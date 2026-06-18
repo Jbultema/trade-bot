@@ -27,6 +27,7 @@ class MacroMinuteReport:
     summary: str
     paragraphs: tuple[str, ...]
     next_step: str
+    daily_delta_cards: tuple[MacroMinuteCard, ...]
     cards: tuple[MacroMinuteCard, ...]
     detail_rows: pd.DataFrame
 
@@ -48,11 +49,17 @@ def _render_macro_minute(
         f'<p class="macro-minute-copy">{html.escape(paragraph)}</p>'
         for paragraph in report.paragraphs
     )
+    daily_delta_html = (
+        '<div class="macro-minute-delta-grid">'
+        + "".join(_macro_minute_delta_html(card) for card in report.daily_delta_cards)
+        + "</div>"
+    )
     st.markdown(
         f"""
         <div class="macro-minute macro-minute-{html.escape(report.tone)}">
             <p class="macro-minute-label">Macro Minute</p>
             <div class="macro-minute-title">{html.escape(report.title)}</div>
+            {daily_delta_html}
             <div class="macro-minute-body">{paragraph_html}</div>
             <p class="macro-minute-next">Next: {html.escape(report.next_step)}</p>
         </div>
@@ -100,6 +107,13 @@ def build_macro_minute_report(
     summary = (
         f"{risk_status} risk with {action}. {scenario_summary['sentence']} "
         f"{news_summary['sentence']} {macro_summary['sentence']} {change_summary['sentence']}"
+    )
+    daily_delta_cards = _daily_delta_cards(
+        change_summary=change_summary,
+        scenario_summary=scenario_summary,
+        news_summary=news_summary,
+        action=action,
+        risk_budget=risk_budget,
     )
     paragraphs = (
         _market_read_paragraph(
@@ -167,6 +181,7 @@ def build_macro_minute_report(
         summary=summary,
         paragraphs=paragraphs,
         next_step=next_step,
+        daily_delta_cards=daily_delta_cards,
         cards=cards,
         detail_rows=_macro_minute_details(
             current_state=current_state,
@@ -200,6 +215,52 @@ def _macro_minute_readout_html(card: MacroMinuteCard) -> str:
     )
 
 
+def _macro_minute_delta_html(card: MacroMinuteCard) -> str:
+    return (
+        f'<div class="macro-delta-card macro-delta-card-{html.escape(card.tone)}">'
+        f'<p class="macro-delta-label">{html.escape(card.label)}</p>'
+        f'<p class="macro-delta-answer">{html.escape(card.answer)}</p>'
+        f'<p class="macro-delta-detail">{html.escape(card.detail)}</p>'
+        "</div>"
+    )
+
+
+def _daily_delta_cards(
+    *,
+    change_summary: dict[str, object],
+    scenario_summary: dict[str, str],
+    news_summary: dict[str, str],
+    action: str,
+    risk_budget: str,
+) -> tuple[MacroMinuteCard, ...]:
+    changed_answer = str(change_summary.get("changed_answer", change_summary["answer"]))
+    changed_detail = str(change_summary.get("changed_detail", change_summary["detail"]))
+    still_answer = str(change_summary.get("still_answer", f"{action}; {risk_budget} risk budget"))
+    still_detail = str(
+        change_summary.get(
+            "still_detail",
+            (
+                f"Current basis remains {scenario_summary['answer']}; "
+                f"{news_summary['answer'].lower()}; {risk_budget} risk budget."
+            ),
+        )
+    )
+    return (
+        MacroMinuteCard(
+            label="What Changed Today",
+            answer=changed_answer,
+            detail=changed_detail,
+            tone=str(change_summary.get("tone", "neutral")),
+        ),
+        MacroMinuteCard(
+            label="Still True",
+            answer=still_answer,
+            detail=still_detail,
+            tone="neutral",
+        ),
+    )
+
+
 def _market_read_paragraph(
     *,
     market_date: str,
@@ -211,7 +272,7 @@ def _market_read_paragraph(
     posture: str,
 ) -> str:
     return (
-        f"As of {market_date}, the system is reading {risk_status} risk ({risk_score:.2f}) "
+        f"Current posture: as of {market_date}, the system is reading {risk_status} risk ({risk_score:.2f}) "
         f"and the operating action is {action}. {confirmation_summary}. "
         f"The one-month map is not cleanly risk-on: {scenario_summary['answer']}, with "
         f"{scenario_summary['top_scenario']} as the lead scenario. {posture}"
@@ -225,7 +286,7 @@ def _driver_paragraph(
     driver_summary: str,
 ) -> str:
     return (
-        f"The driver stack is being pulled most by {news_summary['plain']}. "
+        f"Still true: the driver stack is being pulled most by {news_summary['plain']}. "
         f"Macro is {macro_summary['plain']}. Scenario drivers point to {driver_summary}. "
         "That combination matters because the bot should not treat price trend alone as enough "
         "when news, macro, credit, liquidity, or breadth are arguing for smaller sizing."
@@ -242,7 +303,7 @@ def _action_paragraph(
 ) -> str:
     constraints = str(risk_summary.get("applied_constraints", "none")) if risk_summary else "none"
     return (
-        f"Practical read-through: {action} with risk budget {risk_budget}. {trade_change} "
+        f"Action read-through: {action} with risk budget {risk_budget}. {trade_change} "
         f"The risk engine is applying {constraints}. What would change this: {watch_summary}"
     )
 
@@ -262,9 +323,13 @@ def _change_summary(
             "tone": "neutral",
             "sentence": "No prior snapshot is available, so today's Macro Minute is the comparison baseline.",
             "paragraph": (
-                "Change check: no prior snapshot is available yet. Treat today's posture as the baseline; "
+                "Daily delta: no prior snapshot is available yet. Treat today's posture as the baseline; "
                 "future refreshes will separate persistent messaging from genuinely new information."
             ),
+            "changed_answer": "No prior comparison",
+            "changed_detail": "Today's snapshot is the baseline for future daily-change checks.",
+            "still_answer": "Baseline posture set",
+            "still_detail": f"Current baseline: {_snapshot_read(current)}.",
             "previous_read": "n/a",
             "current_read": _snapshot_read(current),
         }
@@ -280,10 +345,14 @@ def _change_summary(
             "tone": "neutral",
             "sentence": "The current posture is largely unchanged from the prior stored run.",
             "paragraph": (
-                f"Change check: the prior stored posture was {previous_read}; now it is {current_read}. "
-                "The dashboard language is repeating because the system still sees the same broad setup, "
+                f"Daily delta: no monitored change crossed a material threshold. Prior stored posture was {previous_read}; "
+                f"now it is {current_read}. The dashboard language is repeating because the system still sees the same broad setup, "
                 "not because a fresh escalation was detected."
             ),
+            "changed_answer": "No material change",
+            "changed_detail": "No monitored variable crossed a material threshold from the prior stored snapshot.",
+            "still_answer": "Same broad setup",
+            "still_detail": f"Prior posture and current posture are aligned: {current_read}.",
             "previous_read": previous_read,
             "current_read": current_read,
         }
@@ -296,10 +365,14 @@ def _change_summary(
         "tone": tone,
         "sentence": f"Since the prior stored run: {change_text}.",
         "paragraph": (
-            f"Change check: the prior stored posture was {previous_read}; now it is {current_read}. "
+            f"Daily delta: prior stored posture was {previous_read}; now it is {current_read}. "
             f"What changed: {change_text}. Read this as the reason today's recommendation is different, "
             "or as confirmation that the same risk posture is persisting if the action did not move."
         ),
+        "changed_answer": _change_answer(previous, current, changes),
+        "changed_detail": f"Material changes: {change_text}.",
+        "still_answer": "Updated posture now active",
+        "still_detail": f"Current posture after the change check: {current_read}.",
         "previous_read": previous_read,
         "current_read": current_read,
     }

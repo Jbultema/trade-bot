@@ -38,8 +38,9 @@ def test_dashboard_app_renders_action_headline(
 
     assert not app.exception
     assert any(title.value == "Trade Bot Operations" for title in app.title)
-    assert any("dashboard-hero-panel" in markdown.value for markdown in app.markdown)
+    assert any("dashboard-primary-nav-label" in markdown.value for markdown in app.markdown)
     assert any("Macro Minute" in markdown.value for markdown in app.markdown)
+    assert any("What Changed Today" in markdown.value for markdown in app.markdown)
     assert any("macro-minute-body" in markdown.value for markdown in app.markdown)
     assert any("macro-minute-readouts" in markdown.value for markdown in app.markdown)
     assert any("Market State" in markdown.value for markdown in app.markdown)
@@ -65,16 +66,16 @@ def test_dashboard_app_renders_action_headline(
     assert brief_html
     assert '</div><div class="brief-card' in brief_html[0]
     assert '\n    <div class="brief-card' not in brief_html[0]
-    assert any(radio.label == "Dashboard section" for radio in app.radio)
+    assert any(pills.label == "Dashboard section" for pills in app.pills)
     assert any(subheader.value == "Current State" for subheader in app.subheader)
     assert any(subheader.value == "Trade Decision" for subheader in app.subheader)
 
-    dashboard_section = next(radio for radio in app.radio if radio.label == "Dashboard section")
+    dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
     dashboard_section.set_value("Risk & Scenarios").run(timeout=20)
     assert not app.exception
     assert any(subheader.value == "Portfolio Risk Engine" for subheader in app.subheader)
 
-    dashboard_section = next(radio for radio in app.radio if radio.label == "Dashboard section")
+    dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
     dashboard_section.set_value("Research Lab").run(timeout=20)
     assert not app.exception
     assert any(subheader.value == "Experiment Monitor" for subheader in app.subheader)
@@ -82,12 +83,12 @@ def test_dashboard_app_renders_action_headline(
     assert any(selectbox.label == "Approach to inspect" for selectbox in app.selectbox)
     assert not any(subheader.value == "Approach Explorer" for subheader in app.subheader)
 
-    dashboard_section = next(radio for radio in app.radio if radio.label == "Dashboard section")
+    dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
     dashboard_section.set_value("Forward Test").run(timeout=20)
     assert not app.exception
     assert any(subheader.value == "Forward Test / Trade Journal" for subheader in app.subheader)
 
-    dashboard_section = next(radio for radio in app.radio if radio.label == "Dashboard section")
+    dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
     dashboard_section.set_value("Performance").run(timeout=20)
     assert not app.exception
     assert any(subheader.value == "Windowed Performance" for subheader in app.subheader)
@@ -112,12 +113,17 @@ def test_macro_minute_report_summarizes_market_news_and_scenarios() -> None:
     assert "YELLOW risk" in report.title
     assert "1-month scenario map" in report.summary
     assert len(report.paragraphs) == 4
-    assert "As of 2026-06-17" in report.paragraphs[0]
+    assert "Current posture: as of 2026-06-17" in report.paragraphs[0]
     assert "Choppy factor rotation" in report.paragraphs[0]
     assert "no prior snapshot" in report.paragraphs[1].lower()
-    assert "The driver stack" in report.paragraphs[2]
-    assert "Practical read-through" in report.paragraphs[3]
+    assert "Daily delta" in report.paragraphs[1]
+    assert "Still true: the driver stack" in report.paragraphs[2]
+    assert "Action read-through" in report.paragraphs[3]
     assert "What would change this" in report.paragraphs[3]
+    assert [card.label for card in report.daily_delta_cards] == [
+        "What Changed Today",
+        "Still True",
+    ]
     assert [card.label for card in report.cards] == [
         "Market State",
         "Change Since Prior",

@@ -33,6 +33,48 @@ def _install_dashboard_styles() -> None:
         h2 {
             margin-top: 1.55rem;
         }
+        .dashboard-primary-nav-label {
+            margin: 0.15rem 0 0.18rem;
+            color: var(--tb-accent);
+            font-size: 0.82rem;
+            font-weight: 820;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+        .dashboard-nav-caption {
+            margin: 0 0 0.45rem;
+            color: var(--tb-card-muted);
+            font-size: 0.94rem;
+            line-height: 1.35;
+        }
+        div[data-testid="stPills"] {
+            margin: 0 0 1.15rem;
+            padding: 0 0 0.9rem;
+            border-bottom: 1px solid var(--tb-card-border);
+        }
+        div[data-testid="stPills"] button,
+        div[data-testid="stPills"] [role="button"] {
+            min-height: 42px;
+            border-radius: 8px !important;
+            border: 1px solid var(--tb-card-border) !important;
+            background: var(--tb-card-bg) !important;
+            color: var(--tb-card-text) !important;
+            font-size: 1.0rem !important;
+            font-weight: 760 !important;
+            padding: 8px 13px !important;
+            box-shadow: var(--tb-shadow-soft);
+        }
+        div[data-testid="stPills"] button:hover,
+        div[data-testid="stPills"] [role="button"]:hover {
+            border-color: color-mix(in srgb, var(--tb-accent) 58%, var(--tb-card-border)) !important;
+            background: color-mix(in srgb, var(--tb-accent) 8%, var(--tb-card-bg)) !important;
+        }
+        div[data-testid="stPills"] button[aria-selected="true"],
+        div[data-testid="stPills"] [role="button"][aria-selected="true"] {
+            border-color: var(--tb-accent) !important;
+            background: color-mix(in srgb, var(--tb-accent) 16%, var(--tb-card-bg)) !important;
+            color: var(--tb-card-text) !important;
+        }
         :root {
             --tb-accent: #0f766e;
             --tb-accent-strong: #115e59;
@@ -71,82 +113,6 @@ def _install_dashboard_styles() -> None:
                 --tb-shadow: 0 14px 30px rgba(0, 0, 0, 0.30);
                 --tb-shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.22);
             }
-        }
-        .dashboard-hero-panel {
-            display: grid;
-            grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
-            gap: 18px;
-            align-items: stretch;
-            margin: 8px 0 18px;
-            padding: 18px;
-            border: 1px solid var(--tb-card-border);
-            border-radius: 8px;
-            background: var(--tb-panel-bg);
-            box-shadow: var(--tb-shadow-soft);
-        }
-        .dashboard-hero-copy {
-            min-width: 0;
-        }
-        .dashboard-kicker {
-            margin: 0 0 5px;
-            color: var(--tb-accent);
-            font-size: 0.76rem;
-            font-weight: 800;
-            letter-spacing: 0;
-            text-transform: uppercase;
-        }
-        .dashboard-subtitle {
-            margin: 0 0 11px;
-            color: var(--tb-card-text);
-            font-size: 1.02rem;
-            line-height: 1.5;
-            max-width: 980px;
-        }
-        .dashboard-hero-rail {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 8px;
-        }
-        .dashboard-rail-item {
-            border: 1px solid var(--tb-card-border);
-            border-left: 4px solid var(--tb-accent);
-            border-radius: 8px;
-            background: var(--tb-card-bg);
-            padding: 9px 11px;
-        }
-        .dashboard-rail-label {
-            display: block;
-            margin-bottom: 2px;
-            color: var(--tb-card-muted);
-            font-size: 0.70rem;
-            font-weight: 760;
-            text-transform: uppercase;
-        }
-        .dashboard-rail-value {
-            display: block;
-            color: var(--tb-card-text);
-            font-size: 0.95rem;
-            font-weight: 760;
-            line-height: 1.25;
-        }
-        .dashboard-pill-row {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 8px;
-            margin: 0 0 18px;
-        }
-        .dashboard-pill {
-            display: inline-flex;
-            align-items: center;
-            min-height: 28px;
-            padding: 4px 10px;
-            border-radius: 999px;
-            border: 1px solid color-mix(in srgb, var(--tb-accent) 32%, var(--tb-card-border));
-            background: color-mix(in srgb, var(--tb-accent) 9%, var(--tb-card-bg));
-            color: var(--tb-card-text);
-            font-size: 0.78rem;
-            font-weight: 720;
-            white-space: nowrap;
         }
         a {
             color: var(--tb-accent);
@@ -273,6 +239,52 @@ def _install_dashboard_styles() -> None:
         }
         .macro-minute-body {
             max-width: 1180px;
+        }
+        .macro-minute-delta-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin: 12px 0 14px;
+            max-width: 1180px;
+        }
+        .macro-delta-card {
+            border: 1px solid var(--tb-card-border);
+            border-left: 5px solid var(--tb-card-border);
+            border-radius: 8px;
+            background: var(--tb-card-bg);
+            padding: 12px 14px;
+        }
+        .macro-delta-card-critical {
+            border-left-color: var(--tb-critical-border);
+        }
+        .macro-delta-card-warning {
+            border-left-color: var(--tb-warning-border);
+        }
+        .macro-delta-card-success {
+            border-left-color: var(--tb-success-border);
+        }
+        .macro-delta-card-neutral {
+            border-left-color: var(--tb-card-border);
+        }
+        .macro-delta-label {
+            margin: 0 0 5px;
+            color: var(--tb-card-muted);
+            font-size: 0.74rem;
+            font-weight: 800;
+            text-transform: uppercase;
+        }
+        .macro-delta-answer {
+            margin: 0 0 6px;
+            color: var(--tb-card-text);
+            font-size: 1.02rem;
+            font-weight: 780;
+            line-height: 1.25;
+        }
+        .macro-delta-detail {
+            margin: 0;
+            color: var(--tb-card-text);
+            font-size: 0.91rem;
+            line-height: 1.42;
         }
         .macro-minute-copy {
             margin: 0 0 12px;
@@ -527,14 +539,9 @@ def _install_dashboard_styles() -> None:
             font-size: 0.93rem;
         }
         @media (max-width: 1100px) {
-            .dashboard-hero-panel {
-                grid-template-columns: 1fr;
-            }
-            .dashboard-hero-rail {
-                grid-template-columns: repeat(3, minmax(0, 1fr));
-            }
             .macro-minute-grid,
             .macro-minute-readouts,
+            .macro-minute-delta-grid,
             .brief-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -543,12 +550,9 @@ def _install_dashboard_styles() -> None:
             }
         }
         @media (max-width: 700px) {
-            .dashboard-hero-panel {
-                padding: 14px;
-            }
-            .dashboard-hero-rail,
             .macro-minute-grid,
             .macro-minute-readouts,
+            .macro-minute-delta-grid,
             .brief-grid {
                 grid-template-columns: 1fr;
             }

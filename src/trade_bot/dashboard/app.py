@@ -40,41 +40,16 @@ from trade_bot.trading.journal import DEFAULT_JOURNAL_PATH, TradeJournal
 st.set_page_config(page_title="Trade Bot Dashboard", layout="wide")
 _install_dashboard_styles()
 st.title("Trade Bot Operations")
-st.markdown(
-    """
-    <div class="dashboard-hero-panel">
-        <div class="dashboard-hero-copy">
-            <p class="dashboard-kicker">Local decision cockpit</p>
-            <p class="dashboard-subtitle">
-                Macro-aware swing strategy research, scenario sizing, paper monitoring,
-                and human-reviewed trade decisions in one local workspace.
-            </p>
-            <div class="dashboard-pill-row">
-                <span class="dashboard-pill">Local only</span>
-                <span class="dashboard-pill">Long only</span>
-                <span class="dashboard-pill">Paper first</span>
-                <span class="dashboard-pill">Human reviewed</span>
-            </div>
-        </div>
-        <div class="dashboard-hero-rail" aria-label="Operating constraints">
-            <div class="dashboard-rail-item">
-                <span class="dashboard-rail-label">Execution</span>
-                <span class="dashboard-rail-value">Manual review</span>
-            </div>
-            <div class="dashboard-rail-item">
-                <span class="dashboard-rail-label">Cadence</span>
-                <span class="dashboard-rail-value">Snapshot first</span>
-            </div>
-            <div class="dashboard-rail-item">
-                <span class="dashboard-rail-label">Evidence</span>
-                <span class="dashboard-rail-value">Paper monitored</span>
-            </div>
-        </div>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
 
+DASHBOARD_SECTIONS = (
+    "Command Center",
+    "Risk & Scenarios",
+    "Research Lab",
+    "Monitoring",
+    "News & Macro",
+    "Performance",
+    "Forward Test",
+)
 config_path = Path(st.sidebar.text_input("Config", str(DEFAULT_CONFIG_PATH)))
 events_path = Path(st.sidebar.text_input("Events", str(DEFAULT_EVENTS_PATH)))
 macro_path = Path(st.sidebar.text_input("Macro", str(DEFAULT_MACRO_PATH)))
@@ -232,27 +207,26 @@ _render_decision_brief(
     open_ticket_count=len(headline_open_tickets),
     experiment_scorecards=experiment_scorecards,
 )
-_render_metric_guide()
-st.divider()
-
-DASHBOARD_SECTIONS = (
-    "Command Center",
-    "Risk & Scenarios",
-    "Research Lab",
-    "Monitoring",
-    "News & Macro",
-    "Performance",
-    "Forward Test",
+st.markdown(
+    """
+    <div class="dashboard-primary-nav-label">Insight Sections</div>
+    <p class="dashboard-nav-caption">
+        Choose the detailed workbench below. The selected section renders immediately under this control.
+    </p>
+    """,
+    unsafe_allow_html=True,
 )
-selected_section = st.radio(
+selected_section = st.pills(
     "Dashboard section",
     DASHBOARD_SECTIONS,
-    horizontal=True,
+    selection_mode="single",
+    default="Command Center",
     label_visibility="collapsed",
+    key="dashboard_section",
+    width="stretch",
 )
-st.caption(
-    "Sections render one at a time so the operating view stays focused and dense research tables do not dominate the page."
-)
+selected_section = selected_section or "Command Center"
+st.divider()
 _render_dashboard_section(
     selected_section,
     bot_config=bot_config,
@@ -264,3 +238,4 @@ _render_dashboard_section(
     experiment_candidates=experiment_candidates,
     warehouse_path=str(run_store_path),
 )
+_render_metric_guide()
