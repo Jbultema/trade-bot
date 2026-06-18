@@ -71,6 +71,8 @@ def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd
         return dip_reentry_weights(prices, strategy)
     if strategy.type == "dip_reentry_overlay":
         return dip_reentry_overlay_weights(prices, strategy)
+    if strategy.type == "ai_risk_cycle_overlay":
+        return ai_risk_cycle_overlay_weights(prices, strategy)
     raise ValueError(f"Unsupported strategy type: {strategy.type}")
 
 
@@ -405,6 +407,174 @@ def dip_reentry_overlay_weights(prices: pd.DataFrame, strategy: StrategyConfig) 
     residual = (1.0 - weights[risk_tickers].sum(axis=1)).clip(lower=0.0)
     weights.loc[:, strategy.defensive_ticker] = residual
     return weights.clip(lower=0.0).fillna(0.0)
+
+
+def ai_risk_cycle_overlay_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
+    """Blend a diverse off-ramp core with metered AI satellite reentry."""
+    if strategy.defensive_ticker is None:
+        raise ValueError("ai_risk_cycle_overlay strategies require a defensive_ticker.")
+    satellite_tickers = [
+        ticker
+        for ticker in strategy.satellite_tickers
+        if ticker != strategy.defensive_ticker and ticker in strategy.tickers
+    ]
+    if not satellite_tickers:
+        raise ValueError("ai_risk_cycle_overlay strategies require satellite_tickers.")
+    core_tickers = [
+        ticker
+        for ticker in strategy.tickers
+        if ticker not in set(satellite_tickers) and ticker != strategy.defensive_ticker
+    ]
+    if not core_tickers:
+        raise ValueError("ai_risk_cycle_overlay strategies require non-satellite core tickers.")
+
+    filled = prices.ffill().sort_index()
+    _validate_tickers(filled, [*core_tickers, *satellite_tickers, strategy.defensive_ticker])
+    base_weights = dual_momentum_weights(
+        filled,
+        core_tickers,
+        lookback_days=strategy.lookback_days,
+        skip_days=strategy.skip_days,
+        top_n=strategy.top_n,
+        defensive_ticker=strategy.defensive_ticker,
+        min_return=strategy.min_return,
+        ranking_metric=strategy.ranking_metric,
+        weighting=strategy.weighting,
+        volatility_lookback_days=strategy.volatility_lookback_days,
+        trend_filter_days=strategy.trend_filter_days,
+        max_asset_weight=strategy.max_asset_weight,
+    )
+    satellite_top_n = min(max(1, strategy.top_n), len(satellite_tickers))
+    satellite_momentum = dual_momentum_weights(
+        filled,
+        satellite_tickers,
+        lookback_days=max(21, strategy.lookback_days // 2),
+        skip_days=min(strategy.skip_days, 5),
+        top_n=satellite_top_n,
+        defensive_ticker=strategy.defensive_ticker,
+        min_return=max(strategy.min_return, strategy.dip_min_recovery_return),
+        ranking_metric=strategy.ranking_metric,
+        weighting=strategy.weighting,
+        volatility_lookback_days=strategy.volatility_lookback_days,
+        trend_filter_days=strategy.trend_filter_days,
+        max_asset_weight=strategy.max_asset_weight,
+    )
+    reentry_strategy = strategy.model_copy(
+        update={
+            "type": "dip_reentry",
+            "tickers": satellite_tickers,
+            "top_n": satellite_top_n,
+        }
+    )
+    satellite_reentry = dip_reentry_weights(filled, reentry_strategy)
+
+    base_risk_weight = base_weights[core_tickers].sum(axis=1).clip(lower=0.0, upper=1.0)
+    defensive_weight = base_weights[strategy.defensive_ticker].clip(lower=0.0, upper=1.0)
+    momentum_risk = satellite_momentum[satellite_tickers].sum(axis=1).clip(lower=0.0, upper=1.0)
+    reentry_risk = satellite_reentry[satellite_tickers].sum(axis=1).clip(lower=0.0, upper=1.0)
+    risk_on_budget = strategy.cycle_satellite_risk_on_weight * momentum_risk * base_risk_weight
+    reentry_budget = strategy.cycle_satellite_reentry_weight * reentry_risk * defensive_weight
+    satellite_budget = pd.concat([risk_on_budget, reentry_budget], axis=1).max(axis=1).clip(
+        lower=0.0,
+        upper=strategy.cycle_satellite_max_weight,
+    )
+
+    momentum_mix = satellite_momentum[satellite_tickers].div(
+        momentum_risk.where(momentum_risk > 0.0),
+        axis=0,
+    )
+    reentry_mix = satellite_reentry[satellite_tickers].div(
+        reentry_risk.where(reentry_risk > 0.0),
+        axis=0,
+    )
+    reentry_share = reentry_budget.div(
+        (risk_on_budget + reentry_budget).where((risk_on_budget + reentry_budget) > 0.0)
+    ).fillna(0.0)
+    satellite_mix = momentum_mix.mul(1.0 - reentry_share, axis=0).add(
+        reentry_mix.mul(reentry_share, axis=0),
+        fill_value=0.0,
+    )
+    mix_sum = satellite_mix.sum(axis=1)
+    equal_satellite = pd.DataFrame(
+        1.0 / len(satellite_tickers),
+        index=filled.index,
+        columns=satellite_tickers,
+    )
+    satellite_mix = satellite_mix.div(mix_sum.where(mix_sum > 0.0), axis=0).fillna(
+        equal_satellite
+    )
+
+    weights = _empty_weights(filled)
+    core_scale = (1.0 - satellite_budget).clip(lower=0.0, upper=1.0)
+    weights.loc[:, core_tickers] = base_weights[core_tickers].mul(core_scale, axis=0)
+    weights.loc[:, satellite_tickers] = satellite_mix.mul(satellite_budget, axis=0)
+    if strategy.max_asset_weight is not None:
+        weights = _cap_risk_weights(
+            weights,
+            risk_tickers=[*core_tickers, *satellite_tickers],
+            defensive_ticker=strategy.defensive_ticker,
+            max_asset_weight=strategy.max_asset_weight,
+        )
+    residual = (1.0 - weights[[*core_tickers, *satellite_tickers]].sum(axis=1)).clip(lower=0.0)
+    weights.loc[:, strategy.defensive_ticker] = residual
+    return _apply_weight_path_controls(
+        weights.clip(lower=0.0).fillna(0.0),
+        min_change=strategy.cycle_min_rebalance_change,
+        max_step_change=strategy.cycle_max_step_change,
+        min_hold_days=strategy.cycle_min_hold_days,
+        defensive_ticker=strategy.defensive_ticker,
+        risk_off_override_change=strategy.cycle_risk_off_override_change,
+    )
+
+
+def _apply_weight_path_controls(
+    weights: pd.DataFrame,
+    *,
+    min_change: float,
+    max_step_change: float,
+    min_hold_days: int,
+    defensive_ticker: str | None,
+    risk_off_override_change: float,
+) -> pd.DataFrame:
+    if weights.empty or (
+        min_change <= 0.0 and max_step_change >= 2.0 and min_hold_days <= 0
+    ):
+        return weights
+    controlled = weights.copy()
+    current = controlled.iloc[0].copy()
+    controlled.iloc[0] = current
+    last_change_index = 0
+    for row_index in range(1, len(controlled)):
+        target = weights.iloc[row_index]
+        diff = target - current
+        gross_change = float(diff.abs().sum())
+        risk_off_override = False
+        if defensive_ticker and defensive_ticker in target and defensive_ticker in current:
+            risk_off_override = (
+                float(target[defensive_ticker] - current[defensive_ticker])
+                >= risk_off_override_change
+            )
+        if (
+            min_hold_days > 0
+            and row_index - last_change_index < min_hold_days
+            and not risk_off_override
+        ):
+            controlled.iloc[row_index] = current
+            continue
+        if gross_change < min_change:
+            controlled.iloc[row_index] = current
+            continue
+        if gross_change > max_step_change:
+            current = current + diff * (max_step_change / gross_change)
+        else:
+            current = target
+        current = current.clip(lower=0.0)
+        total = float(current.sum())
+        if total > 0.0:
+            current = current / total
+        controlled.iloc[row_index] = current
+        last_change_index = row_index
+    return controlled.fillna(0.0)
 
 
 def _ranking_values(

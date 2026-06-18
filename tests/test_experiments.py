@@ -698,3 +698,186 @@ def test_dip_reentry_overlay_iterations_are_bounded_and_cash_redeployment_focuse
             set(candidate.strategy.tickers).issubset(cached_universe) for candidate in candidates
         )
         assert any(candidate.scenario_sizing is not None for candidate in candidates)
+
+
+
+def test_ai_risk_cycle_overlay_reenters_ai_after_confirmed_repair() -> None:
+    index = pd.bdate_range("2020-01-01", periods=220)
+    core_path = pd.Series(
+        [100.0] * 40 + list(range(100, 70, -1)) + [70.0] * 40 + [70.0 + i * 0.45 for i in range(110)],
+        index=index,
+        dtype=float,
+    )
+    ai_path = pd.Series(
+        [120.0] * 40 + list(range(120, 60, -2)) + [60.0] * 40 + [60.0 + i * 1.0 for i in range(110)],
+        index=index,
+        dtype=float,
+    )
+    prices = pd.DataFrame(
+        {
+            "SPY": core_path,
+            "RSP": core_path * 1.01,
+            "HYG": core_path,
+            "LQD": pd.Series([100.0 for _ in index], index=index),
+            "QQQ": ai_path,
+            "SMH": ai_path * 1.03,
+            "MSFT": ai_path * 0.97,
+            "BIL": pd.Series([100.0 for _ in index], index=index),
+        }
+    )
+    strategy = StrategyConfig(
+        type="ai_risk_cycle_overlay",
+        tickers=["SPY", "RSP", "HYG", "LQD", "QQQ", "SMH", "MSFT"],
+        satellite_tickers=["QQQ", "SMH", "MSFT"],
+        defensive_ticker="BIL",
+        lookback_days=42,
+        skip_days=5,
+        top_n=2,
+        min_return=0.04,
+        ranking_metric="risk_adjusted_return",
+        weighting="risk_adjusted_score",
+        max_asset_weight=0.45,
+        dip_lookback_days=63,
+        dip_trigger_drawdown=-0.15,
+        dip_deep_drawdown=-0.35,
+        dip_recovery_days=10,
+        dip_confirmation_days=3,
+        dip_min_recovery_return=0.015,
+        dip_starter_weight=0.20,
+        dip_step_weight=0.22,
+        dip_max_risk_weight=0.80,
+        dip_volatility_ceiling=1.20,
+        cycle_satellite_max_weight=0.55,
+        cycle_satellite_risk_on_weight=0.35,
+        cycle_satellite_reentry_weight=0.70,
+        cycle_min_rebalance_change=0.02,
+        cycle_max_step_change=0.35,
+    )
+
+    weights = build_strategy_weights(prices, strategy)
+    satellite_weight = weights[["QQQ", "SMH", "MSFT"]].sum(axis=1)
+
+    assert satellite_weight.iloc[45] == 0.0
+    assert satellite_weight.max() > 0.15
+    assert satellite_weight.max() <= 0.55
+    assert weights.loc[satellite_weight.idxmax(), "BIL"] < 0.85
+    assert round(float(weights.loc[satellite_weight.idxmax()].sum()), 8) == 1.0
+
+
+def test_ai_risk_cycle_iterations_are_diverse_and_human_operable() -> None:
+    cached_universe = {
+        "AAPL",
+        "AMZN",
+        "ARCC",
+        "ARKK",
+        "AVGO",
+        "BIL",
+        "BIZD",
+        "BKLN",
+        "BNO",
+        "BOTZ",
+        "BRK-B",
+        "BXSL",
+        "CCJ",
+        "CEG",
+        "COWZ",
+        "DBC",
+        "EEM",
+        "EFA",
+        "ETN",
+        "EWC",
+        "EWJ",
+        "EWZ",
+        "FBTC",
+        "GEV",
+        "GLD",
+        "GOOGL",
+        "HYG",
+        "IAU",
+        "IBIT",
+        "IEF",
+        "IGV",
+        "INDA",
+        "IWD",
+        "IWM",
+        "IYT",
+        "JAAA",
+        "JBBB",
+        "JNK",
+        "KRE",
+        "LQD",
+        "MAIN",
+        "MDY",
+        "META",
+        "MOAT",
+        "MSFT",
+        "MTUM",
+        "NVDA",
+        "NRG",
+        "OBDC",
+        "PWR",
+        "QQQ",
+        "QUAL",
+        "RSP",
+        "SCHD",
+        "SGOV",
+        "SHY",
+        "SMH",
+        "SOXX",
+        "SPHB",
+        "SPLV",
+        "SPY",
+        "SRLN",
+        "SVXY",
+        "TAN",
+        "TIP",
+        "TLT",
+        "TSLA",
+        "UUP",
+        "USFR",
+        "USMV",
+        "USO",
+        "VCIT",
+        "VCSH",
+        "VEA",
+        "VGK",
+        "VIG",
+        "VRT",
+        "VTV",
+        "VWO",
+        "XBI",
+        "XLB",
+        "XLC",
+        "XLE",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLP",
+        "XLRE",
+        "XLU",
+        "XLV",
+        "XLY",
+        "XOP",
+    }
+
+    families: set[str] = set()
+    for iteration in range(66, 72):
+        candidates = generate_iteration_candidates(iteration)
+        families.update(candidate.family for candidate in candidates)
+
+        assert len(candidates) == 6
+        assert len({candidate.name for candidate in candidates}) == len(candidates)
+        assert all(candidate.name.startswith(f"i{iteration:02d}_cycle_") for candidate in candidates)
+        assert {candidate.phase for candidate in candidates} == {"ai_risk_cycle"}
+        assert {candidate.role for candidate in candidates} == {"risk_cycle_candidate"}
+        assert all(candidate.strategy.type == "ai_risk_cycle_overlay" for candidate in candidates)
+        assert all(candidate.strategy.defensive_ticker == "BIL" for candidate in candidates)
+        assert all(candidate.strategy.satellite_tickers for candidate in candidates)
+        assert all(candidate.strategy.cycle_min_rebalance_change >= 0.025 for candidate in candidates)
+        assert all(candidate.strategy.cycle_max_step_change <= 0.48 for candidate in candidates)
+        assert all(
+            set(candidate.strategy.tickers).issubset(cached_universe) for candidate in candidates
+        )
+        assert any(candidate.scenario_sizing is not None for candidate in candidates)
+
+    assert len(families) >= 25

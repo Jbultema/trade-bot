@@ -190,6 +190,18 @@ def build_approach_explanation(
             f"It checks whether each asset is above its own {strategy.moving_average_days}-day "
             f"moving average. Assets above trend are held; if none qualify, capital moves to {defensive}."
         )
+    elif strategy.type == "ai_risk_cycle_overlay":
+        satellite_text = ", ".join(strategy.satellite_tickers)
+        paragraphs.append(
+            f"It runs a diversified momentum/off-ramp core, then layers an AI satellite ({satellite_text}) "
+            f"with a maximum budget of {strategy.cycle_satellite_max_weight:.0%}. AI exposure can be "
+            "earned two ways: normal risk-on momentum, or post-drawdown reentry when discount, "
+            "repair, volatility, credit, and breadth gates confirm."
+        )
+        paragraphs.append(
+            f"To avoid twitchy trading, target changes below {strategy.cycle_min_rebalance_change:.0%} "
+            f"are ignored and any one-step target move is capped at {strategy.cycle_max_step_change:.0%}."
+        )
     else:
         paragraphs.append(
             f"Each rebalance, it computes {strategy.lookback_days}-day momentum after skipping the "
@@ -522,7 +534,7 @@ def build_approach_mechanics(
                 "Risk assets are held only when price is above its moving average.",
             )
         )
-    if strategy.type in {"relative_momentum", "dual_momentum"}:
+    if strategy.type in {"relative_momentum", "dual_momentum", "ai_risk_cycle_overlay"}:
         rows.extend(
             [
                 _mechanic(
@@ -909,8 +921,12 @@ def _strategy_type_explanation(strategy: StrategyConfig) -> str:
         "absolute_momentum": "Trend-following system that exits risk assets when their own trend breaks.",
         "relative_momentum": "Cross-sectional rotation into the strongest assets, without an absolute return hurdle.",
         "dual_momentum": "Cross-sectional rotation plus an absolute momentum hurdle before taking risk.",
+        "dip_reentry": "Metered reentry system that buys discounted assets only after repair signals confirm.",
+        "dip_reentry_overlay": "Momentum/off-ramp system that lets confirmed dip-reentry signals replace defensive cash.",
+        "ai_risk_cycle_overlay": "Diversified off-ramp core with an aggressive AI satellite that can reenter after confirmed repair.",
+        "fixed_allocation": "Static long-only allocation with explicit target weights.",
     }
-    return explanations[strategy.type]
+    return explanations.get(strategy.type, f"Strategy type {strategy.type}.")
 
 
 def _ranking_explanation(metric: str) -> str:

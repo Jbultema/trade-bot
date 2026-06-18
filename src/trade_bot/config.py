@@ -7,6 +7,13 @@ import yaml
 from pydantic import BaseModel, ConfigDict, Field
 
 from trade_bot.DEFAULT import (
+    DEFAULT_CYCLE_MAX_STEP_CHANGE,
+    DEFAULT_CYCLE_MIN_HOLD_DAYS,
+    DEFAULT_CYCLE_MIN_REBALANCE_CHANGE,
+    DEFAULT_CYCLE_RISK_OFF_OVERRIDE_CHANGE,
+    DEFAULT_CYCLE_SATELLITE_MAX_WEIGHT,
+    DEFAULT_CYCLE_SATELLITE_REENTRY_WEIGHT,
+    DEFAULT_CYCLE_SATELLITE_RISK_ON_WEIGHT,
     DEFAULT_DATA_ADJUSTED,
     DEFAULT_DATA_CACHE_DIR,
     DEFAULT_DIP_BREADTH_CONFIRMATION,
@@ -89,8 +96,10 @@ class StrategyConfig(BaseModel):
         "dual_momentum",
         "dip_reentry",
         "dip_reentry_overlay",
+        "ai_risk_cycle_overlay",
     ]
     tickers: list[str]
+    satellite_tickers: list[str] = Field(default_factory=list)
     allocation_weights: dict[str, float] | None = None
     moving_average_days: int = Field(default=DEFAULT_MOVING_AVERAGE_DAYS, gt=1)
     lookback_days: int = Field(default=DEFAULT_MOMENTUM_LOOKBACK_DAYS, gt=1)
@@ -121,6 +130,33 @@ class StrategyConfig(BaseModel):
     dip_volatility_ceiling: float = Field(default=DEFAULT_DIP_VOLATILITY_CEILING, gt=0)
     dip_credit_confirmation: bool = DEFAULT_DIP_CREDIT_CONFIRMATION
     dip_breadth_confirmation: bool = DEFAULT_DIP_BREADTH_CONFIRMATION
+    cycle_satellite_max_weight: float = Field(
+        default=DEFAULT_CYCLE_SATELLITE_MAX_WEIGHT,
+        ge=0,
+        le=1,
+    )
+    cycle_satellite_risk_on_weight: float = Field(
+        default=DEFAULT_CYCLE_SATELLITE_RISK_ON_WEIGHT,
+        ge=0,
+        le=1,
+    )
+    cycle_satellite_reentry_weight: float = Field(
+        default=DEFAULT_CYCLE_SATELLITE_REENTRY_WEIGHT,
+        ge=0,
+        le=1,
+    )
+    cycle_min_rebalance_change: float = Field(
+        default=DEFAULT_CYCLE_MIN_REBALANCE_CHANGE,
+        ge=0,
+        le=2,
+    )
+    cycle_max_step_change: float = Field(default=DEFAULT_CYCLE_MAX_STEP_CHANGE, gt=0, le=2)
+    cycle_min_hold_days: int = Field(default=DEFAULT_CYCLE_MIN_HOLD_DAYS, ge=0)
+    cycle_risk_off_override_change: float = Field(
+        default=DEFAULT_CYCLE_RISK_OFF_OVERRIDE_CHANGE,
+        ge=0,
+        le=1,
+    )
 
 
 class BotConfig(BaseModel):
@@ -145,6 +181,7 @@ def configured_tickers(config: BotConfig) -> list[str]:
         tickers.update(group_tickers)
     for strategy in config.strategies.values():
         tickers.update(strategy.tickers)
+        tickers.update(strategy.satellite_tickers)
         if strategy.defensive_ticker:
             tickers.add(strategy.defensive_ticker)
     return sorted(tickers)

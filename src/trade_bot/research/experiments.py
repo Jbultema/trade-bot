@@ -225,6 +225,8 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _dip_reentry_candidates(iteration)
     if 61 <= iteration <= 65:
         return _dip_reentry_overlay_candidates(iteration)
+    if 66 <= iteration <= 71:
+        return _ai_risk_cycle_candidates(iteration)
     return None
 
 
@@ -4297,6 +4299,857 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
     return batches[iteration]
 
 
+def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    ai_core = ["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN"]
+    ai_concentrated = ["SMH", "SOXX", "NVDA", "AVGO", "MSFT", "META"]
+    ai_infra = ["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX"]
+    batches = {
+        66: (
+            _ai_cycle_candidate(
+                name="i66_cycle_ai_weekly_low_churn_core",
+                family="cycle_ai_plus_low_churn_core",
+                hypothesis=(
+                    "Layer aggressive AI satellite risk onto the best low-churn reentry posture: "
+                    "stay broadly diversified, then let AI replace BIL only after repair is visible."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=126,
+                skip_days=21,
+                top_n=4,
+                min_return=0.02,
+                satellite_max=0.42,
+                satellite_risk_on=0.32,
+                satellite_reentry=0.48,
+                trigger=-0.12,
+                deep=-0.28,
+                recovery_days=42,
+                confirmation_days=10,
+                min_change=0.04,
+                max_step=0.35,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i66_cycle_ai_credit_first_defense",
+                family="cycle_ai_plus_credit_defense",
+                hypothesis=(
+                    "Use credit/rates defense as the core; AI can reenter only when high-yield, "
+                    "breadth, and AI price repair agree."
+                ),
+                core_tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "IEF", "TLT", "GLD", "SPY", "RSP"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.01,
+                satellite_max=0.35,
+                satellite_risk_on=0.25,
+                satellite_reentry=0.40,
+                trigger=-0.13,
+                deep=-0.30,
+                min_change=0.04,
+                max_step=0.30,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i66_cycle_ai_off_ramp_core",
+                family="cycle_ai_plus_off_ramp",
+                hypothesis=(
+                    "Start from the historical off-ramp core, then test whether an AI satellite fixes "
+                    "the classic failure of staying defensive too long after selloffs."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "GLD", "TLT", "IEF", "DBC", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=3,
+                min_return=0.02,
+                satellite_max=0.45,
+                satellite_risk_on=0.35,
+                satellite_reentry=0.50,
+                trigger=-0.11,
+                deep=-0.25,
+                min_change=0.03,
+                max_step=0.40,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i66_cycle_ai_macro_triangle",
+                family="cycle_ai_plus_macro_triangle",
+                hypothesis=(
+                    "Let equities, credit, duration, gold, dollar, and commodities decide the core "
+                    "regime while AI only receives a satellite budget during confirmed repair."
+                ),
+                core_tickers=["SPY", "RSP", "HYG", "LQD", "GLD", "TLT", "IEF", "UUP", "DBC", "USO"],
+                satellite_tickers=ai_core,
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.01,
+                satellite_max=0.40,
+                satellite_risk_on=0.30,
+                satellite_reentry=0.48,
+                trigger=-0.10,
+                deep=-0.24,
+                min_change=0.03,
+                max_step=0.35,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i66_cycle_ai_global_discount",
+                family="cycle_ai_plus_global_discount",
+                hypothesis=(
+                    "Pair AI upside with a global discount core so the system can re-risk outside "
+                    "U.S. mega-cap tech when the U.S. setup is crowded."
+                ),
+                core_tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "HYG", "LQD", "UUP"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.015,
+                satellite_max=0.35,
+                satellite_risk_on=0.25,
+                satellite_reentry=0.38,
+                trigger=-0.11,
+                deep=-0.24,
+                min_change=0.04,
+                max_step=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i66_cycle_ai_sector_factor_blend",
+                family="cycle_ai_plus_sector_factor",
+                hypothesis=(
+                    "Use sector/factor breadth as the core and allow AI to become the satellite only "
+                    "when the market confirms growth leadership is repairing."
+                ),
+                core_tickers=["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "QUAL", "COWZ", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.015,
+                satellite_max=0.38,
+                satellite_risk_on=0.28,
+                satellite_reentry=0.42,
+                trigger=-0.10,
+                deep=-0.24,
+                min_change=0.04,
+                max_step=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        67: (
+            _ai_cycle_candidate(
+                name="i67_cycle_hysteresis_ai_slow_confirm",
+                family="cycle_state_machine_hysteresis",
+                hypothesis=(
+                    "A high-hysteresis state machine tests whether the bot can avoid risk-off traps "
+                    "by requiring durable signals before moving exposure materially."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=126,
+                skip_days=21,
+                top_n=4,
+                min_return=0.02,
+                satellite_max=0.40,
+                satellite_risk_on=0.25,
+                satellite_reentry=0.45,
+                trigger=-0.13,
+                deep=-0.29,
+                recovery_days=42,
+                confirmation_days=10,
+                min_change=0.08,
+                max_step=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i67_cycle_hysteresis_ai_fast_repair",
+                family="cycle_state_machine_hysteresis",
+                hypothesis=(
+                    "Fast repair state machine tests whether a smaller hysteresis band captures "
+                    "earlier rebound juice without turning the system twitchy."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "HYG", "LQD", "GLD", "TLT", "IEF"],
+                satellite_tickers=ai_core,
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.02,
+                satellite_max=0.48,
+                satellite_risk_on=0.35,
+                satellite_reentry=0.55,
+                trigger=-0.10,
+                deep=-0.23,
+                recovery_days=21,
+                confirmation_days=5,
+                min_change=0.025,
+                max_step=0.45,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i67_cycle_hysteresis_no_credit_no_ai",
+                family="cycle_state_machine_credit_gate",
+                hypothesis=(
+                    "AI re-risking is forbidden unless credit repair confirms; this directly tests "
+                    "whether credit gates prevent false-bottom AI buying."
+                ),
+                core_tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "SPY", "RSP", "GLD", "IEF"],
+                satellite_tickers=ai_concentrated,
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.02,
+                satellite_max=0.36,
+                satellite_risk_on=0.20,
+                satellite_reentry=0.42,
+                trigger=-0.15,
+                deep=-0.32,
+                min_recovery=0.035,
+                min_change=0.05,
+                max_step=0.25,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _ai_cycle_candidate(
+                name="i67_cycle_hysteresis_asymmetric_reentry",
+                family="cycle_state_machine_asymmetric",
+                hypothesis=(
+                    "Asymmetric state machine lets AI reenter faster from cash than it adds during "
+                    "normal risk-on, testing whether rebounds deserve special treatment."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "QUAL", "USMV", "GLD", "TLT", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.02,
+                satellite_max=0.44,
+                satellite_risk_on=0.20,
+                satellite_reentry=0.62,
+                trigger=-0.12,
+                deep=-0.26,
+                min_change=0.04,
+                max_step=0.32,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i67_cycle_hysteresis_whipsaw_control",
+                family="cycle_state_machine_whipsaw",
+                hypothesis=(
+                    "Whipsaw-control variant deliberately slows all exposure changes to see whether "
+                    "less trading improves left-tail and operating quality."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=126,
+                skip_days=21,
+                top_n=4,
+                min_return=0.015,
+                satellite_max=0.38,
+                satellite_risk_on=0.28,
+                satellite_reentry=0.40,
+                trigger=-0.12,
+                deep=-0.27,
+                recovery_days=42,
+                confirmation_days=10,
+                min_change=0.10,
+                max_step=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i67_cycle_hysteresis_breadth_unlock",
+                family="cycle_state_machine_breadth_unlock",
+                hypothesis=(
+                    "Breadth-unlock state machine tests whether equal-weight and cyclicals should "
+                    "unlock AI reentry after broad selloffs."
+                ),
+                core_tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.02,
+                satellite_max=0.42,
+                satellite_risk_on=0.25,
+                satellite_reentry=0.50,
+                trigger=-0.11,
+                deep=-0.25,
+                min_change=0.05,
+                max_step=0.28,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        68: (
+            _ai_cycle_candidate(
+                name="i68_cycle_barbell_credit_ai",
+                family="cycle_barbell_credit_ai",
+                hypothesis=(
+                    "Barbell allocator holds credit/rates defense until AI earns a satellite budget "
+                    "through price repair and credit confirmation."
+                ),
+                core_tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "IEF", "TLT", "GLD", "SHY", "SGOV"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                satellite_max=0.36,
+                satellite_risk_on=0.20,
+                satellite_reentry=0.45,
+                trigger=-0.12,
+                deep=-0.28,
+                min_change=0.04,
+                max_step=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i68_cycle_barbell_gold_duration_ai",
+                family="cycle_barbell_gold_duration_ai",
+                hypothesis=(
+                    "Gold/duration bridge protects the portfolio, then AI can take a satellite budget "
+                    "when volatility and repair conditions improve."
+                ),
+                core_tickers=["GLD", "IAU", "TLT", "IEF", "TIP", "SHY", "SGOV", "USFR", "SPY", "RSP", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                satellite_max=0.34,
+                satellite_risk_on=0.18,
+                satellite_reentry=0.42,
+                trigger=-0.11,
+                deep=-0.25,
+                min_change=0.04,
+                max_step=0.24,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i68_cycle_barbell_policy_oil_ai",
+                family="cycle_barbell_policy_oil_ai",
+                hypothesis=(
+                    "Policy/oil shock barbell competes energy, gold, duration, dollar, and AI, testing "
+                    "whether AI should reenter when geopolitical shock fades."
+                ),
+                core_tickers=["SPY", "RSP", "XLE", "XOP", "USO", "BNO", "DBC", "GLD", "UUP", "TLT", "IEF", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.01,
+                satellite_max=0.38,
+                satellite_risk_on=0.25,
+                satellite_reentry=0.42,
+                trigger=-0.12,
+                deep=-0.27,
+                min_change=0.04,
+                max_step=0.30,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i68_cycle_barbell_private_credit_gate",
+                family="cycle_barbell_private_credit_ai",
+                hypothesis=(
+                    "Private-credit gate blocks AI reentry while BDCs, loans, and regional banks are "
+                    "still breaking, then allows AI once credit stress repairs."
+                ),
+                core_tickers=["BIZD", "ARCC", "MAIN", "BXSL", "OBDC", "SRLN", "BKLN", "HYG", "LQD", "KRE", "IEF"],
+                satellite_tickers=ai_concentrated,
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.012,
+                satellite_max=0.32,
+                satellite_risk_on=0.16,
+                satellite_reentry=0.38,
+                trigger=-0.13,
+                deep=-0.30,
+                min_change=0.05,
+                max_step=0.22,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i68_cycle_barbell_rates_relief_ai",
+                family="cycle_barbell_rates_relief_ai",
+                hypothesis=(
+                    "Rates-relief core tests if duration and credit should turn first, then AI follows "
+                    "as a satellite only after repair."
+                ),
+                core_tickers=["SPY", "RSP", "HYG", "LQD", "VCIT", "VCSH", "TLT", "IEF", "TIP", "GLD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.01,
+                satellite_max=0.36,
+                satellite_risk_on=0.22,
+                satellite_reentry=0.42,
+                trigger=-0.10,
+                deep=-0.23,
+                min_change=0.04,
+                max_step=0.28,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i68_cycle_barbell_liquidity_ai",
+                family="cycle_barbell_liquidity_ai",
+                hypothesis=(
+                    "Liquidity-volatility barbell uses SVXY, credit, dollar, gold, and duration as "
+                    "the regime core before giving AI a reentry budget."
+                ),
+                core_tickers=["SPY", "RSP", "HYG", "LQD", "UUP", "GLD", "TLT", "IEF", "SVXY", "SHY", "SGOV"],
+                satellite_tickers=ai_core,
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.01,
+                satellite_max=0.40,
+                satellite_risk_on=0.25,
+                satellite_reentry=0.48,
+                trigger=-0.10,
+                deep=-0.23,
+                min_change=0.035,
+                max_step=0.30,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        69: (
+            _ai_cycle_candidate(
+                name="i69_cycle_aggressive_ai_semis_reentry",
+                family="cycle_aggressive_ai_reentry",
+                hypothesis=(
+                    "Aggressive semis reentry tests whether the system can buy high-convexity AI "
+                    "after deep discounts without overriding risk controls."
+                ),
+                core_tickers=["SPY", "RSP", "QUAL", "USMV", "GLD", "TLT", "HYG", "LQD"],
+                satellite_tickers=ai_concentrated,
+                lookback_days=63,
+                skip_days=5,
+                top_n=3,
+                min_return=0.03,
+                satellite_max=0.58,
+                satellite_risk_on=0.42,
+                satellite_reentry=0.68,
+                trigger=-0.16,
+                deep=-0.34,
+                min_recovery=0.040,
+                vol_ceiling=0.46,
+                min_change=0.04,
+                max_step=0.42,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _ai_cycle_candidate(
+                name="i69_cycle_aggressive_ai_mega_platform",
+                family="cycle_aggressive_ai_platform",
+                hypothesis=(
+                    "Mega-platform reentry tests whether the best AI rebound is concentrated in "
+                    "platform leaders rather than broad QQQ."
+                ),
+                core_tickers=["SPY", "RSP", "QUAL", "COWZ", "GLD", "IEF", "HYG", "LQD"],
+                satellite_tickers=["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "AVGO", "TSLA"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.03,
+                satellite_max=0.55,
+                satellite_risk_on=0.40,
+                satellite_reentry=0.62,
+                trigger=-0.13,
+                deep=-0.28,
+                min_recovery=0.030,
+                vol_ceiling=0.42,
+                min_change=0.04,
+                max_step=0.38,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _ai_cycle_candidate(
+                name="i69_cycle_aggressive_ai_infra_reentry",
+                family="cycle_aggressive_ai_infra",
+                hypothesis=(
+                    "AI infrastructure reentry tests whether power/grid/hardware beneficiaries offer "
+                    "better post-risk-off reentry than pure software or mega-cap beta."
+                ),
+                core_tickers=["SPY", "RSP", "XLI", "XLU", "GLD", "TLT", "HYG", "LQD"],
+                satellite_tickers=ai_infra,
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.025,
+                satellite_max=0.48,
+                satellite_risk_on=0.35,
+                satellite_reentry=0.56,
+                trigger=-0.12,
+                deep=-0.27,
+                min_recovery=0.028,
+                vol_ceiling=0.44,
+                min_change=0.04,
+                max_step=0.35,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i69_cycle_aggressive_high_beta_micro",
+                family="cycle_aggressive_high_beta_probe",
+                hypothesis=(
+                    "High-beta micro sleeve tests whether speculative rebound juice is worth a small, "
+                    "strictly capped allocation after deep washouts."
+                ),
+                core_tickers=["SPY", "RSP", "GLD", "TLT", "HYG", "LQD", "QUAL", "USMV"],
+                satellite_tickers=["SPHB", "ARKK", "IBIT", "FBTC", "XBI", "TAN", "BOTZ", "QQQ"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=2,
+                min_return=0.05,
+                satellite_max=0.28,
+                satellite_risk_on=0.16,
+                satellite_reentry=0.34,
+                trigger=-0.20,
+                deep=-0.40,
+                min_recovery=0.055,
+                vol_ceiling=0.62,
+                min_change=0.05,
+                max_step=0.22,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i69_cycle_aggressive_ai_escape_fast",
+                family="cycle_aggressive_ai_escape",
+                hypothesis=(
+                    "Fast AI escape reentry tests the explicit V1-V3 failure mode: do not stay risk-off "
+                    "once AI leadership and credit repair return."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "GLD", "TLT", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                min_return=0.035,
+                satellite_max=0.60,
+                satellite_risk_on=0.45,
+                satellite_reentry=0.70,
+                trigger=-0.12,
+                deep=-0.27,
+                min_recovery=0.025,
+                vol_ceiling=0.48,
+                min_change=0.025,
+                max_step=0.48,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _ai_cycle_candidate(
+                name="i69_cycle_aggressive_ai_escape_strict",
+                family="cycle_aggressive_ai_escape",
+                hypothesis=(
+                    "Strict AI escape reentry tests whether slower confirmation avoids false starts while "
+                    "still solving the stuck-in-cash problem."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "QUAL", "USMV", "GLD", "TLT", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.035,
+                satellite_max=0.48,
+                satellite_risk_on=0.30,
+                satellite_reentry=0.56,
+                trigger=-0.16,
+                deep=-0.32,
+                recovery_days=42,
+                confirmation_days=10,
+                min_recovery=0.035,
+                vol_ceiling=0.42,
+                min_change=0.06,
+                max_step=0.30,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+        ),
+        70: (
+            _ai_cycle_candidate(
+                name="i70_cycle_diverse_active_mega_cap_escape",
+                family="cycle_diverse_active_mega_cap",
+                hypothesis=(
+                    "Active mega-cap escape becomes a parent core while AI satellite reentry is gated "
+                    "by drawdown repair rather than raw recent winner chasing."
+                ),
+                core_tickers=["SPY", "RSP", "QUAL", "COWZ", "MTUM", "GLD", "TLT", "HYG", "LQD"],
+                satellite_tickers=["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "AVGO", "TSLA"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                min_return=0.03,
+                satellite_max=0.50,
+                satellite_risk_on=0.38,
+                satellite_reentry=0.55,
+                trigger=-0.12,
+                deep=-0.27,
+                min_change=0.04,
+                max_step=0.35,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _ai_cycle_candidate(
+                name="i70_cycle_diverse_spec_liquidity_ai",
+                family="cycle_diverse_spec_liquidity",
+                hypothesis=(
+                    "Speculative liquidity parent tests whether AI and high-beta assets should only "
+                    "activate after liquidity/volatility repair."
+                ),
+                core_tickers=["SVXY", "HYG", "LQD", "UUP", "GLD", "TLT", "SPY", "RSP", "SHY", "SGOV"],
+                satellite_tickers=["QQQ", "SMH", "SOXX", "ARKK", "SPHB", "IBIT", "FBTC", "XBI"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                min_return=0.04,
+                satellite_max=0.38,
+                satellite_risk_on=0.26,
+                satellite_reentry=0.44,
+                trigger=-0.14,
+                deep=-0.30,
+                min_recovery=0.035,
+                vol_ceiling=0.55,
+                min_change=0.05,
+                max_step=0.28,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i70_cycle_diverse_sector_breadth_ai",
+                family="cycle_diverse_sector_breadth",
+                hypothesis=(
+                    "Sector breadth parent checks whether AI should reenter only after broader sector "
+                    "leadership confirms the move."
+                ),
+                core_tickers=["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "RSP", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.015,
+                satellite_max=0.38,
+                satellite_risk_on=0.25,
+                satellite_reentry=0.42,
+                trigger=-0.11,
+                deep=-0.25,
+                min_change=0.04,
+                max_step=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i70_cycle_diverse_policy_oil_ai",
+                family="cycle_diverse_policy_oil",
+                hypothesis=(
+                    "Policy/oil parent tests whether AI reentry can coexist with shock-aware energy, "
+                    "gold, dollar, and duration allocations."
+                ),
+                core_tickers=["SPY", "RSP", "XLE", "XOP", "USO", "BNO", "DBC", "GLD", "UUP", "TLT", "IEF", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.01,
+                satellite_max=0.36,
+                satellite_risk_on=0.22,
+                satellite_reentry=0.40,
+                trigger=-0.12,
+                deep=-0.27,
+                min_change=0.05,
+                max_step=0.26,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i70_cycle_diverse_global_macro_ai",
+                family="cycle_diverse_global_macro",
+                hypothesis=(
+                    "Global macro parent tests whether AI satellite risk is useful even when the best "
+                    "core regime expression is outside U.S. equities."
+                ),
+                core_tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "INDA", "EWZ", "GLD", "UUP", "DBC", "TLT", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.012,
+                satellite_max=0.34,
+                satellite_risk_on=0.22,
+                satellite_reentry=0.38,
+                trigger=-0.11,
+                deep=-0.25,
+                min_change=0.05,
+                max_step=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i70_cycle_diverse_final_core_ai",
+                family="cycle_diverse_final_core",
+                hypothesis=(
+                    "Final diverse core combines broad equity, credit, duration, commodities, and AI "
+                    "satellite reentry as a candidate operating architecture."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "TLT", "IEF", "DBC"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.015,
+                satellite_max=0.42,
+                satellite_risk_on=0.30,
+                satellite_reentry=0.48,
+                trigger=-0.11,
+                deep=-0.26,
+                min_change=0.04,
+                max_step=0.32,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        71: (
+            _ai_cycle_candidate(
+                name="i71_cycle_cooldown_whipsaw_control",
+                family="cycle_cooldown_whipsaw",
+                hypothesis=(
+                    "Cooldown version of the best hysteresis candidate: require a minimum hold period "
+                    "unless a risk-off override fires, aiming to reduce noisy re-risk/de-risk cycles."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=126,
+                skip_days=21,
+                top_n=4,
+                min_return=0.015,
+                satellite_max=0.38,
+                satellite_risk_on=0.28,
+                satellite_reentry=0.40,
+                trigger=-0.12,
+                deep=-0.27,
+                recovery_days=42,
+                confirmation_days=10,
+                min_change=0.10,
+                max_step=0.18,
+                min_hold_days=10,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i71_cycle_cooldown_macro_triangle",
+                family="cycle_cooldown_macro_triangle",
+                hypothesis=(
+                    "Cooldown macro triangle keeps the strong macro/AI blend but forces signals to "
+                    "persist before target weights move again."
+                ),
+                core_tickers=["SPY", "RSP", "HYG", "LQD", "GLD", "TLT", "IEF", "UUP", "DBC", "USO"],
+                satellite_tickers=ai_core,
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.01,
+                satellite_max=0.40,
+                satellite_risk_on=0.30,
+                satellite_reentry=0.48,
+                trigger=-0.10,
+                deep=-0.24,
+                min_change=0.08,
+                max_step=0.20,
+                min_hold_days=8,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i71_cycle_cooldown_final_core",
+                family="cycle_cooldown_final_core",
+                hypothesis=(
+                    "Cooldown final-core variant tests whether a top diverse operating architecture "
+                    "can keep most return while trading less often."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "TLT", "IEF", "DBC"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.015,
+                satellite_max=0.42,
+                satellite_risk_on=0.30,
+                satellite_reentry=0.48,
+                trigger=-0.11,
+                deep=-0.26,
+                min_change=0.08,
+                max_step=0.22,
+                min_hold_days=8,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="i71_cycle_cooldown_credit_barbell",
+                family="cycle_cooldown_credit_barbell",
+                hypothesis=(
+                    "Cooldown credit barbell prioritizes stability and lets AI reenter slowly from a "
+                    "credit/rates defensive core."
+                ),
+                core_tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "IEF", "TLT", "GLD", "SHY", "SGOV"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                satellite_max=0.36,
+                satellite_risk_on=0.20,
+                satellite_reentry=0.45,
+                trigger=-0.12,
+                deep=-0.28,
+                min_change=0.08,
+                max_step=0.18,
+                min_hold_days=10,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _ai_cycle_candidate(
+                name="i71_cycle_cooldown_ai_escape",
+                family="cycle_cooldown_ai_escape",
+                hypothesis=(
+                    "Cooldown AI escape tests whether aggressive reentry can stay viable when every "
+                    "target move must persist long enough to be human-operable."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "QUAL", "USMV", "GLD", "TLT", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.035,
+                satellite_max=0.48,
+                satellite_risk_on=0.30,
+                satellite_reentry=0.56,
+                trigger=-0.16,
+                deep=-0.32,
+                recovery_days=42,
+                confirmation_days=10,
+                min_recovery=0.035,
+                vol_ceiling=0.42,
+                min_change=0.08,
+                max_step=0.20,
+                min_hold_days=8,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _ai_cycle_candidate(
+                name="i71_cycle_cooldown_global_macro",
+                family="cycle_cooldown_global_macro",
+                hypothesis=(
+                    "Cooldown global macro tests whether global diversification plus AI satellite can "
+                    "solve reentry without frequent target churn."
+                ),
+                core_tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "INDA", "EWZ", "GLD", "UUP", "DBC", "TLT", "HYG", "LQD"],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.012,
+                satellite_max=0.34,
+                satellite_risk_on=0.22,
+                satellite_reentry=0.38,
+                trigger=-0.11,
+                deep=-0.25,
+                min_change=0.08,
+                max_step=0.18,
+                min_hold_days=10,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+    }
+    return batches[iteration]
+
+
 def _dip_reentry_candidate(
     *,
     name: str,
@@ -4408,6 +5261,88 @@ def _dip_overlay_candidate(
             dip_volatility_ceiling=vol_ceiling,
             dip_credit_confirmation=credit_confirmation,
             dip_breadth_confirmation=breadth_confirmation,
+        ),
+    )
+
+
+def _ai_cycle_candidate(
+    *,
+    name: str,
+    family: str,
+    hypothesis: str,
+    core_tickers: list[str],
+    satellite_tickers: list[str],
+    lookback_days: int,
+    skip_days: int,
+    top_n: int,
+    min_return: float,
+    satellite_max: float,
+    satellite_risk_on: float,
+    satellite_reentry: float,
+    trigger: float,
+    deep: float,
+    min_recovery: float = 0.020,
+    recovery_days: int = 21,
+    confirmation_days: int = 5,
+    min_change: float = 0.04,
+    max_step: float = 0.35,
+    min_hold_days: int = 0,
+    max_asset_weight: float = 0.30,
+    vol_ceiling: float = 0.40,
+    credit_confirmation: bool = True,
+    breadth_confirmation: bool = True,
+    scenario_sizing: ScenarioSizingConfig | None = None,
+) -> ExperimentCandidate:
+    tickers = list(
+        dict.fromkeys(
+            [
+                *core_tickers,
+                *satellite_tickers,
+                "SPY",
+                "RSP",
+                "HYG",
+                "LQD",
+            ]
+        )
+    )
+    return _candidate(
+        name=name,
+        role="risk_cycle_candidate",
+        phase="ai_risk_cycle",
+        family=family,
+        hypothesis=hypothesis,
+        scenario_sizing=scenario_sizing,
+        strategy=StrategyConfig(
+            type="ai_risk_cycle_overlay",
+            tickers=tickers,
+            satellite_tickers=list(dict.fromkeys(satellite_tickers)),
+            defensive_ticker="BIL",
+            lookback_days=lookback_days,
+            skip_days=skip_days,
+            top_n=top_n,
+            min_return=min_return,
+            ranking_metric="risk_adjusted_return",
+            weighting="risk_adjusted_score",
+            volatility_lookback_days=63,
+            trend_filter_days=100,
+            max_asset_weight=max_asset_weight,
+            dip_trigger_drawdown=trigger,
+            dip_deep_drawdown=deep,
+            dip_recovery_days=recovery_days,
+            dip_confirmation_days=confirmation_days,
+            dip_min_recovery_return=min_recovery,
+            dip_starter_weight=0.18,
+            dip_step_weight=0.22,
+            dip_max_risk_weight=min(0.95, satellite_max + 0.20),
+            dip_volatility_ceiling=vol_ceiling,
+            dip_credit_confirmation=credit_confirmation,
+            dip_breadth_confirmation=breadth_confirmation,
+            cycle_satellite_max_weight=satellite_max,
+            cycle_satellite_risk_on_weight=satellite_risk_on,
+            cycle_satellite_reentry_weight=satellite_reentry,
+            cycle_min_rebalance_change=min_change,
+            cycle_max_step_change=max_step,
+            cycle_min_hold_days=min_hold_days,
         ),
     )
 
@@ -5525,6 +6460,7 @@ def _candidate_tickers(candidates: tuple[ExperimentCandidate, ...]) -> set[str]:
     tickers: set[str] = set()
     for candidate in candidates:
         tickers.update(candidate.strategy.tickers)
+        tickers.update(candidate.strategy.satellite_tickers)
         if candidate.strategy.defensive_ticker:
             tickers.add(candidate.strategy.defensive_ticker)
     return tickers
