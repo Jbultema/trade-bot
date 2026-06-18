@@ -610,15 +610,41 @@ def _render_experiment_monitor(
     _helped_metric(col_c, "Promoted", f"{promoted_count:,}", key="promotion_decision")
     _helped_metric(col_d, "Risk rejects", f"{rejected_tail_count:,}", key="promotion_decision")
 
-    _render_curated_strategy_shelf(experiment_scorecards)
-
     (
-        experiment_overview_tab,
+        experiment_detail_tab,
+        experiment_shelf_tab,
         experiment_leaderboard_tab,
         experiment_regime_tab,
-        experiment_detail_tab,
+        experiment_overview_tab,
         experiment_manifest_tab,
-    ) = st.tabs(["Overview", "Leaderboard", "Regime Tests", "Approach Detail", "Manifests"])
+    ) = st.tabs(
+        [
+            "Candidate Details",
+            "Curated Shelf",
+            "Leaderboard",
+            "Regime Tests",
+            "Overview",
+            "Manifests",
+        ]
+    )
+
+    with experiment_detail_tab:
+        st.caption(
+            "Primary research workbench. Use this before paper-monitoring a strategy: it shows "
+            "the explanation, performance-over-time charts, allocation behavior, mechanics, "
+            "robustness diagnostics, and manifest/risk notes."
+        )
+        _render_approach_detail_workbench(
+            bot_config=bot_config,
+            baseline_run=baseline_run,
+            experiment_scorecards=experiment_scorecards,
+            experiment_regimes=experiment_regimes,
+            experiment_walk_forward=experiment_walk_forward,
+            experiment_candidates=experiment_candidates,
+        )
+
+    with experiment_shelf_tab:
+        _render_curated_strategy_shelf(experiment_scorecards)
 
     with experiment_overview_tab:
         experiment_summary = summarize_experiment_history(experiment_scorecards)
@@ -762,16 +788,6 @@ def _render_experiment_monitor(
                         ]
                     )
                 )
-
-    with experiment_detail_tab:
-        _render_approach_detail_workbench(
-            bot_config=bot_config,
-            baseline_run=baseline_run,
-            experiment_scorecards=experiment_scorecards,
-            experiment_regimes=experiment_regimes,
-            experiment_walk_forward=experiment_walk_forward,
-            experiment_candidates=experiment_candidates,
-        )
 
     with experiment_manifest_tab:
         if experiment_candidates.empty:
