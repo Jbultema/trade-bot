@@ -194,9 +194,14 @@ def _install_dashboard_styles() -> None:
             line-height: 1.38;
         }
         div[data-testid="stPills"] {
-            margin: 0 0 1.3rem;
-            padding: 12px 0 1.15rem;
-            border-bottom: 1px solid var(--tb-card-border);
+            margin: 0 0 0.55rem;
+            padding: 10px 0 0.7rem;
+            border-bottom: 0;
+        }
+        .dashboard-workbench-divider {
+            height: 1px;
+            margin: 0 0 1.35rem;
+            background: color-mix(in srgb, var(--tb-card-border) 78%, transparent);
         }
         div[data-testid="stPills"] button,
         div[data-testid="stPills"] [role="button"] {
@@ -305,13 +310,19 @@ def _install_dashboard_styles() -> None:
             border-color: var(--tb-accent) !important;
             color: #ffffff !important;
         }
+        div[data-testid="stTabs"] {
+            margin-top: 0.25rem;
+        }
         div[data-testid="stTabs"] button {
             border-radius: 8px 8px 0 0;
             color: var(--tb-card-text);
             font-weight: 650;
+            min-height: 38px;
+            padding: 7px 10px;
         }
         div[data-testid="stTabs"] [data-baseweb="tab-list"] {
-            gap: 4px;
+            gap: 8px;
+            padding-top: 2px;
             border-bottom: 1px solid var(--tb-card-border);
         }
         div[data-testid="stTabs"] [data-baseweb="tab-highlight"] {

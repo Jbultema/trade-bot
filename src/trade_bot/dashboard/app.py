@@ -255,7 +255,10 @@ selected_section = st.pills(
     width="stretch",
 )
 selected_section = selected_section or "Command Center"
-st.divider()
+st.markdown(
+    '<div class="dashboard-workbench-divider" aria-hidden="true"></div>',
+    unsafe_allow_html=True,
+)
 _render_dashboard_section(
     selected_section,
     bot_config=bot_config,
