@@ -235,10 +235,13 @@ _render_decision_brief(
 )
 st.markdown(
     """
-    <div class="dashboard-primary-nav-label">Insight Sections</div>
-    <p class="dashboard-nav-caption">
-        Choose the detailed workbench below. The selected section renders immediately under this control.
-    </p>
+    <div class="dashboard-section-header">
+        <p class="dashboard-section-kicker">Dashboard Drilldown</p>
+        <div class="dashboard-primary-nav-label">Insight Sections</div>
+        <p class="dashboard-nav-caption">
+            Choose the detailed workbench below. The selected section renders immediately under this control.
+        </p>
+    </div>
     """,
     unsafe_allow_html=True,
 )

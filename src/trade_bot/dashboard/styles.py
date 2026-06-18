@@ -21,7 +21,7 @@ def _install_dashboard_styles() -> None:
         }
         .block-container {
             max-width: 1540px;
-            padding-top: 1.25rem;
+            padding-top: 1.7rem;
             padding-bottom: 3.25rem;
         }
         h1 {
@@ -42,8 +42,8 @@ def _install_dashboard_styles() -> None:
             align-items: center;
             justify-content: space-between;
             gap: 18px;
-            margin: 0 0 18px;
-            padding: 18px 20px;
+            margin: 4px 0 18px;
+            padding: 24px 22px 22px;
             border: 1px solid rgba(15, 118, 110, 0.35);
             border-radius: 8px;
             background:
@@ -64,8 +64,8 @@ def _install_dashboard_styles() -> None:
             align-items: center;
             justify-content: center;
             flex: 0 0 auto;
-            width: 58px;
-            height: 58px;
+            width: 54px;
+            height: 54px;
             border-radius: 8px;
             border: 1px solid rgba(167, 243, 208, 0.55);
             background:
@@ -103,24 +103,25 @@ def _install_dashboard_styles() -> None:
             min-width: 0;
         }
         .brand-eyebrow {
-            margin: 0 0 3px;
+            margin: 0 0 7px;
             color: #a7f3d0;
             font-size: 0.74rem;
             font-weight: 820;
             letter-spacing: 0;
+            line-height: 1.2;
             text-transform: uppercase;
         }
         .brand-title {
             margin: 0;
             color: #f8fafc !important;
-            font-size: 2.0rem;
+            font-size: 1.9rem;
             line-height: 1.05;
             font-weight: 820;
             letter-spacing: 0;
         }
         .brand-subtitle {
             max-width: 840px;
-            margin: 6px 0 0;
+            margin: 8px 0 0;
             color: rgba(248, 250, 252, 0.86);
             font-size: 0.98rem;
             line-height: 1.42;
@@ -145,33 +146,52 @@ def _install_dashboard_styles() -> None:
             font-weight: 760;
             white-space: nowrap;
         }
-        .dashboard-primary-nav-label {
-            margin: 0.15rem 0 0.18rem;
+        .dashboard-section-header {
+            margin: 24px 0 8px;
+            padding: 16px 18px 14px;
+            border: 1px solid var(--tb-card-border);
+            border-left: 6px solid var(--tb-accent);
+            border-radius: 8px;
+            background:
+                linear-gradient(90deg, color-mix(in srgb, var(--tb-accent) 10%, var(--tb-card-bg)), var(--tb-card-bg));
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .dashboard-section-kicker {
+            margin: 0 0 5px;
             color: var(--tb-accent);
-            font-size: 0.82rem;
+            font-size: 0.76rem;
             font-weight: 820;
             letter-spacing: 0;
+            line-height: 1.2;
             text-transform: uppercase;
         }
+        .dashboard-primary-nav-label {
+            margin: 0;
+            color: var(--tb-card-text);
+            font-size: 1.32rem;
+            font-weight: 820;
+            letter-spacing: 0;
+            line-height: 1.18;
+        }
         .dashboard-nav-caption {
-            margin: 0 0 0.45rem;
+            margin: 6px 0 0;
             color: var(--tb-card-muted);
-            font-size: 0.94rem;
-            line-height: 1.35;
+            font-size: 0.98rem;
+            line-height: 1.38;
         }
         div[data-testid="stPills"] {
             margin: 0 0 1.15rem;
-            padding: 0 0 0.9rem;
+            padding: 10px 0 1.05rem;
             border-bottom: 1px solid var(--tb-card-border);
         }
         div[data-testid="stPills"] button,
         div[data-testid="stPills"] [role="button"] {
-            min-height: 42px;
+            min-height: 46px;
             border-radius: 8px !important;
             border: 1px solid var(--tb-card-border) !important;
             background: var(--tb-card-bg) !important;
             color: var(--tb-card-text) !important;
-            font-size: 1.0rem !important;
+            font-size: 1.03rem !important;
             font-weight: 760 !important;
             padding: 8px 13px !important;
             box-shadow: var(--tb-shadow-soft);
@@ -678,7 +698,7 @@ def _install_dashboard_styles() -> None:
         }
         @media (max-width: 700px) {
             .brand-masthead {
-                padding: 15px;
+                padding: 20px 15px 16px;
             }
             .brand-lockup {
                 align-items: flex-start;
