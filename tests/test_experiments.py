@@ -11,6 +11,7 @@ from trade_bot.research.experiments import (
     build_experiment_scorecard,
     generate_iteration_candidates,
 )
+from trade_bot.strategies.momentum import build_strategy_weights
 
 
 def test_iteration_one_has_bounded_candidate_batch() -> None:
@@ -369,3 +370,331 @@ def test_final_deep_wide_iterations_are_curated_and_human_executable() -> None:
         assert all(
             set(candidate.strategy.tickers).issubset(cached_universe) for candidate in candidates
         )
+
+
+def test_dip_reentry_strategy_meters_cash_into_confirmed_discount() -> None:
+    index = pd.bdate_range("2020-01-01", periods=160)
+    falling = list(range(100, 70, -1))
+    basing = [70.0 for _ in range(30)]
+    repairing = [70.0 + i * 0.8 for i in range(100)]
+    spy_path = pd.Series(falling + basing + repairing, index=index, dtype=float)
+    prices = pd.DataFrame(
+        {
+            "SPY": spy_path,
+            "QQQ": spy_path * 1.02,
+            "RSP": spy_path * 1.01,
+            "HYG": pd.Series(falling + basing + repairing, index=index, dtype=float),
+            "LQD": pd.Series([100.0 for _ in index], index=index),
+            "BIL": pd.Series([100.0 for _ in index], index=index),
+        }
+    )
+    strategy = StrategyConfig(
+        type="dip_reentry",
+        tickers=["SPY", "QQQ", "RSP", "HYG", "LQD"],
+        defensive_ticker="BIL",
+        top_n=3,
+        weighting="risk_adjusted_score",
+        max_asset_weight=0.40,
+        dip_lookback_days=63,
+        dip_trigger_drawdown=-0.10,
+        dip_deep_drawdown=-0.25,
+        dip_recovery_days=10,
+        dip_confirmation_days=3,
+        dip_min_recovery_return=0.01,
+        dip_starter_weight=0.20,
+        dip_step_weight=0.20,
+        dip_max_risk_weight=0.70,
+        dip_volatility_ceiling=1.00,
+    )
+
+    weights = build_strategy_weights(prices, strategy)
+    risk_weight = weights.drop(columns=["BIL"]).sum(axis=1)
+
+    assert risk_weight.iloc[20] == 0.0
+    assert risk_weight.max() > 0.15
+    assert risk_weight.max() <= 0.70
+    assert weights.loc[risk_weight.idxmax(), "BIL"] < 0.85
+    assert round(float(weights.loc[risk_weight.idxmax()].sum()), 8) == 1.0
+
+
+def test_dip_reentry_overlay_replaces_cash_after_confirmed_discount() -> None:
+    index = pd.bdate_range("2020-01-01", periods=180)
+    falling = list(range(100, 64, -1))
+    basing = [64.0 for _ in range(44)]
+    repairing = [64.0 + i * 0.9 for i in range(100)]
+    spy_path = pd.Series(falling + basing + repairing, index=index, dtype=float)
+    prices = pd.DataFrame(
+        {
+            "SPY": spy_path,
+            "QQQ": spy_path * 1.03,
+            "RSP": spy_path * 1.01,
+            "HYG": pd.Series(falling + basing + repairing, index=index, dtype=float),
+            "LQD": pd.Series([100.0 for _ in index], index=index),
+            "BIL": pd.Series([100.0 for _ in index], index=index),
+        }
+    )
+    strategy = StrategyConfig(
+        type="dip_reentry_overlay",
+        tickers=["SPY", "QQQ", "RSP", "HYG", "LQD"],
+        defensive_ticker="BIL",
+        lookback_days=42,
+        skip_days=5,
+        top_n=2,
+        min_return=0.04,
+        ranking_metric="risk_adjusted_return",
+        weighting="risk_adjusted_score",
+        max_asset_weight=0.40,
+        dip_lookback_days=63,
+        dip_trigger_drawdown=-0.10,
+        dip_deep_drawdown=-0.25,
+        dip_recovery_days=10,
+        dip_confirmation_days=3,
+        dip_min_recovery_return=0.01,
+        dip_starter_weight=0.22,
+        dip_step_weight=0.20,
+        dip_max_risk_weight=0.70,
+        dip_volatility_ceiling=1.00,
+    )
+
+    weights = build_strategy_weights(prices, strategy)
+    risk_weight = weights.drop(columns=["BIL"]).sum(axis=1)
+
+    assert risk_weight.iloc[25] == 0.0
+    assert risk_weight.max() > 0.20
+    assert risk_weight.max() <= 1.0
+    assert weights.loc[risk_weight.idxmax(), "BIL"] < 0.80
+    assert round(float(weights.loc[risk_weight.idxmax()].sum()), 8) == 1.0
+
+
+def test_dip_reentry_iterations_are_bounded_and_use_cached_tradeable_universe() -> None:
+    cached_universe = {
+        "AAPL",
+        "AMZN",
+        "ARCC",
+        "ARKK",
+        "AVGO",
+        "BIL",
+        "BIZD",
+        "BKLN",
+        "BOTZ",
+        "BRK-B",
+        "BXSL",
+        "CCJ",
+        "CEG",
+        "COWZ",
+        "DBC",
+        "EEM",
+        "EFA",
+        "ETN",
+        "EWC",
+        "EWJ",
+        "EWZ",
+        "FBTC",
+        "GEV",
+        "GLD",
+        "GOOGL",
+        "HYG",
+        "IAU",
+        "IBIT",
+        "IEF",
+        "IGV",
+        "INDA",
+        "IWD",
+        "IWM",
+        "IYT",
+        "JAAA",
+        "JBBB",
+        "JNK",
+        "JPM",
+        "KRE",
+        "LQD",
+        "MAIN",
+        "MDY",
+        "META",
+        "MOAT",
+        "MSFT",
+        "MTUM",
+        "NVDA",
+        "NRG",
+        "OBDC",
+        "PWR",
+        "QQQ",
+        "QVAL",
+        "QUAL",
+        "RSP",
+        "SCHD",
+        "SGOV",
+        "SHY",
+        "SMH",
+        "SOXX",
+        "SPHB",
+        "SPLV",
+        "SPY",
+        "SRLN",
+        "SVXY",
+        "TAN",
+        "TIP",
+        "TLT",
+        "TSLA",
+        "UUP",
+        "USFR",
+        "USMV",
+        "USO",
+        "VCIT",
+        "VCSH",
+        "VEA",
+        "VFQY",
+        "VGK",
+        "VIG",
+        "VRT",
+        "VTV",
+        "VWO",
+        "XBI",
+        "XHB",
+        "XLB",
+        "XLC",
+        "XLE",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLP",
+        "XLRE",
+        "XLU",
+        "XLV",
+        "XLY",
+        "XRT",
+    }
+
+    for iteration in range(55, 61):
+        candidates = generate_iteration_candidates(iteration)
+
+        assert 3 <= len(candidates) <= 10
+        assert len({candidate.name for candidate in candidates}) == len(candidates)
+        assert all(candidate.name.startswith(f"i{iteration:02d}_dip_") for candidate in candidates)
+        assert {candidate.phase for candidate in candidates} == {"dip_reentry"}
+        assert {candidate.role for candidate in candidates} == {"reentry_candidate"}
+        assert all(candidate.strategy.type == "dip_reentry" for candidate in candidates)
+        assert all(candidate.strategy.defensive_ticker == "BIL" for candidate in candidates)
+        assert all(
+            set(candidate.strategy.tickers).issubset(cached_universe) for candidate in candidates
+        )
+        assert any(candidate.scenario_sizing is not None for candidate in candidates)
+
+
+
+def test_dip_reentry_overlay_iterations_are_bounded_and_cash_redeployment_focused() -> None:
+    cached_universe = {
+        "AAPL",
+        "AMZN",
+        "ARCC",
+        "ARKK",
+        "AVGO",
+        "BIL",
+        "BIZD",
+        "BKLN",
+        "BOTZ",
+        "BRK-B",
+        "BXSL",
+        "CCJ",
+        "CEG",
+        "COWZ",
+        "DBC",
+        "EEM",
+        "EFA",
+        "ETN",
+        "EWC",
+        "EWJ",
+        "EWZ",
+        "FBTC",
+        "GEV",
+        "GLD",
+        "GOOGL",
+        "HYG",
+        "IAU",
+        "IBIT",
+        "IEF",
+        "IGV",
+        "INDA",
+        "IWD",
+        "IWM",
+        "IYT",
+        "JAAA",
+        "JBBB",
+        "JNK",
+        "JPM",
+        "KRE",
+        "LQD",
+        "MAIN",
+        "MDY",
+        "META",
+        "MOAT",
+        "MSFT",
+        "MTUM",
+        "NVDA",
+        "NRG",
+        "OBDC",
+        "PWR",
+        "QQQ",
+        "QVAL",
+        "QUAL",
+        "RSP",
+        "SCHD",
+        "SGOV",
+        "SHY",
+        "SMH",
+        "SOXX",
+        "SPHB",
+        "SPLV",
+        "SPY",
+        "SRLN",
+        "SVXY",
+        "TAN",
+        "TIP",
+        "TLT",
+        "TSLA",
+        "UUP",
+        "USFR",
+        "USMV",
+        "USO",
+        "VCIT",
+        "VCSH",
+        "VEA",
+        "VFQY",
+        "VGK",
+        "VIG",
+        "VRT",
+        "VTV",
+        "VWO",
+        "XBI",
+        "XHB",
+        "XLB",
+        "XLC",
+        "XLE",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLP",
+        "XLRE",
+        "XLU",
+        "XLV",
+        "XLY",
+        "XRT",
+    }
+
+    for iteration in range(61, 66):
+        candidates = generate_iteration_candidates(iteration)
+
+        assert 3 <= len(candidates) <= 10
+        assert len({candidate.name for candidate in candidates}) == len(candidates)
+        assert all(
+            candidate.name.startswith(f"i{iteration:02d}_dip_overlay_")
+            for candidate in candidates
+        )
+        assert {candidate.phase for candidate in candidates} == {"dip_reentry_overlay"}
+        assert {candidate.role for candidate in candidates} == {"reentry_overlay_candidate"}
+        assert all(candidate.strategy.type == "dip_reentry_overlay" for candidate in candidates)
+        assert all(candidate.strategy.defensive_ticker == "BIL" for candidate in candidates)
+        assert all(
+            set(candidate.strategy.tickers).issubset(cached_universe) for candidate in candidates
+        )
+        assert any(candidate.scenario_sizing is not None for candidate in candidates)

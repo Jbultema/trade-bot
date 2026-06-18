@@ -221,6 +221,10 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _active_trading_candidates(iteration)
     if 50 <= iteration <= 54:
         return _final_deep_wide_candidates(iteration)
+    if 55 <= iteration <= 60:
+        return _dip_reentry_candidates(iteration)
+    if 61 <= iteration <= 65:
+        return _dip_reentry_overlay_candidates(iteration)
     return None
 
 
@@ -2983,6 +2987,1429 @@ def _final_deep_wide_candidates(iteration: int) -> tuple[ExperimentCandidate, ..
         ),
     }
     return batches[iteration]
+
+
+def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    batches = {
+        55: (
+            _dip_reentry_candidate(
+                name="i55_dip_broad_market_discount_ladder",
+                family="dip_broad_market",
+                hypothesis=(
+                    "Broad equity reentry ladders back from BIL only after SPY/QQQ/RSP/IWM are "
+                    "meaningfully discounted and recovery, volatility, credit, and breadth stop "
+                    "looking like an active falling knife."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "IEF"],
+                trigger=-0.10,
+                deep=-0.22,
+                starter=0.18,
+                step=0.18,
+                max_risk=0.72,
+                top_n=4,
+                max_asset_weight=0.28,
+            ),
+            _dip_reentry_candidate(
+                name="i55_dip_strict_confirmed_repair",
+                family="dip_broad_market",
+                hypothesis=(
+                    "A strict version waits for a deeper discount and stronger 21-day repair before "
+                    "adding equity risk, prioritizing avoiding falling knives over catching the exact bottom."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "QUAL", "USMV", "HYG", "LQD", "GLD", "IEF"],
+                trigger=-0.14,
+                deep=-0.28,
+                min_recovery=0.025,
+                starter=0.12,
+                step=0.16,
+                max_risk=0.60,
+                top_n=4,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i55_dip_aggressive_panic_starter",
+                family="dip_broad_market",
+                hypothesis=(
+                    "A more aggressive panic-starter tests whether a small early allocation after "
+                    "large drawdowns captures near-bottom returns without letting the ladder get all-in."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "SPHB", "MTUM", "HYG", "LQD", "GLD", "TLT"],
+                trigger=-0.08,
+                deep=-0.20,
+                min_recovery=0.010,
+                starter=0.25,
+                step=0.22,
+                max_risk=0.85,
+                top_n=4,
+                max_asset_weight=0.30,
+                credit_confirmation=True,
+                breadth_confirmation=True,
+            ),
+            _dip_reentry_candidate(
+                name="i55_dip_weekly_low_churn_reentry",
+                family="dip_low_churn",
+                hypothesis=(
+                    "A slower low-churn reentry system tests whether discount buying can be operated "
+                    "with weekly human decisions rather than daily twitch."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+                trigger=-0.12,
+                deep=-0.26,
+                recovery_days=42,
+                confirmation_days=10,
+                min_recovery=0.025,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.70,
+                top_n=4,
+                max_asset_weight=0.28,
+                trend_filter_days=126,
+            ),
+            _dip_reentry_candidate(
+                name="i55_dip_value_quality_reentry",
+                family="dip_fundamental_proxy",
+                hypothesis=(
+                    "Value, quality, cash-flow, dividend, and low-volatility ETFs act as fundamental "
+                    "valuation proxies: buy the dip only in resilient equity cohorts, not the whole index."
+                ),
+                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "RSP", "SPY"],
+                trigger=-0.09,
+                deep=-0.20,
+                starter=0.20,
+                step=0.18,
+                max_risk=0.75,
+                top_n=5,
+                max_asset_weight=0.25,
+                breadth_confirmation=False,
+            ),
+            _dip_reentry_candidate(
+                name="i55_dip_credit_repair_first",
+                family="dip_credit_repair",
+                hypothesis=(
+                    "Credit repair may be the confirmation signal for buying broad-market dips; this "
+                    "basket can hold credit, duration, gold, or equities depending on repair quality."
+                ),
+                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "KRE", "SPY", "RSP", "GLD", "IEF"],
+                trigger=-0.08,
+                deep=-0.18,
+                min_recovery=0.010,
+                starter=0.18,
+                step=0.17,
+                max_risk=0.68,
+                top_n=4,
+                max_asset_weight=0.28,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        56: (
+            _dip_reentry_candidate(
+                name="i56_dip_ai_semis_crash_repair",
+                family="dip_ai_beta_reentry",
+                hypothesis=(
+                    "AI beta dip buying is only allowed after semis/software/platforms are deeply "
+                    "discounted and repair; otherwise this stays mostly in BIL."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN", "GLD", "TLT"],
+                trigger=-0.14,
+                deep=-0.30,
+                min_recovery=0.030,
+                starter=0.10,
+                step=0.16,
+                max_risk=0.55,
+                top_n=3,
+                max_asset_weight=0.22,
+                vol_ceiling=0.42,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _dip_reentry_candidate(
+                name="i56_dip_ai_infra_resilient_reentry",
+                family="dip_ai_infrastructure",
+                hypothesis=(
+                    "AI-infrastructure dip buying tests whether power, grid, nuclear, and hardware "
+                    "beneficiaries are better reentry vehicles than pure software beta."
+                ),
+                tickers=["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLI", "XLU", "GLD"],
+                trigger=-0.12,
+                deep=-0.26,
+                min_recovery=0.025,
+                starter=0.14,
+                step=0.17,
+                max_risk=0.62,
+                top_n=4,
+                max_asset_weight=0.22,
+                vol_ceiling=0.40,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i56_dip_mega_cap_platform_repair",
+                family="dip_mega_cap_platform",
+                hypothesis=(
+                    "Mega-cap dip reentry tests whether platform leaders recover first after market "
+                    "stress while avoiding single-name concentration."
+                ),
+                tickers=["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "AVGO", "TSLA", "BRK-B", "JPM", "GLD"],
+                trigger=-0.12,
+                deep=-0.25,
+                min_recovery=0.025,
+                starter=0.14,
+                step=0.18,
+                max_risk=0.65,
+                top_n=4,
+                max_asset_weight=0.22,
+                vol_ceiling=0.38,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _dip_reentry_candidate(
+                name="i56_dip_high_beta_micro_sleeve",
+                family="dip_high_beta_reentry",
+                hypothesis=(
+                    "A deliberately capped high-beta dip sleeve tests whether speculative beta rebounds "
+                    "are useful only after extreme discounts and repair."
+                ),
+                tickers=["SPHB", "ARKK", "IBIT", "FBTC", "XBI", "TAN", "BOTZ", "QQQ", "GLD", "TLT"],
+                trigger=-0.18,
+                deep=-0.35,
+                min_recovery=0.045,
+                starter=0.06,
+                step=0.12,
+                max_risk=0.35,
+                top_n=2,
+                max_asset_weight=0.16,
+                vol_ceiling=0.58,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_reentry_candidate(
+                name="i56_dip_growth_defense_barbell_repair",
+                family="dip_growth_defense_barbell",
+                hypothesis=(
+                    "Growth dip reentry competes directly with gold, duration, quality, and low-vol so "
+                    "the bot can buy recovery without assuming QQQ must lead."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "SPY", "RSP", "QUAL", "USMV", "GLD", "TLT", "IEF"],
+                trigger=-0.11,
+                deep=-0.24,
+                min_recovery=0.020,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.68,
+                top_n=4,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i56_dip_ai_strict_no_credit_no_buy",
+                family="dip_ai_beta_reentry",
+                hypothesis=(
+                    "This harsh AI reentry variant requires credit and breadth repair; if both fail, "
+                    "it intentionally refuses to buy the AI dip."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "HYG", "LQD", "RSP", "GLD"],
+                trigger=-0.16,
+                deep=-0.32,
+                min_recovery=0.035,
+                starter=0.08,
+                step=0.14,
+                max_risk=0.48,
+                top_n=3,
+                max_asset_weight=0.20,
+                vol_ceiling=0.40,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+        ),
+        57: (
+            _dip_reentry_candidate(
+                name="i57_dip_breadth_repair_reflation",
+                family="dip_breadth_repair",
+                hypothesis=(
+                    "Reentry after drawdowns may work best when equal-weight, small-cap, value, banks, "
+                    "industrials, and materials confirm broadening rather than mega-cap-only bounces."
+                ),
+                tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "GLD", "IEF"],
+                trigger=-0.10,
+                deep=-0.22,
+                min_recovery=0.020,
+                starter=0.18,
+                step=0.18,
+                max_risk=0.72,
+                top_n=5,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i57_dip_small_value_washout",
+                family="dip_small_value",
+                hypothesis=(
+                    "Small/value washouts can be powerful if bought after breadth and credit repair, "
+                    "but the ladder caps concentration because these assets can keep falling."
+                ),
+                tickers=["IWM", "MDY", "VTV", "IWD", "XLF", "KRE", "XLI", "XLB", "XHB", "XRT", "GLD"],
+                trigger=-0.13,
+                deep=-0.28,
+                min_recovery=0.030,
+                starter=0.12,
+                step=0.16,
+                max_risk=0.58,
+                top_n=4,
+                max_asset_weight=0.20,
+                vol_ceiling=0.38,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i57_dip_quality_income_discount",
+                family="dip_fundamental_proxy",
+                hypothesis=(
+                    "A quality/income discount ladder represents the fundamentals-aware version: buy "
+                    "cash-flow, moat, dividend, and low-vol drawdowns before chasing high beta."
+                ),
+                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "VFQY", "QVAL", "GLD"],
+                trigger=-0.08,
+                deep=-0.18,
+                min_recovery=0.012,
+                starter=0.22,
+                step=0.18,
+                max_risk=0.78,
+                top_n=5,
+                max_asset_weight=0.22,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i57_dip_sector_washout_rotation",
+                family="dip_sector_reentry",
+                hypothesis=(
+                    "Sector washout reentry buys only sectors that are both discounted and repairing, "
+                    "rather than buying the whole market after every dip."
+                ),
+                tickers=["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "GLD"],
+                trigger=-0.10,
+                deep=-0.24,
+                min_recovery=0.020,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.70,
+                top_n=5,
+                max_asset_weight=0.20,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i57_dip_global_ex_us_discount",
+                family="dip_global_reentry",
+                hypothesis=(
+                    "Global equity dip buying tests whether cheap ex-U.S. and country ETFs can be "
+                    "better rebound vehicles than crowded U.S. mega-cap exposure."
+                ),
+                tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "GLD", "UUP"],
+                trigger=-0.11,
+                deep=-0.24,
+                min_recovery=0.020,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.68,
+                top_n=5,
+                max_asset_weight=0.20,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i57_dip_cyclical_repair_strict",
+                family="dip_cyclical_repair",
+                hypothesis=(
+                    "A strict cyclical reentry variant refuses to buy small/value/cyclicals unless the "
+                    "short rebound is visible and volatility is settling."
+                ),
+                tickers=["IWM", "RSP", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "XHB", "IYT", "GLD"],
+                trigger=-0.14,
+                deep=-0.30,
+                min_recovery=0.035,
+                starter=0.10,
+                step=0.15,
+                max_risk=0.52,
+                top_n=4,
+                max_asset_weight=0.18,
+                vol_ceiling=0.36,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        58: (
+            _dip_reentry_candidate(
+                name="i58_dip_credit_spread_repair_ladder",
+                family="dip_credit_repair",
+                hypothesis=(
+                    "Credit-led reentry waits for high yield, loans, banks, and investment-grade credit "
+                    "to repair before letting equity risk scale up."
+                ),
+                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "KRE", "SPY", "RSP", "GLD", "IEF"],
+                trigger=-0.08,
+                deep=-0.18,
+                min_recovery=0.012,
+                starter=0.18,
+                step=0.17,
+                max_risk=0.66,
+                top_n=5,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_reentry_candidate(
+                name="i58_dip_liquidity_vol_crush_reentry",
+                family="dip_liquidity_reentry",
+                hypothesis=(
+                    "This tests the classic volatility-crush reentry: buy discounted risk only after "
+                    "volatility, dollar, credit, and breadth pressure stop worsening."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "HYG", "LQD", "UUP", "GLD", "TLT", "IEF", "SVXY"],
+                trigger=-0.10,
+                deep=-0.22,
+                min_recovery=0.020,
+                starter=0.14,
+                step=0.18,
+                max_risk=0.62,
+                top_n=4,
+                max_asset_weight=0.22,
+                vol_ceiling=0.34,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_reentry_candidate(
+                name="i58_dip_duration_rates_relief",
+                family="dip_rates_relief",
+                hypothesis=(
+                    "If market cheapness is caused by rates stress, reentry should prefer duration, "
+                    "quality credit, gold, and equities only after rates relief is visible."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "VCIT", "VCSH", "TLT", "IEF", "TIP", "GLD"],
+                trigger=-0.09,
+                deep=-0.20,
+                min_recovery=0.015,
+                starter=0.18,
+                step=0.17,
+                max_risk=0.68,
+                top_n=5,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i58_dip_private_credit_repair",
+                family="dip_private_credit",
+                hypothesis=(
+                    "Private-credit and BDC proxies test whether the bot should avoid dip buying when "
+                    "illiquid credit stress is still leaking into public markets."
+                ),
+                tickers=["BIZD", "ARCC", "MAIN", "BXSL", "OBDC", "SRLN", "BKLN", "HYG", "LQD", "KRE", "IEF"],
+                trigger=-0.10,
+                deep=-0.22,
+                min_recovery=0.018,
+                starter=0.12,
+                step=0.15,
+                max_risk=0.55,
+                top_n=4,
+                max_asset_weight=0.20,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_reentry_candidate(
+                name="i58_dip_gold_duration_then_risk",
+                family="dip_defensive_bridge",
+                hypothesis=(
+                    "A defensive bridge lets gold/duration/T-bill-like assets win first, then risk assets "
+                    "must earn their way back through repair."
+                ),
+                tickers=["GLD", "IAU", "TLT", "IEF", "TIP", "SHY", "SGOV", "USFR", "SPY", "RSP", "QQQ"],
+                trigger=-0.08,
+                deep=-0.18,
+                min_recovery=0.012,
+                starter=0.20,
+                step=0.16,
+                max_risk=0.62,
+                top_n=5,
+                max_asset_weight=0.24,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_reentry_candidate(
+                name="i58_dip_macro_repair_triangle",
+                family="dip_macro_repair",
+                hypothesis=(
+                    "Equities, credit, duration, gold, dollar, and commodities compete as a macro "
+                    "repair triangle after deep discounts."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "GLD", "TLT", "IEF", "UUP", "DBC", "USO"],
+                trigger=-0.10,
+                deep=-0.22,
+                min_recovery=0.018,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.66,
+                top_n=5,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        59: (
+            _dip_reentry_candidate(
+                name="i59_dip_capitulation_fast_rebound",
+                family="dip_capitulation",
+                hypothesis=(
+                    "A fast capitulation strategy tests whether steep selloffs plus immediate 5-day "
+                    "repair deserve a small but meaningful risk ladder."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "SPHB", "MTUM", "HYG", "LQD", "GLD", "TLT"],
+                trigger=-0.12,
+                deep=-0.25,
+                recovery_days=10,
+                confirmation_days=3,
+                min_recovery=0.018,
+                starter=0.18,
+                step=0.18,
+                max_risk=0.60,
+                top_n=3,
+                max_asset_weight=0.24,
+                vol_ceiling=0.45,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_reentry_candidate(
+                name="i59_dip_slow_bottoming_base",
+                family="dip_bottoming_base",
+                hypothesis=(
+                    "A slow bottoming-base variant requires 42-day repair and lower volatility, aiming "
+                    "to buy after durable stabilization rather than near the exact bottom."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "QUAL", "USMV", "GLD", "IEF"],
+                trigger=-0.11,
+                deep=-0.24,
+                recovery_days=42,
+                confirmation_days=10,
+                min_recovery=0.025,
+                starter=0.14,
+                step=0.16,
+                max_risk=0.64,
+                top_n=4,
+                max_asset_weight=0.24,
+                vol_ceiling=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i59_dip_no_breadth_contrarian_probe",
+                family="dip_contrarian_probe",
+                hypothesis=(
+                    "This contrarian probe deliberately relaxes breadth confirmation to test whether "
+                    "waiting for breadth repair gives up too much near-bottom upside."
+                ),
+                tickers=["SPY", "QQQ", "SMH", "SOXX", "RSP", "IWM", "HYG", "LQD", "GLD", "TLT"],
+                trigger=-0.10,
+                deep=-0.24,
+                min_recovery=0.012,
+                starter=0.22,
+                step=0.18,
+                max_risk=0.74,
+                top_n=4,
+                max_asset_weight=0.26,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_reentry_candidate(
+                name="i59_dip_deep_value_only",
+                family="dip_deep_value_only",
+                hypothesis=(
+                    "A deep-value-only ladder should rarely trade, but when it does it tests whether "
+                    "large discounts plus modest repair are enough to improve long-run compounding."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "VTV", "COWZ", "QUAL", "GLD", "IEF", "HYG"],
+                trigger=-0.20,
+                deep=-0.35,
+                min_recovery=0.020,
+                starter=0.20,
+                step=0.22,
+                max_risk=0.78,
+                top_n=4,
+                max_asset_weight=0.26,
+                vol_ceiling=0.42,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i59_dip_stair_step_recovery",
+                family="dip_stair_step",
+                hypothesis=(
+                    "A stair-step recovery ladder uses modest starter and repeated confirmation steps, "
+                    "trying to capture rebounds while limiting regret if the first bounce fails."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "IEF"],
+                trigger=-0.09,
+                deep=-0.22,
+                min_recovery=0.018,
+                starter=0.10,
+                step=0.24,
+                max_risk=0.82,
+                top_n=5,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i59_dip_defensive_to_risk_rotation",
+                family="dip_defensive_bridge",
+                hypothesis=(
+                    "This version starts with defensive assets in the opportunity set and forces risk "
+                    "assets to outperform them before the ladder meaningfully re-risks."
+                ),
+                tickers=["GLD", "TLT", "IEF", "SGOV", "USFR", "SPY", "QQQ", "RSP", "IWM", "HYG"],
+                trigger=-0.08,
+                deep=-0.20,
+                min_recovery=0.014,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.64,
+                top_n=5,
+                max_asset_weight=0.24,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        60: (
+            _dip_reentry_candidate(
+                name="i60_dip_final_core_discount_repair",
+                family="dip_final_operating_system",
+                hypothesis=(
+                    "Final core candidate: broad-market discount ladder with credit/breadth/volatility "
+                    "repair, designed to complement off-ramp systems that otherwise stay too defensive."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "IEF", "DBC"],
+                trigger=-0.11,
+                deep=-0.24,
+                min_recovery=0.018,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.70,
+                top_n=5,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i60_dip_final_quality_value_repair",
+                family="dip_final_operating_system",
+                hypothesis=(
+                    "Final quality/value candidate: buy discounted fundamental-proxy cohorts first, "
+                    "then let broader beta in only when repair is broad enough."
+                ),
+                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "RSP", "SPY", "GLD"],
+                trigger=-0.08,
+                deep=-0.20,
+                min_recovery=0.012,
+                starter=0.20,
+                step=0.18,
+                max_risk=0.76,
+                top_n=5,
+                max_asset_weight=0.22,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i60_dip_final_ai_repair_micro",
+                family="dip_final_operating_system",
+                hypothesis=(
+                    "Final AI micro candidate: participate in AI crash rebounds only through small, "
+                    "confirmed, scenario-cut allocations."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "GLD", "TLT", "HYG", "LQD"],
+                trigger=-0.15,
+                deep=-0.32,
+                min_recovery=0.035,
+                starter=0.08,
+                step=0.14,
+                max_risk=0.45,
+                top_n=3,
+                max_asset_weight=0.18,
+                vol_ceiling=0.40,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _dip_reentry_candidate(
+                name="i60_dip_final_credit_breadth_gate",
+                family="dip_final_operating_system",
+                hypothesis=(
+                    "Final credit/breadth gate: refuses to buy equity discounts unless credit and "
+                    "equal-weight breadth are repairing, targeting fewer false bottoms."
+                ),
+                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "KRE", "SPY", "RSP", "IWM", "GLD", "IEF"],
+                trigger=-0.09,
+                deep=-0.20,
+                min_recovery=0.016,
+                starter=0.14,
+                step=0.17,
+                max_risk=0.62,
+                top_n=5,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_reentry_candidate(
+                name="i60_dip_final_cyclical_broadening",
+                family="dip_final_operating_system",
+                hypothesis=(
+                    "Final cyclical candidate: buy small/value/cyclical discounts only when the rebound "
+                    "is broadening beyond mega-cap growth."
+                ),
+                tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "QUAL", "GLD", "IEF"],
+                trigger=-0.11,
+                deep=-0.25,
+                min_recovery=0.022,
+                starter=0.14,
+                step=0.17,
+                max_risk=0.64,
+                top_n=5,
+                max_asset_weight=0.20,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="i60_dip_final_deep_value_rare",
+                family="dip_final_operating_system",
+                hypothesis=(
+                    "Final rare-event candidate: only acts in deep discounts, intended as a challenger "
+                    "to staying over-defensive after major market washouts."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "VTV", "COWZ", "QUAL", "HYG", "LQD", "GLD", "IEF"],
+                trigger=-0.18,
+                deep=-0.34,
+                min_recovery=0.022,
+                starter=0.18,
+                step=0.20,
+                max_risk=0.72,
+                top_n=4,
+                max_asset_weight=0.24,
+                vol_ceiling=0.42,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+    }
+    return batches[iteration]
+
+
+def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    batches = {
+        61: (
+            _dip_overlay_candidate(
+                name="i61_dip_overlay_core_cash_redeploy",
+                family="dip_overlay_core",
+                hypothesis=(
+                    "Core overlay starts with a dual-momentum off-ramp, then replaces BIL with "
+                    "discounted equities only when credit, breadth, volatility, and repair confirm."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "IEF"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=3,
+                min_return=0.02,
+                trigger=-0.10,
+                deep=-0.22,
+                starter=0.22,
+                step=0.22,
+                max_risk=0.82,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i61_dip_overlay_strict_repair_gate",
+                family="dip_overlay_core",
+                hypothesis=(
+                    "Strict overlay tests whether the bot should wait for a deeper discount and "
+                    "stronger repair before redeploying defensive cash."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "QUAL", "USMV", "HYG", "LQD", "GLD", "IEF"],
+                lookback_days=126,
+                skip_days=21,
+                top_n=3,
+                min_return=0.03,
+                trigger=-0.14,
+                deep=-0.28,
+                min_recovery=0.028,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.68,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_overlay_candidate(
+                name="i61_dip_overlay_aggressive_panic_probe",
+                family="dip_overlay_core",
+                hypothesis=(
+                    "Aggressive panic probe tests whether a larger starter allocation after a crash "
+                    "improves rebound capture without abandoning the falling-knife throttle."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "SPHB", "MTUM", "HYG", "LQD", "GLD", "TLT"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=3,
+                min_return=0.04,
+                trigger=-0.09,
+                deep=-0.20,
+                min_recovery=0.014,
+                starter=0.30,
+                step=0.24,
+                max_risk=0.92,
+                vol_ceiling=0.42,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i61_dip_overlay_weekly_low_churn",
+                family="dip_overlay_low_churn",
+                hypothesis=(
+                    "Weekly low-churn overlay favors durable basing over exact-bottom timing, keeping "
+                    "the expected human trading cadence reasonable."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=126,
+                skip_days=21,
+                top_n=4,
+                min_return=0.02,
+                trigger=-0.12,
+                deep=-0.26,
+                recovery_days=42,
+                confirmation_days=10,
+                min_recovery=0.025,
+                starter=0.18,
+                step=0.20,
+                max_risk=0.78,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i61_dip_overlay_quality_first",
+                family="dip_overlay_fundamental_proxy",
+                hypothesis=(
+                    "Quality/value/income ETFs act as fundamentals proxies, so cash redeploys first "
+                    "into resilient cohorts rather than the highest-beta losers."
+                ),
+                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "RSP", "SPY"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.01,
+                trigger=-0.08,
+                deep=-0.18,
+                starter=0.24,
+                step=0.20,
+                max_risk=0.84,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i61_dip_overlay_credit_first",
+                family="dip_overlay_credit_repair",
+                hypothesis=(
+                    "Credit-first overlay uses high-yield and loan repair as permission to replace "
+                    "BIL with risk after a drawdown."
+                ),
+                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "KRE", "SPY", "RSP", "GLD", "IEF"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.01,
+                trigger=-0.08,
+                deep=-0.18,
+                starter=0.22,
+                step=0.18,
+                max_risk=0.76,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        62: (
+            _dip_overlay_candidate(
+                name="i62_dip_overlay_ai_beta_escape_reentry",
+                family="dip_overlay_ai_beta",
+                hypothesis=(
+                    "AI-beta overlay tests whether an existing AI off-ramp can buy back only after "
+                    "semis/platforms are discounted and repairing."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN", "HYG", "LQD", "GLD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.04,
+                trigger=-0.14,
+                deep=-0.30,
+                min_recovery=0.030,
+                starter=0.12,
+                step=0.18,
+                max_risk=0.62,
+                vol_ceiling=0.44,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _dip_overlay_candidate(
+                name="i62_dip_overlay_ai_infra_repair",
+                family="dip_overlay_ai_infra",
+                hypothesis=(
+                    "AI-infrastructure overlay buys power/grid/hardware drawdowns when those assets "
+                    "repair before pure software beta."
+                ),
+                tickers=["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLI", "XLU", "GLD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.03,
+                trigger=-0.12,
+                deep=-0.26,
+                min_recovery=0.026,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.70,
+                vol_ceiling=0.42,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i62_dip_overlay_mega_cap_platforms",
+                family="dip_overlay_mega_cap",
+                hypothesis=(
+                    "Mega-cap overlay tests whether platforms can be bought after stress without "
+                    "letting single-name concentration dominate the rebound."
+                ),
+                tickers=["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "AVGO", "TSLA", "BRK-B", "JPM", "HYG", "LQD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.03,
+                trigger=-0.12,
+                deep=-0.25,
+                min_recovery=0.025,
+                starter=0.16,
+                step=0.20,
+                max_risk=0.74,
+                vol_ceiling=0.40,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _dip_overlay_candidate(
+                name="i62_dip_overlay_high_beta_small_probe",
+                family="dip_overlay_high_beta",
+                hypothesis=(
+                    "Small high-beta probe buys only extreme speculative washouts with tight caps, "
+                    "testing whether rebounds are worth the operational complexity."
+                ),
+                tickers=["SPHB", "ARKK", "IBIT", "FBTC", "XBI", "TAN", "BOTZ", "QQQ", "HYG", "LQD", "GLD"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=2,
+                min_return=0.05,
+                trigger=-0.20,
+                deep=-0.38,
+                min_recovery=0.050,
+                starter=0.08,
+                step=0.12,
+                max_risk=0.42,
+                max_asset_weight=0.16,
+                vol_ceiling=0.60,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_overlay_candidate(
+                name="i62_dip_overlay_growth_defense_barbell",
+                family="dip_overlay_growth_defense",
+                hypothesis=(
+                    "Growth-defense overlay lets gold/duration/quality compete with QQQ and semis "
+                    "during recovery, avoiding a one-note AI re-risk."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "SPY", "RSP", "QUAL", "USMV", "GLD", "TLT", "IEF", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.02,
+                trigger=-0.11,
+                deep=-0.24,
+                min_recovery=0.020,
+                starter=0.18,
+                step=0.20,
+                max_risk=0.78,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i62_dip_overlay_ai_no_credit_no_buy",
+                family="dip_overlay_ai_beta",
+                hypothesis=(
+                    "Harsh AI overlay refuses to redeploy cash into AI unless credit and breadth "
+                    "confirm that the selloff is no longer widening."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "HYG", "LQD", "RSP", "GLD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=3,
+                min_return=0.04,
+                trigger=-0.16,
+                deep=-0.32,
+                min_recovery=0.035,
+                starter=0.10,
+                step=0.16,
+                max_risk=0.54,
+                vol_ceiling=0.42,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+        ),
+        63: (
+            _dip_overlay_candidate(
+                name="i63_dip_overlay_breadth_reflation",
+                family="dip_overlay_breadth",
+                hypothesis=(
+                    "Breadth overlay redeploys cash when equal-weight, small-cap, value, banks, and "
+                    "industrials start confirming a market-wide recovery."
+                ),
+                tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "HYG", "LQD", "GLD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.02,
+                trigger=-0.10,
+                deep=-0.22,
+                starter=0.20,
+                step=0.20,
+                max_risk=0.82,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i63_dip_overlay_small_value_washout",
+                family="dip_overlay_small_value",
+                hypothesis=(
+                    "Small/value overlay tests whether the strongest post-washout returns come from "
+                    "breadth-sensitive assets after repair rather than QQQ."
+                ),
+                tickers=["IWM", "MDY", "VTV", "IWD", "XLF", "KRE", "XLI", "XLB", "XHB", "XRT", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.025,
+                trigger=-0.13,
+                deep=-0.28,
+                min_recovery=0.030,
+                starter=0.14,
+                step=0.18,
+                max_risk=0.64,
+                vol_ceiling=0.40,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i63_dip_overlay_quality_income",
+                family="dip_overlay_fundamental_proxy",
+                hypothesis=(
+                    "Quality/income overlay is the fundamentals-proxy version of buy-the-dip: cash "
+                    "reenters through profitable, dividend, moat, and low-volatility cohorts."
+                ),
+                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "VFQY", "QVAL", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.01,
+                trigger=-0.08,
+                deep=-0.18,
+                starter=0.24,
+                step=0.20,
+                max_risk=0.84,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i63_dip_overlay_sector_washout",
+                family="dip_overlay_sector",
+                hypothesis=(
+                    "Sector washout overlay buys only sectors that are simultaneously cheap, repairing, "
+                    "and not too volatile."
+                ),
+                tickers=["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "HYG", "LQD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.015,
+                trigger=-0.10,
+                deep=-0.24,
+                starter=0.18,
+                step=0.20,
+                max_risk=0.78,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i63_dip_overlay_global_discount",
+                family="dip_overlay_global",
+                hypothesis=(
+                    "Global discount overlay tests whether ex-U.S. or country ETFs offer better "
+                    "post-drawdown value than expensive U.S. mega-cap beta."
+                ),
+                tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "HYG", "LQD", "UUP"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.015,
+                trigger=-0.11,
+                deep=-0.24,
+                starter=0.18,
+                step=0.20,
+                max_risk=0.78,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i63_dip_overlay_cyclical_strict",
+                family="dip_overlay_cyclical",
+                hypothesis=(
+                    "Strict cyclical overlay redeploys cash only when small/value/cyclical assets "
+                    "show repair and volatility is no longer expanding."
+                ),
+                tickers=["IWM", "RSP", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "XHB", "IYT", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.03,
+                trigger=-0.14,
+                deep=-0.30,
+                min_recovery=0.035,
+                starter=0.12,
+                step=0.16,
+                max_risk=0.58,
+                vol_ceiling=0.38,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        64: (
+            _dip_overlay_candidate(
+                name="i64_dip_overlay_liquidity_vol_crush",
+                family="dip_overlay_liquidity",
+                hypothesis=(
+                    "Liquidity overlay buys the dip only after volatility, dollar, credit, and breadth "
+                    "pressure stop worsening."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "HYG", "LQD", "UUP", "GLD", "TLT", "IEF", "SVXY"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.015,
+                trigger=-0.10,
+                deep=-0.22,
+                starter=0.18,
+                step=0.20,
+                max_risk=0.76,
+                vol_ceiling=0.36,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_overlay_candidate(
+                name="i64_dip_overlay_credit_spread_repair",
+                family="dip_overlay_credit_repair",
+                hypothesis=(
+                    "Credit-spread overlay redeploys cash into risk when high-yield, loans, banks, and "
+                    "investment-grade credit repair together."
+                ),
+                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "KRE", "SPY", "RSP", "GLD", "IEF"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.01,
+                trigger=-0.08,
+                deep=-0.18,
+                starter=0.22,
+                step=0.18,
+                max_risk=0.76,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_overlay_candidate(
+                name="i64_dip_overlay_rates_relief",
+                family="dip_overlay_rates",
+                hypothesis=(
+                    "Rates-relief overlay assumes some selloffs are duration shocks, so cash can "
+                    "redeploy into duration, credit, gold, or equities as rates pressure fades."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "VCIT", "VCSH", "TLT", "IEF", "TIP", "GLD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.01,
+                trigger=-0.09,
+                deep=-0.20,
+                starter=0.20,
+                step=0.18,
+                max_risk=0.78,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i64_dip_overlay_private_credit_gate",
+                family="dip_overlay_private_credit",
+                hypothesis=(
+                    "Private-credit gate avoids buying equity dips while BDCs, loans, and regional "
+                    "banks are still deteriorating."
+                ),
+                tickers=["BIZD", "ARCC", "MAIN", "BXSL", "OBDC", "SRLN", "BKLN", "HYG", "LQD", "KRE", "IEF"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.012,
+                trigger=-0.10,
+                deep=-0.22,
+                starter=0.14,
+                step=0.16,
+                max_risk=0.60,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_overlay_candidate(
+                name="i64_dip_overlay_gold_duration_bridge",
+                family="dip_overlay_defensive_bridge",
+                hypothesis=(
+                    "Defensive bridge lets gold/duration/cash-like ETFs hold the line, then replaces "
+                    "BIL as risk assets repair."
+                ),
+                tickers=["GLD", "IAU", "TLT", "IEF", "TIP", "SHY", "SGOV", "USFR", "SPY", "RSP", "QQQ"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                trigger=-0.08,
+                deep=-0.18,
+                starter=0.22,
+                step=0.18,
+                max_risk=0.72,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_overlay_candidate(
+                name="i64_dip_overlay_macro_repair_triangle",
+                family="dip_overlay_macro",
+                hypothesis=(
+                    "Macro triangle overlay chooses among equities, credit, duration, gold, dollar, "
+                    "and commodities after deep discounts instead of assuming equities lead."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "GLD", "TLT", "IEF", "UUP", "DBC", "USO"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.01,
+                trigger=-0.10,
+                deep=-0.22,
+                starter=0.18,
+                step=0.20,
+                max_risk=0.76,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        65: (
+            _dip_overlay_candidate(
+                name="i65_dip_overlay_final_core_redeploy",
+                family="dip_overlay_final",
+                hypothesis=(
+                    "Final core overlay: off-ramp first, then measured cash redeployment after broad "
+                    "discount plus credit, breadth, volatility, and repair confirmation."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "IEF", "DBC"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.018,
+                trigger=-0.10,
+                deep=-0.24,
+                starter=0.20,
+                step=0.20,
+                max_risk=0.80,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i65_dip_overlay_final_quality_value",
+                family="dip_overlay_final",
+                hypothesis=(
+                    "Final quality/value overlay redeploys cash into resilient valuation proxies before "
+                    "high-beta market beta."
+                ),
+                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "RSP", "SPY", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.010,
+                trigger=-0.08,
+                deep=-0.20,
+                starter=0.24,
+                step=0.20,
+                max_risk=0.84,
+                breadth_confirmation=False,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i65_dip_overlay_final_ai_micro",
+                family="dip_overlay_final",
+                hypothesis=(
+                    "Final AI micro overlay participates in AI crash rebounds only through small, "
+                    "confirmed, scenario-cut allocations."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "HYG", "LQD", "GLD", "TLT"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=3,
+                min_return=0.04,
+                trigger=-0.15,
+                deep=-0.32,
+                min_recovery=0.035,
+                starter=0.10,
+                step=0.16,
+                max_risk=0.50,
+                max_asset_weight=0.18,
+                vol_ceiling=0.42,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _dip_overlay_candidate(
+                name="i65_dip_overlay_final_credit_breadth",
+                family="dip_overlay_final",
+                hypothesis=(
+                    "Final credit/breadth overlay refuses equity re-risking unless public credit and "
+                    "equal-weight breadth are repairing."
+                ),
+                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "KRE", "SPY", "RSP", "IWM", "GLD", "IEF"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.012,
+                trigger=-0.09,
+                deep=-0.20,
+                starter=0.18,
+                step=0.18,
+                max_risk=0.72,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _dip_overlay_candidate(
+                name="i65_dip_overlay_final_cyclical_broadening",
+                family="dip_overlay_final",
+                hypothesis=(
+                    "Final cyclical overlay buys broadening rebounds only when small/value/cyclical "
+                    "discounts begin repairing beyond mega-cap leadership."
+                ),
+                tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "QUAL", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.020,
+                trigger=-0.11,
+                deep=-0.25,
+                min_recovery=0.024,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.70,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_overlay_candidate(
+                name="i65_dip_overlay_final_deep_value_rare",
+                family="dip_overlay_final",
+                hypothesis=(
+                    "Final rare-event overlay only replaces cash after very deep discounts and repair, "
+                    "testing whether rare deployment improves compounding without twitchy trading."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "VTV", "COWZ", "QUAL", "HYG", "LQD", "GLD", "IEF"],
+                lookback_days=126,
+                skip_days=21,
+                top_n=4,
+                min_return=0.020,
+                trigger=-0.18,
+                deep=-0.34,
+                min_recovery=0.024,
+                starter=0.20,
+                step=0.22,
+                max_risk=0.78,
+                vol_ceiling=0.44,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+    }
+    return batches[iteration]
+
+
+def _dip_reentry_candidate(
+    *,
+    name: str,
+    family: str,
+    hypothesis: str,
+    tickers: list[str],
+    trigger: float,
+    deep: float,
+    min_recovery: float = 0.015,
+    starter: float = 0.20,
+    step: float = 0.20,
+    max_risk: float = 0.75,
+    top_n: int = 4,
+    max_asset_weight: float = 0.25,
+    recovery_days: int = 21,
+    confirmation_days: int = 5,
+    trend_filter_days: int | None = 100,
+    vol_ceiling: float = 0.34,
+    credit_confirmation: bool = True,
+    breadth_confirmation: bool = True,
+    scenario_sizing: ScenarioSizingConfig | None = None,
+    role: str = "reentry_candidate",
+    phase: str = "dip_reentry",
+) -> ExperimentCandidate:
+    return _candidate(
+        name=name,
+        role=role,
+        phase=phase,
+        family=family,
+        hypothesis=hypothesis,
+        scenario_sizing=scenario_sizing,
+        strategy=StrategyConfig(
+            type="dip_reentry",
+            tickers=tickers,
+            defensive_ticker="BIL",
+            top_n=top_n,
+            weighting="risk_adjusted_score",
+            volatility_lookback_days=63,
+            trend_filter_days=trend_filter_days,
+            max_asset_weight=max_asset_weight,
+            dip_trigger_drawdown=trigger,
+            dip_deep_drawdown=deep,
+            dip_recovery_days=recovery_days,
+            dip_confirmation_days=confirmation_days,
+            dip_min_recovery_return=min_recovery,
+            dip_starter_weight=starter,
+            dip_step_weight=step,
+            dip_max_risk_weight=max_risk,
+            dip_volatility_ceiling=vol_ceiling,
+            dip_credit_confirmation=credit_confirmation,
+            dip_breadth_confirmation=breadth_confirmation,
+        ),
+    )
+
+
+def _dip_overlay_candidate(
+    *,
+    name: str,
+    family: str,
+    hypothesis: str,
+    tickers: list[str],
+    lookback_days: int,
+    skip_days: int,
+    top_n: int,
+    min_return: float,
+    trigger: float,
+    deep: float,
+    min_recovery: float = 0.015,
+    starter: float = 0.20,
+    step: float = 0.20,
+    max_risk: float = 0.80,
+    max_asset_weight: float = 0.25,
+    recovery_days: int = 21,
+    confirmation_days: int = 5,
+    trend_filter_days: int | None = 100,
+    vol_ceiling: float = 0.34,
+    credit_confirmation: bool = True,
+    breadth_confirmation: bool = True,
+    scenario_sizing: ScenarioSizingConfig | None = None,
+) -> ExperimentCandidate:
+    return _candidate(
+        name=name,
+        role="reentry_overlay_candidate",
+        phase="dip_reentry_overlay",
+        family=family,
+        hypothesis=hypothesis,
+        scenario_sizing=scenario_sizing,
+        strategy=StrategyConfig(
+            type="dip_reentry_overlay",
+            tickers=tickers,
+            defensive_ticker="BIL",
+            lookback_days=lookback_days,
+            skip_days=skip_days,
+            top_n=top_n,
+            min_return=min_return,
+            ranking_metric="risk_adjusted_return",
+            weighting="risk_adjusted_score",
+            volatility_lookback_days=63,
+            trend_filter_days=trend_filter_days,
+            max_asset_weight=max_asset_weight,
+            dip_trigger_drawdown=trigger,
+            dip_deep_drawdown=deep,
+            dip_recovery_days=recovery_days,
+            dip_confirmation_days=confirmation_days,
+            dip_min_recovery_return=min_recovery,
+            dip_starter_weight=starter,
+            dip_step_weight=step,
+            dip_max_risk_weight=max_risk,
+            dip_volatility_ceiling=vol_ceiling,
+            dip_credit_confirmation=credit_confirmation,
+            dip_breadth_confirmation=breadth_confirmation,
+        ),
+    )
 
 
 def _active_dual_candidate(

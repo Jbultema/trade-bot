@@ -9,6 +9,18 @@ from pydantic import BaseModel, ConfigDict, Field
 from trade_bot.DEFAULT import (
     DEFAULT_DATA_ADJUSTED,
     DEFAULT_DATA_CACHE_DIR,
+    DEFAULT_DIP_BREADTH_CONFIRMATION,
+    DEFAULT_DIP_CONFIRMATION_DAYS,
+    DEFAULT_DIP_CREDIT_CONFIRMATION,
+    DEFAULT_DIP_DEEP_DRAWDOWN,
+    DEFAULT_DIP_LOOKBACK_DAYS,
+    DEFAULT_DIP_MAX_RISK_WEIGHT,
+    DEFAULT_DIP_MIN_RECOVERY_RETURN,
+    DEFAULT_DIP_RECOVERY_DAYS,
+    DEFAULT_DIP_STARTER_WEIGHT,
+    DEFAULT_DIP_STEP_WEIGHT,
+    DEFAULT_DIP_TRIGGER_DRAWDOWN,
+    DEFAULT_DIP_VOLATILITY_CEILING,
     DEFAULT_DRAWDOWN_EQUITY_LOOKBACK_DAYS,
     DEFAULT_DRAWDOWN_MAX_DRAWDOWN,
     DEFAULT_DRAWDOWN_RISK_MULTIPLIER,
@@ -75,6 +87,8 @@ class StrategyConfig(BaseModel):
         "absolute_momentum",
         "relative_momentum",
         "dual_momentum",
+        "dip_reentry",
+        "dip_reentry_overlay",
     ]
     tickers: list[str]
     allocation_weights: dict[str, float] | None = None
@@ -95,6 +109,18 @@ class StrategyConfig(BaseModel):
     max_asset_weight: float | None = Field(default=DEFAULT_MAX_ASSET_WEIGHT, gt=0, le=1)
     volatility_target: VolatilityTargetConfig | None = None
     drawdown_control: DrawdownControlConfig | None = None
+    dip_lookback_days: int = Field(default=DEFAULT_DIP_LOOKBACK_DAYS, gt=20)
+    dip_trigger_drawdown: float = Field(default=DEFAULT_DIP_TRIGGER_DRAWDOWN, lt=0)
+    dip_deep_drawdown: float = Field(default=DEFAULT_DIP_DEEP_DRAWDOWN, lt=0)
+    dip_recovery_days: int = Field(default=DEFAULT_DIP_RECOVERY_DAYS, gt=1)
+    dip_confirmation_days: int = Field(default=DEFAULT_DIP_CONFIRMATION_DAYS, gt=0)
+    dip_min_recovery_return: float = DEFAULT_DIP_MIN_RECOVERY_RETURN
+    dip_starter_weight: float = Field(default=DEFAULT_DIP_STARTER_WEIGHT, ge=0, le=1)
+    dip_step_weight: float = Field(default=DEFAULT_DIP_STEP_WEIGHT, ge=0, le=1)
+    dip_max_risk_weight: float = Field(default=DEFAULT_DIP_MAX_RISK_WEIGHT, ge=0, le=1)
+    dip_volatility_ceiling: float = Field(default=DEFAULT_DIP_VOLATILITY_CEILING, gt=0)
+    dip_credit_confirmation: bool = DEFAULT_DIP_CREDIT_CONFIRMATION
+    dip_breadth_confirmation: bool = DEFAULT_DIP_BREADTH_CONFIRMATION
 
 
 class BotConfig(BaseModel):

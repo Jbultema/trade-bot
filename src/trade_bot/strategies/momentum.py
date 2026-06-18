@@ -16,6 +16,12 @@ from trade_bot.features.indicators import (
     moving_average,
     realized_volatility,
 )
+from trade_bot.features.valuation import (
+    normalized_discount,
+    relative_repair_score,
+    rolling_peak_discount,
+    trend_discount,
+)
 
 
 def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
@@ -61,6 +67,10 @@ def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd
             trend_filter_days=strategy.trend_filter_days,
             max_asset_weight=strategy.max_asset_weight,
         )
+    if strategy.type == "dip_reentry":
+        return dip_reentry_weights(prices, strategy)
+    if strategy.type == "dip_reentry_overlay":
+        return dip_reentry_overlay_weights(prices, strategy)
     raise ValueError(f"Unsupported strategy type: {strategy.type}")
 
 
@@ -222,6 +232,179 @@ def dual_momentum_weights(
         no_signal = selected.sum(axis=1) == 0
         weights.loc[no_signal, defensive_ticker] = 1.0
     return weights
+
+
+def dip_reentry_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
+    """Meter risk back in after large discounts only when repair signals confirm."""
+    risk_tickers = [ticker for ticker in strategy.tickers if ticker != strategy.defensive_ticker]
+    _validate_tickers(prices, risk_tickers)
+    if strategy.defensive_ticker:
+        _validate_tickers(prices, [strategy.defensive_ticker])
+    if not risk_tickers:
+        raise ValueError("dip_reentry strategies require at least one risk ticker.")
+
+    filled = prices.ffill().sort_index()
+    risk_prices = filled[risk_tickers]
+    asset_returns = daily_returns(risk_prices)
+    basket_returns = asset_returns.mean(axis=1).fillna(0.0)
+    basket_equity = (1.0 + basket_returns).cumprod()
+    basket_frame = pd.DataFrame({"basket": basket_equity}, index=filled.index)
+    basket_discount = rolling_peak_discount(basket_frame, strategy.dip_lookback_days)["basket"]
+    discount_score = normalized_discount(
+        basket_discount,
+        trigger_drawdown=strategy.dip_trigger_drawdown,
+        deep_drawdown=strategy.dip_deep_drawdown,
+    )
+    deep_score = normalized_discount(
+        basket_discount,
+        trigger_drawdown=strategy.dip_deep_drawdown,
+        deep_drawdown=min(strategy.dip_deep_drawdown * 1.60, -0.35),
+    )
+
+    recovery_return = basket_equity.pct_change(strategy.dip_recovery_days, fill_method=None)
+    short_return = basket_equity.pct_change(strategy.dip_confirmation_days, fill_method=None)
+    recovery_score = (recovery_return / max(strategy.dip_min_recovery_return, 1e-6)).clip(
+        lower=0.0,
+        upper=1.0,
+    )
+    short_repair_score = (short_return / 0.015).clip(lower=0.0, upper=1.0)
+    basket_vol = realized_volatility(basket_returns, strategy.volatility_lookback_days)
+    volatility_score = (1.0 - basket_vol / strategy.dip_volatility_ceiling).clip(
+        lower=0.0,
+        upper=1.0,
+    )
+    credit_score = (
+        relative_repair_score(filled, "HYG", "LQD", strategy.dip_recovery_days)
+        if strategy.dip_credit_confirmation
+        else pd.Series(1.0, index=filled.index)
+    )
+    breadth_score = (
+        relative_repair_score(filled, "RSP", "SPY", strategy.dip_recovery_days)
+        if strategy.dip_breadth_confirmation
+        else pd.Series(1.0, index=filled.index)
+    )
+    confirmation = pd.concat(
+        [recovery_score, short_repair_score, volatility_score, credit_score, breadth_score],
+        axis=1,
+    ).mean(axis=1).fillna(0.0)
+
+    risk_budget = (
+        strategy.dip_starter_weight * discount_score
+        + strategy.dip_step_weight * discount_score * confirmation
+        + strategy.dip_step_weight * deep_score * confirmation
+    ).clip(lower=0.0, upper=strategy.dip_max_risk_weight)
+    falling_knife = (
+        (short_return < -0.020)
+        | (recovery_return < -abs(strategy.dip_min_recovery_return))
+        | (basket_vol > strategy.dip_volatility_ceiling * 1.25)
+    ).fillna(False)
+    if strategy.dip_credit_confirmation:
+        falling_knife = falling_knife | (credit_score < 0.20)
+    risk_budget = risk_budget.mask(falling_knife, risk_budget * 0.15).fillna(0.0)
+
+    asset_discount = rolling_peak_discount(risk_prices, strategy.dip_lookback_days)
+    asset_discount_score = normalized_discount(
+        asset_discount,
+        trigger_drawdown=strategy.dip_trigger_drawdown,
+        deep_drawdown=strategy.dip_deep_drawdown,
+    )
+    asset_recovery = risk_prices.pct_change(strategy.dip_recovery_days, fill_method=None)
+    asset_short = risk_prices.pct_change(strategy.dip_confirmation_days, fill_method=None)
+    asset_vol = realized_volatility(asset_returns, strategy.volatility_lookback_days)
+    trend_window = strategy.trend_filter_days or max(63, strategy.dip_recovery_days * 3)
+    trend_repair = ((trend_discount(risk_prices, trend_window) + 0.05) / 0.10).clip(
+        lower=0.0,
+        upper=1.0,
+    )
+    recovery_rank = (asset_recovery / max(strategy.dip_min_recovery_return, 1e-6)).clip(
+        lower=0.0,
+        upper=1.0,
+    )
+    short_rank = (asset_short / 0.015).clip(lower=0.0, upper=1.0)
+    volatility_penalty = (asset_vol / strategy.dip_volatility_ceiling).clip(lower=0.0, upper=1.0)
+    ranking_values = (
+        0.42 * asset_discount_score
+        + 0.28 * recovery_rank
+        + 0.18 * short_rank
+        + 0.12 * trend_repair
+        - 0.18 * volatility_penalty
+    ).fillna(0.0)
+    selected = (
+        (asset_discount_score > 0.0)
+        & (asset_recovery > strategy.dip_min_recovery_return * 0.25)
+        & (asset_short > -0.015)
+        & (asset_vol < strategy.dip_volatility_ceiling * 1.50)
+    )
+    ranks = ranking_values.where(selected).rank(axis=1, ascending=False, method="first")
+    selected = ranks <= min(strategy.top_n, len(risk_tickers))
+    selected_weights = _raw_selected_weights(
+        selected.fillna(False),
+        weighting=strategy.weighting,
+        momentum=asset_recovery.fillna(0.0),
+        ranking_values=ranking_values.clip(lower=0.0),
+        volatility=asset_vol,
+    )
+
+    weights = _empty_weights(filled)
+    weights.loc[:, risk_tickers] = selected_weights.mul(risk_budget, axis=0).fillna(0.0)
+    if strategy.max_asset_weight is not None:
+        weights = _cap_risk_weights(
+            weights,
+            risk_tickers=risk_tickers,
+            defensive_ticker=strategy.defensive_ticker,
+            max_asset_weight=strategy.max_asset_weight,
+        )
+    if strategy.defensive_ticker:
+        residual = (1.0 - weights.sum(axis=1)).clip(lower=0.0)
+        weights.loc[:, strategy.defensive_ticker] = weights[strategy.defensive_ticker] + residual
+    return weights.clip(lower=0.0).fillna(0.0)
+
+
+def dip_reentry_overlay_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
+    """Use dip reentry rules to replace defensive cash inside a momentum/off-ramp system."""
+    if strategy.defensive_ticker is None:
+        raise ValueError("dip_reentry_overlay strategies require a defensive_ticker.")
+
+    risk_tickers = [ticker for ticker in strategy.tickers if ticker != strategy.defensive_ticker]
+    base_weights = dual_momentum_weights(
+        prices,
+        risk_tickers,
+        lookback_days=strategy.lookback_days,
+        skip_days=strategy.skip_days,
+        top_n=strategy.top_n,
+        defensive_ticker=strategy.defensive_ticker,
+        min_return=strategy.min_return,
+        ranking_metric=strategy.ranking_metric,
+        weighting=strategy.weighting,
+        volatility_lookback_days=strategy.volatility_lookback_days,
+        trend_filter_days=strategy.trend_filter_days,
+        max_asset_weight=strategy.max_asset_weight,
+    )
+    reentry_weights = dip_reentry_weights(prices, strategy)
+
+    base_risk_weight = base_weights[risk_tickers].sum(axis=1)
+    reentry_risk_weight = reentry_weights[risk_tickers].sum(axis=1)
+    add_budget = (reentry_risk_weight - base_risk_weight).clip(lower=0.0)
+    reentry_risk_mix = reentry_weights[risk_tickers].div(
+        reentry_risk_weight.where(reentry_risk_weight > 0.0),
+        axis=0,
+    )
+
+    weights = base_weights.copy()
+    weights.loc[:, risk_tickers] = weights[risk_tickers].add(
+        reentry_risk_mix.mul(add_budget, axis=0),
+        fill_value=0.0,
+    )
+    if strategy.max_asset_weight is not None:
+        weights = _cap_risk_weights(
+            weights,
+            risk_tickers=risk_tickers,
+            defensive_ticker=strategy.defensive_ticker,
+            max_asset_weight=strategy.max_asset_weight,
+        )
+    residual = (1.0 - weights[risk_tickers].sum(axis=1)).clip(lower=0.0)
+    weights.loc[:, strategy.defensive_ticker] = residual
+    return weights.clip(lower=0.0).fillna(0.0)
 
 
 def _ranking_values(
