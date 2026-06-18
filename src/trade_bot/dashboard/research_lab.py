@@ -35,10 +35,15 @@ from trade_bot.research.approach_explorer import (
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.curation import rank_strategy_candidates, select_curated_strategy_shelf
 from trade_bot.research.experiment_monitor import (
+    build_strategy_family_map,
     latest_experiment_iteration,
+    strategy_family_takeaways,
     summarize_experiment_families,
     summarize_experiment_history,
     summarize_experiment_operating_systems,
+    summarize_family_clusters,
+    summarize_risk_behavior_matrix,
+    summarize_strategy_archetypes,
 )
 
 
@@ -573,6 +578,152 @@ def _render_curated_strategy_shelf(experiment_scorecards: pd.DataFrame) -> None:
     _render_metric_dataframe(_display_metrics(view), hide_index=True)
 
 
+def _render_strategy_family_map(
+    experiment_scorecards: pd.DataFrame,
+    experiment_candidates: pd.DataFrame,
+) -> None:
+    family_map = build_strategy_family_map(experiment_scorecards, experiment_candidates)
+    if family_map.empty:
+        st.write("No strategy-family map is available yet.")
+        return
+
+    st.caption(
+        "High-level navigation for the research archive. This groups strategies by what they "
+        "actually express: the risk-on sleeve, the defensive sleeve, and the behavior used to "
+        "move between them. Use this before choosing paper candidates so the monitor is not "
+        "filled with look-alike variants."
+    )
+
+    takeaways = strategy_family_takeaways(family_map)
+    if takeaways:
+        st.markdown("**Aggregate read**")
+        st.info("\n\n".join(f"- {takeaway}" for takeaway in takeaways))
+
+    metric_cols = st.columns(5)
+    _helped_metric(metric_cols[0], "Mapped", f"{len(family_map):,}")
+    _helped_metric(metric_cols[1], "Archetypes", f"{family_map['strategy_archetype'].nunique():,}")
+    _helped_metric(metric_cols[2], "Risk Behaviors", f"{family_map['risk_behavior'].nunique():,}")
+    _helped_metric(
+        metric_cols[3], "Equity Expressions", f"{family_map['equity_expression'].nunique():,}"
+    )
+    _helped_metric(
+        metric_cols[4],
+        "Promoted",
+        f"{int((family_map['promotion_decision'] == 'promote_candidate').sum()):,}",
+        key="promotion_decision",
+    )
+
+    archetype_summary = summarize_strategy_archetypes(family_map)
+    if not archetype_summary.empty:
+        st.markdown("**Strategy archetype summary**")
+        chart_columns = [
+            column
+            for column in ["median_cagr", "median_max_drawdown", "median_turnover"]
+            if column in archetype_summary
+        ]
+        if chart_columns:
+            chart_frame = archetype_summary.set_index("strategy_archetype")[chart_columns]
+            st.bar_chart(chart_frame.dropna(how="all"))
+        _render_metric_dataframe(_display_metrics(archetype_summary), hide_index=True)
+
+    risk_matrix = summarize_risk_behavior_matrix(family_map)
+    if not risk_matrix.empty:
+        st.markdown("**Risk-behavior matrix**")
+        st.caption(
+            "This shows the actual operating families: what they buy for upside, how they defend, "
+            "and whether the risk logic is trend exit, cooldown, dip reentry, sector gating, or a benchmark."
+        )
+        matrix_columns = [
+            "risk_behavior",
+            "equity_expression",
+            "defensive_expression",
+            "candidates",
+            "promoted",
+            "best_strategy",
+            "best_score",
+            "median_cagr",
+            "median_max_drawdown",
+            "median_turnover",
+            "interpretation",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(
+                risk_matrix[[column for column in matrix_columns if column in risk_matrix]]
+            ),
+            hide_index=True,
+        )
+
+    st.markdown("**Strategy map**")
+    filter_cols = st.columns(4)
+    archetype_options = ["all", *sorted(family_map["strategy_archetype"].dropna().unique())]
+    behavior_options = ["all", *sorted(family_map["risk_behavior"].dropna().unique())]
+    equity_options = ["all", *sorted(family_map["equity_expression"].dropna().unique())]
+    defensive_options = ["all", *sorted(family_map["defensive_expression"].dropna().unique())]
+    archetype_filter = filter_cols[0].selectbox(
+        "Archetype",
+        archetype_options,
+        key="family_map_archetype_filter",
+    )
+    behavior_filter = filter_cols[1].selectbox(
+        "Risk behavior",
+        behavior_options,
+        key="family_map_behavior_filter",
+    )
+    equity_filter = filter_cols[2].selectbox(
+        "Equity expression",
+        equity_options,
+        key="family_map_equity_filter",
+    )
+    defensive_filter = filter_cols[3].selectbox(
+        "Defense expression",
+        defensive_options,
+        key="family_map_defensive_filter",
+    )
+
+    strategy_view = family_map.copy()
+    if archetype_filter != "all":
+        strategy_view = strategy_view[strategy_view["strategy_archetype"] == archetype_filter]
+    if behavior_filter != "all":
+        strategy_view = strategy_view[strategy_view["risk_behavior"] == behavior_filter]
+    if equity_filter != "all":
+        strategy_view = strategy_view[strategy_view["equity_expression"] == equity_filter]
+    if defensive_filter != "all":
+        strategy_view = strategy_view[strategy_view["defensive_expression"] == defensive_filter]
+
+    strategy_columns = [
+        "iteration",
+        "strategy",
+        "strategy_archetype",
+        "risk_behavior",
+        "equity_expression",
+        "defensive_expression",
+        "strategy_type",
+        "defensive_ticker",
+        "ticker_count",
+        "primary_tickers",
+        "promotion_decision",
+        "promotion_score",
+        "cagr",
+        "max_drawdown",
+        "calmar",
+        "walk_forward_positive_rate",
+        "left_tail_regime_return",
+        "risk_read",
+        "hypothesis",
+    ]
+    _render_metric_dataframe(
+        _display_metrics(
+            strategy_view[[column for column in strategy_columns if column in strategy_view]]
+        ),
+        hide_index=True,
+    )
+
+    family_clusters = summarize_family_clusters(family_map)
+    if not family_clusters.empty:
+        with st.expander("Family cluster details", expanded=False):
+            _render_metric_dataframe(_display_metrics(family_clusters), hide_index=True)
+
+
 def _render_experiment_monitor(
     bot_config: Any,
     baseline_run: BaselineRun,
@@ -613,6 +764,7 @@ def _render_experiment_monitor(
     (
         experiment_detail_tab,
         experiment_shelf_tab,
+        experiment_family_tab,
         experiment_leaderboard_tab,
         experiment_regime_tab,
         experiment_overview_tab,
@@ -621,6 +773,7 @@ def _render_experiment_monitor(
         [
             "Candidate Details",
             "Curated Shelf",
+            "Family Map",
             "Leaderboard",
             "Regime Tests",
             "Overview",
@@ -645,6 +798,9 @@ def _render_experiment_monitor(
 
     with experiment_shelf_tab:
         _render_curated_strategy_shelf(experiment_scorecards)
+
+    with experiment_family_tab:
+        _render_strategy_family_map(experiment_scorecards, experiment_candidates)
 
     with experiment_overview_tab:
         experiment_summary = summarize_experiment_history(experiment_scorecards)

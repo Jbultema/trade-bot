@@ -12,6 +12,10 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
     percent_columns = [
         "cagr",
         "median_cagr",
+        "median_max_drawdown",
+        "median_walk_forward_positive_rate",
+        "median_left_tail_regime_return",
+        "median_turnover",
         "worst_cagr",
         "best_cagr",
         "momentum_6m_skip_1w",

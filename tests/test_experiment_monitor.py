@@ -1,18 +1,24 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pandas as pd
 
 from trade_bot.research.experiment_monitor import (
+    build_strategy_family_map,
     latest_experiment_iteration,
     load_experiment_candidates,
     load_experiment_regime_metrics,
     load_experiment_scorecards,
     load_experiment_walk_forward,
+    strategy_family_takeaways,
     summarize_experiment_families,
     summarize_experiment_history,
     summarize_experiment_operating_systems,
+    summarize_family_clusters,
+    summarize_risk_behavior_matrix,
+    summarize_strategy_archetypes,
 )
 
 
@@ -97,3 +103,110 @@ def test_load_experiment_monitor_robustness_artifacts(tmp_path: Path) -> None:
     assert walk_forward.loc[0, "strategy"] == "candidate_a"
     assert candidates.loc[0, "scenario_sizing"] == "balanced"
     assert operating_systems.loc[0, "strategy"] == "candidate_a"
+
+
+def test_strategy_family_map_explains_archetypes_and_risk_behaviors() -> None:
+    scorecards = pd.DataFrame(
+        {
+            "iteration": [1, 1, 2, 3],
+            "strategy": [
+                "i_ai_cycle_reentry",
+                "i_dip_reentry",
+                "i_sector_regime_low_churn",
+                "buy_hold_spy",
+            ],
+            "phase": ["ai_risk_cycle", "dip_reentry", "sector_regime_rotation", "baseline"],
+            "family": [
+                "cycle_aggressive_ai_escape",
+                "dip_reentry",
+                "sector_regime_low_churn",
+                "reference",
+            ],
+            "role": ["risk_cycle_candidate", "candidate", "sector_regime_candidate", "baseline"],
+            "promotion_decision": [
+                "promote_candidate",
+                "evolve_next_iteration",
+                "promote_candidate",
+                "reference",
+            ],
+            "promotion_score": [0.91, 0.72, 0.84, 0.4],
+            "cagr": [0.16, 0.13, 0.11, 0.1],
+            "max_drawdown": [-0.18, -0.22, -0.16, -0.34],
+            "calmar": [0.88, 0.59, 0.69, 0.29],
+            "average_turnover": [0.12, 0.08, 0.05, 0.0],
+            "walk_forward_positive_rate": [0.8, 0.7, 0.75, 0.6],
+            "left_tail_regime_return": [-0.08, -0.11, -0.06, -0.25],
+        }
+    )
+    candidates = pd.DataFrame(
+        {
+            "iteration": [1, 1, 2, 3],
+            "strategy": scorecards["strategy"],
+            "hypothesis": [
+                "AI escape reentry adds risk after drawdowns when credit repairs.",
+                "Buy the dip only after washout and recovery confirmation.",
+                "Sector regime rotation with low churn across SPDR sectors.",
+                "Reference buy and hold benchmark.",
+            ],
+            "strategy_json": [
+                json.dumps(
+                    {
+                        "type": "ai_risk_cycle_overlay",
+                        "tickers": ["SPY", "RSP", "QQQ", "SMH", "SOXX", "BIL"],
+                        "satellite_tickers": ["QQQ", "SMH", "SOXX", "NVDA"],
+                        "defensive_ticker": "BIL",
+                    }
+                ),
+                json.dumps(
+                    {
+                        "type": "dual_momentum",
+                        "tickers": ["SPY", "QQQ", "IWM", "BIL"],
+                        "defensive_ticker": "BIL",
+                    }
+                ),
+                json.dumps(
+                    {
+                        "type": "sector_regime_rotation",
+                        "tickers": [
+                            "XLK",
+                            "XLF",
+                            "XLE",
+                            "XLU",
+                            "BIL",
+                            "SGOV",
+                            "IEF",
+                            "LQD",
+                            "GLD",
+                        ],
+                        "defensive_ticker": "BIL",
+                    }
+                ),
+                json.dumps({"type": "buy_hold", "tickers": ["SPY"]}),
+            ],
+        }
+    )
+
+    family_map = build_strategy_family_map(scorecards, candidates)
+    ai_row = family_map[family_map["strategy"] == "i_ai_cycle_reentry"].iloc[0]
+    dip_row = family_map[family_map["strategy"] == "i_dip_reentry"].iloc[0]
+    sector_row = family_map[family_map["strategy"] == "i_sector_regime_low_churn"].iloc[0]
+    baseline_row = family_map[family_map["strategy"] == "buy_hold_spy"].iloc[0]
+
+    assert ai_row["strategy_archetype"] == "AI risk-cycle reentry"
+    assert ai_row["risk_behavior"] == "Dip-reentry"
+    assert dip_row["strategy_archetype"] == "Dip reentry / buy-the-dip"
+    assert dip_row["defensive_expression"] == "T-bills/cash"
+    assert sector_row["strategy_archetype"] == "Sector and factor rotation"
+    assert sector_row["risk_behavior"] == "Sector-regime gating"
+    assert sector_row["defensive_expression"] == "Multi-asset defense"
+    assert baseline_row["strategy_archetype"] == "Static baseline / reference"
+
+    archetypes = summarize_strategy_archetypes(family_map)
+    risk_matrix = summarize_risk_behavior_matrix(family_map)
+    clusters = summarize_family_clusters(family_map)
+    takeaways = strategy_family_takeaways(family_map)
+
+    assert "AI risk-cycle reentry" in set(archetypes["strategy_archetype"])
+    assert "Sector-regime gating" in set(risk_matrix["risk_behavior"])
+    assert not clusters.empty
+    assert any("Highest promotion-score family" in takeaway for takeaway in takeaways)

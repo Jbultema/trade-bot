@@ -228,6 +228,47 @@ DEFAULT_RISK_HIGH_BETA_TICKERS = (
     "SKYY",
     "CLOU",
 )
+DEFAULT_RISK_SECTOR_TICKERS = (
+    "XLK",
+    "XLF",
+    "XLY",
+    "XLP",
+    "XLE",
+    "XLV",
+    "XLI",
+    "XLU",
+    "XLB",
+    "XLRE",
+    "XLC",
+    "KRE",
+    "XOP",
+    "XBI",
+    "TAN",
+    "BOTZ",
+    "SMH",
+    "SOXX",
+)
+DEFAULT_RISK_DEFENSIVE_FACTOR_TICKERS = (
+    "USMV",
+    "SPLV",
+    "QUAL",
+    "SCHD",
+    "VIG",
+    "COWZ",
+    "MOAT",
+    "VTV",
+)
+DEFAULT_STRATEGY_FAMILY_HIGH_BETA_TICKERS = (
+    "SPHB",
+    "ARKK",
+    "IBIT",
+    "FBTC",
+    "XBI",
+    "TAN",
+    "BOTZ",
+    "TSLA",
+)
+DEFAULT_STRATEGY_FAMILY_TBILL_TICKERS = ("BIL", "BILS", "SGOV", "SHV", "TBIL", "USFR")
 DEFAULT_RISK_AI_BETA_TICKERS = (
     "QQQ",
     "QQQM",
