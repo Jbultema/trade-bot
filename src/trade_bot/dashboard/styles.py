@@ -21,7 +21,7 @@ def _install_dashboard_styles() -> None:
         }
         .block-container {
             max-width: 1540px;
-            padding-top: 1.7rem;
+            padding-top: 2.45rem;
             padding-bottom: 3.25rem;
         }
         h1 {
@@ -39,11 +39,11 @@ def _install_dashboard_styles() -> None:
         }
         .brand-masthead {
             display: flex;
-            align-items: center;
+            align-items: flex-start;
             justify-content: space-between;
             gap: 18px;
-            margin: 4px 0 18px;
-            padding: 24px 22px 22px;
+            margin: 0 0 20px;
+            padding: 26px 24px 23px;
             border: 1px solid rgba(15, 118, 110, 0.35);
             border-radius: 8px;
             background:
@@ -127,11 +127,13 @@ def _install_dashboard_styles() -> None:
             line-height: 1.42;
         }
         .brand-proof-row {
+            align-self: flex-start;
             display: flex;
             flex-wrap: wrap;
             justify-content: flex-end;
             gap: 8px;
             max-width: 390px;
+            padding-top: 10px;
         }
         .brand-proof {
             display: inline-flex;
@@ -685,6 +687,7 @@ def _install_dashboard_styles() -> None:
             .brand-proof-row {
                 justify-content: flex-start;
                 max-width: none;
+                padding-top: 0;
             }
             .macro-minute-grid,
             .macro-minute-readouts,
@@ -697,6 +700,9 @@ def _install_dashboard_styles() -> None:
             }
         }
         @media (max-width: 700px) {
+            .block-container {
+                padding-top: 2rem;
+            }
             .brand-masthead {
                 padding: 20px 15px 16px;
             }
