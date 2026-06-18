@@ -324,22 +324,6 @@ poetry run ruff check --no-cache src tests
 poetry run pytest -p no:cacheprovider
 ```
 
-## Personal GitHub Workflow
-
-This repo can use a personal GitHub SSH alias without clashing with work repositories. The local remote can point at a host alias such as `github-personal`, while other repos keep using their own `github.com` work setup.
-
-```bash
-git remote -v
-git remote add personal git@github-personal:<personal-user>/<repo-name>.git
-git push -u personal main
-```
-
-If the remote already exists, normal pushes are:
-
-```bash
-git push personal main
-```
-
 ## Sharing The Dashboard
 
 Do not expose Streamlit directly to the public internet. For temporary demos with users, prefer a private network tool such as Tailscale or a controlled tunnel. Shared users should start as read-only viewers.
