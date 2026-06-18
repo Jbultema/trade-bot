@@ -39,7 +39,33 @@ from trade_bot.trading.journal import DEFAULT_JOURNAL_PATH, TradeJournal
 
 st.set_page_config(page_title="Trade Bot Dashboard", layout="wide")
 _install_dashboard_styles()
-st.title("Trade Bot Operations")
+st.markdown(
+    """
+    <div class="brand-masthead">
+        <div class="brand-lockup">
+            <div class="brand-mark" aria-label="Trade Bot mark">
+                <span class="brand-mark-text">TB</span>
+                <span class="brand-mark-line"></span>
+            </div>
+            <div class="brand-copy">
+                <p class="brand-eyebrow">Regime Research Lab</p>
+                <h1 class="brand-title">Trade Bot Operations</h1>
+                <p class="brand-subtitle">
+                    Local decision support for macro-aware swing research, scenario sizing,
+                    and paper-monitored strategy evidence.
+                </p>
+            </div>
+        </div>
+        <div class="brand-proof-row">
+            <span class="brand-proof">Local only</span>
+            <span class="brand-proof">Long only</span>
+            <span class="brand-proof">Paper first</span>
+            <span class="brand-proof">Human reviewed</span>
+        </div>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 DASHBOARD_SECTIONS = (
     "Command Center",

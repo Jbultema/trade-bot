@@ -1,18 +1,20 @@
 <div align="center">
-
-# Trade Bot
-
-**Local decision-support cockpit for human-reviewed, long-only swing and momentum research.**
-
-<p>
-  <strong>Local first</strong> | <strong>Paper first</strong> | <strong>Long only</strong> | <strong>Risk aware</strong> | <strong>Human executed</strong>
-</p>
-
+  <img src="docs/assets/trade-bot-mark.svg" width="96" alt="Trade Bot mark">
+  <h1>Trade Bot Operations</h1>
+  <p><strong>Regime-aware trading research, risk sizing, and paper-monitoring cockpit.</strong></p>
+  <p>
+    <img alt="Local first" src="https://img.shields.io/badge/local-first-151A21?style=for-the-badge">
+    <img alt="Long only" src="https://img.shields.io/badge/long-only-0F766E?style=for-the-badge">
+    <img alt="Paper first" src="https://img.shields.io/badge/paper-first-F59E0B?style=for-the-badge">
+    <img alt="Human reviewed" src="https://img.shields.io/badge/human-reviewed-E11D48?style=for-the-badge">
+  </p>
 </div>
+
+---
 
 Trade Bot turns market prices, macro series, curated news/events, scenario probabilities, and research experiments into a daily operating readout. It is built to answer what changed, what it implies for risk, what should be paper-tested or manually reviewed, and how candidate strategies are performing forward.
 
-This system does not place trades automatically.
+**This system does not place trades automatically.** It is decision support for human-reviewed, long-only swing and momentum research.
 
 ## Quick Navigation
 

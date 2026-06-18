@@ -1,0 +1,15 @@
+<svg width="160" height="160" viewBox="0 0 160 160" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">Trade Bot mark</title>
+  <desc id="desc">A compact trading research mark with a trend line, shield, and local-grid motif.</desc>
+  <rect width="160" height="160" rx="30" fill="#151A21"/>
+  <path d="M26 112H134" stroke="#2B3440" stroke-width="3" stroke-linecap="round"/>
+  <path d="M36 38V122" stroke="#2B3440" stroke-width="3" stroke-linecap="round"/>
+  <path d="M45 100L68 82L88 90L119 55" stroke="#22C55E" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M45 100L68 82L88 90L119 55" stroke="#DFFCF0" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+  <circle cx="45" cy="100" r="8" fill="#F59E0B"/>
+  <circle cx="68" cy="82" r="7" fill="#14B8A6"/>
+  <circle cx="88" cy="90" r="7" fill="#F43F5E"/>
+  <circle cx="119" cy="55" r="8" fill="#22C55E"/>
+  <path d="M78 43L103 51V72C103 88 93 101 78 108C63 101 53 88 53 72V51L78 43Z" fill="#0F766E" fill-opacity="0.23" stroke="#A7F3D0" stroke-width="4"/>
+  <path d="M68 72L76 80L91 62" stroke="#F8FAFC" stroke-width="6" stroke-linecap="round" stroke-linejoin="round"/>
+</svg>
