@@ -1,0 +1,79 @@
+news:
+  max_age_minutes: 120
+  lookback_days: 7
+  activation_threshold: 0.80
+  max_items_per_source: 25
+
+sources:
+  - name: "Where's Your Ed"
+    url: "https://www.wheresyoured.at/rss/"
+    source_type: rss
+    priority: 5
+    topics: [ai, ai_capex, hyperscalers, semiconductors, tech_credit]
+
+  - name: "Ars Technica AI"
+    url: "https://feeds.arstechnica.com/arstechnica/technology-lab"
+    source_type: rss
+    priority: 4
+    topics: [ai, technology, semiconductors, cyber]
+
+  - name: "Ars Technica All"
+    url: "https://feeds.arstechnica.com/arstechnica/index"
+    source_type: rss
+    priority: 3
+    topics: [technology, policy, infrastructure]
+
+  - name: "MarketWatch Top Stories"
+    url: "https://www.marketwatch.com/rss/topstories"
+    source_type: rss
+    priority: 4
+    topics: [markets, macro, credit, equities]
+
+  - name: "Yahoo Finance"
+    url: "https://finance.yahoo.com/news/rssindex"
+    source_type: rss
+    priority: 3
+    topics: [markets, earnings, macro, equities]
+
+  - name: "CNBC Top News"
+    url: "https://www.cnbc.com/id/100003114/device/rss/rss.html"
+    source_type: rss
+    priority: 3
+    topics: [markets, macro, policy]
+
+  - name: "CNBC Technology"
+    url: "https://www.cnbc.com/id/19854910/device/rss/rss.html"
+    source_type: rss
+    priority: 3
+    topics: [technology, ai, semiconductors]
+    enabled: false
+
+  - name: "Oilprice"
+    url: "https://oilprice.com/rss/main"
+    source_type: rss
+    priority: 4
+    topics: [oil, energy, geopolitics, inflation]
+
+  - name: "Private Equity Wire"
+    url: "https://www.privateequitywire.co.uk/feed/"
+    source_type: rss
+    priority: 4
+    topics: [private_credit, private_equity, direct_lending, liquidity]
+
+  - name: "AIwire"
+    url: "https://www.aiwire.net/feed/"
+    source_type: rss
+    priority: 3
+    topics: [ai, infrastructure, enterprise_ai]
+
+  - name: "Semiconductor Engineering"
+    url: "https://semiengineering.com/feed/"
+    source_type: rss
+    priority: 4
+    topics: [semiconductors, ai_capex, chips, supply_chain]
+
+  - name: "Reddit Investing"
+    url: "https://www.reddit.com/r/investing/.rss"
+    source_type: rss
+    priority: 2
+    topics: [retail_sentiment, markets, portfolio]

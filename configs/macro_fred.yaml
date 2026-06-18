@@ -1,0 +1,417 @@
+series:
+  - id: DGS1MO
+    name: 1-month Treasury yield
+    category: rates_curve
+    risk_polarity: risk_off_when_rising
+  - id: DGS3MO
+    name: 3-month Treasury yield
+    category: rates_curve
+    risk_polarity: risk_off_when_rising
+  - id: DGS6MO
+    name: 6-month Treasury yield
+    category: rates_curve
+    risk_polarity: risk_off_when_rising
+  - id: DGS1
+    name: 1-year Treasury yield
+    category: rates_curve
+    risk_polarity: risk_off_when_rising
+  - id: DGS2
+    name: 2-year Treasury yield
+    category: rates_curve
+    risk_polarity: risk_off_when_rising
+  - id: DGS5
+    name: 5-year Treasury yield
+    category: rates_curve
+    risk_polarity: risk_off_when_rising
+  - id: DGS10
+    name: 10-year Treasury yield
+    category: rates_curve
+    risk_polarity: risk_off_when_rising
+  - id: DGS30
+    name: 30-year Treasury yield
+    category: rates_curve
+    risk_polarity: risk_off_when_rising
+  - id: T10Y2Y
+    name: 10-year minus 2-year Treasury spread
+    category: rates_curve
+    risk_polarity: risk_on_when_rising
+  - id: T10Y3M
+    name: 10-year minus 3-month Treasury spread
+    category: rates_curve
+    risk_polarity: risk_on_when_rising
+  - id: DFII5
+    name: 5-year real Treasury yield
+    category: real_rates
+    risk_polarity: risk_off_when_rising
+  - id: DFII10
+    name: 10-year real Treasury yield
+    category: real_rates
+    risk_polarity: risk_off_when_rising
+  - id: T5YIE
+    name: 5-year breakeven inflation
+    category: inflation_market
+    risk_polarity: risk_off_when_rising
+  - id: T10YIE
+    name: 10-year breakeven inflation
+    category: inflation_market
+    risk_polarity: risk_off_when_rising
+  - id: T5YIFR
+    name: 5-year 5-year forward inflation expectation
+    category: inflation_market
+    risk_polarity: risk_off_when_rising
+  - id: DFF
+    name: Effective federal funds rate
+    category: policy_rates
+    risk_polarity: risk_off_when_rising
+  - id: SOFR
+    name: Secured overnight financing rate
+    category: policy_rates
+    risk_polarity: risk_off_when_rising
+  - id: IORB
+    name: Interest on reserve balances
+    category: policy_rates
+    risk_polarity: risk_off_when_rising
+  - id: MORTGAGE30US
+    name: 30-year mortgage rate
+    category: housing_rates
+    risk_polarity: risk_off_when_rising
+  - id: MORTGAGE15US
+    name: 15-year mortgage rate
+    category: housing_rates
+    risk_polarity: risk_off_when_rising
+
+  - id: BAMLH0A0HYM2
+    name: High-yield corporate OAS
+    category: credit_spreads
+    risk_polarity: risk_off_when_rising
+  - id: BAMLC0A0CM
+    name: Investment-grade corporate OAS
+    category: credit_spreads
+    risk_polarity: risk_off_when_rising
+  - id: BAMLC0A4CBBB
+    name: BBB corporate OAS
+    category: credit_spreads
+    risk_polarity: risk_off_when_rising
+  - id: BAMLH0A1HYBB
+    name: BB high-yield OAS
+    category: credit_spreads
+    risk_polarity: risk_off_when_rising
+  - id: BAMLH0A2HYB
+    name: B high-yield OAS
+    category: credit_spreads
+    risk_polarity: risk_off_when_rising
+  - id: BAMLH0A3HYC
+    name: CCC and lower high-yield OAS
+    category: credit_spreads
+    risk_polarity: risk_off_when_rising
+  - id: DAAA
+    name: Moody's Aaa corporate bond yield
+    category: corporate_yields
+    risk_polarity: risk_off_when_rising
+  - id: DBAA
+    name: Moody's Baa corporate bond yield
+    category: corporate_yields
+    risk_polarity: risk_off_when_rising
+  - id: NFCI
+    name: Chicago Fed National Financial Conditions Index
+    category: financial_conditions
+    risk_polarity: risk_off_when_rising
+  - id: ANFCI
+    name: Adjusted National Financial Conditions Index
+    category: financial_conditions
+    risk_polarity: risk_off_when_rising
+  - id: STLFSI4
+    name: St. Louis Fed Financial Stress Index
+    category: financial_conditions
+    risk_polarity: risk_off_when_rising
+
+  - id: CPIAUCSL
+    name: CPI
+    category: inflation_realized
+    risk_polarity: risk_off_when_rising
+  - id: CPILFESL
+    name: Core CPI
+    category: inflation_realized
+    risk_polarity: risk_off_when_rising
+  - id: PCEPI
+    name: PCE price index
+    category: inflation_realized
+    risk_polarity: risk_off_when_rising
+  - id: PCEPILFE
+    name: Core PCE price index
+    category: inflation_realized
+    risk_polarity: risk_off_when_rising
+  - id: PPIACO
+    name: PPI all commodities
+    category: inflation_realized
+    risk_polarity: risk_off_when_rising
+  - id: MEDCPIM158SFRBCLE
+    name: Median CPI
+    category: inflation_realized
+    risk_polarity: risk_off_when_rising
+  - id: MICH
+    name: Michigan inflation expectations
+    category: inflation_expectations
+    risk_polarity: risk_off_when_rising
+  - id: EXPINF1YR
+    name: Cleveland Fed 1-year expected inflation
+    category: inflation_expectations
+    risk_polarity: risk_off_when_rising
+  - id: EXPINF5YR
+    name: Cleveland Fed 5-year expected inflation
+    category: inflation_expectations
+    risk_polarity: risk_off_when_rising
+
+  - id: GDPC1
+    name: Real GDP
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: INDPRO
+    name: Industrial production
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: IPMAN
+    name: Manufacturing industrial production
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: TCU
+    name: Capacity utilization
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: RSAFS
+    name: Retail sales
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: RSXFS
+    name: Retail sales ex food services
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: CMRMTSPL
+    name: Real manufacturing and trade sales
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: NEWORDER
+    name: Manufacturers' new orders
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: AMTMNO
+    name: Manufacturers' new orders durable goods
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: DGORDER
+    name: Durable goods new orders
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: CFNAI
+    name: Chicago Fed National Activity Index
+    category: growth
+    risk_polarity: risk_on_when_rising
+  - id: UMCSENT
+    name: Michigan consumer sentiment
+    category: sentiment
+    risk_polarity: risk_on_when_rising
+  - id: USSLIND
+    name: Leading index for the United States
+    category: growth
+    risk_polarity: risk_on_when_rising
+
+  - id: UNRATE
+    name: Unemployment rate
+    category: labor
+    risk_polarity: risk_off_when_rising
+  - id: U6RATE
+    name: U-6 unemployment rate
+    category: labor
+    risk_polarity: risk_off_when_rising
+  - id: SAHMREALTIME
+    name: Sahm rule recession indicator realtime
+    category: labor
+    risk_polarity: risk_off_when_rising
+  - id: PAYEMS
+    name: Nonfarm payrolls
+    category: labor
+    risk_polarity: risk_on_when_rising
+  - id: USPRIV
+    name: Private payrolls
+    category: labor
+    risk_polarity: risk_on_when_rising
+  - id: MANEMP
+    name: Manufacturing employment
+    category: labor
+    risk_polarity: risk_on_when_rising
+  - id: CIVPART
+    name: Labor force participation rate
+    category: labor
+    risk_polarity: risk_on_when_rising
+  - id: ICSA
+    name: Initial jobless claims
+    category: labor
+    risk_polarity: risk_off_when_rising
+  - id: CCSA
+    name: Continued jobless claims
+    category: labor
+    risk_polarity: risk_off_when_rising
+  - id: JTSJOL
+    name: Job openings
+    category: labor
+    risk_polarity: risk_on_when_rising
+  - id: JTSHIR
+    name: Hires
+    category: labor
+    risk_polarity: risk_on_when_rising
+  - id: JTSQUR
+    name: Quits
+    category: labor
+    risk_polarity: risk_on_when_rising
+  - id: CES0500000003
+    name: Average hourly earnings
+    category: wages
+    risk_polarity: risk_off_when_rising
+  - id: AWHMAN
+    name: Manufacturing average weekly hours
+    category: labor
+    risk_polarity: risk_on_when_rising
+
+  - id: HOUST
+    name: Housing starts
+    category: housing
+    risk_polarity: risk_on_when_rising
+  - id: PERMIT
+    name: Building permits
+    category: housing
+    risk_polarity: risk_on_when_rising
+  - id: MSACSR
+    name: Monthly supply of new houses
+    category: housing
+    risk_polarity: risk_off_when_rising
+  - id: CSUSHPINSA
+    name: Case-Shiller U.S. home price index
+    category: housing
+    risk_polarity: risk_on_when_rising
+  - id: SPCS20RSA
+    name: Case-Shiller 20-city home price index
+    category: housing
+    risk_polarity: risk_on_when_rising
+  - id: MSPUS
+    name: Median sales price of houses sold
+    category: housing
+    risk_polarity: risk_on_when_rising
+
+  - id: PCE
+    name: Personal consumption expenditures
+    category: consumer
+    risk_polarity: risk_on_when_rising
+  - id: PCEDG
+    name: Durable goods PCE
+    category: consumer
+    risk_polarity: risk_on_when_rising
+  - id: DSPIC96
+    name: Real disposable personal income
+    category: consumer
+    risk_polarity: risk_on_when_rising
+  - id: PSAVERT
+    name: Personal saving rate
+    category: consumer
+    risk_polarity: neutral
+  - id: TOTALSL
+    name: Consumer credit outstanding
+    category: consumer_credit
+    risk_polarity: risk_off_when_rising
+  - id: REVOLSL
+    name: Revolving consumer credit
+    category: consumer_credit
+    risk_polarity: risk_off_when_rising
+  - id: TDSP
+    name: Household debt service payments
+    category: consumer_credit
+    risk_polarity: risk_off_when_rising
+
+  - id: WALCL
+    name: Federal Reserve total assets
+    category: liquidity
+    risk_polarity: risk_on_when_rising
+  - id: M2SL
+    name: M2 money supply
+    category: liquidity
+    risk_polarity: risk_on_when_rising
+  - id: BOGMBASE
+    name: Monetary base
+    category: liquidity
+    risk_polarity: risk_on_when_rising
+  - id: RRPONTSYD
+    name: Overnight reverse repo
+    category: liquidity
+    risk_polarity: risk_off_when_rising
+  - id: RESBALNS
+    name: Reserve balances
+    category: liquidity
+    risk_polarity: risk_on_when_rising
+  - id: WDTGAL
+    name: Treasury General Account
+    category: liquidity
+    risk_polarity: risk_off_when_rising
+  - id: DTWEXBGS
+    name: Broad dollar index
+    category: dollar_fx
+    risk_polarity: risk_off_when_rising
+  - id: DEXUSEU
+    name: USD per euro
+    category: dollar_fx
+    risk_polarity: risk_on_when_rising
+  - id: DEXJPUS
+    name: Yen per USD
+    category: dollar_fx
+    risk_polarity: risk_off_when_rising
+  - id: DEXCHUS
+    name: Yuan per USD
+    category: dollar_fx
+    risk_polarity: risk_off_when_rising
+
+  - id: VIXCLS
+    name: VIX close
+    category: volatility
+    risk_polarity: risk_off_when_rising
+  - id: VXNCLS
+    name: Nasdaq 100 volatility index
+    category: volatility
+    risk_polarity: risk_off_when_rising
+  - id: OVXCLS
+    name: Crude oil volatility index
+    category: volatility
+    risk_polarity: risk_off_when_rising
+  - id: GVZCLS
+    name: Gold volatility index
+    category: volatility
+    risk_polarity: risk_off_when_rising
+  - id: SP500
+    name: S&P 500 index
+    category: market_index
+    risk_polarity: risk_on_when_rising
+  - id: NASDAQCOM
+    name: Nasdaq Composite
+    category: market_index
+    risk_polarity: risk_on_when_rising
+  - id: DCOILWTICO
+    name: WTI crude oil
+    category: commodities
+    risk_polarity: risk_off_when_rising
+  - id: DCOILBRENTEU
+    name: Brent crude oil
+    category: commodities
+    risk_polarity: risk_off_when_rising
+  - id: DHHNGSP
+    name: Henry Hub natural gas
+    category: commodities
+    risk_polarity: risk_off_when_rising
+  - id: FYFSD
+    name: Federal surplus or deficit
+    category: fiscal
+    risk_polarity: neutral
+  - id: GFDEBTN
+    name: Federal debt
+    category: fiscal
+    risk_polarity: risk_off_when_rising
+  - id: GFDEGDQ188S
+    name: Federal debt to GDP
+    category: fiscal
+    risk_polarity: risk_off_when_rising

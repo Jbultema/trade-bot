@@ -1,0 +1,117 @@
+# Iteration Protocol
+
+The research loop is sequential and promotion-based.
+
+One iteration means:
+
+1. Test 3-10 candidate ideas.
+2. Compare full-history, rolling-window, turnover, and drawdown behavior.
+3. Promote, evolve, or reject each candidate.
+4. Design the next iteration from the result of the previous one.
+
+The target operating end state is not a large strategy zoo. The live system should converge toward
+1-3 operational systems:
+
+- one core system for primary allocation
+- optionally one defensive/risk overlay
+- optionally one satellite sleeve if evidence supports it
+
+## Promotion Rules
+
+Promotion is based on a scorecard, not one metric.
+
+Core promotion criteria:
+
+- credible CAGR against SPY/QQQ benchmarks
+- materially better drawdown profile than buy-and-hold QQQ
+- acceptable 1-year, 3-year, and 5-year rolling-window behavior
+- acceptable walk-forward holdout behavior across sequential one-year test windows
+- survivable total returns in named left-tail and market-transition regimes
+- reasonable turnover for human-triggered swing trades
+- understandable exposure and failure modes
+
+Automatic reject signals:
+
+- max drawdown worse than the left-tail threshold
+- deeply negative 3-year rolling windows
+- weak walk-forward positive-window behavior
+- left-tail regime total return worse than the regime-fragility threshold
+- improvement that only comes from a narrow historical regime
+- strategy mechanics that cannot be operated manually
+
+## Broad-Then-Deep Structure
+
+The first stage should go broad before going deep. The current harness uses:
+
+- iterations 1-3 for broad exploration across core, risk-control, thematic, defensive, and
+  scenario-proxy ideas
+- iterations 4+ for adaptive deepening from prior winners and evolvers
+- iteration 21+ for candidate operating systems that combine alpha selection, risk sizing, and
+  scenario-aware exposure throttles
+- family-diverse parent selection so one hot family cannot monopolize the next batch
+- saved candidate manifests so later iterations evolve exact prior strategy configs
+
+Iteration 1 is a controlled baseline expansion:
+
+- faster versus slower dual momentum
+- concentrated versus diversified winners
+- cross-asset broadening
+- sector plus defensive rotation
+- AI-beta satellite with escape rules
+- factor rotation
+- low-turnover absolute trend
+- volatility targeting
+- tighter drawdown throttle
+
+Iteration 2 adds risk-adjusted ranking, inverse-volatility sizing, trend confirmation,
+single-asset caps, global rotation, credit/rates rotation, commodity shock proxies, and AI
+infrastructure rotation.
+
+Iteration 3 adds scenario-proxy probes: AI bubble escape, AI capex infrastructure rotation,
+private-credit stress, policy whipsaw, oil shock, defensive equity, mega-cap platform caps,
+crypto/liquidity proxy exposure, reflation rotation, and defensive barbell trend.
+
+Later iterations evolve promoted candidates, but they retain family diversity across the research
+queue. This prevents early convergence on one recent-history winner before competing mechanisms
+have been stress-tested.
+
+Iterations 21-40 add the first operating-system layer:
+
+- scenario-position sizing overlays that cut risk exposure when market-trend, breadth, credit,
+  volatility/liquidity, oil/inflation, drawdown, or AI-concentration proxies deteriorate
+- curated operating-system candidates for AI escape, cross-asset guardrails, credit-first
+  defense, global macro rotation, quality/low-vol equity, sector breadth, oil/policy shock
+  barbells, AI infrastructure, and low-turnover trend defense
+- walk-forward holdout summaries saved to `walk_forward_summary.csv` and fold-level diagnostics
+  saved to `walk_forward_folds.csv`
+- named-regime diagnostics saved to `regime_metrics.csv` and `regime_summary.csv`
+- promotion scoring that separates raw performance from robustness score
+
+Short crash windows should be judged by total return and drawdown, not annualized CAGR. Regime
+CAGR remains useful context, but the left-tail reject gate uses regime total return so a short
+crash is not over-penalized by annualization math.
+
+## Benchmark Context
+
+Every saved scorecard includes benchmark-relative context:
+
+- excess CAGR versus SPY and QQQ
+- drawdown improvement versus SPY and QQQ
+- Calmar excess versus SPY and QQQ
+
+Promotion decisions remain research triage, not live-trading approval. A candidate that reduces
+drawdown but trails QQQ can still be useful as an overlay or sleeve, but it should not be mistaken
+for a complete core operating system.
+
+## Leakage Discipline
+
+Risk overlays must be executable with information available at decision time. Volatility targeting
+and drawdown controls use lagged scale factors; they cannot use same-day returns to avoid the day
+that triggers the risk signal.
+
+## Creative Track
+
+Starting no later than iteration 3, each iteration should include at least one deliberately creative
+candidate from [creative_strategy_backlog.md](creative_strategy_backlog.md). Creative candidates are
+still constrained by the operating rules: long-only, human executable, and auditable. Their purpose
+is to discover useful mechanisms, not to inflate the live strategy count.

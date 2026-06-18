@@ -1,0 +1,19 @@
+.env
+.venv/
+__pycache__/
+.mypy_cache/
+.pytest_cache/
+.ruff_cache/
+.DS_Store
+
+# Local market data and generated artifacts.
+data/cache/
+data/raw/
+data/processed/
+data/run_store/
+data/*.sqlite
+reports/
+*.parquet
+*.duckdb
+*.html
+*.csv

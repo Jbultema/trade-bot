@@ -1,0 +1,167 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+
+import pandas as pd
+
+from trade_bot.backtest.engine import BacktestResult, run_backtest
+from trade_bot.backtest.metrics import PerformanceMetrics, calculate_metrics, metrics_frame
+from trade_bot.backtest.windows import (
+    calendar_return_pivot,
+    calendar_year_metrics,
+    rolling_window_metrics,
+    summarize_windows,
+)
+from trade_bot.config import BotConfig, configured_tickers
+from trade_bot.data.fred_data import FredSeries, load_fred_catalog, load_or_fetch_fred_data
+from trade_bot.data.market_data import load_or_fetch_yahoo_prices
+from trade_bot.DEFAULT import DEFAULT_EVENTS_PATH, DEFAULT_MACRO_PATH, DEFAULT_NEWS_PATH
+from trade_bot.portfolio.risk import PortfolioRiskRun
+from trade_bot.research.current_state import CurrentStateRun, build_current_state
+from trade_bot.research.event_risk import (
+    EventRiskRun,
+    load_market_events,
+    run_event_risk_study,
+)
+from trade_bot.research.news_monitor import (
+    NewsMonitorRun,
+    activate_news_events,
+    run_news_monitor,
+)
+from trade_bot.research.signal_inclusion import SignalInclusionRun, run_signal_inclusion_tests
+from trade_bot.research.trade_decision import TradeDecisionRun, build_trade_decision
+from trade_bot.strategies.momentum import build_strategy_weights
+
+
+@dataclass(frozen=True)
+class BaselineRun:
+    prices: pd.DataFrame
+    macro_data: pd.DataFrame
+    macro_catalog: tuple[FredSeries, ...]
+    results: dict[str, BacktestResult]
+    metrics: pd.DataFrame
+    rolling_windows: pd.DataFrame
+    window_summary: pd.DataFrame
+    calendar_metrics: pd.DataFrame
+    calendar_returns: pd.DataFrame
+    current_state: CurrentStateRun
+    event_risk: EventRiskRun
+    news_monitor: NewsMonitorRun
+    signal_inclusion: SignalInclusionRun
+    trade_decision: TradeDecisionRun
+    portfolio_risk: PortfolioRiskRun | None = None
+
+
+def run_configured_baselines(
+    config: BotConfig,
+    *,
+    refresh_data: bool = False,
+    refresh_macro: bool = False,
+    refresh_news: bool = False,
+    event_config_path: str | Path | None = DEFAULT_EVENTS_PATH,
+    macro_config_path: str | Path | None = DEFAULT_MACRO_PATH,
+    news_config_path: str | Path | None = DEFAULT_NEWS_PATH,
+) -> BaselineRun:
+    prices = load_or_fetch_yahoo_prices(
+        configured_tickers(config),
+        start=config.data.start,
+        end=config.data.end,
+        cache_dir=config.data.cache_dir,
+        adjusted=config.data.adjusted,
+        refresh=refresh_data,
+    )
+    macro_catalog = load_fred_catalog(macro_config_path)
+    macro_data = load_or_fetch_fred_data(
+        macro_catalog,
+        start=config.data.start,
+        end=config.data.end,
+        cache_dir=config.data.cache_dir,
+        refresh=refresh_macro,
+    )
+
+    results: dict[str, BacktestResult] = {}
+    calculated_metrics: list[PerformanceMetrics] = []
+    for name, strategy in config.strategies.items():
+        strategy_prices = _strategy_prices(prices, strategy.tickers, strategy.defensive_ticker)
+        target_weights = build_strategy_weights(strategy_prices, strategy)
+        result = run_backtest(
+            name,
+            strategy_prices,
+            target_weights,
+            config.execution,
+            volatility_target=strategy.volatility_target,
+            drawdown_control=strategy.drawdown_control,
+        )
+        results[name] = result
+        calculated_metrics.append(
+            calculate_metrics(
+                name=result.name,
+                returns=result.returns,
+                equity=result.equity,
+                turnover=result.turnover,
+                transaction_costs=result.transaction_costs,
+            )
+        )
+
+    rolling_windows = rolling_window_metrics(results)
+    calendar_metrics_frame = calendar_year_metrics(results)
+    current_state = build_current_state(
+        prices,
+        results,
+        macro_data=macro_data,
+        macro_catalog=macro_catalog,
+    )
+    events = load_market_events(event_config_path)
+    news_monitor = run_news_monitor(
+        news_config_path,
+        cache_dir=config.data.cache_dir,
+        refresh=refresh_news,
+    )
+    news_monitor = activate_news_events(news_monitor, events)
+    event_risk = run_event_risk_study(prices, results, (*events, *news_monitor.activated_events))
+    primary_strategy = "drawdown_managed_dual_momentum"
+    signal_inclusion = run_signal_inclusion_tests(
+        prices,
+        macro_data,
+        macro_catalog,
+        results[primary_strategy],
+        config.execution,
+        base_strategy_name=primary_strategy,
+    )
+    trade_decision = build_trade_decision(
+        primary_result=results[primary_strategy],
+        current_state=current_state,
+        event_risk=event_risk,
+        news_monitor=news_monitor,
+        signal_inclusion=signal_inclusion,
+        prices=prices,
+    )
+
+    return BaselineRun(
+        prices=prices,
+        macro_data=macro_data,
+        macro_catalog=macro_catalog,
+        results=results,
+        metrics=metrics_frame(calculated_metrics).sort_values("calmar", ascending=False),
+        rolling_windows=rolling_windows,
+        window_summary=summarize_windows(rolling_windows),
+        calendar_metrics=calendar_metrics_frame,
+        calendar_returns=calendar_return_pivot(calendar_metrics_frame),
+        current_state=current_state,
+        event_risk=event_risk,
+        news_monitor=news_monitor,
+        signal_inclusion=signal_inclusion,
+        trade_decision=trade_decision,
+        portfolio_risk=trade_decision.portfolio_risk,
+    )
+
+
+def _strategy_prices(
+    prices: pd.DataFrame,
+    tickers: list[str],
+    defensive_ticker: str | None,
+) -> pd.DataFrame:
+    columns = list(dict.fromkeys([*tickers, *([defensive_ticker] if defensive_ticker else [])]))
+    available = prices[columns].dropna(how="all")
+    return available

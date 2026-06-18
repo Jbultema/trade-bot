@@ -1,0 +1,161 @@
+events:
+  - event_id: syria_missile_strike_2017_04_07
+    name: U.S. missile strike on Syria
+    date: "2017-04-07"
+    category: military_escalation
+    direction: escalation
+    current: false
+    tags: [geopolitical, military, safe_haven]
+    source_url: "https://www.marketwatch.com/story/how-markets-reacted-to-us-strike-in-syria-in-4-charts-2017-04-07"
+    description: >
+      U.S. missile strike created a geopolitical shock and initial safe-haven bid.
+
+  - event_id: china_section301_tariffs_2018_03_22
+    name: U.S. announces China Section 301 tariffs
+    date: "2018-03-22"
+    category: trade_policy
+    direction: escalation
+    current: false
+    tags: [tariffs, trade_war, policy_uncertainty]
+    source_url: "https://www.federalreserve.gov/econres/notes/feds-notes/global-trade-patterns-in-the-wake-of-the-2018-19-u-s-china-tariff-hikes-20240412.html"
+    description: >
+      Early U.S.-China tariff escalation that raised trade-policy uncertainty.
+
+  - event_id: iran_nuclear_deal_withdrawal_2018_05_08
+    name: U.S. withdraws from Iran nuclear deal
+    date: "2018-05-08"
+    category: oil_geopolitical
+    direction: escalation
+    current: false
+    tags: [iran, oil, sanctions, geopolitical]
+    source_url: "https://www.reuters.com/article/us-iran-nuclear/trump-withdraws-u-s-from-iran-nuclear-deal-idUSKBN1I91SB"
+    description: >
+      U.S. withdrawal from the Iran nuclear deal increased sanctions and oil-market uncertainty.
+
+  - event_id: china_tariff_package_2018_06_15
+    name: U.S. announces first major China tariff package
+    date: "2018-06-15"
+    category: trade_policy
+    direction: escalation
+    current: false
+    tags: [tariffs, trade_war, china]
+    source_url: "https://www.federalreserve.gov/econres/notes/feds-notes/global-trade-patterns-in-the-wake-of-the-2018-19-u-s-china-tariff-hikes-20240412.html"
+    description: >
+      Formal tariff escalation in the U.S.-China trade war.
+
+  - event_id: china_tariff_tweet_2019_05_05
+    name: Trump threatens higher China tariffs
+    date: "2019-05-05"
+    category: trade_policy
+    direction: escalation
+    current: false
+    tags: [tariffs, trade_war, social_media, policy_reversal_risk]
+    source_url: "https://www.axios.com/2019/05/06/trump-trade-war-china-tariffs-market-reaction"
+    description: >
+      Sunday tariff threat revived trade-war risk after markets had priced progress.
+
+  - event_id: china_new_tariffs_2019_08_01
+    name: U.S. announces new tariffs on Chinese goods
+    date: "2019-08-01"
+    category: trade_policy
+    direction: escalation
+    current: false
+    tags: [tariffs, trade_war, china]
+    source_url: "https://www.theguardian.com/us-news/2019/aug/03/donald-trump-china-tariffs-trade"
+    description: >
+      New tariff announcement abruptly ended a trade truce and hit risk assets.
+
+  - event_id: soleimani_strike_2020_01_03
+    name: U.S. strike kills Qasem Soleimani
+    date: "2020-01-03"
+    category: oil_geopolitical
+    direction: escalation
+    current: false
+    tags: [iran, oil, military, safe_haven]
+    source_url: "https://www.axios.com/2020/01/03/oil-market-iraq-airstrike-soleimani"
+    description: >
+      U.S.-Iran military escalation increased oil-market and safe-haven pressure.
+
+  - event_id: iran_missile_deescalation_2020_01_08
+    name: Iran retaliation followed by U.S. de-escalation signal
+    date: "2020-01-08"
+    category: oil_geopolitical
+    direction: deescalation
+    current: false
+    tags: [iran, oil, military, policy_reversal_risk]
+    source_url: "https://www.reuters.com/article/us-iraq-security-blasts-usa/trump-says-iran-appears-to-be-standing-down-after-missile-attack-idUSKBN1Z70I4"
+    description: >
+      Iran retaliated with missiles; the U.S. signaled no immediate military escalation.
+
+  - event_id: liberation_day_tariffs_2025_04_02
+    name: Broad U.S. tariff escalation
+    date: "2025-04-02"
+    category: trade_policy
+    direction: escalation
+    current: false
+    tags: [tariffs, trade_war, inflation, policy_uncertainty]
+    source_url: "https://www.politico.com/news/2025/04/04/trump-tariffs-never-change-stock-market-china-030780"
+    description: >
+      Broad tariff escalation created a market drawdown, inflation risk, and policy uncertainty.
+
+  - event_id: tariff_pause_2025_04_09
+    name: U.S. pauses most reciprocal tariffs
+    date: "2025-04-09"
+    category: trade_policy
+    direction: deescalation
+    current: false
+    tags: [tariffs, trade_war, relief_rally, policy_reversal_risk]
+    source_url: "https://www.whitehouse.gov/presidential-actions/2025/04/modifying-reciprocal-tariff-rates-to-reflect-trading-partner-retaliation-and-alignment/"
+    description: >
+      Most reciprocal tariffs were paused for 90 days while China tariffs were increased.
+
+  - event_id: openai_financials_zitron_2026_06_15
+    name: OpenAI audited financials raise AI unit-economics concern
+    date: "2026-06-15"
+    category: ai_unit_economics
+    direction: escalation
+    current: true
+    phase: leading_warning
+    phase_reason: >
+      Audited/private-company financial disclosure may precede full repricing across public
+      AI-capex beneficiaries.
+    confirmation_window: >
+      Watch 1d/5d/21d confirmation in QQQ, XLK, SMH, SOXX, IGV, hyperscalers, HYG/LQD,
+      and VIXY.
+    tags:
+      - ai
+      - openai
+      - ai_capex
+      - hyperscalers
+      - semiconductors
+      - concentration
+      - private_markets
+      - leading_warning
+    source_url: "https://www.wheresyoured.at/exclusive-openai-financials/"
+    description: >
+      Ed Zitron reported audited OpenAI financials for 2024 and 2025, including sharply
+      higher spending and losses. The tradable question is whether AI revenue growth can
+      still justify public-market AI capex, semiconductor leadership, hyperscaler margins,
+      and mega-cap concentration.
+
+  - event_id: iran_hormuz_framework_2026_06_15
+    name: U.S.-Iran framework points to Hormuz reopening
+    date: "2026-06-15"
+    category: oil_chokepoint
+    direction: deescalation
+    current: true
+    tags: [iran, hormuz, oil, ceasefire, policy_reversal_risk]
+    source_url: "https://www.cfr.org/articles/is-a-u-s-iran-deal-within-reach-six-key-issues-that-could-shape-a-ceasefire"
+    description: >
+      Preliminary framework would reopen the Strait of Hormuz and start a 60-day negotiation window.
+
+  - event_id: iran_hormuz_mou_uncertainty_2026_06_17
+    name: U.S.-Iran MOU uncertainty remains
+    date: "2026-06-17"
+    category: oil_chokepoint
+    direction: uncertain
+    current: true
+    tags: [iran, hormuz, oil, sanctions, policy_reversal_risk]
+    source_url: "https://www.theguardian.com/world/2026/jun/17/us-iran-deal-trump"
+    description: >
+      MOU terms point to de-escalation, but sanctions, timing, verification, and reversal risk remain unresolved.
