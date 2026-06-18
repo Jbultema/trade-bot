@@ -82,7 +82,7 @@ Run this from the repo root.
 poetry run trade-bot fetch-prices --config configs/baseline.yaml
 poetry run trade-bot build-snapshot --config configs/baseline.yaml --events configs/events.yaml --macro configs/macro_fred.yaml --news configs/news_sources.yaml
 poetry run trade-bot migrate-warehouse
-poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 25 --capital-base 10000
+poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 5 --capital-base 10000
 poetry run trade-bot run-paper-valuation
 poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
 ```
@@ -197,15 +197,15 @@ Use this when you want a controlled, visible setup without remembering CLI flags
 5. Pick the strategy, set `Mode = paper`, choose `champion`, `challenger`, or `reference`, set an account label, set paper capital, and click **Start / Update Monitoring**.
 6. Run `poetry run trade-bot run-paper-valuation` after the next snapshot so the window receives a forward valuation row.
 
-Use account labels deliberately. `default_paper_account`, `top3_promotion_score`, and `small_sleeve_test` can all coexist as separate paper books.
+Use account labels deliberately. `core_paper_roster`, `top3_monitoring_rank`, and `small_sleeve_test` can all coexist as separate paper books, but keep only one or two active accounts unless you are intentionally running a comparison.
 
 ### Start Paper Monitoring From The CLI
 
-Seed paper monitoring windows from the top ranked strategy registry entries. The default is 25 so leading candidates are visible in Monitoring; reference portfolio policies are retained as comparison anchors.
+Seed paper monitoring windows from the top ranked strategy registry entries. The default is 5 so Monitoring stays focused; reference portfolio policies are retained as comparison anchors.
 
 ```bash
 poetry run trade-bot migrate-warehouse
-poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 25 --capital-base 10000
+poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 5 --capital-base 10000
 poetry run trade-bot run-paper-valuation
 ```
 
@@ -336,7 +336,7 @@ Keep `.env`, `.venv/`, `data/`, `reports/`, DuckDB files, parquet files, CSV exp
 | List snapshots | `poetry run trade-bot list-snapshots --limit 10` |
 | List background jobs | `poetry run trade-bot list-snapshot-jobs --limit 10` |
 | Migrate warehouse | `poetry run trade-bot migrate-warehouse` |
-| Seed monitoring | `poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 25 --capital-base 10000` |
+| Seed monitoring | `poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 5 --capital-base 10000` |
 | Add one strategy | `poetry run trade-bot monitor-strategy STRATEGY_NAME --role challenger --mode paper --capital-base 10000 --start-date YYYY-MM-DD` |
 | Change a window | `poetry run trade-bot update-monitoring-window WINDOW_ID --role champion --demote-other-champions` |
 | Run paper valuation | `poetry run trade-bot run-paper-valuation` |

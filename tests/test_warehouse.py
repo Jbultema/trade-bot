@@ -113,7 +113,7 @@ def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_pa
     assert champion.iloc[0]["validation_tier"] == "paper_champion_candidate"
 
 
-def test_warehouse_surfaces_and_seeds_top_25_experiment_candidates(tmp_path) -> None:
+def test_warehouse_surfaces_and_seeds_top_5_experiment_candidates(tmp_path) -> None:
     experiment_dir = tmp_path / "experiments"
     iteration_dir = experiment_dir / "iteration_40"
     iteration_dir.mkdir(parents=True)
@@ -146,10 +146,10 @@ def test_warehouse_surfaces_and_seeds_top_25_experiment_candidates(tmp_path) -> 
 
     top_candidates = warehouse.top_monitoring_candidates()
 
-    assert len(top_candidates) == 25
-    assert top_candidates["rank"].tolist() == list(range(1, 26))
+    assert len(top_candidates) == 5
+    assert top_candidates["rank"].tolist() == list(range(1, 6))
     assert top_candidates.iloc[0]["strategy_name"] == "candidate_00"
-    assert top_candidates.iloc[-1]["strategy_name"] == "candidate_24"
+    assert top_candidates.iloc[-1]["strategy_name"] == "candidate_04"
     assert set(top_candidates["source"]) == {"experiment_scorecard"}
     assert int(top_candidates["is_active_window"].sum()) == 0
     assert set(top_candidates["monitoring_state"]) == {"available_research_only"}
@@ -161,16 +161,16 @@ def test_warehouse_surfaces_and_seeds_top_25_experiment_candidates(tmp_path) -> 
     windows = warehouse.list_monitoring_windows(status="active")
     active_top_candidates = warehouse.top_monitoring_candidates()
 
-    assert len(seeded) == 25
-    assert len(windows) == 25
+    assert len(seeded) == 5
+    assert len(windows) == 5
     assert int((windows["window_role"] == "champion").sum()) == 1
-    assert int((windows["window_role"] == "challenger").sum()) == 24
-    assert int(active_top_candidates["is_active_window"].sum()) == 25
+    assert int((windows["window_role"] == "challenger").sum()) == 4
+    assert int(active_top_candidates["is_active_window"].sum()) == 5
     assert set(active_top_candidates["monitoring_state"]) == {"active_research_only"}
 
     additional_seeded = warehouse.seed_monitoring_windows_from_registry(
         account="shadow",
-        top_n=26,
+        top_n=6,
         start_date="2026-06-18",
     )
     expanded_windows = warehouse.list_monitoring_windows(status="active")
@@ -178,7 +178,7 @@ def test_warehouse_surfaces_and_seeds_top_25_experiment_candidates(tmp_path) -> 
     assert len(additional_seeded) == 1
     assert additional_seeded[0].role == "challenger"
     assert int((expanded_windows["window_role"] == "champion").sum()) == 1
-    assert int((expanded_windows["window_role"] == "challenger").sum()) == 25
+    assert int((expanded_windows["window_role"] == "challenger").sum()) == 5
 
 
 def test_warehouse_keeps_reference_portfolios_visible_for_monitoring(tmp_path) -> None:
