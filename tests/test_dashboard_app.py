@@ -38,6 +38,7 @@ def test_dashboard_app_renders_action_headline(
 
     assert not app.exception
     assert any(title.value == "Trade Bot Operations" for title in app.title)
+    assert any("dashboard-hero-panel" in markdown.value for markdown in app.markdown)
     assert any("Macro Minute" in markdown.value for markdown in app.markdown)
     assert any("macro-minute-body" in markdown.value for markdown in app.markdown)
     assert any("macro-minute-readouts" in markdown.value for markdown in app.markdown)

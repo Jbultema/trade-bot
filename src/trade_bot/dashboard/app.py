@@ -42,15 +42,34 @@ _install_dashboard_styles()
 st.title("Trade Bot Operations")
 st.markdown(
     """
-    <p class="dashboard-subtitle">
-        Local research cockpit for macro-aware swing strategies, risk sizing, paper monitoring,
-        and human-reviewed trade decisions.
-    </p>
-    <div class="dashboard-pill-row">
-        <span class="dashboard-pill">Local only</span>
-        <span class="dashboard-pill">Long only</span>
-        <span class="dashboard-pill">Paper first</span>
-        <span class="dashboard-pill">Human reviewed</span>
+    <div class="dashboard-hero-panel">
+        <div class="dashboard-hero-copy">
+            <p class="dashboard-kicker">Local decision cockpit</p>
+            <p class="dashboard-subtitle">
+                Macro-aware swing strategy research, scenario sizing, paper monitoring,
+                and human-reviewed trade decisions in one local workspace.
+            </p>
+            <div class="dashboard-pill-row">
+                <span class="dashboard-pill">Local only</span>
+                <span class="dashboard-pill">Long only</span>
+                <span class="dashboard-pill">Paper first</span>
+                <span class="dashboard-pill">Human reviewed</span>
+            </div>
+        </div>
+        <div class="dashboard-hero-rail" aria-label="Operating constraints">
+            <div class="dashboard-rail-item">
+                <span class="dashboard-rail-label">Execution</span>
+                <span class="dashboard-rail-value">Manual review</span>
+            </div>
+            <div class="dashboard-rail-item">
+                <span class="dashboard-rail-label">Cadence</span>
+                <span class="dashboard-rail-value">Snapshot first</span>
+            </div>
+            <div class="dashboard-rail-item">
+                <span class="dashboard-rail-label">Evidence</span>
+                <span class="dashboard-rail-value">Paper monitored</span>
+            </div>
+        </div>
     </div>
     """,
     unsafe_allow_html=True,

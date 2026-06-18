@@ -21,10 +21,11 @@ def _install_dashboard_styles() -> None:
             padding-bottom: 3.25rem;
         }
         h1 {
-            font-size: 2.35rem;
+            font-size: 2.45rem;
             line-height: 1.05;
             letter-spacing: 0;
-            margin-bottom: 0.22rem;
+            margin-bottom: 0.18rem;
+            color: var(--text-color, #111827);
         }
         h2, h3 {
             letter-spacing: 0;
@@ -33,11 +34,15 @@ def _install_dashboard_styles() -> None:
             margin-top: 1.55rem;
         }
         :root {
+            --tb-accent: #0f766e;
+            --tb-accent-strong: #115e59;
+            --tb-accent-blue: #2563eb;
             --tb-card-bg: var(--secondary-background-color, #ffffff);
             --tb-card-border: rgba(125, 139, 155, 0.35);
             --tb-card-text: var(--text-color, #111827);
             --tb-card-muted: #4b5563;
             --tb-card-muted: color-mix(in srgb, var(--text-color, #111827) 68%, transparent);
+            --tb-panel-bg: color-mix(in srgb, var(--secondary-background-color, #ffffff) 90%, var(--background-color, #ffffff));
             --tb-critical-bg: #fff5f5;
             --tb-critical-bg: color-mix(in srgb, #ef4444 12%, var(--background-color, #ffffff));
             --tb-critical-border: #c53030;
@@ -47,6 +52,8 @@ def _install_dashboard_styles() -> None:
             --tb-success-bg: #f7fbf8;
             --tb-success-bg: color-mix(in srgb, #22c55e 10%, var(--background-color, #ffffff));
             --tb-success-border: #2f855a;
+            --tb-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
+            --tb-shadow-soft: 0 6px 18px rgba(15, 23, 42, 0.06);
         }
         @media (prefers-color-scheme: dark) {
             :root {
@@ -54,20 +61,73 @@ def _install_dashboard_styles() -> None:
                 --tb-card-border: #2d3440;
                 --tb-card-text: #f8fafc;
                 --tb-card-muted: #cbd5e1;
+                --tb-panel-bg: #141922;
                 --tb-critical-bg: #2a1518;
                 --tb-critical-border: #ef4444;
                 --tb-warning-bg: #251d10;
                 --tb-warning-border: #f59e0b;
                 --tb-success-bg: #102018;
                 --tb-success-border: #22c55e;
+                --tb-shadow: 0 14px 30px rgba(0, 0, 0, 0.30);
+                --tb-shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.22);
             }
         }
+        .dashboard-hero-panel {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(260px, 360px);
+            gap: 18px;
+            align-items: stretch;
+            margin: 8px 0 18px;
+            padding: 18px;
+            border: 1px solid var(--tb-card-border);
+            border-radius: 8px;
+            background: var(--tb-panel-bg);
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .dashboard-hero-copy {
+            min-width: 0;
+        }
+        .dashboard-kicker {
+            margin: 0 0 5px;
+            color: var(--tb-accent);
+            font-size: 0.76rem;
+            font-weight: 800;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
         .dashboard-subtitle {
-            margin: 0 0 9px;
-            color: var(--tb-card-muted);
-            font-size: 0.96rem;
-            line-height: 1.45;
+            margin: 0 0 11px;
+            color: var(--tb-card-text);
+            font-size: 1.02rem;
+            line-height: 1.5;
             max-width: 980px;
+        }
+        .dashboard-hero-rail {
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 8px;
+        }
+        .dashboard-rail-item {
+            border: 1px solid var(--tb-card-border);
+            border-left: 4px solid var(--tb-accent);
+            border-radius: 8px;
+            background: var(--tb-card-bg);
+            padding: 9px 11px;
+        }
+        .dashboard-rail-label {
+            display: block;
+            margin-bottom: 2px;
+            color: var(--tb-card-muted);
+            font-size: 0.70rem;
+            font-weight: 760;
+            text-transform: uppercase;
+        }
+        .dashboard-rail-value {
+            display: block;
+            color: var(--tb-card-text);
+            font-size: 0.95rem;
+            font-weight: 760;
+            line-height: 1.25;
         }
         .dashboard-pill-row {
             display: flex;
@@ -81,12 +141,17 @@ def _install_dashboard_styles() -> None:
             min-height: 28px;
             padding: 4px 10px;
             border-radius: 999px;
-            border: 1px solid var(--tb-card-border);
-            background: color-mix(in srgb, var(--tb-card-bg) 86%, var(--background-color, #ffffff));
+            border: 1px solid color-mix(in srgb, var(--tb-accent) 32%, var(--tb-card-border));
+            background: color-mix(in srgb, var(--tb-accent) 9%, var(--tb-card-bg));
             color: var(--tb-card-text);
             font-size: 0.78rem;
-            font-weight: 680;
+            font-weight: 720;
             white-space: nowrap;
+        }
+        a {
+            color: var(--tb-accent);
+            text-decoration-thickness: 1px;
+            text-underline-offset: 3px;
         }
         section[data-testid="stSidebar"] {
             border-right: 1px solid var(--tb-card-border);
@@ -110,13 +175,15 @@ def _install_dashboard_styles() -> None:
             border-radius: 8px !important;
             border: 1px solid var(--tb-card-border) !important;
             font-weight: 700 !important;
+            box-shadow: none !important;
         }
         .stButton > button:hover {
-            border-color: color-mix(in srgb, #0f766e 60%, var(--tb-card-border)) !important;
+            border-color: color-mix(in srgb, var(--tb-accent) 60%, var(--tb-card-border)) !important;
+            background: color-mix(in srgb, var(--tb-accent) 8%, var(--tb-card-bg)) !important;
         }
         button[kind="primary"] {
-            background: #0f766e !important;
-            border-color: #0f766e !important;
+            background: var(--tb-accent) !important;
+            border-color: var(--tb-accent) !important;
             color: #ffffff !important;
         }
         div[data-testid="stTabs"] button {
@@ -124,8 +191,12 @@ def _install_dashboard_styles() -> None:
             color: var(--tb-card-text);
             font-weight: 650;
         }
+        div[data-testid="stTabs"] [data-baseweb="tab-list"] {
+            gap: 4px;
+            border-bottom: 1px solid var(--tb-card-border);
+        }
         div[data-testid="stTabs"] [data-baseweb="tab-highlight"] {
-            background-color: #0f766e;
+            background-color: var(--tb-accent);
         }
         div[data-testid="stExpander"] {
             border: 1px solid var(--tb-card-border);
@@ -151,6 +222,15 @@ def _install_dashboard_styles() -> None:
         div[data-testid="stAlert"] {
             border-radius: 8px;
             border: 1px solid var(--tb-card-border);
+        }
+        div[role="radiogroup"] {
+            gap: 0.35rem;
+        }
+        div[role="radiogroup"] label {
+            border-radius: 8px;
+        }
+        div[role="radiogroup"] label:hover {
+            color: var(--tb-card-text);
         }
         hr {
             margin: 1.4rem 0;
@@ -348,6 +428,8 @@ def _install_dashboard_styles() -> None:
             border-radius: 8px;
             padding: 12px 14px;
             color: var(--tb-card-text);
+            min-height: 94px;
+            box-shadow: var(--tb-shadow-soft);
         }
         div[data-testid="stMetric"] div[data-testid="stMetricLabel"],
         div[data-testid="stMetric"] div[data-testid="stMetricValue"],
@@ -445,6 +527,12 @@ def _install_dashboard_styles() -> None:
             font-size: 0.93rem;
         }
         @media (max-width: 1100px) {
+            .dashboard-hero-panel {
+                grid-template-columns: 1fr;
+            }
+            .dashboard-hero-rail {
+                grid-template-columns: repeat(3, minmax(0, 1fr));
+            }
             .macro-minute-grid,
             .macro-minute-readouts,
             .brief-grid {
@@ -455,6 +543,10 @@ def _install_dashboard_styles() -> None:
             }
         }
         @media (max-width: 700px) {
+            .dashboard-hero-panel {
+                padding: 14px;
+            }
+            .dashboard-hero-rail,
             .macro-minute-grid,
             .macro-minute-readouts,
             .brief-grid {

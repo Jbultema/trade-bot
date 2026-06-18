@@ -1,14 +1,54 @@
+<div align="center">
+
 # Trade Bot
 
-> Local, human-reviewed trading research for long-only swing and momentum strategies. The system collects market, macro, news, and strategy evidence; builds snapshots; recommends paper/live actions for human review; and tracks forward results. It does not place trades automatically.
+**Local decision-support cockpit for human-reviewed, long-only swing and momentum research.**
 
-| Area | Current Role |
-| --- | --- |
-| Execution model | Human-triggered, long-only, next-session oriented |
-| Trade universe | Stocks and ETFs that are practical to trade in supported accounts |
-| Research target | Higher returns with explicit left-tail and capital-preservation constraints |
-| Operating mode | Local-first Python, DuckDB, Streamlit, Poetry, pyenv |
-| Live-money posture | Paper first; small live trades only after forward evidence earns trust |
+<p>
+  <strong>Local first</strong> | <strong>Paper first</strong> | <strong>Long only</strong> | <strong>Risk aware</strong> | <strong>Human executed</strong>
+</p>
+
+</div>
+
+Trade Bot turns market prices, macro series, curated news/events, scenario probabilities, and research experiments into a daily operating readout. It is built to answer what changed, what it implies for risk, what should be paper-tested or manually reviewed, and how candidate strategies are performing forward.
+
+This system does not place trades automatically.
+
+## Quick Navigation
+
+| Need | Start Here | Result |
+| --- | --- | --- |
+| Run the system today | [Daily Operating Loop](#daily-operating-loop) | Fresh snapshot, warehouse migration, paper valuation, dashboard readout |
+| Understand the dashboard | [Dashboard Map](#dashboard-map) | What each tab is for and where actions live |
+| Start paper monitoring | [Start Paper Monitoring From The Dashboard](#start-paper-monitoring-from-the-dashboard) | Champion/challenger/reference windows seeded with paper capital |
+| Inspect strategy evidence | [Research Lab](#research-lab) | Performance, allocation behavior, robustness, and mechanics |
+| Check formulas | [Formula Audit](#formula-audit) | Locked math definitions and validation commands |
+
+## System At A Glance
+
+| Layer | What It Does | Primary Output |
+| --- | --- | --- |
+| Data intake | Pulls price, macro, news, and event inputs into local caches. | Reusable local data and current signal inputs |
+| Snapshot builder | Freezes the current market state, scenarios, recommendations, and research artifacts. | Fast dashboard snapshot |
+| Risk engine | Applies scenario-aware sizing, factor risk, stress, drawdown, and constraint logic. | Risk budget and target posture |
+| Research loop | Tests strategy ideas across windows, regimes, and walk-forward diagnostics. | Candidate scorecards and curated operating systems |
+| Monitoring | Tracks champion/challenger/reference paper windows forward from a chosen start date. | Paper valuations and promotion/demotion evidence |
+| Forward Test | Locks recommendations and records paper/live executions for auditability. | Exact recommendation and trade journal trail |
+
+## Operating Flow
+
+```mermaid
+flowchart LR
+    A[Market, macro, news, and events] --> B[Snapshot builder]
+    B --> C[Current-state engine]
+    C --> D[Risk and scenario sizing]
+    D --> E[Action headline and operating brief]
+    E --> F[Human review]
+    F --> G[Paper or live journal]
+    B --> H[Research lab]
+    H --> I[Champion/challenger monitoring]
+    I --> E
+```
 
 ## Operating Principles
 
@@ -84,6 +124,18 @@ poetry run trade-bot build-snapshot --refresh-data --refresh-macro --refresh-new
 ## Dashboard Map
 
 The dashboard is intentionally organized from action to evidence. Start at the top, then drill only where needed.
+
+```mermaid
+flowchart TD
+    A[Macro Minute] --> B[Action Headline]
+    B --> C[Operating Brief]
+    C --> D{Need more detail?}
+    D -->|Current action| E[Command Center]
+    D -->|Sizing and off-ramp| F[Risk & Scenarios]
+    D -->|Strategy evidence| G[Research Lab]
+    D -->|Forward proof| H[Monitoring]
+    D -->|Execution trail| I[Forward Test]
+```
 
 | Section | Use It For | Primary Questions |
 | --- | --- | --- |
@@ -259,7 +311,6 @@ Prefer `active_valued` or `available_to_seed_and_value` for serious paper monito
 | Champion/challenger table does not update after starting a window | Valuation has not run after the window was created. | Run `poetry run trade-bot run-paper-valuation`. |
 | Recommendation changed but paper book still looks old | Forward Test executions and Monitoring windows are separate from current target recommendations. | Lock/log execution in Forward Test or update the monitored window as appropriate. |
 | Many tiny daily changes show up | Strategy may be too active for human execution. | Inspect turnover/action frequency in Research Lab before promoting it. |
-| Personal Git push could clash with work GitHub | Remote or SSH key is using the wrong identity. | Use the `github-personal` SSH alias and `git push personal main`. |
 
 ## Storage Model
 
