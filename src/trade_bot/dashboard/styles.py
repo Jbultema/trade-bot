@@ -149,41 +149,53 @@ def _install_dashboard_styles() -> None:
             white-space: nowrap;
         }
         .dashboard-section-header {
-            margin: 24px 0 8px;
-            padding: 16px 18px 14px;
+            margin: 32px 0 12px;
+            padding: 20px 22px 18px;
             border: 1px solid var(--tb-card-border);
-            border-left: 6px solid var(--tb-accent);
+            border-left: 8px solid var(--tb-accent);
             border-radius: 8px;
             background:
-                linear-gradient(90deg, color-mix(in srgb, var(--tb-accent) 10%, var(--tb-card-bg)), var(--tb-card-bg));
-            box-shadow: var(--tb-shadow-soft);
+                linear-gradient(90deg, color-mix(in srgb, var(--tb-accent) 14%, var(--tb-card-bg)), var(--tb-card-bg) 58%),
+                linear-gradient(180deg, color-mix(in srgb, var(--tb-accent) 5%, transparent), transparent);
+            box-shadow: var(--tb-shadow);
         }
         .dashboard-section-kicker {
-            margin: 0 0 5px;
+            margin: 0 0 7px;
             color: var(--tb-accent);
-            font-size: 0.76rem;
-            font-weight: 820;
+            font-size: 0.84rem;
+            font-weight: 860;
             letter-spacing: 0;
             line-height: 1.2;
             text-transform: uppercase;
         }
         .dashboard-primary-nav-label {
+            display: flex;
+            align-items: center;
+            gap: 10px;
             margin: 0;
             color: var(--tb-card-text);
-            font-size: 1.32rem;
-            font-weight: 820;
+            font-size: 1.72rem;
+            font-weight: 860;
             letter-spacing: 0;
-            line-height: 1.18;
+            line-height: 1.12;
+        }
+        .dashboard-primary-nav-label::before {
+            content: "";
+            width: 12px;
+            height: 28px;
+            border-radius: 3px;
+            background: linear-gradient(180deg, var(--tb-accent), #f59e0b);
+            flex: 0 0 auto;
         }
         .dashboard-nav-caption {
-            margin: 6px 0 0;
+            margin: 8px 0 0 22px;
             color: var(--tb-card-muted);
-            font-size: 0.98rem;
+            font-size: 1.03rem;
             line-height: 1.38;
         }
         div[data-testid="stPills"] {
-            margin: 0 0 1.15rem;
-            padding: 10px 0 1.05rem;
+            margin: 0 0 1.3rem;
+            padding: 12px 0 1.15rem;
             border-bottom: 1px solid var(--tb-card-border);
         }
         div[data-testid="stPills"] button,
@@ -702,6 +714,20 @@ def _install_dashboard_styles() -> None:
         @media (max-width: 700px) {
             .block-container {
                 padding-top: 2rem;
+            }
+            .dashboard-section-header {
+                margin-top: 26px;
+                padding: 17px 15px 15px;
+            }
+            .dashboard-primary-nav-label {
+                font-size: 1.38rem;
+            }
+            .dashboard-primary-nav-label::before {
+                height: 24px;
+            }
+            .dashboard-nav-caption {
+                margin-left: 0;
+                font-size: 0.95rem;
             }
             .brand-masthead {
                 padding: 20px 15px 16px;
