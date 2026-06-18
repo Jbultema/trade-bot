@@ -37,7 +37,9 @@ def test_dashboard_app_renders_action_headline(
     app.run(timeout=20)
 
     assert not app.exception
-    assert any(title.value == "Trade Bot Operations" for title in app.title)
+    assert any("brand-masthead" in markdown.value for markdown in app.markdown)
+    assert any("Trade Bot Operations" in markdown.value for markdown in app.markdown)
+    assert any("Regime Research Lab" in markdown.value for markdown in app.markdown)
     assert any("dashboard-primary-nav-label" in markdown.value for markdown in app.markdown)
     assert any("Macro Minute" in markdown.value for markdown in app.markdown)
     assert any("What Changed Today" in markdown.value for markdown in app.markdown)

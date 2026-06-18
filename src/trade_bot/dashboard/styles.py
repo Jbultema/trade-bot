@@ -9,11 +9,15 @@ def _install_dashboard_styles() -> None:
         <style>
         .stApp {
             background:
+                linear-gradient(90deg, rgba(15, 118, 110, 0.035) 1px, transparent 1px),
+                linear-gradient(180deg, rgba(245, 158, 11, 0.040) 1px, transparent 1px),
                 linear-gradient(
                     180deg,
-                    color-mix(in srgb, var(--secondary-background-color, #f8fafc) 72%, var(--background-color, #ffffff)) 0%,
-                    var(--background-color, #ffffff) 360px
+                    color-mix(in srgb, #eef4f2 54%, var(--background-color, #ffffff)) 0%,
+                    color-mix(in srgb, var(--secondary-background-color, #f8fafc) 74%, var(--background-color, #ffffff)) 320px,
+                    var(--background-color, #ffffff) 760px
                 );
+            background-size: 56px 56px, 56px 56px, auto;
         }
         .block-container {
             max-width: 1540px;
@@ -32,6 +36,114 @@ def _install_dashboard_styles() -> None:
         }
         h2 {
             margin-top: 1.55rem;
+        }
+        .brand-masthead {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 18px;
+            margin: 0 0 18px;
+            padding: 18px 20px;
+            border: 1px solid rgba(15, 118, 110, 0.35);
+            border-radius: 8px;
+            background:
+                linear-gradient(135deg, rgba(21, 26, 33, 0.98) 0%, rgba(21, 26, 33, 0.94) 52%, rgba(15, 118, 110, 0.90) 100%),
+                repeating-linear-gradient(135deg, rgba(255, 255, 255, 0.08) 0 1px, transparent 1px 12px);
+            box-shadow: var(--tb-shadow);
+            color: #f8fafc;
+        }
+        .brand-lockup {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            min-width: 0;
+        }
+        .brand-mark {
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex: 0 0 auto;
+            width: 58px;
+            height: 58px;
+            border-radius: 8px;
+            border: 1px solid rgba(167, 243, 208, 0.55);
+            background:
+                linear-gradient(135deg, rgba(15, 118, 110, 0.92), rgba(20, 184, 166, 0.46)),
+                linear-gradient(180deg, rgba(255, 255, 255, 0.12), transparent);
+            overflow: hidden;
+        }
+        .brand-mark::before {
+            content: "";
+            position: absolute;
+            inset: 10px;
+            border-left: 2px solid rgba(248, 250, 252, 0.22);
+            border-bottom: 2px solid rgba(248, 250, 252, 0.22);
+        }
+        .brand-mark-text {
+            position: relative;
+            z-index: 2;
+            color: #f8fafc;
+            font-size: 1.05rem;
+            font-weight: 860;
+            line-height: 1;
+        }
+        .brand-mark-line {
+            position: absolute;
+            left: 13px;
+            right: 11px;
+            bottom: 17px;
+            height: 16px;
+            border-top: 4px solid #f59e0b;
+            border-right: 4px solid #22c55e;
+            transform: skewY(-28deg);
+            opacity: 0.88;
+        }
+        .brand-copy {
+            min-width: 0;
+        }
+        .brand-eyebrow {
+            margin: 0 0 3px;
+            color: #a7f3d0;
+            font-size: 0.74rem;
+            font-weight: 820;
+            letter-spacing: 0;
+            text-transform: uppercase;
+        }
+        .brand-title {
+            margin: 0;
+            color: #f8fafc !important;
+            font-size: 2.0rem;
+            line-height: 1.05;
+            font-weight: 820;
+            letter-spacing: 0;
+        }
+        .brand-subtitle {
+            max-width: 840px;
+            margin: 6px 0 0;
+            color: rgba(248, 250, 252, 0.86);
+            font-size: 0.98rem;
+            line-height: 1.42;
+        }
+        .brand-proof-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+            gap: 8px;
+            max-width: 390px;
+        }
+        .brand-proof {
+            display: inline-flex;
+            align-items: center;
+            min-height: 30px;
+            padding: 5px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(248, 250, 252, 0.24);
+            background: rgba(248, 250, 252, 0.10);
+            color: #f8fafc;
+            font-size: 0.76rem;
+            font-weight: 760;
+            white-space: nowrap;
         }
         .dashboard-primary-nav-label {
             margin: 0.15rem 0 0.18rem;
@@ -98,6 +210,13 @@ def _install_dashboard_styles() -> None:
             --tb-shadow-soft: 0 6px 18px rgba(15, 23, 42, 0.06);
         }
         @media (prefers-color-scheme: dark) {
+            .stApp {
+                background:
+                    linear-gradient(90deg, rgba(20, 184, 166, 0.035) 1px, transparent 1px),
+                    linear-gradient(180deg, rgba(245, 158, 11, 0.030) 1px, transparent 1px),
+                    linear-gradient(180deg, #101318 0%, #111827 420px, #0f1115 100%);
+                background-size: 56px 56px, 56px 56px, auto;
+            }
             :root {
                 --tb-card-bg: #171b22;
                 --tb-card-border: #2d3440;
@@ -539,6 +658,14 @@ def _install_dashboard_styles() -> None:
             font-size: 0.93rem;
         }
         @media (max-width: 1100px) {
+            .brand-masthead {
+                align-items: flex-start;
+                flex-direction: column;
+            }
+            .brand-proof-row {
+                justify-content: flex-start;
+                max-width: none;
+            }
             .macro-minute-grid,
             .macro-minute-readouts,
             .macro-minute-delta-grid,
@@ -550,6 +677,19 @@ def _install_dashboard_styles() -> None:
             }
         }
         @media (max-width: 700px) {
+            .brand-masthead {
+                padding: 15px;
+            }
+            .brand-lockup {
+                align-items: flex-start;
+            }
+            .brand-mark {
+                width: 50px;
+                height: 50px;
+            }
+            .brand-title {
+                font-size: 1.55rem;
+            }
             .macro-minute-grid,
             .macro-minute-readouts,
             .macro-minute-delta-grid,
