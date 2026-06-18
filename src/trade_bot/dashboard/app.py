@@ -40,6 +40,21 @@ from trade_bot.trading.journal import DEFAULT_JOURNAL_PATH, TradeJournal
 st.set_page_config(page_title="Trade Bot Dashboard", layout="wide")
 _install_dashboard_styles()
 st.title("Trade Bot Operations")
+st.markdown(
+    """
+    <p class="dashboard-subtitle">
+        Local research cockpit for macro-aware swing strategies, risk sizing, paper monitoring,
+        and human-reviewed trade decisions.
+    </p>
+    <div class="dashboard-pill-row">
+        <span class="dashboard-pill">Local only</span>
+        <span class="dashboard-pill">Long only</span>
+        <span class="dashboard-pill">Paper first</span>
+        <span class="dashboard-pill">Human reviewed</span>
+    </div>
+    """,
+    unsafe_allow_html=True,
+)
 
 config_path = Path(st.sidebar.text_input("Config", str(DEFAULT_CONFIG_PATH)))
 events_path = Path(st.sidebar.text_input("Events", str(DEFAULT_EVENTS_PATH)))

@@ -1,17 +1,23 @@
 # Trade Bot
 
-Local swing/momentum trading research and decision-support system.
+> Local, human-reviewed trading research for long-only swing and momentum strategies. The system collects market, macro, news, and strategy evidence; builds snapshots; recommends paper/live actions for human review; and tracks forward results. It does not place trades automatically.
 
-This project is intentionally not an automated execution bot. It collects data, runs backtests, summarizes current market context, suggests human-reviewed trades, and tracks paper/live decisions. You execute any real trades manually.
+| Area | Current Role |
+| --- | --- |
+| Execution model | Human-triggered, long-only, next-session oriented |
+| Trade universe | Stocks and ETFs that are practical to trade in supported accounts |
+| Research target | Higher returns with explicit left-tail and capital-preservation constraints |
+| Operating mode | Local-first Python, DuckDB, Streamlit, Poetry, pyenv |
+| Live-money posture | Paper first; small live trades only after forward evidence earns trust |
 
-Core constraints:
+## Operating Principles
 
-- human-triggered trades only
-- long-only stocks and ETFs by default
-- no default derivatives or shorting
-- practical holding periods are measured in trading days, not minutes
-- supported-account accessibility matters for the tradable universe
-- maximum-return research must stay constrained by left-tail risk and long-term capital-preservation goals
+- Human review is mandatory before any real trade.
+- Long-only stocks and ETFs are the default. No default derivatives, shorting, or automated execution.
+- Holding periods are measured in trading days and weeks, not minutes.
+- Backtests must be judged across full history, recent windows, regime shifts, and walk-forward holdouts.
+- Current-state recommendations and future-scenario research are related but separate systems.
+- Risk management, position sizing, and off-ramp behavior matter as much as return forecasts.
 
 ## Environment
 
@@ -39,7 +45,11 @@ poetry run trade-bot run-paper-valuation
 poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
 ```
 
-Use the latest snapshot market date for `YYYY-MM-DD`; check it with `poetry run trade-bot list-snapshots`.
+Use the latest snapshot market date for `YYYY-MM-DD`; check it with:
+
+```bash
+poetry run trade-bot list-snapshots --limit 10
+```
 
 Then open `http://localhost:8501`.
 
@@ -47,12 +57,22 @@ Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. U
 
 ## Daily Operating Loop
 
-Use this loop when you are reviewing the bot for a new trade window.
+| Step | Command or Dashboard Area | Purpose |
+| --- | --- | --- |
+| 1 | `build-snapshot` | Refresh the current market, macro, news, scenario, and strategy state. |
+| 2 | `migrate-warehouse` | Mirror local artifacts into the canonical DuckDB warehouse. |
+| 3 | `run-paper-valuation` | Update forward paper monitoring windows from the latest snapshot. |
+| 4 | Dashboard top readout | Read Macro Minute, Action Headline, Operating Brief, and Decision Brief. |
+| 5 | Monitoring | Check champion/challenger forward performance and paper windows. |
+| 6 | Forward Test | Lock recommendations and log paper/live executions when action is warranted. |
 
-1. Build or refresh a snapshot.
+Daily commands:
 
 ```bash
 poetry run trade-bot build-snapshot --config configs/baseline.yaml --events configs/events.yaml --macro configs/macro_fred.yaml --news configs/news_sources.yaml
+poetry run trade-bot migrate-warehouse
+poetry run trade-bot run-paper-valuation
+poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
 ```
 
 Add refresh flags only when needed:
@@ -61,30 +81,20 @@ Add refresh flags only when needed:
 poetry run trade-bot build-snapshot --refresh-data --refresh-macro --refresh-news
 ```
 
-2. Update warehouse mirrors and paper valuations.
+## Dashboard Map
 
-```bash
-poetry run trade-bot migrate-warehouse
-poetry run trade-bot run-paper-valuation
-```
+The dashboard is intentionally organized from action to evidence. Start at the top, then drill only where needed.
 
-3. Open or refresh the dashboard.
-
-```bash
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
-```
-
-4. Read the dashboard from top to bottom:
-
-- **Macro Minute**: one-minute market situation report.
-- **Action Headline**: do-nothing, small-action, or critical-action state.
-- **Operating Brief**: conclusion, recommended action, sizing translation, scenario incorporation, and bias check.
-- **Decision Brief**: plain-English instructions for what to do next.
-- **Selected section tabs**: deeper supporting evidence.
-
-5. If there is a paper or live action, go to **Forward Test**, lock the recommendation set, then log execution details after you act. Do not rely on memory for price, time, quantity, or rationale.
-
-## Dashboard Walkthrough
+| Section | Use It For | Primary Questions |
+| --- | --- | --- |
+| Top-Level Readout | One-screen operating posture | Is today do-nothing, small-action, or critical-action? What changed? |
+| Command Center | Current-state trade decision | What is the target posture, and which tickers are affected? |
+| Risk & Scenarios | Off-ramp and sizing discipline | Are factor risk, stress loss, scenarios, or expected shortfall forcing lower risk? |
+| Research Lab | Strategy research and diagnostics | Which approaches worked, why, and across which windows/regimes? |
+| Monitoring | Champion/challenger forward paper testing | Which monitored systems are ahead, lagging, or in drawdown review? |
+| News & Macro | Narrative and macro source review | What news or macro pressure is active, stale, or missing? |
+| Performance | Backtest and selected-window charts | Did the approach work recently and through transitions? |
+| Forward Test | Recommendation and execution journal | What was recommended, what was done, at what price, and why? |
 
 ### Top-Level Readout
 
@@ -94,135 +104,36 @@ The top of the app is the operating surface. It is designed to answer three ques
 - What action is recommended and how large is the target-position change?
 - Why did the system change posture: price/trend, macro, news, scenario probabilities, or portfolio-risk constraints?
 
-The most important top-of-page cards are:
+Key cards:
 
-- **Macro Minute**: summarizes risk status, current news/event pressure, scenario map, and the risk-budget action.
-- **Action Headline**: severity score and next action.
-- **Operating Brief**: the instruction sheet. This is the first place to look for what the system thinks you should do.
-- **Decision Brief**: a higher-level explanation of conclusion, evidence, and what would change the recommendation.
-- **Metric Guide**: built-in explainers for metrics that are easy to misuse.
-
-### Command Center
-
-Use this for current-state operations. It shows the current risk state, trade decision, recommendation bridge, current positions, and key evidence. If the top-level brief says action is required, this section is where you inspect the immediate support.
-
-Questions this section should answer:
-
-- What is the current risk state?
-- What is the target posture?
-- Which tickers are being added, reduced, or held?
-- Is the action driven by scenario probabilities, current risk engine constraints, or strategy signal changes?
-
-### Risk & Scenarios
-
-Use this when you need to understand the off-ramp. It shows portfolio-risk diagnostics, scenario lattice, factor exposure, stress tests, expected shortfall, and constraint output.
-
-Questions this section should answer:
-
-- What are the most likely forward regimes over 1w, 1m, 3m, and 6m?
-- How much risk-off or transition probability is being assigned?
-- Are factor exposure, beta, stress loss, or expected shortfall forcing lower risk?
-- What would need to improve before adding risk back?
+- **Macro Minute**: current market situation, scenario pressure, new/recent changes, news/event pressure, and the practical action read-through.
+- **Action Headline**: severity score, risk state, largest target change, active news, and open tickets.
+- **Default Paper Book Alignment**: whether the paper book reflects the latest default target posture.
+- **Operating Brief**: conclusion, recommended action, sizing translation, scenario incorporation, risk constraints, and bias check.
+- **Decision Brief**: plain-English explanation of what to do next and what would change the recommendation.
+- **Metric Guide**: hover/table explainers for metrics that are easy to misuse.
 
 ### Research Lab
 
-Use this for strategy research, not for same-day execution. It contains the approach explorer, experiment monitor, category leaderboards, regime tests, walk-forward tests, candidate manifests, and signal-inclusion diagnostics.
+Use this for strategy research, not same-day execution. It contains the experiment monitor, approach detail, performance-over-time views, allocation behavior, mechanics, robustness diagnostics, candidate manifests, and signal-inclusion tests.
 
 Important distinction: a promoted experiment is not automatically live-operable. It means the idea deserves monitoring or implementation. A strategy becomes paper-operable only when it exists in the runtime pipeline and can be valued in snapshots.
 
 ### Monitoring
 
-Use this for champion/challenger forward testing. It reads from the canonical DuckDB warehouse and shows active paper windows, the top 25 ranked experiment candidates, reference portfolios, valuation status, snapshot metrics, strategy registry rows, and warehouse health.
+Use this for champion/challenger forward testing. It reads from the canonical DuckDB warehouse and shows active paper windows, ranked experiment candidates, reference portfolios, valuation status, snapshot metrics, strategy registry rows, and warehouse health.
 
 Open **Monitoring Controls** to start monitoring an experiment or change an active window. Pick a strategy, choose `champion`, `challenger`, or `reference`, set the mode/account label, and assign paper capital. Use separate account labels when the same strategy should be monitored as multiple sleeves or capital sizes. Leave `Only champion` unchecked if multiple active champions are intentional.
 
-Current paper monitoring starts at the configured capital base. The first valuation row is intentionally `0.00%` return; subsequent rows compound from future snapshots. This avoids the mistake of treating full-history backtest growth as forward paper performance.
+Current paper monitoring starts at the configured capital base. The first valuation row is intentionally `0.00%` return; subsequent rows compound from future snapshots. This avoids treating full-history backtest growth as forward paper performance.
 
-Questions this section should answer:
+## Paper Monitoring Commands
 
-- Which system is the current champion?
-- Which challengers are being paper-monitored?
-- Are any reference policies beating or lagging tactical approaches?
-- Are any forward windows ahead of benchmark, lagging, or in drawdown review?
-- Is the warehouse seeded and healthy?
-
-### News & Macro
-
-Use this to inspect what the system is reading from news, event configs, macro series, and signal-inclusion tests. This is where you check whether sector-specific or geopolitical stories are being converted into event-risk context rather than ignored.
-
-Questions this section should answer:
-
-- Which news items are active?
-- Are they treated as leading warnings, confirming signals, or lagging context?
-- Which macro categories are pressuring risk?
-- Are any data sources stale or missing?
-
-### Performance
-
-Use this for backtest and historical-window performance. The key feature is selected-window rebasing: choose 30 days, 90 days, YTD, 1 year, 3 years, 5 years, full history, or custom windows and inspect growth of `$1` and drawdown for that period.
-
-Questions this section should answer:
-
-- Did the approach work recently, not only over the full 2005-2026 sample?
-- How did it behave around market transitions?
-- Is the drawdown profile acceptable for the retirement-risk objective?
-
-### Forward Test
-
-Use this to lock recommendations and log paper/live executions. This is the audit trail for what the system recommended, what you did, when you did it, at what price, and why.
-
-Default mode should be `paper`. Only use `live` after a strategy has earned trust through forward monitoring.
-
-## Storage Model
-
-The system intentionally keeps all storage local.
-
-Primary locations:
-
-- `data/cache/`: cached market, macro, and news inputs.
-- `data/run_store/trade_bot.duckdb`: canonical DuckDB warehouse and snapshot metadata.
-- `data/run_store/snapshots/`: pickled snapshot artifacts for fast dashboard cold starts.
-- `data/trading_journal.sqlite`: local trade-journal source used by the Forward Test UI.
-- `reports/experiments/`: experiment iteration CSVs and summaries.
-- `reports/baseline_report.html`: static HTML report from baseline runs.
-
-The warehouse command mirrors experiment CSVs and the SQLite journal into DuckDB:
+Seed paper monitoring windows from the top ranked strategy registry entries. The default is 25 so leading candidates are visible in Monitoring; reference portfolio policies are retained as comparison anchors.
 
 ```bash
 poetry run trade-bot migrate-warehouse
-```
-
-Use this after new experiment runs, journal changes, or when you want the dashboard Monitoring section to reflect the latest local artifacts.
-
-## Snapshot And Warehouse Commands
-
-List recent snapshots:
-
-```bash
-poetry run trade-bot list-snapshots --limit 10
-```
-
-List background snapshot jobs:
-
-```bash
-poetry run trade-bot list-snapshot-jobs --limit 10
-```
-
-Migrate local artifacts into DuckDB:
-
-```bash
-poetry run trade-bot migrate-warehouse
-```
-
-Seed paper monitoring windows from the top ranked strategy registry entries. The default is 25 so the leading experiment candidates are visible in Monitoring; reference portfolio policies are also retained as comparison anchors. Snapshot-ready strategies receive daily paper valuations first.
-
-```bash
 poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 25 --capital-base 10000
-```
-
-Write the next daily paper valuation from the latest snapshot:
-
-```bash
 poetry run trade-bot run-paper-valuation
 ```
 
@@ -238,21 +149,58 @@ Show champion/challenger status:
 poetry run trade-bot list-champion-challenger
 ```
 
+To manually add one strategy to paper monitoring:
+
+```bash
+poetry run trade-bot monitor-strategy STRATEGY_NAME --role challenger --mode paper --account default_paper_account --capital-base 10000 --start-date YYYY-MM-DD
+```
+
+## Storage Model
+
+The system intentionally keeps all storage local.
+
+| Location | Purpose |
+| --- | --- |
+| `data/cache/` | Cached market, macro, and news inputs. |
+| `data/run_store/trade_bot.duckdb` | Canonical DuckDB warehouse and snapshot metadata. |
+| `data/run_store/snapshots/` | Pickled snapshot artifacts for fast dashboard cold starts. |
+| `data/trading_journal.sqlite` | Local trade-journal source used by the Forward Test UI. |
+| `reports/experiments/` | Experiment iteration CSVs and summaries. |
+| `reports/baseline_report.html` | Static HTML report from baseline runs. |
+
+Keep `.env`, `.venv/`, `data/`, `reports/`, DuckDB files, parquet files, CSV exports, and local caches out of Git unless there is a deliberate reason to version a small fixture.
+
+## Snapshot And Warehouse Commands
+
+| Task | Command |
+| --- | --- |
+| List snapshots | `poetry run trade-bot list-snapshots --limit 10` |
+| List background jobs | `poetry run trade-bot list-snapshot-jobs --limit 10` |
+| Migrate warehouse | `poetry run trade-bot migrate-warehouse` |
+| Seed monitoring | `poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 25 --capital-base 10000` |
+| Run paper valuation | `poetry run trade-bot run-paper-valuation` |
+| List windows | `poetry run trade-bot list-monitoring-windows` |
+| Champion/challenger | `poetry run trade-bot list-champion-challenger` |
+
 ## Research Loop
 
-Strategy research runs in bounded batches. One iteration tests 3-10 candidates, scores them, and marks each as promote, evolve, or reject. Iteration 41 is reserved for reference portfolio policies such as 60/40, 80/20, Bogleheads-style global allocations, Permanent Portfolio, Golden Butterfly, and all-weather-style sizing so simple go-to portfolios stay visible beside tactical systems. Iterations 42-49 are active-trading probes run with `configs/active_trading.yaml`, which uses daily rebalancing, next-day signal lag, and higher transaction costs to test whether more responsive systems still earn their operational burden.
+Strategy research runs in bounded batches. One iteration tests 3-10 candidates, scores them, and marks each as promote, evolve, or reject.
+
+The intended end state is 1-3 operational systems, not a dashboard full of live strategies. Research should go broad first, then deep:
+
+| Phase | Meaning |
+| --- | --- |
+| Broad | Many hypotheses, overlays, universes, and risk rules. |
+| Deep | Walk-forward testing, regime holdouts, left-tail windows, overfit diagnostics, and forward paper monitoring. |
+| Operational | Promote only systems that can be explained, valued, monitored, and acted on with human latency. |
+
+Reference portfolio policies are included so simple allocations stay visible beside tactical systems. Active-trading probes use `configs/active_trading.yaml`, which applies daily rebalancing checks, next-day signal lag, and higher transaction-cost assumptions.
 
 ```bash
 poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration 41
 poetry run trade-bot run-experiment-iteration --config configs/active_trading.yaml --iteration 42
 poetry run trade-bot migrate-warehouse
 ```
-
-The intended end state is 1-3 operational systems, not a dashboard full of live strategies. Research should go broad first, then deep:
-
-- broad: many hypotheses, overlays, universes, and risk rules
-- deep: walk-forward testing, regime holdouts, left-tail windows, overfit diagnostics, and forward paper monitoring
-- operational: promote only strategies that can be explained, valued, monitored, and acted on with human latency
 
 See [docs/iteration_protocol.md](docs/iteration_protocol.md), [docs/creative_strategy_backlog.md](docs/creative_strategy_backlog.md), and [docs/experiment_plan.md](docs/experiment_plan.md).
 
@@ -264,8 +212,24 @@ Run validation before trusting changes:
 
 ```bash
 poetry run black --check src tests
-RUFF_CACHE_DIR=/private/tmp/trade-bot-ruff-cache poetry run ruff check src tests
+poetry run ruff check --no-cache src tests
 poetry run pytest -p no:cacheprovider
+```
+
+## Personal GitHub Workflow
+
+This repo can use a personal GitHub SSH alias without clashing with work repositories. The local remote can point at a host alias such as `github-personal`, while other repos keep using their own `github.com` work setup.
+
+```bash
+git remote -v
+git remote add personal git@github-personal:<personal-user>/<repo-name>.git
+git push -u personal main
+```
+
+If the remote already exists, normal pushes are:
+
+```bash
+git push personal main
 ```
 
 ## Sharing The Dashboard
@@ -278,7 +242,7 @@ Before broader sharing, add or enable:
 - read-only roles for viewers
 - hidden or disabled state-changing controls for non-admin users
 - redaction of exact account values and secrets
-- clear `paper only / not investment advice` demo labeling
+- clear paper-only and not-investment-advice demo labeling
 
 ## Troubleshooting
 

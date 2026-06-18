@@ -7,16 +7,30 @@ def _install_dashboard_styles() -> None:
     st.markdown(
         """
         <style>
+        .stApp {
+            background:
+                linear-gradient(
+                    180deg,
+                    color-mix(in srgb, var(--secondary-background-color, #f8fafc) 72%, var(--background-color, #ffffff)) 0%,
+                    var(--background-color, #ffffff) 360px
+                );
+        }
         .block-container {
-            padding-top: 1.4rem;
-            padding-bottom: 3rem;
+            max-width: 1540px;
+            padding-top: 1.25rem;
+            padding-bottom: 3.25rem;
         }
         h1 {
-            font-size: 2rem;
+            font-size: 2.35rem;
+            line-height: 1.05;
             letter-spacing: 0;
+            margin-bottom: 0.22rem;
         }
         h2, h3 {
             letter-spacing: 0;
+        }
+        h2 {
+            margin-top: 1.55rem;
         }
         :root {
             --tb-card-bg: var(--secondary-background-color, #ffffff);
@@ -47,6 +61,100 @@ def _install_dashboard_styles() -> None:
                 --tb-success-bg: #102018;
                 --tb-success-border: #22c55e;
             }
+        }
+        .dashboard-subtitle {
+            margin: 0 0 9px;
+            color: var(--tb-card-muted);
+            font-size: 0.96rem;
+            line-height: 1.45;
+            max-width: 980px;
+        }
+        .dashboard-pill-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 0 0 18px;
+        }
+        .dashboard-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 28px;
+            padding: 4px 10px;
+            border-radius: 999px;
+            border: 1px solid var(--tb-card-border);
+            background: color-mix(in srgb, var(--tb-card-bg) 86%, var(--background-color, #ffffff));
+            color: var(--tb-card-text);
+            font-size: 0.78rem;
+            font-weight: 680;
+            white-space: nowrap;
+        }
+        section[data-testid="stSidebar"] {
+            border-right: 1px solid var(--tb-card-border);
+            background: color-mix(in srgb, var(--secondary-background-color, #f8fafc) 88%, var(--background-color, #ffffff));
+        }
+        section[data-testid="stSidebar"] div[data-testid="stSidebarContent"] {
+            padding-top: 1.05rem;
+        }
+        section[data-testid="stSidebar"] label,
+        section[data-testid="stSidebar"] p {
+            color: var(--tb-card-text);
+        }
+        div[data-baseweb="input"],
+        div[data-baseweb="select"] > div,
+        textarea {
+            border-radius: 8px !important;
+        }
+        .stButton > button,
+        button[kind="secondary"],
+        button[kind="primary"] {
+            border-radius: 8px !important;
+            border: 1px solid var(--tb-card-border) !important;
+            font-weight: 700 !important;
+        }
+        .stButton > button:hover {
+            border-color: color-mix(in srgb, #0f766e 60%, var(--tb-card-border)) !important;
+        }
+        button[kind="primary"] {
+            background: #0f766e !important;
+            border-color: #0f766e !important;
+            color: #ffffff !important;
+        }
+        div[data-testid="stTabs"] button {
+            border-radius: 8px 8px 0 0;
+            color: var(--tb-card-text);
+            font-weight: 650;
+        }
+        div[data-testid="stTabs"] [data-baseweb="tab-highlight"] {
+            background-color: #0f766e;
+        }
+        div[data-testid="stExpander"] {
+            border: 1px solid var(--tb-card-border);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--tb-card-bg) 82%, var(--background-color, #ffffff));
+            overflow: hidden;
+        }
+        div[data-testid="stDataFrame"],
+        div[data-testid="stTable"] {
+            border: 1px solid var(--tb-card-border);
+            border-radius: 8px;
+            overflow: hidden;
+            background: var(--tb-card-bg);
+        }
+        div[data-testid="stPlotlyChart"],
+        div[data-testid="stVegaLiteChart"],
+        div[data-testid="stDeckGlJsonChart"] {
+            border: 1px solid var(--tb-card-border);
+            border-radius: 8px;
+            padding: 10px;
+            background: var(--tb-card-bg);
+        }
+        div[data-testid="stAlert"] {
+            border-radius: 8px;
+            border: 1px solid var(--tb-card-border);
+        }
+        hr {
+            margin: 1.4rem 0;
+            border-color: var(--tb-card-border);
         }
         .macro-minute {
             border: 1px solid var(--tb-card-border);
