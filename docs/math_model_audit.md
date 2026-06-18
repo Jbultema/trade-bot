@@ -161,9 +161,18 @@ Dashboard selected-window performance now uses the selected equity window itself
 ```text
 growth_of_1[t] = equity[t] / equity[first_window_date]
 window_return = equity[last_window_date] / equity[first_window_date] - 1
-window_daily_return[t] = pct_change(equity within selected window)
+window_years = max((last_window_date - first_window_date).days / 365.25, 1 / 365.25)
+window_cagr = growth_of_1[last_window_date] ** (1 / window_years) - 1
+window_daily_return[t] = pct_change(growth_of_1 within selected window)
 window_daily_return[first_window_date] = 0
+window_annualized_volatility = std(window_daily_return) * sqrt(252)
+window_sharpe = mean(window_daily_return) * 252 / window_annualized_volatility
+window_calmar = window_cagr / abs(window_max_drawdown)
 ```
+
+Selected-window metrics intentionally rebase on the first selected date and do not include the
+pre-window close-to-close return. Single-observation windows report zero volatility, Sharpe, and
+Calmar rather than `NaN`.
 
 ## Strategy Signals
 

@@ -2,12 +2,13 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import numpy as np
 import pandas as pd
 import plotly.graph_objects as go
 from plotly.subplots import make_subplots
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.features.indicators import drawdown
+from trade_bot.features.indicators import TRADING_DAYS_PER_YEAR, drawdown
 from trade_bot.portfolio.risk import current_positions
 from trade_bot.research.current_state import CurrentStateRun
 from trade_bot.research.event_risk import EventRiskRun
@@ -133,8 +134,15 @@ def window_performance_frame(
         equity = _windowed_series(result.equity, start=start, end=end)
         if equity.empty:
             continue
-        window_drawdown = drawdown(equity / equity.iloc[0])
-        returns = equity.pct_change(fill_method=None).fillna(0.0)
+        normalized = equity / equity.iloc[0]
+        window_drawdown = drawdown(normalized)
+        returns = normalized.pct_change(fill_method=None).fillna(0.0)
+        years = _window_years(normalized)
+        total_return = float(normalized.iloc[-1] - 1.0)
+        cagr = _window_cagr(normalized, years)
+        annualized_volatility = _annualized_volatility(returns)
+        sharpe = _safe_ratio(float(returns.mean()) * TRADING_DAYS_PER_YEAR, annualized_volatility)
+        max_drawdown = float(window_drawdown.min())
         turnover = result.turnover.reindex(equity.index).fillna(0.0).copy()
         turnover.iloc[0] = 0.0
         rows.append(
@@ -143,9 +151,14 @@ def window_performance_frame(
                 "start": str(equity.index.min().date()),
                 "end": str(equity.index.max().date()),
                 "observations": int(equity.shape[0]),
-                "total_return": float(equity.iloc[-1] / equity.iloc[0] - 1.0),
-                "max_drawdown": float(window_drawdown.min()),
+                "years": years,
+                "total_return": total_return,
+                "cagr": cagr,
+                "annualized_volatility": annualized_volatility,
+                "sharpe": sharpe,
+                "max_drawdown": max_drawdown,
                 "current_drawdown": float(window_drawdown.iloc[-1]),
+                "calmar": _safe_ratio(cagr, abs(max_drawdown)),
                 "best_day": float(returns.max()),
                 "worst_day": float(returns.min()),
                 "average_turnover": float(turnover.mean()),
@@ -185,6 +198,33 @@ def _windowed_series(
     if end is not None:
         windowed = windowed.loc[windowed.index <= pd.Timestamp(end)]
     return windowed
+
+
+def _window_years(equity: pd.Series) -> float:
+    elapsed_days = (equity.index[-1] - equity.index[0]).days
+    return max(elapsed_days / 365.25, 1 / 365.25)
+
+
+def _window_cagr(normalized_equity: pd.Series, years: float) -> float:
+    final_growth = float(normalized_equity.iloc[-1])
+    if final_growth <= 0.0:
+        return -1.0
+    return float(final_growth ** (1.0 / years) - 1.0)
+
+
+def _annualized_volatility(returns: pd.Series) -> float:
+    if returns.shape[0] < 2:
+        return 0.0
+    volatility = float(returns.std() * np.sqrt(TRADING_DAYS_PER_YEAR))
+    if np.isnan(volatility):
+        return 0.0
+    return volatility
+
+
+def _safe_ratio(numerator: float, denominator: float) -> float:
+    if np.isnan(numerator) or np.isnan(denominator) or abs(denominator) < 1e-12:
+        return 0.0
+    return numerator / denominator
 
 
 def _format_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
