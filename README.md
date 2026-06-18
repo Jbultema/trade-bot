@@ -127,7 +127,25 @@ Open **Monitoring Controls** to start monitoring an experiment or change an acti
 
 Current paper monitoring starts at the configured capital base. The first valuation row is intentionally `0.00%` return; subsequent rows compound from future snapshots. This avoids treating full-history backtest growth as forward paper performance.
 
-## Paper Monitoring Commands
+## Common Operator Workflows
+
+### Start Paper Monitoring From The Dashboard
+
+Use this when you want a controlled, visible setup without remembering CLI flags.
+
+1. Build or load a current snapshot.
+2. Run `poetry run trade-bot migrate-warehouse` so the Monitoring page sees the latest experiments, registry rows, journal rows, and snapshot metrics.
+3. Open the dashboard and go to **Monitoring -> Monitoring Controls -> Start Monitoring**.
+4. Choose a candidate set:
+   - `Top experiments`: curated operational candidates.
+   - `Reference portfolios`: static policy baselines.
+   - `All registry`: every registered strategy, including research-only rows.
+5. Pick the strategy, set `Mode = paper`, choose `champion`, `challenger`, or `reference`, set an account label, set paper capital, and click **Start / Update Monitoring**.
+6. Run `poetry run trade-bot run-paper-valuation` after the next snapshot so the window receives a forward valuation row.
+
+Use account labels deliberately. `default_paper_account`, `top3_promotion_score`, and `small_sleeve_test` can all coexist as separate paper books.
+
+### Start Paper Monitoring From The CLI
 
 Seed paper monitoring windows from the top ranked strategy registry entries. The default is 25 so leading candidates are visible in Monitoring; reference portfolio policies are retained as comparison anchors.
 
@@ -155,6 +173,94 @@ To manually add one strategy to paper monitoring:
 poetry run trade-bot monitor-strategy STRATEGY_NAME --role challenger --mode paper --account default_paper_account --capital-base 10000 --start-date YYYY-MM-DD
 ```
 
+To make one strategy the only active champion for a paper account:
+
+```bash
+poetry run trade-bot monitor-strategy STRATEGY_NAME --role champion --mode paper --account default_paper_account --capital-base 10000 --start-date YYYY-MM-DD --demote-other-champions
+```
+
+### Add The Top 3 Promotion-Score Strategies
+
+There are two different meanings of "top 3".
+
+The fast operational path uses monitoring rank, which considers operability, validation tier, snapshot Calmar, selection-adjusted promotion score, and raw promotion score:
+
+```bash
+poetry run trade-bot migrate-warehouse
+poetry run trade-bot seed-monitoring-windows --mode paper --account top3_monitoring_rank --capital-base 10000 --top-n 3 --start-date YYYY-MM-DD
+poetry run trade-bot run-paper-valuation
+```
+
+If you literally want the raw top 3 by `promotion_score`:
+
+1. Go to **Research Lab -> Experiment Monitor -> Leaderboard**.
+2. Sort by `promotion_score` descending.
+3. Copy the top three strategy names.
+4. Go to **Monitoring -> Monitoring Controls -> Start Monitoring**.
+5. Candidate set should usually be `All registry`.
+6. Add the first as `champion` and the next two as `challenger`, with `Mode = paper`, `Account label = top3_promotion_score`, and the same paper capital.
+7. Run `poetry run trade-bot run-paper-valuation` after adding them.
+
+### Change Champion, Challenger, Or Window Status
+
+Dashboard path:
+
+1. Go to **Monitoring -> Monitoring Controls -> Manage Active Windows**.
+2. Select the active window.
+3. Change `Role`, `Status`, or `Paper capital`.
+4. Check `Only champion` if this champion should demote other active champions for the same mode/account.
+5. Click **Apply Window Changes**.
+
+CLI path:
+
+```bash
+poetry run trade-bot list-monitoring-windows --status all
+poetry run trade-bot update-monitoring-window WINDOW_ID --role champion --demote-other-champions
+poetry run trade-bot update-monitoring-window WINDOW_ID --status paused
+poetry run trade-bot update-monitoring-window WINDOW_ID --status closed
+```
+
+Window roles are `champion`, `challenger`, and `reference`. Window statuses are `active`, `paused`, `closed`, `killed`, and `archived`.
+
+### Monitoring Versus Forward Test
+
+These are intentionally different workflows.
+
+| Workflow | What It Tracks | When To Use |
+| --- | --- | --- |
+| Monitoring | Forward paper valuation windows for champion/challenger/reference strategies. | Use for paper performance evidence and promotion/demotion decisions. |
+| Forward Test | Locked recommendation tickets and manually logged paper/live executions. | Use when the current trade decision says to act and you need an audit trail. |
+
+Starting paper monitoring does not automatically create trade tickets. Lock tickets in **Forward Test** only after reviewing the current recommendation and deciding to paper-trade or live-trade that action.
+
+### Monitoring State Labels
+
+The Monitoring tab uses state labels to show whether a strategy can be valued forward.
+
+| State | Meaning |
+| --- | --- |
+| `active_valued` | Active monitoring window exists and has at least one paper valuation row. |
+| `active_awaiting_valuation` | Active window exists and the strategy is snapshot-ready, but valuation has not run yet. |
+| `active_research_only` | Active window exists, but the strategy is not currently reconstructable from the latest snapshot. |
+| `available_to_seed_and_value` | Not active yet, but it can be started and valued from snapshots. |
+| `available_research_only` | Visible for research, but not currently snapshot-ready for daily paper valuation. |
+
+Prefer `active_valued` or `available_to_seed_and_value` for serious paper monitoring. Treat research-only rows as ideas to inspect, not as complete forward-monitoring systems.
+
+## Common Gotchas
+
+| Symptom | Likely Cause | Fix |
+| --- | --- | --- |
+| Dashboard feels stale | Fast mode is reading the last completed snapshot. | Build a new snapshot, then refresh the dashboard. |
+| Monitoring is empty | Warehouse has not been migrated or no windows are seeded. | Run `migrate-warehouse`, then seed or start windows. |
+| Candidate appears in Research Lab but cannot be valued | It is research-only or missing runtime reconstruction support. | Inspect it in Research Lab; only paper-monitor it after it becomes snapshot-ready. |
+| Paper return is `0.00%` on the first row | First valuation starts at capital base by design. | Keep collecting future snapshot valuations. |
+| `seed-monitoring-windows --top-n 3` does not match raw promotion-score rank | Seeding uses monitoring rank, not raw score alone. | Use Research Lab leaderboard and manually add strict raw-score candidates. |
+| Champion/challenger table does not update after starting a window | Valuation has not run after the window was created. | Run `poetry run trade-bot run-paper-valuation`. |
+| Recommendation changed but paper book still looks old | Forward Test executions and Monitoring windows are separate from current target recommendations. | Lock/log execution in Forward Test or update the monitored window as appropriate. |
+| Many tiny daily changes show up | Strategy may be too active for human execution. | Inspect turnover/action frequency in Research Lab before promoting it. |
+| Personal Git push could clash with work GitHub | Remote or SSH key is using the wrong identity. | Use the `github-personal` SSH alias and `git push personal main`. |
+
 ## Storage Model
 
 The system intentionally keeps all storage local.
@@ -178,6 +284,8 @@ Keep `.env`, `.venv/`, `data/`, `reports/`, DuckDB files, parquet files, CSV exp
 | List background jobs | `poetry run trade-bot list-snapshot-jobs --limit 10` |
 | Migrate warehouse | `poetry run trade-bot migrate-warehouse` |
 | Seed monitoring | `poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 25 --capital-base 10000` |
+| Add one strategy | `poetry run trade-bot monitor-strategy STRATEGY_NAME --role challenger --mode paper --capital-base 10000 --start-date YYYY-MM-DD` |
+| Change a window | `poetry run trade-bot update-monitoring-window WINDOW_ID --role champion --demote-other-champions` |
 | Run paper valuation | `poetry run trade-bot run-paper-valuation` |
 | List windows | `poetry run trade-bot list-monitoring-windows` |
 | Champion/challenger | `poetry run trade-bot list-champion-challenger` |
