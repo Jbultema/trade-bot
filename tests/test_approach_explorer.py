@@ -7,10 +7,18 @@ import pandas as pd
 
 from trade_bot.config import BotConfig, DataConfig, ExecutionConfig, StrategyConfig
 from trade_bot.research.approach_explorer import (
+    build_approach_backtest_result,
     build_approach_catalog,
+    build_approach_change_log,
+    build_approach_explanation,
+    build_approach_exposure_history,
+    build_approach_holding_stats,
     build_approach_mechanics,
+    build_approach_position_summary,
     build_approach_steps,
+    build_approach_weight_history,
     build_latest_approach_weights,
+    execution_for_catalog_row,
     strategy_from_catalog_row,
 )
 
@@ -94,6 +102,88 @@ def test_latest_approach_weights_uses_loaded_prices() -> None:
 
     assert latest_weights.iloc[0]["ticker"] == "QQQ"
     assert latest_weights.iloc[0]["weight"] == 1.0
+
+
+def test_approach_plain_english_explains_saved_experiment_candidate() -> None:
+    config = _config()
+    strategy = config.strategies["dual"]
+    row = pd.Series(
+        {
+            "family": "ai_beta",
+            "role": "satellite",
+            "promotion_decision": "evolve_next_iteration",
+            "parent": "i09_ai_beta_bubble_escape_broader",
+            "phase": "active_trading",
+        }
+    )
+
+    execution = execution_for_catalog_row(row, config.execution)
+    explanation = " ".join(build_approach_explanation(strategy, row, config, execution=execution))
+
+    assert "dual momentum" in explanation
+    assert "top 1" in explanation
+    assert "BIL" in explanation
+    assert "i09_ai_beta_bubble_escape_broader" in explanation
+    assert execution.rebalance == "D"
+
+
+def test_approach_position_history_outputs_chart_and_change_tables() -> None:
+    strategy = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ"],
+        lookback_days=2,
+        skip_days=0,
+        top_n=1,
+        defensive_ticker="BIL",
+    )
+    index = pd.bdate_range("2024-01-01", periods=8)
+    prices = pd.DataFrame(
+        {
+            "SPY": [100.0, 101.0, 102.0, 107.0, 108.0, 109.0, 110.0, 111.0],
+            "QQQ": [100.0, 104.0, 108.0, 109.0, 110.0, 111.0, 112.0, 113.0],
+            "BIL": [100.0, 100.01, 100.02, 100.03, 100.04, 100.05, 100.06, 100.07],
+        },
+        index=index,
+    )
+
+    result, missing = build_approach_backtest_result(
+        prices,
+        strategy,
+        ExecutionConfig(rebalance="D", signal_lag_days=1),
+    )
+
+    assert result is not None
+    assert missing == []
+    weight_history = build_approach_weight_history(
+        result.weights,
+        defensive_ticker="BIL",
+        lookback_days=8,
+    )
+    exposure_history = build_approach_exposure_history(
+        result.weights,
+        defensive_ticker="BIL",
+        lookback_days=8,
+    )
+    summary = build_approach_position_summary(
+        result.weights,
+        defensive_ticker="BIL",
+        lookback_days=8,
+        material_change=0.05,
+    )
+    change_log = build_approach_change_log(
+        result.weights,
+        defensive_ticker="BIL",
+        lookback_days=8,
+        material_change=0.05,
+    )
+    holding_stats = build_approach_holding_stats(result.weights, lookback_days=8)
+
+    assert not weight_history.empty
+    assert {"risk_assets", "defensive", "cash_or_unallocated"}.issubset(exposure_history.columns)
+    assert summary["metric"].str.contains("Material change days").any()
+    assert not change_log.empty
+    assert "position_after" in change_log.columns
+    assert not holding_stats.empty
 
 
 def _config() -> BotConfig:

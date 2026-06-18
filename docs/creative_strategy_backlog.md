@@ -4,7 +4,7 @@ These ideas are research candidates for later iterations. They are not approved 
 
 The point is to test weird but falsifiable mechanisms while keeping the eventual operating set small.
 
-## Creative Candidate Families
+## Creative Candidate Categories
 
 1. Regime-conditioned momentum: use macro and market-state drivers to switch lookback speed.
 2. Concentration fuse: permit QQQ/SMH leadership only while breadth and credit remain stable.
@@ -25,7 +25,7 @@ The point is to test weird but falsifiable mechanisms while keeping the eventual
 17. Drawdown memory sizing: position size depends on current drawdown plus time since prior peak.
 18. Multi-armed allocation tournament: allocate small research sleeves to top candidates with decay/relegation.
 19. Ensemble-as-overlay: combine only the risk signals from several systems, not their full portfolios.
-20. Narrative/event shock index: classify news into event families and require market confirmation before action.
+20. Narrative/event shock index: classify news into event categories and require market confirmation before action.
 
 ## Constraints
 

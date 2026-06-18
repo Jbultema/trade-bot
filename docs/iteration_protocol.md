@@ -48,7 +48,7 @@ The first stage should go broad before going deep. The current harness uses:
 - iterations 4+ for adaptive deepening from prior winners and evolvers
 - iteration 21+ for candidate operating systems that combine alpha selection, risk sizing, and
   scenario-aware exposure throttles
-- family-diverse parent selection so one hot family cannot monopolize the next batch
+- category-diverse parent selection so one hot category cannot monopolize the next batch
 - saved candidate manifests so later iterations evolve exact prior strategy configs
 
 Iteration 1 is a controlled baseline expansion:
@@ -71,9 +71,15 @@ Iteration 3 adds scenario-proxy probes: AI bubble escape, AI capex infrastructur
 private-credit stress, policy whipsaw, oil shock, defensive equity, mega-cap platform caps,
 crypto/liquidity proxy exposure, reflation rotation, and defensive barbell trend.
 
-Later iterations evolve promoted candidates, but they retain family diversity across the research
+Later iterations evolve promoted candidates, but they retain category diversity across the research
 queue. This prevents early convergence on one recent-history winner before competing mechanisms
 have been stress-tested.
+
+Iterations 42-49 add an active-trading track. These candidates are still long-only and human executable, but they are tested with `configs/active_trading.yaml`: daily rebalance checks, one-day signal lag, and higher transaction-cost assumptions. They are scored on the normal robustness metrics and must also be interpreted through turnover and practical action frequency before any paper-monitoring promotion.
+
+Iterations 50-54 add a final deep/wide curation pass. This pass intentionally tests missed mechanisms without adding an unbounded strategy zoo: canary/off-ramp cores, AI escape and AI infrastructure switches, credit/private-credit warning sleeves, policy/oil/geopolitical shock barbells, low-churn active systems, defensive equity, speculative-liquidity micro-sleeves, and final curated operating-system composites. These candidates remain long-only, cached-universe friendly, and human executable. Their purpose is to feed the curated top-25 shelf, not to force automatic promotion.
+
+The curated shelf is the operational research queue. It anchors on validation-aware score, then adds family champions, operating-system candidates, and active probes so the dashboard does not over-concentrate on one recent historical winner. A shelf entry means inspect or paper-monitor first; it does not mean live-trade approval.
 
 Iterations 21-40 add the first operating-system layer:
 

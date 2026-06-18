@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 
 import pandas as pd
@@ -10,6 +11,8 @@ import trade_bot.research.baselines as baselines_module
 import trade_bot.storage.run_store as run_store_module
 import trade_bot.trading.journal as journal_module
 from trade_bot.backtest.engine import BacktestResult
+from trade_bot.dashboard.macro_minute import build_macro_minute_report
+from trade_bot.research.action_headline import build_action_headline
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.current_state import CurrentStateRun
 from trade_bot.research.event_risk import EventRiskRun
@@ -35,12 +38,32 @@ def test_dashboard_app_renders_action_headline(
 
     assert not app.exception
     assert any(title.value == "Trade Bot Operations" for title in app.title)
+    assert any("Macro Minute" in markdown.value for markdown in app.markdown)
+    assert any("macro-minute-body" in markdown.value for markdown in app.markdown)
+    assert any("macro-minute-readouts" in markdown.value for markdown in app.markdown)
+    assert any("Market State" in markdown.value for markdown in app.markdown)
+    assert any("Scenario Map" in markdown.value for markdown in app.markdown)
     assert any("Action Headline" in markdown.value for markdown in app.markdown)
     assert any("stMetricValue" in markdown.value for markdown in app.markdown)
     assert any("Small Actions" in markdown.value for markdown in app.markdown)
     assert any(subheader.value == "Operating Brief" for subheader in app.subheader)
-    assert any("Scenario Incorporation" in markdown.value for markdown in app.markdown)
+    assert any("Risk Constraints" in markdown.value for markdown in app.markdown)
+    assert any("Bias Check" in markdown.value for markdown in app.markdown)
+    operating_html = [
+        markdown.value
+        for markdown in app.markdown
+        if '<div class="operating-grid">' in markdown.value
+    ]
+    assert operating_html
+    assert '</div><div class="operating-card' in operating_html[0]
+    assert '\n    <div class="operating-card' not in operating_html[0]
     assert any(subheader.value == "Decision Brief" for subheader in app.subheader)
+    brief_html = [
+        markdown.value for markdown in app.markdown if '<div class="brief-grid">' in markdown.value
+    ]
+    assert brief_html
+    assert '</div><div class="brief-card' in brief_html[0]
+    assert '\n    <div class="brief-card' not in brief_html[0]
     assert any(radio.label == "Dashboard section" for radio in app.radio)
     assert any(subheader.value == "Current State" for subheader in app.subheader)
     assert any(subheader.value == "Trade Decision" for subheader in app.subheader)
@@ -53,7 +76,10 @@ def test_dashboard_app_renders_action_headline(
     dashboard_section = next(radio for radio in app.radio if radio.label == "Dashboard section")
     dashboard_section.set_value("Research Lab").run(timeout=20)
     assert not app.exception
-    assert any(subheader.value == "Approach Explorer" for subheader in app.subheader)
+    assert any(subheader.value == "Experiment Monitor" for subheader in app.subheader)
+    assert any(radio.label == "Approach set" for radio in app.radio)
+    assert any(selectbox.label == "Approach to inspect" for selectbox in app.selectbox)
+    assert not any(subheader.value == "Approach Explorer" for subheader in app.subheader)
 
     dashboard_section = next(radio for radio in app.radio if radio.label == "Dashboard section")
     dashboard_section.set_value("Forward Test").run(timeout=20)
@@ -66,6 +92,77 @@ def test_dashboard_app_renders_action_headline(
     assert any(subheader.value == "Windowed Performance" for subheader in app.subheader)
 
 
+def test_macro_minute_report_summarizes_market_news_and_scenarios() -> None:
+    baseline_run = _baseline_run()
+    headline = build_action_headline(
+        current_state=baseline_run.current_state,
+        trade_decision=baseline_run.trade_decision,
+        news_monitor=baseline_run.news_monitor,
+        open_ticket_count=0,
+    )
+
+    report = build_macro_minute_report(
+        baseline_run=baseline_run,
+        headline=headline,
+        open_ticket_count=0,
+    )
+
+    assert report.tone == "warning"
+    assert "YELLOW risk" in report.title
+    assert "1-month scenario map" in report.summary
+    assert len(report.paragraphs) == 4
+    assert "As of 2026-06-17" in report.paragraphs[0]
+    assert "Choppy factor rotation" in report.paragraphs[0]
+    assert "no prior snapshot" in report.paragraphs[1].lower()
+    assert "The driver stack" in report.paragraphs[2]
+    assert "Practical read-through" in report.paragraphs[3]
+    assert "What would change this" in report.paragraphs[3]
+    assert [card.label for card in report.cards] == [
+        "Market State",
+        "Change Since Prior",
+        "News / Events",
+        "Scenario Map",
+        "Risk Budget / Action",
+    ]
+    assert "Choppy factor rotation" in report.cards[3].detail
+    assert set(report.detail_rows["topic"]) >= {
+        "market_state",
+        "scenario_map",
+        "change_since_prior",
+        "news_events",
+        "macro_stack",
+        "risk_budget",
+    }
+
+
+def test_macro_minute_report_compares_current_run_to_prior_snapshot() -> None:
+    baseline_run = _baseline_run()
+    previous_run = _previous_baseline_run()
+    headline = build_action_headline(
+        current_state=baseline_run.current_state,
+        trade_decision=baseline_run.trade_decision,
+        news_monitor=baseline_run.news_monitor,
+        open_ticket_count=0,
+    )
+
+    report = build_macro_minute_report(
+        baseline_run=baseline_run,
+        headline=headline,
+        open_ticket_count=0,
+        previous_run=previous_run,
+    )
+
+    change_card = next(card for card in report.cards if card.label == "Change Since Prior")
+    assert change_card.answer == "Action changed to Review Reduce Risk"
+    assert change_card.tone in {"warning", "critical"}
+    assert "prior stored posture" in report.paragraphs[1]
+    assert "action Hold -> Review Reduce Risk" in report.paragraphs[1]
+    assert "1M risk-off probability 2% -> 12% (+10pp)" in report.paragraphs[1]
+    change_rows = report.detail_rows[report.detail_rows["topic"] == "change_since_prior"]
+    assert not change_rows.empty
+    assert "2026-06-16 GREEN risk" in str(change_rows.iloc[0]["previous_read"])
+
+
 class _FakeRunStore:
     def __init__(self, *args: object, **kwargs: object) -> None:
         pass
@@ -75,6 +172,12 @@ class _FakeRunStore:
 
     def list_jobs(self, *, limit: int = 8) -> pd.DataFrame:
         return pd.DataFrame()
+
+    def list_snapshots(self, *, limit: int = 50) -> pd.DataFrame:
+        return pd.DataFrame()
+
+    def load_snapshot(self, run_id: str) -> object:
+        raise FileNotFoundError(run_id)
 
     def start_snapshot_build_job(self, *args: object, **kwargs: object) -> object:
         return type("Job", (), {"job_id": "job-test"})()
@@ -176,6 +279,48 @@ def _baseline_run() -> BaselineRun:
         ),
         trade_decision=trade_decision,
     )
+
+
+def _previous_baseline_run() -> BaselineRun:
+    run = _baseline_run()
+    previous_state = replace(
+        run.current_state,
+        market_date="2026-06-16",
+        risk_score=0.25,
+        risk_status="green",
+        risk_summary="Risk status was GREEN with score 0.25.",
+    )
+    previous_summary = run.trade_decision.summary.copy()
+    previous_summary.loc[0, "recommended_action"] = "HOLD"
+    previous_summary.loc[0, "risk_status"] = "green"
+    previous_summary.loc[0, "risk_score"] = 0.25
+    previous_summary.loc[0, "risk_budget_multiplier"] = 1.0
+    previous_summary.loc[0, "one_month_risk_off_probability"] = 0.02
+    previous_summary.loc[0, "one_month_transition_probability"] = 0.10
+    previous_summary.loc[0, "one_month_risk_on_probability"] = 0.80
+    previous_summary.loc[0, "event_pressure"] = 0.0
+    previous_summary.loc[0, "scenario_adjusted_position"] = "QQQ 50%, IWM 50%"
+    previous_links = pd.DataFrame(
+        [
+            {
+                "rank": 1,
+                "scenario": "Broad risk-on",
+                "probability": 0.80,
+                "risk_bucket": "risk_on",
+                "expected_bot_posture": "Hold risk.",
+                "preferred_exposure": "QQQ",
+                "avoid_exposure": "None",
+                "confirmation": "Trend holds.",
+                "off_ramp": "Trend breaks.",
+            }
+        ]
+    )
+    previous_decision = replace(
+        run.trade_decision,
+        summary=previous_summary,
+        scenario_links=previous_links,
+    )
+    return replace(run, current_state=previous_state, trade_decision=previous_decision)
 
 
 def _current_state() -> CurrentStateRun:
@@ -280,8 +425,20 @@ def _trade_decision() -> TradeDecisionRun:
                     "risk_score": 0.43,
                     "one_month_risk_off_probability": 0.12,
                     "one_month_transition_probability": 0.25,
+                    "one_month_fragile_upside_probability": 0.08,
+                    "one_month_risk_on_probability": 0.55,
+                    "constructive_scenario_probability": 0.59,
+                    "scenario_event_macro_multiplier": 0.8,
+                    "portfolio_risk_multiplier": 1.0,
                     "event_pressure": 0.04,
                     "macro_pressure": 0.0,
+                    "posture_calibration_status": "opportunity_cost_watch",
+                    "posture_calibration_signal": "Opportunity-cost watch",
+                    "posture_calibration_note": "Constructive evidence still deserves review.",
+                    "current_risk_asset_weight": 1.0,
+                    "target_risk_asset_weight": 0.9,
+                    "target_defensive_weight": 0.1,
+                    "opportunity_pressure": 0.47,
                     "human_explanation": "Because risk is yellow, review reducing risk.",
                 }
             ]

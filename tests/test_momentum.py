@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from trade_bot.strategies.momentum import dual_momentum_weights
+from trade_bot.strategies.momentum import dual_momentum_weights, fixed_allocation_weights
 
 
 def test_dual_momentum_uses_defensive_asset_when_no_positive_momentum() -> None:
@@ -109,3 +109,22 @@ def test_dual_momentum_supports_risk_adjusted_weighting() -> None:
 
     assert round(float(weights[["SMOOTH", "CHOPPY"]].iloc[-1].sum()), 6) == 1.0
     assert weights["SMOOTH"].iloc[-1] > 0.0
+
+
+def test_fixed_allocation_uses_explicit_weights_and_leaves_cash_residual() -> None:
+    index = pd.bdate_range("2024-01-01", periods=3)
+    prices = pd.DataFrame(
+        {
+            "SPY": [100.0, 101.0, 102.0],
+            "AGG": [100.0, 100.1, 100.2],
+            "BIL": [100.0, 100.01, 100.02],
+        },
+        index=index,
+    )
+
+    weights = fixed_allocation_weights(prices, {"SPY": 0.6, "AGG": 0.3})
+
+    assert weights["SPY"].iloc[-1] == 0.6
+    assert weights["AGG"].iloc[-1] == 0.3
+    assert weights["BIL"].iloc[-1] == 0.0
+    assert round(float(weights.iloc[-1].sum()), 6) == 0.9

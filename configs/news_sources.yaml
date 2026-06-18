@@ -2,14 +2,14 @@ news:
   max_age_minutes: 120
   lookback_days: 7
   activation_threshold: 0.80
-  max_items_per_source: 25
+  max_items_per_source: 35
 
 sources:
   - name: "Where's Your Ed"
     url: "https://www.wheresyoured.at/rss/"
     source_type: rss
     priority: 5
-    topics: [ai, ai_capex, hyperscalers, semiconductors, tech_credit]
+    topics: [ai, ai_capex, hyperscalers, semiconductors, tech_credit, earnings_revisions]
 
   - name: "Ars Technica AI"
     url: "https://feeds.arstechnica.com/arstechnica/technology-lab"
@@ -27,32 +27,80 @@ sources:
     url: "https://www.marketwatch.com/rss/topstories"
     source_type: rss
     priority: 4
-    topics: [markets, macro, credit, equities]
+    topics: [markets, macro, macro_release, credit, equities, earnings_revisions, market_plumbing]
 
   - name: "Yahoo Finance"
     url: "https://finance.yahoo.com/news/rssindex"
     source_type: rss
     priority: 3
-    topics: [markets, earnings, macro, equities]
+    topics: [markets, earnings, macro, macro_release, equities, earnings_revisions]
 
   - name: "CNBC Top News"
     url: "https://www.cnbc.com/id/100003114/device/rss/rss.html"
     source_type: rss
     priority: 3
-    topics: [markets, macro, policy]
+    topics: [markets, macro, macro_release, policy, monetary_policy]
 
   - name: "CNBC Technology"
     url: "https://www.cnbc.com/id/19854910/device/rss/rss.html"
     source_type: rss
     priority: 3
-    topics: [technology, ai, semiconductors]
+    topics: [technology, ai, semiconductors, cyber]
+
+  - name: "Federal Reserve Press Releases"
+    url: "https://www.federalreserve.gov/feeds/press_all.xml"
+    source_type: rss
+    priority: 5
+    topics: [official_macro, monetary_policy, liquidity, market_plumbing]
+
+  - name: "Federal Reserve Speeches"
+    url: "https://www.federalreserve.gov/feeds/speeches.xml"
+    source_type: rss
+    priority: 4
+    topics: [official_macro, monetary_policy, liquidity]
+
+  - name: "BLS News Releases"
+    url: "https://www.bls.gov/feed/news_release/rss.xml"
+    source_type: rss
+    priority: 5
+    topics: [official_macro, macro_release, inflation, labor, wages]
     enabled: false
+
+  - name: "BEA News Releases"
+    url: "https://www.bea.gov/news/rss"
+    source_type: rss
+    priority: 5
+    topics: [official_macro, macro_release, growth, consumer, corporate_profits]
+
+  - name: "U.S. Treasury Press Releases"
+    url: "https://home.treasury.gov/rss.xml"
+    source_type: rss
+    priority: 4
+    topics: [fiscal_policy, treasury, sanctions, liquidity, policy]
+
+  - name: "SEC Press Releases"
+    url: "https://www.sec.gov/news/pressreleases.rss"
+    source_type: rss
+    priority: 4
+    topics: [regulatory_filings, enforcement, accounting, market_structure]
+
+  - name: "SEC Current 8-K Filings"
+    url: "https://www.sec.gov/cgi-bin/browse-edgar?action=getcurrent&type=8-K&company=&dateb=&owner=include&start=0&count=40&output=atom"
+    source_type: rss
+    priority: 3
+    topics: [regulatory_filings, earnings_revisions, corporate_events]
 
   - name: "Oilprice"
     url: "https://oilprice.com/rss/main"
     source_type: rss
     priority: 4
     topics: [oil, energy, geopolitics, inflation]
+
+  - name: "EIA Today in Energy"
+    url: "https://www.eia.gov/rss/todayinenergy.xml"
+    source_type: rss
+    priority: 4
+    topics: [oil, energy, natural_gas, inventories, inflation]
 
   - name: "Private Equity Wire"
     url: "https://www.privateequitywire.co.uk/feed/"
@@ -72,8 +120,28 @@ sources:
     priority: 4
     topics: [semiconductors, ai_capex, chips, supply_chain]
 
+  - name: "CoinDesk"
+    url: "https://www.coindesk.com/arc/outboundfeeds/rss/"
+    source_type: rss
+    priority: 3
+    topics: [crypto_liquidity, bitcoin, risk_appetite, retail_sentiment]
+
   - name: "Reddit Investing"
     url: "https://www.reddit.com/r/investing/.rss"
     source_type: rss
     priority: 2
     topics: [retail_sentiment, markets, portfolio]
+
+  - name: "Reddit Stocks"
+    url: "https://www.reddit.com/r/stocks/.rss"
+    source_type: rss
+    priority: 2
+    topics: [retail_sentiment, equities, earnings_revisions]
+    enabled: false
+
+  - name: "Reddit WallStreetBets"
+    url: "https://www.reddit.com/r/wallstreetbets/.rss"
+    source_type: rss
+    priority: 1
+    topics: [retail_sentiment, options, crowding, meme_stocks]
+    enabled: false

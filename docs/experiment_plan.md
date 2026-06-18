@@ -12,7 +12,7 @@ Phase 1 priorities:
 
 - reliable data ingestion and cached reproducibility
 - current market regime and risk-state classification
-- long-only strategy signals for Vanguard-accessible stocks and ETFs
+- long-only strategy signals for brokerage-accessible stocks and ETFs
 - risk management, position sizing, and drawdown controls
 - walk-forward and regime-split backtesting
 - human-readable dashboard and trade suggestion output
@@ -74,7 +74,7 @@ influence recommendations. The first deterministic layer supports:
 - sector narratives where the first signal is not a broad-index move
 - policy-reversal risk, where the first market reaction may not persist
 
-For each event family, the system should produce:
+For each event category, the system should produce:
 
 - a scenario playbook: what would confirm relief, escalation, or whipsaw
 - affected tradable proxies: SPY, QQQ, RSP, IWM, XLK, IGV, SMH, SOXX, XLE, USO, BNO, GLD, TLT, HYG, LQD, BKLN, SRLN, BIZD, KRE, UUP, VIXY, BIL
@@ -124,7 +124,7 @@ produce a granular scenario lattice that can later seed path simulations.
 Each scenario row should include:
 
 - horizon: 1 week, 1 month, 3 months, or 6 months
-- scenario family: risk-on, AI concentration, credit, inflation/energy, rates/liquidity, policy event, defensive, or reflexive policy
+- scenario category: risk-on, AI concentration, credit, inflation/energy, rates/liquidity, policy event, defensive, or reflexive policy
 - probability and rank within horizon
 - expected bot posture
 - preferred exposure and exposure to avoid
@@ -154,7 +154,7 @@ followed by a policy-put rebound.
 Use a broader signal universe than the tradable strategy universe.
 
 - Signal universe: broad indexes, sectors, styles, credit, duration, commodities, currency proxies, volatility proxies, international ETFs, crypto proxies, AI-beta names, and mega-cap concentration names.
-- Tradable strategy universe: a smaller Vanguard-accessible subset selected by liquidity, account suitability, turnover, and backtest evidence.
+- Tradable strategy universe: a smaller brokerage-accessible subset selected by liquidity, account suitability, turnover, and backtest evidence.
 - The expanded universe should feed risk, breadth, regime, and concentration monitors even if most assets are not active trade candidates.
 
 ## Gate Before Phase 2

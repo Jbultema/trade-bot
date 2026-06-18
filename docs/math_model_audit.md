@@ -546,6 +546,37 @@ risk_budget_multiplier = clip(
 )
 ```
 
+Posture calibration is an anti-over-bearish governance check. It reports context to the dashboard and evidence table, but it does not currently override sizing.
+
+```text
+constructive_probability = risk_on_probability + 0.50 * fragile_upside_probability
+constructive_probability = clip(constructive_probability, 0, 1)
+
+opportunity_pressure = risk_on_probability
+                     + fragile_upside_probability
+                     + 0.50 * transition_probability
+                     - risk_off_probability
+                     - event_pressure
+                     - macro_pressure
+opportunity_pressure = clip(opportunity_pressure, 0, 1)
+```
+
+Posture status rules:
+
+```text
+defense_justified if risk_status is orange/red or risk_off_probability >= 35 percent
+event_defense_review if event_pressure >= 12 percent
+under_risk_review if risk_budget <= 75 percent
+    and opportunity_pressure >= 45 percent
+    and constructive_probability >= risk_off_probability + 15 percent
+opportunity_cost_watch if risk_reduction >= 10 percent
+    and opportunity_pressure >= 35 percent
+    and risk_status is green/yellow
+upside_participation_ok if constructive_probability >= 45 percent
+    and target_risk_asset_weight >= current_risk_asset_weight - 5 percent
+balanced otherwise
+```
+
 Position-plan action:
 
 ```text

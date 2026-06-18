@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from dataclasses import replace
+
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
@@ -36,9 +38,12 @@ def test_trade_decision_reduces_risk_when_scenarios_and_events_are_adverse() -> 
 
     assert summary["recommended_action"] == "REVIEW_REDUCE_RISK"
     assert summary["risk_budget_multiplier"] < 1.0
+    assert summary["posture_calibration_status"] == "defense_justified"
     assert bil_row["scenario_adjusted_weight"] > 0.0
     assert "Because risk status is YELLOW" in summary["human_explanation"]
     assert "Credit-led risk-off" in summary["human_explanation"]
+    assert "Posture calibration says" in summary["human_explanation"]
+    assert "posture_calibration" in set(decision.evidence["evidence_type"])
 
 
 def test_trade_decision_uses_portfolio_risk_engine_when_prices_are_available() -> None:
@@ -74,6 +79,90 @@ def test_trade_decision_uses_portfolio_risk_engine_when_prices_are_available() -
     assert bil_row["scenario_adjusted_weight"] > 0.0
     assert "risk_engine_delta" in decision.position_plan
     assert "Portfolio risk engine says" in summary["human_explanation"]
+
+
+def test_trade_decision_flags_possible_opportunity_cost_when_constructive() -> None:
+    index = pd.bdate_range("2026-06-01", periods=5)
+    weights = pd.DataFrame({"QQQ": 0.5, "IWM": 0.5}, index=index)
+    result = BacktestResult(
+        name="primary",
+        equity=pd.Series([100.0, 101.0, 102.0, 103.0, 104.0], index=index),
+        returns=pd.Series([0.0, 0.01, 0.01, 0.01, 0.01], index=index),
+        gross_returns=pd.Series([0.0, 0.01, 0.01, 0.01, 0.01], index=index),
+        weights=weights,
+        target_weights=weights,
+        turnover=pd.Series(0.0, index=index),
+        transaction_costs=pd.Series(0.0, index=index),
+    )
+    scenario_lattice = pd.DataFrame(
+        [
+            {
+                "horizon": "1m",
+                "rank": 1,
+                "scenario": "Broad risk-on broadening",
+                "probability": 0.55,
+                "risk_bucket": "risk_on",
+                "expected_bot_posture": "Maintain risk.",
+                "preferred_exposure": "SPY/RSP",
+                "avoid_exposure": "Concentration",
+                "confirmation": "Breadth improves.",
+                "off_ramp": "Cut if credit weakens.",
+            },
+            {
+                "horizon": "1m",
+                "rank": 2,
+                "scenario": "AI upside squeeze",
+                "probability": 0.20,
+                "risk_bucket": "risk_on_fragile",
+                "expected_bot_posture": "Participate smaller.",
+                "preferred_exposure": "QQQ",
+                "avoid_exposure": "Crowded beta",
+                "confirmation": "Credit holds.",
+                "off_ramp": "Cut if breadth rolls over.",
+            },
+            {
+                "horizon": "1m",
+                "rank": 3,
+                "scenario": "Choppy transition",
+                "probability": 0.15,
+                "risk_bucket": "transition",
+                "expected_bot_posture": "Use guardrails.",
+                "preferred_exposure": "Quality",
+                "avoid_exposure": "Over-trading",
+                "confirmation": "Mixed leadership.",
+                "off_ramp": "Defensive if credit breaks.",
+            },
+            {
+                "horizon": "1m",
+                "rank": 4,
+                "scenario": "Risk-off false break",
+                "probability": 0.10,
+                "risk_bucket": "risk_off",
+                "expected_bot_posture": "Respect stops.",
+                "preferred_exposure": "BIL",
+                "avoid_exposure": "High beta",
+                "confirmation": "Credit weakens.",
+                "off_ramp": "Stay defensive until recovery.",
+            },
+        ]
+    )
+    current_state = replace(_current_state(), scenario_lattice=scenario_lattice)
+
+    decision = build_trade_decision(
+        primary_result=result,
+        current_state=current_state,
+        event_risk=_empty_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_empty_signal_inclusion(),
+    )
+
+    summary = decision.summary.iloc[0]
+
+    assert summary["recommended_action"] == "REVIEW_REDUCE_RISK"
+    assert summary["posture_calibration_status"] == "opportunity_cost_watch"
+    assert summary["opportunity_pressure"] > 0.35
+    assert summary["constructive_scenario_probability"] > summary["one_month_risk_off_probability"]
+    assert "Opportunity-cost watch" in set(decision.evidence["signal"])
 
 
 def _risk_prices(index: pd.DatetimeIndex) -> pd.DataFrame:
@@ -183,6 +272,27 @@ def _news_monitor() -> NewsMonitorRun:
         activated_events=(),
         activation_threshold=0.8,
         lookback_days=7,
+    )
+
+
+def _empty_event_risk() -> EventRiskRun:
+    return EventRiskRun(
+        events=(),
+        asset_event_returns=pd.DataFrame(),
+        strategy_event_returns=pd.DataFrame(),
+        event_summary=pd.DataFrame(),
+        scenario_playbook=pd.DataFrame(),
+        current_event_scenarios=pd.DataFrame(),
+    )
+
+
+def _empty_signal_inclusion() -> SignalInclusionRun:
+    return SignalInclusionRun(
+        summary=pd.DataFrame(),
+        pressure=pd.DataFrame(),
+        results={},
+        metrics=pd.DataFrame(),
+        window_summary=pd.DataFrame(),
     )
 
 

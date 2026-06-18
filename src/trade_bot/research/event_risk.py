@@ -290,6 +290,234 @@ def classify_news_text(text: str) -> NewsEventClassification:
             confirmation_window=confirmation_window,
         )
 
+    if _contains_monetary_policy_signal(normalized):
+        monetary_direction: EventDirection = "uncertain"
+        if _contains_any(
+            normalized,
+            (
+                "hawkish",
+                "rate hike",
+                "hike rates",
+                "higher for longer",
+                "tightening",
+                "quantitative tightening",
+                "balance sheet runoff",
+                "inflation still elevated",
+            ),
+        ):
+            monetary_direction = "escalation"
+        if _contains_any(
+            normalized,
+            (
+                "dovish",
+                "rate cut",
+                "cut rates",
+                "pause",
+                "easing",
+                "quantitative easing",
+                "liquidity facility",
+                "repo facility",
+            ),
+        ):
+            monetary_direction = "deescalation"
+        return NewsEventClassification(
+            category="monetary_policy",
+            direction=monetary_direction,
+            confidence=0.74,
+            risk_channels=("rates", "liquidity", "dollar", "duration", "risk_appetite"),
+            candidate_proxies=("TLT", "IEF", "UUP", "GLD", "SPY", "QQQ", "HYG", "VIXY"),
+            tradable_question=(
+                "Is policy easing enough to support risk assets, or are rates and liquidity "
+                "conditions tightening into equity and credit exposure?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_macro_release_signal(normalized):
+        macro_direction: EventDirection = "uncertain"
+        if _contains_any(
+            normalized,
+            (
+                "hotter than expected",
+                "above expectations",
+                "sticky inflation",
+                "accelerated",
+                "jobless claims rose",
+                "payrolls missed",
+                "recession",
+                "contraction",
+                "weak demand",
+            ),
+        ):
+            macro_direction = "escalation"
+        if macro_direction != "escalation" and _contains_any(
+            normalized,
+            (
+                "cooler than expected",
+                "below expectations",
+                "disinflation",
+                "soft landing",
+                "goldilocks",
+                "payrolls beat",
+                "claims fell",
+                "growth accelerated",
+            ),
+        ):
+            macro_direction = "deescalation"
+        return NewsEventClassification(
+            category="macro_release",
+            direction=macro_direction,
+            confidence=0.70,
+            risk_channels=("growth", "inflation", "rates", "labor", "risk_appetite"),
+            candidate_proxies=("SPY", "QQQ", "IWM", "RSP", "TLT", "TIP", "UUP", "VIXY"),
+            tradable_question=(
+                "Does the macro release change the growth/inflation mix enough to alter "
+                "equity beta, duration exposure, or defensive allocation?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_market_plumbing_signal(normalized):
+        plumbing_direction: EventDirection = "uncertain"
+        if _contains_any(
+            normalized,
+            (
+                "spike",
+                "surge",
+                "stress",
+                "illiquidity",
+                "failed auction",
+                "funding pressure",
+                "margin call",
+                "forced selling",
+                "deleveraging",
+            ),
+        ):
+            plumbing_direction = "escalation"
+        if plumbing_direction != "escalation" and _contains_any(
+            normalized,
+            ("normalizes", "stabilizes", "eases", "volatility falls", "liquidity improves"),
+        ):
+            plumbing_direction = "deescalation"
+        return NewsEventClassification(
+            category="market_plumbing",
+            direction=plumbing_direction,
+            confidence=0.76,
+            risk_channels=("volatility", "funding", "liquidity", "dealer_positioning", "credit"),
+            candidate_proxies=("VIXY", "SVXY", "TLT", "UUP", "HYG", "LQD", "SPY", "QQQ"),
+            tradable_question=(
+                "Is this a contained volatility/liquidity event, or a market-plumbing problem "
+                "that should shrink risk before prices fully confirm?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_regulatory_filing_signal(normalized):
+        regulatory_direction: EventDirection = "escalation"
+        if _contains_any(normalized, ("settlement", "resolved", "dismissed", "approval")):
+            regulatory_direction = "deescalation"
+        return NewsEventClassification(
+            category="regulatory_filing",
+            direction=regulatory_direction,
+            confidence=0.66,
+            risk_channels=(
+                "regulatory",
+                "accounting",
+                "governance",
+                "idiosyncratic",
+                "sector_risk",
+            ),
+            candidate_proxies=("SPY", "QQQ", "XLK", "XLF", "KRE", "HYG", "VIXY"),
+            tradable_question=(
+                "Is the filing/regulatory item idiosyncratic, or does it point to broader "
+                "sector, accounting, credit, or governance stress?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_earnings_revision_signal(normalized):
+        earnings_direction: EventDirection = "uncertain"
+        if _contains_any(
+            normalized,
+            (
+                "miss",
+                "missed",
+                "cut guidance",
+                "lowered guidance",
+                "profit warning",
+                "downgrade",
+                "margin pressure",
+                "revenue shortfall",
+                "estimates cut",
+            ),
+        ):
+            earnings_direction = "escalation"
+        if earnings_direction != "escalation" and _contains_any(
+            normalized,
+            (
+                "beat",
+                "beats",
+                "raised guidance",
+                "raises guidance",
+                "upgrade",
+                "margin expansion",
+                "estimates raised",
+            ),
+        ):
+            earnings_direction = "deescalation"
+        return NewsEventClassification(
+            category="earnings_revision",
+            direction=earnings_direction,
+            confidence=0.72,
+            risk_channels=(
+                "earnings",
+                "margins",
+                "valuation",
+                "sector_rotation",
+                "market_concentration",
+            ),
+            candidate_proxies=("SPY", "QQQ", "RSP", "XLK", "XLY", "XLF", "SMH", "IGV", "VIXY"),
+            tradable_question=(
+                "Are earnings revisions isolated to one company, or broad enough to change "
+                "sector leadership, valuation support, or market concentration risk?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_retail_sentiment_signal(normalized):
+        retail_direction: EventDirection = "uncertain"
+        if _contains_any(normalized, ("squeeze", "mania", "record call buying", "viral")):
+            retail_direction = "escalation"
+        if retail_direction != "escalation" and _contains_any(
+            normalized,
+            ("unwinds", "collapses", "call buying fades", "short interest falls"),
+        ):
+            retail_direction = "deescalation"
+        return NewsEventClassification(
+            category="retail_sentiment",
+            direction=retail_direction,
+            confidence=0.58,
+            risk_channels=("crowding", "options", "speculation", "liquidity", "risk_appetite"),
+            candidate_proxies=("IWM", "ARKK", "QQQ", "SPHB", "TSLA", "IBIT", "VIXY"),
+            tradable_question=(
+                "Is retail/speculative pressure broadening risk appetite, or creating crowded "
+                "upside that can unwind quickly?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
     if _contains_any(normalized, ("hormuz", "strait", "lng chokepoint", "shipping chokepoint")):
         if _contains_any(normalized, ("reopen", "deal", "ceasefire", "waiver", "flow")):
             return NewsEventClassification(
@@ -923,6 +1151,138 @@ def _scenario_templates(category: str, direction: EventDirection) -> tuple[dict[
             },
         )
 
+    if category == "monetary_policy":
+        return (
+            {
+                "scenario": "Policy relief broadens",
+                "confirmation": "TLT stabilizes, UUP fades, HYG/LQD improves, and SPY/QQQ breadth expands.",
+                "risk_posture": "Allow risk budget to rise gradually if price confirmation follows the policy signal.",
+                "off_ramp": "Reduce risk if rates or the dollar rise despite dovish interpretation.",
+            },
+            {
+                "scenario": "Hawkish rates shock",
+                "confirmation": "TLT falls, UUP rises, QQQ/RSP weakens, and credit spreads pressure risk assets.",
+                "risk_posture": "Cap duration-sensitive growth and prefer defensive allocation until rates stabilize.",
+                "off_ramp": "Do not re-risk until TLT, credit, and breadth stop deteriorating together.",
+            },
+            {
+                "scenario": "Liquidity ambiguity",
+                "confirmation": "Mixed Fed language with unstable reactions across UUP, HYG, TLT, and QQQ.",
+                "risk_posture": "Keep position sizes smaller and wait for cross-asset confirmation.",
+                "off_ramp": "Treat failed relief rallies as a signal that liquidity is tighter than headlines imply.",
+            },
+        )
+
+    if category == "macro_release":
+        return (
+            {
+                "scenario": "Goldilocks confirmation",
+                "confirmation": "Rates ease, breadth improves, and cyclical/risk assets hold trend after the release.",
+                "risk_posture": "Permit risk-on posture if trend, breadth, and credit confirm.",
+                "off_ramp": "Reverse if lower rates are paired with growth-scare leadership and weak credit.",
+            },
+            {
+                "scenario": "Hot inflation or rates repricing",
+                "confirmation": "TLT falls, UUP rises, inflation proxies firm, and QQQ/SMH lose leadership.",
+                "risk_posture": "Reduce duration-sensitive growth and avoid adding high-beta exposure.",
+                "off_ramp": "Stay smaller until rates pressure fades and breadth repairs.",
+            },
+            {
+                "scenario": "Growth scare",
+                "confirmation": "IWM/RSP/cyclicals weaken, credit lags, and defensive assets lead.",
+                "risk_posture": "Prefer defensive allocation while waiting for credit and breadth stabilization.",
+                "off_ramp": "Do not treat lower yields as bullish if credit and small caps deteriorate.",
+            },
+        )
+
+    if category == "earnings_revision":
+        return (
+            {
+                "scenario": "Earnings support persists",
+                "confirmation": "Guidance strength broadens beyond mega-cap leaders and RSP improves versus SPY.",
+                "risk_posture": "Maintain risk exposure if revisions confirm breadth rather than concentration.",
+                "off_ramp": "Avoid adding if earnings strength is narrow and credit/volatility deteriorate.",
+            },
+            {
+                "scenario": "Guidance cuts broaden",
+                "confirmation": "Multiple sectors cut guidance while margins, credit, and breadth weaken together.",
+                "risk_posture": "Cut cyclical and high-beta exposure; favor defensive allocation.",
+                "off_ramp": "Wait for estimate stabilization before rebuilding exposure.",
+            },
+            {
+                "scenario": "Leadership rotation",
+                "confirmation": "Earnings winners shift away from crowded AI/mega-cap into broader sectors.",
+                "risk_posture": "Favor diversified broad-market or factor rotation over concentrated growth.",
+                "off_ramp": "Reverse if rotation becomes defensive rather than broadening.",
+            },
+        )
+
+    if category == "market_plumbing":
+        return (
+            {
+                "scenario": "Volatility spike fades",
+                "confirmation": "VIXY falls, HYG/LQD repairs, UUP stabilizes, and equities regain trend.",
+                "risk_posture": "Re-risk gradually only after liquidity stress visibly fades.",
+                "off_ramp": "Cut risk again if volatility rebounds while credit weakens.",
+            },
+            {
+                "scenario": "Liquidity accident",
+                "confirmation": "VIXY/UUP rise together, credit sells off, and risk assets gap through trend.",
+                "risk_posture": "Prioritize drawdown control and defensive allocation over dip buying.",
+                "off_ramp": "Require volatility, credit, and breadth confirmation before re-risking.",
+            },
+            {
+                "scenario": "Positioning squeeze",
+                "confirmation": "Sharp reversal led by crowded assets without broad credit or breadth support.",
+                "risk_posture": "Avoid chasing one-day squeezes; require persistence across several sessions.",
+                "off_ramp": "Exit marginal exposure if the squeeze fails and VIXY/UUP rise.",
+            },
+        )
+
+    if category == "regulatory_filing":
+        return (
+            {
+                "scenario": "Idiosyncratic filing risk",
+                "confirmation": "Affected names weaken but sector ETFs, credit, and broad indexes remain stable.",
+                "risk_posture": "Do not change portfolio risk unless sector or credit confirmation appears.",
+                "off_ramp": "Escalate if related peers or credit proxies start confirming contagion.",
+            },
+            {
+                "scenario": "Sector overhang",
+                "confirmation": "Regulatory or accounting news spreads across sector ETFs and peers.",
+                "risk_posture": "Reduce affected sector/theme exposure until peer confirmation fades.",
+                "off_ramp": "Rebuild only after sector relative strength and credit stabilize.",
+            },
+            {
+                "scenario": "Governance or accounting contagion",
+                "confirmation": "Restatement/material weakness headlines pressure credit and high-beta equities.",
+                "risk_posture": "Treat as left-tail risk and shrink concentrated exposure.",
+                "off_ramp": "Stay smaller until volatility and sector breadth normalize.",
+            },
+        )
+
+    if category == "retail_sentiment":
+        return (
+            {
+                "scenario": "Speculative risk-on broadens",
+                "confirmation": "Retail/call activity coincides with broad market breadth and credit improvement.",
+                "risk_posture": "Permit risk-on posture only if speculation is supported by broader confirmation.",
+                "off_ramp": "Avoid adding if speculative assets run while breadth and credit diverge.",
+            },
+            {
+                "scenario": "Crowded squeeze unwind",
+                "confirmation": "Meme/high-beta names reverse lower while VIXY rises and liquidity fades.",
+                "risk_posture": "Reduce high-beta satellite exposure and avoid chasing late-stage squeezes.",
+                "off_ramp": "Wait for volatility and breadth repair before re-entering speculative themes.",
+            },
+            {
+                "scenario": "Noise without confirmation",
+                "confirmation": "Social chatter is elevated but major proxies do not confirm the move.",
+                "risk_posture": "Keep as triage context; do not override numerical risk engine.",
+                "off_ramp": "Ignore unless it begins affecting trend, volatility, or credit.",
+            },
+        )
+
     if category == "military_escalation":
         return (
             {
@@ -946,6 +1306,159 @@ def _scenario_templates(category: str, direction: EventDirection) -> tuple[dict[
             "risk_posture": "Do not override numerical signals until the affected market channel is clear.",
             "off_ramp": "Stay defensive if volatility rises and breadth/credit deteriorate together.",
         },
+    )
+
+
+def _contains_monetary_policy_signal(text: str) -> bool:
+    return _contains_any(
+        text,
+        (
+            "federal reserve",
+            "fomc",
+            "powell",
+            "fed ",
+            "central bank",
+            "rate cut",
+            "rate hike",
+            "policy rate",
+            "dot plot",
+            "quantitative tightening",
+            "quantitative easing",
+            "balance sheet runoff",
+            "reverse repo",
+            "bank reserves",
+            "discount window",
+        ),
+    )
+
+
+def _contains_macro_release_signal(text: str) -> bool:
+    return _contains_any(
+        text,
+        (
+            "cpi",
+            "core pce",
+            "pce inflation",
+            "ppi",
+            "nonfarm payroll",
+            "payrolls",
+            "jobs report",
+            "jobless claims",
+            "unemployment rate",
+            "retail sales",
+            "industrial production",
+            "consumer sentiment",
+            "ism",
+            "pmi",
+            "gdp",
+            "durable goods",
+        ),
+    )
+
+
+def _contains_earnings_revision_signal(text: str) -> bool:
+    return _contains_any(
+        text,
+        (
+            "earnings",
+            "guidance",
+            "eps",
+            "revenue",
+            "margin",
+            "profit warning",
+            "analyst downgrade",
+            "analyst upgrade",
+            "estimate cut",
+            "estimates cut",
+            "estimate raised",
+            "estimates raised",
+            "lowered forecast",
+            "raised forecast",
+            "cut outlook",
+            "raises outlook",
+            "revision",
+            "revisions",
+        ),
+    )
+
+
+def _contains_market_plumbing_signal(text: str) -> bool:
+    return _contains_any(
+        text,
+        (
+            "vix",
+            "move index",
+            "skew",
+            "put/call",
+            "put call",
+            "dealer gamma",
+            "0dte",
+            "options volume",
+            "treasury auction",
+            "repo market",
+            "funding market",
+            "basis trade",
+            "market liquidity",
+            "dollar funding",
+            "yen carry",
+            "forced selling",
+            "margin call",
+        ),
+    )
+
+
+def _contains_regulatory_filing_signal(text: str) -> bool:
+    has_regulatory_context = _contains_any(
+        text,
+        (
+            "sec",
+            "ftc",
+            "doj",
+            "antitrust",
+            "subpoena",
+            "wells notice",
+            "8-k",
+            "10-k",
+            "10-q",
+            "auditor",
+        ),
+    )
+    has_market_risk_context = _contains_any(
+        text,
+        (
+            "investigation",
+            "probe",
+            "enforcement",
+            "fraud",
+            "restatement",
+            "material weakness",
+            "accounting",
+            "going concern",
+            "bankruptcy",
+            "delisting",
+            "settlement",
+            "approval",
+        ),
+    )
+    return has_regulatory_context and has_market_risk_context
+
+
+def _contains_retail_sentiment_signal(text: str) -> bool:
+    return _contains_any(
+        text,
+        (
+            "reddit",
+            "wallstreetbets",
+            "meme stock",
+            "meme stocks",
+            "short squeeze",
+            "gamma squeeze",
+            "retail traders",
+            "call buying",
+            "social media traders",
+            "roaring kitty",
+            "most shorted",
+        ),
     )
 
 

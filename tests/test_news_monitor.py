@@ -7,6 +7,8 @@ from trade_bot.research.news_monitor import (
     NewsItem,
     NewsMonitorRun,
     activate_news_events,
+    build_news_source_coverage,
+    load_news_config,
     triage_news_items,
 )
 
@@ -113,3 +115,33 @@ def test_news_activation_keeps_low_priority_sources_in_triage_only() -> None:
 
     assert activated.activated_events == ()
     assert activated.triage.iloc[0]["activation_status"] == "triage_only_low_priority"
+
+
+def test_news_source_config_covers_required_narrative_buckets() -> None:
+    config = load_news_config("configs/news_sources.yaml")
+    coverage = build_news_source_coverage(config.sources)
+
+    assert set(coverage["status"]) <= {"covered", "thin"}
+    assert not coverage[coverage["status"] == "blind_spot"].shape[0]
+    assert set(coverage["coverage_bucket"]) >= {
+        "official_macro_releases",
+        "monetary_policy_liquidity",
+        "earnings_revisions_fundamentals",
+        "regulatory_filings_enforcement",
+        "market_plumbing_volatility",
+        "retail_social_sentiment",
+    }
+
+
+def test_news_source_coverage_flags_missing_bucket() -> None:
+    config = load_news_config("configs/news_sources.yaml")
+    macro_only_sources = tuple(
+        source for source in config.sources if "official_macro" in source.topics
+    )
+
+    coverage = build_news_source_coverage(macro_only_sources)
+
+    assert "blind_spot" in set(coverage["status"])
+    assert coverage.loc[coverage["coverage_bucket"] == "official_macro_releases", "status"].iloc[
+        0
+    ] in {"covered", "thin"}

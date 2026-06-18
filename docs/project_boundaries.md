@@ -1,13 +1,13 @@
 # Project Boundaries
 
-This is a private personal research project. It should remain operationally separate from work systems.
+This is a private local research project. It should remain operationally separate from work systems.
 
 ## Operating Boundary
 
 - Do not push this repository to GitHub by default.
 - Do not use work data, work credentials, Databricks workspaces, or Hasbro-specific infrastructure.
 - Keep all market data, backtest results, prompts, and dashboard outputs local unless explicitly changed later.
-- Treat account-specific trading choices as personal Vanguard IRA decisions, not work artifacts.
+- Treat account-specific trading choices as user-controlled brokerage account decisions, not work artifacts.
 
 ## Dependency Boundary
 
@@ -21,7 +21,7 @@ If `lib-aim-timeseries` functionality is used:
 - avoid copying proprietary code into this repository
 - keep tests runnable without that dependency installed
 
-This preserves the project as a clean "can this be done" research system while allowing reuse of personally maintained forecasting patterns where they clearly improve the work.
+This preserves the project as a clean "can this be done" research system while allowing reuse of externally maintained forecasting patterns where they clearly improve the work.
 
 ## Technical Bias
 

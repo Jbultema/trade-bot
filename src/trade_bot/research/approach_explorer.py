@@ -5,9 +5,11 @@ from pathlib import Path
 
 import pandas as pd
 
-from trade_bot.config import BotConfig, StrategyConfig
+from trade_bot.backtest.engine import BacktestResult, run_backtest
+from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
 from trade_bot.DEFAULT import DEFAULT_EXPERIMENTS_DIR
 from trade_bot.portfolio.risk import current_positions
+from trade_bot.research.experiments import ScenarioSizingConfig, apply_scenario_position_sizing
 from trade_bot.strategies.momentum import build_strategy_weights
 
 
@@ -117,7 +119,378 @@ def strategy_from_catalog_row(row: pd.Series) -> StrategyConfig:
     return StrategyConfig.model_validate(json.loads(raw))
 
 
-def build_approach_mechanics(strategy: StrategyConfig, config: BotConfig) -> pd.DataFrame:
+def scenario_sizing_from_catalog_row(row: pd.Series) -> ScenarioSizingConfig | None:
+    raw = row.get("scenario_sizing_json")
+    if not isinstance(raw, str) or not raw or raw == "nan":
+        return None
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(values, dict):
+        return None
+    try:
+        return ScenarioSizingConfig(**values)
+    except TypeError:
+        return None
+
+
+def execution_for_catalog_row(
+    row: pd.Series, default_execution: ExecutionConfig
+) -> ExecutionConfig:
+    if str(row.get("phase", "")) == "active_trading":
+        return ExecutionConfig(
+            initial_capital=default_execution.initial_capital,
+            transaction_cost_bps=10.0,
+            rebalance="D",
+            signal_lag_days=default_execution.signal_lag_days,
+        )
+    return default_execution
+
+
+def build_approach_explanation(
+    strategy: StrategyConfig,
+    row: pd.Series,
+    config: BotConfig,
+    *,
+    execution: ExecutionConfig | None = None,
+    scenario_sizing: ScenarioSizingConfig | None = None,
+) -> list[str]:
+    execution = execution or config.execution
+    family = str(row.get("family", "unknown")).replace("_", " ")
+    role = str(row.get("role", "unknown")).replace("_", " ")
+    decision = str(row.get("promotion_decision", "unscored")).replace("_", " ")
+    defensive = strategy.defensive_ticker or "cash/no explicit defensive asset"
+    paragraphs = [
+        (
+            f"This is a {strategy.type.replace('_', ' ')} approach in the {family} category. "
+            f"Its research role is {role}, and the current research decision is {decision}. "
+            f"The display below uses {execution.rebalance} rebalance checks, "
+            f"a {execution.signal_lag_days}-session execution lag, and "
+            f"{execution.transaction_cost_bps:.1f} bps turnover cost assumptions."
+        )
+    ]
+
+    if strategy.type == "buy_hold":
+        paragraphs.append(
+            "It does not rank or time assets. It simply holds the configured assets and rebalances "
+            "back to equal weights on the execution cadence."
+        )
+    elif strategy.type == "fixed_allocation":
+        allocations = strategy.allocation_weights or {}
+        allocation_text = ", ".join(
+            f"{ticker} {weight:.0%}" for ticker, weight in sorted(allocations.items())
+        )
+        paragraphs.append(
+            f"It is a static allocation policy: {allocation_text}. Position changes should mostly "
+            "come from rebalancing drift, not signal changes."
+        )
+    elif strategy.type == "absolute_momentum":
+        paragraphs.append(
+            f"It checks whether each asset is above its own {strategy.moving_average_days}-day "
+            f"moving average. Assets above trend are held; if none qualify, capital moves to {defensive}."
+        )
+    else:
+        paragraphs.append(
+            f"Each rebalance, it computes {strategy.lookback_days}-day momentum after skipping the "
+            f"most recent {strategy.skip_days} trading day(s), ranks the universe by "
+            f"{strategy.ranking_metric.replace('_', ' ')}, and keeps the top {strategy.top_n}. "
+            f"Survivors are sized with {strategy.weighting.replace('_', ' ')} weighting."
+        )
+        filters: list[str] = []
+        if strategy.type == "dual_momentum":
+            filters.append(f"a {strategy.min_return:.2%} absolute-return hurdle")
+        if strategy.trend_filter_days:
+            filters.append(f"a {strategy.trend_filter_days}-day trend confirmation filter")
+        if strategy.max_asset_weight:
+            filters.append(f"a {strategy.max_asset_weight:.0%} single-asset cap")
+        if filters:
+            paragraphs.append(
+                "It then applies "
+                + ", ".join(filters)
+                + f". Rejected or residual capital goes to {defensive}."
+            )
+        elif strategy.defensive_ticker:
+            paragraphs.append(f"If no asset qualifies, the strategy moves to {defensive}.")
+
+    if scenario_sizing is not None:
+        paragraphs.append(
+            "Scenario sizing is active. After the base strategy chooses holdings, the scenario layer "
+            f"scales risk exposure using the {scenario_sizing.profile} profile, with risk multipliers "
+            f"bounded from {scenario_sizing.min_multiplier:.0%} to {scenario_sizing.max_multiplier:.0%}. "
+            f"The removed risk budget is routed to {defensive}."
+        )
+    if strategy.volatility_target:
+        paragraphs.append(
+            f"A volatility throttle targets {strategy.volatility_target.annualized_volatility:.0%} "
+            f"annualized volatility using a lagged {strategy.volatility_target.lookback_days}-day realized-volatility estimate."
+        )
+    if strategy.drawdown_control:
+        paragraphs.append(
+            f"A drawdown control cuts exposure to {strategy.drawdown_control.risk_multiplier:.0%} "
+            f"after a {strategy.drawdown_control.max_drawdown:.0%} rolling strategy drawdown trigger."
+        )
+    parent = str(row.get("parent", "") or "")
+    if parent and parent != "nan":
+        paragraphs.append(
+            f"This candidate is an evolution of {parent}; the parent link tells us what prior idea it modified."
+        )
+    return paragraphs
+
+
+def build_approach_backtest_result(
+    prices: pd.DataFrame,
+    strategy: StrategyConfig,
+    execution: ExecutionConfig,
+    *,
+    scenario_sizing: ScenarioSizingConfig | None = None,
+    name: str = "approach",
+) -> tuple[BacktestResult | None, list[str]]:
+    strategy_prices, strategy_for_prices, missing_columns = _prepare_strategy_prices(
+        prices, strategy
+    )
+    if strategy_prices.empty or not strategy_for_prices.tickers:
+        return None, missing_columns
+
+    target_weights = build_strategy_weights(strategy_prices, strategy_for_prices)
+    if scenario_sizing is not None:
+        target_weights = apply_scenario_position_sizing(
+            target_weights,
+            strategy_prices,
+            scenario_sizing,
+            defensive_ticker=strategy_for_prices.defensive_ticker,
+        )
+    return (
+        run_backtest(
+            name,
+            strategy_prices,
+            target_weights,
+            execution,
+            volatility_target=strategy_for_prices.volatility_target,
+            drawdown_control=strategy_for_prices.drawdown_control,
+        ),
+        missing_columns,
+    )
+
+
+def build_latest_weight_frame(
+    weights: pd.DataFrame,
+    *,
+    missing_columns: list[str] | None = None,
+    top_n: int = 20,
+) -> pd.DataFrame:
+    if weights.empty:
+        frame = pd.DataFrame(
+            [{"ticker": "none", "weight": 0.0, "note": "No current active position."}]
+        )
+    else:
+        positions = current_positions(weights, top_n=top_n)
+        frame = pd.DataFrame(
+            [
+                {"ticker": ticker, "weight": float(weight), "note": ""}
+                for ticker, weight in positions.items()
+            ]
+        )
+        if frame.empty:
+            frame = pd.DataFrame(
+                [{"ticker": "none", "weight": 0.0, "note": "No current active position."}]
+            )
+    for missing_column in missing_columns or []:
+        frame.loc[len(frame)] = {
+            "ticker": missing_column,
+            "weight": 0.0,
+            "note": "Ticker not available in loaded prices.",
+        }
+    return frame
+
+
+def build_approach_weight_history(
+    weights: pd.DataFrame,
+    *,
+    defensive_ticker: str | None = None,
+    lookback_days: int = 252,
+    max_assets: int = 8,
+) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame()
+    history = weights.tail(lookback_days).copy().fillna(0.0)
+    selected_columns = _important_weight_columns(
+        history,
+        defensive_ticker=defensive_ticker,
+        max_assets=max_assets,
+    )
+    visible = (
+        history[selected_columns].copy() if selected_columns else pd.DataFrame(index=history.index)
+    )
+    hidden_columns = [column for column in history.columns if column not in selected_columns]
+    other_weight = pd.Series(0.0, index=history.index)
+    if hidden_columns:
+        other_weight = other_weight.add(history[hidden_columns].sum(axis=1), fill_value=0.0)
+    cash_residual = (1.0 - history.sum(axis=1)).clip(lower=0.0)
+    other_weight = other_weight.add(cash_residual, fill_value=0.0)
+    if float(other_weight.max()) > 0.005:
+        visible["other_or_cash"] = other_weight
+    visible.index.name = "date"
+    return visible
+
+
+def build_approach_exposure_history(
+    weights: pd.DataFrame,
+    *,
+    defensive_ticker: str | None = None,
+    lookback_days: int = 252,
+) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame()
+    history = weights.tail(lookback_days).copy().fillna(0.0)
+    defensive_weight = (
+        history[defensive_ticker] if defensive_ticker and defensive_ticker in history else 0.0
+    )
+    defensive_series = pd.Series(defensive_weight, index=history.index, dtype=float)
+    invested_weight = history.sum(axis=1)
+    risk_weight = (invested_weight - defensive_series).clip(lower=0.0)
+    frame = pd.DataFrame(
+        {
+            "risk_assets": risk_weight,
+            "defensive": defensive_series,
+            "cash_or_unallocated": (1.0 - invested_weight).clip(lower=0.0),
+        },
+        index=history.index,
+    )
+    frame.index.name = "date"
+    return frame
+
+
+def build_approach_position_summary(
+    weights: pd.DataFrame,
+    *,
+    defensive_ticker: str | None = None,
+    lookback_days: int = 252,
+    material_change: float = 0.05,
+) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame()
+    history = weights.tail(lookback_days).copy().fillna(0.0)
+    turnover = history.diff().abs().sum(axis=1).fillna(history.abs().sum(axis=1))
+    material_turnover = turnover[turnover >= material_change]
+    defensive_weight = (
+        history[defensive_ticker] if defensive_ticker and defensive_ticker in history else 0.0
+    )
+    defensive_series = pd.Series(defensive_weight, index=history.index, dtype=float)
+    risk_weight = (history.sum(axis=1) - defensive_series).clip(lower=0.0)
+    latest = history.iloc[-1]
+    active_positions = int((latest > 0.005).sum())
+    median_days = _median_days_between(material_turnover.index)
+    return pd.DataFrame(
+        [
+            {
+                "metric": "Current risk exposure",
+                "value": f"{risk_weight.iloc[-1]:.1%}",
+                "interpretation": "Weight currently assigned to non-defensive holdings.",
+            },
+            {
+                "metric": "Current defensive/cash exposure",
+                "value": f"{(1.0 - risk_weight.iloc[-1]):.1%}",
+                "interpretation": "Weight currently parked in the defensive asset or unallocated cash.",
+            },
+            {
+                "metric": "Average risk exposure",
+                "value": f"{risk_weight.mean():.1%}",
+                "interpretation": f"Average non-defensive exposure over the last {len(history):,} sessions.",
+            },
+            {
+                "metric": "Material change days",
+                "value": f"{len(material_turnover):,}",
+                "interpretation": f"Days with at least {material_change:.0%} one-way allocation change.",
+            },
+            {
+                "metric": "Median days between material changes",
+                "value": "n/a" if median_days is None else f"{median_days:.0f}",
+                "interpretation": "Lower values imply more frequent human review or trading.",
+            },
+            {
+                "metric": "Current active positions",
+                "value": f"{active_positions:,}",
+                "interpretation": "Number of tickers with more than 0.5% current weight.",
+            },
+        ]
+    )
+
+
+def build_approach_change_log(
+    weights: pd.DataFrame,
+    *,
+    defensive_ticker: str | None = None,
+    lookback_days: int = 252,
+    material_change: float = 0.05,
+    max_rows: int = 30,
+) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame()
+    history = weights.tail(lookback_days).copy().fillna(0.0)
+    previous = history.shift(1).fillna(0.0)
+    deltas = history - previous
+    turnover = deltas.abs().sum(axis=1)
+    rows = []
+    for date, total_change in turnover[turnover >= material_change].tail(max_rows).items():
+        delta = deltas.loc[date].sort_values(ascending=False)
+        current = history.loc[date]
+        defensive_weight = float(current.get(defensive_ticker, 0.0)) if defensive_ticker else 0.0
+        rows.append(
+            {
+                "date": date.date().isoformat() if hasattr(date, "date") else str(date),
+                "total_change": float(total_change),
+                "risk_weight": max(float(current.sum() - defensive_weight), 0.0),
+                "defensive_weight": defensive_weight,
+                "top_adds": _format_delta_vector(delta[delta > 0.005]),
+                "top_reductions": _format_delta_vector(
+                    (-delta[delta < -0.005]).sort_values(ascending=False)
+                ),
+                "position_after": _format_weight_vector(current),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def build_approach_holding_stats(
+    weights: pd.DataFrame,
+    *,
+    lookback_days: int = 252,
+    max_assets: int = 20,
+) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame()
+    history = weights.tail(lookback_days).copy().fillna(0.0)
+    rows = []
+    for ticker in history.columns:
+        series = history[ticker]
+        if float(series.max()) <= 0.005:
+            continue
+        rows.append(
+            {
+                "ticker": ticker,
+                "current_weight": float(series.iloc[-1]),
+                "average_weight": float(series.mean()),
+                "max_weight": float(series.max()),
+                "active_day_rate": float((series > 0.005).mean()),
+            }
+        )
+    if not rows:
+        return pd.DataFrame()
+    return (
+        pd.DataFrame(rows)
+        .sort_values(["current_weight", "average_weight", "max_weight"], ascending=False)
+        .head(max_assets)
+    )
+
+
+def build_approach_mechanics(
+    strategy: StrategyConfig,
+    config: BotConfig,
+    *,
+    execution: ExecutionConfig | None = None,
+) -> pd.DataFrame:
+    execution = execution or config.execution
     rows = [
         _mechanic("Strategy type", strategy.type, _strategy_type_explanation(strategy)),
         _mechanic(
@@ -127,17 +500,17 @@ def build_approach_mechanics(strategy: StrategyConfig, config: BotConfig) -> pd.
         ),
         _mechanic(
             "Decision cadence",
-            config.execution.rebalance,
+            execution.rebalance,
             "Signals are converted to target weights on this rebalance cadence.",
         ),
         _mechanic(
             "Execution lag",
-            f"{config.execution.signal_lag_days} session(s)",
+            f"{execution.signal_lag_days} session(s)",
             "Backtests assume trades happen after signals are known, not at the same close.",
         ),
         _mechanic(
             "Transaction cost",
-            f"{config.execution.transaction_cost_bps:.1f} bps turnover cost",
+            f"{execution.transaction_cost_bps:.1f} bps turnover cost",
             "Every weight change pays this cost in the backtest.",
         ),
     ]
@@ -411,6 +784,95 @@ def approach_scorecard_row(row: pd.Series) -> pd.DataFrame:
             }
         ]
     )
+
+
+def _prepare_strategy_prices(
+    prices: pd.DataFrame,
+    strategy: StrategyConfig,
+) -> tuple[pd.DataFrame, StrategyConfig, list[str]]:
+    columns = list(
+        dict.fromkeys(
+            [*strategy.tickers, *([strategy.defensive_ticker] if strategy.defensive_ticker else [])]
+        )
+    )
+    available_columns = [column for column in columns if column in prices.columns]
+    missing_columns = sorted(set(columns) - set(available_columns))
+    available_risk_tickers = [ticker for ticker in strategy.tickers if ticker in available_columns]
+    if not available_risk_tickers:
+        empty_strategy = StrategyConfig.model_validate(
+            {
+                **strategy.model_dump(mode="json"),
+                "tickers": [],
+                "defensive_ticker": None,
+            }
+        )
+        return pd.DataFrame(), empty_strategy, missing_columns
+
+    strategy_data = strategy.model_dump(mode="json")
+    strategy_data["tickers"] = available_risk_tickers
+    if strategy.defensive_ticker not in available_columns:
+        strategy_data["defensive_ticker"] = None
+    if strategy_data.get("allocation_weights"):
+        strategy_data["allocation_weights"] = {
+            ticker: weight
+            for ticker, weight in strategy_data["allocation_weights"].items()
+            if ticker in available_columns
+        }
+    strategy_for_prices = StrategyConfig.model_validate(strategy_data)
+    strategy_prices = prices[available_columns].dropna(how="all")
+    return strategy_prices, strategy_for_prices, missing_columns
+
+
+def _important_weight_columns(
+    history: pd.DataFrame,
+    *,
+    defensive_ticker: str | None,
+    max_assets: int,
+) -> list[str]:
+    if history.empty:
+        return []
+    stats = pd.DataFrame(
+        {
+            "latest": history.iloc[-1].abs(),
+            "average": history.abs().mean(),
+            "maximum": history.abs().max(),
+        }
+    )
+    stats["score"] = stats["latest"] * 3.0 + stats["average"] + stats["maximum"]
+    selected = stats.sort_values("score", ascending=False).head(max_assets).index.tolist()
+    if (
+        defensive_ticker
+        and defensive_ticker in history.columns
+        and defensive_ticker not in selected
+    ):
+        selected.append(defensive_ticker)
+    return selected
+
+
+def _format_weight_vector(
+    weights: pd.Series, *, min_weight: float = 0.005, max_items: int = 6
+) -> str:
+    positive = weights[weights > min_weight].sort_values(ascending=False).head(max_items)
+    if positive.empty:
+        return "none"
+    return ", ".join(f"{ticker} {weight:.0%}" for ticker, weight in positive.items())
+
+
+def _format_delta_vector(delta: pd.Series, *, min_weight: float = 0.005, max_items: int = 4) -> str:
+    meaningful = delta[delta > min_weight].sort_values(ascending=False).head(max_items)
+    if meaningful.empty:
+        return "none"
+    return ", ".join(f"{ticker} +{weight:.0%}" for ticker, weight in meaningful.items())
+
+
+def _median_days_between(index: pd.Index) -> float | None:
+    if len(index) < 2:
+        return None
+    dates = pd.Series(pd.to_datetime(index)).sort_values()
+    gaps = dates.diff().dropna().dt.days
+    if gaps.empty:
+        return None
+    return float(gaps.median())
 
 
 def _load_experiment_scorecards(root: Path) -> pd.DataFrame:

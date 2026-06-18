@@ -1,0 +1,394 @@
+data:
+  start: '2005-01-01'
+  end: null
+  cache_dir: data/cache
+  adjusted: true
+execution:
+  initial_capital: 100000.0
+  transaction_cost_bps: 10.0
+  rebalance: D
+  signal_lag_days: 1
+universe:
+  broad:
+  - SPY
+  - VOO
+  - IVV
+  - SPLG
+  - QQQ
+  - QQQM
+  - IWM
+  - VTI
+  - VT
+  - DIA
+  - RSP
+  - MDY
+  - IWB
+  - MGC
+  sector:
+  - XLK
+  - XLF
+  - KRE
+  - KBE
+  - XLY
+  - XLP
+  - XLE
+  - XLV
+  - XLI
+  - XLU
+  - XLB
+  - XLRE
+  - XLC
+  - XME
+  - XRT
+  - XHB
+  - XBI
+  style_factor:
+  - VUG
+  - VTV
+  - IWF
+  - IWD
+  - MTUM
+  - QUAL
+  - USMV
+  - SPLV
+  - SPHB
+  - SCHD
+  - VIG
+  - MOAT
+  - COWZ
+  - QVAL
+  - VFQY
+  - SPMO
+  international:
+  - EFA
+  - EEM
+  - VEA
+  - VWO
+  - VGK
+  - EWJ
+  - MCHI
+  - INDA
+  - EWU
+  - EWC
+  - EWA
+  - EWZ
+  - EWW
+  fixed_income:
+  - AGG
+  - BND
+  - BSV
+  - VGSH
+  - VGIT
+  - VGLT
+  - IEF
+  - SHY
+  - IEI
+  - TLT
+  - EDV
+  - TIP
+  - VTIP
+  credit:
+  - HYG
+  - JNK
+  - LQD
+  - VCIT
+  - VCSH
+  - BKLN
+  - SRLN
+  - BIZD
+  - JAAA
+  - JBBB
+  - EMB
+  - MUB
+  defensive:
+  - BIL
+  - SGOV
+  - USFR
+  - SHY
+  - TLT
+  - GLD
+  - IAU
+  commodities_currency:
+  - GLD
+  - IAU
+  - SLV
+  - CPER
+  - USO
+  - BNO
+  - DBC
+  - DBA
+  - UNG
+  - UUP
+  - FXE
+  - FXY
+  - FXF
+  volatility_liquidity:
+  - VIXY
+  - SVXY
+  - TLT
+  - HYG
+  - LQD
+  - UUP
+  crypto_proxies:
+  - IBIT
+  - FBTC
+  - BITB
+  - ETHE
+  industry_theme:
+  - SMH
+  - SOXX
+  - IGV
+  - CLOU
+  - SKYY
+  - BOTZ
+  - ROBO
+  - ARKK
+  - TAN
+  - LIT
+  - URA
+  - XOP
+  - XES
+  - OIH
+  - ITA
+  - PPA
+  - IYT
+  - IBB
+  ai_infrastructure:
+  - VRT
+  - ETN
+  - PWR
+  - CEG
+  - GEV
+  - NRG
+  - CCJ
+  private_credit_proxy:
+  - BIZD
+  - SRLN
+  - BKLN
+  - JAAA
+  - JBBB
+  - ARCC
+  - MAIN
+  - BXSL
+  - OBDC
+  - FSK
+  ai_beta:
+  - NVDA
+  - AMD
+  - MSFT
+  - GOOGL
+  - GOOG
+  - META
+  - AMZN
+  - AVGO
+  - ORCL
+  - TSM
+  - PLTR
+  - MU
+  - ASML
+  - ARM
+  - SMCI
+  - DELL
+  - ANET
+  - MRVL
+  - CRWD
+  - SNOW
+  - DDOG
+  - NET
+  - APP
+  - TSLA
+  mega_cap_platform:
+  - AAPL
+  - MSFT
+  - NVDA
+  - GOOGL
+  - GOOG
+  - AMZN
+  - META
+  - AVGO
+  - TSLA
+  - BRK-B
+  - JPM
+  - LLY
+  - V
+  - MA
+  - COST
+  - NFLX
+strategies:
+  buy_hold_spy:
+    type: buy_hold
+    tickers:
+    - SPY
+  buy_hold_qqq:
+    type: buy_hold
+    tickers:
+    - QQQ
+  i41_ref_us_60_40:
+    type: fixed_allocation
+    tickers:
+    - SPY
+    - AGG
+    allocation_weights:
+      SPY: 0.6
+      AGG: 0.4
+  i41_ref_us_80_20:
+    type: fixed_allocation
+    tickers:
+    - SPY
+    - AGG
+    allocation_weights:
+      SPY: 0.8
+      AGG: 0.2
+  i41_ref_us_90_10:
+    type: fixed_allocation
+    tickers:
+    - SPY
+    - AGG
+    allocation_weights:
+      SPY: 0.9
+      AGG: 0.1
+  i41_ref_global_three_fund_80_20:
+    type: fixed_allocation
+    tickers:
+    - SPY
+    - EFA
+    - EEM
+    - AGG
+    allocation_weights:
+      SPY: 0.48
+      EFA: 0.24
+      EEM: 0.08
+      AGG: 0.2
+  i41_ref_global_three_fund_60_40:
+    type: fixed_allocation
+    tickers:
+    - SPY
+    - EFA
+    - EEM
+    - AGG
+    allocation_weights:
+      SPY: 0.36
+      EFA: 0.18
+      EEM: 0.06
+      AGG: 0.4
+  i41_ref_permanent_portfolio:
+    type: fixed_allocation
+    tickers:
+    - SPY
+    - TLT
+    - GLD
+    - SHY
+    allocation_weights:
+      SPY: 0.25
+      TLT: 0.25
+      GLD: 0.25
+      SHY: 0.25
+  i41_ref_golden_butterfly:
+    type: fixed_allocation
+    tickers:
+    - SPY
+    - IWM
+    - TLT
+    - SHY
+    - GLD
+    allocation_weights:
+      SPY: 0.2
+      IWM: 0.2
+      TLT: 0.2
+      SHY: 0.2
+      GLD: 0.2
+  i41_ref_all_weather:
+    type: fixed_allocation
+    tickers:
+    - SPY
+    - TLT
+    - IEF
+    - GLD
+    - DBC
+    allocation_weights:
+      SPY: 0.3
+      TLT: 0.4
+      IEF: 0.15
+      GLD: 0.075
+      DBC: 0.075
+  i41_ref_growth_cash_barbell:
+    type: fixed_allocation
+    tickers:
+    - QQQ
+    - SPY
+    - BIL
+    allocation_weights:
+      QQQ: 0.5
+      SPY: 0.3
+      BIL: 0.2
+  absolute_momentum_spy:
+    type: absolute_momentum
+    tickers:
+    - SPY
+    moving_average_days: 200
+    defensive_ticker: BIL
+  relative_momentum_sector:
+    type: relative_momentum
+    tickers:
+    - XLK
+    - XLF
+    - XLY
+    - XLP
+    - XLE
+    - XLV
+    - XLI
+    - XLU
+    - XLB
+    - XLRE
+    - XLC
+    lookback_days: 126
+    skip_days: 21
+    top_n: 3
+    defensive_ticker: BIL
+  dual_momentum_core:
+    type: dual_momentum
+    tickers:
+    - SPY
+    - QQQ
+    - IWM
+    - GLD
+    - TLT
+    lookback_days: 126
+    skip_days: 21
+    top_n: 2
+    defensive_ticker: BIL
+    min_return: 0.0
+  vol_target_dual_momentum:
+    type: dual_momentum
+    tickers:
+    - SPY
+    - QQQ
+    - IWM
+    - GLD
+    - TLT
+    lookback_days: 126
+    skip_days: 21
+    top_n: 2
+    defensive_ticker: BIL
+    min_return: 0.0
+    volatility_target:
+      annualized_volatility: 0.12
+      lookback_days: 63
+      max_leverage: 1.0
+  drawdown_managed_dual_momentum:
+    type: dual_momentum
+    tickers:
+    - SPY
+    - QQQ
+    - IWM
+    - GLD
+    - TLT
+    lookback_days: 126
+    skip_days: 21
+    top_n: 2
+    defensive_ticker: BIL
+    min_return: 0.0
+    drawdown_control:
+      equity_lookback_days: 252
+      max_drawdown: -0.1
+      risk_multiplier: 0.5

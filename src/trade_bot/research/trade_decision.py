@@ -69,6 +69,15 @@ def build_trade_decision(
     total_risk_budget_multiplier = float(np.clip(risk_multiplier * portfolio_risk_multiplier, 0, 1))
     position_plan = _position_plan(base_weights, final_weights, min_trade_weight)
     position_plan = _add_portfolio_risk_sizing_columns(position_plan, portfolio_risk)
+    posture_context = _posture_calibration_context(
+        current_state=current_state,
+        scenario_context=scenario_context,
+        event_context=event_context,
+        macro_context=macro_context,
+        position_plan=position_plan,
+        defensive_ticker=defensive_ticker,
+        risk_budget_multiplier=total_risk_budget_multiplier,
+    )
     action = _recommended_action(position_plan, current_state.risk_status)
     explanation = _human_explanation(
         action=action,
@@ -79,6 +88,7 @@ def build_trade_decision(
         event_context=event_context,
         macro_context=macro_context,
         portfolio_risk_context=portfolio_risk_context,
+        posture_context=posture_context,
     )
     authority = _decision_authority(
         scenario_context,
@@ -105,8 +115,17 @@ def build_trade_decision(
                 "one_month_fragile_upside_probability": scenario_context[
                     "fragile_upside_probability"
                 ],
+                "one_month_risk_on_probability": scenario_context["risk_on_probability"],
+                "constructive_scenario_probability": scenario_context["constructive_probability"],
                 "event_pressure": event_context["event_pressure"],
                 "macro_pressure": macro_context["macro_pressure"],
+                "posture_calibration_status": posture_context["status"],
+                "posture_calibration_signal": posture_context["signal"],
+                "posture_calibration_note": posture_context["detail"],
+                "current_risk_asset_weight": posture_context["current_risk_asset_weight"],
+                "target_risk_asset_weight": posture_context["target_risk_asset_weight"],
+                "target_defensive_weight": posture_context["target_defensive_weight"],
+                "opportunity_pressure": posture_context["opportunity_pressure"],
                 "portfolio_risk_level": portfolio_risk_context["portfolio_risk_level"],
                 "portfolio_constraints": portfolio_risk_context["applied_constraints"],
                 "portfolio_expected_shortfall_95": portfolio_risk_context[
@@ -125,6 +144,7 @@ def build_trade_decision(
         event_context=event_context,
         macro_context=macro_context,
         portfolio_risk_context=portfolio_risk_context,
+        posture_context=posture_context,
         news_monitor=news_monitor,
     )
     scenario_links = _scenario_links(current_state.scenario_lattice)
@@ -144,6 +164,8 @@ def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
             "risk_off_probability": 0.0,
             "transition_probability": 0.0,
             "fragile_upside_probability": 0.0,
+            "risk_on_probability": 0.0,
+            "constructive_probability": 0.0,
             "top_scenarios": (),
             "evidence": "No scenario lattice available.",
         }
@@ -160,6 +182,10 @@ def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
     )
     fragile_probability = float(
         (one_month.loc[risk_bucket == "risk_on_fragile", "probability"]).sum()
+    )
+    risk_on_probability = float((one_month.loc[risk_bucket == "risk_on", "probability"]).sum())
+    constructive_probability = float(
+        np.clip(risk_on_probability + 0.50 * fragile_probability, 0.0, 1.0)
     )
     risk_multiplier = 1.0 - 0.55 * risk_off_probability
     risk_multiplier -= 0.20 * transition_probability
@@ -179,6 +205,8 @@ def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
         "risk_off_probability": risk_off_probability,
         "transition_probability": transition_probability,
         "fragile_upside_probability": fragile_probability,
+        "risk_on_probability": risk_on_probability,
+        "constructive_probability": constructive_probability,
         "top_scenarios": top_scenarios,
         "evidence": evidence,
     }
@@ -400,6 +428,140 @@ def _recommended_action(position_plan: pd.DataFrame, risk_status: str) -> str:
     return "HOLD"
 
 
+def _posture_calibration_context(
+    *,
+    current_state: CurrentStateRun,
+    scenario_context: dict[str, object],
+    event_context: dict[str, object],
+    macro_context: dict[str, object],
+    position_plan: pd.DataFrame,
+    defensive_ticker: str,
+    risk_budget_multiplier: float,
+) -> dict[str, object]:
+    current_risk_asset_weight = _risk_asset_weight(
+        position_plan,
+        weight_column="current_weight",
+        defensive_ticker=defensive_ticker,
+    )
+    target_risk_asset_weight = _risk_asset_weight(
+        position_plan,
+        weight_column="scenario_adjusted_weight",
+        defensive_ticker=defensive_ticker,
+    )
+    target_defensive_weight = _ticker_weight(
+        position_plan,
+        weight_column="scenario_adjusted_weight",
+        ticker=defensive_ticker,
+    )
+    risk_reduction = max(0.0, current_risk_asset_weight - target_risk_asset_weight)
+    risk_off_probability = _as_float(scenario_context["risk_off_probability"])
+    transition_probability = _as_float(scenario_context["transition_probability"])
+    fragile_probability = _as_float(scenario_context["fragile_upside_probability"])
+    risk_on_probability = _as_float(scenario_context["risk_on_probability"])
+    constructive_probability = _as_float(scenario_context["constructive_probability"])
+    event_pressure = _as_float(event_context["event_pressure"])
+    macro_pressure = _as_float(macro_context["macro_pressure"])
+    opportunity_pressure = float(
+        np.clip(
+            risk_on_probability
+            + fragile_probability
+            + 0.50 * transition_probability
+            - risk_off_probability
+            - event_pressure
+            - macro_pressure,
+            0.0,
+            1.0,
+        )
+    )
+
+    status = "balanced"
+    signal = "No bearish-bias warning"
+    detail = (
+        "Risk sizing is not materially defensive relative to current scenario, event, "
+        "macro, and price-risk evidence."
+    )
+    if current_state.risk_status in {"red", "orange"} or risk_off_probability >= 0.35:
+        status = "defense_justified"
+        signal = "Defensive posture supported"
+        detail = (
+            "Risk-off, orange/red market state, or left-tail scenario pressure is large enough "
+            "that defensive sizing is not treated as psychological bearishness."
+        )
+    elif event_pressure >= 0.12:
+        status = "event_defense_review"
+        signal = "Event-driven defense"
+        detail = (
+            "Current event pressure is the main reason for smaller sizing. Re-risking should wait "
+            "for tradable confirmation rather than narrative comfort."
+        )
+    elif (
+        risk_budget_multiplier <= 0.75
+        and opportunity_pressure >= 0.45
+        and constructive_probability >= risk_off_probability + 0.15
+    ):
+        status = "under_risk_review"
+        signal = "Possible under-risking"
+        detail = (
+            "Constructive or fragile-upside scenario weight is high relative to risk-off pressure. "
+            "Do not reduce risk further without checking whether price, breadth, and credit are "
+            "actually confirming deterioration."
+        )
+    elif (
+        risk_reduction >= 0.10
+        and opportunity_pressure >= 0.35
+        and current_state.risk_status in {"green", "yellow"}
+    ):
+        status = "opportunity_cost_watch"
+        signal = "Opportunity-cost watch"
+        detail = (
+            "The target posture cuts risk meaningfully while medium-term upside evidence remains "
+            "plausible. Treat the trade as a review item, not a reflexive de-risk."
+        )
+    elif constructive_probability >= 0.45 and target_risk_asset_weight >= (
+        current_risk_asset_weight - 0.05
+    ):
+        status = "upside_participation_ok"
+        signal = "Upside participation intact"
+        detail = (
+            "Constructive scenario evidence is being allowed to participate; the system is not "
+            "currently over-suppressing risk."
+        )
+
+    return {
+        "status": status,
+        "signal": signal,
+        "detail": detail,
+        "current_risk_asset_weight": current_risk_asset_weight,
+        "target_risk_asset_weight": target_risk_asset_weight,
+        "target_defensive_weight": target_defensive_weight,
+        "risk_reduction": risk_reduction,
+        "opportunity_pressure": opportunity_pressure,
+    }
+
+
+def _risk_asset_weight(
+    position_plan: pd.DataFrame,
+    *,
+    weight_column: str,
+    defensive_ticker: str,
+) -> float:
+    if position_plan.empty or weight_column not in position_plan or "ticker" not in position_plan:
+        return 0.0
+    risk_rows = position_plan[
+        position_plan["ticker"].astype(str).str.upper() != defensive_ticker.upper()
+    ]
+    return float(risk_rows[weight_column].clip(lower=0.0).sum())
+
+
+def _ticker_weight(position_plan: pd.DataFrame, *, weight_column: str, ticker: str) -> float:
+    if position_plan.empty or weight_column not in position_plan or "ticker" not in position_plan:
+        return 0.0
+    rows = position_plan[position_plan["ticker"].astype(str).str.upper() == ticker.upper()]
+    if rows.empty:
+        return 0.0
+    return float(rows[weight_column].clip(lower=0.0).sum())
+
+
 def _human_explanation(
     *,
     action: str,
@@ -410,6 +572,7 @@ def _human_explanation(
     event_context: dict[str, object],
     macro_context: dict[str, object],
     portfolio_risk_context: dict[str, object],
+    posture_context: dict[str, object],
 ) -> str:
     base_position = _format_weight_vector(base_weights)
     adjusted_position = _format_weight_vector(adjusted_weights)
@@ -417,6 +580,7 @@ def _human_explanation(
     event_evidence = str(event_context["evidence"])
     macro_evidence = str(macro_context["evidence"])
     portfolio_risk_evidence = str(portfolio_risk_context["evidence"])
+    posture_evidence = str(posture_context["detail"])
     if action in {"REDUCE_RISK", "REVIEW_REDUCE_RISK"}:
         verb = "review reducing risk toward"
     elif action == "REVIEW_ADD_RISK":
@@ -428,7 +592,8 @@ def _human_explanation(
         f"the one-month scenario mix is {top_scenarios}, and current event pressure is {event_evidence}, "
         f"{verb} {adjusted_position}. Base systematic position is {base_position}. "
         f"Portfolio risk engine says: {portfolio_risk_evidence} "
-        f"Macro inclusion tests say: {macro_evidence}"
+        f"Macro inclusion tests say: {macro_evidence} "
+        f"Posture calibration says: {posture_evidence}"
     )
 
 
@@ -461,6 +626,7 @@ def _evidence_table(
     event_context: dict[str, object],
     macro_context: dict[str, object],
     portfolio_risk_context: dict[str, object],
+    posture_context: dict[str, object],
     news_monitor: NewsMonitorRun,
 ) -> pd.DataFrame:
     rows = [
@@ -493,6 +659,12 @@ def _evidence_table(
             "signal": str(portfolio_risk_context["portfolio_risk_level"]),
             "impact": "checks factor, beta, tail, stress, correlation, and constraint risk",
             "detail": str(portfolio_risk_context["evidence"]),
+        },
+        {
+            "evidence_type": "posture_calibration",
+            "signal": str(posture_context["signal"]),
+            "impact": "checks whether defensive sizing may be over-bearish",
+            "detail": str(posture_context["detail"]),
         },
     ]
     if not news_monitor.triage.empty:

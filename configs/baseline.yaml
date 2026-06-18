@@ -224,6 +224,42 @@ strategies:
   buy_hold_qqq:
     type: buy_hold
     tickers: [QQQ]
+  i41_ref_us_60_40:
+    type: fixed_allocation
+    tickers: [SPY, AGG]
+    allocation_weights: {SPY: 0.60, AGG: 0.40}
+  i41_ref_us_80_20:
+    type: fixed_allocation
+    tickers: [SPY, AGG]
+    allocation_weights: {SPY: 0.80, AGG: 0.20}
+  i41_ref_us_90_10:
+    type: fixed_allocation
+    tickers: [SPY, AGG]
+    allocation_weights: {SPY: 0.90, AGG: 0.10}
+  i41_ref_global_three_fund_80_20:
+    type: fixed_allocation
+    tickers: [SPY, EFA, EEM, AGG]
+    allocation_weights: {SPY: 0.48, EFA: 0.24, EEM: 0.08, AGG: 0.20}
+  i41_ref_global_three_fund_60_40:
+    type: fixed_allocation
+    tickers: [SPY, EFA, EEM, AGG]
+    allocation_weights: {SPY: 0.36, EFA: 0.18, EEM: 0.06, AGG: 0.40}
+  i41_ref_permanent_portfolio:
+    type: fixed_allocation
+    tickers: [SPY, TLT, GLD, SHY]
+    allocation_weights: {SPY: 0.25, TLT: 0.25, GLD: 0.25, SHY: 0.25}
+  i41_ref_golden_butterfly:
+    type: fixed_allocation
+    tickers: [SPY, IWM, TLT, SHY, GLD]
+    allocation_weights: {SPY: 0.20, IWM: 0.20, TLT: 0.20, SHY: 0.20, GLD: 0.20}
+  i41_ref_all_weather:
+    type: fixed_allocation
+    tickers: [SPY, TLT, IEF, GLD, DBC]
+    allocation_weights: {SPY: 0.30, TLT: 0.40, IEF: 0.15, GLD: 0.075, DBC: 0.075}
+  i41_ref_growth_cash_barbell:
+    type: fixed_allocation
+    tickers: [QQQ, SPY, BIL]
+    allocation_weights: {QQQ: 0.50, SPY: 0.30, BIL: 0.20}
   absolute_momentum_spy:
     type: absolute_momentum
     tickers: [SPY]

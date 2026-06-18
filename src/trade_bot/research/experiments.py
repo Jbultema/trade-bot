@@ -215,6 +215,12 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _broad_scenario_proxy_candidates()
     if iteration == 21:
         return _operating_system_candidates()
+    if iteration == 41:
+        return _reference_portfolio_candidates()
+    if 42 <= iteration <= 49:
+        return _active_trading_candidates(iteration)
+    if 50 <= iteration <= 54:
+        return _final_deep_wide_candidates(iteration)
     return None
 
 
@@ -859,6 +865,2250 @@ def _broad_scenario_proxy_candidates() -> tuple[ExperimentCandidate, ...]:
     )
 
 
+def _active_trading_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    batches = {
+        42: (
+            _active_dual_candidate(
+                name="i42_active_fast_core_single",
+                family="active_cross_asset",
+                hypothesis=(
+                    "Daily single-winner cross-asset rotation tests whether very fast leadership "
+                    "changes can beat slower weekly systems after next-day lag and costs."
+                ),
+                tickers=["SPY", "QQQ", "IWM", "RSP", "GLD", "TLT", "IEF", "DBC", "UUP"],
+                lookback_days=21,
+                skip_days=0,
+                top_n=1,
+                trend_filter_days=42,
+                max_asset_weight=0.65,
+            ),
+            _active_dual_candidate(
+                name="i42_active_fast_core_pair_invvol",
+                family="active_cross_asset",
+                hypothesis=(
+                    "A two-asset fast cross-asset sleeve may keep responsiveness while reducing "
+                    "the whipsaw of single-winner rotation."
+                ),
+                tickers=["SPY", "QQQ", "IWM", "RSP", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=30,
+                skip_days=2,
+                top_n=2,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.50,
+            ),
+            _active_dual_candidate(
+                name="i42_active_fast_sector_top3",
+                family="active_sector_rotation",
+                hypothesis=(
+                    "Short-horizon sector leadership may catch transitions before broad indexes "
+                    "confirm the move."
+                ),
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLY",
+                    "XLP",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLU",
+                    "XLB",
+                    "XLRE",
+                    "XLC",
+                    "GLD",
+                    "TLT",
+                ],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.40,
+            ),
+            _active_dual_candidate(
+                name="i42_active_fast_factor_top2",
+                family="active_factor_rotation",
+                hypothesis=(
+                    "Fast factor rotation tests whether momentum, quality, value, dividend, and "
+                    "low-volatility leadership changes are more stable than single sectors."
+                ),
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "MTUM",
+                    "VTV",
+                    "VUG",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "SPMO",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=2,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=63,
+                max_asset_weight=0.45,
+            ),
+            _active_dual_candidate(
+                name="i42_active_policy_barbell",
+                family="active_policy_shock",
+                hypothesis=(
+                    "A fast policy-shock barbell can move among equities, gold, duration, energy, "
+                    "commodities, and dollar strength without forcing equity exposure."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "GLD", "TLT", "IEF", "USO", "BNO", "DBC", "UUP"],
+                lookback_days=21,
+                skip_days=2,
+                top_n=3,
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.35,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_absolute_candidate(
+                name="i42_active_fast_absolute_trend",
+                family="active_trend_following",
+                hypothesis=(
+                    "A 42-day absolute trend basket is the simple active off-ramp benchmark for "
+                    "daily monitoring."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+                moving_average_days=42,
+            ),
+        ),
+        43: (
+            _active_dual_candidate(
+                name="i43_active_ai_beta_sprint",
+                family="active_ai_beta",
+                hypothesis=(
+                    "AI beta may still be tradable if treated as a fast satellite with strict "
+                    "trend, return, volatility, and concentration gates."
+                ),
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "AMZN",
+                    "PLTR",
+                    "ARM",
+                ],
+                lookback_days=21,
+                skip_days=0,
+                top_n=2,
+                min_return=0.02,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=42,
+                max_asset_weight=0.35,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.16,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+            ),
+            _active_dual_candidate(
+                name="i43_active_ai_infra_switch",
+                family="active_ai_infrastructure",
+                hypothesis=(
+                    "If AI software economics sour but capex continues, power, grid, and hardware "
+                    "beneficiaries may become the active expression."
+                ),
+                tickers=[
+                    "VRT",
+                    "ETN",
+                    "PWR",
+                    "CEG",
+                    "GEV",
+                    "NRG",
+                    "CCJ",
+                    "SMH",
+                    "SOXX",
+                    "XLI",
+                    "XLU",
+                ],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                min_return=0.01,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.30,
+            ),
+            _active_dual_candidate(
+                name="i43_active_hardware_software_switch",
+                family="active_ai_beta",
+                hypothesis=(
+                    "A hardware/software switch tests whether semis, cloud, software, or broad QQQ "
+                    "leadership is the better active AI proxy."
+                ),
+                tickers=[
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "SKYY",
+                    "CLOU",
+                    "QQQ",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "ORCL",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                min_return=0.01,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i43_active_mega_cap_escape",
+                family="active_mega_cap_platform",
+                hypothesis=(
+                    "Mega-cap platform rotation can keep exposure to winners while escaping to cash "
+                    "when platform leadership fails."
+                ),
+                tickers=[
+                    "AAPL",
+                    "MSFT",
+                    "NVDA",
+                    "GOOGL",
+                    "AMZN",
+                    "META",
+                    "AVGO",
+                    "TSLA",
+                    "BRK-B",
+                    "JPM",
+                    "NFLX",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                min_return=0.015,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.14,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+            ),
+            _active_dual_candidate(
+                name="i43_active_spec_liquidity_proxy",
+                family="active_speculative_liquidity",
+                hypothesis=(
+                    "Speculative liquidity can be tested as a small, strict satellite through crypto "
+                    "and innovation proxies, but only with tight trend gates."
+                ),
+                tickers=["ARKK", "IBIT", "FBTC", "BITB", "ETHE", "TSLA", "QQQ", "GLD", "TLT"],
+                lookback_days=21,
+                skip_days=0,
+                top_n=2,
+                min_return=0.04,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=42,
+                max_asset_weight=0.25,
+            ),
+            _active_dual_candidate(
+                name="i43_active_ai_fragile_scenario",
+                family="active_ai_beta",
+                hypothesis=(
+                    "Fast AI beta should be tested with scenario sizing so crowded upside gets cut "
+                    "when breadth, credit, dollar, or volatility pressure rises."
+                ),
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "AMZN",
+                    "PLTR",
+                ],
+                lookback_days=21,
+                skip_days=2,
+                top_n=3,
+                min_return=0.02,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=42,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+        ),
+        44: (
+            _active_dual_candidate(
+                name="i44_active_credit_stress_rotation",
+                family="active_credit_gate",
+                hypothesis=(
+                    "Fast credit and rates rotation tests whether loan, high-yield, bank, duration, "
+                    "and gold leadership gives an earlier off-ramp than equities."
+                ),
+                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "KRE", "KBE", "IEF", "TLT", "GLD"],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i44_active_defensive_assets_fast",
+                family="active_defensive_barbell",
+                hypothesis=(
+                    "A defensive-only active sleeve tests whether gold, duration, T-bill-like bonds, "
+                    "tips, and dollar strength can preserve capital during sharp transitions."
+                ),
+                tickers=["GLD", "IAU", "TLT", "IEF", "SHY", "TIP", "UUP", "FXY"],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.40,
+            ),
+            _active_dual_candidate(
+                name="i44_active_credit_gate_equity",
+                family="active_credit_gate",
+                hypothesis=(
+                    "Equity exposure should shrink quickly if credit/rates proxies beat equity risk "
+                    "assets on short-horizon risk-adjusted momentum."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "HYG", "LQD", "KRE", "IEF", "TLT", "GLD"],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                min_return=0.0,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i44_active_drawdown_throttle_core",
+                family="active_risk_control",
+                hypothesis=(
+                    "Fast cross-asset rotation may become viable only if strategy drawdown quickly "
+                    "forces a lower-risk posture."
+                ),
+                tickers=["SPY", "QQQ", "IWM", "RSP", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=2,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.40,
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=63,
+                    max_drawdown=-0.05,
+                    risk_multiplier=0.25,
+                ),
+            ),
+            _active_dual_candidate(
+                name="i44_active_vol10_core_fast",
+                family="active_risk_control",
+                hypothesis=(
+                    "Daily active rotation with a 10% volatility target tests whether turnover can be "
+                    "converted into smoother compounding rather than more left-tail risk."
+                ),
+                tickers=["SPY", "QQQ", "IWM", "RSP", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=42,
+                skip_days=2,
+                top_n=2,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.40,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.10,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+            ),
+            _active_dual_candidate(
+                name="i44_active_defensive_scenario_core",
+                family="active_risk_control",
+                hypothesis=(
+                    "Scenario sizing should improve active trading only if it cuts risk before "
+                    "price-confirmed drawdowns are fully visible."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "GLD", "TLT", "IEF", "UUP", "DBC"],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.35,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        45: (
+            _active_dual_candidate(
+                name="i45_active_broadening_small_value",
+                family="active_reflation_breadth",
+                hypothesis=(
+                    "Fast small-cap, value, bank, industrial, material, and energy rotation tests "
+                    "whether broadening regimes can beat QQQ dependence."
+                ),
+                tickers=["IWM", "RSP", "VTV", "XLF", "KRE", "KBE", "XLI", "XLB", "XLE", "DBC"],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i45_active_bank_industrial_materials",
+                family="active_reflation_breadth",
+                hypothesis=(
+                    "Cyclical breadth may show up first in banks, transports, industrials, housing, "
+                    "and materials before broad equity indexes re-rate."
+                ),
+                tickers=["KRE", "KBE", "XLF", "XLI", "IYT", "XHB", "XLB", "XME", "RSP", "IWM"],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i45_active_energy_inflation_shock",
+                family="active_commodity_shock",
+                hypothesis=(
+                    "Oil and inflation shocks may be tradable through fast energy, commodity, gold, "
+                    "and dollar leadership."
+                ),
+                tickers=["XLE", "XOP", "OIH", "USO", "BNO", "DBC", "DBA", "GLD", "UUP", "TLT"],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                min_return=0.01,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i45_active_consumer_housing_pivot",
+                family="active_cyclical_pivot",
+                hypothesis=(
+                    "Housing, retail, discretionary, transports, and equal-weight breadth can act as "
+                    "a fast risk-on/risk-off economic pulse."
+                ),
+                tickers=["XHB", "XRT", "XLY", "IYT", "XLI", "RSP", "IWM", "GLD", "IEF"],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i45_active_quality_or_broadening",
+                family="active_breadth_quality_switch",
+                hypothesis=(
+                    "If growth leadership fades, the system should choose between quality defense "
+                    "and cyclical broadening instead of defaulting to bearish cash."
+                ),
+                tickers=["QUAL", "USMV", "SCHD", "VIG", "COWZ", "IWM", "RSP", "VTV", "XLF", "XLI"],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=63,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i45_active_reflation_scenario_sized",
+                family="active_reflation_breadth",
+                hypothesis=(
+                    "A reflation/broadening sleeve should be allowed to risk up, but scenario sizing "
+                    "must cap it when credit or liquidity pressure contradicts the move."
+                ),
+                tickers=["IWM", "RSP", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "DBC", "GLD"],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        46: (
+            _active_dual_candidate(
+                name="i46_active_global_equity_rotation",
+                family="active_global_rotation",
+                hypothesis=(
+                    "Fast global equity rotation tests whether ex-U.S. and country leadership can "
+                    "replace U.S. mega-cap dependence during regime shifts."
+                ),
+                tickers=[
+                    "SPY",
+                    "RSP",
+                    "EFA",
+                    "EEM",
+                    "VEA",
+                    "VWO",
+                    "VGK",
+                    "EWJ",
+                    "INDA",
+                    "EWZ",
+                    "EWC",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i46_active_dollar_shock_defense",
+                family="active_global_macro",
+                hypothesis=(
+                    "Dollar strength, yen strength, gold, and duration may be the active defense "
+                    "when global equity risk deteriorates."
+                ),
+                tickers=["UUP", "FXY", "FXF", "FXE", "GLD", "TLT", "IEF", "TIP", "SHY"],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i46_active_commodity_currency_cross",
+                family="active_global_macro",
+                hypothesis=(
+                    "Commodity, gold, oil, dollar, and duration leadership can capture macro "
+                    "transition trades without shorting."
+                ),
+                tickers=["GLD", "IAU", "SLV", "CPER", "USO", "BNO", "DBC", "DBA", "UUP", "TLT"],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                min_return=0.0,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i46_active_em_rebound_probe",
+                family="active_global_rotation",
+                hypothesis=(
+                    "Emerging market and international rebounds may require faster recognition than "
+                    "a 6-12 month momentum system can provide."
+                ),
+                tickers=["EEM", "VWO", "MCHI", "INDA", "EWZ", "EWW", "EWA", "EWJ", "SPY", "UUP"],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                min_return=0.01,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i46_active_global_shock_barbell",
+                family="active_global_macro",
+                hypothesis=(
+                    "A global shock barbell should move among U.S. risk, ex-U.S. risk, energy, gold, "
+                    "dollar, and duration depending on current leadership."
+                ),
+                tickers=["SPY", "QQQ", "EFA", "EEM", "GLD", "USO", "DBC", "UUP", "TLT", "IEF"],
+                lookback_days=21,
+                skip_days=2,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=42,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i46_active_global_scenario_sized",
+                family="active_global_rotation",
+                hypothesis=(
+                    "Global active rotation should only be promoted if scenario sizing improves "
+                    "left-tail behavior when dollar, oil, credit, or breadth pressure rises."
+                ),
+                tickers=[
+                    "SPY",
+                    "RSP",
+                    "EFA",
+                    "EEM",
+                    "VWO",
+                    "VGK",
+                    "INDA",
+                    "EWZ",
+                    "GLD",
+                    "UUP",
+                    "DBC",
+                    "TLT",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        47: (
+            _active_dual_candidate(
+                name="i47_active_sector_breadth_top4",
+                family="active_sector_rotation",
+                hypothesis=(
+                    "A broader top-four sector basket may capture active sector leadership without "
+                    "excessive single-sector churn."
+                ),
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLY",
+                    "XLP",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLU",
+                    "XLB",
+                    "XLRE",
+                    "XLC",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+            ),
+            _active_dual_candidate(
+                name="i47_active_factor_breadth_top4",
+                family="active_factor_rotation",
+                hypothesis=(
+                    "A broader factor basket tests whether active trading can be less brittle when "
+                    "the system spreads across multiple factor winners."
+                ),
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "MTUM",
+                    "VTV",
+                    "VUG",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "SPMO",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+            ),
+            _active_dual_candidate(
+                name="i47_active_sector_factor_combo",
+                family="active_breadth_combo",
+                hypothesis=(
+                    "Combining sectors and factors tests whether active breadth signals are stronger "
+                    "than either taxonomy alone."
+                ),
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLP",
+                    "QUAL",
+                    "USMV",
+                    "MTUM",
+                    "VTV",
+                    "COWZ",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+            ),
+            _active_dual_candidate(
+                name="i47_active_lowvol_dividend_defense",
+                family="active_defensive_equity",
+                hypothesis=(
+                    "Low-volatility, dividend, quality, and defensive sector leadership can keep the "
+                    "system invested without taking full QQQ-style beta."
+                ),
+                tickers=[
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "QUAL",
+                    "MOAT",
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                    "GLD",
+                    "IEF",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+            ),
+            _active_dual_candidate(
+                name="i47_active_high_beta_with_escape",
+                family="active_high_beta_rotation",
+                hypothesis=(
+                    "High-beta leadership can be tested only with strict return and trend gates so it "
+                    "does not become blind risk chasing."
+                ),
+                tickers=[
+                    "SPHB",
+                    "MTUM",
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "ARKK",
+                    "IWM",
+                    "XLY",
+                    "XLK",
+                    "GLD",
+                    "TLT",
+                ],
+                lookback_days=21,
+                skip_days=0,
+                top_n=3,
+                min_return=0.02,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=42,
+                max_asset_weight=0.30,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.14,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+            ),
+            _active_dual_candidate(
+                name="i47_active_breadth_scenario_sized",
+                family="active_breadth_combo",
+                hypothesis=(
+                    "Scenario sizing should cut broad active sector/factor exposure when breadth or "
+                    "credit contradicts the apparent leadership."
+                ),
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "QUAL",
+                    "USMV",
+                    "MTUM",
+                    "VTV",
+                    "COWZ",
+                    "GLD",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        48: (
+            _active_dual_candidate(
+                name="i48_active_whipsaw_core_42d",
+                family="active_whipsaw_control",
+                hypothesis=(
+                    "A slightly slower 42-day active core tests whether daily monitoring can be useful "
+                    "without reacting to every short-lived move."
+                ),
+                tickers=["SPY", "QQQ", "IWM", "RSP", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=84,
+                max_asset_weight=0.35,
+            ),
+            _active_dual_candidate(
+                name="i48_active_whipsaw_sector_63d",
+                family="active_whipsaw_control",
+                hypothesis=(
+                    "A 63-day sector system is the medium-active alternative to daily fast sector "
+                    "chasing."
+                ),
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLY",
+                    "XLP",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLU",
+                    "XLB",
+                    "XLRE",
+                    "XLC",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.30,
+            ),
+            _active_dual_candidate(
+                name="i48_active_whipsaw_ai_42d_vol",
+                family="active_whipsaw_control",
+                hypothesis=(
+                    "AI beta may need enough speed to exit bubbles but enough smoothing to avoid "
+                    "daily narrative whipsaw."
+                ),
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "AMZN",
+                    "PLTR",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                min_return=0.02,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=84,
+                max_asset_weight=0.30,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.12,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+            ),
+            _active_dual_candidate(
+                name="i48_active_whipsaw_credit_gate",
+                family="active_whipsaw_control",
+                hypothesis=(
+                    "Credit-gated active rotation should avoid overtrading by requiring a 42-day "
+                    "risk-adjusted signal and trend confirmation."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "KRE", "GLD", "TLT", "IEF", "UUP"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=84,
+                max_asset_weight=0.35,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i48_active_whipsaw_drawdown_guard",
+                family="active_whipsaw_control",
+                hypothesis=(
+                    "A drawdown guard may allow active systems to stay responsive while limiting "
+                    "damage after repeated false breaks."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=84,
+                max_asset_weight=0.35,
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84,
+                    max_drawdown=-0.06,
+                    risk_multiplier=0.30,
+                ),
+            ),
+            _active_dual_candidate(
+                name="i48_active_whipsaw_low_effort",
+                family="active_whipsaw_control",
+                hypothesis=(
+                    "A lower-effort active strategy should still be evaluated because it may deliver "
+                    "most of the benefit with fewer trade decisions."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=63,
+                skip_days=10,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.35,
+            ),
+        ),
+        49: (
+            _active_dual_candidate(
+                name="i49_active_os_cross_asset_scenario",
+                family="active_operating_system",
+                hypothesis=(
+                    "The candidate active core combines daily monitoring, short momentum, inverse-vol "
+                    "positioning, trend confirmation, scenario sizing, and volatility throttling."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                    "UUP",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.12,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i49_active_os_ai_escape_scenario",
+                family="active_operating_system",
+                hypothesis=(
+                    "The active AI operating candidate only works if fast AI leadership survives "
+                    "trend, risk-adjusted rank, size caps, and fragile-upside scenario cuts."
+                ),
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "AMZN",
+                    "PLTR",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                min_return=0.02,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.14,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _active_dual_candidate(
+                name="i49_active_os_credit_gate_scenario",
+                family="active_operating_system",
+                hypothesis=(
+                    "The active credit-gated candidate gives the system permission to pivot among "
+                    "equity, credit, duration, gold, dollar, or cash as risk appetite changes."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "KRE",
+                    "BKLN",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "UUP",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i49_active_os_reflation_scenario",
+                family="active_operating_system",
+                hypothesis=(
+                    "The active reflation candidate tests whether broadening can be bought quickly "
+                    "without ignoring scenario pressure."
+                ),
+                tickers=[
+                    "IWM",
+                    "RSP",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "DBC",
+                    "GLD",
+                    "IEF",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i49_active_os_global_shock_scenario",
+                family="active_operating_system",
+                hypothesis=(
+                    "The active global shock candidate tests whether global equities, commodities, "
+                    "gold, dollar, and duration create a more transition-aware operating sleeve."
+                ),
+                tickers=[
+                    "SPY",
+                    "EFA",
+                    "EEM",
+                    "VWO",
+                    "INDA",
+                    "EWZ",
+                    "GLD",
+                    "DBC",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i49_active_os_sector_breadth_scenario",
+                family="active_operating_system",
+                hypothesis=(
+                    "The active sector/factor candidate tests whether breadth-aware leadership can "
+                    "be a practical challenger to current core systems."
+                ),
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "QUAL",
+                    "USMV",
+                    "MTUM",
+                    "VTV",
+                    "COWZ",
+                    "GLD",
+                ],
+                lookback_days=30,
+                skip_days=2,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=63,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_absolute_candidate(
+                name="i49_active_os_defensive_barbell",
+                family="active_operating_system",
+                hypothesis=(
+                    "The defensive active operating candidate provides a simple daily trend benchmark "
+                    "for capital preservation sleeves."
+                ),
+                tickers=["GLD", "IAU", "TLT", "IEF", "SHY", "TIP", "UUP", "FXY", "DBC"],
+                moving_average_days=63,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i49_active_os_low_effort_active",
+                family="active_operating_system",
+                hypothesis=(
+                    "The low-effort active candidate is included to test whether a slower active "
+                    "system captures most benefits with fewer trade changes."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=63,
+                skip_days=10,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.35,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+    }
+    return batches[iteration]
+
+
+def _final_deep_wide_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    role = "final_candidate"
+    phase = "final_deep_dive"
+    batches = {
+        50: (
+            _active_dual_candidate(
+                name="i50_final_canary_core_63d",
+                role=role,
+                phase=phase,
+                family="final_canary_core",
+                hypothesis=(
+                    "A not-too-twitchy canary core uses 63-day risk-adjusted leadership, trend "
+                    "confirmation, inverse-vol sizing, and scenario cuts to avoid QQQ forever risk."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                    "UUP",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=126,
+                max_asset_weight=0.35,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.12,
+                    lookback_days=63,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i50_final_weekly_cross_asset_low_churn",
+                role=role,
+                phase=phase,
+                family="final_low_churn_core",
+                hypothesis=(
+                    "A slower active cross-asset policy tests whether most active benefit survives "
+                    "with fewer trade changes and less human execution burden."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=126,
+                max_asset_weight=0.35,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i50_final_credit_canary_equity_gate",
+                role=role,
+                phase=phase,
+                family="final_credit_gate",
+                hypothesis=(
+                    "Credit and rates proxies compete directly with equities so worsening risk appetite "
+                    "can pull the system out before broad indexes fully break."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "KRE",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "UUP",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_absolute_candidate(
+                name="i50_final_absolute_multitrend_barbell",
+                role=role,
+                phase=phase,
+                family="final_trend_defense",
+                hypothesis=(
+                    "A multi-asset absolute trend barbell is the low-complexity off-ramp benchmark for "
+                    "the final curated shelf."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                    "UUP",
+                ],
+                moving_average_days=84,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i50_final_svxy_risk_appetite_probe",
+                role=role,
+                phase=phase,
+                family="final_risk_appetite_probe",
+                hypothesis=(
+                    "A constrained risk-appetite probe tests whether inverse-volatility, high-beta, "
+                    "and broad equity leadership adds useful signal without becoming a volatility bet."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "SPHB", "MTUM", "SVXY", "GLD", "TLT", "IEF", "BIL"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                min_return=0.01,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=84,
+                max_asset_weight=0.25,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.10,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i50_final_drawdown_guarded_core",
+                role=role,
+                phase=phase,
+                family="final_drawdown_guard",
+                hypothesis=(
+                    "Drawdown throttling is retested on a medium-active core to see whether it catches "
+                    "market transitions without overreacting to routine pullbacks."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "GLD", "TLT", "IEF", "DBC", "UUP"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=3,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.35,
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84,
+                    max_drawdown=-0.06,
+                    risk_multiplier=0.30,
+                ),
+            ),
+        ),
+        51: (
+            _active_dual_candidate(
+                name="i51_final_ai_escape_quality_gate",
+                role=role,
+                phase=phase,
+                family="final_ai_escape",
+                hypothesis=(
+                    "AI leadership is only allowed when it beats quality, low-vol, gold, and duration "
+                    "after risk adjustment and fragile-upside scenario cuts."
+                ),
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "QUAL",
+                    "USMV",
+                    "GLD",
+                    "TLT",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                min_return=0.02,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=84,
+                max_asset_weight=0.30,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.12,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _active_dual_candidate(
+                name="i51_final_ai_infra_power_grid",
+                role=role,
+                phase=phase,
+                family="final_ai_infrastructure",
+                hypothesis=(
+                    "If AI capex remains real but software economics wobble, power, grid, nuclear, "
+                    "industrial, and hardware beneficiaries should compete for the satellite sleeve."
+                ),
+                tickers=[
+                    "VRT",
+                    "ETN",
+                    "PWR",
+                    "CEG",
+                    "GEV",
+                    "NRG",
+                    "CCJ",
+                    "SMH",
+                    "SOXX",
+                    "XLI",
+                    "XLU",
+                    "GLD",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                min_return=0.01,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=84,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i51_final_hardware_software_platform_switch",
+                role=role,
+                phase=phase,
+                family="final_ai_platform_switch",
+                hypothesis=(
+                    "Hardware, cloud, software, mega-cap platforms, and QQQ are forced to compete so "
+                    "the system does not assume all AI beta is equivalent."
+                ),
+                tickers=[
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "SKYY",
+                    "CLOU",
+                    "QQQ",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "ORCL",
+                    "META",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=3,
+                min_return=0.01,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _active_dual_candidate(
+                name="i51_final_broadening_vs_ai_switch",
+                role=role,
+                phase=phase,
+                family="final_ai_broadening_switch",
+                hypothesis=(
+                    "A direct AI-versus-broadening contest tests whether leadership is leaving QQQ for "
+                    "small-cap, equal-weight, value, banks, industrials, or materials."
+                ),
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "COWZ",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=84,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i51_final_quality_income_escape",
+                role=role,
+                phase=phase,
+                family="final_defensive_equity",
+                hypothesis=(
+                    "Quality, dividends, cash-flow, moat, and low-volatility factors are tested as a "
+                    "less bearish way to de-risk without going entirely to cash."
+                ),
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                    "GLD",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=100,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i51_final_spec_liquidity_strict",
+                role=role,
+                phase=phase,
+                family="final_speculative_liquidity",
+                hypothesis=(
+                    "Crypto and innovation proxies are allowed only as a small strict satellite when "
+                    "risk-adjusted trend is strong enough to justify the effort."
+                ),
+                tickers=["ARKK", "IBIT", "FBTC", "BITB", "ETHE", "TSLA", "QQQ", "GLD", "TLT"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=2,
+                min_return=0.04,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=84,
+                max_asset_weight=0.20,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        52: (
+            _active_dual_candidate(
+                name="i52_final_policy_oil_hormuz_barbell",
+                role=role,
+                phase=phase,
+                family="final_policy_oil_shock",
+                hypothesis=(
+                    "Geopolitical/oil shocks should be tradable only through a barbell that can choose "
+                    "energy, commodities, gold, dollar, duration, broad equities, or cash."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "XLE",
+                    "XOP",
+                    "OIH",
+                    "USO",
+                    "BNO",
+                    "DBC",
+                    "GLD",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                min_return=0.0,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=84,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i52_final_dollar_liquidity_defense",
+                role=role,
+                phase=phase,
+                family="final_global_liquidity",
+                hypothesis=(
+                    "Dollar, yen, gold, duration, T-bill-like, and inflation-linked assets test a pure "
+                    "liquidity-defense sleeve for global stress."
+                ),
+                tickers=[
+                    "UUP",
+                    "FXY",
+                    "FXF",
+                    "FXE",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "SHY",
+                    "SGOV",
+                    "USFR",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=84,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i52_final_private_credit_bdc_warning",
+                role=role,
+                phase=phase,
+                family="final_private_credit",
+                hypothesis=(
+                    "BDC, senior-loan, CLO, high-yield, bank, and duration proxies test whether private "
+                    "credit stress can become an actionable early-warning sleeve."
+                ),
+                tickers=[
+                    "BIZD",
+                    "ARCC",
+                    "MAIN",
+                    "BXSL",
+                    "OBDC",
+                    "SRLN",
+                    "BKLN",
+                    "JAAA",
+                    "JBBB",
+                    "HYG",
+                    "LQD",
+                    "KRE",
+                    "IEF",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i52_final_rates_credit_equity_triangle",
+                role=role,
+                phase=phase,
+                family="final_rates_credit_triangle",
+                hypothesis=(
+                    "Equities, high yield, investment grade, duration, TIPS, and gold compete directly "
+                    "to identify whether the dominant regime is growth, credit stress, or rates relief."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "VCIT",
+                    "VCSH",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "GLD",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i52_final_global_ex_us_replacement",
+                role=role,
+                phase=phase,
+                family="final_global_rotation",
+                hypothesis=(
+                    "Ex-U.S. and country leadership is retested as a possible replacement for crowded "
+                    "U.S. mega-cap beta during market transitions."
+                ),
+                tickers=[
+                    "SPY",
+                    "RSP",
+                    "EFA",
+                    "EEM",
+                    "VEA",
+                    "VWO",
+                    "VGK",
+                    "EWJ",
+                    "INDA",
+                    "EWZ",
+                    "EWC",
+                    "UUP",
+                    "GLD",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i52_final_market_plumbing_probe",
+                role=role,
+                phase=phase,
+                family="final_market_plumbing",
+                hypothesis=(
+                    "A market-plumbing proxy tests whether short duration, credit quality, munis, gold, "
+                    "and volatility-linked risk appetite provide useful signals around liquidity shocks."
+                ),
+                tickers=[
+                    "SGOV",
+                    "USFR",
+                    "SHY",
+                    "VCSH",
+                    "VCIT",
+                    "MUB",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "SVXY",
+                    "SPY",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=84,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        53: (
+            _active_dual_candidate(
+                name="i53_final_sector_factor_blend_low_churn",
+                role=role,
+                phase=phase,
+                family="final_sector_factor_blend",
+                hypothesis=(
+                    "A sector/factor blend tests whether leadership breadth can be harvested with "
+                    "less single-sector concentration and fewer trade flips."
+                ),
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLP",
+                    "QUAL",
+                    "USMV",
+                    "MTUM",
+                    "VTV",
+                    "COWZ",
+                    "GLD",
+                ],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=126,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i53_final_breadth_reflation_quality_switch",
+                role=role,
+                phase=phase,
+                family="final_breadth_reflation",
+                hypothesis=(
+                    "The system should be able to switch among quality defense, cyclical broadening, "
+                    "and cash-like assets without making a binary bearish call."
+                ),
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "XLF",
+                    "XLI",
+                    "XLB",
+                    "GLD",
+                    "IEF",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i53_final_lowvol_dividend_cashflow",
+                role=role,
+                phase=phase,
+                family="final_defensive_equity",
+                hypothesis=(
+                    "Low-vol, dividend, quality, cash-flow, and moat factors are tested as a practical "
+                    "medium-term defensive equity sleeve."
+                ),
+                tickers=[
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "QUAL",
+                    "COWZ",
+                    "MOAT",
+                    "VTV",
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                ],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=126,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i53_final_barbell_growth_defense",
+                role=role,
+                phase=phase,
+                family="final_growth_defense_barbell",
+                hypothesis=(
+                    "A growth/defense barbell tests whether QQQ and semis can coexist with gold, "
+                    "duration, quality, and cash-like protection in one operating policy."
+                ),
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "SPY",
+                    "RSP",
+                    "QUAL",
+                    "USMV",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "BIL",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.01,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.11,
+                    lookback_days=63,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i53_final_vol_target_factor_core",
+                role=role,
+                phase=phase,
+                family="final_vol_target_core",
+                hypothesis=(
+                    "Volatility targeting is retested on a diversified factor/sector core to see if "
+                    "smooth compounding beats raw tactical return."
+                ),
+                tickers=[
+                    "SPY",
+                    "RSP",
+                    "QUAL",
+                    "USMV",
+                    "MTUM",
+                    "VTV",
+                    "COWZ",
+                    "XLK",
+                    "XLF",
+                    "XLV",
+                    "GLD",
+                    "IEF",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.10,
+                    lookback_days=63,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i53_final_cash_plus_risk_reentry",
+                role=role,
+                phase=phase,
+                family="final_reentry_system",
+                hypothesis=(
+                    "A cash-plus-risk reentry system tests whether the bot can sit in T-bill-like assets "
+                    "and re-risk only when broad leadership earns it."
+                ),
+                tickers=[
+                    "BIL",
+                    "SGOV",
+                    "USFR",
+                    "SHY",
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "GLD",
+                    "IEF",
+                    "DBC",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.0,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        54: (
+            _active_dual_candidate(
+                name="i54_final_curated_candidate_core",
+                role=role,
+                phase=phase,
+                family="final_curated_operating_system",
+                hypothesis=(
+                    "A final candidate core combines medium-active cross-asset selection, trend, "
+                    "inverse-vol sizing, volatility targeting, and balanced scenario sizing."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                    "UUP",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.30,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.12,
+                    lookback_days=63,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i54_final_curated_candidate_satellite_ai",
+                role=role,
+                phase=phase,
+                family="final_curated_operating_system",
+                hypothesis=(
+                    "A final AI satellite candidate keeps upside participation but cuts size through "
+                    "trend, concentration caps, volatility targeting, and fragile-AI scenario sizing."
+                ),
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "AMZN",
+                    "PLTR",
+                    "GLD",
+                    "TLT",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                min_return=0.02,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=84,
+                max_asset_weight=0.25,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.12,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _active_dual_candidate(
+                name="i54_final_curated_candidate_credit_macro",
+                role=role,
+                phase=phase,
+                family="final_curated_operating_system",
+                hypothesis=(
+                    "A final credit/macro candidate is included as the explicit off-ramp and non-QQQ "
+                    "transition sleeve."
+                ),
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "BKLN",
+                    "KRE",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "UUP",
+                    "DBC",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i54_final_curated_candidate_breadth",
+                role=role,
+                phase=phase,
+                family="final_curated_operating_system",
+                hypothesis=(
+                    "A final breadth candidate gives the system a non-mega-cap path if leadership rotates "
+                    "toward equal weight, small caps, value, banks, industrials, and materials."
+                ),
+                tickers=[
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "COWZ",
+                    "QUAL",
+                    "GLD",
+                    "IEF",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="i54_final_curated_candidate_defense",
+                role=role,
+                phase=phase,
+                family="final_curated_operating_system",
+                hypothesis=(
+                    "A final defensive candidate tests whether gold, duration, dollar, T-bill-like, and "
+                    "defensive equity factors can provide a practical left-tail sleeve."
+                ),
+                tickers=[
+                    "GLD",
+                    "IAU",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "SHY",
+                    "SGOV",
+                    "USFR",
+                    "UUP",
+                    "USMV",
+                    "SPLV",
+                    "XLU",
+                    "XLP",
+                ],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="i54_final_wild_spec_liquidity_micro_sleeve",
+                role=role,
+                phase=phase,
+                family="final_wild_probe",
+                hypothesis=(
+                    "A deliberately wild but capped liquidity sleeve tests whether crypto, innovation, "
+                    "solar, robotics, biotech, and high-beta proxies add useful early-cycle optionality."
+                ),
+                tickers=[
+                    "ARKK",
+                    "IBIT",
+                    "FBTC",
+                    "ETHE",
+                    "TAN",
+                    "BOTZ",
+                    "ROBO",
+                    "XBI",
+                    "SPHB",
+                    "QQQ",
+                    "GLD",
+                    "TLT",
+                ],
+                lookback_days=42,
+                skip_days=5,
+                top_n=3,
+                min_return=0.04,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=84,
+                max_asset_weight=0.20,
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.12,
+                    lookback_days=42,
+                    max_leverage=1.0,
+                ),
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+    }
+    return batches[iteration]
+
+
+def _active_dual_candidate(
+    *,
+    name: str,
+    family: str,
+    hypothesis: str,
+    tickers: list[str],
+    lookback_days: int,
+    skip_days: int,
+    top_n: int,
+    min_return: float = 0.0,
+    ranking_metric: str = "return",
+    weighting: str = "equal",
+    trend_filter_days: int | None = None,
+    max_asset_weight: float | None = None,
+    volatility_target: VolatilityTargetConfig | None = None,
+    drawdown_control: DrawdownControlConfig | None = None,
+    scenario_sizing: ScenarioSizingConfig | None = None,
+    role: str = "active_candidate",
+    phase: str = "active_trading",
+) -> ExperimentCandidate:
+    return _candidate(
+        name=name,
+        role=role,
+        phase=phase,
+        family=family,
+        hypothesis=hypothesis,
+        scenario_sizing=scenario_sizing,
+        strategy=StrategyConfig(
+            type="dual_momentum",
+            tickers=tickers,
+            lookback_days=lookback_days,
+            skip_days=skip_days,
+            top_n=top_n,
+            defensive_ticker="BIL",
+            min_return=min_return,
+            ranking_metric=ranking_metric,
+            weighting=weighting,
+            trend_filter_days=trend_filter_days,
+            max_asset_weight=max_asset_weight,
+            volatility_target=volatility_target,
+            drawdown_control=drawdown_control,
+        ),
+    )
+
+
+def _active_absolute_candidate(
+    *,
+    name: str,
+    family: str,
+    hypothesis: str,
+    tickers: list[str],
+    moving_average_days: int,
+    scenario_sizing: ScenarioSizingConfig | None = None,
+    role: str = "active_candidate",
+    phase: str = "active_trading",
+) -> ExperimentCandidate:
+    return _candidate(
+        name=name,
+        role=role,
+        phase=phase,
+        family=family,
+        hypothesis=hypothesis,
+        scenario_sizing=scenario_sizing,
+        strategy=StrategyConfig(
+            type="absolute_momentum",
+            tickers=tickers,
+            moving_average_days=moving_average_days,
+            defensive_ticker="BIL",
+            trend_filter_days=None,
+            max_asset_weight=None,
+        ),
+    )
+
+
+def _reference_portfolio_candidates() -> tuple[ExperimentCandidate, ...]:
+    return (
+        _fixed_allocation_candidate(
+            name="i41_ref_us_60_40",
+            hypothesis="Classic 60/40 U.S. stock/bond allocation should be the simple balanced-policy reference.",
+            allocation_weights={"SPY": 0.60, "AGG": 0.40},
+        ),
+        _fixed_allocation_candidate(
+            name="i41_ref_us_80_20",
+            hypothesis="Classic 80/20 growth allocation tests whether more equity risk beats tactical complexity after drawdowns.",
+            allocation_weights={"SPY": 0.80, "AGG": 0.20},
+        ),
+        _fixed_allocation_candidate(
+            name="i41_ref_us_90_10",
+            hypothesis="Aggressive 90/10 allocation is a high-equity reference for long-horizon retirement growth.",
+            allocation_weights={"SPY": 0.90, "AGG": 0.10},
+        ),
+        _fixed_allocation_candidate(
+            name="i41_ref_global_three_fund_80_20",
+            hypothesis="Bogleheads-style global 80/20 allocation tests diversified equity beta plus bonds.",
+            allocation_weights={"SPY": 0.48, "EFA": 0.24, "EEM": 0.08, "AGG": 0.20},
+        ),
+        _fixed_allocation_candidate(
+            name="i41_ref_global_three_fund_60_40",
+            hypothesis="Bogleheads-style global 60/40 allocation is the diversified moderate-risk policy reference.",
+            allocation_weights={"SPY": 0.36, "EFA": 0.18, "EEM": 0.06, "AGG": 0.40},
+        ),
+        _fixed_allocation_candidate(
+            name="i41_ref_permanent_portfolio",
+            hypothesis="Permanent Portfolio tests equal risk assets, long duration, gold, and T-bill-style defense.",
+            allocation_weights={"SPY": 0.25, "TLT": 0.25, "GLD": 0.25, "SHY": 0.25},
+        ),
+        _fixed_allocation_candidate(
+            name="i41_ref_golden_butterfly",
+            hypothesis="Golden Butterfly tests total equity, small-cap, duration, cash-like bonds, and gold diversification.",
+            allocation_weights={"SPY": 0.20, "IWM": 0.20, "TLT": 0.20, "SHY": 0.20, "GLD": 0.20},
+        ),
+        _fixed_allocation_candidate(
+            name="i41_ref_all_weather",
+            hypothesis="All-weather-style allocation tests equity, duration, intermediate bonds, gold, and commodities.",
+            allocation_weights={"SPY": 0.30, "TLT": 0.40, "IEF": 0.15, "GLD": 0.075, "DBC": 0.075},
+        ),
+        _fixed_allocation_candidate(
+            name="i41_ref_growth_cash_barbell",
+            hypothesis="Growth/cash barbell tests whether a simple QQQ/SPY/BIL policy is competitive with tactical off-ramps.",
+            allocation_weights={"QQQ": 0.50, "SPY": 0.30, "BIL": 0.20},
+        ),
+    )
+
+
 def _operating_system_candidates() -> tuple[ExperimentCandidate, ...]:
     return (
         _candidate(
@@ -1213,6 +3463,28 @@ def _candidate(
         hypothesis=hypothesis,
         strategy=strategy,
         scenario_sizing=scenario_sizing,
+    )
+
+
+def _fixed_allocation_candidate(
+    *,
+    name: str,
+    hypothesis: str,
+    allocation_weights: dict[str, float],
+) -> ExperimentCandidate:
+    return _candidate(
+        name=name,
+        role="reference_portfolio",
+        phase="reference",
+        family="reference_portfolio",
+        hypothesis=hypothesis,
+        strategy=StrategyConfig(
+            type="fixed_allocation",
+            tickers=list(allocation_weights),
+            allocation_weights=allocation_weights,
+            trend_filter_days=None,
+            max_asset_weight=None,
+        ),
     )
 
 

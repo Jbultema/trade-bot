@@ -3,7 +3,7 @@ from __future__ import annotations
 import hashlib
 import json
 import re
-from dataclasses import asdict, dataclass
+from dataclasses import asdict, dataclass, field
 from email.utils import parsedate_to_datetime
 from html import unescape
 from pathlib import Path
@@ -53,6 +53,28 @@ TRIAGE_COLUMNS = [
     "summary",
 ]
 SOURCE_HEALTH_COLUMNS = ["source", "status", "fetched_at", "items", "message", "url"]
+SOURCE_COVERAGE_COLUMNS = [
+    "coverage_bucket",
+    "required_topics",
+    "source_count",
+    "enabled_source_count",
+    "max_priority",
+    "status",
+    "source_names",
+]
+NEWS_SOURCE_COVERAGE_BUCKETS = {
+    "official_macro_releases": ("official_macro", "macro_release"),
+    "monetary_policy_liquidity": ("monetary_policy", "liquidity"),
+    "fiscal_treasury_policy": ("fiscal_policy", "treasury", "sanctions"),
+    "earnings_revisions_fundamentals": ("earnings_revisions", "earnings", "corporate_profits"),
+    "regulatory_filings_enforcement": ("regulatory_filings", "enforcement", "accounting"),
+    "credit_private_markets": ("credit", "private_credit", "direct_lending"),
+    "energy_geopolitics": ("oil", "energy", "geopolitics", "inventories"),
+    "ai_semiconductors_supply_chain": ("ai", "ai_capex", "semiconductors", "chips"),
+    "market_plumbing_volatility": ("market_plumbing", "options", "crowding"),
+    "crypto_liquidity_risk_appetite": ("crypto_liquidity", "bitcoin", "risk_appetite"),
+    "retail_social_sentiment": ("retail_sentiment", "meme_stocks"),
+}
 
 
 @dataclass(frozen=True)
@@ -94,6 +116,7 @@ class NewsMonitorRun:
     activated_events: tuple[MarketEvent, ...]
     activation_threshold: float
     lookback_days: int
+    source_coverage: pd.DataFrame = field(default_factory=pd.DataFrame)
 
 
 def load_news_config(path: str | Path | None) -> NewsConfig:
@@ -157,7 +180,36 @@ def run_news_monitor(
         activated_events=(),
         activation_threshold=config.activation_threshold,
         lookback_days=config.lookback_days,
+        source_coverage=build_news_source_coverage(config.sources),
     )
+
+
+def build_news_source_coverage(sources: tuple[NewsSource, ...]) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    for bucket, required_topics in NEWS_SOURCE_COVERAGE_BUCKETS.items():
+        matched_sources = [
+            source for source in sources if set(source.topics).intersection(required_topics)
+        ]
+        enabled_sources = [source for source in matched_sources if source.enabled]
+        max_priority = max((source.priority for source in enabled_sources), default=0)
+        if len(enabled_sources) >= 2 and max_priority >= 3:
+            status = "covered"
+        elif enabled_sources:
+            status = "thin"
+        else:
+            status = "blind_spot"
+        rows.append(
+            {
+                "coverage_bucket": bucket,
+                "required_topics": ", ".join(required_topics),
+                "source_count": len(matched_sources),
+                "enabled_source_count": len(enabled_sources),
+                "max_priority": max_priority,
+                "status": status,
+                "source_names": ", ".join(source.name for source in enabled_sources),
+            }
+        )
+    return pd.DataFrame(rows, columns=SOURCE_COVERAGE_COLUMNS)
 
 
 def fetch_news_sources(
@@ -184,7 +236,7 @@ def fetch_news_sources(
                 headers={"User-Agent": USER_AGENT},
             )
             response.raise_for_status()
-            source_items = _parse_feed(response.text, source)[:max_items_per_source]
+            source_items = _parse_feed(_xml_response_text(response), source)[:max_items_per_source]
             items.extend(source_items)
             health_rows.append(
                 _source_health_row(source, "ok", fetched_at, len(source_items), "Fetched.")
@@ -304,6 +356,7 @@ def activate_news_events(
         activated_events=tuple(activated_events),
         activation_threshold=news_monitor.activation_threshold,
         lookback_days=news_monitor.lookback_days,
+        source_coverage=news_monitor.source_coverage,
     )
 
 
@@ -316,6 +369,10 @@ def _news_source_from_mapping(raw: dict[str, Any]) -> NewsSource:
         priority=int(raw.get("priority", 3)),
         enabled=bool(raw.get("enabled", True)),
     )
+
+
+def _xml_response_text(response: requests.Response) -> str:
+    return response.content.decode("utf-8-sig", errors="replace").lstrip()
 
 
 def _parse_feed(xml_text: str, source: NewsSource) -> list[NewsItem]:
@@ -467,6 +524,12 @@ def _category_weight(category: str) -> float:
         "energy_supply": 0.12,
         "trade_policy": 0.15,
         "military_escalation": 0.13,
+        "monetary_policy": 0.17,
+        "macro_release": 0.14,
+        "earnings_revision": 0.15,
+        "market_plumbing": 0.18,
+        "regulatory_filing": 0.13,
+        "retail_sentiment": 0.08,
     }
     return weights.get(category, 0.0)
 
@@ -663,4 +726,5 @@ def _empty_news_monitor(config: NewsConfig) -> NewsMonitorRun:
         activated_events=(),
         activation_threshold=config.activation_threshold,
         lookback_days=config.lookback_days,
+        source_coverage=build_news_source_coverage(config.sources),
     )

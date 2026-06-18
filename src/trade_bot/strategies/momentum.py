@@ -21,6 +21,10 @@ from trade_bot.features.indicators import (
 def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
     if strategy.type == "buy_hold":
         return buy_hold_weights(prices, strategy.tickers)
+    if strategy.type == "fixed_allocation":
+        if strategy.allocation_weights is None:
+            raise ValueError("fixed_allocation strategies require allocation_weights.")
+        return fixed_allocation_weights(prices, strategy.allocation_weights)
     if strategy.type == "absolute_momentum":
         return absolute_momentum_weights(
             prices,
@@ -65,6 +69,32 @@ def buy_hold_weights(prices: pd.DataFrame, tickers: list[str]) -> pd.DataFrame:
     weights = _empty_weights(prices)
     weight = 1.0 / len(tickers)
     weights.loc[:, tickers] = weight
+    return weights
+
+
+def fixed_allocation_weights(
+    prices: pd.DataFrame,
+    allocation_weights: dict[str, float],
+) -> pd.DataFrame:
+    if not allocation_weights:
+        raise ValueError("fixed_allocation strategies require at least one asset weight.")
+    tickers = list(allocation_weights)
+    _validate_tickers(prices, tickers)
+
+    cleaned_weights = {ticker: float(weight) for ticker, weight in allocation_weights.items()}
+    negative_weights = [ticker for ticker, weight in cleaned_weights.items() if weight < 0.0]
+    if negative_weights:
+        raise ValueError(f"fixed_allocation weights must be long-only: {negative_weights}")
+
+    total_weight = sum(cleaned_weights.values())
+    if total_weight <= 0.0:
+        raise ValueError("fixed_allocation total weight must be positive.")
+    if total_weight > 1.000001:
+        raise ValueError(f"fixed_allocation total weight must be <= 1.0, got {total_weight:.4f}")
+
+    weights = _empty_weights(prices)
+    for ticker, weight in cleaned_weights.items():
+        weights.loc[:, ticker] = weight
     return weights
 
 

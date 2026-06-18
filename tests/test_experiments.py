@@ -203,3 +203,169 @@ def test_scenario_position_sizing_moves_stress_residual_to_defensive_ticker() ->
     assert adjusted["SPY"].iloc[-1] < 0.8
     assert adjusted["BIL"].iloc[-1] > 0.2
     assert round(float(adjusted.iloc[-1].sum()), 8) == 1.0
+
+
+def test_reference_portfolio_iteration_includes_explicit_policy_sizing() -> None:
+    candidates = generate_iteration_candidates(41)
+
+    assert len(candidates) == 9
+    assert {candidate.family for candidate in candidates} == {"reference_portfolio"}
+    assert {candidate.role for candidate in candidates} == {"reference_portfolio"}
+    assert all(candidate.strategy.type == "fixed_allocation" for candidate in candidates)
+
+    allocation_lookup = {
+        candidate.name: candidate.strategy.allocation_weights for candidate in candidates
+    }
+    assert allocation_lookup["i41_ref_us_60_40"] == {"SPY": 0.60, "AGG": 0.40}
+    assert allocation_lookup["i41_ref_all_weather"] == {
+        "SPY": 0.30,
+        "TLT": 0.40,
+        "IEF": 0.15,
+        "GLD": 0.075,
+        "DBC": 0.075,
+    }
+
+
+def test_active_trading_iterations_are_bounded_and_short_horizon() -> None:
+    for iteration in range(42, 50):
+        candidates = generate_iteration_candidates(iteration)
+
+        assert 3 <= len(candidates) <= 10
+        assert len({candidate.name for candidate in candidates}) == len(candidates)
+        assert all(
+            candidate.name.startswith(f"i{iteration:02d}_active_") for candidate in candidates
+        )
+        assert {candidate.phase for candidate in candidates} == {"active_trading"}
+        assert {candidate.role for candidate in candidates} == {"active_candidate"}
+        assert all(candidate.strategy.defensive_ticker == "BIL" for candidate in candidates)
+        assert all(
+            candidate.strategy.type in {"dual_momentum", "absolute_momentum"}
+            for candidate in candidates
+        )
+        assert any(
+            candidate.strategy.lookback_days <= 42 or candidate.strategy.moving_average_days <= 63
+            for candidate in candidates
+        )
+        assert any(candidate.scenario_sizing is not None for candidate in candidates)
+
+
+def test_final_deep_wide_iterations_are_curated_and_human_executable() -> None:
+    cached_universe = {
+        "AAPL",
+        "AGG",
+        "AMZN",
+        "ARCC",
+        "ARKK",
+        "AVGO",
+        "BIL",
+        "BITB",
+        "BIZD",
+        "BKLN",
+        "BNO",
+        "BOTZ",
+        "BXSL",
+        "CCJ",
+        "CEG",
+        "CLOU",
+        "COWZ",
+        "DBC",
+        "EEM",
+        "EFA",
+        "ETHE",
+        "EWC",
+        "EWJ",
+        "EWZ",
+        "ETN",
+        "FBTC",
+        "FXE",
+        "FXF",
+        "FXY",
+        "GEV",
+        "GLD",
+        "HYG",
+        "IAU",
+        "IBIT",
+        "IEF",
+        "IGV",
+        "INDA",
+        "IWM",
+        "JAAA",
+        "JBBB",
+        "JNK",
+        "KRE",
+        "LQD",
+        "MAIN",
+        "META",
+        "MOAT",
+        "MSFT",
+        "MTUM",
+        "MUB",
+        "NVDA",
+        "NRG",
+        "OBDC",
+        "OIH",
+        "ORCL",
+        "PLTR",
+        "PWR",
+        "QQQ",
+        "QUAL",
+        "ROBO",
+        "RSP",
+        "SCHD",
+        "SGOV",
+        "SHY",
+        "SKYY",
+        "SMH",
+        "SOXX",
+        "SPHB",
+        "SPLV",
+        "SPY",
+        "SRLN",
+        "SVXY",
+        "TAN",
+        "TIP",
+        "TLT",
+        "TSLA",
+        "UUP",
+        "USFR",
+        "USMV",
+        "USO",
+        "VCIT",
+        "VCSH",
+        "VEA",
+        "VGK",
+        "VIG",
+        "VRT",
+        "VTV",
+        "VWO",
+        "XBI",
+        "XLB",
+        "XLE",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLP",
+        "XLU",
+        "XLV",
+        "XOP",
+    }
+
+    for iteration in range(50, 55):
+        candidates = generate_iteration_candidates(iteration)
+
+        assert 3 <= len(candidates) <= 10
+        assert len({candidate.name for candidate in candidates}) == len(candidates)
+        assert all(
+            candidate.name.startswith(f"i{iteration:02d}_final_") for candidate in candidates
+        )
+        assert {candidate.phase for candidate in candidates} == {"final_deep_dive"}
+        assert {candidate.role for candidate in candidates} == {"final_candidate"}
+        assert all(candidate.strategy.defensive_ticker == "BIL" for candidate in candidates)
+        assert all(
+            candidate.strategy.type in {"dual_momentum", "absolute_momentum"}
+            for candidate in candidates
+        )
+        assert any(candidate.scenario_sizing is not None for candidate in candidates)
+        assert all(
+            set(candidate.strategy.tickers).issubset(cached_universe) for candidate in candidates
+        )

@@ -69,8 +69,15 @@ class DrawdownControlConfig(BaseModel):
 class StrategyConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
-    type: Literal["buy_hold", "absolute_momentum", "relative_momentum", "dual_momentum"]
+    type: Literal[
+        "buy_hold",
+        "fixed_allocation",
+        "absolute_momentum",
+        "relative_momentum",
+        "dual_momentum",
+    ]
     tickers: list[str]
+    allocation_weights: dict[str, float] | None = None
     moving_average_days: int = Field(default=DEFAULT_MOVING_AVERAGE_DAYS, gt=1)
     lookback_days: int = Field(default=DEFAULT_MOMENTUM_LOOKBACK_DAYS, gt=1)
     skip_days: int = Field(default=DEFAULT_MOMENTUM_SKIP_DAYS, ge=0)

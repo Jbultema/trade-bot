@@ -179,3 +179,73 @@ def test_event_risk_study_surfaces_event_phase_in_scenario_playbook() -> None:
 
     assert set(study.current_event_scenarios["event_phase"]) == {"leading_warning"}
     assert "AI capex repricing starts" in set(study.current_event_scenarios["scenario"])
+
+
+def test_classify_news_text_maps_fed_liquidity_to_monetary_policy() -> None:
+    classification = classify_news_text(
+        "Federal Reserve Chair Powell signaled rates may stay higher for longer while "
+        "balance sheet runoff and bank reserves remain under review."
+    )
+
+    assert classification.category == "monetary_policy"
+    assert classification.direction == "escalation"
+    assert "TLT" in classification.candidate_proxies
+    assert "liquidity" in classification.risk_channels
+
+
+def test_classify_news_text_maps_macro_release_to_growth_inflation_mix() -> None:
+    classification = classify_news_text(
+        "The CPI report came in hotter than expected while jobless claims rose, "
+        "complicating the soft landing outlook."
+    )
+
+    assert classification.category == "macro_release"
+    assert classification.direction == "escalation"
+    assert "TIP" in classification.candidate_proxies
+    assert "inflation" in classification.risk_channels
+
+
+def test_classify_news_text_maps_market_plumbing_to_vol_liquidity() -> None:
+    classification = classify_news_text(
+        "VIX and MOVE index volatility surged as a weak Treasury auction sparked "
+        "funding market stress and forced selling."
+    )
+
+    assert classification.category == "market_plumbing"
+    assert classification.direction == "escalation"
+    assert "VIXY" in classification.candidate_proxies
+    assert "funding" in classification.risk_channels
+
+
+def test_classify_news_text_maps_regulatory_filing_to_governance_risk() -> None:
+    classification = classify_news_text(
+        "SEC investigation revealed a material weakness and accounting restatement "
+        "after the company filed an 8-K."
+    )
+
+    assert classification.category == "regulatory_filing"
+    assert classification.direction == "escalation"
+    assert "regulatory" in classification.risk_channels
+
+
+def test_classify_news_text_maps_earnings_revision_to_margin_risk() -> None:
+    classification = classify_news_text(
+        "Mega-cap software earnings missed estimates and management cut guidance "
+        "because margin pressure and revenue shortfall persisted."
+    )
+
+    assert classification.category == "earnings_revision"
+    assert classification.direction == "escalation"
+    assert "SMH" in classification.candidate_proxies
+    assert "margins" in classification.risk_channels
+
+
+def test_classify_news_text_maps_retail_sentiment_to_crowding() -> None:
+    classification = classify_news_text(
+        "Reddit WallStreetBets traders drove a viral short squeeze with record call buying."
+    )
+
+    assert classification.category == "retail_sentiment"
+    assert classification.direction == "escalation"
+    assert "ARKK" in classification.candidate_proxies
+    assert "crowding" in classification.risk_channels

@@ -13,7 +13,9 @@ from trade_bot.DEFAULT import (
     DEFAULT_CONFIG_PATH,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_JOURNAL_PATH,
     DEFAULT_MACRO_PATH,
+    DEFAULT_MONITORING_TOP_N,
     DEFAULT_NEWS_PATH,
     DEFAULT_REPORT_PATH,
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
@@ -22,8 +24,10 @@ from trade_bot.DEFAULT import (
 )
 from trade_bot.reporting.report import write_baseline_report
 from trade_bot.research.baselines import run_configured_baselines
+from trade_bot.research.entry_date_analysis import build_entry_date_analysis
 from trade_bot.research.experiments import run_experiment_iteration
 from trade_bot.storage.run_store import RunStore, SnapshotManifest
+from trade_bot.storage.warehouse import TradingWarehouse, WarehouseMigrationResult
 
 app = typer.Typer(no_args_is_help=True)
 console = Console()
@@ -459,6 +463,291 @@ def run_experiment_iteration_cmd(
     console.print(f"Wrote experiment outputs to {Path(output_dir) / f'iteration_{iteration:02d}'}")
 
 
+@app.command("run-entry-date-analysis")
+def run_entry_date_analysis_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = Path("reports/entry_date_analysis"),
+    start_frequency: Annotated[str, typer.Option("--start-frequency")] = "M",
+) -> None:
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+    if snapshot_payload is None:
+        console.print("No completed snapshots found. Build a snapshot before entry-date analysis.")
+        return
+    baseline_run, manifest = snapshot_payload
+    analysis = build_entry_date_analysis(
+        baseline_run.results,
+        start_frequency=start_frequency,
+    )
+    output_dir.mkdir(parents=True, exist_ok=True)
+    window_path = output_dir / "entry_windows.csv"
+    summary_path = output_dir / "entry_summary.csv"
+    analysis.windows.to_csv(window_path, index=False)
+    analysis.summary.to_csv(summary_path, index=False)
+
+    console.print(
+        f"Wrote entry-date analysis from snapshot {manifest.run_id} "
+        f"({manifest.market_date}) to {output_dir}."
+    )
+    if analysis.summary.empty:
+        console.print("No entry-date windows were available.")
+        return
+    preview = analysis.summary[
+        analysis.summary["strategy"].isin(
+            [
+                "absolute_momentum_spy",
+                "vol_target_dual_momentum",
+                "dual_momentum_core",
+                "drawdown_managed_dual_momentum",
+                "buy_hold_spy",
+                "buy_hold_qqq",
+            ]
+        )
+    ].copy()
+    preview = preview[preview["horizon"].isin(["3m", "1y", "3y", "5y"])]
+    table = Table(title="Entry-Date Sensitivity Preview")
+    for column in [
+        "strategy",
+        "benchmark",
+        "horizon",
+        "windows",
+        "beat_rate",
+        "median_excess_return",
+        "worst_excess_return",
+        "median_max_drawdown",
+    ]:
+        table.add_column(column)
+    for _, row in preview.head(40).iterrows():
+        table.add_row(
+            str(row["strategy"]),
+            str(row["benchmark"]),
+            str(row["horizon"]),
+            str(int(row["windows"])),
+            _format_optional_percent(row["beat_rate"]),
+            _format_optional_percent(row["median_excess_return"]),
+            _format_optional_percent(row["worst_excess_return"]),
+            _format_optional_percent(row["median_max_drawdown"]),
+        )
+    console.print(table)
+
+
+@app.command("migrate-warehouse")
+def migrate_warehouse_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    experiment_dir: Annotated[Path, typer.Option("--experiment-dir")] = DEFAULT_EXPERIMENTS_DIR,
+    journal: Annotated[Path, typer.Option("--journal")] = DEFAULT_JOURNAL_PATH,
+) -> None:
+    warehouse = TradingWarehouse(store)
+    experiment_results = warehouse.migrate_experiment_outputs(experiment_dir)
+    journal_results = warehouse.migrate_journal_sqlite(journal)
+    _print_migration_table(
+        "Warehouse Migration",
+        [*experiment_results, *journal_results],
+    )
+    console.print("[bold]Warehouse table counts[/bold]")
+    console.print(warehouse.table_counts())
+
+
+@app.command("seed-monitoring-windows")
+def seed_monitoring_windows_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    mode: Annotated[str, typer.Option("--mode")] = "paper",
+    account: Annotated[str, typer.Option("--account")] = "default_paper_account",
+    capital_base: Annotated[float, typer.Option("--capital-base")] = 10_000.0,
+    top_n: Annotated[int, typer.Option("--top-n")] = DEFAULT_MONITORING_TOP_N,
+    start_date: Annotated[str | None, typer.Option("--start-date")] = None,
+) -> None:
+    warehouse = TradingWarehouse(store)
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+    if snapshot_payload is not None:
+        baseline_run, manifest = snapshot_payload
+        warehouse.refresh_strategy_registry_from_snapshot(
+            baseline_run,
+            run_id=manifest.run_id,
+            market_date=manifest.market_date,
+        )
+    seeded = warehouse.seed_monitoring_windows_from_registry(
+        mode=mode,
+        account=account,
+        capital_base=capital_base,
+        top_n=top_n,
+        start_date=start_date,
+    )
+    if not seeded:
+        console.print("No new monitoring windows were seeded.")
+        return
+    table = Table(title="Seeded Monitoring Windows")
+    for column in ["window_id", "strategy_id", "strategy_name", "role"]:
+        table.add_column(column)
+    for row in seeded:
+        table.add_row(row.window_id, row.strategy_id, row.strategy_name, row.role)
+    console.print(table)
+
+
+@app.command("run-paper-valuation")
+def run_paper_valuation_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+) -> None:
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+    if snapshot_payload is None:
+        console.print("No completed snapshots found. Build a snapshot before paper valuation.")
+        return
+    baseline_run, manifest = snapshot_payload
+    warehouse = TradingWarehouse(store)
+    warehouse.refresh_strategy_registry_from_snapshot(
+        baseline_run,
+        run_id=manifest.run_id,
+        market_date=manifest.market_date,
+    )
+    bot_config = load_config(config)
+    rows = warehouse.save_daily_valuations_from_snapshot(
+        baseline_run,
+        market_date=manifest.market_date,
+        execution=bot_config.execution,
+    )
+    console.print(
+        f"Wrote {rows:,} paper valuation rows from snapshot {manifest.run_id} "
+        f"for market date {manifest.market_date}."
+    )
+
+
+@app.command("monitor-strategy")
+def monitor_strategy_cmd(
+    strategy_name: Annotated[str, typer.Argument(help="Strategy name or strategy id to monitor")],
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    role: Annotated[str, typer.Option("--role")] = "challenger",
+    mode: Annotated[str, typer.Option("--mode")] = "paper",
+    account: Annotated[str, typer.Option("--account")] = "default_paper_account",
+    capital_base: Annotated[float, typer.Option("--capital-base")] = 10_000.0,
+    start_date: Annotated[str | None, typer.Option("--start-date")] = None,
+    demote_other_champions: Annotated[
+        bool,
+        typer.Option("--demote-other-champions"),
+    ] = False,
+) -> None:
+    warehouse = TradingWarehouse(store)
+    result = warehouse.monitor_strategy(
+        strategy_name,
+        role=role,
+        mode=mode,
+        account=account,
+        capital_base=capital_base,
+        start_date=start_date,
+        demote_other_champions=demote_other_champions,
+    )
+    console.print(
+        f"Monitoring {result.strategy_name} as {result.role} in window {result.window_id}."
+    )
+
+
+@app.command("update-monitoring-window")
+def update_monitoring_window_cmd(
+    window_id: Annotated[str, typer.Argument(help="Monitoring window id to update")],
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    role: Annotated[str | None, typer.Option("--role")] = None,
+    status: Annotated[str | None, typer.Option("--status")] = None,
+    capital_base: Annotated[float | None, typer.Option("--capital-base")] = None,
+    demote_other_champions: Annotated[
+        bool,
+        typer.Option("--demote-other-champions"),
+    ] = False,
+) -> None:
+    warehouse = TradingWarehouse(store)
+    updated = warehouse.update_monitoring_window(
+        window_id,
+        role=role,
+        status=status,
+        capital_base=capital_base,
+        demote_other_champions=demote_other_champions,
+    )
+    if not updated:
+        console.print(f"No monitoring window found: {window_id}")
+        raise typer.Exit(code=1)
+    console.print(f"Updated monitoring window {window_id}.")
+
+
+@app.command("list-monitoring-windows")
+def list_monitoring_windows_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    status: Annotated[str, typer.Option("--status")] = "active",
+) -> None:
+    warehouse = TradingWarehouse(store)
+    windows = warehouse.list_monitoring_windows(status=None if status == "all" else status)
+    if windows.empty:
+        console.print("No monitoring windows found.")
+        return
+    table = Table(title="Monitoring Windows")
+    for column in [
+        "window_role",
+        "mode",
+        "account",
+        "strategy_name",
+        "status",
+        "start_date",
+        "capital_base",
+        "notes",
+    ]:
+        table.add_column(column)
+    for _, row in windows.iterrows():
+        table.add_row(
+            str(row["window_role"]),
+            str(row["mode"]),
+            str(row["account"]),
+            str(row["strategy_name"]),
+            str(row["status"]),
+            str(row["start_date"]),
+            f"${float(row['capital_base']):,.0f}",
+            str(row["notes"])[:90],
+        )
+    console.print(table)
+
+
+@app.command("list-champion-challenger")
+def list_champion_challenger_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+) -> None:
+    warehouse = TradingWarehouse(store)
+    frame = warehouse.champion_challenger_frame()
+    if frame.empty:
+        console.print("No champion/challenger monitoring rows found.")
+        return
+    table = Table(title="Champion / Challenger")
+    for column in [
+        "window_role",
+        "strategy_name",
+        "forward_status",
+        "cumulative_return",
+        "excess_return",
+        "drawdown",
+        "promotion_score",
+        "overfit_risk_label",
+        "validation_tier",
+    ]:
+        table.add_column(column)
+    for _, row in frame.iterrows():
+        table.add_row(
+            str(row.get("window_role", "")),
+            str(row.get("strategy_name", "")),
+            str(row.get("forward_status", "")),
+            _format_optional_percent(row.get("cumulative_return")),
+            _format_optional_percent(row.get("excess_return")),
+            _format_optional_percent(row.get("drawdown")),
+            _format_optional_decimal(row.get("promotion_score")),
+            str(row.get("overfit_risk_label", "")),
+            str(row.get("validation_tier", "")),
+        )
+    console.print(table)
+
+
 def _format_optional_percent(value: object) -> str:
     raw_value: Any = value
     try:
@@ -468,6 +757,30 @@ def _format_optional_percent(value: object) -> str:
     if numeric != numeric:
         return "n/a"
     return f"{numeric:.2%}"
+
+
+def _format_optional_decimal(value: object) -> str:
+    raw_value: Any = value
+    try:
+        numeric = float(raw_value)
+    except (TypeError, ValueError):
+        return "n/a"
+    if numeric != numeric:
+        return "n/a"
+    return f"{numeric:.2f}"
+
+
+def _print_migration_table(title: str, results: list[WarehouseMigrationResult]) -> None:
+    table = Table(title=title)
+    for column in ["artifact", "rows", "table_name"]:
+        table.add_column(column)
+    for result in results:
+        table.add_row(
+            str(result.artifact),
+            f"{int(result.rows):,}",
+            str(result.table_name),
+        )
+    console.print(table)
 
 
 def _print_snapshot_manifest(manifest: SnapshotManifest) -> None:

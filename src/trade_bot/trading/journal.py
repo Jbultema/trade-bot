@@ -5,7 +5,7 @@ import json
 import sqlite3
 import uuid
 from dataclasses import dataclass
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any, cast
 
@@ -232,19 +232,39 @@ class TradeJournal:
             (limit,),
         )
 
-    def load_executions(self, *, limit: int = 200) -> pd.DataFrame:
-        return self._read_sql(
-            """
+    def load_executions(
+        self,
+        *,
+        limit: int = 200,
+        mode: str | None = None,
+        account: str | None = None,
+    ) -> pd.DataFrame:
+        conditions: list[str] = []
+        params: list[object] = []
+        if mode is not None:
+            conditions.append("mode = ?")
+            params.append(mode)
+        if account is not None:
+            conditions.append("account = ?")
+            params.append(account)
+        where_clause = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+        query = f"""
             SELECT *
             FROM executions
+            {where_clause}
             ORDER BY executed_at_utc DESC, created_at_utc DESC
             LIMIT ?
-            """,
-            (limit,),
-        )
+            """
+        params.append(limit)
+        return self._read_sql(query, tuple(params))
 
-    def execution_position_summary(self) -> pd.DataFrame:
-        executions = self.load_executions(limit=10000)
+    def execution_position_summary(
+        self,
+        *,
+        mode: str | None = None,
+        account: str | None = None,
+    ) -> pd.DataFrame:
+        executions = self.load_executions(limit=10000, mode=mode, account=account)
         if executions.empty:
             return pd.DataFrame()
         signed_quantity = (
@@ -436,8 +456,11 @@ def build_recommendation_tickets(
     account: str,
     strategy_name: str,
     sizing: TicketSizingConfig,
+    position_plan: pd.DataFrame | None = None,
+    rationale: str | None = None,
 ) -> pd.DataFrame:
-    if trade_decision.position_plan.empty:
+    plan = trade_decision.position_plan if position_plan is None else position_plan
+    if plan.empty:
         return _empty_ticket_frame()
     if sizing.account_value <= 0:
         raise ValueError("Account value must be positive.")
@@ -448,9 +471,9 @@ def build_recommendation_tickets(
 
     reference_prices = _latest_prices(prices)
     summary = _first_row(trade_decision.summary)
-    rationale = str(summary.get("human_explanation", ""))
+    ticket_rationale = str(rationale if rationale is not None else summary.get("human_explanation", ""))
     rows: list[dict[str, object]] = []
-    for _, row in trade_decision.position_plan.iterrows():
+    for _, row in plan.iterrows():
         delta_weight = float(row["delta_weight"])
         if abs(delta_weight) < 1e-8:
             continue
@@ -501,7 +524,7 @@ def build_recommendation_tickets(
                 "min_shares": min_shares,
                 "max_shares": max_shares,
                 "status": "open",
-                "rationale": rationale,
+                "rationale": ticket_rationale,
             }
         )
 
@@ -511,7 +534,7 @@ def build_recommendation_tickets(
 
 
 def utc_now_iso() -> str:
-    return datetime.now(timezone.utc).replace(microsecond=0).isoformat()
+    return datetime.now(UTC).replace(microsecond=0).isoformat()
 
 
 def _latest_prices(prices: pd.DataFrame) -> dict[str, float]:
