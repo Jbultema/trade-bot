@@ -23,6 +23,148 @@ from trade_bot.features.valuation import (
     trend_discount,
 )
 
+AI_GROWTH_TICKERS = {
+    "AAPL",
+    "AMD",
+    "AMZN",
+    "ANET",
+    "APP",
+    "ARKK",
+    "ARM",
+    "ASML",
+    "AVGO",
+    "BOTZ",
+    "CLOU",
+    "CRWD",
+    "DDOG",
+    "DELL",
+    "GOOG",
+    "GOOGL",
+    "IGV",
+    "META",
+    "MRVL",
+    "MSFT",
+    "MU",
+    "NET",
+    "NVDA",
+    "ORCL",
+    "PLTR",
+    "QQQ",
+    "QQQM",
+    "ROBO",
+    "SKYY",
+    "SMCI",
+    "SMH",
+    "SNOW",
+    "SOXX",
+    "TSLA",
+    "XLK",
+    "XLC",
+    "XLY",
+}
+
+CYCLICAL_TICKERS = {
+    "BNO",
+    "COWZ",
+    "CPER",
+    "DBC",
+    "DIA",
+    "IWB",
+    "IWM",
+    "IYT",
+    "KBE",
+    "KRE",
+    "MDY",
+    "RSP",
+    "SPHB",
+    "SPMO",
+    "USO",
+    "VTI",
+    "VTV",
+    "XES",
+    "XHB",
+    "XLB",
+    "XLE",
+    "XLF",
+    "XLI",
+    "XME",
+    "XOP",
+    "XRT",
+}
+
+DEFENSIVE_EQUITY_TICKERS = {
+    "MOAT",
+    "QUAL",
+    "SCHD",
+    "SPLV",
+    "USMV",
+    "VIG",
+    "XLRE",
+    "XLP",
+    "XLU",
+    "XLV",
+}
+
+DEFENSIVE_ALT_TICKERS = {
+    "AGG",
+    "BIL",
+    "BND",
+    "BSV",
+    "EDV",
+    "GLD",
+    "IAU",
+    "IEF",
+    "IEI",
+    "LQD",
+    "MUB",
+    "SGOV",
+    "SHY",
+    "TIP",
+    "TLT",
+    "UUP",
+    "USFR",
+    "VCIT",
+    "VCSH",
+    "VGIT",
+    "VGSH",
+    "VGLT",
+    "VTIP",
+}
+
+GLOBAL_TICKERS = {
+    "EEM",
+    "EFA",
+    "EWA",
+    "EWC",
+    "EWJ",
+    "EWU",
+    "EWW",
+    "EWZ",
+    "FXE",
+    "FXF",
+    "FXY",
+    "INDA",
+    "MCHI",
+    "VEA",
+    "VGK",
+    "VT",
+    "VWO",
+}
+
+SPECULATIVE_TICKERS = {
+    "ARKK",
+    "BITB",
+    "ETHE",
+    "FBTC",
+    "IBIT",
+    "LIT",
+    "SVXY",
+    "TAN",
+    "URA",
+    "VIXY",
+    "XBI",
+}
+
 
 def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
     if strategy.type == "buy_hold":
@@ -73,6 +215,8 @@ def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd
         return dip_reentry_overlay_weights(prices, strategy)
     if strategy.type == "ai_risk_cycle_overlay":
         return ai_risk_cycle_overlay_weights(prices, strategy)
+    if strategy.type == "sector_regime_rotation":
+        return sector_regime_rotation_weights(prices, strategy)
     raise ValueError(f"Unsupported strategy type: {strategy.type}")
 
 
@@ -527,6 +671,187 @@ def ai_risk_cycle_overlay_weights(prices: pd.DataFrame, strategy: StrategyConfig
     )
 
 
+
+def sector_regime_rotation_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
+    """Rotate across sectors/themes while a regime layer controls aggregate risk."""
+    if strategy.defensive_ticker is None:
+        raise ValueError("sector_regime_rotation strategies require a defensive_ticker.")
+    investable_tickers = [
+        ticker for ticker in dict.fromkeys(strategy.tickers) if ticker != strategy.defensive_ticker
+    ]
+    if not investable_tickers:
+        raise ValueError("sector_regime_rotation strategies require non-defensive tickers.")
+
+    filled = prices.ffill().sort_index()
+    _validate_tickers(filled, [*investable_tickers, strategy.defensive_ticker])
+    asset_prices = filled[investable_tickers]
+    asset_returns = daily_returns(asset_prices)
+    momentum = lookback_returns(asset_prices, strategy.lookback_days, strategy.skip_days)
+    volatility = realized_volatility(asset_returns, strategy.volatility_lookback_days)
+    ranking_values = _ranking_values(
+        asset_prices,
+        momentum,
+        volatility,
+        ranking_metric=strategy.ranking_metric,
+        trend_filter_days=strategy.trend_filter_days,
+    )
+    cross_sectional_score = ranking_values.rank(axis=1, pct=True, method="average").fillna(0.0)
+    trend_window = strategy.trend_filter_days or max(63, strategy.lookback_days)
+    trend_score = ((trend_discount(asset_prices, trend_window) + 0.04) / 0.10).clip(
+        lower=0.0,
+        upper=1.0,
+    )
+    volatility_penalty = (volatility / strategy.dip_volatility_ceiling).clip(
+        lower=0.0,
+        upper=1.0,
+    ).fillna(0.5)
+
+    credit_score = relative_repair_score(filled, "HYG", "LQD", strategy.dip_recovery_days)
+    breadth_score = relative_repair_score(filled, "RSP", "SPY", strategy.dip_recovery_days)
+    ai_score = _mean_scores(
+        [
+            relative_repair_score(filled, "SMH", "SPY", strategy.dip_recovery_days),
+            relative_repair_score(filled, "QQQ", "RSP", strategy.dip_recovery_days),
+            relative_repair_score(filled, "XLK", "SPY", strategy.dip_recovery_days),
+        ],
+        filled.index,
+    )
+    reflation_score = _mean_scores(
+        [
+            relative_repair_score(filled, "DBC", "SPY", strategy.dip_recovery_days),
+            relative_repair_score(filled, "XLE", "SPY", strategy.dip_recovery_days),
+            relative_repair_score(filled, "XLI", "SPY", strategy.dip_recovery_days),
+            relative_repair_score(filled, "XLF", "SPY", strategy.dip_recovery_days),
+        ],
+        filled.index,
+    )
+    rates_score = _mean_scores(
+        [
+            relative_repair_score(filled, "TLT", "IEF", strategy.dip_recovery_days),
+            relative_repair_score(filled, "IEF", "SHY", strategy.dip_recovery_days),
+        ],
+        filled.index,
+    )
+    basket_returns = asset_returns.mean(axis=1).fillna(0.0)
+    basket_volatility = realized_volatility(basket_returns, strategy.volatility_lookback_days)
+    volatility_calm = (1.0 - basket_volatility / strategy.dip_volatility_ceiling).clip(
+        lower=0.0,
+        upper=1.0,
+    ).fillna(0.5)
+    risk_appetite = _mean_scores([credit_score, breadth_score, volatility_calm], filled.index)
+    defensive_score = (1.0 - _mean_scores([credit_score, breadth_score], filled.index)).clip(
+        lower=0.0,
+        upper=1.0,
+    )
+
+    scores = 0.55 * cross_sectional_score + 0.20 * trend_score - 0.10 * volatility_penalty
+    for ticker in investable_tickers:
+        group = _sector_regime_group(ticker)
+        if group == "ai_growth":
+            tilt = 0.26 * ai_score + 0.10 * risk_appetite - 0.14 * defensive_score
+        elif group == "cyclical":
+            tilt = 0.24 * reflation_score + 0.15 * breadth_score + 0.08 * credit_score
+        elif group == "defensive_equity":
+            tilt = 0.18 * defensive_score + 0.08 * volatility_calm + 0.04 * breadth_score
+        elif group == "defensive_alt":
+            tilt = 0.24 * defensive_score + 0.18 * rates_score + 0.06 * (1.0 - risk_appetite)
+        elif group == "global":
+            tilt = 0.12 * credit_score + 0.12 * breadth_score + 0.06 * reflation_score
+        elif group == "speculative":
+            tilt = 0.20 * ai_score + 0.12 * risk_appetite - 0.22 * defensive_score
+        else:
+            tilt = 0.12 * breadth_score + 0.08 * risk_appetite
+        scores.loc[:, ticker] = scores[ticker] + tilt
+
+    selected = scores.rank(axis=1, ascending=False, method="first") <= min(
+        strategy.top_n,
+        len(investable_tickers),
+    )
+    if strategy.min_return > 0.0:
+        selected = selected & (momentum > strategy.min_return)
+    selected = _apply_trend_filter(asset_prices, selected, strategy.trend_filter_days)
+
+    selected_weights = _raw_selected_weights(
+        selected.fillna(False),
+        weighting=strategy.weighting,
+        momentum=momentum.fillna(0.0),
+        ranking_values=scores.clip(lower=0.0).fillna(0.0),
+        volatility=volatility,
+    )
+
+    risk_tickers = [
+        ticker for ticker in investable_tickers if _sector_regime_group(ticker) != "defensive_alt"
+    ]
+    risk_basket = asset_prices[risk_tickers] if risk_tickers else asset_prices
+    risk_basket_returns = daily_returns(risk_basket).mean(axis=1).fillna(0.0)
+    risk_basket_equity = (1.0 + risk_basket_returns).cumprod()
+    discount = rolling_peak_discount(
+        pd.DataFrame({"risk_basket": risk_basket_equity}, index=filled.index),
+        strategy.dip_lookback_days,
+    )["risk_basket"]
+    discount_score = normalized_discount(
+        discount,
+        trigger_drawdown=strategy.dip_trigger_drawdown,
+        deep_drawdown=strategy.dip_deep_drawdown,
+    )
+    recovery_return = risk_basket_equity.pct_change(
+        strategy.dip_recovery_days,
+        fill_method=None,
+    )
+    short_return = risk_basket_equity.pct_change(
+        strategy.dip_confirmation_days,
+        fill_method=None,
+    )
+    recovery_score = (recovery_return / max(strategy.dip_min_recovery_return, 1e-6)).clip(
+        lower=0.0,
+        upper=1.0,
+    )
+    short_repair_score = (short_return / 0.015).clip(lower=0.0, upper=1.0)
+    repair_score = _mean_scores(
+        [recovery_score, short_repair_score, credit_score, breadth_score, volatility_calm],
+        filled.index,
+    )
+    momentum_budget = (0.18 + 0.78 * risk_appetite).clip(lower=0.12, upper=1.0)
+    discount_budget = (
+        strategy.dip_starter_weight * discount_score
+        + strategy.dip_step_weight * discount_score * repair_score
+    ).clip(lower=0.0, upper=strategy.dip_max_risk_weight)
+    risk_budget = pd.concat([momentum_budget, discount_budget], axis=1).max(axis=1).clip(
+        lower=0.05,
+        upper=strategy.dip_max_risk_weight,
+    )
+    falling_knife = (
+        (short_return < -0.020)
+        | (recovery_return < -abs(strategy.dip_min_recovery_return))
+        | (basket_volatility > strategy.dip_volatility_ceiling * 1.25)
+        | (credit_score < 0.20)
+    ).fillna(False)
+    risk_budget = risk_budget.mask(falling_knife, risk_budget * 0.35).fillna(0.0)
+
+    weights = _empty_weights(filled)
+    weights.loc[:, investable_tickers] = selected_weights
+    if risk_tickers:
+        current_risk = weights[risk_tickers].sum(axis=1)
+        risk_scale = (risk_budget / current_risk.where(current_risk > 0.0)).clip(upper=1.0)
+        weights.loc[:, risk_tickers] = weights[risk_tickers].mul(risk_scale.fillna(0.0), axis=0)
+    if strategy.max_asset_weight is not None:
+        weights = _cap_risk_weights(
+            weights,
+            risk_tickers=investable_tickers,
+            defensive_ticker=strategy.defensive_ticker,
+            max_asset_weight=strategy.max_asset_weight,
+        )
+    residual = (1.0 - weights[investable_tickers].sum(axis=1)).clip(lower=0.0)
+    weights.loc[:, strategy.defensive_ticker] = residual
+    return _apply_weight_path_controls(
+        weights.clip(lower=0.0).fillna(0.0),
+        min_change=strategy.cycle_min_rebalance_change,
+        max_step_change=strategy.cycle_max_step_change,
+        min_hold_days=strategy.cycle_min_hold_days,
+        defensive_ticker=strategy.defensive_ticker,
+        risk_off_override_change=strategy.cycle_risk_off_override_change,
+    )
+
 def _apply_weight_path_controls(
     weights: pd.DataFrame,
     *,
@@ -687,6 +1012,29 @@ def _cap_risk_weights(
 def _empty_weights(prices: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(0.0, index=prices.index, columns=prices.columns)
 
+
+
+def _mean_scores(scores: list[pd.Series], index: pd.Index) -> pd.Series:
+    if not scores:
+        return pd.Series(0.5, index=index)
+    aligned = [score.reindex(index).fillna(0.5) for score in scores]
+    return pd.concat(aligned, axis=1).mean(axis=1).clip(lower=0.0, upper=1.0).fillna(0.5)
+
+
+def _sector_regime_group(ticker: str) -> str:
+    if ticker in DEFENSIVE_ALT_TICKERS:
+        return "defensive_alt"
+    if ticker in DEFENSIVE_EQUITY_TICKERS:
+        return "defensive_equity"
+    if ticker in SPECULATIVE_TICKERS:
+        return "speculative"
+    if ticker in AI_GROWTH_TICKERS:
+        return "ai_growth"
+    if ticker in CYCLICAL_TICKERS:
+        return "cyclical"
+    if ticker in GLOBAL_TICKERS:
+        return "global"
+    return "broad"
 
 def _validate_tickers(prices: pd.DataFrame, tickers: list[str]) -> None:
     missing = sorted(set(tickers) - set(prices.columns))

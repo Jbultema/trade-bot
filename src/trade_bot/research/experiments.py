@@ -227,6 +227,8 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _dip_reentry_overlay_candidates(iteration)
     if 66 <= iteration <= 71:
         return _ai_risk_cycle_candidates(iteration)
+    if 72 <= iteration <= 76:
+        return _sector_regime_rotation_candidates(iteration)
     return None
 
 
@@ -5150,6 +5152,538 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
     return batches[iteration]
 
 
+
+def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    sector_spdrs = ["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC"]
+    sector_expanded = [
+        "XLK",
+        "XLF",
+        "KRE",
+        "XLY",
+        "XLP",
+        "XLE",
+        "XLV",
+        "XLI",
+        "XLU",
+        "XLB",
+        "XLRE",
+        "XLC",
+        "XME",
+        "XRT",
+        "XHB",
+        "XBI",
+        "RSP",
+        "IWM",
+    ]
+    defensive_assets = ["BIL", "SGOV", "SHY", "IEF", "TLT", "GLD", "IAU", "UUP", "LQD"]
+    ai_themes = ["QQQ", "SMH", "SOXX", "IGV", "CLOU", "SKYY", "BOTZ", "ARKK", "XLK", "XLC"]
+    ai_infra = ["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLU", "XLI"]
+    reflation = ["XLE", "XOP", "USO", "BNO", "DBC", "XLB", "XLI", "XLF", "KRE", "IWM", "RSP", "COWZ"]
+    factors = ["VUG", "VTV", "IWF", "IWD", "MTUM", "QUAL", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "COWZ"]
+    global_assets = ["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC"]
+    credit_assets = ["HYG", "JNK", "LQD", "VCIT", "VCSH", "BKLN", "SRLN", "JAAA", "JBBB"]
+    batches = {
+        72: (
+            _sector_regime_candidate(
+                name="i72_sector_regime_classic_spdr",
+                family="sector_regime_spdr",
+                hypothesis=(
+                    "Classic sector rotation should not be only momentum: sector leadership competes "
+                    "with credit, breadth, and defensive assets before total risk is allowed."
+                ),
+                tickers=[*sector_spdrs, *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.005,
+                max_asset_weight=0.30,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i72_sector_regime_expanded_industries",
+                family="sector_regime_expanded",
+                hypothesis=(
+                    "Expanded industries test whether homebuilders, retail, biotech, metals, and banks "
+                    "carry useful early-cycle or late-cycle signals beyond broad SPDR sectors."
+                ),
+                tickers=[*sector_expanded, *defensive_assets, "HYG", "LQD", "SPY"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.005,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i72_sector_regime_factor_sector_blend",
+                family="sector_regime_factor_blend",
+                hypothesis=(
+                    "Sector plus factor rotation should distinguish defensive quality/low-vol leadership "
+                    "from genuine risk-on growth or cyclical leadership."
+                ),
+                tickers=[*sector_spdrs, *factors, *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i72_sector_regime_ai_theme",
+                family="sector_regime_ai_theme",
+                hypothesis=(
+                    "AI theme rotation tests whether the system can own semis/software/cloud/robotics "
+                    "when AI leadership is confirmed and route away when breadth or credit disagrees."
+                ),
+                tickers=[*ai_themes, *sector_spdrs, *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.010,
+                max_asset_weight=0.28,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _sector_regime_candidate(
+                name="i72_sector_regime_reflation_cycle",
+                family="sector_regime_reflation",
+                hypothesis=(
+                    "Reflation/cyclical rotation tests whether energy, materials, banks, and industrials "
+                    "should replace QQQ/SPY leadership when commodity or breadth regimes shift."
+                ),
+                tickers=[*reflation, *sector_spdrs, *defensive_assets, "HYG", "LQD", "SPY"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.005,
+                max_asset_weight=0.28,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i72_sector_regime_global_us_mix",
+                family="sector_regime_global",
+                hypothesis=(
+                    "Global plus sector rotation tests whether U.S. mega-cap concentration should be "
+                    "escaped into international or non-tech sectors when relative leadership changes."
+                ),
+                tickers=[*global_assets, *sector_spdrs, *defensive_assets, "HYG", "LQD", "UUP"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        73: (
+            _sector_regime_candidate(
+                name="i73_sector_regime_low_churn_spdr",
+                family="sector_regime_low_churn",
+                hypothesis=(
+                    "Low-churn SPDR rotation tests whether sector regimes are tradable for a human only "
+                    "when target changes clear a material threshold and persist for two weeks."
+                ),
+                tickers=[*sector_spdrs, *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=126,
+                skip_days=21,
+                top_n=4,
+                min_return=0.005,
+                min_change=0.08,
+                max_step=0.20,
+                min_hold_days=10,
+                max_asset_weight=0.28,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i73_sector_regime_low_churn_factor",
+                family="sector_regime_low_churn_factor",
+                hypothesis=(
+                    "Low-churn factor/sector blend checks whether quality, dividends, and low-volatility "
+                    "can reduce sector whipsaw without simply hiding in cash."
+                ),
+                tickers=[*sector_spdrs, *factors, *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=126,
+                skip_days=21,
+                top_n=5,
+                min_return=0.005,
+                min_change=0.08,
+                max_step=0.20,
+                min_hold_days=10,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i73_sector_regime_low_churn_ai_infra",
+                family="sector_regime_low_churn_ai_infra",
+                hypothesis=(
+                    "AI-infrastructure sector rotation should not be twitchy: power/grid/semis only win "
+                    "when the broader regime allows risk and the signal persists."
+                ),
+                tickers=[*ai_infra, *sector_spdrs, *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.010,
+                min_change=0.07,
+                max_step=0.22,
+                min_hold_days=8,
+                max_asset_weight=0.26,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _sector_regime_candidate(
+                name="i73_sector_regime_low_churn_reflation",
+                family="sector_regime_low_churn_reflation",
+                hypothesis=(
+                    "Reflation leadership is often episodic; this tests whether slow confirmation can "
+                    "capture oil/banks/materials without chasing every price spike."
+                ),
+                tickers=[*reflation, *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.005,
+                min_change=0.08,
+                max_step=0.20,
+                min_hold_days=10,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i73_sector_regime_low_churn_global",
+                family="sector_regime_low_churn_global",
+                hypothesis=(
+                    "Global low-churn rotation tests whether regime changes can move outside U.S. equity "
+                    "leadership without increasing operating burden."
+                ),
+                tickers=[*global_assets, *sector_spdrs, *defensive_assets, "HYG", "LQD", "UUP"],
+                lookback_days=126,
+                skip_days=21,
+                top_n=5,
+                min_return=0.005,
+                min_change=0.08,
+                max_step=0.18,
+                min_hold_days=10,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i73_sector_regime_low_churn_credit_sector",
+                family="sector_regime_low_churn_credit",
+                hypothesis=(
+                    "Credit-sector rotation checks whether HYG/LQD/loans can serve as intermediate risk "
+                    "rather than forcing a binary cash versus equity decision."
+                ),
+                tickers=[*credit_assets, *sector_spdrs, *defensive_assets, "SPY", "RSP"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.003,
+                min_change=0.07,
+                max_step=0.18,
+                min_hold_days=8,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        74: (
+            _sector_regime_candidate(
+                name="i74_sector_regime_ai_capex_basket",
+                family="sector_regime_ai_capex",
+                hypothesis=(
+                    "AI capex basket tests whether the right response to AI-bubble risk is rotation among "
+                    "semis, software, power, industrials, and utilities rather than only QQQ versus cash."
+                ),
+                tickers=[*ai_themes, *ai_infra, "XLI", "XLU", "XLF", *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.010,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _sector_regime_candidate(
+                name="i74_sector_regime_ai_escape_without_mega",
+                family="sector_regime_ai_ex_mega",
+                hypothesis=(
+                    "Ex-mega-cap AI rotation tests whether AI leadership can be expressed through themes "
+                    "and infrastructure without defaulting to QQQ or mega-cap platforms."
+                ),
+                tickers=["SMH", "SOXX", "IGV", "CLOU", "SKYY", "BOTZ", "ROBO", "VRT", "ETN", "PWR", "CEG", "GEV", "XLU", "XLI", *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.012,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _sector_regime_candidate(
+                name="i74_sector_regime_power_grid_barbell",
+                family="sector_regime_power_grid",
+                hypothesis=(
+                    "Power/grid barbell tests whether AI infrastructure creates tradable leadership in "
+                    "utilities, industrials, uranium, and grid names before or after semis lead."
+                ),
+                tickers=["XLU", "XLI", "VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "URA", "SMH", "SOXX", *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.010,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i74_sector_regime_software_hardware_split",
+                family="sector_regime_software_hardware",
+                hypothesis=(
+                    "Software versus hardware split tests whether AI unit-economics pressure should rotate "
+                    "away from software/cloud and into semis or infrastructure when leadership diverges."
+                ),
+                tickers=["IGV", "CLOU", "SKYY", "SMH", "SOXX", "BOTZ", "ROBO", "XLK", "XLC", "XLI", "XLU", *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.010,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _sector_regime_candidate(
+                name="i74_sector_regime_ai_defensive_quality",
+                family="sector_regime_ai_quality",
+                hypothesis=(
+                    "AI with quality/defensive ballast tests whether the system can stay invested in "
+                    "durable compounders while reducing pure AI beta during fragile regimes."
+                ),
+                tickers=[*ai_themes, "QUAL", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "XLV", "XLP", "XLU", *defensive_assets, "SPY", "RSP", "HYG"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.008,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i74_sector_regime_ai_reentry_fast",
+                family="sector_regime_ai_reentry",
+                hypothesis=(
+                    "Fast AI sector reentry tests the stuck-in-cash failure mode by allowing AI themes "
+                    "to reclaim risk when repair, breadth, and credit improve together."
+                ),
+                tickers=[*ai_themes, *ai_infra, *sector_expanded, *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=5,
+                min_return=0.012,
+                min_change=0.04,
+                max_step=0.35,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+        ),
+        75: (
+            _sector_regime_candidate(
+                name="i75_sector_regime_policy_oil_shock",
+                family="sector_regime_policy_oil",
+                hypothesis=(
+                    "Policy/oil shock rotation tests whether energy, gold, dollar, and duration can win "
+                    "while growth sectors step aside during geopolitical or inflation shocks."
+                ),
+                tickers=[*reflation, "GLD", "IAU", "UUP", "TLT", "IEF", "SHY", "BIL", "XLP", "XLU", "XLV", "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                min_return=0.005,
+                max_asset_weight=0.26,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _sector_regime_candidate(
+                name="i75_sector_regime_rates_relief",
+                family="sector_regime_rates_relief",
+                hypothesis=(
+                    "Rates-relief rotation tests whether duration, real estate, growth, and credit should "
+                    "lead re-risking when inflation and rates pressure eases."
+                ),
+                tickers=["TLT", "IEF", "TIP", "LQD", "HYG", "XLRE", "XLU", "XLK", "XLY", "QQQ", "SMH", "SPY", "RSP", "BIL", "SGOV", "SHY", "GLD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.005,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i75_sector_regime_private_credit_warning",
+                family="sector_regime_private_credit",
+                hypothesis=(
+                    "Private-credit warning rotation tests whether BDCs, loans, banks, and credit ETFs "
+                    "warn before equity sectors, and whether the system should route to cash/duration."
+                ),
+                tickers=["BIZD", "ARCC", "MAIN", "BXSL", "OBDC", "SRLN", "BKLN", "JAAA", "JBBB", "KRE", "XLF", "HYG", "LQD", "IEF", "TLT", "BIL", "SPY", "RSP"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.004,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _sector_regime_candidate(
+                name="i75_sector_regime_inflation_barbell",
+                family="sector_regime_inflation_barbell",
+                hypothesis=(
+                    "Inflation barbell rotates among commodities, energy, materials, dollar, gold, and "
+                    "defensive equity instead of treating inflation shocks as a simple sell signal."
+                ),
+                tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XOP", "XLB", "XME", "GLD", "UUP", "XLP", "XLU", "XLV", "BIL", "SHY", "IEF", "SPY", "RSP", "HYG"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.005,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _sector_regime_candidate(
+                name="i75_sector_regime_defensive_equity_bridge",
+                family="sector_regime_defensive_bridge",
+                hypothesis=(
+                    "Defensive-equity bridge tests whether healthcare, staples, utilities, quality, and "
+                    "low-vol can keep compounding when risk is yellow but not fully red."
+                ),
+                tickers=["XLV", "XLP", "XLU", "QUAL", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "GLD", "TLT", "IEF", "BIL", "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.004,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i75_sector_regime_credit_then_sector",
+                family="sector_regime_credit_then_sector",
+                hypothesis=(
+                    "Credit-then-sector rotation tests whether credit repair should unlock sector risk "
+                    "before broad equity momentum fully confirms."
+                ),
+                tickers=[*credit_assets, *sector_expanded, *defensive_assets, "SPY", "RSP"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.004,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        76: (
+            _sector_regime_candidate(
+                name="i76_sector_regime_final_core",
+                family="sector_regime_final_core",
+                hypothesis=(
+                    "Final core sector-regime system combines sector breadth, factors, credit, duration, "
+                    "gold, and cash with explicit regime-controlled risk sizing."
+                ),
+                tickers=[*sector_spdrs, *factors, *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                min_change=0.06,
+                max_step=0.25,
+                min_hold_days=5,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i76_sector_regime_final_low_churn",
+                family="sector_regime_final_low_churn",
+                hypothesis=(
+                    "Final low-churn sector-regime system sacrifices some responsiveness to improve human "
+                    "operability and reduce small frequent reallocations."
+                ),
+                tickers=[*sector_spdrs, *factors, *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=126,
+                skip_days=21,
+                top_n=5,
+                min_return=0.005,
+                min_change=0.09,
+                max_step=0.18,
+                min_hold_days=10,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i76_sector_regime_final_ai_capex",
+                family="sector_regime_final_ai_capex",
+                hypothesis=(
+                    "Final AI-capex sector-regime system allows semis, software, power/grid, quality, "
+                    "and defensive assets to compete rather than hard-coding QQQ exposure."
+                ),
+                tickers=[*ai_themes, *ai_infra, *factors, "XLV", "XLP", "XLU", *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.010,
+                min_change=0.06,
+                max_step=0.25,
+                min_hold_days=5,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _sector_regime_candidate(
+                name="i76_sector_regime_final_macro_barbell",
+                family="sector_regime_final_macro_barbell",
+                hypothesis=(
+                    "Final macro barbell tests sector rotation under oil, dollar, duration, credit, and "
+                    "defensive-equity regimes for non-AI market transitions."
+                ),
+                tickers=[*reflation, "XLV", "XLP", "XLU", "GLD", "IAU", "UUP", "TLT", "IEF", "SHY", "BIL", "HYG", "LQD", "SPY", "RSP"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.005,
+                min_change=0.06,
+                max_step=0.24,
+                min_hold_days=5,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _sector_regime_candidate(
+                name="i76_sector_regime_final_global_rotation",
+                family="sector_regime_final_global",
+                hypothesis=(
+                    "Final global sector-regime system tests whether leadership can migrate outside U.S. "
+                    "mega-cap technology while preserving off-ramp discipline."
+                ),
+                tickers=[*global_assets, *sector_spdrs, *factors, *defensive_assets, "HYG", "LQD", "UUP"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                min_change=0.06,
+                max_step=0.22,
+                min_hold_days=5,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="i76_sector_regime_final_credit_reentry",
+                family="sector_regime_final_credit_reentry",
+                hypothesis=(
+                    "Final credit-reentry system lets credit and sectors rebuild together after stress, "
+                    "targeting the gap between cash defense and early risk-on participation."
+                ),
+                tickers=[*credit_assets, *sector_expanded, *factors, *defensive_assets, "SPY", "RSP"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=6,
+                min_return=0.004,
+                min_change=0.06,
+                max_step=0.23,
+                min_hold_days=5,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+    }
+    return batches[iteration]
+
 def _dip_reentry_candidate(
     *,
     name: str,
@@ -5264,6 +5798,84 @@ def _dip_overlay_candidate(
         ),
     )
 
+
+
+def _sector_regime_candidate(
+    *,
+    name: str,
+    family: str,
+    hypothesis: str,
+    tickers: list[str],
+    lookback_days: int,
+    skip_days: int,
+    top_n: int,
+    min_return: float,
+    min_change: float = 0.04,
+    max_step: float = 0.32,
+    min_hold_days: int = 0,
+    max_asset_weight: float = 0.25,
+    trigger: float = -0.10,
+    deep: float = -0.24,
+    min_recovery: float = 0.018,
+    max_risk: float = 0.95,
+    vol_ceiling: float = 0.38,
+    scenario_sizing: ScenarioSizingConfig | None = None,
+) -> ExperimentCandidate:
+    proxy_tickers = [
+        "BIL",
+        "SPY",
+        "RSP",
+        "QQQ",
+        "SMH",
+        "XLK",
+        "XLE",
+        "XLI",
+        "XLF",
+        "HYG",
+        "LQD",
+        "TLT",
+        "IEF",
+        "SHY",
+        "DBC",
+    ]
+    strategy_tickers = list(dict.fromkeys([*tickers, *proxy_tickers]))
+    return _candidate(
+        name=name,
+        role="sector_regime_candidate",
+        phase="sector_regime_rotation",
+        family=family,
+        hypothesis=hypothesis,
+        scenario_sizing=scenario_sizing,
+        strategy=StrategyConfig(
+            type="sector_regime_rotation",
+            tickers=strategy_tickers,
+            defensive_ticker="BIL",
+            lookback_days=lookback_days,
+            skip_days=skip_days,
+            top_n=top_n,
+            min_return=min_return,
+            ranking_metric="risk_adjusted_return",
+            weighting="risk_adjusted_score",
+            volatility_lookback_days=63,
+            trend_filter_days=100,
+            max_asset_weight=max_asset_weight,
+            dip_lookback_days=126,
+            dip_trigger_drawdown=trigger,
+            dip_deep_drawdown=deep,
+            dip_recovery_days=21,
+            dip_confirmation_days=5,
+            dip_min_recovery_return=min_recovery,
+            dip_starter_weight=0.25,
+            dip_step_weight=0.35,
+            dip_max_risk_weight=max_risk,
+            dip_volatility_ceiling=vol_ceiling,
+            dip_credit_confirmation=True,
+            dip_breadth_confirmation=True,
+            cycle_min_rebalance_change=min_change,
+            cycle_max_step_change=max_step,
+            cycle_min_hold_days=min_hold_days,
+        ),
+    )
 
 def _ai_cycle_candidate(
     *,

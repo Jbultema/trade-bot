@@ -97,6 +97,7 @@ class StrategyConfig(BaseModel):
         "dip_reentry",
         "dip_reentry_overlay",
         "ai_risk_cycle_overlay",
+        "sector_regime_rotation",
     ]
     tickers: list[str]
     satellite_tickers: list[str] = Field(default_factory=list)

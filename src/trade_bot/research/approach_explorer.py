@@ -924,6 +924,7 @@ def _strategy_type_explanation(strategy: StrategyConfig) -> str:
         "dip_reentry": "Metered reentry system that buys discounted assets only after repair signals confirm.",
         "dip_reentry_overlay": "Momentum/off-ramp system that lets confirmed dip-reentry signals replace defensive cash.",
         "ai_risk_cycle_overlay": "Diversified off-ramp core with an aggressive AI satellite that can reenter after confirmed repair.",
+        "sector_regime_rotation": "Sector/theme rotation system that scores leadership by regime, then meters total risk through credit, breadth, volatility, and discount-repair signals.",
         "fixed_allocation": "Static long-only allocation with explicit target weights.",
     }
     return explanations.get(strategy.type, f"Strategy type {strategy.type}.")

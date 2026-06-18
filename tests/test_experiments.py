@@ -701,6 +701,216 @@ def test_dip_reentry_overlay_iterations_are_bounded_and_cash_redeployment_focuse
 
 
 
+
+def test_sector_regime_rotation_routes_from_stress_to_sector_reentry() -> None:
+    index = pd.bdate_range("2020-01-01", periods=240)
+    base = pd.Series(
+        [100.0] * 45
+        + list(range(100, 70, -1))
+        + [70.0] * 45
+        + [70.0 + i * 0.42 for i in range(120)],
+        index=index,
+        dtype=float,
+    )
+    ai = pd.Series(
+        [110.0] * 45
+        + list(range(110, 50, -2))
+        + [50.0] * 45
+        + [50.0 + i * 0.90 for i in range(120)],
+        index=index,
+        dtype=float,
+    )
+    defensive = pd.Series([100.0 + i * 0.03 for i in range(240)], index=index, dtype=float)
+    prices = pd.DataFrame(
+        {
+            "SPY": base,
+            "RSP": base * 1.01,
+            "HYG": base,
+            "LQD": defensive,
+            "QQQ": ai,
+            "SMH": ai * 1.04,
+            "XLK": ai * 0.98,
+            "XLE": base * 0.95,
+            "XLI": base * 1.02,
+            "XLF": base * 0.97,
+            "XLV": defensive * 1.01,
+            "XLU": defensive * 1.02,
+            "TLT": defensive * 1.03,
+            "IEF": defensive,
+            "SHY": defensive * 0.99,
+            "DBC": base * 0.90,
+            "GLD": defensive * 1.04,
+            "BIL": pd.Series([100.0 for _ in index], index=index),
+        }
+    )
+    strategy = StrategyConfig(
+        type="sector_regime_rotation",
+        tickers=[
+            "SPY",
+            "RSP",
+            "QQQ",
+            "SMH",
+            "XLK",
+            "XLE",
+            "XLI",
+            "XLF",
+            "XLV",
+            "XLU",
+            "GLD",
+            "TLT",
+            "IEF",
+            "HYG",
+            "LQD",
+            "DBC",
+        ],
+        defensive_ticker="BIL",
+        lookback_days=42,
+        skip_days=5,
+        top_n=4,
+        min_return=0.0,
+        ranking_metric="risk_adjusted_return",
+        weighting="risk_adjusted_score",
+        volatility_lookback_days=21,
+        trend_filter_days=42,
+        max_asset_weight=0.35,
+        dip_lookback_days=63,
+        dip_trigger_drawdown=-0.12,
+        dip_deep_drawdown=-0.30,
+        dip_recovery_days=10,
+        dip_confirmation_days=3,
+        dip_min_recovery_return=0.015,
+        dip_starter_weight=0.25,
+        dip_step_weight=0.35,
+        dip_max_risk_weight=0.90,
+        dip_volatility_ceiling=1.20,
+        cycle_min_rebalance_change=0.02,
+        cycle_max_step_change=0.40,
+    )
+
+    weights = build_strategy_weights(prices, strategy)
+    equity_theme_weight = weights[["QQQ", "SMH", "XLK", "XLE", "XLI", "XLF"]].sum(axis=1)
+    defensive_weight = weights[["BIL", "GLD", "TLT", "IEF", "LQD"]].sum(axis=1)
+
+    assert round(float(weights.iloc[-1].sum()), 8) == 1.0
+    assert defensive_weight.iloc[80] > equity_theme_weight.iloc[80]
+    assert equity_theme_weight.iloc[-1] > equity_theme_weight.iloc[80]
+    assert equity_theme_weight.max() <= 0.90
+
+
+def test_sector_regime_iterations_are_diverse_and_operable() -> None:
+    cached_universe = {
+        "AAPL",
+        "AGG",
+        "ARCC",
+        "ARKK",
+        "BIL",
+        "BIZD",
+        "BKLN",
+        "BNO",
+        "BOTZ",
+        "BXSL",
+        "CCJ",
+        "CEG",
+        "CLOU",
+        "COWZ",
+        "DBA",
+        "DBC",
+        "EEM",
+        "EFA",
+        "ETN",
+        "EWC",
+        "EWJ",
+        "EWZ",
+        "GEV",
+        "GLD",
+        "HYG",
+        "IAU",
+        "IEF",
+        "IGV",
+        "INDA",
+        "IWD",
+        "IWF",
+        "IWM",
+        "IYT",
+        "JAAA",
+        "JBBB",
+        "JNK",
+        "KRE",
+        "LQD",
+        "MAIN",
+        "MOAT",
+        "MTUM",
+        "NRG",
+        "OBDC",
+        "PWR",
+        "QQQ",
+        "QUAL",
+        "ROBO",
+        "RSP",
+        "SCHD",
+        "SGOV",
+        "SHY",
+        "SKYY",
+        "SMH",
+        "SOXX",
+        "SPY",
+        "SPLV",
+        "SRLN",
+        "TIP",
+        "TLT",
+        "UUP",
+        "URA",
+        "USFR",
+        "USMV",
+        "USO",
+        "VCIT",
+        "VCSH",
+        "VEA",
+        "VGK",
+        "VIG",
+        "VRT",
+        "VTV",
+        "VUG",
+        "VWO",
+        "XBI",
+        "XHB",
+        "XLB",
+        "XLC",
+        "XLE",
+        "XLF",
+        "XLI",
+        "XLK",
+        "XLP",
+        "XLRE",
+        "XLU",
+        "XLV",
+        "XLY",
+        "XME",
+        "XOP",
+        "XRT",
+    }
+
+    families: set[str] = set()
+    for iteration in range(72, 77):
+        candidates = generate_iteration_candidates(iteration)
+        families.update(candidate.family for candidate in candidates)
+
+        assert len(candidates) == 6
+        assert len({candidate.name for candidate in candidates}) == len(candidates)
+        assert all(candidate.name.startswith(f"i{iteration:02d}_sector_regime_") for candidate in candidates)
+        assert {candidate.phase for candidate in candidates} == {"sector_regime_rotation"}
+        assert {candidate.role for candidate in candidates} == {"sector_regime_candidate"}
+        assert all(candidate.strategy.type == "sector_regime_rotation" for candidate in candidates)
+        assert all(candidate.strategy.defensive_ticker == "BIL" for candidate in candidates)
+        assert all(candidate.strategy.cycle_min_rebalance_change >= 0.04 for candidate in candidates)
+        assert all(candidate.strategy.cycle_max_step_change <= 0.35 for candidate in candidates)
+        assert all(
+            set(candidate.strategy.tickers).issubset(cached_universe) for candidate in candidates
+        )
+        assert any(candidate.scenario_sizing is not None for candidate in candidates)
+
+    assert len(families) >= 20
+
 def test_ai_risk_cycle_overlay_reenters_ai_after_confirmed_repair() -> None:
     index = pd.bdate_range("2020-01-01", periods=220)
     core_path = pd.Series(
