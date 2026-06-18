@@ -7,6 +7,7 @@ import pandas as pd
 
 from trade_bot.config import BotConfig, DataConfig, ExecutionConfig, StrategyConfig
 from trade_bot.research.approach_explorer import (
+    build_approach_allocation_transition_events,
     build_approach_backtest_result,
     build_approach_catalog,
     build_approach_change_log,
@@ -208,3 +209,70 @@ def _config() -> BotConfig:
             )
         },
     )
+
+
+def test_approach_position_history_supports_custom_windows_and_transition_events() -> None:
+    strategy = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ"],
+        lookback_days=2,
+        skip_days=0,
+        top_n=1,
+        defensive_ticker="BIL",
+    )
+    index = pd.bdate_range("2024-01-01", periods=14)
+    prices = pd.DataFrame(
+        {
+            "SPY": [100, 101, 102, 103, 90, 88, 87, 89, 94, 98, 101, 103, 104, 105],
+            "QQQ": [100, 103, 106, 109, 92, 86, 84, 88, 96, 103, 110, 114, 116, 118],
+            "BIL": [100 + idx * 0.01 for idx in range(14)],
+        },
+        index=index,
+        dtype=float,
+    )
+    result, missing = build_approach_backtest_result(
+        prices,
+        strategy,
+        ExecutionConfig(rebalance="D", signal_lag_days=1),
+    )
+
+    assert result is not None
+    assert missing == []
+    start = index[4]
+    end = index[11]
+    weight_history = build_approach_weight_history(
+        result.weights,
+        defensive_ticker="BIL",
+        lookback_days=None,
+        start=start,
+        end=end,
+    )
+    exposure_history = build_approach_exposure_history(
+        result.weights,
+        defensive_ticker="BIL",
+        lookback_days=None,
+        start=start,
+        end=end,
+    )
+    summary = build_approach_position_summary(
+        result.weights,
+        defensive_ticker="BIL",
+        lookback_days=None,
+        start=start,
+        end=end,
+    )
+    events = build_approach_allocation_transition_events(
+        result,
+        defensive_ticker="BIL",
+        start=start,
+        end=end,
+        material_change=0.01,
+    )
+
+    assert weight_history.index.min() >= start
+    assert weight_history.index.max() <= end
+    assert exposure_history.index.min() >= start
+    assert {"risk_assets", "defensive", "cash_or_unallocated"}.issubset(exposure_history.columns)
+    assert summary["interpretation"].str.contains("selected").any()
+    assert "Worst drawdown point" in set(events["event"])
+    assert "risk_weight_at_event" in events.columns

@@ -4,7 +4,9 @@ from datetime import date
 from typing import Any, cast
 
 import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
+from plotly.subplots import make_subplots
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
@@ -14,8 +16,10 @@ from trade_bot.dashboard.formatting import (
     _window_start_from_preset,
 )
 from trade_bot.DEFAULT import DEFAULT_PERFORMANCE_WINDOW, DEFAULT_PERFORMANCE_WINDOWS
+from trade_bot.features.indicators import drawdown
 from trade_bot.reporting.report import make_equity_drawdown_figure, window_performance_frame
 from trade_bot.research.approach_explorer import (
+    build_approach_allocation_transition_events,
     build_approach_backtest_result,
     build_approach_catalog,
     build_approach_change_log,
@@ -91,30 +95,28 @@ def _render_position_behavior(
         st.write("No position history is available for this approach.")
         return
 
-    window_options = {
-        "3 months": 63,
-        "6 months": 126,
-        "1 year": 252,
-        "2 years": 504,
-        "5 years": 1260,
-    }
-    selected_window = st.selectbox(
-        "Position-history window",
-        list(window_options),
-        index=2,
-        key=f"{key_prefix}_position_window",
+    earliest_weight_date = pd.Timestamp(weights.index.min())
+    latest_weight_date = pd.Timestamp(weights.index.max())
+    _, window_start, window_end = _select_history_window(
+        label="Position-history window",
+        earliest=earliest_weight_date,
+        latest=latest_weight_date,
+        key_prefix=f"{key_prefix}_position",
     )
-    lookback_days = window_options[selected_window]
 
     exposure_history = build_approach_exposure_history(
         weights,
         defensive_ticker=defensive_ticker,
-        lookback_days=lookback_days,
+        lookback_days=None,
+        start=window_start,
+        end=window_end,
     )
     weight_history = build_approach_weight_history(
         weights,
         defensive_ticker=defensive_ticker,
-        lookback_days=lookback_days,
+        lookback_days=None,
+        start=window_start,
+        end=window_end,
     )
 
     chart_cols = st.columns(2)
@@ -130,7 +132,9 @@ def _render_position_behavior(
         build_approach_position_summary(
             weights,
             defensive_ticker=defensive_ticker,
-            lookback_days=lookback_days,
+            lookback_days=None,
+            start=window_start,
+            end=window_end,
         ),
         hide_index=True,
     )
@@ -144,7 +148,9 @@ def _render_position_behavior(
     change_log = build_approach_change_log(
         weights,
         defensive_ticker=defensive_ticker,
-        lookback_days=lookback_days,
+        lookback_days=None,
+        start=window_start,
+        end=window_end,
     )
     if change_log.empty:
         st.caption("No material allocation changes in the selected window.")
@@ -152,7 +158,12 @@ def _render_position_behavior(
         st.caption("Recent material allocation changes")
         _render_metric_dataframe(_display_metrics(change_log), hide_index=True)
 
-    holding_stats = build_approach_holding_stats(weights, lookback_days=lookback_days)
+    holding_stats = build_approach_holding_stats(
+        weights,
+        lookback_days=None,
+        start=window_start,
+        end=window_end,
+    )
     if not holding_stats.empty:
         st.caption("Holding behavior by ticker")
         _render_metric_dataframe(_display_metrics(holding_stats), hide_index=True)
@@ -168,6 +179,235 @@ def _format_weight_history_table(frame: pd.DataFrame) -> pd.DataFrame:
             continue
         display[column] = display[column].map(lambda value: f"{float(value):.1%}")
     return display
+
+
+def _select_history_window(
+    *,
+    label: str,
+    earliest: pd.Timestamp,
+    latest: pd.Timestamp,
+    key_prefix: str,
+) -> tuple[str, pd.Timestamp, pd.Timestamp]:
+    window_options = list(DEFAULT_PERFORMANCE_WINDOWS)
+    default_index = (
+        window_options.index(DEFAULT_PERFORMANCE_WINDOW)
+        if DEFAULT_PERFORMANCE_WINDOW in window_options
+        else 0
+    )
+    window_columns = st.columns([1, 2])
+    window_preset = window_columns[0].selectbox(
+        label,
+        window_options,
+        index=default_index,
+        key=f"{key_prefix}_window",
+    )
+    custom_start_date: date | None = None
+    window_end = latest
+    if window_preset == "Custom":
+        custom_columns = st.columns(2)
+        custom_start_date = cast(
+            date,
+            custom_columns[0].date_input(
+                "Start",
+                value=max(earliest, latest - pd.DateOffset(days=90)).date(),
+                min_value=earliest.date(),
+                max_value=latest.date(),
+                key=f"{key_prefix}_start",
+            ),
+        )
+        custom_end_date = cast(
+            date,
+            custom_columns[1].date_input(
+                "End",
+                value=latest.date(),
+                min_value=earliest.date(),
+                max_value=latest.date(),
+                key=f"{key_prefix}_end",
+            ),
+        )
+        window_end = min(latest, max(earliest, pd.Timestamp(custom_end_date)))
+
+    window_start = _window_start_from_preset(
+        window_preset,
+        earliest=earliest,
+        latest=latest,
+        custom_start=custom_start_date,
+    )
+    if window_start > window_end:
+        window_start = window_end
+    return window_preset, window_start, window_end
+
+
+def _render_performance_allocation_context(
+    result: BacktestResult,
+    *,
+    baseline_run: BaselineRun,
+    defensive_ticker: str | None,
+    key_prefix: str,
+) -> None:
+    comparison_options = [
+        name
+        for name in [
+            "buy_hold_spy",
+            "buy_hold_qqq",
+            "buy_hold_bil",
+            "drawdown_managed_dual_momentum",
+        ]
+        if name in baseline_run.results and name != result.name
+    ]
+    selected_comparisons = st.multiselect(
+        "Comparison lines",
+        comparison_options,
+        default=comparison_options[:2],
+        key=f"{key_prefix}_comparisons",
+    )
+    chart_results = {result.name: result}
+    chart_results.update({name: baseline_run.results[name] for name in selected_comparisons})
+
+    earliest_result_date, latest_result_date = _result_date_bounds({result.name: result})
+    _, window_start, window_end = _select_history_window(
+        label="Shared performance/allocation window",
+        earliest=earliest_result_date,
+        latest=latest_result_date,
+        key_prefix=f"{key_prefix}_shared",
+    )
+
+    exposure_history = build_approach_exposure_history(
+        result.weights,
+        defensive_ticker=defensive_ticker,
+        lookback_days=None,
+        start=window_start,
+        end=window_end,
+    )
+    weight_history = build_approach_weight_history(
+        result.weights,
+        defensive_ticker=defensive_ticker,
+        lookback_days=None,
+        start=window_start,
+        end=window_end,
+    )
+
+    st.plotly_chart(
+        _make_performance_allocation_figure(
+            chart_results,
+            exposure_history,
+            start=window_start,
+            end=window_end,
+            title=f"Performance, drawdown, and allocation: {window_start.date()} to {window_end.date()}",
+        ),
+        use_container_width=True,
+    )
+
+    stats_col, behavior_col = st.columns(2)
+    with stats_col:
+        st.caption("Window performance stats")
+        window_stats = window_performance_frame(
+            chart_results,
+            start=window_start,
+            end=window_end,
+        )
+        if not window_stats.empty:
+            _render_metric_dataframe(_display_metrics(window_stats), hide_index=True)
+    with behavior_col:
+        st.caption("Window allocation summary")
+        _render_metric_dataframe(
+            build_approach_position_summary(
+                result.weights,
+                defensive_ticker=defensive_ticker,
+                lookback_days=None,
+                start=window_start,
+                end=window_end,
+            ),
+            hide_index=True,
+        )
+
+    if not weight_history.empty:
+        st.caption("Detailed allocation weights for the same window")
+        st.area_chart(weight_history)
+
+    event_frame = build_approach_allocation_transition_events(
+        result,
+        defensive_ticker=defensive_ticker,
+        start=window_start,
+        end=window_end,
+    )
+    if not event_frame.empty:
+        st.caption("Transition events inside the selected window")
+        _render_metric_dataframe(_display_metrics(event_frame), hide_index=True)
+
+
+def _make_performance_allocation_figure(
+    results: dict[str, BacktestResult],
+    exposure_history: pd.DataFrame,
+    *,
+    start: pd.Timestamp,
+    end: pd.Timestamp,
+    title: str,
+) -> go.Figure:
+    figure = make_subplots(
+        rows=3,
+        cols=1,
+        shared_xaxes=True,
+        vertical_spacing=0.06,
+        subplot_titles=("Growth of $1", "Drawdown", "Allocation exposure"),
+    )
+    for name, result in results.items():
+        equity = result.equity.sort_index().dropna()
+        equity = equity.loc[(equity.index >= start) & (equity.index <= end)]
+        if equity.empty:
+            continue
+        normalized = equity / equity.iloc[0]
+        figure.add_trace(
+            go.Scatter(x=normalized.index, y=normalized, mode="lines", name=name),
+            row=1,
+            col=1,
+        )
+        strategy_drawdown = drawdown(normalized)
+        figure.add_trace(
+            go.Scatter(
+                x=strategy_drawdown.index,
+                y=strategy_drawdown,
+                mode="lines",
+                name=f"{name} drawdown",
+                showlegend=False,
+            ),
+            row=2,
+            col=1,
+        )
+
+    allocation_colors = {
+        "risk_assets": "#0f766e",
+        "defensive": "#f59e0b",
+        "cash_or_unallocated": "#94a3b8",
+    }
+    for column in ["risk_assets", "defensive", "cash_or_unallocated"]:
+        if column not in exposure_history:
+            continue
+        figure.add_trace(
+            go.Scatter(
+                x=exposure_history.index,
+                y=exposure_history[column],
+                mode="lines",
+                stackgroup="allocation",
+                name=column.replace("_", " "),
+                line={"color": allocation_colors.get(column)},
+                hovertemplate="%{x|%Y-%m-%d}<br>%{y:.1%}<extra>%{fullData.name}</extra>",
+            ),
+            row=3,
+            col=1,
+        )
+
+    figure.update_yaxes(tickprefix="$", tickformat=".2f", row=1, col=1)
+    figure.update_yaxes(tickformat=".0%", row=2, col=1)
+    figure.update_yaxes(tickformat=".0%", range=[0, 1], row=3, col=1)
+    figure.update_layout(
+        template="plotly_white",
+        height=950,
+        hovermode="x unified",
+        title=title,
+        legend={"orientation": "h", "yanchor": "bottom", "y": 1.02, "xanchor": "left", "x": 0},
+    )
+    return figure
 
 
 def _render_approach_performance(
@@ -197,58 +437,12 @@ def _render_approach_performance(
     chart_results.update({name: baseline_run.results[name] for name in selected_comparisons})
 
     earliest_result_date, latest_result_date = _result_date_bounds({result.name: result})
-    window_columns = st.columns([1, 2])
-    window_options = list(DEFAULT_PERFORMANCE_WINDOWS)
-    default_index = (
-        window_options.index(DEFAULT_PERFORMANCE_WINDOW)
-        if DEFAULT_PERFORMANCE_WINDOW in window_options
-        else 0
-    )
-    window_preset = window_columns[0].selectbox(
-        "Performance window",
-        window_options,
-        index=default_index,
-        key=f"{key_prefix}_performance_window",
-    )
-    custom_start_date: date | None = None
-    window_end = latest_result_date
-    if window_preset == "Custom":
-        custom_columns = st.columns(2)
-        custom_start_date = cast(
-            date,
-            custom_columns[0].date_input(
-                "Start",
-                value=max(
-                    earliest_result_date,
-                    latest_result_date - pd.DateOffset(days=90),
-                ).date(),
-                min_value=earliest_result_date.date(),
-                max_value=latest_result_date.date(),
-                key=f"{key_prefix}_performance_start",
-            ),
-        )
-        custom_end_date = cast(
-            date,
-            custom_columns[1].date_input(
-                "End",
-                value=latest_result_date.date(),
-                min_value=earliest_result_date.date(),
-                max_value=latest_result_date.date(),
-                key=f"{key_prefix}_performance_end",
-            ),
-        )
-        window_end = min(
-            latest_result_date, max(earliest_result_date, pd.Timestamp(custom_end_date))
-        )
-
-    window_start = _window_start_from_preset(
-        window_preset,
+    _, window_start, window_end = _select_history_window(
+        label="Performance window",
         earliest=earliest_result_date,
         latest=latest_result_date,
-        custom_start=custom_start_date,
+        key_prefix=f"{key_prefix}_performance",
     )
-    if window_start > window_end:
-        window_start = window_end
 
     st.plotly_chart(
         make_equity_drawdown_figure(
@@ -417,6 +611,7 @@ def _render_approach_detail_workbench(
             st.write(str(approach_row["hypothesis"]))
 
     (
+        combined_tab,
         performance_tab,
         allocation_tab,
         mechanics_tab,
@@ -424,6 +619,7 @@ def _render_approach_detail_workbench(
         manifest_tab,
     ) = st.tabs(
         [
+            "Performance + Allocation",
             "Performance Over Time",
             "Allocation Behavior",
             "Mechanics",
@@ -431,6 +627,21 @@ def _render_approach_detail_workbench(
             "Manifest / Risk Notes",
         ]
     )
+
+    with combined_tab:
+        if detail_result is None:
+            st.write("No performance/allocation curve could be reconstructed for this approach.")
+        else:
+            st.caption(
+                "Use this shared-window view to inspect whether the strategy got defensive before "
+                "drawdowns, stayed defensive too long, or re-entered risk after repair."
+            )
+            _render_performance_allocation_context(
+                detail_result,
+                baseline_run=baseline_run,
+                defensive_ticker=approach_strategy.defensive_ticker,
+                key_prefix="approach_combined",
+            )
 
     with performance_tab:
         scorecard = _scorecard_for_catalog_row(

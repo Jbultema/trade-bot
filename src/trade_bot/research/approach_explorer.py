@@ -8,6 +8,7 @@ import pandas as pd
 from trade_bot.backtest.engine import BacktestResult, run_backtest
 from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
 from trade_bot.DEFAULT import DEFAULT_EXPERIMENTS_DIR
+from trade_bot.features.indicators import drawdown
 from trade_bot.portfolio.risk import current_positions
 from trade_bot.research.experiments import ScenarioSizingConfig, apply_scenario_position_sizing
 from trade_bot.strategies.momentum import build_strategy_weights
@@ -320,12 +321,16 @@ def build_approach_weight_history(
     weights: pd.DataFrame,
     *,
     defensive_ticker: str | None = None,
-    lookback_days: int = 252,
+    lookback_days: int | None = 252,
     max_assets: int = 8,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
 ) -> pd.DataFrame:
     if weights.empty:
         return pd.DataFrame()
-    history = weights.tail(lookback_days).copy().fillna(0.0)
+    history = _window_weights(weights, lookback_days=lookback_days, start=start, end=end)
+    if history.empty:
+        return pd.DataFrame()
     selected_columns = _important_weight_columns(
         history,
         defensive_ticker=defensive_ticker,
@@ -350,11 +355,15 @@ def build_approach_exposure_history(
     weights: pd.DataFrame,
     *,
     defensive_ticker: str | None = None,
-    lookback_days: int = 252,
+    lookback_days: int | None = 252,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
 ) -> pd.DataFrame:
     if weights.empty:
         return pd.DataFrame()
-    history = weights.tail(lookback_days).copy().fillna(0.0)
+    history = _window_weights(weights, lookback_days=lookback_days, start=start, end=end)
+    if history.empty:
+        return pd.DataFrame()
     defensive_weight = (
         history[defensive_ticker] if defensive_ticker and defensive_ticker in history else 0.0
     )
@@ -377,12 +386,16 @@ def build_approach_position_summary(
     weights: pd.DataFrame,
     *,
     defensive_ticker: str | None = None,
-    lookback_days: int = 252,
+    lookback_days: int | None = 252,
     material_change: float = 0.05,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
 ) -> pd.DataFrame:
     if weights.empty:
         return pd.DataFrame()
-    history = weights.tail(lookback_days).copy().fillna(0.0)
+    history = _window_weights(weights, lookback_days=lookback_days, start=start, end=end)
+    if history.empty:
+        return pd.DataFrame()
     turnover = history.diff().abs().sum(axis=1).fillna(history.abs().sum(axis=1))
     material_turnover = turnover[turnover >= material_change]
     defensive_weight = (
@@ -408,7 +421,7 @@ def build_approach_position_summary(
             {
                 "metric": "Average risk exposure",
                 "value": f"{risk_weight.mean():.1%}",
-                "interpretation": f"Average non-defensive exposure over the last {len(history):,} sessions.",
+                "interpretation": f"Average non-defensive exposure over the selected {len(history):,} sessions.",
             },
             {
                 "metric": "Material change days",
@@ -433,13 +446,17 @@ def build_approach_change_log(
     weights: pd.DataFrame,
     *,
     defensive_ticker: str | None = None,
-    lookback_days: int = 252,
+    lookback_days: int | None = 252,
     material_change: float = 0.05,
     max_rows: int = 30,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
 ) -> pd.DataFrame:
     if weights.empty:
         return pd.DataFrame()
-    history = weights.tail(lookback_days).copy().fillna(0.0)
+    history = _window_weights(weights, lookback_days=lookback_days, start=start, end=end)
+    if history.empty:
+        return pd.DataFrame()
     previous = history.shift(1).fillna(0.0)
     deltas = history - previous
     turnover = deltas.abs().sum(axis=1)
@@ -467,12 +484,16 @@ def build_approach_change_log(
 def build_approach_holding_stats(
     weights: pd.DataFrame,
     *,
-    lookback_days: int = 252,
+    lookback_days: int | None = 252,
     max_assets: int = 20,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
 ) -> pd.DataFrame:
     if weights.empty:
         return pd.DataFrame()
-    history = weights.tail(lookback_days).copy().fillna(0.0)
+    history = _window_weights(weights, lookback_days=lookback_days, start=start, end=end)
+    if history.empty:
+        return pd.DataFrame()
     rows = []
     for ticker in history.columns:
         series = history[ticker]
@@ -494,6 +515,89 @@ def build_approach_holding_stats(
         .sort_values(["current_weight", "average_weight", "max_weight"], ascending=False)
         .head(max_assets)
     )
+
+
+def build_approach_allocation_transition_events(
+    result: BacktestResult,
+    *,
+    defensive_ticker: str | None = None,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
+    context_days: int = 21,
+    forward_days: int = 63,
+    material_change: float = 0.05,
+) -> pd.DataFrame:
+    weights = _window_weights(result.weights, lookback_days=None, start=start, end=end)
+    equity = _window_series(result.equity, start=start, end=end)
+    if weights.empty or equity.empty:
+        return pd.DataFrame()
+
+    common_index = weights.index.intersection(equity.index)
+    if len(common_index) < 3:
+        return pd.DataFrame()
+    weights = weights.reindex(common_index).fillna(0.0)
+    equity = equity.reindex(common_index).dropna()
+    weights = weights.reindex(equity.index).fillna(0.0)
+    risk_weight = build_approach_exposure_history(
+        weights,
+        defensive_ticker=defensive_ticker,
+        lookback_days=None,
+    )["risk_assets"]
+    normalized = equity / equity.iloc[0]
+    window_drawdown = drawdown(normalized)
+    risk_delta = risk_weight.diff().fillna(0.0)
+
+    rows = []
+    rows.append(
+        _allocation_event_row(
+            event="Worst drawdown point",
+            signal="How exposed was the strategy at the deepest selected-window drawdown?",
+            date=window_drawdown.idxmin(),
+            event_value=float(window_drawdown.min()),
+            event_value_label="drawdown",
+            equity=normalized,
+            window_drawdown=window_drawdown,
+            risk_weight=risk_weight,
+            context_days=context_days,
+            forward_days=forward_days,
+        )
+    )
+
+    biggest_derisk = risk_delta.idxmin()
+    if float(risk_delta.loc[biggest_derisk]) <= -material_change:
+        rows.append(
+            _allocation_event_row(
+                event="Largest de-risking move",
+                signal="The biggest one-day reduction in non-defensive exposure in the window.",
+                date=biggest_derisk,
+                event_value=float(risk_delta.loc[biggest_derisk]),
+                event_value_label="risk_weight_change",
+                equity=normalized,
+                window_drawdown=window_drawdown,
+                risk_weight=risk_weight,
+                context_days=context_days,
+                forward_days=forward_days,
+            )
+        )
+
+    biggest_rerisk = risk_delta.idxmax()
+    if float(risk_delta.loc[biggest_rerisk]) >= material_change:
+        rows.append(
+            _allocation_event_row(
+                event="Largest re-risking move",
+                signal="The biggest one-day increase in non-defensive exposure in the window.",
+                date=biggest_rerisk,
+                event_value=float(risk_delta.loc[biggest_rerisk]),
+                event_value_label="risk_weight_change",
+                equity=normalized,
+                window_drawdown=window_drawdown,
+                risk_weight=risk_weight,
+                context_days=context_days,
+                forward_days=forward_days,
+            )
+        )
+
+    return pd.DataFrame(rows)
 
 
 def build_approach_mechanics(
@@ -947,3 +1051,90 @@ def _weighting_explanation(weighting: str) -> str:
         "risk_adjusted_score": "Allocates more to stronger risk-adjusted scores.",
     }
     return explanations.get(weighting, weighting)
+
+
+def _window_weights(
+    weights: pd.DataFrame,
+    *,
+    lookback_days: int | None,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
+) -> pd.DataFrame:
+    history = weights.sort_index().copy().fillna(0.0)
+    if start is not None:
+        history = history.loc[history.index >= pd.Timestamp(start)]
+    if end is not None:
+        history = history.loc[history.index <= pd.Timestamp(end)]
+    if lookback_days is not None:
+        history = history.tail(lookback_days)
+    return history
+
+
+def _window_series(
+    series: pd.Series,
+    *,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
+) -> pd.Series:
+    windowed = series.sort_index().dropna()
+    if start is not None:
+        windowed = windowed.loc[windowed.index >= pd.Timestamp(start)]
+    if end is not None:
+        windowed = windowed.loc[windowed.index <= pd.Timestamp(end)]
+    return windowed
+
+
+def _allocation_event_row(
+    *,
+    event: str,
+    signal: str,
+    date: pd.Timestamp,
+    event_value: float,
+    event_value_label: str,
+    equity: pd.Series,
+    window_drawdown: pd.Series,
+    risk_weight: pd.Series,
+    context_days: int,
+    forward_days: int,
+) -> dict[str, object]:
+    position = risk_weight.index.get_loc(date)
+    if not isinstance(position, int):
+        position = int(position.start if isinstance(position, slice) else position[0])
+    before = risk_weight.iloc[max(0, position - context_days) : position]
+    after = risk_weight.iloc[position + 1 : position + 1 + context_days]
+    forward = equity.iloc[position : position + 1 + forward_days]
+    forward_return = float(forward.iloc[-1] / forward.iloc[0] - 1.0) if len(forward) >= 2 else 0.0
+    return {
+        "event": event,
+        "date": date.date().isoformat() if hasattr(date, "date") else str(date),
+        "signal": signal,
+        event_value_label: event_value,
+        "risk_weight_before_1m": float(before.mean())
+        if not before.empty
+        else float(risk_weight.iloc[position]),
+        "risk_weight_at_event": float(risk_weight.iloc[position]),
+        "risk_weight_after_1m": float(after.mean())
+        if not after.empty
+        else float(risk_weight.iloc[position]),
+        "drawdown_at_event": float(window_drawdown.iloc[position]),
+        "forward_return_3m": forward_return,
+        "interpretation": _allocation_event_interpretation(event, event_value, forward_return),
+    }
+
+
+def _allocation_event_interpretation(event: str, event_value: float, forward_return: float) -> str:
+    if event == "Worst drawdown point":
+        return (
+            "Use this to check whether the strategy was defensive before or only after the damage."
+        )
+    if event == "Largest de-risking move":
+        return (
+            f"Risk exposure dropped {abs(event_value):.1%}; next-window return was {forward_return:.1%}. "
+            "Good off-ramps reduce exposure before follow-through losses, not after a completed move."
+        )
+    if event == "Largest re-risking move":
+        return (
+            f"Risk exposure rose {event_value:.1%}; next-window return was {forward_return:.1%}. "
+            "Good re-entry adds risk when repair is tradable rather than waiting for all upside to pass."
+        )
+    return "Review this event alongside the allocation and drawdown chart."
