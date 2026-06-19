@@ -62,6 +62,7 @@ def load_experiment_scorecards(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "parent": "",
             "role": "unknown",
             "scenario_sizing": "",
+            "future_state_model": "",
             "decision_sanity": "",
         }.items():
             if column not in frame.columns:
@@ -209,6 +210,8 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "role": "unknown",
             "scenario_sizing": "",
             "scenario_sizing_json": "",
+            "future_state_model": "",
+            "future_state_model_json": "",
             "decision_sanity": "",
             "decision_sanity_json": "",
         }.items():

@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 
+import numpy as np
 import pandas as pd
 
 from trade_bot.config import StrategyConfig
@@ -9,9 +10,16 @@ from trade_bot.research.experiments import (
     DecisionSanityConfig,
     ScenarioSizingConfig,
     apply_decision_sanity_overlay,
+    apply_operability_hysteresis,
     apply_scenario_position_sizing,
     build_experiment_scorecard,
     generate_iteration_candidates,
+)
+from trade_bot.research.future_state_ml import (
+    FutureStateModelConfig,
+    apply_future_state_position_sizing,
+    build_future_state_probabilities,
+    label_future_states,
 )
 from trade_bot.strategies.momentum import build_strategy_weights
 
@@ -202,6 +210,9 @@ def test_scorecard_includes_walk_forward_and_regime_robustness() -> None:
     assert "left_tail_regime_return" in scorecard.columns
     assert "left_tail_regime_cagr" in scorecard.columns
     assert "monitoring_readiness_score" in scorecard.columns
+    assert "confidence_score" in scorecard.columns
+    assert "deployment_blockers" in scorecard.columns
+    assert "benchmark_knockout_label" in scorecard.columns
     assert "operability_score" in scorecard.columns
     assert "risk_cycle_label" in scorecard.columns
     assert set(scorecard["operability_label"]) == {"paper_operable"}
@@ -315,6 +326,200 @@ def test_paper_readiness_iteration_tests_low_churn_and_metered_reentry() -> None
     assert any(candidate.name.endswith("low_churn") for candidate in candidates)
     assert any(candidate.name.endswith("metered_reentry") for candidate in candidates)
     assert all(candidate.parent for candidate in candidates)
+
+
+def test_operability_gauntlet_iteration_tests_hysteresis_and_high_conviction() -> None:
+    candidates = generate_iteration_candidates(80)
+
+    assert len(candidates) == 10
+    assert {candidate.role for candidate in candidates} == {"operability_gauntlet"}
+    assert {candidate.phase for candidate in candidates} == {"operability_gauntlet"}
+    assert any(candidate.name.endswith("slow_hysteresis") for candidate in candidates)
+    assert any(candidate.name.endswith("high_conviction") for candidate in candidates)
+    assert all(candidate.strategy.cycle_min_hold_days >= 21 for candidate in candidates)
+    assert all(candidate.strategy.volatility_target is None for candidate in candidates)
+
+
+def test_future_state_ml_iteration_covers_model_families_and_horizons() -> None:
+    candidates = generate_iteration_candidates(81)
+
+    assert len(candidates) == 15
+    assert {candidate.role for candidate in candidates} == {
+        "future_state_ml_candidate",
+        "future_state_ml_control",
+    }
+    model_configs = [candidate.future_state_model for candidate in candidates]
+    assert sum(config is not None for config in model_configs) == 12
+    assert {config.model for config in model_configs if config} >= {
+        "base_rate",
+        "transition",
+        "knn",
+        "feature_bag_knn",
+        "centroid",
+        "naive_bayes",
+        "ridge_logit",
+        "tail_specialist",
+        "ensemble",
+    }
+    assert {config.horizon_days for config in model_configs if config} >= {5, 21, 63}
+
+
+def test_bayesian_future_state_iteration_covers_posterior_models_and_controls() -> None:
+    candidates = generate_iteration_candidates(82)
+
+    assert len(candidates) == 15
+    assert {candidate.role for candidate in candidates} == {
+        "bayesian_future_state_candidate",
+        "bayesian_future_state_control",
+    }
+    model_configs = [candidate.future_state_model for candidate in candidates]
+    assert sum(config is not None for config in model_configs) == 12
+    assert {config.model for config in model_configs if config} >= {
+        "bayesian_base_rate",
+        "bayesian_transition",
+        "bayesian_naive_bayes",
+        "bayesian_ensemble",
+    }
+    assert {config.horizon_days for config in model_configs if config} >= {5, 21, 63}
+    assert any(
+        config is not None and config.recency_half_life_days < 252
+        for config in model_configs
+    )
+
+
+def test_future_state_probabilities_are_lag_safe_and_normalized() -> None:
+    prices = _future_state_prices()
+    config = FutureStateModelConfig(
+        model="knn",
+        horizon_days=21,
+        train_window_days=120,
+        min_train_observations=60,
+        k_neighbors=15,
+    )
+
+    labels = label_future_states(prices, config.horizon_days)
+    probabilities = build_future_state_probabilities(prices, config)
+
+    assert labels.dropna().isin(["risk_off", "transition", "risk_on_fragile", "risk_on"]).all()
+    assert set(probabilities.columns) == {"risk_off", "transition", "risk_on_fragile", "risk_on"}
+    assert probabilities.index.equals(prices.index)
+    assert probabilities.sum(axis=1).round(8).eq(1.0).all()
+    assert probabilities.iloc[-1].notna().all()
+
+
+def test_bayesian_future_state_probabilities_are_posterior_smoothed() -> None:
+    prices = _future_state_prices()
+    config = FutureStateModelConfig(
+        model="bayesian_ensemble",
+        horizon_days=21,
+        train_window_days=120,
+        min_train_observations=60,
+        k_neighbors=15,
+        recency_half_life_days=40,
+        dirichlet_prior_strength=10.0,
+    )
+
+    probabilities = build_future_state_probabilities(prices, config)
+
+    assert set(probabilities.columns) == {"risk_off", "transition", "risk_on_fragile", "risk_on"}
+    assert probabilities.index.equals(prices.index)
+    assert probabilities.sum(axis=1).round(8).eq(1.0).all()
+    assert probabilities.iloc[-1].between(0.0, 1.0).all()
+    assert probabilities.iloc[-1].max() < 1.0
+
+
+def test_future_state_sizing_moves_residual_to_defensive_ticker() -> None:
+    prices = _future_state_prices()
+    target = pd.DataFrame(
+        {"SPY": 0.60, "QQQ": 0.40},
+        index=prices.index,
+    )
+    config = FutureStateModelConfig(
+        model="tail_specialist",
+        horizon_days=21,
+        train_window_days=120,
+        min_train_observations=60,
+        k_neighbors=15,
+        stress_multiplier=0.25,
+        transition_multiplier=0.55,
+        fragile_upside_multiplier=0.75,
+    )
+
+    adjusted = apply_future_state_position_sizing(target, prices, config, defensive_ticker="BIL")
+
+    assert "BIL" in adjusted.columns
+    assert adjusted.sum(axis=1).round(8).eq(1.0).all()
+    assert (adjusted["BIL"] >= 0.0).all()
+    assert adjusted["BIL"].max() > 0.0
+
+
+def test_operability_hysteresis_reduces_small_weight_churn() -> None:
+    index = pd.bdate_range("2026-01-01", periods=6)
+    weights = pd.DataFrame(
+        {
+            "SPY": [0.50, 0.52, 0.53, 0.80, 0.82, 0.40],
+            "BIL": [0.50, 0.48, 0.47, 0.20, 0.18, 0.60],
+        },
+        index=index,
+    )
+    strategy = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY"],
+        defensive_ticker="BIL",
+        cycle_min_rebalance_change=0.10,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=2,
+    )
+
+    smoothed = apply_operability_hysteresis(weights, strategy)
+
+    assert smoothed.iloc[1].equals(smoothed.iloc[0])
+    assert abs(float(smoothed.iloc[3]["SPY"] - smoothed.iloc[0]["SPY"])) <= 0.20 + 1e-9
+    assert round(float(smoothed.iloc[-1].sum()), 8) == 1.0
+
+
+def _future_state_prices() -> pd.DataFrame:
+    index = pd.bdate_range("2020-01-01", periods=360)
+    up = pd.Series(range(120), dtype=float)
+    down = pd.Series(range(120), dtype=float)
+    repair = pd.Series(range(120), dtype=float)
+    spy = pd.concat(
+        [100.0 + up * 0.15, 118.0 - down * 0.22, 92.0 + repair * 0.18],
+        ignore_index=True,
+    )
+    qqq = pd.concat(
+        [100.0 + up * 0.24, 129.0 - down * 0.28, 96.0 + repair * 0.26],
+        ignore_index=True,
+    )
+    rsp = pd.concat(
+        [100.0 + up * 0.12, 114.0 - down * 0.18, 93.0 + repair * 0.18],
+        ignore_index=True,
+    )
+    smh = pd.concat(
+        [100.0 + up * 0.30, 136.0 - down * 0.34, 95.0 + repair * 0.30],
+        ignore_index=True,
+    )
+    safe = pd.Series(100.0 + pd.Series(range(360), dtype=float) * 0.01)
+    frame = pd.DataFrame(
+        {
+            "SPY": spy.to_numpy(),
+            "QQQ": qqq.to_numpy(),
+            "RSP": rsp.to_numpy(),
+            "IWM": rsp.to_numpy() * 0.98,
+            "SMH": smh.to_numpy(),
+            "HYG": spy.to_numpy() * 0.55 + 45.0,
+            "LQD": safe.to_numpy(),
+            "TLT": safe.to_numpy(),
+            "GLD": safe.to_numpy() * 1.01,
+            "USO": 100.0 + np.sin(np.arange(360) / 20.0) * 3.0,
+            "DBC": 100.0 + np.sin(np.arange(360) / 24.0) * 2.0,
+            "UUP": 100.0 + np.cos(np.arange(360) / 30.0) * 2.0,
+            "VIXY": 120.0 - spy.to_numpy() * 0.20,
+            "BIL": safe.to_numpy(),
+        },
+        index=index,
+    )
+    return frame.clip(lower=1.0)
 
 
 def _sanity_prices(index: pd.DatetimeIndex, *, confirmed_break: bool) -> pd.DataFrame:

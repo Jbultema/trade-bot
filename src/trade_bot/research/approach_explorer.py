@@ -14,7 +14,12 @@ from trade_bot.research.experiments import (
     DecisionSanityConfig,
     ScenarioSizingConfig,
     apply_decision_sanity_overlay,
+    apply_operability_hysteresis,
     apply_scenario_position_sizing,
+)
+from trade_bot.research.future_state_ml import (
+    FutureStateModelConfig,
+    apply_future_state_position_sizing,
 )
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.strategies.momentum import build_strategy_weights
@@ -45,6 +50,8 @@ def build_approach_catalog(
                 "strategy_json": json.dumps(strategy.model_dump(mode="json"), sort_keys=True),
                 "scenario_sizing": "",
                 "scenario_sizing_json": "",
+                "future_state_model": "",
+                "future_state_model_json": "",
                 "decision_sanity": "",
                 "decision_sanity_json": "",
             }
@@ -98,6 +105,7 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "worst_1y_cagr",
             "worst_3y_cagr",
             "positive_1y_window_rate",
+            "future_state_model",
             "decision_sanity",
         ]
         available_columns = [column for column in scorecard_columns if column in scorecards]
@@ -187,6 +195,22 @@ def scenario_sizing_from_catalog_row(row: pd.Series) -> ScenarioSizingConfig | N
         return None
 
 
+def future_state_model_from_catalog_row(row: pd.Series) -> FutureStateModelConfig | None:
+    raw = row.get("future_state_model_json")
+    if not isinstance(raw, str) or not raw or raw == "nan":
+        return None
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(values, dict):
+        return None
+    try:
+        return FutureStateModelConfig(**values)
+    except TypeError:
+        return None
+
+
 def execution_for_catalog_row(
     row: pd.Series, default_execution: ExecutionConfig
 ) -> ExecutionConfig:
@@ -207,6 +231,7 @@ def build_approach_explanation(
     *,
     execution: ExecutionConfig | None = None,
     scenario_sizing: ScenarioSizingConfig | None = None,
+    future_state_model: FutureStateModelConfig | None = None,
     decision_sanity: DecisionSanityConfig | None = None,
 ) -> list[str]:
     execution = execution or config.execution
@@ -302,6 +327,21 @@ def build_approach_explanation(
             f"A drawdown control cuts exposure to {strategy.drawdown_control.risk_multiplier:.0%} "
             f"after a {strategy.drawdown_control.max_drawdown:.0%} rolling strategy drawdown trigger."
         )
+    if future_state_model is not None:
+        if future_state_model.model.startswith("bayesian"):
+            model_detail = (
+                "It adds a Bayesian future-state probability overlay. The model estimates posterior "
+                "regime probabilities with explicit priors, recency-weighted evidence, and shrinkage "
+                "so sparse risk-off or transition samples do not dominate sizing."
+            )
+        else:
+            model_detail = "It adds a supervised future-state probability overlay."
+        paragraphs.append(
+            f"{model_detail} The model predicts regime buckets over "
+            f"{future_state_model.horizon_days} trading days using the "
+            f"{future_state_model.feature_set} feature set and `{future_state_model.model}` method; "
+            "those probabilities resize risk exposure and route unused budget to the defensive sleeve."
+        )
     parent = str(row.get("parent", "") or "")
     if parent and parent != "nan":
         paragraphs.append(
@@ -316,6 +356,7 @@ def build_approach_backtest_result(
     execution: ExecutionConfig,
     *,
     scenario_sizing: ScenarioSizingConfig | None = None,
+    future_state_model: FutureStateModelConfig | None = None,
     decision_sanity: DecisionSanityConfig | None = None,
     name: str = "approach",
 ) -> tuple[BacktestResult | None, list[str]]:
@@ -327,6 +368,13 @@ def build_approach_backtest_result(
 
     base_target_weights = build_strategy_weights(strategy_prices, strategy_for_prices)
     target_weights = base_target_weights
+    if future_state_model is not None:
+        target_weights = apply_future_state_position_sizing(
+            target_weights,
+            prices,
+            future_state_model,
+            defensive_ticker=strategy_for_prices.defensive_ticker,
+        )
     if scenario_sizing is not None:
         target_weights = apply_scenario_position_sizing(
             target_weights,
@@ -342,6 +390,7 @@ def build_approach_backtest_result(
             decision_sanity,
             defensive_ticker=strategy_for_prices.defensive_ticker,
         )
+    target_weights = apply_operability_hysteresis(target_weights, strategy_for_prices)
     return (
         run_backtest(
             name,

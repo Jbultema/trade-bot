@@ -38,6 +38,10 @@ from trade_bot.DEFAULT import (
     DEFAULT_SCENARIO_STRESS_MULTIPLIER,
     DEFAULT_SCENARIO_TRANSITION_MULTIPLIER,
 )
+from trade_bot.research.future_state_ml import (
+    FutureStateModelConfig,
+    apply_future_state_position_sizing,
+)
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.strategies.momentum import build_strategy_weights
 
@@ -49,6 +53,7 @@ class ExperimentCandidate:
     role: str
     strategy: StrategyConfig
     scenario_sizing: ScenarioSizingConfig | None = None
+    future_state_model: FutureStateModelConfig | None = None
     decision_sanity: DecisionSanityConfig | None = None
     phase: str = "broad"
     family: str = "general"
@@ -128,6 +133,13 @@ def run_experiment_iteration(
         )
         base_target_weights = build_strategy_weights(candidate_prices, candidate.strategy)
         target_weights = base_target_weights
+        if candidate.future_state_model is not None:
+            target_weights = apply_future_state_position_sizing(
+                target_weights,
+                prices,
+                candidate.future_state_model,
+                defensive_ticker=candidate.strategy.defensive_ticker,
+            )
         if candidate.scenario_sizing is not None:
             target_weights = apply_scenario_position_sizing(
                 target_weights,
@@ -143,6 +155,7 @@ def run_experiment_iteration(
                 candidate.decision_sanity,
                 defensive_ticker=candidate.strategy.defensive_ticker,
             )
+        target_weights = apply_operability_hysteresis(target_weights, candidate.strategy)
         result = run_backtest(
             candidate.name,
             candidate_prices,
@@ -268,6 +281,12 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _decision_sanity_tuning_candidates()
     if iteration == 79:
         return _paper_readiness_tuning_candidates()
+    if iteration == 80:
+        return _operability_gauntlet_candidates()
+    if iteration == 81:
+        return _future_state_ml_candidates()
+    if iteration == 82:
+        return _bayesian_future_state_candidates()
     if 101 <= iteration <= 105:
         return _macro_reset_candidates(iteration)
     return None
@@ -6605,6 +6624,457 @@ def _paper_readiness_tuning_candidates() -> tuple[ExperimentCandidate, ...]:
     return tuple(candidates)
 
 
+def _operability_gauntlet_candidates() -> tuple[ExperimentCandidate, ...]:
+    selected = [
+        _operating_system_candidates()[0],
+        _operating_system_candidates()[1],
+        _operating_system_candidates()[4],
+        _operating_system_candidates()[8],
+        _operating_system_candidates()[9],
+    ]
+    candidates: list[ExperimentCandidate] = []
+    for base in selected:
+        slow_strategy = _clone_strategy(
+            base.strategy,
+            lookback_days=max(base.strategy.lookback_days, 126),
+            skip_days=max(base.strategy.skip_days, 21),
+            top_n=max(1, min(base.strategy.top_n, 2)),
+            weighting="equal",
+            volatility_target=None,
+            drawdown_control=None,
+            cycle_min_rebalance_change=0.12,
+            cycle_max_step_change=0.12,
+            cycle_min_hold_days=21,
+            cycle_risk_off_override_change=0.18,
+        )
+        candidates.append(
+            _candidate(
+                name=f"i80_operability_{_short_name(base.name)}_slow_hysteresis",
+                role="operability_gauntlet",
+                phase="operability_gauntlet",
+                family=base.family,
+                parent=base.name,
+                hypothesis=(
+                    "Slow-hysteresis gauntlet: preserve the parent universe but remove daily vol-target "
+                    "churn, use equal weights, require larger target changes, cap each step, and hold "
+                    f"for at least 21 trading days. Parent: {base.name}."
+                ),
+                scenario_sizing=base.scenario_sizing,
+                decision_sanity=base.decision_sanity,
+                strategy=slow_strategy,
+            )
+        )
+
+        high_conviction_strategy = _clone_strategy(
+            base.strategy,
+            lookback_days=max(base.strategy.lookback_days, 189),
+            skip_days=max(base.strategy.skip_days, 42),
+            top_n=1,
+            weighting="equal",
+            min_return=max(base.strategy.min_return, 0.01),
+            trend_filter_days=200,
+            max_asset_weight=1.0,
+            volatility_target=None,
+            drawdown_control=None,
+            cycle_min_rebalance_change=0.15,
+            cycle_max_step_change=0.15,
+            cycle_min_hold_days=42,
+            cycle_risk_off_override_change=0.20,
+        )
+        candidates.append(
+            _candidate(
+                name=f"i80_operability_{_short_name(base.name)}_high_conviction",
+                role="operability_gauntlet",
+                phase="operability_gauntlet",
+                family=base.family,
+                parent=base.name,
+                hypothesis=(
+                    "High-conviction gauntlet: intentionally reduce degrees of freedom and scenario-size "
+                    "churn to test whether a slower one-position operating system can keep enough edge "
+                    f"while becoming human-executable. Parent: {base.name}."
+                ),
+                scenario_sizing=None,
+                decision_sanity=base.decision_sanity,
+                strategy=high_conviction_strategy,
+            )
+        )
+    return tuple(candidates)
+
+
+def _future_state_ml_candidates() -> tuple[ExperimentCandidate, ...]:
+    base_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=2,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.45,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    ai_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ", "SMH", "XLK", "IGV", "RSP", "IWM", "GLD", "TLT"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=2,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.45,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    sector_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["XLK", "XLI", "XLF", "XLE", "XLV", "XLP", "XLY", "RSP", "SPY", "GLD", "TLT"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=3,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.35,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    controls = (
+        _candidate(
+            name="i81_ml_state_control_core_no_ml",
+            role="future_state_ml_control",
+            phase="future_state_ml",
+            family="future_state_control",
+            hypothesis="No-ML control for the core cross-asset strategy so future-state overlays can be judged against the same base allocation.",
+            strategy=base_core,
+        ),
+        _candidate(
+            name="i81_ml_state_control_ai_no_ml",
+            role="future_state_ml_control",
+            phase="future_state_ml",
+            family="future_state_control",
+            hypothesis="No-ML control for the AI-sensitive strategy so short-horizon AI regime probabilities have a fair benchmark.",
+            strategy=ai_core,
+        ),
+        _candidate(
+            name="i81_ml_state_control_sector_no_ml",
+            role="future_state_ml_control",
+            phase="future_state_ml",
+            family="future_state_control",
+            hypothesis="No-ML control for the sector-rotation strategy so three-month future-state overlays have a fair benchmark.",
+            strategy=sector_core,
+        ),
+    )
+    specs: tuple[tuple[str, StrategyConfig, str, str, FutureStateModelConfig], ...] = (
+        (
+            "base_rate_1m_core",
+            base_core,
+            "future_state_baseline",
+            "Rolling historical base-rate scenario probabilities should be a humility benchmark for ML overlays.",
+            _future_state_profile("base_rate", horizon_days=21, feature_set="core"),
+        ),
+        (
+            "transition_1m_core",
+            base_core,
+            "future_state_transition",
+            "Conditional transition tables should improve over unconditional base rates when current market state is persistent.",
+            _future_state_profile("transition", horizon_days=21, feature_set="core"),
+        ),
+        (
+            "knn_1m_core",
+            base_core,
+            "future_state_analog",
+            "Distance-weighted historical analogs should capture nonlinear risk-off and re-entry setups without price targets.",
+            _future_state_profile("knn", horizon_days=21, feature_set="core", k_neighbors=65),
+        ),
+        (
+            "bagged_knn_1m_all",
+            base_core,
+            "future_state_analog",
+            "Feature-bagged analogs should reduce single-feature overfit while preserving nonlinear regime matching.",
+            _future_state_profile("feature_bag_knn", horizon_days=21, feature_set="all", k_neighbors=75),
+        ),
+        (
+            "centroid_1m_cross_asset",
+            base_core,
+            "future_state_distance",
+            "Shrunken state centroids should provide a stable low-variance regime classifier for cross-asset allocation.",
+            _future_state_profile("centroid", horizon_days=21, feature_set="cross_asset"),
+        ),
+        (
+            "naive_bayes_1m_cross_asset",
+            base_core,
+            "future_state_probabilistic",
+            "Gaussian naive Bayes should handle sparse regime samples with explicit class priors and probability outputs.",
+            _future_state_profile("naive_bayes", horizon_days=21, feature_set="cross_asset"),
+        ),
+        (
+            "ridge_logit_1m_core",
+            base_core,
+            "future_state_regularized",
+            "Regularized multinomial logistic state probabilities should test a more classical supervised ML regime model.",
+            _future_state_profile("ridge_logit", horizon_days=21, feature_set="core"),
+        ),
+        (
+            "tail_specialist_1m_core",
+            base_core,
+            "future_state_tail",
+            "A risk-off specialist should prioritize left-tail classification, then distribute remaining probability across tradable states.",
+            _future_state_profile("tail_specialist", horizon_days=21, feature_set="core", k_neighbors=90),
+        ),
+        (
+            "ensemble_1m_all",
+            base_core,
+            "future_state_ensemble",
+            "A blended state ensemble should be less brittle than any one classifier when market regimes shift.",
+            _future_state_profile("ensemble", horizon_days=21, feature_set="all", k_neighbors=75),
+        ),
+        (
+            "knn_1w_ai",
+            ai_core,
+            "future_state_ai",
+            "A short-horizon AI feature analog should catch fragile melt-up versus AI unwind pressure before slow signals react.",
+            _future_state_profile("knn", horizon_days=5, feature_set="ai", k_neighbors=55),
+        ),
+        (
+            "ridge_logit_3m_cross_asset",
+            base_core,
+            "future_state_regularized",
+            "A three-month regularized classifier should test slower allocation state prediction for swing-horizon sizing.",
+            _future_state_profile("ridge_logit", horizon_days=63, feature_set="cross_asset", train_window_days=1008),
+        ),
+        (
+            "ensemble_3m_sector",
+            sector_core,
+            "future_state_sector_rotation",
+            "A three-month ensemble should help sector rotation avoid late-cycle traps while re-entering when state probabilities improve.",
+            _future_state_profile("ensemble", horizon_days=63, feature_set="all", train_window_days=1008, k_neighbors=95),
+        ),
+    )
+    ml_candidates = tuple(
+        _candidate(
+            name=f"i81_ml_state_{slug}",
+            role="future_state_ml_candidate",
+            phase="future_state_ml",
+            family=family,
+            hypothesis=f"{hypothesis} Uses learned future-state probabilities for risk-budget sizing, not price prediction.",
+            future_state_model=model_config,
+            strategy=strategy,
+        )
+        for slug, strategy, family, hypothesis, model_config in specs
+    )
+    return (*controls, *ml_candidates)
+
+
+def _bayesian_future_state_candidates() -> tuple[ExperimentCandidate, ...]:
+    base_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=2,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.45,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    ai_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ", "SMH", "XLK", "IGV", "RSP", "IWM", "GLD", "TLT"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=2,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.45,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    sector_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["XLK", "XLI", "XLF", "XLE", "XLV", "XLP", "XLY", "RSP", "SPY", "GLD", "TLT"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=3,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.35,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    controls = (
+        _candidate(
+            name="i82_bayes_state_control_core_no_bayes",
+            role="bayesian_future_state_control",
+            phase="bayesian_future_state",
+            family="future_state_control",
+            hypothesis="No-Bayesian control for the core cross-asset strategy so posterior probability overlays are judged against the same base allocation.",
+            strategy=base_core,
+        ),
+        _candidate(
+            name="i82_bayes_state_control_ai_no_bayes",
+            role="bayesian_future_state_control",
+            phase="bayesian_future_state",
+            family="future_state_control",
+            hypothesis="No-Bayesian control for the AI-sensitive strategy so fragile-upside and unwind probabilities have a fair benchmark.",
+            strategy=ai_core,
+        ),
+        _candidate(
+            name="i82_bayes_state_control_sector_no_bayes",
+            role="bayesian_future_state_control",
+            phase="bayesian_future_state",
+            family="future_state_control",
+            hypothesis="No-Bayesian control for the sector-rotation strategy so sector re-risking overlays have a fair benchmark.",
+            strategy=sector_core,
+        ),
+    )
+    specs: tuple[tuple[str, StrategyConfig, str, str, FutureStateModelConfig], ...] = (
+        (
+            "base_rate_1m_core",
+            base_core,
+            "bayesian_base_rate",
+            "Dirichlet-smoothed rolling class priors test whether Bayesian humility improves scenario sizing before feature models are trusted.",
+            _future_state_profile("bayesian_base_rate", horizon_days=21, feature_set="core"),
+        ),
+        (
+            "transition_1m_core",
+            base_core,
+            "bayesian_transition",
+            "A Dirichlet-smoothed state-transition table should avoid overreacting to sparse analogs while still adapting to the current instant regime.",
+            _future_state_profile("bayesian_transition", horizon_days=21, feature_set="core"),
+        ),
+        (
+            "naive_bayes_1m_core",
+            base_core,
+            "bayesian_feature_model",
+            "Bayesian Gaussian naive Bayes tests feature-conditioned posterior probabilities with mean and variance shrinkage.",
+            _future_state_profile("bayesian_naive_bayes", horizon_days=21, feature_set="core"),
+        ),
+        (
+            "ensemble_1m_all",
+            base_core,
+            "bayesian_ensemble",
+            "A Bayesian ensemble blends priors, transition evidence, feature likelihoods, and tail specialization for a low-variance scenario overlay.",
+            _future_state_profile("bayesian_ensemble", horizon_days=21, feature_set="all", k_neighbors=75),
+        ),
+        (
+            "fast_transition_1m_core",
+            base_core,
+            "bayesian_transition",
+            "Short half-life transition priors test whether the model can re-risk faster after market repair without becoming a daily-trading system.",
+            _future_state_profile(
+                "bayesian_transition",
+                horizon_days=21,
+                feature_set="core",
+                recency_half_life_days=84,
+                dirichlet_prior_strength=6.0,
+            ),
+        ),
+        (
+            "slow_ensemble_3m_cross_asset",
+            base_core,
+            "bayesian_ensemble",
+            "Slow Bayesian priors test whether three-month state forecasts are better as a stable allocation throttle than as an aggressive tactical trigger.",
+            _future_state_profile(
+                "bayesian_ensemble",
+                horizon_days=63,
+                feature_set="cross_asset",
+                train_window_days=1008,
+                recency_half_life_days=504,
+                dirichlet_prior_strength=18.0,
+                k_neighbors=95,
+            ),
+        ),
+        (
+            "transition_1w_ai",
+            ai_core,
+            "bayesian_ai_cycle",
+            "Short-horizon Bayesian transition probabilities test whether AI leadership should stay risk-on or de-risk during fragile concentration.",
+            _future_state_profile("bayesian_transition", horizon_days=5, feature_set="ai", recency_half_life_days=63),
+        ),
+        (
+            "naive_bayes_1w_ai",
+            ai_core,
+            "bayesian_ai_cycle",
+            "Bayesian feature likelihoods on AI proxies test whether QQQ/RSP, SMH/SPY, credit, and volatility features add signal beyond transition priors.",
+            _future_state_profile("bayesian_naive_bayes", horizon_days=5, feature_set="ai", recency_half_life_days=63),
+        ),
+        (
+            "ensemble_1m_ai",
+            ai_core,
+            "bayesian_ai_cycle",
+            "A one-month Bayesian ensemble tests whether AI-sensitive strategies can keep upside while avoiding fragile melt-up reversals.",
+            _future_state_profile("bayesian_ensemble", horizon_days=21, feature_set="ai", k_neighbors=75),
+        ),
+        (
+            "transition_1m_sector",
+            sector_core,
+            "bayesian_sector_rotation",
+            "Bayesian transition sizing tests whether sector rotation should lower aggregate risk when leadership looks narrow or unstable.",
+            _future_state_profile("bayesian_transition", horizon_days=21, feature_set="cross_asset"),
+        ),
+        (
+            "naive_bayes_3m_sector",
+            sector_core,
+            "bayesian_sector_rotation",
+            "Three-month Bayesian feature likelihoods test slower sector-cycle probabilities for rotation without relying on one price-trend window.",
+            _future_state_profile(
+                "bayesian_naive_bayes",
+                horizon_days=63,
+                feature_set="all",
+                train_window_days=1008,
+                bayesian_feature_shrinkage=20.0,
+            ),
+        ),
+        (
+            "ensemble_3m_sector",
+            sector_core,
+            "bayesian_sector_rotation",
+            "A three-month Bayesian ensemble tests whether sector rotation benefits from posterior smoothing across transition, tail, and feature evidence.",
+            _future_state_profile(
+                "bayesian_ensemble",
+                horizon_days=63,
+                feature_set="all",
+                train_window_days=1008,
+                recency_half_life_days=378,
+                dirichlet_prior_strength=14.0,
+                k_neighbors=95,
+            ),
+        ),
+    )
+    bayesian_candidates = tuple(
+        _candidate(
+            name=f"i82_bayes_state_{slug}",
+            role="bayesian_future_state_candidate",
+            phase="bayesian_future_state",
+            family=family,
+            hypothesis=f"{hypothesis} The posterior probabilities resize risk exposure; they do not directly forecast price targets.",
+            future_state_model=model_config,
+            strategy=strategy,
+        )
+        for slug, strategy, family, hypothesis, model_config in specs
+    )
+    return (*controls, *bayesian_candidates)
+
+
 def _reference_portfolio_candidates() -> tuple[ExperimentCandidate, ...]:
     return (
         _fixed_allocation_candidate(
@@ -6998,6 +7468,7 @@ def _candidate(
     hypothesis: str,
     strategy: StrategyConfig,
     scenario_sizing: ScenarioSizingConfig | None = None,
+    future_state_model: FutureStateModelConfig | None = None,
     decision_sanity: DecisionSanityConfig | None = None,
     parent: str | None = None,
 ) -> ExperimentCandidate:
@@ -7010,6 +7481,7 @@ def _candidate(
         hypothesis=hypothesis,
         strategy=strategy,
         scenario_sizing=scenario_sizing,
+        future_state_model=future_state_model,
         decision_sanity=decision_sanity,
     )
 
@@ -7084,6 +7556,34 @@ def _scenario_profile(profile: str) -> ScenarioSizingConfig:
     return profiles[profile]
 
 
+def _future_state_profile(
+    model: str,
+    *,
+    horizon_days: int,
+    feature_set: str,
+    train_window_days: int = 756,
+    k_neighbors: int = 80,
+    dirichlet_prior_strength: float = 8.0,
+    recency_half_life_days: int = 252,
+    bayesian_feature_shrinkage: float = 12.0,
+) -> FutureStateModelConfig:
+    return FutureStateModelConfig(
+        model=cast(Any, model),
+        horizon_days=horizon_days,
+        feature_set=cast(Any, feature_set),
+        train_window_days=train_window_days,
+        k_neighbors=k_neighbors,
+        dirichlet_prior_strength=dirichlet_prior_strength,
+        recency_half_life_days=recency_half_life_days,
+        bayesian_feature_shrinkage=bayesian_feature_shrinkage,
+        stress_multiplier=0.28,
+        transition_multiplier=0.62,
+        fragile_upside_multiplier=0.78,
+        min_multiplier=0.18,
+        probability_smoothing=0.10,
+    )
+
+
 def _evolve_from_previous_iteration(
     iteration: int,
     *,
@@ -7108,6 +7608,7 @@ def _evolve_from_previous_iteration(
         if strategy is None or strategy.type not in {"relative_momentum", "dual_momentum"}:
             continue
         scenario_sizing = _scenario_sizing_from_manifest(manifest.loc[parent_name])
+        future_state_model = _future_state_model_from_manifest(manifest.loc[parent_name])
         decision_sanity = _decision_sanity_from_manifest(manifest.loc[parent_name])
         family = str(row.get("family", "evolved"))
         candidates.extend(
@@ -7119,6 +7620,7 @@ def _evolve_from_previous_iteration(
                 parent_role=str(row.get("role", "candidate_core")),
                 parent_strategy=strategy,
                 parent_scenario_sizing=scenario_sizing,
+                parent_future_state_model=future_state_model,
                 parent_decision_sanity=decision_sanity,
                 phase=phase,
             )
@@ -7170,6 +7672,7 @@ def _strategy_variants(
     parent_role: str,
     parent_strategy: StrategyConfig,
     parent_scenario_sizing: ScenarioSizingConfig | None,
+    parent_future_state_model: FutureStateModelConfig | None,
     parent_decision_sanity: DecisionSanityConfig | None,
     phase: str,
 ) -> list[ExperimentCandidate]:
@@ -7301,6 +7804,7 @@ def _strategy_variants(
                 hypothesis=f"{hypothesis} Parent: {parent_name}.",
                 strategy=strategy,
                 scenario_sizing=scenario_sizing,
+                future_state_model=parent_future_state_model,
                 decision_sanity=parent_decision_sanity,
             )
         )
@@ -7355,6 +7859,28 @@ def _scenario_sizing_from_manifest(row: pd.Series) -> ScenarioSizingConfig | Non
         return None
 
 
+def _future_state_model_from_manifest(row: pd.Series) -> FutureStateModelConfig | None:
+    raw = row.get("future_state_model_json")
+    if not isinstance(raw, str) or not raw or raw == "nan":
+        return None
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(values, dict):
+        return None
+    try:
+        return FutureStateModelConfig(**values)
+    except TypeError:
+        return None
+
+
+def _future_state_label(config: FutureStateModelConfig | None) -> str:
+    if config is None:
+        return ""
+    return f"{config.model}_{config.feature_set}_{config.horizon_days}d"
+
+
 def _phase_for_iteration(iteration: int) -> str:
     if iteration <= 3:
         return "broad"
@@ -7404,6 +7930,7 @@ def _retag_candidates(
                 hypothesis=candidate.hypothesis,
                 strategy=candidate.strategy,
                 scenario_sizing=candidate.scenario_sizing,
+                future_state_model=candidate.future_state_model,
                 decision_sanity=candidate.decision_sanity,
             )
         )
@@ -7436,6 +7963,11 @@ def build_experiment_scorecard(
                 "scenario_sizing": (
                     candidate.scenario_sizing.profile if candidate.scenario_sizing else ""
                 ),
+                "future_state_model": (
+                    _future_state_label(candidate.future_state_model)
+                    if candidate.future_state_model
+                    else ""
+                ),
                 "decision_sanity": (
                     candidate.decision_sanity.profile if candidate.decision_sanity else ""
                 ),
@@ -7460,6 +7992,11 @@ def build_experiment_scorecard(
     summary["promotion_decision"] = summary.apply(_promotion_decision, axis=1)
     summary["monitoring_readiness_score"] = _monitoring_readiness_score(summary)
     summary["monitoring_readiness_label"] = summary.apply(_monitoring_readiness_label, axis=1)
+    summary["benchmark_knockout_score"] = _benchmark_knockout_score(summary)
+    summary["benchmark_knockout_label"] = summary.apply(_benchmark_knockout_label, axis=1)
+    summary["confidence_score"] = _confidence_score(summary)
+    summary["confidence_label"] = summary.apply(_confidence_label, axis=1)
+    summary["deployment_blockers"] = summary.apply(_deployment_blockers, axis=1)
     columns = [
         "display_name",
         "phase",
@@ -7467,11 +8004,17 @@ def build_experiment_scorecard(
         "role",
         "parent",
         "scenario_sizing",
+        "future_state_model",
         "decision_sanity",
         "promotion_decision",
         "promotion_score",
         "monitoring_readiness_score",
         "monitoring_readiness_label",
+        "confidence_score",
+        "confidence_label",
+        "deployment_blockers",
+        "benchmark_knockout_score",
+        "benchmark_knockout_label",
         "robustness_score",
         "cagr",
         "sharpe",
@@ -7604,6 +8147,65 @@ def apply_decision_sanity_overlay(
         )
     ).astype(float)
     return _normalize_weight_frame(adjusted)
+
+
+def apply_operability_hysteresis(
+    target_weights: pd.DataFrame,
+    strategy: StrategyConfig,
+) -> pd.DataFrame:
+    min_change = float(strategy.cycle_min_rebalance_change or 0.0)
+    max_step = float(strategy.cycle_max_step_change or 1.0)
+    min_hold_days = int(strategy.cycle_min_hold_days or 0)
+    if min_change < 0.05 and max_step >= 0.999 and min_hold_days <= 0:
+        return target_weights
+
+    desired = _normalize_weight_frame(target_weights).sort_index()
+    if desired.empty:
+        return desired
+
+    current = desired.iloc[0].astype(float).clip(lower=0.0)
+    last_trade_position = 0
+    rows = [current.copy()]
+    for position, (_, target) in enumerate(desired.iloc[1:].iterrows(), start=1):
+        target = target.astype(float).clip(lower=0.0)
+        delta = target - current
+        turnover = float(delta.abs().sum())
+        risk_off_override = _risk_off_override_active(
+            current,
+            target,
+            defensive_ticker=strategy.defensive_ticker,
+            threshold=float(strategy.cycle_risk_off_override_change or 1.0),
+        )
+        held_long_enough = position - last_trade_position >= min_hold_days
+        if turnover < min_change or (not held_long_enough and not risk_off_override):
+            rows.append(current.copy())
+            continue
+
+        if max_step > 0.0 and turnover > max_step:
+            delta = delta * (max_step / turnover)
+        current = (current + delta).clip(lower=0.0)
+        total = float(current.sum())
+        if total > 1.0:
+            current = current / total
+        last_trade_position = position
+        rows.append(current.copy())
+
+    smoothed = pd.DataFrame(rows, index=desired.index, columns=desired.columns)
+    return _normalize_weight_frame(smoothed)
+
+
+def _risk_off_override_active(
+    current: pd.Series,
+    target: pd.Series,
+    *,
+    defensive_ticker: str | None,
+    threshold: float,
+) -> bool:
+    if not defensive_ticker or defensive_ticker not in target.index or threshold <= 0.0:
+        return False
+    current_risk = 1.0 - float(current.get(defensive_ticker, 0.0))
+    target_risk = 1.0 - float(target.get(defensive_ticker, 0.0))
+    return current_risk - target_risk >= threshold
 
 
 def build_decision_sanity_signals(
@@ -7881,6 +8483,10 @@ def _operability_metrics_frame(results: dict[str, BacktestResult]) -> pd.DataFra
         turnover = result.turnover.dropna().astype(float).clip(lower=0.0)
         if turnover.empty:
             continue
+        turnover.iloc[0] = 0.0
+        gross_exposure = result.weights.abs().sum(axis=1).reindex(turnover.index).fillna(0.0)
+        startup_trade = (gross_exposure.shift(1).fillna(0.0) <= 1e-9) & (gross_exposure > 1e-9)
+        turnover.loc[startup_trade] = 0.0
         years = max((turnover.index[-1] - turnover.index[0]).days / 365.25, 1 / 365.25)
         material = turnover[turnover >= 0.05]
         material_days_per_year = len(material) / years
@@ -8216,6 +8822,118 @@ def _monitoring_readiness_label(row: pd.Series) -> str:
     return "research_archive"
 
 
+def _benchmark_knockout_score(summary: pd.DataFrame) -> pd.Series:
+    tests = [
+        _positive_test(summary, "excess_cagr_vs_spy"),
+        _positive_test(summary, "drawdown_improvement_vs_spy"),
+        _positive_test(summary, "calmar_excess_vs_spy"),
+        _positive_test(summary, "excess_cagr_vs_qqq"),
+        _positive_test(summary, "drawdown_improvement_vs_qqq"),
+        _positive_test(summary, "calmar_excess_vs_qqq"),
+    ]
+    return sum(tests) / len(tests)
+
+
+def _positive_test(summary: pd.DataFrame, column: str) -> pd.Series:
+    if column not in summary:
+        return pd.Series(0.5, index=summary.index)
+    values = pd.to_numeric(summary[column], errors="coerce")
+    return (values > 0.0).astype(float).where(values.notna(), 0.5)
+
+
+def _benchmark_knockout_label(row: pd.Series) -> str:
+    spy_score = _mean_present(
+        [
+            _indicator(row.get("excess_cagr_vs_spy")),
+            _indicator(row.get("drawdown_improvement_vs_spy")),
+            _indicator(row.get("calmar_excess_vs_spy")),
+        ]
+    )
+    qqq_score = _mean_present(
+        [
+            _indicator(row.get("excess_cagr_vs_qqq")),
+            _indicator(row.get("drawdown_improvement_vs_qqq")),
+            _indicator(row.get("calmar_excess_vs_qqq")),
+        ]
+    )
+    if spy_score >= 1.0 and qqq_score >= 1.0:
+        return "beats_spy_and_qqq"
+    if spy_score >= 2.0 / 3.0 and qqq_score >= 1.0 / 3.0:
+        return "beats_spy_mixed_qqq"
+    if spy_score >= 2.0 / 3.0:
+        return "beats_spy_only"
+    if max(spy_score, qqq_score) >= 1.0 / 3.0:
+        return "mixed_benchmark"
+    return "fails_index_bar"
+
+
+def _confidence_score(summary: pd.DataFrame) -> pd.Series:
+    return (
+        _rank_column(summary, "promotion_score") * 0.22
+        + _rank_column(summary, "robustness_score") * 0.18
+        + _rank_column(summary, "monitoring_readiness_score") * 0.16
+        + _rank_column(summary, "benchmark_knockout_score") * 0.16
+        + _rank_column(summary, "walk_forward_positive_rate") * 0.12
+        + _rank_column(summary, "left_tail_regime_return") * 0.10
+        + _rank_column(summary, "operability_score") * 0.06
+    )
+
+
+def _confidence_label(row: pd.Series) -> str:
+    blockers = _deployment_blockers_list(row)
+    score = _numeric_value(row.get("confidence_score"))
+    if score >= 0.80 and not blockers:
+        return "paper_eligible"
+    if score >= 0.68 and len(blockers) <= 1:
+        return "paper_watchlist"
+    if score >= 0.55 and len(blockers) <= 2:
+        return "needs_specific_fix"
+    return "research_only"
+
+
+def _deployment_blockers(row: pd.Series) -> str:
+    blockers = _deployment_blockers_list(row)
+    return "; ".join(blockers) if blockers else "none"
+
+
+def _deployment_blockers_list(row: pd.Series) -> list[str]:
+    blockers: list[str] = []
+    if str(row.get("promotion_decision", "")) not in {"promote_candidate", "evolve_next_iteration"}:
+        blockers.append("weak_promotion")
+    if str(row.get("benchmark_knockout_label", "")) in {"fails_index_bar", "mixed_benchmark"}:
+        blockers.append("benchmark_gap")
+    if str(row.get("monitoring_readiness_label", "")) in {"inspect_before_paper", "research_archive"}:
+        blockers.append("readiness_gap")
+    if str(row.get("operability_label", "")) == "too_twitchy":
+        blockers.append("too_twitchy")
+    if str(row.get("risk_cycle_label", "")) == "risk_off_sticky":
+        blockers.append("sticky_risk_off")
+    if _numeric_value(row.get("walk_forward_positive_rate"), default=1.0) < 0.65:
+        blockers.append("walk_forward_gap")
+    if _numeric_value(row.get("left_tail_regime_return"), default=0.0) < -0.15:
+        blockers.append("left_tail_gap")
+    if _numeric_value(row.get("max_drawdown"), default=0.0) < -0.25:
+        blockers.append("drawdown_gap")
+    return blockers
+
+
+def _indicator(value: object) -> float | None:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return None
+    if numeric != numeric:
+        return None
+    return 1.0 if numeric > 0.0 else 0.0
+
+
+def _mean_present(values: list[float | None]) -> float:
+    present = [value for value in values if value is not None]
+    if not present:
+        return 0.5
+    return float(sum(present) / len(present))
+
+
 def _rank_column(summary: pd.DataFrame, column: str) -> pd.Series:
     if column not in summary:
         return pd.Series(0.5, index=summary.index)
@@ -8385,13 +9103,13 @@ def _decision_sanity_adoption_read(row: pd.Series) -> str:
     return "tune_or_reject"
 
 
-def _numeric_value(value: object) -> float:
+def _numeric_value(value: object, *, default: float = 0.0) -> float:
     try:
         numeric = float(value)
     except (TypeError, ValueError):
-        return 0.0
+        return default
     if numeric != numeric:
-        return 0.0
+        return default
     return numeric
 
 
@@ -8416,9 +9134,19 @@ def _write_candidate_manifest(
                 "scenario_sizing": (
                     candidate.scenario_sizing.profile if candidate.scenario_sizing else ""
                 ),
+                "future_state_model": (
+                    _future_state_label(candidate.future_state_model)
+                    if candidate.future_state_model
+                    else ""
+                ),
                 "scenario_sizing_json": (
                     json.dumps(asdict(candidate.scenario_sizing), sort_keys=True)
                     if candidate.scenario_sizing
+                    else ""
+                ),
+                "future_state_model_json": (
+                    json.dumps(asdict(candidate.future_state_model), sort_keys=True)
+                    if candidate.future_state_model
                     else ""
                 ),
                 "decision_sanity": (

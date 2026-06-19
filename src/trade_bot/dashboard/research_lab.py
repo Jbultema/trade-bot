@@ -34,6 +34,7 @@ from trade_bot.research.approach_explorer import (
     build_latest_weight_frame,
     decision_sanity_from_catalog_row,
     execution_for_catalog_row,
+    future_state_model_from_catalog_row,
     scenario_sizing_from_catalog_row,
     strategy_from_catalog_row,
 )
@@ -62,6 +63,7 @@ def _render_strategy_summary_and_behavior(
     key_prefix: str,
 ) -> Any:
     scenario_sizing = scenario_sizing_from_catalog_row(row)
+    future_state_model = future_state_model_from_catalog_row(row)
     decision_sanity = decision_sanity_from_catalog_row(row)
     execution = execution_for_catalog_row(row, bot_config.execution)
     st.markdown("**How this approach works**")
@@ -71,6 +73,7 @@ def _render_strategy_summary_and_behavior(
         bot_config,
         execution=execution,
         scenario_sizing=scenario_sizing,
+        future_state_model=future_state_model,
         decision_sanity=decision_sanity,
     ):
         st.write(paragraph)
@@ -80,6 +83,7 @@ def _render_strategy_summary_and_behavior(
         strategy,
         execution,
         scenario_sizing=scenario_sizing,
+        future_state_model=future_state_model,
         decision_sanity=decision_sanity,
         name=str(row.get("strategy", "approach")),
     )
@@ -585,6 +589,7 @@ def _render_approach_detail_workbench(
     approach_strategy = strategy_from_catalog_row(approach_row)
     approach_execution = execution_for_catalog_row(approach_row, bot_config.execution)
     scenario_sizing = scenario_sizing_from_catalog_row(approach_row)
+    future_state_model = future_state_model_from_catalog_row(approach_row)
     decision_sanity = decision_sanity_from_catalog_row(approach_row)
 
     overview_cols = st.columns(6)
@@ -604,6 +609,12 @@ def _render_approach_detail_workbench(
         else f"#{int(float(approach_row['curation_rank']))}"
     )
     _helped_metric(overview_cols[5], "Curated Rank", curation_value)
+    if future_state_model is not None:
+        st.caption(
+            "Future-state model: "
+            f"{future_state_model.model} / {future_state_model.feature_set} / "
+            f"{future_state_model.horizon_days} trading days"
+        )
 
     detail_result = _render_strategy_summary_and_behavior(
         row=approach_row,
@@ -698,6 +709,22 @@ def _render_approach_detail_workbench(
                 f"{scenario_sizing.min_multiplier:.0%} and {scenario_sizing.max_multiplier:.0%}; "
                 "removed risk budget is routed to the defensive sleeve."
             )
+        if future_state_model is not None:
+            st.caption("Future-state ML sizing layer")
+            bayesian_note = ""
+            if future_state_model.model.startswith("bayesian"):
+                bayesian_note = (
+                    " It uses posterior smoothing, recency-weighted evidence, and shrinkage "
+                    "before converting probabilities into sizing."
+                )
+            st.write(
+                "Predicts regime-bucket probabilities instead of prices, then scales risk exposure. "
+                f"Model `{future_state_model.model}` uses `{future_state_model.feature_set}` features, "
+                f"a {future_state_model.horizon_days}-day target horizon, "
+                f"{future_state_model.train_window_days} training days, and "
+                f"{future_state_model.min_train_observations} minimum observations."
+                f"{bayesian_note}"
+            )
         if decision_sanity is not None:
             st.caption("Decision-sanity overlay")
             st.write(
@@ -788,6 +815,11 @@ def _render_curated_strategy_shelf(experiment_scorecards: pd.DataFrame) -> None:
         "role",
         "promotion_decision",
         "promotion_score",
+        "confidence_score",
+        "confidence_label",
+        "deployment_blockers",
+        "benchmark_knockout_label",
+        "future_state_model",
         "monitoring_readiness_score",
         "monitoring_readiness_label",
         "robustness_score",
@@ -996,6 +1028,7 @@ def _render_experiment_monitor(
     (
         experiment_detail_tab,
         experiment_sanity_tab,
+        experiment_confidence_tab,
         experiment_readiness_tab,
         experiment_shelf_tab,
         experiment_family_tab,
@@ -1007,6 +1040,7 @@ def _render_experiment_monitor(
         [
             "Candidate Details",
             "Sanity Impact",
+            "Confidence Gauntlet",
             "Paper Readiness",
             "Curated Shelf",
             "Family Map",
@@ -1034,6 +1068,9 @@ def _render_experiment_monitor(
 
     with experiment_sanity_tab:
         _render_decision_sanity_impact(decision_sanity_impacts)
+
+    with experiment_confidence_tab:
+        _render_confidence_gauntlet(experiment_scorecards)
 
     with experiment_readiness_tab:
         _render_paper_readiness(experiment_scorecards)
@@ -1118,9 +1155,14 @@ def _render_experiment_monitor(
             "family",
             "role",
             "scenario_sizing",
+            "future_state_model",
             "decision_sanity",
             "promotion_decision",
             "promotion_score",
+            "confidence_score",
+            "confidence_label",
+            "deployment_blockers",
+            "benchmark_knockout_label",
             "monitoring_readiness_score",
             "monitoring_readiness_label",
             "robustness_score",
@@ -1350,6 +1392,92 @@ def _render_paper_readiness(experiment_scorecards: pd.DataFrame) -> None:
     _render_metric_dataframe(
         _display_metrics(frame.head(30)[[column for column in columns if column in frame.columns]]),
         hide_index=True,
+    )
+
+
+def _render_confidence_gauntlet(experiment_scorecards: pd.DataFrame) -> None:
+    if experiment_scorecards.empty or "confidence_score" not in experiment_scorecards:
+        st.write(
+            "Confidence-gauntlet columns will appear after running an experiment iteration with "
+            "benchmark knockout, confidence, and deployment-blocker scoring."
+        )
+        return
+
+    st.caption(
+        "Deployment-focused research gate. This blends performance, robustness, benchmark knockout, "
+        "paper-readiness, walk-forward stability, left-tail behavior, and operability into one audit view."
+    )
+    frame = experiment_scorecards.copy()
+    frame["confidence_score"] = pd.to_numeric(frame["confidence_score"], errors="coerce")
+    frame = frame.sort_values("confidence_score", ascending=False)
+
+    label_summary = (
+        frame.groupby("confidence_label", as_index=False, dropna=False)
+        .agg(
+            candidates=("strategy", "count"),
+            best_strategy=("strategy", "first"),
+            best_confidence=("confidence_score", "max"),
+            median_promotion_score=("promotion_score", "median"),
+            median_benchmark_score=("benchmark_knockout_score", "median"),
+            median_readiness_score=("monitoring_readiness_score", "median"),
+        )
+        .sort_values("best_confidence", ascending=False)
+    )
+    st.markdown("**Confidence summary**")
+    _render_metric_dataframe(_display_metrics(label_summary), hide_index=True)
+
+    blocker_counts = _deployment_blocker_counts(frame)
+    if not blocker_counts.empty:
+        st.markdown("**Most common blockers**")
+        st.bar_chart(blocker_counts.set_index("blocker")["candidates"])
+        _render_metric_dataframe(blocker_counts, hide_index=True)
+
+    st.markdown("**Highest-confidence candidates**")
+    columns = [
+        "iteration",
+        "display_name",
+        "strategy",
+        "phase",
+        "family",
+        "confidence_label",
+        "confidence_score",
+        "deployment_blockers",
+        "benchmark_knockout_label",
+        "benchmark_knockout_score",
+        "monitoring_readiness_label",
+        "monitoring_readiness_score",
+        "promotion_decision",
+        "promotion_score",
+        "robustness_score",
+        "operability_label",
+        "risk_cycle_label",
+        "cagr",
+        "max_drawdown",
+        "calmar",
+        "walk_forward_positive_rate",
+        "left_tail_regime_return",
+    ]
+    _render_metric_dataframe(
+        _display_metrics(frame.head(35)[[column for column in columns if column in frame.columns]]),
+        hide_index=True,
+    )
+
+
+def _deployment_blocker_counts(scorecards: pd.DataFrame) -> pd.DataFrame:
+    if "deployment_blockers" not in scorecards:
+        return pd.DataFrame()
+    rows = []
+    for blockers in scorecards["deployment_blockers"].dropna().astype(str):
+        if not blockers or blockers == "none" or blockers == "nan":
+            continue
+        rows.extend(part.strip() for part in blockers.split(";") if part.strip())
+    if not rows:
+        return pd.DataFrame()
+    return (
+        pd.Series(rows, name="blocker")
+        .value_counts()
+        .rename_axis("blocker")
+        .reset_index(name="candidates")
     )
 
 
