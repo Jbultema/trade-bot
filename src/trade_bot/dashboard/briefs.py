@@ -71,6 +71,7 @@ def _operating_brief_cards(
     scenario_effect = _scenario_effect_sentence(trade_summary, risk_summary)
     primary_sizing = _primary_sizing_sentence(baseline_run.trade_decision.position_plan)
     posture_check = _posture_calibration_sentence(trade_summary)
+    sanity_check = _decision_sanity_sentence(trade_summary)
     return [
         {
             "tone": "warning" if "REDUCE" in action else "success",
@@ -83,6 +84,12 @@ def _operating_brief_cards(
             "label": "Risk Constraints",
             "answer": scenario_effect["answer"],
             "detail": scenario_effect["detail"],
+        },
+        {
+            "tone": sanity_check["tone"],
+            "label": "Decision Sanity",
+            "answer": sanity_check["answer"],
+            "detail": sanity_check["detail"],
         },
         {
             "tone": posture_check["tone"],
@@ -358,6 +365,25 @@ def _scenario_effect_sentence(
             f"Final risk budget is {final_budget}; portfolio-risk multiplier is {portfolio_multiplier}; "
             f"constraints: {constraints}."
         ),
+    }
+
+
+def _decision_sanity_sentence(trade_summary: dict[str, object]) -> dict[str, str]:
+    signal = str(trade_summary.get("decision_sanity_signal", "No sanity cap needed"))
+    note = str(
+        trade_summary.get(
+            "decision_sanity_note",
+            "No event/news-only de-risk cap is active for this recommendation.",
+        )
+    )
+    cap_applied = bool(trade_summary.get("decision_sanity_cap_applied", False))
+    breaks = str(trade_summary.get("market_confirmation_breaks", "none"))
+    break_count = _format_decimal(trade_summary.get("market_confirmation_break_count"))
+    cap = _format_percent(trade_summary.get("event_only_max_defensive_add"))
+    return {
+        "tone": "warning" if cap_applied else "success",
+        "answer": signal,
+        "detail": f"{note} Confirmation breaks: {break_count} ({breaks}); event-only defensive-add cap: {cap}.",
     }
 
 

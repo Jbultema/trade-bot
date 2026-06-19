@@ -165,6 +165,152 @@ def test_trade_decision_flags_possible_opportunity_cost_when_constructive() -> N
     assert "Opportunity-cost watch" in set(decision.evidence["signal"])
 
 
+def test_trade_decision_caps_event_only_derisk_without_market_confirmation() -> None:
+    index = pd.bdate_range("2025-01-01", periods=180)
+    weights = pd.DataFrame({"QQQ": 0.8, "SPY": 0.2}, index=index)
+    result = _backtest_result("primary", index, weights)
+    current_state = replace(
+        _current_state(),
+        scenario_lattice=_constructive_scenario_lattice(),
+        confirmation_matrix=_confirmation_matrix(negative_themes=()),
+    )
+
+    decision = build_trade_decision(
+        primary_result=result,
+        current_state=current_state,
+        event_risk=_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_empty_signal_inclusion(),
+        prices=_risk_prices(index),
+    )
+
+    summary = decision.summary.iloc[0]
+    bil_row = decision.position_plan[decision.position_plan["ticker"] == "BIL"].iloc[0]
+
+    assert summary["decision_sanity_status"] == "event_only_cap_applied"
+    assert bool(summary["decision_sanity_cap_applied"])
+    assert summary["market_confirmation_break_count"] == 0
+    assert summary["pre_sanity_risk_budget_multiplier"] < summary["risk_budget_multiplier"]
+    assert bil_row["scenario_adjusted_weight"] <= 0.25 + 1e-9
+    assert "Decision sanity says" in summary["human_explanation"]
+    assert "decision_sanity" in set(decision.evidence["evidence_type"])
+
+
+def test_trade_decision_allows_larger_derisk_when_market_confirmation_breaks() -> None:
+    index = pd.bdate_range("2025-01-01", periods=180)
+    weights = pd.DataFrame({"QQQ": 0.8, "SPY": 0.2}, index=index)
+    result = _backtest_result("primary", index, weights)
+    current_state = replace(
+        _current_state(),
+        scenario_lattice=_constructive_scenario_lattice(),
+        confirmation_matrix=_confirmation_matrix(negative_themes=("credit", "volatility")),
+    )
+
+    decision = build_trade_decision(
+        primary_result=result,
+        current_state=current_state,
+        event_risk=_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_empty_signal_inclusion(),
+        prices=_risk_prices(index),
+    )
+
+    summary = decision.summary.iloc[0]
+    bil_row = decision.position_plan[decision.position_plan["ticker"] == "BIL"].iloc[0]
+
+    assert summary["decision_sanity_status"] == "market_confirmation_allows_derisk"
+    assert not bool(summary["decision_sanity_cap_applied"])
+    assert summary["market_confirmation_break_count"] == 2
+    assert summary["market_confirmation_breaks"] == "credit, volatility"
+    assert summary["pre_sanity_risk_budget_multiplier"] == summary["risk_budget_multiplier"]
+    assert bil_row["scenario_adjusted_weight"] > 0.25
+
+
+
+def _backtest_result(name: str, index: pd.DatetimeIndex, weights: pd.DataFrame) -> BacktestResult:
+    return BacktestResult(
+        name=name,
+        equity=pd.Series(range(100, 100 + len(index)), index=index, dtype=float),
+        returns=pd.Series(0.001, index=index),
+        gross_returns=pd.Series(0.001, index=index),
+        weights=weights,
+        target_weights=weights,
+        turnover=pd.Series(0.0, index=index),
+        transaction_costs=pd.Series(0.0, index=index),
+    )
+
+
+def _constructive_scenario_lattice() -> pd.DataFrame:
+    return pd.DataFrame(
+        [
+            {
+                "horizon": "1m",
+                "rank": 1,
+                "scenario": "Broad risk-on broadening",
+                "probability": 0.45,
+                "risk_bucket": "risk_on",
+                "expected_bot_posture": "Maintain risk.",
+                "preferred_exposure": "SPY/RSP",
+                "avoid_exposure": "Concentration",
+                "confirmation": "Breadth improves.",
+                "off_ramp": "Cut if credit weakens.",
+            },
+            {
+                "horizon": "1m",
+                "rank": 2,
+                "scenario": "AI upside squeeze",
+                "probability": 0.25,
+                "risk_bucket": "risk_on_fragile",
+                "expected_bot_posture": "Participate smaller.",
+                "preferred_exposure": "QQQ",
+                "avoid_exposure": "Crowded beta",
+                "confirmation": "Credit holds.",
+                "off_ramp": "Cut if breadth rolls over.",
+            },
+            {
+                "horizon": "1m",
+                "rank": 3,
+                "scenario": "Choppy transition",
+                "probability": 0.20,
+                "risk_bucket": "transition",
+                "expected_bot_posture": "Use guardrails.",
+                "preferred_exposure": "Quality",
+                "avoid_exposure": "Over-trading",
+                "confirmation": "Mixed leadership.",
+                "off_ramp": "Defensive if credit breaks.",
+            },
+            {
+                "horizon": "1m",
+                "rank": 4,
+                "scenario": "Risk-off false break",
+                "probability": 0.10,
+                "risk_bucket": "risk_off",
+                "expected_bot_posture": "Respect stops.",
+                "preferred_exposure": "BIL",
+                "avoid_exposure": "High beta",
+                "confirmation": "Credit weakens.",
+                "off_ramp": "Stay defensive until recovery.",
+            },
+        ]
+    )
+
+
+def _confirmation_matrix(negative_themes: tuple[str, ...]) -> pd.DataFrame:
+    rows = [
+        {"name": "High Yield vs IG Credit", "theme": "credit"},
+        {"name": "Volatility ETF Pressure", "theme": "volatility"},
+        {"name": "Equal Weight vs Cap Weight", "theme": "breadth"},
+        {"name": "SPY Trend", "theme": "broad_market"},
+        {"name": "QQQ Trend", "theme": "ai_beta"},
+    ]
+    for row in rows:
+        theme = str(row["theme"])
+        canonical = "trend" if theme in {"broad_market", "ai_beta"} else theme
+        negative = canonical in negative_themes
+        row["status"] = "bearish" if negative else "bullish"
+        row["score"] = -1 if negative else 1
+    return pd.DataFrame(rows)
+
 def _risk_prices(index: pd.DatetimeIndex) -> pd.DataFrame:
     trend = pd.Series(range(len(index)), index=index, dtype=float)
     return pd.DataFrame(

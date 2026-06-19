@@ -32,6 +32,7 @@ from trade_bot.research.approach_explorer import (
     build_approach_steps,
     build_approach_weight_history,
     build_latest_weight_frame,
+    decision_sanity_from_catalog_row,
     execution_for_catalog_row,
     scenario_sizing_from_catalog_row,
     strategy_from_catalog_row,
@@ -60,6 +61,7 @@ def _render_strategy_summary_and_behavior(
     key_prefix: str,
 ) -> Any:
     scenario_sizing = scenario_sizing_from_catalog_row(row)
+    decision_sanity = decision_sanity_from_catalog_row(row)
     execution = execution_for_catalog_row(row, bot_config.execution)
     st.markdown("**How this approach works**")
     for paragraph in build_approach_explanation(
@@ -68,6 +70,7 @@ def _render_strategy_summary_and_behavior(
         bot_config,
         execution=execution,
         scenario_sizing=scenario_sizing,
+        decision_sanity=decision_sanity,
     ):
         st.write(paragraph)
 
@@ -76,6 +79,7 @@ def _render_strategy_summary_and_behavior(
         strategy,
         execution,
         scenario_sizing=scenario_sizing,
+        decision_sanity=decision_sanity,
         name=str(row.get("strategy", "approach")),
     )
     if missing_columns:
@@ -580,6 +584,7 @@ def _render_approach_detail_workbench(
     approach_strategy = strategy_from_catalog_row(approach_row)
     approach_execution = execution_for_catalog_row(approach_row, bot_config.execution)
     scenario_sizing = scenario_sizing_from_catalog_row(approach_row)
+    decision_sanity = decision_sanity_from_catalog_row(approach_row)
 
     overview_cols = st.columns(6)
     _helped_metric(overview_cols[0], "Source", str(approach_row["source"]))
@@ -691,6 +696,13 @@ def _render_approach_detail_workbench(
                 f"Profile `{scenario_sizing.profile}` scales risk exposure between "
                 f"{scenario_sizing.min_multiplier:.0%} and {scenario_sizing.max_multiplier:.0%}; "
                 "removed risk budget is routed to the defensive sleeve."
+            )
+        if decision_sanity is not None:
+            st.caption("Decision-sanity overlay")
+            st.write(
+                "Caps extra defensive sizing unless market confirmation breaks are broad enough. "
+                f"Required confirmation gates: {decision_sanity.required_confirmation_breaks}; "
+                f"event/news-only defensive-add cap: {decision_sanity.max_defensive_add:.0%}."
             )
 
     with robustness_tab:
@@ -1089,6 +1101,7 @@ def _render_experiment_monitor(
             "family",
             "role",
             "scenario_sizing",
+            "decision_sanity",
             "promotion_decision",
             "promotion_score",
             "robustness_score",

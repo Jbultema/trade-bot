@@ -133,6 +133,7 @@ def test_macro_minute_report_summarizes_market_news_and_scenarios() -> None:
         "Regime Pulse",
         "Scenario Map",
         "Risk Budget / Action",
+        "Decision Sanity",
     ]
     scenario_card = next(card for card in report.cards if card.label == "Scenario Map")
     assert "Choppy factor rotation" in scenario_card.detail

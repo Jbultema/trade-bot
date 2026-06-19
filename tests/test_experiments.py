@@ -6,7 +6,9 @@ import pandas as pd
 
 from trade_bot.config import StrategyConfig
 from trade_bot.research.experiments import (
+    DecisionSanityConfig,
     ScenarioSizingConfig,
+    apply_decision_sanity_overlay,
     apply_scenario_position_sizing,
     build_experiment_scorecard,
     generate_iteration_candidates,
@@ -205,6 +207,86 @@ def test_scenario_position_sizing_moves_stress_residual_to_defensive_ticker() ->
     assert adjusted["BIL"].iloc[-1] > 0.2
     assert round(float(adjusted.iloc[-1].sum()), 8) == 1.0
 
+
+
+def test_decision_sanity_overlay_caps_unconfirmed_defensive_add() -> None:
+    index = pd.bdate_range("2026-01-01", periods=90)
+    prices = _sanity_prices(index, confirmed_break=False)
+    base = pd.DataFrame({"SPY": 1.0, "BIL": 0.0}, index=index)
+    adjusted = pd.DataFrame({"SPY": 0.20, "BIL": 0.80}, index=index)
+
+    capped = apply_decision_sanity_overlay(
+        base,
+        adjusted,
+        prices,
+        DecisionSanityConfig(profile="test", max_defensive_add=0.25),
+        defensive_ticker="BIL",
+    )
+
+    assert capped["BIL"].iloc[-1] <= 0.25 + 1e-9
+    assert capped["SPY"].iloc[-1] >= 0.75 - 1e-9
+    assert round(float(capped.iloc[-1].sum()), 8) == 1.0
+
+
+def test_decision_sanity_overlay_allows_confirmed_defensive_add() -> None:
+    index = pd.bdate_range("2026-01-01", periods=90)
+    prices = _sanity_prices(index, confirmed_break=True)
+    base = pd.DataFrame({"SPY": 1.0, "BIL": 0.0}, index=index)
+    adjusted = pd.DataFrame({"SPY": 0.20, "BIL": 0.80}, index=index)
+
+    capped = apply_decision_sanity_overlay(
+        base,
+        adjusted,
+        prices,
+        DecisionSanityConfig(profile="test", max_defensive_add=0.25),
+        defensive_ticker="BIL",
+    )
+
+    assert capped["BIL"].iloc[-1] == adjusted["BIL"].iloc[-1]
+    assert capped["SPY"].iloc[-1] == adjusted["SPY"].iloc[-1]
+
+
+def test_decision_sanity_ablation_iteration_has_raw_and_capped_pairs() -> None:
+    candidates = generate_iteration_candidates(77)
+
+    assert len(candidates) == 8
+    assert {candidate.role for candidate in candidates} == {"sanity_ablation"}
+    assert any(candidate.decision_sanity is None for candidate in candidates)
+    assert any(candidate.decision_sanity is not None for candidate in candidates)
+    capped = [candidate for candidate in candidates if candidate.decision_sanity is not None]
+    assert all(candidate.scenario_sizing is not None for candidate in candidates)
+    assert all(candidate.parent.startswith("i77_sanity_raw_") for candidate in capped)
+
+
+def _sanity_prices(index: pd.DatetimeIndex, *, confirmed_break: bool) -> pd.DataFrame:
+    trend = pd.Series(range(len(index)), index=index, dtype=float)
+    if not confirmed_break:
+        return pd.DataFrame(
+            {
+                "SPY": 100.0 + trend,
+                "QQQ": 100.0 + trend,
+                "RSP": 100.0 + trend,
+                "HYG": 100.0 + trend * 0.5,
+                "LQD": 100.0 + trend * 0.4,
+                "VIXY": 100.0 - trend * 0.2,
+                "UUP": 100.0,
+                "BIL": 100.0,
+            },
+            index=index,
+        )
+    return pd.DataFrame(
+        {
+            "SPY": 120.0 - trend * 0.8,
+            "QQQ": 125.0 - trend,
+            "RSP": 120.0 - trend * 1.2,
+            "HYG": 110.0 - trend * 0.7,
+            "LQD": 100.0 + trend * 0.2,
+            "VIXY": 80.0 + trend * 1.5,
+            "UUP": 100.0 + trend * 0.3,
+            "BIL": 100.0,
+        },
+        index=index,
+    )
 
 
 def test_macro_reset_iterations_use_human_readable_strategy_names() -> None:

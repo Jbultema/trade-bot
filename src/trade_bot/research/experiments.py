@@ -27,6 +27,8 @@ from trade_bot.config import (
 )
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
 from trade_bot.DEFAULT import (
+    DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS,
+    DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_SCENARIO_FRAGILE_UPSIDE_MULTIPLIER,
     DEFAULT_SCENARIO_MAX_MULTIPLIER,
@@ -47,6 +49,7 @@ class ExperimentCandidate:
     role: str
     strategy: StrategyConfig
     scenario_sizing: ScenarioSizingConfig | None = None
+    decision_sanity: DecisionSanityConfig | None = None
     phase: str = "broad"
     family: str = "general"
     parent: str | None = None
@@ -61,6 +64,16 @@ class ScenarioSizingConfig:
     risk_on_multiplier: float = DEFAULT_SCENARIO_RISK_ON_MULTIPLIER
     min_multiplier: float = DEFAULT_SCENARIO_MIN_MULTIPLIER
     max_multiplier: float = DEFAULT_SCENARIO_MAX_MULTIPLIER
+    lookback_days: int = DEFAULT_SCENARIO_SIZING_LOOKBACK_DAYS
+
+
+@dataclass(frozen=True)
+class DecisionSanityConfig:
+    profile: str = "confirmation_cap"
+    max_defensive_add: float = DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD
+    required_confirmation_breaks: int = DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS
+    confirmation_threshold: float = 0.25
+    left_tail_pressure_threshold: float = 0.35
     lookback_days: int = DEFAULT_SCENARIO_SIZING_LOOKBACK_DAYS
 
 
@@ -111,12 +124,21 @@ def run_experiment_iteration(
             candidate.strategy.tickers,
             candidate.strategy.defensive_ticker,
         )
-        target_weights = build_strategy_weights(candidate_prices, candidate.strategy)
+        base_target_weights = build_strategy_weights(candidate_prices, candidate.strategy)
+        target_weights = base_target_weights
         if candidate.scenario_sizing is not None:
             target_weights = apply_scenario_position_sizing(
                 target_weights,
                 candidate_prices,
                 candidate.scenario_sizing,
+                defensive_ticker=candidate.strategy.defensive_ticker,
+            )
+        if candidate.decision_sanity is not None:
+            target_weights = apply_decision_sanity_overlay(
+                base_target_weights,
+                target_weights,
+                candidate_prices,
+                candidate.decision_sanity,
                 defensive_ticker=candidate.strategy.defensive_ticker,
             )
         result = run_backtest(
@@ -230,6 +252,8 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _ai_risk_cycle_candidates(iteration)
     if 72 <= iteration <= 76:
         return _sector_regime_rotation_candidates(iteration)
+    if iteration == 77:
+        return _decision_sanity_overlay_candidates()
     if 101 <= iteration <= 105:
         return _macro_reset_candidates(iteration)
     return None
@@ -6418,6 +6442,53 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
     }
     return batches[iteration]
 
+def _decision_sanity_overlay_candidates() -> tuple[ExperimentCandidate, ...]:
+    selected = [
+        _operating_system_candidates()[0],
+        _operating_system_candidates()[1],
+        _operating_system_candidates()[4],
+        _operating_system_candidates()[7],
+    ]
+    names = ["ai_escape", "cross_asset", "sector_rotation", "oil_policy"]
+    candidates: list[ExperimentCandidate] = []
+    for base, short_name in zip(selected, names, strict=True):
+        raw_name = f"i77_sanity_raw_{short_name}"
+        capped_name = f"i77_sanity_cap_{short_name}"
+        candidates.append(
+            _candidate(
+                name=raw_name,
+                role="sanity_ablation",
+                phase="decision_sanity_ablation",
+                family=base.family,
+                parent=base.name,
+                hypothesis=(
+                    "Raw scenario-sized benchmark for decision-sanity ablation. This candidate keeps "
+                    "the original scenario/risk sizing so the paired capped variant has a clean control."
+                ),
+                scenario_sizing=base.scenario_sizing,
+                strategy=base.strategy,
+            )
+        )
+        candidates.append(
+            _candidate(
+                name=capped_name,
+                role="sanity_ablation",
+                phase="decision_sanity_ablation",
+                family=base.family,
+                parent=raw_name,
+                hypothesis=(
+                    "Decision-sanity variant: cap extra defensive weight unless at least two of "
+                    "credit, volatility/liquidity, breadth, or trend confirm deterioration, or left-tail "
+                    "pressure is already severe."
+                ),
+                scenario_sizing=base.scenario_sizing,
+                decision_sanity=_decision_sanity_profile("confirmation_cap"),
+                strategy=base.strategy,
+            )
+        )
+    return tuple(candidates)
+
+
 def _reference_portfolio_candidates() -> tuple[ExperimentCandidate, ...]:
     return (
         _fixed_allocation_candidate(
@@ -6811,6 +6882,7 @@ def _candidate(
     hypothesis: str,
     strategy: StrategyConfig,
     scenario_sizing: ScenarioSizingConfig | None = None,
+    decision_sanity: DecisionSanityConfig | None = None,
     parent: str | None = None,
 ) -> ExperimentCandidate:
     return ExperimentCandidate(
@@ -6822,6 +6894,7 @@ def _candidate(
         hypothesis=hypothesis,
         strategy=strategy,
         scenario_sizing=scenario_sizing,
+        decision_sanity=decision_sanity,
     )
 
 
@@ -6845,6 +6918,17 @@ def _fixed_allocation_candidate(
             max_asset_weight=None,
         ),
     )
+
+
+def _decision_sanity_profile(profile: str) -> DecisionSanityConfig:
+    profiles = {
+        "confirmation_cap": DecisionSanityConfig(profile="confirmation_cap"),
+        "modest_cap": DecisionSanityConfig(profile="modest_cap", max_defensive_add=0.15),
+        "wide_cap": DecisionSanityConfig(profile="wide_cap", max_defensive_add=0.30),
+    }
+    if profile not in profiles:
+        raise ValueError(f"Unknown decision-sanity profile: {profile}")
+    return profiles[profile]
 
 
 def _scenario_profile(profile: str) -> ScenarioSizingConfig:
@@ -6906,6 +6990,7 @@ def _evolve_from_previous_iteration(
         if strategy is None or strategy.type not in {"relative_momentum", "dual_momentum"}:
             continue
         scenario_sizing = _scenario_sizing_from_manifest(manifest.loc[parent_name])
+        decision_sanity = _decision_sanity_from_manifest(manifest.loc[parent_name])
         family = str(row.get("family", "evolved"))
         candidates.extend(
             _strategy_variants(
@@ -6916,6 +7001,7 @@ def _evolve_from_previous_iteration(
                 parent_role=str(row.get("role", "candidate_core")),
                 parent_strategy=strategy,
                 parent_scenario_sizing=scenario_sizing,
+                parent_decision_sanity=decision_sanity,
                 phase=phase,
             )
         )
@@ -6966,6 +7052,7 @@ def _strategy_variants(
     parent_role: str,
     parent_strategy: StrategyConfig,
     parent_scenario_sizing: ScenarioSizingConfig | None,
+    parent_decision_sanity: DecisionSanityConfig | None,
     phase: str,
 ) -> list[ExperimentCandidate]:
     lookback = parent_strategy.lookback_days
@@ -7096,6 +7183,7 @@ def _strategy_variants(
                 hypothesis=f"{hypothesis} Parent: {parent_name}.",
                 strategy=strategy,
                 scenario_sizing=scenario_sizing,
+                decision_sanity=parent_decision_sanity,
             )
         )
     return candidates
@@ -7114,6 +7202,22 @@ def _strategy_from_manifest(row: pd.Series) -> StrategyConfig | None:
     try:
         return StrategyConfig.model_validate(json.loads(raw))
     except (TypeError, ValueError):
+        return None
+
+
+def _decision_sanity_from_manifest(row: pd.Series) -> DecisionSanityConfig | None:
+    raw = row.get("decision_sanity_json")
+    if not isinstance(raw, str) or not raw or raw == "nan":
+        return None
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(values, dict):
+        return None
+    try:
+        return DecisionSanityConfig(**values)
+    except TypeError:
         return None
 
 
@@ -7182,6 +7286,7 @@ def _retag_candidates(
                 hypothesis=candidate.hypothesis,
                 strategy=candidate.strategy,
                 scenario_sizing=candidate.scenario_sizing,
+                decision_sanity=candidate.decision_sanity,
             )
         )
     return tuple(retagged)
@@ -7211,6 +7316,9 @@ def build_experiment_scorecard(
                 "scenario_sizing": (
                     candidate.scenario_sizing.profile if candidate.scenario_sizing else ""
                 ),
+                "decision_sanity": (
+                    candidate.decision_sanity.profile if candidate.decision_sanity else ""
+                ),
                 "hypothesis": candidate.hypothesis,
             }
             for candidate in candidates
@@ -7235,6 +7343,7 @@ def build_experiment_scorecard(
         "role",
         "parent",
         "scenario_sizing",
+        "decision_sanity",
         "promotion_decision",
         "promotion_score",
         "robustness_score",
@@ -7291,6 +7400,116 @@ def apply_scenario_position_sizing(
         residual = (1.0 - adjusted.sum(axis=1)).clip(lower=0.0)
         adjusted.loc[:, defensive_ticker] = adjusted[defensive_ticker] + residual
     return adjusted.clip(lower=0.0)
+
+
+def apply_decision_sanity_overlay(
+    base_target_weights: pd.DataFrame,
+    adjusted_target_weights: pd.DataFrame,
+    prices: pd.DataFrame,
+    config: DecisionSanityConfig,
+    *,
+    defensive_ticker: str | None,
+) -> pd.DataFrame:
+    if not defensive_ticker:
+        return adjusted_target_weights.clip(lower=0.0)
+
+    tickers = sorted(
+        set(base_target_weights.columns) | set(adjusted_target_weights.columns) | {defensive_ticker}
+    )
+    index = adjusted_target_weights.index
+    base = (
+        base_target_weights.reindex(index=index, columns=tickers)
+        .fillna(0.0)
+        .astype(float)
+        .clip(lower=0.0)
+    )
+    adjusted = (
+        adjusted_target_weights.reindex(index=index, columns=tickers)
+        .fillna(0.0)
+        .astype(float)
+        .clip(lower=0.0)
+    )
+    signals = build_decision_sanity_signals(prices, config).reindex(index).ffill().fillna(0.0)
+    cap_active = signals["sanity_cap_active"].astype(bool)
+
+    base_defensive = base[defensive_ticker].clip(lower=0.0, upper=1.0)
+    adjusted_defensive = adjusted[defensive_ticker].clip(lower=0.0, upper=1.0)
+    max_defensive = (base_defensive + config.max_defensive_add).clip(lower=0.0, upper=1.0)
+    capped_defensive = adjusted_defensive.mask(
+        cap_active & (adjusted_defensive > max_defensive),
+        max_defensive,
+    )
+    freed_weight = (adjusted_defensive - capped_defensive).clip(lower=0.0)
+    adjusted.loc[:, defensive_ticker] = capped_defensive
+
+    risk_columns = [column for column in tickers if column != defensive_ticker]
+    if not risk_columns or float(freed_weight.max()) <= 0.0:
+        return _normalize_weight_frame(adjusted)
+
+    candidate_basis = adjusted[risk_columns].clip(lower=0.0)
+    base_basis = base[risk_columns].clip(lower=0.0)
+    candidate_sum = candidate_basis.sum(axis=1)
+    base_sum = base_basis.sum(axis=1)
+    equal_basis = pd.DataFrame(
+        1.0 / len(risk_columns),
+        index=adjusted.index,
+        columns=risk_columns,
+    )
+    allocation_basis = candidate_basis.div(candidate_sum.replace(0.0, float("nan")), axis=0)
+    fallback_basis = base_basis.div(base_sum.replace(0.0, float("nan")), axis=0)
+    allocation_basis = allocation_basis.fillna(fallback_basis).fillna(equal_basis).astype(float)
+    adjusted.loc[:, risk_columns] = (
+        adjusted[risk_columns].astype(float)
+        + allocation_basis.mul(
+            freed_weight.astype(float),
+            axis=0,
+        )
+    ).astype(float)
+    return _normalize_weight_frame(adjusted)
+
+
+def build_decision_sanity_signals(
+    prices: pd.DataFrame,
+    config: DecisionSanityConfig,
+) -> pd.DataFrame:
+    signal_config = ScenarioSizingConfig(
+        profile=config.profile,
+        lookback_days=config.lookback_days,
+    )
+    signals = build_scenario_sizing_signals(prices, signal_config)
+    threshold = config.confirmation_threshold
+    credit_break = signals["credit"] <= -threshold
+    volatility_break = signals["liquidity_pressure"] >= threshold
+    breadth_break = signals["breadth"] <= -threshold
+    trend_break = signals["market_trend"] <= -threshold
+    confirmation_break_count = (
+        credit_break.astype(int)
+        + volatility_break.astype(int)
+        + breadth_break.astype(int)
+        + trend_break.astype(int)
+    )
+    left_tail_confirmed = signals["risk_off_pressure"] >= config.left_tail_pressure_threshold
+    sanity_cap_active = (
+        confirmation_break_count < config.required_confirmation_breaks
+    ) & ~left_tail_confirmed
+    output = signals.copy()
+    output["credit_break"] = credit_break
+    output["volatility_break"] = volatility_break
+    output["breadth_break"] = breadth_break
+    output["trend_break"] = trend_break
+    output["confirmation_break_count"] = confirmation_break_count
+    output["left_tail_confirmed"] = left_tail_confirmed
+    output["sanity_cap_active"] = sanity_cap_active
+    return output
+
+
+def _normalize_weight_frame(weights: pd.DataFrame) -> pd.DataFrame:
+    clipped = weights.astype(float).clip(lower=0.0).fillna(0.0)
+    row_sum = clipped.sum(axis=1)
+    over = row_sum > 1.0
+    if over.any():
+        clipped.loc[over] = clipped.loc[over].div(row_sum.loc[over], axis=0)
+    return clipped
 
 
 def build_scenario_sizing_signals(
@@ -7677,7 +7896,56 @@ def _write_experiment_outputs(
     regime_summary.to_csv(output / "regime_summary.csv")
     walk_forward_folds.to_csv(output / "walk_forward_folds.csv", index=False)
     walk_forward_summary.to_csv(output / "walk_forward_summary.csv")
+    sanity_impact = _decision_sanity_impact_frame(scorecard)
+    if not sanity_impact.empty:
+        sanity_impact.to_csv(output / "decision_sanity_impact.csv", index=False)
     _write_markdown_summary(iteration, scorecard, output / "summary.md")
+
+
+def _decision_sanity_impact_frame(scorecard: pd.DataFrame) -> pd.DataFrame:
+    if scorecard.empty or "decision_sanity" not in scorecard or "parent" not in scorecard:
+        return pd.DataFrame()
+    frame = scorecard.reset_index().rename(columns={"index": "strategy"})
+    if "strategy" not in frame:
+        return pd.DataFrame()
+    indexed = frame.set_index("strategy", drop=False)
+    capped_rows = frame[frame["decision_sanity"].fillna("").astype(str).str.len() > 0]
+    rows = []
+    metrics_to_compare = [
+        "promotion_score",
+        "robustness_score",
+        "cagr",
+        "sharpe",
+        "max_drawdown",
+        "calmar",
+        "average_turnover",
+        "worst_3y_cagr",
+        "walk_forward_positive_rate",
+        "left_tail_regime_return",
+    ]
+    for _, capped in capped_rows.iterrows():
+        parent = str(capped.get("parent", ""))
+        if parent not in indexed.index:
+            continue
+        raw = indexed.loc[parent]
+        row = {
+            "raw_strategy": parent,
+            "capped_strategy": capped["strategy"],
+            "family": capped.get("family", ""),
+            "decision_sanity": capped.get("decision_sanity", ""),
+            "raw_promotion_decision": raw.get("promotion_decision", ""),
+            "capped_promotion_decision": capped.get("promotion_decision", ""),
+        }
+        for metric in metrics_to_compare:
+            if metric not in capped or metric not in raw:
+                continue
+            capped_value = pd.to_numeric(pd.Series([capped.get(metric)]), errors="coerce").iloc[0]
+            raw_value = pd.to_numeric(pd.Series([raw.get(metric)]), errors="coerce").iloc[0]
+            row[f"raw_{metric}"] = raw_value
+            row[f"capped_{metric}"] = capped_value
+            row[f"delta_{metric}"] = capped_value - raw_value
+        rows.append(row)
+    return pd.DataFrame(rows)
 
 
 def _write_candidate_manifest(
@@ -7704,6 +7972,14 @@ def _write_candidate_manifest(
                 "scenario_sizing_json": (
                     json.dumps(asdict(candidate.scenario_sizing), sort_keys=True)
                     if candidate.scenario_sizing
+                    else ""
+                ),
+                "decision_sanity": (
+                    candidate.decision_sanity.profile if candidate.decision_sanity else ""
+                ),
+                "decision_sanity_json": (
+                    json.dumps(asdict(candidate.decision_sanity), sort_keys=True)
+                    if candidate.decision_sanity
                     else ""
                 ),
                 "strategy_json": json.dumps(

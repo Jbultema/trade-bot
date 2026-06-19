@@ -545,15 +545,42 @@ Portfolio-risk multiplier:
 portfolio_risk_multiplier = post_risk_asset_weight / pre_risk_asset_weight
 ```
 
-Final risk budget:
+Pre-sanity risk budget:
 
 ```text
-risk_budget_multiplier = clip(
+pre_sanity_risk_budget_multiplier = clip(
     scenario_event_macro_multiplier * portfolio_risk_multiplier,
     0,
     1
 )
 ```
+
+Decision-sanity cap:
+
+```text
+confirmation_break_count = count(negative gates among credit, volatility, breadth, trend)
+left_tail_confirmed = risk_status in {orange, red} or risk_off_probability >= 35 percent
+cap_eligible = event_pressure > 0
+               and confirmation_break_count < 2
+               and not left_tail_confirmed
+               and macro_pressure < 10 percent
+
+max_defensive_weight = current_defensive_weight + 25 percentage points
+if cap_eligible and pre_sanity_defensive_weight > max_defensive_weight:
+    final_defensive_weight = max_defensive_weight
+    freed weight is redistributed to non-defensive holdings pro rata
+else:
+    final_weights = pre_sanity_weights
+```
+
+Displayed final risk budget is the actual final risk-asset ratio after portfolio-risk and decision-sanity sizing:
+
+```text
+risk_budget_multiplier = final_non_defensive_weight / current_non_defensive_weight
+risk_budget_multiplier = clip(risk_budget_multiplier, 0, 1)
+```
+
+The historical experiment analogue is in `src/trade_bot/research/experiments.py`. It cannot use current curated news labels across history, so it tests the same governing idea with price-observable gates: credit, volatility/liquidity, breadth, and trend. Paired raw-versus-capped experiments write `decision_sanity_impact.csv` so adoption can be evaluated from backtests rather than dashboard preference.
 
 Posture calibration is an anti-over-bearish governance check. It reports context to the dashboard and evidence table, but it does not currently override sizing.
 

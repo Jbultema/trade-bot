@@ -138,6 +138,7 @@ def build_macro_minute_report(
             action=action,
             risk_budget=risk_budget,
             risk_summary=risk_summary,
+            trade_summary=trade_summary,
             trade_change=trade_change,
             watch_summary=watch_summary,
         ),
@@ -182,6 +183,14 @@ def build_macro_minute_report(
             answer=f"{risk_budget} budget; {action}",
             detail=_risk_budget_detail(trade_summary, risk_summary),
             tone=_brief_tone(headline.level),
+        ),
+        MacroMinuteCard(
+            label="Decision Sanity",
+            answer=str(trade_summary.get("decision_sanity_signal", "No sanity cap needed")),
+            detail=str(trade_summary.get("decision_sanity_note", "No sanity cap is active.")),
+            tone="warning"
+            if bool(trade_summary.get("decision_sanity_cap_applied", False))
+            else "neutral",
         ),
     )
     return MacroMinuteReport(
@@ -310,13 +319,16 @@ def _action_paragraph(
     action: str,
     risk_budget: str,
     risk_summary: dict[str, object],
+    trade_summary: dict[str, object],
     trade_change: str,
     watch_summary: str,
 ) -> str:
     constraints = str(risk_summary.get("applied_constraints", "none")) if risk_summary else "none"
+    sanity = _decision_sanity_sentence(trade_summary)
     return (
         f"Action read-through: {action} with risk budget {risk_budget}. {trade_change} "
-        f"The risk engine is applying {constraints}. What would change this: {watch_summary}"
+        f"The risk engine is applying {constraints}. {sanity} "
+        f"What would change this: {watch_summary}"
     )
 
 
@@ -844,8 +856,17 @@ def _risk_budget_detail(trade_summary: dict[str, object], risk_summary: dict[str
     return (
         f"Scenario/event/macro multiplier: {_format_decimal(trade_summary.get('scenario_event_macro_multiplier'))}; "
         f"portfolio-risk multiplier: {_format_decimal(trade_summary.get('portfolio_risk_multiplier'))}; "
+        f"decision sanity: {trade_summary.get('decision_sanity_signal', 'n/a')}; "
         f"constraints: {constraints}."
     )
+
+
+def _decision_sanity_sentence(trade_summary: dict[str, object]) -> str:
+    signal = str(trade_summary.get("decision_sanity_signal", "No sanity cap needed"))
+    note = str(trade_summary.get("decision_sanity_note", ""))
+    if not note:
+        return f"Decision sanity: {signal}."
+    return f"Decision sanity: {signal}. {note}"
 
 
 def _macro_minute_details(

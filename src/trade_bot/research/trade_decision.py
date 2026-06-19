@@ -6,6 +6,11 @@ import numpy as np
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
+from trade_bot.DEFAULT import (
+    DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS,
+    DEFAULT_EVENT_CONFIRMATION_THEMES,
+    DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD,
+)
 from trade_bot.portfolio.risk import (
     PortfolioRiskConfig,
     PortfolioRiskRun,
@@ -62,13 +67,33 @@ def build_trade_decision(
     )
     portfolio_risk_context = _portfolio_risk_context(portfolio_risk)
     if portfolio_risk is not None and not portfolio_risk.risk_adjusted_weights.empty:
-        final_weights = portfolio_risk.risk_adjusted_weights
+        pre_sanity_final_weights = portfolio_risk.risk_adjusted_weights
     else:
-        final_weights = adjusted_weights
+        pre_sanity_final_weights = adjusted_weights
+    decision_sanity_context = _decision_sanity_context(
+        current_state=current_state,
+        scenario_context=scenario_context,
+        event_context=event_context,
+        macro_context=macro_context,
+    )
+    final_weights, decision_sanity_context = _apply_decision_sanity_cap(
+        base_weights=base_weights,
+        candidate_weights=pre_sanity_final_weights,
+        defensive_ticker=defensive_ticker,
+        sanity_context=decision_sanity_context,
+    )
     portfolio_risk_multiplier = _as_float(portfolio_risk_context["portfolio_risk_multiplier"])
-    total_risk_budget_multiplier = float(np.clip(risk_multiplier * portfolio_risk_multiplier, 0, 1))
+    pre_sanity_risk_budget_multiplier = float(
+        np.clip(risk_multiplier * portfolio_risk_multiplier, 0, 1)
+    )
+    total_risk_budget_multiplier = _risk_budget_multiplier_from_weights(
+        base_weights,
+        final_weights,
+        defensive_ticker=defensive_ticker,
+    )
     position_plan = _position_plan(base_weights, final_weights, min_trade_weight)
     position_plan = _add_portfolio_risk_sizing_columns(position_plan, portfolio_risk)
+    position_plan = _add_decision_sanity_sizing_columns(position_plan)
     posture_context = _posture_calibration_context(
         current_state=current_state,
         scenario_context=scenario_context,
@@ -89,12 +114,14 @@ def build_trade_decision(
         macro_context=macro_context,
         portfolio_risk_context=portfolio_risk_context,
         posture_context=posture_context,
+        decision_sanity_context=decision_sanity_context,
     )
     authority = _decision_authority(
         scenario_context,
         event_context,
         macro_context,
         portfolio_risk_context,
+        decision_sanity_context,
     )
     summary = pd.DataFrame(
         [
@@ -104,10 +131,23 @@ def build_trade_decision(
                 "decision_authority": authority,
                 "base_position": _format_weight_vector(base_weights),
                 "pre_risk_target_position": _format_weight_vector(adjusted_weights),
+                "pre_sanity_target_position": _format_weight_vector(pre_sanity_final_weights),
                 "scenario_adjusted_position": _format_weight_vector(final_weights),
                 "risk_budget_multiplier": total_risk_budget_multiplier,
+                "pre_sanity_risk_budget_multiplier": pre_sanity_risk_budget_multiplier,
                 "scenario_event_macro_multiplier": risk_multiplier,
                 "portfolio_risk_multiplier": portfolio_risk_multiplier,
+                "decision_sanity_status": decision_sanity_context["status"],
+                "decision_sanity_signal": decision_sanity_context["signal"],
+                "decision_sanity_note": decision_sanity_context["detail"],
+                "decision_sanity_cap_applied": decision_sanity_context["cap_applied"],
+                "market_confirmation_break_count": decision_sanity_context[
+                    "confirmation_break_count"
+                ],
+                "market_confirmation_breaks": decision_sanity_context["confirmation_breaks_text"],
+                "event_only_max_defensive_add": decision_sanity_context[
+                    "event_only_max_defensive_add"
+                ],
                 "risk_status": current_state.risk_status,
                 "risk_score": current_state.risk_score,
                 "one_month_risk_off_probability": scenario_context["risk_off_probability"],
@@ -145,6 +185,7 @@ def build_trade_decision(
         macro_context=macro_context,
         portfolio_risk_context=portfolio_risk_context,
         posture_context=posture_context,
+        decision_sanity_context=decision_sanity_context,
         news_monitor=news_monitor,
     )
     scenario_links = _scenario_links(current_state.scenario_lattice)
@@ -416,6 +457,268 @@ def _add_portfolio_risk_sizing_columns(
     )
 
 
+def _add_decision_sanity_sizing_columns(position_plan: pd.DataFrame) -> pd.DataFrame:
+    if (
+        position_plan.empty
+        or "scenario_adjusted_weight" not in position_plan
+        or "risk_adjusted_weight" not in position_plan
+    ):
+        return position_plan
+    frame = position_plan.copy()
+    frame["decision_sanity_delta"] = (
+        pd.to_numeric(frame["scenario_adjusted_weight"], errors="coerce")
+        - pd.to_numeric(frame["risk_adjusted_weight"], errors="coerce")
+    )
+    return frame
+
+
+def _decision_sanity_context(
+    *,
+    current_state: CurrentStateRun,
+    scenario_context: dict[str, object],
+    event_context: dict[str, object],
+    macro_context: dict[str, object],
+) -> dict[str, object]:
+    confirmation_breaks = _market_confirmation_breaks(current_state)
+    break_count = len(confirmation_breaks)
+    risk_status = str(current_state.risk_status).lower()
+    risk_off_probability = _as_float(scenario_context["risk_off_probability"])
+    macro_pressure = _as_float(macro_context["macro_pressure"])
+    event_pressure = _as_float(event_context["event_pressure"])
+    left_tail_confirmed = risk_status in {"orange", "red"} or risk_off_probability >= 0.35
+    market_confirmed = break_count >= DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS
+    cap_eligible = (
+        event_pressure > 0
+        and not left_tail_confirmed
+        and not market_confirmed
+        and macro_pressure < 0.10
+    )
+
+    if market_confirmed:
+        status = "market_confirmation_allows_derisk"
+        signal = "Market confirmation broke"
+        detail = (
+            f"Bigger de-risking is allowed because {break_count}/"
+            f"{DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS} confirmation gates are broken: "
+            f"{_confirmation_breaks_text(confirmation_breaks)}."
+        )
+    elif left_tail_confirmed:
+        status = "left_tail_allows_derisk"
+        signal = "Left-tail pressure confirmed"
+        detail = (
+            "Bigger de-risking is allowed because risk status or one-month scenario risk-off "
+            "probability is already in the severe zone."
+        )
+    elif cap_eligible:
+        status = "event_only_cap_eligible"
+        signal = "Event-only de-risk cap active"
+        detail = (
+            "News/events are pressuring risk, but fewer than two of credit, volatility, "
+            "breadth, or trend have broken. Large cash moves should wait for market "
+            "confirmation."
+        )
+    elif event_pressure > 0:
+        status = "event_watch"
+        signal = "Event pressure watched"
+        detail = (
+            "Event pressure is active, but the cap is not governing because macro, scenario, "
+            "or market-confirmation evidence has separate sizing authority."
+        )
+    else:
+        status = "not_needed"
+        signal = "No sanity cap needed"
+        detail = "No event/news-only de-risk cap is needed for this decision."
+
+    return {
+        "status": status,
+        "signal": signal,
+        "detail": detail,
+        "cap_eligible": cap_eligible,
+        "cap_applied": False,
+        "confirmation_break_count": break_count,
+        "confirmation_breaks": confirmation_breaks,
+        "confirmation_breaks_text": _confirmation_breaks_text(confirmation_breaks),
+        "event_only_max_defensive_add": DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD,
+        "left_tail_confirmed": left_tail_confirmed,
+        "market_confirmed": market_confirmed,
+    }
+
+
+def _apply_decision_sanity_cap(
+    *,
+    base_weights: pd.Series,
+    candidate_weights: pd.Series,
+    defensive_ticker: str,
+    sanity_context: dict[str, object],
+) -> tuple[pd.Series, dict[str, object]]:
+    context = dict(sanity_context)
+    if not bool(context.get("cap_eligible", False)):
+        return candidate_weights.sort_values(ascending=False), context
+
+    base, candidate = _aligned_weights(
+        base_weights,
+        candidate_weights,
+        defensive_ticker=defensive_ticker,
+    )
+    base_defensive = _weight_for_ticker(base, defensive_ticker)
+    candidate_defensive = _weight_for_ticker(candidate, defensive_ticker)
+    max_defensive = float(
+        np.clip(base_defensive + DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD, 0.0, 1.0)
+    )
+    context["max_defensive_weight"] = max_defensive
+    context["pre_sanity_defensive_weight"] = candidate_defensive
+    if candidate_defensive <= max_defensive + 1e-9:
+        context.update(
+            {
+                "status": "event_only_cap_not_needed",
+                "signal": "Event-only cap not binding",
+                "cap_applied": False,
+                "detail": (
+                    "News/events are pressuring risk without enough market confirmation, but "
+                    f"the requested defensive weight of {candidate_defensive:.0%} is already "
+                    f"within the event-only cap of {max_defensive:.0%}."
+                ),
+            }
+        )
+        return candidate.sort_values(ascending=False), context
+
+    capped = candidate.copy()
+    freed_weight = candidate_defensive - max_defensive
+    capped.loc[defensive_ticker] = max_defensive
+    risk_assets = [ticker for ticker in capped.index if ticker.upper() != defensive_ticker.upper()]
+    candidate_risk = capped.loc[risk_assets].clip(lower=0.0)
+    if float(candidate_risk.sum()) > 0:
+        allocation_basis = candidate_risk / float(candidate_risk.sum())
+    else:
+        base_risk = base.loc[risk_assets].clip(lower=0.0)
+        if float(base_risk.sum()) > 0:
+            allocation_basis = base_risk / float(base_risk.sum())
+        else:
+            allocation_basis = pd.Series(1.0 / max(len(risk_assets), 1), index=risk_assets)
+    capped.loc[risk_assets] = capped.loc[risk_assets] + freed_weight * allocation_basis
+    capped = capped.clip(lower=0.0)
+    total = float(capped.sum())
+    if total > 1.0:
+        capped = capped / total
+    context.update(
+        {
+            "status": "event_only_cap_applied",
+            "signal": "Event-only cap applied",
+            "cap_applied": True,
+            "detail": (
+                f"Decision sanity capped the defensive target at {max_defensive:.0%} because "
+                "news/events are active but fewer than two of credit, volatility, breadth, "
+                "or trend have broken. The uncapped defensive target was "
+                f"{candidate_defensive:.0%}; bigger cash moves require market confirmation."
+            ),
+        }
+    )
+    return capped.sort_values(ascending=False), context
+
+
+def _aligned_weights(
+    base_weights: pd.Series,
+    candidate_weights: pd.Series,
+    *,
+    defensive_ticker: str,
+) -> tuple[pd.Series, pd.Series]:
+    tickers = sorted(set(base_weights.index) | set(candidate_weights.index) | {defensive_ticker})
+    base = base_weights.reindex(tickers).fillna(0.0).astype(float).clip(lower=0.0)
+    candidate = candidate_weights.reindex(tickers).fillna(0.0).astype(float).clip(lower=0.0)
+    return base, candidate
+
+
+def _risk_budget_multiplier_from_weights(
+    base_weights: pd.Series,
+    final_weights: pd.Series,
+    *,
+    defensive_ticker: str,
+) -> float:
+    base_risk = _risk_asset_weight_from_weights(base_weights, defensive_ticker=defensive_ticker)
+    final_risk = _risk_asset_weight_from_weights(final_weights, defensive_ticker=defensive_ticker)
+    if base_risk <= 1e-9:
+        return 1.0 if final_risk <= 1e-9 else 0.0
+    return float(np.clip(final_risk / base_risk, 0.0, 1.0))
+
+
+def _risk_asset_weight_from_weights(weights: pd.Series, *, defensive_ticker: str) -> float:
+    if weights.empty:
+        return 0.0
+    clean = weights.astype(float).replace([np.inf, -np.inf], np.nan).fillna(0.0)
+    risk_assets = [ticker for ticker in clean.index if str(ticker).upper() != defensive_ticker.upper()]
+    return float(clean.loc[risk_assets].clip(lower=0.0).sum())
+
+
+def _weight_for_ticker(weights: pd.Series, ticker: str) -> float:
+    matches = [index for index in weights.index if str(index).upper() == ticker.upper()]
+    if not matches:
+        return 0.0
+    return float(weights.loc[matches[0]])
+
+
+def _market_confirmation_breaks(current_state: CurrentStateRun) -> tuple[str, ...]:
+    breaks: set[str] = set()
+    frame = current_state.confirmation_matrix
+    if not frame.empty:
+        for _, row in frame.iterrows():
+            if not _confirmation_row_is_negative(row):
+                continue
+            key = " ".join(
+                str(row.get(column, ""))
+                for column in ("theme", "name", "signal", "driver", "detail")
+            ).lower()
+            breaks.update(_confirmation_themes_from_key(key))
+    health = current_state.market_health
+    if not health.empty:
+        for _, row in health.iterrows():
+            if not _confirmation_row_is_negative(row):
+                continue
+            key = " ".join(str(value) for value in row.to_dict().values()).lower()
+            breaks.update(_confirmation_themes_from_key(key))
+    ordered = [theme for theme in DEFAULT_EVENT_CONFIRMATION_THEMES if theme in breaks]
+    return tuple(ordered)
+
+
+def _confirmation_row_is_negative(row: pd.Series) -> bool:
+    state_text = " ".join(
+        str(row.get(column, "")) for column in ("status", "state", "risk_state", "signal_state")
+    ).lower()
+    if any(token in state_text for token in ("bearish", "risk_off", "risk-pressure", "risk_pressure")):
+        return True
+    score = _as_float(row.get("score", np.nan))
+    return bool(np.isfinite(score) and score < 0)
+
+
+def _confirmation_themes_from_key(key: str) -> set[str]:
+    themes: set[str] = set()
+    if any(token in key for token in ("credit", "hyg", "lqd", "spread")):
+        themes.add("credit")
+    if any(token in key for token in ("volatility", "vix", "vol ")):
+        themes.add("volatility")
+    if any(token in key for token in ("breadth", "equal", "rsp", "cap weight")):
+        themes.add("breadth")
+    if any(
+        token in key
+        for token in (
+            "trend",
+            "momentum",
+            "broad_market",
+            "ai_beta",
+            "spy",
+            "qqq",
+            "smh",
+        )
+    ):
+        themes.add("trend")
+    return themes
+
+
+def _confirmation_breaks_text(confirmation_breaks: tuple[str, ...]) -> str:
+    if not confirmation_breaks:
+        return "none"
+    return ", ".join(confirmation_breaks)
+
+
 def _recommended_action(position_plan: pd.DataFrame, risk_status: str) -> str:
     material_reductions = position_plan[position_plan["delta_weight"] <= -0.05]
     material_adds = position_plan[position_plan["delta_weight"] >= 0.05]
@@ -573,6 +876,7 @@ def _human_explanation(
     macro_context: dict[str, object],
     portfolio_risk_context: dict[str, object],
     posture_context: dict[str, object],
+    decision_sanity_context: dict[str, object],
 ) -> str:
     base_position = _format_weight_vector(base_weights)
     adjusted_position = _format_weight_vector(adjusted_weights)
@@ -581,6 +885,7 @@ def _human_explanation(
     macro_evidence = str(macro_context["evidence"])
     portfolio_risk_evidence = str(portfolio_risk_context["evidence"])
     posture_evidence = str(posture_context["detail"])
+    decision_sanity_evidence = str(decision_sanity_context["detail"])
     if action in {"REDUCE_RISK", "REVIEW_REDUCE_RISK"}:
         verb = "review reducing risk toward"
     elif action == "REVIEW_ADD_RISK":
@@ -593,6 +898,7 @@ def _human_explanation(
         f"{verb} {adjusted_position}. Base systematic position is {base_position}. "
         f"Portfolio risk engine says: {portfolio_risk_evidence} "
         f"Macro inclusion tests say: {macro_evidence} "
+        f"Decision sanity says: {decision_sanity_evidence} "
         f"Posture calibration says: {posture_evidence}"
     )
 
@@ -602,7 +908,10 @@ def _decision_authority(
     event_context: dict[str, object],
     macro_context: dict[str, object],
     portfolio_risk_context: dict[str, object],
+    decision_sanity_context: dict[str, object],
 ) -> str:
+    if bool(decision_sanity_context.get("cap_applied", False)):
+        return "decision_sanity_capped_review"
     if str(portfolio_risk_context["portfolio_risk_level"]) in {
         "constraint_breach",
         "risk_reduced",
@@ -627,6 +936,7 @@ def _evidence_table(
     macro_context: dict[str, object],
     portfolio_risk_context: dict[str, object],
     posture_context: dict[str, object],
+    decision_sanity_context: dict[str, object],
     news_monitor: NewsMonitorRun,
 ) -> pd.DataFrame:
     rows = [
@@ -653,6 +963,12 @@ def _evidence_table(
             "signal": f"{macro_context['paper_candidate_count']} paper candidates",
             "impact": "only validated paper candidates can affect sizing",
             "detail": str(macro_context["evidence"]),
+        },
+        {
+            "evidence_type": "decision_sanity",
+            "signal": str(decision_sanity_context["signal"]),
+            "impact": "caps event/news-only de-risking unless market confirmation breaks",
+            "detail": str(decision_sanity_context["detail"]),
         },
         {
             "evidence_type": "portfolio_risk_engine",

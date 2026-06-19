@@ -10,7 +10,12 @@ from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
 from trade_bot.DEFAULT import DEFAULT_EXPERIMENTS_DIR, DEFAULT_RESET_EXPERIMENTS_DIR
 from trade_bot.features.indicators import drawdown
 from trade_bot.portfolio.risk import current_positions
-from trade_bot.research.experiments import ScenarioSizingConfig, apply_scenario_position_sizing
+from trade_bot.research.experiments import (
+    DecisionSanityConfig,
+    ScenarioSizingConfig,
+    apply_decision_sanity_overlay,
+    apply_scenario_position_sizing,
+)
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.strategies.momentum import build_strategy_weights
 
@@ -38,6 +43,10 @@ def build_approach_catalog(
                 "promotion_score": pd.NA,
                 "hypothesis": "Configured baseline strategy currently included in the main run.",
                 "strategy_json": json.dumps(strategy.model_dump(mode="json"), sort_keys=True),
+                "scenario_sizing": "",
+                "scenario_sizing_json": "",
+                "decision_sanity": "",
+                "decision_sanity_json": "",
             }
         )
 
@@ -89,6 +98,7 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "worst_1y_cagr",
             "worst_3y_cagr",
             "positive_1y_window_rate",
+            "decision_sanity",
         ]
         available_columns = [column for column in scorecard_columns if column in scorecards]
         candidates = candidates.merge(
@@ -145,6 +155,22 @@ def strategy_from_catalog_row(row: pd.Series) -> StrategyConfig:
     return StrategyConfig.model_validate(json.loads(raw))
 
 
+def decision_sanity_from_catalog_row(row: pd.Series) -> DecisionSanityConfig | None:
+    raw = row.get("decision_sanity_json")
+    if not isinstance(raw, str) or not raw or raw == "nan":
+        return None
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(values, dict):
+        return None
+    try:
+        return DecisionSanityConfig(**values)
+    except TypeError:
+        return None
+
+
 def scenario_sizing_from_catalog_row(row: pd.Series) -> ScenarioSizingConfig | None:
     raw = row.get("scenario_sizing_json")
     if not isinstance(raw, str) or not raw or raw == "nan":
@@ -181,6 +207,7 @@ def build_approach_explanation(
     *,
     execution: ExecutionConfig | None = None,
     scenario_sizing: ScenarioSizingConfig | None = None,
+    decision_sanity: DecisionSanityConfig | None = None,
 ) -> list[str]:
     execution = execution or config.execution
     family = str(row.get("family", "unknown")).replace("_", " ")
@@ -258,6 +285,13 @@ def build_approach_explanation(
             f"bounded from {scenario_sizing.min_multiplier:.0%} to {scenario_sizing.max_multiplier:.0%}. "
             f"The removed risk budget is routed to {defensive}."
         )
+    if decision_sanity is not None:
+        paragraphs.append(
+            "Decision-sanity sizing is active. It caps additional defensive allocation unless at least "
+            f"{decision_sanity.required_confirmation_breaks} of credit, volatility/liquidity, breadth, "
+            "or trend confirm deterioration, or left-tail pressure is already severe. The current "
+            f"event/news-only defensive-add cap is {decision_sanity.max_defensive_add:.0%}."
+        )
     if strategy.volatility_target:
         paragraphs.append(
             f"A volatility throttle targets {strategy.volatility_target.annualized_volatility:.0%} "
@@ -282,6 +316,7 @@ def build_approach_backtest_result(
     execution: ExecutionConfig,
     *,
     scenario_sizing: ScenarioSizingConfig | None = None,
+    decision_sanity: DecisionSanityConfig | None = None,
     name: str = "approach",
 ) -> tuple[BacktestResult | None, list[str]]:
     strategy_prices, strategy_for_prices, missing_columns = _prepare_strategy_prices(
@@ -290,12 +325,21 @@ def build_approach_backtest_result(
     if strategy_prices.empty or not strategy_for_prices.tickers:
         return None, missing_columns
 
-    target_weights = build_strategy_weights(strategy_prices, strategy_for_prices)
+    base_target_weights = build_strategy_weights(strategy_prices, strategy_for_prices)
+    target_weights = base_target_weights
     if scenario_sizing is not None:
         target_weights = apply_scenario_position_sizing(
             target_weights,
             strategy_prices,
             scenario_sizing,
+            defensive_ticker=strategy_for_prices.defensive_ticker,
+        )
+    if decision_sanity is not None:
+        target_weights = apply_decision_sanity_overlay(
+            base_target_weights,
+            target_weights,
+            strategy_prices,
+            decision_sanity,
             defensive_ticker=strategy_for_prices.defensive_ticker,
         )
     return (

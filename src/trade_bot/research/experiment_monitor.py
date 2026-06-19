@@ -62,6 +62,7 @@ def load_experiment_scorecards(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "parent": "",
             "role": "unknown",
             "scenario_sizing": "",
+            "decision_sanity": "",
         }.items():
             if column not in frame.columns:
                 frame[column] = default
@@ -135,6 +136,8 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "role": "unknown",
             "scenario_sizing": "",
             "scenario_sizing_json": "",
+            "decision_sanity": "",
+            "decision_sanity_json": "",
         }.items():
             if column not in frame.columns:
                 frame[column] = default
@@ -254,6 +257,7 @@ def build_strategy_family_map(
         for column in [
             "promotion_decision",
             "scenario_sizing",
+            "decision_sanity",
             "promotion_score",
             "cagr",
             "sharpe",
@@ -528,6 +532,7 @@ def _classification_text(
         _safe_text(row.get("parent")),
         _safe_text(row.get("hypothesis")),
         _safe_text(row.get("scenario_sizing")),
+        _safe_text(row.get("decision_sanity")),
         _safe_text(manifest.get("type")),
         " ".join(tickers),
     ]
@@ -540,6 +545,7 @@ def _classification_text(
                 _safe_text(candidate.get("parent")),
                 _safe_text(candidate.get("hypothesis")),
                 _safe_text(candidate.get("scenario_sizing")),
+                _safe_text(candidate.get("decision_sanity")),
             ]
         )
     return " ".join(piece for piece in pieces if piece).lower()
