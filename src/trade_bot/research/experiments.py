@@ -36,6 +36,7 @@ from trade_bot.DEFAULT import (
     DEFAULT_SCENARIO_STRESS_MULTIPLIER,
     DEFAULT_SCENARIO_TRANSITION_MULTIPLIER,
 )
+from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.strategies.momentum import build_strategy_weights
 
 
@@ -229,6 +230,8 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _ai_risk_cycle_candidates(iteration)
     if 72 <= iteration <= 76:
         return _sector_regime_rotation_candidates(iteration)
+    if 101 <= iteration <= 105:
+        return _macro_reset_candidates(iteration)
     return None
 
 
@@ -6033,6 +6036,388 @@ def _active_absolute_candidate(
     )
 
 
+
+def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    """Reset-era macro-framework-inspired candidate batches with human-readable names."""
+    sector_spdrs = ["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC"]
+    defensive_assets = ["BIL", "SGOV", "SHY", "IEF", "TLT", "GLD", "IAU", "UUP", "LQD"]
+    factors = ["VUG", "VTV", "IWF", "IWD", "MTUM", "QUAL", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "COWZ"]
+    ai_core = ["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN"]
+    ai_infra = ["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLU", "XLI"]
+    reflation = ["XLE", "XOP", "USO", "BNO", "DBC", "XLB", "XLI", "XLF", "KRE", "IWM", "RSP", "COWZ"]
+    global_assets = ["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC"]
+    credit_assets = ["HYG", "JNK", "LQD", "VCIT", "VCSH", "BKLN", "SRLN", "JAAA", "JBBB"]
+
+    batches = {
+        101: (
+            _sector_regime_candidate(
+                name="regime_pulse_growth_liquidity_01_risk_on_core",
+                family="regime_pulse_growth_liquidity",
+                hypothesis=(
+                    "Regime Pulse reset core: let growth, liquidity, credit, breadth, gold, "
+                    "duration, and commodities compete before adding broad equity risk."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "HYG", "LQD", "GLD", "IEF", "TLT", "DBC", "UUP"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.005,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="regime_pulse_growth_liquidity_02_low_churn_core",
+                family="regime_pulse_growth_liquidity",
+                hypothesis=(
+                    "Low-churn Regime Pulse core: same cross-asset decision layer, but target "
+                    "changes must be large and persistent enough for human execution."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "TLT", "IEF", "DBC"],
+                lookback_days=126,
+                skip_days=21,
+                top_n=5,
+                min_return=0.005,
+                min_change=0.08,
+                max_step=0.18,
+                min_hold_days=10,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="regime_pulse_inflation_policy_03_barbell",
+                family="regime_pulse_inflation_policy",
+                hypothesis=(
+                    "Inflation and policy barbell: when inflation/rates pressure dominates, the "
+                    "strategy can own energy, commodities, gold, dollar, duration, or defensive cash."
+                ),
+                tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XLB", "GLD", "UUP", "TLT", "IEF", "SPY", "RSP"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.005,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _active_dual_candidate(
+                name="regime_pulse_positioning_04_crowding_escape",
+                family="regime_pulse_positioning",
+                hypothesis=(
+                    "Positioning-aware escape: own growth and AI beta only when trend is confirmed; "
+                    "otherwise compete against quality, low-volatility, gold, and duration."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "IGV", "SPY", "RSP", "QUAL", "USMV", "GLD", "TLT"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.015,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+        ),
+        102: (
+            _sector_regime_candidate(
+                name="growth_inflation_rotation_01_growth_disinflation",
+                family="growth_inflation_rotation",
+                hypothesis=(
+                    "Growth-disinflation proxy: when growth assets lead without inflation stress, favor "
+                    "growth, momentum, broad equities, and credit-sensitive risk."
+                ),
+                tickers=["SPY", "QQQ", "SMH", "MTUM", "VUG", "SPHB", "RSP", "IWM", "HYG", "LQD", *defensive_assets],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.008,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="growth_inflation_rotation_02_reflation_broadening",
+                family="growth_inflation_rotation",
+                hypothesis=(
+                    "Reflation-broadening proxy: test whether small caps, value, banks, energy, "
+                    "materials, and industrials can replace mega-cap growth leadership."
+                ),
+                tickers=[*reflation, "VTV", "IWD", "MDY", "XHB", *defensive_assets, "HYG", "LQD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.005,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="growth_inflation_rotation_03_inflation_defense",
+                family="growth_inflation_rotation",
+                hypothesis=(
+                    "Inflation-defense proxy: route away from duration-sensitive growth when energy, "
+                    "commodities, gold, dollar, and defensive equity lead."
+                ),
+                tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XOP", "XLB", "GLD", "UUP", "XLP", "XLU", "XLV", *defensive_assets, "SPY", "RSP"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.005,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _sector_regime_candidate(
+                name="growth_inflation_rotation_04_deflation_quality_duration",
+                family="growth_inflation_rotation",
+                hypothesis=(
+                    "Deflation-quality proxy: test whether duration, quality, low-volatility, gold, "
+                    "and T-bills protect better than a simple equity/cash switch."
+                ),
+                tickers=["TLT", "IEF", "SHY", "SGOV", "GLD", "IAU", "QUAL", "USMV", "SPLV", "XLV", "XLP", "LQD", "SPY", "RSP"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.003,
+                max_asset_weight=0.24,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+        103: (
+            _active_dual_candidate(
+                name="positioning_crowding_01_crowded_upside_trim",
+                family="positioning_crowding",
+                hypothesis=(
+                    "Crowded upside trim: keep risk-on participation but force high-beta and AI "
+                    "exposure to pass stricter return, trend, and risk-adjusted hurdles."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "SPHB", "MTUM", "SPY", "RSP", "QUAL", "USMV", "GLD", "TLT"],
+                lookback_days=42,
+                skip_days=5,
+                top_n=4,
+                min_return=0.020,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=100,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _dip_reentry_candidate(
+                name="positioning_crowding_02_washed_out_reentry",
+                family="positioning_crowding",
+                hypothesis=(
+                    "Washed-out broad-market reentry: buy discounts in measured steps only when "
+                    "price repair, credit, breadth, and volatility stop signaling falling-knife risk."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "HYG", "LQD", "QUAL", "USMV", "GLD", "IEF"],
+                trigger=-0.10,
+                deep=-0.24,
+                min_recovery=0.018,
+                starter=0.16,
+                step=0.18,
+                max_risk=0.70,
+                top_n=5,
+                max_asset_weight=0.23,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _dip_reentry_candidate(
+                name="positioning_crowding_03_ai_washout_micro",
+                family="positioning_crowding_ai",
+                hypothesis=(
+                    "AI washout micro-sleeve: participate in sharp AI rebounds only with small, "
+                    "confirmed allocations after deep discount and repair."
+                ),
+                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "GLD", "TLT", "HYG", "LQD"],
+                trigger=-0.15,
+                deep=-0.32,
+                min_recovery=0.035,
+                starter=0.08,
+                step=0.14,
+                max_risk=0.45,
+                top_n=3,
+                max_asset_weight=0.18,
+                vol_ceiling=0.40,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _sector_regime_candidate(
+                name="positioning_crowding_04_sector_washout_rotation",
+                family="positioning_crowding_sector",
+                hypothesis=(
+                    "Sector washout rotation: buy only sectors and factors that are both discounted "
+                    "and repairing instead of treating every dip as a broad-market buy."
+                ),
+                tickers=[*sector_spdrs, *factors, *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.005,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        104: (
+            _active_dual_candidate(
+                name="exposure_alignment_long_only_01_us_equity",
+                family="exposure_alignment_long_only",
+                hypothesis=(
+                    "Exposure Alignment long-only proxy for U.S. equities: max long when equity momentum state agrees, "
+                    "half-sized/cash-like when leadership weakens, never short."
+                ),
+                tickers=["SPY", "QQQ", "RSP", "IWM", "QUAL", "USMV", "GLD", "TLT", "IEF"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=3,
+                min_return=0.010,
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=100,
+                max_asset_weight=0.34,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="exposure_alignment_long_only_02_global_equity",
+                family="exposure_alignment_long_only",
+                hypothesis=(
+                    "Exposure Alignment global-equity proxy: global risk assets must beat defensive assets and "
+                    "clear absolute trend gates before receiving full exposure."
+                ),
+                tickers=[*global_assets, "QQQ", "GLD", "TLT", "IEF", "UUP", "HYG", "LQD"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=4,
+                min_return=0.008,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _active_dual_candidate(
+                name="exposure_alignment_long_only_03_commodity_gold_dollar",
+                family="exposure_alignment_long_only",
+                hypothesis=(
+                    "Exposure Alignment macro-exposure proxy: commodities, oil, gold, dollar, and duration compete "
+                    "for long-only exposure based on current vol-adjusted momentum leadership."
+                ),
+                tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XLB", "GLD", "UUP", "TLT", "IEF", "SHY"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=4,
+                min_return=0.003,
+                ranking_metric="risk_adjusted_return",
+                weighting="inverse_volatility",
+                trend_filter_days=100,
+                max_asset_weight=0.25,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+            _sector_regime_candidate(
+                name="exposure_alignment_long_only_04_sector_asset_class_blend",
+                family="exposure_alignment_long_only",
+                hypothesis=(
+                    "Exposure Alignment sector/asset-class blend: hold max/half/no-position style long exposure "
+                    "across sectors, factors, credit, duration, gold, and cash-like defense."
+                ),
+                tickers=[*sector_spdrs, *factors, *credit_assets, *defensive_assets, "SPY", "RSP"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=6,
+                min_return=0.004,
+                min_change=0.06,
+                max_step=0.24,
+                min_hold_days=5,
+                max_asset_weight=0.20,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+        ),
+        105: (
+            _ai_cycle_candidate(
+                name="integrated_operating_system_01_retirement_core",
+                family="integrated_operating_system",
+                hypothesis=(
+                    "Retirement-core operating system: broad cross-asset defense plus metered AI "
+                    "satellite reentry, tuned for low churn and left-tail control."
+                ),
+                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "TLT", "IEF", "DBC"],
+                satellite_tickers=ai_core,
+                lookback_days=126,
+                skip_days=21,
+                top_n=5,
+                min_return=0.015,
+                satellite_max=0.36,
+                satellite_risk_on=0.24,
+                satellite_reentry=0.42,
+                trigger=-0.12,
+                deep=-0.27,
+                recovery_days=42,
+                confirmation_days=10,
+                min_change=0.08,
+                max_step=0.18,
+                min_hold_days=10,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _sector_regime_candidate(
+                name="integrated_operating_system_02_balanced_macro_swing",
+                family="integrated_operating_system",
+                hypothesis=(
+                    "Balanced macro swing system: sector, factor, credit, duration, gold, dollar, "
+                    "and commodities all compete under scenario sizing."
+                ),
+                tickers=[*sector_spdrs, *factors, *credit_assets, *defensive_assets, "SPY", "RSP", "QQQ", "DBC", "UUP"],
+                lookback_days=84,
+                skip_days=10,
+                top_n=6,
+                min_return=0.004,
+                min_change=0.06,
+                max_step=0.23,
+                min_hold_days=5,
+                max_asset_weight=0.20,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            _ai_cycle_candidate(
+                name="integrated_operating_system_03_aggressive_ai_guarded",
+                family="integrated_operating_system_ai",
+                hypothesis=(
+                    "Aggressive AI guarded system: larger AI upside budget, but only after trend, "
+                    "credit, breadth, discount repair, and scenario pressure agree."
+                ),
+                core_tickers=["SPY", "RSP", "QUAL", "USMV", "GLD", "TLT", "HYG", "LQD", *ai_infra],
+                satellite_tickers=ai_core,
+                lookback_days=84,
+                skip_days=10,
+                top_n=5,
+                min_return=0.025,
+                satellite_max=0.48,
+                satellite_risk_on=0.32,
+                satellite_reentry=0.56,
+                trigger=-0.15,
+                deep=-0.32,
+                min_recovery=0.035,
+                min_change=0.06,
+                max_step=0.24,
+                min_hold_days=8,
+                scenario_sizing=_scenario_profile("fragile_ai"),
+            ),
+            _sector_regime_candidate(
+                name="integrated_operating_system_04_policy_oil_inflation_guard",
+                family="integrated_operating_system_policy",
+                hypothesis=(
+                    "Policy/oil/inflation guard: keep the system from treating inflation shocks as "
+                    "generic bearishness by letting energy, commodities, gold, dollar, and defense win."
+                ),
+                tickers=[*reflation, "GLD", "IAU", "UUP", "TLT", "IEF", "SHY", "XLP", "XLU", "XLV", "QUAL", "USMV", "SPY", "RSP", "HYG", "LQD"],
+                lookback_days=63,
+                skip_days=5,
+                top_n=5,
+                min_return=0.004,
+                min_change=0.06,
+                max_step=0.22,
+                min_hold_days=5,
+                max_asset_weight=0.22,
+                scenario_sizing=_scenario_profile("defensive"),
+            ),
+        ),
+    }
+    return batches[iteration]
+
 def _reference_portfolio_candidates() -> tuple[ExperimentCandidate, ...]:
     return (
         _fixed_allocation_candidate(
@@ -6814,6 +7199,11 @@ def build_experiment_scorecard(
         [
             {
                 "strategy": candidate.name,
+                "display_name": strategy_display_name(
+                    candidate.name,
+                    family=candidate.family,
+                    phase=candidate.phase,
+                ),
                 "phase": candidate.phase,
                 "family": candidate.family,
                 "role": candidate.role,
@@ -6839,6 +7229,7 @@ def build_experiment_scorecard(
     summary["promotion_score"] = _promotion_score(summary)
     summary["promotion_decision"] = summary.apply(_promotion_decision, axis=1)
     columns = [
+        "display_name",
         "phase",
         "family",
         "role",
@@ -7297,6 +7688,11 @@ def _write_candidate_manifest(
         [
             {
                 "strategy": candidate.name,
+                "display_name": strategy_display_name(
+                    candidate.name,
+                    family=candidate.family,
+                    phase=candidate.phase,
+                ),
                 "phase": candidate.phase,
                 "family": candidate.family,
                 "role": candidate.role,

@@ -3,10 +3,10 @@ from __future__ import annotations
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.research.current_state import build_current_state, vams_table
+from trade_bot.research.current_state import build_current_state, momentum_state_table
 
 
-def test_vams_table_classifies_positive_and_negative_trends() -> None:
+def test_momentum_state_table_classifies_positive_and_negative_trends() -> None:
     index = pd.bdate_range("2024-01-01", periods=180)
     prices = pd.DataFrame(
         {
@@ -16,10 +16,10 @@ def test_vams_table_classifies_positive_and_negative_trends() -> None:
         index=index,
     )
 
-    vams = vams_table(prices, lookback_days=63, vol_days=21)
+    momentum_state = momentum_state_table(prices, lookback_days=63, vol_days=21)
 
-    assert vams.loc["UP", "vams_state"] == "bullish"
-    assert vams.loc["DOWN", "vams_state"] == "bearish"
+    assert momentum_state.loc["UP", "momentum_state_label"] == "bullish"
+    assert momentum_state.loc["DOWN", "momentum_state_label"] == "bearish"
 
 
 def test_build_current_state_produces_alerts_and_scenarios() -> None:
@@ -70,6 +70,11 @@ def test_build_current_state_produces_alerts_and_scenarios() -> None:
     assert not state.scenario_lattice.empty
     assert not state.scenario_drivers.empty
     assert not state.signal_coverage.empty
+    assert not state.regime_pulse_cycles.empty
+    assert not state.regime_pulse_assets.empty
+    assert not state.growth_inflation_map.empty
+    assert not state.positioning_crowding.empty
+    assert not state.positioning_summary.empty
     assert not state.confirmation_matrix.empty
     assert round(state.scenario_outlook["probability"].sum(), 6) == 1.0
     assert sorted(state.scenario_lattice["horizon"].unique()) == ["1m", "1w", "3m", "6m"]

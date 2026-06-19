@@ -13,6 +13,7 @@ data/processed/
 data/run_store/
 data/*.sqlite
 reports/
+data/experiments*/
 *.parquet
 *.duckdb
 *.html

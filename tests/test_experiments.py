@@ -206,6 +206,29 @@ def test_scenario_position_sizing_moves_stress_residual_to_defensive_ticker() ->
     assert round(float(adjusted.iloc[-1].sum()), 8) == 1.0
 
 
+
+def test_macro_reset_iterations_use_human_readable_strategy_names() -> None:
+    reset_families: set[str] = set()
+    reset_names: list[str] = []
+
+    for iteration in range(101, 106):
+        candidates = generate_iteration_candidates(iteration)
+        assert len(candidates) == 4
+        assert all(not candidate.name[1:4].isdigit() for candidate in candidates)
+        assert all(candidate.scenario_sizing is not None for candidate in candidates)
+        reset_families.update(candidate.family for candidate in candidates)
+        reset_names.extend(candidate.name for candidate in candidates)
+
+    assert len(reset_names) == len(set(reset_names))
+    assert {
+        "regime_pulse_growth_liquidity",
+        "growth_inflation_rotation",
+        "positioning_crowding",
+        "exposure_alignment_long_only",
+        "integrated_operating_system",
+    }.issubset(reset_families)
+    assert "integrated_operating_system_01_retirement_core" in reset_names
+
 def test_reference_portfolio_iteration_includes_explicit_policy_sizing() -> None:
     candidates = generate_iteration_candidates(41)
 

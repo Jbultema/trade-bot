@@ -9,6 +9,7 @@ from trade_bot.config import load_config
 from trade_bot.DEFAULT import (
     DEFAULT_EXPERIMENT_CACHE_TTL_SECONDS,
     DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_RESET_EXPERIMENTS_DIR,
     DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS,
 )
 from trade_bot.research.baselines import BaselineRun, run_configured_baselines
@@ -25,12 +26,20 @@ from trade_bot.storage.run_store import RunStore, SnapshotManifest, build_snapsh
 def load_experiment_dashboard_frames(
     root: str | Path = DEFAULT_EXPERIMENTS_DIR,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    experiment_root = _active_experiment_root(root)
     return (
-        load_experiment_scorecards(root),
-        load_experiment_regime_metrics(root),
-        load_experiment_walk_forward(root),
-        load_experiment_candidates(root),
+        load_experiment_scorecards(experiment_root),
+        load_experiment_regime_metrics(experiment_root),
+        load_experiment_walk_forward(experiment_root),
+        load_experiment_candidates(experiment_root),
     )
+
+
+def _active_experiment_root(root: str | Path) -> Path:
+    requested = Path(root)
+    if requested == DEFAULT_EXPERIMENTS_DIR and DEFAULT_RESET_EXPERIMENTS_DIR.exists():
+        return DEFAULT_RESET_EXPERIMENTS_DIR
+    return requested
 
 
 @st.cache_data(show_spinner=False, ttl=DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS)

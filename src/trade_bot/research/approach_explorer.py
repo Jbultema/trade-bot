@@ -7,10 +7,11 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
 from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
-from trade_bot.DEFAULT import DEFAULT_EXPERIMENTS_DIR
+from trade_bot.DEFAULT import DEFAULT_EXPERIMENTS_DIR, DEFAULT_RESET_EXPERIMENTS_DIR
 from trade_bot.features.indicators import drawdown
 from trade_bot.portfolio.risk import current_positions
 from trade_bot.research.experiments import ScenarioSizingConfig, apply_scenario_position_sizing
+from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.strategies.momentum import build_strategy_weights
 
 
@@ -24,7 +25,8 @@ def build_approach_catalog(
         rows.append(
             {
                 "approach_id": f"baseline::{name}",
-                "label": f"baseline | {name}",
+                "display_name": strategy_display_name(name, family="baseline", phase="baseline"),
+                "label": f"baseline | {strategy_display_name(name, family='baseline', phase='baseline')}",
                 "source": "baseline",
                 "iteration": pd.NA,
                 "strategy": name,
@@ -39,15 +41,22 @@ def build_approach_catalog(
             }
         )
 
-    experiment_candidates = load_experiment_candidates(experiment_root)
+    experiment_candidates = load_experiment_candidates(_active_experiment_root(experiment_root))
     if not experiment_candidates.empty:
         rows.extend(experiment_candidates.to_dict(orient="records"))
 
     return pd.DataFrame(rows)
 
 
+def _active_experiment_root(root: str | Path) -> Path:
+    requested = Path(root)
+    if requested == DEFAULT_EXPERIMENTS_DIR and DEFAULT_RESET_EXPERIMENTS_DIR.exists():
+        return DEFAULT_RESET_EXPERIMENTS_DIR
+    return requested
+
+
 def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd.DataFrame:
-    experiment_root = Path(root)
+    experiment_root = _active_experiment_root(root)
     if not experiment_root.exists():
         return pd.DataFrame()
 
@@ -66,6 +75,7 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
         scorecard_columns = [
             "iteration",
             "strategy",
+            "display_name",
             "promotion_decision",
             "promotion_score",
             "cagr",
@@ -88,6 +98,21 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             suffixes=("", "_scorecard"),
         )
 
+    if "display_name" not in candidates:
+        candidates["display_name"] = ""
+    missing_names = candidates["display_name"].isna() | (
+        candidates["display_name"].astype(str).str.len() == 0
+    )
+    if missing_names.any():
+        candidates.loc[missing_names, "display_name"] = candidates.loc[missing_names].apply(
+            lambda row: strategy_display_name(
+                str(row.get("strategy", "")),
+                family=str(row.get("family", "")),
+                phase=str(row.get("phase", "")),
+            ),
+            axis=1,
+        )
+
     candidates["source"] = "experiment"
     candidates["approach_id"] = candidates.apply(
         lambda row: f"experiment::{int(row['iteration']):02d}::{row['strategy']}",
@@ -95,7 +120,7 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
     )
     candidates["label"] = candidates.apply(
         lambda row: (
-            f"experiment {int(row['iteration']):02d} | {row['strategy']} "
+            f"experiment {int(row['iteration']):02d} | {row['display_name']} "
             f"| {row.get('promotion_decision', 'unscored')}"
         ),
         axis=1,

@@ -30,7 +30,7 @@ class ScenarioTemplate:
 def build_scenario_driver_state(
     confirmation_matrix: pd.DataFrame,
     market_health: pd.DataFrame,
-    vams: pd.DataFrame,
+    momentum_state: pd.DataFrame,
     risk_score: float,
 ) -> pd.DataFrame:
     rows = [
@@ -38,9 +38,9 @@ def build_scenario_driver_state(
             "market_trend",
             _mean_scores(
                 [
-                    _vams_score(vams, "SPY"),
-                    _vams_score(vams, "QQQ"),
-                    _vams_score(vams, "RSP"),
+                    _momentum_state_score(momentum_state, "SPY"),
+                    _momentum_state_score(momentum_state, "QQQ"),
+                    _momentum_state_score(momentum_state, "RSP"),
                     _signal_score(confirmation_matrix, "SPY Trend"),
                     _signal_score(confirmation_matrix, "QQQ Trend"),
                 ]
@@ -54,8 +54,8 @@ def build_scenario_driver_state(
                 [
                     _signal_score(confirmation_matrix, "Equal Weight vs Cap Weight"),
                     _signal_score(confirmation_matrix, "Small Caps vs Mega Caps"),
-                    _vams_score(vams, "RSP"),
-                    _vams_score(vams, "IWM"),
+                    _momentum_state_score(momentum_state, "RSP"),
+                    _momentum_state_score(momentum_state, "IWM"),
                 ]
             ),
             "Participation beyond mega-cap indexes.",
@@ -66,8 +66,8 @@ def build_scenario_driver_state(
             _mean_scores(
                 [
                     _signal_score(confirmation_matrix, "High Yield vs IG Credit"),
-                    _vams_score(vams, "HYG"),
-                    -0.5 * _vams_score(vams, "LQD"),
+                    _momentum_state_score(momentum_state, "HYG"),
+                    -0.5 * _momentum_state_score(momentum_state, "LQD"),
                 ]
             ),
             "Risk appetite in credit markets.",
@@ -79,9 +79,9 @@ def build_scenario_driver_state(
                 [
                     _signal_score(confirmation_matrix, "Semis vs Broad Market"),
                     _signal_score(confirmation_matrix, "QQQ Trend"),
-                    _vams_score(vams, "SMH"),
-                    _vams_score(vams, "QQQ"),
-                    _vams_score(vams, "NVDA"),
+                    _momentum_state_score(momentum_state, "SMH"),
+                    _momentum_state_score(momentum_state, "QQQ"),
+                    _momentum_state_score(momentum_state, "NVDA"),
                 ]
             ),
             "AI and mega-cap growth leadership.",
@@ -89,7 +89,7 @@ def build_scenario_driver_state(
         ),
         _driver(
             "concentration_pressure",
-            _concentration_pressure(confirmation_matrix, vams),
+            _concentration_pressure(confirmation_matrix, momentum_state),
             "Narrow leadership risk from mega-cap and AI concentration.",
             "QQQ/RSP, SMH/SPY, RSP/SPY",
         ),
@@ -99,8 +99,8 @@ def build_scenario_driver_state(
                 [
                     _signal_score(confirmation_matrix, "Volatility ETF Pressure"),
                     _signal_score(confirmation_matrix, "Dollar Pressure"),
-                    -0.5 * _vams_score(vams, "UUP"),
-                    -0.5 * _vams_score(vams, "VIXY"),
+                    -0.5 * _momentum_state_score(momentum_state, "UUP"),
+                    -0.5 * _momentum_state_score(momentum_state, "VIXY"),
                 ]
             ),
             "Volatility and dollar/liquidity pressure.",
@@ -108,7 +108,7 @@ def build_scenario_driver_state(
         ),
         _driver(
             "energy_inflation_relief",
-            _energy_inflation_relief(vams),
+            _energy_inflation_relief(momentum_state),
             "Oil, commodity, and inflation-pressure relief.",
             "USO, XLE, DBC, CPER/GLD",
         ),
@@ -116,10 +116,10 @@ def build_scenario_driver_state(
             "defensive_pressure",
             _mean_scores(
                 [
-                    _vams_score(vams, "GLD"),
-                    _vams_score(vams, "TLT"),
-                    _vams_score(vams, "BIL"),
-                    _vams_score(vams, "VIXY"),
+                    _momentum_state_score(momentum_state, "GLD"),
+                    _momentum_state_score(momentum_state, "TLT"),
+                    _momentum_state_score(momentum_state, "BIL"),
+                    _momentum_state_score(momentum_state, "VIXY"),
                 ]
             ),
             "Safe-haven and defensive-asset bid.",
@@ -129,10 +129,10 @@ def build_scenario_driver_state(
             "duration_support",
             _mean_scores(
                 [
-                    _vams_score(vams, "TLT"),
-                    _vams_score(vams, "IEF"),
-                    _vams_score(vams, "VGIT"),
-                    -0.5 * _vams_score(vams, "UUP"),
+                    _momentum_state_score(momentum_state, "TLT"),
+                    _momentum_state_score(momentum_state, "IEF"),
+                    _momentum_state_score(momentum_state, "VGIT"),
+                    -0.5 * _momentum_state_score(momentum_state, "UUP"),
                 ]
             ),
             "Duration bid and rate-sensitive support.",
@@ -149,10 +149,10 @@ def build_scenario_driver_state(
             _mean_scores(
                 [
                     _signal_score(confirmation_matrix, "Value vs Growth"),
-                    _vams_score(vams, "VTV"),
-                    -0.5 * _vams_score(vams, "VUG"),
-                    _vams_score(vams, "XLE"),
-                    _vams_score(vams, "XLI"),
+                    _momentum_state_score(momentum_state, "VTV"),
+                    -0.5 * _momentum_state_score(momentum_state, "VUG"),
+                    _momentum_state_score(momentum_state, "XLE"),
+                    _momentum_state_score(momentum_state, "XLI"),
                 ]
             ),
             "Value/cyclical rotation pressure versus growth leadership.",
@@ -168,14 +168,14 @@ def build_scenario_driver_state(
 def build_scenario_lattice(
     confirmation_matrix: pd.DataFrame,
     market_health: pd.DataFrame,
-    vams: pd.DataFrame,
+    momentum_state: pd.DataFrame,
     risk_score: float,
     risk_status: str,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
     driver_state = build_scenario_driver_state(
         confirmation_matrix,
         market_health,
-        vams,
+        momentum_state,
         risk_score,
     )
     driver_scores = dict(zip(driver_state["driver"], driver_state["score"], strict=False))
@@ -273,10 +273,10 @@ def _signal_score(confirmation_matrix: pd.DataFrame, name: str) -> float:
     return float(rows["score"].mean())
 
 
-def _vams_score(vams: pd.DataFrame, ticker: str) -> float:
-    if ticker not in vams.index or "vams_score" not in vams:
+def _momentum_state_score(momentum_state: pd.DataFrame, ticker: str) -> float:
+    if ticker not in momentum_state.index or "momentum_state_score" not in momentum_state:
         return 0.0
-    value = vams.loc[ticker, "vams_score"]
+    value = momentum_state.loc[ticker, "momentum_state_score"]
     if pd.isna(value):
         return 0.0
     return float(max(-1.0, min(1.0, float(value) / 1.5)))
@@ -289,21 +289,21 @@ def _mean_scores(values: list[float]) -> float:
     return float(np.mean(clean))
 
 
-def _concentration_pressure(confirmation_matrix: pd.DataFrame, vams: pd.DataFrame) -> float:
+def _concentration_pressure(confirmation_matrix: pd.DataFrame, momentum_state: pd.DataFrame) -> float:
     qqq_rsp = _signal_score(confirmation_matrix, "Nasdaq vs Equal Weight")
     smh_spy = _signal_score(confirmation_matrix, "Semis vs Broad Market")
     breadth = _signal_score(confirmation_matrix, "Equal Weight vs Cap Weight")
-    ai = _mean_scores([qqq_rsp, smh_spy, _vams_score(vams, "QQQ"), _vams_score(vams, "SMH")])
+    ai = _mean_scores([qqq_rsp, smh_spy, _momentum_state_score(momentum_state, "QQQ"), _momentum_state_score(momentum_state, "SMH")])
     return float(max(-1.0, min(1.0, ai - max(0.0, breadth) * 0.75)))
 
 
-def _energy_inflation_relief(vams: pd.DataFrame) -> float:
+def _energy_inflation_relief(momentum_state: pd.DataFrame) -> float:
     energy_pressure = _mean_scores(
         [
-            _vams_score(vams, "USO"),
-            _vams_score(vams, "DBC"),
-            _vams_score(vams, "XLE"),
-            _vams_score(vams, "UUP"),
+            _momentum_state_score(momentum_state, "USO"),
+            _momentum_state_score(momentum_state, "DBC"),
+            _momentum_state_score(momentum_state, "XLE"),
+            _momentum_state_score(momentum_state, "UUP"),
         ]
     )
     return float(max(-1.0, min(1.0, -energy_pressure)))

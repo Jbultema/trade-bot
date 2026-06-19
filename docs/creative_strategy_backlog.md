@@ -19,7 +19,7 @@ The point is to test weird but falsifiable mechanisms while keeping the eventual
 11. Macro surprise drift: use recent economic releases versus consensus once a calendar data source is available.
 12. Slow crash detector: combine rolling lower highs in QQQ/RSP, HYG/LQD, and semis breadth.
 13. False breakout penalty: penalize assets that repeatedly fail 1-month highs within a short window.
-14. Sector crowding unwind: fade sectors with extreme VAMS but deteriorating breadth/credit confirmation.
+14. Sector crowding unwind: fade sectors with extreme Vol-Adjusted Momentum but deteriorating breadth/credit confirmation.
 15. Dollar wrecking-ball filter: reduce EM, commodities, and cyclicals when dollar pressure rises.
 16. Inflation split-state model: distinguish disinflationary growth support from recessionary disinflation.
 17. Drawdown memory sizing: position size depends on current drawdown plus time since prior peak.

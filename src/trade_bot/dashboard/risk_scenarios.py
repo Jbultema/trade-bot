@@ -104,13 +104,13 @@ def _render_risk_and_scenarios(baseline_run: BaselineRun) -> None:
     st.subheader("Market Health")
     _render_metric_dataframe(_display_metrics(current_state.market_health))
 
-    st.subheader("VAMS-Style Signal Table")
-    vams_filter = st.radio(
-        "VAMS filter",
+    st.subheader("Vol-Adjusted Momentum Signal Table")
+    momentum_filter = st.radio(
+        "Momentum filter",
         ["all", "bullish", "neutral", "bearish"],
         horizontal=True,
     )
-    vams_table = current_state.vams.copy()
-    if vams_filter != "all":
-        vams_table = vams_table[vams_table["vams_state"] == vams_filter]
-    _render_metric_dataframe(_display_metrics(vams_table.head(75)))
+    momentum_state_table = current_state.momentum_state.copy()
+    if momentum_filter != "all":
+        momentum_state_table = momentum_state_table[momentum_state_table["momentum_state_label"] == momentum_filter]
+    _render_metric_dataframe(_display_metrics(momentum_state_table.head(75)))

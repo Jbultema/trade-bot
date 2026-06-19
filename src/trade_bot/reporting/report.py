@@ -269,6 +269,20 @@ def _current_state_html(current_state: CurrentStateRun | None) -> str:
             current_state.strategy_alerts.to_html(index=False, float_format=lambda x: f"{x:,.4f}"),
             "<h3>Signal Coverage</h3>",
             current_state.signal_coverage.to_html(index=False, float_format=lambda x: f"{x:,.4f}"),
+            "<h3>Regime Pulse Cycles</h3>",
+            current_state.regime_pulse_cycles.to_html(
+                index=False, float_format=lambda x: f"{x:,.4f}"
+            ),
+            "<h3>Regime Pulse Asset Reads</h3>",
+            current_state.regime_pulse_assets.to_html(
+                index=False, float_format=lambda x: f"{x:,.4f}"
+            ),
+            "<h3>Growth-Inflation Map Probabilities</h3>",
+            current_state.growth_inflation_map.to_html(index=False, float_format=lambda x: f"{x:,.4f}"),
+            "<h3>Positioning And Crowding Summary</h3>",
+            current_state.positioning_summary.to_html(
+                index=False, float_format=lambda x: f"{x:,.4f}"
+            ),
             "<h3>Macro Category Summary</h3>",
             current_state.macro_category_summary.to_html(
                 index=False, float_format=lambda x: f"{x:,.4f}"

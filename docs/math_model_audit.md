@@ -227,19 +227,19 @@ If no asset qualifies and a defensive ticker is configured, the strategy assigns
 
 Source: `src/trade_bot/research/current_state.py`
 
-VAMS score:
+vol-adjusted momentum score:
 
 ```text
 momentum = lookback_return(price, lookback_days=126, skip_days=5)
 volatility = realized_volatility(daily_returns, lookback=63)
-vams_score = momentum / volatility
+momentum_state_score = momentum / volatility
 ```
 
-VAMS state:
+Vol-Adjusted Momentum state:
 
 ```text
-bullish if vams_score >= 0.60
-bearish if vams_score <= -0.40
+bullish if momentum_state_score >= 0.60
+bearish if momentum_state_score <= -0.40
 neutral otherwise
 ```
 
@@ -247,7 +247,7 @@ Confirmation matrix:
 
 - Absolute signals map `bullish` to 1, `bearish` to -1, and neutral/insufficient to 0.
 - Inverse pressure signals, such as `VIXY` and `UUP`, multiply that score by -1.
-- Relative signals run VAMS on ratios such as `HYG / LQD`, `RSP / SPY`, and `SMH / SPY`.
+- Relative signals run Vol-Adjusted Momentum on ratios such as `HYG / LQD`, `RSP / SPY`, and `SMH / SPY`.
 
 Current risk score:
 

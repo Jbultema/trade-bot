@@ -58,7 +58,7 @@ def _current_state(risk_status: str, risk_score: float) -> CurrentStateRun:
         risk_status=risk_status,
         risk_summary=f"Risk status is {risk_status.upper()} with score {risk_score:.2f}.",
         market_health=pd.DataFrame(),
-        vams=pd.DataFrame(),
+        momentum_state=pd.DataFrame(),
         confirmation_matrix=pd.DataFrame(),
         strategy_alerts=pd.DataFrame({"strategy": ["demo"], "action": ["HOLD"]}),
         scenario_outlook=pd.DataFrame(),

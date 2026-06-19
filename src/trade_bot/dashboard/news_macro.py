@@ -78,6 +78,61 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
     _helped_metric(coverage_cols[2], "Macro Loaded", f"{baseline_run.macro_data.shape[1]:,}")
     st.dataframe(current_state.signal_coverage, use_container_width=True)
 
+    st.subheader("Regime Pulse / Growth-Inflation Map")
+    if current_state.regime_pulse_cycles.empty:
+        st.write("No regime-pulse diagnostics are available.")
+    else:
+        lead_regime = (
+            current_state.growth_inflation_map.iloc[0]
+            if not current_state.growth_inflation_map.empty
+            else pd.Series(dtype=object)
+        )
+        stocks = _asset_regime_pulse_row(current_state.regime_pulse_assets, "stocks")
+        bonds = _asset_regime_pulse_row(current_state.regime_pulse_assets, "bonds")
+        weather_cols = st.columns(4)
+        _helped_metric(
+            weather_cols[0],
+            "Lead Regime",
+            _lead_regime_label(lead_regime),
+        )
+        _helped_metric(
+            weather_cols[1],
+            "Stocks",
+            str(stocks.get("regime_pulse_read", "missing")),
+        )
+        _helped_metric(
+            weather_cols[2],
+            "Bonds",
+            str(bonds.get("regime_pulse_read", "missing")),
+        )
+        _helped_metric(
+            weather_cols[3],
+            "Cycle Count",
+            f"{len(current_state.regime_pulse_cycles):,}",
+        )
+        cycle_tab, asset_tab, grid_tab, crowding_tab = st.tabs(
+            ["Cycles", "Asset Reads", "Growth-Inflation Map", "Positioning / Crowding"]
+        )
+        with cycle_tab:
+            _render_metric_dataframe(_display_metrics(current_state.regime_pulse_cycles))
+        with asset_tab:
+            _render_metric_dataframe(_display_metrics(current_state.regime_pulse_assets))
+        with grid_tab:
+            _render_metric_dataframe(_display_metrics(current_state.growth_inflation_map))
+        with crowding_tab:
+            if current_state.positioning_summary.empty:
+                st.write("No positioning/crowding proxy diagnostics are available.")
+            else:
+                st.caption(
+                    "Proxy layer: 3-month return z-score plus 14-day RSI. This is not yet true "
+                    "ETF-flow, survey, or futures positioning data."
+                )
+                _render_metric_dataframe(_display_metrics(current_state.positioning_summary))
+                with st.expander("Ticker-level crowding proxy", expanded=False):
+                    _render_metric_dataframe(
+                        _display_metrics(current_state.positioning_crowding.head(100))
+                    )
+
     st.subheader("Macro State")
     if current_state.macro_category_summary.empty:
         st.write("No macro diagnostics available.")
@@ -195,3 +250,22 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
 
     st.subheader("Data Quality")
     _render_metric_dataframe(_display_metrics(current_state.data_quality))
+
+
+def _asset_regime_pulse_row(assets: pd.DataFrame, asset_class: str) -> pd.Series:
+    if assets.empty or "asset_class" not in assets:
+        return pd.Series(dtype=object)
+    rows = assets[assets["asset_class"] == asset_class]
+    if rows.empty:
+        return pd.Series(dtype=object)
+    return rows.iloc[0]
+
+
+def _lead_regime_label(row: pd.Series) -> str:
+    if row.empty:
+        return "missing"
+    regime = str(row.get("regime", "missing"))
+    probability = row.get("probability")
+    if pd.isna(probability):
+        return regime
+    return f"{regime} {float(probability):.0%}"

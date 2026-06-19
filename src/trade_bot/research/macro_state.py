@@ -178,10 +178,16 @@ def build_signal_coverage_table(
     rows.extend(
         [
             {
+                "coverage_area": "regime pulse cycles",
+                "series_count": 6,
+                "status": "implemented",
+                "gap_to_42macro_style_stack": "Cycle reads now exist for growth, inflation, monetary policy, fiscal policy, liquidity, and positioning; still needs consensus forecast and vintage discipline.",
+            },
+            {
                 "coverage_area": "positioning and crowding",
-                "series_count": 0,
-                "status": "gap",
-                "gap_to_42macro_style_stack": "CFTC COT, AAII/NAAIM, ETF/mutual-fund flows, short interest, dealer/CTA estimates.",
+                "series_count": yahoo_prices.shape[1],
+                "status": "partial",
+                "gap_to_42macro_style_stack": "Price/RSI crowding proxies are implemented; true CFTC COT, AAII/NAAIM, ETF/mutual-fund flows, short interest, and dealer/CTA estimates remain missing.",
             },
             {
                 "coverage_area": "earnings and fundamentals",

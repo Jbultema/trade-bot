@@ -130,16 +130,19 @@ def test_macro_minute_report_summarizes_market_news_and_scenarios() -> None:
         "Market State",
         "Change Since Prior",
         "News / Events",
+        "Regime Pulse",
         "Scenario Map",
         "Risk Budget / Action",
     ]
-    assert "Choppy factor rotation" in report.cards[3].detail
+    scenario_card = next(card for card in report.cards if card.label == "Scenario Map")
+    assert "Choppy factor rotation" in scenario_card.detail
     assert set(report.detail_rows["topic"]) >= {
         "market_state",
         "scenario_map",
         "change_since_prior",
         "news_events",
         "macro_stack",
+        "regime_pulse",
         "risk_budget",
     }
 
@@ -391,7 +394,7 @@ def _current_state() -> CurrentStateRun:
         risk_status="yellow",
         risk_summary="Risk status is YELLOW with score 0.43.",
         market_health=pd.DataFrame({"metric": ["trend"], "value": [1.0]}),
-        vams=pd.DataFrame({"ticker": ["QQQ"], "vams_state": ["bullish"]}),
+        momentum_state=pd.DataFrame({"ticker": ["QQQ"], "momentum_state_label": ["bullish"]}),
         confirmation_matrix=pd.DataFrame({"signal": ["trend"], "state": ["bullish"]}),
         strategy_alerts=pd.DataFrame(
             {

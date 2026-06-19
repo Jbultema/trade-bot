@@ -765,6 +765,7 @@ def _render_curated_strategy_shelf(experiment_scorecards: pd.DataFrame) -> None:
     )
     columns = [
         "curation_rank",
+        "display_name",
         "strategy",
         "curation_bucket",
         "curation_reason",
@@ -903,6 +904,7 @@ def _render_strategy_family_map(
 
     strategy_columns = [
         "iteration",
+        "display_name",
         "strategy",
         "strategy_archetype",
         "risk_behavior",
@@ -1081,6 +1083,7 @@ def _render_experiment_monitor(
             experiment_view = experiment_view[experiment_view["family"] == family_filter]
         leaderboard_columns = [
             "iteration",
+            "display_name",
             "strategy",
             "phase",
             "family",

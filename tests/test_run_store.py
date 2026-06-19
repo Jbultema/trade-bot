@@ -93,7 +93,7 @@ def _baseline_run() -> BaselineRun:
         risk_status="green",
         risk_summary="Green test state.",
         market_health=pd.DataFrame(),
-        vams=pd.DataFrame(),
+        momentum_state=pd.DataFrame(),
         confirmation_matrix=pd.DataFrame(),
         strategy_alerts=pd.DataFrame(),
         scenario_outlook=pd.DataFrame(),

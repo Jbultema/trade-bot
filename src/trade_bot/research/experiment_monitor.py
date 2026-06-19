@@ -21,6 +21,7 @@ from trade_bot.DEFAULT import (
     DEFAULT_STRATEGY_FAMILY_HIGH_BETA_TICKERS,
     DEFAULT_STRATEGY_FAMILY_TBILL_TICKERS,
 )
+from trade_bot.research.strategy_naming import strategy_display_name
 
 AI_GROWTH_TICKERS = set(DEFAULT_RISK_AI_BETA_TICKERS)
 BROAD_US_TICKERS = set(DEFAULT_RISK_BROAD_EQUITY_TICKERS)
@@ -66,6 +67,7 @@ def load_experiment_scorecards(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
                 frame[column] = default
             else:
                 frame[column] = frame[column].fillna(default)
+        frame = _ensure_display_name(frame)
         frames.append(frame)
 
     if not frames:
@@ -105,6 +107,23 @@ def load_experiment_walk_forward(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> 
     return pd.concat(frames, ignore_index=True)
 
 
+def _ensure_display_name(frame: pd.DataFrame) -> pd.DataFrame:
+    output = frame.copy()
+    if "display_name" not in output:
+        output["display_name"] = ""
+    missing = output["display_name"].isna() | (output["display_name"].astype(str).str.len() == 0)
+    if missing.any() and "strategy" in output:
+        output.loc[missing, "display_name"] = output.loc[missing].apply(
+            lambda row: strategy_display_name(
+                str(row.get("strategy", "")),
+                family=str(row.get("family", "")),
+                phase=str(row.get("phase", "")),
+            ),
+            axis=1,
+        )
+    return output
+
+
 def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd.DataFrame:
     frames = []
     for iteration, frame in _load_iteration_csvs(root, "candidates.csv"):
@@ -119,6 +138,7 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
         }.items():
             if column not in frame.columns:
                 frame[column] = default
+        frame = _ensure_display_name(frame)
         frames.append(frame)
     if not frames:
         return pd.DataFrame()
@@ -210,6 +230,7 @@ def build_strategy_family_map(
         mapped = {
             "iteration": row.get("iteration"),
             "strategy": _safe_text(row.get("strategy")),
+            "display_name": _safe_text(row.get("display_name")),
             "phase": _safe_text(row.get("phase")),
             "raw_family": _safe_text(row.get("family")),
             "role": _safe_text(row.get("role")),

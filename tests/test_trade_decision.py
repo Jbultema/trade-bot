@@ -230,7 +230,7 @@ def _current_state() -> CurrentStateRun:
         risk_status="yellow",
         risk_summary="Risk status is YELLOW with score 0.43.",
         market_health=pd.DataFrame(),
-        vams=pd.DataFrame(),
+        momentum_state=pd.DataFrame(),
         confirmation_matrix=pd.DataFrame(),
         strategy_alerts=pd.DataFrame(),
         scenario_outlook=pd.DataFrame(),

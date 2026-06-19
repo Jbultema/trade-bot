@@ -109,7 +109,7 @@ Required sections:
 - event-risk monitor with current news scenarios, confirmation checks, and historical analog windows
 - granular future-state scenario lattice across 1-week, 1-month, 3-month, and 6-month horizons
 - scenario drivers for trend, breadth, credit, AI concentration, volatility/liquidity, energy inflation, defensive pressure, duration, drawdown resilience, and style rotation
-- VAMS-style signal table across the expanded universe
+- vol-adjusted momentum signal table across the expanded universe
 - confirmation matrix for breadth, credit, volatility, concentration, AI beta, and defensive assets
 - data quality table so stale or short-history inputs are visible
 - historical full-period, rolling-window, and calendar-year performance

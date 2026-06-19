@@ -92,6 +92,7 @@ def build_macro_minute_report(
         trade_summary, scenario_links, current_state.scenario_lattice
     )
     macro_summary = _macro_summary(current_state.macro_category_summary, baseline_run.macro_data)
+    regime_pulse_summary = _regime_pulse_summary(current_state)
     confirmation_summary = _confirmation_summary(current_state.confirmation_matrix)
     change_summary = _change_summary(baseline_run, previous_run)
 
@@ -106,7 +107,8 @@ def build_macro_minute_report(
     watch_summary = _watch_summary(scenario_links, current_state.scenario_lattice)
     summary = (
         f"{risk_status} risk with {action}. {scenario_summary['sentence']} "
-        f"{news_summary['sentence']} {macro_summary['sentence']} {change_summary['sentence']}"
+        f"{news_summary['sentence']} {macro_summary['sentence']} "
+        f"{regime_pulse_summary['sentence']} {change_summary['sentence']}"
     )
     daily_delta_cards = _daily_delta_cards(
         change_summary=change_summary,
@@ -129,6 +131,7 @@ def build_macro_minute_report(
         _driver_paragraph(
             news_summary=news_summary,
             macro_summary=macro_summary,
+            regime_pulse_summary=regime_pulse_summary,
             driver_summary=driver_summary,
         ),
         _action_paragraph(
@@ -163,6 +166,12 @@ def build_macro_minute_report(
             tone=news_summary["tone"],
         ),
         MacroMinuteCard(
+            label="Regime Pulse",
+            answer=regime_pulse_summary["answer"],
+            detail=regime_pulse_summary["detail"],
+            tone=regime_pulse_summary["tone"],
+        ),
+        MacroMinuteCard(
             label="Scenario Map",
             answer=scenario_summary["answer"],
             detail=scenario_summary["detail"],
@@ -189,6 +198,7 @@ def build_macro_minute_report(
             news_summary=news_summary,
             scenario_summary=scenario_summary,
             macro_summary=macro_summary,
+            regime_pulse_summary=regime_pulse_summary,
             risk_summary=risk_summary,
             change_summary=change_summary,
             open_ticket_count=open_ticket_count,
@@ -283,13 +293,15 @@ def _driver_paragraph(
     *,
     news_summary: dict[str, str],
     macro_summary: dict[str, str],
+    regime_pulse_summary: dict[str, str],
     driver_summary: str,
 ) -> str:
     return (
         f"Still true: the driver stack is being pulled most by {news_summary['plain']}. "
-        f"Macro is {macro_summary['plain']}. Scenario drivers point to {driver_summary}. "
+        f"Macro is {macro_summary['plain']}; regime pulse is {regime_pulse_summary['plain']}. "
+        f"Scenario drivers point to {driver_summary}. "
         "That combination matters because the bot should not treat price trend alone as enough "
-        "when news, macro, credit, liquidity, or breadth are arguing for smaller sizing."
+        "when news, macro, credit, liquidity, positioning, or breadth are arguing for smaller sizing."
     )
 
 
@@ -732,6 +744,46 @@ def _news_summary(baseline_run: BaselineRun) -> dict[str, str]:
     }
 
 
+def _regime_pulse_summary(current_state: object) -> dict[str, str]:
+    assets = getattr(current_state, "regime_pulse_assets", pd.DataFrame())
+    cycles = getattr(current_state, "regime_pulse_cycles", pd.DataFrame())
+    grid = getattr(current_state, "growth_inflation_map", pd.DataFrame())
+    if assets.empty or cycles.empty:
+        return {
+            "answer": "No regime-pulse read",
+            "detail": "Regime Pulse Lite did not produce cycle or asset-class diagnostics.",
+            "tone": "neutral",
+            "sentence": "Regime Pulse Lite is unavailable in this run.",
+            "plain": "unavailable",
+        }
+
+    stock_rows = assets[assets["asset_class"] == "stocks"] if "asset_class" in assets else pd.DataFrame()
+    stock_read = (
+        str(stock_rows.iloc[0].get("regime_pulse_read", "missing"))
+        if not stock_rows.empty
+        else "missing"
+    )
+    stock_score = (
+        float(stock_rows.iloc[0].get("regime_pulse_score", 0.0))
+        if not stock_rows.empty
+        else 0.0
+    )
+    lead_regime = grid.iloc[0] if not grid.empty else pd.Series(dtype=object)
+    regime_text = "n/a"
+    if not lead_regime.empty:
+        regime_text = f"{lead_regime.get('regime', 'n/a')} {_format_percent(lead_regime.get('probability'))}"
+    tailwinds = _cycle_names(cycles, "tailwind")
+    headwinds = _cycle_names(cycles, "headwind")
+    tone = "success" if stock_score >= 0.20 else "warning" if stock_score <= -0.20 else "neutral"
+    return {
+        "answer": f"{regime_text}; stocks {stock_read}",
+        "detail": f"Tailwinds: {tailwinds or 'none'}. Headwinds: {headwinds or 'none'}.",
+        "tone": tone,
+        "sentence": f"Regime Pulse Lite reads {regime_text} with stocks: {stock_read}.",
+        "plain": f"{regime_text}; stocks {stock_read}; tailwinds {tailwinds or 'none'}; headwinds {headwinds or 'none'}",
+    }
+
+
 def _macro_summary(
     macro_category_summary: pd.DataFrame, macro_data: pd.DataFrame
 ) -> dict[str, str]:
@@ -803,6 +855,7 @@ def _macro_minute_details(
     news_summary: dict[str, str],
     scenario_summary: dict[str, str],
     macro_summary: dict[str, str],
+    regime_pulse_summary: dict[str, str],
     risk_summary: dict[str, object],
     change_summary: dict[str, object],
     open_ticket_count: int,
@@ -834,6 +887,11 @@ def _macro_minute_details(
                 "topic": "macro_stack",
                 "current_read": macro_summary["answer"],
                 "why_it_matters": macro_summary["detail"],
+            },
+            {
+                "topic": "regime_pulse",
+                "current_read": regime_pulse_summary["answer"],
+                "why_it_matters": regime_pulse_summary["detail"],
             },
             {
                 "topic": "risk_budget",
@@ -988,3 +1046,14 @@ def _brief_tone(level: str) -> str:
     if level == "small_actions":
         return "warning"
     return "success"
+
+
+def _cycle_names(cycles: pd.DataFrame, direction: str) -> str:
+    if cycles.empty or "cycle_state" not in cycles:
+        return ""
+    if direction == "tailwind":
+        states = {"modest_tailwind", "meaningful_tailwind"}
+    else:
+        states = {"modest_headwind", "meaningful_headwind"}
+    names = cycles[cycles["cycle_state"].isin(states)]["cycle"].dropna().astype(str).tolist()
+    return ", ".join(names[:4])

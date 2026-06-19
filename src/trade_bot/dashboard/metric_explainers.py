@@ -423,13 +423,13 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
         aliases=("max_concentration_hhi", "concentration_hhi"),
     ),
     MetricExplainer(
-        metric="VAMS Score",
+        metric="Vol-Adjusted Momentum Score",
         category="Signals",
-        plain_english="VAMS-style volatility-adjusted momentum score for a tradable asset.",
+        plain_english="Momentum score normalized by realized volatility for a tradable asset.",
         calculation="Lookback return with skip-period logic divided by realized volatility.",
         how_to_read="Positive is supportive, negative is adverse, near zero is mixed.",
-        caution="Fast shocks can outrun VAMS-style trend signals.",
-        aliases=("vams_score", "vams_state"),
+        caution="Fast shocks can outrun vol-adjusted momentum trend signals.",
+        aliases=("momentum_state_score", "momentum_state_label"),
     ),
     MetricExplainer(
         metric="Signal Inclusion Delta",

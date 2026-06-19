@@ -359,7 +359,7 @@ def classify_news_text(text: str) -> NewsEventClassification:
                 "below expectations",
                 "disinflation",
                 "soft landing",
-                "goldilocks",
+                "growth-disinflation",
                 "payrolls beat",
                 "claims fell",
                 "growth accelerated",
@@ -1176,7 +1176,7 @@ def _scenario_templates(category: str, direction: EventDirection) -> tuple[dict[
     if category == "macro_release":
         return (
             {
-                "scenario": "Goldilocks confirmation",
+                "scenario": "Growth-disinflation confirmation",
                 "confirmation": "Rates ease, breadth improves, and cyclical/risk assets hold trend after the release.",
                 "risk_posture": "Permit risk-on posture if trend, breadth, and credit confirm.",
                 "off_ramp": "Reverse if lower rates are paired with growth-scare leadership and weak credit.",
