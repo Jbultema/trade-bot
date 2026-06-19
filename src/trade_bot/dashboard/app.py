@@ -222,6 +222,7 @@ _render_book_alignment(
     experiment_regimes,
     experiment_walk_forward,
     experiment_candidates,
+    decision_sanity_impacts,
 ) = load_experiment_dashboard_frames()
 _render_operating_brief(
     baseline_run=baseline_run,
@@ -268,6 +269,7 @@ _render_dashboard_section(
     experiment_regimes=experiment_regimes,
     experiment_walk_forward=experiment_walk_forward,
     experiment_candidates=experiment_candidates,
+    decision_sanity_impacts=decision_sanity_impacts,
     warehouse_path=str(run_store_path),
 )
 _render_metric_guide()

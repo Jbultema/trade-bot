@@ -162,6 +162,30 @@ def test_scorecard_includes_walk_forward_and_regime_robustness() -> None:
         },
         index=pd.Index(names, name="name"),
     )
+    operability_metrics = pd.DataFrame(
+        {
+            "material_trade_days_per_year": [10.0 for _ in names],
+            "mean_days_between_material_trades": [25.0 for _ in names],
+            "median_material_turnover": [0.08 for _ in names],
+            "max_single_day_turnover": [0.40 for _ in names],
+            "operability_score": [0.85 for _ in names],
+            "operability_label": ["paper_operable" for _ in names],
+        },
+        index=pd.Index(names, name="strategy"),
+    )
+    transition_metrics = pd.DataFrame(
+        {
+            "average_risk_weight": [0.75 for _ in names],
+            "min_risk_weight": [0.25 for _ in names],
+            "latest_risk_weight": [0.80 for _ in names],
+            "low_risk_day_rate": [0.10 for _ in names],
+            "median_reentry_days": [18.0 for _ in names],
+            "reentry_cycles": [3 for _ in names],
+            "reentry_score": [0.75 for _ in names],
+            "risk_cycle_label": ["risk_off_then_reenters" for _ in names],
+        },
+        index=pd.Index(names, name="strategy"),
+    )
 
     scorecard = build_experiment_scorecard(
         candidates,
@@ -169,12 +193,18 @@ def test_scorecard_includes_walk_forward_and_regime_robustness() -> None:
         window_summary,
         regime_summary=regime_summary,
         walk_forward_summary=walk_forward_summary,
+        operability_metrics=operability_metrics,
+        transition_metrics=transition_metrics,
     )
 
     assert "robustness_score" in scorecard.columns
     assert "walk_forward_positive_rate" in scorecard.columns
     assert "left_tail_regime_return" in scorecard.columns
     assert "left_tail_regime_cagr" in scorecard.columns
+    assert "monitoring_readiness_score" in scorecard.columns
+    assert "operability_score" in scorecard.columns
+    assert "risk_cycle_label" in scorecard.columns
+    assert set(scorecard["operability_label"]) == {"paper_operable"}
 
 
 def test_scenario_position_sizing_moves_stress_residual_to_defensive_ticker() -> None:
@@ -256,6 +286,35 @@ def test_decision_sanity_ablation_iteration_has_raw_and_capped_pairs() -> None:
     capped = [candidate for candidate in candidates if candidate.decision_sanity is not None]
     assert all(candidate.scenario_sizing is not None for candidate in candidates)
     assert all(candidate.parent.startswith("i77_sanity_raw_") for candidate in capped)
+
+
+def test_decision_sanity_tuning_iteration_has_multiple_profiles() -> None:
+    candidates = generate_iteration_candidates(78)
+
+    assert len(candidates) == 18
+    raw = [candidate for candidate in candidates if candidate.decision_sanity is None]
+    tuned = [candidate for candidate in candidates if candidate.decision_sanity is not None]
+    assert len(raw) == 3
+    assert len(tuned) == 15
+    assert {candidate.decision_sanity.profile for candidate in tuned if candidate.decision_sanity} == {
+        "modest_cap",
+        "confirmation_cap",
+        "wide_cap",
+        "strict_gate",
+        "loose_gate",
+    }
+    assert all(candidate.parent.startswith("i78_sanity_raw_") for candidate in tuned)
+
+
+def test_paper_readiness_iteration_tests_low_churn_and_metered_reentry() -> None:
+    candidates = generate_iteration_candidates(79)
+
+    assert len(candidates) == 10
+    assert {candidate.role for candidate in candidates} == {"paper_readiness_candidate"}
+    assert {candidate.phase for candidate in candidates} == {"paper_readiness_tuning"}
+    assert any(candidate.name.endswith("low_churn") for candidate in candidates)
+    assert any(candidate.name.endswith("metered_reentry") for candidate in candidates)
+    assert all(candidate.parent for candidate in candidates)
 
 
 def _sanity_prices(index: pd.DatetimeIndex, *, confirmed_break: bool) -> pd.DataFrame:

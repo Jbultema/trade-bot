@@ -255,6 +255,19 @@ If you literally want the raw top 3 by `promotion_score`:
 6. Add the first as `champion` and the next two as `challenger`, with `Mode = paper`, `Account label = top3_promotion_score`, and the same paper capital.
 7. Run `poetry run trade-bot run-paper-valuation` after adding them.
 
+### Decision-Sanity Overlay Testing
+
+The dashboard recommendation layer includes a decision-sanity guardrail: large news/event-only de-risking should not automatically force a huge cash move unless price, credit, volatility, breadth, or trend confirmation also deteriorates. That rule is not assumed to be good by default. It is backtested as paired raw-versus-capped experiments.
+
+```bash
+poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration 77 --output-dir data/experiments_reset_v2
+poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration 78 --output-dir data/experiments_reset_v2
+```
+
+Dashboard path: **Research Lab -> Experiment Monitor -> Sanity Impact**.
+
+Use that tab to compare profile-level adoption reads and pair-level deltas. A positive `delta_max_drawdown` means the capped version had a less negative drawdown. A negative `delta_promotion_score` means the capped version scored worse after the validation penalties.
+
 ### Change Champion, Challenger, Or Window Status
 
 Dashboard path:

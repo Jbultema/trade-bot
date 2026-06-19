@@ -8,11 +8,13 @@ import pandas as pd
 from trade_bot.research.experiment_monitor import (
     build_strategy_family_map,
     latest_experiment_iteration,
+    load_decision_sanity_impacts,
     load_experiment_candidates,
     load_experiment_regime_metrics,
     load_experiment_scorecards,
     load_experiment_walk_forward,
     strategy_family_takeaways,
+    summarize_decision_sanity_impacts,
     summarize_experiment_families,
     summarize_experiment_history,
     summarize_experiment_operating_systems,
@@ -103,6 +105,38 @@ def test_load_experiment_monitor_robustness_artifacts(tmp_path: Path) -> None:
     assert walk_forward.loc[0, "strategy"] == "candidate_a"
     assert candidates.loc[0, "scenario_sizing"] == "balanced"
     assert operating_systems.loc[0, "strategy"] == "candidate_a"
+
+
+def test_load_and_summarize_decision_sanity_impacts(tmp_path: Path) -> None:
+    iteration_dir = tmp_path / "iteration_77"
+    iteration_dir.mkdir()
+    pd.DataFrame(
+        {
+            "raw_strategy": ["raw_a", "raw_b"],
+            "capped_strategy": ["cap_a", "cap_b"],
+            "family": ["ai", "macro"],
+            "decision_sanity": ["confirmation_cap", "confirmation_cap"],
+            "delta_promotion_score": [0.04, -0.02],
+            "delta_cagr": [0.01, -0.003],
+            "delta_max_drawdown": [0.02, -0.01],
+            "delta_calmar": [0.03, -0.01],
+            "delta_average_turnover": [0.001, 0.002],
+            "delta_walk_forward_positive_rate": [0.1, 0.0],
+            "delta_left_tail_regime_return": [0.02, -0.01],
+        }
+    ).to_csv(iteration_dir / "decision_sanity_impact.csv", index=False)
+
+    impacts = load_decision_sanity_impacts(tmp_path)
+    summary = summarize_decision_sanity_impacts(impacts)
+
+    assert impacts["iteration"].tolist() == [77, 77]
+    assert summary.loc[0, "pairs"] == 2
+    assert summary.loc[0, "decision_sanity"] == "confirmation_cap"
+    assert summary.loc[0, "adoption_read"] in {
+        "promote_for_monitoring",
+        "mixed_keep_testing",
+        "tune_or_reject",
+    }
 
 
 def test_strategy_family_map_explains_archetypes_and_risk_behaviors() -> None:

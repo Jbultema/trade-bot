@@ -25,6 +25,7 @@ def _render_dashboard_section(
     experiment_regimes: pd.DataFrame,
     experiment_walk_forward: pd.DataFrame,
     experiment_candidates: pd.DataFrame,
+    decision_sanity_impacts: pd.DataFrame,
     warehouse_path: str,
 ) -> None:
     if section == "Command Center":
@@ -41,6 +42,7 @@ def _render_dashboard_section(
             experiment_regimes,
             experiment_walk_forward,
             experiment_candidates,
+            decision_sanity_impacts,
         )
     elif section == "News & Macro":
         _render_news_and_macro(baseline_run)

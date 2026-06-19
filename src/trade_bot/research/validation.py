@@ -38,13 +38,23 @@ def add_overfit_diagnostics(scorecard: pd.DataFrame) -> pd.DataFrame:
         1.0,
     )
 
-    cagr = frame["cagr"].map(_optional_float).fillna(0.0)
-    walk_forward_cagr = frame["walk_forward_median_cagr"].map(_optional_float).fillna(cagr)
+    cagr = pd.to_numeric(frame["cagr"].map(_optional_float), errors="coerce").fillna(0.0)
+    walk_forward_cagr = pd.to_numeric(
+        frame["walk_forward_median_cagr"].map(_optional_float),
+        errors="coerce",
+    ).fillna(cagr)
     walk_forward_positive_rate = (
-        frame["walk_forward_positive_rate"].map(_optional_float).fillna(0.50)
+        pd.to_numeric(frame["walk_forward_positive_rate"].map(_optional_float), errors="coerce")
+        .fillna(0.50)
     )
-    left_tail_return = frame["left_tail_regime_return"].map(_optional_float).fillna(-0.10)
-    max_drawdown = frame["max_drawdown"].map(_optional_float).fillna(-0.20)
+    left_tail_return = pd.to_numeric(
+        frame["left_tail_regime_return"].map(_optional_float),
+        errors="coerce",
+    ).fillna(-0.10)
+    max_drawdown = pd.to_numeric(
+        frame["max_drawdown"].map(_optional_float),
+        errors="coerce",
+    ).fillna(-0.20)
 
     holdout_decay = ((cagr - walk_forward_cagr).clip(lower=0.0) / 0.12).clip(0.0, 1.0)
     holdout_fragility = ((0.75 - walk_forward_positive_rate).clip(lower=0.0) / 0.35).clip(
@@ -68,8 +78,9 @@ def add_overfit_diagnostics(scorecard: pd.DataFrame) -> pd.DataFrame:
     frame["drawdown_penalty"] = drawdown_penalty
     frame["overfit_risk_score"] = overfit_risk_score
     frame["overfit_risk_label"] = overfit_risk_score.map(_overfit_label)
-    frame["selection_adjusted_promotion_score"] = frame["promotion_score"].map(
-        _optional_float
+    frame["selection_adjusted_promotion_score"] = pd.to_numeric(
+        frame["promotion_score"].map(_optional_float),
+        errors="coerce",
     ).fillna(0.0) * (1.0 - 0.60 * overfit_risk_score)
     frame["validation_tier"] = frame.apply(_validation_tier, axis=1)
     return frame

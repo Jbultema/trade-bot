@@ -14,6 +14,7 @@ from trade_bot.DEFAULT import (
 )
 from trade_bot.research.baselines import BaselineRun, run_configured_baselines
 from trade_bot.research.experiment_monitor import (
+    load_decision_sanity_impacts,
     load_experiment_candidates,
     load_experiment_regime_metrics,
     load_experiment_scorecards,
@@ -25,13 +26,14 @@ from trade_bot.storage.run_store import RunStore, SnapshotManifest, build_snapsh
 @st.cache_data(show_spinner=False, ttl=DEFAULT_EXPERIMENT_CACHE_TTL_SECONDS)
 def load_experiment_dashboard_frames(
     root: str | Path = DEFAULT_EXPERIMENTS_DIR,
-) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     experiment_root = _active_experiment_root(root)
     return (
         load_experiment_scorecards(experiment_root),
         load_experiment_regime_metrics(experiment_root),
         load_experiment_walk_forward(experiment_root),
         load_experiment_candidates(experiment_root),
+        load_decision_sanity_impacts(experiment_root),
     )
 
 

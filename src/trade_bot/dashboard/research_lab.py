@@ -43,6 +43,7 @@ from trade_bot.research.experiment_monitor import (
     build_strategy_family_map,
     latest_experiment_iteration,
     strategy_family_takeaways,
+    summarize_decision_sanity_impacts,
     summarize_experiment_families,
     summarize_experiment_history,
     summarize_experiment_operating_systems,
@@ -787,11 +788,16 @@ def _render_curated_strategy_shelf(experiment_scorecards: pd.DataFrame) -> None:
         "role",
         "promotion_decision",
         "promotion_score",
+        "monitoring_readiness_score",
+        "monitoring_readiness_label",
         "robustness_score",
         "cagr",
         "max_drawdown",
         "calmar",
         "average_turnover",
+        "operability_label",
+        "material_trade_days_per_year",
+        "risk_cycle_label",
         "walk_forward_positive_rate",
         "left_tail_regime_return",
         "hypothesis",
@@ -956,6 +962,7 @@ def _render_experiment_monitor(
     experiment_regimes: pd.DataFrame,
     experiment_walk_forward: pd.DataFrame,
     experiment_candidates: pd.DataFrame,
+    decision_sanity_impacts: pd.DataFrame,
 ) -> None:
     st.subheader("Experiment Monitor")
     if experiment_scorecards.empty:
@@ -988,6 +995,8 @@ def _render_experiment_monitor(
 
     (
         experiment_detail_tab,
+        experiment_sanity_tab,
+        experiment_readiness_tab,
         experiment_shelf_tab,
         experiment_family_tab,
         experiment_leaderboard_tab,
@@ -997,6 +1006,8 @@ def _render_experiment_monitor(
     ) = st.tabs(
         [
             "Candidate Details",
+            "Sanity Impact",
+            "Paper Readiness",
             "Curated Shelf",
             "Family Map",
             "Leaderboard",
@@ -1020,6 +1031,12 @@ def _render_experiment_monitor(
             experiment_walk_forward=experiment_walk_forward,
             experiment_candidates=experiment_candidates,
         )
+
+    with experiment_sanity_tab:
+        _render_decision_sanity_impact(decision_sanity_impacts)
+
+    with experiment_readiness_tab:
+        _render_paper_readiness(experiment_scorecards)
 
     with experiment_shelf_tab:
         _render_curated_strategy_shelf(experiment_scorecards)
@@ -1104,10 +1121,15 @@ def _render_experiment_monitor(
             "decision_sanity",
             "promotion_decision",
             "promotion_score",
+            "monitoring_readiness_score",
+            "monitoring_readiness_label",
             "robustness_score",
             "cagr",
             "max_drawdown",
             "calmar",
+            "operability_label",
+            "material_trade_days_per_year",
+            "risk_cycle_label",
             "walk_forward_positive_rate",
             "left_tail_regime_return",
             "left_tail_regime_cagr",
@@ -1189,6 +1211,148 @@ def _render_experiment_monitor(
             st.dataframe(manifest_view, use_container_width=True)
 
 
+def _render_decision_sanity_impact(decision_sanity_impacts: pd.DataFrame) -> None:
+    st.caption(
+        "Backtested raw-versus-capped ablations for the decision-sanity overlay. Positive "
+        "delta promotion score, Calmar, walk-forward rate, left-tail return, and max drawdown "
+        "are good. Positive delta max drawdown means the drawdown became less negative."
+    )
+    if decision_sanity_impacts.empty:
+        st.write(
+            "No decision-sanity impact files were found. Run iteration 77 or 78 to generate "
+            "paired raw-versus-capped evidence."
+        )
+        return
+
+    summary = summarize_decision_sanity_impacts(decision_sanity_impacts)
+    if not summary.empty:
+        st.markdown("**Profile adoption read**")
+        summary_columns = [
+            "decision_sanity",
+            "adoption_read",
+            "pairs",
+            "mean_delta_promotion_score",
+            "mean_delta_cagr",
+            "mean_delta_max_drawdown",
+            "mean_delta_calmar",
+            "mean_delta_turnover",
+            "mean_delta_walk_forward_positive_rate",
+            "mean_delta_left_tail_regime_return",
+            "promotion_win_rate",
+            "drawdown_win_rate",
+            "calmar_win_rate",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(summary[[column for column in summary_columns if column in summary]]),
+            hide_index=True,
+        )
+
+    iterations = sorted(decision_sanity_impacts["iteration"].dropna().unique())
+    selected_iterations = st.multiselect(
+        "Impact iterations",
+        iterations,
+        default=iterations[-2:],
+        key="decision_sanity_impact_iterations",
+    )
+    impact_view = decision_sanity_impacts[
+        decision_sanity_impacts["iteration"].isin(selected_iterations)
+    ].copy()
+    if impact_view.empty:
+        st.write("No impact rows match the selected iterations.")
+        return
+
+    st.markdown("**Paired raw-versus-capped details**")
+    detail_columns = [
+        "iteration",
+        "family",
+        "decision_sanity",
+        "raw_strategy",
+        "capped_strategy",
+        "raw_promotion_decision",
+        "capped_promotion_decision",
+        "delta_promotion_score",
+        "delta_cagr",
+        "delta_max_drawdown",
+        "delta_calmar",
+        "delta_average_turnover",
+        "delta_walk_forward_positive_rate",
+        "delta_left_tail_regime_return",
+    ]
+    _render_metric_dataframe(
+        _display_metrics(
+            impact_view[[column for column in detail_columns if column in impact_view.columns]]
+        ),
+        hide_index=True,
+    )
+
+
+def _render_paper_readiness(experiment_scorecards: pd.DataFrame) -> None:
+    if experiment_scorecards.empty or "monitoring_readiness_score" not in experiment_scorecards:
+        st.write(
+            "Paper-readiness diagnostics will appear after running an experiment iteration with "
+            "the updated operability and re-entry metrics."
+        )
+        return
+
+    st.caption(
+        "Ranks candidates for paper monitoring by blending historical performance, robustness, "
+        "human-executable trade cadence, and whether the strategy can re-risk after defensive periods."
+    )
+    frame = experiment_scorecards.copy()
+    frame["monitoring_readiness_score"] = pd.to_numeric(
+        frame["monitoring_readiness_score"],
+        errors="coerce",
+    )
+    frame = frame.sort_values("monitoring_readiness_score", ascending=False)
+
+    label_summary = (
+        frame.groupby("monitoring_readiness_label", as_index=False, dropna=False)
+        .agg(
+            candidates=("strategy", "count"),
+            best_strategy=("strategy", "first"),
+            best_score=("monitoring_readiness_score", "max"),
+            median_promotion_score=("promotion_score", "median"),
+            median_operability_score=("operability_score", "median"),
+            median_reentry_score=("reentry_score", "median"),
+        )
+        .sort_values("best_score", ascending=False)
+    )
+    st.markdown("**Readiness summary**")
+    _render_metric_dataframe(_display_metrics(label_summary), hide_index=True)
+
+    st.markdown("**Top paper-monitoring candidates**")
+    columns = [
+        "iteration",
+        "display_name",
+        "strategy",
+        "phase",
+        "family",
+        "monitoring_readiness_label",
+        "monitoring_readiness_score",
+        "promotion_decision",
+        "promotion_score",
+        "robustness_score",
+        "operability_label",
+        "operability_score",
+        "material_trade_days_per_year",
+        "mean_days_between_material_trades",
+        "max_single_day_turnover",
+        "risk_cycle_label",
+        "reentry_score",
+        "median_reentry_days",
+        "low_risk_day_rate",
+        "cagr",
+        "max_drawdown",
+        "calmar",
+        "walk_forward_positive_rate",
+        "left_tail_regime_return",
+    ]
+    _render_metric_dataframe(
+        _display_metrics(frame.head(30)[[column for column in columns if column in frame.columns]]),
+        hide_index=True,
+    )
+
+
 def _render_signal_inclusion(baseline_run: BaselineRun) -> None:
     st.subheader("Signal Inclusion Tests")
     signal_inclusion = baseline_run.signal_inclusion
@@ -1233,6 +1397,7 @@ def _render_research_lab(
     experiment_regimes: pd.DataFrame,
     experiment_walk_forward: pd.DataFrame,
     experiment_candidates: pd.DataFrame,
+    decision_sanity_impacts: pd.DataFrame,
 ) -> None:
     _render_experiment_monitor(
         bot_config,
@@ -1241,6 +1406,7 @@ def _render_research_lab(
         experiment_regimes,
         experiment_walk_forward,
         experiment_candidates,
+        decision_sanity_impacts,
     )
     st.divider()
     _render_signal_inclusion(baseline_run)

@@ -89,6 +89,8 @@ class ExperimentBatchRun:
     regime_summary: pd.DataFrame
     walk_forward_folds: pd.DataFrame
     walk_forward_summary: pd.DataFrame
+    operability_metrics: pd.DataFrame
+    transition_metrics: pd.DataFrame
     scorecard: pd.DataFrame
 
 
@@ -166,6 +168,8 @@ def run_experiment_iteration(
     regime_summary = summarize_regimes(regime_metrics)
     walk_forward_folds = walk_forward_holdout_metrics(results)
     walk_forward_summary = summarize_walk_forward(walk_forward_folds)
+    operability_metrics = _operability_metrics_frame(results)
+    transition_metrics = _transition_metrics_frame(candidates, results)
     benchmark_metrics = _benchmark_metrics(prices, config.execution)
     scorecard = build_experiment_scorecard(
         candidates,
@@ -174,6 +178,8 @@ def run_experiment_iteration(
         regime_summary=regime_summary,
         walk_forward_summary=walk_forward_summary,
         benchmark_metrics=benchmark_metrics,
+        operability_metrics=operability_metrics,
+        transition_metrics=transition_metrics,
     )
     _write_experiment_outputs(
         iteration,
@@ -185,6 +191,8 @@ def run_experiment_iteration(
         regime_summary,
         walk_forward_folds,
         walk_forward_summary,
+        operability_metrics,
+        transition_metrics,
         output_dir,
     )
 
@@ -199,6 +207,8 @@ def run_experiment_iteration(
         regime_summary=regime_summary,
         walk_forward_folds=walk_forward_folds,
         walk_forward_summary=walk_forward_summary,
+        operability_metrics=operability_metrics,
+        transition_metrics=transition_metrics,
         scorecard=scorecard,
     )
 
@@ -254,6 +264,10 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _sector_regime_rotation_candidates(iteration)
     if iteration == 77:
         return _decision_sanity_overlay_candidates()
+    if iteration == 78:
+        return _decision_sanity_tuning_candidates()
+    if iteration == 79:
+        return _paper_readiness_tuning_candidates()
     if 101 <= iteration <= 105:
         return _macro_reset_candidates(iteration)
     return None
@@ -6489,6 +6503,108 @@ def _decision_sanity_overlay_candidates() -> tuple[ExperimentCandidate, ...]:
     return tuple(candidates)
 
 
+def _decision_sanity_tuning_candidates() -> tuple[ExperimentCandidate, ...]:
+    selected = [
+        _operating_system_candidates()[0],
+        _operating_system_candidates()[4],
+        _operating_system_candidates()[7],
+    ]
+    names = ["ai_escape", "sector_rotation", "oil_policy"]
+    profiles = ["modest_cap", "confirmation_cap", "wide_cap", "strict_gate", "loose_gate"]
+    candidates: list[ExperimentCandidate] = []
+    for base, short_name in zip(selected, names, strict=True):
+        raw_name = f"i78_sanity_raw_{short_name}"
+        candidates.append(
+            _candidate(
+                name=raw_name,
+                role="sanity_tuning_control",
+                phase="decision_sanity_tuning",
+                family=base.family,
+                parent=base.name,
+                hypothesis=(
+                    "Raw scenario-sized benchmark for decision-sanity tuning. This keeps the "
+                    "original scenario/risk sizing so each gated variant has a clean control."
+                ),
+                scenario_sizing=base.scenario_sizing,
+                strategy=base.strategy,
+            )
+        )
+        for profile in profiles:
+            candidates.append(
+                _candidate(
+                    name=f"i78_sanity_{profile}_{short_name}",
+                    role="sanity_tuning_variant",
+                    phase="decision_sanity_tuning",
+                    family=base.family,
+                    parent=raw_name,
+                    hypothesis=(
+                        f"Decision-sanity tuning variant using the {profile} profile. It tests "
+                        "whether event/news-only de-risking should be capped until market "
+                        "confirmation arrives."
+                    ),
+                    scenario_sizing=base.scenario_sizing,
+                    decision_sanity=_decision_sanity_profile(profile),
+                    strategy=base.strategy,
+                )
+            )
+    return tuple(candidates)
+
+
+def _paper_readiness_tuning_candidates() -> tuple[ExperimentCandidate, ...]:
+    selected = [
+        _operating_system_candidates()[0],
+        _operating_system_candidates()[1],
+        _operating_system_candidates()[4],
+        _operating_system_candidates()[7],
+        _operating_system_candidates()[8],
+    ]
+    variants = [
+        (
+            "low_churn",
+            {
+                "skip_days": 21,
+                "cycle_min_rebalance_change": 0.08,
+                "cycle_max_step_change": 0.18,
+                "cycle_min_hold_days": 10,
+            },
+            "Lower churn variant: larger change threshold, slower execution steps, and a minimum hold period.",
+        ),
+        (
+            "metered_reentry",
+            {
+                "dip_starter_weight": 0.10,
+                "dip_step_weight": 0.12,
+                "dip_max_risk_weight": 0.65,
+                "dip_confirmation_days": 10,
+                "cycle_min_rebalance_change": 0.06,
+                "cycle_max_step_change": 0.20,
+                "cycle_min_hold_days": 8,
+            },
+            "Metered re-entry variant: buy back risk more slowly after drawdowns and require longer confirmation.",
+        ),
+    ]
+    candidates: list[ExperimentCandidate] = []
+    for base in selected:
+        for suffix, updates, hypothesis in variants:
+            candidates.append(
+                _candidate(
+                    name=f"i79_paper_ready_{_short_name(base.name)}_{suffix}",
+                    role="paper_readiness_candidate",
+                    phase="paper_readiness_tuning",
+                    family=base.family,
+                    parent=base.name,
+                    hypothesis=(
+                        f"{hypothesis} Parent: {base.name}. Optimizes for paper-monitorable "
+                        "trade cadence, re-entry behavior, and monitoring-readiness score."
+                    ),
+                    scenario_sizing=base.scenario_sizing,
+                    decision_sanity=base.decision_sanity,
+                    strategy=_clone_strategy(base.strategy, **updates),
+                )
+            )
+    return tuple(candidates)
+
+
 def _reference_portfolio_candidates() -> tuple[ExperimentCandidate, ...]:
     return (
         _fixed_allocation_candidate(
@@ -6925,6 +7041,8 @@ def _decision_sanity_profile(profile: str) -> DecisionSanityConfig:
         "confirmation_cap": DecisionSanityConfig(profile="confirmation_cap"),
         "modest_cap": DecisionSanityConfig(profile="modest_cap", max_defensive_add=0.15),
         "wide_cap": DecisionSanityConfig(profile="wide_cap", max_defensive_add=0.30),
+        "strict_gate": DecisionSanityConfig(profile="strict_gate", required_confirmation_breaks=3),
+        "loose_gate": DecisionSanityConfig(profile="loose_gate", required_confirmation_breaks=1),
     }
     if profile not in profiles:
         raise ValueError(f"Unknown decision-sanity profile: {profile}")
@@ -7299,6 +7417,8 @@ def build_experiment_scorecard(
     regime_summary: pd.DataFrame | None = None,
     walk_forward_summary: pd.DataFrame | None = None,
     benchmark_metrics: pd.DataFrame | None = None,
+    operability_metrics: pd.DataFrame | None = None,
+    transition_metrics: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     candidate_meta = pd.DataFrame(
         [
@@ -7333,9 +7453,13 @@ def build_experiment_scorecard(
     summary = _add_regime_context(summary, regime_summary)
     summary = _add_walk_forward_context(summary, walk_forward_summary)
     summary = _add_benchmark_context(summary, benchmark_metrics)
+    summary = _add_operability_context(summary, operability_metrics)
+    summary = _add_transition_context(summary, transition_metrics)
     summary["robustness_score"] = _robustness_score(summary)
     summary["promotion_score"] = _promotion_score(summary)
     summary["promotion_decision"] = summary.apply(_promotion_decision, axis=1)
+    summary["monitoring_readiness_score"] = _monitoring_readiness_score(summary)
+    summary["monitoring_readiness_label"] = summary.apply(_monitoring_readiness_label, axis=1)
     columns = [
         "display_name",
         "phase",
@@ -7346,6 +7470,8 @@ def build_experiment_scorecard(
         "decision_sanity",
         "promotion_decision",
         "promotion_score",
+        "monitoring_readiness_score",
+        "monitoring_readiness_label",
         "robustness_score",
         "cagr",
         "sharpe",
@@ -7359,6 +7485,18 @@ def build_experiment_scorecard(
         "calmar_excess_vs_spy",
         "calmar_excess_vs_qqq",
         "average_turnover",
+        "material_trade_days_per_year",
+        "mean_days_between_material_trades",
+        "median_material_turnover",
+        "max_single_day_turnover",
+        "operability_score",
+        "operability_label",
+        "average_risk_weight",
+        "low_risk_day_rate",
+        "median_reentry_days",
+        "reentry_cycles",
+        "reentry_score",
+        "risk_cycle_label",
         "worst_1y_cagr",
         "worst_3y_cagr",
         "worst_5y_cagr",
@@ -7737,6 +7875,189 @@ def _benchmark_metrics(prices: pd.DataFrame, execution: ExecutionConfig) -> pd.D
     return metrics_frame(calculated_metrics)
 
 
+def _operability_metrics_frame(results: dict[str, BacktestResult]) -> pd.DataFrame:
+    rows = []
+    for name, result in results.items():
+        turnover = result.turnover.dropna().astype(float).clip(lower=0.0)
+        if turnover.empty:
+            continue
+        years = max((turnover.index[-1] - turnover.index[0]).days / 365.25, 1 / 365.25)
+        material = turnover[turnover >= 0.05]
+        material_days_per_year = len(material) / years
+        mean_gap = _mean_event_gap_days(turnover.index, material.index)
+        max_turnover = float(turnover.max())
+        median_material = float(material.median()) if not material.empty else 0.0
+        average_turnover = float(turnover.mean())
+        operability_score = _operability_score(
+            material_days_per_year=material_days_per_year,
+            mean_days_between_material_trades=mean_gap,
+            max_single_day_turnover=max_turnover,
+            average_turnover=average_turnover,
+        )
+        rows.append(
+            {
+                "strategy": name,
+                "material_trade_days_per_year": material_days_per_year,
+                "mean_days_between_material_trades": mean_gap,
+                "median_material_turnover": median_material,
+                "max_single_day_turnover": max_turnover,
+                "operability_score": operability_score,
+                "operability_label": _operability_label(
+                    material_days_per_year=material_days_per_year,
+                    max_single_day_turnover=max_turnover,
+                    average_turnover=average_turnover,
+                ),
+            }
+        )
+    if not rows:
+        return pd.DataFrame()
+    return pd.DataFrame(rows).set_index("strategy")
+
+
+def _transition_metrics_frame(
+    candidates: tuple[ExperimentCandidate, ...],
+    results: dict[str, BacktestResult],
+) -> pd.DataFrame:
+    candidate_by_name = {candidate.name: candidate for candidate in candidates}
+    rows = []
+    for name, result in results.items():
+        weights = result.weights.sort_index().fillna(0.0)
+        if weights.empty:
+            continue
+        candidate = candidate_by_name.get(name)
+        defensive_ticker = candidate.strategy.defensive_ticker if candidate else None
+        risk_weight = _risk_weight_series(weights, defensive_ticker)
+        reentry_days = _reentry_days(risk_weight)
+        median_reentry_days = float(pd.Series(reentry_days).median()) if reentry_days else float("nan")
+        low_risk_day_rate = float((risk_weight <= 0.35).mean())
+        average_risk_weight = float(risk_weight.mean())
+        min_risk_weight = float(risk_weight.min())
+        latest_risk_weight = float(risk_weight.iloc[-1])
+        reentry_score = _reentry_score(
+            median_reentry_days=median_reentry_days,
+            reentry_cycles=len(reentry_days),
+            low_risk_day_rate=low_risk_day_rate,
+            min_risk_weight=min_risk_weight,
+        )
+        rows.append(
+            {
+                "strategy": name,
+                "average_risk_weight": average_risk_weight,
+                "min_risk_weight": min_risk_weight,
+                "latest_risk_weight": latest_risk_weight,
+                "low_risk_day_rate": low_risk_day_rate,
+                "median_reentry_days": median_reentry_days,
+                "reentry_cycles": len(reentry_days),
+                "reentry_score": reentry_score,
+                "risk_cycle_label": _risk_cycle_label(
+                    low_risk_day_rate=low_risk_day_rate,
+                    reentry_cycles=len(reentry_days),
+                    median_reentry_days=median_reentry_days,
+                    min_risk_weight=min_risk_weight,
+                ),
+            }
+        )
+    if not rows:
+        return pd.DataFrame()
+    return pd.DataFrame(rows).set_index("strategy")
+
+
+def _risk_weight_series(weights: pd.DataFrame, defensive_ticker: str | None) -> pd.Series:
+    if defensive_ticker and defensive_ticker in weights.columns:
+        return (1.0 - weights[defensive_ticker].astype(float)).clip(lower=0.0, upper=1.0)
+    return weights.sum(axis=1).astype(float).clip(lower=0.0, upper=1.0)
+
+
+def _mean_event_gap_days(index: pd.Index, event_index: pd.Index) -> float:
+    if len(event_index) <= 1:
+        return float("nan")
+    positions = pd.Series(range(len(index)), index=index).reindex(event_index).dropna().astype(int)
+    if len(positions) <= 1:
+        return float("nan")
+    return float(positions.diff().dropna().mean())
+
+
+def _reentry_days(risk_weight: pd.Series) -> list[int]:
+    values = risk_weight.reset_index(drop=True).astype(float)
+    days: list[int] = []
+    low_start: int | None = None
+    for position, value in enumerate(values):
+        if low_start is None and value <= 0.35:
+            low_start = position
+            continue
+        if low_start is not None and value >= 0.65:
+            days.append(position - low_start)
+            low_start = None
+    return days
+
+
+def _operability_score(
+    *,
+    material_days_per_year: float,
+    mean_days_between_material_trades: float,
+    max_single_day_turnover: float,
+    average_turnover: float,
+) -> float:
+    cadence_score = 1.0 - _clip01((material_days_per_year - 8.0) / 44.0)
+    gap_score = _clip01((mean_days_between_material_trades if mean_days_between_material_trades == mean_days_between_material_trades else 63.0) / 21.0)
+    max_trade_score = 1.0 - _clip01((max_single_day_turnover - 0.35) / 0.65)
+    average_turnover_score = 1.0 - _clip01((average_turnover - 0.04) / 0.14)
+    return float(
+        0.35 * cadence_score
+        + 0.25 * gap_score
+        + 0.25 * max_trade_score
+        + 0.15 * average_turnover_score
+    )
+
+
+def _operability_label(
+    *,
+    material_days_per_year: float,
+    max_single_day_turnover: float,
+    average_turnover: float,
+) -> str:
+    if material_days_per_year <= 18.0 and max_single_day_turnover <= 0.65 and average_turnover <= 0.08:
+        return "paper_operable"
+    if material_days_per_year <= 40.0 and max_single_day_turnover <= 0.90:
+        return "review_churn"
+    return "too_twitchy"
+
+
+def _reentry_score(
+    *,
+    median_reentry_days: float,
+    reentry_cycles: int,
+    low_risk_day_rate: float,
+    min_risk_weight: float,
+) -> float:
+    if reentry_cycles == 0:
+        return 0.45 if min_risk_weight > 0.55 else 0.25
+    speed_score = 1.0 - _clip01((median_reentry_days - 10.0) / 53.0)
+    cycle_score = _clip01(reentry_cycles / 4.0)
+    sticky_penalty = _clip01((low_risk_day_rate - 0.35) / 0.35)
+    return float((0.65 * speed_score + 0.35 * cycle_score) * (1.0 - 0.35 * sticky_penalty))
+
+
+def _risk_cycle_label(
+    *,
+    low_risk_day_rate: float,
+    reentry_cycles: int,
+    median_reentry_days: float,
+    min_risk_weight: float,
+) -> str:
+    if reentry_cycles and median_reentry_days == median_reentry_days and median_reentry_days <= 42:
+        return "risk_off_then_reenters"
+    if low_risk_day_rate >= 0.35 and not reentry_cycles:
+        return "risk_off_sticky"
+    if min_risk_weight > 0.55:
+        return "mostly_risk_on"
+    return "mixed_cycle"
+
+
+def _clip01(value: float) -> float:
+    return min(max(float(value), 0.0), 1.0)
+
+
 def _add_benchmark_context(
     summary: pd.DataFrame,
     benchmark_metrics: pd.DataFrame | None,
@@ -7793,6 +8114,38 @@ def _add_walk_forward_context(
     return _join_optional_context(summary, walk_forward_summary, columns)
 
 
+def _add_operability_context(
+    summary: pd.DataFrame,
+    operability_metrics: pd.DataFrame | None,
+) -> pd.DataFrame:
+    columns = [
+        "material_trade_days_per_year",
+        "mean_days_between_material_trades",
+        "median_material_turnover",
+        "max_single_day_turnover",
+        "operability_score",
+        "operability_label",
+    ]
+    return _join_optional_context(summary, operability_metrics, columns)
+
+
+def _add_transition_context(
+    summary: pd.DataFrame,
+    transition_metrics: pd.DataFrame | None,
+) -> pd.DataFrame:
+    columns = [
+        "average_risk_weight",
+        "min_risk_weight",
+        "latest_risk_weight",
+        "low_risk_day_rate",
+        "median_reentry_days",
+        "reentry_cycles",
+        "reentry_score",
+        "risk_cycle_label",
+    ]
+    return _join_optional_context(summary, transition_metrics, columns)
+
+
 def _join_optional_context(
     summary: pd.DataFrame,
     context: pd.DataFrame | None,
@@ -7837,6 +8190,30 @@ def _promotion_score(summary: pd.DataFrame) -> pd.Series:
         + _rank_column(summary, "worst_regime_return") * 0.06
         + _rank_column(summary, "left_tail_regime_return") * 0.04
     )
+
+
+def _monitoring_readiness_score(summary: pd.DataFrame) -> pd.Series:
+    return (
+        _rank_column(summary, "promotion_score") * 0.30
+        + _rank_column(summary, "robustness_score") * 0.22
+        + _rank_column(summary, "operability_score") * 0.18
+        + _rank_column(summary, "reentry_score") * 0.12
+        + _rank_column(summary, "walk_forward_positive_rate") * 0.10
+        + _rank_column(summary, "left_tail_regime_return") * 0.08
+    )
+
+
+def _monitoring_readiness_label(row: pd.Series) -> str:
+    score = _numeric_value(row.get("monitoring_readiness_score"))
+    operability = str(row.get("operability_label", ""))
+    risk_cycle = str(row.get("risk_cycle_label", ""))
+    if operability == "too_twitchy" or risk_cycle == "risk_off_sticky":
+        return "inspect_before_paper"
+    if score >= 0.78 and row.get("promotion_decision") == "promote_candidate":
+        return "paper_ready"
+    if score >= 0.60:
+        return "paper_candidate"
+    return "research_archive"
 
 
 def _rank_column(summary: pd.DataFrame, column: str) -> pd.Series:
@@ -7884,6 +8261,8 @@ def _write_experiment_outputs(
     regime_summary: pd.DataFrame,
     walk_forward_folds: pd.DataFrame,
     walk_forward_summary: pd.DataFrame,
+    operability_metrics: pd.DataFrame,
+    transition_metrics: pd.DataFrame,
     output_dir: str | Path,
 ) -> None:
     output = Path(output_dir) / f"iteration_{iteration:02d}"
@@ -7896,9 +8275,15 @@ def _write_experiment_outputs(
     regime_summary.to_csv(output / "regime_summary.csv")
     walk_forward_folds.to_csv(output / "walk_forward_folds.csv", index=False)
     walk_forward_summary.to_csv(output / "walk_forward_summary.csv")
+    operability_metrics.to_csv(output / "operability_metrics.csv")
+    transition_metrics.to_csv(output / "transition_metrics.csv")
     sanity_impact = _decision_sanity_impact_frame(scorecard)
     if not sanity_impact.empty:
         sanity_impact.to_csv(output / "decision_sanity_impact.csv", index=False)
+        _decision_sanity_assessment_frame(sanity_impact).to_csv(
+            output / "decision_sanity_assessment.csv",
+            index=False,
+        )
     _write_markdown_summary(iteration, scorecard, output / "summary.md")
 
 
@@ -7946,6 +8331,68 @@ def _decision_sanity_impact_frame(scorecard: pd.DataFrame) -> pd.DataFrame:
             row[f"delta_{metric}"] = capped_value - raw_value
         rows.append(row)
     return pd.DataFrame(rows)
+
+
+def _decision_sanity_assessment_frame(impact: pd.DataFrame) -> pd.DataFrame:
+    if impact.empty:
+        return pd.DataFrame()
+    frame = impact.copy()
+    for column in [
+        "delta_promotion_score",
+        "delta_cagr",
+        "delta_max_drawdown",
+        "delta_calmar",
+        "delta_average_turnover",
+        "delta_walk_forward_positive_rate",
+        "delta_left_tail_regime_return",
+    ]:
+        if column not in frame:
+            frame[column] = float("nan")
+        frame[column] = pd.to_numeric(frame[column], errors="coerce")
+
+    assessment = (
+        frame.groupby("decision_sanity", as_index=False, dropna=False)
+        .agg(
+            pairs=("capped_strategy", "count"),
+            mean_delta_promotion_score=("delta_promotion_score", "mean"),
+            mean_delta_cagr=("delta_cagr", "mean"),
+            mean_delta_max_drawdown=("delta_max_drawdown", "mean"),
+            mean_delta_calmar=("delta_calmar", "mean"),
+            mean_delta_turnover=("delta_average_turnover", "mean"),
+            mean_delta_walk_forward_positive_rate=("delta_walk_forward_positive_rate", "mean"),
+            mean_delta_left_tail_regime_return=("delta_left_tail_regime_return", "mean"),
+            promotion_win_rate=("delta_promotion_score", lambda values: float((values > 0).mean())),
+            drawdown_win_rate=("delta_max_drawdown", lambda values: float((values > 0).mean())),
+            calmar_win_rate=("delta_calmar", lambda values: float((values > 0).mean())),
+        )
+        .sort_values(
+            ["mean_delta_promotion_score", "mean_delta_max_drawdown"],
+            ascending=False,
+        )
+    )
+    assessment["adoption_read"] = assessment.apply(_decision_sanity_adoption_read, axis=1)
+    return assessment
+
+
+def _decision_sanity_adoption_read(row: pd.Series) -> str:
+    promotion_delta = _numeric_value(row.get("mean_delta_promotion_score"))
+    drawdown_win_rate = _numeric_value(row.get("drawdown_win_rate"))
+    calmar_delta = _numeric_value(row.get("mean_delta_calmar"))
+    if promotion_delta > 0.0 and drawdown_win_rate >= 0.50 and calmar_delta >= 0.0:
+        return "promote_for_monitoring"
+    if promotion_delta > -0.03 and drawdown_win_rate >= 0.50:
+        return "mixed_keep_testing"
+    return "tune_or_reject"
+
+
+def _numeric_value(value: object) -> float:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return 0.0
+    if numeric != numeric:
+        return 0.0
+    return numeric
 
 
 def _write_candidate_manifest(

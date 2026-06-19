@@ -108,6 +108,58 @@ def load_experiment_walk_forward(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> 
     return pd.concat(frames, ignore_index=True)
 
 
+def load_decision_sanity_impacts(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd.DataFrame:
+    frames = []
+    for iteration, frame in _load_iteration_csvs(root, "decision_sanity_impact.csv"):
+        frame.insert(0, "iteration", iteration)
+        frames.append(frame)
+    if not frames:
+        return pd.DataFrame()
+    return pd.concat(frames, ignore_index=True)
+
+
+def summarize_decision_sanity_impacts(impacts: pd.DataFrame) -> pd.DataFrame:
+    if impacts.empty:
+        return pd.DataFrame()
+
+    frame = impacts.copy()
+    for column in [
+        "delta_promotion_score",
+        "delta_cagr",
+        "delta_max_drawdown",
+        "delta_calmar",
+        "delta_average_turnover",
+        "delta_walk_forward_positive_rate",
+        "delta_left_tail_regime_return",
+    ]:
+        if column not in frame:
+            frame[column] = float("nan")
+        frame[column] = pd.to_numeric(frame[column], errors="coerce")
+
+    grouped = (
+        frame.groupby("decision_sanity", as_index=False, dropna=False)
+        .agg(
+            pairs=("capped_strategy", "count"),
+            mean_delta_promotion_score=("delta_promotion_score", "mean"),
+            mean_delta_cagr=("delta_cagr", "mean"),
+            mean_delta_max_drawdown=("delta_max_drawdown", "mean"),
+            mean_delta_calmar=("delta_calmar", "mean"),
+            mean_delta_turnover=("delta_average_turnover", "mean"),
+            mean_delta_walk_forward_positive_rate=("delta_walk_forward_positive_rate", "mean"),
+            mean_delta_left_tail_regime_return=("delta_left_tail_regime_return", "mean"),
+            promotion_win_rate=("delta_promotion_score", lambda values: float((values > 0).mean())),
+            drawdown_win_rate=("delta_max_drawdown", lambda values: float((values > 0).mean())),
+            calmar_win_rate=("delta_calmar", lambda values: float((values > 0).mean())),
+        )
+        .sort_values(
+            ["mean_delta_promotion_score", "mean_delta_max_drawdown"],
+            ascending=False,
+        )
+    )
+    grouped["adoption_read"] = grouped.apply(_decision_sanity_adoption_read, axis=1)
+    return grouped
+
+
 def _ensure_display_name(frame: pd.DataFrame) -> pd.DataFrame:
     output = frame.copy()
     if "display_name" not in output:
@@ -123,6 +175,27 @@ def _ensure_display_name(frame: pd.DataFrame) -> pd.DataFrame:
             axis=1,
         )
     return output
+
+
+def _decision_sanity_adoption_read(row: pd.Series) -> str:
+    promotion_delta = _safe_float(row.get("mean_delta_promotion_score"))
+    drawdown_win_rate = _safe_float(row.get("drawdown_win_rate"))
+    calmar_delta = _safe_float(row.get("mean_delta_calmar"))
+    if promotion_delta > 0.0 and drawdown_win_rate >= 0.50 and calmar_delta >= 0.0:
+        return "promote_for_monitoring"
+    if promotion_delta > -0.03 and drawdown_win_rate >= 0.50:
+        return "mixed_keep_testing"
+    return "tune_or_reject"
+
+
+def _safe_float(value: object) -> float:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return 0.0
+    if numeric != numeric:
+        return 0.0
+    return numeric
 
 
 def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd.DataFrame:
