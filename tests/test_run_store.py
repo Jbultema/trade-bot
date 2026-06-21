@@ -60,6 +60,52 @@ def test_run_store_tracks_snapshot_jobs(tmp_path: Path) -> None:
     assert jobs.iloc[0]["run_id"] == "run-1"
 
 
+def test_run_store_starts_daily_update_job(tmp_path: Path, monkeypatch: object) -> None:
+    calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
+
+    class DummyPopen:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            calls.append((args, kwargs))
+
+    monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", DummyPopen)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    job = store.start_daily_update_job(
+        config_path=tmp_path / "baseline.yaml",
+        events_path=tmp_path / "events.yaml",
+        macro_path=tmp_path / "macro.yaml",
+        news_path=tmp_path / "news.yaml",
+        report_path=tmp_path / "report.html",
+        experiment_dir=tmp_path / "experiments",
+        journal_path=tmp_path / "journal.sqlite",
+        refresh_data=True,
+        refresh_macro=False,
+        refresh_news=True,
+        migrate_warehouse=True,
+        paper_valuation=False,
+    )
+    jobs = store.list_jobs()
+
+    assert calls
+    command = list(calls[0][0][0])
+    assert "run-daily-update" in command
+    assert "--refresh-data" in command
+    assert "--cached-macro" in command
+    assert "--refresh-news" in command
+    assert "--migrate-warehouse" in command
+    assert "--skip-paper-valuation" in command
+    assert "--job-id" in command
+    assert job.job_id in command
+    assert Path(job.log_path).exists()
+    assert jobs.iloc[0]["job_id"] == job.job_id
+    assert jobs.iloc[0]["status"] == "queued"
+    assert "run-daily-update" in str(jobs.iloc[0]["command"])
+
+
 def _config_files(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
     paths = (
         tmp_path / "baseline.yaml",

@@ -19,6 +19,7 @@ from trade_bot.DEFAULT import (
     DEFAULT_MONITORING_TOP_N,
     DEFAULT_NEWS_PATH,
     DEFAULT_REPORT_PATH,
+    DEFAULT_RESET_EXPERIMENTS_DIR,
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
@@ -344,6 +345,113 @@ def build_snapshot_cmd(
         raise
 
     _print_snapshot_manifest(manifest)
+
+
+@app.command("run-daily-update")
+def run_daily_update_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    events: Annotated[Path, typer.Option("--events")] = DEFAULT_EVENTS_PATH,
+    macro: Annotated[Path, typer.Option("--macro")] = DEFAULT_MACRO_PATH,
+    news: Annotated[Path, typer.Option("--news")] = DEFAULT_NEWS_PATH,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data/--cached-data")] = True,
+    refresh_macro: Annotated[bool, typer.Option("--refresh-macro/--cached-macro")] = True,
+    refresh_news: Annotated[bool, typer.Option("--refresh-news/--cached-news")] = True,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    report_path: Annotated[Path, typer.Option("--report-path")] = DEFAULT_REPORT_PATH,
+    experiment_dir: Annotated[Path, typer.Option("--experiment-dir")] = DEFAULT_EXPERIMENTS_DIR,
+    journal: Annotated[Path, typer.Option("--journal")] = DEFAULT_JOURNAL_PATH,
+    migrate_warehouse: Annotated[
+        bool,
+        typer.Option("--migrate-warehouse/--skip-warehouse"),
+    ] = True,
+    paper_valuation: Annotated[
+        bool,
+        typer.Option("--paper-valuation/--skip-paper-valuation"),
+    ] = True,
+    job_id: Annotated[str | None, typer.Option("--job-id")] = None,
+) -> None:
+    """Run the full daily operating refresh for the dashboard."""
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    if job_id:
+        run_store.mark_job_running(job_id)
+
+    warehouse = TradingWarehouse(store)
+    migration_results: list[WarehouseMigrationResult] = []
+    registry_rows = 0
+    valuation_rows = 0
+    effective_experiment_dir = _active_experiment_dir(experiment_dir)
+    try:
+        bot_config = load_config(config)
+        baseline_run = run_configured_baselines(
+            bot_config,
+            refresh_data=refresh_data,
+            refresh_macro=refresh_macro,
+            refresh_news=refresh_news,
+            event_config_path=events,
+            macro_config_path=macro,
+            news_config_path=news,
+        )
+        manifest = run_store.save_snapshot(
+            baseline_run,
+            config_path=config,
+            events_path=events,
+            macro_path=macro,
+            news_path=news,
+            refresh_data=refresh_data,
+            refresh_macro=refresh_macro,
+            refresh_news=refresh_news,
+        )
+        write_baseline_report(
+            baseline_run.results,
+            baseline_run.metrics,
+            baseline_run.window_summary,
+            baseline_run.calendar_returns,
+            baseline_run.current_state,
+            baseline_run.event_risk,
+            baseline_run.news_monitor,
+            baseline_run.signal_inclusion,
+            baseline_run.trade_decision,
+            report_path,
+        )
+        registry_rows = warehouse.refresh_strategy_registry_from_snapshot(
+            baseline_run,
+            run_id=manifest.run_id,
+            market_date=manifest.market_date,
+        )
+        if migrate_warehouse:
+            migration_results.extend(
+                warehouse.migrate_experiment_outputs(effective_experiment_dir)
+            )
+            migration_results.extend(warehouse.migrate_journal_sqlite(journal))
+        if paper_valuation:
+            valuation_rows = warehouse.save_daily_valuations_from_snapshot(
+                baseline_run,
+                market_date=manifest.market_date,
+                execution=bot_config.execution,
+            )
+        if job_id:
+            run_store.mark_job_completed(job_id, manifest.run_id)
+    except Exception as error:
+        if job_id:
+            run_store.mark_job_failed(job_id, str(error))
+        raise
+
+    _print_snapshot_manifest(manifest)
+    _print_daily_update_summary(
+        manifest=manifest,
+        report_path=report_path,
+        experiment_dir=effective_experiment_dir,
+        registry_rows=registry_rows,
+        migration_results=migration_results,
+        valuation_rows=valuation_rows,
+        refresh_data=refresh_data,
+        refresh_macro=refresh_macro,
+        refresh_news=refresh_news,
+    )
+    if migration_results:
+        _print_migration_table("Daily Warehouse Refresh", migration_results)
 
 
 @app.command("list-snapshots")
@@ -850,6 +958,62 @@ def _print_snapshot_manifest(manifest: SnapshotManifest) -> None:
         manifest.artifact_path,
     )
     console.print(table)
+
+
+def _print_daily_update_summary(
+    *,
+    manifest: SnapshotManifest,
+    report_path: Path,
+    experiment_dir: Path,
+    registry_rows: int,
+    migration_results: list[WarehouseMigrationResult],
+    valuation_rows: int,
+    refresh_data: bool,
+    refresh_macro: bool,
+    refresh_news: bool,
+) -> None:
+    migrated_rows = sum(result.rows for result in migration_results)
+    summary = Table(title="Daily Update Stack")
+    summary.add_column("step")
+    summary.add_column("status")
+    summary.add_column("detail")
+    summary.add_row(
+        "Market/macro/news refresh",
+        "complete",
+        (
+            f"prices={'refreshed' if refresh_data else 'cached'}; "
+            f"macro={'refreshed' if refresh_macro else 'cached'}; "
+            f"news={'refreshed' if refresh_news else 'cached'}"
+        ),
+    )
+    summary.add_row(
+        "Snapshot",
+        "complete",
+        f"{manifest.run_id} | market date {manifest.market_date} | {manifest.risk_status}",
+    )
+    summary.add_row("Report", "complete", str(report_path))
+    summary.add_row(
+        "Strategy registry",
+        "complete",
+        f"{registry_rows:,} snapshot strategies refreshed",
+    )
+    summary.add_row(
+        "Warehouse migration",
+        "complete",
+        f"{migrated_rows:,} rows from {experiment_dir} and journal tables",
+    )
+    summary.add_row(
+        "Paper valuations",
+        "complete",
+        f"{valuation_rows:,} rows written for active monitoring windows",
+    )
+    console.print(summary)
+
+
+def _active_experiment_dir(experiment_dir: Path) -> Path:
+    if experiment_dir == DEFAULT_EXPERIMENTS_DIR and DEFAULT_RESET_EXPERIMENTS_DIR.exists():
+        return DEFAULT_RESET_EXPERIMENTS_DIR
+    return experiment_dir
 
 
 if __name__ == "__main__":

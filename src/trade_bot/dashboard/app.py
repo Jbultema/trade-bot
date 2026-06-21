@@ -24,10 +24,12 @@ from trade_bot.dashboard.styles import _install_dashboard_styles
 from trade_bot.DEFAULT import (
     DEFAULT_CONFIG_PATH,
     DEFAULT_EVENTS_PATH,
+    DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_FORWARD_TEST_ACCOUNT,
     DEFAULT_FORWARD_TEST_STRATEGY,
     DEFAULT_MACRO_PATH,
     DEFAULT_NEWS_PATH,
+    DEFAULT_REPORT_PATH,
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
@@ -101,31 +103,50 @@ with st.sidebar.expander("Local paths", expanded=False):
     artifact_dir = Path(st.text_input("Snapshot artifacts", str(DEFAULT_RUN_STORE_ARTIFACT_DIR)))
     job_log_dir = Path(st.text_input("Snapshot job logs", str(DEFAULT_RUN_STORE_JOB_LOG_DIR)))
 
-with st.sidebar.expander("Refresh options", expanded=False):
-    refresh_data = st.checkbox("Refresh market data", value=False)
-    refresh_macro = st.checkbox("Refresh macro data", value=False)
-    refresh_news = st.checkbox("Refresh news", value=False)
-st.sidebar.caption(
-    "Fast mode reads the latest precomputed snapshot. Live mode runs the full pipeline."
-)
-bot_config = load_config(config_path)
-
 run_store = RunStore(run_store_path, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
-if st.sidebar.button("Start Snapshot Refresh"):
-    job = run_store.start_snapshot_build_job(
+st.sidebar.caption(
+    "Fast mode reads the latest precomputed snapshot. Live mode runs the pipeline in-session."
+)
+if st.sidebar.button("Run Full Daily Update", type="primary"):
+    job = run_store.start_daily_update_job(
         config_path=config_path,
         events_path=events_path,
         macro_path=macro_path,
         news_path=news_path,
-        refresh_data=refresh_data,
-        refresh_macro=refresh_macro,
-        refresh_news=refresh_news,
+        report_path=DEFAULT_REPORT_PATH,
+        experiment_dir=DEFAULT_EXPERIMENTS_DIR,
+        journal_path=journal_path,
+        refresh_data=True,
+        refresh_macro=True,
+        refresh_news=True,
+        migrate_warehouse=True,
+        paper_valuation=True,
     )
-    st.sidebar.success(f"Queued snapshot job: {job.job_id}")
+    st.cache_data.clear()
+    st.sidebar.success(f"Queued daily update job: {job.job_id}")
+    st.sidebar.caption("Refresh this page after the job completes to load the new snapshot.")
+
+with st.sidebar.expander("Advanced refresh options", expanded=False):
+    refresh_data = st.checkbox("Refresh market data", value=False)
+    refresh_macro = st.checkbox("Refresh macro data", value=False)
+    refresh_news = st.checkbox("Refresh news", value=False)
+    if st.button("Build Snapshot Only"):
+        job = run_store.start_snapshot_build_job(
+            config_path=config_path,
+            events_path=events_path,
+            macro_path=macro_path,
+            news_path=news_path,
+            refresh_data=refresh_data,
+            refresh_macro=refresh_macro,
+            refresh_news=refresh_news,
+        )
+        st.cache_data.clear()
+        st.success(f"Queued snapshot job: {job.job_id}")
+bot_config = load_config(config_path)
 
 snapshot_jobs = load_snapshot_jobs_frame(str(run_store_path), str(artifact_dir), str(job_log_dir))
 if not snapshot_jobs.empty:
-    with st.sidebar.expander("Snapshot jobs", expanded=False):
+    with st.sidebar.expander("Update jobs", expanded=False):
         job_columns = [
             "created_at_utc",
             "status",

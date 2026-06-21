@@ -17,8 +17,11 @@ import pandas as pd
 from trade_bot.DEFAULT import (
     DEFAULT_CONFIG_PATH,
     DEFAULT_EVENTS_PATH,
+    DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_JOURNAL_PATH,
     DEFAULT_MACRO_PATH,
     DEFAULT_NEWS_PATH,
+    DEFAULT_REPORT_PATH,
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
@@ -288,6 +291,90 @@ class RunStore:
         if refresh_news:
             command.append("--refresh-news")
 
+        job = self.create_job(command, log_path)
+        command.extend(["--job-id", job.job_id])
+        self._upsert_job(
+            SnapshotJob(
+                job_id=job.job_id,
+                created_at_utc=job.created_at_utc,
+                started_at_utc=job.started_at_utc,
+                completed_at_utc=job.completed_at_utc,
+                status=job.status,
+                command=" ".join(command),
+                log_path=job.log_path,
+                run_id=job.run_id,
+                error_message=job.error_message,
+            )
+        )
+
+        env = os.environ.copy()
+        src_path = str(Path.cwd() / "src")
+        env["PYTHONPATH"] = (
+            f"{src_path}{os.pathsep}{env['PYTHONPATH']}" if env.get("PYTHONPATH") else src_path
+        )
+        with Path(job.log_path).open("ab") as log_handle:
+            subprocess.Popen(  # noqa: S603
+                command,
+                cwd=Path.cwd(),
+                env=env,
+                stdout=log_handle,
+                stderr=subprocess.STDOUT,
+                close_fds=True,
+        )
+        return job
+
+    def start_daily_update_job(
+        self,
+        *,
+        config_path: str | Path = DEFAULT_CONFIG_PATH,
+        events_path: str | Path = DEFAULT_EVENTS_PATH,
+        macro_path: str | Path = DEFAULT_MACRO_PATH,
+        news_path: str | Path = DEFAULT_NEWS_PATH,
+        report_path: str | Path = DEFAULT_REPORT_PATH,
+        experiment_dir: str | Path = DEFAULT_EXPERIMENTS_DIR,
+        journal_path: str | Path = DEFAULT_JOURNAL_PATH,
+        refresh_data: bool = True,
+        refresh_macro: bool = True,
+        refresh_news: bool = True,
+        migrate_warehouse: bool = True,
+        paper_valuation: bool = True,
+    ) -> SnapshotJob:
+        log_path = self.job_log_dir / f"{_new_job_id()}.log"
+        command = [
+            sys.executable,
+            "-m",
+            "trade_bot.cli",
+            "run-daily-update",
+            "--config",
+            str(config_path),
+            "--events",
+            str(events_path),
+            "--macro",
+            str(macro_path),
+            "--news",
+            str(news_path),
+            "--store",
+            str(self.db_path),
+            "--artifact-dir",
+            str(self.artifact_dir),
+            "--job-log-dir",
+            str(self.job_log_dir),
+            "--report-path",
+            str(report_path),
+            "--experiment-dir",
+            str(experiment_dir),
+            "--journal",
+            str(journal_path),
+        ]
+        command.append("--refresh-data" if refresh_data else "--cached-data")
+        command.append("--refresh-macro" if refresh_macro else "--cached-macro")
+        command.append("--refresh-news" if refresh_news else "--cached-news")
+        command.append("--migrate-warehouse" if migrate_warehouse else "--skip-warehouse")
+        command.append("--paper-valuation" if paper_valuation else "--skip-paper-valuation")
+
+        return self._start_background_job(command, log_path)
+
+    def _start_background_job(self, command: list[str], log_path: Path) -> SnapshotJob:
         job = self.create_job(command, log_path)
         command.extend(["--job-id", job.job_id])
         self._upsert_job(

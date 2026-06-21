@@ -1,6 +1,6 @@
 # Backend Agent Guide
 
-This document is the canonical backend onboarding guide for a future AI agent or engineer working in this repository. It explains what this project is trying to accomplish, why the system is structured this way, where the major code lives, and what standards should govern future changes.
+This document is the canonical backend onboarding guide for a future engineer or AI agent working in this repository. It explains what this project is trying to accomplish, why the system is structured this way, where the major code lives, and what standards should govern future changes.
 
 This guide is intentionally separate from `README.md`. The README is for running the app. This file is for understanding and extending the backend without losing the project intent.
 
@@ -26,7 +26,6 @@ Hard boundaries:
 - Long-only by default. Do not introduce shorts, leverage, options, futures, or derivatives unless the project owner explicitly asks for a separate research track.
 - Human-reviewed execution. The system can suggest trades, sizing ranges, price bands, and rationale, but should not place orders.
 - At-least-about-one-day trading horizon. The system can refresh intraday data or news, but it should not require ultra-low latency or frequent micro-adjustments.
-- Work-system separation. Do not depend on work repositories, work data, or work credentials. Optional private libraries can be wrapped behind adapters, but the core project must run without them.
 - No investment advice claims. The app is a research and paper-monitoring system; recommendations are decision-support outputs requiring human review.
 
 Soft design principles:
@@ -90,8 +89,17 @@ poetry install --sync
 poetry run trade-bot fetch-prices
 poetry run trade-bot run-baselines
 poetry run trade-bot build-snapshot
+poetry run trade-bot run-daily-update
 poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
 ```
+
+`run-daily-update` is the canonical one-command operating refresh. It refreshes market data, macro data, and news by default; builds and stores a fresh snapshot; writes the baseline report; refreshes the local strategy registry and warehouse tables; migrates experiment/journal outputs; and writes daily paper-monitoring valuations for active monitoring windows. Use cached inputs only when intentionally doing a faster local check:
+
+```bash
+poetry run trade-bot run-daily-update --cached-data --cached-macro --cached-news
+```
+
+The dashboard exposes the same workflow as the primary sidebar button labeled `Run Full Daily Update`. That button queues the job in the local run store so the app can keep serving the latest completed snapshot while the refresh runs in the background.
 
 Other useful commands:
 
