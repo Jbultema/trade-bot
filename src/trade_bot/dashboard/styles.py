@@ -247,6 +247,10 @@ def _install_dashboard_styles() -> None:
             --tb-success-border: #2f855a;
             --tb-shadow: 0 12px 28px rgba(15, 23, 42, 0.08);
             --tb-shadow-soft: 0 6px 18px rgba(15, 23, 42, 0.06);
+            --tb-sidebar-bg: #f8fafc;
+            --tb-sidebar-panel: #ffffff;
+            --tb-sidebar-text: #111827;
+            --tb-sidebar-muted: #64748b;
         }
         @media (prefers-color-scheme: dark) {
             .stApp {
@@ -270,6 +274,10 @@ def _install_dashboard_styles() -> None:
                 --tb-success-border: #22c55e;
                 --tb-shadow: 0 14px 30px rgba(0, 0, 0, 0.30);
                 --tb-shadow-soft: 0 8px 22px rgba(0, 0, 0, 0.22);
+                --tb-sidebar-bg: #0f1117;
+                --tb-sidebar-panel: #171b22;
+                --tb-sidebar-text: #f8fafc;
+                --tb-sidebar-muted: #cbd5e1;
             }
         }
         a {
@@ -279,14 +287,71 @@ def _install_dashboard_styles() -> None:
         }
         section[data-testid="stSidebar"] {
             border-right: 1px solid var(--tb-card-border);
-            background: color-mix(in srgb, var(--secondary-background-color, #f8fafc) 88%, var(--background-color, #ffffff));
+            background: var(--tb-sidebar-bg) !important;
+            color: var(--tb-sidebar-text) !important;
         }
         section[data-testid="stSidebar"] div[data-testid="stSidebarContent"] {
-            padding-top: 1.05rem;
+            padding: 1.05rem 0.85rem 1.4rem;
         }
         section[data-testid="stSidebar"] label,
-        section[data-testid="stSidebar"] p {
-            color: var(--tb-card-text);
+        section[data-testid="stSidebar"] p,
+        section[data-testid="stSidebar"] span,
+        section[data-testid="stSidebar"] div {
+            color: var(--tb-sidebar-text);
+        }
+        .sidebar-header {
+            padding: 0.7rem 0.75rem 0.85rem;
+            margin: 0 0 0.85rem;
+            border: 1px solid var(--tb-card-border);
+            border-left: 5px solid var(--tb-accent);
+            border-radius: 8px;
+            background: var(--tb-sidebar-panel);
+        }
+        .sidebar-kicker {
+            color: var(--tb-accent) !important;
+            font-size: 0.70rem;
+            font-weight: 850;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+        .sidebar-title {
+            margin-top: 0.18rem;
+            color: var(--tb-sidebar-text) !important;
+            font-size: 1.05rem;
+            font-weight: 780;
+            line-height: 1.2;
+        }
+        section[data-testid="stSidebar"] div[data-testid="stTextInput"] {
+            margin-bottom: 0.48rem;
+        }
+        section[data-testid="stSidebar"] div[data-baseweb="input"] {
+            background: var(--tb-sidebar-panel) !important;
+            border: 1px solid var(--tb-card-border) !important;
+            min-height: 38px;
+        }
+        section[data-testid="stSidebar"] input {
+            color: var(--tb-sidebar-text) !important;
+            background: transparent !important;
+            font-size: 0.82rem !important;
+        }
+        section[data-testid="stSidebar"] div[data-testid="stExpander"] {
+            background: var(--tb-sidebar-panel);
+            border-color: var(--tb-card-border);
+            margin-bottom: 0.75rem;
+        }
+        section[data-testid="stSidebar"] div[role="radiogroup"] label,
+        section[data-testid="stSidebar"] div[data-testid="stCheckbox"] label {
+            background: transparent !important;
+            color: var(--tb-sidebar-text) !important;
+        }
+        section[data-testid="stSidebar"] div[data-testid="stCaptionContainer"] p,
+        section[data-testid="stSidebar"] small {
+            color: var(--tb-sidebar-muted) !important;
+        }
+        section[data-testid="stSidebar"] .stButton > button {
+            width: 100%;
+            background: var(--tb-sidebar-panel) !important;
+            color: var(--tb-sidebar-text) !important;
         }
         div[data-baseweb="input"],
         div[data-baseweb="select"] > div,

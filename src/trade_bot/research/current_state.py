@@ -33,6 +33,7 @@ from trade_bot.research.positioning_crowding import (
     build_positioning_crowding_table,
     build_positioning_summary,
 )
+from trade_bot.research.regime_instability import build_regime_instability_index
 from trade_bot.research.regime_pulse import (
     build_growth_inflation_map,
     build_regime_pulse_asset_table,
@@ -64,6 +65,8 @@ class CurrentStateRun:
     growth_inflation_map: pd.DataFrame = field(default_factory=pd.DataFrame)
     positioning_crowding: pd.DataFrame = field(default_factory=pd.DataFrame)
     positioning_summary: pd.DataFrame = field(default_factory=pd.DataFrame)
+    regime_instability: pd.DataFrame = field(default_factory=pd.DataFrame)
+    regime_instability_components: pd.DataFrame = field(default_factory=pd.DataFrame)
 
 
 @dataclass(frozen=True)
@@ -95,6 +98,9 @@ def build_current_state(
     macro_category_summary = build_macro_category_summary(macro_signals)
     positioning_crowding = build_positioning_crowding_table(clean_prices)
     positioning_summary = build_positioning_summary(positioning_crowding)
+    regime_instability, regime_instability_components = build_regime_instability_index(
+        clean_prices
+    )
     regime_pulse_cycles = build_regime_pulse_cycles(macro_signals, positioning_summary)
     regime_pulse_assets = build_regime_pulse_asset_table(regime_pulse_cycles)
     growth_inflation_map = build_growth_inflation_map(regime_pulse_cycles)
@@ -137,6 +143,8 @@ def build_current_state(
         growth_inflation_map=growth_inflation_map,
         positioning_crowding=positioning_crowding,
         positioning_summary=positioning_summary,
+        regime_instability=regime_instability,
+        regime_instability_components=regime_instability_components,
         signal_coverage=signal_coverage,
         data_quality=data_quality,
     )

@@ -259,6 +259,12 @@ def _optional_percent_table(frame: pd.DataFrame | None) -> str:
 def _current_state_html(current_state: CurrentStateRun | None) -> str:
     if current_state is None:
         return "<p>No current-state diagnostics available.</p>"
+    regime_instability = getattr(current_state, "regime_instability", pd.DataFrame())
+    regime_instability_components = getattr(
+        current_state,
+        "regime_instability_components",
+        pd.DataFrame(),
+    )
     return "\n".join(
         [
             f"<p><strong>Date:</strong> {current_state.market_date}</p>",
@@ -281,6 +287,12 @@ def _current_state_html(current_state: CurrentStateRun | None) -> str:
             current_state.growth_inflation_map.to_html(index=False, float_format=lambda x: f"{x:,.4f}"),
             "<h3>Positioning And Crowding Summary</h3>",
             current_state.positioning_summary.to_html(
+                index=False, float_format=lambda x: f"{x:,.4f}"
+            ),
+            "<h3>Regime Instability Index</h3>",
+            regime_instability.to_html(index=False, float_format=lambda x: f"{x:,.4f}"),
+            "<h3>Regime Instability Components</h3>",
+            regime_instability_components.to_html(
                 index=False, float_format=lambda x: f"{x:,.4f}"
             ),
             "<h3>Macro Category Summary</h3>",

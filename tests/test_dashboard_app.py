@@ -131,6 +131,7 @@ def test_macro_minute_report_summarizes_market_news_and_scenarios() -> None:
         "Change Since Prior",
         "News / Events",
         "Regime Pulse",
+        "Instability",
         "Scenario Map",
         "Risk Budget / Action",
         "Decision Sanity",

@@ -150,6 +150,8 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "min_risk_weight",
         "latest_risk_weight",
         "low_risk_day_rate",
+        "spy_ytd_large_move_share",
+        "latest_percentile",
     ]
     for column in percent_columns:
         if column in display:
@@ -250,6 +252,9 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "average_correlation_long",
         "correlation_regime_shift",
         "scenario_risk_multiplier",
+        "regime_instability_score",
+        "component_score",
+        "weight",
     ]:
         if column in display:
             display[column] = display[column].map(_format_decimal)

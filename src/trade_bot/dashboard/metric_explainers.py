@@ -215,6 +215,20 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
         aliases=("risk_score", "mean_risk_score"),
     ),
     MetricExplainer(
+        metric="Regime Instability Score",
+        category="Current State",
+        plain_english="Watch-only estimate of whether market internals look statistically unstable.",
+        calculation="Weighted blend of SPY +/-1% day share, realized volatility, cross-sectional dispersion, VIXY pressure, correlation shift, breadth/concentration, and credit stress.",
+        how_to_read="Higher means the market may be in a transition regime even if headline trend has not broken.",
+        caution="This is not currently allowed to change trade sizing; it needs ablation testing before becoming an allocation signal.",
+        aliases=(
+            "regime_instability_score",
+            "regime_instability_state",
+            "component_score",
+            "spy_ytd_large_move_share",
+        ),
+    ),
+    MetricExplainer(
         metric="Severity",
         category="Current State",
         plain_english="How urgent the dashboard thinks today's action review is.",

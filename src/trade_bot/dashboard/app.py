@@ -76,27 +76,42 @@ DASHBOARD_SECTIONS = (
     "Performance",
     "Forward Test",
 )
-config_path = Path(st.sidebar.text_input("Config", str(DEFAULT_CONFIG_PATH)))
-events_path = Path(st.sidebar.text_input("Events", str(DEFAULT_EVENTS_PATH)))
-macro_path = Path(st.sidebar.text_input("Macro", str(DEFAULT_MACRO_PATH)))
-news_path = Path(st.sidebar.text_input("News", str(DEFAULT_NEWS_PATH)))
-journal_path = Path(st.sidebar.text_input("Trade journal", str(DEFAULT_JOURNAL_PATH)))
-run_store_path = Path(st.sidebar.text_input("Run store", str(DEFAULT_RUN_STORE_DB_PATH)))
-artifact_dir = Path(
-    st.sidebar.text_input("Snapshot artifacts", str(DEFAULT_RUN_STORE_ARTIFACT_DIR))
+st.sidebar.markdown(
+    """
+    <div class="sidebar-header">
+        <div class="sidebar-kicker">Local Runtime</div>
+        <div class="sidebar-title">Dashboard Controls</div>
+    </div>
+    """,
+    unsafe_allow_html=True,
 )
-job_log_dir = Path(st.sidebar.text_input("Snapshot job logs", str(DEFAULT_RUN_STORE_JOB_LOG_DIR)))
-run_source = st.sidebar.radio("Run source", ["Latest snapshot (fast)", "Live pipeline"], index=0)
-refresh_data = st.sidebar.checkbox("Refresh market data", value=False)
-refresh_macro = st.sidebar.checkbox("Refresh macro data", value=False)
-refresh_news = st.sidebar.checkbox("Refresh news", value=False)
+run_source = st.sidebar.radio(
+    "Run source",
+    ["Latest snapshot (fast)", "Live pipeline"],
+    index=0,
+)
+
+with st.sidebar.expander("Local paths", expanded=False):
+    config_path = Path(st.text_input("Config", str(DEFAULT_CONFIG_PATH)))
+    events_path = Path(st.text_input("Events", str(DEFAULT_EVENTS_PATH)))
+    macro_path = Path(st.text_input("Macro", str(DEFAULT_MACRO_PATH)))
+    news_path = Path(st.text_input("News", str(DEFAULT_NEWS_PATH)))
+    journal_path = Path(st.text_input("Trade journal", str(DEFAULT_JOURNAL_PATH)))
+    run_store_path = Path(st.text_input("Run store", str(DEFAULT_RUN_STORE_DB_PATH)))
+    artifact_dir = Path(st.text_input("Snapshot artifacts", str(DEFAULT_RUN_STORE_ARTIFACT_DIR)))
+    job_log_dir = Path(st.text_input("Snapshot job logs", str(DEFAULT_RUN_STORE_JOB_LOG_DIR)))
+
+with st.sidebar.expander("Refresh options", expanded=False):
+    refresh_data = st.checkbox("Refresh market data", value=False)
+    refresh_macro = st.checkbox("Refresh macro data", value=False)
+    refresh_news = st.checkbox("Refresh news", value=False)
 st.sidebar.caption(
     "Fast mode reads the latest precomputed snapshot. Live mode runs the full pipeline."
 )
 bot_config = load_config(config_path)
 
 run_store = RunStore(run_store_path, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
-if st.sidebar.button("Start Background Snapshot Refresh"):
+if st.sidebar.button("Start Snapshot Refresh"):
     job = run_store.start_snapshot_build_job(
         config_path=config_path,
         events_path=events_path,

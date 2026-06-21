@@ -70,6 +70,12 @@ def _join_unique_values(values: pd.Series) -> str:
 
 def _render_news_and_macro(baseline_run: BaselineRun) -> None:
     current_state = baseline_run.current_state
+    regime_instability = getattr(current_state, "regime_instability", pd.DataFrame())
+    regime_instability_components = getattr(
+        current_state,
+        "regime_instability_components",
+        pd.DataFrame(),
+    )
 
     st.subheader("Signal Coverage")
     coverage_cols = st.columns(3)
@@ -132,6 +138,33 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
                     _render_metric_dataframe(
                         _display_metrics(current_state.positioning_crowding.head(100))
                     )
+
+    st.subheader("Regime Instability Index")
+    if regime_instability.empty:
+        st.write("No regime-instability diagnostics are available.")
+    else:
+        row = regime_instability.iloc[0]
+        instability_cols = st.columns(4)
+        _helped_metric(
+            instability_cols[0],
+            "Instability State",
+            str(row.get("regime_instability_state", "n/a")).upper(),
+        )
+        _helped_metric(
+            instability_cols[1],
+            "Instability Score",
+            f"{float(row.get('regime_instability_score', 0.0)):.2f}",
+        )
+        _helped_metric(
+            instability_cols[2],
+            "SPY +/-1% YTD",
+            f"{float(row.get('spy_ytd_large_move_share', 0.0)):.1%}",
+        )
+        _helped_metric(instability_cols[3], "Trading Use", "Watch Only")
+        st.caption(
+            "Research signal only: useful for monitoring transition risk, not yet granted sizing authority."
+        )
+        _render_metric_dataframe(_display_metrics(regime_instability_components))
 
     st.subheader("Macro State")
     if current_state.macro_category_summary.empty:

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import pandas as pd
 import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
@@ -10,6 +11,12 @@ from trade_bot.research.baselines import BaselineRun
 def _render_risk_and_scenarios(baseline_run: BaselineRun) -> None:
     current_state = baseline_run.current_state
     trade_decision = baseline_run.trade_decision
+    regime_instability = getattr(current_state, "regime_instability", pd.DataFrame())
+    regime_instability_components = getattr(
+        current_state,
+        "regime_instability_components",
+        pd.DataFrame(),
+    )
 
     st.subheader("Portfolio Risk Engine")
     st.caption(
@@ -77,6 +84,48 @@ def _render_risk_and_scenarios(baseline_run: BaselineRun) -> None:
             _render_metric_dataframe(_display_metrics(portfolio_risk.marginal_risk_contribution))
         with risk_scenario_tab:
             _render_metric_dataframe(_display_metrics(portfolio_risk.scenario_risk_budget))
+
+    st.subheader("Regime Instability Index")
+    st.caption(
+        "Watch-only transition-risk diagnostic. This summarizes realized volatility, +/-1% SPY days, "
+        "dispersion, correlation shift, breadth/concentration, volatility pressure, and credit stress. "
+        "It does not alter sizing until we backtest it as an overlay."
+    )
+    if regime_instability.empty:
+        st.write("No regime-instability diagnostics are available.")
+    else:
+        instability = regime_instability.iloc[0]
+        instability_cols = st.columns(5)
+        _helped_metric(
+            instability_cols[0],
+            "Instability",
+            str(instability.get("regime_instability_state", "n/a")).upper(),
+        )
+        _helped_metric(
+            instability_cols[1],
+            "Score",
+            f"{float(instability.get('regime_instability_score', 0.0)):.2f}",
+        )
+        _helped_metric(
+            instability_cols[2],
+            "SPY +/-1% YTD",
+            f"{float(instability.get('spy_ytd_large_move_share', 0.0)):.1%}",
+        )
+        _helped_metric(
+            instability_cols[3],
+            "Large Move Days",
+            (
+                f"{int(instability.get('spy_ytd_large_move_days', 0))}/"
+                f"{int(instability.get('spy_ytd_trading_days', 0))}"
+            ),
+        )
+        _helped_metric(
+            instability_cols[4],
+            "Use",
+            "Watch Only",
+        )
+        st.write(str(instability.get("regime_instability_read", "")))
+        _render_metric_dataframe(_display_metrics(regime_instability_components))
 
     st.subheader("Future-State Scenario Lattice")
     _render_metric_dataframe(_display_metrics(current_state.scenario_drivers))

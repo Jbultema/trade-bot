@@ -75,6 +75,8 @@ def test_build_current_state_produces_alerts_and_scenarios() -> None:
     assert not state.growth_inflation_map.empty
     assert not state.positioning_crowding.empty
     assert not state.positioning_summary.empty
+    assert not state.regime_instability.empty
+    assert not state.regime_instability_components.empty
     assert not state.confirmation_matrix.empty
     assert round(state.scenario_outlook["probability"].sum(), 6) == 1.0
     assert sorted(state.scenario_lattice["horizon"].unique()) == ["1m", "1w", "3m", "6m"]

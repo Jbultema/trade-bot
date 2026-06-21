@@ -93,6 +93,7 @@ def build_macro_minute_report(
     )
     macro_summary = _macro_summary(current_state.macro_category_summary, baseline_run.macro_data)
     regime_pulse_summary = _regime_pulse_summary(current_state)
+    instability_summary = _instability_summary(current_state)
     confirmation_summary = _confirmation_summary(current_state.confirmation_matrix)
     change_summary = _change_summary(baseline_run, previous_run)
 
@@ -108,7 +109,8 @@ def build_macro_minute_report(
     summary = (
         f"{risk_status} risk with {action}. {scenario_summary['sentence']} "
         f"{news_summary['sentence']} {macro_summary['sentence']} "
-        f"{regime_pulse_summary['sentence']} {change_summary['sentence']}"
+        f"{regime_pulse_summary['sentence']} {instability_summary['sentence']} "
+        f"{change_summary['sentence']}"
     )
     daily_delta_cards = _daily_delta_cards(
         change_summary=change_summary,
@@ -132,6 +134,7 @@ def build_macro_minute_report(
             news_summary=news_summary,
             macro_summary=macro_summary,
             regime_pulse_summary=regime_pulse_summary,
+            instability_summary=instability_summary,
             driver_summary=driver_summary,
         ),
         _action_paragraph(
@@ -173,6 +176,12 @@ def build_macro_minute_report(
             tone=regime_pulse_summary["tone"],
         ),
         MacroMinuteCard(
+            label="Instability",
+            answer=instability_summary["answer"],
+            detail=instability_summary["detail"],
+            tone=instability_summary["tone"],
+        ),
+        MacroMinuteCard(
             label="Scenario Map",
             answer=scenario_summary["answer"],
             detail=scenario_summary["detail"],
@@ -208,6 +217,7 @@ def build_macro_minute_report(
             scenario_summary=scenario_summary,
             macro_summary=macro_summary,
             regime_pulse_summary=regime_pulse_summary,
+            instability_summary=instability_summary,
             risk_summary=risk_summary,
             change_summary=change_summary,
             open_ticket_count=open_ticket_count,
@@ -303,11 +313,13 @@ def _driver_paragraph(
     news_summary: dict[str, str],
     macro_summary: dict[str, str],
     regime_pulse_summary: dict[str, str],
+    instability_summary: dict[str, str],
     driver_summary: str,
 ) -> str:
     return (
         f"Still true: the driver stack is being pulled most by {news_summary['plain']}. "
         f"Macro is {macro_summary['plain']}; regime pulse is {regime_pulse_summary['plain']}. "
+        f"Regime instability is {instability_summary['plain']}. "
         f"Scenario drivers point to {driver_summary}. "
         "That combination matters because the bot should not treat price trend alone as enough "
         "when news, macro, credit, liquidity, positioning, or breadth are arguing for smaller sizing."
@@ -796,6 +808,38 @@ def _regime_pulse_summary(current_state: object) -> dict[str, str]:
     }
 
 
+def _instability_summary(current_state: object) -> dict[str, str]:
+    frame = getattr(current_state, "regime_instability", pd.DataFrame())
+    if frame.empty:
+        return {
+            "answer": "No index read",
+            "detail": "Regime Instability Index is unavailable in this run.",
+            "tone": "neutral",
+            "sentence": "Regime instability is unavailable in this run.",
+            "plain": "unavailable",
+        }
+    row = frame.iloc[0]
+    score = _as_float(row.get("regime_instability_score"))
+    if pd.isna(score):
+        score = 0.0
+    state = str(row.get("regime_instability_state", "n/a"))
+    ytd_share = _format_percent(row.get("spy_ytd_large_move_share"))
+    ytd_days = _safe_int(row.get("spy_ytd_large_move_days"))
+    total_days = _safe_int(row.get("spy_ytd_trading_days"))
+    components = str(row.get("top_instability_components", "n/a"))
+    tone = "critical" if score >= 0.70 else "warning" if score >= 0.55 else "neutral"
+    return {
+        "answer": f"{state.title()} ({score:.2f})",
+        "detail": (
+            f"SPY +/-1% days YTD: {ytd_days}/{total_days} ({ytd_share}). "
+            f"Top components: {components}. Watch-only until backtested."
+        ),
+        "tone": tone,
+        "sentence": f"Regime Instability Index is {state} at {score:.2f}.",
+        "plain": f"{state} ({score:.2f}), SPY +/-1% YTD {ytd_share}, top components {components}",
+    }
+
+
 def _macro_summary(
     macro_category_summary: pd.DataFrame, macro_data: pd.DataFrame
 ) -> dict[str, str]:
@@ -877,6 +921,7 @@ def _macro_minute_details(
     scenario_summary: dict[str, str],
     macro_summary: dict[str, str],
     regime_pulse_summary: dict[str, str],
+    instability_summary: dict[str, str],
     risk_summary: dict[str, object],
     change_summary: dict[str, object],
     open_ticket_count: int,
@@ -913,6 +958,11 @@ def _macro_minute_details(
                 "topic": "regime_pulse",
                 "current_read": regime_pulse_summary["answer"],
                 "why_it_matters": regime_pulse_summary["detail"],
+            },
+            {
+                "topic": "regime_instability",
+                "current_read": instability_summary["answer"],
+                "why_it_matters": instability_summary["detail"],
             },
             {
                 "topic": "risk_budget",
@@ -1043,6 +1093,10 @@ def _as_float(value: object) -> float:
     if numeric != numeric:
         return 0.0
     return numeric
+
+
+def _safe_int(value: object) -> int:
+    return int(round(_as_float(value)))
 
 
 def _macro_minute_tone(headline_level: str, risk_status: str) -> str:
