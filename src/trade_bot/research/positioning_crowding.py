@@ -25,7 +25,7 @@ def build_positioning_crowding_table(
     rsi_days: int = 14,
     z_history_days: int = 504,
 ) -> pd.DataFrame:
-    """Build a 42-style crowding proxy from price behavior.
+    """Build an institutional-style crowding proxy from price behavior.
 
     This is intentionally labeled as a proxy: commercial positioning models often use ETF flows, surveys, and
     positioning inputs that are not all in our local store yet. The same output

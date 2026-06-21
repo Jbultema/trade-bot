@@ -465,7 +465,7 @@ The dashboard is not meant to expose every table at once. It should guide the us
 
 Top-level flow:
 
-1. Macro Minute: 30-60 second daily summary. It should distinguish what changed today from what is still true.
+1. Daily Market Brief: 30-60 second daily summary. It should distinguish what changed today from what is still true.
 2. Action Headline: whether this is a do-nothing, small-action, or critical-action day.
 3. Decision Brief: plain-English conclusion, sizing translation, scenario bridge, bias check, and execution details.
 4. Insight Sections: deeper workbenches for Command Center, Risk & Scenarios, Research Lab, Monitoring, News & Macro, Performance, and Forward Test.

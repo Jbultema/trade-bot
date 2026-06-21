@@ -24,7 +24,7 @@ def _render_operating_brief(
 ) -> None:
     st.subheader("Operating Brief")
     st.caption(
-        "Execution checklist after the Macro Minute: sizing translation, scenario constraints, and bias checks."
+        "Execution checklist after the Daily Market Brief: sizing translation, scenario constraints, and bias checks."
     )
     cards = _operating_brief_cards(baseline_run=baseline_run, headline=headline)
     st.markdown(
@@ -479,7 +479,7 @@ def _render_decision_brief(
 ) -> None:
     st.subheader("Decision Brief")
     st.caption(
-        "Research and performance context. Use Macro Minute and Action Headline for the operating summary."
+        "Research and performance context. Use Daily Market Brief and Action Headline for the operating summary."
     )
     with st.expander("Decision context", expanded=False):
         cards = _decision_brief_cards(

@@ -106,7 +106,7 @@ Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. U
 | 2 | `migrate-warehouse` | Mirror local artifacts into the canonical DuckDB warehouse. |
 | 3 | `run-paper-valuation` | Update forward paper monitoring windows from the latest snapshot. |
 | 4 | Optional `run-ml-diagnostics --profile standard` | Refresh Research Lab ML probability, feature-importance, and drift artifacts. |
-| 5 | Dashboard top readout | Read Macro Minute, Action Headline, Operating Brief, and Decision Brief. |
+| 5 | Dashboard top readout | Read Daily Market Brief, Action Headline, Operating Brief, and Decision Brief. |
 | 6 | Monitoring | Check champion/challenger forward performance and paper windows. |
 | 7 | Forward Test | Lock recommendations and log paper/live executions when action is warranted. |
 
@@ -132,7 +132,7 @@ The dashboard is intentionally organized from action to evidence. Start at the t
 
 ```mermaid
 flowchart TD
-    A[Macro Minute] --> B[Action Headline]
+    A[Daily Market Brief] --> B[Action Headline]
     B --> C[Operating Brief]
     C --> D{Need more detail?}
     D -->|Current action| E[Command Center]
@@ -163,7 +163,7 @@ The top of the app is the operating surface. It is designed to answer three ques
 
 Key cards:
 
-- **Macro Minute**: current market situation, scenario pressure, new/recent changes, news/event pressure, and the practical action read-through.
+- **Daily Market Brief**: current market situation, scenario pressure, new/recent changes, news/event pressure, and the practical action read-through.
 - **Action Headline**: severity score, risk state, largest target change, active news, and open tickets.
 - **Default Paper Book Alignment**: whether the paper book reflects the latest default target posture.
 - **Operating Brief**: conclusion, recommended action, sizing translation, scenario incorporation, risk constraints, and bias check.

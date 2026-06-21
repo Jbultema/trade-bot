@@ -431,7 +431,7 @@ def _install_dashboard_styles() -> None:
             margin: 1.4rem 0;
             border-color: var(--tb-card-border);
         }
-        .macro-minute {
+        .market-brief {
             border: 1px solid var(--tb-card-border);
             border-left-width: 8px;
             border-radius: 8px;
@@ -440,108 +440,108 @@ def _install_dashboard_styles() -> None:
             background: var(--tb-card-bg);
             color: var(--tb-card-text);
         }
-        .macro-minute-critical {
+        .market-brief-critical {
             border-left-color: var(--tb-critical-border);
             background: var(--tb-critical-bg);
         }
-        .macro-minute-warning {
+        .market-brief-warning {
             border-left-color: var(--tb-warning-border);
             background: var(--tb-warning-bg);
         }
-        .macro-minute-success {
+        .market-brief-success {
             border-left-color: var(--tb-success-border);
             background: var(--tb-success-bg);
         }
-        .macro-minute-label {
+        .market-brief-label {
             margin: 0;
             font-size: 0.78rem;
             text-transform: uppercase;
             color: var(--tb-card-muted);
             font-weight: 750;
         }
-        .macro-minute-title {
+        .market-brief-title {
             margin: 4px 0 7px;
             font-size: 1.42rem;
             line-height: 1.24;
             font-weight: 770;
             color: var(--tb-card-text);
         }
-        .macro-minute-body {
+        .market-brief-body {
             max-width: 1180px;
         }
-        .macro-minute-delta-grid {
+        .market-brief-delta-grid {
             display: grid;
             grid-template-columns: repeat(2, minmax(0, 1fr));
             gap: 12px;
             margin: 12px 0 14px;
             max-width: 1180px;
         }
-        .macro-delta-card {
+        .brief-delta-card {
             border: 1px solid var(--tb-card-border);
             border-left: 5px solid var(--tb-card-border);
             border-radius: 8px;
             background: var(--tb-card-bg);
             padding: 12px 14px;
         }
-        .macro-delta-card-critical {
+        .brief-delta-card-critical {
             border-left-color: var(--tb-critical-border);
         }
-        .macro-delta-card-warning {
+        .brief-delta-card-warning {
             border-left-color: var(--tb-warning-border);
         }
-        .macro-delta-card-success {
+        .brief-delta-card-success {
             border-left-color: var(--tb-success-border);
         }
-        .macro-delta-card-neutral {
+        .brief-delta-card-neutral {
             border-left-color: var(--tb-card-border);
         }
-        .macro-delta-label {
+        .brief-delta-label {
             margin: 0 0 5px;
             color: var(--tb-card-muted);
             font-size: 0.74rem;
             font-weight: 800;
             text-transform: uppercase;
         }
-        .macro-delta-answer {
+        .brief-delta-answer {
             margin: 0 0 6px;
             color: var(--tb-card-text);
             font-size: 1.02rem;
             font-weight: 780;
             line-height: 1.25;
         }
-        .macro-delta-detail {
+        .brief-delta-detail {
             margin: 0;
             color: var(--tb-card-text);
             font-size: 0.91rem;
             line-height: 1.42;
         }
-        .macro-minute-copy {
+        .market-brief-copy {
             margin: 0 0 12px;
             color: var(--tb-card-text);
             line-height: 1.55;
             font-size: 0.98rem;
         }
-        .macro-minute-copy:last-child {
+        .market-brief-copy:last-child {
             margin-bottom: 12px;
         }
-        .macro-minute-next {
+        .market-brief-next {
             margin: 0;
             color: var(--tb-card-text);
             font-weight: 680;
         }
-        .macro-minute-grid {
+        .market-brief-grid {
             display: grid;
             grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 12px;
             margin: 8px 0 18px;
         }
-        .macro-minute-readouts {
+        .market-brief-readouts {
             display: grid;
             grid-template-columns: repeat(5, minmax(0, 1fr));
             gap: 10px;
             margin: 6px 0 18px;
         }
-        .macro-minute-readout {
+        .market-brief-readout {
             background: var(--tb-card-bg);
             border: 1px solid var(--tb-card-border);
             border-left: 4px solid var(--tb-card-border);
@@ -553,32 +553,32 @@ def _install_dashboard_styles() -> None:
             justify-content: center;
             gap: 4px;
         }
-        .macro-minute-readout-critical {
+        .market-brief-readout-critical {
             border-left-color: var(--tb-critical-border);
         }
-        .macro-minute-readout-warning {
+        .market-brief-readout-warning {
             border-left-color: var(--tb-warning-border);
         }
-        .macro-minute-readout-success {
+        .market-brief-readout-success {
             border-left-color: var(--tb-success-border);
         }
-        .macro-minute-readout-neutral {
+        .market-brief-readout-neutral {
             border-left-color: var(--tb-card-border);
         }
-        .macro-readout-label {
+        .brief-readout-label {
             color: var(--tb-card-muted);
             font-size: 0.72rem;
             font-weight: 750;
             text-transform: uppercase;
             line-height: 1.2;
         }
-        .macro-readout-answer {
+        .brief-readout-answer {
             color: var(--tb-card-text);
             font-size: 0.94rem;
             font-weight: 740;
             line-height: 1.25;
         }
-        .macro-minute-card {
+        .market-brief-card {
             background: var(--tb-card-bg);
             border: 1px solid var(--tb-card-border);
             border-left: 5px solid var(--tb-card-border);
@@ -586,33 +586,33 @@ def _install_dashboard_styles() -> None:
             padding: 13px 15px;
             min-height: 132px;
         }
-        .macro-minute-card-critical {
+        .market-brief-card-critical {
             border-left-color: var(--tb-critical-border);
         }
-        .macro-minute-card-warning {
+        .market-brief-card-warning {
             border-left-color: var(--tb-warning-border);
         }
-        .macro-minute-card-success {
+        .market-brief-card-success {
             border-left-color: var(--tb-success-border);
         }
-        .macro-minute-card-neutral {
+        .market-brief-card-neutral {
             border-left-color: var(--tb-card-border);
         }
-        .macro-card-label {
+        .brief-card-label {
             margin: 0 0 5px;
             color: var(--tb-card-muted);
             font-size: 0.74rem;
             font-weight: 750;
             text-transform: uppercase;
         }
-        .macro-card-answer {
+        .brief-card-answer {
             margin: 0 0 7px;
             color: var(--tb-card-text);
             font-size: 1.0rem;
             line-height: 1.28;
             font-weight: 750;
         }
-        .macro-card-detail {
+        .brief-card-detail {
             margin: 0;
             color: var(--tb-card-text);
             line-height: 1.42;
@@ -777,9 +777,9 @@ def _install_dashboard_styles() -> None:
                 max-width: none;
                 padding-top: 0;
             }
-            .macro-minute-grid,
-            .macro-minute-readouts,
-            .macro-minute-delta-grid,
+            .market-brief-grid,
+            .market-brief-readouts,
+            .market-brief-delta-grid,
             .brief-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
@@ -818,9 +818,9 @@ def _install_dashboard_styles() -> None:
             .brand-title {
                 font-size: 1.55rem;
             }
-            .macro-minute-grid,
-            .macro-minute-readouts,
-            .macro-minute-delta-grid,
+            .market-brief-grid,
+            .market-brief-readouts,
+            .market-brief-delta-grid,
             .brief-grid {
                 grid-template-columns: 1fr;
             }

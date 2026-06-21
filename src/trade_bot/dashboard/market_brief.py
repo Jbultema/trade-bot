@@ -13,7 +13,7 @@ from trade_bot.research.baselines import BaselineRun
 
 
 @dataclass(frozen=True)
-class MacroMinuteCard:
+class MarketBriefCard:
     label: str
     answer: str
     detail: str
@@ -21,68 +21,68 @@ class MacroMinuteCard:
 
 
 @dataclass(frozen=True)
-class MacroMinuteReport:
+class MarketBriefReport:
     tone: str
     title: str
     summary: str
     paragraphs: tuple[str, ...]
     next_step: str
-    daily_delta_cards: tuple[MacroMinuteCard, ...]
-    cards: tuple[MacroMinuteCard, ...]
+    daily_delta_cards: tuple[MarketBriefCard, ...]
+    cards: tuple[MarketBriefCard, ...]
     detail_rows: pd.DataFrame
 
 
-def _render_macro_minute(
+def _render_market_brief(
     *,
     baseline_run: BaselineRun,
     headline: ActionHeadline,
     open_ticket_count: int,
     previous_run: BaselineRun | None = None,
 ) -> None:
-    report = build_macro_minute_report(
+    report = build_market_brief_report(
         baseline_run=baseline_run,
         headline=headline,
         open_ticket_count=open_ticket_count,
         previous_run=previous_run,
     )
     paragraph_html = "".join(
-        f'<p class="macro-minute-copy">{html.escape(paragraph)}</p>'
+        f'<p class="market-brief-copy">{html.escape(paragraph)}</p>'
         for paragraph in report.paragraphs
     )
     daily_delta_html = (
-        '<div class="macro-minute-delta-grid">'
-        + "".join(_macro_minute_delta_html(card) for card in report.daily_delta_cards)
+        '<div class="market-brief-delta-grid">'
+        + "".join(_market_brief_delta_html(card) for card in report.daily_delta_cards)
         + "</div>"
     )
     st.markdown(
         f"""
-        <div class="macro-minute macro-minute-{html.escape(report.tone)}">
-            <p class="macro-minute-label">Macro Minute</p>
-            <div class="macro-minute-title">{html.escape(report.title)}</div>
+        <div class="market-brief market-brief-{html.escape(report.tone)}">
+            <p class="market-brief-label">Daily Market Brief</p>
+            <div class="market-brief-title">{html.escape(report.title)}</div>
             {daily_delta_html}
-            <div class="macro-minute-body">{paragraph_html}</div>
-            <p class="macro-minute-next">Next: {html.escape(report.next_step)}</p>
+            <div class="market-brief-body">{paragraph_html}</div>
+            <p class="market-brief-next">Next: {html.escape(report.next_step)}</p>
         </div>
         """,
         unsafe_allow_html=True,
     )
     st.markdown(
-        '<div class="macro-minute-readouts">'
-        + "".join(_macro_minute_readout_html(card) for card in report.cards)
+        '<div class="market-brief-readouts">'
+        + "".join(_market_brief_readout_html(card) for card in report.cards)
         + "</div>",
         unsafe_allow_html=True,
     )
-    with st.expander("Macro Minute detail", expanded=False):
+    with st.expander("Daily Market Brief detail", expanded=False):
         _render_metric_dataframe(_display_metrics(report.detail_rows), hide_index=True)
 
 
-def build_macro_minute_report(
+def build_market_brief_report(
     *,
     baseline_run: BaselineRun,
     headline: ActionHeadline,
     open_ticket_count: int,
     previous_run: BaselineRun | None = None,
-) -> MacroMinuteReport:
+) -> MarketBriefReport:
     current_state = baseline_run.current_state
     trade_summary = _first_row(baseline_run.trade_decision.summary)
     scenario_links = baseline_run.trade_decision.scenario_links
@@ -100,7 +100,7 @@ def build_macro_minute_report(
     action = str(trade_summary.get("recommended_action", headline.label)).replace("_", " ").title()
     risk_status = current_state.risk_status.upper()
     risk_budget = _format_decimal(trade_summary.get("risk_budget_multiplier", "n/a"))
-    tone = _macro_minute_tone(headline.level, current_state.risk_status)
+    tone = _market_brief_tone(headline.level, current_state.risk_status)
     title = f"{current_state.market_date}: {risk_status} risk, {action}"
     posture = _posture_sentence(trade_summary)
     driver_summary = _driver_summary(current_state.scenario_drivers)
@@ -151,49 +151,49 @@ def build_macro_minute_report(
         next_step = f"Review {open_ticket_count} open ticket(s) before changing exposure."
 
     cards = (
-        MacroMinuteCard(
+        MarketBriefCard(
             label="Market State",
             answer=f"{risk_status} risk ({current_state.risk_score:.2f})",
             detail=f"{confirmation_summary}. {current_state.risk_summary}",
             tone=_status_tone(current_state.risk_status),
         ),
-        MacroMinuteCard(
+        MarketBriefCard(
             label="Change Since Prior",
             answer=str(change_summary["answer"]),
             detail=str(change_summary["detail"]),
             tone=str(change_summary["tone"]),
         ),
-        MacroMinuteCard(
+        MarketBriefCard(
             label="News / Events",
             answer=news_summary["answer"],
             detail=news_summary["detail"],
             tone=news_summary["tone"],
         ),
-        MacroMinuteCard(
+        MarketBriefCard(
             label="Regime Pulse",
             answer=regime_pulse_summary["answer"],
             detail=regime_pulse_summary["detail"],
             tone=regime_pulse_summary["tone"],
         ),
-        MacroMinuteCard(
+        MarketBriefCard(
             label="Instability",
             answer=instability_summary["answer"],
             detail=instability_summary["detail"],
             tone=instability_summary["tone"],
         ),
-        MacroMinuteCard(
+        MarketBriefCard(
             label="Scenario Map",
             answer=scenario_summary["answer"],
             detail=scenario_summary["detail"],
             tone=scenario_summary["tone"],
         ),
-        MacroMinuteCard(
+        MarketBriefCard(
             label="Risk Budget / Action",
             answer=f"{risk_budget} budget; {action}",
             detail=_risk_budget_detail(trade_summary, risk_summary),
             tone=_brief_tone(headline.level),
         ),
-        MacroMinuteCard(
+        MarketBriefCard(
             label="Decision Sanity",
             answer=str(trade_summary.get("decision_sanity_signal", "No sanity cap needed")),
             detail=str(trade_summary.get("decision_sanity_note", "No sanity cap is active.")),
@@ -202,7 +202,7 @@ def build_macro_minute_report(
             else "neutral",
         ),
     )
-    return MacroMinuteReport(
+    return MarketBriefReport(
         tone=tone,
         title=title,
         summary=summary,
@@ -210,7 +210,7 @@ def build_macro_minute_report(
         next_step=next_step,
         daily_delta_cards=daily_delta_cards,
         cards=cards,
-        detail_rows=_macro_minute_details(
+        detail_rows=_market_brief_details(
             current_state=current_state,
             trade_summary=trade_summary,
             news_summary=news_summary,
@@ -225,31 +225,31 @@ def build_macro_minute_report(
     )
 
 
-def _macro_minute_card_html(card: MacroMinuteCard) -> str:
+def _market_brief_card_html(card: MarketBriefCard) -> str:
     return (
-        f'<div class="macro-minute-card macro-minute-card-{html.escape(card.tone)}">'
-        f'<p class="macro-card-label">{html.escape(card.label)}</p>'
-        f'<p class="macro-card-answer">{html.escape(card.answer)}</p>'
-        f'<p class="macro-card-detail">{html.escape(card.detail)}</p>'
+        f'<div class="market-brief-card market-brief-card-{html.escape(card.tone)}">'
+        f'<p class="brief-card-label">{html.escape(card.label)}</p>'
+        f'<p class="brief-card-answer">{html.escape(card.answer)}</p>'
+        f'<p class="brief-card-detail">{html.escape(card.detail)}</p>'
         "</div>"
     )
 
 
-def _macro_minute_readout_html(card: MacroMinuteCard) -> str:
+def _market_brief_readout_html(card: MarketBriefCard) -> str:
     return (
-        f'<div class="macro-minute-readout macro-minute-readout-{html.escape(card.tone)}">'
-        f'<span class="macro-readout-label">{html.escape(card.label)}</span>'
-        f'<span class="macro-readout-answer">{html.escape(card.answer)}</span>'
+        f'<div class="market-brief-readout market-brief-readout-{html.escape(card.tone)}">'
+        f'<span class="brief-readout-label">{html.escape(card.label)}</span>'
+        f'<span class="brief-readout-answer">{html.escape(card.answer)}</span>'
         "</div>"
     )
 
 
-def _macro_minute_delta_html(card: MacroMinuteCard) -> str:
+def _market_brief_delta_html(card: MarketBriefCard) -> str:
     return (
-        f'<div class="macro-delta-card macro-delta-card-{html.escape(card.tone)}">'
-        f'<p class="macro-delta-label">{html.escape(card.label)}</p>'
-        f'<p class="macro-delta-answer">{html.escape(card.answer)}</p>'
-        f'<p class="macro-delta-detail">{html.escape(card.detail)}</p>'
+        f'<div class="brief-delta-card brief-delta-card-{html.escape(card.tone)}">'
+        f'<p class="brief-delta-label">{html.escape(card.label)}</p>'
+        f'<p class="brief-delta-answer">{html.escape(card.answer)}</p>'
+        f'<p class="brief-delta-detail">{html.escape(card.detail)}</p>'
         "</div>"
     )
 
@@ -261,7 +261,7 @@ def _daily_delta_cards(
     news_summary: dict[str, str],
     action: str,
     risk_budget: str,
-) -> tuple[MacroMinuteCard, ...]:
+) -> tuple[MarketBriefCard, ...]:
     changed_answer = str(change_summary.get("changed_answer", change_summary["answer"]))
     changed_detail = str(change_summary.get("changed_detail", change_summary["detail"]))
     still_answer = str(change_summary.get("still_answer", f"{action}; {risk_budget} risk budget"))
@@ -275,13 +275,13 @@ def _daily_delta_cards(
         )
     )
     return (
-        MacroMinuteCard(
+        MarketBriefCard(
             label="What Changed Today",
             answer=changed_answer,
             detail=changed_detail,
             tone=str(change_summary.get("tone", "neutral")),
         ),
-        MacroMinuteCard(
+        MarketBriefCard(
             label="Still True",
             answer=still_answer,
             detail=still_detail,
@@ -357,7 +357,7 @@ def _change_summary(
             "answer": "No prior snapshot",
             "detail": "No stored prior run is available for comparison yet.",
             "tone": "neutral",
-            "sentence": "No prior snapshot is available, so today's Macro Minute is the comparison baseline.",
+            "sentence": "No prior snapshot is available, so today's Daily Market Brief is the comparison baseline.",
             "paragraph": (
                 "Daily delta: no prior snapshot is available yet. Treat today's posture as the baseline; "
                 "future refreshes will separate persistent messaging from genuinely new information."
@@ -913,7 +913,7 @@ def _decision_sanity_sentence(trade_summary: dict[str, object]) -> str:
     return f"Decision sanity: {signal}. {note}"
 
 
-def _macro_minute_details(
+def _market_brief_details(
     *,
     current_state: object,
     trade_summary: dict[str, object],
@@ -1099,7 +1099,7 @@ def _safe_int(value: object) -> int:
     return int(round(_as_float(value)))
 
 
-def _macro_minute_tone(headline_level: str, risk_status: str) -> str:
+def _market_brief_tone(headline_level: str, risk_status: str) -> str:
     if headline_level == "critical_actions" or risk_status.lower() in {"red", "orange"}:
         return "critical"
     if headline_level == "small_actions" or risk_status.lower() == "yellow":

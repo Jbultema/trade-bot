@@ -1,4 +1,4 @@
-# 42-Style Macro Capability Gap
+# Institutional Macro Capability Gap
 
 This project is not trying to clone any commercial macro product. The useful target is functional
 parity with the operating pattern: macro regime, positioning, market signal,
@@ -37,7 +37,7 @@ risk sizing, and human-readable action translation.
 - Global central-bank balance sheets, broad money, FX reserves, PMIs, and
   country-level inflation/policy grids.
 - Secular inflation model with structural drivers.
-- Long-only Exposure Alignment-style state backtests by asset class.
+- Long-only asset-class state backtests.
 
 ## Intended Use
 

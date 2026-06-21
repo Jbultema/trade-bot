@@ -150,19 +150,19 @@ def build_signal_coverage_table(
             "coverage_area": "Yahoo market proxies",
             "series_count": market_categories["market_price_proxy"],
             "status": "implemented",
-            "gap_to_42macro_style_stack": "Needs depth in constituents, global assets, options/vol surfaces, and fund flows.",
+            "institutional_stack_gap": "Needs depth in constituents, global assets, options/vol surfaces, and fund flows.",
         },
         {
             "coverage_area": "FRED macro catalog",
             "series_count": market_categories["macro_fred_series"],
             "status": "implemented",
-            "gap_to_42macro_style_stack": "Still missing release-lag discipline, revisions, global macro, and private Bloomberg datasets.",
+            "institutional_stack_gap": "Still missing release-lag discipline, revisions, global macro, and private Bloomberg datasets.",
         },
         {
             "coverage_area": "FRED macro loaded",
             "series_count": market_categories["macro_fred_loaded"],
             "status": "implemented",
-            "gap_to_42macro_style_stack": "Loaded series depend on FRED availability and cache freshness.",
+            "institutional_stack_gap": "Loaded series depend on FRED availability and cache freshness.",
         },
     ]
     for category, count in sorted(macro_by_category.items()):
@@ -171,7 +171,7 @@ def build_signal_coverage_table(
                 "coverage_area": f"macro:{category}",
                 "series_count": count,
                 "status": "implemented",
-                "gap_to_42macro_style_stack": "Empirical inclusion test available; see Signal Inclusion Tests before granting allocation authority.",
+                "institutional_stack_gap": "Empirical inclusion test available; see Signal Inclusion Tests before granting allocation authority.",
             }
         )
 
@@ -181,37 +181,37 @@ def build_signal_coverage_table(
                 "coverage_area": "regime pulse cycles",
                 "series_count": 6,
                 "status": "implemented",
-                "gap_to_42macro_style_stack": "Cycle reads now exist for growth, inflation, monetary policy, fiscal policy, liquidity, and positioning; still needs consensus forecast and vintage discipline.",
+                "institutional_stack_gap": "Cycle reads now exist for growth, inflation, monetary policy, fiscal policy, liquidity, and positioning; still needs consensus forecast and vintage discipline.",
             },
             {
                 "coverage_area": "positioning and crowding",
                 "series_count": yahoo_prices.shape[1],
                 "status": "partial",
-                "gap_to_42macro_style_stack": "Price/RSI crowding proxies are implemented; true CFTC COT, AAII/NAAIM, ETF/mutual-fund flows, short interest, and dealer/CTA estimates remain missing.",
+                "institutional_stack_gap": "Price/RSI crowding proxies are implemented; true CFTC COT, AAII/NAAIM, ETF/mutual-fund flows, short interest, and dealer/CTA estimates remain missing.",
             },
             {
                 "coverage_area": "earnings and fundamentals",
                 "series_count": 0,
                 "status": "gap",
-                "gap_to_42macro_style_stack": "Forward EPS, revisions, margins, valuations, buybacks, sector-level estimates.",
+                "institutional_stack_gap": "Forward EPS, revisions, margins, valuations, buybacks, sector-level estimates.",
             },
             {
                 "coverage_area": "global macro breadth",
                 "series_count": 0,
                 "status": "gap",
-                "gap_to_42macro_style_stack": "Country-level PMIs, inflation, policy rates, FX reserves, trade, and balance-of-payments.",
+                "institutional_stack_gap": "Country-level PMIs, inflation, policy rates, FX reserves, trade, and balance-of-payments.",
             },
             {
                 "coverage_area": "options and volatility surface",
                 "series_count": 0,
                 "status": "gap",
-                "gap_to_42macro_style_stack": "Skew, term structure, implied correlation, MOVE detail, single-name vol, realized/implied spreads.",
+                "institutional_stack_gap": "Skew, term structure, implied correlation, MOVE detail, single-name vol, realized/implied spreads.",
             },
             {
                 "coverage_area": "news and narrative features",
                 "series_count": 0,
                 "status": "partial",
-                "gap_to_42macro_style_stack": "Event-risk scaffolding exists; needs source ingestion, tagging, and backtested narrative indices.",
+                "institutional_stack_gap": "Event-risk scaffolding exists; needs source ingestion, tagging, and backtested narrative indices.",
             },
         ]
     )

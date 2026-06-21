@@ -6332,10 +6332,10 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
         ),
         104: (
             _active_dual_candidate(
-                name="exposure_alignment_long_only_01_us_equity",
-                family="exposure_alignment_long_only",
+                name="exposure_state_long_only_01_us_equity",
+                family="exposure_state_long_only",
                 hypothesis=(
-                    "Exposure Alignment long-only proxy for U.S. equities: max long when equity momentum state agrees, "
+                    "Long-only exposure-state proxy for U.S. equities: max long when equity momentum state agrees, "
                     "half-sized/cash-like when leadership weakens, never short."
                 ),
                 tickers=["SPY", "QQQ", "RSP", "IWM", "QUAL", "USMV", "GLD", "TLT", "IEF"],
@@ -6350,10 +6350,10 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                 scenario_sizing=_scenario_profile("balanced"),
             ),
             _active_dual_candidate(
-                name="exposure_alignment_long_only_02_global_equity",
-                family="exposure_alignment_long_only",
+                name="exposure_state_long_only_02_global_equity",
+                family="exposure_state_long_only",
                 hypothesis=(
-                    "Exposure Alignment global-equity proxy: global risk assets must beat defensive assets and "
+                    "Global-equity exposure-state proxy: global risk assets must beat defensive assets and "
                     "clear absolute trend gates before receiving full exposure."
                 ),
                 tickers=[*global_assets, "QQQ", "GLD", "TLT", "IEF", "UUP", "HYG", "LQD"],
@@ -6368,10 +6368,10 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                 scenario_sizing=_scenario_profile("balanced"),
             ),
             _active_dual_candidate(
-                name="exposure_alignment_long_only_03_commodity_gold_dollar",
-                family="exposure_alignment_long_only",
+                name="exposure_state_long_only_03_commodity_gold_dollar",
+                family="exposure_state_long_only",
                 hypothesis=(
-                    "Exposure Alignment macro-exposure proxy: commodities, oil, gold, dollar, and duration compete "
+                    "Macro-exposure state proxy: commodities, oil, gold, dollar, and duration compete "
                     "for long-only exposure based on current vol-adjusted momentum leadership."
                 ),
                 tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XLB", "GLD", "UUP", "TLT", "IEF", "SHY"],
@@ -6386,10 +6386,10 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                 scenario_sizing=_scenario_profile("defensive"),
             ),
             _sector_regime_candidate(
-                name="exposure_alignment_long_only_04_sector_asset_class_blend",
-                family="exposure_alignment_long_only",
+                name="exposure_state_long_only_04_sector_asset_class_blend",
+                family="exposure_state_long_only",
                 hypothesis=(
-                    "Exposure Alignment sector/asset-class blend: hold max/half/no-position style long exposure "
+                    "Sector/asset-class exposure-state blend: hold max/half/no-position style long exposure "
                     "across sectors, factors, credit, duration, gold, and cash-like defense."
                 ),
                 tickers=[*sector_spdrs, *factors, *credit_assets, *defensive_assets, "SPY", "RSP"],

@@ -768,7 +768,7 @@ def test_macro_reset_iterations_use_human_readable_strategy_names() -> None:
         "regime_pulse_growth_liquidity",
         "growth_inflation_rotation",
         "positioning_crowding",
-        "exposure_alignment_long_only",
+        "exposure_state_long_only",
         "integrated_operating_system",
     }.issubset(reset_families)
     assert "integrated_operating_system_01_retirement_core" in reset_names

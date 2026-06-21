@@ -11,7 +11,7 @@ import trade_bot.research.baselines as baselines_module
 import trade_bot.storage.run_store as run_store_module
 import trade_bot.trading.journal as journal_module
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.dashboard.macro_minute import build_macro_minute_report
+from trade_bot.dashboard.market_brief import build_market_brief_report
 from trade_bot.research.action_headline import build_action_headline
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.current_state import CurrentStateRun
@@ -41,10 +41,10 @@ def test_dashboard_app_renders_action_headline(
     assert any("Trade Bot Operations" in markdown.value for markdown in app.markdown)
     assert any("Regime Research Lab" in markdown.value for markdown in app.markdown)
     assert any("dashboard-primary-nav-label" in markdown.value for markdown in app.markdown)
-    assert any("Macro Minute" in markdown.value for markdown in app.markdown)
+    assert any("Daily Market Brief" in markdown.value for markdown in app.markdown)
     assert any("What Changed Today" in markdown.value for markdown in app.markdown)
-    assert any("macro-minute-body" in markdown.value for markdown in app.markdown)
-    assert any("macro-minute-readouts" in markdown.value for markdown in app.markdown)
+    assert any("market-brief-body" in markdown.value for markdown in app.markdown)
+    assert any("market-brief-readouts" in markdown.value for markdown in app.markdown)
     assert any("Market State" in markdown.value for markdown in app.markdown)
     assert any("Scenario Map" in markdown.value for markdown in app.markdown)
     assert any("Action Headline" in markdown.value for markdown in app.markdown)
@@ -96,7 +96,7 @@ def test_dashboard_app_renders_action_headline(
     assert any(subheader.value == "Windowed Performance" for subheader in app.subheader)
 
 
-def test_macro_minute_report_summarizes_market_news_and_scenarios() -> None:
+def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:
     baseline_run = _baseline_run()
     headline = build_action_headline(
         current_state=baseline_run.current_state,
@@ -105,7 +105,7 @@ def test_macro_minute_report_summarizes_market_news_and_scenarios() -> None:
         open_ticket_count=0,
     )
 
-    report = build_macro_minute_report(
+    report = build_market_brief_report(
         baseline_run=baseline_run,
         headline=headline,
         open_ticket_count=0,
@@ -149,7 +149,7 @@ def test_macro_minute_report_summarizes_market_news_and_scenarios() -> None:
     }
 
 
-def test_macro_minute_report_compares_current_run_to_prior_snapshot() -> None:
+def test_market_brief_report_compares_current_run_to_prior_snapshot() -> None:
     baseline_run = _baseline_run()
     previous_run = _previous_baseline_run()
     headline = build_action_headline(
@@ -159,7 +159,7 @@ def test_macro_minute_report_compares_current_run_to_prior_snapshot() -> None:
         open_ticket_count=0,
     )
 
-    report = build_macro_minute_report(
+    report = build_market_brief_report(
         baseline_run=baseline_run,
         headline=headline,
         open_ticket_count=0,

@@ -18,7 +18,7 @@ from trade_bot.dashboard.loaders import (
     load_snapshot_dashboard_run,
     load_snapshot_jobs_frame,
 )
-from trade_bot.dashboard.macro_minute import _render_macro_minute
+from trade_bot.dashboard.market_brief import _render_market_brief
 from trade_bot.dashboard.sections import _render_dashboard_section
 from trade_bot.dashboard.styles import _install_dashboard_styles
 from trade_bot.DEFAULT import (
@@ -226,7 +226,7 @@ action_headline = build_action_headline(
     news_monitor=baseline_run.news_monitor,
     open_ticket_count=len(headline_open_tickets),
 )
-_render_macro_minute(
+_render_market_brief(
     baseline_run=baseline_run,
     headline=action_headline,
     open_ticket_count=len(headline_open_tickets),
