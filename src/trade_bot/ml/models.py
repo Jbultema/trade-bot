@@ -18,6 +18,17 @@ from sklearn.model_selection import TimeSeriesSplit
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import StandardScaler
 
+from trade_bot.DEFAULTS import (
+    DEFAULT_SKLEARN_CALIBRATION_SPLITS,
+    DEFAULT_SKLEARN_MAX_DEPTH,
+    DEFAULT_SKLEARN_MAX_ITER,
+    DEFAULT_SKLEARN_MIN_SAMPLES_LEAF,
+    DEFAULT_SKLEARN_MODEL_NAMES,
+    DEFAULT_SKLEARN_N_ESTIMATORS,
+    DEFAULT_SKLEARN_RANDOM_STATE,
+    DEFAULT_SKLEARN_REGULARIZATION_C,
+)
+
 SklearnModelName = Literal[
     "sk_logit_l2",
     "sk_logit_l1",
@@ -28,27 +39,17 @@ SklearnModelName = Literal[
     "sk_ensemble",
 ]
 
-SKLEARN_MODEL_NAMES: set[str] = {
-    "sk_logit_l2",
-    "sk_logit_l1",
-    "sk_random_forest",
-    "sk_extra_trees",
-    "sk_gradient_boosting",
-    "sk_calibrated_logit",
-    "sk_ensemble",
-}
-
 
 @dataclass(frozen=True)
 class SklearnFitConfig:
     model: str
-    random_state: int = 17
-    n_estimators: int = 160
-    max_depth: int = 5
-    min_samples_leaf: int = 20
-    max_iter: int = 1000
-    regularization_c: float = 0.65
-    calibration_splits: int = 3
+    random_state: int = DEFAULT_SKLEARN_RANDOM_STATE
+    n_estimators: int = DEFAULT_SKLEARN_N_ESTIMATORS
+    max_depth: int = DEFAULT_SKLEARN_MAX_DEPTH
+    min_samples_leaf: int = DEFAULT_SKLEARN_MIN_SAMPLES_LEAF
+    max_iter: int = DEFAULT_SKLEARN_MAX_ITER
+    regularization_c: float = DEFAULT_SKLEARN_REGULARIZATION_C
+    calibration_splits: int = DEFAULT_SKLEARN_CALIBRATION_SPLITS
 
 
 def fit_probability_model(
@@ -144,7 +145,7 @@ def feature_importance(fit: dict[str, Any], class_columns: tuple[str, ...]) -> p
 
 
 def is_sklearn_model(model: str) -> bool:
-    return model in SKLEARN_MODEL_NAMES
+    return model in DEFAULT_SKLEARN_MODEL_NAMES
 
 
 def _build_estimator(config: SklearnFitConfig, y_train: pd.Series) -> Any:

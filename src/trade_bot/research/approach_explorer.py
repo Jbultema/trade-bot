@@ -7,7 +7,7 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
 from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
-from trade_bot.DEFAULT import DEFAULT_EXPERIMENTS_DIR, DEFAULT_RESET_EXPERIMENTS_DIR
+from trade_bot.DEFAULTS import DEFAULT_EXPERIMENTS_DIR, DEFAULT_RESET_EXPERIMENTS_DIR
 from trade_bot.features.indicators import drawdown
 from trade_bot.portfolio.risk import current_positions
 from trade_bot.research.curation import add_research_status

@@ -16,7 +16,7 @@ from trade_bot.backtest.windows import (
 from trade_bot.config import BotConfig, configured_tickers
 from trade_bot.data.fred_data import FredSeries, load_fred_catalog, load_or_fetch_fred_data
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
-from trade_bot.DEFAULT import DEFAULT_EVENTS_PATH, DEFAULT_MACRO_PATH, DEFAULT_NEWS_PATH
+from trade_bot.DEFAULTS import DEFAULT_EVENTS_PATH, DEFAULT_MACRO_PATH, DEFAULT_NEWS_PATH
 from trade_bot.portfolio.risk import PortfolioRiskRun
 from trade_bot.research.current_state import CurrentStateRun, build_current_state
 from trade_bot.research.event_risk import (

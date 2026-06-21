@@ -13,7 +13,7 @@ from trade_bot.dashboard.formatting import (
     _result_date_bounds,
     _window_start_from_preset,
 )
-from trade_bot.DEFAULT import DEFAULT_PERFORMANCE_WINDOW, DEFAULT_PERFORMANCE_WINDOWS
+from trade_bot.DEFAULTS import DEFAULT_PERFORMANCE_WINDOW, DEFAULT_PERFORMANCE_WINDOWS
 from trade_bot.reporting.report import (
     latest_positions_frame,
     make_equity_drawdown_figure,

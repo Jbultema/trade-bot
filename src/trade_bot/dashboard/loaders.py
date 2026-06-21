@@ -6,7 +6,7 @@ import pandas as pd
 import streamlit as st
 
 from trade_bot.config import load_config
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_EXPERIMENT_CACHE_TTL_SECONDS,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_RESET_EXPERIMENTS_DIR,

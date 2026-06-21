@@ -8,7 +8,7 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.data.fred_data import FredSeries
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_MOMENTUM_STATE_LOOKBACK_DAYS,
     DEFAULT_MOMENTUM_STATE_SKIP_DAYS,
     DEFAULT_MOMENTUM_STATE_VOL_DAYS,

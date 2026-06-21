@@ -11,7 +11,7 @@ from typing import Any, cast
 
 import pandas as pd
 
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_JOURNAL_PATH,
     DEFAULT_TICKET_MIN_TRADE_NOTIONAL,
     DEFAULT_TICKET_PRICE_BAND_PCT,

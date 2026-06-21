@@ -14,7 +14,7 @@ from typing import Any, cast
 import duckdb
 import pandas as pd
 
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,

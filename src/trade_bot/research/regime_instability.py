@@ -5,16 +5,15 @@ from itertools import combinations
 import numpy as np
 import pandas as pd
 
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_RISK_AI_BETA_TICKERS,
     DEFAULT_RISK_BROAD_EQUITY_TICKERS,
     DEFAULT_RISK_CREDIT_TICKERS,
     DEFAULT_RISK_DEFENSIVE_FACTOR_TICKERS,
     DEFAULT_RISK_SECTOR_TICKERS,
+    TRADING_DAYS_PER_YEAR,
 )
 from trade_bot.features.indicators import daily_returns
-
-TRADING_DAYS_PER_YEAR = 252
 
 
 def build_regime_instability_index(

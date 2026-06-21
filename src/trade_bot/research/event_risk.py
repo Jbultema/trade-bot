@@ -10,7 +10,7 @@ import pandas as pd
 import yaml
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.DEFAULT import DEFAULT_EVENT_ASSET_PROXIES, DEFAULT_EVENT_WINDOWS
+from trade_bot.DEFAULTS import DEFAULT_EVENT_ASSET_PROXIES, DEFAULT_EVENT_WINDOWS
 
 EventDirection = Literal["escalation", "deescalation", "uncertain"]
 NewsPhase = Literal[

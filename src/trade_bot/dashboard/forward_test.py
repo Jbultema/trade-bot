@@ -8,7 +8,7 @@ import streamlit as st
 from trade_bot.dashboard.book_alignment import _render_book_alignment
 from trade_bot.dashboard.components import _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_trade_frame, _safe_timezone
-from trade_bot.DEFAULT import DEFAULT_FORWARD_TEST_ACCOUNT, DEFAULT_FORWARD_TEST_STRATEGY
+from trade_bot.DEFAULTS import DEFAULT_FORWARD_TEST_ACCOUNT, DEFAULT_FORWARD_TEST_STRATEGY
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.trading.book_alignment import build_book_alignment
 from trade_bot.trading.journal import (

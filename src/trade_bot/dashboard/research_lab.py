@@ -16,7 +16,7 @@ from trade_bot.dashboard.formatting import (
     _result_date_bounds,
     _window_start_from_preset,
 )
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_ML_DIAGNOSTICS_DIR,
     DEFAULT_PERFORMANCE_WINDOW,
     DEFAULT_PERFORMANCE_WINDOWS,

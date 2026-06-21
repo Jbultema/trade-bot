@@ -6,13 +6,54 @@ from typing import Literal
 import numpy as np
 import pandas as pd
 
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
+    DEFAULT_FUTURE_STATE_BAG_COUNT,
+    DEFAULT_FUTURE_STATE_BAYESIAN_FEATURE_SHRINKAGE,
+    DEFAULT_FUTURE_STATE_BAYESIAN_VARIANCE_FLOOR,
+    DEFAULT_FUTURE_STATE_COLUMNS,
+    DEFAULT_FUTURE_STATE_DIRICHLET_PRIOR_STRENGTH,
+    DEFAULT_FUTURE_STATE_FEATURE_SET,
+    DEFAULT_FUTURE_STATE_FRAGILE_ACTIVATION_PROBABILITY,
+    DEFAULT_FUTURE_STATE_K_NEIGHBORS,
+    DEFAULT_FUTURE_STATE_MIN_TRAIN_OBSERVATIONS,
+    DEFAULT_FUTURE_STATE_MODEL_HORIZON_DAYS,
+    DEFAULT_FUTURE_STATE_PROBABILITY_SMOOTHING,
+    DEFAULT_FUTURE_STATE_RECENCY_HALF_LIFE_DAYS,
+    DEFAULT_FUTURE_STATE_REFIT_EVERY_DAYS,
+    DEFAULT_FUTURE_STATE_RIDGE_ALPHA,
+    DEFAULT_FUTURE_STATE_RIDGE_ITERATIONS,
+    DEFAULT_FUTURE_STATE_RIDGE_LEARNING_RATE,
+    DEFAULT_FUTURE_STATE_RISK_OFF_ACTIVATION_PROBABILITY,
+    DEFAULT_FUTURE_STATE_SKLEARN_MAX_DEPTH,
+    DEFAULT_FUTURE_STATE_SKLEARN_MIN_SAMPLES_LEAF,
+    DEFAULT_FUTURE_STATE_SKLEARN_N_ESTIMATORS,
+    DEFAULT_FUTURE_STATE_SKLEARN_RANDOM_STATE,
+    DEFAULT_FUTURE_STATE_SKLEARN_REGULARIZATION_C,
+    DEFAULT_FUTURE_STATE_TRAIN_WINDOW_DAYS,
+    DEFAULT_FUTURE_STATE_TRANSITION_ACTIVATION_PROBABILITY,
     DEFAULT_SCENARIO_FRAGILE_UPSIDE_MULTIPLIER,
     DEFAULT_SCENARIO_MAX_MULTIPLIER,
     DEFAULT_SCENARIO_MIN_MULTIPLIER,
     DEFAULT_SCENARIO_RISK_ON_MULTIPLIER,
     DEFAULT_SCENARIO_STRESS_MULTIPLIER,
     DEFAULT_SCENARIO_TRANSITION_MULTIPLIER,
+    DEFAULT_STRATEGY_DRAWDOWN_ACTIVATION_PROBABILITY,
+    DEFAULT_STRATEGY_DRAWDOWN_COLUMNS,
+    DEFAULT_STRATEGY_DRAWDOWN_FEATURE_SET,
+    DEFAULT_STRATEGY_DRAWDOWN_FUTURE_DRAWDOWN_THRESHOLD,
+    DEFAULT_STRATEGY_DRAWDOWN_MIN_MULTIPLIER,
+    DEFAULT_STRATEGY_DRAWDOWN_MIN_TRAIN_OBSERVATIONS,
+    DEFAULT_STRATEGY_DRAWDOWN_MODEL_HORIZON_DAYS,
+    DEFAULT_STRATEGY_DRAWDOWN_PROBABILITY_SMOOTHING,
+    DEFAULT_STRATEGY_DRAWDOWN_REFIT_EVERY_DAYS,
+    DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_MAX_DEPTH,
+    DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_MIN_SAMPLES_LEAF,
+    DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_N_ESTIMATORS,
+    DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_RANDOM_STATE,
+    DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_REGULARIZATION_C,
+    DEFAULT_STRATEGY_DRAWDOWN_STRESS_MULTIPLIER,
+    DEFAULT_STRATEGY_DRAWDOWN_TRAIN_WINDOW_DAYS,
+    TRADING_DAYS_PER_YEAR,
 )
 from trade_bot.ml.models import (
     SklearnFitConfig,
@@ -21,8 +62,8 @@ from trade_bot.ml.models import (
     predict_probability,
 )
 
-STATE_COLUMNS = ("risk_off", "transition", "risk_on_fragile", "risk_on")
-STRATEGY_DRAWDOWN_COLUMNS = ("stable", "drawdown")
+STATE_COLUMNS = DEFAULT_FUTURE_STATE_COLUMNS
+STRATEGY_DRAWDOWN_COLUMNS = DEFAULT_STRATEGY_DRAWDOWN_COLUMNS
 
 
 @dataclass(frozen=True)
@@ -49,35 +90,35 @@ class FutureStateModelConfig:
         "sk_calibrated_logit",
         "sk_ensemble",
     ]
-    horizon_days: int = 21
-    feature_set: Literal["core", "ai", "cross_asset", "all"] = "core"
-    train_window_days: int = 756
-    min_train_observations: int = 252
-    refit_every_days: int = 21
-    k_neighbors: int = 80
-    bag_count: int = 9
-    ridge_alpha: float = 0.15
-    ridge_learning_rate: float = 0.08
-    ridge_iterations: int = 140
-    probability_smoothing: float = 0.08
-    dirichlet_prior_strength: float = 8.0
-    recency_half_life_days: int = 252
-    bayesian_variance_floor: float = 0.25
-    bayesian_feature_shrinkage: float = 12.0
-    sklearn_n_estimators: int = 140
-    sklearn_max_depth: int = 5
-    sklearn_min_samples_leaf: int = 20
-    sklearn_regularization_c: float = 0.70
-    sklearn_random_state: int = 17
+    horizon_days: int = DEFAULT_FUTURE_STATE_MODEL_HORIZON_DAYS
+    feature_set: Literal["core", "ai", "cross_asset", "all"] = DEFAULT_FUTURE_STATE_FEATURE_SET
+    train_window_days: int = DEFAULT_FUTURE_STATE_TRAIN_WINDOW_DAYS
+    min_train_observations: int = DEFAULT_FUTURE_STATE_MIN_TRAIN_OBSERVATIONS
+    refit_every_days: int = DEFAULT_FUTURE_STATE_REFIT_EVERY_DAYS
+    k_neighbors: int = DEFAULT_FUTURE_STATE_K_NEIGHBORS
+    bag_count: int = DEFAULT_FUTURE_STATE_BAG_COUNT
+    ridge_alpha: float = DEFAULT_FUTURE_STATE_RIDGE_ALPHA
+    ridge_learning_rate: float = DEFAULT_FUTURE_STATE_RIDGE_LEARNING_RATE
+    ridge_iterations: int = DEFAULT_FUTURE_STATE_RIDGE_ITERATIONS
+    probability_smoothing: float = DEFAULT_FUTURE_STATE_PROBABILITY_SMOOTHING
+    dirichlet_prior_strength: float = DEFAULT_FUTURE_STATE_DIRICHLET_PRIOR_STRENGTH
+    recency_half_life_days: int = DEFAULT_FUTURE_STATE_RECENCY_HALF_LIFE_DAYS
+    bayesian_variance_floor: float = DEFAULT_FUTURE_STATE_BAYESIAN_VARIANCE_FLOOR
+    bayesian_feature_shrinkage: float = DEFAULT_FUTURE_STATE_BAYESIAN_FEATURE_SHRINKAGE
+    sklearn_n_estimators: int = DEFAULT_FUTURE_STATE_SKLEARN_N_ESTIMATORS
+    sklearn_max_depth: int = DEFAULT_FUTURE_STATE_SKLEARN_MAX_DEPTH
+    sklearn_min_samples_leaf: int = DEFAULT_FUTURE_STATE_SKLEARN_MIN_SAMPLES_LEAF
+    sklearn_regularization_c: float = DEFAULT_FUTURE_STATE_SKLEARN_REGULARIZATION_C
+    sklearn_random_state: int = DEFAULT_FUTURE_STATE_SKLEARN_RANDOM_STATE
     stress_multiplier: float = DEFAULT_SCENARIO_STRESS_MULTIPLIER
     transition_multiplier: float = DEFAULT_SCENARIO_TRANSITION_MULTIPLIER
     fragile_upside_multiplier: float = DEFAULT_SCENARIO_FRAGILE_UPSIDE_MULTIPLIER
     risk_on_multiplier: float = DEFAULT_SCENARIO_RISK_ON_MULTIPLIER
     min_multiplier: float = DEFAULT_SCENARIO_MIN_MULTIPLIER
     max_multiplier: float = DEFAULT_SCENARIO_MAX_MULTIPLIER
-    risk_off_activation_probability: float = 0.0
-    transition_activation_probability: float = 0.0
-    fragile_activation_probability: float = 0.0
+    risk_off_activation_probability: float = DEFAULT_FUTURE_STATE_RISK_OFF_ACTIVATION_PROBABILITY
+    transition_activation_probability: float = DEFAULT_FUTURE_STATE_TRANSITION_ACTIVATION_PROBABILITY
+    fragile_activation_probability: float = DEFAULT_FUTURE_STATE_FRAGILE_ACTIVATION_PROBABILITY
 
 
 @dataclass(frozen=True)
@@ -92,21 +133,21 @@ class StrategyDrawdownModelConfig:
         "sk_calibrated_logit",
         "sk_ensemble",
     ]
-    horizon_days: int = 21
-    feature_set: Literal["core", "ai", "cross_asset", "all"] = "ai"
-    train_window_days: int = 756
-    min_train_observations: int = 252
-    refit_every_days: int = 126
-    future_drawdown_threshold: float = -0.08
-    activation_probability: float = 0.42
-    stress_multiplier: float = 0.62
-    min_multiplier: float = 0.55
-    probability_smoothing: float = 0.08
-    sklearn_n_estimators: int = 48
-    sklearn_max_depth: int = 4
-    sklearn_min_samples_leaf: int = 24
-    sklearn_regularization_c: float = 0.70
-    sklearn_random_state: int = 29
+    horizon_days: int = DEFAULT_STRATEGY_DRAWDOWN_MODEL_HORIZON_DAYS
+    feature_set: Literal["core", "ai", "cross_asset", "all"] = DEFAULT_STRATEGY_DRAWDOWN_FEATURE_SET
+    train_window_days: int = DEFAULT_STRATEGY_DRAWDOWN_TRAIN_WINDOW_DAYS
+    min_train_observations: int = DEFAULT_STRATEGY_DRAWDOWN_MIN_TRAIN_OBSERVATIONS
+    refit_every_days: int = DEFAULT_STRATEGY_DRAWDOWN_REFIT_EVERY_DAYS
+    future_drawdown_threshold: float = DEFAULT_STRATEGY_DRAWDOWN_FUTURE_DRAWDOWN_THRESHOLD
+    activation_probability: float = DEFAULT_STRATEGY_DRAWDOWN_ACTIVATION_PROBABILITY
+    stress_multiplier: float = DEFAULT_STRATEGY_DRAWDOWN_STRESS_MULTIPLIER
+    min_multiplier: float = DEFAULT_STRATEGY_DRAWDOWN_MIN_MULTIPLIER
+    probability_smoothing: float = DEFAULT_STRATEGY_DRAWDOWN_PROBABILITY_SMOOTHING
+    sklearn_n_estimators: int = DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_N_ESTIMATORS
+    sklearn_max_depth: int = DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_MAX_DEPTH
+    sklearn_min_samples_leaf: int = DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_MIN_SAMPLES_LEAF
+    sklearn_regularization_c: float = DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_REGULARIZATION_C
+    sklearn_random_state: int = DEFAULT_STRATEGY_DRAWDOWN_SKLEARN_RANDOM_STATE
 
 
 def build_future_state_features(prices: pd.DataFrame) -> pd.DataFrame:
@@ -119,8 +160,12 @@ def build_future_state_features(prices: pd.DataFrame) -> pd.DataFrame:
         for window in (21, 63, 126):
             features[f"{ticker.lower()}_ret_{window}"] = _return(series, window)
         if ticker in {"SPY", "QQQ", "HYG", "VIXY"}:
-            features[f"{ticker.lower()}_vol_21"] = _daily_returns(series).rolling(21).std() * np.sqrt(252)
-            features[f"{ticker.lower()}_vol_63"] = _daily_returns(series).rolling(63).std() * np.sqrt(252)
+            features[f"{ticker.lower()}_vol_21"] = _daily_returns(series).rolling(21).std() * np.sqrt(
+                TRADING_DAYS_PER_YEAR
+            )
+            features[f"{ticker.lower()}_vol_63"] = _daily_returns(series).rolling(63).std() * np.sqrt(
+                TRADING_DAYS_PER_YEAR
+            )
 
     for lhs, rhs, name in (
         ("QQQ", "RSP", "qqq_rsp"),

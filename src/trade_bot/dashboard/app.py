@@ -21,8 +21,9 @@ from trade_bot.dashboard.loaders import (
 from trade_bot.dashboard.market_brief import _render_market_brief
 from trade_bot.dashboard.sections import _render_dashboard_section
 from trade_bot.dashboard.styles import _install_dashboard_styles
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
+    DEFAULT_DASHBOARD_SECTIONS,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_FORWARD_TEST_ACCOUNT,
@@ -69,15 +70,6 @@ st.markdown(
     unsafe_allow_html=True,
 )
 
-DASHBOARD_SECTIONS = (
-    "Command Center",
-    "Risk & Scenarios",
-    "Research Lab",
-    "Monitoring",
-    "News & Macro",
-    "Performance",
-    "Forward Test",
-)
 st.sidebar.markdown(
     """
     <div class="sidebar-header">
@@ -284,7 +276,7 @@ st.markdown(
 )
 selected_section = st.pills(
     "Dashboard section",
-    DASHBOARD_SECTIONS,
+    DEFAULT_DASHBOARD_SECTIONS,
     selection_mode="single",
     default="Command Center",
     label_visibility="collapsed",

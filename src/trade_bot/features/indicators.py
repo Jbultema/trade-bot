@@ -3,7 +3,7 @@ from __future__ import annotations
 import numpy as np
 import pandas as pd
 
-TRADING_DAYS_PER_YEAR = 252
+from trade_bot.DEFAULTS import TRADING_DAYS_PER_YEAR
 
 
 def daily_returns(prices: pd.DataFrame) -> pd.DataFrame:

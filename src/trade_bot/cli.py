@@ -9,7 +9,7 @@ from rich.table import Table
 
 from trade_bot.config import configured_tickers, load_config
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,

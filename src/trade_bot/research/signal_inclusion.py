@@ -10,7 +10,7 @@ from trade_bot.backtest.metrics import PerformanceMetrics, calculate_metrics, me
 from trade_bot.backtest.windows import rolling_window_metrics, summarize_windows
 from trade_bot.config import ExecutionConfig
 from trade_bot.data.fred_data import FredSeries
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_SIGNAL_INCLUSION_DEFENSIVE_TICKER,
     DEFAULT_SIGNAL_INCLUSION_LOOKBACK_DAYS,
     DEFAULT_SIGNAL_INCLUSION_MIN_OBSERVATIONS,

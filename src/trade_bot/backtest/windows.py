@@ -6,7 +6,7 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.backtest.metrics import calculate_metrics
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_CALENDAR_YEAR_MIN_OBSERVATIONS,
     DEFAULT_REGIME_MIN_OBSERVATIONS,
     DEFAULT_REGIMES,

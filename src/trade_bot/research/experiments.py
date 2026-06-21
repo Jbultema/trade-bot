@@ -26,7 +26,7 @@ from trade_bot.config import (
     configured_tickers,
 )
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS,
     DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD,
     DEFAULT_EXPERIMENTS_DIR,

@@ -6,7 +6,7 @@ import numpy as np
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS,
     DEFAULT_EVENT_CONFIRMATION_THEMES,
     DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD,

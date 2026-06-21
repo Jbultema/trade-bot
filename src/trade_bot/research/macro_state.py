@@ -4,7 +4,7 @@ import numpy as np
 import pandas as pd
 
 from trade_bot.data.fred_data import FredSeries
-from trade_bot.DEFAULT import DEFAULT_MACRO_SIGNAL_LOOKBACK_DAYS
+from trade_bot.DEFAULTS import DEFAULT_MACRO_SIGNAL_LOOKBACK_DAYS
 
 
 def build_macro_signal_table(

@@ -6,14 +6,7 @@ from dataclasses import dataclass
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
-
-DEFAULT_ENTRY_HORIZONS: dict[str, int] = {
-    "3m": 63,
-    "6m": 126,
-    "1y": 252,
-    "3y": 756,
-    "5y": 1260,
-}
+from trade_bot.DEFAULTS import DEFAULT_ENTRY_HORIZONS
 
 
 @dataclass(frozen=True)

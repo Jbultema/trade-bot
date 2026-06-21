@@ -120,7 +120,7 @@ When the dashboard feels slow, prefer `build-snapshot` before app launch. The in
 
 High-level code ownership:
 
-- `src/trade_bot/DEFAULT.py`: centralized default constants. New defaults should usually go here instead of being scattered through modules.
+- `src/trade_bot/DEFAULTS.py`: centralized default constants. New defaults should usually go here instead of being scattered through modules.
 - `src/trade_bot/config.py`: typed config model and ticker universe assembly.
 - `src/trade_bot/data/`: market and macro data loaders/caches.
 - `src/trade_bot/features/`: reusable feature engineering and valuation helpers.
@@ -161,7 +161,7 @@ Future agents should avoid creating parallel storage patterns unless there is a 
 
 ## Config And Defaults
 
-The project owner strongly prefers defaults to be centralized. Use `src/trade_bot/DEFAULT.py` for reusable default values, then pass them into modules through function signatures or config models.
+The project owner strongly prefers defaults to be centralized. Use `src/trade_bot/DEFAULTS.py` for reusable default values, then pass them into modules through function signatures or config models. `src/trade_bot/DEFAULT.py` is only a backward-compatible re-export shim; do not add new values there.
 
 Config files:
 
@@ -541,7 +541,7 @@ Documentation should explain what changed, why it exists, how it is used, and wh
    - The system needs exact state, timing, prices, size ranges, and disposition tracking.
 
 10. Letting defaults drift across files.
-    - Use `DEFAULT.py` for reusable defaults.
+    - Use `DEFAULTS.py` for reusable defaults.
 
 ## Current Limitations And Open Research Areas
 
@@ -571,7 +571,7 @@ When starting a new backend task, do this first:
 2. Read the relevant docs before editing formulas, risk logic, storage, or dashboard surfaces.
 3. Identify whether the change affects research only, paper monitoring, or live decision-support semantics.
 4. Preserve long-only, human-reviewed, local-only assumptions unless explicitly told otherwise.
-5. Check whether a default belongs in `DEFAULT.py`.
+5. Check whether a default belongs in `DEFAULTS.py`.
 6. Add tests for any new behavior.
 7. Run Ruff and pytest.
 8. Update docs if behavior or interpretation changed.

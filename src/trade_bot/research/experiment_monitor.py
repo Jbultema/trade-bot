@@ -6,7 +6,7 @@ from typing import Any
 
 import pandas as pd
 
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_RISK_AI_BETA_TICKERS,
     DEFAULT_RISK_BROAD_EQUITY_TICKERS,

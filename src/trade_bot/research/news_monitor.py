@@ -15,15 +15,17 @@ import pandas as pd
 import requests
 import yaml
 
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_NEWS_ACTIVATION_THRESHOLD,
     DEFAULT_NEWS_CACHE_FILE,
     DEFAULT_NEWS_LOOKBACK_DAYS,
     DEFAULT_NEWS_MAX_AGE_MINUTES,
     DEFAULT_NEWS_MAX_ITEMS_PER_SOURCE,
+    DEFAULT_NEWS_SOURCE_COVERAGE_BUCKETS,
     DEFAULT_NEWS_SOURCE_ENABLED,
     DEFAULT_NEWS_SOURCE_PRIORITY,
     DEFAULT_NEWS_SOURCE_TYPE,
+    DEFAULT_NEWS_USER_AGENT,
 )
 from trade_bot.research.event_risk import (
     EventDirection,
@@ -32,7 +34,6 @@ from trade_bot.research.event_risk import (
     classify_news_text,
 )
 
-USER_AGENT = "trade-bot-news-monitor/0.1"
 TRIAGE_COLUMNS = [
     "title",
     "source",
@@ -62,19 +63,6 @@ SOURCE_COVERAGE_COLUMNS = [
     "status",
     "source_names",
 ]
-NEWS_SOURCE_COVERAGE_BUCKETS = {
-    "official_macro_releases": ("official_macro", "macro_release"),
-    "monetary_policy_liquidity": ("monetary_policy", "liquidity"),
-    "fiscal_treasury_policy": ("fiscal_policy", "treasury", "sanctions"),
-    "earnings_revisions_fundamentals": ("earnings_revisions", "earnings", "corporate_profits"),
-    "regulatory_filings_enforcement": ("regulatory_filings", "enforcement", "accounting"),
-    "credit_private_markets": ("credit", "private_credit", "direct_lending"),
-    "energy_geopolitics": ("oil", "energy", "geopolitics", "inventories"),
-    "ai_semiconductors_supply_chain": ("ai", "ai_capex", "semiconductors", "chips"),
-    "market_plumbing_volatility": ("market_plumbing", "options", "crowding"),
-    "crypto_liquidity_risk_appetite": ("crypto_liquidity", "bitcoin", "risk_appetite"),
-    "retail_social_sentiment": ("retail_sentiment", "meme_stocks"),
-}
 
 
 @dataclass(frozen=True)
@@ -186,7 +174,7 @@ def run_news_monitor(
 
 def build_news_source_coverage(sources: tuple[NewsSource, ...]) -> pd.DataFrame:
     rows: list[dict[str, object]] = []
-    for bucket, required_topics in NEWS_SOURCE_COVERAGE_BUCKETS.items():
+    for bucket, required_topics in DEFAULT_NEWS_SOURCE_COVERAGE_BUCKETS.items():
         matched_sources = [
             source for source in sources if set(source.topics).intersection(required_topics)
         ]
@@ -233,7 +221,7 @@ def fetch_news_sources(
             response = requests.get(
                 source.url,
                 timeout=12,
-                headers={"User-Agent": USER_AGENT},
+                headers={"User-Agent": DEFAULT_NEWS_USER_AGENT},
             )
             response.raise_for_status()
             source_items = _parse_feed(_xml_response_text(response), source)[:max_items_per_source]

@@ -5,7 +5,7 @@ from pathlib import Path
 import pandas as pd
 import yfinance as yf
 
-from trade_bot.DEFAULT import DEFAULT_DATA_ADJUSTED
+from trade_bot.DEFAULTS import DEFAULT_DATA_ADJUSTED
 
 
 def load_or_fetch_yahoo_prices(

@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import pandas as pd
 
-DEFAULT_CURATED_SHELF_LIMIT = 25
+from trade_bot.DEFAULTS import DEFAULT_CURATED_SHELF_LIMIT
+
 PRUNED_STATUS = "pruned_dead_end"
 REFERENCE_STATUS = "reference"
 OPERATIONAL_STATUS = "operational_candidate"

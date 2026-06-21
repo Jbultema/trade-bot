@@ -4,7 +4,7 @@ from dataclasses import dataclass
 
 import pandas as pd
 
-from trade_bot.DEFAULT import DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT
+from trade_bot.DEFAULTS import DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT
 from trade_bot.research.trade_decision import TradeDecisionRun
 from trade_bot.trading.journal import TradeJournal
 

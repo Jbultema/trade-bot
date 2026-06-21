@@ -11,6 +11,18 @@ import numpy as np
 import pandas as pd
 from sklearn.metrics import accuracy_score, balanced_accuracy_score, log_loss
 
+from trade_bot.DEFAULTS import (
+    DEFAULT_ML_HORIZONS,
+    DEFAULT_ML_MODEL_NAMES,
+    DEFAULT_ML_RESEARCH_HORIZONS,
+    DEFAULT_ML_RESEARCH_MODEL_NAMES,
+    DEFAULT_ML_RESEARCH_STEP_DAYS,
+    DEFAULT_ML_SECTOR_TICKERS,
+    DEFAULT_ML_STANDARD_STEP_DAYS,
+    DEFAULT_ML_TASK_MIN_TRAIN_OBSERVATIONS,
+    DEFAULT_ML_TASK_STEP_DAYS,
+    DEFAULT_ML_TASK_TRAIN_WINDOW_DAYS,
+)
 from trade_bot.ml.models import (
     SklearnFitConfig,
     feature_importance,
@@ -29,25 +41,6 @@ TaskKind = Literal[
 ]
 MLDiagnosticProfile = Literal["standard", "research"]
 
-STANDARD_MODEL_NAMES = (
-    "sk_logit_l2",
-    "sk_random_forest",
-)
-RESEARCH_MODEL_NAMES = (
-    "sk_logit_l2",
-    "sk_logit_l1",
-    "sk_random_forest",
-    "sk_extra_trees",
-    "sk_gradient_boosting",
-    "sk_calibrated_logit",
-)
-DEFAULT_MODEL_NAMES = STANDARD_MODEL_NAMES
-DEFAULT_HORIZONS = (21, 63)
-RESEARCH_HORIZONS = (5, 21, 63)
-STANDARD_STEP_DAYS = 126
-RESEARCH_STEP_DAYS = 42
-SECTOR_TICKERS = ("XLK", "XLF", "XLE", "XLV", "XLI", "XLY", "XLP", "XLU", "XLRE", "XLC")
-
 
 @dataclass(frozen=True)
 class MLTaskSpec:
@@ -55,9 +48,9 @@ class MLTaskSpec:
     kind: TaskKind
     horizon_days: int
     positive_class: str | None = None
-    min_train_observations: int = 252
-    train_window_days: int = 756
-    step_days: int = 21
+    min_train_observations: int = DEFAULT_ML_TASK_MIN_TRAIN_OBSERVATIONS
+    train_window_days: int = DEFAULT_ML_TASK_TRAIN_WINDOW_DAYS
+    step_days: int = DEFAULT_ML_TASK_STEP_DAYS
 
 
 @dataclass(frozen=True)
@@ -189,13 +182,13 @@ def _profile_settings(
     step_days: int | None,
 ) -> tuple[tuple[int, ...], tuple[str, ...], int]:
     if profile == "research":
-        default_horizons = RESEARCH_HORIZONS
-        default_models = RESEARCH_MODEL_NAMES
-        default_step_days = RESEARCH_STEP_DAYS
+        default_horizons = DEFAULT_ML_RESEARCH_HORIZONS
+        default_models = DEFAULT_ML_RESEARCH_MODEL_NAMES
+        default_step_days = DEFAULT_ML_RESEARCH_STEP_DAYS
     else:
-        default_horizons = DEFAULT_HORIZONS
-        default_models = DEFAULT_MODEL_NAMES
-        default_step_days = STANDARD_STEP_DAYS
+        default_horizons = DEFAULT_ML_HORIZONS
+        default_models = DEFAULT_ML_MODEL_NAMES
+        default_step_days = DEFAULT_ML_STANDARD_STEP_DAYS
     return (
         tuple(horizons or default_horizons),
         tuple(model_names or default_models),
@@ -232,7 +225,7 @@ def _build_task_specs(
                 step_days=step_days,
             )
         )
-        if len(set(SECTOR_TICKERS) & set(prices.columns)) >= 4:
+        if len(set(DEFAULT_ML_SECTOR_TICKERS) & set(prices.columns)) >= 4:
             tasks.append(MLTaskSpec(f"sector_rotation_{horizon}d", "sector_rotation", horizon, step_days=step_days))
     tasks.append(MLTaskSpec("churn_filter_21d", "churn_filter", 21, positive_class="durable", step_days=step_days))
     return tuple(tasks)
@@ -432,7 +425,7 @@ def _reentry_labels(prices: pd.DataFrame, horizon_days: int) -> pd.Series:
 
 
 def _sector_rotation_labels(prices: pd.DataFrame, horizon_days: int) -> pd.Series:
-    tickers = [ticker for ticker in SECTOR_TICKERS if ticker in prices.columns]
+    tickers = [ticker for ticker in DEFAULT_ML_SECTOR_TICKERS if ticker in prices.columns]
     forward = prices[tickers].ffill().shift(-horizon_days) / prices[tickers].ffill().replace(0, np.nan) - 1.0
     valid = forward.notna().sum(axis=1) >= max(3, len(tickers) // 2)
     labels = pd.Series(index=prices.index, dtype="object")
@@ -445,7 +438,7 @@ def _strategy_family_labels(prices: pd.DataFrame, horizon_days: int) -> pd.Serie
     qqq_rsp = _forward_return(_price(prices, "QQQ") / _price(prices, "RSP").replace(0, np.nan), horizon_days)
     smh_spy = _forward_return(_price(prices, "SMH") / _price(prices, "SPY").replace(0, np.nan), horizon_days)
     hyg_lqd = _forward_return(_price(prices, "HYG") / _price(prices, "LQD").replace(0, np.nan), horizon_days)
-    sectors = [ticker for ticker in SECTOR_TICKERS if ticker in prices.columns]
+    sectors = [ticker for ticker in DEFAULT_ML_SECTOR_TICKERS if ticker in prices.columns]
     if sectors:
         sector_forward = prices[sectors].ffill().shift(-horizon_days) / prices[sectors].ffill().replace(0, np.nan) - 1.0
         dispersion = sector_forward.max(axis=1) - sector_forward.median(axis=1)

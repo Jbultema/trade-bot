@@ -3,9 +3,15 @@ from __future__ import annotations
 import pandas as pd
 
 from trade_bot.config import StrategyConfig
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_MAX_ASSET_WEIGHT,
     DEFAULT_RANKING_METRIC,
+    DEFAULT_STRATEGY_AI_GROWTH_TICKERS,
+    DEFAULT_STRATEGY_CYCLICAL_TICKERS,
+    DEFAULT_STRATEGY_DEFENSIVE_ALT_TICKERS,
+    DEFAULT_STRATEGY_DEFENSIVE_EQUITY_TICKERS,
+    DEFAULT_STRATEGY_GLOBAL_TICKERS,
+    DEFAULT_STRATEGY_SPECULATIVE_TICKERS,
     DEFAULT_TREND_FILTER_DAYS,
     DEFAULT_VOLATILITY_LOOKBACK_DAYS,
     DEFAULT_WEIGHTING,
@@ -22,148 +28,6 @@ from trade_bot.features.valuation import (
     rolling_peak_discount,
     trend_discount,
 )
-
-AI_GROWTH_TICKERS = {
-    "AAPL",
-    "AMD",
-    "AMZN",
-    "ANET",
-    "APP",
-    "ARKK",
-    "ARM",
-    "ASML",
-    "AVGO",
-    "BOTZ",
-    "CLOU",
-    "CRWD",
-    "DDOG",
-    "DELL",
-    "GOOG",
-    "GOOGL",
-    "IGV",
-    "META",
-    "MRVL",
-    "MSFT",
-    "MU",
-    "NET",
-    "NVDA",
-    "ORCL",
-    "PLTR",
-    "QQQ",
-    "QQQM",
-    "ROBO",
-    "SKYY",
-    "SMCI",
-    "SMH",
-    "SNOW",
-    "SOXX",
-    "TSLA",
-    "XLK",
-    "XLC",
-    "XLY",
-}
-
-CYCLICAL_TICKERS = {
-    "BNO",
-    "COWZ",
-    "CPER",
-    "DBC",
-    "DIA",
-    "IWB",
-    "IWM",
-    "IYT",
-    "KBE",
-    "KRE",
-    "MDY",
-    "RSP",
-    "SPHB",
-    "SPMO",
-    "USO",
-    "VTI",
-    "VTV",
-    "XES",
-    "XHB",
-    "XLB",
-    "XLE",
-    "XLF",
-    "XLI",
-    "XME",
-    "XOP",
-    "XRT",
-}
-
-DEFENSIVE_EQUITY_TICKERS = {
-    "MOAT",
-    "QUAL",
-    "SCHD",
-    "SPLV",
-    "USMV",
-    "VIG",
-    "XLRE",
-    "XLP",
-    "XLU",
-    "XLV",
-}
-
-DEFENSIVE_ALT_TICKERS = {
-    "AGG",
-    "BIL",
-    "BND",
-    "BSV",
-    "EDV",
-    "GLD",
-    "IAU",
-    "IEF",
-    "IEI",
-    "LQD",
-    "MUB",
-    "SGOV",
-    "SHY",
-    "TIP",
-    "TLT",
-    "UUP",
-    "USFR",
-    "VCIT",
-    "VCSH",
-    "VGIT",
-    "VGSH",
-    "VGLT",
-    "VTIP",
-}
-
-GLOBAL_TICKERS = {
-    "EEM",
-    "EFA",
-    "EWA",
-    "EWC",
-    "EWJ",
-    "EWU",
-    "EWW",
-    "EWZ",
-    "FXE",
-    "FXF",
-    "FXY",
-    "INDA",
-    "MCHI",
-    "VEA",
-    "VGK",
-    "VT",
-    "VWO",
-}
-
-SPECULATIVE_TICKERS = {
-    "ARKK",
-    "BITB",
-    "ETHE",
-    "FBTC",
-    "IBIT",
-    "LIT",
-    "SVXY",
-    "TAN",
-    "URA",
-    "VIXY",
-    "XBI",
-}
 
 
 def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
@@ -1022,17 +886,17 @@ def _mean_scores(scores: list[pd.Series], index: pd.Index) -> pd.Series:
 
 
 def _sector_regime_group(ticker: str) -> str:
-    if ticker in DEFENSIVE_ALT_TICKERS:
+    if ticker in DEFAULT_STRATEGY_DEFENSIVE_ALT_TICKERS:
         return "defensive_alt"
-    if ticker in DEFENSIVE_EQUITY_TICKERS:
+    if ticker in DEFAULT_STRATEGY_DEFENSIVE_EQUITY_TICKERS:
         return "defensive_equity"
-    if ticker in SPECULATIVE_TICKERS:
+    if ticker in DEFAULT_STRATEGY_SPECULATIVE_TICKERS:
         return "speculative"
-    if ticker in AI_GROWTH_TICKERS:
+    if ticker in DEFAULT_STRATEGY_AI_GROWTH_TICKERS:
         return "ai_growth"
-    if ticker in CYCLICAL_TICKERS:
+    if ticker in DEFAULT_STRATEGY_CYCLICAL_TICKERS:
         return "cyclical"
-    if ticker in GLOBAL_TICKERS:
+    if ticker in DEFAULT_STRATEGY_GLOBAL_TICKERS:
         return "global"
     return "broad"
 

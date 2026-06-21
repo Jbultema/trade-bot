@@ -10,7 +10,7 @@ import pandas as pd
 import requests
 import yaml
 
-FRED_GRAPH_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv"
+from trade_bot.DEFAULTS import DEFAULT_FRED_GRAPH_URL
 
 
 @dataclass(frozen=True)
@@ -80,7 +80,7 @@ def fetch_fred_data(series_ids: list[str], start: str, end: str | None) -> pd.Da
 
 def fetch_fred_series(series_id: str, start: str, end: str | None) -> pd.Series:
     response = requests.get(
-        FRED_GRAPH_URL,
+        DEFAULT_FRED_GRAPH_URL,
         params={"id": series_id},
         timeout=30,
     )

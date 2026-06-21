@@ -6,7 +6,7 @@ from typing import Any, Literal
 import yaml
 from pydantic import BaseModel, ConfigDict, Field
 
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_CYCLE_MAX_STEP_CHANGE,
     DEFAULT_CYCLE_MIN_HOLD_DAYS,
     DEFAULT_CYCLE_MIN_REBALANCE_CHANGE,

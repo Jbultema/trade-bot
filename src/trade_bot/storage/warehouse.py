@@ -13,7 +13,7 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
 from trade_bot.config import ExecutionConfig, StrategyConfig
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_EXPERIMENT_REGISTRY_LIMIT,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_JOURNAL_PATH,

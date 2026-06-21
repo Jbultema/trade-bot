@@ -5,7 +5,7 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 
-from trade_bot.DEFAULT import (
+from trade_bot.DEFAULTS import (
     DEFAULT_RISK_AI_BETA_TICKERS,
     DEFAULT_RISK_BASE_MAX_AI_BETA,
     DEFAULT_RISK_BASE_MAX_EQUITY_BETA,

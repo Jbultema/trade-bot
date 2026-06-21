@@ -8,7 +8,7 @@ import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
-from trade_bot.DEFAULT import DEFAULT_MONITORING_TOP_N, DEFAULT_RUN_STORE_DB_PATH
+from trade_bot.DEFAULTS import DEFAULT_MONITORING_TOP_N, DEFAULT_RUN_STORE_DB_PATH
 from trade_bot.storage.warehouse import TradingWarehouse
 
 
