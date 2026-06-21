@@ -14,8 +14,15 @@ from trade_bot.DEFAULT import (
     DEFAULT_SCENARIO_STRESS_MULTIPLIER,
     DEFAULT_SCENARIO_TRANSITION_MULTIPLIER,
 )
+from trade_bot.ml.models import (
+    SklearnFitConfig,
+    fit_probability_model,
+    is_sklearn_model,
+    predict_probability,
+)
 
 STATE_COLUMNS = ("risk_off", "transition", "risk_on_fragile", "risk_on")
+STRATEGY_DRAWDOWN_COLUMNS = ("stable", "drawdown")
 
 
 @dataclass(frozen=True)
@@ -34,6 +41,13 @@ class FutureStateModelConfig:
         "tail_specialist",
         "ensemble",
         "bayesian_ensemble",
+        "sk_logit_l2",
+        "sk_logit_l1",
+        "sk_random_forest",
+        "sk_extra_trees",
+        "sk_gradient_boosting",
+        "sk_calibrated_logit",
+        "sk_ensemble",
     ]
     horizon_days: int = 21
     feature_set: Literal["core", "ai", "cross_asset", "all"] = "core"
@@ -50,12 +64,49 @@ class FutureStateModelConfig:
     recency_half_life_days: int = 252
     bayesian_variance_floor: float = 0.25
     bayesian_feature_shrinkage: float = 12.0
+    sklearn_n_estimators: int = 140
+    sklearn_max_depth: int = 5
+    sklearn_min_samples_leaf: int = 20
+    sklearn_regularization_c: float = 0.70
+    sklearn_random_state: int = 17
     stress_multiplier: float = DEFAULT_SCENARIO_STRESS_MULTIPLIER
     transition_multiplier: float = DEFAULT_SCENARIO_TRANSITION_MULTIPLIER
     fragile_upside_multiplier: float = DEFAULT_SCENARIO_FRAGILE_UPSIDE_MULTIPLIER
     risk_on_multiplier: float = DEFAULT_SCENARIO_RISK_ON_MULTIPLIER
     min_multiplier: float = DEFAULT_SCENARIO_MIN_MULTIPLIER
     max_multiplier: float = DEFAULT_SCENARIO_MAX_MULTIPLIER
+    risk_off_activation_probability: float = 0.0
+    transition_activation_probability: float = 0.0
+    fragile_activation_probability: float = 0.0
+
+
+@dataclass(frozen=True)
+class StrategyDrawdownModelConfig:
+    model: Literal[
+        "base_rate",
+        "sk_logit_l2",
+        "sk_logit_l1",
+        "sk_random_forest",
+        "sk_extra_trees",
+        "sk_gradient_boosting",
+        "sk_calibrated_logit",
+        "sk_ensemble",
+    ]
+    horizon_days: int = 21
+    feature_set: Literal["core", "ai", "cross_asset", "all"] = "ai"
+    train_window_days: int = 756
+    min_train_observations: int = 252
+    refit_every_days: int = 126
+    future_drawdown_threshold: float = -0.08
+    activation_probability: float = 0.42
+    stress_multiplier: float = 0.62
+    min_multiplier: float = 0.55
+    probability_smoothing: float = 0.08
+    sklearn_n_estimators: int = 48
+    sklearn_max_depth: int = 4
+    sklearn_min_samples_leaf: int = 24
+    sklearn_regularization_c: float = 0.70
+    sklearn_random_state: int = 29
 
 
 def build_future_state_features(prices: pd.DataFrame) -> pd.DataFrame:
@@ -220,12 +271,24 @@ def apply_future_state_position_sizing(
 ) -> pd.DataFrame:
     probabilities = build_future_state_probabilities(prices, config)
     probabilities = probabilities.reindex(target_weights.index).ffill().fillna(_default_probability())
+    risk_off_probability = _activated_probability(
+        probabilities["risk_off"],
+        config.risk_off_activation_probability,
+    )
+    transition_probability = _activated_probability(
+        probabilities["transition"],
+        config.transition_activation_probability,
+    )
+    fragile_probability = _activated_probability(
+        probabilities["risk_on_fragile"],
+        config.fragile_activation_probability,
+    )
     multiplier = config.risk_on_multiplier
-    multiplier -= probabilities["risk_off"] * (config.risk_on_multiplier - config.stress_multiplier)
-    multiplier -= probabilities["transition"] * (
+    multiplier -= risk_off_probability * (config.risk_on_multiplier - config.stress_multiplier)
+    multiplier -= transition_probability * (
         config.risk_on_multiplier - config.transition_multiplier
     )
-    multiplier -= probabilities["risk_on_fragile"] * (
+    multiplier -= fragile_probability * (
         config.risk_on_multiplier - config.fragile_upside_multiplier
     )
     multiplier = multiplier.clip(lower=config.min_multiplier, upper=config.max_multiplier)
@@ -239,6 +302,214 @@ def apply_future_state_position_sizing(
         residual = (1.0 - adjusted.sum(axis=1)).clip(lower=0.0)
         adjusted.loc[:, defensive_ticker] = adjusted[defensive_ticker] + residual
     return adjusted.clip(lower=0.0)
+
+
+def label_strategy_forward_drawdown(
+    target_weights: pd.DataFrame,
+    prices: pd.DataFrame,
+    *,
+    horizon_days: int,
+    future_drawdown_threshold: float,
+) -> pd.Series:
+    strategy_returns = _strategy_shadow_returns(target_weights, prices)
+    equity = (1.0 + strategy_returns.fillna(0.0)).cumprod()
+    forward_drawdown = _forward_min(equity, horizon_days) / equity.replace(0, np.nan) - 1.0
+    labels = pd.Series("stable", index=equity.index, dtype="object")
+    labels.loc[forward_drawdown <= future_drawdown_threshold] = "drawdown"
+    return labels.where(forward_drawdown.notna())
+
+
+def build_strategy_drawdown_probabilities(
+    target_weights: pd.DataFrame,
+    prices: pd.DataFrame,
+    config: StrategyDrawdownModelConfig,
+) -> pd.DataFrame:
+    features = build_future_state_features(prices)
+    labels = label_strategy_forward_drawdown(
+        target_weights,
+        prices,
+        horizon_days=config.horizon_days,
+        future_drawdown_threshold=config.future_drawdown_threshold,
+    )
+    selected_features = _select_feature_columns(features, config.feature_set)
+    if selected_features.empty:
+        return _default_strategy_drawdown_probabilities(features.index)
+
+    probabilities = []
+    last_fit_at = -10**9
+    last_predict_at = -10**9
+    last_probability: pd.Series | None = None
+    cached_fit: object | None = None
+    cached_columns: list[str] | None = None
+    for position, _timestamp in enumerate(selected_features.index):
+        if (
+            last_probability is not None
+            and position - last_predict_at < max(config.refit_every_days, 1)
+        ):
+            probabilities.append(last_probability.copy())
+            continue
+        train_end = position - config.horizon_days
+        if train_end <= 0:
+            last_probability = _default_strategy_drawdown_probability()
+            last_predict_at = position
+            probabilities.append(last_probability.copy())
+            continue
+        train_start = max(0, train_end - config.train_window_days)
+        x_train = selected_features.iloc[train_start:train_end]
+        y_train = labels.iloc[train_start:train_end]
+        valid = y_train.notna()
+        x_train = x_train.loc[valid]
+        y_train = y_train.loc[valid].astype(str)
+        if len(y_train) < config.min_train_observations:
+            last_probability = _blend_strategy_drawdown_probabilities(
+                _strategy_drawdown_frequency(y_train),
+                _default_strategy_drawdown_probability(),
+                config.probability_smoothing,
+            )
+            last_predict_at = position
+            probabilities.append(last_probability.copy())
+            continue
+
+        current = selected_features.iloc[position]
+        if is_sklearn_model(config.model):
+            if cached_fit is None or position - last_fit_at >= config.refit_every_days:
+                cached_columns = list(x_train.columns)
+                cached_fit = fit_probability_model(
+                    x_train,
+                    y_train,
+                    SklearnFitConfig(
+                        model=config.model,
+                        random_state=config.sklearn_random_state + config.horizon_days,
+                        n_estimators=config.sklearn_n_estimators,
+                        max_depth=config.sklearn_max_depth,
+                        min_samples_leaf=config.sklearn_min_samples_leaf,
+                        regularization_c=config.sklearn_regularization_c,
+                    ),
+                )
+                last_fit_at = position
+            model_probability = predict_probability(
+                cached_fit if isinstance(cached_fit, dict) else {},
+                current.reindex(cached_columns or list(x_train.columns)).fillna(0.0),
+                STRATEGY_DRAWDOWN_COLUMNS,
+            )
+        else:
+            model_probability = _strategy_drawdown_frequency(y_train)
+
+        base_probability = _strategy_drawdown_frequency(y_train)
+        last_probability = _blend_strategy_drawdown_probabilities(
+            model_probability,
+            base_probability,
+            config.probability_smoothing,
+        )
+        last_predict_at = position
+        probabilities.append(last_probability.copy())
+
+    frame = pd.DataFrame(
+        probabilities,
+        index=selected_features.index,
+        columns=STRATEGY_DRAWDOWN_COLUMNS,
+    )
+    return _normalize_strategy_drawdown_probabilities(frame).fillna(
+        _default_strategy_drawdown_probability()
+    )
+
+
+def apply_strategy_drawdown_position_sizing(
+    target_weights: pd.DataFrame,
+    prices: pd.DataFrame,
+    config: StrategyDrawdownModelConfig,
+    *,
+    defensive_ticker: str | None,
+) -> pd.DataFrame:
+    probabilities = build_strategy_drawdown_probabilities(target_weights, prices, config)
+    probabilities = probabilities.reindex(target_weights.index).ffill().fillna(
+        _default_strategy_drawdown_probability()
+    )
+    drawdown_probability = _activated_probability(
+        probabilities["drawdown"],
+        config.activation_probability,
+    )
+    multiplier = 1.0 - drawdown_probability * (1.0 - config.stress_multiplier)
+    multiplier = multiplier.clip(lower=config.min_multiplier, upper=1.0)
+
+    adjusted = target_weights.copy().astype(float)
+    if defensive_ticker and defensive_ticker not in adjusted.columns:
+        adjusted[defensive_ticker] = 0.0
+    risk_columns = [column for column in adjusted.columns if column != defensive_ticker]
+    adjusted.loc[:, risk_columns] = adjusted[risk_columns].mul(multiplier, axis=0)
+    if defensive_ticker:
+        residual = (1.0 - adjusted.sum(axis=1)).clip(lower=0.0)
+        adjusted.loc[:, defensive_ticker] = adjusted[defensive_ticker] + residual
+    return adjusted.clip(lower=0.0)
+
+
+def _activated_probability(probability: pd.Series, activation_probability: float) -> pd.Series:
+    threshold = float(np.clip(activation_probability, 0.0, 0.95))
+    if threshold <= 0.0:
+        return probability.clip(lower=0.0, upper=1.0)
+    return ((probability - threshold) / (1.0 - threshold)).clip(lower=0.0, upper=1.0)
+
+
+def _strategy_shadow_returns(target_weights: pd.DataFrame, prices: pd.DataFrame) -> pd.Series:
+    aligned_prices = prices.ffill().sort_index()
+    aligned_weights = target_weights.reindex(aligned_prices.index).ffill().fillna(0.0)
+    common_columns = [column for column in aligned_weights.columns if column in aligned_prices.columns]
+    if not common_columns:
+        return pd.Series(0.0, index=aligned_prices.index, dtype=float)
+    asset_returns = aligned_prices[common_columns].pct_change().replace([np.inf, -np.inf], np.nan).fillna(0.0)
+    execution_weights = aligned_weights[common_columns].shift(1).fillna(0.0)
+    return (execution_weights * asset_returns).sum(axis=1)
+
+
+def _strategy_drawdown_frequency(labels: pd.Series) -> pd.Series:
+    counts = labels.value_counts(normalize=True)
+    return _normalize_strategy_drawdown_probability(
+        pd.Series(
+            {
+                "stable": float(counts.get("stable", 0.0)),
+                "drawdown": float(counts.get("drawdown", 0.0)),
+            },
+            dtype=float,
+        )
+    )
+
+
+def _default_strategy_drawdown_probability() -> pd.Series:
+    return pd.Series({"stable": 0.80, "drawdown": 0.20}, dtype=float)
+
+
+def _default_strategy_drawdown_probabilities(index: pd.Index) -> pd.DataFrame:
+    probability = _default_strategy_drawdown_probability()
+    return pd.DataFrame(
+        [probability] * len(index),
+        index=index,
+        columns=STRATEGY_DRAWDOWN_COLUMNS,
+    )
+
+
+def _blend_strategy_drawdown_probabilities(
+    left: pd.Series,
+    right: pd.Series,
+    right_weight: float,
+) -> pd.Series:
+    weight = float(np.clip(right_weight, 0.0, 1.0))
+    left = left.reindex(STRATEGY_DRAWDOWN_COLUMNS).fillna(0.0)
+    right = right.reindex(STRATEGY_DRAWDOWN_COLUMNS).fillna(0.0)
+    return _normalize_strategy_drawdown_probability(left * (1.0 - weight) + right * weight)
+
+
+def _normalize_strategy_drawdown_probabilities(frame: pd.DataFrame) -> pd.DataFrame:
+    normalized = frame.reindex(columns=STRATEGY_DRAWDOWN_COLUMNS).clip(lower=0.0).fillna(0.0)
+    totals = normalized.sum(axis=1).replace(0.0, np.nan)
+    return normalized.div(totals, axis=0).fillna(_default_strategy_drawdown_probability())
+
+
+def _normalize_strategy_drawdown_probability(probability: pd.Series) -> pd.Series:
+    probability = probability.reindex(STRATEGY_DRAWDOWN_COLUMNS).fillna(0.0).clip(lower=0.0)
+    total = float(probability.sum())
+    if total <= 0:
+        return _default_strategy_drawdown_probability()
+    return probability / total
 
 
 def _predict_direct_model(
@@ -289,7 +560,7 @@ def _predict_direct_model(
 
 
 def _uses_cached_fit(model: str) -> bool:
-    return model == "ridge_logit"
+    return model == "ridge_logit" or is_sklearn_model(model)
 
 
 def _fit_cached_model(
@@ -299,6 +570,19 @@ def _fit_cached_model(
 ) -> dict[str, object]:
     if config.model == "ridge_logit":
         return _fit_ridge_logit(x_train, y_train, config)
+    if is_sklearn_model(config.model):
+        return fit_probability_model(
+            x_train,
+            y_train,
+            SklearnFitConfig(
+                model=config.model,
+                random_state=config.sklearn_random_state + config.horizon_days,
+                n_estimators=config.sklearn_n_estimators,
+                max_depth=config.sklearn_max_depth,
+                min_samples_leaf=config.sklearn_min_samples_leaf,
+                regularization_c=config.sklearn_regularization_c,
+            ),
+        )
     return {"frequency": _class_frequency(y_train)}
 
 
@@ -311,6 +595,8 @@ def _predict_cached_model(
         return _default_probability()
     if config.model == "ridge_logit":
         return _predict_ridge_logit(cached_fit, current)
+    if is_sklearn_model(config.model):
+        return predict_probability(cached_fit, current, STATE_COLUMNS)
     frequency = cached_fit.get("frequency")
     return frequency if isinstance(frequency, pd.Series) else _default_probability()
 

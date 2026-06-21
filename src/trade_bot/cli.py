@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 from pathlib import Path
-from typing import Annotated, Any
+from typing import Annotated, Any, Literal
 
 import typer
 from rich.console import Console
@@ -15,6 +15,7 @@ from trade_bot.DEFAULT import (
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_JOURNAL_PATH,
     DEFAULT_MACRO_PATH,
+    DEFAULT_ML_DIAGNOSTICS_DIR,
     DEFAULT_MONITORING_TOP_N,
     DEFAULT_NEWS_PATH,
     DEFAULT_REPORT_PATH,
@@ -22,6 +23,7 @@ from trade_bot.DEFAULT import (
     DEFAULT_RUN_STORE_DB_PATH,
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
 )
+from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
 from trade_bot.research.baselines import run_configured_baselines
 from trade_bot.research.entry_date_analysis import build_entry_date_analysis
@@ -461,6 +463,49 @@ def run_experiment_iteration_cmd(
         )
     console.print(table)
     console.print(f"Wrote experiment outputs to {Path(output_dir) / f'iteration_{iteration:02d}'}")
+
+
+@app.command("run-ml-diagnostics")
+def run_ml_diagnostics_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_ML_DIAGNOSTICS_DIR,
+    profile: Annotated[Literal["standard", "research"], typer.Option("--profile")] = "standard",
+    step_days: Annotated[int | None, typer.Option("--step-days")] = None,
+) -> None:
+    bot_config = load_config(config)
+    prices = load_or_fetch_yahoo_prices(
+        configured_tickers(bot_config),
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        adjusted=bot_config.data.adjusted,
+        refresh=refresh_data,
+    )
+    run = run_ml_diagnostics(prices, output_dir=output_dir, profile=profile, step_days=step_days)
+    table = Table(title=f"ML Diagnostics ({profile})")
+    for column in [
+        "task",
+        "model",
+        "utility_score",
+        "balanced_accuracy",
+        "brier_score",
+        "calibration_error",
+        "positive_recall",
+    ]:
+        table.add_column(column)
+    for _, row in run.metrics.head(18).iterrows():
+        table.add_row(
+            str(row["task"]),
+            str(row["model"]),
+            f"{float(row['utility_score']):.3f}",
+            f"{float(row['balanced_accuracy']):.3f}",
+            f"{float(row['brier_score']):.3f}",
+            f"{float(row['calibration_error']):.3f}",
+            _format_optional_decimal(row.get("positive_recall")),
+        )
+    console.print(table)
+    console.print(f"Wrote ML diagnostics to {run.output_dir}")
 
 
 @app.command("run-entry-date-analysis")

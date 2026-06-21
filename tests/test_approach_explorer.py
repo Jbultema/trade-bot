@@ -20,8 +20,10 @@ from trade_bot.research.approach_explorer import (
     build_approach_weight_history,
     build_latest_approach_weights,
     execution_for_catalog_row,
+    strategy_drawdown_model_from_catalog_row,
     strategy_from_catalog_row,
 )
+from trade_bot.research.future_state_ml import StrategyDrawdownModelConfig
 
 
 def test_approach_catalog_includes_baselines_and_experiment_manifests(tmp_path: Path) -> None:
@@ -35,6 +37,12 @@ def test_approach_catalog_includes_baselines_and_experiment_manifests(tmp_path: 
         top_n=1,
         defensive_ticker="BIL",
     )
+    drawdown_config = StrategyDrawdownModelConfig(
+        model="base_rate",
+        horizon_days=5,
+        train_window_days=20,
+        min_train_observations=5,
+    )
     pd.DataFrame(
         [
             {
@@ -45,6 +53,8 @@ def test_approach_catalog_includes_baselines_and_experiment_manifests(tmp_path: 
                 "parent": "",
                 "hypothesis": "Test broad momentum.",
                 "strategy_json": json.dumps(strategy.model_dump(mode="json")),
+                "strategy_drawdown_model": "base_rate_ai_5d_dd8%",
+                "strategy_drawdown_model_json": json.dumps(drawdown_config.__dict__),
             }
         ]
     ).to_csv(iteration_dir / "candidates.csv", index=False)
@@ -56,7 +66,7 @@ def test_approach_catalog_includes_baselines_and_experiment_manifests(tmp_path: 
                 "promotion_score": 0.9,
                 "cagr": 0.1,
                 "max_drawdown": -0.2,
-                "calmar": 0.5,
+                "calmar": 0.6,
             }
         ]
     ).to_csv(iteration_dir / "scorecard.csv", index=False)
@@ -66,7 +76,9 @@ def test_approach_catalog_includes_baselines_and_experiment_manifests(tmp_path: 
     assert {"baseline", "experiment"} == set(catalog["source"])
     experiment_row = catalog[catalog["source"] == "experiment"].iloc[0]
     assert experiment_row["promotion_decision"] == "promote_candidate"
+    assert experiment_row["research_status"] == "operational_candidate"
     assert strategy_from_catalog_row(experiment_row).type == "dual_momentum"
+    assert strategy_drawdown_model_from_catalog_row(experiment_row) == drawdown_config
 
 
 def test_approach_explanation_surfaces_strategy_mechanics() -> None:
@@ -119,11 +131,21 @@ def test_approach_plain_english_explains_saved_experiment_candidate() -> None:
     )
 
     execution = execution_for_catalog_row(row, config.execution)
-    explanation = " ".join(build_approach_explanation(strategy, row, config, execution=execution))
+    drawdown_model = StrategyDrawdownModelConfig(model="base_rate", horizon_days=21)
+    explanation = " ".join(
+        build_approach_explanation(
+            strategy,
+            row,
+            config,
+            execution=execution,
+            strategy_drawdown_model=drawdown_model,
+        )
+    )
 
     assert "dual momentum" in explanation
     assert "top 1" in explanation
     assert "BIL" in explanation
+    assert "strategy-specific ML drawdown guard" in explanation
     assert "i09_ai_beta_bubble_escape_broader" in explanation
     assert execution.rebalance == "D"
 
@@ -185,6 +207,52 @@ def test_approach_position_history_outputs_chart_and_change_tables() -> None:
     assert not change_log.empty
     assert "position_after" in change_log.columns
     assert not holding_stats.empty
+
+
+def test_approach_backtest_reconstructs_strategy_drawdown_ml_overlay() -> None:
+    strategy = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ"],
+        lookback_days=2,
+        skip_days=0,
+        top_n=1,
+        defensive_ticker="BIL",
+    )
+    index = pd.bdate_range("2024-01-01", periods=40)
+    trend = pd.Series(range(40), dtype=float)
+    qqq = pd.concat(
+        [100.0 + trend.iloc[:20] * 0.80, 116.0 - pd.Series(range(20), dtype=float) * 1.40],
+        ignore_index=True,
+    )
+    prices = pd.DataFrame(
+        {
+            "SPY": 100.0 + trend * 0.20,
+            "QQQ": qqq.to_numpy(),
+            "BIL": 100.0 + trend * 0.01,
+        },
+        index=index,
+    )
+    drawdown_model = StrategyDrawdownModelConfig(
+        model="base_rate",
+        horizon_days=5,
+        train_window_days=20,
+        min_train_observations=5,
+        activation_probability=0.0,
+        stress_multiplier=0.50,
+        min_multiplier=0.50,
+    )
+
+    result, missing = build_approach_backtest_result(
+        prices,
+        strategy,
+        ExecutionConfig(rebalance="D", signal_lag_days=1),
+        strategy_drawdown_model=drawdown_model,
+    )
+
+    assert result is not None
+    assert missing == []
+    assert "BIL" in result.target_weights.columns
+    assert result.target_weights["BIL"].max() > 0.0
 
 
 def _config() -> BotConfig:

@@ -3,13 +3,24 @@ from __future__ import annotations
 import pandas as pd
 
 DEFAULT_CURATED_SHELF_LIMIT = 25
+PRUNED_STATUS = "pruned_dead_end"
+REFERENCE_STATUS = "reference"
+OPERATIONAL_STATUS = "operational_candidate"
+ITERATE_STATUS = "needs_iteration"
+ARCHIVE_STATUS = "research_archive"
+
+RISK_REJECT_DECISIONS = {
+    "reject_left_tail",
+    "reject_regime_fragility",
+    "reject_walk_forward_fragility",
+}
 
 
 def rank_strategy_candidates(frame: pd.DataFrame) -> pd.DataFrame:
     """Return a stable research ranking before explicit curation/diversification."""
     if frame.empty:
         return frame.copy()
-    ranked = frame.copy()
+    ranked = add_research_status(frame)
     if "name" in ranked and "strategy" not in ranked:
         ranked = ranked.rename(columns={"name": "strategy"})
 
@@ -67,8 +78,23 @@ def rank_strategy_candidates(frame: pd.DataFrame) -> pd.DataFrame:
         .fillna(ranked["robustness_score"])
         .fillna(ranked["calmar"])
     )
+    ranked["_research_status_rank"] = (
+        ranked["research_status"]
+        .astype(str)
+        .map(
+            {
+                OPERATIONAL_STATUS: 0,
+                ITERATE_STATUS: 1,
+                REFERENCE_STATUS: 2,
+                ARCHIVE_STATUS: 3,
+                PRUNED_STATUS: 4,
+            }
+        )
+        .fillna(3)
+    )
     ranked = ranked.sort_values(
         [
+            "_research_status_rank",
             "_promotion_rank",
             "_validation_rank",
             "_curation_sort_score",
@@ -78,10 +104,107 @@ def rank_strategy_candidates(frame: pd.DataFrame) -> pd.DataFrame:
             "left_tail_regime_return",
             "iteration",
         ],
-        ascending=[True, True, False, False, False, False, False, False],
+        ascending=[True, True, True, False, False, False, False, False, False],
         na_position="last",
     )
-    return ranked.drop(columns=["_promotion_rank", "_validation_rank"], errors="ignore")
+    return ranked.drop(
+        columns=["_promotion_rank", "_validation_rank", "_research_status_rank"],
+        errors="ignore",
+    )
+
+
+def add_research_status(frame: pd.DataFrame) -> pd.DataFrame:
+    """Classify experiment rows into live candidates, archive rows, and dead-end prunes.
+
+    Pruning here is an interface and curation decision, not deletion. Historical rows remain
+    available for audit, but default views should not keep low-return or failed-risk ideas in
+    the active operating queue.
+    """
+    if frame.empty:
+        return frame.copy()
+    output = frame.copy()
+    if "name" in output and "strategy" not in output:
+        output = output.rename(columns={"name": "strategy"})
+    for column in [
+        "cagr",
+        "calmar",
+        "max_drawdown",
+        "walk_forward_positive_rate",
+        "left_tail_regime_return",
+        "promotion_score",
+    ]:
+        if column not in output:
+            output[column] = float("nan")
+        output[column] = pd.to_numeric(output[column], errors="coerce")
+    for column, default in {
+        "promotion_decision": "",
+        "phase": "",
+        "family": "",
+        "role": "",
+        "strategy": "",
+        "operability_label": "",
+    }.items():
+        if column not in output:
+            output[column] = default
+        output[column] = output[column].fillna(default)
+
+    statuses = []
+    reasons = []
+    for _, row in output.iterrows():
+        status, reason = _research_status_for_row(row)
+        statuses.append(status)
+        reasons.append(reason)
+    output["research_status"] = statuses
+    output["prune_reason"] = reasons
+    return output
+
+
+def _research_status_for_row(row: pd.Series) -> tuple[str, str]:
+    if bool(_reference_mask(pd.DataFrame([row])).iloc[0]):
+        return REFERENCE_STATUS, "reference_or_baseline"
+
+    decision = str(row.get("promotion_decision", ""))
+    phase = str(row.get("phase", "")).lower()
+    family = str(row.get("family", "")).lower()
+    role = str(row.get("role", "")).lower()
+    strategy = str(row.get("strategy", "")).lower()
+    cagr = _numeric(row.get("cagr"))
+    calmar = _numeric(row.get("calmar"))
+    max_drawdown = _numeric(row.get("max_drawdown"))
+    walk_forward_positive = _numeric(row.get("walk_forward_positive_rate"))
+    left_tail_return = _numeric(row.get("left_tail_regime_return"))
+    operability = str(row.get("operability_label", ""))
+
+    if decision in RISK_REJECT_DECISIONS:
+        return PRUNED_STATUS, f"{decision}_failed_validation"
+    if cagr == cagr and cagr < 0.05:
+        return PRUNED_STATUS, "low_cagr_below_5pct"
+    if calmar == calmar and calmar < 0.25 and cagr == cagr and cagr < 0.08:
+        return PRUNED_STATUS, "weak_return_and_risk_adjusted_profile"
+    if max_drawdown == max_drawdown and max_drawdown < -0.25:
+        return PRUNED_STATUS, "drawdown_worse_than_25pct"
+    if "classic_dd" in strategy and cagr == cagr and cagr < 0.135:
+        return PRUNED_STATUS, "reactive_drawdown_control_lost_too_much_growth"
+    if "sklearn_future_state" in phase and cagr == cagr and cagr < 0.08:
+        return PRUNED_STATUS, "low_return_future_state_ml_probe"
+    if "future_state" in phase and cagr == cagr and cagr < 0.08:
+        return PRUNED_STATUS, "low_return_future_state_probe"
+    if walk_forward_positive == walk_forward_positive and walk_forward_positive < 0.55:
+        return PRUNED_STATUS, "weak_walk_forward_positive_rate"
+    if left_tail_return == left_tail_return and left_tail_return < -0.18:
+        return PRUNED_STATUS, "left_tail_regime_loss_too_large"
+
+    promoted = decision in {"promote_candidate", "evolve_next_iteration"}
+    high_growth = cagr == cagr and cagr >= 0.10
+    good_risk_adjusted = calmar == calmar and calmar >= 0.55
+    tolerable_tail = max_drawdown != max_drawdown or max_drawdown >= -0.24
+    human_operable = operability != "too_twitchy"
+    if promoted and high_growth and good_risk_adjusted and tolerable_tail and human_operable:
+        return OPERATIONAL_STATUS, "growth_and_risk_profile_still_operational"
+
+    if promoted or (cagr == cagr and cagr >= 0.08) or "candidate" in role or "guardrail" in family:
+        return ITERATE_STATUS, "keep_for_targeted_iteration_not_default_monitoring"
+    return ARCHIVE_STATUS, "use_as_context_or_reference_only"
 
 
 def select_curated_strategy_shelf(
@@ -123,7 +246,8 @@ def select_curated_strategy_shelf(
             added += 1
 
     reference_mask = _reference_mask(ranked)
-    non_reference = ranked[~reference_mask].copy()
+    pruned_mask = ranked.get("research_status", pd.Series("", index=ranked.index)).eq(PRUNED_STATUS)
+    non_reference = ranked[~reference_mask & ~pruned_mask].copy()
     reference = ranked[reference_mask].copy()
 
     anchor_count = min(5, limit)
@@ -239,3 +363,10 @@ def _first_string_column(frame: pd.DataFrame, columns: list[str]) -> pd.Series:
         if column in frame:
             return frame[column].astype(str)
     return pd.Series("", index=frame.index)
+
+
+def _numeric(value: object) -> float:
+    try:
+        return float(value)
+    except (TypeError, ValueError):
+        return float("nan")

@@ -21,6 +21,7 @@ from trade_bot.DEFAULT import (
     DEFAULT_STRATEGY_FAMILY_HIGH_BETA_TICKERS,
     DEFAULT_STRATEGY_FAMILY_TBILL_TICKERS,
 )
+from trade_bot.research.curation import add_research_status
 from trade_bot.research.strategy_naming import strategy_display_name
 
 AI_GROWTH_TICKERS = set(DEFAULT_RISK_AI_BETA_TICKERS)
@@ -63,6 +64,7 @@ def load_experiment_scorecards(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "role": "unknown",
             "scenario_sizing": "",
             "future_state_model": "",
+            "strategy_drawdown_model": "",
             "decision_sanity": "",
         }.items():
             if column not in frame.columns:
@@ -80,6 +82,7 @@ def load_experiment_scorecards(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
         ascending=False,
         method="first",
     )
+    combined = add_research_status(combined)
     return combined.sort_values(["iteration", "iteration_rank"])
 
 
@@ -212,6 +215,8 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "scenario_sizing_json": "",
             "future_state_model": "",
             "future_state_model_json": "",
+            "strategy_drawdown_model": "",
+            "strategy_drawdown_model_json": "",
             "decision_sanity": "",
             "decision_sanity_json": "",
         }.items():
@@ -333,7 +338,10 @@ def build_strategy_family_map(
         for column in [
             "promotion_decision",
             "scenario_sizing",
+            "strategy_drawdown_model",
             "decision_sanity",
+            "research_status",
+            "prune_reason",
             "promotion_score",
             "cagr",
             "sharpe",
@@ -440,6 +448,15 @@ def strategy_family_takeaways(family_map: pd.DataFrame) -> list[str]:
 
     behavior_count = family_map["risk_behavior"].nunique()
     equity_count = family_map["equity_expression"].nunique()
+    if "research_status" in family_map:
+        pruned_count = int(family_map["research_status"].eq("pruned_dead_end").sum())
+    else:
+        pruned_count = 0
+    if pruned_count:
+        takeaways.append(
+            f"{pruned_count:,} tested strategy rows are now marked as pruned dead ends. They remain "
+            "auditable, but they should not drive paper-monitoring selection unless explicitly reopened."
+        )
     takeaways.append(
         f"Coverage now spans {behavior_count} risk-behavior patterns and "
         f"{equity_count} equity expressions, so use this map to choose genuinely different "

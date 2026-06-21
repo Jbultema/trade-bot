@@ -10,6 +10,7 @@ from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
 from trade_bot.DEFAULT import DEFAULT_EXPERIMENTS_DIR, DEFAULT_RESET_EXPERIMENTS_DIR
 from trade_bot.features.indicators import drawdown
 from trade_bot.portfolio.risk import current_positions
+from trade_bot.research.curation import add_research_status
 from trade_bot.research.experiments import (
     DecisionSanityConfig,
     ScenarioSizingConfig,
@@ -19,7 +20,9 @@ from trade_bot.research.experiments import (
 )
 from trade_bot.research.future_state_ml import (
     FutureStateModelConfig,
+    StrategyDrawdownModelConfig,
     apply_future_state_position_sizing,
+    apply_strategy_drawdown_position_sizing,
 )
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.strategies.momentum import build_strategy_weights
@@ -52,8 +55,12 @@ def build_approach_catalog(
                 "scenario_sizing_json": "",
                 "future_state_model": "",
                 "future_state_model_json": "",
+                "strategy_drawdown_model": "",
+                "strategy_drawdown_model_json": "",
                 "decision_sanity": "",
                 "decision_sanity_json": "",
+                "research_status": "reference",
+                "prune_reason": "configured_baseline",
             }
         )
 
@@ -106,7 +113,10 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "worst_3y_cagr",
             "positive_1y_window_rate",
             "future_state_model",
+            "strategy_drawdown_model",
             "decision_sanity",
+            "research_status",
+            "prune_reason",
         ]
         available_columns = [column for column in scorecard_columns if column in scorecards]
         candidates = candidates.merge(
@@ -150,9 +160,12 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
         "parent": "",
         "hypothesis": "",
         "promotion_decision": "unscored",
+        "research_status": "research_archive",
+        "prune_reason": "unclassified",
     }.items():
         if column not in candidates:
             candidates[column] = default
+    candidates = add_research_status(candidates)
     return candidates
 
 
@@ -211,6 +224,24 @@ def future_state_model_from_catalog_row(row: pd.Series) -> FutureStateModelConfi
         return None
 
 
+def strategy_drawdown_model_from_catalog_row(
+    row: pd.Series,
+) -> StrategyDrawdownModelConfig | None:
+    raw = row.get("strategy_drawdown_model_json")
+    if not isinstance(raw, str) or not raw or raw == "nan":
+        return None
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(values, dict):
+        return None
+    try:
+        return StrategyDrawdownModelConfig(**values)
+    except TypeError:
+        return None
+
+
 def execution_for_catalog_row(
     row: pd.Series, default_execution: ExecutionConfig
 ) -> ExecutionConfig:
@@ -232,6 +263,7 @@ def build_approach_explanation(
     execution: ExecutionConfig | None = None,
     scenario_sizing: ScenarioSizingConfig | None = None,
     future_state_model: FutureStateModelConfig | None = None,
+    strategy_drawdown_model: StrategyDrawdownModelConfig | None = None,
     decision_sanity: DecisionSanityConfig | None = None,
 ) -> list[str]:
     execution = execution or config.execution
@@ -342,6 +374,15 @@ def build_approach_explanation(
             f"{future_state_model.feature_set} feature set and `{future_state_model.model}` method; "
             "those probabilities resize risk exposure and route unused budget to the defensive sleeve."
         )
+    if strategy_drawdown_model is not None:
+        paragraphs.append(
+            "It also has a strategy-specific ML drawdown guard. This model labels the strategy's "
+            f"own forward {strategy_drawdown_model.horizon_days}-trading-day drawdown risk, not an "
+            "index forecast. If the predicted drawdown probability clears the activation threshold, "
+            f"risk exposure is multiplied toward {strategy_drawdown_model.stress_multiplier:.0%} "
+            f"with a floor of {strategy_drawdown_model.min_multiplier:.0%}; unused budget is routed "
+            f"to {defensive}."
+        )
     parent = str(row.get("parent", "") or "")
     if parent and parent != "nan":
         paragraphs.append(
@@ -357,6 +398,7 @@ def build_approach_backtest_result(
     *,
     scenario_sizing: ScenarioSizingConfig | None = None,
     future_state_model: FutureStateModelConfig | None = None,
+    strategy_drawdown_model: StrategyDrawdownModelConfig | None = None,
     decision_sanity: DecisionSanityConfig | None = None,
     name: str = "approach",
 ) -> tuple[BacktestResult | None, list[str]]:
@@ -380,6 +422,13 @@ def build_approach_backtest_result(
             target_weights,
             strategy_prices,
             scenario_sizing,
+            defensive_ticker=strategy_for_prices.defensive_ticker,
+        )
+    if strategy_drawdown_model is not None:
+        target_weights = apply_strategy_drawdown_position_sizing(
+            target_weights,
+            prices,
+            strategy_drawdown_model,
             defensive_ticker=strategy_for_prices.defensive_ticker,
         )
     if decision_sanity is not None:

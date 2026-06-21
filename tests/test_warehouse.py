@@ -58,8 +58,11 @@ def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_pa
     assert {result.table_name for result in migrated} == {"experiment_scorecard"}
     scorecard = warehouse.read_table("experiment_scorecard")
     labels = scorecard.set_index("strategy")["overfit_risk_label"].to_dict()
+    statuses = scorecard.set_index("strategy")["research_status"].to_dict()
     assert labels["candidate_alpha"] == "low"
     assert labels["fragile_alpha"] in {"high", "critical"}
+    assert statuses["candidate_alpha"] == "operational_candidate"
+    assert statuses["fragile_alpha"] == "pruned_dead_end"
     assert "selection_adjusted_promotion_score" in scorecard
 
     seeded = warehouse.seed_monitoring_windows_from_registry(

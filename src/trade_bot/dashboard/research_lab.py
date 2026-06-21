@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from datetime import date
+from pathlib import Path
 from typing import Any, cast
 
 import pandas as pd
@@ -15,7 +16,11 @@ from trade_bot.dashboard.formatting import (
     _result_date_bounds,
     _window_start_from_preset,
 )
-from trade_bot.DEFAULT import DEFAULT_PERFORMANCE_WINDOW, DEFAULT_PERFORMANCE_WINDOWS
+from trade_bot.DEFAULT import (
+    DEFAULT_ML_DIAGNOSTICS_DIR,
+    DEFAULT_PERFORMANCE_WINDOW,
+    DEFAULT_PERFORMANCE_WINDOWS,
+)
 from trade_bot.features.indicators import drawdown
 from trade_bot.reporting.report import make_equity_drawdown_figure, window_performance_frame
 from trade_bot.research.approach_explorer import (
@@ -36,6 +41,7 @@ from trade_bot.research.approach_explorer import (
     execution_for_catalog_row,
     future_state_model_from_catalog_row,
     scenario_sizing_from_catalog_row,
+    strategy_drawdown_model_from_catalog_row,
     strategy_from_catalog_row,
 )
 from trade_bot.research.baselines import BaselineRun
@@ -64,6 +70,7 @@ def _render_strategy_summary_and_behavior(
 ) -> Any:
     scenario_sizing = scenario_sizing_from_catalog_row(row)
     future_state_model = future_state_model_from_catalog_row(row)
+    strategy_drawdown_model = strategy_drawdown_model_from_catalog_row(row)
     decision_sanity = decision_sanity_from_catalog_row(row)
     execution = execution_for_catalog_row(row, bot_config.execution)
     st.markdown("**How this approach works**")
@@ -74,6 +81,7 @@ def _render_strategy_summary_and_behavior(
         execution=execution,
         scenario_sizing=scenario_sizing,
         future_state_model=future_state_model,
+        strategy_drawdown_model=strategy_drawdown_model,
         decision_sanity=decision_sanity,
     ):
         st.write(paragraph)
@@ -84,6 +92,7 @@ def _render_strategy_summary_and_behavior(
         execution,
         scenario_sizing=scenario_sizing,
         future_state_model=future_state_model,
+        strategy_drawdown_model=strategy_drawdown_model,
         decision_sanity=decision_sanity,
         name=str(row.get("strategy", "approach")),
     )
@@ -520,7 +529,11 @@ def _approach_catalog_for_detail(
         lambda row: (
             "baseline"
             if row.get("source") == "baseline"
-            else ("curated_top_25" if bool(row.get("is_curated")) else "experiment_archive")
+            else (
+                "curated_top_25"
+                if bool(row.get("is_curated"))
+                else str(row.get("research_status", "experiment_archive"))
+            )
         ),
         axis=1,
     )
@@ -566,7 +579,12 @@ def _render_approach_detail_workbench(
         st.write("No approaches are available to inspect.")
         return
 
-    scope_options = ["Curated top 25 + baselines", "All approaches"]
+    scope_options = [
+        "Curated top 25 + baselines",
+        "Operational + iteration candidates",
+        "All non-pruned approaches",
+        "All approaches",
+    ]
     selected_scope = st.radio(
         "Approach set",
         scope_options,
@@ -575,6 +593,18 @@ def _render_approach_detail_workbench(
     )
     if selected_scope == "Curated top 25 + baselines":
         visible_catalog = catalog[(catalog["source"] == "baseline") | catalog["is_curated"]]
+    elif selected_scope == "Operational + iteration candidates":
+        visible_catalog = catalog[
+            (catalog["source"] == "baseline")
+            | catalog["research_status"].isin(
+                ["operational_candidate", "needs_iteration", "reference"]
+            )
+        ]
+    elif selected_scope == "All non-pruned approaches":
+        visible_catalog = catalog[
+            (catalog["source"] == "baseline")
+            | ~catalog["research_status"].eq("pruned_dead_end")
+        ]
     else:
         visible_catalog = catalog
     if visible_catalog.empty:
@@ -590,9 +620,10 @@ def _render_approach_detail_workbench(
     approach_execution = execution_for_catalog_row(approach_row, bot_config.execution)
     scenario_sizing = scenario_sizing_from_catalog_row(approach_row)
     future_state_model = future_state_model_from_catalog_row(approach_row)
+    strategy_drawdown_model = strategy_drawdown_model_from_catalog_row(approach_row)
     decision_sanity = decision_sanity_from_catalog_row(approach_row)
 
-    overview_cols = st.columns(6)
+    overview_cols = st.columns(7)
     _helped_metric(overview_cols[0], "Source", str(approach_row["source"]))
     _helped_metric(overview_cols[1], "Category", str(approach_row["family"]))
     _helped_metric(overview_cols[2], "Role", str(approach_row["role"]))
@@ -603,17 +634,29 @@ def _render_approach_detail_workbench(
         key="promotion_decision",
     )
     _helped_metric(overview_cols[4], "Type", approach_strategy.type)
+    _helped_metric(
+        overview_cols[5],
+        "Research Status",
+        str(approach_row.get("research_status", "unclassified")).replace("_", " "),
+    )
     curation_value = (
         "not curated"
         if pd.isna(approach_row.get("curation_rank"))
         else f"#{int(float(approach_row['curation_rank']))}"
     )
-    _helped_metric(overview_cols[5], "Curated Rank", curation_value)
+    _helped_metric(overview_cols[6], "Curated Rank", curation_value)
     if future_state_model is not None:
         st.caption(
             "Future-state model: "
             f"{future_state_model.model} / {future_state_model.feature_set} / "
             f"{future_state_model.horizon_days} trading days"
+        )
+    if strategy_drawdown_model is not None:
+        st.caption(
+            "Strategy drawdown model: "
+            f"{strategy_drawdown_model.model} / {strategy_drawdown_model.feature_set} / "
+            f"{strategy_drawdown_model.horizon_days} trading days / "
+            f"{strategy_drawdown_model.future_drawdown_threshold:.0%} forward drawdown label"
         )
 
     detail_result = _render_strategy_summary_and_behavior(
@@ -725,6 +768,17 @@ def _render_approach_detail_workbench(
                 f"{future_state_model.min_train_observations} minimum observations."
                 f"{bayesian_note}"
             )
+        if strategy_drawdown_model is not None:
+            st.caption("Strategy-specific ML drawdown guard")
+            st.write(
+                "Labels the selected strategy's own future drawdown, not future index return. "
+                f"Model `{strategy_drawdown_model.model}` uses `{strategy_drawdown_model.feature_set}` features, "
+                f"a {strategy_drawdown_model.horizon_days}-day target horizon, "
+                f"{strategy_drawdown_model.train_window_days} training days, and an activation threshold of "
+                f"{strategy_drawdown_model.activation_probability:.0%}. If active, the risk sleeve scales toward "
+                f"{strategy_drawdown_model.stress_multiplier:.0%} with a floor of "
+                f"{strategy_drawdown_model.min_multiplier:.0%}."
+            )
         if decision_sanity is not None:
             st.caption("Decision-sanity overlay")
             st.write(
@@ -820,6 +874,9 @@ def _render_curated_strategy_shelf(experiment_scorecards: pd.DataFrame) -> None:
         "deployment_blockers",
         "benchmark_knockout_label",
         "future_state_model",
+        "strategy_drawdown_model",
+        "research_status",
+        "prune_reason",
         "monitoring_readiness_score",
         "monitoring_readiness_label",
         "robustness_score",
@@ -848,6 +905,13 @@ def _render_strategy_family_map(
     if family_map.empty:
         st.write("No strategy-family map is available yet.")
         return
+    active_family_map = family_map[
+        ~family_map.get("research_status", pd.Series("", index=family_map.index)).eq(
+            "pruned_dead_end"
+        )
+    ]
+    if active_family_map.empty:
+        active_family_map = family_map
 
     st.caption(
         "High-level navigation for the research archive. This groups strategies by what they "
@@ -875,9 +939,10 @@ def _render_strategy_family_map(
         key="promotion_decision",
     )
 
-    archetype_summary = summarize_strategy_archetypes(family_map)
+    archetype_summary = summarize_strategy_archetypes(active_family_map)
     if not archetype_summary.empty:
         st.markdown("**Strategy archetype summary**")
+        st.caption("Summary statistics exclude pruned dead-end rows; the detailed map can still show them.")
         chart_columns = [
             column
             for column in ["median_cagr", "median_max_drawdown", "median_turnover"]
@@ -888,7 +953,7 @@ def _render_strategy_family_map(
             st.bar_chart(chart_frame.dropna(how="all"))
         _render_metric_dataframe(_display_metrics(archetype_summary), hide_index=True)
 
-    risk_matrix = summarize_risk_behavior_matrix(family_map)
+    risk_matrix = summarize_risk_behavior_matrix(active_family_map)
     if not risk_matrix.empty:
         st.markdown("**Risk-behavior matrix**")
         st.caption(
@@ -964,6 +1029,9 @@ def _render_strategy_family_map(
         "defensive_ticker",
         "ticker_count",
         "primary_tickers",
+        "strategy_drawdown_model",
+        "research_status",
+        "prune_reason",
         "promotion_decision",
         "promotion_score",
         "cagr",
@@ -1018,12 +1086,18 @@ def _render_experiment_monitor(
         .isin(["reject_left_tail", "reject_regime_fragility", "reject_walk_forward_fragility"])
         .sum()
     )
+    pruned_count = int(
+        experiment_scorecards.get("research_status", pd.Series("", index=experiment_scorecards.index))
+        .eq("pruned_dead_end")
+        .sum()
+    )
     latest_label = f"{latest_iteration:02d}" if latest_iteration is not None else "n/a"
-    col_a, col_b, col_c, col_d = st.columns(4)
+    col_a, col_b, col_c, col_d, col_e = st.columns(5)
     _helped_metric(col_a, "Iterations", latest_label)
     _helped_metric(col_b, "Candidates", f"{len(experiment_scorecards):,}")
     _helped_metric(col_c, "Promoted", f"{promoted_count:,}", key="promotion_decision")
     _helped_metric(col_d, "Risk rejects", f"{rejected_tail_count:,}", key="promotion_decision")
+    _helped_metric(col_e, "Pruned", f"{pruned_count:,}")
 
     (
         experiment_detail_tab,
@@ -1108,11 +1182,16 @@ def _render_experiment_monitor(
             default=default_iterations,
             key="experiment_leaderboard_iterations",
         )
-        filter_col_a, filter_col_b, filter_col_c, filter_col_d = st.columns(4)
+        filter_col_a, filter_col_b, filter_col_c, filter_col_d, filter_col_e = st.columns(5)
         decision_options = ["all", *sorted(experiment_scorecards["promotion_decision"].unique())]
         role_options = ["all", *sorted(experiment_scorecards["role"].unique())]
         phase_options = ["all", *sorted(experiment_scorecards["phase"].dropna().unique())]
         family_options = ["all", *sorted(experiment_scorecards["family"].dropna().unique())]
+        status_options = [
+            "active research",
+            "all",
+            *sorted(experiment_scorecards.get("research_status", pd.Series(dtype=str)).dropna().unique()),
+        ]
         decision_filter = filter_col_a.selectbox(
             "Promotion decision",
             decision_options,
@@ -1133,10 +1212,26 @@ def _render_experiment_monitor(
             family_options,
             key="experiment_family_filter",
         )
+        status_filter = filter_col_e.selectbox(
+            "Research status",
+            status_options,
+            key="experiment_status_filter",
+        )
 
         experiment_view = experiment_scorecards[
             experiment_scorecards["iteration"].isin(selected_iterations)
         ]
+        if status_filter == "active research":
+            experiment_view = experiment_view[
+                ~experiment_view.get("research_status", pd.Series("", index=experiment_view.index)).eq(
+                    "pruned_dead_end"
+                )
+            ]
+        elif status_filter != "all":
+            experiment_view = experiment_view[
+                experiment_view.get("research_status", pd.Series("", index=experiment_view.index))
+                == status_filter
+            ]
         if decision_filter != "all":
             experiment_view = experiment_view[
                 experiment_view["promotion_decision"] == decision_filter
@@ -1156,7 +1251,10 @@ def _render_experiment_monitor(
             "role",
             "scenario_sizing",
             "future_state_model",
+            "strategy_drawdown_model",
             "decision_sanity",
+            "research_status",
+            "prune_reason",
             "promotion_decision",
             "promotion_score",
             "confidence_score",
@@ -1518,6 +1616,113 @@ def _render_signal_inclusion(baseline_run: BaselineRun) -> None:
     _render_metric_dataframe(_display_metrics(inclusion_view[available_inclusion_columns]))
 
 
+@st.cache_data(show_spinner=False, ttl=300)
+def _load_ml_diagnostic_frames(root: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    base = Path(root)
+    frames = []
+    for filename in [
+        "metrics.csv",
+        "latest_probabilities.csv",
+        "family_importance.csv",
+        "drift.csv",
+    ]:
+        file_path = base / filename
+        frames.append(pd.read_csv(file_path) if file_path.exists() else pd.DataFrame())
+    return cast(tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame], tuple(frames))
+
+
+def _render_ml_diagnostics() -> None:
+    st.subheader("ML Diagnostics")
+    metrics, latest, family_importance, drift = _load_ml_diagnostic_frames(
+        str(DEFAULT_ML_DIAGNOSTICS_DIR)
+    )
+    if metrics.empty and latest.empty:
+        st.info(
+            "No ML diagnostic artifacts found. Run `poetry run trade-bot run-ml-diagnostics` "
+            "to generate future-state, re-entry, off-ramp, router, churn, feature-importance, and drift diagnostics."
+        )
+        return
+
+    overview_cols = st.columns(4)
+    _helped_metric(overview_cols[0], "Tasks", f"{metrics['task'].nunique():,}" if "task" in metrics else "0")
+    _helped_metric(overview_cols[1], "Model Rows", f"{len(metrics):,}")
+    best_utility = pd.to_numeric(metrics.get("utility_score"), errors="coerce").max()
+    _helped_metric(
+        overview_cols[2],
+        "Best Utility",
+        f"{best_utility:.3f}" if best_utility == best_utility else "n/a",
+    )
+    top_drift = pd.to_numeric(drift.get("drift_score"), errors="coerce").max() if not drift.empty else float("nan")
+    _helped_metric(
+        overview_cols[3],
+        "Top Drift",
+        f"{top_drift:.2f}" if top_drift == top_drift else "n/a",
+    )
+
+    model_tab, latest_tab, families_tab, drift_tab = st.tabs(
+        ["Model Tasks", "Latest Probabilities", "Feature Families", "Drift"]
+    )
+    with model_tab:
+        st.caption(
+            "Walk-forward model diagnostics. Utility combines accuracy, balanced accuracy, positive-class recall, Brier score, and calibration error."
+        )
+        columns = [
+            "task",
+            "kind",
+            "horizon_days",
+            "model",
+            "observations",
+            "utility_score",
+            "accuracy",
+            "balanced_accuracy",
+            "brier_score",
+            "calibration_error",
+            "positive_class",
+            "positive_recall",
+        ]
+        available = [column for column in columns if column in metrics.columns]
+        _render_metric_dataframe(_display_metrics(metrics[available].head(60)), hide_index=True)
+    with latest_tab:
+        st.caption("Latest batch inference probabilities by task and model. These are research diagnostics, not trade tickets.")
+        columns = [
+            "task",
+            "kind",
+            "horizon_days",
+            "model",
+            "top_class",
+            "top_probability",
+        ]
+        probability_columns = [column for column in latest.columns if column.startswith("prob_")]
+        available = [column for column in [*columns, *probability_columns] if column in latest.columns]
+        _render_metric_dataframe(_display_metrics(latest[available].head(80)), hide_index=True)
+    with families_tab:
+        st.caption("Feature-family importance from sklearn models, aggregated across folds.")
+        columns = [
+            "task",
+            "kind",
+            "horizon_days",
+            "model",
+            "feature_family",
+            "mean_importance",
+            "represented_features",
+        ]
+        available = [column for column in columns if column in family_importance.columns]
+        _render_metric_dataframe(_display_metrics(family_importance[available].head(80)), hide_index=True)
+    with drift_tab:
+        st.caption("Feature drift compares the most recent year against the prior reference window.")
+        columns = [
+            "feature",
+            "feature_family",
+            "recent_mean",
+            "reference_mean",
+            "mean_shift_z",
+            "psi",
+            "drift_score",
+        ]
+        available = [column for column in columns if column in drift.columns]
+        _render_metric_dataframe(_display_metrics(drift[available].head(80)), hide_index=True)
+
+
 def _render_research_lab(
     bot_config: Any,
     baseline_run: BaselineRun,
@@ -1536,5 +1741,7 @@ def _render_research_lab(
         experiment_candidates,
         decision_sanity_impacts,
     )
+    st.divider()
+    _render_ml_diagnostics()
     st.divider()
     _render_signal_inclusion(baseline_run)

@@ -14,6 +14,7 @@ data/run_store/
 data/*.sqlite
 reports/
 data/experiments*/
+data/ml_diagnostics/
 *.parquet
 *.duckdb
 *.html

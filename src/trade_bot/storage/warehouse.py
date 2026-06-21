@@ -20,7 +20,7 @@ from trade_bot.DEFAULT import (
     DEFAULT_MONITORING_TOP_N,
     DEFAULT_RUN_STORE_DB_PATH,
 )
-from trade_bot.research.curation import select_curated_strategy_shelf
+from trade_bot.research.curation import add_research_status, select_curated_strategy_shelf
 from trade_bot.research.experiments import ScenarioSizingConfig, apply_scenario_position_sizing
 from trade_bot.research.validation import add_overfit_diagnostics
 from trade_bot.strategies.momentum import build_strategy_weights
@@ -82,6 +82,7 @@ class TradingWarehouse:
                 continue
             combined = pd.concat(frames, ignore_index=True)
             if artifact == "scorecard":
+                combined = add_research_status(combined)
                 combined = add_overfit_diagnostics(combined)
             table_name = f"experiment_{artifact}"
             self._replace_table(table_name, combined)

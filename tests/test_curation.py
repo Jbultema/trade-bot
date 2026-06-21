@@ -2,7 +2,12 @@ from __future__ import annotations
 
 import pandas as pd
 
-from trade_bot.research.curation import rank_strategy_candidates, select_curated_strategy_shelf
+from trade_bot.research.curation import (
+    PRUNED_STATUS,
+    add_research_status,
+    rank_strategy_candidates,
+    select_curated_strategy_shelf,
+)
 
 
 def test_curated_shelf_preserves_score_order_when_one_family_dominates() -> None:
@@ -73,3 +78,69 @@ def test_curated_shelf_adds_family_champions_beyond_raw_top_scores() -> None:
     assert "credit_gate_candidate" in set(curated["strategy"])
     assert "active_ai_candidate" in set(curated["strategy"])
     assert set(curated["curation_bucket"]) >= {"score_anchor", "family_champion"}
+
+
+def test_research_status_prunes_low_growth_and_failed_risk_profiles() -> None:
+    rows = pd.DataFrame(
+        [
+            {
+                "strategy": "low_growth_ml_probe",
+                "phase": "sklearn_future_state",
+                "family": "future_state_ml",
+                "promotion_decision": "promote_candidate",
+                "cagr": 0.035,
+                "calmar": 0.35,
+                "max_drawdown": -0.08,
+            },
+            {
+                "strategy": "high_growth_candidate",
+                "phase": "high_cagr_ml_guardrail",
+                "family": "high_cagr_ai_escape",
+                "promotion_decision": "promote_candidate",
+                "cagr": 0.145,
+                "calmar": 0.70,
+                "max_drawdown": -0.21,
+                "operability_label": "paper_operable",
+            },
+        ]
+    )
+
+    classified = add_research_status(rows).set_index("strategy")
+
+    assert classified.loc["low_growth_ml_probe", "research_status"] == PRUNED_STATUS
+    assert classified.loc["low_growth_ml_probe", "prune_reason"] == "low_cagr_below_5pct"
+    assert classified.loc["high_growth_candidate", "research_status"] == "operational_candidate"
+
+
+def test_curated_shelf_excludes_pruned_dead_ends_by_default() -> None:
+    rows = pd.DataFrame(
+        [
+            {
+                "strategy": "dead_end",
+                "family": "ml_probe",
+                "phase": "sklearn_future_state",
+                "role": "candidate",
+                "promotion_decision": "promote_candidate",
+                "promotion_score": 1.0,
+                "cagr": 0.03,
+                "calmar": 0.25,
+                "max_drawdown": -0.05,
+            },
+            {
+                "strategy": "keeper",
+                "family": "ai_escape",
+                "phase": "high_cagr_ml_guardrail",
+                "role": "candidate",
+                "promotion_decision": "promote_candidate",
+                "promotion_score": 0.80,
+                "cagr": 0.14,
+                "calmar": 0.70,
+                "max_drawdown": -0.21,
+            },
+        ]
+    )
+
+    curated = select_curated_strategy_shelf(rank_strategy_candidates(rows), limit=5)
+
+    assert "keeper" in set(curated["strategy"])
+    assert "dead_end" not in set(curated["strategy"])

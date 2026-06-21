@@ -751,6 +751,16 @@ shares = notional / reference_price
 
 Whole-share mode floors share counts to integers.
 
+## Research Pruning and Current Model Read
+
+Source: `src/trade_bot/research/curation.py`, `src/trade_bot/research/future_state_ml.py`, and `src/trade_bot/research/experiments.py`.
+
+The experiment system separates historical evidence from current operating candidates. `research_status` does not delete results; it classifies them for default dashboard curation. Low-return ML probes, failed left-tail/regime tests, and reactive drawdown-control hybrids are marked as `pruned_dead_end` so they remain auditable without crowding paper-monitoring decisions.
+
+The current ML conclusion is empirical, not theoretical: bounded ML overlays preserve the high-CAGR AI escape engine better than unconstrained future-state allocation, but the tested strategy-specific drawdown models have not yet materially reduced max drawdown. Reactive rolling drawdown controls are especially suspect for this engine because they often cut after damage is already visible and can impair reentry.
+
+Future model work should optimize for high-CAGR drawdown mitigation, reentry, and live drift confidence. A low-CAGR defensive model can be retained as a reference sleeve, but it should not be treated as a successful answer to the primary growth problem.
+
 ## Known Limitations
 
 - No risk-free rate in Sharpe or Sortino.

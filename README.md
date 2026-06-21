@@ -105,14 +105,16 @@ Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. U
 | 1 | `build-snapshot` | Refresh the current market, macro, news, scenario, and strategy state. |
 | 2 | `migrate-warehouse` | Mirror local artifacts into the canonical DuckDB warehouse. |
 | 3 | `run-paper-valuation` | Update forward paper monitoring windows from the latest snapshot. |
-| 4 | Dashboard top readout | Read Macro Minute, Action Headline, Operating Brief, and Decision Brief. |
-| 5 | Monitoring | Check champion/challenger forward performance and paper windows. |
-| 6 | Forward Test | Lock recommendations and log paper/live executions when action is warranted. |
+| 4 | Optional `run-ml-diagnostics --profile standard` | Refresh Research Lab ML probability, feature-importance, and drift artifacts. |
+| 5 | Dashboard top readout | Read Macro Minute, Action Headline, Operating Brief, and Decision Brief. |
+| 6 | Monitoring | Check champion/challenger forward performance and paper windows. |
+| 7 | Forward Test | Lock recommendations and log paper/live executions when action is warranted. |
 
 Daily commands:
 
 ```bash
 poetry run trade-bot build-snapshot --config configs/baseline.yaml --events configs/events.yaml --macro configs/macro_fred.yaml --news configs/news_sources.yaml
+poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard
 poetry run trade-bot migrate-warehouse
 poetry run trade-bot run-paper-valuation
 poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
@@ -171,6 +173,8 @@ Key cards:
 ### Research Lab
 
 Use this for strategy research, not same-day execution. It contains the experiment monitor, approach detail, performance-over-time views, allocation behavior, mechanics, robustness diagnostics, candidate manifests, and signal-inclusion tests.
+
+The **ML Diagnostics** section is artifact-backed, not trained inside Streamlit. Refresh it with `poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard`. Use `--profile research` when you intentionally want the heavier 1W/1M/3M model sweep with additional estimators; it is slower and should be treated as a research batch, not a dashboard cold-start path.
 
 Important distinction: a promoted experiment is not automatically live-operable. It means the idea deserves monitoring or implementation. A strategy becomes paper-operable only when it exists in the runtime pipeline and can be valued in snapshots.
 
@@ -377,7 +381,7 @@ poetry run trade-bot run-experiment-iteration --config configs/active_trading.ya
 poetry run trade-bot migrate-warehouse
 ```
 
-See [docs/iteration_protocol.md](docs/iteration_protocol.md), [docs/creative_strategy_backlog.md](docs/creative_strategy_backlog.md), and [docs/experiment_plan.md](docs/experiment_plan.md).
+See [docs/iteration_protocol.md](docs/iteration_protocol.md), [docs/creative_strategy_backlog.md](docs/creative_strategy_backlog.md), [docs/experiment_plan.md](docs/experiment_plan.md), and [docs/research_pruning_and_growth.md](docs/research_pruning_and_growth.md).
 
 ## Formula Audit
 

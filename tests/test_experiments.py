@@ -4,6 +4,7 @@ import json
 
 import numpy as np
 import pandas as pd
+import pytest
 
 from trade_bot.config import StrategyConfig
 from trade_bot.research.experiments import (
@@ -17,9 +18,14 @@ from trade_bot.research.experiments import (
 )
 from trade_bot.research.future_state_ml import (
     FutureStateModelConfig,
+    StrategyDrawdownModelConfig,
+    _activated_probability,
     apply_future_state_position_sizing,
+    apply_strategy_drawdown_position_sizing,
     build_future_state_probabilities,
+    build_strategy_drawdown_probabilities,
     label_future_states,
+    label_strategy_forward_drawdown,
 )
 from trade_bot.strategies.momentum import build_strategy_weights
 
@@ -387,6 +393,180 @@ def test_bayesian_future_state_iteration_covers_posterior_models_and_controls() 
     )
 
 
+def test_sklearn_future_state_iteration_covers_classical_ml_models_and_controls() -> None:
+    candidates = generate_iteration_candidates(83)
+
+    assert len(candidates) == 15
+    assert {candidate.role for candidate in candidates} == {
+        "sklearn_future_state_candidate",
+        "sklearn_future_state_control",
+    }
+    model_configs = [candidate.future_state_model for candidate in candidates]
+    assert sum(config is not None for config in model_configs) == 12
+    assert {config.model for config in model_configs if config} >= {
+        "sk_logit_l2",
+        "sk_logit_l1",
+        "sk_random_forest",
+        "sk_extra_trees",
+        "sk_gradient_boosting",
+    }
+    assert {config.horizon_days for config in model_configs if config} >= {5, 21, 63}
+
+
+def test_high_cagr_ml_guardrail_iteration_preserves_aggressive_engine() -> None:
+    candidates = generate_iteration_candidates(84)
+
+    assert len(candidates) == 12
+    assert {candidate.phase for candidate in candidates} == {"high_cagr_ml_guardrail"}
+    assert {candidate.role for candidate in candidates} == {
+        "high_cagr_ml_control",
+        "high_cagr_ml_guardrail",
+    }
+    controls = [candidate for candidate in candidates if candidate.role == "high_cagr_ml_control"]
+    guarded = [candidate for candidate in candidates if candidate.future_state_model is not None]
+
+    assert len(controls) == 3
+    assert len(guarded) == 9
+    assert all(candidate.family.startswith("high_cagr_ai_escape") for candidate in candidates)
+    assert all(candidate.strategy.volatility_target is not None for candidate in candidates)
+    assert {candidate.future_state_model.model for candidate in guarded} >= {
+        "sk_logit_l2",
+        "sk_random_forest",
+        "sk_extra_trees",
+    }
+    assert {candidate.future_state_model.horizon_days for candidate in guarded} >= {5, 21, 63}
+    assert all(
+        candidate.future_state_model.risk_off_activation_probability >= 0.35
+        for candidate in guarded
+    )
+    assert all(
+        candidate.future_state_model.transition_multiplier == 1.0
+        and candidate.future_state_model.fragile_upside_multiplier == 1.0
+        for candidate in guarded
+    )
+    assert any(candidate.scenario_sizing is None for candidate in guarded)
+
+
+def test_strategy_drawdown_ml_guardrail_iteration_targets_high_cagr_drawdown() -> None:
+    candidates = generate_iteration_candidates(85)
+
+    assert len(candidates) == 14
+    assert {candidate.phase for candidate in candidates} == {"strategy_drawdown_ml_guardrail"}
+    assert {candidate.role for candidate in candidates} == {
+        "strategy_drawdown_ml_control",
+        "strategy_drawdown_ml_guardrail",
+    }
+    controls = [
+        candidate for candidate in candidates if candidate.role == "strategy_drawdown_ml_control"
+    ]
+    guarded = [candidate for candidate in candidates if candidate.strategy_drawdown_model is not None]
+
+    assert len(controls) == 3
+    assert len(guarded) == 11
+    assert {candidate.strategy_drawdown_model.model for candidate in guarded} >= {
+        "sk_logit_l2",
+        "sk_random_forest",
+        "sk_extra_trees",
+        "sk_gradient_boosting",
+        "sk_ensemble",
+    }
+    assert {candidate.strategy_drawdown_model.horizon_days for candidate in guarded} >= {21, 63}
+    assert all(
+        candidate.strategy_drawdown_model.activation_probability >= 0.38
+        for candidate in guarded
+    )
+    assert all(candidate.strategy_drawdown_model.min_multiplier >= 0.50 for candidate in guarded)
+    assert all(candidate.family.startswith("high_cagr_ai_escape") for candidate in candidates)
+
+
+def test_aggressive_drawdown_ml_hybrid_iteration_includes_ml_and_classic_controls() -> None:
+    candidates = generate_iteration_candidates(86)
+
+    assert len(candidates) == 11
+    assert {candidate.phase for candidate in candidates} == {"aggressive_drawdown_ml_hybrid"}
+    assert {candidate.role for candidate in candidates} == {"aggressive_drawdown_ml_hybrid"}
+    assert any(candidate.strategy.drawdown_control is not None for candidate in candidates)
+    assert sum(candidate.strategy_drawdown_model is not None for candidate in candidates) >= 6
+    assert any(candidate.future_state_model is not None for candidate in candidates)
+    assert all(candidate.decision_sanity is not None for candidate in candidates)
+    assert all(candidate.strategy.volatility_target is not None for candidate in candidates)
+
+
+def test_thresholded_future_state_probability_preserves_low_confidence_risk_on() -> None:
+    probabilities = pd.Series([0.10, 0.35, 0.60, 0.95], dtype=float)
+
+    activated = _activated_probability(probabilities, 0.40)
+
+    assert activated.iloc[0] == 0.0
+    assert activated.iloc[1] == 0.0
+    assert activated.iloc[2] == pytest.approx(1.0 / 3.0)
+    assert activated.iloc[3] == pytest.approx(0.9166666667)
+
+
+def test_strategy_forward_drawdown_labels_strategy_specific_failure() -> None:
+    prices = _future_state_prices().iloc[:80].copy()
+    index = prices.index
+    prices.loc[index[45:58], "QQQ"] *= 0.82
+    target = pd.DataFrame({"QQQ": 1.0}, index=index)
+
+    labels = label_strategy_forward_drawdown(
+        target,
+        prices,
+        horizon_days=21,
+        future_drawdown_threshold=-0.08,
+    )
+
+    assert labels.dropna().isin(["stable", "drawdown"]).all()
+    assert (labels == "drawdown").sum() > 0
+
+
+def test_strategy_drawdown_probabilities_are_lag_safe_and_normalized() -> None:
+    prices = _future_state_prices()
+    target = pd.DataFrame({"QQQ": 0.70, "SPY": 0.30}, index=prices.index)
+    config = StrategyDrawdownModelConfig(
+        model="sk_logit_l2",
+        horizon_days=21,
+        train_window_days=120,
+        min_train_observations=60,
+        refit_every_days=21,
+        future_drawdown_threshold=-0.05,
+    )
+
+    probabilities = build_strategy_drawdown_probabilities(target, prices, config)
+
+    assert set(probabilities.columns) == {"stable", "drawdown"}
+    assert probabilities.index.equals(prices.index)
+    assert probabilities.sum(axis=1).round(8).eq(1.0).all()
+    assert probabilities.iloc[-1].between(0.0, 1.0).all()
+
+
+def test_strategy_drawdown_sizing_preserves_low_confidence_risk_and_adds_defense() -> None:
+    prices = _future_state_prices()
+    target = pd.DataFrame({"QQQ": 0.70, "SPY": 0.30}, index=prices.index)
+    config = StrategyDrawdownModelConfig(
+        model="base_rate",
+        horizon_days=21,
+        train_window_days=120,
+        min_train_observations=60,
+        future_drawdown_threshold=-0.05,
+        activation_probability=0.30,
+        stress_multiplier=0.50,
+        min_multiplier=0.50,
+    )
+
+    adjusted = apply_strategy_drawdown_position_sizing(
+        target,
+        prices,
+        config,
+        defensive_ticker="BIL",
+    )
+
+    assert "BIL" in adjusted.columns
+    assert adjusted.sum(axis=1).round(8).eq(1.0).all()
+    assert adjusted["BIL"].max() > 0.0
+    assert adjusted[["QQQ", "SPY"]].sum(axis=1).min() >= 0.50
+
+
 def test_future_state_probabilities_are_lag_safe_and_normalized() -> None:
     prices = _future_state_prices()
     config = FutureStateModelConfig(
@@ -426,6 +606,24 @@ def test_bayesian_future_state_probabilities_are_posterior_smoothed() -> None:
     assert probabilities.sum(axis=1).round(8).eq(1.0).all()
     assert probabilities.iloc[-1].between(0.0, 1.0).all()
     assert probabilities.iloc[-1].max() < 1.0
+
+
+def test_sklearn_future_state_probabilities_are_lag_safe_and_normalized() -> None:
+    prices = _future_state_prices()
+    config = FutureStateModelConfig(
+        model="sk_logit_l2",
+        horizon_days=21,
+        train_window_days=120,
+        min_train_observations=60,
+        refit_every_days=21,
+    )
+
+    probabilities = build_future_state_probabilities(prices, config)
+
+    assert set(probabilities.columns) == {"risk_off", "transition", "risk_on_fragile", "risk_on"}
+    assert probabilities.index.equals(prices.index)
+    assert probabilities.sum(axis=1).round(8).eq(1.0).all()
+    assert probabilities.iloc[-1].between(0.0, 1.0).all()
 
 
 def test_future_state_sizing_moves_residual_to_defensive_ticker() -> None:

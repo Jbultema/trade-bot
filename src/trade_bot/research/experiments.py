@@ -38,9 +38,12 @@ from trade_bot.DEFAULT import (
     DEFAULT_SCENARIO_STRESS_MULTIPLIER,
     DEFAULT_SCENARIO_TRANSITION_MULTIPLIER,
 )
+from trade_bot.research.curation import add_research_status
 from trade_bot.research.future_state_ml import (
     FutureStateModelConfig,
+    StrategyDrawdownModelConfig,
     apply_future_state_position_sizing,
+    apply_strategy_drawdown_position_sizing,
 )
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.strategies.momentum import build_strategy_weights
@@ -54,6 +57,7 @@ class ExperimentCandidate:
     strategy: StrategyConfig
     scenario_sizing: ScenarioSizingConfig | None = None
     future_state_model: FutureStateModelConfig | None = None
+    strategy_drawdown_model: StrategyDrawdownModelConfig | None = None
     decision_sanity: DecisionSanityConfig | None = None
     phase: str = "broad"
     family: str = "general"
@@ -145,6 +149,13 @@ def run_experiment_iteration(
                 target_weights,
                 candidate_prices,
                 candidate.scenario_sizing,
+                defensive_ticker=candidate.strategy.defensive_ticker,
+            )
+        if candidate.strategy_drawdown_model is not None:
+            target_weights = apply_strategy_drawdown_position_sizing(
+                target_weights,
+                prices,
+                candidate.strategy_drawdown_model,
                 defensive_ticker=candidate.strategy.defensive_ticker,
             )
         if candidate.decision_sanity is not None:
@@ -287,6 +298,14 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _future_state_ml_candidates()
     if iteration == 82:
         return _bayesian_future_state_candidates()
+    if iteration == 83:
+        return _sklearn_future_state_candidates()
+    if iteration == 84:
+        return _high_cagr_ml_guardrail_candidates()
+    if iteration == 85:
+        return _strategy_drawdown_ml_guardrail_candidates()
+    if iteration == 86:
+        return _aggressive_drawdown_ml_hybrid_candidates()
     if 101 <= iteration <= 105:
         return _macro_reset_candidates(iteration)
     return None
@@ -7075,6 +7094,810 @@ def _bayesian_future_state_candidates() -> tuple[ExperimentCandidate, ...]:
     return (*controls, *bayesian_candidates)
 
 
+def _sklearn_future_state_candidates() -> tuple[ExperimentCandidate, ...]:
+    base_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=2,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.45,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    ai_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["SPY", "QQQ", "SMH", "XLK", "IGV", "RSP", "IWM", "GLD", "TLT"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=2,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.45,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    sector_core = StrategyConfig(
+        type="dual_momentum",
+        tickers=["XLK", "XLI", "XLF", "XLE", "XLV", "XLP", "XLY", "RSP", "SPY", "GLD", "TLT"],
+        lookback_days=126,
+        skip_days=21,
+        top_n=3,
+        defensive_ticker="BIL",
+        ranking_metric="risk_adjusted_return",
+        weighting="inverse_volatility",
+        trend_filter_days=100,
+        max_asset_weight=0.35,
+        cycle_min_rebalance_change=0.08,
+        cycle_max_step_change=0.20,
+        cycle_min_hold_days=10,
+    )
+    controls = (
+        _candidate(
+            name="i83_sklearn_state_control_core_no_ml",
+            role="sklearn_future_state_control",
+            phase="sklearn_future_state",
+            family="future_state_control",
+            hypothesis="No-sklearn control for the core cross-asset strategy so supervised probability overlays are judged against the same base allocation.",
+            strategy=base_core,
+        ),
+        _candidate(
+            name="i83_sklearn_state_control_ai_no_ml",
+            role="sklearn_future_state_control",
+            phase="sklearn_future_state",
+            family="future_state_control",
+            hypothesis="No-sklearn control for the AI-sensitive strategy so short-horizon model overlays have a fair benchmark.",
+            strategy=ai_core,
+        ),
+        _candidate(
+            name="i83_sklearn_state_control_sector_no_ml",
+            role="sklearn_future_state_control",
+            phase="sklearn_future_state",
+            family="future_state_control",
+            hypothesis="No-sklearn control for the sector-rotation strategy so sector regime overlays have a fair benchmark.",
+            strategy=sector_core,
+        ),
+    )
+    specs: tuple[tuple[str, StrategyConfig, str, str, FutureStateModelConfig], ...] = (
+        (
+            "logit_l2_1m_core",
+            base_core,
+            "sklearn_regularized_state",
+            "Regularized logistic probabilities test a simple, calibrated-ish linear state model before nonlinear models are trusted.",
+            _future_state_profile("sk_logit_l2", horizon_days=21, feature_set="core"),
+        ),
+        (
+            "logit_l1_1m_core",
+            base_core,
+            "sklearn_feature_selection",
+            "Sparse logistic probabilities test whether implicit feature selection improves future-state sizing and interpretability.",
+            _future_state_profile("sk_logit_l1", horizon_days=21, feature_set="core", sklearn_regularization_c=0.35),
+        ),
+        (
+            "forest_1m_all",
+            base_core,
+            "sklearn_tree_state",
+            "Random forests test nonlinear state interactions across trend, breadth, credit, vol, duration, dollar, and commodity features.",
+            _future_state_profile("sk_random_forest", horizon_days=21, feature_set="all", sklearn_max_depth=4),
+        ),
+        (
+            "extra_trees_1m_all",
+            base_core,
+            "sklearn_tree_state",
+            "Extra-trees probabilities test a faster nonlinear state model that is less brittle than one fitted decision tree path.",
+            _future_state_profile("sk_extra_trees", horizon_days=21, feature_set="all", sklearn_max_depth=4),
+        ),
+        (
+            "gb_1m_core",
+            base_core,
+            "sklearn_tree_state",
+            "A bounded gradient-boosting state model tests whether sequential nonlinear learners add signal without dominating runtime.",
+            _future_state_profile("sk_gradient_boosting", horizon_days=21, feature_set="core", sklearn_max_depth=3),
+        ),
+        (
+            "logit_l2_3m_core",
+            base_core,
+            "sklearn_regularized_state",
+            "A three-month regularized logistic model tests slower swing-horizon probabilities with a cheap, interpretable estimator.",
+            _future_state_profile("sk_logit_l2", horizon_days=63, feature_set="core", train_window_days=1008),
+        ),
+        (
+            "forest_3m_cross_asset",
+            base_core,
+            "sklearn_tree_state",
+            "A three-month forest tests slower future-state sizing for swing-horizon allocation, not next-day timing.",
+            _future_state_profile("sk_random_forest", horizon_days=63, feature_set="cross_asset", train_window_days=1008),
+        ),
+        (
+            "extra_trees_3m_all",
+            base_core,
+            "sklearn_tree_state",
+            "Three-month extra-trees probabilities test slower nonlinear state sizing across the full signal stack.",
+            _future_state_profile("sk_extra_trees", horizon_days=63, feature_set="all", train_window_days=1008, sklearn_max_depth=4),
+        ),
+        (
+            "forest_1w_ai",
+            ai_core,
+            "sklearn_ai_cycle",
+            "Short-horizon forests test whether AI concentration can be detected early enough to resize without overtrading.",
+            _future_state_profile("sk_random_forest", horizon_days=5, feature_set="ai", sklearn_max_depth=3),
+        ),
+        (
+            "extra_trees_1m_ai",
+            ai_core,
+            "sklearn_ai_cycle",
+            "An AI-focused extra-trees model tests whether supervised probabilities retain upside while cutting fragile melt-up reversals.",
+            _future_state_profile("sk_extra_trees", horizon_days=21, feature_set="ai", sklearn_max_depth=4),
+        ),
+        (
+            "forest_1m_sector",
+            sector_core,
+            "sklearn_sector_rotation",
+            "A sector-rotation forest tests nonlinear regime signals for sizing the sector sleeve without forcing binary cash/equity behavior.",
+            _future_state_profile("sk_random_forest", horizon_days=21, feature_set="cross_asset", sklearn_max_depth=4),
+        ),
+        (
+            "extra_trees_3m_sector",
+            sector_core,
+            "sklearn_sector_rotation",
+            "Three-month extra-trees tests slower sector-cycle probabilities for rotation, defense, and re-entry discipline.",
+            _future_state_profile("sk_extra_trees", horizon_days=63, feature_set="all", train_window_days=1008, sklearn_max_depth=4),
+        ),
+    )
+    sklearn_candidates = tuple(
+        _candidate(
+            name=f"i83_sklearn_state_{slug}",
+            role="sklearn_future_state_candidate",
+            phase="sklearn_future_state",
+            family=family,
+            hypothesis=f"{hypothesis} The model feeds constrained future-state sizing and never directly chooses a trade by itself.",
+            future_state_model=model_config,
+            strategy=strategy,
+        )
+        for slug, strategy, family, hypothesis, model_config in specs
+    )
+    return (*controls, *sklearn_candidates)
+
+
+def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
+    base = _operating_system_candidates()[0]
+    assert base.name == "i21_os_ai_escape_scenario_sized"
+    high_octane = _clone_strategy(
+        base.strategy,
+        volatility_target=VolatilityTargetConfig(
+            annualized_volatility=0.16,
+            lookback_days=42,
+            max_leverage=1.0,
+        ),
+    )
+    candidates: list[ExperimentCandidate] = [
+        _candidate(
+            name="i84_high_cagr_control_raw_ai_escape",
+            role="high_cagr_ml_control",
+            phase="high_cagr_ml_guardrail",
+            family="high_cagr_ai_escape",
+            parent=base.name,
+            hypothesis=(
+                "High-CAGR control: keep the historically strong AI escape engine unchanged so ML "
+                "guardrails are judged against return preservation, not just drawdown reduction."
+            ),
+            scenario_sizing=base.scenario_sizing,
+            strategy=base.strategy,
+        ),
+        _candidate(
+            name="i84_high_cagr_control_wide_cap_ai_escape",
+            role="high_cagr_ml_control",
+            phase="high_cagr_ml_guardrail",
+            family="high_cagr_ai_escape",
+            parent=base.name,
+            hypothesis=(
+                "Decision-sanity control: preserve the high-CAGR engine but cap event/news-only "
+                "de-risking with the wide-cap profile that previously retained most upside."
+            ),
+            scenario_sizing=base.scenario_sizing,
+            decision_sanity=_decision_sanity_profile("wide_cap"),
+            strategy=base.strategy,
+        ),
+        _candidate(
+            name="i84_high_cagr_control_high_octane_ai_escape",
+            role="high_cagr_ml_control",
+            phase="high_cagr_ml_guardrail",
+            family="high_cagr_ai_escape",
+            parent=base.name,
+            hypothesis=(
+                "High-octane control: allow less volatility downscaling before adding ML, so the "
+                "guardrail can be tested against a higher-return posture."
+            ),
+            scenario_sizing=base.scenario_sizing,
+            decision_sanity=_decision_sanity_profile("wide_cap"),
+            strategy=high_octane,
+        ),
+    ]
+    specs: tuple[
+        tuple[str, str, ScenarioSizingConfig | None, StrategyConfig, FutureStateModelConfig, DecisionSanityConfig | None],
+        ...,
+    ] = (
+        (
+            "rf_1m_tail_gate_fragile",
+            "Random-forest 1M tail gate: only reduce the AI engine after risk-off probability crosses a material threshold.",
+            base.scenario_sizing,
+            base.strategy,
+            _return_preserving_ml_profile("sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.35),
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "extra_trees_1m_tail_gate_fragile",
+            "Extra-trees 1M tail gate: test a faster nonlinear guardrail while preserving almost all transition/upside exposure.",
+            base.scenario_sizing,
+            base.strategy,
+            _return_preserving_ml_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=0.35),
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "logit_1m_tail_gate_fragile",
+            "Regularized-logit 1M tail gate: simple linear ML should be hard to beat if the signal is robust.",
+            base.scenario_sizing,
+            base.strategy,
+            _return_preserving_ml_profile("sk_logit_l2", horizon_days=21, feature_set="ai", threshold=0.35),
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "rf_3m_tail_gate_fragile",
+            "Random-forest 3M tail gate: slower swing-horizon risk probabilities may avoid overreacting to noise.",
+            base.scenario_sizing,
+            base.strategy,
+            _return_preserving_ml_profile("sk_random_forest", horizon_days=63, feature_set="ai", threshold=0.40),
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "extra_trees_3m_tail_gate_fragile",
+            "Extra-trees 3M tail gate: nonlinear slower-horizon ML with a higher activation threshold.",
+            base.scenario_sizing,
+            base.strategy,
+            _return_preserving_ml_profile("sk_extra_trees", horizon_days=63, feature_set="all", threshold=0.40),
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "rf_1w_fast_tail_gate_fragile",
+            "Fast 1W AI tail gate: test whether short-horizon ML can catch abrupt AI-beta breaks without staying bearish.",
+            base.scenario_sizing,
+            base.strategy,
+            _return_preserving_ml_profile("sk_random_forest", horizon_days=5, feature_set="ai", threshold=0.45, refit_every_days=63),
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "rf_1m_tail_gate_aggressive_scenario",
+            "Aggressive scenario plus ML tail gate: let scenario sizing stay risk-on unless ML assigns clear left-tail pressure.",
+            _scenario_profile("aggressive"),
+            base.strategy,
+            _return_preserving_ml_profile("sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.40, stress=0.68),
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "rf_1m_tail_gate_no_scenario",
+            "ML-only tail gate: remove hand-built scenario sizing to test whether ML can cut drawdown without permanently shrinking CAGR.",
+            None,
+            base.strategy,
+            _return_preserving_ml_profile("sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.45, stress=0.55),
+            None,
+        ),
+        (
+            "extra_trees_1m_tail_gate_high_octane",
+            "High-octane ML guardrail: raise the volatility target and rely on thresholded ML plus wide-cap sanity to control the left tail.",
+            base.scenario_sizing,
+            high_octane,
+            _return_preserving_ml_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=0.38, stress=0.70),
+            _decision_sanity_profile("wide_cap"),
+        ),
+    )
+    candidates.extend(
+        _candidate(
+            name=f"i84_high_cagr_ml_{slug}",
+            role="high_cagr_ml_guardrail",
+            phase="high_cagr_ml_guardrail",
+            family="high_cagr_ai_escape_ml",
+            parent=base.name,
+            hypothesis=(
+                f"{hypothesis} The ML model can only alter position sizing; the high-CAGR AI engine "
+                "still chooses the risk assets."
+            ),
+            scenario_sizing=scenario_sizing,
+            future_state_model=model_config,
+            decision_sanity=decision_sanity,
+            strategy=strategy,
+        )
+        for slug, hypothesis, scenario_sizing, strategy, model_config, decision_sanity in specs
+    )
+    return tuple(candidates)
+
+
+def _return_preserving_ml_profile(
+    model: str,
+    *,
+    horizon_days: int,
+    feature_set: str,
+    threshold: float,
+    stress: float = 0.72,
+    refit_every_days: int = 126,
+) -> FutureStateModelConfig:
+    return _future_state_profile(
+        model,
+        horizon_days=horizon_days,
+        feature_set=feature_set,
+        train_window_days=1008 if horizon_days >= 63 else 756,
+        refit_every_days=refit_every_days,
+        sklearn_n_estimators=32,
+        sklearn_max_depth=4,
+        sklearn_min_samples_leaf=22,
+        stress_multiplier=stress,
+        transition_multiplier=1.0,
+        fragile_upside_multiplier=1.0,
+        min_multiplier=max(0.55, stress),
+        probability_smoothing=0.04,
+        risk_off_activation_probability=threshold,
+        transition_activation_probability=0.95,
+        fragile_activation_probability=0.95,
+    )
+
+
+def _strategy_drawdown_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
+    base = _operating_system_candidates()[0]
+    assert base.name == "i21_os_ai_escape_scenario_sized"
+    high_octane = _clone_strategy(
+        base.strategy,
+        volatility_target=VolatilityTargetConfig(
+            annualized_volatility=0.16,
+            lookback_days=42,
+            max_leverage=1.0,
+        ),
+    )
+    controls: list[ExperimentCandidate] = [
+        _candidate(
+            name="i85_drawdown_ml_control_raw_ai_escape",
+            role="strategy_drawdown_ml_control",
+            phase="strategy_drawdown_ml_guardrail",
+            family="high_cagr_ai_escape",
+            parent=base.name,
+            hypothesis=(
+                "Raw high-CAGR AI escape control for strategy-specific ML drawdown guards. "
+                "A candidate only matters if it preserves most of this return while improving tail risk."
+            ),
+            scenario_sizing=base.scenario_sizing,
+            strategy=base.strategy,
+        ),
+        _candidate(
+            name="i85_drawdown_ml_control_wide_cap_ai_escape",
+            role="strategy_drawdown_ml_control",
+            phase="strategy_drawdown_ml_guardrail",
+            family="high_cagr_ai_escape",
+            parent=base.name,
+            hypothesis=(
+                "Wide-cap decision-sanity control keeps news/event-only de-risking from overwhelming "
+                "the historically strong AI escape engine."
+            ),
+            scenario_sizing=base.scenario_sizing,
+            decision_sanity=_decision_sanity_profile("wide_cap"),
+            strategy=base.strategy,
+        ),
+        _candidate(
+            name="i85_drawdown_ml_control_future_state_tail_gate",
+            role="strategy_drawdown_ml_control",
+            phase="strategy_drawdown_ml_guardrail",
+            family="high_cagr_ai_escape_ml",
+            parent=base.name,
+            hypothesis=(
+                "Best prior high-CAGR future-state ML shape: preserve transition/upside exposure and "
+                "only throttle after clear model risk-off pressure."
+            ),
+            scenario_sizing=base.scenario_sizing,
+            future_state_model=_return_preserving_ml_profile(
+                "sk_extra_trees",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=0.35,
+            ),
+            decision_sanity=_decision_sanity_profile("wide_cap"),
+            strategy=base.strategy,
+        ),
+    ]
+    specs: tuple[
+        tuple[
+            str,
+            str,
+            StrategyConfig,
+            StrategyDrawdownModelConfig,
+            FutureStateModelConfig | None,
+            DecisionSanityConfig | None,
+        ],
+        ...,
+    ] = (
+        (
+            "rf_1m_dd8_ai",
+            "Random forest predicts whether the current AI escape posture faces an 8% forward strategy drawdown over the next month.",
+            base.strategy,
+            _strategy_drawdown_profile("sk_random_forest", horizon_days=21, feature_set="ai", threshold=-0.08),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "extra_trees_1m_dd8_ai",
+            "Extra trees tests a more variance-tolerant nonlinear drawdown guard on AI, credit, breadth, and vol features.",
+            base.strategy,
+            _strategy_drawdown_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "logit_1m_dd8_ai",
+            "Regularized logistic drawdown guard is the transparent baseline: it should compete if the feature relationship is stable.",
+            base.strategy,
+            _strategy_drawdown_profile("sk_logit_l2", horizon_days=21, feature_set="ai", threshold=-0.08),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "gradient_1m_dd8_ai",
+            "Gradient boosting tests nonlinear interactions while staying shallower than a full tree ensemble.",
+            base.strategy,
+            _strategy_drawdown_profile("sk_gradient_boosting", horizon_days=21, feature_set="ai", threshold=-0.08, estimators=64),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "ensemble_1m_dd8_ai",
+            "A simple sklearn ensemble tests whether model averaging improves drawdown probability stability.",
+            base.strategy,
+            _strategy_drawdown_profile("sk_ensemble", horizon_days=21, feature_set="ai", threshold=-0.08, estimators=40),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "rf_3m_dd10_all",
+            "Three-month forest uses the full cross-asset feature stack to catch slower strategy failure regimes.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_random_forest",
+                horizon_days=63,
+                feature_set="all",
+                threshold=-0.10,
+                activation=0.38,
+                stress=0.58,
+                train_window_days=1008,
+            ),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "extra_trees_3m_dd10_cross_asset",
+            "Three-month extra trees focuses on cross-asset stress, rates, dollar, oil, credit, and volatility features.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_extra_trees",
+                horizon_days=63,
+                feature_set="cross_asset",
+                threshold=-0.10,
+                activation=0.38,
+                stress=0.58,
+                train_window_days=1008,
+            ),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "rf_1m_dd12_late_hard_gate",
+            "Late hard gate only acts when the model sees elevated odds of a severe 12% strategy drawdown, preserving upside otherwise.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_random_forest",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.12,
+                activation=0.45,
+                stress=0.52,
+                min_multiplier=0.50,
+            ),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "extra_trees_1m_dd6_soft_gate",
+            "Soft gate reacts to smaller 6% drawdown risk, but only trims modestly so it cannot collapse CAGR into cash-like returns.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_extra_trees",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.06,
+                activation=0.42,
+                stress=0.75,
+                min_multiplier=0.72,
+            ),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "extra_trees_future_state_combo",
+            "Combine broad future-state risk with strategy-specific drawdown risk to test whether two independent ML views reduce false confidence.",
+            base.strategy,
+            _strategy_drawdown_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08, stress=0.70),
+            _return_preserving_ml_profile(
+                "sk_extra_trees",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=0.40,
+                stress=0.78,
+            ),
+            _decision_sanity_profile("wide_cap"),
+        ),
+        (
+            "high_octane_extra_trees_dd8",
+            "High-octane variant asks whether ML can support a higher-volatility target without letting drawdowns expand too far.",
+            high_octane,
+            _strategy_drawdown_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08, stress=0.58),
+            None,
+            _decision_sanity_profile("wide_cap"),
+        ),
+    )
+    candidates = controls.copy()
+    candidates.extend(
+        _candidate(
+            name=f"i85_strategy_drawdown_ml_{slug}",
+            role="strategy_drawdown_ml_guardrail",
+            phase="strategy_drawdown_ml_guardrail",
+            family="high_cagr_ai_escape_strategy_drawdown_ml",
+            parent=base.name,
+            hypothesis=(
+                f"{hypothesis} The model does not choose assets; it only meters the risk sleeve "
+                "when the strategy-specific drawdown probability is high."
+            ),
+            scenario_sizing=base.scenario_sizing,
+            future_state_model=future_state_model,
+            strategy_drawdown_model=drawdown_model,
+            decision_sanity=decision_sanity,
+            strategy=strategy,
+        )
+        for slug, hypothesis, strategy, drawdown_model, future_state_model, decision_sanity in specs
+    )
+    return tuple(candidates)
+
+
+def _strategy_drawdown_profile(
+    model: str,
+    *,
+    horizon_days: int,
+    feature_set: str,
+    threshold: float,
+    activation: float = 0.42,
+    stress: float = 0.62,
+    min_multiplier: float = 0.55,
+    train_window_days: int = 756,
+    estimators: int = 48,
+    refit_every_days: int = 126,
+) -> StrategyDrawdownModelConfig:
+    return StrategyDrawdownModelConfig(
+        model=cast(Any, model),
+        horizon_days=horizon_days,
+        feature_set=cast(Any, feature_set),
+        train_window_days=train_window_days,
+        refit_every_days=refit_every_days,
+        future_drawdown_threshold=threshold,
+        activation_probability=activation,
+        stress_multiplier=stress,
+        min_multiplier=min_multiplier,
+        probability_smoothing=0.06,
+        sklearn_n_estimators=estimators,
+        sklearn_max_depth=4,
+        sklearn_min_samples_leaf=24,
+    )
+
+
+def _aggressive_drawdown_ml_hybrid_candidates() -> tuple[ExperimentCandidate, ...]:
+    base = _operating_system_candidates()[0]
+    assert base.name == "i21_os_ai_escape_scenario_sized"
+    dd6 = _clone_strategy(
+        base.strategy,
+        drawdown_control=DrawdownControlConfig(
+            equity_lookback_days=84,
+            max_drawdown=-0.06,
+            risk_multiplier=0.45,
+        ),
+    )
+    dd8 = _clone_strategy(
+        base.strategy,
+        drawdown_control=DrawdownControlConfig(
+            equity_lookback_days=126,
+            max_drawdown=-0.08,
+            risk_multiplier=0.45,
+        ),
+    )
+    dd10 = _clone_strategy(
+        base.strategy,
+        drawdown_control=DrawdownControlConfig(
+            equity_lookback_days=126,
+            max_drawdown=-0.10,
+            risk_multiplier=0.55,
+        ),
+    )
+    specs: tuple[
+        tuple[str, str, StrategyConfig, StrategyDrawdownModelConfig | None, FutureStateModelConfig | None],
+        ...,
+    ] = (
+        (
+            "raw_control",
+            "Raw high-CAGR control anchors whether any added guardrail earns its complexity.",
+            base.strategy,
+            None,
+            None,
+        ),
+        (
+            "classic_dd6_control",
+            "Classic 6% rolling drawdown control tests the non-ML ceiling for drawdown reduction and CAGR sacrifice.",
+            dd6,
+            None,
+            None,
+        ),
+        (
+            "classic_dd8_control",
+            "Classic 8% rolling drawdown control is the moderate non-ML benchmark.",
+            dd8,
+            None,
+            None,
+        ),
+        (
+            "classic_dd10_control",
+            "Classic 10% rolling drawdown control is the slower non-ML benchmark.",
+            dd10,
+            None,
+            None,
+        ),
+        (
+            "extra_trees_1m_dd8_aggressive",
+            "Aggressive extra-trees guard trims earlier and deeper when 1M strategy drawdown odds rise.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_extra_trees",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.08,
+                activation=0.30,
+                stress=0.38,
+                min_multiplier=0.35,
+                estimators=72,
+            ),
+            None,
+        ),
+        (
+            "rf_1m_dd8_aggressive",
+            "Aggressive random forest is the comparable tree-bagging drawdown throttle.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_random_forest",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.08,
+                activation=0.30,
+                stress=0.38,
+                min_multiplier=0.35,
+                estimators=72,
+            ),
+            None,
+        ),
+        (
+            "logit_1m_dd8_aggressive",
+            "Aggressive logistic guard tests whether a simpler calibrated surface can cut earlier without overfitting trees.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_logit_l2",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.08,
+                activation=0.30,
+                stress=0.40,
+                min_multiplier=0.35,
+            ),
+            None,
+        ),
+        (
+            "extra_trees_1m_dd5_early",
+            "Early 5% drawdown label tests whether catching smaller strategy cracks reduces the eventual left tail.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_extra_trees",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.05,
+                activation=0.30,
+                stress=0.48,
+                min_multiplier=0.42,
+                estimators=72,
+            ),
+            None,
+        ),
+        (
+            "extra_trees_3m_dd8_all_aggressive",
+            "Three-month full-stack extra trees asks whether slower macro/cross-asset stress is the missing warning layer.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_extra_trees",
+                horizon_days=63,
+                feature_set="all",
+                threshold=-0.08,
+                activation=0.32,
+                stress=0.38,
+                min_multiplier=0.35,
+                train_window_days=1008,
+                estimators=72,
+            ),
+            None,
+        ),
+        (
+            "classic_dd8_plus_extra_trees",
+            "Hybrid: ML tries to pre-empt risk, and classic drawdown control limits damage if ML is late.",
+            dd8,
+            _strategy_drawdown_profile(
+                "sk_extra_trees",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.08,
+                activation=0.34,
+                stress=0.55,
+                min_multiplier=0.45,
+                estimators=72,
+            ),
+            None,
+        ),
+        (
+            "future_state_plus_aggressive_dd",
+            "Hybrid: broad future-state risk and strategy-specific drawdown risk both need to agree before a larger throttle is applied.",
+            base.strategy,
+            _strategy_drawdown_profile(
+                "sk_extra_trees",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.08,
+                activation=0.34,
+                stress=0.55,
+                min_multiplier=0.45,
+                estimators=72,
+            ),
+            _return_preserving_ml_profile(
+                "sk_extra_trees",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=0.38,
+                stress=0.78,
+            ),
+        ),
+    )
+    return tuple(
+        _candidate(
+            name=f"i86_aggressive_drawdown_ml_{slug}",
+            role="aggressive_drawdown_ml_hybrid",
+            phase="aggressive_drawdown_ml_hybrid",
+            family="high_cagr_ai_escape_drawdown_hybrid",
+            parent=base.name,
+            hypothesis=(
+                f"{hypothesis} Promotion should require a materially better drawdown/Calmar tradeoff, "
+                "not just preserved CAGR."
+            ),
+            scenario_sizing=base.scenario_sizing,
+            future_state_model=future_state_model,
+            strategy_drawdown_model=drawdown_model,
+            decision_sanity=_decision_sanity_profile("wide_cap"),
+            strategy=strategy,
+        )
+        for slug, hypothesis, strategy, drawdown_model, future_state_model in specs
+    )
+
+
 def _reference_portfolio_candidates() -> tuple[ExperimentCandidate, ...]:
     return (
         _fixed_allocation_candidate(
@@ -7469,6 +8292,7 @@ def _candidate(
     strategy: StrategyConfig,
     scenario_sizing: ScenarioSizingConfig | None = None,
     future_state_model: FutureStateModelConfig | None = None,
+    strategy_drawdown_model: StrategyDrawdownModelConfig | None = None,
     decision_sanity: DecisionSanityConfig | None = None,
     parent: str | None = None,
 ) -> ExperimentCandidate:
@@ -7482,6 +8306,7 @@ def _candidate(
         strategy=strategy,
         scenario_sizing=scenario_sizing,
         future_state_model=future_state_model,
+        strategy_drawdown_model=strategy_drawdown_model,
         decision_sanity=decision_sanity,
     )
 
@@ -7562,25 +8387,47 @@ def _future_state_profile(
     horizon_days: int,
     feature_set: str,
     train_window_days: int = 756,
+    refit_every_days: int | None = None,
     k_neighbors: int = 80,
     dirichlet_prior_strength: float = 8.0,
     recency_half_life_days: int = 252,
     bayesian_feature_shrinkage: float = 12.0,
+    sklearn_n_estimators: int = 24,
+    sklearn_max_depth: int = 5,
+    sklearn_min_samples_leaf: int = 20,
+    sklearn_regularization_c: float = 0.70,
+    stress_multiplier: float = 0.28,
+    transition_multiplier: float = 0.62,
+    fragile_upside_multiplier: float = 0.78,
+    min_multiplier: float = 0.18,
+    probability_smoothing: float = 0.10,
+    risk_off_activation_probability: float = 0.0,
+    transition_activation_probability: float = 0.0,
+    fragile_activation_probability: float = 0.0,
 ) -> FutureStateModelConfig:
+    resolved_refit = refit_every_days or (126 if model.startswith("sk_") else 21)
     return FutureStateModelConfig(
         model=cast(Any, model),
         horizon_days=horizon_days,
         feature_set=cast(Any, feature_set),
         train_window_days=train_window_days,
+        refit_every_days=resolved_refit,
         k_neighbors=k_neighbors,
         dirichlet_prior_strength=dirichlet_prior_strength,
         recency_half_life_days=recency_half_life_days,
         bayesian_feature_shrinkage=bayesian_feature_shrinkage,
-        stress_multiplier=0.28,
-        transition_multiplier=0.62,
-        fragile_upside_multiplier=0.78,
-        min_multiplier=0.18,
-        probability_smoothing=0.10,
+        sklearn_n_estimators=sklearn_n_estimators,
+        sklearn_max_depth=sklearn_max_depth,
+        sklearn_min_samples_leaf=sklearn_min_samples_leaf,
+        sklearn_regularization_c=sklearn_regularization_c,
+        stress_multiplier=stress_multiplier,
+        transition_multiplier=transition_multiplier,
+        fragile_upside_multiplier=fragile_upside_multiplier,
+        min_multiplier=min_multiplier,
+        probability_smoothing=probability_smoothing,
+        risk_off_activation_probability=risk_off_activation_probability,
+        transition_activation_probability=transition_activation_probability,
+        fragile_activation_probability=fragile_activation_probability,
     )
 
 
@@ -7609,6 +8456,7 @@ def _evolve_from_previous_iteration(
             continue
         scenario_sizing = _scenario_sizing_from_manifest(manifest.loc[parent_name])
         future_state_model = _future_state_model_from_manifest(manifest.loc[parent_name])
+        strategy_drawdown_model = _strategy_drawdown_model_from_manifest(manifest.loc[parent_name])
         decision_sanity = _decision_sanity_from_manifest(manifest.loc[parent_name])
         family = str(row.get("family", "evolved"))
         candidates.extend(
@@ -7621,6 +8469,7 @@ def _evolve_from_previous_iteration(
                 parent_strategy=strategy,
                 parent_scenario_sizing=scenario_sizing,
                 parent_future_state_model=future_state_model,
+                parent_strategy_drawdown_model=strategy_drawdown_model,
                 parent_decision_sanity=decision_sanity,
                 phase=phase,
             )
@@ -7673,6 +8522,7 @@ def _strategy_variants(
     parent_strategy: StrategyConfig,
     parent_scenario_sizing: ScenarioSizingConfig | None,
     parent_future_state_model: FutureStateModelConfig | None,
+    parent_strategy_drawdown_model: StrategyDrawdownModelConfig | None,
     parent_decision_sanity: DecisionSanityConfig | None,
     phase: str,
 ) -> list[ExperimentCandidate]:
@@ -7805,6 +8655,7 @@ def _strategy_variants(
                 strategy=strategy,
                 scenario_sizing=scenario_sizing,
                 future_state_model=parent_future_state_model,
+                strategy_drawdown_model=parent_strategy_drawdown_model,
                 decision_sanity=parent_decision_sanity,
             )
         )
@@ -7875,10 +8726,33 @@ def _future_state_model_from_manifest(row: pd.Series) -> FutureStateModelConfig 
         return None
 
 
+def _strategy_drawdown_model_from_manifest(row: pd.Series) -> StrategyDrawdownModelConfig | None:
+    raw = row.get("strategy_drawdown_model_json")
+    if not isinstance(raw, str) or not raw or raw == "nan":
+        return None
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+    if not isinstance(values, dict):
+        return None
+    try:
+        return StrategyDrawdownModelConfig(**values)
+    except TypeError:
+        return None
+
+
 def _future_state_label(config: FutureStateModelConfig | None) -> str:
     if config is None:
         return ""
     return f"{config.model}_{config.feature_set}_{config.horizon_days}d"
+
+
+def _strategy_drawdown_label(config: StrategyDrawdownModelConfig | None) -> str:
+    if config is None:
+        return ""
+    threshold = abs(float(config.future_drawdown_threshold))
+    return f"{config.model}_{config.feature_set}_{config.horizon_days}d_dd{threshold:.0%}"
 
 
 def _phase_for_iteration(iteration: int) -> str:
@@ -7931,6 +8805,7 @@ def _retag_candidates(
                 strategy=candidate.strategy,
                 scenario_sizing=candidate.scenario_sizing,
                 future_state_model=candidate.future_state_model,
+                strategy_drawdown_model=candidate.strategy_drawdown_model,
                 decision_sanity=candidate.decision_sanity,
             )
         )
@@ -7968,6 +8843,11 @@ def build_experiment_scorecard(
                     if candidate.future_state_model
                     else ""
                 ),
+                "strategy_drawdown_model": (
+                    _strategy_drawdown_label(candidate.strategy_drawdown_model)
+                    if candidate.strategy_drawdown_model
+                    else ""
+                ),
                 "decision_sanity": (
                     candidate.decision_sanity.profile if candidate.decision_sanity else ""
                 ),
@@ -7997,6 +8877,7 @@ def build_experiment_scorecard(
     summary["confidence_score"] = _confidence_score(summary)
     summary["confidence_label"] = summary.apply(_confidence_label, axis=1)
     summary["deployment_blockers"] = summary.apply(_deployment_blockers, axis=1)
+    summary = add_research_status(summary)
     columns = [
         "display_name",
         "phase",
@@ -8005,7 +8886,10 @@ def build_experiment_scorecard(
         "parent",
         "scenario_sizing",
         "future_state_model",
+        "strategy_drawdown_model",
         "decision_sanity",
+        "research_status",
+        "prune_reason",
         "promotion_decision",
         "promotion_score",
         "monitoring_readiness_score",
@@ -9139,6 +10023,11 @@ def _write_candidate_manifest(
                     if candidate.future_state_model
                     else ""
                 ),
+                "strategy_drawdown_model": (
+                    _strategy_drawdown_label(candidate.strategy_drawdown_model)
+                    if candidate.strategy_drawdown_model
+                    else ""
+                ),
                 "scenario_sizing_json": (
                     json.dumps(asdict(candidate.scenario_sizing), sort_keys=True)
                     if candidate.scenario_sizing
@@ -9147,6 +10036,11 @@ def _write_candidate_manifest(
                 "future_state_model_json": (
                     json.dumps(asdict(candidate.future_state_model), sort_keys=True)
                     if candidate.future_state_model
+                    else ""
+                ),
+                "strategy_drawdown_model_json": (
+                    json.dumps(asdict(candidate.strategy_drawdown_model), sort_keys=True)
+                    if candidate.strategy_drawdown_model
                     else ""
                 ),
                 "decision_sanity": (
