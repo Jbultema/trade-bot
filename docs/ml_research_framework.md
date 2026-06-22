@@ -2,6 +2,30 @@
 
 This project should use classical ML as targeted evidence machinery, not as an unconstrained trade generator. The operating system remains long-only, human-reviewed, and benchmarked against simple references. ML models must compete against the current rules in the same backtest, walk-forward, regime, operability, and paper-monitoring framework.
 
+## Implemented Status
+
+As of 2026-06-21, ML is implemented as a research, diagnostics, and candidate
+overlay layer. It is not the central daily trade-decision brain. The daily
+operating recommendation still flows through the current-state engine, trade
+decision layer, scenario/event/macro overlays, and portfolio-risk constraints.
+
+Implemented ML surfaces include:
+
+- `trade_bot.ml.models`: sklearn model wrappers and calibration utilities.
+- `trade_bot.ml.diagnostics`: future-state, off-ramp, re-entry, sector-rotation,
+  family-router, churn-filter, feature-importance, and drift diagnostics.
+- `trade_bot.research.future_state_ml`: future-state and strategy-drawdown
+  probability overlays that can resize candidate strategy weights inside
+  experiments.
+- `trade_bot.research.experiments`: ML/Bayesian candidate batches that compete
+  against non-ML controls in the same scorecard framework.
+- Research Lab displays for ML metrics, latest probabilities, feature-family
+  importance, and drift artifacts.
+
+Promoting ML into the operating recommendation path requires evidence that it
+improves economic outcomes after costs, churn, walk-forward validation, and
+paper-monitoring review.
+
 ## First-Class Modeling Seams
 
 1. **Future-state probabilities**

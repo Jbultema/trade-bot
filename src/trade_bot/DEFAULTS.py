@@ -76,6 +76,12 @@ DEFAULT_TRANSACTION_COST_BPS = 5.0
 DEFAULT_REBALANCE = "W-FRI"
 DEFAULT_SIGNAL_LAG_DAYS = 1
 
+# Owner-directed investable exclusions. These are hard local constraints used
+# for data loading, generated candidates, and paper/live recommendation paths.
+# Excluded tickers may still appear in watch-only risk/event proxy lists when
+# they are useful warning signals, but they should not be proposed as holdings.
+DEFAULT_EXCLUDED_TICKERS = frozenset({"ORCL"})
+
 
 # Backtest evaluation-window defaults.
 DEFAULT_ROLLING_WINDOW_YEARS = (1, 3, 5)
@@ -142,7 +148,6 @@ DEFAULT_STRATEGY_AI_GROWTH_TICKERS = frozenset(
         "MU",
         "NET",
         "NVDA",
-        "ORCL",
         "PLTR",
         "QQQ",
         "QQQM",

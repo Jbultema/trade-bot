@@ -7,6 +7,7 @@ import pandas as pd
 import pytest
 
 from trade_bot.config import StrategyConfig
+from trade_bot.DEFAULTS import DEFAULT_EXCLUDED_TICKERS
 from trade_bot.research.experiments import (
     DecisionSanityConfig,
     ScenarioSizingConfig,
@@ -492,6 +493,107 @@ def test_aggressive_drawdown_ml_hybrid_iteration_includes_ml_and_classic_control
     assert all(candidate.strategy.volatility_target is not None for candidate in candidates)
 
 
+def test_reentry_tuning_iterations_cover_distinct_mechanisms() -> None:
+    candidates = [candidate for iteration in range(106, 116) for candidate in generate_iteration_candidates(iteration)]
+
+    assert len(candidates) >= 40
+    assert {candidate.name[:4] for candidate in candidates} == {f"i{iteration}" for iteration in range(106, 116)}
+    assert {candidate.strategy.type for candidate in candidates} >= {
+        "dual_momentum",
+        "dip_reentry_overlay",
+        "ai_risk_cycle_overlay",
+        "sector_regime_rotation",
+    }
+    assert any(candidate.future_state_model is not None for candidate in candidates)
+    assert any(candidate.strategy_drawdown_model is not None for candidate in candidates)
+    assert any(candidate.scenario_sizing is None for candidate in candidates)
+    assert any(candidate.strategy.volatility_target is None for candidate in candidates)
+    assert any(candidate.parent == "i84_high_cagr_control_raw_ai_escape" for candidate in candidates)
+
+
+def test_broad_risk_on_reentry_iterations_reduce_ai_concentration() -> None:
+    candidates = [candidate for iteration in range(116, 126) for candidate in generate_iteration_candidates(iteration)]
+    ai_tickers = {"QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN", "PLTR"}
+    global_tickers = {"EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC"}
+    factor_tickers = {"VUG", "VTV", "MTUM", "QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT"}
+    cyclical_tickers = {"IWM", "MDY", "XLF", "KRE", "XLI", "XLB", "XLE", "XHB", "XRT", "IYT"}
+
+    assert len(candidates) >= 40
+    assert {candidate.name[:4] for candidate in candidates} == {f"i{iteration}" for iteration in range(116, 126)}
+    assert {candidate.strategy.type for candidate in candidates} >= {
+        "dual_momentum",
+        "dip_reentry_overlay",
+        "ai_risk_cycle_overlay",
+        "sector_regime_rotation",
+    }
+    assert {candidate.phase for candidate in candidates} >= {"broad_risk_on_reentry", "dip_reentry_overlay"}
+    assert any(ai_tickers.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert any(global_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(factor_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(cyclical_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(candidate.scenario_sizing is None for candidate in candidates)
+    assert any(candidate.decision_sanity is not None for candidate in candidates)
+    assert any(candidate.parent == "i84_high_cagr_control_raw_ai_escape" for candidate in candidates)
+
+
+def test_high_cagr_broadened_reentry_iterations_keep_upside_objective() -> None:
+    candidates = [candidate for iteration in range(126, 136) for candidate in generate_iteration_candidates(iteration)]
+    excluded = set(DEFAULT_EXCLUDED_TICKERS)
+
+    assert all(excluded.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert all(excluded.isdisjoint(candidate.strategy.satellite_tickers) for candidate in candidates)
+    ai_single_names = {"NVDA", "AVGO", "MSFT", "META", "AMZN", "PLTR"}
+    high_beta_tickers = {"SPHB", "ARKK", "XBI", "TAN", "XHB", "XRT", "KRE", "XOP", "XME", "SVXY"}
+    compounder_tickers = {"BRK-B", "JPM", "V", "MA", "COST", "LLY", "NFLX", "GOOG", "AAPL", "MSFT"}
+    sector_theme_tickers = {"ITA", "PPA", "XBI", "IBB", "TAN", "URA", "XME", "OIH", "XOP"}
+
+    assert len(candidates) >= 40
+    assert {candidate.name[:4] for candidate in candidates} == {f"i{iteration}" for iteration in range(126, 136)}
+    assert {candidate.strategy.type for candidate in candidates} >= {
+        "dual_momentum",
+        "dip_reentry_overlay",
+        "ai_risk_cycle_overlay",
+        "sector_regime_rotation",
+    }
+    assert any(ai_single_names.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert any(high_beta_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(compounder_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(sector_theme_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(candidate.strategy.volatility_target is None for candidate in candidates)
+    assert any(
+        candidate.strategy.volatility_target is not None
+        and candidate.strategy.volatility_target.annualized_volatility >= 0.22
+        for candidate in candidates
+    )
+    assert any(candidate.strategy.drawdown_control is not None for candidate in candidates)
+    assert any(candidate.strategy.satellite_tickers for candidate in candidates)
+
+
+def test_multi_asset_risk_on_rotation_iterations_cover_non_tech_buckets() -> None:
+    candidates = [candidate for iteration in range(136, 146) for candidate in generate_iteration_candidates(iteration)]
+    tech_ai = {"QQQ", "QQQM", "XLK", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN", "PLTR"}
+    energy_commodities = {"XLE", "XOP", "OIH", "USO", "BNO", "DBC", "CPER", "XME", "URA", "GLD", "SLV"}
+    industrial_infra = {"XLI", "ITA", "PPA", "PWR", "ETN", "VRT", "CEG", "GEV", "NRG", "CCJ", "XLU"}
+    cyclicals = {"IWM", "MDY", "RSP", "XLF", "KRE", "KBE", "XHB", "XRT", "IYT", "XLB"}
+    global_tickers = {"EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWA", "EWU", "EWW", "MCHI"}
+
+    assert len(candidates) >= 40
+    assert {candidate.name[:4] for candidate in candidates} == {f"i{iteration}" for iteration in range(136, 146)}
+    assert {candidate.strategy.type for candidate in candidates} >= {
+        "dual_momentum",
+        "dip_reentry_overlay",
+        "sector_regime_rotation",
+    }
+    assert any(tech_ai.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert any(energy_commodities & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(industrial_infra & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(cyclicals & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(global_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(candidate.strategy.drawdown_control is not None for candidate in candidates)
+    assert any(candidate.decision_sanity is not None for candidate in candidates)
+    assert any(candidate.strategy.cycle_min_hold_days >= 10 for candidate in candidates)
+
+
 def test_thresholded_future_state_probability_preserves_low_confidence_risk_on() -> None:
     probabilities = pd.Series([0.10, 0.35, 0.60, 0.95], dtype=float)
 
@@ -872,7 +974,6 @@ def test_final_deep_wide_iterations_are_curated_and_human_executable() -> None:
         "NRG",
         "OBDC",
         "OIH",
-        "ORCL",
         "PLTR",
         "PWR",
         "QQQ",

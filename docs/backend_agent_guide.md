@@ -118,6 +118,11 @@ When the dashboard feels slow, prefer `build-snapshot` before app launch. The in
 
 ## Repository Map
 
+Documentation navigation starts in `docs/doc_index.md`. Keep dated plans in
+`docs/archive/` and keep current operating behavior in the canonical docs listed
+there. Do not let old point-in-time experiment notes masquerade as live system
+status.
+
 High-level code ownership:
 
 - `src/trade_bot/DEFAULTS.py`: centralized default constants. New defaults should usually go here instead of being scattered through modules.
@@ -146,7 +151,8 @@ Primary data paths:
 - `data/run_store/trade_bot.duckdb`: local run-store metadata, snapshot manifests, jobs, and related tables.
 - `data/run_store/snapshots/`: pickled `BaselineRun` snapshots for fast dashboard loading.
 - `data/trading_journal.sqlite`: local trading journal and recommendation-ticket state.
-- `reports/experiments/`: experiment outputs and scorecards.
+- `data/experiments_reset_v2/`: active reset-era experiment outputs when present locally.
+- `reports/experiments/`: historical experiment outputs and scorecards from earlier runs.
 - `reports/`: static reports, app logs, and runtime files.
 
 Storage design rationale:
@@ -158,6 +164,11 @@ Storage design rationale:
 - The project intentionally avoids a remote database until there is a concrete need.
 
 Future agents should avoid creating parallel storage patterns unless there is a clear reason. If a new result needs to be queried by the dashboard or used across runs, prefer extending the run store or warehouse instead of writing another ad hoc CSV.
+
+The dashboard currently treats the reset-era experiment root as the active
+research root when it exists. Older `reports/experiments/` artifacts remain
+auditable evidence, but they are historical unless a workflow explicitly merges
+or selects that root.
 
 ## Config And Defaults
 

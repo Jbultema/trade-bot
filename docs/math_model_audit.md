@@ -1,8 +1,11 @@
 # Math, Formula, And Model Audit
 
-This document locks the current math and model semantics used by the app. It is meant to prevent code drift: if a future change alters one of these formulas or interpretations, update this document and the formula-contract tests in the same change.
+This document locks the current math and model semantics used by the app. It is
+meant to prevent code drift: if a future change alters one of these formulas or
+interpretations, update this document and the formula-contract tests in the same
+change. It is a formula and semantics contract, not a daily market-status report.
 
-Audit date: 2026-06-17
+Original audit date: 2026-06-17. Last docs review: 2026-06-21.
 
 ## Audit Result
 

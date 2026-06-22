@@ -24,6 +24,7 @@ Trade Bot turns market prices, macro series, curated news/events, scenario proba
 | Understand the dashboard | [Dashboard Map](#dashboard-map) | What each tab is for and where actions live |
 | Start paper monitoring | [Start Paper Monitoring From The Dashboard](#start-paper-monitoring-from-the-dashboard) | Champion/challenger/reference windows seeded with paper capital |
 | Inspect strategy evidence | [Research Lab](#research-lab) | Performance, allocation behavior, robustness, and mechanics |
+| Navigate backend docs | [Documentation Index](docs/doc_index.md) | Current docs, maintained research notes, and archived plans |
 | Extend ML research | [ML Research Framework](docs/ml_research_framework.md) | Targeted ML/Bayesian seams, cadence, and validation gates |
 | Check formulas | [Formula Audit](#formula-audit) | Locked math definitions and validation commands |
 

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from pathlib import Path
 from typing import Any, Literal
 
@@ -31,6 +32,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_DRAWDOWN_EQUITY_LOOKBACK_DAYS,
     DEFAULT_DRAWDOWN_MAX_DRAWDOWN,
     DEFAULT_DRAWDOWN_RISK_MULTIPLIER,
+    DEFAULT_EXCLUDED_TICKERS,
     DEFAULT_INITIAL_CAPITAL,
     DEFAULT_MAX_ASSET_WEIGHT,
     DEFAULT_MIN_RETURN,
@@ -169,11 +171,72 @@ class BotConfig(BaseModel):
     strategies: dict[str, StrategyConfig]
 
 
+def filter_excluded_tickers(
+    tickers: Iterable[str],
+    excluded_tickers: frozenset[str] = DEFAULT_EXCLUDED_TICKERS,
+) -> list[str]:
+    """Return tickers after applying owner-directed hard exclusions."""
+
+    excluded = {ticker.upper() for ticker in excluded_tickers}
+    return list(dict.fromkeys(ticker for ticker in tickers if ticker.upper() not in excluded))
+
+
+def _filter_excluded_allocation_weights(
+    allocation_weights: dict[str, float] | None,
+    excluded_tickers: frozenset[str] = DEFAULT_EXCLUDED_TICKERS,
+) -> dict[str, float] | None:
+    if allocation_weights is None:
+        return None
+    allowed_weights = {
+        ticker: weight
+        for ticker, weight in allocation_weights.items()
+        if ticker.upper() not in {excluded.upper() for excluded in excluded_tickers}
+    }
+    total_weight = sum(allowed_weights.values())
+    if total_weight <= 0:
+        return allowed_weights
+    return {ticker: weight / total_weight for ticker, weight in allowed_weights.items()}
+
+
+def apply_excluded_ticker_policy_to_strategy(strategy: StrategyConfig) -> StrategyConfig:
+    """Strip excluded tickers from a strategy while preserving its shape."""
+
+    excluded = {ticker.upper() for ticker in DEFAULT_EXCLUDED_TICKERS}
+    defensive_ticker = strategy.defensive_ticker
+    if defensive_ticker is not None and defensive_ticker.upper() in excluded:
+        defensive_ticker = None
+    return strategy.model_copy(
+        update={
+            "tickers": filter_excluded_tickers(strategy.tickers),
+            "satellite_tickers": filter_excluded_tickers(strategy.satellite_tickers),
+            "allocation_weights": _filter_excluded_allocation_weights(strategy.allocation_weights),
+            "defensive_ticker": defensive_ticker,
+        }
+    )
+
+
+def apply_excluded_ticker_policy(config: BotConfig) -> BotConfig:
+    """Apply hard ticker exclusions to loaded config universes and strategies."""
+
+    return config.model_copy(
+        update={
+            "universe": {
+                group: filter_excluded_tickers(tickers)
+                for group, tickers in config.universe.items()
+            },
+            "strategies": {
+                name: apply_excluded_ticker_policy_to_strategy(strategy)
+                for name, strategy in config.strategies.items()
+            },
+        }
+    )
+
+
 def load_config(path: str | Path) -> BotConfig:
     config_path = Path(path)
     with config_path.open("r", encoding="utf-8") as handle:
         raw: dict[str, Any] = yaml.safe_load(handle)
-    return BotConfig.model_validate(raw)
+    return apply_excluded_ticker_policy(BotConfig.model_validate(raw))
 
 
 def configured_tickers(config: BotConfig) -> list[str]:
@@ -185,4 +248,4 @@ def configured_tickers(config: BotConfig) -> list[str]:
         tickers.update(strategy.satellite_tickers)
         if strategy.defensive_ticker:
             tickers.add(strategy.defensive_ticker)
-    return sorted(tickers)
+    return sorted(filter_excluded_tickers(tickers))

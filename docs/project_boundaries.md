@@ -4,7 +4,9 @@ This is a private local research project. It should remain operationally separat
 
 ## Operating Boundary
 
-- Do not push this repository to GitHub by default.
+- Do not push this repository to any remote by default. A personal GitHub remote
+  is allowed only when the project owner explicitly configures it; never assume
+  work GitHub credentials, work remotes, or work infrastructure.
 - Do not use work data, work credentials, Databricks workspaces, or Hasbro-specific infrastructure.
 - Keep all market data, backtest results, prompts, and dashboard outputs local unless explicitly changed later.
 - Treat account-specific trading choices as user-controlled brokerage account decisions, not work artifacts.

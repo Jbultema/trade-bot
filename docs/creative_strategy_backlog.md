@@ -1,5 +1,7 @@
 # Creative Strategy Backlog
 
+Status: maintained backlog, not current system state. Last reviewed: 2026-06-21.
+
 These ideas are research candidates for later iterations. They are not approved live systems.
 
 The point is to test weird but falsifiable mechanisms while keeping the eventual operating set small.

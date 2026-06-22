@@ -1,4 +1,10 @@
-# Experiment Reset And Re-Run Plan
+# Archived: Experiment Reset And Re-Run Plan
+
+Archived on 2026-06-21. This was a dated reset plan for creating the
+`data/experiments_reset_v2/` experiment root. The reset root and follow-on
+iterations now exist, so this file is retained only for historical rationale.
+Current experiment-root behavior belongs in `docs/iteration_protocol.md`, and
+current documentation navigation belongs in `docs/doc_index.md`.
 
 The current experiment archive is useful evidence, but the strategy IDs became
 too machine-generated for daily use. The next clean sweep should preserve the old

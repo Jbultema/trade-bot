@@ -1,10 +1,17 @@
-# Institutional Macro Capability Gap
+# Macro Coverage Gap And Data Roadmap
+
+Status: maintained capability-gap map. Last reviewed: 2026-06-21.
 
 This project is not trying to clone any commercial macro product. The useful target is functional
 parity with the operating pattern: macro regime, positioning, market signal,
 risk sizing, and human-readable action translation.
 
-## Implemented Now
+## Current Implemented Coverage
+
+The local public-data system currently approximates several institutional-style
+macro concepts, but it should be treated as a research proxy stack rather than a
+commercial data terminal. These signals are useful only after they survive
+backtests, walk-forward checks, and paper-monitoring review.
 
 - Regime Pulse Lite:
   - growth
@@ -38,6 +45,10 @@ risk sizing, and human-readable action translation.
   country-level inflation/policy grids.
 - Secular inflation model with structural drivers.
 - Long-only asset-class state backtests.
+- Direct earnings-revision and analyst-estimate revision history.
+- IPO calendar and post-IPO performance monitoring for large market-structure
+  events.
+- Source-quality scoring for news/event inputs.
 
 ## Intended Use
 

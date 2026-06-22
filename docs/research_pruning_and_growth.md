@@ -1,10 +1,12 @@
 # Research Pruning and Regrowth Protocol
 
+Status: maintained research-policy note. Last reviewed: 2026-06-21.
+
 This project is intentionally experimental, but the dashboard should not treat every experiment as equally alive. Historical artifacts remain auditable; pruning only changes the default research queue.
 
 ## Current Empirical Read
 
-The latest reset archive is now classified into research statuses:
+The active reset-era experiment archive is classified into research statuses:
 
 - `operational_candidate`: high-growth, tolerable drawdown, and still worth paper-monitoring or close inspection.
 - `needs_iteration`: promising mechanism, but not ready to monitor without a tighter next experiment.
@@ -12,7 +14,15 @@ The latest reset archive is now classified into research statuses:
 - `pruned_dead_end`: failed risk/return, low-growth, or validation-failed experiment. Keep for audit, hide from default curation.
 - `reference`: static or configured benchmark rows.
 
-The main finding after the ML expansion is sharp: broad future-state ML can easily become too conservative, while bounded ML overlays preserve high CAGR better. Strategy-specific drawdown ML improved CAGR and Calmar slightly in the best cases, but it has not yet materially reduced max drawdown versus the best raw high-CAGR AI escape controls. Reactive classic drawdown-control hybrids were worse and should not be promoted for the AI escape engine without a new reason.
+The current working read after the ML expansion is sharp: broad future-state ML
+can easily become too conservative, while bounded ML overlays preserve high CAGR
+better. Strategy-specific drawdown ML improved CAGR and Calmar slightly in the
+best cases, but it has not yet materially reduced max drawdown versus the best
+raw high-CAGR AI escape controls. Reactive classic drawdown-control hybrids were
+worse and should not be promoted for the AI escape engine without a new reason.
+
+This section is empirical, not a permanent truth. Revisit it after major
+experiment batches, material data changes, or sustained forward paper evidence.
 
 ## Pruning Rules
 

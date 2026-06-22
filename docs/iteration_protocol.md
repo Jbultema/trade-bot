@@ -16,6 +16,23 @@ The target operating end state is not a large strategy zoo. The live system shou
 - optionally one defensive/risk overlay
 - optionally one satellite sleeve if evidence supports it
 
+## Experiment Artifact Roots
+
+The project has both historical and active experiment roots:
+
+- `reports/experiments/`: original historical experiment archive.
+- `data/experiments_reset_v2/`: active reset-era archive with more readable
+  strategy names and later ML/operating-system experiments.
+
+Dashboard loaders currently prefer `data/experiments_reset_v2/` when it exists
+locally. In that mode, "All approaches" means all approaches in the active root
+plus configured baselines; it does not automatically merge the older historical
+root. If a future workflow needs full cross-root investigation, add an explicit
+root selector or merged archive view with an `experiment_root` column.
+
+Do not overwrite old experiment roots. Add new roots for clean resets, and keep
+archived roots available for audit.
+
 ## Promotion Rules
 
 Promotion is based on a scorecard, not one metric.
