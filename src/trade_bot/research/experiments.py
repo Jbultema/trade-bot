@@ -31,6 +31,22 @@ from trade_bot.DEFAULTS import (
     DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS,
     DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD,
     DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_OPERABILITY_GOOD_MEAN_GAP_TRADING_DAYS,
+    DEFAULT_OPERABILITY_MATERIAL_TRADE_TURNOVER_THRESHOLD,
+    DEFAULT_OPERABILITY_PAPER_OPERABLE_MAX_AVERAGE_TURNOVER,
+    DEFAULT_OPERABILITY_PAPER_OPERABLE_MAX_SINGLE_DAY_TURNOVER,
+    DEFAULT_OPERABILITY_PAPER_OPERABLE_MAX_TRADES_PER_YEAR,
+    DEFAULT_OPERABILITY_REVIEW_CHURN_MAX_SINGLE_DAY_TURNOVER,
+    DEFAULT_OPERABILITY_REVIEW_CHURN_MAX_TRADES_PER_YEAR,
+    DEFAULT_OPERABILITY_SCORE_AVERAGE_TURNOVER_START,
+    DEFAULT_OPERABILITY_SCORE_AVERAGE_TURNOVER_ZERO,
+    DEFAULT_OPERABILITY_SCORE_FULL_CADENCE_TRADES_PER_YEAR,
+    DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_START,
+    DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_ZERO,
+    DEFAULT_OPERABILITY_SCORE_ZERO_CADENCE_TRADES_PER_YEAR,
+    DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_AVERAGE_TURNOVER,
+    DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_SINGLE_DAY_TURNOVER,
+    DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_TRADES_PER_YEAR,
     DEFAULT_SCENARIO_FRAGILE_UPSIDE_MULTIPLIER,
     DEFAULT_SCENARIO_MAX_MULTIPLIER,
     DEFAULT_SCENARIO_MIN_MULTIPLIER,
@@ -12225,7 +12241,7 @@ def _operability_metrics_frame(results: dict[str, BacktestResult]) -> pd.DataFra
         startup_trade = (gross_exposure.shift(1).fillna(0.0) <= 1e-9) & (gross_exposure > 1e-9)
         turnover.loc[startup_trade] = 0.0
         years = max((turnover.index[-1] - turnover.index[0]).days / 365.25, 1 / 365.25)
-        material = turnover[turnover >= 0.05]
+        material = turnover[turnover >= DEFAULT_OPERABILITY_MATERIAL_TRADE_TURNOVER_THRESHOLD]
         material_days_per_year = len(material) / years
         mean_gap = _mean_event_gap_days(turnover.index, material.index)
         max_turnover = float(turnover.max())
@@ -12341,10 +12357,36 @@ def _operability_score(
     max_single_day_turnover: float,
     average_turnover: float,
 ) -> float:
-    cadence_score = 1.0 - _clip01((material_days_per_year - 8.0) / 44.0)
-    gap_score = _clip01((mean_days_between_material_trades if mean_days_between_material_trades == mean_days_between_material_trades else 63.0) / 21.0)
-    max_trade_score = 1.0 - _clip01((max_single_day_turnover - 0.35) / 0.65)
-    average_turnover_score = 1.0 - _clip01((average_turnover - 0.04) / 0.14)
+    cadence_range = (
+        DEFAULT_OPERABILITY_SCORE_ZERO_CADENCE_TRADES_PER_YEAR
+        - DEFAULT_OPERABILITY_SCORE_FULL_CADENCE_TRADES_PER_YEAR
+    )
+    cadence_score = 1.0 - _clip01(
+        (material_days_per_year - DEFAULT_OPERABILITY_SCORE_FULL_CADENCE_TRADES_PER_YEAR)
+        / cadence_range
+    )
+    gap_value = (
+        mean_days_between_material_trades
+        if mean_days_between_material_trades == mean_days_between_material_trades
+        else DEFAULT_OPERABILITY_GOOD_MEAN_GAP_TRADING_DAYS
+    )
+    gap_score = _clip01(gap_value / DEFAULT_OPERABILITY_GOOD_MEAN_GAP_TRADING_DAYS)
+    max_trade_range = (
+        DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_ZERO
+        - DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_START
+    )
+    max_trade_score = 1.0 - _clip01(
+        (max_single_day_turnover - DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_START)
+        / max_trade_range
+    )
+    average_turnover_range = (
+        DEFAULT_OPERABILITY_SCORE_AVERAGE_TURNOVER_ZERO
+        - DEFAULT_OPERABILITY_SCORE_AVERAGE_TURNOVER_START
+    )
+    average_turnover_score = 1.0 - _clip01(
+        (average_turnover - DEFAULT_OPERABILITY_SCORE_AVERAGE_TURNOVER_START)
+        / average_turnover_range
+    )
     return float(
         0.35 * cadence_score
         + 0.25 * gap_score
@@ -12359,10 +12401,23 @@ def _operability_label(
     max_single_day_turnover: float,
     average_turnover: float,
 ) -> str:
-    if material_days_per_year <= 18.0 and max_single_day_turnover <= 0.65 and average_turnover <= 0.08:
+    if (
+        material_days_per_year <= DEFAULT_OPERABILITY_PAPER_OPERABLE_MAX_TRADES_PER_YEAR
+        and max_single_day_turnover <= DEFAULT_OPERABILITY_PAPER_OPERABLE_MAX_SINGLE_DAY_TURNOVER
+        and average_turnover <= DEFAULT_OPERABILITY_PAPER_OPERABLE_MAX_AVERAGE_TURNOVER
+    ):
         return "paper_operable"
-    if material_days_per_year <= 40.0 and max_single_day_turnover <= 0.90:
-        return "review_churn"
+    if material_days_per_year <= DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_TRADES_PER_YEAR:
+        if (
+            max_single_day_turnover <= DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_SINGLE_DAY_TURNOVER
+            and average_turnover <= DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_AVERAGE_TURNOVER
+        ):
+            return "weekly_cadence"
+        return "weekly_large_moves"
+    if material_days_per_year <= DEFAULT_OPERABILITY_REVIEW_CHURN_MAX_TRADES_PER_YEAR:
+        if max_single_day_turnover <= DEFAULT_OPERABILITY_REVIEW_CHURN_MAX_SINGLE_DAY_TURNOVER:
+            return "review_churn"
+        return "review_large_moves"
     return "too_twitchy"
 
 

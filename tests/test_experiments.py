@@ -11,6 +11,8 @@ from trade_bot.DEFAULTS import DEFAULT_EXCLUDED_TICKERS
 from trade_bot.research.experiments import (
     DecisionSanityConfig,
     ScenarioSizingConfig,
+    _operability_label,
+    _operability_score,
     apply_decision_sanity_overlay,
     apply_operability_hysteresis,
     apply_scenario_position_sizing,
@@ -751,6 +753,45 @@ def test_future_state_sizing_moves_residual_to_defensive_ticker() -> None:
     assert adjusted.sum(axis=1).round(8).eq(1.0).all()
     assert (adjusted["BIL"] >= 0.0).all()
     assert adjusted["BIL"].max() > 0.0
+
+
+def test_weekly_material_trade_cadence_is_not_too_twitchy() -> None:
+    label = _operability_label(
+        material_days_per_year=50.0,
+        max_single_day_turnover=0.70,
+        average_turnover=0.09,
+    )
+    score = _operability_score(
+        material_days_per_year=50.0,
+        mean_days_between_material_trades=5.0,
+        max_single_day_turnover=0.70,
+        average_turnover=0.09,
+    )
+
+    assert label == "weekly_cadence"
+    assert score >= 0.60
+
+
+def test_weekly_cadence_with_large_rebalances_is_not_too_twitchy() -> None:
+    assert (
+        _operability_label(
+            material_days_per_year=50.0,
+            max_single_day_turnover=1.40,
+            average_turnover=0.09,
+        )
+        == "weekly_large_moves"
+    )
+
+
+def test_high_frequency_material_trading_still_gets_too_twitchy_label() -> None:
+    assert (
+        _operability_label(
+            material_days_per_year=115.0,
+            max_single_day_turnover=0.70,
+            average_turnover=0.09,
+        )
+        == "too_twitchy"
+    )
 
 
 def test_operability_hysteresis_reduces_small_weight_churn() -> None:

@@ -6,6 +6,39 @@ from zoneinfo import ZoneInfo, ZoneInfoNotFoundError
 
 import pandas as pd
 
+CATEGORY_LABEL_COLUMNS = {
+    "operability_label",
+    "monitoring_readiness_label",
+}
+
+CATEGORY_LABELS = {
+    "paper_operable": "Paper operable",
+    "weekly_cadence": "Weekly cadence",
+    "weekly_large_moves": "Weekly cadence, large moves",
+    "review_churn": "Review churn",
+    "review_large_moves": "Review large moves",
+    "too_twitchy": "Too twitchy",
+    "paper_ready": "Paper ready",
+    "paper_candidate": "Paper candidate",
+    "blocked": "Blocked",
+}
+
+
+def _format_category_label(value: Any) -> Any:
+    if not isinstance(value, str) or not value:
+        return value
+    normalized = value.strip()
+    if not normalized:
+        return value
+    return CATEGORY_LABELS.get(normalized, normalized.replace("_", " ").title())
+
+
+def _format_category_columns(display: pd.DataFrame) -> pd.DataFrame:
+    for column in CATEGORY_LABEL_COLUMNS:
+        if column in display:
+            display[column] = display[column].map(_format_category_label)
+    return display
+
 
 def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
     display = metrics.copy()
@@ -306,6 +339,7 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
     ]:
         if column in display:
             display[column] = display[column].map(_format_percent)
+    display = _format_category_columns(display)
     return display
 
 
