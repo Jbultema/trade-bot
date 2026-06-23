@@ -21,36 +21,67 @@ def load_or_fetch_yahoo_prices(
     ordered_tickers = sorted(set(tickers))
     cache_path = Path(cache_dir) / "yahoo_prices.parquet"
     cache_path.parent.mkdir(parents=True, exist_ok=True)
-    cached: pd.DataFrame | None = None
-
-    if cache_path.exists() and not refresh:
-        cached = pd.read_parquet(cache_path)
-        cached.index = pd.to_datetime(cached.index)
-        if set(ordered_tickers).issubset(cached.columns):
-            return _filter_prices(cached[ordered_tickers], start=start, end=end)
+    cached = _read_cached_prices(cache_path)
 
     if cached is not None and not refresh:
-        missing = sorted(set(ordered_tickers) - set(cached.columns))
+        cached_filtered = _filter_prices(
+            cached.reindex(columns=ordered_tickers),
+            start=start,
+            end=end,
+        )
+        missing = _missing_or_empty_tickers(cached_filtered, ordered_tickers)
+        if not missing:
+            return cached_filtered
+
         fetched = fetch_yahoo_prices(
             missing,
             start=start,
             end=end,
             adjusted=adjusted,
         )
-        prices = cached.combine_first(fetched).reindex(
-            columns=sorted(set(cached.columns) | set(fetched.columns))
-        )
+        prices = _merge_price_frames(cached, fetched, ordered_tickers)
         prices.to_parquet(cache_path)
-        return _filter_prices(prices.reindex(columns=ordered_tickers), start=start, end=end)
+        return _filter_prices(
+            prices.reindex(columns=ordered_tickers),
+            start=start,
+            end=end,
+        )
 
-    prices = fetch_yahoo_prices(
-        ordered_tickers,
+    try:
+        fetched = fetch_yahoo_prices(
+            ordered_tickers,
+            start=start,
+            end=end,
+            adjusted=adjusted,
+        )
+    except Exception:
+        if cached is None:
+            raise
+        cached_filtered = _filter_prices(
+            cached.reindex(columns=ordered_tickers),
+            start=start,
+            end=end,
+        )
+        if cached_filtered.empty:
+            raise
+        return cached_filtered
+
+    prices = _merge_price_frames(cached, fetched, ordered_tickers)
+    filtered = _filter_prices(
+        prices.reindex(columns=ordered_tickers),
         start=start,
         end=end,
-        adjusted=adjusted,
     )
+    if filtered.empty and cached is not None:
+        cached_filtered = _filter_prices(
+            cached.reindex(columns=ordered_tickers),
+            start=start,
+            end=end,
+        )
+        if not cached_filtered.empty:
+            return cached_filtered
     prices.to_parquet(cache_path)
-    return prices
+    return filtered
 
 
 def fetch_yahoo_prices(
@@ -106,6 +137,36 @@ def _fetch_yahoo_price_chunk(
     prices = prices.reindex(columns=tickers)
     prices = prices.dropna(how="all")
     return prices
+
+
+def _read_cached_prices(cache_path: Path) -> pd.DataFrame | None:
+    if not cache_path.exists():
+        return None
+    cached = pd.read_parquet(cache_path)
+    cached.index = pd.to_datetime(cached.index)
+    return cached.sort_index()
+
+
+def _merge_price_frames(
+    cached: pd.DataFrame | None,
+    fetched: pd.DataFrame,
+    ordered_tickers: list[str],
+) -> pd.DataFrame:
+    fetched = fetched.copy()
+    fetched.index = pd.to_datetime(fetched.index)
+    fetched = fetched.sort_index()
+    if cached is None:
+        return fetched.reindex(columns=ordered_tickers)
+    columns = sorted(set(cached.columns) | set(fetched.columns) | set(ordered_tickers))
+    return fetched.reindex(columns=columns).combine_first(cached.reindex(columns=columns))
+
+
+def _missing_or_empty_tickers(prices: pd.DataFrame, tickers: list[str]) -> list[str]:
+    missing: list[str] = []
+    for ticker in tickers:
+        if ticker not in prices.columns or prices[ticker].dropna().empty:
+            missing.append(ticker)
+    return missing
 
 
 def _filter_prices(prices: pd.DataFrame, *, start: str, end: str | None) -> pd.DataFrame:

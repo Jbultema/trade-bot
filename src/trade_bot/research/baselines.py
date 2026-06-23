@@ -84,6 +84,11 @@ def run_configured_baselines(
     calculated_metrics: list[PerformanceMetrics] = []
     for name, strategy in config.strategies.items():
         strategy_prices = _strategy_prices(prices, strategy.tickers, strategy.defensive_ticker)
+        if strategy_prices.empty:
+            raise RuntimeError(
+                f"Strategy {name!r} has no usable price rows for tickers "
+                f"{strategy.tickers!r} and defensive ticker {strategy.defensive_ticker!r}."
+            )
         target_weights = build_strategy_weights(strategy_prices, strategy)
         result = run_backtest(
             name,
@@ -93,6 +98,11 @@ def run_configured_baselines(
             volatility_target=strategy.volatility_target,
             drawdown_control=strategy.drawdown_control,
         )
+        if result.returns.dropna().empty:
+            raise RuntimeError(
+                f"Strategy {name!r} produced an empty return series. "
+                "Check for all-empty price columns after the latest data refresh."
+            )
         results[name] = result
         calculated_metrics.append(
             calculate_metrics(
