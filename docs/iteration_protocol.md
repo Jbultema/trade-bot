@@ -64,8 +64,7 @@ Automatic reject signals:
 
 Account semantics are part of the scorecard contract. Current results are
 pre-tax / IRA-like. Taxable-account rankings should not be inferred from current
-scorecards until the tax-lot and after-tax simulator described in
-`docs/taxable_account_framework.md` is implemented.
+scorecards unless the estimated tax-lot and after-tax simulator fields are explicitly selected.
 
 ## Broad-Then-Deep Structure
 

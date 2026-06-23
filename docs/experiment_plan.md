@@ -89,8 +89,7 @@ improves confidence, operability, and risk/re-entry behavior:
 - Promote candidate operating systems only after reviewing allocation history,
   drawdown behavior, robustness diagnostics, and forward paper-monitoring
   readiness.
-- Label account semantics explicitly. Until the taxable simulator exists, all
-  strategy results should be treated as pre-tax / IRA-like research outputs.
+- Label account semantics explicitly. Base strategy results remain pre-tax / IRA-like unless fields are explicitly labeled as estimated taxable outputs.
 
 ## Related Docs
 
@@ -99,7 +98,7 @@ improves confidence, operability, and risk/re-entry behavior:
 - `docs/math_model_audit.md`: locked formulas and model semantics.
 - `docs/ml_research_framework.md`: ML/Bayesian seams and validation gates.
 - `docs/forward_testing_protocol.md`: paper/live monitoring and ticket workflow.
-- `docs/taxable_account_framework.md`: planned taxable-account and after-tax
+- `docs/taxable_account_framework.md`: estimated taxable-account and after-tax
   research semantics.
 - `docs/research_pruning_and_growth.md`: current pruning rules and growth
   direction.

@@ -27,7 +27,7 @@ Trade Bot turns market prices, macro series, curated news/events, scenario proba
 | Navigate backend docs | [Documentation Index](docs/doc_index.md) | Current docs, maintained research notes, and archived plans |
 | Extend ML research | [ML Research Framework](docs/ml_research_framework.md) | Targeted ML/Bayesian seams, cadence, and validation gates |
 | Check formulas | [Formula Audit](#formula-audit) | Locked math definitions and validation commands |
-| Understand taxable account support | [Taxable Account Framework](docs/taxable_account_framework.md) | What is planned, what is not implemented, and how after-tax testing should work |
+| Evaluate taxable-account impact | [Taxable Account Workflow](#taxable-account-workflow) | Estimated after-tax strategy comparison, tax lots, wash-sale checks, and TLH candidates |
 
 ## System At A Glance
 
@@ -39,6 +39,7 @@ Trade Bot turns market prices, macro series, curated news/events, scenario proba
 | Research loop | Tests strategy ideas across windows, regimes, and walk-forward diagnostics. | Candidate scorecards and curated operating systems |
 | Monitoring | Tracks champion/challenger/reference paper windows forward from a chosen start date. | Paper valuations and promotion/demotion evidence |
 | Forward Test | Locks recommendations and records paper/live executions for auditability. | Exact recommendation and trade journal trail |
+| Taxable lens | Reconstructs lots, realized gains/losses, wash-sale estimates, tax drag, and after-tax utility. | Estimated taxable-account scorecards and journal lot tables |
 
 ## Operating Flow
 
@@ -149,7 +150,7 @@ flowchart TD
 | Top-Level Readout | One-screen operating posture | Is today do-nothing, small-action, or critical-action? What changed? |
 | Command Center | Current-state trade decision | What is the target posture, and which tickers are affected? |
 | Risk & Scenarios | Off-ramp and sizing discipline | Are factor risk, stress loss, scenarios, or expected shortfall forcing lower risk? |
-| Research Lab | Strategy research and diagnostics | Which approaches worked, why, and across which windows/regimes? |
+| Research Lab | Strategy research and diagnostics | Which approaches worked, why, and across which windows/regimes? Includes **Taxable Impact** for after-tax survivability. |
 | Monitoring | Champion/challenger forward paper testing | Which monitored systems are ahead, lagging, or in drawdown review? |
 | News & Macro | Narrative and macro source review | What news or macro pressure is active, stale, or missing? |
 | Performance | Backtest and selected-window charts | Did the approach work recently and through transitions? |
@@ -179,6 +180,9 @@ Use this for strategy research, not same-day execution. It contains the experime
 The **ML Diagnostics** section is artifact-backed, not trained inside Streamlit. Refresh it with `poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard`. Use `--profile research` when you intentionally want the heavier 1W/1M/3M model sweep with additional estimators; it is slower and should be treated as a research batch, not a dashboard cold-start path.
 
 Important distinction: a promoted experiment is not automatically live-operable. It means the idea deserves monitoring or implementation. A strategy becomes paper-operable only when it exists in the runtime pipeline and can be valued in snapshots.
+
+
+The **Taxable Impact** tab is the taxable-account research lens. It shows configured tax assumptions, pre-tax versus estimated after-tax CAGR, tax drag, after-tax growth utility, realized gain/loss mix, wash-sale estimates, loss carryforward, and a tax-drag watchlist. Use it for taxable brokerage evaluation; use **Outcome Frontier** for IRA-like/pre-tax selection.
 
 ### Monitoring
 
@@ -262,6 +266,66 @@ If you literally want the raw top 3 by `promotion_score`:
 6. Add the first as `champion` and the next two as `challenger`, with `Mode = paper`, `Account label = top3_promotion_score`, and the same paper capital.
 7. Run `poetry run trade-bot run-paper-valuation` after adding them.
 
+
+
+### Taxable Account Workflow
+
+Taxable support is an estimated research layer. It is useful for deciding whether an active strategy is worth paper-monitoring in a taxable brokerage account, but it is not tax advice and it is not broker-grade lot accounting.
+
+Where it appears:
+
+| Surface | What To Look For |
+| --- | --- |
+| **Research Lab -> Experiment Monitor -> Taxable Impact** | Portfolio-level after-tax comparison across experiments, tax drag, after-tax utility, and candidates that still look strong after taxes. |
+| **Research Lab -> Candidate Details -> Performance Over Time** | Selected-strategy estimated taxable readout above the full scorecard. |
+| **Forward Test / journal backend** | Executions can be rebuilt into derived open and realized tax-lot tables for paper/live audit support. |
+| [Taxable Account Framework](docs/taxable_account_framework.md) | Modeling assumptions, IRS reference links, limitations, and future broker-grade work. |
+
+Default tax assumptions live in `src/trade_bot/DEFAULTS.py` and are exposed through the top-level config as `tax_account`. Override them locally in `configs/baseline.yaml` when you want taxable estimates to reflect a different planning assumption:
+
+```yaml
+tax_account:
+  account_type: taxable
+  federal_short_term_tax_rate: 0.24
+  federal_long_term_tax_rate: 0.15
+  state_short_term_tax_rate: 0.00
+  state_long_term_tax_rate: 0.00
+  niit_rate: 0.00
+  niit_applies: false
+  annual_loss_deduction_limit: 3000
+  lot_selection_method: specific_id_tax_min
+  wash_sale_window_days: 30
+  wash_sale_enforcement: warn
+```
+
+Interpretation rules:
+
+- Use `after_tax_cagr`, `after_tax_max_drawdown`, and `after_tax_growth_constrained_utility_score` when ranking strategies for taxable brokerage monitoring.
+- Use `tax_drag_bps_per_year` to see whether turnover and short-term gain realization are eating the edge.
+- Use `short_term_gain_share`, `realized_short_term_gain`, and `realized_long_term_gain` to understand whether a strategy is tax-efficient or mostly short-term churn.
+- Use `wash_sale_disallowed_loss` and `loss_carryforward_end` as warnings, not as broker-confirmed tax records.
+- Do not let tax optimization override a real left-tail exit. The taxable layer can warn about drag; it should not force holding a failing position just to avoid taxes.
+
+To refresh taxable research evidence, rerun experiment iterations with the current code and then migrate the warehouse:
+
+```bash
+poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration ITERATION_NUMBER --output-dir data/experiments_reset_v2
+poetry run trade-bot migrate-warehouse
+```
+
+If you log paper/live executions and need derived tax lots, use the journal API from Python for now:
+
+```python
+from trade_bot.trading.journal import TradeJournal
+
+journal = TradeJournal("data/trading_journal.sqlite")
+rebuilt = journal.rebuild_tax_lots(mode="paper", account="default_paper_account")
+open_lots = journal.load_tax_lots(mode="paper", account="default_paper_account")
+realized = journal.load_tax_realized_lots(mode="paper", account="default_paper_account")
+```
+
+Before relying on taxable output for real-money decisions, reconcile broker-reported lots and review assumptions with a qualified tax professional.
+
 ### Decision-Sanity Overlay Testing
 
 The dashboard recommendation layer includes a decision-sanity guardrail: large news/event-only de-risking should not automatically force a huge cash move unless price, credit, volatility, breadth, or trend confirmation also deteriorates. That rule is not assumed to be good by default. It is backtested as paired raw-versus-capped experiments.
@@ -328,6 +392,8 @@ Prefer `active_valued` or `available_to_seed_and_value` for serious paper monito
 | Dashboard feels stale | Fast mode is reading the last completed snapshot. | Build a new snapshot, then refresh the dashboard. |
 | Monitoring is empty | Warehouse has not been migrated or no windows are seeded. | Run `migrate-warehouse`, then seed or start windows. |
 | Candidate appears in Research Lab but cannot be valued | It is research-only or missing runtime reconstruction support. | Inspect it in Research Lab; only paper-monitor it after it becomes snapshot-ready. |
+| Taxable Impact is blank | The visible experiment scorecards were generated before taxable fields existed, or the warehouse was not migrated. | Run new experiment iterations, then `poetry run trade-bot migrate-warehouse`. |
+| Tax lots differ from brokerage | The journal rebuild uses local execution records and estimated wash-sale rules, not imported broker lots. | Reconcile broker-reported lots before tax-sensitive live use. |
 | Paper return is `0.00%` on the first row | First valuation starts at capital base by design. | Keep collecting future snapshot valuations. |
 | `seed-monitoring-windows --top-n 3` does not match raw promotion-score rank | Seeding uses monitoring rank, not raw score alone. | Use Research Lab leaderboard and manually add strict raw-score candidates. |
 | Champion/challenger table does not update after starting a window | Valuation has not run after the window was created. | Run `poetry run trade-bot run-paper-valuation`. |
@@ -343,7 +409,7 @@ The system intentionally keeps all storage local.
 | `data/cache/` | Cached market, macro, and news inputs. |
 | `data/run_store/trade_bot.duckdb` | Canonical DuckDB warehouse and snapshot metadata. |
 | `data/run_store/snapshots/` | Pickled snapshot artifacts for fast dashboard cold starts. |
-| `data/trading_journal.sqlite` | Local trade-journal source used by the Forward Test UI. |
+| `data/trading_journal.sqlite` | Local trade-journal source used by the Forward Test UI; derived tax-lot and realized-lot tables are rebuilt from executions. |
 | `reports/experiments/` | Experiment iteration CSVs and summaries. |
 | `reports/baseline_report.html` | Static HTML report from baseline runs. |
 

@@ -19,6 +19,8 @@ from trade_bot.DEFAULTS import (
     DEFAULT_TICKET_WHOLE_SHARES,
 )
 from trade_bot.research.trade_decision import TradeDecisionRun
+from trade_bot.tax.account import TaxAccountProfile
+from trade_bot.tax.lots import TaxLotLedger
 
 
 @dataclass(frozen=True)
@@ -299,6 +301,49 @@ class TradeJournal:
         )
         return summary
 
+    def rebuild_tax_lots(
+        self,
+        *,
+        mode: str | None = None,
+        account: str | None = None,
+        profile: TaxAccountProfile | None = None,
+        substitute_map: dict[str, list[str]] | None = None,
+    ) -> dict[str, pd.DataFrame]:
+        """Rebuild derived tax-lot tables from execution history."""
+
+        executions = self.load_executions(limit=100000, mode=mode, account=account)
+        ledger = TaxLotLedger(profile or TaxAccountProfile())
+        if not executions.empty:
+            ledger.process_frame(executions)
+            ledger.apply_wash_sale_rules(substitute_map=substitute_map)
+        open_lots = ledger.open_lots_frame()
+        realized_lots = ledger.realized_lots_frame()
+        rebuilt_at_utc = utc_now_iso()
+        with self._connect() as connection:
+            self._delete_tax_rows(connection, "tax_lots", mode=mode, account=account)
+            self._delete_tax_rows(connection, "tax_realized_lots", mode=mode, account=account)
+            self._insert_tax_lots(connection, open_lots, rebuilt_at_utc)
+            self._insert_tax_realized_lots(connection, realized_lots, rebuilt_at_utc)
+        return {"open_lots": open_lots, "realized_lots": realized_lots}
+
+    def load_tax_lots(
+        self,
+        *,
+        limit: int = 500,
+        mode: str | None = None,
+        account: str | None = None,
+    ) -> pd.DataFrame:
+        return self._load_tax_table("tax_lots", limit=limit, mode=mode, account=account)
+
+    def load_tax_realized_lots(
+        self,
+        *,
+        limit: int = 500,
+        mode: str | None = None,
+        account: str | None = None,
+    ) -> pd.DataFrame:
+        return self._load_tax_table("tax_realized_lots", limit=limit, mode=mode, account=account)
+
     def _ensure_schema(self) -> None:
         with self._connect() as connection:
             connection.execute(
@@ -356,6 +401,51 @@ class TradeJournal:
             )
             connection.execute(
                 """
+                CREATE TABLE IF NOT EXISTS tax_lots (
+                    lot_id TEXT PRIMARY KEY,
+                    rebuilt_at_utc TEXT NOT NULL,
+                    mode TEXT NOT NULL,
+                    account TEXT NOT NULL,
+                    ticker TEXT NOT NULL,
+                    acquired_at TEXT NOT NULL,
+                    quantity REAL NOT NULL,
+                    remaining_quantity REAL NOT NULL,
+                    price REAL NOT NULL,
+                    cost_basis_per_share REAL NOT NULL,
+                    total_cost_basis REAL NOT NULL,
+                    source_execution_id TEXT NOT NULL,
+                    fees REAL NOT NULL,
+                    wash_sale_adjustment REAL NOT NULL,
+                    current_status TEXT NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS tax_realized_lots (
+                    realized_id TEXT PRIMARY KEY,
+                    rebuilt_at_utc TEXT NOT NULL,
+                    mode TEXT NOT NULL,
+                    account TEXT NOT NULL,
+                    ticker TEXT NOT NULL,
+                    acquired_at TEXT NOT NULL,
+                    sold_at TEXT NOT NULL,
+                    quantity REAL NOT NULL,
+                    proceeds REAL NOT NULL,
+                    cost_basis REAL NOT NULL,
+                    realized_gain_loss REAL NOT NULL,
+                    wash_sale_disallowed_loss REAL NOT NULL,
+                    taxable_gain_loss REAL NOT NULL,
+                    term TEXT NOT NULL,
+                    wash_sale_status TEXT NOT NULL,
+                    source_lot_id TEXT NOT NULL,
+                    source_execution_id TEXT NOT NULL,
+                    sell_execution_id TEXT NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
                 CREATE TABLE IF NOT EXISTS executions (
                     execution_id TEXT PRIMARY KEY,
                     recommendation_id TEXT NOT NULL,
@@ -372,6 +462,134 @@ class TradeJournal:
                     notes TEXT NOT NULL
                 )
                 """
+            )
+
+    def _load_tax_table(
+        self,
+        table: str,
+        *,
+        limit: int,
+        mode: str | None,
+        account: str | None,
+    ) -> pd.DataFrame:
+        conditions: list[str] = []
+        params: list[object] = []
+        if mode is not None:
+            conditions.append("mode = ?")
+            params.append(mode)
+        if account is not None:
+            conditions.append("account = ?")
+            params.append(account)
+        where_clause = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+        order_column = "acquired_at" if table == "tax_lots" else "sold_at"
+        query = f"""
+            SELECT *
+            FROM {table}
+            {where_clause}
+            ORDER BY {order_column} DESC
+            LIMIT ?
+            """
+        params.append(limit)
+        return self._read_sql(query, tuple(params))
+
+    def _delete_tax_rows(
+        self,
+        connection: sqlite3.Connection,
+        table: str,
+        *,
+        mode: str | None,
+        account: str | None,
+    ) -> None:
+        conditions: list[str] = []
+        params: list[object] = []
+        if mode is not None:
+            conditions.append("mode = ?")
+            params.append(mode)
+        if account is not None:
+            conditions.append("account = ?")
+            params.append(account)
+        where_clause = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+        connection.execute(f"DELETE FROM {table} {where_clause}", tuple(params))
+
+    def _insert_tax_lots(
+        self,
+        connection: sqlite3.Connection,
+        lots: pd.DataFrame,
+        rebuilt_at_utc: str,
+    ) -> None:
+        columns = [
+            "lot_id",
+            "rebuilt_at_utc",
+            "mode",
+            "account",
+            "ticker",
+            "acquired_at",
+            "quantity",
+            "remaining_quantity",
+            "price",
+            "cost_basis_per_share",
+            "total_cost_basis",
+            "source_execution_id",
+            "fees",
+            "wash_sale_adjustment",
+            "current_status",
+        ]
+        for _, row in lots.iterrows():
+            payload = {column: row.get(column, "") for column in columns}
+            payload["rebuilt_at_utc"] = rebuilt_at_utc
+            connection.execute(
+                """
+                INSERT INTO tax_lots (
+                    lot_id, rebuilt_at_utc, mode, account, ticker, acquired_at,
+                    quantity, remaining_quantity, price, cost_basis_per_share,
+                    total_cost_basis, source_execution_id, fees, wash_sale_adjustment,
+                    current_status
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                tuple(payload[column] for column in columns),
+            )
+
+    def _insert_tax_realized_lots(
+        self,
+        connection: sqlite3.Connection,
+        lots: pd.DataFrame,
+        rebuilt_at_utc: str,
+    ) -> None:
+        columns = [
+            "realized_id",
+            "rebuilt_at_utc",
+            "mode",
+            "account",
+            "ticker",
+            "acquired_at",
+            "sold_at",
+            "quantity",
+            "proceeds",
+            "cost_basis",
+            "realized_gain_loss",
+            "wash_sale_disallowed_loss",
+            "taxable_gain_loss",
+            "term",
+            "wash_sale_status",
+            "source_lot_id",
+            "source_execution_id",
+            "sell_execution_id",
+        ]
+        for _, row in lots.iterrows():
+            payload = {column: row.get(column, "") for column in columns}
+            payload["rebuilt_at_utc"] = rebuilt_at_utc
+            connection.execute(
+                """
+                INSERT INTO tax_realized_lots (
+                    realized_id, rebuilt_at_utc, mode, account, ticker, acquired_at,
+                    sold_at, quantity, proceeds, cost_basis, realized_gain_loss,
+                    wash_sale_disallowed_loss, taxable_gain_loss, term, wash_sale_status,
+                    source_lot_id, source_execution_id, sell_execution_id
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                tuple(payload[column] for column in columns),
             )
 
     def _insert_tickets(
@@ -471,7 +689,9 @@ def build_recommendation_tickets(
 
     reference_prices = _latest_prices(prices)
     summary = _first_row(trade_decision.summary)
-    ticket_rationale = str(rationale if rationale is not None else summary.get("human_explanation", ""))
+    ticket_rationale = str(
+        rationale if rationale is not None else summary.get("human_explanation", "")
+    )
     rows: list[dict[str, object]] = []
     for _, row in plan.iterrows():
         delta_weight = float(row["delta_weight"])

@@ -55,6 +55,38 @@ Trade tickets are not broker orders. They are auditable decision records.
 - Size bands define the intended notional/share range.
 - Whole-share sizing can be toggled depending on the actual brokerage/account constraint.
 
+
+## Taxable Account Forward Testing
+
+Taxable-account monitoring is a parallel evidence track. It should not replace
+pre-tax/IRA-like strategy research, and it should not override true risk exits.
+
+Before paper-monitoring a taxable brokerage version of a strategy:
+
+- Review **Research Lab -> Experiment Monitor -> Taxable Impact**.
+- Confirm the strategy still has acceptable `after_tax_cagr`,
+  `after_tax_max_drawdown`, and `after_tax_growth_constrained_utility_score`.
+- Check `tax_drag_bps_per_year`, `short_term_gain_share`, realized short/long
+  gain mix, wash-sale disallowed-loss estimates, and loss carryforward.
+- Confirm the tax assumptions in `tax_account` match the intended planning
+  scenario closely enough for research use.
+
+When logging paper or live executions for taxable accounts:
+
+- Keep account labels explicit, for example `paper_taxable_core` rather than a
+  generic account name.
+- Record fees and exact execution timestamps because tax lots are rebuilt from
+  execution history.
+- Rebuild derived lots with `TradeJournal.rebuild_tax_lots()` after executions
+  are logged if you need current open/realized lot tables.
+- Treat the local tax-lot tables as estimated audit support until broker lots are
+  reconciled.
+
+Before real taxable-account trades, add one more gate: broker-reported opening
+lots, wash-sale exposure, and personal tax assumptions need manual review. The
+bot can show estimated drag and TLH candidates; it cannot decide that a taxable
+trade is appropriate.
+
 ## Minimum Gate Before Real Money
 
 Before real trades, the system should have:

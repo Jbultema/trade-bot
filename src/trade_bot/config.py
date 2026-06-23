@@ -42,6 +42,20 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RANKING_METRIC,
     DEFAULT_REBALANCE,
     DEFAULT_SIGNAL_LAG_DAYS,
+    DEFAULT_TAX_ACCOUNT_TYPE,
+    DEFAULT_TAX_ANNUAL_LOSS_DEDUCTION_LIMIT,
+    DEFAULT_TAX_CAPITAL_LOSS_CARRYFORWARD_LONG,
+    DEFAULT_TAX_CAPITAL_LOSS_CARRYFORWARD_SHORT,
+    DEFAULT_TAX_FEDERAL_LONG_TERM_RATE,
+    DEFAULT_TAX_FEDERAL_SHORT_TERM_RATE,
+    DEFAULT_TAX_LONG_TERM_HOLDING_DAYS,
+    DEFAULT_TAX_LOT_SELECTION_METHOD,
+    DEFAULT_TAX_NIIT_APPLIES,
+    DEFAULT_TAX_NIIT_RATE,
+    DEFAULT_TAX_STATE_LONG_TERM_RATE,
+    DEFAULT_TAX_STATE_SHORT_TERM_RATE,
+    DEFAULT_TAX_WASH_SALE_ENFORCEMENT,
+    DEFAULT_TAX_WASH_SALE_WINDOW_DAYS,
     DEFAULT_TOP_N,
     DEFAULT_TRANSACTION_COST_BPS,
     DEFAULT_TREND_FILTER_DAYS,
@@ -51,6 +65,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_VOLATILITY_LOOKBACK_DAYS,
     DEFAULT_WEIGHTING,
 )
+from trade_bot.tax.account import TaxAccountProfile
 
 
 class DataConfig(BaseModel):
@@ -85,6 +100,55 @@ class DrawdownControlConfig(BaseModel):
     equity_lookback_days: int = Field(default=DEFAULT_DRAWDOWN_EQUITY_LOOKBACK_DAYS, gt=1)
     max_drawdown: float = Field(default=DEFAULT_DRAWDOWN_MAX_DRAWDOWN, lt=0)
     risk_multiplier: float = Field(default=DEFAULT_DRAWDOWN_RISK_MULTIPLIER, ge=0, le=1)
+
+
+class TaxAccountConfig(BaseModel):
+    model_config = ConfigDict(extra="forbid")
+
+    account_type: Literal["ira", "roth", "taxable"] = DEFAULT_TAX_ACCOUNT_TYPE  # type: ignore[assignment]
+    federal_short_term_tax_rate: float = Field(
+        default=DEFAULT_TAX_FEDERAL_SHORT_TERM_RATE,
+        ge=0,
+        le=1,
+    )
+    federal_long_term_tax_rate: float = Field(
+        default=DEFAULT_TAX_FEDERAL_LONG_TERM_RATE,
+        ge=0,
+        le=1,
+    )
+    state_short_term_tax_rate: float = Field(default=DEFAULT_TAX_STATE_SHORT_TERM_RATE, ge=0, le=1)
+    state_long_term_tax_rate: float = Field(default=DEFAULT_TAX_STATE_LONG_TERM_RATE, ge=0, le=1)
+    niit_rate: float = Field(default=DEFAULT_TAX_NIIT_RATE, ge=0, le=1)
+    niit_applies: bool = DEFAULT_TAX_NIIT_APPLIES
+    capital_loss_carryforward_short: float = Field(
+        default=DEFAULT_TAX_CAPITAL_LOSS_CARRYFORWARD_SHORT,
+        ge=0,
+    )
+    capital_loss_carryforward_long: float = Field(
+        default=DEFAULT_TAX_CAPITAL_LOSS_CARRYFORWARD_LONG,
+        ge=0,
+    )
+    annual_loss_deduction_limit: float = Field(
+        default=DEFAULT_TAX_ANNUAL_LOSS_DEDUCTION_LIMIT,
+        ge=0,
+    )
+    long_term_holding_period_days: int = Field(default=DEFAULT_TAX_LONG_TERM_HOLDING_DAYS, gt=0)
+    lot_selection_method: Literal[
+        "fifo",
+        "specific_id_tax_min",
+        "highest_cost",
+        "lowest_gain",
+    ] = DEFAULT_TAX_LOT_SELECTION_METHOD  # type: ignore[assignment]
+    wash_sale_window_days: int = Field(default=DEFAULT_TAX_WASH_SALE_WINDOW_DAYS, ge=0)
+    wash_sale_enforcement: Literal[
+        "off",
+        "warn",
+        "block_loss_harvest",
+        "strict",
+    ] = DEFAULT_TAX_WASH_SALE_ENFORCEMENT  # type: ignore[assignment]
+
+    def to_profile(self) -> TaxAccountProfile:
+        return TaxAccountProfile(**self.model_dump())
 
 
 class StrategyConfig(BaseModel):
@@ -167,6 +231,7 @@ class BotConfig(BaseModel):
 
     data: DataConfig
     execution: ExecutionConfig
+    tax_account: TaxAccountConfig = Field(default_factory=TaxAccountConfig)
     universe: dict[str, list[str]]
     strategies: dict[str, StrategyConfig]
 

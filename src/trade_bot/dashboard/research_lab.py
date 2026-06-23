@@ -70,6 +70,34 @@ from trade_bot.research.strategy_outcome_utility import (
 )
 
 
+def _render_taxable_estimate_summary(scorecard: pd.DataFrame) -> None:
+    tax_columns = [
+        "tax_model_status",
+        "tax_account_type",
+        "after_tax_cagr",
+        "after_tax_max_drawdown",
+        "after_tax_calmar",
+        "tax_drag_bps_per_year",
+        "after_tax_growth_constrained_utility_score",
+        "after_tax_terminal_wealth_with_contributions_15y",
+        "net_estimated_tax_paid",
+        "realized_short_term_gain",
+        "realized_long_term_gain",
+        "realized_loss_harvested",
+        "wash_sale_disallowed_loss",
+        "loss_carryforward_end",
+        "short_term_gain_share",
+    ]
+    available = [column for column in tax_columns if column in scorecard]
+    if not available:
+        return
+    tax_status = str(scorecard.iloc[0].get("tax_model_status", ""))
+    if not tax_status or tax_status == "not_evaluated":
+        return
+    st.caption("Estimated taxable-account readout")
+    _render_metric_dataframe(_display_metrics(scorecard[available]), hide_index=True)
+
+
 def _render_strategy_summary_and_behavior(
     *,
     row: pd.Series,
@@ -612,8 +640,7 @@ def _render_approach_detail_workbench(
         ]
     elif selected_scope == "All non-pruned approaches":
         visible_catalog = catalog[
-            (catalog["source"] == "baseline")
-            | ~catalog["research_status"].eq("pruned_dead_end")
+            (catalog["source"] == "baseline") | ~catalog["research_status"].eq("pruned_dead_end")
         ]
     else:
         visible_catalog = catalog
@@ -720,6 +747,7 @@ def _render_approach_detail_workbench(
             experiment_scorecards=experiment_scorecards,
         )
         if not scorecard.empty:
+            _render_taxable_estimate_summary(scorecard)
             st.caption("Full-history scorecard")
             _render_metric_dataframe(_display_metrics(scorecard), hide_index=True)
         if detail_result is None:
@@ -952,7 +980,9 @@ def _render_strategy_family_map(
     archetype_summary = summarize_strategy_archetypes(active_family_map)
     if not archetype_summary.empty:
         st.markdown("**Strategy archetype summary**")
-        st.caption("Summary statistics exclude pruned dead-end rows; the detailed map can still show them.")
+        st.caption(
+            "Summary statistics exclude pruned dead-end rows; the detailed map can still show them."
+        )
         chart_columns = [
             column
             for column in ["median_cagr", "median_max_drawdown", "median_turnover"]
@@ -1065,7 +1095,6 @@ def _render_strategy_family_map(
             _render_metric_dataframe(_display_metrics(family_clusters), hide_index=True)
 
 
-
 def _render_outcome_frontier(
     *,
     bot_config: Any,
@@ -1091,7 +1120,9 @@ def _render_outcome_frontier(
             frame = active
     required_columns = {"cagr", "max_drawdown", "growth_constrained_utility_score"}
     if not required_columns.issubset(frame.columns):
-        st.write("Outcome utility fields are not available yet. Run the daily update stack or migrate experiments.")
+        st.write(
+            "Outcome utility fields are not available yet. Run the daily update stack or migrate experiments."
+        )
         return
 
     plot_frame = frame.dropna(subset=["cagr", "max_drawdown"]).copy()
@@ -1141,7 +1172,11 @@ def _render_outcome_frontier(
                 y=pareto["cagr"],
                 mode="markers",
                 name="Pareto frontier",
-                marker={"symbol": "diamond-open", "size": 16, "line": {"width": 2, "color": "#ef4444"}},
+                marker={
+                    "symbol": "diamond-open",
+                    "size": 16,
+                    "line": {"width": 2, "color": "#ef4444"},
+                },
                 text=pareto.get("display_name", pareto.get("strategy", "")),
                 hovertemplate="%{text}<br>Pareto efficient<extra></extra>",
             )
@@ -1195,7 +1230,9 @@ def _render_outcome_frontier(
     ]
     st.caption("Top outcome-utility candidates")
     _render_metric_dataframe(
-        _display_metrics(plot_frame[[column for column in comparison_columns if column in plot_frame]].head(20)),
+        _display_metrics(
+            plot_frame[[column for column in comparison_columns if column in plot_frame]].head(20)
+        ),
         hide_index=True,
     )
 
@@ -1334,7 +1371,9 @@ def _extra_wealth_from_multiple(wealth: float | None, multiple: object) -> float
     return wealth_value - wealth_value / multiple_value
 
 
-def _outcome_decision_helper(row: pd.Series, *, extra_spy: float | None, extra_qqq: float | None) -> str:
+def _outcome_decision_helper(
+    row: pd.Series, *, extra_spy: float | None, extra_qqq: float | None
+) -> str:
     max_drawdown = _safe_float(row.get("max_drawdown"))
     cagr = _safe_float(row.get("cagr"))
     utility_tier = str(row.get("growth_utility_tier", "")).replace("_", " ")
@@ -1346,7 +1385,12 @@ def _outcome_decision_helper(row: pd.Series, *, extra_spy: float | None, extra_q
         band = "outside the hard drawdown band"
     elif drawdown_depth > soft:
         band = "inside the soft penalty band"
-    support = "supported" if _safe_float(row.get("walk_forward_positive_rate")) and _safe_float(row.get("walk_forward_positive_rate")) >= 0.65 else "not fully supported"
+    support = (
+        "supported"
+        if _safe_float(row.get("walk_forward_positive_rate"))
+        and _safe_float(row.get("walk_forward_positive_rate")) >= 0.65
+        else "not fully supported"
+    )
     return (
         f"Outcome read: this strategy compounds at {_format_percent(cagr)} with max drawdown "
         f"{_format_percent(max_drawdown)}, which is {band}. At the configured 15-year accumulation "
@@ -1363,6 +1407,7 @@ def _safe_float(value: object) -> float | None:
     if numeric != numeric:
         return None
     return numeric
+
 
 def _render_experiment_monitor(
     bot_config: Any,
@@ -1396,7 +1441,9 @@ def _render_experiment_monitor(
         .sum()
     )
     pruned_count = int(
-        experiment_scorecards.get("research_status", pd.Series("", index=experiment_scorecards.index))
+        experiment_scorecards.get(
+            "research_status", pd.Series("", index=experiment_scorecards.index)
+        )
         .eq("pruned_dead_end")
         .sum()
     )
@@ -1411,6 +1458,7 @@ def _render_experiment_monitor(
     (
         experiment_detail_tab,
         experiment_outcome_tab,
+        experiment_taxable_tab,
         experiment_sanity_tab,
         experiment_confidence_tab,
         experiment_readiness_tab,
@@ -1424,6 +1472,7 @@ def _render_experiment_monitor(
         [
             "Candidate Details",
             "Outcome Frontier",
+            "Taxable Impact",
             "Sanity Impact",
             "Confidence Gauntlet",
             "Paper Readiness",
@@ -1457,6 +1506,12 @@ def _render_experiment_monitor(
             baseline_run=baseline_run,
             experiment_scorecards=experiment_scorecards,
             experiment_candidates=experiment_candidates,
+        )
+
+    with experiment_taxable_tab:
+        _render_taxable_impact(
+            bot_config=bot_config,
+            experiment_scorecards=experiment_scorecards,
         )
 
     with experiment_sanity_tab:
@@ -1509,7 +1564,9 @@ def _render_experiment_monitor(
         status_options = [
             "active research",
             "all",
-            *sorted(experiment_scorecards.get("research_status", pd.Series(dtype=str)).dropna().unique()),
+            *sorted(
+                experiment_scorecards.get("research_status", pd.Series(dtype=str)).dropna().unique()
+            ),
         ]
         decision_filter = filter_col_a.selectbox(
             "Promotion decision",
@@ -1542,9 +1599,9 @@ def _render_experiment_monitor(
         ]
         if status_filter == "active research":
             experiment_view = experiment_view[
-                ~experiment_view.get("research_status", pd.Series("", index=experiment_view.index)).eq(
-                    "pruned_dead_end"
-                )
+                ~experiment_view.get(
+                    "research_status", pd.Series("", index=experiment_view.index)
+                ).eq("pruned_dead_end")
             ]
         elif status_filter != "all":
             experiment_view = experiment_view[
@@ -1668,6 +1725,211 @@ def _render_experiment_monitor(
                 experiment_candidates["iteration"].isin(selected_manifest_iterations)
             ]
             st.dataframe(manifest_view, use_container_width=True)
+
+
+def _render_taxable_impact(*, bot_config: Any, experiment_scorecards: pd.DataFrame) -> None:
+    st.markdown("**Taxable Impact**")
+    st.caption(
+        "Estimated taxable-account research view. Use this to check whether an active strategy's "
+        "edge survives realized gains, short-term gain mix, wash-sale estimates, loss carryforward, "
+        "and configured tax rates. IRA-like/pre-tax selection should still use the Outcome Frontier."
+    )
+    tax_config = getattr(bot_config, "tax_account", None)
+    account_type = str(getattr(tax_config, "account_type", "unknown"))
+    short_rate = _safe_float(getattr(tax_config, "federal_short_term_tax_rate", None)) or 0.0
+    short_rate += _safe_float(getattr(tax_config, "state_short_term_tax_rate", None)) or 0.0
+    long_rate = _safe_float(getattr(tax_config, "federal_long_term_tax_rate", None)) or 0.0
+    long_rate += _safe_float(getattr(tax_config, "state_long_term_tax_rate", None)) or 0.0
+    niit_applies = bool(getattr(tax_config, "niit_applies", False))
+    niit_rate = _safe_float(getattr(tax_config, "niit_rate", None)) or 0.0
+    if niit_applies:
+        short_rate += niit_rate
+        long_rate += niit_rate
+    assumption_cols = st.columns(5)
+    _helped_metric(assumption_cols[0], "Account", account_type.replace("_", " ").title())
+    _helped_metric(assumption_cols[1], "Short Rate", _format_percent(short_rate))
+    _helped_metric(assumption_cols[2], "Long Rate", _format_percent(long_rate))
+    _helped_metric(
+        assumption_cols[3],
+        "Lot Method",
+        str(getattr(tax_config, "lot_selection_method", "unknown")).replace("_", " ").title(),
+    )
+    _helped_metric(
+        assumption_cols[4],
+        "Wash Window",
+        f"{int(getattr(tax_config, 'wash_sale_window_days', 0) or 0)} days",
+    )
+
+    required_columns = {
+        "after_tax_cagr",
+        "after_tax_max_drawdown",
+        "tax_drag_bps_per_year",
+        "after_tax_growth_constrained_utility_score",
+    }
+    if experiment_scorecards.empty or not required_columns.issubset(experiment_scorecards.columns):
+        st.info(
+            "No estimated taxable scorecard fields are available yet. Run new experiment iterations "
+            "with the current code, then run `migrate-warehouse` so the dashboard can load them."
+        )
+        return
+
+    frame = experiment_scorecards.copy()
+    if "research_status" in frame:
+        active = frame[~frame["research_status"].astype(str).eq("pruned_dead_end")].copy()
+        if not active.empty:
+            frame = active
+    frame = frame.dropna(subset=["after_tax_cagr", "after_tax_growth_constrained_utility_score"])
+    if frame.empty:
+        st.info(
+            "Taxable columns exist, but no candidate has complete estimated taxable metrics yet."
+        )
+        return
+
+    card_cols = st.columns(4)
+    _helped_metric(card_cols[0], "Tax-Evaluated", f"{len(frame):,}")
+    _helped_metric(
+        card_cols[1],
+        "Median Tax Drag",
+        _format_decimal(frame["tax_drag_bps_per_year"].median()),
+        key="tax_drag_bps_per_year",
+    )
+    _helped_metric(
+        card_cols[2],
+        "Best After-Tax Utility",
+        _format_decimal(frame["after_tax_growth_constrained_utility_score"].max()),
+        key="after_tax_growth_constrained_utility_score",
+    )
+    best_after_tax_cagr = frame.sort_values(
+        "after_tax_growth_constrained_utility_score", ascending=False
+    ).iloc[0]
+    _helped_metric(
+        card_cols[3],
+        "Top After-Tax CAGR",
+        _format_percent(best_after_tax_cagr.get("after_tax_cagr")),
+    )
+
+    plot_frame = frame.dropna(subset=["cagr", "after_tax_cagr"]).copy()
+    if not plot_frame.empty:
+        fig = go.Figure()
+        fig.add_trace(
+            go.Scatter(
+                x=plot_frame["cagr"],
+                y=plot_frame["after_tax_cagr"],
+                mode="markers",
+                name="Strategies",
+                marker={
+                    "size": 11,
+                    "color": plot_frame["tax_drag_bps_per_year"],
+                    "colorscale": "Bluered",
+                    "showscale": True,
+                    "colorbar": {"title": "Tax drag bps"},
+                    "line": {"width": 1, "color": "#0f172a"},
+                    "opacity": 0.78,
+                },
+                text=plot_frame.get("display_name", plot_frame.get("strategy", "")),
+                customdata=plot_frame[
+                    [
+                        column
+                        for column in [
+                            "strategy",
+                            "after_tax_growth_constrained_utility_score",
+                            "tax_drag_bps_per_year",
+                            "short_term_gain_share",
+                        ]
+                        if column in plot_frame
+                    ]
+                ],
+                hovertemplate=(
+                    "%{text}<br>Pre-tax CAGR %{x:.1%}<br>After-tax CAGR %{y:.1%}"
+                    "<br>Tax drag %{customdata[2]:.0f} bps"
+                    "<br>After-tax utility %{customdata[1]:.2f}<extra></extra>"
+                ),
+            )
+        )
+        axis_min = float(min(plot_frame["cagr"].min(), plot_frame["after_tax_cagr"].min()))
+        axis_max = float(max(plot_frame["cagr"].max(), plot_frame["after_tax_cagr"].max()))
+        fig.add_trace(
+            go.Scatter(
+                x=[axis_min, axis_max],
+                y=[axis_min, axis_max],
+                mode="lines",
+                name="No tax drag",
+                line={"dash": "dash", "color": "#64748b"},
+                hoverinfo="skip",
+            )
+        )
+        fig.update_layout(
+            height=460,
+            xaxis_title="Pre-tax CAGR",
+            yaxis_title="Estimated after-tax CAGR",
+            xaxis_tickformat=".0%",
+            yaxis_tickformat=".0%",
+            margin={"l": 20, "r": 20, "t": 35, "b": 20},
+        )
+        st.plotly_chart(fig, use_container_width=True)
+
+    top_columns = [
+        "iteration",
+        "display_name",
+        "strategy",
+        "family",
+        "research_status",
+        "cagr",
+        "after_tax_cagr",
+        "tax_drag_bps_per_year",
+        "max_drawdown",
+        "after_tax_max_drawdown",
+        "growth_constrained_utility_score",
+        "after_tax_growth_constrained_utility_score",
+        "after_tax_terminal_wealth_with_contributions_15y",
+        "net_estimated_tax_paid",
+        "realized_short_term_gain",
+        "realized_long_term_gain",
+        "realized_loss_harvested",
+        "wash_sale_disallowed_loss",
+        "loss_carryforward_end",
+        "short_term_gain_share",
+        "monitoring_readiness_label",
+    ]
+    st.caption("Top estimated after-tax candidates")
+    top_view = frame.sort_values("after_tax_growth_constrained_utility_score", ascending=False)
+    _render_metric_dataframe(
+        _display_metrics(
+            top_view[[column for column in top_columns if column in top_view]].head(25)
+        ),
+        hide_index=True,
+    )
+
+    with st.expander("Tax drag watchlist", expanded=False):
+        st.caption(
+            "High tax drag is not automatically fatal, but it means taxable-account monitoring should "
+            "prove the after-tax edge instead of relying on pre-tax CAGR."
+        )
+        drag_columns = [
+            "display_name",
+            "strategy",
+            "family",
+            "cagr",
+            "after_tax_cagr",
+            "tax_drag_bps_per_year",
+            "short_term_gain_share",
+            "realized_short_term_gain",
+            "wash_sale_disallowed_loss",
+            "after_tax_growth_constrained_utility_score",
+        ]
+        drag_view = frame.sort_values("tax_drag_bps_per_year", ascending=False)
+        _render_metric_dataframe(
+            _display_metrics(
+                drag_view[[column for column in drag_columns if column in drag_view]].head(25)
+            ),
+            hide_index=True,
+        )
+
+    st.info(
+        "Interpretation: taxable mode is a parallel research lens, not a replacement for risk control. "
+        "Favor candidates where after-tax utility and after-tax CAGR remain strong, tax drag is understandable, "
+        "and wash-sale/loss-carryforward estimates do not dominate the result."
+    )
 
 
 def _render_decision_sanity_impact(decision_sanity_impacts: pd.DataFrame) -> None:
@@ -1936,7 +2198,9 @@ def _render_signal_inclusion(baseline_run: BaselineRun) -> None:
 
 
 @st.cache_data(show_spinner=False, ttl=300)
-def _load_ml_diagnostic_frames(root: str) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+def _load_ml_diagnostic_frames(
+    root: str,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     base = Path(root)
     frames = []
     for filename in [
@@ -1963,7 +2227,9 @@ def _render_ml_diagnostics() -> None:
         return
 
     overview_cols = st.columns(4)
-    _helped_metric(overview_cols[0], "Tasks", f"{metrics['task'].nunique():,}" if "task" in metrics else "0")
+    _helped_metric(
+        overview_cols[0], "Tasks", f"{metrics['task'].nunique():,}" if "task" in metrics else "0"
+    )
     _helped_metric(overview_cols[1], "Model Rows", f"{len(metrics):,}")
     best_utility = pd.to_numeric(metrics.get("utility_score"), errors="coerce").max()
     _helped_metric(
@@ -1971,7 +2237,11 @@ def _render_ml_diagnostics() -> None:
         "Best Utility",
         f"{best_utility:.3f}" if best_utility == best_utility else "n/a",
     )
-    top_drift = pd.to_numeric(drift.get("drift_score"), errors="coerce").max() if not drift.empty else float("nan")
+    top_drift = (
+        pd.to_numeric(drift.get("drift_score"), errors="coerce").max()
+        if not drift.empty
+        else float("nan")
+    )
     _helped_metric(
         overview_cols[3],
         "Top Drift",
@@ -2002,7 +2272,9 @@ def _render_ml_diagnostics() -> None:
         available = [column for column in columns if column in metrics.columns]
         _render_metric_dataframe(_display_metrics(metrics[available].head(60)), hide_index=True)
     with latest_tab:
-        st.caption("Latest batch inference probabilities by task and model. These are research diagnostics, not trade tickets.")
+        st.caption(
+            "Latest batch inference probabilities by task and model. These are research diagnostics, not trade tickets."
+        )
         columns = [
             "task",
             "kind",
@@ -2012,7 +2284,9 @@ def _render_ml_diagnostics() -> None:
             "top_probability",
         ]
         probability_columns = [column for column in latest.columns if column.startswith("prob_")]
-        available = [column for column in [*columns, *probability_columns] if column in latest.columns]
+        available = [
+            column for column in [*columns, *probability_columns] if column in latest.columns
+        ]
         _render_metric_dataframe(_display_metrics(latest[available].head(80)), hide_index=True)
     with families_tab:
         st.caption("Feature-family importance from sklearn models, aggregated across folds.")
@@ -2026,9 +2300,13 @@ def _render_ml_diagnostics() -> None:
             "represented_features",
         ]
         available = [column for column in columns if column in family_importance.columns]
-        _render_metric_dataframe(_display_metrics(family_importance[available].head(80)), hide_index=True)
+        _render_metric_dataframe(
+            _display_metrics(family_importance[available].head(80)), hide_index=True
+        )
     with drift_tab:
-        st.caption("Feature drift compares the most recent year against the prior reference window.")
+        st.caption(
+            "Feature drift compares the most recent year against the prior reference window."
+        )
         columns = [
             "feature",
             "feature_family",

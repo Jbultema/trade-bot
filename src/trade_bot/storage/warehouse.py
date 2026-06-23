@@ -545,6 +545,15 @@ class TradingWarehouse:
             "selection_adjusted_promotion_score",
             "growth_constrained_utility_score",
             "growth_utility_tier",
+            "tax_model_status",
+            "tax_account_type",
+            "after_tax_cagr",
+            "after_tax_max_drawdown",
+            "after_tax_calmar",
+            "tax_drag_bps_per_year",
+            "after_tax_growth_constrained_utility_score",
+            "after_tax_growth_utility_tier",
+            "after_tax_terminal_wealth_with_contributions_15y",
             "terminal_wealth_with_contributions_15y",
             "wealth_multiple_vs_spy",
             "wealth_multiple_vs_qqq",
@@ -1222,11 +1231,23 @@ def _rank_strategy_rows(scorecards: pd.DataFrame) -> pd.DataFrame:
     frame = scorecards.copy()
     if "strategy" not in frame and "name" in frame:
         frame = frame.rename(columns={"name": "strategy"})
-    for column in ["growth_constrained_utility_score", "promotion_score", "robustness_score", "calmar", "iteration"]:
+    for column in [
+        "growth_constrained_utility_score",
+        "promotion_score",
+        "robustness_score",
+        "calmar",
+        "iteration",
+    ]:
         if column not in frame:
             frame[column] = float("nan")
     return frame.sort_values(
-        ["growth_constrained_utility_score", "promotion_score", "robustness_score", "calmar", "iteration"],
+        [
+            "growth_constrained_utility_score",
+            "promotion_score",
+            "robustness_score",
+            "calmar",
+            "iteration",
+        ],
         ascending=False,
         na_position="last",
     )

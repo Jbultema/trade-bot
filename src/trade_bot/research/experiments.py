@@ -64,8 +64,12 @@ from trade_bot.research.future_state_ml import (
     apply_strategy_drawdown_position_sizing,
 )
 from trade_bot.research.strategy_naming import strategy_display_name
-from trade_bot.research.strategy_outcome_utility import enrich_strategy_outcome_utility
+from trade_bot.research.strategy_outcome_utility import (
+    enrich_after_tax_outcome_utility,
+    enrich_strategy_outcome_utility,
+)
 from trade_bot.strategies.momentum import build_strategy_weights
+from trade_bot.tax.backtest import simulate_taxable_backtest, tax_metrics_frame
 
 
 @dataclass(frozen=True)
@@ -214,6 +218,7 @@ def run_experiment_iteration(
     operability_metrics = _operability_metrics_frame(results)
     transition_metrics = _transition_metrics_frame(candidates, results)
     benchmark_metrics = _benchmark_metrics(prices, config.execution)
+    tax_metrics = _tax_metrics_frame(results, prices, config)
     scorecard = build_experiment_scorecard(
         candidates,
         metrics,
@@ -223,6 +228,7 @@ def run_experiment_iteration(
         benchmark_metrics=benchmark_metrics,
         operability_metrics=operability_metrics,
         transition_metrics=transition_metrics,
+        tax_metrics=tax_metrics,
     )
     _write_experiment_outputs(
         iteration,
@@ -11988,6 +11994,7 @@ def build_experiment_scorecard(
     benchmark_metrics: pd.DataFrame | None = None,
     operability_metrics: pd.DataFrame | None = None,
     transition_metrics: pd.DataFrame | None = None,
+    tax_metrics: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
     candidate_meta = pd.DataFrame(
         [
@@ -12034,7 +12041,9 @@ def build_experiment_scorecard(
     summary = _add_benchmark_context(summary, benchmark_metrics)
     summary = _add_operability_context(summary, operability_metrics)
     summary = _add_transition_context(summary, transition_metrics)
+    summary = _add_tax_context(summary, tax_metrics)
     summary = enrich_strategy_outcome_utility(summary, benchmark_metrics=benchmark_metrics)
+    summary = enrich_after_tax_outcome_utility(summary, benchmark_metrics=benchmark_metrics)
     summary["robustness_score"] = _robustness_score(summary)
     summary["promotion_score"] = _promotion_score(summary)
     summary["promotion_decision"] = summary.apply(_promotion_decision, axis=1)
@@ -12077,6 +12086,32 @@ def build_experiment_scorecard(
         "growth_constrained_utility_score",
         "growth_utility_tier",
         "is_growth_pareto_efficient",
+        "tax_model_status",
+        "tax_account_type",
+        "after_tax_final_equity",
+        "after_tax_cagr",
+        "after_tax_max_drawdown",
+        "after_tax_calmar",
+        "tax_drag_bps_per_year",
+        "total_tax_liability",
+        "total_tax_benefit",
+        "net_estimated_tax_paid",
+        "realized_short_term_gain",
+        "realized_long_term_gain",
+        "realized_loss_harvested",
+        "wash_sale_disallowed_loss",
+        "loss_carryforward_end",
+        "short_term_gain_share",
+        "after_tax_terminal_wealth_15y",
+        "after_tax_terminal_wealth_with_contributions_15y",
+        "after_tax_wealth_multiple_vs_spy",
+        "after_tax_wealth_multiple_vs_qqq",
+        "after_tax_drawdown_recovery_return",
+        "after_tax_drawdown_soft_penalty",
+        "after_tax_drawdown_hard_penalty",
+        "after_tax_growth_constrained_utility_score",
+        "after_tax_growth_utility_tier",
+        "after_tax_is_growth_pareto_efficient",
         "robustness_score",
         "cagr",
         "sharpe",
@@ -12506,6 +12541,56 @@ def _window_stat(window_summary: pd.DataFrame, window: str, column: str) -> pd.S
     strategy_column = "strategy" if "strategy" in frame.columns else "name"
     selected = frame[frame["window"] == window].set_index(strategy_column)
     return selected[column]
+
+
+
+TAX_SCORECARD_NUMERIC_COLUMNS = (
+    "after_tax_final_equity",
+    "after_tax_cagr",
+    "after_tax_max_drawdown",
+    "after_tax_calmar",
+    "tax_drag_bps_per_year",
+    "total_tax_liability",
+    "total_tax_benefit",
+    "net_estimated_tax_paid",
+    "realized_short_term_gain",
+    "realized_long_term_gain",
+    "realized_loss_harvested",
+    "wash_sale_disallowed_loss",
+    "loss_carryforward_end",
+    "short_term_gain_share",
+)
+
+
+def _tax_metrics_frame(
+    results: dict[str, BacktestResult],
+    prices: pd.DataFrame,
+    config: BotConfig,
+) -> pd.DataFrame:
+    profile = config.tax_account.to_profile()
+    tax_results = [
+        simulate_taxable_backtest(
+            result,
+            prices.reindex(columns=result.weights.columns),
+            profile,
+        )
+        for result in results.values()
+    ]
+    return tax_metrics_frame(tax_results)
+
+
+def _add_tax_context(summary: pd.DataFrame, tax_metrics: pd.DataFrame | None) -> pd.DataFrame:
+    output = summary.copy()
+    if tax_metrics is not None and not tax_metrics.empty:
+        output = output.join(tax_metrics, how="left")
+    if "tax_model_status" not in output:
+        output["tax_model_status"] = "not_evaluated"
+    if "tax_account_type" not in output:
+        output["tax_account_type"] = "unknown"
+    for column in TAX_SCORECARD_NUMERIC_COLUMNS:
+        if column not in output:
+            output[column] = pd.NA
+    return output
 
 
 def _benchmark_metrics(prices: pd.DataFrame, execution: ExecutionConfig) -> pd.DataFrame:

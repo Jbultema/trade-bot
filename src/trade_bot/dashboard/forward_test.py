@@ -49,6 +49,23 @@ TICKET_COLUMN_HELP = {
     "notes": "Optional execution notes entered by the user.",
     "net_quantity": "Net shares accumulated from logged executions.",
     "net_cash_deployed": "Net cash deployed from logged executions after buys and sells.",
+    "lot_id": "Derived tax-lot ID rebuilt from local execution history.",
+    "rebuilt_at_utc": "When the derived tax-lot table was last rebuilt, in UTC.",
+    "acquired_at": "Timestamp when the lot was acquired according to local execution history.",
+    "sold_at": "Timestamp when the lot was sold according to local execution history.",
+    "remaining_quantity": "Shares still open in the derived lot.",
+    "cost_basis_per_share": "Estimated cost basis per share for the derived lot, including allocated fees where available.",
+    "total_cost_basis": "Estimated remaining cost basis for the open lot.",
+    "proceeds": "Estimated sale proceeds for the realized lot after allocated fees.",
+    "cost_basis": "Estimated cost basis consumed by the sale.",
+    "realized_gain_loss": "Estimated realized gain or loss before wash-sale disallowance.",
+    "taxable_gain_loss": "Estimated taxable gain or loss after wash-sale disallowance.",
+    "wash_sale_disallowed_loss": "Estimated loss disallowed by configured wash-sale rules.",
+    "wash_sale_status": "Configured wash-sale handling applied to this realized lot.",
+    "term": "Estimated holding-period bucket: short or long.",
+    "source_lot_id": "Open lot consumed by this realized-lot record.",
+    "source_execution_id": "Execution that created the original lot.",
+    "sell_execution_id": "Execution that realized this lot.",
 }
 
 
@@ -353,6 +370,71 @@ def _render_forward_test_and_journal(
     if not position_summary.empty:
         st.caption("Execution-derived position summary")
         _render_ticket_table(position_summary)
+
+    _render_tax_lot_panel(journal, mode=journal_mode, account=journal_account)
+
+
+def _render_tax_lot_panel(journal: TradeJournal, *, mode: str, account: str) -> None:
+    with st.expander("Estimated taxable lots", expanded=False):
+        st.caption(
+            "Derived tax-lot tables rebuilt from local executions. Use this for paper/live audit "
+            "support only; reconcile broker-reported lots before tax-sensitive real decisions."
+        )
+        if st.button("Rebuild Tax Lots", key="rebuild_tax_lots"):
+            try:
+                rebuilt = journal.rebuild_tax_lots(mode=mode, account=account)
+                st.success(
+                    "Rebuilt tax lots: "
+                    f"{len(rebuilt['open_lots']):,} open lots, "
+                    f"{len(rebuilt['realized_lots']):,} realized lots."
+                )
+            except ValueError as exc:
+                st.error(f"Could not rebuild tax lots: {exc}")
+        open_lots = journal.load_tax_lots(mode=mode, account=account)
+        realized_lots = journal.load_tax_realized_lots(mode=mode, account=account)
+        lot_tab, realized_tab = st.tabs(["Open Lots", "Realized Lots"])
+        with lot_tab:
+            if open_lots.empty:
+                st.write("No derived open lots yet. Log executions, then rebuild tax lots.")
+            else:
+                open_columns = [
+                    "acquired_at",
+                    "lot_id",
+                    "mode",
+                    "account",
+                    "ticker",
+                    "remaining_quantity",
+                    "cost_basis_per_share",
+                    "total_cost_basis",
+                    "source_execution_id",
+                    "rebuilt_at_utc",
+                ]
+                _render_ticket_table(
+                    open_lots[[column for column in open_columns if column in open_lots]]
+                )
+        with realized_tab:
+            if realized_lots.empty:
+                st.write("No derived realized lots yet.")
+            else:
+                realized_columns = [
+                    "sold_at",
+                    "ticker",
+                    "quantity",
+                    "proceeds",
+                    "cost_basis",
+                    "realized_gain_loss",
+                    "wash_sale_disallowed_loss",
+                    "taxable_gain_loss",
+                    "term",
+                    "wash_sale_status",
+                    "sell_execution_id",
+                    "source_lot_id",
+                ]
+                _render_ticket_table(
+                    realized_lots[
+                        [column for column in realized_columns if column in realized_lots]
+                    ]
+                )
 
 
 def _render_ticket_table(frame: pd.DataFrame) -> None:

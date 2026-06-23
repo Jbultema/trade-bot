@@ -172,20 +172,33 @@ or selects that root.
 
 ## Account And Tax Model Status
 
-Current backtests and scorecards are pre-tax / IRA-like unless a future result is
-explicitly labeled otherwise. The engine models transaction costs through
-turnover, but it does not yet model tax lots, realized short-term or long-term
-gains, wash sales, tax-loss harvesting, estimated taxes, or loss carryforwards.
-
-Taxable brokerage support should be added as an account-aware evaluation layer,
-not as a hidden strategy penalty. The design lives in
-`docs/taxable_account_framework.md`. Future implementation should introduce an
-`AccountProfile`, tax-lot ledger, after-tax backtest path, and separate taxable
-curation metrics while keeping the existing pre-tax/IRA-style rankings intact.
+Current base backtests and scorecards are pre-tax / IRA-like unless a field is
+explicitly labeled after-tax. The account-aware taxable layer now runs as a
+parallel evaluation path: `TaxAccountProfile`, `TaxLotLedger`, taxable backtest
+enrichment, wash-sale estimates, loss-harvesting candidates, and journal-derived
+tax-lot tables live under `src/trade_bot/tax/` and
+`src/trade_bot/trading/journal.py`. Keep the existing pre-tax/IRA-style rankings
+intact and add taxable-specific fields rather than silently penalizing strategy
+returns.
 
 Do not let tax optimization override real risk exits. Tax-aware logic can delay
 marginal trades, prefer new cash, or harvest losses, but left-tail risk control
 remains the higher-priority guardrail.
+
+
+Dashboard surfaces:
+
+- `Research Lab -> Experiment Monitor -> Taxable Impact` is the cross-strategy
+  after-tax comparison surface.
+- `Research Lab -> Candidate Details` includes a compact selected-strategy
+  estimated taxable readout when scorecard fields are available.
+- `Forward Test` remains the execution journal surface. Derived tax-lot tables
+  are rebuilt from that journal; do not treat them as broker-confirmed lots.
+
+When adding taxable features, keep labels explicit and avoid silently mixing
+pre-tax and after-tax rankings. Any score that uses taxable assumptions should
+include `after_tax`, `tax`, `realized`, `wash_sale`, or `loss_carryforward` in
+its column name unless there is a very strong reason not to.
 
 ## Config And Defaults
 

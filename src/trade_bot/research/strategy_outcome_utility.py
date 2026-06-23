@@ -75,9 +75,12 @@ def enrich_strategy_outcome_utility(
             starting_account_value=cfg.starting_account_value,
             annual_contribution=cfg.annual_contribution,
         )
-        output[f"wealth_multiple_vs_{ticker}"] = terminal_wealth_with_contributions / benchmark_wealth.replace(
-            0.0,
-            np.nan,
+        output[f"wealth_multiple_vs_{ticker}"] = (
+            terminal_wealth_with_contributions
+            / benchmark_wealth.replace(
+                0.0,
+                np.nan,
+            )
         )
 
     output["drawdown_recovery_return"] = drawdown_recovery_return(max_drawdown)
@@ -97,6 +100,44 @@ def enrich_strategy_outcome_utility(
     output["growth_constrained_utility_score"] = outcome_score
     output["growth_utility_tier"] = output.apply(_growth_utility_tier, axis=1)
     return add_outcome_frontier_flags(output)
+
+
+def enrich_after_tax_outcome_utility(
+    frame: pd.DataFrame,
+    *,
+    benchmark_metrics: pd.DataFrame | None = None,
+    config: StrategyOutcomeUtilityConfig | None = None,
+) -> pd.DataFrame:
+    """Add growth utility columns based on estimated after-tax CAGR/drawdown."""
+
+    if frame.empty or "after_tax_cagr" not in frame or "after_tax_max_drawdown" not in frame:
+        return frame.copy()
+    output = frame.copy()
+    tax_input = output.copy()
+    tax_input["cagr"] = _numeric_series(output, "after_tax_cagr")
+    tax_input["max_drawdown"] = _numeric_series(output, "after_tax_max_drawdown")
+    enriched = enrich_strategy_outcome_utility(
+        tax_input,
+        benchmark_metrics=benchmark_metrics,
+        config=config,
+    )
+    cfg = config or StrategyOutcomeUtilityConfig()
+    mapping = {
+        f"terminal_wealth_{cfg.horizon_years}y": f"after_tax_terminal_wealth_{cfg.horizon_years}y",
+        f"terminal_wealth_with_contributions_{cfg.horizon_years}y": f"after_tax_terminal_wealth_with_contributions_{cfg.horizon_years}y",
+        "wealth_multiple_vs_spy": "after_tax_wealth_multiple_vs_spy",
+        "wealth_multiple_vs_qqq": "after_tax_wealth_multiple_vs_qqq",
+        "drawdown_recovery_return": "after_tax_drawdown_recovery_return",
+        "drawdown_soft_penalty": "after_tax_drawdown_soft_penalty",
+        "drawdown_hard_penalty": "after_tax_drawdown_hard_penalty",
+        "growth_constrained_utility_score": "after_tax_growth_constrained_utility_score",
+        "growth_utility_tier": "after_tax_growth_utility_tier",
+        "is_growth_pareto_efficient": "after_tax_is_growth_pareto_efficient",
+    }
+    for source, target in mapping.items():
+        if source in enriched:
+            output[target] = enriched[source]
+    return output
 
 
 def terminal_wealth_from_cagr(
@@ -193,7 +234,10 @@ def _wealth_score(
         annual_contribution=config.annual_contribution,
     ).iloc[0]
     denominator = max(float(np.log(target_wealth) - np.log(floor_wealth)), 1e-12)
-    return ((np.log(terminal_wealth_with_contributions.clip(lower=1.0)) - np.log(floor_wealth)) / denominator).clip(
+    return (
+        (np.log(terminal_wealth_with_contributions.clip(lower=1.0)) - np.log(floor_wealth))
+        / denominator
+    ).clip(
         0.0,
         1.0,
     )

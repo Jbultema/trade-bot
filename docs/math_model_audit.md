@@ -812,7 +812,7 @@ Future model work should optimize for high-CAGR drawdown mitigation, reentry, an
 
 ## Taxable Account Status
 
-Current formulas are pre-tax unless a field is explicitly named `after_tax`. Transaction costs are modeled through turnover, but tax drag is not. A future taxable-account engine must add account profiles, tax-lot accounting, short-term/long-term classification, wash-sale handling, loss carryforwards, and after-tax utility scores before taxable brokerage conclusions are promoted.
+Current base formulas remain pre-tax unless a field is explicitly named `after_tax`, `tax_`, `realized_`, `wash_sale`, or `loss_carryforward`. Transaction costs are modeled through turnover in the base engine. The taxable layer estimates tax drag by reconstructing implied executions, deriving tax lots, classifying realized short-term/long-term gains and losses, applying wash-sale disallowance, carrying losses by calendar year, and recomputing after-tax metrics and after-tax growth utility.
 
 ## Known Limitations
 
@@ -821,7 +821,7 @@ Current formulas are pre-tax unless a field is explicitly named `after_tax`. Tra
 - No true walk-forward parameter re-optimization yet.
 - No slippage model beyond turnover cost.
 - No market-impact model.
-- No after-tax or tax-lot model in current backtests. Current scorecards are pre-tax / IRA-like unless explicitly labeled otherwise; planned taxable-account semantics live in `docs/taxable_account_framework.md`.
+- Taxable-account outputs are estimated and not broker-grade. They do not yet model dividends, broker-lot imports, exact estimated-tax timing, or full wash-sale replacement-basis chains. Pre-tax / IRA-like fields remain the default unless explicitly labeled after-tax.
 - FRED macro histories are not revision-safe.
 - Yahoo Finance data is acceptable for early research but not institutional-grade.
 - News classification is keyword/rule based and will miss stories outside configured channels.

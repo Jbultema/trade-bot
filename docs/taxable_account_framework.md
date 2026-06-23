@@ -1,11 +1,12 @@
 # Taxable Account Framework
 
-Status: planned design, not implemented in current backtests. Last reviewed: 2026-06-22.
+Status: V1/V2 estimated taxable-account support implemented for research and paper monitoring. Last reviewed: 2026-06-22.
 
-This document defines how taxable brokerage support should be added without
-confusing pre-tax research results with after-tax operating evidence. The current
-system is still best interpreted as IRA-like or pre-tax research unless a result
-is explicitly labeled after-tax.
+This document defines how taxable brokerage support is modeled without
+confusing pre-tax research results with after-tax operating evidence. The base
+backtest remains IRA-like/pre-tax. Estimated taxable outputs are only the fields
+explicitly labeled `after_tax`, `tax_`, `realized_`, `wash_sale`, or
+`loss_carryforward`.
 
 This is not tax advice. It is an engineering design for research and paper
 monitoring. Before using taxable-account outputs for real trades, review the
@@ -20,9 +21,12 @@ produce different after-tax wealth if one churns winners weekly and the other le
 positions cross long-term holding periods.
 
 The current backtest engine models next-session execution, long-only weights,
-turnover, and explicit transaction costs. It does not yet model realized taxes,
-tax lots, wash sales, estimated taxes, dividend taxation, or account-level loss
-carryforwards.
+turnover, and explicit transaction costs. The tax layer now runs in parallel: it
+reconstructs implied executions from strategy weights, creates derived tax lots,
+classifies realized gains/losses, estimates wash-sale disallowance, applies
+calendar-year tax cash flows, and emits after-tax scorecard fields. It still does
+not model dividend taxation, broker-specific lot reconciliation, estimated-tax
+payment timing, or full replacement-lot basis adjustments.
 
 ## Tax Rules The Model Must Respect
 
@@ -183,6 +187,32 @@ Substitute maps should be conservative. For example, swapping two ETFs that trac
 the same index may be too close for an automated recommendation. The app should
 show the exposure-preserving intent and require human review.
 
+
+## Current Dashboard Surfaces
+
+The dashboard exposes taxable support in two main places:
+
+- **Research Lab -> Experiment Monitor -> Taxable Impact** is the portfolio-level
+  taxable research lens. It shows configured account assumptions, pre-tax versus
+  estimated after-tax CAGR, tax drag, after-tax growth utility, top after-tax
+  candidates, and a tax-drag watchlist.
+- **Research Lab -> Candidate Details** shows an estimated taxable-account
+  readout for the selected strategy before the full scorecard. Use this when
+  inspecting a single strategy's mechanics, allocation behavior, and robustness.
+- **Forward Test -> Estimated taxable lots** rebuilds and displays derived open
+  and realized tax-lot tables for the selected mode/account from the local
+  execution journal.
+
+Taxable fields are deliberately explicit: `after_tax_*`, `tax_*`, `realized_*`,
+`wash_sale_*`, and `loss_carryforward_*`. If those fields are missing, the
+scorecard was probably generated before the taxable layer existed or the
+warehouse has not been migrated after rerunning experiments.
+
+The dashboard does not yet render tax-loss harvesting candidates from live price
+updates. The helper exists in `trade_bot.tax.harvesting`; operational dashboard
+TLH cards should be added only after broker-lot import/reconciliation is defined
+or the user explicitly accepts paper-only estimates.
+
 ## Dashboard Requirements
 
 Add an account-mode selector to research and monitoring views:
@@ -207,36 +237,43 @@ The operating brief should say whether a trade is being recommended despite tax
 cost because risk evidence is strong, or delayed because the signal is marginal
 and taxable drag is high.
 
-## Implementation Plan
+## Implementation Status
 
-Phase T0: Documentation and flags.
+Implemented V1: account profile and simplified taxable simulator.
 
-- Keep all current scorecards labeled pre-tax.
-- Add `account_type` and `tax_model_status` fields where scorecards or dashboard
-  views could become account-aware later.
+- `TaxAccountProfile` and `TaxAccountConfig` define taxable/IRA/Roth mode,
+  short-term and long-term federal/state/NIIT rates, loss carryforward inputs,
+  lot-selection method, and wash-sale behavior.
+- `TaxLotLedger` creates derived lots from backtest or journal executions.
+- FIFO, highest-cost/specific-ID tax-min, and lowest-gain lot selection are
+  supported.
+- Realized lots are classified short-term versus long-term using the configured
+  holding-period threshold.
+- Estimated after-tax CAGR, max drawdown, Calmar, tax drag, realized gain/loss,
+  wash-sale, loss-carryforward, and after-tax growth-utility fields are added to
+  experiment scorecards.
 
-Phase T1: Simplified taxable simulator.
+Implemented V2: wash-sale and tax-loss harvesting research support.
 
-- Add account profile defaults.
-- Add tax-lot ledger for backtests.
-- Add FIFO and specific-ID tax-min lot selection.
-- Add short/long-term gain classification.
-- Add federal/state/NIIT tax-rate inputs.
-- Add after-tax metrics and dashboard comparison.
+- Wash-sale detection scans same/substitute tickers inside the configured window
+  and marks disallowed loss estimates.
+- Substitute maps are supported by the ledger and loss-harvesting helper.
+- Calendar-year loss carryforward accounting is included in the estimated tax
+  cash-flow model.
+- `find_tax_loss_harvest_candidates` surfaces lots with sufficiently large
+  unrealized losses and labels them `human_review_required`.
+- `TradeJournal.rebuild_tax_lots()` rebuilds derived open and realized tax-lot
+  tables from paper/live execution history.
 
-Phase T2: Wash-sale and tax-loss harvesting.
+Still future work / not broker-grade yet:
 
-- Add wash-sale detection.
-- Add substitute asset maps.
-- Add loss carryforward accounting.
-- Add TLH candidate generation with human-review warnings.
-
-Phase T3: Paper/live taxable monitoring.
-
-- Import or manually maintain starting lots.
-- Tie recommendation tickets to executed lots.
-- Track realized gains/losses forward.
-- Reconcile broker-reported lots manually before tax-sensitive live use.
+- Import or manually seed broker-reported opening lots.
+- Model dividends, qualified dividends, and distributions.
+- Model exact estimated-tax payment timing.
+- Carry disallowed wash-sale basis onto specific replacement lots.
+- Reconcile cross-account wash-sale exposure against IRA/Roth activity.
+- Reconcile all derived lots against broker statements before tax-sensitive live
+  use.
 
 ## Research Rule
 
@@ -250,5 +287,6 @@ ira_monitoring_readiness
 taxable_monitoring_readiness
 ```
 
-Until the taxable simulator exists, taxable-account conclusions should be framed
-as design hypotheses, not measured results.
+Taxable-account conclusions are now measured estimates, not design-only
+hypotheses. They should still be treated as research support until broker lots,
+actual account settings, and qualified tax review are reconciled.

@@ -69,6 +69,6 @@ The most fruitful direction remains a high-CAGR operating system with bounded ri
 - concentrated AI/growth exposure limits that preserve upside;
 - sector/factor alternatives that are not just lower-return defensive substitutes;
 - calibrated confidence intervals and live drift checks for paper-monitoring;
-- account-aware and taxable-account evaluation once the tax-lot simulator exists.
+- account-aware and taxable-account evaluation as the tax-lot simulator matures.
 
 The bar is practical: a strategy that compounds at 3-5% is not useful for this project unless it is explicitly a defensive/reference sleeve. The operating systems should target high returns with drawdown mitigation, not cash-like returns with better optics.

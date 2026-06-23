@@ -10,6 +10,7 @@ CATEGORY_LABEL_COLUMNS = {
     "operability_label",
     "monitoring_readiness_label",
     "growth_utility_tier",
+    "after_tax_growth_utility_tier",
 }
 
 CATEGORY_LABELS = {
@@ -51,6 +52,17 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
     currency_columns = [
         "terminal_wealth_15y",
         "terminal_wealth_with_contributions_15y",
+        "after_tax_final_equity",
+        "after_tax_terminal_wealth_15y",
+        "after_tax_terminal_wealth_with_contributions_15y",
+        "total_tax_liability",
+        "total_tax_benefit",
+        "net_estimated_tax_paid",
+        "realized_short_term_gain",
+        "realized_long_term_gain",
+        "realized_loss_harvested",
+        "wash_sale_disallowed_loss",
+        "loss_carryforward_end",
     ]
     for column in currency_columns:
         if column in display:
@@ -199,6 +211,12 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "spy_ytd_large_move_share",
         "latest_percentile",
         "drawdown_recovery_return",
+        "after_tax_cagr",
+        "after_tax_max_drawdown",
+        "after_tax_drawdown_recovery_return",
+        "after_tax_drawdown_soft_penalty",
+        "after_tax_drawdown_hard_penalty",
+        "short_term_gain_share",
     ]
     for column in percent_columns:
         if column in display:
@@ -274,6 +292,11 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "portfolio_risk_multiplier",
         "robustness_score",
         "growth_constrained_utility_score",
+        "after_tax_calmar",
+        "after_tax_growth_constrained_utility_score",
+        "after_tax_wealth_multiple_vs_spy",
+        "after_tax_wealth_multiple_vs_qqq",
+        "tax_drag_bps_per_year",
         "wealth_multiple_vs_spy",
         "wealth_multiple_vs_qqq",
         "operability_score",
@@ -381,8 +404,18 @@ def _display_trade_frame(frame: pd.DataFrame) -> pd.DataFrame:
         "delta_notional",
         "account_value",
         "largest_delta_notional",
+        "cost_basis_per_share",
+        "total_cost_basis",
+        "proceeds",
+        "cost_basis",
+        "realized_gain_loss",
+        "taxable_gain_loss",
+        "unrealized_gain_loss",
+        "current_value",
+        "current_price",
+        "wash_sale_adjustment",
     ]
-    share_columns = ["min_shares", "max_shares", "quantity", "net_quantity"]
+    share_columns = ["min_shares", "max_shares", "quantity", "net_quantity", "remaining_quantity"]
     percent_columns = [
         "current_weight",
         "scenario_adjusted_weight",
@@ -393,6 +426,7 @@ def _display_trade_frame(frame: pd.DataFrame) -> pd.DataFrame:
         "max_abs_delta",
         "largest_delta_weight",
         "min_trade_weight",
+        "unrealized_loss_pct",
     ]
     for column in currency_columns:
         if column in display:
