@@ -82,8 +82,8 @@ class TradingWarehouse:
                 continue
             combined = pd.concat(frames, ignore_index=True)
             if artifact == "scorecard":
-                combined = add_research_status(combined)
                 combined = add_overfit_diagnostics(combined)
+                combined = add_research_status(combined)
             table_name = f"experiment_{artifact}"
             self._replace_table(table_name, combined)
             results.append(
@@ -543,6 +543,14 @@ class TradingWarehouse:
             "promotion_decision",
             "promotion_score",
             "selection_adjusted_promotion_score",
+            "growth_constrained_utility_score",
+            "growth_utility_tier",
+            "terminal_wealth_with_contributions_15y",
+            "wealth_multiple_vs_spy",
+            "wealth_multiple_vs_qqq",
+            "drawdown_recovery_return",
+            "drawdown_soft_penalty",
+            "drawdown_hard_penalty",
             "robustness_score",
             "overfit_risk_score",
             "overfit_risk_label",
@@ -585,6 +593,7 @@ class TradingWarehouse:
             .fillna(2)
         )
         for column in [
+            "growth_constrained_utility_score",
             "selection_adjusted_promotion_score",
             "promotion_score",
             "snapshot_calmar",
@@ -592,7 +601,8 @@ class TradingWarehouse:
             if column not in merged:
                 merged[column] = float("nan")
         merged["monitoring_sort_score"] = (
-            merged["snapshot_calmar"]
+            merged["growth_constrained_utility_score"]
+            .fillna(merged["snapshot_calmar"])
             .fillna(merged["selection_adjusted_promotion_score"])
             .fillna(merged["promotion_score"])
         )
@@ -933,6 +943,14 @@ class TradingWarehouse:
                 "promotion_decision",
                 "promotion_score",
                 "selection_adjusted_promotion_score",
+                "growth_constrained_utility_score",
+                "growth_utility_tier",
+                "terminal_wealth_with_contributions_15y",
+                "wealth_multiple_vs_spy",
+                "wealth_multiple_vs_qqq",
+                "drawdown_recovery_return",
+                "drawdown_soft_penalty",
+                "drawdown_hard_penalty",
                 "robustness_score",
                 "overfit_risk_score",
                 "overfit_risk_label",
@@ -961,6 +979,7 @@ class TradingWarehouse:
             column
             for column in [
                 "window_role_sort",
+                "growth_constrained_utility_score",
                 "snapshot_calmar",
                 "promotion_score",
                 "strategy_name",
@@ -970,7 +989,7 @@ class TradingWarehouse:
         if sort_columns:
             frame = frame.sort_values(
                 sort_columns,
-                ascending=[True, False, False, True][: len(sort_columns)],
+                ascending=[True, False, False, False, True][: len(sort_columns)],
                 na_position="last",
             )
         return frame
@@ -1203,11 +1222,11 @@ def _rank_strategy_rows(scorecards: pd.DataFrame) -> pd.DataFrame:
     frame = scorecards.copy()
     if "strategy" not in frame and "name" in frame:
         frame = frame.rename(columns={"name": "strategy"})
-    for column in ["promotion_score", "robustness_score", "calmar", "iteration"]:
+    for column in ["growth_constrained_utility_score", "promotion_score", "robustness_score", "calmar", "iteration"]:
         if column not in frame:
             frame[column] = float("nan")
     return frame.sort_values(
-        ["promotion_score", "robustness_score", "calmar", "iteration"],
+        ["growth_constrained_utility_score", "promotion_score", "robustness_score", "calmar", "iteration"],
         ascending=False,
         na_position="last",
     )

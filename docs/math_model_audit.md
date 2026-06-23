@@ -700,10 +700,56 @@ Promotion score:
 +0.04 * rank(left_tail_regime_return)
 ```
 
+Growth-constrained outcome utility:
+
+```text
+terminal_wealth_15y = starting_account_value * (1 + CAGR) ^ 15
+
+terminal_wealth_with_contributions_15y
+    = starting_account_value * (1 + CAGR) ^ 15
+    + annual_contribution * (((1 + CAGR) ^ 15 - 1) / CAGR)
+
+If CAGR is effectively zero, the contribution term uses annual_contribution * 15.
+
+wealth_multiple_vs_spy = strategy_terminal_wealth_with_contributions
+                         / spy_terminal_wealth_with_contributions
+wealth_multiple_vs_qqq = strategy_terminal_wealth_with_contributions
+                         / qqq_terminal_wealth_with_contributions
+
+drawdown_recovery_return = 1 / (1 - absolute_drawdown_depth) - 1
+
+soft_drawdown_penalty = clip((absolute_drawdown_depth - 22 percent)
+                             / (30 percent - 22 percent), 0, 1)
+hard_drawdown_penalty = 1 if absolute_drawdown_depth >= 30 percent else 0
+
+wealth_score = log-scaled terminal wealth between the configured floor CAGR
+               and target CAGR baselines.
+validation_score starts at 1.0 and subtracts penalties for:
+    weak walk-forward positive rate,
+    worst 3Y CAGR below the configured floor,
+    left-tail regime return below the configured floor,
+    high overfit risk,
+    excessive churn.
+
+growth_constrained_utility_score
+    = 0.78 * wealth_score
+    + 0.22 * validation_score
+    - 0.18 * soft_drawdown_penalty
+    - 0.35 * hard_drawdown_penalty
+    - churn_penalty_weight * churn_penalty
+```
+
+Default planning assumptions are a 15-year horizon, 220,000 dollar starting account,
+65,000 dollars of annual end-of-year contributions, a soft drawdown band beginning
+at -22 percent, and hard drawdown rejection at -30 percent. This score is an
+experiment-selection and paper-monitoring priority layer. It does not replace
+promotion score, robustness score, walk-forward diagnostics, regime diagnostics,
+or human review.
+
 Promotion decisions:
 
 ```text
-reject_left_tail if max_drawdown <= -35 percent
+reject_left_tail if max_drawdown <= -30 percent
 reject_regime_fragility if left_tail_regime_return < -20 percent
 reject_regime_fragility if worst_regime_return < -25 percent
 reject_regime_fragility if worst_3y_cagr < -5 percent
@@ -764,6 +810,10 @@ The current ML conclusion is empirical, not theoretical: bounded ML overlays pre
 
 Future model work should optimize for high-CAGR drawdown mitigation, reentry, and live drift confidence. A low-CAGR defensive model can be retained as a reference sleeve, but it should not be treated as a successful answer to the primary growth problem.
 
+## Taxable Account Status
+
+Current formulas are pre-tax unless a field is explicitly named `after_tax`. Transaction costs are modeled through turnover, but tax drag is not. A future taxable-account engine must add account profiles, tax-lot accounting, short-term/long-term classification, wash-sale handling, loss carryforwards, and after-tax utility scores before taxable brokerage conclusions are promoted.
+
 ## Known Limitations
 
 - No risk-free rate in Sharpe or Sortino.
@@ -771,7 +821,7 @@ Future model work should optimize for high-CAGR drawdown mitigation, reentry, an
 - No true walk-forward parameter re-optimization yet.
 - No slippage model beyond turnover cost.
 - No market-impact model.
-- No tax model.
+- No after-tax or tax-lot model in current backtests. Current scorecards are pre-tax / IRA-like unless explicitly labeled otherwise; planned taxable-account semantics live in `docs/taxable_account_framework.md`.
 - FRED macro histories are not revision-safe.
 - Yahoo Finance data is acceptable for early research but not institutional-grade.
 - News classification is keyword/rule based and will miss stories outside configured channels.

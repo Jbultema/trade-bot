@@ -131,6 +131,9 @@ def test_experiment_scorecard_marks_left_tail_rejects() -> None:
 
     assert scorecard.loc[names[0], "promotion_decision"] == "reject_left_tail"
     assert "promotion_score" in scorecard.columns
+    assert "terminal_wealth_with_contributions_15y" in scorecard.columns
+    assert "growth_constrained_utility_score" in scorecard.columns
+    assert "growth_utility_tier" in scorecard.columns
     assert "family" in scorecard.columns
     assert round(float(scorecard.loc[names[1], "excess_cagr_vs_spy"]), 6) == 0.02
 
@@ -225,6 +228,35 @@ def test_scorecard_includes_walk_forward_and_regime_robustness() -> None:
     assert "operability_score" in scorecard.columns
     assert "risk_cycle_label" in scorecard.columns
     assert set(scorecard["operability_label"]) == {"paper_operable"}
+
+
+def test_growth_frontier_iteration_generates_targeted_candidates() -> None:
+    candidates = generate_iteration_candidates(146)
+
+    assert len(candidates) == 5
+    assert {candidate.phase for candidate in candidates} == {"growth_frontier"}
+    assert {candidate.role for candidate in candidates} == {"growth_frontier_candidate"}
+    assert any(candidate.strategy.type == "dip_reentry" for candidate in candidates)
+    assert any(candidate.strategy.volatility_target is not None for candidate in candidates)
+    assert any(candidate.strategy.drawdown_control is not None for candidate in candidates)
+
+
+def test_growth_frontier_adjacent_iterations_use_distinct_parameters() -> None:
+    candidates_146 = generate_iteration_candidates(146)
+    candidates_147 = generate_iteration_candidates(147)
+
+    broad_146 = next(
+        candidate for candidate in candidates_146 if candidate.family == "growth_constrained_broad_equity"
+    )
+    broad_147 = next(
+        candidate for candidate in candidates_147 if candidate.family == "growth_constrained_broad_equity"
+    )
+
+    assert broad_146.name != broad_147.name
+    assert broad_146.strategy.lookback_days != broad_147.strategy.lookback_days
+    assert broad_146.strategy.drawdown_control is not None
+    assert broad_147.strategy.drawdown_control is not None
+    assert broad_146.strategy.drawdown_control.max_drawdown != broad_147.strategy.drawdown_control.max_drawdown
 
 
 def test_scenario_position_sizing_moves_stress_residual_to_defensive_ticker() -> None:

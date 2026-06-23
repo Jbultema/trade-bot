@@ -81,6 +81,7 @@ def test_dashboard_app_renders_action_headline(
     dashboard_section.set_value("Research Lab").run(timeout=20)
     assert not app.exception
     assert any(subheader.value == "Experiment Monitor" for subheader in app.subheader)
+    assert any("Outcome Frontier" in markdown.value for markdown in app.markdown)
     assert any(radio.label == "Approach set" for radio in app.radio)
     assert any(selectbox.label == "Approach to inspect" for selectbox in app.selectbox)
     assert not any(subheader.value == "Approach Explorer" for subheader in app.subheader)

@@ -9,6 +9,7 @@ import pandas as pd
 CATEGORY_LABEL_COLUMNS = {
     "operability_label",
     "monitoring_readiness_label",
+    "growth_utility_tier",
 }
 
 CATEGORY_LABELS = {
@@ -21,6 +22,11 @@ CATEGORY_LABELS = {
     "paper_ready": "Paper ready",
     "paper_candidate": "Paper candidate",
     "blocked": "Blocked",
+    "growth_champion_candidate": "Growth champion candidate",
+    "growth_challenger_candidate": "Growth challenger candidate",
+    "growth_watchlist": "Growth watchlist",
+    "growth_research_only": "Growth research only",
+    "growth_reject_hard_drawdown": "Growth reject: hard drawdown",
 }
 
 
@@ -42,6 +48,13 @@ def _format_category_columns(display: pd.DataFrame) -> pd.DataFrame:
 
 def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
     display = metrics.copy()
+    currency_columns = [
+        "terminal_wealth_15y",
+        "terminal_wealth_with_contributions_15y",
+    ]
+    for column in currency_columns:
+        if column in display:
+            display[column] = display[column].map(_format_currency)
     percent_columns = [
         "cagr",
         "median_cagr",
@@ -185,6 +198,7 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "low_risk_day_rate",
         "spy_ytd_large_move_share",
         "latest_percentile",
+        "drawdown_recovery_return",
     ]
     for column in percent_columns:
         if column in display:
@@ -259,6 +273,9 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "scenario_event_macro_multiplier",
         "portfolio_risk_multiplier",
         "robustness_score",
+        "growth_constrained_utility_score",
+        "wealth_multiple_vs_spy",
+        "wealth_multiple_vs_qqq",
         "operability_score",
         "reentry_score",
         "material_trade_days_per_year",
@@ -336,6 +353,8 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "max_scenario_weighted_stress_loss",
         "min_defensive_weight",
         "post_defensive_weight",
+        "drawdown_soft_penalty",
+        "drawdown_hard_penalty",
     ]:
         if column in display:
             display[column] = display[column].map(_format_percent)

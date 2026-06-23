@@ -2,7 +2,8 @@ from __future__ import annotations
 
 import pandas as pd
 
-from trade_bot.DEFAULTS import DEFAULT_CURATED_SHELF_LIMIT
+from trade_bot.DEFAULTS import DEFAULT_CURATED_SHELF_LIMIT, DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT
+from trade_bot.research.strategy_outcome_utility import enrich_strategy_outcome_utility
 
 PRUNED_STATUS = "pruned_dead_end"
 REFERENCE_STATUS = "reference"
@@ -21,11 +22,12 @@ def rank_strategy_candidates(frame: pd.DataFrame) -> pd.DataFrame:
     """Return a stable research ranking before explicit curation/diversification."""
     if frame.empty:
         return frame.copy()
-    ranked = add_research_status(frame)
+    ranked = add_research_status(enrich_strategy_outcome_utility(frame))
     if "name" in ranked and "strategy" not in ranked:
         ranked = ranked.rename(columns={"name": "strategy"})
 
     for column in [
+        "growth_constrained_utility_score",
         "selection_adjusted_promotion_score",
         "promotion_score",
         "robustness_score",
@@ -74,7 +76,8 @@ def rank_strategy_candidates(frame: pd.DataFrame) -> pd.DataFrame:
         .fillna(2)
     )
     ranked["_curation_sort_score"] = (
-        ranked["selection_adjusted_promotion_score"]
+        ranked["growth_constrained_utility_score"]
+        .fillna(ranked["selection_adjusted_promotion_score"])
         .fillna(ranked["promotion_score"])
         .fillna(ranked["robustness_score"])
         .fillna(ranked["calmar"])
@@ -99,13 +102,14 @@ def rank_strategy_candidates(frame: pd.DataFrame) -> pd.DataFrame:
             "_promotion_rank",
             "_validation_rank",
             "_curation_sort_score",
+            "growth_constrained_utility_score",
             "robustness_score",
             "calmar",
             "walk_forward_positive_rate",
             "left_tail_regime_return",
             "iteration",
         ],
-        ascending=[True, True, True, False, False, False, False, False, False],
+        ascending=[True, True, True, False, False, False, False, False, False, False],
         na_position="last",
     )
     return ranked.drop(
@@ -123,7 +127,7 @@ def add_research_status(frame: pd.DataFrame) -> pd.DataFrame:
     """
     if frame.empty:
         return frame.copy()
-    output = frame.copy()
+    output = enrich_strategy_outcome_utility(frame)
     if "name" in output and "strategy" not in output:
         output = output.rename(columns={"name": "strategy"})
     for column in [
@@ -133,6 +137,7 @@ def add_research_status(frame: pd.DataFrame) -> pd.DataFrame:
         "walk_forward_positive_rate",
         "left_tail_regime_return",
         "promotion_score",
+        "growth_constrained_utility_score",
     ]:
         if column not in output:
             output[column] = float("nan")
@@ -144,6 +149,7 @@ def add_research_status(frame: pd.DataFrame) -> pd.DataFrame:
         "role": "",
         "strategy": "",
         "operability_label": "",
+        "growth_utility_tier": "",
     }.items():
         if column not in output:
             output[column] = default
@@ -182,8 +188,8 @@ def _research_status_for_row(row: pd.Series) -> tuple[str, str]:
         return PRUNED_STATUS, "low_cagr_below_5pct"
     if calmar == calmar and calmar < 0.25 and cagr == cagr and cagr < 0.08:
         return PRUNED_STATUS, "weak_return_and_risk_adjusted_profile"
-    if max_drawdown == max_drawdown and max_drawdown < -0.25:
-        return PRUNED_STATUS, "drawdown_worse_than_25pct"
+    if max_drawdown == max_drawdown and max_drawdown <= DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT:
+        return PRUNED_STATUS, "drawdown_worse_than_30pct"
     if "classic_dd" in strategy and cagr == cagr and cagr < 0.135:
         return PRUNED_STATUS, "reactive_drawdown_control_lost_too_much_growth"
     if "sklearn_future_state" in phase and cagr == cagr and cagr < 0.08:
@@ -198,9 +204,17 @@ def _research_status_for_row(row: pd.Series) -> tuple[str, str]:
     promoted = decision in {"promote_candidate", "evolve_next_iteration"}
     high_growth = cagr == cagr and cagr >= 0.10
     good_risk_adjusted = calmar == calmar and calmar >= 0.55
-    tolerable_tail = max_drawdown != max_drawdown or max_drawdown >= -0.24
+    growth_tier = str(row.get("growth_utility_tier", ""))
+    tolerable_tail = max_drawdown != max_drawdown or max_drawdown > DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT
     human_operable = operability != "too_twitchy"
-    if promoted and high_growth and good_risk_adjusted and tolerable_tail and human_operable:
+    if (
+        promoted
+        and high_growth
+        and good_risk_adjusted
+        and tolerable_tail
+        and human_operable
+        and growth_tier != "growth_reject_hard_drawdown"
+    ):
         return OPERATIONAL_STATUS, "growth_and_risk_profile_still_operational"
 
     if promoted or (cagr == cagr and cagr >= 0.08) or "candidate" in role or "guardrail" in family:
@@ -255,7 +269,7 @@ def select_curated_strategy_shelf(
     append_rows(
         non_reference.head(anchor_count),
         "score_anchor",
-        "Highest-ranked candidates after validation, promotion, robustness, and score sorting.",
+        "Highest-ranked candidates after growth-constrained utility, validation, promotion, robustness, and score sorting.",
     )
 
     family_champions = _family_champions(non_reference)

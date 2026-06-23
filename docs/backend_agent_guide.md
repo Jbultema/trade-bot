@@ -170,6 +170,23 @@ research root when it exists. Older `reports/experiments/` artifacts remain
 auditable evidence, but they are historical unless a workflow explicitly merges
 or selects that root.
 
+## Account And Tax Model Status
+
+Current backtests and scorecards are pre-tax / IRA-like unless a future result is
+explicitly labeled otherwise. The engine models transaction costs through
+turnover, but it does not yet model tax lots, realized short-term or long-term
+gains, wash sales, tax-loss harvesting, estimated taxes, or loss carryforwards.
+
+Taxable brokerage support should be added as an account-aware evaluation layer,
+not as a hidden strategy penalty. The design lives in
+`docs/taxable_account_framework.md`. Future implementation should introduce an
+`AccountProfile`, tax-lot ledger, after-tax backtest path, and separate taxable
+curation metrics while keeping the existing pre-tax/IRA-style rankings intact.
+
+Do not let tax optimization override real risk exits. Tax-aware logic can delay
+marginal trades, prefer new cash, or harvest losses, but left-tail risk control
+remains the higher-priority guardrail.
+
 ## Config And Defaults
 
 The project owner strongly prefers defaults to be centralized. Use `src/trade_bot/DEFAULTS.py` for reusable default values, then pass them into modules through function signatures or config models. `src/trade_bot/DEFAULT.py` is only a backward-compatible re-export shim; do not add new values there.

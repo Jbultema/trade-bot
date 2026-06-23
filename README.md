@@ -27,6 +27,7 @@ Trade Bot turns market prices, macro series, curated news/events, scenario proba
 | Navigate backend docs | [Documentation Index](docs/doc_index.md) | Current docs, maintained research notes, and archived plans |
 | Extend ML research | [ML Research Framework](docs/ml_research_framework.md) | Targeted ML/Bayesian seams, cadence, and validation gates |
 | Check formulas | [Formula Audit](#formula-audit) | Locked math definitions and validation commands |
+| Understand taxable account support | [Taxable Account Framework](docs/taxable_account_framework.md) | What is planned, what is not implemented, and how after-tax testing should work |
 
 ## System At A Glance
 

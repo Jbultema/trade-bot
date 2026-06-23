@@ -10,6 +10,7 @@ This is a private local research project. It should remain operationally separat
 - Do not use work data, work credentials, Databricks workspaces, or Hasbro-specific infrastructure.
 - Keep all market data, backtest results, prompts, and dashboard outputs local unless explicitly changed later.
 - Treat account-specific trading choices as user-controlled brokerage account decisions, not work artifacts.
+- Treat taxable-account outputs as estimated research support, not tax advice.
 
 ## Dependency Boundary
 

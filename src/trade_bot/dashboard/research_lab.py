@@ -13,11 +13,17 @@ from trade_bot.backtest.engine import BacktestResult
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import (
     _display_metrics,
+    _format_currency,
+    _format_decimal,
+    _format_percent,
     _result_date_bounds,
     _window_start_from_preset,
 )
 from trade_bot.DEFAULTS import (
     DEFAULT_ML_DIAGNOSTICS_DIR,
+    DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
+    DEFAULT_OUTCOME_HORIZON_YEARS,
+    DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT,
     DEFAULT_PERFORMANCE_WINDOW,
     DEFAULT_PERFORMANCE_WINDOWS,
 )
@@ -57,6 +63,10 @@ from trade_bot.research.experiment_monitor import (
     summarize_family_clusters,
     summarize_risk_behavior_matrix,
     summarize_strategy_archetypes,
+)
+from trade_bot.research.strategy_outcome_utility import (
+    add_outcome_frontier_flags,
+    enrich_strategy_outcome_utility,
 )
 
 
@@ -1055,6 +1065,305 @@ def _render_strategy_family_map(
             _render_metric_dataframe(_display_metrics(family_clusters), hide_index=True)
 
 
+
+def _render_outcome_frontier(
+    *,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+    experiment_candidates: pd.DataFrame,
+) -> None:
+    st.markdown("**Outcome Frontier**")
+    st.caption(
+        "Growth-constrained research view: this asks whether extra CAGR is worth the additional "
+        "drawdown for a 15-year accumulation account. The soft drawdown band starts at "
+        f"{abs(DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT):.0%}; the hard review band starts at "
+        f"{abs(DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT):.0%}."
+    )
+    if experiment_scorecards.empty:
+        st.write("No experiment scorecards are available for outcome-frontier analysis yet.")
+        return
+
+    frame = add_outcome_frontier_flags(enrich_strategy_outcome_utility(experiment_scorecards))
+    if "research_status" in frame:
+        active = frame[~frame["research_status"].astype(str).eq("pruned_dead_end")].copy()
+        if not active.empty:
+            frame = active
+    required_columns = {"cagr", "max_drawdown", "growth_constrained_utility_score"}
+    if not required_columns.issubset(frame.columns):
+        st.write("Outcome utility fields are not available yet. Run the daily update stack or migrate experiments.")
+        return
+
+    plot_frame = frame.dropna(subset=["cagr", "max_drawdown"]).copy()
+    if plot_frame.empty:
+        st.write("No CAGR/drawdown rows are available for outcome-frontier analysis.")
+        return
+
+    plot_frame = plot_frame.sort_values("growth_constrained_utility_score", ascending=False)
+    fig = go.Figure()
+    for tier, tier_frame in plot_frame.groupby("growth_utility_tier", dropna=False):
+        fig.add_trace(
+            go.Scatter(
+                x=tier_frame["max_drawdown"],
+                y=tier_frame["cagr"],
+                mode="markers",
+                name=str(tier).replace("_", " ").title(),
+                marker={
+                    "size": _outcome_marker_sizes(tier_frame),
+                    "opacity": 0.76,
+                    "line": {"width": 1, "color": "#0f172a"},
+                },
+                text=tier_frame.get("display_name", tier_frame.get("strategy", "")),
+                customdata=tier_frame[
+                    [
+                        column
+                        for column in [
+                            "strategy",
+                            "growth_constrained_utility_score",
+                            f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y",
+                            "drawdown_recovery_return",
+                            "monitoring_readiness_label",
+                        ]
+                        if column in tier_frame
+                    ]
+                ],
+                hovertemplate=(
+                    "%{text}<br>Max drawdown %{x:.1%}<br>CAGR %{y:.1%}"
+                    "<br>Utility %{customdata[1]:.2f}<extra></extra>"
+                ),
+            )
+        )
+    pareto = plot_frame[plot_frame.get("is_growth_pareto_efficient", False).astype(bool)]
+    if not pareto.empty:
+        fig.add_trace(
+            go.Scatter(
+                x=pareto["max_drawdown"],
+                y=pareto["cagr"],
+                mode="markers",
+                name="Pareto frontier",
+                marker={"symbol": "diamond-open", "size": 16, "line": {"width": 2, "color": "#ef4444"}},
+                text=pareto.get("display_name", pareto.get("strategy", "")),
+                hovertemplate="%{text}<br>Pareto efficient<extra></extra>",
+            )
+        )
+    fig.add_vline(x=DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT, line_dash="dash", line_color="#f59e0b")
+    fig.add_vline(x=DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT, line_dash="dot", line_color="#ef4444")
+    fig.update_layout(
+        height=520,
+        xaxis_title="Max drawdown",
+        yaxis_title="CAGR",
+        xaxis_tickformat=".0%",
+        yaxis_tickformat=".0%",
+        legend_title="Growth utility tier",
+        margin={"l": 20, "r": 20, "t": 35, "b": 20},
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+    selected_options = _outcome_select_options(plot_frame)
+    selected_label = st.selectbox(
+        "Outcome strategy to inspect",
+        selected_options["label"].tolist(),
+        key="outcome_frontier_strategy",
+    )
+    selected_row = selected_options[selected_options["label"] == selected_label].iloc[0]
+    selected_strategy = str(selected_row["strategy"])
+    selected_scorecard = plot_frame[plot_frame["strategy"].astype(str) == selected_strategy].iloc[0]
+    _render_outcome_decision_cards(
+        selected_scorecard,
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+    )
+
+    comparison_columns = [
+        "display_name",
+        "strategy",
+        "growth_constrained_utility_score",
+        "growth_utility_tier",
+        f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y",
+        "wealth_multiple_vs_spy",
+        "wealth_multiple_vs_qqq",
+        "cagr",
+        "max_drawdown",
+        "drawdown_recovery_return",
+        "walk_forward_positive_rate",
+        "worst_1y_cagr",
+        "worst_3y_cagr",
+        "left_tail_regime_return",
+        "monitoring_readiness_label",
+        "operability_label",
+    ]
+    st.caption("Top outcome-utility candidates")
+    _render_metric_dataframe(
+        _display_metrics(plot_frame[[column for column in comparison_columns if column in plot_frame]].head(20)),
+        hide_index=True,
+    )
+
+
+def _outcome_marker_sizes(frame: pd.DataFrame) -> pd.Series:
+    wealth_column = f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y"
+    if wealth_column not in frame:
+        return pd.Series(12.0, index=frame.index)
+    wealth = pd.to_numeric(frame[wealth_column], errors="coerce")
+    if wealth.notna().sum() <= 1 or float(wealth.max()) == float(wealth.min()):
+        return pd.Series(13.0, index=frame.index)
+    scaled = (wealth - wealth.min()) / max(float(wealth.max() - wealth.min()), 1e-12)
+    return 9.0 + 18.0 * scaled.fillna(0.0)
+
+
+def _outcome_select_options(frame: pd.DataFrame) -> pd.DataFrame:
+    output = frame.copy()
+    output["label"] = output.apply(
+        lambda row: (
+            f"{row.get('display_name', row.get('strategy', 'strategy'))} | "
+            f"utility {_format_decimal(row.get('growth_constrained_utility_score'))} | "
+            f"CAGR {_format_percent(row.get('cagr'))} | "
+            f"DD {_format_percent(row.get('max_drawdown'))}"
+        ),
+        axis=1,
+    )
+    return output.sort_values("growth_constrained_utility_score", ascending=False)
+
+
+def _render_outcome_decision_cards(
+    row: pd.Series,
+    *,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+) -> None:
+    wealth_column = f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y"
+    wealth = _safe_float(row.get(wealth_column))
+    extra_spy = _extra_wealth_from_multiple(wealth, row.get("wealth_multiple_vs_spy"))
+    extra_qqq = _extra_wealth_from_multiple(wealth, row.get("wealth_multiple_vs_qqq"))
+    result = _selected_outcome_result(
+        str(row.get("strategy", "")),
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+    )
+    underwater_rate = _time_underwater_rate(result)
+
+    cols = st.columns(5)
+    _helped_metric(cols[0], "15Y Wealth", _format_currency(wealth))
+    _helped_metric(cols[1], "Extra vs SPY", _format_currency(extra_spy))
+    _helped_metric(cols[2], "Extra vs QQQ", _format_currency(extra_qqq))
+    _helped_metric(cols[3], "Recovery Needed", _format_percent(row.get("drawdown_recovery_return")))
+    _helped_metric(cols[4], "Time Underwater", _format_percent(underwater_rate))
+
+    st.info(_outcome_decision_helper(row, extra_spy=extra_spy, extra_qqq=extra_qqq))
+
+    context = pd.DataFrame(
+        [
+            {
+                "metric": "CAGR",
+                "selected": row.get("cagr"),
+                "spy_delta": row.get("excess_cagr_vs_spy"),
+                "qqq_delta": row.get("excess_cagr_vs_qqq"),
+            },
+            {
+                "metric": "Max drawdown",
+                "selected": row.get("max_drawdown"),
+                "spy_delta": row.get("drawdown_improvement_vs_spy"),
+                "qqq_delta": row.get("drawdown_improvement_vs_qqq"),
+            },
+            {
+                "metric": "Worst 1Y CAGR",
+                "selected": row.get("worst_1y_cagr"),
+                "spy_delta": pd.NA,
+                "qqq_delta": pd.NA,
+            },
+            {
+                "metric": "Worst 3Y CAGR",
+                "selected": row.get("worst_3y_cagr"),
+                "spy_delta": pd.NA,
+                "qqq_delta": pd.NA,
+            },
+            {
+                "metric": "Left-tail regime return",
+                "selected": row.get("left_tail_regime_return"),
+                "spy_delta": pd.NA,
+                "qqq_delta": pd.NA,
+            },
+        ]
+    )
+    _render_metric_dataframe(_display_metrics(context), hide_index=True)
+
+
+def _selected_outcome_result(
+    strategy_name: str,
+    *,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+) -> BacktestResult | None:
+    catalog = _approach_catalog_for_detail(bot_config, experiment_scorecards=experiment_scorecards)
+    if catalog.empty or "strategy" not in catalog:
+        return None
+    matches = catalog[catalog["strategy"].astype(str) == strategy_name]
+    if matches.empty:
+        return None
+    row = matches.iloc[0]
+    strategy = strategy_from_catalog_row(row)
+    execution = execution_for_catalog_row(row, bot_config.execution)
+    result, _ = build_approach_backtest_result(
+        baseline_run.prices,
+        strategy,
+        execution,
+        scenario_sizing=scenario_sizing_from_catalog_row(row),
+        future_state_model=future_state_model_from_catalog_row(row),
+        strategy_drawdown_model=strategy_drawdown_model_from_catalog_row(row),
+        decision_sanity=decision_sanity_from_catalog_row(row),
+        name=strategy_name,
+    )
+    return result
+
+
+def _time_underwater_rate(result: BacktestResult | None) -> float | None:
+    if result is None or result.equity.empty:
+        return None
+    strategy_drawdown = drawdown(result.equity)
+    return float((strategy_drawdown < 0.0).mean())
+
+
+def _extra_wealth_from_multiple(wealth: float | None, multiple: object) -> float | None:
+    wealth_value = _safe_float(wealth)
+    multiple_value = _safe_float(multiple)
+    if wealth_value is None or multiple_value is None or multiple_value <= 0.0:
+        return None
+    return wealth_value - wealth_value / multiple_value
+
+
+def _outcome_decision_helper(row: pd.Series, *, extra_spy: float | None, extra_qqq: float | None) -> str:
+    max_drawdown = _safe_float(row.get("max_drawdown"))
+    cagr = _safe_float(row.get("cagr"))
+    utility_tier = str(row.get("growth_utility_tier", "")).replace("_", " ")
+    soft = abs(DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT)
+    hard = abs(DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT)
+    drawdown_depth = abs(max_drawdown or 0.0)
+    band = "inside the preferred band"
+    if drawdown_depth >= hard:
+        band = "outside the hard drawdown band"
+    elif drawdown_depth > soft:
+        band = "inside the soft penalty band"
+    support = "supported" if _safe_float(row.get("walk_forward_positive_rate")) and _safe_float(row.get("walk_forward_positive_rate")) >= 0.65 else "not fully supported"
+    return (
+        f"Outcome read: this strategy compounds at {_format_percent(cagr)} with max drawdown "
+        f"{_format_percent(max_drawdown)}, which is {band}. At the configured 15-year accumulation "
+        f"assumptions it is {_format_currency(extra_spy)} versus SPY and {_format_currency(extra_qqq)} "
+        f"versus QQQ. The growth utility tier is {utility_tier}; walk-forward evidence is {support}."
+    )
+
+
+def _safe_float(value: object) -> float | None:
+    try:
+        numeric = float(cast(object, value))
+    except (TypeError, ValueError):
+        return None
+    if numeric != numeric:
+        return None
+    return numeric
+
 def _render_experiment_monitor(
     bot_config: Any,
     baseline_run: BaselineRun,
@@ -1101,6 +1410,7 @@ def _render_experiment_monitor(
 
     (
         experiment_detail_tab,
+        experiment_outcome_tab,
         experiment_sanity_tab,
         experiment_confidence_tab,
         experiment_readiness_tab,
@@ -1113,6 +1423,7 @@ def _render_experiment_monitor(
     ) = st.tabs(
         [
             "Candidate Details",
+            "Outcome Frontier",
             "Sanity Impact",
             "Confidence Gauntlet",
             "Paper Readiness",
@@ -1137,6 +1448,14 @@ def _render_experiment_monitor(
             experiment_scorecards=experiment_scorecards,
             experiment_regimes=experiment_regimes,
             experiment_walk_forward=experiment_walk_forward,
+            experiment_candidates=experiment_candidates,
+        )
+
+    with experiment_outcome_tab:
+        _render_outcome_frontier(
+            bot_config=bot_config,
+            baseline_run=baseline_run,
+            experiment_scorecards=experiment_scorecards,
             experiment_candidates=experiment_candidates,
         )
 

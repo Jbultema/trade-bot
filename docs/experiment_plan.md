@@ -1,6 +1,6 @@
 # Experiment Roadmap
 
-Status: maintained roadmap. Last reviewed: 2026-06-21.
+Status: maintained roadmap. Last reviewed: 2026-06-22.
 
 This document defines the project phase boundary and current research direction.
 It replaces the original planning note now archived at
@@ -71,6 +71,8 @@ improves confidence, operability, and risk/re-entry behavior:
   costs, churn, and walk-forward validation
 - keep the default monitored set small, with baselines and only a few
   champion/challenger systems
+- add taxable-account evaluation as a parallel research mode, not as a silent
+  change to existing pre-tax/IRA-like scorecards
 
 ## Validation Rules
 
@@ -87,6 +89,8 @@ improves confidence, operability, and risk/re-entry behavior:
 - Promote candidate operating systems only after reviewing allocation history,
   drawdown behavior, robustness diagnostics, and forward paper-monitoring
   readiness.
+- Label account semantics explicitly. Until the taxable simulator exists, all
+  strategy results should be treated as pre-tax / IRA-like research outputs.
 
 ## Related Docs
 
@@ -95,5 +99,7 @@ improves confidence, operability, and risk/re-entry behavior:
 - `docs/math_model_audit.md`: locked formulas and model semantics.
 - `docs/ml_research_framework.md`: ML/Bayesian seams and validation gates.
 - `docs/forward_testing_protocol.md`: paper/live monitoring and ticket workflow.
+- `docs/taxable_account_framework.md`: planned taxable-account and after-tax
+  research semantics.
 - `docs/research_pruning_and_growth.md`: current pruning rules and growth
   direction.

@@ -35,7 +35,11 @@ archived roots available for audit.
 
 ## Promotion Rules
 
-Promotion is based on a scorecard, not one metric.
+Promotion is based on a scorecard, not one metric. The legacy `promotion_score`
+remains useful for research triage, while `growth_constrained_utility_score` is
+the preferred outcome lens for accumulation-account selection because it rewards
+15-year terminal wealth with contributions while enforcing survivable drawdown
+and validation gates.
 
 Core promotion criteria:
 
@@ -45,6 +49,8 @@ Core promotion criteria:
 - acceptable walk-forward holdout behavior across sequential one-year test windows
 - survivable total returns in named left-tail and market-transition regimes
 - reasonable turnover for human-triggered swing trades
+- acceptable growth-constrained utility when the strategy is intended for
+  accumulation-account monitoring
 - understandable exposure and failure modes
 
 Automatic reject signals:
@@ -55,6 +61,11 @@ Automatic reject signals:
 - left-tail regime total return worse than the regime-fragility threshold
 - improvement that only comes from a narrow historical regime
 - strategy mechanics that cannot be operated manually
+
+Account semantics are part of the scorecard contract. Current results are
+pre-tax / IRA-like. Taxable-account rankings should not be inferred from current
+scorecards until the tax-lot and after-tax simulator described in
+`docs/taxable_account_framework.md` is implemented.
 
 ## Broad-Then-Deep Structure
 

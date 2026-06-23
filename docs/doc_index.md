@@ -1,6 +1,6 @@
 # Documentation Index
 
-Status: canonical navigation. Last reviewed: 2026-06-21.
+Status: canonical navigation. Last reviewed: 2026-06-22.
 
 Use this file to decide which docs are current operating references and which
 ones are historical research notes. When a doc captures a point-in-time plan or
@@ -19,6 +19,7 @@ like live system behavior.
 | `docs/math_model_audit.md` | Locked formulas, model semantics, and caveats | Update with any formula or interpretation change in the same PR/change. |
 | `docs/forward_testing_protocol.md` | Paper/live ticket workflow and scaling gates | Update when journal, ticket, or monitoring workflows change. |
 | `docs/ml_research_framework.md` | Classical ML/Bayesian seams, cadence, validation gates | Update when ML moves from research-only to operating recommendations. |
+| `docs/taxable_account_framework.md` | Planned taxable brokerage account model and after-tax research semantics | Update before adding account-aware scoring, tax lots, or tax-loss harvesting logic. |
 
 ## Maintained Research Notes
 

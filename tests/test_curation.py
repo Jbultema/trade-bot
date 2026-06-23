@@ -144,3 +144,46 @@ def test_curated_shelf_excludes_pruned_dead_ends_by_default() -> None:
 
     assert "keeper" in set(curated["strategy"])
     assert "dead_end" not in set(curated["strategy"])
+
+def test_growth_utility_can_rank_higher_cagr_tolerable_drawdown_above_safer_lower_growth() -> None:
+    rows = pd.DataFrame(
+        [
+            {
+                "strategy": "lower_growth_lower_drawdown",
+                "family": "growth_frontier",
+                "phase": "growth_frontier",
+                "role": "growth_frontier_candidate",
+                "promotion_decision": "promote_candidate",
+                "promotion_score": 0.85,
+                "robustness_score": 0.85,
+                "calmar": 0.73,
+                "cagr": 0.1117,
+                "max_drawdown": -0.1534,
+                "walk_forward_positive_rate": 0.85,
+                "worst_3y_cagr": 0.02,
+                "left_tail_regime_return": -0.08,
+                "operability_label": "weekly_cadence",
+            },
+            {
+                "strategy": "higher_growth_tolerable_drawdown",
+                "family": "growth_frontier",
+                "phase": "growth_frontier",
+                "role": "growth_frontier_candidate",
+                "promotion_decision": "promote_candidate",
+                "promotion_score": 0.85,
+                "robustness_score": 0.85,
+                "calmar": 0.74,
+                "cagr": 0.1487,
+                "max_drawdown": -0.2001,
+                "walk_forward_positive_rate": 0.85,
+                "worst_3y_cagr": 0.02,
+                "left_tail_regime_return": -0.08,
+                "operability_label": "weekly_cadence",
+            },
+        ]
+    )
+
+    ranked = rank_strategy_candidates(rows)
+
+    assert ranked.iloc[0]["strategy"] == "higher_growth_tolerable_drawdown"
+    assert ranked.iloc[0]["growth_constrained_utility_score"] > ranked.iloc[1]["growth_constrained_utility_score"]

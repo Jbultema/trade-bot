@@ -47,6 +47,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_AVERAGE_TURNOVER,
     DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_SINGLE_DAY_TURNOVER,
     DEFAULT_OPERABILITY_WEEKLY_CADENCE_MAX_TRADES_PER_YEAR,
+    DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_SCENARIO_FRAGILE_UPSIDE_MULTIPLIER,
     DEFAULT_SCENARIO_MAX_MULTIPLIER,
     DEFAULT_SCENARIO_MIN_MULTIPLIER,
@@ -63,6 +64,7 @@ from trade_bot.research.future_state_ml import (
     apply_strategy_drawdown_position_sizing,
 )
 from trade_bot.research.strategy_naming import strategy_display_name
+from trade_bot.research.strategy_outcome_utility import enrich_strategy_outcome_utility
 from trade_bot.strategies.momentum import build_strategy_weights
 
 
@@ -333,6 +335,8 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _high_cagr_broadened_reentry_candidates(iteration)
     if 136 <= iteration <= 145:
         return _multi_asset_risk_on_rotation_candidates(iteration)
+    if 146 <= iteration <= 150:
+        return _growth_frontier_candidates(iteration)
     return None
 
 
@@ -11151,6 +11155,300 @@ def _operating_system_candidates() -> tuple[ExperimentCandidate, ...]:
     )
 
 
+
+def _growth_frontier_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    suffix = max(1, iteration - 145)
+    variants = (
+        {
+            "label": "balanced_22",
+            "lookback": 42,
+            "skip": 5,
+            "top_n": 4,
+            "min_return": -0.005,
+            "trend": 63,
+            "max_weight": 0.35,
+            "vol": 0.22,
+            "vol_lookback": 42,
+            "drawdown": -0.22,
+            "risk_multiplier": 0.60,
+            "scenario": "aggressive",
+            "dip_trigger": -0.055,
+            "dip_deep": -0.13,
+            "dip_recovery_days": 10,
+            "dip_confirmation_days": 3,
+            "dip_min_recovery": 0.004,
+            "dip_starter": 0.30,
+            "dip_step": 0.25,
+            "dip_max_risk": 0.95,
+            "dip_vol_ceiling": 0.42,
+        },
+        {
+            "label": "fast_reentry_20",
+            "lookback": 21,
+            "skip": 3,
+            "top_n": 4,
+            "min_return": -0.015,
+            "trend": 42,
+            "max_weight": 0.35,
+            "vol": 0.24,
+            "vol_lookback": 42,
+            "drawdown": -0.20,
+            "risk_multiplier": 0.70,
+            "scenario": "aggressive",
+            "dip_trigger": -0.040,
+            "dip_deep": -0.10,
+            "dip_recovery_days": 6,
+            "dip_confirmation_days": 2,
+            "dip_min_recovery": 0.002,
+            "dip_starter": 0.45,
+            "dip_step": 0.30,
+            "dip_max_risk": 1.00,
+            "dip_vol_ceiling": 0.48,
+        },
+        {
+            "label": "wide_band_24",
+            "lookback": 63,
+            "skip": 5,
+            "top_n": 5,
+            "min_return": -0.010,
+            "trend": 84,
+            "max_weight": 0.30,
+            "vol": 0.25,
+            "vol_lookback": 63,
+            "drawdown": -0.24,
+            "risk_multiplier": 0.55,
+            "scenario": "aggressive",
+            "dip_trigger": -0.070,
+            "dip_deep": -0.16,
+            "dip_recovery_days": 12,
+            "dip_confirmation_days": 3,
+            "dip_min_recovery": 0.004,
+            "dip_starter": 0.35,
+            "dip_step": 0.25,
+            "dip_max_risk": 1.00,
+            "dip_vol_ceiling": 0.50,
+        },
+        {
+            "label": "quality_floor_22",
+            "lookback": 84,
+            "skip": 10,
+            "top_n": 4,
+            "min_return": 0.000,
+            "trend": 126,
+            "max_weight": 0.30,
+            "vol": 0.20,
+            "vol_lookback": 63,
+            "drawdown": -0.22,
+            "risk_multiplier": 0.65,
+            "scenario": "balanced",
+            "dip_trigger": -0.060,
+            "dip_deep": -0.14,
+            "dip_recovery_days": 15,
+            "dip_confirmation_days": 4,
+            "dip_min_recovery": 0.005,
+            "dip_starter": 0.25,
+            "dip_step": 0.20,
+            "dip_max_risk": 0.90,
+            "dip_vol_ceiling": 0.38,
+        },
+        {
+            "label": "sector_accel_22",
+            "lookback": 28,
+            "skip": 5,
+            "top_n": 3,
+            "min_return": -0.005,
+            "trend": 63,
+            "max_weight": 0.40,
+            "vol": 0.23,
+            "vol_lookback": 42,
+            "drawdown": -0.22,
+            "risk_multiplier": 0.60,
+            "scenario": "aggressive",
+            "dip_trigger": -0.050,
+            "dip_deep": -0.12,
+            "dip_recovery_days": 8,
+            "dip_confirmation_days": 2,
+            "dip_min_recovery": 0.003,
+            "dip_starter": 0.40,
+            "dip_step": 0.30,
+            "dip_max_risk": 1.00,
+            "dip_vol_ceiling": 0.45,
+        },
+    )
+    variant = variants[(suffix - 1) % len(variants)]
+    label = str(variant["label"])
+    broad_growth = ["SPY", "QQQ", "RSP", "IWM", "MTUM", "SCHG", "VUG", "XLK", "XLY", "XLC"]
+    sector_theme = ["XLK", "XLY", "XLC", "XLI", "XLF", "XLE", "XLV", "SMH", "SOXX", "IGV"]
+    quality_compounders = ["QQQ", "SPY", "QUAL", "COWZ", "MOAT", "VIG", "SCHD", "USMV", "MTUM", "RSP"]
+    multi_asset_recovery = ["SPY", "QQQ", "RSP", "IWM", "MTUM", "QUAL", "HYG", "LQD", "GLD", "DBC", "XLE"]
+    high_beta_diversified = ["SPY", "QQQ", "IWM", "MTUM", "SCHG", "XLK", "XLY", "XLC", "SMH", "SOXX", "ARKK"]
+    scenario = _scenario_profile(str(variant["scenario"]))
+    return (
+        _candidate(
+            name=f"i{iteration}_growth_frontier_broad_{label}",
+            role="growth_frontier_candidate",
+            phase="growth_frontier",
+            family="growth_constrained_broad_equity",
+            hypothesis=(
+                "Optimize for retirement terminal wealth by allowing a tolerable drawdown band while "
+                "using broad equity leadership instead of forcing a narrow AI-only recovery."
+            ),
+            scenario_sizing=scenario,
+            strategy=StrategyConfig(
+                type="dual_momentum",
+                tickers=broad_growth,
+                lookback_days=int(variant["lookback"]),
+                skip_days=int(variant["skip"]),
+                top_n=int(variant["top_n"]),
+                defensive_ticker="BIL",
+                min_return=float(variant["min_return"]),
+                ranking_metric="return_trend_quality",
+                weighting="risk_adjusted_score",
+                trend_filter_days=int(variant["trend"]),
+                max_asset_weight=float(variant["max_weight"]),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=float(variant["vol"]),
+                    lookback_days=int(variant["vol_lookback"]),
+                    max_leverage=1.0,
+                ),
+                drawdown_control=DrawdownControlConfig(
+                    max_drawdown=float(variant["drawdown"]),
+                    risk_multiplier=float(variant["risk_multiplier"]),
+                ),
+            ),
+        ),
+        _candidate(
+            name=f"i{iteration}_growth_frontier_sector_{label}",
+            role="growth_frontier_candidate",
+            phase="growth_frontier",
+            family="growth_constrained_sector_rotation",
+            hypothesis=(
+                "Let sector leadership own recovery phases so the system can keep high CAGR even if "
+                "AI/mega-cap tech is not the next risk-on leader."
+            ),
+            scenario_sizing=scenario,
+            strategy=StrategyConfig(
+                type="dual_momentum",
+                tickers=sector_theme,
+                lookback_days=int(variant["lookback"]),
+                skip_days=int(variant["skip"]),
+                top_n=max(3, min(5, int(variant["top_n"]))),
+                defensive_ticker="BIL",
+                min_return=float(variant["min_return"]),
+                ranking_metric="return_trend_quality",
+                weighting="risk_adjusted_score",
+                trend_filter_days=int(variant["trend"]),
+                max_asset_weight=float(variant["max_weight"]),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=min(float(variant["vol"]) + 0.02, 0.27),
+                    lookback_days=int(variant["vol_lookback"]),
+                    max_leverage=1.0,
+                ),
+                drawdown_control=DrawdownControlConfig(
+                    max_drawdown=float(variant["drawdown"]),
+                    risk_multiplier=max(float(variant["risk_multiplier"]) - 0.05, 0.45),
+                ),
+            ),
+        ),
+        _candidate(
+            name=f"i{iteration}_growth_frontier_quality_{label}",
+            role="growth_frontier_candidate",
+            phase="growth_frontier",
+            family="growth_constrained_quality_compounders",
+            hypothesis=(
+                "Quality, cash-flow, dividend, momentum, and broad growth ETFs may preserve enough "
+                "upside while avoiding single-theme AI bubble exposure."
+            ),
+            scenario_sizing=_scenario_profile("balanced"),
+            strategy=StrategyConfig(
+                type="dual_momentum",
+                tickers=quality_compounders,
+                lookback_days=max(42, int(variant["lookback"])),
+                skip_days=int(variant["skip"]),
+                top_n=4,
+                defensive_ticker="BIL",
+                min_return=max(float(variant["min_return"]), 0.0),
+                ranking_metric="risk_adjusted_return",
+                weighting="risk_adjusted_score",
+                trend_filter_days=max(84, int(variant["trend"])),
+                max_asset_weight=min(float(variant["max_weight"]), 0.35),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=max(float(variant["vol"]) - 0.03, 0.18),
+                    lookback_days=max(42, int(variant["vol_lookback"])),
+                    max_leverage=1.0,
+                ),
+                drawdown_control=DrawdownControlConfig(
+                    max_drawdown=max(float(variant["drawdown"]), -0.22),
+                    risk_multiplier=min(float(variant["risk_multiplier"]) + 0.05, 0.75),
+                ),
+            ),
+        ),
+        _candidate(
+            name=f"i{iteration}_growth_frontier_reentry_{label}",
+            role="growth_frontier_candidate",
+            phase="growth_frontier",
+            family="growth_constrained_reentry",
+            hypothesis=(
+                "Buy back risk sooner after drawdowns when recovery, credit, volatility, and breadth "
+                "confirm, accepting the -20%ish drawdown band to capture more upside."
+            ),
+            scenario_sizing=scenario,
+            strategy=StrategyConfig(
+                type="dip_reentry",
+                tickers=multi_asset_recovery,
+                top_n=max(3, min(5, int(variant["top_n"]))),
+                defensive_ticker="BIL",
+                ranking_metric="return_trend_quality",
+                weighting="risk_adjusted_score",
+                max_asset_weight=float(variant["max_weight"]),
+                dip_trigger_drawdown=float(variant["dip_trigger"]),
+                dip_deep_drawdown=float(variant["dip_deep"]),
+                dip_recovery_days=int(variant["dip_recovery_days"]),
+                dip_confirmation_days=int(variant["dip_confirmation_days"]),
+                dip_min_recovery_return=float(variant["dip_min_recovery"]),
+                dip_starter_weight=float(variant["dip_starter"]),
+                dip_step_weight=float(variant["dip_step"]),
+                dip_max_risk_weight=float(variant["dip_max_risk"]),
+                dip_volatility_ceiling=float(variant["dip_vol_ceiling"]),
+                dip_credit_confirmation=True,
+                dip_breadth_confirmation=True,
+            ),
+        ),
+        _candidate(
+            name=f"i{iteration}_growth_frontier_high_beta_{label}",
+            role="growth_frontier_candidate",
+            phase="growth_frontier",
+            family="growth_constrained_high_beta",
+            hypothesis=(
+                "Test whether diversified high-beta recovery can beat QQQ-like upside capture while "
+                "keeping drawdowns inside the new hard-growth utility limit."
+            ),
+            scenario_sizing=scenario,
+            strategy=StrategyConfig(
+                type="dual_momentum",
+                tickers=high_beta_diversified,
+                lookback_days=max(21, int(variant["lookback"]) - 21),
+                skip_days=int(variant["skip"]),
+                top_n=4,
+                defensive_ticker="BIL",
+                min_return=min(float(variant["min_return"]), -0.005),
+                ranking_metric="return_trend_quality",
+                weighting="momentum_score",
+                trend_filter_days=max(42, int(variant["trend"]) - 21),
+                max_asset_weight=float(variant["max_weight"]),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=min(float(variant["vol"]) + 0.03, 0.28),
+                    lookback_days=int(variant["vol_lookback"]),
+                    max_leverage=1.0,
+                ),
+                drawdown_control=DrawdownControlConfig(
+                    max_drawdown=min(float(variant["drawdown"]), -0.24),
+                    risk_multiplier=max(float(variant["risk_multiplier"]) - 0.10, 0.45),
+                ),
+            ),
+        ),
+    )
+
 def _candidate(
     *,
     name: str,
@@ -11736,6 +12034,7 @@ def build_experiment_scorecard(
     summary = _add_benchmark_context(summary, benchmark_metrics)
     summary = _add_operability_context(summary, operability_metrics)
     summary = _add_transition_context(summary, transition_metrics)
+    summary = enrich_strategy_outcome_utility(summary, benchmark_metrics=benchmark_metrics)
     summary["robustness_score"] = _robustness_score(summary)
     summary["promotion_score"] = _promotion_score(summary)
     summary["promotion_decision"] = summary.apply(_promotion_decision, axis=1)
@@ -11768,6 +12067,16 @@ def build_experiment_scorecard(
         "deployment_blockers",
         "benchmark_knockout_score",
         "benchmark_knockout_label",
+        "terminal_wealth_15y",
+        "terminal_wealth_with_contributions_15y",
+        "wealth_multiple_vs_spy",
+        "wealth_multiple_vs_qqq",
+        "drawdown_recovery_return",
+        "drawdown_soft_penalty",
+        "drawdown_hard_penalty",
+        "growth_constrained_utility_score",
+        "growth_utility_tier",
+        "is_growth_pareto_efficient",
         "robustness_score",
         "cagr",
         "sharpe",
@@ -12704,8 +13013,10 @@ def _deployment_blockers_list(row: pd.Series) -> list[str]:
         blockers.append("walk_forward_gap")
     if _numeric_value(row.get("left_tail_regime_return"), default=0.0) < -0.15:
         blockers.append("left_tail_gap")
-    if _numeric_value(row.get("max_drawdown"), default=0.0) < -0.25:
-        blockers.append("drawdown_gap")
+    if _numeric_value(row.get("max_drawdown"), default=0.0) <= DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT:
+        blockers.append("hard_drawdown_gap")
+    if str(row.get("growth_utility_tier", "")) == "growth_reject_hard_drawdown":
+        blockers.append("growth_hard_drawdown")
     return blockers
 
 
@@ -12736,7 +13047,7 @@ def _rank_column(summary: pd.DataFrame, column: str) -> pd.Series:
 
 
 def _promotion_decision(row: pd.Series) -> str:
-    if row["max_drawdown"] <= -0.35:
+    if row["max_drawdown"] <= DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT:
         return "reject_left_tail"
     if _finite(row.get("left_tail_regime_return")) and row["left_tail_regime_return"] < -0.20:
         return "reject_regime_fragility"
