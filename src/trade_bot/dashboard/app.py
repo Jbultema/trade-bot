@@ -212,19 +212,6 @@ previous_baseline_run = previous_snapshot_payload[0] if previous_snapshot_payloa
 
 journal = TradeJournal(journal_path)
 headline_open_tickets = journal.load_recommendation_tickets(status="open")
-action_headline = build_action_headline(
-    current_state=baseline_run.current_state,
-    trade_decision=baseline_run.trade_decision,
-    news_monitor=baseline_run.news_monitor,
-    open_ticket_count=len(headline_open_tickets),
-)
-_render_market_brief(
-    baseline_run=baseline_run,
-    headline=action_headline,
-    open_ticket_count=len(headline_open_tickets),
-    previous_run=previous_baseline_run,
-)
-_render_action_headline(action_headline)
 default_book_alignment = build_book_alignment(
     journal=journal,
     trade_decision=baseline_run.trade_decision,
@@ -240,6 +227,31 @@ default_book_alignment = build_book_alignment(
         default=10_000.0,
     ),
 )
+default_book_has_executions = (
+    not default_book_alignment.summary.empty
+    and bool(default_book_alignment.summary.iloc[0].get("has_executions", False))
+)
+execution_book_alignment = default_book_alignment if default_book_has_executions else None
+headline_position_plan = (
+    default_book_alignment.position_plan
+    if default_book_has_executions
+    else baseline_run.trade_decision.position_plan
+)
+action_headline = build_action_headline(
+    current_state=baseline_run.current_state,
+    trade_decision=baseline_run.trade_decision,
+    news_monitor=baseline_run.news_monitor,
+    open_ticket_count=len(headline_open_tickets),
+    position_plan=headline_position_plan,
+)
+_render_market_brief(
+    baseline_run=baseline_run,
+    headline=action_headline,
+    open_ticket_count=len(headline_open_tickets),
+    previous_run=previous_baseline_run,
+    book_alignment=execution_book_alignment,
+)
+_render_action_headline(action_headline)
 _render_book_alignment(
     default_book_alignment,
     heading="Default Paper Book Alignment",
@@ -255,6 +267,7 @@ _render_book_alignment(
 _render_operating_brief(
     baseline_run=baseline_run,
     headline=action_headline,
+    book_alignment=execution_book_alignment,
 )
 _render_decision_brief(
     baseline_run=baseline_run,
@@ -299,5 +312,6 @@ _render_dashboard_section(
     experiment_candidates=experiment_candidates,
     decision_sanity_impacts=decision_sanity_impacts,
     warehouse_path=str(run_store_path),
+    book_alignment=execution_book_alignment,
 )
 _render_metric_guide()

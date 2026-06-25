@@ -28,11 +28,12 @@ def build_action_headline(
     trade_decision: TradeDecisionRun,
     news_monitor: NewsMonitorRun,
     open_ticket_count: int = 0,
+    position_plan: pd.DataFrame | None = None,
 ) -> ActionHeadline:
     summary = _summary_row(trade_decision.summary)
-    position_plan = trade_decision.position_plan
-    max_abs_delta = _max_abs_delta(position_plan)
-    material_trade_count = _material_trade_count(position_plan)
+    execution_position_plan = trade_decision.position_plan if position_plan is None else position_plan
+    max_abs_delta = _max_abs_delta(execution_position_plan)
+    material_trade_count = _material_trade_count(execution_position_plan)
     recommended_action = str(summary.get("recommended_action", "HOLD"))
     risk_off_probability = _as_float(summary.get("one_month_risk_off_probability"))
     transition_probability = _as_float(summary.get("one_month_transition_probability"))
@@ -308,12 +309,15 @@ def _level(
     max_abs_delta: float,
     risk_off_probability: float,
 ) -> str:
+    large_book_move = max_abs_delta >= 0.20
+    material_book_move = max_abs_delta >= 0.05
+    severe_and_actionable = severity >= 10 and material_book_move
     if (
         risk_status == "red"
         or recommended_action == "REDUCE_RISK"
-        or max_abs_delta >= 0.20
+        or large_book_move
         or risk_off_probability >= 0.35
-        or severity >= 10
+        or severe_and_actionable
     ):
         return "critical_actions"
     if (

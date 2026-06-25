@@ -5,9 +5,13 @@ import streamlit as st
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.trading.book_alignment import BookAlignmentRun
 
 
-def _render_command_center(baseline_run: BaselineRun) -> None:
+def _render_command_center(
+    baseline_run: BaselineRun,
+    book_alignment: BookAlignmentRun | None = None,
+) -> None:
     current_state = baseline_run.current_state
     trade_decision = baseline_run.trade_decision
 
@@ -45,7 +49,20 @@ def _render_command_center(baseline_run: BaselineRun) -> None:
         )
         _helped_metric(decision_cols[3], "Authority", str(decision_summary["decision_authority"]))
         st.write(str(decision_summary["human_explanation"]))
-        _render_metric_dataframe(_display_metrics(trade_decision.position_plan))
+        execution_plan = (
+            book_alignment.position_plan
+            if book_alignment is not None and not book_alignment.position_plan.empty
+            else trade_decision.position_plan
+        )
+        if book_alignment is not None and not book_alignment.summary.empty:
+            st.caption(
+                "Book-aware execution bridge for the default paper champion. "
+                "This reconciles logged paper holdings to the latest target."
+            )
+        _render_metric_dataframe(_display_metrics(execution_plan))
+        if book_alignment is not None and not book_alignment.summary.empty:
+            with st.expander("Raw model position bridge", expanded=False):
+                _render_metric_dataframe(_display_metrics(trade_decision.position_plan))
         st.dataframe(trade_decision.evidence, use_container_width=True)
         _render_metric_dataframe(_display_metrics(trade_decision.scenario_links))
 

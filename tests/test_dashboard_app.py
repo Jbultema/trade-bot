@@ -19,6 +19,7 @@ from trade_bot.research.event_risk import EventRiskRun
 from trade_bot.research.news_monitor import NewsMonitorRun
 from trade_bot.research.signal_inclusion import SignalInclusionRun
 from trade_bot.research.trade_decision import TradeDecisionRun
+from trade_bot.trading.book_alignment import BookAlignmentRun
 
 
 def test_dashboard_app_renders_action_headline(
@@ -176,6 +177,30 @@ def test_market_brief_report_compares_current_run_to_prior_snapshot() -> None:
     change_rows = report.detail_rows[report.detail_rows["topic"] == "change_since_prior"]
     assert not change_rows.empty
     assert "2026-06-16 GREEN risk" in str(change_rows.iloc[0]["previous_read"])
+
+
+def test_market_brief_report_uses_book_alignment_for_execution_readthrough() -> None:
+    baseline_run = _baseline_run()
+    book_alignment = _book_alignment_run()
+    headline = build_action_headline(
+        current_state=baseline_run.current_state,
+        trade_decision=baseline_run.trade_decision,
+        news_monitor=baseline_run.news_monitor,
+        open_ticket_count=0,
+        position_plan=book_alignment.position_plan,
+    )
+
+    report = build_market_brief_report(
+        baseline_run=baseline_run,
+        headline=headline,
+        open_ticket_count=0,
+        book_alignment=book_alignment,
+    )
+
+    assert "default paper book is currently QQQ 36%, IWM 36%, BIL 28%" in report.paragraphs[0]
+    assert "latest target is QQQ 37%, IWM 37%, BIL 25%" in report.paragraphs[0]
+    assert "reduce BIL by 3.00%" in report.paragraphs[3]
+    assert "add bil by 10.00%" not in report.paragraphs[3].lower()
 
 
 class _FakeRunStore:
@@ -336,6 +361,58 @@ def _previous_baseline_run() -> BaselineRun:
         scenario_links=previous_links,
     )
     return replace(run, current_state=previous_state, trade_decision=previous_decision)
+
+
+def _book_alignment_run() -> BookAlignmentRun:
+    return BookAlignmentRun(
+        summary=pd.DataFrame(
+            [
+                {
+                    "mode": "paper",
+                    "account": "default_paper_account",
+                    "strategy_name": "scenario_adjusted_trade_decision",
+                    "alignment_status": "small_drift",
+                    "recommended_action": "SMALL_REBALANCE",
+                    "current_position": "QQQ 36%, IWM 36%, BIL 28%",
+                    "target_position": "QQQ 37%, IWM 37%, BIL 25%",
+                    "max_abs_delta": 0.03,
+                    "material_trade_count": 1,
+                    "has_executions": True,
+                }
+            ]
+        ),
+        position_plan=pd.DataFrame(
+            [
+                {
+                    "ticker": "BIL",
+                    "current_weight": 0.28,
+                    "scenario_adjusted_weight": 0.25,
+                    "target_weight": 0.25,
+                    "delta_weight": -0.03,
+                    "action": "REDUCE",
+                },
+                {
+                    "ticker": "QQQ",
+                    "current_weight": 0.36,
+                    "scenario_adjusted_weight": 0.37,
+                    "target_weight": 0.37,
+                    "delta_weight": 0.01,
+                    "action": "HOLD",
+                },
+            ]
+        ),
+        holdings=pd.DataFrame(
+            [
+                {
+                    "mode": "paper",
+                    "account": "default_paper_account",
+                    "ticker": "QQQ",
+                    "net_quantity": 1.0,
+                    "current_notional": 3600.0,
+                }
+            ]
+        ),
+    )
 
 
 def _current_state() -> CurrentStateRun:

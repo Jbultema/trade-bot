@@ -51,6 +51,36 @@ def test_action_headline_marks_large_red_risk_as_critical() -> None:
     assert "open tickets" in headline.explanation
 
 
+def test_action_headline_uses_book_aware_position_plan_for_action_size() -> None:
+    book_position_plan = pd.DataFrame(
+        [
+            {
+                "ticker": "BIL",
+                "current_weight": 0.28,
+                "scenario_adjusted_weight": 0.25,
+                "delta_weight": -0.03,
+                "action": "REDUCE",
+            }
+        ]
+    )
+
+    headline = build_action_headline(
+        current_state=_current_state("yellow", 0.40),
+        trade_decision=_trade_decision(
+            "REVIEW_REDUCE_RISK",
+            -0.25,
+            risk_off=0.27,
+            event_pressure=0.20,
+        ),
+        news_monitor=_news_monitor(active=True, high_urgency=True),
+        position_plan=book_position_plan,
+    )
+
+    assert headline.level == "small_actions"
+    assert headline.metrics.iloc[0]["max_position_change"] == 0.03
+    assert "3.0%" in headline.headline
+
+
 def _current_state(risk_status: str, risk_score: float) -> CurrentStateRun:
     return CurrentStateRun(
         market_date="2026-06-17",

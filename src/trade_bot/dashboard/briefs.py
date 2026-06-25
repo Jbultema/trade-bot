@@ -12,21 +12,29 @@ from trade_bot.dashboard.formatting import (
     _format_percent,
     _optional_float,
 )
+from trade_bot.DEFAULTS import DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT
 from trade_bot.reporting.report import window_performance_frame
 from trade_bot.research.action_headline import ActionHeadline
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.trading.book_alignment import BookAlignmentRun
 
 
 def _render_operating_brief(
     *,
     baseline_run: BaselineRun,
     headline: ActionHeadline,
+    book_alignment: BookAlignmentRun | None = None,
 ) -> None:
     st.subheader("Operating Brief")
     st.caption(
         "Execution checklist after the Daily Market Brief: sizing translation, scenario constraints, and bias checks."
     )
-    cards = _operating_brief_cards(baseline_run=baseline_run, headline=headline)
+    position_plan = _execution_position_plan(baseline_run, book_alignment)
+    cards = _operating_brief_cards(
+        baseline_run=baseline_run,
+        headline=headline,
+        position_plan=position_plan,
+    )
     st.markdown(
         '<div class="operating-grid">'
         + "".join(_operating_card_html(card) for card in cards)
@@ -34,7 +42,7 @@ def _render_operating_brief(
         unsafe_allow_html=True,
     )
 
-    sizing_steps = _recommended_sizing_steps(baseline_run.trade_decision.position_plan)
+    sizing_steps = _recommended_sizing_steps(position_plan)
     scenario_bridge = _scenario_bridge_table(baseline_run)
     evidence = _operating_evidence_table(baseline_run, headline)
 
@@ -44,7 +52,8 @@ def _render_operating_brief(
         )
         with detail_tab:
             _render_metric_dataframe(
-                _operating_instruction_table(baseline_run, headline), hide_index=True
+                _operating_instruction_table(baseline_run, headline, book_alignment),
+                hide_index=True,
             )
         with sizing_tab:
             st.caption(
@@ -64,12 +73,13 @@ def _operating_brief_cards(
     *,
     baseline_run: BaselineRun,
     headline: ActionHeadline,
+    position_plan: pd.DataFrame,
 ) -> list[dict[str, str]]:
     trade_summary = _first_display_row(baseline_run.trade_decision.summary)
     risk_summary = _portfolio_risk_summary(baseline_run)
     action = str(trade_summary.get("recommended_action", headline.label))
     scenario_effect = _scenario_effect_sentence(trade_summary, risk_summary)
-    primary_sizing = _primary_sizing_sentence(baseline_run.trade_decision.position_plan)
+    primary_sizing = _primary_sizing_sentence(position_plan)
     posture_check = _posture_calibration_sentence(trade_summary)
     sanity_check = _decision_sanity_sentence(trade_summary)
     return [
@@ -113,14 +123,11 @@ def _operating_card_html(card: dict[str, str]) -> str:
 def _operating_instruction_table(
     baseline_run: BaselineRun,
     headline: ActionHeadline,
+    book_alignment: BookAlignmentRun | None = None,
 ) -> pd.DataFrame:
     trade_summary = _first_display_row(baseline_run.trade_decision.summary)
     action = str(trade_summary.get("recommended_action", headline.label))
-    target_position = str(
-        trade_summary.get("scenario_adjusted_position")
-        or trade_summary.get("base_position")
-        or "No target position available."
-    )
+    target_position = _target_position_text(trade_summary, book_alignment)
     risk_status = baseline_run.current_state.risk_status.upper()
     risk_budget = _format_decimal(trade_summary.get("risk_budget_multiplier", "n/a"))
     return pd.DataFrame(
@@ -146,6 +153,30 @@ def _operating_instruction_table(
                 "what_to_do": "Lock the recommendation set, then log paper or live executions with exact time, price, quantity, and notes.",
             },
         ]
+    )
+
+
+def _execution_position_plan(
+    baseline_run: BaselineRun,
+    book_alignment: BookAlignmentRun | None,
+) -> pd.DataFrame:
+    if book_alignment is not None and not book_alignment.position_plan.empty:
+        return book_alignment.position_plan
+    return baseline_run.trade_decision.position_plan
+
+
+def _target_position_text(
+    trade_summary: dict[str, object],
+    book_alignment: BookAlignmentRun | None,
+) -> str:
+    if book_alignment is not None and not book_alignment.summary.empty:
+        target_position = str(book_alignment.summary.iloc[0].get("target_position", "")).strip()
+        if target_position:
+            return target_position
+    return str(
+        trade_summary.get("scenario_adjusted_position")
+        or trade_summary.get("base_position")
+        or "No target position available."
     )
 
 
@@ -200,7 +231,7 @@ def _recommended_sizing_steps(position_plan: pd.DataFrame) -> pd.DataFrame:
         current_weight = _as_float(row.get(current_column))
         target_weight = _as_float(row.get(target_column))
         delta_weight = _as_float(row.get("delta_weight", target_weight - current_weight))
-        if abs(delta_weight) < 0.005 and action == "HOLD":
+        if action == "HOLD" and abs(delta_weight) < DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT:
             continue
         rows.append(
             {

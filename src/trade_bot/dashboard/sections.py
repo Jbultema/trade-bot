@@ -12,6 +12,7 @@ from trade_bot.dashboard.performance import _render_performance
 from trade_bot.dashboard.research_lab import _render_research_lab
 from trade_bot.dashboard.risk_scenarios import _render_risk_and_scenarios
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.trading.book_alignment import BookAlignmentRun
 from trade_bot.trading.journal import TradeJournal
 
 
@@ -27,9 +28,10 @@ def _render_dashboard_section(
     experiment_candidates: pd.DataFrame,
     decision_sanity_impacts: pd.DataFrame,
     warehouse_path: str,
+    book_alignment: BookAlignmentRun | None = None,
 ) -> None:
     if section == "Command Center":
-        _render_command_center(baseline_run)
+        _render_command_center(baseline_run, book_alignment=book_alignment)
     elif section == "Risk & Scenarios":
         _render_risk_and_scenarios(baseline_run)
     elif section == "Monitoring":

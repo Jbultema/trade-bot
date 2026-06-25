@@ -8,8 +8,10 @@ import streamlit as st
 
 from trade_bot.dashboard.components import _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics, _format_decimal, _format_percent
+from trade_bot.DEFAULTS import DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT
 from trade_bot.research.action_headline import ActionHeadline
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.trading.book_alignment import BookAlignmentRun
 
 
 @dataclass(frozen=True)
@@ -38,12 +40,14 @@ def _render_market_brief(
     headline: ActionHeadline,
     open_ticket_count: int,
     previous_run: BaselineRun | None = None,
+    book_alignment: BookAlignmentRun | None = None,
 ) -> None:
     report = build_market_brief_report(
         baseline_run=baseline_run,
         headline=headline,
         open_ticket_count=open_ticket_count,
         previous_run=previous_run,
+        book_alignment=book_alignment,
     )
     paragraph_html = "".join(
         f'<p class="market-brief-copy">{html.escape(paragraph)}</p>'
@@ -82,6 +86,7 @@ def build_market_brief_report(
     headline: ActionHeadline,
     open_ticket_count: int,
     previous_run: BaselineRun | None = None,
+    book_alignment: BookAlignmentRun | None = None,
 ) -> MarketBriefReport:
     current_state = baseline_run.current_state
     trade_summary = _first_row(baseline_run.trade_decision.summary)
@@ -102,9 +107,10 @@ def build_market_brief_report(
     risk_budget = _format_decimal(trade_summary.get("risk_budget_multiplier", "n/a"))
     tone = _market_brief_tone(headline.level, current_state.risk_status)
     title = f"{current_state.market_date}: {risk_status} risk, {action}"
-    posture = _posture_sentence(trade_summary)
+    execution_position_plan = _execution_position_plan(baseline_run, book_alignment)
+    posture = _posture_sentence(trade_summary, book_alignment=book_alignment)
     driver_summary = _driver_summary(current_state.scenario_drivers)
-    trade_change = _trade_change_summary(baseline_run.trade_decision.position_plan)
+    trade_change = _trade_change_summary(execution_position_plan)
     watch_summary = _watch_summary(scenario_links, current_state.scenario_lattice)
     summary = (
         f"{risk_status} risk with {action}. {scenario_summary['sentence']} "
@@ -620,7 +626,23 @@ def _macro_pressure_count(macro_category_summary: pd.DataFrame) -> int:
     )
 
 
-def _posture_sentence(trade_summary: dict[str, object]) -> str:
+def _posture_sentence(
+    trade_summary: dict[str, object],
+    *,
+    book_alignment: BookAlignmentRun | None = None,
+) -> str:
+    book_summary = _book_summary_row(book_alignment)
+    if book_summary and bool(book_summary.get("has_executions", False)):
+        current_position = str(book_summary.get("current_position", "")).strip()
+        target_position = str(book_summary.get("target_position", "")).strip()
+        if current_position and target_position and current_position != target_position:
+            return (
+                f"The default paper book is currently {current_position}; "
+                f"latest target is {target_position}."
+            )
+        if target_position:
+            return f"The default paper book is already near the latest target: {target_position}."
+
     base_position = str(trade_summary.get("base_position", "")).strip()
     adjusted_position = str(trade_summary.get("scenario_adjusted_position", "")).strip()
     if base_position and adjusted_position and base_position != adjusted_position:
@@ -632,6 +654,21 @@ def _posture_sentence(trade_summary: dict[str, object]) -> str:
     return "The scenario layer is informing sizing before final risk constraints are applied."
 
 
+def _execution_position_plan(
+    baseline_run: BaselineRun,
+    book_alignment: BookAlignmentRun | None,
+) -> pd.DataFrame:
+    if book_alignment is not None and not book_alignment.position_plan.empty:
+        return book_alignment.position_plan
+    return baseline_run.trade_decision.position_plan
+
+
+def _book_summary_row(book_alignment: BookAlignmentRun | None) -> dict[str, object]:
+    if book_alignment is None or book_alignment.summary.empty:
+        return {}
+    return book_alignment.summary.iloc[0].to_dict()
+
+
 def _trade_change_summary(position_plan: pd.DataFrame) -> str:
     if position_plan.empty or "delta_weight" not in position_plan:
         return "No material position change is visible in the current position plan."
@@ -639,6 +676,10 @@ def _trade_change_summary(position_plan: pd.DataFrame) -> str:
     frame["abs_delta"] = pd.to_numeric(frame["delta_weight"], errors="coerce").abs()
     frame = frame.dropna(subset=["abs_delta"]).sort_values("abs_delta", ascending=False)
     frame = frame[frame["abs_delta"] > 0.005]
+    if "action" in frame:
+        actionable = frame["action"].astype(str).isin(["ADD", "REDUCE"])
+        material_hold = frame["abs_delta"] >= DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT
+        frame = frame[actionable | material_hold]
     if frame.empty:
         return "No material position change is visible in the current position plan."
     parts = []
