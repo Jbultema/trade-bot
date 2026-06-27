@@ -18,6 +18,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_JOURNAL_PATH,
     DEFAULT_MONITORING_TOP_N,
+    DEFAULT_RESET_EXPERIMENTS_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
 )
 from trade_bot.research.curation import add_research_status, select_curated_strategy_shelf
@@ -847,7 +848,7 @@ class TradingWarehouse:
         if not missing_names:
             return runtime_results
 
-        candidate_manifests = self.read_table("experiment_candidates")
+        candidate_manifests = self._candidate_manifests_for_strategy_names(missing_names)
         if candidate_manifests.empty or "strategy_json" not in candidate_manifests:
             return runtime_results
         manifest_rows = (
@@ -889,6 +890,31 @@ class TradingWarehouse:
                 drawdown_control=strategy.drawdown_control,
             )
         return runtime_results
+
+    def _candidate_manifests_for_strategy_names(self, strategy_names: list[str]) -> pd.DataFrame:
+        names = set(strategy_names)
+        if not names:
+            return pd.DataFrame()
+
+        frames = []
+        table = self.read_table("experiment_candidates")
+        if not table.empty and "strategy" in table and "strategy_json" in table:
+            warehouse_matches = table[table["strategy"].astype(str).isin(names)].copy()
+            if not warehouse_matches.empty:
+                frames.append(warehouse_matches)
+
+        found_names = (
+            set(pd.concat(frames, ignore_index=True)["strategy"].astype(str)) if frames else set()
+        )
+        missing_names = names - found_names
+        if missing_names:
+            artifact_matches = _load_candidate_manifests_from_artifacts(missing_names)
+            if not artifact_matches.empty:
+                frames.append(artifact_matches)
+
+        if not frames:
+            return pd.DataFrame()
+        return pd.concat(frames, ignore_index=True)
 
     def _window_valuations_before(self, window_id: str, valuation_date: str) -> pd.DataFrame:
         valuations = self.read_table("strategy_daily_valuations")
@@ -1330,6 +1356,40 @@ def _candidate_strategy_prices(
     if len(available_columns) != len(columns):
         return pd.DataFrame()
     return prices[available_columns].dropna(how="all")
+
+
+def _load_candidate_manifests_from_artifacts(strategy_names: set[str]) -> pd.DataFrame:
+    frames = []
+    for root in _candidate_manifest_roots():
+        if not root.exists():
+            continue
+        for path in sorted(root.glob("iteration_*/candidates.csv")):
+            try:
+                frame = pd.read_csv(path)
+            except (OSError, pd.errors.ParserError):
+                continue
+            if "strategy" not in frame:
+                continue
+            matches = frame[frame["strategy"].astype(str).isin(strategy_names)].copy()
+            if matches.empty:
+                continue
+            if "iteration" not in matches:
+                matches.insert(0, "iteration", _iteration_from_path(path))
+            if "source_path" not in matches:
+                matches.insert(1, "source_path", str(path))
+            frames.append(matches)
+    if not frames:
+        return pd.DataFrame()
+    return pd.concat(frames, ignore_index=True)
+
+
+def _candidate_manifest_roots() -> list[Path]:
+    roots = []
+    for root in (DEFAULT_EXPERIMENTS_DIR, DEFAULT_RESET_EXPERIMENTS_DIR):
+        path = Path(root)
+        if path not in roots:
+            roots.append(path)
+    return roots
 
 
 def _reference_candidate_mask(frame: pd.DataFrame) -> pd.Series:
