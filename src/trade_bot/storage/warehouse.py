@@ -21,8 +21,16 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RESET_EXPERIMENTS_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
 )
-from trade_bot.research.curation import add_research_status, select_curated_strategy_shelf
+from trade_bot.research.curation import (
+    add_research_status,
+    default_reference_mask,
+    select_curated_strategy_shelf,
+)
 from trade_bot.research.experiments import ScenarioSizingConfig, apply_scenario_position_sizing
+from trade_bot.research.operating_exposure import (
+    aggregate_beta_adjusted_spy_delta,
+    build_sleeve_exposure_table,
+)
 from trade_bot.research.validation import add_overfit_diagnostics
 from trade_bot.strategies.momentum import build_strategy_weights
 
@@ -243,7 +251,9 @@ class TradingWarehouse:
         if candidate_rows.empty:
             candidate_rows = candidate_pool if not candidate_pool.empty else ranked_strategies
         candidate_rows = _select_monitoring_rows(candidate_rows, top_n)
-        reference_rows = ranked_strategies[reference_mask]
+        reference_rows = ranked_strategies[
+            reference_mask & default_reference_mask(ranked_strategies)
+        ]
         if not reference_rows.empty:
             candidate_rows = (
                 pd.concat([candidate_rows, reference_rows], ignore_index=True)
@@ -574,6 +584,9 @@ class TradingWarehouse:
             "walk_forward_worst_cagr",
             "walk_forward_positive_rate",
             "left_tail_regime_return",
+            "research_status",
+            "prune_reason",
+            "operability_label",
         ]
         if not latest_scores.empty:
             merged = merged.merge(
@@ -639,9 +652,15 @@ class TradingWarehouse:
 
         candidate_statuses = {"operable", "promoted", "candidate", "evolve"}
         ranked = self._monitoring_seed_candidates(strategies)
-        candidates = ranked[ranked["status"].isin(candidate_statuses)].copy()
+        reference_mask = _reference_candidate_mask(ranked)
+        research_status = ranked.get("research_status", pd.Series("", index=ranked.index))
+        candidates = ranked[
+            ranked["status"].isin(candidate_statuses)
+            & ~reference_mask
+            & ~research_status.astype(str).eq("pruned_dead_end")
+        ].copy()
         if candidates.empty:
-            candidates = ranked.copy()
+            candidates = ranked[~reference_mask].copy()
         candidates = _select_monitoring_rows(candidates, limit).reset_index(drop=True)
         candidates.insert(0, "rank", range(1, len(candidates) + 1))
         return self._enrich_monitoring_candidates(candidates)
@@ -655,7 +674,7 @@ class TradingWarehouse:
             return pd.DataFrame()
 
         ranked = self._monitoring_seed_candidates(strategies)
-        reference_mask = _reference_candidate_mask(ranked)
+        reference_mask = _reference_candidate_mask(ranked) & default_reference_mask(ranked)
         references = ranked[reference_mask].copy()
         if references.empty:
             return pd.DataFrame()
@@ -799,6 +818,11 @@ class TradingWarehouse:
             cumulative_return = paper_equity / capital_base - 1.0
             benchmark_cumulative_return = benchmark_equity_value / capital_base - 1.0
             drawdown = _forward_drawdown(previous_valuations, paper_equity)
+            latest_weights = _latest_strategy_weights(result)
+            exposure_diagnostics = _latest_exposure_diagnostics(
+                getattr(baseline_run, "prices", pd.DataFrame()),
+                latest_weights,
+            )
             rows.append(
                 {
                     "valuation_id": f"{window['window_id']}:{valuation_date}",
@@ -825,6 +849,7 @@ class TradingWarehouse:
                         if benchmark_cumulative_return == benchmark_cumulative_return
                         else float("nan")
                     ),
+                    **exposure_diagnostics,
                     "notes": "Forward paper valuation compounded from monitoring-window start; first valuation starts at capital base.",
                 }
             )
@@ -1197,8 +1222,35 @@ class TradingWarehouse:
                 )
                 """
             )
+            self._ensure_table_columns(
+                connection,
+                "strategy_daily_valuations",
+                {
+                    "beta_adjusted_spy_delta": "DOUBLE",
+                    "stocks_percent_of_max_sleeve": "DOUBLE",
+                    "defensive_percent_of_max_sleeve": "DOUBLE",
+                    "gold_percent_of_max_sleeve": "DOUBLE",
+                    "crypto_percent_of_max_sleeve": "DOUBLE",
+                    "credit_percent_of_max_sleeve": "DOUBLE",
+                    "latest_weights_json": "VARCHAR",
+                },
+            )
         finally:
             connection.close()
+
+    @staticmethod
+    def _ensure_table_columns(
+        connection: duckdb.DuckDBPyConnection,
+        table_name: str,
+        column_specs: dict[str, str],
+    ) -> None:
+        existing = {
+            str(row[1])
+            for row in connection.execute(f"PRAGMA table_info('{table_name}')").fetchall()
+        }
+        for column, column_type in column_specs.items():
+            if column not in existing:
+                connection.execute(f"ALTER TABLE {table_name} ADD COLUMN {column} {column_type}")
 
     def _replace_table(self, table_name: str, frame: pd.DataFrame) -> None:
         connection = self._connect()
@@ -1215,14 +1267,27 @@ class TradingWarehouse:
             return
         connection = self._connect()
         try:
-            connection.register("upsert_frame", frame)
+            table_columns = [
+                str(row[1])
+                for row in connection.execute(f"PRAGMA table_info('{table_name}')").fetchall()
+            ]
+            upsert_frame = frame.copy()
+            for column in table_columns:
+                if column not in upsert_frame:
+                    upsert_frame[column] = None
+            upsert_frame = upsert_frame[table_columns]
+            quoted_columns = ", ".join(_quote_identifier(column) for column in table_columns)
+            connection.register("upsert_frame", upsert_frame)
             connection.execute(
                 f"""
                 DELETE FROM {table_name}
                 WHERE {key_column} IN (SELECT {key_column} FROM upsert_frame)
                 """
             )
-            connection.execute(f"INSERT INTO {table_name} SELECT * FROM upsert_frame")
+            connection.execute(
+                f"INSERT INTO {table_name} ({quoted_columns}) "
+                f"SELECT {quoted_columns} FROM upsert_frame"
+            )
         finally:
             connection.close()
 
@@ -1251,6 +1316,10 @@ def utc_now_iso() -> str:
 def _strategy_id(strategy_name: str) -> str:
     cleaned = "".join(character if character.isalnum() else "_" for character in strategy_name)
     return cleaned.strip("_").lower()[:96]
+
+
+def _quote_identifier(identifier: str) -> str:
+    return f'"{identifier.replace(chr(34), chr(34) * 2)}"'
 
 
 def _rank_strategy_rows(scorecards: pd.DataFrame) -> pd.DataFrame:
@@ -1469,6 +1538,43 @@ def _latest_net_exposure(result: Any) -> float:
     if weights.empty:
         return 0.0
     return float(weights.iloc[-1].sum())
+
+
+def _latest_strategy_weights(result: Any) -> pd.Series:
+    weights = getattr(result, "weights", pd.DataFrame())
+    if weights.empty:
+        return pd.Series(dtype=float)
+    latest = pd.to_numeric(weights.iloc[-1], errors="coerce").fillna(0.0)
+    return latest[latest.abs() > 1e-8].astype(float)
+
+
+def _latest_exposure_diagnostics(prices: pd.DataFrame, weights: pd.Series) -> dict[str, object]:
+    if weights.empty:
+        return {
+            "beta_adjusted_spy_delta": float("nan"),
+            "stocks_percent_of_max_sleeve": float("nan"),
+            "defensive_percent_of_max_sleeve": float("nan"),
+            "gold_percent_of_max_sleeve": float("nan"),
+            "crypto_percent_of_max_sleeve": float("nan"),
+            "credit_percent_of_max_sleeve": float("nan"),
+            "latest_weights_json": "{}",
+        }
+    sleeve_exposure = build_sleeve_exposure_table(weights, prices)
+    diagnostics = {
+        "beta_adjusted_spy_delta": aggregate_beta_adjusted_spy_delta(prices, weights),
+        "latest_weights_json": json.dumps(
+            {str(ticker): float(weight) for ticker, weight in weights.sort_index().items()},
+            sort_keys=True,
+        ),
+    }
+    for sleeve in ("stocks", "defensive", "gold", "crypto", "credit"):
+        sleeve_row = sleeve_exposure[sleeve_exposure["sleeve"].astype(str) == sleeve]
+        diagnostics[f"{sleeve}_percent_of_max_sleeve"] = (
+            float(sleeve_row["percent_of_max_sleeve"].iloc[0])
+            if not sleeve_row.empty
+            else float("nan")
+        )
+    return diagnostics
 
 
 def _forward_status(row: pd.Series) -> str:

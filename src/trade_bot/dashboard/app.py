@@ -5,12 +5,7 @@ from pathlib import Path
 import streamlit as st
 
 from trade_bot.config import load_config
-from trade_bot.dashboard.book_alignment import _render_book_alignment
-from trade_bot.dashboard.briefs import _render_decision_brief, _render_operating_brief
-from trade_bot.dashboard.components import (
-    _render_action_headline,
-    _render_metric_guide,
-)
+from trade_bot.dashboard.components import _render_metric_guide
 from trade_bot.dashboard.loaders import (
     load_experiment_dashboard_frames,
     load_live_run,
@@ -18,12 +13,19 @@ from trade_bot.dashboard.loaders import (
     load_snapshot_dashboard_run,
     load_snapshot_jobs_frame,
 )
-from trade_bot.dashboard.market_brief import _render_market_brief
+from trade_bot.dashboard.navigation import (
+    render_dashboard_workbench_selector,
+    render_selected_section_guide,
+)
+from trade_bot.dashboard.overview import (
+    execution_book_alignment_or_none,
+    headline_position_plan,
+    render_operating_overview,
+)
 from trade_bot.dashboard.sections import _render_dashboard_section
 from trade_bot.dashboard.styles import _install_dashboard_styles
 from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
-    DEFAULT_DASHBOARD_SECTIONS,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_FORWARD_TEST_ACCOUNT,
@@ -227,35 +229,16 @@ default_book_alignment = build_book_alignment(
         default=10_000.0,
     ),
 )
-default_book_has_executions = (
-    not default_book_alignment.summary.empty
-    and bool(default_book_alignment.summary.iloc[0].get("has_executions", False))
-)
-execution_book_alignment = default_book_alignment if default_book_has_executions else None
-headline_position_plan = (
-    default_book_alignment.position_plan
-    if default_book_has_executions
-    else baseline_run.trade_decision.position_plan
-)
+execution_book_alignment = execution_book_alignment_or_none(default_book_alignment)
 action_headline = build_action_headline(
     current_state=baseline_run.current_state,
     trade_decision=baseline_run.trade_decision,
     news_monitor=baseline_run.news_monitor,
     open_ticket_count=len(headline_open_tickets),
-    position_plan=headline_position_plan,
-)
-_render_market_brief(
-    baseline_run=baseline_run,
-    headline=action_headline,
-    open_ticket_count=len(headline_open_tickets),
-    previous_run=previous_baseline_run,
-    book_alignment=execution_book_alignment,
-)
-_render_action_headline(action_headline)
-_render_book_alignment(
-    default_book_alignment,
-    heading="Default Paper Book Alignment",
-    show_position_plan=False,
+    position_plan=headline_position_plan(
+        baseline_run=baseline_run,
+        default_book_alignment=default_book_alignment,
+    ),
 )
 (
     experiment_scorecards,
@@ -264,39 +247,17 @@ _render_book_alignment(
     experiment_candidates,
     decision_sanity_impacts,
 ) = load_experiment_dashboard_frames()
-_render_operating_brief(
-    baseline_run=baseline_run,
-    headline=action_headline,
-    book_alignment=execution_book_alignment,
-)
-_render_decision_brief(
+render_operating_overview(
     baseline_run=baseline_run,
     headline=action_headline,
     open_ticket_count=len(headline_open_tickets),
     experiment_scorecards=experiment_scorecards,
+    default_book_alignment=default_book_alignment,
+    previous_run=previous_baseline_run,
+    execution_book_alignment=execution_book_alignment,
 )
-st.markdown(
-    """
-    <div class="dashboard-section-header">
-        <p class="dashboard-section-kicker">Dashboard Drilldown</p>
-        <div class="dashboard-primary-nav-label">Insight Sections</div>
-        <p class="dashboard-nav-caption">
-            Choose the detailed workbench below. The selected section renders immediately under this control.
-        </p>
-    </div>
-    """,
-    unsafe_allow_html=True,
-)
-selected_section = st.pills(
-    "Dashboard section",
-    DEFAULT_DASHBOARD_SECTIONS,
-    selection_mode="single",
-    default="Command Center",
-    label_visibility="collapsed",
-    key="dashboard_section",
-    width="stretch",
-)
-selected_section = selected_section or "Command Center"
+selected_section = render_dashboard_workbench_selector()
+render_selected_section_guide(selected_section)
 st.markdown(
     '<div class="dashboard-workbench-divider" aria-hidden="true"></div>',
     unsafe_allow_html=True,

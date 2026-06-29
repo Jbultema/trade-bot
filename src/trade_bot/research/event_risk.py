@@ -35,6 +35,7 @@ class MarketEvent:
     phase: NewsPhase = "phase_uncertain"
     phase_reason: str = ""
     confirmation_window: str = ""
+    sizing_authority: bool = True
 
 
 @dataclass(frozen=True)
@@ -146,6 +147,18 @@ def classify_news_text(text: str) -> NewsEventClassification:
             "revenue",
             "cash flow",
         ),
+    ) and not _contains_any(
+        normalized,
+        (
+            "hyperscaler",
+            "hyperscalers",
+            "microsoft",
+            "amazon",
+            "google",
+            "alphabet",
+            "meta",
+            "oracle",
+        ),
     ):
         return NewsEventClassification(
             category="ai_unit_economics",
@@ -177,6 +190,118 @@ def classify_news_text(text: str) -> NewsEventClassification:
             tradable_question=(
                 "Is AI demand still funding profitable capex, or are AI losses starting to "
                 "pressure hyperscaler margins, semis leadership, and market concentration?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_any(
+        normalized,
+        (
+            "hyperscaler",
+            "hyperscalers",
+            "microsoft",
+            "amazon",
+            "google",
+            "alphabet",
+            "meta",
+            "oracle",
+            "cloud",
+            "data center",
+            "datacenter",
+        ),
+    ) and _contains_any(
+        normalized,
+        (
+            "capex",
+            "capital expenditure",
+            "free cash flow",
+            "fcf",
+            "depreciation",
+            "margin pressure",
+            "debt issuance",
+            "cash burn",
+            "spending cliff",
+        ),
+    ):
+        return NewsEventClassification(
+            category="hyperscaler_capex_fcf",
+            direction="escalation",
+            confidence=0.80,
+            risk_channels=(
+                "ai_capex",
+                "hyperscaler_margins",
+                "free_cash_flow",
+                "depreciation",
+                "market_concentration",
+            ),
+            candidate_proxies=(
+                "QQQ",
+                "XLK",
+                "IGV",
+                "MSFT",
+                "AMZN",
+                "GOOGL",
+                "META",
+                "SMH",
+                "SOXX",
+                "HYG",
+                "VIXY",
+            ),
+            tradable_question=(
+                "Is the AI capex cycle still being funded by durable free cash flow, or is "
+                "hyperscaler spending starting to pressure margins, credit, and concentration?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_any(
+        normalized,
+        (
+            "memory",
+            "dram",
+            "hbm",
+            "chip shortage",
+            "semiconductor shortage",
+            "gpu shortage",
+            "power shortage",
+            "electricity price",
+            "device price",
+            "iphone price",
+            "consumer electronics",
+        ),
+    ) and _contains_any(
+        normalized,
+        (
+            "ai",
+            "data center",
+            "datacenter",
+            "inflation",
+            "price hike",
+            "shortage",
+            "cost",
+            "supply constraint",
+            "capacity constraint",
+        ),
+    ):
+        return NewsEventClassification(
+            category="ai_capex_inflation",
+            direction="escalation",
+            confidence=0.72,
+            risk_channels=(
+                "ai_capex",
+                "inflation",
+                "semiconductor_demand",
+                "power_demand",
+                "consumer_prices",
+            ),
+            candidate_proxies=("MU", "SMH", "SOXX", "AAPL", "XLK", "TIP", "TLT", "UUP", "VIXY"),
+            tradable_question=(
+                "Is AI infrastructure demand becoming an inflation channel through chips, "
+                "power, or consumer-device pricing?"
             ),
             phase=phase,
             phase_reason=phase_reason,
@@ -247,6 +372,47 @@ def classify_news_text(text: str) -> NewsEventClassification:
             tradable_question=(
                 "Is AI infrastructure buildout still expanding profitably, or are power, "
                 "chip supply, and capex constraints becoming a market risk?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_any(
+        normalized,
+        (
+            "ipo",
+            "initial public offering",
+            "lockup",
+            "lock-up",
+            "secondary offering",
+            "share sale",
+            "convertible",
+            "public float",
+            "index inclusion",
+            "index add",
+            "equity supply",
+            "stock offering",
+        ),
+    ):
+        supply_direction: EventDirection = "escalation"
+        if _contains_any(normalized, ("withdrawn", "delayed", "postponed", "cancelled")):
+            supply_direction = "deescalation"
+        return NewsEventClassification(
+            category="equity_supply",
+            direction=supply_direction,
+            confidence=0.66,
+            risk_channels=(
+                "equity_supply",
+                "market_plumbing",
+                "liquidity",
+                "risk_appetite",
+                "concentration",
+            ),
+            candidate_proxies=("SPY", "QQQ", "RSP", "IWM", "ARKK", "VIXY", "HYG", "LQD"),
+            tradable_question=(
+                "Is new equity supply, lockup pressure, or index-flow absorption becoming "
+                "large enough to affect risk appetite or crowded leadership?"
             ),
             phase=phase,
             phase_reason=phase_reason,
@@ -764,6 +930,7 @@ def build_scenario_playbook(events: tuple[MarketEvent, ...]) -> pd.DataFrame:
                     "event_name": event.name,
                     "event_date": str(event.date.date()),
                     "current_event": event.current,
+                    "sizing_authority": event.sizing_authority,
                     "event_phase": event.phase,
                     "phase_reason": event.phase_reason,
                     "confirmation_window": event.confirmation_window,
@@ -922,6 +1089,7 @@ def _market_event_from_mapping(raw: dict[str, Any]) -> MarketEvent:
         phase=_phase(raw.get("phase", inferred_phase)),
         phase_reason=str(raw.get("phase_reason", inferred_phase_reason)),
         confirmation_window=str(raw.get("confirmation_window", inferred_confirmation_window)),
+        sizing_authority=bool(raw.get("sizing_authority", True)),
     )
 
 
@@ -954,6 +1122,7 @@ def _event_fields(event: MarketEvent) -> dict[str, object]:
         "category": event.category,
         "direction": event.direction,
         "current_event": event.current,
+        "sizing_authority": event.sizing_authority,
         "event_phase": event.phase,
         "phase_reason": event.phase_reason,
         "confirmation_window": event.confirmation_window,
@@ -1085,6 +1254,50 @@ def _scenario_templates(category: str, direction: EventDirection) -> tuple[dict[
             },
         )
 
+    if category == "hyperscaler_capex_fcf":
+        return (
+            {
+                "scenario": "Capex burden stays manageable",
+                "confirmation": "MSFT/AMZN/GOOGL/META stabilize versus SPY while credit and QQQ/RSP hold.",
+                "risk_posture": "Keep AI exposure diversified; do not overreact if platform cash-flow pressure stays contained.",
+                "off_ramp": "Reduce concentrated growth if platform weakness spreads into QQQ, IGV, and credit.",
+            },
+            {
+                "scenario": "Free-cash-flow cliff reprices platforms",
+                "confirmation": "Hyperscalers lag, IGV weakens, SMH leadership narrows, and HYG/LQD deteriorates.",
+                "risk_posture": "Favor broad or supplier/industrial rotation over mega-cap platform concentration.",
+                "off_ramp": "Avoid re-adding platform beta until price and earnings-revision pressure stabilize.",
+            },
+            {
+                "scenario": "Supplier boom masks customer stress",
+                "confirmation": "SMH/SOXX lead while platform owners and software underperform.",
+                "risk_posture": "Keep supplier exposure capped and require breadth confirmation before increasing total risk.",
+                "off_ramp": "Cut supplier beta if the customer-stress narrative starts pulling semis lower too.",
+            },
+        )
+
+    if category == "ai_capex_inflation":
+        return (
+            {
+                "scenario": "AI inflation channel stays localized",
+                "confirmation": "TIP/IEF remains contained and consumer/device inflation does not broaden.",
+                "risk_posture": "Treat the item as a watch signal; do not cut risk without market confirmation.",
+                "off_ramp": "Reduce duration-sensitive growth if rates, dollar, and inflation proxies confirm together.",
+            },
+            {
+                "scenario": "AI buildout becomes inflationary",
+                "confirmation": "Memory/power costs rise, TIP beats IEF, TLT weakens, and QQQ breadth narrows.",
+                "risk_posture": "Cap AI and long-duration growth exposure; prefer diversified or inflation-resistant sleeves.",
+                "off_ramp": "Stay smaller until rates and inflation proxies stop pressuring risk assets.",
+            },
+            {
+                "scenario": "Consumer backlash / demand hit",
+                "confirmation": "Consumer discretionary or device/platform names weaken despite AI supplier strength.",
+                "risk_posture": "Avoid assuming AI supplier strength is automatically broad-market bullish.",
+                "off_ramp": "Shift toward broad/factor rotation only if breadth confirms outside the AI chain.",
+            },
+        )
+
     if category == "ai_infrastructure":
         return (
             {
@@ -1104,6 +1317,28 @@ def _scenario_templates(category: str, direction: EventDirection) -> tuple[dict[
                 "confirmation": "Power, grid, and industrial names outperform while mega-cap AI concentration cools.",
                 "risk_posture": "Favor diversified broad-market or infrastructure proxies over single-name AI beta.",
                 "off_ramp": "Reverse if the rotation becomes defensive and credit weakens.",
+            },
+        )
+
+    if category == "equity_supply":
+        return (
+            {
+                "scenario": "Supply absorbed cleanly",
+                "confirmation": "New issuance, IPOs, or index adds occur without weak breadth or credit pressure.",
+                "risk_posture": "No automatic de-risking; watch whether demand absorbs the new float.",
+                "off_ramp": "Reduce risk if supply arrives while market breadth and liquidity weaken.",
+            },
+            {
+                "scenario": "Equity supply pressures crowded winners",
+                "confirmation": "IPO/lockup/secondary supply coincides with QQQ/RSP, ARKK, and high-beta weakness.",
+                "risk_posture": "Reduce crowded growth exposure and prefer cash or broader factor baskets.",
+                "off_ramp": "Re-risk only if supply is digested and leadership broadens.",
+            },
+            {
+                "scenario": "Speculative window stays open",
+                "confirmation": "IPO demand remains strong and high-beta breadth expands without credit stress.",
+                "risk_posture": "Allow risk-on candidates to compete, but keep concentration and drawdown controls active.",
+                "off_ramp": "Cut exposure if failed IPOs or weak follow-ons signal risk appetite is fading.",
             },
         )
 

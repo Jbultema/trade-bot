@@ -122,6 +122,7 @@ def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:
     assert "no prior snapshot" in report.paragraphs[1].lower()
     assert "Daily delta" in report.paragraphs[1]
     assert "Still true: the driver stack" in report.paragraphs[2]
+    assert "explainer/research-only" in report.paragraphs[2]
     assert "Action read-through" in report.paragraphs[3]
     assert "What would change this" in report.paragraphs[3]
     assert [card.label for card in report.daily_delta_cards] == [
@@ -132,6 +133,7 @@ def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:
         "Market State",
         "Change Since Prior",
         "News / Events",
+        "Cross-Source Signals",
         "Regime Pulse",
         "Instability",
         "Scenario Map",
@@ -140,6 +142,8 @@ def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:
     ]
     scenario_card = next(card for card in report.cards if card.label == "Scenario Map")
     assert "Choppy factor rotation" in scenario_card.detail
+    cross_source_card = next(card for card in report.cards if card.label == "Cross-Source Signals")
+    assert "no direct sizing authority" in cross_source_card.detail
     assert set(report.detail_rows["topic"]) >= {
         "market_state",
         "scenario_map",
@@ -149,6 +153,9 @@ def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:
         "regime_pulse",
         "risk_budget",
     }
+    role_lookup = report.detail_rows.set_index("topic")["model_role"].to_dict()
+    assert role_lookup["risk_budget"] == "allocation_driver"
+    assert role_lookup["cross_source_signals"] == "explainer_research_only"
 
 
 def test_market_brief_report_compares_current_run_to_prior_snapshot() -> None:

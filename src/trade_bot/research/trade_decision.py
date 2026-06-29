@@ -255,8 +255,9 @@ def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
 
 def _event_context(events: tuple[MarketEvent, ...]) -> dict[str, object]:
     current_events = [event for event in events if event.current]
-    escalation_events = [event for event in current_events if event.direction == "escalation"]
-    uncertain_events = [event for event in current_events if event.direction == "uncertain"]
+    sizing_events = [event for event in current_events if event.sizing_authority]
+    escalation_events = [event for event in sizing_events if event.direction == "escalation"]
+    uncertain_events = [event for event in sizing_events if event.direction == "uncertain"]
     leading_events = [event for event in escalation_events if event.phase == "leading_warning"]
     event_pressure = min(
         0.25,
@@ -269,6 +270,7 @@ def _event_context(events: tuple[MarketEvent, ...]) -> dict[str, object]:
         sorted(
             current_events,
             key=lambda event: (
+                not event.sizing_authority,
                 event.direction != "escalation",
                 event.phase != "leading_warning",
                 event.date,
@@ -276,13 +278,18 @@ def _event_context(events: tuple[MarketEvent, ...]) -> dict[str, object]:
         )[:5]
     )
     evidence = "; ".join(
-        f"{event.name} ({event.category}, {event.direction}, {event.phase})"
+        (
+            f"{event.name} ({event.category}, {event.direction}, {event.phase}, "
+            f"{'sizing' if event.sizing_authority else 'watch-only'})"
+        )
         for event in material_events
     )
     return {
         "risk_multiplier": risk_multiplier,
         "event_pressure": event_pressure,
         "current_event_count": len(current_events),
+        "sizing_event_count": len(sizing_events),
+        "watch_only_event_count": len(current_events) - len(sizing_events),
         "escalation_event_count": len(escalation_events),
         "leading_event_count": len(leading_events),
         "material_events": material_events,

@@ -1,6 +1,6 @@
 # Macro Coverage Gap And Data Roadmap
 
-Status: maintained capability-gap map. Last reviewed: 2026-06-21.
+Status: maintained capability-gap map. Last reviewed: 2026-06-29.
 
 This project is not trying to clone any commercial macro product. The useful target is functional
 parity with the operating pattern: macro regime, positioning, market signal,
@@ -31,6 +31,61 @@ backtests, walk-forward checks, and paper-monitoring review.
   - crowded upside and washed-out re-entry states
 - Dashboard surface:
   - News & Macro now shows cycle, asset, Growth-Inflation Map, and positioning tables.
+- Cross-Source Insight Diagnostics:
+  - AI supplier / hyperscaler divergence.
+  - Hyperscaler capex / free-cash-flow pressure.
+  - AI capex inflation pass-through.
+  - Concentration versus broadening.
+  - Oil / inflation shock.
+  - Private-credit / liquidity stress.
+  - Fed-put / policy uncertainty.
+  - Speculative leverage proxy.
+  - IPO / equity-supply pressure.
+  - Positive catalyst absorption.
+  - International chip concentration.
+  - Sector valuation / policy proxy.
+  - Easy-bubble versus hard risk-off.
+
+## Data-Support Discipline
+
+The source-informed diagnostic layer exists because investor commentary can point
+to useful questions before they become obvious in broad indexes. It is not a
+license to invent precision. Each diagnostic row carries a `data_support` label:
+
+- `direct`: the project has a reasonably direct public-data measure.
+- `proxy`: the project has a tradable public-market proxy that can be tested.
+- `thin_proxy`: the project has only partial public-market or news-derived
+  evidence. These rows can guide research, but they should not directly drive
+  trade sizing until the proxy improves backtests or paper monitoring.
+- `unsupported_watchlist`: the idea is potentially important, but the project
+  lacks the institutional feed needed to measure it. These rows are explicitly
+  non-trading rows.
+
+The dashboard should surface these labels so a future user or agent can tell the
+difference between "the bot sees this in the data" and "a smart external source
+raised this, but we do not have the data to verify it."
+
+## Promotion Standard For New Diagnostics
+
+Cross-source diagnostics start as explainers. They are allowed to shape research
+questions and dashboard interpretation, but they should not change portfolio
+weights until they pass a promotion test. A diagnostic can become an allocation
+input only after a dedicated experiment answers these questions:
+
+1. Does adding the signal improve the target objective versus a matched strategy
+   without the signal?
+2. Does the improvement survive walk-forward windows, drawdown regimes,
+   transition regimes, transaction costs, and turnover/churn checks?
+3. Does the signal improve at least one economically meaningful outcome such as
+   CAGR, max drawdown, Calmar, re-entry timing, left-tail regime loss, or
+   paper-monitoring drift?
+4. Does the signal have enough historical availability to avoid post-hoc
+   narrative fitting?
+5. Is the signal independent enough to add information beyond trend, credit,
+   volatility, breadth, macro pressure, and existing event-risk inputs?
+
+Until those tests pass, the UI should label the diagnostic as
+`explainer_research_only` with `no_direct_sizing_authority`.
 
 ## Remaining Gaps
 
@@ -49,6 +104,15 @@ backtests, walk-forward checks, and paper-monitoring review.
 - IPO calendar and post-IPO performance monitoring for large market-structure
   events.
 - Source-quality scoring for news/event inputs.
+- Direct hyperscaler capex, free-cash-flow, depreciation, order-book, and
+  consensus-revision feeds.
+- Dealer gamma, CTA exposure, option-flow, short-interest, and margin-debt data
+  with useful timeliness.
+- Bloomberg-style sector, country, and constituent-contribution monitors.
+- Reliable IPO, lockup, secondary-offering, convertible-issuance, and free-float
+  calendars.
+- Private-credit fund marks, redemption queues, covenant-level loan data, and
+  dealer balance-sheet measures.
 
 ## Intended Use
 
@@ -59,3 +123,14 @@ It should answer four operating questions:
 2. Are positioning and crowding making the same trade fragile?
 3. Is the likely growth-inflation regime changing?
 4. Should the risk engine cut, hold, or re-risk exposure?
+
+The cross-source diagnostic layer should answer a separate set of questions:
+
+1. Which recurring external-source themes are currently supported by our public
+   data proxies?
+2. Which themes are only weakly proxied and therefore useful mainly for research
+   design?
+3. Which themes require paid or unavailable data and must stay out of trade
+   sizing?
+4. Are multiple source-informed pressures pointing in the same direction, or are
+   they contradictory?

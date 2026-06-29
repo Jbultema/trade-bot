@@ -35,6 +35,7 @@ DEFAULT_REPORT_PATH = Path("reports/baseline_report.html")
 DEFAULT_EXPERIMENTS_DIR = Path("reports/experiments")
 DEFAULT_RESET_EXPERIMENTS_DIR = Path("data/experiments_reset_v2")
 DEFAULT_ML_DIAGNOSTICS_DIR = Path("data/ml_diagnostics/latest")
+DEFAULT_SIGNAL_EVIDENCE_DIR = Path("reports/signal_evidence")
 DEFAULT_JOURNAL_PATH = Path("data/trading_journal.sqlite")
 DEFAULT_RUN_STORE_DB_PATH = Path("data/run_store/trade_bot.duckdb")
 DEFAULT_RUN_STORE_ARTIFACT_DIR = Path("data/run_store/snapshots")
@@ -43,6 +44,23 @@ DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS = 15
 DEFAULT_MONITORING_TOP_N = 5
 DEFAULT_EXPERIMENT_REGISTRY_LIMIT = 500
 DEFAULT_CURATED_SHELF_LIMIT = 25
+DEFAULT_REFERENCE_BASELINE_STRATEGIES = frozenset(
+    {
+        "buy_hold_spy",
+        "buy_hold_qqq",
+        "buy_hold_bil",
+        "buy_hold_cash",
+        "cash",
+        "bil",
+        "i41_ref_us_60_40",
+        "i41_ref_global_risk_sleeves",
+    }
+)
+DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES = (
+    "operational_candidate",
+    "needs_iteration",
+    "reference",
+)
 DEFAULT_DASHBOARD_SECTIONS = (
     "Command Center",
     "Risk & Scenarios",
@@ -66,7 +84,7 @@ DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT = 0.02
 # Tax-aware account modeling defaults. These are configurable research
 # assumptions, not tax advice. User-specific rates belong in local config, and
 # broker-reported lots should be reconciled before real taxable decisions.
-DEFAULT_TAX_ACCOUNT_TYPE = "taxable"
+DEFAULT_TAX_ACCOUNT_TYPE = "ira"
 DEFAULT_TAX_FEDERAL_SHORT_TERM_RATE = 0.24
 DEFAULT_TAX_FEDERAL_LONG_TERM_RATE = 0.15
 DEFAULT_TAX_STATE_SHORT_TERM_RATE = 0.0
@@ -83,6 +101,8 @@ DEFAULT_TAX_WASH_SALE_ENFORCEMENT = "warn"
 DEFAULT_TAX_MIN_LOSS_HARVEST_AMOUNT = 250.0
 DEFAULT_TAX_MIN_LOSS_HARVEST_PCT = 0.05
 DEFAULT_TAX_HARVEST_COOLDOWN_DAYS = 31
+DEFAULT_TAX_LOT_QUANTITY_EPSILON = 1e-8
+DEFAULT_TAX_BACKTEST_MIN_RECONSTRUCTED_QUANTITY = 1e-6
 
 
 # Market data loading defaults.
@@ -527,6 +547,249 @@ DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD = 0.25
 DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS = 2
 DEFAULT_EVENT_CONFIRMATION_THEMES = ("credit", "volatility", "breadth", "trend")
 
+# Narrative signal defaults. These research-only diagnostics turn recurring
+# investor/commentary themes into visible signals that can be backtested before
+# they are allowed to affect sizing directly.
+DEFAULT_NARRATIVE_SIGNAL_WARNING_SCORE = 0.45
+DEFAULT_NARRATIVE_SIGNAL_ACTIVE_SCORE = 0.70
+DEFAULT_NARRATIVE_SIGNAL_NEWS_URGENCY_THRESHOLD = 0.70
+DEFAULT_NARRATIVE_SIGNAL_RELATIVE_STRENGTH_THRESHOLD = 0.05
+DEFAULT_NARRATIVE_SIGNAL_STRONG_RELATIVE_STRENGTH = 0.15
+DEFAULT_NARRATIVE_SIGNAL_ABSORPTION_LOOKBACK_DAYS = 5
+DEFAULT_NARRATIVE_SIGNAL_MEDIUM_LOOKBACK_DAYS = 21
+DEFAULT_NARRATIVE_SIGNAL_LONG_LOOKBACK_DAYS = 63
+DEFAULT_NARRATIVE_SIGNAL_DECISION_ROLE = "explainer_research_only"
+DEFAULT_NARRATIVE_SIGNAL_MODEL_AUTHORITY = "no_direct_sizing_authority"
+DEFAULT_NARRATIVE_SIGNAL_PROMOTION_REQUIREMENT = (
+    "Must pass ablation, walk-forward, regime, churn, and paper-monitoring tests "
+    "before it can affect allocation sizing."
+)
+DEFAULT_NARRATIVE_OPERATING_DATA_SUPPORT = ("direct", "proxy")
+DEFAULT_NARRATIVE_RESEARCH_ONLY_DATA_SUPPORT = ("thin_proxy",)
+DEFAULT_NARRATIVE_UNSUPPORTED_DATA_SUPPORT = ("unsupported_watchlist",)
+DEFAULT_NARRATIVE_HYPERSCALER_TICKERS = (
+    "AAPL",
+    "MSFT",
+    "AMZN",
+    "GOOGL",
+    "META",
+    "ORCL",
+    "QQQ",
+    "IGV",
+)
+DEFAULT_NARRATIVE_AI_SUPPLIER_TICKERS = (
+    "SMH",
+    "SOXX",
+    "MU",
+    "NVDA",
+    "AMD",
+    "AVGO",
+    "VRT",
+    "ETN",
+    "GEV",
+)
+DEFAULT_NARRATIVE_AI_INFRASTRUCTURE_TICKERS = ("VRT", "ETN", "PWR", "CEG", "GEV", "NRG")
+DEFAULT_NARRATIVE_GLOBAL_CHIP_TICKERS = ("TSM", "ASML", "SMH", "SOXX", "MU")
+DEFAULT_NARRATIVE_SPECULATIVE_TICKERS = ("ARKK", "SPHB", "IWM", "IBIT", "VIXY")
+DEFAULT_NARRATIVE_DEFENSIVE_CONFIRMATION_TICKERS = ("HYG", "LQD", "VIXY", "UUP", "TLT")
+
+# Driver-rotation dashboard defaults. This view separates proven historical
+# relevance from what is currently firing so unproven narrative context remains
+# visible without silently becoming an allocation input.
+DEFAULT_DRIVER_ROTATION_ML_FAMILY_IMPORTANCE_PATH = (
+    DEFAULT_ML_DIAGNOSTICS_DIR / "family_importance.csv"
+)
+DEFAULT_DRIVER_ROTATION_ACTIVE_THRESHOLD = 0.45
+DEFAULT_DRIVER_ROTATION_PROVEN_THRESHOLD = 0.45
+DEFAULT_DRIVER_ROTATION_EMERGING_DELTA_THRESHOLD = 0.20
+DEFAULT_DRIVER_ROTATION_FADING_DELTA_THRESHOLD = -0.20
+DEFAULT_DRIVER_ROTATION_SHORT_LOOKBACK_DAYS = 30
+DEFAULT_DRIVER_ROTATION_LONG_LOOKBACK_DAYS = 90
+DEFAULT_DRIVER_ROTATION_FALLBACK_RELEVANCE = {
+    "credit": 0.72,
+    "volatility": 0.72,
+    "breadth": 0.68,
+    "trend": 0.68,
+    "ai_leadership": 0.60,
+    "commodities": 0.58,
+    "duration_rates": 0.55,
+    "dollar_liquidity": 0.52,
+    "drawdown": 0.50,
+    "concentration": 0.45,
+    "positioning": 0.38,
+    "regime_instability": 0.35,
+    "private_credit": 0.32,
+    "ai_capex": 0.30,
+    "equity_supply": 0.22,
+}
+DEFAULT_DRIVER_ROTATION_PRICE_PROXY_SPECS = (
+    ("trend", "Broad equity trend", "SPY", None, 63, 0.12),
+    ("ai_leadership", "AI / semis leadership", "SMH", "SPY", 63, 0.15),
+    ("ai_leadership", "Nasdaq leadership", "QQQ", "RSP", 63, 0.12),
+    ("breadth", "Equal weight breadth", "RSP", "SPY", 63, 0.08),
+    ("breadth", "Small-cap breadth", "IWM", "SPY", 63, 0.10),
+    ("credit", "Credit appetite", "HYG", "LQD", 63, 0.06),
+    ("volatility", "Volatility pressure", "VIXY", None, 21, 0.25),
+    ("dollar_liquidity", "Dollar pressure", "UUP", None, 63, 0.08),
+    ("duration_rates", "Duration pressure", "TLT", "IEF", 63, 0.10),
+    ("commodities", "Broad commodities", "DBC", "SPY", 63, 0.12),
+    ("commodities", "Oil pressure", "USO", "SPY", 63, 0.18),
+    ("concentration", "Concentration pressure", "QQQ", "RSP", 63, 0.12),
+    ("positioning", "Speculative risk appetite", "ARKK", "SPY", 63, 0.18),
+)
+DEFAULT_DRIVER_ROTATION_CONFIRMATION_THEME_MAP = {
+    "ai_beta": "ai_leadership",
+    "broad_market": "trend",
+    "concentration": "concentration",
+    "credit": "credit",
+    "defensive": "duration_rates",
+    "growth_inflation": "commodities",
+    "liquidity": "dollar_liquidity",
+    "market_risk": "trend",
+    "style_rotation": "breadth",
+    "volatility": "volatility",
+}
+DEFAULT_DRIVER_ROTATION_MACRO_CATEGORY_MAP = {
+    "commodities": "commodities",
+    "consumer": "trend",
+    "consumer_credit": "credit",
+    "corporate_yields": "credit",
+    "credit_spreads": "credit",
+    "dollar_fx": "dollar_liquidity",
+    "financial_conditions": "dollar_liquidity",
+    "inflation_realized": "commodities",
+    "liquidity": "dollar_liquidity",
+    "monetary_policy": "duration_rates",
+    "rates": "duration_rates",
+    "sentiment": "positioning",
+    "wages": "commodities",
+}
+DEFAULT_DRIVER_ROTATION_NARRATIVE_SIGNAL_MAP = {
+    "ai_capex_inflation_pass_through": "ai_capex",
+    "ai_supplier_hyperscaler_divergence": "ai_leadership",
+    "concentration_vs_broadening": "concentration",
+    "easy_bubble_vs_hard_risk_off": "regime_instability",
+    "hyperscaler_capex_fcf_pressure": "ai_capex",
+    "international_chip_concentration": "ai_leadership",
+    "ipo_equity_supply_pressure": "equity_supply",
+    "oil_inflation_shock": "commodities",
+    "paid_or_unavailable_data_watchlist": "unsupported_watchlist",
+    "policy_put_uncertainty": "duration_rates",
+    "positive_catalyst_absorption": "ai_leadership",
+    "private_credit_liquidity": "private_credit",
+    "sector_valuation_policy_proxy": "positioning",
+    "speculative_leverage_proxy": "positioning",
+}
+DEFAULT_DRIVER_ROTATION_NEWS_CATEGORY_MAP = {
+    "ai_infrastructure": "ai_capex",
+    "ai_unit_economics": "ai_capex",
+    "earnings_revision": "trend",
+    "energy_supply": "commodities",
+    "fiscal_policy": "duration_rates",
+    "macro_release": "duration_rates",
+    "market_plumbing": "volatility",
+    "monetary_policy": "duration_rates",
+    "oil": "commodities",
+    "private_credit": "private_credit",
+    "retail_sentiment": "positioning",
+}
+
+# Signal-family evidence defaults. These support marginal-contribution tests:
+# does a signal family improve growth, drawdown, re-entry, or churn after the
+# strategy's normal execution-cost assumptions?
+DEFAULT_SIGNAL_EVIDENCE_MIN_PAIRED_TESTS = 3
+DEFAULT_SIGNAL_EVIDENCE_PROMISING_SCORE = 0.55
+DEFAULT_SIGNAL_EVIDENCE_PROVEN_SCORE = 0.65
+DEFAULT_SIGNAL_EVIDENCE_SIGNAL_FAMILY_KEYWORDS = {
+    "reentry_timing": (
+        "reentry",
+        "re-entry",
+        "dip",
+        "buy the dip",
+        "washout",
+        "repair",
+        "deescalation",
+    ),
+    "concentration_dispersion": (
+        "concentration",
+        "dispersion",
+        "qqq/rsp",
+        "equal weight",
+        "cap weight",
+    ),
+    "breadth": ("breadth", "rsp", "small cap", "small-cap", "iwm", "equal_weight"),
+    "earnings_revision": ("earnings", "revision", "margin", "fcf", "free cash flow", "profits"),
+    "ai_value_chain": (
+        "ai",
+        "semis",
+        "semiconductor",
+        "capex",
+        "hyperscaler",
+        "supplier",
+        "chip",
+        "infrastructure",
+    ),
+    "credit": ("credit", "hyg", "lqd", "private_credit", "loan", "spread"),
+    "volatility": ("vol", "vix", "instability", "left-tail", "left_tail", "drawdown"),
+    "trend_momentum": ("momentum", "trend", "dual_momentum", "moving_average"),
+    "sector_rotation": ("sector", "rotation", "cyclical", "xle", "xlk", "xlf", "xli"),
+    "macro_policy": (
+        "macro",
+        "fed",
+        "policy",
+        "rates",
+        "duration",
+        "dollar",
+        "liquidity",
+        "inflation",
+    ),
+    "decision_sanity": ("decision_sanity", "sanity", "confirmation_cap", "event-only cap"),
+    "ml_models": ("future_state_model", "strategy_drawdown_model", "sk_", "bayesian", "ml"),
+}
+DEFAULT_SIGNAL_EVIDENCE_DATA_STATUS = {
+    "reentry_timing": "implemented_backtested",
+    "concentration_dispersion": "proxy_backtested_needs_depth",
+    "breadth": "proxy_backtested_needs_constituents",
+    "earnings_revision": "thin_proxy_needs_better_data",
+    "ai_value_chain": "proxy_backtested_needs_company_fundamentals",
+    "credit": "implemented_backtested",
+    "volatility": "implemented_backtested",
+    "trend_momentum": "implemented_backtested",
+    "sector_rotation": "implemented_backtested",
+    "macro_policy": "proxy_backtested_needs_release_lags",
+    "decision_sanity": "paired_ablation_available",
+    "ml_models": "implemented_backtested_mixed",
+}
+DEFAULT_SIGNAL_EVIDENCE_METRIC_WEIGHTS = {
+    "cagr_win_rate": 0.25,
+    "drawdown_win_rate": 0.25,
+    "reentry_win_rate": 0.18,
+    "churn_win_rate": 0.14,
+    "promotion_win_rate": 0.12,
+    "calmar_win_rate": 0.06,
+}
+
+# Factor attribution defaults. These are transparent ETF proxy factors used to
+# explain strategy behavior. They are not a proprietary risk model and should be
+# read as directional decomposition: broad beta, AI/growth beta, rates, credit,
+# commodities, volatility, and residual strategy behavior.
+DEFAULT_FACTOR_ATTRIBUTION_MIN_OBSERVATIONS = 60
+DEFAULT_FACTOR_ATTRIBUTION_RECENT_LOOKBACK_DAYS = 63
+DEFAULT_FACTOR_ATTRIBUTION_BETA_DRIFT_THRESHOLD = 0.35
+DEFAULT_FACTOR_ATTRIBUTION_R2_DROP_THRESHOLD = 0.20
+DEFAULT_FACTOR_ATTRIBUTION_RESIDUAL_VOL_RATIO_THRESHOLD = 1.50
+DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS = (
+    ("market_beta", "SPY", "Market beta", "Broad U.S. equity beta."),
+    ("qqq_growth_beta", "QQQ", "QQQ / growth beta", "Nasdaq and mega-cap growth exposure."),
+    ("ai_semis_beta", "SMH", "AI / semis beta", "Semiconductor and AI-capex sensitivity."),
+    ("equal_weight_breadth_beta", "RSP", "Breadth beta", "Equal-weight U.S. equity exposure."),
+    ("sector_rotation_beta", "XLI", "Sector / cyclicals beta", "Industrial cyclicality proxy."),
+    ("rates_duration_beta", "TLT", "Rates / duration beta", "Long-duration Treasury exposure."),
+    ("credit_beta", "HYG", "Credit beta", "High-yield credit risk appetite."),
+    ("commodity_beta", "DBC", "Commodity beta", "Broad commodity and inflation pressure."),
+    ("volatility_beta", "VIXY", "Volatility beta", "Equity-volatility stress exposure."),
+)
+
 
 # Scenario horizons used by the current-state and dashboard scenario layers.
 DEFAULT_SCENARIO_HORIZONS = ("1w", "1m", "3m", "6m")
@@ -730,9 +993,20 @@ DEFAULT_RISK_PRIVATE_CREDIT_TICKERS = (
     "OBDC",
     "FSK",
 )
-DEFAULT_RISK_COMMODITY_TICKERS = ("GLD", "IAU", "SLV", "CPER", "USO", "BNO", "DBC", "DBA", "UNG")
+DEFAULT_RISK_COMMODITY_TICKERS = (
+    "GLD",
+    "GLDM",
+    "IAU",
+    "SLV",
+    "CPER",
+    "USO",
+    "BNO",
+    "DBC",
+    "DBA",
+    "UNG",
+)
 DEFAULT_RISK_ENERGY_TICKERS = ("XLE", "XOP", "XES", "OIH", "USO", "BNO", "UNG")
-DEFAULT_RISK_GOLD_TICKERS = ("GLD", "IAU")
+DEFAULT_RISK_GOLD_TICKERS = ("GLD", "GLDM", "IAU")
 DEFAULT_RISK_DOLLAR_TICKERS = ("UUP", "FXE", "FXY", "FXF")
 DEFAULT_RISK_VOLATILITY_TICKERS = ("VIXY", "SVXY")
 DEFAULT_RISK_INTERNATIONAL_TICKERS = (
@@ -749,6 +1023,73 @@ DEFAULT_RISK_INTERNATIONAL_TICKERS = (
     "EWA",
     "EWZ",
     "EWW",
+)
+
+# Operating exposure and tactical-matrix defaults. These are presentation and
+# monitoring defaults, not live execution permissions. They provide a compact
+# way to compare the current book, reference sleeves, and monitored strategies.
+DEFAULT_GLOBAL_RISK_SLEEVES_REFERENCE_WEIGHTS = {
+    "VT": 0.60,
+    "USFR": 0.40,
+    "GLDM": 0.0,
+    "FBTC": 0.0,
+}
+DEFAULT_OPERATING_SLEEVE_MAX_EXPOSURES = {
+    "stocks": 0.60,
+    "defensive": 1.00,
+    "gold": 0.30,
+    "crypto": 0.10,
+    "credit": 0.30,
+    "other": 1.00,
+}
+DEFAULT_OPERATING_SLEEVE_TICKERS = {
+    "defensive": ("BIL", "BILS", "SGOV", "SHV", "TBIL", "USFR", "SHY", "VGSH", "BSV"),
+    "gold": DEFAULT_RISK_GOLD_TICKERS,
+    "crypto": ("IBIT", "FBTC", "BITB", "ETHE", "BTC", "ETH"),
+    "credit": DEFAULT_RISK_CREDIT_TICKERS + DEFAULT_RISK_PRIVATE_CREDIT_TICKERS,
+    "stocks": (
+        DEFAULT_RISK_BROAD_EQUITY_TICKERS
+        + DEFAULT_RISK_HIGH_BETA_TICKERS
+        + DEFAULT_RISK_SECTOR_TICKERS
+        + DEFAULT_RISK_DEFENSIVE_FACTOR_TICKERS
+        + DEFAULT_RISK_AI_BETA_TICKERS
+        + DEFAULT_RISK_INTERNATIONAL_TICKERS
+    ),
+}
+DEFAULT_BETA_ADJUSTED_DELTA_BENCHMARK = "SPY"
+DEFAULT_BETA_ADJUSTED_DELTA_LOOKBACK_DAYS = 252
+DEFAULT_TACTICAL_MATRIX_LOOKBACK_DAYS = 63
+DEFAULT_TACTICAL_MATRIX_TREND_DAYS = 126
+DEFAULT_TACTICAL_MATRIX_TICKERS = (
+    "SPY",
+    "QQQ",
+    "MTUM",
+    "QUAL",
+    "SPHB",
+    "IWM",
+    "IWF",
+    "IWD",
+    "XLK",
+    "XLF",
+    "XLI",
+    "XLE",
+    "XLC",
+    "XLB",
+    "XLP",
+    "ACWX",
+    "EEM",
+    "AGG",
+    "BIL",
+    "USFR",
+    "HYG",
+    "LQD",
+    "BKLN",
+    "BIZD",
+    "GLD",
+    "GLDM",
+    "DBA",
+    "DBC",
+    "FBTC",
 )
 
 

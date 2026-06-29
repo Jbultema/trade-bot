@@ -6,9 +6,10 @@ from typing import Any
 
 import pandas as pd
 
+from trade_bot.DEFAULTS import DEFAULT_TAX_LOT_QUANTITY_EPSILON
 from trade_bot.tax.account import TaxAccountProfile
 
-EPSILON = 1e-8
+EPSILON = DEFAULT_TAX_LOT_QUANTITY_EPSILON
 
 
 @dataclass
@@ -168,7 +169,11 @@ class TaxLotLedger:
     def remaining_quantity(self, ticker: str) -> float:
         ticker = ticker.upper()
         return float(
-            sum(lot.remaining_quantity for lot in self._lots if lot.ticker == ticker),
+            sum(
+                lot.remaining_quantity
+                for lot in self._lots
+                if lot.ticker == ticker and lot.remaining_quantity > EPSILON
+            ),
         )
 
     def open_lots_frame(self) -> pd.DataFrame:

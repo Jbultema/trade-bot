@@ -478,6 +478,80 @@ risk_contribution_i = w_i * marginal_i / portfolio_variance
 annualized_vol_contribution_i = risk_contribution_i * sqrt(portfolio_variance) * sqrt(252)
 ```
 
+## Factor Attribution And Shortfall
+
+Source: `src/trade_bot/research/factor_attribution.py`
+
+This layer explains selected strategies and monitoring behavior. It is not a
+trade generator and does not replace the portfolio risk engine. It uses ETF proxy
+factors because this local project does not have institutional factor-model
+holdings, Barra-style exposures, or Bloomberg-grade company fundamentals.
+
+Proxy factor model:
+
+```text
+strategy_return_t = alpha + sum_j beta_j * factor_return_j,t + residual_t
+```
+
+The coefficients are estimated with ordinary least squares over the overlapping
+strategy/factor daily return window.
+
+Return contribution:
+
+```text
+factor_return_contribution_j = sum_t beta_j * factor_return_j,t
+residual_strategy_contribution = sum_t (alpha + residual_t)
+absolute_contribution_share_j =
+    abs(factor_return_contribution_j) /
+    sum(abs(all factor contributions) + abs(residual contribution))
+```
+
+Risk contribution:
+
+```text
+factor_component_j,t = beta_j * factor_return_j,t
+risk_contribution_j = cov(factor_component_j, strategy_return) / var(strategy_return)
+residual_risk_contribution =
+    cov(alpha + residual, strategy_return) / var(strategy_return)
+```
+
+Model fit and residual behavior:
+
+```text
+factor_model_r_squared = 1 - var(strategy_return - predicted_return) / var(strategy_return)
+residual_annualized_volatility = std(alpha + residual) * sqrt(252)
+residual_variance_share = var(alpha + residual) / var(strategy_return)
+```
+
+Factor decay monitoring compares the full-history attribution to a recent
+lookback:
+
+```text
+beta_drift_j = recent_beta_j - full_beta_j
+drift_flag_j = abs(beta_drift_j) >= configured_beta_drift_threshold
+r_squared_drop = full_r_squared - recent_r_squared
+residual_volatility_ratio = recent_residual_volatility / full_residual_volatility
+model_decay_flag =
+    r_squared_drop >= configured_r2_drop_threshold
+    or residual_volatility_ratio >= configured_residual_vol_ratio_threshold
+```
+
+Implementation shortfall has two V1 forms:
+
+1. Ticket/execution audit: join recommendation tickets to logged executions and
+   flag unexecuted tickets, price-band breaks, and size-band breaks.
+2. Equity shortfall when actual account valuation is available:
+
+```text
+ideal_equity_rebased_t = ideal_equity_t / ideal_equity_start * actual_equity_start
+shortfall_dollars = actual_final_equity - ideal_final_equity_rebased
+shortfall_return = actual_cumulative_return - ideal_cumulative_return
+tracking_error = std(actual_return_t - ideal_return_t) * sqrt(252)
+```
+
+Current caveat: the dashboard V1 shortfall tab can audit ticket/execution
+discipline, but it does not yet ingest broker-grade daily account valuation.
+
 Constraint application:
 
 1. Cap non-defensive single-asset weights and move freed weight to the defensive ticker.

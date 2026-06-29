@@ -28,6 +28,16 @@ def drawdown(equity: pd.Series) -> pd.Series:
     return equity / running_max - 1.0
 
 
+def ulcer_index(equity: pd.Series) -> float:
+    """Return the root mean square drawdown for an equity curve."""
+
+    clean_equity = equity.dropna().astype(float)
+    if clean_equity.empty:
+        return float("nan")
+    drawdowns = drawdown(clean_equity).clip(upper=0.0)
+    return float(np.sqrt(np.square(drawdowns).mean()))
+
+
 def rolling_drawdown(equity: pd.Series, window: int) -> pd.Series:
     running_max = equity.rolling(window=window, min_periods=window).max()
     return equity / running_max - 1.0

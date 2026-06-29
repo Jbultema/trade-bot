@@ -80,6 +80,106 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
         aliases=("average_turnover", "delta_average_turnover"),
     ),
     MetricExplainer(
+        metric="Time Underwater",
+        category="Performance",
+        plain_english=(
+            "Share of evaluated days where the equity curve is below its prior high-water mark."
+        ),
+        calculation="Mean of days where drawdown is below zero.",
+        how_to_read=(
+            "High values mean the strategy often spends time below a prior peak; this can happen even "
+            "when the drawdowns are shallow."
+        ),
+        caution=(
+            "This is not the same as time spent in a severe drawdown. A strategy can have high time "
+            "underwater and still have acceptable max drawdown."
+        ),
+        aliases=("time_underwater", "underwater_rate"),
+    ),
+    MetricExplainer(
+        metric="Ulcer Index",
+        category="Performance",
+        plain_english=(
+            "Drawdown pain metric that combines depth and persistence of drawdowns."
+        ),
+        calculation="Square root of the average squared drawdown from prior equity highs.",
+        how_to_read=(
+            "Lower is better. Tiny below-peak days barely move it; deep and persistent drawdowns move it a lot."
+        ),
+        caution=(
+            "It is still historical and sample-dependent, but it is usually more useful than raw days below peak."
+        ),
+        aliases=("ulcer_index", "pain_index"),
+    ),
+    MetricExplainer(
+        metric="Variance Contribution",
+        category="Attribution",
+        plain_english="How much each proxy factor contributes to strategy return variance.",
+        calculation="Covariance of the fitted factor return contribution with strategy returns, divided by strategy-return variance.",
+        how_to_read=(
+            "Positive values mean the factor explains strategy variance in the same direction; negative values "
+            "mean it offsets strategy variance."
+        ),
+        caution=(
+            "This can look similar to return contribution when the same factors both earned returns and drove volatility."
+        ),
+        aliases=("risk_contribution_pct", "variance_contribution", "risk contribution"),
+    ),
+    MetricExplainer(
+        metric="Beta-Adjusted S&P Delta",
+        category="Risk",
+        plain_english=(
+            "Approximate S&P 500-equivalent exposure after accounting for each holding's rolling beta."
+        ),
+        calculation="Sum of position weight times rolling beta to SPY over the configured lookback.",
+        how_to_read="A 65% reading means the book behaves roughly like a 65% SPY allocation for broad-market moves.",
+        caution="Rolling beta can change quickly in stress regimes and is only a linear approximation.",
+        aliases=("beta_adjusted_spy_delta",),
+    ),
+    MetricExplainer(
+        metric="Percent of Max Sleeve",
+        category="Risk",
+        plain_english="How much of a configured sleeve limit is currently being used.",
+        calculation="Current sleeve weight divided by that sleeve's configured maximum exposure.",
+        how_to_read="A 100% reading means the sleeve is at its current operating maximum.",
+        caution="Sleeve limits are policy constraints, not proof that the exposure is attractive.",
+        aliases=(
+            "percent_of_max_sleeve",
+            "stocks_percent_of_max_sleeve",
+            "defensive_percent_of_max_sleeve",
+            "gold_percent_of_max_sleeve",
+            "crypto_percent_of_max_sleeve",
+            "credit_percent_of_max_sleeve",
+        ),
+    ),
+    MetricExplainer(
+        metric="Factor R2",
+        category="Attribution",
+        plain_english="Share of the strategy's daily return variance explained by the proxy factor model.",
+        calculation="1 minus residual variance divided by strategy-return variance.",
+        how_to_read="High values mean the strategy is mostly explained by broad proxy factors; low values mean more residual strategy-specific behavior.",
+        caution="A high R2 is not bad by itself, but it can reveal that several strategies are the same disguised factor bet.",
+        aliases=("factor_model_r_squared", "factor_r2"),
+    ),
+    MetricExplainer(
+        metric="Residual Share",
+        category="Attribution",
+        plain_english="Portion of absolute return contribution not explained by the proxy factor set.",
+        calculation="Absolute residual strategy contribution divided by total absolute factor plus residual contribution.",
+        how_to_read="Higher values suggest more unique behavior after broad beta, AI/growth, rates, credit, commodities, and volatility are considered.",
+        caution="Residual behavior can be true skill, missing factors, noise, or overfit. Inspect robustness before trusting it.",
+        aliases=("residual_contribution_share", "residual_share"),
+    ),
+    MetricExplainer(
+        metric="Factor Decay",
+        category="Attribution",
+        plain_english="Whether recent factor exposure no longer resembles the full-history factor profile.",
+        calculation="Compares recent beta, R2, and residual volatility against full-history attribution.",
+        how_to_read="A flag means the strategy may be drifting, crowded, broken, or entering a new regime.",
+        caution="Short windows can produce false alarms. Treat decay flags as review triggers, not automatic exits.",
+        aliases=("drift_flag", "model_decay_flag", "beta_drift", "abs_beta_drift"),
+    ),
+    MetricExplainer(
         metric="Growth of $1",
         category="Performance",
         plain_english="Window-rebased equity curve showing how one dollar would have grown in the selected period.",

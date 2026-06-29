@@ -2,7 +2,12 @@ from __future__ import annotations
 
 import pandas as pd
 
-from trade_bot.dashboard.news_macro import _current_event_rollup, _dedupe_display_rows
+from trade_bot.dashboard.news_macro import (
+    _current_event_rollup,
+    _dedupe_display_rows,
+    _driver_rotation_heatmap_figure,
+    _driver_rotation_scatter_figure,
+)
 
 
 def test_dedupe_display_rows_removes_exact_display_duplicates() -> None:
@@ -66,3 +71,41 @@ def test_current_event_rollup_keeps_one_row_per_event_and_counts_scenarios() -> 
     assert event_a["scenario_count"] == 2
     assert "Stress contained" in event_a["scenarios"]
     assert "Stress leaks" in event_a["scenarios"]
+
+
+def test_driver_rotation_figures_render_core_traces() -> None:
+    rotation = pd.DataFrame(
+        [
+            {
+                "driver_label": "Credit conditions",
+                "model_role": "allocation_driver",
+                "primary_rotation_state": "normally_important_active",
+                "proven_relevance": 0.8,
+                "current_activation": 0.7,
+                "previous_30d_activation": 0.3,
+                "previous_90d_activation": 0.2,
+                "change_30d": 0.4,
+                "change_90d": 0.5,
+                "data_support": "validated_market_or_macro_proxy",
+            },
+            {
+                "driver_label": "AI capex pressure",
+                "model_role": "explainer_only",
+                "primary_rotation_state": "emerging_importance",
+                "proven_relevance": 0.2,
+                "current_activation": 0.8,
+                "previous_30d_activation": 0.0,
+                "previous_90d_activation": 0.0,
+                "change_30d": 0.8,
+                "change_90d": 0.8,
+                "data_support": "thin_proxy",
+            },
+        ]
+    )
+
+    scatter = _driver_rotation_scatter_figure(rotation)
+    heatmap = _driver_rotation_heatmap_figure(rotation)
+
+    assert len(scatter.data) == 2
+    assert len(heatmap.data) == 1
+    assert "Historical Relevance" in str(scatter.layout.title.text)

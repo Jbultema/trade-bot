@@ -7,6 +7,7 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.backtest.metrics import calculate_metrics
+from trade_bot.DEFAULTS import DEFAULT_TAX_BACKTEST_MIN_RECONSTRUCTED_QUANTITY
 from trade_bot.tax.account import TaxAccountProfile
 from trade_bot.tax.lots import EPSILON, TaxLotLedger
 
@@ -95,6 +96,7 @@ def _reconstruct_executions(
     tickers = [ticker for ticker in result.weights.columns if ticker in prices.columns]
     if not tickers:
         return
+    min_quantity = max(EPSILON, DEFAULT_TAX_BACKTEST_MIN_RECONSTRUCTED_QUANTITY)
     positions = pd.Series(0.0, index=tickers, dtype=float)
     weights = result.weights.reindex(columns=tickers).fillna(0.0)
     for date, weight_row in weights.iterrows():
@@ -111,8 +113,15 @@ def _reconstruct_executions(
             price = float(price_row[ticker])
             if price <= 0 or pd.isna(price):
                 continue
-            sell_quantity = min(float(positions[ticker]), abs(float(delta)) / price)
-            if sell_quantity <= EPSILON:
+            available_quantity = min(
+                max(0.0, float(positions[ticker])),
+                ledger.remaining_quantity(ticker),
+            )
+            if available_quantity <= min_quantity:
+                positions[ticker] = 0.0
+                continue
+            sell_quantity = min(available_quantity, abs(float(delta)) / price)
+            if sell_quantity <= min_quantity:
                 continue
             ledger.process_execution(
                 execution_id=_execution_id(result.name, date, ticker, "SELL"),
@@ -124,13 +133,13 @@ def _reconstruct_executions(
                 price=price,
                 executed_at=date,
             )
-            positions[ticker] = max(0.0, positions[ticker] - sell_quantity)
+            positions[ticker] = ledger.remaining_quantity(ticker)
         for ticker, delta in deltas[deltas > EPSILON].sort_values(ascending=False).items():
             price = float(price_row[ticker])
             if price <= 0 or pd.isna(price):
                 continue
             buy_quantity = float(delta) / price
-            if buy_quantity <= EPSILON:
+            if buy_quantity <= min_quantity:
                 continue
             ledger.process_execution(
                 execution_id=_execution_id(result.name, date, ticker, "BUY"),

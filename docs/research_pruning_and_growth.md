@@ -1,6 +1,6 @@
 # Research Pruning and Regrowth Protocol
 
-Status: maintained research-policy note. Last reviewed: 2026-06-22.
+Status: maintained research-policy note. Last reviewed: 2026-06-29.
 
 This project is intentionally experimental, but the dashboard should not treat every experiment as equally alive. Historical artifacts remain auditable; pruning only changes the default research queue.
 
@@ -48,6 +48,48 @@ Rows are pruned from default views when any of these are true:
 - outcome utility cannot justify the drawdown burden after validation penalties.
 
 Pruned rows are not deleted. They remain available by selecting `All approaches` or filtering Research Lab leaderboards by `pruned_dead_end`.
+
+## Default Operating Surface
+
+The default dashboard and monitoring surface is intentionally narrower than the
+research archive:
+
+- Unsupported watchlist items are hidden from the main action layer and shown
+  only as data gaps.
+- Thin-proxy narrative diagnostics are research-only unless a marginal
+  contribution test proves they improve CAGR, drawdown, re-entry, or churn.
+- Default reference anchors are limited to SPY, QQQ, BIL/cash if configured,
+  and the U.S. 60/40 policy benchmark. Other policy portfolios remain
+  inspectable in explicit all-approach views.
+- Low-CAGR defensive sleeves, failed ML routers, poor sector-rotation ML, and
+  `pruned_dead_end` rows are suppressed from default candidate shelves.
+- Narrative/news modules remain visible as "watch this" diagnostics unless
+  ablation and forward-monitoring evidence promotes them into a model driver.
+
+This pruning is display and monitoring governance, not deletion. The archive is
+still the audit trail.
+
+Signal families now have their own evidence audit. Before promoting a new
+monitor, source family, or narrative diagnostic into the default operating
+surface, run:
+
+```bash
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+```
+
+Dashboard path:
+
+```text
+Research Lab -> Experiment Monitor -> Signal Evidence
+```
+
+Use the resulting labels as pruning guidance:
+
+- `validated_contributor`: keep visible and continue iterating.
+- `promising_mixed`: keep in research views, but require failure-case review.
+- `not_proven`: hide from default decision surfaces unless manually selected.
+- `context_only`: explanation layer only; do not let it drive allocation.
+- `research_gap`: backlog only until data and paired ablations exist.
 
 ## Regrowth Rules
 

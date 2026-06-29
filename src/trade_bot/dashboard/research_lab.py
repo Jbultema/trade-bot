@@ -20,14 +20,16 @@ from trade_bot.dashboard.formatting import (
     _window_start_from_preset,
 )
 from trade_bot.DEFAULTS import (
+    DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES,
     DEFAULT_ML_DIAGNOSTICS_DIR,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_HORIZON_YEARS,
     DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT,
     DEFAULT_PERFORMANCE_WINDOW,
     DEFAULT_PERFORMANCE_WINDOWS,
+    DEFAULT_REFERENCE_BASELINE_STRATEGIES,
 )
-from trade_bot.features.indicators import drawdown
+from trade_bot.features.indicators import drawdown, ulcer_index
 from trade_bot.reporting.report import make_equity_drawdown_figure, window_performance_frame
 from trade_bot.research.approach_explorer import (
     build_approach_allocation_transition_events,
@@ -64,10 +66,24 @@ from trade_bot.research.experiment_monitor import (
     summarize_risk_behavior_matrix,
     summarize_strategy_archetypes,
 )
+from trade_bot.research.factor_attribution import (
+    build_factor_attribution,
+    build_factor_decay_monitor,
+)
+from trade_bot.research.signal_evidence import (
+    build_signal_family_evidence,
+    build_signal_family_marginal_tests,
+    signal_evidence_takeaways,
+    tag_scorecard_signal_families,
+)
 from trade_bot.research.strategy_outcome_utility import (
     add_outcome_frontier_flags,
     enrich_strategy_outcome_utility,
 )
+
+_OUTCOME_FRONTIER_PLOT_KEY = "outcome_frontier_plot"
+_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY = "outcome_frontier_selected_strategy"
+_OUTCOME_FRONTIER_SELECTBOX_KEY = "outcome_frontier_strategy_label"
 
 
 def _render_taxable_estimate_summary(scorecard: pd.DataFrame) -> None:
@@ -520,6 +536,114 @@ def _render_approach_performance(
         _render_metric_dataframe(_display_metrics(window_stats), hide_index=True)
 
 
+def _render_factor_attribution(result: BacktestResult, *, baseline_run: BaselineRun) -> None:
+    attribution = build_factor_attribution(result.equity, baseline_run.prices)
+    if attribution.summary.empty or attribution.factor_attribution.empty:
+        st.write(
+            "No factor attribution is available. The selected approach may not have enough "
+            "overlapping history with the proxy factor universe."
+        )
+        return
+
+    summary = attribution.summary.iloc[0]
+    cols = st.columns(5)
+    _helped_metric(cols[0], "Factor R2", _format_percent(summary["factor_model_r_squared"]))
+    _helped_metric(cols[1], "Residual Share", _format_percent(summary["residual_contribution_share"]))
+    _helped_metric(cols[2], "Dominant Factor", str(summary["dominant_factor"]))
+    _helped_metric(cols[3], "Dominant Share", _format_percent(summary["dominant_factor_share"]))
+    _helped_metric(
+        cols[4],
+        "Residual Vol",
+        _format_percent(summary["residual_annualized_volatility"]),
+    )
+
+    st.caption(
+        "Proxy-factor attribution: cumulative return contribution, factor beta, and variance "
+        "contribution. Residual strategy behavior is the part not explained by the current proxy set."
+    )
+    factor_view = attribution.factor_attribution.copy()
+    return_risk_similarity = _safe_float(
+        factor_view["absolute_contribution_share"].abs().corr(
+            factor_view["risk_contribution_pct"].abs()
+        )
+    )
+    contribution_fig = make_subplots(
+        rows=1,
+        cols=2,
+        subplot_titles=("Cumulative return contribution", "Variance contribution"),
+    )
+    contribution_fig.add_trace(
+        go.Bar(
+            x=factor_view["return_contribution"],
+            y=factor_view["label"],
+            orientation="h",
+            name="Return",
+            marker_color="#0f766e",
+        ),
+        row=1,
+        col=1,
+    )
+    contribution_fig.add_trace(
+        go.Bar(
+            x=factor_view["risk_contribution_pct"],
+            y=factor_view["label"],
+            orientation="h",
+            name="Risk",
+            marker_color="#b45309",
+        ),
+        row=1,
+        col=2,
+    )
+    contribution_fig.update_layout(
+        height=420,
+        template="plotly_white",
+        showlegend=False,
+        margin={"l": 20, "r": 20, "t": 50, "b": 20},
+    )
+    contribution_fig.update_xaxes(tickformat=".0%")
+    st.plotly_chart(contribution_fig, use_container_width=True)
+    if return_risk_similarity is not None:
+        st.caption(
+            "These panels can look similar when the same proxy factors both earned the returns and "
+            f"explained the variance. Absolute return-share / variance-contribution similarity is "
+            f"{return_risk_similarity:.2f}. Variance contribution is covariance with strategy returns, "
+            "not a duplicated return-contribution calculation."
+        )
+
+    attribution_columns = [
+        "label",
+        "proxy_ticker",
+        "beta",
+        "correlation",
+        "return_contribution",
+        "absolute_contribution_share",
+        "risk_contribution_pct",
+        "annualized_factor_volatility",
+        "description",
+    ]
+    _render_metric_dataframe(
+        _display_metrics(
+            factor_view[[column for column in attribution_columns if column in factor_view]]
+        ),
+        hide_index=True,
+    )
+
+    st.caption("Factor decay / behavior drift")
+    decay = build_factor_decay_monitor(result.equity, baseline_run.prices)
+    if decay.empty:
+        st.write("No recent factor-decay diagnostic is available for this approach.")
+        return
+    flagged = decay[(decay["drift_flag"]) | (decay["model_decay_flag"])]
+    if flagged.empty:
+        st.success("No major recent factor-decay flags versus the full-history attribution.")
+    else:
+        st.warning(
+            f"{len(flagged):,} factor-decay flag(s): recent behavior is diverging from "
+            "the full-history factor profile."
+        )
+    _render_metric_dataframe(_display_metrics(decay), hide_index=True)
+
+
 def _scorecard_for_catalog_row(
     row: pd.Series,
     *,
@@ -596,6 +720,12 @@ def _approach_detail_sort_key(row: pd.Series) -> tuple[int, float, str]:
     return (2, sort_score, str(row.get("strategy", "")))
 
 
+def _default_reference_catalog_mask(catalog: pd.DataFrame) -> pd.Series:
+    if catalog.empty or "strategy" not in catalog:
+        return pd.Series(dtype=bool)
+    return catalog["strategy"].astype(str).str.lower().isin(DEFAULT_REFERENCE_BASELINE_STRATEGIES)
+
+
 def _render_approach_detail_workbench(
     *,
     bot_config: Any,
@@ -618,10 +748,10 @@ def _render_approach_detail_workbench(
         return
 
     scope_options = [
-        "Curated top 25 + baselines",
-        "Operational + iteration candidates",
-        "All non-pruned approaches",
-        "All approaches",
+        "Curated shelf + core baselines",
+        "Operational candidates + core baselines",
+        "All non-pruned research + core baselines",
+        "All approaches and archived rows",
     ]
     selected_scope = st.radio(
         "Approach set",
@@ -629,18 +759,17 @@ def _render_approach_detail_workbench(
         horizontal=True,
         key="approach_detail_scope",
     )
-    if selected_scope == "Curated top 25 + baselines":
-        visible_catalog = catalog[(catalog["source"] == "baseline") | catalog["is_curated"]]
-    elif selected_scope == "Operational + iteration candidates":
+    default_reference = _default_reference_catalog_mask(catalog)
+    if selected_scope == "Curated shelf + core baselines":
+        visible_catalog = catalog[default_reference | catalog["is_curated"]]
+    elif selected_scope == "Operational candidates + core baselines":
         visible_catalog = catalog[
-            (catalog["source"] == "baseline")
-            | catalog["research_status"].isin(
-                ["operational_candidate", "needs_iteration", "reference"]
-            )
+            default_reference
+            | catalog["research_status"].isin(DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES)
         ]
-    elif selected_scope == "All non-pruned approaches":
+    elif selected_scope == "All non-pruned research + core baselines":
         visible_catalog = catalog[
-            (catalog["source"] == "baseline") | ~catalog["research_status"].eq("pruned_dead_end")
+            default_reference | ~catalog["research_status"].eq("pruned_dead_end")
         ]
     else:
         visible_catalog = catalog
@@ -711,6 +840,7 @@ def _render_approach_detail_workbench(
         combined_tab,
         performance_tab,
         allocation_tab,
+        factor_tab,
         mechanics_tab,
         robustness_tab,
         manifest_tab,
@@ -719,6 +849,7 @@ def _render_approach_detail_workbench(
             "Performance + Allocation",
             "Performance Over Time",
             "Allocation Behavior",
+            "Factor Attribution",
             "Mechanics",
             "Robustness",
             "Manifest / Risk Notes",
@@ -774,6 +905,12 @@ def _render_approach_detail_workbench(
                 defensive_ticker=approach_strategy.defensive_ticker,
                 key_prefix="approach_detail",
             )
+
+    with factor_tab:
+        if detail_result is None:
+            st.write("No factor attribution can be reconstructed for this approach.")
+        else:
+            _render_factor_attribution(detail_result, baseline_run=baseline_run)
 
     with mechanics_tab:
         st.caption("Mechanics")
@@ -1178,6 +1315,7 @@ def _render_outcome_frontier(
                     "line": {"width": 2, "color": "#ef4444"},
                 },
                 text=pareto.get("display_name", pareto.get("strategy", "")),
+                customdata=pareto[["strategy"]],
                 hovertemplate="%{text}<br>Pareto efficient<extra></extra>",
             )
         )
@@ -1192,16 +1330,39 @@ def _render_outcome_frontier(
         legend_title="Growth utility tier",
         margin={"l": 20, "r": 20, "t": 35, "b": 20},
     )
-    st.plotly_chart(fig, use_container_width=True)
+    selection = st.plotly_chart(
+        fig,
+        use_container_width=True,
+        key=_OUTCOME_FRONTIER_PLOT_KEY,
+        on_select="rerun",
+        selection_mode="points",
+    )
 
     selected_options = _outcome_select_options(plot_frame)
+    selected_from_chart = _plotly_selected_strategy(selection)
+    if selected_from_chart:
+        st.session_state[_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY] = selected_from_chart
+
+    option_labels = selected_options["label"].tolist()
+    selected_index = _outcome_label_index_for_strategy(
+        selected_options,
+        st.session_state.get(_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY),
+    )
+    selected_label_from_state = option_labels[selected_index]
+    if (
+        selected_from_chart
+        or st.session_state.get(_OUTCOME_FRONTIER_SELECTBOX_KEY) not in option_labels
+    ):
+        st.session_state[_OUTCOME_FRONTIER_SELECTBOX_KEY] = selected_label_from_state
+
     selected_label = st.selectbox(
         "Outcome strategy to inspect",
-        selected_options["label"].tolist(),
-        key="outcome_frontier_strategy",
+        option_labels,
+        key=_OUTCOME_FRONTIER_SELECTBOX_KEY,
     )
     selected_row = selected_options[selected_options["label"] == selected_label].iloc[0]
     selected_strategy = str(selected_row["strategy"])
+    st.session_state[_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY] = selected_strategy
     selected_scorecard = plot_frame[plot_frame["strategy"].astype(str) == selected_strategy].iloc[0]
     _render_outcome_decision_cards(
         selected_scorecard,
@@ -1262,6 +1423,46 @@ def _outcome_select_options(frame: pd.DataFrame) -> pd.DataFrame:
     return output.sort_values("growth_constrained_utility_score", ascending=False)
 
 
+def _outcome_label_index_for_strategy(options: pd.DataFrame, strategy: Any) -> int:
+    if strategy is None or "strategy" not in options:
+        return 0
+    matches = options.index[options["strategy"].astype(str).eq(str(strategy))].tolist()
+    if not matches:
+        return 0
+    return int(options.index.get_loc(matches[0]))
+
+
+def _plotly_selected_strategy(selection_event: Any) -> str | None:
+    """Return the first selected strategy id from a Streamlit Plotly selection event."""
+
+    selection = _get_selection_field(selection_event, "selection")
+    points = _get_selection_field(selection, "points")
+    if not points:
+        return None
+
+    first_point = points[0]
+    customdata = _get_selection_field(first_point, "customdata")
+    if customdata is None:
+        return None
+    if isinstance(customdata, (list, tuple)):
+        if not customdata:
+            return None
+        return str(customdata[0])
+    if not isinstance(customdata, (str, bytes)) and hasattr(customdata, "__len__"):
+        if len(customdata) == 0:
+            return None
+        return str(customdata[0])
+    return str(customdata)
+
+
+def _get_selection_field(payload: Any, field: str) -> Any:
+    if payload is None:
+        return None
+    if isinstance(payload, dict):
+        return payload.get(field)
+    return getattr(payload, field, None)
+
+
 def _render_outcome_decision_cards(
     row: pd.Series,
     *,
@@ -1280,13 +1481,14 @@ def _render_outcome_decision_cards(
         experiment_scorecards=experiment_scorecards,
     )
     underwater_rate = _time_underwater_rate(result)
+    pain_index = _ulcer_index(result)
 
     cols = st.columns(5)
     _helped_metric(cols[0], "15Y Wealth", _format_currency(wealth))
     _helped_metric(cols[1], "Extra vs SPY", _format_currency(extra_spy))
     _helped_metric(cols[2], "Extra vs QQQ", _format_currency(extra_qqq))
     _helped_metric(cols[3], "Recovery Needed", _format_percent(row.get("drawdown_recovery_return")))
-    _helped_metric(cols[4], "Time Underwater", _format_percent(underwater_rate))
+    _helped_metric(cols[4], "Ulcer Index", _format_percent(pain_index))
 
     st.info(_outcome_decision_helper(row, extra_spy=extra_spy, extra_qqq=extra_qqq))
 
@@ -1319,6 +1521,18 @@ def _render_outcome_decision_cards(
             {
                 "metric": "Left-tail regime return",
                 "selected": row.get("left_tail_regime_return"),
+                "spy_delta": pd.NA,
+                "qqq_delta": pd.NA,
+            },
+            {
+                "metric": "Ulcer Index",
+                "selected": pain_index,
+                "spy_delta": pd.NA,
+                "qqq_delta": pd.NA,
+            },
+            {
+                "metric": "Days below prior peak",
+                "selected": underwater_rate,
                 "spy_delta": pd.NA,
                 "qqq_delta": pd.NA,
             },
@@ -1361,6 +1575,12 @@ def _time_underwater_rate(result: BacktestResult | None) -> float | None:
         return None
     strategy_drawdown = drawdown(result.equity)
     return float((strategy_drawdown < 0.0).mean())
+
+
+def _ulcer_index(result: BacktestResult | None) -> float | None:
+    if result is None or result.equity.empty:
+        return None
+    return ulcer_index(result.equity)
 
 
 def _extra_wealth_from_multiple(wealth: float | None, multiple: object) -> float | None:
@@ -1460,6 +1680,7 @@ def _render_experiment_monitor(
         experiment_outcome_tab,
         experiment_taxable_tab,
         experiment_sanity_tab,
+        experiment_signal_evidence_tab,
         experiment_confidence_tab,
         experiment_readiness_tab,
         experiment_shelf_tab,
@@ -1474,6 +1695,7 @@ def _render_experiment_monitor(
             "Outcome Frontier",
             "Taxable Impact",
             "Sanity Impact",
+            "Signal Evidence",
             "Confidence Gauntlet",
             "Paper Readiness",
             "Curated Shelf",
@@ -1516,6 +1738,9 @@ def _render_experiment_monitor(
 
     with experiment_sanity_tab:
         _render_decision_sanity_impact(decision_sanity_impacts)
+
+    with experiment_signal_evidence_tab:
+        _render_signal_evidence(experiment_scorecards, experiment_candidates)
 
     with experiment_confidence_tab:
         _render_confidence_gauntlet(experiment_scorecards)
@@ -1562,6 +1787,7 @@ def _render_experiment_monitor(
         phase_options = ["all", *sorted(experiment_scorecards["phase"].dropna().unique())]
         family_options = ["all", *sorted(experiment_scorecards["family"].dropna().unique())]
         status_options = [
+            "default surface",
             "active research",
             "all",
             *sorted(
@@ -1597,7 +1823,13 @@ def _render_experiment_monitor(
         experiment_view = experiment_scorecards[
             experiment_scorecards["iteration"].isin(selected_iterations)
         ]
-        if status_filter == "active research":
+        if status_filter == "default surface":
+            experiment_view = experiment_view[
+                experiment_view.get("research_status", pd.Series("", index=experiment_view.index))
+                .astype(str)
+                .isin(DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES)
+            ]
+        elif status_filter == "active research":
             experiment_view = experiment_view[
                 ~experiment_view.get(
                     "research_status", pd.Series("", index=experiment_view.index)
@@ -1725,6 +1957,154 @@ def _render_experiment_monitor(
                 experiment_candidates["iteration"].isin(selected_manifest_iterations)
             ]
             st.dataframe(manifest_view, use_container_width=True)
+
+
+def _render_signal_evidence(
+    experiment_scorecards: pd.DataFrame,
+    experiment_candidates: pd.DataFrame,
+) -> None:
+    st.markdown("**Signal Evidence**")
+    st.caption(
+        "Marginal-contribution infrastructure for pruning and expansion. Paired rows compare "
+        "candidate strategies to their parent/control where possible; broader family rows are "
+        "association evidence only. Metrics are after the experiment backtest execution-cost assumptions."
+    )
+    tagged = tag_scorecard_signal_families(experiment_scorecards, experiment_candidates)
+    evidence = build_signal_family_evidence(tagged)
+    marginal_tests = build_signal_family_marginal_tests(tagged)
+    if evidence.empty:
+        st.write("No signal-family evidence could be computed from the saved scorecards.")
+        return
+
+    validated_count = int(
+        evidence["evidence_label"].isin(["validated_contributor", "promising_mixed"]).sum()
+    )
+    context_only_count = int(evidence["evidence_label"].isin(["context_only", "research_gap"]).sum())
+    paired_count = int(evidence["paired_tests"].sum())
+    cols = st.columns(4)
+    _helped_metric(cols[0], "Signal Families", f"{len(evidence):,}")
+    _helped_metric(cols[1], "Paired Tests", f"{paired_count:,}")
+    _helped_metric(cols[2], "Useful / Promising", f"{validated_count:,}")
+    _helped_metric(cols[3], "Context / Gaps", f"{context_only_count:,}")
+
+    for takeaway in signal_evidence_takeaways(evidence):
+        st.write(f"- {takeaway}")
+
+    chart_frame = evidence.sort_values("net_evidence_score", ascending=True)
+    fig = go.Figure(
+        go.Bar(
+            x=chart_frame["net_evidence_score"],
+            y=chart_frame["signal_label"],
+            orientation="h",
+            marker_color=chart_frame["evidence_label"].map(
+                {
+                    "validated_contributor": "#0f766e",
+                    "promising_mixed": "#b7791f",
+                    "needs_more_ablation": "#4f46e5",
+                    "context_only": "#64748b",
+                    "not_proven": "#b91c1c",
+                    "research_gap": "#9ca3af",
+                }
+            ),
+            customdata=chart_frame[["paired_tests", "candidate_count", "evidence_label"]],
+            hovertemplate=(
+                "<b>%{y}</b><br>Evidence score: %{x:.0%}<br>"
+                "Paired tests: %{customdata[0]}<br>"
+                "Candidates: %{customdata[1]}<br>"
+                "Label: %{customdata[2]}<extra></extra>"
+            ),
+        )
+    )
+    fig.update_layout(
+        title="Signal-Family Marginal Evidence",
+        template="plotly_white",
+        xaxis={"title": "Net evidence score", "tickformat": ".0%", "range": [0, 1]},
+        yaxis={"title": ""},
+        height=max(420, 32 * len(chart_frame) + 120),
+        margin={"l": 20, "r": 20, "t": 60, "b": 20},
+    )
+    st.plotly_chart(fig, use_container_width=True)
+
+    evidence_tab, paired_tab, tagged_tab = st.tabs(
+        ["Family Evidence", "Paired Marginal Tests", "Tagged Strategies"]
+    )
+    with evidence_tab:
+        evidence_columns = [
+            "signal_label",
+            "evidence_label",
+            "data_status",
+            "evidence_tier",
+            "candidate_count",
+            "paired_tests",
+            "net_evidence_score",
+            "median_delta_cagr",
+            "median_delta_max_drawdown",
+            "median_delta_reentry_score",
+            "median_delta_average_turnover",
+            "cagr_win_rate",
+            "drawdown_win_rate",
+            "churn_win_rate",
+            "best_strategy",
+            "best_cagr",
+            "best_max_drawdown",
+            "recommendation",
+            "caveat",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(evidence[[column for column in evidence_columns if column in evidence]]),
+            hide_index=True,
+        )
+    with paired_tab:
+        if marginal_tests.empty:
+            st.write("No parent/control pairs were available for marginal signal tests.")
+        else:
+            family_filter = st.selectbox(
+                "Signal family",
+                ["all", *sorted(marginal_tests["signal_label"].dropna().unique())],
+                key="signal_evidence_family_filter",
+            )
+            paired_view = marginal_tests
+            if family_filter != "all":
+                paired_view = paired_view[paired_view["signal_label"] == family_filter]
+            paired_columns = [
+                "signal_label",
+                "child_strategy",
+                "parent_strategy",
+                "iteration",
+                "delta_cagr",
+                "delta_max_drawdown",
+                "delta_calmar",
+                "delta_reentry_score",
+                "delta_average_turnover",
+                "delta_left_tail_regime_return",
+                "hypothesis",
+            ]
+            _render_metric_dataframe(
+                _display_metrics(
+                    paired_view[[column for column in paired_columns if column in paired_view]]
+                ),
+                hide_index=True,
+            )
+    with tagged_tab:
+        tagged_columns = [
+            "iteration",
+            "strategy",
+            "display_name",
+            "phase",
+            "family",
+            "role",
+            "signal_families",
+            "promotion_decision",
+            "promotion_score",
+            "cagr",
+            "max_drawdown",
+            "average_turnover",
+            "hypothesis",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(tagged[[column for column in tagged_columns if column in tagged]]),
+            hide_index=True,
+        )
 
 
 def _render_taxable_impact(*, bot_config: Any, experiment_scorecards: pd.DataFrame) -> None:

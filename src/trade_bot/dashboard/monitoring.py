@@ -7,8 +7,9 @@ import pandas as pd
 import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
-from trade_bot.dashboard.formatting import _display_metrics
+from trade_bot.dashboard.formatting import _display_metrics, _display_trade_frame
 from trade_bot.DEFAULTS import DEFAULT_MONITORING_TOP_N, DEFAULT_RUN_STORE_DB_PATH
+from trade_bot.research.factor_attribution import build_ticket_shortfall_audit
 from trade_bot.storage.warehouse import TradingWarehouse
 
 
@@ -80,6 +81,12 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
         "benchmark_cumulative_return",
         "excess_return",
         "drawdown",
+        "beta_adjusted_spy_delta",
+        "stocks_percent_of_max_sleeve",
+        "defensive_percent_of_max_sleeve",
+        "gold_percent_of_max_sleeve",
+        "crypto_percent_of_max_sleeve",
+        "credit_percent_of_max_sleeve",
         "snapshot_cagr",
         "snapshot_calmar",
         "snapshot_max_drawdown",
@@ -94,9 +101,10 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
     available_columns = [column for column in leaderboard_columns if column in frame.columns]
     _render_metric_dataframe(_display_metrics(frame[available_columns]))
 
-    detail_tab, top_tab, reference_tab, registry_tab, warehouse_tab = st.tabs(
+    detail_tab, shortfall_tab, top_tab, reference_tab, registry_tab, warehouse_tab = st.tabs(
         [
             "Monitoring Windows",
+            "Shortfall / Drift",
             "Top Experiments",
             "Reference Portfolios",
             "Strategy Registry",
@@ -121,6 +129,8 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
             windows[[column for column in window_columns if column in windows.columns]],
             use_container_width=True,
         )
+    with shortfall_tab:
+        _render_shortfall_and_execution_audit(str(warehouse_path), frame)
     with top_tab:
         st.caption(
             f"Curated top {DEFAULT_MONITORING_TOP_N} candidates from the experiment registry. "
@@ -152,6 +162,81 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
             st.dataframe(registry_view, use_container_width=True)
     with warehouse_tab:
         st.dataframe(counts, use_container_width=True)
+
+
+def _render_shortfall_and_execution_audit(warehouse_path: str, frame: pd.DataFrame) -> None:
+    st.caption(
+        "Implementation shortfall checks whether the forward paper/live process actually followed "
+        "the recommendations. V1 uses recommendation-ticket and execution compliance; actual-vs-ideal "
+        "account-equity attribution can be added once daily account valuation rows are logged."
+    )
+    warehouse = TradingWarehouse(warehouse_path)
+    tickets = warehouse.read_table("journal_recommendation_tickets")
+    executions = warehouse.read_table("journal_executions")
+    audit = build_ticket_shortfall_audit(tickets, executions)
+
+    cols = st.columns(5)
+    _helped_metric(cols[0], "Tickets", f"{len(audit):,}")
+    _helped_metric(
+        cols[1],
+        "Executed",
+        f"{int((audit.get('execution_status', pd.Series(dtype=str)) == 'executed').sum()):,}",
+    )
+    _helped_metric(
+        cols[2],
+        "Unexecuted",
+        f"{int((audit.get('execution_status', pd.Series(dtype=str)) == 'not_executed').sum()):,}",
+    )
+    _helped_metric(
+        cols[3],
+        "Price Band Breaks",
+        f"{_false_count(audit, 'inside_price_band'):,}",
+    )
+    _helped_metric(
+        cols[4],
+        "Size Band Breaks",
+        f"{_false_count(audit, 'inside_size_band'):,}",
+    )
+
+    if audit.empty:
+        st.write("No recommendation tickets have been migrated into the warehouse yet.")
+    else:
+        st.caption("Ticket/execution shortfall audit")
+        _render_metric_dataframe(_display_trade_frame(audit), hide_index=True)
+
+    if not frame.empty:
+        st.caption("Latest ideal monitoring valuation state")
+        valuation_columns = [
+            "window_role",
+            "strategy_name",
+            "valuation_date",
+            "equity",
+            "cumulative_return",
+            "benchmark_cumulative_return",
+            "excess_return",
+            "drawdown",
+            "beta_adjusted_spy_delta",
+            "stocks_percent_of_max_sleeve",
+            "defensive_percent_of_max_sleeve",
+            "gold_percent_of_max_sleeve",
+            "crypto_percent_of_max_sleeve",
+            "credit_percent_of_max_sleeve",
+            "forward_status",
+        ]
+        available = [column for column in valuation_columns if column in frame.columns]
+        if available:
+            _render_metric_dataframe(_display_metrics(frame[available]), hide_index=True)
+
+
+def _false_count(frame: pd.DataFrame, column: str) -> int:
+    if frame.empty or column not in frame:
+        return 0
+    scoped = frame
+    if "execution_status" in scoped:
+        scoped = scoped[scoped["execution_status"].astype(str) == "executed"]
+    if scoped.empty:
+        return 0
+    return int((~scoped[column].fillna(False).astype(bool)).sum())
 
 
 def _render_monitoring_controls(

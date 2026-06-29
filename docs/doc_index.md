@@ -13,7 +13,6 @@ like live system behavior.
 | --- | --- | --- |
 | `README.md` | Running the app, dashboard walkthrough, daily workflow | Keep user-facing and operational; avoid deep backend theory here. |
 | `docs/backend_agent_guide.md` | Backend onboarding for engineers and future AI agents | Update when architecture, storage, command flow, or ownership changes. |
-| `docs/project_boundaries.md` | Project constraints and separation from work systems | Update only when operating boundaries intentionally change. |
 | `docs/experiment_plan.md` | Current roadmap and Phase 1/Phase 2 boundary | Keep current; archive outdated plans instead of accumulating stale queues. |
 | `docs/iteration_protocol.md` | Research loop, promotion rules, curation, and artifact roots | Update when experiment scoring, roots, or promotion semantics change. |
 | `docs/math_model_audit.md` | Locked formulas, model semantics, and caveats | Update with any formula or interpretation change in the same PR/change. |

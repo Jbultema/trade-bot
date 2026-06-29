@@ -18,8 +18,6 @@ The system is built around three ideas:
 
 ## Project Boundaries
 
-See also: `docs/project_boundaries.md`.
-
 Hard boundaries:
 
 - Local machine first. Do not assume cloud services, hosted databases, Databricks, or work infrastructure.
@@ -442,6 +440,75 @@ This is the canonical strategy drill-down. It should include explanation, perfor
 
 Promotion is not deployment. A promoted candidate can be suitable for paper monitoring, but live-money trust requires forward evidence.
 
+Signal evidence is the pruning and expansion layer for monitored inputs. It asks
+whether signal families have actually improved candidate behavior in historical
+experiments instead of assuming every interesting macro, news, or narrative
+diagnostic should influence allocation.
+
+```bash
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+```
+
+The command writes:
+
+- `reports/signal_evidence/signal_family_evidence.csv`: family-level evidence tier,
+  counts, win rates, marginal medians, recommendation, and data caveat.
+- `reports/signal_evidence/signal_marginal_tests.csv`: child-versus-parent
+  deltas for CAGR, drawdown, Calmar, re-entry score, turnover, and promotion
+  score. These are the preferred ablation rows.
+- `reports/signal_evidence/tagged_strategy_signal_families.csv`: normalized
+  scorecards with signal-family tags for auditability.
+
+Dashboard path:
+
+```text
+Research Lab -> Experiment Monitor -> Signal Evidence
+```
+
+Default interpretation:
+
+- `validated_contributor`: acceptable as a model-search driver.
+- `promising_mixed`: keep testing; inspect failure windows.
+- `not_proven`: do not promote as a default trade driver.
+- `context_only`: useful for human explanation, not allocation.
+- `research_gap`: backlog item; do not imply the data is already sufficient.
+
+Factor attribution is the canonical answer to "what actually moved the
+needle?" for a selected strategy. The implementation lives in
+`src/trade_bot/research/factor_attribution.py` and is surfaced in:
+
+```text
+Research Lab -> Experiment Monitor -> Candidate Details -> Factor Attribution
+```
+
+It uses transparent ETF proxy factors rather than a proprietary factor database:
+market beta, QQQ/growth, AI/semis, breadth, sector/cyclicals, rates/duration,
+credit, commodities, volatility, and residual strategy behavior. The output
+includes:
+
+- factor betas and correlations;
+- return contribution by factor;
+- risk contribution by factor;
+- residual return and residual volatility;
+- recent factor-decay flags versus the full-history factor profile.
+
+Use this before saying that two strategies are independent. If both are mostly
+QQQ/growth or AI/semis beta with similar residual behavior, they should not both
+consume scarce paper-monitoring slots without a clear operational reason.
+
+Implementation shortfall is monitored separately from ideal strategy research.
+The dashboard path is:
+
+```text
+Monitoring -> Shortfall / Drift
+```
+
+V1 compares journal recommendation tickets with logged paper/live executions,
+flagging missed tickets and executions outside price or size bands. It does not
+yet import broker-grade daily account valuation. When that data exists, use
+`build_implementation_shortfall` to compare ideal strategy equity to actual
+account equity over the same dates.
+
 ## ML And Bayesian Models
 
 See also: `docs/ml_research_framework.md`.
@@ -547,7 +614,7 @@ When changing system behavior, update the relevant doc:
 - New ML seam or validation rule: `docs/ml_research_framework.md`.
 - Research workflow or iteration rule: `docs/iteration_protocol.md` or `docs/experiment_plan.md`.
 - Live/paper process change: `docs/forward_testing_protocol.md`.
-- Local/work boundary change: `docs/project_boundaries.md`.
+- Local/work boundary change: this internal agent guide.
 - Overall architecture or agent onboarding change: this file.
 
 Documentation should explain what changed, why it exists, how it is used, and what it must not be used for.

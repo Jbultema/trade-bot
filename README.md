@@ -177,10 +177,13 @@ Key cards:
 
 Use this for strategy research, not same-day execution. It contains the experiment monitor, approach detail, performance-over-time views, allocation behavior, mechanics, robustness diagnostics, candidate manifests, and signal-inclusion tests.
 
+Default Research Lab views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants are still available through explicit all-approach filters.
+
 The **ML Diagnostics** section is artifact-backed, not trained inside Streamlit. Refresh it with `poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard`. Use `--profile research` when you intentionally want the heavier 1W/1M/3M model sweep with additional estimators; it is slower and should be treated as a research batch, not a dashboard cold-start path.
 
 Important distinction: a promoted experiment is not automatically live-operable. It means the idea deserves monitoring or implementation. A strategy becomes paper-operable only when it exists in the runtime pipeline and can be valued in snapshots.
 
+The **Factor Attribution** tab in Candidate Details decomposes a reconstructed strategy into transparent ETF proxy factors: broad market, QQQ/growth, AI/semis, breadth, cyclicals, rates/duration, credit, commodities, volatility, and residual strategy behavior. Use it to answer whether a strategy is genuinely different or mostly another disguised AI/growth bet.
 
 The **Taxable Impact** tab is the taxable-account research lens. It shows configured tax assumptions, pre-tax versus estimated after-tax CAGR, tax drag, after-tax growth utility, realized gain/loss mix, wash-sale estimates, loss carryforward, and a tax-drag watchlist. Use it for taxable brokerage evaluation; use **Outcome Frontier** for IRA-like/pre-tax selection.
 
@@ -191,6 +194,8 @@ Use this for champion/challenger forward testing. It reads from the canonical Du
 Open **Monitoring Controls** to start monitoring an experiment or change an active window. Pick a strategy, choose `champion`, `challenger`, or `reference`, set the mode/account label, and assign paper capital. Use separate account labels when the same strategy should be monitored as multiple sleeves or capital sizes. Leave `Only champion` unchecked if multiple active champions are intentional.
 
 Current paper monitoring starts at the configured capital base. The first valuation row is intentionally `0.00%` return; subsequent rows compound from future snapshots. This avoids treating full-history backtest growth as forward paper performance.
+
+The **Shortfall / Drift** tab compares logged recommendation tickets with logged paper/live executions. It flags unexecuted tickets, executions outside price bands, and executions outside size bands. V1 does not yet replace broker-grade daily account valuation, but it makes timing, missed execution, and band discipline auditable.
 
 ## Common Operator Workflows
 
@@ -339,6 +344,41 @@ Dashboard path: **Research Lab -> Experiment Monitor -> Sanity Impact**.
 
 Use that tab to compare profile-level adoption reads and pair-level deltas. A positive `delta_max_drawdown` means the capped version had a less negative drawdown. A negative `delta_promotion_score` means the capped version scored worse after the validation penalties.
 
+### Signal Evidence And Ablations
+
+The research surface now separates proven model drivers from context-only diagnostics. Use signal evidence before expanding or pruning dashboard signals:
+
+```bash
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+```
+
+This writes:
+
+- `reports/signal_evidence/signal_family_evidence.csv`
+- `reports/signal_evidence/signal_marginal_tests.csv`
+- `reports/signal_evidence/tagged_strategy_signal_families.csv`
+
+Dashboard path: **Research Lab -> Experiment Monitor -> Signal Evidence**.
+
+Interpretation rules:
+
+- `validated_contributor`: paired parent/control tests show the signal family improved enough to remain a candidate model driver.
+- `promising_mixed`: keep testing, but inspect where the signal loses.
+- `not_proven`: do not let it drive default actions without more evidence.
+- `context_only` or `research_gap`: keep it as explanatory or backlog context unless a later ablation proves value.
+
+The family rows are useful for pruning. The paired marginal-test rows are the stronger evidence because they compare a candidate against its parent/control after the normal backtest cost assumptions.
+
+### Default Surface Pruning
+
+The app keeps the operating surface narrow by default:
+
+- Core reference anchors: SPY, QQQ, BIL/cash when configured, and U.S. 60/40.
+- Hidden from default action/monitoring views: unsupported watchlists, thin-proxy diagnostics, low-CAGR defensive sleeves, failed ML routers, poor sector-rotation ML, and `pruned_dead_end` rows.
+- Still inspectable: archived strategies, broad reference portfolios, context-only narrative diagnostics, and unsupported data gaps through explicit all-archive or research-only views.
+
+This keeps the daily decision workflow focused without losing the research audit trail.
+
 ### Change Champion, Challenger, Or Window Status
 
 Dashboard path:
@@ -397,6 +437,7 @@ Prefer `active_valued` or `available_to_seed_and_value` for serious paper monito
 | Paper return is `0.00%` on the first row | First valuation starts at capital base by design. | Keep collecting future snapshot valuations. |
 | `seed-monitoring-windows --top-n 3` does not match raw promotion-score rank | Seeding uses monitoring rank, not raw score alone. | Use Research Lab leaderboard and manually add strict raw-score candidates. |
 | Champion/challenger table does not update after starting a window | Valuation has not run after the window was created. | Run `poetry run trade-bot run-paper-valuation`. |
+| Strategies look different but share the same driver | Factor attribution may show the same dominant beta across several candidates. | Use Research Lab -> Candidate Details -> Factor Attribution before paper-monitoring look-alike strategies. |
 | Recommendation changed but paper book still looks old | Forward Test executions and Monitoring windows are separate from current target recommendations. | Lock/log execution in Forward Test or update the monitored window as appropriate. |
 | Many tiny daily changes show up | Strategy may be too active for human execution. | Inspect turnover/action frequency in Research Lab before promoting it. |
 
@@ -441,7 +482,7 @@ The intended end state is 1-3 operational systems, not a dashboard full of live 
 | Deep | Walk-forward testing, regime holdouts, left-tail windows, overfit diagnostics, and forward paper monitoring. |
 | Operational | Promote only systems that can be explained, valued, monitored, and acted on with human latency. |
 
-Reference portfolio policies are included so simple allocations stay visible beside tactical systems. Active-trading probes use `configs/active_trading.yaml`, which applies daily rebalancing checks, next-day signal lag, and higher transaction-cost assumptions.
+Core reference portfolio policies are included so simple allocations stay visible beside tactical systems. Broader policy references remain inspectable in the research archive. Active-trading probes use `configs/active_trading.yaml`, which applies daily rebalancing checks, next-day signal lag, and higher transaction-cost assumptions.
 
 ```bash
 poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration 41
@@ -500,10 +541,6 @@ poetry env info
 ```
 
 If Codex keeps requesting file approvals after a repo move, start a fresh Codex session rooted at the actual repo path.
-
-## Project Boundary
-
-This is a private local research project. It should stay separate from work infrastructure and data. See [docs/project_boundaries.md](docs/project_boundaries.md) for the dependency and operating rules, including how any optional `lib-aim-timeseries` reuse should be isolated behind adapters.
 
 ## Not Investment Advice
 

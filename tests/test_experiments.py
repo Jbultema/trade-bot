@@ -628,6 +628,59 @@ def test_multi_asset_risk_on_rotation_iterations_cover_non_tech_buckets() -> Non
     assert any(candidate.strategy.cycle_min_hold_days >= 10 for candidate in candidates)
 
 
+def test_interview_insight_iterations_cover_new_macro_theses() -> None:
+    candidates = [candidate for iteration in range(151, 156) for candidate in generate_iteration_candidates(iteration)]
+    excluded = set(DEFAULT_EXCLUDED_TICKERS)
+    families = {candidate.family for candidate in candidates}
+    global_tickers = {"VT", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWW"}
+    infra_tickers = {"SMH", "SOXX", "VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "XLU", "XLI"}
+    repression_tickers = {"GLD", "IAU", "TIP", "VTIP", "DBC", "UUP", "TLT", "IEF"}
+    credit_tickers = {"HYG", "JNK", "LQD", "BKLN", "SRLN"}
+
+    assert len(candidates) >= 20
+    assert all(candidate.phase == "interview_insight" for candidate in candidates)
+    assert all(excluded.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert "source_of_funds_rotation" in families
+    assert "tri_sleeve_reference" in families
+    assert "regime_conditioned_vol_target" in families
+    assert "deescalation_reentry" in families
+    assert "fed_liquidity_term_premium" in families
+    assert any(candidate.strategy.type == "fixed_allocation" for candidate in candidates)
+    assert any(candidate.strategy.type == "dip_reentry_overlay" for candidate in candidates)
+    assert any(global_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(infra_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(repression_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(credit_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(candidate.decision_sanity is not None for candidate in candidates)
+    assert any(candidate.strategy.drawdown_control is not None for candidate in candidates)
+
+
+def test_long_form_macro_process_iterations_cover_risk_process_theses() -> None:
+    candidates = [candidate for iteration in range(156, 161) for candidate in generate_iteration_candidates(iteration)]
+    excluded = set(DEFAULT_EXCLUDED_TICKERS)
+    families = {candidate.family for candidate in candidates}
+    global_tickers = {"VT", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWW"}
+    driver_tickers = {"GLD", "IAU", "TIP", "VTIP", "DBC", "UUP", "TLT", "IEF", "BIL"}
+    factor_tickers = {"XLK", "XLI", "XLF", "XLV", "XLY", "XLP", "XLU", "XLE", "QUAL", "COWZ"}
+
+    assert len(candidates) >= 20
+    assert all(candidate.phase == "long_form_macro_process" for candidate in candidates)
+    assert all(excluded.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert "simple_systematic_driver_sleeves" in families
+    assert "late_bubble_rebound_management" in families
+    assert "home_bias_global_convergence" in families
+    assert "fed_regime_surprise_paths" in families
+    assert "factor_regime_overlay_proxy" in families
+    assert any(candidate.strategy.type == "fixed_allocation" for candidate in candidates)
+    assert any(candidate.strategy.type == "dip_reentry_overlay" for candidate in candidates)
+    assert any(candidate.strategy.type == "sector_regime_rotation" for candidate in candidates)
+    assert any(global_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(driver_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(factor_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(candidate.strategy.drawdown_control is not None for candidate in candidates)
+    assert any(candidate.strategy.volatility_target is not None for candidate in candidates)
+
+
 def test_thresholded_future_state_probability_preserves_low_confidence_risk_on() -> None:
     probabilities = pd.Series([0.10, 0.35, 0.60, 0.95], dtype=float)
 
@@ -951,7 +1004,7 @@ def test_macro_reset_iterations_use_human_readable_strategy_names() -> None:
 def test_reference_portfolio_iteration_includes_explicit_policy_sizing() -> None:
     candidates = generate_iteration_candidates(41)
 
-    assert len(candidates) == 9
+    assert len(candidates) == 10
     assert {candidate.family for candidate in candidates} == {"reference_portfolio"}
     assert {candidate.role for candidate in candidates} == {"reference_portfolio"}
     assert all(candidate.strategy.type == "fixed_allocation" for candidate in candidates)
@@ -966,6 +1019,12 @@ def test_reference_portfolio_iteration_includes_explicit_policy_sizing() -> None
         "IEF": 0.15,
         "GLD": 0.075,
         "DBC": 0.075,
+    }
+    assert allocation_lookup["i41_ref_global_risk_sleeves"] == {
+        "VT": 0.60,
+        "USFR": 0.40,
+        "GLDM": 0.0,
+        "FBTC": 0.0,
     }
 
 

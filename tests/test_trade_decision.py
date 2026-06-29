@@ -9,7 +9,7 @@ from trade_bot.research.current_state import CurrentStateRun
 from trade_bot.research.event_risk import EventRiskRun, MarketEvent
 from trade_bot.research.news_monitor import NewsMonitorRun
 from trade_bot.research.signal_inclusion import SignalInclusionRun
-from trade_bot.research.trade_decision import build_trade_decision
+from trade_bot.research.trade_decision import _event_context, build_trade_decision
 
 
 def test_trade_decision_reduces_risk_when_scenarios_and_events_are_adverse() -> None:
@@ -408,6 +408,31 @@ def _event_risk() -> EventRiskRun:
         scenario_playbook=pd.DataFrame(),
         current_event_scenarios=pd.DataFrame(),
     )
+
+
+def test_watch_only_events_are_context_but_not_sizing_pressure() -> None:
+    watch_event = MarketEvent(
+        event_id="bis_ai_financing_warning",
+        name="BIS AI financing warning",
+        date=pd.Timestamp("2026-06-29"),
+        category="ai_unit_economics",
+        direction="escalation",
+        description="watch context",
+        current=True,
+        phase="leading_warning",
+        sizing_authority=False,
+    )
+    sizing_event = replace(watch_event, event_id="sizing_event", sizing_authority=True)
+
+    watch_context = _event_context((watch_event,))
+    sizing_context = _event_context((sizing_event,))
+
+    assert watch_context["current_event_count"] == 1
+    assert watch_context["watch_only_event_count"] == 1
+    assert watch_context["event_pressure"] == 0.0
+    assert watch_context["risk_multiplier"] == 1.0
+    assert "watch-only" in str(watch_context["evidence"])
+    assert sizing_context["event_pressure"] == 0.07
 
 
 def _news_monitor() -> NewsMonitorRun:

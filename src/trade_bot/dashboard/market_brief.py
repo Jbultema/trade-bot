@@ -11,6 +11,10 @@ from trade_bot.dashboard.formatting import _display_metrics, _format_decimal, _f
 from trade_bot.DEFAULTS import DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT
 from trade_bot.research.action_headline import ActionHeadline
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.research.narrative_signals import (
+    build_narrative_signal_table,
+    summarize_narrative_signals,
+)
 from trade_bot.trading.book_alignment import BookAlignmentRun
 
 
@@ -93,6 +97,12 @@ def build_market_brief_report(
     scenario_links = baseline_run.trade_decision.scenario_links
     risk_summary = _portfolio_risk_summary(baseline_run)
     news_summary = _news_summary(baseline_run)
+    narrative_signals = build_narrative_signal_table(
+        baseline_run.prices,
+        news_triage=baseline_run.news_monitor.triage,
+        events=baseline_run.event_risk.events,
+    )
+    narrative_summary = summarize_narrative_signals(narrative_signals)
     scenario_summary = _scenario_summary(
         trade_summary, scenario_links, current_state.scenario_lattice
     )
@@ -138,6 +148,7 @@ def build_market_brief_report(
         _change_paragraph(change_summary),
         _driver_paragraph(
             news_summary=news_summary,
+            narrative_summary=narrative_summary,
             macro_summary=macro_summary,
             regime_pulse_summary=regime_pulse_summary,
             instability_summary=instability_summary,
@@ -174,6 +185,12 @@ def build_market_brief_report(
             answer=news_summary["answer"],
             detail=news_summary["detail"],
             tone=news_summary["tone"],
+        ),
+        MarketBriefCard(
+            label="Cross-Source Signals",
+            answer=narrative_summary["answer"],
+            detail=f"{narrative_summary['detail']} Explainer/research-only; no direct sizing authority.",
+            tone=narrative_summary["tone"],
         ),
         MarketBriefCard(
             label="Regime Pulse",
@@ -224,6 +241,8 @@ def build_market_brief_report(
             macro_summary=macro_summary,
             regime_pulse_summary=regime_pulse_summary,
             instability_summary=instability_summary,
+            narrative_summary=narrative_summary,
+            narrative_signals=narrative_signals,
             risk_summary=risk_summary,
             change_summary=change_summary,
             open_ticket_count=open_ticket_count,
@@ -317,6 +336,7 @@ def _market_read_paragraph(
 def _driver_paragraph(
     *,
     news_summary: dict[str, str],
+    narrative_summary: dict[str, str],
     macro_summary: dict[str, str],
     regime_pulse_summary: dict[str, str],
     instability_summary: dict[str, str],
@@ -324,6 +344,8 @@ def _driver_paragraph(
 ) -> str:
     return (
         f"Still true: the driver stack is being pulled most by {news_summary['plain']}. "
+        f"Cross-source diagnostics show {narrative_summary['plain']}, but this layer is "
+        "explainer/research-only unless ablation tests promote a signal. "
         f"Macro is {macro_summary['plain']}; regime pulse is {regime_pulse_summary['plain']}. "
         f"Regime instability is {instability_summary['plain']}. "
         f"Scenario drivers point to {driver_summary}. "
@@ -963,60 +985,96 @@ def _market_brief_details(
     macro_summary: dict[str, str],
     regime_pulse_summary: dict[str, str],
     instability_summary: dict[str, str],
+    narrative_summary: dict[str, str],
+    narrative_signals: pd.DataFrame,
     risk_summary: dict[str, object],
     change_summary: dict[str, object],
     open_ticket_count: int,
 ) -> pd.DataFrame:
-    return pd.DataFrame(
-        [
-            {
-                "topic": "market_state",
-                "current_read": f"{current_state.risk_status.upper()} ({current_state.risk_score:.2f})",
-                "why_it_matters": current_state.risk_summary,
-            },
-            {
-                "topic": "scenario_map",
-                "current_read": scenario_summary["answer"],
-                "why_it_matters": scenario_summary["detail"],
-            },
-            {
-                "topic": "change_since_prior",
-                "previous_read": change_summary.get("previous_read", "n/a"),
-                "current_read": change_summary.get("current_read", change_summary["answer"]),
-                "why_it_matters": change_summary["detail"],
-            },
-            {
-                "topic": "news_events",
-                "current_read": news_summary["answer"],
-                "why_it_matters": news_summary["detail"],
-            },
-            {
-                "topic": "macro_stack",
-                "current_read": macro_summary["answer"],
-                "why_it_matters": macro_summary["detail"],
-            },
-            {
-                "topic": "regime_pulse",
-                "current_read": regime_pulse_summary["answer"],
-                "why_it_matters": regime_pulse_summary["detail"],
-            },
-            {
-                "topic": "regime_instability",
-                "current_read": instability_summary["answer"],
-                "why_it_matters": instability_summary["detail"],
-            },
-            {
-                "topic": "risk_budget",
-                "current_read": _format_decimal(trade_summary.get("risk_budget_multiplier")),
-                "why_it_matters": _risk_budget_detail(trade_summary, risk_summary),
-            },
-            {
-                "topic": "open_tickets",
-                "current_read": f"{open_ticket_count}",
-                "why_it_matters": "Open locked recommendations need review before the next execution window.",
-            },
-        ]
-    )
+    rows: list[dict[str, object]] = [
+        {
+            "topic": "market_state",
+            "current_read": f"{current_state.risk_status.upper()} ({current_state.risk_score:.2f})",
+            "model_role": "allocation_driver",
+            "why_it_matters": current_state.risk_summary,
+        },
+        {
+            "topic": "scenario_map",
+            "current_read": scenario_summary["answer"],
+            "model_role": "allocation_driver",
+            "why_it_matters": scenario_summary["detail"],
+        },
+        {
+            "topic": "change_since_prior",
+            "previous_read": change_summary.get("previous_read", "n/a"),
+            "current_read": change_summary.get("current_read", change_summary["answer"]),
+            "model_role": "dashboard_change_detection",
+            "why_it_matters": change_summary["detail"],
+        },
+        {
+            "topic": "news_events",
+            "current_read": news_summary["answer"],
+            "model_role": "event_pressure_driver_after_activation",
+            "why_it_matters": news_summary["detail"],
+        },
+        {
+            "topic": "cross_source_signals",
+            "current_read": narrative_summary["answer"],
+            "model_role": "explainer_research_only",
+            "why_it_matters": (
+                f"{narrative_summary['detail']} These rows do not directly alter the target "
+                "portfolio unless a future ablation promotes them."
+            ),
+        },
+        {
+            "topic": "macro_stack",
+            "current_read": macro_summary["answer"],
+            "model_role": "allocation_driver_only_for_validated_pressure_groups",
+            "why_it_matters": macro_summary["detail"],
+        },
+        {
+            "topic": "regime_pulse",
+            "current_read": regime_pulse_summary["answer"],
+            "model_role": "context_and_research_signal",
+            "why_it_matters": regime_pulse_summary["detail"],
+        },
+        {
+            "topic": "regime_instability",
+            "current_read": instability_summary["answer"],
+            "model_role": "watch_only_research_signal",
+            "why_it_matters": instability_summary["detail"],
+        },
+        {
+            "topic": "risk_budget",
+            "current_read": _format_decimal(trade_summary.get("risk_budget_multiplier")),
+            "model_role": "allocation_driver",
+            "why_it_matters": _risk_budget_detail(trade_summary, risk_summary),
+        },
+        {
+            "topic": "open_tickets",
+            "current_read": f"{open_ticket_count}",
+            "model_role": "workflow_control",
+            "why_it_matters": "Open locked recommendations need review before the next execution window.",
+        },
+    ]
+    if not narrative_signals.empty:
+        for _, row in narrative_signals.head(8).iterrows():
+            rows.append(
+                {
+                    "topic": f"cross_source::{row['signal_id']}",
+                    "current_read": (
+                        f"{row['status']} ({float(row['score']):.2f}); "
+                        f"{row['data_support']}"
+                    ),
+                    "model_role": str(row.get("decision_role", "explainer_research_only")),
+                    "why_it_matters": (
+                        f"{row['signal_name']}: {row['read_through']} "
+                        f"Authority: {row.get('model_authority', 'no_direct_sizing_authority')}. "
+                        f"Evidence: {row['evidence']} Missing data: {row['missing_data']}"
+                    ),
+                }
+            )
+    return pd.DataFrame(rows)
 
 
 def _top_news_items(triage: pd.DataFrame) -> str:

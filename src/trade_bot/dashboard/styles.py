@@ -200,8 +200,92 @@ def _install_dashboard_styles() -> None:
         }
         .dashboard-workbench-divider {
             height: 1px;
-            margin: 0 0 1.35rem;
+            margin: 0.85rem 0 1.35rem;
             background: color-mix(in srgb, var(--tb-card-border) 78%, transparent);
+        }
+        .workbench-guide {
+            display: grid;
+            grid-template-columns: minmax(220px, 0.34fr) minmax(0, 1fr);
+            gap: 18px;
+            margin: 0.2rem 0 0.7rem;
+            padding: 18px 20px;
+            border: 1px solid var(--tb-card-border);
+            border-left: 7px solid var(--tb-card-border);
+            border-radius: 8px;
+            background:
+                linear-gradient(90deg, color-mix(in srgb, var(--tb-card-border) 16%, var(--tb-card-bg)), var(--tb-card-bg) 62%),
+                var(--tb-card-bg);
+            color: var(--tb-card-text);
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .workbench-guide-critical {
+            border-left-color: var(--tb-critical-border);
+        }
+        .workbench-guide-warning {
+            border-left-color: var(--tb-warning-border);
+        }
+        .workbench-guide-success {
+            border-left-color: var(--tb-success-border);
+        }
+        .workbench-guide-neutral {
+            border-left-color: var(--tb-accent);
+        }
+        .workbench-guide-kicker {
+            margin: 0 0 5px;
+            color: var(--tb-accent);
+            font-size: 0.75rem;
+            font-weight: 850;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+        .workbench-guide-title {
+            margin: 0 !important;
+            color: var(--tb-card-text) !important;
+            font-size: 1.5rem;
+            line-height: 1.12;
+        }
+        .workbench-guide-role {
+            margin: 7px 0 0;
+            color: var(--tb-card-muted);
+            font-size: 0.94rem;
+            line-height: 1.35;
+        }
+        .workbench-guide-main {
+            min-width: 0;
+        }
+        .workbench-guide-question {
+            margin: 0 0 10px;
+            color: var(--tb-card-text);
+            font-size: 1.08rem;
+            font-weight: 780;
+            line-height: 1.35;
+        }
+        .workbench-guide-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 10px;
+        }
+        .workbench-guide-grid div {
+            min-height: 86px;
+            padding: 10px 12px;
+            border: 1px solid var(--tb-card-border);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--tb-panel-bg) 76%, transparent);
+        }
+        .workbench-guide-grid span {
+            display: block;
+            margin: 0 0 5px;
+            color: var(--tb-card-muted);
+            font-size: 0.72rem;
+            font-weight: 820;
+            line-height: 1.2;
+            text-transform: uppercase;
+        }
+        .workbench-guide-grid p {
+            margin: 0;
+            color: var(--tb-card-text);
+            font-size: 0.89rem;
+            line-height: 1.38;
         }
         div[data-testid="stPills"] button,
         div[data-testid="stPills"] [role="button"] {
@@ -777,6 +861,9 @@ def _install_dashboard_styles() -> None:
                 max-width: none;
                 padding-top: 0;
             }
+            .workbench-guide {
+                grid-template-columns: 1fr;
+            }
             .market-brief-grid,
             .market-brief-readouts,
             .market-brief-delta-grid,
@@ -821,6 +908,7 @@ def _install_dashboard_styles() -> None:
             .market-brief-grid,
             .market-brief-readouts,
             .market-brief-delta-grid,
+            .workbench-guide-grid,
             .brief-grid {
                 grid-template-columns: 1fr;
             }

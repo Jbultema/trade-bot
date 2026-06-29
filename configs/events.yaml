@@ -159,3 +159,62 @@ events:
     source_url: "https://www.theguardian.com/world/2026/jun/17/us-iran-deal-trump"
     description: >
       MOU terms point to de-escalation, but sanctions, timing, verification, and reversal risk remain unresolved.
+
+  - event_id: bis_ai_financing_warning_2026_06_29
+    name: BIS flags AI financing and repricing risk
+    date: "2026-06-29"
+    category: ai_unit_economics
+    direction: escalation
+    current: true
+    sizing_authority: false
+    phase: leading_warning
+    phase_reason: >
+      BIS-style financial-stability warnings about AI financing, circular revenue loops, and crowded
+      capex expectations can precede market repricing, but this item needs price, credit, or breadth
+      confirmation before it can resize the book.
+    confirmation_window: >
+      Watch hyperscaler free cash flow and margins, SMH/SPY, QQQ/RSP, HYG/LQD, VIXY, credit spreads,
+      and data-center financing proxies before giving this event sizing authority.
+    tags:
+      - ai
+      - ai_capex
+      - circular_financing
+      - credit
+      - hyperscalers
+      - financial_stability
+      - leading_warning
+      - watch_context
+    source_url: "user_provided_42_macro_daily_read_2026_06_29"
+    description: >
+      Current market commentary highlighted BIS concerns around AI financing quality, circular funding
+      relationships, and the risk that aggressive compute/capex assumptions are vulnerable to repricing.
+      Trade-bot should monitor this as context, not as a standalone reason to sell.
+
+  - event_id: ai_compute_capacity_constraints_2026_06_29
+    name: AI compute capacity and pricing constraints enter market discussion
+    date: "2026-06-29"
+    category: ai_infrastructure
+    direction: escalation
+    current: true
+    sizing_authority: false
+    phase: leading_warning
+    phase_reason: >
+      Compute scarcity, power availability, data-center capacity, and supplier pricing constraints may
+      explain AI market leadership or future margin pressure, but this is still a watch-context driver.
+    confirmation_window: >
+      Watch semis, hyperscalers, power/grid infrastructure, cloud margins, credit, and AI breadth before
+      treating the capacity constraint as a portfolio-sizing signal.
+    tags:
+      - ai
+      - compute_capacity
+      - data_centers
+      - hyperscalers
+      - power_grid
+      - ai_infrastructure
+      - leading_warning
+      - watch_context
+    source_url: "user_provided_42_macro_daily_read_2026_06_29"
+    description: >
+      Current market commentary emphasized compute-capacity constraints and upward-sloping AI input
+      costs. The tradable question is whether this remains a supplier tailwind, becomes a hyperscaler
+      margin problem, or evolves into a broader AI capex repricing catalyst.

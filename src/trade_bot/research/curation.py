@@ -2,7 +2,11 @@ from __future__ import annotations
 
 import pandas as pd
 
-from trade_bot.DEFAULTS import DEFAULT_CURATED_SHELF_LIMIT, DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT
+from trade_bot.DEFAULTS import (
+    DEFAULT_CURATED_SHELF_LIMIT,
+    DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
+    DEFAULT_REFERENCE_BASELINE_STRATEGIES,
+)
 from trade_bot.research.strategy_outcome_utility import enrich_strategy_outcome_utility
 
 PRUNED_STATUS = "pruned_dead_end"
@@ -263,7 +267,7 @@ def select_curated_strategy_shelf(
     reference_mask = _reference_mask(ranked)
     pruned_mask = ranked.get("research_status", pd.Series("", index=ranked.index)).eq(PRUNED_STATUS)
     non_reference = ranked[~reference_mask & ~pruned_mask].copy()
-    reference = ranked[reference_mask].copy()
+    reference = ranked[reference_mask & default_reference_mask(ranked)].copy()
 
     anchor_count = min(5, limit)
     append_rows(
@@ -354,6 +358,20 @@ def _reference_mask(frame: pd.DataFrame) -> pd.Series:
         | role.eq("reference_portfolio")
         | strategy.str.startswith("i41_ref_")
     )
+
+
+def default_reference_mask(frame: pd.DataFrame) -> pd.Series:
+    """Return the small reference set shown in default operating surfaces.
+
+    Broader reference portfolios remain auditable in "all" views, but the main
+    monitoring and curation layers should not be crowded by every policy
+    portfolio ever tested.
+    """
+    if frame.empty:
+        return pd.Series(dtype=bool)
+    strategy = _first_string_column(frame, ["strategy_name", "strategy", "name"])
+    strategy = strategy.str.strip().str.lower()
+    return strategy.isin(DEFAULT_REFERENCE_BASELINE_STRATEGIES)
 
 
 def _contains_any(frame: pd.DataFrame, *, columns: list[str], needles: list[str]) -> pd.Series:

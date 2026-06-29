@@ -145,6 +145,52 @@ def test_curated_shelf_excludes_pruned_dead_ends_by_default() -> None:
     assert "keeper" in set(curated["strategy"])
     assert "dead_end" not in set(curated["strategy"])
 
+
+def test_curated_shelf_keeps_only_core_reference_anchors_by_default() -> None:
+    rows = pd.DataFrame(
+        [
+            {
+                "strategy": "keeper",
+                "family": "ai_escape",
+                "phase": "operating_system",
+                "role": "candidate",
+                "promotion_decision": "promote_candidate",
+                "promotion_score": 0.80,
+                "cagr": 0.14,
+                "calmar": 0.70,
+                "max_drawdown": -0.21,
+            },
+            {
+                "strategy": "i41_ref_us_60_40",
+                "family": "reference_portfolio",
+                "phase": "reference",
+                "role": "reference_portfolio",
+                "promotion_decision": "reject_or_hold_for_reference",
+                "promotion_score": 0.40,
+                "cagr": 0.07,
+                "calmar": 0.35,
+                "max_drawdown": -0.25,
+            },
+            {
+                "strategy": "i41_ref_all_weather",
+                "family": "reference_portfolio",
+                "phase": "reference",
+                "role": "reference_portfolio",
+                "promotion_decision": "reject_or_hold_for_reference",
+                "promotion_score": 0.50,
+                "cagr": 0.06,
+                "calmar": 0.33,
+                "max_drawdown": -0.18,
+            },
+        ]
+    )
+
+    curated = select_curated_strategy_shelf(rank_strategy_candidates(rows), limit=10)
+
+    assert "i41_ref_us_60_40" in set(curated["strategy"])
+    assert "i41_ref_all_weather" not in set(curated["strategy"])
+
+
 def test_growth_utility_can_rank_higher_cagr_tolerable_drawdown_above_safer_lower_growth() -> None:
     rows = pd.DataFrame(
         [

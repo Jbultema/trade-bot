@@ -1,11 +1,25 @@
 from __future__ import annotations
 
 import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
+from trade_bot.DEFAULTS import (
+    DEFAULT_NARRATIVE_OPERATING_DATA_SUPPORT,
+    DEFAULT_NARRATIVE_RESEARCH_ONLY_DATA_SUPPORT,
+    DEFAULT_NARRATIVE_UNSUPPORTED_DATA_SUPPORT,
+)
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.research.driver_rotation import (
+    build_driver_rotation_table,
+    summarize_driver_rotation,
+)
+from trade_bot.research.narrative_signals import (
+    build_narrative_signal_table,
+    summarize_narrative_signals,
+)
 
 
 def _dedupe_display_rows(frame: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
@@ -76,6 +90,12 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
         "regime_instability_components",
         pd.DataFrame(),
     )
+    narrative_signals = build_narrative_signal_table(
+        baseline_run.prices,
+        news_triage=baseline_run.news_monitor.triage,
+        events=baseline_run.event_risk.events,
+    )
+    narrative_summary = summarize_narrative_signals(narrative_signals)
 
     st.subheader("Signal Coverage")
     coverage_cols = st.columns(3)
@@ -165,6 +185,123 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
             "Research signal only: useful for monitoring transition risk, not yet granted sizing authority."
         )
         _render_metric_dataframe(_display_metrics(regime_instability_components))
+
+    st.subheader("Driver Rotation")
+    driver_rotation = build_driver_rotation_table(
+        baseline_run.prices,
+        current_state,
+        narrative_signals=narrative_signals,
+        news_triage=baseline_run.news_monitor.triage,
+    )
+    driver_summary = summarize_driver_rotation(driver_rotation)
+    driver_cols = st.columns(5)
+    _helped_metric(
+        driver_cols[0],
+        "Normally Important",
+        f"{int(driver_rotation['normally_important'].sum()):,}" if not driver_rotation.empty else "0",
+    )
+    _helped_metric(
+        driver_cols[1],
+        "Currently Active",
+        f"{int(driver_rotation['currently_active'].sum()):,}" if not driver_rotation.empty else "0",
+    )
+    _helped_metric(
+        driver_cols[2],
+        "Emerging",
+        f"{int(driver_rotation['emerging_importance'].sum()):,}" if not driver_rotation.empty else "0",
+    )
+    _helped_metric(
+        driver_cols[3],
+        "Fading",
+        f"{int(driver_rotation['fading_importance'].sum()):,}" if not driver_rotation.empty else "0",
+    )
+    _helped_metric(driver_cols[4], "Driver Read", driver_summary["answer"])
+    st.caption(
+        f"{driver_summary['detail']} X-axis is historical relevance from ML diagnostics "
+        "or fallback research priors; Y-axis is current activation. Color is model authority."
+    )
+    if driver_rotation.empty:
+        st.write("No driver-rotation diagnostics are available.")
+    else:
+        quadrant_tab, heatmap_tab, table_tab = st.tabs(["Quadrant", "Heatmap", "Driver Table"])
+        with quadrant_tab:
+            st.plotly_chart(
+                _driver_rotation_scatter_figure(driver_rotation),
+                use_container_width=True,
+            )
+        with heatmap_tab:
+            st.plotly_chart(
+                _driver_rotation_heatmap_figure(driver_rotation),
+                use_container_width=True,
+            )
+        with table_tab:
+            display_columns = [
+                "driver_label",
+                "model_role",
+                "primary_rotation_state",
+                "proven_relevance",
+                "current_activation",
+                "previous_30d_activation",
+                "previous_90d_activation",
+                "change_30d",
+                "change_90d",
+                "data_support",
+                "evidence",
+                "interpretation",
+            ]
+            _render_metric_dataframe(
+                _display_metrics(driver_rotation[display_columns]),
+                hide_index=True,
+            )
+
+    st.subheader("Cross-Source Insight Diagnostics")
+    signal_cols = st.columns(4)
+    operating_signals = narrative_signals[
+        narrative_signals["data_support"].isin(DEFAULT_NARRATIVE_OPERATING_DATA_SUPPORT)
+    ]
+    research_only_signals = narrative_signals[
+        narrative_signals["data_support"].isin(DEFAULT_NARRATIVE_RESEARCH_ONLY_DATA_SUPPORT)
+    ]
+    unsupported_signals = narrative_signals[
+        narrative_signals["data_support"].isin(DEFAULT_NARRATIVE_UNSUPPORTED_DATA_SUPPORT)
+    ]
+    active_count = int(operating_signals["status"].isin(["active", "warning"]).sum())
+    unsupported_count = int(
+        narrative_signals["data_support"].isin(DEFAULT_NARRATIVE_UNSUPPORTED_DATA_SUPPORT).sum()
+    )
+    _helped_metric(signal_cols[0], "Operating Context", f"{len(operating_signals):,}")
+    _helped_metric(signal_cols[1], "Active Operating", f"{active_count:,}")
+    _helped_metric(signal_cols[2], "Research-Only", f"{len(research_only_signals):,}")
+    _helped_metric(signal_cols[3], "Sizing Authority", "None")
+    st.caption(
+        f"{narrative_summary['detail']} These rows synthesize recurring themes from the "
+        "external sources into diagnostics. Direct/proxy rows are operating context; thin proxies "
+        "and unsupported watchlists are research-only unless ablation evidence promotes them."
+    )
+    narrative_tabs = st.tabs(
+        [
+            "Operating Context",
+            "Research-Only Thin Proxies",
+            "Unsupported Watchlist",
+            "All Diagnostics",
+        ]
+    )
+    with narrative_tabs[0]:
+        _render_metric_dataframe(_display_metrics(operating_signals), hide_index=True)
+    with narrative_tabs[1]:
+        st.caption(
+            "Thin proxies can explain a narrative but are not treated as model drivers without "
+            "marginal-contribution evidence."
+        )
+        _render_metric_dataframe(_display_metrics(research_only_signals), hide_index=True)
+    with narrative_tabs[2]:
+        st.caption(
+            f"{unsupported_count:,} watchlist gap(s): data we might want but do not currently have "
+            "in a reliable local feed."
+        )
+        _render_metric_dataframe(_display_metrics(unsupported_signals), hide_index=True)
+    with narrative_tabs[3]:
+        _render_metric_dataframe(_display_metrics(narrative_signals), hide_index=True)
 
     st.subheader("Macro State")
     if current_state.macro_category_summary.empty:
@@ -302,3 +439,132 @@ def _lead_regime_label(row: pd.Series) -> str:
     if pd.isna(probability):
         return regime
     return f"{regime} {float(probability):.0%}"
+
+
+def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
+    role_colors = {
+        "allocation_driver": "#0f766e",
+        "validated_context": "#b7791f",
+        "explainer_only": "#4f46e5",
+        "unsupported": "#9ca3af",
+    }
+    fig = go.Figure()
+    for role, frame in rotation.groupby("model_role", sort=False):
+        color = role_colors.get(str(role), "#64748b")
+        fig.add_trace(
+            go.Scatter(
+                x=frame["proven_relevance"],
+                y=frame["current_activation"],
+                mode="markers+text",
+                name=str(role).replace("_", " ").title(),
+                text=frame["driver_label"],
+                textposition="top center",
+                marker={
+                    "size": 12 + frame["current_activation"].astype(float) * 18,
+                    "color": color,
+                    "opacity": 0.82,
+                    "line": {"color": "white", "width": 1},
+                },
+                customdata=frame[
+                    [
+                        "primary_rotation_state",
+                        "change_30d",
+                        "change_90d",
+                        "data_support",
+                    ]
+                ],
+                hovertemplate=(
+                    "<b>%{text}</b><br>"
+                    "Historical relevance: %{x:.0%}<br>"
+                    "Current activation: %{y:.0%}<br>"
+                    "State: %{customdata[0]}<br>"
+                    "Change vs 30d: %{customdata[1]:+.0%}<br>"
+                    "Change vs 90d: %{customdata[2]:+.0%}<br>"
+                    "Support: %{customdata[3]}<extra></extra>"
+                ),
+            )
+        )
+    for _, row in (
+        rotation.dropna(subset=["previous_30d_activation"])
+        .assign(abs_change=lambda frame: frame["change_30d"].abs())
+        .sort_values("abs_change", ascending=False)
+        .head(10)
+        .iterrows()
+    ):
+        previous = float(row["previous_30d_activation"])
+        current = float(row["current_activation"])
+        if abs(current - previous) < 0.08:
+            continue
+        fig.add_annotation(
+            x=float(row["proven_relevance"]),
+            y=current,
+            ax=float(row["proven_relevance"]),
+            ay=previous,
+            xref="x",
+            yref="y",
+            axref="x",
+            ayref="y",
+            showarrow=True,
+            arrowhead=2,
+            arrowsize=1.1,
+            arrowwidth=1.2,
+            arrowcolor="#111827",
+            opacity=0.55,
+        )
+    fig.add_vline(x=0.45, line_dash="dash", line_color="#94a3b8")
+    fig.add_hline(y=0.45, line_dash="dash", line_color="#94a3b8")
+    fig.update_layout(
+        title="Driver Rotation: Historical Relevance vs Current Activation",
+        xaxis_title="Proven historical relevance",
+        yaxis_title="Current activation / pressure",
+        xaxis={"range": [-0.03, 1.05], "tickformat": ".0%"},
+        yaxis={"range": [-0.03, 1.05], "tickformat": ".0%"},
+        template="plotly_white",
+        legend_title_text="Model role",
+        margin={"l": 20, "r": 20, "t": 60, "b": 20},
+        height=520,
+    )
+    return fig
+
+
+def _driver_rotation_heatmap_figure(rotation: pd.DataFrame) -> go.Figure:
+    view = rotation.sort_values(
+        ["current_activation", "proven_relevance"],
+        ascending=False,
+    ).head(18)
+    metrics = [
+        "previous_90d_activation",
+        "previous_30d_activation",
+        "current_activation",
+        "proven_relevance",
+    ]
+    z = view[metrics].astype(float).to_numpy()
+    labels = [
+        "90d proxy activation",
+        "30d proxy activation",
+        "Current activation",
+        "Historical relevance",
+    ]
+    fig = go.Figure(
+        data=go.Heatmap(
+            z=z,
+            x=labels,
+            y=view["driver_label"],
+            zmin=0,
+            zmax=1,
+            colorscale=[
+                [0.0, "#f8fafc"],
+                [0.45, "#fef3c7"],
+                [1.0, "#b91c1c"],
+            ],
+            colorbar={"title": "Score", "tickformat": ".0%"},
+            hovertemplate="<b>%{y}</b><br>%{x}: %{z:.0%}<extra></extra>",
+        )
+    )
+    fig.update_layout(
+        title="Driver Activation Heatmap",
+        template="plotly_white",
+        margin={"l": 20, "r": 20, "t": 60, "b": 20},
+        height=max(420, 32 * len(view) + 120),
+    )
+    return fig

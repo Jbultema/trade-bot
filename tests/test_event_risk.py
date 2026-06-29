@@ -90,6 +90,40 @@ def test_classify_news_text_maps_openai_financials_to_ai_unit_economics() -> Non
     assert "market_concentration" in classification.risk_channels
 
 
+def test_classify_news_text_maps_hyperscaler_capex_to_fcf_pressure() -> None:
+    classification = classify_news_text(
+        "Microsoft and Amazon hyperscaler data center capex is creating a free cash flow "
+        "and depreciation cliff with margin pressure."
+    )
+
+    assert classification.category == "hyperscaler_capex_fcf"
+    assert classification.direction == "escalation"
+    assert "free_cash_flow" in classification.risk_channels
+    assert "MSFT" in classification.candidate_proxies
+
+
+def test_classify_news_text_maps_ai_memory_shortage_to_inflation_channel() -> None:
+    classification = classify_news_text(
+        "AI data center demand is causing a memory chip shortage and consumer electronics price hikes."
+    )
+
+    assert classification.category == "ai_capex_inflation"
+    assert classification.direction == "escalation"
+    assert "consumer_prices" in classification.risk_channels
+    assert "TIP" in classification.candidate_proxies
+
+
+def test_classify_news_text_maps_ipo_and_lockup_to_equity_supply() -> None:
+    classification = classify_news_text(
+        "A major AI IPO and lockup expiration could add public float and equity supply."
+    )
+
+    assert classification.category == "equity_supply"
+    assert classification.direction == "escalation"
+    assert "equity_supply" in classification.risk_channels
+    assert "ARKK" in classification.candidate_proxies
+
+
 def test_classify_news_text_maps_private_credit_to_credit_liquidity_risk() -> None:
     classification = classify_news_text(
         "New data revealed private credit and direct lending stress in middle market loans."

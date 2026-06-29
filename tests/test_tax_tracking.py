@@ -55,7 +55,7 @@ def test_tax_lot_ledger_uses_tax_min_specific_id_and_classifies_term() -> None:
 
 
 def test_wash_sale_detection_disallows_replacement_loss() -> None:
-    ledger = TaxLotLedger(TaxAccountProfile(wash_sale_window_days=30))
+    ledger = TaxLotLedger(TaxAccountProfile(account_type="taxable", wash_sale_window_days=30))
     ledger.process_execution(
         execution_id="buy_original",
         mode="paper",
@@ -125,7 +125,7 @@ def test_tax_loss_harvest_candidates_filter_by_amount_and_pct() -> None:
 def test_taxable_backtest_reports_tax_drag_and_tax_deferred_profile_is_neutral() -> None:
     result, prices = _simple_gain_result()
 
-    taxable = simulate_taxable_backtest(result, prices, TaxAccountProfile())
+    taxable = simulate_taxable_backtest(result, prices, TaxAccountProfile(account_type="taxable"))
     deferred = simulate_taxable_backtest(result, prices, TaxAccountProfile(account_type="ira"))
 
     assert taxable.summary["tax_model_status"] == "taxable_estimated"
@@ -134,6 +134,31 @@ def test_taxable_backtest_reports_tax_drag_and_tax_deferred_profile_is_neutral()
     assert taxable.summary["tax_drag_bps_per_year"] > 0
     assert deferred.summary["total_tax_liability"] == 0
     assert deferred.summary["after_tax_final_equity"] == result.equity.iloc[-1]
+
+
+def test_taxable_backtest_ignores_reconstructed_dust_lots() -> None:
+    index = pd.to_datetime(["2026-01-02", "2026-01-03", "2026-01-04"])
+    prices = pd.DataFrame({"EEM": [1.0, 1.0, 1.0]}, index=index)
+    weights = pd.DataFrame({"EEM": [5e-10, 0.0, 0.0]}, index=index)
+    returns = pd.Series([0.0, 0.0, 0.0], index=index, name="dust_test")
+    equity = pd.Series([1000.0, 1000.0, 1000.0], index=index, name="dust_test")
+    zeros = pd.Series(0.0, index=index, name="dust_test")
+    result = BacktestResult(
+        name="dust_test",
+        equity=equity,
+        returns=returns,
+        gross_returns=returns,
+        weights=weights,
+        target_weights=weights,
+        turnover=zeros,
+        transaction_costs=zeros,
+    )
+
+    taxable = simulate_taxable_backtest(result, prices, TaxAccountProfile(account_type="taxable"))
+
+    assert taxable.realized_lots.empty
+    assert taxable.open_lots.empty
+    assert taxable.summary["after_tax_final_equity"] == 1000.0
 
 
 def test_scorecard_accepts_after_tax_metrics() -> None:

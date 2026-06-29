@@ -4,6 +4,7 @@ import json
 from types import SimpleNamespace
 
 import pandas as pd
+import pytest
 
 import trade_bot.storage.warehouse as warehouse_module
 from trade_bot.config import ExecutionConfig, StrategyConfig
@@ -115,6 +116,9 @@ def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_pa
     assert champion.iloc[0]["strategy_name"] == "candidate_alpha"
     assert champion.iloc[0]["forward_status"] == "ahead_of_benchmark"
     assert champion.iloc[0]["validation_tier"] == "paper_champion_candidate"
+    assert champion.iloc[0]["stocks_percent_of_max_sleeve"] == pytest.approx(0.5 / 0.6)
+    assert champion.iloc[0]["defensive_percent_of_max_sleeve"] == pytest.approx(0.5)
+    assert json.loads(str(champion.iloc[0]["latest_weights_json"])) == {"BIL": 0.5, "QQQ": 0.5}
 
 
 def test_warehouse_surfaces_and_seeds_top_5_experiment_candidates(tmp_path) -> None:
@@ -185,7 +189,9 @@ def test_warehouse_surfaces_and_seeds_top_5_experiment_candidates(tmp_path) -> N
     assert int((expanded_windows["window_role"] == "challenger").sum()) == 5
 
 
-def test_warehouse_keeps_reference_portfolios_visible_for_monitoring(tmp_path) -> None:
+def test_warehouse_keeps_only_core_reference_portfolios_visible_for_default_monitoring(
+    tmp_path,
+) -> None:
     experiment_dir = tmp_path / "experiments"
     iteration_dir = experiment_dir / "iteration_41"
     iteration_dir.mkdir(parents=True)
@@ -256,13 +262,11 @@ def test_warehouse_keeps_reference_portfolios_visible_for_monitoring(tmp_path) -
     windows = warehouse.list_monitoring_windows(status="active")
 
     assert top_candidates.iloc[0]["strategy_name"] == "candidate_core"
-    assert set(reference_candidates["strategy_name"]) == {
-        "i41_ref_us_60_40",
-        "i41_ref_all_weather",
-    }
-    assert len(seeded) == 3
+    assert set(reference_candidates["strategy_name"]) == {"i41_ref_us_60_40"}
+    assert "i41_ref_all_weather" not in set(reference_candidates["strategy_name"])
+    assert len(seeded) == 2
     assert int((windows["window_role"] == "champion").sum()) == 1
-    assert int((windows["window_role"] == "reference").sum()) == 2
+    assert int((windows["window_role"] == "reference").sum()) == 1
 
 
 def test_warehouse_manually_monitors_and_values_experiment_candidate(tmp_path) -> None:

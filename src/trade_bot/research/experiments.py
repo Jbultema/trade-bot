@@ -31,6 +31,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS,
     DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD,
     DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_GLOBAL_RISK_SLEEVES_REFERENCE_WEIGHTS,
     DEFAULT_OPERABILITY_GOOD_MEAN_GAP_TRADING_DAYS,
     DEFAULT_OPERABILITY_MATERIAL_TRADE_TURNOVER_THRESHOLD,
     DEFAULT_OPERABILITY_PAPER_OPERABLE_MAX_AVERAGE_TURNOVER,
@@ -343,6 +344,10 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _multi_asset_risk_on_rotation_candidates(iteration)
     if 146 <= iteration <= 150:
         return _growth_frontier_candidates(iteration)
+    if 151 <= iteration <= 155:
+        return _interview_insight_candidates(iteration)
+    if 156 <= iteration <= 160:
+        return _long_form_macro_process_candidates(iteration)
     return None
 
 
@@ -5875,11 +5880,12 @@ def _dip_overlay_candidate(
     credit_confirmation: bool = True,
     breadth_confirmation: bool = True,
     scenario_sizing: ScenarioSizingConfig | None = None,
+    phase: str = "dip_reentry_overlay",
 ) -> ExperimentCandidate:
     return _candidate(
         name=name,
         role="reentry_overlay_candidate",
-        phase="dip_reentry_overlay",
+        phase=phase,
         family=family,
         hypothesis=hypothesis,
         scenario_sizing=scenario_sizing,
@@ -5932,6 +5938,7 @@ def _sector_regime_candidate(
     max_risk: float = 0.95,
     vol_ceiling: float = 0.38,
     scenario_sizing: ScenarioSizingConfig | None = None,
+    phase: str = "sector_regime_rotation",
 ) -> ExperimentCandidate:
     proxy_tickers = [
         "BIL",
@@ -5954,7 +5961,7 @@ def _sector_regime_candidate(
     return _candidate(
         name=name,
         role="sector_regime_candidate",
-        phase="sector_regime_rotation",
+        phase=phase,
         family=family,
         hypothesis=hypothesis,
         scenario_sizing=scenario_sizing,
@@ -10824,6 +10831,14 @@ def _reference_portfolio_candidates() -> tuple[ExperimentCandidate, ...]:
             hypothesis="Growth/cash barbell tests whether a simple QQQ/SPY/BIL policy is competitive with tactical off-ramps.",
             allocation_weights={"QQQ": 0.50, "SPY": 0.30, "BIL": 0.20},
         ),
+        _fixed_allocation_candidate(
+            name="i41_ref_global_risk_sleeves",
+            hypothesis=(
+                "Simple global risk-sleeves benchmark: broad global equity plus cash-like "
+                "Treasury reserves, with gold and crypto tracked as explicit zero-weight sleeves."
+            ),
+            allocation_weights=DEFAULT_GLOBAL_RISK_SLEEVES_REFERENCE_WEIGHTS,
+        ),
     )
 
 
@@ -11454,6 +11469,999 @@ def _growth_frontier_candidates(iteration: int) -> tuple[ExperimentCandidate, ..
             ),
         ),
     )
+
+
+def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    """Strategy families derived from recent macro/investor interviews.
+
+    These are not attempts to copy any outside framework. They convert useful
+    thesis fragments into testable local strategy families: source-of-funds
+    rotation, simple systematic tri-sleeve allocation, regime-conditioned risk
+    sizing, faster re-risking after left-tail removal, and Fed/liquidity
+    transition behavior.
+    """
+
+    broad_equity = ["SPY", "VTI", "VOO", "RSP", "IWM", "MDY", "QQQ"]
+    mag7 = ["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "TSLA", "QQQ", "XLK"]
+    ai_infra = ["SMH", "SOXX", "VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "XLU", "XLI"]
+    ai_adopters = ["XLI", "XLF", "XLV", "XLY", "XRT", "IYT", "RSP", "IWM", "MDY", "COWZ", "QUAL"]
+    global_equity = ["VT", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWW"]
+    financial_repression = ["GLD", "IAU", "TIP", "VTIP", "DBC", "UUP", "TLT", "IEF"]
+    liquidity_rates = ["TLT", "IEF", "TIP", "VTIP", "UUP", "GLD", "DBC", "HYG", "LQD", "BIL"]
+    credit_repair = ["HYG", "JNK", "LQD", "BKLN", "SRLN", "IWM", "RSP", "SPY", "QQQ"]
+
+    def unique(tickers: list[str]) -> list[str]:
+        return list(dict.fromkeys(tickers))
+
+    def dual(
+        *,
+        name: str,
+        family: str,
+        hypothesis: str,
+        tickers: list[str],
+        lookback_days: int = 42,
+        skip_days: int = 0,
+        top_n: int = 6,
+        min_return: float = 0.0,
+        ranking_metric: str = "risk_adjusted_return",
+        weighting: str = "risk_adjusted_score",
+        max_asset_weight: float | None = 0.18,
+        vol_target: float | None = 0.18,
+        trend_filter_days: int | None = 63,
+        scenario_sizing: ScenarioSizingConfig | None = None,
+        decision_sanity: DecisionSanityConfig | None = None,
+        drawdown_control: DrawdownControlConfig | None = None,
+        min_change: float = 0.05,
+        max_step: float = 0.34,
+        min_hold_days: int = 5,
+    ) -> ExperimentCandidate:
+        return _candidate(
+            name=name,
+            role="interview_insight_candidate",
+            phase="interview_insight",
+            family=family,
+            parent="macro_interview_synthesis",
+            hypothesis=hypothesis,
+            scenario_sizing=scenario_sizing,
+            decision_sanity=decision_sanity,
+            strategy=StrategyConfig(
+                type="dual_momentum",
+                tickers=unique(tickers),
+                defensive_ticker="BIL",
+                lookback_days=lookback_days,
+                skip_days=skip_days,
+                top_n=top_n,
+                min_return=min_return,
+                ranking_metric=cast(Any, ranking_metric),
+                weighting=cast(Any, weighting),
+                volatility_lookback_days=42,
+                trend_filter_days=trend_filter_days,
+                max_asset_weight=max_asset_weight,
+                volatility_target=(
+                    VolatilityTargetConfig(annualized_volatility=vol_target, lookback_days=42)
+                    if vol_target is not None
+                    else None
+                ),
+                drawdown_control=drawdown_control,
+                cycle_min_rebalance_change=min_change,
+                cycle_max_step_change=max_step,
+                cycle_min_hold_days=min_hold_days,
+            ),
+        )
+
+    def fixed(
+        *,
+        name: str,
+        family: str,
+        hypothesis: str,
+        weights: dict[str, float],
+    ) -> ExperimentCandidate:
+        return _candidate(
+            name=name,
+            role="interview_reference_portfolio",
+            phase="interview_insight",
+            family=family,
+            parent="macro_interview_synthesis",
+            hypothesis=hypothesis,
+            strategy=StrategyConfig(
+                type="fixed_allocation",
+                tickers=list(weights),
+                allocation_weights=weights,
+                trend_filter_days=None,
+                max_asset_weight=None,
+            ),
+        )
+
+    batches: dict[int, tuple[ExperimentCandidate, ...]] = {
+        151: (
+            dual(
+                name="i151_source_funds_ai_provider_to_adopter",
+                family="source_of_funds_rotation",
+                hypothesis=(
+                    "Test the source-of-funds thesis: if capital rotates out of crowded Mag 7 "
+                    "providers, AI adopters, industrials, financials, and broad indexes should win."
+                ),
+                tickers=unique([*mag7, *ai_adopters, *ai_infra, "HYG", "LQD"]),
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.20,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i151_source_funds_global_convergence",
+                family="source_of_funds_global",
+                hypothesis=(
+                    "If AI diffusion compresses productivity, margin, and valuation gaps, global "
+                    "and ex-US equities should compete against US mega-cap concentration."
+                ),
+                tickers=unique([*global_equity, *broad_equity, "QUAL", "COWZ", "GLD", "UUP"]),
+                top_n=7,
+                max_asset_weight=0.16,
+                vol_target=0.19,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i151_source_funds_capex_survivors",
+                family="source_of_funds_infrastructure",
+                hypothesis=(
+                    "Separate AI-capex beneficiaries from hyperscaler cash-burn risk by letting "
+                    "semis, power, grid, industrials, and utilities compete for the risk sleeve."
+                ),
+                tickers=unique([*ai_infra, "SMH", "SOXX", "XLI", "XLU", "PPA", "ITA", "HYG", "LQD"]),
+                top_n=6,
+                max_asset_weight=0.18,
+                vol_target=0.21,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            dual(
+                name="i151_source_funds_broad_no_mag7",
+                family="source_of_funds_anti_concentration",
+                hypothesis=(
+                    "Explicit anti-concentration test: broad, equal-weight, factor, cyclical, and "
+                    "global risk-on assets must carry returns without Mag 7 direct holdings."
+                ),
+                tickers=unique([*ai_adopters, *global_equity, "RSP", "IWM", "MDY", "VTV", "SCHD", "VIG"]),
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.19,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i151_source_funds_low_churn",
+                family="source_of_funds_operable",
+                hypothesis=(
+                    "Lower-churn source-of-funds rotation tests whether the thesis is usable for "
+                    "human execution rather than only short-lived factor noise."
+                ),
+                tickers=unique([*mag7, *ai_adopters, *ai_infra, *global_equity, "GLD", "TLT"]),
+                lookback_days=84,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.18,
+                trend_filter_days=100,
+                min_change=0.08,
+                max_step=0.28,
+                min_hold_days=10,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+        ),
+        152: (
+            fixed(
+                name="i152_tri_sleeve_global_gold_cash",
+                family="tri_sleeve_reference",
+                hypothesis=(
+                    "Simple systematic reference without crypto: productivity via global equity, "
+                    "financial-repression hedge via gold, and cash-like defense."
+                ),
+                weights={"VT": 0.42, "SPY": 0.12, "EEM": 0.06, "GLD": 0.30, "BIL": 0.10},
+            ),
+            fixed(
+                name="i152_tri_sleeve_gold_commodity_debasement",
+                family="tri_sleeve_reference",
+                hypothesis=(
+                    "Debasement proxy reference for Vanguard-compatible testing: global equity, "
+                    "gold, commodities, inflation bonds, and T-bills."
+                ),
+                weights={"VT": 0.40, "SPY": 0.10, "EFA": 0.08, "EEM": 0.02, "GLD": 0.22, "DBC": 0.08, "TIP": 0.05, "BIL": 0.05},
+            ),
+            fixed(
+                name="i152_tri_sleeve_deflation_duration",
+                family="tri_sleeve_reference",
+                hypothesis=(
+                    "Deflation-leaning tri-sleeve: equities plus duration instead of gold when "
+                    "deflation, not inflation, is the dominant left-tail risk."
+                ),
+                weights={"VT": 0.42, "SPY": 0.12, "EEM": 0.06, "TLT": 0.22, "IEF": 0.08, "BIL": 0.10},
+            ),
+            dual(
+                name="i152_tri_sleeve_dynamic_rotation",
+                family="tri_sleeve_dynamic",
+                hypothesis=(
+                    "Dynamic tri-sleeve lets productivity, financial-repression, inflation, dollar, "
+                    "and duration sleeves compete rather than fixing gold/bond weights forever."
+                ),
+                tickers=unique([*broad_equity, *global_equity, *financial_repression, "HYG", "LQD"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=7,
+                max_asset_weight=0.18,
+                vol_target=0.16,
+                scenario_sizing=_scenario_profile("balanced"),
+            ),
+            dual(
+                name="i152_tri_sleeve_growth_frontier",
+                family="tri_sleeve_growth_frontier",
+                hypothesis=(
+                    "Growth-friendly tri-sleeve keeps the defensive/debasement sleeves available "
+                    "but does not let them suppress risk-on when trend and credit remain healthy."
+                ),
+                tickers=unique([*broad_equity, "QQQ", "SMH", "RSP", "GLD", "DBC", "TIP", "HYG", "LQD"]),
+                lookback_days=42,
+                top_n=6,
+                max_asset_weight=0.18,
+                vol_target=0.20,
+                scenario_sizing=_scenario_profile("aggressive"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+        ),
+        153: (
+            dual(
+                name="i153_regime_vol_source_funds_balanced",
+                family="regime_conditioned_vol_target",
+                hypothesis=(
+                    "Approximate risk-off volatility expansion by combining source-of-funds "
+                    "rotation, volatility targeting, scenario sizing, and decision sanity."
+                ),
+                tickers=unique([*mag7, *ai_adopters, *ai_infra, *global_equity, "GLD", "TLT", "HYG", "LQD"]),
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(equity_lookback_days=84, max_drawdown=-0.12, risk_multiplier=0.55),
+            ),
+            dual(
+                name="i153_regime_vol_risk_off_pre_cut",
+                family="regime_conditioned_vol_target",
+                hypothesis=(
+                    "Pre-cut exposure during deteriorating regimes so the strategy does not wait "
+                    "for realized volatility to fully double before reducing risk."
+                ),
+                tickers=unique([*broad_equity, *ai_infra, *liquidity_rates]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=7,
+                max_asset_weight=0.16,
+                vol_target=0.16,
+                scenario_sizing=_scenario_profile("defensive"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(equity_lookback_days=63, max_drawdown=-0.10, risk_multiplier=0.50),
+            ),
+            dual(
+                name="i153_regime_vol_growth_tolerant",
+                family="regime_conditioned_growth_tolerant",
+                hypothesis=(
+                    "Keep the higher-growth drawdown band alive: only throttle materially when "
+                    "scenario pressure and price drawdown confirm together."
+                ),
+                tickers=unique([*mag7, *ai_infra, *broad_equity, "HYG", "LQD"]),
+                lookback_days=42,
+                top_n=7,
+                max_asset_weight=0.16,
+                vol_target=0.22,
+                scenario_sizing=_scenario_profile("aggressive"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(equity_lookback_days=84, max_drawdown=-0.20, risk_multiplier=0.68),
+            ),
+            dual(
+                name="i153_regime_vol_low_churn",
+                family="regime_conditioned_operable",
+                hypothesis=(
+                    "Low-churn regime-vol candidate checks whether the risk system can avoid "
+                    "twitchy weekly reallocations while preserving drawdown control."
+                ),
+                tickers=unique([*broad_equity, *global_equity, *financial_repression, "HYG", "LQD"]),
+                lookback_days=84,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.17,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                min_change=0.08,
+                max_step=0.25,
+                min_hold_days=10,
+            ),
+        ),
+        154: (
+            _dip_overlay_candidate(
+                name="i154_deescalation_fast_reentry_global",
+                family="deescalation_reentry",
+                hypothesis=(
+                    "When a left-tail event is removed, re-risk through broad/global equities "
+                    "faster if credit and volatility repair confirms."
+                ),
+                tickers=unique([*broad_equity, *global_equity, "HYG", "LQD", "GLD"]),
+                lookback_days=42,
+                skip_days=0,
+                top_n=7,
+                min_return=0.000,
+                trigger=-0.06,
+                deep=-0.18,
+                min_recovery=0.004,
+                starter=0.36,
+                step=0.26,
+                max_risk=0.94,
+                max_asset_weight=0.16,
+                vol_ceiling=0.46,
+                scenario_sizing=_scenario_profile("balanced"),
+                phase="interview_insight",
+            ),
+            _dip_overlay_candidate(
+                name="i154_deescalation_source_funds_reentry",
+                family="deescalation_reentry_source_funds",
+                hypothesis=(
+                    "After the left-tail clears, let the recovery choose between AI providers, "
+                    "adopters, infrastructure, and broadening instead of defaulting to QQQ."
+                ),
+                tickers=unique([*mag7, *ai_adopters, *ai_infra, "RSP", "IWM", "HYG", "LQD"]),
+                lookback_days=42,
+                skip_days=0,
+                top_n=8,
+                min_return=0.000,
+                trigger=-0.07,
+                deep=-0.20,
+                min_recovery=0.005,
+                starter=0.34,
+                step=0.26,
+                max_risk=0.95,
+                max_asset_weight=0.14,
+                vol_ceiling=0.50,
+                scenario_sizing=_scenario_profile("balanced"),
+                phase="interview_insight",
+            ),
+            _dip_overlay_candidate(
+                name="i154_deescalation_policy_put_reentry",
+                family="deescalation_policy_put",
+                hypothesis=(
+                    "Policy-put recovery proxy: duration, credit, and equity repair together "
+                    "should release defensive pressure sooner after a panic."
+                ),
+                tickers=unique([*credit_repair, "TLT", "IEF", "GLD", "QQQ", "SMH"]),
+                lookback_days=42,
+                skip_days=0,
+                top_n=7,
+                min_return=0.000,
+                trigger=-0.08,
+                deep=-0.22,
+                min_recovery=0.006,
+                starter=0.34,
+                step=0.26,
+                max_risk=0.94,
+                max_asset_weight=0.16,
+                vol_ceiling=0.44,
+                scenario_sizing=_scenario_profile("balanced"),
+                phase="interview_insight",
+            ),
+            _sector_regime_candidate(
+                name="i154_deescalation_sector_vehicle",
+                family="deescalation_sector_rotation",
+                hypothesis=(
+                    "Sector-aware de-escalation should catch relief rallies without assuming "
+                    "the same sector that led before the shock will lead afterward."
+                ),
+                tickers=unique([*ai_adopters, *ai_infra, "XLK", "XLV", "XLP", "XLU", "XLE", "GLD", "TLT", "HYG", "LQD"]),
+                lookback_days=42,
+                skip_days=0,
+                top_n=7,
+                min_return=0.000,
+                trigger=-0.07,
+                deep=-0.20,
+                min_recovery=0.005,
+                max_risk=0.96,
+                max_asset_weight=0.16,
+                vol_ceiling=0.50,
+                scenario_sizing=_scenario_profile("balanced"),
+                phase="interview_insight",
+            ),
+        ),
+        155: (
+            dual(
+                name="i155_fed_liquidity_term_premium_barbell",
+                family="fed_liquidity_term_premium",
+                hypothesis=(
+                    "Fed balance-sheet and term-premium transition proxy: let equities, gold, "
+                    "dollar, credit, duration, and inflation hedges compete."
+                ),
+                tickers=unique([*broad_equity, *liquidity_rates, "EFA", "EEM", "XLF", "KRE"]),
+                lookback_days=42,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.17,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i155_term_premium_widening_no_duration",
+                family="fed_liquidity_term_premium",
+                hypothesis=(
+                    "If term premium widens, duration can fail as defense; test gold, dollar, "
+                    "commodities, T-bills, cyclicals, and global assets without TLT dependence."
+                ),
+                tickers=unique([*broad_equity, *global_equity, "GLD", "DBC", "TIP", "VTIP", "UUP", "BIL", "XLF", "XLE"]),
+                lookback_days=42,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i155_bank_reg_relief_reflation",
+                family="fed_bank_reg_reflation",
+                hypothesis=(
+                    "If bank-regulatory offset softens balance-sheet tightening, financials, "
+                    "small caps, credit, and cyclicals should participate in risk-on."
+                ),
+                tickers=unique(["XLF", "KRE", "KBE", "IWM", "MDY", "RSP", "HYG", "JNK", "XLI", "XLB", "XLE", "SPY"]),
+                lookback_days=42,
+                top_n=6,
+                max_asset_weight=0.18,
+                vol_target=0.20,
+                scenario_sizing=_scenario_profile("aggressive"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i155_real_time_macro_quality_bridge",
+                family="fed_data_quality_transition",
+                hypothesis=(
+                    "Labor/inflation data-quality uncertainty argues for a bridge that can own "
+                    "productivity growth while keeping inflation and liquidity hedges available."
+                ),
+                tickers=unique([*broad_equity, "QQQ", "SMH", "QUAL", "COWZ", "GLD", "TIP", "UUP", "HYG", "LQD"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=7,
+                max_asset_weight=0.16,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i155_global_hot_potato_rotation",
+                family="fed_global_hot_potato",
+                hypothesis=(
+                    "Treasury-demand stress and home-bias reversal should show up as global, "
+                    "gold, dollar, commodity, and non-US equity leadership."
+                ),
+                tickers=unique([*global_equity, "GLD", "DBC", "UUP", "TIP", "VTIP", "EFA", "EEM", "EWJ", "MCHI"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=7,
+                max_asset_weight=0.16,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+        ),
+    }
+    return batches[iteration]
+
+
+def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
+    """Additional long-form macro-process theses converted into testable candidates.
+
+    These candidates focus on process mechanics rather than directional macro
+    calls: simple systematic driver sleeves, risk-off exposure halving,
+    late-bubble correction/rebound handling, home-bias compression, and Fed
+    regime surprise paths.
+    """
+
+    productivity = ["SPY", "VTI", "VOO", "RSP", "IWM", "MDY", "QQQ", "QUAL", "COWZ"]
+    ai_providers = ["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "TSLA", "QQQ", "XLK", "SMH"]
+    ai_adopters = ["XLI", "XLF", "XLV", "XLY", "XRT", "IYT", "RSP", "IWM", "MDY", "COWZ"]
+    ai_infra = ["SMH", "SOXX", "VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "XLU", "XLI"]
+    global_equity = ["VT", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWW", "MCHI"]
+    repression = ["GLD", "IAU", "TIP", "VTIP", "DBC", "UUP", "IEF", "TLT", "BIL"]
+    term_premium = ["GLD", "DBC", "TIP", "VTIP", "UUP", "BIL", "XLF", "KRE", "IWM", "RSP", "HYG", "LQD"]
+    factor_market = [
+        "XLK",
+        "XLI",
+        "XLF",
+        "XLV",
+        "XLY",
+        "XLP",
+        "XLU",
+        "XLE",
+        "XLB",
+        "XRT",
+        "IYT",
+        "QUAL",
+        "COWZ",
+        "VTV",
+        "SCHD",
+        "VIG",
+    ]
+
+    def unique(tickers: list[str]) -> list[str]:
+        return list(dict.fromkeys(tickers))
+
+    def dual(
+        *,
+        name: str,
+        family: str,
+        hypothesis: str,
+        tickers: list[str],
+        lookback_days: int = 42,
+        skip_days: int = 0,
+        top_n: int = 7,
+        min_return: float = 0.0,
+        ranking_metric: str = "risk_adjusted_return",
+        weighting: str = "risk_adjusted_score",
+        max_asset_weight: float | None = 0.16,
+        vol_target: float | None = 0.18,
+        trend_filter_days: int | None = 63,
+        scenario_sizing: ScenarioSizingConfig | None = None,
+        decision_sanity: DecisionSanityConfig | None = None,
+        drawdown_control: DrawdownControlConfig | None = None,
+        min_change: float = 0.05,
+        max_step: float = 0.34,
+        min_hold_days: int = 5,
+    ) -> ExperimentCandidate:
+        return _candidate(
+            name=name,
+            role="long_form_macro_candidate",
+            phase="long_form_macro_process",
+            family=family,
+            parent="long_form_macro_interview",
+            hypothesis=hypothesis,
+            scenario_sizing=scenario_sizing,
+            decision_sanity=decision_sanity,
+            strategy=StrategyConfig(
+                type="dual_momentum",
+                tickers=unique(tickers),
+                defensive_ticker="BIL",
+                lookback_days=lookback_days,
+                skip_days=skip_days,
+                top_n=top_n,
+                min_return=min_return,
+                ranking_metric=cast(Any, ranking_metric),
+                weighting=cast(Any, weighting),
+                volatility_lookback_days=42,
+                trend_filter_days=trend_filter_days,
+                max_asset_weight=max_asset_weight,
+                volatility_target=(
+                    VolatilityTargetConfig(annualized_volatility=vol_target, lookback_days=42)
+                    if vol_target is not None
+                    else None
+                ),
+                drawdown_control=drawdown_control,
+                cycle_min_rebalance_change=min_change,
+                cycle_max_step_change=max_step,
+                cycle_min_hold_days=min_hold_days,
+            ),
+        )
+
+    def fixed(
+        *,
+        name: str,
+        family: str,
+        hypothesis: str,
+        weights: dict[str, float],
+    ) -> ExperimentCandidate:
+        return _candidate(
+            name=name,
+            role="long_form_reference_portfolio",
+            phase="long_form_macro_process",
+            family=family,
+            parent="long_form_macro_interview",
+            hypothesis=hypothesis,
+            strategy=StrategyConfig(
+                type="fixed_allocation",
+                tickers=list(weights),
+                allocation_weights=weights,
+                trend_filter_days=None,
+                max_asset_weight=None,
+            ),
+        )
+
+    batches: dict[int, tuple[ExperimentCandidate, ...]] = {
+        156: (
+            fixed(
+                name="i156_simple_systematic_60_30_10_no_crypto",
+                family="simple_systematic_driver_sleeves",
+                hypothesis=(
+                    "Reference portfolio for productivity, financial-repression, and debasement "
+                    "drivers without direct crypto exposure."
+                ),
+                weights={"VT": 0.42, "SPY": 0.12, "QQQ": 0.06, "GLD": 0.24, "DBC": 0.04, "TIP": 0.02, "BIL": 0.10},
+            ),
+            fixed(
+                name="i156_simple_systematic_risk_off_halved",
+                family="simple_systematic_driver_sleeves",
+                hypothesis=(
+                    "Risk-off reference: halve the risk-driver sleeve and keep the same driver "
+                    "mix instead of fully exiting equities."
+                ),
+                weights={"VT": 0.21, "SPY": 0.06, "QQQ": 0.03, "GLD": 0.12, "DBC": 0.02, "TIP": 0.01, "BIL": 0.55},
+            ),
+            dual(
+                name="i156_driver_sleeve_dynamic_vol",
+                family="simple_systematic_driver_sleeves",
+                hypothesis=(
+                    "Let productivity, repression, debasement, duration, and cash-like sleeves "
+                    "compete under volatility targeting."
+                ),
+                tickers=unique([*productivity, *global_equity, *repression, "HYG", "LQD"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.16,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i156_driver_sleeve_growth_preserve",
+                family="simple_systematic_growth_preserve",
+                hypothesis=(
+                    "Keep productivity growth exposure dominant unless realized trend and credit "
+                    "confirm that left-tail risk is taking over."
+                ),
+                tickers=unique([*productivity, *ai_infra, "GLD", "TIP", "HYG", "LQD"]),
+                lookback_days=42,
+                top_n=8,
+                max_asset_weight=0.15,
+                vol_target=0.22,
+                scenario_sizing=_scenario_profile("aggressive"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84,
+                    max_drawdown=-0.20,
+                    risk_multiplier=0.68,
+                ),
+            ),
+            dual(
+                name="i156_driver_sleeve_explicit_halving",
+                family="simple_systematic_risk_halving",
+                hypothesis=(
+                    "Approximate the explicit risk-off halving rule: when drawdown pressure "
+                    "confirms, cut the risky sleeve roughly in half, not to zero."
+                ),
+                tickers=unique([*productivity, *global_equity, *repression, "HYG", "LQD"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.15,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=63,
+                    max_drawdown=-0.10,
+                    risk_multiplier=0.50,
+                ),
+            ),
+        ),
+        157: (
+            _dip_overlay_candidate(
+                name="i157_late_bubble_rebound_fast",
+                family="late_bubble_rebound_management",
+                hypothesis=(
+                    "Test a 1998-like path: accept a painful correction, then re-risk quickly "
+                    "when credit, breadth, and recovery signals confirm."
+                ),
+                tickers=unique([*ai_providers, *ai_adopters, "SPY", "RSP", "HYG", "LQD"]),
+                lookback_days=42,
+                skip_days=0,
+                top_n=8,
+                min_return=0.0,
+                trigger=-0.08,
+                deep=-0.20,
+                min_recovery=0.004,
+                starter=0.42,
+                step=0.30,
+                max_risk=0.98,
+                max_asset_weight=0.14,
+                vol_ceiling=0.55,
+                scenario_sizing=_scenario_profile("aggressive"),
+                phase="long_form_macro_process",
+            ),
+            _dip_overlay_candidate(
+                name="i157_late_bubble_rebound_credit_gate",
+                family="late_bubble_rebound_management",
+                hypothesis=(
+                    "Use credit repair as the re-entry gate so a correction can be bought without "
+                    "blindly catching a falling knife."
+                ),
+                tickers=unique([*ai_providers, *ai_adopters, *global_equity, "HYG", "JNK", "LQD", "GLD"]),
+                lookback_days=42,
+                skip_days=0,
+                top_n=8,
+                min_return=0.0,
+                trigger=-0.10,
+                deep=-0.22,
+                min_recovery=0.006,
+                starter=0.36,
+                step=0.26,
+                max_risk=0.95,
+                max_asset_weight=0.14,
+                vol_ceiling=0.48,
+                scenario_sizing=_scenario_profile("balanced"),
+                phase="long_form_macro_process",
+            ),
+            dual(
+                name="i157_late_bubble_pre_correction_cut",
+                family="late_bubble_rebound_management",
+                hypothesis=(
+                    "Take some exposure down before a crowded-bull correction, but retain enough "
+                    "growth sleeve to recover if liquidity remains supportive."
+                ),
+                tickers=unique([*ai_providers, *ai_adopters, *ai_infra, "RSP", "IWM", "HYG", "LQD", "BIL"]),
+                lookback_days=42,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=63,
+                    max_drawdown=-0.12,
+                    risk_multiplier=0.58,
+                ),
+            ),
+            dual(
+                name="i157_late_bubble_tolerant_source_funds",
+                family="late_bubble_source_funds",
+                hypothesis=(
+                    "If liquidity is still rising, tolerate more volatility and rotate from "
+                    "crowded providers toward adopters, infrastructure, and broadening."
+                ),
+                tickers=unique([*ai_providers, *ai_adopters, *ai_infra, "RSP", "IWM", "MDY", "HYG", "LQD"]),
+                lookback_days=42,
+                top_n=8,
+                max_asset_weight=0.13,
+                vol_target=0.23,
+                scenario_sizing=_scenario_profile("aggressive"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84,
+                    max_drawdown=-0.22,
+                    risk_multiplier=0.70,
+                ),
+            ),
+        ),
+        158: (
+            dual(
+                name="i158_home_bias_global_convergence",
+                family="home_bias_global_convergence",
+                hypothesis=(
+                    "If US home bias is stretched, global and ex-US equities should compete "
+                    "for risk-on capital instead of letting US mega-cap concentration dominate."
+                ),
+                tickers=unique([*global_equity, "VT", "SPY", "RSP", "IWM", "MDY", "GLD", "UUP", "HYG", "LQD"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.19,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i158_ai_diffusion_global_adopters",
+                family="home_bias_global_convergence",
+                hypothesis=(
+                    "AI diffusion should create catch-up candidates outside the current provider "
+                    "cluster: global equities, adopters, factors, and infrastructure compete."
+                ),
+                tickers=unique([*global_equity, *ai_adopters, *ai_infra, "QUAL", "COWZ", "RSP", "HYG", "LQD"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.20,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i158_global_convergence_low_churn",
+                family="home_bias_global_operable",
+                hypothesis=(
+                    "Lower-churn global convergence test for human execution: require more "
+                    "persistent leadership before moving across regions."
+                ),
+                tickers=unique([*global_equity, *productivity, "GLD", "TIP", "HYG", "LQD"]),
+                lookback_days=100,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.18,
+                trend_filter_days=126,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                min_change=0.08,
+                max_step=0.26,
+                min_hold_days=10,
+            ),
+            dual(
+                name="i158_global_convergence_no_mega_cap_direct",
+                family="home_bias_global_no_mega_cap",
+                hypothesis=(
+                    "Strict anti-mega-cap test: if convergence is real, global, equal-weight, "
+                    "small/mid, and factor ETFs can carry returns without direct mega-cap names."
+                ),
+                tickers=unique([*global_equity, "RSP", "IWM", "MDY", "QUAL", "COWZ", "VTV", "SCHD", "VIG", "GLD"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.19,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+        ),
+        159: (
+            dual(
+                name="i159_fed_balance_sheet_tighten_with_offsets",
+                family="fed_regime_surprise_paths",
+                hypothesis=(
+                    "Balance-sheet tightening is a headwind, but bank-regulatory offsets could "
+                    "keep credit, financials, and small caps from breaking."
+                ),
+                tickers=unique([*term_premium, "KBE", "XLI", "XLE", "SPY", "RSP"]),
+                lookback_days=42,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i159_term_premium_no_duration_defense",
+                family="fed_regime_surprise_paths",
+                hypothesis=(
+                    "If communication changes widen term premium, long-duration bonds may fail "
+                    "as defense; favor gold, TIPS, dollar, bills, credit, and cyclicals."
+                ),
+                tickers=unique([*productivity, "GLD", "DBC", "TIP", "VTIP", "UUP", "BIL", "XLF", "XLE", "HYG", "LQD"]),
+                lookback_days=42,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+            ),
+            dual(
+                name="i159_realtime_labor_inflation_dovish_turn",
+                family="fed_regime_surprise_paths",
+                hypothesis=(
+                    "If revised labor and real-time inflation data create a dovish surprise, "
+                    "quality growth, credit, and productivity exposures should regain leadership."
+                ),
+                tickers=unique([*productivity, "QQQ", "SMH", "XLK", "QUAL", "COWZ", "HYG", "LQD", "TLT", "IEF"]),
+                lookback_days=42,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.21,
+                scenario_sizing=_scenario_profile("aggressive"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84,
+                    max_drawdown=-0.20,
+                    risk_multiplier=0.70,
+                ),
+            ),
+            dual(
+                name="i159_policy_whipsaw_barbell",
+                family="fed_regime_surprise_paths",
+                hypothesis=(
+                    "Wide Fed-policy outcome bands argue for a barbell that can own growth, "
+                    "gold, dollar, cash-like defense, and credit without making one macro bet."
+                ),
+                tickers=unique([*productivity, *global_equity, *repression, "HYG", "LQD"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=8,
+                max_asset_weight=0.14,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                min_change=0.06,
+                max_step=0.30,
+                min_hold_days=5,
+            ),
+        ),
+        160: (
+            dual(
+                name="i160_discretionary_overlay_proxy_all_factors",
+                family="factor_regime_overlay_proxy",
+                hypothesis=(
+                    "Proxy the broad factor overlay idea with sectors, factors, geographies, "
+                    "credit, rates, gold, commodities, and cash competing under one risk process."
+                ),
+                tickers=unique([*factor_market, *global_equity, *repression, "HYG", "LQD", "BIL"]),
+                lookback_days=63,
+                skip_days=5,
+                top_n=10,
+                max_asset_weight=0.12,
+                vol_target=0.18,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                min_change=0.06,
+                max_step=0.30,
+                min_hold_days=5,
+            ),
+            dual(
+                name="i160_discretionary_overlay_growth_frontier",
+                family="factor_regime_overlay_proxy",
+                hypothesis=(
+                    "Growth-frontier version of the broad overlay: do not let macro hedges "
+                    "dominate unless trend, credit, or drawdown evidence confirms."
+                ),
+                tickers=unique([*factor_market, *ai_providers, *ai_infra, *global_equity, "HYG", "LQD", "GLD", "BIL"]),
+                lookback_days=42,
+                top_n=10,
+                max_asset_weight=0.12,
+                vol_target=0.22,
+                scenario_sizing=_scenario_profile("aggressive"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84,
+                    max_drawdown=-0.20,
+                    risk_multiplier=0.68,
+                ),
+            ),
+            dual(
+                name="i160_discretionary_overlay_low_churn",
+                family="factor_regime_overlay_operable",
+                hypothesis=(
+                    "Low-churn broad overlay checks whether the all-factor idea can remain "
+                    "human executable without losing the regime benefit."
+                ),
+                tickers=unique([*factor_market, *global_equity, *repression, "HYG", "LQD", "BIL"]),
+                lookback_days=100,
+                skip_days=5,
+                top_n=10,
+                max_asset_weight=0.12,
+                vol_target=0.17,
+                trend_filter_days=126,
+                scenario_sizing=_scenario_profile("balanced"),
+                decision_sanity=_decision_sanity_profile("wide_cap"),
+                min_change=0.08,
+                max_step=0.24,
+                min_hold_days=10,
+            ),
+            _sector_regime_candidate(
+                name="i160_sector_factor_reentry_overlay",
+                family="factor_regime_reentry_overlay",
+                hypothesis=(
+                    "When the regime improves after stress, allow sector/factor leadership to "
+                    "choose the recovery vehicle instead of defaulting to a narrow tech sleeve."
+                ),
+                tickers=unique([*factor_market, *ai_infra, "SPY", "RSP", "IWM", "HYG", "LQD", "GLD"]),
+                lookback_days=42,
+                skip_days=0,
+                top_n=8,
+                min_return=0.0,
+                trigger=-0.08,
+                deep=-0.20,
+                min_recovery=0.006,
+                max_risk=0.96,
+                max_asset_weight=0.14,
+                vol_ceiling=0.50,
+                scenario_sizing=_scenario_profile("balanced"),
+                phase="long_form_macro_process",
+            ),
+        ),
+    }
+    return batches[iteration]
+
 
 def _candidate(
     *,

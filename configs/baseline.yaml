@@ -109,9 +109,11 @@ universe:
     - SHY
     - TLT
     - GLD
+    - GLDM
     - IAU
   commodities_currency:
     - GLD
+    - GLDM
     - IAU
     - SLV
     - CPER

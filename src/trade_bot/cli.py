@@ -23,12 +23,22 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    DEFAULT_SIGNAL_EVIDENCE_DIR,
 )
 from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
 from trade_bot.research.baselines import run_configured_baselines
 from trade_bot.research.entry_date_analysis import build_entry_date_analysis
+from trade_bot.research.experiment_monitor import (
+    load_experiment_candidates,
+    load_experiment_scorecards,
+)
 from trade_bot.research.experiments import run_experiment_iteration
+from trade_bot.research.signal_evidence import (
+    build_signal_family_evidence,
+    build_signal_family_marginal_tests,
+    tag_scorecard_signal_families,
+)
 from trade_bot.storage.run_store import RunStore, SnapshotManifest
 from trade_bot.storage.warehouse import TradingWarehouse, WarehouseMigrationResult
 
@@ -575,6 +585,60 @@ def run_experiment_iteration_cmd(
         )
     console.print(table)
     console.print(f"Wrote experiment outputs to {Path(output_dir) / f'iteration_{iteration:02d}'}")
+
+
+@app.command("run-signal-evidence")
+def run_signal_evidence_cmd(
+    experiment_dir: Annotated[Path, typer.Option("--experiment-dir")] = DEFAULT_EXPERIMENTS_DIR,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_SIGNAL_EVIDENCE_DIR,
+) -> None:
+    effective_experiment_dir = _active_experiment_dir(experiment_dir)
+    scorecards = load_experiment_scorecards(effective_experiment_dir)
+    if scorecards.empty:
+        console.print(f"No experiment scorecards found in {effective_experiment_dir}.")
+        raise typer.Exit(code=1)
+
+    candidates = load_experiment_candidates(effective_experiment_dir)
+    tagged = tag_scorecard_signal_families(scorecards, candidates)
+    evidence = build_signal_family_evidence(tagged)
+    marginal_tests = build_signal_family_marginal_tests(tagged)
+
+    output_dir.mkdir(parents=True, exist_ok=True)
+    evidence_path = output_dir / "signal_family_evidence.csv"
+    tests_path = output_dir / "signal_marginal_tests.csv"
+    tagged_path = output_dir / "tagged_strategy_signal_families.csv"
+    evidence.to_csv(evidence_path, index=False)
+    marginal_tests.to_csv(tests_path, index=False)
+    tagged.to_csv(tagged_path, index=False)
+
+    table = Table(title="Signal-Family Evidence")
+    for column in [
+        "signal",
+        "label",
+        "paired",
+        "candidates",
+        "score",
+        "median dCAGR",
+        "median dMDD",
+        "recommendation",
+    ]:
+        table.add_column(column)
+    for _, row in evidence.head(12).iterrows():
+        table.add_row(
+            str(row["signal_label"]),
+            str(row["evidence_label"]),
+            str(int(row["paired_tests"])),
+            str(int(row["candidate_count"])),
+            _format_optional_decimal(row.get("net_evidence_score")),
+            _format_optional_percent(row.get("median_delta_cagr")),
+            _format_optional_percent(row.get("median_delta_max_drawdown")),
+            str(row["recommendation"])[:64],
+        )
+    console.print(table)
+    console.print(
+        f"Wrote signal evidence from {effective_experiment_dir} to {output_dir} "
+        f"({len(evidence):,} families, {len(marginal_tests):,} paired tests)."
+    )
 
 
 @app.command("run-ml-diagnostics")

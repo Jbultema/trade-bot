@@ -6,6 +6,13 @@ import streamlit as st
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.research.operating_exposure import (
+    aggregate_beta_adjusted_spy_delta,
+    build_beta_adjusted_delta_table,
+    build_sleeve_exposure_table,
+    build_tactical_matrix,
+    weights_from_position_plan,
+)
 
 
 def _render_risk_and_scenarios(baseline_run: BaselineRun) -> None:
@@ -85,6 +92,55 @@ def _render_risk_and_scenarios(baseline_run: BaselineRun) -> None:
         with risk_scenario_tab:
             _render_metric_dataframe(_display_metrics(portfolio_risk.scenario_risk_budget))
 
+    st.subheader("Operating Exposure")
+    st.caption(
+        "Current target posture translated into operating sleeves, percent of maximum sleeve exposure, "
+        "and beta-adjusted S&P 500 delta."
+    )
+    current_weights = weights_from_position_plan(trade_decision.position_plan)
+    if current_weights.empty:
+        st.write("No current target weights are available for exposure diagnostics.")
+    else:
+        sleeve_exposure = build_sleeve_exposure_table(current_weights, baseline_run.prices)
+        beta_delta = aggregate_beta_adjusted_spy_delta(baseline_run.prices, current_weights)
+        exposure_cols = st.columns(6)
+        _helped_metric(
+            exposure_cols[0],
+            "Beta-Adjusted S&P Delta",
+            f"{beta_delta:.1%}" if pd.notna(beta_delta) else "n/a",
+            key="beta_adjusted_spy_delta",
+        )
+        for column_index, sleeve in enumerate(["stocks", "defensive", "gold", "crypto", "credit"], start=1):
+            sleeve_row = sleeve_exposure[sleeve_exposure["sleeve"].astype(str) == sleeve]
+            percent_of_max = (
+                float(sleeve_row["percent_of_max_sleeve"].iloc[0])
+                if not sleeve_row.empty
+                else float("nan")
+            )
+            _helped_metric(
+                exposure_cols[column_index],
+                f"{sleeve.title()} % of Max",
+                f"{percent_of_max:.0%}" if pd.notna(percent_of_max) else "n/a",
+                key="percent_of_max_sleeve",
+            )
+
+        sleeve_tab, beta_tab, tactical_tab = st.tabs(
+            ["Sleeve Exposure", "Beta Delta", "Tactical Matrix"]
+        )
+        with sleeve_tab:
+            _render_metric_dataframe(_display_metrics(sleeve_exposure), hide_index=True)
+        with beta_tab:
+            beta_table = build_beta_adjusted_delta_table(baseline_run.prices, current_weights)
+            _render_metric_dataframe(_display_metrics(beta_table), hide_index=True)
+        with tactical_tab:
+            tactical_matrix = build_tactical_matrix(
+                baseline_run.prices,
+                current_weights=current_weights,
+                risk_status=str(getattr(current_state, "risk_status", "")),
+                regime=_lead_regime_label(current_state),
+            )
+            _render_metric_dataframe(_display_metrics(tactical_matrix), hide_index=True)
+
     st.subheader("Regime Instability Index")
     st.caption(
         "Watch-only transition-risk diagnostic. This summarizes realized volatility, +/-1% SPY days, "
@@ -163,3 +219,21 @@ def _render_risk_and_scenarios(baseline_run: BaselineRun) -> None:
     if momentum_filter != "all":
         momentum_state_table = momentum_state_table[momentum_state_table["momentum_state_label"] == momentum_filter]
     _render_metric_dataframe(_display_metrics(momentum_state_table.head(75)))
+
+
+def _lead_regime_label(current_state: object) -> str:
+    growth_inflation_map = getattr(current_state, "growth_inflation_map", pd.DataFrame())
+    if isinstance(growth_inflation_map, pd.DataFrame) and not growth_inflation_map.empty:
+        for column in ("regime", "market_regime", "dominant_regime", "cycle"):
+            if column in growth_inflation_map:
+                return str(growth_inflation_map[column].iloc[0])
+    scenario_lattice = getattr(current_state, "scenario_lattice", pd.DataFrame())
+    if isinstance(scenario_lattice, pd.DataFrame) and not scenario_lattice.empty:
+        one_month = (
+            scenario_lattice[scenario_lattice["horizon"].astype(str) == "1m"]
+            if "horizon" in scenario_lattice
+            else pd.DataFrame()
+        )
+        if not one_month.empty and "scenario" in one_month:
+            return str(one_month.sort_values("probability", ascending=False)["scenario"].iloc[0])
+    return ""
