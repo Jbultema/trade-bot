@@ -6,6 +6,7 @@ import pandas as pd
 
 from trade_bot.dashboard.research_lab import (
     _outcome_label_index_for_strategy,
+    _peer_percentile,
     _plotly_selected_strategy,
 )
 
@@ -35,6 +36,7 @@ def test_plotly_selected_strategy_reads_array_like_customdata() -> None:
 def test_plotly_selected_strategy_returns_none_for_empty_selection() -> None:
     assert _plotly_selected_strategy({"selection": {"points": []}}) is None
     assert _plotly_selected_strategy({"selection": {}}) is None
+    assert _plotly_selected_strategy({"selection": {"points": [{"customdata": [""]}]}}) is None
 
 
 def test_outcome_label_index_for_strategy_falls_back_to_first_option() -> None:
@@ -48,3 +50,10 @@ def test_outcome_label_index_for_strategy_falls_back_to_first_option() -> None:
 
     assert _outcome_label_index_for_strategy(options, "strategy_b") == 1
     assert _outcome_label_index_for_strategy(options, "missing") == 0
+
+
+def test_peer_percentile_respects_metric_direction() -> None:
+    values = pd.Series([0.05, 0.10, 0.15, 0.20])
+
+    assert _peer_percentile(0.15, values, lower_is_better=False) == 0.75
+    assert _peer_percentile(0.10, values, lower_is_better=True) == 0.75

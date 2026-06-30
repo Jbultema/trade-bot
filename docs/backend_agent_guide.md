@@ -575,14 +575,19 @@ Top-level flow:
 
 1. Daily Market Brief: 30-60 second daily summary. It should distinguish what changed today from what is still true.
 2. Action Headline: whether this is a do-nothing, small-action, or critical-action day.
-3. Decision Brief: plain-English conclusion, sizing translation, scenario bridge, bias check, and execution details.
-4. Insight Sections: deeper workbenches for Command Center, Risk & Scenarios, Research Lab, Monitoring, News & Macro, Performance, and Forward Test.
+3. Book-aware recommendation: default paper-book alignment, expanded only when material drift needs attention.
+4. Operating Brief: execution checklist with sizing translation, scenario constraints, decision sanity, and bias checks.
+5. Decision Brief: plain-English conclusion, supporting evidence, scenario bridge, and invalidation details.
+6. Right-side Term Lookup: compact metric/tracker explanations sourced from the metric explainer registry. This is the quick-reference surface for terms that appear anywhere in the app.
+7. Insight Workbench: deeper workbenches for Command Center, Risk & Scenarios, Research Lab, Monitoring, News & Macro, Performance, and Forward Test.
 
 Design standard:
 
 - The dashboard should explain what to do, why, what changed, and what would invalidate the conclusion.
 - Avoid duplicative sections that show the same cards with different labels.
 - Keep research details available, but do not bury the operating decision.
+- Keep definitions close to the user through hover help and the right-side Term Lookup, rather than repeating long glossary text inside each section.
+- Keep one detailed workbench visible at a time. If a section becomes a duplicate of another section, consolidate it or make one an explicit drill-down.
 - Dark mode must remain readable.
 
 ## Quality And Testing Standards

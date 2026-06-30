@@ -5,7 +5,7 @@ from pathlib import Path
 import streamlit as st
 
 from trade_bot.config import load_config
-from trade_bot.dashboard.components import _render_metric_guide
+from trade_bot.dashboard.components import _render_metric_info_rail
 from trade_bot.dashboard.loaders import (
     load_experiment_dashboard_frames,
     load_live_run,
@@ -23,7 +23,10 @@ from trade_bot.dashboard.overview import (
     render_operating_overview,
 )
 from trade_bot.dashboard.sections import _render_dashboard_section
-from trade_bot.dashboard.styles import _install_dashboard_styles
+from trade_bot.dashboard.styles import (
+    _install_dashboard_styles,
+    _install_quick_reference_rail_layout,
+)
 from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
     DEFAULT_EVENTS_PATH,
@@ -86,6 +89,13 @@ run_source = st.sidebar.radio(
     ["Latest snapshot (fast)", "Live pipeline"],
     index=0,
 )
+show_quick_reference = st.sidebar.toggle(
+    "Show quick reference rail",
+    value=True,
+    help="Show the fixed right-side lookup rail for metrics, ticket fields, workflows, and ticker symbols.",
+)
+if show_quick_reference:
+    _install_quick_reference_rail_layout()
 
 with st.sidebar.expander("Local paths", expanded=False):
     config_path = Path(st.text_input("Config", str(DEFAULT_CONFIG_PATH)))
@@ -247,6 +257,9 @@ action_headline = build_action_headline(
     experiment_candidates,
     decision_sanity_impacts,
 ) = load_experiment_dashboard_frames()
+if show_quick_reference:
+    _render_metric_info_rail()
+
 render_operating_overview(
     baseline_run=baseline_run,
     headline=action_headline,
@@ -275,4 +288,3 @@ _render_dashboard_section(
     warehouse_path=str(run_store_path),
     book_alignment=execution_book_alignment,
 )
-_render_metric_guide()

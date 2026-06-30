@@ -19,12 +19,16 @@ from trade_bot.dashboard.formatting import (
     _result_date_bounds,
     _window_start_from_preset,
 )
+from trade_bot.dashboard.metric_explainers import metric_detail
 from trade_bot.DEFAULTS import (
     DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES,
     DEFAULT_ML_DIAGNOSTICS_DIR,
+    DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_HORIZON_YEARS,
+    DEFAULT_OUTCOME_PEER_CURVE_METRIC_LIMIT,
     DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT,
+    DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
     DEFAULT_PERFORMANCE_WINDOW,
     DEFAULT_PERFORMANCE_WINDOWS,
     DEFAULT_REFERENCE_BASELINE_STRATEGIES,
@@ -78,7 +82,9 @@ from trade_bot.research.signal_evidence import (
 )
 from trade_bot.research.strategy_outcome_utility import (
     add_outcome_frontier_flags,
+    drawdown_recovery_return,
     enrich_strategy_outcome_utility,
+    terminal_wealth_from_cagr,
 )
 
 _OUTCOME_FRONTIER_PLOT_KEY = "outcome_frontier_plot"
@@ -1319,8 +1325,27 @@ def _render_outcome_frontier(
                 hovertemplate="%{text}<br>Pareto efficient<extra></extra>",
             )
         )
-    fig.add_vline(x=DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT, line_dash="dash", line_color="#f59e0b")
-    fig.add_vline(x=DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT, line_dash="dot", line_color="#ef4444")
+    _add_outcome_drawdown_band_trace(
+        fig,
+        y_values=plot_frame["cagr"],
+        x_value=DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT,
+        name="Soft drawdown band",
+        color="#f59e0b",
+        dash="dash",
+        detail=(
+            "Drawdowns more negative than this enter the soft penalty band; "
+            "high-growth candidates can remain eligible."
+        ),
+    )
+    _add_outcome_drawdown_band_trace(
+        fig,
+        y_values=plot_frame["cagr"],
+        x_value=DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
+        name="Hard review band",
+        color="#ef4444",
+        dash="dot",
+        detail="Drawdowns at or beyond this line trigger hard review/rejection behavior.",
+    )
     fig.update_layout(
         height=520,
         xaxis_title="Max drawdown",
@@ -1369,6 +1394,7 @@ def _render_outcome_frontier(
         bot_config=bot_config,
         baseline_run=baseline_run,
         experiment_scorecards=experiment_scorecards,
+        peer_frame=plot_frame,
     )
 
     comparison_columns = [
@@ -1409,6 +1435,40 @@ def _outcome_marker_sizes(frame: pd.DataFrame) -> pd.Series:
     return 9.0 + 18.0 * scaled.fillna(0.0)
 
 
+def _add_outcome_drawdown_band_trace(
+    fig: go.Figure,
+    *,
+    y_values: pd.Series,
+    x_value: float,
+    name: str,
+    color: str,
+    dash: str,
+    detail: str,
+) -> None:
+    clean = pd.to_numeric(y_values, errors="coerce").dropna()
+    if clean.empty:
+        y_min, y_max = 0.0, 1.0
+    else:
+        span = max(float(clean.max() - clean.min()), 0.01)
+        y_min = float(clean.min() - span * 0.08)
+        y_max = float(clean.max() + span * 0.08)
+    fig.add_trace(
+        go.Scatter(
+            x=[x_value, x_value],
+            y=[y_min, y_max],
+            mode="lines",
+            name=f"{name}: {abs(x_value):.0%}",
+            line={"color": color, "dash": dash, "width": 2},
+            hovertemplate=(
+                f"<b>{name}</b><br>Max drawdown threshold: {x_value:.0%}<br>{detail}"
+                "<extra></extra>"
+            ),
+            showlegend=True,
+            customdata=[[""], [""]],
+        )
+    )
+
+
 def _outcome_select_options(frame: pd.DataFrame) -> pd.DataFrame:
     output = frame.copy()
     output["label"] = output.apply(
@@ -1447,12 +1507,17 @@ def _plotly_selected_strategy(selection_event: Any) -> str | None:
     if isinstance(customdata, (list, tuple)):
         if not customdata:
             return None
-        return str(customdata[0])
+        return _non_empty_strategy_id(customdata[0])
     if not isinstance(customdata, (str, bytes)) and hasattr(customdata, "__len__"):
         if len(customdata) == 0:
             return None
-        return str(customdata[0])
-    return str(customdata)
+        return _non_empty_strategy_id(customdata[0])
+    return _non_empty_strategy_id(customdata)
+
+
+def _non_empty_strategy_id(value: object) -> str | None:
+    strategy_id = str(value).strip()
+    return strategy_id or None
 
 
 def _get_selection_field(payload: Any, field: str) -> Any:
@@ -1469,6 +1534,7 @@ def _render_outcome_decision_cards(
     bot_config: Any,
     baseline_run: BaselineRun,
     experiment_scorecards: pd.DataFrame,
+    peer_frame: pd.DataFrame,
 ) -> None:
     wealth_column = f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y"
     wealth = _safe_float(row.get(wealth_column))
@@ -1492,53 +1558,557 @@ def _render_outcome_decision_cards(
 
     st.info(_outcome_decision_helper(row, extra_spy=extra_spy, extra_qqq=extra_qqq))
 
-    context = pd.DataFrame(
-        [
-            {
-                "metric": "CAGR",
-                "selected": row.get("cagr"),
-                "spy_delta": row.get("excess_cagr_vs_spy"),
-                "qqq_delta": row.get("excess_cagr_vs_qqq"),
-            },
-            {
-                "metric": "Max drawdown",
-                "selected": row.get("max_drawdown"),
-                "spy_delta": row.get("drawdown_improvement_vs_spy"),
-                "qqq_delta": row.get("drawdown_improvement_vs_qqq"),
-            },
-            {
-                "metric": "Worst 1Y CAGR",
-                "selected": row.get("worst_1y_cagr"),
-                "spy_delta": pd.NA,
-                "qqq_delta": pd.NA,
-            },
-            {
-                "metric": "Worst 3Y CAGR",
-                "selected": row.get("worst_3y_cagr"),
-                "spy_delta": pd.NA,
-                "qqq_delta": pd.NA,
-            },
-            {
-                "metric": "Left-tail regime return",
-                "selected": row.get("left_tail_regime_return"),
-                "spy_delta": pd.NA,
-                "qqq_delta": pd.NA,
-            },
-            {
-                "metric": "Ulcer Index",
-                "selected": pain_index,
-                "spy_delta": pd.NA,
-                "qqq_delta": pd.NA,
-            },
-            {
-                "metric": "Days below prior peak",
-                "selected": underwater_rate,
-                "spy_delta": pd.NA,
-                "qqq_delta": pd.NA,
-            },
-        ]
+    benchmark_values = _outcome_benchmark_metric_values(baseline_run, experiment_scorecards)
+    context = _outcome_selected_benchmark_context(
+        row,
+        selected_ulcer_index=pain_index,
+        selected_underwater_rate=underwater_rate,
+        benchmark_values=benchmark_values,
     )
-    _render_metric_dataframe(_display_metrics(context), hide_index=True)
+    _render_metric_dataframe(
+        context,
+        hide_index=True,
+        column_help={
+            "selected": "Selected strategy value.",
+            "spy": "SPY buy-and-hold value calculated from the benchmark curve when available.",
+            "qqq": "QQQ buy-and-hold value calculated from the benchmark curve when available.",
+            "note": "Why a benchmark value may be missing.",
+        },
+    )
+    st.caption("Selected metric context across displayed outcome candidates")
+    _render_metric_dataframe(
+        _display_metrics(
+            _outcome_metric_peer_context(
+                row,
+                selected_result=result,
+                selected_ulcer_index=pain_index,
+                selected_underwater_rate=underwater_rate,
+                peer_frame=peer_frame,
+                bot_config=bot_config,
+                baseline_run=baseline_run,
+                experiment_scorecards=experiment_scorecards,
+                benchmark_values=benchmark_values,
+            )
+        ),
+        hide_index=True,
+        column_help={
+            "peer_percentile": (
+                "Percent of displayed outcome candidates the selected strategy beats for this metric. "
+                "Higher is better after adjusting for metric direction."
+            ),
+            "peer_min": "Lowest raw value among displayed outcome candidates.",
+            "peer_median": "Median raw value among displayed outcome candidates.",
+            "peer_max": "Highest raw value among displayed outcome candidates.",
+        },
+    )
+
+
+def _outcome_selected_benchmark_context(
+    row: pd.Series,
+    *,
+    selected_ulcer_index: float | None,
+    selected_underwater_rate: float | None,
+    benchmark_values: dict[str, dict[str, float | None]],
+) -> pd.DataFrame:
+    metric_specs = _outcome_metric_specs()
+    rows: list[dict[str, object]] = []
+    for spec in metric_specs:
+        metric = str(spec["metric"])
+        metric_key = str(spec["key"])
+        kind = str(spec["kind"])
+        if metric_key == "ulcer_index":
+            selected = selected_ulcer_index
+        elif metric_key == "days_below_prior_peak":
+            selected = selected_underwater_rate
+        elif metric_key == "extra_wealth_vs_spy":
+            selected = _extra_wealth_from_multiple(
+                _safe_float(row.get(_outcome_wealth_column())),
+                row.get("wealth_multiple_vs_spy"),
+            )
+        elif metric_key == "extra_wealth_vs_qqq":
+            selected = _extra_wealth_from_multiple(
+                _safe_float(row.get(_outcome_wealth_column())),
+                row.get("wealth_multiple_vs_qqq"),
+            )
+        else:
+            selected = _safe_float(row.get(metric_key))
+
+        spy_value = _benchmark_display_value(
+            metric_key,
+            benchmark_values=benchmark_values,
+            benchmark="SPY",
+        )
+        qqq_value = _benchmark_display_value(
+            metric_key,
+            benchmark_values=benchmark_values,
+            benchmark="QQQ",
+        )
+        rows.append(
+            {
+                "metric": metric,
+                "definition": _metric_plain_english(metric),
+                "selected": _format_outcome_value(selected, kind),
+                "spy": _format_outcome_value(spy_value, kind),
+                "qqq": _format_outcome_value(qqq_value, kind),
+                "note": _outcome_benchmark_note(metric_key, spy_value, qqq_value),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _outcome_metric_peer_context(
+    row: pd.Series,
+    *,
+    selected_result: BacktestResult | None,
+    selected_ulcer_index: float | None,
+    selected_underwater_rate: float | None,
+    peer_frame: pd.DataFrame,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+    benchmark_values: dict[str, dict[str, float | None]],
+) -> pd.DataFrame:
+    working = _outcome_peer_distribution_frame(
+        row,
+        selected_result=selected_result,
+        selected_ulcer_index=selected_ulcer_index,
+        selected_underwater_rate=selected_underwater_rate,
+        peer_frame=peer_frame,
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+    )
+    rows: list[dict[str, object]] = []
+    for spec in _outcome_metric_specs():
+        metric = str(spec["metric"])
+        metric_key = str(spec["key"])
+        kind = str(spec["kind"])
+        lower_is_better = bool(spec["lower_is_better"])
+        selected = _safe_float(working.loc[working["is_selected"], metric_key].iloc[0])
+        values = pd.to_numeric(working[metric_key], errors="coerce").dropna()
+        if values.empty or selected is None:
+            peer_min = peer_median = peer_max = peer_percentile = None
+        else:
+            peer_min = float(values.min())
+            peer_median = float(values.median())
+            peer_max = float(values.max())
+            peer_percentile = _peer_percentile(
+                selected,
+                values,
+                lower_is_better=lower_is_better,
+            )
+        rows.append(
+            {
+                "metric": metric,
+                "selected": _format_outcome_value(selected, kind),
+                "spy": _format_outcome_value(
+                    _benchmark_display_value(
+                        metric_key,
+                        benchmark_values=benchmark_values,
+                        benchmark="SPY",
+                    ),
+                    kind,
+                ),
+                "qqq": _format_outcome_value(
+                    _benchmark_display_value(
+                        metric_key,
+                        benchmark_values=benchmark_values,
+                        benchmark="QQQ",
+                    ),
+                    kind,
+                ),
+                "peer_min": _format_outcome_value(peer_min, kind),
+                "peer_median": _format_outcome_value(peer_median, kind),
+                "peer_max": _format_outcome_value(peer_max, kind),
+                "peer_percentile": _format_percent(peer_percentile),
+                "peer_count": int(values.shape[0]),
+                "how_to_read": _metric_how_to_read(metric),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _outcome_peer_distribution_frame(
+    row: pd.Series,
+    *,
+    selected_result: BacktestResult | None,
+    selected_ulcer_index: float | None,
+    selected_underwater_rate: float | None,
+    peer_frame: pd.DataFrame,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+) -> pd.DataFrame:
+    working = peer_frame.copy()
+    wealth_column = _outcome_wealth_column()
+    if wealth_column in working:
+        wealth = pd.to_numeric(working[wealth_column], errors="coerce")
+        spy_multiple = pd.to_numeric(
+            working["wealth_multiple_vs_spy"]
+            if "wealth_multiple_vs_spy" in working
+            else pd.Series(pd.NA, index=working.index),
+            errors="coerce",
+        )
+        qqq_multiple = pd.to_numeric(
+            working["wealth_multiple_vs_qqq"]
+            if "wealth_multiple_vs_qqq" in working
+            else pd.Series(pd.NA, index=working.index),
+            errors="coerce",
+        )
+        working["extra_wealth_vs_spy"] = wealth - wealth / spy_multiple.replace(0.0, pd.NA)
+        working["extra_wealth_vs_qqq"] = wealth - wealth / qqq_multiple.replace(0.0, pd.NA)
+    selected_strategy = str(row.get("strategy", ""))
+    working["is_selected"] = working["strategy"].astype(str).eq(selected_strategy)
+    curve_metrics = _outcome_peer_curve_metrics(
+        working,
+        selected_strategy=selected_strategy,
+        selected_result=selected_result,
+        selected_ulcer_index=selected_ulcer_index,
+        selected_underwater_rate=selected_underwater_rate,
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+    )
+    if not curve_metrics.empty:
+        working = working.merge(curve_metrics, on="strategy", how="left")
+    else:
+        working["ulcer_index"] = pd.NA
+        working["days_below_prior_peak"] = pd.NA
+    if working["is_selected"].any():
+        selected_index = working.index[working["is_selected"]][0]
+        working.loc[selected_index, "ulcer_index"] = selected_ulcer_index
+        working.loc[selected_index, "days_below_prior_peak"] = selected_underwater_rate
+    return working
+
+
+def _outcome_peer_curve_metrics(
+    frame: pd.DataFrame,
+    *,
+    selected_strategy: str,
+    selected_result: BacktestResult | None,
+    selected_ulcer_index: float | None,
+    selected_underwater_rate: float | None,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+) -> pd.DataFrame:
+    if "strategy" not in frame:
+        return pd.DataFrame()
+    candidate_strategies = (
+        frame.sort_values("growth_constrained_utility_score", ascending=False)["strategy"]
+        .astype(str)
+        .drop_duplicates()
+        .head(DEFAULT_OUTCOME_PEER_CURVE_METRIC_LIMIT)
+        .tolist()
+    )
+    if selected_strategy and selected_strategy not in candidate_strategies:
+        candidate_strategies.append(selected_strategy)
+    catalog = _approach_catalog_for_detail(bot_config, experiment_scorecards=experiment_scorecards)
+    if catalog.empty or "strategy" not in catalog:
+        return pd.DataFrame()
+    rows: list[dict[str, object]] = []
+    for strategy_name in candidate_strategies:
+        if strategy_name == selected_strategy and selected_result is not None:
+            result = selected_result
+            metric_ulcer = selected_ulcer_index
+            metric_underwater = selected_underwater_rate
+        else:
+            result = _result_for_catalog_strategy(
+                strategy_name,
+                catalog=catalog,
+                bot_config=bot_config,
+                baseline_run=baseline_run,
+            )
+            metric_ulcer = _ulcer_index(result)
+            metric_underwater = _time_underwater_rate(result)
+        if result is None:
+            continue
+        rows.append(
+            {
+                "strategy": strategy_name,
+                "ulcer_index": metric_ulcer,
+                "days_below_prior_peak": metric_underwater,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _result_for_catalog_strategy(
+    strategy_name: str,
+    *,
+    catalog: pd.DataFrame,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+) -> BacktestResult | None:
+    matches = catalog[catalog["strategy"].astype(str) == strategy_name]
+    if matches.empty:
+        return None
+    row = matches.iloc[0]
+    try:
+        strategy = strategy_from_catalog_row(row)
+        execution = execution_for_catalog_row(row, bot_config.execution)
+        result, _ = build_approach_backtest_result(
+            baseline_run.prices,
+            strategy,
+            execution,
+            scenario_sizing=scenario_sizing_from_catalog_row(row),
+            future_state_model=future_state_model_from_catalog_row(row),
+            strategy_drawdown_model=strategy_drawdown_model_from_catalog_row(row),
+            decision_sanity=decision_sanity_from_catalog_row(row),
+            name=strategy_name,
+        )
+    except (KeyError, ValueError, TypeError, AttributeError):
+        return None
+    return result
+
+
+def _outcome_benchmark_metric_values(
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+) -> dict[str, dict[str, float | None]]:
+    output: dict[str, dict[str, float | None]] = {}
+    for label, strategy_name in {"SPY": "buy_hold_spy", "QQQ": "buy_hold_qqq"}.items():
+        result = baseline_run.results.get(strategy_name)
+        metrics: dict[str, float | None] = {
+            "cagr": _baseline_metric_value(baseline_run.metrics, strategy_name, "cagr"),
+            "max_drawdown": _baseline_metric_value(
+                baseline_run.metrics,
+                strategy_name,
+                "max_drawdown",
+            ),
+            "worst_1y_cagr": _baseline_window_value(
+                baseline_run.window_summary,
+                strategy_name,
+                "1y",
+                "worst_cagr",
+            ),
+            "worst_3y_cagr": _baseline_window_value(
+                baseline_run.window_summary,
+                strategy_name,
+                "3y",
+                "worst_cagr",
+            ),
+            "left_tail_regime_return": _scorecard_strategy_value(
+                experiment_scorecards,
+                strategy_name,
+                "left_tail_regime_return",
+            ),
+        }
+        if result is not None:
+            metrics["ulcer_index"] = _ulcer_index(result)
+            metrics["days_below_prior_peak"] = _time_underwater_rate(result)
+        else:
+            metrics["ulcer_index"] = None
+            metrics["days_below_prior_peak"] = None
+        metrics["drawdown_recovery_return"] = _drawdown_recovery_value(metrics["max_drawdown"])
+        metrics[_outcome_wealth_column()] = _terminal_wealth_value(metrics["cagr"])
+        output[label] = metrics
+    return output
+
+
+def _baseline_metric_value(metrics: pd.DataFrame, strategy_name: str, column: str) -> float | None:
+    if metrics.empty or column not in metrics:
+        return None
+    if strategy_name not in metrics.index:
+        return None
+    return _safe_float(metrics.loc[strategy_name, column])
+
+
+def _baseline_window_value(
+    window_summary: pd.DataFrame,
+    strategy_name: str,
+    window: str,
+    column: str,
+) -> float | None:
+    if window_summary.empty or column not in window_summary:
+        return None
+    frame = window_summary.reset_index()
+    if "name" not in frame or "window" not in frame:
+        return None
+    matches = frame[
+        frame["name"].astype(str).eq(strategy_name) & frame["window"].astype(str).eq(window)
+    ]
+    if matches.empty:
+        return None
+    return _safe_float(matches.iloc[0][column])
+
+
+def _scorecard_strategy_value(
+    scorecards: pd.DataFrame,
+    strategy_name: str,
+    column: str,
+) -> float | None:
+    if scorecards.empty or column not in scorecards:
+        return None
+    if "strategy" in scorecards:
+        matches = scorecards[scorecards["strategy"].astype(str).eq(strategy_name)]
+        if not matches.empty:
+            return _safe_float(matches.iloc[0][column])
+    if strategy_name in scorecards.index:
+        return _safe_float(scorecards.loc[strategy_name, column])
+    return None
+
+
+def _benchmark_display_value(
+    metric_key: str,
+    *,
+    benchmark_values: dict[str, dict[str, float | None]],
+    benchmark: str,
+) -> float | None:
+    if metric_key == "extra_wealth_vs_spy":
+        return _benchmark_extra_wealth(benchmark_values, benchmark=benchmark, against="SPY")
+    if metric_key == "extra_wealth_vs_qqq":
+        return _benchmark_extra_wealth(benchmark_values, benchmark=benchmark, against="QQQ")
+    return benchmark_values.get(benchmark, {}).get(metric_key)
+
+
+def _benchmark_extra_wealth(
+    benchmark_values: dict[str, dict[str, float | None]],
+    *,
+    benchmark: str,
+    against: str,
+) -> float | None:
+    benchmark_wealth = benchmark_values.get(benchmark, {}).get(_outcome_wealth_column())
+    against_wealth = benchmark_values.get(against, {}).get(_outcome_wealth_column())
+    if benchmark_wealth is None or against_wealth is None:
+        return None
+    return benchmark_wealth - against_wealth
+
+
+def _outcome_metric_specs() -> list[dict[str, object]]:
+    wealth_column = _outcome_wealth_column()
+    return [
+        {"metric": "15Y Wealth", "key": wealth_column, "kind": "currency", "lower_is_better": False},
+        {
+            "metric": "Extra vs SPY",
+            "key": "extra_wealth_vs_spy",
+            "kind": "currency",
+            "lower_is_better": False,
+        },
+        {
+            "metric": "Extra vs QQQ",
+            "key": "extra_wealth_vs_qqq",
+            "kind": "currency",
+            "lower_is_better": False,
+        },
+        {"metric": "CAGR", "key": "cagr", "kind": "percent", "lower_is_better": False},
+        {
+            "metric": "Max Drawdown",
+            "key": "max_drawdown",
+            "kind": "percent",
+            "lower_is_better": False,
+        },
+        {
+            "metric": "Recovery Needed",
+            "key": "drawdown_recovery_return",
+            "kind": "percent",
+            "lower_is_better": True,
+        },
+        {
+            "metric": "Worst 1Y CAGR",
+            "key": "worst_1y_cagr",
+            "kind": "percent",
+            "lower_is_better": False,
+        },
+        {
+            "metric": "Worst 3Y CAGR",
+            "key": "worst_3y_cagr",
+            "kind": "percent",
+            "lower_is_better": False,
+        },
+        {
+            "metric": "Left-Tail Regime Return",
+            "key": "left_tail_regime_return",
+            "kind": "percent",
+            "lower_is_better": False,
+        },
+        {
+            "metric": "Ulcer Index",
+            "key": "ulcer_index",
+            "kind": "percent",
+            "lower_is_better": True,
+        },
+        {
+            "metric": "Days Below Prior Peak",
+            "key": "days_below_prior_peak",
+            "kind": "percent",
+            "lower_is_better": True,
+        },
+    ]
+
+
+def _outcome_wealth_column() -> str:
+    return f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y"
+
+
+def _terminal_wealth_value(cagr: float | None) -> float | None:
+    if cagr is None:
+        return None
+    wealth = terminal_wealth_from_cagr(
+        cagr,
+        years=DEFAULT_OUTCOME_HORIZON_YEARS,
+        starting_account_value=DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
+        annual_contribution=DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
+    )
+    if wealth.empty:
+        return None
+    return _safe_float(wealth.iloc[0])
+
+
+def _drawdown_recovery_value(max_drawdown: float | None) -> float | None:
+    if max_drawdown is None:
+        return None
+    recovery = drawdown_recovery_return(max_drawdown)
+    if recovery.empty:
+        return None
+    return _safe_float(recovery.iloc[0])
+
+
+def _peer_percentile(
+    selected: float,
+    values: pd.Series,
+    *,
+    lower_is_better: bool,
+) -> float | None:
+    clean = pd.to_numeric(values, errors="coerce").dropna()
+    if clean.empty:
+        return None
+    if lower_is_better:
+        return float((clean >= selected).mean())
+    return float((clean <= selected).mean())
+
+
+def _format_outcome_value(value: float | None, kind: str) -> str:
+    numeric = _safe_float(value)
+    if numeric is None:
+        return "not available"
+    if kind == "currency":
+        return _format_currency(numeric)
+    if kind == "percent":
+        return _format_percent(numeric)
+    return _format_decimal(numeric)
+
+
+def _metric_plain_english(metric_name: str) -> str:
+    detail = metric_detail(metric_name)
+    return detail.plain_english if detail else ""
+
+
+def _metric_how_to_read(metric_name: str) -> str:
+    detail = metric_detail(metric_name)
+    return detail.how_to_read if detail else ""
+
+
+def _outcome_benchmark_note(
+    metric_key: str,
+    spy_value: float | None,
+    qqq_value: float | None,
+) -> str:
+    if spy_value is not None and qqq_value is not None:
+        return ""
+    if metric_key == "left_tail_regime_return":
+        return "Regime metric is available only when benchmark regime summaries are present in the experiment artifacts."
+    return "Benchmark curve or derived benchmark metric is not available in the loaded snapshot."
 
 
 def _selected_outcome_result(

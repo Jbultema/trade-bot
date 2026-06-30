@@ -1,6 +1,6 @@
 # Documentation Index
 
-Status: canonical navigation. Last reviewed: 2026-06-22.
+Status: canonical navigation. Last reviewed: 2026-06-29.
 
 Use this file to decide which docs are current operating references and which
 ones are historical research notes. When a doc captures a point-in-time plan or
@@ -11,8 +11,8 @@ like live system behavior.
 
 | Doc | Use For | Maintenance Rule |
 | --- | --- | --- |
-| `README.md` | Running the app, dashboard walkthrough, daily workflow | Keep user-facing and operational; avoid deep backend theory here. |
-| `docs/backend_agent_guide.md` | Backend onboarding for engineers and future AI agents | Update when architecture, storage, command flow, or ownership changes. |
+| `README.md` | Running the app, dashboard walkthrough, daily workflow | Keep user-facing and operational; avoid deep backend theory here. Update when the operating overview, Insight Workbench, or Term Lookup behavior changes. |
+| `docs/backend_agent_guide.md` | Backend onboarding for engineers and future AI agents | Update when architecture, storage, command flow, dashboard structure, or ownership changes. |
 | `docs/experiment_plan.md` | Current roadmap and Phase 1/Phase 2 boundary | Keep current; archive outdated plans instead of accumulating stale queues. |
 | `docs/iteration_protocol.md` | Research loop, promotion rules, curation, and artifact roots | Update when experiment scoring, roots, or promotion semantics change. |
 | `docs/math_model_audit.md` | Locked formulas, model semantics, and caveats | Update with any formula or interpretation change in the same PR/change. |

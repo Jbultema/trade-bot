@@ -94,7 +94,7 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
             "This is not the same as time spent in a severe drawdown. A strategy can have high time "
             "underwater and still have acceptable max drawdown."
         ),
-        aliases=("time_underwater", "underwater_rate"),
+        aliases=("Days below prior peak", "time_underwater", "underwater_rate"),
     ),
     MetricExplainer(
         metric="Ulcer Index",
@@ -277,10 +277,22 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
         how_to_read="This is the practical retirement-accumulation outcome to compare across high-growth and lower-drawdown strategies.",
         caution="It assumes the historical CAGR repeats for planning math only; it is not a forecast.",
         aliases=(
+            "15Y Wealth",
+            "15 Year Wealth",
+            "15-year wealth",
             "terminal_wealth_with_contributions_15y",
             "terminal_wealth_15y",
             "projected_wealth",
         ),
+    ),
+    MetricExplainer(
+        metric="Extra Wealth Versus Benchmark",
+        category="Performance",
+        plain_english="Projected wealth difference versus a benchmark under the same 15-year contribution assumptions.",
+        calculation="Selected strategy projected wealth minus benchmark projected wealth.",
+        how_to_read="Positive means the selected strategy projects more wealth than the benchmark under the planning assumptions; negative means it trails.",
+        caution="This is scenario math from historical CAGR, not a forecast. It can swing sharply when CAGR estimates are close.",
+        aliases=("Extra vs SPY", "Extra vs QQQ", "extra_wealth_vs_spy", "extra_wealth_vs_qqq"),
     ),
     MetricExplainer(
         metric="Drawdown Recovery Return",
@@ -289,7 +301,7 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
         calculation="1 divided by 1 minus drawdown depth, minus 1. A 20 percent drawdown requires a 25 percent rebound.",
         how_to_read="Use it to translate drawdown into the recovery burden you would need to sit through.",
         caution="The time required to recover can matter more than the percentage recovery alone.",
-        aliases=("drawdown_recovery_return", "recovery_return_required"),
+        aliases=("Recovery Needed", "drawdown_recovery_return", "recovery_return_required"),
     ),
     MetricExplainer(
         metric="After-Tax CAGR",

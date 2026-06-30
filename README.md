@@ -83,11 +83,8 @@ Run project commands through Poetry so the correct interpreter and dependencies 
 Run this from the repo root.
 
 ```bash
-poetry run trade-bot fetch-prices --config configs/baseline.yaml
-poetry run trade-bot build-snapshot --config configs/baseline.yaml --events configs/events.yaml --macro configs/macro_fred.yaml --news configs/news_sources.yaml
-poetry run trade-bot migrate-warehouse
+poetry run trade-bot run-daily-update
 poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 5 --capital-base 10000
-poetry run trade-bot run-paper-valuation
 poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
 ```
 
@@ -105,28 +102,23 @@ Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. U
 
 | Step | Command or Dashboard Area | Purpose |
 | --- | --- | --- |
-| 1 | `build-snapshot` | Refresh the current market, macro, news, scenario, and strategy state. |
-| 2 | `migrate-warehouse` | Mirror local artifacts into the canonical DuckDB warehouse. |
-| 3 | `run-paper-valuation` | Update forward paper monitoring windows from the latest snapshot. |
-| 4 | Optional `run-ml-diagnostics --profile standard` | Refresh Research Lab ML probability, feature-importance, and drift artifacts. |
-| 5 | Dashboard top readout | Read Daily Market Brief, Action Headline, Operating Brief, and Decision Brief. |
-| 6 | Monitoring | Check champion/challenger forward performance and paper windows. |
-| 7 | Forward Test | Lock recommendations and log paper/live executions when action is warranted. |
+| 1 | `run-daily-update` or sidebar **Run Full Daily Update** | Refresh market, macro, news, scenarios, snapshot, warehouse, and paper valuations. |
+| 2 | Optional `run-ml-diagnostics --profile standard` | Refresh Research Lab ML probability, feature-importance, and drift artifacts. |
+| 3 | Dashboard operating overview | Read Daily Market Brief, Action Headline, book alignment when it needs attention, Operating Brief, and Decision Brief. Use the right-side Term Lookup for unclear terms. |
+| 4 | Monitoring | Check champion/challenger forward performance and paper windows. |
+| 5 | Forward Test | Lock recommendations and log paper/live executions when action is warranted. |
 
-Daily commands:
+Daily command:
 
 ```bash
-poetry run trade-bot build-snapshot --config configs/baseline.yaml --events configs/events.yaml --macro configs/macro_fred.yaml --news configs/news_sources.yaml
-poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard
-poetry run trade-bot migrate-warehouse
-poetry run trade-bot run-paper-valuation
+poetry run trade-bot run-daily-update
 poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
 ```
 
-Add refresh flags only when needed:
+Use cached inputs only when you intentionally want a faster local check:
 
 ```bash
-poetry run trade-bot build-snapshot --refresh-data --refresh-macro --refresh-news
+poetry run trade-bot run-daily-update --cached-data --cached-macro --cached-news
 ```
 
 ## Dashboard Map
@@ -136,18 +128,24 @@ The dashboard is intentionally organized from action to evidence. Start at the t
 ```mermaid
 flowchart TD
     A[Daily Market Brief] --> B[Action Headline]
-    B --> C[Operating Brief]
-    C --> D{Need more detail?}
-    D -->|Current action| E[Command Center]
-    D -->|Sizing and off-ramp| F[Risk & Scenarios]
-    D -->|Strategy evidence| G[Research Lab]
-    D -->|Forward proof| H[Monitoring]
-    D -->|Execution trail| I[Forward Test]
+    B --> C[Book Alignment Expander]
+    C --> D[Operating Brief]
+    D --> E[Decision Brief]
+    E --> F{Need more detail?}
+    F -->|Current action| G[Command Center]
+    F -->|Sizing and off-ramp| H[Risk & Scenarios]
+    F -->|Strategy evidence| I[Research Lab]
+    F -->|Forward proof| J[Monitoring]
+    F -->|Execution trail| K[Forward Test]
+    L[Right-Side Term Lookup] -. explains .-> A
+    L -. explains .-> I
 ```
 
 | Section | Use It For | Primary Questions |
 | --- | --- | --- |
-| Top-Level Readout | One-screen operating posture | Is today do-nothing, small-action, or critical-action? What changed? |
+| Operating Overview | One-screen operating posture | Is today do-nothing, small-action, or critical-action? What changed? Is the paper book aligned? |
+| Right-Side Term Lookup | Metric and tracker explanations | What does this term mean, how is it calculated, and how can it mislead? |
+| Insight Workbench | Navigation to deeper evidence sections | Which detailed workbench should I open for the next question? |
 | Command Center | Current-state trade decision | What is the target posture, and which tickers are affected? |
 | Risk & Scenarios | Off-ramp and sizing discipline | Are factor risk, stress loss, scenarios, or expected shortfall forcing lower risk? |
 | Research Lab | Strategy research and diagnostics | Which approaches worked, why, and across which windows/regimes? Includes **Taxable Impact** for after-tax survivability. |
@@ -156,7 +154,7 @@ flowchart TD
 | Performance | Backtest and selected-window charts | Did the approach work recently and through transitions? |
 | Forward Test | Recommendation and execution journal | What was recommended, what was done, at what price, and why? |
 
-### Top-Level Readout
+### Operating Overview
 
 The top of the app is the operating surface. It is designed to answer three questions before you look at any tables:
 
@@ -164,20 +162,23 @@ The top of the app is the operating surface. It is designed to answer three ques
 - What action is recommended and how large is the target-position change?
 - Why did the system change posture: price/trend, macro, news, scenario probabilities, or portfolio-risk constraints?
 
-Key cards:
+Key surfaces:
 
 - **Daily Market Brief**: current market situation, scenario pressure, new/recent changes, news/event pressure, and the practical action read-through.
 - **Action Headline**: severity score, risk state, largest target change, active news, and open tickets.
-- **Default Paper Book Alignment**: whether the paper book reflects the latest default target posture.
-- **Operating Brief**: conclusion, recommended action, sizing translation, scenario incorporation, risk constraints, and bias check.
-- **Decision Brief**: plain-English explanation of what to do next and what would change the recommendation.
-- **Metric Guide**: hover/table explainers for metrics that are easy to misuse.
+- **Default Paper Book Alignment**: an expander that opens when the logged default paper book has material drift from the latest target posture.
+- **Operating Brief**: execution checklist after the daily readout, including sizing translation, scenario constraints, and bias checks.
+- **Decision Brief**: research and performance context for the recommendation; use it to understand the supporting evidence and what would change the call.
+- **Right-side Term Lookup**: always-available explanations for metrics and trackers. Use it when a term is unfamiliar or easy to misuse.
+- **Insight Workbench**: the main section selector below the operating overview. It renders one detailed workbench at a time and shows a guide for what that workbench answers.
 
 ### Research Lab
 
 Use this for strategy research, not same-day execution. It contains the experiment monitor, approach detail, performance-over-time views, allocation behavior, mechanics, robustness diagnostics, candidate manifests, and signal-inclusion tests.
 
 Default Research Lab views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants are still available through explicit all-approach filters.
+
+The **Candidate Details** view is the canonical one-strategy research workbench. It shows explanation, performance-over-time, allocation behavior, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart.
 
 The **ML Diagnostics** section is artifact-backed, not trained inside Streamlit. Refresh it with `poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard`. Use `--profile research` when you intentionally want the heavier 1W/1M/3M model sweep with additional estimators; it is slower and should be treated as a research batch, not a dashboard cold-start path.
 
@@ -430,6 +431,7 @@ Prefer `active_valued` or `available_to_seed_and_value` for serious paper monito
 | Symptom | Likely Cause | Fix |
 | --- | --- | --- |
 | Dashboard feels stale | Fast mode is reading the last completed snapshot. | Build a new snapshot, then refresh the dashboard. |
+| A dashboard term is unclear | Some metrics are useful but easy to over-read. | Use the right-side Term Lookup; hover icons are shorter reminders. |
 | Monitoring is empty | Warehouse has not been migrated or no windows are seeded. | Run `migrate-warehouse`, then seed or start windows. |
 | Candidate appears in Research Lab but cannot be valued | It is research-only or missing runtime reconstruction support. | Inspect it in Research Lab; only paper-monitor it after it becomes snapshot-ready. |
 | Taxable Impact is blank | The visible experiment scorecards were generated before taxable fields existed, or the warehouse was not migrated. | Run new experiment iterations, then `poetry run trade-bot migrate-warehouse`. |

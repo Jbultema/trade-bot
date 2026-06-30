@@ -287,6 +287,98 @@ def _install_dashboard_styles() -> None:
             font-size: 0.89rem;
             line-height: 1.38;
         }
+        .metric-info-rail {
+            margin: 8px 0 12px;
+            padding: 16px 16px 14px;
+            border: 1px solid var(--tb-card-border);
+            border-left: 6px solid var(--tb-accent);
+            border-radius: 8px;
+            background:
+                linear-gradient(180deg, color-mix(in srgb, var(--tb-accent) 9%, var(--tb-card-bg)), var(--tb-card-bg)),
+                var(--tb-card-bg);
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .metric-info-kicker {
+            margin: 0 0 5px;
+            color: var(--tb-accent);
+            font-size: 0.72rem;
+            font-weight: 860;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+        .metric-info-title {
+            color: var(--tb-card-text);
+            font-size: 1.2rem;
+            font-weight: 840;
+            line-height: 1.18;
+        }
+        .metric-info-copy {
+            margin: 7px 0 0;
+            color: var(--tb-card-muted);
+            font-size: 0.85rem;
+            line-height: 1.38;
+        }
+        .metric-info-card {
+            margin: 10px 0 12px;
+            padding: 14px 14px 12px;
+            border: 1px solid var(--tb-card-border);
+            border-radius: 8px;
+            background: var(--tb-card-bg);
+            color: var(--tb-card-text);
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .metric-info-card-label {
+            margin: 0 0 5px;
+            color: var(--tb-card-muted);
+            font-size: 0.70rem;
+            font-weight: 820;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+        .metric-info-card h3 {
+            margin: 0 0 8px !important;
+            color: var(--tb-card-text) !important;
+            font-size: 1.05rem;
+            line-height: 1.22;
+        }
+        .metric-info-card p {
+            margin: 0 0 10px;
+            color: var(--tb-card-text);
+            font-size: 0.86rem;
+            line-height: 1.42;
+        }
+        .st-key-quick_reference_rail {
+            position: fixed;
+            top: 4.15rem;
+            right: 1.05rem;
+            z-index: 999;
+            width: 330px;
+            max-height: calc(100vh - 5.15rem);
+            overflow-y: auto;
+            overflow-x: hidden;
+            padding: 0 0.18rem 0.8rem;
+            scrollbar-width: thin;
+        }
+        .st-key-quick_reference_rail div[data-testid="stVerticalBlock"] {
+            gap: 0.55rem;
+        }
+        .metric-info-card-section {
+            margin-top: 10px;
+            padding-top: 9px;
+            border-top: 1px solid var(--tb-card-border);
+        }
+        .metric-info-card-section span {
+            display: block;
+            margin: 0 0 4px;
+            color: var(--tb-card-muted);
+            font-size: 0.70rem;
+            font-weight: 820;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+        .metric-info-card-section p {
+            margin: 0;
+        }
         div[data-testid="stPills"] button,
         div[data-testid="stPills"] [role="button"] {
             min-height: 46px;
@@ -864,6 +956,20 @@ def _install_dashboard_styles() -> None:
             .workbench-guide {
                 grid-template-columns: 1fr;
             }
+            .st-key-quick_reference_rail {
+                position: static;
+                width: auto;
+                max-height: none;
+                overflow: visible;
+                padding: 0;
+            }
+            .metric-info-rail {
+                margin-top: 1rem;
+            }
+            .block-container {
+                padding-right: 1rem !important;
+                max-width: 1540px;
+            }
             .market-brief-grid,
             .market-brief-readouts,
             .market-brief-delta-grid,
@@ -911,6 +1017,22 @@ def _install_dashboard_styles() -> None:
             .workbench-guide-grid,
             .brief-grid {
                 grid-template-columns: 1fr;
+            }
+        }
+        </style>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def _install_quick_reference_rail_layout() -> None:
+    st.markdown(
+        """
+        <style>
+        @media (min-width: 1101px) {
+            .block-container {
+                max-width: 1760px;
+                padding-right: 370px;
             }
         }
         </style>
