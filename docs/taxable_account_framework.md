@@ -196,9 +196,10 @@ The dashboard exposes taxable support in two main places:
   taxable research lens. It shows configured account assumptions, pre-tax versus
   estimated after-tax CAGR, tax drag, after-tax growth utility, top after-tax
   candidates, and a tax-drag watchlist.
-- **Research Lab -> Candidate Details** shows an estimated taxable-account
-  readout for the selected strategy before the full scorecard. Use this when
-  inspecting a single strategy's mechanics, allocation behavior, and robustness.
+- **Research Lab -> Experiment Monitor -> Candidate Details workbench** shows an
+  estimated taxable-account readout for the selected strategy before the full
+  scorecard. Use this when inspecting a single strategy's mechanics, allocation
+  behavior, and robustness.
 - **Forward Test -> Estimated taxable lots** rebuilds and displays derived open
   and realized tax-lot tables for the selected mode/account from the local
   execution journal.

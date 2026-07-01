@@ -1685,99 +1685,105 @@ def _render_strategy_family_map(
 
     risk_matrix = summarize_risk_behavior_matrix(active_family_map)
     if not risk_matrix.empty:
-        st.markdown("**Risk-behavior matrix**")
+        with st.expander(f"Risk-behavior matrix table ({len(risk_matrix):,} rows)", expanded=False):
+            st.caption(
+                "This shows the actual operating families: what they buy for upside, how they defend, "
+                "and whether the risk logic is trend exit, cooldown, dip reentry, sector gating, or a benchmark."
+            )
+            matrix_columns = [
+                "risk_behavior",
+                "equity_expression",
+                "defensive_expression",
+                "candidates",
+                "promoted",
+                "best_strategy",
+                "best_score",
+                "median_cagr",
+                "median_max_drawdown",
+                "median_turnover",
+                "interpretation",
+            ]
+            _render_metric_dataframe(
+                _display_metrics(
+                    risk_matrix[[column for column in matrix_columns if column in risk_matrix]]
+                ),
+                hide_index=True,
+            )
+
+    with st.expander(f"Strategy map table and filters ({len(family_map):,} rows)", expanded=False):
         st.caption(
-            "This shows the actual operating families: what they buy for upside, how they defend, "
-            "and whether the risk logic is trend exit, cooldown, dip reentry, sector gating, or a benchmark."
+            "Filter the full strategy map when you need to inspect individual candidates by "
+            "archetype, risk behavior, risk-on sleeve, or defensive sleeve."
         )
-        matrix_columns = [
+        filter_cols = st.columns(4)
+        archetype_options = ["all", *sorted(family_map["strategy_archetype"].dropna().unique())]
+        behavior_options = ["all", *sorted(family_map["risk_behavior"].dropna().unique())]
+        equity_options = ["all", *sorted(family_map["equity_expression"].dropna().unique())]
+        defensive_options = ["all", *sorted(family_map["defensive_expression"].dropna().unique())]
+        archetype_filter = filter_cols[0].selectbox(
+            "Archetype",
+            archetype_options,
+            key="family_map_archetype_filter",
+        )
+        behavior_filter = filter_cols[1].selectbox(
+            "Risk behavior",
+            behavior_options,
+            key="family_map_behavior_filter",
+        )
+        equity_filter = filter_cols[2].selectbox(
+            "Equity expression",
+            equity_options,
+            key="family_map_equity_filter",
+        )
+        defensive_filter = filter_cols[3].selectbox(
+            "Defense expression",
+            defensive_options,
+            key="family_map_defensive_filter",
+        )
+
+        strategy_view = family_map.copy()
+        if archetype_filter != "all":
+            strategy_view = strategy_view[strategy_view["strategy_archetype"] == archetype_filter]
+        if behavior_filter != "all":
+            strategy_view = strategy_view[strategy_view["risk_behavior"] == behavior_filter]
+        if equity_filter != "all":
+            strategy_view = strategy_view[strategy_view["equity_expression"] == equity_filter]
+        if defensive_filter != "all":
+            strategy_view = strategy_view[
+                strategy_view["defensive_expression"] == defensive_filter
+            ]
+
+        strategy_columns = [
+            "iteration",
+            "display_name",
+            "strategy",
+            "strategy_archetype",
             "risk_behavior",
             "equity_expression",
             "defensive_expression",
-            "candidates",
-            "promoted",
-            "best_strategy",
-            "best_score",
-            "median_cagr",
-            "median_max_drawdown",
-            "median_turnover",
-            "interpretation",
+            "strategy_type",
+            "defensive_ticker",
+            "ticker_count",
+            "primary_tickers",
+            "strategy_drawdown_model",
+            "research_status",
+            "prune_reason",
+            "promotion_decision",
+            "promotion_score",
+            "cagr",
+            "max_drawdown",
+            "calmar",
+            "walk_forward_positive_rate",
+            "left_tail_regime_return",
+            "risk_read",
+            "hypothesis",
         ]
         _render_metric_dataframe(
             _display_metrics(
-                risk_matrix[[column for column in matrix_columns if column in risk_matrix]]
+                strategy_view[[column for column in strategy_columns if column in strategy_view]]
             ),
             hide_index=True,
         )
-
-    st.markdown("**Strategy map**")
-    filter_cols = st.columns(4)
-    archetype_options = ["all", *sorted(family_map["strategy_archetype"].dropna().unique())]
-    behavior_options = ["all", *sorted(family_map["risk_behavior"].dropna().unique())]
-    equity_options = ["all", *sorted(family_map["equity_expression"].dropna().unique())]
-    defensive_options = ["all", *sorted(family_map["defensive_expression"].dropna().unique())]
-    archetype_filter = filter_cols[0].selectbox(
-        "Archetype",
-        archetype_options,
-        key="family_map_archetype_filter",
-    )
-    behavior_filter = filter_cols[1].selectbox(
-        "Risk behavior",
-        behavior_options,
-        key="family_map_behavior_filter",
-    )
-    equity_filter = filter_cols[2].selectbox(
-        "Equity expression",
-        equity_options,
-        key="family_map_equity_filter",
-    )
-    defensive_filter = filter_cols[3].selectbox(
-        "Defense expression",
-        defensive_options,
-        key="family_map_defensive_filter",
-    )
-
-    strategy_view = family_map.copy()
-    if archetype_filter != "all":
-        strategy_view = strategy_view[strategy_view["strategy_archetype"] == archetype_filter]
-    if behavior_filter != "all":
-        strategy_view = strategy_view[strategy_view["risk_behavior"] == behavior_filter]
-    if equity_filter != "all":
-        strategy_view = strategy_view[strategy_view["equity_expression"] == equity_filter]
-    if defensive_filter != "all":
-        strategy_view = strategy_view[strategy_view["defensive_expression"] == defensive_filter]
-
-    strategy_columns = [
-        "iteration",
-        "display_name",
-        "strategy",
-        "strategy_archetype",
-        "risk_behavior",
-        "equity_expression",
-        "defensive_expression",
-        "strategy_type",
-        "defensive_ticker",
-        "ticker_count",
-        "primary_tickers",
-        "strategy_drawdown_model",
-        "research_status",
-        "prune_reason",
-        "promotion_decision",
-        "promotion_score",
-        "cagr",
-        "max_drawdown",
-        "calmar",
-        "walk_forward_positive_rate",
-        "left_tail_regime_return",
-        "risk_read",
-        "hypothesis",
-    ]
-    _render_metric_dataframe(
-        _display_metrics(
-            strategy_view[[column for column in strategy_columns if column in strategy_view]]
-        ),
-        hide_index=True,
-    )
 
     family_clusters = summarize_family_clusters(family_map)
     if not family_clusters.empty:

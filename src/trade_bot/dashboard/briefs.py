@@ -27,7 +27,7 @@ def _render_operating_brief(
 ) -> None:
     st.subheader("Operating Brief")
     st.caption(
-        "Execution checklist after the Daily Market Brief: sizing translation, scenario constraints, and bias checks."
+        "Execution checklist for today's recommendation: sizing translation, scenario constraints, and bias checks."
     )
     position_plan = _execution_position_plan(baseline_run, book_alignment)
     cards = _operating_brief_cards(
@@ -510,7 +510,7 @@ def _render_decision_brief(
 ) -> None:
     st.subheader("Decision Brief")
     st.caption(
-        "Research and performance context. Use Daily Market Brief and Action Headline for the operating summary."
+        "Research and performance context. Use the action headline and operating brief for the operating summary."
     )
     with st.expander("Decision context", expanded=False):
         cards = _decision_brief_cards(

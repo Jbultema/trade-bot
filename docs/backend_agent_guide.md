@@ -188,8 +188,9 @@ Dashboard surfaces:
 
 - `Research Lab -> Experiment Monitor -> Taxable Impact` is the cross-strategy
   after-tax comparison surface.
-- `Research Lab -> Candidate Details` includes a compact selected-strategy
-  estimated taxable readout when scorecard fields are available.
+- `Research Lab -> Experiment Monitor -> Candidate Details workbench` includes a
+  compact selected-strategy estimated taxable readout when scorecard fields are
+  available.
 - `Forward Test` remains the execution journal surface. Derived tax-lot tables
   are rebuilt from that journal; do not treat them as broker-confirmed lots.
 
@@ -430,13 +431,18 @@ Experiment principles:
 - Track parentage and rationale so the research path is explainable.
 - Promote candidates based on validation, not only raw score.
 
-The key dashboard path is:
+The key dashboard area is:
 
 ```text
-Research Lab -> Experiment Monitor -> Candidate Details
+Research Lab -> Experiment Monitor
 ```
 
-This is the canonical strategy drill-down. It should include explanation, performance-over-time charts, allocation behavior, mechanics, robustness diagnostics, and manifest/risk notes. Avoid creating parallel strategy explorers unless there is a clear reason.
+The upper aggregate area is for leaderboard, curated shelf, outcome frontier,
+signal evidence, family map, taxable impact, validation/QC, and manifests. The
+lower Candidate Details workbench is the canonical strategy drill-down. It should
+include explanation, performance-over-time charts, allocation behavior, decision
+timeline, factor attribution, mechanics, robustness diagnostics, and manifest/risk
+notes. Avoid creating parallel strategy explorers unless there is a clear reason.
 
 Promotion is not deployment. A promoted candidate can be suitable for paper monitoring, but live-money trust requires forward evidence.
 
@@ -478,7 +484,7 @@ needle?" for a selected strategy. The implementation lives in
 `src/trade_bot/research/factor_attribution.py` and is surfaced in:
 
 ```text
-Research Lab -> Experiment Monitor -> Candidate Details -> Factor Attribution
+Research Lab -> Experiment Monitor -> Candidate Details workbench -> Factor Attribution
 ```
 
 It uses transparent ETF proxy factors rather than a proprietary factor database:
@@ -573,18 +579,18 @@ The dashboard is not meant to expose every table at once. It should guide the us
 
 Top-level flow:
 
-1. Daily Market Brief: 30-60 second daily summary. It should distinguish what changed today from what is still true.
-2. Action Headline: whether this is a do-nothing, small-action, or critical-action day.
-3. Book-aware recommendation: default paper-book alignment, expanded only when material drift needs attention.
-4. Operating Brief: execution checklist with sizing translation, scenario constraints, decision sanity, and bias checks.
-5. Decision Brief: plain-English conclusion, supporting evidence, scenario bridge, and invalidation details.
-6. Right-side Term Lookup: compact metric/tracker explanations sourced from the metric explainer registry. This is the quick-reference surface for terms that appear anywhere in the app.
-7. Insight Workbench: deeper workbenches for Command Center, Risk & Scenarios, Research Lab, Monitoring, News & Macro, Performance, and Forward Test.
+1. Action Headline: whether this is a do-nothing, small-action, or critical-action day.
+2. Operating Brief: execution checklist with sizing translation, scenario constraints, decision sanity, and bias checks.
+3. Decision Brief: collapsed research context with supporting evidence, scenario bridge, and invalidation details.
+4. Book-aware recommendation: visible default paper-book alignment, with raw position and execution rows kept inside the details expander.
+5. Right-side Term Lookup: compact metric/tracker explanations sourced from the metric explainer registry. This is the quick-reference surface for terms that appear anywhere in the app.
+6. Insight Workbench: deeper workbenches for Command Center, Risk & Scenarios, Research Lab, Monitoring, News & Macro, Performance, and Forward Test.
 
 Design standard:
 
 - The dashboard should explain what to do, why, what changed, and what would invalidate the conclusion.
 - Avoid duplicative sections that show the same cards with different labels.
+- Keep the top-of-page operating surface focused on today's action, not broad research context.
 - Keep research details available, but do not bury the operating decision.
 - Keep definitions close to the user through hover help and the right-side Term Lookup, rather than repeating long glossary text inside each section.
 - Keep one detailed workbench visible at a time. If a section becomes a duplicate of another section, consolidate it or make one an explicit drill-down.

@@ -148,6 +148,43 @@ def _install_dashboard_styles() -> None:
             font-weight: 760;
             white-space: nowrap;
         }
+        .freshness-strip {
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: -8px 0 14px;
+            padding: 8px 11px;
+            border: 1px solid var(--tb-card-border);
+            border-left: 5px solid var(--tb-accent);
+            border-radius: 8px;
+            background: color-mix(in srgb, var(--tb-card-bg) 86%, transparent);
+            color: var(--tb-card-text);
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .freshness-kicker {
+            color: var(--tb-accent);
+            font-size: 0.72rem;
+            font-weight: 820;
+            text-transform: uppercase;
+        }
+        .freshness-main {
+            font-size: 0.86rem;
+            font-weight: 720;
+        }
+        .freshness-chip {
+            border: 1px solid var(--tb-card-border);
+            border-radius: 999px;
+            padding: 2px 8px;
+            color: var(--tb-card-muted);
+            font-size: 0.76rem;
+            font-weight: 680;
+            white-space: nowrap;
+        }
+        .freshness-detail {
+            color: var(--tb-card-muted);
+            font-size: 0.76rem;
+        }
         .dashboard-section-header {
             margin: 32px 0 12px;
             padding: 20px 22px 18px;

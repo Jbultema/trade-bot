@@ -104,7 +104,7 @@ Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. U
 | --- | --- | --- |
 | 1 | `run-daily-update` or sidebar **Run Full Daily Update** | Refresh market, macro, news, scenarios, snapshot, warehouse, and paper valuations. |
 | 2 | Optional `run-ml-diagnostics --profile standard` | Refresh Research Lab ML probability, feature-importance, and drift artifacts. |
-| 3 | Dashboard operating overview | Read Daily Market Brief, Action Headline, book alignment when it needs attention, Operating Brief, and Decision Brief. Use the right-side Term Lookup for unclear terms. |
+| 3 | Dashboard operating overview | Read Action Headline, Operating Brief, Decision Brief when needed, and book alignment. Use the right-side Term Lookup for unclear terms. |
 | 4 | Monitoring | Check champion/challenger forward performance and paper windows. |
 | 5 | Forward Test | Lock recommendations and log paper/live executions when action is warranted. |
 
@@ -127,18 +127,17 @@ The dashboard is intentionally organized from action to evidence. Start at the t
 
 ```mermaid
 flowchart TD
-    A[Daily Market Brief] --> B[Action Headline]
-    B --> C[Book Alignment Expander]
-    C --> D[Operating Brief]
-    D --> E[Decision Brief]
-    E --> F{Need more detail?}
-    F -->|Current action| G[Command Center]
-    F -->|Sizing and off-ramp| H[Risk & Scenarios]
-    F -->|Strategy evidence| I[Research Lab]
-    F -->|Forward proof| J[Monitoring]
-    F -->|Execution trail| K[Forward Test]
-    L[Right-Side Term Lookup] -. explains .-> A
-    L -. explains .-> I
+    A[Action Headline] --> B[Operating Brief]
+    B --> C[Decision Brief Expander]
+    C --> D[Book Alignment]
+    D --> E{Need more detail?}
+    E -->|Current action| F[Command Center]
+    E -->|Sizing and off-ramp| G[Risk & Scenarios]
+    E -->|Strategy evidence| H[Research Lab]
+    E -->|Forward proof| I[Monitoring]
+    E -->|Execution trail| J[Forward Test]
+    K[Right-Side Term Lookup] -. explains .-> A
+    K -. explains .-> H
 ```
 
 | Section | Use It For | Primary Questions |
@@ -156,29 +155,30 @@ flowchart TD
 
 ### Operating Overview
 
-The top of the app is the operating surface. It is designed to answer three questions before you look at any tables:
+The top of the app is the operating surface. It is designed to answer four questions before you look at any tables:
 
 - What kind of day is this: do nothing, small actions, or critical actions?
 - What action is recommended and how large is the target-position change?
-- Why did the system change posture: price/trend, macro, news, scenario probabilities, or portfolio-risk constraints?
+- Is the logged paper book already aligned with the latest target?
+- What constraints or checks matter before creating or executing a ticket?
 
 Key surfaces:
 
-- **Daily Market Brief**: current market situation, scenario pressure, new/recent changes, news/event pressure, and the practical action read-through.
-- **Action Headline**: severity score, risk state, largest target change, active news, and open tickets.
-- **Default Paper Book Alignment**: an expander that opens when the logged default paper book has material drift from the latest target posture.
-- **Operating Brief**: execution checklist after the daily readout, including sizing translation, scenario constraints, and bias checks.
-- **Decision Brief**: research and performance context for the recommendation; use it to understand the supporting evidence and what would change the call.
+- **Latest Update Strip**: small timestamp row under the masthead showing when the loaded snapshot or live run was generated, plus market date and risk state.
+- **Action Headline**: the first operating read. It tells you whether today is do-nothing, small-action, or critical-action, plus the next required step.
+- **Operating Brief**: the primary checklist for today's recommendation: sizing translation, risk constraints, decision sanity, and bias checks.
+- **Decision Brief**: collapsed research and performance context. Open it when you need the supporting evidence or invalidation conditions.
+- **Default Paper Book Alignment**: a visible operating section that compares the logged default paper book to the latest target posture and shows whether action is still needed. Raw position and execution rows remain tucked under its details expander.
 - **Right-side Term Lookup**: always-available explanations for metrics and trackers. Use it when a term is unfamiliar or easy to misuse.
 - **Insight Workbench**: the main section selector below the operating overview. It renders one detailed workbench at a time and shows a guide for what that workbench answers.
 
 ### Research Lab
 
-Use this for strategy research, not same-day execution. It contains the experiment monitor, approach detail, performance-over-time views, allocation behavior, mechanics, robustness diagnostics, candidate manifests, and signal-inclusion tests.
+Use this for strategy research, not same-day execution. The Research Lab is split into two layers: an upper aggregate section for cross-experiment comparisons and a lower candidate deep-dive for one selected strategy.
 
-Default Research Lab views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants are still available through explicit all-approach filters.
+The upper aggregate section includes the overview, leaderboard, curated shelf, outcome frontier, signal evidence, family map, taxable impact, validation/QC, and manifests. Default aggregate views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants remain available through explicit all-approach filters.
 
-The **Candidate Details** view is the canonical one-strategy research workbench. It shows explanation, performance-over-time, allocation behavior, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart.
+The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart.
 
 The **ML Diagnostics** section is artifact-backed, not trained inside Streamlit. Refresh it with `poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard`. Use `--profile research` when you intentionally want the heavier 1W/1M/3M model sweep with additional estimators; it is slower and should be treated as a research batch, not a dashboard cold-start path.
 
@@ -282,8 +282,8 @@ Where it appears:
 
 | Surface | What To Look For |
 | --- | --- |
-| **Research Lab -> Experiment Monitor -> Taxable Impact** | Portfolio-level after-tax comparison across experiments, tax drag, after-tax utility, and candidates that still look strong after taxes. |
-| **Research Lab -> Candidate Details -> Performance Over Time** | Selected-strategy estimated taxable readout above the full scorecard. |
+| **Research Lab -> Experiment Monitor -> Taxable Impact** | Aggregate after-tax comparison across experiments, tax drag, after-tax utility, and candidates that still look strong after taxes. |
+| **Research Lab -> Experiment Monitor -> Candidate Details workbench -> Performance Over Time** | Selected-strategy estimated taxable readout above the full scorecard. |
 | **Forward Test / journal backend** | Executions can be rebuilt into derived open and realized tax-lot tables for paper/live audit support. |
 | [Taxable Account Framework](docs/taxable_account_framework.md) | Modeling assumptions, IRS reference links, limitations, and future broker-grade work. |
 
@@ -341,7 +341,7 @@ poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --i
 poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration 78 --output-dir data/experiments_reset_v2
 ```
 
-Dashboard path: **Research Lab -> Experiment Monitor -> Sanity Impact**.
+Dashboard path: **Research Lab -> Experiment Monitor -> Validation / QC -> Sanity Impact**.
 
 Use that tab to compare profile-level adoption reads and pair-level deltas. A positive `delta_max_drawdown` means the capped version had a less negative drawdown. A negative `delta_promotion_score` means the capped version scored worse after the validation penalties.
 
@@ -439,7 +439,7 @@ Prefer `active_valued` or `available_to_seed_and_value` for serious paper monito
 | Paper return is `0.00%` on the first row | First valuation starts at capital base by design. | Keep collecting future snapshot valuations. |
 | `seed-monitoring-windows --top-n 3` does not match raw promotion-score rank | Seeding uses monitoring rank, not raw score alone. | Use Research Lab leaderboard and manually add strict raw-score candidates. |
 | Champion/challenger table does not update after starting a window | Valuation has not run after the window was created. | Run `poetry run trade-bot run-paper-valuation`. |
-| Strategies look different but share the same driver | Factor attribution may show the same dominant beta across several candidates. | Use Research Lab -> Candidate Details -> Factor Attribution before paper-monitoring look-alike strategies. |
+| Strategies look different but share the same driver | Factor attribution may show the same dominant beta across several candidates. | Use Research Lab -> Experiment Monitor -> Candidate Details workbench -> Factor Attribution before paper-monitoring look-alike strategies. |
 | Recommendation changed but paper book still looks old | Forward Test executions and Monitoring windows are separate from current target recommendations. | Lock/log execution in Forward Test or update the monitored window as appropriate. |
 | Many tiny daily changes show up | Strategy may be too active for human execution. | Inspect turnover/action frequency in Research Lab before promoting it. |
 

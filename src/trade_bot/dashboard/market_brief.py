@@ -36,6 +36,7 @@ class MarketBriefReport:
     daily_delta_cards: tuple[MarketBriefCard, ...]
     cards: tuple[MarketBriefCard, ...]
     detail_rows: pd.DataFrame
+    latest_input_tables: tuple[tuple[str, pd.DataFrame], ...]
 
 
 def _render_market_brief(
@@ -80,7 +81,17 @@ def _render_market_brief(
         + "</div>",
         unsafe_allow_html=True,
     )
-    with st.expander("Daily Market Brief detail", expanded=False):
+    with st.expander("Latest news and numbers", expanded=False):
+        st.caption(
+            "Current input details behind the brief. These are source readings and driver "
+            "diagnostics, not an additional recommendation layer."
+        )
+        for label, frame in report.latest_input_tables:
+            if frame.empty:
+                continue
+            st.markdown(f"**{label}**")
+            _render_metric_dataframe(_display_metrics(frame), hide_index=True)
+        st.markdown("**Driver role map**")
         _render_metric_dataframe(_display_metrics(report.detail_rows), hide_index=True)
 
 
@@ -169,40 +180,31 @@ def build_market_brief_report(
 
     cards = (
         MarketBriefCard(
-            label="Market State",
-            answer=f"{risk_status} risk ({current_state.risk_score:.2f})",
-            detail=f"{confirmation_summary}. {current_state.risk_summary}",
-            tone=_status_tone(current_state.risk_status),
-        ),
-        MarketBriefCard(
             label="Change Since Prior",
             answer=str(change_summary["answer"]),
             detail=str(change_summary["detail"]),
             tone=str(change_summary["tone"]),
         ),
         MarketBriefCard(
-            label="News / Events",
-            answer=news_summary["answer"],
-            detail=news_summary["detail"],
-            tone=news_summary["tone"],
-        ),
-        MarketBriefCard(
-            label="Cross-Source Signals",
-            answer=narrative_summary["answer"],
-            detail=f"{narrative_summary['detail']} Explainer/research-only; no direct sizing authority.",
-            tone=narrative_summary["tone"],
-        ),
-        MarketBriefCard(
-            label="Regime Pulse",
-            answer=regime_pulse_summary["answer"],
-            detail=regime_pulse_summary["detail"],
-            tone=regime_pulse_summary["tone"],
-        ),
-        MarketBriefCard(
-            label="Instability",
-            answer=instability_summary["answer"],
-            detail=instability_summary["detail"],
-            tone=instability_summary["tone"],
+            label="Driver Stack",
+            answer=_driver_readout_answer(
+                news_summary=news_summary,
+                macro_summary=macro_summary,
+                regime_pulse_summary=regime_pulse_summary,
+            ),
+            detail=_driver_readout_detail(
+                news_summary=news_summary,
+                macro_summary=macro_summary,
+                regime_pulse_summary=regime_pulse_summary,
+                instability_summary=instability_summary,
+                narrative_summary=narrative_summary,
+            ),
+            tone=_driver_readout_tone(
+                news_summary=news_summary,
+                macro_summary=macro_summary,
+                regime_pulse_summary=regime_pulse_summary,
+                instability_summary=instability_summary,
+            ),
         ),
         MarketBriefCard(
             label="Scenario Map",
@@ -246,6 +248,21 @@ def build_market_brief_report(
             risk_summary=risk_summary,
             change_summary=change_summary,
             open_ticket_count=open_ticket_count,
+        ),
+        latest_input_tables=_latest_input_tables(
+            baseline_run=baseline_run,
+            current_state=current_state,
+            trade_summary=trade_summary,
+            scenario_summary=scenario_summary,
+            news_summary=news_summary,
+            macro_summary=macro_summary,
+            regime_pulse_summary=regime_pulse_summary,
+            instability_summary=instability_summary,
+            narrative_summary=narrative_summary,
+            narrative_signals=narrative_signals,
+            risk_summary=risk_summary,
+            confirmation_summary=confirmation_summary,
+            position_plan=execution_position_plan,
         ),
     )
 
@@ -974,6 +991,291 @@ def _decision_sanity_sentence(trade_summary: dict[str, object]) -> str:
     if not note:
         return f"Decision sanity: {signal}."
     return f"Decision sanity: {signal}. {note}"
+
+
+def _driver_readout_answer(
+    *,
+    news_summary: dict[str, str],
+    macro_summary: dict[str, str],
+    regime_pulse_summary: dict[str, str],
+) -> str:
+    return (
+        f"{news_summary['answer']}; {macro_summary['answer']}; "
+        f"{regime_pulse_summary['answer']}"
+    )
+
+
+def _driver_readout_detail(
+    *,
+    news_summary: dict[str, str],
+    macro_summary: dict[str, str],
+    regime_pulse_summary: dict[str, str],
+    instability_summary: dict[str, str],
+    narrative_summary: dict[str, str],
+) -> str:
+    return (
+        f"News/events: {news_summary['detail']} Macro: {macro_summary['detail']} "
+        f"Regime: {regime_pulse_summary['detail']} Instability: {instability_summary['answer']}. "
+        f"Cross-source diagnostics: {narrative_summary['answer']}."
+    )
+
+
+def _driver_readout_tone(
+    *,
+    news_summary: dict[str, str],
+    macro_summary: dict[str, str],
+    regime_pulse_summary: dict[str, str],
+    instability_summary: dict[str, str],
+) -> str:
+    tones = {
+        news_summary["tone"],
+        macro_summary["tone"],
+        regime_pulse_summary["tone"],
+        instability_summary["tone"],
+    }
+    if "critical" in tones:
+        return "critical"
+    if "warning" in tones:
+        return "warning"
+    if tones == {"success"}:
+        return "success"
+    return "neutral"
+
+
+def _latest_input_tables(
+    *,
+    baseline_run: BaselineRun,
+    current_state: object,
+    trade_summary: dict[str, object],
+    scenario_summary: dict[str, str],
+    news_summary: dict[str, str],
+    macro_summary: dict[str, str],
+    regime_pulse_summary: dict[str, str],
+    instability_summary: dict[str, str],
+    narrative_summary: dict[str, str],
+    narrative_signals: pd.DataFrame,
+    risk_summary: dict[str, object],
+    confirmation_summary: str,
+    position_plan: pd.DataFrame,
+) -> tuple[tuple[str, pd.DataFrame], ...]:
+    return (
+        (
+            "Current operating numbers",
+            _current_operating_numbers_frame(
+                current_state=current_state,
+                trade_summary=trade_summary,
+                scenario_summary=scenario_summary,
+                news_summary=news_summary,
+                macro_summary=macro_summary,
+                regime_pulse_summary=regime_pulse_summary,
+                instability_summary=instability_summary,
+                narrative_summary=narrative_summary,
+                risk_summary=risk_summary,
+                confirmation_summary=confirmation_summary,
+            ),
+        ),
+        ("Latest news and events", _latest_news_events_frame(baseline_run)),
+        ("Scenario probabilities", _scenario_inputs_frame(current_state.scenario_lattice)),
+        (
+            "Macro pressure groups",
+            _compact_frame(
+                current_state.macro_category_summary,
+                [
+                    "signal_group",
+                    "category",
+                    "risk_state",
+                    "near_term_state",
+                    "latest_pressure_state",
+                    "mean_risk_score",
+                    "latest_date",
+                    "usable_series",
+                    "interpretation",
+                ],
+                limit=12,
+            ),
+        ),
+        (
+            "Confirmation matrix",
+            _compact_frame(
+                current_state.confirmation_matrix,
+                ["signal", "state", "status", "value", "latest_value", "detail", "interpretation"],
+                limit=15,
+            ),
+        ),
+        (
+            "Position plan",
+            _compact_frame(
+                position_plan,
+                [
+                    "ticker",
+                    "current_weight",
+                    "scenario_adjusted_weight",
+                    "target_weight",
+                    "delta_weight",
+                    "action",
+                    "group",
+                    "risk_adjustment_reason",
+                ],
+                limit=15,
+            ),
+        ),
+        (
+            "Cross-source diagnostics",
+            _compact_frame(
+                narrative_signals,
+                [
+                    "signal_name",
+                    "status",
+                    "score",
+                    "decision_role",
+                    "model_authority",
+                    "evidence",
+                    "missing_data",
+                ],
+                limit=10,
+            ),
+        ),
+    )
+
+
+def _current_operating_numbers_frame(
+    *,
+    current_state: object,
+    trade_summary: dict[str, object],
+    scenario_summary: dict[str, str],
+    news_summary: dict[str, str],
+    macro_summary: dict[str, str],
+    regime_pulse_summary: dict[str, str],
+    instability_summary: dict[str, str],
+    narrative_summary: dict[str, str],
+    risk_summary: dict[str, object],
+    confirmation_summary: str,
+) -> pd.DataFrame:
+    rows = [
+        ("market_date", str(current_state.market_date), "snapshot"),
+        ("risk_status", str(current_state.risk_status).upper(), "allocation_driver"),
+        ("risk_score", f"{float(current_state.risk_score):.2f}", "allocation_driver"),
+        (
+            "recommended_action",
+            str(trade_summary.get("recommended_action", "n/a")).replace("_", " ").title(),
+            "allocation_driver",
+        ),
+        (
+            "risk_budget",
+            _format_decimal(trade_summary.get("risk_budget_multiplier")),
+            "allocation_driver",
+        ),
+        ("scenario_map", scenario_summary["answer"], "allocation_driver"),
+        (
+            "event_pressure",
+            _format_percent(trade_summary.get("event_pressure")),
+            "event_pressure_driver_after_activation",
+        ),
+        ("news_events", news_summary["answer"], "event_pressure_driver_after_activation"),
+        ("macro_stack", macro_summary["answer"], "validated_context"),
+        ("regime_pulse", regime_pulse_summary["answer"], "context_and_research_signal"),
+        ("instability", instability_summary["answer"], "watch_only_research_signal"),
+        ("cross_source", narrative_summary["answer"], "explainer_research_only"),
+        ("confirmation", confirmation_summary, "allocation_driver"),
+        (
+            "portfolio_constraints",
+            str(risk_summary.get("applied_constraints", "none")) if risk_summary else "none",
+            "allocation_driver",
+        ),
+        (
+            "target_posture",
+            str(trade_summary.get("scenario_adjusted_position", "n/a")),
+            "allocation_driver",
+        ),
+    ]
+    return pd.DataFrame(rows, columns=["input", "latest_read", "model_role"])
+
+
+def _latest_news_events_frame(baseline_run: BaselineRun) -> pd.DataFrame:
+    frames: list[pd.DataFrame] = []
+    triage = baseline_run.news_monitor.triage
+    if not triage.empty:
+        frame = triage.copy()
+        if "urgency_score" in frame:
+            frame["urgency_score"] = pd.to_numeric(frame["urgency_score"], errors="coerce")
+            frame = frame.sort_values("urgency_score", ascending=False)
+        frame = _compact_frame(
+            frame,
+            [
+                "title",
+                "source",
+                "published_at",
+                "category",
+                "activation_status",
+                "urgency_score",
+                "risk_score",
+                "phase",
+                "url",
+            ],
+            limit=8,
+        )
+        if not frame.empty:
+            frame.insert(0, "input_type", "news")
+            frames.append(frame)
+
+    active_events = [
+        {
+            "input_type": "event",
+            "title": str(getattr(event, "name", "")),
+            "category": str(getattr(event, "category", "")),
+            "activation_status": "current" if bool(getattr(event, "current", False)) else "inactive",
+            "urgency_score": getattr(event, "urgency_score", None),
+            "phase": str(getattr(event, "phase", "")),
+        }
+        for event in baseline_run.event_risk.events
+        if bool(getattr(event, "current", False))
+    ]
+    if active_events:
+        frames.append(pd.DataFrame(active_events).head(8))
+    if not frames:
+        return pd.DataFrame(
+            [{"input_type": "news", "title": "No active news/event inputs", "category": "n/a"}]
+        )
+    return pd.concat(frames, ignore_index=True, sort=False).fillna("")
+
+
+def _scenario_inputs_frame(scenario_lattice: pd.DataFrame) -> pd.DataFrame:
+    if scenario_lattice.empty:
+        return pd.DataFrame()
+    frame = scenario_lattice.copy()
+    if "horizon" in frame:
+        frame["_horizon_order"] = frame["horizon"].map({"1w": 0, "1m": 1, "3m": 2, "6m": 3})
+        sort_columns = ["_horizon_order"]
+        if "rank" in frame:
+            sort_columns.append("rank")
+        frame = frame.sort_values(sort_columns).drop(columns=["_horizon_order"])
+    elif "probability" in frame:
+        frame = frame.sort_values("probability", ascending=False)
+    return _compact_frame(
+        frame,
+        [
+            "horizon",
+            "rank",
+            "scenario",
+            "probability",
+            "risk_bucket",
+            "expected_bot_posture",
+            "preferred_exposure",
+            "avoid_exposure",
+            "confirmation",
+            "off_ramp",
+        ],
+        limit=16,
+    )
+
+
+def _compact_frame(frame: pd.DataFrame, columns: list[str], *, limit: int) -> pd.DataFrame:
+    if frame.empty:
+        return pd.DataFrame()
+    available = [column for column in columns if column in frame.columns]
+    if not available:
+        return frame.head(limit).copy()
+    return frame[available].head(limit).copy()
 
 
 def _market_brief_details(

@@ -1,11 +1,14 @@
 from __future__ import annotations
 
+import html
+from datetime import UTC, datetime
 from pathlib import Path
 
 import streamlit as st
 
 from trade_bot.config import load_config
 from trade_bot.dashboard.components import _render_metric_info_rail
+from trade_bot.dashboard.formatting import _safe_timezone
 from trade_bot.dashboard.loaders import (
     load_experiment_dashboard_frames,
     load_live_run,
@@ -44,6 +47,51 @@ from trade_bot.research.action_headline import build_action_headline
 from trade_bot.storage.run_store import RunStore, SnapshotManifest
 from trade_bot.trading.book_alignment import build_book_alignment, latest_book_account_value
 from trade_bot.trading.journal import DEFAULT_JOURNAL_PATH, TradeJournal
+
+
+def _render_freshness_strip(
+    *,
+    snapshot_manifest: SnapshotManifest | None,
+    baseline_run: object,
+    run_source: str,
+) -> None:
+    market_date = html.escape(str(getattr(baseline_run.current_state, "market_date", "n/a")))
+    risk_status = html.escape(str(getattr(baseline_run.current_state, "risk_status", "n/a")).upper())
+    local_timezone = _safe_timezone("America/Denver")
+    if snapshot_manifest is not None:
+        local_time = _local_time_label(snapshot_manifest.created_at_utc, local_timezone)
+        utc_time = html.escape(snapshot_manifest.created_at_utc)
+        freshness_text = f"Latest snapshot: {html.escape(local_time)}"
+        detail_text = f"UTC {utc_time}"
+    else:
+        local_time = datetime.now(local_timezone).replace(microsecond=0).strftime(
+            "%Y-%m-%d %I:%M %p %Z"
+        )
+        freshness_text = f"{html.escape(run_source)} loaded live: {html.escape(local_time)}"
+        detail_text = "No saved snapshot timestamp for this run"
+    st.markdown(
+        f"""
+        <div class="freshness-strip">
+            <span class="freshness-kicker">Latest update</span>
+            <span class="freshness-main">{freshness_text}</span>
+            <span class="freshness-chip">Market date {market_date}</span>
+            <span class="freshness-chip">{risk_status} risk</span>
+            <span class="freshness-detail">{detail_text}</span>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
+def _local_time_label(timestamp_utc: str, timezone: object) -> str:
+    try:
+        parsed = datetime.fromisoformat(timestamp_utc.replace("Z", "+00:00"))
+    except ValueError:
+        return timestamp_utc
+    if parsed.tzinfo is None:
+        parsed = parsed.replace(tzinfo=UTC)
+    return parsed.astimezone(timezone).strftime("%Y-%m-%d %I:%M %p %Z")
+
 
 st.set_page_config(page_title="Trade Bot Dashboard", layout="wide")
 _install_dashboard_styles()
@@ -260,6 +308,11 @@ action_headline = build_action_headline(
 if show_quick_reference:
     _render_metric_info_rail()
 
+_render_freshness_strip(
+    snapshot_manifest=snapshot_manifest,
+    baseline_run=baseline_run,
+    run_source=run_source,
+)
 render_operating_overview(
     baseline_run=baseline_run,
     headline=action_headline,

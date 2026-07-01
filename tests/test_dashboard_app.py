@@ -41,22 +41,21 @@ def test_dashboard_app_renders_action_headline(
     assert any("brand-masthead" in markdown.value for markdown in app.markdown)
     assert any("Trade Bot Operations" in markdown.value for markdown in app.markdown)
     assert any("Regime Research Lab" in markdown.value for markdown in app.markdown)
+    assert any("freshness-strip" in markdown.value for markdown in app.markdown)
+    assert any("Latest update" in markdown.value for markdown in app.markdown)
+    assert any("Market date 2026-06-17" in markdown.value for markdown in app.markdown)
     assert any("Term Lookup" in markdown.value for markdown in app.markdown)
     assert any("ticket field" in markdown.value for markdown in app.markdown)
     assert any("metric-info-rail" in markdown.value for markdown in app.markdown)
     assert any("dashboard-primary-nav-label" in markdown.value for markdown in app.markdown)
-    assert any("Daily Market Brief" in markdown.value for markdown in app.markdown)
-    assert any("What Changed Today" in markdown.value for markdown in app.markdown)
-    assert any("market-brief-body" in markdown.value for markdown in app.markdown)
-    assert any("market-brief-readouts" in markdown.value for markdown in app.markdown)
-    assert any("Market State" in markdown.value for markdown in app.markdown)
-    assert any("Scenario Map" in markdown.value for markdown in app.markdown)
+    assert not any("Daily Market Brief" in markdown.value for markdown in app.markdown)
     assert any("Action Headline" in markdown.value for markdown in app.markdown)
     assert any("stMetricValue" in markdown.value for markdown in app.markdown)
     assert any("Small Actions" in markdown.value for markdown in app.markdown)
     assert any(subheader.value == "Operating Brief" for subheader in app.subheader)
     assert any("Risk Constraints" in markdown.value for markdown in app.markdown)
     assert any("Bias Check" in markdown.value for markdown in app.markdown)
+    assert any(subheader.value == "Book Alignment" for subheader in app.subheader)
     operating_html = [
         markdown.value
         for markdown in app.markdown
@@ -133,20 +132,28 @@ def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:
         "Still True",
     ]
     assert [card.label for card in report.cards] == [
-        "Market State",
         "Change Since Prior",
-        "News / Events",
-        "Cross-Source Signals",
-        "Regime Pulse",
-        "Instability",
+        "Driver Stack",
         "Scenario Map",
         "Risk Budget / Action",
         "Decision Sanity",
     ]
     scenario_card = next(card for card in report.cards if card.label == "Scenario Map")
     assert "Choppy factor rotation" in scenario_card.detail
-    cross_source_card = next(card for card in report.cards if card.label == "Cross-Source Signals")
-    assert "no direct sizing authority" in cross_source_card.detail
+    assert "explainer_research_only" in report.detail_rows.to_string()
+    latest_table_names = [label for label, _frame in report.latest_input_tables]
+    assert latest_table_names == [
+        "Current operating numbers",
+        "Latest news and events",
+        "Scenario probabilities",
+        "Macro pressure groups",
+        "Confirmation matrix",
+        "Position plan",
+        "Cross-source diagnostics",
+    ]
+    numbers_frame = dict(report.latest_input_tables)["Current operating numbers"]
+    assert "risk_score" in set(numbers_frame["input"])
+    assert "target_posture" in set(numbers_frame["input"])
     assert set(report.detail_rows["topic"]) >= {
         "market_state",
         "scenario_map",

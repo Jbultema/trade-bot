@@ -3,12 +3,10 @@ from __future__ import annotations
 from typing import Any
 
 import pandas as pd
-import streamlit as st
 
 from trade_bot.dashboard.book_alignment import _render_book_alignment
 from trade_bot.dashboard.briefs import _render_decision_brief, _render_operating_brief
 from trade_bot.dashboard.components import _render_action_headline
-from trade_bot.dashboard.market_brief import _render_market_brief
 from trade_bot.DEFAULTS import DEFAULT_BOOK_ALIGNMENT_MIN_TRADE_WEIGHT
 from trade_bot.research.action_headline import ActionHeadline
 from trade_bot.research.baselines import BaselineRun
@@ -27,23 +25,7 @@ def render_operating_overview(
 ) -> None:
     """Render the top operating readout before the deep-dive workbenches."""
 
-    _render_market_brief(
-        baseline_run=baseline_run,
-        headline=headline,
-        open_ticket_count=open_ticket_count,
-        previous_run=previous_run,
-        book_alignment=execution_book_alignment,
-    )
     _render_action_headline(headline)
-    with st.expander(
-        "Default paper book alignment",
-        expanded=book_alignment_needs_attention(default_book_alignment),
-    ):
-        _render_book_alignment(
-            default_book_alignment,
-            heading="Book Alignment",
-            show_position_plan=False,
-        )
     _render_operating_brief(
         baseline_run=baseline_run,
         headline=headline,
@@ -54,6 +36,11 @@ def render_operating_overview(
         headline=headline,
         open_ticket_count=open_ticket_count,
         experiment_scorecards=experiment_scorecards,
+    )
+    _render_book_alignment(
+        default_book_alignment,
+        heading="Book Alignment",
+        show_position_plan=False,
     )
 
 
