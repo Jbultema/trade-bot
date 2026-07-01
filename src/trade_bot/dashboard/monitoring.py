@@ -4,11 +4,18 @@ from datetime import date
 from pathlib import Path
 
 import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics, _display_trade_frame
-from trade_bot.DEFAULTS import DEFAULT_MONITORING_TOP_N, DEFAULT_RUN_STORE_DB_PATH
+from trade_bot.DEFAULTS import (
+    DEFAULT_MONITORING_ENVELOPE_BREACH_SHARE,
+    DEFAULT_MONITORING_ENVELOPE_REVIEW_SHARE,
+    DEFAULT_MONITORING_ENVELOPE_WATCH_SHARE,
+    DEFAULT_MONITORING_TOP_N,
+    DEFAULT_RUN_STORE_DB_PATH,
+)
 from trade_bot.research.factor_attribution import build_ticket_shortfall_audit
 from trade_bot.storage.warehouse import TradingWarehouse
 
@@ -226,6 +233,7 @@ def _render_shortfall_and_execution_audit(warehouse_path: str, frame: pd.DataFra
         available = [column for column in valuation_columns if column in frame.columns]
         if available:
             _render_metric_dataframe(_display_metrics(frame[available]), hide_index=True)
+        _render_monitoring_drift_envelope(frame)
 
 
 def _false_count(frame: pd.DataFrame, column: str) -> int:
@@ -237,6 +245,177 @@ def _false_count(frame: pd.DataFrame, column: str) -> int:
     if scoped.empty:
         return 0
     return int((~scoped[column].fillna(False).astype(bool)).sum())
+
+
+def _render_monitoring_drift_envelope(frame: pd.DataFrame) -> None:
+    envelope = _monitoring_drift_envelope_frame(frame)
+    if envelope.empty:
+        return
+    st.caption("Live drift versus backtest envelope")
+    status_counts = envelope["envelope_status"].value_counts().to_dict()
+    cols = st.columns(4)
+    _helped_metric(cols[0], "Inside", f"{int(status_counts.get('inside', 0)):,}")
+    _helped_metric(cols[1], "Watch", f"{int(status_counts.get('watch', 0)):,}")
+    _helped_metric(cols[2], "Review", f"{int(status_counts.get('review', 0)):,}")
+    _helped_metric(cols[3], "Breach", f"{int(status_counts.get('breach', 0)):,}")
+    st.plotly_chart(_monitoring_drift_envelope_figure(envelope), use_container_width=True)
+    _render_metric_dataframe(_display_metrics(envelope), hide_index=True)
+
+
+def _monitoring_drift_envelope_frame(frame: pd.DataFrame) -> pd.DataFrame:
+    if frame.empty:
+        return pd.DataFrame()
+    required = {"strategy_name", "window_role", "drawdown", "snapshot_max_drawdown"}
+    if not required.issubset(frame.columns):
+        return pd.DataFrame()
+    rows = []
+    for _, row in frame.iterrows():
+        drawdown_value = _safe_float(row.get("drawdown"))
+        snapshot_drawdown = _safe_float(row.get("snapshot_max_drawdown"))
+        envelope_used = _drawdown_envelope_used(drawdown_value, snapshot_drawdown)
+        rows.append(
+            {
+                "window_role": row.get("window_role", ""),
+                "strategy_name": row.get("strategy_name", ""),
+                "forward_status": row.get("forward_status", ""),
+                "valuation_date": row.get("valuation_date", ""),
+                "current_drawdown": drawdown_value,
+                "backtest_max_drawdown": snapshot_drawdown,
+                "drawdown_envelope_used": envelope_used,
+                "envelope_status": _monitoring_envelope_status(envelope_used),
+                "beta_adjusted_spy_delta": _safe_float(row.get("beta_adjusted_spy_delta")),
+                "stocks_percent_of_max_sleeve": _safe_float(
+                    row.get("stocks_percent_of_max_sleeve")
+                ),
+                "defensive_percent_of_max_sleeve": _safe_float(
+                    row.get("defensive_percent_of_max_sleeve")
+                ),
+                "read": _monitoring_envelope_read(envelope_used),
+            }
+        )
+    output = pd.DataFrame(rows)
+    status_order = {"breach": 0, "review": 1, "watch": 2, "inside": 3, "no_snapshot": 4}
+    output["_status_order"] = output["envelope_status"].map(status_order).fillna(5)
+    return output.sort_values(["_status_order", "drawdown_envelope_used"], ascending=[True, False]).drop(
+        columns=["_status_order"]
+    )
+
+
+def _monitoring_drift_envelope_figure(envelope: pd.DataFrame) -> go.Figure:
+    status_colors = {
+        "inside": "#0f766e",
+        "watch": "#b7791f",
+        "review": "#ea580c",
+        "breach": "#b91c1c",
+        "no_snapshot": "#64748b",
+    }
+    plot_frame = envelope.copy()
+    plot_frame["drawdown_envelope_used"] = pd.to_numeric(
+        plot_frame["drawdown_envelope_used"],
+        errors="coerce",
+    )
+    figure = go.Figure(
+        go.Bar(
+            x=plot_frame["strategy_name"],
+            y=plot_frame["drawdown_envelope_used"],
+            marker_color=plot_frame["envelope_status"].map(status_colors).fillna("#64748b"),
+            customdata=plot_frame[
+                [
+                    "window_role",
+                    "envelope_status",
+                    "current_drawdown",
+                    "backtest_max_drawdown",
+                    "forward_status",
+                ]
+            ],
+            hovertemplate=(
+                "<b>%{x}</b><br>Role: %{customdata[0]}"
+                "<br>Status: %{customdata[1]}"
+                "<br>Envelope used: %{y:.1%}"
+                "<br>Current drawdown: %{customdata[2]:.1%}"
+                "<br>Backtest max drawdown: %{customdata[3]:.1%}"
+                "<br>Forward status: %{customdata[4]}<extra></extra>"
+            ),
+        )
+    )
+    figure.add_hline(
+        y=DEFAULT_MONITORING_ENVELOPE_WATCH_SHARE,
+        line_dash="dash",
+        line_color="#b7791f",
+        annotation_text="watch",
+        annotation_position="top left",
+    )
+    figure.add_hline(
+        y=DEFAULT_MONITORING_ENVELOPE_REVIEW_SHARE,
+        line_dash="dash",
+        line_color="#ea580c",
+        annotation_text="review",
+        annotation_position="top left",
+    )
+    figure.add_hline(
+        y=DEFAULT_MONITORING_ENVELOPE_BREACH_SHARE,
+        line_dash="dot",
+        line_color="#b91c1c",
+        annotation_text="breach",
+        annotation_position="top left",
+    )
+    figure.update_layout(
+        title="Forward Drawdown Used Versus Backtest Max Drawdown",
+        template="plotly_white",
+        yaxis={"title": "Drawdown envelope used", "tickformat": ".0%", "range": [0, 1.15]},
+        xaxis={"title": "", "tickangle": -25},
+        height=420,
+        margin={"l": 20, "r": 20, "t": 60, "b": 100},
+        showlegend=False,
+    )
+    return figure
+
+
+def _drawdown_envelope_used(
+    current_drawdown: float | None,
+    backtest_max_drawdown: float | None,
+) -> float | None:
+    if current_drawdown is None or backtest_max_drawdown is None:
+        return None
+    denominator = abs(float(backtest_max_drawdown))
+    if denominator <= 0:
+        return None
+    return abs(float(current_drawdown)) / denominator
+
+
+def _monitoring_envelope_status(envelope_used: float | None) -> str:
+    if envelope_used is None or pd.isna(envelope_used):
+        return "no_snapshot"
+    if envelope_used >= DEFAULT_MONITORING_ENVELOPE_BREACH_SHARE:
+        return "breach"
+    if envelope_used >= DEFAULT_MONITORING_ENVELOPE_REVIEW_SHARE:
+        return "review"
+    if envelope_used >= DEFAULT_MONITORING_ENVELOPE_WATCH_SHARE:
+        return "watch"
+    return "inside"
+
+
+def _monitoring_envelope_read(envelope_used: float | None) -> str:
+    status = _monitoring_envelope_status(envelope_used)
+    if status == "breach":
+        return "Forward drawdown has exceeded the historical max-drawdown envelope; review or pause."
+    if status == "review":
+        return "Forward drawdown is close to the historical envelope; inspect attribution and trades."
+    if status == "watch":
+        return "Forward drawdown is material but still within the tested envelope."
+    if status == "inside":
+        return "Forward drawdown is comfortably inside the tested envelope."
+    return "No historical max-drawdown snapshot is available for this row."
+
+
+def _safe_float(value: object) -> float | None:
+    try:
+        output = float(value)
+    except (TypeError, ValueError):
+        return None
+    if pd.isna(output):
+        return None
+    return output
 
 
 def _render_monitoring_controls(

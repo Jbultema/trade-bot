@@ -5,12 +5,14 @@ from pathlib import Path
 
 import pandas as pd
 
+from trade_bot.backtest.engine import BacktestResult
 from trade_bot.config import BotConfig, DataConfig, ExecutionConfig, StrategyConfig
 from trade_bot.research.approach_explorer import (
     build_approach_allocation_transition_events,
     build_approach_backtest_result,
     build_approach_catalog,
     build_approach_change_log,
+    build_approach_decision_events,
     build_approach_explanation,
     build_approach_exposure_history,
     build_approach_holding_stats,
@@ -344,3 +346,44 @@ def test_approach_position_history_supports_custom_windows_and_transition_events
     assert summary["interpretation"].str.contains("selected").any()
     assert "Worst drawdown point" in set(events["event"])
     assert "risk_weight_at_event" in events.columns
+
+
+def test_approach_decision_events_keep_multiple_material_allocation_moves() -> None:
+    dates = pd.bdate_range("2026-01-02", periods=8)
+    equity = pd.Series([100, 101, 99, 102, 105, 104, 108, 110], index=dates, dtype=float)
+    weights = pd.DataFrame(
+        {
+            "QQQ": [0.70, 0.70, 0.25, 0.25, 0.65, 0.65, 0.35, 0.35],
+            "IWM": [0.10, 0.10, 0.05, 0.05, 0.10, 0.10, 0.25, 0.25],
+            "BIL": [0.20, 0.20, 0.70, 0.70, 0.25, 0.25, 0.40, 0.40],
+        },
+        index=dates,
+    )
+    result = BacktestResult(
+        name="candidate",
+        equity=equity,
+        returns=equity.pct_change().fillna(0.0),
+        gross_returns=equity.pct_change().fillna(0.0),
+        weights=weights,
+        target_weights=weights,
+        turnover=weights.diff().abs().sum(axis=1).fillna(0.0),
+        transaction_costs=pd.Series(0.0, index=dates),
+    )
+
+    events = build_approach_decision_events(
+        result,
+        defensive_ticker="BIL",
+        start=dates[0],
+        end=dates[-1],
+        material_change=0.10,
+        max_events=10,
+    )
+
+    assert len(events) >= 3
+    assert {"De-risking move", "Re-risking move"}.issubset(set(events["event"]))
+    assert {"inferred_driver", "top_adds", "top_reductions", "forward_return_3m"}.issubset(
+        events.columns
+    )
+    derisk = events[events["event"] == "De-risking move"].iloc[0]
+    assert derisk["top_reductions"] != "none"
+    assert "off-ramp" in derisk["inferred_driver"]

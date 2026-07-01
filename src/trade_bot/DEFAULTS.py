@@ -42,6 +42,9 @@ DEFAULT_RUN_STORE_ARTIFACT_DIR = Path("data/run_store/snapshots")
 DEFAULT_RUN_STORE_JOB_LOG_DIR = Path("data/run_store/jobs")
 DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS = 15
 DEFAULT_MONITORING_TOP_N = 5
+DEFAULT_MONITORING_ENVELOPE_WATCH_SHARE = 0.50
+DEFAULT_MONITORING_ENVELOPE_REVIEW_SHARE = 0.85
+DEFAULT_MONITORING_ENVELOPE_BREACH_SHARE = 1.00
 DEFAULT_EXPERIMENT_REGISTRY_LIMIT = 500
 DEFAULT_CURATED_SHELF_LIMIT = 25
 DEFAULT_REFERENCE_BASELINE_STRATEGIES = frozenset(
@@ -64,10 +67,10 @@ DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES = (
 DEFAULT_DASHBOARD_SECTIONS = (
     "Command Center",
     "Risk & Scenarios",
-    "Research Lab",
-    "Monitoring",
     "News & Macro",
+    "Research Lab",
     "Performance",
+    "Monitoring",
     "Forward Test",
 )
 
@@ -144,6 +147,13 @@ DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_START = 0.35
 DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_ZERO = 1.00
 DEFAULT_OPERABILITY_SCORE_AVERAGE_TURNOVER_START = 0.04
 DEFAULT_OPERABILITY_SCORE_AVERAGE_TURNOVER_ZERO = 0.18
+
+
+# Dashboard decision-timeline defaults. The timeline should expose the material
+# allocation moves a human reviewer would care about, not every small rebalance.
+DEFAULT_DECISION_TIMELINE_CONTEXT_DAYS = 21
+DEFAULT_DECISION_TIMELINE_FORWARD_DAYS = 63
+DEFAULT_DECISION_TIMELINE_MAX_EVENTS = 35
 
 
 # Growth-constrained outcome utility defaults. These encode the retirement-style
@@ -794,6 +804,7 @@ DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS = (
 
 # Scenario horizons used by the current-state and dashboard scenario layers.
 DEFAULT_SCENARIO_HORIZONS = ("1w", "1m", "3m", "6m")
+DEFAULT_SCENARIO_EXPLANATION_TOP_SCENARIOS = 8
 
 
 # Dashboard performance-window defaults.

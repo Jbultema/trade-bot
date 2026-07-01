@@ -7,7 +7,13 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
 from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
-from trade_bot.DEFAULTS import DEFAULT_EXPERIMENTS_DIR, DEFAULT_RESET_EXPERIMENTS_DIR
+from trade_bot.DEFAULTS import (
+    DEFAULT_DECISION_TIMELINE_CONTEXT_DAYS,
+    DEFAULT_DECISION_TIMELINE_FORWARD_DAYS,
+    DEFAULT_DECISION_TIMELINE_MAX_EVENTS,
+    DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_RESET_EXPERIMENTS_DIR,
+)
 from trade_bot.features.indicators import drawdown
 from trade_bot.portfolio.risk import current_positions
 from trade_bot.research.curation import add_research_status
@@ -648,6 +654,187 @@ def build_approach_change_log(
     return pd.DataFrame(rows)
 
 
+def build_approach_decision_events(
+    result: BacktestResult,
+    *,
+    defensive_ticker: str | None = None,
+    start: str | pd.Timestamp | None = None,
+    end: str | pd.Timestamp | None = None,
+    context_days: int = DEFAULT_DECISION_TIMELINE_CONTEXT_DAYS,
+    forward_days: int = DEFAULT_DECISION_TIMELINE_FORWARD_DAYS,
+    material_change: float = 0.05,
+    max_events: int = DEFAULT_DECISION_TIMELINE_MAX_EVENTS,
+) -> pd.DataFrame:
+    """Return repeated material allocation decisions for chart/table inspection.
+
+    This intentionally differs from ``build_approach_allocation_transition_events``:
+    transition events are single landmarks, while decision events are the largest
+    recurring allocation moves that a human reviewer would have had to act on.
+    Historical rows usually do not persist the exact internal signal that moved a
+    target weight, so the driver text is inferred from the reconstructed weights.
+    """
+    weights = result.weights.sort_index().copy().fillna(0.0)
+    equity = result.equity.sort_index().dropna()
+    if weights.empty or equity.empty:
+        return pd.DataFrame()
+
+    common_index = weights.index.intersection(equity.index)
+    if len(common_index) < 3:
+        return pd.DataFrame()
+    weights = weights.reindex(common_index).fillna(0.0)
+    equity = equity.reindex(common_index).dropna()
+    weights = weights.reindex(equity.index).fillna(0.0)
+
+    exposure_history = build_approach_exposure_history(
+        weights,
+        defensive_ticker=defensive_ticker,
+        lookback_days=None,
+    )
+    risk_weight = exposure_history["risk_assets"]
+    defensive_weight = exposure_history["defensive"]
+    normalized = equity / equity.iloc[0]
+    strategy_drawdown = drawdown(normalized)
+
+    window_weights = _window_weights(weights, lookback_days=None, start=start, end=end)
+    if window_weights.empty:
+        return pd.DataFrame()
+    window_index = window_weights.index
+    deltas = weights.diff().reindex(window_index).fillna(0.0)
+    turnover = deltas.abs().sum(axis=1)
+    risk_delta = risk_weight.diff().reindex(window_index).fillna(0.0)
+    defensive_delta = defensive_weight.diff().reindex(window_index).fillna(0.0)
+    material_mask = (
+        (turnover >= material_change)
+        | (risk_delta.abs() >= material_change)
+        | (defensive_delta.abs() >= material_change)
+    )
+    candidate_dates = turnover[material_mask].sort_values(ascending=False).head(max_events).index
+    if len(candidate_dates) == 0:
+        return pd.DataFrame()
+
+    rows: list[dict[str, object]] = []
+    for event_date in sorted(candidate_dates):
+        current = weights.loc[event_date]
+        delta = deltas.loc[event_date]
+        risk_change = float(risk_delta.loc[event_date])
+        defensive_change = float(defensive_delta.loc[event_date])
+        total_change = float(turnover.loc[event_date])
+        event = _decision_event_type(
+            risk_change=risk_change,
+            defensive_change=defensive_change,
+            material_change=material_change,
+        )
+        risk_position = risk_weight.index.get_loc(event_date)
+        if not isinstance(risk_position, int):
+            risk_position = int(
+                risk_position.start if isinstance(risk_position, slice) else risk_position[0]
+            )
+        before = risk_weight.iloc[max(0, risk_position - context_days) : risk_position]
+        after = risk_weight.iloc[risk_position + 1 : risk_position + 1 + context_days]
+        forward = equity.iloc[risk_position : risk_position + 1 + forward_days]
+        forward_return = (
+            float(forward.iloc[-1] / forward.iloc[0] - 1.0)
+            if len(forward) >= 2
+            else float("nan")
+        )
+        short_forward = equity.iloc[risk_position : risk_position + 1 + context_days]
+        short_forward_return = (
+            float(short_forward.iloc[-1] / short_forward.iloc[0] - 1.0)
+            if len(short_forward) >= 2
+            else float("nan")
+        )
+        top_adds = _format_delta_vector(delta[delta > 0.005])
+        top_reductions = _format_reduction_vector((-delta[delta < -0.005]).sort_values())
+        rows.append(
+            {
+                "event": event,
+                "date": event_date.date().isoformat()
+                if hasattr(event_date, "date")
+                else str(event_date),
+                "signal": (
+                    f"{event}: risk {risk_change:+.1%}, defensive {defensive_change:+.1%}, "
+                    f"total move {total_change:.1%}."
+                ),
+                "inferred_driver": _decision_event_driver(
+                    event=event,
+                    risk_change=risk_change,
+                    defensive_change=defensive_change,
+                    top_adds=top_adds,
+                    top_reductions=top_reductions,
+                ),
+                "total_change": total_change,
+                "risk_weight_change": risk_change,
+                "defensive_weight_change": defensive_change,
+                "risk_weight_before_1m": float(before.mean())
+                if not before.empty
+                else float(risk_weight.iloc[risk_position]),
+                "risk_weight_at_event": float(risk_weight.iloc[risk_position]),
+                "risk_weight_after_1m": float(after.mean())
+                if not after.empty
+                else float(risk_weight.iloc[risk_position]),
+                "defensive_weight_at_event": float(defensive_weight.iloc[risk_position]),
+                "drawdown_at_event": float(strategy_drawdown.iloc[risk_position]),
+                "forward_return_1m": short_forward_return,
+                "forward_return_3m": forward_return,
+                "top_adds": top_adds,
+                "top_reductions": top_reductions,
+                "position_after": _format_weight_vector(current),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _decision_event_type(
+    *,
+    risk_change: float,
+    defensive_change: float,
+    material_change: float,
+) -> str:
+    if risk_change <= -material_change:
+        return "De-risking move"
+    if risk_change >= material_change:
+        return "Re-risking move"
+    if defensive_change >= material_change:
+        return "Defensive add"
+    if defensive_change <= -material_change:
+        return "Defensive reduce"
+    return "Risk rotation"
+
+
+def _decision_event_driver(
+    *,
+    event: str,
+    risk_change: float,
+    defensive_change: float,
+    top_adds: str,
+    top_reductions: str,
+) -> str:
+    if event == "De-risking move":
+        return (
+            "Inferred off-ramp: non-defensive exposure fell and capital moved toward "
+            f"defensive/cash sleeves. Adds: {top_adds}; reductions: {top_reductions}."
+        )
+    if event == "Re-risking move":
+        return (
+            "Inferred re-entry: non-defensive exposure rose, usually after repair, trend, "
+            f"or risk-budget confirmation. Adds: {top_adds}; reductions: {top_reductions}."
+        )
+    if event == "Risk rotation":
+        return (
+            "Inferred rotation: total risk stayed broadly similar, but leadership changed "
+            f"inside the risk sleeve. Adds: {top_adds}; reductions: {top_reductions}."
+        )
+    if defensive_change > 0:
+        return (
+            "Defensive sleeve increased without a large aggregate risk-weight change. "
+            f"Adds: {top_adds}; reductions: {top_reductions}."
+        )
+    return (
+        f"Defensive sleeve decreased by {abs(defensive_change):.1%} while risk changed "
+        f"{risk_change:+.1%}. Adds: {top_adds}; reductions: {top_reductions}."
+    )
+
+
 def build_approach_holding_stats(
     weights: pd.DataFrame,
     *,
@@ -1146,6 +1333,15 @@ def _format_delta_vector(delta: pd.Series, *, min_weight: float = 0.005, max_ite
     if meaningful.empty:
         return "none"
     return ", ".join(f"{ticker} +{weight:.0%}" for ticker, weight in meaningful.items())
+
+
+def _format_reduction_vector(
+    reductions: pd.Series, *, min_weight: float = 0.005, max_items: int = 4
+) -> str:
+    meaningful = reductions[reductions > min_weight].sort_values(ascending=False).head(max_items)
+    if meaningful.empty:
+        return "none"
+    return ", ".join(f"{ticker} -{weight:.0%}" for ticker, weight in meaningful.items())
 
 
 def _median_days_between(index: pd.Index) -> float | None:

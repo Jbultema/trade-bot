@@ -278,14 +278,7 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
         "external sources into diagnostics. Direct/proxy rows are operating context; thin proxies "
         "and unsupported watchlists are research-only unless ablation evidence promotes them."
     )
-    narrative_tabs = st.tabs(
-        [
-            "Operating Context",
-            "Research-Only Thin Proxies",
-            "Unsupported Watchlist",
-            "All Diagnostics",
-        ]
-    )
+    narrative_tabs = st.tabs(["Operating Context", "Research-Only Thin Proxies"])
     with narrative_tabs[0]:
         _render_metric_dataframe(_display_metrics(operating_signals), hide_index=True)
     with narrative_tabs[1]:
@@ -294,13 +287,14 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
             "marginal-contribution evidence."
         )
         _render_metric_dataframe(_display_metrics(research_only_signals), hide_index=True)
-    with narrative_tabs[2]:
+    with st.expander("Unsupported watchlist and full diagnostic audit", expanded=False):
         st.caption(
             f"{unsupported_count:,} watchlist gap(s): data we might want but do not currently have "
-            "in a reliable local feed."
+            "in a reliable local feed. These are intentionally hidden from the default operating "
+            "surface because they are context gaps, not validated trading signals."
         )
         _render_metric_dataframe(_display_metrics(unsupported_signals), hide_index=True)
-    with narrative_tabs[3]:
+        st.caption("Full cross-source diagnostic table")
         _render_metric_dataframe(_display_metrics(narrative_signals), hide_index=True)
 
     st.subheader("Macro State")
@@ -325,14 +319,15 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
     st.subheader("News Intake Monitor")
     news_monitor = baseline_run.news_monitor
     source_coverage = getattr(news_monitor, "source_coverage", None)
-    if source_coverage is not None and not source_coverage.empty:
-        st.caption("Coverage audit for the narrative buckets we expect the monitor to watch.")
-        _render_metric_dataframe(_display_metrics(source_coverage))
+    with st.expander("News source coverage and health audit", expanded=False):
+        if source_coverage is not None and not source_coverage.empty:
+            st.caption("Coverage audit for the narrative buckets we expect the monitor to watch.")
+            _render_metric_dataframe(_display_metrics(source_coverage))
 
-    if news_monitor.source_health.empty:
-        st.write("No news sources are configured.")
-    else:
-        st.dataframe(news_monitor.source_health, use_container_width=True)
+        if news_monitor.source_health.empty:
+            st.write("No news sources are configured.")
+        else:
+            st.dataframe(news_monitor.source_health, use_container_width=True)
 
     if news_monitor.triage.empty:
         st.write("No recent news items were triaged.")
@@ -418,8 +413,8 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
         ]
         _render_metric_dataframe(_display_metrics(complete_strategy_events))
 
-    st.subheader("Data Quality")
-    _render_metric_dataframe(_display_metrics(current_state.data_quality))
+    with st.expander("Data quality audit", expanded=False):
+        _render_metric_dataframe(_display_metrics(current_state.data_quality))
 
 
 def _asset_regime_pulse_row(assets: pd.DataFrame, asset_class: str) -> pd.Series:
@@ -455,10 +450,9 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
             go.Scatter(
                 x=frame["proven_relevance"],
                 y=frame["current_activation"],
-                mode="markers+text",
+                mode="markers",
                 name=str(role).replace("_", " ").title(),
                 text=frame["driver_label"],
-                textposition="top center",
                 marker={
                     "size": 12 + frame["current_activation"].astype(float) * 18,
                     "color": color,
@@ -483,6 +477,27 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
                     "Support: %{customdata[3]}<extra></extra>"
                 ),
             )
+        )
+    label_rows = rotation.sort_values(
+        ["current_activation", "proven_relevance"],
+        ascending=False,
+    ).reset_index(drop=True)
+    for ordinal, row in label_rows.iterrows():
+        label_style = _driver_rotation_label_style(row, ordinal)
+        fig.add_annotation(
+            x=float(row["proven_relevance"]),
+            y=float(row["current_activation"]),
+            text=str(row["driver_label"]),
+            xref="x",
+            yref="y",
+            showarrow=False,
+            xshift=label_style["xshift"],
+            yshift=label_style["yshift"],
+            xanchor=label_style["xanchor"],
+            yanchor=label_style["yanchor"],
+            align="left",
+            font={"size": 12, "color": "#667085"},
+            opacity=0.86,
         )
     for _, row in (
         rotation.dropna(subset=["previous_30d_activation"])
@@ -517,14 +532,55 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
         title="Driver Rotation: Historical Relevance vs Current Activation",
         xaxis_title="Proven historical relevance",
         yaxis_title="Current activation / pressure",
-        xaxis={"range": [-0.03, 1.05], "tickformat": ".0%"},
-        yaxis={"range": [-0.03, 1.05], "tickformat": ".0%"},
+        xaxis={"range": [-0.06, 1.08], "tickformat": ".0%"},
+        yaxis={"range": [-0.05, 1.08], "tickformat": ".0%"},
         template="plotly_white",
         legend_title_text="Model role",
-        margin={"l": 20, "r": 20, "t": 60, "b": 20},
+        margin={"l": 24, "r": 28, "t": 62, "b": 24},
         height=520,
     )
     return fig
+
+
+def _driver_rotation_label_style(row: pd.Series, ordinal: int) -> dict[str, int | str]:
+    x = float(row.get("proven_relevance", 0.0))
+    y = float(row.get("current_activation", 0.0))
+    xshift = 12 if x < 0.55 else -12
+    yshift = 16
+    xanchor = "left" if x < 0.55 else "right"
+    yanchor = "bottom"
+
+    if x <= 0.08:
+        xshift = 18
+        xanchor = "left"
+    elif x >= 0.92:
+        xshift = -20
+        xanchor = "right"
+
+    if y >= 0.92:
+        yshift = -22
+        yanchor = "top"
+    elif y <= 0.08:
+        yshift = 22
+        yanchor = "bottom"
+
+    if y >= 0.75 and 0.25 <= x <= 0.50:
+        xshift = 14 if ordinal % 2 == 0 else -14
+        xanchor = "left" if xshift > 0 else "right"
+        yshift = -22 - 8 * (ordinal % 3)
+        yanchor = "top"
+    elif y >= 0.75 and 0.50 < x < 0.82:
+        xshift = 14 if ordinal % 2 == 0 else -14
+        xanchor = "left" if xshift > 0 else "right"
+        yshift = -18 - 8 * (ordinal % 2)
+        yanchor = "top"
+
+    return {
+        "xshift": xshift,
+        "yshift": yshift,
+        "xanchor": xanchor,
+        "yanchor": yanchor,
+    }
 
 
 def _driver_rotation_heatmap_figure(rotation: pd.DataFrame) -> go.Figure:

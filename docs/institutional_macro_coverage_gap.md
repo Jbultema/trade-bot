@@ -87,6 +87,19 @@ input only after a dedicated experiment answers these questions:
 Until those tests pass, the UI should label the diagnostic as
 `explainer_research_only` with `no_direct_sizing_authority`.
 
+### AI Earnings-Quality / Reflexivity Boundary
+
+AI accounting-quality, circular-financing, and private-mark stories can be
+tracked as current news/event context, but they are not model drivers.
+
+Direct private AI mark-to-market gains, circular private financing, and
+company-specific private investment revaluations are not consistently available
+as free, long-history data. Until the project adds SEC/XBRL extraction and
+shows out-of-sample value in ablation, walk-forward, and paper-monitoring tests,
+these items should remain `watch_context` events with `sizing_authority: false`.
+They should not create a scored proxy, dashboard promotion, or allocation
+change.
+
 ## Remaining Gaps
 
 - True ETF and mutual-fund flow data.

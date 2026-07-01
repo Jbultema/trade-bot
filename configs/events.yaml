@@ -190,6 +190,40 @@ events:
       relationships, and the risk that aggressive compute/capex assumptions are vulnerable to repricing.
       Trade-bot should monitor this as context, not as a standalone reason to sell.
 
+  - event_id: ai_earnings_quality_reflexivity_2026_06_30
+    name: AI earnings-quality and private-mark reflexivity enters market discussion
+    date: "2026-06-30"
+    category: ai_unit_economics
+    direction: escalation
+    current: true
+    sizing_authority: false
+    phase: leading_warning
+    phase_reason: >
+      Public commentary flagged the possibility that private AI investment marks, other-income gains,
+      and circular financing relationships can make reported earnings look stronger than operating
+      cash economics. This is relevant context, but trade-bot does not have direct historical private
+      mark data and should not treat the narrative as an allocation input.
+    confirmation_window: >
+      Keep this in watch-context unless filing-derived earnings-quality proxies, QQQ/RSP, SMH/SPY,
+      hyperscaler free-cash-flow pressure, HYG/LQD, VIXY, or breadth confirm that the concern is
+      becoming a tradable market-risk signal.
+    tags:
+      - ai
+      - ai_capex
+      - accounting_quality
+      - circular_financing
+      - hyperscalers
+      - private_marks
+      - earnings_quality
+      - leading_warning
+      - watch_context
+    source_url: "user_provided_prof_g_media_2026_06_30"
+    description: >
+      Current market commentary raised concern that some headline AI earnings strength may include
+      non-operating or unrealized gains from private AI investments. The proper trade-bot treatment is
+      news/context only: do not score it, size from it, or promote it without future filing-derived
+      evidence and ablation support.
+
   - event_id: ai_compute_capacity_constraints_2026_06_29
     name: AI compute capacity and pricing constraints enter market discussion
     date: "2026-06-29"

@@ -1,5 +1,8 @@
 from __future__ import annotations
 
+import hashlib
+import json
+from dataclasses import asdict, is_dataclass
 from datetime import date
 from pathlib import Path
 from typing import Any, cast
@@ -21,8 +24,12 @@ from trade_bot.dashboard.formatting import (
 )
 from trade_bot.dashboard.metric_explainers import metric_detail
 from trade_bot.DEFAULTS import (
+    DEFAULT_DECISION_TIMELINE_CONTEXT_DAYS,
+    DEFAULT_DECISION_TIMELINE_FORWARD_DAYS,
+    DEFAULT_DECISION_TIMELINE_MAX_EVENTS,
     DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES,
     DEFAULT_ML_DIAGNOSTICS_DIR,
+    DEFAULT_OPERABILITY_MATERIAL_TRADE_TURNOVER_THRESHOLD,
     DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_HORIZON_YEARS,
@@ -40,6 +47,7 @@ from trade_bot.research.approach_explorer import (
     build_approach_backtest_result,
     build_approach_catalog,
     build_approach_change_log,
+    build_approach_decision_events,
     build_approach_explanation,
     build_approach_exposure_history,
     build_approach_holding_stats,
@@ -120,14 +128,12 @@ def _render_taxable_estimate_summary(scorecard: pd.DataFrame) -> None:
     _render_metric_dataframe(_display_metrics(scorecard[available]), hide_index=True)
 
 
-def _render_strategy_summary_and_behavior(
+def _render_strategy_explanation(
     *,
     row: pd.Series,
     strategy: Any,
     bot_config: Any,
-    baseline_run: BaselineRun,
-    key_prefix: str,
-) -> Any:
+) -> None:
     scenario_sizing = scenario_sizing_from_catalog_row(row)
     future_state_model = future_state_model_from_catalog_row(row)
     strategy_drawdown_model = strategy_drawdown_model_from_catalog_row(row)
@@ -146,20 +152,135 @@ def _render_strategy_summary_and_behavior(
     ):
         st.write(paragraph)
 
-    result, missing_columns = build_approach_backtest_result(
-        baseline_run.prices,
-        strategy,
-        execution,
+
+def _config_cache_payload(value: object) -> object:
+    if value is None:
+        return None
+    if hasattr(value, "model_dump"):
+        return value.model_dump(mode="json")  # type: ignore[no-any-return, attr-defined]
+    if is_dataclass(value):
+        return asdict(value)  # type: ignore[arg-type]
+    if isinstance(value, str | int | float | bool):
+        return value
+    if isinstance(value, list | tuple):
+        return [_config_cache_payload(item) for item in value]
+    if isinstance(value, dict):
+        return {str(key): _config_cache_payload(item) for key, item in value.items()}
+    return str(value)
+
+
+def _approach_result_cache_key(
+    *,
+    baseline_run: BaselineRun,
+    strategy: Any,
+    execution: Any,
+    scenario_sizing: Any,
+    future_state_model: Any,
+    strategy_drawdown_model: Any,
+    decision_sanity: Any,
+    name: str,
+) -> str:
+    prices = baseline_run.prices
+    if prices.empty:
+        price_marker: object = "empty"
+    else:
+        price_marker = {
+            "rows": int(len(prices)),
+            "columns": list(map(str, prices.columns)),
+            "start": str(prices.index.min()),
+            "end": str(prices.index.max()),
+        }
+    payload = {
+        "price_marker": price_marker,
+        "strategy": _config_cache_payload(strategy),
+        "execution": _config_cache_payload(execution),
+        "scenario_sizing": _config_cache_payload(scenario_sizing),
+        "future_state_model": _config_cache_payload(future_state_model),
+        "strategy_drawdown_model": _config_cache_payload(strategy_drawdown_model),
+        "decision_sanity": _config_cache_payload(decision_sanity),
+        "name": name,
+    }
+    serialized = json.dumps(payload, sort_keys=True, default=str)
+    return hashlib.sha256(serialized.encode("utf-8")).hexdigest()
+
+
+def _cached_approach_backtest_result(
+    *,
+    row: pd.Series,
+    strategy: Any,
+    execution: Any,
+    scenario_sizing: Any,
+    future_state_model: Any,
+    strategy_drawdown_model: Any,
+    decision_sanity: Any,
+    baseline_run: BaselineRun,
+) -> tuple[BacktestResult | None, list[str]]:
+    cache = st.session_state.setdefault("approach_backtest_result_cache", {})
+    name = str(row.get("strategy", "approach"))
+    cache_key = _approach_result_cache_key(
+        baseline_run=baseline_run,
+        strategy=strategy,
+        execution=execution,
         scenario_sizing=scenario_sizing,
         future_state_model=future_state_model,
         strategy_drawdown_model=strategy_drawdown_model,
         decision_sanity=decision_sanity,
-        name=str(row.get("strategy", "approach")),
+        name=name,
     )
+    if cache_key not in cache:
+        with st.spinner("Reconstructing selected strategy history..."):
+            cache[cache_key] = build_approach_backtest_result(
+                baseline_run.prices,
+                strategy,
+                execution,
+                scenario_sizing=scenario_sizing,
+                future_state_model=future_state_model,
+                strategy_drawdown_model=strategy_drawdown_model,
+                decision_sanity=decision_sanity,
+                name=name,
+            )
+        if len(cache) > 24:
+            oldest_key = next(iter(cache))
+            cache.pop(oldest_key, None)
+    result, missing_columns = cache[cache_key]
     if missing_columns:
         st.caption("Missing from loaded prices: " + ", ".join(missing_columns))
     if result is None:
         st.warning("Could not reconstruct historical weights for this approach from loaded prices.")
+    return result, missing_columns
+
+
+def _load_detail_result_if_needed(
+    *,
+    selected_detail_view: str,
+    row: pd.Series,
+    strategy: Any,
+    execution: Any,
+    scenario_sizing: Any,
+    future_state_model: Any,
+    strategy_drawdown_model: Any,
+    decision_sanity: Any,
+    baseline_run: BaselineRun,
+) -> BacktestResult | None:
+    result_views = {
+        "Performance + Allocation",
+        "Decision Timeline",
+        "Performance Over Time",
+        "Allocation Behavior",
+        "Factor Attribution",
+    }
+    if selected_detail_view not in result_views:
+        return None
+    result, _ = _cached_approach_backtest_result(
+        row=row,
+        strategy=strategy,
+        execution=execution,
+        scenario_sizing=scenario_sizing,
+        future_state_model=future_state_model,
+        strategy_drawdown_model=strategy_drawdown_model,
+        decision_sanity=decision_sanity,
+        baseline_run=baseline_run,
+    )
     return result
 
 
@@ -488,6 +609,324 @@ def _make_performance_allocation_figure(
     return figure
 
 
+def _render_decision_timeline(
+    result: BacktestResult,
+    *,
+    defensive_ticker: str | None,
+    key_prefix: str,
+) -> None:
+    earliest_result_date, latest_result_date = _result_date_bounds({result.name: result})
+    _, window_start, window_end = _select_history_window(
+        label="Decision-timeline window",
+        earliest=earliest_result_date,
+        latest=latest_result_date,
+        key_prefix=f"{key_prefix}_decision_timeline",
+    )
+    event_frame = build_approach_decision_events(
+        result,
+        defensive_ticker=defensive_ticker,
+        start=window_start,
+        end=window_end,
+        context_days=DEFAULT_DECISION_TIMELINE_CONTEXT_DAYS,
+        forward_days=DEFAULT_DECISION_TIMELINE_FORWARD_DAYS,
+        material_change=DEFAULT_OPERABILITY_MATERIAL_TRADE_TURNOVER_THRESHOLD,
+        max_events=DEFAULT_DECISION_TIMELINE_MAX_EVENTS,
+    )
+    landmark_frame = build_approach_allocation_transition_events(
+        result,
+        defensive_ticker=defensive_ticker,
+        start=window_start,
+        end=window_end,
+        context_days=DEFAULT_DECISION_TIMELINE_CONTEXT_DAYS,
+        forward_days=DEFAULT_DECISION_TIMELINE_FORWARD_DAYS,
+        material_change=DEFAULT_OPERABILITY_MATERIAL_TRADE_TURNOVER_THRESHOLD,
+    )
+    st.caption(
+        "Decision timeline: markers show the largest material allocation moves inside the selected "
+        "window, not just one max/min event. Hover for inferred driver, top adds/reductions, risk "
+        "change, drawdown context, and next-window return. Drivers are inferred from reconstructed "
+        "weights; use Mechanics for the formal rule set."
+    )
+    st.plotly_chart(
+        _make_decision_timeline_figure(
+            result,
+            event_frame,
+            landmark_frame=landmark_frame,
+            defensive_ticker=defensive_ticker,
+            start=window_start,
+            end=window_end,
+        ),
+        use_container_width=True,
+    )
+    if event_frame.empty:
+        st.caption("No material allocation decision events were detected in this window.")
+    else:
+        st.caption("Major allocation decision events")
+        _render_metric_dataframe(_display_metrics(event_frame), hide_index=True)
+
+
+def _make_decision_timeline_figure(
+    result: BacktestResult,
+    event_frame: pd.DataFrame,
+    *,
+    landmark_frame: pd.DataFrame | None = None,
+    defensive_ticker: str | None,
+    start: pd.Timestamp,
+    end: pd.Timestamp,
+) -> go.Figure:
+    equity = result.equity.sort_index().dropna()
+    equity = equity.loc[(equity.index >= start) & (equity.index <= end)]
+    weights = result.weights.loc[
+        (result.weights.index >= start) & (result.weights.index <= end)
+    ].copy()
+    exposure_history = build_approach_exposure_history(
+        weights,
+        defensive_ticker=defensive_ticker,
+        lookback_days=None,
+        start=start,
+        end=end,
+    )
+    figure = make_subplots(
+        rows=3,
+        cols=1,
+        shared_xaxes=True,
+        vertical_spacing=0.07,
+        subplot_titles=("Growth of $1", "Drawdown", "Risk / defense posture"),
+    )
+    if not equity.empty:
+        normalized = equity / equity.iloc[0]
+        strategy_drawdown = drawdown(normalized)
+        figure.add_trace(
+            go.Scatter(
+                x=normalized.index,
+                y=normalized,
+                mode="lines",
+                name=result.name,
+                line={"color": "#2563eb", "width": 2},
+            ),
+            row=1,
+            col=1,
+        )
+        figure.add_trace(
+            go.Scatter(
+                x=strategy_drawdown.index,
+                y=strategy_drawdown,
+                mode="lines",
+                name="drawdown",
+                line={"color": "#ef4444", "width": 1.8},
+                showlegend=False,
+            ),
+            row=2,
+            col=1,
+        )
+        marker_frame = _decision_timeline_marker_frame(event_frame, normalized, strategy_drawdown)
+        if not marker_frame.empty:
+            figure.add_trace(
+                go.Scatter(
+                    x=marker_frame["date"],
+                    y=marker_frame["equity_marker"],
+                    mode="markers",
+                    name="decision events",
+                    marker={
+                        "size": 12,
+                        "symbol": marker_frame["symbol"],
+                        "color": marker_frame["color"],
+                        "line": {"width": 1, "color": "#0f172a"},
+                    },
+                    customdata=marker_frame[
+                        [
+                            "event",
+                            "signal",
+                            "inferred_driver",
+                            "risk_weight_at_event",
+                            "risk_weight_change",
+                            "defensive_weight_change",
+                            "total_change",
+                            "top_adds",
+                            "top_reductions",
+                            "forward_return_1m",
+                            "forward_return_3m",
+                            "drawdown_at_event",
+                        ]
+                    ],
+                    hovertemplate=(
+                        "<b>%{customdata[0]}</b><br>%{x|%Y-%m-%d}"
+                        "<br>%{customdata[1]}"
+                        "<br>%{customdata[2]}"
+                        "<br>Risk weight: %{customdata[3]:.1%}"
+                        "<br>Risk change: %{customdata[4]:+.1%}"
+                        "<br>Defensive change: %{customdata[5]:+.1%}"
+                        "<br>Total move: %{customdata[6]:.1%}"
+                        "<br>Adds: %{customdata[7]}"
+                        "<br>Reductions: %{customdata[8]}"
+                        "<br>Next 1M return: %{customdata[9]:.1%}"
+                        "<br>Next 3M return: %{customdata[10]:.1%}"
+                        "<br>Drawdown: %{customdata[11]:.1%}<extra></extra>"
+                    ),
+                ),
+                row=1,
+                col=1,
+            )
+        if landmark_frame is not None and not landmark_frame.empty:
+            risk_landmarks = landmark_frame[
+                landmark_frame["event"].astype(str).eq("Worst drawdown point")
+            ]
+            landmark_markers = _decision_timeline_marker_frame(
+                risk_landmarks,
+                normalized,
+                strategy_drawdown,
+            )
+            if not landmark_markers.empty:
+                figure.add_trace(
+                    go.Scatter(
+                        x=landmark_markers["date"],
+                        y=landmark_markers["equity_marker"],
+                        mode="markers",
+                        name="drawdown landmark",
+                        marker={
+                            "size": 12,
+                            "symbol": landmark_markers["symbol"],
+                            "color": landmark_markers["color"],
+                            "line": {"width": 1, "color": "#0f172a"},
+                        },
+                        customdata=landmark_markers[
+                            [
+                                "event",
+                                "signal",
+                                "risk_weight_at_event",
+                                "forward_return_3m",
+                                "drawdown_at_event",
+                            ]
+                        ],
+                        hovertemplate=(
+                            "<b>%{customdata[0]}</b><br>%{x|%Y-%m-%d}"
+                            "<br>%{customdata[1]}"
+                            "<br>Risk weight: %{customdata[2]:.1%}"
+                            "<br>Next 3M return: %{customdata[3]:.1%}"
+                            "<br>Drawdown: %{customdata[4]:.1%}<extra></extra>"
+                        ),
+                    ),
+                    row=1,
+                    col=1,
+                )
+                for _, row in landmark_markers.iterrows():
+                    figure.add_vline(
+                        x=row["date"],
+                        line_color=str(row["color"]),
+                        line_width=1,
+                        opacity=0.20,
+                    )
+
+    exposure_colors = {
+        "risk_assets": "#0f766e",
+        "defensive": "#f59e0b",
+        "cash_or_unallocated": "#94a3b8",
+    }
+    for column in ["risk_assets", "defensive", "cash_or_unallocated"]:
+        if column not in exposure_history:
+            continue
+        figure.add_trace(
+            go.Scatter(
+                x=exposure_history.index,
+                y=exposure_history[column],
+                mode="lines",
+                name=column.replace("_", " "),
+                line={"color": exposure_colors[column], "width": 2},
+                hovertemplate="%{x|%Y-%m-%d}<br>%{y:.1%}<extra>%{fullData.name}</extra>",
+            ),
+            row=3,
+            col=1,
+        )
+
+    figure.update_yaxes(tickprefix="$", tickformat=".2f", row=1, col=1)
+    figure.update_yaxes(tickformat=".0%", row=2, col=1)
+    figure.update_yaxes(tickformat=".0%", range=[0, 1], row=3, col=1)
+    figure.update_layout(
+        template="plotly_white",
+        height=780,
+        hovermode="x unified",
+        legend={"orientation": "h", "yanchor": "bottom", "y": 1.02, "xanchor": "left", "x": 0},
+        margin={"l": 20, "r": 20, "t": 70, "b": 20},
+    )
+    return figure
+
+
+def _decision_timeline_marker_frame(
+    event_frame: pd.DataFrame,
+    normalized_equity: pd.Series,
+    strategy_drawdown: pd.Series,
+) -> pd.DataFrame:
+    if event_frame.empty or normalized_equity.empty:
+        return pd.DataFrame()
+    event_dates = pd.to_datetime(event_frame["date"], errors="coerce")
+    events = event_frame.copy()
+    events["date"] = event_dates
+    events = events.dropna(subset=["date"])
+    if events.empty:
+        return pd.DataFrame()
+    equity_lookup = (
+        normalized_equity.reindex(normalized_equity.index.union(events["date"]))
+        .sort_index()
+        .ffill()
+    )
+    drawdown_lookup = (
+        strategy_drawdown.reindex(strategy_drawdown.index.union(events["date"]))
+        .sort_index()
+        .ffill()
+    )
+    events["equity_marker"] = events["date"].map(equity_lookup)
+    events["drawdown_at_event"] = events["date"].map(drawdown_lookup).fillna(
+        pd.to_numeric(events.get("drawdown_at_event"), errors="coerce")
+    )
+    events["symbol"] = events["event"].map(
+        {
+            "Worst drawdown point": "x",
+            "Largest de-risking move": "triangle-down",
+            "Largest re-risking move": "triangle-up",
+            "De-risking move": "triangle-down",
+            "Re-risking move": "triangle-up",
+            "Risk rotation": "diamond",
+            "Defensive add": "triangle-down",
+            "Defensive reduce": "triangle-up",
+        }
+    ).fillna("circle")
+    events["color"] = events["event"].map(
+        {
+            "Worst drawdown point": "#ef4444",
+            "Largest de-risking move": "#f59e0b",
+            "Largest re-risking move": "#0f766e",
+            "De-risking move": "#f59e0b",
+            "Re-risking move": "#0f766e",
+            "Risk rotation": "#6366f1",
+            "Defensive add": "#d97706",
+            "Defensive reduce": "#14b8a6",
+        }
+    ).fillna("#4f46e5")
+    numeric_defaults = {
+        "risk_weight_at_event": float("nan"),
+        "risk_weight_change": float("nan"),
+        "defensive_weight_change": float("nan"),
+        "total_change": float("nan"),
+        "forward_return_1m": float("nan"),
+        "forward_return_3m": float("nan"),
+    }
+    for column, default in numeric_defaults.items():
+        if column not in events:
+            events[column] = default
+        events[column] = pd.to_numeric(events[column], errors="coerce")
+    text_defaults = {
+        "signal": "",
+        "inferred_driver": "Driver not available for this landmark.",
+        "top_adds": "n/a",
+        "top_reductions": "n/a",
+    }
+    for column, default in text_defaults.items():
+        if column not in events:
+            events[column] = default
+        events[column] = events[column].fillna(default).astype(str)
+    return events
+
+
 def _render_approach_performance(
     result: BacktestResult,
     *,
@@ -568,6 +1007,10 @@ def _render_factor_attribution(result: BacktestResult, *, baseline_run: Baseline
         "contribution. Residual strategy behavior is the part not explained by the current proxy set."
     )
     factor_view = attribution.factor_attribution.copy()
+    st.plotly_chart(
+        _factor_contribution_waterfall_figure(factor_view),
+        use_container_width=True,
+    )
     return_risk_similarity = _safe_float(
         factor_view["absolute_contribution_share"].abs().corr(
             factor_view["risk_contribution_pct"].abs()
@@ -648,6 +1091,49 @@ def _render_factor_attribution(result: BacktestResult, *, baseline_run: Baseline
             "the full-history factor profile."
         )
     _render_metric_dataframe(_display_metrics(decay), hide_index=True)
+
+
+def _factor_contribution_waterfall_figure(factor_view: pd.DataFrame) -> go.Figure:
+    if factor_view.empty or "return_contribution" not in factor_view:
+        return go.Figure()
+    display = factor_view.copy()
+    display["return_contribution"] = pd.to_numeric(
+        display["return_contribution"],
+        errors="coerce",
+    )
+    display = display.dropna(subset=["return_contribution"])
+    if display.empty:
+        return go.Figure()
+    display = display.sort_values(
+        "return_contribution",
+        key=lambda series: series.abs(),
+        ascending=False,
+    )
+    labels = display["label"].astype(str).tolist()
+    values = display["return_contribution"].astype(float).tolist()
+    total = float(sum(values))
+    figure = go.Figure(
+        go.Waterfall(
+            name="Return attribution",
+            orientation="v",
+            measure=["relative", *["relative"] * len(labels), "total"],
+            x=["Start", *labels, "Explained + residual"],
+            y=[0.0, *values, total],
+            connector={"line": {"color": "#94a3b8"}},
+            increasing={"marker": {"color": "#0f766e"}},
+            decreasing={"marker": {"color": "#b91c1c"}},
+            totals={"marker": {"color": "#2563eb"}},
+            hovertemplate="%{x}<br>Contribution %{y:.1%}<extra></extra>",
+        )
+    )
+    figure.update_layout(
+        title="Factor Attribution Waterfall",
+        template="plotly_white",
+        yaxis={"title": "Arithmetic return contribution", "tickformat": ".0%"},
+        height=420,
+        margin={"l": 20, "r": 20, "t": 60, "b": 90},
+    )
+    return figure
 
 
 def _scorecard_for_catalog_row(
@@ -831,38 +1317,89 @@ def _render_approach_detail_workbench(
             f"{strategy_drawdown_model.future_drawdown_threshold:.0%} forward drawdown label"
         )
 
-    detail_result = _render_strategy_summary_and_behavior(
+    _render_strategy_explanation(
         row=approach_row,
         strategy=approach_strategy,
         bot_config=bot_config,
-        baseline_run=baseline_run,
-        key_prefix="approach_detail",
     )
     if str(approach_row.get("hypothesis", "")):
         with st.expander("Original research hypothesis", expanded=False):
             st.write(str(approach_row["hypothesis"]))
 
-    (
-        combined_tab,
-        performance_tab,
-        allocation_tab,
-        factor_tab,
-        mechanics_tab,
-        robustness_tab,
-        manifest_tab,
-    ) = st.tabs(
-        [
-            "Performance + Allocation",
-            "Performance Over Time",
-            "Allocation Behavior",
-            "Factor Attribution",
-            "Mechanics",
-            "Robustness",
-            "Manifest / Risk Notes",
-        ]
+    detail_views = [
+        "Summary",
+        "Performance + Allocation",
+        "Decision Timeline",
+        "Performance Over Time",
+        "Allocation Behavior",
+        "Factor Attribution",
+        "Mechanics",
+        "Robustness",
+        "Manifest / Risk Notes",
+    ]
+    selected_detail_view = (
+        st.pills(
+            "Candidate detail view",
+            detail_views,
+            selection_mode="single",
+            default="Summary",
+            key="approach_detail_view",
+            label_visibility="collapsed",
+            width="stretch",
+        )
+        or "Summary"
+    )
+    detail_result = _load_detail_result_if_needed(
+        selected_detail_view=selected_detail_view,
+        row=approach_row,
+        strategy=approach_strategy,
+        execution=approach_execution,
+        scenario_sizing=scenario_sizing,
+        future_state_model=future_state_model,
+        strategy_drawdown_model=strategy_drawdown_model,
+        decision_sanity=decision_sanity,
+        baseline_run=baseline_run,
     )
 
-    with combined_tab:
+    if selected_detail_view == "Summary":
+        scorecard = _scorecard_for_catalog_row(
+            approach_row,
+            baseline_run=baseline_run,
+            experiment_scorecards=experiment_scorecards,
+        )
+        if not scorecard.empty:
+            summary_columns = [
+                "display_name",
+                "strategy",
+                "promotion_decision",
+                "promotion_score",
+                "monitoring_readiness_label",
+                "growth_utility_tier",
+                "cagr",
+                "max_drawdown",
+                "calmar",
+                "walk_forward_positive_rate",
+                "left_tail_regime_return",
+                "operability_label",
+                "material_trade_days_per_year",
+            ]
+            available_summary_columns = [column for column in summary_columns if column in scorecard]
+            st.caption("Selected candidate scorecard")
+            _render_metric_dataframe(
+                _display_metrics(scorecard[available_summary_columns]),
+                hide_index=True,
+            )
+        st.caption("Risk notes")
+        _render_metric_dataframe(
+            build_approach_risk_notes(approach_strategy, approach_row),
+            hide_index=True,
+        )
+        st.info(
+            "This summary is intentionally light. Choose a detail view above to build the heavier "
+            "performance, decision-timeline, allocation, or factor-attribution charts."
+        )
+
+    elif selected_detail_view == "Performance + Allocation":
         if detail_result is None:
             st.write("No performance/allocation curve could be reconstructed for this approach.")
         else:
@@ -877,7 +1414,17 @@ def _render_approach_detail_workbench(
                 key_prefix="approach_combined",
             )
 
-    with performance_tab:
+    elif selected_detail_view == "Decision Timeline":
+        if detail_result is None:
+            st.write("No decision timeline could be reconstructed for this approach.")
+        else:
+            _render_decision_timeline(
+                detail_result,
+                defensive_ticker=approach_strategy.defensive_ticker,
+                key_prefix="approach_detail",
+            )
+
+    elif selected_detail_view == "Performance Over Time":
         scorecard = _scorecard_for_catalog_row(
             approach_row,
             baseline_run=baseline_run,
@@ -896,7 +1443,7 @@ def _render_approach_detail_workbench(
                 key_prefix="approach_detail",
             )
 
-    with allocation_tab:
+    elif selected_detail_view == "Allocation Behavior":
         if detail_result is None:
             st.write("No allocation history could be reconstructed for this approach.")
         else:
@@ -912,13 +1459,13 @@ def _render_approach_detail_workbench(
                 key_prefix="approach_detail",
             )
 
-    with factor_tab:
+    elif selected_detail_view == "Factor Attribution":
         if detail_result is None:
             st.write("No factor attribution can be reconstructed for this approach.")
         else:
             _render_factor_attribution(detail_result, baseline_run=baseline_run)
 
-    with mechanics_tab:
+    elif selected_detail_view == "Mechanics":
         st.caption("Mechanics")
         _render_metric_dataframe(
             build_approach_mechanics(approach_strategy, bot_config, execution=approach_execution),
@@ -968,7 +1515,7 @@ def _render_approach_detail_workbench(
                 f"event/news-only defensive-add cap: {decision_sanity.max_defensive_add:.0%}."
             )
 
-    with robustness_tab:
+    elif selected_detail_view == "Robustness":
         selected_strategy = str(approach_row.get("strategy", ""))
         rendered_robustness = False
         if not experiment_walk_forward.empty:
@@ -1006,7 +1553,7 @@ def _render_approach_detail_workbench(
         if not rendered_robustness:
             st.write("No robustness artifacts are available for this approach yet.")
 
-    with manifest_tab:
+    elif selected_detail_view == "Manifest / Risk Notes":
         st.caption("Risk notes")
         _render_metric_dataframe(
             build_approach_risk_notes(approach_strategy, approach_row),
@@ -2245,86 +2792,42 @@ def _render_experiment_monitor(
     _helped_metric(col_d, "Risk rejects", f"{rejected_tail_count:,}", key="promotion_decision")
     _helped_metric(col_e, "Pruned", f"{pruned_count:,}")
 
-    (
-        experiment_detail_tab,
-        experiment_outcome_tab,
-        experiment_taxable_tab,
-        experiment_sanity_tab,
-        experiment_signal_evidence_tab,
-        experiment_confidence_tab,
-        experiment_readiness_tab,
-        experiment_shelf_tab,
-        experiment_family_tab,
-        experiment_leaderboard_tab,
-        experiment_regime_tab,
-        experiment_overview_tab,
-        experiment_manifest_tab,
-    ) = st.tabs(
-        [
-            "Candidate Details",
-            "Outcome Frontier",
-            "Taxable Impact",
-            "Sanity Impact",
-            "Signal Evidence",
-            "Confidence Gauntlet",
-            "Paper Readiness",
-            "Curated Shelf",
-            "Family Map",
-            "Leaderboard",
-            "Regime Tests",
-            "Overview",
-            "Manifests",
-        ]
+    st.caption(
+        "Research flow: the upper area summarizes patterns across experiments; the lower area is "
+        "reserved for a deep dive into one selected candidate and its internal strategy tabs."
     )
 
-    with experiment_detail_tab:
-        st.caption(
-            "Primary research workbench. Use this before paper-monitoring a strategy: it shows "
-            "the explanation, performance-over-time charts, allocation behavior, mechanics, "
-            "robustness diagnostics, and manifest/risk notes."
+    st.markdown("**Aggregated Insights Across Experiments**")
+    st.caption(
+        "Cross-experiment views: rankings, curated lists, frontier tradeoffs, signal/family "
+        "patterns, account impacts, and validation/QC. Use this area to decide which candidate "
+        "deserves inspection below."
+    )
+    aggregate_views = [
+        "Overview",
+        "Leaderboard",
+        "Curated Shelf",
+        "Outcome Frontier",
+        "Signal Evidence",
+        "Family Map",
+        "Taxable Impact",
+        "Validation / QC",
+        "Manifests",
+    ]
+    aggregate_view = (
+        st.pills(
+            "Aggregate insight view",
+            aggregate_views,
+            selection_mode="single",
+            default="Overview",
+            key="experiment_aggregate_view",
+            label_visibility="collapsed",
+            width="stretch",
         )
-        _render_approach_detail_workbench(
-            bot_config=bot_config,
-            baseline_run=baseline_run,
-            experiment_scorecards=experiment_scorecards,
-            experiment_regimes=experiment_regimes,
-            experiment_walk_forward=experiment_walk_forward,
-            experiment_candidates=experiment_candidates,
-        )
+        or "Overview"
+    )
 
-    with experiment_outcome_tab:
-        _render_outcome_frontier(
-            bot_config=bot_config,
-            baseline_run=baseline_run,
-            experiment_scorecards=experiment_scorecards,
-            experiment_candidates=experiment_candidates,
-        )
-
-    with experiment_taxable_tab:
-        _render_taxable_impact(
-            bot_config=bot_config,
-            experiment_scorecards=experiment_scorecards,
-        )
-
-    with experiment_sanity_tab:
-        _render_decision_sanity_impact(decision_sanity_impacts)
-
-    with experiment_signal_evidence_tab:
-        _render_signal_evidence(experiment_scorecards, experiment_candidates)
-
-    with experiment_confidence_tab:
-        _render_confidence_gauntlet(experiment_scorecards)
-
-    with experiment_readiness_tab:
-        _render_paper_readiness(experiment_scorecards)
-
-    with experiment_shelf_tab:
-        _render_curated_strategy_shelf(experiment_scorecards)
-
-    with experiment_family_tab:
-        _render_strategy_family_map(experiment_scorecards, experiment_candidates)
-
-    with experiment_overview_tab:
+    if aggregate_view == "Overview":
         experiment_summary = summarize_experiment_history(experiment_scorecards)
         _render_metric_dataframe(_display_metrics(experiment_summary))
 
@@ -2342,7 +2845,11 @@ def _render_experiment_monitor(
                 _display_metrics(operating_systems.rename(columns={"family": "category"}))
             )
 
-    with experiment_leaderboard_tab:
+    elif aggregate_view == "Leaderboard":
+        st.caption(
+            "Aggregate comparison table. Start here when you want to filter the whole experiment "
+            "backlog by iteration, status, family, role, and promotion result."
+        )
         experiment_iterations = sorted(experiment_scorecards["iteration"].unique())
         default_iterations = experiment_iterations[-10:]
         selected_iterations = st.multiselect(
@@ -2458,61 +2965,113 @@ def _render_experiment_monitor(
         ].rename(columns={"family": "category"})
         _render_metric_dataframe(_display_metrics(leaderboard_view))
 
-    with experiment_regime_tab:
-        if experiment_walk_forward.empty and experiment_regimes.empty:
-            st.write("New robustness artifacts will appear after the next experiment iteration.")
-        else:
-            strategy_options = sorted(experiment_scorecards["strategy"].dropna().unique())
-            default_strategies = (
-                experiment_scorecards.sort_values("promotion_score", ascending=False)
-                .head(8)["strategy"]
-                .tolist()
-            )
-            selected_strategies = st.multiselect(
-                "Strategies",
-                strategy_options,
-                default=default_strategies,
-                key="experiment_regime_strategies",
-            )
-            if not experiment_walk_forward.empty:
-                walk_view = experiment_walk_forward[
-                    experiment_walk_forward["strategy"].isin(selected_strategies)
-                ]
-                st.caption("Walk-forward holdout summary")
-                _render_metric_dataframe(_display_metrics(walk_view))
-            if not experiment_regimes.empty:
-                regime_view = experiment_regimes[
-                    experiment_regimes["strategy"].isin(selected_strategies)
-                ]
-                regime_options = ["all", *sorted(regime_view["regime"].dropna().unique())]
-                regime_filter = st.selectbox(
-                    "Regime window",
-                    regime_options,
-                    key="experiment_regime_filter",
-                )
-                if regime_filter != "all":
-                    regime_view = regime_view[regime_view["regime"] == regime_filter]
-                regime_columns = [
-                    "iteration",
-                    "strategy",
-                    "regime",
-                    "regime_type",
-                    "total_return",
-                    "cagr",
-                    "max_drawdown",
-                    "calmar",
-                    "description",
-                ]
-                st.caption("Named market-transition and left-tail windows")
-                _render_metric_dataframe(
-                    _display_metrics(
-                        regime_view[
-                            [column for column in regime_columns if column in regime_view.columns]
-                        ]
-                    )
-                )
+    elif aggregate_view == "Curated Shelf":
+        _render_curated_strategy_shelf(experiment_scorecards)
 
-    with experiment_manifest_tab:
+    elif aggregate_view == "Outcome Frontier":
+        _render_outcome_frontier(
+            bot_config=bot_config,
+            baseline_run=baseline_run,
+            experiment_scorecards=experiment_scorecards,
+            experiment_candidates=experiment_candidates,
+        )
+
+    elif aggregate_view == "Signal Evidence":
+        _render_signal_evidence(experiment_scorecards, experiment_candidates)
+
+    elif aggregate_view == "Family Map":
+        _render_strategy_family_map(experiment_scorecards, experiment_candidates)
+
+    elif aggregate_view == "Taxable Impact":
+        _render_taxable_impact(
+            bot_config=bot_config,
+            experiment_scorecards=experiment_scorecards,
+        )
+
+    elif aggregate_view == "Validation / QC":
+        validation_views = [
+            "Sanity Impact",
+            "Confidence Gauntlet",
+            "Paper Readiness",
+            "Regime Tests",
+        ]
+        validation_view = (
+            st.pills(
+                "Validation view",
+                validation_views,
+                selection_mode="single",
+                default="Sanity Impact",
+                key="experiment_validation_view",
+                label_visibility="collapsed",
+                width="stretch",
+            )
+            or "Sanity Impact"
+        )
+        if validation_view == "Sanity Impact":
+            _render_decision_sanity_impact(decision_sanity_impacts)
+        elif validation_view == "Confidence Gauntlet":
+            _render_confidence_gauntlet(experiment_scorecards)
+        elif validation_view == "Paper Readiness":
+            _render_paper_readiness(experiment_scorecards)
+        elif validation_view == "Regime Tests":
+            if experiment_walk_forward.empty and experiment_regimes.empty:
+                st.write("New robustness artifacts will appear after the next experiment iteration.")
+            else:
+                strategy_options = sorted(experiment_scorecards["strategy"].dropna().unique())
+                default_strategies = (
+                    experiment_scorecards.sort_values("promotion_score", ascending=False)
+                    .head(8)["strategy"]
+                    .tolist()
+                )
+                selected_strategies = st.multiselect(
+                    "Strategies",
+                    strategy_options,
+                    default=default_strategies,
+                    key="experiment_regime_strategies",
+                )
+                if not experiment_walk_forward.empty:
+                    walk_view = experiment_walk_forward[
+                        experiment_walk_forward["strategy"].isin(selected_strategies)
+                    ]
+                    st.caption("Walk-forward holdout summary")
+                    _render_metric_dataframe(_display_metrics(walk_view))
+                if not experiment_regimes.empty:
+                    regime_view = experiment_regimes[
+                        experiment_regimes["strategy"].isin(selected_strategies)
+                    ]
+                    regime_options = ["all", *sorted(regime_view["regime"].dropna().unique())]
+                    regime_filter = st.selectbox(
+                        "Regime window",
+                        regime_options,
+                        key="experiment_regime_filter",
+                    )
+                    if regime_filter != "all":
+                        regime_view = regime_view[regime_view["regime"] == regime_filter]
+                    regime_columns = [
+                        "iteration",
+                        "strategy",
+                        "regime",
+                        "regime_type",
+                        "total_return",
+                        "cagr",
+                        "max_drawdown",
+                        "calmar",
+                        "description",
+                    ]
+                    st.caption("Named market-transition and left-tail windows")
+                    _render_metric_dataframe(
+                        _display_metrics(
+                            regime_view[
+                                [
+                                    column
+                                    for column in regime_columns
+                                    if column in regime_view.columns
+                                ]
+                            ]
+                        )
+                    )
+
+    elif aggregate_view == "Manifests":
         if experiment_candidates.empty:
             st.write("No candidate manifests were found.")
         else:
@@ -2527,6 +3086,31 @@ def _render_experiment_monitor(
                 experiment_candidates["iteration"].isin(selected_manifest_iterations)
             ]
             st.dataframe(manifest_view, use_container_width=True)
+
+    st.divider()
+    st.subheader("Candidate Deep Dive")
+    st.caption(
+        "Lower research area for one selected strategy. The upper section compares experiments "
+        "across the backlog; this section explains a single candidate in detail."
+    )
+    deep_dive_col_a, deep_dive_col_b, deep_dive_col_c = st.columns(3)
+    deep_dive_col_a.info(
+        "Pick the candidate to inspect, then use the internal tabs to study behavior over time."
+    )
+    deep_dive_col_b.info(
+        "Use this before moving a strategy into paper monitoring or changing champion status."
+    )
+    deep_dive_col_c.info(
+        "Look for performance, drawdown, allocation changes, decision events, and factor exposure."
+    )
+    _render_approach_detail_workbench(
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+        experiment_regimes=experiment_regimes,
+        experiment_walk_forward=experiment_walk_forward,
+        experiment_candidates=experiment_candidates,
+    )
 
 
 def _render_signal_evidence(
@@ -2594,6 +3178,17 @@ def _render_signal_evidence(
         margin={"l": 20, "r": 20, "t": 60, "b": 20},
     )
     st.plotly_chart(fig, use_container_width=True)
+
+    heatmap_frame = _signal_ablation_heatmap_frame(marginal_tests)
+    if not heatmap_frame.empty:
+        st.caption(
+            "Ablation heatmap: median paired child-minus-parent deltas by signal family. "
+            "Green means the family improved the metric direction; red means it hurt after controls."
+        )
+        st.plotly_chart(
+            _signal_ablation_heatmap_figure(heatmap_frame),
+            use_container_width=True,
+        )
 
     evidence_tab, paired_tab, tagged_tab = st.tabs(
         ["Family Evidence", "Paired Marginal Tests", "Tagged Strategies"]
@@ -2675,6 +3270,79 @@ def _render_signal_evidence(
             _display_metrics(tagged[[column for column in tagged_columns if column in tagged]]),
             hide_index=True,
         )
+
+
+def _signal_ablation_heatmap_frame(marginal_tests: pd.DataFrame) -> pd.DataFrame:
+    if marginal_tests.empty or "signal_label" not in marginal_tests:
+        return pd.DataFrame()
+    metric_columns = [
+        column
+        for column in [
+            "delta_cagr",
+            "delta_max_drawdown",
+            "delta_calmar",
+            "delta_reentry_score",
+            "delta_average_turnover",
+            "delta_left_tail_regime_return",
+        ]
+        if column in marginal_tests
+    ]
+    if not metric_columns:
+        return pd.DataFrame()
+    grouped = (
+        marginal_tests.groupby("signal_label", dropna=False)[metric_columns]
+        .median(numeric_only=True)
+        .dropna(how="all")
+    )
+    if grouped.empty:
+        return pd.DataFrame()
+    signed = grouped.copy()
+    if "delta_average_turnover" in signed:
+        signed["delta_average_turnover"] = -signed["delta_average_turnover"]
+    return signed.sort_index()
+
+
+def _signal_ablation_heatmap_figure(heatmap_frame: pd.DataFrame) -> go.Figure:
+    labels = {
+        "delta_cagr": "CAGR",
+        "delta_max_drawdown": "Max drawdown",
+        "delta_calmar": "Calmar",
+        "delta_reentry_score": "Re-entry",
+        "delta_average_turnover": "Lower churn",
+        "delta_left_tail_regime_return": "Left-tail",
+    }
+    display = heatmap_frame.rename(columns=labels)
+    z_values = display.to_numpy(dtype=float)
+    max_abs = float(pd.Series(z_values.ravel()).abs().dropna().max()) if z_values.size else 0.0
+    color_bound = max(max_abs, 0.01)
+    figure = go.Figure(
+        go.Heatmap(
+            z=z_values,
+            x=display.columns.tolist(),
+            y=display.index.astype(str).tolist(),
+            zmid=0.0,
+            zmin=-color_bound,
+            zmax=color_bound,
+            colorscale=[
+                [0.0, "#b91c1c"],
+                [0.5, "#f8fafc"],
+                [1.0, "#0f766e"],
+            ],
+            colorbar={"title": "Median delta"},
+            hovertemplate=(
+                "<b>%{y}</b><br>%{x}<br>Median paired delta: %{z:.2%}<extra></extra>"
+            ),
+        )
+    )
+    figure.update_layout(
+        title="Signal Ablation Heatmap",
+        template="plotly_white",
+        height=max(360, 34 * len(display.index) + 140),
+        margin={"l": 20, "r": 20, "t": 60, "b": 40},
+        xaxis={"side": "top"},
+        yaxis={"title": ""},
+    )
+    return figure
 
 
 def _render_taxable_impact(*, bot_config: Any, experiment_scorecards: pd.DataFrame) -> None:
@@ -3289,6 +3957,13 @@ def _render_research_lab(
         decision_sanity_impacts,
     )
     st.divider()
-    _render_ml_diagnostics()
-    st.divider()
-    _render_signal_inclusion(baseline_run)
+    st.subheader("Research Diagnostics / QC")
+    st.caption(
+        "Lower-frequency diagnostics that support pruning and model governance. These are useful "
+        "for audit and expansion work, but they are intentionally collapsed so the main research "
+        "flow stays focused on strategy comparison and candidate inspection."
+    )
+    with st.expander("ML diagnostics", expanded=False):
+        _render_ml_diagnostics()
+    with st.expander("Signal inclusion tests", expanded=False):
+        _render_signal_inclusion(baseline_run)

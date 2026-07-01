@@ -109,3 +109,10 @@ def test_driver_rotation_figures_render_core_traces() -> None:
     assert len(scatter.data) == 2
     assert len(heatmap.data) == 1
     assert "Historical Relevance" in str(scatter.layout.title.text)
+    assert all(trace.mode == "markers" for trace in scatter.data)
+    label_annotations = [
+        annotation
+        for annotation in scatter.layout.annotations
+        if annotation.showarrow is False and annotation.text in {"Credit conditions", "AI capex pressure"}
+    ]
+    assert len(label_annotations) == 2
