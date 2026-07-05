@@ -1,0 +1,553 @@
+# Trade Bot Technical Explainer
+
+Status: canonical technical reference. Last reviewed: 2026-07-05.
+
+This document explains how the major pieces of Trade Bot work behind the scenes.
+It is intended for developers, reviewers, and technical users who need to answer:
+"Where does this number come from?" or "Does the system use this approach?"
+
+## Architecture Summary
+
+Trade Bot is a local Python application with these main layers:
+
+| Layer | Primary Modules | Role |
+| --- | --- | --- |
+| Config/defaults | `config.py`, `DEFAULTS.py`, `configs/*.yaml` | Defines universes, strategies, execution assumptions, thresholds, and file paths. |
+| Data | `data/market_data.py`, `data/fred_data.py` | Loads Yahoo-compatible prices and FRED macro data into local caches. |
+| Features | `features/indicators.py`, `features/valuation.py` | Computes returns, drawdowns, momentum, volatility, and valuation helpers. |
+| Backtest | `backtest/engine.py`, `backtest/metrics.py`, `backtest/windows.py` | Applies target weights, transaction costs, lag, turnover, equity curves, and metrics. |
+| Strategy construction | `strategies/momentum.py`, `research/experiments.py` | Builds baseline weights and research candidate weights. |
+| Current state | `research/current_state.py` | Builds market health, momentum state, confirmation matrix, macro state, scenarios, and regime diagnostics. |
+| Risk and sizing | `portfolio/risk.py`, `research/trade_decision.py` | Converts scenarios and constraints into target posture and position deltas. |
+| Research scoring | `research/validation.py`, `research/strategy_outcome_utility.py`, `research/curation.py` | Scores candidates for robustness, outcome utility, and monitoring readiness. |
+| Monitoring/journal | `storage/warehouse.py`, `trading/journal.py`, `trading/book_alignment.py` | Stores paper windows, valuations, tickets, executions, and book alignment. |
+| Dashboard | `dashboard/*.py` | Streamlit UI over snapshots, warehouse tables, and research artifacts. |
+| CLI | `cli.py` | Operational commands for daily updates, snapshots, experiments, ML, monitoring, and valuation. |
+
+## Data Flow
+
+The normal daily flow is:
+
+```text
+configs -> data load -> baseline run -> snapshot -> warehouse migration -> paper valuation -> dashboard
+```
+
+The main command is:
+
+```bash
+poetry run trade-bot run-daily-update
+```
+
+Internally it:
+
+1. loads `configs/baseline.yaml`,
+2. loads market prices,
+3. loads macro series,
+4. runs configured baseline strategies,
+5. builds current state,
+6. runs news monitor and event activation,
+7. builds event-risk study,
+8. runs signal-inclusion tests,
+9. builds the trade decision,
+10. saves a snapshot to DuckDB and pickle artifact,
+11. writes the static HTML report,
+12. refreshes the strategy registry,
+13. migrates experiment and journal outputs,
+14. writes paper valuations for active windows.
+
+## Configuration And Defaults
+
+Defaults belong in `src/trade_bot/DEFAULTS.py`. Configurable user-level choices
+belong in `configs/*.yaml`.
+
+Use `DEFAULTS.py` for:
+
+- file paths,
+- threshold constants,
+- default tax assumptions,
+- dashboard display defaults,
+- driver-rotation thresholds,
+- monitoring defaults,
+- fallback ticker metadata.
+
+Use `configs/baseline.yaml` for:
+
+- data start/end,
+- execution assumptions,
+- ticker universe,
+- baseline strategies,
+- tax-account config overrides.
+
+Avoid hardcoding thresholds at the top of feature modules. That creates drift.
+
+## Price And Macro Data
+
+Market data is pulled by `load_or_fetch_yahoo_prices`. It uses local cache files
+unless refresh is requested. Macro data is configured in `configs/macro_fred.yaml`
+and loaded through `load_or_fetch_fred_data`.
+
+Important limitations:
+
+- Yahoo-compatible market data can revise or occasionally fail.
+- FRED data has release timing and revision issues.
+- Public proxies are not equivalent to proprietary terminal data.
+- Private credit, AI capex, and liquidity plumbing often use imperfect proxies.
+
+## Backtest Engine
+
+The backtest engine takes:
+
+- adjusted price data,
+- target weights,
+- execution assumptions,
+- optional volatility target,
+- optional drawdown control.
+
+It applies:
+
+- configured signal lag,
+- rebalance cadence,
+- transaction costs,
+- turnover tracking,
+- equity curve compounding.
+
+The default execution assumptions live in config:
+
+```yaml
+execution:
+  initial_capital: 100000.0
+  transaction_cost_bps: 5.0
+  rebalance: "W-FRI"
+  signal_lag_days: 1
+```
+
+This matters because the system is not allowed to look ahead or assume same-day
+perfect execution.
+
+## Core Metrics
+
+Key metrics are calculated in `backtest/metrics.py`.
+
+| Metric | Meaning |
+| --- | --- |
+| CAGR | Annualized compounded return. |
+| Volatility | Annualized standard deviation of returns. |
+| Sharpe | Excess return per unit volatility, using configured simple assumptions. |
+| Sortino | Return per unit downside volatility. |
+| Max drawdown | Worst equity peak-to-trough decline. |
+| Calmar | CAGR divided by absolute max drawdown. |
+| Average turnover | Average absolute portfolio weight change per rebalance. |
+| Ulcer Index | Depth and persistence of drawdowns. |
+
+Formula contracts are documented in `docs/math_model_audit.md` and tested in
+`tests/test_math_contracts.py`.
+
+## Current-State Engine
+
+`research/current_state.py` builds the daily market read. It calculates:
+
+- market date,
+- momentum state,
+- data quality,
+- macro signals,
+- macro category summary,
+- positioning/crowding,
+- regime instability,
+- regime pulse,
+- signal coverage,
+- confirmation matrix,
+- market health,
+- risk score and status,
+- strategy alerts,
+- scenario lattice and rollup.
+
+The risk score is intentionally a compact current-state measure. It is not the
+same thing as a strategy score.
+
+## Scenario Lattice
+
+`research/future_scenarios.py` builds scenario probabilities from current market
+and macro state. The scenario buckets include states such as:
+
+- risk-off,
+- transition,
+- broad risk-on,
+- narrow AI-led melt-up,
+- risk-off then relief.
+
+The scenario output is used by `trade_decision.py` to shape risk budget and
+target posture. It does not directly forecast exact prices.
+
+## Trade Decision
+
+`research/trade_decision.py` converts current state, events, news, signal
+inclusion, and scenario outlook into a target allocation bridge.
+
+Outputs include:
+
+- recommended action,
+- current posture,
+- scenario-adjusted posture,
+- ticker-level target weights,
+- delta weights,
+- risk adjustment reasons,
+- human explanation.
+
+The system distinguishes:
+
+- model target,
+- risk-adjusted target,
+- decision-sanity capped target,
+- logged book alignment.
+
+## Portfolio Risk Engine
+
+`portfolio/risk.py` applies risk controls after the scenario target. It includes:
+
+- beta/factor checks,
+- expected shortfall,
+- stress loss,
+- concentration constraints,
+- scenario minimum defensive allocation,
+- scenario-weighted stress constraints,
+- portfolio risk multiplier.
+
+The risk engine is a guardrail. It should not be treated as a complete
+institutional risk system, but it is more than a simple momentum toggle.
+
+## Decision-Sanity Overlay
+
+Decision sanity prevents context-only or event-only pressure from forcing huge
+defensive moves without market confirmation. Larger defensive moves should
+generally require confirmation from at least some combination of:
+
+- credit,
+- volatility,
+- breadth,
+- trend,
+- price action.
+
+This overlay is tested in paired experiments. It is not simply hand-waved into
+production.
+
+## News And Events
+
+News monitoring is handled by `research/news_monitor.py`, event study logic by
+`research/event_risk.py`, and dashboard display by `dashboard/news_macro.py`.
+
+News/event items can be:
+
+- activated events,
+- context only,
+- high urgency,
+- leading warning,
+- coincident,
+- lagging,
+- phase uncertain.
+
+The important design rule is that news generally informs context and risk review.
+It should not become a direct trade driver unless validated or confirmed by
+market data.
+
+## Driver Rotation
+
+`research/driver_rotation.py` creates a table that separates:
+
+- normally important,
+- currently active,
+- emerging importance,
+- fading importance.
+
+Each driver has:
+
+- historical relevance,
+- current activation,
+- short/long change,
+- model role,
+- data support,
+- evidence.
+
+The dashboard visualizes this as a quadrant/heatmap/table. It helps users see
+what is moving the market narrative versus what has actually mattered in tests.
+
+## Signal Evidence And Ablations
+
+`research/signal_evidence.py` tags strategy families and compares parent/control
+pairs to estimate marginal contribution.
+
+Signal recommendations include:
+
+- validated contributor,
+- promising mixed,
+- not proven,
+- context only,
+- research gap.
+
+This is the preferred path for deciding whether a signal deserves more operating
+surface or should be pruned.
+
+## Experiment Engine
+
+`research/experiments.py` generates candidate strategies for a given iteration.
+Each iteration creates scorecards, candidates, regime metrics, walk-forward
+summaries, window summaries, and manifests.
+
+Run:
+
+```bash
+poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration 161 --output-dir data/experiments_reset_v2
+```
+
+The system is designed for iterative research:
+
+1. test several candidates,
+2. score them,
+3. promote/evolve/reject,
+4. inspect results,
+5. design the next batch.
+
+## Validation And Scoring
+
+Candidate scoring uses multiple layers:
+
+- raw performance,
+- promotion score,
+- robustness score,
+- monitoring readiness,
+- walk-forward diagnostics,
+- regime metrics,
+- overfit risk,
+- left-tail behavior,
+- outcome utility,
+- taxable impact where available.
+
+No single metric should dominate selection.
+
+## Outcome Utility
+
+`research/strategy_outcome_utility.py` adds a growth-constrained objective. It
+models an accumulation account with configurable horizon, starting value,
+contributions, drawdown soft limit, and hard limit.
+
+It computes:
+
+- terminal wealth,
+- terminal wealth with contributions,
+- benchmark wealth deltas,
+- recovery return needed,
+- drawdown penalties,
+- growth-constrained utility score,
+- growth utility tier.
+
+This explicitly encodes the insight that higher CAGR with tolerable drawdown may
+be better than low-drawdown undergrowth for a long accumulation horizon.
+
+## ML Diagnostics
+
+ML lives under `src/trade_bot/ml` and `research/future_state_ml.py`.
+
+Current ML use is diagnostic and research-oriented:
+
+- future-state classification,
+- Brier score,
+- calibration error,
+- balanced accuracy,
+- feature importance,
+- drift diagnostics.
+
+Run:
+
+```bash
+poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard
+```
+
+Use `--profile research` for heavier sweeps. The dashboard should not train
+models on cold start.
+
+## Factor Attribution
+
+`research/factor_attribution.py` decomposes strategy behavior into transparent ETF
+proxy factors:
+
+- market beta,
+- QQQ/growth beta,
+- AI/semis beta,
+- breadth,
+- cyclicals,
+- rates/duration,
+- credit,
+- commodities,
+- volatility,
+- residual behavior.
+
+This helps answer whether strategies are genuinely different or mostly disguised
+versions of the same AI/growth bet.
+
+## Monitoring
+
+Monitoring is handled by `storage/warehouse.py`. It stores:
+
+- strategy registry,
+- monitoring windows,
+- daily valuations,
+- snapshot metrics,
+- experiment scorecards,
+- journal data.
+
+The key table is `strategy_daily_valuations`, which tracks forward paper results
+from the window start date rather than importing full-history backtest gains.
+
+## Forward Test And Journal
+
+`trading/journal.py` stores tickets and executions in SQLite. Forward Test uses
+this to log:
+
+- recommendation tickets,
+- execution mode,
+- account label,
+- ticker,
+- side,
+- quantity,
+- price,
+- fees,
+- timestamp,
+- notes.
+
+Book Alignment uses journal executions to estimate the current logged book.
+
+## Book Alignment
+
+`trading/book_alignment.py` compares the latest target posture against the local
+book derived from logged executions.
+
+It is not a broker import. It answers whether the locally tracked paper/live
+book is close enough to the latest model target.
+
+## Taxable Layer
+
+Tax modules live under `src/trade_bot/tax`.
+
+They estimate:
+
+- open lots,
+- realized lots,
+- short-term and long-term gains,
+- wash-sale warnings,
+- tax drag,
+- loss carryforward,
+- TLH candidates.
+
+This is a research layer. Broker lots and professional tax review remain required
+for real taxable decisions.
+
+## Storage
+
+The system uses local storage:
+
+| Store | Path | Purpose |
+| --- | --- | --- |
+| Cache | `data/cache/` | Market, macro, and news input caches. |
+| Run store | `data/run_store/trade_bot.duckdb` | Snapshot metadata and warehouse tables. |
+| Snapshot artifacts | `data/run_store/snapshots/` | Pickled `BaselineRun` objects for fast dashboard loads. |
+| Journal | `data/trading_journal.sqlite` | Tickets, executions, and derived tax lots. |
+| Reports | `reports/` | Static report and experiment outputs. |
+
+## Dashboard Structure
+
+The dashboard is split into:
+
+- app shell and sidebar: `dashboard/app.py`,
+- top overview: `dashboard/overview.py`,
+- operating cards: `dashboard/briefs.py`,
+- section navigation: `dashboard/navigation.py`,
+- section modules: command center, risk scenarios, research lab, monitoring,
+  news/macro, performance, forward test,
+- styling: `dashboard/styles.py`,
+- explanations: `dashboard/metric_explainers.py` and
+  `dashboard/ticket_explainers.py`.
+
+The dashboard should read snapshots and warehouse outputs; expensive research
+jobs should run through CLI commands.
+
+## Testing Strategy
+
+Tests cover:
+
+- data loaders,
+- config parsing,
+- backtest formulas,
+- current-state logic,
+- trade decision logic,
+- risk engine,
+- experiments,
+- curation,
+- dashboard rendering,
+- monitoring,
+- journal,
+- tax tracking,
+- ML diagnostics.
+
+Run focused tests during development and full tests before larger handoff:
+
+```bash
+poetry run ruff check src tests
+poetry run pytest -q
+```
+
+For formula-sensitive changes:
+
+```bash
+poetry run pytest tests/test_math_contracts.py tests/test_backtest_engine.py tests/test_metrics.py -q
+```
+
+For dashboard changes:
+
+```bash
+poetry run pytest tests/test_dashboard_app.py tests/test_dashboard_navigation.py tests/test_dashboard_explainability.py -q
+```
+
+## Extension Guidelines
+
+When adding a new feature:
+
+1. Put defaults in `DEFAULTS.py`.
+2. Put user choices in config.
+3. Keep dashboard cold-start fast.
+4. Add research artifacts before operating claims.
+5. Separate model drivers from explanatory context.
+6. Add tests.
+7. Update docs.
+
+When adding a new signal:
+
+1. Ask whether data exists.
+2. Ask whether historical/proxy analogs exist.
+3. Add it as context first.
+4. Build ablation or paired tests.
+5. Promote only if it improves outcomes.
+
+When adding a new strategy:
+
+1. Define thesis.
+2. Define universe.
+3. Define risk-on and defensive sleeves.
+4. Define re-entry/off-ramp logic.
+5. Backtest with costs and lag.
+6. Score across regimes.
+7. Compare against references.
+8. Add paper monitoring only if operational.
+
+## What The System Does Not Do
+
+Trade Bot does not:
+
+- place trades,
+- guarantee performance,
+- import broker positions automatically,
+- provide legal or tax advice,
+- solve intraday execution,
+- use proprietary institutional datasets,
+- turn every news item into a trade,
+- make LLM-generated claims authoritative.
+
+These boundaries are intentional.

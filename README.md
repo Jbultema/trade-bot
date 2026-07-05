@@ -20,6 +20,11 @@ Trade Bot turns market prices, macro series, curated news/events, scenario proba
 
 | Need | Start Here | Result |
 | --- | --- | --- |
+| Set up the project from scratch | [Setup Guide](docs/setup_guide.md) | Local Python, Poetry, VS Code, dashboard, data, and common troubleshooting |
+| Learn the full app workflow | [User Guide](docs/user_guide.md) | Daily monitoring, research, paper tracking, live logging, taxable review, and review cadence |
+| Answer common questions | [FAQ](docs/faq.md) | Plain-English answers for operation, metrics, risk, ML, data, taxes, and governance |
+| Understand the backend | [Technical Explainer](docs/technical_explainer.md) | How the data, models, risk engine, research loop, monitoring, and dashboard work |
+| Review research takeaways | [Learnings](docs/learnings.md) | What the experiments have taught us and what should be pruned or expanded |
 | Run the system today | [Daily Operating Loop](#daily-operating-loop) | Fresh snapshot, warehouse migration, paper valuation, dashboard readout |
 | Understand the dashboard | [Dashboard Map](#dashboard-map) | What each tab is for and where actions live |
 | Start paper monitoring | [Start Paper Monitoring From The Dashboard](#start-paper-monitoring-from-the-dashboard) | Champion/challenger/reference windows seeded with paper capital |
@@ -28,6 +33,20 @@ Trade Bot turns market prices, macro series, curated news/events, scenario proba
 | Extend ML research | [ML Research Framework](docs/ml_research_framework.md) | Targeted ML/Bayesian seams, cadence, and validation gates |
 | Check formulas | [Formula Audit](#formula-audit) | Locked math definitions and validation commands |
 | Evaluate taxable-account impact | [Taxable Account Workflow](#taxable-account-workflow) | Estimated after-tax strategy comparison, tax lots, wash-sale checks, and TLH candidates |
+
+## Documentation Library
+
+These are the canonical entry points for users and maintainers. Start with the
+first two if you are new to the project.
+
+| Doc | Audience | Purpose |
+| --- | --- | --- |
+| [Setup Guide](docs/setup_guide.md) | New users and maintainers | Step-by-step installation, local environment setup, dashboard launch, Git basics, and troubleshooting. |
+| [User Guide](docs/user_guide.md) | Operators and reviewers | Full workflow guide for daily monitoring, strategy research, paper tracking, live logging, taxable review, and periodic review. |
+| [FAQ](docs/faq.md) | Everyone | Comprehensive answers to common questions about safety, workflow, metrics, risk, data, ML, taxes, and governance. |
+| [Technical Explainer](docs/technical_explainer.md) | Engineers, data scientists, and AI agents | Behind-the-scenes explanation of architecture, storage, models, risk logic, experiments, monitoring, and extension rules. |
+| [Learnings](docs/learnings.md) | Strategy reviewers | Research takeaways from experiment batches, including what worked, what failed, and what should be pruned or expanded. |
+| [Documentation Index](docs/doc_index.md) | Maintainers | Current docs map, archived docs, and maintenance rules. |
 
 ## System At A Glance
 
