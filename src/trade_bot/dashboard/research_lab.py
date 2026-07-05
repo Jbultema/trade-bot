@@ -31,11 +31,16 @@ from trade_bot.DEFAULTS import (
     DEFAULT_ML_DIAGNOSTICS_DIR,
     DEFAULT_OPERABILITY_MATERIAL_TRADE_TURNOVER_THRESHOLD,
     DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
+    DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS,
+    DEFAULT_OUTCOME_BOOTSTRAP_PATHS,
+    DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED,
+    DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_HORIZON_YEARS,
     DEFAULT_OUTCOME_PEER_CURVE_METRIC_LIMIT,
     DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
+    DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR,
     DEFAULT_PERFORMANCE_WINDOW,
     DEFAULT_PERFORMANCE_WINDOWS,
     DEFAULT_REFERENCE_BASELINE_STRATEGIES,
@@ -89,9 +94,12 @@ from trade_bot.research.signal_evidence import (
     tag_scorecard_signal_families,
 )
 from trade_bot.research.strategy_outcome_utility import (
+    OutcomeBootstrapConfig,
     add_outcome_frontier_flags,
+    bootstrap_outcome_paths,
     drawdown_recovery_return,
     enrich_strategy_outcome_utility,
+    summarize_bootstrap_outcomes,
     terminal_wealth_from_cagr,
 )
 
@@ -1827,6 +1835,7 @@ def _render_outcome_frontier(
         return
 
     plot_frame = plot_frame.sort_values("growth_constrained_utility_score", ascending=False)
+    _render_outcome_planning_assumptions()
     fig = go.Figure()
     for tier, tier_frame in plot_frame.groupby("growth_utility_tier", dropna=False):
         fig.add_trace(
@@ -1977,6 +1986,104 @@ def _render_outcome_frontier(
     )
 
 
+def _render_outcome_planning_assumptions() -> None:
+    st.markdown("**Planning assumptions and model basis**")
+    assumption_cols = st.columns(5)
+    _helped_metric(
+        assumption_cols[0],
+        "Starting Account",
+        _format_currency(DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE),
+    )
+    _helped_metric(
+        assumption_cols[1],
+        "Annual Contribution",
+        _format_currency(DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION),
+    )
+    _helped_metric(
+        assumption_cols[2],
+        "Horizon",
+        f"{DEFAULT_OUTCOME_HORIZON_YEARS} years",
+    )
+    _helped_metric(
+        assumption_cols[3],
+        "Soft / Hard DD",
+        (
+            f"{abs(DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT):.0%} / "
+            f"{abs(DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT):.0%}"
+        ),
+    )
+    _helped_metric(
+        assumption_cols[4],
+        "Projection Mode",
+        "CAGR + bootstrap",
+    )
+    st.info(
+        "The frontier scorecard's 15Y Wealth card is deterministic planning math: historical "
+        "CAGR applied to the configured starting balance plus end-of-year contributions. The "
+        "selected-strategy section below adds a historical block-bootstrap simulation to show "
+        "sequence risk and drawdown-path uncertainty. These settings live in "
+        "`src/trade_bot/DEFAULTS.py`; after changing them, rerun the experiment/daily refresh "
+        "stack so scorecards and dashboard snapshots stay aligned."
+    )
+    with st.expander("Outcome assumption details", expanded=False):
+        st.markdown(
+            "**Model ladder:** deterministic CAGR is used for fast frontier scoring; historical "
+            "block bootstrap is used below for selected-strategy sequence risk; a future "
+            "regime-conditioned simulator should be promoted only after calibration, path, and "
+            "paper-forward validation show it improves decisions."
+        )
+        st.dataframe(
+            pd.DataFrame(
+                [
+                    {
+                        "setting": "starting_account_value",
+                        "current_value": _format_currency(DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE),
+                        "meaning": "Initial account value used for accumulation projections.",
+                        "change_location": "DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE in src/trade_bot/DEFAULTS.py",
+                    },
+                    {
+                        "setting": "annual_contribution",
+                        "current_value": _format_currency(DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION),
+                        "meaning": "Annual contribution added to the projection.",
+                        "change_location": "DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION in src/trade_bot/DEFAULTS.py",
+                    },
+                    {
+                        "setting": "contribution_timing",
+                        "current_value": DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
+                        "meaning": "Contribution timing assumed by deterministic and bootstrap projections.",
+                        "change_location": "DEFAULT_OUTCOME_CONTRIBUTION_TIMING documents the current policy.",
+                    },
+                    {
+                        "setting": "bootstrap_paths",
+                        "current_value": f"{DEFAULT_OUTCOME_BOOTSTRAP_PATHS:,}",
+                        "meaning": "Number of historical return-sequence simulations shown for the selected strategy.",
+                        "change_location": "DEFAULT_OUTCOME_BOOTSTRAP_PATHS in src/trade_bot/DEFAULTS.py",
+                    },
+                    {
+                        "setting": "bootstrap_block_days",
+                        "current_value": f"{DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS} trading days",
+                        "meaning": "Block size used when resampling historical daily returns.",
+                        "change_location": "DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS in src/trade_bot/DEFAULTS.py",
+                    },
+                    {
+                        "setting": "trading_days_per_year",
+                        "current_value": f"{DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR}",
+                        "meaning": "Annualization calendar used by the sequence-aware simulation.",
+                        "change_location": "DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR in src/trade_bot/DEFAULTS.py",
+                    },
+                    {
+                        "setting": "bootstrap_random_seed",
+                        "current_value": f"{DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED}",
+                        "meaning": "Seed used so the dashboard simulation is reproducible across reloads.",
+                        "change_location": "DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED in src/trade_bot/DEFAULTS.py",
+                    },
+                ]
+            ),
+            hide_index=True,
+            use_container_width=True,
+        )
+
+
 def _outcome_marker_sizes(frame: pd.DataFrame) -> pd.Series:
     wealth_column = f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y"
     if wealth_column not in frame:
@@ -2110,6 +2217,7 @@ def _render_outcome_decision_cards(
     _helped_metric(cols[4], "Ulcer Index", _format_percent(pain_index))
 
     st.info(_outcome_decision_helper(row, extra_spy=extra_spy, extra_qqq=extra_qqq))
+    _render_outcome_bootstrap_summary(result, deterministic_wealth=wealth)
 
     benchmark_values = _outcome_benchmark_metric_values(baseline_run, experiment_scorecards)
     context = _outcome_selected_benchmark_context(
@@ -2207,6 +2315,86 @@ def _outcome_selected_benchmark_context(
             }
         )
     return pd.DataFrame(rows)
+
+
+def _render_outcome_bootstrap_summary(
+    result: BacktestResult | None,
+    *,
+    deterministic_wealth: float | None,
+) -> None:
+    if result is None or result.equity.empty:
+        st.warning(
+            "Sequence-aware projection is not available because the selected strategy could not "
+            "be reconstructed from the loaded snapshot."
+        )
+        return
+    daily_returns = result.equity.pct_change().replace([float("inf"), float("-inf")], pd.NA)
+    config = OutcomeBootstrapConfig()
+    paths = bootstrap_outcome_paths(daily_returns, config=config)
+    summary = summarize_bootstrap_outcomes(paths)
+    if int(summary.get("paths") or 0) == 0:
+        st.warning(
+            "Sequence-aware projection is not available because the selected strategy has too few "
+            "usable daily returns."
+        )
+        return
+
+    st.markdown("**Sequence-aware outcome simulation**")
+    st.caption(
+        "Historical block bootstrap of the selected strategy's daily returns. This keeps sampled "
+        "return sequences and drawdown behavior instead of assuming one smooth CAGR. It is not yet "
+        "a regime-conditioned Monte Carlo forecast."
+    )
+    cols = st.columns(5)
+    _helped_metric(cols[0], "Bootstrap P10 Wealth", _format_currency(summary["terminal_wealth_p10"]))
+    _helped_metric(cols[1], "Bootstrap Median", _format_currency(summary["terminal_wealth_p50"]))
+    _helped_metric(cols[2], "Bootstrap P90 Wealth", _format_currency(summary["terminal_wealth_p90"]))
+    _helped_metric(cols[3], "Median Sim DD", _format_percent(summary["max_drawdown_p50"]))
+    _helped_metric(cols[4], "Median Sim Ulcer", _format_percent(summary["ulcer_index_p50"]))
+
+    deterministic_value = _safe_float(deterministic_wealth)
+    median_value = _safe_float(summary.get("terminal_wealth_p50"))
+    if deterministic_value is not None and median_value is not None:
+        difference = median_value - deterministic_value
+        st.caption(
+            "Bootstrap median minus deterministic CAGR projection: "
+            f"{_format_currency(difference)}. Large gaps indicate meaningful sequence risk."
+        )
+
+    with st.expander("Simulation settings and sample distribution", expanded=False):
+        st.write(
+            "Current settings: "
+            f"{config.paths:,} paths, {config.block_days}-trading-day blocks, "
+            f"{config.horizon_years}-year horizon, "
+            f"{_format_currency(config.starting_account_value)} starting balance, "
+            f"{_format_currency(config.annual_contribution)} end-of-year contribution."
+        )
+        st.write(
+            "Next modeling step: condition return-path sampling on current scenario/regime "
+            "probabilities, estimate regime transition paths, and evaluate strategy-level "
+            "drawdown, contribution, and re-entry behavior across those simulated states. That "
+            "should be tested against historical walk-forward and paper-forward evidence before "
+            "it affects monitoring priority."
+        )
+        fig = go.Figure(
+            go.Histogram(
+                x=paths["terminal_wealth"],
+                nbinsx=40,
+                marker={"color": "#0f766e", "line": {"color": "#0f172a", "width": 0.5}},
+                hovertemplate="Terminal wealth %{x:$,.0f}<br>Paths %{y}<extra></extra>",
+            )
+        )
+        fig.update_layout(
+            height=260,
+            xaxis_title="Simulated terminal wealth",
+            yaxis_title="Path count",
+            margin={"l": 20, "r": 20, "t": 20, "b": 20},
+        )
+        st.plotly_chart(fig, use_container_width=True)
+        _render_metric_dataframe(
+            _display_metrics(paths.describe(percentiles=[0.1, 0.5, 0.9]).reset_index()),
+            hide_index=True,
+        )
 
 
 def _outcome_metric_peer_context(

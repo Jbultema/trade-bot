@@ -820,6 +820,38 @@ experiment-selection and paper-monitoring priority layer. It does not replace
 promotion score, robustness score, walk-forward diagnostics, regime diagnostics,
 or human review.
 
+Sequence-aware outcome simulation:
+
+```text
+For each selected strategy:
+1. compute daily strategy returns from the reconstructed equity curve,
+2. sample historical daily returns in fixed-size blocks,
+3. compound each sampled path for the configured planning horizon,
+4. add the configured contribution at each year-end,
+5. compute terminal wealth, max drawdown, and Ulcer Index for each path,
+6. report distribution summaries such as P10, median, and P90 terminal wealth.
+```
+
+The block bootstrap is a stronger planning diagnostic than deterministic CAGR
+because it exposes sequence risk: two strategies with similar CAGR can produce
+different lived paths if one has deeper or more persistent drawdowns. It is not
+yet a regime-conditioned Monte Carlo forecast. It resamples historical strategy
+returns and can miss future regimes that are not represented in the historical
+path.
+
+The intended modeling ladder is:
+
+```text
+deterministic CAGR projection
+-> historical block-bootstrap sequence-risk projection
+-> regime-conditioned forward simulation using scenario probabilities,
+   regime transition assumptions, and strategy allocation rules.
+```
+
+The final regime-conditioned layer should remain research-only until calibration,
+walk-forward behavior, and paper-forward monitoring show that it improves
+selection, sizing, re-entry, or drawdown control.
+
 Promotion decisions:
 
 ```text

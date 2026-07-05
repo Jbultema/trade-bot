@@ -8,6 +8,9 @@ import pandas as pd
 
 from trade_bot.DEFAULTS import (
     DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
+    DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS,
+    DEFAULT_OUTCOME_BOOTSTRAP_PATHS,
+    DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED,
     DEFAULT_OUTCOME_CHURN_PENALTY_WEIGHT,
     DEFAULT_OUTCOME_FLOOR_CAGR,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
@@ -19,6 +22,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
     DEFAULT_OUTCOME_TARGET_CAGR,
+    DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR,
 )
 
 
@@ -36,6 +40,17 @@ class StrategyOutcomeUtilityConfig:
     min_left_tail_regime_return: float = DEFAULT_OUTCOME_MIN_LEFT_TAIL_REGIME_RETURN
     overfit_penalty_weight: float = DEFAULT_OUTCOME_OVERFIT_PENALTY_WEIGHT
     churn_penalty_weight: float = DEFAULT_OUTCOME_CHURN_PENALTY_WEIGHT
+
+
+@dataclass(frozen=True)
+class OutcomeBootstrapConfig:
+    horizon_years: int = DEFAULT_OUTCOME_HORIZON_YEARS
+    starting_account_value: float = DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE
+    annual_contribution: float = DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION
+    trading_days_per_year: int = DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR
+    paths: int = DEFAULT_OUTCOME_BOOTSTRAP_PATHS
+    block_days: int = DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS
+    random_seed: int = DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED
 
 
 def enrich_strategy_outcome_utility(
@@ -158,6 +173,86 @@ def terminal_wealth_from_cagr(
         non_zero
     ]
     return starting_wealth + annual_contribution * annuity_factor
+
+
+def bootstrap_outcome_paths(
+    daily_returns: pd.Series | np.ndarray,
+    *,
+    config: OutcomeBootstrapConfig | None = None,
+) -> pd.DataFrame:
+    """Build sequence-aware terminal wealth samples from historical daily returns.
+
+    This is a block bootstrap over the realized strategy return path. It is more
+    informative than applying one CAGR forever because it preserves sampled
+    drawdown and volatility sequences, but it is still historical resampling, not
+    a forward-looking regime simulation.
+    """
+
+    cfg = config or OutcomeBootstrapConfig()
+    returns = _clean_daily_returns(daily_returns)
+    if returns.size == 0 or cfg.paths <= 0 or cfg.horizon_years <= 0:
+        return pd.DataFrame(columns=["terminal_wealth", "max_drawdown", "ulcer_index"])
+
+    total_days = int(cfg.horizon_years * cfg.trading_days_per_year)
+    if total_days <= 0:
+        return pd.DataFrame(columns=["terminal_wealth", "max_drawdown", "ulcer_index"])
+
+    sampled_returns = _sample_block_bootstrap_returns(
+        returns,
+        paths=cfg.paths,
+        total_days=total_days,
+        block_days=cfg.block_days,
+        random_seed=cfg.random_seed,
+    )
+    wealth = np.full(cfg.paths, float(cfg.starting_account_value), dtype=float)
+    peak = wealth.copy()
+    max_drawdown = np.zeros(cfg.paths, dtype=float)
+    drawdown_square_sum = np.zeros(cfg.paths, dtype=float)
+
+    for day_idx in range(total_days):
+        wealth *= 1.0 + sampled_returns[:, day_idx]
+        if (day_idx + 1) % cfg.trading_days_per_year == 0:
+            wealth += float(cfg.annual_contribution)
+        peak = np.maximum(peak, wealth)
+        current_drawdown = (
+            np.divide(wealth, peak, out=np.ones_like(wealth), where=peak != 0.0) - 1.0
+        )
+        current_drawdown = np.minimum(current_drawdown, 0.0)
+        max_drawdown = np.minimum(max_drawdown, current_drawdown)
+        drawdown_square_sum += current_drawdown**2
+
+    return pd.DataFrame(
+        {
+            "terminal_wealth": wealth,
+            "max_drawdown": max_drawdown,
+            "ulcer_index": np.sqrt(drawdown_square_sum / float(total_days)),
+        }
+    )
+
+
+def summarize_bootstrap_outcomes(paths: pd.DataFrame) -> dict[str, float | int | None]:
+    if paths.empty:
+        return {
+            "paths": 0,
+            "terminal_wealth_p10": None,
+            "terminal_wealth_p50": None,
+            "terminal_wealth_p90": None,
+            "max_drawdown_p50": None,
+            "max_drawdown_p10": None,
+            "ulcer_index_p50": None,
+        }
+    terminal = pd.to_numeric(paths["terminal_wealth"], errors="coerce").dropna()
+    drawdown_values = pd.to_numeric(paths["max_drawdown"], errors="coerce").dropna()
+    ulcer_values = pd.to_numeric(paths["ulcer_index"], errors="coerce").dropna()
+    return {
+        "paths": int(paths.shape[0]),
+        "terminal_wealth_p10": _quantile_or_none(terminal, 0.10),
+        "terminal_wealth_p50": _quantile_or_none(terminal, 0.50),
+        "terminal_wealth_p90": _quantile_or_none(terminal, 0.90),
+        "max_drawdown_p50": _quantile_or_none(drawdown_values, 0.50),
+        "max_drawdown_p10": _quantile_or_none(drawdown_values, 0.10),
+        "ulcer_index_p50": _quantile_or_none(ulcer_values, 0.50),
+    }
 
 
 def drawdown_recovery_return(max_drawdown: pd.Series | float) -> pd.Series:
@@ -323,6 +418,37 @@ def _as_series(value: pd.Series | float) -> pd.Series:
     if isinstance(value, pd.Series):
         return value
     return pd.Series([cast(float, value)], dtype=float)
+
+
+def _clean_daily_returns(daily_returns: pd.Series | np.ndarray) -> np.ndarray:
+    values = pd.Series(np.asarray(daily_returns, dtype=float).reshape(-1))
+    values = values.replace([np.inf, -np.inf], np.nan).dropna()
+    values = values.clip(lower=-0.95, upper=1.0)
+    return values.to_numpy(dtype=float)
+
+
+def _sample_block_bootstrap_returns(
+    returns: np.ndarray,
+    *,
+    paths: int,
+    total_days: int,
+    block_days: int,
+    random_seed: int,
+) -> np.ndarray:
+    block = max(1, min(int(block_days), int(returns.size)))
+    blocks_needed = int(np.ceil(total_days / block))
+    max_start = max(int(returns.size - block), 0)
+    rng = np.random.default_rng(random_seed)
+    starts = rng.integers(0, max_start + 1, size=(paths, blocks_needed))
+    offsets = np.arange(block)
+    sampled = returns[starts[..., None] + offsets].reshape(paths, blocks_needed * block)
+    return sampled[:, :total_days]
+
+
+def _quantile_or_none(values: pd.Series, quantile: float) -> float | None:
+    if values.empty:
+        return None
+    return float(values.quantile(quantile))
 
 
 def _optional_float(value: object) -> float | None:

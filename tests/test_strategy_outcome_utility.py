@@ -4,10 +4,13 @@ import pandas as pd
 import pytest
 
 from trade_bot.research.strategy_outcome_utility import (
+    OutcomeBootstrapConfig,
+    bootstrap_outcome_paths,
     drawdown_hard_penalty,
     drawdown_recovery_return,
     drawdown_soft_penalty,
     enrich_strategy_outcome_utility,
+    summarize_bootstrap_outcomes,
     terminal_wealth_from_cagr,
 )
 
@@ -21,6 +24,47 @@ def test_terminal_wealth_includes_end_of_year_contributions() -> None:
     )
 
     assert float(wealth.iloc[0]) == pytest.approx(142.0)
+
+
+def test_bootstrap_outcome_paths_include_end_of_year_contributions() -> None:
+    paths = bootstrap_outcome_paths(
+        pd.Series([0.0, 0.0, 0.0, 0.0]),
+        config=OutcomeBootstrapConfig(
+            horizon_years=2,
+            starting_account_value=100.0,
+            annual_contribution=10.0,
+            trading_days_per_year=2,
+            paths=3,
+            block_days=1,
+            random_seed=7,
+        ),
+    )
+    summary = summarize_bootstrap_outcomes(paths)
+
+    assert paths["terminal_wealth"].tolist() == pytest.approx([120.0, 120.0, 120.0])
+    assert paths["max_drawdown"].tolist() == pytest.approx([0.0, 0.0, 0.0])
+    assert paths["ulcer_index"].tolist() == pytest.approx([0.0, 0.0, 0.0])
+    assert summary["paths"] == 3
+    assert summary["terminal_wealth_p50"] == pytest.approx(120.0)
+
+
+def test_bootstrap_outcome_paths_capture_sequence_drawdown() -> None:
+    paths = bootstrap_outcome_paths(
+        pd.Series([-0.10, 0.02, 0.03, 0.01]),
+        config=OutcomeBootstrapConfig(
+            horizon_years=1,
+            starting_account_value=100.0,
+            annual_contribution=0.0,
+            trading_days_per_year=4,
+            paths=20,
+            block_days=2,
+            random_seed=11,
+        ),
+    )
+
+    assert paths["terminal_wealth"].notna().all()
+    assert paths["max_drawdown"].min() < 0.0
+    assert paths["ulcer_index"].max() > 0.0
 
 
 def test_drawdown_recovery_math() -> None:

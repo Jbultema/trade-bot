@@ -272,6 +272,22 @@ Outcome Frontier plots CAGR versus max drawdown and overlays terminal wealth,
 utility tiers, and Pareto-efficient candidates. It asks whether extra CAGR is
 worth the extra drawdown for a configured accumulation horizon.
 
+### Is the 15-year wealth output a Monte Carlo forecast?
+
+The headline 15-year wealth card is deterministic planning math: historical
+CAGR applied to the configured starting account and annual contributions. The
+selected-strategy section adds a historical block-bootstrap simulation that
+resamples daily return sequences and reports P10, median, and P90 terminal
+wealth plus simulated drawdown pain. That is better for sequence risk, but it
+is still not a calibrated regime-conditioned forecast.
+
+### Where do I change the 15-year outcome assumptions?
+
+The defaults live in `src/trade_bot/DEFAULTS.py`: planning horizon, starting
+account value, annual contribution, drawdown bands, bootstrap path count, and
+bootstrap block length. After changing them, rerun the daily/experiment refresh
+so stored scorecards and dashboard snapshots use the same assumptions.
+
 ### What is growth-constrained utility?
 
 It is an outcome score that rewards projected 15-year wealth with contributions

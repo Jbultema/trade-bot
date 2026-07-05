@@ -342,6 +342,19 @@ It computes:
 This explicitly encodes the insight that higher CAGR with tolerable drawdown may
 be better than low-drawdown undergrowth for a long accumulation horizon.
 
+The dashboard also exposes a sequence-aware simulation for the selected
+candidate. That simulation uses a historical block bootstrap over daily strategy
+returns, then applies the same starting account, annual contribution, and
+horizon settings. It reports P10/median/P90 terminal wealth plus simulated
+drawdown and Ulcer Index summaries. This is stronger than the deterministic
+CAGR card because it shows path risk, but it is still a historical-resampling
+diagnostic. It is not yet a regime-conditioned Monte Carlo engine.
+
+The intended next modeling layer is a forward simulator that conditions path
+sampling on current regime probabilities, transition assumptions, and strategy
+allocation behavior. That engine should be validated separately before it
+influences strategy ranking or trade recommendations.
+
 ## ML Diagnostics
 
 ML lives under `src/trade_bot/ml` and `research/future_state_ml.py`.

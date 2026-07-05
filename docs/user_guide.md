@@ -28,20 +28,77 @@ Research evidence -> paper monitoring -> recommendation ticket -> execution log 
 
 Do not skip paper monitoring. Do not treat a backtest as live proof.
 
+## Dashboard Controls
+
+Most normal operation can be done from the dashboard UI. The left sidebar is the
+runtime control panel; the main page is the decision and research surface; the
+right reference rail is the glossary and quick-help surface.
+
+### Left Sidebar
+
+Use the left sidebar for regular refresh and runtime controls.
+
+| Control | Use It For | Notes |
+| --- | --- | --- |
+| Run source: **Latest snapshot (fast)** | Normal dashboard use | Reads the latest completed snapshot and keeps the app snappy. |
+| Run source: **Live pipeline** | Debugging or ad hoc local checks | Recomputes in-session and can be slower. Do not use this as the default daily workflow. |
+| **Run Full Daily Update** | Normal one-click refresh | Queues the full daily stack: market data, macro data, news, snapshot, warehouse migration, and paper valuation. |
+| Local paths | Changing config/run-store inputs | Most users should leave these alone after setup. |
+| Advanced refresh options | Partial snapshot rebuilds | Use only when intentionally refreshing one input layer or debugging. |
+| Update jobs | Checking background job status | After a queued job finishes, refresh the browser to load the new snapshot. |
+| Show quick reference rail | Showing/hiding the right help rail | Turn it off when you need more horizontal chart/table space. |
+
+### Right Reference Rail
+
+The right rail is a searchable quick-reference system for:
+
+- metrics,
+- ticket fields,
+- workflow terms,
+- ticker symbols,
+- dashboard concepts.
+
+Use it when a card, table column, or chart label is unfamiliar. It explains what
+the term means, how it is calculated, how to read it, and what can go wrong.
+
+### Main Page
+
+The main page is organized as:
+
+1. Header and freshness strip.
+2. Action Headline.
+3. Operating Brief.
+4. Book Alignment.
+5. Insight Workbench.
+
+The first four sections answer "what do I need to do today?" The Insight
+Workbench answers "why, what evidence supports it, and what should I inspect?"
+
 ## The Daily Operating Workflow
 
 Use this workflow on market days or whenever you want a fresh read.
 
 ### Step 1: Run The Daily Update
 
-From the repo root:
+Preferred dashboard workflow:
+
+1. Open the dashboard.
+2. In the left sidebar, keep **Run source** set to **Latest snapshot (fast)**.
+3. Click **Run Full Daily Update**.
+4. Open **Update jobs** and wait until the queued job completes.
+5. Refresh the browser so the app loads the new snapshot.
+
+The sidebar button refreshes market data, macro data, news, the snapshot,
+warehouse tables, and active paper-monitoring valuations.
+
+CLI equivalent from the repo root:
 
 ```bash
 poetry run trade-bot run-daily-update
 ```
 
-This builds a new snapshot, refreshes the warehouse, writes a static report, and
-updates paper valuation rows for active monitoring windows.
+Use the CLI when you are automating the workflow, running the app headless, or
+debugging outside Streamlit.
 
 Use cached inputs only for a faster local smoke check:
 
@@ -49,7 +106,9 @@ Use cached inputs only for a faster local smoke check:
 poetry run trade-bot run-daily-update --cached-data --cached-macro --cached-news
 ```
 
-### Step 2: Open The Dashboard
+### Step 2: Open Or Refresh The Dashboard
+
+If the dashboard is not already running, start it:
 
 ```bash
 poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
@@ -61,6 +120,9 @@ If port 8501 is busy:
 poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8502
 ```
 
+If the dashboard is already open and the sidebar job has completed, refresh the
+browser tab.
+
 ### Step 3: Confirm Freshness
 
 At the top of the app, read the latest update strip. Confirm:
@@ -70,7 +132,8 @@ At the top of the app, read the latest update strip. Confirm:
 - risk state,
 - whether the loaded view is a latest snapshot or live pipeline.
 
-If the timestamp is stale, rerun the daily update.
+If the timestamp is stale, use the sidebar **Run Full Daily Update** button or
+run the CLI command again.
 
 ### Step 4: Read The Action Headline
 
@@ -183,10 +246,19 @@ Recommended flow:
 
 1. Leaderboard: find high-scoring candidates.
 2. Curated Shelf: see candidates chosen for diversity and operability.
-3. Outcome Frontier: compare CAGR versus drawdown and projected terminal wealth.
+3. Outcome Frontier: compare CAGR versus drawdown, projected terminal wealth,
+   and sequence-aware simulated outcome ranges.
 4. Family Map: understand whether many strategies are the same bet.
 5. Signal Evidence: see which signal families helped historically.
 6. Candidate Details: inspect one strategy before monitoring.
+
+Outcome Frontier uses the configured accumulation assumptions from
+`src/trade_bot/DEFAULTS.py`: starting account value, annual contribution,
+planning horizon, and soft/hard drawdown bands. The headline 15-year wealth
+metric is deterministic CAGR planning math. The selected-strategy simulation
+below it uses historical block bootstrap paths to show terminal-wealth ranges
+and drawdown-path risk. Treat both as research decision support, not a promise
+of future retirement wealth.
 
 ### Monitoring
 
@@ -316,7 +388,8 @@ research idea until runtime support is added.
 8. Set account label.
 9. Set capital base.
 10. Click the start/update button.
-11. Run paper valuation after the next snapshot.
+11. After the next full daily update, confirm the window receives a valuation
+    row. The sidebar **Run Full Daily Update** button includes paper valuation.
 
 ### From The CLI
 
@@ -351,7 +424,8 @@ After the daily update:
 5. Review whether any strategy is stale, lagging, or drifting.
 6. Do not promote or demote on one noisy day unless the original thesis is broken.
 
-Useful CLI:
+The normal path is the sidebar **Run Full Daily Update** button. Useful CLI
+commands when you want to inspect state outside the app:
 
 ```bash
 poetry run trade-bot list-monitoring-windows
