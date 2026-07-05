@@ -94,6 +94,16 @@ apparently different candidates were largely variants of growth/AI beta plus
 defensive timing. That does not make them useless, but it reduces the value of
 monitoring too many similar challengers.
 
+### 6. Forward simulation needs regimes, not only CAGR
+
+The Outcome Frontier started as deterministic accumulation math, then added
+block-bootstrap sequence risk. The current forward-simulation layer goes one
+step further: it conditions path sampling on today's scenario probabilities and
+historical regime-labeled returns. That gives a more realistic planning read
+than a single CAGR line because it can show how much of the simulated future is
+risk-off, transition, fragile risk-on, or risk-on. It remains evidence support,
+not an automatic trade engine.
+
 ## What Was Less Useful
 
 ### 1. Overly defensive low-CAGR systems

@@ -25,4 +25,8 @@ def test_metric_guide_can_filter_and_search() -> None:
 def test_metric_help_resolves_outcome_simulation_terms() -> None:
     assert "Outcome Frontier" in (metric_help("Starting Account") or "")
     assert "Sequence-aware wealth distribution" in (metric_help("Bootstrap P10 Wealth") or "")
+    assert "scenario probabilities" in (metric_help("Forward Median") or "")
+    assert "regime-conditioned forward simulation" in (metric_help("Median Forward DD") or "")
+    assert "hard drawdown limit" in (metric_help("Severe DD Prob") or "")
+    assert "planned contributions" in (metric_help("Capital Shortfall Prob") or "")
     assert metric_detail("Median Sim Ulcer") is not None

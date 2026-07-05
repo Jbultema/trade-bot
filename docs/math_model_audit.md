@@ -834,10 +834,26 @@ For each selected strategy:
 
 The block bootstrap is a stronger planning diagnostic than deterministic CAGR
 because it exposes sequence risk: two strategies with similar CAGR can produce
-different lived paths if one has deeper or more persistent drawdowns. It is not
-yet a regime-conditioned Monte Carlo forecast. It resamples historical strategy
-returns and can miss future regimes that are not represented in the historical
-path.
+different lived paths if one has deeper or more persistent drawdowns. It
+resamples historical strategy returns and can miss future regimes that are not
+represented in the historical path.
+
+Regime-conditioned forward simulation:
+
+```text
+For each selected strategy:
+1. compute daily returns from the reconstructed equity curve,
+2. label historical days into risk_off, transition, risk_on_fragile, or risk_on,
+3. aggregate today's scenario rollup into the same broad regime buckets,
+4. blend historical regime frequencies with today's scenario probabilities
+   for the starting state,
+5. blend empirical regime transition frequencies with today's scenario
+   probabilities for forward transitions,
+6. sample historical return blocks from the active simulated regime,
+7. add configured contributions at each year-end,
+8. compute terminal wealth, max drawdown, Ulcer Index, hard-drawdown breach
+   probability, capital-shortfall probability, and average regime mix.
+```
 
 The intended modeling ladder is:
 
@@ -848,9 +864,10 @@ deterministic CAGR projection
    regime transition assumptions, and strategy allocation rules.
 ```
 
-The final regime-conditioned layer should remain research-only until calibration,
-walk-forward behavior, and paper-forward monitoring show that it improves
-selection, sizing, re-entry, or drawdown control.
+The regime-conditioned layer is implemented as a planning and research lens. It
+should stay out of direct trade automation until calibration, walk-forward
+behavior, and paper-forward monitoring show that it improves selection, sizing,
+re-entry, or drawdown control.
 
 Promotion decisions:
 

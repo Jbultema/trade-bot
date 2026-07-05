@@ -308,7 +308,7 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
         plain_english="Sequence-aware wealth distribution from resampling the selected strategy's historical daily returns.",
         calculation="Block bootstrap daily returns for the configured horizon, add end-of-year contributions, and report terminal-wealth quantiles.",
         how_to_read="P10 is a worse-but-plausible sampled path, median is the center sampled path, and P90 is a better sampled path.",
-        caution="This is historical return-sequence resampling, not a regime-conditioned forecast and not proof the future distribution is known.",
+        caution="This is historical return-sequence resampling. Use the regime-conditioned simulation beside it when today's scenario map matters.",
         aliases=(
             "Bootstrap P10 Wealth",
             "Bootstrap Median",
@@ -333,6 +333,88 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
             "bootstrap_ulcer_index",
             "simulated_drawdown",
         ),
+    ),
+    MetricExplainer(
+        metric="Regime-Conditioned Forward Simulation",
+        category="Performance",
+        plain_english=(
+            "Forward planning simulation that blends current scenario probabilities with historical "
+            "regime-labeled return paths."
+        ),
+        calculation=(
+            "Label historical strategy returns into risk-off, transition, fragile risk-on, and risk-on "
+            "regimes; blend today's scenario probabilities with empirical regime transitions; sample "
+            "future paths with annual contributions."
+        ),
+        how_to_read=(
+            "Use it to see whether current scenarios materially widen the wealth and drawdown range "
+            "versus simple CAGR or bootstrap views."
+        ),
+        caution=(
+            "This is still scenario-conditioned historical simulation, not an oracle. Sparse regimes "
+            "and unseen future shocks can make realized outcomes worse."
+        ),
+        aliases=(
+            "Projection Mode",
+            "Forward P10 Wealth",
+            "Forward Median",
+            "Forward P90 Wealth",
+            "terminal_wealth_forward_p10",
+            "terminal_wealth_forward_p50",
+            "terminal_wealth_forward_p90",
+            "regime_forward_simulation",
+        ),
+    ),
+    MetricExplainer(
+        metric="Severe Drawdown Probability",
+        category="Performance",
+        plain_english="Share of forward simulation paths that breach the configured hard drawdown limit.",
+        calculation="Count simulated paths with max drawdown at or below the hard drawdown limit, divided by all paths.",
+        how_to_read="Lower is better. A non-zero value means the selected strategy still has paths that violate the pain budget.",
+        caution="The hard drawdown limit is configurable and the probability is only as good as the historical regime library.",
+        aliases=("Severe DD Prob", "severe_drawdown_probability", "hard_drawdown_breach_rate"),
+    ),
+    MetricExplainer(
+        metric="Forward Simulated Drawdown",
+        category="Performance",
+        plain_english="Median max drawdown across the regime-conditioned forward simulation paths.",
+        calculation=(
+            "For each simulated path, compute the worst peak-to-trough loss; then report the "
+            "median path's max drawdown."
+        ),
+        how_to_read="Less negative is better. Compare this with historical max drawdown and bootstrap drawdown.",
+        caution=(
+            "It is conditioned on the empirical regime library and today's scenario blend, so it can "
+            "understate drawdowns from regimes not present in the historical sample."
+        ),
+        aliases=("Median Forward DD", "forward_median_drawdown", "max_drawdown_p50"),
+    ),
+    MetricExplainer(
+        metric="Capital Shortfall Probability",
+        category="Performance",
+        plain_english=(
+            "Share of simulated paths that finish below the sum of starting capital plus planned "
+            "contributions."
+        ),
+        calculation=(
+            "Count simulated terminal wealth values below starting balance plus total planned "
+            "contributions, divided by all paths."
+        ),
+        how_to_read=(
+            "This is a practical bad-outcome flag: it asks whether compounding failed to outrun "
+            "the money put into the account."
+        ),
+        caution="It does not include inflation or taxes unless a separate taxable or real-return layer is used.",
+        aliases=("Capital Shortfall Prob", "capital_impairment_probability", "capital_shortfall"),
+    ),
+    MetricExplainer(
+        metric="Forward Regime Mix",
+        category="Performance",
+        plain_english="Average share of simulated path days spent in each broad regime.",
+        calculation="For each path, count sampled days by regime; then summarize the regime shares across paths.",
+        how_to_read="High risk-off or transition shares mean the simulation is stress-testing more defensive or unstable futures.",
+        caution="Regime labels are coarse and empirical; they are useful for diagnostics, not precise macro classification.",
+        aliases=("mean_risk_off_share", "mean_transition_share", "Path Regime Share", "regime_mix"),
     ),
     MetricExplainer(
         metric="Extra Wealth Versus Benchmark",

@@ -274,19 +274,27 @@ worth the extra drawdown for a configured accumulation horizon.
 
 ### Is the 15-year wealth output a Monte Carlo forecast?
 
-The headline 15-year wealth card is deterministic planning math: historical
-CAGR applied to the configured starting account and annual contributions. The
-selected-strategy section adds a historical block-bootstrap simulation that
-resamples daily return sequences and reports P10, median, and P90 terminal
-wealth plus simulated drawdown pain. That is better for sequence risk, but it
-is still not a calibrated regime-conditioned forecast.
+The app now shows three layers:
+
+1. deterministic planning math: historical CAGR applied to the configured
+   starting account and annual contributions;
+2. historical block bootstrap: resampled daily return sequences that report
+   P10, median, and P90 terminal wealth plus simulated drawdown pain;
+3. regime-conditioned forward simulation: historical strategy returns labeled
+   into broad regimes, blended with today's scenario probabilities and empirical
+   regime transitions.
+
+The third layer is the muscular forward-looking planning engine, but it is still
+scenario-conditioned historical simulation. It is not a guarantee, not a broker
+forecast, and not an automatic trade instruction.
 
 ### Where do I change the 15-year outcome assumptions?
 
 The defaults live in `src/trade_bot/DEFAULTS.py`: planning horizon, starting
 account value, annual contribution, drawdown bands, bootstrap path count, and
-bootstrap block length. After changing them, rerun the daily/experiment refresh
-so stored scorecards and dashboard snapshots use the same assumptions.
+bootstrap/forward-simulation settings. After changing them, rerun the
+daily/experiment refresh so stored scorecards and dashboard snapshots use the
+same assumptions.
 
 ### What is growth-constrained utility?
 

@@ -23,6 +23,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
     DEFAULT_OUTCOME_TARGET_CAGR,
     DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR,
+    DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
 )
 
 
@@ -31,6 +32,7 @@ class StrategyOutcomeUtilityConfig:
     horizon_years: int = DEFAULT_OUTCOME_HORIZON_YEARS
     starting_account_value: float = DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE
     annual_contribution: float = DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION
+    contribution_timing: str = DEFAULT_OUTCOME_CONTRIBUTION_TIMING
     soft_drawdown_limit: float = DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT
     hard_drawdown_limit: float = DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT
     floor_cagr: float = DEFAULT_OUTCOME_FLOOR_CAGR
@@ -47,6 +49,7 @@ class OutcomeBootstrapConfig:
     horizon_years: int = DEFAULT_OUTCOME_HORIZON_YEARS
     starting_account_value: float = DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE
     annual_contribution: float = DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION
+    contribution_timing: str = DEFAULT_OUTCOME_CONTRIBUTION_TIMING
     trading_days_per_year: int = DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR
     paths: int = DEFAULT_OUTCOME_BOOTSTRAP_PATHS
     block_days: int = DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS
@@ -76,6 +79,7 @@ def enrich_strategy_outcome_utility(
         years=cfg.horizon_years,
         starting_account_value=cfg.starting_account_value,
         annual_contribution=cfg.annual_contribution,
+        contribution_timing=cfg.contribution_timing,
     )
     output[f"terminal_wealth_{cfg.horizon_years}y"] = terminal_wealth
     output[f"terminal_wealth_with_contributions_{cfg.horizon_years}y"] = (
@@ -89,6 +93,7 @@ def enrich_strategy_outcome_utility(
             years=cfg.horizon_years,
             starting_account_value=cfg.starting_account_value,
             annual_contribution=cfg.annual_contribution,
+            contribution_timing=cfg.contribution_timing,
         )
         output[f"wealth_multiple_vs_{ticker}"] = (
             terminal_wealth_with_contributions
@@ -161,18 +166,69 @@ def terminal_wealth_from_cagr(
     years: int,
     starting_account_value: float,
     annual_contribution: float = 0.0,
+    contribution_timing: str = DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
 ) -> pd.Series:
     rates = _as_series(cagr).astype(float)
     growth_base = (1.0 + rates).clip(lower=0.0) ** float(years)
     starting_wealth = starting_account_value * growth_base
     if annual_contribution == 0.0:
         return starting_wealth
-    annuity_factor = pd.Series(float(years), index=rates.index, dtype=float)
-    non_zero = rates.abs() > 1e-12
-    annuity_factor.loc[non_zero] = ((1.0 + rates.loc[non_zero]) ** float(years) - 1.0) / rates.loc[
-        non_zero
-    ]
-    return starting_wealth + annual_contribution * annuity_factor
+    periods_per_year = contribution_periods_per_year(contribution_timing)
+    total_periods = int(years * periods_per_year)
+    periodic_contribution = float(annual_contribution) / float(periods_per_year)
+    period_rates = (1.0 + rates).clip(lower=0.0) ** (1.0 / float(periods_per_year)) - 1.0
+    annuity_factor = pd.Series(float(total_periods), index=rates.index, dtype=float)
+    non_zero = period_rates.abs() > 1e-12
+    annuity_factor.loc[non_zero] = (
+        ((1.0 + period_rates.loc[non_zero]) ** float(total_periods) - 1.0)
+        / period_rates.loc[non_zero]
+    )
+    return starting_wealth + periodic_contribution * annuity_factor
+
+
+def contribution_periods_per_year(contribution_timing: str) -> int:
+    """Return contribution events per year for the configured planning cadence."""
+
+    normalized = str(contribution_timing or "").strip().lower().replace("-", "_")
+    if normalized in {"monthly", "month", "end_of_month", "monthly_end"}:
+        return 12
+    if normalized in {"quarterly", "quarter", "end_of_quarter", "quarterly_end"}:
+        return 4
+    if normalized in {"end_of_year", "yearly", "annual", "annually", "year_end"}:
+        return 1
+    raise ValueError(f"Unsupported contribution timing: {contribution_timing!r}")
+
+
+def annual_contribution_schedule(
+    *,
+    annual_contribution: float,
+    trading_days_per_year: int,
+    contribution_timing: str = DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
+) -> dict[int, float]:
+    """Build a period-end contribution schedule keyed by day-of-year.
+
+    The schedule always sums to the configured annual contribution. When tests or
+    toy simulations use fewer trading days than contribution periods, multiple
+    contribution periods can land on the same simulated day.
+    """
+
+    if annual_contribution == 0.0 or trading_days_per_year <= 0:
+        return {}
+    periods = contribution_periods_per_year(contribution_timing)
+    contribution = float(annual_contribution) / float(periods)
+    schedule: dict[int, float] = {}
+    for period in range(1, periods + 1):
+        day = int(round(period * float(trading_days_per_year) / float(periods)))
+        day = min(max(day, 1), int(trading_days_per_year))
+        schedule[day] = schedule.get(day, 0.0) + contribution
+    return schedule
+
+
+def contribution_amount_for_day(day_number: int, schedule: dict[int, float], *, trading_days_per_year: int) -> float:
+    if not schedule or trading_days_per_year <= 0:
+        return 0.0
+    day_of_year = ((int(day_number) - 1) % int(trading_days_per_year)) + 1
+    return float(schedule.get(day_of_year, 0.0))
 
 
 def bootstrap_outcome_paths(
@@ -208,11 +264,21 @@ def bootstrap_outcome_paths(
     peak = wealth.copy()
     max_drawdown = np.zeros(cfg.paths, dtype=float)
     drawdown_square_sum = np.zeros(cfg.paths, dtype=float)
+    contribution_schedule = annual_contribution_schedule(
+        annual_contribution=cfg.annual_contribution,
+        trading_days_per_year=cfg.trading_days_per_year,
+        contribution_timing=cfg.contribution_timing,
+    )
 
     for day_idx in range(total_days):
         wealth *= 1.0 + sampled_returns[:, day_idx]
-        if (day_idx + 1) % cfg.trading_days_per_year == 0:
-            wealth += float(cfg.annual_contribution)
+        contribution = contribution_amount_for_day(
+            day_idx + 1,
+            contribution_schedule,
+            trading_days_per_year=cfg.trading_days_per_year,
+        )
+        if contribution:
+            wealth += contribution
         peak = np.maximum(peak, wealth)
         current_drawdown = (
             np.divide(wealth, peak, out=np.ones_like(wealth), where=peak != 0.0) - 1.0
@@ -321,12 +387,14 @@ def _wealth_score(
         years=config.horizon_years,
         starting_account_value=config.starting_account_value,
         annual_contribution=config.annual_contribution,
+        contribution_timing=config.contribution_timing,
     ).iloc[0]
     target_wealth = terminal_wealth_from_cagr(
         config.target_cagr,
         years=config.horizon_years,
         starting_account_value=config.starting_account_value,
         annual_contribution=config.annual_contribution,
+        contribution_timing=config.contribution_timing,
     ).iloc[0]
     denominator = max(float(np.log(target_wealth) - np.log(floor_wealth)), 1e-12)
     return (

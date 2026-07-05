@@ -16,37 +16,32 @@ Trade Bot turns market prices, macro series, curated news/events, scenario proba
 
 **This system does not place trades automatically.** It is decision support for human-reviewed, long-only swing and momentum research.
 
-## Quick Navigation
+## What This System Is
 
-| Need | Start Here | Result |
+Trade Bot is a local decision cockpit for researching and monitoring long-only trading systems. It is designed for human-executable swing and momentum decisions, not intraday trading or unattended execution.
+
+The app combines five core capabilities:
+
+- **Daily operating readout**: action headline, operating brief, book alignment, and current risk state.
+- **Strategy research lab**: experiment leaderboards, curated shelves, outcome frontier, candidate deep dives, robustness tests, and family maps.
+- **Forward simulation**: deterministic planning math, historical sequence/bootstrap risk, and regime-conditioned outcome paths for 15-year accumulation assumptions.
+- **Champion/challenger monitoring**: forward paper windows that track selected strategies from a chosen start date.
+- **Execution and account journal**: locked recommendation tickets, paper/live execution logging, taxable-account impact, and audit trails.
+
+The target user is someone who wants a rigorous local research system before risking capital. The intended workflow is paper-first, evidence-first, and review-before-action.
+
+## What It Helps You Decide
+
+| Question | Where To Look | Output |
 | --- | --- | --- |
-| Set up the project from scratch | [Setup Guide](docs/setup_guide.md) | Local Python, Poetry, VS Code, dashboard, data, and common troubleshooting |
-| Learn the full app workflow | [User Guide](docs/user_guide.md) | Daily monitoring, research, paper tracking, live logging, taxable review, and review cadence |
-| Answer common questions | [FAQ](docs/faq.md) | Plain-English answers for operation, metrics, risk, ML, data, taxes, and governance |
-| Understand the backend | [Technical Explainer](docs/technical_explainer.md) | How the data, models, risk engine, research loop, monitoring, and dashboard work |
-| Review research takeaways | [Learnings](docs/learnings.md) | What the experiments have taught us and what should be pruned or expanded |
-| Run the system today | [Daily Operating Loop](#daily-operating-loop) | Fresh snapshot, warehouse migration, paper valuation, dashboard readout |
-| Understand the dashboard | [Dashboard Map](#dashboard-map) | What each tab is for and where actions live |
-| Start paper monitoring | [Start Paper Monitoring From The Dashboard](#start-paper-monitoring-from-the-dashboard) | Champion/challenger/reference windows seeded with paper capital |
-| Inspect strategy evidence | [Research Lab](#research-lab) | Performance, allocation behavior, robustness, and mechanics |
-| Navigate backend docs | [Documentation Index](docs/doc_index.md) | Current docs, maintained research notes, and archived plans |
-| Extend ML research | [ML Research Framework](docs/ml_research_framework.md) | Targeted ML/Bayesian seams, cadence, and validation gates |
-| Check formulas | [Formula Audit](#formula-audit) | Locked math definitions and validation commands |
-| Evaluate taxable-account impact | [Taxable Account Workflow](#taxable-account-workflow) | Estimated after-tax strategy comparison, tax lots, wash-sale checks, and TLH candidates |
-
-## Documentation Library
-
-These are the canonical entry points for users and maintainers. Start with the
-first two if you are new to the project.
-
-| Doc | Audience | Purpose |
-| --- | --- | --- |
-| [Setup Guide](docs/setup_guide.md) | New users and maintainers | Step-by-step installation, local environment setup, dashboard launch, Git basics, and troubleshooting. |
-| [User Guide](docs/user_guide.md) | Operators and reviewers | Full workflow guide for daily monitoring, strategy research, paper tracking, live logging, taxable review, and periodic review. |
-| [FAQ](docs/faq.md) | Everyone | Comprehensive answers to common questions about safety, workflow, metrics, risk, data, ML, taxes, and governance. |
-| [Technical Explainer](docs/technical_explainer.md) | Engineers, data scientists, and AI agents | Behind-the-scenes explanation of architecture, storage, models, risk logic, experiments, monitoring, and extension rules. |
-| [Learnings](docs/learnings.md) | Strategy reviewers | Research takeaways from experiment batches, including what worked, what failed, and what should be pruned or expanded. |
-| [Documentation Index](docs/doc_index.md) | Maintainers | Current docs map, archived docs, and maintenance rules. |
+| Do I need to act today? | Operating Overview | Action headline, operating brief, book alignment, and next step |
+| Is the current paper book aligned? | Book Alignment | Target/current drift, recommended trade size, and ticket status |
+| Which strategies are worth trust? | Research Lab | Leaderboards, curated shelf, outcome frontier, validation, and candidate details |
+| What outcome range should I expect? | Outcome Frontier and forward simulations | Wealth range, drawdown burden, ulcer index, and scenario-conditioned risk |
+| Are paper strategies working forward? | Monitoring | Champion/challenger/reference valuations and drift status |
+| What changed in markets, macro, or news? | Daily brief, News & Macro, Driver Rotation | Current drivers, emerging/fading signals, and explanatory context |
+| What did I actually do? | Forward Test | Locked recommendations, executions, prices, sizes, and notes |
+| Would taxable brokerage change the answer? | Taxable Impact | Estimated tax drag, wash-sale watch, after-tax utility, and lot effects |
 
 ## System At A Glance
 
@@ -54,13 +49,15 @@ first two if you are new to the project.
 | --- | --- | --- |
 | Data intake | Pulls price, macro, news, and event inputs into local caches. | Reusable local data and current signal inputs |
 | Snapshot builder | Freezes the current market state, scenarios, recommendations, and research artifacts. | Fast dashboard snapshot |
+| Operating overview | Turns the latest snapshot into a human-readable action surface. | Action headline, operating brief, and book alignment |
 | Risk engine | Applies scenario-aware sizing, factor risk, stress, drawdown, and constraint logic. | Risk budget and target posture |
 | Research loop | Tests strategy ideas across windows, regimes, and walk-forward diagnostics. | Candidate scorecards and curated operating systems |
+| Outcome simulation | Projects selected strategies through deterministic, bootstrap, and regime-conditioned forward paths. | Wealth ranges, sequence risk, and scenario-conditioned drawdown risk |
 | Monitoring | Tracks champion/challenger/reference paper windows forward from a chosen start date. | Paper valuations and promotion/demotion evidence |
 | Forward Test | Locks recommendations and records paper/live executions for auditability. | Exact recommendation and trade journal trail |
 | Taxable lens | Reconstructs lots, realized gains/losses, wash-sale estimates, tax drag, and after-tax utility. | Estimated taxable-account scorecards and journal lot tables |
 
-## Operating Flow
+## How The System Works
 
 ```mermaid
 flowchart LR
@@ -71,9 +68,14 @@ flowchart LR
     E --> F[Human review]
     F --> G[Paper or live journal]
     B --> H[Research lab]
-    H --> I[Champion/challenger monitoring]
-    I --> E
+    H --> I[Outcome simulation and candidate diagnostics]
+    I --> J[Champion/challenger monitoring]
+    J --> E
 ```
+
+The daily path starts with a snapshot: prices, macro series, curated news/events, strategy state, and paper valuations are frozen into local storage. The dashboard reads that snapshot first so the app opens quickly. Heavier research and ML diagnostics run as batch jobs, then write artifacts the dashboard can inspect.
+
+The strategy path is separate from the daily action path. Strategy experiments are evaluated through backtests, rolling windows, walk-forward checks, regime tests, ablations, taxable-account estimates, and forward paper monitoring before they influence the operating surface.
 
 ## Operating Principles
 
@@ -83,6 +85,36 @@ flowchart LR
 - Backtests must be judged across full history, recent windows, regime shifts, and walk-forward holdouts.
 - Current-state recommendations and future-scenario research are related but separate systems.
 - Risk management, position sizing, and off-ramp behavior matter as much as return forecasts.
+
+## Start Here
+
+If you are new to the project, read from top to bottom through **Environment** and **Quick Start**, then open the dashboard and use the operating overview before digging into Research Lab.
+
+| Need | Start Here | Result |
+| --- | --- | --- |
+| Set up the project from scratch | [Setup Guide](docs/setup_guide.md) | Local Python, Poetry, VS Code, dashboard, data, and troubleshooting |
+| Learn the app workflow | [User Guide](docs/user_guide.md) | Daily monitoring, strategy research, paper tracking, live logging, taxable review, and review cadence |
+| Answer common questions | [FAQ](docs/faq.md) | Plain-English answers for operation, metrics, risk, ML, data, taxes, and governance |
+| Understand the backend | [Technical Explainer](docs/technical_explainer.md) | How storage, models, risk logic, experiments, monitoring, simulations, and dashboard surfaces work |
+| Review research takeaways | [Learnings](docs/learnings.md) | What the experiments have taught us and what should be pruned or expanded |
+| Run the system today | [Daily Operating Loop](#daily-operating-loop) | Fresh snapshot, warehouse migration, paper valuation, dashboard readout |
+| Understand the dashboard | [Dashboard Map](#dashboard-map) | What each section is for and where actions live |
+| Inspect strategy evidence | [Research Lab](#research-lab) | Performance, allocation behavior, robustness, factor attribution, and mechanics |
+| Start paper monitoring | [Start Paper Monitoring From The Dashboard](#start-paper-monitoring-from-the-dashboard) | Champion/challenger/reference windows seeded with paper capital |
+| Check formulas | [Formula Audit](#formula-audit) | Locked math definitions and validation commands |
+
+## Documentation Library
+
+These are the canonical entry points for users and maintainers. Start with the first two if you are new to the project.
+
+| Doc | Audience | Purpose |
+| --- | --- | --- |
+| [Setup Guide](docs/setup_guide.md) | New users and maintainers | Step-by-step installation, local environment setup, dashboard launch, Git basics, and troubleshooting. |
+| [User Guide](docs/user_guide.md) | Operators and reviewers | Full workflow guide for daily monitoring, strategy research, paper tracking, live logging, taxable review, and periodic review. |
+| [FAQ](docs/faq.md) | Everyone | Comprehensive answers to common questions about safety, workflow, metrics, risk, data, ML, taxes, and governance. |
+| [Technical Explainer](docs/technical_explainer.md) | Engineers, data scientists, and AI agents | Behind-the-scenes explanation of architecture, storage, models, risk logic, experiments, monitoring, simulations, and extension rules. |
+| [Learnings](docs/learnings.md) | Strategy reviewers | Research takeaways from experiment batches, including what worked, what failed, and what should be pruned or expanded. |
+| [Documentation Index](docs/doc_index.md) | Maintainers | Current docs map, archived docs, and maintenance rules. |
 
 ## Environment
 
@@ -197,7 +229,7 @@ Use this for strategy research, not same-day execution. The Research Lab is spli
 
 The upper aggregate section includes the overview, leaderboard, curated shelf, outcome frontier, signal evidence, family map, taxable impact, validation/QC, and manifests. Default aggregate views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants remain available through explicit all-approach filters.
 
-The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart. Outcome Frontier also shows the configured accumulation assumptions and a selected-strategy historical block-bootstrap simulation, so the 15-year wealth view is not just a naked CAGR comparison.
+The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart. Outcome Frontier also shows the configured accumulation assumptions, deterministic wealth math, historical block-bootstrap sequence risk, and a regime-conditioned forward simulation that blends current scenario probabilities with historical regime-return paths.
 
 The **ML Diagnostics** section is artifact-backed, not trained inside Streamlit. Refresh it with `poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard`. Use `--profile research` when you intentionally want the heavier 1W/1M/3M model sweep with additional estimators; it is slower and should be treated as a research batch, not a dashboard cold-start path.
 

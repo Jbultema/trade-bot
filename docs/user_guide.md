@@ -247,7 +247,8 @@ Recommended flow:
 1. Leaderboard: find high-scoring candidates.
 2. Curated Shelf: see candidates chosen for diversity and operability.
 3. Outcome Frontier: compare CAGR versus drawdown, projected terminal wealth,
-   and sequence-aware simulated outcome ranges.
+   sequence-aware simulated outcome ranges, and regime-conditioned forward
+   simulation ranges.
 4. Family Map: understand whether many strategies are the same bet.
 5. Signal Evidence: see which signal families helped historically.
 6. Candidate Details: inspect one strategy before monitoring.
@@ -256,9 +257,26 @@ Outcome Frontier uses the configured accumulation assumptions from
 `src/trade_bot/DEFAULTS.py`: starting account value, annual contribution,
 planning horizon, and soft/hard drawdown bands. The headline 15-year wealth
 metric is deterministic CAGR planning math. The selected-strategy simulation
-below it uses historical block bootstrap paths to show terminal-wealth ranges
-and drawdown-path risk. Treat both as research decision support, not a promise
-of future retirement wealth.
+below it first uses historical block bootstrap paths to show sequence risk, then
+uses the regime-conditioned forward simulation to blend current scenario
+probabilities with historical regime-labeled return paths. Treat all three
+layers as research decision support, not a promise of future retirement wealth.
+
+Use the forward simulation details when you want to ask:
+
+- What is the central 80% wealth range if today's scenario map matters?
+- How often do simulated paths breach the hard drawdown band?
+- Does the selected strategy depend on a future path that is mostly risk-on, or
+  can it survive meaningful risk-off/transition exposure?
+- Is the forward read meaningfully different from the deterministic CAGR card or
+  the block-bootstrap sequence-risk view?
+
+The key controls live in `DEFAULTS.py`: path count, block length, random seed,
+scenario weight for the starting regime, scenario weight for future regime
+transitions, and minimum historical observations required before a regime gets
+its own return library. After changing these, run the full daily update from the
+left sidebar or rerun the relevant CLI refresh so snapshots and scorecards stay
+internally consistent.
 
 ### Monitoring
 
