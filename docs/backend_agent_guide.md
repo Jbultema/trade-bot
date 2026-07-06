@@ -584,7 +584,13 @@ Top-level flow:
 3. Decision Brief: collapsed research context with supporting evidence, scenario bridge, and invalidation details.
 4. Book-aware recommendation: visible default paper-book alignment, with raw position and execution rows kept inside the details expander.
 5. Right-side Term Lookup: compact metric/tracker explanations sourced from the metric explainer registry. This is the quick-reference surface for terms that appear anywhere in the app.
-6. Insight Workbench: deeper workbenches for Command Center, Risk & Scenarios, Research Lab, Monitoring, News & Macro, Performance, and Forward Test.
+6. Insight Workbench: deeper workbenches for Command Center, Risk & Scenarios, Simulation Lab, Research Lab, Monitoring, News & Macro, Performance, and Forward Test.
+
+Simulation Lab is the dedicated forward-path planning workbench. Keep
+deterministic wealth math, historical block-bootstrap sequence risk,
+regime-conditioned forward simulation, and simulation interpretability there.
+Research Lab should stay focused on empirical strategy evidence, aggregate
+experiment comparisons, and individual candidate diagnostics.
 
 Design standard:
 

@@ -781,9 +781,17 @@ terminal_wealth_15y = starting_account_value * (1 + CAGR) ^ 15
 
 terminal_wealth_with_contributions_15y
     = starting_account_value * (1 + CAGR) ^ 15
-    + annual_contribution * (((1 + CAGR) ^ 15 - 1) / CAGR)
+    + periodic_contribution * (((1 + periodic_return) ^ total_periods - 1)
+                               / periodic_return)
 
-If CAGR is effectively zero, the contribution term uses annual_contribution * 15.
+contribution_periods_per_year = 12 for monthly default, 4 for quarterly,
+                                and 1 for end-of-year
+periodic_contribution = annual_contribution / contribution_periods_per_year
+periodic_return = (1 + CAGR) ^ (1 / contribution_periods_per_year) - 1
+total_periods = years * contribution_periods_per_year
+
+If periodic_return is effectively zero, the contribution term uses
+periodic_contribution * total_periods.
 
 wealth_multiple_vs_spy = strategy_terminal_wealth_with_contributions
                          / spy_terminal_wealth_with_contributions
@@ -813,12 +821,12 @@ growth_constrained_utility_score
     - churn_penalty_weight * churn_penalty
 ```
 
-Default planning assumptions are a 15-year horizon, 220,000 dollar starting account,
-65,000 dollars of annual end-of-year contributions, a soft drawdown band beginning
-at -22 percent, and hard drawdown rejection at -30 percent. This score is an
-experiment-selection and paper-monitoring priority layer. It does not replace
-promotion score, robustness score, walk-forward diagnostics, regime diagnostics,
-or human review.
+Default planning assumptions are a 15-year horizon, 220,000 dollar starting
+account, 65,000 dollars of annual contributions split into monthly period-end
+deposits, a soft drawdown band beginning at -22 percent, and hard drawdown
+rejection at -30 percent. This score is an experiment-selection and
+paper-monitoring priority layer. It does not replace promotion score,
+robustness score, walk-forward diagnostics, regime diagnostics, or human review.
 
 Sequence-aware outcome simulation:
 
@@ -827,7 +835,7 @@ For each selected strategy:
 1. compute daily strategy returns from the reconstructed equity curve,
 2. sample historical daily returns in fixed-size blocks,
 3. compound each sampled path for the configured planning horizon,
-4. add the configured contribution at each year-end,
+4. add scheduled contributions according to the configured cadence,
 5. compute terminal wealth, max drawdown, and Ulcer Index for each path,
 6. report distribution summaries such as P10, median, and P90 terminal wealth.
 ```
@@ -850,7 +858,7 @@ For each selected strategy:
 5. blend empirical regime transition frequencies with today's scenario
    probabilities for forward transitions,
 6. sample historical return blocks from the active simulated regime,
-7. add configured contributions at each year-end,
+7. add scheduled contributions according to the configured cadence,
 8. compute terminal wealth, max drawdown, Ulcer Index, hard-drawdown breach
    probability, capital-shortfall probability, and average regime mix.
 ```

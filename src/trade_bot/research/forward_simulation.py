@@ -14,10 +14,15 @@ from trade_bot.DEFAULTS import (
     DEFAULT_FORWARD_SIMULATION_RANDOM_SEED,
     DEFAULT_FORWARD_SIMULATION_TRANSITION_SCENARIO_WEIGHT,
     DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
+    DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_HORIZON_YEARS,
     DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
     DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR,
+)
+from trade_bot.research.strategy_outcome_utility import (
+    annual_contribution_schedule,
+    contribution_amount_for_day,
 )
 
 REGIME_BUCKETS = ("risk_off", "transition", "risk_on_fragile", "risk_on")
@@ -35,6 +40,7 @@ class ForwardSimulationConfig:
     horizon_years: int = DEFAULT_OUTCOME_HORIZON_YEARS
     starting_account_value: float = DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE
     annual_contribution: float = DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION
+    contribution_timing: str = DEFAULT_OUTCOME_CONTRIBUTION_TIMING
     trading_days_per_year: int = DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR
     paths: int = DEFAULT_FORWARD_SIMULATION_PATHS
     block_days: int = DEFAULT_FORWARD_SIMULATION_BLOCK_DAYS
@@ -146,6 +152,11 @@ def simulate_regime_conditioned_paths(
         scenario_weight=cfg.transition_scenario_weight,
     )
     block_library = _build_block_library(library, block_days=cfg.block_days)
+    contribution_schedule = annual_contribution_schedule(
+        annual_contribution=cfg.annual_contribution,
+        trading_days_per_year=cfg.trading_days_per_year,
+        contribution_timing=cfg.contribution_timing,
+    )
 
     total_days = int(cfg.horizon_years * cfg.trading_days_per_year)
     if total_days <= 0:
@@ -170,8 +181,13 @@ def simulate_regime_conditioned_paths(
                 regime_counts[regime] += 1
                 wealth *= 1.0 + float(day_return)
                 day_idx += 1
-                if day_idx % cfg.trading_days_per_year == 0:
-                    wealth += float(cfg.annual_contribution)
+                contribution = contribution_amount_for_day(
+                    day_idx,
+                    contribution_schedule,
+                    trading_days_per_year=cfg.trading_days_per_year,
+                )
+                if contribution:
+                    wealth += contribution
                 peak = max(peak, wealth)
                 current_drawdown = min(wealth / peak - 1.0, 0.0) if peak else 0.0
                 max_drawdown = min(max_drawdown, current_drawdown)
@@ -262,6 +278,16 @@ def simulation_settings_frame(config: ForwardSimulationConfig | None = None) -> 
                 "setting": "block_days",
                 "value": f"{cfg.block_days}",
                 "meaning": "Historical return-block length sampled inside each regime.",
+            },
+            {
+                "setting": "annual_contribution",
+                "value": f"${cfg.annual_contribution:,.0f}",
+                "meaning": "Annual contribution total injected according to contribution timing.",
+            },
+            {
+                "setting": "contribution_timing",
+                "value": cfg.contribution_timing,
+                "meaning": "Contribution cadence; monthly is split into 12 period-end deposits.",
             },
             {
                 "setting": "initial_scenario_weight",

@@ -196,6 +196,17 @@ Research Lab is the experiment and strategy evidence workbench. It has aggregate
 views for comparing strategies and a candidate-detail workbench for inspecting a
 single strategy.
 
+### What is the Simulation Lab?
+
+Simulation Lab is the forward-path planning workbench. It shows the current
+future-state map, the configured accumulation assumptions, deterministic wealth
+math, historical block-bootstrap sequence risk, regime-conditioned forward
+paths, and interpretability tables for a selected strategy.
+
+Use Research Lab to decide whether a strategy has enough evidence. Use
+Simulation Lab to understand what range of future outcomes could occur if that
+strategy is followed under today's scenario map.
+
 ### What is the difference between aggregate insights and candidate details?
 
 Aggregate insights compare many strategies: leaderboards, curated shelf, outcome
@@ -270,14 +281,16 @@ example, a -20% drawdown needs +25% to return to the prior high.
 
 Outcome Frontier plots CAGR versus max drawdown and overlays terminal wealth,
 utility tiers, and Pareto-efficient candidates. It asks whether extra CAGR is
-worth the extra drawdown for a configured accumulation horizon.
+worth the extra drawdown for a configured accumulation horizon. It is now the
+aggregate tradeoff view inside Research Lab; open Simulation Lab for detailed
+bootstrap and regime-conditioned forward-path distributions.
 
 ### Is the 15-year wealth output a Monte Carlo forecast?
 
 The app now shows three layers:
 
 1. deterministic planning math: historical CAGR applied to the configured
-   starting account and annual contributions;
+   starting account and scheduled contributions;
 2. historical block bootstrap: resampled daily return sequences that report
    P10, median, and P90 terminal wealth plus simulated drawdown pain;
 3. regime-conditioned forward simulation: historical strategy returns labeled
@@ -291,10 +304,11 @@ forecast, and not an automatic trade instruction.
 ### Where do I change the 15-year outcome assumptions?
 
 The defaults live in `src/trade_bot/DEFAULTS.py`: planning horizon, starting
-account value, annual contribution, drawdown bands, bootstrap path count, and
-bootstrap/forward-simulation settings. After changing them, rerun the
-daily/experiment refresh so stored scorecards and dashboard snapshots use the
-same assumptions.
+account value, annual contribution, contribution timing, drawdown bands,
+bootstrap path count, and bootstrap/forward-simulation settings. The default
+contribution timing splits the annual total into monthly period-end deposits.
+After changing them, rerun the daily/experiment refresh so stored scorecards and
+dashboard snapshots use the same assumptions.
 
 ### What is growth-constrained utility?
 

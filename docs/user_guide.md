@@ -184,6 +184,7 @@ Use the Insight Workbench when you need detail:
 | --- | --- |
 | What exactly is the target posture? | Command Center |
 | Why is risk being reduced or increased? | Risk & Scenarios |
+| What future outcome range should I expect? | Simulation Lab |
 | Which strategy should be trusted? | Research Lab |
 | Are paper strategies behaving? | Monitoring |
 | What news or macro inputs are active? | News & Macro |
@@ -233,6 +234,29 @@ Look for:
 - regime instability,
 - risk constraints.
 
+### Simulation Lab
+
+Use this to inspect the forward-looking planning distribution for a selected
+strategy. Simulation Lab is not a replacement for Research Lab evidence; it is
+the place to understand how deterministic CAGR math, historical sequence risk,
+and current scenario probabilities change the expected range of outcomes.
+
+Recommended flow:
+
+1. Future-State Map: read the current scenario probabilities and how they map
+   into broad simulation buckets.
+2. Strategy Simulations: choose a strategy and compare deterministic 15-year
+   wealth, historical bootstrap range, and regime-conditioned forward range.
+3. Interpretability: inspect the model ladder, scenario bridge, historical
+   regime-return library, and simulated regime mix.
+
+Simulation Lab uses the configured accumulation assumptions from
+`src/trade_bot/DEFAULTS.py`: starting account value, annual contribution,
+monthly contribution timing, planning horizon, soft/hard drawdown bands,
+bootstrap path count, and regime-forward simulation settings. Treat the outputs
+as planning distributions and risk ranges, not point forecasts or trade
+instructions.
+
 ### Research Lab
 
 Use this before promoting any strategy into paper monitoring.
@@ -246,37 +270,18 @@ Recommended flow:
 
 1. Leaderboard: find high-scoring candidates.
 2. Curated Shelf: see candidates chosen for diversity and operability.
-3. Outcome Frontier: compare CAGR versus drawdown, projected terminal wealth,
-   sequence-aware simulated outcome ranges, and regime-conditioned forward
-   simulation ranges.
+3. Outcome Frontier: compare CAGR versus drawdown and projected terminal wealth.
 4. Family Map: understand whether many strategies are the same bet.
 5. Signal Evidence: see which signal families helped historically.
 6. Candidate Details: inspect one strategy before monitoring.
 
 Outcome Frontier uses the configured accumulation assumptions from
 `src/trade_bot/DEFAULTS.py`: starting account value, annual contribution,
-planning horizon, and soft/hard drawdown bands. The headline 15-year wealth
-metric is deterministic CAGR planning math. The selected-strategy simulation
-below it first uses historical block bootstrap paths to show sequence risk, then
-uses the regime-conditioned forward simulation to blend current scenario
-probabilities with historical regime-labeled return paths. Treat all three
-layers as research decision support, not a promise of future retirement wealth.
-
-Use the forward simulation details when you want to ask:
-
-- What is the central 80% wealth range if today's scenario map matters?
-- How often do simulated paths breach the hard drawdown band?
-- Does the selected strategy depend on a future path that is mostly risk-on, or
-  can it survive meaningful risk-off/transition exposure?
-- Is the forward read meaningfully different from the deterministic CAGR card or
-  the block-bootstrap sequence-risk view?
-
-The key controls live in `DEFAULTS.py`: path count, block length, random seed,
-scenario weight for the starting regime, scenario weight for future regime
-transitions, and minimum historical observations required before a regime gets
-its own return library. After changing these, run the full daily update from the
-left sidebar or rerun the relevant CLI refresh so snapshots and scorecards stay
-internally consistent.
+contribution timing, planning horizon, and soft/hard drawdown bands. The default
+contribution timing splits the annual total into monthly period-end deposits.
+The headline 15-year wealth metric is deterministic CAGR planning math. Use
+Simulation Lab when you need sequence-aware simulation, current-scenario
+simulation, path-risk ranges, or interpretability for a selected strategy.
 
 ### Monitoring
 

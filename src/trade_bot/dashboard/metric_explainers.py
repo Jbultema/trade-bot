@@ -272,8 +272,14 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
     MetricExplainer(
         metric="15-Year Terminal Wealth With Contributions",
         category="Performance",
-        plain_english="Projected account value after applying the strategy CAGR to the configured starting balance and annual contributions.",
-        calculation="Starting value compounded by CAGR for 15 years plus end-of-year annual contributions grown at the same CAGR.",
+        plain_english=(
+            "Projected account value after applying the strategy CAGR to the configured starting "
+            "balance and scheduled contributions."
+        ),
+        calculation=(
+            "Starting value compounded by CAGR for 15 years plus the configured annual contribution "
+            "split across the configured cadence; the default is monthly period-end deposits."
+        ),
         how_to_read="This is the practical retirement-accumulation outcome to compare across high-growth and lower-drawdown strategies.",
         caution="It assumes the historical CAGR repeats for planning math only; it is not a forecast.",
         aliases=(
@@ -306,7 +312,10 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
         metric="Bootstrap Wealth Range",
         category="Performance",
         plain_english="Sequence-aware wealth distribution from resampling the selected strategy's historical daily returns.",
-        calculation="Block bootstrap daily returns for the configured horizon, add end-of-year contributions, and report terminal-wealth quantiles.",
+        calculation=(
+            "Block bootstrap daily returns for the configured horizon, add scheduled contributions "
+            "using the configured cadence, and report terminal-wealth quantiles."
+        ),
         how_to_read="P10 is a worse-but-plausible sampled path, median is the center sampled path, and P90 is a better sampled path.",
         caution="This is historical return-sequence resampling. Use the regime-conditioned simulation beside it when today's scenario map matters.",
         aliases=(
@@ -344,7 +353,7 @@ METRIC_EXPLAINERS: tuple[MetricExplainer, ...] = (
         calculation=(
             "Label historical strategy returns into risk-off, transition, fragile risk-on, and risk-on "
             "regimes; blend today's scenario probabilities with empirical regime transitions; sample "
-            "future paths with annual contributions."
+            "future paths with scheduled contributions."
         ),
         how_to_read=(
             "Use it to see whether current scenarios materially widen the wealth and drawdown range "

@@ -12,6 +12,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_OUTCOME_BOOTSTRAP_PATHS,
     DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED,
     DEFAULT_OUTCOME_CHURN_PENALTY_WEIGHT,
+    DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
     DEFAULT_OUTCOME_FLOOR_CAGR,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_HORIZON_YEARS,
@@ -23,7 +24,6 @@ from trade_bot.DEFAULTS import (
     DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
     DEFAULT_OUTCOME_TARGET_CAGR,
     DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR,
-    DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
 )
 
 
@@ -224,7 +224,12 @@ def annual_contribution_schedule(
     return schedule
 
 
-def contribution_amount_for_day(day_number: int, schedule: dict[int, float], *, trading_days_per_year: int) -> float:
+def contribution_amount_for_day(
+    day_number: int,
+    schedule: dict[int, float],
+    *,
+    trading_days_per_year: int,
+) -> float:
     if not schedule or trading_days_per_year <= 0:
         return 0.0
     day_of_year = ((int(day_number) - 1) % int(trading_days_per_year)) + 1

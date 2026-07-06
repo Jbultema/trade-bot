@@ -38,6 +38,15 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         next_step="Use the constraints to decide whether the trade plan is a signal or a risk-control action.",
         tone="warning",
     ),
+    "Simulation Lab": DashboardSectionGuide(
+        name="Simulation Lab",
+        role="Forward-state and path-risk simulation",
+        primary_question="What future-state range should I expect if this strategy is followed?",
+        use_when="Use this when comparing terminal wealth ranges, sequence risk, and scenario-conditioned outcomes.",
+        first_read="Future-state map, simulation assumptions, selected-strategy path ranges.",
+        next_step="Use Research Lab for evidence, Monitoring for forward proof, and Forward Test for tickets.",
+        tone="success",
+    ),
     "Research Lab": DashboardSectionGuide(
         name="Research Lab",
         role="Strategy evidence and experiment drilldown",

@@ -92,6 +92,26 @@ def test_simulate_regime_conditioned_paths_returns_distribution() -> None:
     assert summary["severe_drawdown_probability"] is not None
 
 
+def test_simulate_regime_conditioned_paths_uses_monthly_contributions() -> None:
+    returns = pd.Series([0.0] * 80)
+    config = ForwardSimulationConfig(
+        horizon_years=1,
+        trading_days_per_year=12,
+        paths=5,
+        block_days=1,
+        starting_account_value=100.0,
+        annual_contribution=12.0,
+        random_seed=3,
+        min_regime_observations=1,
+    )
+
+    paths = simulate_regime_conditioned_paths(returns, config=config)
+    summary = summarize_forward_simulation(paths, config=config)
+
+    assert paths["terminal_wealth"].tolist() == pytest.approx([112.0] * 5)
+    assert summary["terminal_wealth_p50"] == pytest.approx(112.0)
+
+
 def test_forward_simulation_empty_inputs_return_empty_summary() -> None:
     paths = simulate_regime_conditioned_paths(pd.Series(dtype=float))
     summary = summarize_forward_simulation(paths)

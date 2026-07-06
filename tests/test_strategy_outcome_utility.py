@@ -21,18 +21,52 @@ def test_terminal_wealth_includes_end_of_year_contributions() -> None:
         years=2,
         starting_account_value=100.0,
         annual_contribution=10.0,
+        contribution_timing="end_of_year",
     )
 
     assert float(wealth.iloc[0]) == pytest.approx(142.0)
 
 
-def test_bootstrap_outcome_paths_include_end_of_year_contributions() -> None:
+def test_terminal_wealth_splits_default_contributions_monthly() -> None:
+    wealth = terminal_wealth_from_cagr(
+        0.12,
+        years=1,
+        starting_account_value=100.0,
+        annual_contribution=12.0,
+    )
+    monthly_rate = 1.12 ** (1.0 / 12.0) - 1.0
+    expected = 100.0 * 1.12 + ((1.0 + monthly_rate) ** 12.0 - 1.0) / monthly_rate
+
+    assert float(wealth.iloc[0]) == pytest.approx(expected)
+
+
+def test_bootstrap_outcome_paths_split_default_contributions_monthly() -> None:
+    monthly_rate = 1.12 ** (1.0 / 12.0) - 1.0
+    paths = bootstrap_outcome_paths(
+        pd.Series([monthly_rate] * 12),
+        config=OutcomeBootstrapConfig(
+            horizon_years=1,
+            starting_account_value=100.0,
+            annual_contribution=12.0,
+            trading_days_per_year=12,
+            paths=3,
+            block_days=1,
+            random_seed=7,
+        ),
+    )
+    expected = 100.0 * 1.12 + ((1.0 + monthly_rate) ** 12.0 - 1.0) / monthly_rate
+
+    assert paths["terminal_wealth"].tolist() == pytest.approx([expected, expected, expected])
+
+
+def test_bootstrap_outcome_paths_can_use_end_of_year_contributions() -> None:
     paths = bootstrap_outcome_paths(
         pd.Series([0.0, 0.0, 0.0, 0.0]),
         config=OutcomeBootstrapConfig(
             horizon_years=2,
             starting_account_value=100.0,
             annual_contribution=10.0,
+            contribution_timing="end_of_year",
             trading_days_per_year=2,
             paths=3,
             block_days=1,

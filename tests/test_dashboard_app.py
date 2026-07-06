@@ -81,6 +81,13 @@ def test_dashboard_app_renders_action_headline(
     assert any(subheader.value == "Portfolio Risk Engine" for subheader in app.subheader)
 
     dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
+    dashboard_section.set_value("Simulation Lab").run(timeout=20)
+    assert not app.exception
+    assert any(subheader.value == "Simulation Lab" for subheader in app.subheader)
+    assert any("Future-State Simulation Map" in markdown.value for markdown in app.markdown)
+    assert any(selectbox.label == "Strategy to simulate" for selectbox in app.selectbox)
+
+    dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
     dashboard_section.set_value("Research Lab").run(timeout=20)
     assert not app.exception
     assert any(subheader.value == "Experiment Monitor" for subheader in app.subheader)

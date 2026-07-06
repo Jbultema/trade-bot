@@ -37,7 +37,7 @@ The target user is someone who wants a rigorous local research system before ris
 | Do I need to act today? | Operating Overview | Action headline, operating brief, book alignment, and next step |
 | Is the current paper book aligned? | Book Alignment | Target/current drift, recommended trade size, and ticket status |
 | Which strategies are worth trust? | Research Lab | Leaderboards, curated shelf, outcome frontier, validation, and candidate details |
-| What outcome range should I expect? | Outcome Frontier and forward simulations | Wealth range, drawdown burden, ulcer index, and scenario-conditioned risk |
+| What outcome range should I expect? | Simulation Lab | Future-state map, deterministic wealth, bootstrap sequence risk, and scenario-conditioned paths |
 | Are paper strategies working forward? | Monitoring | Champion/challenger/reference valuations and drift status |
 | What changed in markets, macro, or news? | Daily brief, News & Macro, Driver Rotation | Current drivers, emerging/fading signals, and explanatory context |
 | What did I actually do? | Forward Test | Locked recommendations, executions, prices, sizes, and notes |
@@ -184,6 +184,7 @@ flowchart TD
     D --> E{Need more detail?}
     E -->|Current action| F[Command Center]
     E -->|Sizing and off-ramp| G[Risk & Scenarios]
+    E -->|Forward path planning| L[Simulation Lab]
     E -->|Strategy evidence| H[Research Lab]
     E -->|Forward proof| I[Monitoring]
     E -->|Execution trail| J[Forward Test]
@@ -198,6 +199,7 @@ flowchart TD
 | Insight Workbench | Navigation to deeper evidence sections | Which detailed workbench should I open for the next question? |
 | Command Center | Current-state trade decision | What is the target posture, and which tickers are affected? |
 | Risk & Scenarios | Off-ramp and sizing discipline | Are factor risk, stress loss, scenarios, or expected shortfall forcing lower risk? |
+| Simulation Lab | Future-state and path-risk simulation | What could the future range look like for a selected strategy under deterministic, bootstrap, and scenario-conditioned models? |
 | Research Lab | Strategy research and diagnostics | Which approaches worked, why, and across which windows/regimes? Includes **Taxable Impact** for after-tax survivability. |
 | Monitoring | Champion/challenger forward paper testing | Which monitored systems are ahead, lagging, or in drawdown review? |
 | News & Macro | Narrative and macro source review | What news or macro pressure is active, stale, or missing? |
@@ -223,13 +225,37 @@ Key surfaces:
 - **Right-side Term Lookup**: always-available explanations for metrics and trackers. Use it when a term is unfamiliar or easy to misuse.
 - **Insight Workbench**: the main section selector below the operating overview. It renders one detailed workbench at a time and shows a guide for what that workbench answers.
 
+### Simulation Lab
+
+Use this when the question shifts from "what worked historically?" to "what range
+of future paths should I expect if I follow this strategy?" Simulation Lab gives
+the forward engine its own designed workbench instead of burying it inside the
+strategy research tables.
+
+Key surfaces:
+
+- **Planning assumptions**: starting account, annual contribution, monthly
+  contribution cadence, horizon, and soft/hard drawdown bands from
+  `src/trade_bot/DEFAULTS.py`.
+- **Future-State Map**: current scenario probabilities mapped into broad
+  simulation buckets, with the detailed scenario records and simulation settings.
+- **Strategy Simulations**: a selected-strategy comparison across deterministic
+  CAGR math, historical block-bootstrap sequence risk, and regime-conditioned
+  forward paths.
+- **Interpretability**: model ladder, scenario bridge, historical regime-return
+  library, and average simulated regime mix so the distribution can be audited.
+
+Outcome cards are planning distributions, not forecasts. Use them to judge
+terminal-wealth range, severe drawdown probability, and whether today's scenario
+map materially changes the simple CAGR story.
+
 ### Research Lab
 
 Use this for strategy research, not same-day execution. The Research Lab is split into two layers: an upper aggregate section for cross-experiment comparisons and a lower candidate deep-dive for one selected strategy.
 
 The upper aggregate section includes the overview, leaderboard, curated shelf, outcome frontier, signal evidence, family map, taxable impact, validation/QC, and manifests. Default aggregate views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants remain available through explicit all-approach filters.
 
-The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart. Outcome Frontier also shows the configured accumulation assumptions, deterministic wealth math, historical block-bootstrap sequence risk, and a regime-conditioned forward simulation that blends current scenario probabilities with historical regime-return paths.
+The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart. Outcome Frontier shows the configured accumulation assumptions and deterministic wealth math for aggregate tradeoff comparison; open **Simulation Lab** for historical bootstrap and regime-conditioned forward path distributions.
 
 The **ML Diagnostics** section is artifact-backed, not trained inside Streamlit. Refresh it with `poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard`. Use `--profile research` when you intentionally want the heavier 1W/1M/3M model sweep with additional estimators; it is slower and should be treated as a research batch, not a dashboard cold-start path.
 

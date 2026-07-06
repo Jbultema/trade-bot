@@ -342,24 +342,31 @@ It computes:
 This explicitly encodes the insight that higher CAGR with tolerable drawdown may
 be better than low-drawdown undergrowth for a long accumulation horizon.
 
-The dashboard also exposes a sequence-aware simulation for the selected
-candidate. That simulation uses a historical block bootstrap over daily strategy
-returns, then applies the same starting account, annual contribution, and
-horizon settings. It reports P10/median/P90 terminal wealth plus simulated
-drawdown and Ulcer Index summaries. This is stronger than the deterministic
-CAGR card because it shows path risk, but it remains a historical-resampling
-diagnostic.
+The dashboard exposes sequence-aware simulations in the top-level
+**Simulation Lab** workbench. The historical sequence model uses a block
+bootstrap over daily strategy returns, then applies the same starting account,
+annual contribution, and horizon settings, with the annual contribution split
+across the configured cadence. The default cadence is monthly. It reports
+P10/median/P90 terminal wealth plus simulated drawdown and Ulcer Index
+summaries. This is stronger than the deterministic CAGR card because it shows
+path risk, but it remains a historical-resampling diagnostic.
 
 The forward simulation engine in `research/forward_simulation.py` adds the
 regime-conditioned layer. It labels the selected strategy's historical daily
 returns into `risk_off`, `transition`, `risk_on_fragile`, and `risk_on`, blends
 today's scenario probabilities with empirical regime-transition paths, then
-samples forward return blocks with annual contributions. The dashboard reports
-P10/median/P90 terminal wealth, median simulated drawdown, severe-drawdown
-probability, capital-shortfall probability, and the average regime mix across
-paths. This is the strongest planning layer in the app, but it is still
-scenario-conditioned historical simulation rather than a guarantee or automatic
-trading rule.
+samples forward return blocks with scheduled contributions. The dashboard
+reports P10/median/P90 terminal wealth, median simulated drawdown,
+severe-drawdown probability, capital-shortfall probability, and the average
+regime mix across paths. This is the strongest planning layer in the app, but it
+is still scenario-conditioned historical simulation rather than a guarantee or
+automatic trading rule.
+
+Simulation Lab keeps this forward modeling separate from Research Lab's
+empirical evidence surfaces. Research Lab answers "which strategies worked and
+why?" while Simulation Lab answers "what future range could this selected
+strategy experience under deterministic, bootstrapped, and current-scenario
+conditioned assumptions?"
 
 ## ML Diagnostics
 

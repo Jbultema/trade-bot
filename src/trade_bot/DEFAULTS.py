@@ -67,6 +67,7 @@ DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES = (
 DEFAULT_DASHBOARD_SECTIONS = (
     "Command Center",
     "Risk & Scenarios",
+    "Simulation Lab",
     "News & Macro",
     "Research Lab",
     "Performance",
@@ -173,6 +174,8 @@ DEFAULT_OUTCOME_MIN_LEFT_TAIL_REGIME_RETURN = -0.15
 DEFAULT_OUTCOME_OVERFIT_PENALTY_WEIGHT = 0.10
 DEFAULT_OUTCOME_CHURN_PENALTY_WEIGHT = 0.06
 DEFAULT_OUTCOME_PEER_CURVE_METRIC_LIMIT = 75
+# Split the annual accumulation budget into period-end deposits. Monthly is the
+# default because it better approximates ongoing 401k/paycheck contributions.
 DEFAULT_OUTCOME_CONTRIBUTION_TIMING = "monthly"
 DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR = 252
 DEFAULT_OUTCOME_BOOTSTRAP_PATHS = 750

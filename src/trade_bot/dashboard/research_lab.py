@@ -105,6 +105,7 @@ from trade_bot.research.strategy_outcome_utility import (
     OutcomeBootstrapConfig,
     add_outcome_frontier_flags,
     bootstrap_outcome_paths,
+    contribution_periods_per_year,
     drawdown_recovery_return,
     enrich_strategy_outcome_utility,
     summarize_bootstrap_outcomes,
@@ -1996,7 +1997,10 @@ def _render_outcome_frontier(
 
 def _render_outcome_planning_assumptions() -> None:
     st.markdown("**Planning assumptions and model basis**")
-    assumption_cols = st.columns(5)
+    contribution_periods = contribution_periods_per_year(DEFAULT_OUTCOME_CONTRIBUTION_TIMING)
+    contribution_amount = DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION / contribution_periods
+    contribution_label = DEFAULT_OUTCOME_CONTRIBUTION_TIMING.replace("_", " ").title()
+    assumption_cols = st.columns(6)
     _helped_metric(
         assumption_cols[0],
         "Starting Account",
@@ -2005,15 +2009,20 @@ def _render_outcome_planning_assumptions() -> None:
     _helped_metric(
         assumption_cols[1],
         "Annual Contribution",
-        _format_currency(DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION),
+        f"{_format_currency(DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION)} / yr",
     )
     _helped_metric(
         assumption_cols[2],
+        "Contribution Cadence",
+        f"{_format_currency(contribution_amount)} {contribution_label}",
+    )
+    _helped_metric(
+        assumption_cols[3],
         "Horizon",
         f"{DEFAULT_OUTCOME_HORIZON_YEARS} years",
     )
     _helped_metric(
-        assumption_cols[3],
+        assumption_cols[4],
         "Soft / Hard DD",
         (
             f"{abs(DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT):.0%} / "
@@ -2021,13 +2030,13 @@ def _render_outcome_planning_assumptions() -> None:
         ),
     )
     _helped_metric(
-        assumption_cols[4],
+        assumption_cols[5],
         "Projection Mode",
         "CAGR + bootstrap + regime sim",
     )
     st.info(
         "The frontier scorecard's 15Y Wealth card is deterministic planning math: historical "
-        "CAGR applied to the configured starting balance plus end-of-year contributions. The "
+        "CAGR applied to the configured starting balance plus scheduled contributions. The "
         "selected-strategy section below adds a historical block-bootstrap simulation to show "
         "sequence risk, plus a regime-conditioned forward simulation that blends current scenario "
         "probabilities with historical regime-labeled return paths. These settings live in "
@@ -2060,7 +2069,10 @@ def _render_outcome_planning_assumptions() -> None:
                         {
                             "setting": "annual_contribution",
                             "current_value": _format_currency(DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION),
-                            "meaning": "Annual contribution added to the projection.",
+                            "meaning": (
+                                "Annual contribution budget added according to the configured "
+                                "contribution cadence."
+                            ),
                             "change_location": (
                                 "DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION in "
                                 "src/trade_bot/DEFAULTS.py"
@@ -2071,10 +2083,19 @@ def _render_outcome_planning_assumptions() -> None:
                             "current_value": DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
                             "meaning": (
                                 "Contribution timing assumed by deterministic and simulated "
-                                "projections."
+                                "projections. The current default splits the annual total into "
+                                "monthly period-end deposits."
                             ),
                             "change_location": (
                                 "DEFAULT_OUTCOME_CONTRIBUTION_TIMING documents the current policy."
+                            ),
+                        },
+                        {
+                            "setting": "contribution_amount",
+                            "current_value": _format_currency(contribution_amount),
+                            "meaning": "Amount added at each scheduled contribution point.",
+                            "change_location": (
+                                "Derived from annual_contribution divided by contribution_timing."
                             ),
                         },
                         {
@@ -2263,8 +2284,10 @@ def _render_outcome_decision_cards(
     _helped_metric(cols[4], "Ulcer Index", _format_percent(pain_index))
 
     st.info(_outcome_decision_helper(row, extra_spy=extra_spy, extra_qqq=extra_qqq))
-    _render_outcome_bootstrap_summary(result, deterministic_wealth=wealth)
-    _render_regime_forward_simulation(result, baseline_run=baseline_run)
+    st.caption(
+        "Open Simulation Lab for historical bootstrap paths and regime-conditioned "
+        "forward simulations for this strategy."
+    )
 
     benchmark_values = _outcome_benchmark_metric_values(baseline_run, experiment_scorecards)
     context = _outcome_selected_benchmark_context(
@@ -2414,7 +2437,8 @@ def _render_outcome_bootstrap_summary(
             f"{config.paths:,} paths, {config.block_days}-trading-day blocks, "
             f"{config.horizon_years}-year horizon, "
             f"{_format_currency(config.starting_account_value)} starting balance, "
-            f"{_format_currency(config.annual_contribution)} end-of-year contribution."
+            f"{_format_currency(config.annual_contribution)} annual contribution "
+            f"split {config.contribution_timing}."
         )
         fig = go.Figure(
             go.Histogram(
@@ -2464,7 +2488,7 @@ def _render_regime_forward_simulation(
     st.caption(
         "Forward planning layer: label the strategy's historical daily returns into broad regimes, "
         "blend today's scenario probabilities with empirical regime transitions, then sample future "
-        "paths with annual contributions. This is a research and planning lens, not an automatic "
+        "paths with scheduled contributions. This is a research and planning lens, not an automatic "
         "trade instruction."
     )
 
@@ -3012,6 +3036,7 @@ def _terminal_wealth_value(cagr: float | None) -> float | None:
         years=DEFAULT_OUTCOME_HORIZON_YEARS,
         starting_account_value=DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
         annual_contribution=DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
+        contribution_timing=DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
     )
     if wealth.empty:
         return None
