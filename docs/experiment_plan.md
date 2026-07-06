@@ -2,9 +2,8 @@
 
 Status: maintained roadmap. Last reviewed: 2026-06-22.
 
-This document defines the project phase boundary and current research direction.
-It replaces the original planning note now archived at
-`docs/archive/experiment_plan_2026-06-17.md`.
+This document defines the project phase boundary and research direction. The
+original planning note is archived at `docs/archive/experiment_plan_2026-06-17.md`.
 
 ## Phase Boundary
 

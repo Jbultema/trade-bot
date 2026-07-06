@@ -11,7 +11,7 @@ Original audit date: 2026-06-17. Last docs review: 2026-06-21.
 
 Status: usable for research and paper trading, with explicit caveats.
 
-The core backtest, performance, strategy, risk, scenario, and trade-decision math is internally consistent after this audit. One dashboard-window boundary issue was fixed: selected-window best/worst-day stats now come from the rebased equity window and no longer include the prior close-to-close return on the first displayed date.
+The core backtest, performance, strategy, risk, scenario, and trade-decision math is internally consistent for research and paper trading. Selected-window best/worst-day stats come from the rebased equity window and exclude the prior close-to-close return on the first displayed date.
 
 The main risk is not arithmetic inversion. The main risk is semantic overclaiming. Several app concepts are heuristic policy rules, not calibrated probability models:
 
@@ -159,7 +159,7 @@ average_turnover = mean(turnover)
 total_transaction_cost = sum(transaction_cost)
 ```
 
-Dashboard selected-window performance now uses the selected equity window itself:
+Dashboard selected-window performance uses the selected equity window itself:
 
 ```text
 growth_of_1[t] = equity[t] / equity[first_window_date]
@@ -549,8 +549,8 @@ shortfall_return = actual_cumulative_return - ideal_cumulative_return
 tracking_error = std(actual_return_t - ideal_return_t) * sqrt(252)
 ```
 
-Current caveat: the dashboard V1 shortfall tab can audit ticket/execution
-discipline, but it does not yet ingest broker-grade daily account valuation.
+Current caveat: the shortfall tab audits ticket/execution discipline, but it
+does not ingest broker-grade daily account valuation.
 
 Constraint application:
 
@@ -659,7 +659,7 @@ risk_budget_multiplier = clip(risk_budget_multiplier, 0, 1)
 
 The historical experiment analogue is in `src/trade_bot/research/experiments.py`. It cannot use current curated news labels across history, so it tests the same governing idea with price-observable gates: credit, volatility/liquidity, breadth, and trend. Paired raw-versus-capped experiments write `decision_sanity_impact.csv` so adoption can be evaluated from backtests rather than dashboard preference.
 
-Posture calibration is an anti-over-bearish governance check. It reports context to the dashboard and evidence table, but it does not currently override sizing.
+Posture calibration is an anti-over-bearish governance check. It reports context to the dashboard and evidence table without overriding sizing.
 
 ```text
 constructive_probability = risk_on_probability + 0.50 * fragile_upside_probability
@@ -937,7 +937,7 @@ Source: `src/trade_bot/research/curation.py`, `src/trade_bot/research/future_sta
 
 The experiment system separates historical evidence from current operating candidates. `research_status` does not delete results; it classifies them for default dashboard curation. Low-return ML probes, failed left-tail/regime tests, and reactive drawdown-control hybrids are marked as `pruned_dead_end` so they remain auditable without crowding paper-monitoring decisions.
 
-The current ML conclusion is empirical, not theoretical: bounded ML overlays preserve the high-CAGR AI escape engine better than unconstrained future-state allocation, but the tested strategy-specific drawdown models have not yet materially reduced max drawdown. Reactive rolling drawdown controls are especially suspect for this engine because they often cut after damage is already visible and can impair reentry.
+The ML conclusion is empirical, not theoretical: bounded ML overlays preserve the high-CAGR AI escape engine better than unconstrained future-state allocation, while the tested strategy-specific drawdown models do not materially reduce max drawdown. Reactive rolling drawdown controls are especially suspect for this engine because they often cut after damage is already visible and can impair reentry.
 
 Future model work should optimize for high-CAGR drawdown mitigation, reentry, and live drift confidence. A low-CAGR defensive model can be retained as a reference sleeve, but it should not be treated as a successful answer to the primary growth problem.
 
@@ -952,7 +952,7 @@ Current base formulas remain pre-tax unless a field is explicitly named `after_t
 - No true walk-forward parameter re-optimization yet.
 - No slippage model beyond turnover cost.
 - No market-impact model.
-- Taxable-account outputs are estimated and not broker-grade. They do not yet model dividends, broker-lot imports, exact estimated-tax timing, or full wash-sale replacement-basis chains. Pre-tax / IRA-like fields remain the default unless explicitly labeled after-tax.
+- Taxable-account outputs are estimated and not broker-grade. They do not model dividends, broker-lot imports, exact estimated-tax timing, or full wash-sale replacement-basis chains. Pre-tax / IRA-like fields remain the default unless explicitly labeled after-tax.
 - FRED macro histories are not revision-safe.
 - Yahoo Finance data is acceptable for early research but not institutional-grade.
 - News classification is keyword/rule based and will miss stories outside configured channels.

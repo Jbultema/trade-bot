@@ -106,6 +106,54 @@ def test_run_store_starts_daily_update_job(tmp_path: Path, monkeypatch: object) 
     assert "run-daily-update" in str(jobs.iloc[0]["command"])
 
 
+def test_run_store_starts_targeted_update_jobs(tmp_path: Path, monkeypatch: object) -> None:
+    calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
+
+    class DummyPopen:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            calls.append((args, kwargs))
+
+    monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", DummyPopen)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    migration_job = store.start_warehouse_migration_job(
+        experiment_dir=tmp_path / "experiments",
+        journal_path=tmp_path / "journal.sqlite",
+    )
+    valuation_job = store.start_paper_valuation_job(config_path=tmp_path / "baseline.yaml")
+    seed_job = store.start_monitoring_seed_job(top_n=3, capital_base=5_000.0)
+    reset_job = store.start_monitoring_start_reset_job(
+        config_path=tmp_path / "baseline.yaml",
+        start_date="2026-01-01",
+    )
+    ml_job = store.start_ml_diagnostics_job(
+        config_path=tmp_path / "baseline.yaml",
+        output_dir=tmp_path / "ml",
+        profile="standard",
+        refresh_data=True,
+    )
+
+    commands = [list(call[0][0]) for call in calls]
+    assert any("migrate-warehouse" in command for command in commands)
+    assert any("run-paper-valuation" in command for command in commands)
+    assert any("seed-monitoring-windows" in command for command in commands)
+    assert any("reset-monitoring-start-date" in command for command in commands)
+    assert any("run-ml-diagnostics" in command for command in commands)
+    assert any("--refresh-data" in command for command in commands)
+    assert all("--job-id" in command for command in commands)
+    assert {
+        migration_job.job_id,
+        valuation_job.job_id,
+        seed_job.job_id,
+        reset_job.job_id,
+        ml_job.job_id,
+    } == set(store.list_jobs(limit=10)["job_id"])
+
+
 def _config_files(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
     paths = (
         tmp_path / "baseline.yaml",

@@ -6,6 +6,9 @@ from trade_bot.DEFAULTS import DEFAULT_DASHBOARD_SECTIONS
 
 def test_dashboard_section_guides_cover_default_sections() -> None:
     assert dashboard_section_names() == DEFAULT_DASHBOARD_SECTIONS
+    section_names = dashboard_section_names()
+    research_index = section_names.index("Research Lab")
+    assert section_names[research_index + 1] == "Simulation Lab"
 
     for section in DEFAULT_DASHBOARD_SECTIONS:
         guide = section_guide(section)

@@ -24,7 +24,7 @@ The project has both historical and active experiment roots:
 - `data/experiments_reset_v2/`: active reset-era archive with more readable
   strategy names and later ML/operating-system experiments.
 
-Dashboard loaders currently prefer `data/experiments_reset_v2/` when it exists
+Dashboard loaders prefer `data/experiments_reset_v2/` when it exists
 locally. In that mode, "All approaches" means all approaches in the active root
 plus configured baselines; it does not automatically merge the older historical
 root. If a future workflow needs full cross-root investigation, add an explicit

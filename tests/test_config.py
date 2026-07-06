@@ -3,6 +3,15 @@ from __future__ import annotations
 from pytest import approx
 
 from trade_bot.config import configured_tickers, load_config
+from trade_bot.DEFAULTS import DEFAULT_CONFIG_PATH, DEFAULT_REBALANCE, DEFAULT_SIGNAL_LAG_DAYS
+
+
+def test_baseline_execution_config_matches_default_cadence() -> None:
+    config = load_config(DEFAULT_CONFIG_PATH)
+
+    assert DEFAULT_REBALANCE == "W-WED"
+    assert config.execution.rebalance == DEFAULT_REBALANCE
+    assert config.execution.signal_lag_days == DEFAULT_SIGNAL_LAG_DAYS
 
 
 def test_load_config_applies_hard_ticker_exclusions(tmp_path) -> None:

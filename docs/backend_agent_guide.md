@@ -80,7 +80,7 @@ run_configured_baselines(config)
 
 ## Important Runtime Commands
 
-Use Poetry and the local virtual environment. The project currently targets Python 3.12.
+Use Poetry and the local virtual environment. The project targets Python 3.12.
 
 ```bash
 poetry install --sync
@@ -97,7 +97,9 @@ poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
 poetry run trade-bot run-daily-update --cached-data --cached-macro --cached-news
 ```
 
-The dashboard exposes the same workflow as the primary sidebar button labeled `Run Full Daily Update`. That button queues the job in the local run store so the app can keep serving the latest completed snapshot while the refresh runs in the background.
+The dashboard exposes the same workflow as the primary sidebar button labeled `Run Full Daily Update`. That button queues the job in the local run store so the app can keep serving the latest completed snapshot while the refresh runs in the background. The sidebar also exposes targeted background jobs for warehouse migration, paper valuation, monitoring-window seeding, and standard/research ML diagnostics. Those buttons should call `RunStore` job helpers rather than launching untracked subprocesses from Streamlit.
+
+Keep broad experiment sweeps, dependency management, Git operations, and live-broker execution out of one-click dashboard buttons. They are long-running, parameterized, environment-sensitive, or intentionally require explicit review.
 
 Other useful commands:
 
@@ -118,8 +120,7 @@ When the dashboard feels slow, prefer `build-snapshot` before app launch. The in
 
 Documentation navigation starts in `docs/doc_index.md`. Keep dated plans in
 `docs/archive/` and keep current operating behavior in the canonical docs listed
-there. Do not let old point-in-time experiment notes masquerade as live system
-status.
+there. Do not let dated experiment notes masquerade as live system status.
 
 High-level code ownership:
 
@@ -128,7 +129,7 @@ High-level code ownership:
 - `src/trade_bot/data/`: market and macro data loaders/caches.
 - `src/trade_bot/features/`: reusable feature engineering and valuation helpers.
 - `src/trade_bot/backtest/`: lag-safe backtest engine, performance metrics, rolling/calendar windows.
-- `src/trade_bot/strategies/`: strategy weight generators, currently anchored around momentum and related allocation logic.
+- `src/trade_bot/strategies/`: strategy weight generators anchored around momentum and related allocation logic.
 - `src/trade_bot/research/`: current-state engine, scenario logic, experiment machinery, event/news monitors, ML diagnostics, curation, and validation.
 - `src/trade_bot/portfolio/`: portfolio risk engine and constraints.
 - `src/trade_bot/trading/`: paper/live journal concepts, tickets, executions, monitoring windows, and book alignment.
@@ -161,18 +162,18 @@ Storage design rationale:
 - SQLite remains suitable for journal-style transactional paper/live records.
 - The project intentionally avoids a remote database until there is a concrete need.
 
-Future agents should avoid creating parallel storage patterns unless there is a clear reason. If a new result needs to be queried by the dashboard or used across runs, prefer extending the run store or warehouse instead of writing another ad hoc CSV.
+Future agents should avoid creating parallel storage patterns unless there is a clear reason. If a result needs to be queried by the dashboard or used across runs, prefer extending the run store or warehouse instead of writing another ad hoc CSV.
 
-The dashboard currently treats the reset-era experiment root as the active
+The dashboard treats the reset-era experiment root as the active
 research root when it exists. Older `reports/experiments/` artifacts remain
 auditable evidence, but they are historical unless a workflow explicitly merges
 or selects that root.
 
 ## Account And Tax Model Status
 
-Current base backtests and scorecards are pre-tax / IRA-like unless a field is
-explicitly labeled after-tax. The account-aware taxable layer now runs as a
-parallel evaluation path: `TaxAccountProfile`, `TaxLotLedger`, taxable backtest
+Base backtests and scorecards are pre-tax / IRA-like unless a field is
+explicitly labeled after-tax. The account-aware taxable layer runs as a parallel
+evaluation path: `TaxAccountProfile`, `TaxLotLedger`, taxable backtest
 enrichment, wash-sale estimates, loss-harvesting candidates, and journal-derived
 tax-lot tables live under `src/trade_bot/tax/` and
 `src/trade_bot/trading/journal.py`. Keep the existing pre-tax/IRA-style rankings
@@ -201,7 +202,7 @@ its column name unless there is a very strong reason not to.
 
 ## Config And Defaults
 
-The project owner strongly prefers defaults to be centralized. Use `src/trade_bot/DEFAULTS.py` for reusable default values, then pass them into modules through function signatures or config models. `src/trade_bot/DEFAULT.py` is only a backward-compatible re-export shim; do not add new values there.
+The project owner strongly prefers defaults to be centralized. Use `src/trade_bot/DEFAULTS.py` for reusable default values, then pass them into modules through function signatures or config models. Do not add a parallel singular `DEFAULT.py` shim or scatter defaults across individual implementation modules.
 
 Config files:
 
@@ -274,9 +275,9 @@ Current-state outputs should be lag-safe where they affect backtests or trade de
 
 ## Future-State And Scenario Modeling
 
-The system predicts future states, not exact prices. Scenario probabilities are used to shape risk budgets and explanations. They are not currently guaranteed to be calibrated probabilities unless a specific ML diagnostic proves calibration.
+The system predicts future states, not exact prices. Scenario probabilities are used to shape risk budgets and explanations. They are treated as calibrated probabilities only when a specific ML diagnostic proves calibration.
 
-Scenario horizons currently include:
+Scenario horizons include:
 
 - `1w`
 - `1m`
@@ -305,9 +306,9 @@ Sources:
 
 The news/event layer is designed to reduce blind spots, not to chase headlines. It watches categories such as monetary policy, AI infrastructure, private credit, energy/oil, geopolitical risk, earnings/capex signals, macro releases, and sector-specific catalysts.
 
-The current implementation uses lightweight deterministic and metadata-based processing rather than LLM-first reading. News items receive category, urgency, phase, activation, risk-channel, candidate-proxy, and confirmation-window metadata. Activated news can create event-risk context, but event/news signals are intentionally constrained by decision-sanity logic.
+The implementation uses lightweight deterministic and metadata-based processing rather than LLM-first reading. News items receive category, urgency, phase, activation, risk-channel, candidate-proxy, and confirmation-window metadata. Activated news can create event-risk context, but event/news signals are intentionally constrained by decision-sanity logic.
 
-Key principle: news-only de-risking should be capped unless market confirmation also deteriorates. The system added a decision-sanity overlay because earlier variants could get too bearish from narrative/event pressure alone.
+Key principle: news-only de-risking should be capped unless market confirmation also deteriorates. Decision sanity prevents narrative/event pressure from overpowering market confirmation.
 
 ## Regime Instability Index
 
@@ -315,7 +316,7 @@ Source: `src/trade_bot/research/regime_instability.py`.
 
 The regime instability index is a watch-only signal. It should appear in the dashboard and research outputs, but it must not directly alter trade sizing until an overlay is backtested.
 
-The index currently blends:
+The index blends:
 
 - SPY large-move share over 21 and 63 trading days.
 - SPY realized volatility over 21 and 63 trading days.
@@ -359,7 +360,7 @@ Important concepts:
 - `evidence`: human-readable justification rows.
 - `scenario_links`: which future scenarios are influencing the recommendation.
 
-The current action labels are decision-support labels such as `DO_NOTHING`, `REVIEW_INCREASE_RISK`, `REVIEW_REDUCE_RISK`, and related variants. They should not be interpreted as automatic order instructions.
+Action labels are decision-support labels such as `DO_NOTHING`, `REVIEW_INCREASE_RISK`, `REVIEW_REDUCE_RISK`, and related variants. They should not be interpreted as automatic order instructions.
 
 ## Portfolio Risk Engine
 
@@ -367,7 +368,7 @@ Source: `src/trade_bot/portfolio/risk.py`.
 
 The risk engine exists because raw momentum output is not enough. It evaluates the candidate portfolio against constraints and risk diagnostics before the dashboard presents target weights.
 
-Current risk concepts include:
+Risk concepts include:
 
 - Factor/beta exposures.
 - Equity beta and AI beta.
@@ -383,7 +384,7 @@ The risk engine is a guardrail layer. It should be conservative about permitting
 
 ## Decision Sanity Overlay
 
-The decision-sanity overlay was added after the system became too willing to make large defensive moves based only on news/event pressure. Its core rule is that large cash/T-bill moves require confirmation from at least two market-confirmation groups such as credit, volatility, breadth, or trend.
+The decision-sanity overlay guards against large defensive moves based only on news/event pressure. Its core rule is that large cash/T-bill moves require confirmation from at least two market-confirmation groups such as credit, volatility, breadth, or trend.
 
 Purpose:
 
@@ -621,7 +622,7 @@ Test expectations:
 - New strategy behavior needs backtest or allocation-contract tests.
 - Any change to risk/trade-decision semantics should update docs and tests together.
 
-The repository currently uses Ruff, Black-compatible line length, mypy settings, and pytest. Keep code Pythonic, typed where practical, and close to existing patterns.
+The repository uses Ruff, Black-compatible line length, mypy settings, and pytest. Keep code Pythonic, typed where practical, and close to existing patterns.
 
 ## Documentation Standards
 

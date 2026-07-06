@@ -154,7 +154,7 @@ Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. U
 | Step | Command or Dashboard Area | Purpose |
 | --- | --- | --- |
 | 1 | `run-daily-update` or sidebar **Run Full Daily Update** | Refresh market, macro, news, scenarios, snapshot, warehouse, and paper valuations. |
-| 2 | Optional `run-ml-diagnostics --profile standard` | Refresh Research Lab ML probability, feature-importance, and drift artifacts. |
+| 2 | Optional sidebar **Run ML Diagnostics** or `run-ml-diagnostics --profile standard` | Refresh Research Lab ML probability, feature-importance, and drift artifacts. |
 | 3 | Dashboard operating overview | Read Action Headline, Operating Brief, Decision Brief when needed, and book alignment. Use the right-side Term Lookup for unclear terms. |
 | 4 | Monitoring | Check champion/challenger forward performance and paper windows. |
 | 5 | Forward Test | Lock recommendations and log paper/live executions when action is warranted. |
@@ -171,6 +171,22 @@ Use cached inputs only when you intentionally want a faster local check:
 ```bash
 poetry run trade-bot run-daily-update --cached-data --cached-macro --cached-news
 ```
+
+Most refresh work can be run from the dashboard left sidebar:
+
+| Sidebar Button | Equivalent CLI | Use |
+| --- | --- | --- |
+| **Run Full Daily Update** | `poetry run trade-bot run-daily-update` | Normal daily path. Refreshes data, scenarios, snapshot, warehouse, and paper valuations. |
+| **Build Snapshot Only** | `poetry run trade-bot build-snapshot` | Rebuilds the dashboard snapshot without downstream warehouse or paper valuation steps. |
+| **Migrate Warehouse** | `poetry run trade-bot migrate-warehouse` | Re-reads experiment, registry, journal, and scorecard artifacts into DuckDB. |
+| **Run Paper Valuation** | `poetry run trade-bot run-paper-valuation` | Updates active champion/challenger/reference paper valuations from the latest snapshot. |
+| **Seed Monitoring Windows** | `poetry run trade-bot seed-monitoring-windows` | Adds top paper windows from the current strategy registry. |
+| **Run ML Diagnostics** | `poetry run trade-bot run-ml-diagnostics --profile standard` | Refreshes ML diagnostic artifacts used by research views. |
+
+Not everything belongs behind a single UI click. Large experiment sweeps,
+dependency installs, Git operations, and any live-broker execution remain
+terminal/Codex workflows because they are parameterized, long-running, or
+intentionally require explicit human review.
 
 ## Dashboard Map
 
@@ -228,9 +244,10 @@ Key surfaces:
 ### Simulation Lab
 
 Use this when the question shifts from "what worked historically?" to "what range
-of future paths should I expect if I follow this strategy?" Simulation Lab gives
-the forward engine its own designed workbench instead of burying it inside the
-strategy research tables.
+of future paths should I expect if I follow this strategy?" Simulation Lab is
+the forward-simulation workbench for deterministic planning, historical
+bootstrap ranges, regime-conditioned paths, benchmark overlays, and simulation
+interpretation.
 
 Key surfaces:
 
@@ -241,9 +258,12 @@ Key surfaces:
   simulation buckets, with the detailed scenario records and simulation settings.
 - **Strategy Simulations**: a selected-strategy comparison across deterministic
   CAGR math, historical block-bootstrap sequence risk, and regime-conditioned
-  forward paths.
-- **Interpretability**: model ladder, scenario bridge, historical regime-return
-  library, and average simulated regime mix so the distribution can be audited.
+  forward paths. When buy-and-hold reference results are present in the loaded
+  snapshot, this view also overlays Hold SPY and Hold QQQ so the forward
+  distribution can be judged against practical do-nothing alternatives.
+- **Interpretability**: simulation verdict, resemblance-to-history checks,
+  reference edge, drawdown pain, scenario tilt, historical regime-return
+  libraries, and model limitations so the distribution can be audited.
 
 Outcome cards are planning distributions, not forecasts. Use them to judge
 terminal-wealth range, severe drawdown probability, and whether today's scenario
@@ -271,9 +291,9 @@ Use this for champion/challenger forward testing. It reads from the canonical Du
 
 Open **Monitoring Controls** to start monitoring an experiment or change an active window. Pick a strategy, choose `champion`, `challenger`, or `reference`, set the mode/account label, and assign paper capital. Use separate account labels when the same strategy should be monitored as multiple sleeves or capital sizes. Leave `Only champion` unchecked if multiple active champions are intentional.
 
-Current paper monitoring starts at the configured capital base. The first valuation row is intentionally `0.00%` return; subsequent rows compound from future snapshots. This avoids treating full-history backtest growth as forward paper performance.
+Paper monitoring is anchored to the window `start_date`. When a monitored strategy can be reconstructed from the latest snapshot, its valuation is replayed from the first available trading point on or after that start date through the current market date. Use one shared cohort start date, such as `2026-01-01`, when you want fair YTD champion/challenger comparisons. Use a strategy-specific start date when the research question is “what happened after this exact adoption point?”
 
-The **Shortfall / Drift** tab compares logged recommendation tickets with logged paper/live executions. It flags unexecuted tickets, executions outside price bands, and executions outside size bands. V1 does not yet replace broker-grade daily account valuation, but it makes timing, missed execution, and band discipline auditable.
+The **Shortfall / Drift** tab compares logged recommendation tickets with logged paper/live executions. It flags unexecuted tickets, executions outside price bands, and executions outside size bands. This is an audit layer for timing, missed execution, and band discipline; broker-grade account valuation and reconciliation should come from the broker/export workflow.
 
 ## Common Operator Workflows
 
@@ -301,6 +321,12 @@ Seed paper monitoring windows from the top ranked strategy registry entries. The
 poetry run trade-bot migrate-warehouse
 poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 5 --capital-base 10000
 poetry run trade-bot run-paper-valuation
+```
+
+To reset active paper windows to a common cohort start and immediately revalue them from the latest snapshot:
+
+```bash
+poetry run trade-bot reset-monitoring-start-date --start-date 2026-01-01
 ```
 
 Show active monitoring windows:
@@ -424,7 +450,7 @@ Use that tab to compare profile-level adoption reads and pair-level deltas. A po
 
 ### Signal Evidence And Ablations
 
-The research surface now separates proven model drivers from context-only diagnostics. Use signal evidence before expanding or pruning dashboard signals:
+Signal evidence separates proven model drivers from context-only diagnostics. Use it before expanding or pruning dashboard signals:
 
 ```bash
 poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
@@ -497,9 +523,9 @@ The Monitoring tab uses state labels to show whether a strategy can be valued fo
 | --- | --- |
 | `active_valued` | Active monitoring window exists and has at least one paper valuation row. |
 | `active_awaiting_valuation` | Active window exists and the strategy is snapshot-ready, but valuation has not run yet. |
-| `active_research_only` | Active window exists, but the strategy is not currently reconstructable from the latest snapshot. |
+| `active_research_only` | Active window exists, but the strategy cannot be reconstructed from the latest snapshot. |
 | `available_to_seed_and_value` | Not active yet, but it can be started and valued from snapshots. |
-| `available_research_only` | Visible for research, but not currently snapshot-ready for daily paper valuation. |
+| `available_research_only` | Visible for research, but not snapshot-ready for daily paper valuation. |
 
 Prefer `active_valued` or `available_to_seed_and_value` for serious paper monitoring. Treat research-only rows as ideas to inspect, not as complete forward-monitoring systems.
 
@@ -513,9 +539,9 @@ Prefer `active_valued` or `available_to_seed_and_value` for serious paper monito
 | Candidate appears in Research Lab but cannot be valued | It is research-only or missing runtime reconstruction support. | Inspect it in Research Lab; only paper-monitor it after it becomes snapshot-ready. |
 | Taxable Impact is blank | The visible experiment scorecards were generated before taxable fields existed, or the warehouse was not migrated. | Run new experiment iterations, then `poetry run trade-bot migrate-warehouse`. |
 | Tax lots differ from brokerage | The journal rebuild uses local execution records and estimated wash-sale rules, not imported broker lots. | Reconcile broker-reported lots before tax-sensitive live use. |
-| Paper return is `0.00%` on the first row | First valuation starts at capital base by design. | Keep collecting future snapshot valuations. |
+| Paper monitoring comparisons look start-date dependent | Strategy adoption timing matters; a window started before a drawdown is not comparable to one started after the repair. | Use a shared cohort start such as `2026-01-01`, then run `reset-monitoring-start-date` and paper valuation. |
 | `seed-monitoring-windows --top-n 3` does not match raw promotion-score rank | Seeding uses monitoring rank, not raw score alone. | Use Research Lab leaderboard and manually add strict raw-score candidates. |
-| Champion/challenger table does not update after starting a window | Valuation has not run after the window was created. | Run `poetry run trade-bot run-paper-valuation`. |
+| Champion/challenger table does not update after starting or resetting a window | Valuation has not run after the window change, or the strategy is not reconstructable from the latest snapshot. | Run `poetry run trade-bot run-paper-valuation`; for a cohort reset use `poetry run trade-bot reset-monitoring-start-date --start-date 2026-01-01`. |
 | Strategies look different but share the same driver | Factor attribution may show the same dominant beta across several candidates. | Use Research Lab -> Experiment Monitor -> Candidate Details workbench -> Factor Attribution before paper-monitoring look-alike strategies. |
 | Recommendation changed but paper book still looks old | Forward Test executions and Monitoring windows are separate from current target recommendations. | Lock/log execution in Forward Test or update the monitored window as appropriate. |
 | Many tiny daily changes show up | Strategy may be too active for human execution. | Inspect turnover/action frequency in Research Lab before promoting it. |
@@ -545,6 +571,7 @@ Keep `.env`, `.venv/`, `data/`, `reports/`, DuckDB files, parquet files, CSV exp
 | Seed monitoring | `poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 5 --capital-base 10000` |
 | Add one strategy | `poetry run trade-bot monitor-strategy STRATEGY_NAME --role challenger --mode paper --capital-base 10000 --start-date YYYY-MM-DD` |
 | Change a window | `poetry run trade-bot update-monitoring-window WINDOW_ID --role champion --demote-other-champions` |
+| Reset paper cohort start | `poetry run trade-bot reset-monitoring-start-date --start-date 2026-01-01` |
 | Run paper valuation | `poetry run trade-bot run-paper-valuation` |
 | List windows | `poetry run trade-bot list-monitoring-windows` |
 | Champion/challenger | `poetry run trade-bot list-champion-challenger` |

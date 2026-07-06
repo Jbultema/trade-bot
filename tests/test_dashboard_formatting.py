@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import pandas as pd
 
-from trade_bot.dashboard.formatting import _display_metrics
+from trade_bot.dashboard.formatting import _display_metrics, _escape_markdown_dollars
 
 
 def test_display_metrics_formats_operability_labels() -> None:
@@ -23,3 +23,14 @@ def test_display_metrics_formats_operability_labels() -> None:
         "Paper candidate",
         "Paper ready",
     ]
+
+
+def test_escape_markdown_dollars_keeps_currency_prose_out_of_math_mode() -> None:
+    text = _escape_markdown_dollars(
+        "$5,062,993.91 to $8,347,478.76 against Hold QQQ median $5,090,183.54."
+    )
+
+    assert text == (
+        r"\$5,062,993.91 to \$8,347,478.76 against Hold QQQ median "
+        r"\$5,090,183.54."
+    )

@@ -16,6 +16,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_JOURNAL_PATH,
     DEFAULT_MACRO_PATH,
     DEFAULT_ML_DIAGNOSTICS_DIR,
+    DEFAULT_MONITORING_COHORT_START_DATE,
     DEFAULT_MONITORING_TOP_N,
     DEFAULT_NEWS_PATH,
     DEFAULT_REPORT_PATH,
@@ -648,17 +649,36 @@ def run_ml_diagnostics_cmd(
     output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_ML_DIAGNOSTICS_DIR,
     profile: Annotated[Literal["standard", "research"], typer.Option("--profile")] = "standard",
     step_days: Annotated[int | None, typer.Option("--step-days")] = None,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    job_id: Annotated[str | None, typer.Option("--job-id")] = None,
 ) -> None:
-    bot_config = load_config(config)
-    prices = load_or_fetch_yahoo_prices(
-        configured_tickers(bot_config),
-        start=bot_config.data.start,
-        end=bot_config.data.end,
-        cache_dir=bot_config.data.cache_dir,
-        adjusted=bot_config.data.adjusted,
-        refresh=refresh_data,
-    )
-    run = run_ml_diagnostics(prices, output_dir=output_dir, profile=profile, step_days=step_days)
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    if job_id:
+        run_store.mark_job_running(job_id)
+    try:
+        bot_config = load_config(config)
+        prices = load_or_fetch_yahoo_prices(
+            configured_tickers(bot_config),
+            start=bot_config.data.start,
+            end=bot_config.data.end,
+            cache_dir=bot_config.data.cache_dir,
+            adjusted=bot_config.data.adjusted,
+            refresh=refresh_data,
+        )
+        run = run_ml_diagnostics(
+            prices,
+            output_dir=output_dir,
+            profile=profile,
+            step_days=step_days,
+        )
+        if job_id:
+            run_store.mark_job_completed(job_id, str(run.output_dir))
+    except Exception as error:
+        if job_id:
+            run_store.mark_job_failed(job_id, str(error))
+        raise
     table = Table(title=f"ML Diagnostics ({profile})")
     for column in [
         "task",
@@ -759,10 +779,23 @@ def migrate_warehouse_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
     experiment_dir: Annotated[Path, typer.Option("--experiment-dir")] = DEFAULT_EXPERIMENTS_DIR,
     journal: Annotated[Path, typer.Option("--journal")] = DEFAULT_JOURNAL_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    job_id: Annotated[str | None, typer.Option("--job-id")] = None,
 ) -> None:
-    warehouse = TradingWarehouse(store)
-    experiment_results = warehouse.migrate_experiment_outputs(experiment_dir)
-    journal_results = warehouse.migrate_journal_sqlite(journal)
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    if job_id:
+        run_store.mark_job_running(job_id)
+    try:
+        warehouse = TradingWarehouse(store)
+        experiment_results = warehouse.migrate_experiment_outputs(experiment_dir)
+        journal_results = warehouse.migrate_journal_sqlite(journal)
+        if job_id:
+            run_store.mark_job_completed(job_id, "warehouse-migration")
+    except Exception as error:
+        if job_id:
+            run_store.mark_job_failed(job_id, str(error))
+        raise
     _print_migration_table(
         "Warehouse Migration",
         [*experiment_results, *journal_results],
@@ -781,24 +814,34 @@ def seed_monitoring_windows_cmd(
     capital_base: Annotated[float, typer.Option("--capital-base")] = 10_000.0,
     top_n: Annotated[int, typer.Option("--top-n")] = DEFAULT_MONITORING_TOP_N,
     start_date: Annotated[str | None, typer.Option("--start-date")] = None,
+    job_id: Annotated[str | None, typer.Option("--job-id")] = None,
 ) -> None:
-    warehouse = TradingWarehouse(store)
     run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
-    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
-    if snapshot_payload is not None:
-        baseline_run, manifest = snapshot_payload
-        warehouse.refresh_strategy_registry_from_snapshot(
-            baseline_run,
-            run_id=manifest.run_id,
-            market_date=manifest.market_date,
+    if job_id:
+        run_store.mark_job_running(job_id)
+    try:
+        warehouse = TradingWarehouse(store)
+        snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+        if snapshot_payload is not None:
+            baseline_run, manifest = snapshot_payload
+            warehouse.refresh_strategy_registry_from_snapshot(
+                baseline_run,
+                run_id=manifest.run_id,
+                market_date=manifest.market_date,
+            )
+        seeded = warehouse.seed_monitoring_windows_from_registry(
+            mode=mode,
+            account=account,
+            capital_base=capital_base,
+            top_n=top_n,
+            start_date=start_date,
         )
-    seeded = warehouse.seed_monitoring_windows_from_registry(
-        mode=mode,
-        account=account,
-        capital_base=capital_base,
-        top_n=top_n,
-        start_date=start_date,
-    )
+        if job_id:
+            run_store.mark_job_completed(job_id, "monitoring-seed")
+    except Exception as error:
+        if job_id:
+            run_store.mark_job_failed(job_id, str(error))
+        raise
     if not seeded:
         console.print("No new monitoring windows were seeded.")
         return
@@ -816,28 +859,101 @@ def run_paper_valuation_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
     artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
     job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    job_id: Annotated[str | None, typer.Option("--job-id")] = None,
 ) -> None:
     run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
-    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
-    if snapshot_payload is None:
-        console.print("No completed snapshots found. Build a snapshot before paper valuation.")
-        return
-    baseline_run, manifest = snapshot_payload
-    warehouse = TradingWarehouse(store)
-    warehouse.refresh_strategy_registry_from_snapshot(
-        baseline_run,
-        run_id=manifest.run_id,
-        market_date=manifest.market_date,
-    )
-    bot_config = load_config(config)
-    rows = warehouse.save_daily_valuations_from_snapshot(
-        baseline_run,
-        market_date=manifest.market_date,
-        execution=bot_config.execution,
-    )
+    if job_id:
+        run_store.mark_job_running(job_id)
+    try:
+        snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+        if snapshot_payload is None:
+            console.print("No completed snapshots found. Build a snapshot before paper valuation.")
+            if job_id:
+                run_store.mark_job_completed(job_id, "paper-valuation-no-snapshot")
+            return
+        baseline_run, manifest = snapshot_payload
+        warehouse = TradingWarehouse(store)
+        warehouse.refresh_strategy_registry_from_snapshot(
+            baseline_run,
+            run_id=manifest.run_id,
+            market_date=manifest.market_date,
+        )
+        bot_config = load_config(config)
+        rows = warehouse.save_daily_valuations_from_snapshot(
+            baseline_run,
+            market_date=manifest.market_date,
+            execution=bot_config.execution,
+        )
+        if job_id:
+            run_store.mark_job_completed(job_id, manifest.run_id)
+    except Exception as error:
+        if job_id:
+            run_store.mark_job_failed(job_id, str(error))
+        raise
     console.print(
         f"Wrote {rows:,} paper valuation rows from snapshot {manifest.run_id} "
         f"for market date {manifest.market_date}."
+    )
+
+
+@app.command("reset-monitoring-start-date")
+def reset_monitoring_start_date_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    start_date: Annotated[str, typer.Option("--start-date")] = DEFAULT_MONITORING_COHORT_START_DATE,
+    mode: Annotated[str | None, typer.Option("--mode")] = "paper",
+    account: Annotated[str | None, typer.Option("--account")] = None,
+    status: Annotated[str | None, typer.Option("--status")] = "active",
+    value_after_reset: Annotated[
+        bool,
+        typer.Option("--value-after-reset/--skip-valuation"),
+    ] = True,
+    job_id: Annotated[str | None, typer.Option("--job-id")] = None,
+) -> None:
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    if job_id:
+        run_store.mark_job_running(job_id)
+    valuation_rows = 0
+    try:
+        warehouse = TradingWarehouse(store)
+        reset_rows = warehouse.reset_monitoring_start_dates(
+            start_date=start_date,
+            mode=mode,
+            account=account,
+            status=status,
+            clear_valuations=True,
+        )
+        if value_after_reset and reset_rows:
+            snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+            if snapshot_payload is None:
+                console.print("No completed snapshots found. Monitoring starts were reset only.")
+            else:
+                baseline_run, manifest = snapshot_payload
+                warehouse.refresh_strategy_registry_from_snapshot(
+                    baseline_run,
+                    run_id=manifest.run_id,
+                    market_date=manifest.market_date,
+                )
+                bot_config = load_config(config)
+                valuation_rows = warehouse.save_daily_valuations_from_snapshot(
+                    baseline_run,
+                    market_date=manifest.market_date,
+                    execution=bot_config.execution,
+                )
+        if job_id:
+            run_store.mark_job_completed(job_id, "monitoring-start-reset")
+    except Exception as error:
+        if job_id:
+            run_store.mark_job_failed(job_id, str(error))
+        raise
+    scope = f"mode={mode or 'all'}"
+    if account:
+        scope += f", account={account}"
+    console.print(
+        f"Reset {reset_rows:,} monitoring window(s) to start date {start_date} "
+        f"({scope}); wrote {valuation_rows:,} valuation row(s)."
     )
 
 
@@ -877,6 +993,7 @@ def update_monitoring_window_cmd(
     role: Annotated[str | None, typer.Option("--role")] = None,
     status: Annotated[str | None, typer.Option("--status")] = None,
     capital_base: Annotated[float | None, typer.Option("--capital-base")] = None,
+    start_date: Annotated[str | None, typer.Option("--start-date")] = None,
     demote_other_champions: Annotated[
         bool,
         typer.Option("--demote-other-champions"),
@@ -888,6 +1005,7 @@ def update_monitoring_window_cmd(
         role=role,
         status=status,
         capital_base=capital_base,
+        start_date=start_date,
         demote_other_champions=demote_other_champions,
     )
     if not updated:

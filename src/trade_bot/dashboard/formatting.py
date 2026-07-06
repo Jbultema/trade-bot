@@ -66,6 +66,14 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "ideal_final_equity",
         "actual_final_equity",
         "shortfall_dollars",
+        "deterministic_15y",
+        "bootstrap_p10",
+        "bootstrap_median",
+        "bootstrap_p90",
+        "forward_p10",
+        "forward_median",
+        "forward_p90",
+        "selected_minus_row_forward_median",
     ]
     for column in currency_columns:
         if column in display:
@@ -433,6 +441,8 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "post_defensive_weight",
         "drawdown_soft_penalty",
         "drawdown_hard_penalty",
+        "median_forward_drawdown",
+        "severe_drawdown_probability",
     ]:
         if column in display:
             display[column] = display[column].map(_format_percent)
@@ -518,6 +528,16 @@ def _format_currency(value: object) -> str:
     if numeric is None:
         return str(value)
     return f"${numeric:,.2f}"
+
+
+def _escape_markdown_dollars(value: object) -> str:
+    """Escape currency markers in Streamlit markdown contexts.
+
+    Streamlit alert boxes parse Markdown, and unescaped dollar signs can be
+    interpreted as math delimiters. That corrupts prose containing multiple
+    dollar-denominated values.
+    """
+    return str(value).replace("$", r"\$")
 
 
 def _format_shares(value: object) -> str:

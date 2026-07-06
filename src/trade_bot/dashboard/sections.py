@@ -52,6 +52,15 @@ def _render_dashboard_section(
     elif section == "News & Macro":
         _render_news_and_macro(baseline_run)
     elif section == "Performance":
-        _render_performance(baseline_run)
+        _render_performance(
+            baseline_run,
+            bot_config=bot_config,
+            experiment_scorecards=experiment_scorecards,
+        )
     elif section == "Forward Test":
-        _render_forward_test_and_journal(journal, baseline_run)
+        _render_forward_test_and_journal(
+            journal,
+            baseline_run,
+            bot_config=bot_config,
+            warehouse_path=warehouse_path,
+        )

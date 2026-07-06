@@ -203,6 +203,11 @@ future-state map, the configured accumulation assumptions, deterministic wealth
 math, historical block-bootstrap sequence risk, regime-conditioned forward
 paths, and interpretability tables for a selected strategy.
 
+When the loaded snapshot includes the major reference backtests, Strategy
+Simulations also shows Hold SPY and Hold QQQ overlays and a comparison table.
+That makes the forward distribution useful for the real question: whether a
+candidate is worth operating versus a simpler buy-and-hold reference.
+
 Use Research Lab to decide whether a strategy has enough evidence. Use
 Simulation Lab to understand what range of future outcomes could occur if that
 strategy is followed under today's scenario map.
@@ -281,13 +286,13 @@ example, a -20% drawdown needs +25% to return to the prior high.
 
 Outcome Frontier plots CAGR versus max drawdown and overlays terminal wealth,
 utility tiers, and Pareto-efficient candidates. It asks whether extra CAGR is
-worth the extra drawdown for a configured accumulation horizon. It is now the
+worth the extra drawdown for a configured accumulation horizon. It is the
 aggregate tradeoff view inside Research Lab; open Simulation Lab for detailed
 bootstrap and regime-conditioned forward-path distributions.
 
 ### Is the 15-year wealth output a Monte Carlo forecast?
 
-The app now shows three layers:
+The app shows three layers:
 
 1. deterministic planning math: historical CAGR applied to the configured
    starting account and scheduled contributions;
@@ -453,7 +458,8 @@ poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8502
 
 ### The dashboard opens but data looks old.
 
-Run a daily update:
+Use the left sidebar **Run Full Daily Update** button, wait for the job to
+complete in **Update jobs**, then refresh the browser. CLI equivalent:
 
 ```bash
 poetry run trade-bot run-daily-update
@@ -461,13 +467,39 @@ poetry run trade-bot run-daily-update
 
 Then refresh the browser.
 
+### Can I run refresh jobs from the dashboard instead of the terminal?
+
+Yes for normal operation. The left sidebar can queue:
+
+- **Run Full Daily Update** for the full daily stack.
+- **Build Snapshot Only** for a snapshot rebuild without downstream updates.
+- **Migrate Warehouse** for experiment/journal/registry table refreshes.
+- **Run Paper Valuation** for champion/challenger/reference paper windows.
+- **Seed Monitoring Windows** for top-N paper monitoring setup.
+- **Reset Active Paper Windows To Cohort Start** when you want all active paper
+  windows valued from the same comparison date.
+- **Run ML Diagnostics** for standard or research ML diagnostic artifacts.
+
+Broad experiment sweeps, dependency installs, Git operations, and live-broker
+execution stay outside the dashboard because they are long-running,
+parameterized, environment-sensitive, or intentionally require explicit review.
+
 ### Monitoring does not update.
 
-Run:
+Use the left sidebar **Run Paper Valuation** button if the latest snapshot is
+already current. If the registry or experiment tables are stale, run
+**Migrate Warehouse** first. CLI equivalents:
 
 ```bash
 poetry run trade-bot migrate-warehouse
 poetry run trade-bot run-paper-valuation
+```
+
+If you want fair YTD-style monitoring comparisons, reset active paper windows
+to a common cohort start date and revalue them:
+
+```bash
+poetry run trade-bot reset-monitoring-start-date --start-date 2026-01-01
 ```
 
 ### A strategy is visible in research but missing from monitoring.

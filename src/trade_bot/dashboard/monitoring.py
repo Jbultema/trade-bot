@@ -10,6 +10,7 @@ import streamlit as st
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics, _display_trade_frame
 from trade_bot.DEFAULTS import (
+    DEFAULT_MONITORING_COHORT_START_DATE,
     DEFAULT_MONITORING_ENVELOPE_BREACH_SHARE,
     DEFAULT_MONITORING_ENVELOPE_REVIEW_SHARE,
     DEFAULT_MONITORING_ENVELOPE_WATCH_SHARE,
@@ -496,8 +497,12 @@ def _render_monitoring_controls(
                 )
                 start_date = cols[4].date_input(
                     "Start date",
-                    date.today(),
+                    date.fromisoformat(DEFAULT_MONITORING_COHORT_START_DATE),
                     key="monitor_new_start_date",
+                    help=(
+                        "Use a shared cohort start for fair YTD comparisons, or choose a "
+                        "strategy-specific adoption date when that is the research question."
+                    ),
                 )
                 demote_other = st.checkbox(
                     "Make this the only active champion for this mode/account",
@@ -541,7 +546,15 @@ def _render_monitoring_controls(
             current_role = str(selected_window.get("window_role", "challenger"))
             current_status = str(selected_window.get("status", "active"))
             current_capital = float(selected_window.get("capital_base", 10_000.0))
-            cols = st.columns(4)
+            current_start = pd.to_datetime(
+                selected_window.get("start_date", DEFAULT_MONITORING_COHORT_START_DATE),
+                errors="coerce",
+            )
+            if pd.isna(current_start):
+                current_start_date = date.fromisoformat(DEFAULT_MONITORING_COHORT_START_DATE)
+            else:
+                current_start_date = current_start.date()
+            cols = st.columns(5)
             role_options = ["champion", "challenger", "reference"]
             status_options = ["active", "paused", "closed", "killed", "archived"]
             next_role = cols[0].selectbox(
@@ -565,7 +578,13 @@ def _render_monitoring_controls(
                 step=1_000.0,
                 key="monitor_manage_capital",
             )
-            demote_other = cols[3].checkbox(
+            next_start_date = cols[3].date_input(
+                "Start date",
+                value=current_start_date,
+                key="monitor_manage_start_date",
+                help="Changing this clears stale paper valuation rows for the selected window.",
+            )
+            demote_other = cols[4].checkbox(
                 "Only champion",
                 value=False,
                 key="monitor_manage_demote_other",
@@ -579,6 +598,7 @@ def _render_monitoring_controls(
                         role=next_role,
                         status=next_status,
                         capital_base=float(next_capital),
+                        start_date=next_start_date.isoformat(),
                         demote_other_champions=bool(demote_other),
                     )
                 except ValueError as exc:

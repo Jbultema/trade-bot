@@ -1,16 +1,30 @@
 from __future__ import annotations
 
+import json
 from datetime import UTC, datetime
+from pathlib import Path
 
 import pandas as pd
+import plotly.graph_objects as go
 import streamlit as st
+from plotly.subplots import make_subplots
 
 from trade_bot.dashboard.book_alignment import _render_book_alignment
 from trade_bot.dashboard.components import _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_trade_frame, _safe_timezone
 from trade_bot.dashboard.ticket_explainers import ticket_column_help
 from trade_bot.DEFAULTS import DEFAULT_FORWARD_TEST_ACCOUNT, DEFAULT_FORWARD_TEST_STRATEGY
+from trade_bot.research.approach_explorer import (
+    build_approach_backtest_result,
+    decision_sanity_from_catalog_row,
+    execution_for_catalog_row,
+    future_state_model_from_catalog_row,
+    scenario_sizing_from_catalog_row,
+    strategy_drawdown_model_from_catalog_row,
+    strategy_from_catalog_row,
+)
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.storage.warehouse import TradingWarehouse
 from trade_bot.trading.book_alignment import build_book_alignment
 from trade_bot.trading.journal import (
     TicketSizingConfig,
@@ -120,11 +134,47 @@ TICKET_LABEL_REFERENCE = pd.DataFrame(
 def _render_forward_test_and_journal(
     journal: TradeJournal,
     baseline_run: BaselineRun,
+    *,
+    bot_config: object | None = None,
+    warehouse_path: str | Path | None = None,
 ) -> None:
     trade_decision = baseline_run.trade_decision
     st.subheader("Forward Test / Trade Journal")
     st.caption(
-        "Lock recommendations, paper-trade them, and log actual executions so forward performance can be audited."
+        "Operational record keeping for paper/live decisions: configure the book, review alignment, lock recommendation tickets, log executions, and audit what happened."
+    )
+
+    st.markdown(
+        """
+        <div class="brief-grid">
+            <div class="brief-card brief-card-warning">
+                <p class="brief-label">Step 1</p>
+                <p class="brief-answer">Review book alignment</p>
+                <p class="brief-detail">Check whether the selected paper/live book is already close enough to the latest target posture.</p>
+            </div>
+            <div class="brief-card brief-card-warning">
+                <p class="brief-label">Step 2</p>
+                <p class="brief-answer">Lock tickets only when needed</p>
+                <p class="brief-detail">Create a dated recommendation set when the current decision should become an auditable paper/live action.</p>
+            </div>
+            <div class="brief-card brief-card-success">
+                <p class="brief-label">Step 3</p>
+                <p class="brief-answer">Log fills after execution</p>
+                <p class="brief-detail">Record exact ticker, side, quantity, price, time, fees, and notes so performance can be reconciled.</p>
+            </div>
+            <div class="brief-card">
+                <p class="brief-label">Step 4</p>
+                <p class="brief-answer">Audit records</p>
+                <p class="brief-detail">Use ledgers, position summary, tax-lot estimates, and allocation history to verify the forward book.</p>
+            </div>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+    st.markdown("### Record setup")
+    st.caption(
+        "These inputs define which local book receives tickets and executions. They do not change the strategy backtest."
     )
     journal_cols = st.columns(4)
     journal_mode = journal_cols[0].selectbox("Mode", ["paper", "live"])
@@ -140,20 +190,26 @@ def _render_forward_test_and_journal(
         step=1000.0,
     )
 
-    sizing_cols = st.columns(4)
-    price_band_pct = (
-        sizing_cols[0].number_input("Price band %", min_value=0.0, value=0.75, step=0.25) / 100.0
-    )
-    size_band_pct = (
-        sizing_cols[1].number_input("Size band %", min_value=0.0, value=20.0, step=5.0) / 100.0
-    )
-    min_trade_notional = sizing_cols[2].number_input(
-        "Min trade $",
-        min_value=0.0,
-        value=25.0,
-        step=25.0,
-    )
-    whole_shares = sizing_cols[3].checkbox("Whole shares", value=True)
+    with st.expander("Ticket sizing controls", expanded=False):
+        st.caption(
+            "Advanced controls for translating target-weight changes into practical ticket sizes."
+        )
+        sizing_cols = st.columns(4)
+        price_band_pct = (
+            sizing_cols[0].number_input("Price band %", min_value=0.0, value=0.75, step=0.25)
+            / 100.0
+        )
+        size_band_pct = (
+            sizing_cols[1].number_input("Size band %", min_value=0.0, value=20.0, step=5.0)
+            / 100.0
+        )
+        min_trade_notional = sizing_cols[2].number_input(
+            "Min trade $",
+            min_value=0.0,
+            value=25.0,
+            step=25.0,
+        )
+        whole_shares = sizing_cols[3].checkbox("Whole shares", value=True)
     sizing = TicketSizingConfig(
         account_value=float(account_value),
         price_band_pct=float(price_band_pct),
@@ -161,7 +217,8 @@ def _render_forward_test_and_journal(
         min_trade_notional=float(min_trade_notional),
         whole_shares=bool(whole_shares),
     )
-    _render_ticket_label_reference()
+
+    st.markdown("### 1. Book alignment")
     book_alignment = build_book_alignment(
         journal=journal,
         trade_decision=trade_decision,
@@ -173,6 +230,12 @@ def _render_forward_test_and_journal(
     )
     _render_book_alignment(book_alignment, heading="Selected Book Alignment")
     alignment_summary = book_alignment.summary.iloc[0] if not book_alignment.summary.empty else {}
+
+    st.markdown("### 2. Recommendation tickets")
+    st.caption(
+        "Tickets are the bridge between the model recommendation and a human-reviewed paper/live action. Lock only when you want the current recommendation set preserved for audit."
+    )
+    _render_ticket_label_reference()
     ticket_preview = build_recommendation_tickets(
         trade_decision,
         baseline_run.prices,
@@ -199,26 +262,31 @@ def _render_forward_test_and_journal(
         "min_shares",
         "max_shares",
     ]
-    if ticket_preview.empty:
-        st.write(
-            "No executable recommendation tickets from the current decision and sizing inputs."
-        )
-    else:
-        st.caption("Preview of tickets that would be locked from the current trade decision.")
-        _render_ticket_table(ticket_preview[ticket_columns])
-        if st.button("Lock Current Recommendation Set"):
-            decision_id = journal.save_decision_snapshot(
-                mode=journal_mode,
-                account=journal_account,
-                strategy_name=journal_strategy,
-                trade_decision=trade_decision,
-                sizing=sizing,
-                tickets=ticket_preview,
+    with st.expander("Current recommendation ticket preview", expanded=not ticket_preview.empty):
+        if ticket_preview.empty:
+            st.write(
+                "No executable recommendation tickets from the current decision and sizing inputs."
             )
-            st.success(f"Locked {len(ticket_preview):,} recommendation tickets: {decision_id}")
+        else:
+            st.caption("These are not locked yet. Review them before creating an auditable ticket set.")
+            _render_ticket_table(ticket_preview[ticket_columns])
+            if st.button("Lock Current Recommendation Set"):
+                decision_id = journal.save_decision_snapshot(
+                    mode=journal_mode,
+                    account=journal_account,
+                    strategy_name=journal_strategy,
+                    trade_decision=trade_decision,
+                    sizing=sizing,
+                    tickets=ticket_preview,
+                )
+                st.success(f"Locked {len(ticket_preview):,} recommendation tickets: {decision_id}")
 
-    st.caption("Locked recommendations")
-    ticket_status = st.selectbox("Ticket status", ["open", "all", "executed", "skipped", "expired"])
+    open_tickets = journal.load_recommendation_tickets(status="open")
+    ticket_status = st.selectbox(
+        "Ticket ledger filter",
+        ["open", "all", "executed", "skipped", "expired"],
+        help="Filter the locked recommendation ledger. Open tickets still need execution, skip, or expiration.",
+    )
     stored_tickets = journal.load_recommendation_tickets(
         status=None if ticket_status == "all" else ticket_status
     )
@@ -239,14 +307,21 @@ def _render_forward_test_and_journal(
         "max_shares",
         "rationale",
     ]
-    if stored_tickets.empty:
-        st.write("No locked recommendation tickets yet.")
-    else:
-        available_columns = [column for column in stored_ticket_columns if column in stored_tickets]
-        _render_ticket_table(stored_tickets[available_columns])
+    record_cols = st.columns(3)
+    record_cols[0].metric("Open Tickets", len(open_tickets))
+    record_cols[1].metric("Filtered Tickets", len(stored_tickets))
+    record_cols[2].metric("Filter", ticket_status.title())
+    with st.expander("Locked recommendation ledger", expanded=False):
+        if stored_tickets.empty:
+            st.write("No locked recommendation tickets for this filter.")
+        else:
+            available_columns = [column for column in stored_ticket_columns if column in stored_tickets]
+            _render_ticket_table(stored_tickets[available_columns])
 
-    st.caption("Execution log")
-    open_tickets = journal.load_recommendation_tickets(status="open")
+    st.markdown("### 3. Execution journal")
+    st.caption(
+        "After you paper-trade or live-trade a ticket, log the exact fill here. Manual entries are allowed for executions that did not come from a locked ticket."
+    )
     ticket_options = {"manual": None}
     if not open_tickets.empty:
         ticket_options.update(_ticket_option_map(open_tickets))
@@ -332,18 +407,19 @@ def _render_forward_test_and_journal(
             st.success(f"Logged execution: {execution_id}")
 
     if not open_tickets.empty:
-        status_cols = st.columns(2)
-        status_ticket_options = _ticket_option_map(open_tickets)
-        status_ticket_label = status_cols[0].selectbox(
-            "Open ticket to update",
-            list(status_ticket_options),
-            help="Readable ticket label: ticker, side, share range, status, strategy, and short ticket ID.",
-        )
-        status_ticket = status_ticket_options[status_ticket_label]
-        status_update = status_cols[1].selectbox("New status", ["skipped", "expired", "open"])
-        if st.button("Update Ticket Status"):
-            journal.update_ticket_status(status_ticket, status_update)
-            st.success(f"Updated ticket {status_ticket} to {status_update}.")
+        with st.expander("Update open ticket status", expanded=False):
+            status_cols = st.columns(2)
+            status_ticket_options = _ticket_option_map(open_tickets)
+            status_ticket_label = status_cols[0].selectbox(
+                "Open ticket to update",
+                list(status_ticket_options),
+                help="Readable ticket label: ticker, side, share range, status, strategy, and short ticket ID.",
+            )
+            status_ticket = status_ticket_options[status_ticket_label]
+            status_update = status_cols[1].selectbox("New status", ["skipped", "expired", "open"])
+            if st.button("Update Ticket Status"):
+                journal.update_ticket_status(status_ticket, status_update)
+                st.success(f"Updated ticket {status_ticket} to {status_update}.")
 
     executions = journal.load_executions()
     execution_columns = [
@@ -360,20 +436,644 @@ def _render_forward_test_and_journal(
         "fees",
         "notes",
     ]
-    if executions.empty:
-        st.write("No executions logged yet.")
-    else:
-        _render_ticket_table(executions[execution_columns])
+    with st.expander("Execution ledger", expanded=False):
+        if executions.empty:
+            st.write("No executions logged yet.")
+        else:
+            _render_ticket_table(executions[execution_columns])
 
+    st.markdown("### 4. Records and audit")
+    st.caption(
+        "Use these derived records to reconcile the book after trades have been logged."
+    )
     position_summary = journal.execution_position_summary(
         mode=journal_mode,
         account=journal_account,
     )
-    if not position_summary.empty:
-        st.caption("Execution-derived position summary")
-        _render_ticket_table(position_summary)
+    with st.expander("Execution-derived position summary", expanded=not position_summary.empty):
+        if position_summary.empty:
+            st.write("No execution-derived positions yet for the selected mode/account.")
+        else:
+            _render_ticket_table(position_summary)
 
     _render_tax_lot_panel(journal, mode=journal_mode, account=journal_account)
+    _render_forward_allocation_history(
+        baseline_run=baseline_run,
+        bot_config=bot_config,
+        warehouse_path=warehouse_path,
+        mode=journal_mode,
+        account=journal_account,
+    )
+
+
+def _render_forward_allocation_history(
+    *,
+    baseline_run: BaselineRun,
+    bot_config: object | None,
+    warehouse_path: str | Path | None,
+    mode: str,
+    account: str,
+) -> None:
+    st.subheader("Forward Allocation History")
+    st.caption(
+        "Compare the strategy's historical target-weight path with the allocation record "
+        "captured after a paper/live monitoring window started."
+    )
+    if warehouse_path is None:
+        st.info("No warehouse path is configured, so forward allocation records are unavailable.")
+        return
+
+    try:
+        warehouse = TradingWarehouse(Path(warehouse_path))
+        windows = warehouse.list_monitoring_windows(status="active")
+        valuations = warehouse.read_table("strategy_daily_valuations")
+    except Exception as exc:  # pragma: no cover - defensive dashboard guard
+        st.warning(f"Could not load monitoring allocation history: {exc}")
+        return
+
+    if windows.empty:
+        st.info("No active monitoring windows are configured yet.")
+        return
+    if valuations.empty or "latest_weights_json" not in valuations:
+        st.info(
+            "No forward allocation valuation rows are available yet. Run paper valuation "
+            "after seeding monitoring windows to populate this chart."
+        )
+        return
+
+    all_window_options = _forward_window_options(windows, valuations)
+    if all_window_options.empty:
+        st.info("No valued monitoring windows have parseable allocation records yet.")
+        return
+
+    scoped_window_options = _forward_window_options(
+        windows,
+        valuations,
+        mode=mode,
+        account=account,
+    )
+    scope_options = ["All valued monitoring windows"]
+    if not scoped_window_options.empty:
+        scope_options.append(f"Selected book only ({mode}/{account})")
+    selected_scope = st.selectbox(
+        "Forward allocation source",
+        scope_options,
+        help=(
+            "Use all valued monitoring windows to compare champion/challenger/reference "
+            "strategies. Use selected book only when auditing the exact mode/account chosen above."
+        ),
+        key="forward_allocation_scope",
+    )
+    window_options = (
+        scoped_window_options
+        if selected_scope.startswith("Selected book only")
+        else all_window_options
+    )
+    if window_options.empty:
+        st.info("No valued monitoring windows match the selected allocation source.")
+        return
+
+    selected_label = st.selectbox(
+        "Forward allocation strategy",
+        window_options["label"].tolist(),
+        key="forward_allocation_strategy",
+    )
+    selected_window = window_options[window_options["label"] == selected_label].iloc[0]
+    strategy_name = str(selected_window["strategy_name"])
+    window_id = str(selected_window["window_id"])
+    start_date = pd.to_datetime(selected_window.get("start_date"), errors="coerce")
+
+    historical_weights, historical_note = _historical_weight_history_for_strategy(
+        strategy_name,
+        baseline_run=baseline_run,
+        warehouse=warehouse,
+        bot_config=bot_config,
+    )
+    forward_weights = _forward_weight_history_from_valuations(valuations, window_id=window_id)
+
+    if forward_weights.empty:
+        st.info("This monitoring window has no parsed forward allocation records yet.")
+        return
+
+    view = st.selectbox(
+        "Allocation history window",
+        [
+            "Full history",
+            "5Y before start + forward",
+            "1Y before start + forward",
+            "Forward overlap",
+            "Forward records only",
+            "Custom",
+        ],
+        key="forward_allocation_history_window",
+    )
+    historical_weights, forward_weights = _apply_allocation_view_window(
+        historical_weights,
+        forward_weights,
+        view=view,
+        start_date=start_date,
+    )
+    if view == "Custom":
+        min_date, max_date = _allocation_date_bounds(historical_weights, forward_weights)
+        if min_date is not None and max_date is not None:
+            date_cols = st.columns(2)
+            custom_start = date_cols[0].date_input(
+                "Allocation start",
+                min_date.date(),
+                key="forward_allocation_custom_start",
+            )
+            custom_end = date_cols[1].date_input(
+                "Allocation end",
+                max_date.date(),
+                key="forward_allocation_custom_end",
+            )
+            historical_weights = _filter_weight_history(
+                historical_weights,
+                start=custom_start,
+                end=custom_end,
+            )
+            forward_weights = _filter_weight_history(
+                forward_weights,
+                start=custom_start,
+                end=custom_end,
+            )
+
+    historical_weights, forward_weights = _prepare_allocation_frames(
+        historical_weights,
+        forward_weights,
+        max_assets=10,
+    )
+    if historical_weights.empty and forward_weights.empty:
+        st.info("No allocation rows remain for the selected window.")
+        return
+
+    stats_cols = st.columns(4)
+    latest_forward = forward_weights.iloc[-1] if not forward_weights.empty else pd.Series()
+    latest_label = forward_weights.index.max().date() if not forward_weights.empty else "n/a"
+    stats_cols[0].metric("Forward Start", _format_date_for_metric(start_date))
+    stats_cols[1].metric("Latest Forward Weight Date", str(latest_label))
+    stats_cols[2].metric("Forward Records", f"{len(forward_weights):,}")
+    stats_cols[3].metric(
+        "Latest Risk Assets",
+        _format_percent_value(1.0 - float(latest_forward.get("cash_or_unallocated", 0.0))),
+    )
+
+    figure = _make_forward_allocation_history_figure(
+        historical_weights,
+        forward_weights,
+        start_date=start_date,
+        strategy_name=strategy_name,
+    )
+    st.plotly_chart(figure, use_container_width=True)
+
+    if historical_note:
+        st.caption(historical_note)
+
+    table_cols = st.columns(2)
+    with table_cols[0]:
+        st.caption("Latest forward allocation")
+        _render_metric_dataframe(
+            _display_trade_frame(_latest_weight_table(forward_weights)),
+            hide_index=True,
+            use_container_width=True,
+        )
+    with table_cols[1]:
+        st.caption("Monitoring window")
+        _render_metric_dataframe(
+            pd.DataFrame(
+                [
+                    {
+                        "field": "window_role",
+                        "value": selected_window.get("window_role", ""),
+                    },
+                    {"field": "mode", "value": selected_window.get("mode", "")},
+                    {"field": "account", "value": selected_window.get("account", "")},
+                    {"field": "benchmark", "value": selected_window.get("benchmark", "")},
+                    {
+                        "field": "start_date",
+                        "value": selected_window.get("start_date", ""),
+                    },
+                ]
+            ),
+            hide_index=True,
+            use_container_width=True,
+        )
+
+
+def _forward_window_options(
+    windows: pd.DataFrame,
+    valuations: pd.DataFrame,
+    *,
+    mode: str | None = None,
+    account: str | None = None,
+) -> pd.DataFrame:
+    valued = valuations.copy()
+    if "latest_weights_json" not in valued:
+        return pd.DataFrame()
+    valued = valued[
+        valued["latest_weights_json"].apply(lambda raw: bool(_parse_weights_json(raw)))
+    ].copy()
+    if valued.empty:
+        return pd.DataFrame()
+    valued["window_id"] = valued["window_id"].astype(str)
+    valuation_counts = (
+        valued.groupby("window_id")
+        .agg(
+            valuation_rows=("valuation_date", "count"),
+            latest_valuation_date=("valuation_date", "max"),
+        )
+        .reset_index()
+    )
+    options = windows.copy()
+    options["window_id"] = options["window_id"].astype(str)
+    options = options.merge(valuation_counts, on="window_id", how="inner")
+    if mode is not None and account is not None:
+        scoped = options[
+            (options["mode"].astype(str) == str(mode))
+            & (options["account"].astype(str) == str(account))
+        ]
+    else:
+        scoped = options
+    if scoped.empty:
+        return scoped
+    scoped = scoped.sort_values(
+        ["window_role", "strategy_name", "latest_valuation_date"],
+        ascending=[True, True, False],
+    ).copy()
+    scoped["label"] = scoped.apply(_forward_window_label, axis=1)
+    return scoped
+
+
+def _forward_window_label(row: pd.Series) -> str:
+    role = str(row.get("window_role", "window"))
+    strategy = str(row.get("strategy_name", "strategy"))
+    scope = f"{row.get('mode', '')}/{row.get('account', '')}"
+    start = str(row.get("start_date", ""))
+    latest = str(row.get("latest_valuation_date", ""))
+    count = int(row.get("valuation_rows", 0) or 0)
+    return f"{role} | {strategy} | {scope} | start {start} | {count} records thru {latest}"
+
+
+def _historical_weight_history_for_strategy(
+    strategy_name: str,
+    *,
+    baseline_run: BaselineRun,
+    warehouse: TradingWarehouse,
+    bot_config: object | None,
+) -> tuple[pd.DataFrame, str]:
+    if strategy_name in baseline_run.results:
+        result = baseline_run.results[strategy_name]
+        return _normalize_weight_history(result.weights), ""
+
+    reconstructed = _reconstruct_candidate_weight_history(
+        strategy_name,
+        baseline_run=baseline_run,
+        warehouse=warehouse,
+        bot_config=bot_config,
+    )
+    if not reconstructed.empty:
+        return (
+            reconstructed,
+            "Historical allocation history was reconstructed from the stored experiment "
+            "manifest for this monitored candidate.",
+        )
+    return (
+        pd.DataFrame(),
+        "Historical allocation history is not available in the current snapshot for this "
+        "strategy, so the chart shows only the forward-tested allocation record.",
+    )
+
+
+def _reconstruct_candidate_weight_history(
+    strategy_name: str,
+    *,
+    baseline_run: BaselineRun,
+    warehouse: TradingWarehouse,
+    bot_config: object | None,
+) -> pd.DataFrame:
+    if bot_config is None or not hasattr(bot_config, "execution"):
+        return pd.DataFrame()
+    candidates = warehouse.read_table("experiment_candidates")
+    if candidates.empty or "strategy" not in candidates or "strategy_json" not in candidates:
+        return pd.DataFrame()
+    matches = candidates[candidates["strategy"].astype(str) == str(strategy_name)]
+    if matches.empty:
+        return pd.DataFrame()
+    sort_columns = [column for column in ["iteration", "created_at_utc"] if column in matches]
+    row = (
+        matches.sort_values(sort_columns).iloc[-1]
+        if sort_columns
+        else matches.iloc[-1]
+    )
+    try:
+        strategy = strategy_from_catalog_row(row)
+        execution = execution_for_catalog_row(row, bot_config.execution)
+        result, _missing = build_approach_backtest_result(
+            baseline_run.prices,
+            strategy,
+            execution,
+            scenario_sizing=scenario_sizing_from_catalog_row(row),
+            future_state_model=future_state_model_from_catalog_row(row),
+            strategy_drawdown_model=strategy_drawdown_model_from_catalog_row(row),
+            decision_sanity=decision_sanity_from_catalog_row(row),
+            name=strategy_name,
+        )
+    except Exception:
+        return pd.DataFrame()
+    if result is None:
+        return pd.DataFrame()
+    return _normalize_weight_history(result.weights)
+
+
+def _forward_weight_history_from_valuations(
+    valuations: pd.DataFrame,
+    *,
+    window_id: str,
+) -> pd.DataFrame:
+    if valuations.empty or "latest_weights_json" not in valuations:
+        return pd.DataFrame()
+    rows = valuations[valuations["window_id"].astype(str) == str(window_id)].copy()
+    if rows.empty:
+        return pd.DataFrame()
+    records: list[dict[str, float | pd.Timestamp]] = []
+    for _, row in rows.sort_values(["valuation_date", "created_at_utc"]).iterrows():
+        raw_weights = _parse_weights_json(row.get("latest_weights_json"))
+        valuation_date = pd.to_datetime(row.get("valuation_date"), errors="coerce")
+        if pd.isna(valuation_date) or not raw_weights:
+            continue
+        records.append({"date": valuation_date, **raw_weights})
+    if not records:
+        return pd.DataFrame()
+    frame = pd.DataFrame(records).set_index("date").sort_index()
+    return _normalize_weight_history(frame)
+
+
+def _parse_weights_json(raw: object) -> dict[str, float]:
+    if raw is None:
+        return {}
+    if isinstance(raw, dict):
+        values = raw
+    else:
+        try:
+            values = json.loads(str(raw))
+        except (TypeError, ValueError, json.JSONDecodeError):
+            return {}
+    if not isinstance(values, dict):
+        return {}
+    parsed: dict[str, float] = {}
+    for ticker, weight in values.items():
+        try:
+            numeric = float(weight)
+        except (TypeError, ValueError):
+            continue
+        if abs(numeric) > 1e-8:
+            parsed[str(ticker)] = numeric
+    return parsed
+
+
+def _normalize_weight_history(weights: pd.DataFrame) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame()
+    frame = weights.copy()
+    frame.index = pd.to_datetime(frame.index, errors="coerce")
+    frame = frame[frame.index.notna()].sort_index()
+    if frame.empty:
+        return pd.DataFrame()
+    frame = frame.apply(pd.to_numeric, errors="coerce").fillna(0.0)
+    frame = frame.clip(lower=0.0)
+    frame = frame.loc[:, frame.abs().sum(axis=0) > 1e-8]
+    frame.index.name = "date"
+    return frame
+
+
+def _prepare_allocation_frames(
+    historical_weights: pd.DataFrame,
+    forward_weights: pd.DataFrame,
+    *,
+    max_assets: int,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    historical_with_cash = _add_cash_residual(historical_weights)
+    forward_with_cash = _add_cash_residual(forward_weights)
+    combined = pd.concat([historical_with_cash, forward_with_cash], axis=0).fillna(0.0)
+    if combined.empty:
+        return historical_with_cash, forward_with_cash
+    importance = combined.max(axis=0).sort_values(ascending=False)
+    keep = [
+        column
+        for column in ["cash_or_unallocated"]
+        if column in importance.index
+    ]
+    keep.extend(
+        [
+            column
+            for column in importance.index
+            if column not in keep
+        ][:max(max_assets - len(keep), 0)]
+    )
+    return (
+        _compact_to_columns(historical_with_cash, keep),
+        _compact_to_columns(forward_with_cash, keep),
+    )
+
+
+def _add_cash_residual(weights: pd.DataFrame) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame()
+    frame = weights.copy()
+    residual = (1.0 - frame.sum(axis=1)).clip(lower=0.0)
+    if float(residual.max()) > 0.005:
+        frame["cash_or_unallocated"] = residual
+    return frame
+
+
+def _compact_to_columns(weights: pd.DataFrame, keep: list[str]) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame()
+    selected = [column for column in keep if column in weights]
+    frame = weights[selected].copy() if selected else pd.DataFrame(index=weights.index)
+    hidden = [column for column in weights.columns if column not in selected]
+    if hidden:
+        other = weights[hidden].sum(axis=1)
+        if float(other.max()) > 0.005:
+            frame["other_or_cash"] = frame.get("other_or_cash", 0.0) + other
+    return frame.loc[:, frame.abs().sum(axis=0) > 1e-8]
+
+
+def _apply_allocation_view_window(
+    historical_weights: pd.DataFrame,
+    forward_weights: pd.DataFrame,
+    *,
+    view: str,
+    start_date: pd.Timestamp,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
+    if pd.isna(start_date):
+        return historical_weights, forward_weights
+    if view == "5Y before start + forward":
+        historical_weights = _filter_weight_history(
+            historical_weights,
+            start=start_date - pd.DateOffset(years=5),
+        )
+    elif view == "1Y before start + forward":
+        historical_weights = _filter_weight_history(
+            historical_weights,
+            start=start_date - pd.DateOffset(years=1),
+        )
+    elif view == "Forward overlap":
+        historical_weights = _filter_weight_history(historical_weights, start=start_date)
+    elif view == "Forward records only":
+        historical_weights = pd.DataFrame()
+    return historical_weights, forward_weights
+
+
+def _filter_weight_history(
+    weights: pd.DataFrame,
+    *,
+    start: object | None = None,
+    end: object | None = None,
+) -> pd.DataFrame:
+    if weights.empty:
+        return weights
+    frame = weights.copy()
+    if start is not None:
+        frame = frame[frame.index >= pd.Timestamp(start)]
+    if end is not None:
+        frame = frame[frame.index <= pd.Timestamp(end)]
+    return frame
+
+
+def _allocation_date_bounds(
+    historical_weights: pd.DataFrame,
+    forward_weights: pd.DataFrame,
+) -> tuple[pd.Timestamp | None, pd.Timestamp | None]:
+    indexes = [
+        frame.index
+        for frame in [historical_weights, forward_weights]
+        if not frame.empty
+    ]
+    if not indexes:
+        return None, None
+    combined = indexes[0]
+    for index in indexes[1:]:
+        combined = combined.union(index)
+    return pd.Timestamp(combined.min()), pd.Timestamp(combined.max())
+
+
+def _make_forward_allocation_history_figure(
+    historical_weights: pd.DataFrame,
+    forward_weights: pd.DataFrame,
+    *,
+    start_date: pd.Timestamp,
+    strategy_name: str,
+) -> go.Figure:
+    row_titles = ["Backtested target allocation", "Forward-tested allocation"]
+    fig = make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        vertical_spacing=0.11,
+        subplot_titles=row_titles,
+    )
+    columns = list(dict.fromkeys([*historical_weights.columns, *forward_weights.columns]))
+    palette = [
+        "#0f766e",
+        "#f59e0b",
+        "#2563eb",
+        "#dc2626",
+        "#7c3aed",
+        "#16a34a",
+        "#0891b2",
+        "#db2777",
+        "#64748b",
+        "#a16207",
+        "#334155",
+    ]
+    color_lookup = {column: palette[index % len(palette)] for index, column in enumerate(columns)}
+    for column in columns:
+        if column in historical_weights:
+            fig.add_trace(
+                go.Scatter(
+                    x=historical_weights.index,
+                    y=historical_weights[column],
+                    mode="lines",
+                    name=column,
+                    legendgroup=column,
+                    line={"width": 0.5, "color": color_lookup[column]},
+                    stackgroup="historical",
+                    hovertemplate=f"{column}<br>%{{x|%Y-%m-%d}}<br>%{{y:.1%}}<extra></extra>",
+                ),
+                row=1,
+                col=1,
+            )
+        if column in forward_weights:
+            fig.add_trace(
+                go.Scatter(
+                    x=forward_weights.index,
+                    y=forward_weights[column],
+                    mode="lines",
+                    name=f"{column} forward",
+                    legendgroup=column,
+                    line={"width": 0.5, "color": color_lookup[column]},
+                    stackgroup="forward",
+                    showlegend=column not in historical_weights,
+                    hovertemplate=(
+                        f"{column} forward<br>%{{x|%Y-%m-%d}}<br>%{{y:.1%}}<extra></extra>"
+                    ),
+                ),
+                row=2,
+                col=1,
+            )
+    if not pd.isna(start_date):
+        marker_x = pd.Timestamp(start_date)
+        for row, showlegend in ((1, True), (2, False)):
+            fig.add_trace(
+                go.Scatter(
+                    x=[marker_x, marker_x],
+                    y=[0, 1],
+                    mode="lines",
+                    name="Forward test start",
+                    line={"dash": "dash", "color": "#ef4444", "width": 2},
+                    showlegend=showlegend,
+                    hovertemplate="Forward test start<br>%{x|%Y-%m-%d}<extra></extra>",
+                ),
+                row=row,
+                col=1,
+            )
+    fig.update_layout(
+        title=f"Allocation history: {strategy_name}",
+        height=650,
+        margin={"l": 20, "r": 20, "t": 80, "b": 30},
+        legend={
+            "orientation": "h",
+            "yanchor": "bottom",
+            "y": -0.18,
+            "xanchor": "left",
+            "x": 0,
+        },
+    )
+    fig.update_yaxes(tickformat=".0%", range=[0, 1], title_text="Weight", row=1, col=1)
+    fig.update_yaxes(tickformat=".0%", range=[0, 1], title_text="Weight", row=2, col=1)
+    fig.update_xaxes(title_text="Date", row=2, col=1)
+    return fig
+
+
+def _latest_weight_table(weights: pd.DataFrame) -> pd.DataFrame:
+    if weights.empty:
+        return pd.DataFrame(columns=["ticker", "target_weight"])
+    latest = weights.iloc[-1].sort_values(ascending=False)
+    latest = latest[latest.abs() > 1e-8]
+    return pd.DataFrame(
+        [{"ticker": str(ticker), "target_weight": float(weight)} for ticker, weight in latest.items()]
+    )
+
+
+def _format_percent_value(value: float) -> str:
+    return f"{value:.1%}"
+
+
+def _format_date_for_metric(value: pd.Timestamp) -> str:
+    if pd.isna(value):
+        return "n/a"
+    return str(value.date())
 
 
 def _render_tax_lot_panel(journal: TradeJournal, *, mode: str, account: str) -> None:

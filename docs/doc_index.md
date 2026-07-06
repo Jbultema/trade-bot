@@ -3,7 +3,7 @@
 Status: canonical navigation. Last reviewed: 2026-07-05.
 
 Use this file to decide which docs are current operating references and which
-ones are historical research notes. When a doc captures a point-in-time plan or
+ones are historical research notes. When a doc captures a dated plan or
 experiment result, archive it or label it as dated rather than letting it look
 like live system behavior.
 

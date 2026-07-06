@@ -20,8 +20,8 @@ adjustments, and loss carryforwards. Two strategies with the same pre-tax CAGR c
 produce different after-tax wealth if one churns winners weekly and the other lets
 positions cross long-term holding periods.
 
-The current backtest engine models next-session execution, long-only weights,
-turnover, and explicit transaction costs. The tax layer now runs in parallel: it
+The backtest engine models next-session execution, long-only weights,
+turnover, and explicit transaction costs. The tax layer runs in parallel: it
 reconstructs implied executions from strategy weights, creates derived tax lots,
 classifies realized gains/losses, estimates wash-sale disallowance, applies
 calendar-year tax cash flows, and emits after-tax scorecard fields. It still does
@@ -209,7 +209,7 @@ Taxable fields are deliberately explicit: `after_tax_*`, `tax_*`, `realized_*`,
 scorecard was probably generated before the taxable layer existed or the
 warehouse has not been migrated after rerunning experiments.
 
-The dashboard does not yet render tax-loss harvesting candidates from live price
+The dashboard does not render tax-loss harvesting candidates from live price
 updates. The helper exists in `trade_bot.tax.harvesting`; operational dashboard
 TLH cards should be added only after broker-lot import/reconciliation is defined
 or the user explicitly accepts paper-only estimates.
@@ -288,6 +288,6 @@ ira_monitoring_readiness
 taxable_monitoring_readiness
 ```
 
-Taxable-account conclusions are now measured estimates, not design-only
-hypotheses. They should still be treated as research support until broker lots,
+Taxable-account conclusions are measured estimates, not design-only
+hypotheses. Treat them as research support until broker lots,
 actual account settings, and qualified tax review are reconciled.

@@ -16,6 +16,7 @@ from trade_bot.backtest.engine import BacktestResult
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import (
     _display_metrics,
+    _escape_markdown_dollars,
     _format_currency,
     _format_decimal,
     _format_percent,
@@ -31,9 +32,6 @@ from trade_bot.DEFAULTS import (
     DEFAULT_ML_DIAGNOSTICS_DIR,
     DEFAULT_OPERABILITY_MATERIAL_TRADE_TURNOVER_THRESHOLD,
     DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
-    DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS,
-    DEFAULT_OUTCOME_BOOTSTRAP_PATHS,
-    DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED,
     DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_OUTCOME_HORIZON_YEARS,
@@ -87,14 +85,6 @@ from trade_bot.research.factor_attribution import (
     build_factor_attribution,
     build_factor_decay_monitor,
 )
-from trade_bot.research.forward_simulation import (
-    ForwardSimulationConfig,
-    regime_mix_frame,
-    scenario_probability_frame,
-    simulate_regime_conditioned_paths,
-    simulation_settings_frame,
-    summarize_forward_simulation,
-)
 from trade_bot.research.signal_evidence import (
     build_signal_family_evidence,
     build_signal_family_marginal_tests,
@@ -102,13 +92,10 @@ from trade_bot.research.signal_evidence import (
     tag_scorecard_signal_families,
 )
 from trade_bot.research.strategy_outcome_utility import (
-    OutcomeBootstrapConfig,
     add_outcome_frontier_flags,
-    bootstrap_outcome_paths,
     contribution_periods_per_year,
     drawdown_recovery_return,
     enrich_strategy_outcome_utility,
-    summarize_bootstrap_outcomes,
     terminal_wealth_from_cagr,
 )
 
@@ -2031,25 +2018,22 @@ def _render_outcome_planning_assumptions() -> None:
     )
     _helped_metric(
         assumption_cols[5],
-        "Projection Mode",
-        "CAGR + bootstrap + regime sim",
+        "Frontier Mode",
+        "Deterministic utility",
     )
     st.info(
-        "The frontier scorecard's 15Y Wealth card is deterministic planning math: historical "
-        "CAGR applied to the configured starting balance plus scheduled contributions. The "
-        "selected-strategy section below adds a historical block-bootstrap simulation to show "
-        "sequence risk, plus a regime-conditioned forward simulation that blends current scenario "
-        "probabilities with historical regime-labeled return paths. These settings live in "
-        "`src/trade_bot/DEFAULTS.py`; after changing them, rerun the experiment/daily refresh "
-        "stack so scorecards and dashboard snapshots stay aligned."
+        "Outcome Frontier is now the deterministic research sorter: historical CAGR, max "
+        "drawdown, recovery burden, validation gates, and configured contribution assumptions. "
+        "Use it to decide which strategies deserve inspection. Open Simulation Lab for "
+        "historical bootstrap paths, regime-conditioned futures, reference overlays, and "
+        "simulation interpretability."
     )
     with st.expander("Outcome assumption details", expanded=False):
         st.markdown(
-            "**Model ladder:** deterministic CAGR is used for fast frontier scoring; historical "
-            "block bootstrap is used below for selected-strategy sequence risk; regime-conditioned "
-            "forward simulation adds today's scenario probabilities and empirical regime-transition "
-            "paths. The regime simulator is a planning and research lens, not an automatic trading "
-            "instruction."
+            "**What this section does:** deterministic CAGR is used for fast frontier scoring, "
+            "using the configured account value, contribution cadence, planning horizon, and "
+            "drawdown bands. Simulation-specific settings and outputs live in Simulation Lab so "
+            "this view remains a clean cross-experiment sorter."
         )
         settings = pd.concat(
             [
@@ -2099,47 +2083,14 @@ def _render_outcome_planning_assumptions() -> None:
                             ),
                         },
                         {
-                            "setting": "bootstrap_paths",
-                            "current_value": f"{DEFAULT_OUTCOME_BOOTSTRAP_PATHS:,}",
-                            "meaning": (
-                                "Number of historical return-sequence simulations shown for the "
-                                "selected strategy."
-                            ),
-                            "change_location": (
-                                "DEFAULT_OUTCOME_BOOTSTRAP_PATHS in src/trade_bot/DEFAULTS.py"
-                            ),
-                        },
-                        {
-                            "setting": "bootstrap_block_days",
-                            "current_value": f"{DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS} trading days",
-                            "meaning": "Block size used when resampling historical daily returns.",
-                            "change_location": (
-                                "DEFAULT_OUTCOME_BOOTSTRAP_BLOCK_DAYS in src/trade_bot/DEFAULTS.py"
-                            ),
-                        },
-                        {
                             "setting": "trading_days_per_year",
                             "current_value": f"{DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR}",
-                            "meaning": "Annualization calendar used by the sequence-aware simulation.",
+                            "meaning": "Annualization calendar used by outcome utility scoring.",
                             "change_location": (
                                 "DEFAULT_OUTCOME_TRADING_DAYS_PER_YEAR in src/trade_bot/DEFAULTS.py"
                             ),
                         },
-                        {
-                            "setting": "bootstrap_random_seed",
-                            "current_value": f"{DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED}",
-                            "meaning": (
-                                "Seed used so the dashboard simulation is reproducible across "
-                                "reloads."
-                            ),
-                            "change_location": (
-                                "DEFAULT_OUTCOME_BOOTSTRAP_RANDOM_SEED in src/trade_bot/DEFAULTS.py"
-                            ),
-                        },
                     ]
-                ),
-                simulation_settings_frame(ForwardSimulationConfig()).rename(
-                    columns={"value": "current_value"}
                 ),
             ],
             ignore_index=True,
@@ -2283,7 +2234,11 @@ def _render_outcome_decision_cards(
     _helped_metric(cols[3], "Recovery Needed", _format_percent(row.get("drawdown_recovery_return")))
     _helped_metric(cols[4], "Ulcer Index", _format_percent(pain_index))
 
-    st.info(_outcome_decision_helper(row, extra_spy=extra_spy, extra_qqq=extra_qqq))
+    st.info(
+        _escape_markdown_dollars(
+            _outcome_decision_helper(row, extra_spy=extra_spy, extra_qqq=extra_qqq)
+        )
+    )
     st.caption(
         "Open Simulation Lab for historical bootstrap paths and regime-conditioned "
         "forward simulations for this strategy."
@@ -2385,262 +2340,6 @@ def _outcome_selected_benchmark_context(
             }
         )
     return pd.DataFrame(rows)
-
-
-def _render_outcome_bootstrap_summary(
-    result: BacktestResult | None,
-    *,
-    deterministic_wealth: float | None,
-) -> None:
-    if result is None or result.equity.empty:
-        st.warning(
-            "Sequence-aware projection is not available because the selected strategy could not "
-            "be reconstructed from the loaded snapshot."
-        )
-        return
-    daily_returns = result.equity.pct_change().replace([float("inf"), float("-inf")], pd.NA)
-    config = OutcomeBootstrapConfig()
-    paths = bootstrap_outcome_paths(daily_returns, config=config)
-    summary = summarize_bootstrap_outcomes(paths)
-    if int(summary.get("paths") or 0) == 0:
-        st.warning(
-            "Sequence-aware projection is not available because the selected strategy has too few "
-            "usable daily returns."
-        )
-        return
-
-    st.markdown("**Sequence-aware outcome simulation**")
-    st.caption(
-        "Historical block bootstrap of the selected strategy's daily returns. This keeps sampled "
-        "return sequences and drawdown behavior instead of assuming one smooth CAGR. The next "
-        "section adds current scenario probabilities and empirical regime transitions."
-    )
-    cols = st.columns(5)
-    _helped_metric(cols[0], "Bootstrap P10 Wealth", _format_currency(summary["terminal_wealth_p10"]))
-    _helped_metric(cols[1], "Bootstrap Median", _format_currency(summary["terminal_wealth_p50"]))
-    _helped_metric(cols[2], "Bootstrap P90 Wealth", _format_currency(summary["terminal_wealth_p90"]))
-    _helped_metric(cols[3], "Median Sim DD", _format_percent(summary["max_drawdown_p50"]))
-    _helped_metric(cols[4], "Median Sim Ulcer", _format_percent(summary["ulcer_index_p50"]))
-
-    deterministic_value = _safe_float(deterministic_wealth)
-    median_value = _safe_float(summary.get("terminal_wealth_p50"))
-    if deterministic_value is not None and median_value is not None:
-        difference = median_value - deterministic_value
-        st.caption(
-            "Bootstrap median minus deterministic CAGR projection: "
-            f"{_format_currency(difference)}. Large gaps indicate meaningful sequence risk."
-        )
-
-    with st.expander("Bootstrap settings and sample distribution", expanded=False):
-        st.write(
-            "Current settings: "
-            f"{config.paths:,} paths, {config.block_days}-trading-day blocks, "
-            f"{config.horizon_years}-year horizon, "
-            f"{_format_currency(config.starting_account_value)} starting balance, "
-            f"{_format_currency(config.annual_contribution)} annual contribution "
-            f"split {config.contribution_timing}."
-        )
-        fig = go.Figure(
-            go.Histogram(
-                x=paths["terminal_wealth"],
-                nbinsx=40,
-                marker={"color": "#0f766e", "line": {"color": "#0f172a", "width": 0.5}},
-                hovertemplate="Terminal wealth %{x:$,.0f}<br>Paths %{y}<extra></extra>",
-            )
-        )
-        fig.update_layout(
-            height=260,
-            xaxis_title="Simulated terminal wealth",
-            yaxis_title="Path count",
-            margin={"l": 20, "r": 20, "t": 20, "b": 20},
-        )
-        st.plotly_chart(fig, use_container_width=True)
-        _render_metric_dataframe(
-            _display_metrics(paths.describe(percentiles=[0.1, 0.5, 0.9]).reset_index()),
-            hide_index=True,
-        )
-
-
-def _render_regime_forward_simulation(
-    result: BacktestResult | None,
-    *,
-    baseline_run: BaselineRun,
-) -> None:
-    if result is None or result.equity.empty:
-        return
-    return_values = _returns_tuple_for_cache(result)
-    if len(return_values) < 30:
-        st.warning(
-            "Regime-conditioned forward simulation is not available because the selected strategy "
-            "has too few usable daily returns."
-        )
-        return
-
-    scenario_records = _scenario_records_for_cache(baseline_run.current_state.scenario_outlook)
-    paths = _cached_regime_forward_paths(return_values, scenario_records)
-    config = ForwardSimulationConfig()
-    summary = summarize_forward_simulation(paths, config=config)
-    if int(summary.get("paths") or 0) == 0:
-        st.warning("Regime-conditioned forward simulation could not produce usable paths.")
-        return
-
-    st.markdown("**Regime-conditioned forward simulation**")
-    st.caption(
-        "Forward planning layer: label the strategy's historical daily returns into broad regimes, "
-        "blend today's scenario probabilities with empirical regime transitions, then sample future "
-        "paths with scheduled contributions. This is a research and planning lens, not an automatic "
-        "trade instruction."
-    )
-
-    cols = st.columns(6)
-    _helped_metric(
-        cols[0],
-        "Forward P10 Wealth",
-        _format_currency(summary["terminal_wealth_p10"]),
-    )
-    _helped_metric(
-        cols[1],
-        "Forward Median",
-        _format_currency(summary["terminal_wealth_p50"]),
-    )
-    _helped_metric(
-        cols[2],
-        "Forward P90 Wealth",
-        _format_currency(summary["terminal_wealth_p90"]),
-    )
-    _helped_metric(
-        cols[3],
-        "Median Forward DD",
-        _format_percent(summary["max_drawdown_p50"]),
-    )
-    _helped_metric(
-        cols[4],
-        "Severe DD Prob",
-        _format_percent(summary["severe_drawdown_probability"]),
-    )
-    _helped_metric(
-        cols[5],
-        "Capital Shortfall Prob",
-        _format_percent(summary["capital_impairment_probability"]),
-    )
-
-    p10 = _safe_float(summary.get("terminal_wealth_p10"))
-    p50 = _safe_float(summary.get("terminal_wealth_p50"))
-    p90 = _safe_float(summary.get("terminal_wealth_p90"))
-    severe_probability = _safe_float(summary.get("severe_drawdown_probability"))
-    if p10 is not None and p50 is not None and p90 is not None:
-        severe_text = (
-            f"{_format_percent(severe_probability)} severe-drawdown probability"
-            if severe_probability is not None
-            else "unknown severe-drawdown probability"
-        )
-        st.info(
-            "Forward read: current scenarios and historical regime transitions produce a "
-            f"{_format_currency(p10)} to {_format_currency(p90)} central 80% wealth range, "
-            f"with median {_format_currency(p50)} and {severe_text}."
-        )
-
-    with st.expander("Regime simulation details", expanded=False):
-        detail_cols = st.columns(2)
-        with detail_cols[0]:
-            st.caption("Scenario probabilities used now")
-            _render_metric_dataframe(
-                _display_metrics(pd.DataFrame(scenario_records, columns=["regime", "probability"])),
-                hide_index=True,
-            )
-        with detail_cols[1]:
-            st.caption("Average regime mix across simulated paths")
-            _render_metric_dataframe(_display_metrics(regime_mix_frame(paths)), hide_index=True)
-
-        st.caption("Forward simulation settings")
-        _render_metric_dataframe(simulation_settings_frame(config), hide_index=True)
-
-        chart_cols = st.columns(2)
-        with chart_cols[0]:
-            st.plotly_chart(
-                _simulation_histogram(
-                    paths,
-                    column="terminal_wealth",
-                    title="Terminal wealth paths",
-                    xaxis_title="Terminal wealth",
-                    color="#0f766e",
-                    hovertemplate="Terminal wealth %{x:$,.0f}<br>Paths %{y}<extra></extra>",
-                ),
-                use_container_width=True,
-            )
-        with chart_cols[1]:
-            st.plotly_chart(
-                _simulation_histogram(
-                    paths,
-                    column="max_drawdown",
-                    title="Max drawdown paths",
-                    xaxis_title="Max drawdown",
-                    color="#f59e0b",
-                    hovertemplate="Max drawdown %{x:.1%}<br>Paths %{y}<extra></extra>",
-                ),
-                use_container_width=True,
-            )
-
-        st.caption("Raw path distribution")
-        _render_metric_dataframe(
-            _display_metrics(paths.describe(percentiles=[0.1, 0.5, 0.9]).reset_index()),
-            hide_index=True,
-        )
-
-
-@st.cache_data(show_spinner=False, max_entries=64)
-def _cached_regime_forward_paths(
-    return_values: tuple[float, ...],
-    scenario_records: tuple[tuple[str, float], ...],
-) -> pd.DataFrame:
-    scenario_frame = pd.DataFrame(
-        [{"risk_bucket": regime, "probability": probability} for regime, probability in scenario_records]
-    )
-    return simulate_regime_conditioned_paths(
-        pd.Series(return_values, dtype=float),
-        scenario_outlook=scenario_frame,
-        config=ForwardSimulationConfig(),
-    )
-
-
-def _returns_tuple_for_cache(result: BacktestResult) -> tuple[float, ...]:
-    returns = result.equity.pct_change().replace([float("inf"), float("-inf")], pd.NA)
-    clean = pd.to_numeric(returns, errors="coerce").dropna()
-    return tuple(float(value) for value in clean.to_numpy(dtype=float))
-
-
-def _scenario_records_for_cache(scenario_outlook: pd.DataFrame | None) -> tuple[tuple[str, float], ...]:
-    probabilities = scenario_probability_frame(scenario_outlook)
-    return tuple(
-        (str(row["regime"]), float(row["probability"])) for _, row in probabilities.iterrows()
-    )
-
-
-def _simulation_histogram(
-    paths: pd.DataFrame,
-    *,
-    column: str,
-    title: str,
-    xaxis_title: str,
-    color: str,
-    hovertemplate: str,
-) -> go.Figure:
-    fig = go.Figure(
-        go.Histogram(
-            x=paths[column],
-            nbinsx=40,
-            marker={"color": color, "line": {"color": "#0f172a", "width": 0.5}},
-            hovertemplate=hovertemplate,
-        )
-    )
-    fig.update_layout(
-        height=280,
-        title=title,
-        xaxis_title=xaxis_title,
-        yaxis_title="Path count",
-        margin={"l": 20, "r": 20, "t": 40, "b": 20},
-    )
-    return fig
 
 
 def _outcome_metric_peer_context(

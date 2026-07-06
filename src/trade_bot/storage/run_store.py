@@ -20,6 +20,8 @@ from trade_bot.DEFAULTS import (
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_JOURNAL_PATH,
     DEFAULT_MACRO_PATH,
+    DEFAULT_ML_DIAGNOSTICS_DIR,
+    DEFAULT_MONITORING_TOP_N,
     DEFAULT_NEWS_PATH,
     DEFAULT_REPORT_PATH,
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
@@ -372,6 +374,157 @@ class RunStore:
         command.append("--migrate-warehouse" if migrate_warehouse else "--skip-warehouse")
         command.append("--paper-valuation" if paper_valuation else "--skip-paper-valuation")
 
+        return self._start_background_job(command, log_path)
+
+    def start_warehouse_migration_job(
+        self,
+        *,
+        experiment_dir: str | Path = DEFAULT_EXPERIMENTS_DIR,
+        journal_path: str | Path = DEFAULT_JOURNAL_PATH,
+    ) -> SnapshotJob:
+        log_path = self.job_log_dir / f"{_new_job_id()}.log"
+        command = [
+            sys.executable,
+            "-m",
+            "trade_bot.cli",
+            "migrate-warehouse",
+            "--store",
+            str(self.db_path),
+            "--artifact-dir",
+            str(self.artifact_dir),
+            "--job-log-dir",
+            str(self.job_log_dir),
+            "--experiment-dir",
+            str(experiment_dir),
+            "--journal",
+            str(journal_path),
+        ]
+        return self._start_background_job(command, log_path)
+
+    def start_paper_valuation_job(
+        self,
+        *,
+        config_path: str | Path = DEFAULT_CONFIG_PATH,
+    ) -> SnapshotJob:
+        log_path = self.job_log_dir / f"{_new_job_id()}.log"
+        command = [
+            sys.executable,
+            "-m",
+            "trade_bot.cli",
+            "run-paper-valuation",
+            "--config",
+            str(config_path),
+            "--store",
+            str(self.db_path),
+            "--artifact-dir",
+            str(self.artifact_dir),
+            "--job-log-dir",
+            str(self.job_log_dir),
+        ]
+        return self._start_background_job(command, log_path)
+
+    def start_monitoring_start_reset_job(
+        self,
+        *,
+        config_path: str | Path = DEFAULT_CONFIG_PATH,
+        start_date: str,
+        mode: str = "paper",
+        account: str | None = None,
+        status: str = "active",
+        value_after_reset: bool = True,
+    ) -> SnapshotJob:
+        log_path = self.job_log_dir / f"{_new_job_id()}.log"
+        command = [
+            sys.executable,
+            "-m",
+            "trade_bot.cli",
+            "reset-monitoring-start-date",
+            "--config",
+            str(config_path),
+            "--store",
+            str(self.db_path),
+            "--artifact-dir",
+            str(self.artifact_dir),
+            "--job-log-dir",
+            str(self.job_log_dir),
+            "--start-date",
+            start_date,
+            "--mode",
+            mode,
+            "--status",
+            status,
+        ]
+        if account:
+            command.extend(["--account", account])
+        command.append("--value-after-reset" if value_after_reset else "--skip-valuation")
+        return self._start_background_job(command, log_path)
+
+    def start_monitoring_seed_job(
+        self,
+        *,
+        mode: str = "paper",
+        account: str = "default_paper_account",
+        capital_base: float = 10_000.0,
+        top_n: int = DEFAULT_MONITORING_TOP_N,
+        start_date: str | None = None,
+    ) -> SnapshotJob:
+        log_path = self.job_log_dir / f"{_new_job_id()}.log"
+        command = [
+            sys.executable,
+            "-m",
+            "trade_bot.cli",
+            "seed-monitoring-windows",
+            "--store",
+            str(self.db_path),
+            "--artifact-dir",
+            str(self.artifact_dir),
+            "--job-log-dir",
+            str(self.job_log_dir),
+            "--mode",
+            mode,
+            "--account",
+            account,
+            "--capital-base",
+            str(capital_base),
+            "--top-n",
+            str(top_n),
+        ]
+        if start_date:
+            command.extend(["--start-date", start_date])
+        return self._start_background_job(command, log_path)
+
+    def start_ml_diagnostics_job(
+        self,
+        *,
+        config_path: str | Path = DEFAULT_CONFIG_PATH,
+        output_dir: str | Path = DEFAULT_ML_DIAGNOSTICS_DIR,
+        profile: str = "standard",
+        refresh_data: bool = False,
+        step_days: int | None = None,
+    ) -> SnapshotJob:
+        log_path = self.job_log_dir / f"{_new_job_id()}.log"
+        command = [
+            sys.executable,
+            "-m",
+            "trade_bot.cli",
+            "run-ml-diagnostics",
+            "--config",
+            str(config_path),
+            "--output-dir",
+            str(output_dir),
+            "--profile",
+            profile,
+            "--store",
+            str(self.db_path),
+            "--artifact-dir",
+            str(self.artifact_dir),
+            "--job-log-dir",
+            str(self.job_log_dir),
+        ]
+        if refresh_data:
+            command.append("--refresh-data")
+        if step_days is not None:
+            command.extend(["--step-days", str(step_days)])
         return self._start_background_job(command, log_path)
 
     def _start_background_job(self, command: list[str], log_path: Path) -> SnapshotJob:

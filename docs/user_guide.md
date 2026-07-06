@@ -44,7 +44,8 @@ Use the left sidebar for regular refresh and runtime controls.
 | Run source: **Live pipeline** | Debugging or ad hoc local checks | Recomputes in-session and can be slower. Do not use this as the default daily workflow. |
 | **Run Full Daily Update** | Normal one-click refresh | Queues the full daily stack: market data, macro data, news, snapshot, warehouse migration, and paper valuation. |
 | Local paths | Changing config/run-store inputs | Most users should leave these alone after setup. |
-| Advanced refresh options | Partial snapshot rebuilds | Use only when intentionally refreshing one input layer or debugging. |
+| Targeted update jobs | Refreshing one downstream layer | Use after the snapshot is current and you only need warehouse migration, paper valuation, monitoring-window seeding, or ML diagnostics. |
+| Advanced snapshot options | Partial snapshot rebuilds | Use only when intentionally refreshing one input layer or debugging. |
 | Update jobs | Checking background job status | After a queued job finishes, refresh the browser to load the new snapshot. |
 | Show quick reference rail | Showing/hiding the right help rail | Turn it off when you need more horizontal chart/table space. |
 
@@ -90,6 +91,20 @@ Preferred dashboard workflow:
 
 The sidebar button refreshes market data, macro data, news, the snapshot,
 warehouse tables, and active paper-monitoring valuations.
+
+If you only need part of the stack, open **Targeted update jobs** in the left
+sidebar:
+
+| Button | What It Does | When To Use It |
+| --- | --- | --- |
+| **Migrate Warehouse** | Re-imports experiment artifacts, journal rows, strategy registry, and scorecards into DuckDB. | After experiment files change or when Research Lab/Monitoring looks stale. |
+| **Run Paper Valuation** | Values active paper champion/challenger/reference windows from the latest snapshot. | After the snapshot is current but monitoring rows need today’s valuation. |
+| **Seed Monitoring Windows** | Adds top paper windows from the current registry using the selected top-N and capital settings. | When starting or resetting paper monitoring. |
+| **Run ML Diagnostics** | Refreshes standard or research ML diagnostics. | When Research Lab ML probabilities, feature importance, or drift artifacts need updating. |
+
+These targeted buttons use the same local background-job queue as the full
+daily update. Open **Update jobs** to inspect status and logs, then refresh the
+browser once the job completes.
 
 CLI equivalent from the repo root:
 
@@ -247,6 +262,9 @@ Recommended flow:
    into broad simulation buckets.
 2. Strategy Simulations: choose a strategy and compare deterministic 15-year
    wealth, historical bootstrap range, and regime-conditioned forward range.
+   If the loaded snapshot includes reference backtests, keep Hold SPY and Hold
+   QQQ selected in the reference overlay control to see whether the selected
+   strategy adds forward utility versus simply holding the major indexes.
 3. Interpretability: inspect the model ladder, scenario bridge, historical
    regime-return library, and simulated regime mix.
 
@@ -410,9 +428,17 @@ research idea until runtime support is added.
 7. Set mode to `paper`.
 8. Set account label.
 9. Set capital base.
-10. Click the start/update button.
-11. After the next full daily update, confirm the window receives a valuation
+10. Set the start date. Use a shared cohort date such as `2026-01-01` for
+    YTD-style comparisons, or use the actual adoption date when the question is
+    "what happened after I started monitoring this strategy?"
+11. Click the start/update button.
+12. After the next full daily update, confirm the window receives a valuation
     row. The sidebar **Run Full Daily Update** button includes paper valuation.
+
+The left sidebar also has a **Monitoring cohort start** control plus buttons to
+seed windows or reset active paper windows to that shared start date. Resetting
+the start date clears old paper valuation rows for those windows, then the
+valuation job rebuilds the paper track from the selected cohort start.
 
 ### From The CLI
 
@@ -422,6 +448,13 @@ Seed top operational candidates:
 poetry run trade-bot migrate-warehouse
 poetry run trade-bot seed-monitoring-windows --mode paper --account default_paper_account --capital-base 10000 --top-n 5 --start-date YYYY-MM-DD
 poetry run trade-bot run-paper-valuation
+```
+
+Reset all active paper windows to a common YTD cohort start and immediately
+revalue them:
+
+```bash
+poetry run trade-bot reset-monitoring-start-date --start-date 2026-01-01
 ```
 
 Monitor one strategy:

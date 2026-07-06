@@ -14,18 +14,19 @@ The active reset-era experiment archive is classified into research statuses:
 - `pruned_dead_end`: failed risk/return, low-growth, or validation-failed experiment. Keep for audit, hide from default curation.
 - `reference`: static or configured benchmark rows.
 
-The current working read after the ML and outcome-utility expansion is sharp:
+The working read after the ML and outcome-utility expansion is sharp:
 broad future-state ML can easily become too conservative, while bounded ML and
 re-entry overlays preserve high CAGR better. Strategy-specific drawdown ML
-improved CAGR and Calmar slightly in the best cases, but it has not yet
-materially reduced max drawdown versus the best raw high-CAGR AI escape controls.
+improved CAGR and Calmar slightly in the best cases, but it is not a promoted
+default driver for material max-drawdown reduction versus the best raw high-CAGR
+AI escape controls.
 Reactive classic drawdown-control hybrids were worse and should not be promoted
 for the AI escape engine without a new reason.
 
 The growth-constrained outcome lens changed the curation objective. A strategy
 with roughly 14-15 percent CAGR and a tolerable -20 to -22 percent drawdown can
 rank above an 11 percent CAGR strategy with a smaller drawdown when validation is
-comparable. The hard pruning boundary for drawdown is now the growth hard limit,
+comparable. The hard pruning boundary for drawdown is the growth hard limit,
 not a blanket -25 percent cutoff. The broad/sector growth-frontier pass was
 useful evidence but did not dethrone the existing high-CAGR re-entry and AI-escape
 guardrail families.
@@ -40,7 +41,7 @@ Rows are pruned from default views when any of these are true:
 - explicit left-tail, regime-fragility, or walk-forward-fragility rejection;
 - CAGR below 5%;
 - weak combined return and risk-adjusted profile;
-- max drawdown at or beyond the hard growth drawdown limit, currently -30%;
+- max drawdown at or beyond the configured hard growth drawdown limit;
 - reactive classic drawdown-control variants lose too much growth;
 - future-state ML probes remain below practical return thresholds;
 - weak walk-forward positive rate;
@@ -69,7 +70,7 @@ research archive:
 This pruning is display and monitoring governance, not deletion. The archive is
 still the audit trail.
 
-Signal families now have their own evidence audit. Before promoting a new
+Signal families have their own evidence audit. Before promoting a new
 monitor, source family, or narrative diagnostic into the default operating
 surface, run:
 

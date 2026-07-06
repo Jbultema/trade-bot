@@ -17,6 +17,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_EXPERIMENT_REGISTRY_LIMIT,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_JOURNAL_PATH,
+    DEFAULT_MONITORING_COHORT_START_DATE,
     DEFAULT_MONITORING_TOP_N,
     DEFAULT_RESET_EXPERIMENTS_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
@@ -283,7 +284,7 @@ class TradingWarehouse:
             has_active_champion = not active_champions.empty
 
         now = utc_now_iso()
-        today = start_date or date.today().isoformat()
+        today = _normalize_monitoring_start_date(start_date)
         rows = []
         seeded: list[MonitoringWindowSeedResult] = []
         seeded_champion = False
@@ -388,6 +389,7 @@ class TradingWarehouse:
                     role=role,
                     status="active",
                     capital_base=capital_base,
+                    start_date=start_date,
                     demote_other_champions=demote_other_champions,
                 )
                 return MonitoringWindowSeedResult(
@@ -397,7 +399,7 @@ class TradingWarehouse:
                     role=role,
                 )
 
-        today = start_date or date.today().isoformat()
+        today = _normalize_monitoring_start_date(start_date)
         window_id = self._unique_monitoring_window_id(
             _monitoring_window_id(mode, account, strategy_id, today)
         )
@@ -444,6 +446,7 @@ class TradingWarehouse:
         role: str | None = None,
         status: str | None = None,
         capital_base: float | None = None,
+        start_date: str | None = None,
         demote_other_champions: bool = False,
     ) -> bool:
         windows = self.list_monitoring_windows(status=None)
@@ -472,12 +475,20 @@ class TradingWarehouse:
                 raise ValueError("capital_base must be positive.")
             updates.append("capital_base = ?")
             params.append(float(capital_base))
+        normalized_start_date = (
+            _normalize_monitoring_start_date(start_date) if start_date is not None else None
+        )
+        if normalized_start_date is not None:
+            updates.append("start_date = ?")
+            params.append(normalized_start_date)
 
         params.append(window_id)
         self._execute(
             f"UPDATE monitoring_windows SET {', '.join(updates)} WHERE window_id = ?",
             params,
         )
+        if normalized_start_date is not None and normalized_start_date != str(row["start_date"]):
+            self.clear_monitoring_valuations([window_id])
         if role == "champion" and demote_other_champions:
             self._demote_other_champions(
                 window_id,
@@ -485,6 +496,71 @@ class TradingWarehouse:
                 str(row["account"]),
             )
         return True
+
+    def reset_monitoring_start_dates(
+        self,
+        *,
+        start_date: str = DEFAULT_MONITORING_COHORT_START_DATE,
+        mode: str | None = "paper",
+        account: str | None = None,
+        status: str | None = "active",
+        clear_valuations: bool = True,
+    ) -> int:
+        normalized_start_date = _normalize_monitoring_start_date(start_date)
+        windows = self.list_monitoring_windows(status=status)
+        if windows.empty:
+            return 0
+        mask = pd.Series(True, index=windows.index)
+        if mode is not None:
+            mask &= windows["mode"].astype(str) == mode
+        if account:
+            mask &= windows["account"].astype(str) == account
+        selected = windows[mask].copy()
+        if selected.empty:
+            return 0
+
+        window_ids = selected["window_id"].astype(str).tolist()
+        connection = self._connect()
+        try:
+            update_ids = pd.DataFrame({"window_id": window_ids})
+            connection.register("update_window_ids", update_ids)
+            connection.execute(
+                """
+                UPDATE monitoring_windows
+                SET start_date = ?, updated_at_utc = ?
+                WHERE window_id IN (SELECT window_id FROM update_window_ids)
+                """,
+                [normalized_start_date, utc_now_iso()],
+            )
+        finally:
+            connection.close()
+        if clear_valuations:
+            self.clear_monitoring_valuations(window_ids)
+        return len(window_ids)
+
+    def clear_monitoring_valuations(self, window_ids: Iterable[str]) -> int:
+        window_id_list = [str(window_id) for window_id in window_ids if str(window_id)]
+        if not window_id_list or not self.table_exists("strategy_daily_valuations"):
+            return 0
+        before = self._query(
+            "SELECT COUNT(*) AS rows FROM strategy_daily_valuations"
+        )["rows"].iloc[0]
+        connection = self._connect()
+        try:
+            delete_ids = pd.DataFrame({"window_id": window_id_list})
+            connection.register("delete_window_ids", delete_ids)
+            connection.execute(
+                """
+                DELETE FROM strategy_daily_valuations
+                WHERE window_id IN (SELECT window_id FROM delete_window_ids)
+                """
+            )
+        finally:
+            connection.close()
+        after = self._query("SELECT COUNT(*) AS rows FROM strategy_daily_valuations")[
+            "rows"
+        ].iloc[0]
+        return int(before - after)
 
     def _demote_other_champions(self, window_id: str, mode: str, account: str) -> None:
         self._execute(
@@ -790,34 +866,42 @@ class TradingWarehouse:
             if equity_series.empty:
                 continue
             capital_base = float(window["capital_base"])
-            previous_valuations = self._window_valuations_before(
-                str(window["window_id"]),
-                valuation_date,
+            start_date = _normalize_monitoring_start_date(str(window.get("start_date", "")))
+            strategy_path = _strategy_path_for_monitoring_window(
+                equity_series,
+                start_date=start_date,
+                valuation_date=valuation_date,
             )
-            has_previous_valuation = not previous_valuations.empty
-            latest_strategy_return = float(returns.iloc[-1]) if not returns.empty else 0.0
+            if strategy_path.empty:
+                continue
+            strategy_start = float(strategy_path.iloc[0])
+            strategy_end = float(strategy_path.iloc[-1])
+            if strategy_start <= 0:
+                continue
+            cumulative_return = strategy_end / strategy_start - 1.0
+            paper_equity = capital_base * (1.0 + cumulative_return)
+            daily_return = _series_return_on_or_before(returns, valuation_date)
             benchmark_return = 0.0
+            benchmark_cumulative_return = float("nan")
+            benchmark_equity_value = float("nan")
             if benchmark_equity is not None and not benchmark_equity.empty:
-                aligned_benchmark = benchmark_equity.reindex(equity_series.index).ffill().dropna()
-                if len(aligned_benchmark) >= 2:
-                    benchmark_return = float(aligned_benchmark.pct_change().iloc[-1])
-
-            if has_previous_valuation:
-                previous_row = previous_valuations.iloc[-1]
-                daily_return = latest_strategy_return
-                paper_equity = float(previous_row["equity"]) * (1.0 + daily_return)
-                previous_benchmark_equity = _optional_float(previous_row.get("benchmark_equity"))
-                benchmark_base = previous_benchmark_equity or capital_base
-                benchmark_equity_value = benchmark_base * (1.0 + benchmark_return)
-            else:
-                daily_return = 0.0
-                benchmark_return = 0.0
-                paper_equity = capital_base
-                benchmark_equity_value = capital_base
-
-            cumulative_return = paper_equity / capital_base - 1.0
-            benchmark_cumulative_return = benchmark_equity_value / capital_base - 1.0
-            drawdown = _forward_drawdown(previous_valuations, paper_equity)
+                benchmark_path = _strategy_path_for_monitoring_window(
+                    benchmark_equity,
+                    start_date=start_date,
+                    valuation_date=valuation_date,
+                )
+                if not benchmark_path.empty and float(benchmark_path.iloc[0]) > 0:
+                    benchmark_cumulative_return = (
+                        float(benchmark_path.iloc[-1]) / float(benchmark_path.iloc[0]) - 1.0
+                    )
+                    benchmark_equity_value = capital_base * (
+                        1.0 + benchmark_cumulative_return
+                    )
+                    benchmark_return = _series_return_on_or_before(
+                        benchmark_equity.pct_change().dropna(),
+                        valuation_date,
+                    )
+            drawdown = _latest_drawdown(strategy_path)
             latest_weights = _latest_strategy_weights(result)
             exposure_diagnostics = _latest_exposure_diagnostics(
                 getattr(baseline_run, "prices", pd.DataFrame()),
@@ -850,7 +934,10 @@ class TradingWarehouse:
                         else float("nan")
                     ),
                     **exposure_diagnostics,
-                    "notes": "Forward paper valuation compounded from monitoring-window start; first valuation starts at capital base.",
+                    "notes": (
+                        "Start-date anchored ideal valuation from the monitoring window start; "
+                        "actual execution drift is tracked separately in Forward Test."
+                    ),
                 }
             )
         if not rows:
@@ -1372,6 +1459,52 @@ def _benchmark_equity(baseline_run: Any) -> pd.Series | None:
         if ticker in prices:
             return cast(pd.Series, prices[ticker].dropna())
     return None
+
+
+def _normalize_monitoring_start_date(value: str | None) -> str:
+    if value is None or not str(value).strip() or str(value).lower() == "nan":
+        return DEFAULT_MONITORING_COHORT_START_DATE
+    try:
+        return pd.Timestamp(value).date().isoformat()
+    except ValueError as exc:
+        raise ValueError(f"Invalid monitoring start date: {value}") from exc
+
+
+def _series_with_datetime_index(series: pd.Series) -> pd.Series:
+    clean = pd.to_numeric(series, errors="coerce").dropna()
+    if clean.empty:
+        return pd.Series(dtype=float)
+    index = pd.to_datetime(clean.index, errors="coerce")
+    clean = clean.copy()
+    clean.index = index
+    clean = clean[~clean.index.isna()].sort_index()
+    return clean.astype(float)
+
+
+def _strategy_path_for_monitoring_window(
+    series: pd.Series,
+    *,
+    start_date: str,
+    valuation_date: str,
+) -> pd.Series:
+    clean = _series_with_datetime_index(series)
+    if clean.empty:
+        return clean
+    start_ts = pd.Timestamp(start_date)
+    valuation_ts = pd.Timestamp(valuation_date)
+    if valuation_ts < start_ts:
+        return clean.iloc[0:0]
+    return clean[(clean.index >= start_ts) & (clean.index <= valuation_ts)]
+
+
+def _series_return_on_or_before(returns: pd.Series, valuation_date: str) -> float:
+    clean = _series_with_datetime_index(returns)
+    if clean.empty:
+        return 0.0
+    eligible = clean[clean.index <= pd.Timestamp(valuation_date)]
+    if eligible.empty:
+        return 0.0
+    return float(eligible.iloc[-1])
 
 
 def _monitoring_window_id(mode: str, account: str, strategy_id: str, start_date: str) -> str:

@@ -8,7 +8,7 @@ risk sizing, and human-readable action translation.
 
 ## Current Implemented Coverage
 
-The local public-data system currently approximates several institutional-style
+The local public-data system approximates several institutional-style
 macro concepts, but it should be treated as a research proxy stack rather than a
 commercial data terminal. These signals are useful only after they survive
 backtests, walk-forward checks, and paper-monitoring review.
@@ -30,7 +30,7 @@ backtests, walk-forward checks, and paper-monitoring review.
   - 14-day RSI
   - crowded upside and washed-out re-entry states
 - Dashboard surface:
-  - News & Macro now shows cycle, asset, Growth-Inflation Map, and positioning tables.
+  - News & Macro shows cycle, asset, Growth-Inflation Map, and positioning tables.
 - Cross-Source Insight Diagnostics:
   - AI supplier / hyperscaler divergence.
   - Hyperscaler capex / free-cash-flow pressure.
@@ -139,7 +139,7 @@ It should answer four operating questions:
 
 The cross-source diagnostic layer should answer a separate set of questions:
 
-1. Which recurring external-source themes are currently supported by our public
+1. Which recurring external-source themes are supported by our public
    data proxies?
 2. Which themes are only weakly proxied and therefore useful mainly for research
    design?

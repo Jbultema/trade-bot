@@ -18,9 +18,9 @@ guardrails against concentration and narrative overreaction.
 
 The most important practical lesson is that risk-off is only half the problem.
 Many systems can reduce drawdown by moving defensive. The harder and more
-valuable problem is re-risking early enough after damage has been contained. The
-best research direction has therefore moved toward re-entry, recovery capture,
-and growth-constrained outcome optimization rather than maximum Calmar alone.
+valuable problem is re-risking early enough after damage has been contained.
+The highest-value research direction is re-entry, recovery capture, and
+growth-constrained outcome optimization rather than maximum Calmar alone.
 
 The second major lesson is that narratives can be useful but dangerous. AI capex,
 private credit, Treasury supply, and concentration are important context, but the
@@ -63,8 +63,8 @@ Useful re-entry ingredients:
 
 ### 3. Decision-sanity caps
 
-The decision-sanity overlay was added because news/event pressure could make the
-system too bearish. The useful rule is: large defensive moves should require
+Decision-sanity overlays address a recurring failure mode: news/event pressure
+can make the system too bearish. The useful rule is: large defensive moves should require
 market confirmation, not only narrative concern.
 
 This is especially important in environments where:
@@ -254,8 +254,8 @@ The dashboard is most useful when it follows this structure:
 5. candidate deep dives,
 6. monitoring and execution audit.
 
-The app became less useful when it showed too many numbers without conclusions.
-The best views now explain:
+The dashboard is least useful when it shows numbers without conclusions. The
+best views explain:
 
 - what to do,
 - why,
@@ -300,8 +300,8 @@ Promising taxable strategy traits:
 
 ## What To Keep Testing
 
-The most valuable future work is not more random strategy variants. It is
-targeted evidence:
+The highest-value research backlog is targeted evidence rather than more random
+strategy variants:
 
 - re-entry timing after drawdowns,
 - broadening/source-of-funds rotation away from concentrated AI,
@@ -323,7 +323,7 @@ Default operating views should hide:
 - stale narrative modules,
 - redundant variants,
 - strategies that cannot be valued forward,
-- old plans that no longer describe current system behavior.
+- archived plans that do not describe maintained system behavior.
 
 Pruning does not mean deleting the research history. It means protecting the
 daily operating surface from noise.

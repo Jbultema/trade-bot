@@ -70,7 +70,7 @@ def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_pa
     seeded = warehouse.seed_monitoring_windows_from_registry(
         account="shadow",
         top_n=1,
-        start_date="2026-06-18",
+        start_date="2026-06-16",
     )
 
     assert len(seeded) == 1
@@ -110,9 +110,9 @@ def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_pa
 
     assert valued_rows == 1
     assert second_rows == 1
-    assert first_champion.iloc[0]["equity"] == 10_000.0
-    assert first_champion.iloc[0]["cumulative_return"] == 0.0
-    assert first_champion.iloc[0]["forward_status"] == "in_line"
+    assert first_champion.iloc[0]["equity"] == pytest.approx(10_300.0)
+    assert first_champion.iloc[0]["cumulative_return"] == pytest.approx(0.03)
+    assert first_champion.iloc[0]["forward_status"] == "ahead_of_benchmark"
     assert champion.iloc[0]["strategy_name"] == "candidate_alpha"
     assert champion.iloc[0]["forward_status"] == "ahead_of_benchmark"
     assert champion.iloc[0]["validation_tier"] == "paper_champion_candidate"
@@ -323,14 +323,14 @@ def test_warehouse_manually_monitors_and_values_experiment_candidate(tmp_path) -
         role="challenger",
         account="paper_core",
         capital_base=10_000.0,
-        start_date="2026-06-18",
+        start_date="2026-06-15",
     )
     separate_champion = warehouse.monitor_strategy(
         "manual_candidate",
         role="champion",
         account="paper_satellite",
         capital_base=5_000.0,
-        start_date="2026-06-18",
+        start_date="2026-06-15",
     )
     updated = warehouse.update_monitoring_window(
         monitored.window_id,
@@ -375,6 +375,118 @@ def test_warehouse_manually_monitors_and_values_experiment_candidate(tmp_path) -
     assert set(valued["strategy_name"]) == {"manual_candidate"}
     assert valued["valuation_date"].notna().all()
     assert valued["equity"].min() > 5_000.0
+
+
+def test_warehouse_resets_monitoring_start_dates_and_reanchors_valuations(tmp_path) -> None:
+    experiment_dir = tmp_path / "experiments"
+    iteration_dir = experiment_dir / "iteration_43"
+    iteration_dir.mkdir(parents=True)
+    strategy = StrategyConfig(type="buy_hold", tickers=["QQQ"])
+    pd.DataFrame(
+        [
+            {
+                "strategy": "reset_candidate",
+                "phase": "operating_system",
+                "family": "runtime_test",
+                "role": "candidate",
+                "parent": "",
+                "hypothesis": "Can reset monitoring start.",
+                "scenario_sizing": "",
+                "scenario_sizing_json": "",
+                "strategy_json": json.dumps(strategy.model_dump(mode="json")),
+            }
+        ]
+    ).to_csv(iteration_dir / "candidates.csv", index=False)
+    pd.DataFrame(
+        [
+            {
+                "strategy": "reset_candidate",
+                "phase": "operating_system",
+                "family": "runtime_test",
+                "role": "candidate",
+                "promotion_decision": "promote_candidate",
+                "promotion_score": 0.90,
+                "robustness_score": 0.80,
+                "cagr": 0.12,
+                "sharpe": 1.0,
+                "max_drawdown": -0.12,
+                "calmar": 1.0,
+                "average_turnover": 0.02,
+                "walk_forward_positive_rate": 0.8,
+                "left_tail_regime_return": -0.08,
+                "hypothesis": "Can reset monitoring start.",
+            }
+        ]
+    ).to_csv(iteration_dir / "scorecard.csv", index=False)
+
+    warehouse = TradingWarehouse(tmp_path / "trade_bot.duckdb")
+    warehouse.migrate_experiment_outputs(experiment_dir)
+    warehouse.monitor_strategy(
+        "reset_candidate",
+        role="challenger",
+        account="paper_core",
+        capital_base=10_000.0,
+        start_date="2026-06-18",
+    )
+    baseline_run = SimpleNamespace(
+        current_state=SimpleNamespace(market_date="2026-06-18"),
+        prices=pd.DataFrame(
+            {
+                "SPY": [100.0, 101.0, 102.0, 103.0],
+                "QQQ": [100.0, 102.0, 104.0, 108.0],
+            },
+            index=pd.to_datetime(["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]),
+        ),
+        results={
+            "reset_candidate": SimpleNamespace(
+                equity=pd.Series(
+                    [100.0, 102.0, 104.0, 108.0],
+                    index=pd.to_datetime(
+                        ["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]
+                    ),
+                ),
+                returns=pd.Series(
+                    [0.0, 0.02, 0.0196078431, 0.0384615385],
+                    index=pd.to_datetime(
+                        ["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]
+                    ),
+                ),
+                weights=pd.DataFrame(
+                    {"QQQ": [1.0, 1.0, 1.0, 1.0]},
+                    index=pd.to_datetime(
+                        ["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]
+                    ),
+                ),
+            )
+        },
+    )
+
+    first_rows = warehouse.save_daily_valuations_from_snapshot(
+        baseline_run,
+        market_date="2026-06-18",
+        execution=ExecutionConfig(initial_capital=100_000.0, rebalance="D", signal_lag_days=1),
+    )
+    first = warehouse.champion_challenger_frame()
+    reset_rows = warehouse.reset_monitoring_start_dates(
+        start_date="2026-06-15",
+        mode="paper",
+        account="paper_core",
+    )
+    cleared = warehouse.read_table("strategy_daily_valuations")
+    second_rows = warehouse.save_daily_valuations_from_snapshot(
+        baseline_run,
+        market_date="2026-06-18",
+        execution=ExecutionConfig(initial_capital=100_000.0, rebalance="D", signal_lag_days=1),
+    )
+    second = warehouse.champion_challenger_frame()
+
+    assert first_rows == 1
+    assert first.iloc[0]["equity"] == pytest.approx(10_000.0)
+    assert reset_rows == 1
+    assert cleared.empty
+    assert second_rows == 1
+    assert second.iloc[0]["start_date"] == "2026-06-15"
+    assert second.iloc[0]["equity"] == pytest.approx(10_800.0)
 
 
 def test_warehouse_values_monitored_strategy_from_artifact_manifest_when_db_manifest_missing(

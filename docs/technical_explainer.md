@@ -117,7 +117,7 @@ The default execution assumptions live in config:
 execution:
   initial_capital: 100000.0
   transaction_cost_bps: 5.0
-  rebalance: "W-FRI"
+  rebalance: "W-WED"
   signal_lag_days: 1
 ```
 
@@ -362,6 +362,14 @@ regime mix across paths. This is the strongest planning layer in the app, but it
 is still scenario-conditioned historical simulation rather than a guarantee or
 automatic trading rule.
 
+Simulation Lab can also run the same bootstrap and regime-conditioned path
+machinery for configured reference portfolios such as Hold SPY and Hold QQQ.
+Those references are not a separate benchmark shortcut; they use the same
+terminal-wealth, contribution, and drawdown simulation settings as the selected
+strategy. The comparison table reports selected-strategy median forward wealth
+minus each reference median so the user can evaluate whether a candidate's
+extra complexity is earning its keep versus doing nothing.
+
 Simulation Lab keeps this forward modeling separate from Research Lab's
 empirical evidence surfaces. Research Lab answers "which strategies worked and
 why?" while Simulation Lab answers "what future range could this selected
@@ -421,7 +429,10 @@ Monitoring is handled by `storage/warehouse.py`. It stores:
 - journal data.
 
 The key table is `strategy_daily_valuations`, which tracks forward paper results
-from the window start date rather than importing full-history backtest gains.
+from the first available trading point on or after the monitoring-window start
+date rather than importing full-history backtest gains. This is idealized
+strategy monitoring; actual timing, quantities, fees, and missed executions stay
+in the Forward Test journal and book-alignment layer.
 
 ## Forward Test And Journal
 

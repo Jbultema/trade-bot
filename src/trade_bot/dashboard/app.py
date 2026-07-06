@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import html
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 import streamlit as st
@@ -37,6 +37,9 @@ from trade_bot.DEFAULTS import (
     DEFAULT_FORWARD_TEST_ACCOUNT,
     DEFAULT_FORWARD_TEST_STRATEGY,
     DEFAULT_MACRO_PATH,
+    DEFAULT_ML_DIAGNOSTICS_DIR,
+    DEFAULT_MONITORING_COHORT_START_DATE,
+    DEFAULT_MONITORING_TOP_N,
     DEFAULT_NEWS_PATH,
     DEFAULT_REPORT_PATH,
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
@@ -159,6 +162,9 @@ run_store = RunStore(run_store_path, artifact_dir=artifact_dir, job_log_dir=job_
 st.sidebar.caption(
     "Fast mode reads the latest precomputed snapshot. Live mode runs the pipeline in-session."
 )
+st.sidebar.caption(
+    "Recommended: run the full update, then refresh the browser after the job completes."
+)
 if st.sidebar.button("Run Full Daily Update", type="primary"):
     job = run_store.start_daily_update_job(
         config_path=config_path,
@@ -178,7 +184,82 @@ if st.sidebar.button("Run Full Daily Update", type="primary"):
     st.sidebar.success(f"Queued daily update job: {job.job_id}")
     st.sidebar.caption("Refresh this page after the job completes to load the new snapshot.")
 
-with st.sidebar.expander("Advanced refresh options", expanded=False):
+with st.sidebar.expander("Targeted update jobs", expanded=False):
+    st.caption(
+        "Use these when the daily snapshot is already current and you only need one downstream "
+        "piece refreshed."
+    )
+    if st.button("Migrate Warehouse", key="sidebar_migrate_warehouse"):
+        job = run_store.start_warehouse_migration_job(
+            experiment_dir=DEFAULT_EXPERIMENTS_DIR,
+            journal_path=journal_path,
+        )
+        st.cache_data.clear()
+        st.success(f"Queued warehouse migration: {job.job_id}")
+    if st.button("Run Paper Valuation", key="sidebar_run_paper_valuation"):
+        job = run_store.start_paper_valuation_job(config_path=config_path)
+        st.cache_data.clear()
+        st.success(f"Queued paper valuation: {job.job_id}")
+    seed_top_n = st.number_input(
+        "Seed top N paper windows",
+        min_value=1,
+        max_value=25,
+        value=DEFAULT_MONITORING_TOP_N,
+        step=1,
+    )
+    seed_capital = st.number_input(
+        "Seed capital per window",
+        min_value=100.0,
+        max_value=1_000_000.0,
+        value=10_000.0,
+        step=1_000.0,
+    )
+    monitoring_start_date = st.date_input(
+        "Monitoring cohort start",
+        value=date.fromisoformat(DEFAULT_MONITORING_COHORT_START_DATE),
+        help=(
+            "Used when seeding new paper windows or resetting active paper windows. "
+            "Use the same date for fair champion/challenger YTD comparisons."
+        ),
+    )
+    if st.button("Seed Monitoring Windows", key="sidebar_seed_monitoring"):
+        job = run_store.start_monitoring_seed_job(
+            mode="paper",
+            account=DEFAULT_FORWARD_TEST_ACCOUNT,
+            capital_base=float(seed_capital),
+            top_n=int(seed_top_n),
+            start_date=monitoring_start_date.isoformat(),
+        )
+        st.cache_data.clear()
+        st.success(f"Queued monitoring-window seed: {job.job_id}")
+    if st.button("Reset Active Paper Windows To Cohort Start", key="sidebar_reset_monitoring"):
+        job = run_store.start_monitoring_start_reset_job(
+            config_path=config_path,
+            start_date=monitoring_start_date.isoformat(),
+            mode="paper",
+            account=DEFAULT_FORWARD_TEST_ACCOUNT,
+            status="active",
+            value_after_reset=True,
+        )
+        st.cache_data.clear()
+        st.success(f"Queued monitoring reset + valuation: {job.job_id}")
+    ml_profile = st.selectbox("ML diagnostics profile", ["standard", "research"], index=0)
+    ml_refresh_data = st.checkbox("Refresh prices for ML diagnostics", value=False)
+    if st.button("Run ML Diagnostics", key="sidebar_run_ml_diagnostics"):
+        job = run_store.start_ml_diagnostics_job(
+            config_path=config_path,
+            output_dir=DEFAULT_ML_DIAGNOSTICS_DIR,
+            profile=ml_profile,
+            refresh_data=ml_refresh_data,
+        )
+        st.cache_data.clear()
+        st.success(f"Queued ML diagnostics: {job.job_id}")
+    st.caption(
+        "Large research sweeps remain CLI/Codex-driven because they are long-running, "
+        "parameterized, and can create many artifacts."
+    )
+
+with st.sidebar.expander("Advanced snapshot options", expanded=False):
     refresh_data = st.checkbox("Refresh market data", value=False)
     refresh_macro = st.checkbox("Refresh macro data", value=False)
     refresh_news = st.checkbox("Refresh news", value=False)
