@@ -852,15 +852,21 @@ Regime-conditioned forward simulation:
 For each selected strategy:
 1. compute daily returns from the reconstructed equity curve,
 2. label historical days into risk_off, transition, risk_on_fragile, or risk_on,
-3. aggregate today's scenario rollup into the same broad regime buckets,
-4. blend historical regime frequencies with today's scenario probabilities
+3. attach derived covariates such as trend, volatility, drawdown, and recent
+   shock, plus any supplied external numeric covariates,
+4. aggregate today's scenario rollup into the same broad regime buckets,
+5. blend historical regime frequencies with today's scenario probabilities
    for the starting state,
-5. blend empirical regime transition frequencies with today's scenario
+6. blend empirical regime transition frequencies with today's scenario
    probabilities for forward transitions,
-6. sample historical return blocks from the active simulated regime,
-7. add scheduled contributions according to the configured cadence,
-8. compute terminal wealth, max drawdown, Ulcer Index, hard-drawdown breach
-   probability, capital-shortfall probability, and average regime mix.
+7. adjust transition odds for how long the current simulated regime has
+   persisted relative to historical regime-duration distributions,
+8. sample historical return blocks from the active simulated regime, with
+   optional weighting toward blocks whose covariates resemble the latest state,
+9. add scheduled contributions according to the configured cadence,
+10. compute terminal wealth, max drawdown, Ulcer Index, hard-drawdown breach
+    probability, capital-shortfall probability, average regime mix, average
+    regime switches, longest risk-off streak, and covariate-match distance.
 ```
 
 The intended modeling ladder is:
@@ -869,13 +875,51 @@ The intended modeling ladder is:
 deterministic CAGR projection
 -> historical block-bootstrap sequence-risk projection
 -> regime-conditioned forward simulation using scenario probabilities,
-   regime transition assumptions, and strategy allocation rules.
+   duration-aware transitions, covariate-matched return blocks, and strategy
+   allocation rules
+-> factor-proxy path simulation using ETF proxy factors, fitted betas, and
+   residual strategy behavior.
 ```
 
 The regime-conditioned layer is implemented as a planning and research lens. It
 should stay out of direct trade automation until calibration, walk-forward
 behavior, and paper-forward monitoring show that it improves selection, sizing,
 re-entry, or drawdown control.
+
+Advanced simulation expansion:
+
+```text
+Duration-aware transitions:
+- estimate historical contiguous regime-run lengths,
+- boost same-regime persistence while a simulated regime is younger than its
+  historical median duration,
+- reduce same-regime persistence after the regime ages beyond its historical
+  upper-quartile duration,
+- redistribute fatigue toward plausible exit regimes such as risk_off ->
+  transition, risk_on -> fragile/transition, and fragile -> transition/risk_off.
+
+Covariate-matched blocks:
+- every historical block carries the state at its starting date,
+- default state features come from the strategy return path: 21-day trend,
+  63-day trend, 21-day volatility, drawdown, and 5-day shock,
+- callers may add external numeric covariates such as breadth, credit, rates,
+  concentration, or AI/growth leadership,
+- block sampling blends uniform regime sampling with a distance-weighted
+  nearest-neighbor preference for blocks that resemble the latest state.
+
+Factor-proxy paths:
+- fit daily strategy returns to supplied factor proxy returns,
+- sample factor-return blocks with the same regime and covariate machinery,
+- reconstruct simulated strategy returns from alpha + factor betas + residual
+  behavior,
+- report factor_model_r_squared so weak factor fits are treated as fragility
+  checks rather than as reliable forecasts.
+```
+
+The factor-path layer is deliberately a proxy model. It does not yet synthesize
+full ticker price histories and rerun every strategy rule against those
+synthetic prices. That stricter version remains the next frontier for dynamic
+allocation testing.
 
 Rolling-origin simulation validation:
 

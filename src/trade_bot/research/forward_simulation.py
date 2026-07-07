@@ -34,6 +34,30 @@ from trade_bot.research.strategy_outcome_utility import (
 )
 
 REGIME_BUCKETS = ("risk_off", "transition", "risk_on_fragile", "risk_on")
+_RETURN_COVARIATE_COLUMNS = (
+    "trend_21",
+    "trend_63",
+    "volatility_21",
+    "drawdown",
+    "shock_5",
+)
+
+
+@dataclass(frozen=True)
+class _SimulationBlock:
+    returns: np.ndarray
+    covariates: np.ndarray
+    factor_returns: np.ndarray | None = None
+    residual_returns: np.ndarray | None = None
+
+
+@dataclass(frozen=True)
+class _FactorSimulationModel:
+    factor_returns: pd.DataFrame
+    residual_returns: pd.Series
+    beta: pd.Series
+    alpha: float
+    r_squared: float
 
 
 @dataclass(frozen=True)
@@ -57,6 +81,10 @@ class ForwardSimulationConfig:
     transition_scenario_weight: float = DEFAULT_FORWARD_SIMULATION_TRANSITION_SCENARIO_WEIGHT
     min_regime_observations: int = DEFAULT_FORWARD_SIMULATION_MIN_REGIME_OBSERVATIONS
     hard_drawdown_limit: float = DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT
+    duration_aware_transitions: bool = True
+    duration_adjustment_weight: float = 0.35
+    covariate_match_weight: float = 0.35
+    covariate_match_temperature: float = 1.25
 
 
 @dataclass(frozen=True)
@@ -117,6 +145,7 @@ def scenario_bucket_probabilities(scenario_outlook: pd.DataFrame | None) -> pd.S
 def build_regime_return_library(
     daily_returns: pd.Series | np.ndarray,
     *,
+    covariates: pd.DataFrame | None = None,
     config: ForwardSimulationConfig | None = None,
 ) -> pd.DataFrame:
     """Label historical strategy returns into coarse simulation regimes."""
@@ -155,6 +184,11 @@ def build_regime_return_library(
     labels.loc[risk_off] = "risk_off"
 
     library = pd.DataFrame({"return": returns, "regime": labels})
+    library["regime_duration_days"] = _regime_duration_days(labels)
+    library = pd.concat(
+        [library, _simulation_covariates(returns, covariates=covariates)],
+        axis=1,
+    )
     return _repair_sparse_regime_labels(library, min_observations=cfg.min_regime_observations)
 
 
@@ -162,12 +196,18 @@ def simulate_regime_conditioned_paths(
     daily_returns: pd.Series | np.ndarray,
     *,
     scenario_outlook: pd.DataFrame | None = None,
+    covariates: pd.DataFrame | None = None,
+    factor_returns: pd.DataFrame | None = None,
     config: ForwardSimulationConfig | None = None,
 ) -> pd.DataFrame:
     """Simulate forward account paths using current scenarios and historical regimes."""
 
     cfg = config or ForwardSimulationConfig()
-    library = build_regime_return_library(daily_returns, config=cfg)
+    returns = _clean_returns_series(daily_returns)
+    factor_model = _fit_factor_simulation_model(returns, factor_returns)
+    if factor_model is not None:
+        returns = returns.reindex(factor_model.factor_returns.index).dropna()
+    library = build_regime_return_library(returns, covariates=covariates, config=cfg)
     if library.empty or cfg.paths <= 0 or cfg.horizon_years <= 0:
         return _empty_paths_frame()
 
@@ -183,7 +223,16 @@ def simulate_regime_conditioned_paths(
         scenario_probs,
         scenario_weight=cfg.transition_scenario_weight,
     )
-    block_library = _build_block_library(library, block_days=cfg.block_days)
+    duration_model = _empirical_duration_model(library)
+    covariate_columns = _covariate_columns(library)
+    current_covariates = _current_covariate_vector(library, covariate_columns)
+    covariate_scale = _covariate_scale_vector(library, covariate_columns)
+    block_library = _build_block_library(
+        library,
+        block_days=cfg.block_days,
+        covariate_columns=covariate_columns,
+        factor_model=factor_model,
+    )
     contribution_schedule = annual_contribution_schedule(
         annual_contribution=cfg.annual_contribution,
         trading_days_per_year=cfg.trading_days_per_year,
@@ -203,14 +252,36 @@ def simulate_regime_conditioned_paths(
         drawdown_square_sum = 0.0
         regime_counts = dict.fromkeys(REGIME_BUCKETS, 0)
         regime = _sample_bucket(rng, start_probs)
+        regime_age_days = 0
+        regime_switches = 0
+        risk_off_streak_days = 0
+        max_risk_off_streak_days = 0
+        match_distance_sum = 0.0
+        sampled_blocks = 0
         day_idx = 0
         while day_idx < total_days:
-            block = _sample_block(rng, block_library, regime=regime)
-            if block.size == 0:
+            block, match_distance = _sample_block(
+                rng,
+                block_library,
+                regime=regime,
+                current_covariates=current_covariates,
+                covariate_scale=covariate_scale,
+                config=cfg,
+            )
+            if block.returns.size == 0:
                 break
-            usable_days = min(int(block.size), total_days - day_idx)
-            for day_return in block[:usable_days]:
+            match_distance_sum += match_distance
+            sampled_blocks += 1
+            block_returns = _block_strategy_returns(block, factor_model)
+            usable_days = min(int(block_returns.size), total_days - day_idx)
+            for day_return in block_returns[:usable_days]:
                 regime_counts[regime] += 1
+                regime_age_days += 1
+                if regime == "risk_off":
+                    risk_off_streak_days += 1
+                    max_risk_off_streak_days = max(max_risk_off_streak_days, risk_off_streak_days)
+                else:
+                    risk_off_streak_days = 0
                 wealth *= 1.0 + float(day_return)
                 day_idx += 1
                 contribution = contribution_amount_for_day(
@@ -226,18 +297,63 @@ def simulate_regime_conditioned_paths(
                 drawdown_square_sum += current_drawdown**2
                 if day_idx >= total_days:
                     break
-            regime = _sample_bucket(rng, transition_matrix.loc[regime])
+            next_regime = _sample_bucket(
+                rng,
+                _duration_adjusted_transition_probabilities(
+                    transition_matrix.loc[regime],
+                    regime=regime,
+                    age_days=regime_age_days,
+                    duration_model=duration_model,
+                    scenario_probs=scenario_probs,
+                    config=cfg,
+                ),
+            )
+            if next_regime != regime:
+                regime_switches += 1
+                regime_age_days = 0
+            regime = next_regime
 
         row: dict[str, float | int] = {
             "path": path_id,
             "terminal_wealth": wealth,
             "max_drawdown": max_drawdown,
             "ulcer_index": float(np.sqrt(drawdown_square_sum / max(day_idx, 1))),
+            "regime_switches": regime_switches,
+            "max_risk_off_streak_days": max_risk_off_streak_days,
+            "mean_covariate_match_distance": match_distance_sum / max(sampled_blocks, 1),
         }
+        if factor_model is not None:
+            row["factor_model_r_squared"] = factor_model.r_squared
+            row["factor_count"] = len(factor_model.beta)
         for bucket in REGIME_BUCKETS:
             row[f"share_{bucket}"] = regime_counts[bucket] / max(day_idx, 1)
         rows.append(row)
     return pd.DataFrame(rows)
+
+
+def simulate_factor_conditioned_paths(
+    strategy_returns: pd.Series | np.ndarray,
+    factor_returns: pd.DataFrame,
+    *,
+    scenario_outlook: pd.DataFrame | None = None,
+    covariates: pd.DataFrame | None = None,
+    config: ForwardSimulationConfig | None = None,
+) -> pd.DataFrame:
+    """Simulate paths from factor blocks plus residual strategy behavior.
+
+    This is a proxy factor-path simulator. It fits transparent daily betas to
+    historical factor proxy returns, samples future factor blocks with the same
+    regime/covariate machinery as the base simulator, then reconstructs
+    strategy returns from simulated factor returns plus historical residuals.
+    """
+
+    return simulate_regime_conditioned_paths(
+        strategy_returns,
+        scenario_outlook=scenario_outlook,
+        covariates=covariates,
+        factor_returns=factor_returns,
+        config=config,
+    )
 
 
 def summarize_forward_simulation(
@@ -259,6 +375,10 @@ def summarize_forward_simulation(
             "capital_impairment_probability": None,
             "mean_risk_off_share": None,
             "mean_transition_share": None,
+            "mean_regime_switches": None,
+            "mean_max_risk_off_streak_days": None,
+            "mean_covariate_match_distance": None,
+            "factor_model_r_squared": None,
         }
     terminal = pd.to_numeric(paths["terminal_wealth"], errors="coerce").dropna()
     drawdown = pd.to_numeric(paths["max_drawdown"], errors="coerce").dropna()
@@ -276,6 +396,13 @@ def summarize_forward_simulation(
         "capital_impairment_probability": _mean_or_none(terminal < total_contributions),
         "mean_risk_off_share": _column_mean_or_none(paths, "share_risk_off"),
         "mean_transition_share": _column_mean_or_none(paths, "share_transition"),
+        "mean_regime_switches": _column_mean_or_none(paths, "regime_switches"),
+        "mean_max_risk_off_streak_days": _column_mean_or_none(paths, "max_risk_off_streak_days"),
+        "mean_covariate_match_distance": _column_mean_or_none(
+            paths,
+            "mean_covariate_match_distance",
+        ),
+        "factor_model_r_squared": _column_mean_or_none(paths, "factor_model_r_squared"),
     }
 
 
@@ -337,6 +464,21 @@ def simulation_settings_frame(config: ForwardSimulationConfig | None = None) -> 
                 "setting": "min_regime_observations",
                 "value": f"{cfg.min_regime_observations}",
                 "meaning": "Minimum historical observations before a regime gets its own return library.",
+            },
+            {
+                "setting": "duration_aware_transitions",
+                "value": str(cfg.duration_aware_transitions),
+                "meaning": "Adjusts transition odds based on how long the simulated regime has already persisted.",
+            },
+            {
+                "setting": "duration_adjustment_weight",
+                "value": f"{cfg.duration_adjustment_weight:.0%}",
+                "meaning": "How strongly typical regime duration changes future transition probabilities.",
+            },
+            {
+                "setting": "covariate_match_weight",
+                "value": f"{cfg.covariate_match_weight:.0%}",
+                "meaning": "How strongly block sampling prefers historical windows that resemble the latest covariate state.",
             },
         ]
     )
@@ -930,6 +1072,78 @@ def _rolling_compound_return(returns: pd.Series, window: int) -> pd.Series:
     ) - 1.0
 
 
+def _regime_duration_days(labels: pd.Series) -> pd.Series:
+    if labels.empty:
+        return pd.Series(dtype=float)
+    durations: list[int] = []
+    current_label: object = None
+    current_duration = 0
+    for label in labels.astype(str):
+        if label != current_label:
+            current_label = label
+            current_duration = 1
+        else:
+            current_duration += 1
+        durations.append(current_duration)
+    return pd.Series(durations, index=labels.index, dtype=float)
+
+
+def _simulation_covariates(
+    returns: pd.Series,
+    *,
+    covariates: pd.DataFrame | None,
+) -> pd.DataFrame:
+    derived = pd.DataFrame(index=returns.index)
+    equity = (1.0 + returns).cumprod()
+    derived["trend_21"] = _rolling_compound_return(returns, 21)
+    derived["trend_63"] = _rolling_compound_return(returns, 63)
+    derived["volatility_21"] = returns.rolling(21, min_periods=5).std()
+    derived["drawdown"] = equity / equity.cummax() - 1.0
+    derived["shock_5"] = _rolling_compound_return(returns, 5)
+
+    frames = [derived]
+    if covariates is not None and not covariates.empty:
+        external = covariates.copy()
+        external = external.reindex(returns.index).ffill()
+        external = external.select_dtypes(include=[np.number])
+        external = external.rename(columns={column: f"cov_{column}" for column in external.columns})
+        frames.append(external)
+
+    frame = pd.concat(frames, axis=1)
+    return frame.replace([np.inf, -np.inf], np.nan).ffill().bfill().fillna(0.0)
+
+
+def _covariate_columns(library: pd.DataFrame) -> list[str]:
+    return [
+        column
+        for column in library.columns
+        if column in _RETURN_COVARIATE_COLUMNS or column.startswith("cov_")
+    ]
+
+
+def _current_covariate_vector(
+    library: pd.DataFrame,
+    covariate_columns: list[str],
+) -> np.ndarray | None:
+    if not covariate_columns:
+        return None
+    values = library[covariate_columns].replace([np.inf, -np.inf], np.nan).dropna(how="all")
+    if values.empty:
+        return None
+    return values.iloc[-1].fillna(0.0).to_numpy(dtype=float)
+
+
+def _covariate_scale_vector(
+    library: pd.DataFrame,
+    covariate_columns: list[str],
+) -> np.ndarray | None:
+    if not covariate_columns:
+        return None
+    values = library[covariate_columns].replace([np.inf, -np.inf], np.nan).fillna(0.0)
+    scale = values.std().replace(0.0, np.nan).fillna(1.0).to_numpy(dtype=float)
+    return np.maximum(scale, 1e-6)
+
+
 def _quantile(values: pd.Series, quantile: float) -> float:
     clean = pd.to_numeric(values, errors="coerce").dropna()
     if clean.empty:
@@ -976,6 +1190,46 @@ def _empirical_transition_matrix(library: pd.DataFrame, *, block_days: int) -> p
     return matrix.div(matrix.sum(axis=1), axis=0)
 
 
+def _empirical_duration_model(library: pd.DataFrame) -> pd.DataFrame:
+    if library.empty or "regime" not in library:
+        return pd.DataFrame(index=REGIME_BUCKETS)
+    labels = library["regime"].astype(str).reset_index(drop=True)
+    runs: list[dict[str, object]] = []
+    current_regime = ""
+    current_duration = 0
+    for regime in labels:
+        if regime != current_regime:
+            if current_regime:
+                runs.append({"regime": current_regime, "duration_days": current_duration})
+            current_regime = regime
+            current_duration = 1
+        else:
+            current_duration += 1
+    if current_regime:
+        runs.append({"regime": current_regime, "duration_days": current_duration})
+    if not runs:
+        return pd.DataFrame(index=REGIME_BUCKETS)
+    frame = pd.DataFrame(runs)
+    rows = []
+    for regime in REGIME_BUCKETS:
+        values = pd.to_numeric(
+            frame.loc[frame["regime"].eq(regime), "duration_days"],
+            errors="coerce",
+        ).dropna()
+        if values.empty:
+            values = pd.Series([21.0])
+        rows.append(
+            {
+                "regime": regime,
+                "duration_p25": float(values.quantile(0.25)),
+                "duration_median": float(values.quantile(0.50)),
+                "duration_p75": float(values.quantile(0.75)),
+                "duration_mean": float(values.mean()),
+            }
+        )
+    return pd.DataFrame(rows).set_index("regime")
+
+
 def _blend_transition_matrix(
     empirical: pd.DataFrame,
     scenario: pd.Series,
@@ -992,19 +1246,118 @@ def _blend_transition_matrix(
     return matrix
 
 
-def _build_block_library(library: pd.DataFrame, *, block_days: int) -> dict[str, list[np.ndarray]]:
+def _duration_adjusted_transition_probabilities(
+    base_probabilities: pd.Series,
+    *,
+    regime: str,
+    age_days: int,
+    duration_model: pd.DataFrame,
+    scenario_probs: pd.Series,
+    config: ForwardSimulationConfig,
+) -> pd.Series:
+    base = _normalize_probability_vector(base_probabilities)
+    if (
+        not config.duration_aware_transitions
+        or duration_model.empty
+        or regime not in duration_model.index
+        or regime not in base.index
+    ):
+        return base
+
+    row = duration_model.loc[regime]
+    median = max(_safe_float(row.get("duration_median")) or 1.0, 1.0)
+    p75 = max(_safe_float(row.get("duration_p75")) or median, median)
+    weight = float(np.clip(config.duration_adjustment_weight, 0.0, 1.0))
+    adjusted = base.copy()
+    if age_days < median:
+        persistence_boost = weight * (1.0 - age_days / median)
+        adjusted.loc[regime] += persistence_boost
+    elif age_days > p75:
+        fatigue = weight * min((age_days - p75) / max(p75, 1.0), 1.0)
+        released = adjusted.loc[regime] * fatigue
+        adjusted.loc[regime] -= released
+        exits = _regime_exit_bias(regime, scenario_probs)
+        adjusted = adjusted.add(released * exits, fill_value=0.0)
+    return _normalize_probability_vector(adjusted)
+
+
+def _regime_exit_bias(regime: str, scenario_probs: pd.Series) -> pd.Series:
+    scenario = _normalize_probability_vector(scenario_probs)
+    bias = pd.Series(0.0, index=REGIME_BUCKETS, dtype=float)
+    if regime == "risk_off":
+        bias["transition"] = 0.65
+        bias["risk_on_fragile"] = 0.20
+        bias["risk_on"] = 0.15
+    elif regime == "risk_on":
+        bias["risk_on_fragile"] = 0.45
+        bias["transition"] = 0.40
+        bias["risk_off"] = 0.15
+    elif regime == "risk_on_fragile":
+        bias["transition"] = 0.45
+        bias["risk_off"] = 0.35
+        bias["risk_on"] = 0.20
+    else:
+        bias["risk_on"] = 0.40
+        bias["risk_on_fragile"] = 0.25
+        bias["risk_off"] = 0.25
+        bias["transition"] = 0.10
+    return _normalize_probability_vector(0.6 * bias + 0.4 * scenario)
+
+
+def _build_block_library(
+    library: pd.DataFrame,
+    *,
+    block_days: int,
+    covariate_columns: list[str],
+    factor_model: _FactorSimulationModel | None = None,
+) -> dict[str, list[_SimulationBlock]]:
     block = max(1, int(block_days))
     returns = library["return"].to_numpy(dtype=float)
     labels = library["regime"].astype(str).to_numpy()
-    output: dict[str, list[np.ndarray]] = {bucket: [] for bucket in REGIME_BUCKETS}
+    covariates = (
+        library[covariate_columns].fillna(0.0).to_numpy(dtype=float)
+        if covariate_columns
+        else np.empty((len(library), 0), dtype=float)
+    )
+    factor_values = None
+    residual_values = None
+    if factor_model is not None:
+        factor_values = factor_model.factor_returns.reindex(library.index).to_numpy(dtype=float)
+        residual_values = factor_model.residual_returns.reindex(library.index).to_numpy(dtype=float)
+    output: dict[str, list[_SimulationBlock]] = {bucket: [] for bucket in REGIME_BUCKETS}
     if returns.size == 0:
         return output
     max_start = max(returns.size - block, 0)
     for start in range(max_start + 1):
         regime = labels[start]
         if regime in output:
-            output[regime].append(returns[start : start + block])
-    fallback_blocks = [returns[start : start + block] for start in range(max_start + 1)]
+            output[regime].append(
+                _SimulationBlock(
+                    returns=returns[start : start + block],
+                    covariates=covariates[start],
+                    factor_returns=(
+                        factor_values[start : start + block] if factor_values is not None else None
+                    ),
+                    residual_returns=(
+                        residual_values[start : start + block]
+                        if residual_values is not None
+                        else None
+                    ),
+                )
+            )
+    fallback_blocks = [
+        _SimulationBlock(
+            returns=returns[start : start + block],
+            covariates=covariates[start],
+            factor_returns=(
+                factor_values[start : start + block] if factor_values is not None else None
+            ),
+            residual_returns=(
+                residual_values[start : start + block] if residual_values is not None else None
+            ),
+        )
+        for start in range(max_start + 1)
+    ]
     for regime in REGIME_BUCKETS:
         if not output[regime]:
             output[regime] = fallback_blocks
@@ -1018,14 +1371,101 @@ def _sample_bucket(rng: np.random.Generator, probabilities: pd.Series) -> str:
 
 def _sample_block(
     rng: np.random.Generator,
-    block_library: dict[str, list[np.ndarray]],
+    block_library: dict[str, list[_SimulationBlock]],
     *,
     regime: str,
-) -> np.ndarray:
+    current_covariates: np.ndarray | None,
+    covariate_scale: np.ndarray | None,
+    config: ForwardSimulationConfig,
+) -> tuple[_SimulationBlock, float]:
     blocks = block_library.get(regime) or []
     if not blocks:
-        return np.array([], dtype=float)
-    return blocks[int(rng.integers(0, len(blocks)))]
+        return _SimulationBlock(returns=np.array([], dtype=float), covariates=np.array([])), 0.0
+    weights, distances = _block_match_weights(
+        blocks,
+        current_covariates=current_covariates,
+        covariate_scale=covariate_scale,
+        config=config,
+    )
+    selected = int(rng.choice(np.arange(len(blocks)), p=weights))
+    return blocks[selected], float(distances[selected])
+
+
+def _block_match_weights(
+    blocks: list[_SimulationBlock],
+    *,
+    current_covariates: np.ndarray | None,
+    covariate_scale: np.ndarray | None,
+    config: ForwardSimulationConfig,
+) -> tuple[np.ndarray, np.ndarray]:
+    uniform = np.full(len(blocks), 1.0 / max(len(blocks), 1), dtype=float)
+    if current_covariates is None or covariate_scale is None or current_covariates.size == 0:
+        return uniform, np.zeros(len(blocks), dtype=float)
+    matrix = np.vstack([block.covariates for block in blocks])
+    if matrix.shape[1] != current_covariates.size:
+        return uniform, np.zeros(len(blocks), dtype=float)
+    scaled = (matrix - current_covariates) / covariate_scale
+    distances = np.sqrt(np.nanmean(scaled**2, axis=1))
+    distances = np.nan_to_num(
+        distances, nan=float(np.nanmedian(distances) if distances.size else 0.0)
+    )
+    if config.covariate_match_weight <= 0:
+        return uniform, distances
+    temperature = max(float(config.covariate_match_temperature), 1e-6)
+    logits = -distances / temperature
+    logits = logits - float(logits.max())
+    matched = np.exp(logits)
+    matched = matched / max(float(matched.sum()), 1e-12)
+    weight = float(np.clip(config.covariate_match_weight, 0.0, 1.0))
+    return (1.0 - weight) * uniform + weight * matched, distances
+
+
+def _block_strategy_returns(
+    block: _SimulationBlock,
+    factor_model: _FactorSimulationModel | None,
+) -> np.ndarray:
+    if (
+        factor_model is None
+        or block.factor_returns is None
+        or block.residual_returns is None
+        or block.factor_returns.size == 0
+    ):
+        return block.returns
+    factor_component = block.factor_returns @ factor_model.beta.to_numpy(dtype=float)
+    residual = np.asarray(block.residual_returns, dtype=float)
+    return factor_model.alpha + factor_component + residual
+
+
+def _fit_factor_simulation_model(
+    strategy_returns: pd.Series,
+    factor_returns: pd.DataFrame | None,
+) -> _FactorSimulationModel | None:
+    if factor_returns is None or factor_returns.empty or strategy_returns.empty:
+        return None
+    factors = factor_returns.copy()
+    factors = factors.select_dtypes(include=[np.number]).replace([np.inf, -np.inf], np.nan)
+    if factors.empty:
+        return None
+    aligned = pd.concat([strategy_returns.rename("strategy_return"), factors], axis=1).dropna()
+    if aligned.shape[0] < max(30, aligned.shape[1] * 3):
+        return None
+    y = aligned["strategy_return"].astype(float)
+    x = aligned.drop(columns=["strategy_return"]).astype(float)
+    design = np.column_stack([np.ones(len(x)), x.to_numpy(dtype=float)])
+    coefficients, *_ = np.linalg.lstsq(design, y.to_numpy(dtype=float), rcond=None)
+    alpha = float(coefficients[0])
+    beta = pd.Series(coefficients[1:], index=x.columns, dtype=float)
+    predicted = pd.Series(design @ coefficients, index=y.index, dtype=float)
+    residual = (y - predicted).rename("factor_model_residual")
+    variance = float(y.var())
+    r_squared = 0.0 if variance <= 1e-12 else 1.0 - float((y - predicted).var()) / variance
+    return _FactorSimulationModel(
+        factor_returns=x,
+        residual_returns=residual,
+        beta=beta,
+        alpha=alpha,
+        r_squared=float(np.clip(r_squared, 0.0, 1.0)),
+    )
 
 
 def _empty_paths_frame() -> pd.DataFrame:
@@ -1035,6 +1475,11 @@ def _empty_paths_frame() -> pd.DataFrame:
             "terminal_wealth",
             "max_drawdown",
             "ulcer_index",
+            "regime_switches",
+            "max_risk_off_streak_days",
+            "mean_covariate_match_distance",
+            "factor_model_r_squared",
+            "factor_count",
             "share_risk_off",
             "share_transition",
             "share_risk_on_fragile",

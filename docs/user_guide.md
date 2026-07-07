@@ -265,6 +265,9 @@ Recommended flow:
    If the loaded snapshot includes reference backtests, keep Hold SPY and Hold
    QQQ selected in the reference overlay control to see whether the selected
    strategy adds forward utility versus simply holding the major indexes.
+   The advanced diagnostics table also shows duration-aware regime behavior,
+   covariate-match distance, and factor-proxy path output when enough factor
+   proxy history exists in the snapshot.
 3. Interpretability: inspect the model ladder, scenario bridge, historical
    regime-return library, and simulated regime mix.
 

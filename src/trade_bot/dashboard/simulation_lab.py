@@ -22,6 +22,7 @@ from trade_bot.dashboard.formatting import (
     _format_percent,
 )
 from trade_bot.DEFAULTS import (
+    DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS,
     DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
     DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
@@ -47,6 +48,7 @@ from trade_bot.research.forward_simulation import (
     build_regime_return_library,
     regime_mix_frame,
     scenario_probability_frame,
+    simulate_factor_conditioned_paths,
     simulate_regime_conditioned_paths,
     simulation_settings_frame,
     summarize_forward_simulation,
@@ -121,9 +123,17 @@ def _render_simulation_planning_cards() -> None:
     contribution_amount = DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION / contribution_periods
     cadence = DEFAULT_OUTCOME_CONTRIBUTION_TIMING.replace("_", " ").title()
     cols = st.columns(5)
-    _helped_metric(cols[0], "Starting Account", _format_currency(DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE))
-    _helped_metric(cols[1], "Annual Contribution", f"{_format_currency(DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION)} / yr")
-    _helped_metric(cols[2], "Contribution Cadence", f"{_format_currency(contribution_amount)} {cadence}")
+    _helped_metric(
+        cols[0], "Starting Account", _format_currency(DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE)
+    )
+    _helped_metric(
+        cols[1],
+        "Annual Contribution",
+        f"{_format_currency(DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION)} / yr",
+    )
+    _helped_metric(
+        cols[2], "Contribution Cadence", f"{_format_currency(contribution_amount)} {cadence}"
+    )
     _helped_metric(cols[3], "Horizon", f"{DEFAULT_OUTCOME_HORIZON_YEARS} years")
     _helped_metric(
         cols[4],
@@ -220,7 +230,9 @@ def _render_future_state_map(
 
     with st.expander("Simulation settings", expanded=False):
         st.caption("Regime-conditioned forward simulation settings")
-        _render_metric_dataframe(simulation_settings_frame(ForwardSimulationConfig()), hide_index=True)
+        _render_metric_dataframe(
+            simulation_settings_frame(ForwardSimulationConfig()), hide_index=True
+        )
         st.caption("Current state context")
         _render_metric_dataframe(
             pd.DataFrame(
@@ -372,6 +384,22 @@ def _render_strategy_simulations(
     forward_summary = summarize_forward_simulation(
         forward_paths,
         config=ForwardSimulationConfig(),
+    )
+    factor_inputs = _factor_simulation_inputs(selected_result, baseline_run.prices)
+    factor_paths = (
+        _cached_factor_forward_paths(
+            factor_inputs[0],
+            factor_inputs[1],
+            factor_inputs[2],
+            _scenario_records(scenario_source),
+        )
+        if factor_inputs is not None
+        else pd.DataFrame()
+    )
+    factor_summary = (
+        summarize_forward_simulation(factor_paths, config=ForwardSimulationConfig())
+        if not factor_paths.empty
+        else {}
     )
     reference_options = _reference_option_frame(baseline_run, selected_strategy)
     selected_reference_labels: list[str] = []
@@ -566,6 +594,37 @@ def _render_strategy_simulations(
         )
     _render_metric_dataframe(_display_metrics(pd.DataFrame(drawdown_rows)), hide_index=True)
 
+    st.caption("Advanced simulation diagnostics")
+    advanced_rows = [
+        _advanced_simulation_row(
+            model="Duration/covariate regime paths",
+            summary=forward_summary,
+        )
+    ]
+    if factor_summary:
+        advanced_rows.append(
+            _advanced_simulation_row(
+                model="Factor-proxy paths",
+                summary=factor_summary,
+            )
+        )
+    else:
+        advanced_rows.append(
+            {
+                "model": "Factor-proxy paths",
+                "paths": 0,
+                "terminal_wealth_p50": None,
+                "max_drawdown_p50": None,
+                "severe_drawdown_probability": None,
+                "mean_regime_switches": None,
+                "mean_max_risk_off_streak_days": None,
+                "mean_covariate_match_distance": None,
+                "factor_model_r_squared": None,
+                "read": "Unavailable because the loaded snapshot lacks enough factor proxy history.",
+            }
+        )
+    _render_metric_dataframe(_display_metrics(pd.DataFrame(advanced_rows)), hide_index=True)
+
     st.caption("Simulation calibration and historical resemblance")
     validation_rows = [
         _simulation_validation_row(
@@ -628,6 +687,40 @@ def _drawdown_distribution_row(
         "breach_soft_band": _series_mean(drawdowns <= DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT),
         "breach_hard_band": _series_mean(drawdowns <= DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT),
     }
+
+
+def _advanced_simulation_row(
+    *,
+    model: str,
+    summary: dict[str, object],
+) -> dict[str, object]:
+    return {
+        "model": model,
+        "paths": summary.get("paths"),
+        "terminal_wealth_p50": summary.get("terminal_wealth_p50"),
+        "max_drawdown_p50": summary.get("max_drawdown_p50"),
+        "severe_drawdown_probability": summary.get("severe_drawdown_probability"),
+        "mean_regime_switches": summary.get("mean_regime_switches"),
+        "mean_max_risk_off_streak_days": summary.get("mean_max_risk_off_streak_days"),
+        "mean_covariate_match_distance": summary.get("mean_covariate_match_distance"),
+        "factor_model_r_squared": summary.get("factor_model_r_squared"),
+        "read": _advanced_simulation_read(summary),
+    }
+
+
+def _advanced_simulation_read(summary: dict[str, object]) -> str:
+    factor_r2 = _safe_float(summary.get("factor_model_r_squared"))
+    match_distance = _safe_float(summary.get("mean_covariate_match_distance"))
+    risk_off_streak = _safe_float(summary.get("mean_max_risk_off_streak_days"))
+    if factor_r2 is not None:
+        if factor_r2 >= 0.60:
+            return "Factor proxy explains enough history to treat this as a useful stress lens."
+        return "Factor proxy fit is weak; use as a fragility check, not as a strategy oracle."
+    if match_distance is not None and match_distance <= 1.0:
+        return "Sampled blocks are close to the latest trend/volatility/covariate state."
+    if risk_off_streak is not None and risk_off_streak >= 40:
+        return "Duration model is allowing long stress regimes; inspect drawdown tolerance."
+    return "Uses duration-aware regime transitions and covariate-matched historical blocks."
 
 
 def _simulation_validation_row(
@@ -779,7 +872,9 @@ def _simulation_verdict_rows(
     return [
         {
             "question": "Do simulated futures resemble the tested past?",
-            "read": _calibration_answer(str(validation_row.get("calibration_read", "insufficient_history"))),
+            "read": _calibration_answer(
+                str(validation_row.get("calibration_read", "insufficient_history"))
+            ),
             "evidence": (
                 "Forward vs deterministic "
                 f"{_format_percent(validation_row.get('forward_vs_deterministic'))}; "
@@ -847,7 +942,9 @@ def _regime_resemblance_frame(
     for bucket in REGIME_BUCKETS:
         historical_share = _safe_float(historical.get(bucket, 0.0)) or 0.0
         scenario_share = _probability_sum(probabilities, (bucket,))
-        simulated_share = _series_mean(_numeric_path_column(forward_paths, f"share_{bucket}")) or 0.0
+        simulated_share = (
+            _series_mean(_numeric_path_column(forward_paths, f"share_{bucket}")) or 0.0
+        )
         scenario_delta = scenario_share - historical_share
         simulation_delta = simulated_share - historical_share
         rows.append(
@@ -972,7 +1069,11 @@ def _reference_edge_rows(
         if not isinstance(summary, dict):
             continue
         reference_median = _safe_float(summary.get("terminal_wealth_p50"))
-        edge = selected_median - reference_median if selected_median is not None and reference_median is not None else None
+        edge = (
+            selected_median - reference_median
+            if selected_median is not None and reference_median is not None
+            else None
+        )
         rows.append(
             {
                 "reference": reference.get("label"),
@@ -1060,9 +1161,9 @@ def _render_simulation_interpretability(
     reference_simulations = _reference_simulations(
         baseline_run=baseline_run,
         reference_options=reference_options,
-        selected_reference_labels=reference_options["label"].head(2).tolist()
-        if not reference_options.empty
-        else [],
+        selected_reference_labels=(
+            reference_options["label"].head(2).tolist() if not reference_options.empty else []
+        ),
         scenario_source=scenario_source,
     )
     validation_row = _simulation_validation_row(
@@ -1132,7 +1233,10 @@ def _render_simulation_interpretability(
     )
     regime_summary["annualized_mean_return"] = regime_summary["mean_daily_return"] * 252
     regime_summary["annualized_volatility"] = regime_summary["daily_volatility"] * (252**0.5)
-    with st.expander("Audit details: model inputs, scenario records, and sampled return libraries", expanded=False):
+    with st.expander(
+        "Audit details: model inputs, scenario records, and sampled return libraries",
+        expanded=False,
+    ):
         _render_metric_dataframe(pd.DataFrame(_simulation_method_rows()), hide_index=True)
         cols = st.columns(2)
         with cols[0]:
@@ -1152,7 +1256,9 @@ def _render_simulation_interpretability(
                 if column in scenario_source
             ]
             if available:
-                _render_metric_dataframe(_display_metrics(scenario_source[available].head(10)), hide_index=True)
+                _render_metric_dataframe(
+                    _display_metrics(scenario_source[available].head(10)), hide_index=True
+                )
             else:
                 st.write("No detailed scenario records available.")
 
@@ -1183,7 +1289,9 @@ def _strategy_option_frame(bot_config: Any, experiment_scorecards: pd.DataFrame)
     if catalog.empty or "strategy" not in catalog:
         return pd.DataFrame()
     output = catalog.copy()
-    output = output[output.get("source", pd.Series("", index=output.index)).astype(str).eq("baseline")]
+    output = output[
+        output.get("source", pd.Series("", index=output.index)).astype(str).eq("baseline")
+    ]
     if output.empty:
         output = catalog.head(25).copy()
     output["simulation_label"] = output.apply(
@@ -1236,7 +1344,9 @@ def _result_for_strategy(
 def _scenario_source_frame(baseline_run: BaselineRun) -> pd.DataFrame:
     lattice = baseline_run.current_state.scenario_lattice.copy()
     if not lattice.empty and {"risk_bucket", "probability"}.issubset(lattice.columns):
-        one_month = lattice[lattice.get("horizon", pd.Series("", index=lattice.index)).astype(str).eq("1m")]
+        one_month = lattice[
+            lattice.get("horizon", pd.Series("", index=lattice.index)).astype(str).eq("1m")
+        ]
         return one_month.copy() if not one_month.empty else lattice
     outlook = baseline_run.current_state.scenario_outlook.copy()
     if not outlook.empty:
@@ -1314,6 +1424,42 @@ def _returns_tuple(result: BacktestResult) -> tuple[float, ...]:
     return tuple(float(value) for value in _daily_returns(result).to_numpy(dtype=float))
 
 
+def _factor_simulation_inputs(
+    result: BacktestResult,
+    prices: pd.DataFrame,
+) -> tuple[tuple[float, ...], tuple[str, ...], tuple[tuple[float, ...], ...]] | None:
+    strategy_returns = _daily_returns(result)
+    factor_returns = _factor_returns_from_prices(prices)
+    if strategy_returns.empty or factor_returns.empty:
+        return None
+    aligned = pd.concat([strategy_returns.rename("strategy_return"), factor_returns], axis=1)
+    aligned = aligned.replace([float("inf"), float("-inf")], pd.NA).dropna()
+    if aligned.shape[0] < max(60, aligned.shape[1] * 3):
+        return None
+    strategy_values = tuple(
+        float(value) for value in aligned["strategy_return"].to_numpy(dtype=float)
+    )
+    factor_columns = tuple(str(column) for column in factor_returns.columns)
+    factor_values = tuple(
+        tuple(float(value) for value in row)
+        for row in aligned.loc[:, factor_columns].to_numpy(dtype=float)
+    )
+    return strategy_values, factor_columns, factor_values
+
+
+def _factor_returns_from_prices(prices: pd.DataFrame) -> pd.DataFrame:
+    if prices.empty:
+        return pd.DataFrame()
+    frame = pd.DataFrame(index=prices.index)
+    price_returns = (
+        prices.sort_index().astype(float).pct_change().replace([float("inf"), float("-inf")], pd.NA)
+    )
+    for factor_name, proxy_ticker, _label, _description in DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS:
+        if proxy_ticker in price_returns:
+            frame[factor_name] = pd.to_numeric(price_returns[proxy_ticker], errors="coerce")
+    return frame.dropna(how="all")
+
+
 def _scenario_records(scenario_source: pd.DataFrame) -> tuple[tuple[str, float], ...]:
     probabilities = scenario_probability_frame(scenario_source)
     return tuple(
@@ -1323,7 +1469,9 @@ def _scenario_records(scenario_source: pd.DataFrame) -> tuple[tuple[str, float],
 
 @st.cache_data(show_spinner=False, max_entries=64)
 def _cached_bootstrap_paths(return_values: tuple[float, ...]) -> pd.DataFrame:
-    return bootstrap_outcome_paths(pd.Series(return_values, dtype=float), config=OutcomeBootstrapConfig())
+    return bootstrap_outcome_paths(
+        pd.Series(return_values, dtype=float), config=OutcomeBootstrapConfig()
+    )
 
 
 @st.cache_data(show_spinner=False, max_entries=64)
@@ -1332,10 +1480,37 @@ def _cached_regime_forward_paths(
     scenario_records: tuple[tuple[str, float], ...],
 ) -> pd.DataFrame:
     scenario_frame = pd.DataFrame(
-        [{"risk_bucket": regime, "probability": probability} for regime, probability in scenario_records]
+        [
+            {"risk_bucket": regime, "probability": probability}
+            for regime, probability in scenario_records
+        ]
     )
     return simulate_regime_conditioned_paths(
         pd.Series(return_values, dtype=float),
+        scenario_outlook=scenario_frame,
+        config=ForwardSimulationConfig(),
+    )
+
+
+@st.cache_data(show_spinner=False, max_entries=32)
+def _cached_factor_forward_paths(
+    return_values: tuple[float, ...],
+    factor_columns: tuple[str, ...],
+    factor_rows: tuple[tuple[float, ...], ...],
+    scenario_records: tuple[tuple[str, float], ...],
+) -> pd.DataFrame:
+    if not return_values or not factor_columns or not factor_rows:
+        return pd.DataFrame()
+    scenario_frame = pd.DataFrame(
+        [
+            {"risk_bucket": regime, "probability": probability}
+            for regime, probability in scenario_records
+        ]
+    )
+    factor_frame = pd.DataFrame(factor_rows, columns=list(factor_columns), dtype=float)
+    return simulate_factor_conditioned_paths(
+        pd.Series(return_values, dtype=float),
+        factor_frame,
         scenario_outlook=scenario_frame,
         config=ForwardSimulationConfig(),
     )

@@ -11,6 +11,7 @@ from trade_bot.research.forward_simulation import (
     rolling_origin_simulation_backtest,
     rolling_origin_strategy_rank_validation,
     scenario_bucket_probabilities,
+    simulate_factor_conditioned_paths,
     simulate_regime_conditioned_paths,
     summarize_forward_simulation,
     summarize_simulation_validation,
@@ -87,6 +88,107 @@ def test_simulate_regime_conditioned_paths_returns_distribution() -> None:
     assert summary["paths"] == 25
     assert summary["terminal_wealth_p50"] is not None
     assert summary["severe_drawdown_probability"] is not None
+    assert summary["mean_regime_switches"] is not None
+    assert summary["mean_covariate_match_distance"] is not None
+
+
+def test_regime_return_library_adds_duration_and_covariate_state() -> None:
+    index = pd.bdate_range("2025-01-02", periods=90)
+    returns = pd.Series([0.002] * 35 + [-0.015] * 15 + [0.003] * 40, index=index)
+    covariates = pd.DataFrame(
+        {
+            "credit_spread": [0.3] * 35 + [0.9] * 15 + [0.4] * 40,
+            "breadth": [0.7] * 35 + [0.2] * 15 + [0.8] * 40,
+        },
+        index=index,
+    )
+
+    library = build_regime_return_library(
+        returns,
+        covariates=covariates,
+        config=ForwardSimulationConfig(min_regime_observations=1),
+    )
+
+    assert "regime_duration_days" in library
+    assert "cov_credit_spread" in library
+    assert "cov_breadth" in library
+    assert library["regime_duration_days"].max() > 1
+
+
+def test_covariate_matching_prefers_blocks_that_resemble_latest_state() -> None:
+    index = pd.bdate_range("2025-01-02", periods=160)
+    returns = pd.Series([0.003] * 70 + [-0.012] * 30 + [0.0025] * 60, index=index)
+    covariates = pd.DataFrame(
+        {
+            "volatility": [0.15] * 70 + [0.85] * 30 + [0.18] * 60,
+            "credit": [0.25] * 70 + [0.90] * 30 + [0.28] * 60,
+        },
+        index=index,
+    )
+    base_config = ForwardSimulationConfig(
+        horizon_years=1,
+        trading_days_per_year=40,
+        paths=80,
+        block_days=5,
+        random_seed=11,
+        min_regime_observations=1,
+        covariate_match_weight=0.0,
+    )
+    matched_config = ForwardSimulationConfig(
+        horizon_years=1,
+        trading_days_per_year=40,
+        paths=80,
+        block_days=5,
+        random_seed=11,
+        min_regime_observations=1,
+        covariate_match_weight=1.0,
+        covariate_match_temperature=0.25,
+    )
+
+    unweighted = simulate_regime_conditioned_paths(
+        returns,
+        covariates=covariates,
+        config=base_config,
+    )
+    matched = simulate_regime_conditioned_paths(
+        returns,
+        covariates=covariates,
+        config=matched_config,
+    )
+
+    assert (
+        matched["mean_covariate_match_distance"].mean()
+        < unweighted["mean_covariate_match_distance"].mean()
+    )
+
+
+def test_factor_conditioned_paths_use_factor_model_outputs() -> None:
+    index = pd.bdate_range("2025-01-02", periods=180)
+    market = pd.Series([0.001, 0.002, -0.001, 0.003, -0.002] * 36, index=index)
+    credit = pd.Series([0.0005, 0.001, -0.002, 0.0015, -0.001] * 36, index=index)
+    factor_returns = pd.DataFrame({"market": market, "credit": credit}, index=index)
+    residual = pd.Series([0.0002, -0.0001, 0.0001, 0.0, 0.0003] * 36, index=index)
+    strategy_returns = 0.0001 + 0.7 * market - 0.2 * credit + residual
+    config = ForwardSimulationConfig(
+        horizon_years=1,
+        trading_days_per_year=30,
+        paths=30,
+        block_days=5,
+        random_seed=13,
+        min_regime_observations=1,
+    )
+
+    paths = simulate_factor_conditioned_paths(
+        strategy_returns,
+        factor_returns,
+        config=config,
+    )
+    summary = summarize_forward_simulation(paths, config=config)
+
+    assert len(paths) == 30
+    assert paths["factor_model_r_squared"].notna().all()
+    assert paths["factor_count"].eq(2).all()
+    assert summary["factor_model_r_squared"] is not None
 
 
 def test_simulate_regime_conditioned_paths_uses_monthly_contributions() -> None:

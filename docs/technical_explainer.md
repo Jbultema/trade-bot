@@ -372,6 +372,23 @@ probability calibration, hindsight launch stance, and multi-strategy ranking
 usefulness. This is the calibration layer the forward simulator needs before it
 can influence sizing or launch decisions.
 
+The forward simulator now has three advanced controls layered on top of the
+original regime-block sampler:
+
+- **Duration-aware regime transitions:** simulated regimes track how long they
+  have persisted and adjust transition odds against historical regime-duration
+  distributions. Young regimes get more persistence; overstretched regimes get
+  more exit pressure.
+- **Covariate-matched return blocks:** historical blocks carry trend,
+  volatility, drawdown, shock, and optional external numeric covariates. The
+  sampler can prefer blocks that resemble the latest state instead of sampling
+  every broad regime bucket uniformly.
+- **Factor-proxy paths:** when factor proxy returns are available, the engine
+  can fit strategy returns to transparent factor betas, sample factor blocks,
+  and reconstruct strategy paths from factor returns plus residual behavior.
+  This is a proxy stress lens, not a full synthetic-price rerun of every
+  strategy rule.
+
 The same validation harness is available from the CLI:
 
 ```bash
@@ -392,6 +409,12 @@ terminal-wealth, contribution, and drawdown simulation settings as the selected
 strategy. The comparison table reports selected-strategy median forward wealth
 minus each reference median so the user can evaluate whether a candidate's
 extra complexity is earning its keep versus doing nothing.
+
+The Strategy Simulations view includes an advanced diagnostics table that
+reports duration/covariate regime paths and, when possible, factor-proxy paths.
+Use the factor-model R-squared and covariate-match distance as confidence
+checks: weak factor fit or large match distance means the simulation is more of
+a stress test than a high-confidence planning distribution.
 
 Simulation Lab keeps this forward modeling separate from Research Lab's
 empirical evidence surfaces. Research Lab answers "which strategies worked and
