@@ -49,6 +49,29 @@ def test_launch_readiness_counts_bad_starts() -> None:
     assert run.summary["bad_start_rate"].max() > 0.0
 
 
+def test_launch_readiness_ramp_protocols_change_short_window_returns() -> None:
+    index = pd.bdate_range("2020-01-01", periods=260)
+    returns = pd.Series(0.0010, index=index)
+    returns.iloc[1:8] = -0.025
+    returns.iloc[8:25] = 0.004
+
+    run = build_launch_readiness(
+        _result("early_drawdown_strategy", returns),
+        benchmark_result=_result("buy_hold_spy", pd.Series(0.0, index=index)),
+        horizons={"1m": 21},
+        ramp_weeks=(0, 4, 8),
+        primary_horizon="1m",
+        start_frequency="M",
+    )
+
+    first_start = run.windows[run.windows["start_date"].eq("2020-01-01")]
+    protocol_returns = first_start.set_index("protocol")["total_return"]
+
+    assert protocol_returns["Immediate full launch"] < protocol_returns["25% now / 4w ramp"]
+    assert protocol_returns.max() - protocol_returns.min() > 0.005
+    assert protocol_returns.nunique() == 3
+
+
 def test_launch_readiness_skips_invalid_window_values() -> None:
     index = pd.bdate_range("2020-01-01", periods=520)
     strategy_returns = pd.Series(0.0012, index=index)

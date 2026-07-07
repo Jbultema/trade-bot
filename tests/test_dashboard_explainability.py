@@ -15,7 +15,10 @@ from trade_bot.dashboard.risk_scenarios import (
     _scenario_history_from_lattice,
     _scenario_history_insights,
     _scenario_history_scope,
+    _scenario_horizon_differentiation_frame,
+    _scenario_horizon_differentiation_read,
     _scenario_named_history_figure,
+    _scenario_probability_heatmap_figure,
     _scenario_probability_stack_figure,
 )
 
@@ -141,6 +144,84 @@ def test_scenario_probability_and_driver_figures_render_from_current_state_frame
     assert len(probability_figure.data) == 3
     assert len(driver_figure.data) == 1
     assert list(driver_figure.data[0].y)[0] == "AI leadership"
+
+
+def test_scenario_horizon_audit_flags_flat_bucket_probabilities() -> None:
+    scenario_lattice = pd.DataFrame(
+        [
+            {
+                "horizon": horizon,
+                "scenario": "Broad risk-on",
+                "risk_bucket": "risk_on",
+                "probability": risk_on_probability,
+            }
+            for horizon, risk_on_probability in [
+                ("1w", 0.40),
+                ("1m", 0.41),
+                ("3m", 0.40),
+                ("6m", 0.42),
+            ]
+        ]
+        + [
+            {
+                "horizon": horizon,
+                "scenario": "Choppy transition",
+                "risk_bucket": "transition",
+                "probability": 1.0 - risk_on_probability,
+            }
+            for horizon, risk_on_probability in [
+                ("1w", 0.40),
+                ("1m", 0.41),
+                ("3m", 0.40),
+                ("6m", 0.42),
+            ]
+        ]
+    )
+
+    audit = _scenario_horizon_differentiation_frame(scenario_lattice)
+    read = _scenario_horizon_differentiation_read(scenario_lattice)
+
+    assert not audit.empty
+    assert float(audit["horizon_spread"].max()) < 0.03
+    assert "nearly flat" in read
+
+
+def test_scenario_horizon_heatmap_shows_named_scenario_movement() -> None:
+    scenario_lattice = pd.DataFrame(
+        [
+            {
+                "horizon": "1w",
+                "scenario": "Policy whipsaw",
+                "risk_bucket": "transition",
+                "probability": 0.50,
+            },
+            {
+                "horizon": "6m",
+                "scenario": "Policy whipsaw",
+                "risk_bucket": "transition",
+                "probability": 0.10,
+            },
+            {
+                "horizon": "1w",
+                "scenario": "Credit repair",
+                "risk_bucket": "risk_on",
+                "probability": 0.10,
+            },
+            {
+                "horizon": "6m",
+                "scenario": "Credit repair",
+                "risk_bucket": "risk_on",
+                "probability": 0.50,
+            },
+        ]
+    )
+
+    audit = _scenario_horizon_differentiation_frame(scenario_lattice).set_index("risk_bucket")
+    heatmap = _scenario_probability_heatmap_figure(scenario_lattice)
+
+    assert float(audit.loc["transition", "horizon_spread"]) == 0.40
+    assert len(heatmap.data) == 1
+    assert "Policy whipsaw" in list(heatmap.data[0].y)
 
 
 def test_scenario_history_helpers_surface_risk_pressure_changes() -> None:

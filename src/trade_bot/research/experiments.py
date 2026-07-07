@@ -348,6 +348,10 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _interview_insight_candidates(iteration)
     if 156 <= iteration <= 160:
         return _long_form_macro_process_candidates(iteration)
+    if iteration == 161:
+        return _systematic_break_risk_on_candidates()
+    if iteration == 162:
+        return _growth_core_source_funds_overlay_candidates()
     return None
 
 
@@ -12461,6 +12465,528 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
         ),
     }
     return batches[iteration]
+
+
+def _systematic_break_risk_on_candidates() -> tuple[ExperimentCandidate, ...]:
+    """Risk-on-until-systematic-break candidates.
+
+    This family tests a specific operating hypothesis: when price trend and
+    credit remain intact, stay meaningfully risk-on and rotate the source of
+    risk exposure instead of reflexively raising cash from narrative or event
+    pressure alone. Defense is still allowed, but larger de-risking requires
+    harder confirmation through trend, breadth, credit, volatility, or strategy
+    drawdown behavior.
+    """
+
+    broadening = ["SPY", "VTI", "VOO", "RSP", "IWM", "MDY", "DIA"]
+    growth_leadership = ["QQQ", "QQQM", "IWF", "VUG", "XLK", "SMH", "SOXX", "XLC", "XLY", "MTUM"]
+    quality_value = ["QUAL", "COWZ", "VTV", "SCHD", "VIG", "MOAT", "USMV", "SPLV"]
+    cyclicals = ["XLI", "XLF", "XRT", "IYT", "XLB", "XHB", "KRE", "KBE"]
+    global_equity = ["VT", "EFA", "VEA", "EEM", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWW"]
+    ai_adopters = ["XLI", "XLF", "XLV", "XLY", "XRT", "IYT", "RSP", "IWM", "MDY", "COWZ", "QUAL"]
+    ai_infra = ["SMH", "SOXX", "VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "XLU", "XLI"]
+    risk_confirmers = ["HYG", "LQD", "BKLN", "SRLN"]
+    diversifiers = ["GLD", "IAU", "DBC", "TIP", "VTIP", "IEF", "TLT", "BIL"]
+
+    def unique(tickers: list[str]) -> list[str]:
+        return list(dict.fromkeys(tickers))
+
+    def strict_growth_gate(
+        *,
+        max_defensive_add: float = 0.18,
+        required_confirmation_breaks: int = 3,
+    ) -> DecisionSanityConfig:
+        return DecisionSanityConfig(
+            profile="systematic_break_growth_gate",
+            max_defensive_add=max_defensive_add,
+            required_confirmation_breaks=required_confirmation_breaks,
+        )
+
+    def dual(
+        *,
+        name: str,
+        family: str,
+        hypothesis: str,
+        tickers: list[str],
+        lookback_days: int = 42,
+        skip_days: int = 0,
+        top_n: int = 8,
+        max_asset_weight: float | None = 0.14,
+        vol_target: float | None = 0.22,
+        trend_filter_days: int | None = 63,
+        min_return: float = -0.005,
+        ranking_metric: str = "risk_adjusted_return",
+        weighting: str = "risk_adjusted_score",
+        scenario_sizing: ScenarioSizingConfig | None = None,
+        decision_sanity: DecisionSanityConfig | None = None,
+        drawdown_control: DrawdownControlConfig | None = None,
+        min_change: float = 0.05,
+        max_step: float = 0.30,
+        min_hold_days: int = 5,
+    ) -> ExperimentCandidate:
+        return _candidate(
+            name=name,
+            role="systematic_break_risk_on_candidate",
+            phase="systematic_break_risk_on",
+            family=family,
+            parent="risk_on_until_systematic_break",
+            hypothesis=hypothesis,
+            scenario_sizing=scenario_sizing,
+            decision_sanity=decision_sanity,
+            strategy=StrategyConfig(
+                type="dual_momentum",
+                tickers=unique(tickers),
+                defensive_ticker="BIL",
+                lookback_days=lookback_days,
+                skip_days=skip_days,
+                top_n=top_n,
+                min_return=min_return,
+                ranking_metric=cast(Any, ranking_metric),
+                weighting=cast(Any, weighting),
+                volatility_lookback_days=42,
+                trend_filter_days=trend_filter_days,
+                max_asset_weight=max_asset_weight,
+                volatility_target=(
+                    VolatilityTargetConfig(annualized_volatility=vol_target, lookback_days=42)
+                    if vol_target is not None
+                    else None
+                ),
+                drawdown_control=drawdown_control,
+                cycle_min_rebalance_change=min_change,
+                cycle_max_step_change=max_step,
+                cycle_min_hold_days=min_hold_days,
+            ),
+        )
+
+    return (
+        dual(
+            name="i161_systematic_break_growth_preserve",
+            family="systematic_break_growth_preserve",
+            hypothesis=(
+                "Stay growth-biased while trend and credit remain intact; reduce exposure only "
+                "after multiple systematic breaks confirm that event risk has become market risk."
+            ),
+            tickers=unique([*growth_leadership, *broadening, *quality_value, *risk_confirmers]),
+            top_n=8,
+            max_asset_weight=0.15,
+            vol_target=0.24,
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=strict_growth_gate(max_defensive_add=0.15),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.22,
+                risk_multiplier=0.72,
+            ),
+        ),
+        dual(
+            name="i161_systematic_break_source_funds_rotation",
+            family="systematic_break_source_funds",
+            hypothesis=(
+                "When mega-cap leadership gets crowded, stay risk-on but rotate the source of "
+                "funds toward AI adopters, infrastructure, broadening, and credit-confirmed risk."
+            ),
+            tickers=unique([*ai_adopters, *ai_infra, *broadening, *quality_value, *risk_confirmers]),
+            lookback_days=42,
+            top_n=10,
+            max_asset_weight=0.12,
+            vol_target=0.23,
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=strict_growth_gate(max_defensive_add=0.18),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.22,
+                risk_multiplier=0.70,
+            ),
+        ),
+        dual(
+            name="i161_systematic_break_equal_weight_midcap",
+            family="systematic_break_broadening",
+            hypothesis=(
+                "If source-of-funds rotation broadens beyond mega-cap growth, equal-weight, "
+                "midcap, small-cap, quality, and cyclicals should keep the portfolio risk-on."
+            ),
+            tickers=unique([*broadening, *cyclicals, *quality_value, *risk_confirmers]),
+            lookback_days=63,
+            skip_days=5,
+            top_n=8,
+            max_asset_weight=0.14,
+            vol_target=0.21,
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=strict_growth_gate(max_defensive_add=0.18),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.20,
+                risk_multiplier=0.72,
+            ),
+        ),
+        dual(
+            name="i161_systematic_break_global_convergence",
+            family="systematic_break_global_rotation",
+            hypothesis=(
+                "Keep risk exposure active, but allow ex-US and global ETFs to take capital "
+                "when US mega-cap concentration is less compelling than global breadth."
+            ),
+            tickers=unique([*global_equity, *broadening, *quality_value, *risk_confirmers, "GLD"]),
+            lookback_days=84,
+            skip_days=5,
+            top_n=8,
+            max_asset_weight=0.14,
+            vol_target=0.20,
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=strict_growth_gate(max_defensive_add=0.18),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.20,
+                risk_multiplier=0.72,
+            ),
+            min_change=0.06,
+            max_step=0.28,
+            min_hold_days=5,
+        ),
+        dual(
+            name="i161_systematic_break_quality_value_cyclicals",
+            family="systematic_break_quality_value",
+            hypothesis=(
+                "Risk-on does not have to mean high-duration technology: test quality, value, "
+                "dividends, cyclicals, financials, and industrials as a risk-on rotation sleeve."
+            ),
+            tickers=unique([*quality_value, *cyclicals, "RSP", "IWM", "MDY", *risk_confirmers]),
+            lookback_days=63,
+            skip_days=5,
+            top_n=8,
+            max_asset_weight=0.15,
+            vol_target=0.20,
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=strict_growth_gate(max_defensive_add=0.18),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.20,
+                risk_multiplier=0.74,
+            ),
+        ),
+        dual(
+            name="i161_systematic_break_all_weather_risk_on",
+            family="systematic_break_multi_asset",
+            hypothesis=(
+                "Approximate a broad all-weather risk-on book: equities stay primary, but gold, "
+                "commodities, duration, and credit can absorb source-of-funds rotation before cash."
+            ),
+            tickers=unique(
+                [
+                    *growth_leadership,
+                    *broadening,
+                    *global_equity,
+                    *quality_value,
+                    *cyclicals,
+                    *risk_confirmers,
+                    *diversifiers,
+                ]
+            ),
+            lookback_days=63,
+            skip_days=5,
+            top_n=12,
+            max_asset_weight=0.10,
+            vol_target=0.21,
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=strict_growth_gate(max_defensive_add=0.20),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.22,
+                risk_multiplier=0.72,
+            ),
+            min_change=0.06,
+            max_step=0.26,
+            min_hold_days=5,
+        ),
+        dual(
+            name="i161_systematic_break_low_churn",
+            family="systematic_break_operable",
+            hypothesis=(
+                "Low-churn version of the systematic-break thesis: stay invested through noise, "
+                "rotate slowly, and require large confirmation before defensive moves."
+            ),
+            tickers=unique([*growth_leadership, *broadening, *global_equity, *quality_value, *risk_confirmers, "GLD"]),
+            lookback_days=100,
+            skip_days=5,
+            top_n=8,
+            max_asset_weight=0.14,
+            vol_target=0.19,
+            trend_filter_days=126,
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=strict_growth_gate(max_defensive_add=0.15),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=100,
+                max_drawdown=-0.20,
+                risk_multiplier=0.78,
+            ),
+            min_change=0.08,
+            max_step=0.22,
+            min_hold_days=10,
+        ),
+    )
+
+
+def _growth_core_source_funds_overlay_candidates() -> tuple[ExperimentCandidate, ...]:
+    """Growth-first candidates with source-of-funds rotation as a satellite.
+
+    Iteration 161 tested whether a broad systematic-break book could replace
+    concentrated growth exposure. It reduced risk, but gave up too much return.
+    This follow-up keeps the high-CAGR re-entry core and only lets the risk-on
+    sleeve rotate toward broadening, quality/value, cyclicals, global equities,
+    or AI-adopter/infrastructure assets when those vehicles have better evidence.
+    """
+
+    base = _operating_system_candidates()[0]
+    assert base.name == "i21_os_ai_escape_scenario_sized"
+
+    growth_core = ["QQQ", "QQQM", "IWF", "VUG", "XLK", "SMH", "SOXX", "IGV", "XLC", "XLY", "MTUM"]
+    broadening = ["SPY", "VTI", "VOO", "RSP", "IWM", "MDY", "DIA", "SPHB"]
+    quality_value = ["QUAL", "COWZ", "VTV", "SCHD", "VIG", "MOAT", "USMV", "SPLV"]
+    cyclicals = ["XLI", "XLF", "XLB", "XRT", "IYT", "XHB", "KRE"]
+    global_equity = ["VT", "EFA", "VEA", "EEM", "VWO", "VGK", "EWJ", "INDA", "EWZ"]
+    ai_adopters = ["XLI", "XLF", "XLV", "XLY", "XRT", "IYT", "RSP", "IWM", "MDY", "COWZ", "QUAL"]
+    ai_infra = ["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLU", "XLI"]
+    credit_confirmers = ["HYG", "LQD", "BKLN", "SRLN"]
+
+    def unique(tickers: list[str]) -> list[str]:
+        return list(dict.fromkeys(tickers))
+
+    def sanity_gate(max_defensive_add: float = 0.20) -> DecisionSanityConfig:
+        return DecisionSanityConfig(
+            profile="growth_core_source_funds_gate",
+            max_defensive_add=max_defensive_add,
+            required_confirmation_breaks=3,
+        )
+
+    def direct(
+        *,
+        name: str,
+        family: str,
+        hypothesis: str,
+        tickers: list[str],
+        scenario_sizing: ScenarioSizingConfig | None,
+        decision_sanity: DecisionSanityConfig | None = None,
+        lookback_days: int = 42,
+        skip_days: int = 0,
+        top_n: int = 6,
+        min_return: float = 0.0,
+        max_asset_weight: float | None = 0.22,
+        vol_target: float | None = 0.18,
+        vol_lookback_days: int = 21,
+        trend_filter_days: int | None = 63,
+        drawdown: float = -0.22,
+        drawdown_multiplier: float = 0.78,
+        min_change: float = 0.035,
+        max_step: float = 0.36,
+        min_hold_days: int = 0,
+    ) -> ExperimentCandidate:
+        return _candidate(
+            name=name,
+            role="growth_core_source_funds_candidate",
+            phase="growth_core_source_funds_overlay",
+            family=family,
+            parent="i111_reentry_vol_target_fast_21d",
+            hypothesis=hypothesis,
+            scenario_sizing=scenario_sizing,
+            decision_sanity=decision_sanity,
+            strategy=_clone_strategy(
+                base.strategy,
+                tickers=unique(tickers),
+                lookback_days=lookback_days,
+                skip_days=skip_days,
+                top_n=top_n,
+                min_return=min_return,
+                max_asset_weight=max_asset_weight,
+                trend_filter_days=trend_filter_days,
+                volatility_target=(
+                    VolatilityTargetConfig(
+                        annualized_volatility=vol_target,
+                        lookback_days=vol_lookback_days,
+                        max_leverage=1.0,
+                    )
+                    if vol_target is not None
+                    else None
+                ),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84,
+                    max_drawdown=drawdown,
+                    risk_multiplier=drawdown_multiplier,
+                ),
+                cycle_min_rebalance_change=min_change,
+                cycle_max_step_change=max_step,
+                cycle_min_hold_days=min_hold_days,
+            ),
+        )
+
+    return (
+        direct(
+            name="i162_growth_core_source_funds_raw",
+            family="growth_core_source_funds_raw",
+            hypothesis=(
+                "Keep the high-CAGR growth/re-entry engine, but broaden the risk-on universe "
+                "so source-of-funds rotation can choose equal-weight, midcap, quality, cyclicals, "
+                "or AI-adopter vehicles without defaulting to cash."
+            ),
+            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]),
+            scenario_sizing=None,
+            top_n=7,
+            max_asset_weight=0.20,
+            vol_target=0.20,
+            drawdown=-0.23,
+            drawdown_multiplier=0.82,
+        ),
+        direct(
+            name="i162_growth_core_source_funds_sanity",
+            family="growth_core_source_funds_sanity",
+            hypothesis=(
+                "Same broadened growth core, but scenario/event pressure can only force large "
+                "defense after systematic trend, breadth, credit, or volatility confirmation."
+            ),
+            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]),
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=sanity_gate(max_defensive_add=0.20),
+            top_n=7,
+            max_asset_weight=0.20,
+            vol_target=0.20,
+            drawdown=-0.23,
+            drawdown_multiplier=0.82,
+        ),
+        _ai_cycle_candidate(
+            name="i162_ai_cycle_source_funds_core",
+            family="growth_core_source_funds_cycle",
+            hypothesis=(
+                "Treat broadening and quality/value/cyclical assets as the core book, while "
+                "AI/growth remains a high-upside satellite that expands only in confirmed repair."
+            ),
+            core_tickers=unique([*broadening, *quality_value, *cyclicals, *credit_confirmers]),
+            satellite_tickers=unique(growth_core),
+            lookback_days=42,
+            skip_days=0,
+            top_n=7,
+            min_return=-0.005,
+            satellite_max=0.68,
+            satellite_risk_on=0.44,
+            satellite_reentry=0.82,
+            trigger=-0.08,
+            deep=-0.22,
+            min_recovery=0.006,
+            vol_ceiling=0.56,
+            max_asset_weight=0.22,
+            min_change=0.035,
+            max_step=0.42,
+            scenario_sizing=_scenario_profile("aggressive"),
+        ),
+        _dip_overlay_candidate(
+            name="i162_broadening_dip_reentry_overlay",
+            family="growth_core_source_funds_dip_reentry",
+            hypothesis=(
+                "Use metered dip re-entry to buy broadening vehicles earlier than the narrow "
+                "AI trend signal, while keeping the growth complex eligible when it repairs."
+            ),
+            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]),
+            lookback_days=42,
+            skip_days=0,
+            top_n=7,
+            min_return=-0.005,
+            trigger=-0.07,
+            deep=-0.19,
+            min_recovery=0.005,
+            starter=0.34,
+            step=0.28,
+            max_risk=0.96,
+            max_asset_weight=0.20,
+            vol_ceiling=0.54,
+            scenario_sizing=_scenario_profile("aggressive"),
+            phase="growth_core_source_funds_overlay",
+        ),
+        _sector_regime_candidate(
+            name="i162_sector_factor_source_funds_rotation",
+            family="growth_core_source_funds_sector_rotation",
+            hypothesis=(
+                "Let the risk-on sleeve rotate among growth, quality, cyclicals, financials, "
+                "industrials, and broad equity when source-of-funds leadership changes."
+            ),
+            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *ai_adopters, *credit_confirmers]),
+            lookback_days=42,
+            skip_days=0,
+            top_n=8,
+            min_return=-0.005,
+            trigger=-0.08,
+            deep=-0.20,
+            min_recovery=0.006,
+            max_risk=1.00,
+            max_asset_weight=0.16,
+            vol_ceiling=0.54,
+            scenario_sizing=_scenario_profile("aggressive"),
+            phase="growth_core_source_funds_overlay",
+        ),
+        direct(
+            name="i162_quality_value_satellite_high_cagr",
+            family="growth_core_source_funds_quality_value",
+            hypothesis=(
+                "Keep high growth as the return hurdle, but make quality, cash-flow, dividend, "
+                "and value vehicles eligible when concentration or duration risk is less attractive."
+            ),
+            tickers=unique([*growth_core, *quality_value, "SPY", "RSP", "IWM", "HYG", "LQD"]),
+            scenario_sizing=None,
+            top_n=6,
+            max_asset_weight=0.22,
+            vol_target=0.19,
+            drawdown=-0.22,
+            drawdown_multiplier=0.82,
+        ),
+        direct(
+            name="i162_global_convergence_satellite_high_cagr",
+            family="growth_core_source_funds_global",
+            hypothesis=(
+                "Do not abandon U.S. growth, but allow ex-US and global equities to compete "
+                "for source-of-funds rotation when their trend and volatility evidence improves."
+            ),
+            tickers=unique([*growth_core, *global_equity, "SPY", "RSP", "IWM", "HYG", "LQD"]),
+            scenario_sizing=None,
+            top_n=6,
+            max_asset_weight=0.22,
+            vol_target=0.18,
+            drawdown=-0.22,
+            drawdown_multiplier=0.82,
+        ),
+        direct(
+            name="i162_growth_core_source_funds_low_churn",
+            family="growth_core_source_funds_low_churn",
+            hypothesis=(
+                "Human-operable version: stay risk-on through noise, rotate only on durable "
+                "source-of-funds evidence, and avoid small daily changes."
+            ),
+            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *global_equity, *credit_confirmers]),
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=sanity_gate(max_defensive_add=0.18),
+            lookback_days=63,
+            skip_days=5,
+            top_n=7,
+            max_asset_weight=0.20,
+            vol_target=0.18,
+            drawdown=-0.22,
+            drawdown_multiplier=0.84,
+            min_change=0.07,
+            max_step=0.28,
+            min_hold_days=10,
+        ),
+        direct(
+            name="i162_ai_infra_adopter_source_funds",
+            family="growth_core_source_funds_ai_adopters",
+            hypothesis=(
+                "If capital rotates within the AI story rather than out of it, let infrastructure "
+                "and AI-adopter sleeves compete with semis and mega-cap growth."
+            ),
+            tickers=unique([*growth_core, *ai_infra, *ai_adopters, *broadening, *credit_confirmers]),
+            scenario_sizing=None,
+            top_n=7,
+            max_asset_weight=0.18,
+            vol_target=0.21,
+            drawdown=-0.24,
+            drawdown_multiplier=0.80,
+        ),
+    )
 
 
 def _candidate(

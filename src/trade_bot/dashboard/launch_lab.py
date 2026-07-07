@@ -20,8 +20,10 @@ from trade_bot.dashboard.formatting import (
     _format_percent,
 )
 from trade_bot.DEFAULTS import (
+    DEFAULT_ENTRY_HORIZONS,
     DEFAULT_LAUNCH_CAPITAL,
     DEFAULT_LAUNCH_PRIMARY_HORIZON,
+    DEFAULT_LAUNCH_START_FREQUENCY,
     DEFAULT_LAUNCH_TARGET_FRACTION,
 )
 from trade_bot.research.baselines import BaselineRun
@@ -53,7 +55,7 @@ def _render_launch_lab(
         st.info("Choose a strategy to evaluate launch timing.")
         return
 
-    input_cols = st.columns([1, 1, 1])
+    input_cols = st.columns([1.0, 0.75, 0.9, 0.85, 0.9])
     benchmark_name = input_cols[0].selectbox(
         "Launch benchmark",
         _benchmark_options(baseline_run),
@@ -61,7 +63,19 @@ def _render_launch_lab(
         help="Reference for start-date beat rates. SPY is the default broad-market hurdle.",
         key="launch_lab_benchmark",
     )
-    capital_to_launch = input_cols[1].number_input(
+    horizon_options = list(DEFAULT_ENTRY_HORIZONS)
+    primary_horizon = input_cols[1].selectbox(
+        "Entry horizon",
+        horizon_options,
+        index=_default_option_index(horizon_options, DEFAULT_LAUNCH_PRIMARY_HORIZON),
+        help=(
+            "Forward window used for launch evidence. Shorter horizons show entry timing; "
+            "longer horizons show whether adoption timing mattered after initial noise."
+        ),
+        key="launch_lab_primary_horizon",
+    )
+    start_frequency = _start_frequency_selector(input_cols[2])
+    capital_to_launch = input_cols[3].number_input(
         "Test capital",
         min_value=0.0,
         value=float(DEFAULT_LAUNCH_CAPITAL),
@@ -69,7 +83,7 @@ def _render_launch_lab(
         help="Dollar sleeve you are considering for a new paper/live launch.",
         key="launch_lab_capital",
     )
-    target_fraction = input_cols[2].slider(
+    target_fraction = input_cols[4].slider(
         "Final sleeve fraction",
         min_value=0.10,
         max_value=1.00,
@@ -86,6 +100,8 @@ def _render_launch_lab(
         current_state=baseline_run.current_state,
         capital_to_launch=capital_to_launch,
         target_fraction=target_fraction,
+        primary_horizon=str(primary_horizon),
+        start_frequency=start_frequency,
     )
     _render_launch_decision(run, selected_strategy, benchmark_name)
 
@@ -134,6 +150,40 @@ def _benchmark_options(baseline_run: BaselineRun) -> list[str]:
     preferred = ["buy_hold_spy", "buy_hold_qqq", "i41_ref_us_60_40", "buy_hold_bil"]
     options = [name for name in preferred if name in baseline_run.results]
     return options or sorted(baseline_run.results.keys())[:1]
+
+
+def _default_option_index(options: list[str], default: str) -> int:
+    try:
+        return options.index(default)
+    except ValueError:
+        return 0
+
+
+def _start_frequency_selector(container: Any) -> str:
+    options = {
+        "Monthly starts": "M",
+        "Quarterly starts": "Q",
+        "Annual starts": "A",
+    }
+    default_label = next(
+        (
+            label
+            for label, value in options.items()
+            if value == DEFAULT_LAUNCH_START_FREQUENCY
+        ),
+        "Monthly starts",
+    )
+    selected = container.selectbox(
+        "Start sampling",
+        list(options),
+        index=list(options).index(default_label),
+        help=(
+            "How historical launch dates are sampled. Monthly starts give more observations "
+            "but overlap heavily for 3m+ horizons; annual starts are a lower-overlap sanity check."
+        ),
+        key="launch_lab_start_frequency",
+    )
+    return options[str(selected)]
 
 
 def _render_launch_decision(
@@ -421,6 +471,8 @@ def _render_entry_backtest_read(run: LaunchReadinessRun, windows: pd.DataFrame) 
         protocol_windows = windows.copy()
     best_start = protocol_windows.sort_values("total_return", ascending=False).iloc[0]
     worst_start = protocol_windows.sort_values("total_return", ascending=True).iloc[0]
+    protocol_read = _protocol_separation_read(windows)
+    overlap_read = _window_overlap_read(windows)
     cards = [
         {
             "label": "Historical Pattern",
@@ -433,6 +485,18 @@ def _render_entry_backtest_read(run: LaunchReadinessRun, windows: pd.DataFrame) 
                 "Larger dots are starts with an early drawdown breach."
             ),
             "tone": "warning",
+        },
+        {
+            "label": "Window Overlap",
+            "answer": overlap_read["answer"],
+            "detail": overlap_read["detail"],
+            "tone": overlap_read["tone"],
+        },
+        {
+            "label": "Protocol Separation",
+            "answer": protocol_read["answer"],
+            "detail": protocol_read["detail"],
+            "tone": protocol_read["tone"],
         },
         {
             "label": "Best Start",
@@ -451,6 +515,112 @@ def _render_entry_backtest_read(run: LaunchReadinessRun, windows: pd.DataFrame) 
         },
     ]
     _render_launch_card_grid(cards, class_name="launch-guidance-grid")
+
+
+def _protocol_separation_read(windows: pd.DataFrame) -> dict[str, str]:
+    if windows.empty or "protocol" not in windows or "total_return" not in windows:
+        return {
+            "answer": "No protocol spread",
+            "detail": "Protocol separation cannot be calculated for this window.",
+            "tone": "neutral",
+        }
+    medians = (
+        windows.assign(total_return=pd.to_numeric(windows["total_return"], errors="coerce"))
+        .dropna(subset=["total_return"])
+        .groupby("protocol")["total_return"]
+        .median()
+        .sort_values(ascending=False)
+    )
+    if medians.empty or len(medians) < 2:
+        return {
+            "answer": "Single protocol",
+            "detail": "Only one launch protocol is available for this selected horizon.",
+            "tone": "neutral",
+        }
+    spread = float(medians.max() - medians.min())
+    best = str(medians.index[0])
+    worst = str(medians.index[-1])
+    if spread < 0.005:
+        answer = "Protocols effectively identical"
+        tone = "warning"
+        detail = (
+            f"Median-return spread is only {_format_percent(spread)} across protocols. "
+            "For this horizon, the ramp period is too small relative to the full window to change the read much."
+        )
+    elif spread < 0.02:
+        answer = f"{_format_percent(spread)} median-return spread"
+        tone = "neutral"
+        detail = (
+            f"Best median protocol is {best}; weakest is {worst}. "
+            "The ramp choice matters a little, but the strategy path still dominates."
+        )
+    else:
+        answer = f"{_format_percent(spread)} median-return spread"
+        tone = "success"
+        detail = (
+            f"Best median protocol is {best}; weakest is {worst}. "
+            "The launch ramp is materially changing outcomes for this horizon."
+        )
+    return {"answer": answer, "detail": detail, "tone": tone}
+
+
+def _window_overlap_read(windows: pd.DataFrame) -> dict[str, str]:
+    if windows.empty or "start_date" not in windows:
+        return {
+            "answer": "Overlap unknown",
+            "detail": "Start-date overlap cannot be calculated for this window.",
+            "tone": "neutral",
+        }
+    unique_starts = (
+        pd.to_datetime(windows["start_date"], errors="coerce")
+        .dropna()
+        .drop_duplicates()
+        .sort_values()
+    )
+    if len(unique_starts) < 2:
+        return {
+            "answer": "Single start sample",
+            "detail": "There are not enough sampled starts to assess overlap.",
+            "tone": "neutral",
+        }
+    horizon_days = None
+    if "horizon_trading_days" in windows:
+        horizon_series = pd.to_numeric(windows["horizon_trading_days"], errors="coerce").dropna()
+        if not horizon_series.empty:
+            horizon_days = float(horizon_series.iloc[0])
+    if not horizon_days or horizon_days <= 0:
+        return {
+            "answer": "Overlap unknown",
+            "detail": "The selected launch windows do not include horizon length.",
+            "tone": "neutral",
+        }
+    median_gap_calendar = float(unique_starts.diff().dt.days.dropna().median())
+    estimated_gap_trading = median_gap_calendar * 5.0 / 7.0
+    overlap = max(0.0, min(1.0, 1.0 - estimated_gap_trading / horizon_days))
+    if overlap >= 0.60:
+        tone = "warning"
+        detail = (
+            f"Sampled starts are roughly {int(round(median_gap_calendar))} calendar days apart "
+            f"against a {int(round(horizon_days))}-trading-day horizon. Adjacent dots share most "
+            "of the same future market path, so waves can look seasonal even when they are overlapping-window math."
+        )
+    elif overlap >= 0.25:
+        tone = "neutral"
+        detail = (
+            f"Sampled starts have moderate overlap: roughly {int(round(median_gap_calendar))} calendar days "
+            f"between starts against a {int(round(horizon_days))}-trading-day horizon."
+        )
+    else:
+        tone = "success"
+        detail = (
+            f"Sampled starts are mostly independent for this horizon: roughly {int(round(median_gap_calendar))} "
+            f"calendar days between starts against a {int(round(horizon_days))}-trading-day horizon."
+        )
+    return {
+        "answer": f"{_format_percent(overlap)} estimated overlap",
+        "detail": detail,
+        "tone": tone,
+    }
 
 
 def _render_ramp_plan_read(run: LaunchReadinessRun) -> None:

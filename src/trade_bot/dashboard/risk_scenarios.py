@@ -14,6 +14,9 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
     DEFAULT_SCENARIO_EXPLANATION_TOP_SCENARIOS,
     DEFAULT_SCENARIO_HISTORY_SNAPSHOT_LIMIT,
+    DEFAULT_SCENARIO_HORIZON_AUDIT_TOP_N,
+    DEFAULT_SCENARIO_HORIZON_FLAT_SPREAD_THRESHOLD,
+    DEFAULT_SCENARIO_HORIZON_MODEST_SPREAD_THRESHOLD,
     DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS,
 )
 from trade_bot.research.baselines import BaselineRun
@@ -295,6 +298,22 @@ def _render_scenario_probability_explanation(
             st.plotly_chart(driver_figure, use_container_width=True)
         else:
             st.write("No driver-score chart is available.")
+
+    horizon_read = _scenario_horizon_differentiation_read(scenario_lattice)
+    if horizon_read:
+        st.info(horizon_read)
+    audit_cols = st.columns(2)
+    with audit_cols[0]:
+        heatmap = _scenario_probability_heatmap_figure(scenario_lattice)
+        if heatmap.data:
+            st.plotly_chart(heatmap, use_container_width=True)
+    with audit_cols[1]:
+        audit_frame = _scenario_horizon_differentiation_frame(scenario_lattice)
+        if not audit_frame.empty:
+            st.caption("Bucket-level horizon differentiation")
+            _render_metric_dataframe(
+                _display_metrics(audit_frame.head(DEFAULT_SCENARIO_HORIZON_AUDIT_TOP_N))
+            )
 
 
 def _render_scenario_probability_history(
@@ -791,6 +810,115 @@ def _format_history_time(value: object) -> str:
     return timestamp.strftime("%Y-%m-%d %H:%M")
 
 
+def _scenario_horizon_differentiation_frame(scenario_lattice: pd.DataFrame) -> pd.DataFrame:
+    required = {"horizon", "risk_bucket", "probability"}
+    if scenario_lattice.empty or not required.issubset(scenario_lattice.columns):
+        return pd.DataFrame()
+    scoped = scenario_lattice.copy()
+    scoped["probability"] = pd.to_numeric(scoped["probability"], errors="coerce")
+    pivot = (
+        scoped.dropna(subset=["probability"])
+        .groupby(["risk_bucket", "horizon"], dropna=False)["probability"]
+        .sum()
+        .unstack(fill_value=0.0)
+    )
+    if pivot.empty:
+        return pd.DataFrame()
+    horizon_order = _ordered_horizons(pivot.columns)
+    pivot = pivot.reindex(columns=horizon_order, fill_value=0.0)
+    result = pivot.reset_index()
+    horizon_columns = [column for column in horizon_order if column in result.columns]
+    result["horizon_spread"] = result[horizon_columns].max(axis=1) - result[horizon_columns].min(axis=1)
+    result["highest_horizon"] = result[horizon_columns].idxmax(axis=1)
+    result["lowest_horizon"] = result[horizon_columns].idxmin(axis=1)
+    result["max_probability"] = result[horizon_columns].max(axis=1)
+    return result.sort_values(["horizon_spread", "max_probability"], ascending=False)
+
+
+def _scenario_horizon_differentiation_read(scenario_lattice: pd.DataFrame) -> str:
+    audit = _scenario_horizon_differentiation_frame(scenario_lattice)
+    if audit.empty:
+        return ""
+    max_spread = float(pd.to_numeric(audit["horizon_spread"], errors="coerce").fillna(0.0).max())
+    mean_spread = float(pd.to_numeric(audit["horizon_spread"], errors="coerce").fillna(0.0).mean())
+    top_bucket = str(audit.iloc[0]["risk_bucket"]).replace("_", " ")
+    if max_spread < DEFAULT_SCENARIO_HORIZON_FLAT_SPREAD_THRESHOLD:
+        label = "Horizon audit: nearly flat bucket probabilities."
+        interpretation = (
+            "The scenario layer is reading roughly the same broad risk mix across horizons. "
+            "Treat the horizon stack as a current-state posture repeated forward, not as a strongly differentiated term structure."
+        )
+    elif max_spread < DEFAULT_SCENARIO_HORIZON_MODEST_SPREAD_THRESHOLD:
+        label = "Horizon audit: modest differentiation."
+        interpretation = (
+            "Some horizon movement exists, but broad bucket totals are still close. "
+            "Use the named-scenario heatmap before assuming the forecast meaningfully changes by horizon."
+        )
+    else:
+        label = "Horizon audit: material differentiation."
+        interpretation = (
+            "At least one broad risk bucket changes meaningfully across horizons. "
+            "The horizon stack is carrying a differentiated term-structure signal."
+        )
+    return (
+        f"{label} Largest bucket spread is {max_spread:.1%} in {top_bucket}; "
+        f"average bucket spread is {mean_spread:.1%}. {interpretation}"
+    )
+
+
+def _scenario_probability_heatmap_figure(scenario_lattice: pd.DataFrame) -> go.Figure:
+    required = {"horizon", "scenario", "probability"}
+    if scenario_lattice.empty or not required.issubset(scenario_lattice.columns):
+        return go.Figure()
+    scoped = scenario_lattice.copy()
+    scoped["probability"] = pd.to_numeric(scoped["probability"], errors="coerce")
+    pivot = (
+        scoped.dropna(subset=["probability"])
+        .groupby(["scenario", "horizon"], dropna=False)["probability"]
+        .sum()
+        .unstack(fill_value=0.0)
+    )
+    if pivot.empty:
+        return go.Figure()
+    horizon_order = _ordered_horizons(pivot.columns)
+    pivot = pivot.reindex(columns=horizon_order, fill_value=0.0)
+    ranking = pd.DataFrame(
+        {
+            "max_probability": pivot.max(axis=1),
+            "horizon_spread": pivot.max(axis=1) - pivot.min(axis=1),
+        }
+    ).sort_values(["max_probability", "horizon_spread"], ascending=False)
+    top_scenarios = ranking.head(DEFAULT_SCENARIO_HORIZON_AUDIT_TOP_N).index
+    pivot = pivot.loc[top_scenarios]
+    figure = go.Figure(
+        go.Heatmap(
+            z=pivot.values,
+            x=pivot.columns.astype(str),
+            y=pivot.index.astype(str),
+            colorscale=[
+                [0.0, "#f8fafc"],
+                [0.45, "#cbd5e1"],
+                [1.0, "#0f766e"],
+            ],
+            zmin=0,
+            zmax=max(float(pivot.max().max()), 0.01),
+            colorbar={"title": "Probability", "tickformat": ".0%"},
+            hovertemplate=(
+                "<b>%{y}</b><br>Horizon: %{x}<br>Probability: %{z:.1%}<extra></extra>"
+            ),
+        )
+    )
+    figure.update_layout(
+        title="Named Scenario Probability by Horizon",
+        template="plotly_white",
+        xaxis={"title": "Horizon"},
+        yaxis={"title": "", "autorange": "reversed"},
+        height=360,
+        margin={"l": 20, "r": 20, "t": 60, "b": 30},
+    )
+    return figure
+
+
 def _scenario_probability_stack_figure(scenario_lattice: pd.DataFrame) -> go.Figure:
     if scenario_lattice.empty or not {"horizon", "risk_bucket", "probability"}.issubset(
         scenario_lattice.columns
@@ -811,8 +939,10 @@ def _scenario_probability_stack_figure(scenario_lattice: pd.DataFrame) -> go.Fig
     pivot = pivot.reindex(horizon_order)
     color_map = {
         "risk_on": "#0f766e",
+        "risk_on_fragile": "#64748b",
         "fragile_upside": "#65a30d",
         "transition": "#b7791f",
+        "risk_off_then_relief": "#7c3aed",
         "risk_off": "#b91c1c",
         "shock": "#7f1d1d",
     }

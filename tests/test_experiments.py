@@ -681,6 +681,77 @@ def test_long_form_macro_process_iterations_cover_risk_process_theses() -> None:
     assert any(candidate.strategy.volatility_target is not None for candidate in candidates)
 
 
+def test_systematic_break_risk_on_iteration_tests_stay_in_and_broaden_thesis() -> None:
+    candidates = generate_iteration_candidates(161)
+    excluded = set(DEFAULT_EXCLUDED_TICKERS)
+    families = {candidate.family for candidate in candidates}
+    broadening_tickers = {"RSP", "IWM", "MDY", "QUAL", "COWZ", "VTV", "SCHD"}
+    global_tickers = {"VT", "EFA", "VEA", "EEM", "VWO", "VGK", "EWJ", "INDA", "EWZ"}
+    confirmer_tickers = {"HYG", "LQD", "BKLN", "SRLN"}
+
+    assert len(candidates) == 7
+    assert all(candidate.phase == "systematic_break_risk_on" for candidate in candidates)
+    assert all(candidate.role == "systematic_break_risk_on_candidate" for candidate in candidates)
+    assert all(excluded.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert {
+        "systematic_break_growth_preserve",
+        "systematic_break_source_funds",
+        "systematic_break_broadening",
+        "systematic_break_global_rotation",
+        "systematic_break_quality_value",
+        "systematic_break_multi_asset",
+        "systematic_break_operable",
+    } == families
+    assert any(broadening_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(global_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(confirmer_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert all(candidate.scenario_sizing is not None for candidate in candidates)
+    assert all(candidate.decision_sanity is not None for candidate in candidates)
+    assert all(candidate.decision_sanity.required_confirmation_breaks >= 3 for candidate in candidates)
+    assert all(candidate.strategy.drawdown_control is not None for candidate in candidates)
+    assert all(candidate.strategy.volatility_target is not None for candidate in candidates)
+
+
+def test_growth_core_source_funds_overlay_keeps_growth_engine_and_rotates_sleeves() -> None:
+    candidates = generate_iteration_candidates(162)
+    excluded = set(DEFAULT_EXCLUDED_TICKERS)
+    families = {candidate.family for candidate in candidates}
+    growth_tickers = {"QQQ", "IWF", "VUG", "XLK", "SMH", "SOXX", "MTUM"}
+    source_of_funds_tickers = {"RSP", "IWM", "MDY", "QUAL", "COWZ", "VTV", "XLI", "XLF"}
+    global_tickers = {"VT", "EFA", "VEA", "EEM", "VWO", "VGK", "EWJ", "INDA", "EWZ"}
+
+    assert len(candidates) == 9
+    assert all(candidate.phase in {"growth_core_source_funds_overlay", "ai_risk_cycle"} for candidate in candidates)
+    assert all(excluded.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert {
+        "growth_core_source_funds_raw",
+        "growth_core_source_funds_sanity",
+        "growth_core_source_funds_cycle",
+        "growth_core_source_funds_dip_reentry",
+        "growth_core_source_funds_sector_rotation",
+        "growth_core_source_funds_quality_value",
+        "growth_core_source_funds_global",
+        "growth_core_source_funds_low_churn",
+        "growth_core_source_funds_ai_adopters",
+    } == families
+    assert any(candidate.strategy.type == "ai_risk_cycle_overlay" for candidate in candidates)
+    assert any(candidate.strategy.type == "dip_reentry_overlay" for candidate in candidates)
+    assert any(candidate.strategy.type == "sector_regime_rotation" for candidate in candidates)
+    assert all(growth_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(source_of_funds_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(global_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(candidate.scenario_sizing is None for candidate in candidates)
+    assert any(candidate.scenario_sizing is not None for candidate in candidates)
+    gated = [candidate for candidate in candidates if candidate.decision_sanity is not None]
+    assert gated
+    assert all(candidate.decision_sanity.required_confirmation_breaks >= 3 for candidate in gated)
+    assert all(
+        candidate.strategy.volatility_target is not None
+        for candidate in candidates
+        if candidate.strategy.type == "dual_momentum"
+    )
+
+
 def test_thresholded_future_state_probability_preserves_low_confidence_risk_on() -> None:
     probabilities = pd.Series([0.10, 0.35, 0.60, 0.95], dtype=float)
 
