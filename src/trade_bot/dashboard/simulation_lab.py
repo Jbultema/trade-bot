@@ -82,20 +82,22 @@ def _render_simulation_lab(
         experiment_scorecards=experiment_scorecards,
     )
 
-    tabs = st.tabs(
-        [
-            "Future-State Map",
-            "Strategy Simulations",
-            "Interpretability",
-        ]
-    )
     scenario_source = _scenario_source_frame(baseline_run)
     probabilities = scenario_probability_frame(scenario_source)
+    simulation_view = (
+        st.pills(
+            "Simulation Lab view",
+            ["Future-State Map", "Strategy Simulations", "Interpretability"],
+            selection_mode="single",
+            default="Future-State Map",
+            key="simulation_lab_view",
+        )
+        or "Future-State Map"
+    )
 
-    with tabs[0]:
+    if simulation_view == "Future-State Map":
         _render_future_state_map(baseline_run, scenario_source, probabilities)
-
-    with tabs[1]:
+    elif simulation_view == "Strategy Simulations":
         _render_strategy_simulations(
             selected_strategy=selected_strategy,
             selected_scorecard=selected_scorecard,
@@ -103,7 +105,7 @@ def _render_simulation_lab(
             baseline_run=baseline_run,
             scenario_source=scenario_source,
         )
-    with tabs[2]:
+    else:
         _render_simulation_interpretability(
             selected_strategy=selected_strategy,
             selected_scorecard=selected_scorecard,

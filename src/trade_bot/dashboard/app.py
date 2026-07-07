@@ -409,18 +409,20 @@ st.markdown(
     '<div class="dashboard-workbench-divider" aria-hidden="true"></div>',
     unsafe_allow_html=True,
 )
-_render_dashboard_section(
-    selected_section,
-    bot_config=bot_config,
-    baseline_run=baseline_run,
-    journal=journal,
-    experiment_scorecards=experiment_scorecards,
-    experiment_regimes=experiment_regimes,
-    experiment_walk_forward=experiment_walk_forward,
-    experiment_candidates=experiment_candidates,
-    decision_sanity_impacts=decision_sanity_impacts,
-    warehouse_path=str(run_store_path),
-    artifact_dir=str(artifact_dir),
-    job_log_dir=str(job_log_dir),
-    book_alignment=execution_book_alignment,
-)
+    section_slot = st.empty()
+    with section_slot.container(), st.spinner(f"Loading {selected_section}..."):
+        _render_dashboard_section(
+            selected_section,
+            bot_config=bot_config,
+            baseline_run=baseline_run,
+            journal=journal,
+            experiment_scorecards=experiment_scorecards,
+            experiment_regimes=experiment_regimes,
+            experiment_walk_forward=experiment_walk_forward,
+            experiment_candidates=experiment_candidates,
+            decision_sanity_impacts=decision_sanity_impacts,
+            warehouse_path=str(run_store_path),
+            artifact_dir=str(artifact_dir),
+            job_log_dir=str(job_log_dir),
+            book_alignment=execution_book_alignment,
+        )

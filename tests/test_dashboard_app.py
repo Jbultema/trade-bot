@@ -139,10 +139,12 @@ def test_dashboard_app_renders_action_headline(
     )
 
 
-def test_simulation_lab_strategy_selector_renders_before_internal_tabs() -> None:
+def test_simulation_lab_strategy_selector_renders_before_lazy_internal_view() -> None:
     source = inspect.getsource(simulation_lab_module._render_simulation_lab)
 
-    assert source.index("_selected_simulation_strategy(") < source.index("st.tabs(")
+    assert source.index("_selected_simulation_strategy(") < source.index("st.pills(")
+    assert "Simulation Lab view" in source
+    assert "st.tabs(" not in source
 
 
 def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:
