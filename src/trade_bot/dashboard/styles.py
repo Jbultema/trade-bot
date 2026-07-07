@@ -885,22 +885,77 @@ def _install_dashboard_styles() -> None:
             min-height: 94px;
             min-width: 0;
             overflow: hidden;
+            overflow-wrap: anywhere;
             box-shadow: var(--tb-shadow-soft);
         }
         div[data-testid="stMetric"] div[data-testid="stMetricLabel"],
         div[data-testid="stMetric"] div[data-testid="stMetricValue"],
         div[data-testid="stMetric"] div[data-testid="stMetricDelta"] {
             color: var(--tb-card-text) !important;
+            min-width: 0;
+            max-width: 100%;
+            white-space: normal !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            overflow-wrap: anywhere;
+            word-break: normal;
         }
         div[data-testid="stMetric"] div[data-testid="stMetricLabel"] {
             color: var(--tb-card-muted) !important;
+            line-height: 1.25 !important;
         }
         div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
             white-space: normal !important;
             overflow-wrap: anywhere;
-            word-break: break-word;
-            font-size: clamp(1.35rem, 2.1vw, 2.2rem) !important;
-            line-height: 1.08 !important;
+            word-break: normal;
+            hyphens: auto;
+            font-size: clamp(1.18rem, 1.55vw, 1.95rem) !important;
+            line-height: 1.12 !important;
+            text-wrap: balance;
+        }
+        div[data-testid="stMetric"] div[data-testid="stMetricLabel"] *,
+        div[data-testid="stMetric"] div[data-testid="stMetricValue"] *,
+        div[data-testid="stMetric"] div[data-testid="stMetricDelta"] * {
+            min-width: 0 !important;
+            max-width: 100% !important;
+            white-space: normal !important;
+            overflow: visible !important;
+            text-overflow: clip !important;
+            overflow-wrap: anywhere !important;
+            word-break: normal !important;
+        }
+        .brand-masthead,
+        .freshness-strip,
+        .dashboard-section-header,
+        .workbench-guide,
+        .action-banner,
+        .market-brief-card,
+        .market-brief-readout,
+        .brief-delta-card,
+        .brief-card,
+        .operating-card,
+        .launch-guidance-card,
+        .metric-info-card {
+            min-width: 0;
+            overflow-wrap: anywhere;
+            word-break: normal;
+        }
+        .brand-masthead *,
+        .freshness-strip *,
+        .dashboard-section-header *,
+        .workbench-guide *,
+        .action-banner *,
+        .market-brief-card *,
+        .market-brief-readout *,
+        .brief-delta-card *,
+        .brief-card *,
+        .operating-card *,
+        .launch-guidance-card *,
+        .metric-info-card * {
+            max-width: 100%;
+            overflow-wrap: anywhere;
+            word-break: normal;
+            text-overflow: clip;
         }
         .brief-grid {
             display: grid;

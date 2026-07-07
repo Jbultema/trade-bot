@@ -76,6 +76,12 @@ def _render_simulation_lab(
 
     _render_simulation_planning_cards()
     _render_simulation_method_guide()
+    selected_strategy, selected_scorecard, selected_result = _selected_simulation_strategy(
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+    )
+
     tabs = st.tabs(
         [
             "Future-State Map",
@@ -89,11 +95,6 @@ def _render_simulation_lab(
     with tabs[0]:
         _render_future_state_map(baseline_run, scenario_source, probabilities)
 
-    selected_strategy, selected_scorecard, selected_result = _selected_simulation_strategy(
-        bot_config=bot_config,
-        baseline_run=baseline_run,
-        experiment_scorecards=experiment_scorecards,
-    )
     with tabs[1]:
         _render_strategy_simulations(
             selected_strategy=selected_strategy,

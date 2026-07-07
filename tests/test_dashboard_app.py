@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import inspect
 from dataclasses import replace
 from pathlib import Path
 
@@ -7,6 +8,7 @@ import pandas as pd
 import pytest
 from streamlit.testing.v1 import AppTest
 
+import trade_bot.dashboard.simulation_lab as simulation_lab_module
 import trade_bot.research.baselines as baselines_module
 import trade_bot.storage.run_store as run_store_module
 import trade_bot.trading.journal as journal_module
@@ -55,7 +57,19 @@ def test_dashboard_app_renders_action_headline(
     assert any("dashboard-primary-nav-label" in markdown.value for markdown in app.markdown)
     assert not any("Daily Market Brief" in markdown.value for markdown in app.markdown)
     assert any("Action Headline" in markdown.value for markdown in app.markdown)
+    action_headline_html = [
+        markdown.value
+        for markdown in app.markdown
+        if '<div class="action-banner action-' in markdown.value
+        and "Action Headline" in markdown.value
+    ]
+    assert action_headline_html
+    assert "headline-copy" not in action_headline_html[0]
+    assert "headline-next" not in action_headline_html[0]
+    assert "Next:" not in action_headline_html[0]
     assert any("stMetricValue" in markdown.value for markdown in app.markdown)
+    assert any("text-overflow: clip" in markdown.value for markdown in app.markdown)
+    assert any("overflow-wrap: anywhere" in markdown.value for markdown in app.markdown)
     assert any("Small Actions" in markdown.value for markdown in app.markdown)
     assert any(subheader.value == "Operating Brief" for subheader in app.subheader)
     assert any("Risk Constraints" in markdown.value for markdown in app.markdown)
@@ -90,7 +104,10 @@ def test_dashboard_app_renders_action_headline(
     assert not app.exception
     assert any(subheader.value == "Simulation Lab" for subheader in app.subheader)
     assert any("Future-State Simulation Map" in markdown.value for markdown in app.markdown)
-    assert any(selectbox.label == "Strategy to simulate" for selectbox in app.selectbox)
+    strategy_selectors = [
+        selectbox for selectbox in app.selectbox if selectbox.label == "Strategy to simulate"
+    ]
+    assert len(strategy_selectors) == 1
 
     dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
     dashboard_section.set_value("Research Lab").run(timeout=20)
@@ -109,7 +126,23 @@ def test_dashboard_app_renders_action_headline(
     dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
     dashboard_section.set_value("Performance").run(timeout=20)
     assert not app.exception
+    performance_subheaders = [subheader.value for subheader in app.subheader]
+    assert (
+        performance_subheaders.index("Performance")
+        < performance_subheaders.index("Rolling Window Summary")
+        < performance_subheaders.index("Windowed Performance")
+    )
     assert any(subheader.value == "Windowed Performance" for subheader in app.subheader)
+    assert not any(
+        subheader.value == "Selected Full-History Equity and Drawdown"
+        for subheader in app.subheader
+    )
+
+
+def test_simulation_lab_strategy_selector_renders_before_internal_tabs() -> None:
+    source = inspect.getsource(simulation_lab_module._render_simulation_lab)
+
+    assert source.index("_selected_simulation_strategy(") < source.index("st.tabs(")
 
 
 def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:

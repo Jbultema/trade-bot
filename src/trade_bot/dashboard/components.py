@@ -370,8 +370,6 @@ def _render_action_headline(headline: ActionHeadline) -> None:
         <div class="action-banner action-{html.escape(headline.level)}">
             <p class="headline-label">Action Headline</p>
             <div class="headline-title">{html.escape(headline.headline)}</div>
-            <p class="headline-copy">{html.escape(headline.explanation)}</p>
-            <p class="headline-next">Next: {html.escape(headline.next_action)}</p>
         </div>
         """,
         unsafe_allow_html=True,

@@ -49,6 +49,9 @@ def _render_performance(
     st.subheader("Performance")
     _render_metric_dataframe(_display_metrics(baseline_run.metrics))
 
+    st.subheader("Rolling Window Summary")
+    _render_metric_dataframe(_display_metrics(baseline_run.window_summary))
+
     st.subheader("Windowed Performance")
     option_frame = _performance_option_frame(
         baseline_run,
@@ -143,17 +146,11 @@ def _render_performance(
     else:
         st.warning("Select at least one approach.")
 
-    st.subheader("Rolling Window Summary")
-    _render_metric_dataframe(_display_metrics(baseline_run.window_summary))
-
     st.subheader("Calendar Year Returns")
     st.dataframe(
         baseline_run.calendar_returns.map(lambda value: f"{value:.2%}"),
         use_container_width=True,
     )
-
-    st.subheader("Selected Full-History Equity and Drawdown")
-    st.plotly_chart(make_equity_drawdown_figure(selected_results), use_container_width=True)
 
     st.subheader("Latest Positions")
     positions = latest_positions_frame(selected_results)
