@@ -10,6 +10,7 @@ from plotly.subplots import make_subplots
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.features.indicators import TRADING_DAYS_PER_YEAR, drawdown
 from trade_bot.portfolio.risk import current_positions
+from trade_bot.reporting.colors import series_color_map
 from trade_bot.research.current_state import CurrentStateRun
 from trade_bot.research.event_risk import EventRiskRun
 from trade_bot.research.news_monitor import NewsMonitorRun
@@ -81,17 +82,21 @@ def make_equity_drawdown_figure(
     )
 
     selected_results = _selected_results(results, strategy_names)
+    color_lookup = series_color_map(selected_results.keys())
     for name, result in selected_results.items():
         equity = _windowed_series(result.equity, start=start, end=end)
         if equity.empty:
             continue
         normalized = equity / equity.iloc[0] if rebase else equity
+        color = color_lookup.get(name)
         figure.add_trace(
             go.Scatter(
                 x=normalized.index,
                 y=normalized,
                 mode="lines",
                 name=name,
+                legendgroup=name,
+                line={"color": color},
                 hovertemplate="%{x|%Y-%m-%d}<br>$%{y:.4f}<extra>%{fullData.name}</extra>",
             ),
             row=1,
@@ -104,6 +109,8 @@ def make_equity_drawdown_figure(
                 y=dd,
                 mode="lines",
                 name=f"{name} drawdown",
+                legendgroup=name,
+                line={"color": color},
                 showlegend=False,
                 hovertemplate="%{x|%Y-%m-%d}<br>%{y:.2%}<extra>%{fullData.name}</extra>",
             ),

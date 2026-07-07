@@ -48,6 +48,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_REFERENCE_BASELINE_STRATEGIES,
 )
 from trade_bot.features.indicators import drawdown, ulcer_index
+from trade_bot.reporting.colors import ALLOCATION_EXPOSURE_COLORS, series_color_map
 from trade_bot.reporting.report import make_equity_drawdown_figure, window_performance_frame
 from trade_bot.research.approach_explorer import (
     build_approach_allocation_transition_events,
@@ -558,14 +559,23 @@ def _make_performance_allocation_figure(
         vertical_spacing=0.06,
         subplot_titles=("Growth of $1", "Drawdown", "Allocation exposure"),
     )
+    color_lookup = series_color_map(results.keys())
     for name, result in results.items():
         equity = result.equity.sort_index().dropna()
         equity = equity.loc[(equity.index >= start) & (equity.index <= end)]
         if equity.empty:
             continue
         normalized = equity / equity.iloc[0]
+        color = color_lookup.get(name)
         figure.add_trace(
-            go.Scatter(x=normalized.index, y=normalized, mode="lines", name=name),
+            go.Scatter(
+                x=normalized.index,
+                y=normalized,
+                mode="lines",
+                name=name,
+                legendgroup=name,
+                line={"color": color},
+            ),
             row=1,
             col=1,
         )
@@ -576,17 +586,14 @@ def _make_performance_allocation_figure(
                 y=strategy_drawdown,
                 mode="lines",
                 name=f"{name} drawdown",
+                legendgroup=name,
+                line={"color": color},
                 showlegend=False,
             ),
             row=2,
             col=1,
         )
 
-    allocation_colors = {
-        "risk_assets": "#0f766e",
-        "defensive": "#f59e0b",
-        "cash_or_unallocated": "#94a3b8",
-    }
     for column in ["risk_assets", "defensive", "cash_or_unallocated"]:
         if column not in exposure_history:
             continue
@@ -597,7 +604,7 @@ def _make_performance_allocation_figure(
                 mode="lines",
                 stackgroup="allocation",
                 name=column.replace("_", " "),
-                line={"color": allocation_colors.get(column)},
+                line={"color": ALLOCATION_EXPOSURE_COLORS.get(column)},
                 hovertemplate="%{x|%Y-%m-%d}<br>%{y:.1%}<extra>%{fullData.name}</extra>",
             ),
             row=3,
@@ -825,11 +832,6 @@ def _make_decision_timeline_figure(
                         opacity=0.20,
                     )
 
-    exposure_colors = {
-        "risk_assets": "#0f766e",
-        "defensive": "#f59e0b",
-        "cash_or_unallocated": "#94a3b8",
-    }
     for column in ["risk_assets", "defensive", "cash_or_unallocated"]:
         if column not in exposure_history:
             continue
@@ -839,7 +841,7 @@ def _make_decision_timeline_figure(
                 y=exposure_history[column],
                 mode="lines",
                 name=column.replace("_", " "),
-                line={"color": exposure_colors[column], "width": 2},
+                line={"color": ALLOCATION_EXPOSURE_COLORS[column], "width": 2},
                 hovertemplate="%{x|%Y-%m-%d}<br>%{y:.1%}<extra>%{fullData.name}</extra>",
             ),
             row=3,

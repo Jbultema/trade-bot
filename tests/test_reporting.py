@@ -53,6 +53,42 @@ def test_windowed_equity_figure_rebases_growth_of_one() -> None:
     assert stats.loc[0, "calmar"] == 0.0
 
 
+def test_equity_drawdown_figure_keeps_series_colors_aligned() -> None:
+    index = pd.bdate_range("2026-01-01", periods=5)
+    equity_a = pd.Series([100.0, 104.0, 102.0, 108.0, 112.0], index=index)
+    equity_b = pd.Series([100.0, 101.0, 99.0, 103.0, 106.0], index=index)
+
+    def _result(name: str, equity: pd.Series) -> BacktestResult:
+        returns = equity.pct_change(fill_method=None).fillna(0.0)
+        return BacktestResult(
+            name=name,
+            equity=equity,
+            returns=returns,
+            gross_returns=returns,
+            weights=pd.DataFrame({"SPY": 1.0}, index=index),
+            target_weights=pd.DataFrame({"SPY": 1.0}, index=index),
+            turnover=pd.Series(0.0, index=index),
+            transaction_costs=pd.Series(0.0, index=index),
+        )
+
+    figure = make_equity_drawdown_figure(
+        {
+            "buy_hold_spy": _result("buy_hold_spy", equity_a),
+            "custom_strategy": _result("custom_strategy", equity_b),
+        }
+    )
+
+    assert figure.data[0].name == "buy_hold_spy"
+    assert figure.data[1].name == "buy_hold_spy drawdown"
+    assert figure.data[0].line.color == figure.data[1].line.color
+    assert figure.data[0].legendgroup == figure.data[1].legendgroup == "buy_hold_spy"
+    assert figure.data[2].name == "custom_strategy"
+    assert figure.data[3].name == "custom_strategy drawdown"
+    assert figure.data[2].line.color == figure.data[3].line.color
+    assert figure.data[2].legendgroup == figure.data[3].legendgroup == "custom_strategy"
+    assert figure.data[0].line.color != figure.data[2].line.color
+
+
 def test_window_performance_stats_exclude_pre_window_boundary_return() -> None:
     index = pd.bdate_range("2026-01-01", periods=4)
     equity = pd.Series([100.0, 50.0, 100.0, 110.0], index=index)

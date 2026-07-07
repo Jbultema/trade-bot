@@ -4,6 +4,7 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.research.launch_readiness import (
+    build_aggregate_launch_readiness,
     build_launch_ramp_plan,
     build_launch_readiness,
 )
@@ -70,6 +71,57 @@ def test_launch_readiness_ramp_protocols_change_short_window_returns() -> None:
     assert protocol_returns["Immediate full launch"] < protocol_returns["25% now / 4w ramp"]
     assert protocol_returns.max() - protocol_returns.min() > 0.005
     assert protocol_returns.nunique() == 3
+
+
+def test_aggregate_launch_readiness_builds_transition_and_protocol_frames() -> None:
+    index = pd.bdate_range("2020-01-01", periods=900)
+    benchmark_returns = pd.Series(0.0004, index=index)
+    strong_returns = pd.Series(0.0012, index=index)
+    choppy_returns = pd.Series(0.0006, index=index)
+    choppy_returns.iloc[22:43] = -0.012
+    choppy_returns.iloc[300:330] = 0.004
+
+    run = build_aggregate_launch_readiness(
+        {
+            "strong": _result("strong", strong_returns),
+            "choppy": _result("choppy", choppy_returns),
+        },
+        benchmark_result=_result("buy_hold_spy", benchmark_returns),
+        horizons={"1m": 21, "3m": 63, "1y": 252},
+        ramp_weeks=(0, 4, 8, 12),
+        start_frequency="M",
+    )
+
+    assert run.strategy_count == 2
+    assert set(run.horizon_label_counts["horizon"]) == {"1m", "3m", "1y"}
+    assert set(run.horizon_label_counts["launch_label"]) == {"no_go", "wait", "set", "ready"}
+    assert not run.horizon_transition_matrix.empty
+    pair_counts = run.horizon_transition_matrix.groupby(
+        ["from_horizon", "to_horizon"]
+    )["count"].sum()
+    assert (pair_counts == 2).all()
+    assert not run.protocol_separation.empty
+    assert "material_separation_rate" in run.protocol_separation_by_horizon.columns
+
+
+def test_aggregate_launch_protocol_separation_detects_material_ramp_effect() -> None:
+    index = pd.bdate_range("2020-01-01", periods=320)
+    returns = pd.Series(0.0010, index=index)
+    returns.iloc[1:8] = -0.040
+    returns.iloc[8:25] = 0.006
+
+    run = build_aggregate_launch_readiness(
+        {"early_drawdown_strategy": _result("early_drawdown_strategy", returns)},
+        benchmark_result=_result("buy_hold_spy", pd.Series(0.0, index=index)),
+        horizons={"1m": 21},
+        ramp_weeks=(0, 4, 8),
+        start_frequency="M",
+        protocol_small_spread=0.0001,
+        protocol_material_spread=0.001,
+    )
+
+    assert run.protocol_separation["protocol_spread"].max() > 0.001
+    assert "material" in set(run.protocol_separation["separation_label"])
 
 
 def test_launch_readiness_skips_invalid_window_values() -> None:

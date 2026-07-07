@@ -275,6 +275,38 @@ bootstrap path count, and regime-forward simulation settings. Treat the outputs
 as planning distributions and risk ranges, not point forecasts or trade
 instructions.
 
+### Launch Lab
+
+Use this before adding new capital or scaling up a paper/live sleeve. Launch Lab
+is separate from daily Book Alignment: Book Alignment manages a running book,
+while Launch Lab asks whether fresh dollars should start now, phase in, or wait.
+
+Recommended flow:
+
+1. Select the strategy to launch-check.
+2. Choose the benchmark, entry horizon, start sampling, test capital, and final
+   sleeve fraction.
+3. Read Launch Readiness for the selected strategy.
+4. Open Aggregate View to see whether the same launch pattern appears across the
+   curated/Pareto shelf.
+5. Use Why / Why Not for current-state blockers and supports.
+6. Use Entry Backtest to inspect historical start-date behavior.
+7. Use Ramp Plan if the recommendation is to stage in capital.
+
+Aggregate View has two key reads:
+
+- **Horizon transition matrix**: shows how many strategies move from wait to
+  set or ready as the evidence horizon extends from short windows to longer
+  windows.
+- **Protocol separation**: shows whether immediate launch, 4-week ramp, 8-week
+  ramp, or 12-week ramp materially changed historical outcomes.
+
+If many strong strategies are wait at 3 months but set or ready at 1 year and
+beyond, the system is saying entry timing is fragile but longer-horizon adoption
+evidence may still be constructive. If protocol separation is low, do not
+over-optimize the exact ramp schedule; focus on strategy quality, current risk,
+and whether the sleeve belongs in the operating set.
+
 ### Research Lab
 
 Use this before promoting any strategy into paper monitoring.

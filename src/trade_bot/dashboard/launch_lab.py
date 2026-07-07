@@ -21,13 +21,21 @@ from trade_bot.dashboard.formatting import (
 )
 from trade_bot.DEFAULTS import (
     DEFAULT_ENTRY_HORIZONS,
+    DEFAULT_LAUNCH_AGGREGATE_MAX_STRATEGIES,
     DEFAULT_LAUNCH_CAPITAL,
     DEFAULT_LAUNCH_PRIMARY_HORIZON,
+    DEFAULT_LAUNCH_PROTOCOL_MATERIAL_SPREAD,
+    DEFAULT_LAUNCH_PROTOCOL_SMALL_SPREAD,
     DEFAULT_LAUNCH_START_FREQUENCY,
     DEFAULT_LAUNCH_TARGET_FRACTION,
 )
 from trade_bot.research.baselines import BaselineRun
-from trade_bot.research.launch_readiness import LaunchReadinessRun, build_launch_readiness
+from trade_bot.research.launch_readiness import (
+    AggregateLaunchReadinessRun,
+    LaunchReadinessRun,
+    build_aggregate_launch_readiness,
+    build_launch_readiness,
+)
 
 
 def _render_launch_lab(
@@ -44,12 +52,12 @@ def _render_launch_lab(
 
     from trade_bot.dashboard.simulation_lab import _result_for_strategy, _strategy_option_frame
 
+    options = _strategy_option_frame(bot_config, experiment_scorecards)
     selected_strategy, selected_result = _selected_launch_strategy(
         bot_config=bot_config,
         baseline_run=baseline_run,
-        experiment_scorecards=experiment_scorecards,
+        options=options,
         result_loader=_result_for_strategy,
-        option_loader=_strategy_option_frame,
     )
     if selected_strategy is None or selected_result is None:
         st.info("Choose a strategy to evaluate launch timing.")
@@ -94,6 +102,16 @@ def _render_launch_lab(
     )
 
     benchmark_result = baseline_run.results.get(benchmark_name)
+    aggregate_run = _build_aggregate_launch_run(
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        options=options,
+        result_loader=_result_for_strategy,
+        benchmark_result=benchmark_result,
+        current_state=baseline_run.current_state,
+        start_frequency=start_frequency,
+        target_fraction=target_fraction,
+    )
     run = build_launch_readiness(
         selected_result,
         benchmark_result=benchmark_result,
@@ -105,14 +123,18 @@ def _render_launch_lab(
     )
     _render_launch_decision(run, selected_strategy, benchmark_name)
 
-    tabs = st.tabs(["Why / Why Not", "Entry Backtest", "Ramp Plan", "How to Use This"])
+    tabs = st.tabs(
+        ["Aggregate View", "Why / Why Not", "Entry Backtest", "Ramp Plan", "How to Use This"]
+    )
     with tabs[0]:
-        _render_launch_gate(run)
+        _render_aggregate_launch_lab(aggregate_run, str(primary_horizon))
     with tabs[1]:
-        _render_entry_backtest(run)
+        _render_launch_gate(run)
     with tabs[2]:
-        _render_ramp_plan(run)
+        _render_entry_backtest(run)
     with tabs[3]:
+        _render_ramp_plan(run)
+    with tabs[4]:
         _render_launch_vs_operating()
 
 
@@ -120,11 +142,9 @@ def _selected_launch_strategy(
     *,
     bot_config: Any,
     baseline_run: BaselineRun,
-    experiment_scorecards: pd.DataFrame,
+    options: pd.DataFrame,
     result_loader: Any,
-    option_loader: Any,
 ) -> tuple[str | None, BacktestResult | None]:
-    options = option_loader(bot_config, experiment_scorecards)
     if options.empty:
         return None, None
     label_column = "simulation_label" if "simulation_label" in options else "strategy"
@@ -144,6 +164,208 @@ def _selected_launch_strategy(
         bot_config=bot_config,
         baseline_run=baseline_run,
     )
+
+
+def _build_aggregate_launch_run(
+    *,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    options: pd.DataFrame,
+    result_loader: Any,
+    benchmark_result: BacktestResult | None,
+    current_state: Any,
+    start_frequency: str,
+    target_fraction: float,
+) -> AggregateLaunchReadinessRun:
+    aggregate_options = _aggregate_launch_option_frame(options)
+    strategy_results: dict[str, BacktestResult] = {}
+    for strategy_name in aggregate_options.get("strategy", pd.Series(dtype=str)).astype(str):
+        result = result_loader(
+            strategy_name,
+            bot_config=bot_config,
+            baseline_run=baseline_run,
+        )
+        if result is not None:
+            strategy_results[strategy_name] = result
+    return build_aggregate_launch_readiness(
+        strategy_results,
+        benchmark_result=benchmark_result,
+        current_state=current_state,
+        start_frequency=start_frequency,
+        target_fraction=target_fraction,
+    )
+
+
+def _aggregate_launch_option_frame(options: pd.DataFrame) -> pd.DataFrame:
+    columns = ["strategy"]
+    if options.empty or "strategy" not in options:
+        return pd.DataFrame(columns=columns)
+    frame = options.copy()
+    eligibility_masks = []
+    for column in ["is_growth_pareto_efficient", "is_pareto_efficient", "pareto_frontier"]:
+        if column in frame:
+            eligibility_masks.append(frame[column].fillna(False).astype(bool))
+    for column in ["curation_rank", "curated_rank"]:
+        if column in frame:
+            eligibility_masks.append(pd.to_numeric(frame[column], errors="coerce").notna())
+    if "growth_utility_tier" in frame:
+        eligibility_masks.append(
+            frame["growth_utility_tier"]
+            .astype(str)
+            .str.contains("champion|challenger", case=False, na=False)
+        )
+    if eligibility_masks:
+        eligible = frame[pd.concat(eligibility_masks, axis=1).any(axis=1)].copy()
+        if not eligible.empty:
+            frame = eligible
+
+    sort_columns: list[str] = []
+    ascending: list[bool] = []
+    for column, sort_ascending in [
+        ("curation_rank", True),
+        ("curated_rank", True),
+        ("growth_constrained_utility_score", False),
+        ("promotion_score", False),
+        ("cagr", False),
+    ]:
+        if column in frame:
+            frame[column] = pd.to_numeric(frame[column], errors="coerce")
+            sort_columns.append(column)
+            ascending.append(sort_ascending)
+    if sort_columns:
+        frame = frame.sort_values(
+            sort_columns,
+            ascending=ascending,
+            na_position="last",
+        )
+    return frame.drop_duplicates("strategy").head(DEFAULT_LAUNCH_AGGREGATE_MAX_STRATEGIES)
+
+
+def _render_aggregate_launch_lab(
+    aggregate_run: AggregateLaunchReadinessRun,
+    primary_horizon: str,
+) -> None:
+    st.markdown("**Aggregate Launch Read**")
+    st.caption(
+        "Cross-strategy entry-gate evidence across curated and Pareto candidates. Use this to see "
+        "whether launch guidance is strategy-specific or broadly shifts from wait to set/ready as "
+        "the horizon extends."
+    )
+    if aggregate_run.strategy_count <= 0:
+        st.info("No curated or Pareto strategies were available for aggregate launch analysis.")
+        return
+
+    _render_aggregate_launch_cards(aggregate_run, primary_horizon)
+    chart_cols = st.columns([1.0, 1.15])
+    with chart_cols[0]:
+        st.plotly_chart(
+            _horizon_label_count_figure(aggregate_run.horizon_label_counts),
+            use_container_width=True,
+        )
+    with chart_cols[1]:
+        st.plotly_chart(
+            _horizon_transition_figure(aggregate_run.horizon_transition_matrix),
+            use_container_width=True,
+        )
+    st.plotly_chart(
+        _protocol_separation_figure(aggregate_run.protocol_separation_by_horizon),
+        use_container_width=True,
+    )
+
+    with st.expander("Aggregate launch detail tables", expanded=False):
+        detail_tabs = st.tabs(
+            [
+                "Best Horizon Rows",
+                "Transition Matrix",
+                "Protocol Separation",
+                "Protocol by Horizon",
+            ]
+        )
+        with detail_tabs[0]:
+            _render_metric_dataframe(
+                _display_metrics(aggregate_run.strategy_horizon_summary),
+                hide_index=True,
+            )
+        with detail_tabs[1]:
+            _render_metric_dataframe(
+                _display_metrics(aggregate_run.horizon_transition_matrix),
+                hide_index=True,
+            )
+        with detail_tabs[2]:
+            _render_metric_dataframe(
+                _display_metrics(aggregate_run.protocol_separation),
+                hide_index=True,
+            )
+        with detail_tabs[3]:
+            _render_metric_dataframe(
+                _display_metrics(aggregate_run.protocol_separation_by_horizon),
+                hide_index=True,
+            )
+
+
+def _render_aggregate_launch_cards(
+    aggregate_run: AggregateLaunchReadinessRun,
+    primary_horizon: str,
+) -> None:
+    counts = aggregate_run.horizon_label_counts
+    selected_counts = (
+        counts[counts["horizon"].astype(str).eq(primary_horizon)].copy()
+        if not counts.empty and "horizon" in counts
+        else pd.DataFrame()
+    )
+    set_ready = _launch_label_count(selected_counts, {"set", "ready"})
+    wait_no_go = _launch_label_count(selected_counts, {"wait", "no_go"})
+    transitions = aggregate_run.horizon_transition_matrix
+    upgrades = _transition_count(transitions, "upgrade")
+    downgrades = _transition_count(transitions, "downgrade")
+    protocol_by_horizon = aggregate_run.protocol_separation_by_horizon
+    selected_protocol = (
+        protocol_by_horizon[protocol_by_horizon["horizon"].astype(str).eq(primary_horizon)]
+        if not protocol_by_horizon.empty and "horizon" in protocol_by_horizon
+        else pd.DataFrame()
+    )
+    protocol_row = (
+        selected_protocol.iloc[0].to_dict() if not selected_protocol.empty else {}
+    )
+    material_rate = _safe_float(protocol_row.get("material_separation_rate"))
+    median_spread = _safe_float(protocol_row.get("median_protocol_spread"))
+    cards = [
+        {
+            "label": "Strategies Evaluated",
+            "answer": str(aggregate_run.strategy_count),
+            "detail": (
+                "Curated, Pareto, or high-utility candidates included in the aggregate launch shelf."
+            ),
+            "tone": "neutral",
+        },
+        {
+            "label": f"{primary_horizon} Set / Ready",
+            "answer": f"{set_ready}/{aggregate_run.strategy_count}",
+            "detail": (
+                f"{wait_no_go} candidate(s) remain wait/no-go at the selected horizon."
+            ),
+            "tone": "success" if set_ready > wait_no_go else "warning",
+        },
+        {
+            "label": "Horizon Upgrades",
+            "answer": f"{upgrades} up / {downgrades} down",
+            "detail": (
+                "Counts how often candidate launch labels improve or deteriorate as the evidence "
+                "window extends from one horizon to the next."
+            ),
+            "tone": "success" if upgrades >= downgrades else "warning",
+        },
+        {
+            "label": "Ramp Separation",
+            "answer": _format_percent(material_rate),
+            "detail": (
+                f"{_format_percent(median_spread)} median protocol spread at {primary_horizon}; "
+                "material means 4w/8w/12w ramps changed median outcomes enough to matter."
+            ),
+            "tone": "success" if material_rate >= 0.25 else "warning",
+        },
+    ]
+    _render_launch_card_grid(cards, class_name="launch-guidance-grid")
 
 
 def _benchmark_options(baseline_run: BaselineRun) -> list[str]:
@@ -540,14 +762,14 @@ def _protocol_separation_read(windows: pd.DataFrame) -> dict[str, str]:
     spread = float(medians.max() - medians.min())
     best = str(medians.index[0])
     worst = str(medians.index[-1])
-    if spread < 0.005:
+    if spread < DEFAULT_LAUNCH_PROTOCOL_SMALL_SPREAD:
         answer = "Protocols effectively identical"
         tone = "warning"
         detail = (
             f"Median-return spread is only {_format_percent(spread)} across protocols. "
             "For this horizon, the ramp period is too small relative to the full window to change the read much."
         )
-    elif spread < 0.02:
+    elif spread < DEFAULT_LAUNCH_PROTOCOL_MATERIAL_SPREAD:
         answer = f"{_format_percent(spread)} median-return spread"
         tone = "neutral"
         detail = (
@@ -773,6 +995,202 @@ def _format_diagnostic_value(metric: object, value: object) -> str:
     if metric_name == "risk_score":
         return _format_decimal(value)
     return str(value)
+
+
+def _horizon_label_count_figure(counts: pd.DataFrame) -> go.Figure:
+    fig = go.Figure()
+    if not counts.empty:
+        frame = counts.copy()
+        frame = frame.sort_values(["horizon_order", "launch_label"])
+        for label in _launch_label_order():
+            label_frame = frame[frame["launch_label"].astype(str).eq(label)]
+            fig.add_trace(
+                go.Bar(
+                    x=label_frame["horizon"],
+                    y=label_frame["count"],
+                    name=_launch_label_display(label),
+                    marker={"color": _launch_label_colors().get(label, "#64748b")},
+                    customdata=label_frame[["share"]],
+                    hovertemplate=(
+                        "%{x}<br>"
+                        f"{_launch_label_display(label)}: %{{y}} strategies<br>"
+                        "Share %{customdata[0]:.1%}<extra></extra>"
+                    ),
+                )
+            )
+    fig.update_layout(
+        barmode="stack",
+        height=360,
+        title="Launch labels by horizon",
+        xaxis_title="Entry horizon",
+        yaxis_title="Strategy count",
+        margin={"l": 20, "r": 20, "t": 48, "b": 86},
+        legend={"orientation": "h", "yanchor": "top", "y": -0.24, "xanchor": "left", "x": 0.0},
+    )
+    return fig
+
+
+def _horizon_transition_figure(transitions: pd.DataFrame) -> go.Figure:
+    fig = go.Figure()
+    if transitions.empty:
+        fig.update_layout(
+            height=360,
+            title="Launch-label transitions by horizon",
+            margin={"l": 20, "r": 20, "t": 48, "b": 64},
+        )
+        return fig
+
+    frame = transitions.copy()
+    horizon_pairs = frame["horizon_pair"].drop_duplicates().astype(str).tolist()
+    transition_labels = _transition_label_order(frame)
+    pivot = (
+        frame.pivot_table(
+            index="transition",
+            columns="horizon_pair",
+            values="count",
+            aggfunc="sum",
+            fill_value=0,
+        )
+        .reindex(index=transition_labels, columns=horizon_pairs, fill_value=0)
+        .astype(float)
+    )
+    hover = (
+        frame.assign(
+            hover=frame.apply(
+                lambda row: (
+                    f"{row['transition']}<br>{row['horizon_pair']}<br>"
+                    f"Count {int(row['count'])}<br>"
+                    f"Direction {row['direction']}<br>"
+                    f"Examples {row['example_strategies'] or 'n/a'}"
+                ),
+                axis=1,
+            )
+        )
+        .pivot_table(
+            index="transition",
+            columns="horizon_pair",
+            values="hover",
+            aggfunc="first",
+            fill_value="",
+        )
+        .reindex(index=transition_labels, columns=horizon_pairs, fill_value="")
+    )
+    fig.add_trace(
+        go.Heatmap(
+            x=horizon_pairs,
+            y=transition_labels,
+            z=pivot.to_numpy(),
+            customdata=hover.to_numpy(),
+            colorscale="Teal",
+            colorbar={"title": "count"},
+            hovertemplate="%{customdata}<extra></extra>",
+        )
+    )
+    fig.update_layout(
+        height=360,
+        title="Horizon transition matrix",
+        xaxis_title="Horizon step",
+        yaxis_title="Launch label transition",
+        margin={"l": 20, "r": 20, "t": 48, "b": 64},
+    )
+    return fig
+
+
+def _protocol_separation_figure(protocol_by_horizon: pd.DataFrame) -> go.Figure:
+    fig = go.Figure()
+    if not protocol_by_horizon.empty:
+        frame = protocol_by_horizon.sort_values("horizon_order").copy()
+        rate_specs = [
+            ("material_separation_rate", "Material", "#0f766e"),
+            ("small_separation_rate", "Small", "#f59e0b"),
+            ("effectively_identical_rate", "Effectively identical", "#64748b"),
+        ]
+        for column, label, color in rate_specs:
+            if column not in frame:
+                continue
+            fig.add_trace(
+                go.Bar(
+                    x=frame["horizon"],
+                    y=frame[column],
+                    name=label,
+                    marker={"color": color},
+                    customdata=frame[["median_protocol_spread", "strategies"]],
+                    hovertemplate=(
+                        "%{x}<br>"
+                        f"{label}: %{{y:.1%}}<br>"
+                        "Median spread %{customdata[0]:.1%}<br>"
+                        "Strategies %{customdata[1]}<extra></extra>"
+                    ),
+                )
+            )
+        if "median_protocol_spread" in frame:
+            fig.add_trace(
+                go.Scatter(
+                    x=frame["horizon"],
+                    y=frame["median_protocol_spread"],
+                    mode="lines+markers",
+                    name="Median protocol spread",
+                    line={"color": "#2563eb", "width": 3},
+                    yaxis="y2",
+                    hovertemplate="%{x}<br>Median spread %{y:.1%}<extra></extra>",
+                )
+            )
+    fig.update_layout(
+        barmode="stack",
+        height=360,
+        title="Ramp-protocol separation by horizon",
+        xaxis_title="Entry horizon",
+        yaxis={"title": "Share of strategies", "tickformat": ".0%"},
+        yaxis2={
+            "title": "Median return spread",
+            "tickformat": ".0%",
+            "overlaying": "y",
+            "side": "right",
+        },
+        margin={"l": 20, "r": 20, "t": 48, "b": 90},
+        legend={"orientation": "h", "yanchor": "top", "y": -0.25, "xanchor": "left", "x": 0.0},
+    )
+    return fig
+
+
+def _launch_label_count(frame: pd.DataFrame, labels: set[str]) -> int:
+    if frame.empty or not {"launch_label", "count"}.issubset(frame.columns):
+        return 0
+    filtered = frame[frame["launch_label"].astype(str).isin(labels)]
+    return int(pd.to_numeric(filtered["count"], errors="coerce").fillna(0).sum())
+
+
+def _transition_count(transitions: pd.DataFrame, direction: str) -> int:
+    if transitions.empty or not {"direction", "count"}.issubset(transitions.columns):
+        return 0
+    filtered = transitions[transitions["direction"].astype(str).eq(direction)]
+    return int(pd.to_numeric(filtered["count"], errors="coerce").fillna(0).sum())
+
+
+def _transition_label_order(frame: pd.DataFrame) -> list[str]:
+    labels = _launch_label_order()
+    expected = [f"{left} -> {right}" for left in labels for right in labels]
+    present = frame["transition"].dropna().astype(str).drop_duplicates().tolist()
+    return [label for label in expected if label in present] + [
+        label for label in present if label not in expected
+    ]
+
+
+def _launch_label_order() -> list[str]:
+    return ["no_go", "wait", "set", "ready"]
+
+
+def _launch_label_display(label: str) -> str:
+    return str(label).replace("_", " ").title()
+
+
+def _launch_label_colors() -> dict[str, str]:
+    return {
+        "no_go": "#dc2626",
+        "wait": "#f59e0b",
+        "set": "#2563eb",
+        "ready": "#0f766e",
+    }
 
 
 def _render_launch_card_grid(cards: list[dict[str, str]], *, class_name: str) -> None:

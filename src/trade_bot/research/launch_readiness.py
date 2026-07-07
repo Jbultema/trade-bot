@@ -14,6 +14,8 @@ from trade_bot.DEFAULTS import (
     DEFAULT_LAUNCH_INITIAL_RAMP_FRACTION,
     DEFAULT_LAUNCH_MIN_WINDOWS,
     DEFAULT_LAUNCH_PRIMARY_HORIZON,
+    DEFAULT_LAUNCH_PROTOCOL_MATERIAL_SPREAD,
+    DEFAULT_LAUNCH_PROTOCOL_SMALL_SPREAD,
     DEFAULT_LAUNCH_RAMP_WEEKS,
     DEFAULT_LAUNCH_READY_SCORE,
     DEFAULT_LAUNCH_SET_SCORE,
@@ -32,6 +34,18 @@ class LaunchReadinessRun:
     diagnostics: pd.DataFrame
     ramp_plan: pd.DataFrame
     recommendation: dict[str, object]
+
+
+@dataclass(frozen=True)
+class AggregateLaunchReadinessRun:
+    """Launch-readiness evidence summarized across multiple candidates."""
+
+    strategy_horizon_summary: pd.DataFrame
+    horizon_label_counts: pd.DataFrame
+    horizon_transition_matrix: pd.DataFrame
+    protocol_separation: pd.DataFrame
+    protocol_separation_by_horizon: pd.DataFrame
+    strategy_count: int
 
 
 def build_launch_readiness(
@@ -93,6 +107,73 @@ def build_launch_readiness(
         diagnostics=diagnostics,
         ramp_plan=ramp_plan,
         recommendation=recommendation,
+    )
+
+
+def build_aggregate_launch_readiness(
+    strategy_results: Mapping[str, BacktestResult],
+    *,
+    benchmark_result: BacktestResult | None = None,
+    current_state: Any | None = None,
+    horizons: Mapping[str, int] = DEFAULT_ENTRY_HORIZONS,
+    ramp_weeks: Sequence[int] = DEFAULT_LAUNCH_RAMP_WEEKS,
+    start_frequency: str = DEFAULT_LAUNCH_START_FREQUENCY,
+    target_fraction: float = DEFAULT_LAUNCH_TARGET_FRACTION,
+    bad_start_drawdown: float = DEFAULT_LAUNCH_BAD_START_DRAWDOWN,
+    initial_ramp_fraction: float = DEFAULT_LAUNCH_INITIAL_RAMP_FRACTION,
+    protocol_small_spread: float = DEFAULT_LAUNCH_PROTOCOL_SMALL_SPREAD,
+    protocol_material_spread: float = DEFAULT_LAUNCH_PROTOCOL_MATERIAL_SPREAD,
+) -> AggregateLaunchReadinessRun:
+    """Summarize launch-readiness behavior across a strategy shelf."""
+
+    summaries: list[pd.DataFrame] = []
+    windows: list[pd.DataFrame] = []
+    for strategy_name, strategy_result in strategy_results.items():
+        if strategy_result is None:
+            continue
+        run = build_launch_readiness(
+            strategy_result,
+            benchmark_result=benchmark_result,
+            current_state=current_state,
+            horizons=horizons,
+            ramp_weeks=ramp_weeks,
+            start_frequency=start_frequency,
+            target_fraction=target_fraction,
+            bad_start_drawdown=bad_start_drawdown,
+            initial_ramp_fraction=initial_ramp_fraction,
+        )
+        if not run.summary.empty:
+            summary = run.summary.copy()
+            summary["strategy"] = str(strategy_name)
+            summaries.append(summary)
+        if not run.windows.empty:
+            window = run.windows.copy()
+            window["strategy"] = str(strategy_name)
+            windows.append(window)
+
+    summary_frame = pd.concat(summaries, ignore_index=True) if summaries else pd.DataFrame()
+    windows_frame = pd.concat(windows, ignore_index=True) if windows else pd.DataFrame()
+    strategy_horizon_summary = _best_launch_rows(summary_frame, horizons=horizons)
+    protocol_separation = _protocol_separation_frame(
+        windows_frame,
+        small_spread=protocol_small_spread,
+        material_spread=protocol_material_spread,
+    )
+    return AggregateLaunchReadinessRun(
+        strategy_horizon_summary=strategy_horizon_summary,
+        horizon_label_counts=_horizon_label_counts(strategy_horizon_summary, horizons=horizons),
+        horizon_transition_matrix=_horizon_transition_matrix(
+            strategy_horizon_summary,
+            horizons=horizons,
+        ),
+        protocol_separation=protocol_separation,
+        protocol_separation_by_horizon=_protocol_separation_by_horizon(
+            protocol_separation,
+            horizons=horizons,
+        ),
+        strategy_count=int(strategy_horizon_summary["strategy"].nunique())
+        if "strategy" in strategy_horizon_summary
+        else 0,
     )
 
 
@@ -208,6 +289,285 @@ def build_launch_ramp_plan(
             }
         )
     return pd.DataFrame(rows)
+
+
+def _best_launch_rows(summary: pd.DataFrame, *, horizons: Mapping[str, int]) -> pd.DataFrame:
+    columns = [
+        "strategy",
+        "horizon",
+        "horizon_order",
+        "protocol",
+        "ramp_weeks",
+        "launch_label",
+        "launch_action",
+        "launch_score",
+        "positive_return_rate",
+        "beat_rate",
+        "bad_start_rate",
+        "median_return",
+        "median_excess_return",
+        "median_max_drawdown",
+        "windows",
+    ]
+    if summary.empty or not {"strategy", "horizon"}.issubset(summary.columns):
+        return pd.DataFrame(columns=columns)
+    frame = summary.copy()
+    frame["horizon_order"] = frame["horizon"].astype(str).map(_horizon_rank(horizons))
+    for column in [
+        "launch_score",
+        "bad_start_rate",
+        "median_excess_return",
+        "median_return",
+        "median_max_drawdown",
+        "windows",
+    ]:
+        if column in frame:
+            frame[column] = pd.to_numeric(frame[column], errors="coerce")
+    sorted_frame = frame.sort_values(
+        ["strategy", "horizon_order", "launch_score", "bad_start_rate", "median_excess_return"],
+        ascending=[True, True, False, True, False],
+    )
+    best = sorted_frame.groupby(["strategy", "horizon"], as_index=False).head(1)
+    return best[[column for column in columns if column in best]].reset_index(drop=True)
+
+
+def _horizon_label_counts(
+    strategy_horizon_summary: pd.DataFrame,
+    *,
+    horizons: Mapping[str, int],
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    labels = _launch_labels()
+    for horizon in _horizon_names(horizons):
+        frame = (
+            strategy_horizon_summary[
+                strategy_horizon_summary["horizon"].astype(str).eq(str(horizon))
+            ]
+            if not strategy_horizon_summary.empty and "horizon" in strategy_horizon_summary
+            else pd.DataFrame()
+        )
+        denominator = max(int(frame["strategy"].nunique()), 1) if "strategy" in frame else 1
+        counts = frame["launch_label"].astype(str).value_counts() if "launch_label" in frame else {}
+        for label in labels:
+            count = int(counts.get(label, 0)) if hasattr(counts, "get") else 0
+            rows.append(
+                {
+                    "horizon": horizon,
+                    "horizon_order": _horizon_rank(horizons).get(horizon, 999_999),
+                    "launch_label": label,
+                    "count": count,
+                    "share": count / denominator if denominator else 0.0,
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def _horizon_transition_matrix(
+    strategy_horizon_summary: pd.DataFrame,
+    *,
+    horizons: Mapping[str, int],
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    labels = _launch_labels()
+    horizon_names = _horizon_names(horizons)
+    if not strategy_horizon_summary.empty and {"strategy", "horizon", "launch_label"}.issubset(
+        strategy_horizon_summary.columns
+    ):
+        pivot = strategy_horizon_summary.pivot_table(
+            index="strategy",
+            columns="horizon",
+            values="launch_label",
+            aggfunc="first",
+        )
+    else:
+        pivot = pd.DataFrame()
+    for from_horizon, to_horizon in zip(horizon_names, horizon_names[1:], strict=False):
+        if pivot.empty or from_horizon not in pivot or to_horizon not in pivot:
+            pair = pd.DataFrame(columns=["strategy", "from_label", "to_label"])
+        else:
+            pair = (
+                pivot[[from_horizon, to_horizon]]
+                .dropna()
+                .rename(columns={from_horizon: "from_label", to_horizon: "to_label"})
+                .reset_index()
+            )
+            pair["from_label"] = pair["from_label"].astype(str)
+            pair["to_label"] = pair["to_label"].astype(str)
+        for from_label in labels:
+            for to_label in labels:
+                matches = pair[
+                    pair["from_label"].eq(from_label) & pair["to_label"].eq(to_label)
+                ]
+                examples = ", ".join(matches["strategy"].astype(str).head(5).tolist())
+                rows.append(
+                    {
+                        "from_horizon": from_horizon,
+                        "to_horizon": to_horizon,
+                        "horizon_pair": f"{from_horizon} -> {to_horizon}",
+                        "transition": f"{from_label} -> {to_label}",
+                        "from_label": from_label,
+                        "to_label": to_label,
+                        "direction": _transition_direction(from_label, to_label),
+                        "count": int(len(matches)),
+                        "example_strategies": examples,
+                    }
+                )
+    return pd.DataFrame(rows)
+
+
+def _protocol_separation_frame(
+    windows: pd.DataFrame,
+    *,
+    small_spread: float,
+    material_spread: float,
+) -> pd.DataFrame:
+    columns = [
+        "strategy",
+        "horizon",
+        "horizon_order",
+        "best_protocol",
+        "worst_protocol",
+        "best_median_return",
+        "worst_median_return",
+        "protocol_spread",
+        "separation_label",
+    ]
+    if windows.empty or not {"strategy", "horizon", "protocol", "total_return"}.issubset(
+        windows.columns
+    ):
+        return pd.DataFrame(columns=columns)
+    frame = windows.copy()
+    frame["total_return"] = pd.to_numeric(frame["total_return"], errors="coerce")
+    medians = (
+        frame.dropna(subset=["total_return"])
+        .groupby(["strategy", "horizon", "protocol"], as_index=False)["total_return"]
+        .median()
+    )
+    rows: list[dict[str, object]] = []
+    for (strategy, horizon), group in medians.groupby(["strategy", "horizon"]):
+        if len(group) < 2:
+            continue
+        ranked = group.sort_values("total_return", ascending=False)
+        best = ranked.iloc[0]
+        worst = ranked.iloc[-1]
+        spread = float(best["total_return"] - worst["total_return"])
+        rows.append(
+            {
+                "strategy": str(strategy),
+                "horizon": str(horizon),
+                "horizon_order": _horizon_order_value(str(horizon)),
+                "best_protocol": str(best["protocol"]),
+                "worst_protocol": str(worst["protocol"]),
+                "best_median_return": float(best["total_return"]),
+                "worst_median_return": float(worst["total_return"]),
+                "protocol_spread": spread,
+                "separation_label": _separation_label(
+                    spread,
+                    small_spread=small_spread,
+                    material_spread=material_spread,
+                ),
+            }
+        )
+    return pd.DataFrame(rows, columns=columns).sort_values(
+        ["horizon_order", "protocol_spread"],
+        ascending=[True, False],
+        ignore_index=True,
+    )
+
+
+def _protocol_separation_by_horizon(
+    protocol_separation: pd.DataFrame,
+    *,
+    horizons: Mapping[str, int],
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    for horizon in _horizon_names(horizons):
+        frame = (
+            protocol_separation[protocol_separation["horizon"].astype(str).eq(str(horizon))]
+            if not protocol_separation.empty and "horizon" in protocol_separation
+            else pd.DataFrame()
+        )
+        strategies = int(frame["strategy"].nunique()) if "strategy" in frame else 0
+        labels = (
+            frame["separation_label"].astype(str)
+            if "separation_label" in frame
+            else pd.Series(dtype=str)
+        )
+        spreads = (
+            pd.to_numeric(frame["protocol_spread"], errors="coerce").dropna()
+            if "protocol_spread" in frame
+            else pd.Series(dtype=float)
+        )
+        denominator = max(strategies, 1)
+        rows.append(
+            {
+                "horizon": horizon,
+                "horizon_order": _horizon_rank(horizons).get(horizon, 999_999),
+                "strategies": strategies,
+                "median_protocol_spread": float(spreads.median()) if not spreads.empty else 0.0,
+                "mean_protocol_spread": float(spreads.mean()) if not spreads.empty else 0.0,
+                "material_separation_rate": float((labels == "material").sum() / denominator),
+                "small_separation_rate": float((labels == "small").sum() / denominator),
+                "effectively_identical_rate": float(
+                    (labels == "effectively_identical").sum() / denominator
+                ),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _horizon_names(horizons: Mapping[str, int]) -> list[str]:
+    return sorted([str(name) for name in horizons], key=_horizon_order_value)
+
+
+def _horizon_rank(horizons: Mapping[str, int]) -> dict[str, int]:
+    return {name: index for index, name in enumerate(_horizon_names(horizons))}
+
+
+def _horizon_order_value(horizon: str) -> int:
+    text = str(horizon).strip().lower()
+    if text.endswith("w"):
+        return int(float(text[:-1]) * 5)
+    if text.endswith("m"):
+        return int(float(text[:-1]) * 21)
+    if text.endswith("y"):
+        return int(float(text[:-1]) * 252)
+    try:
+        return int(float(text))
+    except ValueError:
+        return 999_999
+
+
+def _launch_labels() -> list[str]:
+    return ["no_go", "wait", "set", "ready"]
+
+
+def _launch_label_rank(label: str) -> int:
+    ranks = {label: index for index, label in enumerate(_launch_labels())}
+    return ranks.get(str(label), -1)
+
+
+def _transition_direction(from_label: str, to_label: str) -> str:
+    from_rank = _launch_label_rank(from_label)
+    to_rank = _launch_label_rank(to_label)
+    if to_rank > from_rank:
+        return "upgrade"
+    if to_rank < from_rank:
+        return "downgrade"
+    return "unchanged"
+
+
+def _separation_label(
+    spread: float,
+    *,
+    small_spread: float,
+    material_spread: float,
+) -> str:
+    if spread < small_spread:
+        return "effectively_identical"
+    if spread < material_spread:
+        return "small"
+    return "material"
 
 
 def _build_launch_windows(

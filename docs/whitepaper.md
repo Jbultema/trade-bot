@@ -414,6 +414,17 @@ schedule. When all ramp protocols look identical, the user should not over-read
 the ramp choice; when they separate meaningfully, staging is adding measurable
 entry-risk control.
 
+The aggregate Launch Lab view repeats this question across the curated and
+Pareto strategy shelf. It counts how many candidates are wait, set, or ready at
+each horizon, shows how labels transition as horizons extend, and reports
+whether 4-week, 8-week, and 12-week ramps materially change outcomes. This
+matters because launch evidence can be strategy-specific or broad. If many
+strong candidates move from wait at 3 months to set or ready at 1 year and
+beyond, the system is saying short-term timing is fragile while longer-term
+adoption evidence remains constructive. If ramp protocols are effectively
+identical, the launch decision should focus on strategy quality and current
+risk state rather than over-optimizing the entry schedule.
+
 Like Simulation Lab, Launch Lab is not a forecast. Long windows overlap heavily,
 so a large number of 3-year or 5-year historical start tests should not be read
 as independent trials. The useful read is comparative: does this strategy have

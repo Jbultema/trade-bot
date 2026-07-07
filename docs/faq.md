@@ -327,6 +327,29 @@ For a long accumulation account, a strategy with 14-15% CAGR and -20% to -22%
 drawdown can produce more terminal wealth than an 11% CAGR strategy with -15%
 drawdown, if the larger drawdown is behaviorally and financially tolerable.
 
+### What does Launch Lab tell me?
+
+Launch Lab asks whether fresh capital should start following a selected strategy
+now, stage in gradually, or wait. It is different from Book Alignment: Book
+Alignment manages a book that is already running, while Launch Lab evaluates new
+or scale-up capital.
+
+### Why does Launch Lab sometimes move from wait at 3 months to set or ready at 1 year?
+
+Short horizons measure entry-friction risk: how often a new launch would have
+felt immediately wrong. Longer horizons measure whether the dynamic strategy had
+enough time to adapt, recover, and compound. If the longer horizons improve, the
+strategy may still be attractive, but the first allocation should probably be
+phased rather than treated as an all-in timing call.
+
+### What is protocol separation?
+
+Protocol separation measures whether launch ramps actually changed historical
+outcomes. If immediate entry, 4-week ramps, 8-week ramps, and 12-week ramps
+produce nearly identical results, do not over-optimize the ramp schedule. If the
+spread is material, staging has historically changed entry outcomes enough to
+deserve attention.
+
 ## Risk And Scenarios
 
 ### What is risk status?
