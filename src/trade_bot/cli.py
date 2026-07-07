@@ -1,8 +1,10 @@
 from __future__ import annotations
 
+from dataclasses import replace
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
+import numpy as np
 import pandas as pd
 import typer
 from rich.console import Console
@@ -14,6 +16,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS,
     DEFAULT_FORWARD_SIMULATION_BLOCK_DAYS,
     DEFAULT_FORWARD_SIMULATION_PATHS,
     DEFAULT_FORWARD_SIMULATION_VALIDATION_HORIZONS,
@@ -831,6 +834,13 @@ def validate_simulation_engine_cmd(
             help="Optional date-stamped CSV or parquet scenario probabilities.",
         ),
     ] = None,
+    ablation: Annotated[
+        bool,
+        typer.Option(
+            "--ablation/--skip-ablation",
+            help="Write a model-ablation readout comparing baseline, duration, covariate, and factor-proxy variants.",
+        ),
+    ] = False,
 ) -> None:
     """Validate forward simulation calibration against historical realized paths."""
 
@@ -884,6 +894,19 @@ def validate_simulation_engine_cmd(
         f"({manifest.market_date}); wrote {validation_path}."
     )
     _print_simulation_validation_summary(strategy, validation_summary)
+
+    if ablation:
+        factor_returns = _factor_returns_from_snapshot_prices(getattr(baseline_run, "prices", None))
+        ablation_frame = _simulation_ablation_validation(
+            returns_by_strategy[strategy],
+            scenario_history=scenario_history_frame,
+            factor_returns=factor_returns,
+            config=config,
+        )
+        ablation_path = output_dir / f"{_slug_identifier(strategy)}_simulation_ablation.csv"
+        ablation_frame.to_csv(ablation_path, index=False)
+        console.print(f"Wrote simulation model ablation to {ablation_path}.")
+        _print_simulation_ablation_summary(ablation_frame)
 
     if len(returns_by_strategy) < 2:
         console.print(
@@ -1305,6 +1328,92 @@ def _has_scenario_history_date_column(frame: pd.DataFrame) -> bool:
     )
 
 
+def _factor_returns_from_snapshot_prices(prices: object) -> pd.DataFrame | None:
+    if not isinstance(prices, pd.DataFrame) or prices.empty:
+        return None
+    returns = (
+        prices.sort_index()
+        .astype(float)
+        .pct_change(fill_method=None)
+        .replace([np.inf, -np.inf], np.nan)
+    )
+    frame = pd.DataFrame(index=returns.index)
+    for factor_name, proxy_ticker, _label, _description in DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS:
+        if proxy_ticker in returns:
+            frame[factor_name] = pd.to_numeric(returns[proxy_ticker], errors="coerce")
+    frame = frame.dropna(how="all")
+    return frame if not frame.empty else None
+
+
+def _simulation_ablation_validation(
+    returns: pd.Series,
+    *,
+    scenario_history: pd.DataFrame | None,
+    factor_returns: pd.DataFrame | None,
+    config: ForwardSimulationValidationConfig,
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    variants: list[tuple[str, str, ForwardSimulationValidationConfig, pd.DataFrame | None]] = [
+        (
+            "baseline_regime_blocks",
+            "Baseline regime blocks",
+            replace(config, duration_aware_transitions=False, covariate_match_weight=0.0),
+            None,
+        ),
+        (
+            "duration_aware",
+            "Duration-aware transitions",
+            replace(config, duration_aware_transitions=True, covariate_match_weight=0.0),
+            None,
+        ),
+        (
+            "duration_covariate",
+            "Duration + covariate matching",
+            replace(config, duration_aware_transitions=True),
+            None,
+        ),
+    ]
+    if factor_returns is not None and not factor_returns.empty:
+        variants.append(
+            (
+                "factor_proxy",
+                "Factor-proxy paths",
+                replace(config, duration_aware_transitions=True),
+                factor_returns,
+            )
+        )
+
+    for variant, label, variant_config, variant_factors in variants:
+        validation = rolling_origin_simulation_backtest(
+            returns,
+            scenario_history=scenario_history,
+            factor_returns=variant_factors,
+            config=variant_config,
+        )
+        summary = summarize_simulation_validation(validation)
+        rows.append(
+            {
+                "variant": variant,
+                "label": label,
+                "uses_duration_aware_transitions": variant_config.duration_aware_transitions,
+                "uses_covariate_matching": variant_config.covariate_match_weight > 0.0,
+                "uses_factor_proxy": variant_factors is not None,
+                "rows": summary.get("rows"),
+                "origins": summary.get("origins"),
+                "horizons": summary.get("horizons"),
+                "interval_coverage": summary.get("interval_coverage"),
+                "target_coverage": summary.get("target_coverage"),
+                "coverage_error": summary.get("coverage_error"),
+                "median_error_mean": summary.get("median_error_mean"),
+                "median_abs_error": summary.get("median_abs_error"),
+                "severe_drawdown_brier": summary.get("severe_drawdown_brier"),
+                "launch_decision_accuracy": summary.get("launch_decision_accuracy"),
+                "validity_read": summary.get("validity_read"),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def _slug_identifier(value: str) -> str:
     slug = "".join(character if character.isalnum() else "_" for character in value.lower())
     return "_".join(part for part in slug.split("_") if part) or "strategy"
@@ -1332,6 +1441,31 @@ def _print_simulation_validation_summary(strategy: str, summary: dict[str, objec
     ]
     for metric, value in rows:
         table.add_row(metric, str(value))
+    console.print(table)
+
+
+def _print_simulation_ablation_summary(frame: pd.DataFrame) -> None:
+    table = Table(title="Simulation Model Ablation")
+    for column in [
+        "variant",
+        "rows",
+        "coverage error",
+        "median abs error",
+        "severe brier",
+        "launch accuracy",
+        "validity read",
+    ]:
+        table.add_column(column)
+    for _, row in frame.iterrows():
+        table.add_row(
+            str(row.get("variant", "")),
+            str(row.get("rows", "")),
+            _format_optional_percent(row.get("coverage_error")),
+            _format_optional_percent(row.get("median_abs_error")),
+            _format_optional_decimal(row.get("severe_drawdown_brier")),
+            _format_optional_percent(row.get("launch_decision_accuracy")),
+            str(row.get("validity_read", "")),
+        )
     console.print(table)
 
 

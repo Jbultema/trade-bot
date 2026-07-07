@@ -52,11 +52,14 @@ def test_validate_simulation_engine_command_writes_validation_outputs(
             "8",
             "--block-days",
             "5",
+            "--ablation",
         ],
     )
 
     assert result.exit_code == 0, result.output
     assert (tmp_path / "strategy_a_simulation_validation.csv").exists()
+    assert (tmp_path / "strategy_a_simulation_ablation.csv").exists()
     assert (tmp_path / "strategy_rank_validation.csv").exists()
     assert "Simulation Validation: strategy_a" in result.output
+    assert "Simulation Model Ablation" in result.output
     assert "Strategy Rank Validation" in result.output

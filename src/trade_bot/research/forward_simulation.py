@@ -109,6 +109,10 @@ class ForwardSimulationValidationConfig:
     ramp_drawdown_limit: float = DEFAULT_FORWARD_SIMULATION_VALIDATION_RAMP_DRAWDOWN_LIMIT
     ramp_severe_probability: float = DEFAULT_FORWARD_SIMULATION_VALIDATION_RAMP_SEVERE_PROBABILITY
     wait_severe_probability: float = DEFAULT_FORWARD_SIMULATION_VALIDATION_WAIT_SEVERE_PROBABILITY
+    duration_aware_transitions: bool = ForwardSimulationConfig.duration_aware_transitions
+    duration_adjustment_weight: float = ForwardSimulationConfig.duration_adjustment_weight
+    covariate_match_weight: float = ForwardSimulationConfig.covariate_match_weight
+    covariate_match_temperature: float = ForwardSimulationConfig.covariate_match_temperature
 
 
 def scenario_bucket_probabilities(scenario_outlook: pd.DataFrame | None) -> pd.Series:
@@ -499,6 +503,7 @@ def rolling_origin_simulation_backtest(
     daily_returns: pd.Series | np.ndarray,
     *,
     scenario_history: pd.DataFrame | None = None,
+    factor_returns: pd.DataFrame | None = None,
     config: ForwardSimulationValidationConfig | None = None,
 ) -> pd.DataFrame:
     """Backtest simulation calibration through historical rolling origins.
@@ -512,6 +517,7 @@ def rolling_origin_simulation_backtest(
     returns = _clean_returns_series(daily_returns).sort_index()
     if returns.empty:
         return _empty_validation_frame()
+    factor_history = _clean_factor_returns_frame(factor_returns)
 
     rows: list[dict[str, object]] = []
     origins = _validation_origin_dates(returns, config=cfg)
@@ -532,6 +538,7 @@ def rolling_origin_simulation_backtest(
             paths = simulate_regime_conditioned_paths(
                 train,
                 scenario_outlook=scenario_outlook,
+                factor_returns=_factor_returns_for_train_window(factor_history, train),
                 config=simulation_config,
             )
             if paths.empty:
@@ -614,6 +621,7 @@ def rolling_origin_strategy_rank_validation(
     strategy_returns: dict[str, pd.Series | np.ndarray],
     *,
     scenario_history: pd.DataFrame | None = None,
+    factor_returns: pd.DataFrame | None = None,
     config: ForwardSimulationValidationConfig | None = None,
 ) -> pd.DataFrame:
     """Validate whether simulated median rankings predict realized rankings."""
@@ -623,6 +631,7 @@ def rolling_origin_strategy_rank_validation(
         validation = rolling_origin_simulation_backtest(
             returns,
             scenario_history=scenario_history,
+            factor_returns=factor_returns,
             config=config,
         )
         if validation.empty:
@@ -709,6 +718,25 @@ def _clean_returns_series(daily_returns: pd.Series | np.ndarray) -> pd.Series:
     values = pd.to_numeric(values, errors="coerce").replace([np.inf, -np.inf], np.nan).dropna()
     values = values.clip(lower=-0.95, upper=1.0)
     return values.astype(float)
+
+
+def _clean_factor_returns_frame(factor_returns: pd.DataFrame | None) -> pd.DataFrame | None:
+    if factor_returns is None or factor_returns.empty:
+        return None
+    frame = factor_returns.copy()
+    frame = frame.select_dtypes(include=[np.number]).replace([np.inf, -np.inf], np.nan)
+    frame = frame.dropna(how="all")
+    return frame.astype(float) if not frame.empty else None
+
+
+def _factor_returns_for_train_window(
+    factor_returns: pd.DataFrame | None,
+    train_returns: pd.Series,
+) -> pd.DataFrame | None:
+    if factor_returns is None or factor_returns.empty or train_returns.empty:
+        return None
+    aligned = factor_returns.reindex(train_returns.index).dropna(how="all")
+    return aligned if not aligned.empty else None
 
 
 def _validation_origin_dates(
@@ -824,6 +852,10 @@ def _validation_simulation_config(
         transition_scenario_weight=validation_config.transition_scenario_weight,
         min_regime_observations=validation_config.min_regime_observations,
         hard_drawdown_limit=validation_config.severe_drawdown_limit,
+        duration_aware_transitions=validation_config.duration_aware_transitions,
+        duration_adjustment_weight=validation_config.duration_adjustment_weight,
+        covariate_match_weight=validation_config.covariate_match_weight,
+        covariate_match_temperature=validation_config.covariate_match_temperature,
     )
 
 

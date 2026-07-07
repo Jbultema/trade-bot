@@ -625,7 +625,7 @@ def _render_strategy_simulations(
         )
     _render_metric_dataframe(_display_metrics(pd.DataFrame(advanced_rows)), hide_index=True)
 
-    st.caption("Simulation calibration and historical resemblance")
+    st.caption("Current-path resemblance")
     validation_rows = [
         _simulation_validation_row(
             label="Selected strategy",

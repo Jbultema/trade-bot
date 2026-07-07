@@ -402,6 +402,16 @@ be supplied, but it must include a date column such as `origin_date`,
 are ignored to avoid contaminating old origins with current scenario
 probabilities.
 
+Pass `--ablation` to also write a model-ablation CSV for the selected strategy.
+That file compares baseline regime blocks, duration-aware transitions, duration
+plus covariate matching, and factor-proxy paths when enough factor proxy prices
+exist in the latest snapshot. Use it as the first check before trusting the more
+complex simulation machinery: if the enhanced variants do not improve
+calibration or drawdown probability scores, keep them as stress lenses rather
+than decision inputs. The ablation is opt-in because it repeats rolling-origin
+validation several times and is materially slower than the default validation
+run.
+
 Simulation Lab can also run the same bootstrap and regime-conditioned path
 machinery for configured reference portfolios such as Hold SPY and Hold QQQ.
 Those references are not a separate benchmark shortcut; they use the same
@@ -410,11 +420,14 @@ strategy. The comparison table reports selected-strategy median forward wealth
 minus each reference median so the user can evaluate whether a candidate's
 extra complexity is earning its keep versus doing nothing.
 
-The Strategy Simulations view includes an advanced diagnostics table that
-reports duration/covariate regime paths and, when possible, factor-proxy paths.
-Use the factor-model R-squared and covariate-match distance as confidence
-checks: weak factor fit or large match distance means the simulation is more of
-a stress test than a high-confidence planning distribution.
+The Strategy Simulations view includes an advanced diagnostics table and a
+Current-path resemblance section. The advanced table reports duration/covariate
+regime paths and, when possible, factor-proxy paths. Use the factor-model
+R-squared and covariate-match distance as confidence checks: weak factor fit or
+large match distance means the simulation is more of a stress test than a
+high-confidence planning distribution. Current-path resemblance is not the same
+as rolling-origin validation; it compares the selected live simulation output
+with the strategy's own historical profile.
 
 Simulation Lab keeps this forward modeling separate from Research Lab's
 empirical evidence surfaces. Research Lab answers "which strategies worked and

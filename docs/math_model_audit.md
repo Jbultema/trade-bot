@@ -952,6 +952,23 @@ scenario probabilities are supplied for historical validation, they must be
 date-stamped. Undated scenario rows are intentionally ignored because they
 cannot prove they were known at the historical origin date.
 
+Passing `--ablation` writes a selected-strategy model ablation. The ablation
+compares:
+
+```text
+baseline_regime_blocks: empirical regime blocks without duration adjustment or
+  covariate matching
+duration_aware: baseline plus regime-age transition adjustment
+duration_covariate: duration-aware transitions plus covariate-matched block
+  sampling
+factor_proxy: duration/covariate simulation on fitted factor-proxy paths when
+  factor proxy prices exist in the snapshot
+```
+
+The ablation should be read before trusting complexity. A more ambitious variant
+is only useful if it improves calibration metrics such as interval coverage,
+median absolute error, severe-drawdown Brier score, or launch-decision accuracy.
+
 Interpretation:
 
 ```text
