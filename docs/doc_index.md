@@ -1,6 +1,6 @@
 # Documentation Index
 
-Status: canonical navigation. Last reviewed: 2026-07-05.
+Status: canonical navigation. Last reviewed: 2026-07-06.
 
 Use this file to decide which docs are current operating references and which
 ones are historical research notes. When a doc captures a dated plan or
@@ -12,6 +12,7 @@ like live system behavior.
 | Doc | Use For | Maintenance Rule |
 | --- | --- | --- |
 | `README.md` | Running the app, dashboard walkthrough, daily workflow | Keep user-facing and operational; avoid deep backend theory here. Update when the operating overview, Insight Workbench, Simulation Lab, Research Lab layout, or Term Lookup behavior changes. |
+| `docs/whitepaper.md` | Semi-technical system narrative for users, reviewers, and technical readers who need the full system in one document | Keep evergreen and concise relative to detailed guides; update after major architecture, strategy-family, testing, simulation, or monitoring changes. |
 | `docs/setup_guide.md` | Full local setup for users who do not regularly use GitHub, VS Code, Python, Poetry, or Codex | Update when Python version, install commands, environment assumptions, dashboard launch behavior, or onboarding workflow changes. |
 | `docs/user_guide.md` | Full product guide for daily operation, research, monitoring, paper tracking, live logging, taxable review, and review cadence | Update when any dashboard workflow, CLI workflow, monitoring workflow, or paper/live journal workflow changes. |
 | `docs/faq.md` | Comprehensive plain-English answers for users and reviewers | Update when recurring user questions appear, metric interpretations change, or safety/governance language changes. |

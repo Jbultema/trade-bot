@@ -109,6 +109,7 @@ These are the canonical entry points for users and maintainers. Start with the f
 
 | Doc | Audience | Purpose |
 | --- | --- | --- |
+| [System Whitepaper](docs/whitepaper.md) | Users, reviewers, and technical readers | Semi-technical overview of what Trade Bot is, how the components work, what the research has found, and how monitoring makes the system operational. |
 | [Setup Guide](docs/setup_guide.md) | New users and maintainers | Step-by-step installation, local environment setup, dashboard launch, Git basics, and troubleshooting. |
 | [User Guide](docs/user_guide.md) | Operators and reviewers | Full workflow guide for daily monitoring, strategy research, paper tracking, live logging, taxable review, and periodic review. |
 | [FAQ](docs/faq.md) | Everyone | Comprehensive answers to common questions about safety, workflow, metrics, risk, data, ML, taxes, and governance. |
