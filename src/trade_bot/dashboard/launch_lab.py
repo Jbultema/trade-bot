@@ -247,27 +247,28 @@ def _render_launch_vs_operating() -> None:
         "Use this when Launch Lab appears to conflict with the daily recommendation. "
         "It usually means one area is judging new capital while the other is managing a running book."
     )
-    st.markdown(
-        """
-        <div class="launch-guidance-grid">
-            <div class="launch-guidance-card launch-guidance-warning">
-                <p class="launch-card-label">New capital</p>
-                <p class="launch-card-answer">Launch Lab</p>
-                <p class="launch-card-detail">Answers whether a new paper/live sleeve should start now, wait, or stage in gradually.</p>
-            </div>
-            <div class="launch-guidance-card launch-guidance-success">
-                <p class="launch-card-label">Running book</p>
-                <p class="launch-card-answer">Book Alignment and Forward Test</p>
-                <p class="launch-card-detail">Answers what an already-running paper/live book should hold after the daily target update.</p>
-            </div>
-            <div class="launch-guidance-card launch-guidance-neutral">
-                <p class="launch-card-label">Scale-up capital</p>
-                <p class="launch-card-answer">Treat it as a new tranche</p>
-                <p class="launch-card-detail">Run Launch Lab for the incremental dollars, then log any executed tranche in Forward Test.</p>
-            </div>
-        </div>
-        """,
-        unsafe_allow_html=True,
+    _render_launch_card_grid(
+        [
+            {
+                "label": "New capital",
+                "answer": "Launch Lab",
+                "detail": "Answers whether a new paper/live sleeve should start now, wait, or stage in gradually.",
+                "tone": "warning",
+            },
+            {
+                "label": "Running book",
+                "answer": "Book Alignment and Forward Test",
+                "detail": "Answers what an already-running paper/live book should hold after the daily target update.",
+                "tone": "success",
+            },
+            {
+                "label": "Scale-up capital",
+                "answer": "Treat it as a new tranche",
+                "detail": "Run Launch Lab for the incremental dollars, then log any executed tranche in Forward Test.",
+                "tone": "neutral",
+            },
+        ],
+        class_name="launch-guidance-grid",
     )
     _render_metric_dataframe(
         pd.DataFrame(
@@ -607,18 +608,19 @@ def _format_diagnostic_value(metric: object, value: object) -> str:
 def _render_launch_card_grid(cards: list[dict[str, str]], *, class_name: str) -> None:
     rendered_cards = []
     for card in cards:
-        tone = html.escape(str(card.get("tone", "neutral")))
+        tone = html.escape(str(card.get("tone", "neutral")), quote=True)
+        label = html.escape(str(card.get("label", "")), quote=True)
+        answer = html.escape(str(card.get("answer", "")), quote=True)
+        detail = html.escape(str(card.get("detail", "")), quote=True)
         rendered_cards.append(
-            f"""
-            <div class="launch-guidance-card launch-guidance-{tone}">
-                <p class="launch-card-label">{html.escape(str(card.get("label", "")))}</p>
-                <p class="launch-card-answer">{html.escape(str(card.get("answer", "")))}</p>
-                <p class="launch-card-detail">{html.escape(str(card.get("detail", "")))}</p>
-            </div>
-            """
+            f'<div class="launch-guidance-card launch-guidance-{tone}">'
+            f'<p class="launch-card-label">{label}</p>'
+            f'<p class="launch-card-answer">{answer}</p>'
+            f'<p class="launch-card-detail">{detail}</p>'
+            "</div>"
         )
     st.markdown(
-        f"<div class=\"{html.escape(class_name)}\">{''.join(rendered_cards)}</div>",
+        f'<div class="{html.escape(class_name, quote=True)}">{"".join(rendered_cards)}</div>',
         unsafe_allow_html=True,
     )
 
