@@ -1,12 +1,14 @@
 from __future__ import annotations
 
 import json
+from datetime import date
 
 import pandas as pd
 import pytest
 
 from trade_bot.dashboard.forward_test import (
     _apply_allocation_view_window,
+    _clamp_date_value,
     _forward_weight_history_from_valuations,
     _forward_window_options,
     _prepare_allocation_frames,
@@ -176,3 +178,27 @@ def test_allocation_view_window_can_focus_forward_overlap() -> None:
 
     assert filtered_historical.index.min() == pd.Timestamp("2026-01-02")
     assert filtered_forward.index.min() == pd.Timestamp("2026-01-02")
+
+
+def test_clamp_date_value_keeps_custom_picker_inside_available_history() -> None:
+    min_value = date(2005, 1, 3)
+    max_value = date(2026, 7, 6)
+
+    assert _clamp_date_value(
+        date(2026, 1, 1),
+        min_value=min_value,
+        max_value=max_value,
+        fallback=min_value,
+    ) == date(2026, 1, 1)
+    assert _clamp_date_value(
+        date(2035, 1, 1),
+        min_value=min_value,
+        max_value=max_value,
+        fallback=max_value,
+    ) == max_value
+    assert _clamp_date_value(
+        "not-a-date",
+        min_value=min_value,
+        max_value=max_value,
+        fallback=min_value,
+    ) == min_value

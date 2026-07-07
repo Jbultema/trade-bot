@@ -47,6 +47,21 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         next_step="Use Research Lab for evidence, Monitoring for forward proof, and Forward Test for tickets.",
         tone="success",
     ),
+    "Launch Lab": DashboardSectionGuide(
+        name="Launch Lab",
+        role="Entry timing and staged launch gate",
+        primary_question="Is now a good time to start or scale this strategy?",
+        use_when=(
+            "Use this before moving a paper candidate into pseudo-live/live capital "
+            "or before adding a new tranche."
+        ),
+        first_read="Launch readiness, suggested ramp, entry backtest, and launch-versus-operating boundary.",
+        next_step=(
+            "If ready or set, use Forward Test to lock/log the launch; once running, "
+            "use Book Alignment for daily drift."
+        ),
+        tone="warning",
+    ),
     "Research Lab": DashboardSectionGuide(
         name="Research Lab",
         role="Strategy evidence and experiment drilldown",

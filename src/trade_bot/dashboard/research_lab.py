@@ -13,7 +13,11 @@ import streamlit as st
 from plotly.subplots import make_subplots
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
+from trade_bot.dashboard.components import (
+    _clearable_selectbox,
+    _helped_metric,
+    _render_metric_dataframe,
+)
 from trade_bot.dashboard.formatting import (
     _display_metrics,
     _escape_markdown_dollars,
@@ -1272,11 +1276,15 @@ def _render_approach_detail_workbench(
     if visible_catalog.empty:
         visible_catalog = catalog
 
-    selected_label = st.selectbox(
+    selected_label = _clearable_selectbox(
         "Approach to inspect",
         visible_catalog["label"].tolist(),
         key="approach_detail_label",
+        placeholder="Search approaches...",
     )
+    if selected_label is None:
+        st.info("Choose an approach to inspect its details.")
+        return
     approach_row = visible_catalog[visible_catalog["label"] == selected_label].iloc[0]
     approach_strategy = strategy_from_catalog_row(approach_row)
     approach_execution = execution_for_catalog_row(approach_row, bot_config.execution)
@@ -1932,17 +1940,23 @@ def _render_outcome_frontier(
         st.session_state.get(_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY),
     )
     selected_label_from_state = option_labels[selected_index]
+    current_outcome_label = st.session_state.get(_OUTCOME_FRONTIER_SELECTBOX_KEY)
     if (
         selected_from_chart
-        or st.session_state.get(_OUTCOME_FRONTIER_SELECTBOX_KEY) not in option_labels
+        or _OUTCOME_FRONTIER_SELECTBOX_KEY not in st.session_state
+        or (current_outcome_label is not None and current_outcome_label not in option_labels)
     ):
         st.session_state[_OUTCOME_FRONTIER_SELECTBOX_KEY] = selected_label_from_state
 
-    selected_label = st.selectbox(
+    selected_label = _clearable_selectbox(
         "Outcome strategy to inspect",
         option_labels,
         key=_OUTCOME_FRONTIER_SELECTBOX_KEY,
+        placeholder="Search outcome candidates...",
     )
+    if selected_label is None:
+        st.info("Choose an outcome strategy or click a dot in the frontier plot.")
+        return
     selected_row = selected_options[selected_options["label"] == selected_label].iloc[0]
     selected_strategy = str(selected_row["strategy"])
     st.session_state[_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY] = selected_strategy

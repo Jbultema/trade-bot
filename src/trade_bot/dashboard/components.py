@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import html
 import re
-from collections.abc import Mapping
+from collections.abc import Callable, Mapping, Sequence
 from typing import Any
 
 import pandas as pd
@@ -20,6 +20,61 @@ from trade_bot.dashboard.ticket_explainers import (
     ticket_guide_frame,
 )
 from trade_bot.research.action_headline import ActionHeadline
+
+_MISSING_SELECTION = object()
+
+
+def _clearable_selectbox(
+    label: str,
+    options: Sequence[Any],
+    *,
+    key: str,
+    default_index: int | None = 0,
+    format_func: Callable[[Any], str] = str,
+    help: str | None = None,
+    placeholder: str | None = None,
+    label_visibility: str = "visible",
+) -> Any | None:
+    option_list = list(options)
+    if not option_list:
+        return None
+
+    select_col, clear_col = st.columns([24, 1], vertical_alignment="bottom")
+    with clear_col:
+        if st.button(
+            "x",
+            key=f"{key}__clear",
+            help=f"Clear {label}",
+            use_container_width=True,
+        ):
+            st.session_state[key] = None
+
+    current_value = st.session_state.get(key, _MISSING_SELECTION)
+    if current_value is _MISSING_SELECTION:
+        index = (
+            default_index
+            if default_index is not None and 0 <= default_index < len(option_list)
+            else None
+        )
+    elif current_value is None:
+        index = None
+    elif current_value in option_list:
+        index = option_list.index(current_value)
+    else:
+        st.session_state[key] = None
+        index = None
+
+    with select_col:
+        return st.selectbox(
+            label,
+            option_list,
+            index=index,
+            format_func=format_func,
+            key=key,
+            help=help,
+            placeholder=placeholder or "Type to search...",
+            label_visibility=label_visibility,
+        )
 
 
 def _helped_metric(
@@ -90,11 +145,15 @@ def _render_metric_guide() -> None:
             st.write("No matching metric explainers.")
             return
 
-        selected_metric = st.selectbox(
+        selected_metric = _clearable_selectbox(
             "Detailed metric",
             list(guide["metric"]),
             key="metric_guide_metric",
+            placeholder="Search metrics...",
         )
+        if selected_metric is None:
+            st.info("Choose a metric to inspect.")
+            return
         detail = metric_detail(str(selected_metric))
         if detail is not None:
             st.markdown(f"**{detail.metric}**")
@@ -152,14 +211,21 @@ def _render_metric_info_rail_content() -> None:
     if st.session_state.get("metric_info_rail_context") != lookup_context:
         st.session_state["metric_info_rail_metric"] = _default_lookup_option(option_keys, guide)
         st.session_state["metric_info_rail_context"] = lookup_context
-    elif st.session_state.get("metric_info_rail_metric") not in option_keys:
+    elif (
+        st.session_state.get("metric_info_rail_metric") is not None
+        and st.session_state.get("metric_info_rail_metric") not in option_keys
+    ):
         st.session_state["metric_info_rail_metric"] = _default_lookup_option(option_keys, guide)
-    selected_key = st.selectbox(
+    selected_key = _clearable_selectbox(
         "Term",
         option_keys,
         format_func=lambda key: option_labels.get(str(key), str(key)),
         key="metric_info_rail_metric",
+        placeholder="Search matching terms...",
     )
+    if selected_key is None:
+        st.info("Choose a matching term to inspect.")
+        return
     selected_row = guide[guide["lookup_key"] == selected_key].iloc[0]
     detail = _lookup_detail(str(selected_row["kind"]), str(selected_row["term"]))
     if detail is None:
@@ -258,9 +324,17 @@ def _lookup_match_rank(frame: pd.DataFrame, search: str) -> pd.Series:
         return pd.Series(3, index=frame.index)
     terms = frame["term"].astype(str).str.lower()
     aliases = frame.get("aliases", pd.Series("", index=frame.index)).astype(str).str.lower()
-    exact_term = terms == query
-    exact_alias = aliases.str.split(", ").apply(lambda values: query in values)
-    contains_term = terms.str.contains(re.escape(query), na=False)
+    normalized_query = _normalize_lookup_key(query)
+    normalized_terms = terms.map(_normalize_lookup_key)
+    exact_term = (terms == query) | (normalized_terms == normalized_query)
+    exact_alias = aliases.str.split(", ").apply(
+        lambda values: query in values
+        or normalized_query in {_normalize_lookup_key(value) for value in values}
+    )
+    contains_term = terms.str.contains(re.escape(query), na=False) | normalized_terms.str.contains(
+        re.escape(normalized_query),
+        na=False,
+    )
     return pd.Series(
         [
             0 if exact else 1 if alias else 2 if contains else 3
@@ -273,6 +347,13 @@ def _lookup_match_rank(frame: pd.DataFrame, search: str) -> pd.Series:
         ],
         index=frame.index,
     )
+
+
+def _normalize_lookup_key(value: str) -> str:
+    normalized = value.strip().lower()
+    normalized = normalized.replace("$", " dollar ")
+    normalized = re.sub(r"[^a-z0-9]+", "_", normalized)
+    return normalized.strip("_")
 
 
 def _default_lookup_option(option_keys: list[str], guide: pd.DataFrame) -> str:

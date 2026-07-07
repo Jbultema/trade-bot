@@ -9,7 +9,11 @@ import plotly.graph_objects as go
 import streamlit as st
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
+from trade_bot.dashboard.components import (
+    _clearable_selectbox,
+    _helped_metric,
+    _render_metric_dataframe,
+)
 from trade_bot.dashboard.formatting import (
     _display_metrics,
     _escape_markdown_dollars,
@@ -251,11 +255,15 @@ def _selected_simulation_strategy(
         return None, None, None
 
     labels = options["simulation_label"].tolist()
-    selected_label = st.selectbox(
+    selected_label = _clearable_selectbox(
         "Strategy to simulate",
         labels,
         key="simulation_lab_selected_strategy",
+        placeholder="Search simulation strategies...",
     )
+    if selected_label is None:
+        st.info("Choose a strategy to run forward simulations.")
+        return None, None, None
     row = options[options["simulation_label"] == selected_label].iloc[0]
     strategy_name = str(row["strategy"])
     result = _result_for_strategy(

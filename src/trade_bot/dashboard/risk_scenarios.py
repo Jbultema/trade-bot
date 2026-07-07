@@ -1,12 +1,21 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
-from trade_bot.DEFAULTS import DEFAULT_SCENARIO_EXPLANATION_TOP_SCENARIOS
+from trade_bot.DEFAULTS import (
+    DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    DEFAULT_RUN_STORE_DB_PATH,
+    DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    DEFAULT_SCENARIO_EXPLANATION_TOP_SCENARIOS,
+    DEFAULT_SCENARIO_HISTORY_SNAPSHOT_LIMIT,
+    DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS,
+)
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.operating_exposure import (
     aggregate_beta_adjusted_spy_delta,
@@ -15,9 +24,36 @@ from trade_bot.research.operating_exposure import (
     build_tactical_matrix,
     weights_from_position_plan,
 )
+from trade_bot.storage.run_store import RunStore
+
+_SCENARIO_HISTORY_COLUMNS = [
+    "snapshot_time",
+    "market_date",
+    "horizon",
+    "scenario",
+    "risk_bucket",
+    "probability",
+    "rank",
+    "run_id",
+]
+_SCENARIO_BUCKET_COLOR_MAP = {
+    "risk_on": "#0f766e",
+    "risk_on_fragile": "#84cc16",
+    "fragile_upside": "#84cc16",
+    "transition": "#b7791f",
+    "risk_off_then_relief": "#7c3aed",
+    "risk_off": "#b91c1c",
+    "shock": "#7f1d1d",
+}
 
 
-def _render_risk_and_scenarios(baseline_run: BaselineRun) -> None:
+def _render_risk_and_scenarios(
+    baseline_run: BaselineRun,
+    *,
+    run_store_path: str | Path = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: str | Path = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: str | Path = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+) -> None:
     current_state = baseline_run.current_state
     trade_decision = baseline_run.trade_decision
     regime_instability = getattr(current_state, "regime_instability", pd.DataFrame())
@@ -191,6 +227,12 @@ def _render_risk_and_scenarios(baseline_run: BaselineRun) -> None:
         scenario_lattice,
         current_state.scenario_drivers,
     )
+    _render_scenario_probability_history(
+        baseline_run,
+        run_store_path=run_store_path,
+        artifact_dir=artifact_dir,
+        job_log_dir=job_log_dir,
+    )
     _render_metric_dataframe(_display_metrics(current_state.scenario_drivers))
 
     scenario_horizon = st.radio(
@@ -253,6 +295,500 @@ def _render_scenario_probability_explanation(
             st.plotly_chart(driver_figure, use_container_width=True)
         else:
             st.write("No driver-score chart is available.")
+
+
+def _render_scenario_probability_history(
+    baseline_run: BaselineRun,
+    *,
+    run_store_path: str | Path = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: str | Path = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: str | Path = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+) -> None:
+    st.markdown("**Scenario Probability Evolution**")
+    st.caption(
+        "Saved daily snapshots let this page show whether risk-off, transition, fragile upside, "
+        "and risk-on probabilities are rising, fading, or staying stable. Use this before "
+        "reacting to a single current-day probability."
+    )
+    history = _load_scenario_history_frame(
+        str(run_store_path),
+        str(artifact_dir),
+        str(job_log_dir),
+        DEFAULT_SCENARIO_HISTORY_SNAPSHOT_LIMIT,
+    )
+    if history.empty:
+        history = _scenario_history_from_lattice(
+            baseline_run.current_state.scenario_lattice,
+            market_date=getattr(baseline_run.current_state, "market_date", ""),
+            created_at_utc=getattr(baseline_run.current_state, "market_date", ""),
+            run_id="current_session",
+        )
+    if history.empty:
+        st.write("No scenario history is available yet.")
+        return
+
+    available_horizons = _ordered_horizons(history["horizon"].dropna().astype(str).unique())
+    if not available_horizons:
+        st.write("No scenario horizons are available in saved snapshots.")
+        return
+    control_cols = st.columns([1, 1, 2])
+    selected_horizon = control_cols[0].selectbox(
+        "Scenario history horizon",
+        available_horizons,
+        index=available_horizons.index("1m") if "1m" in available_horizons else 0,
+        key="risk_scenario_history_horizon",
+    )
+    distinct_market_dates = history["market_date"].dropna().nunique()
+    default_granularity = (
+        "Latest per market date" if distinct_market_dates > 1 else "Every saved refresh"
+    )
+    granularity_options = ["Latest per market date", "Every saved refresh"]
+    granularity = control_cols[1].radio(
+        "History granularity",
+        granularity_options,
+        index=granularity_options.index(default_granularity),
+        horizontal=True,
+        key="risk_scenario_history_granularity",
+    )
+    control_cols[2].caption(
+        "Latest-per-date is cleaner for daily trends. Every saved refresh is useful when you "
+        "have multiple same-day updates or only one market date loaded."
+    )
+
+    scoped_history = _scenario_history_scope(history, granularity)
+    scoped_history = scoped_history[scoped_history["horizon"].astype(str) == selected_horizon]
+    if scoped_history.empty:
+        st.write("No scenario history is available for the selected horizon.")
+        return
+    insights = _scenario_history_insights(scoped_history, selected_horizon)
+    metric_cols = st.columns(4)
+    summary = _scenario_history_metric_summary(scoped_history)
+    _helped_metric(metric_cols[0], "Latest Risk-Off", summary["latest_risk_off"])
+    _helped_metric(metric_cols[1], "Latest Transition", summary["latest_transition"])
+    _helped_metric(metric_cols[2], "Dominant Bucket", summary["dominant_bucket"])
+    _helped_metric(metric_cols[3], "History Points", summary["history_points"])
+    _render_metric_dataframe(insights, hide_index=True)
+
+    chart_cols = st.columns(2)
+    with chart_cols[0]:
+        bucket_figure = _scenario_bucket_history_figure(scoped_history)
+        if bucket_figure.data:
+            st.plotly_chart(bucket_figure, use_container_width=True)
+        else:
+            st.write("No risk-bucket history chart is available.")
+    with chart_cols[1]:
+        named_figure = _scenario_named_history_figure(scoped_history)
+        if named_figure.data:
+            st.plotly_chart(named_figure, use_container_width=True)
+        else:
+            st.write("No named-scenario history chart is available.")
+
+    with st.expander("Scenario history detail", expanded=False):
+        detail = (
+            scoped_history[
+                [
+                    "snapshot_time",
+                    "market_date",
+                    "horizon",
+                    "scenario",
+                    "risk_bucket",
+                    "probability",
+                    "rank",
+                    "run_id",
+                ]
+            ]
+            .sort_values(["snapshot_time", "rank", "probability"], ascending=[False, True, False])
+            .head(200)
+        )
+        _render_metric_dataframe(_display_metrics(detail), hide_index=True)
+
+
+@st.cache_data(show_spinner=False, ttl=DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS)
+def _load_scenario_history_frame(
+    store_path_string: str,
+    artifact_dir_string: str,
+    job_log_dir_string: str,
+    limit: int,
+) -> pd.DataFrame:
+    store = RunStore(
+        store_path_string,
+        artifact_dir=artifact_dir_string,
+        job_log_dir=job_log_dir_string,
+    )
+    snapshots = store.list_snapshots(limit=limit)
+    if snapshots.empty or "run_id" not in snapshots:
+        return pd.DataFrame(columns=_SCENARIO_HISTORY_COLUMNS)
+    frames: list[pd.DataFrame] = []
+    for _, row in snapshots.iloc[::-1].iterrows():
+        run_id = str(row["run_id"])
+        try:
+            run, manifest = store.load_snapshot(run_id)
+        except (FileNotFoundError, TypeError, OSError, AttributeError, ValueError):
+            continue
+        frame = _scenario_history_from_lattice(
+            getattr(run.current_state, "scenario_lattice", pd.DataFrame()),
+            market_date=manifest.market_date,
+            created_at_utc=manifest.created_at_utc,
+            run_id=manifest.run_id,
+        )
+        if not frame.empty:
+            frames.append(frame)
+    if not frames:
+        return pd.DataFrame(columns=_SCENARIO_HISTORY_COLUMNS)
+    history = pd.concat(frames, ignore_index=True)
+    return _clean_scenario_history(history)
+
+
+def _scenario_history_from_lattice(
+    scenario_lattice: pd.DataFrame,
+    *,
+    market_date: str,
+    created_at_utc: str,
+    run_id: str,
+) -> pd.DataFrame:
+    if scenario_lattice.empty or not {"horizon", "risk_bucket", "probability"}.issubset(
+        scenario_lattice.columns
+    ):
+        return pd.DataFrame(columns=_SCENARIO_HISTORY_COLUMNS)
+    frame = scenario_lattice.copy()
+    if "scenario" not in frame:
+        frame["scenario"] = frame["risk_bucket"].astype(str)
+    if "rank" not in frame:
+        frame["rank"] = (
+            frame.groupby("horizon")["probability"]
+            .rank(method="first", ascending=False)
+            .astype("Int64")
+        )
+    frame["probability"] = pd.to_numeric(frame["probability"], errors="coerce").clip(0.0, 1.0)
+    frame["snapshot_time"] = pd.to_datetime(created_at_utc, errors="coerce", utc=True)
+    if frame["snapshot_time"].isna().all():
+        frame["snapshot_time"] = pd.to_datetime(market_date, errors="coerce", utc=True)
+    market_timestamp = pd.to_datetime(market_date, errors="coerce")
+    frame["market_date"] = market_timestamp.date() if pd.notna(market_timestamp) else pd.NaT
+    frame["run_id"] = str(run_id)
+    frame = frame.dropna(subset=["probability", "snapshot_time"])
+    if frame.empty:
+        return pd.DataFrame(columns=_SCENARIO_HISTORY_COLUMNS)
+    return frame[_SCENARIO_HISTORY_COLUMNS].copy()
+
+
+def _clean_scenario_history(history: pd.DataFrame) -> pd.DataFrame:
+    if history.empty:
+        return pd.DataFrame(columns=_SCENARIO_HISTORY_COLUMNS)
+    frame = history.copy()
+    frame["snapshot_time"] = pd.to_datetime(frame["snapshot_time"], errors="coerce", utc=True)
+    frame["market_date"] = pd.to_datetime(frame["market_date"], errors="coerce").dt.date
+    frame["probability"] = pd.to_numeric(frame["probability"], errors="coerce").clip(0.0, 1.0)
+    frame["rank"] = pd.to_numeric(frame["rank"], errors="coerce")
+    frame = frame.dropna(subset=["snapshot_time", "market_date", "probability"])
+    if frame.empty:
+        return pd.DataFrame(columns=_SCENARIO_HISTORY_COLUMNS)
+    return frame.sort_values(["snapshot_time", "horizon", "rank"]).reset_index(drop=True)
+
+
+def _scenario_history_scope(history: pd.DataFrame, granularity: str) -> pd.DataFrame:
+    frame = _clean_scenario_history(history)
+    if frame.empty:
+        return frame
+    if granularity == "Latest per market date":
+        frame = (
+            frame.sort_values("snapshot_time")
+            .drop_duplicates(["market_date", "horizon", "scenario"], keep="last")
+            .copy()
+        )
+        frame["history_time"] = pd.to_datetime(frame["market_date"], errors="coerce")
+    else:
+        frame["history_time"] = frame["snapshot_time"]
+    return frame.sort_values(["history_time", "horizon", "rank"]).reset_index(drop=True)
+
+
+def _scenario_history_metric_summary(history: pd.DataFrame) -> dict[str, str]:
+    bucket_pivot = _scenario_bucket_history_pivot(history)
+    if bucket_pivot.empty:
+        return {
+            "latest_risk_off": "n/a",
+            "latest_transition": "n/a",
+            "dominant_bucket": "n/a",
+            "history_points": "0",
+        }
+    latest = bucket_pivot.iloc[-1]
+    dominant_bucket = str(latest.idxmax()).replace("_", " ").title()
+    latest_risk_off = float(
+        latest[[column for column in latest.index if "risk_off" in str(column)]].sum()
+    )
+    latest_transition = float(latest.get("transition", 0.0))
+    return {
+        "latest_risk_off": f"{latest_risk_off:.1%}",
+        "latest_transition": f"{latest_transition:.1%}",
+        "dominant_bucket": dominant_bucket,
+        "history_points": f"{bucket_pivot.shape[0]}",
+    }
+
+
+def _scenario_history_insights(history: pd.DataFrame, horizon: str) -> pd.DataFrame:
+    bucket_pivot = _scenario_bucket_history_pivot(history)
+    if bucket_pivot.empty:
+        return pd.DataFrame(columns=["insight", "read", "detail"])
+    latest_time = bucket_pivot.index[-1]
+    latest = bucket_pivot.iloc[-1]
+    prior = bucket_pivot.iloc[-2] if len(bucket_pivot) > 1 else None
+    latest_risk_off = float(
+        latest[[column for column in latest.index if "risk_off" in str(column)]].sum()
+    )
+    latest_transition = float(latest.get("transition", 0.0))
+    dominant_bucket = str(latest.idxmax()).replace("_", " ").title()
+    rows = [
+        {
+            "insight": "Current regime mix",
+            "read": f"{dominant_bucket} leads",
+            "detail": (
+                f"{horizon} risk-off is {latest_risk_off:.1%} and transition is "
+                f"{latest_transition:.1%} as of {_format_history_time(latest_time)}."
+            ),
+        }
+    ]
+    if prior is None:
+        rows.append(
+            {
+                "insight": "Trend evidence",
+                "read": "More history needed",
+                "detail": "Only one saved history point is available for this horizon.",
+            }
+        )
+    else:
+        prior_risk_off = float(
+            prior[[column for column in prior.index if "risk_off" in str(column)]].sum()
+        )
+        prior_transition = float(prior.get("transition", 0.0))
+        delta_risk_off = latest_risk_off - prior_risk_off
+        delta_transition = latest_transition - prior_transition
+        rows.append(
+            {
+                "insight": "Risk pressure trend",
+                "read": _risk_pressure_read(delta_risk_off, delta_transition),
+                "detail": (
+                    f"Since the prior saved point, risk-off changed {delta_risk_off:+.1%} "
+                    f"and transition changed {delta_transition:+.1%}."
+                ),
+            }
+        )
+        scenario_delta = _largest_named_scenario_delta(history, latest_time)
+        if scenario_delta:
+            rows.append(scenario_delta)
+    rows.append(
+        {
+            "insight": "Coverage",
+            "read": f"{len(bucket_pivot)} saved point(s)",
+            "detail": (
+                f"History spans {_format_history_time(bucket_pivot.index[0])} to "
+                f"{_format_history_time(bucket_pivot.index[-1])}."
+            ),
+        }
+    )
+    return pd.DataFrame(rows)
+
+
+def _scenario_bucket_history_figure(history: pd.DataFrame) -> go.Figure:
+    pivot = _scenario_bucket_history_pivot(history)
+    if pivot.empty:
+        return go.Figure()
+    figure = go.Figure()
+    bucket_order = _ordered_buckets(pivot.columns)
+    if len(pivot.index) == 1:
+        latest = pivot.iloc[-1]
+        figure.add_trace(
+            go.Bar(
+                x=[str(bucket).replace("_", " ").title() for bucket in bucket_order],
+                y=[float(latest.get(bucket, 0.0)) for bucket in bucket_order],
+                marker_color=[
+                    _SCENARIO_BUCKET_COLOR_MAP.get(str(bucket), "#64748b")
+                    for bucket in bucket_order
+                ],
+                hovertemplate="%{x}<br>Probability: %{y:.1%}<extra></extra>",
+                name="Latest probability",
+            )
+        )
+        xaxis = {"title": "Risk bucket"}
+    else:
+        for bucket in bucket_order:
+            figure.add_trace(
+                go.Scatter(
+                    x=pivot.index,
+                    y=pivot[bucket],
+                    name=str(bucket).replace("_", " ").title(),
+                    mode="lines",
+                    stackgroup="scenario_probability",
+                    line={
+                        "width": 1.8,
+                        "color": _SCENARIO_BUCKET_COLOR_MAP.get(str(bucket), "#64748b"),
+                    },
+                    hovertemplate="%{x}<br>%{fullData.name}: %{y:.1%}<extra></extra>",
+                )
+            )
+        xaxis = {"title": "Snapshot"}
+    figure.update_layout(
+        title="Risk-Bucket Probability Over Time",
+        template="plotly_white",
+        yaxis={"title": "Probability", "tickformat": ".0%", "range": [0, 1]},
+        xaxis=xaxis,
+        height=380,
+        margin={"l": 20, "r": 20, "t": 60, "b": 60},
+        legend={"orientation": "h", "yanchor": "top", "y": -0.18, "xanchor": "left", "x": 0},
+    )
+    return figure
+
+
+def _scenario_named_history_figure(
+    history: pd.DataFrame,
+    *,
+    top_n: int = DEFAULT_SCENARIO_EXPLANATION_TOP_SCENARIOS,
+) -> go.Figure:
+    if history.empty or "history_time" not in history:
+        return go.Figure()
+    frame = history.copy()
+    frame["probability"] = pd.to_numeric(frame["probability"], errors="coerce")
+    latest_time = frame["history_time"].max()
+    latest = (
+        frame[frame["history_time"] == latest_time]
+        .sort_values("probability", ascending=False)
+        .head(top_n)
+    )
+    top_scenarios = list(latest["scenario"].astype(str))
+    if not top_scenarios:
+        return go.Figure()
+    scoped = frame[frame["scenario"].astype(str).isin(top_scenarios)]
+    pivot = (
+        scoped.groupby(["history_time", "scenario"], dropna=False)["probability"]
+        .sum()
+        .unstack(fill_value=0.0)
+        .sort_index()
+    )
+    figure = go.Figure()
+    if len(pivot.index) == 1:
+        values = pivot.iloc[-1].sort_values(ascending=False)
+        figure.add_trace(
+            go.Bar(
+                x=values.index.astype(str),
+                y=values.values,
+                marker_color="#0f766e",
+                hovertemplate="%{x}<br>Probability: %{y:.1%}<extra></extra>",
+                name="Latest probability",
+            )
+        )
+        xaxis = {"title": "Scenario"}
+    else:
+        for scenario in top_scenarios:
+            if scenario in pivot:
+                figure.add_trace(
+                    go.Scatter(
+                        x=pivot.index,
+                        y=pivot[scenario],
+                        mode="lines+markers",
+                        name=scenario,
+                        hovertemplate="%{x}<br>%{fullData.name}: %{y:.1%}<extra></extra>",
+                    )
+                )
+        xaxis = {"title": "Snapshot"}
+    figure.update_layout(
+        title="Top Named Scenarios Over Time",
+        template="plotly_white",
+        yaxis={"title": "Probability", "tickformat": ".0%", "range": [0, 1]},
+        xaxis=xaxis,
+        height=380,
+        margin={"l": 20, "r": 20, "t": 60, "b": 60},
+        legend={"orientation": "h", "yanchor": "top", "y": -0.18, "xanchor": "left", "x": 0},
+    )
+    return figure
+
+
+def _scenario_bucket_history_pivot(history: pd.DataFrame) -> pd.DataFrame:
+    if history.empty or "history_time" not in history:
+        return pd.DataFrame()
+    frame = history.copy()
+    frame["probability"] = pd.to_numeric(frame["probability"], errors="coerce")
+    pivot = (
+        frame.dropna(subset=["probability", "history_time"])
+        .groupby(["history_time", "risk_bucket"], dropna=False)["probability"]
+        .sum()
+        .unstack(fill_value=0.0)
+        .sort_index()
+    )
+    if pivot.empty:
+        return pivot
+    return pivot[_ordered_buckets(pivot.columns)]
+
+
+def _largest_named_scenario_delta(history: pd.DataFrame, latest_time: object) -> dict[str, str] | None:
+    frame = history.copy()
+    times = sorted(frame["history_time"].dropna().unique())
+    if len(times) < 2:
+        return None
+    prior_time = times[-2]
+    latest = (
+        frame[frame["history_time"] == latest_time]
+        .groupby("scenario", dropna=False)["probability"]
+        .sum()
+    )
+    prior = (
+        frame[frame["history_time"] == prior_time]
+        .groupby("scenario", dropna=False)["probability"]
+        .sum()
+    )
+    delta = latest.subtract(prior, fill_value=0.0)
+    if delta.empty:
+        return None
+    scenario = str(delta.abs().idxmax())
+    value = float(delta.loc[scenario])
+    direction = "rose" if value > 0 else "fell"
+    return {
+        "insight": "Largest scenario move",
+        "read": f"{scenario} {direction}",
+        "detail": f"{scenario} {direction} {abs(value):.1%} from the prior saved point.",
+    }
+
+
+def _risk_pressure_read(delta_risk_off: float, delta_transition: float) -> str:
+    combined_delta = delta_risk_off + delta_transition
+    if combined_delta >= 0.03:
+        return "Risk pressure rising"
+    if combined_delta <= -0.03:
+        return "Risk pressure fading"
+    return "Mostly stable"
+
+
+def _ordered_horizons(horizons: list[str] | pd.Index | pd.Series) -> list[str]:
+    values = [str(horizon) for horizon in horizons if pd.notna(horizon)]
+    order = ["1w", "1m", "3m", "6m"]
+    ordered = [horizon for horizon in order if horizon in values]
+    ordered.extend(sorted(horizon for horizon in values if horizon not in order))
+    return ordered
+
+
+def _ordered_buckets(buckets: pd.Index | list[object]) -> list[object]:
+    order = [
+        "risk_off",
+        "shock",
+        "risk_off_then_relief",
+        "transition",
+        "risk_on_fragile",
+        "fragile_upside",
+        "risk_on",
+    ]
+    values = list(buckets)
+    ordered = [bucket for bucket in order if bucket in values]
+    ordered.extend(sorted(bucket for bucket in values if bucket not in ordered))
+    return ordered
+
+
+def _format_history_time(value: object) -> str:
+    timestamp = pd.Timestamp(value)
+    if pd.isna(timestamp):
+        return "n/a"
+    if timestamp.tzinfo is not None:
+        timestamp = timestamp.tz_convert(None)
+    if timestamp.hour == 0 and timestamp.minute == 0 and timestamp.second == 0:
+        return timestamp.date().isoformat()
+    return timestamp.strftime("%Y-%m-%d %H:%M")
 
 
 def _scenario_probability_stack_figure(scenario_lattice: pd.DataFrame) -> go.Figure:

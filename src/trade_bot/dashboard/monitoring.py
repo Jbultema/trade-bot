@@ -7,7 +7,11 @@ import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
-from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
+from trade_bot.dashboard.components import (
+    _clearable_selectbox,
+    _helped_metric,
+    _render_metric_dataframe,
+)
 from trade_bot.dashboard.formatting import _display_metrics, _display_trade_frame
 from trade_bot.DEFAULTS import (
     DEFAULT_MONITORING_COHORT_START_DATE,
@@ -448,99 +452,115 @@ def _render_monitoring_controls(
                 st.write("No candidates available. Run `poetry run trade-bot migrate-warehouse`.")
             else:
                 option_labels = [_candidate_label(row) for _, row in candidates.iterrows()]
-                selected_label = st.selectbox("Strategy", option_labels)
-                selected_index = option_labels.index(selected_label)
-                selected = candidates.iloc[selected_index]
-                selected_summary = (
-                    selected[
-                        [
-                            column
-                            for column in [
-                                "strategy_name",
-                                "status",
-                                "family",
-                                "source",
-                                "monitoring_state",
-                                "snapshot_valuation_ready",
-                                "promotion_score",
-                                "calmar",
-                                "max_drawdown",
-                                "notes",
+                selected_label = _clearable_selectbox(
+                    "Strategy",
+                    option_labels,
+                    key="monitor_start_strategy",
+                    placeholder="Search strategies to monitor...",
+                )
+                if selected_label is None:
+                    st.info("Choose a strategy to start or update monitoring.")
+                else:
+                    selected_index = option_labels.index(selected_label)
+                    selected = candidates.iloc[selected_index]
+                    selected_summary = (
+                        selected[
+                            [
+                                column
+                                for column in [
+                                    "strategy_name",
+                                    "status",
+                                    "family",
+                                    "source",
+                                    "monitoring_state",
+                                    "snapshot_valuation_ready",
+                                    "promotion_score",
+                                    "calmar",
+                                    "max_drawdown",
+                                    "notes",
+                                ]
+                                if column in selected.index
                             ]
-                            if column in selected.index
                         ]
-                    ]
-                    .to_frame("selected")
-                    .T
-                )
-                st.dataframe(_display_metrics(selected_summary), use_container_width=True)
+                        .to_frame("selected")
+                        .T
+                    )
+                    st.dataframe(_display_metrics(selected_summary), use_container_width=True)
 
-                cols = st.columns(5)
-                role = cols[0].selectbox(
-                    "Role",
-                    ["challenger", "champion", "reference"],
-                    index=0,
-                    key="monitor_new_role",
-                )
-                mode = cols[1].selectbox("Mode", ["paper", "live"], key="monitor_new_mode")
-                account = cols[2].text_input(
-                    "Account label",
-                    "default_paper_account",
-                    key="monitor_new_account",
-                )
-                capital_base = cols[3].number_input(
-                    "Paper capital",
-                    min_value=1.0,
-                    value=10_000.0,
-                    step=1_000.0,
-                    key="monitor_new_capital",
-                )
-                start_date = cols[4].date_input(
-                    "Start date",
-                    date.fromisoformat(DEFAULT_MONITORING_COHORT_START_DATE),
-                    key="monitor_new_start_date",
-                    help=(
-                        "Use a shared cohort start for fair YTD comparisons, or choose a "
-                        "strategy-specific adoption date when that is the research question."
-                    ),
-                )
-                demote_other = st.checkbox(
-                    "Make this the only active champion for this mode/account",
-                    value=False,
-                    key="monitor_new_demote_other",
-                    help=(
-                        "Leave unchecked if you intentionally want multiple champion windows, "
-                        "for example different strategy sizes or account sleeves."
-                    ),
-                )
-                if st.button("Start / Update Monitoring", type="primary"):
-                    warehouse = TradingWarehouse(warehouse_path)
-                    try:
-                        result = warehouse.monitor_strategy(
-                            str(selected["strategy_name"]),
-                            role=role,
-                            mode=mode,
-                            account=account,
-                            capital_base=float(capital_base),
-                            start_date=start_date.isoformat(),
-                            demote_other_champions=bool(demote_other),
-                        )
-                    except ValueError as exc:
-                        st.error(str(exc))
-                    else:
-                        _load_monitoring_frames.clear()
-                        st.success(
-                            f"Monitoring {result.strategy_name} as {result.role} "
-                            f"with ${float(capital_base):,.0f}."
-                        )
-                        st.rerun()
+                    cols = st.columns(5)
+                    role = cols[0].selectbox(
+                        "Role",
+                        ["challenger", "champion", "reference"],
+                        index=0,
+                        key="monitor_new_role",
+                    )
+                    mode = cols[1].selectbox("Mode", ["paper", "live"], key="monitor_new_mode")
+                    account = cols[2].text_input(
+                        "Account label",
+                        "default_paper_account",
+                        key="monitor_new_account",
+                    )
+                    capital_base = cols[3].number_input(
+                        "Paper capital",
+                        min_value=1.0,
+                        value=10_000.0,
+                        step=1_000.0,
+                        key="monitor_new_capital",
+                    )
+                    start_date = cols[4].date_input(
+                        "Start date",
+                        date.fromisoformat(DEFAULT_MONITORING_COHORT_START_DATE),
+                        key="monitor_new_start_date",
+                        help=(
+                            "Use a shared cohort start for fair YTD comparisons, or choose a "
+                            "strategy-specific adoption date when that is the research question."
+                        ),
+                    )
+                    demote_other = st.checkbox(
+                        "Make this the only active champion for this mode/account",
+                        value=False,
+                        key="monitor_new_demote_other",
+                        help=(
+                            "Leave unchecked if you intentionally want multiple champion windows, "
+                            "for example different strategy sizes or account sleeves."
+                        ),
+                    )
+                    if st.button("Start / Update Monitoring", type="primary"):
+                        warehouse = TradingWarehouse(warehouse_path)
+                        try:
+                            result = warehouse.monitor_strategy(
+                                str(selected["strategy_name"]),
+                                role=role,
+                                mode=mode,
+                                account=account,
+                                capital_base=float(capital_base),
+                                start_date=start_date.isoformat(),
+                                demote_other_champions=bool(demote_other),
+                            )
+                        except ValueError as exc:
+                            st.error(str(exc))
+                        else:
+                            _load_monitoring_frames.clear()
+                            st.success(
+                                f"Monitoring {result.strategy_name} as {result.role} "
+                                f"with ${float(capital_base):,.0f}."
+                            )
+                            st.rerun()
 
         with manage_tab:
             if windows.empty:
                 st.write("No active windows to manage yet.")
                 return
             window_labels = [_window_label(row) for _, row in windows.iterrows()]
-            selected_window_label = st.selectbox("Active window", window_labels)
+            selected_window_label = _clearable_selectbox(
+                "Active window",
+                window_labels,
+                key="monitor_active_window",
+                placeholder="Search active windows...",
+            )
+            if selected_window_label is None:
+                st.info("Choose an active window to manage it.")
+                return
             selected_window_index = window_labels.index(selected_window_label)
             selected_window = windows.iloc[selected_window_index]
             current_role = str(selected_window.get("window_role", "challenger"))

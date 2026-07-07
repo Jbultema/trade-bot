@@ -9,6 +9,7 @@ def test_dashboard_section_guides_cover_default_sections() -> None:
     section_names = dashboard_section_names()
     research_index = section_names.index("Research Lab")
     assert section_names[research_index + 1] == "Simulation Lab"
+    assert section_names[research_index + 2] == "Launch Lab"
 
     for section in DEFAULT_DASHBOARD_SECTIONS:
         guide = section_guide(section)

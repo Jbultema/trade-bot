@@ -74,6 +74,8 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "forward_median",
         "forward_p90",
         "selected_minus_row_forward_median",
+        "capital_deployed",
+        "cash_reserved",
     ]
     for column in currency_columns:
         if column in display:
@@ -275,6 +277,17 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "actual_cumulative_return",
         "tracking_error",
         "price_slippage_pct",
+        "positive_return_rate",
+        "beat_rate",
+        "bad_start_rate",
+        "median_return",
+        "worst_return",
+        "median_excess_return",
+        "worst_excess_return",
+        "median_first_month_drawdown",
+        "worst_first_month_drawdown",
+        "account_fraction_deployed",
+        "target_fraction_of_strategy",
     ]
     for column in percent_columns:
         if column in display:
@@ -391,6 +404,9 @@ def _display_metrics(metrics: pd.DataFrame) -> pd.DataFrame:
         "regime_instability_score",
         "component_score",
         "weight",
+        "historical_entry_score",
+        "current_entry_score",
+        "launch_score",
     ]:
         if column in display:
             display[column] = display[column].map(_format_decimal)

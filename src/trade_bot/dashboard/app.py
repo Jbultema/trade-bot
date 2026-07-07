@@ -420,5 +420,7 @@ _render_dashboard_section(
     experiment_candidates=experiment_candidates,
     decision_sanity_impacts=decision_sanity_impacts,
     warehouse_path=str(run_store_path),
+    artifact_dir=str(artifact_dir),
+    job_log_dir=str(job_log_dir),
     book_alignment=execution_book_alignment,
 )

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
 import json
-from datetime import UTC, datetime
+from datetime import UTC, date, datetime
 from pathlib import Path
 
 import pandas as pd
@@ -10,7 +10,7 @@ import streamlit as st
 from plotly.subplots import make_subplots
 
 from trade_bot.dashboard.book_alignment import _render_book_alignment
-from trade_bot.dashboard.components import _render_metric_dataframe
+from trade_bot.dashboard.components import _clearable_selectbox, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_trade_frame, _safe_timezone
 from trade_bot.dashboard.ticket_explainers import ticket_column_help
 from trade_bot.DEFAULTS import DEFAULT_FORWARD_TEST_ACCOUNT, DEFAULT_FORWARD_TEST_STRATEGY
@@ -410,16 +410,27 @@ def _render_forward_test_and_journal(
         with st.expander("Update open ticket status", expanded=False):
             status_cols = st.columns(2)
             status_ticket_options = _ticket_option_map(open_tickets)
-            status_ticket_label = status_cols[0].selectbox(
-                "Open ticket to update",
-                list(status_ticket_options),
-                help="Readable ticket label: ticker, side, share range, status, strategy, and short ticket ID.",
-            )
-            status_ticket = status_ticket_options[status_ticket_label]
-            status_update = status_cols[1].selectbox("New status", ["skipped", "expired", "open"])
-            if st.button("Update Ticket Status"):
-                journal.update_ticket_status(status_ticket, status_update)
-                st.success(f"Updated ticket {status_ticket} to {status_update}.")
+            with status_cols[0]:
+                status_ticket_label = _clearable_selectbox(
+                    "Open ticket to update",
+                    list(status_ticket_options),
+                    key="status_ticket_label",
+                    help=(
+                        "Readable ticket label: ticker, side, share range, status, strategy, "
+                        "and short ticket ID."
+                    ),
+                    placeholder="Search open tickets...",
+                )
+            if status_ticket_label is None:
+                st.info("Choose an open ticket before updating status.")
+            else:
+                status_ticket = status_ticket_options[status_ticket_label]
+                status_update = status_cols[1].selectbox(
+                    "New status", ["skipped", "expired", "open"]
+                )
+                if st.button("Update Ticket Status"):
+                    journal.update_ticket_status(status_ticket, status_update)
+                    st.success(f"Updated ticket {status_ticket} to {status_update}.")
 
     executions = journal.load_executions()
     execution_columns = [
@@ -533,11 +544,15 @@ def _render_forward_allocation_history(
         st.info("No valued monitoring windows match the selected allocation source.")
         return
 
-    selected_label = st.selectbox(
+    selected_label = _clearable_selectbox(
         "Forward allocation strategy",
         window_options["label"].tolist(),
         key="forward_allocation_strategy",
+        placeholder="Search monitored strategies...",
     )
+    if selected_label is None:
+        st.info("Choose a monitored strategy to inspect its allocation history.")
+        return
     selected_window = window_options[window_options["label"] == selected_label].iloc[0]
     strategy_name = str(selected_window["strategy_name"])
     window_id = str(selected_window["window_id"])
@@ -576,17 +591,41 @@ def _render_forward_allocation_history(
     if view == "Custom":
         min_date, max_date = _allocation_date_bounds(historical_weights, forward_weights)
         if min_date is not None and max_date is not None:
+            min_allowed = min_date.date()
+            max_allowed = max_date.date()
+            start_key = "forward_allocation_custom_start"
+            end_key = "forward_allocation_custom_end"
+            st.session_state[start_key] = _clamp_date_value(
+                st.session_state.get(start_key),
+                min_value=min_allowed,
+                max_value=max_allowed,
+                fallback=min_allowed,
+            )
+            st.session_state[end_key] = _clamp_date_value(
+                st.session_state.get(end_key),
+                min_value=min_allowed,
+                max_value=max_allowed,
+                fallback=max_allowed,
+            )
             date_cols = st.columns(2)
             custom_start = date_cols[0].date_input(
                 "Allocation start",
-                min_date.date(),
-                key="forward_allocation_custom_start",
+                st.session_state[start_key],
+                min_value=min_allowed,
+                max_value=max_allowed,
+                key=start_key,
             )
             custom_end = date_cols[1].date_input(
                 "Allocation end",
-                max_date.date(),
-                key="forward_allocation_custom_end",
+                st.session_state[end_key],
+                min_value=min_allowed,
+                max_value=max_allowed,
+                key=end_key,
             )
+            if custom_start > custom_end:
+                st.warning("Allocation start is after allocation end; showing the full available window.")
+                custom_start = min_allowed
+                custom_end = max_allowed
             historical_weights = _filter_weight_history(
                 historical_weights,
                 start=custom_start,
@@ -956,6 +995,22 @@ def _allocation_date_bounds(
     for index in indexes[1:]:
         combined = combined.union(index)
     return pd.Timestamp(combined.min()), pd.Timestamp(combined.max())
+
+
+def _clamp_date_value(
+    value: object,
+    *,
+    min_value: date,
+    max_value: date,
+    fallback: date,
+) -> date:
+    try:
+        parsed = pd.Timestamp(value).date()
+    except (TypeError, ValueError):
+        parsed = fallback
+    if parsed < min_value or parsed > max_value:
+        return fallback
+    return parsed
 
 
 def _make_forward_allocation_history_figure(

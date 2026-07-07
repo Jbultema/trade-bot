@@ -41,6 +41,7 @@ DEFAULT_RUN_STORE_DB_PATH = Path("data/run_store/trade_bot.duckdb")
 DEFAULT_RUN_STORE_ARTIFACT_DIR = Path("data/run_store/snapshots")
 DEFAULT_RUN_STORE_JOB_LOG_DIR = Path("data/run_store/jobs")
 DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS = 15
+DEFAULT_SCENARIO_HISTORY_SNAPSHOT_LIMIT = 120
 DEFAULT_MONITORING_TOP_N = 5
 DEFAULT_MONITORING_COHORT_START_DATE = "2026-01-01"
 DEFAULT_MONITORING_ENVELOPE_WATCH_SHARE = 0.50
@@ -71,6 +72,7 @@ DEFAULT_DASHBOARD_SECTIONS = (
     "News & Macro",
     "Research Lab",
     "Simulation Lab",
+    "Launch Lab",
     "Performance",
     "Monitoring",
     "Forward Test",
@@ -216,6 +218,22 @@ DEFAULT_ENTRY_HORIZONS: dict[str, int] = {
     "3y": 756,
     "5y": 1260,
 }
+
+
+# Launch-readiness defaults. Launch Lab answers a different question than the
+# daily operating book: whether new paper/live capital should begin following a
+# strategy now, and whether the entry should be immediate or staged.
+DEFAULT_LAUNCH_CAPITAL = 1_000.0
+DEFAULT_LAUNCH_TARGET_FRACTION = 1.0
+DEFAULT_LAUNCH_INITIAL_RAMP_FRACTION = 0.25
+DEFAULT_LAUNCH_RAMP_WEEKS = (0, 4, 8, 12)
+DEFAULT_LAUNCH_START_FREQUENCY = "M"
+DEFAULT_LAUNCH_PRIMARY_HORIZON = "6m"
+DEFAULT_LAUNCH_BAD_START_DRAWDOWN = -0.08
+DEFAULT_LAUNCH_READY_SCORE = 0.75
+DEFAULT_LAUNCH_SET_SCORE = 0.55
+DEFAULT_LAUNCH_WAIT_SCORE = 0.35
+DEFAULT_LAUNCH_MIN_WINDOWS = 12
 
 
 # Volatility targeting and drawdown-control defaults.

@@ -513,7 +513,12 @@ def ticket_guide_frame(
     query = search.strip().lower()
     if query:
         haystack = frame.astype(str).agg(" ".join, axis=1).str.lower()
-        frame = frame[haystack.str.contains(re.escape(query), na=False)]
+        normalized_query = _normalize_key(query)
+        normalized_haystack = haystack.map(_normalize_key)
+        frame = frame[
+            haystack.str.contains(re.escape(query), na=False)
+            | normalized_haystack.str.contains(re.escape(normalized_query), na=False)
+        ]
         if not frame.empty:
             frame = frame.assign(search_rank=_search_rank(frame, query)).sort_values(
                 ["search_rank", "term"],
@@ -553,9 +558,16 @@ def _normalize_key(value: str) -> str:
 def _search_rank(frame: pd.DataFrame, query: str) -> pd.Series:
     terms = frame["term"].astype(str).str.lower()
     aliases = frame.get("aliases", pd.Series("", index=frame.index)).astype(str).str.lower()
-    exact_term = terms == query
-    exact_alias = aliases.str.split(", ").apply(lambda values: query in values)
-    contains_term = terms.str.contains(re.escape(query), na=False)
+    normalized_query = _normalize_key(query)
+    normalized_terms = terms.map(_normalize_key)
+    exact_term = (terms == query) | (normalized_terms == normalized_query)
+    exact_alias = aliases.str.split(", ").apply(
+        lambda values: query in values or normalized_query in {_normalize_key(value) for value in values}
+    )
+    contains_term = terms.str.contains(re.escape(query), na=False) | normalized_terms.str.contains(
+        re.escape(normalized_query),
+        na=False,
+    )
     return pd.Series(
         [
             0 if exact else 1 if alias else 2 if contains else 3

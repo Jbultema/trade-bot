@@ -6,6 +6,7 @@ import pandas as pd
 
 from trade_bot.dashboard.command_center import _render_command_center
 from trade_bot.dashboard.forward_test import _render_forward_test_and_journal
+from trade_bot.dashboard.launch_lab import _render_launch_lab
 from trade_bot.dashboard.monitoring import _render_monitoring
 from trade_bot.dashboard.news_macro import _render_news_and_macro
 from trade_bot.dashboard.performance import _render_performance
@@ -29,14 +30,23 @@ def _render_dashboard_section(
     experiment_candidates: pd.DataFrame,
     decision_sanity_impacts: pd.DataFrame,
     warehouse_path: str,
+    artifact_dir: str = "",
+    job_log_dir: str = "",
     book_alignment: BookAlignmentRun | None = None,
 ) -> None:
     if section == "Command Center":
         _render_command_center(baseline_run, book_alignment=book_alignment)
     elif section == "Risk & Scenarios":
-        _render_risk_and_scenarios(baseline_run)
+        _render_risk_and_scenarios(
+            baseline_run,
+            run_store_path=warehouse_path,
+            artifact_dir=artifact_dir,
+            job_log_dir=job_log_dir,
+        )
     elif section == "Simulation Lab":
         _render_simulation_lab(bot_config, baseline_run, experiment_scorecards)
+    elif section == "Launch Lab":
+        _render_launch_lab(bot_config, baseline_run, experiment_scorecards)
     elif section == "Monitoring":
         _render_monitoring(warehouse_path)
     elif section == "Research Lab":

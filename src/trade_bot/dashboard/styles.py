@@ -883,6 +883,8 @@ def _install_dashboard_styles() -> None:
             padding: 12px 14px;
             color: var(--tb-card-text);
             min-height: 94px;
+            min-width: 0;
+            overflow: hidden;
             box-shadow: var(--tb-shadow-soft);
         }
         div[data-testid="stMetric"] div[data-testid="stMetricLabel"],
@@ -892,6 +894,13 @@ def _install_dashboard_styles() -> None:
         }
         div[data-testid="stMetric"] div[data-testid="stMetricLabel"] {
             color: var(--tb-card-muted) !important;
+        }
+        div[data-testid="stMetric"] div[data-testid="stMetricValue"] {
+            white-space: normal !important;
+            overflow-wrap: anywhere;
+            word-break: break-word;
+            font-size: clamp(1.35rem, 2.1vw, 2.2rem) !important;
+            line-height: 1.08 !important;
         }
         .brief-grid {
             display: grid;
@@ -980,6 +989,66 @@ def _install_dashboard_styles() -> None:
             line-height: 1.45;
             font-size: 0.93rem;
         }
+        .launch-summary-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 12px;
+            margin: 8px 0 14px;
+        }
+        .launch-guidance-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 12px;
+            margin: 10px 0 16px;
+        }
+        .launch-guidance-card {
+            background: var(--tb-card-bg);
+            border: 1px solid var(--tb-card-border);
+            border-left: 5px solid var(--tb-card-border);
+            border-radius: 8px;
+            padding: 14px 16px;
+            min-height: 126px;
+            min-width: 0;
+            overflow: hidden;
+            overflow-wrap: anywhere;
+        }
+        .launch-guidance-critical {
+            border-left-color: var(--tb-critical-border);
+            background: var(--tb-critical-bg);
+        }
+        .launch-guidance-warning {
+            border-left-color: var(--tb-warning-border);
+            background: var(--tb-warning-bg);
+        }
+        .launch-guidance-success {
+            border-left-color: var(--tb-success-border);
+            background: var(--tb-success-bg);
+        }
+        .launch-guidance-neutral {
+            border-left-color: var(--tb-card-border);
+        }
+        .launch-card-label {
+            margin: 0 0 6px;
+            color: var(--tb-card-muted);
+            font-size: 0.74rem;
+            font-weight: 760;
+            text-transform: uppercase;
+        }
+        .launch-card-answer {
+            margin: 0 0 8px;
+            color: var(--tb-card-text);
+            font-size: clamp(0.98rem, 1.2vw, 1.2rem);
+            line-height: 1.25;
+            font-weight: 780;
+            overflow-wrap: anywhere;
+        }
+        .launch-card-detail {
+            margin: 0;
+            color: var(--tb-card-text);
+            line-height: 1.42;
+            font-size: 0.90rem;
+            overflow-wrap: anywhere;
+        }
         @media (max-width: 1100px) {
             .brand-masthead {
                 align-items: flex-start;
@@ -1010,9 +1079,11 @@ def _install_dashboard_styles() -> None:
             .market-brief-grid,
             .market-brief-readouts,
             .market-brief-delta-grid,
+            .launch-summary-grid,
             .brief-grid {
                 grid-template-columns: repeat(2, minmax(0, 1fr));
             }
+            .launch-guidance-grid,
             .operating-grid {
                 grid-template-columns: 1fr;
             }
@@ -1052,6 +1123,8 @@ def _install_dashboard_styles() -> None:
             .market-brief-readouts,
             .market-brief-delta-grid,
             .workbench-guide-grid,
+            .launch-summary-grid,
+            .launch-guidance-grid,
             .brief-grid {
                 grid-template-columns: 1fr;
             }
