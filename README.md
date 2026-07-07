@@ -183,7 +183,6 @@ Most refresh work can be run from the dashboard left sidebar:
 | **Run Paper Valuation** | `poetry run trade-bot run-paper-valuation` | Updates active champion/challenger/reference paper valuations from the latest snapshot. |
 | **Seed Monitoring Windows** | `poetry run trade-bot seed-monitoring-windows` | Adds top paper windows from the current strategy registry. |
 | **Run ML Diagnostics** | `poetry run trade-bot run-ml-diagnostics --profile standard` | Refreshes ML diagnostic artifacts used by research views. |
-| **Run M6 Lab** | `poetry run trade-bot run-m6-lab` | Runs M6-style external forecast and allocation validation against public prices. |
 
 Not everything belongs behind a single UI click. Large experiment sweeps,
 dependency installs, Git operations, and any live-broker execution remain
@@ -474,34 +473,6 @@ Interpretation rules:
 - `context_only` or `research_gap`: keep it as explanatory or backlog context unless a later ablation proves value.
 
 The family rows are useful for pruning. The paired marginal-test rows are the stronger evidence because they compare a candidate against its parent/control after the normal backtest cost assumptions.
-
-### M6-Style External Validation
-
-M6 Lab is an external benchmark harness for asking whether Trade Bot signals
-rank assets better than naive and public sophisticated baselines. It is modeled
-after the M6 competition structure: each evaluation window scores probabilistic
-return-quintile forecasts and separately scores portfolio weights.
-
-```bash
-poetry run trade-bot run-m6-lab
-```
-
-This writes:
-
-- `reports/m6_lab/m6_forecast_scores.csv`
-- `reports/m6_lab/m6_investment_scores.csv`
-- `reports/m6_lab/m6_model_comparison.csv`
-- `reports/m6_lab/m6_period_diagnostics.csv`
-- `reports/m6_lab/m6_forecasts.csv`
-- `reports/m6_lab/m6_portfolio_weights.csv`
-
-The default `configs/m6.yaml` universe is a Yahoo-compatible M6-style proxy
-set, not a claim of exact official leaderboard replication. Replace the
-`universe` list with the official M6 asset list when an exact-replication file
-is available. The built-in competitors include equal probabilities, momentum,
-inverse-vol momentum, covariance Monte Carlo, shrinkage covariance, a
-Gorelli-style rolling-CV covariance ensemble, and a Trade Bot composite rank
-signal.
 
 ### Default Surface Pruning
 

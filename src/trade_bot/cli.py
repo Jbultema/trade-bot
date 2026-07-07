@@ -12,8 +12,6 @@ from trade_bot.config import configured_tickers, load_config
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
 from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
-    DEFAULT_DATA_ADJUSTED,
-    DEFAULT_DATA_CACHE_DIR,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_FORWARD_SIMULATION_BLOCK_DAYS,
@@ -22,8 +20,6 @@ from trade_bot.DEFAULTS import (
     DEFAULT_FORWARD_SIMULATION_VALIDATION_MIN_TRAIN_DAYS,
     DEFAULT_FORWARD_SIMULATION_VALIDATION_ORIGIN_FREQUENCY,
     DEFAULT_JOURNAL_PATH,
-    DEFAULT_M6_CONFIG_PATH,
-    DEFAULT_M6_OUTPUT_DIR,
     DEFAULT_MACRO_PATH,
     DEFAULT_ML_DIAGNOSTICS_DIR,
     DEFAULT_MONITORING_COHORT_START_DATE,
@@ -53,7 +49,6 @@ from trade_bot.research.forward_simulation import (
     summarize_simulation_validation,
     summarize_strategy_rank_validation,
 )
-from trade_bot.research.m6_lab import M6LabConfig, load_m6_lab_config, run_m6_lab
 from trade_bot.research.signal_evidence import (
     build_signal_family_evidence,
     build_signal_family_marginal_tests,
@@ -794,49 +789,6 @@ def run_entry_date_analysis_cmd(
     console.print(table)
 
 
-@app.command("run-m6-lab")
-def run_m6_lab_cmd(
-    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_M6_CONFIG_PATH,
-    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_M6_OUTPUT_DIR,
-    cache_dir: Annotated[Path, typer.Option("--cache-dir")] = Path(DEFAULT_DATA_CACHE_DIR) / "m6",
-    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
-    adjusted: Annotated[bool, typer.Option("--adjusted/--raw-close")] = DEFAULT_DATA_ADJUSTED,
-) -> None:
-    """Run M6-style external validation against public-price data."""
-
-    lab_config = load_m6_lab_config(config)
-    prices = load_or_fetch_yahoo_prices(
-        list(lab_config.universe),
-        start=_m6_fetch_start(lab_config),
-        end=_m6_fetch_end(lab_config),
-        cache_dir=cache_dir,
-        adjusted=adjusted,
-        refresh=refresh_data,
-    )
-    run = run_m6_lab(prices, config=lab_config)
-    output_dir.mkdir(parents=True, exist_ok=True)
-    forecast_scores_path = output_dir / "m6_forecast_scores.csv"
-    investment_scores_path = output_dir / "m6_investment_scores.csv"
-    model_comparison_path = output_dir / "m6_model_comparison.csv"
-    diagnostics_path = output_dir / "m6_period_diagnostics.csv"
-    forecasts_path = output_dir / "m6_forecasts.csv"
-    weights_path = output_dir / "m6_portfolio_weights.csv"
-
-    run.forecast_scores.to_csv(forecast_scores_path, index=False)
-    run.investment_scores.to_csv(investment_scores_path, index=False)
-    run.model_comparison.to_csv(model_comparison_path, index=False)
-    run.period_diagnostics.to_csv(diagnostics_path, index=False)
-    run.forecasts.to_csv(forecasts_path, index=False)
-    run.portfolio_weights.to_csv(weights_path, index=False)
-
-    console.print(
-        f"Ran M6-style lab '{lab_config.name}' on {len(lab_config.universe):,} configured "
-        f"assets and {len(lab_config.windows):,} windows; wrote artifacts to {output_dir}."
-    )
-    _print_m6_forecast_table(run.forecast_scores)
-    _print_m6_investment_table(run.investment_scores)
-
-
 @app.command("validate-simulation-engine")
 def validate_simulation_engine_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -1260,95 +1212,6 @@ def list_champion_challenger_cmd(
             _format_optional_decimal(row.get("promotion_score")),
             str(row.get("overfit_risk_label", "")),
             str(row.get("validation_tier", "")),
-        )
-    console.print(table)
-
-
-def _m6_fetch_start(config: M6LabConfig) -> str:
-    earliest = min(window.start for window in config.windows)
-    buffer_days = max(config.train_lookback_days * 3, 365)
-    return (earliest - pd.Timedelta(days=buffer_days)).date().isoformat()
-
-
-def _m6_fetch_end(config: M6LabConfig) -> str:
-    latest = max(window.end for window in config.windows)
-    return (latest + pd.Timedelta(days=7)).date().isoformat()
-
-
-def _print_m6_forecast_table(forecast_scores: pd.DataFrame) -> None:
-    if forecast_scores.empty:
-        console.print("No M6 forecast scores were produced.")
-        return
-    summary = (
-        forecast_scores.groupby("model", as_index=False)
-        .agg(
-            periods=("period", "nunique"),
-            mean_rps=("rps", "mean"),
-            worst_rps=("rps", "max"),
-            top_quintile_hit_rate=("top_quintile_hit_rate", "mean"),
-        )
-        .sort_values("mean_rps")
-        .head(12)
-    )
-    table = Table(title="M6-Style Forecast Scores")
-    for column in ["model", "periods", "mean_rps", "worst_rps", "top_quintile_hit_rate"]:
-        table.add_column(column)
-    for _, row in summary.iterrows():
-        table.add_row(
-            str(row["model"]),
-            str(int(row["periods"])),
-            _format_optional_decimal(row["mean_rps"]),
-            _format_optional_decimal(row["worst_rps"]),
-            _format_optional_percent(row["top_quintile_hit_rate"]),
-        )
-    console.print(table)
-
-
-def _print_m6_investment_table(investment_scores: pd.DataFrame) -> None:
-    if investment_scores.empty:
-        console.print("No M6 investment scores were produced.")
-        return
-    rows = []
-    for (model, portfolio), group in investment_scores.groupby(["model", "portfolio"]):
-        returns = pd.to_numeric(group["period_return"], errors="coerce").dropna()
-        volatility = float(returns.std()) if len(returns) > 1 else float("nan")
-        sharpe = (
-            float(returns.mean() / volatility * (12**0.5))
-            if volatility == volatility and volatility > 0.0
-            else float("nan")
-        )
-        rows.append(
-            {
-                "model": model,
-                "portfolio": portfolio,
-                "periods": int(group["period"].nunique()),
-                "cumulative_return": float((1.0 + returns).prod() - 1.0),
-                "annualized_sharpe": sharpe,
-                "hit_rate": float((returns > 0.0).mean()) if not returns.empty else float("nan"),
-            }
-        )
-    summary = pd.DataFrame(rows).sort_values(
-        ["annualized_sharpe", "cumulative_return"],
-        ascending=[False, False],
-    )
-    table = Table(title="M6-Style Investment Scores")
-    for column in [
-        "model",
-        "portfolio",
-        "periods",
-        "cumulative_return",
-        "annualized_sharpe",
-        "hit_rate",
-    ]:
-        table.add_column(column)
-    for _, row in summary.head(12).iterrows():
-        table.add_row(
-            str(row["model"]),
-            str(row["portfolio"]),
-            str(int(row["periods"])),
-            _format_optional_percent(row["cumulative_return"]),
-            _format_optional_decimal(row["annualized_sharpe"]),
-            _format_optional_percent(row["hit_rate"]),
         )
     console.print(table)
 

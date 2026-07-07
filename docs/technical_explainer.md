@@ -399,41 +399,6 @@ why?" while Simulation Lab answers "what future range could this selected
 strategy experience under deterministic, bootstrapped, and current-scenario
 conditioned assumptions?"
 
-## M6-Style External Validation
-
-`research/m6_lab.py` adds an external benchmark harness inspired by the M6
-forecasting competition. It converts public adjusted-price histories into
-rolling competition-style windows, then evaluates two separate questions:
-
-- forecast quality: can a model assign useful probabilities that each asset will
-  land in each realized return quintile?
-- allocation quality: do portfolio weights built from those probabilities
-  produce attractive out-of-sample period returns and risk?
-
-The built-in forecast competitors are intentionally simple and public:
-
-- equal quintile probabilities,
-- trailing-momentum quintile probabilities,
-- inverse-volatility momentum,
-- sample covariance Monte Carlo,
-- Ledoit-Wolf and OAS shrinkage covariance Monte Carlo,
-- a Gorelli-style rolling-CV covariance ensemble,
-- a Trade Bot composite rank score using momentum, volatility, and drawdown
-  resilience.
-
-Run it with:
-
-```bash
-poetry run trade-bot run-m6-lab
-```
-
-The default `configs/m6.yaml` universe is an M6-style proxy universe that works
-with Yahoo-compatible symbols. It is not an official leaderboard replication
-unless the universe and data conventions are replaced with exact M6 inputs. The
-point of the harness is to raise the validation bar: Trade Bot signals should be
-compared against external public baselines such as covariance simulation, not
-only against internal reference portfolios.
-
 ## ML Diagnostics
 
 ML lives under `src/trade_bot/ml` and `research/future_state_ml.py`.
