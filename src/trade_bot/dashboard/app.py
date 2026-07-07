@@ -59,7 +59,9 @@ def _render_freshness_strip(
     run_source: str,
 ) -> None:
     market_date = html.escape(str(getattr(baseline_run.current_state, "market_date", "n/a")))
-    risk_status = html.escape(str(getattr(baseline_run.current_state, "risk_status", "n/a")).upper())
+    risk_status = html.escape(
+        str(getattr(baseline_run.current_state, "risk_status", "n/a")).upper()
+    )
     local_timezone = _safe_timezone("America/Denver")
     if snapshot_manifest is not None:
         local_time = _local_time_label(snapshot_manifest.created_at_utc, local_timezone)
@@ -67,8 +69,8 @@ def _render_freshness_strip(
         freshness_text = f"Latest snapshot: {html.escape(local_time)}"
         detail_text = f"UTC {utc_time}"
     else:
-        local_time = datetime.now(local_timezone).replace(microsecond=0).strftime(
-            "%Y-%m-%d %I:%M %p %Z"
+        local_time = (
+            datetime.now(local_timezone).replace(microsecond=0).strftime("%Y-%m-%d %I:%M %p %Z")
         )
         freshness_text = f"{html.escape(run_source)} loaded live: {html.escape(local_time)}"
         detail_text = "No saved snapshot timestamp for this run"
@@ -409,20 +411,20 @@ st.markdown(
     '<div class="dashboard-workbench-divider" aria-hidden="true"></div>',
     unsafe_allow_html=True,
 )
-    section_slot = st.empty()
-    with section_slot.container(), st.spinner(f"Loading {selected_section}..."):
-        _render_dashboard_section(
-            selected_section,
-            bot_config=bot_config,
-            baseline_run=baseline_run,
-            journal=journal,
-            experiment_scorecards=experiment_scorecards,
-            experiment_regimes=experiment_regimes,
-            experiment_walk_forward=experiment_walk_forward,
-            experiment_candidates=experiment_candidates,
-            decision_sanity_impacts=decision_sanity_impacts,
-            warehouse_path=str(run_store_path),
-            artifact_dir=str(artifact_dir),
-            job_log_dir=str(job_log_dir),
-            book_alignment=execution_book_alignment,
-        )
+section_slot = st.empty()
+with section_slot.container(), st.spinner(f"Loading {selected_section}..."):
+    _render_dashboard_section(
+        selected_section,
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        journal=journal,
+        experiment_scorecards=experiment_scorecards,
+        experiment_regimes=experiment_regimes,
+        experiment_walk_forward=experiment_walk_forward,
+        experiment_candidates=experiment_candidates,
+        decision_sanity_impacts=decision_sanity_impacts,
+        warehouse_path=str(run_store_path),
+        artifact_dir=str(artifact_dir),
+        job_log_dir=str(job_log_dir),
+        book_alignment=execution_book_alignment,
+    )
