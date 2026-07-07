@@ -1,0 +1,147 @@
+name: m6_style_external_validation
+description: >
+  M6-style external validation harness. This default universe is a Yahoo-compatible
+  proxy set of 50 large liquid U.S. stocks and 50 ETFs; replace `universe` with
+  the official M6 asset list when an exact-replication file is available.
+
+settings:
+  train_lookback_days: 200
+  min_train_observations: 60
+  simulations: 2000
+  random_seed: 20260707
+  cv_window_count: 3
+  cv_top_n: 2
+  forecast_models:
+    - equal_probability
+    - momentum_quintile
+    - inverse_vol_momentum
+    - covariance_sample
+    - covariance_ledoit_wolf
+    - covariance_oas
+    - gorelli_cv_covariance
+    - tradebot_composite
+  portfolio_constructors:
+    - equal_weight
+    - forecast_long_short
+    - forecast_long_only_top
+  covariance_estimators:
+    - sample
+    - ledoit_wolf
+    - oas
+    - diagonal
+
+windows:
+  - {label: m6_01_2022_03, start: "2022-03-07", end: "2022-04-01"}
+  - {label: m6_02_2022_04, start: "2022-04-04", end: "2022-04-29"}
+  - {label: m6_03_2022_05, start: "2022-05-02", end: "2022-05-27"}
+  - {label: m6_04_2022_06, start: "2022-05-30", end: "2022-06-24"}
+  - {label: m6_05_2022_07, start: "2022-06-27", end: "2022-07-22"}
+  - {label: m6_06_2022_08, start: "2022-07-25", end: "2022-08-19"}
+  - {label: m6_07_2022_09, start: "2022-08-22", end: "2022-09-16"}
+  - {label: m6_08_2022_10, start: "2022-09-19", end: "2022-10-14"}
+  - {label: m6_09_2022_11, start: "2022-10-17", end: "2022-11-11"}
+  - {label: m6_10_2022_12, start: "2022-11-14", end: "2022-12-09"}
+  - {label: m6_11_2023_01, start: "2022-12-12", end: "2023-01-06"}
+  - {label: m6_12_2023_02, start: "2023-01-09", end: "2023-02-03"}
+
+universe:
+  - AAPL
+  - MSFT
+  - AMZN
+  - GOOGL
+  - META
+  - TSLA
+  - NVDA
+  - JPM
+  - JNJ
+  - V
+  - PG
+  - UNH
+  - HD
+  - MA
+  - BAC
+  - DIS
+  - PYPL
+  - CMCSA
+  - XOM
+  - VZ
+  - KO
+  - PFE
+  - INTC
+  - CSCO
+  - PEP
+  - ABT
+  - ABBV
+  - CRM
+  - TMO
+  - NKE
+  - MRK
+  - WMT
+  - CVX
+  - MCD
+  - COST
+  - DHR
+  - ACN
+  - AVGO
+  - TXN
+  - QCOM
+  - MDT
+  - BMY
+  - LIN
+  - UPS
+  - HON
+  - ORCL
+  - AMGN
+  - LOW
+  - IBM
+  - CAT
+  - SPY
+  - QQQ
+  - IWM
+  - DIA
+  - VTI
+  - EFA
+  - EEM
+  - AGG
+  - TLT
+  - IEF
+  - SHY
+  - LQD
+  - HYG
+  - GLD
+  - SLV
+  - DBC
+  - USO
+  - VNQ
+  - XLF
+  - XLK
+  - XLE
+  - XLI
+  - XLY
+  - XLP
+  - XLV
+  - XLU
+  - XLB
+  - XLRE
+  - XLC
+  - SMH
+  - IBB
+  - ARKK
+  - VEA
+  - VWO
+  - BND
+  - TIP
+  - MUB
+  - EMB
+  - VGK
+  - EWJ
+  - EWZ
+  - FXI
+  - EWT
+  - EWH
+  - EWC
+  - EWA
+  - EWW
+  - IYR
+  - GDX
+  - VXX

@@ -877,6 +877,121 @@ should stay out of direct trade automation until calibration, walk-forward
 behavior, and paper-forward monitoring show that it improves selection, sizing,
 re-entry, or drawdown control.
 
+Rolling-origin simulation validation:
+
+```text
+For each origin date:
+1. keep only strategy returns observed through the origin,
+2. optionally attach the latest scenario-probability rows available no later
+   than that origin,
+3. simulate each configured horizon with starting_account_value = 1 and
+   annual_contribution = 0,
+4. convert simulated terminal wealth into simulated terminal return bands,
+5. compare realized forward return with simulated P10/P50/P90,
+6. compare realized forward max drawdown with simulated severe-drawdown
+   probability,
+7. classify simulated and realized launch stance as wait, ramp_in, or
+   full_launch,
+8. summarize interval coverage, median bias, severe-drawdown Brier score,
+   launch-decision accuracy, and strategy-rank usefulness.
+```
+
+Operational entry point:
+
+```bash
+poetry run trade-bot validate-simulation-engine
+```
+
+The CLI reads the latest stored snapshot, writes single-strategy calibration and
+multi-strategy rank-validation CSVs, and prints compact summary tables. If
+scenario probabilities are supplied for historical validation, they must be
+date-stamped. Undated scenario rows are intentionally ignored because they
+cannot prove they were known at the historical origin date.
+
+Interpretation:
+
+```text
+interval_coverage should be close to interval_high - interval_low
+positive p50_error means the simulator was too bullish
+negative p50_error means the simulator was too bearish
+severe_drawdown_brier scores probability calibration for hard drawdown events
+top_strategy_hit_rate measures whether simulated median ranks picked the
+realized winner among compared strategies
+```
+
+This is a model-validity harness, not a trading rule. A useful result means the
+simulation distribution has been historically calibrated enough for research
+review. It does not prove that future scenario probabilities are calibrated or
+that launch/ramp/wait recommendations should be automated.
+
+## M6-Style External Validation
+
+Source: `src/trade_bot/research/m6_lab.py`
+
+This layer is an external validation harness, not a production allocator. It
+tests whether Trade Bot-style signals add value against public baselines in an
+M6-like cross-sectional competition format.
+
+Realized window return:
+
+```text
+window_return_i = log(price_i,end / price_i,last_before_start)
+```
+
+Realized quintile label:
+
+```text
+actual_quintile_i = ceil(cross_sectional_rank(window_return_i) / N * 5)
+```
+
+Ranked probability score:
+
+```text
+forecast_cdf_i,k = sum_{j <= k} forecast_probability_i,j
+actual_cdf_i,k = sum_{j <= k} actual_one_hot_i,j
+RPS_i = sum_{k=1..4} (forecast_cdf_i,k - actual_cdf_i,k)^2 / 4
+model_RPS = mean_i(RPS_i)
+```
+
+Covariance Monte Carlo forecast:
+
+```text
+daily_log_returns = log(price_t / price_{t-1})
+mu, Sigma = estimator(daily_log_returns over the lookback window)
+simulated_horizon_return_s ~ MVN(mu * horizon_days, Sigma * horizon_days)
+forecast_probability_i,q =
+    share of simulations where asset i lands in realized rank quintile q
+```
+
+The `gorelli_cv_covariance` model evaluates configured covariance estimators on
+recent prior M6-style windows, ranks them by RPS, and averages the top
+estimators for the current window. This mirrors the important public lesson
+from the M6 writeup: select simple covariance-based models by recent
+competition-shaped cross-validation rather than by full-history hindsight.
+
+Portfolio weights from forecasts:
+
+```text
+expected_quintile_i = sum_q forecast_probability_i,q * q
+forecast_long_short_raw_i = expected_quintile_i - mean(expected_quintile)
+forecast_long_short_i = raw_i / sum(abs(raw))
+forecast_long_only_top_i = expected_quintile_i if in top quintile of expected scores else 0
+forecast_long_only_top_i = raw_i / sum(raw)
+```
+
+Investment period return:
+
+```text
+period_return = sum_i weight_i * realized_window_return_i
+```
+
+The default `configs/m6.yaml` universe is a Yahoo-compatible proxy universe.
+Exact M6 leaderboard replication requires the official M6 universe and matching
+data conventions. The intended acceptance standard is comparative: Trade Bot
+signals should be evaluated against equal probabilities, momentum, inverse-vol
+momentum, covariance Monte Carlo, shrinkage covariance, and the rolling-CV
+covariance ensemble.
+
 Promotion decisions:
 
 ```text

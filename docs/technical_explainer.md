@@ -362,6 +362,29 @@ regime mix across paths. This is the strongest planning layer in the app, but it
 is still scenario-conditioned historical simulation rather than a guarantee or
 automatic trading rule.
 
+The same module now includes a rolling-origin validation harness for the
+simulation engine. For historical month-end or quarter-end origins, it trains
+only on returns available through that origin, simulates configured forward
+horizons such as 3 months, 6 months, 1 year, 3 years, and 5 years, then compares
+realized future returns and drawdowns with the simulated P10/P50/P90 bands. The
+summary scores interval coverage, bullish/bearish median bias, severe-drawdown
+probability calibration, hindsight launch stance, and multi-strategy ranking
+usefulness. This is the calibration layer the forward simulator needs before it
+can influence sizing or launch decisions.
+
+The same validation harness is available from the CLI:
+
+```bash
+poetry run trade-bot validate-simulation-engine
+```
+
+By default it uses the latest stored snapshot strategy returns and writes CSV
+evidence under `reports/simulation_validation/`. A `--scenario-history` file may
+be supplied, but it must include a date column such as `origin_date`,
+`as_of_date`, `date`, `created_at_utc`, or `created_at`; undated scenario rows
+are ignored to avoid contaminating old origins with current scenario
+probabilities.
+
 Simulation Lab can also run the same bootstrap and regime-conditioned path
 machinery for configured reference portfolios such as Hold SPY and Hold QQQ.
 Those references are not a separate benchmark shortcut; they use the same
@@ -375,6 +398,41 @@ empirical evidence surfaces. Research Lab answers "which strategies worked and
 why?" while Simulation Lab answers "what future range could this selected
 strategy experience under deterministic, bootstrapped, and current-scenario
 conditioned assumptions?"
+
+## M6-Style External Validation
+
+`research/m6_lab.py` adds an external benchmark harness inspired by the M6
+forecasting competition. It converts public adjusted-price histories into
+rolling competition-style windows, then evaluates two separate questions:
+
+- forecast quality: can a model assign useful probabilities that each asset will
+  land in each realized return quintile?
+- allocation quality: do portfolio weights built from those probabilities
+  produce attractive out-of-sample period returns and risk?
+
+The built-in forecast competitors are intentionally simple and public:
+
+- equal quintile probabilities,
+- trailing-momentum quintile probabilities,
+- inverse-volatility momentum,
+- sample covariance Monte Carlo,
+- Ledoit-Wolf and OAS shrinkage covariance Monte Carlo,
+- a Gorelli-style rolling-CV covariance ensemble,
+- a Trade Bot composite rank score using momentum, volatility, and drawdown
+  resilience.
+
+Run it with:
+
+```bash
+poetry run trade-bot run-m6-lab
+```
+
+The default `configs/m6.yaml` universe is an M6-style proxy universe that works
+with Yahoo-compatible symbols. It is not an official leaderboard replication
+unless the universe and data conventions are replaced with exact M6 inputs. The
+point of the harness is to raise the validation bar: Trade Bot signals should be
+compared against external public baselines such as covariance simulation, not
+only against internal reference portfolios.
 
 ## ML Diagnostics
 

@@ -3,6 +3,7 @@ from __future__ import annotations
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
+import pandas as pd
 import typer
 from rich.console import Console
 from rich.table import Table
@@ -11,9 +12,18 @@ from trade_bot.config import configured_tickers, load_config
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
 from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
+    DEFAULT_DATA_ADJUSTED,
+    DEFAULT_DATA_CACHE_DIR,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_FORWARD_SIMULATION_BLOCK_DAYS,
+    DEFAULT_FORWARD_SIMULATION_PATHS,
+    DEFAULT_FORWARD_SIMULATION_VALIDATION_HORIZONS,
+    DEFAULT_FORWARD_SIMULATION_VALIDATION_MIN_TRAIN_DAYS,
+    DEFAULT_FORWARD_SIMULATION_VALIDATION_ORIGIN_FREQUENCY,
     DEFAULT_JOURNAL_PATH,
+    DEFAULT_M6_CONFIG_PATH,
+    DEFAULT_M6_OUTPUT_DIR,
     DEFAULT_MACRO_PATH,
     DEFAULT_ML_DIAGNOSTICS_DIR,
     DEFAULT_MONITORING_COHORT_START_DATE,
@@ -25,6 +35,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RUN_STORE_DB_PATH,
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
     DEFAULT_SIGNAL_EVIDENCE_DIR,
+    DEFAULT_SIMULATION_REFERENCE_STRATEGIES,
 )
 from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
@@ -35,6 +46,14 @@ from trade_bot.research.experiment_monitor import (
     load_experiment_scorecards,
 )
 from trade_bot.research.experiments import run_experiment_iteration
+from trade_bot.research.forward_simulation import (
+    ForwardSimulationValidationConfig,
+    rolling_origin_simulation_backtest,
+    rolling_origin_strategy_rank_validation,
+    summarize_simulation_validation,
+    summarize_strategy_rank_validation,
+)
+from trade_bot.research.m6_lab import M6LabConfig, load_m6_lab_config, run_m6_lab
 from trade_bot.research.signal_evidence import (
     build_signal_family_evidence,
     build_signal_family_marginal_tests,
@@ -45,6 +64,9 @@ from trade_bot.storage.warehouse import TradingWarehouse, WarehouseMigrationResu
 
 app = typer.Typer(no_args_is_help=True)
 console = Console()
+DEFAULT_SIMULATION_VALIDATION_REFERENCE_STRATEGIES = ",".join(
+    name for name, _label in DEFAULT_SIMULATION_REFERENCE_STRATEGIES
+)
 
 
 @app.command()
@@ -432,9 +454,7 @@ def run_daily_update_cmd(
             market_date=manifest.market_date,
         )
         if migrate_warehouse:
-            migration_results.extend(
-                warehouse.migrate_experiment_outputs(effective_experiment_dir)
-            )
+            migration_results.extend(warehouse.migrate_experiment_outputs(effective_experiment_dir))
             migration_results.extend(warehouse.migrate_journal_sqlite(journal))
         if paper_valuation:
             valuation_rows = warehouse.save_daily_valuations_from_snapshot(
@@ -774,6 +794,163 @@ def run_entry_date_analysis_cmd(
     console.print(table)
 
 
+@app.command("run-m6-lab")
+def run_m6_lab_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_M6_CONFIG_PATH,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_M6_OUTPUT_DIR,
+    cache_dir: Annotated[Path, typer.Option("--cache-dir")] = Path(DEFAULT_DATA_CACHE_DIR) / "m6",
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+    adjusted: Annotated[bool, typer.Option("--adjusted/--raw-close")] = DEFAULT_DATA_ADJUSTED,
+) -> None:
+    """Run M6-style external validation against public-price data."""
+
+    lab_config = load_m6_lab_config(config)
+    prices = load_or_fetch_yahoo_prices(
+        list(lab_config.universe),
+        start=_m6_fetch_start(lab_config),
+        end=_m6_fetch_end(lab_config),
+        cache_dir=cache_dir,
+        adjusted=adjusted,
+        refresh=refresh_data,
+    )
+    run = run_m6_lab(prices, config=lab_config)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    forecast_scores_path = output_dir / "m6_forecast_scores.csv"
+    investment_scores_path = output_dir / "m6_investment_scores.csv"
+    model_comparison_path = output_dir / "m6_model_comparison.csv"
+    diagnostics_path = output_dir / "m6_period_diagnostics.csv"
+    forecasts_path = output_dir / "m6_forecasts.csv"
+    weights_path = output_dir / "m6_portfolio_weights.csv"
+
+    run.forecast_scores.to_csv(forecast_scores_path, index=False)
+    run.investment_scores.to_csv(investment_scores_path, index=False)
+    run.model_comparison.to_csv(model_comparison_path, index=False)
+    run.period_diagnostics.to_csv(diagnostics_path, index=False)
+    run.forecasts.to_csv(forecasts_path, index=False)
+    run.portfolio_weights.to_csv(weights_path, index=False)
+
+    console.print(
+        f"Ran M6-style lab '{lab_config.name}' on {len(lab_config.universe):,} configured "
+        f"assets and {len(lab_config.windows):,} windows; wrote artifacts to {output_dir}."
+    )
+    _print_m6_forecast_table(run.forecast_scores)
+    _print_m6_investment_table(run.investment_scores)
+
+
+@app.command("validate-simulation-engine")
+def validate_simulation_engine_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = Path(
+        "reports/simulation_validation"
+    ),
+    strategy: Annotated[str, typer.Option("--strategy")] = "drawdown_managed_dual_momentum",
+    reference_strategies: Annotated[
+        str,
+        typer.Option(
+            "--reference-strategies",
+            help="Comma-separated strategies to include in rank validation.",
+        ),
+    ] = DEFAULT_SIMULATION_VALIDATION_REFERENCE_STRATEGIES,
+    horizons: Annotated[
+        str,
+        typer.Option(
+            "--horizons",
+            help="Comma-separated default labels or custom label=trading_days entries.",
+        ),
+    ] = ",".join(DEFAULT_FORWARD_SIMULATION_VALIDATION_HORIZONS),
+    origin_frequency: Annotated[
+        str,
+        typer.Option("--origin-frequency"),
+    ] = DEFAULT_FORWARD_SIMULATION_VALIDATION_ORIGIN_FREQUENCY,
+    min_train_days: Annotated[
+        int,
+        typer.Option("--min-train-days"),
+    ] = DEFAULT_FORWARD_SIMULATION_VALIDATION_MIN_TRAIN_DAYS,
+    paths: Annotated[int, typer.Option("--paths")] = DEFAULT_FORWARD_SIMULATION_PATHS,
+    block_days: Annotated[
+        int, typer.Option("--block-days")
+    ] = DEFAULT_FORWARD_SIMULATION_BLOCK_DAYS,
+    scenario_history: Annotated[
+        Path | None,
+        typer.Option(
+            "--scenario-history",
+            help="Optional date-stamped CSV or parquet scenario probabilities.",
+        ),
+    ] = None,
+) -> None:
+    """Validate forward simulation calibration against historical realized paths."""
+
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+    if snapshot_payload is None:
+        console.print("No completed snapshots found. Build a snapshot before validation.")
+        raise typer.Exit(code=1)
+
+    baseline_run, manifest = snapshot_payload
+    selected_names = _dedupe_names([strategy, *_parse_csv_option(reference_strategies)])
+    returns_by_strategy = _strategy_returns_from_results(baseline_run.results, selected_names)
+    if strategy not in returns_by_strategy:
+        available = ", ".join(sorted(baseline_run.results))
+        console.print(f"Strategy {strategy!r} was not found in snapshot {manifest.run_id}.")
+        console.print(f"Available strategies: {available}")
+        raise typer.Exit(code=1)
+
+    scenario_history_frame = _load_scenario_history(scenario_history)
+    if scenario_history_frame is None:
+        console.print(
+            "No date-stamped scenario history supplied; validation uses the empirical "
+            "return-regime library and fallback scenario probabilities."
+        )
+    else:
+        console.print(
+            f"Loaded {len(scenario_history_frame):,} scenario-history rows from "
+            f"{scenario_history}."
+        )
+
+    config = ForwardSimulationValidationConfig(
+        origin_frequency=origin_frequency,
+        horizons=_parse_validation_horizons(horizons),
+        min_train_days=min_train_days,
+        paths=paths,
+        block_days=block_days,
+    )
+    output_dir.mkdir(parents=True, exist_ok=True)
+
+    validation = rolling_origin_simulation_backtest(
+        returns_by_strategy[strategy],
+        scenario_history=scenario_history_frame,
+        config=config,
+    )
+    validation_summary = summarize_simulation_validation(validation)
+    validation_path = output_dir / f"{_slug_identifier(strategy)}_simulation_validation.csv"
+    validation.to_csv(validation_path, index=False)
+
+    console.print(
+        f"Validated {strategy} from snapshot {manifest.run_id} "
+        f"({manifest.market_date}); wrote {validation_path}."
+    )
+    _print_simulation_validation_summary(strategy, validation_summary)
+
+    if len(returns_by_strategy) < 2:
+        console.print(
+            "Rank validation skipped because fewer than two selected strategies had returns."
+        )
+        return
+
+    rank_validation = rolling_origin_strategy_rank_validation(
+        returns_by_strategy,
+        scenario_history=scenario_history_frame,
+        config=config,
+    )
+    rank_summary = summarize_strategy_rank_validation(rank_validation)
+    rank_path = output_dir / "strategy_rank_validation.csv"
+    rank_validation.to_csv(rank_path, index=False)
+    console.print(f"Wrote strategy rank validation to {rank_path}.")
+    _print_strategy_rank_validation_summary(rank_summary)
+
+
 @app.command("migrate-warehouse")
 def migrate_warehouse_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -1084,6 +1261,231 @@ def list_champion_challenger_cmd(
             str(row.get("overfit_risk_label", "")),
             str(row.get("validation_tier", "")),
         )
+    console.print(table)
+
+
+def _m6_fetch_start(config: M6LabConfig) -> str:
+    earliest = min(window.start for window in config.windows)
+    buffer_days = max(config.train_lookback_days * 3, 365)
+    return (earliest - pd.Timedelta(days=buffer_days)).date().isoformat()
+
+
+def _m6_fetch_end(config: M6LabConfig) -> str:
+    latest = max(window.end for window in config.windows)
+    return (latest + pd.Timedelta(days=7)).date().isoformat()
+
+
+def _print_m6_forecast_table(forecast_scores: pd.DataFrame) -> None:
+    if forecast_scores.empty:
+        console.print("No M6 forecast scores were produced.")
+        return
+    summary = (
+        forecast_scores.groupby("model", as_index=False)
+        .agg(
+            periods=("period", "nunique"),
+            mean_rps=("rps", "mean"),
+            worst_rps=("rps", "max"),
+            top_quintile_hit_rate=("top_quintile_hit_rate", "mean"),
+        )
+        .sort_values("mean_rps")
+        .head(12)
+    )
+    table = Table(title="M6-Style Forecast Scores")
+    for column in ["model", "periods", "mean_rps", "worst_rps", "top_quintile_hit_rate"]:
+        table.add_column(column)
+    for _, row in summary.iterrows():
+        table.add_row(
+            str(row["model"]),
+            str(int(row["periods"])),
+            _format_optional_decimal(row["mean_rps"]),
+            _format_optional_decimal(row["worst_rps"]),
+            _format_optional_percent(row["top_quintile_hit_rate"]),
+        )
+    console.print(table)
+
+
+def _print_m6_investment_table(investment_scores: pd.DataFrame) -> None:
+    if investment_scores.empty:
+        console.print("No M6 investment scores were produced.")
+        return
+    rows = []
+    for (model, portfolio), group in investment_scores.groupby(["model", "portfolio"]):
+        returns = pd.to_numeric(group["period_return"], errors="coerce").dropna()
+        volatility = float(returns.std()) if len(returns) > 1 else float("nan")
+        sharpe = (
+            float(returns.mean() / volatility * (12**0.5))
+            if volatility == volatility and volatility > 0.0
+            else float("nan")
+        )
+        rows.append(
+            {
+                "model": model,
+                "portfolio": portfolio,
+                "periods": int(group["period"].nunique()),
+                "cumulative_return": float((1.0 + returns).prod() - 1.0),
+                "annualized_sharpe": sharpe,
+                "hit_rate": float((returns > 0.0).mean()) if not returns.empty else float("nan"),
+            }
+        )
+    summary = pd.DataFrame(rows).sort_values(
+        ["annualized_sharpe", "cumulative_return"],
+        ascending=[False, False],
+    )
+    table = Table(title="M6-Style Investment Scores")
+    for column in [
+        "model",
+        "portfolio",
+        "periods",
+        "cumulative_return",
+        "annualized_sharpe",
+        "hit_rate",
+    ]:
+        table.add_column(column)
+    for _, row in summary.head(12).iterrows():
+        table.add_row(
+            str(row["model"]),
+            str(row["portfolio"]),
+            str(int(row["periods"])),
+            _format_optional_percent(row["cumulative_return"]),
+            _format_optional_decimal(row["annualized_sharpe"]),
+            _format_optional_percent(row["hit_rate"]),
+        )
+    console.print(table)
+
+
+def _parse_csv_option(value: str) -> list[str]:
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
+def _dedupe_names(names: list[str]) -> list[str]:
+    output: list[str] = []
+    seen: set[str] = set()
+    for name in names:
+        if name in seen:
+            continue
+        seen.add(name)
+        output.append(name)
+    return output
+
+
+def _parse_validation_horizons(value: str) -> tuple[tuple[str, int], ...]:
+    requested = _parse_csv_option(value)
+    if not requested:
+        msg = "At least one horizon is required."
+        raise typer.BadParameter(msg)
+    horizons: list[tuple[str, int]] = []
+    defaults = DEFAULT_FORWARD_SIMULATION_VALIDATION_HORIZONS
+    for item in requested:
+        if "=" in item:
+            label, raw_days = item.split("=", 1)
+            label = label.strip()
+            try:
+                days = int(raw_days.strip())
+            except ValueError as error:
+                msg = f"Invalid horizon day count: {item!r}"
+                raise typer.BadParameter(msg) from error
+        else:
+            label = item.strip()
+            if label not in defaults:
+                available = ", ".join(defaults)
+                msg = f"Unknown horizon {label!r}; use one of {available} or label=days."
+                raise typer.BadParameter(msg)
+            days = int(defaults[label])
+        if not label or days <= 0:
+            msg = f"Invalid horizon: {item!r}"
+            raise typer.BadParameter(msg)
+        horizons.append((label, days))
+    return tuple(horizons)
+
+
+def _strategy_returns_from_results(
+    results: dict[str, Any],
+    strategy_names: list[str],
+) -> dict[str, pd.Series]:
+    strategy_returns: dict[str, pd.Series] = {}
+    for strategy_name in strategy_names:
+        result = results.get(strategy_name)
+        returns = getattr(result, "returns", None)
+        if returns is None:
+            continue
+        series = pd.to_numeric(pd.Series(returns), errors="coerce").dropna()
+        if series.empty:
+            continue
+        strategy_returns[strategy_name] = series.astype(float)
+    return strategy_returns
+
+
+def _load_scenario_history(path: Path | None) -> pd.DataFrame | None:
+    if path is None:
+        return None
+    if not path.exists():
+        msg = f"Scenario history file does not exist: {path}"
+        raise typer.BadParameter(msg)
+    if path.suffix.lower() in {".parquet", ".pq"}:
+        frame = pd.read_parquet(path)
+    else:
+        frame = pd.read_csv(path)
+    if frame.empty:
+        return None
+    if not _has_scenario_history_date_column(frame):
+        console.print(
+            "Scenario history has no date column; ignoring it to avoid historical lookahead."
+        )
+        return None
+    return frame
+
+
+def _has_scenario_history_date_column(frame: pd.DataFrame) -> bool:
+    return any(
+        column in frame
+        for column in ("origin_date", "as_of_date", "date", "created_at_utc", "created_at")
+    )
+
+
+def _slug_identifier(value: str) -> str:
+    slug = "".join(character if character.isalnum() else "_" for character in value.lower())
+    return "_".join(part for part in slug.split("_") if part) or "strategy"
+
+
+def _print_simulation_validation_summary(strategy: str, summary: dict[str, object]) -> None:
+    table = Table(title=f"Simulation Validation: {strategy}")
+    table.add_column("metric")
+    table.add_column("value")
+    rows = [
+        ("rows", summary.get("rows")),
+        ("origins", summary.get("origins")),
+        ("horizons", summary.get("horizons")),
+        ("interval coverage", _format_optional_percent(summary.get("interval_coverage"))),
+        ("target coverage", _format_optional_percent(summary.get("target_coverage"))),
+        ("coverage error", _format_optional_percent(summary.get("coverage_error"))),
+        ("mean p50 error", _format_optional_percent(summary.get("median_error_mean"))),
+        ("median abs error", _format_optional_percent(summary.get("median_abs_error"))),
+        ("severe drawdown brier", _format_optional_decimal(summary.get("severe_drawdown_brier"))),
+        (
+            "launch decision accuracy",
+            _format_optional_percent(summary.get("launch_decision_accuracy")),
+        ),
+        ("validity read", summary.get("validity_read")),
+    ]
+    for metric, value in rows:
+        table.add_row(metric, str(value))
+    console.print(table)
+
+
+def _print_strategy_rank_validation_summary(summary: dict[str, object]) -> None:
+    table = Table(title="Strategy Rank Validation")
+    table.add_column("metric")
+    table.add_column("value")
+    rows = [
+        ("rows", summary.get("rows")),
+        ("origin horizons", summary.get("origin_horizons")),
+        ("top strategy hit rate", _format_optional_percent(summary.get("top_strategy_hit_rate"))),
+        ("mean rank correlation", _format_optional_decimal(summary.get("mean_rank_correlation"))),
+        ("mean abs rank error", _format_optional_decimal(summary.get("mean_abs_rank_error"))),
+        ("ranking read", summary.get("ranking_read")),
+    ]
+    for metric, value in rows:
+        table.add_row(metric, str(value))
     console.print(table)
 
 

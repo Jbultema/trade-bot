@@ -6,10 +6,15 @@ import pytest
 from trade_bot.research.forward_simulation import (
     REGIME_BUCKETS,
     ForwardSimulationConfig,
+    ForwardSimulationValidationConfig,
     build_regime_return_library,
+    rolling_origin_simulation_backtest,
+    rolling_origin_strategy_rank_validation,
     scenario_bucket_probabilities,
     simulate_regime_conditioned_paths,
     summarize_forward_simulation,
+    summarize_simulation_validation,
+    summarize_strategy_rank_validation,
 )
 
 
@@ -35,11 +40,7 @@ def test_scenario_bucket_probabilities_normalize_current_rollup() -> None:
 
 def test_regime_return_library_labels_known_buckets() -> None:
     returns = pd.Series(
-        [0.002] * 70
-        + [-0.025] * 15
-        + [0.004] * 70
-        + [-0.012, 0.018] * 25
-        + [0.001] * 60
+        [0.002] * 70 + [-0.025] * 15 + [0.004] * 70 + [-0.012, 0.018] * 25 + [0.001] * 60
     )
     config = ForwardSimulationConfig(min_regime_observations=1)
 
@@ -52,11 +53,7 @@ def test_regime_return_library_labels_known_buckets() -> None:
 
 def test_simulate_regime_conditioned_paths_returns_distribution() -> None:
     returns = pd.Series(
-        [0.003] * 80
-        + [-0.02] * 20
-        + [0.004] * 80
-        + [-0.01, 0.02] * 30
-        + [0.001] * 60
+        [0.003] * 80 + [-0.02] * 20 + [0.004] * 80 + [-0.01, 0.02] * 30 + [0.001] * 60
     )
     scenario_outlook = pd.DataFrame(
         [
@@ -119,3 +116,126 @@ def test_forward_simulation_empty_inputs_return_empty_summary() -> None:
     assert paths.empty
     assert summary["paths"] == 0
     assert summary["terminal_wealth_p50"] is None
+
+
+def test_rolling_origin_simulation_backtest_scores_calibration() -> None:
+    index = pd.bdate_range("2024-01-02", periods=220)
+    returns = pd.Series(
+        [0.002] * 70 + [-0.010] * 20 + [0.003] * 70 + [0.0005] * 60,
+        index=index,
+    )
+    scenario_history = pd.DataFrame(
+        [
+            {
+                "origin_date": index[80],
+                "risk_bucket": "risk_on",
+                "probability": 0.70,
+                "horizon": "1m",
+            },
+            {
+                "origin_date": index[80],
+                "risk_bucket": "transition",
+                "probability": 0.30,
+                "horizon": "1m",
+            },
+        ]
+    )
+    config = ForwardSimulationValidationConfig(
+        origin_frequency="monthly",
+        horizons=(("1m", 20), ("3m", 60)),
+        min_train_days=60,
+        paths=30,
+        block_days=5,
+        random_seed=17,
+        min_regime_observations=1,
+    )
+
+    validation = rolling_origin_simulation_backtest(
+        returns,
+        scenario_history=scenario_history,
+        config=config,
+    )
+    summary = summarize_simulation_validation(validation)
+
+    assert not validation.empty
+    assert {"1m", "3m"}.issuperset(set(validation["horizon"]))
+    assert validation["train_days"].min() >= 60
+    assert validation["simulated_p10_return"].notna().all()
+    assert validation["simulated_p50_return"].notna().all()
+    assert validation["simulated_p90_return"].notna().all()
+    assert validation["realized_in_interval"].isin([True, False]).all()
+    assert set(validation["simulated_launch_decision"]).issubset({"wait", "ramp_in", "full_launch"})
+    assert summary["rows"] == len(validation)
+    assert summary["target_coverage"] == pytest.approx(0.80)
+    assert summary["validity_read"] in {
+        "limited_sample",
+        "interval_too_narrow",
+        "interval_too_wide",
+        "too_bullish",
+        "too_bearish",
+        "drawdown_miscalibrated",
+        "calibrated_enough_for_research",
+    }
+
+
+def test_rolling_origin_simulation_backtest_ignores_undated_scenario_history() -> None:
+    index = pd.bdate_range("2024-01-02", periods=160)
+    returns = pd.Series([0.001] * 60 + [-0.005] * 20 + [0.002] * 80, index=index)
+    undated_scenario_history = pd.DataFrame(
+        [
+            {"risk_bucket": "risk_off", "probability": 1.0, "horizon": "1m"},
+            {"risk_bucket": "risk_on", "probability": 0.0, "horizon": "1m"},
+        ]
+    )
+    config = ForwardSimulationValidationConfig(
+        origin_frequency="monthly",
+        horizons=(("1m", 20),),
+        min_train_days=50,
+        paths=20,
+        block_days=5,
+        random_seed=19,
+        min_regime_observations=1,
+    )
+
+    without_history = rolling_origin_simulation_backtest(returns, config=config)
+    with_undated_history = rolling_origin_simulation_backtest(
+        returns,
+        scenario_history=undated_scenario_history,
+        config=config,
+    )
+
+    pd.testing.assert_frame_equal(with_undated_history, without_history)
+
+
+def test_rolling_origin_strategy_rank_validation_scores_predicted_rankings() -> None:
+    index = pd.bdate_range("2024-01-02", periods=180)
+    strategy_returns = {
+        "steady_winner": pd.Series([0.002] * 180, index=index),
+        "steady_lagger": pd.Series([0.0002] * 180, index=index),
+    }
+    config = ForwardSimulationValidationConfig(
+        origin_frequency="monthly",
+        horizons=(("1m", 20),),
+        min_train_days=50,
+        paths=20,
+        block_days=5,
+        random_seed=23,
+        min_regime_observations=1,
+    )
+
+    rank_validation = rolling_origin_strategy_rank_validation(
+        strategy_returns,
+        config=config,
+    )
+    summary = summarize_strategy_rank_validation(rank_validation)
+
+    assert not rank_validation.empty
+    assert set(rank_validation["strategy"]) == {"steady_winner", "steady_lagger"}
+    top_rows = rank_validation[rank_validation["simulated_rank"] == 1]
+    assert set(top_rows["predicted_top_strategy"]) == {"steady_winner"}
+    assert summary["top_strategy_hit_rate"] == pytest.approx(1.0)
+    assert summary["ranking_read"] in {
+        "limited_sample",
+        "ranking_signal_useful",
+        "ranking_signal_mixed",
+    }
