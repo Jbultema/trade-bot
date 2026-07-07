@@ -111,6 +111,7 @@ The main components are:
 | Risk engine | Applies scenario-aware sizing, expected shortfall, stress loss, factor exposure, concentration checks, and defensive floors. |
 | Research Lab | Compares experiments, strategy families, outcome frontier, validation, factor attribution, and candidate details. |
 | Simulation Lab | Projects selected strategies through deterministic, bootstrap, and regime-conditioned forward paths. |
+| Launch Lab | Tests whether new or scale-up capital should enter a selected strategy now, gradually, or wait. |
 | Monitoring | Tracks champion/challenger/reference windows from chosen start dates using paper valuations. |
 | Forward Test | Records locked recommendations, paper/live executions, current book alignment, and allocation history. |
 
@@ -332,11 +333,95 @@ The Simulation Lab also includes interpretability. It should help answer:
 - How does the strategy compare to holding SPY or QQQ under the same contribution
   assumptions?
 
+This matters most for the project's 15-year accumulation objective. The simple
+Outcome Frontier view answers whether a candidate has enough historical return
+and drawdown discipline to deserve attention. Simulation Lab then asks a harder
+question: if future paths arrive in different sequences of risk-on, risk-off,
+transition, and relief regimes, what range of account values and drawdowns could
+the user experience while contributing monthly? That distinction is important
+because a strategy can have an attractive deterministic 15-year wealth estimate
+and still be unpleasant or unsuitable if simulated paths show deep interim
+losses, poor downside percentile outcomes, or too much dependence on one regime.
+
+The simulation approach should be read as a hierarchy rather than one answer.
+Deterministic accumulation is the benchmark math. Historical bootstrap adds
+sequence risk by reshuffling realized return blocks. Regime-conditioned paths
+add current-state awareness by sampling from historical regime-labeled behavior
+according to today's scenario map. If all three views tell a similar story, the
+planning read is stronger. If deterministic wealth looks excellent but
+regime-conditioned paths deteriorate, the strategy may be too dependent on a
+favorable historical mix. If the selected strategy beats SPY or QQQ in median
+paths but has worse left-tail paths, the user is accepting more dispersion for
+potential wealth.
+
 The simulation layer is planning support. It does not decide trades by itself.
 It helps users understand whether a candidate's historical edge is plausible
 under future-state assumptions and whether the range of outcomes is acceptable.
 
-## 8. Monitoring, Tickets, And Making It Real
+## 8. Launch Lab And Entry Timing
+
+Launch Lab answers a different question from both Research Lab and Simulation
+Lab. Research Lab asks whether a strategy has worked historically. Simulation
+Lab asks what long-horizon future ranges could look like. Launch Lab asks
+whether fresh paper or live capital should begin following the strategy now,
+phase in over several weeks, or stay on deck.
+
+This distinction exists because adoption timing is a real source of risk. A
+strategy can be attractive over 15 years and still have poor short-term entry
+windows. Launch Lab therefore tests historical start dates for the selected
+strategy using multiple horizons, such as 3 months, 6 months, 1 year, 3 years,
+and 5 years. For each start date it compares launch protocols, including an
+immediate launch and staged ramps such as 25% now with the remainder phased in
+over 4, 8, or 12 weeks. It then evaluates positive-start rate, benchmark beat
+rate, bad-start rate, forward return, excess return, max drawdown, and
+first-month drawdown.
+
+The key interpretation is horizon-dependent:
+
+- Short windows, especially 3 months and 6 months, are entry-timing stress
+  tests. They ask whether starting now has historically been vulnerable to quick
+  regret, early drawdown, or underperformance.
+- Longer windows, such as 1 year, 3 years, and 5 years, ask whether the strategy
+  has had enough time for its dynamic sizing and compounding edge to work after
+  a wide variety of historical entry dates.
+- If short windows say "wait" or "starter sleeve" but longer windows say
+  "phase in," the message is not contradictory. It means the strategy may be
+  worth owning for the planning horizon, but new capital should not necessarily
+  enter at full size in one trade.
+
+This is especially relevant for dynamically sized strategies. Once a sleeve is
+running, the strategy can de-risk or re-risk as its rules change. That makes
+entry timing less important than it would be for static buy-and-hold, but it
+does not make launch timing irrelevant. New capital still has a first few weeks
+or months of exposure, and a full-size launch just before a drawdown can create
+behavioral and financial friction even if the strategy later responds correctly.
+Launch Lab is therefore a scale-up control, not a daily rebalance engine.
+
+For the 15-year retirement horizon, the practical use is to separate adoption
+confidence from tranche timing. One-year, three-year, and five-year launch
+evidence should carry more weight when deciding whether a strategy belongs in a
+long-term operating set. Three-month and six-month launch evidence should govern
+how aggressively to put new dollars to work. A strong long-horizon strategy with
+fragile near-term entry evidence may deserve a small starter sleeve or staged
+entry rather than a full allocation. A strategy that looks weak across both
+short and long horizons should stay out of the operating set.
+
+Launch Lab also exposes whether ramp protocols actually matter. Over a 3-month
+or 6-month horizon, a 4-week or 8-week ramp can materially change the first
+drawdown experience. Over 3-year or 5-year horizons, ramp choice should matter
+less because the ongoing strategy behavior dominates the initial entry
+schedule. When all ramp protocols look identical, the user should not over-read
+the ramp choice; when they separate meaningfully, staging is adding measurable
+entry-risk control.
+
+Like Simulation Lab, Launch Lab is not a forecast. Long windows overlap heavily,
+so a large number of 3-year or 5-year historical start tests should not be read
+as independent trials. The useful read is comparative: does this strategy have
+poor entry behavior across many historical starts, does staging improve that
+behavior, and does the answer change when the horizon is aligned to the user's
+actual investment problem?
+
+## 9. Monitoring, Tickets, And Making It Real
 
 A common failure mode in research systems is stopping at the backtest. Trade Bot
 adds the operational plumbing needed to make the research observable.
@@ -367,6 +452,13 @@ material rebalance? This prevents the top-line dashboard from repeatedly saying
 "reduce risk" after the user has already logged paper trades that implemented
 the prior recommendation.
 
+The boundary between Launch Lab and Forward Test is important. Launch Lab is for
+new or scale-up capital before it becomes an actively monitored sleeve. Once a
+sleeve is running, Forward Test and Book Alignment become the operating source
+of truth. At that point the question is no longer "should I launch this
+strategy?" but "is my current paper or live book aligned with the latest target,
+and do I need a ticket?"
+
 The system also includes a taxable-account framework. Taxable modeling is more
 complex than IRA-style trading because turnover can create realized gains,
 short-term tax drag, wash-sale concerns, and tax-lot consequences. Trade Bot's
@@ -379,7 +471,7 @@ paper monitoring, compared against challengers and references, and only then
 considered for small real-money testing. Scaling should depend on forward
 evidence, not only backtest confidence.
 
-## 9. Dashboard Design And User Workflow
+## 10. Dashboard Design And User Workflow
 
 The dashboard is organized to answer questions in the order a human needs them.
 The top of the page is not a research dump. It starts with the action headline,
@@ -394,6 +486,8 @@ The Insight Workbench then branches into focused sections:
 - **News & Macro**: current context, driver rotation, and latest inputs.
 - **Research Lab**: experiment comparison and strategy deep dives.
 - **Simulation Lab**: forward path modeling and scenario-conditioned outcomes.
+- **Launch Lab**: entry-gate evidence for new or scale-up capital, including
+  staged launch protocols and horizon sensitivity.
 - **Performance**: historical performance and custom windows.
 - **Monitoring**: champion/challenger forward evidence.
 - **Forward Test**: tickets, execution logs, book alignment, and allocation
@@ -412,7 +506,7 @@ valuation, monitoring-window seeding, and ML diagnostics. Long experiment
 sweeps, dependency changes, Git operations, and any live-broker activity remain
 outside the one-click path because they require explicit human intent and review.
 
-## 10. Governance, Limitations, And Appropriate Use
+## 11. Governance, Limitations, And Appropriate Use
 
 Trade Bot is an evidence system, not an oracle. It can reduce ambiguity, expose
 tradeoffs, and enforce a paper-first process, but it cannot remove uncertainty.
@@ -438,10 +532,12 @@ The most appropriate use is iterative:
 2. Read the action headline and book alignment.
 3. Review risk/scenario context if action is non-trivial.
 4. Check monitored strategy evidence.
-5. Lock and log paper recommendations before treating them as followed.
-6. Promote, demote, or archive strategies based on both historical and forward
+5. Use Launch Lab before putting new or scale-up capital into a selected
+   strategy.
+6. Lock and log paper recommendations before treating them as followed.
+7. Promote, demote, or archive strategies based on both historical and forward
    evidence.
-7. Keep narrative inputs in the right authority lane unless ablation tests or
+8. Keep narrative inputs in the right authority lane unless ablation tests or
    market confirmation promote them.
 
 In that sense, Trade Bot is less a single model and more a research operating
