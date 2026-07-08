@@ -121,6 +121,103 @@ def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_pa
     assert json.loads(str(champion.iloc[0]["latest_weights_json"])) == {"BIL": 0.5, "QQQ": 0.5}
 
 
+def test_warehouse_persists_simulation_validation_history(tmp_path) -> None:
+    warehouse = TradingWarehouse(tmp_path / "trade_bot.duckdb")
+    validation = pd.DataFrame(
+        [
+            {
+                "origin_date": "2025-01-31",
+                "horizon": "1m",
+                "horizon_days": 20,
+                "train_days": 252,
+                "paths": 100,
+                "realized_return": 0.02,
+                "realized_max_drawdown": -0.03,
+                "realized_severe_drawdown": False,
+                "simulated_p10_return": -0.01,
+                "simulated_p50_return": 0.015,
+                "simulated_p90_return": 0.04,
+                "target_interval_coverage": 0.80,
+                "realized_in_interval": True,
+                "p50_error": -0.005,
+                "p50_abs_error": 0.005,
+                "simulated_severe_drawdown_probability": 0.10,
+                "severe_drawdown_probability_error": 0.10,
+                "simulated_launch_decision": "launch",
+                "realized_launch_decision": "launch",
+            }
+        ]
+    )
+    ablation = pd.DataFrame(
+        [
+            {
+                "variant": "duration_covariate",
+                "label": "Duration + covariate matching",
+                "uses_duration_aware_transitions": True,
+                "uses_covariate_matching": True,
+                "uses_factor_proxy": False,
+                "rows": 1,
+                "origins": 1,
+                "horizons": 1,
+                "interval_coverage": 1.0,
+                "target_coverage": 0.8,
+                "coverage_error": 0.2,
+                "median_error_mean": -0.005,
+                "median_abs_error": 0.005,
+                "severe_drawdown_brier": 0.01,
+                "launch_decision_accuracy": 1.0,
+                "validity_read": "calibrated_enough_for_research",
+            }
+        ]
+    )
+
+    validation_run_id = warehouse.save_simulation_validation_run(
+        snapshot_run_id="snapshot-1",
+        market_date="2025-01-31",
+        strategy="strategy_a",
+        reference_strategies="strategy_b",
+        horizons="1m=20",
+        origin_frequency="monthly",
+        min_train_days=252,
+        paths=100,
+        block_days=21,
+        scenario_history_path="",
+        validation_output_path="validation.csv",
+        ablation_output_path="ablation.csv",
+        rank_output_path="rank.csv",
+        validation_summary={
+            "rows": 1,
+            "origins": 1,
+            "horizons": 1,
+            "interval_coverage": 1.0,
+            "target_coverage": 0.8,
+            "coverage_error": 0.2,
+            "median_abs_error": 0.005,
+            "launch_decision_accuracy": 1.0,
+            "validity_read": "calibrated_enough_for_research",
+        },
+        validation=validation,
+        ablation_summary=ablation,
+    )
+
+    runs = warehouse.simulation_validation_runs()
+    metrics = warehouse.simulation_validation_metrics(validation_run_id=validation_run_id)
+    ablation_metrics = warehouse.simulation_validation_metrics(
+        validation_run_id=validation_run_id,
+        metric_scope="ablation_summary",
+    )
+
+    assert runs.iloc[0]["validation_run_id"] == validation_run_id
+    assert runs.iloc[0]["strategy"] == "strategy_a"
+    assert set(metrics["metric_scope"]) == {
+        "primary_summary",
+        "rolling_origin",
+        "ablation_summary",
+    }
+    assert ablation_metrics.iloc[0]["variant"] == "duration_covariate"
+    assert bool(ablation_metrics.iloc[0]["uses_covariate_matching"])
+
+
 def test_warehouse_surfaces_and_seeds_top_5_experiment_candidates(tmp_path) -> None:
     experiment_dir = tmp_path / "experiments"
     iteration_dir = experiment_dir / "iteration_40"
@@ -441,21 +538,15 @@ def test_warehouse_resets_monitoring_start_dates_and_reanchors_valuations(tmp_pa
             "reset_candidate": SimpleNamespace(
                 equity=pd.Series(
                     [100.0, 102.0, 104.0, 108.0],
-                    index=pd.to_datetime(
-                        ["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]
-                    ),
+                    index=pd.to_datetime(["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]),
                 ),
                 returns=pd.Series(
                     [0.0, 0.02, 0.0196078431, 0.0384615385],
-                    index=pd.to_datetime(
-                        ["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]
-                    ),
+                    index=pd.to_datetime(["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]),
                 ),
                 weights=pd.DataFrame(
                     {"QQQ": [1.0, 1.0, 1.0, 1.0]},
-                    index=pd.to_datetime(
-                        ["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]
-                    ),
+                    index=pd.to_datetime(["2026-06-15", "2026-06-16", "2026-06-17", "2026-06-18"]),
                 ),
             )
         },

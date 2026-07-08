@@ -122,7 +122,7 @@ def render_dashboard_workbench_selector() -> str:
     st.markdown(
         """
         <div class="dashboard-section-header">
-            <p class="dashboard-section-kicker">Dashboard Drilldown</p>
+            <p class="dashboard-section-kicker">Main Driver Station</p>
             <div class="dashboard-primary-nav-label">Insight Workbench</div>
             <p class="dashboard-nav-caption">
                 Pick one focused section. The card below explains what that section answers before
@@ -132,15 +132,16 @@ def render_dashboard_workbench_selector() -> str:
         """,
         unsafe_allow_html=True,
     )
-    selected_section = st.pills(
-        "Dashboard section",
-        dashboard_section_names(),
-        selection_mode="single",
-        default="Command Center",
-        label_visibility="collapsed",
-        key="dashboard_section",
-        width="stretch",
-    )
+    with st.container(key="dashboard_main_station_nav"):
+        selected_section = st.pills(
+            "Dashboard section",
+            dashboard_section_names(),
+            selection_mode="single",
+            default="Command Center",
+            label_visibility="collapsed",
+            key="dashboard_section",
+            width="stretch",
+        )
     return selected_section or "Command Center"
 
 

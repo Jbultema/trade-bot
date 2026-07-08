@@ -14,6 +14,7 @@ from trade_bot.dashboard.loaders import (
     load_live_run,
     load_previous_snapshot_dashboard_run,
     load_snapshot_dashboard_run,
+    load_snapshot_dashboard_run_by_id,
     load_snapshot_jobs_frame,
 )
 from trade_bot.dashboard.navigation import (
@@ -66,7 +67,10 @@ def _render_freshness_strip(
     if snapshot_manifest is not None:
         local_time = _local_time_label(snapshot_manifest.created_at_utc, local_timezone)
         utc_time = html.escape(snapshot_manifest.created_at_utc)
-        freshness_text = f"Latest snapshot: {html.escape(local_time)}"
+        snapshot_label = (
+            "Selected snapshot" if run_source == "Selected snapshot" else "Latest snapshot"
+        )
+        freshness_text = f"{snapshot_label}: {html.escape(local_time)}"
         detail_text = f"UTC {utc_time}"
     else:
         local_time = (
@@ -139,7 +143,7 @@ st.sidebar.markdown(
 )
 run_source = st.sidebar.radio(
     "Run source",
-    ["Latest snapshot (fast)", "Live pipeline"],
+    ["Latest snapshot (fast)", "Selected snapshot", "Live pipeline"],
     index=0,
 )
 show_quick_reference = st.sidebar.toggle(
@@ -162,11 +166,33 @@ with st.sidebar.expander("Local paths", expanded=False):
 
 run_store = RunStore(run_store_path, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
 st.sidebar.caption(
-    "Fast mode reads the latest precomputed snapshot. Live mode runs the pipeline in-session."
+    "Fast mode reads a precomputed snapshot. Selected snapshot lets you time-travel "
+    "through recent saved dashboard states."
 )
 st.sidebar.caption(
     "Recommended: run the full update, then refresh the browser after the job completes."
 )
+selected_snapshot_run_id: str | None = None
+if run_source == "Selected snapshot":
+    snapshot_choices = run_store.list_snapshots(limit=100)
+    if snapshot_choices.empty:
+        st.sidebar.warning("No completed snapshots are available to select.")
+    else:
+        snapshot_options = snapshot_choices["run_id"].astype(str).tolist()
+
+        def _snapshot_option_label(run_id: str) -> str:
+            row = snapshot_choices[snapshot_choices["run_id"] == run_id].iloc[0]
+            return (
+                f"{row['market_date']} | {row['risk_status']} | "
+                f"{row['created_at_utc']} | {run_id[:18]}"
+            )
+
+        selected_snapshot_run_id = st.sidebar.selectbox(
+            "Snapshot",
+            snapshot_options,
+            format_func=_snapshot_option_label,
+            help="Load the saved dashboard state from a specific run snapshot.",
+        )
 if st.sidebar.button("Run Full Daily Update", type="primary"):
     job = run_store.start_daily_update_job(
         config_path=config_path,
@@ -321,6 +347,14 @@ if run_source == "Latest snapshot (fast)":
     else:
         baseline_run, snapshot_manifest = snapshot_payload
         snapshot_loaded = True
+elif run_source == "Selected snapshot" and selected_snapshot_run_id is not None:
+    baseline_run, snapshot_manifest = load_snapshot_dashboard_run_by_id(
+        str(run_store_path),
+        str(artifact_dir),
+        str(job_log_dir),
+        selected_snapshot_run_id,
+    )
+    snapshot_loaded = True
 else:
     baseline_run = load_live_run(
         str(config_path),
@@ -350,6 +384,9 @@ previous_snapshot_payload = load_previous_snapshot_dashboard_run(
     str(artifact_dir),
     str(job_log_dir),
     current_run_id=snapshot_manifest.run_id if snapshot_manifest is not None else None,
+    before_created_at_utc=(
+        snapshot_manifest.created_at_utc if snapshot_manifest is not None else None
+    ),
 )
 previous_baseline_run = previous_snapshot_payload[0] if previous_snapshot_payload else None
 

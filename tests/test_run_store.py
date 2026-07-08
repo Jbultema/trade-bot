@@ -60,6 +60,60 @@ def test_run_store_tracks_snapshot_jobs(tmp_path: Path) -> None:
     assert jobs.iloc[0]["run_id"] == "run-1"
 
 
+def test_run_store_prunes_snapshot_artifacts_after_dry_run(
+    tmp_path: Path,
+    monkeypatch: object,
+) -> None:
+    config_path, events_path, macro_path, news_path = _config_files(tmp_path)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+    timestamps = iter(
+        [
+            "2026-07-01T00:00:00+00:00",
+            "2026-07-02T00:00:00+00:00",
+            "2026-07-03T00:00:00+00:00",
+        ]
+    )
+    monkeypatch.setattr("trade_bot.storage.run_store.utc_now_iso", lambda: next(timestamps))
+
+    manifests = [
+        store.save_snapshot(
+            _baseline_run(),
+            config_path=config_path,
+            events_path=events_path,
+            macro_path=macro_path,
+            news_path=news_path,
+        )
+        for _ in range(3)
+    ]
+
+    dry_run_candidates = store.prune_snapshots(
+        keep_latest=1,
+        keep_per_market_date=1,
+        apply=False,
+    )
+    assert len(dry_run_candidates) == 2
+    assert all(Path(manifest.artifact_path).exists() for manifest in manifests)
+    assert len(store.list_snapshots(limit=10)) == 3
+
+    applied_candidates = store.prune_snapshots(
+        keep_latest=1,
+        keep_per_market_date=1,
+        apply=True,
+    )
+    remaining = store.list_snapshots(limit=10)
+
+    assert len(applied_candidates) == 2
+    assert applied_candidates["pruned"].tolist() == [True, True]
+    assert remaining["run_id"].tolist() == [manifests[-1].run_id]
+    assert Path(manifests[-1].artifact_path).exists()
+    assert not Path(manifests[0].artifact_path).exists()
+    assert not Path(manifests[1].artifact_path).exists()
+
+
 def test_run_store_starts_daily_update_job(tmp_path: Path, monkeypatch: object) -> None:
     calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
 

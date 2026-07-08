@@ -72,6 +72,21 @@ def load_snapshot_dashboard_run(
 
 
 @st.cache_data(show_spinner=False, ttl=DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS)
+def load_snapshot_dashboard_run_by_id(
+    store_path_string: str,
+    artifact_dir_string: str,
+    job_log_dir_string: str,
+    run_id: str,
+) -> tuple[BaselineRun, SnapshotManifest]:
+    run_store = RunStore(
+        store_path_string,
+        artifact_dir=artifact_dir_string,
+        job_log_dir=job_log_dir_string,
+    )
+    return run_store.load_snapshot(run_id)
+
+
+@st.cache_data(show_spinner=False, ttl=DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS)
 def load_previous_snapshot_dashboard_run(
     config_path_string: str,
     events_path_string: str,
@@ -81,6 +96,7 @@ def load_previous_snapshot_dashboard_run(
     artifact_dir_string: str,
     job_log_dir_string: str,
     current_run_id: str | None = None,
+    before_created_at_utc: str | None = None,
 ) -> tuple[BaselineRun, SnapshotManifest] | None:
     run_store = RunStore(
         store_path_string,
@@ -99,6 +115,8 @@ def load_previous_snapshot_dashboard_run(
     snapshots = snapshots[snapshots["combined_config_hash"] == fingerprint.combined_hash]
     if current_run_id is not None and "run_id" in snapshots:
         snapshots = snapshots[snapshots["run_id"] != current_run_id]
+    if before_created_at_utc is not None and "created_at_utc" in snapshots:
+        snapshots = snapshots[snapshots["created_at_utc"].astype(str) < before_created_at_utc]
     if snapshots.empty:
         return None
     return run_store.load_snapshot(str(snapshots.iloc[0]["run_id"]))

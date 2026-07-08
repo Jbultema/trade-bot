@@ -44,7 +44,12 @@ def _render_dashboard_section(
             job_log_dir=job_log_dir,
         )
     elif section == "Simulation Lab":
-        _render_simulation_lab(bot_config, baseline_run, experiment_scorecards)
+        _render_simulation_lab(
+            bot_config,
+            baseline_run,
+            experiment_scorecards,
+            warehouse_path=warehouse_path,
+        )
     elif section == "Launch Lab":
         _render_launch_lab(bot_config, baseline_run, experiment_scorecards)
     elif section == "Monitoring":

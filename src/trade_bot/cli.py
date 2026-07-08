@@ -521,6 +521,68 @@ def list_snapshots_cmd(
     console.print(table)
 
 
+@app.command("prune-snapshots")
+def prune_snapshots_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    keep_latest: Annotated[int, typer.Option("--keep-latest")] = 12,
+    keep_per_market_date: Annotated[int, typer.Option("--keep-per-market-date")] = 2,
+    apply: Annotated[
+        bool,
+        typer.Option(
+            "--apply/--dry-run",
+            help="Delete snapshot artifacts and manifest rows. Defaults to dry-run.",
+        ),
+    ] = False,
+) -> None:
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    candidates = run_store.prune_snapshots(
+        keep_latest=keep_latest,
+        keep_per_market_date=keep_per_market_date,
+        apply=apply,
+    )
+    mode = "Applied" if apply else "Dry run"
+    if candidates.empty:
+        console.print(
+            f"{mode}: no snapshots fall outside the retention policy "
+            f"(keep_latest={keep_latest}, keep_per_market_date={keep_per_market_date})."
+        )
+        return
+
+    total_bytes = int(candidates["artifact_size_bytes"].sum())
+    total_mb = total_bytes / (1024 * 1024)
+    console.print(
+        f"{mode}: {len(candidates):,} snapshot(s), {total_mb:,.1f} MB outside "
+        f"retention policy (keep_latest={keep_latest}, "
+        f"keep_per_market_date={keep_per_market_date})."
+    )
+    if not apply:
+        console.print("Re-run with --apply to delete these artifacts and manifest rows.")
+
+    table = Table(title="Snapshot Prune Candidates" if not apply else "Pruned Snapshots")
+    for column in [
+        "created_at_utc",
+        "run_id",
+        "market_date",
+        "risk_status",
+        "artifact_size_mb",
+        "pruned",
+    ]:
+        table.add_column(column)
+    for _, row in candidates.iterrows():
+        artifact_size_mb = float(row["artifact_size_bytes"]) / (1024 * 1024)
+        table.add_row(
+            str(row["created_at_utc"]),
+            str(row["run_id"]),
+            str(row["market_date"]),
+            str(row["risk_status"]),
+            f"{artifact_size_mb:,.1f}",
+            str(bool(row["pruned"])),
+        )
+    console.print(table)
+
+
 @app.command("list-snapshot-jobs")
 def list_snapshot_jobs_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -895,6 +957,8 @@ def validate_simulation_engine_cmd(
     )
     _print_simulation_validation_summary(strategy, validation_summary)
 
+    ablation_frame: pd.DataFrame | None = None
+    ablation_path_string = ""
     if ablation:
         factor_returns = _factor_returns_from_snapshot_prices(getattr(baseline_run, "prices", None))
         ablation_frame = _simulation_ablation_validation(
@@ -905,25 +969,47 @@ def validate_simulation_engine_cmd(
         )
         ablation_path = output_dir / f"{_slug_identifier(strategy)}_simulation_ablation.csv"
         ablation_frame.to_csv(ablation_path, index=False)
+        ablation_path_string = str(ablation_path)
         console.print(f"Wrote simulation model ablation to {ablation_path}.")
         _print_simulation_ablation_summary(ablation_frame)
 
+    rank_path_string = ""
     if len(returns_by_strategy) < 2:
         console.print(
             "Rank validation skipped because fewer than two selected strategies had returns."
         )
-        return
+    else:
+        rank_validation = rolling_origin_strategy_rank_validation(
+            returns_by_strategy,
+            scenario_history=scenario_history_frame,
+            config=config,
+        )
+        rank_summary = summarize_strategy_rank_validation(rank_validation)
+        rank_path = output_dir / "strategy_rank_validation.csv"
+        rank_validation.to_csv(rank_path, index=False)
+        rank_path_string = str(rank_path)
+        console.print(f"Wrote strategy rank validation to {rank_path}.")
+        _print_strategy_rank_validation_summary(rank_summary)
 
-    rank_validation = rolling_origin_strategy_rank_validation(
-        returns_by_strategy,
-        scenario_history=scenario_history_frame,
-        config=config,
+    validation_run_id = TradingWarehouse(store).save_simulation_validation_run(
+        snapshot_run_id=manifest.run_id,
+        market_date=manifest.market_date,
+        strategy=strategy,
+        reference_strategies=reference_strategies,
+        horizons=horizons,
+        origin_frequency=origin_frequency,
+        min_train_days=min_train_days,
+        paths=paths,
+        block_days=block_days,
+        scenario_history_path=str(scenario_history or ""),
+        validation_output_path=str(validation_path),
+        ablation_output_path=ablation_path_string,
+        rank_output_path=rank_path_string,
+        validation_summary=validation_summary,
+        validation=validation,
+        ablation_summary=ablation_frame,
     )
-    rank_summary = summarize_strategy_rank_validation(rank_validation)
-    rank_path = output_dir / "strategy_rank_validation.csv"
-    rank_validation.to_csv(rank_path, index=False)
-    console.print(f"Wrote strategy rank validation to {rank_path}.")
-    _print_strategy_rank_validation_summary(rank_summary)
+    console.print(f"Saved simulation validation history to DuckDB as {validation_run_id}.")
 
 
 @app.command("migrate-warehouse")

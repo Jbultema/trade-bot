@@ -6,6 +6,7 @@ import pandas as pd
 from typer.testing import CliRunner
 
 from trade_bot.cli import app
+from trade_bot.storage.warehouse import TradingWarehouse
 
 
 def test_validate_simulation_engine_command_writes_validation_outputs(
@@ -22,6 +23,7 @@ def test_validate_simulation_engine_command_writes_validation_outputs(
         }
     )
     manifest = SimpleNamespace(run_id="run_test", market_date="2025-07-17")
+    store_path = tmp_path / "trade_bot.duckdb"
 
     class FakeRunStore:
         def __init__(self, *args: object, **kwargs: object) -> None:
@@ -36,6 +38,8 @@ def test_validate_simulation_engine_command_writes_validation_outputs(
         app,
         [
             "validate-simulation-engine",
+            "--store",
+            str(store_path),
             "--output-dir",
             str(tmp_path),
             "--strategy",
@@ -63,3 +67,14 @@ def test_validate_simulation_engine_command_writes_validation_outputs(
     assert "Simulation Validation: strategy_a" in result.output
     assert "Simulation Model Ablation" in result.output
     assert "Strategy Rank Validation" in result.output
+    assert "Saved simulation validation history to DuckDB" in result.output
+
+    warehouse = TradingWarehouse(store_path)
+    runs = warehouse.read_table("simulation_validation_runs")
+    metrics = warehouse.read_table("simulation_validation_metrics")
+    assert len(runs) == 1
+    assert runs.iloc[0]["strategy"] == "strategy_a"
+    assert {"primary_summary", "rolling_origin", "ablation_summary"}.issubset(
+        set(metrics["metric_scope"])
+    )
+    assert "duration_covariate" in set(metrics["variant"])

@@ -186,21 +186,21 @@ def _install_dashboard_styles() -> None:
             font-size: 0.76rem;
         }
         .dashboard-section-header {
-            margin: 32px 0 12px;
-            padding: 20px 22px 18px;
-            border: 1px solid var(--tb-card-border);
-            border-left: 8px solid var(--tb-accent);
+            margin: 38px 0 16px;
+            padding: 26px 30px 24px;
+            border: 2px solid color-mix(in srgb, var(--tb-accent) 44%, var(--tb-card-border));
+            border-left: 12px solid var(--tb-accent);
             border-radius: 8px;
             background:
-                linear-gradient(90deg, color-mix(in srgb, var(--tb-accent) 14%, var(--tb-card-bg)), var(--tb-card-bg) 58%),
-                linear-gradient(180deg, color-mix(in srgb, var(--tb-accent) 5%, transparent), transparent);
+                linear-gradient(90deg, color-mix(in srgb, var(--tb-accent) 18%, var(--tb-card-bg)), var(--tb-card-bg) 62%),
+                linear-gradient(180deg, color-mix(in srgb, var(--tb-accent) 8%, transparent), transparent);
             box-shadow: var(--tb-shadow);
         }
         .dashboard-section-kicker {
-            margin: 0 0 7px;
+            margin: 0 0 9px;
             color: var(--tb-accent);
-            font-size: 0.84rem;
-            font-weight: 860;
+            font-size: 0.98rem;
+            font-weight: 900;
             letter-spacing: 0;
             line-height: 1.2;
             text-transform: uppercase;
@@ -211,29 +211,51 @@ def _install_dashboard_styles() -> None:
             gap: 10px;
             margin: 0;
             color: var(--tb-card-text);
-            font-size: 1.72rem;
-            font-weight: 860;
+            font-size: 2.28rem;
+            font-weight: 920;
             letter-spacing: 0;
-            line-height: 1.12;
+            line-height: 1.05;
         }
         .dashboard-primary-nav-label::before {
             content: "";
-            width: 12px;
-            height: 28px;
+            width: 14px;
+            height: 42px;
             border-radius: 3px;
             background: linear-gradient(180deg, var(--tb-accent), #f59e0b);
             flex: 0 0 auto;
         }
         .dashboard-nav-caption {
-            margin: 8px 0 0 22px;
+            margin: 10px 0 0 26px;
             color: var(--tb-card-muted);
-            font-size: 1.03rem;
-            line-height: 1.38;
+            font-size: 1.14rem;
+            line-height: 1.35;
         }
         div[data-testid="stPills"] {
             margin: 0 0 0.55rem;
             padding: 10px 0 0.7rem;
             border-bottom: 0;
+        }
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] {
+            margin: 0 0 1rem;
+            padding: 12px 0 1rem;
+        }
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] [data-baseweb="tab-list"],
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] div[role="radiogroup"] {
+            gap: 12px;
+        }
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] button,
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] [role="button"] {
+            min-height: 58px;
+            padding: 12px 20px !important;
+            border-width: 2px !important;
+            font-size: 1.13rem !important;
+            font-weight: 860 !important;
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] button[aria-selected="true"],
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] [role="button"][aria-selected="true"] {
+            background: color-mix(in srgb, var(--tb-accent) 22%, var(--tb-card-bg)) !important;
+            box-shadow: 0 10px 24px color-mix(in srgb, var(--tb-accent) 18%, transparent);
         }
         .dashboard-workbench-divider {
             height: 1px;
@@ -1149,17 +1171,25 @@ def _install_dashboard_styles() -> None:
             }
             .dashboard-section-header {
                 margin-top: 26px;
-                padding: 17px 15px 15px;
+                padding: 19px 16px 17px;
+                border-left-width: 9px;
             }
             .dashboard-primary-nav-label {
-                font-size: 1.38rem;
+                font-size: 1.58rem;
             }
             .dashboard-primary-nav-label::before {
-                height: 24px;
+                width: 12px;
+                height: 30px;
             }
             .dashboard-nav-caption {
                 margin-left: 0;
                 font-size: 0.95rem;
+            }
+            .st-key-dashboard_main_station_nav div[data-testid="stPills"] button,
+            .st-key-dashboard_main_station_nav div[data-testid="stPills"] [role="button"] {
+                min-height: 50px;
+                padding: 10px 14px !important;
+                font-size: 1rem !important;
             }
             .brand-masthead {
                 padding: 20px 15px 16px;

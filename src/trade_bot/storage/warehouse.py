@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import json
 import sqlite3
+import uuid
 from collections.abc import Iterable
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
@@ -542,9 +543,9 @@ class TradingWarehouse:
         window_id_list = [str(window_id) for window_id in window_ids if str(window_id)]
         if not window_id_list or not self.table_exists("strategy_daily_valuations"):
             return 0
-        before = self._query(
-            "SELECT COUNT(*) AS rows FROM strategy_daily_valuations"
-        )["rows"].iloc[0]
+        before = self._query("SELECT COUNT(*) AS rows FROM strategy_daily_valuations")["rows"].iloc[
+            0
+        ]
         connection = self._connect()
         try:
             delete_ids = pd.DataFrame({"window_id": window_id_list})
@@ -557,9 +558,9 @@ class TradingWarehouse:
             )
         finally:
             connection.close()
-        after = self._query("SELECT COUNT(*) AS rows FROM strategy_daily_valuations")[
-            "rows"
-        ].iloc[0]
+        after = self._query("SELECT COUNT(*) AS rows FROM strategy_daily_valuations")["rows"].iloc[
+            0
+        ]
         return int(before - after)
 
     def _demote_other_champions(self, window_id: str, mode: str, account: str) -> None:
@@ -894,9 +895,7 @@ class TradingWarehouse:
                     benchmark_cumulative_return = (
                         float(benchmark_path.iloc[-1]) / float(benchmark_path.iloc[0]) - 1.0
                     )
-                    benchmark_equity_value = capital_base * (
-                        1.0 + benchmark_cumulative_return
-                    )
+                    benchmark_equity_value = capital_base * (1.0 + benchmark_cumulative_return)
                     benchmark_return = _series_return_on_or_before(
                         benchmark_equity.pct_change().dropna(),
                         valuation_date,
@@ -944,6 +943,146 @@ class TradingWarehouse:
             return 0
         self._upsert_frame("strategy_daily_valuations", pd.DataFrame(rows), "valuation_id")
         return len(rows)
+
+    def save_simulation_validation_run(
+        self,
+        *,
+        snapshot_run_id: str,
+        market_date: str,
+        strategy: str,
+        reference_strategies: str,
+        horizons: str,
+        origin_frequency: str,
+        min_train_days: int,
+        paths: int,
+        block_days: int,
+        scenario_history_path: str,
+        validation_output_path: str,
+        ablation_output_path: str,
+        rank_output_path: str,
+        validation_summary: dict[str, object],
+        validation: pd.DataFrame,
+        ablation_summary: pd.DataFrame | None = None,
+    ) -> str:
+        validation_run_id = _new_validation_run_id()
+        created_at_utc = utc_now_iso()
+        run_record = pd.DataFrame(
+            [
+                {
+                    "validation_run_id": validation_run_id,
+                    "created_at_utc": created_at_utc,
+                    "snapshot_run_id": snapshot_run_id,
+                    "market_date": market_date,
+                    "strategy": strategy,
+                    "reference_strategies": reference_strategies,
+                    "horizons": horizons,
+                    "origin_frequency": origin_frequency,
+                    "min_train_days": int(min_train_days),
+                    "paths": int(paths),
+                    "block_days": int(block_days),
+                    "scenario_history_path": scenario_history_path,
+                    "validation_output_path": validation_output_path,
+                    "ablation_output_path": ablation_output_path,
+                    "rank_output_path": rank_output_path,
+                    "primary_validity_read": str(validation_summary.get("validity_read", "")),
+                    "primary_interval_coverage": _optional_float(
+                        validation_summary.get("interval_coverage")
+                    ),
+                    "primary_coverage_error": _optional_float(
+                        validation_summary.get("coverage_error")
+                    ),
+                    "primary_median_abs_error": _optional_float(
+                        validation_summary.get("median_abs_error")
+                    ),
+                    "primary_launch_decision_accuracy": _optional_float(
+                        validation_summary.get("launch_decision_accuracy")
+                    ),
+                }
+            ]
+        )
+        self._upsert_frame("simulation_validation_runs", run_record, "validation_run_id")
+
+        metric_rows = [
+            _simulation_validation_summary_metric_row(
+                validation_run_id=validation_run_id,
+                created_at_utc=created_at_utc,
+                strategy=strategy,
+                metric_scope="primary_summary",
+                variant="current_engine",
+                label="Current simulation engine",
+                summary=validation_summary,
+            )
+        ]
+        metric_rows.extend(
+            _simulation_validation_origin_metric_rows(
+                validation_run_id=validation_run_id,
+                created_at_utc=created_at_utc,
+                strategy=strategy,
+                validation=validation,
+            )
+        )
+        if ablation_summary is not None and not ablation_summary.empty:
+            metric_rows.extend(
+                _simulation_ablation_metric_rows(
+                    validation_run_id=validation_run_id,
+                    created_at_utc=created_at_utc,
+                    strategy=strategy,
+                    ablation_summary=ablation_summary,
+                )
+            )
+        self._upsert_frame(
+            "simulation_validation_metrics",
+            pd.DataFrame(metric_rows),
+            "metric_id",
+        )
+        return validation_run_id
+
+    def simulation_validation_runs(self, *, limit: int = 25) -> pd.DataFrame:
+        if not self.table_exists("simulation_validation_runs"):
+            return pd.DataFrame()
+        return self._query(
+            """
+            SELECT *
+            FROM simulation_validation_runs
+            ORDER BY created_at_utc DESC
+            LIMIT ?
+            """,
+            [limit],
+        )
+
+    def simulation_validation_metrics(
+        self,
+        *,
+        validation_run_id: str | None = None,
+        strategy: str | None = None,
+        metric_scope: str | None = None,
+        limit: int = 500,
+    ) -> pd.DataFrame:
+        if not self.table_exists("simulation_validation_metrics"):
+            return pd.DataFrame()
+        filters = []
+        params: list[object] = []
+        if validation_run_id:
+            filters.append("validation_run_id = ?")
+            params.append(validation_run_id)
+        if strategy:
+            filters.append("strategy = ?")
+            params.append(strategy)
+        if metric_scope:
+            filters.append("metric_scope = ?")
+            params.append(metric_scope)
+        where_clause = f"WHERE {' AND '.join(filters)}" if filters else ""
+        params.append(limit)
+        return self._query(
+            f"""
+            SELECT *
+            FROM simulation_validation_metrics
+            {where_clause}
+            ORDER BY created_at_utc DESC, metric_scope, variant, origin_date, horizon
+            LIMIT ?
+            """,
+            params,
+        )
 
     def _monitoring_runtime_results(
         self,
@@ -1191,6 +1330,8 @@ class TradingWarehouse:
             "strategy_registry",
             "monitoring_windows",
             "strategy_daily_valuations",
+            "simulation_validation_runs",
+            "simulation_validation_metrics",
             "experiment_scorecard",
             "experiment_walk_forward_summary",
             "experiment_regime_metrics",
@@ -1321,6 +1462,78 @@ class TradingWarehouse:
                     "credit_percent_of_max_sleeve": "DOUBLE",
                     "latest_weights_json": "VARCHAR",
                 },
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS simulation_validation_runs (
+                    validation_run_id VARCHAR PRIMARY KEY,
+                    created_at_utc VARCHAR NOT NULL,
+                    snapshot_run_id VARCHAR NOT NULL,
+                    market_date VARCHAR NOT NULL,
+                    strategy VARCHAR NOT NULL,
+                    reference_strategies VARCHAR NOT NULL,
+                    horizons VARCHAR NOT NULL,
+                    origin_frequency VARCHAR NOT NULL,
+                    min_train_days INTEGER NOT NULL,
+                    paths INTEGER NOT NULL,
+                    block_days INTEGER NOT NULL,
+                    scenario_history_path VARCHAR NOT NULL,
+                    validation_output_path VARCHAR NOT NULL,
+                    ablation_output_path VARCHAR NOT NULL,
+                    rank_output_path VARCHAR NOT NULL,
+                    primary_validity_read VARCHAR NOT NULL,
+                    primary_interval_coverage DOUBLE,
+                    primary_coverage_error DOUBLE,
+                    primary_median_abs_error DOUBLE,
+                    primary_launch_decision_accuracy DOUBLE
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS simulation_validation_metrics (
+                    metric_id VARCHAR PRIMARY KEY,
+                    validation_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    metric_scope VARCHAR NOT NULL,
+                    variant VARCHAR NOT NULL,
+                    label VARCHAR NOT NULL,
+                    strategy VARCHAR NOT NULL,
+                    origin_date VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    train_days INTEGER,
+                    paths INTEGER,
+                    rows INTEGER,
+                    origins INTEGER,
+                    horizons_count INTEGER,
+                    interval_coverage DOUBLE,
+                    target_coverage DOUBLE,
+                    coverage_error DOUBLE,
+                    median_error_mean DOUBLE,
+                    median_abs_error DOUBLE,
+                    severe_drawdown_brier DOUBLE,
+                    launch_decision_accuracy DOUBLE,
+                    validity_read VARCHAR NOT NULL,
+                    realized_return DOUBLE,
+                    realized_max_drawdown DOUBLE,
+                    realized_severe_drawdown BOOLEAN,
+                    simulated_p10_return DOUBLE,
+                    simulated_p50_return DOUBLE,
+                    simulated_p90_return DOUBLE,
+                    target_interval_coverage DOUBLE,
+                    realized_in_interval BOOLEAN,
+                    p50_error DOUBLE,
+                    p50_abs_error DOUBLE,
+                    simulated_severe_drawdown_probability DOUBLE,
+                    severe_drawdown_probability_error DOUBLE,
+                    simulated_launch_decision VARCHAR NOT NULL,
+                    realized_launch_decision VARCHAR NOT NULL,
+                    uses_duration_aware_transitions BOOLEAN,
+                    uses_covariate_matching BOOLEAN,
+                    uses_factor_proxy BOOLEAN
+                )
+                """
             )
         finally:
             connection.close()
@@ -1722,6 +1935,190 @@ def _forward_status(row: pd.Series) -> str:
     if excess is not None and excess < -0.03:
         return "lagging_benchmark"
     return "in_line"
+
+
+def _new_validation_run_id() -> str:
+    timestamp = utc_now_iso().replace("+00:00", "Z").replace(":", "").replace("-", "")
+    return f"simval-{timestamp}-{uuid.uuid4().hex[:8]}"
+
+
+def _simulation_validation_summary_metric_row(
+    *,
+    validation_run_id: str,
+    created_at_utc: str,
+    strategy: str,
+    metric_scope: str,
+    variant: str,
+    label: str,
+    summary: dict[str, object],
+) -> dict[str, object]:
+    return {
+        "metric_id": f"{validation_run_id}:{metric_scope}:{variant}",
+        "validation_run_id": validation_run_id,
+        "created_at_utc": created_at_utc,
+        "metric_scope": metric_scope,
+        "variant": variant,
+        "label": label,
+        "strategy": strategy,
+        "origin_date": "",
+        "horizon": "all",
+        "horizon_days": None,
+        "train_days": None,
+        "paths": None,
+        "rows": _optional_int(summary.get("rows")),
+        "origins": _optional_int(summary.get("origins")),
+        "horizons_count": _optional_int(summary.get("horizons")),
+        "interval_coverage": _optional_float(summary.get("interval_coverage")),
+        "target_coverage": _optional_float(summary.get("target_coverage")),
+        "coverage_error": _optional_float(summary.get("coverage_error")),
+        "median_error_mean": _optional_float(summary.get("median_error_mean")),
+        "median_abs_error": _optional_float(summary.get("median_abs_error")),
+        "severe_drawdown_brier": _optional_float(summary.get("severe_drawdown_brier")),
+        "launch_decision_accuracy": _optional_float(summary.get("launch_decision_accuracy")),
+        "validity_read": str(summary.get("validity_read", "")),
+        "realized_return": None,
+        "realized_max_drawdown": None,
+        "realized_severe_drawdown": None,
+        "simulated_p10_return": None,
+        "simulated_p50_return": None,
+        "simulated_p90_return": None,
+        "target_interval_coverage": None,
+        "realized_in_interval": None,
+        "p50_error": None,
+        "p50_abs_error": None,
+        "simulated_severe_drawdown_probability": None,
+        "severe_drawdown_probability_error": None,
+        "simulated_launch_decision": "",
+        "realized_launch_decision": "",
+        "uses_duration_aware_transitions": None,
+        "uses_covariate_matching": None,
+        "uses_factor_proxy": None,
+    }
+
+
+def _simulation_validation_origin_metric_rows(
+    *,
+    validation_run_id: str,
+    created_at_utc: str,
+    strategy: str,
+    validation: pd.DataFrame,
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    if validation.empty:
+        return rows
+    for position, row in validation.reset_index(drop=True).iterrows():
+        origin_date = str(row.get("origin_date", ""))
+        horizon = str(row.get("horizon", ""))
+        rows.append(
+            {
+                "metric_id": (
+                    f"{validation_run_id}:rolling_origin:current_engine:"
+                    f"{origin_date}:{horizon}:{position}"
+                ),
+                "validation_run_id": validation_run_id,
+                "created_at_utc": created_at_utc,
+                "metric_scope": "rolling_origin",
+                "variant": "current_engine",
+                "label": "Current simulation engine",
+                "strategy": strategy,
+                "origin_date": origin_date,
+                "horizon": horizon,
+                "horizon_days": _optional_int(row.get("horizon_days")),
+                "train_days": _optional_int(row.get("train_days")),
+                "paths": _optional_int(row.get("paths")),
+                "rows": None,
+                "origins": None,
+                "horizons_count": None,
+                "interval_coverage": None,
+                "target_coverage": None,
+                "coverage_error": None,
+                "median_error_mean": None,
+                "median_abs_error": None,
+                "severe_drawdown_brier": None,
+                "launch_decision_accuracy": None,
+                "validity_read": "",
+                "realized_return": _optional_float(row.get("realized_return")),
+                "realized_max_drawdown": _optional_float(row.get("realized_max_drawdown")),
+                "realized_severe_drawdown": _optional_bool(row.get("realized_severe_drawdown")),
+                "simulated_p10_return": _optional_float(row.get("simulated_p10_return")),
+                "simulated_p50_return": _optional_float(row.get("simulated_p50_return")),
+                "simulated_p90_return": _optional_float(row.get("simulated_p90_return")),
+                "target_interval_coverage": _optional_float(row.get("target_interval_coverage")),
+                "realized_in_interval": _optional_bool(row.get("realized_in_interval")),
+                "p50_error": _optional_float(row.get("p50_error")),
+                "p50_abs_error": _optional_float(row.get("p50_abs_error")),
+                "simulated_severe_drawdown_probability": _optional_float(
+                    row.get("simulated_severe_drawdown_probability")
+                ),
+                "severe_drawdown_probability_error": _optional_float(
+                    row.get("severe_drawdown_probability_error")
+                ),
+                "simulated_launch_decision": str(row.get("simulated_launch_decision", "")),
+                "realized_launch_decision": str(row.get("realized_launch_decision", "")),
+                "uses_duration_aware_transitions": None,
+                "uses_covariate_matching": None,
+                "uses_factor_proxy": None,
+            }
+        )
+    return rows
+
+
+def _simulation_ablation_metric_rows(
+    *,
+    validation_run_id: str,
+    created_at_utc: str,
+    strategy: str,
+    ablation_summary: pd.DataFrame,
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for _, row in ablation_summary.iterrows():
+        variant = str(row.get("variant", ""))
+        rows.append(
+            {
+                **_simulation_validation_summary_metric_row(
+                    validation_run_id=validation_run_id,
+                    created_at_utc=created_at_utc,
+                    strategy=strategy,
+                    metric_scope="ablation_summary",
+                    variant=variant,
+                    label=str(row.get("label", variant)),
+                    summary=row.to_dict(),
+                ),
+                "uses_duration_aware_transitions": _optional_bool(
+                    row.get("uses_duration_aware_transitions")
+                ),
+                "uses_covariate_matching": _optional_bool(row.get("uses_covariate_matching")),
+                "uses_factor_proxy": _optional_bool(row.get("uses_factor_proxy")),
+            }
+        )
+    return rows
+
+
+def _optional_bool(value: object) -> bool | None:
+    if value is None:
+        return None
+    if isinstance(value, bool):
+        return value
+    if isinstance(value, str):
+        lowered = value.strip().lower()
+        if lowered in {"true", "1", "yes"}:
+            return True
+        if lowered in {"false", "0", "no"}:
+            return False
+    try:
+        numeric = float(cast(Any, value))
+    except (TypeError, ValueError):
+        return None
+    if numeric != numeric:
+        return None
+    return bool(numeric)
+
+
+def _optional_int(value: object) -> int | None:
+    numeric = _optional_float(value)
+    if numeric is None:
+        return None
+    return int(numeric)
 
 
 def _optional_float(value: object) -> float | None:

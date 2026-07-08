@@ -62,12 +62,15 @@ from trade_bot.research.strategy_outcome_utility import (
     summarize_bootstrap_outcomes,
     terminal_wealth_from_cagr,
 )
+from trade_bot.storage.warehouse import TradingWarehouse
 
 
 def _render_simulation_lab(
     bot_config: Any,
     baseline_run: BaselineRun,
     experiment_scorecards: pd.DataFrame,
+    *,
+    warehouse_path: str = "",
 ) -> None:
     st.subheader("Simulation Lab")
     st.caption(
@@ -89,7 +92,12 @@ def _render_simulation_lab(
     simulation_view = (
         st.pills(
             "Simulation Lab view",
-            ["Future-State Map", "Strategy Simulations", "Interpretability"],
+            [
+                "Future-State Map",
+                "Strategy Simulations",
+                "Validation History",
+                "Interpretability",
+            ],
             selection_mode="single",
             default="Future-State Map",
             key="simulation_lab_view",
@@ -107,6 +115,11 @@ def _render_simulation_lab(
             baseline_run=baseline_run,
             scenario_source=scenario_source,
         )
+    elif simulation_view == "Validation History":
+        _render_simulation_validation_history(
+            warehouse_path=warehouse_path,
+            selected_strategy=selected_strategy,
+        )
     else:
         _render_simulation_interpretability(
             selected_strategy=selected_strategy,
@@ -116,6 +129,138 @@ def _render_simulation_lab(
             scenario_source=scenario_source,
             probabilities=probabilities,
         )
+
+
+def _render_simulation_validation_history(
+    *,
+    warehouse_path: str,
+    selected_strategy: str | None,
+) -> None:
+    st.markdown("**Rolling-Origin Validation History**")
+    st.caption(
+        "Reads persisted validation runs from the local DuckDB store. Use this to compare "
+        "baseline regime blocks, duration-aware transitions, covariate matching, and factor "
+        "proxy variants across repeated validation runs."
+    )
+    if not warehouse_path:
+        st.info("No warehouse path was supplied for validation history.")
+        return
+
+    warehouse = TradingWarehouse(warehouse_path)
+    runs = warehouse.simulation_validation_runs(limit=50)
+    if selected_strategy and not runs.empty and "strategy" in runs:
+        selected_runs = runs[runs["strategy"].astype(str) == selected_strategy].copy()
+        if not selected_runs.empty:
+            runs = selected_runs
+    if runs.empty:
+        st.info(
+            "No simulation validation history is stored yet. Run "
+            "`poetry run trade-bot validate-simulation-engine --ablation` to populate it."
+        )
+        return
+
+    run_columns = [
+        "created_at_utc",
+        "strategy",
+        "market_date",
+        "horizons",
+        "paths",
+        "primary_interval_coverage",
+        "primary_coverage_error",
+        "primary_median_abs_error",
+        "primary_launch_decision_accuracy",
+        "primary_validity_read",
+    ]
+    available_run_columns = [column for column in run_columns if column in runs]
+    st.caption("Validation runs")
+    _render_metric_dataframe(
+        _display_metrics(runs[available_run_columns].head(12)),
+        hide_index=True,
+    )
+
+    latest_run_id = str(runs.iloc[0]["validation_run_id"])
+    strategy_filter = selected_strategy if selected_strategy else None
+    ablation_metrics = warehouse.simulation_validation_metrics(
+        strategy=strategy_filter,
+        metric_scope="ablation_summary",
+        limit=500,
+    )
+    latest_ablation = ablation_metrics[
+        ablation_metrics["validation_run_id"].astype(str) == latest_run_id
+    ]
+    if not latest_ablation.empty:
+        st.caption("Latest ablation readout")
+        ablation_columns = [
+            "variant",
+            "label",
+            "rows",
+            "origins",
+            "interval_coverage",
+            "coverage_error",
+            "median_abs_error",
+            "severe_drawdown_brier",
+            "launch_decision_accuracy",
+            "validity_read",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(
+                latest_ablation[
+                    [column for column in ablation_columns if column in latest_ablation]
+                ]
+            ),
+            hide_index=True,
+        )
+    else:
+        st.info("The latest validation run does not include ablation metrics.")
+
+    if not ablation_metrics.empty:
+        st.caption("Ablation history")
+        history_columns = [
+            "created_at_utc",
+            "strategy",
+            "variant",
+            "coverage_error",
+            "median_abs_error",
+            "launch_decision_accuracy",
+            "validity_read",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(
+                ablation_metrics[
+                    [column for column in history_columns if column in ablation_metrics]
+                ].head(40)
+            ),
+            hide_index=True,
+        )
+
+    origin_metrics = warehouse.simulation_validation_metrics(
+        validation_run_id=latest_run_id,
+        metric_scope="rolling_origin",
+        limit=500,
+    )
+    if origin_metrics.empty:
+        return
+    st.caption("Latest rolling-origin observations")
+    origin_columns = [
+        "origin_date",
+        "horizon",
+        "train_days",
+        "paths",
+        "realized_return",
+        "simulated_p10_return",
+        "simulated_p50_return",
+        "simulated_p90_return",
+        "realized_in_interval",
+        "p50_error",
+        "simulated_launch_decision",
+        "realized_launch_decision",
+    ]
+    _render_metric_dataframe(
+        _display_metrics(
+            origin_metrics[[column for column in origin_columns if column in origin_metrics]]
+        ),
+        hide_index=True,
+    )
 
 
 def _render_simulation_planning_cards() -> None:

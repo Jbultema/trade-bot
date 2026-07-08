@@ -239,6 +239,80 @@ class RunStore:
         finally:
             connection.close()
 
+    def prune_snapshots(
+        self,
+        *,
+        keep_latest: int = 12,
+        keep_per_market_date: int = 2,
+        apply: bool = False,
+    ) -> pd.DataFrame:
+        if keep_latest < 0:
+            msg = "keep_latest must be non-negative"
+            raise ValueError(msg)
+        if keep_per_market_date < 0:
+            msg = "keep_per_market_date must be non-negative"
+            raise ValueError(msg)
+
+        snapshots = self.list_snapshots(limit=100_000)
+        if snapshots.empty:
+            return _empty_prune_frame()
+
+        snapshots = snapshots.copy().reset_index(drop=True)
+        snapshots["_rank_all"] = snapshots.index + 1
+        snapshots["_rank_market_date"] = snapshots.groupby("market_date").cumcount() + 1
+        latest_mask = snapshots["_rank_all"] <= keep_latest
+        market_date_mask = snapshots["_rank_market_date"] <= keep_per_market_date
+
+        candidates = snapshots[~(latest_mask | market_date_mask)].copy()
+        if candidates.empty:
+            return _empty_prune_frame()
+
+        artifact_sizes: list[int] = []
+        artifact_exists: list[bool] = []
+        safe_paths: list[Path] = []
+        for artifact_path_string in candidates["artifact_path"]:
+            artifact_path = self._safe_artifact_path_for_prune(str(artifact_path_string))
+            safe_paths.append(artifact_path)
+            artifact_exists.append(artifact_path.exists())
+            artifact_sizes.append(artifact_path.stat().st_size if artifact_path.exists() else 0)
+
+        candidates["artifact_exists"] = artifact_exists
+        candidates["artifact_size_bytes"] = artifact_sizes
+        candidates["pruned"] = False
+        candidates["prune_reason"] = "outside_snapshot_retention_policy"
+
+        if apply:
+            for artifact_path in safe_paths:
+                if artifact_path.exists():
+                    artifact_path.unlink()
+            run_ids = candidates[["run_id"]].copy()
+            connection = self._connect()
+            try:
+                connection.register("snapshot_prune_ids", run_ids)
+                connection.execute(
+                    """
+                    DELETE FROM run_snapshots
+                    WHERE run_id IN (SELECT run_id FROM snapshot_prune_ids)
+                    """
+                )
+            finally:
+                connection.close()
+            candidates["pruned"] = True
+
+        return candidates[
+            [
+                "created_at_utc",
+                "run_id",
+                "market_date",
+                "risk_status",
+                "artifact_path",
+                "artifact_exists",
+                "artifact_size_bytes",
+                "pruned",
+                "prune_reason",
+            ]
+        ].reset_index(drop=True)
+
     def create_job(self, command: list[str], log_path: str | Path) -> SnapshotJob:
         job = SnapshotJob(
             job_id=_new_job_id(),
@@ -322,7 +396,7 @@ class RunStore:
                 stdout=log_handle,
                 stderr=subprocess.STDOUT,
                 close_fds=True,
-        )
+            )
         return job
 
     def start_daily_update_job(
@@ -765,6 +839,20 @@ class RunStore:
         finally:
             connection.close()
 
+    def _safe_artifact_path_for_prune(self, artifact_path_string: str) -> Path:
+        artifact_path = Path(artifact_path_string)
+        if not artifact_path.is_absolute():
+            artifact_path = Path.cwd() / artifact_path
+        artifact_path = artifact_path.resolve()
+        artifact_root = self.artifact_dir.resolve()
+        if not artifact_path.is_relative_to(artifact_root):
+            msg = (
+                "Refusing to prune snapshot artifact outside the artifact directory: "
+                f"{artifact_path}"
+            )
+            raise ValueError(msg)
+        return artifact_path
+
 
 def build_snapshot_fingerprint(
     config_path: str | Path = DEFAULT_CONFIG_PATH,
@@ -863,4 +951,20 @@ def _job_from_mapping(row: dict[str, Any]) -> SnapshotJob:
         log_path=str(row["log_path"]),
         run_id=str(row["run_id"]),
         error_message=str(row["error_message"]),
+    )
+
+
+def _empty_prune_frame() -> pd.DataFrame:
+    return pd.DataFrame(
+        columns=[
+            "created_at_utc",
+            "run_id",
+            "market_date",
+            "risk_status",
+            "artifact_path",
+            "artifact_exists",
+            "artifact_size_bytes",
+            "pruned",
+            "prune_reason",
+        ]
     )
