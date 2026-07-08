@@ -1,6 +1,6 @@
 # Trade Bot System Whitepaper
 
-Status: canonical overview. Last reviewed: 2026-07-06.
+Status: canonical overview. Last reviewed: 2026-07-08.
 
 ## Executive Summary
 
@@ -110,8 +110,8 @@ The main components are:
 | Backtest engine | Applies execution lag, rebalance cadence, transaction costs, target weights, and equity compounding. |
 | Risk engine | Applies scenario-aware sizing, expected shortfall, stress loss, factor exposure, concentration checks, and defensive floors. |
 | Research Lab | Compares experiments, strategy families, outcome frontier, validation, factor attribution, and candidate details. |
-| Simulation Lab | Projects selected strategies through deterministic, bootstrap, and regime-conditioned forward paths. |
-| Launch Lab | Tests whether new or scale-up capital should enter a selected strategy now, gradually, or wait. |
+| Simulation Lab | Projects selected strategies through deterministic, bootstrap, and regime-conditioned forward paths, then validates those simulations with rolling-origin calibration tests. |
+| Launch Lab | Tests whether new or scale-up capital should enter a selected strategy now, gradually, or wait, with Simulation Lab diagnostics acting as a forward-risk guardrail. |
 | Monitoring | Tracks champion/challenger/reference windows from chosen start dates using paper valuations. |
 | Forward Test | Records locked recommendations, paper/live executions, current book alignment, and allocation history. |
 
@@ -291,6 +291,38 @@ after costs. This is how narrative or newly added indicators should earn their
 way into the action layer. If a signal cannot be tested or mapped to a relevant
 now-casting framework, it should remain explanatory context.
 
+Simulation validation is now treated as its own test family rather than a visual
+nice-to-have. The rolling-origin simulation test chooses historical origin dates,
+trains the simulator only on returns available through each origin, simulates
+forward paths for configured horizons, and compares the simulated distribution
+with the realized future return and drawdown. The primary calibration question is
+whether realized outcomes land inside the simulated interval at approximately
+the target rate. For example, a 20th-to-80th percentile band should contain
+realized outcomes roughly 60% of the time over enough origins. The test also
+records median forecast error, severe-drawdown probability error, and a
+launch-action score that translates simulated and realized outcomes into a
+simple wait, ramp-in, or full-launch scale.
+
+The simulation validation layer is deliberately more demanding than "did the
+chart look plausible?" It stores run-level, horizon-level, origin-level, and
+ablation metrics in the local DuckDB warehouse. That makes Simulation Lab a
+persistent calibration monitor instead of a one-off dashboard calculation.
+Ablations compare the baseline regime sampler, duration-aware transitions,
+duration plus covariate-matched blocks, and factor-proxy paths where factor data
+is available. If the more complex model does not beat the simpler baseline on
+coverage, median error, severe-drawdown calibration, or launch-action quality,
+the system should not give the extra complexity more decision authority.
+
+Scenario history is also separated by source. Saved snapshots are true
+date-stamped operating records. Reconstructed scenario history rebuilds the
+price-derived scenario engine from prices truncated through historical origins,
+which is point-in-time safe for the price-driven parts of the current engine.
+It is not the same as a full vintage macro or news database. This distinction
+matters: reconstructed histories are useful for testing whether the current
+price-based scenario logic would have classified past markets sensibly, but they
+should not be read as proof that today's macro or narrative layer existed in
+that historical form.
+
 Finally, automated software tests protect the math and workflows. Unit and
 regression tests cover formulas, dashboard explainability, launch readiness,
 forward simulation, outcome utility, paper valuation, and experiment machinery.
@@ -314,6 +346,9 @@ Trade Bot uses several simulation modes:
   to estimate terminal-wealth ranges and drawdown distributions.
 - **Regime-conditioned forward paths**: samples future paths using current
   scenario probabilities and historical regime-labeled return behavior.
+- **Validated rolling-origin paths**: repeatedly reruns the simulator from
+  historical origin dates and checks whether simulated ranges, medians, drawdown
+  probabilities, and launch-action labels match what actually happened.
 
 The regime-conditioned model is the most distinctive. It is closer to a
 scenario-aware Monte Carlo process than a simple CAGR calculator. Each path can
@@ -322,6 +357,36 @@ risk-on, risk-off, or risk-off-then-relief. Strategy behavior is then sampled
 from historical windows associated with those regimes. This produces ranges for
 terminal wealth, drawdowns, severe-drawdown probability, and benchmark-relative
 outcomes.
+
+The current simulator uses three additional controls to reduce the weaknesses of
+plain regime resampling:
+
+- **Duration-aware transitions**: the simulator tracks how long the current
+  simulated regime has persisted. If a regime is young relative to historical
+  median duration, the model modestly increases persistence. If a regime is old
+  relative to its historical upper-quartile duration, the model shifts some
+  probability toward plausible exit states. This prevents every block boundary
+  from acting like a fresh independent regime draw.
+- **Covariate-matched return blocks**: historical blocks are sampled from the
+  chosen regime, but the sampler can prefer blocks whose starting conditions
+  resemble the current state. The default covariates include recent trend,
+  medium-term trend, short volatility, drawdown, and short shock behavior, with
+  room for external numeric covariates. This preserves non-parametric realized
+  return behavior while reducing the chance of sampling a block from a very
+  different market state.
+- **Factor-proxy paths**: where factor proxies are available, the simulator can
+  fit a transparent linear factor model to strategy returns, sample factor
+  blocks with the same regime and covariate machinery, and reconstruct strategy
+  returns from factor exposure plus residual behavior. This is not a black-box
+  alpha model. It is a diagnostic proxy for asking whether the simulated
+  strategy path is mostly explained by familiar factor exposures such as equity,
+  growth, rates, commodities, credit, or defensive assets.
+
+These controls add realism, but they also add ways to overfit. For that reason
+the dashboard and CLI expose ablation results beside the main validation read.
+The preferred model should be the simplest variant that gives acceptable
+coverage, lower median miss, sensible severe-drawdown calibration, and better
+launch-action behavior across the horizons the user actually cares about.
 
 The Simulation Lab also includes interpretability. It should help answer:
 
@@ -353,6 +418,29 @@ regime-conditioned paths deteriorate, the strategy may be too dependent on a
 favorable historical mix. If the selected strategy beats SPY or QQQ in median
 paths but has worse left-tail paths, the user is accepting more dispersion for
 potential wealth.
+
+The rolling-origin validation view is how the system decides whether those
+simulated ranges deserve trust. A calibrated interval hit rate means the band is
+about as wide as advertised, not that the simulator is highly predictive. Median
+miss measures whether the central path is useful or merely directional. The
+severe-drawdown Brier-style error asks whether simulated drawdown probabilities
+behave like probabilities.
+
+The launch-action score is a bridge from simulation quality to operating use.
+For each historical origin and horizon, the simulator maps its distribution into
+one of three coarse actions: wait, ramp in, or full launch. A non-positive
+simulated median or high simulated severe-drawdown probability maps to wait.
+A negative lower-band return or elevated severe-drawdown probability maps to
+ramp in. Otherwise the simulated action is full launch. The realized future path
+is mapped to the same scale using hindsight return and drawdown: negative
+return or severe drawdown means wait would have been best, moderate drawdown
+means ramp would have been best, and a positive path without meaningful drawdown
+means full launch would have been acceptable. Action error is the distance
+between those two labels. Over-risk means the simulator was too aggressive
+versus hindsight; under-risk means it was too cautious. This is intentionally
+blunt: a model that can roughly separate "wait," "ramp," and "full launch"
+across historical origins is more useful for operating decisions than one that
+only produces attractive looking fan charts.
 
 The simulation layer is planning support. It does not decide trades by itself.
 It helps users understand whether a candidate's historical edge is plausible
@@ -431,6 +519,27 @@ as independent trials. The useful read is comparative: does this strategy have
 poor entry behavior across many historical starts, does staging improve that
 behavior, and does the answer change when the horizon is aligned to the user's
 actual investment problem?
+
+The connection between Launch Lab and Simulation Lab is important but should be
+kept explicit. Launch Lab's historical windows answer what happened after prior
+entry dates. Simulation Lab answers what the current scenario-conditioned
+distribution implies and whether that distribution has been calibrated in
+rolling-origin tests. A good launch process needs both. Historical entry windows
+can look strong while the forward simulator says the current state has elevated
+left-tail risk or weak calibration. Conversely, a simulated forward range can
+look acceptable while historical entry windows show repeated bad starts.
+
+The intended integration is a Simulation Gate inside Launch Lab. The gate should
+bring in horizon-specific validation status, simulated severe-drawdown
+probability, median miss, launch-action score, over-risk and under-risk rates,
+and the latest ablation read. Those diagnostics should not mechanically replace
+Launch Lab's historical entry score. Instead, they should apply conservative
+friction: weak simulation validation caps launch enthusiasm, high simulated
+left-tail risk argues for staging, and calibrated constructive simulation
+evidence can support a stronger ramp only when historical entry evidence agrees.
+The most useful human read is often the disagreement itself: "entry history is
+constructive, but simulation confidence is weak," or "simulation looks
+constructive, but past launches from similar windows had early drawdown pain."
 
 ## 9. Monitoring, Tickets, And Making It Real
 
