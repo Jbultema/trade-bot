@@ -221,6 +221,134 @@ def test_warehouse_persists_simulation_validation_history(tmp_path) -> None:
     assert bool(ablation_metrics.iloc[0]["uses_covariate_matching"])
 
 
+def test_warehouse_persists_reconstructed_operating_history(tmp_path) -> None:
+    warehouse = TradingWarehouse(tmp_path / "trade_bot.duckdb")
+    metrics = pd.DataFrame(
+        [
+            {
+                "history_id": "reconstructed:2026-01-02",
+                "history_time": "2026-01-02",
+                "snapshot_time": "2026-01-02",
+                "market_date": "2026-01-02",
+                "run_id": "reconstructed:2026-01-02",
+                "source": "reconstructed_price_fast_point_in_time",
+                "reconstruction_note": "test",
+                "risk_score": 0.31,
+                "one_month_risk_off_probability": 0.22,
+                "risk_budget_multiplier": 0.70,
+                "portfolio_risk_multiplier": 0.35,
+                "post_expected_shortfall_95": 0.01,
+                "post_max_stress_loss": 0.08,
+                "post_equity_beta": 0.40,
+                "post_ai_beta": 0.12,
+                "correlation_shift": -0.05,
+                "regime_instability_score": 0.44,
+                "spy_ytd_large_move_share": 0.18,
+            }
+        ]
+    )
+    components = pd.DataFrame(
+        [
+            {
+                "history_id": "reconstructed:2026-01-02:component:vol_pressure",
+                "history_time": "2026-01-02",
+                "snapshot_time": "2026-01-02",
+                "market_date": "2026-01-02",
+                "run_id": "reconstructed:2026-01-02",
+                "source": "reconstructed_price_fast_point_in_time",
+                "reconstruction_note": "test",
+                "component": "vol_pressure",
+                "component_score": 0.6,
+                "latest_value": 0.2,
+                "state": "elevated",
+            }
+        ]
+    )
+    scenario_drivers = pd.DataFrame(
+        [
+            {
+                "history_id": "reconstructed:2026-01-02:scenario_driver:credit",
+                "history_time": "2026-01-02",
+                "snapshot_time": "2026-01-02",
+                "market_date": "2026-01-02",
+                "run_id": "reconstructed:2026-01-02",
+                "source": "reconstructed_price_fast_point_in_time",
+                "reconstruction_note": "test",
+                "driver": "credit",
+                "score": 0.4,
+                "state": "watch",
+            }
+        ]
+    )
+    driver_rotation = pd.DataFrame(
+        [
+            {
+                "history_id": "reconstructed:2026-01-02:driver_rotation:credit",
+                "history_time": "2026-01-02",
+                "snapshot_time": "2026-01-02",
+                "market_date": "2026-01-02",
+                "run_id": "reconstructed:2026-01-02",
+                "source": "reconstructed_price_fast_point_in_time",
+                "reconstruction_note": "test",
+                "driver": "credit",
+                "driver_label": "Credit",
+                "current_activation": 0.3,
+                "proven_relevance": 0.7,
+                "change_30d": 0.05,
+                "change_90d": 0.12,
+                "model_role": "risk",
+            }
+        ]
+    )
+
+    counts = warehouse.save_operating_history(
+        metrics=metrics,
+        components=components,
+        scenario_drivers=scenario_drivers,
+        driver_rotation=driver_rotation,
+    )
+    saved_metrics, saved_components, saved_drivers, saved_rotation = (
+        warehouse.operating_history_frames()
+    )
+
+    assert counts == {
+        "operating_metric_history": 1,
+        "operating_component_history": 1,
+        "operating_scenario_driver_history": 1,
+        "operating_driver_rotation_history": 1,
+    }
+    assert saved_metrics.iloc[0]["risk_score"] == pytest.approx(0.31)
+    assert saved_components.iloc[0]["component"] == "vol_pressure"
+    assert saved_drivers.iloc[0]["driver"] == "credit"
+    assert saved_rotation.iloc[0]["driver_label"] == "Credit"
+
+    replacement_metrics = metrics.copy()
+    replacement_metrics.loc[0, "history_id"] = "reconstructed:2026-01-09"
+    replacement_metrics.loc[0, "history_time"] = "2026-01-09"
+    replacement_metrics.loc[0, "snapshot_time"] = "2026-01-09"
+    replacement_metrics.loc[0, "market_date"] = "2026-01-09"
+    replacement_metrics.loc[0, "run_id"] = "reconstructed:2026-01-09"
+    replacement_metrics.loc[0, "risk_score"] = 0.45
+
+    warehouse.save_operating_history(
+        metrics=replacement_metrics,
+        components=pd.DataFrame(),
+        scenario_drivers=pd.DataFrame(),
+        driver_rotation=pd.DataFrame(),
+        replace_sources=("reconstructed_price_fast_point_in_time",),
+    )
+    replaced_metrics, replaced_components, replaced_drivers, replaced_rotation = (
+        warehouse.operating_history_frames()
+    )
+
+    assert len(replaced_metrics) == 1
+    assert replaced_metrics.iloc[0]["history_id"] == "reconstructed:2026-01-09"
+    assert replaced_metrics.iloc[0]["risk_score"] == pytest.approx(0.45)
+    assert replaced_components.empty
+    assert replaced_drivers.empty
+    assert replaced_rotation.empty
+
+
 def test_warehouse_surfaces_and_seeds_top_5_experiment_candidates(tmp_path) -> None:
     experiment_dir = tmp_path / "experiments"
     iteration_dir = experiment_dir / "iteration_40"

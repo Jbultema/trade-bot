@@ -8,6 +8,12 @@ import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
+from trade_bot.dashboard.trends import (
+    compact_metric_line_figure,
+    latest_per_market_date,
+    load_snapshot_trend_frames,
+    long_metric_line_figure,
+)
 from trade_bot.DEFAULTS import (
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
@@ -106,6 +112,11 @@ def _render_risk_and_scenarios(
             "AI Beta",
             f"{float(risk_summary['post_ai_beta']):.2f}",
             key="post_ai_beta",
+        )
+        _render_portfolio_risk_history(
+            run_store_path=str(run_store_path),
+            artifact_dir=str(artifact_dir),
+            job_log_dir=str(job_log_dir),
         )
 
         (
@@ -223,6 +234,11 @@ def _render_risk_and_scenarios(
         )
         st.write(str(instability.get("regime_instability_read", "")))
         _render_metric_dataframe(_display_metrics(regime_instability_components))
+        _render_regime_instability_history(
+            run_store_path=str(run_store_path),
+            artifact_dir=str(artifact_dir),
+            job_log_dir=str(job_log_dir),
+        )
 
     st.subheader("Future-State Scenario Lattice")
     scenario_lattice = current_state.scenario_lattice
@@ -314,6 +330,103 @@ def _render_scenario_probability_explanation(
             _render_metric_dataframe(
                 _display_metrics(audit_frame.head(DEFAULT_SCENARIO_HORIZON_AUDIT_TOP_N))
             )
+
+
+def _render_regime_instability_history(
+    *,
+    run_store_path: str,
+    artifact_dir: str,
+    job_log_dir: str,
+) -> None:
+    metric_history, component_history, _scenario_driver_history, _driver_rotation_history = (
+        load_snapshot_trend_frames(run_store_path, artifact_dir, job_log_dir)
+    )
+    metric_history = latest_per_market_date(metric_history)
+    component_history = latest_per_market_date(component_history, subset=["component"])
+    st.caption("Regime-instability trend from saved snapshots")
+    cols = st.columns(2)
+    with cols[0]:
+        figure = compact_metric_line_figure(
+            metric_history,
+            columns=["regime_instability_score", "spy_ytd_large_move_share"],
+            labels={
+                "regime_instability_score": "Instability score",
+                "spy_ytd_large_move_share": "SPY +/-1% YTD share",
+            },
+            title="Instability Score Over Time",
+            yaxis_title="Score / share",
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+        else:
+            st.info("No saved instability trend is available yet.")
+    with cols[1]:
+        figure = long_metric_line_figure(
+            component_history,
+            category_column="component",
+            value_column="component_score",
+            title="Instability Components Over Time",
+            yaxis_title="Component score",
+            top_n=6,
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+        else:
+            st.info("No saved instability component trend is available yet.")
+
+
+def _render_portfolio_risk_history(
+    *,
+    run_store_path: str,
+    artifact_dir: str,
+    job_log_dir: str,
+) -> None:
+    metric_history, _component_history, _scenario_driver_history, _driver_rotation_history = (
+        load_snapshot_trend_frames(run_store_path, artifact_dir, job_log_dir)
+    )
+    metric_history = latest_per_market_date(metric_history)
+    st.caption("Portfolio risk constraint trend from saved snapshots")
+    cols = st.columns(2)
+    with cols[0]:
+        figure = compact_metric_line_figure(
+            metric_history,
+            columns=[
+                "portfolio_risk_multiplier",
+                "post_expected_shortfall_95",
+                "post_max_stress_loss",
+            ],
+            labels={
+                "portfolio_risk_multiplier": "Risk multiplier",
+                "post_expected_shortfall_95": "ES 95",
+                "post_max_stress_loss": "Max stress loss",
+            },
+            title="Sizing Clamp and Tail Risk",
+            yaxis_title="Value",
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+        else:
+            st.info("No saved portfolio risk trend is available yet.")
+    with cols[1]:
+        figure = compact_metric_line_figure(
+            metric_history,
+            columns=["post_equity_beta", "post_ai_beta", "correlation_shift"],
+            labels={
+                "post_equity_beta": "Equity beta",
+                "post_ai_beta": "AI beta",
+                "correlation_shift": "Correlation shift",
+            },
+            title="Beta and Correlation Pressure",
+            yaxis_title="Exposure / shift",
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+        else:
+            st.info("No saved beta or correlation trend is available yet.")
 
 
 def _render_scenario_probability_history(

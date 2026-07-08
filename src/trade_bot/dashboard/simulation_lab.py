@@ -22,6 +22,10 @@ from trade_bot.dashboard.formatting import (
     _format_decimal,
     _format_percent,
 )
+from trade_bot.dashboard.trends import (
+    load_simulation_validation_trend_frame,
+    long_metric_line_figure,
+)
 from trade_bot.DEFAULTS import (
     DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS,
     DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_HIGH,
@@ -229,6 +233,7 @@ def _render_simulation_validation_history(
         origin_metrics=origin_metrics,
     )
     _render_simulation_horizon_summary(horizon_metrics)
+    _render_simulation_quality_history(warehouse_path, selected_strategy=selected_strategy)
 
     visual_cols = st.columns([1.25, 1.0])
     with visual_cols[0]:
@@ -390,6 +395,93 @@ def _render_simulation_horizon_summary(horizon_metrics: pd.DataFrame) -> None:
         ),
         hide_index=True,
     )
+
+
+def _render_simulation_quality_history(
+    warehouse_path: str,
+    *,
+    selected_strategy: str | None,
+) -> None:
+    history = load_simulation_validation_trend_frame(warehouse_path)
+    if selected_strategy and not history.empty and "strategy" in history:
+        scoped = history[history["strategy"].astype(str) == selected_strategy].copy()
+        if not scoped.empty:
+            history = scoped
+    summary = history[
+        history.get("metric_scope", pd.Series(dtype=str))
+        .astype(str)
+        .isin(["primary_summary", "horizon_summary", "ablation_summary"])
+    ].copy()
+    if summary.empty:
+        return
+    st.caption("Validation quality over time")
+    cols = st.columns(2)
+    with cols[0]:
+        figure = long_metric_line_figure(
+            summary,
+            category_column="horizon",
+            value_column="coverage_error",
+            title="Coverage Error by Horizon",
+            yaxis_title="Coverage error",
+            percent=True,
+            top_n=6,
+            height=300,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+    with cols[1]:
+        figure = long_metric_line_figure(
+            summary,
+            category_column="horizon",
+            value_column="median_abs_error",
+            title="Median Forecast Miss by Horizon",
+            yaxis_title="Median absolute error",
+            percent=True,
+            top_n=6,
+            height=300,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+    cols = st.columns(3)
+    with cols[0]:
+        figure = long_metric_line_figure(
+            summary,
+            category_column="variant",
+            value_column="launch_action_score",
+            title="Launch Action Score",
+            yaxis_title="Score",
+            percent=True,
+            top_n=6,
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+    with cols[1]:
+        figure = long_metric_line_figure(
+            summary,
+            category_column="variant",
+            value_column="launch_overrisk_rate",
+            title="Over-Risk Rate",
+            yaxis_title="Rate",
+            percent=True,
+            top_n=6,
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+    with cols[2]:
+        figure = long_metric_line_figure(
+            summary,
+            category_column="variant",
+            value_column="constructive_capture_rate",
+            title="Constructive Capture",
+            yaxis_title="Rate",
+            percent=True,
+            top_n=6,
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
 
 
 def _render_simulation_validation_conclusion(

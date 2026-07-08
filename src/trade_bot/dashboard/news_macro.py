@@ -1,15 +1,25 @@
 from __future__ import annotations
 
+from pathlib import Path
+
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
+from trade_bot.dashboard.trends import (
+    latest_per_market_date,
+    load_snapshot_trend_frames,
+    long_metric_line_figure,
+)
 from trade_bot.DEFAULTS import (
     DEFAULT_NARRATIVE_OPERATING_DATA_SUPPORT,
     DEFAULT_NARRATIVE_RESEARCH_ONLY_DATA_SUPPORT,
     DEFAULT_NARRATIVE_UNSUPPORTED_DATA_SUPPORT,
+    DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    DEFAULT_RUN_STORE_DB_PATH,
+    DEFAULT_RUN_STORE_JOB_LOG_DIR,
 )
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.driver_rotation import (
@@ -82,7 +92,13 @@ def _join_unique_values(values: pd.Series) -> str:
     return "; ".join(unique_values)
 
 
-def _render_news_and_macro(baseline_run: BaselineRun) -> None:
+def _render_news_and_macro(
+    baseline_run: BaselineRun,
+    *,
+    run_store_path: str | Path = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: str | Path = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: str | Path = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+) -> None:
     current_state = baseline_run.current_state
     regime_instability = getattr(current_state, "regime_instability", pd.DataFrame())
     regime_instability_components = getattr(
@@ -253,6 +269,11 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
                 _display_metrics(driver_rotation[display_columns]),
                 hide_index=True,
             )
+        _render_macro_driver_history(
+            run_store_path=str(run_store_path),
+            artifact_dir=str(artifact_dir),
+            job_log_dir=str(job_log_dir),
+        )
 
     st.subheader("Cross-Source Insight Diagnostics")
     signal_cols = st.columns(4)
@@ -415,6 +436,55 @@ def _render_news_and_macro(baseline_run: BaselineRun) -> None:
 
     with st.expander("Data quality audit", expanded=False):
         _render_metric_dataframe(_display_metrics(current_state.data_quality))
+
+
+def _render_macro_driver_history(
+    *,
+    run_store_path: str,
+    artifact_dir: str,
+    job_log_dir: str,
+) -> None:
+    _metric_history, _component_history, scenario_driver_history, driver_rotation_history = (
+        load_snapshot_trend_frames(run_store_path, artifact_dir, job_log_dir)
+    )
+    scenario_driver_history = latest_per_market_date(
+        scenario_driver_history,
+        subset=["driver"],
+    )
+    driver_rotation_history = latest_per_market_date(
+        driver_rotation_history,
+        subset=["driver"],
+    )
+    st.caption("Macro and scenario driver momentum from saved snapshots")
+    cols = st.columns(2)
+    with cols[0]:
+        figure = long_metric_line_figure(
+            scenario_driver_history,
+            category_column="driver",
+            value_column="score",
+            title="Scenario Driver Scores Over Time",
+            yaxis_title="Score",
+            top_n=7,
+            height=300,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+        else:
+            st.info("No saved scenario-driver trend is available yet.")
+    with cols[1]:
+        figure = long_metric_line_figure(
+            driver_rotation_history,
+            category_column="driver_label",
+            value_column="current_activation",
+            title="Driver Rotation Activation Over Time",
+            yaxis_title="Activation",
+            top_n=7,
+            height=300,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+        else:
+            st.info("No saved driver-rotation trend is available yet.")
 
 
 def _asset_regime_pulse_row(assets: pd.DataFrame, asset_class: str) -> pd.Series:

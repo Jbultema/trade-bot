@@ -148,7 +148,7 @@ run_source = st.sidebar.radio(
 )
 show_quick_reference = st.sidebar.toggle(
     "Show quick reference rail",
-    value=True,
+    value=False,
     help="Show the fixed right-side lookup rail for metrics, ticket fields, workflows, and ticker symbols.",
 )
 if show_quick_reference:

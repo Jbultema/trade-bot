@@ -244,6 +244,9 @@ class RunStore:
         *,
         keep_latest: int = 12,
         keep_per_market_date: int = 2,
+        keep_recent_market_days: int | None = None,
+        keep_weekly_older: int = 1,
+        weekly_frequency: str = "W-WED",
         apply: bool = False,
     ) -> pd.DataFrame:
         if keep_latest < 0:
@@ -251,6 +254,12 @@ class RunStore:
             raise ValueError(msg)
         if keep_per_market_date < 0:
             msg = "keep_per_market_date must be non-negative"
+            raise ValueError(msg)
+        if keep_recent_market_days is not None and keep_recent_market_days < 0:
+            msg = "keep_recent_market_days must be non-negative"
+            raise ValueError(msg)
+        if keep_weekly_older < 0:
+            msg = "keep_weekly_older must be non-negative"
             raise ValueError(msg)
 
         snapshots = self.list_snapshots(limit=100_000)
@@ -261,9 +270,30 @@ class RunStore:
         snapshots["_rank_all"] = snapshots.index + 1
         snapshots["_rank_market_date"] = snapshots.groupby("market_date").cumcount() + 1
         latest_mask = snapshots["_rank_all"] <= keep_latest
-        market_date_mask = snapshots["_rank_market_date"] <= keep_per_market_date
+        if keep_recent_market_days is None:
+            retention_mask = latest_mask | (snapshots["_rank_market_date"] <= keep_per_market_date)
+        else:
+            market_dates = pd.to_datetime(snapshots["market_date"], errors="coerce")
+            recent_dates = (
+                market_dates.dropna()
+                .drop_duplicates()
+                .sort_values(ascending=False)
+                .head(keep_recent_market_days)
+            )
+            recent_date_values = set(recent_dates.dt.date)
+            recent_mask = market_dates.dt.date.isin(recent_date_values)
+            recent_market_date_mask = recent_mask & (
+                snapshots["_rank_market_date"] <= keep_per_market_date
+            )
+            older_mask = ~recent_mask
+            weekly_mask = pd.Series(False, index=snapshots.index)
+            if keep_weekly_older > 0 and older_mask.any():
+                weekly_periods = market_dates.dt.to_period(weekly_frequency).astype(str)
+                weekly_ranks = snapshots.loc[older_mask].groupby(weekly_periods[older_mask]).cumcount() + 1
+                weekly_mask.loc[older_mask] = weekly_ranks <= keep_weekly_older
+            retention_mask = latest_mask | recent_market_date_mask | weekly_mask
 
-        candidates = snapshots[~(latest_mask | market_date_mask)].copy()
+        candidates = snapshots[~retention_mask].copy()
         if candidates.empty:
             return _empty_prune_frame()
 

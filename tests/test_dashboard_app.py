@@ -48,6 +48,16 @@ def test_dashboard_app_renders_action_headline(
     assert any("freshness-strip" in markdown.value for markdown in app.markdown)
     assert any("Latest update" in markdown.value for markdown in app.markdown)
     assert any("Market date 2026-06-17" in markdown.value for markdown in app.markdown)
+    quick_reference_toggle = next(
+        toggle for toggle in app.toggle if toggle.label == "Show quick reference rail"
+    )
+    assert quick_reference_toggle.value is False
+    assert not any("Term Lookup" in markdown.value for markdown in app.markdown)
+    assert not any("ticket field" in markdown.value for markdown in app.markdown)
+    assert not any("Quick Reference" in markdown.value for markdown in app.markdown)
+    quick_reference_toggle.set_value(True).run(timeout=20)
+    assert not app.exception
+    assert any("Quick Reference" in markdown.value for markdown in app.markdown)
     assert any("Term Lookup" in markdown.value for markdown in app.markdown)
     assert any("ticket field" in markdown.value for markdown in app.markdown)
     assert any("metric-info-rail" in markdown.value for markdown in app.markdown)

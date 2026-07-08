@@ -1342,6 +1342,10 @@ class TradingWarehouse:
             "run_snapshots",
             "snapshot_jobs",
             "snapshot_strategy_metrics",
+            "operating_metric_history",
+            "operating_component_history",
+            "operating_scenario_driver_history",
+            "operating_driver_rotation_history",
             "strategy_registry",
             "monitoring_windows",
             "strategy_daily_valuations",
@@ -1362,6 +1366,57 @@ class TradingWarehouse:
             count = int(self._query(f"SELECT COUNT(*) AS rows FROM {table_name}").iloc[0]["rows"])
             rows.append({"table_name": table_name, "rows": count})
         return pd.DataFrame(rows)
+
+    def save_operating_history(
+        self,
+        *,
+        metrics: pd.DataFrame,
+        components: pd.DataFrame,
+        scenario_drivers: pd.DataFrame,
+        driver_rotation: pd.DataFrame,
+        replace_sources: Iterable[str] | None = None,
+    ) -> dict[str, int]:
+        sources = tuple(str(source) for source in (replace_sources or ()))
+        if sources:
+            placeholders = ", ".join("?" for _source in sources)
+            for table_name in (
+                "operating_metric_history",
+                "operating_component_history",
+                "operating_scenario_driver_history",
+                "operating_driver_rotation_history",
+            ):
+                self._execute(
+                    f"DELETE FROM {table_name} WHERE source IN ({placeholders})",
+                    sources,
+                )
+        self._upsert_frame("operating_metric_history", metrics, "history_id")
+        self._upsert_frame("operating_component_history", components, "history_id")
+        self._upsert_frame(
+            "operating_scenario_driver_history",
+            scenario_drivers,
+            "history_id",
+        )
+        self._upsert_frame(
+            "operating_driver_rotation_history",
+            driver_rotation,
+            "history_id",
+        )
+        return {
+            "operating_metric_history": len(metrics),
+            "operating_component_history": len(components),
+            "operating_scenario_driver_history": len(scenario_drivers),
+            "operating_driver_rotation_history": len(driver_rotation),
+        }
+
+    def operating_history_frames(
+        self,
+    ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+        return (
+            self.read_table("operating_metric_history"),
+            self.read_table("operating_component_history"),
+            self.read_table("operating_scenario_driver_history"),
+            self.read_table("operating_driver_rotation_history"),
+        )
 
     def table_exists(self, table_name: str) -> bool:
         frame = self._query(
@@ -1435,6 +1490,83 @@ class TradingWarehouse:
                     promotion_rule VARCHAR NOT NULL,
                     kill_rule VARCHAR NOT NULL,
                     notes VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS operating_metric_history (
+                    history_id VARCHAR PRIMARY KEY,
+                    history_time VARCHAR NOT NULL,
+                    snapshot_time VARCHAR NOT NULL,
+                    market_date VARCHAR NOT NULL,
+                    run_id VARCHAR NOT NULL,
+                    source VARCHAR NOT NULL,
+                    reconstruction_note VARCHAR NOT NULL,
+                    risk_score DOUBLE,
+                    one_month_risk_off_probability DOUBLE,
+                    risk_budget_multiplier DOUBLE,
+                    portfolio_risk_multiplier DOUBLE,
+                    post_expected_shortfall_95 DOUBLE,
+                    post_max_stress_loss DOUBLE,
+                    post_equity_beta DOUBLE,
+                    post_ai_beta DOUBLE,
+                    correlation_shift DOUBLE,
+                    regime_instability_score DOUBLE,
+                    spy_ytd_large_move_share DOUBLE
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS operating_component_history (
+                    history_id VARCHAR PRIMARY KEY,
+                    history_time VARCHAR NOT NULL,
+                    snapshot_time VARCHAR NOT NULL,
+                    market_date VARCHAR NOT NULL,
+                    run_id VARCHAR NOT NULL,
+                    source VARCHAR NOT NULL,
+                    reconstruction_note VARCHAR NOT NULL,
+                    component VARCHAR NOT NULL,
+                    component_score DOUBLE,
+                    latest_value DOUBLE,
+                    state VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS operating_scenario_driver_history (
+                    history_id VARCHAR PRIMARY KEY,
+                    history_time VARCHAR NOT NULL,
+                    snapshot_time VARCHAR NOT NULL,
+                    market_date VARCHAR NOT NULL,
+                    run_id VARCHAR NOT NULL,
+                    source VARCHAR NOT NULL,
+                    reconstruction_note VARCHAR NOT NULL,
+                    driver VARCHAR NOT NULL,
+                    score DOUBLE,
+                    state VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS operating_driver_rotation_history (
+                    history_id VARCHAR PRIMARY KEY,
+                    history_time VARCHAR NOT NULL,
+                    snapshot_time VARCHAR NOT NULL,
+                    market_date VARCHAR NOT NULL,
+                    run_id VARCHAR NOT NULL,
+                    source VARCHAR NOT NULL,
+                    reconstruction_note VARCHAR NOT NULL,
+                    driver VARCHAR NOT NULL,
+                    driver_label VARCHAR NOT NULL,
+                    current_activation DOUBLE,
+                    proven_relevance DOUBLE,
+                    change_30d DOUBLE,
+                    change_90d DOUBLE,
+                    model_role VARCHAR NOT NULL
                 )
                 """
             )

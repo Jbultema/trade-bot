@@ -114,6 +114,52 @@ def test_run_store_prunes_snapshot_artifacts_after_dry_run(
     assert not Path(manifests[1].artifact_path).exists()
 
 
+def test_run_store_prunes_to_recent_daily_and_older_weekly_snapshots(
+    tmp_path: Path,
+    monkeypatch: object,
+) -> None:
+    config_path, events_path, macro_path, news_path = _config_files(tmp_path)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+    market_dates = pd.bdate_range("2026-05-01", "2026-07-15")
+    timestamps = iter(
+        f"{market_date.date()}T20:00:00+00:00" for market_date in market_dates
+    )
+    monkeypatch.setattr("trade_bot.storage.run_store.utc_now_iso", lambda: next(timestamps))
+    manifests = [
+        store.save_snapshot(
+            _baseline_run(str(market_date.date())),
+            config_path=config_path,
+            events_path=events_path,
+            macro_path=macro_path,
+            news_path=news_path,
+        )
+        for market_date in market_dates
+    ]
+
+    candidates = store.prune_snapshots(
+        keep_latest=0,
+        keep_per_market_date=1,
+        keep_recent_market_days=5,
+        keep_weekly_older=1,
+        weekly_frequency="W-WED",
+        apply=True,
+    )
+    remaining = store.list_snapshots(limit=100)
+    remaining_dates = pd.to_datetime(remaining["market_date"])
+    recent_dates = set(market_dates[-5:].date)
+    older = remaining_dates[~remaining_dates.dt.date.isin(recent_dates)]
+
+    assert not candidates.empty
+    assert set(remaining_dates.dt.date).issuperset(recent_dates)
+    assert older.dt.to_period("W-WED").nunique() == len(older)
+    assert len(remaining) == len(recent_dates) + market_dates[:-5].to_period("W-WED").nunique()
+    assert all(Path(manifest.artifact_path).exists() for manifest in manifests[-5:])
+
+
 def test_run_store_starts_daily_update_job(tmp_path: Path, monkeypatch: object) -> None:
     calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
 
@@ -220,7 +266,7 @@ def _config_files(tmp_path: Path) -> tuple[Path, Path, Path, Path]:
     return paths
 
 
-def _baseline_run() -> BaselineRun:
+def _baseline_run(market_date: str = "2026-06-17") -> BaselineRun:
     index = pd.bdate_range("2026-06-01", periods=4)
     prices = pd.DataFrame({"SPY": [100.0, 101.0, 102.0, 103.0]}, index=index)
     weights = pd.DataFrame({"SPY": [1.0, 1.0, 1.0, 1.0]}, index=index)
@@ -236,7 +282,7 @@ def _baseline_run() -> BaselineRun:
         transaction_costs=pd.Series(0.0, index=index),
     )
     current_state = CurrentStateRun(
-        market_date="2026-06-17",
+        market_date=market_date,
         risk_score=0.2,
         risk_status="green",
         risk_summary="Green test state.",

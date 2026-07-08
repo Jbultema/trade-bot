@@ -64,6 +64,11 @@ from trade_bot.research.forward_simulation import (
     summarize_simulation_validation_by_horizon,
     summarize_strategy_rank_validation,
 )
+from trade_bot.research.operating_history import (
+    DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
+    DEFAULT_OPERATING_HISTORY_SOURCE,
+    reconstruct_operating_history,
+)
 from trade_bot.research.scenario_history import (
     clean_scenario_history,
     reconstruct_scenario_history_from_prices,
@@ -546,7 +551,28 @@ def prune_snapshots_cmd(
     artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
     job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
     keep_latest: Annotated[int, typer.Option("--keep-latest")] = 12,
-    keep_per_market_date: Annotated[int, typer.Option("--keep-per-market-date")] = 2,
+    keep_per_market_date: Annotated[int, typer.Option("--keep-per-market-date")] = 1,
+    keep_recent_market_days: Annotated[
+        int,
+        typer.Option(
+            "--keep-recent-market-days",
+            help="Keep this many recent market dates at daily granularity.",
+        ),
+    ] = 30,
+    keep_weekly_older: Annotated[
+        int,
+        typer.Option(
+            "--keep-weekly-older",
+            help="Keep this many snapshots per older weekly bucket.",
+        ),
+    ] = 1,
+    weekly_frequency: Annotated[
+        str,
+        typer.Option(
+            "--weekly-frequency",
+            help="Weekly retention bucket frequency for older snapshots.",
+        ),
+    ] = "W-WED",
     apply: Annotated[
         bool,
         typer.Option(
@@ -559,13 +585,18 @@ def prune_snapshots_cmd(
     candidates = run_store.prune_snapshots(
         keep_latest=keep_latest,
         keep_per_market_date=keep_per_market_date,
+        keep_recent_market_days=keep_recent_market_days,
+        keep_weekly_older=keep_weekly_older,
+        weekly_frequency=weekly_frequency,
         apply=apply,
     )
     mode = "Applied" if apply else "Dry run"
     if candidates.empty:
         console.print(
             f"{mode}: no snapshots fall outside the retention policy "
-            f"(keep_latest={keep_latest}, keep_per_market_date={keep_per_market_date})."
+            f"(keep_latest={keep_latest}, keep_per_market_date={keep_per_market_date}, "
+            f"keep_recent_market_days={keep_recent_market_days}, "
+            f"keep_weekly_older={keep_weekly_older}, weekly_frequency={weekly_frequency})."
         )
         return
 
@@ -574,7 +605,9 @@ def prune_snapshots_cmd(
     console.print(
         f"{mode}: {len(candidates):,} snapshot(s), {total_mb:,.1f} MB outside "
         f"retention policy (keep_latest={keep_latest}, "
-        f"keep_per_market_date={keep_per_market_date})."
+        f"keep_per_market_date={keep_per_market_date}, "
+        f"keep_recent_market_days={keep_recent_market_days}, "
+        f"keep_weekly_older={keep_weekly_older}, weekly_frequency={weekly_frequency})."
     )
     if not apply:
         console.print("Re-run with --apply to delete these artifacts and manifest rows.")
@@ -1300,6 +1333,108 @@ def migrate_warehouse_cmd(
     )
     console.print("[bold]Warehouse table counts[/bold]")
     console.print(warehouse.table_counts())
+
+
+@app.command("seed-operating-history")
+def seed_operating_history_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    events: Annotated[Path, typer.Option("--events")] = DEFAULT_EVENTS_PATH,
+    macro: Annotated[Path, typer.Option("--macro")] = DEFAULT_MACRO_PATH,
+    news: Annotated[Path, typer.Option("--news")] = DEFAULT_NEWS_PATH,
+    source: Annotated[
+        Literal["latest-snapshot", "configured-baselines"],
+        typer.Option(
+            "--source",
+            help=(
+                "Use the latest saved snapshot when available, or recompute configured "
+                "baselines from local inputs."
+            ),
+        ),
+    ] = "latest-snapshot",
+    start_date: Annotated[str | None, typer.Option("--start-date")] = None,
+    end_date: Annotated[str | None, typer.Option("--end-date")] = None,
+    frequency: Annotated[
+        str,
+        typer.Option(
+            "--frequency",
+            help="Pandas resample frequency for historical points, for example W-WED, ME, B.",
+        ),
+    ] = "W-WED",
+    max_points: Annotated[int, typer.Option("--max-points")] = 260,
+    daily_tail_market_days: Annotated[
+        int,
+        typer.Option(
+            "--daily-tail-market-days",
+            help="Append this many recent market dates at daily granularity.",
+        ),
+    ] = 30,
+    min_history_days: Annotated[int, typer.Option("--min-history-days")] = 252,
+    primary_strategy: Annotated[
+        str,
+        typer.Option("--primary-strategy"),
+    ] = DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
+) -> None:
+    run_store = RunStore(store)
+    source_label = "configured baselines"
+    snapshot_payload = None
+    if source == "latest-snapshot":
+        try:
+            snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+        except (FileNotFoundError, TypeError, OSError, AttributeError, ValueError) as error:
+            console.print(f"Could not load latest snapshot; falling back to baseline recompute: {error}")
+    if snapshot_payload is not None:
+        baseline_run, manifest = snapshot_payload
+        source_label = f"latest snapshot {manifest.run_id}"
+    else:
+        if source == "latest-snapshot":
+            console.print("No completed snapshot found; recomputing configured baselines.")
+        bot_config = load_config(config)
+        baseline_run = run_configured_baselines(
+            bot_config,
+            refresh_data=False,
+            refresh_macro=False,
+            refresh_news=False,
+            event_config_path=events,
+            macro_config_path=macro,
+            news_config_path=news,
+        )
+    history = reconstruct_operating_history(
+        baseline_run,
+        start_date=start_date,
+        end_date=end_date,
+        frequency=frequency,
+        max_points=max_points,
+        daily_tail_market_days=daily_tail_market_days,
+        min_history_days=min_history_days,
+        primary_strategy=primary_strategy,
+    )
+    warehouse = TradingWarehouse(store)
+    counts = warehouse.save_operating_history(
+        metrics=history.metrics,
+        components=history.components,
+        scenario_drivers=history.scenario_drivers,
+        driver_rotation=history.driver_rotation,
+        replace_sources=(DEFAULT_OPERATING_HISTORY_SOURCE,),
+    )
+    table = Table(title="Seeded Operating History")
+    table.add_column("table")
+    table.add_column("rows", justify="right")
+    for table_name, rows in counts.items():
+        table.add_row(table_name, f"{rows:,}")
+    console.print(table)
+    if history.metrics.empty:
+        console.print(
+            "No operating history rows were generated. Check start/end dates, frequency, "
+            "and whether enough price history exists for the requested min-history-days."
+        )
+    else:
+        start = str(history.metrics["market_date"].iloc[0])
+        end = str(history.metrics["market_date"].iloc[-1])
+        console.print(
+            f"Stored reconstructed operating history from {start} to {end} using {source_label}. "
+            "These rows are separate from live saved snapshots."
+        )
 
 
 @app.command("seed-monitoring-windows")

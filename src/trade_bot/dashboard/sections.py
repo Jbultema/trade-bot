@@ -35,7 +35,14 @@ def _render_dashboard_section(
     book_alignment: BookAlignmentRun | None = None,
 ) -> None:
     if section == "Command Center":
-        _render_command_center(baseline_run, book_alignment=book_alignment)
+        _render_command_center(
+            baseline_run,
+            book_alignment=book_alignment,
+            run_store_path=warehouse_path,
+            artifact_dir=artifact_dir,
+            job_log_dir=job_log_dir,
+            warehouse_path=warehouse_path,
+        )
     elif section == "Risk & Scenarios":
         _render_risk_and_scenarios(
             baseline_run,
@@ -65,7 +72,12 @@ def _render_dashboard_section(
             decision_sanity_impacts,
         )
     elif section == "News & Macro":
-        _render_news_and_macro(baseline_run)
+        _render_news_and_macro(
+            baseline_run,
+            run_store_path=warehouse_path,
+            artifact_dir=artifact_dir,
+            job_log_dir=job_log_dir,
+        )
     elif section == "Performance":
         _render_performance(
             baseline_run,

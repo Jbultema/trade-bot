@@ -13,6 +13,10 @@ from trade_bot.dashboard.components import (
     _render_metric_dataframe,
 )
 from trade_bot.dashboard.formatting import _display_metrics, _display_trade_frame
+from trade_bot.dashboard.trends import (
+    load_monitoring_trend_frame,
+    long_metric_line_figure,
+)
 from trade_bot.DEFAULTS import (
     DEFAULT_MONITORING_COHORT_START_DATE,
     DEFAULT_MONITORING_ENVELOPE_BREACH_SHARE,
@@ -120,6 +124,7 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
     ]
     available_columns = [column for column in leaderboard_columns if column in display_frame.columns]
     _render_metric_dataframe(_display_metrics(display_frame[available_columns]))
+    _render_monitoring_forward_trends(str(warehouse_path), display_frame)
 
     detail_tab, shortfall_tab, top_tab, reference_tab, registry_tab, warehouse_tab = st.tabs(
         [
@@ -249,6 +254,73 @@ def _render_shortfall_and_execution_audit(warehouse_path: str, frame: pd.DataFra
         if available:
             _render_metric_dataframe(_display_metrics(frame[available]), hide_index=True)
         _render_monitoring_drift_envelope(frame)
+
+
+def _render_monitoring_forward_trends(warehouse_path: str, display_frame: pd.DataFrame) -> None:
+    history = load_monitoring_trend_frame(warehouse_path)
+    if history.empty:
+        return
+    if not display_frame.empty and "window_id" in display_frame and "window_id" in history:
+        window_ids = set(display_frame["window_id"].dropna().astype(str))
+        if window_ids:
+            history = history[history["window_id"].astype(str).isin(window_ids)].copy()
+    if history.empty:
+        return
+    st.caption("Champion/challenger forward trends")
+    cols = st.columns(2)
+    with cols[0]:
+        figure = long_metric_line_figure(
+            history,
+            category_column="window_label",
+            value_column="excess_return",
+            title="Excess Return Since Monitoring Start",
+            yaxis_title="Excess return",
+            percent=True,
+            top_n=8,
+            height=300,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+    with cols[1]:
+        figure = long_metric_line_figure(
+            history,
+            category_column="window_label",
+            value_column="drawdown",
+            title="Forward Drawdown",
+            yaxis_title="Drawdown",
+            percent=True,
+            top_n=8,
+            height=300,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+    cols = st.columns(2)
+    with cols[0]:
+        figure = long_metric_line_figure(
+            history,
+            category_column="window_label",
+            value_column="drawdown_envelope_used",
+            title="Drawdown Envelope Used",
+            yaxis_title="Envelope used",
+            percent=True,
+            top_n=8,
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
+    with cols[1]:
+        figure = long_metric_line_figure(
+            history,
+            category_column="window_label",
+            value_column="beta_adjusted_spy_delta",
+            title="Beta-Adjusted S&P Delta",
+            yaxis_title="Delta",
+            percent=True,
+            top_n=8,
+            height=280,
+        )
+        if figure.data:
+            st.plotly_chart(figure, use_container_width=True)
 
 
 def _monitoring_start_cohorts(windows: pd.DataFrame) -> list[str]:
