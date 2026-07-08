@@ -3,6 +3,7 @@ from __future__ import annotations
 from dataclasses import replace
 
 import pandas as pd
+import pytest
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.research.current_state import CurrentStateRun
@@ -196,6 +197,35 @@ def test_trade_decision_caps_event_only_derisk_without_market_confirmation() -> 
     assert "decision_sanity" in set(decision.evidence["evidence_type"])
 
 
+def test_macro_pressure_alone_does_not_bypass_event_only_derisk_cap() -> None:
+    index = pd.bdate_range("2025-01-01", periods=180)
+    weights = pd.DataFrame({"QQQ": 0.8, "SPY": 0.2}, index=index)
+    result = _backtest_result("primary", index, weights)
+    current_state = replace(
+        _current_state(),
+        scenario_lattice=_constructive_scenario_lattice(),
+        confirmation_matrix=_confirmation_matrix(negative_themes=()),
+    )
+
+    decision = build_trade_decision(
+        primary_result=result,
+        current_state=current_state,
+        event_risk=_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_macro_pressure_signal_inclusion(),
+        prices=_risk_prices(index),
+    )
+
+    summary = decision.summary.iloc[0]
+    bil_row = decision.position_plan[decision.position_plan["ticker"] == "BIL"].iloc[0]
+
+    assert summary["macro_pressure"] == 0.15
+    assert summary["decision_sanity_status"] == "event_only_cap_applied"
+    assert bool(summary["decision_sanity_cap_applied"])
+    assert summary["market_confirmation_break_count"] == 0
+    assert bil_row["scenario_adjusted_weight"] <= 0.25 + 1e-9
+
+
 def test_trade_decision_allows_larger_derisk_when_market_confirmation_breaks() -> None:
     index = pd.bdate_range("2025-01-01", periods=180)
     weights = pd.DataFrame({"QQQ": 0.8, "SPY": 0.2}, index=index)
@@ -224,6 +254,29 @@ def test_trade_decision_allows_larger_derisk_when_market_confirmation_breaks() -
     assert summary["market_confirmation_breaks"] == "credit, volatility"
     assert summary["pre_sanity_risk_budget_multiplier"] == summary["risk_budget_multiplier"]
     assert bil_row["scenario_adjusted_weight"] > 0.25
+
+
+def test_trade_decision_treats_uninvested_vol_target_residual_as_defensive() -> None:
+    index = pd.bdate_range("2025-01-01", periods=180)
+    weights = pd.DataFrame({"QQQ": 0.20, "SMH": 0.10}, index=index)
+    result = _backtest_result("partial_vol_target", index, weights)
+
+    decision = build_trade_decision(
+        primary_result=result,
+        current_state=_current_state(),
+        event_risk=_empty_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_empty_signal_inclusion(),
+    )
+
+    summary = decision.summary.iloc[0]
+    bil_row = decision.position_plan[decision.position_plan["ticker"] == "BIL"].iloc[0]
+
+    assert "BIL 70%" in summary["base_position"]
+    assert summary["recommended_action"] == "REVIEW_REDUCE_RISK"
+    assert bil_row["current_weight"] == 0.70
+    assert decision.position_plan["current_weight"].sum() == 1.0
+    assert summary["current_risk_asset_weight"] == pytest.approx(0.30)
 
 
 
@@ -460,6 +513,26 @@ def _empty_event_risk() -> EventRiskRun:
 def _empty_signal_inclusion() -> SignalInclusionRun:
     return SignalInclusionRun(
         summary=pd.DataFrame(),
+        pressure=pd.DataFrame(),
+        results={},
+        metrics=pd.DataFrame(),
+        window_summary=pd.DataFrame(),
+    )
+
+
+def _macro_pressure_signal_inclusion() -> SignalInclusionRun:
+    return SignalInclusionRun(
+        summary=pd.DataFrame(
+            {
+                "decision": ["paper_candidate", "paper_candidate", "paper_candidate"],
+                "latest_pressure_state": ["risk_pressure", "risk_pressure", "risk_pressure"],
+                "signal_group": [
+                    "macro:inflation_realized",
+                    "macro:wages",
+                    "macro:sentiment",
+                ],
+            }
+        ),
         pressure=pd.DataFrame(),
         results={},
         metrics=pd.DataFrame(),

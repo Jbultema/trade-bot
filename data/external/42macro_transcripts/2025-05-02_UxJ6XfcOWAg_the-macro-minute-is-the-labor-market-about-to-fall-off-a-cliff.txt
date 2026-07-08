@@ -1,0 +1,544 @@
+source: 42macro_youtube
+published_date: 2025-05-02
+video_id: UxJ6XfcOWAg
+url: https://www.youtube.com/watch?v=UxJ6XfcOWAg
+title: The Macro Minute:  Is the labor market about to fall off a cliff?
+
+Happy Friday out there at Te42. It's
+your skipper here at Darius Dell to
+present our macro minute for Friday, May
+2nd, 2025. As always, we'll start with
+the executive summary from today's
+leadoff morning note. If you would like
+to review the analysis supporting these
+conclusions and to see if you need to
+make any changes in your portfolio to
+remain on the right side of market risk,
+you need to be a client of 42 macro. So
+today's key macro question is, is the
+labor market about to fall off a cliff?
+Our answers are unlikely. The April jobs
+report indicated that the US labor
+market remains resilient from an income
+perspective, but employment growth is
+slowing sharply as we expected. All
+told, persistent leading indicators of
+the business cycle currently indicate a
+low to middling probability of a
+developing recession in the US economy.
+We continue to view a technical
+recession as the highest probability
+outcome, not an actual slash NBER
+recession that features a broad-based
+decline in consumption, production,
+income, and investment. techno recession
+being just multiple quarters of negative
+growth that does not snowball into a
+broader credit cycle. That said, the
+labor market is likely to deteriorate
+over the medium term, boosting consensus
+recession odds in the process. Whether
+asset markets can look through that
+depends entirely on the messaging from
+the Trump administration. The more they
+allow historically elevated policy
+uncertainty to linger, the higher
+consensus recession odds will rise,
+which may reflexively cause one to
+occur. Worse, the Treasury bond market
+blow up from early April confirmed one
+of our biggest fears. The US lacks the
+fiscal space to easily climb out of a
+recession. The federal budget deficit,
+which is currently 7%, could balloon to
+10 to 15% of GDP at a time when foreign
+creditors and investors would be less
+inclined to capitalize the Treasury
+market because of the Trump
+administration's policy choices. And to
+be clear, strategic ambiguity and
+bullying trading partners and military
+allies are indeed policy choices.
+Moreover, they are policy choices that
+risk dramatically and permanently
+eroding the US's exorbitant privilege if
+they cause a recession that leads to a
+buyer strike in the Treasury market in
+part due to the US's absurdly poor twin
+deficit dynamics. It's a lot of
+complicated stuff here, but uh hopefully
+everyone is understanding that. And if
+you don't understand that, uh, we have
+our May 2025 macro scouting report
+presentation coming out this afternoon,
+published exclusively, uh, to 42 macro
+clients. Uh, you know, we're going to
+walk through all those c current account
+and capital account dynamics uh, and
+ultimately the risks we see both from a
+medium-term perspective as it relates to
+the economy and asset markets, but also
+from a longer term perspective in terms
+of where this is all heading in the
+context of the fourth turning poly
+crisis that we've been helping our
+clients prepare for uh, for the la
+better part of two years. So, um, you
+know, if I sound like I'm wearing a
+tinfoil hat, uh, you know, that that's
+that's totally fine, but I'd rather put
+the tinfoil hat on and help you guys
+understand, uh, you know, paint a
+credible road map using data. I think
+there's 150 slides in this presentation
+that I'm staring at. uh paint a credible
+roadmap using data so that you know you
+have some you know understanding of that
+full distribution of probable uh
+economic policy and market outcomes that
+we talked about in yesterday's macro
+minute. Transitioning to our 42 macro
+dashboard as always we'll wrap up with a
+question from our community. Uh this one
+uh is near and dear to my heart because
+it allows me to uh to geek out a little
+bit uh for you guys. Um, so this one
+says, uh, global macrois matrix strength
+of signal, uh, has been dropping like a
+rock o over the last week. Looks like
+we're back in a market trying to figure
+out what to do phase. Uh, fantastic, uh,
+question here. Um, so let me pull up our
+um, our global macro risk matrix here.
+Uh, for those of you who may not be uh,
+familiar with what we do uh, behind our
+payw wall for our clients, one of the
+most important things we do is now cast
+a market regime. Uh, and the reason that
+that's important is because investors
+you you if you want to avoid FOMO, which
+is fear of missing out, which causes
+investors to buy cycle tops, or FOMO,
+which is fear of more losses, which
+causes investors to sell cycle lows, if
+you want to avoid FOMO and FOMO, you
+have to position for the market regime
+as an investor. You don't have to
+position for the market regime as a
+retail investor. you can, you know, have
+your shorts go up indefinitely or have
+your loans go down indefinitely and no
+one's going to tap you on the shoulder
+until your bank until your brokerage
+account runs out of money or your, you
+know, your spouse, you know, divorces
+you or whatever. Uh, but if you're an
+institutional investor, which is where
+this process comes from, then you must
+position for the market regime because
+eventually you're going to get tapped on
+the shoulder and you won't be an
+institutional investor anymore. You'll
+be selling insurance. And so, we built
+this system to make keep our buy side
+clients on the right side of market
+risk. And oh by the way it it really
+works for retail investors too. So let
+me um let me give you a little bit of
+background about the system uh so I can
+answer the question um cogently. Uh so
+how the system works actually I can just
+use my pin here. How the system works.
+So what we're trying to do here is score
+all the relevant markets that you know
+major institutional investors traffic in
+across uh stocks um volatility
+commodities currencies and and fixed
+income. Um, we're scoring all the
+relevant the mo what we consider to be
+the most the 42 most important markets
+in the world from the perspective of
+institutional investors uh market
+exposures at least or market macro
+market indicators. Uh we score each one
+of those daily through the lens of its
+own respective volatility adjusted
+momentum signal. um you know we don't
+have time to unpack exactly what that is
+but then we tally up the score uh on a
+daily on a daily frequency to identify
+you know which regime is essentially
+being shown the most love by asset
+markets which we interpret to be the
+market regime and so for example uh
+let's you know let's pick on um you know
+implied va correlations three-month
+implied volatility correlations uh those
+are currently bullish from the
+perspective of their volatility adjusted
+momentum signal uh historically implied
+volatility correlation
+um within the equity market have been
+bullish in um inflation and deflation
+which are the two riskoff regimes.
+Inflation being a riskoff regime with an
+inflationary bias, deflation being a
+riskoff regime with a disinflationary
+bias. And so you know the the current
+bullish vamp signal for implied
+volatility correlations is providing a
+point for both inflation and deflation.
+It doesn't know for an inflation or
+deflation in isolation, but it knows
+that historically it's been bullish in
+inflation or deflation. So right now
+it's assuming that this particular one
+of those 42 indicators is particular is
+is um is is assuming that we're in
+inflation or deflation. Uh let's use
+Bitcoin as an example here. Uh Bitcoin
+is currently bullish from the set of
+volatility just a momentum signal.
+Historically Bitcoin most of its
+performance is concentrated uh in
+Goldilocks and reflation. Goldilocks
+being a riskon market regime with a
+disinflationary bias. Reflation being a
+risk-on market regime with a
+reflationary bias with an inflationary
+bias. And so the current bullish VMs
+condition, bullish volatility adjusted
+momentum signal condition of Bitcoin is
+currently contributing one point to both
+Goldilocks and reflation. Again, Bitcoin
+doesn't know if it's risk on with an
+inflationary bias or risk off with an
+infl sorry risk on with an inflationary
+bias or risk on with a disinflationary
+bias. It just knows that it's risk based
+on its bullish V's condition. And so
+we're tallying each of these markets
+daily from that perspective to get a
+sense of which markets, which of the
+four regimes is actually, you know,
+again, getting shown the most love
+getting confirmed by the maximum number
+of markets or not the maximum number,
+but the the highest sum and share of
+those confirming markets. And the
+neutral signals in this in this process
+don't count because there's no
+conviction in that particular indicator.
+So we're only tallying the bullish and
+bearish signals on any given day. And
+then we sum that up to identify which
+regime, which of those four market
+regimes we identified uh is getting the
+maximum amount of uh the sorry the
+highest sum and share of those
+confirming markets. And right now
+deflation uh is the highest uh sum and
+share. There are 16 of the 42 markets
+confirming deflation as opposed to 12
+for Goldilocks, eight for uh reflation,
+and 10 for inflation. And so we say okay
+as long as that defla as long as
+deflation remains the highest sum and
+share we'll say we're still in a
+deflation market regime. Now going back
+to the question which I think is a
+fantastic question obviously this is a
+client that's been with us for a while
+uh the strength of signal which is just
+the total amount of of confirming
+markets in any given day displayed on a
+percentile basis with daily uh of date
+with daily data going back to January
+1998. The current total amount of
+conviction that's being you know
+generated by global macro markets right
+now as evidenced by the cumulative
+number of of signal being generated
+across these four uh regimes is only in
+the 23rd percentile. And so that you
+know with daily data going back to
+January 1998 and and so what that
+essentially is saying is markets are
+increasingly less convicted about what
+regime they want to price in right now.
+And you can see this represented pretty
+clearly on this chart where we show the
+versus the share of each the confirming
+markets. Um the chart on the left shows
+the sum. The chart on the right shows
+the share. Whenever you see a limited
+amount of dispersion between the
+regimes, that tells you that markets
+aren't really sure if we're pricing risk
+on, risk off, or inflation, deflation.
+Right now, markets are kind of in a
+holding pattern right now from the
+perspective of their medium-term
+volatility just momentum signals across
+the 42 markets that are contributing to
+this uh to this process. And so um going
+back to the question is essentially
+saying that we could be on the you know
+what this essentially says is we could
+potentially be on the precipice of
+regime change in asset markets i.e.
+going from deflation to either
+goldilocks, reflation or inflation. Uh
+and obviously two of those three
+outcomes is are bullish you know from
+the perspective of a risk on market
+regime and uh one of those potentially
+is bearish. So uh you know this is a uh
+really important I think asset markets
+are very much at an important crossroads
+right here. Uh this has been a very
+important week uh both from an economic
+signaling standpoint. We got the GDP
+report, the PC report, the jobs report,
+uh more jobless claims data. We got all
+the the not the all for the max 7
+company earnings. We got a ton of
+information that markets are currently
+digesting uh this week. And that in my
+opinion is what's contributing to the
+fact that global macro markets across
+the 42 most important volatility
+adjusted momentum signals to track in
+the world from our perspective. uh
+global macro markets are now kind of in
+this holding pattern and trying to look
+around say okay what's next what's the
+next big macro catalyst where are we
+going from here you know a lot of the
+you know just where are we going from
+here is really the question that asset
+markets are a are asking right now and
+in terms of this um in terms of our
+process and the reason this stuff
+matters right you know again you have to
+position for the market regime to avoid
+FOMO and FOMO that's the number one
+reason we do what we do here from a
+market regime now casting process uh you
+don't want FOMO O in a raging bull
+market in so much that you don't want
+FOMO in a raging bare market. And so
+just acknowledging what regime we're in
+and and positioning your portfolio at
+least at the very margins. You know, if
+you're an institutional investor, but if
+you're a retail investor, you know, you
+have the flexibility in terms of your
+account size and liquidity to reposition
+your entire portfolio uh to take
+advantage of what the market regime
+signals are are signaling. Especially
+when new regime change occurs. That's
+when the most money is made is when you
+get the signal and you immediately
+respond to it in your portfolio because
+it maximizes the number amount the the
+total amount of days or the total amount
+of weeks or months that you could
+potentially participate in the market
+regime. It gives you the best cost basis
+to participate in the new market regime.
+This is what we mean by staying on the
+right side of market risk. uh and then
+just historically uh if you um in terms
+of the regime change statistics you know
+uh because I think that's you know very
+important to understand exactly you know
+how frequently this process will
+generate signal particularly meaningful
+signal uh in your portfolio and what we
+mean by meaningful signal is rorow phase
+transitions row phase transition just
+means you're going from risk on to risk
+off or risk off to risk on that's what
+really matters as it relates to staying
+on the right side of market risk
+institutional investors care if it's
+disinflationary bias or infl
+inflationary bias in terms of Goldilocks
+versus reflation or inflation and deep
+versus deflation because they're going
+to make very, you know, specific factor
+long short bets across a variety of
+factors in their portfolio, you know, in
+order to generate relative returns in
+asset markets. That's a very
+institutional, you know, sort of problem
+set that we're trying to solve and and
+and help our clients solve here on the
+institutional risk management side. But
+retail investors, all you really need to
+know is are we risked on or risk off
+period? And most importantly, you need
+to know, okay, today is the day we're
+going risk off or today is the day we're
+going risk on so that you can do
+something differently in your portfolio
+to remain on the right side of market
+risk. And and essentially, you know,
+with data going back to J daily data
+going back to January 1998, if you look
+at over a trailing three-year, 5year, 10
+year, and 20-year perspective, you
+you're talking about basically, you
+know, two rorow phase transitions per
+year. So that means going from a bull
+market, you know, if you're, let's say
+you're in a bull market, that means you
+go down into a meaningful enough
+correction that you need to risk manage
+to stay on the right side of market
+risk. That would be one. And then you
+break back out into the bull market.
+That's two. So once a year essentially
+what our data what our daily data
+suggests with data going back to January
+1998 in terms of this market regime
+casting process what the data suggest is
+there's really one material correction
+per year that you need to risk manage in
+order to stay on the right side of
+market risk one you know so that you're
+not you know risking potentially blowing
+up your account uh in a potential crash
+because you don't know if it's a crash
+you know was there between a crash and
+and a correction ahead on an Xanti basis
+really nothing. On a X-ost basis you you
+can tell the difference between a crash
+and a correction but Xanti they both
+look the same. So and so you need to do
+something in order to um in order to to
+give yourself the best to optimize uh
+remaining on the right side of market
+risk. So again there's only one material
+enough correction per year in asset
+markets to you know stay on the right
+side of that's what our data confirms.
+There's a lot of chop and a lot of noise
+and most retail investors are trading
+way more frequently than that. We we try
+to avoid trading at all if we don't have
+to here at 42 Macro. We don't want to
+trade at all. I'd rather not trade. But
+most retail investors are constantly
+responding to, you know, fundamental
+news, podcasts, talking heads on TV,
+Twitter, LinkedIn. They're constantly
+getting what they think is signal, but
+it's mostly noise. The data tells you
+that most it's most of it's noise. you
+only really need to make two decisions
+per year to remain on the right side of
+market risk generally speaking obviously
+these are these are averages but just
+you know again these averages are
+persistent across a trailing three year
+trailing five year trailing 10 year and
+trailing 20-y year uh uh sample so in my
+opinion I think you you you can trust
+that uh and then I would say if we're in
+a raging bare market you know we haven't
+had a you know a multi-quarter
+multi-year type bare market in in a long
+time I mean you got to go back to the
+GFC and prior to that you got to go back
+to uh uhh the.com US uh even the 1990
+bare market was quick. Um let's go back
+to 87. That was obviously quick. I mean,
+you know, we don't tend to have, you
+know, sustained long-term bare markets
+because usually we get a policy
+response. Um you know, that that that
+that prevents that. Um but that kind of
+goes back to executive summaries. I we
+don't have the fiscal space for a
+significant policy response and
+certainly won't after we, you know, we
+dump another five, you know, point8
+trillion dollars of of debt finance tax
+cuts on the books. um that would be
+really dangerous. Uh and most
+importantly, we may not have the
+monetary policy response if the Fed has
+to keep interest rates high to support
+the dollar in a potential balance of
+payments. Uh um you know, I don't want
+to say crisis. Crisis is too strong of a
+word, but we saw elements of the balance
+of payments crisis earlier this this
+month. You know, so I think you know, in
+our opinion, the fourth turning poly
+crisis that we've been preparing our
+clients for, you know, for the past
+couple of years is really, you know, has
+really accelerated here in 2025. And
+that's not a political statement. It
+just is true. You know, we saw some
+things that we have not seen yet uh in
+the US um treasury market and how that
+uh flowed through in terms of the
+currency market and equity market. And
+you know, this is all new stuff, but
+it's not new if you've been preparing
+for it like we have uh been for the past
+couple of years. So, um, yeah, it's a
+longwinded way to answer a, uh, what a
+seemingly simple question, but it's not
+simple in the context of what we're
+trying to do here, uh, for our clients,
+which is again keep them on the right
+side of the market risk, which generally
+speaking means avoiding FOMO and bull
+markets and avoiding FOMO, uh, in bare
+markets, and ultimately not overtrading
+your account, overreacting to mostly
+noise, right? there's only two signals a
+year really to to do something
+differently in your account at least
+according to our you know the
+institutional grade uh uh market regime
+now casting process which we have you
+know $25 trillion plus worth of
+institutional investors all you know
+paying attention to this on a daily uh
+frequency so uh we're grateful for that
+we're grateful for everyone for tuning
+in and uh everyone have a wonderful
+weekend we'll catch you back here uh
+next Monday and as I said earlier we
+have our uh macro uh uh sorry our March
+uh 2025 uh macro scouting report
+presentation uh that webcast that will
+be out uh uh to our clients this
+afternoon. So uh if you want to get up
+to speed on all these current account
+and capital account dynamics and uh you
+know trying to understand you know the
+root cause of US exorbitant privilege
+and and and sorry root cause of US
+exceptionalism and how that's
+inextricably linked to US exorbitant
+privilege and the risk to that as well
+as where the labor market's headed uh
+where we see inflation headed how the
+bond market and the Fed are going to
+respond to those you know those the
+crossurrens and those dynamics you know
+those are the kinds of questions uh we
+ask and answer uh in these uh macro
+scouting report presentations. So, um,
+looking forward to, uh, presenting that
+to our clients this afternoon. Everyone
+have a wonderful weekend. We'll catch
+you back here tomorrow. Cheers.

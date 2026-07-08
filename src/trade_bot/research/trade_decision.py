@@ -42,7 +42,10 @@ def build_trade_decision(
     defensive_ticker: str = "BIL",
     min_trade_weight: float = 0.02,
 ) -> TradeDecisionRun:
-    base_weights = primary_result.weights.iloc[-1].astype(float)
+    base_weights = _weights_with_defensive_residual(
+        primary_result.weights.iloc[-1].astype(float),
+        defensive_ticker=defensive_ticker,
+    )
     scenario_context = _scenario_context(current_state.scenario_lattice)
     event_context = _event_context(event_risk.events)
     macro_context = _macro_context(signal_inclusion.summary)
@@ -103,7 +106,11 @@ def build_trade_decision(
         defensive_ticker=defensive_ticker,
         risk_budget_multiplier=total_risk_budget_multiplier,
     )
-    action = _recommended_action(position_plan, current_state.risk_status)
+    action = _recommended_action(
+        position_plan,
+        current_state.risk_status,
+        defensive_ticker=defensive_ticker,
+    )
     explanation = _human_explanation(
         action=action,
         base_weights=base_weights,
@@ -196,6 +203,22 @@ def build_trade_decision(
         scenario_links=scenario_links,
         portfolio_risk=portfolio_risk,
     )
+
+
+def _weights_with_defensive_residual(
+    weights: pd.Series,
+    *,
+    defensive_ticker: str,
+) -> pd.Series:
+    clean = weights.astype(float).replace([np.inf, -np.inf], np.nan).fillna(0.0).clip(lower=0.0)
+    if defensive_ticker not in clean.index:
+        clean.loc[defensive_ticker] = 0.0
+    total = float(clean.sum())
+    if total < 1.0:
+        clean.loc[defensive_ticker] = clean.loc[defensive_ticker] + (1.0 - total)
+    elif total > 1.0:
+        clean = clean / total
+    return clean.sort_values(ascending=False)
 
 
 def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
@@ -490,7 +513,6 @@ def _decision_sanity_context(
     break_count = len(confirmation_breaks)
     risk_status = str(current_state.risk_status).lower()
     risk_off_probability = _as_float(scenario_context["risk_off_probability"])
-    macro_pressure = _as_float(macro_context["macro_pressure"])
     event_pressure = _as_float(event_context["event_pressure"])
     left_tail_confirmed = risk_status in {"orange", "red"} or risk_off_probability >= 0.35
     market_confirmed = break_count >= DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS
@@ -498,7 +520,6 @@ def _decision_sanity_context(
         event_pressure > 0
         and not left_tail_confirmed
         and not market_confirmed
-        and macro_pressure < 0.10
     )
 
     if market_confirmed:
@@ -528,7 +549,7 @@ def _decision_sanity_context(
         status = "event_watch"
         signal = "Event pressure watched"
         detail = (
-            "Event pressure is active, but the cap is not governing because macro, scenario, "
+            "Event pressure is active, but the cap is not governing because left-tail scenario "
             "or market-confirmation evidence has separate sizing authority."
         )
     else:
@@ -726,11 +747,35 @@ def _confirmation_breaks_text(confirmation_breaks: tuple[str, ...]) -> str:
     return ", ".join(confirmation_breaks)
 
 
-def _recommended_action(position_plan: pd.DataFrame, risk_status: str) -> str:
-    material_reductions = position_plan[position_plan["delta_weight"] <= -0.05]
-    material_adds = position_plan[position_plan["delta_weight"] >= 0.05]
-    if risk_status in {"orange", "red"} and not material_reductions.empty:
+def _recommended_action(
+    position_plan: pd.DataFrame,
+    risk_status: str,
+    *,
+    defensive_ticker: str,
+) -> str:
+    current_risk = _risk_asset_weight(
+        position_plan,
+        weight_column="current_weight",
+        defensive_ticker=defensive_ticker,
+    )
+    target_risk = _risk_asset_weight(
+        position_plan,
+        weight_column="scenario_adjusted_weight",
+        defensive_ticker=defensive_ticker,
+    )
+    risk_delta = target_risk - current_risk
+    if risk_delta <= -0.05 and risk_status in {"orange", "red"}:
         return "REDUCE_RISK"
+    if risk_delta <= -0.05:
+        return "REVIEW_REDUCE_RISK"
+    if risk_delta >= 0.05:
+        return "REVIEW_ADD_RISK"
+
+    risk_assets = position_plan[
+        position_plan["ticker"].astype(str).str.upper() != defensive_ticker.upper()
+    ]
+    material_reductions = risk_assets[risk_assets["delta_weight"] <= -0.05]
+    material_adds = risk_assets[risk_assets["delta_weight"] >= 0.05]
     if not material_reductions.empty:
         return "REVIEW_REDUCE_RISK"
     if not material_adds.empty:

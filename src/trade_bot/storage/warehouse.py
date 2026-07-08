@@ -1351,6 +1351,9 @@ class TradingWarehouse:
             "strategy_daily_valuations",
             "simulation_validation_runs",
             "simulation_validation_metrics",
+            "external_macro_videos",
+            "external_macro_classifications",
+            "external_macro_tradebot_comparisons",
             "experiment_scorecard",
             "experiment_walk_forward_summary",
             "experiment_regime_metrics",
@@ -1417,6 +1420,42 @@ class TradingWarehouse:
             self.read_table("operating_scenario_driver_history"),
             self.read_table("operating_driver_rotation_history"),
         )
+
+    def save_external_macro_alignment(
+        self,
+        *,
+        videos: pd.DataFrame,
+        classifications: pd.DataFrame,
+        comparisons: pd.DataFrame,
+    ) -> dict[str, int]:
+        classifications = classifications.copy()
+        comparisons = comparisons.copy()
+        if not classifications.empty:
+            if "classification_text_source" not in classifications:
+                classifications["classification_text_source"] = "transcript"
+            if "classification_confidence" not in classifications:
+                classifications["classification_confidence"] = 1.0
+        if not comparisons.empty:
+            if "classification_text_source" not in comparisons:
+                comparisons["classification_text_source"] = "transcript"
+            if "classification_confidence" not in comparisons:
+                comparisons["classification_confidence"] = 1.0
+        self._upsert_frame("external_macro_videos", videos, "video_id")
+        self._upsert_frame(
+            "external_macro_classifications",
+            classifications,
+            "classification_id",
+        )
+        self._upsert_frame(
+            "external_macro_tradebot_comparisons",
+            comparisons,
+            "comparison_id",
+        )
+        return {
+            "external_macro_videos": len(videos),
+            "external_macro_classifications": len(classifications),
+            "external_macro_tradebot_comparisons": len(comparisons),
+        }
 
     def table_exists(self, table_name: str) -> bool:
         frame = self._query(
@@ -1724,6 +1763,89 @@ class TradingWarehouse:
                     "launch_underrisk": "BOOLEAN",
                     "avoided_bad_launch_action": "BOOLEAN",
                     "captured_constructive_launch": "BOOLEAN",
+                },
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS external_macro_videos (
+                    video_id VARCHAR PRIMARY KEY,
+                    source VARCHAR NOT NULL,
+                    published_date VARCHAR NOT NULL,
+                    title VARCHAR NOT NULL,
+                    url VARCHAR NOT NULL,
+                    transcript_path VARCHAR NOT NULL,
+                    word_count INTEGER,
+                    fetched_at_utc VARCHAR NOT NULL,
+                    status VARCHAR NOT NULL,
+                    error VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS external_macro_classifications (
+                    classification_id VARCHAR PRIMARY KEY,
+                    video_id VARCHAR NOT NULL,
+                    source VARCHAR NOT NULL,
+                    published_date VARCHAR NOT NULL,
+                    title VARCHAR NOT NULL,
+                    macro_posture_score DOUBLE,
+                    macro_posture_label VARCHAR NOT NULL,
+                    near_term_risk_score DOUBLE,
+                    medium_term_bullish_score DOUBLE,
+                    large_change_flag BOOLEAN,
+                    bullish_term_score DOUBLE,
+                    defensive_term_score DOUBLE,
+                    key_themes VARCHAR NOT NULL,
+                    classification_text_source VARCHAR NOT NULL,
+                    classification_confidence DOUBLE,
+                    classified_at_utc VARCHAR NOT NULL
+                )
+                """
+            )
+            self._ensure_table_columns(
+                connection,
+                "external_macro_classifications",
+                {
+                    "classification_text_source": "VARCHAR",
+                    "classification_confidence": "DOUBLE",
+                },
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS external_macro_tradebot_comparisons (
+                    comparison_id VARCHAR PRIMARY KEY,
+                    video_id VARCHAR NOT NULL,
+                    source VARCHAR NOT NULL,
+                    published_date VARCHAR NOT NULL,
+                    matched_market_date VARCHAR NOT NULL,
+                    matched_source VARCHAR NOT NULL,
+                    days_from_tradebot INTEGER,
+                    macro_posture_score DOUBLE,
+                    macro_posture_label VARCHAR NOT NULL,
+                    classification_text_source VARCHAR NOT NULL,
+                    classification_confidence DOUBLE,
+                    trade_bot_posture_score DOUBLE,
+                    trade_bot_posture_label VARCHAR NOT NULL,
+                    disagreement DOUBLE,
+                    abs_disagreement DOUBLE,
+                    disagreement_label VARCHAR NOT NULL,
+                    large_change_focus BOOLEAN,
+                    trade_bot_risk_score DOUBLE,
+                    trade_bot_risk_budget_multiplier DOUBLE,
+                    trade_bot_risk_off_probability DOUBLE,
+                    trade_bot_portfolio_risk_multiplier DOUBLE,
+                    notes VARCHAR NOT NULL,
+                    compared_at_utc VARCHAR NOT NULL
+                )
+                """
+            )
+            self._ensure_table_columns(
+                connection,
+                "external_macro_tradebot_comparisons",
+                {
+                    "classification_text_source": "VARCHAR",
+                    "classification_confidence": "DOUBLE",
                 },
             )
         finally:

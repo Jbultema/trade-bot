@@ -1,0 +1,666 @@
+source: 42macro_youtube
+published_date: 2025-03-28
+video_id: Du-QXHSCoOg
+url: https://www.youtube.com/watch?v=Du-QXHSCoOg
+title: Manage Risk Like The Best Hedge Funds With 42 Macro’s Dr. Mo Framework
+
+Howdy investors. This is Darius Dell
+here, founder and CEO of 42 Macro. And
+today I'm going to talk to you about our
+discretionary risk management overlay,
+aka Dr. Mo, which is the systematic
+system that we use to help our
+professional investor clients and
+sophisticated retail trader clients stay
+on the right side of market risk, which
+means maximizing upside capture in bull
+markets and minimizing downside capture
+in bare markets. So we'll start with our
+42 macro risk management process. The
+number one thing that we do for our
+clients here at 42 macro is to help them
+identify and position for the market
+regime. We don't help them identify and
+fight the market regime. We want them to
+pos participate in what the markets are
+trying to price in because that's
+ultimately how you make the most money
+in gold markets and minimize uh downside
+capture uh in bare markets. And so how
+do we do that? Uh we now cast the market
+regime with our global macro risk matrix
+system which we'll talk about shortly.
+And then we filter those signals through
+our KISS portfolio construction process
+of which we have thousands of retail
+investors around the world. Uh following
+that simple three ETF solution to stay
+on the right side of of market risk and
+then our discretionary risk management
+overlay which takes those same market
+regime signals and generates proper
+trade recommendations across 70
+different factors across the equity,
+fixed income, commodity, currency and
+crypto markets. Uh and so uh when we say
+what so for those who may be new what is
+a market regime? If you go back and you
+study some of the kind of hallowed halls
+of institutional finance, what you'll
+find is is that a lot of the best firms
+do from an asset management standpoint
+uh is use regime segmentation to orient
+their factor long short bets. And so uh
+generally speaking, there's about four
+different regimes. Uh Goldilocks is a
+risk regime in which investors uh it's a
+risk-on regime with a disinflationary
+bias in terms of the performance in
+asset markets. Uh reflation is a risk-on
+regime with an inflationary bias in
+terms of the performance and dispersion
+within and across asset markets.
+Inflation is a riskoff regime uh with an
+inflationary bias in terms of the
+dispersion within and across asset
+markets. And then uh deflation is a
+riskoff regime uh with a disinflationary
+bias in terms of the performance and
+dispersion across asset markets. And so
+generally speaking, in a riskoff regime,
+you're going to want to be long
+overweight risk assets and underweight
+defensive assets. In a riskoff regime,
+you're going to want to be doing the
+opposite. Uh, generally speaking, in a
+risk-on regime, you're going to be
+overweight high beta as opposed to an
+underweight low beta. And the opposite
+is true in riskoff regimes. Uh, from a
+sector standpoint, you're going to be
+overweight cyclicals and underweight
+defensives in riskon regime as opposed
+to uh the opposite is true in riskoff
+regimes. Uh, generally speaking, growth
+tends to outperform value in riskon
+regimes, whereas value tends to
+outperform growth in inflation and
+growth tends to outperform value in
+deflation. Um, in terms of market cap
+bias, uh, your factor long preferences,
+you're going to be overweight, small,
+and midcaps in a risk-on regime, and
+underweight large caps. Uh, and then the
+the opposite is true when you're in a
+riskoff regime. Uh, from a regional
+standpoint, uh, US tends to perform
+international in Goldilocks, whereas
+international tends to perform the US in
+reflation and then the US tends to
+perform both uh, in uh, in inflation and
+deflation. Um, or sorry, US tends to
+perform in both inflation and deflation.
+uh EM tends to outperform DM uh when
+you're in a risk-on regime and the
+opposite is true in a riskoff regime uh
+when you're uh in fixed income spread
+products tend outperform treasuries in a
+risk-on regime whereas the opposite is
+true in a riskoff regime uh when you're
+in uh thinking about uh allocating
+across the treasury curve the short end
+of the curve tends to outperform the
+belly of the curve which tends to
+outperform the long bond uh when you're
+in a risk-on regime uh um the opposite
+is true in a deflation regime and then
+when you're in an inflation and so that
+that is true across Goldilocks uh
+reflation and inflation in terms of
+short rates outperforming the belly
+which tends to outperform the long bond
+that is true in and again Goldilocks
+reflation and inflation whereas in
+deflation the performance is reversed
+the long bond tends to outperform the
+belly which tends to outperform short
+rates. Um in with respect to credit if
+you're in a riskon regime high yield
+tends to outperform investment grade and
+if you're in a riskoff regime investment
+grade tends to outperform high yield. Uh
+in commodities industrial commodities
+tend out perform energy commodities
+which tend outperform ad commodities in
+a riskon regime. The opposite is true in
+a riskoff regime. And then finally with
+respect to currencies, gold tends to
+outperform foreign currencies which tend
+to outperform the US dollar. Uh in
+riskon regimes um the the US dollar
+tends to outperform gold which tends to
+perform foreign currencies in inflation.
+And then gold tends to outperform the US
+dollar which tends to outperform foreign
+currencies in deflation. And so what
+investing from a what regime
+segmentation does is it makes the
+process of asset allocation and
+portfolio construction much simpler,
+much easier to think about and
+ultimately uh uh it creates better
+outcomes in your portfolio when you're
+generally participating again in what
+the market is trying to price in when
+the market is trying to price it in. And
+so uh let's talk about how we uh
+determine what the actual market regime
+is and how we send out timely and
+actionable signals for our clients to
+actually reorient their portfolios uh on
+time so that they can continue
+maximizing upside capture in bull
+markets and minimizing downside capture
+and bare markets. And so we use our
+global macro risk matrix to now cast the
+market regime which investors must
+position for to avoid FOMO or FOMO. Fear
+of missing out causes investors to buy
+cycle tops and fear of more losses
+causes investors to sell cycle lows. And
+so how does this system work? Uh what we
+looking at here in in this table are 42
+of the most important markets uh market
+prices market macro markets in the world
+from the perspective of the
+institutional investor community across
+equities, volatility, uh commodities,
+currencies and then fixed income across
+credit and and sovereign uh debt. Uh and
+so how does the system work? Uh we use a
+couple of examples here. So we'll start
+with the S&P 500 today. It is bearish
+from the perspective of its own
+individual volatility just a momentum
+signal which is how we measure uh
+volatility or how we measure momentum in
+and across asset markets. And so that
+bearish VA signal for the S&P 500 today
+is attributing one point to each of the
+two riskoff regimes go inflation uh and
+deflation. Um for example the 10-year
+Treasury yield broke down to bearish uh
+today and historically the 10-year
+Treasury yield has had a a negative
+absolute performance in Goldilocks and
+deflation. So each of those regimes is
+currently uh getting a point. Uh and
+then finally looking at something like
+gold. Gold is bullish from the receptive
+of its volatility just a momentum
+signal. So gold has historically
+performed well in every regime with the
+exception of inflation. Uh so gold is
+getting a uh the goldilocks is getting a
+point. Inflation is getting a point and
+deflation uh is getting a point. And so
+how we determine the market regime we're
+just looking at any given time which of
+these four regimes has the highest sum
+and share of confirming markets. And
+right now it's inflation. Inflation
+having 19 of the confirming markets. And
+what we mean by confirming markets are
+the ones that are actually generating a
+bullish or bearish signal. The neutral
+signals don't count because there's no
+conviction in that trade for that
+particular macro market exposure. Uh and
+so you know what we say is we're in an
+inflation market regime, then you're
+going to want to orient your portfolio
+uh uh to take advantage of the things
+that tend to happen when you're in
+inflation market regimes. at least
+according to our back testing and the
+generally accepted uh belief system
+across institutional uh finance. Um you
+know in terms of uh in terms of the
+regime change statistics so you know
+generally speaking there's about one and
+a half to two uh uh what we call rorow
+phase transitions per year. What a rorow
+phase transition uh means is just that
+you're going from a riskon regime to a
+riskoff regime. As we showed here in
+this slide, the factor long short
+preferences when you're going from
+riskon regime to risk on regime don't
+really change that much. And the factor
+long short preferences when you're going
+from the two risk off regimes when
+you're trans justing between the two
+riskoff regimes don't really change that
+much. It's when you go from risk on to
+risk off or risk off to risk on where
+you have to make significant changes in
+your portfolio if you want to remain on
+the right side of market risk. You don't
+have to remain on the right side of
+market risk, but I can guarantee you if
+you're a professional investor managing
+other people's money if you choose to
+not remain on the right side of market
+risk for a long enough period of time,
+you won't have anybody else's money to
+manage. And so, obviously, what the
+system does is it makes our keeps our
+buy side clients uh constantly oriented
+towards what the markets are trying to
+price in so they can get back to under,
+you know, understanding uh what their
+company fundamentals are, what their
+credit fundamentals are for the for the
+credits that they're investing in, etc.
+Um so so as I mentioned there's about
+you know let's call it two rorow phase
+transitions per year which is where you
+have this most significant amount of
+change in your portfolio from a
+portfolio construction and asset
+allocation standpoint. So if you're in a
+bull market what you tend to see uh is
+you know you have one robo phase
+transition to a deep enough correction
+that that warrants risk managing as a
+buy side professional and then you have
+another role phase transition back to
+the bull market. Uh if you're in a bare
+market, what that ultimately looks like
+is you have a big enough uh uh rally
+counter trend rally in a bare market
+that ultimately is big enough uh uh for
+institutional investors to have to risk
+manage uh um in order to uh essentially
+stay on the stay in their seats if
+they're by side professional. And then
+there's another rural phase transition
+back to the uh bare market. And so what
+Dr. Mo does getting to Dr. Mo, what Dr.
+MO does is takes that information from a
+market regime now casting standpoint and
+filters those signals across 70
+different factors across uh US equities,
+US equity factors, global equities,
+fixed income sectors and macro exposures
+which we interpret to be commodities,
+currencies and crypto. Uh and it
+generates proper trade recommendations
+based on the combination of the market
+regime as well as the combination of the
+individual assets volatility adjusted
+momentum signal. So for example, if an
+ETF is bullish or bearish VMs, let's
+just start with the bullish because it's
+easier to explain this way. If an ETF is
+bullish or if the factor is bullish and
+it should be bullish in this regime,
+then Dr. Mo will recommend a long max
+position uh in that in that particular
+exposure. Again, this is a market timing
+and position sizing guide for factor
+long short bets. If an asset is neutral,
+but it should be bullish in that partic
+in the particular market regime that
+we're currently in, then Dr. MO
+recommend a long half position in that
+particular asset. Uh if an asset is
+neutral and it should be bearish uh
+based on how it's historically traded
+based on our back testing here how it's
+historically traded uh in in the
+particular regime then Dr. Mo will
+recommend a short half position and then
+finally if an asset is bearish and it
+should be bearish in the particular
+regime then Dr. MO would recommend a a
+short max position and then finally for
+the assets where they are bullish but
+they should be bearish in this regime
+based on the historical back testing or
+if the asset is bullish and it should be
+or so bullish and it should be bearish
+or if the asset is bearish and it should
+be bullish uh then Dr. Mo will say hey
+do nothing there's the market is is
+sending conflicting signals this is your
+your capital will be rewarded elsewhere
+uh um for the time being and so it'll
+recommend a a no position in those
+particular assets. So, let's use a few
+stylized examples so we can sort of
+hammer home the the how easy and
+effective this system is and and why our
+by side clients continue to rave about
+the results that they're experiencing in
+their client portfolios as a function of
+adhering to these signals. U so let's
+use the S&P 500 everyone cares about
+that. So right now Dr. the S&P 500 is
+bearish from the perspective of its uh
+volatility just a momentum signal but
+historically S&P has performed quite
+well in a Goldilocks regime. So, if we
+were in a Goldilocks regime, which we're
+not currently in this on March 24th,
+2025, we're actually in an inflation
+market regime, which we'll get to in a
+second. If we were in a Goldilocks
+market regime, Dr. Mo would recommend a
+no position uh in in stocks. Um, let's
+keep it moving here. Let's look at the
+uh long bond. In a Goldilocks regime,
+right now, the long bond is neutral from
+the perspective of its own volatility,
+just a momentum signal. And historically
+speaking, the long bond has had negative
+absolute performance in this um
+Goldilocks regime. So, Dr. Mo is
+recommending a short half position uh in
+uh in in in in in the long bond. Uh if
+uh currently gold for example uh is
+bullish from the setup of its volatility
+just momentum signal and and
+historically has done really well in
+goldilocks and so right now Dr. Mo is
+recommending a long max position in gold
+and then wrapping up with Bitcoin.
+Bitcoin is currently neutral from the
+perspective of its volatility just a
+momentum signal. Uh and and so it's
+historically obviously performed quite
+well in Goldilocks and so right now Dr.
+most saying, hey, you can be long a half
+position in Bitcoin as opposed to a long
+max position like it has in gold, which
+is currently still bullish from the side
+of its own volatility, just a momentum
+signal. Uh, and then as I mentioned
+earlier, the factor long short
+preferences that you're going to want to
+uh uh, you know, sort of take into
+consideration when you're constructing
+your portfolios are listed down here at
+the end of the page. Uh, so in terms of
+the uh, what the key portfolio
+construction considerations are, which
+again is the uh, this essentially a
+summary of the information that we put
+in this table here on the right here on
+slide 13. So, let's keep moving here. If
+we were in a reflation market regime,
+then the S&P's bearish VAM signal will
+continue to signal no position. The
+Treasury's neutral vamp signal would
+continue to signal short half position.
+Uh the gold's uh bullish VA signal will
+continue to signal a long max position.
+And Bitcoin's neutral vamp signal would
+continue to signal a long half position.
+when we go into a riskoff regime, so
+transitioning to an inflation regime,
+which is our current uh regime for the
+current uh juncture for Monday, March
+24th, 2025, the bearish VAM signal for
+the S&P 500 is currently a short max
+position as it would be in an inflation
+regime. Again, the S&P is currently
+bearish from the perspective of its own
+volatility, just momentum signal
+condition, and the market regime uh
+condition is riskoff. And so those two
+things formulate the short max position
+signal that Dr. Mo is currently
+recommending for the S&P 500. Uh if you
+look at treasuries, uh treasuries have
+historically performed poorly uh in the
+Treasury bond long bond has historically
+performed poorly in inflation. So Dr. Mo
+is recommending a short half position
+still there. Uh if you look at gold,
+gold has historically performed poorly
+uh in an inflation market regime. And so
+despite it being bullish, it's currently
+recommending no position because again,
+gold should has historically performed
+poorly. And so that dichotomy between
+gold's current bands condition and the
+market regime is essentially telling you
+do nothing walk away waste your don't
+waste your time or energy uh uh uh
+trying to focusing on this and same uh
+with Bitcoin uh Bitcoin is currently
+neutral and then finally if you if the
+market regime were deflation uh
+historically S&P 500 has had reasonable
+performance reasonable enough
+performance in deflation so this bearish
+fam's condition is currently
+recommending a no position uh in in go
+in S&P 500 uh if uh in a in if we were
+in a deflation market regime. This
+neutral vamp signal for the TLT would be
+a long half position. Uh in gold, this
+bullish vamp VA vamp signal for gold
+would be a long max position in a
+deflation regime. And then finally in
+Bitcoin, it would be a uh no position uh
+in this regime. And so as I mentioned,
+at any given time, our our clients are
+currently are aware of what the market
+regime is and so we refresh the Dr. Mo
+model for that particular market regime.
+So until we change market regimes, then
+our clients will consistently see the
+market regime. As I mentioned, we're
+currently in an inflation market regime
+here from Monday, March 24th, 2025. And
+so until that market regime condition
+changes, our clients are going to be
+orienting their portfolio from a
+portfolio construction consideration
+perspective and ultimately adhering to
+the proper trade recommendations that
+are designed to take advantage of the
+market risk provided by the inflation
+market regime. Again, it's not about
+hoping that we go into a Goldilocks or
+reflation market regime or hoping that
+we transition to a deflation market
+regime. What Dr. Mo says, don't worry
+about that. That will come in the
+future. For now, take advantage of the
+market risk that the the the returns
+that the markets are trying to give you
+uh if you're paying attention. You don't
+have to pay attention. You don't have to
+stay on the right side of market risk.
+But as I mentioned, if you stay on the
+wrong side of market risk for a long
+enough time as a professional investor,
+you're not going to have anybody else's
+money to manage. So ultimately what we
+found throughout our travels across the
+global buy side uh and our clients you
+know we we currently advised well over
+$25 trillion and in and in and client
+AUM what we found is that you know
+essentially so much of the job for most
+buysiders has become to orienting their
+portfolios to take advantage of what the
+market's pricing in not enough investors
+on the buy side anymore have enough time
+horizon or duration to just invest in
+the companies and the credits that they
+ultimately believe in the most. And so,
+you know, so part of the job what we've
+built this system is to help acknowledge
+that and ultimately take advantage of of
+that. And so, and it works really, it's
+incredibly effective. And so, as you
+know, we back test everything very
+rigorously with institutional grade back
+tests here uh with respect to um with
+respect to all of our signals, Dr. Mo
+included. Uh and so, if you wanted to
+isolate some of the key macro kind of
+factors, the macro markets that matter
+to most investors, what we find is that
+our Dr. Most signals are incredibly
+effective at again helping investors
+stay on the right side of market risk
+which it means maximizing upside capture
+in bull markets and minimizing downside
+capture in bare markets. And so in terms
+of how to interpret these charts, you
+know what this uh the the bars in these
+charts just identify the cumulative
+performance by proper trade
+recommendation. So this is the total
+amount of performance you would have uh
+achieved just being long these assets
+since January of 1998. uh in terms of on
+a on a in terms of summing the the daily
+log price changes for each of these
+assets and then what the dotted lines uh
+indicate is the percentage of that
+cumulative performance that has occurred
+during the the as as a function of each
+of these proper trade recommendations.
+And so what we ultimately see is that
+when Dr. Mo is recommending a long
+position for the S&P 500. Historically,
+the 110% of the return, the cumulative
+performance that we've seen in the S&P
+500 since January of 1998 has come when
+Dr. Mo recommended a long position in
+the S&P 100. And so, for example, what
+does that mean? So, if the S&P 500 was
+up 100% uh since January of 1998, it's
+up somewhere closer to, you know, 300
+400%. But if it was up just
+stylistically, if it if if if it was up
+100%, you would have made 110%. If there
+was a dollar to be made, uh, uh, you
+would have actually made $110 just by
+being long the S&P 500 when Dr. Mo tells
+you to be long and not being
+participating in the asset when Dr. Mo
+tells you not to participate. And the
+reason that's incredibly important for
+institutional investors is because when
+you're long an asset, when you're
+supposed to be long an asset based on
+its volatility, digital momentum signal
+characteristics and the market regime
+signal characteristics, you tend to have
+lower volatility, lower draw downs when
+you're in those moments. And so
+ultimately your riskadjusted returns
+increase when you're participating in
+the asset when you're supposed to be
+participating and not participating in
+the asset when you're not supposed to be
+participating when the volatility of the
+asset is higher when the draw downs are
+steeper and ultimately your risk
+adjusted returns are lower uh in those
+assets. Uh for global equities 140% of
+the cumulative performance since January
+of 1998 has come uh when you uh when Dr.
+Mo's recommending a long position. So
+for instance, if you if there was a
+dollar to be made just being naked long
+buy and hold global equities since
+January of 1998, you would have made
+a$140 if you were only long them uh when
+Dr. Mo says be long. Uh that upside
+capture ratio is 105% for the long bond.
+It's 114% for international bonds. It's
+103% for investment grade credit. It's
+116% for high yield credit. It's 1,700%
+essentially for for the dollar, which by
+the way, the dollar, you know, doesn't
+have much cumulative performance because
+it's a a stationary object over over a
+long enough time horizon. And so, uh,
+obviously those results are a bit
+skewed, but again, it it continues to
+signal that if you're long when you're
+supposed to be long, particularly for an
+asset that has a a high degree of of of
+of medium diversion like a currency
+would, then you actually improving your
+risk adjusted returns by even that much
+more. Um, the upside capture ratio for
+gold is 94%, the upside capture ratio
+for commodities is 240%, it's 158% for
+crude oil. And then finally for the
+crypto market, the upside capture ratio
+uh for Bitcoin is 108% and 150% for
+Ethereum. So what that again what that
+means is that if you're long Bitcoin
+when Dr. Mo tells you to be long
+Bitcoin, you would have made a$18 as
+opposed to the dollar you could have
+made if you were just naked long buy and
+hold Bitcoin, which is what the bear the
+bull porn purveyors would have you do.
+And the issue with the the the the bull
+porn out there in the crypto space is
+crypto has much more significant draw
+downs than most asset classes. I want to
+say Bitcoin specifically has declined
+about 75 to 90% once every four years
+since the inception of the asset class.
+And so obviously that may not matter to
+you if you're 25 or 30 something years
+old and you don't have that much money
+you've accumulated over the course of
+your career uh in your portfolio. But if
+you're in your 50s or 60s or heaven
+forbid you're retired, you can afford to
+suffer a 75 to 90% draw down in a in a
+in a in a core strategic holding. And so
+ultimately, you need systems like Dr. Mo
+to keep you on the right side of market
+risk, which means be long when you're
+supposed to be long and don't be long or
+be short when you're supposed to be
+short. Uh and so just be aware of that.
+And again, that upside capture ratio is
+even better for Ethereum since the
+inception of asset class at 150%. So you
+would have made a buck 50 being long
+Ethereum as opposed to the dollar you
+could have made since Ethereum was first
+launched. So uh that's our Dr. Mo
+system. Again, it's an incredibly
+effective system. It sends out clear,
+actionable and timely proper trade
+recommendations uh based on the market
+regime uh that we're currently now
+casting our ourselves in and ultimately
+how the asset is currently performing
+from the perspective of its volatility
+just a momentum signal. And what this
+does is it prevent it adds a very
+institutional-grade riskmanagement
+overlay to the factor-l long short bets
+that are uh professional investor
+clients and sophisticated retail trader
+clients are making and that's why they
+continue to have superior results
+relative to their competitors. So we'll
+wrap it up there. Darius Stale here.
+Thanks for joining us.

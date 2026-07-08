@@ -1,0 +1,251 @@
+source: 42macro_youtube
+published_date: 2025-10-24
+video_id: HNOhYyq1xUY
+url: https://www.youtube.com/watch?v=HNOhYyq1xUY
+title: Are You Worried About The Everything Bubble Popping?
+
+And so I'm gonna try to translate that a
+little bit. Tell me if I'm getting it
+right or wrong. You're saying, "Look, um
+I I don't live in worry about this
+because I've worked so hard to put
+together this framework that you're
+walking us all through here that will
+tell me when it's time to ride the wave
+and it'll start giving me signals to get
+out when and if we get to the point
+where um uh you know, positioning for a
+pop may become more more timely."
+>> Uh 100%. And this is exactly how why we
+built our process to mimic the process
+of the funds that are charging 3 and 30
+across global Wall Street. Obviously, we
+don't have the same caliber of models or
+the same caliber of intellect or the
+same breath of of analysts and portfolio
+managers on our team. But what we do
+have is, you know, someone who's smart
+enough to try to mimic it. And
+>> I would say you've got the same caliber
+of intellect or better. That's just my
+>> I've been in all those buildings and
+rooms, man. I disagree, but I appreciate
+the the compliment. Uh but the key
+takeaway I would say is is what we know
+from you know our studies with in
+collaborating with those investors and
+and just our general studies in terms of
+you know uh learning about financial
+markets. We know that volatility
+clusters and obviously volatility is a
+derivative of price. So that obviously
+must mean gap gap you know gaps up and
+down and price must cluster as well. And
+so what we built we built our distress
+respon and the tools that power it which
+are also the exact same tools that power
+KISS which we can conclude with later.
+um the same tools. They're all the same
+tools based on the same concepts, which
+is, you know, you want to be in the
+markets when it's time to be in the
+markets. And then you don't want to be
+in the markets when it's not time to be
+in the markets. And that's exactly what
+Dr. Mo helps investors do. When you go
+back and you look at the cumulative
+performance of the S&P 500 since January
+of 1998, if you're only long the market
+when Dr. Mo tells you to be long the
+market, which is a trendbased trend
+following system, then you would get
+131% of the return that you would
+otherwise get from being in the market.
+So that's 1.31 times whatever the return
+of the S&P 500 was when you're in the
+market. And so obviously that means, you
+know, when you're not in the market, uh,
+when Dr. Mo tells you not to be in the
+market, the SM is going down. And so
+this is how you chop off left tail risk
+from the distribution, you basically
+want to have some sort of reliable
+quantitative risk management signal that
+says don't be long here. And just by
+just by not being long there and only
+being long in this part of the
+distribution, you're going to increase
+your absolute and riskadjusted returns.
+And that's what we've been doing for
+years for our clients. aside most for
+investors who want a little bit more
+context around this market regime now
+casting process that is the basis powers
+our entire quantitative respendant
+signal historically speaking you know
+when you're in a bull market so if you
+go back and look at a trailing 385 10
+20-year basis there's really only two
+rophase transitions per year on average
+so that means you're in a bull market
+you have one rophase transition down to
+a material enough correction that
+warrants doing something differently in
+your portfolio to essentially mitigate
+the volatility drag associated with that
+potential potential crash because you
+don't know if it's going to be a crash
+or not in real life. And then two, you
+recover back to the prior bull market.
+Or if you're in a bare market, it's it's
+basically that in reverse. So you're in
+a bare market, you have a big enough,
+you know, a rally, big and long and
+sustained enough rally in the context of
+the bare market to warrant uh, you know,
+reposition your portfolio to keep your
+seat on the buy side or to to avoid, you
+know, FOMO uh on the on the on the on
+the as retail investor and then
+ultimately you return back to the legacy
+bare market. So, um, you know what our
+and you look at 2025, it's been a
+perfect year. You know, we were in a
+bull market heading into 2025. I was on
+your show saying, "I'm about to be as
+bearish as I possibly can be." Uh,
+before
+>> again, this is why I give you so many
+props, right? I mean, you were so
+bullish starting at a time where almost
+nobody was. You maintained that for two
+years. I don't think anybody thought at
+the start of 2023, we're going to
+backto-back 20% years. You started 20
+to25, I think still bullish, but then
+very, you know, couple months in said,
+"Hey, whoa, wait a minute. Now it's the
+time to be bearish." I even think you
+said ragingly bearish, if I remember
+correctly.
+>> And then pick up the baton here.
+>> Yeah. No, so we I said, "Hey, look, I
+think at some point in the first half of
+this year, we're going to see a rorow
+phase transition to a crash." Uh, and uh
+this I think we were back in might have
+been back in late January when I have
+this conversation with you. I said we're
+going to robo phase transition into a
+crash and then we're probably going to
+robo phase transition back into a a
+ripping bull market. You know, we said I
+think I might have been on your show
+when I said this. 1998 is the best
+analog to think about the distribution
+of probable economic market and policy
+and market outcomes for 2028 or for
+2025. You recall we basically had the
+same dynamic in 1998. We're in a raging
+bull market. We crashed, we recovered
+quickly and we ran into a bubble. I
+think it's a very legitimate risk still.
+uh and having said that um you know in
+the first quarter of this year.
+>> Okay. And and again sort of generalizing
+risks I'm taking a strong message from
+you that the the the you perceive the
+higher risk right now is the risk of
+missing a continued dramatic
+appreciation in in the market right now
+versus the risk of getting caught by
+some really big market draw down in the
+near term.
+>> Yeah 100%. I mean this is until we rot
+transition out of this risk on market
+regime and I don't know why we would
+think other think differently.
+>> How does how does your model pick up on
+that type of risk?
+>> Yeah, that's a great way to put it. So
+there's two ways in which we uh would do
+that. So the first way uh I'm sending a
+request to share a screen.
+>> Yeah, absolutely.
+>> So the the first way I would always
+start with anything that's developing
+whether it be bullish or bearish is what
+are the quantitative risk management
+signals saying because that's the
+leading edge of our process. leading
+edge of our process is what are
+institutional investors doing from a
+volatility and price perspective to
+asset markets that you know sort of
+indicates their underlying flows and so
+when we go and we look at our global
+macrois matrix market now casting
+process that's the core model that
+powers Kiss and Dr. Mo uh you can sort
+of see the nature of the disturbance in
+the kitchen mayor. Uh when we talked to
+him Tuesday, we were in a uh very high
+strength of signal um Goldilocks market
+regime. I want to say the strength of
+signal back on Tuesday was 86%. It has
+since declined to 66% because we're
+starting to lose confirming markets. I
+want to say Goldilocks was at 29. Now
+it's at 27. Reflation was at you know 20
+or some or so. Now it's at 17. And so
+ultimately what it means is the
+probability the the shape of the
+distribution is evolving in a manner
+that is bearish. The probability
+associated with the two risk on market
+regimes is declining and the probability
+associated with the two risk offmarket
+regimes is declining or is increasing.
+And so that doesn't necessarily mean
+that we're heading for a robo phase
+transition. It probably means at the
+bare minimum we're headed for a you know
+what we talked about earlier 5 to 8%
+correction. However, this is the kind of
+stuff that should have your antenna from
+a fundamental standpoint because it does
+suggest that asset markets as a function
+of those institutional flows that we're
+tracking in the global macro risk matrix
+are moving from what would be a
+positively skewed return distribution to
+something that at the bare minimum looks
+Gaussian skewed and the delta shift is
+negative and we have to respect that and
+that's what KISS and Dr. Mo picked up on
+this week in terms of the signals that
+they sent to our clients.
+>> Okay. And this is great folks. So,
+you're actually watching the value of
+the model in real time here, right?
+which is you're you're seeing um you
+know we we we we a few minutes ago we
+saw a version of this slide that had
+pretty much Goldilocks fully in the
+driver's seat and all of a sudden you're
+seeing you know the these these other
+regimes all of a sudden start to
+increase their competition for the crown
+here. Um and of course that's what you
+know then informs the model like what I
+said is hey no matter how Darius feels
+when he wakes up in the morning
+emotionally uh he he doesn't trade on
+that he trades on what the model tells
+him to trade on. Well, this is the model
+actually starting to sort of change its
+its signal in real time here.
+>> 100%. It's all about the shape of the
+distribution of probable economic policy
+and market outcomes. And that shape of
+the distribution is evolving.

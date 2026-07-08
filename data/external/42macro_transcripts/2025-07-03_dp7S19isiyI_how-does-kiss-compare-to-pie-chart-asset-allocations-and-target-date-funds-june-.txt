@@ -1,0 +1,323 @@
+source: 42macro_youtube
+published_date: 2025-07-03
+video_id: dp7S19isiyI
+url: https://www.youtube.com/watch?v=dp7S19isiyI
+title: How Does KISS Compare to Pie Chart Asset Allocations and Target-Date Funds? | June 28, 2025
+
+uh in terms of how we get to the
+allocations for stocks, gold, and
+bitcoin. Uh with regards to stocks, the
+actual exposure is 100% of the current
+target allocation of 60%. The current
+target allocation is maxed out at 60%
+because we remain in a risk on market
+regime and the actual exposure is 100%
+of that because the S&P 500 remains
+bullish from the of its volatility
+adjusted momentum signal. So those um
+you know the the actual exposure and the
+target allocation those are the two risk
+management overlays that we use in KISS
+to generate the positively skewed return
+distribution uh that you guys are all
+experiencing and participating in and
+and and having good vibes and in your
+portfolios. Uh so the top down risk
+management overlay uh that's what we use
+to incorporate volatility targeting into
+the strategy visav our market regime now
+casting process and then the bottom up
+risk management overlay is what we use
+to incorporate dynamic position sizing
+into the strategy visa v our v our
+volatility adjusted momentum signal and
+so those two overlays you know this is
+what this is what Wall Street is doing
+to chop off the left tail of the
+distribution wall street doesn't want to
+give you this because they'd rather
+stuff you in target date funds and pie
+chart asset allocations and and and and
+whatever whatever whatever whatever
+floats their boat uh as it relates to
+your uh uh retirement. But uh what we're
+doing here for you at 42 Macro is
+floating your boat, doing things that
+help you retire on time and comfortably,
+not the people selling you BS, you know,
+financial garbage, uh in our opinion.
+So, um you know, and and as you can see
+here with regards to our KISS back test
+is the rolling out of sample back test.
+I got a good question on Twitter the
+other day. Why does the rolling out of
+sample back test only start in January
+2018? Well, in my opinion, Bitcoin is
+just too dominant in terms of the the
+the explosiveness of the moves uh prior
+to 2018. And I would also say it wasn't
+really an institutional asset class. I
+myself didn't buy Bitcoin until 2020.
+So, I don't want to pretend like I would
+have had Jalong Bitcoin uh uh back in
+2015 when it was going up a thousands of
+percent a year. You know, that's just
+not, you know, that to me would feel a
+little bit um disingenuous. And so
+starting the back test uh this rolling
+out of sample back test in January 2018
+actually makes it a lot harder to
+demonstrate good results and it actually
+does demonstrate fantastic results. So
+the average return of KISS is 24% versus
+uh an average return of only 10% for the
+6040 pie chart that they want that Wall
+Street wants to keep you stuffed in. uh
+and that uh and and not only is KISS,
+you know, creating a, you know, 237%
+upside capture ratio relative to 60/40
+over the lifetime of this out of sample
+back test, it does it with significantly
+less downside and significantly less
+volatility. Uh so the max draw down for
+KISS is minus 12% uh versus the max draw
+down of minus 22% for the uh 6040
+portfolio which has crashed twice since
+January 2018. Whereas this minus 12%
+decline uh in COVID for KISS is the only
+double-digit draw down in the entirety
+of this entire rolling out of sample
+back test. So uh KISS has as I mentioned
+a 237% upside capture ratio versus 6040
+a 54% downside capture ratio versus
+6040. It is almost two and a half times
+as you get almost two and a half times
+the return for half the risk relative to
+Wall Street's pie chart asset allocation
+that they keep trying to sell you or
+these ridiculous target date funds which
+is just a colle rolling series of pie
+chart asset allocations as you age. This
+stuff is garbage. You can do better. You
+should you deserve better. Your family
+deserves better. You deserve to be
+counting money on a boat in the
+Mediterranean somewhere. If you don't
+believe that about yourself, I'm here to
+give you the confidence that you can
+actually achieve those types of outcomes
+for yourself and your family uh you know
+with our with our KISS system here. And
+then if you want to compare KISS to uh a
+naked long portfolio of 60 3010 stocks
+gold Bitcoin, this is where I really
+think KISS shines because you know what
+in my opinion I think it's pretty easy
+to to beat the 6040 portfolio. Uh what
+it's not easy to beat is a naked long
+portfolio of risk assets that is fully
+invested at all times. This is why most
+fund managers underperform the the the
+the the index. It's because they they
+have cash and they make decisions. The
+index has a survivorship bias and it has
+no cash. Those are two those are four
+reasons why you it's very difficult to
+beat the index. And so, you know, if
+you're having if you're making any risk
+management decisions, you're not going
+to have a 100 plus% upside capture ratio
+relative to the assets. You know, the
+kiss is an unlevered strategy. So, it's
+never going to have a more than 100%
+upside capture ratio to a 6010 stocks go
+uh Bitcoin portfolio. But what it does
+have is an 89% upside capture ratio and
+a 49% downside capture ratio. So you're
+getting 90% of the return you would get
+if you were naked long 603010 stocks
+gold Bitcoin at all times but you're
+only getting half of the downside. And
+so to me I think that's a phenomenal
+fantastic trade-off. If you look at the
+max draw down of of of 6010 stocks go
+Bitcoin if minus 25% that it's more than
+double the max draw down of KISS. And by
+the way you would have crashed three
+times in a portfolio featuring 60310
+stocks gold Bitcoin. So uh this just
+just it demonstrates the effectiveness
+of our top down and bottom up risk
+management overlays which again we're
+using to incorporate ball targeting and
+dynamic position sizing into the
+strategy which is what you know two of
+the hallmarks of institutional risk
+management that you know they're selling
+to their clients for 2 and 20 and 3 and
+30 across Wall Street. can't even get
+into most of these funds that uh you
+know employ strategies like this and
+we're really like I said we're really
+happy to deliver that to uh ordinary
+Main Street investors because you know
+I'm I'm someone who believes in in Main
+Street as someone who uh grew up on Main
+Street uh on the wrong side of Main
+Street, the train tracks on Main Street
+and I definitely want to make sure that
+we're you know I leave a very lasting
+impact. You know that Jackie Robertson
+quote you know life is not important
+except for the impact that it has on
+other lives uh is one of the most
+powerful things that I've ever heard and
+and it certainly changed my life when I
+heard it. uh and I'm sitting in front of
+you today as a function of that quote uh
+in terms of um you know trying to have a
+positive impact on many people's lives
+uh you know with the skills that God
+blessed me with as it relates to
+institutional macro management. So uh
+enough about me and let's get back into
+KISS. Uh gold the actual exposure is
+100% of the fixed target allocation of
+30%. Fixed allocation for gold target
+allocation for gold is fixed at 30%
+because there gold can perform in uh any
+market regime and the actual exposure is
+100% of that because gold remains
+bullish. uh Bitcoin the actual exposure
+is 100% of the current target allocation
+of 10% uh the current target allocation
+is maxed out at 10% because they remain
+in a risk on market regime the actual
+exposure is 100% of that because Bitcoin
+remains bullish on the subset of its
+volatility adjusted uh momentum uh
+signal so keep moving here the following
+content is intended for use by
+professional investors and should not be
+reconciled with KISS if you're a retail
+investor and need help understanding any
+of the following content please study
+the educational resources on slide three
+and or just follow KISS so we're on
+slide 12 right now or sorry 11 right now
+and everything else we say beyond slide
+11 is primarily designed to influence
+the decision-making process or educate
+in professional investors largely
+institutional investors uh the folks
+that I cut my teeth you know servicing
+and meeting with uh a client around
+global Wall Street in fact I'm I'm fresh
+from a I presented at uh my favorite Mac
+7 companies uh treasury conference uh I
+was a keynote address uh there uh this
+past week and so um you know what we do
+here at 42 macro research one is really
+good in my thinking you know I I would
+consume my own product if I was on the
+other side of this uh webcast. Uh two uh
+I would say you know this is an
+institutional macro riskmanagement
+process and elements of that
+institutional macro risk management
+process are filtered to retail investors
+via KISS because it's simple it's easy
+to execute uh and it works u so you know
+that's what we created for the retail
+audience to to manage their uh um you
+know their retirement assets and and and
+and you know create uh good good
+outcomes in your guys' portfolios. Uh
+some of you as retail investors may
+think KISS is too simple or you want to
+take more risk or you have a sliver of
+your portfolio where you want to wing it
+around and whip it around and and that's
+where uh the um that's where the rest of
+this content uh uh comes in handy. But
+uh make no bones about it. This is in my
+opinion uh some of the best macro risk
+management content uh floating around
+Global Wall Street. Uh we have many
+clients uh very very famous large uh
+institution institutional investors that
+will confirm that. Um and we're really
+grateful that we have an platform. We've
+built a platform where we're actually
+sharing all this information with
+everyone. Nowhere else in Wall Street
+can you go buy topshelf
+institutional macro risk management
+content as a research as a retail
+investor. Certainly, you're not even
+getting access to it because you
+generally need to be a client of these
+brokerage uh services. You're not going
+to be a client of Morgan Stanley's prime
+brokerage service or Goldman Sachs prime
+brokerage or Morgan Jaden Morgan's prime
+brokerage. You're not going to be a
+prime brokerage client to these folks
+unless you're a high net worth
+individual. and maybe you'll get access
+to the the researcher. But, you know,
+like I said, I'm I'm really grateful to
+be able to deliver this to everyone
+because I don't think it's fair that
+retail investors get priced out of, you
+know, what I think are, you know, high
+quality macro risk management insights
+or high quality research insights to
+begin with. I just think it's an unfair
+practice that keeps us, you know, Wall
+Street perpetually at a at an advantage
+relative to the retail audience. I just
+think that's a that's an unfair way to
+live life. That's an unfair thing to do
+to society. So, I'm here trying to fix
+that. And so, retail investors, you can
+come along for the ride between now and
+the end of this presentation. A lot of
+this stuff shouldn't pertain to you if
+you're just dispassionately executing
+kisses, which is what I want you to do
+because that's what is going to create
+the best outcomes for you in your
+portfolio and the best outcomes for you
+in your life as it relates to
+d-stressing you. But if you want to take
+on the stress of shorting or or winging
+it around and and and having this
+exposure in your portfolio and that
+exposure in your portfolio, you want to
+trade this or that, be my guest. Do
+whatever you want. You're a grown man or
+woman. Uh but the reality is uh
+everything we say beyond this slide is
+designed to communicate directly to
+institutional investors about how they
+should be contextualizing economic and
+financial market risk. So appreciate you
+guys for being along that journey and
+appreciate all the institutional
+investors listening to me blow8 for the
+last five minutes. Like come on Darius,
+hurry up and get into it. I got to go.
+So let me uh let me hurry and get into
+it for you guys. So, um, with regards to
+soft and and that's another thing we're,
+like I said, we're the only firm where I
+can, we're talking to both retail, some
+of the top PMs on Global Wall Street and
+some of the, you know, smallest account
+mom and pop retail investors. The same
+exact content. I'm very proud to say
+that because again, that information
+asymmetry, uh, is unfair thing for
+society and I'm not going to participate
+in it. Uh, uh, not anymore at least.

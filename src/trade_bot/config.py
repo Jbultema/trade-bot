@@ -232,6 +232,7 @@ class BotConfig(BaseModel):
     data: DataConfig
     execution: ExecutionConfig
     tax_account: TaxAccountConfig = Field(default_factory=TaxAccountConfig)
+    primary_strategy: str = "drawdown_managed_dual_momentum"
     universe: dict[str, list[str]]
     strategies: dict[str, StrategyConfig]
 

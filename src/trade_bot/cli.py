@@ -25,6 +25,8 @@ from trade_bot.DEFAULTS import (
     DEFAULT_DASHBOARD_PORT,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
+    DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR,
+    DEFAULT_EXTERNAL_MACRO_TRANSCRIPT_DIR,
     DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS,
     DEFAULT_FORWARD_SIMULATION_BLOCK_DAYS,
     DEFAULT_FORWARD_SIMULATION_PATHS,
@@ -56,6 +58,11 @@ from trade_bot.research.experiment_monitor import (
     load_experiment_scorecards,
 )
 from trade_bot.research.experiments import run_experiment_iteration
+from trade_bot.research.external_macro import (
+    DEFAULT_42MACRO_HANDLE,
+    compare_42macro_to_trade_bot,
+    sync_42macro_transcripts,
+)
 from trade_bot.research.forward_simulation import (
     ForwardSimulationValidationConfig,
     rolling_origin_simulation_backtest,
@@ -1437,6 +1444,117 @@ def seed_operating_history_cmd(
         )
 
 
+@app.command("sync-42macro-transcripts")
+def sync_42macro_transcripts_cmd(
+    transcript_dir: Annotated[
+        Path,
+        typer.Option("--transcript-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_TRANSCRIPT_DIR,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    max_videos: Annotated[int | None, typer.Option("--max-videos")] = 250,
+    max_pages: Annotated[int | None, typer.Option("--max-pages")] = 25,
+    refresh: Annotated[bool, typer.Option("--refresh")] = False,
+    channel_handle: Annotated[str, typer.Option("--channel-handle")] = DEFAULT_42MACRO_HANDLE,
+    transcript_timeout_seconds: Annotated[
+        int,
+        typer.Option("--transcript-timeout-seconds"),
+    ] = 30,
+    metadata_only: Annotated[bool, typer.Option("--metadata-only")] = False,
+) -> None:
+    result = sync_42macro_transcripts(
+        transcript_dir=transcript_dir,
+        max_videos=max_videos,
+        max_pages=max_pages,
+        refresh=refresh,
+        channel_handle=channel_handle,
+        transcript_timeout_seconds=transcript_timeout_seconds,
+        fetch_transcripts=not metadata_only,
+    )
+    warehouse = TradingWarehouse(store)
+    warehouse.save_external_macro_alignment(
+        videos=result.videos,
+        classifications=pd.DataFrame(),
+        comparisons=pd.DataFrame(),
+    )
+    table = Table(title="42 Macro Transcript Sync")
+    table.add_column("metric")
+    table.add_column("value", justify="right")
+    table.add_row("catalog videos", f"{len(result.videos):,}")
+    table.add_row("fetched", f"{result.fetched:,}")
+    table.add_row("skipped existing", f"{result.skipped:,}")
+    table.add_row("failed", f"{result.failed:,}")
+    console.print(table)
+    console.print(f"Manifest: {result.manifest_path}")
+
+
+@app.command("compare-42macro")
+def compare_42macro_cmd(
+    transcript_dir: Annotated[
+        Path,
+        typer.Option("--transcript-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_TRANSCRIPT_DIR,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR,
+    max_match_days: Annotated[int, typer.Option("--max-match-days")] = 10,
+) -> None:
+    warehouse = TradingWarehouse(store)
+    result = compare_42macro_to_trade_bot(
+        transcript_dir=transcript_dir,
+        warehouse=warehouse,
+        output_dir=output_dir,
+        max_match_days=max_match_days,
+    )
+    _print_macro_alignment_summary(result.summary, output_dir)
+
+
+@app.command("run-42macro-daily-check")
+def run_42macro_daily_check_cmd(
+    transcript_dir: Annotated[
+        Path,
+        typer.Option("--transcript-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_TRANSCRIPT_DIR,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR,
+    max_videos: Annotated[int | None, typer.Option("--max-videos")] = 80,
+    max_pages: Annotated[int | None, typer.Option("--max-pages")] = 8,
+    refresh: Annotated[bool, typer.Option("--refresh")] = False,
+    max_match_days: Annotated[int, typer.Option("--max-match-days")] = 10,
+    channel_handle: Annotated[str, typer.Option("--channel-handle")] = DEFAULT_42MACRO_HANDLE,
+    transcript_timeout_seconds: Annotated[
+        int,
+        typer.Option("--transcript-timeout-seconds"),
+    ] = 30,
+    metadata_only: Annotated[bool, typer.Option("--metadata-only")] = False,
+) -> None:
+    sync_result = sync_42macro_transcripts(
+        transcript_dir=transcript_dir,
+        max_videos=max_videos,
+        max_pages=max_pages,
+        refresh=refresh,
+        channel_handle=channel_handle,
+        transcript_timeout_seconds=transcript_timeout_seconds,
+        fetch_transcripts=not metadata_only,
+    )
+    warehouse = TradingWarehouse(store)
+    result = compare_42macro_to_trade_bot(
+        transcript_dir=transcript_dir,
+        warehouse=warehouse,
+        output_dir=output_dir,
+        max_match_days=max_match_days,
+    )
+    console.print(
+        f"Synced {len(sync_result.videos):,} public 42 Macro videos "
+        f"({sync_result.fetched:,} fetched, {sync_result.skipped:,} skipped)."
+    )
+    _print_macro_alignment_summary(result.summary, output_dir)
+
+
 @app.command("seed-monitoring-windows")
 def seed_monitoring_windows_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -2197,6 +2315,35 @@ def _print_daily_update_summary(
         f"{valuation_rows:,} rows written for active monitoring windows",
     )
     console.print(summary)
+
+
+def _print_macro_alignment_summary(summary: dict[str, object], output_dir: Path) -> None:
+    table = Table(title="42 Macro / Trade-Bot Alignment")
+    table.add_column("metric")
+    table.add_column("value", justify="right")
+    table.add_row("status", str(summary.get("status", "unknown")))
+    table.add_row("comparisons", f"{int(summary.get('comparisons', 0)):,}")
+    if summary.get("status") == "ok":
+        table.add_row("date range", f"{summary.get('date_min')} to {summary.get('date_max')}")
+        table.add_row(
+            "mean 42 posture",
+            _format_optional_decimal(summary.get("macro_mean_posture_score")),
+        )
+        table.add_row(
+            "mean trade-bot posture",
+            _format_optional_decimal(summary.get("trade_bot_mean_posture_score")),
+        )
+        table.add_row(
+            "mean abs disagreement",
+            _format_optional_decimal(summary.get("mean_abs_disagreement")),
+        )
+        table.add_row("major mismatches", f"{int(summary.get('major_mismatches', 0)):,}")
+        table.add_row(
+            "large-change major mismatches",
+            f"{int(summary.get('large_change_major_mismatches', 0)):,}",
+        )
+    console.print(table)
+    console.print(f"Reports: {output_dir}")
 
 
 def _active_experiment_dir(experiment_dir: Path) -> Path:

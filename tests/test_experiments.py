@@ -259,6 +259,70 @@ def test_growth_frontier_adjacent_iterations_use_distinct_parameters() -> None:
     assert broad_146.strategy.drawdown_control.max_drawdown != broad_147.strategy.drawdown_control.max_drawdown
 
 
+def test_top10_global_retry_preserves_parent_and_adds_non_us_pool() -> None:
+    strategy = StrategyConfig(
+        type="dual_momentum",
+        tickers=["QQQ", "SMH", "NVDA", "MSFT"],
+        lookback_days=63,
+        skip_days=5,
+        top_n=2,
+        defensive_ticker="BIL",
+        min_return=0.0,
+    )
+    decision_sanity = DecisionSanityConfig(profile="strict_gate", required_confirmation_breaks=3)
+    previous_scorecards = pd.DataFrame(
+        {
+            "iteration": [111],
+            "strategy": ["parent_ai_growth"],
+            "family": ["ai_beta"],
+            "phase": ["reentry_tuning"],
+            "role": ["candidate"],
+            "promotion_decision": ["promote_candidate"],
+            "growth_constrained_utility_score": [0.95],
+            "promotion_score": [0.9],
+            "robustness_score": [0.8],
+            "cagr": [0.14],
+            "calmar": [0.7],
+            "max_drawdown": [-0.2],
+            "walk_forward_positive_rate": [0.9],
+            "left_tail_regime_return": [-0.12],
+            "average_turnover": [0.05],
+        }
+    )
+    previous_candidates = pd.DataFrame(
+        {
+            "iteration": [111],
+            "strategy": ["parent_ai_growth"],
+            "family": ["ai_beta"],
+            "phase": ["reentry_tuning"],
+            "role": ["candidate"],
+            "hypothesis": ["Synthetic high-performing parent."],
+            "strategy_json": [json.dumps(strategy.model_dump(mode="json"))],
+            "decision_sanity_json": [json.dumps(decision_sanity.__dict__)],
+            "scenario_sizing_json": [""],
+            "future_state_model_json": [""],
+            "strategy_drawdown_model_json": [""],
+        }
+    )
+
+    candidates = generate_iteration_candidates(
+        164,
+        previous_scorecards=previous_scorecards,
+        previous_candidates=previous_candidates,
+    )
+
+    assert [candidate.role for candidate in candidates] == [
+        "top10_parent_retest",
+        "top10_globalized_retest",
+    ]
+    parent, globalized = candidates
+    assert parent.parent == "parent_ai_growth"
+    assert parent.strategy.tickers == ["QQQ", "SMH", "NVDA", "MSFT"]
+    assert globalized.parent == "parent_ai_growth"
+    assert {"VEA", "VWO", "VGK", "EWJ"}.issubset(set(globalized.strategy.tickers))
+    assert globalized.decision_sanity == decision_sanity
+
+
 def test_scenario_position_sizing_moves_stress_residual_to_defensive_ticker() -> None:
     index = pd.bdate_range("2026-01-01", periods=90)
     prices = pd.DataFrame(
@@ -750,6 +814,38 @@ def test_growth_core_source_funds_overlay_keeps_growth_engine_and_rotates_sleeve
         for candidate in candidates
         if candidate.strategy.type == "dual_momentum"
     )
+
+
+def test_global_equity_pool_ablation_tests_non_us_strategy_pools() -> None:
+    candidates = generate_iteration_candidates(163)
+    excluded = set(DEFAULT_EXCLUDED_TICKERS)
+    families = {candidate.family for candidate in candidates}
+    us_tickers = {"SPY", "VTI", "VOO", "RSP", "IWM", "MDY", "QQQ", "QQQM", "IWF", "VUG"}
+    non_us_tickers = {"VT", "VEA", "VWO", "EFA", "EEM", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWA", "EWU", "MCHI"}
+    europe_tickers = {"VGK", "EWU", "EFA", "VEA", "ASML"}
+    emerging_tickers = {"VWO", "EEM", "INDA", "EWZ", "MCHI", "TSM"}
+
+    assert len(candidates) == 6
+    assert all(candidate.phase == "global_equity_pool_ablation" for candidate in candidates)
+    assert all(excluded.isdisjoint(candidate.strategy.tickers) for candidate in candidates)
+    assert {
+        "global_pool_compounder_developed",
+        "global_pool_compounder_europe",
+        "global_pool_systematic_break",
+        "global_pool_low_churn",
+        "global_pool_emerging_reentry",
+        "global_pool_dip_reentry_overlay",
+    } == families
+    assert all(us_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert all(non_us_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(europe_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert any(emerging_tickers & set(candidate.strategy.tickers) for candidate in candidates)
+    assert all(candidate.strategy.volatility_target is not None for candidate in candidates if candidate.strategy.type == "dual_momentum")
+    assert any(candidate.strategy.type == "dip_reentry_overlay" for candidate in candidates)
+    assert any(candidate.strategy.drawdown_control is not None for candidate in candidates)
+    gated = [candidate for candidate in candidates if candidate.decision_sanity is not None]
+    assert gated
+    assert all(candidate.decision_sanity.required_confirmation_breaks >= 3 for candidate in gated)
 
 
 def test_thresholded_future_state_probability_preserves_low_confidence_risk_on() -> None:

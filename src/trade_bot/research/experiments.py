@@ -57,7 +57,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_SCENARIO_STRESS_MULTIPLIER,
     DEFAULT_SCENARIO_TRANSITION_MULTIPLIER,
 )
-from trade_bot.research.curation import add_research_status
+from trade_bot.research.curation import add_research_status, rank_strategy_candidates
 from trade_bot.research.future_state_ml import (
     FutureStateModelConfig,
     StrategyDrawdownModelConfig,
@@ -269,6 +269,12 @@ def generate_iteration_candidates(
     previous_scorecards: pd.DataFrame | None = None,
     previous_candidates: pd.DataFrame | None = None,
 ) -> tuple[ExperimentCandidate, ...]:
+    if iteration == 164:
+        return _top10_global_equity_retry_candidates(
+            previous_scorecards=previous_scorecards,
+            previous_candidates=previous_candidates,
+        )
+
     preset = _preset_iteration_candidates(iteration)
     if preset is not None:
         return preset
@@ -352,6 +358,8 @@ def _preset_iteration_candidates(iteration: int) -> tuple[ExperimentCandidate, .
         return _systematic_break_risk_on_candidates()
     if iteration == 162:
         return _growth_core_source_funds_overlay_candidates()
+    if iteration == 163:
+        return _global_equity_pool_ablation_candidates()
     return None
 
 
@@ -5885,12 +5893,14 @@ def _dip_overlay_candidate(
     breadth_confirmation: bool = True,
     scenario_sizing: ScenarioSizingConfig | None = None,
     phase: str = "dip_reentry_overlay",
+    parent: str | None = None,
 ) -> ExperimentCandidate:
     return _candidate(
         name=name,
         role="reentry_overlay_candidate",
         phase=phase,
         family=family,
+        parent=parent,
         hypothesis=hypothesis,
         scenario_sizing=scenario_sizing,
         strategy=StrategyConfig(
@@ -12467,6 +12477,341 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
     return batches[iteration]
 
 
+def _global_equity_pool_ablation_candidates() -> tuple[ExperimentCandidate, ...]:
+    """Pool-swap tests for high-performing risk-managed equity engines.
+
+    Earlier high-scoring candidates were often US growth or compounder heavy.
+    This batch keeps those risk mechanics but varies the eligible equity pool so
+    we can test whether developed ex-US, Europe, emerging markets, and global
+    broad equity can compete without turning the strategy into a US-only book.
+    """
+
+    us_growth = ["QQQ", "QQQM", "IWF", "VUG", "XLK", "SMH", "SOXX", "MTUM"]
+    us_broad = ["SPY", "VTI", "VOO", "RSP", "IWM", "MDY", "DIA"]
+    us_quality = ["QUAL", "COWZ", "VTV", "SCHD", "VIG", "MOAT", "USMV", "SPLV"]
+    developed_ex_us = ["VEA", "EFA", "VGK", "EWJ", "EWC", "EWA", "EWU"]
+    europe = ["VGK", "EWU", "EFA", "VEA", "ASML", "TSM"]
+    emerging = ["VWO", "EEM", "INDA", "EWZ", "MCHI", "TSM"]
+    global_broad = ["VT", "VEA", "VWO", "EFA", "EEM", "VGK", "EWJ", "INDA", "EWZ"]
+    credit_confirmers = ["HYG", "LQD", "BKLN", "SRLN"]
+    diversifiers = ["GLD", "TLT", "IEF"]
+
+    def unique(tickers: list[str]) -> list[str]:
+        return list(dict.fromkeys(tickers))
+
+    def global_gate(max_defensive_add: float = 0.20) -> DecisionSanityConfig:
+        return DecisionSanityConfig(
+            profile="global_equity_pool_confirmation_gate",
+            max_defensive_add=max_defensive_add,
+            required_confirmation_breaks=3,
+        )
+
+    def dual(
+        *,
+        name: str,
+        family: str,
+        hypothesis: str,
+        tickers: list[str],
+        parent: str,
+        lookback_days: int,
+        skip_days: int = 0,
+        top_n: int = 7,
+        min_return: float = 0.0,
+        weighting: str = "risk_adjusted_score",
+        max_asset_weight: float | None = 0.16,
+        trend_filter_days: int | None = 42,
+        vol_target: float | None = 0.22,
+        scenario_sizing: ScenarioSizingConfig | None = None,
+        decision_sanity: DecisionSanityConfig | None = None,
+        drawdown_control: DrawdownControlConfig | None = None,
+        min_change: float = 0.05,
+        max_step: float = 0.36,
+        min_hold_days: int = 5,
+    ) -> ExperimentCandidate:
+        return _candidate(
+            name=name,
+            role="global_equity_pool_candidate",
+            phase="global_equity_pool_ablation",
+            family=family,
+            parent=parent,
+            hypothesis=hypothesis,
+            scenario_sizing=scenario_sizing,
+            decision_sanity=decision_sanity,
+            strategy=StrategyConfig(
+                type="dual_momentum",
+                tickers=unique(tickers),
+                defensive_ticker="BIL",
+                lookback_days=lookback_days,
+                skip_days=skip_days,
+                top_n=top_n,
+                min_return=min_return,
+                ranking_metric="risk_adjusted_return",
+                weighting=cast(Any, weighting),
+                volatility_lookback_days=42,
+                trend_filter_days=trend_filter_days,
+                max_asset_weight=max_asset_weight,
+                volatility_target=(
+                    VolatilityTargetConfig(annualized_volatility=vol_target, lookback_days=42)
+                    if vol_target is not None
+                    else None
+                ),
+                drawdown_control=drawdown_control,
+                cycle_min_rebalance_change=min_change,
+                cycle_max_step_change=max_step,
+                cycle_min_hold_days=min_hold_days,
+            ),
+        )
+
+    return (
+        dual(
+            name="i163_compounder_global_developed_pool",
+            family="global_pool_compounder_developed",
+            parent="i135_final_compounder_high_cagr",
+            hypothesis=(
+                "Clone the high-CAGR compounder mechanics, but force developed ex-US and "
+                "Europe/Japan ETFs to compete directly with US growth and quality leaders."
+            ),
+            tickers=unique([*us_growth, *us_quality, *developed_ex_us, *credit_confirmers]),
+            lookback_days=21,
+            top_n=7,
+            max_asset_weight=0.16,
+            vol_target=0.22,
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.10,
+                risk_multiplier=0.50,
+            ),
+        ),
+        dual(
+            name="i163_compounder_europe_tilt_pool",
+            family="global_pool_compounder_europe",
+            parent="i135_final_compounder_high_cagr",
+            hypothesis=(
+                "Stress-test a Europe-capable compounder pool so the strategy can own European "
+                "developed equity when it leads instead of defaulting to US growth."
+            ),
+            tickers=unique([*us_growth, *us_quality, *europe, *credit_confirmers]),
+            lookback_days=21,
+            top_n=7,
+            max_asset_weight=0.16,
+            vol_target=0.22,
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.10,
+                risk_multiplier=0.50,
+            ),
+        ),
+        dual(
+            name="i163_systematic_break_global_convergence_pool",
+            family="global_pool_systematic_break",
+            parent="i161_systematic_break_global_convergence",
+            hypothesis=(
+                "Clone the systematic-break global-convergence thesis with a wider equity pool: "
+                "stay risk-on unless confirmation breaks, but let global and emerging ETFs win."
+            ),
+            tickers=unique([*us_broad, *us_quality, *global_broad, *emerging, *credit_confirmers, "GLD"]),
+            lookback_days=84,
+            skip_days=5,
+            top_n=8,
+            max_asset_weight=0.14,
+            vol_target=0.20,
+            trend_filter_days=126,
+            scenario_sizing=_scenario_profile("aggressive"),
+            decision_sanity=global_gate(max_defensive_add=0.18),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.20,
+                risk_multiplier=0.72,
+            ),
+            min_change=0.06,
+            max_step=0.28,
+        ),
+        dual(
+            name="i163_global_low_churn_operable_pool",
+            family="global_pool_low_churn",
+            parent="i160_discretionary_overlay_low_churn",
+            hypothesis=(
+                "Low-churn global pool: give non-US equities, credit confirmers, gold, and "
+                "duration room to compete while keeping trading cadence human-operable."
+            ),
+            tickers=unique([*us_broad, *us_quality, *global_broad, *credit_confirmers, *diversifiers]),
+            lookback_days=100,
+            skip_days=5,
+            top_n=8,
+            max_asset_weight=0.14,
+            vol_target=0.17,
+            trend_filter_days=126,
+            scenario_sizing=_scenario_profile("balanced"),
+            decision_sanity=global_gate(max_defensive_add=0.20),
+            min_change=0.08,
+            max_step=0.22,
+            min_hold_days=10,
+        ),
+        dual(
+            name="i163_global_emerging_reentry_pool",
+            family="global_pool_emerging_reentry",
+            parent="i154_deescalation_fast_reentry_global",
+            hypothesis=(
+                "Use de-escalation/reentry-style mechanics with a global and emerging equity "
+                "pool so post-stress recovery does not have to be US-led."
+            ),
+            tickers=unique([*us_broad, *global_broad, *emerging, *credit_confirmers, "GLD"]),
+            lookback_days=42,
+            top_n=7,
+            max_asset_weight=0.16,
+            vol_target=0.20,
+            scenario_sizing=_scenario_profile("balanced"),
+            decision_sanity=global_gate(max_defensive_add=0.20),
+            drawdown_control=DrawdownControlConfig(
+                equity_lookback_days=84,
+                max_drawdown=-0.18,
+                risk_multiplier=0.70,
+            ),
+            min_change=0.05,
+            max_step=0.30,
+        ),
+        _dip_overlay_candidate(
+            name="i163_global_dip_reentry_overlay",
+            family="global_pool_dip_reentry_overlay",
+            parent="i135_final_broad_growth_dip_overlay",
+            hypothesis=(
+                "Research contrast: let a global equity pool re-enter after dips when repair "
+                "confirms, instead of assuming the rebound vehicle is US growth."
+            ),
+            tickers=unique([*us_growth, *us_broad, *global_broad, *emerging, *credit_confirmers]),
+            lookback_days=21,
+            skip_days=0,
+            top_n=8,
+            min_return=0.000,
+            trigger=-0.06,
+            deep=-0.20,
+            min_recovery=0.004,
+            starter=0.42,
+            step=0.30,
+            max_risk=1.00,
+            max_asset_weight=0.16,
+            recovery_days=10,
+            confirmation_days=3,
+            trend_filter_days=42,
+            vol_ceiling=0.60,
+            credit_confirmation=True,
+            breadth_confirmation=False,
+            scenario_sizing=_scenario_profile("balanced"),
+            phase="global_equity_pool_ablation",
+        ),
+    )
+
+
+def _top10_global_equity_retry_candidates(
+    *,
+    previous_scorecards: pd.DataFrame | None,
+    previous_candidates: pd.DataFrame | None,
+) -> tuple[ExperimentCandidate, ...]:
+    """Retest the app-ranked top candidates with non-US equity optionality.
+
+    This batch is intentionally paired: each parent is rerun unchanged beside a
+    globalized clone that preserves the parent mechanics and overlays, but adds
+    developed ex-US, emerging, Europe, Japan, and all-world ETFs to the eligible
+    risk pool. That keeps the test focused on whether non-US optionality helps
+    the same engines that already scored well.
+    """
+
+    if previous_scorecards is None or previous_scorecards.empty:
+        return ()
+    if previous_candidates is None or previous_candidates.empty:
+        return ()
+
+    ranked = rank_strategy_candidates(previous_scorecards)
+    if ranked.empty:
+        return ()
+
+    candidate_index = _candidate_manifest_index(previous_candidates)
+    global_equity = ["VT", "VEA", "VWO", "EFA", "EEM", "VGK", "EWJ", "INDA", "EWZ", "EWC"]
+    candidates: list[ExperimentCandidate] = []
+    selected = 0
+
+    for _, score_row in ranked.iterrows():
+        if selected >= 10:
+            break
+        parent_name = str(score_row.get("strategy", ""))
+        parent_iteration = _optional_int(score_row.get("iteration"))
+        manifest_row = _candidate_for_ranked_row(
+            candidate_index,
+            iteration=parent_iteration,
+            strategy=parent_name,
+        )
+        if manifest_row is None:
+            continue
+        parent_strategy = _strategy_from_manifest(manifest_row)
+        if parent_strategy is None:
+            continue
+        if parent_strategy.type not in {
+            "dual_momentum",
+            "relative_momentum",
+            "absolute_momentum",
+            "dip_reentry",
+            "dip_reentry_overlay",
+            "ai_risk_cycle_overlay",
+            "sector_regime_rotation",
+        }:
+            continue
+
+        selected += 1
+        parent_suffix = _short_name(parent_name)
+        family = str(score_row.get("family") or manifest_row.get("family") or "top10_global_retry")
+        parent_phase = str(score_row.get("phase") or manifest_row.get("phase") or "unknown")
+        parent_hypothesis = str(manifest_row.get("hypothesis") or "")
+        scenario_sizing = _scenario_sizing_from_manifest(manifest_row)
+        future_state_model = _future_state_model_from_manifest(manifest_row)
+        strategy_drawdown_model = _strategy_drawdown_model_from_manifest(manifest_row)
+        decision_sanity = _decision_sanity_from_manifest(manifest_row)
+
+        candidates.append(
+            _candidate(
+                name=f"i164_parent_r{selected:02d}_{parent_suffix}",
+                role="top10_parent_retest",
+                phase="top10_global_equity_retry",
+                family=f"{family}_parent_retest",
+                parent=parent_name,
+                hypothesis=(
+                    f"Same-iteration parent retest for comparison against the globalized clone. "
+                    f"Original phase: {parent_phase}. Parent hypothesis: {parent_hypothesis}"
+                ),
+                strategy=parent_strategy,
+                scenario_sizing=scenario_sizing,
+                future_state_model=future_state_model,
+                strategy_drawdown_model=strategy_drawdown_model,
+                decision_sanity=decision_sanity,
+            )
+        )
+
+        global_strategy = _clone_strategy(
+            parent_strategy,
+            tickers=_unique_tickers([*parent_strategy.tickers, *global_equity]),
+        )
+        candidates.append(
+            _candidate(
+                name=f"i164_global_r{selected:02d}_{parent_suffix}",
+                role="top10_globalized_retest",
+                phase="top10_global_equity_retry",
+                family=f"{family}_globalized",
+                parent=parent_name,
+                hypothesis=(
+                    "Globalized clone of a top-ranked strategy: preserve all parent mechanics, "
+                    "but add VT/VEA/VWO/EFA/EEM/VGK/EWJ/INDA/EWZ/EWC so non-US equity can win "
+                    f"the same ranking contest. Parent: {parent_name}."
+                ),
+                strategy=global_strategy,
+                scenario_sizing=scenario_sizing,
+                future_state_model=future_state_model,
+                strategy_drawdown_model=strategy_drawdown_model,
+                decision_sanity=decision_sanity,
+            )
+        )
+
+    return tuple(candidates)
+
+
 def _systematic_break_risk_on_candidates() -> tuple[ExperimentCandidate, ...]:
     """Risk-on-until-systematic-break candidates.
 
@@ -13373,6 +13718,48 @@ def _clone_strategy(strategy: StrategyConfig, **updates: object) -> StrategyConf
     data = strategy.model_dump(mode="json")
     data.update(updates)
     return StrategyConfig.model_validate(data)
+
+
+def _unique_tickers(tickers: list[str]) -> list[str]:
+    return list(dict.fromkeys(str(ticker).upper() for ticker in tickers if str(ticker)))
+
+
+def _candidate_manifest_index(
+    candidates: pd.DataFrame,
+) -> tuple[dict[tuple[int | None, str], pd.Series], dict[str, pd.Series]]:
+    by_key: dict[tuple[int | None, str], pd.Series] = {}
+    by_strategy: dict[str, pd.Series] = {}
+    if candidates.empty or "strategy" not in candidates:
+        return by_key, by_strategy
+    for _, row in candidates.iterrows():
+        strategy = str(row.get("strategy", ""))
+        if not strategy:
+            continue
+        iteration = _optional_int(row.get("iteration"))
+        by_key[(iteration, strategy)] = row
+        by_strategy[strategy] = row
+    return by_key, by_strategy
+
+
+def _candidate_for_ranked_row(
+    candidate_index: tuple[dict[tuple[int | None, str], pd.Series], dict[str, pd.Series]],
+    *,
+    iteration: int | None,
+    strategy: str,
+) -> pd.Series | None:
+    by_key, by_strategy = candidate_index
+    match = by_key.get((iteration, strategy))
+    if match is not None:
+        return match
+    return by_strategy.get(strategy)
+
+
+def _optional_int(value: object) -> int | None:
+    try:
+        numeric = int(float(cast(Any, value)))
+    except (TypeError, ValueError):
+        return None
+    return numeric
 
 
 def _strategy_from_manifest(row: pd.Series) -> StrategyConfig | None:

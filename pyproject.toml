@@ -21,6 +21,7 @@ rich = ">=13.7,<14.0"
 streamlit = ">=1.38,<2.0"
 typer = ">=0.12,<1.0"
 yfinance = ">=0.2.50,<1.0"
+youtube-transcript-api = ">=1.2,<2.0"
 scikit-learn = ">=1.5,<2.0"
 
 [tool.poetry.group.dev.dependencies]

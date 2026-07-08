@@ -10,6 +10,8 @@ execution:
   rebalance: "W-WED"
   signal_lag_days: 1
 
+primary_strategy: i111_reentry_vol_target_fast_21d
+
 universe:
   broad:
     - SPY
@@ -275,7 +277,7 @@ strategies:
     defensive_ticker: BIL
   dual_momentum_core:
     type: dual_momentum
-    tickers: [SPY, QQQ, IWM, GLD, TLT]
+    tickers: [SPY, QQQ, IWM, VEA, VWO, VGK, EWJ, GLD, TLT]
     lookback_days: 126
     skip_days: 21
     top_n: 2
@@ -283,7 +285,7 @@ strategies:
     min_return: 0.0
   vol_target_dual_momentum:
     type: dual_momentum
-    tickers: [SPY, QQQ, IWM, GLD, TLT]
+    tickers: [SPY, QQQ, IWM, VEA, VWO, VGK, EWJ, GLD, TLT]
     lookback_days: 126
     skip_days: 21
     top_n: 2
@@ -295,7 +297,7 @@ strategies:
       max_leverage: 1.0
   drawdown_managed_dual_momentum:
     type: dual_momentum
-    tickers: [SPY, QQQ, IWM, GLD, TLT]
+    tickers: [SPY, QQQ, IWM, VEA, VWO, VGK, EWJ, GLD, TLT]
     lookback_days: 126
     skip_days: 21
     top_n: 2
@@ -305,3 +307,20 @@ strategies:
       equity_lookback_days: 252
       max_drawdown: -0.10
       risk_multiplier: 0.50
+  i111_reentry_vol_target_fast_21d:
+    type: dual_momentum
+    tickers: [QQQ, SMH, SOXX, IGV, NVDA, AVGO, MSFT, META, AMZN, PLTR]
+    lookback_days: 63
+    skip_days: 5
+    top_n: 4
+    defensive_ticker: BIL
+    min_return: 0.03
+    ranking_metric: risk_adjusted_return
+    weighting: risk_adjusted_score
+    volatility_lookback_days: 63
+    trend_filter_days: 100
+    max_asset_weight: 0.35
+    volatility_target:
+      annualized_volatility: 0.16
+      lookback_days: 21
+      max_leverage: 1.0

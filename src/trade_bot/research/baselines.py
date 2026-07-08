@@ -130,7 +130,10 @@ def run_configured_baselines(
     )
     news_monitor = activate_news_events(news_monitor, events)
     event_risk = run_event_risk_study(prices, results, (*events, *news_monitor.activated_events))
-    primary_strategy = "drawdown_managed_dual_momentum"
+    primary_strategy = config.primary_strategy
+    if primary_strategy not in results:
+        msg = f"Configured primary strategy {primary_strategy!r} was not found in strategies."
+        raise KeyError(msg)
     signal_inclusion = run_signal_inclusion_tests(
         prices,
         macro_data,

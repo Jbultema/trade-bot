@@ -1,0 +1,1571 @@
+source: 42macro_youtube
+published_date: 2025-01-30
+video_id: xSjcwNKPLmk
+url: https://www.youtube.com/watch?v=xSjcwNKPLmk
+title: 42 MACRO PRO TO PRO with Cem Karsan | REPLAY | January 28, 2025
+
+How do you team 42, it's your skipper
+here, Darius Dale, to present another
+fantastic episode for the Pro live. I'm
+joined by our friend Jim Carson, fan
+favorite, who's the founder and CIO of
+Kai volatility advisors, as well as
+their new venture, Kai wealth. Jim, Jim,
+welcome back to the program. How are you
+doing?
+Good to be here. Thanks for having me,
+Darius.
+It's a wonderful to see you, man. So,
+you're a fan favorite of our everyone's
+audience. Certainly, you're a fan
+favorite of of my self as well. You're
+on the very, very short list,
+a list that features less than 10
+fingers of people whose words that I I
+generally listen to pretty regularly.
+You know, a lot of there's a lot of
+noise out there in financial market
+media, but you're one of those folks who
+provide really clean, accurate, and
+actionable signals, man. So, I
+appreciate you for that and and a
+world-class education as well. You know,
+I think you do a phenomenal job of
+educating people of these market
+structure dynamics
+in a way that most people have not
+really seen before. So, I just want to
+thank you and congratulate you on that,
+as well as what you guys are doing over
+at Kai wealth. Talk to me about that.
+What's going on there?
+Well, first of all, incredibly kind for
+you to say that, and coming from you,
+who I also tremendously respect, I I I
+take that,
+you know, as a as a big compliment. So,
+thank you.
+Appreciate it.
+What are we doing? So, Kai wealth is a
+new venture started in
+May. It's a a non-correlated wealth
+advisory program. So, basically, if you
+think about it,
+you know, the majority of the world is
+60/40 stocks and bonds, directionally
+focused owning investment investing is
+broadly thought of as owning an asset.
+Our view is that you don't have to just
+own assets. There's a better way
+to kind of to invest, and it is heavy
+alternatives. When I say alternatives,
+most people think private equity,
+venture capital, real estate,
+commodities.
+No, those are not alternatives in our
+book. Those are all, in our view,
+long only assets.
+They may take away the mark-to-market
+of the
+you know, of the movement, but they are
+still
+private equity. They are still equity.
+They are still A lot of these things are
+very very correlated with the stock
+market even if you don't see that
+correlation. So our view is very much
+you need more non-correlated
+strategies investment. We avoid duration
+risk and credit risk as well on the bond
+side which I think is very important.
+Wow.
+Um, and so we're really focused on
+you know, creating solutions for people
+to produce better risk-adjusted returns
+across their entire portfolio.
+That's a phenomenal product, man. Uh,
+few questions and and slap me on the
+wrist and tell me to move on if I'm
+encroaching on some some secret sauce
+but
+what is the sort of underlying
+fundamental return stream that you're
+sort of tapping into, right? If you're
+not going to be long assets, you know,
+what is what is essentially the the
+strategy generating return from?
+Yeah, so before I dive into this just as
+a disclosure, right? I I you know, don't
+take any of this as current investment
+advice, right? You probably already say
+it on the front of all of your stuff. If
+you're interested, reach out and we're
+happy to have a conversation and and
+work with you.
+That said, at Kai Wealth, we we are very
+focused on kind of a three different
+bucket of allocations.
+One
+instead of a bond allocation, we we take
+a alternative approach to credit. We do
+what's called yield stacking.
+It's a much more efficient way to get
+after-tax yields that are actually
+better than you can get in the bond
+market
+while taking significantly less risk.
+And and how do we do that? I could get
+into the details today but essentially
+what we do is called boxes in the
+options markets which are a T-bill
+synthetic T-bill. They really are It's
+really arbitrage and they trade for 30
+to 50 basis points higher. So that's an
+extra incremental yield. It doesn't
+sound all that sexy, right? At at the
+start. But what you what you don't
+realize is that's also tax advantage. So
+instead of paying ordinary income tax,
+you pay a blended 60/40, which gets you
+about 15% lower taxes. And if you have
+some tax relief on the form of a
+deduction, it's actually lower than that
+because it's a 60/40. So, you get the
+ordinary first. A lot of details there,
+but what I'm at what that amounts to is
+after tax currently people are making
+about 2 and 1/2% right at the risk-free
+T-bill rate. And we get closer to 3 and
+1/2 3.6% to start. So, that again, not
+going to make anybody like all that
+excited. You're making an extra 1.1
+after taxes, but it's that's risk-free
+to me. Sure, you're that's arbitrage.
+That's tax arbitrage and that's that's
+options kind of synthetic arbitrage. And
+to get anything for free, especially
+when you're increasing your risk-free by
+50% is a huge deal. There are other
+benefits. The second you have that in
+your portfolio, you're getting 100%
+collateral on any stacking any risk that
+you take in the options market
+afterwards. As opposed to a T-bill,
+you'd only probably get 90% and then on
+top of that you'd have to have a
+complicated structure where you
+essentially have a collateral account
+then you're getting a collateralized and
+bank's going to charge you for that.
+There's a lot of things that make it
+more difficult that then stack on top of
+that. So, you're starting with a box a
+structure in the options market that
+gets you that T-bill and then that all
+counts as as 100% collateral to then
+stack to the risk to ladder risk
+essentially the way you want to. And you
+can create risk defined strategies that
+have a statistical advantage because of
+risk premium. And you can use risk
+premium in the form of put spreads, call
+spreads, all kinds of other structures
+that can then generate a yield on top of
+that. And you can do those at a very low
+leverage. You know,
+better than cash secured max. So, we do
+a max defined. Our favorite is defined
+risk of about 8 and 1/2%.
+You know, you can do a back 30 years.
+This is not just a back test. Like Uh,
+it cannot lose more than 10%, but in
+over a 30-year period hasn't lost more
+than 8 and 1/2 and
+because of the structure and then
+and that can yield on average over time
+about 4% over risk-free. So, and tax
+advantaged as well. So, when you start
+looking at the basic numbers are if you
+start looking at an 8 and 1/4
+you know, 4 and 1/4 right now risk-free
+plus
+you're getting about 30 to 50 basis
+points better before tax
+on these boxes plus
+another 4%. All of a sudden you're
+looking at 8 and 1/2% plus
+and then it's tax advantaged which works
+out to something like a 6 and 1/2%
+after-tax yield
+which then if you do turn into an
+effective like what would that be, it's
+closer to an 11% pre-tax return given
+the tax advantage nature.
+And you're doing this
+for an 8 and 1/2 max drawdown risk,
+non-correlated
+non- no duration risk, no credit risk.
+It's a
+a dramatically better risk-return
+profile. People look at it's different
+so it's like people get scared and
+confused and that's why these
+opportunities exist but on a
+risk-adjusted basis you're talking about
+an over one sharp trade that's stacked
+on top of a risk-free rate that then has
+a 1%
+added
+arbitrage. So,
+compare that to people who are currently
+invested in municipal bonds for example
+who are getting about 4% and have a with
+call that's a 4% they're getting with
+you know
+called
+municipal bonds. This is a place a lot
+of people try and hide out and they're
+getting 4% with
+average duration of like 15 to 20 years.
+Oh my god. People don't realize the
+duration on these things that they have
+and the risk that they're taking but
+it's Uh, you know, incredibly crowded
+space private credit is the same way.
+And all of those have worse returns,
+worse yields with dramatically more
+risk. Not we're not worried about an an
+8 and 1/2% drawdown in those situations
+with a 17% duration or 17-year duration,
+I apologize.
+A 3%
+Um, a 3% change in interest rates, which
+you know, we just saw 1% in 3 months.
+Draws Draws your portfolio down 65 60 to
+65%. So,
+that's the risk people are taking and
+this is the risk they can take and they
+can get a significantly better yield.
+So, that's what we do on the bond side.
+I I don't even I just got through one of
+the three buckets. You probably don't
+want to talk about all of them. We do do
+some equities. We just do it
+thematically and we do it differently. I
+know you do, you know,
+similar type of thing on your end, but
+we're very trying to seal off interest
+rate risk and inflation risk from the
+equity portfolio.
+And we do that by really focusing on
+negative um, working capital companies,
+commodity businesses, a lot of other we
+can go through all of them, but a lot of
+other trends in the equity space
+that we think are
+are are going to do well if interest
+rates go higher, but will do well as a
+value approach regardless.
+Um,
+and and so we really do that again 35 to
+40% on the equity side, not 60 really.
+And the beta that is also about a 0.3.
+So, significantly lower. And then that
+leaves us about 35% for true alternative
+trading strategies.
+You know, in those alternative trading
+strategies, I mean, I can go through,
+but like typical hedge fund strategies,
+I could probably list of 30, you know,
+merger arbitrage, convertible arbitrage,
+managed futures, CTAs.
+We include trend following in there.
+Distressed debt, event driven,
+statistical arbitrage, volatility
+arbitrage, commodity focused hedge
+funds,
+uh and trading strategies, uh long short
+equity, long short credit, uh
+reinsurance strategies, except I can go
+on and on. So, there's a million uh
+there we have a diversified alternatives
+fund which invests in 15 non-correlated
+strategies that that uh then also uh we
+provide a product for our wealth
+advisory clients as well. So, we're
+really trying to build out more and more
+product for our clients, uh more and
+more flexibility, more tools. We also
+provide a uh a hedging account, a
+portfolio margin account that we then
+help um you know uh
+in intermittently uh people can opt into
+hedges that we suggest at certain times
+as we go forward, too. So, it's an
+active
+uh hedge strategy as well.
+Jim, and I I I every time we talk,
+you open a door in my brain that I
+didn't know existed. And I got to
+applaud you for that, man, because, you
+know, you live at this vanguard that I
+hope, you know, we try to you know, try
+to at least the vanguard and hang out at
+that vanguard a little bit of taking the
+best of from an institutional finance
+perspective and democratizing that so
+that regular people can have access to
+these return streams and more
+importantly these risk mitigation
+strategies. Now, you just talked to me
+about a uh a multi-pronged approach. You
+know, we have very similar ways in which
+we view our asset allocation. Our
+flagship uh KISBU construction process
+uh breaks risk down into three buckets.
+We've completely eliminated, you know,
+interest rate risk and credit risk from
+our our strategies well for I'm I'm
+guessing many of the same structural
+reasons uh that you see as well. We can
+talk about that from a fundamental
+standpoint. But then it's the risk
+mitigation to me that is where you make
+the the the the biggest bang for your
+buck as an investor in a Kai Wealth
+vehicle, for instance.
+Absolutely.
+You're talking about sharp ratios north
+of one, Calmar ratios one, one and a
+half. You know, most of those strategies
+you listed on the hedge fund side, you
+know, you pick your average hedge fund,
+and again, I don't mean to be pejorative
+about that, but that they They love
+to to compound returns at those rates.
+Now, most of them do do that. They just
+don't do it consistently enough to
+warrant, you know, allocating all of
+your capital to one particular fund and
+one particular manager. And so, what
+you've done is a little bit of what our
+friend Bob Elliott done over at
+unlimited funds is acknowledge that
+there are the consistency of hedge fund
+outperformance of outperformance back to
+alternative strategies in general
+attends not tends not to be correlated
+from a year-to-year perspective. So,
+having that diversification and that
+balance also increases your
+risk-adjusted returns because you're
+then adding non-correlated strategies.
+This is fantastic stuff, man. I'm really
+proud of you for building this.
+Yeah, I appreciate it. Yeah, I think uh
+you said the critical word
+diversification. I think, you know,
+people
+uh
+hear that word primarily tied to equity
+diversification
+um and don't really think holistically
+about what diversification truly is. Uh
+diversification uh should be applied uh
+truly across the whole portfolio uh you
+know, in distributionally. Like, your
+your tails and your standard deviation
+should be diversified fully. And if you
+do that properly, that's the alchemy
+that happens at the multi-strategy hedge
+fund. People look at the Citadels and
+Millenniums of the world and
+uh you know, look at their gross
+returns, take out the fees. Yes, the
+fees are really high and particularly at
+those entities and then the never mind
+the sales fees and everything that go on
+top of that from the third-party
+providers.
+But, if you really strip out all the
+fees, you know, what they're producing
+is
+phenomenal.
+And and not just over a year or two,
+this is over decades and decades and and
+and it's an the whole industry is really
+that way. I mean, there are better ones
+and worse ones, right?
+Right.
+Um and so, you have to ask yourself, how
+are they able to do that yet, you know,
+uh the broad world is not? And it's it's
+simple. The answer is diversification,
+true diversification.
+Um you know, I can if you can pull
+together, which is what we're, you know,
+uh
+uh doing or or uh attempting to do,
+right? And and uh so far so good in our
+our multi-strategy.
+If you pull together, you know, 15 uh
+one sharp strategies that return 10% a
+year that may draw down 15% every 2
+years, like that sounds good, right? But
+it's not going to
+nobody's going to beat down your door to
+get that return. Um you know, it it's
+it's good though. But the beauty of it
+is if you put those together and they're
+all non-correlated
+Oh, yeah.
+um now there's this
+beautiful magic that happens where yeah,
+you still make 10%, but there's the risk
+part, right? And the sharp ratio goes to
+two.
+And the drawdown goes down to not not
+down to 10, not to 7 1/2, it goes down
+to five.
+Yeah.
+Um and then you do what other industries
+like private equity do or uh you know,
+even private credit where you deploy 50%
+leverage and because these are uh mo-
+you know, in managed accounts of the
+fund, these aren't allocated out and
+they have a lot of uh efficiency of
+capital. You can often notionally fund a
+lot of these strategies.
+Now the leverage is free. You don't have
+to borrow money to to leverage and so
+that 10% becomes 15 or 17 or whatever
+leverage you want to deploy and it's a
+two sharp.
+Yeah.
+You should be deploying leverage on it.
+Um and so that's how the multi-strategy
+returns happen. It's it's through that
+true diversification
+uh meaning completely non-correlated
+strategies and and building out um uh
+layering strategies that offset uh the
+risks of one another and it's true truly
+diversification.
+Um
+But that then you take those
+multi-strategies, you plug them into
+your alternative space to provide that
+another level of diversification and now
+you deploy other types of exposure that
+can really really um help bolster a
+really battle-tested kind of risk um
+uh hedged risk portfolio. Um and we
+really think through diversification we
+can achieve a one and a half sharp
+across plus across the whole portfolio.
+Um, whereas 60/40 over 120 years is is
+is at best a 0.5 sharp.
+Five, yeah. Uh, we had it at 0.6.
+Yeah. It's been better lately, right?
+So, you know, it looks better if you if
+you unwind 30, 40 years, it's closer to
+0.35.
+Yeah.
+Um, and you could argue that's
+outperformance that's likely to lead to
+underperformance going forward. So,
+you know, it's not even close. We're
+dealing with four, five, six X
+risk-adjusted returns. Uh, it it almost
+blows my mind that that we're that that
+the majority of the world says you
+should be passively investing
+um, in equities um, or bonds. The amount
+of risk that people take um,
+is is irrational.
+Um, it's an industry that's created uh,
+because it's easy
+um, and it's easy to understand. Um, but
+it is not optimal.
+The math is easy for math people. I
+don't I wouldn't say it's easy to
+understand.
+No, I meant the stock. Like people
+what's easy the industry has created a a
+60/40 allocation model because it's
+Oh, you 60/40 in general. Yeah, yeah,
+yeah, sorry.
+and bonds and that's not optimal. The
+reason is it seems easy and people
+understand it, but it's not it's far
+from optimal.
+No, 100% completely agree with you and
+I'm I'm glad we're having these
+questions because, you know, there's a
+handful of strategists or investors or
+people who who kind of, you know, we
+kind of all play in the same
+you know, playground if you will, that
+sort of have arrived at the similar
+conclusion
+from different strategies and different
+methods, which is
+it's a lot of risk in the bond market
+and there's just a lot of risk
+associated with interest rates repricing
+significantly higher than they currently
+are today.
+That's not necessarily a call on the Fed
+or a call on supply or you know,
+duration risk or or even term premium. I
+think it's a call on all three
+essentially effectively where we are in
+this sort of broader structural cycle.
+So, can we back up a little bit and kind
+of give you an opportunity to set the
+lay of the land on why how you arrived
+at that strategy and why you are here
+today?
+Yeah, so before I dive into the macro
+kind of driving forces that I see
+happening now and you and I have been
+talking about this
+for years.
+Accurate accurately.
+4 or 5 years
+Uh we we foretold a lot of this
+Agreed.
+Yeah, 4 years ago.
+Um
+At the lows in bond yields in 2020 we
+were talking about this.
+Correct. Yeah, 2021-ish I think, but
+yes, I think it was definitely
+um yeah, a much harder call then, right?
+And and and obviously people laughed at
+some of the 5% yield calls then, much
+like they're
+um kind of pooh-poohing a, you know,
+potentially get to seven, right?
+Um which
+which again we can kind of dig into a
+little bit here.
+All right, but we got to unpack that.
+That's a hot take, man. I love it.
+Yeah, yeah. But uh but I
+Before we dive into that, I just want to
+back up and and, you know, really set
+the stage that
+you know,
+equities
+um
+until 40 years ago had about average
+return of about 7 and a half percent,
+right?
+40 years is a long time. Last 40 years
+they've had a return of about 12% or 11
+and a half I think it is, right? Um
+Uh
+and that's kind of taken the returns,
+you know, to 9 and a half 10%, right?
+Longer term. Uh
+uh
+and if you think about
+the risk-adjusted returns up until 40
+years ago, uh again, 0.35 sharp and now
+you're at 0.45
+or so in a just the stock market without
+the bonds added in.
+And
+um
+as we said, that's not a very good
+risk-reward. Um and what people do is
+they extrapolate the
+the most recent like What are What are
+we looking at at a 5-year track record?
+At most a 10-year? 40 years is like
+forever. Like that you People laugh when
+you say, "Well, you're looking at a
+120-year track record." But there's a
+reason we do that, because what people
+don't realize is that
+um the last 40 years, up until 2 years
+ago, um have been correlated one to one
+with a
+bond yield, a 10-year bond yield, going
+from 20 to zero in a straight line,
+essentially, right? Like the
+You look at it and it it You literally
+could draw just a line and it goes
+straight down for 40 years.
+That's not a coincidence. Uh you know,
+uh it wasn't magic. Uh the the Federal
+Reserve
+ran a supply-side economic model for 40
+years that essentially pushed markets
+there. But people confuse correlation
+for causation. It happens. It's it's
+human nature.
+And because they think 40 years is
+forever, they think that's just how
+things will go for the next 5 years, 10
+years, 20 years, 30 years, 40 years.
+Um but they forget that interest rates
+can go the other way. And they never ask
+the question, "What if they do?" Uh you
+know, what does that mean, right? And I
+think that's so critical. Um uh and and
+I I I feel strongly, and we've said this
+for quite some time now, uh you know, to
+this point accurately,
+that that
+that that process um is not a a 1-year,
+2-year process. And mean reversion,
+which happens for structural reasons in
+markets over longer periods of time, are
+likely to to play out in the bond
+market. And that has massive uh It's the
+most important thing to outcomes in
+equity markets as well as bond markets.
+Um and if you take that view that there
+is mean reversion to the longer-term
+mean, um during periods when that
+happens, uh we're not worried about a
+0.35 sharp for stocks. We're point we're
+we're we're concerned about a negative
+right particularly in real terms
+performance.
+It's incredibly poor.
+You've heard me talk about this, but
+I'll bring out the specter of the 60s
+and 70s 68 to 82. Why do I choose that
+period? Because it's the last time we
+saw over some extended period a secular
+move in interest rates higher not lower
+right last 40 years until 21 were
+straight down. When's the last time we
+saw interest rates go higher? We should
+probably go look at that. We should
+probably understand what the risks of
+that look like. Well,
+68 to 82 when interest rates went
+secularly higher again. Three different
+major
+rallies and declines, but again if you
+draw a line again for 14 years secularly
+working their way higher.
+When we saw that what happened to the
+stock market? Well,
+the stock market went nowhere in nominal
+terms for those 14 years and in real
+terms lost 70% of its value.
+It's hard for people to imagine for 14
+years markets losing in real terms 70%
+of their value. It's not in people's
+vocabulary.
+I would
+encourage people to think about what
+that means for all the things that have
+worked so amazingly well for the last 40
+years not just their public equities and
+bonds, but
+what happens to private equity if you
+get negative real returns that last over
+a decade? Those mark to market losses
+that they were
+able to cut out of the volatility
+picture from COVID that they were able
+to cut out of the volatility picture
+from 08 09 that they were able to cut
+out of the picture from 2001 2002
+because those only lasted a couple
+years. They were just short-term crises
+with V bottoms.
+What happens if the market doesn't come
+back in a meaningful way and that
+declines are happen over a longer period
+of time.
+And in those situations you have to
+realize that private equity, much like I
+talked about the multi-strategy, right?
+How how they generate the returns, um
+multi-strategy is truly non-correlated.
+It's offsetting it's all of all of its
+exposure. Private equity is not. Private
+equity is equity. It's diversified
+equity. But what happens to that equity
+factor risk if it happens over 10 years
+when you're deploying 100% leverage,
+which is what private equity is doing?
+Well, private equity is public equity
+leveraged two to one and then charged,
+uh you know, high fees on and then not
+marked to market and it looks great
+almost like a diversifier cuz you don't
+see the volatility. That works until the
+volatility is occurs over a longer
+period of time.
+So, things like this all the embedded
+leverage in the system, there's a ton
+that is kind of locked up and hidden
+away
+um in banks and in private equity and
+all kinds of private credit. You can go
+on and and look at it all and it's all
+bundled away and sat in a corner cuz
+it's not marked to market. Um and people
+say, "Well, it it'll always come back.
+Look at the last 40 years. All of our
+models say." What happens if it doesn't?
+Yeah.
+Important to note that and understand
+the risk that people are taking and the
+risk that's embedded in the system based
+on recency bias.
+And again, the argument isn't this is
+not to scare people.
+But we probably should look at the
+possibility of bonds not going down
+but also going up over some period of
+time if you're truly going to manage
+risk.
+Um that No regardless of whether you
+believe the odds are higher or better or
+not. And I I'm here to tell you that
+most entities don't and haven't.
+Um because if they did, like I said, you
+take that last time that it happened as
+some general indicator of what can and
+is likely to happen in those scenarios.
+Um
+the the performance of basically the the
+overwhelming majority of how people
+manage their money as dramatically
+negative using
+that approach.
+Um and if both advisors are truly
+intended to be fiduciaries,
+I would say there's a
+dramatic amount of malpractice actually
+happening
+in in the wealth advisory space and in
+the RAA space
+bolstered by candidly the regulatory
+system, which itself is built up
+to
+to incentivize
+you know passive investment as as a
+lower risk option for uneducated
+investors.
+And so the whole system is is really
+has dramatic risk that again will change
+under a scenario if something like that
+is about to happen, but it'll likely be
+way too late for the majority
+of of investors.
+All right, so that's the the preview.
+That's the big picture.
+I was going to ask that sounds like an
+institutional constraint. And I agree
+with your take by the way. So if I sound
+like I'm playing devil's advocate, it's
+because I am.
+If the institutional constraint is the
+entire system is set up to funnel people
+into passive investing asset classes so
+that we can capitalize our national
+champions and we can capitalize our
+federal government and our municipal
+governments, how do we ever get to a
+scenario where we're approaching 7% if
+you will on the 10-year or even much
+higher than 5.5%?
+Yeah, this is the this is the argument
+that everybody
+the right argument
+that everybody comes back with that
+paired with the other correlator that is
+the national debt, right? Which is also
+a similar right argument like how could
+we ever get there if it blows the system
+up?
+Right? Well,
+Famous last words.
+Yeah, I was about to say like if you if
+you think it it can't happen, right?
+Because the system is incentivized for
+it not to happen. I'm here to give you
+bad news is that all kinds of things
+happen in this world that that the world
+doesn't want to happen.
+This one in particular to to address
+both of those specific issues. One,
+inflation,
+and this is where we can get into the
+macro picture quant topic a little bit,
+is is not happening
+is not something that the Fed can
+control.
+Um, it is something that is a function
+of
+the populace, the people
+within a political system
+saying, "We are not okay with money
+continuing to flow to the top."
+Yeah.
+Um, in a system where you have um
+in a natural system, money money flows
+to the top, right? Survival of the
+fittest, right?
+The strong get the resources and and
+capture
+uh the majority of the gains. And that's
+why since time incarnate, right? Like
+there've been kings and queens and
+emperors and
+um and serfdom, right? And and the
+reality is
+um
+as human beings, we have a
+overdeveloped or
+frontal cortex, which helps us to
+manipulate the world around us,
+to control the world around us, but by
+definition for that to happen, we have
+to have a a well-defined sense of self,
+right? To to manipulate the world, you
+have to know you are a thing that is a
+manipulating the world around you. And
+that sense of self is something that's
+very
+relative to any other animal in the
+world, no matter how you think about
+things, is very specific to us. And that
+sense of self
+means I look at myself and I look at you
+and I say,
+"There must be some equality or some
+fairness." That's not a natural system.
+Your mother, your father probably told
+you life isn't fair. That's true. The
+life in the in a natural state is not
+fair.
+Very much not.
+But we want
+to have a societal contract where we are
+individuals
+and we are equal and where we should be
+treated fairly. That's what America is
+all about, by the way. It's kind of
+freeing ourselves from the natural
+world. In order to do that, there's a
+natural entropy towards
+survival of the fittest in the natural
+system, right?
+Mhm.
+And and our founding fathers here in the
+US knew that.
+And knowing that, they created an
+elaborate sense of a set of checks and
+balances, right?
+Uh to help uh avoid that entropy and to
+create a system that allowed people to
+be more fairly treated and and to to to
+have freedom and not be subjugated um to
+to one another by power. Um
+but the system is not naturally set up
+that way. And so, in a natural state,
+um which is what the Federal Reserve was
+created so you know, the right believes
+in a free market economic system because
+it's more efficient,
+um which is true.
+Um and and that system ultimately drives
+unequal outcomes and dramatically so.
+So, the Federal Reserve through monetary
+policy, which is supply-side policy, um
+just pumps more oxygen into the system,
+more money. It's the same thing, right?
+Totally.
+And and if you pump oxygen more and more
+into the system to help build more and
+more, you know, well, in the Mesozoic
+era, pump more oxygen in the air, what
+happened? We got really big dinosaurs.
+Totally.
+Like you you pump more oxygen into the
+you know, into the free market economy
+and
+um corporations and the powerful become
+more and more powerful and they grow and
+they create more technology and
+globalization happens faster and all the
+things, right? And that's what we've
+done for 40 years. And that's GDP
+maximizing. That's probably maximizing
+towards technological
+innovation
+um and progress.
+Yep. Corporate profits.
+But the problem with that system is if
+we believe as a people
+in a system of fairness, it becomes over
+time a dramatically unfair
+and unjust, much like the real world is,
+by the way.
+This is not a political argument. I
+don't want to sit here and, you know,
+debate the the the politics of fairness
+or or whether fairness should exist.
+But these two things are diametrically
+opposed, and these two things ultimately
+are the two biggest pressures over time
+that drive to historical cycles, the big
+big macro cycles. And at the end of the
+day,
+you get absolute power corrupting
+absolutely. You get
+everything going to the top until it
+gets to the let them eat cake moment,
+right? And
+you know, we've reached our let them eat
+cake moment. That's where we are.
+Inequality has grown dramatically in the
+developed world over 40 years.
+And you know, Gini coefficients have
+gone from 0.35, which is a measure of
+the statistical width of the
+distribution of wealth, to 0.45, 0.46.
+It's actually coming in a little bit as
+we start to have more populist policies,
+but it won't happen quickly.
+Nope.
+And and as those things happen,
+the the system is less efficient. It
+does all the opposite things of free
+market economics. It it drives a demand
+push economy, which drives money to
+people, which then ultimately,
+you know, drives
+one-to-one velocity of money. Money that
+goes to the top is essentially zero. You
+know, at in the short term has an active
+velocity of money, but relatively low,
+and then eventually
+turns negative because it, you know, it
+money finds it going to corporations
+finds its way
+to to profit-seeking enter enterprises,
+which reduces the inputs, which human
+beings are a major input to the whole
+process. So,
+100%.
+Um we've said this before, but, you
+know, you know, during
+um the last 40 years, we've had 1.75%
+real GDP growth approximately,
+uh, give or take. Uh, about 0.75 of that
+has gone to median outcomes.
+What happened to the other 1%?
+It went to the top. If we were to say
+that top that 1% went to the top 1%,
+that's 100% per year,
+right?
+For 40 years.
+Um, and and uh, there's uh, you know,
+you think compound You want to do a
+compounding exercise? Try compounding
+100% uh, growth for 40 years. I mean,
+that's an exaggeration of the scale and
+size of this and some there is some
+trickle down, but but but the forces of
+supply-side economics are incredibly
+powerful and especially when um,
+done over that type of a period of time.
+So,
+Yeah, so that's
+Um,
+so, anyway, uh, I I could go on and on
+for some time about this, but you but
+you see how when you get to a point
+where and it's a generational issue. I
+think this is another big takeaway that
+we've talked about, but people assume
+it's just about wealth disparity and
+expansion and reduction in a in almost
+like a a vertical sense uh, between the
+rich and the poor. But what people
+forget too is that you can turn that
+wealth disparity on its side
+horizontally to generations, because
+when people come out of college, they're
+labor
+uh, or high school and when they retire,
+they're capital.
+Yeah.
+Um, and and over time people build
+wealth. So, what's happened is over this
+40-year period, which is two
+generations, baby boomers
+have become a greater and greater
+they've been capital. They've benefited
+dramatically from um, from this
+supply-side economic model.
+Meanwhile, the
+millennials on down have have been labor
+and have been the ones being suffering
+through this uh, this issue. So, when
+you see a generational divide in this
+kind of the oh, boomers, you hear that
+or you know, like the system's broken or
+the angst. Where's the angst coming
+from? It's not coming from the boomers,
+it's coming from the millennials on
+down. They're the ones who've been stuck
+at home with mom and dad,
+unable to afford a home, unable to pay
+for their college education,
+etc. Is it any surprise that something
+like Bitcoin would come and be the you
+know the essentially the the zeitgeist
+for that generation? The zeitgeist Why
+is that the zeitgeist of the generation?
+They grew up during a 40-year period
+where 0% money led to massive
+technological innovation. So they think
+technology, cuz they're in that 40 years
+it's been true, solves everything.
+So they they they think the system is
+unfair and broken. They want to burn it
+down, they want to break it,
+understandably, right? And and how do
+you do that? Well, you Who's at the
+source of power for
+this? The Fed, monetary policy. And so,
+you know, we need a fairer system of of
+monetary policy in their minds, right?
+And in order to do that, we have to
+create a technology that does that,
+right? Meanwhile, as a as a generation,
+they are way behind. They have 40% of
+the wealth creation household formation
+of baby boomers at their time of their
+generation. I think it's up to 45%
+actually now.
+So how do they catch up? Well, convex
+bets. That's what this is what the
+yellow calls are about. It's also what
+Bitcoin and and and crypto is all about.
+And so they're driving all the money
+that they're now starting to get into,
+you know, the tendies are going
+right into into what they believe in as
+a zeitgeist, but also because they're
+convex and and they can
+push outsized returns there. So all of
+this is connected. You have to see the
+big picture and kind of not miss the
+forest from the trees. But once this
+starts, it's not stopping until we get
+some level of what they perceive as
+fairness. We haven't done that with
+housing, we haven't done that with with
+education, we haven't done that with
+a ton of issues. And that's what's
+driven, by the way, people think Trump
+is driving This Trump's a vehicle,
+right?
+Biden was a vehicle, AOC, Bernie
+Sanders, whether you're left or right,
+they're all vehicles for this populism.
+And it's not about right or left. The
+reason Trump is important is cuz he's
+the he's brought the right left, right?
+And that's the departure that that
+that's been so critical for getting
+policy actually pushed. You know, people
+don't think about it, but all the
+policies started
+the more populist policies started with
+Trump and continued and was reinforced
+during COVID by Biden, which was like
+the catalyst to unleash a lot of that.
+But the reason Biden was able to do all
+that was because
+Trump had brought the right left. And
+the right can no longer stand up to
+populist policies because the policies
+were essentially their policies as well.
+And and so I'll stop there, but but but
+the point here is, you know, once you
+once this process starts,
+it's it's hard to to turn back. There
+are things that can change the path over
+a year or two or three,
+but but those pressures are are massive
+pressures. The incentives have changed
+in the system, and that's what leads to
+secular outcomes changing.
+100% man. That was a massive Folks, if
+you guys
+didn't have a pen and pad down or some
+ability to record I mean, I guess we're
+going to post this to YouTube so you can
+replay it, but that was a master class
+in geopolitical economics and tying
+together a lot of very important
+dynamics that will have very significant
+influence over both the economy and
+asset markets over the long term.
+Colin, can you throw the slide up on the
+screen? This is slide 96 from our
+January macro scouting report. This is I
+created this chart for the first time
+probably a decade ago, maybe over a
+decade ago, you know, sometime in the
+early 'oughts. And what I noticed in
+creating the chart at the first time,
+which is probably down around here, was
+that this sort of break that we had a
+significant sort of departure from what
+had been a long-term kind of stable
+social contract between labor and
+capital. Labor being the blue line and
+capital being the red line. Labor is
+labor's share of gross domestic income
+and the red line is corporate profit
+share of gross domestic income. We're
+now down here in the lows. We're down up
+there in the highs with respect to
+corporate profit. So, everything you
+said about supply-side economics and
+essentially siphoning resources to the
+largest, you know, companies and the and
+the richest households, this is
+represented in this chart. You know, we
+we did some math on this to sort of see
+that, you know, when you kind of do this
+on a on a per capita type basis, this
+spread between going from the long-run
+mean to the levels, these current
+levels, is essentially roughly around a,
+you know, roughly about 10 $9,000
+per person regressive tax in the with
+respect to the private sector labor
+force that's going to corporations. It's
+about 11% of the median household
+income. And so, we have had these
+policies built from a supply-side
+standpoint with respect to the Federal
+Reserve policy. But, I would argue we've
+had a lot of supply-side
+fiscal policy as well starting in the in
+the early '80s, obviously, with with
+Ronald Reagan.
+The result is this system whereby the
+younger cohorts of the system are
+generating labor income which eventually
+turns to capital if they save enough of
+it at a very low rate. And rate that
+don't allow them to catch up to previous
+generations. So, as a function of that,
+they're demanding populist policies
+starting with Obamacare, moving on to
+President Trump, moving on to President
+Biden and all the ancillary voices
+around the Democratic and Republican
+Party since then. And so, I guess my
+question to you is is just the
+is the inevitable
+sort of inflationary impact of this
+populist policy and the likelihood that
+we see higher interest rates over a
+long-term time horizon, is it just as
+inevitable as millennials and Gen Z's
+taking over spots from the baby boomers
+as their share of total US voting
+population? Is it as simple as that?
+Um, I would say yes, but I think time
+frames are so important.
+Yep.
+Right? Um, and I think that's so
+critical to this conversation. I mean,
+you're looking at a very long-term
+chart, right? And so I would say
+in the in the
+over decades, the answer is yes.
+Um, but uh, and again, this is not a
+political comment, but there are can be
+politicians, uh,
+um, who increasingly in the system
+have incentives that are maybe not to
+just uh, give people what they want,
+right? Um, the system again is
+ultimately built, and this is left and
+right, by the way.
+Um, the system is built, uh, to
+incentivize power to the powerful
+increasingly. And, um, despite the
+politics and the rhetoric, which will
+increasingly match what people want, uh,
+um,
+there can be periods where, even though
+the pressures politically to fulfill
+fulfill those policies are increasing
+over time and are definitely quite
+strong at this point.
+Um, there can be periods where despite
+that, we get policy that is,
+um, not as populist. Um, if you look at
+some of the the current Trump proposals,
+right, to extend the fiscal tax cuts,
+which were
+dramatically in in his first time
+around, he was very populist in terms of
+tariffs against China. Um,
+uh, you know, and and at face incredibly
+populist rhetoric, right? His
+inauguration speech in '16 was the
+rusted out cities in middle America,
+right?
+Yeah.
+Despite all that rhetoric and all the
+popularity around that populist kind of,
+uh, going up the small guy, there has
+been a lot of policy, um, some of the
+biggest policy have been actually supply
+side. Um, and, um,
+and so we have to to watch the policy
+outcomes over shorter periods of times
+over two, four years.
+And see you know,
+it doesn't mean we are going to mean
+revert yet. But you know, the long term
+the markets are weighing machine and
+yes, over the long term these things
+will trend in that direction. That's why
+I say the word secular, right? Like
+we can have two, three, four years where
+despite the bigger view being correct,
+right? The things can go in the opposite
+direction. Now the odds are not in favor
+of that because you know, at some point
+you would think people see through some
+of this or it drives more inequality and
+angers people more and then you know,
+etc. Right?
+But
+but important to understand these
+timelines I think and then and to zoom
+in to that. But to your to your
+question, yes, it's a function of a
+generation who believes more
+in the importance of fairness and
+equality. By the way, it's not a
+coincidence to tie in some social things
+that there's been much more of a focus
+during this period on issues of
+equality, right?
+In other ways, not just economic
+equality, right? If you look at the 60s
+and 70s, similar, right? Those periods
+happen generally in language generations
+who value that more because to a good
+extent equality has been a problem for
+them. They can they can relate more,
+right?
+To to being
+to feeling like a system is not fair.
+And so
+I would argue that a lot of the what
+people would call wokeness or whatever,
+right? That I think that's a derogatory
+you know, word for what is a
+increased
+meaningful increase in
+to to a focus on equality.
+Yeah.
+And
+um
+again, I think those things are are
+likely that to trend and continue with
+these these things as well and are not a
+coincidence. So, but yes, we will we
+will tend towards those things until
+it's addressed at the end of the day and
+it can it be addressed very quickly and
+dramatically. It can be it can happen
+not for a while and get worse and then
+happen
+over some period of time. But the
+pressures and the incentives in the
+system are are at a point after 40 some
+years and generationally with the
+millennials becoming politically
+dominant baby boomers dying off too to a
+realization of those policies as well.
+I agree with you, man.
+I've been up all night so much of your
+time. I do want to get your take on this
+before we wrap up. Um, so uh, agree with
+practically everything you said and in
+fact I I have to go back and rewind it,
+but I I think I do agree with everything
+you said. Uh, you know, you and I've
+been having these conversations for you
+know, almost half a decade now.
+When it comes to, you know, we're in
+this fourth turning regime and you know,
+I don't have time to explain that what
+that means. So, definitely look it up if
+you have not come across that framework.
+Uh, but my former colleague and one of
+my mentors know how
+we have a lot of institutional change in
+fourth turnings, right? If you believe
+that as a you know, starting point. And
+one of those institutional changes that
+I think uh, is a very high risk just
+given the precondition of this demand
+for equality amongst lower
+you know, uh, income you know, parts of
+the population and and and younger
+cohorts of the population that are only
+increasing in share of the overall voter
+base is the probability that we have and
+experience a fiscal crisis in this
+fourth turning. So, to me
+you know, I think when you hear 7% bond
+yields out there if you're an advisor or
+an investor, uh, we have several clients
+who manage trillions of dollars of
+bonds. I'm talking to you guys
+right now. Um, you know, you hear 7%
+bond yields. It sounds It sounds crazy.
+But I'm going to show you walk you
+through three charts in 30 seconds to
+show you why it's actually not crazy and
+I would argue you could potentially
+sniff 6% uh a year in in 2025.
+So, in our view, uh there's sort of five
+key risks that are sort of materializing
+around midyear, Q3, uh in our opinion,
+that could potentially create some
+significantly hawkish dynamics in the
+market. One, we could see uh the advent
+of tariffs that cause a too strong US
+dollar uh that ultimately drains
+liquidity and makes the capitalizing of
+the US government more onerous than it
+already is with the private sector
+owning about 55% of marketable Treasury
+securities in a year where we're going
+to have a record 11 to 12 trillion
+dollars of gross Treasury supply.
+Uh so, number two, we are likely to see
+a further deceleration in core PC
+inflation uh in the first 4 months of
+the year. Our model has core PC starting
+to back up again uh in May, reported
+until June, and and, you know, starting
+to trend higher from there. Uh cyclical
+low in core PC inflation that is
+obviously inconsistent with 2% inflation
+in terms of the Fed's target. Uh number
+three, uh you could potentially have
+have that cause a hawkish pivot uh with
+respect to the Fed and their general
+assessment that they're roughly 150
+basis points above neutral from the
+sector of their policy rate, complete
+repricing of the forward rate curve, in
+fact, introducing two-sided risk to the
+forward rate curve for the first time
+since, you know, kind of probably uh
+first half of 2023. Uh and then uh you
+also have a uh potential hawkish shift
+in uh
+in Treasury uh debt composition as it
+relates to the US's net financing
+policy. Uh Scott Bessent, uh who I know
+well as a client for a long time, and
+former fellow Yalie, uh been very
+critical of our fellow Yalies uh uh net
+financing policy with respect to our
+preference for uh bill financing. So,
+it's likely that we start to see an
+increase in coupon supply uh on a
+nominal and and and relative basis. Uh
+and then finally, we have
+what is on record for being, you know,
+the one of the biggest uh years ever
+with respect to global refinancing
+demand. When you look at the lagged
+growth rate of global nonfinancial
+sector debt, you know, the kind of that
+peak that growth rate peaks on a on a
+four and a half, five-year kind of lag
+to simulate the early wave of the
+refinancing cycle. That peaks in Q3 of
+this year. You know, you you can argue
+over the specificity of that, but in
+2025, we will have a record year for
+global private sector and public sector
+debt growth in terms of refinancing
+need. So, if all those things sort of
+happen around mid-year, you could be
+talking about a
+I want to say a dearth of capital, if
+you will, that forces a significant
+repricing across sovereign debt markets,
+and that takes me to these charts,
+which, you know, will take me way less
+time to to explain. In this top panel,
+we show 10-year term premium at 54 basis
+points. And for those who don't
+understand what term premium are, it's
+the excess return you get from rolling
+over short-term paper instead of taking
+a liquidity risk in the bond market by
+locking your money up for whatever that
+tenure is, 10 years.
+If you subtract the deviation from the
+long-run mean of term premium, which is
+mostly positive for, you know, 50, 60,
+70 years,
+if you subtract that deviation from the
+long-run mean, you're talking about a a
+fair value on the 10-year from a term
+premium adjustment that's five and a
+half percent. That's a significant
+change from where we are today, which is
+around four and a half percent. And in
+our opinion, that makes sense because we
+are in a world that has higher
+structural inflation, as you and I
+generally agree on. We can unpack the
+reasons why, but we don't have time to
+do today. And historically speaking,
+when you've had higher inflation, you've
+had higher realized volatility in
+inflation, but you've also had a
+persistent, you know, inflation
+ex-positive excess inflation relative to
+the Fed's target. So, ultimately, you
+have higher volatility and inflation
+pricing in the bond market, which
+contributes to higher term premium, but
+you also have structurally less demand
+in terms of the Fed being able to use
+its balance sheet to take down risk. And
+so, if you sort of put those two things
+together, it suggests that we're
+probably going to continue to see this
+hawkish repricing of term premium in the
+bond market. It could accelerate
+markedly, you know, sometime around late
+Q2, early Q3, and then throughout Q3 in
+the second half of this year. And if
+we're wrong on all that, and we have a
+deflationary boom on AI from
+productivity, then the yield curve is
+just too flat to account for that
+anyway. You're talking about 28 basis
+points wide in terms of the 3-month
+10-year Treasury yield curve on a
+long-run mean of about 150 basis points.
+You know, you would subtract that
+deviation from the mean and you're still
+talking about 10-year nominal yields at
+around 5 and 5.6% and a 10-year TIPS
+yield that's somewhere around 3 and a
+quarter. So, no matter how you slice and
+dice it, too much supply, not enough
+liquidity, potentially too high too high
+inflation or
+deflationary AI-driven productivity
+boom, in our opinion, the bond market is
+just mispriced and it's mispriced at
+least by 100 basis points right now. And
+I would argue, you know, somewhere
+closer to 250 basis points.
+Couldn't agree more. Yeah, great great
+analysis. Uh
+I think you touched on the most
+important part, Darius, which is
+supply, right?
+We The weighing machine matters over
+a decade, right?
+The voting machine, short-term outcomes,
+the next year or two, are functions of
+supply and demand.
+And quite simply, the amount of supply
+of bonds
+and refinancing, however you want to put
+it, right, in the market,
+is a function of of a lag.
+If you go look back when we hit lows,
+you know, 4 years or so ago, right? Um
+that 5-year mark's important.
+And
+uh
+there's a ton of refinancing that happen
+has to happen at 5 years.
+Not to mention the the, you know, the US
+government itself has really kind of
+pushed all the issuance right to the
+front end of the curve. So,
+it is um
+is going to be hard to meet that supply
+and the net result will likely be higher
+interest rates.
+Um
+Never mind the inflation or structural
+pushes that we've we've mentioned
+otherwise. So,
+um
+yeah, it's not a good time if you are
+sitting there thinking, "Well,
+you know, interest rates are going to
+revert back to zero or one or two or
+three percent." I think I think you're
+kind of missing the big picture if you
+if you're still looking in the rearview
+mirror at the last 30 40 years thinking
+we're going back to that regime.
+Amazing. So, I think we just made a
+great pitch for why investors need to be
+having a lot less duration in their
+portfolio, potentially a lot less credit
+risk as well. Maybe not, but you know,
+certainly on the duration risk side. And
+so, if you're an investor and you have a
+lot of bonds in your portfolio, whether
+it be munis or treasuries or global
+bonds, please reach out to my man Jim
+Carson to talk about how to mitigate
+some of those risks while also achieving
+similar type returns. I think that's a
+phenomenal product you're putting out
+there into the world to help some folks,
+you know, really stay on the right side
+of market risk on the over the long-term
+basis. So, where can we send folks to
+find you?
+Uh kyvolatility.com or kywealth.com.
+Uh you can find me on social media at
+Jim_croissant.
+Um and
+again, you can find me back on here with
+you sometimes. It's always good to be
+here with you.
+It's a real blessing to be here, man. I
+learn a ton every time we talk. I
+learned a ton from you over the years,
+man. You're just a good dude, a great
+educator, and a good person, man. So,
+keep it up.
+Feelings mutual, buddy. Great being here
+today. Take care, Harris. See you,
+buddy.

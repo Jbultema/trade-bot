@@ -14,6 +14,19 @@ def test_baseline_execution_config_matches_default_cadence() -> None:
     assert config.execution.signal_lag_days == DEFAULT_SIGNAL_LAG_DAYS
 
 
+def test_default_operable_momentum_strategies_include_global_equity_choices() -> None:
+    config = load_config(DEFAULT_CONFIG_PATH)
+    expected_global_choices = {"VEA", "VWO", "VGK", "EWJ"}
+
+    for strategy_name in [
+        "dual_momentum_core",
+        "vol_target_dual_momentum",
+        "drawdown_managed_dual_momentum",
+    ]:
+        strategy = config.strategies[strategy_name]
+        assert expected_global_choices.issubset(set(strategy.tickers))
+
+
 def test_load_config_applies_hard_ticker_exclusions(tmp_path) -> None:
     config_path = tmp_path / "config.yaml"
     config_path.write_text(

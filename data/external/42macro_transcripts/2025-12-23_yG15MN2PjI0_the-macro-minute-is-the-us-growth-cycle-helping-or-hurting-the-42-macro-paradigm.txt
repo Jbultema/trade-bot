@@ -1,0 +1,379 @@
+source: 42macro_youtube
+published_date: 2025-12-23
+video_id: yG15MN2PjI0
+url: https://www.youtube.com/watch?v=yG15MN2PjI0
+title: The Macro Minute: Is the US growth cycle helping or hurting the 42 Macro Paradigm C bull market?
+
+Happy Tuesday out there team42. It's
+your skipper here at Darius Dell to
+present our macro minute for Tuesday,
+December 23rd, 2025. As always, we'll
+start with the executive summary from
+today's leadoff morning note. So, let's
+dive right in. Today's key macro
+question is, is the US growth cycle
+helping or hurting the 42 macro paradigm
+C bull market? The short answer is,
+according to our macro weather model,
+the tailwind from the growth cycle is by
+far the biggest tailwind for risk assets
+at present. We believe the tailwind will
+accelerate in the quarters ahead and
+continue to view consensus real GDP
+estimates for 2026 to 2027 as being
+roughly 50% too low at the current
+juncture. Terms of analytical nuance and
+boy is there a lot today. The Q3 GDP
+October capex and durable goods and
+November industrial production data
+supported our resilient US economy theme
+and the U-shaped economy thesis.
+Unpacking the Q3 GDP data, the headline
+growth dynamic supported our resilient
+US economy theme, particularly the
+strong positive impulses in real GDP and
+real personal consumption expenditures.
+The strong positive impulse in real
+final sales to private domestic
+purchases and weak positive impulse in
+real final sales to public domestic
+purchasers supported our resilient US
+economy theme. The investment growth
+dynamic supported our U-shaped economy
+thesis, particularly the weak negative
+impulse in real private fixed
+investment, which slowed to 1%
+quarter-over-arter saw in Q3, which was
+the lowest since fourth quarter of 2024.
+The tariff impact supported our U-shaped
+economy thesis as well, and that it
+signals headline real GDP growth is
+slightly weaker than implied.
+Specifically, the 45 basis point
+contribution to headline real GDP from
+imports and inventories in Q3 was 85
+basis points u greater than the long run
+mean of the time series. The strong
+negative impulses in industrial
+production and capacity utilization in
+November support our view that the
+resilient US economy is probing for a
+bottom of its U-shaped slowdown in the
+second half of 2025 as did the strong
+positive impulse in core capital goods
+new orders and weak negative impulse in
+durable goods new orders. Reminder,
+employment growth as measured by the
+establishment survey was non-existent on
+either a three-month or six-month
+annualized basis in November,
+particularly true private services
+payrolls, which represent greater than
+50% of total employment, 54% to be
+exact. Reminder, the US labor market has
+become substantially less dynamic during
+the Trump 2.0 administration with
+roughly 90% of all employment growth
+coming from the government or government
+adjacent sectors like healthcare and
+social services. As such, the
+reacelerations in NIPA corporate profits
+growth to well above trend rates of 9.1%
+year-over-year and 16.9%
+quarter-over-arter SAR in Q3, which were
+the highest since the fourth quarter of
+2023 and fourth quarter of 2024,
+respectively, support our view that the
+resilient US economy is headed for a
+jobless recovery that will perpetuate a
+boom in corporate profits due to
+sustained above trend productivity
+growth.
+Reminder, consensus is still too bearish
+on aggregate output relative to our
+resilient US economy and paradigm C
+themes. Real GDP growth is likely to be
+roughly 50% higher than consensus
+currently anticipates throughout 2026
+and 2027. With that bullish backdrop in
+mind, we see that consensus is currently
+not as bullish as we are on the
+corporate profits outlook according to
+the 22nd percentile reading of the S&P
+500 next 12 month 12-month earnings per
+share ratio. Cassentis may be as bullish
+as we are on the US corporate profits
+outlook, looking further ahead,
+according to the 64th percentile reading
+in the S&P 500 current fiscal year EPS
+to next fiscal year EPS ratio. But the
+risk of upside surprises over the next
+few quarters remains elevated. And
+lastly, the GDP deflator and core PC
+price deflator supported our sticky
+inflation theme and tariff pig in the
+Python thesis. As always, members of our
+global investor community can trust that
+our institutional-grade risk management
+overlays, Kiss and Dr. Mo, will help our
+portfolios navigate these emergent risks
+better than investors attempting to
+manage risk without systematic rules or
+relying on fundamental research alone.
+Uh, transition micro dashboard is always
+a wrap up with a question from our
+community. Actually, I just realized
+a lot of economist gobbly go here. Let
+me take off my economist hat. I'm
+guessing half of you don't even know
+what a weak positive impulse or strong
+positive impulse or this or that means.
+So, let me explain that. I apologize.
+It's very uh technical. A strong
+positive impulse is a a situation in in
+a time series where the three-month
+annualized rate of change is greater
+than the six-month annualized rate of
+change and the six-month annualized rate
+of change is greater than the
+year-over-year rate of change. So, what
+that indicates is an acceleration in the
+slope of the underlying time series.
+Obviously, when you're talking about
+growth, that's phenomenal. When you're
+talking about inflation, not so much.
+Um, a weak positive impulse means uh the
+3-month annualized rate of change is
+above the six-month annualized rate of
+change, but the six-month annualized
+related change is below the
+year-over-year rate of change. So, it
+suggests that there is a transitory, at
+least for now, acceleration in the slope
+of the underlying time series that is
+not yet trending. Uh and conversely, a
+strong negative impulse means the
+three-month annualized rate of change is
+below the six-month annualized rate of
+change, which itself is below the
+year-over-year rate of change. So, it
+means you have a a a a trending
+deceleration in the underlying slope of
+the of the slope of the underlying time
+series. And then conversely, a weak
+negative impulse means the three-month
+annualized rate of change is below the
+six-month annualized rate of change, but
+the six-month annualized rate of change
+is above the year-over-year rate of
+change. you have this transitory uh
+deceleration at least for now uh uh in
+the slope of the underlying uh time
+series. So hopefully that uh could clear
+some things up for you guys. You know,
+as you guys know, I love educating. It's
+a labor of love. My goal in life is to
+transform the investing habits of the
+general investing public. So that the
+vin diagram of investing activity
+according to institutional investors
+like myself and the investing act other
+circle the investing activity according
+to retail investors merges over time.
+It'll never be a cons you know just two
+concentric circle. It'll never be, you
+know, just one big circle cuz, you know,
+retail investors don't have guardrails
+in their process to prevent their
+amydalas from being tickled by bull porn
+purveyors or bare porn purveyors. And
+so, they'll always be making more
+mistakes on average at a higher
+frequency to a greater severity than the
+median institutional investor. But my
+goal and the goal of 42 macro, the
+company that me and my partners and our
+and our and our teammates build is to
+push those two circles together in the
+direction of the investing activity of
+the institutional investors uh that I'm
+partner with across global Wall Street.
+So uh getting into our uh 42 micro
+dashboard here as always I wrap up with
+the question from our community. This
+one's titled BOJ action. Recall that we
+talked about the BOJ and its impact on
+global financial markets in yesterday's
+macro minute. So this is says uh DD how
+does the DOJ action specifically or
+andor additionally contribute to the
+imbalance in the treasury market that
+has been good uh for gold. So uh
+primarily it it is uh so the number one
+reason it contributes to that imbalance
+is because the explosive growth or you
+know the positive or change whatever you
+want to call it in terms of the JGB uh
+bond yields at 10ear yields in Japan are
+the highest they've ever been as they've
+been since I want to say 98 or 99.
+Two-year yields in Japan are the highest
+they've been since 1997. the increase
+the durable increase in bond yields uh
+in Japan as Japan has exited deflation.
+If you look at Japan's CPI, it's been
+somewhere at or bel ab above 3% for
+three years now. So they've exited
+deflation and so that that dynamic is
+causing a reversal of the capital flow
+dynamic from Japan to the US. Recall
+that Japan is the US's second largest uh
+foreign creditor from the perspective of
+the marketable treasury debt securities
+market which is somewhere around $30
+trillion. Japan owns about I want to say
+somewhere around um you know five to
+six% of that of of that total and so now
+that the Japanese capital allocators and
+again Japan is one of the world's um
+largest net international investment
+surplus economy so that you know in
+layman's terms Japan has all the money
+alongside Germany alongside China um to
+a lesser degree um to a lesser degree
+Switzerland um but you know these are
+the places with all the money in the in
+the world in the global economy so if
+you remove a source of demand from one
+of the world's largest net international
+investment creditors, i.e. Japan, which
+just so happens to be one of our largest
+uh uh uh capitalizers in terms of the
+Treasury bond market, then you're you're
+it puts upward bias on yields because
+you're removing at the margins that
+source of demand because the Japanese
+investors can just stay home and
+capitalize their bond market. In fact,
+when you adjust for the cost effect of
+FX hedging from the perspective of
+Japanese investors who are allocating
+assets to the Treasury market right now,
+they're essentially picking up about a
+negative 110 basis point drag from
+investing in treasuries on a 10-year
+basis and hedging them uh and rolling
+those hedges forward right now. Um
+roughly about 110 basis point drag
+relative to what they would pick up by
+just buying a 10-year JGB. In fact, I
+was I hadn't looked at that uh this
+week. It might be closer to 120 150
+basis points just based on the uh uh uh
+widening uh uh um a slope uh in the
+Japanese uh uh yield curve. So, the
+yield curve that that slope that widens,
+it'll it'll start to uh uh cause that
+that negative spread to to get even more
+negative. So, uh you're basically not
+getting paid to buy treasuries as a
+Japanese investor right now if your goal
+is to hedge out the currency risk. And
+over time, as we move forward over the
+next couple of years, we ultimately
+think that Japanese investors will be
+increasingly forced to hedge out their
+currency risk as a partially as a
+function of the uh structural uh uh uh
+reform that we continue to call for and
+expect out of the Federal Reserve that
+should create the conditions for a much
+lower uh US dollar on a long-term uh
+basis. So, uh wrap it up there. Uh and
+we got another fun question uh talking
+about yesterday's macro minutes. So, I
+thought I'd uh hit on this as well. It's
+the season, you know, it's the holiday
+season. Uh if you're if you're if you
+enjoy these macro minutes, you're
+probably hanging on listening right now.
+If you don't enjoy these macro minutes,
+you're probably not watching. So my
+assumption is I'm talking to uh some
+friendly folks here. Uh so yesterday's
+macro minute, just reading the question.
+It says uh skipper for president. Uh if
+and I'm Skipper. Uh if you really want
+to do something great, the only problem
+is that uh who's going to take over for
+you. Uh so I always like to say be
+careful what you wish for. And boy are
+they right because uh this country has a
+long and storied history of um
+assassinating people who look like me
+when they start speaking truth to power.
+So uh uh you're absolutely right. I got
+to be careful what I what I wish for.
+But um you know the one thing I'll say
+on this is you know I do have political
+aspirations in the future. Not because
+I'm I want to be a politician. I have no
+desire to be a politician at all. I'm
+just a Christian who understands the
+economy at a level that far it's far
+surpasses the median politician and want
+to do good in the world and try to
+create policy that helps the people on
+the bottom of the K as opposed to the
+policies we continue to see created by
+the uh puppet puppet master oligarchs
+that pay for their um pay for their
+politicians to go to DC or to go to the
+state capitals around the country to
+imple to legislate policy on their
+behalf. That's what's happened. That our
+economy has we we replaced the king,
+King King George, with a litany of kings
+in Silicon Valley.
+And I don't think it's appropriate. And
+I think most of the people listening to
+me talk right now don't think it's
+appropriate, especially when you
+consider the hardship, the increasing
+amounts of hardship that are being
+levied upon those on the bottom of the
+cave. This the the the low to median
+income consumers that are struggling to
+make ends meet. the small businesses
+that are getting ravaged by tariffs and
+other factors, the the the the the
+income interest rate sensitive sectors
+that have been gasping for economic
+oxygen for years now. I think we can do
+a better job of creating policy so that
+we have a more cohesive and harmonious
+society that is is it represents the
+Christian values that we were originally
+this country was originally started on.
+I don't know where those went, but uh
+I'm someone who believes in bringing
+that back. So uh at some point in the
+long future, not the near future, the
+long future, uh I will be replaced by
+some a version of AI or whoever I train
+or whoever I the collection of people I
+train to do my job better than me so
+that I can go focus on fixing our broken
+country. So again, that's decades away.
+I got to wait till my kids get out of um
+get out of get out of college because as
+you know, this country has a long and
+storied history of not liking uh people
+who speak truth to power, especially
+when they uh unfortunately look like me.
+So uh we'll wrap it up there. Derry
+Stell here presenting our macro minute
+for Tuesday, December 23rd, 2025. Best
+of luck out there today, everyone. Have
+a wonderful holiday. We'll catch back
+here tomorrow. Cheers.
