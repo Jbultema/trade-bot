@@ -963,9 +963,9 @@ def _scenario_probability_stack_figure(scenario_lattice: pd.DataFrame) -> go.Fig
         barmode="stack",
         yaxis={"title": "Probability", "tickformat": ".0%", "range": [0, 1]},
         xaxis={"title": "Horizon"},
-        height=360,
-        margin={"l": 20, "r": 20, "t": 60, "b": 30},
-        legend={"orientation": "h", "yanchor": "bottom", "y": 1.02, "xanchor": "left", "x": 0},
+        height=410,
+        margin={"l": 20, "r": 20, "t": 60, "b": 95},
+        legend={"orientation": "h", "yanchor": "top", "y": -0.22, "xanchor": "left", "x": 0},
     )
     return figure
 

@@ -62,6 +62,7 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
     latest_valuation_rows = (
         int(frame["valuation_date"].notna().sum()) if "valuation_date" in frame else 0
     )
+    start_cohorts = _monitoring_start_cohorts(windows)
     champions = int((windows["window_role"] == "champion").sum()) if "window_role" in windows else 0
     challengers = (
         int((windows["window_role"] == "challenger").sum()) if "window_role" in windows else 0
@@ -72,20 +73,27 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
         int((windows["window_role"] == "reference").sum()) if "window_role" in windows else 0
     )
 
-    cols = st.columns(7)
+    cols = st.columns(8)
     _helped_metric(cols[0], "Active Windows", f"{len(windows):,}")
-    _helped_metric(cols[1], "Top Candidates", f"{len(top_candidates):,}")
-    _helped_metric(cols[2], "References", f"{references:,}")
-    _helped_metric(cols[3], "Champions", f"{champions:,}")
-    _helped_metric(cols[4], "Challengers", f"{challengers:,}")
-    _helped_metric(cols[5], "Valued Today", f"{latest_valuation_rows:,}")
-    _helped_metric(cols[6], "Ahead", f"{ahead:,}")
+    _helped_metric(cols[1], "Start Cohorts", f"{len(start_cohorts):,}")
+    _helped_metric(cols[2], "Top Candidates", f"{len(top_candidates):,}")
+    _helped_metric(cols[3], "References", f"{references:,}")
+    _helped_metric(cols[4], "Champions", f"{champions:,}")
+    _helped_metric(cols[5], "Challengers", f"{challengers:,}")
+    _helped_metric(cols[6], "Valued Today", f"{latest_valuation_rows:,}")
+    _helped_metric(cols[7], "Ahead", f"{ahead:,}")
 
     st.markdown("**Current operating readout**")
-    st.write(_monitoring_takeaway(frame))
+    selected_start_cohort = _monitoring_start_cohort_selector(start_cohorts)
+    display_frame = _monitoring_display_frame(frame, start_cohort=selected_start_cohort)
+    st.write(_monitoring_takeaway(display_frame, start_cohort=selected_start_cohort))
     leaderboard_columns = [
+        "start_date",
+        "monitoring_days",
         "window_role",
         "strategy_name",
+        "mode",
+        "account",
         "forward_status",
         "valuation_date",
         "equity",
@@ -110,8 +118,8 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
         "walk_forward_positive_rate",
         "left_tail_regime_return",
     ]
-    available_columns = [column for column in leaderboard_columns if column in frame.columns]
-    _render_metric_dataframe(_display_metrics(frame[available_columns]))
+    available_columns = [column for column in leaderboard_columns if column in display_frame.columns]
+    _render_metric_dataframe(_display_metrics(display_frame[available_columns]))
 
     detail_tab, shortfall_tab, top_tab, reference_tab, registry_tab, warehouse_tab = st.tabs(
         [
@@ -142,7 +150,7 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
             use_container_width=True,
         )
     with shortfall_tab:
-        _render_shortfall_and_execution_audit(str(warehouse_path), frame)
+        _render_shortfall_and_execution_audit(str(warehouse_path), display_frame)
     with top_tab:
         st.caption(
             f"Curated top {DEFAULT_MONITORING_TOP_N} candidates from the experiment registry. "
@@ -219,6 +227,8 @@ def _render_shortfall_and_execution_audit(warehouse_path: str, frame: pd.DataFra
     if not frame.empty:
         st.caption("Latest ideal monitoring valuation state")
         valuation_columns = [
+            "start_date",
+            "monitoring_days",
             "window_role",
             "strategy_name",
             "valuation_date",
@@ -239,6 +249,85 @@ def _render_shortfall_and_execution_audit(warehouse_path: str, frame: pd.DataFra
         if available:
             _render_metric_dataframe(_display_metrics(frame[available]), hide_index=True)
         _render_monitoring_drift_envelope(frame)
+
+
+def _monitoring_start_cohorts(windows: pd.DataFrame) -> list[str]:
+    if windows.empty or "start_date" not in windows:
+        return []
+    values = (
+        pd.to_datetime(windows["start_date"], errors="coerce")
+        .dropna()
+        .dt.date.astype(str)
+        .drop_duplicates()
+        .sort_values()
+        .tolist()
+    )
+    return [str(value) for value in values]
+
+
+def _monitoring_start_cohort_selector(start_cohorts: list[str]) -> str:
+    if not start_cohorts:
+        return "All starts"
+    options = ["All starts", *start_cohorts]
+    return (
+        st.pills(
+            "Monitoring start cohort",
+            options,
+            selection_mode="single",
+            default="All starts",
+            key="monitoring_start_cohort",
+            help=(
+                "Filter the operating readout by monitoring start date. Use this to compare "
+                "YTD paper starts against newer starts after missed rally windows."
+            ),
+            width="stretch",
+        )
+        or "All starts"
+    )
+
+
+def _monitoring_display_frame(frame: pd.DataFrame, *, start_cohort: str) -> pd.DataFrame:
+    if frame.empty:
+        return frame
+    output = frame.copy()
+    if "start_date" in output:
+        start_dates = pd.to_datetime(output["start_date"], errors="coerce")
+        output["start_date"] = start_dates.dt.date.astype("string").fillna("")
+        if start_cohort != "All starts":
+            output = output[output["start_date"].astype(str) == start_cohort].copy()
+        valuation_dates = (
+            pd.to_datetime(output["valuation_date"], errors="coerce")
+            if "valuation_date" in output
+            else pd.Series(pd.NaT, index=output.index)
+        )
+        fallback_end = pd.Timestamp(date.today())
+        elapsed_days = (valuation_dates.fillna(fallback_end) - start_dates.reindex(output.index)).dt.days
+        output["monitoring_days"] = elapsed_days.where(elapsed_days >= 0)
+    else:
+        output["monitoring_days"] = pd.NA
+    if output.empty:
+        return output
+    role_order = output.get("window_role", pd.Series("", index=output.index)).map(
+        {"champion": 0, "challenger": 1, "reference": 2}
+    )
+    output["_role_order"] = role_order.fillna(3)
+    sort_columns = [
+        column
+        for column in [
+            "_role_order",
+            "strategy_name",
+            "start_date",
+            "account",
+        ]
+        if column in output
+    ]
+    if sort_columns:
+        output = output.sort_values(
+            sort_columns,
+            ascending=[True, True, False, True][: len(sort_columns)],
+            na_position="last",
+        )
+    return output.drop(columns=["_role_order"], errors="ignore")
 
 
 def _false_count(frame: pd.DataFrame, column: str) -> int:
@@ -281,6 +370,8 @@ def _monitoring_drift_envelope_frame(frame: pd.DataFrame) -> pd.DataFrame:
         rows.append(
             {
                 "window_role": row.get("window_role", ""),
+                "start_date": row.get("start_date", ""),
+                "monitoring_days": row.get("monitoring_days", None),
                 "strategy_name": row.get("strategy_name", ""),
                 "forward_status": row.get("forward_status", ""),
                 "valuation_date": row.get("valuation_date", ""),
@@ -301,8 +392,11 @@ def _monitoring_drift_envelope_frame(frame: pd.DataFrame) -> pd.DataFrame:
     output = pd.DataFrame(rows)
     status_order = {"breach": 0, "review": 1, "watch": 2, "inside": 3, "no_snapshot": 4}
     output["_status_order"] = output["envelope_status"].map(status_order).fillna(5)
-    return output.sort_values(["_status_order", "drawdown_envelope_used"], ascending=[True, False]).drop(
-        columns=["_status_order"]
+    return output.sort_values(
+        ["_status_order", "strategy_name", "start_date", "drawdown_envelope_used"],
+        ascending=[True, True, False, False],
+    ).drop(
+        columns=["_status_order"],
     )
 
 
@@ -319,14 +413,19 @@ def _monitoring_drift_envelope_figure(envelope: pd.DataFrame) -> go.Figure:
         plot_frame["drawdown_envelope_used"],
         errors="coerce",
     )
+    plot_frame["window_label"] = (
+        plot_frame["strategy_name"].astype(str) + " | " + plot_frame["start_date"].astype(str)
+    )
     figure = go.Figure(
         go.Bar(
-            x=plot_frame["strategy_name"],
+            x=plot_frame["window_label"],
             y=plot_frame["drawdown_envelope_used"],
             marker_color=plot_frame["envelope_status"].map(status_colors).fillna("#64748b"),
             customdata=plot_frame[
                 [
                     "window_role",
+                    "start_date",
+                    "monitoring_days",
                     "envelope_status",
                     "current_drawdown",
                     "backtest_max_drawdown",
@@ -335,11 +434,13 @@ def _monitoring_drift_envelope_figure(envelope: pd.DataFrame) -> go.Figure:
             ],
             hovertemplate=(
                 "<b>%{x}</b><br>Role: %{customdata[0]}"
-                "<br>Status: %{customdata[1]}"
+                "<br>Start: %{customdata[1]}"
+                "<br>Days monitored: %{customdata[2]}"
+                "<br>Status: %{customdata[3]}"
                 "<br>Envelope used: %{y:.1%}"
-                "<br>Current drawdown: %{customdata[2]:.1%}"
-                "<br>Backtest max drawdown: %{customdata[3]:.1%}"
-                "<br>Forward status: %{customdata[4]}<extra></extra>"
+                "<br>Current drawdown: %{customdata[4]:.1%}"
+                "<br>Backtest max drawdown: %{customdata[5]:.1%}"
+                "<br>Forward status: %{customdata[6]}<extra></extra>"
             ),
         )
     )
@@ -674,8 +775,9 @@ def _window_label(row: pd.Series) -> str:
     role = str(row.get("window_role", ""))
     status = str(row.get("status", ""))
     account = str(row.get("account", ""))
+    start_date = str(row.get("start_date", ""))
     capital = float(row.get("capital_base", 0.0))
-    return f"{strategy} | {role} | {status} | {account} | ${capital:,.0f}"
+    return f"{strategy} | start {start_date} | {role} | {status} | {account} | ${capital:,.0f}"
 
 
 @st.cache_data(show_spinner=False, ttl=60)
@@ -735,22 +837,23 @@ def _render_monitoring_candidates(top_candidates: pd.DataFrame) -> None:
     _render_metric_dataframe(_display_metrics(view))
 
 
-def _monitoring_takeaway(frame: pd.DataFrame) -> str:
+def _monitoring_takeaway(frame: pd.DataFrame, *, start_cohort: str = "All starts") -> str:
+    cohort = "" if start_cohort == "All starts" else f" for the {start_cohort} start cohort"
     if frame.empty:
-        return "Monitoring windows exist, but no champion/challenger rows are available yet."
+        return f"Monitoring windows exist, but no champion/challenger rows are available{cohort} yet."
     valued = frame[frame.get("valuation_date", pd.Series(dtype=object)).notna()]
     if valued.empty:
         return (
-            "The windows are seeded, but they have not been valued yet. Run the daily paper "
+            f"The windows{cohort} are seeded, but they have not been valued yet. Run the daily paper "
             "valuation command after each snapshot refresh so forward returns start accumulating."
         )
     ahead = int((valued["forward_status"] == "ahead_of_benchmark").sum())
     lagging = int((valued["forward_status"] == "lagging_benchmark").sum())
     drawdown = int((valued["forward_status"] == "review_drawdown").sum())
     if drawdown:
-        return f"{drawdown} monitored strategy is in drawdown review; do not promote until the failure mode is understood."
+        return f"{drawdown} monitored strategy{cohort} is in drawdown review; do not promote until the failure mode is understood."
     if ahead and not lagging:
-        return f"{ahead} monitored strategy is ahead of benchmark on the current paper window; keep collecting forward evidence before promotion."
+        return f"{ahead} monitored strategy{cohort} is ahead of benchmark on the current paper window; keep collecting forward evidence before promotion."
     if lagging:
-        return f"{lagging} monitored strategy is lagging benchmark; treat the current champion/challenger set as under review."
-    return "The monitored set is broadly in line with benchmark; no promotion or kill decision is obvious from forward valuation alone."
+        return f"{lagging} monitored strategy{cohort} is lagging benchmark; treat the current champion/challenger set as under review."
+    return f"The monitored set{cohort} is broadly in line with benchmark; no promotion or kill decision is obvious from forward valuation alone."

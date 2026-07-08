@@ -3,7 +3,11 @@ from __future__ import annotations
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.dashboard.monitoring import _monitoring_drift_envelope_frame
+from trade_bot.dashboard.monitoring import (
+    _monitoring_display_frame,
+    _monitoring_drift_envelope_frame,
+    _monitoring_start_cohorts,
+)
 from trade_bot.dashboard.research_lab import (
     _factor_contribution_waterfall_figure,
     _make_decision_timeline_figure,
@@ -142,6 +146,8 @@ def test_scenario_probability_and_driver_figures_render_from_current_state_frame
     driver_figure = _scenario_driver_score_figure(scenario_drivers)
 
     assert len(probability_figure.data) == 3
+    assert probability_figure.layout.legend.y < 0
+    assert probability_figure.layout.margin.b >= 90
     assert len(driver_figure.data) == 1
     assert list(driver_figure.data[0].y)[0] == "AI leadership"
 
@@ -369,6 +375,8 @@ def test_monitoring_drift_envelope_classifies_forward_drawdown_status() -> None:
         [
             {
                 "window_role": "champion",
+                "start_date": "2026-01-01",
+                "monitoring_days": 180,
                 "strategy_name": "steady",
                 "forward_status": "in_line",
                 "valuation_date": "2026-06-30",
@@ -377,6 +385,8 @@ def test_monitoring_drift_envelope_classifies_forward_drawdown_status() -> None:
             },
             {
                 "window_role": "challenger",
+                "start_date": "2026-06-01",
+                "monitoring_days": 29,
                 "strategy_name": "stressed",
                 "forward_status": "behind_benchmark",
                 "valuation_date": "2026-06-30",
@@ -385,6 +395,8 @@ def test_monitoring_drift_envelope_classifies_forward_drawdown_status() -> None:
             },
             {
                 "window_role": "challenger",
+                "start_date": "2026-06-01",
+                "monitoring_days": 29,
                 "strategy_name": "breached",
                 "forward_status": "behind_benchmark",
                 "valuation_date": "2026-06-30",
@@ -399,3 +411,43 @@ def test_monitoring_drift_envelope_classifies_forward_drawdown_status() -> None:
     assert envelope.loc["steady", "envelope_status"] == "inside"
     assert envelope.loc["stressed", "envelope_status"] == "review"
     assert envelope.loc["breached", "envelope_status"] == "breach"
+    assert envelope.loc["steady", "start_date"] == "2026-01-01"
+    assert envelope.loc["stressed", "monitoring_days"] == 29
+
+
+def test_monitoring_display_frame_preserves_duplicate_strategy_start_cohorts() -> None:
+    frame = pd.DataFrame(
+        [
+            {
+                "window_role": "challenger",
+                "strategy_name": "same_strategy",
+                "start_date": "2026-01-01",
+                "valuation_date": "2026-07-07",
+                "account": "paper",
+            },
+            {
+                "window_role": "challenger",
+                "strategy_name": "same_strategy",
+                "start_date": "2026-06-01",
+                "valuation_date": "2026-07-07",
+                "account": "paper",
+            },
+            {
+                "window_role": "champion",
+                "strategy_name": "champion_strategy",
+                "start_date": "2026-06-01",
+                "valuation_date": "2026-07-07",
+                "account": "paper",
+            },
+        ]
+    )
+
+    cohorts = _monitoring_start_cohorts(frame)
+    all_rows = _monitoring_display_frame(frame, start_cohort="All starts")
+    june_rows = _monitoring_display_frame(frame, start_cohort="2026-06-01")
+
+    assert cohorts == ["2026-01-01", "2026-06-01"]
+    assert len(all_rows[all_rows["strategy_name"].eq("same_strategy")]) == 2
+    assert set(june_rows["start_date"]) == {"2026-06-01"}
+    assert set(june_rows["strategy_name"]) == {"same_strategy", "champion_strategy"}
+    assert june_rows["monitoring_days"].notna().all()
