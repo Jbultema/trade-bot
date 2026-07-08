@@ -268,7 +268,7 @@ def test_rolling_origin_simulation_backtest_scores_calibration() -> None:
     assert validation["realized_in_interval"].isin([True, False]).all()
     assert set(validation["simulated_launch_decision"]).issubset({"wait", "ramp_in", "full_launch"})
     assert summary["rows"] == len(validation)
-    assert summary["target_coverage"] == pytest.approx(0.80)
+    assert summary["target_coverage"] == pytest.approx(0.60)
     assert summary["validity_read"] in {
         "limited_sample",
         "interval_too_narrow",

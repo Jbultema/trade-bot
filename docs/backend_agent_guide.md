@@ -88,7 +88,7 @@ poetry run trade-bot fetch-prices
 poetry run trade-bot run-baselines
 poetry run trade-bot build-snapshot
 poetry run trade-bot run-daily-update
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
+poetry run trade-bot run-dashboard
 ```
 
 `run-daily-update` is the canonical one-command operating refresh. It refreshes market data, macro data, and news by default; builds and stores a fresh snapshot; writes the baseline report; refreshes the local strategy registry and warehouse tables; migrates experiment/journal outputs; and writes daily paper-monitoring valuations for active monitoring windows. Use cached inputs only when intentionally doing a faster local check:

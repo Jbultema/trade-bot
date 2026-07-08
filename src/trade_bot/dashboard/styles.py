@@ -236,26 +236,49 @@ def _install_dashboard_styles() -> None:
             border-bottom: 0;
         }
         .st-key-dashboard_main_station_nav div[data-testid="stPills"] {
-            margin: 0 0 1rem;
-            padding: 12px 0 1rem;
+            margin: 0 0 1.1rem;
+            padding: 14px 14px 16px;
+            border: 1px solid color-mix(in srgb, var(--tb-card-border) 82%, var(--tb-accent));
+            border-radius: 10px;
+            background:
+                linear-gradient(180deg, color-mix(in srgb, var(--tb-card-bg) 92%, var(--tb-accent)), var(--tb-card-bg)),
+                color-mix(in srgb, var(--tb-card-border) 12%, transparent);
         }
         .st-key-dashboard_main_station_nav div[data-testid="stPills"] [data-baseweb="tab-list"],
         .st-key-dashboard_main_station_nav div[data-testid="stPills"] div[role="radiogroup"] {
-            gap: 12px;
+            gap: 14px;
         }
         .st-key-dashboard_main_station_nav div[data-testid="stPills"] button,
         .st-key-dashboard_main_station_nav div[data-testid="stPills"] [role="button"] {
-            min-height: 58px;
-            padding: 12px 20px !important;
-            border-width: 2px !important;
-            font-size: 1.13rem !important;
-            font-weight: 860 !important;
-            box-shadow: var(--tb-shadow-soft);
+            min-height: 66px;
+            padding: 15px 26px !important;
+            border: 2px solid color-mix(in srgb, var(--tb-card-border) 74%, var(--tb-card-text)) !important;
+            background: color-mix(in srgb, var(--tb-card-bg) 94%, var(--tb-card-border)) !important;
+            color: var(--tb-card-text) !important;
+            font-size: 1.18rem !important;
+            font-weight: 900 !important;
+            line-height: 1.1 !important;
+            box-shadow:
+                0 1px 0 color-mix(in srgb, white 64%, transparent) inset,
+                0 8px 18px color-mix(in srgb, var(--tb-card-border) 44%, transparent);
+        }
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] button:hover,
+        .st-key-dashboard_main_station_nav div[data-testid="stPills"] [role="button"]:hover {
+            border-color: color-mix(in srgb, var(--tb-accent) 54%, var(--tb-card-border)) !important;
+            background: color-mix(in srgb, var(--tb-accent) 10%, var(--tb-card-bg)) !important;
+            box-shadow:
+                0 1px 0 color-mix(in srgb, white 68%, transparent) inset,
+                0 11px 24px color-mix(in srgb, var(--tb-accent) 16%, transparent);
         }
         .st-key-dashboard_main_station_nav div[data-testid="stPills"] button[aria-selected="true"],
         .st-key-dashboard_main_station_nav div[data-testid="stPills"] [role="button"][aria-selected="true"] {
-            background: color-mix(in srgb, var(--tb-accent) 22%, var(--tb-card-bg)) !important;
-            box-shadow: 0 10px 24px color-mix(in srgb, var(--tb-accent) 18%, transparent);
+            border: 3px solid var(--tb-danger) !important;
+            background:
+                linear-gradient(180deg, color-mix(in srgb, var(--tb-danger) 14%, var(--tb-card-bg)), color-mix(in srgb, var(--tb-danger) 6%, var(--tb-card-bg))) !important;
+            color: var(--tb-danger) !important;
+            box-shadow:
+                0 0 0 4px color-mix(in srgb, var(--tb-danger) 10%, transparent),
+                0 12px 28px color-mix(in srgb, var(--tb-danger) 22%, transparent);
         }
         .dashboard-workbench-divider {
             height: 1px;
@@ -437,6 +460,101 @@ def _install_dashboard_styles() -> None:
         }
         .metric-info-card-section p {
             margin: 0;
+        }
+        .simulation-validation-verdict {
+            margin: 12px 0 16px;
+            padding: 18px 20px 16px;
+            border: 1px solid var(--tb-card-border);
+            border-left: 8px solid var(--tb-card-border);
+            border-radius: 8px;
+            background: var(--tb-card-bg);
+            color: var(--tb-card-text);
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .simulation-validation-verdict h4 {
+            margin: 3px 0 8px !important;
+            color: var(--tb-card-text) !important;
+            font-size: 1.34rem;
+            line-height: 1.18;
+            letter-spacing: 0;
+        }
+        .simulation-validation-verdict p {
+            max-width: 1120px;
+            margin: 0 0 11px;
+            color: var(--tb-card-text);
+            font-size: 0.95rem;
+            line-height: 1.42;
+        }
+        .simulation-validation-verdict .simulation-validation-detail {
+            color: var(--tb-card-muted);
+        }
+        .simulation-validation-verdict-kicker,
+        .simulation-validation-card-label {
+            color: var(--tb-card-muted);
+            font-size: 0.74rem;
+            font-weight: 840;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+        .simulation-validation-grid {
+            display: grid;
+            grid-template-columns: repeat(5, minmax(0, 1fr));
+            gap: 14px;
+            margin: 0 0 18px;
+        }
+        .simulation-validation-card {
+            min-height: 156px;
+            padding: 16px 16px 14px;
+            border: 1px solid var(--tb-card-border);
+            border-left: 6px solid var(--tb-card-border);
+            border-radius: 8px;
+            background: var(--tb-card-bg);
+            color: var(--tb-card-text);
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .simulation-validation-card strong {
+            display: block;
+            margin: 8px 0 7px;
+            color: var(--tb-card-text);
+            font-size: 1.38rem;
+            font-weight: 780;
+            line-height: 1.12;
+        }
+        .simulation-validation-card p {
+            min-height: 42px;
+            margin: 0 0 10px;
+            color: var(--tb-card-muted);
+            font-size: 0.82rem;
+            line-height: 1.32;
+        }
+        .simulation-validation-pill {
+            display: inline-flex;
+            align-items: center;
+            min-height: 24px;
+            padding: 3px 9px;
+            border: 1px solid var(--tb-card-border);
+            border-radius: 999px;
+            color: var(--tb-card-text);
+            background: color-mix(in srgb, var(--tb-card-bg) 82%, transparent);
+            font-size: 0.72rem;
+            font-weight: 780;
+            line-height: 1.1;
+        }
+        .simulation-validation-good {
+            border-left-color: var(--tb-success-border);
+            background: var(--tb-success-bg);
+        }
+        .simulation-validation-warn {
+            border-left-color: var(--tb-warning-border);
+            background: var(--tb-warning-bg);
+        }
+        .simulation-validation-bad {
+            border-left-color: var(--tb-critical-border);
+            background: var(--tb-critical-bg);
+        }
+        .simulation-validation-neutral {
+            border-left-color: var(--tb-card-border);
+            background: var(--tb-card-bg);
         }
         div[data-testid="stPills"] button,
         div[data-testid="stPills"] [role="button"] {
@@ -1149,6 +1267,9 @@ def _install_dashboard_styles() -> None:
             .metric-info-rail {
                 margin-top: 1rem;
             }
+            .simulation-validation-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
             .block-container {
                 padding-right: 1rem !important;
                 max-width: 1540px;
@@ -1187,9 +1308,9 @@ def _install_dashboard_styles() -> None:
             }
             .st-key-dashboard_main_station_nav div[data-testid="stPills"] button,
             .st-key-dashboard_main_station_nav div[data-testid="stPills"] [role="button"] {
-                min-height: 50px;
-                padding: 10px 14px !important;
-                font-size: 1rem !important;
+                min-height: 54px;
+                padding: 11px 16px !important;
+                font-size: 1.02rem !important;
             }
             .brand-masthead {
                 padding: 20px 15px 16px;
@@ -1208,6 +1329,7 @@ def _install_dashboard_styles() -> None:
             .market-brief-readouts,
             .market-brief-delta-grid,
             .workbench-guide-grid,
+            .simulation-validation-grid,
             .launch-summary-grid,
             .launch-guidance-grid,
             .brief-grid {

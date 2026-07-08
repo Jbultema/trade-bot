@@ -1,5 +1,10 @@
 from __future__ import annotations
 
+import os
+import signal
+import subprocess
+import sys
+import time
 from dataclasses import replace
 from pathlib import Path
 from typing import Annotated, Any, Literal
@@ -14,12 +19,18 @@ from trade_bot.config import configured_tickers, load_config
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
 from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
+    DEFAULT_DASHBOARD_APP_PATH,
+    DEFAULT_DASHBOARD_LOG_PATH,
+    DEFAULT_DASHBOARD_PID_PATH,
+    DEFAULT_DASHBOARD_PORT,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS,
     DEFAULT_FORWARD_SIMULATION_BLOCK_DAYS,
     DEFAULT_FORWARD_SIMULATION_PATHS,
     DEFAULT_FORWARD_SIMULATION_VALIDATION_HORIZONS,
+    DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_HIGH,
+    DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_LOW,
     DEFAULT_FORWARD_SIMULATION_VALIDATION_MIN_TRAIN_DAYS,
     DEFAULT_FORWARD_SIMULATION_VALIDATION_ORIGIN_FREQUENCY,
     DEFAULT_JOURNAL_PATH,
@@ -65,6 +76,7 @@ console = Console()
 DEFAULT_SIMULATION_VALIDATION_REFERENCE_STRATEGIES = ",".join(
     name for name, _label in DEFAULT_SIMULATION_REFERENCE_STRATEGIES
 )
+DEFAULT_STREAMLIT_FILE_WATCHER_TYPE = "none"
 
 
 @app.command()
@@ -619,6 +631,92 @@ def list_snapshot_jobs_cmd(
     console.print(table)
 
 
+@app.command("run-dashboard")
+def run_dashboard_cmd(
+    app_path: Annotated[Path, typer.Option("--app-path")] = DEFAULT_DASHBOARD_APP_PATH,
+    port: Annotated[int, typer.Option("--port")] = DEFAULT_DASHBOARD_PORT,
+    pid_path: Annotated[Path, typer.Option("--pid-path")] = DEFAULT_DASHBOARD_PID_PATH,
+    log_path: Annotated[Path, typer.Option("--log-path")] = DEFAULT_DASHBOARD_LOG_PATH,
+    file_watcher_type: Annotated[
+        str,
+        typer.Option(
+            "--file-watcher-type",
+            help="Streamlit file watcher mode. 'none' avoids common local shutdown hangs.",
+        ),
+    ] = DEFAULT_STREAMLIT_FILE_WATCHER_TYPE,
+    stop_existing: Annotated[
+        bool,
+        typer.Option("--stop-existing/--keep-existing"),
+    ] = False,
+) -> None:
+    """Start the dashboard as a managed background process with a PID file."""
+
+    if stop_existing:
+        _stop_dashboard_from_pid_file(pid_path, timeout_seconds=5.0, force=True)
+    existing_pid = _read_pid_file(pid_path)
+    if existing_pid is not None and _process_exists(existing_pid):
+        console.print(
+            f"Dashboard appears to already be running as PID {existing_pid}. "
+            "Use `poetry run trade-bot stop-dashboard` or pass --stop-existing."
+        )
+        return
+
+    pid_path.parent.mkdir(parents=True, exist_ok=True)
+    log_path.parent.mkdir(parents=True, exist_ok=True)
+    command = [
+        sys.executable,
+        "-m",
+        "streamlit",
+        "run",
+        str(app_path),
+        "--server.port",
+        str(port),
+        "--server.headless",
+        "true",
+        "--server.fileWatcherType",
+        file_watcher_type,
+    ]
+    env = os.environ.copy()
+    src_path = str(Path.cwd() / "src")
+    env["PYTHONPATH"] = (
+        f"{src_path}{os.pathsep}{env['PYTHONPATH']}" if env.get("PYTHONPATH") else src_path
+    )
+    with log_path.open("ab") as log_handle:
+        process = subprocess.Popen(  # noqa: S603
+            command,
+            cwd=Path.cwd(),
+            env=env,
+            stdout=log_handle,
+            stderr=subprocess.STDOUT,
+            close_fds=True,
+            start_new_session=True,
+        )
+    pid_path.write_text(f"{process.pid}\n", encoding="utf-8")
+    console.print(f"Dashboard started on http://localhost:{port} as PID {process.pid}.")
+    console.print(f"Log: {log_path}")
+    console.print("Stop it with: poetry run trade-bot stop-dashboard")
+
+
+@app.command("stop-dashboard")
+def stop_dashboard_cmd(
+    pid_path: Annotated[Path, typer.Option("--pid-path")] = DEFAULT_DASHBOARD_PID_PATH,
+    timeout_seconds: Annotated[float, typer.Option("--timeout-seconds")] = 5.0,
+    force: Annotated[
+        bool,
+        typer.Option("--force/--no-force", help="Escalate to SIGKILL if graceful stop hangs."),
+    ] = True,
+) -> None:
+    """Stop the managed dashboard process without relying on Ctrl-C."""
+
+    stopped = _stop_dashboard_from_pid_file(
+        pid_path,
+        timeout_seconds=timeout_seconds,
+        force=force,
+    )
+    if not stopped:
+        console.print(f"No running dashboard PID found at {pid_path}.")
+
+
 @app.command("run-experiment-iteration")
 def run_experiment_iteration_cmd(
     config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
@@ -889,6 +987,24 @@ def validate_simulation_engine_cmd(
     block_days: Annotated[
         int, typer.Option("--block-days")
     ] = DEFAULT_FORWARD_SIMULATION_BLOCK_DAYS,
+    interval_low: Annotated[
+        float,
+        typer.Option(
+            "--interval-low",
+            min=0.0,
+            max=0.49,
+            help="Lower simulated return quantile used for rolling-origin calibration.",
+        ),
+    ] = DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_LOW,
+    interval_high: Annotated[
+        float,
+        typer.Option(
+            "--interval-high",
+            min=0.51,
+            max=1.0,
+            help="Upper simulated return quantile used for rolling-origin calibration.",
+        ),
+    ] = DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_HIGH,
     scenario_history: Annotated[
         Path | None,
         typer.Option(
@@ -905,6 +1021,10 @@ def validate_simulation_engine_cmd(
     ] = False,
 ) -> None:
     """Validate forward simulation calibration against historical realized paths."""
+
+    if interval_low >= interval_high:
+        console.print("--interval-low must be lower than --interval-high.")
+        raise typer.Exit(code=2)
 
     run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
     snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
@@ -939,6 +1059,8 @@ def validate_simulation_engine_cmd(
         min_train_days=min_train_days,
         paths=paths,
         block_days=block_days,
+        interval_low=interval_low,
+        interval_high=interval_high,
     )
     output_dir.mkdir(parents=True, exist_ok=True)
 
@@ -1001,6 +1123,8 @@ def validate_simulation_engine_cmd(
         min_train_days=min_train_days,
         paths=paths,
         block_days=block_days,
+        interval_low=interval_low,
+        interval_high=interval_high,
         scenario_history_path=str(scenario_history or ""),
         validation_output_path=str(validation_path),
         ablation_output_path=ablation_path_string,
@@ -1570,6 +1694,77 @@ def _print_strategy_rank_validation_summary(summary: dict[str, object]) -> None:
     for metric, value in rows:
         table.add_row(metric, str(value))
     console.print(table)
+
+
+def _stop_dashboard_from_pid_file(
+    pid_path: Path,
+    *,
+    timeout_seconds: float,
+    force: bool,
+) -> bool:
+    pid = _read_pid_file(pid_path)
+    if pid is None:
+        pid_path.unlink(missing_ok=True)
+        return False
+    if not _process_exists(pid):
+        pid_path.unlink(missing_ok=True)
+        return False
+
+    _signal_process(pid, signal.SIGTERM)
+    if not _wait_for_process_exit(pid, timeout_seconds=timeout_seconds):
+        if not force:
+            console.print(f"Dashboard PID {pid} did not stop within {timeout_seconds:.1f}s.")
+            return True
+        _signal_process(pid, signal.SIGKILL)
+        _wait_for_process_exit(pid, timeout_seconds=2.0)
+        console.print(f"Dashboard PID {pid} required SIGKILL.")
+    else:
+        console.print(f"Dashboard PID {pid} stopped.")
+    pid_path.unlink(missing_ok=True)
+    return True
+
+
+def _read_pid_file(pid_path: Path) -> int | None:
+    try:
+        text = pid_path.read_text(encoding="utf-8").strip()
+    except FileNotFoundError:
+        return None
+    try:
+        pid = int(text)
+    except ValueError:
+        return None
+    return pid if pid > 0 else None
+
+
+def _process_exists(pid: int) -> bool:
+    try:
+        os.kill(pid, 0)
+    except ProcessLookupError:
+        return False
+    except PermissionError:
+        return True
+    return True
+
+
+def _signal_process(pid: int, sig: int) -> None:
+    try:
+        os.killpg(pid, sig)
+    except PermissionError:
+        raise
+    except OSError:
+        try:
+            os.kill(pid, sig)
+        except ProcessLookupError:
+            return
+
+
+def _wait_for_process_exit(pid: int, *, timeout_seconds: float) -> bool:
+    deadline = time.monotonic() + timeout_seconds
+    while time.monotonic() < deadline:
+        if not _process_exists(pid):
+            return True
+        time.sleep(0.10)
+    return not _process_exists(pid)
 
 
 def _format_optional_percent(value: object) -> str:

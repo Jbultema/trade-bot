@@ -181,6 +181,8 @@ def test_warehouse_persists_simulation_validation_history(tmp_path) -> None:
         min_train_days=252,
         paths=100,
         block_days=21,
+        interval_low=0.20,
+        interval_high=0.80,
         scenario_history_path="",
         validation_output_path="validation.csv",
         ablation_output_path="ablation.csv",
@@ -209,6 +211,7 @@ def test_warehouse_persists_simulation_validation_history(tmp_path) -> None:
 
     assert runs.iloc[0]["validation_run_id"] == validation_run_id
     assert runs.iloc[0]["strategy"] == "strategy_a"
+    assert runs.iloc[0]["target_interval_coverage"] == pytest.approx(0.60)
     assert set(metrics["metric_scope"]) == {
         "primary_summary",
         "rolling_origin",

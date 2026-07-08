@@ -102,7 +102,7 @@ valuations by default.
 ### How do I open the dashboard?
 
 ```bash
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
+poetry run trade-bot run-dashboard
 ```
 
 Then open `http://localhost:8501`.
@@ -476,7 +476,7 @@ just to defer taxes.
 Use another port:
 
 ```bash
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8502
+poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
 ```
 
 ### The dashboard opens but data looks old.

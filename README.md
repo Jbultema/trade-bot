@@ -137,7 +137,7 @@ Run this from the repo root.
 ```bash
 poetry run trade-bot run-daily-update
 poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 5 --capital-base 10000
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
+poetry run trade-bot run-dashboard
 ```
 
 Use the latest snapshot market date for `YYYY-MM-DD`; check it with:
@@ -164,8 +164,18 @@ Daily command:
 
 ```bash
 poetry run trade-bot run-daily-update
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
+poetry run trade-bot run-dashboard
 ```
+
+Stop the managed dashboard with:
+
+```bash
+poetry run trade-bot stop-dashboard
+```
+
+Use the managed commands instead of relying on Ctrl-C. Streamlit can sometimes
+hang during shutdown after its event loop closes; `stop-dashboard` escalates to
+a force stop when the graceful stop does not finish.
 
 Use cached inputs only when you intentionally want a faster local check:
 

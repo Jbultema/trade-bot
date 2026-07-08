@@ -956,6 +956,8 @@ class TradingWarehouse:
         min_train_days: int,
         paths: int,
         block_days: int,
+        interval_low: float,
+        interval_high: float,
         scenario_history_path: str,
         validation_output_path: str,
         ablation_output_path: str,
@@ -980,6 +982,9 @@ class TradingWarehouse:
                     "min_train_days": int(min_train_days),
                     "paths": int(paths),
                     "block_days": int(block_days),
+                    "interval_low": float(interval_low),
+                    "interval_high": float(interval_high),
+                    "target_interval_coverage": float(interval_high - interval_low),
                     "scenario_history_path": scenario_history_path,
                     "validation_output_path": validation_output_path,
                     "ablation_output_path": ablation_output_path,
@@ -1477,6 +1482,9 @@ class TradingWarehouse:
                     min_train_days INTEGER NOT NULL,
                     paths INTEGER NOT NULL,
                     block_days INTEGER NOT NULL,
+                    interval_low DOUBLE,
+                    interval_high DOUBLE,
+                    target_interval_coverage DOUBLE,
                     scenario_history_path VARCHAR NOT NULL,
                     validation_output_path VARCHAR NOT NULL,
                     ablation_output_path VARCHAR NOT NULL,
@@ -1488,6 +1496,15 @@ class TradingWarehouse:
                     primary_launch_decision_accuracy DOUBLE
                 )
                 """
+            )
+            self._ensure_table_columns(
+                connection,
+                "simulation_validation_runs",
+                {
+                    "interval_low": "DOUBLE",
+                    "interval_high": "DOUBLE",
+                    "target_interval_coverage": "DOUBLE",
+                },
             )
             connection.execute(
                 """

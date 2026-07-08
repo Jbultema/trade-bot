@@ -23,6 +23,8 @@ from trade_bot.dashboard.formatting import (
 )
 from trade_bot.DEFAULTS import (
     DEFAULT_FACTOR_ATTRIBUTION_FACTOR_SPECS,
+    DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_HIGH,
+    DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_LOW,
     DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
     DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
@@ -159,12 +161,63 @@ def _render_simulation_validation_history(
         )
         return
 
+    latest_run_id = str(runs.iloc[0]["validation_run_id"])
+    latest_strategy = str(runs.iloc[0].get("strategy", ""))
+    primary_metrics = warehouse.simulation_validation_metrics(
+        validation_run_id=latest_run_id,
+        metric_scope="primary_summary",
+        limit=5,
+    )
+    ablation_metrics = warehouse.simulation_validation_metrics(
+        metric_scope="ablation_summary",
+        limit=500,
+    )
+    latest_ablation = ablation_metrics[
+        ablation_metrics["validation_run_id"].astype(str) == latest_run_id
+    ]
+    origin_metrics = warehouse.simulation_validation_metrics(
+        validation_run_id=latest_run_id,
+        metric_scope="rolling_origin",
+        limit=500,
+    )
+
+    primary_row = (
+        primary_metrics.iloc[0] if not primary_metrics.empty else pd.Series(runs.iloc[0].to_dict())
+    )
+    _render_simulation_validation_conclusion(
+        latest_run=runs.iloc[0],
+        primary_row=primary_row,
+        latest_ablation=latest_ablation,
+        origin_metrics=origin_metrics,
+    )
+
+    visual_cols = st.columns([1.25, 1.0])
+    with visual_cols[0]:
+        if not origin_metrics.empty:
+            st.plotly_chart(
+                _simulation_validation_band_figure(origin_metrics),
+                use_container_width=True,
+            )
+    with visual_cols[1]:
+        if not latest_ablation.empty:
+            st.plotly_chart(
+                _simulation_ablation_comparison_figure(latest_ablation),
+                use_container_width=True,
+            )
+        elif not origin_metrics.empty:
+            st.plotly_chart(
+                _simulation_validation_error_figure(origin_metrics),
+                use_container_width=True,
+            )
+
     run_columns = [
         "created_at_utc",
         "strategy",
         "market_date",
         "horizons",
         "paths",
+        "interval_low",
+        "interval_high",
         "primary_interval_coverage",
         "primary_coverage_error",
         "primary_median_abs_error",
@@ -172,22 +225,12 @@ def _render_simulation_validation_history(
         "primary_validity_read",
     ]
     available_run_columns = [column for column in run_columns if column in runs]
-    st.caption("Validation runs")
-    _render_metric_dataframe(
-        _display_metrics(runs[available_run_columns].head(12)),
-        hide_index=True,
-    )
+    with st.expander("Validation run audit table", expanded=False):
+        _render_metric_dataframe(
+            _display_metrics(runs[available_run_columns].head(12)),
+            hide_index=True,
+        )
 
-    latest_run_id = str(runs.iloc[0]["validation_run_id"])
-    strategy_filter = selected_strategy if selected_strategy else None
-    ablation_metrics = warehouse.simulation_validation_metrics(
-        strategy=strategy_filter,
-        metric_scope="ablation_summary",
-        limit=500,
-    )
-    latest_ablation = ablation_metrics[
-        ablation_metrics["validation_run_id"].astype(str) == latest_run_id
-    ]
     if not latest_ablation.empty:
         st.caption("Latest ablation readout")
         ablation_columns = [
@@ -211,10 +254,20 @@ def _render_simulation_validation_history(
             hide_index=True,
         )
     else:
-        st.info("The latest validation run does not include ablation metrics.")
+        st.info(
+            "This validation run does not include ablation metrics. Re-run "
+            "`poetry run trade-bot validate-simulation-engine --ablation` if you need the "
+            "model-variant comparison."
+        )
 
     if not ablation_metrics.empty:
         st.caption("Ablation history")
+        if selected_strategy and selected_strategy != latest_strategy:
+            selected_ablation = ablation_metrics[
+                ablation_metrics["strategy"].astype(str) == selected_strategy
+            ].copy()
+        else:
+            selected_ablation = ablation_metrics
         history_columns = [
             "created_at_utc",
             "strategy",
@@ -226,18 +279,12 @@ def _render_simulation_validation_history(
         ]
         _render_metric_dataframe(
             _display_metrics(
-                ablation_metrics[
-                    [column for column in history_columns if column in ablation_metrics]
+                selected_ablation[
+                    [column for column in history_columns if column in selected_ablation]
                 ].head(40)
             ),
             hide_index=True,
         )
-
-    origin_metrics = warehouse.simulation_validation_metrics(
-        validation_run_id=latest_run_id,
-        metric_scope="rolling_origin",
-        limit=500,
-    )
     if origin_metrics.empty:
         return
     st.caption("Latest rolling-origin observations")
@@ -255,12 +302,515 @@ def _render_simulation_validation_history(
         "simulated_launch_decision",
         "realized_launch_decision",
     ]
+    origin_display = origin_metrics[
+        [column for column in origin_columns if column in origin_metrics]
+    ].rename(
+        columns={
+            "simulated_p10_return": "simulated_lower_band_return",
+            "simulated_p90_return": "simulated_upper_band_return",
+        }
+    )
     _render_metric_dataframe(
-        _display_metrics(
-            origin_metrics[[column for column in origin_columns if column in origin_metrics]]
-        ),
+        _display_metrics(origin_display),
         hide_index=True,
     )
+
+
+def _render_simulation_validation_conclusion(
+    *,
+    latest_run: pd.Series,
+    primary_row: pd.Series,
+    latest_ablation: pd.DataFrame,
+    origin_metrics: pd.DataFrame,
+) -> None:
+    interval_coverage = _safe_float(primary_row.get("interval_coverage"))
+    target_coverage = _safe_float(primary_row.get("target_coverage"))
+    coverage_error = _safe_float(primary_row.get("coverage_error"))
+    median_abs_error = _safe_float(primary_row.get("median_abs_error"))
+    launch_accuracy = _safe_float(primary_row.get("launch_decision_accuracy"))
+    validity_read = str(
+        primary_row.get("validity_read") or latest_run.get("primary_validity_read", "")
+    )
+    interval_share = _origin_interval_share(origin_metrics)
+
+    plain_english_read = _validation_history_plain_english_read(
+        validity_read=validity_read,
+        interval_coverage=interval_coverage,
+        target_coverage=target_coverage,
+        coverage_error=coverage_error,
+        median_abs_error=median_abs_error,
+        launch_accuracy=launch_accuracy,
+        latest_ablation=latest_ablation,
+    )
+    st.markdown(
+        _simulation_validation_verdict_card(
+            validity_read=validity_read,
+            coverage_error=coverage_error,
+            median_abs_error=median_abs_error,
+            launch_accuracy=launch_accuracy,
+            detail=plain_english_read,
+        ),
+        unsafe_allow_html=True,
+    )
+    st.markdown(
+        _simulation_validation_metric_cards(
+            interval_coverage=interval_coverage,
+            target_coverage=target_coverage,
+            coverage_error=coverage_error,
+            median_abs_error=median_abs_error,
+            launch_accuracy=launch_accuracy,
+            interval_share=interval_share,
+        ),
+        unsafe_allow_html=True,
+    )
+
+
+def _validation_history_plain_english_read(
+    *,
+    validity_read: str,
+    interval_coverage: float | None,
+    target_coverage: float | None,
+    coverage_error: float | None,
+    median_abs_error: float | None,
+    launch_accuracy: float | None,
+    latest_ablation: pd.DataFrame,
+) -> str:
+    target_label = _format_percent(
+        target_coverage if target_coverage is not None else _default_validation_target_coverage()
+    )
+    coverage_label = _format_percent(interval_coverage)
+    miss_label = _format_percent(median_abs_error)
+    launch_label = _format_percent(launch_accuracy)
+    if coverage_error is not None and abs(coverage_error) <= 0.05:
+        calibration = (
+            f"The simulated return band is roughly calibrated: realized outcomes landed inside "
+            f"the band {coverage_label} of the time versus a target near {target_label}."
+        )
+    elif coverage_error is not None and coverage_error < -0.05:
+        calibration = (
+            f"The simulated band is too narrow or too optimistic: realized outcomes only landed "
+            f"inside it {coverage_label} of the time versus a target near {target_label}."
+        )
+    else:
+        calibration = (
+            f"The simulated band is too wide or too conservative: realized outcomes landed inside "
+            f"it {coverage_label} of the time versus a target near {target_label}."
+        )
+
+    launch_warning = (
+        f" The go/no-go call is still weak at {launch_label}, so use this as a planning range, "
+        "not as a launch trigger."
+        if launch_accuracy is not None and launch_accuracy < 0.50
+        else f" The go/no-go call matched history {launch_label} of the time."
+    )
+    miss_warning = (
+        f" The median simulated return missed realized outcomes by about {miss_label} on "
+        "average, so the p50 line should be treated as directional rather than precise."
+        if median_abs_error is not None
+        else ""
+    )
+    ablation_read = _ablation_plain_english_read(latest_ablation)
+    return f"{calibration}{miss_warning}{launch_warning} {ablation_read} Validity label: {validity_read}."
+
+
+def _simulation_validation_verdict_card(
+    *,
+    validity_read: str,
+    coverage_error: float | None,
+    median_abs_error: float | None,
+    launch_accuracy: float | None,
+    detail: str,
+) -> str:
+    verdict = _simulation_validation_verdict(
+        coverage_error=coverage_error,
+        median_abs_error=median_abs_error,
+        launch_accuracy=launch_accuracy,
+    )
+    escaped_title = html.escape(verdict["title"])
+    escaped_copy = html.escape(verdict["copy"])
+    escaped_detail = html.escape(detail)
+    escaped_label = html.escape(str(validity_read or "unknown"))
+    return (
+        f'<div class="simulation-validation-verdict simulation-validation-{verdict["status"]}">'
+        f'<div class="simulation-validation-verdict-kicker">Interpretation</div>'
+        f"<h4>{escaped_title}</h4>"
+        f"<p>{escaped_copy}</p>"
+        f'<p class="simulation-validation-detail">{escaped_detail}</p>'
+        f'<span class="simulation-validation-pill">{escaped_label}</span>'
+        "</div>"
+    )
+
+
+def _simulation_validation_verdict(
+    *,
+    coverage_error: float | None,
+    median_abs_error: float | None,
+    launch_accuracy: float | None,
+) -> dict[str, str]:
+    coverage_status = _simulation_validation_metric_status("coverage", coverage_error)
+    median_status = _simulation_validation_metric_status("median", median_abs_error)
+    launch_status = _simulation_validation_metric_status("launch", launch_accuracy)
+    if launch_status == "bad":
+        return {
+            "status": "bad",
+            "title": "Research-useful, not decision-ready",
+            "copy": (
+                "The return band can be useful for planning, but the launch/no-launch "
+                "classification is too weak to drive trades by itself."
+            ),
+        }
+    if "bad" in {coverage_status, median_status}:
+        return {
+            "status": "bad",
+            "title": "Validation is failing at least one core check",
+            "copy": (
+                "Treat this run as a model-diagnostics result, not evidence that the "
+                "simulation engine is ready to influence allocations."
+            ),
+        }
+    if "warn" in {coverage_status, median_status, launch_status}:
+        return {
+            "status": "warn",
+            "title": "Useful, but still only a planning range",
+            "copy": (
+                "The band is not obviously broken, but at least one accuracy check is "
+                "marginal. Use it to compare scenarios rather than approve a strategy."
+            ),
+        }
+    return {
+        "status": "good",
+        "title": "Calibration checks look healthy",
+        "copy": (
+            "The band hit rate, median miss, and launch/no-launch check are all inside "
+            "the current dashboard thresholds."
+        ),
+    }
+
+
+def _simulation_validation_metric_cards(
+    *,
+    interval_coverage: float | None,
+    target_coverage: float | None,
+    coverage_error: float | None,
+    median_abs_error: float | None,
+    launch_accuracy: float | None,
+    interval_share: float | None,
+) -> str:
+    cards = [
+        _simulation_validation_metric_card(
+            label="Interval hit rate",
+            value=_coverage_pair_label(interval_coverage, target_coverage),
+            status=_simulation_validation_metric_status("coverage", coverage_error),
+            read=_coverage_status_read(coverage_error),
+        ),
+        _simulation_validation_metric_card(
+            label="Coverage miss",
+            value=_format_percent(coverage_error),
+            status=_simulation_validation_metric_status("coverage", coverage_error),
+            read="Distance from target hit rate",
+        ),
+        _simulation_validation_metric_card(
+            label="Median miss",
+            value=_format_percent(median_abs_error),
+            status=_simulation_validation_metric_status("median", median_abs_error),
+            read="Average p50 forecast error",
+        ),
+        _simulation_validation_metric_card(
+            label="Go/no-go accuracy",
+            value=_format_percent(launch_accuracy),
+            status=_simulation_validation_metric_status("launch", launch_accuracy),
+            read="Whether the simulated launch call matched history",
+        ),
+        _simulation_validation_metric_card(
+            label="Origins in band",
+            value=_format_percent(interval_share),
+            status=_simulation_validation_metric_status("coverage", coverage_error),
+            read="Realized outcomes inside the simulated band",
+        ),
+    ]
+    return f'<div class="simulation-validation-grid">{"".join(cards)}</div>'
+
+
+def _simulation_validation_metric_card(
+    *,
+    label: str,
+    value: str,
+    status: str,
+    read: str,
+) -> str:
+    escaped_label = html.escape(label)
+    escaped_value = html.escape(value)
+    escaped_read = html.escape(read)
+    escaped_status = html.escape(_simulation_validation_status_label(status))
+    return (
+        f'<div class="simulation-validation-card simulation-validation-{status}">'
+        f'<div class="simulation-validation-card-label">{escaped_label}</div>'
+        f"<strong>{escaped_value}</strong>"
+        f"<p>{escaped_read}</p>"
+        f'<span class="simulation-validation-pill">{escaped_status}</span>'
+        "</div>"
+    )
+
+
+def _simulation_validation_metric_status(metric: str, value: float | None) -> str:
+    if value is None:
+        return "neutral"
+    if metric == "coverage":
+        miss = abs(value)
+        if miss <= 0.03:
+            return "good"
+        if miss <= 0.08:
+            return "warn"
+        return "bad"
+    if metric == "median":
+        if value <= 0.03:
+            return "good"
+        if value <= 0.06:
+            return "warn"
+        return "bad"
+    if metric == "launch":
+        if value >= 0.60:
+            return "good"
+        if value >= 0.40:
+            return "warn"
+        return "bad"
+    return "neutral"
+
+
+def _coverage_status_read(coverage_error: float | None) -> str:
+    if coverage_error is None:
+        return "No target coverage comparison"
+    if coverage_error < -0.08:
+        return "Too many realized outcomes missed the band"
+    if coverage_error > 0.08:
+        return "Band is likely too generous"
+    if abs(coverage_error) > 0.03:
+        return "Near target, but not tight"
+    return "Close to target"
+
+
+def _simulation_validation_status_label(status: str) -> str:
+    return {
+        "good": "Healthy",
+        "warn": "Caution",
+        "bad": "Weak",
+        "neutral": "No read",
+    }.get(status, "No read")
+
+
+def _ablation_plain_english_read(latest_ablation: pd.DataFrame) -> str:
+    if latest_ablation.empty:
+        return "No ablation comparison is available for this run."
+    best_error = _best_ablation_row(latest_ablation, "median_abs_error", absolute=False)
+    best_coverage = _best_ablation_row(latest_ablation, "coverage_error", absolute=True)
+    if best_error is None and best_coverage is None:
+        return "Ablation rows are present, but the comparison metrics are incomplete."
+    if best_error is not None and best_coverage is not None:
+        if str(best_error.get("variant")) == str(best_coverage.get("variant")):
+            return (
+                f"The strongest variant on both coverage and median error is "
+                f"{best_error.get('label', best_error.get('variant'))}."
+            )
+        return (
+            f"Ablation is mixed: {best_coverage.get('label', best_coverage.get('variant'))} "
+            f"has the best coverage, while {best_error.get('label', best_error.get('variant'))} "
+            "has the lowest median error."
+        )
+    row = best_error if best_error is not None else best_coverage
+    return f"The strongest available ablation read is {row.get('label', row.get('variant'))}."
+
+
+def _best_ablation_row(
+    frame: pd.DataFrame,
+    column: str,
+    *,
+    absolute: bool,
+) -> pd.Series | None:
+    if frame.empty or column not in frame:
+        return None
+    values = pd.to_numeric(frame[column], errors="coerce")
+    values = values.abs() if absolute else values
+    values = values.dropna()
+    if values.empty:
+        return None
+    return frame.loc[values.idxmin()]
+
+
+def _coverage_pair_label(interval_coverage: float | None, target_coverage: float | None) -> str:
+    if interval_coverage is None and target_coverage is None:
+        return "n/a"
+    target = (
+        target_coverage if target_coverage is not None else _default_validation_target_coverage()
+    )
+    return f"{_format_percent(interval_coverage)} / {_format_percent(target)}"
+
+
+def _default_validation_target_coverage() -> float:
+    return (
+        DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_HIGH
+        - DEFAULT_FORWARD_SIMULATION_VALIDATION_INTERVAL_LOW
+    )
+
+
+def _origin_interval_share(origin_metrics: pd.DataFrame) -> float | None:
+    if origin_metrics.empty or "realized_in_interval" not in origin_metrics:
+        return None
+    values = origin_metrics["realized_in_interval"].dropna()
+    if values.empty:
+        return None
+    return float(values.astype(bool).mean())
+
+
+def _simulation_validation_band_figure(origin_metrics: pd.DataFrame) -> go.Figure:
+    frame = _origin_metrics_for_plot(origin_metrics)
+    fig = go.Figure()
+    if frame.empty:
+        return fig
+    fig.add_trace(
+        go.Scatter(
+            x=frame["origin_date"],
+            y=frame["simulated_p90_return"],
+            mode="lines",
+            line={"color": "rgba(37, 99, 235, 0.15)", "width": 1},
+            name="Simulated upper band",
+            hovertemplate="Upper band %{y:.1%}<extra></extra>",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=frame["origin_date"],
+            y=frame["simulated_p10_return"],
+            mode="lines",
+            fill="tonexty",
+            fillcolor="rgba(37, 99, 235, 0.14)",
+            line={"color": "rgba(37, 99, 235, 0.18)", "width": 1},
+            name="Simulated evaluation band",
+            hovertemplate="Lower band %{y:.1%}<extra></extra>",
+        )
+    )
+    fig.add_trace(
+        go.Scatter(
+            x=frame["origin_date"],
+            y=frame["simulated_p50_return"],
+            mode="lines",
+            line={"color": "#2563eb", "width": 2},
+            name="Simulated p50",
+            hovertemplate="p50 %{y:.1%}<extra></extra>",
+        )
+    )
+    colors = frame["realized_in_interval"].map({True: "#0f766e", False: "#dc2626"})
+    fig.add_trace(
+        go.Scatter(
+            x=frame["origin_date"],
+            y=frame["realized_return"],
+            mode="markers",
+            marker={"color": colors, "size": 8, "line": {"color": "white", "width": 1}},
+            name="Realized return",
+            hovertemplate="Realized %{y:.1%}<br>%{x|%Y-%m-%d}<extra></extra>",
+        )
+    )
+    fig.update_layout(
+        title="Did realized returns land inside the simulated range?",
+        margin={"l": 10, "r": 10, "t": 50, "b": 35},
+        legend={"orientation": "h", "y": -0.22},
+        yaxis={"tickformat": ".0%", "title": "3m return"},
+        xaxis={"title": "Origin date"},
+        hovermode="x unified",
+    )
+    return fig
+
+
+def _simulation_ablation_comparison_figure(latest_ablation: pd.DataFrame) -> go.Figure:
+    frame = latest_ablation.copy()
+    frame["variant_label"] = frame["label"].fillna(frame["variant"]).astype(str)
+    frame["absolute_coverage_error"] = pd.to_numeric(
+        frame.get("coverage_error"),
+        errors="coerce",
+    ).abs()
+    frame["median_abs_error"] = pd.to_numeric(frame.get("median_abs_error"), errors="coerce")
+    fig = go.Figure()
+    fig.add_trace(
+        go.Bar(
+            x=frame["variant_label"],
+            y=frame["absolute_coverage_error"],
+            name="Coverage miss",
+            marker_color="#2563eb",
+            hovertemplate="Coverage miss %{y:.1%}<extra></extra>",
+        )
+    )
+    fig.add_trace(
+        go.Bar(
+            x=frame["variant_label"],
+            y=frame["median_abs_error"],
+            name="Median miss",
+            marker_color="#f97316",
+            hovertemplate="Median miss %{y:.1%}<extra></extra>",
+        )
+    )
+    fig.update_layout(
+        title="Which simulation variant is least wrong?",
+        barmode="group",
+        margin={"l": 10, "r": 10, "t": 50, "b": 80},
+        legend={"orientation": "h", "y": -0.32},
+        yaxis={"tickformat": ".0%", "title": "Error, lower is better"},
+        xaxis={"tickangle": -20},
+    )
+    return fig
+
+
+def _simulation_validation_error_figure(origin_metrics: pd.DataFrame) -> go.Figure:
+    frame = _origin_metrics_for_plot(origin_metrics)
+    fig = go.Figure()
+    if frame.empty:
+        return fig
+    fig.add_trace(
+        go.Histogram(
+            x=frame["p50_error"],
+            nbinsx=24,
+            marker_color="#64748b",
+            name="p50 error",
+            hovertemplate="p50 error %{x:.1%}<br>Origins %{y}<extra></extra>",
+        )
+    )
+    fig.add_vline(x=0, line_dash="dash", line_color="#0f172a")
+    fig.update_layout(
+        title="Was the simulated median biased high or low?",
+        margin={"l": 10, "r": 10, "t": 50, "b": 35},
+        xaxis={"tickformat": ".0%", "title": "p50 minus realized return"},
+        yaxis={"title": "Origin count"},
+        showlegend=False,
+    )
+    return fig
+
+
+def _origin_metrics_for_plot(origin_metrics: pd.DataFrame) -> pd.DataFrame:
+    required = [
+        "origin_date",
+        "realized_return",
+        "simulated_p10_return",
+        "simulated_p50_return",
+        "simulated_p90_return",
+    ]
+    if origin_metrics.empty or any(column not in origin_metrics for column in required):
+        return pd.DataFrame()
+    frame = origin_metrics.copy()
+    frame["origin_date"] = pd.to_datetime(frame["origin_date"], errors="coerce")
+    for column in [
+        "realized_return",
+        "simulated_p10_return",
+        "simulated_p50_return",
+        "simulated_p90_return",
+        "p50_error",
+    ]:
+        if column in frame:
+            frame[column] = pd.to_numeric(frame[column], errors="coerce")
+    if "realized_in_interval" in frame:
+        frame["realized_in_interval"] = frame["realized_in_interval"].astype(bool)
+    else:
+        frame["realized_in_interval"] = frame["realized_return"].ge(
+            frame["simulated_p10_return"]
+        ) & frame["realized_return"].le(frame["simulated_p90_return"])
+    return frame.dropna(subset=required).sort_values("origin_date")
 
 
 def _render_simulation_planning_cards() -> None:

@@ -9,10 +9,15 @@ from trade_bot.backtest.engine import BacktestResult
 from trade_bot.dashboard.simulation_lab import (
     _drawdown_distribution_row,
     _reference_option_frame,
+    _simulation_ablation_comparison_figure,
     _simulation_calibration_read,
     _simulation_comparison_row,
     _simulation_overlay_histogram,
+    _simulation_validation_band_figure,
+    _simulation_validation_metric_status,
     _simulation_validation_row,
+    _simulation_validation_verdict,
+    _validation_history_plain_english_read,
 )
 
 
@@ -135,3 +140,85 @@ def test_simulation_calibration_read_labels_broadly_past_like_cases() -> None:
         )
         == "broadly_past_like"
     )
+
+
+def test_validation_history_read_explains_use_and_limits() -> None:
+    ablation = pd.DataFrame(
+        [
+            {
+                "variant": "baseline",
+                "label": "Baseline",
+                "coverage_error": 0.002,
+                "median_abs_error": 0.050,
+            },
+            {
+                "variant": "duration_covariate",
+                "label": "Duration + covariate",
+                "coverage_error": -0.022,
+                "median_abs_error": 0.048,
+            },
+        ]
+    )
+
+    read = _validation_history_plain_english_read(
+        validity_read="calibrated_enough_for_research",
+        interval_coverage=0.778,
+        target_coverage=0.80,
+        coverage_error=-0.022,
+        median_abs_error=0.048,
+        launch_accuracy=0.086,
+        latest_ablation=ablation,
+    )
+
+    assert "roughly calibrated" in read
+    assert "planning range, not as a launch trigger" in read
+    assert "Ablation is mixed" in read
+
+
+def test_simulation_validation_statuses_call_out_generous_or_weak_metrics() -> None:
+    assert _simulation_validation_metric_status("coverage", -0.022) == "good"
+    assert _simulation_validation_metric_status("coverage", 0.062) == "warn"
+    assert _simulation_validation_metric_status("coverage", 0.12) == "bad"
+    assert _simulation_validation_metric_status("median", 0.048) == "warn"
+    assert _simulation_validation_metric_status("launch", 0.086) == "bad"
+
+
+def test_simulation_validation_verdict_prioritizes_weak_launch_signal() -> None:
+    verdict = _simulation_validation_verdict(
+        coverage_error=-0.022,
+        median_abs_error=0.048,
+        launch_accuracy=0.086,
+    )
+
+    assert verdict["status"] == "bad"
+    assert "not decision-ready" in verdict["title"]
+
+
+def test_validation_history_figures_make_band_and_ablation_visuals() -> None:
+    origins = pd.DataFrame(
+        {
+            "origin_date": ["2026-01-31", "2026-02-28"],
+            "realized_return": [0.02, -0.03],
+            "simulated_p10_return": [-0.02, -0.01],
+            "simulated_p50_return": [0.01, 0.02],
+            "simulated_p90_return": [0.05, 0.06],
+            "realized_in_interval": [True, False],
+            "p50_error": [-0.01, 0.05],
+        }
+    )
+    ablation = pd.DataFrame(
+        {
+            "variant": ["baseline", "duration"],
+            "label": ["Baseline", "Duration"],
+            "coverage_error": [0.002, -0.022],
+            "median_abs_error": [0.050, 0.048],
+        }
+    )
+
+    band = _simulation_validation_band_figure(origins)
+    ablation_fig = _simulation_ablation_comparison_figure(ablation)
+
+    assert len(band.data) == 4
+    assert band.data[-1].name == "Realized return"
+    assert len(ablation_fig.data) == 2
+    assert ablation_fig.layout.barmode == "group"

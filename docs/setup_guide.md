@@ -249,7 +249,7 @@ poetry run trade-bot run-daily-update --cached-data --cached-macro --cached-news
 ## Open The Dashboard
 
 ```bash
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
+poetry run trade-bot run-dashboard
 ```
 
 Open:
@@ -261,7 +261,13 @@ http://localhost:8501
 If the port is busy:
 
 ```bash
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8502
+poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
+```
+
+When you are done, stop the managed dashboard without relying on Ctrl-C:
+
+```bash
+poetry run trade-bot stop-dashboard
 ```
 
 Use the dashboard sidebar default:
@@ -305,7 +311,7 @@ Most users need only:
 
 ```bash
 poetry run trade-bot run-daily-update
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
+poetry run trade-bot run-dashboard
 ```
 
 Optional:
@@ -492,7 +498,7 @@ poetry install
 Use another port:
 
 ```bash
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8502
+poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
 ```
 
 ### Dashboard is stale
@@ -564,7 +570,7 @@ pyenv local 3.12.6
 poetry install
 poetry run pytest tests/test_config.py -q
 poetry run trade-bot run-daily-update
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
+poetry run trade-bot run-dashboard
 ```
 
 Then read `docs/user_guide.md`.

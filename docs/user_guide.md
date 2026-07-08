@@ -126,13 +126,19 @@ poetry run trade-bot run-daily-update --cached-data --cached-macro --cached-news
 If the dashboard is not already running, start it:
 
 ```bash
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8501
+poetry run trade-bot run-dashboard
 ```
 
 If port 8501 is busy:
 
 ```bash
-poetry run streamlit run src/trade_bot/dashboard/app.py --server.port 8502
+poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
+```
+
+Stop the managed dashboard with:
+
+```bash
+poetry run trade-bot stop-dashboard
 ```
 
 If the dashboard is already open and the sidebar job has completed, refresh the
