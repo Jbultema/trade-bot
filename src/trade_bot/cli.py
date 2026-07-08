@@ -61,7 +61,14 @@ from trade_bot.research.forward_simulation import (
     rolling_origin_simulation_backtest,
     rolling_origin_strategy_rank_validation,
     summarize_simulation_validation,
+    summarize_simulation_validation_by_horizon,
     summarize_strategy_rank_validation,
+)
+from trade_bot.research.scenario_history import (
+    clean_scenario_history,
+    reconstruct_scenario_history_from_prices,
+    scenario_history_from_snapshots,
+    write_scenario_history,
 )
 from trade_bot.research.signal_evidence import (
     build_signal_family_evidence,
@@ -952,6 +959,99 @@ def run_entry_date_analysis_cmd(
     console.print(table)
 
 
+@app.command("export-scenario-history")
+def export_scenario_history_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[
+        Path,
+        typer.Option("--artifact-dir"),
+    ] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[
+        Path,
+        typer.Option("--job-log-dir"),
+    ] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    output: Annotated[
+        Path,
+        typer.Option("--output"),
+    ] = Path("reports/simulation_validation/scenario_history.csv"),
+    limit: Annotated[int, typer.Option("--limit")] = 250,
+) -> None:
+    """Export date-stamped scenario probabilities from saved snapshots."""
+
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    history = scenario_history_from_snapshots(run_store, limit=limit)
+    output_path = write_scenario_history(history, output)
+    if history.empty:
+        console.print(
+            f"No scenario history rows were available; wrote empty file to {output_path}."
+        )
+        return
+    market_dates = history["market_date"].dropna().nunique()
+    horizons = ",".join(sorted(history["horizon"].dropna().astype(str).unique()))
+    console.print(
+        f"Wrote {len(history):,} scenario-history rows across {market_dates:,} "
+        f"market dates to {output_path}. Horizons: {horizons}."
+    )
+
+
+@app.command("reconstruct-scenario-history")
+def reconstruct_scenario_history_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[
+        Path,
+        typer.Option("--artifact-dir"),
+    ] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[
+        Path,
+        typer.Option("--job-log-dir"),
+    ] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    output: Annotated[
+        Path,
+        typer.Option("--output"),
+    ] = Path("reports/simulation_validation/reconstructed_scenario_history.csv"),
+    origin_frequency: Annotated[
+        str,
+        typer.Option("--origin-frequency"),
+    ] = DEFAULT_FORWARD_SIMULATION_VALIDATION_ORIGIN_FREQUENCY,
+    min_train_days: Annotated[
+        int,
+        typer.Option("--min-train-days"),
+    ] = DEFAULT_FORWARD_SIMULATION_VALIDATION_MIN_TRAIN_DAYS,
+    start_date: Annotated[str | None, typer.Option("--start-date")] = None,
+    end_date: Annotated[str | None, typer.Option("--end-date")] = None,
+) -> None:
+    """Rebuild scenario history by recomputing price-derived state at past origins."""
+
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+    if snapshot_payload is None:
+        console.print("No completed snapshots found. Build a snapshot before reconstruction.")
+        raise typer.Exit(code=1)
+    baseline_run, manifest = snapshot_payload
+    prices = getattr(baseline_run, "prices", pd.DataFrame())
+    if not isinstance(prices, pd.DataFrame) or prices.empty:
+        console.print(f"Snapshot {manifest.run_id} does not include historical prices.")
+        raise typer.Exit(code=1)
+    history = reconstruct_scenario_history_from_prices(
+        prices,
+        origin_frequency=origin_frequency,
+        min_train_days=min_train_days,
+        start_date=start_date,
+        end_date=end_date,
+    )
+    output_path = write_scenario_history(history, output)
+    if history.empty:
+        console.print(f"No reconstructed scenario rows were available; wrote {output_path}.")
+        return
+    market_dates = history["market_date"].dropna().nunique()
+    horizons = ",".join(sorted(history["horizon"].dropna().astype(str).unique()))
+    console.print(
+        f"Reconstructed {len(history):,} scenario-history rows across {market_dates:,} "
+        f"market dates from snapshot {manifest.run_id}; wrote {output_path}. "
+        f"Horizons: {horizons}."
+    )
+
+
 @app.command("validate-simulation-engine")
 def validate_simulation_engine_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -1012,6 +1112,16 @@ def validate_simulation_engine_cmd(
             help="Optional date-stamped CSV or parquet scenario probabilities.",
         ),
     ] = None,
+    snapshot_scenario_history_limit: Annotated[
+        int,
+        typer.Option(
+            "--snapshot-scenario-history-limit",
+            help=(
+                "Use up to this many saved snapshots as date-stamped scenario history "
+                "when --scenario-history is omitted. Use 0 to disable."
+            ),
+        ),
+    ] = 0,
     ablation: Annotated[
         bool,
         typer.Option(
@@ -1042,6 +1152,18 @@ def validate_simulation_engine_cmd(
         raise typer.Exit(code=1)
 
     scenario_history_frame = _load_scenario_history(scenario_history)
+    scenario_history_source = str(scenario_history or "")
+    if scenario_history_frame is None and snapshot_scenario_history_limit > 0:
+        scenario_history_frame = scenario_history_from_snapshots(
+            run_store,
+            limit=snapshot_scenario_history_limit,
+        )
+        if scenario_history_frame.empty:
+            scenario_history_frame = None
+        else:
+            scenario_history_output = output_dir / "scenario_history_from_snapshots.csv"
+            write_scenario_history(scenario_history_frame, scenario_history_output)
+            scenario_history_source = str(scenario_history_output)
     if scenario_history_frame is None:
         console.print(
             "No date-stamped scenario history supplied; validation uses the empirical "
@@ -1050,7 +1172,7 @@ def validate_simulation_engine_cmd(
     else:
         console.print(
             f"Loaded {len(scenario_history_frame):,} scenario-history rows from "
-            f"{scenario_history}."
+            f"{scenario_history_source or scenario_history}."
         )
 
     config = ForwardSimulationValidationConfig(
@@ -1064,24 +1186,34 @@ def validate_simulation_engine_cmd(
     )
     output_dir.mkdir(parents=True, exist_ok=True)
 
+    console.print(
+        f"Running rolling-origin validation for {strategy} across "
+        f"{len(config.horizons)} horizon(s), {paths} path(s) per origin."
+    )
     validation = rolling_origin_simulation_backtest(
         returns_by_strategy[strategy],
         scenario_history=scenario_history_frame,
         config=config,
     )
     validation_summary = summarize_simulation_validation(validation)
+    horizon_summary = summarize_simulation_validation_by_horizon(validation)
     validation_path = output_dir / f"{_slug_identifier(strategy)}_simulation_validation.csv"
+    horizon_path = output_dir / f"{_slug_identifier(strategy)}_simulation_horizon_summary.csv"
     validation.to_csv(validation_path, index=False)
+    horizon_summary.to_csv(horizon_path, index=False)
 
     console.print(
         f"Validated {strategy} from snapshot {manifest.run_id} "
         f"({manifest.market_date}); wrote {validation_path}."
     )
     _print_simulation_validation_summary(strategy, validation_summary)
+    console.print(f"Wrote per-horizon validation summary to {horizon_path}.")
+    _print_simulation_horizon_summary(horizon_summary)
 
     ablation_frame: pd.DataFrame | None = None
     ablation_path_string = ""
     if ablation:
+        console.print("Running simulation model ablation variants.")
         factor_returns = _factor_returns_from_snapshot_prices(getattr(baseline_run, "prices", None))
         ablation_frame = _simulation_ablation_validation(
             returns_by_strategy[strategy],
@@ -1101,6 +1233,9 @@ def validate_simulation_engine_cmd(
             "Rank validation skipped because fewer than two selected strategies had returns."
         )
     else:
+        console.print(
+            f"Running strategy rank validation for {len(returns_by_strategy)} strategies."
+        )
         rank_validation = rolling_origin_strategy_rank_validation(
             returns_by_strategy,
             scenario_history=scenario_history_frame,
@@ -1131,6 +1266,7 @@ def validate_simulation_engine_cmd(
         rank_output_path=rank_path_string,
         validation_summary=validation_summary,
         validation=validation,
+        horizon_summary=horizon_summary,
         ablation_summary=ablation_frame,
     )
     console.print(f"Saved simulation validation history to DuckDB as {validation_run_id}.")
@@ -1528,13 +1664,21 @@ def _load_scenario_history(path: Path | None) -> pd.DataFrame | None:
             "Scenario history has no date column; ignoring it to avoid historical lookahead."
         )
         return None
-    return frame
+    return clean_scenario_history(frame)
 
 
 def _has_scenario_history_date_column(frame: pd.DataFrame) -> bool:
     return any(
         column in frame
-        for column in ("origin_date", "as_of_date", "date", "created_at_utc", "created_at")
+        for column in (
+            "origin_date",
+            "as_of_date",
+            "date",
+            "snapshot_time",
+            "market_date",
+            "created_at_utc",
+            "created_at",
+        )
     )
 
 
@@ -1618,6 +1762,9 @@ def _simulation_ablation_validation(
                 "median_abs_error": summary.get("median_abs_error"),
                 "severe_drawdown_brier": summary.get("severe_drawdown_brier"),
                 "launch_decision_accuracy": summary.get("launch_decision_accuracy"),
+                "launch_action_score": summary.get("launch_action_score"),
+                "launch_overrisk_rate": summary.get("launch_overrisk_rate"),
+                "constructive_capture_rate": summary.get("constructive_capture_rate"),
                 "validity_read": summary.get("validity_read"),
             }
         )
@@ -1647,10 +1794,47 @@ def _print_simulation_validation_summary(strategy: str, summary: dict[str, objec
             "launch decision accuracy",
             _format_optional_percent(summary.get("launch_decision_accuracy")),
         ),
+        ("launch action score", _format_optional_percent(summary.get("launch_action_score"))),
+        ("over-risk rate", _format_optional_percent(summary.get("launch_overrisk_rate"))),
+        (
+            "constructive capture",
+            _format_optional_percent(summary.get("constructive_capture_rate")),
+        ),
         ("validity read", summary.get("validity_read")),
     ]
     for metric, value in rows:
         table.add_row(metric, str(value))
+    console.print(table)
+
+
+def _print_simulation_horizon_summary(frame: pd.DataFrame) -> None:
+    if frame.empty:
+        return
+    table = Table(title="Simulation Validation By Horizon")
+    for column in [
+        "horizon",
+        "rows",
+        "coverage error",
+        "median abs error",
+        "launch accuracy",
+        "action score",
+        "over-risk",
+        "capture",
+        "validity read",
+    ]:
+        table.add_column(column)
+    for _, row in frame.iterrows():
+        table.add_row(
+            str(row.get("horizon", "")),
+            str(row.get("rows", "")),
+            _format_optional_percent(row.get("coverage_error")),
+            _format_optional_percent(row.get("median_abs_error")),
+            _format_optional_percent(row.get("launch_decision_accuracy")),
+            _format_optional_percent(row.get("launch_action_score")),
+            _format_optional_percent(row.get("launch_overrisk_rate")),
+            _format_optional_percent(row.get("constructive_capture_rate")),
+            str(row.get("validity_read", "")),
+        )
     console.print(table)
 
 
@@ -1663,6 +1847,8 @@ def _print_simulation_ablation_summary(frame: pd.DataFrame) -> None:
         "median abs error",
         "severe brier",
         "launch accuracy",
+        "action score",
+        "over-risk",
         "validity read",
     ]:
         table.add_column(column)
@@ -1674,6 +1860,8 @@ def _print_simulation_ablation_summary(frame: pd.DataFrame) -> None:
             _format_optional_percent(row.get("median_abs_error")),
             _format_optional_decimal(row.get("severe_drawdown_brier")),
             _format_optional_percent(row.get("launch_decision_accuracy")),
+            _format_optional_percent(row.get("launch_action_score")),
+            _format_optional_percent(row.get("launch_overrisk_rate")),
             str(row.get("validity_read", "")),
         )
     console.print(table)

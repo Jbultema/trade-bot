@@ -181,6 +181,8 @@ def test_simulation_validation_statuses_call_out_generous_or_weak_metrics() -> N
     assert _simulation_validation_metric_status("coverage", 0.12) == "bad"
     assert _simulation_validation_metric_status("median", 0.048) == "warn"
     assert _simulation_validation_metric_status("launch", 0.086) == "bad"
+    assert _simulation_validation_metric_status("action_score", 0.70) == "warn"
+    assert _simulation_validation_metric_status("overrisk", 0.55) == "bad"
 
 
 def test_simulation_validation_verdict_prioritizes_weak_launch_signal() -> None:
@@ -188,6 +190,8 @@ def test_simulation_validation_verdict_prioritizes_weak_launch_signal() -> None:
         coverage_error=-0.022,
         median_abs_error=0.048,
         launch_accuracy=0.086,
+        launch_action_score=0.63,
+        launch_overrisk_rate=0.52,
     )
 
     assert verdict["status"] == "bad"

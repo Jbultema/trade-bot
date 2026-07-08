@@ -15,6 +15,7 @@ from trade_bot.research.forward_simulation import (
     simulate_regime_conditioned_paths,
     summarize_forward_simulation,
     summarize_simulation_validation,
+    summarize_simulation_validation_by_horizon,
     summarize_strategy_rank_validation,
 )
 
@@ -267,8 +268,14 @@ def test_rolling_origin_simulation_backtest_scores_calibration() -> None:
     assert validation["simulated_p90_return"].notna().all()
     assert validation["realized_in_interval"].isin([True, False]).all()
     assert set(validation["simulated_launch_decision"]).issubset({"wait", "ramp_in", "full_launch"})
+    assert validation["launch_action_error"].between(0, 2).all()
+    assert validation["launch_overrisk"].isin([True, False]).all()
     assert summary["rows"] == len(validation)
     assert summary["target_coverage"] == pytest.approx(0.60)
+    assert summary["launch_action_score"] is not None
+    assert 0.0 <= summary["launch_action_score"] <= 1.0
+    assert summary["launch_overrisk_rate"] is not None
+    assert summary["constructive_capture_rate"] is not None
     assert summary["validity_read"] in {
         "limited_sample",
         "interval_too_narrow",
@@ -278,6 +285,94 @@ def test_rolling_origin_simulation_backtest_scores_calibration() -> None:
         "drawdown_miscalibrated",
         "calibrated_enough_for_research",
     }
+
+
+def test_rolling_origin_simulation_backtest_accepts_utc_scenario_history_dates() -> None:
+    index = pd.bdate_range("2024-01-02", periods=160)
+    returns = pd.Series([0.0015] * 70 + [-0.006] * 20 + [0.002] * 70, index=index)
+    scenario_history = pd.DataFrame(
+        [
+            {
+                "snapshot_time": pd.Timestamp(index[70], tz="UTC"),
+                "market_date": index[70].date(),
+                "risk_bucket": "risk_on",
+                "probability": 0.65,
+                "horizon": "1m",
+            },
+            {
+                "snapshot_time": pd.Timestamp(index[70], tz="UTC"),
+                "market_date": index[70].date(),
+                "risk_bucket": "transition",
+                "probability": 0.35,
+                "horizon": "1m",
+            },
+        ]
+    )
+    config = ForwardSimulationValidationConfig(
+        origin_frequency="monthly",
+        horizons=(("1m", 20),),
+        min_train_days=50,
+        paths=20,
+        block_days=5,
+        random_seed=29,
+        min_regime_observations=1,
+    )
+
+    validation = rolling_origin_simulation_backtest(
+        returns,
+        scenario_history=scenario_history,
+        config=config,
+    )
+
+    assert not validation.empty
+    assert validation["simulated_p50_return"].notna().all()
+
+
+def test_simulation_validation_by_horizon_summarizes_decision_quality() -> None:
+    validation = pd.DataFrame(
+        [
+            {
+                "origin_date": "2024-01-31",
+                "horizon": "1m",
+                "horizon_days": 20,
+                "realized_in_interval": True,
+                "target_interval_coverage": 0.5,
+                "p50_error": 0.01,
+                "simulated_severe_drawdown_probability": 0.10,
+                "realized_severe_drawdown": False,
+                "simulated_launch_decision": "ramp_in",
+                "realized_launch_decision": "full_launch",
+                "launch_action_error": 1,
+                "launch_overrisk": False,
+                "launch_underrisk": True,
+                "avoided_bad_launch_action": True,
+                "captured_constructive_launch": True,
+            },
+            {
+                "origin_date": "2024-02-29",
+                "horizon": "3m",
+                "horizon_days": 60,
+                "realized_in_interval": False,
+                "target_interval_coverage": 0.5,
+                "p50_error": -0.05,
+                "simulated_severe_drawdown_probability": 0.30,
+                "realized_severe_drawdown": True,
+                "simulated_launch_decision": "full_launch",
+                "realized_launch_decision": "wait",
+                "launch_action_error": 2,
+                "launch_overrisk": True,
+                "launch_underrisk": False,
+                "avoided_bad_launch_action": False,
+                "captured_constructive_launch": None,
+            },
+        ]
+    )
+
+    summary = summarize_simulation_validation_by_horizon(validation).set_index("horizon")
+
+    assert set(summary.index) == {"1m", "3m"}
+    assert summary.loc["1m", "launch_action_score"] == pytest.approx(0.5)
+    assert summary.loc["3m", "launch_overrisk_rate"] == pytest.approx(1.0)
 
 
 def test_rolling_origin_simulation_backtest_ignores_undated_scenario_history() -> None:

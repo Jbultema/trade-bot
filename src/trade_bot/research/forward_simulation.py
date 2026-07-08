@@ -34,6 +34,7 @@ from trade_bot.research.strategy_outcome_utility import (
 )
 
 REGIME_BUCKETS = ("risk_off", "transition", "risk_on_fragile", "risk_on")
+LAUNCH_DECISION_ORDER = {"wait": 0, "ramp_in": 1, "full_launch": 2}
 _RETURN_COVARIATE_COLUMNS = (
     "trend_21",
     "trend_63",
@@ -578,6 +579,12 @@ def summarize_simulation_validation(validation: pd.DataFrame) -> dict[str, objec
             "realized_severe_drawdown_rate": None,
             "simulated_severe_drawdown_probability_mean": None,
             "launch_decision_accuracy": None,
+            "launch_action_error_mean": None,
+            "launch_action_score": None,
+            "launch_overrisk_rate": None,
+            "launch_underrisk_rate": None,
+            "bad_action_avoidance_rate": None,
+            "constructive_capture_rate": None,
             "validity_read": "insufficient_history",
         }
 
@@ -594,9 +601,21 @@ def summarize_simulation_validation(validation: pd.DataFrame) -> dict[str, objec
         .astype(str)
         .eq(validation["realized_launch_decision"].astype(str))
     )
+    action_error = pd.to_numeric(validation["launch_action_error"], errors="coerce")
+    over_risk = pd.to_numeric(validation["launch_overrisk"], errors="coerce")
+    under_risk = pd.to_numeric(validation["launch_underrisk"], errors="coerce")
+    avoided_bad_action = pd.to_numeric(
+        validation["avoided_bad_launch_action"],
+        errors="coerce",
+    )
+    captured_constructive = pd.to_numeric(
+        validation["captured_constructive_launch"],
+        errors="coerce",
+    )
     severe_brier = _mean_or_none((severe_probability - severe_event) ** 2)
     median_error_mean = _mean_or_none(median_error)
     median_abs_error = _mean_or_none(median_error.abs())
+    launch_action_error_mean = _mean_or_none(action_error)
     summary = {
         "rows": int(validation.shape[0]),
         "origins": int(validation["origin_date"].nunique()),
@@ -612,9 +631,59 @@ def summarize_simulation_validation(validation: pd.DataFrame) -> dict[str, objec
         "realized_severe_drawdown_rate": _mean_or_none(severe_event),
         "simulated_severe_drawdown_probability_mean": _mean_or_none(severe_probability),
         "launch_decision_accuracy": _mean_or_none(launch_match),
+        "launch_action_error_mean": launch_action_error_mean,
+        "launch_action_score": (
+            1.0 - launch_action_error_mean / 2.0 if launch_action_error_mean is not None else None
+        ),
+        "launch_overrisk_rate": _mean_or_none(over_risk),
+        "launch_underrisk_rate": _mean_or_none(under_risk),
+        "bad_action_avoidance_rate": _mean_or_none(avoided_bad_action),
+        "constructive_capture_rate": _mean_or_none(captured_constructive),
     }
     summary["validity_read"] = _simulation_validation_read(summary)
     return summary
+
+
+def summarize_simulation_validation_by_horizon(validation: pd.DataFrame) -> pd.DataFrame:
+    """Return one calibration summary per simulated horizon."""
+
+    if validation.empty or "horizon" not in validation:
+        return pd.DataFrame()
+    rows: list[dict[str, object]] = []
+    for horizon, group in validation.groupby("horizon", sort=False):
+        summary = summarize_simulation_validation(group)
+        summary["horizon"] = str(horizon)
+        horizon_days = (
+            pd.to_numeric(group["horizon_days"], errors="coerce").dropna()
+            if "horizon_days" in group
+            else pd.Series(dtype=float)
+        )
+        summary["horizon_days"] = int(horizon_days.iloc[0]) if not horizon_days.empty else None
+        rows.append(summary)
+    if not rows:
+        return pd.DataFrame()
+    columns = [
+        "horizon",
+        "horizon_days",
+        "rows",
+        "origins",
+        "horizons",
+        "interval_coverage",
+        "target_coverage",
+        "coverage_error",
+        "median_error_mean",
+        "median_abs_error",
+        "severe_drawdown_brier",
+        "launch_decision_accuracy",
+        "launch_action_error_mean",
+        "launch_action_score",
+        "launch_overrisk_rate",
+        "launch_underrisk_rate",
+        "bad_action_avoidance_rate",
+        "constructive_capture_rate",
+        "validity_read",
+    ]
+    return pd.DataFrame(rows).reindex(columns=columns)
 
 
 def rolling_origin_strategy_rank_validation(
@@ -813,7 +882,15 @@ def _scenario_history_for_origin(
     date_column = next(
         (
             column
-            for column in ("origin_date", "as_of_date", "date", "created_at_utc", "created_at")
+            for column in (
+                "origin_date",
+                "as_of_date",
+                "date",
+                "snapshot_time",
+                "market_date",
+                "created_at_utc",
+                "created_at",
+            )
             if column in frame
         ),
         None,
@@ -821,8 +898,8 @@ def _scenario_history_for_origin(
     if date_column is None:
         return None
 
-    frame[date_column] = pd.to_datetime(frame[date_column], errors="coerce")
-    origin_timestamp = pd.to_datetime(origin_date, errors="coerce")
+    frame[date_column] = pd.to_datetime(frame[date_column], errors="coerce", utc=True)
+    origin_timestamp = pd.to_datetime(origin_date, errors="coerce", utc=True)
     if pd.isna(origin_timestamp):
         return None
     eligible = frame[frame[date_column].le(origin_timestamp)].copy()
@@ -878,6 +955,20 @@ def _simulation_validation_origin_row(
     realized_return = _realized_terminal_return(realized)
     realized_drawdown = _realized_max_drawdown(realized)
     realized_severe = bool(realized_drawdown <= config.severe_drawdown_limit)
+    simulated_launch = _simulated_launch_decision(
+        simulated_p10=simulated_p10,
+        simulated_p50=simulated_p50,
+        severe_probability=severe_probability,
+        config=config,
+    )
+    realized_launch = _realized_launch_decision(
+        realized_return=realized_return,
+        realized_drawdown=realized_drawdown,
+        config=config,
+    )
+    simulated_action = _launch_decision_value(simulated_launch)
+    realized_action = _launch_decision_value(realized_launch)
+    action_error = abs(simulated_action - realized_action)
     return {
         "origin_date": origin_date,
         "horizon": horizon_label,
@@ -904,17 +995,15 @@ def _simulation_validation_origin_row(
         "severe_drawdown_probability_error": (
             severe_probability - float(realized_severe) if severe_probability is not None else None
         ),
-        "simulated_launch_decision": _simulated_launch_decision(
-            simulated_p10=simulated_p10,
-            simulated_p50=simulated_p50,
-            severe_probability=severe_probability,
-            config=config,
-        ),
-        "realized_launch_decision": _realized_launch_decision(
-            realized_return=realized_return,
-            realized_drawdown=realized_drawdown,
-            config=config,
-        ),
+        "simulated_launch_decision": simulated_launch,
+        "realized_launch_decision": realized_launch,
+        "simulated_launch_action": simulated_action,
+        "realized_launch_action": realized_action,
+        "launch_action_error": action_error,
+        "launch_overrisk": simulated_action > realized_action,
+        "launch_underrisk": simulated_action < realized_action,
+        "avoided_bad_launch_action": simulated_action <= realized_action,
+        "captured_constructive_launch": (simulated_action > 0 if realized_action > 0 else None),
     }
 
 
@@ -978,6 +1067,10 @@ def _realized_launch_decision(
     if realized_drawdown <= config.ramp_drawdown_limit:
         return "ramp_in"
     return "full_launch"
+
+
+def _launch_decision_value(decision: str) -> int:
+    return LAUNCH_DECISION_ORDER.get(str(decision), 0)
 
 
 def _validation_target_coverage(validation: pd.DataFrame) -> float:
@@ -1050,6 +1143,13 @@ def _empty_validation_frame() -> pd.DataFrame:
             "severe_drawdown_probability_error",
             "simulated_launch_decision",
             "realized_launch_decision",
+            "simulated_launch_action",
+            "realized_launch_action",
+            "launch_action_error",
+            "launch_overrisk",
+            "launch_underrisk",
+            "avoided_bad_launch_action",
+            "captured_constructive_launch",
         ]
     )
 

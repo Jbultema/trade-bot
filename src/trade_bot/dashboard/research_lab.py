@@ -17,6 +17,7 @@ from trade_bot.dashboard.components import (
     _clearable_selectbox,
     _helped_metric,
     _render_metric_dataframe,
+    _render_runtime_notice,
 )
 from trade_bot.dashboard.formatting import (
     _display_metrics,
@@ -4119,7 +4120,31 @@ def _render_research_lab(
         "for audit and expansion work, but they are intentionally collapsed so the main research "
         "flow stays focused on strategy comparison and candidate inspection."
     )
-    with st.expander("ML diagnostics", expanded=False):
-        _render_ml_diagnostics()
-    with st.expander("Signal inclusion tests", expanded=False):
-        _render_signal_inclusion(baseline_run)
+    _render_runtime_notice(
+        "Optional diagnostics are explicit-load",
+        (
+            "ML diagnostics and signal-inclusion tests read larger artifact sets. Leave these "
+            "off for normal strategy browsing; turn them on when doing model governance or "
+            "signal expansion work."
+        ),
+        tone="neutral",
+    )
+    diagnostics_cols = st.columns(2)
+    load_ml_diagnostics = diagnostics_cols[0].toggle(
+        "Load ML diagnostics",
+        value=False,
+        key="research_lab_load_ml_diagnostics",
+        help="Reads ML diagnostic artifacts and renders model, inference, family, and drift tables.",
+    )
+    load_signal_inclusion = diagnostics_cols[1].toggle(
+        "Load signal inclusion tests",
+        value=False,
+        key="research_lab_load_signal_inclusion",
+        help="Runs the signal inclusion readout for the loaded baseline run.",
+    )
+    if load_ml_diagnostics:
+        with st.spinner("Loading ML diagnostics..."):
+            _render_ml_diagnostics()
+    if load_signal_inclusion:
+        with st.spinner("Loading signal inclusion tests..."):
+            _render_signal_inclusion(baseline_run)

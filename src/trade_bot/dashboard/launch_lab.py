@@ -12,6 +12,7 @@ from trade_bot.dashboard.components import (
     _clearable_selectbox,
     _helped_metric,
     _render_metric_dataframe,
+    _render_runtime_notice,
 )
 from trade_bot.dashboard.formatting import (
     _display_metrics,
@@ -102,16 +103,6 @@ def _render_launch_lab(
     )
 
     benchmark_result = baseline_run.results.get(benchmark_name)
-    aggregate_run = _build_aggregate_launch_run(
-        bot_config=bot_config,
-        baseline_run=baseline_run,
-        options=options,
-        result_loader=_result_for_strategy,
-        benchmark_result=benchmark_result,
-        current_state=baseline_run.current_state,
-        start_frequency=start_frequency,
-        target_fraction=target_fraction,
-    )
     run = build_launch_readiness(
         selected_result,
         benchmark_result=benchmark_result,
@@ -123,18 +114,39 @@ def _render_launch_lab(
     )
     _render_launch_decision(run, selected_strategy, benchmark_name)
 
-    tabs = st.tabs(
-        ["Aggregate View", "Why / Why Not", "Entry Backtest", "Ramp Plan", "How to Use This"]
+    launch_view = (
+        st.pills(
+            "Launch Lab view",
+            ["Aggregate View", "Why / Why Not", "Entry Backtest", "Ramp Plan", "How to Use This"],
+            selection_mode="single",
+            default="Why / Why Not",
+            key="launch_lab_view",
+            width="stretch",
+        )
+        or "Why / Why Not"
     )
-    with tabs[0]:
+    _render_launch_view_runtime_notice(launch_view)
+
+    if launch_view == "Aggregate View":
+        with st.spinner("Building aggregate launch read across candidate strategies..."):
+            aggregate_run = _build_aggregate_launch_run(
+                bot_config=bot_config,
+                baseline_run=baseline_run,
+                options=options,
+                result_loader=_result_for_strategy,
+                benchmark_result=benchmark_result,
+                current_state=baseline_run.current_state,
+                start_frequency=start_frequency,
+                target_fraction=target_fraction,
+            )
         _render_aggregate_launch_lab(aggregate_run, str(primary_horizon))
-    with tabs[1]:
+    elif launch_view == "Why / Why Not":
         _render_launch_gate(run)
-    with tabs[2]:
+    elif launch_view == "Entry Backtest":
         _render_entry_backtest(run)
-    with tabs[3]:
+    elif launch_view == "Ramp Plan":
         _render_ramp_plan(run)
-    with tabs[4]:
+    else:
         _render_launch_vs_operating()
 
 
@@ -194,6 +206,28 @@ def _build_aggregate_launch_run(
         start_frequency=start_frequency,
         target_fraction=target_fraction,
     )
+
+
+def _render_launch_view_runtime_notice(launch_view: str) -> None:
+    if launch_view == "Aggregate View":
+        _render_runtime_notice(
+            "Aggregate View can be slow",
+            (
+                "This view rebuilds launch-readiness summaries across the curated candidate "
+                "set and multiple horizons. Changing horizon, frequency, or sleeve settings "
+                "will rerun that aggregate pass."
+            ),
+            tone="warning",
+        )
+    elif launch_view == "Entry Backtest":
+        _render_runtime_notice(
+            "Entry Backtest renders the densest launch table",
+            (
+                "This view is usually faster than aggregate launch, but changing the strategy "
+                "or start frequency can rebuild many historical start-window rows."
+            ),
+            tone="neutral",
+        )
 
 
 def _aggregate_launch_option_frame(options: pd.DataFrame) -> pd.DataFrame:
@@ -273,30 +307,38 @@ def _render_aggregate_launch_lab(
     )
 
     with st.expander("Aggregate launch detail tables", expanded=False):
-        detail_tabs = st.tabs(
-            [
-                "Best Horizon Rows",
-                "Transition Matrix",
-                "Protocol Separation",
-                "Protocol by Horizon",
-            ]
+        detail_view = (
+            st.pills(
+                "Aggregate detail table",
+                [
+                    "Best Horizon Rows",
+                    "Transition Matrix",
+                    "Protocol Separation",
+                    "Protocol by Horizon",
+                ],
+                selection_mode="single",
+                default="Best Horizon Rows",
+                key="launch_lab_aggregate_detail_view",
+                width="stretch",
+            )
+            or "Best Horizon Rows"
         )
-        with detail_tabs[0]:
+        if detail_view == "Best Horizon Rows":
             _render_metric_dataframe(
                 _display_metrics(aggregate_run.strategy_horizon_summary),
                 hide_index=True,
             )
-        with detail_tabs[1]:
+        elif detail_view == "Transition Matrix":
             _render_metric_dataframe(
                 _display_metrics(aggregate_run.horizon_transition_matrix),
                 hide_index=True,
             )
-        with detail_tabs[2]:
+        elif detail_view == "Protocol Separation":
             _render_metric_dataframe(
                 _display_metrics(aggregate_run.protocol_separation),
                 hide_index=True,
             )
-        with detail_tabs[3]:
+        else:
             _render_metric_dataframe(
                 _display_metrics(aggregate_run.protocol_separation_by_horizon),
                 hide_index=True,

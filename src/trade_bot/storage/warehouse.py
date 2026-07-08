@@ -964,6 +964,7 @@ class TradingWarehouse:
         rank_output_path: str,
         validation_summary: dict[str, object],
         validation: pd.DataFrame,
+        horizon_summary: pd.DataFrame | None = None,
         ablation_summary: pd.DataFrame | None = None,
     ) -> str:
         validation_run_id = _new_validation_run_id()
@@ -1026,6 +1027,15 @@ class TradingWarehouse:
                 validation=validation,
             )
         )
+        if horizon_summary is not None and not horizon_summary.empty:
+            metric_rows.extend(
+                _simulation_horizon_summary_metric_rows(
+                    validation_run_id=validation_run_id,
+                    created_at_utc=created_at_utc,
+                    strategy=strategy,
+                    horizon_summary=horizon_summary,
+                )
+            )
         if ablation_summary is not None and not ablation_summary.empty:
             metric_rows.extend(
                 _simulation_ablation_metric_rows(
@@ -1531,6 +1541,12 @@ class TradingWarehouse:
                     median_abs_error DOUBLE,
                     severe_drawdown_brier DOUBLE,
                     launch_decision_accuracy DOUBLE,
+                    launch_action_error_mean DOUBLE,
+                    launch_action_score DOUBLE,
+                    launch_overrisk_rate DOUBLE,
+                    launch_underrisk_rate DOUBLE,
+                    bad_action_avoidance_rate DOUBLE,
+                    constructive_capture_rate DOUBLE,
                     validity_read VARCHAR NOT NULL,
                     realized_return DOUBLE,
                     realized_max_drawdown DOUBLE,
@@ -1546,11 +1562,37 @@ class TradingWarehouse:
                     severe_drawdown_probability_error DOUBLE,
                     simulated_launch_decision VARCHAR NOT NULL,
                     realized_launch_decision VARCHAR NOT NULL,
+                    simulated_launch_action INTEGER,
+                    realized_launch_action INTEGER,
+                    launch_action_error INTEGER,
+                    launch_overrisk BOOLEAN,
+                    launch_underrisk BOOLEAN,
+                    avoided_bad_launch_action BOOLEAN,
+                    captured_constructive_launch BOOLEAN,
                     uses_duration_aware_transitions BOOLEAN,
                     uses_covariate_matching BOOLEAN,
                     uses_factor_proxy BOOLEAN
                 )
                 """
+            )
+            self._ensure_table_columns(
+                connection,
+                "simulation_validation_metrics",
+                {
+                    "launch_action_error_mean": "DOUBLE",
+                    "launch_action_score": "DOUBLE",
+                    "launch_overrisk_rate": "DOUBLE",
+                    "launch_underrisk_rate": "DOUBLE",
+                    "bad_action_avoidance_rate": "DOUBLE",
+                    "constructive_capture_rate": "DOUBLE",
+                    "simulated_launch_action": "INTEGER",
+                    "realized_launch_action": "INTEGER",
+                    "launch_action_error": "INTEGER",
+                    "launch_overrisk": "BOOLEAN",
+                    "launch_underrisk": "BOOLEAN",
+                    "avoided_bad_launch_action": "BOOLEAN",
+                    "captured_constructive_launch": "BOOLEAN",
+                },
             )
         finally:
             connection.close()
@@ -1992,6 +2034,12 @@ def _simulation_validation_summary_metric_row(
         "median_abs_error": _optional_float(summary.get("median_abs_error")),
         "severe_drawdown_brier": _optional_float(summary.get("severe_drawdown_brier")),
         "launch_decision_accuracy": _optional_float(summary.get("launch_decision_accuracy")),
+        "launch_action_error_mean": _optional_float(summary.get("launch_action_error_mean")),
+        "launch_action_score": _optional_float(summary.get("launch_action_score")),
+        "launch_overrisk_rate": _optional_float(summary.get("launch_overrisk_rate")),
+        "launch_underrisk_rate": _optional_float(summary.get("launch_underrisk_rate")),
+        "bad_action_avoidance_rate": _optional_float(summary.get("bad_action_avoidance_rate")),
+        "constructive_capture_rate": _optional_float(summary.get("constructive_capture_rate")),
         "validity_read": str(summary.get("validity_read", "")),
         "realized_return": None,
         "realized_max_drawdown": None,
@@ -2007,6 +2055,13 @@ def _simulation_validation_summary_metric_row(
         "severe_drawdown_probability_error": None,
         "simulated_launch_decision": "",
         "realized_launch_decision": "",
+        "simulated_launch_action": None,
+        "realized_launch_action": None,
+        "launch_action_error": None,
+        "launch_overrisk": None,
+        "launch_underrisk": None,
+        "avoided_bad_launch_action": None,
+        "captured_constructive_launch": None,
         "uses_duration_aware_transitions": None,
         "uses_covariate_matching": None,
         "uses_factor_proxy": None,
@@ -2053,6 +2108,12 @@ def _simulation_validation_origin_metric_rows(
                 "median_abs_error": None,
                 "severe_drawdown_brier": None,
                 "launch_decision_accuracy": None,
+                "launch_action_error_mean": None,
+                "launch_action_score": None,
+                "launch_overrisk_rate": None,
+                "launch_underrisk_rate": None,
+                "bad_action_avoidance_rate": None,
+                "constructive_capture_rate": None,
                 "validity_read": "",
                 "realized_return": _optional_float(row.get("realized_return")),
                 "realized_max_drawdown": _optional_float(row.get("realized_max_drawdown")),
@@ -2072,11 +2133,46 @@ def _simulation_validation_origin_metric_rows(
                 ),
                 "simulated_launch_decision": str(row.get("simulated_launch_decision", "")),
                 "realized_launch_decision": str(row.get("realized_launch_decision", "")),
+                "simulated_launch_action": _optional_int(row.get("simulated_launch_action")),
+                "realized_launch_action": _optional_int(row.get("realized_launch_action")),
+                "launch_action_error": _optional_int(row.get("launch_action_error")),
+                "launch_overrisk": _optional_bool(row.get("launch_overrisk")),
+                "launch_underrisk": _optional_bool(row.get("launch_underrisk")),
+                "avoided_bad_launch_action": _optional_bool(row.get("avoided_bad_launch_action")),
+                "captured_constructive_launch": _optional_bool(
+                    row.get("captured_constructive_launch")
+                ),
                 "uses_duration_aware_transitions": None,
                 "uses_covariate_matching": None,
                 "uses_factor_proxy": None,
             }
         )
+    return rows
+
+
+def _simulation_horizon_summary_metric_rows(
+    *,
+    validation_run_id: str,
+    created_at_utc: str,
+    strategy: str,
+    horizon_summary: pd.DataFrame,
+) -> list[dict[str, object]]:
+    rows: list[dict[str, object]] = []
+    for _, row in horizon_summary.iterrows():
+        horizon = str(row.get("horizon", ""))
+        metric = _simulation_validation_summary_metric_row(
+            validation_run_id=validation_run_id,
+            created_at_utc=created_at_utc,
+            strategy=strategy,
+            metric_scope="horizon_summary",
+            variant="current_engine",
+            label=f"{horizon} horizon",
+            summary=row.to_dict(),
+        )
+        metric["metric_id"] = f"{validation_run_id}:horizon_summary:current_engine:{horizon}"
+        metric["horizon"] = horizon
+        metric["horizon_days"] = _optional_int(row.get("horizon_days"))
+        rows.append(metric)
     return rows
 
 

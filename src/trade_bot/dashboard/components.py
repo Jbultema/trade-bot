@@ -120,6 +120,25 @@ def _render_metric_dataframe(
     st.dataframe(frame, **kwargs)
 
 
+def _render_runtime_notice(
+    title: str,
+    detail: str,
+    *,
+    tone: str = "warning",
+) -> None:
+    safe_tone = tone if tone in {"neutral", "warning", "critical", "success"} else "warning"
+    st.markdown(
+        f"""
+        <div class="runtime-notice runtime-notice-{safe_tone}">
+            <span class="runtime-notice-kicker">Runtime note</span>
+            <strong>{html.escape(title)}</strong>
+            <p>{html.escape(detail)}</p>
+        </div>
+        """,
+        unsafe_allow_html=True,
+    )
+
+
 def _render_metric_guide() -> None:
     with st.expander("Metric Guide", expanded=False):
         st.caption(

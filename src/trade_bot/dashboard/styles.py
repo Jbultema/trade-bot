@@ -344,7 +344,7 @@ def _install_dashboard_styles() -> None:
         }
         .workbench-guide-grid {
             display: grid;
-            grid-template-columns: repeat(3, minmax(0, 1fr));
+            grid-template-columns: repeat(4, minmax(0, 1fr));
             gap: 10px;
         }
         .workbench-guide-grid div {
@@ -368,6 +368,53 @@ def _install_dashboard_styles() -> None:
             color: var(--tb-card-text);
             font-size: 0.89rem;
             line-height: 1.38;
+        }
+        .runtime-notice {
+            margin: 8px 0 14px;
+            padding: 12px 14px;
+            border: 1px solid var(--tb-card-border);
+            border-left: 5px solid var(--tb-card-border);
+            border-radius: 8px;
+            background: var(--tb-card-bg);
+            color: var(--tb-card-text);
+            box-shadow: var(--tb-shadow-soft);
+        }
+        .runtime-notice-warning {
+            border-left-color: var(--tb-warning-border);
+            background: var(--tb-warning-bg);
+        }
+        .runtime-notice-critical {
+            border-left-color: var(--tb-critical-border);
+            background: var(--tb-critical-bg);
+        }
+        .runtime-notice-success {
+            border-left-color: var(--tb-success-border);
+            background: var(--tb-success-bg);
+        }
+        .runtime-notice-neutral {
+            border-left-color: var(--tb-accent);
+            background: color-mix(in srgb, var(--tb-accent) 7%, var(--tb-card-bg));
+        }
+        .runtime-notice-kicker {
+            display: block;
+            margin: 0 0 4px;
+            color: var(--tb-card-muted);
+            font-size: 0.72rem;
+            font-weight: 850;
+            line-height: 1.15;
+            text-transform: uppercase;
+        }
+        .runtime-notice strong {
+            display: block;
+            margin: 0 0 4px;
+            font-size: 1.02rem;
+            line-height: 1.25;
+        }
+        .runtime-notice p {
+            margin: 0;
+            color: var(--tb-card-text);
+            font-size: 0.92rem;
+            line-height: 1.42;
         }
         .metric-info-rail {
             margin: 8px 0 12px;
@@ -498,7 +545,7 @@ def _install_dashboard_styles() -> None:
         }
         .simulation-validation-grid {
             display: grid;
-            grid-template-columns: repeat(5, minmax(0, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
             gap: 14px;
             margin: 0 0 18px;
         }
@@ -1256,6 +1303,9 @@ def _install_dashboard_styles() -> None:
             }
             .workbench-guide {
                 grid-template-columns: 1fr;
+            }
+            .workbench-guide-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
             }
             .st-key-quick_reference_rail {
                 position: static;

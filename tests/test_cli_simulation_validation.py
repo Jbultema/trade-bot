@@ -74,7 +74,8 @@ def test_validate_simulation_engine_command_writes_validation_outputs(
     metrics = warehouse.read_table("simulation_validation_metrics")
     assert len(runs) == 1
     assert runs.iloc[0]["strategy"] == "strategy_a"
-    assert {"primary_summary", "rolling_origin", "ablation_summary"}.issubset(
+    assert {"primary_summary", "horizon_summary", "rolling_origin", "ablation_summary"}.issubset(
         set(metrics["metric_scope"])
     )
+    assert "launch_action_score" in metrics
     assert "duration_covariate" in set(metrics["variant"])

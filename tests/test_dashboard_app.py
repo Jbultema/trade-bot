@@ -8,6 +8,8 @@ import pandas as pd
 import pytest
 from streamlit.testing.v1 import AppTest
 
+import trade_bot.dashboard.launch_lab as launch_lab_module
+import trade_bot.dashboard.research_lab as research_lab_module
 import trade_bot.dashboard.simulation_lab as simulation_lab_module
 import trade_bot.research.baselines as baselines_module
 import trade_bot.storage.run_store as run_store_module
@@ -147,6 +149,44 @@ def test_simulation_lab_strategy_selector_renders_before_lazy_internal_view() ->
     assert source.index("_selected_simulation_strategy(") < source.index("st.pills(")
     assert "Simulation Lab view" in source
     assert "st.tabs(" not in source
+
+
+def test_strategy_simulations_gate_expensive_path_engines() -> None:
+    source = inspect.getsource(simulation_lab_module._render_strategy_simulations)
+
+    assert "Load bootstrap and regime path simulations" in source
+    assert source.index("Load bootstrap and regime path simulations") < source.index(
+        "_cached_bootstrap_paths("
+    )
+    assert source.index("Load bootstrap and regime path simulations") < source.index(
+        "_cached_regime_forward_paths("
+    )
+    assert "Quick (150 paths)" in source
+    assert "Include reference overlays" in source
+    assert "Include factor-proxy diagnostics" in source
+    assert 'default=[]' in source
+
+
+def test_launch_lab_uses_lazy_internal_views_for_heavy_sections() -> None:
+    source = inspect.getsource(launch_lab_module._render_launch_lab)
+
+    assert "Launch Lab view" in source
+    assert "st.tabs(" not in source
+    assert source.index("Launch Lab view") < source.index("_build_aggregate_launch_run(")
+    assert "Building aggregate launch read" in source
+
+
+def test_research_lab_optional_diagnostics_are_explicit_load() -> None:
+    source = inspect.getsource(research_lab_module._render_research_lab)
+
+    assert "Load ML diagnostics" in source
+    assert "Load signal inclusion tests" in source
+    assert "st.expander(\"ML diagnostics\"" not in source
+    assert "st.expander(\"Signal inclusion tests\"" not in source
+    assert source.index("Load ML diagnostics") < source.index("_render_ml_diagnostics()")
+    assert source.index("Load signal inclusion tests") < source.index(
+        "_render_signal_inclusion(baseline_run)"
+    )
 
 
 def test_market_brief_report_summarizes_market_news_and_scenarios() -> None:

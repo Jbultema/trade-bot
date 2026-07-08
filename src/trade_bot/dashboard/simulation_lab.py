@@ -13,6 +13,7 @@ from trade_bot.dashboard.components import (
     _clearable_selectbox,
     _helped_metric,
     _render_metric_dataframe,
+    _render_runtime_notice,
 )
 from trade_bot.dashboard.formatting import (
     _display_metrics,
@@ -106,6 +107,7 @@ def _render_simulation_lab(
         )
         or "Future-State Map"
     )
+    _render_simulation_view_runtime_notice(simulation_view)
 
     if simulation_view == "Future-State Map":
         _render_future_state_map(baseline_run, scenario_source, probabilities)
@@ -130,6 +132,37 @@ def _render_simulation_lab(
             baseline_run=baseline_run,
             scenario_source=scenario_source,
             probabilities=probabilities,
+        )
+
+
+def _render_simulation_view_runtime_notice(simulation_view: str) -> None:
+    if simulation_view == "Strategy Simulations":
+        _render_runtime_notice(
+            "Strategy Simulations can be slow on first render",
+            (
+                "Changing the selected strategy or reference overlays can recompute cached "
+                "bootstrap, regime-conditioned, and factor-proxy path summaries. Repeat views "
+                "should be faster while the cache is warm."
+            ),
+            tone="warning",
+        )
+    elif simulation_view == "Validation History":
+        _render_runtime_notice(
+            "Validation History reads persisted DuckDB metrics",
+            (
+                "This is usually faster than rerunning validation, but large origin-level "
+                "history tables and charts can still take a moment to render."
+            ),
+            tone="neutral",
+        )
+    elif simulation_view == "Interpretability":
+        _render_runtime_notice(
+            "Interpretability renders several diagnostic tables",
+            (
+                "This view is meant for deeper review. It avoids rerunning validation, but it "
+                "does render resemblance, regime, method, and scenario diagnostics together."
+            ),
+            tone="neutral",
         )
 
 
@@ -180,6 +213,11 @@ def _render_simulation_validation_history(
         metric_scope="rolling_origin",
         limit=500,
     )
+    horizon_metrics = warehouse.simulation_validation_metrics(
+        validation_run_id=latest_run_id,
+        metric_scope="horizon_summary",
+        limit=50,
+    )
 
     primary_row = (
         primary_metrics.iloc[0] if not primary_metrics.empty else pd.Series(runs.iloc[0].to_dict())
@@ -190,6 +228,7 @@ def _render_simulation_validation_history(
         latest_ablation=latest_ablation,
         origin_metrics=origin_metrics,
     )
+    _render_simulation_horizon_summary(horizon_metrics)
 
     visual_cols = st.columns([1.25, 1.0])
     with visual_cols[0]:
@@ -243,6 +282,9 @@ def _render_simulation_validation_history(
             "median_abs_error",
             "severe_drawdown_brier",
             "launch_decision_accuracy",
+            "launch_action_score",
+            "launch_overrisk_rate",
+            "constructive_capture_rate",
             "validity_read",
         ]
         _render_metric_dataframe(
@@ -275,6 +317,8 @@ def _render_simulation_validation_history(
             "coverage_error",
             "median_abs_error",
             "launch_decision_accuracy",
+            "launch_action_score",
+            "launch_overrisk_rate",
             "validity_read",
         ]
         _render_metric_dataframe(
@@ -301,6 +345,9 @@ def _render_simulation_validation_history(
         "p50_error",
         "simulated_launch_decision",
         "realized_launch_decision",
+        "launch_action_error",
+        "launch_overrisk",
+        "captured_constructive_launch",
     ]
     origin_display = origin_metrics[
         [column for column in origin_columns if column in origin_metrics]
@@ -312,6 +359,35 @@ def _render_simulation_validation_history(
     )
     _render_metric_dataframe(
         _display_metrics(origin_display),
+        hide_index=True,
+    )
+
+
+def _render_simulation_horizon_summary(horizon_metrics: pd.DataFrame) -> None:
+    if horizon_metrics.empty:
+        st.info(
+            "This validation run does not include per-horizon summary metrics yet. "
+            "Re-run validation with the latest CLI to populate them."
+        )
+        return
+    st.caption("Latest per-horizon readout")
+    display_columns = [
+        "horizon",
+        "rows",
+        "interval_coverage",
+        "target_coverage",
+        "coverage_error",
+        "median_abs_error",
+        "launch_decision_accuracy",
+        "launch_action_score",
+        "launch_overrisk_rate",
+        "constructive_capture_rate",
+        "validity_read",
+    ]
+    _render_metric_dataframe(
+        _display_metrics(
+            horizon_metrics[[column for column in display_columns if column in horizon_metrics]]
+        ),
         hide_index=True,
     )
 
@@ -328,6 +404,9 @@ def _render_simulation_validation_conclusion(
     coverage_error = _safe_float(primary_row.get("coverage_error"))
     median_abs_error = _safe_float(primary_row.get("median_abs_error"))
     launch_accuracy = _safe_float(primary_row.get("launch_decision_accuracy"))
+    launch_action_score = _safe_float(primary_row.get("launch_action_score"))
+    launch_overrisk_rate = _safe_float(primary_row.get("launch_overrisk_rate"))
+    constructive_capture_rate = _safe_float(primary_row.get("constructive_capture_rate"))
     validity_read = str(
         primary_row.get("validity_read") or latest_run.get("primary_validity_read", "")
     )
@@ -348,6 +427,8 @@ def _render_simulation_validation_conclusion(
             coverage_error=coverage_error,
             median_abs_error=median_abs_error,
             launch_accuracy=launch_accuracy,
+            launch_action_score=launch_action_score,
+            launch_overrisk_rate=launch_overrisk_rate,
             detail=plain_english_read,
         ),
         unsafe_allow_html=True,
@@ -359,6 +440,9 @@ def _render_simulation_validation_conclusion(
             coverage_error=coverage_error,
             median_abs_error=median_abs_error,
             launch_accuracy=launch_accuracy,
+            launch_action_score=launch_action_score,
+            launch_overrisk_rate=launch_overrisk_rate,
+            constructive_capture_rate=constructive_capture_rate,
             interval_share=interval_share,
         ),
         unsafe_allow_html=True,
@@ -419,12 +503,16 @@ def _simulation_validation_verdict_card(
     coverage_error: float | None,
     median_abs_error: float | None,
     launch_accuracy: float | None,
+    launch_action_score: float | None,
+    launch_overrisk_rate: float | None,
     detail: str,
 ) -> str:
     verdict = _simulation_validation_verdict(
         coverage_error=coverage_error,
         median_abs_error=median_abs_error,
         launch_accuracy=launch_accuracy,
+        launch_action_score=launch_action_score,
+        launch_overrisk_rate=launch_overrisk_rate,
     )
     escaped_title = html.escape(verdict["title"])
     escaped_copy = html.escape(verdict["copy"])
@@ -446,11 +534,15 @@ def _simulation_validation_verdict(
     coverage_error: float | None,
     median_abs_error: float | None,
     launch_accuracy: float | None,
+    launch_action_score: float | None,
+    launch_overrisk_rate: float | None,
 ) -> dict[str, str]:
     coverage_status = _simulation_validation_metric_status("coverage", coverage_error)
     median_status = _simulation_validation_metric_status("median", median_abs_error)
     launch_status = _simulation_validation_metric_status("launch", launch_accuracy)
-    if launch_status == "bad":
+    action_score_status = _simulation_validation_metric_status("action_score", launch_action_score)
+    over_risk_status = _simulation_validation_metric_status("overrisk", launch_overrisk_rate)
+    if launch_status == "bad" or action_score_status == "bad" or over_risk_status == "bad":
         return {
             "status": "bad",
             "title": "Research-useful, not decision-ready",
@@ -468,7 +560,13 @@ def _simulation_validation_verdict(
                 "simulation engine is ready to influence allocations."
             ),
         }
-    if "warn" in {coverage_status, median_status, launch_status}:
+    if "warn" in {
+        coverage_status,
+        median_status,
+        launch_status,
+        action_score_status,
+        over_risk_status,
+    }:
         return {
             "status": "warn",
             "title": "Useful, but still only a planning range",
@@ -494,6 +592,9 @@ def _simulation_validation_metric_cards(
     coverage_error: float | None,
     median_abs_error: float | None,
     launch_accuracy: float | None,
+    launch_action_score: float | None,
+    launch_overrisk_rate: float | None,
+    constructive_capture_rate: float | None,
     interval_share: float | None,
 ) -> str:
     cards = [
@@ -519,7 +620,25 @@ def _simulation_validation_metric_cards(
             label="Go/no-go accuracy",
             value=_format_percent(launch_accuracy),
             status=_simulation_validation_metric_status("launch", launch_accuracy),
-            read="Whether the simulated launch call matched history",
+            read="Exact wait/ramp/full hindsight match",
+        ),
+        _simulation_validation_metric_card(
+            label="Action score",
+            value=_format_percent(launch_action_score),
+            status=_simulation_validation_metric_status("action_score", launch_action_score),
+            read="Partial credit for being one step off",
+        ),
+        _simulation_validation_metric_card(
+            label="Over-risk rate",
+            value=_format_percent(launch_overrisk_rate),
+            status=_simulation_validation_metric_status("overrisk", launch_overrisk_rate),
+            read="How often simulated action was too aggressive",
+        ),
+        _simulation_validation_metric_card(
+            label="Constructive capture",
+            value=_format_percent(constructive_capture_rate),
+            status=_simulation_validation_metric_status("capture", constructive_capture_rate),
+            read="Did it participate when hindsight was constructive",
         ),
         _simulation_validation_metric_card(
             label="Origins in band",
@@ -572,6 +691,24 @@ def _simulation_validation_metric_status(metric: str, value: float | None) -> st
         if value >= 0.60:
             return "good"
         if value >= 0.40:
+            return "warn"
+        return "bad"
+    if metric == "action_score":
+        if value >= 0.75:
+            return "good"
+        if value >= 0.55:
+            return "warn"
+        return "bad"
+    if metric == "overrisk":
+        if value <= 0.25:
+            return "good"
+        if value <= 0.45:
+            return "warn"
+        return "bad"
+    if metric == "capture":
+        if value >= 0.75:
+            return "good"
+        if value >= 0.55:
             return "warn"
         return "bad"
     return "neutral"
@@ -1003,6 +1140,7 @@ def _reference_simulations(
     reference_options: pd.DataFrame,
     selected_reference_labels: list[str],
     scenario_source: pd.DataFrame,
+    path_count: int,
 ) -> list[dict[str, object]]:
     if reference_options.empty or not selected_reference_labels:
         return []
@@ -1019,8 +1157,12 @@ def _reference_simulations(
         returns = _returns_tuple(result)
         if len(returns) < 30:
             continue
-        bootstrap_paths = _cached_bootstrap_paths(returns)
-        forward_paths = _cached_regime_forward_paths(returns, _scenario_records(scenario_source))
+        bootstrap_paths = _cached_bootstrap_paths(returns, path_count)
+        forward_paths = _cached_regime_forward_paths(
+            returns,
+            _scenario_records(scenario_source),
+            path_count,
+        )
         simulations.append(
             {
                 "strategy": strategy_name,
@@ -1031,7 +1173,7 @@ def _reference_simulations(
                 "forward_paths": forward_paths,
                 "forward_summary": summarize_forward_simulation(
                     forward_paths,
-                    config=ForwardSimulationConfig(),
+                    config=ForwardSimulationConfig(paths=path_count),
                 ),
                 "result": result,
                 "color": colors[position % len(colors)],
@@ -1070,39 +1212,109 @@ def _render_strategy_simulations(
         return
 
     deterministic_wealth = _deterministic_wealth(selected_scorecard, selected_result)
-    bootstrap_paths = _cached_bootstrap_paths(_returns_tuple(selected_result))
-    bootstrap_summary = summarize_bootstrap_outcomes(bootstrap_paths)
-    forward_paths = _cached_regime_forward_paths(
-        _returns_tuple(selected_result),
-        _scenario_records(scenario_source),
+    historical_metrics = _historical_result_metrics(selected_result)
+    fast_cols = st.columns(5)
+    _helped_metric(fast_cols[0], "Deterministic 15Y", _format_currency(deterministic_wealth))
+    _helped_metric(fast_cols[1], "Historical CAGR", _format_percent(historical_metrics["cagr"]))
+    _helped_metric(
+        fast_cols[2],
+        "Historical Max DD",
+        _format_percent(historical_metrics["max_drawdown"]),
     )
+    _helped_metric(
+        fast_cols[3],
+        "Historical Ulcer",
+        _format_percent(historical_metrics["ulcer_index"]),
+    )
+    _helped_metric(fast_cols[4], "Return Days", f"{len(daily_returns):,}")
+
+    _render_runtime_notice(
+        "Path simulations are explicit-load",
+        (
+            "The fast read above avoids Monte Carlo work. Turn on path simulations when you "
+            "need the bootstrap/regime fan charts; reference overlays and factor-proxy paths "
+            "add additional compute."
+        ),
+        tone="warning",
+    )
+    load_path_simulations = st.toggle(
+        "Load bootstrap and regime path simulations",
+        value=False,
+        key="simulation_lab_load_path_simulations",
+        help=(
+            "Runs cached bootstrap and regime-conditioned simulations for the selected strategy. "
+            "First render after a strategy change can still take a moment."
+        ),
+    )
+    if not load_path_simulations:
+        st.info(
+            "Path simulations are paused so this page stays responsive. Turn on the loader above "
+            "when you are ready to wait for the distribution charts."
+        )
+        return
+
+    simulation_profile = st.radio(
+        "Simulation path budget",
+        ["Quick (150 paths)", "Standard (600 paths)"],
+        index=0,
+        horizontal=True,
+        key="simulation_lab_path_budget",
+        help="Quick is intended for interactive review. Standard matches the default planning path count.",
+    )
+    path_count = 150 if simulation_profile.startswith("Quick") else 600
+    include_reference_overlays = st.toggle(
+        "Include reference overlays",
+        value=False,
+        key="simulation_lab_include_reference_overlays",
+        help="Adds SPY/QQQ-style reference simulations. Useful, but each selected reference adds more work.",
+    )
+    include_factor_proxy = st.toggle(
+        "Include factor-proxy diagnostics",
+        value=False,
+        key="simulation_lab_include_factor_proxy",
+        help="Fits factor proxies and simulates factor-conditioned paths. This is the slowest optional layer.",
+    )
+
+    with st.spinner(f"Running {path_count:,} path bootstrap and regime simulations..."):
+        bootstrap_paths = _cached_bootstrap_paths(_returns_tuple(selected_result), path_count)
+        forward_paths = _cached_regime_forward_paths(
+            _returns_tuple(selected_result),
+            _scenario_records(scenario_source),
+            path_count,
+        )
+    bootstrap_summary = summarize_bootstrap_outcomes(bootstrap_paths)
     forward_summary = summarize_forward_simulation(
         forward_paths,
-        config=ForwardSimulationConfig(),
+        config=ForwardSimulationConfig(paths=path_count),
     )
-    factor_inputs = _factor_simulation_inputs(selected_result, baseline_run.prices)
+    factor_inputs = (
+        _factor_simulation_inputs(selected_result, baseline_run.prices)
+        if include_factor_proxy
+        else None
+    )
     factor_paths = (
         _cached_factor_forward_paths(
             factor_inputs[0],
             factor_inputs[1],
             factor_inputs[2],
             _scenario_records(scenario_source),
+            path_count,
         )
         if factor_inputs is not None
         else pd.DataFrame()
     )
     factor_summary = (
-        summarize_forward_simulation(factor_paths, config=ForwardSimulationConfig())
+        summarize_forward_simulation(factor_paths, config=ForwardSimulationConfig(paths=path_count))
         if not factor_paths.empty
         else {}
     )
     reference_options = _reference_option_frame(baseline_run, selected_strategy)
     selected_reference_labels: list[str] = []
-    if not reference_options.empty:
+    if include_reference_overlays and not reference_options.empty:
         selected_reference_labels = st.multiselect(
             "Reference overlays",
             reference_options["label"].tolist(),
-            default=reference_options["label"].head(2).tolist(),
+            default=[],
             help=(
                 "Compare this strategy against major do-nothing references using the same "
                 "bootstrap and regime-conditioned simulation settings."
@@ -1114,6 +1326,7 @@ def _render_strategy_simulations(
         reference_options=reference_options,
         selected_reference_labels=selected_reference_labels,
         scenario_source=scenario_source,
+        path_count=path_count,
     )
 
     cols = st.columns(6)
@@ -1848,10 +2061,18 @@ def _render_simulation_interpretability(
 
     deterministic_wealth = _deterministic_wealth(selected_scorecard, selected_result)
     return_values = _returns_tuple(selected_result)
-    bootstrap_paths = _cached_bootstrap_paths(return_values)
+    path_count = 150
+    bootstrap_paths = _cached_bootstrap_paths(return_values, path_count)
     bootstrap_summary = summarize_bootstrap_outcomes(bootstrap_paths)
-    forward_paths = _cached_regime_forward_paths(return_values, _scenario_records(scenario_source))
-    forward_summary = summarize_forward_simulation(forward_paths, config=ForwardSimulationConfig())
+    forward_paths = _cached_regime_forward_paths(
+        return_values,
+        _scenario_records(scenario_source),
+        path_count,
+    )
+    forward_summary = summarize_forward_simulation(
+        forward_paths,
+        config=ForwardSimulationConfig(paths=path_count),
+    )
     reference_options = _reference_option_frame(baseline_run, selected_strategy)
     reference_simulations = _reference_simulations(
         baseline_run=baseline_run,
@@ -1860,6 +2081,7 @@ def _render_simulation_interpretability(
             reference_options["label"].head(2).tolist() if not reference_options.empty else []
         ),
         scenario_source=scenario_source,
+        path_count=path_count,
     )
     validation_row = _simulation_validation_row(
         label="Selected strategy",
@@ -2163,9 +2385,9 @@ def _scenario_records(scenario_source: pd.DataFrame) -> tuple[tuple[str, float],
 
 
 @st.cache_data(show_spinner=False, max_entries=64)
-def _cached_bootstrap_paths(return_values: tuple[float, ...]) -> pd.DataFrame:
+def _cached_bootstrap_paths(return_values: tuple[float, ...], path_count: int) -> pd.DataFrame:
     return bootstrap_outcome_paths(
-        pd.Series(return_values, dtype=float), config=OutcomeBootstrapConfig()
+        pd.Series(return_values, dtype=float), config=OutcomeBootstrapConfig(paths=path_count)
     )
 
 
@@ -2173,6 +2395,7 @@ def _cached_bootstrap_paths(return_values: tuple[float, ...]) -> pd.DataFrame:
 def _cached_regime_forward_paths(
     return_values: tuple[float, ...],
     scenario_records: tuple[tuple[str, float], ...],
+    path_count: int,
 ) -> pd.DataFrame:
     scenario_frame = pd.DataFrame(
         [
@@ -2183,7 +2406,7 @@ def _cached_regime_forward_paths(
     return simulate_regime_conditioned_paths(
         pd.Series(return_values, dtype=float),
         scenario_outlook=scenario_frame,
-        config=ForwardSimulationConfig(),
+        config=ForwardSimulationConfig(paths=path_count),
     )
 
 
@@ -2193,6 +2416,7 @@ def _cached_factor_forward_paths(
     factor_columns: tuple[str, ...],
     factor_rows: tuple[tuple[float, ...], ...],
     scenario_records: tuple[tuple[str, float], ...],
+    path_count: int,
 ) -> pd.DataFrame:
     if not return_values or not factor_columns or not factor_rows:
         return pd.DataFrame()
@@ -2207,7 +2431,7 @@ def _cached_factor_forward_paths(
         pd.Series(return_values, dtype=float),
         factor_frame,
         scenario_outlook=scenario_frame,
-        config=ForwardSimulationConfig(),
+        config=ForwardSimulationConfig(paths=path_count),
     )
 
 

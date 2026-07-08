@@ -18,6 +18,12 @@ def test_dashboard_section_guides_cover_default_sections() -> None:
         assert guide.primary_question.endswith("?")
         assert guide.first_read
         assert guide.next_step
+        assert guide.runtime
+        assert guide.runtime_note
+
+    assert section_guide("Simulation Lab").runtime == "Heavy"
+    assert section_guide("Launch Lab").runtime == "Heavy"
+    assert section_guide("Research Lab").runtime == "Heavy"
 
 
 def test_unknown_section_falls_back_to_command_center_guide() -> None:

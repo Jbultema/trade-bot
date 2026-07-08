@@ -17,6 +17,8 @@ class DashboardSectionGuide:
     first_read: str
     next_step: str
     tone: str = "neutral"
+    runtime: str = "Normal"
+    runtime_note: str = "Reads precomputed snapshot data; most interactions should feel quick."
 
 
 _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
@@ -28,6 +30,7 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         first_read="Trade decision, target weights, and material deltas.",
         next_step="Move to Forward Test only after the recommendation is worth paper/live execution.",
         tone="critical",
+        runtime="Fast",
     ),
     "Risk & Scenarios": DashboardSectionGuide(
         name="Risk & Scenarios",
@@ -37,6 +40,8 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         first_read="Risk constraints, scenario budget, factor exposure, expected shortfall.",
         next_step="Use the constraints to decide whether the trade plan is a signal or a risk-control action.",
         tone="warning",
+        runtime="Medium",
+        runtime_note="Several charts and stress tables render from the loaded snapshot; custom slices can take a moment.",
     ),
     "Simulation Lab": DashboardSectionGuide(
         name="Simulation Lab",
@@ -46,6 +51,11 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         first_read="Future-state map, simulation assumptions, selected-strategy path ranges.",
         next_step="Use Research Lab for evidence, Monitoring for forward proof, and Forward Test for tickets.",
         tone="success",
+        runtime="Heavy",
+        runtime_note=(
+            "Strategy simulations run cached bootstrap, regime, and factor-path summaries; "
+            "changing strategy or overlays can trigger a slower first render."
+        ),
     ),
     "Launch Lab": DashboardSectionGuide(
         name="Launch Lab",
@@ -61,6 +71,11 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
             "use Book Alignment for daily drift."
         ),
         tone="warning",
+        runtime="Heavy",
+        runtime_note=(
+            "Aggregate launch reads test many strategies and horizons; use the internal view picker "
+            "to load only the subview you need."
+        ),
     ),
     "Research Lab": DashboardSectionGuide(
         name="Research Lab",
@@ -70,6 +85,11 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         first_read="Overview, Leaderboard, Curated Shelf, Outcome Frontier, then Candidate Details.",
         next_step="Inspect candidates only after aggregate ranking, then confirm validation and QC tabs.",
         tone="success",
+        runtime="Heavy",
+        runtime_note=(
+            "Outcome frontier, signal evidence, taxable impact, candidate deep dives, and optional "
+            "diagnostics are table/chart heavy."
+        ),
     ),
     "Monitoring": DashboardSectionGuide(
         name="Monitoring",
@@ -79,6 +99,8 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         first_read="Champion/challenger table, active windows, shortfall/drift, references.",
         next_step="Keep collecting evidence, demote stale windows, and review implementation drift.",
         tone="success",
+        runtime="Medium",
+        runtime_note="Reads paper valuation history from local storage; larger monitoring histories may take a moment.",
     ),
     "News & Macro": DashboardSectionGuide(
         name="News & Macro",
@@ -88,6 +110,8 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         first_read="Driver Rotation, event triage, macro pressure, narrative diagnostics.",
         next_step="Treat unproven items as watch context until signal evidence supports trading impact.",
         tone="warning",
+        runtime="Medium",
+        runtime_note="Narrative and macro tables are precomputed, but the section renders many explanatory cards.",
     ),
     "Performance": DashboardSectionGuide(
         name="Performance",
@@ -97,6 +121,8 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         first_read="Windowed growth, drawdown, custom start/end, benchmark comparison.",
         next_step="If recent behavior diverges from long-run behavior, inspect Research Lab and Monitoring.",
         tone="neutral",
+        runtime="Medium",
+        runtime_note="Custom date windows reconstruct histories for selected approaches; broad selections are slower.",
     ),
     "Forward Test": DashboardSectionGuide(
         name="Forward Test",
@@ -106,6 +132,8 @@ _SECTION_GUIDES: dict[str, DashboardSectionGuide] = {
         first_read="Locked tickets, execution log, current paper/live book alignment.",
         next_step="Record exact executions so monitoring and taxable lots can reconcile later.",
         tone="critical",
+        runtime="Medium",
+        runtime_note="Journal and tax-lot views read local ledgers; expanded tables can be slower on long histories.",
     ),
 }
 
@@ -181,6 +209,10 @@ def _section_guide_html(guide: DashboardSectionGuide) -> str:
                     <span>Next step</span>
                     <p>{guide.next_step}</p>
                 </div>
+                <div>
+                    <span>Runtime</span>
+                    <p><strong>{guide.runtime}</strong>: {guide.runtime_note}</p>
+                </div>
             </div>
         </div>
     </div>
@@ -194,6 +226,7 @@ def _section_map_frame(guides: Iterable[DashboardSectionGuide]) -> list[dict[str
             "answers": guide.primary_question,
             "read_first": guide.first_read,
             "use_when": guide.use_when,
+            "runtime": guide.runtime,
         }
         for guide in guides
     ]
