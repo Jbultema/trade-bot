@@ -374,6 +374,7 @@ class TradingWarehouse:
             raise ValueError(f"Strategy is not registered: {strategy_name}")
         row = match.iloc[0]
         strategy_id = str(row["strategy_id"])
+        requested_start_date = _normalize_monitoring_start_date(start_date)
 
         existing = self.list_monitoring_windows(status=None)
         if not existing.empty:
@@ -383,6 +384,10 @@ class TradingWarehouse:
                 & (existing["strategy_id"].astype(str) == strategy_id)
                 & (existing["status"].astype(str) == "active")
             ]
+            if start_date is not None:
+                existing_active = existing_active[
+                    existing_active["start_date"].astype(str) == requested_start_date
+                ]
             if not existing_active.empty:
                 window = existing_active.sort_values(["start_date", "created_at_utc"]).iloc[-1]
                 self.update_monitoring_window(
@@ -400,7 +405,7 @@ class TradingWarehouse:
                     role=role,
                 )
 
-        today = _normalize_monitoring_start_date(start_date)
+        today = requested_start_date
         window_id = self._unique_monitoring_window_id(
             _monitoring_window_id(mode, account, strategy_id, today)
         )
@@ -700,22 +705,24 @@ class TradingWarehouse:
         ]:
             if column not in merged:
                 merged[column] = float("nan")
+        merged["snapshot_ready_rank"] = merged["snapshot_calmar"].isna().astype(int)
         merged["monitoring_sort_score"] = (
-            merged["growth_constrained_utility_score"]
-            .fillna(merged["snapshot_calmar"])
+            merged["snapshot_calmar"]
+            .fillna(merged["growth_constrained_utility_score"])
             .fillna(merged["selection_adjusted_promotion_score"])
             .fillna(merged["promotion_score"])
         )
         return merged.sort_values(
             [
                 "status_rank",
-                "validation_rank",
+                "snapshot_ready_rank",
                 "monitoring_sort_score",
+                "validation_rank",
                 "selection_adjusted_promotion_score",
                 "promotion_score",
                 "strategy_name",
             ],
-            ascending=[True, True, False, False, False, True],
+            ascending=[True, True, False, True, False, False, True],
             na_position="last",
         )
 
@@ -2141,12 +2148,7 @@ def _select_monitoring_rows(ranked_rows: pd.DataFrame, limit: int) -> pd.DataFra
     limit = max(int(limit), 0)
     if limit == 0:
         return ranked_rows.head(0).copy()
-    experiment_rows = ranked_rows[ranked_rows["source"].astype(str) == "experiment_scorecard"]
-    if len(experiment_rows) >= limit:
-        return select_curated_strategy_shelf(experiment_rows, limit=limit)
-    remainder = ranked_rows.drop(index=experiment_rows.index)
-    combined = pd.concat([experiment_rows, remainder], ignore_index=True)
-    return select_curated_strategy_shelf(combined, limit=limit)
+    return select_curated_strategy_shelf(ranked_rows, limit=limit)
 
 
 def _clean_identifier_series(values: pd.Series) -> pd.Series:

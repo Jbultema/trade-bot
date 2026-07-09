@@ -417,6 +417,63 @@ def test_warehouse_surfaces_and_seeds_top_5_experiment_candidates(tmp_path) -> N
     assert int((expanded_windows["window_role"] == "challenger").sum()) == 5
 
 
+def test_warehouse_top_monitoring_candidates_include_snapshot_runtime_leaders(
+    tmp_path,
+) -> None:
+    experiment_dir = tmp_path / "experiments"
+    iteration_dir = experiment_dir / "iteration_40"
+    iteration_dir.mkdir(parents=True)
+    pd.DataFrame(
+        [
+            {
+                "strategy": "older_promoted_candidate",
+                "phase": "operating_system",
+                "family": "legacy",
+                "role": "candidate",
+                "promotion_decision": "promote_candidate",
+                "promotion_score": 0.90,
+                "robustness_score": 0.80,
+                "cagr": 0.14,
+                "sharpe": 1.0,
+                "max_drawdown": -0.20,
+                "calmar": 0.70,
+                "average_turnover": 0.04,
+                "walk_forward_positive_rate": 0.8,
+                "left_tail_regime_return": -0.08,
+                "hypothesis": "Older promoted candidate.",
+            }
+        ]
+    ).to_csv(iteration_dir / "scorecard.csv", index=False)
+
+    warehouse = TradingWarehouse(tmp_path / "trade_bot.duckdb")
+    warehouse.migrate_experiment_outputs(experiment_dir)
+    warehouse.refresh_strategy_registry_from_snapshot(
+        SimpleNamespace(
+            metrics=pd.DataFrame(
+                [
+                    {
+                        "strategy": "runtime_frontier_candidate",
+                        "cagr": 0.22,
+                        "sharpe": 1.1,
+                        "max_drawdown": -0.20,
+                        "calmar": 1.10,
+                        "average_turnover": 0.05,
+                    }
+                ]
+            )
+        ),
+        run_id="snapshot_frontier",
+        market_date="2026-07-08",
+    )
+
+    top_candidates = warehouse.top_monitoring_candidates(limit=2)
+
+    assert top_candidates.iloc[0]["strategy_name"] == "runtime_frontier_candidate"
+    assert top_candidates.iloc[0]["source"] == "latest_snapshot"
+    assert bool(top_candidates.iloc[0]["snapshot_valuation_ready"])
+    assert "older_promoted_candidate" in set(top_candidates["strategy_name"])
+
+
 def test_warehouse_keeps_only_core_reference_portfolios_visible_for_default_monitoring(
     tmp_path,
 ) -> None:
@@ -574,6 +631,20 @@ def test_warehouse_manually_monitors_and_values_experiment_candidate(tmp_path) -
     assert set(windows["capital_base"].astype(float)) == {10_000.0, 5_000.0}
     assert monitored.window_id != separate_champion.window_id
 
+    january_cohort = warehouse.monitor_strategy(
+        "manual_candidate",
+        role="challenger",
+        account="paper_core",
+        capital_base=10_000.0,
+        start_date="2026-01-01",
+    )
+    windows = warehouse.list_monitoring_windows(status="active")
+    paper_core_windows = windows[windows["account"].astype(str).eq("paper_core")]
+
+    assert len(paper_core_windows) == 2
+    assert set(paper_core_windows["start_date"]) == {"2026-01-01", "2026-06-15"}
+    assert january_cohort.window_id != monitored.window_id
+
     baseline_run = SimpleNamespace(
         current_state=SimpleNamespace(market_date="2026-06-18"),
         prices=pd.DataFrame(
@@ -598,8 +669,8 @@ def test_warehouse_manually_monitors_and_values_experiment_candidate(tmp_path) -
     )
     valued = warehouse.champion_challenger_frame()
 
-    assert first_rows == 2
-    assert second_rows == 2
+    assert first_rows == 3
+    assert second_rows == 3
     assert set(valued["strategy_name"]) == {"manual_candidate"}
     assert valued["valuation_date"].notna().all()
     assert valued["equity"].min() > 5_000.0

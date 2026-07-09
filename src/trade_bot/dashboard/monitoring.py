@@ -130,7 +130,7 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
         [
             "Monitoring Windows",
             "Shortfall / Drift",
-            "Top Experiments",
+            "Top Candidates",
             "Reference Portfolios",
             "Strategy Registry",
             "Warehouse Health",
@@ -158,9 +158,10 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
         _render_shortfall_and_execution_audit(str(warehouse_path), display_frame)
     with top_tab:
         st.caption(
-            f"Curated top {DEFAULT_MONITORING_TOP_N} candidates from the experiment registry. "
-            "The shelf anchors on score, then diversifies by strategy family and operating role; "
-            "research-only rows are visible, but only snapshot-ready rows can receive daily paper valuations."
+            f"Curated top {DEFAULT_MONITORING_TOP_N} candidates from latest runtime snapshots "
+            "and the experiment registry. The shelf anchors on score, then diversifies by strategy "
+            "family and operating role; research-only rows are visible, but only snapshot-ready rows "
+            "can receive daily paper valuations."
         )
         _render_monitoring_candidates(top_candidates)
     with reference_tab:
@@ -605,14 +606,14 @@ def _render_monitoring_controls(
 ) -> None:
     with st.expander("Monitoring Controls", expanded=False):
         st.write(
-            "Use this to start paper monitoring for an experiment, promote/demote roles, "
+            "Use this to start paper monitoring for a candidate, promote/demote roles, "
             "pause/close windows, or run separate champion windows with different account labels."
         )
         start_tab, manage_tab = st.tabs(["Start Monitoring", "Manage Active Windows"])
         with start_tab:
             candidate_group = st.radio(
                 "Candidate set",
-                ["Top experiments", "Reference portfolios", "All registry"],
+                ["Top candidates", "Reference portfolios", "All registry"],
                 horizontal=True,
             )
             candidates = _candidate_control_frame(
@@ -648,6 +649,9 @@ def _render_monitoring_controls(
                                     "monitoring_state",
                                     "snapshot_valuation_ready",
                                     "promotion_score",
+                                    "snapshot_cagr",
+                                    "snapshot_calmar",
+                                    "snapshot_max_drawdown",
                                     "calmar",
                                     "max_drawdown",
                                     "notes",
@@ -811,7 +815,7 @@ def _candidate_control_frame(
     top_candidates: pd.DataFrame,
     reference_candidates: pd.DataFrame,
 ) -> pd.DataFrame:
-    if candidate_group == "Top experiments":
+    if candidate_group in {"Top candidates", "Top experiments"}:
         frame = top_candidates.copy()
     elif candidate_group == "Reference portfolios":
         frame = reference_candidates.copy()
@@ -877,7 +881,7 @@ def _load_monitoring_frames(
 def _render_monitoring_candidates(top_candidates: pd.DataFrame) -> None:
     if top_candidates.empty:
         st.write(
-            "No ranked experiment candidates are available. Run `poetry run trade-bot migrate-warehouse`."
+            "No ranked monitoring candidates are available. Run `poetry run trade-bot migrate-warehouse`."
         )
         return
     columns = [
@@ -892,6 +896,10 @@ def _render_monitoring_candidates(top_candidates: pd.DataFrame) -> None:
         "promotion_decision",
         "promotion_score",
         "selection_adjusted_promotion_score",
+        "snapshot_cagr",
+        "snapshot_calmar",
+        "snapshot_max_drawdown",
+        "snapshot_average_turnover",
         "validation_tier",
         "walk_forward_positive_rate",
         "left_tail_regime_return",
