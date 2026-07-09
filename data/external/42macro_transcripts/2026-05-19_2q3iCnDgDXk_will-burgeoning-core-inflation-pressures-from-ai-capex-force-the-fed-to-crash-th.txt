@@ -1,0 +1,225 @@
+source: 42macro_youtube
+published_date: 2026-05-19
+video_id: 2q3iCnDgDXk
+url: https://www.youtube.com/watch?v=2q3iCnDgDXk
+title: Will Burgeoning Core Inflation Pressures from AI Capex Force the Fed to Crash the Stock Market?
+
+We want to get the macro picture.
+Joining us right now is Darius Dale, the
+founder and CEO of the research firm 42
+Macro. Darius, great to see you here. I
+I wonder if you could maybe put it this
+into perspective here because there are
+a lot of conflicting opinions about
+where we stand right now. You have a
+an economy overall that appears to be
+holding up, an equity market that
+despite the downdraft today still not
+far from its record highs, but signals
+coming out of the bond market that are
+causing a lot of concern out there. How
+do you read it?
+Uh thanks again for having me, Romaine.
+It's always a pleasure. So, things are
+fine from an economic perspective and
+you can make the case that they're
+actually too fine. We have nominal GDP
+tracking up about 10% on a 3-month
+annualized basis and so for this and for
+a variety of other reasons, we think the
+Fed is falling behind the curve. When
+you look at that the market's pricing in
+for neutral and we take in a cutting
+cycle, the minimum value on the IS curve
+out 5 years or in a hiking cycle, we
+take the maximum value on the IS curve
+out 5 years, you can see that the
+minimum value now the market's estimate
+of neutral if we were still on a cutting
+cycle, which we may not be,
+is now higher than the effective funds
+rate. And then the effective funds rate
+is actually two rate hikes below, sorry,
+two two rate hikes below from where it
+actually needs to be just for the Fed to
+get back to neutral. So, this is a Fed
+that's falling behind the curve and
+should actually contribute to bond
+market volatility in the months ahead as
+it struggles to catch up. Well, that's
+what I'm curious about here. I mean, the
+whole narrative on Kevin Warsh, who's
+expected to be sworn in as Fed chair
+before the week is out, the whole
+narrative on him was that he was going
+to be a little bit more dovish when it
+came to monetary policy. I know a lot
+has changed since his name was first
+floated as a potential Fed chair, but do
+you get the sense here that he will try
+to stick by, I guess that longer-term
+structural narrative of easier monetary
+policy or give in to I guess what the
+economic data might actually be telling
+him?
+I think he's going to wind up giving in
+to what the data are telling him and the
+reason is twofold. One, you're actually
+getting you know, ever so slight signals
+from the administration that they're
+okay with the Federal Reserve actually
+maintaining some some of the inflation
+fighting credibility here. You got
+Bostic signaling that hey, the Fed can
+wait on cutting interest rates.
+President Trump was out with similar
+commentary this past weekend. And then
+secondarily, if you look at the metrics
+that Kevin Warsh himself was
+highlighting, specifically trim mean
+CPI, we're now tracking up at 3.4%
+through month annualized. That number's
+higher than the six-month annualized
+rate of 3.2%, higher than the
+year-over-year rate of change of 2.9%.
+We got a strong positive impulse in the
+inflation statistic that Kevin Warsh was
+going to anchor on to lower interest
+rates. And so, in our opinion, he's
+going to wind up at an FOMC where most
+of his colleagues there are going to be
+moving in a hawkish direction, and they
+should be because the bond market is
+telling them to.
+I do want to get your thoughts on
+something that one of our previous
+guest, Julie Biel, brought up. And it
+was the idea of what artificial
+intelligence might actually mean for the
+economy, and particularly what the
+response might have to be by the
+government. The idea that whatever
+upsides we're seeing in the market from
+this with regards to the cap ex bends,
+it might come, at least in the interim,
+with some sort of cost
+to jobs, to American jobs. And the idea
+as to whether the Fed, or really even
+fiscal policy makers, have a response,
+or even can have a response to that
+should it actually materialize.
+Well, they can and they should. I think
+that's a that's a that's where you and I
+can grab some beers for this kind of
+conversation. But uh the reality is they
+can and they should. That's why we have
+a democracy. That's why we elect uh
+public officials to answer and and solve
+these big problems. Uh but of course, uh
+but one thing I would highlight just
+from the set of investors is the fact
+that AI, at least in 2026, is a roughly
+$800 billion
+positive demand shock for resources and
+positive demand shock for capital that's
+expected to grow to about $1.2 trillion
+next year. So, as disinflationary and
+and as productivity enhancing as the
+technology may be longer term, in the
+interim, it is actually pushing up
+demand in the economy and pushing up
+inflation. And we can see this across a
+variety of inflation statistics. Every
+single core inflation measure, where you
+look at PPI, CPI, or PCE, is in a strong
+positive impulse or a weak positive
+impulse at a level that is significantly
+higher than the Fed funds 2% target. So,
+this So, kind of tie this up though,
+because we get to this idea of whether
+we even need a Fed to do anything at
+this moment. I mean, you know, maybe
+they need to hike to fight inflation,
+maybe they don't. But, there's also been
+a lot of talk of why is there any sort
+of haste, if you will, to do anything
+right now, given how well, let's face
+it, that economy has held up, at least
+based on the official economic data, and
+given how well markets have held up,
+given, you know, the recent record highs
+that were, well, just, I don't know, a
+few days ago.
+Well, that's a great question, Romaine.
+That's exactly what I said with your
+colleagues on surveillance a few weeks
+ago, which is if the Fed does anything
+this year, they're going to cause
+problems in asset markets, because we
+clearly have evidence from the bond
+market itself and from reported
+inflation data that the Fed is falling
+behind the curve. So, if they ease
+monetary policy, you're going to
+exacerbate the meltdown of the bond
+market. However, if they tight monetary
+policy in response to the
+[clears throat] build-up of inflation
+pressures, and they're obviously going
+to cause an unwind of the crowded bull's
+positioning, and particularly where
+everyone is crowded concentrated right
+now, which is in AI. Fun fact on AI, 48%
+of the S&P 500 is now tech and
+communication services, which is higher
+than it was at the peak of the dot-com
+bubble. Is that a risk though right now,
+because I mean, there is someone make
+the argument that this complex the
+complexion of this rally is a lot
+different. The AI bubble was a lot of
+companies that with no profitability,
+questionable revenue growth, and this AI
+boom is being driven by, let's face it,
+the biggest companies in the world with
+some of the biggest cash stockpiles in
+the world, who can borrow at relatively
+low rates.
+Well, they still have to meet investor
+expectations for their sales, their
+earnings, their cash flows, their return
+on invested capital, their return on
+equity. Those expectations are going to
+go They're growing exponentially
+alongside the CapEx. And so, ultimately,
+investors are going to want their money
+back and this stuff tells me actually
+back to your previous question, which is
+what are the societal ramifications of
+this? You know, we've been very much on
+record for the past few years that AI is
+going to cause a, you know, kind of low
+higher low fire dynamic in the labor
+market to continue and in our opinion we
+think that's going to accelerate in the
+coming years in terms of its depressing
+impact on labor demand. And if that's
+true, then you start to think about
+what's going to happen from the
+perspective of the political response.
+You're going to be talking about
+nationwide wealth taxes and
+redistribution. You're going to be
+talking about a heavy hand of regulation
+coming from the other side of the
+political aisle in response to some of
+these dynamics and so at the end of the
+day no matter how profitable these
+companies are and how you know, game
+changing this technology is, there is
+another side of the trade that investors
+won't be prepared for in terms of how
+much concentration we're seeing at the
+current juncture. All right, Darius.
+Great stuff. Darius Dale, founder, CEO
+over at the research firm 42 Macro.

@@ -23,10 +23,36 @@ Sync public video metadata and transcript text:
 poetry run trade-bot sync-42macro-transcripts --max-videos 300 --max-pages 30
 ```
 
+Write a prioritized queue of missing transcripts:
+
+```bash
+poetry run trade-bot prioritize-42macro-transcripts
+```
+
+The queue is written to:
+
+- `reports/42macro_alignment/missing_transcript_priority.csv`
+
+It includes both the normal YouTube URL and a
+`https://youtubetotranscript.com/transcript?v=...` URL so high-value missing
+transcripts can be opened directly in a browser.
+
+Import browser-copied transcripts or saved transcript pages:
+
+```bash
+poetry run trade-bot import-42macro-transcripts --input-dir data/external/42macro_manual_imports
+```
+
 Compare saved 42 Macro transcripts to trade-bot operating history:
 
 ```bash
 poetry run trade-bot compare-42macro
+```
+
+Score both systems against what happened next:
+
+```bash
+poetry run trade-bot score-42macro-outcomes
 ```
 
 Daily job wrapper:
@@ -51,14 +77,20 @@ poetry run trade-bot seed-operating-history \
 The public channel catalog can be discovered from YouTube, but caption endpoints
 can return HTTP 429 or IP-block errors when many older transcripts are requested
 in one run. The sync command records those failures in the manifest instead of
-blocking indefinitely.
+blocking indefinitely. Browser transcript sites can show text to a normal
+interactive browser while returning bot-challenge HTML to direct scripts, so the
+manual import path is the preferred fallback when transcript coverage matters.
 
 For older history, use one of these paths:
 
 - Rerun the sync after a cooldown with a smaller `--max-videos` window.
-- Use a browser transcript site manually and save transcript `.txt` files into
-  `data/external/42macro_transcripts`.
-- Keep the header format below so the compare command can match the transcript:
+- Run `prioritize-42macro-transcripts`, open the highest-priority
+  `transcript_url` rows, copy the visible transcript into `.txt` files under
+  `data/external/42macro_manual_imports`, then run `import-42macro-transcripts`.
+- Save transcript pages as `.html` files into `data/external/42macro_manual_imports`
+  and import them the same way.
+- If you are creating transcript files by hand, the header format below is still
+  accepted and gives the importer an exact match:
 
 ```text
 source: 42macro_youtube
@@ -70,9 +102,31 @@ title: The Macro Minute: Will ending the Strait of Hormuz Crisis be a sell-the-n
 <transcript text>
 ```
 
-The compare command also scans local `.txt` files that are not yet present in
-`manifest.json`, so manually added transcript files are picked up on the next
-run.
+The importer can infer the video from a file name containing the YouTube ID, a
+YouTube or youtubetotranscript URL in the file, the header above, or a title that
+matches the manifest.
+
+## Forward Outcome Scoring
+
+The outcome job asks a different question from the alignment report:
+
+- Alignment: did 42 Macro and trade-bot say roughly the same thing?
+- Outcome scoring: was each system's tactical risk sizing appropriate for what
+  happened afterward?
+
+The current implementation tests 1-week, 1-month, and 3-month forward windows.
+It converts each system's posture to a risk-allocation proxy, then compares the
+proxy against SPY versus BIL outcomes:
+
+- Constructive windows reward higher risk exposure.
+- Left-tail return or drawdown windows reward lower risk exposure.
+- Choppy windows reward balanced sizing.
+
+Output files:
+
+- `reports/42macro_alignment/forward_outcome_scores.csv`
+- `reports/42macro_alignment/forward_outcome_summary.csv`
+- `reports/42macro_alignment/outcome_analysis.md`
 
 ## Interpretation
 
@@ -84,3 +138,7 @@ risk-off probability.
 Use the output as a disagreement audit, not a truth oracle. High-value rows are
 the `large_change_focus` rows where either 42 Macro flagged a large tactical
 shift or trade-bot's posture changed sharply.
+
+Outcome scoring is also a tactical audit, not a complete test of 42 Macro's
+long-horizon themes or proprietary model. Emphasize transcript-backed rows over
+title-only rows.

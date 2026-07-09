@@ -4,11 +4,13 @@ import json
 import re
 import signal
 import time
+from html import unescape
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
 from typing import Any
 
+import numpy as np
 import pandas as pd
 import requests
 
@@ -17,6 +19,8 @@ from trade_bot.storage.warehouse import TradingWarehouse
 YOUTUBE_BROWSE_URL = "https://www.youtube.com/youtubei/v1/browse"
 DEFAULT_42MACRO_HANDLE = "@42Macro"
 DEFAULT_42MACRO_SOURCE = "42macro_youtube"
+DEFAULT_OUTCOME_HORIZONS = {"1w": 5, "1m": 21, "3m": 63}
+DEFAULT_OUTCOME_TICKERS = ("SPY", "QQQ", "GLD", "VEA", "IWM")
 
 
 @dataclass(frozen=True)
@@ -30,11 +34,29 @@ class MacroTranscriptSyncResult:
 
 
 @dataclass(frozen=True)
+class MacroTranscriptImportResult:
+    videos: pd.DataFrame
+    imported: int
+    skipped: int
+    failed: int
+    transcript_dir: Path
+    manifest_path: Path
+    imported_files: pd.DataFrame
+
+
+@dataclass(frozen=True)
 class MacroAlignmentResult:
     videos: pd.DataFrame
     classifications: pd.DataFrame
     comparisons: pd.DataFrame
     summary: dict[str, object]
+    output_dir: Path
+
+
+@dataclass(frozen=True)
+class MacroOutcomeResult:
+    outcomes: pd.DataFrame
+    summary: pd.DataFrame
     output_dir: Path
 
 
@@ -129,7 +151,12 @@ def sync_42macro_transcripts(
         max_pages=max_pages,
     )
     prior_manifest = _load_manifest(output_dir / "manifest.json")
+    local_transcripts = _local_transcript_rows(output_dir)
     prior_by_id = {str(row.get("video_id")): row for row in prior_manifest}
+    for local_row in local_transcripts:
+        video_id = str(local_row.get("video_id", ""))
+        if video_id and not str(prior_by_id.get(video_id, {}).get("transcript_path", "")):
+            prior_by_id[video_id] = local_row
     rows: list[dict[str, object]] = []
     fetched = 0
     skipped = 0
@@ -225,6 +252,244 @@ def sync_42macro_transcripts(
     )
 
 
+def import_42macro_transcript_files(
+    *,
+    input_dir: str | Path,
+    transcript_dir: str | Path,
+    source: str = DEFAULT_42MACRO_SOURCE,
+    overwrite: bool = False,
+) -> MacroTranscriptImportResult:
+    """Import browser-copied transcript text or saved HTML transcript pages.
+
+    This is the fallback path for public transcript pages that render in a
+    normal browser but block direct non-browser HTTP clients.
+    """
+
+    import_root = Path(input_dir)
+    output_dir = Path(transcript_dir)
+    output_dir.mkdir(parents=True, exist_ok=True)
+    manifest = _manifest_frame(output_dir)
+    manifest_by_id = {
+        str(row.get("video_id", "")): dict(row)
+        for _, row in manifest.iterrows()
+        if str(row.get("video_id", ""))
+    }
+    manifest_by_title = {
+        _normalize_title(str(row.get("title", ""))): dict(row)
+        for _, row in manifest.iterrows()
+        if str(row.get("title", ""))
+    }
+    imported_rows: list[dict[str, object]] = []
+    imported = 0
+    skipped = 0
+    failed = 0
+    supported = {".txt", ".md", ".html", ".htm"}
+    for input_path in sorted(path for path in import_root.rglob("*") if path.suffix.lower() in supported):
+        try:
+            raw = input_path.read_text(encoding="utf-8", errors="ignore")
+            header = _parse_transcript_header_text(raw)
+            title = (
+                header.get("title", "")
+                or _extract_youtube_transcript_page_title(raw)
+                or input_path.stem
+            )
+            video_id = (
+                header.get("video_id", "")
+                or _extract_video_id(f"{input_path.name}\n{raw}")
+                or _video_id_for_title(title, manifest_by_title)
+            )
+            if not video_id:
+                raise ValueError("Could not infer YouTube video ID from file name, header, URL, or title.")
+            manifest_row = manifest_by_id.get(video_id, {})
+            title = str(manifest_row.get("title") or title)
+            published_date = (
+                header.get("published_date", "")
+                or header.get("date", "")
+                or str(manifest_row.get("published_date", ""))
+                or _date_from_text_or_filename(f"{input_path.name}\n{raw}")
+            )
+            url = (
+                header.get("url", "")
+                or str(manifest_row.get("url", ""))
+                or _youtube_url(video_id)
+            )
+            transcript = _extract_manual_transcript_text(raw)
+            if _word_count(transcript) < 20:
+                raise ValueError("Transcript text is too short after removing page chrome.")
+            output_path = output_dir / _transcript_filename(published_date, video_id, title)
+            if output_path.exists() and not overwrite:
+                skipped += 1
+                status = "skipped_existing"
+            else:
+                output_path.write_text(
+                    _format_transcript_file(
+                        source=source,
+                        published_date=published_date,
+                        video_id=video_id,
+                        title=title,
+                        url=url,
+                        transcript=transcript,
+                    ),
+                    encoding="utf-8",
+                )
+                imported += 1
+                status = "imported_manual"
+            row = {
+                "video_id": video_id,
+                "source": source,
+                "published_date": published_date,
+                "title": title,
+                "url": url,
+                "transcript_path": _relative_transcript_path(output_dir, output_path),
+                "word_count": _word_count(transcript),
+                "fetched_at_utc": _utc_now_iso(),
+                "status": status,
+                "error": "",
+                "input_path": str(input_path),
+            }
+            imported_rows.append(row)
+            manifest_by_id[video_id] = {key: value for key, value in row.items() if key != "input_path"}
+        except Exception as exc:
+            failed += 1
+            imported_rows.append(
+                {
+                    "input_path": str(input_path),
+                    "video_id": "",
+                    "status": "failed",
+                    "error": str(exc),
+                }
+            )
+    videos = pd.DataFrame(manifest_by_id.values())
+    videos = _sort_manifest_frame(videos)
+    manifest_path = _write_manifest(output_dir, videos)
+    return MacroTranscriptImportResult(
+        videos=videos,
+        imported=imported,
+        skipped=skipped,
+        failed=failed,
+        transcript_dir=output_dir,
+        manifest_path=manifest_path,
+        imported_files=pd.DataFrame(imported_rows),
+    )
+
+
+def write_missing_42macro_transcript_priority(
+    *,
+    transcript_dir: str | Path,
+    output_dir: str | Path,
+    comparison_path: str | Path | None = None,
+    outcome_path: str | Path | None = None,
+) -> pd.DataFrame:
+    """Write a ranked queue of missing transcript URLs worth filling first."""
+
+    transcript_root = Path(transcript_dir)
+    report_dir = Path(output_dir)
+    report_dir.mkdir(parents=True, exist_ok=True)
+    videos = _manifest_frame(transcript_root)
+    if videos.empty:
+        priority = pd.DataFrame()
+        priority.to_csv(report_dir / "missing_transcript_priority.csv", index=False)
+        return priority
+    videos = videos.copy()
+    videos["has_transcript"] = videos["transcript_path"].apply(
+        lambda value: (
+            _resolve_transcript_path(transcript_root, str(value)) is not None
+            and _resolve_transcript_path(transcript_root, str(value)).exists()
+        )
+    )
+    missing = videos[~videos["has_transcript"]].copy()
+    if missing.empty:
+        priority = pd.DataFrame(
+            columns=[
+                "priority_score",
+                "published_date",
+                "video_id",
+                "title",
+                "url",
+                "transcript_url",
+                "priority_reason",
+            ]
+        )
+        priority.to_csv(report_dir / "missing_transcript_priority.csv", index=False)
+        return priority
+
+    comparison_file = Path(comparison_path) if comparison_path else report_dir / "daily_comparison.csv"
+    outcome_file = Path(outcome_path) if outcome_path else report_dir / "forward_outcome_scores.csv"
+    comparisons = pd.read_csv(comparison_file) if comparison_file.exists() else pd.DataFrame()
+    outcomes = pd.read_csv(outcome_file) if outcome_file.exists() else pd.DataFrame()
+    comparison_by_id = {
+        str(video_id): frame
+        for video_id, frame in comparisons.groupby("video_id", dropna=False)
+    } if not comparisons.empty and "video_id" in comparisons else {}
+    outcome_by_id = {
+        str(video_id): frame
+        for video_id, frame in outcomes.groupby("video_id", dropna=False)
+    } if not outcomes.empty and "video_id" in outcomes else {}
+
+    rows: list[dict[str, object]] = []
+    newest_date = pd.to_datetime(missing["published_date"], errors="coerce").max()
+    for _, video in missing.iterrows():
+        video_id = str(video.get("video_id", ""))
+        score = 0.0
+        reasons: list[str] = []
+        comparison_frame = comparison_by_id.get(video_id, pd.DataFrame())
+        if not comparison_frame.empty:
+            if bool(comparison_frame.get("large_change_focus", pd.Series(dtype=bool)).astype(bool).any()):
+                score += 100.0
+                reasons.append("large-change comparison")
+            max_gap = float(comparison_frame.get("abs_disagreement", pd.Series([0.0])).max())
+            if max_gap >= 0.70:
+                score += 40.0
+                reasons.append("major 42/trade-bot mismatch")
+            elif max_gap >= 0.35:
+                score += 20.0
+                reasons.append("modest 42/trade-bot mismatch")
+        outcome_frame = outcome_by_id.get(video_id, pd.DataFrame())
+        if not outcome_frame.empty:
+            large_outcomes = outcome_frame[
+                outcome_frame.get("realized_environment", pd.Series(dtype=str))
+                .astype(str)
+                .isin(["left_tail", "constructive"])
+            ]
+            if not large_outcomes.empty:
+                score += 60.0
+                reasons.append("large realized forward move")
+            if {"macro_action_score", "trade_bot_action_score"}.issubset(outcome_frame.columns):
+                action_gap = (
+                    outcome_frame["macro_action_score"].astype(float)
+                    - outcome_frame["trade_bot_action_score"].astype(float)
+                ).abs().max()
+                if pd.notna(action_gap) and float(action_gap) >= 0.35:
+                    score += 30.0
+                    reasons.append("large outcome-score gap")
+        published = pd.to_datetime(video.get("published_date"), errors="coerce")
+        if pd.notna(published) and pd.notna(newest_date):
+            age_days = max(0, int((newest_date.normalize() - published.normalize()).days))
+            recency_score = max(0.0, 30.0 - min(age_days, 365) / 365.0 * 30.0)
+            score += recency_score
+            if age_days <= 45:
+                reasons.append("recent")
+        if not reasons:
+            reasons.append("missing transcript")
+        rows.append(
+            {
+                "priority_score": round(score, 3),
+                "published_date": str(video.get("published_date", "")),
+                "video_id": video_id,
+                "title": str(video.get("title", "")),
+                "url": str(video.get("url", "")) or _youtube_url(video_id),
+                "transcript_url": f"https://youtubetotranscript.com/transcript?v={video_id}",
+                "priority_reason": "; ".join(dict.fromkeys(reasons)),
+            }
+        )
+    priority = pd.DataFrame(rows).sort_values(
+        ["priority_score", "published_date"],
+        ascending=[False, False],
+    )
+    priority.to_csv(report_dir / "missing_transcript_priority.csv", index=False)
+    return priority
+
+
 def compare_42macro_to_trade_bot(
     *,
     transcript_dir: str | Path,
@@ -268,6 +533,411 @@ def compare_42macro_to_trade_bot(
         comparisons=comparisons,
     )
     return MacroAlignmentResult(videos, classifications, comparisons, summary, report_dir)
+
+
+def score_macro_tradebot_outcomes(
+    *,
+    comparisons: pd.DataFrame,
+    prices: pd.DataFrame,
+    output_dir: str | Path,
+    horizons: dict[str, int] | None = None,
+    risk_ticker: str = "SPY",
+    defensive_ticker: str = "BIL",
+    context_tickers: tuple[str, ...] = DEFAULT_OUTCOME_TICKERS,
+) -> MacroOutcomeResult:
+    """Score 42 Macro and trade-bot posture against forward market outcomes."""
+
+    report_dir = Path(output_dir)
+    report_dir.mkdir(parents=True, exist_ok=True)
+    outcome_horizons = horizons or DEFAULT_OUTCOME_HORIZONS
+    outcomes = build_forward_outcome_scores(
+        comparisons,
+        prices,
+        horizons=outcome_horizons,
+        risk_ticker=risk_ticker,
+        defensive_ticker=defensive_ticker,
+        context_tickers=context_tickers,
+    )
+    summary = summarize_forward_outcome_scores(outcomes)
+    outcomes.to_csv(report_dir / "forward_outcome_scores.csv", index=False)
+    summary.to_csv(report_dir / "forward_outcome_summary.csv", index=False)
+    (report_dir / "outcome_analysis.md").write_text(
+        _outcome_summary_markdown(outcomes, summary),
+        encoding="utf-8",
+    )
+    return MacroOutcomeResult(outcomes=outcomes, summary=summary, output_dir=report_dir)
+
+
+def build_forward_outcome_scores(
+    comparisons: pd.DataFrame,
+    prices: pd.DataFrame,
+    *,
+    horizons: dict[str, int] | None = None,
+    risk_ticker: str = "SPY",
+    defensive_ticker: str = "BIL",
+    context_tickers: tuple[str, ...] = DEFAULT_OUTCOME_TICKERS,
+) -> pd.DataFrame:
+    if comparisons.empty or prices.empty:
+        return pd.DataFrame()
+    outcome_horizons = horizons or DEFAULT_OUTCOME_HORIZONS
+    clean_prices = prices.sort_index().ffill()
+    clean_prices.index = pd.to_datetime(clean_prices.index, errors="coerce")
+    clean_prices = clean_prices[~clean_prices.index.isna()].sort_index()
+    if risk_ticker not in clean_prices:
+        return pd.DataFrame()
+    if defensive_ticker not in clean_prices:
+        clean_prices[defensive_ticker] = 1.0
+
+    rows: list[dict[str, object]] = []
+    for _, comparison in comparisons.iterrows():
+        origin_date = pd.to_datetime(
+            comparison.get("matched_market_date") or comparison.get("published_date"),
+            errors="coerce",
+        )
+        if pd.isna(origin_date):
+            continue
+        origin_index = _first_market_index_on_or_after(clean_prices.index, pd.Timestamp(origin_date))
+        if origin_index is None:
+            continue
+        for horizon_label, horizon_days in outcome_horizons.items():
+            end_index = origin_index + int(horizon_days)
+            if end_index >= len(clean_prices.index):
+                continue
+            start_date = clean_prices.index[origin_index]
+            end_date = clean_prices.index[end_index]
+            risk_return = _forward_return(clean_prices, risk_ticker, origin_index, end_index)
+            defensive_return = _forward_return(
+                clean_prices,
+                defensive_ticker,
+                origin_index,
+                end_index,
+            )
+            if risk_return is None or defensive_return is None:
+                continue
+            risk_drawdown = _forward_max_drawdown(
+                clean_prices,
+                risk_ticker,
+                origin_index,
+                end_index,
+            )
+            context = _context_forward_returns(
+                clean_prices,
+                context_tickers,
+                origin_index,
+                end_index,
+            )
+            excess_return = risk_return - defensive_return
+            left_tail_threshold = _left_tail_threshold(horizon_label)
+            constructive_threshold = _constructive_threshold(horizon_label)
+            environment = _realized_environment(
+                excess_return=excess_return,
+                risk_return=risk_return,
+                risk_drawdown=risk_drawdown,
+                left_tail_threshold=left_tail_threshold,
+                constructive_threshold=constructive_threshold,
+            )
+            macro_score = _optional_float(comparison.get("macro_posture_score")) or 0.0
+            trade_score = _optional_float(comparison.get("trade_bot_posture_score")) or 0.0
+            macro_allocation = _posture_to_allocation(macro_score)
+            trade_allocation = _posture_to_allocation(trade_score)
+            macro_proxy_return = _proxy_return(macro_allocation, risk_return, defensive_return)
+            trade_proxy_return = _proxy_return(trade_allocation, risk_return, defensive_return)
+            oracle_proxy_return = max(risk_return, defensive_return)
+            macro_action_score = _risk_sizing_action_score(macro_allocation, environment)
+            trade_action_score = _risk_sizing_action_score(trade_allocation, environment)
+            row = {
+                "video_id": str(comparison.get("video_id", "")),
+                "published_date": str(comparison.get("published_date", "")),
+                "origin_date": start_date.date().isoformat(),
+                "end_date": end_date.date().isoformat(),
+                "horizon": horizon_label,
+                "horizon_days": int(horizon_days),
+                "classification_text_source": str(
+                    comparison.get("classification_text_source", "")
+                ),
+                "classification_confidence": _optional_float(
+                    comparison.get("classification_confidence")
+                ),
+                "macro_posture_score": macro_score,
+                "trade_bot_posture_score": trade_score,
+                "macro_risk_allocation_proxy": macro_allocation,
+                "trade_bot_risk_allocation_proxy": trade_allocation,
+                "risk_ticker": risk_ticker,
+                "risk_forward_return": risk_return,
+                "defensive_forward_return": defensive_return,
+                "risk_excess_return": excess_return,
+                "risk_forward_max_drawdown": risk_drawdown,
+                "realized_environment": environment,
+                "macro_proxy_return": macro_proxy_return,
+                "trade_bot_proxy_return": trade_proxy_return,
+                "oracle_proxy_return": oracle_proxy_return,
+                "macro_return_regret": oracle_proxy_return - macro_proxy_return,
+                "trade_bot_return_regret": oracle_proxy_return - trade_proxy_return,
+                "macro_action_score": macro_action_score,
+                "trade_bot_action_score": trade_action_score,
+                "macro_correct_side": _correct_side(macro_score, excess_return),
+                "trade_bot_correct_side": _correct_side(trade_score, excess_return),
+                "macro_overrisk": environment == "left_tail" and macro_allocation > 0.60,
+                "trade_bot_overrisk": environment == "left_tail" and trade_allocation > 0.60,
+                "macro_underrisk": environment == "constructive" and macro_allocation < 0.40,
+                "trade_bot_underrisk": environment == "constructive" and trade_allocation < 0.40,
+                "proxy_return_winner": _winner_label(
+                    macro_proxy_return,
+                    trade_proxy_return,
+                    "42macro",
+                    "trade_bot",
+                ),
+                "action_score_winner": _winner_label(
+                    macro_action_score,
+                    trade_action_score,
+                    "42macro",
+                    "trade_bot",
+                ),
+            }
+            row.update(context)
+            rows.append(row)
+    return pd.DataFrame(rows)
+
+
+def summarize_forward_outcome_scores(outcomes: pd.DataFrame) -> pd.DataFrame:
+    if outcomes.empty:
+        return pd.DataFrame()
+    rows: list[dict[str, object]] = []
+    group_columns = ["classification_text_source", "horizon"]
+    for keys, frame in outcomes.groupby(group_columns, dropna=False):
+        text_source, horizon = keys
+        rows.append(_outcome_summary_row(str(text_source), str(horizon), frame))
+    rows.append(_outcome_summary_row("all", "all", outcomes))
+    for horizon, frame in outcomes.groupby("horizon", dropna=False):
+        rows.append(_outcome_summary_row("all", str(horizon), frame))
+    return pd.DataFrame(rows)
+
+
+def _outcome_summary_row(scope: str, horizon: str, frame: pd.DataFrame) -> dict[str, object]:
+    left_tail = frame[frame["realized_environment"] == "left_tail"]
+    constructive = frame[frame["realized_environment"] == "constructive"]
+    return {
+        "scope": scope,
+        "horizon": horizon,
+        "rows": int(len(frame)),
+        "date_min": str(frame["origin_date"].min()),
+        "date_max": str(frame["origin_date"].max()),
+        "risk_mean_forward_return": float(frame["risk_forward_return"].mean()),
+        "risk_mean_excess_return": float(frame["risk_excess_return"].mean()),
+        "left_tail_rows": int(len(left_tail)),
+        "constructive_rows": int(len(constructive)),
+        "macro_mean_proxy_return": float(frame["macro_proxy_return"].mean()),
+        "trade_bot_mean_proxy_return": float(frame["trade_bot_proxy_return"].mean()),
+        "macro_mean_return_regret": float(frame["macro_return_regret"].mean()),
+        "trade_bot_mean_return_regret": float(frame["trade_bot_return_regret"].mean()),
+        "macro_mean_action_score": float(frame["macro_action_score"].mean()),
+        "trade_bot_mean_action_score": float(frame["trade_bot_action_score"].mean()),
+        "macro_correct_side_rate": float(frame["macro_correct_side"].mean()),
+        "trade_bot_correct_side_rate": float(frame["trade_bot_correct_side"].mean()),
+        "macro_overrisk_rate": float(frame["macro_overrisk"].mean()),
+        "trade_bot_overrisk_rate": float(frame["trade_bot_overrisk"].mean()),
+        "macro_underrisk_rate": float(frame["macro_underrisk"].mean()),
+        "trade_bot_underrisk_rate": float(frame["trade_bot_underrisk"].mean()),
+        "macro_left_tail_overrisk_rate": (
+            float(left_tail["macro_overrisk"].mean()) if not left_tail.empty else np.nan
+        ),
+        "trade_bot_left_tail_overrisk_rate": (
+            float(left_tail["trade_bot_overrisk"].mean()) if not left_tail.empty else np.nan
+        ),
+        "macro_constructive_underrisk_rate": (
+            float(constructive["macro_underrisk"].mean())
+            if not constructive.empty
+            else np.nan
+        ),
+        "trade_bot_constructive_underrisk_rate": (
+            float(constructive["trade_bot_underrisk"].mean())
+            if not constructive.empty
+            else np.nan
+        ),
+    }
+
+
+def _first_market_index_on_or_after(index: pd.DatetimeIndex, date_value: pd.Timestamp) -> int | None:
+    positions = np.flatnonzero(index.normalize() >= date_value.normalize())
+    if len(positions) == 0:
+        return None
+    return int(positions[0])
+
+
+def _forward_return(
+    prices: pd.DataFrame,
+    ticker: str,
+    origin_index: int,
+    end_index: int,
+) -> float | None:
+    if ticker not in prices:
+        return None
+    series = prices[ticker].astype(float).iloc[[origin_index, end_index]]
+    if series.isna().any() or float(series.iloc[0]) == 0.0:
+        return None
+    return float(series.iloc[1] / series.iloc[0] - 1.0)
+
+
+def _forward_max_drawdown(
+    prices: pd.DataFrame,
+    ticker: str,
+    origin_index: int,
+    end_index: int,
+) -> float:
+    series = prices[ticker].astype(float).iloc[origin_index : end_index + 1].dropna()
+    if series.empty or float(series.iloc[0]) == 0.0:
+        return float("nan")
+    relative = series / float(series.iloc[0])
+    drawdown = relative / relative.cummax() - 1.0
+    return float(drawdown.min())
+
+
+def _context_forward_returns(
+    prices: pd.DataFrame,
+    tickers: tuple[str, ...],
+    origin_index: int,
+    end_index: int,
+) -> dict[str, float]:
+    rows: dict[str, float] = {}
+    for ticker in tickers:
+        value = _forward_return(prices, ticker, origin_index, end_index)
+        if value is not None:
+            rows[f"{ticker.lower()}_forward_return"] = value
+    return rows
+
+
+def _left_tail_threshold(horizon: str) -> float:
+    return {"1w": -0.025, "1m": -0.055, "3m": -0.085}.get(horizon, -0.055)
+
+
+def _constructive_threshold(horizon: str) -> float:
+    return {"1w": 0.010, "1m": 0.025, "3m": 0.050}.get(horizon, 0.025)
+
+
+def _realized_environment(
+    *,
+    excess_return: float,
+    risk_return: float,
+    risk_drawdown: float,
+    left_tail_threshold: float,
+    constructive_threshold: float,
+) -> str:
+    if risk_return <= left_tail_threshold or risk_drawdown <= left_tail_threshold:
+        return "left_tail"
+    if excess_return >= constructive_threshold and risk_drawdown > left_tail_threshold / 2.0:
+        return "constructive"
+    return "choppy"
+
+
+def _posture_to_allocation(score: float) -> float:
+    return float(np.clip((score + 1.0) / 2.0, 0.0, 1.0))
+
+
+def _proxy_return(allocation: float, risk_return: float, defensive_return: float) -> float:
+    return float(allocation * risk_return + (1.0 - allocation) * defensive_return)
+
+
+def _risk_sizing_action_score(allocation: float, environment: str) -> float:
+    if environment == "constructive":
+        return float(allocation)
+    if environment == "left_tail":
+        return float(1.0 - allocation)
+    return float(1.0 - abs(allocation - 0.50) * 2.0)
+
+
+def _correct_side(score: float, excess_return: float) -> bool:
+    if excess_return > 0:
+        return score >= 0
+    if excess_return < 0:
+        return score <= 0
+    return abs(score) < 0.15
+
+
+def _winner_label(left: float, right: float, left_label: str, right_label: str) -> str:
+    if abs(left - right) < 1e-9:
+        return "tie"
+    return left_label if left > right else right_label
+
+
+def _outcome_summary_markdown(outcomes: pd.DataFrame, summary: pd.DataFrame) -> str:
+    lines = [
+        "# 42 Macro / Trade-Bot Forward Outcome Analysis",
+        "",
+        "## Goal",
+        "",
+        (
+            "Measure whether 42 Macro's public tactical read and trade-bot's "
+            "risk posture were appropriately sized for what happened next."
+        ),
+        "",
+        "## Method",
+        "",
+        "- Convert each system's daily posture into a 0-100% risk-allocation proxy.",
+        "- Score forward 1w, 1m, and 3m SPY-versus-BIL outcomes from the matched date.",
+        "- Reward risk-on posture in constructive forward windows.",
+        "- Reward defensive posture before left-tail return/drawdown windows.",
+        "- Keep transcript-backed and title-only 42 Macro classifications separate.",
+        "",
+    ]
+    if outcomes.empty or summary.empty:
+        lines.append("No forward outcome rows were produced.")
+        return "\n".join(lines) + "\n"
+
+    transcript = summary[summary["scope"].eq("transcript")]
+    if not transcript.empty:
+        lines.extend(["## Transcript-Backed Summary", ""])
+        for _, row in transcript.sort_values("horizon").iterrows():
+            lines.append(
+                f"- {row['horizon']}: {int(row['rows']):,} rows; "
+                f"42 Macro action score {row['macro_mean_action_score']:.2f}, "
+                f"trade-bot action score {row['trade_bot_mean_action_score']:.2f}; "
+                f"42 Macro proxy return {row['macro_mean_proxy_return']:.2%}, "
+                f"trade-bot proxy return {row['trade_bot_mean_proxy_return']:.2%}."
+            )
+        lines.append("")
+
+    all_horizons = summary[summary["scope"].eq("all") & ~summary["horizon"].eq("all")]
+    if not all_horizons.empty:
+        lines.extend(["## Whole-Corpus Directional Summary", ""])
+        for _, row in all_horizons.sort_values("horizon").iterrows():
+            lines.append(
+                f"- {row['horizon']}: {int(row['rows']):,} rows; "
+                f"42 Macro action score {row['macro_mean_action_score']:.2f}, "
+                f"trade-bot action score {row['trade_bot_mean_action_score']:.2f}; "
+                f"left-tail rows {int(row['left_tail_rows']):,}, "
+                f"constructive rows {int(row['constructive_rows']):,}."
+            )
+        lines.append("")
+
+    large = outcomes[
+        (outcomes["classification_text_source"].eq("transcript"))
+        & (outcomes["realized_environment"].isin(["left_tail", "constructive"]))
+    ].copy()
+    if not large.empty:
+        large["action_score_gap"] = large["macro_action_score"] - large["trade_bot_action_score"]
+        top = large.reindex(large["action_score_gap"].abs().sort_values(ascending=False).index).head(12)
+        lines.extend(["## Largest Transcript-Backed Outcome Gaps", ""])
+        lines.append("| date | horizon | environment | 42 score | bot score | gap | SPY fwd | SPY max DD |")
+        lines.append("|---|---|---|---:|---:|---:|---:|---:|")
+        for _, row in top.iterrows():
+            lines.append(
+                f"| {row['origin_date']} | {row['horizon']} | {row['realized_environment']} | "
+                f"{row['macro_action_score']:.2f} | {row['trade_bot_action_score']:.2f} | "
+                f"{row['action_score_gap']:.2f} | {row['risk_forward_return']:.2%} | "
+                f"{row['risk_forward_max_drawdown']:.2%} |"
+            )
+        lines.append("")
+
+    lines.extend(
+        [
+            "## Caveats",
+            "",
+            "- This is a tactical sizing audit, not a full test of 42 Macro's long-horizon themes.",
+            "- A transcript-derived heuristic is still not the same as 42 Macro's proprietary model state.",
+            "- Title-only rows are included only for coverage and prioritization; conclusions should emphasize transcript-backed rows.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
 
 
 def classify_42macro_transcript(
@@ -648,6 +1318,34 @@ def _load_manifest(path: Path) -> list[dict[str, object]]:
     return payload if isinstance(payload, list) else []
 
 
+def _sort_manifest_frame(videos: pd.DataFrame) -> pd.DataFrame:
+    if videos.empty:
+        return videos
+    output = videos.copy()
+    if "published_date" in output:
+        output["_published_sort"] = pd.to_datetime(output["published_date"], errors="coerce")
+        output = output.sort_values(["_published_sort", "video_id"], ascending=[False, True])
+        output = output.drop(columns=["_published_sort"])
+    elif "video_id" in output:
+        output = output.sort_values("video_id")
+    expected = [
+        "video_id",
+        "source",
+        "published_date",
+        "title",
+        "url",
+        "transcript_path",
+        "word_count",
+        "fetched_at_utc",
+        "status",
+        "error",
+    ]
+    for column in expected:
+        if column not in output:
+            output[column] = ""
+    return output[expected]
+
+
 def _manifest_frame(transcript_root: Path) -> pd.DataFrame:
     manifest_path = transcript_root / "manifest.json"
     rows = _load_manifest(manifest_path)
@@ -712,8 +1410,12 @@ def _local_transcript_rows(transcript_root: Path) -> list[dict[str, object]]:
 
 
 def _parse_transcript_header(path: Path) -> dict[str, str]:
+    return _parse_transcript_header_text(path.read_text(encoding="utf-8", errors="ignore"))
+
+
+def _parse_transcript_header_text(text: str) -> dict[str, str]:
     header: dict[str, str] = {}
-    for line in path.read_text(encoding="utf-8", errors="ignore").splitlines()[:10]:
+    for line in text.splitlines()[:12]:
         if not line.strip():
             break
         if ":" not in line:
@@ -726,6 +1428,105 @@ def _parse_transcript_header(path: Path) -> dict[str, str]:
 def _video_id_from_filename(path: Path) -> str:
     parts = path.stem.split("_")
     return parts[1] if len(parts) >= 2 else ""
+
+
+def _extract_video_id(text: str) -> str:
+    for pattern in (
+        r"(?:youtube\.com/watch\?v=|youtubetotranscript\.com/transcript\?v=|youtu\.be/)([A-Za-z0-9_-]{11})",
+        r"\b(?:video_id|video id)\s*:\s*([A-Za-z0-9_-]{11})\b",
+        r"\b([A-Za-z0-9_-]{11})\b",
+    ):
+        match = re.search(pattern, text)
+        if match:
+            return match.group(1)
+    return ""
+
+
+def _date_from_text_or_filename(text: str) -> str:
+    match = re.search(r"\b(20\d{2}-\d{2}-\d{2})\b", text)
+    return match.group(1) if match else ""
+
+
+def _extract_youtube_transcript_page_title(text: str) -> str:
+    plain = _html_to_plain_text(text)
+    match = re.search(r"Transcript of\s+(.+?)(?:\n|Author\s*:)", plain, flags=re.S)
+    if not match:
+        return ""
+    return _normalize_whitespace(match.group(1))
+
+
+def _extract_manual_transcript_text(text: str) -> str:
+    header = _parse_transcript_header_text(text)
+    if header and "\n\n" in text:
+        text = text.split("\n\n", 1)[1]
+    plain = _html_to_plain_text(text)
+    lines = [_normalize_whitespace(line) for line in plain.splitlines()]
+    lines = [line for line in lines if line]
+    start_index = 0
+    for marker in ("Translate", "Timestamp OFF", "Copy"):
+        marker_indexes = [index for index, line in enumerate(lines) if line == marker]
+        if marker_indexes:
+            start_index = max(start_index, marker_indexes[-1] + 1)
+    cleaned: list[str] = []
+    skip_prefixes = (
+        "Transcript of ",
+        "Author :",
+        "Author:",
+        "source:",
+        "published_date:",
+        "date:",
+        "video_id:",
+        "url:",
+        "title:",
+    )
+    skip_exact = {
+        "Transcript",
+        "Copy",
+        "Timestamp OFF",
+        "Timestamp ON",
+        "Translate",
+        "AI Features",
+        "Feedback",
+        "Popular Features",
+        "Output Language",
+    }
+    for line in lines[start_index:]:
+        if line in skip_exact:
+            continue
+        if any(line.startswith(prefix) for prefix in skip_prefixes):
+            continue
+        cleaned.append(line)
+    return "\n".join(cleaned).strip()
+
+
+def _html_to_plain_text(text: str) -> str:
+    if "<" not in text or ">" not in text:
+        return text
+    without_scripts = re.sub(r"<(script|style)\b.*?</\1>", " ", text, flags=re.I | re.S)
+    with_breaks = re.sub(r"</?(p|div|br|h[1-6]|li|section|article)\b[^>]*>", "\n", without_scripts, flags=re.I)
+    plain = re.sub(r"<[^>]+>", " ", with_breaks)
+    plain = unescape(plain)
+    return re.sub(r"\n{3,}", "\n\n", plain)
+
+
+def _video_id_for_title(title: str, manifest_by_title: dict[str, dict[str, object]]) -> str:
+    normalized = _normalize_title(title)
+    if not normalized:
+        return ""
+    if normalized in manifest_by_title:
+        return str(manifest_by_title[normalized].get("video_id", ""))
+    for manifest_title, row in manifest_by_title.items():
+        if normalized in manifest_title or manifest_title in normalized:
+            return str(row.get("video_id", ""))
+    return ""
+
+
+def _normalize_title(title: str) -> str:
+    return re.sub(r"[^a-z0-9]+", " ", title.lower()).strip()
+
+
+def _normalize_whitespace(text: str) -> str:
+    return re.sub(r"\s+", " ", text).strip()
 
 
 def _resolve_transcript_path(transcript_root: Path, raw_path: str) -> Path | None:

@@ -61,7 +61,10 @@ from trade_bot.research.experiments import run_experiment_iteration
 from trade_bot.research.external_macro import (
     DEFAULT_42MACRO_HANDLE,
     compare_42macro_to_trade_bot,
+    import_42macro_transcript_files,
+    score_macro_tradebot_outcomes,
     sync_42macro_transcripts,
+    write_missing_42macro_transcript_priority,
 )
 from trade_bot.research.forward_simulation import (
     ForwardSimulationValidationConfig,
@@ -86,6 +89,10 @@ from trade_bot.research.signal_evidence import (
     build_signal_family_evidence,
     build_signal_family_marginal_tests,
     tag_scorecard_signal_families,
+)
+from trade_bot.research.upside_capture import (
+    DEFAULT_UPSIDE_CAPTURE_OUTPUT_DIR,
+    run_upside_capture_lab,
 )
 from trade_bot.storage.run_store import RunStore, SnapshotManifest
 from trade_bot.storage.warehouse import TradingWarehouse, WarehouseMigrationResult
@@ -1487,6 +1494,82 @@ def sync_42macro_transcripts_cmd(
     console.print(f"Manifest: {result.manifest_path}")
 
 
+@app.command("import-42macro-transcripts")
+def import_42macro_transcripts_cmd(
+    input_dir: Annotated[
+        Path,
+        typer.Option("--input-dir"),
+    ],
+    transcript_dir: Annotated[
+        Path,
+        typer.Option("--transcript-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_TRANSCRIPT_DIR,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    overwrite: Annotated[bool, typer.Option("--overwrite")] = False,
+) -> None:
+    result = import_42macro_transcript_files(
+        input_dir=input_dir,
+        transcript_dir=transcript_dir,
+        overwrite=overwrite,
+    )
+    warehouse = TradingWarehouse(store)
+    warehouse.save_external_macro_alignment(
+        videos=result.videos,
+        classifications=pd.DataFrame(),
+        comparisons=pd.DataFrame(),
+    )
+    table = Table(title="42 Macro Manual Transcript Import")
+    table.add_column("metric")
+    table.add_column("value", justify="right")
+    table.add_row("manifest videos", f"{len(result.videos):,}")
+    table.add_row("imported", f"{result.imported:,}")
+    table.add_row("skipped existing", f"{result.skipped:,}")
+    table.add_row("failed", f"{result.failed:,}")
+    console.print(table)
+    if result.failed:
+        failed = result.imported_files[result.imported_files["status"].eq("failed")]
+        console.print(failed[["input_path", "error"]].head(10).to_string(index=False))
+    console.print(f"Manifest: {result.manifest_path}")
+
+
+@app.command("prioritize-42macro-transcripts")
+def prioritize_42macro_transcripts_cmd(
+    transcript_dir: Annotated[
+        Path,
+        typer.Option("--transcript-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_TRANSCRIPT_DIR,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR,
+    comparison_path: Annotated[
+        Path | None,
+        typer.Option("--comparison-path"),
+    ] = None,
+    outcome_path: Annotated[
+        Path | None,
+        typer.Option("--outcome-path"),
+    ] = None,
+    top_n: Annotated[int, typer.Option("--top-n")] = 25,
+) -> None:
+    priority = write_missing_42macro_transcript_priority(
+        transcript_dir=transcript_dir,
+        output_dir=output_dir,
+        comparison_path=comparison_path,
+        outcome_path=outcome_path,
+    )
+    path = output_dir / "missing_transcript_priority.csv"
+    console.print(f"Wrote {len(priority):,} missing transcript priorities: {path}")
+    if not priority.empty:
+        console.print(
+            priority[
+                ["priority_score", "published_date", "video_id", "title", "transcript_url"]
+            ]
+            .head(top_n)
+            .to_string(index=False)
+        )
+
+
 @app.command("compare-42macro")
 def compare_42macro_cmd(
     transcript_dir: Annotated[
@@ -1510,6 +1593,45 @@ def compare_42macro_cmd(
     _print_macro_alignment_summary(result.summary, output_dir)
 
 
+@app.command("score-42macro-outcomes")
+def score_42macro_outcomes_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    comparison_path: Annotated[
+        Path,
+        typer.Option("--comparison-path"),
+    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR / "daily_comparison.csv",
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+    risk_ticker: Annotated[str, typer.Option("--risk-ticker")] = "SPY",
+    defensive_ticker: Annotated[str, typer.Option("--defensive-ticker")] = "BIL",
+) -> None:
+    if not comparison_path.exists():
+        raise typer.BadParameter(
+            f"{comparison_path} does not exist. Run `trade-bot compare-42macro` first."
+        )
+    bot_config = load_config(config)
+    prices = load_or_fetch_yahoo_prices(
+        configured_tickers(bot_config),
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        adjusted=bot_config.data.adjusted,
+        refresh=refresh_data,
+    )
+    comparisons = pd.read_csv(comparison_path)
+    result = score_macro_tradebot_outcomes(
+        comparisons=comparisons,
+        prices=prices,
+        output_dir=output_dir,
+        risk_ticker=risk_ticker,
+        defensive_ticker=defensive_ticker,
+    )
+    _print_macro_outcome_summary(result.summary, output_dir)
+
+
 @app.command("run-42macro-daily-check")
 def run_42macro_daily_check_cmd(
     transcript_dir: Annotated[
@@ -1521,6 +1643,7 @@ def run_42macro_daily_check_cmd(
         Path,
         typer.Option("--output-dir"),
     ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR,
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
     max_videos: Annotated[int | None, typer.Option("--max-videos")] = 80,
     max_pages: Annotated[int | None, typer.Option("--max-pages")] = 8,
     refresh: Annotated[bool, typer.Option("--refresh")] = False,
@@ -1531,6 +1654,7 @@ def run_42macro_daily_check_cmd(
         typer.Option("--transcript-timeout-seconds"),
     ] = 30,
     metadata_only: Annotated[bool, typer.Option("--metadata-only")] = False,
+    score_outcomes: Annotated[bool, typer.Option("--score-outcomes/--skip-outcomes")] = True,
 ) -> None:
     sync_result = sync_42macro_transcripts(
         transcript_dir=transcript_dir,
@@ -1553,6 +1677,64 @@ def run_42macro_daily_check_cmd(
         f"({sync_result.fetched:,} fetched, {sync_result.skipped:,} skipped)."
     )
     _print_macro_alignment_summary(result.summary, output_dir)
+    if score_outcomes and not result.comparisons.empty:
+        bot_config = load_config(config)
+        prices = load_or_fetch_yahoo_prices(
+            configured_tickers(bot_config),
+            start=bot_config.data.start,
+            end=bot_config.data.end,
+            cache_dir=bot_config.data.cache_dir,
+            adjusted=bot_config.data.adjusted,
+            refresh=False,
+        )
+        outcome_result = score_macro_tradebot_outcomes(
+            comparisons=result.comparisons,
+            prices=prices,
+            output_dir=output_dir,
+        )
+        _print_macro_outcome_summary(outcome_result.summary, output_dir)
+
+
+@app.command("run-upside-capture-lab")
+def run_upside_capture_lab_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_UPSIDE_CAPTURE_OUTPUT_DIR,
+    primary_strategy: Annotated[
+        str,
+        typer.Option("--primary-strategy"),
+    ] = "i111_reentry_vol_target_fast_21d",
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    bot_config = load_config(config)
+    result = run_upside_capture_lab(
+        bot_config,
+        output_dir=output_dir,
+        primary_strategy=primary_strategy,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="Upside Capture Lab")
+    table.add_column("candidate")
+    table.add_column("round", justify="right")
+    table.add_column("CAGR", justify="right")
+    table.add_column("max DD", justify="right")
+    table.add_column("run-up lift", justify="right")
+    table.add_column("left-tail delta", justify="right")
+    table.add_column("score", justify="right")
+    for _, row in result.summary.sort_values("research_score", ascending=False).head(10).iterrows():
+        table.add_row(
+            str(row["candidate"]),
+            str(int(row["round_id"])),
+            _format_optional_percent(row.get("cagr")),
+            _format_optional_percent(row.get("max_drawdown")),
+            _format_optional_percent(row.get("runup_capture_lift")),
+            _format_optional_percent(row.get("left_tail_loss_delta")),
+            _format_optional_decimal(row.get("research_score")),
+        )
+    console.print(table)
+    console.print(f"Reports: {output_dir}")
 
 
 @app.command("seed-monitoring-windows")
@@ -2344,6 +2526,34 @@ def _print_macro_alignment_summary(summary: dict[str, object], output_dir: Path)
         )
     console.print(table)
     console.print(f"Reports: {output_dir}")
+
+
+def _print_macro_outcome_summary(summary: pd.DataFrame, output_dir: Path) -> None:
+    table = Table(title="42 Macro / Trade-Bot Forward Outcome Scores")
+    table.add_column("scope")
+    table.add_column("horizon")
+    table.add_column("rows", justify="right")
+    table.add_column("42 action", justify="right")
+    table.add_column("bot action", justify="right")
+    table.add_column("42 proxy ret", justify="right")
+    table.add_column("bot proxy ret", justify="right")
+    if not summary.empty:
+        display = summary[
+            (summary["scope"].isin(["transcript", "all"]))
+            & (summary["horizon"].isin(["1w", "1m", "3m"]))
+        ].copy()
+        for _, row in display.iterrows():
+            table.add_row(
+                str(row["scope"]),
+                str(row["horizon"]),
+                f"{int(row['rows']):,}",
+                _format_optional_decimal(row.get("macro_mean_action_score")),
+                _format_optional_decimal(row.get("trade_bot_mean_action_score")),
+                _format_optional_percent(row.get("macro_mean_proxy_return")),
+                _format_optional_percent(row.get("trade_bot_mean_proxy_return")),
+            )
+    console.print(table)
+    console.print(f"Outcome reports: {output_dir}")
 
 
 def _active_experiment_dir(experiment_dir: Path) -> Path:

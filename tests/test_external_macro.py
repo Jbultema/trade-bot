@@ -5,8 +5,12 @@ import pytest
 
 from trade_bot.research.external_macro import (
     build_macro_tradebot_comparisons,
+    build_forward_outcome_scores,
     classify_42macro_transcript,
+    import_42macro_transcript_files,
+    summarize_forward_outcome_scores,
     summarize_macro_alignment,
+    write_missing_42macro_transcript_priority,
 )
 from trade_bot.storage.warehouse import TradingWarehouse
 
@@ -84,6 +88,108 @@ def test_macro_tradebot_comparison_matches_nearest_operating_date() -> None:
     assert comparisons.iloc[0]["disagreement_label"] == "major_mismatch"
     assert bool(comparisons.iloc[0]["large_change_focus"])
     assert summary["major_mismatches"] == 1
+
+
+def test_manual_transcript_import_accepts_youtubetotranscript_copy(tmp_path) -> None:
+    transcript_dir = tmp_path / "transcripts"
+    transcript_dir.mkdir()
+    (transcript_dir / "manifest.json").write_text(
+        """
+[
+  {
+    "video_id": "lxZyYBLbKnw",
+    "source": "42macro_youtube",
+    "published_date": "2026-07-08",
+    "title": "Should investors stop using the Mag-7 as a Source of Funds?",
+    "url": "https://www.youtube.com/watch?v=lxZyYBLbKnw",
+    "transcript_path": "",
+    "word_count": 0,
+    "fetched_at_utc": "",
+    "status": "catalog_only",
+    "error": ""
+  }
+]
+""",
+        encoding="utf-8",
+    )
+    input_dir = tmp_path / "manual"
+    input_dir.mkdir()
+    (input_dir / "lxZyYBLbKnw.txt").write_text(
+        """
+Transcript of Should investors stop using the Mag-7 as a Source of Funds?
+Author : 42 Macro
+Transcript
+Copy
+Timestamp OFF
+Translate
+
+Happy Wednesday out there team42. The rising probability of a risk-off market
+regime should cause investors to reduce gross exposure and book gains. Winners
+may become a source of funds if volatility rises. This is tactical risk
+reduction, not a long-term bearish view.
+""",
+        encoding="utf-8",
+    )
+
+    result = import_42macro_transcript_files(
+        input_dir=input_dir,
+        transcript_dir=transcript_dir,
+    )
+
+    assert result.imported == 1
+    row = result.videos.iloc[0]
+    assert row["video_id"] == "lxZyYBLbKnw"
+    assert row["status"] == "imported_manual"
+    transcript_path = transcript_dir / str(row["transcript_path"])
+    assert transcript_path.exists()
+    assert "Timestamp OFF" not in transcript_path.read_text(encoding="utf-8")
+    assert "risk-off market" in transcript_path.read_text(encoding="utf-8")
+
+
+def test_missing_transcript_priority_prefers_large_change_rows(tmp_path) -> None:
+    transcript_dir = tmp_path / "transcripts"
+    transcript_dir.mkdir()
+    (transcript_dir / "manifest.json").write_text(
+        """
+[
+  {
+    "video_id": "missing1234",
+    "source": "42macro_youtube",
+    "published_date": "2026-07-08",
+    "title": "Risk-off warning",
+    "url": "https://www.youtube.com/watch?v=missing1234",
+    "transcript_path": "",
+    "word_count": 0,
+    "fetched_at_utc": "",
+    "status": "catalog_only",
+    "error": ""
+  }
+]
+""",
+        encoding="utf-8",
+    )
+    output_dir = tmp_path / "reports"
+    output_dir.mkdir()
+    pd.DataFrame(
+        [
+            {
+                "video_id": "missing1234",
+                "published_date": "2026-07-08",
+                "large_change_focus": True,
+                "abs_disagreement": 0.8,
+            }
+        ]
+    ).to_csv(output_dir / "daily_comparison.csv", index=False)
+
+    priority = write_missing_42macro_transcript_priority(
+        transcript_dir=transcript_dir,
+        output_dir=output_dir,
+    )
+
+    assert len(priority) == 1
+    assert priority.iloc[0]["priority_score"] >= 100
+    assert priority.iloc[0]["transcript_url"].endswith("v=missing1234")
+    assert "large-change" in priority.iloc[0]["priority_reason"]
 
 
 def test_warehouse_persists_external_macro_alignment(tmp_path) -> None:
@@ -169,3 +275,56 @@ def test_warehouse_persists_external_macro_alignment(tmp_path) -> None:
     assert warehouse.read_table("external_macro_tradebot_comparisons").iloc[0][
         "disagreement"
     ] == pytest.approx(1.1)
+
+
+def test_forward_outcome_scores_reward_defense_before_left_tail() -> None:
+    dates = pd.bdate_range("2026-01-01", periods=30)
+    prices = pd.DataFrame(
+        {
+            "SPY": [
+                100,
+                99,
+                96,
+                94,
+                93,
+                92,
+                91,
+                91,
+                92,
+                93,
+                *([93] * 20),
+            ],
+            "BIL": [100 + index * 0.01 for index in range(30)],
+        },
+        index=dates,
+    )
+    comparisons = pd.DataFrame(
+        [
+            {
+                "video_id": "abc",
+                "published_date": "2026-01-01",
+                "matched_market_date": "2026-01-01",
+                "macro_posture_score": -0.8,
+                "trade_bot_posture_score": 0.8,
+                "classification_text_source": "transcript",
+                "classification_confidence": 1.0,
+            }
+        ]
+    )
+
+    outcomes = build_forward_outcome_scores(
+        comparisons,
+        prices,
+        horizons={"1w": 5},
+    )
+    summary = summarize_forward_outcome_scores(outcomes)
+
+    assert outcomes.iloc[0]["realized_environment"] == "left_tail"
+    assert outcomes.iloc[0]["macro_action_score"] > outcomes.iloc[0]["trade_bot_action_score"]
+    assert bool(outcomes.iloc[0]["trade_bot_overrisk"])
+    assert not bool(outcomes.iloc[0]["macro_overrisk"])
+    assert summary[summary["scope"].eq("transcript")].iloc[0][
+        "macro_mean_action_score"
+    ] > summary[summary["scope"].eq("transcript")].iloc[0][
+        "trade_bot_mean_action_score"
+    ]

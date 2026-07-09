@@ -1,0 +1,135 @@
+source: 42macro_youtube
+published_date: 2024-01-22
+video_id: Pc8mq9LOyHo
+url: https://www.youtube.com/watch?v=Pc8mq9LOyHo
+title: The Macro Minute | January 22, 2024
+
+happy Monday out there team 42 it's your
+skiber here at Darius Dell to present
+our macro minute for Monday January 22nd
+2024 as always we'll start with our
+executive summary from today's leadoff
+morning note if you would like the
+analysis supporting these conclusions as
+well as what to specifically do about
+them in your portfolio you need to be a
+client 42 macro so we'll start with
+today's key macro event which is uh
+still no data points worthy of upending
+goil loocks but the next two weeks are
+critical so the Nuance on that is a
+Friday's January University of Michigan
+consumer sentiment report was supportive
+of the soft Landing consensus implied by
+the current Goldilocks top top down
+Market regime also supportive of
+Goldilocks is the rolling recovery in
+the housing market which Friday's
+existing home sales confirmed via the
+highest year-over-year growth rate since
+March of 2022 from a market implication
+standpoint uh as discussed in Friday's
+ladup morning note the next two weeks
+present investors with the Bevy of macro
+Catalyst that each threaten Stern Ravel
+soft Landing plus favorable liquidity
+Dynamics consensus implied by the
+current goil loocks top down Market
+regime Bears must gain control of ass
+asset markets over the next few weeks
+because if they do not they will be
+forced into upside capitulation heading
+into the spring uh transitioning to my
+42 macro dashboard here getting a couple
+of overbought signals here that's of
+consequence so the S&P 500 overbought
+here in the context of the trading range
+signals from our friends over at longb
+so definitely uh decent spot to be
+looking some gains and maybe take
+tactically taking down some risk NASDAQ
+100 uh Futures over bought as well uh
+and then I think that was it oh and
+Bitcoin still Nearing lower boundary of
+its probable range there so definitely
+be aware of that and then lastly
+transitioning to our 42 mro aware
+Community getting a question here uh
+that reads uh hi Darius I Echo the rest
+of the community in thanking you uh for
+the amazing and unique work I spent
+various years searching for a product
+like this clearly without luck until now
+thank you for the kind compliment and
+recently subscribed to the round the
+horn membership after following you for
+a while the first question regards the
+the mechanical way to properly implement
+the output of your models when it comes
+to customizing our our Flagship kit his
+portfolio construction process with
+foreign equities exposure uh suppose for
+for instance one wants to add fxi which
+is China and India which is India to the
+process in terms of the bottom up risk
+management overlay featured in Kiss uh
+it's pretty clear that uh the the column
+the volatil Justus momentum signal in
+the discretionary investment idea
+summary uh is the uh is where to get the
+uh the information for the bottomup RIS
+management overlay so that is correct uh
+it's not clear to me that the the client
+where one should look at in terms of the
+Wacker weather model with respect to
+outputs of foreign markets um so just
+the quick answer on that is the you
+would be using the stock market so it
+corresponds to the the weather model
+signal composite signal corresponds to
+the various asset classes so there's the
+stock market the bond market uh the
+dollar the currency Market uh and then
+the Commodities market and crypto Market
+we we use Bitcoin to proxy the crypto
+market so obviously for foreign for
+international equities we'd be anchoring
+on the stock market uh signal as well
+for something like gold you'd be taking
+the inverse of the US dollar signal and
+obviously for the various um
+cryptocurrency exposures uh you'd be
+taking the um taking the uh taking the
+signal from uh from from Bitcoin so
+that's pretty uh that's pretty
+straightforward there and then the next
+question the final part of the question
+is uh where could we find your work on
+the fourth turning you mentioned that a
+few times but Haven manag to find where
+it is so uh the work our Deep dive
+seminal work on the fourth turning uh
+it's in the it's in the appendix section
+of every macro Scouting Report uh we
+introduced it in our September 2023
+macros Scot report we beefed it up a
+little bit in the October 23 Macos
+scouting report and we've just kept it
+updating and refreshing the data uh ever
+since so definitely check that out any
+of our most recent Macos scouting
+reports you'll find our it's about 30 40
+slides uh uh in terms of the appendix
+there of all the Deep dive empirical
+studies on the fourth turning uh in
+terms of uh what investors should expect
+from the economy from policy makers and
+ultimately from asset markets throughout
+the duration of this fourth turning uh
+regime that we're currently in so we
+wrap it up there Terry St presenting our
+macro minute for Monday January 22nd
+2024 everyone have a wonderful day out
+there best of luck out there and we'll
+catch you back here tomorrow
+cheers

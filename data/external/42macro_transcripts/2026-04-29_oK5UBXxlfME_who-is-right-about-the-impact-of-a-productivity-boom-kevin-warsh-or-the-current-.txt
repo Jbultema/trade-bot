@@ -1,0 +1,292 @@
+source: 42macro_youtube
+published_date: 2026-04-29
+video_id: oK5UBXxlfME
+url: https://www.youtube.com/watch?v=oK5UBXxlfME
+title: Who Is Right About the Impact of a Productivity Boom: Kevin Warsh or the Current FOMC?
+
+Well, investors will also be eagerly
+watching the next moves of the Federal
+Reserve as the FOMC begins the two-day
+April meeting. Let's get into what's
+expected from the Fed and the wider
+market with Darius Dale. He is 42
+Macro's founder and CEO, and also
+Christian Hoffman, head of fixed income
+at Thornburg Investment Management.
+Let's just take a step back because
+tomorrow could be Fed Chair Jerome
+Powell's last meeting. Christian, I want
+to get to you first. What do you make of
+that and what do you think is sort of
+the moment that everyone will be waiting
+for? Will we get sort of any indication
+if Fed Chair Jerome Powell will stay on
+the Board of Governors?
+I don't think we get that on Wednesday,
+but I've actually evolved my thought
+process on this. I think it I think he
+actually sticks around at least till the
+end of the year.
+It seems like there's a bit of fuzziness
+on if the DOJ investigation is getting
+it maybe you know, acceptable to some
+folks to to confirm Warsh, but I'm not
+sure it's going to be acceptable to
+Powell.
+Um, so I don't think he stays around
+forever, but I think the likelihood that
+he's around past May 15th is actually
+fairly high at this point. Uh, look,
+we've gone from really, you know, almost
+halfway through the year and and no rate
+cuts and that's actually turning out to
+be a base case for the rest of the year.
+Now, that can change rapidly if the data
+changes, but right now the market is
+basically pricing in less than a 25%
+chance of any cuts for the totality of
+2026 and looking at the data today, that
+seems right the right call. I think the
+most interesting that could come out of
+the meeting is really any insights to
+any high frequency data on the on the
+macro economy,
+but broadly I think markets are
+preparing for hawkish rhetoric,
+which I think is the right call. Now,
+the question is how much of that is
+being priced in in advance and I think
+there actually might be a decent amount,
+which is why you're seeing some of the
+sell-off today.
+Darius, one thing that I do like is that
+once we hear from
+from the Fed, then we have press
+conferences, but it doesn't seem like
+that could be the case under Kevin
+Warsh. As Christian just had noted, we
+sort of hear sort of tea leaves of a
+more hawkish tone maybe prior or more
+dovish tone.
+What would a Fed look like under Kevin
+Warsh and just how different would it
+would the markets react should there not
+be that following press conference?
+Oh, thanks for having me, Brooke. So,
+the the Fed is going to be very
+different under Kevin
+Warsh as outlined in his Senate
+confirmation testimony. For one, there's
+probably going to be a lot less, I
+guess, popcorn, if you will, of Fed
+speak as it relates to their their their
+their outlook for policy and and and and
+the economy. So, that's number one, but
+to me I think the biggest delta from the
+Powell Fed to the Kevin Warsh Fed is a
+shift from backward-looking data
+dependency CYA monetary policy to
+forward-looking data dependency I have a
+view and we are going to have a Bayesian
+inference process to adjust away from
+that view if the data tells us to
+monetary policy. Chair Powell was a
+fantastic human being uh throughout his
+entire time as Fed Chair and and has
+guided the country through a lot of, you
+know, very difficult times.
+However, his track record as Fed Chair
+has been been quite poor, if you will.
+He's made five major monetary policy
+errors since 2018 alone and as a partial
+as a function of this backward-looking
+data dependency. So, you have to expect
+the Kevin Warsh Fed is going to come in,
+convince his
+colleagues on the FOMC that we are in
+fact in a structural uptrend in
+productivity, which is something our
+research has long argued for and as a
+function of that, the Federal Reserve
+has a lot more scope on the policy rate
+than than than is currently priced in
+the markets. Hey Darius, I like that
+maybe a reverse-looking versus a
+forward-looking Kevin Warsh. Christian,
+for you, you are also very focused on
+productivity gains, especially when it
+comes to AI. How do you think we'll be
+viewing this moving forward and maybe
+just how different will it be viewed by
+the Fed?
+I think we're all watching it play out
+in real time and I think it's happening,
+you know, a lot faster than than people
+you know, initially expected.
+One of the interesting things is how
+it's reverberating through markets in in
+a pretty different way through equity
+markets and fixed income markets.
+Historically, there was this idea that,
+you know, fixed income markets react
+first, but with AI, which is, you know,
+potentially the greatest innovation
+we've seen since the internet, you know,
+it's really the opposite that, you know,
+it has not touched fixed income markets
+really until last year
+and, you know, continue to more slowly
+play out. I think the bigger question
+is, you know, how it impacts the the
+global macroeconomy
+and there are again, I think a strong
+case for increased productivity,
+which is deflationary, but at the same
+time,
+you know, that level of investment and
+potential GDP growth could push the
+neutral rate and real rates to higher
+sustainable levels. So, there's some
+push-pull there. It's not all good nor
+all bad for bonds. That's on the rate
+side, you know, on the credit side,
+which is equally important, it could be
+helpful for the business cycle, but it's
+also going to create winners and losers
+and we're seeing that increasingly in
+equity markets. So, it may make some
+businesses more resilient through the
+cycle, but it's also going to create
+some losers, which should cause pockets
+of of credit markets to
+to see rising defaults and in private
+credit, again, I think it's an easy area
+to pick on, but it does seem, you know,
+we have credit in the crosshairs of, you
+know, some of that innovation and being
+on the wrong side of it. All right,
+definitely something to look out for.
+Something else that caught investors'
+minds that we were just chatting a bit
+about before, but that report from the
+Wall Street Journal that OpenAI did not
+meet their internal targets. We're now
+seeing Oracle, AMD, CoreWeave fall on
+that. Darius, for you, what do you make
+of this pullback and is maybe now the
+time for investors to get in have they
+not been already in on this momentum
+that we've seen over the last last
+month, really?
+Uh, I I would refrain from comment on
+very short-term market movements because
+I think the goal here is to help
+investors retire on time comfortably.
+The thing I will say is that if AI is
+what we all think it's going to be, then
+we're going to see a convergence in the
+productivity,
+and the valuations between AI exposed,
+the AI providers, and the AI
+beneficiaries, which is everyone else.
+And so, if investors are looking to
+allocate fresh capital, they're going to
+have to start to look at the other 493
+in the S&P, the other companies outside
+of our borders, small caps, mid caps,
+because essentially what we're doing is
+we're transferring technology that has
+allowed the AI providers to have
+elevated gross margins and elevated free
+cash flow growth rates to everyone else
+and obviously the technology should have
+impacted those business models the same.
+But can we go back to this conversation
+on productivity before we wrap up
+because I think the consensus view as
+evidenced by the latest summary of
+economic projections is that the
+positive productivity shock is going to
+lead to a unchanged or moderately
+moderately higher neutral rate.
+If you think about this from the
+perspective of the labor market, in our
+opinion, we actually think the neutral
+rate is going to drift lower because
+it's going to be harder to sustain
+employment growth as this technology
+diffuses throughout the economy. I'll
+leave you with one final stat. If you
+break apart the labor market into
+different categories and look at true
+private services payrolls, which are
+payrolls ex-government, ex-healthcare,
+ex-social services and education, so
+basically everything where the
+government is the employer or the
+consumer of last resort and just look at
+the 52% of the labor market that is true
+private services payrolls,
+it peaked in March of 2024.
+With that being said, Christian, I want
+to ask you, we are hearing from Google,
+Microsoft, Meta, Amazon, some of these
+companies which announced an impact to
+their own workforce. They also announced
+layoffs. One, what do you hear what are
+you waiting to hear from those reports
+and two, do you think we'll hear more
+about the impact that this does have on
+these companies' workforce?
+Yeah, I do, but I would I'd be hesitant
+to read too much into, you know, some of
+this very micro high frequency data.
+Again, we're you know, even for the the
+major players, again, the OpenAI news
+today, I think, you know, caught a lot
+of people
+you know, by surprise,
+but to me it kind of
+reminded me of the the mid-90s, right?
+When again, it was clear that the
+internet was was transformational, but
+the there was a lot of the investment
+that turned out to be to be
+malinvestment, particularly on the
+infrastructure side and then the
+ultimate winners, you know, weren't
+decided for for a number of years,
+right? For for a while it was Yahoo, you
+know, AltaVista was a name that, you
+know, was terribly exciting for folks,
+you know, for a long time, but you know,
+Google became the ultimate winner, you
+know, at the end of the day and
+look, you know, six months ago, I think,
+you know, OpenAI was was the industry
+darling and, you know, right now it
+seems like there's a you know, strong
+preference for for Anthropic and Claude
+and again, this is playing out very
+quickly and and in real time
+and I'd be hesitant to extrapolate, you
+know, too much from from any one day,
+but I think history can teach a lot of
+lessons on this. Christian, are you
+saying that we're already seeing the
+winners and the losers here already?
+I'm just saying it's too early to
+declare winners and losers
+>> [music]
+>> and you know, what the whole competitive
+landscape looks like two years from now
+might be unrecognizable from from what
+we're looking at today. All right, we'll
+have to look out for that. Darius,
+Christian, thanks so much for joining
+us. Appreciate your time.
+Thank you. Thank Coming up, the latest
+data shows home price growth is slowing.
+We'll talk about what that can mean for
+home buyers. Next, our market
+domination.
