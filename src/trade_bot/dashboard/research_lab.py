@@ -29,6 +29,11 @@ from trade_bot.dashboard.formatting import (
     _window_start_from_preset,
 )
 from trade_bot.dashboard.metric_explainers import metric_detail
+from trade_bot.dashboard.strategy_candidates import (
+    outcome_candidate_scorecards,
+    outcome_strategy_option_frame,
+    runtime_benchmark_metrics,
+)
 from trade_bot.DEFAULTS import (
     DEFAULT_DECISION_TIMELINE_CONTEXT_DAYS,
     DEFAULT_DECISION_TIMELINE_FORWARD_DAYS,
@@ -1249,9 +1254,21 @@ def _render_approach_detail_workbench(
     if catalog.empty:
         st.write("No approaches are available to inspect.")
         return
+    runtime_leader_frame = outcome_strategy_option_frame(
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+        limit=20,
+    )
+    runtime_leaders = (
+        set(runtime_leader_frame["strategy"].dropna().astype(str))
+        if "strategy" in runtime_leader_frame
+        else set()
+    )
+    runtime_leader_mask = catalog["strategy"].astype(str).isin(runtime_leaders)
 
     scope_options = [
-        "Curated shelf + core baselines",
+        "Runtime leaders + curated shelf + core baselines",
         "Operational candidates + core baselines",
         "All non-pruned research + core baselines",
         "All approaches and archived rows",
@@ -1263,16 +1280,17 @@ def _render_approach_detail_workbench(
         key="approach_detail_scope",
     )
     default_reference = _default_reference_catalog_mask(catalog)
-    if selected_scope == "Curated shelf + core baselines":
-        visible_catalog = catalog[default_reference | catalog["is_curated"]]
+    if selected_scope == "Runtime leaders + curated shelf + core baselines":
+        visible_catalog = catalog[default_reference | catalog["is_curated"] | runtime_leader_mask]
     elif selected_scope == "Operational candidates + core baselines":
         visible_catalog = catalog[
             default_reference
+            | runtime_leader_mask
             | catalog["research_status"].isin(DEFAULT_DEFAULT_APPROACH_RESEARCH_STATUSES)
         ]
     elif selected_scope == "All non-pruned research + core baselines":
         visible_catalog = catalog[
-            default_reference | ~catalog["research_status"].eq("pruned_dead_end")
+            default_reference | runtime_leader_mask | ~catalog["research_status"].eq("pruned_dead_end")
         ]
     else:
         visible_catalog = catalog
@@ -1820,11 +1838,24 @@ def _render_outcome_frontier(
         f"{abs(DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT):.0%}; the hard review band starts at "
         f"{abs(DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT):.0%}."
     )
-    if experiment_scorecards.empty:
-        st.write("No experiment scorecards are available for outcome-frontier analysis yet.")
+    outcome_scorecards = outcome_candidate_scorecards(
+        baseline_run=baseline_run,
+        bot_config=bot_config,
+        experiment_scorecards=experiment_scorecards,
+    )
+    if outcome_scorecards.empty:
+        st.write(
+            "No experiment scorecards or runtime snapshot metrics are available for "
+            "outcome-frontier analysis yet."
+        )
         return
 
-    frame = add_outcome_frontier_flags(enrich_strategy_outcome_utility(experiment_scorecards))
+    frame = add_outcome_frontier_flags(
+        enrich_strategy_outcome_utility(
+            outcome_scorecards,
+            benchmark_metrics=runtime_benchmark_metrics(baseline_run),
+        )
+    )
     if "research_status" in frame:
         active = frame[~frame["research_status"].astype(str).eq("pruned_dead_end")].copy()
         if not active.empty:
@@ -1968,7 +1999,7 @@ def _render_outcome_frontier(
         selected_scorecard,
         bot_config=bot_config,
         baseline_run=baseline_run,
-        experiment_scorecards=experiment_scorecards,
+        experiment_scorecards=outcome_scorecards,
         peer_frame=plot_frame,
     )
 
@@ -2039,18 +2070,18 @@ def _render_outcome_planning_assumptions() -> None:
         "Deterministic utility",
     )
     st.info(
-        "Outcome Frontier is now the deterministic research sorter: historical CAGR, max "
+        "Outcome Frontier is now the deterministic candidate sorter: historical CAGR, max "
         "drawdown, recovery burden, validation gates, and configured contribution assumptions. "
-        "Use it to decide which strategies deserve inspection. Open Simulation Lab for "
-        "historical bootstrap paths, regime-conditioned futures, reference overlays, and "
-        "simulation interpretability."
+        "It includes migrated experiments plus the latest configured runtime snapshot strategies. "
+        "Use it to decide which strategies deserve inspection. Open Simulation Lab for historical "
+        "bootstrap paths, regime-conditioned futures, reference overlays, and simulation interpretability."
     )
     with st.expander("Outcome assumption details", expanded=False):
         st.markdown(
             "**What this section does:** deterministic CAGR is used for fast frontier scoring, "
             "using the configured account value, contribution cadence, planning horizon, and "
             "drawdown bands. Simulation-specific settings and outputs live in Simulation Lab so "
-            "this view remains a clean cross-experiment sorter."
+            "this view remains a clean sorter across experiments and configured runtime strategies."
         )
         settings = pd.concat(
             [
@@ -2903,6 +2934,41 @@ def _safe_float(value: object) -> float | None:
     return numeric
 
 
+def _render_runtime_snapshot_leaders(
+    *,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+) -> None:
+    leaders = outcome_strategy_option_frame(
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+        limit=20,
+    )
+    if leaders.empty or "source" not in leaders:
+        return
+    leaders = leaders[leaders["source"].astype(str).eq("latest_runtime_snapshot")].copy()
+    if leaders.empty:
+        return
+    columns = [
+        "display_name",
+        "strategy",
+        "growth_constrained_utility_score",
+        "growth_utility_tier",
+        "cagr",
+        "max_drawdown",
+        "calmar",
+        "average_turnover",
+        "monitoring_readiness_label",
+    ]
+    st.caption("Latest runtime snapshot leaders")
+    _render_metric_dataframe(
+        _display_metrics(leaders[[column for column in columns if column in leaders]].head(10)),
+        hide_index=True,
+    )
+
+
 def _render_experiment_monitor(
     bot_config: Any,
     baseline_run: BaselineRun,
@@ -2987,6 +3053,12 @@ def _render_experiment_monitor(
     if aggregate_view == "Overview":
         experiment_summary = summarize_experiment_history(experiment_scorecards)
         _render_metric_dataframe(_display_metrics(experiment_summary))
+
+        _render_runtime_snapshot_leaders(
+            bot_config=bot_config,
+            baseline_run=baseline_run,
+            experiment_scorecards=experiment_scorecards,
+        )
 
         family_summary = summarize_experiment_families(experiment_scorecards)
         if not family_summary.empty:

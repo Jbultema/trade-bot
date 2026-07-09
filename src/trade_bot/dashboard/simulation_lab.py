@@ -22,6 +22,7 @@ from trade_bot.dashboard.formatting import (
     _format_decimal,
     _format_percent,
 )
+from trade_bot.dashboard.strategy_candidates import outcome_strategy_option_frame
 from trade_bot.dashboard.trends import (
     load_simulation_validation_trend_frame,
     long_metric_line_figure,
@@ -62,10 +63,8 @@ from trade_bot.research.forward_simulation import (
 )
 from trade_bot.research.strategy_outcome_utility import (
     OutcomeBootstrapConfig,
-    add_outcome_frontier_flags,
     bootstrap_outcome_paths,
     contribution_periods_per_year,
-    enrich_strategy_outcome_utility,
     summarize_bootstrap_outcomes,
     terminal_wealth_from_cagr,
 )
@@ -1188,7 +1187,11 @@ def _selected_simulation_strategy(
     baseline_run: BaselineRun,
     experiment_scorecards: pd.DataFrame,
 ) -> tuple[str | None, pd.Series | None, BacktestResult | None]:
-    options = _strategy_option_frame(bot_config, experiment_scorecards)
+    options = _strategy_option_frame(
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+    )
     if options.empty:
         st.warning("No reconstructable strategies are available for simulation.")
         return None, None, None
@@ -2279,21 +2282,19 @@ def _render_simulation_interpretability(
             _render_metric_dataframe(_display_metrics(mix), hide_index=True)
 
 
-def _strategy_option_frame(bot_config: Any, experiment_scorecards: pd.DataFrame) -> pd.DataFrame:
-    if not experiment_scorecards.empty and {"strategy", "cagr", "max_drawdown"}.issubset(
-        experiment_scorecards.columns
-    ):
-        frame = add_outcome_frontier_flags(
-            enrich_strategy_outcome_utility(experiment_scorecards)
-        ).copy()
-        if "research_status" in frame:
-            active = frame[~frame["research_status"].astype(str).eq("pruned_dead_end")].copy()
-            if not active.empty:
-                frame = active
-        frame = frame.sort_values("growth_constrained_utility_score", ascending=False).head(80)
-        frame["simulation_label"] = frame.apply(_scorecard_option_label, axis=1)
+def _strategy_option_frame(
+    *,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+) -> pd.DataFrame:
+    frame = outcome_strategy_option_frame(
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+    )
+    if not frame.empty:
         return frame
-
     catalog = build_approach_catalog(bot_config)
     if catalog.empty or "strategy" not in catalog:
         return pd.DataFrame()
@@ -2308,15 +2309,6 @@ def _strategy_option_frame(bot_config: Any, experiment_scorecards: pd.DataFrame)
         axis=1,
     )
     return output.reset_index(drop=True)
-
-
-def _scorecard_option_label(row: pd.Series) -> str:
-    return (
-        f"{row.get('display_name', row.get('strategy', 'Strategy'))} | "
-        f"utility {_format_decimal(row.get('growth_constrained_utility_score'))} | "
-        f"CAGR {_format_percent(row.get('cagr'))} | "
-        f"DD {_format_percent(row.get('max_drawdown'))}"
-    )
 
 
 def _result_for_strategy(

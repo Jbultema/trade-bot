@@ -1,6 +1,9 @@
 from __future__ import annotations
 
+from types import SimpleNamespace
+
 import pandas as pd
+import pytest
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.dashboard.monitoring import (
@@ -24,6 +27,10 @@ from trade_bot.dashboard.risk_scenarios import (
     _scenario_named_history_figure,
     _scenario_probability_heatmap_figure,
     _scenario_probability_stack_figure,
+)
+from trade_bot.dashboard.strategy_candidates import (
+    outcome_candidate_scorecards,
+    outcome_strategy_option_frame,
 )
 
 
@@ -71,6 +78,104 @@ def test_factor_contribution_waterfall_uses_factor_return_contributions() -> Non
     assert len(figure.data) == 1
     assert "Explained + residual" in list(figure.data[0].x)
     assert list(figure.data[0].y)[-1] == 0.11
+
+
+def test_outcome_frontier_includes_latest_runtime_snapshot_candidates() -> None:
+    baseline_run = SimpleNamespace(
+        metrics=pd.DataFrame(
+            [
+                {
+                    "name": "runtime_frontier_candidate",
+                    "cagr": 0.22,
+                    "max_drawdown": -0.20,
+                    "calmar": 1.10,
+                    "average_turnover": 0.05,
+                },
+                {
+                    "name": "buy_hold_spy",
+                    "cagr": 0.10,
+                    "max_drawdown": -0.55,
+                    "calmar": 0.18,
+                    "average_turnover": 0.0,
+                },
+                {
+                    "name": "buy_hold_qqq",
+                    "cagr": 0.15,
+                    "max_drawdown": -0.53,
+                    "calmar": 0.28,
+                    "average_turnover": 0.0,
+                },
+            ]
+        ).set_index("name"),
+        window_summary=pd.DataFrame(
+            [
+                {
+                    "name": "runtime_frontier_candidate",
+                    "window": "1y",
+                    "worst_cagr": -0.18,
+                    "positive_window_rate": 0.72,
+                },
+                {
+                    "name": "runtime_frontier_candidate",
+                    "window": "3y",
+                    "worst_cagr": 0.02,
+                    "positive_window_rate": 0.90,
+                },
+                {
+                    "name": "buy_hold_spy",
+                    "window": "1y",
+                    "worst_cagr": -0.45,
+                    "positive_window_rate": 0.65,
+                },
+                {
+                    "name": "buy_hold_qqq",
+                    "window": "1y",
+                    "worst_cagr": -0.42,
+                    "positive_window_rate": 0.68,
+                },
+            ]
+        ).set_index(["name", "window"]),
+    )
+    bot_config = SimpleNamespace(strategies={"runtime_frontier_candidate": object()})
+    experiment_scorecards = pd.DataFrame(
+        [
+            {
+                "strategy": "older_experiment_candidate",
+                "source": "experiment_scorecard",
+                "cagr": 0.14,
+                "max_drawdown": -0.20,
+            }
+        ]
+    )
+
+    scorecards = outcome_candidate_scorecards(
+        baseline_run=baseline_run,
+        bot_config=bot_config,
+        experiment_scorecards=experiment_scorecards,
+    )
+
+    assert set(scorecards["strategy"]) == {
+        "runtime_frontier_candidate",
+        "older_experiment_candidate",
+    }
+    runtime = scorecards[scorecards["strategy"].eq("runtime_frontier_candidate")].iloc[0]
+    assert runtime["source"] == "latest_runtime_snapshot"
+    assert runtime["monitoring_readiness_label"] == "snapshot_ready"
+    assert runtime["worst_1y_cagr"] == pytest.approx(-0.18)
+    assert runtime["worst_3y_cagr"] == pytest.approx(0.02)
+
+    option_frame = outcome_strategy_option_frame(
+        baseline_run=baseline_run,
+        bot_config=bot_config,
+        experiment_scorecards=experiment_scorecards,
+    )
+    option_runtime = option_frame[
+        option_frame["strategy"].eq("runtime_frontier_candidate")
+    ].iloc[0]
+    assert option_runtime["wealth_multiple_vs_spy"] > 1.0
+    assert option_runtime["wealth_multiple_vs_qqq"] > 1.0
+    assert option_runtime["worst_1y_cagr"] == pytest.approx(-0.18)
+    assert option_runtime["worst_3y_cagr"] == pytest.approx(0.02)
 
 
 def test_decision_timeline_figure_marks_key_allocation_events() -> None:

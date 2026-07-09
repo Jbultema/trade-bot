@@ -53,7 +53,11 @@ def _render_launch_lab(
 
     from trade_bot.dashboard.simulation_lab import _result_for_strategy, _strategy_option_frame
 
-    options = _strategy_option_frame(bot_config, experiment_scorecards)
+    options = _strategy_option_frame(
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+    )
     selected_strategy, selected_result = _selected_launch_strategy(
         bot_config=bot_config,
         baseline_run=baseline_run,
