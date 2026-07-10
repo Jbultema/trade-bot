@@ -80,6 +80,12 @@ from trade_bot.research.approach_explorer import (
 )
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.curation import rank_strategy_candidates, select_curated_strategy_shelf
+from trade_bot.research.defensive_judgement import (
+    build_defensive_judgement_audit,
+    defensive_judgement_label,
+    effective_defensive_weight,
+    load_scenario_context,
+)
 from trade_bot.research.experiment_monitor import (
     build_strategy_family_map,
     latest_experiment_iteration,
@@ -2018,6 +2024,10 @@ def _render_outcome_frontier(
         "worst_1y_cagr",
         "worst_3y_cagr",
         "left_tail_regime_return",
+        "current_defensive_weight",
+        "defensive_correct_rate",
+        "defensive_false_alarm_rate",
+        "defensive_judgement_label",
         "monitoring_readiness_label",
         "operability_label",
     ]
@@ -2335,6 +2345,196 @@ def _render_outcome_decision_cards(
             "peer_max": "Highest raw value among displayed outcome candidates.",
         },
     )
+    _render_defensive_judgement_section(
+        result,
+        prices=getattr(baseline_run, "prices", pd.DataFrame()),
+    )
+
+
+def _render_defensive_judgement_section(
+    result: BacktestResult | None,
+    *,
+    prices: pd.DataFrame,
+) -> None:
+    st.markdown("**Defensive Signal Judgement**")
+    st.caption(
+        "Historical false-alarm versus correct-judgement audit for moments when this "
+        "candidate moved heavily into BIL/residual cash. Episode starts are counted once "
+        "per defensive crossing so a long caution window does not dominate the sample."
+    )
+    if result is None or prices.empty:
+        st.info("Defensive judgement history is not available for this candidate yet.")
+        return
+
+    scenario_context = load_scenario_context()
+    audit = build_defensive_judgement_audit(
+        result,
+        prices,
+        scenario_context=scenario_context,
+    )
+    summary = audit["summary"]
+    events = audit["events"]
+    if summary.empty:
+        st.info(
+            "This candidate has not generated enough high-defensive episodes to score "
+            "false alarms versus correct defensive judgements."
+        )
+        return
+
+    threshold_options = sorted(summary["threshold"].dropna().unique().tolist())
+    selected_threshold = st.selectbox(
+        "Defensive threshold",
+        threshold_options,
+        index=threshold_options.index(0.65) if 0.65 in threshold_options else 0,
+        format_func=lambda value: f"{value:.0%}+ defensive",
+        key=f"defensive_judgement_threshold_{result.name}",
+    )
+    threshold_summary = summary[summary["threshold"].eq(selected_threshold)].copy()
+    primary = _defensive_primary_summary_row(threshold_summary)
+    current_defensive = _current_defensive_weight(result)
+    cols = st.columns(5)
+    _helped_metric(cols[0], "Current Defensive", _format_percent(current_defensive))
+    _helped_metric(cols[1], "Correct Defense", _format_percent(primary.get("correct_defense_rate")))
+    _helped_metric(cols[2], "False Alarm", _format_percent(primary.get("false_alarm_rate")))
+    _helped_metric(cols[3], "Mixed", _format_percent(primary.get("mixed_rate")))
+    _helped_metric(cols[4], "Episode Starts", _format_decimal(primary.get("episode_starts")))
+
+    label = defensive_judgement_label(primary) if not primary.empty else "not_enough_history"
+    st.info(_defensive_judgement_readout(primary, label=label, threshold=selected_threshold))
+
+    chart_events = events[
+        events["threshold"].eq(selected_threshold)
+        & events["horizon"].astype(str).eq("1m")
+        & events["judgement"].astype(str).ne("insufficient_forward_data")
+    ].copy()
+    if not chart_events.empty:
+        st.plotly_chart(
+            _defensive_judgement_figure(chart_events),
+            use_container_width=True,
+            key=f"defensive_judgement_figure_{result.name}_{selected_threshold}",
+        )
+
+    display_columns = [
+        "horizon",
+        "episode_starts",
+        "correct_defense_rate",
+        "false_alarm_rate",
+        "mixed_rate",
+        "avg_benchmark_excess_vs_cash",
+        "median_benchmark_forward_max_drawdown",
+    ]
+    _render_metric_dataframe(
+        _display_metrics(
+            threshold_summary[[column for column in display_columns if column in threshold_summary]]
+        ),
+        hide_index=True,
+        column_help={
+            "correct_defense_rate": (
+                "Share of defensive episode starts where SPY lagged BIL or suffered a material "
+                "forward drawdown over the evaluation horizon."
+            ),
+            "false_alarm_rate": (
+                "Share of defensive episode starts where SPY materially beat BIL and avoided "
+                "a meaningful drawdown over the evaluation horizon."
+            ),
+            "avg_benchmark_excess_vs_cash": (
+                "Average SPY forward return minus BIL forward return after defensive episode starts."
+            ),
+        },
+    )
+
+
+def _defensive_primary_summary_row(summary: pd.DataFrame) -> pd.Series:
+    if summary.empty:
+        return pd.Series(dtype=object)
+    one_month = summary[summary["horizon"].astype(str).eq("1m")]
+    if not one_month.empty:
+        return one_month.iloc[0]
+    return summary.iloc[0]
+
+
+def _current_defensive_weight(result: BacktestResult) -> float | None:
+    defensive = effective_defensive_weight(result)
+    if defensive.empty:
+        return None
+    return _safe_float(defensive.iloc[-1])
+
+
+def _defensive_judgement_readout(
+    row: pd.Series,
+    *,
+    label: str,
+    threshold: float,
+) -> str:
+    if row.empty:
+        return "Defensive judgement history is not available for this threshold."
+    horizon = str(row.get("horizon", "1m"))
+    episodes = _safe_float(row.get("episode_starts")) or 0.0
+    correct = _format_percent(row.get("correct_defense_rate"))
+    false_alarm = _format_percent(row.get("false_alarm_rate"))
+    drawdown = _format_percent(row.get("median_benchmark_forward_max_drawdown"))
+    excess = _format_percent(row.get("avg_benchmark_excess_vs_cash"))
+    label_text = str(label).replace("_", " ")
+    return (
+        f"At the {threshold:.0%}+ defensive threshold, this candidate has {episodes:.0f} "
+        f"historical {horizon} episode starts. Correct-defense rate is {correct}; false-alarm "
+        f"rate is {false_alarm}. The average benchmark excess versus BIL after these signals "
+        f"was {excess}, with median forward benchmark drawdown of {drawdown}. "
+        f"Label: {label_text}."
+    )
+
+
+def _defensive_judgement_figure(events: pd.DataFrame) -> go.Figure:
+    color_map = {
+        "correct_defense": "#16a34a",
+        "false_alarm": "#dc2626",
+        "mixed_or_early": "#f59e0b",
+    }
+    label_map = {
+        "correct_defense": "Correct defense",
+        "false_alarm": "False alarm",
+        "mixed_or_early": "Mixed",
+    }
+    fig = go.Figure()
+    for judgement, group in events.groupby("judgement"):
+        fig.add_trace(
+            go.Scatter(
+                x=group["date"],
+                y=group["defensive_weight"],
+                mode="markers",
+                name=label_map.get(str(judgement), str(judgement)),
+                marker={
+                    "size": 9,
+                    "color": color_map.get(str(judgement), "#64748b"),
+                    "line": {"width": 1, "color": "#ffffff"},
+                },
+                customdata=group[
+                    [
+                        "benchmark_forward_return",
+                        "cash_forward_return",
+                        "benchmark_forward_max_drawdown",
+                        "strategy_forward_return",
+                    ]
+                ],
+                hovertemplate=(
+                    "%{x|%Y-%m-%d}<br>Defensive weight %{y:.1%}"
+                    "<br>SPY forward %{customdata[0]:.1%}"
+                    "<br>BIL forward %{customdata[1]:.1%}"
+                    "<br>SPY max DD %{customdata[2]:.1%}"
+                    "<br>Strategy forward %{customdata[3]:.1%}<extra></extra>"
+                ),
+            )
+        )
+    fig.update_layout(
+        title="1M defensive episode outcomes",
+        height=360,
+        yaxis_title="Defensive weight at episode start",
+        yaxis_tickformat=".0%",
+        xaxis_title="Episode start",
+        legend_title="Judgement",
+        margin={"l": 20, "r": 20, "t": 45, "b": 20},
+    )
+    return fig
 
 
 def _outcome_selected_benchmark_context(

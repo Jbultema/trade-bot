@@ -1,0 +1,514 @@
+from __future__ import annotations
+
+from dataclasses import dataclass
+from pathlib import Path
+from typing import Iterable
+
+import pandas as pd
+
+from trade_bot.backtest.engine import BacktestResult
+
+
+@dataclass(frozen=True)
+class DefensiveJudgementHorizon:
+    label: str
+    trading_days: int
+    drawdown_correct_threshold: float
+    false_alarm_excess_threshold: float
+    false_alarm_drawdown_floor: float
+
+
+DEFAULT_DEFENSIVE_THRESHOLDS: tuple[float, ...] = (0.65, 0.75, 0.85, 0.90)
+DEFAULT_DEFENSIVE_JUDGEMENT_HORIZONS: tuple[DefensiveJudgementHorizon, ...] = (
+    DefensiveJudgementHorizon(
+        label="1w",
+        trading_days=5,
+        drawdown_correct_threshold=-0.03,
+        false_alarm_excess_threshold=0.01,
+        false_alarm_drawdown_floor=-0.02,
+    ),
+    DefensiveJudgementHorizon(
+        label="1m",
+        trading_days=21,
+        drawdown_correct_threshold=-0.05,
+        false_alarm_excess_threshold=0.02,
+        false_alarm_drawdown_floor=-0.03,
+    ),
+    DefensiveJudgementHorizon(
+        label="3m",
+        trading_days=63,
+        drawdown_correct_threshold=-0.08,
+        false_alarm_excess_threshold=0.05,
+        false_alarm_drawdown_floor=-0.05,
+    ),
+)
+
+
+def effective_defensive_weight(
+    result: BacktestResult,
+    *,
+    defensive_ticker: str = "BIL",
+) -> pd.Series:
+    """Return explicit defensive allocation plus residual cash from risk scaling."""
+
+    if result.weights.empty:
+        return pd.Series(dtype=float, name="effective_defensive_weight")
+    weights = result.weights.sort_index().astype(float).fillna(0.0)
+    explicit_defensive = (
+        weights[defensive_ticker]
+        if defensive_ticker in weights
+        else pd.Series(0.0, index=weights.index)
+    )
+    residual_cash = (1.0 - weights.sum(axis=1)).clip(lower=0.0)
+    return (explicit_defensive + residual_cash).clip(lower=0.0, upper=1.0).rename(
+        "effective_defensive_weight"
+    )
+
+
+def build_defensive_judgement_audit(
+    result: BacktestResult,
+    prices: pd.DataFrame,
+    *,
+    thresholds: Iterable[float] = DEFAULT_DEFENSIVE_THRESHOLDS,
+    horizons: Iterable[DefensiveJudgementHorizon] = DEFAULT_DEFENSIVE_JUDGEMENT_HORIZONS,
+    defensive_ticker: str = "BIL",
+    benchmark_ticker: str = "SPY",
+    cash_ticker: str = "BIL",
+    scenario_context: pd.DataFrame | None = None,
+) -> dict[str, pd.DataFrame]:
+    """Audit whether high defensive sizing historically protected or overreacted.
+
+    The audit is intentionally episode-based. Consecutive high-defensive days are counted
+    once at the crossing date so a long defensive spell does not dominate the evidence.
+    """
+
+    if result.weights.empty or prices.empty:
+        return _empty_audit()
+    if benchmark_ticker not in prices or cash_ticker not in prices:
+        return _empty_audit()
+
+    prices = prices.sort_index()
+    common_index = result.weights.index.intersection(prices.index)
+    if common_index.empty:
+        return _empty_audit()
+
+    prices = prices.reindex(common_index)
+    defensive_weight = effective_defensive_weight(
+        result,
+        defensive_ticker=defensive_ticker,
+    ).reindex(common_index).ffill().fillna(0.0)
+    risk_weight = (1.0 - defensive_weight).clip(lower=0.0, upper=1.0)
+    returns = result.returns.reindex(common_index).fillna(0.0)
+
+    day_rows: list[dict[str, object]] = []
+    event_rows: list[dict[str, object]] = []
+    threshold_values = tuple(float(threshold) for threshold in thresholds)
+    horizon_values = tuple(horizons)
+
+    for threshold in threshold_values:
+        signal = defensive_weight >= threshold
+        episode_start = signal & ~signal.shift(1, fill_value=False)
+        for position, date in enumerate(common_index):
+            if not bool(signal.iloc[position]):
+                continue
+            row = {
+                "strategy": result.name,
+                "date": date,
+                "threshold": threshold,
+                "defensive_weight": float(defensive_weight.iloc[position]),
+                "risk_weight": float(risk_weight.iloc[position]),
+                "episode_start": bool(episode_start.iloc[position]),
+                "nonpanic_defensive": bool(defensive_weight.iloc[position] < 0.90),
+                "panic_defensive": bool(defensive_weight.iloc[position] >= 0.90),
+            }
+            day_rows.append(row)
+            if not bool(episode_start.iloc[position]):
+                continue
+            for horizon in horizon_values:
+                benchmark_return = _forward_return(
+                    prices[benchmark_ticker],
+                    position,
+                    horizon.trading_days,
+                )
+                cash_return = _forward_return(
+                    prices[cash_ticker],
+                    position,
+                    horizon.trading_days,
+                )
+                benchmark_drawdown = _forward_max_drawdown(
+                    prices[benchmark_ticker],
+                    position,
+                    horizon.trading_days,
+                )
+                strategy_return = _forward_strategy_return(
+                    returns,
+                    position,
+                    horizon.trading_days,
+                )
+                event_rows.append(
+                    {
+                        **row,
+                        "horizon": horizon.label,
+                        "forward_days": horizon.trading_days,
+                        "benchmark_ticker": benchmark_ticker,
+                        "cash_ticker": cash_ticker,
+                        "benchmark_forward_return": benchmark_return,
+                        "cash_forward_return": cash_return,
+                        "strategy_forward_return": strategy_return,
+                        "benchmark_excess_vs_cash": (
+                            benchmark_return - cash_return
+                            if pd.notna(benchmark_return) and pd.notna(cash_return)
+                            else pd.NA
+                        ),
+                        "benchmark_forward_max_drawdown": benchmark_drawdown,
+                        "judgement": classify_defensive_judgement(
+                            benchmark_forward_return=benchmark_return,
+                            cash_forward_return=cash_return,
+                            benchmark_forward_max_drawdown=benchmark_drawdown,
+                            horizon=horizon,
+                        ),
+                    }
+                )
+
+    days = pd.DataFrame(day_rows)
+    events = pd.DataFrame(event_rows)
+    if not events.empty and scenario_context is not None and not scenario_context.empty:
+        events = _attach_scenario_context(events, scenario_context)
+    summary = summarize_defensive_judgement(events)
+    return {"days": days, "events": events, "summary": summary}
+
+
+def classify_defensive_judgement(
+    *,
+    benchmark_forward_return: float | pd.NA,
+    cash_forward_return: float | pd.NA,
+    benchmark_forward_max_drawdown: float | pd.NA,
+    horizon: DefensiveJudgementHorizon,
+) -> str:
+    if (
+        pd.isna(benchmark_forward_return)
+        or pd.isna(cash_forward_return)
+        or pd.isna(benchmark_forward_max_drawdown)
+    ):
+        return "insufficient_forward_data"
+    benchmark_return = float(benchmark_forward_return)
+    cash_return = float(cash_forward_return)
+    benchmark_drawdown = float(benchmark_forward_max_drawdown)
+    if (
+        benchmark_return <= cash_return
+        or benchmark_drawdown <= horizon.drawdown_correct_threshold
+    ):
+        return "correct_defense"
+    if (
+        benchmark_return - cash_return >= horizon.false_alarm_excess_threshold
+        and benchmark_drawdown >= horizon.false_alarm_drawdown_floor
+    ):
+        return "false_alarm"
+    return "mixed_or_early"
+
+
+def summarize_defensive_judgement(events: pd.DataFrame) -> pd.DataFrame:
+    if events.empty:
+        return pd.DataFrame()
+    rows: list[dict[str, object]] = []
+    for keys, group in events.groupby(["strategy", "threshold", "horizon"], dropna=False):
+        strategy, threshold, horizon = keys
+        eligible = group[group["judgement"].astype(str).ne("insufficient_forward_data")]
+        if eligible.empty:
+            continue
+        judgement = eligible["judgement"].astype(str)
+        rows.append(
+            {
+                "strategy": strategy,
+                "threshold": threshold,
+                "horizon": horizon,
+                "episode_starts": int(len(eligible)),
+                "correct_defense": int(judgement.eq("correct_defense").sum()),
+                "false_alarm": int(judgement.eq("false_alarm").sum()),
+                "mixed_or_early": int(judgement.eq("mixed_or_early").sum()),
+                "correct_defense_rate": float(judgement.eq("correct_defense").mean()),
+                "false_alarm_rate": float(judgement.eq("false_alarm").mean()),
+                "mixed_rate": float(judgement.eq("mixed_or_early").mean()),
+                "avg_benchmark_forward_return": float(
+                    pd.to_numeric(eligible["benchmark_forward_return"], errors="coerce").mean()
+                ),
+                "avg_cash_forward_return": float(
+                    pd.to_numeric(eligible["cash_forward_return"], errors="coerce").mean()
+                ),
+                "avg_benchmark_excess_vs_cash": float(
+                    pd.to_numeric(eligible["benchmark_excess_vs_cash"], errors="coerce").mean()
+                ),
+                "median_benchmark_forward_return": float(
+                    pd.to_numeric(eligible["benchmark_forward_return"], errors="coerce").median()
+                ),
+                "median_benchmark_forward_max_drawdown": float(
+                    pd.to_numeric(
+                        eligible["benchmark_forward_max_drawdown"],
+                        errors="coerce",
+                    ).median()
+                ),
+            }
+        )
+    if not rows:
+        return pd.DataFrame()
+    order = {"1w": 0, "1m": 1, "3m": 2}
+    summary = pd.DataFrame(rows)
+    return summary.sort_values(
+        ["strategy", "threshold", "horizon"],
+        key=lambda column: column.map(order) if column.name == "horizon" else column,
+    ).reset_index(drop=True)
+
+
+def defensive_judgement_scorecard(
+    result: BacktestResult,
+    prices: pd.DataFrame,
+    *,
+    threshold: float = 0.65,
+    horizon: str = "1m",
+    defensive_ticker: str = "BIL",
+    benchmark_ticker: str = "SPY",
+    cash_ticker: str = "BIL",
+) -> dict[str, float | int | str | None]:
+    audit = build_defensive_judgement_audit(
+        result,
+        prices,
+        thresholds=(threshold,),
+        horizons=DEFAULT_DEFENSIVE_JUDGEMENT_HORIZONS,
+        defensive_ticker=defensive_ticker,
+        benchmark_ticker=benchmark_ticker,
+        cash_ticker=cash_ticker,
+    )
+    summary = audit["summary"]
+    defensive_weight = effective_defensive_weight(
+        result,
+        defensive_ticker=defensive_ticker,
+    )
+    current_defensive_weight = (
+        float(defensive_weight.iloc[-1]) if not defensive_weight.empty else None
+    )
+    output: dict[str, float | int | str | None] = {
+        "defensive_threshold": threshold,
+        "defensive_judgement_horizon": horizon,
+        "current_defensive_weight": current_defensive_weight,
+        "current_risk_weight": (
+            1.0 - current_defensive_weight
+            if current_defensive_weight is not None
+            else None
+        ),
+        "defensive_judgement_label": "not_enough_history",
+        "defensive_episode_starts": 0,
+        "defensive_correct_rate": None,
+        "defensive_false_alarm_rate": None,
+        "defensive_mixed_rate": None,
+        "defensive_avg_benchmark_excess_vs_cash": None,
+        "defensive_median_forward_drawdown": None,
+    }
+    if summary.empty or not {"threshold", "horizon"}.issubset(summary.columns):
+        return output
+    selected = summary[
+        summary["threshold"].eq(threshold) & summary["horizon"].astype(str).eq(horizon)
+    ]
+    if selected.empty:
+        return output
+    row = selected.iloc[0]
+    output.update(
+        {
+            "defensive_episode_starts": int(row.get("episode_starts", 0)),
+            "defensive_correct_rate": float(row["correct_defense_rate"]),
+            "defensive_false_alarm_rate": float(row["false_alarm_rate"]),
+            "defensive_mixed_rate": float(row["mixed_rate"]),
+            "defensive_avg_benchmark_excess_vs_cash": float(
+                row["avg_benchmark_excess_vs_cash"]
+            ),
+            "defensive_median_forward_drawdown": float(
+                row["median_benchmark_forward_max_drawdown"]
+            ),
+            "defensive_judgement_label": defensive_judgement_label(row),
+        }
+    )
+    return output
+
+
+def defensive_judgement_label(summary_row: pd.Series) -> str:
+    correct_rate = _safe_float(summary_row.get("correct_defense_rate"))
+    false_alarm_rate = _safe_float(summary_row.get("false_alarm_rate"))
+    episode_starts = _safe_float(summary_row.get("episode_starts"))
+    if episode_starts is None or episode_starts < 8:
+        return "thin_history"
+    if correct_rate is not None and correct_rate >= 0.60 and (
+        false_alarm_rate is None or false_alarm_rate <= 0.25
+    ):
+        return "defensive_signal_useful"
+    if false_alarm_rate is not None and false_alarm_rate >= 0.40:
+        return "frequent_false_alarm"
+    if correct_rate is not None and correct_rate >= 0.45:
+        return "mixed_but_informative"
+    return "weak_defensive_signal"
+
+
+def load_scenario_context(
+    paths: Iterable[Path] = (
+        Path("reports/simulation_validation/scenario_history.csv"),
+        Path("reports/simulation_validation/reconstructed_scenario_history.csv"),
+    ),
+) -> pd.DataFrame:
+    frames: list[pd.DataFrame] = []
+    for path in paths:
+        if not path.exists():
+            continue
+        frame = pd.read_csv(path)
+        required = {"market_date", "horizon", "risk_bucket", "probability"}
+        if not required.issubset(frame.columns):
+            continue
+        frame["date"] = pd.to_datetime(frame["market_date"], errors="coerce").dt.tz_localize(
+            None
+        )
+        frame["source_file"] = path.name
+        frames.append(frame.dropna(subset=["date"]))
+    if not frames:
+        return pd.DataFrame()
+    combined = pd.concat(frames, ignore_index=True, sort=False)
+    combined["source_priority"] = combined["source_file"].eq("scenario_history.csv").astype(int)
+    combined = combined.sort_values(["date", "horizon", "risk_bucket", "source_priority"])
+    combined = combined.drop_duplicates(["date", "horizon", "risk_bucket"], keep="last")
+    bucket = (
+        combined[combined["horizon"].astype(str).eq("1m")]
+        .groupby(["date", "risk_bucket"], as_index=False)["probability"]
+        .sum()
+        .pivot(index="date", columns="risk_bucket", values="probability")
+        .fillna(0.0)
+        .sort_index()
+    )
+    for column in ["risk_off", "transition", "risk_on_fragile", "risk_on"]:
+        if column not in bucket:
+            bucket[column] = 0.0
+    bucket["defensive_or_transition_probability"] = bucket["risk_off"] + bucket["transition"]
+    bucket["constructive_probability"] = bucket["risk_on"] + bucket["risk_on_fragile"]
+    bucket["scenario_context"] = "mixed"
+    bucket.loc[bucket["risk_off"] >= 0.25, "scenario_context"] = "risk_off_elevated"
+    bucket.loc[
+        bucket["defensive_or_transition_probability"] >= 0.45,
+        "scenario_context",
+    ] = "transition_defensive"
+    bucket.loc[
+        bucket["risk_on_fragile"] >= 0.20,
+        "scenario_context",
+    ] = "fragile_constructive"
+    bucket.loc[
+        bucket["constructive_probability"] >= 0.35,
+        "scenario_context",
+    ] = "constructive"
+    return bucket.reset_index()
+
+
+def write_defensive_judgement_report(
+    *,
+    results: dict[str, BacktestResult],
+    prices: pd.DataFrame,
+    output_dir: Path,
+    strategy_names: Iterable[str] | None = None,
+) -> dict[str, Path]:
+    output_dir.mkdir(parents=True, exist_ok=True)
+    selected_names = list(strategy_names) if strategy_names is not None else list(results)
+    scenario_context = load_scenario_context()
+    days_frames: list[pd.DataFrame] = []
+    event_frames: list[pd.DataFrame] = []
+    summary_frames: list[pd.DataFrame] = []
+    scorecard_rows: list[dict[str, object]] = []
+    for strategy_name in selected_names:
+        result = results.get(strategy_name)
+        if result is None:
+            continue
+        audit = build_defensive_judgement_audit(
+            result,
+            prices,
+            scenario_context=scenario_context,
+        )
+        days_frames.append(audit["days"])
+        event_frames.append(audit["events"])
+        summary_frames.append(audit["summary"])
+        scorecard = defensive_judgement_scorecard(result, prices)
+        scorecard["strategy"] = strategy_name
+        scorecard_rows.append(scorecard)
+    outputs = {
+        "days": output_dir / "defensive_signal_days.csv",
+        "events": output_dir / "defensive_episode_outcomes.csv",
+        "summary": output_dir / "defensive_signal_summary.csv",
+        "scorecards": output_dir / "defensive_signal_scorecards.csv",
+    }
+    _concat_or_empty(days_frames).to_csv(outputs["days"], index=False)
+    _concat_or_empty(event_frames).to_csv(outputs["events"], index=False)
+    _concat_or_empty(summary_frames).to_csv(outputs["summary"], index=False)
+    pd.DataFrame(scorecard_rows).to_csv(outputs["scorecards"], index=False)
+    return outputs
+
+
+def _forward_return(series: pd.Series, position: int, days: int) -> float | pd.NA:
+    end = position + days
+    if position < 0 or end >= len(series):
+        return pd.NA
+    start_value = series.iloc[position]
+    end_value = series.iloc[end]
+    if pd.isna(start_value) or pd.isna(end_value) or float(start_value) == 0.0:
+        return pd.NA
+    return float(end_value / start_value - 1.0)
+
+
+def _forward_strategy_return(returns: pd.Series, position: int, days: int) -> float | pd.NA:
+    end = position + days
+    if position < 0 or end >= len(returns):
+        return pd.NA
+    return float((1.0 + returns.iloc[position + 1 : end + 1]).prod() - 1.0)
+
+
+def _forward_max_drawdown(series: pd.Series, position: int, days: int) -> float | pd.NA:
+    end = position + days
+    if position < 0 or end >= len(series):
+        return pd.NA
+    path = series.iloc[position : end + 1].dropna()
+    if path.empty:
+        return pd.NA
+    relative = path / path.iloc[0]
+    drawdown = relative / relative.cummax() - 1.0
+    return float(drawdown.min())
+
+
+def _attach_scenario_context(events: pd.DataFrame, scenario_context: pd.DataFrame) -> pd.DataFrame:
+    if "date" not in scenario_context:
+        return events
+    left = events.copy().sort_values("date")
+    right = scenario_context.copy().sort_values("date")
+    left["date"] = pd.to_datetime(left["date"]).dt.tz_localize(None)
+    right["date"] = pd.to_datetime(right["date"]).dt.tz_localize(None)
+    return pd.merge_asof(
+        left,
+        right,
+        on="date",
+        direction="backward",
+        tolerance=pd.Timedelta(days=65),
+    )
+
+
+def _safe_float(value: object) -> float | None:
+    try:
+        numeric = float(value)  # type: ignore[arg-type]
+    except (TypeError, ValueError):
+        return None
+    if numeric != numeric:
+        return None
+    return numeric
+
+
+def _concat_or_empty(frames: list[pd.DataFrame]) -> pd.DataFrame:
+    clean = [frame for frame in frames if not frame.empty]
+    if not clean:
+        return pd.DataFrame()
+    return pd.concat(clean, ignore_index=True, sort=False)
+
+
+def _empty_audit() -> dict[str, pd.DataFrame]:
+    return {
+        "days": pd.DataFrame(),
+        "events": pd.DataFrame(),
+        "summary": pd.DataFrame(),
+    }

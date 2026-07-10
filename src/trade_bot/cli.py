@@ -52,6 +52,7 @@ from trade_bot.DEFAULTS import (
 from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
 from trade_bot.research.baselines import run_configured_baselines
+from trade_bot.research.defensive_judgement import write_defensive_judgement_report
 from trade_bot.research.entry_date_analysis import build_entry_date_analysis
 from trade_bot.research.experiment_monitor import (
     load_experiment_candidates,
@@ -1317,6 +1318,43 @@ def validate_simulation_engine_cmd(
         ablation_summary=ablation_frame,
     )
     console.print(f"Saved simulation validation history to DuckDB as {validation_run_id}.")
+
+
+@app.command("audit-defensive-judgement")
+def audit_defensive_judgement_cmd(
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = Path("reports/defensive_signal_audit"),
+    strategies: Annotated[
+        str,
+        typer.Option(
+            "--strategies",
+            help="Comma-separated strategy names. Defaults to every strategy in the latest snapshot.",
+        ),
+    ] = "",
+) -> None:
+    """Backfill false-alarm versus correct-defense metrics from saved backtests."""
+
+    store = RunStore()
+    baseline_run, _manifest = store.load_latest_snapshot(require_matching_config=False)
+    strategy_names = [
+        strategy.strip()
+        for strategy in strategies.split(",")
+        if strategy.strip()
+    ] or None
+    outputs = write_defensive_judgement_report(
+        results=baseline_run.results,
+        prices=baseline_run.prices,
+        output_dir=output_dir,
+        strategy_names=strategy_names,
+    )
+    table = Table(title="Defensive Judgement Audit")
+    table.add_column("artifact")
+    table.add_column("path")
+    for name, path in outputs.items():
+        table.add_row(name, str(path))
+    console.print(table)
 
 
 @app.command("migrate-warehouse")

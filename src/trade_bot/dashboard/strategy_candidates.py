@@ -6,6 +6,7 @@ import pandas as pd
 
 from trade_bot.dashboard.formatting import _format_decimal, _format_percent
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.research.defensive_judgement import defensive_judgement_scorecard
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.research.strategy_outcome_utility import (
     add_outcome_frontier_flags,
@@ -104,6 +105,9 @@ def runtime_outcome_scorecards(
         )
         if not window_values.empty:
             runtime[output_column] = runtime["strategy"].astype(str).map(window_values)
+    defensive_scorecards = _runtime_defensive_judgement_values(baseline_run)
+    if not defensive_scorecards.empty:
+        runtime = runtime.merge(defensive_scorecards, on="strategy", how="left")
     return runtime
 
 
@@ -151,6 +155,19 @@ def _runtime_window_values(
         return pd.Series(dtype=float)
     values = pd.to_numeric(selected.set_index(strategy_column)[column], errors="coerce")
     return values[~values.index.duplicated(keep="last")]
+
+
+def _runtime_defensive_judgement_values(baseline_run: BaselineRun) -> pd.DataFrame:
+    prices = getattr(baseline_run, "prices", pd.DataFrame())
+    results = getattr(baseline_run, "results", {}) or {}
+    if prices.empty or not results:
+        return pd.DataFrame()
+    rows: list[dict[str, object]] = []
+    for strategy, result in results.items():
+        scorecard = defensive_judgement_scorecard(result, prices)
+        scorecard["strategy"] = strategy
+        rows.append(scorecard)
+    return pd.DataFrame(rows)
 
 
 def outcome_strategy_option_frame(
