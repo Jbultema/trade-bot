@@ -51,6 +51,7 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
+from trade_bot.research.backtest_qc import DEFAULT_QC_STRATEGY, run_backtest_qc_gauntlet
 from trade_bot.research.baselines import run_configured_baselines
 from trade_bot.research.defensive_judgement import write_defensive_judgement_report
 from trade_bot.research.entry_date_analysis import build_entry_date_analysis
@@ -1368,6 +1369,62 @@ def audit_defensive_judgement_cmd(
     for name, path in outputs.items():
         table.add_row(name, str(path))
     console.print(table)
+
+
+@app.command("audit-backtest-qc")
+def audit_backtest_qc_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = Path("reports/backtest_qc"),
+    strategy: Annotated[
+        str,
+        typer.Option("--strategy", help="Configured strategy name to audit."),
+    ] = DEFAULT_QC_STRATEGY,
+    benchmarks: Annotated[
+        str,
+        typer.Option("--benchmarks", help="Comma-separated buy-and-hold benchmarks."),
+    ] = "SPY,QQQ",
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    """Run leakage, execution, universe, and parameter-sensitivity checks."""
+
+    bot_config = load_config(config)
+    prices = load_or_fetch_yahoo_prices(
+        configured_tickers(bot_config),
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        adjusted=bot_config.data.adjusted,
+        refresh=refresh_data,
+    )
+    benchmark_tickers = tuple(
+        benchmark.strip().upper()
+        for benchmark in benchmarks.split(",")
+        if benchmark.strip()
+    ) or ("SPY", "QQQ")
+    gauntlet = run_backtest_qc_gauntlet(
+        config=bot_config,
+        prices=prices,
+        strategy_name=strategy,
+        output_dir=output_dir,
+        benchmark_tickers=benchmark_tickers,
+    )
+    headline = gauntlet.headline.iloc[0]
+    console.print(
+        "[bold]Backtest QC base result:[/bold] "
+        f"CAGR {_format_optional_percent(headline['cagr'])}, "
+        f"max DD {_format_optional_percent(headline['max_drawdown'])}, "
+        f"Sharpe {float(headline['sharpe']):.2f}."
+    )
+    table = Table(title="Backtest QC Artifacts")
+    table.add_column("artifact")
+    table.add_column("path")
+    for name, path in gauntlet.artifacts.items():
+        table.add_row(name, str(path))
+    console.print(table)
+    console.print(gauntlet.readout)
 
 
 @app.command("migrate-warehouse")
