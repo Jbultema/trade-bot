@@ -82,6 +82,7 @@ from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.curation import rank_strategy_candidates, select_curated_strategy_shelf
 from trade_bot.research.defensive_judgement import (
     build_defensive_judgement_audit,
+    defensive_false_alarm_bayes_update,
     defensive_judgement_label,
     effective_defensive_weight,
     load_scenario_context,
@@ -108,6 +109,7 @@ from trade_bot.research.signal_evidence import (
     signal_evidence_takeaways,
     tag_scorecard_signal_families,
 )
+from trade_bot.research.signal_state import build_signal_state_report
 from trade_bot.research.strategy_outcome_utility import (
     add_outcome_frontier_flags,
     contribution_periods_per_year,
@@ -2345,10 +2347,136 @@ def _render_outcome_decision_cards(
             "peer_max": "Highest raw value among displayed outcome candidates.",
         },
     )
+    _render_signal_state_section(
+        row,
+        result=result,
+        bot_config=bot_config,
+        experiment_scorecards=experiment_scorecards,
+        prices=getattr(baseline_run, "prices", pd.DataFrame()),
+    )
     _render_defensive_judgement_section(
         result,
         prices=getattr(baseline_run, "prices", pd.DataFrame()),
     )
+
+
+def _render_signal_state_section(
+    row: pd.Series,
+    *,
+    result: BacktestResult | None,
+    bot_config: Any,
+    experiment_scorecards: pd.DataFrame,
+    prices: pd.DataFrame,
+) -> None:
+    st.markdown("**Signal State / Confirmation Sniff Test**")
+    st.caption(
+        "Transparent confirmation read: top-down market pressure plus bottom-up "
+        "volatility-adjusted momentum. This is a challenge layer, not the native sizing engine."
+    )
+    if result is None or prices.empty:
+        st.info("Signal-state confirmation is not available for this candidate yet.")
+        return
+    catalog_row = _selected_approach_catalog_row(
+        str(row.get("strategy", "")),
+        bot_config=bot_config,
+        experiment_scorecards=experiment_scorecards,
+    )
+    if catalog_row is None:
+        st.info("Signal-state confirmation could not find this candidate in the approach catalog.")
+        return
+    try:
+        strategy = strategy_from_catalog_row(catalog_row)
+        execution = execution_for_catalog_row(catalog_row, bot_config.execution)
+    except Exception as exc:  # pragma: no cover - defensive UI guard
+        st.info(f"Signal-state confirmation could not rebuild this candidate: {exc}")
+        return
+    report = build_signal_state_report(
+        result=result,
+        prices=prices,
+        strategy=strategy,
+        execution=execution,
+    )
+    if report.assets.empty:
+        st.info("Signal-state confirmation needs price history for this candidate's assets.")
+        return
+
+    latest = report.latest
+    cols = st.columns(5)
+    _helped_metric(
+        cols[0],
+        "Top-Down State",
+        str(latest.get("top_down_signal", "n/a")).replace("_", " ").title(),
+    )
+    _helped_metric(cols[1], "Top-Down Score", _format_decimal(latest.get("top_down_score")))
+    _helped_metric(cols[2], "Confirmed Assets", _format_decimal(latest.get("confirmed_assets")))
+    _helped_metric(cols[3], "Partial Assets", _format_decimal(latest.get("partial_assets")))
+    _helped_metric(cols[4], "Watch-Only Assets", _format_decimal(latest.get("watch_only_assets")))
+
+    backtest_label = str(latest.get("backtest_label", "not tested")).replace("_", " ")
+    if not report.backtest.empty and len(report.backtest) >= 2:
+        gated = report.backtest.iloc[1]
+        st.info(
+            "Confirmation overlay backtest: "
+            f"{backtest_label}. Delta versus native strategy: "
+            f"CAGR {_format_percent(gated.get('delta_vs_native_cagr'))}, "
+            f"max drawdown {_format_percent(gated.get('delta_vs_native_drawdown'))}."
+        )
+        _render_metric_dataframe(
+            _display_metrics(report.backtest),
+            hide_index=True,
+            column_help={
+                "variant": "Native candidate versus a transparent confirmation-gated overlay.",
+                "delta_vs_native_cagr": "CAGR difference versus the native candidate. Positive is better.",
+                "delta_vs_native_drawdown": (
+                    "Max drawdown difference versus the native candidate. Positive means "
+                    "less severe drawdown."
+                ),
+            },
+        )
+    display = report.assets[
+        [
+            column
+            for column in [
+                "ticker",
+                "target_weight",
+                "current_weight",
+                "confirmation_state",
+                "top_down_signal",
+                "bottom_up_signal",
+                "vol_adjusted_momentum",
+                "rank",
+                "state_read",
+            ]
+            if column in report.assets
+        ]
+    ].copy()
+    _render_metric_dataframe(
+        _display_metrics(display),
+        hide_index=True,
+        column_help={
+            "confirmation_state": (
+                "Long-only state: long_max when top-down and bottom-up agree, long_half "
+                "when confirmation is partial, watch_only when the asset is not confirmed."
+            ),
+            "vol_adjusted_momentum": "Lookback return divided by realized volatility.",
+            "state_read": "Plain-English interpretation of the confirmation state.",
+        },
+    )
+
+
+def _selected_approach_catalog_row(
+    strategy_name: str,
+    *,
+    bot_config: Any,
+    experiment_scorecards: pd.DataFrame,
+) -> pd.Series | None:
+    catalog = _approach_catalog_for_detail(bot_config, experiment_scorecards=experiment_scorecards)
+    if catalog.empty or "strategy" not in catalog:
+        return None
+    matches = catalog[catalog["strategy"].astype(str).eq(str(strategy_name))]
+    if matches.empty:
+        return None
+    return matches.iloc[0]
 
 
 def _render_defensive_judgement_section(
@@ -2423,6 +2551,35 @@ def _render_defensive_judgement_section(
             benchmark_ticker=selected_benchmark,
         )
     )
+    bayes = defensive_false_alarm_bayes_update(
+        events,
+        threshold=selected_threshold,
+        horizon=str(primary.get("horizon", "1m")),
+        current_defensive_weight=current_defensive,
+    )
+    st.markdown("**Recent False-Alarm Sniff Test**")
+    bayes_cols = st.columns(4)
+    _helped_metric(
+        bayes_cols[0],
+        "Long-History False Alarm",
+        _format_percent(bayes.get("historical_false_alarm_rate")),
+    )
+    _helped_metric(
+        bayes_cols[1],
+        "Recent False Alarm",
+        _format_percent(bayes.get("recent_false_alarm_rate")),
+    )
+    _helped_metric(
+        bayes_cols[2],
+        "Updated False Alarm",
+        _format_percent(bayes.get("posterior_false_alarm_rate")),
+    )
+    _helped_metric(
+        bayes_cols[3],
+        "Recent Episodes",
+        _format_decimal(bayes.get("recent_episode_starts")),
+    )
+    st.info(str(bayes.get("sniff_test_readout", "")))
 
     chart_events = events[
         events["threshold"].eq(selected_threshold)

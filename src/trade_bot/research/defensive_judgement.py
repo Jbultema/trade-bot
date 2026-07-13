@@ -1,8 +1,9 @@
 from __future__ import annotations
 
+import math
+from collections.abc import Iterable
 from dataclasses import dataclass
 from pathlib import Path
-from typing import Iterable
 
 import pandas as pd
 
@@ -217,7 +218,9 @@ def summarize_defensive_judgement(events: pd.DataFrame) -> pd.DataFrame:
         if column in events
     ]
     for keys, group in events.groupby(group_columns, dropna=False):
-        key_values = dict(zip(group_columns, keys if isinstance(keys, tuple) else (keys,)))
+        key_values = dict(
+            zip(group_columns, keys if isinstance(keys, tuple) else (keys,), strict=False)
+        )
         eligible = group[group["judgement"].astype(str).ne("insufficient_forward_data")]
         if eligible.empty:
             continue
@@ -348,6 +351,111 @@ def defensive_judgement_label(summary_row: pd.Series) -> str:
     if correct_rate is not None and correct_rate >= 0.45:
         return "mixed_but_informative"
     return "weak_defensive_signal"
+
+
+def defensive_false_alarm_bayes_update(
+    events: pd.DataFrame,
+    *,
+    threshold: float,
+    horizon: str = "1m",
+    current_defensive_weight: float | None = None,
+    recent_years: float = 3.0,
+    similar_band: float = 0.10,
+    prior_strength: float = 20.0,
+) -> dict[str, float | int | str | None]:
+    """Estimate whether recent/relevant evidence changes the false-alarm prior.
+
+    The prior is the full historical false-alarm rate for the selected threshold and
+    horizon. The posterior then updates that prior using recent episodes and, when
+    available, episodes with a defensive weight near today's defensive weight.
+    """
+
+    output: dict[str, float | int | str | None] = {
+        "historical_episode_starts": 0,
+        "historical_false_alarm_rate": None,
+        "recent_episode_starts": 0,
+        "recent_false_alarm_rate": None,
+        "similar_episode_starts": 0,
+        "similar_false_alarm_rate": None,
+        "posterior_false_alarm_rate": None,
+        "posterior_false_alarm_low": None,
+        "posterior_false_alarm_high": None,
+        "sniff_test_label": "not_enough_evidence",
+        "sniff_test_readout": "Not enough defensive episode history to update the false-alarm read.",
+    }
+    if events.empty:
+        return output
+    eligible = events[
+        events["threshold"].eq(threshold)
+        & events["horizon"].astype(str).eq(str(horizon))
+        & events["judgement"].astype(str).ne("insufficient_forward_data")
+    ].copy()
+    if eligible.empty:
+        return output
+    eligible["date"] = pd.to_datetime(eligible["date"], errors="coerce")
+    eligible = eligible.dropna(subset=["date"])
+    if eligible.empty:
+        return output
+
+    historical_false_rate = _false_alarm_rate(eligible)
+    historical_count = int(len(eligible))
+    if historical_count < 5 or historical_false_rate is None:
+        return output
+
+    latest_date = eligible["date"].max()
+    recent_cutoff = latest_date - pd.Timedelta(days=int(recent_years * 365.25))
+    recent = eligible[eligible["date"] >= recent_cutoff]
+    similar = pd.DataFrame()
+    if current_defensive_weight is not None and "defensive_weight" in eligible:
+        defensive = pd.to_numeric(eligible["defensive_weight"], errors="coerce")
+        similar = eligible[
+            defensive.between(
+                max(0.0, current_defensive_weight - similar_band),
+                min(1.0, current_defensive_weight + similar_band),
+            )
+        ]
+    contextual = _concat_contextual_evidence(recent, similar)
+    if contextual.empty:
+        contextual = recent
+
+    prior_alpha = 1.0 + historical_false_rate * prior_strength
+    prior_beta = 1.0 + (1.0 - historical_false_rate) * prior_strength
+    contextual_false_count = int(contextual["judgement"].astype(str).eq("false_alarm").sum())
+    contextual_nonfalse_count = int(len(contextual) - contextual_false_count)
+    posterior_alpha = prior_alpha + contextual_false_count
+    posterior_beta = prior_beta + contextual_nonfalse_count
+    posterior_rate = posterior_alpha / (posterior_alpha + posterior_beta)
+    low, high = _beta_normal_interval(posterior_alpha, posterior_beta)
+    recent_rate = _false_alarm_rate(recent)
+    similar_rate = _false_alarm_rate(similar)
+    label = _false_alarm_sniff_label(
+        historical_rate=historical_false_rate,
+        recent_rate=recent_rate,
+        posterior_rate=posterior_rate,
+        recent_count=len(recent),
+    )
+    output.update(
+        {
+            "historical_episode_starts": historical_count,
+            "historical_false_alarm_rate": historical_false_rate,
+            "recent_episode_starts": int(len(recent)),
+            "recent_false_alarm_rate": recent_rate,
+            "similar_episode_starts": int(len(similar)),
+            "similar_false_alarm_rate": similar_rate,
+            "posterior_false_alarm_rate": float(posterior_rate),
+            "posterior_false_alarm_low": low,
+            "posterior_false_alarm_high": high,
+            "sniff_test_label": label,
+            "sniff_test_readout": _false_alarm_sniff_readout(
+                label=label,
+                historical_rate=historical_false_rate,
+                recent_rate=recent_rate,
+                posterior_rate=posterior_rate,
+                recent_count=len(recent),
+            ),
+        }
+    )
+    return output
 
 
 def load_scenario_context(
@@ -510,6 +618,79 @@ def _safe_float(value: object) -> float | None:
     if numeric != numeric:
         return None
     return numeric
+
+
+def _false_alarm_rate(events: pd.DataFrame) -> float | None:
+    if events.empty:
+        return None
+    judgement = events["judgement"].astype(str)
+    return float(judgement.eq("false_alarm").mean())
+
+
+def _concat_contextual_evidence(*frames: pd.DataFrame) -> pd.DataFrame:
+    clean = [frame for frame in frames if not frame.empty]
+    if not clean:
+        return pd.DataFrame()
+    combined = pd.concat(clean, ignore_index=False, sort=False)
+    if "date" in combined:
+        combined = combined.sort_values("date")
+    return combined[~combined.index.duplicated(keep="last")]
+
+
+def _beta_normal_interval(alpha: float, beta: float) -> tuple[float, float]:
+    total = alpha + beta
+    mean = alpha / total
+    variance = alpha * beta / ((total**2) * (total + 1.0))
+    margin = 1.96 * math.sqrt(max(variance, 0.0))
+    return max(0.0, mean - margin), min(1.0, mean + margin)
+
+
+def _false_alarm_sniff_label(
+    *,
+    historical_rate: float,
+    recent_rate: float | None,
+    posterior_rate: float,
+    recent_count: int,
+) -> str:
+    if recent_count < 4:
+        return "thin_recent_evidence"
+    if recent_rate is not None and recent_rate >= historical_rate + 0.12 and posterior_rate >= 0.35:
+        return "recent_false_alarms_elevated"
+    if recent_rate is not None and recent_rate <= historical_rate - 0.12 and posterior_rate <= 0.30:
+        return "recent_evidence_supports_defense"
+    if posterior_rate >= 0.40:
+        return "false_alarm_risk_high"
+    if posterior_rate <= 0.25:
+        return "false_alarm_risk_low"
+    return "mixed_context"
+
+
+def _false_alarm_sniff_readout(
+    *,
+    label: str,
+    historical_rate: float,
+    recent_rate: float | None,
+    posterior_rate: float,
+    recent_count: int,
+) -> str:
+    recent_text = "not enough recent episodes" if recent_rate is None else f"{recent_rate:.1%}"
+    if label == "recent_false_alarms_elevated":
+        prefix = "Recent defensive signals have false-alarmed more often than long history."
+    elif label == "recent_evidence_supports_defense":
+        prefix = "Recent defensive signals have been more useful than long history."
+    elif label == "false_alarm_risk_high":
+        prefix = "The updated false-alarm risk is high."
+    elif label == "false_alarm_risk_low":
+        prefix = "The updated false-alarm risk is low."
+    elif label == "thin_recent_evidence":
+        prefix = "Recent evidence is thin, so the long-run prior still dominates."
+    else:
+        prefix = "Recent evidence is mixed."
+    return (
+        f"{prefix} Historical false-alarm rate is {historical_rate:.1%}; recent rate is "
+        f"{recent_text} across {recent_count} recent episodes; Bayesian-updated rate is "
+        f"{posterior_rate:.1%}."
+    )
 
 
 def _concat_or_empty(frames: list[pd.DataFrame]) -> pd.DataFrame:

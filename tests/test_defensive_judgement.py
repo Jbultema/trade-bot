@@ -10,6 +10,7 @@ from trade_bot.dashboard.strategy_candidates import runtime_outcome_scorecards
 from trade_bot.research.defensive_judgement import (
     DefensiveJudgementHorizon,
     build_defensive_judgement_audit,
+    defensive_false_alarm_bayes_update,
     effective_defensive_weight,
 )
 
@@ -171,4 +172,44 @@ def test_runtime_scorecards_include_defensive_judgement_metrics() -> None:
         "mixed_but_informative",
         "defensive_signal_useful",
         "weak_defensive_signal",
+    }
+
+
+def test_defensive_false_alarm_bayes_update_uses_recent_evidence() -> None:
+    dates = pd.bdate_range("2020-01-02", periods=8, freq="260B")
+    events = pd.DataFrame(
+        {
+            "date": dates,
+            "threshold": [0.65] * 8,
+            "horizon": ["1m"] * 8,
+            "defensive_weight": [0.66, 0.67, 0.68, 0.69, 0.70, 0.71, 0.72, 0.73],
+            "judgement": [
+                "correct_defense",
+                "correct_defense",
+                "mixed_or_early",
+                "correct_defense",
+                "false_alarm",
+                "false_alarm",
+                "false_alarm",
+                "mixed_or_early",
+            ],
+        }
+    )
+
+    update = defensive_false_alarm_bayes_update(
+        events,
+        threshold=0.65,
+        horizon="1m",
+        current_defensive_weight=0.70,
+        recent_years=3.0,
+        prior_strength=8.0,
+    )
+
+    assert update["historical_episode_starts"] == 8
+    assert update["recent_episode_starts"] >= 3
+    assert update["posterior_false_alarm_rate"] is not None
+    assert update["sniff_test_label"] in {
+        "recent_false_alarms_elevated",
+        "false_alarm_risk_high",
+        "mixed_context",
     }
