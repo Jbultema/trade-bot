@@ -34,6 +34,7 @@ def _render_operating_brief(
         baseline_run=baseline_run,
         headline=headline,
         position_plan=position_plan,
+        book_alignment=book_alignment,
     )
     st.markdown(
         '<div class="operating-grid">'
@@ -74,12 +75,13 @@ def _operating_brief_cards(
     baseline_run: BaselineRun,
     headline: ActionHeadline,
     position_plan: pd.DataFrame,
+    book_alignment: BookAlignmentRun | None = None,
 ) -> list[dict[str, str]]:
     trade_summary = _first_display_row(baseline_run.trade_decision.summary)
     risk_summary = _portfolio_risk_summary(baseline_run)
     action = str(trade_summary.get("recommended_action", headline.label))
     scenario_effect = _scenario_effect_sentence(trade_summary, risk_summary)
-    primary_sizing = _primary_sizing_sentence(position_plan)
+    primary_sizing = _primary_sizing_sentence(position_plan, book_alignment)
     posture_check = _posture_calibration_sentence(trade_summary)
     sanity_check = _decision_sanity_sentence(trade_summary)
     return [
@@ -450,7 +452,10 @@ def _posture_calibration_sentence(trade_summary: dict[str, object]) -> dict[str,
     }
 
 
-def _primary_sizing_sentence(position_plan: pd.DataFrame) -> dict[str, str]:
+def _primary_sizing_sentence(
+    position_plan: pd.DataFrame,
+    book_alignment: BookAlignmentRun | None = None,
+) -> dict[str, str]:
     sizing_steps = _recommended_sizing_steps(position_plan)
     material = sizing_steps[sizing_steps["ticker"] != "Portfolio"]
     if material.empty:
@@ -461,14 +466,25 @@ def _primary_sizing_sentence(position_plan: pd.DataFrame) -> dict[str, str]:
     largest = material.copy()
     largest["abs_delta"] = largest["delta_weight"].astype(float).abs()
     row = largest.sort_values("abs_delta", ascending=False).iloc[0]
+    detail = (
+        f"Largest proposed move is {_format_percent(row['delta_weight'])}: "
+        f"{_format_percent(row['current_weight'])} to {_format_percent(row['target_weight'])}. "
+        "Translate each percentage-point change into dollars using the account value in Forward Test."
+    )
+    warning = _book_account_value_warning(book_alignment)
+    if warning:
+        detail = f"{detail} {warning}"
     return {
         "answer": f"{str(row['action']).replace('_', ' ').title()} {row['ticker']}",
-        "detail": (
-            f"Largest proposed move is {_format_percent(row['delta_weight'])}: "
-            f"{_format_percent(row['current_weight'])} to {_format_percent(row['target_weight'])}. "
-            "Translate each percentage-point change into dollars using the account value in Forward Test."
-        ),
+        "detail": detail,
     }
+
+
+def _book_account_value_warning(book_alignment: BookAlignmentRun | None) -> str:
+    if book_alignment is None or book_alignment.summary.empty:
+        return ""
+    warning = str(book_alignment.summary.iloc[0].get("account_value_warning", "")).strip()
+    return warning
 
 
 def _first_existing_column(frame: pd.DataFrame, candidates: tuple[str, ...]) -> str | None:

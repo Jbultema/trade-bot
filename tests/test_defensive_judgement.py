@@ -76,6 +76,26 @@ def test_defensive_judgement_classifies_episode_outcomes() -> None:
                 109,
                 110,
             ],
+            "QQQ": [
+                100,
+                101,
+                100,
+                99,
+                98,
+                97,
+                98,
+                99,
+                100,
+                101,
+                100,
+                103,
+                106,
+                109,
+                112,
+                115,
+                117,
+                119,
+            ],
             "BIL": [100 + i * 0.01 for i in range(18)],
         },
         index=dates,
@@ -101,6 +121,16 @@ def test_defensive_judgement_classifies_episode_outcomes() -> None:
     assert one_week["false_alarm"] == 1
     assert one_week["correct_defense_rate"] == pytest.approx(0.5)
     assert one_week["false_alarm_rate"] == pytest.approx(0.5)
+    assert one_week["benchmark_ticker"] == "SPY"
+
+    qqq_audit = build_defensive_judgement_audit(
+        result,
+        prices,
+        thresholds=(0.65,),
+        horizons=(horizon,),
+        benchmark_ticker="QQQ",
+    )
+    assert qqq_audit["summary"].iloc[0]["benchmark_ticker"] == "QQQ"
 
 
 def test_runtime_scorecards_include_defensive_judgement_metrics() -> None:
@@ -110,6 +140,7 @@ def test_runtime_scorecards_include_defensive_judgement_metrics() -> None:
     prices = pd.DataFrame(
         {
             "SPY": [100 + i for i in range(30)],
+            "QQQ": [100 + i * 2 for i in range(30)],
             "BIL": [100 + i * 0.01 for i in range(30)],
         },
         index=dates,
@@ -132,6 +163,7 @@ def test_runtime_scorecards_include_defensive_judgement_metrics() -> None:
     row = scorecards.iloc[0]
     assert row["current_defensive_weight"] == pytest.approx(0.65)
     assert row["current_risk_weight"] == pytest.approx(0.35)
+    assert "qqq_defensive_false_alarm_rate" in row
     assert row["defensive_episode_starts"] >= 1
     assert row["defensive_judgement_label"] in {
         "thin_history",

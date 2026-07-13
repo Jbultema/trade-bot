@@ -1333,6 +1333,13 @@ def audit_defensive_judgement_cmd(
             help="Comma-separated strategy names. Defaults to every strategy in the latest snapshot.",
         ),
     ] = "",
+    benchmarks: Annotated[
+        str,
+        typer.Option(
+            "--benchmarks",
+            help="Comma-separated risk benchmarks for false-alarm scoring.",
+        ),
+    ] = "SPY,QQQ",
 ) -> None:
     """Backfill false-alarm versus correct-defense metrics from saved backtests."""
 
@@ -1343,11 +1350,17 @@ def audit_defensive_judgement_cmd(
         for strategy in strategies.split(",")
         if strategy.strip()
     ] or None
+    benchmark_tickers = [
+        benchmark.strip().upper()
+        for benchmark in benchmarks.split(",")
+        if benchmark.strip()
+    ] or ["SPY"]
     outputs = write_defensive_judgement_report(
         results=baseline_run.results,
         prices=baseline_run.prices,
         output_dir=output_dir,
         strategy_names=strategy_names,
+        benchmark_tickers=benchmark_tickers,
     )
     table = Table(title="Defensive Judgement Audit")
     table.add_column("artifact")

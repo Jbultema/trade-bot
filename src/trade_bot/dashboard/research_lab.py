@@ -2366,10 +2366,25 @@ def _render_defensive_judgement_section(
         st.info("Defensive judgement history is not available for this candidate yet.")
         return
 
+    benchmark_options = [ticker for ticker in ["QQQ", "SPY"] if ticker in prices.columns]
+    if not benchmark_options:
+        st.info("Defensive judgement needs QQQ or SPY benchmark prices in the loaded snapshot.")
+        return
+    selected_benchmark = st.selectbox(
+        "Risk benchmark",
+        benchmark_options,
+        index=0,
+        help=(
+            "Benchmark used to decide whether the defensive call was correct or a false alarm. "
+            "Use QQQ for growth-heavy candidates; SPY remains useful as a broad-market reference."
+        ),
+        key=f"defensive_judgement_benchmark_{result.name}",
+    )
     scenario_context = load_scenario_context()
     audit = build_defensive_judgement_audit(
         result,
         prices,
+        benchmark_ticker=selected_benchmark,
         scenario_context=scenario_context,
     )
     summary = audit["summary"]
@@ -2400,7 +2415,14 @@ def _render_defensive_judgement_section(
     _helped_metric(cols[4], "Episode Starts", _format_decimal(primary.get("episode_starts")))
 
     label = defensive_judgement_label(primary) if not primary.empty else "not_enough_history"
-    st.info(_defensive_judgement_readout(primary, label=label, threshold=selected_threshold))
+    st.info(
+        _defensive_judgement_readout(
+            primary,
+            label=label,
+            threshold=selected_threshold,
+            benchmark_ticker=selected_benchmark,
+        )
+    )
 
     chart_events = events[
         events["threshold"].eq(selected_threshold)
@@ -2411,7 +2433,10 @@ def _render_defensive_judgement_section(
         st.plotly_chart(
             _defensive_judgement_figure(chart_events),
             use_container_width=True,
-            key=f"defensive_judgement_figure_{result.name}_{selected_threshold}",
+            key=(
+                f"defensive_judgement_figure_{result.name}_"
+                f"{selected_benchmark}_{selected_threshold}"
+            ),
         )
 
     display_columns = [
@@ -2430,15 +2455,16 @@ def _render_defensive_judgement_section(
         hide_index=True,
         column_help={
             "correct_defense_rate": (
-                "Share of defensive episode starts where SPY lagged BIL or suffered a material "
-                "forward drawdown over the evaluation horizon."
+                "Share of defensive episode starts where the selected benchmark lagged BIL "
+                "or suffered a material forward drawdown over the evaluation horizon."
             ),
             "false_alarm_rate": (
-                "Share of defensive episode starts where SPY materially beat BIL and avoided "
-                "a meaningful drawdown over the evaluation horizon."
+                "Share of defensive episode starts where the selected benchmark materially "
+                "beat BIL and avoided a meaningful drawdown over the evaluation horizon."
             ),
             "avg_benchmark_excess_vs_cash": (
-                "Average SPY forward return minus BIL forward return after defensive episode starts."
+                "Average selected-benchmark forward return minus BIL forward return after "
+                "defensive episode starts."
             ),
         },
     )
@@ -2465,6 +2491,7 @@ def _defensive_judgement_readout(
     *,
     label: str,
     threshold: float,
+    benchmark_ticker: str,
 ) -> str:
     if row.empty:
         return "Defensive judgement history is not available for this threshold."
@@ -2478,8 +2505,8 @@ def _defensive_judgement_readout(
     return (
         f"At the {threshold:.0%}+ defensive threshold, this candidate has {episodes:.0f} "
         f"historical {horizon} episode starts. Correct-defense rate is {correct}; false-alarm "
-        f"rate is {false_alarm}. The average benchmark excess versus BIL after these signals "
-        f"was {excess}, with median forward benchmark drawdown of {drawdown}. "
+        f"rate is {false_alarm}. The average {benchmark_ticker} excess versus BIL after these "
+        f"signals was {excess}, with median forward {benchmark_ticker} drawdown of {drawdown}. "
         f"Label: {label_text}."
     )
 
@@ -2496,6 +2523,16 @@ def _defensive_judgement_figure(events: pd.DataFrame) -> go.Figure:
         "mixed_or_early": "Mixed",
     }
     fig = go.Figure()
+    benchmark = (
+        str(events["benchmark_ticker"].dropna().iloc[0])
+        if "benchmark_ticker" in events and events["benchmark_ticker"].notna().any()
+        else "Benchmark"
+    )
+    cash = (
+        str(events["cash_ticker"].dropna().iloc[0])
+        if "cash_ticker" in events and events["cash_ticker"].notna().any()
+        else "BIL"
+    )
     for judgement, group in events.groupby("judgement"):
         fig.add_trace(
             go.Scatter(
@@ -2518,15 +2555,15 @@ def _defensive_judgement_figure(events: pd.DataFrame) -> go.Figure:
                 ],
                 hovertemplate=(
                     "%{x|%Y-%m-%d}<br>Defensive weight %{y:.1%}"
-                    "<br>SPY forward %{customdata[0]:.1%}"
-                    "<br>BIL forward %{customdata[1]:.1%}"
-                    "<br>SPY max DD %{customdata[2]:.1%}"
+                    f"<br>{benchmark} forward %{{customdata[0]:.1%}}"
+                    f"<br>{cash} forward %{{customdata[1]:.1%}}"
+                    f"<br>{benchmark} max DD %{{customdata[2]:.1%}}"
                     "<br>Strategy forward %{customdata[3]:.1%}<extra></extra>"
                 ),
             )
         )
     fig.update_layout(
-        title="1M defensive episode outcomes",
+        title=f"1M defensive episode outcomes versus {benchmark}",
         height=360,
         yaxis_title="Defensive weight at episode start",
         yaxis_tickformat=".0%",

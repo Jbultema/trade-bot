@@ -92,6 +92,38 @@ def test_book_alignment_recognizes_executed_target_as_aligned(tmp_path: Path) ->
     assert tickets.empty
 
 
+def test_book_alignment_floors_account_value_at_marked_holdings(tmp_path: Path) -> None:
+    journal = TradeJournal(tmp_path / "journal.sqlite")
+    journal.log_execution(
+        mode="paper",
+        account="shadow",
+        ticker="QQQ",
+        side="BUY",
+        quantity=10.0,
+        price=500.0,
+        executed_at_utc="2026-06-17T16:00:00+00:00",
+    )
+
+    alignment = build_book_alignment(
+        journal=journal,
+        trade_decision=_trade_decision(),
+        prices=_prices(),
+        mode="paper",
+        account="shadow",
+        strategy_name="scenario_adjusted_trade_decision",
+        account_value=1000.0,
+    )
+
+    summary = alignment.summary.iloc[0]
+    qqq = alignment.position_plan.set_index("ticker").loc["QQQ"]
+    assert summary["account_value"] == 5000.0
+    assert summary["account_value_input"] == 1000.0
+    assert summary["account_value_source"] == "marked_holdings_floor"
+    assert "Logged holdings exceed" in summary["account_value_warning"]
+    assert qqq["current_weight"] == 1.0
+    assert float(alignment.position_plan["current_weight"].abs().max()) <= 1.0
+
+
 def _prices() -> pd.DataFrame:
     return pd.DataFrame(
         {

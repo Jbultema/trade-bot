@@ -165,6 +165,23 @@ def _runtime_defensive_judgement_values(baseline_run: BaselineRun) -> pd.DataFra
     rows: list[dict[str, object]] = []
     for strategy, result in results.items():
         scorecard = defensive_judgement_scorecard(result, prices)
+        if "QQQ" in prices:
+            qqq_scorecard = defensive_judgement_scorecard(
+                result,
+                prices,
+                benchmark_ticker="QQQ",
+            )
+            for column, value in qqq_scorecard.items():
+                if column in {
+                    "defensive_correct_rate",
+                    "defensive_false_alarm_rate",
+                    "defensive_mixed_rate",
+                    "defensive_avg_benchmark_excess_vs_cash",
+                    "defensive_median_forward_drawdown",
+                    "defensive_episode_starts",
+                    "defensive_judgement_label",
+                }:
+                    scorecard[f"qqq_{column}"] = value
         scorecard["strategy"] = strategy
         rows.append(scorecard)
     return pd.DataFrame(rows)

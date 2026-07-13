@@ -114,6 +114,8 @@ def build_defensive_judgement_audit(
             row = {
                 "strategy": result.name,
                 "date": date,
+                "benchmark_ticker": benchmark_ticker,
+                "cash_ticker": cash_ticker,
                 "threshold": threshold,
                 "defensive_weight": float(defensive_weight.iloc[position]),
                 "risk_weight": float(risk_weight.iloc[position]),
@@ -150,8 +152,6 @@ def build_defensive_judgement_audit(
                         **row,
                         "horizon": horizon.label,
                         "forward_days": horizon.trading_days,
-                        "benchmark_ticker": benchmark_ticker,
-                        "cash_ticker": cash_ticker,
                         "benchmark_forward_return": benchmark_return,
                         "cash_forward_return": cash_return,
                         "strategy_forward_return": strategy_return,
@@ -211,17 +211,20 @@ def summarize_defensive_judgement(events: pd.DataFrame) -> pd.DataFrame:
     if events.empty:
         return pd.DataFrame()
     rows: list[dict[str, object]] = []
-    for keys, group in events.groupby(["strategy", "threshold", "horizon"], dropna=False):
-        strategy, threshold, horizon = keys
+    group_columns = [
+        column
+        for column in ["strategy", "benchmark_ticker", "cash_ticker", "threshold", "horizon"]
+        if column in events
+    ]
+    for keys, group in events.groupby(group_columns, dropna=False):
+        key_values = dict(zip(group_columns, keys if isinstance(keys, tuple) else (keys,)))
         eligible = group[group["judgement"].astype(str).ne("insufficient_forward_data")]
         if eligible.empty:
             continue
         judgement = eligible["judgement"].astype(str)
         rows.append(
             {
-                "strategy": strategy,
-                "threshold": threshold,
-                "horizon": horizon,
+                **key_values,
                 "episode_starts": int(len(eligible)),
                 "correct_defense": int(judgement.eq("correct_defense").sum()),
                 "false_alarm": int(judgement.eq("false_alarm").sum()),
@@ -254,7 +257,7 @@ def summarize_defensive_judgement(events: pd.DataFrame) -> pd.DataFrame:
     order = {"1w": 0, "1m": 1, "3m": 2}
     summary = pd.DataFrame(rows)
     return summary.sort_values(
-        ["strategy", "threshold", "horizon"],
+        [column for column in ["strategy", "benchmark_ticker", "threshold", "horizon"] if column in summary],
         key=lambda column: column.map(order) if column.name == "horizon" else column,
     ).reset_index(drop=True)
 
@@ -289,6 +292,7 @@ def defensive_judgement_scorecard(
     output: dict[str, float | int | str | None] = {
         "defensive_threshold": threshold,
         "defensive_judgement_horizon": horizon,
+        "defensive_benchmark_ticker": benchmark_ticker,
         "current_defensive_weight": current_defensive_weight,
         "current_risk_weight": (
             1.0 - current_defensive_weight
@@ -407,6 +411,7 @@ def write_defensive_judgement_report(
     prices: pd.DataFrame,
     output_dir: Path,
     strategy_names: Iterable[str] | None = None,
+    benchmark_tickers: Iterable[str] = ("SPY", "QQQ"),
 ) -> dict[str, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     selected_names = list(strategy_names) if strategy_names is not None else list(results)
@@ -419,17 +424,25 @@ def write_defensive_judgement_report(
         result = results.get(strategy_name)
         if result is None:
             continue
-        audit = build_defensive_judgement_audit(
-            result,
-            prices,
-            scenario_context=scenario_context,
-        )
-        days_frames.append(audit["days"])
-        event_frames.append(audit["events"])
-        summary_frames.append(audit["summary"])
-        scorecard = defensive_judgement_scorecard(result, prices)
-        scorecard["strategy"] = strategy_name
-        scorecard_rows.append(scorecard)
+        for benchmark_ticker in benchmark_tickers:
+            if benchmark_ticker not in prices:
+                continue
+            audit = build_defensive_judgement_audit(
+                result,
+                prices,
+                benchmark_ticker=benchmark_ticker,
+                scenario_context=scenario_context,
+            )
+            days_frames.append(audit["days"])
+            event_frames.append(audit["events"])
+            summary_frames.append(audit["summary"])
+            scorecard = defensive_judgement_scorecard(
+                result,
+                prices,
+                benchmark_ticker=benchmark_ticker,
+            )
+            scorecard["strategy"] = strategy_name
+            scorecard_rows.append(scorecard)
     outputs = {
         "days": output_dir / "defensive_signal_days.csv",
         "events": output_dir / "defensive_episode_outcomes.csv",

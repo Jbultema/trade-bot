@@ -45,7 +45,7 @@ def render_operating_overview(
 
 
 def execution_book_alignment_or_none(alignment: BookAlignmentRun) -> BookAlignmentRun | None:
-    return alignment if book_alignment_has_executions(alignment) else None
+    return alignment if book_alignment_is_usable(alignment) else None
 
 
 def headline_position_plan(
@@ -53,9 +53,16 @@ def headline_position_plan(
     baseline_run: BaselineRun,
     default_book_alignment: BookAlignmentRun,
 ) -> pd.DataFrame:
-    if book_alignment_has_executions(default_book_alignment):
+    if book_alignment_is_usable(default_book_alignment):
         return default_book_alignment.position_plan
     return baseline_run.trade_decision.position_plan
+
+
+def book_alignment_is_usable(alignment: BookAlignmentRun) -> bool:
+    if not book_alignment_has_executions(alignment):
+        return False
+    warning = str(alignment.summary.iloc[0].get("account_value_warning", "")).strip()
+    return not warning
 
 
 def book_alignment_has_executions(alignment: BookAlignmentRun) -> bool:

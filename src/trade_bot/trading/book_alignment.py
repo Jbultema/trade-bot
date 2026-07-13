@@ -51,6 +51,11 @@ def build_book_alignment(
         account=account,
         reference_prices=reference_prices,
     )
+    account_value_input = float(account_value)
+    account_value, account_value_source, account_value_warning = _effective_account_value(
+        account_value_input,
+        holdings,
+    )
     target_weights = _target_weights(trade_decision.position_plan)
     current_notional = {
         str(row["ticker"]).upper(): float(row["current_notional"])
@@ -109,6 +114,9 @@ def build_book_alignment(
         account=account,
         strategy_name=strategy_name,
         account_value=account_value,
+        account_value_input=account_value_input,
+        account_value_source=account_value_source,
+        account_value_warning=account_value_warning,
         min_trade_weight=min_trade_weight,
     )
     return BookAlignmentRun(summary=summary, position_plan=position_plan, holdings=holdings)
@@ -226,6 +234,9 @@ def _alignment_summary(
     account: str,
     strategy_name: str,
     account_value: float,
+    account_value_input: float,
+    account_value_source: str,
+    account_value_warning: str,
     min_trade_weight: float,
 ) -> pd.DataFrame:
     material = position_plan[position_plan["delta_weight"].abs() >= min_trade_weight].copy()
@@ -267,6 +278,9 @@ def _alignment_summary(
                 "strategy_name": strategy_name,
                 "book_scope": "account",
                 "account_value": account_value,
+                "account_value_input": account_value_input,
+                "account_value_source": account_value_source,
+                "account_value_warning": account_value_warning,
                 "alignment_status": alignment_status,
                 "recommended_action": recommended_action,
                 "current_position": _format_weight_vector(current_weights),
@@ -361,6 +375,25 @@ def _current_notional(row: pd.Series, reference_prices: dict[str, float]) -> flo
     if reference_price is not None:
         return float(row["net_quantity"]) * reference_price
     return float(row["net_cash_deployed"])
+
+
+def _effective_account_value(
+    account_value: float,
+    holdings: pd.DataFrame,
+) -> tuple[float, str, str]:
+    if holdings.empty or "current_notional" not in holdings:
+        return account_value, "input", ""
+    marked_long_value = float(holdings["current_notional"].clip(lower=0.0).sum())
+    if marked_long_value <= account_value + 1e-6:
+        return account_value, "input", ""
+    return (
+        marked_long_value,
+        "marked_holdings_floor",
+        (
+            "Logged holdings exceed the supplied account value; using marked holdings "
+            "as the account-value floor for book-weight math."
+        ),
+    )
 
 
 def _latest_prices(prices: pd.DataFrame) -> dict[str, float]:

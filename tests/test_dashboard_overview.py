@@ -4,6 +4,7 @@ import pandas as pd
 
 from trade_bot.dashboard.overview import (
     book_alignment_has_executions,
+    book_alignment_is_usable,
     book_alignment_needs_attention,
     execution_book_alignment_or_none,
 )
@@ -32,8 +33,24 @@ def test_book_alignment_attention_triggers_for_material_logged_drift() -> None:
     )
 
     assert book_alignment_has_executions(alignment)
+    assert book_alignment_is_usable(alignment)
     assert book_alignment_needs_attention(alignment)
     assert execution_book_alignment_or_none(alignment) is alignment
+
+
+def test_book_alignment_with_account_value_warning_is_not_used_for_headline() -> None:
+    alignment = _alignment(
+        has_executions=True,
+        alignment_status="critical_rebalance",
+        material_trade_count=1,
+        max_abs_delta=4.8,
+        account_value_warning="Logged holdings exceed the supplied account value.",
+    )
+
+    assert book_alignment_has_executions(alignment)
+    assert not book_alignment_is_usable(alignment)
+    assert book_alignment_needs_attention(alignment)
+    assert execution_book_alignment_or_none(alignment) is None
 
 
 def test_book_alignment_attention_stays_closed_when_logged_book_is_aligned() -> None:
@@ -53,6 +70,7 @@ def _alignment(
     alignment_status: str,
     material_trade_count: int,
     max_abs_delta: float,
+    account_value_warning: str = "",
 ) -> BookAlignmentRun:
     return BookAlignmentRun(
         summary=pd.DataFrame(
@@ -62,6 +80,7 @@ def _alignment(
                     "alignment_status": alignment_status,
                     "material_trade_count": material_trade_count,
                     "max_abs_delta": max_abs_delta,
+                    "account_value_warning": account_value_warning,
                 }
             ]
         ),
