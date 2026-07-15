@@ -135,6 +135,16 @@ If port 8501 is busy:
 poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
 ```
 
+To review the faster V2 workbench, start it separately:
+
+```bash
+poetry run trade-bot run-dashboard-v2
+```
+
+Then open `http://localhost:8502`. V2 keeps the same local data but starts with
+summary pages and loads heavy Research, Simulation, and Monitoring detail only
+when selected.
+
 Stop the managed dashboard with:
 
 ```bash

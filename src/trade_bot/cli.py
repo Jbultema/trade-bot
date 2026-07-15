@@ -23,6 +23,9 @@ from trade_bot.DEFAULTS import (
     DEFAULT_DASHBOARD_LOG_PATH,
     DEFAULT_DASHBOARD_PID_PATH,
     DEFAULT_DASHBOARD_PORT,
+    DEFAULT_DASHBOARD_V2_APP_PATH,
+    DEFAULT_DASHBOARD_V2_LOG_PATH,
+    DEFAULT_DASHBOARD_V2_PID_PATH,
     DEFAULT_EVENTS_PATH,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR,
@@ -759,6 +762,36 @@ def run_dashboard_cmd(
     console.print(f"Dashboard started on http://localhost:{port} as PID {process.pid}.")
     console.print(f"Log: {log_path}")
     console.print("Stop it with: poetry run trade-bot stop-dashboard")
+
+
+@app.command("run-dashboard-v2")
+def run_dashboard_v2_cmd(
+    app_path: Annotated[Path, typer.Option("--app-path")] = DEFAULT_DASHBOARD_V2_APP_PATH,
+    port: Annotated[int, typer.Option("--port")] = 8502,
+    pid_path: Annotated[Path, typer.Option("--pid-path")] = DEFAULT_DASHBOARD_V2_PID_PATH,
+    log_path: Annotated[Path, typer.Option("--log-path")] = DEFAULT_DASHBOARD_V2_LOG_PATH,
+    file_watcher_type: Annotated[
+        str,
+        typer.Option(
+            "--file-watcher-type",
+            help="Streamlit file watcher mode. 'none' avoids common local shutdown hangs.",
+        ),
+    ] = DEFAULT_STREAMLIT_FILE_WATCHER_TYPE,
+    stop_existing: Annotated[
+        bool,
+        typer.Option("--stop-existing/--keep-existing"),
+    ] = False,
+) -> None:
+    """Start the summary-first Dashboard V2 as a managed background process."""
+
+    run_dashboard_cmd(
+        app_path=app_path,
+        port=port,
+        pid_path=pid_path,
+        log_path=log_path,
+        file_watcher_type=file_watcher_type,
+        stop_existing=stop_existing,
+    )
 
 
 @app.command("stop-dashboard")

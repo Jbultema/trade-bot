@@ -550,7 +550,7 @@ The system uses local storage:
 
 ## Dashboard Structure
 
-The dashboard is split into:
+The legacy dashboard is split into:
 
 - app shell and sidebar: `dashboard/app.py`,
 - top overview: `dashboard/overview.py`,
@@ -564,6 +564,22 @@ The dashboard is split into:
 
 The dashboard should read snapshots and warehouse outputs; expensive research
 jobs should run through CLI commands.
+
+Dashboard V2 adds a parallel summary-first shell under `dashboard_v2/`. It does
+not introduce a second storage system. Instead, it puts service wrappers around
+the existing snapshot store, DuckDB warehouse, and artifact directories, then
+renders pages from small view-specific summaries. The important performance
+rule is that Research, Simulation, and Monitoring overview pages should not
+hydrate deep diagnostics, raw split files, full candidate workbenches, or path
+engines until the user selects that subview.
+
+Start V2 with:
+
+```bash
+poetry run trade-bot run-dashboard-v2
+```
+
+V1 remains available with `run-dashboard` while V2 is reviewed.
 
 ## Testing Strategy
 

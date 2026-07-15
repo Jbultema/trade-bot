@@ -150,6 +150,18 @@ Then open `http://localhost:8501`.
 
 Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. Use `Live pipeline` only when you intentionally want the dashboard open to recompute the full pipeline.
 
+Dashboard V2 is available for review on the refactor branch. It keeps the same
+local snapshots, DuckDB warehouse, and research artifacts, but reorganizes the
+UI into summary-first workbenches so Research, Simulation, and Monitoring do
+not load deep diagnostics until requested:
+
+```bash
+poetry run trade-bot run-dashboard-v2
+```
+
+Then open `http://localhost:8502`. V1 remains available through
+`run-dashboard` while V2 is tested.
+
 ## Daily Operating Loop
 
 | Step | Command or Dashboard Area | Purpose |
@@ -165,6 +177,12 @@ Daily command:
 ```bash
 poetry run trade-bot run-daily-update
 poetry run trade-bot run-dashboard
+```
+
+To review the faster V2 workbench instead:
+
+```bash
+poetry run trade-bot run-dashboard-v2
 ```
 
 Stop the managed dashboard with:
