@@ -125,8 +125,33 @@ def install_v2_styles() -> None:
             background: rgba(245, 158, 11, .12);
             color: #92400e;
         }
+        .v2-decision-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(290px, 1fr));
+            gap: 12px;
+            margin: 12px 0 16px;
+        }
+        .v2-decision-card {
+            border: 1px solid var(--tb-card-border, #d1d5db);
+            border-radius: 8px;
+            padding: 14px 15px;
+            background: var(--tb-card-bg, #fff);
+            min-height: 156px;
+        }
+        .v2-decision-answer {
+            margin: 0 0 8px;
+            color: var(--tb-card-text, #111827);
+            font-size: 1.02rem;
+            font-weight: 850;
+            line-height: 1.25;
+        }
+        .v2-decision-detail {
+            margin: 0;
+            color: var(--tb-card-muted, #6b7280);
+            font-size: .90rem;
+            line-height: 1.42;
+        }
         </style>
         """,
         unsafe_allow_html=True,
     )
-

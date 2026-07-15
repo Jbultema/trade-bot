@@ -326,55 +326,71 @@ def _render_forward_test_and_journal(
     if not open_tickets.empty:
         ticket_options.update(_ticket_option_map(open_tickets))
 
-    with st.form("execution_log_form"):
-        selected_ticket_label = st.selectbox(
-            "Recommendation ticket",
-            list(ticket_options),
-            help="Readable ticket label: ticker, side, share range, status, strategy, and short ticket ID. Pick manual for an execution that did not come from a locked recommendation.",
-        )
-        selected_ticket_id = ticket_options[selected_ticket_label]
-        selected_ticket = None
-        if selected_ticket_id is not None:
-            selected_ticket_rows = open_tickets[open_tickets["ticket_id"] == selected_ticket_id]
-            if not selected_ticket_rows.empty:
-                selected_ticket = selected_ticket_rows.iloc[0]
+    selected_ticket_label = st.selectbox(
+        "Recommendation ticket",
+        list(ticket_options),
+        key="execution_recommendation_ticket",
+        help="Readable ticket label: ticker, side, share range, status, strategy, and short ticket ID. Pick manual for an execution that did not come from a locked recommendation.",
+    )
+    selected_ticket_id = ticket_options[selected_ticket_label]
+    selected_ticket = None
+    if selected_ticket_id is not None:
+        selected_ticket_rows = open_tickets[open_tickets["ticket_id"] == selected_ticket_id]
+        if not selected_ticket_rows.empty:
+            selected_ticket = selected_ticket_rows.iloc[0]
 
-        default_ticker = str(selected_ticket["ticker"]) if selected_ticket is not None else "QQQ"
-        default_side = str(selected_ticket["side"]) if selected_ticket is not None else "BUY"
-        default_price = (
-            float(selected_ticket["reference_price"])
-            if selected_ticket is not None
-            else float(baseline_run.prices.ffill().iloc[-1].get(default_ticker, 0.0))
-        )
-        default_quantity = (
-            float(selected_ticket["min_shares"]) if selected_ticket is not None else 1.0
-        )
-        execution_cols = st.columns(5)
-        execution_ticker = execution_cols[0].text_input("Ticker", default_ticker).upper()
-        execution_side = execution_cols[1].selectbox(
+    default_ticker = str(selected_ticket["ticker"]) if selected_ticket is not None else "QQQ"
+    default_side = str(selected_ticket["side"]) if selected_ticket is not None else "BUY"
+    ticket_key = str(selected_ticket_id or "manual")
+    execution_ticker = st.text_input(
+        "Ticker",
+        default_ticker,
+        key=f"execution_ticker_{ticket_key}",
+        help="Changing the ticker refreshes the estimated price from the latest loaded market data.",
+    ).upper()
+    latest_ticker_price = _latest_price_for_ticker(baseline_run.prices, execution_ticker)
+    default_price = (
+        float(selected_ticket["reference_price"])
+        if selected_ticket is not None and execution_ticker == default_ticker.upper()
+        else latest_ticker_price
+    )
+    default_quantity = float(selected_ticket["min_shares"]) if selected_ticket is not None else 1.0
+    quantity_min = 1.0 if whole_shares else 0.01
+    quantity_value = max(default_quantity, quantity_min)
+    if whole_shares:
+        quantity_value = max(float(round(quantity_value)), quantity_min)
+
+    with st.form("execution_log_form", enter_to_submit=False):
+        execution_cols = st.columns(4)
+        execution_side = execution_cols[0].selectbox(
             "Side",
             ["BUY", "SELL"],
             index=0 if default_side == "BUY" else 1,
+            key=f"execution_side_{ticket_key}",
         )
-        execution_quantity = execution_cols[2].number_input(
+        execution_quantity = execution_cols[1].number_input(
             "Quantity",
-            min_value=0.0001,
-            value=max(default_quantity, 0.0001),
-            step=1.0 if whole_shares else 0.1,
-            format="%.4f",
+            min_value=quantity_min,
+            value=quantity_value,
+            step=1.0 if whole_shares else 0.01,
+            format="%.0f" if whole_shares else "%.4f",
+            key=f"execution_quantity_{ticket_key}",
+            help="Whole-share mode prevents tiny fractional-share mistakes.",
         )
-        execution_price = execution_cols[3].number_input(
+        execution_price = execution_cols[2].number_input(
             "Price",
             min_value=0.01,
             value=max(default_price, 0.01),
             step=0.01,
             format="%.4f",
+            key=f"execution_price_{ticket_key}_{execution_ticker}",
         )
-        execution_fees = execution_cols[4].number_input(
+        execution_fees = execution_cols[3].number_input(
             "Fees",
             min_value=0.0,
             value=0.0,
             step=0.01,
+            key=f"execution_fees_{ticket_key}",
         )
 
         time_cols = st.columns(3)
@@ -387,6 +403,9 @@ def _render_forward_test_and_journal(
         submitted_execution = st.form_submit_button("Log Execution")
 
         if submitted_execution:
+            if whole_shares and abs(float(execution_quantity) - round(float(execution_quantity))) > 1e-9:
+                st.error("Quantity must be a whole number of shares when Whole shares is enabled.")
+                return
             local_execution_time = datetime.combine(execution_date, execution_time).replace(
                 tzinfo=execution_timezone
             )
@@ -1219,6 +1238,16 @@ def _ticket_option_map(tickets: pd.DataFrame) -> dict[str, str]:
             label = f"{label} | {ticket_id}"
         options[label] = ticket_id
     return options
+
+
+def _latest_price_for_ticker(prices: pd.DataFrame, ticker: str) -> float:
+    ticker = str(ticker).upper()
+    if prices.empty or ticker not in prices.columns:
+        return 0.0
+    series = pd.to_numeric(prices[ticker], errors="coerce").dropna()
+    if series.empty:
+        return 0.0
+    return float(series.iloc[-1])
 
 
 def _ticket_option_label(row: pd.Series) -> str:

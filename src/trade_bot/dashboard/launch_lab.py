@@ -141,6 +141,7 @@ def _render_launch_lab(
             benchmark_ticker=benchmark_name,
         ),
         title="Selected Strategy Sniff Test",
+        include_summary=False,
         include_details=True,
         expanded_details=False,
     )
@@ -335,6 +336,7 @@ def _render_aggregate_launch_lab(
         return
 
     _render_aggregate_launch_cards(aggregate_run, primary_horizon)
+    _render_launch_label_concentration_note(aggregate_run.horizon_label_counts, primary_horizon)
     chart_cols = st.columns([1.0, 1.15])
     with chart_cols[0]:
         st.plotly_chart(
@@ -453,6 +455,27 @@ def _render_aggregate_launch_cards(
         },
     ]
     _render_launch_card_grid(cards, class_name="launch-guidance-grid")
+
+
+def _render_launch_label_concentration_note(counts: pd.DataFrame, primary_horizon: str) -> None:
+    if counts.empty or not {"horizon", "launch_label", "count"}.issubset(counts.columns):
+        return
+    selected = counts[counts["horizon"].astype(str).eq(str(primary_horizon))].copy()
+    if selected.empty:
+        return
+    total = float(pd.to_numeric(selected["count"], errors="coerce").fillna(0.0).sum())
+    if total <= 0:
+        return
+    top = selected.sort_values("count", ascending=False).iloc[0]
+    top_share = float(top["count"]) / total
+    if top_share >= 0.80:
+        st.info(
+            "Launch labels are currently concentrated: "
+            f"{_format_percent(top_share)} of evaluated strategies are "
+            f"{_launch_label_display(str(top['launch_label']))} at {primary_horizon}. "
+            "That usually means the launch gate is reading the broad current setup more than "
+            "separating strategy-specific entry quality."
+        )
 
 
 def _benchmark_options(baseline_run: BaselineRun) -> list[str]:

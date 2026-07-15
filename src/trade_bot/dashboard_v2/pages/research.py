@@ -5,7 +5,12 @@ import streamlit as st
 
 from trade_bot.dashboard.components import _clearable_selectbox, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
-from trade_bot.dashboard.research_lab import _render_research_lab
+from trade_bot.dashboard.research_lab import (
+    _OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY,
+    _render_approach_detail_workbench,
+    _render_outcome_frontier,
+    _render_research_lab,
+)
 from trade_bot.dashboard_v2.components.cards import render_callout, render_card_grid
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.artifact_service import leadership_frames, pbo_frames
@@ -37,21 +42,35 @@ def render_research_page(runtime: DashboardRuntime) -> None:
 
     view = st.pills(
         "Research view",
-        ["Leaderboard", "Candidate", "Validation artifacts", "Full legacy workbench"],
-        default="Leaderboard",
+        [
+            "Outcome Frontier",
+            "Candidate Deep Dive",
+            "Leaderboard",
+            "Validation artifacts",
+            "Full Workbench",
+        ],
+        default="Outcome Frontier",
         selection_mode="single",
         key="dashboard_v2_research_view",
     )
-    selected_view = view or "Leaderboard"
-    if selected_view == "Leaderboard":
+    selected_view = view or "Outcome Frontier"
+    if selected_view == "Outcome Frontier":
+        _render_outcome_frontier(
+            bot_config=runtime.bot_config,
+            baseline_run=runtime.baseline_run,
+            experiment_scorecards=scores,
+            experiment_candidates=pd.DataFrame(),
+            warehouse_path=str(runtime.paths.run_store_path),
+        )
+    elif selected_view == "Leaderboard":
         _render_leaderboard(top)
-    elif selected_view == "Candidate":
-        _render_candidate(scores)
+    elif selected_view == "Candidate Deep Dive":
+        _render_candidate(scores, runtime=runtime)
     elif selected_view == "Validation artifacts":
         _render_validation_artifacts()
     else:
         render_callout(
-            "This loads the full legacy Research Lab and its aggregate frames. Use it only when the summary-first views are not enough.",
+            "This loads the full Research Lab and its aggregate frames. Use it only when the summary-first views are not enough.",
             heavy=True,
         )
         with timed("research.legacy_frames"):
@@ -91,15 +110,21 @@ def _render_leaderboard(frame: pd.DataFrame) -> None:
     _render_metric_dataframe(_display_metrics(frame[columns]))
 
 
-def _render_candidate(scores: pd.DataFrame) -> None:
-    st.subheader("Candidate Quick Read")
+def _render_candidate(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> None:
+    st.subheader("Candidate Deep Dive")
     if scores.empty or "strategy" not in scores:
         st.info("No candidates are available.")
         return
-    ordered = top_scorecards(scores, limit=200)
+    ordered = top_scorecards(scores, limit=max(len(scores), 1))
+    selected_from_frontier = st.session_state.get(_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY)
+    strategy_options = list(ordered["strategy"].astype(str))
+    last_frontier_strategy = st.session_state.get("dashboard_v2_last_frontier_strategy")
+    if selected_from_frontier in strategy_options and selected_from_frontier != last_frontier_strategy:
+        st.session_state["dashboard_v2_candidate"] = selected_from_frontier
+        st.session_state["dashboard_v2_last_frontier_strategy"] = selected_from_frontier
     selected = _clearable_selectbox(
         "Candidate",
-        list(ordered["strategy"].astype(str)),
+        strategy_options,
         key="dashboard_v2_candidate",
         placeholder="Search candidate...",
     )
@@ -132,6 +157,30 @@ def _render_candidate(scores: pd.DataFrame) -> None:
     ]
     _render_metric_dataframe(pd.DataFrame([row[summary_columns].to_dict()]))
     _render_candidate_artifact_read(str(selected))
+    load_full_candidate_workbench = st.toggle(
+        "Load full candidate workbench",
+        value=False,
+        key="dashboard_v2_load_candidate_workbench",
+        help=(
+            "Loads the former Candidate Deep Dive from the full workbench. Keep this off "
+            "when you only need the fast summary."
+        ),
+    )
+    if load_full_candidate_workbench:
+        render_callout(
+            "This is the former Candidate Deep Dive from the legacy workbench, now reachable from the V2 candidate view.",
+            heavy=True,
+        )
+        with timed("research.candidate_legacy_frames"):
+            frames = dashboard_frames()
+        _render_approach_detail_workbench(
+            bot_config=runtime.bot_config,
+            baseline_run=runtime.baseline_run,
+            experiment_scorecards=frames[0],
+            experiment_regimes=frames[1],
+            experiment_walk_forward=frames[2],
+            experiment_candidates=frames[3],
+        )
 
 
 def _render_candidate_artifact_read(strategy_name: str) -> None:
@@ -204,4 +253,3 @@ def _fmt_float(value: object) -> str:
         return f"{float(value):.2f}"
     except (TypeError, ValueError):
         return "n/a"
-

@@ -10,12 +10,10 @@ def render_card_grid(cards: Iterable[tuple[str, object]]) -> None:
     html_cards = []
     for label, value in cards:
         html_cards.append(
-            f"""
-            <div class="v2-card">
-                <p class="v2-card-label">{html.escape(str(label))}</p>
-                <p class="v2-card-value">{html.escape(str(value))}</p>
-            </div>
-            """
+            '<div class="v2-card">'
+            f'<p class="v2-card-label">{html.escape(str(label))}</p>'
+            f'<p class="v2-card-value">{html.escape(str(value))}</p>'
+            "</div>"
         )
     st.markdown(
         f"<div class=\"v2-grid\">{''.join(html_cards)}</div>",
@@ -29,4 +27,3 @@ def render_callout(message: str, *, heavy: bool = False) -> None:
         f"<div class=\"{class_name}\">{html.escape(message)}</div>",
         unsafe_allow_html=True,
     )
-

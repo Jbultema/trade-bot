@@ -23,10 +23,10 @@ def routes() -> tuple[DashboardRoute, ...]:
     from trade_bot.dashboard_v2.pages.legacy import (
         render_forward_test_page,
         render_launch_page,
-        render_news_macro_page,
         render_performance_page,
         render_risk_scenarios_page,
     )
+    from trade_bot.dashboard_v2.pages.macro import render_macro_page
     from trade_bot.dashboard_v2.pages.monitoring import render_monitoring_page
     from trade_bot.dashboard_v2.pages.research import render_research_page
     from trade_bot.dashboard_v2.pages.simulation import render_simulation_page
@@ -98,9 +98,9 @@ def routes() -> tuple[DashboardRoute, ...]:
             lane="Research",
             title="News & Macro",
             question="What context is active, and what is only watch-only narrative?",
-            runtime="Medium",
-            runtime_note="Compatibility page over the existing macro renderer.",
-            render=render_news_macro_page,
+            runtime="Fast by default",
+            runtime_note="Uses snapshot price and macro frames first; the full macro workbench is explicit.",
+            render=render_macro_page,
         ),
         DashboardRoute(
             key="performance",
@@ -128,4 +128,3 @@ def routes() -> tuple[DashboardRoute, ...]:
 def route_by_key(route_key: str) -> DashboardRoute:
     route_map = {route.key: route for route in routes()}
     return route_map.get(route_key, route_map["today"])
-

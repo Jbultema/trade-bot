@@ -100,6 +100,7 @@ def render_operational_sniff_read(
     read: OperationalSniffRead | None,
     *,
     title: str = "Decision Sniff Test",
+    include_summary: bool = True,
     include_details: bool = True,
     expanded_details: bool = False,
 ) -> None:
@@ -129,7 +130,8 @@ def render_operational_sniff_read(
         _format_percent(false_alarm.get("similar_false_alarm_rate")),
     )
 
-    st.info(_operational_sniff_sentence(read))
+    if include_summary:
+        st.info(_operational_sniff_sentence(read))
     if not include_details:
         return
     with st.expander("Sniff-test detail", expanded=expanded_details):
