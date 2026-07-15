@@ -1,0 +1,733 @@
+source: allin_youtube
+published_date: 2026-06-09
+video_id: xTO1aQ_m44I
+url: https://www.youtube.com/watch?v=xTO1aQ_m44I
+title: Dan Dreyfus: The Next AI Bottleneck is Copper
+
+We've got Dan Dreifus on [music] the
+show. He's with Fornight Capital.
+>> We're going to be measuring human
+progress by how much electricity
+>> [music]
+>> we consume.
+>> The semiconductor industry, I view that
+as an industrial or infrastructure
+company. I mean, it's effectively a
+factory.
+We try to figure [music] out
+where the world is going
+and then we try to figure out [music]
+what we're going to need to get there.
+>> In the next 10 minutes, I am going to
+try to teach you about critical
+minerals,
+commodities,
+our incredibly fragile infrastructure
+here in the US that is going to require
+trillions and trillions of dollars of
+investment if we want to achieve our
+technological objectives, our reshoring
+reindustrialization objectives, and our
+national security and military
+objectives. But first, a little bit of
+history.
+We are at a very significant inflection
+point right now
+in US economic growth and what it's
+going to look like.
+Really from the early 2000s
+until just a few years ago,
+the US went through effectively what I
+think was an economic miracle where we
+created so much growth,
+so much market cap,
+so much value
+without really having to invest any
+capital at all. I mean, think of all the
+companies that were created with no
+capital. You had Google with the search
+engine. You had Meta with social media.
+They bought WhatsApp for $30
+with 12 employees. You know, no capital
+whatsoever. You had the streaming
+platforms. You had the food delivery
+platforms. You had Apple computer, which
+was capital light, created trillions of
+market cap. You had software as a
+service.
+Absolutely no capital required to create
+all that value. And at the same time, we
+were creating these companies.
+At the same time we were doing that, we
+were literally tearing down all of our
+critical infrastructure
+and moving it overseas to China.
+So, we were really doubling down on that
+capital light mentality.
+But then it started started to come back
+to bite us, right? We had COVID, we had
+the Russia-Ukraine conflict, we had the
+tariffs, now we have the Iranian
+conflict, and every time we had one of
+these geopolitical flare-ups,
+inflation spikes like a rocket. You need
+a telescope to see how high inflation
+went, and it never came down. And the
+reason for that is we let our supply
+chains
+get way too fragile and way too weak,
+and there's no resiliency in the supply
+chains. And now we're at this inflection
+point where we want to reshore
+everything that we tore down and moved
+to China, we want to reindustrialize.
+We have this technological compute
+revolution that is infinitely more
+infrastructure-intensive
+than compute was in the last
+generations, and this is creating this
+really wild demand shock for
+infrastructural critical minerals,
+commodities, at the same time where
+there's a supply shock because we just
+haven't invested in this stuff for so
+long.
+Now,
+there are so many capital cycles going
+on at the same time. I've never seen
+this many going on at the same time in
+my career. We have the aerospace cycle.
+Boeing and Airbus have a trillion
+dollars of backlog over the next 10
+years. Now throw in the space economy,
+which is going to compete for the exact
+same materials and backlog that Boeing
+and Airbus are trying to source. We have
+the grid,
+right? Anytime it gets a little bit cold
+in Texas, the ERCOT, the Texas grid's
+not connected not connected to the rest
+of the US grid. Every time it gets a
+little bit cold, that grid shuts down
+and they're freezing in the dark. Then
+we've got,
+you know, here in California,
+Paradise, California, that power line
+that caught on fire and killed 300
+people.
+Did you know that that power line was
+over 106 years old? There's parts of the
+grid in this country that are over 106
+years old. And then here in California,
+if half the people buy electric cars or
+there's robo taxis and we all go and
+plug them in at 6:00 p.m. after work and
+turn up the air conditioning,
+we're just going to kill the grid. Boom.
+We're going to kill it. We're all going
+to be sitting in the dark. So, the grid
+barely works for what we need it for
+right now, and we haven't even started
+talking about the tsunami of demand,
+electricity demand that AI is going to
+bring. And there's power generation, you
+know, we've let China go and build
+multiples more power generation than
+what we have here. And this is a
+trillion-dollar plus capital cycle
+that's probably going to be a trillion
+dollars every 10 years for the next 30
+years. Data centers, this is now a
+trillion dollars per year.
+Per year, all infrastructure, all all
+commodities.
+Then there's semi fabs. Um the CPU is
+making a huge resurgence. CPU intensity
+is is going up like a rocket. And and I
+I bet you this number is way too low,
+$750 billion. I bet you that's going to
+be measured in the trillions. And then
+there's defense.
+Right? Everybody, you know, Taiwan's
+turned into a porky pie. Japan's raising
+their defense budgets. Europe's raising
+their defense budgets. The US raising
+their defense budgets.
+What
+the similarity is amongst all of these
+end markets is none of them will work
+without critical minerals.
+None of it. None of this can happen.
+And so here's the problem.
+Last April,
+China
+announced that they were going to cut
+off exports of some critical materials
+to the US. Samarium, gadolinium,
+terbium, dysprosium, lutetium, scandium,
+yttrium, erbium, silver. Just cut it
+off.
+And we're close to a lot of big
+industrial supply chains.
+And the cut off of samarium cobalt
+magnets, we learned that the Ford Motor
+Company was within days, literally days,
+of their entire production line shutting
+down. The whole Ford Motor Company.
+And same with McDonnell Douglas, too, by
+the way.
+And this put people in Department of
+War, Department of Energy into a panic.
+And
+to their credit,
+they're doing something really
+aggressive and really important. They
+are now going around
+to small resource owners across the US
+and into Canada,
+and they're knocking on the doors of
+these companies that were left for dead
+in the last 20 years. And they're
+saying, "Here is three pieces of paper.
+The first piece of paper is an equity
+check that we're investing into your
+company so that you can go and start
+converting your resource into a mine."
+And then the company says, "Oh, that's
+great. Wow, that's that's that's a
+shock. But, you know, the problem is
+I've been waiting on my permit for the
+last 20 years. Nobody wants to give me a
+permit." And they say, "Oh, look at the
+second piece of paper. There's your
+permit. Go and start building right
+now."
+And then they show them a third piece of
+paper. And then the company says,
+"What's this?"
+And they say, "This is an off-take
+agreement, take or pay with a minimum
+floor price that's going to guarantee
+you a very high internal rate of return
+on your project, where you can keep all
+the upside above the minimum price, but
+here's a minimum price that you can go
+out and raise a bunch of capital to get
+this thing fast-tracked and up and
+running." Now, China has an absolute
+grip. It's absolute on all of these
+critical minerals.
+And it's going to take at least 10
+years, probably 20 to catch up, but we
+got to start somewhere because we just
+can't have China leading over us and
+squeezing our testicles every time that
+we don't do something that they don't
+like and say we're going to cut off your
+exports, we're going to cut off exports
+of critical minerals and you guys are
+going to freeze in the dark. So, I give
+a lot of credit to the administration
+for doing this and really, you know,
+I've done commodities now for 25 years
+and I've never seen something like this
+happen before. It's truly what I call a
+déjà vu day moment, which is the
+overwhelming feeling that none of this
+has ever happened before.
+So, here's copper. This is the king of
+metals. This is just one example. We
+need copper for everything. You know, if
+we want clean energy, you know, solar
+power per megawatt takes five amounts
+five times the amount of copper than a
+typical base load CCGT gas-fired
+turbine. Same with wind, seven times the
+copper.
+Data centers for a 1 gigawatt AI factory
+now, you need 50,000 tons of copper per
+gigawatt. And we're going to start
+building 15 gigawatts of these things
+per year. Per year. So, 50,000 tons per
+gigawatt at 15 gigawatts is 750,000 tons
+of copper that we're going to need for
+these things. Do you know what the
+copper supply was last year?
+It grew only 500,000 tons and this is
+just the data centers. Then electric
+cars, you know, if we're going to have
+robo taxis everywhere, electric car
+consumes five or six times the copper
+than a traditional internal combustion
+engine. And then there's the military.
+In the Ukraine-Russia conflict, did you
+know
+that we used more explosives than in all
+of World War II?
+Do you know that?
+And
+the artillery shells of these
+explosives, guess what they're made of?
+One of them's called the copperhead,
+very cleverly named after a poisonous
+snake. They're all made of copper. Do
+you think we go into the battlefield and
+recycle that copper? No, that copper's
+gone. So, we need this these metals for
+everything that we do. Now, where are we
+going to get it? Going back in human
+history
+to Mohenjo-Daro,
+we have mined 700 million tons of
+copper.
+700 million tons of copper over the past
+10,000 years.
+Now, 80% of that copper, we could
+probably get it all back if we wanted.
+But, what we'd have to do is we'd have
+to tear down this building.
+We'd have to rip up the grid. We'd have
+to tear down the buildings in Europe, in
+Japan, in China. And we could get all
+that copper back. Sure.
+But, then we'd be doing this conference
+in a tent.
+So,
+how are we going to get it?
+Well,
+right now copper demand is 30 million
+tons per year.
+About 4 million of that supply comes
+from recycled copper copper. The rest of
+it is 26 million tons is mined.
+And if we just grow in line with GDP, so
+forgetting about data center upside,
+forgetting about green energy solar
+upside, just growing at GDP like we used
+to.
+Now, listen carefully.
+That means over the next 18 years,
+we're going to need 700 million tons of
+copper.
+Over the next 18 years, we're going to
+need as much copper as we mined in the
+last 10,000 years.
+That means we're going to need five
+world-class mega tier one mines coming
+online every single year.
+And you can go and grok this or chat GPT
+this. You can count on one hand and have
+some fingers left over
+uh the number of tier one mines that are
+coming on between now and the end of the
+decade. So, I don't know what they're
+going to do because it takes 7 to 12
+years to build a copper mine. The
+existing copper mines are dying. You
+know, the big mines in Chile are over
+100 years old. The grades are depleting.
+And um
+this is going to be a major major
+challenge and an upcoming bottleneck.
+Right? Today, all the rage is in memory
+and HBM and NAND. Prices are going
+vertical cuz that's the bottleneck.
+Now, if you want to look around the
+corner and see the next bottleneck
+coming, I strongly urge you to look at
+copper.
+And so, um
+here we are. A supply shock meets a
+demand shock. Commodity cycles typically
+last 15 years and have multiple hundreds
+percent of upside. We're only a few
+years into this. This is just really
+getting started. And I want to say one
+more thing. Right, we spoke about
+demand.
+We're having this demand shock. We spoke
+about supply. But, what we haven't
+spoken about is how we're destroying the
+value of the US dollar.
+Since COVID, we have absolutely
+destroyed the value of our fiat
+currencies. Today, we have $40 trillion
+of government debt that's growing at
+$2.5 trillion every year. On top of
+that, we have $100 trillion of
+discounted present value of the future
+social liabilities. So, Medicare,
+Medicaid, Social Security, pensions.
+That's also growing by $2.5 trillion a
+year. So, you have $2.5 trillion of
+growth on the federal debt, $2.5
+trillion of growth on the social
+liabilities.
+The US government only has $5.5 trillion
+of tax receipts every year. And so,
+what's going to happen the next time we
+have a recession where tax receipts go
+down and spending has to go up? We're
+going to print giga dollars. And in the
+1970s, we had this problem as well. And
+the way we did it is we just debased the
+currency through through some inflation,
+through some growth, and the currency
+lost 70% of its purchasing power. And
+commodities and hard assets and
+infrastructure will protect your
+purchasing power in that kind of
+environment. Go and look it up. In the
+1970s, what was the best performing
+asset class by a mile?
+That's your homework. So, with that, uh
+thank you and uh look forward to
+chatting with you guys. Shabbat, I think
+on
+the prediction show, you um
+did was your call I forget which
+category it was, but you definitely had
+top
+>> the best performing asset was going to
+be copper, yeah.
+>> Yeah.
+Pretty
+>> And that's before I talked to Dan.
+>> That's right.
+>> Which is saying something.
+>> Well, you know, I I think the copper
+price is easily going to double from
+here. I mean, I've seen I've seen
+molybdenum go from a dollar a pound to
+$33 a pound. So, a double is no big
+deal.
+>> Yeah.
+>> And so
+>> Take a Take a step back. You said
+something really interesting backstage,
+which is
+If you look at everything that we're
+doing right now,
+we're barely going to keep up
+with just the natural energy demands of
+of humanity, right? Just explain that
+thesis the way that you framed it in the
+back.
+>> So, here's the issue. We have not
+invested
+in upgrading and modernizing and
+hardening the electric grid since
+post-World War II.
+We just let it go. You know, the last
+two, three, four administrations were
+sleepwalking
+and haven't done anything to harden this
+infrastructure. Now,
+if we simply just want to achieve our
+objectives to re-industrialize,
+reshore, electrify. When I say
+electrify, that just means replacing
+your old gas boilers in these buildings
+with heat pumps, which every commercial
+building is doing. It means, you know,
+electric car penetration going up. It
+means using your your your electronic
+devices more. Not even talking about AI.
+Not even talking about AI.
+We're going to have shortfalls just from
+that.
+>> Just from living our lives.
+>> Just from living our lives.
+>> So, what happens? Blackouts, brownouts?
+>> Blackouts, brownouts, and we're going to
+have to
+>> prices.
+>> Rising electricity prices, but you know,
+you brought up a really great point I
+thought on one of your shows
+where you were talking about how the
+utilities are just really goosing up the
+cost to do everything so that they can
+report to their regulator and earn that
+ROE on the higher capital base. What's
+really interesting I think is really
+under-appreciated
+is that's where all the inflation is
+coming from. It's from the transmission
+and distribution from the utility
+because power prices over the last 20
+years, even after the rise we've just
+had, power prices are still down they're
+definitely down in real terms,
+but they haven't really gone up much in
+absolute terms. And so, when you're
+talking about power going up
+>> making it is still cheap.
+>> But getting more expensive.
+>> No, it's getting it but getting it to
+people is what
+>> getting it to people because, you know,
+the labor the labor by far and away is
+the biggest bottle that craft labor,
+right? What do we tell all our kids to
+do?
+You know, in in the last 10 or 15 years
+they go out and stand for you become a
+coder.
+>> northeast.
+>> Yeah.
+>> Right. Big mistake. And so,
+I'm curious
+from the audience, in your homes, how
+many people have put up solar and or
+power walls? How many people have
+actually done that? So, that's about
+half the crowd. How many people, second
+question, are planning to do that in the
+next year or two?
+Okay, so that's another 20%. So, it's
+pretty obvious this is obviously a
+fluent crowd.
+They are routing around the grid. Is the
+solution to this energy independence
+in the
+>> Great question.
+>> you know, the home, in the business
+Businesses are not waiting for the
+government. So, maybe the grid is going
+to be like this weird archaic
+infrastructure and it's just going to be
+a ground-up solution.
+>> Well, you're going to need the grid no
+matter what for industrial use. I mean,
+that's that that's the foundation of
+industrial use. I mean,
+the scale of what we have to do just for
+industrial Here's a good stat for you.
+So, a 1 gigawatt AI factory, if you
+wanted to do all solar, right? And I'm a
+big solar bull, okay? If you want to do
+all solar because solar's capacity
+factor is 20% cuz the sun doesn't shine
+all the time, with a capacity factor of
+20%, a 1 gigawatt data center needs 5 GW
+of solar.
+Each GW of solar takes up 7,000 acres.
+So, at 5 GW that's 35,000 acres. That's
+bigger than San Francisco. So, where are
+you going to find the people? You know,
+where are you going to find That's
+that's the biggest bottleneck we have,
+by the way, is craft labor.
+>> Yeah. What about generally scarcity
+breeds innovation?
+There's been a conversation or I've seen
+some startups that are talking about new
+technology in mining
+to access I think traditionally rare
+earth uh is kind of the pitch. But,
+everything we need is in the earth below
+us. It's just that we only mine the
+stuff that's on the surface is the the
+the general thesis. Is there a set of
+innovations that you think are coming to
+market that are going to ultimately
+unleash more productivity than we see as
+cuz we're still using the same
+technology we did 100 years ago to get
+this stuff out of the ground?
+>> For some commodities, yes. You you
+brought up rare earths. So, so coming
+out of the 14th century, there were
+these guys called alchemists. Remember
+then they said they could turn lead into
+gold. And back then the periodic table
+was just four elements. There was water,
+there was fire,
+there was air, and there was earth. Now,
+fire you could figure out what it was.
+The air was pretty pure. The water was
+pure. But, every time they saw something
+in the earth they didn't know what it
+was, they called it a rare earth.
+And so, rare earths are everywhere. And
+the technology to extract rare earths is
+going to allow us to have a huge
+abundance of them. But, the problem is
+processing them.
+That's the problem. The Chinese have all
+the technological know-how to convert
+what you take out of the ground
+and convert it into something that we
+can use. And so, there's always going to
+be, you know, some element of conversion
+that you're going to need. With
+something like copper,
+the market is so big that it's really
+difficult to find a technology that
+could solve that problem overnight.
+>> And if we are having, just to throw a
+couple of topics we've been talking
+about on the pod
+incessantly about if we do have
+uh this rivalry with China
+and they are the provider and that's the
+brittle part of the supply chain
+we can solve the problem of job
+displacement, not apocalypse,
+displacement.
+People in America who want jobs, these
+are going to be incredibly high-paying
+jobs and we can start bringing the fabs
+from Taiwan here, which we're doing. And
+we're going to bring both to North
+America and I understand South America
+from a friend of mine who's got an
+automated um mining uh
+system
+uh
+Adams, Travis. He We're going to be able
+to just create a large number of jobs
+here.
+So, maybe you could talk a little bit
+about what impact We keep talking about
+how behind America is, but what happens
+to China if we stop buying?
+And we start
+building.
+>> What you said is is is very important
+for this whole jobs debate. The craft
+labor that we're going to need is going
+to be
+almost limitless for what we have to
+build.
+And
+there's really no other way around it,
+right? The The you know, in many ways,
+like look what happened in the 2000s,
+right? We tore down all our factories
+and moved them to China. And who got
+killed by that? It was the blue-collar
+craft labor, created all kinds of
+unintended consequences, fentanyl, uh
+you know, wealth gaps.
+>> Pennsylvania, Detroit.
+>> coast were making all the money and the
+heart of the country, the salt of the
+earth, was was getting killed. What's
+ironic today is that same part of the
+middle country, those people that got
+displaced, are now getting entry-level
+salaries. You know, if you go to Quanta
+University and you're top of your class,
+you're starting out at 150 grand right
+out of high school.
+And the jobs they're doing ironically
+are the jobs that may or may not be
+displacing some of the early, you know,
+lower level white-collar labor. And so
+so the tables the tables have totally
+turned. And so look, it's it's an it's
+an efficient market. The jobs are going
+to flow where the money is and the money
+right now is is really coming into this
+area.
+>> Can we talk about a couple of other
+areas? What's your take on
+uh other forms of energy? Not gas, coal,
+nuclear, hydrocarbons.
+I mean, the demand pull seem like if
+just based on this
+maybe the most reductive takeaway is
+everything.
+But then how do you Dan differentiate
+like why were you why did you say for
+example you're super bullish solar? What
+are your thoughts on nuclear? How do you
+trade all these off? These different
+sources of energy?
+>> So we're we're swimming in natural gas
+in this country. We can build solar. Uh
+you know, that's that's not a
+bottleneck. And nuclear,
+you know, we we can't really build it.
+We can't even build the containment
+vessels in this country. The Koreans can
+do it, but we can't do that here.
+So
+there's always going to be these big
+bottlenecks in the system. And whether
+you're talking about solar, whether
+you're talking about nat gas, whether
+you're talking about uranium,
+we're going to have the raw inputs like
+the natural gas that we drill from the
+ground, but what we're going to be short
+of is the critical minerals to build the
+nuclear power plants. We're going to be
+short the silver, for example, to build
+these solar panels, especially if we
+start launching data centers in space.
+Right? These are going to consume
+incredible amounts of silver. Right now
+the silver supply demand dynamic is we
+consume a billion 2 oz a year, we supply
+a billion oz a year. So there's a 200
+million ton deficit per year. And we
+only have 600 million of above ground
+inventory left. So the clock's ticking.
+We got 3 years left, guys, before we
+just stock out. And then the solar story
+is where do you get the silver for the
+photovoltaic cells?
+>> So
+for our kids and for the country,
+generation tool belt for us allocating,
+get some exposure to copper, silver,
+minerals, and then there's a bunch of
+service providers
+in and around that area that we should
+be investigating over the next year.
+>> Don't forget the labor, the service
+providers. That's a big one.
+>> Okay.
+>> And how do you allocate capital? You're
+at the front end of owning what? Mines
+and production, but then also the end
+use cases. Like how do you decide where
+to not play? Cuz a lot of these things
+it looks like these are incredible end
+markets, but you can get run over. Like
+if you're in the wrong part of the
+market,
+there's supply shocks, there's supply
+shaping by China, there's price dumping.
+It can be all obvious and you could make
+you could lose a lot of money, too.
+>> Yeah, look, you really have to
+understand supply chains, and I think I
+think to a lot of people out there the
+supply chains are this sort of weird,
+mystical concept. And I still think a
+lot of urban Americans still think a ham
+sandwich comes from the refrigerator,
+and they don't think about the 30
+million pigs every month they're getting
+slaughtered slaughtered outside of
+Chicago with
+>> Freeburg started. He's
+>> But, you know, you got to understand
+where the pinch points are in the supply
+chain, number one. And number two, I
+think you have to really make sure that
+you're not going to get technologically
+disrupted, where you can find You know,
+I think this is to Freeburg's point,
+where you can find something that's
+going to replace that tightness in the
+supply chain.
+>> up for Dan.
+Well done. Very very informative.
+[applause]
+>> [music]
+>> Thanks, bro.

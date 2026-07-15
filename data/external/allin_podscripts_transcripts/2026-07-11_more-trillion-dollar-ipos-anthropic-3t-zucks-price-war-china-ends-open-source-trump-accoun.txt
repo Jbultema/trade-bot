@@ -1,0 +1,1444 @@
+source: allin_podscripts
+published_date: 2026-07-11
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/more-trillion-dollar-ipos-anthropic-3t-zucks-price-war-china-ends-open-source-trump-accounts
+title: More Trillion Dollar IPOs, Anthropic $3T, Zuck's Price War, China Ends Open Source?, Trump Accounts
+
+All right, everybody, welcome back.
+Number one podcast in the world.
+It's July, all in episode 280.
+Freiburg is on a little vacay.
+I'll leave it at that.
+And, yeah, Bestie Brad is here.
+How you doing, Brad?
+I'm doing great.
+Vacay in maybe Idaho or somewhere, J.K.
+I don't know.
+Who knows?
+Who knows?
+Who knows?
+Who know?
+It could be anywhere.
+It could be anywhere.
+I mean, there's lots of things.
+He could be in plenty of places.
+And looks like you are.
+Yeah, somewhere in the Northeast. I'll leave it at that. You having a little vacay for yourself this week?
+Very page. I'm in my flag room, very patriotic room here.
+Very nice. You know, where I work on the East Coast in the summertime.
+Yes. And spent some time in D.C. this week. And it's been a great week. It's been a great week.
+So you're going to be out of there by the second week of August. Yeah. So I have it August 10th through the 30th. I'm good.
+Exactly. Exactly. I just want to make sure. Jason B&B. Jason B&B.
+Oh, absolutely.
+You don't know the half of it, man.
+I am on a summer bender.
+I'm like, where's your vacation?
+By the way, where are you?
+Where are you right now?
+I am in Paris.
+I did about eight interviews at the Rays conference.
+They'll be coming out in the all-in feed.
+And, of course, cackling from the factory.
+Look at him.
+You're working in the factory.
+Chamath Polyhapitia.
+It's going to be a hot software summer for Chamath.
+How's your hot software summer going?
+It's good.
+Selling enterprise software is hard, but it's good.
+I was like, man, I was such a dick to all my CEOs.
+Hey, the SaaS period.
+And now you know.
+I went to Geneva.
+I saw that.
+I went to Geneva.
+He works out of Europe.
+He sees all his European customers and he had a dinner in Geneva, which I joined.
+And then me, Jensen, Brad Smith, Anthony Tan from Grab, and a bunch of other folks were put
+on this UN commission for AI that Mark is the co-chairman of.
+When you see Mark Benioff in action, man, this guy is a fucking master.
+Holy shit.
+He is the impresario of impresarios.
+Yeah.
+You see how he's built such a ginormous business.
+It's impressive.
+It's impressive.
+What is a commission by the United Nations for AI?
+What is their calling?
+Open source.
+No, but no, I mean, it's like the United Nations actually do anything?
+They actually do it.
+Actually, it's so funny.
+Yeah, I mean, Anthropic was there, too,
+some, one of the co-founders, Tom Brown, I think was his name.
+Yeah.
+That's good.
+Was the anthropic guy running around saying, it's the end of the world.
+It's the end of the world.
+No, no, no.
+He was very.
+Tom's awesome.
+Tom's awesome.
+In fairness to him, he wears it on his sleeve,
+which is like, hey, we really believe we're doing the right thing.
+Right.
+And just trust us.
+And I think the future is open source for all these countries.
+Well, we're going to get into that.
+That's on the docket for sure.
+But let's start with the IPO update.
+You know, there's a trillion dollar IPO rush to the exits.
+And, you know, this was a big topic of discussion, Brad, at the Liquidity Summit last month.
+And we'd never seen a trillion dollar IPO.
+We had one this year already.
+SpaceX trading right about where it went public.
+So it was priced, I guess, to perfection.
+And theoretically, I'm going to see two more.
+Brad has the inside information, so I'll try to get it out of them.
+Open AI and Anthropic are slated to go out.
+Let's just go quickly over what happened with SpaceX.
+It ran up to $200 a share.
+It's been down a bit.
+It's at $150 a share, as I said.
+That's right at the IPO price.
+So it's trading at that two trilly.
+Market cap, currently seven largest company in the world.
+And Anthropic confidentially filed on June 1st.
+I don't know why they call this confidential filing when it immediately comes out,
+but I guess the information is confidential.
+Polymarket says 65% chance Anthropics IPO will happen this year.
+on light volume, 360K.
+And two weeks ago, Gavin Baker, another bestie said he thinks they're going to end
+2026 with over $100 billion in revenue and very profitable.
+He said, a couple of us guests on the program, that he thinks it would trade at $3 trillion
+right now if it went public.
+Chbath, you made a great call on the pod.
+You said, hey, good idea for Elon to get out first.
+What are the chances here, Chamoth, that these other two get out this year or maybe in like,
+you know, say nine months in the first quarter of next year. We'll start there.
+Well, I think that these are all great businesses. I think the question is what is the market
+clearing price? And I think that's more of a function of how much appetite the markets have
+to absorb new issues and at what scale. That's number one. And I think that's mostly determined
+by price.
+So I think Anthropic and Open AI are probably in two different places.
+The last time we heard from OpenAI, their cash burn was still quite high just because of the
+diffuse nature of their business and more reliance on consumer than enterprise.
+I think Brad mentioned it in one of the pods that Anthropic may actually be accidentally
+profitable.
+I think he said something like that.
+Yeah.
+Let me tell you something really interesting.
+I sat down with my CTO today and I said, how are we doing on token spend?
+he said the most incredible thing. He said, right now, our token costs are doubling every 45 days.
+Okay. And I was like, ugh. And he said, yeah. And I said, well, what is the downstream productivity?
+And he said, maybe 5% max. Okay. And I said, okay, so my costs are doubling every 45 days.
+My upside is essentially flat. And he said, basically. And I said, well, explain why
+that is. And he said, honestly, what we're finding out is that you need to use a lot more tokens
+to get to this next iteration of improvement because we've effectively already asymptoted.
+And I said, so what should we do? And he said, honestly, we have to figure this out. And so
+we're going to take a step back and try to figure out what to do. I don't know how many other
+companies will actually go through this reckoning now. But the point is, everybody in the next three or four
+years will for sure go through it. So I suspect that if you can get out now, you should get out
+now before all of that starts to seep into the water table because I think that's probably
+what allows you to get out at a huge price and raise a huge amount of money.
+All right, Brad, you are well invested and well known for being invested in these two next IPOs.
+So you probably have some good insights since you talk to them on a regular basis.
+Chances they get out in the next six to nine months, both of them, you'd say 100% chance,
+unless there's some outside event, you know, blockade of Taiwan, some Black Swan event
+that we're not anticipating.
+What do you think that chances are, they're public when we're sitting here and I'm skiing
+in Hokkaido?
+Yeah, I think it's very high.
+But let me first say, you know, the SpaceX IPO where we were also investors and we also
+bought in the IPO.
+I mean, it was textbook.
+It was a hugely successful IPO.
+they raised $75 billion at $1.75 trillion.
+Okay, so it went out below where we are today.
+It's up 25%.
+You know, and let's call it on $35 billion of forward revenue.
+So if you think about that revenue multiple,
+it's trading at $2 trillion on roughly $35 billion of forward revenue.
+It's an incredible achievement.
+I think it was textbook.
+I think Anthropic and Open AI were watching very closely
+because, frankly, we had not had an IPO of that size.
+And to Elon's credit, to the team's credit, Brett and Gwen, they really pioneered some really smart and interesting things as part of that IPO.
+So, you know, you heard from Gavin Anthropics rumored to be, you know, trending over $100 billion in revenue compared to the $35, right?
+If they exit the year at $100, that means their gap revenue next year could be well over $100.
+So based on the SpaceX success, I think it would be a blockbuster.
+IPO. And I think SpaceX has shown them the way on things like the total raise, pricing, liquidity,
+inclusion into the indexes, how to do the lockup. Like, I think they've gone to school. It was a staged
+release in terms of getting out of the lockup. It has to hit certain milestones and some of those
+are time. Early inclusion in the index, raise $75 billion. Like, you know, early inclusion in the
+index. Let me have you unpack that for a second because people said, hey, maybe this feels
+unfair that they should be forced to buy it? What's your take on that? Is that just like
+haters going to hate or is there's something to that? I think there was legitimate concern,
+right? What is the legitimate concern? The legitimate concern is that a company that had not
+been through the process of being vetted post-IPO, there's a lot of volatility. You've seen that
+chart, Jason. Sure. The peak to trough drawdown in the six months post IPO is 50%. We've seen a pretty
+big drawdown here from the peak to trough.
+as well. So you don't want to jam it into an index at the peak and then have a 30% drawdown
+on top of people, which often happens in IPOs because people get excited. It runs ahead of itself,
+but they didn't do that here. There was fear that that was going to happen. So both the exchanges
+and the indexes, they looked at this and they made some modifications because the other side of the
+argument is it's so damn big and important that it needs to be part of the index. Right. And so
+the reason the rules had previously existed is because most companies coming public were younger,
+earlier, less tested, less revenues, less profitable, all the things weren't as important
+in the overall scheme of things. So I think that they pioneered some really smart things. It's worked
+well. It's traded well. And so I think that that provides a bit of a blueprint for Anthropic.
+But just in terms of the enthusiasm, is an altimeter or is a fidelity, is a T-Rowe, an enthusiastic
+buyer of Anthropic based upon the things we know today around profitability and model improvement
+and revenue growth, et cetera. Yes, everybody would be pig piling in. Everybody would be trying to get
+into the top of the book. And, you know, the last I heard, you know, again, rumored that they would
+like to get out this year. On Open AI, everybody knows that Anthropic kind of passed Open AI on a
+revenue trajectory, but I will tell you, Open AIs kind of got its swagger and mojo back. It's coming out,
+you know, just today with a whole new set of models. We know GPT6, you know, there's a lot of talk of
+that coming out within the next 30 days, a whole new generation of models. I think their revenue
+has really ticked back up. The most recent kind of rumors I see on Twitter is around $70 billion
+tax at the year. So just as a reminder, $70 billion may not be over $100 billion that's
+rumored and anthropic, but it's still twice, you know, where the revenue of SpaceX is at. So
+can they get out at over a trillion on that type of revenue growth being one of the two frontier
+premier labs? I think the answer to that is yes. I'm not sure there's a huge race between the two
+of them to get out first. I think they'll both go out when it's time. I think Open AI has a
+little bit more complexity just associated with the corporate restructuring that they have to go
+through, et cetera. So I would be surprised if they go out before Anthropic, but the fact of the matter
+is I don't know. But today, as I sit here today, Altimeter would be a buyer at scale and at
+size in both of those IPOs. At $3 trillion, are you a buyer? Or are you a, hey, you know, it's
+obviously going to trade up and down. And there's no rush. Because you, I think, were the one who
+said on the pot or might have been at liquidity live. When I asked you point blank, hey, should
+retail get involved in SpaceX? What's your thoughts? And you were like, hey, listen,
+It's a 4% float, 5% float.
+It's going to trade up and down.
+But, you know, a year from now, it might be trading at the same basic price.
+It's going to be priced not to perfection, which it seems to have been.
+But I think your position was it's going to be priced reasonably.
+There'll be plenty of time to get in.
+You don't have to like, you know, panic about getting your shares.
+Yeah.
+Once a company's valued it over a trillion dollars, like the get rich quick schemes are over.
+Yeah.
+Right?
+Like you and I share a deep passion, Jason.
+and we got to get retail investors, we've got to get the citizens of the United States
+in on these value-creating opportunities earlier.
+The accredited investor laws are insane that we have in this country and keeps people
+from participating in these things.
+But it is what it is, right?
+So they're coming public at over a trillion dollars.
+I still think there's a lot of meat on the bone on SpaceX, on Anthropic, on OpenAI.
+But you're not going to have things that are, I don't expect that they're going to be priced
+in a way where you're going to get a 50 to 100 percent durable.
+bounce out of the IPOs. If so, that would mean they were probably mispriced, right, into the
+IPO. But I do think that these things can be compounders. They're going to compound at the
+rate they compound revenue. And I think all of these companies are going to compound revenue at well
+over 30% for the next many years. And 30% a year for just so people understand. This is high growth
+in public markets on very large revenue numbers already. You know, growing 30% when you have
+100 million revenues, one thing. Growing 30%, you know, when you got to,
+10 billion or 100 billion, you know, this is, this becomes a different task.
+So let's talk a little bit about these two companies, Chamoth, and what the public's going
+to perceive them as.
+ChatGPT seem to be the public brand, the consumer brand for, you know, large language models.
+It's the AI for, you know, people who are doing their homework or mom and dad are trying to fix
+the dishwasher or whatever.
+And then Claude took the lane of, hey, we're going to be the one for.
+for corporate. And it did seem like Open AI got very distracted with SORA and, you know,
+Disney relationship. We're going to make a puck with Johnny I. If everything consumer, then they
+realized, oh, wow, the revenue seems to be an enterprise first. Is that going to wind up being
+the big mistake when we look at it? They kind of gave the Google position, the high growth position
+to clawed in Anthropic and they took the Yahoo position. Or do you think they'll catch up on the
+enterprise, or maybe they should just go back to trying to be the consumer version. How are these
+going to be positioned a year from now? How's the public going to look at them? The problem with
+enterprise revenue is at some point, the person that's spending it has to see an ROI. I asked
+Fable 5 high. Anthropics new model. Yeah. Anthropics new model. I first asked it,
+what is the lift of the S&P 500 earnings per share growth since 2004,
+from AI. And they answered, oh, it's 50%. So then I looked through it and I said, well, no,
+you're including the money that Nvidia makes from selling chips to that. So I said, okay, I asked
+a different question, which is then what was the EPS growth of the S&P 493? And the answer was 9%. And I said,
+okay, well, that's different. And I said, unpack that. And the overwhelming majority of that was
+from pricing power, sitting on top of inflation, and then the other 3% was from buybacks.
+And so the answer, as far as all publicly available data, was that the actual ROI was somewhere
+between 0 and 2%.
+So, I don't know.
+I mean, I think that enterprise looks really good.
+The problem is that very smart investors like Brad and Gavin and others, at some point,
+we'll start asking companies, what's your ROI?
+What's the actual EPS lift?
+And if the answer is, well, I don't really know or I'm not sure.
+And, you know, you don't necessarily have the pricing power to continue to raise prices.
+Enterprise is probably a little bit more brittle because there are fewer buyers and they're more
+demanding.
+Consumer, on the other hand, then all of a sudden becomes an incredible safe harbor,
+because you have tens of millions of buyers.
+And having those two orders of magnitude,
+more buyers at a much smaller price point,
+inoculates you from the vicissitudes of an ROI discussion.
+So it all really depends on what the actual ROI is of this money being spent.
+I think that we're in the phase of just being astonished, as Brad said,
+about the scale of the revenue growth.
+But at some point,
+you'd have to be an idiot not to ask, well, who is paying you this and can they sustain paying it to you?
+I just don't know what the answer to that question is. And at some point, it may not be now,
+at some point people will have to answer that question.
+And interestingly, if you're spending $5 million a year on tokens, and that $1 million a year is doubling and tripling and quadrupling,
+at some point you're going to have to show an ROI that's above the risk-free rate of return.
+otherwise you're going to have some angry investors on your hands.
+And our discussion here for the last couple of weeks on the pod has sent it around that.
+And the industry has responded on the place where all the CTO, CEOs, and capital allocators
+hang out, which is X.com, formerly known as Twitter.
+Here's Praveen, the CTO of Uber.
+And so when you ask, like, how are they getting, how are they getting the ROI out of this,
+people are now bringing that conversation front and center and they're explaining it on X.
+And he talked, remember, Uber was also the one that ran through all their tokens in the first quarter.
+So then on the other side of the business, which is legal, operations, marketing, customer support, HR, and procurement, which he lists here, he says in this, you know, today 99% of our engineers use AI tools.
+Okay, great, right?
+It's everybody's, you know, doing vibe coding and has coding assistance.
+More than 70% of pull requests are attributed to local or cloud agents.
+Our engineers have built 2,500 agentic skills.
+So how are we bringing agentic AI beyond engineering?
+And what they've decided to do is essentially he talks about these agentic pods.
+And this to me seems directionally how this should be done, which is you find engineers
+and you, as we talked about forward-deployed engineers, fancy way of saying put an engineer,
+put them into departments and have them work with the department heads who understand systems
+thinking, how their process is done.
+and he says it's making basically long and short of it is they're making massive, massive progress
+on the operational side of the business.
+So Brad, you're pretty familiar with Uber and have been a long support of that.
+This is a company that knows how to deploy technology pretty well, and they're an operations machine run by an operations machine, Dara.
+They should report the EPS gains attributable to AI.
+Yeah, well, I mean, this first step seems like they're really being thoughtful about this.
+First, hey, this token span got out of control with the developers.
+We're going to need to pause this and look at it.
+And then second, here's how it's going to lower costs and create more efficiency.
+So, Brad, let's talk about that side of it, not just token maxing with the developers hitting
+the slot machine of like, okay, let's see if this pull request and let's see if this produces
+the right code or not to these departments in a more strategic way.
+It's not just the person who works in HR, you know, using Claude Code or perplexity or
+whatever and trying to vibe code something.
+This is, hey, we're sending engineering in to work with your top systems architect,
+and we're going to try to find that ROI, yeah?
+Yes, first, I would say Chimath is right.
+The only question is on what time frame?
+There's no doubt that there's a lot of money being spent today that is in the experimental bucket,
+right, where I think there probably isn't direct ROI, Chimath, to your point.
+But I think we're so early, nobody cares.
+I think we're so early in terms of enterprise adoption,
+Remember, the total addressable market here is every single, small, medium, large company
+on the planet.
+And so we've never seen revenue growth like this because we've never seen a TAM like this.
+And if you look at the distribution of revenues across these businesses, it's not like
+it's concentrated with four or five customers.
+There are millions of customers independently, economically, making the decision that is rational
+for them every day that it makes sense, like Praveen at Uber.
+And of course, they're trying to find things on both right now,
+mostly the cost side, cost takeouts to justify the investments that they're making and,
+you know, in tokens. But I think we're on the verge of breakthroughs and intelligence that's
+going to dramatically change the revenue side of the equation for a lot of these businesses,
+breakthroughs in life sciences, breakthroughs in product innovation, etc., where they could not
+divorce themselves from this even if they wanted to. For example, Jensen Huang has talked many
+times that all of his design work, all of his design work now at Nvidia is using AI to design
+the next generation chip. The machine is building the machine. So you can't get rid of that,
+even if you wanted to. And tiny intelligence advantages at the frontier where he sits are required.
+Like there's no way I don't think that Jensen is going to use anything but the best models that
+he can to build out those capabilities.
+So I just think that we're not going to see that in the next few years.
+You're going to see it under the hood, of course.
+But that occurred at Snowflake.
+There was tons of optimization that occurred at Snowflake, but the revenue continued
+unabated.
+The revenue growth continued unabated because they further penetrated use cases,
+further penetrated the enterprise.
+So let me be provocative here.
+If these guys end the year over $100 billion, I think that they're on a revenue trajectory
+that they could three to five X again next year.
+We've never seen anything like this.
+You're saying 100 to 300, 100 to 400.
+And Jason, like you and I have talked about this.
+Our minds were blown if a company could go from 100 million to 300 million.
+We're talking from 100 billion to 300 billion.
+200 billion of incremental revenue is incomprehensible in the history of Silicon Valley.
+Okay. And just the fact that we're even in the history of the world. Yeah, in the history of the world.
+So the fact that we're even talking anywhere close to this tells us something different is going on here.
+I think the thing that's different is that intelligence is the largest tam we've ever seen in the history of the world.
+These guys are penetrating it. So yes, the super sophisticated companies that 8090 and Chama are helping optimize their token spend that are early adopters, 100,
+that's occurring, but it's not really changing the trajectory that the frontier labs are on.
+Yeah, and one of the interesting things about this technology, that's really unique, we talk
+about intelligence on demand. When you would make a piece of software or you had some technological
+innovation, it would typically accrue to, I don't know, one group of people in an organization,
+you know, maybe two groups of people, right? Excel comes out, okay, yeah, the accounting department's
+having a field day with it, but it's not really affecting human resources or marketing.
+Okay, yeah, maybe it trickles down eventually.
+Every single person in every single organization is playing with these tools.
+So if everybody's playing with it, everybody's trying to apply it all at the same time,
+it's kind of like, you know, you got a thousand person organization.
+People are spending 200 a month.
+Okay, yeah, Chamoth.
+They double it every, you know, X number of months.
+Okay, yeah, now they're spending $400 a month per person.
+Okay, they're spending $5,000.
+Well, if the average salary is $100, $150K at this organization, it's only an incremental
+three, four, or five percent on top of their salary.
+So the way I look at it is, did it make that person three, four, five times more effective at their
+job? And I think the answer is yes. So that's why there's so much token maxing going on.
+And it's also a bottom up type product. You can just get into this product for 20 bucks a month.
+And no, no, no, you can't spend 20 bucks a month at your corporate card for this technology.
+So when a bottom up technology hits everybody at the same time, that's what would explain
+this revenue ramp that we're all having a hard thing.
+time adjusting to. It applies to every single person. Who isn't impacted by the technology is my
+question to you, Chumalt? In what organization you're working with with 80-90, is there a department
+that says, yeah, the intelligence on demand? Not for us. We don't need it. Well, it's less about
+being dismissive that way. It's more that regulators and other people won't necessarily allow to
+use it the way you want. Okay, so finance, HIPAA, yeah, there's HR data. You're not allowed to put that to
+work just yet. What I'm finding is, once you start using this and getting some gains,
+it's very addictive. And we were sitting here, Brad, I don't know, maybe in January, and I got that
+open claw bug. And then, you know, I started playing with this Hermes, Hermes agent, which is not a
+French company, by the way. They just use, you know, French names. It's Nouveau research or whatever it is.
+I started playing with that. It's a very peculiar piece of software, but it's a very open piece of
+software. So I went to OpenRouter. I got my own keys. I've been playing with GLM. Then I talked a little
+bit about BitCensor on the program known as Tao, dollar sign TAO. It's a crypto project.
+Somebody who is creating a subnet that is putting GLM 5.2 and other models available at really
+cheap prices. So I all of a sudden experienced because they gave me an API key, having my token
+costs go down 95%. And when you have unlimited tokens,
+as an exercise, which is going to come to everybody.
+Eventually, everybody's going to learn how to drop the price by 95%.
+And it's going to happen as well because people like GROC with inference.
+This is all inference, right?
+This is what people are using.
+They're using inference to do this.
+Well, inference is being impacted like three or four different ways.
+The software is getting better, open source at the same time.
+You're going to have distributed networks like Tao.
+And you're going to have better chipsets from GROC.
+and cerebrus, et cetera. All that's happening at the same time. Once I got down to 95% cheaper,
+I started setting my agents instead of doing daily runs to doing hourly runs. Then I took my agents
+from doing one task and I broke them up into three agents and have them doing three different
+things on the hour. And when you start doing hourly tasks and then you wake up in the morning
+and like 14 jobs have been done, you're like, wait a second. This is completely different.
+As one example, I have it, has all the all-in episodes, all of this week in startups episodes,
+and we set these cron jobs to go find what the new trends are in technology.
+I have a trend-spotting agent running every hour informing me of the top three or four trends,
+and I just give it words.
+Really does change your thinking when costs go down.
+What do you think the tokens are going to cost, Brad?
+And, you know, next year.
+Yeah, we've seen 90% reductions in the price of tokens for,
+each of the last two and a half years. We've talked a lot about Jevin's paradox, which I think you're
+referencing here, which is you're going to use a hell of a lot more when it happens. I think the central
+debate right now in AI is the one that Chimath keeps pointing us back in the direction of, which is
+for 18 months since the deep seek moment, right? When the deep seek moment happened, the markets fell 40%.
+And there was a reason for that. Many started arguing that the frontier models were,
+screwed, that open source was going to kill them, that they were closing the intelligence
+gap, that model routing was going to make it easier and easier to root these tasks to cheap
+tokens. But despite all of those arguments, and now we're 18 months into this, and I had this
+back and forth with Gurley a lot. I love open source. I want all the competition in the world.
+Let's be very clear. But despite all of those arguments, the facts on the field are just the
+opposite. The share of economic value, right? There's this quote, there's a, there's a
+this tweet this week from Jesse Zhang that we ought to pull up here, you know, the economic value,
+the share of wallet is actually increasing to the frontier labs, while the share of tokens,
+these commodity tokens, is obviously going up, you know, to the other guys. And I had a little
+back and forth this week with Nikesh on this, kind of trying to suss out, why is that the case?
+Right. Because what people would have thought is, oh, cheaper, pretty damn good. 90% is good enough
+to do all these tasks that you're talking about, Jason,
+so nobody's going to use the Anthropics and the Open AIs of the world.
+But despite that, it looks like their share of wallet has gone up.
+I think it's not that.
+I think it's more that when the iPhone was a novelty,
+everybody would keep upgrading because you expected that the new price was worth it.
+And then at some point, there's a moment.
+You can debate when it happened where people said,
+you know what, I'm just going to keep the old phone because it's good enough
+and I just don't see the difference.
+And I think that there's going to be a moment.
+moment like that. Like, when I use Fable 5, the problem is that it's nerved on a bunch of things that I
+would normally research. You know, I was with somebody this weekend and he was telling me about
+some help thing and I put it into Fable and it's like, it won't answer you. And I'm like,
+okay. So I think that everybody will get to a point. They'll get to it at different times where they
+just say, you know what? Like, it shouldn't really matter what model I'm using if I get an answer
+that I think is reasonable and I can kind of go about my day.
+separately, I think when the corporate CFO gets involved, it'll be an entirely different
+conversation altogether. I think that what I can tell you after this UN commission that I
+joined with Benioff and Jensen and Brad Smith, there is not a single country in the world that
+is not trying to figure out its own sovereign AI strategy. And I don't think they believe
+using a close source American model is the answer. And so, you know, I think we have to keep
+in mind, there's trends. One is just geographic penetration of humans, and there are still
+many, many, many more people that don't use it than do, which is an upside and an opportunity
+for everybody. And then the second is, there is going to be the experimentation, as you said,
+that needs to transition to ongoing repeatable usage. And then the third is that all of that
+that needs to plug into the existing regulatory infrastructure that we use as societies to run
+the world. And I think when you put all of these things together, it's not clear to me
+who wins, except that you're going to have a lot of diversity of choice. Certain countries,
+I can tell you after this week, have no desire to subjugate themselves to any technical risk.
+And so they're willing to spend the money to have their own. Now, we can argue and debate
+whether that country has any chance. But they would rather take an open source model like
+invidias, actually, and stand up their own stack soup to nuts for their own people and their own
+companies inside of their own country. And if the models are 99% as good or 95% as good,
+there's going to be a claim that some countries make, which is it's just good enough.
+That's the question. That's the question. And then separately, there are companies who will not
+have the earnings growth to justify this without going on some long protracted carve out of cost.
+And most companies, you know this, they just don't do it. They don't have.
+the nerve to do it, they're not capable of it. You know, you wrote that famous essay to Zuck.
+He was pressured into finally doing it. Absent to very few companies, most people just allow the
+problems to compound. So I just don't see a world where when you get clobbered over the head,
+you don't look at other ways of just displacing costs. And if it's like Coke Pepsi kind of
+a thing and Pepsi's one one thousandth the cost of Coke, I don't know. I just think it's a risk that
+I think has to be managed in the perception of the market participants and the underwriters.
+To add to that, Brad, just open source is very hard to implement when compared to just firing
+up Claude and having Claude already approved in your organization. The number of steps,
+it took me in order to, and I'm pretty familiar with technology, it took me hours to configure
+my new setup to get onto the spin sensor network, to get open router going. And to your point,
+Schumath, it does dynamically route now. So I'm dynamically routing and I'm, you know, GLM 5.2 and then
+if I fall back to Claude, but which quad am I going to fall back to? And here's another
+piece of evidence to your point, SchaMoth. There are some organizations that just aren't
+capable of this. They don't have the team that, you know, does this nationally. We just talked about
+the CTO of Uber. Now let's talk about another CTO, Andy Fang, is the CTO of DoorDash.
+Shout out to Stanley. And so he, as you can see here in this tweet, I got a lot of
+people listening to All In over the last couple of weeks are coming out, and as I said,
+explaining what they're doing to address this exact issue. He says, hey, with our internal
+coding benchmarks, we're able to confidently introduce open weight models into our AI code review
+without degrading code quality, have the frontier model, Fable, from Anthropic, to do the
+hardest work, delegate lower level work to Kimmy 2.6, and they are now releasing their benchmarks.
+So another group releasing their benchmarks and saying, hey, we know this is an issue. The CTO has
+been charged, to your point, Chimoth again, CFO says, hey, make sure this is profitable. We get the
+ROI. They put that on the CTO. Here's another CTO from another leading tech organization that
+knows how to implement this. Yeah. The really interesting thing we have to forecast right now is
+what happens in an earnings miss? And I think what happens in a in a moment where, for whatever
+reason, maybe there's just an externality, that there are a series of earnings misses.
+where are people going to look?
+And I just think that people find it very difficult to lay off other people.
+I think it's much, much easier to cut other costs.
+And I think that the more successful these companies get in a very quick amount of time without really proving the ROI.
+I just think the bigger the risk is.
+It's complicated.
+The game on the field when you're working with these enterprises and just trying to explain it to them is I think that they're getting smarter quickly, is what I would say.
+I would just say, I think that Chimoth stacks absolutely right about the sovereign stacks that are going to get built around the world.
+This is not either or we are going to have open source and we are going to have frontier intelligence.
+The preponderance of the tokens today are already shifting toward cheaper, lower lagging models out of OpenAI or lagging models out of Anthropic or the other frontier labs that are out there.
+Obviously, we, you know, we talk about those two.
+SpaceX's release.
+an incredible model, you know, in the last two days. Meta's out with, you know, a terrific
+model today. So Gemini's still in the hunt. So there are lots of choice. The meta thing was
+really intense because I thought, okay, you know, we talked about the game theory, which was
+Mark should scorch the earth with open source. I think they flubbed that play. But then I think he is
+now said he's going to create a price for. And so if you look at the tweet or the quote, there was
+a post, Jason, I don't know, Nick, if you can find it.
+I got it. Announcing it, he was basically like, hey, guys, I'm going to give you the same
+quality at like one one hundredth of the cost. Now, again, there's a lot between here and there.
+There's a lot of enterprise distribution that's required. And, you know, there's been a couple
+of misfires before. But I thought it was interesting that the vector of challenge was on cost.
+Yeah, here's the Mark Zuckerberg tweet. Just sorry, cue it up for you there, Brad. And he's
+at FinkD. That was his old handle back when he was in college.
+F-I-N-K-D. And he's done more tweets today over this Muse Spark announcement than he's done in his
+history. So he's getting into the X.com conversation, quote, today we're releasing New Spark 1.1,
+a strong agentic encoding model at a very low price. It's available through our new meta-model API and
+in meta-a-I. So he's coming out saying, hey, we got the strongest agentic tool here.
+Please come use it. He also wants to have his own essentially, you know, he wants to
+to jump into not the hosting space, but he wants to provide tokens as well.
+So again, I think we're going to have a tremendous amount of selection. The competition is
+great for America. But I think if you look at the things people are doing, let me give you
+an example, the premium workload. Jason, you talked about summarizing a document.
+It may take 20,000 cheap tokens to do. Of course, shoot that to a lagging model or an open source
+model. But if you're talking about replacing a software engineer for two hours, that may take
+2 million expensive tokens.
+And the consequence of using something that's 95% as good is really high, right?
+Because you have a long-running task.
+And if the task breaks early or it breaks in the middle or breaks at the end, there's a huge
+cost to that.
+So if it's still burn the tokens, right?
+You're back to this analogy.
+And the time.
+And you lose.
+And the time and the compute.
+So if an AI agent is replacing a $200 an hour consultant.
+Take that as an example.
+So three consulting firms, they're competing, they need the smartest consultant.
+They're charging $200 an hour.
+The difference between spending three bucks on a cheap model or $15 on an expensive model
+to replace a $200 an hour consultant, it's just irrelevance.
+That inference cost difference is irrelevant if you're getting something that's bulletproof for
+$15.
+And so I think that's what we're seeing play out.
+The best evidence for all of this is just revenue growth.
+right we can sit here and speculate all day long as to what this company not from anthropic and
+opening eye but from their customers i'm no i'm talking about what is anthropics revenue growth
+compared to open a i compared to the open source models millions of independent actors are choosing
+every single day the open source companies are growing right but they're growing selling something
+that is really really cheap and there's a there's room in every single market for premium products
+for mid-tier products and for commodity products. And I think we see a lot of this token growth,
+people are speculating that the intelligence gap between that commodity stuff and the frontier stuff
+is going to collapse to the point that people won't pay for the frontier stuff. There is no evidence
+of that on the field today. It may develop over the course of the next couple of years,
+but it's not on the field today. Yeah, and just to give people an idea, we keep mentioning what
+sovereigns are doing to give you the specifics on that, the UAE, very famous.
+has their own Abu Dhabi Technology Innovation Institute Shipping Falcon. You probably have heard
+about that. The Saudis have Humane, and they're doing their own models that are Arabic LLMs.
+And then this week, Japan is investing $6 billion in a consortium. It's called the Neotera,
+Neotera, Neotera, Neotera, and they're doing that and skipping ahead to physical AI, i.e.
+robotics. Okay, joining the conversation here, the one, the only. Saksie Poo. Sacks bringing you into
+the discussion, talking a little bit here about the debate that we started here on the podcast,
+getting ROI from tokens, where are the tokens going to accrue to open source versus the
+frontier models? A bunch of CTOs chiming in on X this week in the last couple of days, in fact,
+talking about how they're managing intelligent routing first to open source models, then falling
+back to Fable and the frontier models. How do you think this is playing out? And if you're an investor
+in the space, how do you think about the frontier models and their growth when you have,
+you know, CFOs coming in and saying, hey, justify this cost. And do you have a cheaper solution? And
+what is that cheaper solution? Well, look, I think that enterprise C-THAs.
+TOs would like to shift their token consumption to cheaper models for the obvious reason that that would be more efficient.
+And they are seeing their compute costs or their token cost is skyrocketing right now.
+So everyone's trying to figure out how do we put the brakes on this or at least control it, you know, make sure we're getting R.
+You also have the AI sovereignty issue that we discussed last week that Alex Karp talked about where they're worried about giving up the secret sauce or the alpha in their business to a,
+Frontier Lab that may one day be competing with them. So there's no question that enterprises would
+like to diversify. They would like to get off of these frontier models when they can. The problem is
+I think in most cases they don't have the technical ability to do it. I mean, Coinbase figured out
+how to do it, DoorDash figured out how to do it, which is to say they built a token routing system,
+a layer of middleware that allows them to sort of send frontier tasks to frontier models and non-frontier
+tasks to more mundane models. But I don't think your average enterprise has the technical capability
+to do that. So I think this is a case of the spirit is willing, but the flesh is weak. I mean,
+they are willing. They would like to diversify off of these closed models, but they are unable to do it.
+And so this is why the share of wallet of closed models, it actually increased. I think that
+open source went from 19% last year to 11% this year. So open source as a share of enterprise
+spending is actually decreasing. Now, I don't think that means that usage is decreasing. I think
+usage is skyrocketing in both these categories. It also may be the case that because the whole
+point of using an open model is you just pay for the compute cost, you don't have to pay a lab.
+So it may be the case that it's hard to measure that usage in terms of spend. But nonetheless,
+I mean, anyone who's saying that these closed models are going to lose or are somehow losing,
+you're just not seeing it in the data.
+Like Brad's saying, the revenue is skyrocketing.
+And I think the most you can say is that enterprises that are technically capable would like
+to gravitate towards hybrid architectures.
+But at the same time, it takes technical expertise and it is just phenomenally convenient,
+whether you're a developer or an enterprise, just to go with,
+the frontier labs. And that's why their revenue is skyrocketing. It is the easiest choice.
+It's the most refined. Yeah. And there's one other thing here as well. And this was discussed in a really
+interesting blog post by the founder of Decagon, which is enabling AI power customer support for
+enterprises. And what the founder said is, look, open models are great when you know exactly
+what you're trying to do. Why? There's smaller, cheaper models, but you have to do post training. You
+have to have the data set and you have to know exactly what you're going to use them for.
+Totally.
+But if you don't know exactly what you're going to use them for, you want the most powerful
+general intelligence that you can get, right?
+So what he said is that for mature use cases, yeah, you want to go open.
+But for immature use cases, which are all the new things people are discovering right now,
+you're just going to want to use the most capable general model that you can.
+And then once you figure out what the workflow is and what the workload is going to be
+and exactly what you're trying to accomplish,
+then you can use a small, highly trained model.
+And I think he said something like-
+You'll optimize in the post to get the games.
+For customer support, your model doesn't need to know physics,
+you know, for example.
+And so you don't need that capability,
+but enterprises are still trying to figure out exactly
+what all these workflows are going to do.
+So I think that's another factor,
+which is to say that, you know,
+it depends on the use case and how mature that use case is,
+and you really want the most powerful frontier models that you can at the discovery of all the potential for the technology.
+Yeah.
+And then we just wrap up.
+Then there's one other interesting posts that I saw was by Nikesh Aurora, who also said that what he's seeing is, yeah, enterprises would like to diversify.
+They would like what he called model fungibility.
+They would love to commoditize these models, right?
+And just hot swap them.
+Yeah.
+Headless is the term being used, right?
+Yeah, that would be ideal for enterprises as you sort of swap out the model for the cheapest one that gets your task done.
+But then what do you do about memory? What do you do about context? What do you do about history?
+And what he said is no one's really figured out a way to abstract that stuff away from the model yet.
+And again, this goes to the technical challenge of creating this middleware layer that would do the most efficient token routing.
+It's, well, you know, it doesn't work unless you can make all of that context and memory and history fully portable.
+to the cheaper model that you want to basically hot swap to.
+Which means you have to have some technical ability sacks.
+And the people with technical ability, the tip of the spear, the 1% of people deploying this technology are starting to figure that out.
+Here's another proof point and some more evidence.
+This is Ali, the founder of Databricks.
+I think a company you're very familiar with, Brad.
+And what he realized, when you start taking apart the harness and you start looking at the skills, you look at the memory and all this,
+accruedermont that you put around your tasks, he said, we find that the same model, using the
+same model, not using open source versus open AI or Claude, we found that for the same model,
+the choice of harness can significantly save costs by about 2x. So they found with GLM 5.2 that this
+performs extremely well and that their tasks literally are getting cut in half using the same model,
+but with a different harness. And that rings true to me. Once you've built one of these agents,
+and I was talking about one earlier, I'm running every hour on the hour to find trends.
+I asked it to please start optimizing it. And when I optimized it, it was like 80% less token
+use. And now in these apps, you can go to your analytics sacks and you can actually
+see your token use by hour, by job, and across which models you're using. This is really
+sophisticated and hard for a consumer to do of the technology, but it's definitely a trend.
+So with the harness that he was using, is that something they built in house?
+Yes, I think it's, yeah.
+Okay, got it.
+So they basically create their own application.
+He's using OmniGent in front of these and that it can multiplex different harnesses
+and models for different tasks.
+So he's not only routing to the right LLM, he's routing to the right harness.
+And people don't even know what skills are.
+people don't even know what the memory is at this point.
+That's all abstracted into the Claude product with a propensity product, etc.
+There'll be a massive business.
+There already is.
+All these inference clouds, you know, the base tens of the world, the fireworks of the world,
+every single hyperscaler in the world is going to do this.
+They're all going to provide, you know, tools that allow you to achieve some level of model fungibility.
+The big question is, at the end of the day, it's going to be very heterogeneous.
+But what is the mix between these two?
+I again, think the TAM is so damn big here, that you're going to have huge open source use cases,
+sovereign use cases, et cetera.
+You're going to have plenty of room for the frontier labs.
+Let me throw something out.
+I'd like to get your opinion on, you know, to a certain extent there's this implied assumption
+in the world that there's going to be this convergence of intelligence, right?
+And if you look at the benchmarks today, it seems like everybody, you know, on the benchmarks,
+they are converging.
+But yet, if you look at the revenue distribution, it's not converging.
+at all? One of the questions I have, will the model router itself be smart enough to overcome
+David the inherent intelligence advantages of the generalized of the frontier labs? The non-consensus
+argument might be that intelligence is not converging at all, that superintelligence becomes
+fully self-recursive. And as it becomes recursive, you actually extend to the lead because
+the smarter your model gets, the more revenue you get, the more compute you can buy,
+the more compute you can buy, the better the model is that you can build.
+So I think there's a chance that over the course of the next two to three years, as we take
+on much more complex, agentic tasks, that the distance between the frontier and everybody
+else doesn't converge, it actually extends.
+What we shall see.
+But, you know, I think there's this implicit assumption in all the arguments today that
+everything's converging.
+I'm not sure that we've really run that to ground.
+Another piece of evidence to put in to this mix, I interviewed Anton, the CEO of Lovable.
+Loveable is an app or is a service that allows you to vibe code, you know, different pieces of
+software.
+They've got a really interesting take on that.
+They went from 100 to 600 million in revenue over the last two years.
+They went from zero to 350 in the first two years of the company.
+The product's been out, I think roughly for like 30 months.
+Then I also spoke to the CEO of 11 labs, Mati.
+And I asked both of them point blank, are you guys, you know, your major customers of, you know, the frontier models?
+Yes, they're spending tens of millions of dollars with those frontier models.
+I asked them, hey, are you concerned about data leakage and them, you know, releasing competing products?
+11 Labs is doing voice.
+And obviously, Claude, you know, is an obvious competitor to lovable.
+Are you going to make your own models?
+Both of them said that they're working essentially on their own models.
+Those are major customers of the frontier labs who they want to get off of the frontier models
+and they want to have their own proprietary model.
+The ability to create verticalized models is getting easier and easier every six months or so.
+So that's going to be another trend to look for is these verticalized models for voice,
+verticalized models for building code.
+And we're going to see people stop using the frontier labs.
+And these are major, major eight and nine figure customers.
+I think they're going to just run.
+of the Hells and only use the frontier models.
+They absolutely have to.
+Jay, Jay, the counterpoint there is 11 labs.
+I love Maddie.
+Yeah.
+Do you really think he's going to use an inferior model?
+He's got to have the best voice agent in the world.
+And if the best voice agent in the world is given to him by using the frontier labs,
+can he afford in a competitive marketplace to say,
+I'm going to use the cheaper version, the thing that I built for myself,
+even though it's not as good as the other thing?
+If he builds something better, I totally agree with you.
+which is what he believes he's doing.
+He believes he's making a better version.
+So that's the question that I just put on the table.
+Whether or not you're going to see this convergence,
+whether it in fact is that easy.
+I don't think it's that easy, but we shall see.
+It may come down to how discrete and sort of predictive the use is.
+So like Decagon, the customer support AI company,
+they said that 90% of their usage now is being sent to open models.
+But those are open models that they've had the opportunity.
+to post-train on and do a huge amount of customization based on all of their learnings
+and all of the data that they've gotten.
+So, again, it comes back to maturity of the use case.
+If you know exactly what you're trying to do, it's probably easier.
+But, you know, I don't think that's most enterprises, though.
+And maybe there's going to be a pattern where, you know, all the immature use cases,
+which is to say all the things you're figuring out, you're just going to want to use
+the most powerful model possible.
+And then once it gets really well defined, maybe you start moving some of those workloads to post-trained open models.
+Purpose-built models, yeah.
+Yeah, purpose-built.
+Yeah, it could be something like that.
+That's kind of what's happening with the people who are the tip of the spear.
+They're working on the routing of the jobs.
+They're working on the harness.
+And they want to be independent and have that AI sovereignty we talked about last week speaking.
+Well, just to take on Brad's point for a second, I actually agree with what I think you're saying, Brad, which is,
+The market today seems to be pushing towards duopoly, or it has become a duopoly, certainly
+measured in terms of revenue.
+If you're to look at market share based on token revenue, there's only two companies
+making meaningful revenue.
+Anthropics at what, 60-something billion ARR, OpenAI at 40-something billion ARR.
+I don't know if anybody else even registers.
+And it may be the case that the more tokens that Anthropic and OpenAI, you know,
+produce. I mean, we've got to remember every token that they're serving up is on behalf of a use
+case, right? So they themselves are learning from that, and they're getting better at then providing
+whatever offering that is. And so, who knows? Like, the gap may be growing. A year ago, it seemed like
+we had five major labs. You know, now it seems like there's a top two and then everybody else.
+So, I mean, look, I could see AI easily becoming another tech market that becomes a duopoly,
+which, by the way, is the trend.
+The historical trend is like monopoly or duopoly in most tech categories for better or worse.
+Yeah.
+In this case, though, however, we're using revenue as the metric to determine the winner.
+Keep in mind, when you're doing open source, those are dark tokens.
+Those don't come up as revenue.
+So we don't know the utilization that's occurring at DoorDash when they're using an open source model.
+We do know their fable and their anthropic spend, right?
+because we see that in the anthropic revenue ramp, the more they deploy these things on their
+own hardware, using commoditized hardware, using the neoclouds, you don't see that. It doesn't come
+up as revenue. It comes up as free. The only thing you're paying for there is the hosting cost.
+And that will come up on Nvidia's balance sheet. So the gains you'll see there will be
+cerebris, neoclouds, Caruso cloud, etc. So just keep that in mind when we're having this
+discussion. Let's talk a little bit back to sovereignty here.
+The CCP said that they might, or there's a report out, according to Reuters,
+Reuters generally does a good job of this.
+They dropped a couple of anonymously source reports about AI and China, and these were published
+about 15 minutes apart.
+The big scoop that CCP officials, Chinese Communist Party, are reportedly considering restricting
+overseas access to China's top models.
+So two Chinese regulators met with Alibaba, Bytdance, and Z.a.
+They're the ones who are doing GLM 5.2 that we keep referencing.
+They're discussing limiting access to the top open and closed models outside of China.
+Why are they doing this?
+Well, they're making any theft or leaks of AI research a national security offense, and
+they want to control who can fund Chinese AI labs.
+And we saw this with Manus, which was a Chinese company, tried to go to Singapore, the CCP
+pulled those employees from Singapore back to China.
+And so here is their main concern.
+The quote is that they're concerned about mythos.
+Chinese authorities are deeply worried about the potential for mythos to exploit software vulnerabilities
+and that Washington might deploy a model against Chinese interest.
+Sachs, last week, I proposed the reverse to you in your previous position as czar of AI.
+Do you think the United States should be banning those models?
+Now we have the opposite.
+China's saying potentially, according to these reports, allegedly, that they might restrict them.
+So explain the game on the field here.
+if you're going to look into what China's thinking, why would they want us to not have those
+open source models? And how is this chess board developing? Well, last week, I explained why it would
+be harmful to the U.S. to ban open models. So if you're China and you want to harm the U.S., maybe you
+would want to. I mean, it does kind of make sense because our companies are benefiting a lot
+from all this R&D that they're doing. Now, at the end of the day, I think this story is probably a little bit
+overstated. I think there are a few Chinese models that were open source that have gone
+closed source, but I don't think they're all, I'd be surprised, let's put it that way, if they all
+went closed. So for example, the number one model in China, as I understand it, is bite dances
+model, which is already closed. That's kind of like their chat GPT equivalent, and it's always
+been closed. Then you've got Alibaba's Quinn, which was open and now I think is
+going closed. And Zipu, which has GLM 5.2, which we've talked about a couple of weeks ago,
+because it seemed to be catching up to what was then commercially available as the American frontier
+at certain tasks. They, I think, are going closed, too, after having been open. And so this is,
+I think, the tactic is you stay open until you catch the frontier, you get close to it.
+And then there's a really compelling incentive to go close because you want to capture all
+the value for yourself.
+Which, by the way, is exactly what Sam Altman did, famously at Open AI.
+Not only did they go from a nonprofit to a for-profit, they went from open models to close models.
+So it's exactly paralleling what Sam realized three years ago.
+Yeah.
+I mean, in a way, that was what I think Meta's original strategy was, was that Lama was going to be open.
+But then they actually, they've sort of backed away from open a little bit.
+But it's just kind of an obvious strategy, right?
+Is that if you want to catch up, you go open.
+because, by the way, you're not going to make any meaningful revenue on closed anyway, because
+you're not close enough to the frontier. So why would anyone buy your product? But if you go
+open, you get the developer community on your side. And you get utilization. More people use it,
+which in AI gives you reinforcement learning. Yeah, sex. Well, having spent some time in D.C.
+this week in talking with the White House and Treasury, et cetera, on this topic, what I can tell you is,
+while there may be some, you know, debates about regulation of U.S. models, the one thing there's
+absolute agreement on is doing everything to stay ahead of China. And, you know, and the president,
+all the way up to the president, very interested, how far are we ahead of China? What are the
+things we need to do to stay ahead of China? It is a unifying force in Washington. And the idea that we
+were going to kind of take our frontier labs off the field, off the playing field, while letting
+Chinese open source models run free. And on top of that, distilling our models, I will tell you,
+GLM 5.2 has watermarks from mythos all over it, right? So we know they were distilling, et cetera.
+And I think the U.S. government is going to take steps against distillation, which they should do.
+So I think that, you know, China doing this in some ways, I don't think it hurts the United States.
+The United States can spin up open source models. We've got reflection spinning one up.
+obviously we got the good work going on at invidio with their open source models the labs i've talked
+to a couple of the frontier labs about open source models i said why aren't you guys making open source
+models they're like there's not a lot of demand for it if there was a lot of demand for it we would
+make it and so i think the u.s is in a good position i think this is probably more chess playing by
+china than actual threats because it would hurt them a lot more than it would uh hurt us yeah and then
+to just back up your point sacks about when you're behind go open and then once you catch
+up, kind of tightening things up. That's exactly what they did with Android, right? Google released Android.
+At a certain point, they were like, in order to use Android and the license, you have to include
+Google Search, you've got to use Google Drive, you've got to use Chrome, and they started tightening
+it up so it's not really an open source project at this point. Just by the way, I think the absolute
+best thing that could happen for America in terms of winning the AI race against China is if China
+somehow sprouted their own dumer community. Yes. We need a like a, a,
+Chinese Yud over there.
+We got to get their P-DOOM up.
+We got to get their P-Doom up.
+Yeah, exactly.
+We need a lot more people over there freaking out about, you know, job loss or RSI or
+whatever.
+Yeah.
+That'd be the best thing that could ever happen to us is if they start cracking down
+on their labs in the same way that the DOOMers want to do over here.
+Yeah.
+Brad, let me just say, just one comment.
+I mean, look, I agree with you that from the president on down, everyone wants to win the
+AI race.
+And in fact, that was, you know, in the big AI policy.
+speech the president gave about one year ago. That was the whole thrust of the speech was declaring
+that we were in an AI race and America had to win it. I think the big risk is more that, and this
+would not be at like the top level. I think if the president can make every single decision,
+it'd be perfect. The issue is at a lower level in the bureaucracy, do people somehow do things
+that are counterproductive? Maybe they think it's going to help us in the race against China,
+but they end up doing something that's ham-fisted.
+They just, like, ban something or without, you know, really truly understanding all the
+implications of it.
+So I think there's no question that the administration wants to win the AI race,
+the president definitely does.
+And at the top levels, they will all make smart decisions.
+The question is whether at lower levels of the bureaucracy, you can get mistakes being
+made.
+And then you have the influence of Congress, whatever they want to do.
+Those guys, they're more responsive, I think, in a way to, like the Dumer,
+community, that's creating a lot of political pressure right now.
+Well, and the throttle, you know, paradoxically to all of this might not be the software,
+might not be the chips. It might be energy, yeah, Chamath? I mean, when you look at your data
+center projects and the other ones that are going out there, if we need more tokens,
+if people need more inference, we have a gating factor in the United States, which is energy.
+There's an analysis that my team put together, which I think is quite staggering.
+if you just look at the load growth that's expected between now and 2050, we are about
+three entire California's worth of energy short. And that's just assuming regular consumption
+of devices and cars, fridges, televisions, and computers. So we have an enormous problem
+in the United States with respect to electrons. Yeah. And if you put Taiwan into the mix here,
+where the chips are coming out of, I had a really big wake-up call.
+There was a Wall Street Journal article about this.
+The amount of LNG, which is what Taiwan runs on, is like they have two or three weeks of it.
+China decides to blockade Taiwan.
+They're going to run out of energy immediately.
+So this is energy both in China and Taiwan and in the United States.
+It's all dependent on that.
+We have to get nuclear running, more solar running, more batteries, more of everything.
+And that is obviously a regulatory challenge here in the United States.
+All right, let's talk about your time in D.C.
+Brad Gersoner went to D.C., everybody.
+And huge, huge congrats, Brad.
+You've been harping on about this accounts now called Trump accounts,
+the Invest America accounts.
+And tell us what happened in D.C. this week,
+because I think you finally have the number.
+one app in the world. Trump accounts is the number one app in the world. Congratulations. And a bunch
+of announcements. So what what's the contours of the announcement? And maybe you could take us behind the
+scenes. There it is. Trump accounts, the official app number one in top downloads. Your kids can invest in
+the future. There's been, you know, a four-year mission in the making. Thanks to you guys, you were
+early supporters, backers. We talked about it on here. And, you know, founders are crazy. And you guys probably
+looked at what I was working on and thought, you're nuts, you're wasting your time on this.
+And so, you know, when it got signed into law last year, that's a huge moment in a founder
+journey that it's like getting your first round of funding, maybe, like, okay, we actually,
+this thing is going to happen.
+But on July 4th of this year, the app went live, right?
+So that means millions of accounts got created, the accounts got funded, and to celebrate that
+and to really kind of take the next step forward, you know, we designed a joint bell ringing first
+in history between the NYSE and NASDAQ from the Oval Office that was incredible.
+We had 100 CEOs there, kids there, families that were impacted.
+And the president really kind of laid out that this is much bigger than just a program
+to give a few people some accounts.
+This is really about making every child a capitalist.
+In fact, the president suggested that we're going to auto create accounts for all 50
+million kids or upwards of 70 million kids under the age of 18. So he called on us to get the accounts
+open faster for more people to have more impact to make sure no child is left behind.
+Right. Just slow down because a lot of people don't even know what a Trump account is. Just explain
+what it is and then you should contrast it to like a 529 account and some of these other things.
+Great. So as you guys know, the idea was very simple. A thousand dollars for every
+child at birth that could compound for their life in a privately owned investment account.
+So you're born, you get a social security number, and you get an investment account.
+And if you do that, you start with $1,000 and somebody matches that and you save $10
+a week, that's $50,000 at age 18.
+And that's invested in the S&P 500?
+SMP 500.
+So when these accounts are created, all that money goes into the S&P 500.
+there's no cost. It's a free account for the lifetime of the recipient. And that was packaged
+into the Invest America Act, which was passed into law a year ago as part of the reconciliation
+bill. So that's what actually occurred on July 4th of this year. All those accounts were created
+for all of these kids. That's the reason the Trump account app is number one in the app store,
+because parents started hearing about this and saying, whoa, I need to go download and get this
+setup for my child. We had over a million and a half counts created in the first 24 hours
+after the launch of this. We had over a billion dollars of deposits. So I was contributing money
+into the accounts of my nieces, my nephews, my kids, friends kids. Every account app has a
+QR code, Jason. So somebody can just send you the QR code for your kid. You double,
+you Apple pay on your phone, double click, and you send them 25 or.
+or 50 bucks. So that is kind of the most essential part of it, but we also had a bunch of
+announcements around philanthropists. And just to be clear, you can get access to that when you're
+18, 19, 20 years old and start putting it towards school or you can roll it into your IRA,
+Roth IRA, I guess your retirement account. Obviously, Michael and Susan Dell were the,
+with the anchors here, over $6 billion, $250 for each of 25 million children, primarily lower
+and middle income kids.
+SpaceX is president, Gwen Shotwell.
+She joined the party, put $350 million in her SpaceX shares and for children of lower
+income communities.
+So with this, there's a device or some way to do it.
+So you can target specific communities by geo or by, I guess, their net worth.
+No, it's just zip code and age.
+Zip code and age.
+Okay.
+And then Micron put in $250 million up to $1,000 per employee.
+So that seems to be a really interesting way to do this.
+like you can do an employee, I'm sorry, an employer contribution.
+And Brad, Brad, Brad did it for all kids in Indiana, I think, right?
+Correct.
+All kids under five.
+And Brad, this is a big number here.
+This is a big announcement.
+Brad, the guy who complains when we make him buy-in for 10K after 10 p.m. at the poker game
+and who like rage quits the game when he loses $6,000.
+Somehow, Brad dropped a hundred million dollars.
+I mean, oh my God, let's get a round of applause and a golf clap. Brad, this is, I mean, I've never heard of you doing any philanthropy. Like, sometimes you show up with a bottle of wine to the game, but this is a big number. This is a big decision for you, huh? Well, I think this will become the largest direct philanthropic platform in the history of the country. We told the president, we think we can raise $100 billion in the first 12 months. And so the scale of the philanthropy, the nature of the philanthropy, directly to American.
+as kids without a charitable middle band that's directing who gets what and how it's distributed.
+So you think about the people who now are, you know, we're 10 billion or 100 billion.
+How do they give that money away at scale effectively?
+Now we have a platform they can do that with.
+It goes directly into the accounts.
+The money can't be taken out until the kids are 18.
+Brad, there was a bunch of noise about how some people won't do it because it's called
+Trump accounts.
+and that some people said, you know, this is going to create this weird class divide by people who had TDS and refused to give their kids.
+Because I think your website or something said something like 13 million bucks by the time they're 50.
+And, you know, I tweeted something to the effective.
+That is an irresponsible amount of money to not give a kid because you don't like the fact that it's called a Trump account.
+It's patently insane.
+If you go on Blue Sky, which is like the open source, lib, TDS, social network, people are like, just but one, you know, y'all trust those Trump accounts? I sure has held out.
+So there's a bunch of people.
+Speak to that. Yeah, speak to that for one second, Mike.
+So I would say this, you know, it was the enabling legislation is the Invest America Act.
+A lot of people, a lot of Democrats call them invest America accounts. They're officially Trump accounts.
+And the facts on the ground are that parents aren't listening to them.
+noise. The parents who are signing up for this are across the income spectrum, across the
+economic spectrum, they're across the political spectrum. They know and understand that their
+first responsibility is making sure their kids have a connection to the American dream,
+have savings for their life. But yes, they are called Trump accounts. And I've read some of that
+blowback. But the president himself, let me just make this case very strongly. There's nobody
+who I've talked to about this over the last two years, who cares more about every child getting an
+account than the president himself. In fact, that occupied a lot of our conversation over lunch.
+He said, how do we get more people auto-enrolled in this faster? I want every kid to have the
+shot, to have this. I don't want anybody being left out and left behind because their parents are
+too busy working two jobs or because their parents may have an issue with it being
+called a Trump account. So the president is pushing us very hard and the Treasury Secretary to get
+more kids signed up faster. He gave you instructions. He gave you an order that he wants you to
+auto-create the accounts. This is a brilliant move. We know the social security numbers of people who are
+under 18. He told you get to work and automatically create the accounts. Are you going to do
+what the President Trump has commanded you to do, Brad? Are you going to auto-create them, Brad?
+Are you going to disobey the president?
+Our intention is to get all 50 to 70 million accounts created over the course of the next 90 days using all of this data.
+But, you know, listen, we got to work through Treasury, the White House, Social Security, et cetera.
+They're definitely hurdles that we have to overcome.
+And you have to get through Elizabeth Warren and Bernie Sanders and Roecona who are going to try to stop you.
+Are they going to try to stop you from doing this?
+Are they giving you blowback because they don't want to give Trump the win, which is totally retarded?
+But no, listen, I'll give credit where credit is due.
+You know, Cory Booker's come out and supported these.
+And Gavin Newsom, Governor Westmore, you know, John Federman, Senator from Pennsylvania.
+So there are plenty of Democrats who are able to get over that hurdle.
+But you bring up a good point, and I said this on CNBC yesterday.
+On the one hand, you have Bernie and Mandami.
+They want to take and tax all these corporations.
+They want to control all that money in Washington.
+and decide who gets it. Right? It's a very dependent on Washington model. On the other side,
+you have the president in this administration and frankly, a lot of Democrats who are more in the
+orthodoxy closer to the center, who say, no, let's set up a private account for every kid in America.
+Let's fund them. Let's not make them dependent. Let's make them independent of the government to build
+wealth on their own, financial literacy on their own, more likely to graduate from high school,
+will start a business by a home.
+Those are two very different world views for America.
+And I think the antidote to more socialism is more capitalism.
+And as I told the president, this is more capitalism.
+Sachs, if this succeeds and Brad does, as he's been instructed by the president,
+we're going to go from 50% of people owning equities in the country to as much as 70,
+maybe even 75% of the country having access and for the first time being part of equity,
+Nation, what's your thoughts on this, SACS? Look, I think that's a great thing, and I think that this is a
+tremendous new philanthropic platform, and that's really important, especially in this time of
+growing anger and backlash and populism against billionaires and people questioning whether
+the system is rigged and whether they can be successful in America, whether they will be
+part of it. This is a really important antidote to that. But I almost think that the philanthropic
+aspect maybe has gotten almost too much attention because people are naturally attracted to the
+freebies and the part that I think hasn't gotten enough attention or all the the comments I saw
+on CPA Twitter, you know, where all these accounts were talking about what an unbelievable,
+I guess you could say a state planning strategy this is or basically.
+Tax advantage.
+Like a wealth management technique, whatever you want to call like planning for the future.
+And there's never been anything like this before.
+basically saying this is like in the top three, you know, there's certain things that you just
+have to do. Like if your employer offers a matching 401K, you have to do it because otherwise it's
+just you're losing out on free money. And if you don't do a health savings account or you don't
+max out your Roth IRA, there's just certain things you have to do because there's so tax
+advantage or you're getting free money, right? And in this case, you're getting both. There is the
+opportunity for, frankly, the free money for your kids, right? But also the tax advantage is huge.
+So let's just go through this and Brad, correct me if I get any of this wrong. So you can donate up to
+$5,000 a year to your kid as long as they're under 18. And it's not just you. It's any friends and
+family or others can contribute as well, which is new. And then they get tax free compounding until they're
+18. And your employer can contribute up to $2,500 tax free. So at a minimum, you should go to your
+employer and say, sign up for this. And if you have to, take $2,500 out of my salary and make it a
+donation to my kid's Trump account, because then that's a huge tax savings, right? Neither
+side has to pay tax on it. So, you know, like Brad said, this is basically like an IRA. You get tax
+re-compounding. Then when the kid turns 18, they can get access to it and they can do a rollover
+into an IRA or into a Roth IRA, which is even better because when the Roth IRA mature,
+you don't pay tax on the money that gets distributed out of it, whereas with a traditional IRA,
+all the taxes get deferred until the end. The difference is that when you do a IRA to a Roth IRA
+conversion, you're supposed to create taxes at that point. And I saw one really clever CPA say that,
+well, the best way to do this is wait till your kid is actually not a dependent anymore.
+Like so maybe they're in college or they just graduated from college. And they're in like the
+zero percent tax bracket because they're not making any money. And then do it.
+the conversion. And so you'll be able to convert the Trump account very cheaply into a Roth IRA.
+And now they're going to have $200,000 to $300,000 potentially in that account that they can then
+do tax-free investing for the rest of their life. Or they can potentially start accompanying with that.
+Other things you can do with an IRA is you can use part of the money on a down payment for the first
+home purchase. Or if you get into a health emergency, you can use money for that. So there's all
+these things you're allowed to distribute money out of an IRA without incurring a penalty. But
+generally speaking, the point of an IRA is to save for retirement. And this is where I think it gets
+really amazing is because if you start with $2,000 to $300,000 at age 18, you'll be at $10 million
+plus by age 60 if you just let it compound. I mean, there's a lot of nepo babies we're creating
+here. We're going to have a lot of rich kids with trust funds. Yeah. So this is all you have to do to make
+sure that your kid is protected for retirement as if you and your family and your friends and your
+employer can just contribute to their Trump accounts.
+Like, that's like, that's way better than Social Security.
+Brett, I have an idea.
+I have to go and sell some enterprise software, so I have to leave.
+But I'm really proud of you.
+I think this is incredible.
+You should convince Open AI and Anthropic to give the equity of those companies.
+If this is going to be as big as you say, 100 billion, 300 billion.
+billion, zillion, trillion, put it into the accounts of every kid.
+Can you just explain how that works against the $5,000 limit?
+I got to go.
+Love you guys.
+See later.
+All right.
+Good luck on the sales call.
+Yeah.
+Close you.
+Always be closing, Chimoth.
+Always be closing.
+APC.
+Chimoth always be closing.
+You know, again, David at and Chimath, as we build out the platform at scale.
+So imagine now you have 50 million accounts that are opened.
+We do, we, I've said on CNBC, you know, I,
+I've obviously talked with Dario and Sam and Elon and others about making those donations.
+I don't like this idea of shaking down our companies, taking their shares and then putting them
+in some government slush fund that perhaps Bernie or AOC or somebody is going to control in the future.
+I've said it's got to be voluntary.
+And number two, it should go into citizen accounts, right?
+Privately held in citizen accounts, a compound for their life.
+And so you asked the question, David, how does it happen given the limits that you have, you know, the $5,000 per child?
+that's why you have to have so you know 50 million accounts open right because then you can take
+dollars in at scale but we can also set up a pooled account david where it can be distributed
+over time so you distribute it to all the kids subject to the limits that you have today and then
+any remainder you can distribute to the three and a half million kids that are going to be born next year
+or the three and a half million kids born the year after that or the three and a half million
+kids born after that. We are on a trajectory now that we're going to have over a hundred million
+of these counts set up over the next decade. Okay. So we could have 70 million today and then
+you're going to add 3.7 million a year. So you're going to be at 100 million private
+individual accounts that are compounding for people's lives that anybody can donate money into.
+The people themselves, I think one of the things that gets lost is moms and dads or somebody
+working their summer job, put in 10 bucks, put in 100 bucks, put it, you know, into these accounts.
+They get to see it on their phone, you know, this is, when we started this, my sons and I designed
+this app. And it's basically what we ended up with. It's a, you know, Joe and Tim. Shout out to Vlad at
+Robin Hood helped you with it, yeah. Vlad and Joe have implemented a more elegant version of this,
+but every kid owns a little bit of invidio, a little bit of Microsoft, a little bit of Apple.
+imagine opening up that account, David, in middle school or high school, to the money page.
+And now you're getting excited that you're seeing, oh, man, I'm in the game.
+I have ownership.
+And while you reference what it could be for families who can contribute $5,000, obviously Michael
+Dell and I and Gwen and everybody else were focused on the 50% of Americans who feel left out
+and left behind who would otherwise have zero.
+If you do the math on this, over the course of the next few,
+15 years, you could have somewhere between two and four trillion dollars added to the accounts
+of families and kids who would have otherwise had zero.
+I just want a lot.
+Go ahead.
+We talk a lot about...
+See, the philanthropy piece, it basically, the way the philanthropic aspect works is that other
+people, philanthropists can contribute towards that $5,000 per kid, right?
+Right.
+Is that...
+So, you know, when Gwen Shotwell contributes two million shares of...
+SpaceX to 2 million kids, each kid's getting a share of stock.
+$150.
+So now that's counting against their $5,000 or a limit.
+So that's what makes it compelling is, okay, look, every family that can afford to do the
+$5,000 should because it's just like so compelling from a tax and saving standpoint.
+But then even for families who can't, they're going to be beneficiaries of philanthropists who
+just want to give this type of direct giving.
+And it seems to me this is so much more efficient and so much better than the whole NGO industrial complex where...
+Absolutely, where they take 40% for their offices and their salaries.
+Yeah, they're just grifting.
+Yeah.
+One of the numbers I saw was kind of amazing is, again, just goes back to the power of compounding, is that if a Trump account had had been maxed out and you have the standard market rate of return that we've had for, say, the past 30 years, then by age 28, that kid will be a millionaire.
+Incredible. That's right. That's right. All the numbers you hear me quote the $50,000 and the $200,000, it doesn't assume maxing. You know, that just assumes people are adding $50 a month because I've been focused as Michael and others have really on the families who don't have the capacity to save today. We're getting all of them into the game. And the president directed us. He said, listen, we have 529 accounts that already helped the top 10%. That's not who we're focused on. This is about the main street agenda.
+This is about all the families that he ran for to feel left out and left behind and were reconnected them to the American dream through universal ownership.
+They all have their own account.
+They all have a private account on their phone.
+It's a game changer for the country.
+It's the largest change to our social contracts since 1935 in Social Security.
+And importantly, I think it couldn't come at a better time.
+You know, we have this fight for the soul.
+Also, just every employer should be signed up to be, you know, an employer.
+that can contribute it because again, you could take that $2,500 and hopefully, look, it's additive
+and it's not just a substitute. But even if it's just a substitute and J-Cal, your employer takes
+$2,500 out of your salary and puts it in your kid's Trump account, then it's reducing your
+taxable income. So it's a no-brainer. If you're a profitable company, your employees are going to love
+you. Yeah. Yeah, but I think every employee is going to want to, and every employer should do it because
+it's a tax savings for both, right?
+So the tax savings here is huge.
+Yeah.
+Just off of the mechanics of it, I just want to maybe level up here for a second.
+Yeah.
+I have been often critical.
+I call balls and strikes, and I can tell you in detail the things that I have a problem
+with this administration and their actions they've done, and I have done it here on the
+pot.
+I want to address the people who are nagging this and specifically nagging it because it
+has the name Trump accounts on, which I told you at the poker game, call up Trump accounts.
+I don't know if that was like an obvious thing or I was the person who told you to do it.
+I'm not taking any credit here, but I remember that conversation where I was like, just call him
+Trump accounts. Like, whatever criticism you have of Trump, however valid you may feel it is,
+this has nothing to do with Donald Trump and how you feel about him. Put your TDS on the side.
+Put your valid criticisms on the side. In this country, we have a K-shaped recovery going on. We have
+immense tension between the haves and the have-nots, to the point at which people actually believe
+that socialism and communism is a better operating system than the best operating system
+humanity has ever created, which is called democracy plus capitalism, right? And kids love,
+love capitalism. They love building businesses. But we are in an existential moment right now.
+If these kids believe young kids, and there's a couple of generations of them right now,
+who do not believe in America anymore, while we're sitting here on the two,
+250th anniversary of this amazing experiment known as America.
+This is the most American thing you can do.
+So put aside your TDS, put aside your valid criticisms, and embrace this.
+And give the flowers to Brad, to the people donating like Michael and Susan Dell and Gwen.
+This is beautiful.
+This is the most beautiful gift I've ever seen to a country.
+And this could be something that's a unifying principle that brings us back together as a country,
+that everybody gets to participate in capitalism.
+And this is the number one way to do it, which is to let kids on their smartphone,
+instead of saying, you know what, Mondami's right.
+I should get a free bus ride.
+I should get free pizza.
+And we should take Ken Griffin's and seize his penthouse, it's a pan of terror.
+Fuck all that.
+You know, and we have CEOs getting shot and their home.
+home's firebombed.
+Well, you know what?
+If you're one of those CEOs, you've done incredibly well, there was something called the
+Giving Pledge where they pushed, you know, affluent people at the TED conference for decades,
+Bill Gates and everybody.
+Warren Buffett, everybody was pushing for this.
+This is like the perfect version of the Giving Pledge, because you're not just saying I'm giving
+away my wealth by the time I die.
+You're very strategically saying every single person in America gets to be part of the best part
+of America, which is entrepreneurship.
+everybody will be part of the equity nation. And my final point is, one of the happiest countries
+in the world is Australia. If you've ever gone to Australia, everybody feels safe. And we have a large
+number of people in this country who do not feel safe. And the reason they don't feel safe is because
+they don't think their kids are safe. To the point at which people do not want to have kids in this
+country because they feel the system is just too hard, this could change that. If people feel,
+Hey, kids have a shot and I don't have to worry about my kids. I worry about my kids and I'm affluent.
+I can't imagine being a single parent and what anxiety you must have as a single mother or father
+and you're making minimum wage and you're behind the, you know, the eight ball for your entire
+life. And now your kids are set. That's all people want. That's the only thing a parent wants
+is to make sure their kids have a better future. That was the promise of this country and
+somehow it went off the rails for the last two generations. This puts it.
+back on the rails. This is superannuation funds in Australia. In Australia, people are extremely
+happy. The reason they're happy is they're forced to put 14K a year or whatever it is, 12 or 14%
+I think of their income into essentially a 401k that they get to direct to a certain extent.
+It's forced. Savings. This does the same thing. At a very basic level, this could replace
+Social Security. This replaces the giving pledge. And I just want to say, Brad, you know, a lot of my
+friends got involved in politics, some of them on this very program, a lot of people, it's
+very divisive. You threaded the needle here. It was a masterclass in balancing these two
+crazy parties and the divisiveness in this country. I just want to give you as your friend,
+your flowers. This is just absolutely outstanding what you did. And you have been incredibly
+humble in your approach to this. This would not have happened without you, Brad. This is your
+legacy of everything you've done in your life, lots of success, and I've seen it up close
+and personal. This is a million times X everything you've done in your whole fucking life.
+You'll be remembered for this. This is architecturally...
+It's as big as Social Security. I mean, it's a new platform.
+It's an entirely new platform.
+It's not because it's philanthropy, but it's also retirement savings. I mean, right?
+And everything in between. And this is not static. This is dynamic.
+We can add to this. There could be other.
+their features. I'm saying a lot of people in the comments say, why stop at age 18? Why can't you? I mean,
+you have the Trump account rollover into IRA or Roth IRA after age 18, but why can't you keep it going?
+And then people can keep that $5,000 contribution going. And, you know, it doesn't mean we take away
+retirement benefits that are owed to current Social Security recipients. But sunseted.
+But at a certain point, you could just say that, hey, the next generation is going to
+be on this platform other than the old one. And it would be a lot better. A lot more efficient
+than government not running it, right? Sachs. Yeah. We don't want the government running this.
+Let me ask you a question about this, Brad, because I do see one thing that people say,
+which is what if your kid turns 18 and then they just want to blow the money? You know,
+how do you trust that they're going to put it to good use, you know, as opposed to, I don't know,
+you know, YOLO and whatever.
+As you know, these things are always political tradeoffs and balances.
+And I wanted them to have to compound until they were 30, right?
+Because I figured by 30, you were a little bit more, you had a mature mentally developed
+on financial issues.
+But, you know, the argument ultimately came, you're old enough to vote, you're old enough
+to fight a war.
+If by 18, we don't allow you to have control of your own money.
+So that's where a political, you know, consensus was built.
+David. But the other thing, remember, is they can only take up to 25% out to buy a home, start a
+business, go to college. The rest rolls into an IRA, and there are build-in penalties
+for early withdrawal in an IRA. So there are disincentives for people to pull out. But let's be
+clear, we have to do a much better job in our education, our public education system,
+leveraging this as the platform. You know, if a kid doesn't have any money, it's hard to get
+excited about learning about money. But if a kid's in the game and has $12,000 bucks in the
+grade. Now you got my attention. I own a little bit of Nike. I own a little bit of Apple. I own a little bit
+of Nvidia. Let's talk about that. How did it get there? How did it compound? If I added 50 bucks a month,
+what does it turn into? All of these things will now be present on every child's phone in America.
+37 states require financial literacy. Every state should build this into the curriculum. We're working
+with a lot of states on that. We haven't talked about that. We have about 25 states who are going to add
+money into the accounts of the kids in their states.
+The states are going to do it.
+States, state action, Oklahoma, West Virginia, you know, Indiana, et cetera.
+So that's also sweeping the country where the states are looking at programs they already
+have where they're spending money for kids that are ineffective.
+And they're saying instead of continuing to spend money on these things that aren't working,
+why not just block grant the money directly to the kids?
+because we go if you give the kids the money more likely to graduate,
+more likely to buy a home, start a business, etc.
+So I think that we're, as I said in the Oval, this is day one.
+And I am fully committed to the next decade, as is my partner in crime on this, Michael
+and Susan Dell.
+I appreciate your guys' comments on the legacy of this.
+It has been the most profound work and kind of,
+honor of my life and standing in the Oval Office with my two sons who are really my two co-founders
+on this. We draft, you know, we made the sketch of this at our kitchen table in the fall of
+2020. That's where the conversation started. Lincoln's been with me in every single meeting with
+every congressman, senator, president, former president, et cetera. The president shouted him out,
+you know, again, when we're there. That journey as a father with my kids has been like the
+payback has been really extraordinary. The other thing that's notable here, and again, like,
+you got to call balls and strikes and give credit where credit is due. Joe Jebbya join this administration.
+A lot of people in the tech industry are like, oh, you know, oh, you join the Trump administration,
+whatever. Yes. Okay, there's some criticism. He's an incredible world-class designer.
+I was talking to producer Nick, our producer here, also happens to show the same last name as me.
+He signed up for this, right? He's doing well, but, you know, his wife signed up for it. The software
+is fantastic. Let's pause for a second. The American government has made exceptional software,
+and this all got done in Trump's first 18 months. Immense credit for this. This is like,
+of all the challenges this presidency has had and ran war and other issues, we made great software.
+The American government, because of Joe Jebby, makes kick-ass software. Like, just also major shout
+out to him. And, you know, he can be doing whatever he wants. He's done incredibly,
+Wells, the co-founder of Airbnb, and he's doing this. Like, that's a real patriotic thing to do.
+I'm just over the moon with this. I think it's fantastic. The dream team, you had like Michael Dell,
+myself, Vlad Tennis, Joe Gabbya, the Treasury secretary, Luke Petit at the Treasury, talking
+basically every day for the last year. And our objective was not we want to build the best thing
+that the government's ever launched. We wanted to build one of the best consumer products,
+period that's ever been launched.
+Mission a conference. Any Silicon Valley
+consumer company would be thrilled
+with the numbers that we're seeing, the
+ratings that we're seeing, the
+engagement that we're seeing. So
+you know, it's been fun
+doing it with that incredible team.
+And, you know, everybody's in this for the right
+mission as well. And so I agree
+with you, Jason. It's rare that government
+recruits or embraces
+you know, that
+mission. And I think
+the tent's getting a heck of a lot bigger.
+It is bipartisan.
+It's bipartisan in support.
+This is important what Governor Moore from Maryland said yesterday.
+He said Republicans and Democrats have been trying to do something that looks like this, feels like this for 40 years.
+This guy got it done.
+Give him credit.
+This is great for America.
+Great for our kids.
+And especially on the 250th anniversary, you know, you're standing in the Oval Office looking at the original Declaration of Independence.
+and you realize what people
+laid down for this experiment.
+And then I read this chatter in my feeds
+about Mondami and others
+literally wanting to set this great experiment on fire.
+Yeah.
+Right?
+Wanting to burn the place down
+because they think they have a better formula?
+No.
+The answer is evolving and doubling down
+on the formula that has worked for 250 years.
+And rather than making all these kids socialists,
+we get them all into the game of capital.
+They become owners, owners and shareholders in America.
+So that's what we got accomplished.
+Let's go.
+Appreciate the chance to talk about it.
+Listen, incredible, Brad.
+And just amazing to watch you do it.
+And if you really think about it, the tech industry needs to win.
+And capitalist and creators and the makers, the people who build stuff, this is our chance
+to say, here's an example of something.
+that helps the people at the bottom, right? And I talked a bunch about the minimum wage here. We got a $7 minimum wage.
+Like, we need to address that as well. These are the things that if we address what people are scared
+about, what people who are, who don't have what we all have here, if we have empathy for those people
+and we actually care about them and we give them a path to believe in the American dream,
+they will take that path. We have to give them a better path than these.
+socialist lunatics and this is so much of a better path let's do it again let's do another one of
+these things let's keep growing this spirit of getting everybody in the country to have equity
+uh in these great companies that that's why the entire world is trying to replicate what we do here
+every single country i go to wants to recreate silicon valley well we're not we're not we're
+not stopping here and um david to your point where you know whether it's the ai companies
+uh or frankly whether it's the intel shares or whether it's
+the TikTok fee. I now have a place where all of those wins achieved by this administration can go.
+They ought to go directly to all their citizens, you know, the country into their accounts and compound
+for a lifetime. And then as far as people over the age of 18, there's certainly a lot of talk about
+that as well. Not again as Social Security is a sacred promise by both parties. Nobody's going to
+change that. But there's a huge opportunity to have a supplement here. Why shouldn't people, you know,
+between 20 and 30 or 20 and 40 also have a Trump account that they can begin on a supplemental
+basis adding dollars that they own and control. Remember, the big difference between this and
+Social Security, Social Security takes 12.4% of my W-2 income and puts it into something akin to the
+black hole of government. I don't own it. I don't control it. If I ask a room of 3,000 people
+how much they've contributed, they have no idea. If I die, I don't have title. It doesn't pass to my heirs,
+etc. So it's really not mine. But if we created a supplemental IRA, it doesn't even require new
+legislation. I don't think it's just expanding the age. These are IRAs after the age of 18, right? Then
+people could start building supplemental wealth and participate in these gains. And so there's a lot
+of conversations going on about that as well. And so we're not done. But it was a hell of a milestone
+on the 250th birthday of America to ring the bell in the oval and to watch all these kids
+get their accounts lit up. It was pretty special. What I think is really cool about the Trump
+accounts. I think it's an amazing philanthropic platform. But in addition to that, it's an amazing
+platform for middle class family planning. That's the plan I'm trying to make. Is all the CPAs that
+I'm seeing talking about this or saying this is like one of the greatest things ever. And if I could only
+tell my clients to do one thing, this would be the one thing. Finally, something for the middle class,
+right? This is what people have been asking for, hey, let's get something for the middle class. Let's
+get something for the, you know, for poor people. I think the market gap, correct me if I'm wrong,
+but basically the market gap that was created here is that you can't get an IRA, which is basically
+a tax advantage savings account until you have your first job, right? Correct. Correct. Correct.
+which would be for most people at age 22 plus.
+So for that first 22 years,
+your kids can't have an IRA, right?
+Correct.
+And you're effectively giving every child at birth
+IRA.
+You know, it's a Trump account that has certain rules.
+It's actually better than an IRA.
+Better than an IRA.
+It's better than an IRA because with an IRA,
+your employer can't contribute $2,500 tax-free, can they?
+I mean...
+I don't think so.
+And philanthropists can't.
+can't contribute to it and moms and dads.
+But the most important thing, you know, like I say this, you know,
+Buffett's like the secret is to find a really small snowball and a really long hill.
+Okay.
+But the size of the hill in this country, we've cut off the first third of the hill forever.
+Nobody saves anything until they're 25.
+Okay.
+The easiest compounding in the world.
+The easiest compounding in the world is between zero and 25.
+All right.
+Listen, this has been amazing.
+Yeah, because their dependents, frankly.
+They're still on mom and dad's time.
+You pick up the first third of life.
+Incredible, right?
+In compounding.
+And so it's a, it's really remarkable.
+Let's go.
+I mean, this is amazing job.
+All right, we'll see you all next time.
+Bye-bye.
+We'll let your winners.
+Rain Man, David Sachs.
+Source it to the fans, and they've just gone crazy with it.
+Love you, West.
+The queen of kin, we all just get a room and just have one big huge origin because they're
+It's like this sexual tension, but they just need to release somehow.

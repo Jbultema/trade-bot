@@ -1,0 +1,1285 @@
+source: allin_podscripts
+published_date: 2025-07-23
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/winning-the-ai-race-part-3-jensen-huang-lisa-su-james-litinsky-chase-lochmiller
+title: Winning the AI Race Part 3: Jensen Huang, Lisa Su, James Litinsky, Chase Lochmiller
+
+Guys, this is one of the most amazing entrepreneurs that you're going to meet,
+Jim Latinsky, the founder and CEO of MP Materials.
+Good to be here.
+Hey, Jason. How are you?
+So let me set this up.
+Jim was a hedge fund guy running a pretty successful hedge fund,
+and he ended up basically investing in something called Molly Corp,
+which went out of business.
+Yes. You did this incredible thing, which went out of business. Yep.
+And you did this incredible thing, which is you said, you know what, screw this.
+You essentially shuttered the fund, took over the company, and fast forward many years later,
+you are the largest and only, I think, supplier and refiner of rare earth materials and maker
+of magnets inside the United States
+We're 100% of the American industry 100% American industry you know just did two really incredible things actually in the last couple weeks
+One was you announced an enormous public-private partnership with the DoD
+400 million dollars etc and then the second is you announce a really big deal with Apple. Yes
+Okay, so yeah, take I take take a huge step back, talk to us why rare earths matter,
+tell us about the supply chain for AI, tell us why you're doing this.
+So rare earth magnets are really the feedstock to physical AI.
+You know, robots, drones, everything we're talking about today,
+the biggest industry in the world to come.
+Essentially, electrified motion requires rare earth magnets.
+So you mentioned the predecessor went bankrupt.
+There was a feeling when I took over this site with my co-founder,
+and this goes back to 2015.
+Where is the site?
+Oh, it's in Mountain Pass, California.
+So you'll be familiar, if you take a 45-minute drive
+from the Las Vegas Strip just over the border in California
+is this site.
+You actually can see it from the road.
+And it's actually really the best rare earth ore
+body in the world.
+The thing about rare earths is that when you mine them,
+you also have to refine them.
+And it's really expensive and difficult to refine them.
+It's really a specialty chemical process.
+And so think of it as a multi-billion dollar refinery that you need to have just to separate them. It's really a specialty chemical process. And so it's really a think of it
+as a multi billion dollar refinery that you need to have just to separate them. And then
+once you separate them, you need to turn them into metal and then a magnet. And so there's
+a multiple layers of this stream to get this supply chain. And of course, you could have
+all the rarest in the world. But if you don't make the magnets, you're sending it to China.
+Or you could have all of the magnetic capability in the world. But if you don't make the magnets you're sending it to China or you could have all of the magnetic capability in the world
+But if you don't have the rare earths you're relying on China
+And so our vision from day one going back to we we originally bought these assets out of bankruptcy
+Officially, it was a two-year battle took it out in 2017 and there was a perception that we just couldn't compete against China
+And what we discovered actually is we could. It's a world-class site,
+but we had to reorganize the process flow.
+And then we had to make investments to move downstream.
+So over the last eight years,
+we invested about a billion dollars.
+Chamath, as you know, we took the company public in 2020.
+We built out the refining capability.
+And then about four years ago,
+we announced we were gonna build a magnetics factory in Texas
+We built that factory. We have GM as a foundational customer
+We're now producing auto grade magnets to GM spec and we'll be ramping up
+Sales to GM at the end of this year in in magnets and then Chamath you referenced
+It's been a busy few months for us
+We announced a pretty transformative public-private partnership with the Department of Defense
+DoD is there's really three pillars to this deal
+DoD is becoming our largest economic investor
+as well as they're going to provide a
+Price floor for our commodities so that the Chinese sort of Chinese mercantilism you can get into that
+floor for our commodity so that the Chinese sort of Chinese mercantilism, you can get into that, won't take the price of the commodity below the cost of production.
+And then as a result of the DoD investment, we're going to accelerate the build out of
+the magnetic supply chain.
+So we're expanding our facility in Texas for Apple.
+I'll talk about that in a second.
+But we're then going to build a 10x facility to 10x our capacity with DoD as our 100% off take partner,
+customer and business partner, because we'll be we'll be splitting profits 50 50 with the.
+To just translate this, it's not a handout from the government.
+They didn't not at all. You 400 million dollars.
+They invested in your company. They have warrants. They have equity.
+Yeah. So they invested. They they both are an owner.
+They also are an upside participant in our commodity to the extent that the prices
+Take off and then they're also a hundred percent off take customer
+We have a guaranteed level of profits to want to build out this facility, but above a certain threshold
+There are fifty fifty economic participants. They mean there's really you the taxpayer. Yeah, so this is a
+Maybe I'll say something wild here,
+this is a true win-win.
+Obviously great for MP shareholders.
+Great from a national security
+and commercial national security standpoint
+because we're gonna have enough magnets to provide
+real certainty in the supply chain
+for the physical AI revolution and other industries.
+But it would not surprise me if when we,
+five years from now hopefully we'll do this conference,
+and Chamath, you'll say to me, Jim, you know, I remember that deal that was the first of
+its kind that you did with DOD, and the government made money on you.
+The taxpayer made money on doing this.
+And I'll say, yeah, I actually think that that's going to be the outcome, because there's
+sort of an element of mutually assured economic destruction.
+If the Chinese believe that America has national champions too, then there's no point in subsidizing
+the rest of the world.
+And so I think you can start to see prices normalize for some of these things and free
+up our ability to invest and expand.
+Why go to the government for this investment as opposed to the private markets?
+Well, because it's that issue that this is sort of one of those you know
+Obviously you have to go back to World War two or the railroad boom where you really need government and credit
+I mean this administration
+Did something you know totally unique that which piece why do you need the government the mercantilism straight-up mercantilism?
+Because the Chinese will sell magnets for below the cost of raw materials
+And so every time there's somebody who makes progress
+They can put them out of business overnight. And so it's difficult to want to make the investment. And so frankly
+With the Department of Defense the scale that they wanted us to build on the time frame that they wanted us to build
+We there was no way we were gonna make that commitment. We're fiduciaries, right? We've shareholders
+us to build, there was no way we were going to make that commitment.
+We're fiduciaries, right?
+We have shareholders.
+There's no way we're going to make that commitment
+without certainty that we would not be destroyed by market
+totalism and that we would have a customer for the magnets.
+How big of an industry is physical AI?
+Meaning we see the robots.
+We're told the robots are coming.
+We're told there's going to be billions of them.
+Are they actually being deployed at the scale
+and at the pace that we've been told?
+Well, I think that that is a question for...
+There's much smarter guests on this.
+For the rest, I'll give a plug. The rest of the day, obviously,
+you have the best of the best providing that feedstock.
+I will say that I think one of the big drivers of our deal was,
+as we've seen in Ukraine
+and the Middle East, the future of warfare is physical AI, right?
+Robots and drones.
+And I think irrespective of the scale that robotics is ultimately going to be, and certainly
+the commercial business will be bigger than the defense needs, but just from a defense
+standpoint, this is a really important supply chain that we must have.
+We can't be funding cutting edge drone and robotics companies
+and then say, OK, but we're going to buy those magnets from China.
+That makes no sense.
+Do we have talent capacity, or do we have a talent shortage?
+Secretary Burgum gave me a stat, which was pretty shocking to me,
+that we only graduate 200 people a year in the United States
+in mining, which is orders of magnitude different than China. What do we need to
+do to be competitive to build the industry here? It's a great question.
+I think Jason, I think is used all the time. It's the only...
+Token whites.
+I know.
+It's the only...
+And you know I'm a fan of the pods since day one and I've totally embarrassed myself.
+There's only one correction on that.
+Nor am I messing with you.
+Nor am I messing with you.
+What's this intentional?
+So...
+Huge fan of the pod.
+Yeah, huge fan of the pod.
+Who are you again?
+We'll take a selfie later.
+And I'm not the A.I. czar.
+Go ahead. Yeah. Who are you again? We'll take a selfie later. I'm not the AI czar.
+Go ahead.
+Go ahead.
+So we have 850 employees today at MP.
+We're going to hire, when we include what we're building out for Apple, coupled with what
+we're going to build with DoD, we're going to need a couple thousand more people easily,
+not to mention the construction jobs.
+So this is a key existential question for all of us as we build out this is where are
+we going to get the talent?
+I think what we have found at Mountain Pass, and we hire it all, electricians, maintenance,
+operators, is you get people in, you train them, and then obviously you give people a
+career.
+And so we've been training a lot of people and it's a little bit more painstaking, but
+there's absolutely talent out there.
+People are hungry to do it.
+Why do you think it's been so hard to establish that idea?
+Meaning, you find it straightforward to find good, hardworking people to get into these
+jobs, but the thought is always that, wow, these jobs are not desirable, but they really
+are desirable by many people.
+Yeah, absolutely.
+Our median wage is now pushing $100,000 a year.
+And relative to some of the opportunities that these
+are great jobs.
+What are the starting salaries?
+What's that?
+What's the starting salary?
+It really depends on the job function.
+Because I think the easiest way to think about it What's that? What's the starting salary? It really depends on the job function because
+There's what I mean I think the easiest way to think about it is you can you can certainly as an operator make close to a hundred thousand dollars
+a year with us because by the way
+Everybody's an owner. We have an owner operator culture. Everyone got stock when we went public in 2020
+It's somebody coming out of high school. They can make 40 50 60 K or more
+Yeah, or it depends.
+Are you if we can't find enough electricians, we can't find enough maintenance
+workers, a maintenance worker can an electrician, they can make six figures
+today. Tell us you said earlier that you suspect five years from now we're going
+to look back at this deal with the DOD was a blueprint.
+Yeah. Give us other areas of either physical AI or software AI
+or other markets where you think these public-private
+partnerships are really necessary to embellish
+US supremacy.
+Yeah.
+There are some major categories, obviously.
+We've all heard about shipbuilding
+and advanced pharmaceutical ingredients.
+I mean, I think those are important ones.
+And then there are a number of sort of niche areas like industrial diamonds
+that are important for quantum computing.
+And some of these things that you never would have thought of
+where it's a vertical where there might not be a market large enough to to need
+five players, but a good public privateprivate partnership can just solve that problem.
+And then there's some other verticals and critical minerals.
+Was it straightforward for you to find the right person within the Trump administration that said,
+of course, this is obvious, let's sit down and hash this out?
+Well, and I think that's, you know, our particular deal was led by DOD. And so I have to say that the
+Pentagon leadership is extraordinary. And, you know, this was a mandate, though, directly from the president
+to solve this problem.
+And so again, they deserve a lot of credit for being bold here.
+And to be clear, because this story is another, our process,
+this was, I've never worked so hard in my life.
+I mean, this was like a true aggressive private equity
+style investment and negotiation.
+The transaction documents are public.
+You can look at that.
+So yeah, that's a tough.
+Yeah, this was as tough as it gets tougher than,
+think of any blue chip private equity or distress lender type negotiation.
+That's what this was.
+And the key thing was they were going to hold
+our feet to the fire to execute on an aggressive timeline. They were going to hold our feet
+to the fire on the costs. And so we're exposed. If we get the costs wrong, you know, we're
+making this investment. And so the key piece of this, which I think is a good model for
+all of us and is actually will be really effective, is the goal, I don't speak for them, ask them, but I think their goal was, we're going to
+take the things off the table that you can't control.
+Mercantilism, certain customer issues, we're going to be held to account for the things
+that we can control, our ability to execute, our ability to execute on a good timeline and our ability
+to control costs.
+So when we think about a lot of these, historically, the government sort of investing in a sector
+and quote, picking a winner, usually there's sort of money given to someone and it's sort
+of public risk, private upside, right?
+This is not that.
+This is private risk, public risk, public upside,
+private upside.
+It's a true shared win-win-win.
+And again, like I said, hold me to these words.
+I hope I'm right on this.
+But I think that, to the credit to the Trump administration,
+I think they will make money on this
+and have solved the national security problem.
+We appreciate your comments, Steve.
+Oh, thanks. Thanks so much. Thanks, brother. Yeah, national security problem. All right, we appreciate you coming, Steve. Thanks.
+Thanks so much.
+Thanks, brother.
+Yeah, it's great.
+All right, take care, Steve.
+Thanks, Jacob.
+I appreciate it.
+Hi, Lisa.
+Nice to meet you.
+Lisa, it's a pleasure.
+Hi.
+Nice to meet you.
+Hi, hi, hi, hi.
+Well, thanks so much for being here with us today.
+We don't have a lot of time, so we want to get into it.
+In April, it was announced that you achieved your first silicon output at the TSMC facility
+in Arizona on that two nanometer line.
+This administration and the private sector have talked a lot about onshore and semiconductor
+manufacturing.
+We'd love your thoughts of the on the ground experience in Arizona.
+How's it going?
+What's not going well?
+What does America need to do to get this right?
+Well, absolutely.
+First of all, it's a pleasure to be here.
+Love the theme.
+I think we're all super excited about winning the US AI race.
+And I thought if we're going to talk about chips, David,
+I should actually bring one.
+Oh, awesome.
+That's OK.
+Oh, yeah.
+A little bit of show and tell.
+So this is our latest generation AI chip.
+It's our MI355 chip.
+185 billion transistors,
+takes about nine months to build, lots of technology on it.
+If I just-
+That's a two nanometer?
+This is three nanometer and six nanometer,
+so lots of different chiplets.
+I'll be putting this on eBay later.
+I'm gonna take it with me when I leave, how is that?
+Thank you.
+But look, to answer your question, I think,
+look, these AI chips are extremely, extremely complex.
+They have so much technology on it.
+We're super excited about the progress in US manufacturing.
+I would say, you know, 12 months ago, people weren't sure that we could do leading edge
+manufacturing in the United States.
+We've been very early in Arizona with TSMC, and we did get our first chips out. They're actually four nanometer.
+But what we see from it is where there's a will, there's a way. And I think all of the
+conversation about on-shoring manufacturing has been super good for the semiconductor industry.
+And frankly, for all of us in semiconductors, we're in such an interesting place because you know chips are so essential to ensuring that we are able to win the AI race that
+you know we want to make sure that there's a lot of geographic diversity and capability there.
+But the reports out were that TSMC couldn't get good qualified trained employees they had to bring folks over.
+Is that accurate and like again like if we're going to scale like what's the order of magnitude? We're going from here is a 10x 100x and how are we gonna build a workforce to support this industry?
+Which is a completely new industry for America and Lisa you have permission to speak freely
+The best way to say it is no matter when you start something new it's gonna take work, right?
+It's it's gonna be hard. So sure in, in the beginning, there were some issues of,
+you know, TSMC has like a formula for how they build
+and they just rinse and repeat,
+and they've learned how to do that well in Taiwan.
+So they had to learn how to do it well in the United States.
+But I have to tell you,
+we've been super impressed with the progress.
+And, you know, if we look at,
+the main thing that we look at is yields
+and just how many chips do we get out on a given wafer and I would
+say it's equivalent between what we get in Taiwan and what about cost in Arizona
+it's unrealistic to think the United States could compete on cost am I
+correct we're gonna pay a little bit more give us the ballpark 50% more 20 not
+not 50% more I mean look it's gonna be you know more
+than 5% but you know let's call it less than 20% so low low double let's say low
+double digits and how does that impact the business if at all in terms of
+competition globally well I think the important thing is I mean just think
+about like everybody wants a GPU right like you look across the industry, you really
+say the people who are going to win in AI
+want to have as much compute in their foundation as possible.
+And they want assurance of supply.
+We want to be able to supply this no matter what happens.
+And so if you put that in context,
+the fact that you're not going for the lowest
+cost every minute of the day is OK.
+It's OK.
+Obviously, we're not going to build.
+Not everything needs to be in the most advanced technologies.
+And so we have a very geographically diverse supply
+chain.
+I think Taiwan continues to be important in that view.
+But the focus from this administration
+on getting on-firm manufacturing in a big way,
+not in a small way, I think is very good for the country.
+How much time do we have if there was a disruption
+for whatever reason we can come up with hypotheticals in Taiwan
+and we were unable to get chips from those factories?
+What would that look like globally?
+Yeah, you have to look across the supply chain.
+But from a structure standpoint we all
+want to keep reserves for you know those those times but it's months it's not
+years. Lisa there was two really interesting posts over the last couple
+of days one was from Elon where he said in five years he projected 50 million H100
+equivalents just for XAI and the second second was Sam Altman. They signed a deal for a four, I think, gigawatt data center,
+$30 billion a year with Oracle.
+That just portends an enormous amount of chips
+that are necessary and power.
+And if you forecast that, how do we actually meet all of that?
+What needs to happen that's not happening today
+inside of the United States to actually do that?
+Yeah, it's a great, great point.
+I mean, that's what we're seeing.
+We're seeing this incredibly large demand for AI
+and they're coming from, you know,
+Sam and Elon are certainly the leaders,
+a couple of the leaders.
+There's a lot of demand elsewhere too.
+I mean, if you think about it, nations want their own AI.
+So there's a very high demand.
+We're imagining that just the accelerator market,
+so the chips for these AI large computing systems
+will be like over $500 billion in a couple of years.
+So very high growth.
+And when you say, what do we need to do?
+The entire ecosystem needs to scale up.
+So we need to scale up.
+Certainly what we're doing in chip design
+is trying to get chips out as fast as possible,
+but we're also scaling up
+the entire manufacturing ecosystem.
+And as I said, I think the US is gonna be a huge piece of it.
+So it's not just about the silicon,
+there's all of the various other pieces of the ecosystem
+that have to come to the US. And I think today's AI action plan is
+actually a really, you know, excellent blueprint.
+And how do you see the market evolving in these next five or six years?
+Is it there's a standard set of chips for training, a standard set for inference,
+or do you just see an explosion, like a Cambrian explosion of different ASICs,
+different designs, different use cases?
+Yeah, I like that question because I am a believer
+in there will be diversity of chips.
+And the reason is there's so many use cases, right?
+If you think about use cases from,
+whether you're talking about science or manufacturing
+or design or backend or frankly, personal AI,
+I think we're gonna see AI in everything that we do,
+certainly in your phones and your PCs.
+And so you have all these pieces.
+You're going to have different types of chips that do that.
+Certainly for the largest systems,
+we tend to believe that you need the most compute you can get.
+And so GPUs are there, but lots of ASICs are in the process.
+And we'll see a variety of different chips.
+You opened up a really interesting line
+of questioning there.
+When mainframes were so expensive
+and then eventually wound up having
+PCs that were more expensive on their desktop,
+you alluded to AI being run locally.
+Yes.
+When would we have a local computer, a laptop,
+a desktop computer that would have the power we're
+seeing to run some of these LLM models in your mind and you see that as a specific market to go after
+Look, I definitely see the the idea that AI will be at every part of our ecosystem
+Is a is a real thing. I think that's one of the advantages if you think about the power of AI
+You want it everywhere and you want it across all different applications and I think when you think
+about PCs today, we're putting significant amount of AI in them to run
+local models and why would you want that? It's like, well, maybe I don't want all
+my personal data, you know, all over the place.
+On that point, can you make a prediction on when the market for physical AI chips is greater than the market for chips and data centers?
+That's a great question. I'm a big believer in physical AI. I still think it's, let's call it five years.
+You think five years is that fast?
+At least five years.
+So you're saying five plus.
+Five plus, yes.
+But that is ultimately the biggest end market, do you think is it you think physical AI becomes the biggest end market? I think it becomes a significant end market
+I think you look at chips in data centers and you look at chips at the edge. They're also you know significant markets
+when you look at the
+most cutting-edge techniques today
+Eevee lithography all of this whole stuff to make chips
+One of the things that's observable is we're only as good as what humans have been able to invent
+And I often ask the recursive question what happens when the AI is able to invent its own method of manufacturing
+Different materials different material sciences different approaches that we may not necessarily
+Understand is any of that R&D happening, whether it AMD or in other places?
+How are we trying to get beyond the physical limits
+of electrons shunting across a junction?
+I think this idea that the AI can be extremely smart
+and extremely capable,
+we think about how AI can design the future chips.
+And it will design pieces of it,
+but there's still a creativity of bringing it all together
+that I think humans are still absolutely
+at the center of that.
+So I don't necessarily see the AI designing
+our next generation GPU,
+but I do see it helping us design the next generation GPU
+much faster and more reliably.
+You talked about the need to like rehore more parts of the ecosystem.
+Obviously you guys are world-class chip design, the fabs are getting reshored.
+But how do you think about things like lithography?
+Like does that need to be reshored or like does ASML need to start building
+machines in the United States or is it okay to have that type of supply chain risk on an ally?
+Look, I think we're going to, we have to accept the fact that it's a global supply chain risk on an ally? Look, I think we're gonna, we have to accept the fact
+that it's a global supply chain.
+Like even if you were to reshore X number of components,
+you would still have Y components that are across the world.
+I think it's important for us to have our allies together,
+so that's a key piece of the conversation
+and ensuring that we have access
+to the latest generation technologies.
+And that is something that we protect given our intellectual property.
+And going to first principles and asking you the open-ended question, what should be done
+about American education?
+I'm going to ask this a lot today.
+Assume there's no college, high school, nothing.
+You arrive in America, the situation is what it is today.
+What do you do?
+How do you build an education system
+to prepare the next generation for the evolving workforce?
+Yeah, I'm probably a little bit biased
+as maybe some of your guests are today.
+I'm a big believer in science and technology background
+as being sort of the STEM background is so helpful
+when we think about the future workforce.
+And the earlier we can get into the process,
+I think the better.
+So some of the work that's being done
+to kind of revitalize the curriculum,
+I think is pretty important
+in the sort of the next generation workforce.
+And one of the things when I think about how we win in AI,
+like there's so many aspects of it, but ensuring that America
+is the best place for AI talent is also a key piece of that.
+So kind of inspiring people when they're young
+to really study science and technology.
+Lisa, when you go to bed at night
+and you think about the best-case scenario
+for this technology and this trajectory on, which is accelerating and you're enabling.
+What could the world look like in 10 years?
+Let's say, pretty obvious, we're hitting artificial general intelligence at this moment.
+I think we'd all agree.
+We're starting to see that.
+But super intelligence can't be far behind that.
+I assume you agree with that.
+Soon we hit that super intelligence.
+What would the world look like in 10 years
+in the most optimistic scenario if we do this right?
+Well, I think the exciting part about it,
+and I can say this very sincerely,
+I mean, this is the most transformational technology
+sort of in our lifetimes.
+I mean, that's the way we should think about it.
+Orders of magnitude. Orders of magnitude.
+And the reason is it's not just going after one aspect.
+You can actually take AI and make science better.
+You can take AI and make medicine better.
+You can take AI and make manufacturing better.
+You can take AI and make every aspect of your business better.
+And so in my mind, 10 years from now,
+we'd like to believe that we are really
+leveraging it
+to solve some of the world's most important problems.
+I like to say, AMDers get up in the morning and they say, how can I use technology to
+solve some of the most important challenges in the world?
+And AI is really our mechanism for doing that.
+I have a business strategy question.
+If we went back 20 years and we wrote the tale of three companies, NVIDIA, AMD, Intel, and then you fast forward
+to 20 years, two have just absolutely thrived
+and one has not.
+And if you had made the bet back then,
+it would have been very inconclusive
+that you would have picked NVIDIA and AMD.
+And if anything, there is an amount of inherent belief
+that Intel had just figured it all out.
+Can you just tell us sort of like the lessons learned
+of why you thrive and maybe what you take away
+from their journey that you make sure AMD doesn't play out?
+Well, you know, as a CEO,
+we have to be paranoid every single day, right? So we don't rely
+on the past, but I think there are lessons of the past. And I think that probably the most important
+lesson that I can say for technology is you have to shoot ahead of the duck. Like you have to be
+thinking, what is the most like your question, Jason, great question. We think about that all
+the time. How do we shoot ahead of the duck? And you have things that change.
+Technology is a beautiful place
+because you see big inflection points.
+Five years ago, AI was around,
+but we wouldn't be able to gather this audience
+to talk about AI because people would be like, who cares?
+But the fact is you had to invest many, many years ago
+to be where we are today.
+And I think, I like to say that, you know,
+you will be able to judge whether we've done a good job
+or not by how we perform five years from now.
+Like the decisions we're making will take, you know,
+five plus years to play out.
+But that's the key thing in tech.
+Like nothing is fast, but hopefully it's quite lasting
+in what it can achieve.
+And what do you think is happening in countries,
+not in the United States?
+Like what do you think is happening in chip design
+and all of these capabilities in China and
+other places right now?
+We should believe that it's super, super competitive.
+At the end of the day, I think the world has recognized that semiconductors and chips are
+essential.
+They're essential to national economies.
+They're essential to national security.
+And so assume that everyone's investing.
+I'd like to believe that we have a great head start
+because of the innovation pipeline,
+because of the great companies that we have here,
+but we should not be confused that everybody's investing
+and we need to keep up our investments as well.
+And I think that's why this whole idea of any one company
+can provide every solution that's necessary just isn't the case. Right. I love the idea
+of open ecosystems of companies collaborating of collaboration across the ecosystem. So
+hardware, software systems, you know, collaboration across public private partnerships, because
+that's what it's going to take. Like for us to win, we have to be front-facing
+and realizing that bringing,
+the countries that win bring all of the smartest people
+and the best capabilities together
+and let them go as fast as they possibly can.
+Right, well, thank you for being with us.
+Wonderful.
+Yeah.
+It's been great, appreciate it.
+Thank you.
+Thank you. Pleasure to Thank you. Thank you.
+Great.
+Pleasure to meet you.
+Thank you.
+I'm Chase Lockmiller, the co-founder and CEO of Crusoe.
+And I'm here to talk to you about the AI industrial
+revolution.
+I'm going to start with a quote.
+And it's from Warren Buffett in his 2020 shareholder letter
+to investors.
+And he said, in its brief 232 years of existence,
+there has been no incubator for unleashing human potential
+like America.
+Despite some severe interruptions,
+our country's economic progress has been breathtaking.
+Our unwavering conclusion, never bet against America.
+Buffett's words were true then, and as we enter this global race for technological dominance of artificial intelligence,
+they ring even truer today.
+American dynamism has always prevailed, and it will continue to do so. So in sort of the
+history of really what's made America great is,
+you know, we live in a nation that's the freest nation in the world.
+And we are just as rich in land and resources
+as we are in human ambition to drive progress.
+And one of the things that's fundamentally enabled
+that progress to happen and that ambition to be unleashed
+is the leading investments that we've made in infrastructure.
+Over the course of his lifetime, Warren Buffett got to witness investments in power,
+in transportation, and in power and transportation and in natural resources
+to enable people to go pursue their dreams and live a better life.
+Let's see.
+There we go. Now in 2025, we stand at the start
+of a new era of infrastructure,
+the infrastructure of intelligence.
+And it's driving the biggest capital investment
+in human history.
+This investment's being led by the hyperscalers who are investing hundreds of billions of dollars per year, per year
+to make this happen. These are the companies with the biggest balance
+sheets in the history of business that are quite literally going all in to make
+this happen. And they're not the only ones, you know, there's also startups like
+Crusoe and there's even nation states that are following suit.
+So what's going on there?
+What's the prize that they're going after?
+The opportunity here is that for the first time in human history, we've actually been
+able to manufacture intelligence.
+Intelligence is the scarcest economic resource in the history of the economy,
+and for the first time we're actually able to make it.
+And the opportunity here is to actually unlock access to what has
+historically been that scarce economic resource.
+So this is why the data centers of the future are not being referred to as data centers,
+they're actually being referred to as AI factories.
+It's a factory that takes as inputs data and algorithms and chips and energy,
+and it outputs intelligence.
+This is the alchemy of intelligence.
+So this newly manufactured intelligence will spawn a new chapter of unprecedented productivity and development and
+That will serve to improve human quality of life
+So the IDC estimates that AI will generate 20 trillion dollars in economic impact by 2030
+So even if you can earn a small slice of that that hundreds of billions of dollars of investment will earn an amazing return
+that hundreds of billions of dollars of investment will earn an amazing return.
+For each dollar invested into business related AI,
+it's expected to generate $4.60.
+As my friend Jensen would say,
+the more you buy, the more you save.
+Or in this case, the more you buy, the more you make.
+And we can grow the pie together
+and usher in a new era of AI driven abundance.
+So when we look at the history of American energy production and consumption, as the
+US industrialized, we really ramped up energy generation and also consumption.
+But if you look at this chart, you can see that it's kind of flatlined over the last
+20 years, where we're generating and consuming about 4,000
+terawatt hours per year.
+AI is fundamentally transforming this demand picture,
+and energy is quickly becoming the bottleneck to growth.
+Data centers are forecast to do account
+for 20% of the growth in power demand between now and 2030.
+And data center total power consumption
+is going to go from 2.5% of US power consumption to 10%.
+So what this means is that the technology industry that's
+sort of willing this infrastructure into existence
+fundamentally needs to bring its own power
+to support that growth, which means massive investments,
+not just in data centers, but also in the energy
+infrastructure to support them.
+And this will require people, lots of people, to build, operate, maintain, and run these
+large-scale energy investments.
+So if we look at data centers by the numbers, I think it's important, as people are sort
+of throwing around gigawatt-scale data centers, of looking at the amount of data center infrastructure
+that exists today.
+Northern Virginia is sort of the center of the world for data centers, but it's only,
+you know, at the end of 24, it was only four and a half gigawatts.
+Today, we have companies that are looking at building single five gigawatt facilities.
+And if you look at this growth, we're building more than Northern Virginia every single year
+in the forecasted future.
+So we need new, so if there's one thing that you're going to take away from this presentation, it's
+that we need new infrastructure, we need lots of it, and we need lots of people to build,
+operate, and maintain it.
+This is what Crusoe is focused on solving.
+Crusoe's in the business of activating energy for intelligence, of building, operating AI
+factories at scale from the steel to the silicon,
+from the electron to the token.
+And if you look at our pipeline,
+we've about 40 gigawatts of capacity that spans
+all sorts of energy resources,
+from new energy technologies like small modular reactors,
+to renewables and natural gas to power this innovative future.
+So revisiting my formula here, I think we left off one critical component,
+which is the people.
+AI will be AI infrastructure will be the largest job creation catalyst
+that we've ever seen.
+So I think it's important to sort of look at what this looks like in practice.
+For the last year, Crusoe has been building
+a large scale AI factory in Abilene, Texas. And speed is paramount. Again, this event is winning the AI race. In
+order to win a race, you really need speed. And Crusoe has really been focused on using
+modular components, on rapidly scaling investment in construction and infrastructure to support this.
+And we've actually built a lot of different modular components
+in factories and brought them to site.
+And they're kind of like LEGO blocks
+that sort of fit together to build one of these AI factories
+at rapid scale and speed.
+So if you look at what this looks like today, this site will consume over 1.2 gigawatts of power
+and 400,000 NVIDIA GPUs, all in a single coherent cluster.
+So this will essentially be a gigawatt scale computer
+to drive human progress forward.
+It's really amazing what you can accomplish in a year.
+You see just one year ago, this is what the site looked like,
+and this is what it looks like today.
+So what does this mean from a jobs perspective?
+We have 4,000 people working on site every day
+to make this facility happen.
+And it's a bunch of different trades, electricians,
+and plumbers, and construction workers.
+And it's required a lot of capital, too.
+We raised $15 dollars to basically put this
+facility and and and bring it into existence
+and
+It's also required manufacturing and that's in a lot of the critical components have happened off-site in these controlled manufacturing environments
+But this isn't the only one this isn't a one-of-a-kind
+But this isn't the only one, this isn't a one-of-a-kind. We also are building AI infrastructure and AI factories across America.
+This site in West Texas is going to be a gigawatt facility behind the meter with
+wind,
+with incremental gas and grid interconnection. We did a partnership with
+Redwood Materials where we built the largest
+microgrid
+in the United States with 60 megawatt hours of batteries, end-of-life EV
+batteries, and 20 megawatts of solar to power an AI factory.
+We have a partnership with GE, Vernova, and engine number one
+for 4 and 1 half gigawatts of new gas generation capacity
+to power future AI data centers.
+And finally, we want to announce a new partnership
+that we're doing with Tallgrass Energy in Wyoming
+that will initially power 1.3 gigawatts of total compute load
+alongside two gigawatts of power generation.
+Ultimately, we feel like this can scale
+to 10 gigawatts of power.
+So we're really thrilled to partner with Tallgrass.
+So as a vertically integrated AI infrastructure company
+built here in America, we believe
+that AI factories will be the ultimate economic engine, creating utility for society, uh, and,
+and, and, and new jobs for the economy.
+Um, this will usher in a massive new era of AI driven prosperity
+for the United States.
+And I want to leave you with, you know, my final quote from Warren
+Buffett that, you know, in this AI race, uh, never bet against America.
+Thank you.
+So is this stuff real?
+You guys started off as a Bitcoin miner,
+and now somehow all the hyperscalers
+are asking you to build nonstop data centers.
+Why you guys?
+I think, again, it comes back to this being a race.
+And one of the things that Crusoe's been able to do
+better than anyone is execute at speed and scale. this being a race. And one of the things that Crusoe's been able to do better than anyone
+is execute at speed and scale.
+And I know there's been some of the biggest constraints
+around water, energy, the land for this type of stuff.
+Where have you seen?
+What parts of the country are you
+guys able to actually do this?
+Or have you seen any of the local regulators
+start to step up to make this stuff easier for you?
+We've been building quite a bit in Texas.
+Abilene, Texas is this initial facility
+that's gotten a lot of coverage.
+We just sort of announced another facility in Texas.
+Wyoming's been a big area of investment for us.
+But there's a number of other states
+that we're sort of evaluating investing to build large scale
+AI.
+Is it only going to be the more rural sort of red states?
+Or do you think that Oregon, Washington, et cetera,
+will start to get together and realize
+they've got cheap hydropower and cheap water,
+and we'll try and get you there?
+Believe it or not, we're actually looking at something
+in California.
+Wow.
+California, Gavin Newsom's going to bring you in.
+I imagine it's going to take like 50 years
+with their regulations there.
+Yeah, maybe.
+We'll see.
+We'll see.
+And do you think that the hyperscaler demand, obviously, we were just on with Lisa Su talking
+about the demand for chips over the next couple years, that's obviously correlated to the
+demand with data centers. Do you think that's actually going to play out the way that all
+the public markets are projecting? Or are we like in 1999 peak, everybody thinks that
+fiber is going to be deployed all over the world. Turns out all those projections were
+totally off.
+I think the important trend to watch
+is sort of the capital investment that's happening
+and the term over which that's happening.
+I felt like Meta backed off on it a little bit.
+Like, did they, like, for a little bit,
+talk about they were going to deploy like crazy
+and then pulled back, although he's obviously
+spending a billion dollars on chief AI scientists now.
+Yeah, I think, you know, the investments they're
+making in people are actually rounding errors
+compared to the investments they're
+making in infrastructure. And I think that to the investments they're making in infrastructure.
+And I think that's something to appreciate
+in this moment in time.
+People are betting their entire balance sheets.
+These are the biggest and best balance sheets
+in the history of business.
+And they're betting their entire balance sheet
+on the future infrastructure that's
+going to power the modern economy.
+And then in data centers like Texas,
+what's the limiting factor?
+Is it workforce to actually go build these things?
+Is it materials? Is it the limiting factor? Is it workforce to actually go build these things? Is it materials?
+Is it the cooling towers?
+Is it the chips?
+Is it the hyperscalers giving you the contracts?
+What's the limiting reagent?
+Labor's definitely a major constraint.
+Like I said, we have about 4,000 people on site every day.
+We're going to have multiple sites that
+are operating with thousands of folks basically
+building this infrastructure.
+So labor is definitely one of the big bottlenecks.
+And we think it's really important for America
+to make these massive investments in the workforce
+to really build the infrastructure for the future.
+And do you think that requires some real re-skilling,
+where it's people from oil and gas or construction
+having to go into just totally new fields? or is it something where you guys are actually
+able to pull on pre-existing talent pools pretty quickly?
+Both.
+There's a lot of existing labor at that facility in Abilene where we're actually pulling labor
+from all 50 states at this point, believe it or not.
+So-
+Making like a company town, importing people in.
+Yeah.
+We have about 50% of the people are from Texas,
+but we are importing a lot of labor
+to make the project happen.
+And do you see the company starting
+to go more full stack beyond just the operations
+of the data centers?
+Or how do you think about you started off
+with focus on energy arbitrage now to data centers.
+Where do you see yourselves going over time?
+Yeah, Crusoe is a vertically integrated AI infrastructure business.
+So data centers is a key component to that.
+And I think one of the most important pieces to be building right now
+and one of the hardest things to do at speed.
+But we also have this managed AI cloud services layer
+that enables innovators to build large scale AI applications on the platform.
+Makes sense. Well, yeah, Chase, thanks so much for joining us on stage.
+And we appreciate the talk.
+Thanks, Dylan.
+OK, everybody, we've got a real treat for you.
+Jensen Wong is here.
+Can I sit here?
+No, right there.
+Sit here.
+Sit here.
+The hot seat.
+Thanks for coming.
+Thank you.
+Great to have you.
+Thank you.
+The number one podcast in the world.
+We were saying the number one company in the world Wow
+Thank you fan of the pod you listen to the pod
+Norman our host yeah, yes, and they're Steve
+What's the story with the jacket you got one of those you have like six? I have something like 50 or 60 of them
+Yeah, what is that Tom Ford I
+Think so this one is I think yeah, it's nice. I like that. I tried that out
+It was like you way too much money. Well, you guys are all so fashionable. Yeah coming from you guys. It actually means something
+Yeah, oh, yeah. Oh, look
+Hey, we've been talking a lot about opportunity you've talked about is like a model
+day. You've talked about is like a model.
+He is. Okay, good. I can definitely in his head. He's like,
+it's Tom Ford favorite. Who's your favorite? My favorite is
+whatever my wife gets me. Ah, she dresses you as soon as she
+gets it for me. It's my favorite. Yes, same with me.
+Smart man.
+You got nobody wears a nobody wears a suit better than Jacob.
+Good God. Yeah.
+He's a handsome man trying to give up with you guys.
+I have two questions for you taking whichever order you like
+We've been talking a lot about job displacement opportunity short-term long-term
+Obviously you get to see
+Everybody applying the technology because hey listen, you've got the best product in town to build on
+Therefore everybody explains to you their hopes, their dreams.
+So you have a unique way of looking at the playing field,
+you have complete information that we don't have. So I want
+to know what you think. Don't worry, we'll fix it. What you
+think, what you think about job creation, transfer,
+displacement, etc. And then the second one, I've just always been curious,
+you got all these important people knocking on your door.
+You got Zuck, you got E, you got Sam Altman.
+He seems like he's a little bit of a headache,
+I'll be honest, but-
+He's great.
+He's great, I'm joking, I'm joking.
+How do you allocate the H100s
+and whatever else you're selling them and still have them all like you?
+Because they must ask sometimes, hey, can I get extra?
+I'll pay you extra.
+So just the allocation of a finite amount of resources
+and then jobs.
+First of all, I wrote off $5 billion worth of hoppers.
+If anybody would like to have some extras, you know, just give me a call.
+Jobs.
+We use AI across a whole company.
+Every single software engineer today uses AI, not one left behind.
+100% of our chip designers use AI.
+We are busier than ever.
+And the reason for that is because we have so many ideas that we want to go pursue.
+AI makes it possible for us to go pursue those ideas
+now that we're not doing the mundane stuff.
+And so I think the first idea is
+the more productive you are as a company,
+so long as you have more ideas,
+you could pursue those ideas,
+you'll go after those ideas.
+And I think that AI, in my case, is creating jobs.
+It causes us to be able to create things
+that other people, customers would like to buy.
+It drives more growth, it drives more jobs,
+all that goes together.
+The other thing to remember is that AI
+is the greatest technology equalizer of all time.
+Okay, explain.
+Everybody's a programmer now.
+Yes.
+You used to have to know C and then C++ and Python and you know, in the future everybody
+can program a computer, right?
+Just have to get up and if you don't know how to program a computer, you don't even
+know how to program an AI, just go up to the AI and say, how do I program an AI?
+The AI explains to you exactly how to program the AI.
+Even when you're not sure exactly how to ask a question, what's the best way to ask the
+question and it'll actually write the question for you.
+It's incredible.
+And so it's a great equalizer.
+Everybody is going to be augmented by AI.
+Everybody's an artist now.
+Everybody's an author now.
+Everybody's a programmer now.
+That is all true.
+And so we know that AI is a great equalizer.
+We also know that it's not likely that,
+although everybody's job will be different
+as a result of AI, everybody's job will be different as a result of AI,
+everybody's jobs will be different.
+Some jobs will be obsolete, but many jobs will be created.
+The one thing that we know for certain is that
+if you're not using AI, you're gonna lose your job
+to somebody who uses AI.
+That I think we know for certain.
+There's not a software programmer in the future who's gonna be able to hold their own
+I mean you know typing by themselves. Yeah you can't raw dog it, no.
+No, not anymore. Not anymore, you can't raw dog it.
+I'll be sure to go home and tell people
+yeah exactly, you're not gonna raw dog this. Yeah, get your copilot on.
+Now what about the allocation of all these? OK, so the way we allocate is this.
+The way we allocate is this.
+Place a PO.
+OK.
+That's it.
+Just that's it.
+You go to the register.
+You pay.
+You order.
+First, in the old days with Hopper, it happened so fast.
+It was impossible to keep up with the demand.
+But now, we disclose our roadmap to all of
+our partners a year in advance.
+Gives everybody a chance to plan with us.
+They decide how much power and how much data center space and how much capex they want
+to allocate.
+We plan together.
+We work on transitions.
+It's really quite orally these days.
+What's the lifespan now?
+I was looking into how they're amateurizing
+You know these units four or five years what happens to this massive build out in your six seven and eight?
+What will be the use of those computers if you keep building such great products that replace them at two three four times?
+What do we do with all that concepts are happening right now the first thing first thing is every generation?
+We increase the performance by X factors.
+If the perf per watt goes up by X factors, whatever your data center power is, we just
+increase your revenues by X factors.
+So perf per watt is equal to revenues.
+Perf per dollar equals the cost.
+And so when we increase your perf per dollar by X factors, we reduce your cost by X factors. Does that make sense? That's the first
+idea. And so every single the reason why we're moving so fast is we're trying to
+increase everybody's revenues. We're trying to decrease everybody's cost so
+that we have the benefit of driving AI cost down as far as possible so that we
+can have thinking AI. It's not that we're trying to make AI
+so that it generates a thousand tokens and that's it.
+In the future, you're gonna be generating
+millions of tokens and that generates an answer
+as a result of that.
+You gotta think a long time.
+And so you gotta get that cost down.
+The second idea is, if you look at the residual value
+of NVIDIA gear right now, Hopper for example, one year later it's probably about
+80%, 75 to 80% of the value of the original value,
+and then one year later it's another kind of like 65%,
+and then one year later it's like 50%.
+The reason, and right now if you try to get Hoppers
+in the cloud, it's all sold out.
+The reason for that is because CUDA is so programmable
+and we're constantly, the whole world, not just us,
+the whole world is doing open source development,
+improving its effectiveness.
+And so what's amazing is the performance of Hopper
+increases over time because we're improving
+the software stack.
+Hopper improved in performance by us and others
+by a factor of four in the time that we shipped it.
+Now you can't get that out of a CPU.
+Right.
+Jensen, can you explain to us Elon's tweet
+and the impact to your industry?
+He said, we're going to have 50 million H100 equivalents
+by in five years from now.
+And everybody started to feverishly do the math
+because if he has 50 million H100 equivalents,
+then OpenAI will have that much or more.
+Meta will have that much or more.
+Google, et cetera, et cetera, et cetera.
+Can you just explain to us, layman,
+what that means, what he just said,
+and how it impacts your business?
+One of the biggest
+Observations about AI is that there's there's the industry of applications that AI
+Has created as a revolutionary technology every industry would will be revolutionized new applications will be created so on so forth that all the things
+that we know a
+Gentic AI reasoning AI robotics AI so on so forth forth, all the things that we know. Agentic AI, reasoning AI, robotics AI, so on and so forth.
+We know all those things now.
+Every industry, healthcare, education, transportation,
+you name it, manufacturing, all revolutionized.
+The one part that we observed
+and made a great contribution to
+is that in order to sustain those applications,
+you need factories of AI.
+You have to produce AI.
+Unlike software, you write the software and that's it.
+In the case of AI, you have to continuously produce it,
+generate the tokens.
+In a lot of the same ways that energy production
+was a large part of the economy, couple, two, three hundred years ago.
+I think it actually peaked out at 30%.
+There's gonna be a whole industry of just producing tokens.
+And this is gonna be the new infrastructure,
+just as we have the energy production infrastructure,
+we have the internet infrastructure,
+and we gotta build out that plumbing,
+and now we have to build out the AI
+Infrastructure my sense is that we're probably you know a couple of hundred billion dollars. Maybe a few hundred billion dollars into a
+multi trillion dollar
+Infrastructure build out per year yeah, what about?
+manufacturing and the reason for that is because
+You want the new infrastructure which increases revenue
+driving your cost down.
+Right.
+That's right.
+What about manufacturing in the US?
+So where are we?
+We've seen stories of TMC in Arizona.
+We asked this question earlier about how it's going.
+Is the US equipped?
+What is it going to take for us to get there to have onshore fabs?
+First of all, you guys know you're talking about the United States.
+I know that there's lots of concerns and everybody's worried about competition
+and things like that, but we are talking about America here.
+This is unquestionably the most technology-rich country
+in the world, and this is the most innovative countries in the world.
+And the computer industry, I have the honor to serve,
+is the single greatest industry
+our country has ever produced.
+I think we could acknowledge that.
+Yep.
+The level of leadership of the computer industry,
+the technology industry, is just unimaginable worldwide.
+And so this is our national treasure.
+This is one of our country's assets.
+We have to make sure that we continue to advance it.
+Onshore.
+Next generation manufacturing is gonna be
+insanely technology driven.
+Robotics technology, AI technology.
+You're gonna have factories that are gonna be
+orchestrated by AI, orchestrating a whole bunch of robots
+that are AI, building products that are effectively AIs.
+Right?
+So you're going to have this in layers of inception and the amount of technology necessary
+to create that is really insane.
+I love President Trump's vision, bold vision of re-industrializing the United States.
+That entire band of industry that's missing,
+we outsource too much of it, frankly.
+We don't need to insource all of it,
+but we ought to bring onshore the most advanced,
+the most economy-sustaining, driving,
+national security-enhancing parts of the industry.
+People always degrade down to tennis shoes.
+We don't have to go there.
+We just manufacture chips and AI supercomputers.
+In Arizona and Texas, we will, in the next four years,
+probably produce about half a trillion dollars
+worth of AI supercomputers.
+That half a trillion dollars with AI supercomputers
+will probably drive a few trillion dollars
+worth of AI industry.
+And so that's only in the next several years. And they're doing great.
+Arizona's doing great.
+And so there's a lot of talk
+about American competitiveness today.
+And the White House ruled out its AI action plan
+and Nvidia is making very big bets on the United States.
+And so as a CEO of a global company,
+what do you see are America's unique advantages
+that other countries don't have?
+What do you see are America's unique advantages that other countries don't have?
+America's unique advantage that no country possibly have
+is President Trump.
+And let me explain why.
+One, on the first day of his administration,
+he realized the importance of AI, he realized the importance of AI
+and he realized the importance of energy.
+For the last, I don't know how many years,
+energy production was vilified, if you guys remember.
+We can't create new industries without energy.
+You can't reshore manufacturing without energy.
+You can't sustain a brand new industry like artificial intelligence without energy. You can't reshore manufacturing without energy. You can't sustain a brand new industry like artificial intelligence without energy.
+If we decide as a country the only thing we want is IP, to be an IP only, a services only
+country, then we don't need much energy.
+But if we want to produce things, something as vital as artificial intelligence, then
+we need energy. And so I'm just delighted to see pro,
+to accelerate AI innovation,
+to accelerate the growth of energy
+so that we can sustain this new industry
+and go after the new industrial revolution.
+Big, big deal.
+Can you talk about physical AI versus data center AI?
+We talked a little bit about this today.
+Is there a threshold where you see physical AI accelerating and ultimately the deployment
+of chips outpaces the deployment of chips in data centers?
+Is that where the world evolves to or what do you think the construction of the world
+looks like?
+Yeah, excellent.
+Everything in the world that moves will be autonomous someday.
+And that someday is probably around the corner.
+So everything that moves.
+We already know that your lawnmower is going to,
+who's going to be pushing a lawnmower around?
+That's craziness.
+Unless you want to.
+I mean, that's, you know.
+And so I think everything that moves will be autonomous.
+And every machine, every company that builds machines
+will have two factories.
+There's the machine factory, for example, cars,
+and then there's the AI factory
+to create the AI for the cars.
+And so maybe you're a machine factory
+to build human or robots.
+You need an AI factory to build a brain
+for the human or robot.
+And so every company in the future, in fact,
+the future of industry is really two factories.
+Tesla already has two factories, right?
+Elon has a giant AI factory.
+He was very early in recognizing that he needs to have an AI factory to sustain the cars
+that he has.
+Now he's got AIs in the car, but in the future, instead of, you know, I imagine that in the
+future instead of a whole lot of people remotely monitoring air traffic control,
+there'll be a giant AI that's doing the remote control.
+And then only in the case that the giant AI can handle it, will a person come in to intercept.
+And so I think you see that these industries in the future, every industrial company will be an AI company.
+Or you're not going to be an industrial company.
+There was a couple of moments throughout the course
+of this year where people almost threw in the towel
+and said, oh, we lost to China, right?
+There was the deep seek moment.
+And maybe this week, last week, there
+was this Kimmy model moment.
+But then it kind of fizzled out.
+Can you just explain to us how big of a threat
+they really are in terms of getting to supremacy,
+getting there first, whether it's the AGI
+or super intelligence?
+Yeah, excellent question.
+The Chinese AI labs are the world's leading
+open model companies.
+They offer the most advanced open models. Open source is fantastic. leading open model companies.
+They offer the most advanced open models.
+Open source is fantastic.
+If not for open source, we know startups won't exist.
+And to the extent that we believe that the future
+is gonna be, the future industry is gonna be today's startups,
+they're gonna need open source models.
+And DeepSeek, when it came out,
+it was a great win for
+the United States it was an incredible win what people didn't and two reasons
+first imagine if deep sea came out and only ran on Huawei I just want us to
+pretend use that thought experiment totally right got to parallel universe
+exactly could you imagine if QN came out and only worked on non-american tech stack could you imagine if Kimi came out and only worked on non-American tech stack?
+Could you imagine if Kimi came out and only worked on non-American tech stack?
+And these are the top three open models in the world today.
+It has downloaded hundreds of millions of times.
+So the fact of the matter is American tech stack, all over the world, being the world's standard,
+is vital to the future of winning the AI race.
+You can't do it any other way.
+We've got to be, you know, as you know, any computing platform wins because of developers.
+Yeah.
+And half of the world's developers are in China.
+So speaking of developers...
+The second...
+I'm sorry, go ahead.
+The second thing is really a big deal.
+When Deepsea came out, we were thrilled for the second reason, which is we now have
+a super efficient reasoning model.
+And the reason for that is because the old models
+are one shot.
+You give it a question, everything was memorized.
+You know, pre-training is basically memorization
+and generalization, two concepts.
+Post-training is teaching you how to think.
+And so now with DeepSeq R1, Kimi, Kimi K2, Q1.3,
+you now have reasoning models that can help you think.
+And so the reason why I was so excited
+is if each pass of a thought is energy efficient,
+then you can think for a long time.
+The last question for me is that we
+see this capital being applied to human capital in a way
+that we never thought was possible.
+It used to be NBA players signing $300 million contracts.
+Now it's model researchers.
+And then there was a post this weekend
+that said that there was a person that
+was offered a billion
+dollars over four years by Metta.
+Now if that's happening at this layer, why hasn't it happened at your layer?
+Because you are the enabler of all of that.
+And how do you think all of this human capital is going to actually play out?
+First of all, I've created more billionaires on my management team than any CEO in the
+world.
+They're doing just fine. Okay, and so, and they're doing, don't feel sad
+for anybody at my layer.
+Yeah, everybody's doing okay.
+Yeah, my layer's doing just fine.
+I tell, but the important, the big idea though
+is that you're highlighting is that the impact
+of 150 or so AI researchers
+can probably create with an upfunding behind them, create an open AI.
+It's not a...
+150 people.
+Yeah.
+It's not a...
+Well, DeepSeek's 150 people.
+BoomShot's 150 people.
+Right.
+Right?
+Crazy.
+And so, I mean, look at the original OpenAI was about 150 people.
+DeepMind, you know, and they're all about that size. I think, you know, there's something about the elegance of small teams.
+And that's not a small team. That's a good size team with the right infrastructure.
+And so that kind of tells you something. 150 people, if you're willing to pay, say, $20 billion, $30 billion to buy a startup with 150 AI researchers, why wouldn't you pay one? Right?
+Yeah. Speaking of by the way, we told me we need to wrap
+because we have this one question, somebody who is
+inside your organization told me with the options, that you have
+a secret pool of options, and that you will randomly just if
+somebody does a great job, dropped a bunch of rsu's on top of them and
+That you have this like little bag of options you carry around and that you that's about nuts
+Is that true? Yeah, I'm carrying in my pocket right now. So listen, so this is what happens. I
+Review I review everybody's compensation up to this day
+Yeah at the end of every cycle when they present it.
+And they send me everybody's recommended comp. I go through the whole company. I've got my methods
+of doing that. And I use machine learning. I do all kinds of technology. And I sort through all
+42,000 employees. And 100% of the time, I increase the company's spend on OpEx. And the reason for
+that is because you take care of people,
+everything else takes care of themselves.
+All right, well done.
+Thank you.
+Thank you, Justin.
+Great to see you.
+Great to see you.
+We have an event in LA.
+We'd love to continue the conversation.
+Yeah.
+So we'll send you the note.
+The world's number one podcast.
+There you go.
+Thank you.

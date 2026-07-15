@@ -1,0 +1,1604 @@
+source: allin_podscripts
+published_date: 2025-10-31
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/elon-musk-openai-betrayal-his-future-at-tesla-and-the-next-big-thing-grokipedia
+title: Elon Musk: OpenAI Betrayal, His Future at Tesla, and the Next Big Thing - Grokipedia
+
+Let's get started.
+You know, we wanted to try something new this week.
+Every week, you know, I get a little upset.
+Things perturb me, sacks.
+And when it does, I just yell and scream,
+Descartia.
+And so I bought the domain named Desgratziad.com for no reason other than my own amusement.
+But you know what?
+I'm not alone in my absolute disgust at what's going on in the world.
+So this week, we're going to bring out a new feature here on the Allman podcast,
+Desgratziad Corner.
+Disgratziad.
+He was the best guy around.
+What about the people he murdered?
+What murder?
+You can act like a man.
+He's just killed a little bit.
+He insulted him a little bit.
+I'm smart and I want to fix.
+Your hair was in the toilet water.
+Disgusting.
+I had to suffocate you, your little bit.
+It's a fucking disgrace.
+Ah.
+Discraciad.
+Discratia.
+This is fantastic.
+This is our new feature.
+Chamath, you look like you're ready to go.
+Why don't you tell you, tell everybody who gets your disgracian this one?
+Wait, we all had to come with a discracea?
+You really heard.
+You missed a memo.
+All right, fine.
+Enough.
+I got one.
+I got one.
+Okay, all right, just calm down.
+My discraceat corner goes to Jason Calcanus.
+Oh, here we go.
+Come on, man, you can't.
+And Pete Buttigieg, where they, in the first 30 seconds of the interview,
+compared virtue signaling points about how each one worked at various moments at Amnesty International.
+Absolutely.
+Literally affecting zero change, making no progress in the world, but collecting a badge that they
+used to hold over other people.
+Discautziad.
+We wrote a lot of letters.
+Disgratziad.
+Which is good.
+That means it's like a good one because it's behind the scenes.
+Disgratziad.
+Jason Kalkanis and Pete Buttigieg.
+Great.
+I'm glad that I get the first one.
+And you can imagine what's coming next week for you.
+I saw the Sydney Sweeney dress today trending on social.
+Disgratziad.
+It's too much.
+What?
+It's too much.
+What is it?
+I didn't even know what this is.
+You didn't see it?
+Bring it up, Nick.
+Bring it up.
+It's a little floppy.
+Get a vestito and propo.
+How is this disgruntia?
+What are you talking about?
+Much.
+It's disgraceful.
+A little bit of like, look at this.
+Oh my God.
+Too much.
+It's elegant.
+Too much.
+In my day, Sacks, a little cleavage, maybe.
+perhaps in the 90s or
+2000s, some side view, this is too much.
+Hey, guy.
+Great highbrow subject,
+Matt out.
+We were discussing the wrong politics
+and Sydney, Sweden's dressed.
+I don't know.
+It was trending on X-Dat.
+Put away the phone, Jason.
+What's going on with the algorithm?
+I'm getting Sidney's Dweeney's dress all day.
+And last week, Sacks...
+Well, maybe you should stop everything in.
+I can't you married it 15 times.
+That's that poor Sacks got...
+You got invited to SluckCon for two weeks straight on the algorithm.
+I say the algorithm has become...
+If you demonstrate...
+You can't even tell if that's a joke or a real thing.
+It's a real thing in San Francisco.
+It's all too real.
+It's actually real.
+Wait.
+Yeah.
+Conner's
+for real?
+I've noticed,
+yeah,
+if you,
+if you demonstrate interest
+in anything on X now,
+if you click on it,
+God forbid you like something,
+man,
+it will give you more of that.
+It will give you a lot more.
+Yes,
+yes.
+So we did have an issue.
+We still have somewhat of an issue where
+there was an important bug
+that was figured out
+that was sold over the weekend.
+which caused in-network posts to be not shown.
+So you basically, if you followed someone,
+you wouldn't see their posts.
+Got it.
+It's obviously a big bug, a major bug.
+Then the algorithm was not probably taking into account
+if you just dwells on something.
+but if you if you interacted with it it would go hog wild so if you pay as David said
+if you if you would a favorite reply or engage with it in some way it is going to get you a
+torrent of that same thing oh sacks so maybe you what was your interaction did you bookmarked
+slack on i think you bookmarked did here's what i thought was good about it though is all of a sudden
+The sports switch Sydney Sweeney's boobs.
+Yeah.
+And you were getting a lot more of them.
+Yeah.
+But what I thought was good about it was that you would see who else had a take on the same subject matter.
+And that actually has been a useful part of it.
+Yeah.
+And so you do get more of a, you get more of like a 360 view on whatever it is that you're shown interested.
+Yeah.
+Yeah.
+It just, it's like it was giving you, if you take a.
+you'd have like it was just going too far obviously it was overcorrecting it had too much gain on
+um it just turned up the gain way too high on any interaction would would you would then get a
+tar into that it's like it's like oh you had a taste of it we're going to give you three helpings
+okay we're going to pull we're going to give you the food funnel and and that's all being done
+I assume it's all being done with grok now so it's not like the old hard coding algorithm or is it
+using groin well what what's happening is that you know we're gradually deleting the legacy twitter
+heuristics now the problem is that it's like as you delete these heuristics it turns out the one
+heuristic what the one bug was covering for the other bug and so when you delete one side of the bug
+you know it's like that that meme with the internet that way there's like this is very complicated
+machine and there's like a tiny little wooden stick that's yeah and that's keep going which
+was i guess a w s east or whatever had something like that that
+You know, when somebody pulled out the little steak, what's this?
+Oops.
+I think it would be good if it.
+Half of earth, you know.
+It would be great if it showed, like, one person you follow and then, like, it blended
+the old style, which was just reverse chronological of your friends, the original version,
+with this new version.
+So you get, like, a little bit of both.
+Well, you can still, you still have the, everyone still has the following tab.
+Yeah.
+Now, something we're going to be adding is the ability to have a curated following tab,
+because the problem is, like, if you follow some people and they're maybe a little more prolific,
+then you're, you know, you follow someone and some people are much more, you know, say a lot more than others.
+That makes the following tab hard to use.
+So we're going to add an option where you can have the following tab be curated.
+So Grok will say, what are the most interesting?
+interesting things posted by your friends and we'll show you that in the following tab.
+It will also be the opportunity to say everything.
+But I think having that option will make the following tab much more useful.
+So it'll be a curated list of people you follow, like ideally the most interesting stuff that they've said, which is kind of what you want to look at.
+And then we've mostly fixed the bug, which would
+give you way too much of something if you interacted with a particular subject matter.
+And then the really big change, which is where Groch literally reads everything that's posted
+to the platform, which actually, there's about 100 million posts per day.
+So it's 100 million pieces of content per day.
+I think that's actually just maybe just in English.
+I think it goes beyond that if it's outside of English.
+So Grog is going to, we're going to start off reading the really what Grogh thinks are the top 10 million of the 100 million.
+And it will actually read them and understand them and categorize them and match them to users.
+It's like this is not a job humans could ever do.
+And then once that is scaling, we'll use to be well, we'll add the entire 100 million a day.
+So it's literally going to read through 100 million things and show you the things that
+it thinks out of 100 million posts per day, what are the most interesting posts to you?
+How much of Colossus will that take?
+A lot of work.
+Yeah.
+That's like, is it tens of thousands of servers, like to do that every day?
+Yeah, my guess is it's probably on the order of 50K, H100, something like that.
+Wow.
+And that will replace search.
+so you'll be able to actually search on Twitter and find things in like with a with a plain language.
+We'll have semantic search where you can just ask a question and it will show you all content,
+whether that is text, pictures, or video that matches your search query semantically.
+How has it been three years in?
+This is a three year anniversary like a couple days.
+This is three years?
+Yeah.
+Yeah, remember it was Halloween?
+Yeah, Halloween's back.
+Halloween's back, but it was the weekend you took over was Halloween.
+Yeah.
+We had a good time.
+Yeah.
+Wow.
+Yeah, three years.
+Well, things three years for now.
+Yeah.
+What's the takeaway?
+Three years later, you obviously don't regret buying it.
+It's saved free speech.
+That was good.
+It seemed to have turned that whole thing around.
+That was, I think, a big part of your mission.
+But then you added.
+it to XAI, which makes it incredibly valuable as a data source. So when you look back on it,
+the reason you bought it to stop crazy woke mind virus and make truth exist in the world again.
+Great. Mission accomplished. And now it has this great future.
+Yeah, we've got community notes. You can also ask GROC about anything you see on the platform.
+you know, just press the GROC icon on any X post and we'll analyze it for you and research it as much as you want.
+So you can basically have just by tapping the GROC icon, you can assess whether that post is the truth, the whole truth or nothing but the truth or whether there's something supplemental you need to be explained.
+So I think it's actually, we've made a lot of progress towards freedom of speech.
+and people being able to tell whether something is false or not, you know, propaganda.
+The recent update to GROC is actually, I think, very good at piercing through propaganda.
+So, and then we use that latest version of GROC to create Grogopedia,
+which I think is much more, it's not just, I think, more neutral and more accurate than Wikipedia.
+but it actually has a lot more information than a Wikipedia page.
+Did you seed it with Wikipedia?
+Actually, take a step back.
+How did you guys, how did you do this?
+Well, we used AI.
+But meaning like totally unsupervised,
+just a complete training run on its own,
+totally synthetic data, no seeded set, nothing.
+Well, it was only just recently possible for us to do this.
+So we've finished training.
+on a maximally true seeking, a version of grok that is good at cogent analysis.
+So breaking down any given argument into its axiomatic elements, assessing whether those axioms are,
+you know, the basic test for cogency, the axioms are likely to be true. They're not
+contradictory
+that
+the conclusion
+the conclusion
+most likely follows
+from those axioms
+so
+we're just
+trained GROC on a lot
+of critical thinking
+so it just got
+really good of critical thinking
+which was quite hard
+and then we took that version of GROC and said
+okay, cycle through the million
+most popular
+articles in Wikipedia
+and add
+modify and delete
+So that means research the rest of the internet, whatever is publicly available, and correct the Wikipedia articles and fix mistakes, but also add a lot more context.
+So sometimes really the nature of the propaganda is that facts are stated that are technically true, but do not properly represent a picture of the individual or event.
+this is critical because when you have a bio as you do actually all do on Wikipedia
+over time it's just the people you fired or you you beat in business or have an axe to grind
+so it just slowly becomes like the place where everybody you know kind of who hates you then
+puts their information i looked at mine it was so much more representative and it was five
+times longer six times longer and the what it gave weight
+was much more accurate, much more accurate.
+And this opportunity was sitting here, I think, for a long time.
+It's just great that you got to it because they don't update my page, but, you know, I don't know, twice a month with, you know,
+and then who is this secret cobble?
+There's 50 people who are anonymous who decide what gets put on it.
+It was a much better, much more updated page in version one.
+Yes, this is version's important one, as we put it, as we showed,
+the top. So I do think actually by the time we get to version 1.0, it'll be 10 times better.
+But even at this early stage, as you just mentioned, it's not just that it's correcting
+errors, but it is creating a more accurate, realistic, and fleshed out description of people
+and events.
+Elon, you think that...
+And subject matters.
+You can look at articles on physics and Groghpeter that they're much better than Wikipedia
+by far. This is what I was going to ask you is, do you think that you can take this corpus of pages now and
+get Google to de-boost Wikipedia or boost Grocopedia in traditional search? Because a lot of people
+still find this and they believe that it's authoritative because it comes up number one. Right? So how do we,
+how do we do you flip Google? Yeah. So it really can, if people share a lot of, if, if, if, if
+If Grogopedia is used elsewhere, like if people cite it on their websites or post about it on social media, or when they do a search when Grogapedia shows up, they click on Grogpedia, it will naturally, you know, rise in Google's, you know, rankings.
+I did send, I did text Sondar because, you know, even sort of a day after launch, if you type in Groghpedia, Google would just say, did you mean Wikipedia?
+Wikipedia, yeah.
+And it wouldn't even bring Brockpedia up at all.
+Yeah, that's true.
+So now...
+How's the usage then?
+Have you seen good growth since it launched?
+Yeah.
+It went super viral.
+So we're seeing it sighted all over the place.
+But yeah, it's...
+And I think we'll see it used more and more as people refer to it.
+And people will judge for themselves.
+When you read a Grogapedia article about a sub...
+or a person that you know a lot about and you see wow this is way better than
+Wikipedia it's it's more comprehensive it's way more accurate it's not it's
+it's neutral instead of bias then you're gonna set you're gonna forward those links
+around and say that this is actually the better source like it's it
+Gracofea will will succeed I think very well because it will it is fundamentally a
+superior product to Wikipedia it is it is
+better source of information.
+And we haven't even added
+images and video yet.
+That's going to be awesome.
+Yeah, we're going to add a lot of video.
+So using Grock Imagine to create videos.
+And so if you're trying to explain something,
+Grogamagin can take the text from Grogroghpedia
+and then generate a video, an explanatory video.
+So if you're trying to understand anything from how to tie, boat, tie to, you know, how do certain chemical reactions work, or, you know, really anything, dietary things, medical things, we can, we can just go on and see the video of how it works.
+That's created by AIDA.
+When you have this version that's maximally truth-seeking as a model, do you think that there needs to be a better eval or a benchmark that people can point to that shows how off of the truth things are?
+so that if you're going to start a training run with Common Crawl,
+or if you're going to use Reddit,
+or if you're going to use,
+is it important to be able to say,
+hey, hold on a second,
+this e-val just,
+like you guys suck on this e-val.
+Like, it's just,
+this is crappy data.
+Yeah, I guess I'm a much,
+I think,
+I mean,
+there are a lot of e-vals out there.
+I've complete confidence that
+Crocopoebaedia is going to succeed
+because Wikipedia is actually not a very good product.
+Yeah.
+It's, it's, it's, it's the information is sparse, wrong and out of date.
+And if you can go, if you find, if it, and it doesn't have, you know, there are very few images.
+There's basically no video.
+So if you have something which is, you know, accurate, comprehensive, has videos where moreover, you can ask, if there's any part of it that you're curious about, you can just highlight.
+and ask Rock right there.
+Like, if you're trying to learn something, it's just great.
+It's not going to be a little bit better than Wikipedia.
+It's going to be a hundred times better than Wikipedia.
+Elon, do you think you'll see, like, good uniform usage?
+Like, if you look back on the last three years since you bought Twitter,
+there was a lot of people after you bought Twitter that said,
+I'm leaving Twitter, Elon's bought it, I'm going to go to this other,
+wherever the hell they went.
+And there's all these news.
+And there's all these articles saying, you know.
+Blue sky is falling is my favorite.
+I guess my question is,
+as you destroy the woke mind viral kind of control of the system,
+and as you bring truth to the system,
+whether the system is through Grogapedia or through X,
+do people like just look for confirmation bias
+and they actually don't accept the truth?
+Like, what do you, like, or do you think people are actually going to see the truth and change?
+Yeah.
+But, I mean, is that like...
+You thought Sydney Swini's boobs were great.
+We see them like.
+Looking good.
+Yeah.
+Solid.
+Solid makeup there.
+Yeah.
+A little sheer, you know.
+I think we just got flagged on YouTube again.
+Yeah, we did.
+That was definitely going to give us a censorship moment.
+Yeah.
+Great A moves.
+Yeah.
+No, but like, like, but do people?
+change their mind? I mean,
+I could take it. There's no such thing as great. A move.
+God, so if the rails are ready.
+David, you were trying to ask a serious question. Go ahead.
+Well, I just want to know if people change their mind. Like, can you actually change
+people's minds by putting the truth in front of them? Or do people just take, you know,
+they kind of ignore the truth because they're, they feel like they're in some sort of camp
+and they're like, I'm on the side. They want the confirmation bias.
+They want the confirmation bias and they want to stay in a camp and they want to be tribal
+about everything.
+It is remarkable how much people believe things
+simply because it is the belief of their in-group,
+whatever their sort of political or ideological tribe is.
+So, I mean, there's some pretty hilarious videos of, you know,
+there's like some guy going around.
+It's like a racist, Nazi or whatever.
+And then he was like,
+to show them the videos where of the thing that they are talking about um where he is in fact
+condemning the nazis in strongest possible terms and condemning racism in the strongest possible
+terms and they literally don't even want to watch the videos so so yeah that people or at least some
+people would they were preferred um they will stick to whatever their um ideological views are
+or that sort of political tribal abuse are, no matter what.
+The evidence could be staring them in the face, and they're just going to be a flat earther.
+You know, there is no evidence that you can show to a flat earth that commits them the world's
+round because everything is just a lie.
+The world is flat type of thing.
+I think the ability to hit at Grok in a reply and ask it a question in the thread
+has really become like a truth-seeking missile on the platform.
+So when I put up metrics or something like that, I reply to myself and I say,
+at GROC, is the information I just shared correct?
+And can you find any better information?
+And please tell me if my argument is correct or if I'm wrong.
+And then it goes through and then it DM Sachs and then Sacks and then Sacks gets in my replies and tries to correct me.
+No, but it does actually a really good job of like, and that combined with community notes.
+Now you've got like two swings at bat.
+The community's consensus view and then GROC coming in, I think it would be like really interesting if Grock
+on like really powerful threads
+kind of did like its own version of community notes
+and had it sitting there ahead of time.
+You know, like you could look at a thread
+and it just had next to it, you know,
+or maybe on like the specific statistic,
+you could click on it and it would show you like,
+here's what that statistic's from.
+I mean, you can, I mean, pretty much every,
+I mean, essentially every post on X
+unless it's like advertising or something,
+has the GROC symbol on it.
+Yeah.
+And you can just tap that symbol
+and you're one tap away from a GROC analysis,
+literally just one tap.
+And we want to clutter the interface with which
+providing an explanation.
+But I'm just saying if you go on X right now,
+it's one tap to get to get GROX analysis.
+And Grok will research the X post
+and give you an accurate answer.
+And you can even ask us to do further research
+and further due diligence.
+And you can go as far down there.
+I have it as you want to go.
+But I do think that this is consistent with,
+we want X to be the best source of truth on the planet by far.
+And I think it is.
+And where you hear any and all points of view,
+but where those points of view are corrected by human editors with community notes.
+And the essence of community notes is that people who historically disagree agree
+that this community note is correct.
+So it's and all of the community notes,
+code is open source and the data is open source. So you can recreate any community note from
+scratch independently. By and large, it's worked very well. Yeah. Yeah. I think we originally had the
+idea to have you back on the pod because it was a three-year anniversary of the Twitter acquisition.
+So I just wanted to kind of reminisce a little bit. And I remember, yeah, I mean, I remember.
+Where's that sync? Where's that sync? Well, yeah. So Elon was staying at my house. We had talked the week before,
+told me the deal is going to close.
+And so I was like, hey, do you need a place to stay?
+And he took me up on it.
+And the day before he went to the Twitter office, there was a request made to my staff.
+Do you happen to have an extra sync?
+And they did not, but they were able to.
+Yeah, who has an extra sync, really?
+But they were able to locate one at a nearby hardware store.
+And I think they paid extra to get it out of the window or something.
+Well, I think the store was confused because my security
+he was asking for any kind of sink.
+And like, like, normally people wouldn't ask for any kind of sink.
+You need a sink that puts in your bathroom or connects with certain kind of plumbing.
+So they're like trying to ask, he's like, well, what kind of process do you want?
+No, no, I just want it to sink.
+Yeah, I think it's a mental person called.
+The store was confused that we just wanted to the sink and didn't care what the sink
+connected to.
+That was really.
+They were like almost not letting us buy the sink because
+they thought maybe we'd buy the wrong sink, you know?
+It's just rare that somebody wants a sink for sick.
+For meme purposes.
+One of my favorite memories was Elon said, hey, you know, swing by, check it out.
+I said, okay, I'll come by.
+And I drive up there and I'm looking where to park the car.
+And I realize there's just parking spaces around the entire building.
+And I'm like, okay, this can't be like legal parking, but I park and it's legal parking.
+Yeah, I mean, you're in downtown SF, so you might get your window broken.
+Yeah, I might not be there when I get back.
+But we get in there and the place is empty.
+And then it was seriously empty, except the cafeteria.
+There was an entire, there were two, the Twitter headquarters, there's two buildings.
+One of the buildings was completely and utterly empty.
+And the other building had like 5% occupancy.
+And the 5% argument, we go to the cafeteria, we all go get something to eat, and we realize there's more people working in the cafeteria than that Twitter.
+There were more people making the food than eating the food.
+Correct.
+And this giant, really nice, really nice cafeteria.
+You know, this is where we discovered that the actual price of the lunch was $400.
+Yes.
+the original price was $20 but it had five it went for it was at 5% occupancy so it was 20 times higher
+and they still kept making the same amount pretty much so and charging the same amount so effectively
+lunch was for $400 um that was a great meeting yes and then and then there was that that where we had
+the initial meetings sort of the sort of trying to figure out what the heck's going on meetings in the in the in the
+because there's the two buildings,
+two Twitter buildings,
+and one with literally no one in it,
+that's where we had the initial meetings.
+And then we tried drawing on the whiteboard
+and the markers had gone dry.
+So nobody had used the whiteboard markers
+in like two years.
+So sad.
+None of the markers were.
+So we're like, this is totally bizarre.
+but it was totally clean because the cleaning crew had come in and done their job and cleaned
+it cleaned an already clean place for about two, three years straight.
+It was pointless.
+I mean, honestly, this is more crazy than any sort of Mike Judge movie or, you know, Silicon Valley
+or anything like that.
+And then I remember going into the men's bathroom and there's a table.
+with, you know,
+hygiene to menstrual hygiene products.
+Yeah.
+Refreshed every week.
+Tampons, like a fresh box of tampons.
+And we're like, but there's literally no one in this building.
+So, but nope, hadn't turned off the send fresh tampons to the van's bathroom in the empty building.
+had not been turned off.
+No.
+So every week,
+they would put a fresh box of tampons
+in an empty building
+for years.
+This happened for years.
+And it must be very confusing
+to the people
+that were being asked to do this
+because they're like,
+okay, I'll throw them away.
+I guess they're paying us.
+So we'll just put tampon.
+So seriously,
+have to consider the string of possibilities
+necessary in order for
+anyone to possibly use that tampon in the men's bathroom at the unoccupied second building of
+Twitter headquarters because you'd have to be a burglar who is a transman burglar who's unwilling to use
+the woman's bathroom that also has tamponans statistically improvise.
+There's no one in the building.
+So you've broken into the building.
+And at that moment, you have a period.
+Yes.
+And you're on your period.
+I mean, you're more likely to be struck by a meteor than need that tampon.
+Okay.
+Well, I remember it was, I think it was shortly after that.
+You discovered an entire room at the office that was filled with stay woke t-shirts.
+Do you remember this?
+An entire pile of merch.
+Yes.
+The hashtag stay-woke.
+Stay-woke.
+And also a big sort of buttons like those,
+buttons that you put on your shirt that said, I am an engineer.
+I'm like, look, if you're an engineer, you don't need a button.
+Who's the button for?
+Who are you telling you that to?
+You could just ship code.
+We would know.
+We could check your get on.
+But yeah, they're like scarves, hoodies, all kinds of merch that said hashtags, stay
+work.
+Yeah, a couple of music rooms.
+When you found that, I was like, my God, man, the bar.
+Barians are fully within the gates now.
+The barbarians have smashed through the gates and are looting the merch.
+Yes.
+You are rummaging through their holy relics and defiling them.
+I mean, but when you think about it, David, the amount of waste that we saw there during those
+first 30 days, just to be serious about it for a second, this was a publicly traded company.
+So if you think about the financial duty of those individuals, there was a list of
+SaaS software we went through, and none of it was being used. Some of it had never been installed,
+and they had been paying for it for two years. They've been paying for a SaaS product for two
+years. And the one that blew my mind the most that we canceled was they were paying a certain
+amount of money per desk to have desk-sweeting software in an office where nobody came to work.
+So they were paying to rob nobody. There was millions of dollars a year of being paid for, yes,
+but for analysis of pedestrian, like software that use cameras to analyze the pedestrian traffic
+to figure out where you can alleviate pedestrian traffic jams in an empty building.
+Right.
+That's like 11 out of 10 on a Dillbert scale.
+Yeah, it was pretty shout out Scott Adams.
+You've gone offscale on your Dillbert level at that point.
+Let's talk about the free speech aspect for a second, because I think that is the most important
+legacy of the Twitter acquisition. And I think people have short memories and they forget how bad
+things were three years ago. First of all, you had figures as diverse as President Trump,
+Jordan Peterson, Jay Botta Charia, Andrew Tate. They were all banned from Twitter. And I remember
+when you opened up the Twitter jails and reinstated their accounts, kind of, you know, freed all the
+bad boys of free speech. Yeah, the best deal. Yes. So you basically gave all the bad boys of free speech
+their accounts back. But second, beyond just the bannings, there was the shadow bannings. And Twitter
+had claimed for years that they were not shadow banning. This was a paranoid, conservative, conspiracy
+theorists. Yeah. There was a very aggressive shadow banning by what was called the trust and safety group,
+which of course naturally would be the one that is doing the nefarious shadow banning.
+And I just think you shouldn't have a group called trust and safety.
+I mean, this is an Orwellian name if you ever, if there ever was one.
+I'm from the trust department.
+Oh, really?
+I want to talk to you about your tweets.
+Can we see your DMs?
+Say that you're from the trust department.
+That's the Ministry of Truth right there.
+Yeah.
+And Twitter executives had made, they had maintained for years that they were
+not engaged in this practice, including under oath.
+And on the heels of you opening that up and exposing that,
+because by the way, it wasn't just the fact they were doing it,
+they created an elaborate set of tools to do this.
+They had checkboxes.
+Elaborate set of tools to, yes, to de-boast accounts, yes.
+Yes.
+And subsequently, we found out that other social networking properties have done this as well,
+but you were really first to expose it.
+This is still being done at the other social media companies.
+It's Google, by the way.
+So for, you know, I don't pick on Google because they're all doing it, but for search
+results, if you simply push a result pretty far down the page or, you know, the second
+page of results, like, you know, the joke used to be, or personally as anything, like, where
+do you hide a dead, what's the best place to hide a dead body?
+The second page of Google search results, because nobody ever goes to the second page of Google
+search results.
+So you could hide a dead body there and nobody would find it.
+And you still have, then it's not like you've, you haven't made them go away.
+You've, you've just put them on this one page too.
+Yes.
+So shadow banning, I think, was number two.
+So first was banning.
+Second was shadow banning.
+I think third to me was government collusion, government interference.
+So you release the Twitter files.
+Nothing like that I ever been done before where you just, you actually let investigative reporters go through Twitter's emails.
+Unfettered tax groups.
+I was not looking over their shoulder at all.
+They just had direct access to everything.
+And they found that there was extensive collusion between the FBI and the Twitter Trust and Safety Group, where it turns out the FBI had 80 agents submitting takedown requests.
+And they were very involved in the banning, the shadow banning, the censorship, which I don't think we ever had definitive evidence of that before.
+That was pretty extraordinary.
+Yeah.
+And the U.S. House representatives had hearings on the matter and a lot of this, you know, was unearthed.
+It's public record.
+So a lot of people, some people in the left still think this is like made up.
+I'm like, this is just literally these, the Twitter files are literally the files at Twitter.
+I mean, we're literally just talking about these are the emails that were sent internally that confirm this.
+This is what's on the Slack channels.
+And this is what is shown in the, on the Twitter database.
+as where people have made either suspensions or shadow vans.
+Has the government come and asked you to take stuff down since,
+or did they just have to, the policy is, hey, listen,
+you've got to file a warrant,
+you've got to come correct as opposed to just putting pressure on executives.
+Yeah, our policy at this point is to follow the law.
+Now, the laws are obviously different in different countries.
+So sometimes I get criticized for like,
+why don't I push free speech in XYZ country that doesn't have free speech laws?
+I'm like, because that's not the law there.
+And if we don't obey the law, we'll simply be blocked in that country.
+So the policy is really just adhered to the laws in any given country.
+It is not up to us to agree or disagree with those laws.
+And if the people of that country want laws to be different, then they should
+you know, ask their leaders to change the laws.
+Yeah.
+But anything that, but as soon as you start going beyond the law, now you're putting your thumb on the scale.
+So, so the, yeah, that, I think, I think that's the right policy is just adhere to the laws within any given country.
+Now, sometimes we get, you know, in a bit of a bind like we had got into with Brazil, where, you know, this judge in Brazil was asking us to, or,
+we're telling us to break the law in Brazil and ban accounts contrary to the law of Brazil.
+And now we're somewhat stuck.
+We're like, wait a second.
+We're reading the law and says this is not allowed to happen.
+And also that and giving us a gag order.
+So like we're not allowed to say it's happening and we have to break the law.
+And the judge is telling us to break the law.
+The law is breaking the law.
+That's where things get very difficult.
+and we were actually banned in Brazil for a while because of that.
+I was only one final point on the free speech issue and then we can move on.
+It's just I think people forget that the censorship wasn't just about COVID.
+There was a growing number of categories of thought and opinion that were being outlawed.
+The quote content moderation, which is another Orwellian euphemism for censorship,
+was being applied to categories like gender and even climate change.
+the definition of hate speech was constantly growing.
+Yes.
+And more and more people were being banned or shadow ban.
+And there was more and more things that you couldn't say.
+This trend of censorship was growing.
+It was galloping.
+And it would have continued.
+If it wasn't, I think, for the fact that you decided to buy Twitter and opened it up.
+And it was only on the heels of that, that the other social networks were willing to, I think, be a little bit chastened in their policies and start to push back more.
+Yeah, that's right.
+once Twitter broke ranks,
+the others had to,
+it became very obvious what the others were doing.
+And so they had to mitigate their censorship substantially
+because of what Twitter did.
+And I mean, perhaps to give them some credit,
+they also felt that they had the air cover
+to be more inclined towards free speech.
+They still do a lot of sort of, you know,
+shadow banning and whatnot at the other social media companies.
+but it's much less than it used to be.
+Yeah.
+Elon, what have you seen in terms of like governments creating new laws?
+So we've seen a lot of this crackdown in the UK on what's being called hateful speech
+on social media and folks getting arrested and actually going to prison over it.
+And it seems like when there's more freedom, the side that is threatened by that comes out
+and creates their own counter, right?
+There's a reaction to that and there seems to be reaction.
+seeing more of these laws around the world in response to your opening up free speech through
+Twitter and those changes and what they're enabling that the governments and the parties
+that control those governments aren't aligned and they're stepping in and saying, let's create
+new ways of maintaining our control through law. Yeah, there is, there's been an overall global
+movement to suppress free speech under the name of, under the guise of suppressing hate speech.
+But then, you know, it's, the problem with that is that your freedom of speech only matters if people are allowed to say things that you, that you don't like or even that things that you hate.
+Because if you're allowed to suppress speech that you don't like, then, and, you know, you don't have freedom of speech.
+And it's only a matter of time before things switch around.
+And then the shoes on the other foot and they will suppress.
+here. So, suppress not, lest you be suppressed. But there is a movement and I, there,
+there was a very strong movement to codify speech suppression into the law throughout,
+throughout the world, and including the Western world, you know, the Europe and Australia.
+UK and Germany were very, yeah, aggressive in this regard. Yes. And my understanding is that
+in the UK, there's something like 2 or 3,000 people in prison for social media posts.
+And in fact, there's so many people that were in prison for social media posts.
+And many of these things are, like, you can't believe that someone would actually put in prison for this.
+They have, in a lot of cases, released people who have committed violent crimes in order to to imprison people who have simply made posts on social media, which is deeply wrong.
+and underscores why the founders of this country made the First Amendment, the First Amendment was
+freedom of speech.
+Why did they do that?
+It's because in the places that they came from, there wasn't freedom of speech, and you
+could be imprisoned or killed for saying things.
+Can I ask you a question just to maybe move to a different topic?
+If you came and did this next week, we will be past the Tesla board vote.
+We talked about it last week, and we talked about how critical.
+crazy ISS and Glass-Luises.
+Right.
+We use this one insane example where, like, Ira, Aaron Prize, didn't get the recommendation
+from ISS in Glass-Lewis because he didn't meet the gender requirements, but then Kathleen
+also didn't.
+It doesn't make sense.
+Can you, so the board vote is on the six.
+She was an African-American woman.
+Yeah.
+Yeah, she, they recommended against her, but then also recommended against our enterprise on
+on the grounds he was insufficient
+diverse. So I'm like,
+these things don't make any sense.
+Yeah.
+So I do think we've got a fundamental issue
+with corporate governance
+in publicly traded companies
+where you've got about half of the stock market
+is controlled by passive index funds.
+And most of them outsource the decision
+to advisory firms
+and particularly Glass Lewis and ISS.
+I call them corporate ISIS.
+you know so all they do is basically they're just they're just terrorists so so and they own no stock in any
+of these companies right so I think that this there's a fundamental breakdown of fiduciary responsibility
+here where really you know any company that's managing even though they're passively managing
+you know index funds or whatever that they do at the end of the day have
+a fiduciary duty to vote, you know, along the lines of what would maximize the shareholder returns.
+Because people are counting on them. Like people, you know, have, say, you know,
+sort of have all their savings and say a 401k or something like that. And they're counting on
+the index funds to vote, do company votes in the direction that would ensure that their
+retirement savings do as well as possible. But the problem is if that is then outsourced to
+ISS and Glass-Lewis, which have been infiltrated by far-left activists. Because, you know,
+where far-like, you know, you know, where basically political activists go. They go where the
+power is. And so effectively, Glass-Lewis and ISS controlled the vote of half the stock market.
+now if you're a political activist you know what a great place would be to go work
+i assess and glass of course and they do so um so my concern for the future um because this
+the you know the tesla thing is it's called sort of compensation but really it's not about
+compensation so like i'm going to go out and buy you know a yacht with it or something it's just
+that i i do in order if i'm going to a build up optimist and and and
+you know, have all these robots out there.
+I need to make sure we do not have a terminated scenario
+and that I can make, you know, maximize the safety of the robots.
+And, and, but I feel like I need to have something like a 25% vote,
+which is enough of a vote to have a strong influence,
+but not so much of a vote that I can't be fired if I go insane.
+So it's kind of, but my concern would be, you know,
+creating this army of robots and then and then being fired for political reasons um because of because of
+i s s and glass louis uh you know declined to be isis and glass louis fire me effectively or or the
+the activists at those bones fire me um even though i've done everything right yeah that's my
+concern yeah and then i and then then you've got and then i and then i cannot ensure this the safety of the
+robots.
+If you don't get that vote, it doesn't go your way, it looks like it's going to.
+Would you leave?
+I mean, is that even in the cards?
+I heard they were, the board was very concerned about that.
+Let's just say, I'm not going to build a robot on me if I, if I can be easily kicked
+out by activist investors.
+No way.
+Yeah.
+Makes sense.
+Yeah.
+And who is capable of running the four or five major product lines at Tesla?
+I mean, this is the madness of it.
+It's a very complex business.
+People don't understand what's under the hood there.
+It's not just a car company.
+You got batteries.
+You got trucks.
+You got the self-driving group.
+And this is a very complex business that you've built over decades now.
+It's not a very simple thing to run.
+I don't think there's a Elon equivalent out there who can just jump into the cockpit.
+By the way, if we take a full turn around corporate governance corner, also this week, what
+What was interesting about the Open AI restructuring was I read the letter and your lawsuit
+was excluded from the allowances of the California Attorney General basically saying this thing
+can go through, which means that your lawsuit is still out there, right?
+And I think it's going to go to a jury trial.
+Yes.
+So there, that corporate governance thing is still very much in question.
+Do you have any thoughts on that?
+Yes, I believe that will go to a jury trial in February of March and then we'll
+see what the results are there. But there's like a mountain of evidence that that shows that
+open AI was created as an open source nonprofit. It's literally, that's the exact description
+in the incorporation documents. And in fact, the incorporation documents explicitly say that no officer
+or founding member will benefit financially from Open AI. And they've completely violated that.
+And more of it, you can just use the Wayback machine and look at the website of OpenAI.
+Again, open source non-profit, open source nonprofit, the whole way until, you know, it looked like, wow, this is a, there's a lot of money to be gained here.
+And then suddenly it starts changing.
+And they try to change the definition of Open AI to mean open to everyone instead of open source, even though it always meant open source.
+I came up with the name.
+Yeah.
+That's how I know.
+So if they open sourced it or they gave you, I mean, you don't need the money,
+but if they gave you the percentage ownership in it that you would be rightfully,
+which 50 million for a startup would be half at least.
+But they must have made an overture towards you and said,
+hey, can we just give you 10% of this thing and give us your blessing?
+You obviously have a different goal here, yeah?
+Yeah.
+I mean, essentially, since I came up with the idea for the company,
+named it, provided the A, B, and C rounds of funding,
+recruited the critical personnel,
+and told them everything I know.
+You know, if that had been a commercial corporation,
+I'd probably own half the company.
+So, but, and I could have chosen to do that.
+That, if I, it was totally at my discretion,
+I could have done that.
+But I created it as a nonprofit for the world,
+an open source nonprofit for the world.
+Do you think the right thing to do is to take those models
+and just open source them today?
+If you could affect that change, is that the right thing to do?
+Yeah, I think that that is what it was created to do, so it should.
+I mean, the best open source models right now,
+actually ironically, because Fade seems to be an irony maximizer,
+the best open source models are generally from China.
+Yeah.
+Like, that's bizarre.
+And then I think the second best are, one is, or maybe it's better than second best,
+but like the, the GROC 2.5 open source model is actually very good.
+And I think we'd probably be, and we'll continue to open source our models.
+But whereas, like, try using any of the, the recent,
+so-called the Open AI
+open-source models.
+They don't work.
+They're basically,
+they open-sourced
+a broken,
+non-working version
+of their models
+as a fig leaf.
+I mean,
+do you know anyone
+who's running
+Open AI's open-source models?
+Exactly.
+Yeah, nobody.
+We've had a big debate
+about jobs here.
+Obviously, there's going to be
+job displacement.
+You and I have talked about it
+for decades.
+What's your take on
+the pace of it. Because obviously, you're building soft-driving software, you're building optimists.
+Yeah. And we're seeing Amazon take some steps here where they're like, yeah, we're probably not going to
+hire these positions in the future. And, you know, maybe they're getting rid of people now because
+they were bloated, but maybe some of its AI, you know, it's all debatable. What do you think the
+timeline is? And what do you think as a society we're going to need to do to mitigate it if it goes
+too fast. Well,
+I call AI the supersonic tsunami.
+So,
+not the most competent description in the world.
+But if it was a tsunami,
+a giant wall of water moving fast than the speed of sound, that's AI.
+When does it land?
+Yeah, exactly.
+So,
+now this is happening whether I wanted to or not.
+I actually try to slow down AI.
+from the
+and then
+the reason
+you know
+I
+I
+uh
+the reason I
+wanted to create
+open AI
+was to serve as a counterweight
+to Google
+because at the time
+Google was
+sort of
+essentially had unilateral power
+in AI that all the AI
+essentially
+um
+and um
+and uh
+you know
+Larry Page was not
+um
+you know
+he was not
+taking AI's safety seriously
+I mean, Jason, I'm sure, were you there when he called me a speciest?
+Yes, when it was there.
+Yeah.
+Okay, so.
+You were more concerned about the human race than you were about the machines.
+And, yeah, you had a clear bias for humanity.
+Yes, yes, exactly.
+I was like, Larry, well, like, we need to make sure that the AI doesn't destroy all the humans.
+And then he called me a specious, like racist or something for being pro-human.
+intelligence instead of machine intelligence. I'm like, well, Larry, what side are you on? I mean,
+you know, that's kind of a concern. And then at the time, the Google had essentially a monopoly on
+AI. Yeah, they bought DeepMind, which you were on the board of had an investment in. Larry and
+Serga had invested in as well. And it's really interesting. I thought out about it because I told him
+about it. I showed him some stuff from Deep, from DeepMind. And I think that's how I found out. I found out
+found out about it and acquired them, actually.
+I got to give what I say.
+But the point is that it's like, look,
+now he's not taking AI safety seriously,
+and Google had essentially all the AI and all the computers and all the money.
+And I'm like, this is a unipolar world where the guy in charge is not taking things seriously.
+So, and called me a speciist who being pro-human.
+What are you doing those circumstances?
+Build a competitor.
+Yes.
+So Open AI was created essentially as the opposite, which is an open source nonprofit, the opposite to Google.
+Now, unfortunately, it needs to change its name to close to a maximum profit AI.
+Yeah.
+For maximum profit, to be clear.
+The most amount of profit that you possibly get.
+I mean, it is so, it is like, like I said.
+It's comical.
+And when you hear Sam, when you hear Sam, it's an irony, maximize the episode.
+like what is the most the most ironic outcome for a company that that was created for
+to do open source not at nonprofit AI is it's super closed source it's tighter than
+knocks the open air source is locked up tight in Fort Knox and and and they are going for
+maximum profit like a maximum like get the bourbon the steak knife that you know yeah I mean
+You know, they're going for the buffet.
+And they're just diving headfirst into the profit buffet.
+I mean, it's just, or at least aspiration, the revenue buffet at least, profit will see.
+I mean, it's like ravenous wolves for revenue.
+Revenous.
+Revenue buffet.
+No, no, it's literally like super villain.
+It's like Bond villain level flip.
+Like it went from being the United Nations to being.
+Spector in like James Bondland.
+Yeah.
+When you hear him say, I'm going to, when Sam says it's going to like raise $1.4 trillion
+to build out data centers.
+Yeah, no, but I think he means it.
+Yeah.
+I mean, it's, I would say audacious, but I wouldn't want to, yeah, insult the word.
+Oh, actually, I have a question about this.
+How is that possible?
+In the earnings call, you said something that was insane.
+And then I think the math actually nets up, but you said we could connect all the
+Teslas and allow them in downtime to actually offer up inference and you can string them
+all together.
+I think the math is like it could actually be like 100 gigawatts.
+Is that right?
+If ultimately there's a Tesla fleet that is 100 million vehicles, which I think we probably
+will get to at some point, a hundred million vehicle fleet.
+And they have mostly state of the art inference computers in them that each say are a kilowatt
+a kilowatt of inference computer.
+And they have built in power and cooling and connect to the Wi-Fi.
+That's the key.
+Yeah, exactly.
+Yeah, exactly.
+And you'd have 100 gigawatts of inference compute.
+Elon, do you think that the architecture, like there was an attention-free model that came
+out the last week?
+There's been all of these papers, all of these new models that have been shown to reduce power
+per token of output by many, many, many orders of magnitude.
+not just an order of magnitude, but like maybe three or four.
+Like, what's your view and all the work you've been doing on where we're headed
+in terms of power per unit of compute or per token of output?
+Well, we have a clear example of efficient, power efficient compute, which is the human brain.
+So our brains use about 20 watts of power.
+But, and all that, only about 10 watts is higher brain function.
+Most of it's, you know, half of it is just housekeeping functions, you know, keeping your heart going and breathing and that kind of thing.
+So you've got maybe 10 watts of higher brain function in a human.
+And we've managed to build civilization with 10 watts of a biological computer.
+And that biological computer has like a 20-year, you know, boot sequence.
+But it's very power efficient.
+So given that humans are capable of inventing, you know, general relativity and quantum mechanics and or discovering like inventing aircraft, lasers, the internet, and discovering physics with a 10-watt meat computer essentially, then there's clearly a massive opportunity for improving the efficiency of AI computer.
+it's because it's it's
+it's currently many orders of magnitude away from that
+and it's still the case that
+a 100 megawatt
+or even
+you know a gigawatt
+AI supercomputer at this point
+can't do everything that a human can do
+it will be able to
+but it can't yet
+so but
+we hope but like I say we've got this obvious case
+of
+human brains being very power efficient and achieving and building civilization with 10 watts to compute.
+And our bandwidth is very low.
+So the speed of which we communicate information to each other is extremely low.
+You know, we're not communicating at a terabyte.
+We're communicating more like 10 bits per second.
+So.
+Do you think that there's a...
+That should actually lead to just the conclusion that there is massive opportunity for being more power efficient with AI.
+And at Tesla and at XAI, we're both, we continue to see massive improvements in inference computer efficiency.
+So, yeah.
+You think that there's a moment where you would justify stopping all the traditional cars and just going completely all in on cyber cab if you felt
+like the learning was good enough and that the system was safe enough? Is there ever a moment
+like that or do you think you'll always kind of dual track and always do both? I mean, all of the
+cars we make right now are capable of being a robotaxie. So there's a little confusion of the
+terminology because our cars look normal, you know, like model three or model Y looks, it's a good
+looking car, but it looks normal. But it has an advanced AI computer and advanced AI software
+and cameras.
+And we didn't want the cameras to stick out.
+So we, you know, so that we wouldn't want them to be ugly or stick out.
+So, so, you know, we put them, that's sort of an out-obtrusive locations.
+You know, the forward-looking cameras are in front of the rear-view mirror.
+The side-viewers are in the side-repeaters.
+Oh, the side-view cameras are on the side of peter's.
+The rear camera is, you know, just in the, you know, above the license plate,
+actually typically where the review camera is in a car.
+and the diagonal forward ones are in the B-pillers.
+Like if you look closely, you can see all the cameras,
+but you have to look closely.
+We just didn't want them to stick out like warts or something.
+But actually all the cars we make are hyper-intelligent
+and have the cameras in the right places.
+They just look normal.
+And so all of the cars we make are capable of unsupervised full autonomy.
+Now, we have a dedicated product, which is the cyber cab, which has no steering wheel or pedals,
+which are obviously prestigious in an autonomous world.
+And we saw production of the cyber cab in Q2 next year.
+And we'll scale that up to quite high volume.
+I think ultimately we'll make millions of cybercabs per year.
+But it is important to emphasize that all of our cars are capable of being robotic taxis.
+The cyber cab is gorgeous.
+I told you I'd buy two of those if you put a steering wheel in them.
+And there is a big movement online.
+I'm putting a steering wheel.
+People are begging for it.
+Why not?
+Why not let us buy a couple, you know, just the first ones off the line and drive them?
+I mean, they look great.
+It's like the perfect model.
+You always had a vision for a model two, right?
+Isn't it like the perfect model two in addition to being a cyber cab?
+Look, the reality is people may think they want to drive their car, but the reality is that they don't.
+How many times have you been saying an Uber or Lyft?
+And you said, you know what?
+I wish I could take over from the driver.
+And I wish I could get off my phone and take over from the Uber driver and drive to my destination.
+How many times have you thought that to yourself?
+No, it's quite the opposite.
+Zero times, okay.
+I have the Model Y and it just got 14.
+I have Juniper and I got the 14 one and I put it on Mad Max mode the last couple of days.
+that is
+a unique experience.
+I was like,
+wait a second,
+this thing is driving
+in a very unique fashion.
+Yeah.
+Yeah.
+It assumes you want to get to your destination in a hurry.
+Yeah.
+I used to give cam drivers an extra 20 bucks to do that.
+Medical appointment or something.
+I don't know.
+Yeah.
+But it feels like it's getting very close,
+but you have to be very careful.
+You know, Uber had a horrible accident.
+with the safety driver, Cruz had a terrible accident.
+It wasn't their fault exactly, except, you know, somebody got hit and then they hit the person
+the second time and they got dragged.
+Yeah, yeah.
+You know, there's this pretty high stakes.
+So you're being extremely cautious.
+The car is actually extremely capable right now.
+Yeah.
+But we are being extremely cautious and we're being paranoid about it because to your point,
+even one accident would be headline news.
+Well, probably worldwide headline news.
+Especially if it's a Tesla.
+Like Waymo, I think, gets a bit of a pass.
+I think there's half the country or a number of people probably would, you know, go extra hard on you.
+Yes.
+Yeah, exactly.
+Yeah.
+Not everyone in the press is my friend.
+I hadn't noticed.
+Some of them are a little antagonistic.
+Yeah.
+But people are pressuring you to go fast.
+And I think everybody's got to just take their time with this thing.
+It's obviously going to happen.
+But I just get very nervous that the pressure to put these things on the road faster than they're ready is just a little crazy.
+So I applaud you for putting the safety monitor in, doing the safety driver.
+No shame in the safety driver game.
+It's so much the right decision, obviously.
+But people are criticizing you for it.
+I think it's dumb.
+It's the right thing to do.
+Yes.
+And we do expect it to take, to not have any sort of safety occupant or, or, there's not really a driver that just sits.
+Monitor.
+Safety, safety monitor.
+Just sit.
+They just sit in the car and don't do anything.
+Safety, dude.
+Yeah.
+So, but we do expect that the cause will be driving out without any, any safety monitor before the end of the year.
+So sometime in December.
+In Austin, yeah.
+I mean, you got a number of rapid.
+under your belt in Austin and it feels like pretty well you guys have done a great job
+figuring out where the trouble spots are maybe you could talk a little bit about what you
+learned in the first I don't know it's been like three or four months of this so far
+what did you learn the first three or four months of the Austin experiment actually
+it's gone pretty smoothly a lot of things that we're learning are just how to manage
+a fleet like because you've got to write all the fleet management
+software, right? So yeah. And you've got to write the ride handling software. You've got to
+write, basically the software that Uber has, you've got to write that software. It's just summoning a
+robot car instead of a car with a driver. So a lot of the things we're doing, we're scaling up
+the number of cars to say, say, what happens if you have a thousand cars? Like so we'll, you know,
+we think probably we'll have, you know, a thousand cars or more in the Bay Area by the end of this
+year probably 500 or more in the greater or Austin area and you know if if if you have to you have to make
+sure the cars don't all for example go to the same supercharger right so or don't all go to the same
+intersection it's like what do these cars do and then like sometimes there's a high demand and
+sometimes there's low demand.
+What do you do during those times?
+Do you have the car circled the block?
+Do you have to try to find a parking space?
+The, and then, you know, sometimes like I say, it's a, you know,
+a disabled parking space or something, but the writing's faded or the thing's faded.
+The car was like, oh, look, a parking space will jump right in there.
+Yeah, get a ticket.
+You got to look carefully and make sure it's like, you know, it's not an illegal parking space.
+or it sees a space to park and it's like ridiculously tight
+but it's like I can get in there
+with like you know three inches on either side type of
+bad computer
+yeah but nobody else would be able to get in the car if you do that
+so you know there's just like all these odd wall corner cases
+and um and regulators like regulators
+are all very, yeah, they have different levels of perspicuiness and regulations depending on the city,
+depending on the airport.
+I mean, it's just, you know, very different everywhere.
+That's going to just be a lot of blocking and tackling, and it just takes time.
+Elon, let me ask you another.
+In order to take people to San Jose Airport, like you actually have to connect to San Jose Airport servers
+because you have to pay a fee every time you go off.
+So the car actually has to do a remote call.
+The robot car has to do, you know,
+a remote procedure call to San Jose airport servers to say,
+I'm dropping someone off at the airport and charge me whatever,
+five bucks, which is like, there are all these like quirky things like that.
+Like airports are somewhat of a racket.
+Yeah.
+So that's like, you know, we have to solve that thing.
+But it's kind of funny if the robot car is like,
+calling the server, the airport server, to, you know, charge its credit card or whatever.
+It's like a send a fax.
+Yeah, we're going to be dropping off at this time.
+But it will seem to become extremely normal to see cars going around with no one in them.
+Yeah.
+Extremely normal.
+Just before we lose you, I want to, like, ask if you saw the Bill Gates memo that he put out,
+a lot of people are talking about this memo.
+Like, you know, did, I just want to say, Billy G is not my love.
+Oh, man.
+Like, did, did climate change become woke?
+Did it become, like, woke?
+And is it over being woke?
+Like, you know, like, what happened?
+And what, what happened with Billy G?
+I mean, you know.
+Great question.
+Great question.
+Yeah.
+You know, you think that someone like Paul Gates who clearly started a technology company,
+that's one of the biggest companies in the world, Microsoft, being, you think he'd be really
+quite, you know, strong in the sciences.
+But actually, my, at least direct conversations with him have, he is not strong in the sciences.
+Like, yeah, this is a really, really,
+really surprising. He came to visit me at the Tesla Gigapactory in Austin and was telling me that it's
+impossible to have a long-range semi-truck. And I was like, well, but we literally have them.
+And you can drive them. And Pepsi is literally using them right now. And you can drive them yourself or send someone.
+Obviously, Boggastonk has not a drive himself. But you can send a trusted person to drive the truck.
+and verify that it can do the things that we say it's doing.
+And it's like, no, no, it doesn't work.
+Doesn't work.
+And I'm like, okay, I'm like kind of stuck there.
+Then it's like, well, so it must be that you disagree with the watt hours per kilogram
+of the battery pack so that you must think that perhaps we can't achieve the energy density
+of the battery pack or that the what hours per mile of the truck is too high.
+and that when you combine those two numbers, the range is low.
+And so which one of those numbers do you think we have wrong?
+And what numbers do you think are correct?
+And he didn't know any of the numbers.
+And I'm like, well, doesn't it seem that it's perhaps, you know,
+premature to conclude that a long-range semi cannot work
+if you do not know the energy density of the battery pack
+or the energy efficiency of the truck chassis?
+Hmm.
+Hmm.
+Hmm.
+But, yeah, he's now taken a 180 on climate.
+He's saying maybe this shouldn't be the top priority.
+Climate is gay.
+It's just, yeah.
+Why would he say climate is gay?
+That's wrong.
+It's totally retarded.
+Well, gay, so the climate is gay and retarded.
+Come on.
+I, maybe he's got some data centers.
+He's got to put up.
+Does he have to stand up a data center for Sam Malmant or something?
+I don't know.
+what is Azure?
+No.
+It changed this position.
+I can't figure out why.
+I mean,
+you know, I mean, the reality of the whole climate change thing is, is that the, you know,
+you've just had sort of people who say it doesn't exist at all.
+And then people who say it's are super alarmist and saying, you know,
+Rar is going to be underwater in five years.
+And obviously, neither of those two positions are true.
+the reality is you can measure the common concentration in the atmosphere again you can just
+literally buy a CO2 monitor from Amazon it's like 50 bucks and you can measure it yourself and you know
+and you can say okay well look the the the the POS per million of CO2 in the atmosphere has been
+increasing steadily at two to three per year at some point if you continue to take
+to take billions,
+especially trillions of tons of carbon
+from deep underground
+and transfer it to the atmosphere and oceans.
+So you transferred from deep underground
+into the surface cycle, you will
+change the chemical constituency of the
+atmosphere and oceans, just
+that you just literally will.
+Then you can only,
+then now you can say argue to what degree and over what time scale.
+And the reality is that, in my opinion,
+is that we've got at least 50 years
+before it's a serious issue.
+I don't think we've got 500 years, but we've probably got 50.
+It's not five years.
+So if you're trying to get to the right order of magnitude of accuracy,
+I'd say the concern level for climate change is on the order of 50 years.
+It's definitely not five, and I think it probably isn't 500.
+So really, the right course of action is actually just the reasonable course of action,
+which is to lean in the direction of sustainable energy.
+and lean in the direction of solar and sort of a solar battery future.
+And generally have the rules of the system lean in that direction.
+I don't think we need massive subsidies,
+but then we also shouldn't have massive subsidies for the oil and gas industry.
+Okay.
+So the oil and gas industry has massive tax write-offs.
+They don't even think of as subsidies because these things have been in place for, in some cases, 80 years.
+But they're not there for other industries.
+So when you've got special tax conditions that are in one industry and not another industry, I call that a subsidy, obviously, it is.
+But they've taken up for granted for so long in oil and gas that they don't think of it as a subsidy.
+So the right course of action, of course, is to remove, in my opinion, to remove subsidies from all industries.
+But the political reality is that the oil and gas industry is very strong in the Republican Party, but not in the Democratic Party.
+So you will not see, obviously, even the tiniest subsidy being removed from the oil, gas and coal industry.
+In fact, there were some that were added to the oil, gas and coal industry in the sort of big bill.
+And there were a massive number of sustainable energy incentives that were removed.
+which I agreed with, by the way.
+Some of the incentives have gone too far.
+But anyway,
+the actual, I think,
+the correct scientific conclusion, in my opinion,
+and I think we can back this up with solid reasoning,
+ask Grock, for example,
+is that we should
+lean in the direction of moving
+towards a sustainable energy future,
+We will eventually run out of oil gas and coal to burn anyway because it's a finite,
+there's a finite amount of that stuff.
+And we will eventually have to go to something that lasts long time that is sustainable.
+But to your point about the irony of things, it seems to be the case that making energy
+with solar is cheaper than making energy with some of these carbon-based sources today.
+And so the irony is, it's already working.
+I mean, the market is moving in that direction.
+and this notion that we need to kind of force everyone into a model of behavior,
+it's just naturally going to change because we've got better systems.
+You know, you and others have engineered better systems that make these alternatives cheaper
+and therefore they're winning.
+Like they're actually winning in the market, which is great.
+But they can't win if there are subsidies to support the old systems, obviously.
+Yeah, I mean, by the way, there are actually massive disincentives of Postphalo
+because China is.
+a massive producer of solar panels that doing China does an incredible job of solar
+manufacturing of solar panel manufacturing really incredible they have one and like
+roughly one and a half terawatts of solar production right now and they're only using a
+terawatt per year by the way that's a gigantic number the the the average US power
+consumption is only half a terawatt so just think about that for a second China is
+China's solar panel production max capacity is one and a half terawatts per year.
+U.S. steady state power usage is half a terawatt.
+Now, you do have to reduce, you say to produce one and a half terawats a year of solar,
+you need to add that with batteries, taking to account the differences between night and day,
+the fact that the solar panel is not always pointed directly at the sun, that kind of thing.
+So you can divide by five-ish to say that, but that's still a number.
+means that China has the ability to produce solar panels that have a steady state output
+that is roughly two-thirds out of the entire use economy from all sources, which means that
+just with solar alone, China can in 18 months produce enough solar panels to power the
+entire United States or the electricity of the United States.
+What do you think about near-field solar, aka nuclear?
+I'm in favor of, look, make energy from any way you want.
+That doesn't, that doesn't like obviously harmful to the environment.
+Generally, people don't welcome a nuclear reactor in their backyard.
+They're not like championing.
+Put it here.
+Put it under my bed.
+Put it on my roof.
+If you're next door neighbor said, hey, I'm selling my house and they're putting a reactor there.
+Well, you know, the typical homeowner response will be negative.
+Very few people will embrace a nuclear reactor adjacent to their house.
+So, but nonetheless, I do think nuclear is actually very safe.
+There's a lot of scaremongering and propaganda around fission.
+If you're talking about fission, but fission is actually very safe.
+They obviously have this on, you know, the Navy, U.S. Navy has this on submarines and aircraft carriers and with people really working right.
+I mean, the submarine is a pretty crowded place and they have a nuclear-powered submarine.
+So I think vision is fine as an option.
+The regulatory environment makes it very difficult to actually get that done.
+And then it is important to appreciate just the sheer magnitude of the power of the sun.
+So here's some just important basic facts.
+Even Wikipedia has these facts right.
+You know, so you don't even have to you go to Rockpedia, get the best answer, but even Wikipedia has.
+Yeah, even Wikipedia got it right.
+Yes, yes.
+I'm saying, what I'm saying, even Wikipedia has got these facts, right?
+The Sun is about 99.8% of the mass of the solar system.
+Then Jupiter is about 0.1%.
+and everything else is in the remaining 0.1%.
+And we are much less than 0.1%.
+So if you burnt all of the mass of the solar system,
+then the total energy produced by the sun
+would still round up to 100%.
+If you just burnt Earth, the whole planet,
+and burnt Jupiter, which is very big
+and quite challenging to burn.
+You know,
+Jupiter into thermonuclear active.
+It wouldn't matter.
+The sun, compared to the sun,
+the sun is 99.8% of the mass of the solar system
+and everything else is in the miscellaneous category.
+So, like basically, no matter what you do,
+total energy produced in our solar system
+rounds up to 100% from the sun.
+You could even throw another Jupiter in there.
+So we're going to snag a Jupiter from somewhere else and somehow I'll teleport.
+You could teleport two more Jupiters into our solar system, burn them,
+and the sun would still round up to 100%.
+As long as you're at 99.6%, you're still rounding up to 100%.
+Maybe that gives some perspective of why solar is really the thing that matters.
+And as soon as you start thinking about things at sort of a grander scale, like Kaudershev scale to civilizations, it becomes very, very obvious.
+I'm not saying anything that's new, by the way.
+Like anyone studies physics has known this for, you know, a very long time.
+In fact, Kaudershiv, I think was a Russian physicist who came up with this idea, I think, in the 60s, just as a way to classify civilizations.
+where
+Kotashev scale 1 would be
+you've used
+you've harnessed most of the energy
+of the planet
+Kada Shep scale 2 you've harnessed most of the energy
+of your sun
+Kaudership 3 you've harnessed most the energy of galaxy
+Now we're only about
+I don't know
+1% or a few percent
+of Kotashev scale 1
+right now
+optimistically
+so
+but as soon as you go to Kada Shep
+scale two where you're talking about the power of the sun, then you're really just saying,
+um, everything is solar power and and and and the rest is in the noise. Um,
+and, um, yeah. So like the, you know, like the sun produces about a billion times or
+call it well over a billion times more energy than everything on earth combined.
+It's crazy.
+It's mind-blown.
+Right.
+Yeah.
+Yeah, solar is the obvious solution to all this.
+And yeah, I mean, short term.
+Yeah.
+We have to use some of these other sources.
+But hey, there it is.
+An hour and a half with the Elon Musk.
+Star powered.
+Like maybe we've got a branding issue here.
+Yeah.
+Star power.
+Instead of solar power, it's starlight.
+Yeah, starlight.
+Perfect.
+It's the power of a blazing sun.
+How much energy does an entire star have?
+Yeah.
+More than enough.
+More than enough.
+All right.
+And also, you really need to keep the power local.
+So sometimes people, honestly, I've had these discussions so many times.
+It's where they say, would you beam the power back to Earth?
+I'm like, do you want to melt Earth?
+because you would melt Earth
+if you did that.
+We'd be vaporized in an instant.
+So you really need to keep the power local,
+you know, basically distributed power.
+And I guess most would reuse for intelligence.
+So it's like the future is like a whole bunch of solar powered AI satellites.
+But Elon, the only thing that makes the star work is it just happens to have a lot of mass.
+So it has that gravity to ignite the fusion.
+to ignite the fusion reaction, right?
+But like, we could ignite the fusion reaction on Earth now.
+I don't know, like, if your view has changed.
+I think we talked about this a couple of years ago
+where you were pretty like,
+we don't know if or when fusion becomes real here.
+But theoretically, we could take like 10.
+No, I want to be careful.
+My opinion on, so, you know,
+I started physics of physics in college.
+At one point in high school, I was thinking about a career in physics.
+One of my sons actually is doing a career in physics.
+But the problem is, I came to the conclusion is that I'd be waiting
+for a collider or a telescope.
+I don't have any to get that collater of a career in physics,
+but I have a strong interest in the subject.
+So my opinion on, say, creating a fusion reactor on Earth
+is I think this is actually not a hard problem.
+Actually, I mean, it's a little hard.
+I mean, it's not like totally trivial.
+But if you just scale up at Tokamak,
+the bigger you make it, the easier the problem gets.
+So you've got to say, you've got to
+surface-to-volume ratio thing where you're trying to maintain a really hot core while having
+a wall that doesn't melt. So that's a similar problem with rocket engines. You've got a super hot
+core in the rocket engine, but you don't want the walls, the chamber walls of the rocket engine to melt.
+So you have a temperature gradient where it's very hot in the middle and it gradually gets cold
+enough as you get to the perimeter, as you get to the, you know, the chamber walls in the rocket engine
+where the, it doesn't melt because you've lowered the temperature and you've got a temperature
+gradient. So just if you just scale up, you know, the donut reactor, Tokomok and improve your
+surface volume ratio, it becomes much easier. And you can absolutely, in my opinion,
+I think just anyone who looks at the math, you can make a reactor that generates more energy than it consumes.
+And the big you make it, the easier it is.
+And in the limit, you just have a giant gravitationally contained thermonugly reactor like the sun.
+So, which requires no maintenance and it's free.
+So this is also why why would we bother doing that on making a little itty-bitty-bitty
+that so microscopic you'd barely notice
+on Earth
+when we've got the giant free one in the sky.
+Yeah, but we only get a fraction of 1%
+of that energy on the planet Earth.
+We have to go...
+Much less 1%.
+Yeah.
+Right, so we've got to figure out
+how to wrap the sun
+if we're going to harness that energy.
+That's our longer...
+Look, if people want to have fun with reactors,
+you know, that's fine,
+have fun with reactors.
+But it's not a serious endeavor
+compared to the sun.
+You know, it's sort of a fun science project to make a nuclear reactor, but it's not,
+it's just penis compared to the sun.
+And even the solar energy that does reach Earth is a gigawatt per square kilometer or roughly,
+you know, called two and a half gigawatts per square mile.
+So that's a lot, you know.
+And the commercially available panels are around 20.
+almost 26% efficiency and maybe, you know,
+and then you say like if you pack it densely,
+you get an 80% packing density,
+you're gonna, which I think you know,
+you've got a lot of places you could get an 80% packing density.
+You effectively have about, you know,
+200 megawatts per square kilometer.
+And you need to pair that with batteries
+so you have continuous power.
+Although our power usage,
+drops conservatively at night, so you need less batteries than you think.
+And doesn't the question then become...
+A rough way to...
+Maybe an ECM to remember is a gigabyte hour per square kilometer per day,
+is a roughly correct number.
+But then doesn't your technical challenge become the scalability of manufacturing of those
+systems?
+So, you know, accessing the raw materials and getting them out of the ground of planet Earth
+to make them, to make enough of them,
+to get to that sort of scale on that volume that you're talking about.
+And if you kind of think about what it would take to get to that scale,
+like, do we have an ability to do that with what we have today?
+Like, can we pull that much material out of the ground?
+Yes, solar panels are made of silicon, which is sand, essentially.
+And I guess more on the battery side, but.
+Oh, the battery side, yeah.
+So the battery side, you know, like iron phosphate lithium-on battery cells,
+I'd like to throw out some interesting factoid here.
+Most people don't know if you said,
+as measured by mass, what is the biggest element?
+What is Earth made of as measured by mass?
+Actually, it's iron.
+Iron, yeah.
+Yeah, we're, I think, 32% iron, 30% oxygen,
+and then everything else is in the remaining percentage.
+So we're basically a rusty bowl bearing.
+That's Earth.
+And with, you know, a lot of silicon at the surface in the form of sand.
+And the iron phosphate, so iron phosphate lithium ion cells, iron, extremely common, most common element on Earth, even in the crust.
+And then phosphorus is also very common.
+And then the anode is carbon, but also very common.
+And then lithium is also very common.
+So there's actually, you can do the math.
+did the math and published it, published the math, but never you looked at it. It's on the Tesla website
+that shows that you can completely power Earth with solar panels and batteries, and there's no
+shortage of anything. All right. So on that note, yeah, go get to work, Elon and just power the
+earth while you're getting implants into people's brains and satellites and other good fun stuff.
+Good to see you, buddy. Yeah, good see you guys. Yeah. Yeah.
+Stop by any time.
+Thanks for doing this.
+You got the Zoom link.
+Stop by any time.
+Thank you for coming today and thank you for liberating free speech three years ago.
+Yeah.
+That was a very important milestone.
+And I see all you guys are in just different places.
+I guess this is a very virtual situation.
+Always been that.
+I'm at the ranch.
+Are you ever in the same room?
+We try not to be.
+Only when we do that summit, but otherwise we do the summit.
+We do the summit.
+Yeah.
+Otherwise.
+The Summit is pretty fun.
+We've waited a great time
+recounting SNL sketches that didn't
+make it. Oh, God, there's just
+so many good ones.
+I mean,
+we didn't even get to the Jeopardy ones.
+Yeah, yeah.
+Those were so offensive.
+Oh, wait.
+Well, I think we skipped a few that would have
+dramatically increased our probability
+of being killed.
+We can take this one out.
+Boys, I love you.
+I love you.
+I love you all. I'm going to poker.
+Later.
+Take care.
+Later.
+All right.
+Thanks.
+Bye.
+Bye.
+Love you.
+Thank you.
+Rain Man, David Sack.
+We've been sourced it to the fans and they've just gone crazy with it.
+Love U.S.
+The queen of kind of attention.

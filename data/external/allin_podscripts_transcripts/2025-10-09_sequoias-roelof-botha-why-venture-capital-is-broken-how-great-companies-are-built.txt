@@ -1,0 +1,547 @@
+source: allin_podscripts
+published_date: 2025-10-09
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/sequoias-roelof-botha-why-venture-capital-is-broken-how-great-companies-are-built
+title: Sequoia’s Roelof Botha: Why Venture Capital is Broken & How Great Companies Are Built
+
+Sequoia is the most sought-after name in the venture capital business.
+The firm has made over a thousand investments now worth in the trillions in public market value.
+There's a list of five VCs who I think can really transform a company and you're one of those five.
+When I joined Sequoia, it was clear that if I wanted to make it as a partner, you needed to produce meaningful games.
+YouTube, Instagram, where this is a list of amazing, amazing startups.
+Our ambition is to build a partnership that endures, and that means we need to leave it in a better place than we found it.
+Ladies and gentlemen, please welcome Sequoia Capitals Roloff Botha.
+See you.
+How are you? Good to see you.
+Welcome.
+Roll off.
+When did Sacks go?
+What's that?
+When did Sacks go?
+He had to pee-pee.
+He had to make a wee-week.
+Come on.
+Yeah, exactly.
+You guys did work together.
+Like 25 years ago.
+And he just abandoned us right now.
+He's had enough of you.
+Everybody wants to know who's your favorite Sequoia Scout of all time.
+Let's go through it.
+Jason Galicanus.
+It is hilarious when you think about it.
+You came to me, gosh, 15 years ago and you said I have an idea for a program.
+It's called Sequoia Scouts.
+We'd like to have you go around and invest in some companies.
+No good deed shall go unpunished.
+Absolutely.
+It created a monster.
+But that program...
+Sorry, before you ask you question,
+how far are you going to insert your head up Rolloff's ass?
+We sat up that far away for a reason.
+I mean, sorry, bro.
+Jesus Christ.
+Go on with your quenkin.
+Let me land the question.
+What's your question?
+That program had some, that first cohort of individuals wound up being a pretty interesting
+group of folks.
+Maybe you can tell everybody just a little bit about that program you conceived of, and then
+who were some of the first folks in it and the first investments?
+We conceived of this program, as you mentioned, in 2010 when we launched it, and the idea
+was that there were a bunch of contemporary founders who had very interesting access to
+up-and-coming founders who were turning to them for advice, but these founders didn't yet have
+money. At the point that you became a scout, you didn't have the net worth you have now, where
+you could write a check on your own. And so we thought it would be a great program for us to
+provide the capital for founders like yourself to be able to invest in those companies, and
+hopefully we'd get an introduction to those companies for us to be able to make an investment
+too. So you were in that program, you helped us with the investment in Uber, Sam Altman was
+in that group as well. He helped with an investment in a little company
+called Stripe. They did okay. So at this point, that fund is a 26x fund at this point.
+Wow. That's up there in the... It's pretty good. What's the best fund in the history of Sequoia,
+whether the Google Fund, the WhatsApp Fund, which one has the highest multiple in history?
+The highest multiple in history is, I think Venture 12, which has Airbnb, Dropbox, Naterra,
+ad mob and a couple of other companies. And then Venture 13, which is the fund right after that,
+has Stripe and Square, now called Block, MongoDB, and a bunch of other companies. So those were both
+north of 20X funds. Tell us about the venture industry, actually. So we're at a point in the cycle
+where there's been a lot of specialization, both maybe at the stage level, at the sector level.
+There's been all kinds of experimentation and approaches and strategy. Can you just level set on
+what you've learned
+and what the industry has learned and where we are?
+I'm glad you called it an industry not an asset class.
+I listened to one of the shows you guys had recently
+and I think there's a huge problem with the venture industry
+that there's too much money.
+You guys have talked about this before.
+Venture industry as a whole invests right now
+between $150 to $200 billion a year
+was the last number as I saw.
+If you think about reasonable assumptions for returns,
+it's just a 12% per annum net,
+which isn't great.
+might as well invest in an index fund.
+The math basically implies that you need three and a half to four X funds
+to make that math work over a reasonable time frame.
+So if you're investing, let's just say $200 billion a year.
+The industry needs to give back $700,000 a year.
+VCs don't own 100% of the company last time I checked.
+So that means that the aggregate exit value is north of a trillion a year.
+So Figma went public recently, they're worth $25, $26 billion.
+You need 40 Figmas a year.
+for the industry to make the returns work,
+which means that they don't.
+So, in my opinion, investing in venture
+is a return-free risk.
+You shouldn't.
+They're basically only about 20 companies...
+You said return-free risk.
+Exactly.
+If you look at every single decade,
+there are only about 20 companies
+that end up getting exit values
+north of a billion dollars.
+Actual IPOs are M&As north of a billion,
+not the paper write-ups.
+Only 20 companies.
+More money doesn't create more great ideas.
+or more great founders.
+So I think there is way too much money in the industry.
+The industry does provide a lot of value.
+It provides some of the know-how
+for entrepreneurs to succeed
+and obviously leads to job creation
+and all the attendant benefits for America.
+But there is too much money
+and too many people want to be investors.
+How does the money get level set then
+and right-sized for what is needed?
+I've been wondering that for 20 years.
+This problem is a problem 20 years ago.
+It has only gotten to us.
+Well, it's an incredibly sexy asset class.
+I mean, look, Jason writes a best-selling book.
+it doesn't, you know, dissuade people.
+It incentivizes more people to say, oh, I can try this, I'll be like it.
+I mean, it's just a self-fulfilling prophecy.
+The more successes there are, there's just a...
+Yeah, everybody wants to go to Vegas and, you know, strike it rich.
+It doesn't happen.
+Yeah.
+That's part of the dynamic is that you get a firm that has one success in their fund,
+and then they attract more capital because people think it's repeatable, and it's not.
+And you don't know that until fund three or four.
+Like, often they raise fund three before they've even...
+They've raised fund two, three, four, and five before even Fund One is really fully distributed after the times.
+So what could change?
+One of the things that I thought was transparency, but nobody wants to publish their returns.
+You could publish your returns.
+I published my returns, but, you know, I'm not taking outside capital, but would that help?
+Like, is it working with people like Cambridge so that these things become more public and more understood?
+It seems like there's an education element here that's missing on behalf of the industry to the potential LPs.
+I think people will still hide behind the J-Curve effect.
+And they would say, yeah, my fund is only at 1.5x right now, but it's only four years in,
+and the winners are going to emerge.
+And so I think this hope springs eternal dynamic and such a long time period of gestation
+before the companies get realized that I don't think that will change that dynamic, unfortunately.
+There's also been this really interesting effect where it's been this industrialization of venture capital,
+I will call it.
+So if you look at the organization that Andresen has built,
+the organization that General Catalyst has built.
+It's about this girthiness, right, across many different things.
+How has Sequoia reacted when they've seen those movements?
+And I'm sure you've had to sit down as a partnership and say,
+are we matching this? Are we copying this?
+Are we going to do the same thing?
+Are we doing something different?
+That's a great question.
+The industry has changed a lot since I got into venture just over 20 years ago.
+If you go back to the proverbial 1990s venture firm,
+it was a dozen people sitting around a table making investment decisions
+with very lightweight staff.
+And it was much more of a cottage industry.
+I think the industry is professionalized.
+And really the founders are the ones who benefited from it
+because all these firms have built larger operating teams
+to be able to help those founders with talent, with go-to-market.
+And so I think it's really helping founders.
+That's probably the main takeaway I have from that.
+We've decided to not build as big an organization.
+Most of the operating teams we have at Sequoia help us.
+So we have about as many developers at Sequoia
+as we have investors, and they're building products for us
+so that we are much more effective and productive
+than we might have been 20 years ago.
+What's an example of that that they're building for you?
+So, you know, on my phone, I can pull up an app
+that if you give me any company name,
+I'll be able to tell you who my team lost met it,
+how we rated it, I'll give you data on what's happening with their hiring,
+how many vouched employees they have,
+how good do we think their engineering team is based on their history,
+their academic profiles, et cetera,
+all this information is at my fingertips.
+If we get business plan submissions,
+we have an AI system that will summarize it for me,
+so I get a very quick read on the company,
+a quick summarization of the quality of the team,
+and a very quick analysis of the competitive dynamics
+and the other companies I should consider alongside them.
+So these are just small examples of the things we do.
+We just had Joe Tsai on.
+We're talking a bit about the relationship between America and China.
+You had a fabulous business in China for two decades, I believe.
+With Neil, yeah.
+And it did absolutely fantastic.
+But then the government of the United States said,
+hey, we cannot, as venture capitalists, invest in China anymore.
+So what's your take on the opportunity in China?
+Will that return?
+And just the experience you had with all those incredible hits at the time.
+When we first went into China, it was 2007, I think.
+The world was flat.
+It was the moniker at the time.
+China gained admission to the World Trade Organization in, I think, 2001.
+and we all believe that it would integrate into the global economy.
+That premise proved wrong.
+And so we had a period where it was really interesting
+to be able to share knowledge and share ideas
+and sort of figure out how we can build a globally interconnected
+set of systems and companies.
+And life just got too hard for that, honestly.
+And we saw just more division between the two countries.
+So we embarked on global separation just over two years ago.
+And what used to be Sequoia China is now an independent business
+called Hongshan.
+and they're off to the races.
+I think there's a real challenge in China right now.
+Some static card recently, in 2018, there were 51,000 companies started in China.
+In 2023, it was 1,200.
+Wow.
+How many?
+1,200.
+You had a 98% reduction in the number of companies founded in China.
+Because if you're an entrepreneur in China, why would you want to start a company
+when the government regulations are so uncertain?
+which, by the way, is an interesting warning sign for me for us in America as we think
+about AI policy and AI regulation, the more uncertainty we create for founders, the more
+difficult it is for them to actually take that risk, take that leap to start a business.
+But Chinese entrepreneurship is still strong, so you see many Chinese entrepreneurs now operating
+in Latin America, they move to Singapore, they're in Japan, they're moving to Europe.
+I mean, you can't repress that spirit.
+Rolf, there's an interesting dynamic that I observed, which is you have the early, early
+stage venture companies who've had an incredible track record, you guys, benchmark, Kozla.
+And then what happens is you have these late stage firms, but many of the companies that they
+fund need so much money that the late stage firms can't service them. So you have to go direct.
+You go right to Saudi, you go right to the Qataris, you go right to the Emirates, you go right
+to Norway, you know, these sovereign wealth funds that are writing these big checks. And so it creates
+this really weird dynamic where you almost become this kind of glorified placement agent almost.
+So there's this part of the curve and then there's all this money that goes over here.
+How do you adapt the business in the face of that dynamic?
+Well, we stick to our knitting. The funds we operate today, our seed venture and growth funds
+today are no bigger than they were five, six, seven years ago. We realize that there's money
+to be made for some people writing very large checks and very late stage companies, but
+our aspiration is to be the number one investment manager for our limited partners.
+We literally want to be the best net IRR and net multiple for our LPs.
+And we're not interested in maximizing fees or maximizing share of industry value creation.
+That's the game we've chosen to play.
+And so there's no path where Sequoia, for example, tries to go public or take the, you know,
+that's like it's just not in the strategy of the business.
+No, actually, we've structured ourselves to be a private partnership in perpetuity to the extent
+possible under California law.
+We have the sense of stewardship at Chukhoea.
+You have to leave the partnership in a better place than you found it.
+Don Valentine didn't call it Valentine Ventures when he started it.
+He handed the partnership over to a next generation with Mike Moritz and Doug Leone and Jim Gets.
+And, you know, we're now part of a third generation, our team currently running the partnership.
+We didn't have to pay to get the partnership from the previous generation and nor will we charge
+the next generation.
+That's our motto.
+How would you describe the culture that's driven the success roll off?
+So when you select partners, what do you look for?
+How do you value those partners?
+How do you assess the performance of those partners?
+And how do you guys operate that kind of defines the culture?
+So I think the probably most important characteristic we look for is an insatiable curiosity in the individual.
+We look for people who are extremely driven, but they need to have a heart of gold.
+So one of the things we talk about at Sequoia is we cherish individualism and teamwork.
+You need an individual to be able to have a keen insight and propose an investment, but
+you've got to work with a team, and that whole teamwork aspect is really important for us.
+So when we make investment decisions at Sequoia, it's a consensus decision, which blew my mind
+when I first got there.
+It's okay, meaning everybody has to agree?
+Everybody has to agree.
+So if one person says no, it doesn't happen.
+Correct.
+So one person can veto an investment.
+Correct.
+And that happens often?
+It has.
+Sometimes it was a good decision and sometimes not.
+What's the worst?
+Well, what do the statistics tell you?
+What's the worst thing somebody killed?
+Oh, geez.
+It's okay.
+We're all friends here.
+What is that list called when you have that?
+You would call it your anti-portfolio.
+Anti-portfolio.
+But in this case, somebody maybe had consensus.
+It wasn't just an anti-portfolies.
+Like, everyone agreed we should do it except the one.
+Yeah, and so you think about that responsibility.
+And it weighs.
+on people. But it means that you need to show up with your best game every single day.
+And part of what we've done is we look at the vote distribution these days. And look, if somebody
+shows up and everybody's really positive, there are a bunch of people that are eight,
+nines out of ten, and there's one person who clearly woke up in a bad mood and is a three,
+you know, at some point that person will probably say, listen, maybe I just don't get it.
+This actually happened to me. We listened to a company in late November. This company
+is thriving right now. They're in the, pretty saxism here because this company's benefiting from
+stable coins with the Genius Act that he helped put in place. It's really benefiting from
+that. And I didn't quite get this company at the time. And I was the only person who was
+below the line. And I said, listen, there's something I'm missing in this particular
+company. I think we should proceed with the investment, even though my intuition walking
+in was that we shouldn't. And I'm really glad that we proceeded. So can you tell us about
+the holding company transition that you underwent and the role of being a venture capitalist
+in making an exit decision? So we did this conversation on the show a few weeks ago.
+go, pulled up some analysis. The biggest winners continue to compound as public companies.
+99% of the returns are as a public company or whatever it is. So it looks like an amazing
+exit goes public. But that's not the end of the value creation. True compounders compound
+for decades, especially founders are still in the seat. Amazon, Nvidia was a Sequoia investment,
+I think. Google. I mean, these are multi-trillion dollar companies that if you guys held your
+position to today, I'm assuming things would look a little bit different. It would.
+yes. So we backed
+a bunch of very interesting companies over our 50
+years. The companies in which
+we were private investors, when they were little
+companies, today
+account for over 30% of the total
+value of the NASDAQ.
+Wow.
+You said 30%. Over 30% of the combined
+value of the NASDAQ. Apple,
+Cisco, Nvidia, Google,
+Palalternateworks Service Now.
+I mean, the list goes on.
+Pretty good.
+So one of the things
+things we realized, what you're alluding to is in
+2022, we launched something called the Sequoia
+Capital Fund. And so we realized that
+the great companies continue to compound, as you
+talked about in that episode, it was
+an excellent episode, obviously.
+And by the way, even in more recent
+memory, if you look at the last 10-ish
+years, Palo Alto Service Now,
+HubSpot, MongoDB, these
+companies have all been 10xers
+as public companies.
+And so we've realized that when we distribute
+shares prematurely to LPs,
+they don't know any better because, you know, they're on a
+big endowment, they suddenly get $5 million worth of company ABC that aren't any better,
+they sell the shares. So what we've decided to do is for the companies that we believe
+have the ability to compound longer term, we have a different fund structure. And so 6, 12, 18 months
+after the IPO, we can move those shares into this fund called the Sequo Capital Fund. And this
+now becomes the vehicle through which we fund all our next underlying investment vehicles.
+Now, to give you a sense, since we launched this three and a half years ago, we've accumulated
+another 6.7 billion in gains by doing nothing except being patient.
+6.7 billion dollars in gains that our LPs would not have seen if we had just distributed
+those shares outright.
+You're making a moan.
+He's moaning.
+I like it.
+I'm getting, I'm getting warm.
+So the counterargument is, as a public company, you as venture capitalists who are
+excellent at interrogating early stage technology, early stage metrics, founder personality,
+all the things that might make a good venture capital investor.
+Maybe as a public company, quarter to quarter, are they growing 12%, 14%.
+There's a different analytical skill set, some might argue, like, you know, that belongs
+in that investment domain and, frankly, very hard to beat the indices doing that.
+What's the argument to be made to the counter, and why would you counter that argument?
+So, see, one of the things for us is that, I mean, most of these cases, we're involved
+of these companies literally at inception.
+I mean, Palo Alto Networks was incubated inside our office
+with one founder and my partner, Jim Gitts.
+So we've known these companies since the earliest of days.
+Why should that relationship end at the IPO?
+And in most of these cases, as you pointed out,
+the founders are still there,
+and there's so much more innovation taking place.
+Jack Dorsey's, one of Jack Dorsey's favorite quotes to me
+was, companies have multiple founding moments.
+And so when you're in a company where the founder
+keeps reinventing the business. In a company like Square, half the revenue today comes from
+a product called Cash app that hadn't launched for the first five years in the company's
+life. And so if you can find these companies, these special companies, the founders, keep
+pushing the boundary on innovation, and they are relentless, then it works. Google buying YouTube.
+Don't remind me. Do you think it would have been the same? Would YouTube still have had the same
+outcome if it wasn't acquired by... And to be clear, Ruloff wrote in his first year or two at the
+company, the deal memo to invest in YouTube, and it got bought for $1.6 billion.
+It was a standalone business today. It would be worth $400,000, $500 billion.
+And then Google then invested quite significantly in infrastructure and enabling
+scalability and building out a team, building out an ad revenue system, et cetera.
+We've got Neil here tomorrow to talk about the current state of YouTube.
+But do you think it could have taken the same? It's hard to say.
+It's hard to say. I think a lot of credit should go to Google.
+Google for the way that they managed YouTube after the acquisition, both in the resources that provided, the leadership, and they've enabled it to thrive.
+So one of my favorite things that Peter Thiel says is, you know, when you make it, when an acquisition like this happens, one side was orders of magnitude off.
+Like it was just a zero or it was 100 more than what they paid.
+Something is always off anyway.
+Don Valentine, the founder of the firm, drew a four quadrant chart at one point to explain
+the founders that perform extremely well in terms of returns.
+Maybe you could explain that to the audience.
+Yes, Don pulled me aside in the early days when I joined Sequo and he said,
+two by two matrix, people are exceptional, not exceptional, easy to get along with,
+not so easy to get along with.
+Rolf, we normally make money in one of those four quadrants.
+Your job is to figure out which one.
+And it's the exceptional people.
+who are not so easy to get along with.
+So then, let's talk about the next generation.
+I'm sorry, can we just double-click on that?
+Why do you think that is?
+These people change the world.
+They don't take no for an answer, right?
+Why does that make them hard to get along with, for saying?
+Well, I think he was saying that a little bit tongue-in-cheek, right?
+But this is a guy who backed Steve Jobs when Steve would walk around Sand Hill Road without shoes.
+He'd come back from a trip to India.
+Allegedly he didn't smell too great.
+And he was unusual, and nobody wanted to back.
+And, you know, Don wanted to find these underdogs, these unknown...
+Atari.
+Well, apparently some of the Atari board meetings took place in hot hubs.
+Yes.
+By the way, that's how we got to Steve, because Steve had worked at Atari.
+That's how Don got the introduction to Steve.
+So I think part of the point he was trying to make is don't look for the people that, you know,
+went to all the right schools and where the right clothes, all the conventional stuff.
+Founders are unconventional.
+These people change the world.
+I mean, most of us encounter challenges every day.
+single day and we accommodate. You know, this thing isn't quite to your liking, you adapt. Founders
+don't. Founders see things and go, hmm, I think the world can look different. And then they're
+going to try to fix it. They just don't take no for an answer. So let's fast forward to your two
+mentors, Michael Moritz and Doug Leone, two very different characters. When the story gets told,
+maybe a rivalry there between the two of them. What did you learn from each? Sure. From Doug,
+I learned hard.
+unpack it
+Doug has an incredible heart
+when did you see that most
+what was the moment that's coming to your mind right now
+that you probably shouldn't talk about
+well I'll give you two examples
+one was in 2009 when I was in a funk
+I nearly quit the business
+I didn't know this really
+but we'd had the YouTube was a great success
+and I felt very good about that
+and then you in venture after a few years
+you walk through the valley of despair
+and you start to realize the things
+you should have invested in that you didn't and the lemons start to drop the things
+that you did invest in that are not working out so yes there was the one great
+quick exit but then a bunch of other things and I was really having a lot of
+self-doubt and Doug showed up at my house with a homemade pesto jar and he
+didn't need to it was on a Saturday afternoon he knocks on my door who's this
+person at my house and he just wanted to tell me that he was there to support
+me through this dark period that was one example another one was when
+My son was in hospital, and Doug showed up.
+Didn't have to.
+That meant a lot to me.
+And Michael?
+Michael's imagination.
+Michael just has an unbelievable ability to imagine how a company can succeed.
+And when I've thought about my mistakes as an investor,
+by the way, every single time it comes down to a failure of imagination
+that I didn't think big enough.
+I didn't think about how this company could progress from where they were.
+You first introduced me to Twitter, 2007.
+I have the emails.
+Before smartphones launched, and it was an SMS app.
+I got tired of getting all your, I'm having cappuccino messages on Twitter at the time, I remember.
+On your BlackBerry.
+And I didn't quite imagine that it could be what it is today.
+And so that to me was an example.
+I remember an early meeting with Yelp, with Jeremy Stoppelman and Max Lefchon in our offices,
+and Yelp hadn't launched a web app that were going to be an email newsletter thing.
+And Michael in this meeting said, I imagine that one day,
+Restaurants will put a Yelp sticker in the window, just like a Zagat or a Michelin Star.
+And he saw that.
+He saw that.
+He saw that.
+I mean, 10 years before that became a reality, he had the imagination to think about that.
+That, to me, is amazing.
+So now, Doug is still there, and Mike has transitioned out?
+Is that what is?
+Yes, Michael has transitioned not completely.
+Doug has stepped back from day-to-day investing, so he's no longer in partner meetings routinely,
+but he continues to serve on several boards.
+And you're in charge.
+I'm the leader of a team.
+I think it's more like being captain of the team.
+We play team sport.
+We play team sport at Sequoia.
+And, you know, we are equal partners and, you know, it's...
+Was it hard to see those two guys go just seeing how legendary they were?
+To succeed them?
+Well, both to succeed them, but also just to see them walk out the door.
+Like, is there a tendency to want to keep them around as long as possible?
+I understand the question.
+Well, firstly, it is very hard to succeed them.
+I think every single person in Sequoia feels this enormous burden and responsibility
+to try to match the performance.
+that we've been known for.
+But we have this great generational transition in Sequoia.
+So Michael stepped back from day-to-day activity in 2012.
+And he was...
+Moritz did.
+In 2012, Michael stepped back.
+He had personal health reasons, and he stepped back.
+He continued to serve on the boards that he was on.
+And we had him for another decade where I would ask him for advice.
+You know, as we were going through global separation that we talked about earlier,
+I would ask Doug and Michael, you know, what do you think should we, what should we be doing here?
+Do you have advice for me?
+And so it's a way we have this benefit of intergenerational knowledge transfer.
+Doug was on a call earlier today, actually.
+We had a difficult conversation.
+I wanted his input on an important question.
+And it's not because he has the authority to tell me what to do.
+It's because I seek out his advice.
+You were investing in traditional software, internet services for years.
+And then a couple of years ago, you started investing in some life sciences.
+Does life sciences kind of work as a venture investment today?
+and what's been the challenge in biotech and life sciences investing generally over the last few years?
+There's a lot of notoriety about the collapse of the market.
+And even Dave Ricks today was saying most public biotech companies are trading below cash.
+What's your observations on the business model, what you've seen, the types of businesses you've invested in there?
+So the business we invested in that has done really well is a company called Natera.
+And we made a seed investment of a million dollars in 2007 in this company.
+20 billion now, right? Market cap?
+22 billion dollar market cap.
+It was a million dollars, two people with a very raw idea, and today they're the leading provider of prenatal testing, oncology, recurrence monitoring, organ transplant, rejection testing.
+And so that company has been a huge success.
+Diagnostics, genetic diagnostics, there's been a huge success.
+And you think about the dividend we're still collecting from the Human Genome Project 25 years ago.
+It's incredible.
+And you've obviously seen that in some of the businesses that you've helped build as well.
+We did make an investment in a company called Bridge Bio, which is helping with rare genetic disease,
+drug development. But other than that, I think we just don't have the expertise for biotech.
+You know, we don't have any... But there are still winners.
+There are still winners, but we have no MD PhDs on our team in Sequoia. And I think,
+you know, it's very dangerous when people think that your success in one domain just naturally
+makes you, gives you the right to compete in other domains. I think I have tremendous
+respect for the people who understand that. I do not. I learned that one the hard way.
+Ladies and gentlemen, roll off.
+Thank you.
+Thank you.
+Thank you.
+Thank you so much.
+Thank you, sir.
+Thank you, sir.
+I appreciate you coming out.
+Thanks.

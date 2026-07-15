@@ -1,0 +1,1410 @@
+source: allin_youtube
+published_date: 2026-07-13
+video_id: J0bce9WQJ-g
+url: https://www.youtube.com/watch?v=J0bce9WQJ-g
+title: The Trillion-Dollar Industries AI Is Disrupting: Voice, Law & the End of the Billable Hour
+
+You're on a bit of a heater, huh?
+>> It's It's the best time to be building
+>> and revenue has surged, but you face
+really intense competition. Let's go
+right at that to start.
+>> If you were building a global financial
+system from First Principles today, you
+wouldn't build it on 50-year-old legacy
+rails. You'd build Airwalks, one AI
+native platform for global accounts,
+cards, and payments. is designed to make
+the entire world feel like a local
+market. Others are bolting AI onto
+broken infrastructure, but Airwall was
+built for the intelligent era from day
+one. Stop paying the legacy tax and
+start building the future at
+airwalls.com/allin.
+Airwalls built for the future.
+>> 350 million in what 2 or 3 years and I'm
+hearing numbers five or 600 million now.
+Tell us about the revenue ramp of the
+company from the moment you released the
+software to today. the the product's
+been in market for 40 months, 50 months,
+you tell me.
+>> Spot on. We started company 2022. First
+year was all about building the the
+research and the product to really
+kickstart the work. We built the first
+texttospech model that finally could
+sound human. Released it in 2023,
+beginning of 2023. Then it took us
+roughly 20 months to get to the first
+100 million in ARR. Roughly 10 months to
+get to 200, 5 months to get to 300. Um
+and um and that's how we closed end of
+the last year and now we are at 600.
+>> You're at $600 million in revenue. This
+is just extraordinary. Um how many
+employees now? Because the company's
+obviously hit incredible valuations,
+but you have to fill in that valuation
+and you you're competing at a very high
+level for talent. So, so tell us about
+how many employees you have now and how
+you maintain the culture of the company
+when revenue is ripping, investors are
+throwing money at you, showing up at
+your doorstep. I mean, quite literally.
+Um, but you've got to run the company.
+You've got to build a culture. So, how
+many employees now and how are you
+dealing with these competing
+uh priorities?
+Yeah, that's the that's the key element
+of how you all for us the the element of
+like how we can maintain the culture
+despite the quick growth is is is kind
+of critical and how we optimize both the
+interview cycle how we are bringing
+people on board how we on board them
+with 600 people today um so also very
+quick growth on that [snorts] people's
+side and as a company we combine
+research and product so we we we are
+building a communication platform for AI
+on the research side this includes
+everything across audio generating
+speech transcribing speech,
+orchestrating speech for interactions on
+the product. This is how we can complete
+the entirety of the customer journey
+from marketing and creating assets and
+localizing them internationally through
+customer support with voice agents to
+proactive enablement of how voice agents
+can help in operations, training and
+sales. So this requires a lot of
+different talent um and and and and a
+part of that revenue growth is actually
+reflection of the functions we've grown
+over time. So from the original team
+very research very engineering heavy
+from the first 10 people we had zero
+attrition everybody is uh uh still at
+the company from those core research and
+engineering talent building together
+with us so so far been able to out
+compete and I think the common
+Fred and and then credit to my
+co-founder who is incredible researcher
+himself we've been able to assemble the
+team that is truly excited about solving
+audio solving interaction and building
+that research and if they if they are
+looking for an opportunity out there and
+looking for a company to join and solve
+that we are we are one of the the the
+leading if not the leading place to do
+that
+>> and you started before
+AI was so impactful at making software
+>> right
+>> so when you were starting four years ago
+5 years ago and working on this building
+software was limited to low percentage
+uh of the population of planet earth you
+know the number of people could write
+code and now here we are, you know, went
+from vibe, we had a no code moment, then
+vibe coding, and now we actually have
+people building production code who are
+not developers. You have developers
+going 10x and token maxing.
+How has building software changed
+internally? And how do you deal with
+making sure that the code is really high
+quality? because people are paying you
+this money
+>> uh but they're going to demand really
+high quality product since they're
+spending so much money with you.
+>> Yeah, that's it's also true that 2022
+was still the year where topics of the
+day were crypto and um and metaverse. So
+with the building there was also the
+best time to start because we could
+actually take a take a bit of time to
+focus on what we thought is the future.
+Um but the the way we are structured is
+a lot of small teams especially across
+the product engineering but also in how
+we think about go to market optimized
+for specific industries telco financial
+services healthcare. So every unit is
+very tightly knit together. Um and we do
+that across the company. Uh so it's
+usually five to 10 people teams that
+that that run ahead. And inside of each
+of those teams the decision we took
+which is slightly different than how
+it's usually structured. We embedded
+engineers in in in every place and even
+in the places which aren't engineering.
+So our talent team will have an
+engineer, our legal team will have an
+engineer, our revenue engineering or go
+to market engineering have engineers
+embedded all across and those people
+will have two roles. One is of course
+creating automations and bringing the
+software inside of that team, but second
+is actually helping everybody else do
+what you said, which is make sure that
+people are adopting AI, but also there's
+a security check for everything they
+deploy because ultimately if if you're
+not using a lot of the coding software,
+a lot of the co-working software, then
+you're probably in the wrong spot. If
+you're using too much of it, that is
+also a flag because you maybe are not
+doing that in the right way. Um and of
+course as you start bringing that into
+the sites of the organizations that
+never were exposed they frequently can
+create but not necessarily review
+whether that's actually doing behind the
+scenes all the secure ways or anything.
+So that's an essential role in the in
+the in the company.
+>> Yeah. We the it's fantastic that
+everyone can build software until you
+put it into production and you have a
+leak.
+>> Yeah. uh or that person leaves the
+company and people forget they built
+that software and it's just deprecating
+uh on its own. The other thing that
+seems to have changed is management.
+When you had 10 developers in your pod
+or six, you had a UX designer, you might
+have a pure graphic designer, you'd have
+a product manager, they rolled up and
+then suddenly, you know, we watched over
+the past 3 years. Oh, hey, this is
+pretty good at um summarizing what
+happened on the call. Oh, it is actually
+creating action items and it's telling
+us what to do next. Oh, and it's, you
+know, doing uh all the different stories
+in our conbon board. And now, how do you
+think about product managers and
+management as the CEO and as the
+co-founder?
+>> Yeah, we we So, we
+>> you fired them all, right?
+>> We don't we don't have any PMs,
+>> right?
+>> Did you ever or did you have you never
+did? Okay.
+>> Never did. thought it's it's a little
+bit of what you mentioned was also
+before the true AI impact started which
+was ideal ideal person in that role can
+code can understand the customer can
+understand design of course that's very
+hard to find there's no truly that many
+people that are expert in any all all of
+those fields at the same time so we
+optimize for profiles that are experts
+in at least one of those fields but
+understand at least one other field
+really well to your point what we are
+seeing now there's if you can do a
+little bit of all with AI you can maybe
+step change from being an amateur to
+being a advanced level maybe not an
+expert level so suddenly you are not
+bottlenecked on all the other functions
+to do your work in u in growth
+phenomenal part growth engineering a
+person can design experiment ship an
+experiment it's working and bring it
+back um we also have the privilege where
+we are using a lot of our product
+ourselves so to be able to do that
+ultimately to help everybody else create
+voice agents we ourselves need to create
+voice agents too. Um so we are seeing
+that also in the non-traditional
+functions even in go to market like you
+need to be able to create a version of
+that if we are offering that to the
+customers too and and we do we created
+our inbound AI SDR agent that in
+addition to the form that you fill on
+the website you have an agent that you
+can call
+>> and uh and people are um of course e can
+give all the information in a much
+easier and quicker way but the second
+thing that happen is people also leave a
+lot more information so you can get
+connected to the right problem and right
+person a lot a lot quicker. Um so we are
+seeing that kind of phenomena all the
+time where actually using a lot of
+tooling makes you yourself better in
+your job overall and in 11lapse in our
+specific tooling that we are solving for
+customers.
+>> Yeah, it seems like the use case of
+calling on the phone and talking to a
+computer or previously going through
+voice jail and and it was incredibly
+arduous and painful and annoying.
+made you just say operator and hit the
+zero button like as fast as possible.
+But now it seems to have turned a corner
+where
+>> talking to a human you I almost feel bad
+talking to a human where I'm like I am
+so sorry I'm wasting your time with this
+and the AI is just so much more precise
+and the fidelity is so great that when
+you tell them what you're looking to do
+and you cut them off you don't feel bad
+you don't have to make small talk. Is
+that what you're seeing in your customer
+base in terms of the ability in real
+time to interrupt the agent to interrupt
+the uh you know conversation and just
+move faster has made consumers and
+companies basically embrace the
+technology.
+>> Yeah, it's it's slowly becoming that you
+will be asking for a give me an AI agent
+effective call AI operator. But uh we we
+are seeing a transition. We're suddenly
+and that's you know the the the biggest
+fuel of the recent growth for us is
+enterprises sales team just doing
+incredible work but then finally the
+product combines the reliability that's
+core with
+the orchestration for a lot of the AI
+models but also the knowledge and the
+integrations to provide you the right
+experience. And yeah, I think it it was
+a step change in the last 12 months and
+especially in the last six of of how
+good that experience became where it's
+like this golden era of consu for for
+the consumers out there customers and
+and customers is coming where you're
+going to actually open a website um um
+call an agent and have um the agent have
+information from your past interactions
+and deliver that help. And I think we'll
+see this kind of interesting phenomena
+combining your previous question and
+this where now of course you are
+reaching frequently when you have a
+problem and you're asking for help but
+ultimately a the whole interface will
+change and morph depending on how you
+are operating with that inter interface
+with voice being helping you in the
+background find that information will
+shift from reactive to proactive to help
+you get uh that help before you
+potentially ask for it. Um and we are
+seeing those examples those examples too
+>> seemed to me that speech to text um had
+a major blocker again in fidelity 10
+years ago lawyers would put on dragon
+dictate if you remember that terrible
+software they get a headset
+>> and it seemed like the the big blocker
+was you felt like an idiot talking to a
+computer in an office, right? And so
+people who did it quietly in their
+office, you know, they they kind of got
+away with it. Um, but now we see
+something very different. The whisper in
+the office. People very quietly talking
+to their computer, giving it a prompt,
+you know, and talking to their agents.
+And now there's a ring out. You can
+press it. And uh I use a really cool
+product called Whisper Flow. I don't
+know if they use 11 Labs on the back
+end. I
+>> they they use they use and and a few
+others uh as well. And they they are
+doing phenomenal work too.
+>> Whisper flow is just a tremendous
+product. And then I got a pedal. Does
+anybody here use a pedal on their
+computer? Raise your hand if you're a
+com There's one dork, two dorks.
+[laughter]
+Any others? Raise it high. Oh, she's
+half dork. Okay, so there's about three
+and a half dorks here. Next year, this
+is going to be Do you have a pedal?
+>> I don't. I I have I
+>> Have you considered a pedal?
+>> I I should consider a pedal. I love the
+devices that you can wear and the
+>> I have the Plaude. It's incredible.
+>> Plaude Pocket. Phenomenal. Like so good.
+And especially in events like this, I
+feel
+>> if you pre pre preempted that you're
+recording, of course,
+>> but how incredible would it be that all
+the signal on the conversations that
+otherwise disappear, you maybe tap tap
+few notes here and there to try to get
+signal afterwards if you can just have
+that automatically fill your specific
+notes and make sure you do your
+follow-ups. Phenomenal.
+>> All right, so let me make the case for
+the pedal. Okay, I have a I have three
+pedals under the desk and I I think I'm
+trying to figure out what the company
+is, but with Whisper Flow, you press
+down, it turns on, and uh you talk and
+then you let it go. And one of the
+annoying parts of working with an LLM is
+typing. And you're kind of like
+exhausted when you're giving it the
+prompt. So, you stop prompting. But if
+you're a professional artist
+like me and a talker, this is like
+incredible because when I press the
+pedal down, I just give a stream of
+consciousness now. And it turns out what
+these LLMs actually do really well with
+is taking a massive stream of
+consciousness where you just keep
+talking and talking and talking. So I'll
+give it a one to twominut prompt. Then I
+let go and it has changed everything.
+Everything. It's it's you know like the
+whole experience is changing so much a
+similar version of what we see happen is
+you know how you have a you want to say
+a thought and then you're like okay I
+actually want to change and say
+something else
+>> now you have those two context combined
+and the experience you get as an answer
+is so much better uh so we already see
+that as an experience but even the the
+previous example of like people are
+adjusting how they speak to AI versus
+how they speak to human people are
+asking
+>> how so yeah what what how should you
+speak to the LLM. We saw Sergey Brin say
+threaten it with bodily harm. It's a
+very effective technique if you haven't
+tried it, but what are the things that
+are different when you're talking to the
+LLM?
+>> The the the a specific emotional
+example, we we work with a lot of um
+financial services companies uh uh uh
+Revolute, Clara, Pogbank. And some of
+the frequent case not in all of them is
+of course how you remind people about
+payment or that you collect the de that
+from the people that aren't answering
+and frequently people would naturally
+feel ashamed of telling the real
+situation with AI people are much more
+open to share what actually happened
+give the information and suddenly this
+emotional block of like in front of
+other human I don't want to be able to
+to say all of that is is is very
+different so that's different um usually
+people are more snappy with AI voice
+agent. It's like, you know, like quick
+responses.
+>> Yeah. You don't mind cutting it off.
+>> Exactly. So, you can like kind of go
+through to to the point you want much
+quicker. Um, which you needed to like
+change a little bit of the interaction
+model too, which which is working. Uh,
+but we'll work on the pedal and whether
+whether we should we should do
+>> a little bit about celebrities on the
+platform. You have some celebrities who
+are on there. Um, you also have um an
+issue with impersonation.
+Um, I know this because somebody was
+like, "Oh my god, I love your bulldog
+videos." Many people know I'm a big fan
+of bulldogs. I currently have three. Um,
+and I said, "I'm sorry, I don't know
+what you're talking about." And they
+sent me a channel where somebody had
+created a bunch of dogs telling jokes
+and they made one and I guess they were
+looking for a podcaster. So they used
+the this weekend startups archive and 11
+lab to create my voice and do this huge
+channel. And I contacted them and I
+said, "Oh my god, it's very flattering.
+How how did you do this? This is like a
+year or two ago." And they said, "Oh, I
+used 11 Labs." So I I think I emailed
+you about it. I'm like, "H how do you
+protect against this in advertising in
+the law in the United States? I'm not
+sure about here in France. I'm sure they
+have 17 laws for this. We have one. Um,
+you guys are great at regulations unless
+no offense. And the French guy over here
+is like, "Oh, Mond shal
+um the that's my French angry developer
+guy." Um, I cannot smoke in the Lou. Um,
+[laughter] this is crazy. Um, and so
+[laughter]
+is super like interesting. um with this
+right to privacy and I think you've got
+a quick education on this because you've
+had a couple people I'm sure write you a
+legal letter what it basically means is
+you you can't take somebody's voice and
+use it to you know do commerce in the
+world you can use it for parody there is
+fair use I can do a Donald Trump
+impersonation up here if I like
+we're going to take about 5% of 11 lab
+stock is okay with you put them in Trump
+accounts [laughter]
+sounds good okay and for that you get to
+come to the White
+Okay, thank you. Um, [applause]
+nasty guy. Wouldn't give 5%.
+Loves socialism, but not America. It's
+the problem with the Nordics. Um,
+nasty, nasty socialism. Then I noticed
+when my guys wanted to clone my voice so
+that they could fix the ads where I
+mispronounce something or I do the wrong
+promo code, use the code jal 20. They
+like were like, "It's 25, dummy." And
+I'm like, "Okay, I have dyslexia." and
+then they redid it and it was like I'm
+sorry you cannot uh clone Jason's voice
+and then it's like I have to go in there
+and do it and you put a bunch of
+protections in there. So explain what's
+happening in that regard in terms of
+people's you know concerns around this
+and then the other side which is the
+opportunity because I think you got
+Jamie Fox and some other folks actually
+that you paid for their voices.
+>> Yeah. No, the the the the voice is
+identity and IP. It's like you know when
+you when you speak a certain way people
+recognize it can feel that emotion and
+you know to some extent it was it it was
+a a um it could be a problem could be
+opportunity before I mean as you did
+impersonation of of of the President
+Trump it's of course similarly uh uh u
+something that is possible even of a
+human uh not specifically AI but um for
+us on the safeguard side you know over
+over last years We took the role as we
+are leading on our development
+development. We also need to lead on a
+lot of the safeguards. So that's like a
+critical element. We do three things.
+One, trace everything that's generated
+so we can take action when needed. Two,
+now we moderate both on the voice and
+text level. So if you were to input
+something that would be commercial in
+nature or uh would try to scam someone
+that gets flagged, we can block it. And
+now free because over last years we've
+seen the development of those models
+more broadly. how how can we create
+systems for the wider world so people
+can upload a sample and get information
+whether it's AI or not immediately um
+and we do it for 11 Labs but we also do
+it for other open source models the
+interesting part given that it's such a
+good um IP um and and part of your your
+your your element it opens up new
+opportunities so we partnered with
+Matthew McConna on creating a world
+>> all right all right
+>> and across languages and it's the first
+>> I haven't got paid a lot of money for
+these independent films but oh 11 lab
+stock is juicy.
+>> The
+>> yum yum.
+>> Could you do it? Could you do it in
+Spanish?
+>> It's a it's it's a fugazia fugazi.
+>> Yeah. But the the crazy thing with the
+with AI technology open is that now the
+voice can be carried not only English
+but also in Spanish and Italian and
+Portuguese and you can still have
+exactly that element of emotions coming
+through. Um so that that's kind of a a
+good example there but we've seen that
+with master.
+>> What do you pay these guys? What does it
+cost to get Matthew McConn? Is this like
+an eight figure deal, seven figure deal?
+You give him a little equity?
+>> Always depends. Uh so like you know the
+masterclass for example is a good
+example where they worked with talent
+directly. And here you have u previously
+a static content that you would learn
+from. Now um you have interactive
+content. So you have Gordon Ramsey
+teaching you how to how to cook in the
+kitchen. He can scream at you if you're
+not doing
+>> raw scallops raw. So, so, so that is
+that is definitely a
+>> So, they're doing characters now or or
+AI instances using 11 Labs. So, you can
+interact with them as part of your
+subscription.
+>> Exactly. But as a company, what we now
+do and this from the beginning, we
+created a marketplace where people can
+create their voice. We authenticated,
+you can share it, and you earn money.
+Today, we paid back over $22 million
+back to the community of of of talent.
+>> Really? uh which so those voiceover
+actors now who got paid as hourly
+workers sometimes they get a little
+backend if they were doing a commercial
+or something now they can spend an hour
+reading create an 11 labs voice and then
+license it out
+>> 100% and then
+>> do they get to pick their price or you
+pick the price
+>> the depends on the model we do we do
+both so you can you can either give it a
+default that lets us distribute that
+slightly more optimally or you can pick
+yours and the use case is going to be
+going to be different and like you opens
+up a set of incredible opportunities in
+the dynamic context in other languages.
+Uh but maybe a last one on that like
+voice is such a big part of identity and
+probably probably our most important
+work was actually working with people
+that lost their voice due to ALS due to
+throat cancer and working on bringing
+that voice back. So he worked with
+congresswoman in the US Jennifer
+Jennifer Wexon who lost it and wanted to
+continue inspire others that you can do
+incredible work despite that and uh and
+was the first speech delivered in in in
+in in Congress or more recently I think
+this was my the most uh like heart uh
+warming story. There was um there's a
+woman that um that's wanted to get
+married lost her voice before she could
+get married.
+>> Oh wow.
+>> And then they decided to redo the
+marriage together. do the vows again
+>> and do the vows
+>> and you could see the whole family just
+>> for the first time hearing the vows. It
+was just uh you could you could feel the
+emotions that you can see in any other
+any other way because the voice is such
+a connecting thing.
+>> Yeah. And and you've done it for some
+iconic voices. My understanding is the
+estate of James Earl Jones. I'm not sure
+if they did he pass? Is James Earl Jones
+alive? Can somebody pass?
+>> He he passed, right?
+>> Yes. But before he passed, I think he
+did a deal with Disney and he said,
+"Listen, for my family, I would like to
+license the Darth Vader voice for all
+time to Disney." They gave him some
+incredible deal. And then they were left
+with, "Well, how do we actually do this?
+Do we get a voice impersonator, but
+instead they went to you?" Talk a little
+bit about that deal and how it went
+down. And is that what they used
+recently, you know, in in uh some of the
+new films with Darth Vader? There's a
+new Darth Maul series
+um where they have Darth Vader and did
+you power that?
+>> I don't know what I can say about the
+new things but definitely the big use
+case that that big big completely new
+experience [clears throat]
+uh was in the gaming space where yes
+>> uh Fortnite so Epic Games
+game Fortnite launched um Darth Vader
+which people and players could interact
+with live in partnership with the state
+in partnership with Disney. So every
+player after reaching a certain stage
+could have a Darve interact and help you
+solve the missions. And we are seeing
+that kind of mode coming up more and
+more often of how you can effectively
+extend extend your likeness your like
+you said publicity into interactive use
+cases bring it across the world uh
+together. Uh so that was exactly that
+model and now we are working on on a on
+a one of the public one is headsp space.
+So Headspace has a great meditation.
+This is the uh second uh greatest
+meditation app right behind Comm
+>> which you are an investor of. I am I
+didn't realize you're right. I did
+[laughter]
+and it was a $4 million company
+>> is incredible. I think their their team
+>> but anyway you were you were working
+with the the um the second place.
+>> Exactly. So they not exactly the second
+place but exactly to the working part.
+They so they localize a lot the content
+and and calm I think is trying some of
+the interactive elements. Could you have
+a meditation lesson that's personalized
+to you?
+>> Which uh which we we would uh hopefully
+love to to to
+>> and like imagine just you know so many
+voices.
+>> David Saxs is defending Trump. Take a
+deep breath in. Breathe out. Breathe in.
+Breathe out.
+>> Maybe you should license the voice to
+come.
+>> I I mean that would be interesting.
+Let's talk a little bit about
+um
+being up against
+some of the greatest entrepreneurs ever
+who want to take your business from you.
+Specifically, Daario and Anthropic, Sam
+from OpenAI. They they want your
+business. They've been pretty clear
+about it. Um, and I think you have used
+the frontier models in your product, but
+you must be thinking, my lord, am I
+enabling my own demise by partnering
+with them? And there's all these open-
+source models. So, um, how do you think
+about your partnerships with those type
+of frontier models and the fact that
+they want to kill your company?
+>> [snorts]
+>> So on on the on the first part the given
+we create a platform we try to provide
+all alms out there. So our customers can
+pick entropic open AI open source uh
+Google models um and that agnostic being
+agnostic to the specific model is
+actually helpful because customers can
+they make sure that they build a harness
+build the agent orchestration create the
+voice element of how that agent
+interacts with the world how the
+marketing interacts with the world but
+they are not dependent on any model. So
+for us that part is is is um is a is
+actually good because we can provide
+that to the customers. On the on the
+kind of the second big part of like of
+course the the space is overlapping
+increasingly
+models our platform platform are
+application everything is becoming a
+little bit more more fuzzy for us. The
+still the defining piece was focusing on
+that one layer of like how does
+interaction look like? How does
+communication look like? And we've been
+able to out compete them on voice models
+um both on text to speech, speech to
+text, on the turn taking on music and um
+and we've you know here our research
+team is is is is a a set of magicians
+that are able to continuously do it time
+and time again. Um and I think part of
+the reason is it's on the research side.
+It's the architecture that matters, not
+the scale. You really need to change how
+the model operates. Two, you need very
+specific data that there's of course a
+wide set of data out there, but it's
+unlabelled data and where we spend a lot
+of time. So we build a internal team of
+over thousand contractors that label all
+those audio assets to make them to make
+them good. So that's on the research
+side. And then as you think about the
+rest of product stack, we want to create
+a fully verticalized solution for that
+communication angle. The product
+understanding the right workflow in
+financial services is very different to
+healthcare, very different to telos. We
+spend all of our product team to figure
+out how that works and those companies
+don't. And then ultimately last piece is
+the ecosystem. Can you build the wider
+set of integrations voices that you use
+templates for the agent authentication
+that you can benefit from instead of
+starting from scratch? And so far we've
+been we've been able to create a new
+model for that.
+>> Certainly though you must be concerned
+about hey the reinforcement learning the
+data leakage. They say they're not using
+your data, but they're kind of using
+your data. And so, do you have an
+open-source project internally as the
+like in case of Glass, we got to break
+this? And when do you think
+>> you'll be able to discontin working with
+them if you had to?
+>> We we we we
+know that some companies are
+continuously trying to figure out how to
+distill and use the data. So that is uh
+that is a existing problem and we have
+few mechanism to to to stop it. Um or
+slow it down not stop it. Um but um but
+on the open source question or like
+creating our own um um uh versions we
+are we are looking a little bit closer
+on like how we could use our expertise
+of
+how does like you know we won't focus on
+knowledge work. we won't focus on coding
+but any interaction and how you can
+combine all those pieces together and
+make sure this is this is great. Yeah,
+we want to own. So we are spending more
+time there. Uh but it's also just great
+to be in the arena and compete with
+those guys and uh and and every so often
+show that we can do it and do it better.
+Yeah, it's pretty clear in my estimation
+that that's where you you will wind up
+and the ability to make your own
+language model today, especially with
+all these great models out there that
+are now open- sourced. It's going to be
+a pretty easy for a company with your
+level of resources. So, why wouldn't you
+at least offering it as an option? And
+then I guess there's cost. I mean, you
+must be shipping
+tens of millions of dollars to the
+Frontier models every year. ship good
+amount. Um we are good partners good
+partners with them. Uh um but but it's
+um it's ultimately you know showing up
+in the value we can create too. So like
+a lot of what we spoke at the beginning
+of how we can elevate ourselves as
+organization too is is definitely
+helpful. So I think they they done
+tremendous work on on building uh it's
+it's almost crazy that each of us has
+like a a a Turing uh like you know if
+you if you were to chat with an agent
+now it feels like um the Turing test
+will be complete it's as smart as
+another human. Uh and we hope this year
+we'll do that same thing for voice uh
+where any conversation feels like you
+are speaking with another human. It will
+be
+>> yeah I think you're there. It just
+depends on the application and like what
+question you ask. But it definitely
+passes it. I mean it if we were to look
+at the tests that were created to define
+artificial general intelligence or just
+to define artificial intelligence, we
+passed all of those. These were tests
+that were created 30 or 40 years ago. We
+need a new set of tests right now. I
+think the new test is like can this be
+more intelligent than every single
+person on the planet times 10. And if we
+get anything less than that, we we're
+kind of like, oh yeah, it's not smart. I
+mean, these things, we're kind of there
+on AGI, don't you think that we've kind
+of achieved it, we just haven't deployed
+it. I
+>> I am I there are definitely places where
+where we did achieve it.
+>> Yeah, for sure. All right. Continued
+success. Let's give it up for Mati from
+11 Labs. Well done. Thanks for coming
+out. I'm going all in.
+>> The AI companies building the future run
+on Oracle cloud infrastructure, training
+and deploying at scale on one of the
+world's largest AI infrastructures. The
+same Oracle AI platform gives
+enterprises access to leading models AI
+grounded in their own data and the
+security to move from pilot to
+production. Learn more at oracle.com/ai
+or experience it live at oracle
+experience live. I'm going all in.
+>> You're growing also at a very
+significant clip.
+>> Exponentially.
+>> Is it exponential? No, it's not
+exponential.
+>> Oh, it's a 50 sustained 50% quarter over
+quarter for the last seven quarters.
+>> 50% quarter over quarter. Last seven
+quarters. Yeah, that's that's pretty
+darn fast. So I think we actually just
+became as of the close last week on
+Tuesday one of the fastest enterprise
+company with a direct sales motion to go
+from one to 100 150 beating Sierra with
+one quarter.
+>> Amazing. Um and so um people I mean
+there's a couple of things in life that
+people really hate and paying lawyers is
+like way up on the top of the list.
+um with your tools obviously you got
+your contemporary and Harvey and people
+>> it's just a it's a small company um in
+the in the states um and then you also
+have I guess Claude and other folks also
+want to be in your business so this is a
+big prize um to
+take I don't know 80% of what we pay
+lawyers for and compress it by 90% like
+what what is the realistic
+power law here in terms of
+making for startups in the audience,
+your legal bills dramatically drop in
+costs. Yeah. And I'm seeing it already
+in the startup space. I had an I had one
+firm, one startup that hit a million in
+revenue.
+>> Yeah.
+>> They had closed multiple rounds of
+funding. Um, multiple obviously large
+number of employees, a decent couple
+dozen employees. They didn't have a
+corporate lawyer.
+>> No. And I said, "Whoa, whoa, whoa, whoa,
+whoa, whoa. You think I had a million
+dollars in revenue? Like, somebody
+should review the contracts?" And
+they're like, "Chat CPT, bro." And I'm
+like, "What about the cap table?"
+They're like, "Chp, bro." And I was
+like, "Okay." And HR. And they're like,
+"Same thing, bro." And I'm like,
+>> "Okay,
+>> it's going to be a fun diligence target
+one day."
+>> Well, that's what I said. I said, "Hey,
+you know, when you do the series A,
+they're going to ask that like some of
+this stuff be reviewed. like, "Do you
+guys have like IP assignments?" They're
+like, "Yeah." I'm like, "How did you
+know to do IP assignments?" First- time
+founders are like, "We asked chat GPT."
+And I'm like, "Okay, wow. I just turned
+into unk like I guess." Yeah. [snorts]
+So, so take us through what you you
+think is happening out there. This is
+not uncommon, right? What I scenario
+>> but but a a seedstage startup operates
+very differently from, you know, one of
+the biggest banks in the US. And so the
+way to think about the market or at
+least the way that we like to is you
+have this enormous bucket of legal
+services which today is being done
+manually. It's a trillion dollars every
+year into legal services which is very
+fragmented.
+>> But the software spend into legal
+technology is about 40 billion. So it
+means there's 4% software 96% service
+which is bananas. The software piece
+should be much bigger than that. And
+[snorts] so the software piece naturally
+will grow into um the service revenue
+but also legal is a very supply
+constrained market. The demand for legal
+services is much larger than what there
+are lawyers or legal services available.
+And so many of the legal service
+providers are now using technology to
+serve new use cases, new market segments
+and to actually package new products and
+you will not make
+>> what's an example of that like
+>> so so an example of that is Kulie
+actually they started serving startup
+founders directly with a sort of
+software uh platform that you just log
+onto the platform they pumped it full
+with their material and their precedent
+and then you have the startup material
+there and they've embedded workflows
+that reviews the contracts.
+>> Um, and what I think is interesting by
+that is it it starts to um break this
+model where you charge out associates
+for very high hourly rates and you have
+a billable hour model. And actually, if
+you look in law firms, the way that that
+business model works is you overcharge
+for the associates and you actually
+undercharge for the partners. I don't
+know if they're under charge. I mean, I
+got a bill recently and it was 1,800 an
+hour, right? But
+>> for a senior person, I think the
+associates were 800.
+>> Well, you know, at Kirkland, it can go
+up to 4,000 an hour. But the but the
+thing is when a when a Kirkland if so,
+let's say, you know, 30 minutes of a
+Kirkland partner's time when it really
+matters can be worth a lot more than
+that.
+>> Like a lot more than that. If it's bet
+the company litigation or you avoid a
+pitfall that would have costed the
+company tens of millions of dollars,
+>> well worth it. Yeah.
+>> Right. Exactly. And but the only way
+they know how to price that is to
+overcharge for the associates.
+>> But as you're saying, the enterprises
+are looking at this and they're going,
+"Huh, we're spending a lot of dollars on
+legal services. Let's take this
+in-house." And
+>> Oh, really?
+>> Absolutely. I mean, we're doing this
+partly at Lora. We acquired four
+businesses so far this year. We did the
+diligence inhouse the with our own tool
+and the fastest transaction we did was
+12 days from LOI to closing
+>> because your motivation as the founder
+is to get the deal done,
+>> right?
+>> The motivation of the lawyer is to not
+have you sue them if they up the deal,
+>> right?
+>> And to make as much money as possible,
+>> which means to drag it out,
+>> which means their incentive is to even
+if they don't say it explicitly, it is
+to drag it out. your incentive is to
+close it as quick as possible. Yeah.
+>> Yeah. And so, you know, I think a lot of
+law firms are also experimenting with
+different pricing models where you do a
+fixed fee for a transaction or for a
+fund raise. Um, in litigation, you can
+take a part of the success fee when you
+win the deal.
+>> Yeah.
+>> Uh or win the case. And so, I think it's
+just very interesting how, you know, one
+of the biggest industries in the world
+now is being completely transformed and
+reshapen as a consequence of the tech.
+And are those law firms feeling like
+they're being disrupted or this is a
+huge opportunity
+and and and did that switch at a certain
+point in time or has it switched for
+them?
+>> Um there's a lot of anxiety and a lot of
+fear and you know these law firms are
+enormously profitable and big
+businesses. Kirkland Ellis turns around
+$10 billion a year.
+>> How many lawyers did it have?
+>> Four or 5,000. Wow.
+>> I mean, per partner, they make it
+between 5 and 10 million every year in
+profits. And so, when something like AI
+comes along, that poses um existential
+threats and existential opportunity. And
+I that's actually a big part of my job
+to help articulate with the leadership
+teams that we work with because we will
+only be as successful as our customers
+are. And so [snorts] we actually have a
+very unique role at Legora as well which
+is called the legal engineer. So in the
+same way that Palanteer has forward
+deployed engineers, we have forward
+deployed lawyers and their job is to sit
+down with the Kirkland partners and help
+them transform their business
+>> from a preAI to a post AI world. A and
+it's sort of like document management
+and PCs were but 20 or 30 years ago when
+they were printing out and keeping
+drafts in a in a library in in a storage
+facility and they had to sort of walk
+them through and handhold that.
+>> Absolutely. But I think the difference
+>> the difference is those were you know
+mild productivity gains.
+>> Yeah. this can do a lot of the work and
+so it's really reshaping what it also
+means to be a junior lawyer going into
+this occupation.
+>> What does it mean? Are those jobs going
+to still exist or a lot of the lawyers
+who are coming out of school going, "Oh
+my god, was this a good idea or a bad
+idea?"
+>> The job will exist. The tasks will be
+different,
+>> right? Um, in order to have a
+partner-driven model, you need to bring
+people up the ranks, right? In [snorts]
+the same way as you do with software
+engineers. You need to have junior
+engineers so that one day you can have
+senior engineers who know what they're
+doing. Um, but the way to get there is
+very different. The way of getting there
+today will not be lock yourself in the
+physical data room, read through every
+single document, mark the errors, and
+you know, go fax it, right? It's and
+it's also no longer just look in the
+virtual data room and control F. It's
+orchestrating the agent that will be
+doing that work.
+>> And and when you look at that work, you
+you have a global backdrop
+attorneys obviously very famously
+localized, right? And is this going to
+create attorneys who can operate across
+borders in a way that didn't exist? And
+you're starting to see that and is that
+something that's built into the product?
+So when you're doing even in the United
+States, it's a it's state level
+certification obviously. Um and doing a
+non-compete in the Northeast is very
+different than doing it in California.
+>> They're not very enforceable or
+enforceable at all in California as
+people know, but they're quite
+enforceable if you're in Boston.
+>> Yeah.
+>> So, so talk about that. Uh because that
+seems to be a place where there could be
+massive gains from AI.
+>> 100%. And it it's really two things. I
+mean the data that Legora sits on top of
+is on one hand side the firms and
+enterprises own data their precedent
+their organizational data and secondly
+we do the hard work of gathering all the
+cases all the legislation all the
+regulatory updates for every
+jurisdiction in the world and that is
+very painful but once you start to do
+that at scale it builds a real data mo
+>> and so in the system if you are the GC
+of a company in California and you just
+landed your first customer in South
+Africa, right? Legora can be adapted to
+the local legislation in South Africa.
+And we actually had a case of this
+where, you know, instead of having to
+call a lawyer who then knows a lawyer in
+that region who will respond to the
+query, they can get an 80% accurate
+response immediately that they can start
+working off out of. And the better that
+gets um the more um the more interesting
+things I I I believe you can do because
+this data has really never been
+structured before and there are so many
+people who are working with setting
+policy and building regulation and and
+this is a enormous inefficiency in
+society
+>> and Lexus Nexus has been a juggernaut
+and the legacy player in you know all
+the case law and regulations. They have
+a massive data moat. They but they only
+make a couple of billion dollars a year.
+And if you put your revenue and Harvey's
+revenue together, you guys are probably
+already just that the two of you uh
+you're both making hundreds of millions
+of dollars. So, they must be looking in
+the rearview mirror at you like the
+Tyrannosaurus Rex in Jurassic Park and
+going, "Holy shit." Like, are they
+coming for our business? And then here
+you are on stage saying, "Hey, we're
+doing all the manual hard work of
+getting that information into our what I
+assume is a proprietary language model."
+We'll get to that in a second. Um, are
+you going to just try and buy Lexus
+Nexus? I know it's part of a larger
+enterprise, or are you just going to
+kill it?
+Well, I think that some of the existing
+uh providers and the sort of legacy
+players have a really hard time pivoting
+into becoming AI native businesses.
+>> Sure.
+>> And they have a really hard time meeting
+and and catching up to the tempo that we
+run at. They can't get the talent. They
+don't work our hours. And they're so
+political in their organizations that
+it's just hard to move. Um, I think at
+the outset of AI, many believed and made
+a bet that those organizations who had
+all the data was going to be the
+winners. As we're starting to see in the
+market, that's no longer the case. I
+think there's a real opportunity for us
+to partner with content providers. And
+we're already doing this in many of the
+smaller jurisdictions like in Germany,
+in France, in Spain. The US is is
+peculiar because it's such a duopoly on
+legal research as a West Law is the
+other one.
+>> West law and Lexus Nexus. Exactly. But
+um yeah, if you look at how their stock
+is doing, um I think
+>> or are they getting priced in with the
+AI uh certainty?
+>> Yeah.
+>> Yeah, that's one way of putting it.
+>> Yeah, they're getting crushed. Uh and I
+I would assume there's some power law
+here. you know, they might have an
+incredible breath of, you know, old case
+law that they scanned in and went to the
+courouses and did all that work on, sent
+to India to be double blind typed in.
+Like they literally
+>> You're right. That's what you have to
+do.
+>> Yeah. They literally had two different
+people type in the cases or OCR them,
+then check them, look for the
+differences. I mean, cuz you can't get
+it wrong.
+>> Nope.
+>> But today with the AI tools, the AI
+tools are really good at doing what they
+did manually. Yes. Um, you still have to
+ship the books because you have to
+physically scan. This is very strange in
+the US, but uh, West Law basically has a
+monopoly with the American government to
+report on the cases. So, they're not
+owned by the public in a way. They're
+owned by
+>> That's crazy.
+>> The company. You guys are very good at
+capitalism.
+>> Sometimes too good. But sometimes too
+good. But I mean, Harvard has a project.
+There's the court law court listener.
+>> They're trying. They're trying.
+>> Yeah, it's it doesn't work. Um or rather
+put it this way, you cannot build a
+legal research solution that doesn't
+have all of the data.
+>> Because if you go to WCTEL and a
+litigator at WCLE, the best law firm in
+the world, says, "I'm going to use this
+to to, you know, go after Elon or or do
+a billion dollar case." You better make
+sure you have all the cases.
+>> So So it's the opposite of the power
+law. You don't just need the top 80%.
+You actually need all of it.
+>> All of it.
+>> Which means you have to go to courouses
+and ask them for a copy to print it out
+and pay them 10 cents a page.
+>> Well, there's other ways of getting it,
+but in in practice, yes. Um, you have to
+physically get the books all the way to
+India. You need to open them. You need
+to scan them cuz you need to get what's
+called page citations. I never thought
+in in college I would get this nerdy
+about legal data, but here we are. And
+what's interesting is that these
+previous generation of databases were
+very much search in the database, find
+the case, and then the lawyer, you know,
+does their work,
+>> right?
+>> What's really interesting about
+especially the agents following the
+release of Opus 4.5 and 4.6 Six is they
+can now start to do really intelligent
+case strategy and they can actually
+start to combine the witness statements,
+the cases and they can really do end to
+end work which is I think moving us from
+a world where AI is just augmenting
+to AI is actually really doing things
+and your job becomes to orchestrate and
+to manage those agents as we're seeing
+in coding.
+And so you have partnerships with I'm
+assuming anthropic and open AI. Yes. To
+and you spend millions or tens of
+millions of dollars on tokens.
+>> Absolutely.
+>> And they are also competing with you on
+the margins.
+>> Um they are not competing in our product
+category at all at at all. Um from
+>> for now the well you know from the
+outside uh you know Claude has a legal
+offering. Yeah. which is basically a
+bundling of markdown skills files and a
+couple of integrations.
+>> And so I think what's really helpful
+about that is that it illustrates to
+everyone how applicable AI is in law.
+>> Um what it also does is it drives a lot
+of initial usage there and then you hit
+the ceiling or you know you understand
+how shallow it is and then you call us
+right
+>> and so it's actually a big pipeline
+generator uh for us.
+>> Got it. So they start experimenting.
+Boom. And we were just talking with the
+CEO of um 11 Labs about hey building
+your own models is you know pretty um uh
+pretty doable these days and every 6
+months it gets easier and easier. So are
+you working on your own models using
+open source to then fork it and and make
+your own models? Is that the future for
+your firm? So um I don't believe in
+fine-tuning or building any general
+intelligence models. I think that's uh
+total waste of time and money. I do
+believe in very narrow models for narrow
+use cases that you also drive a lot of
+scaling. So you can drive both cost and
+latency down. An example of this for us
+is we have a big feature called tabular
+review which is basically the number of
+documents times the number of prompts.
+So 100 documents, 100 prompts, 10,000
+API calls.
+>> If you [snorts] make a fine-tuned model
+at extracting contract data, it's very
+applicable there. But it doesn't make
+sense to build a general legal
+intelligence model like some of our
+competitors are attempting.
+>> Yeah. Um, and how do you mitigate
+against the data leakage issue with your
+customers? these, you know, are highly
+regulated industries with a lot at
+stake.
+So, putting in, you know, this recent
+case you're working on in a litigation,
+if [snorts] any of that [clears throat]
+were to seep into a language model and
+then come out the other end, I mean, you
+this is disastrous. You have a higher
+level of
+>> responsibility
+>> and uh compliance is our currency. And
+so um it's actually one of the reasons
+why it's really hard to sell into law.
+There's a lot of legal AI companies and
+very few are making it through
+>> and not because it's hard to build
+stuff. It's actually quite easy to
+understand where you can build value,
+but getting it to the customer is very
+hard. But that's something we cracked
+pretty early on. And
+>> once you're in, it's much easier to
+expand. So that's al also one of the
+driving forces behind our M&A strategy.
+[snorts] But yeah, I mean we're hosting
+national secrets weapons manufacturers
+with their contracts on Lora and we work
+with governments and
+>> does that mean you have to put it on
+prem as well or
+>> we don't do on prem. Um I
+>> that's on the road map or
+>> no I mean you know deploying in a VPC is
+very
+time consuming and it creates a lot of
+dependencies which slow down your road
+map and the execution forward.
+>> All right continuous success max thanks
+for taking some time for us.
+[music]
+>> [music]
+[music]
+>> I'm going all in.

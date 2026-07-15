@@ -1,0 +1,183 @@
+source: allin_podscripts
+published_date: 2025-10-01
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/multicoin-capitals-kyle-samani-on-internet-capital-markets
+title: Multicoin Capital’s Kyle Samani on Internet Capital Markets
+
+Crypto-crypto-crypto.
+Cryptocurrency becomes more popular.
+We're starting to see signs that it could become part of our financial future.
+U.S. dollars are the greatest product in human history, but amazingly, most people around the world who want dollars cannot get them because the legacy financial rails simply prevent them from doing so.
+You want to have the world's most real-time global financial market where everyone is synchronizing using the same open protocol at the speed of light.
+gentlemen, please welcome Multi-Coin Capitals Kyle Samani.
+Good afternoon, everyone. My name is Kyle Samani. I'm a founder and managing partner
+of Multicoin Capital. I'm incredibly excited to be here with y'all at the All-In Summit today.
+Today, I'm going to be talking a little bit about Internet and Capital Markets. But before we
+get to the future of Capital Markets, I think a little history lesson is in order.
+Before we dive in, do have some small disclosures. You can read all this in about
+four seconds. Please do know that nothing in this presentation should be considered financial
+advice. All right, let's jump in. The roots of our modern financial system are about 100 years old.
+The stock market, as we know it today, was actually born out of crisis. In 1929, the stock market crash
+lost a third of its value in about a week, and over the next three years proceeded to lose
+about 90% of its value. At the time, there was no SEC, there were no disclosures, there were no
+standardized audits. In response, Congress passed three major pieces of legislation. The first
+is the Securities Act of 33, and that required disclosures for companies that issue securities.
+The second was the Exchange Act of 34, which created the SEC, and the third was the Investment Company
+Act of 1940, which created regulations for regulating public mutual funds. The government's goal
+in these regulations was simple. They needed to create trust, protect investors, and most importantly,
+restore confidence in our capital markets. Those three laws today still stand as the foundation
+that our modern capital markets are built on top of. In the 90 years since, we've added
+a rule after rule, system after system. Typically, it's been predicated on these financial
+intermediaries whose job it is they're deputized to process these regulatory functions.
+We've added layers of complexity, layers of rent-seeking.
+And interestingly, most of these rules have come not from Congress, but from the administrative state.
+Today's markets are both held together by these intermediaries and made more inefficient by them.
+Investors have to go through exchanges. Exchanges go through clearing houses.
+Clearing houses go through custodians, on and on.
+Each of these players takes a cut.
+They add a fee.
+They add a delay.
+They create complexity.
+and they also create inertia in the status quo
+so that it's harder to remove them later.
+While the intent of these legal protections
+are generally pretty good,
+their evolutionary path over the last hundred years
+has produced in our modern system of bloat and cruft.
+Markets still close at 4 p.m., fees are still high,
+access is still limited.
+Inefficiency is baked into the system by design.
+It still takes two days to settle a stock trade in 2025.
+If you ask the group of engineers and trained,
+to redesign capital markets infrastructure from first principles in 2025,
+you wouldn't be recreating all of these intermediaries.
+You'd be building something based on modern software.
+You'd build something that's global in 24-7,
+that's programmable and permissionless,
+and that's secured, most importantly, by cryptography.
+You'd build one global ledger that can support internet-scale capital markets.
+Until recently, these global ledgers, or as we like to call them, blockchains,
+blockchains couldn't actually scale to support internet capital markets.
+No one in this room is going to wait two minutes to send the transaction and pay $20 in gas fees on Ethereum.
+But blockchains have gotten a lot better, cheaper, and faster.
+And modern blockchains like Solana can actually process now more than a billion transactions in a day
+at an average cost of less than a penny per transaction.
+The tech is finally ready.
+The tech alone, though, is not enough.
+We need a regulatory alignment as well to get there.
+And in 2025, we're getting it.
+President Trump kicked off the year by signing a series of executive orders
+aimed to make America the crypto capital of the world.
+We also owe a huge shout out to our favorite bestie David Sachs
+in his role as cryptos are for helping get these executive orders through.
+Thank you, yeah, David, thank you.
+For working with the president on getting these EOs through
+and working with the administration and Congress.
+In July, Congress passed the Genius Act, which created a foundation on top of a framework for stable coins to proliferate all over the world on permissionless crypto rails.
+The Genius Act is not only going to have implications for how capital markets work around the world, but global geopolitics as the U.S. dollar permeates every corner of the world.
+And in the next few months, we expect Congress is going to pass the Clarity Act, which is going to answer a number of open questions about how crypto market structure should be regulated.
+But interestingly, the most consequential actions are going to be coming from the SEC itself.
+In a speech that he gave about six weeks ago, SEC Chair Paul Atkins outlined his plans for
+the future of all of the employees at the SEC.
+In that speech, he said, quote, I have directed the commission staff to update antiquated
+agency rules and regulations to unleash the potential of on-chain software systems in our
+securities markets. He is preparing the SEC for what he calls, quote, the digital finance
+revolution. It just does not get any more clear than this. U.S. securities markets are coming
+on chain. In that same speech, Chair Atkins also outlined his vision for what he calls
+regulation super super app. And this creates a framework for a regulatory framework to allow three
+distinct kinds of assets to all trade on one user interface despite different underlying backends.
+Those three asset types include non-security crypto assets, tokenized securities, and traditional securities.
+And while these assets all have different backends, users should not have to care.
+You should be able to trade any of these things all from the same front end.
+Under this framework, these regulated financial super apps are going to be able to offer these services and many others, things like staking, lending, trading, or just general access to defy, all from these regulated superapp platforms.
+and they're going to be able to do so without getting 50 state licenses
+or even going through multiple federal licenses.
+The makings of these super apps already exist today.
+They look like Robin Hood, Coinbase, SoFi, and many others.
+Soon, you're going to be able to access
+crypto-native protocols such as Gito, Drift, Camino, and a lot of others,
+directly from these regulated financial super apps.
+In this reg super-app vision, the worlds of regulated financial services and permissionless crypto protocols are converging.
+And this is going to open up access to capital markets for people all over the world,
+and it's going to result in an absolute boom in on-chain defy activity.
+Taken together, we are at a critical inflection point.
+For the first time in 100 years, the technology and the regulatory frameworks have come into alignment,
+and that's created an opportunity for innovation and ultimately for rebirth of our capital market structure.
+This combination is creating the substrate on top of which we can finally build internet capital markets.
+At the highest level, internet capital markets should just be thought of as one global market.
+A market in which anyone, anywhere, with just a phone and an internet connection,
+can trade any asset from any software modality.
+It's actually a beautifully simple concept.
+Blockchains are going to be the infrastructure that powers all of the issuance access trading of those assets.
+With internet capital markets, finance becomes an internet native primitive for the first time ever.
+All right, with all this context, let's now look at some pretty fun examples on how we think internet capital markets are going to come to life.
+Reading the journal and think the Fed's going to cut interest rates?
+Well, with internet capital markets, you're going to be able to bet on interest rates on using something like Cali
+without ever even leaving the journal.
+As this kind of a behavior proliferates, we expect that,
+that the nature of media itself is going to change because a lot of media is now going to be
+derived from the prediction markets. The kind of analogy to understand would be, if you look at most
+financial media today, it's de facto about a stock price or an interest rate. We think that
+prediction markets are going to just change how media works for all kinds of subject matter.
+Is the next pass going to be completed? Is Curry going to drain a three? Is Bryson going to drive
+the green on hole 16? Internet capital markets are coming to the TV too. Twitter actually
+attempted the second screen experience about 10 years ago by embedding a social feed right next to
+the main video content. But it turns out that was kind of the wrong instantiation of the second
+screen experience. The right instantiation of it is not social content, it's financial. By betting
+on a game, it makes it way more entertaining and engaging. And putting finance as that second
+screen experience alongside the sports is going to drive all new engagement in sports TV.
+Thank you. I haven't done the work, but I hope others do.
+secret is we all know that everyone likes to bring their phone to the throne, and soon you're
+going to be able to swipe to bet while you're taking care of business. My point in sharing this
+is that internet capital markets are going to be embedded in software everywhere, and you're
+going to have all new kinds of ways to trade. It might look like swipe to trade, as shown here,
+could be type to trade, could be tap to trade. People are going to play with all kinds of fun new ways
+to trade. Speaking of text to trade, I think in the pretty near future, our favorite besties
+are going to be trading directly in their group chat. In this case, Jason's buying some Robin Hood,
+obviously, and this is all powered by super state equities on drift. Millions of people actually
+already trade crypto assets using telegram bots that are not too dissimilar from this
+illustrative example I'm showing here on the screen. But right now,
+that's mostly contained just in crypto circles.
+We expect that this kind of experience
+is going to make its way for trading all kinds of assets
+and prediction markets.
+We think in sports betting in particular,
+this is going to be super pervasive.
+Being able to chat with your friends and make bets on sports
+in a group chat is going to go viral.
+Speaking of trading with friends,
+you know, Jim Kramer really was Entertainment Finance 1.0.
+But as we think about what entertainment finance 2.0 looks like,
+we think it looks a lot more like Roaring Kitty or Dave Portnoy.
+There are today tens of thousands of streamers all over the world
+streaming content and trading with their fans and their audience members,
+and this is happening every day on Solana.
+With Internet Capital Markets, you're going to be able to have groups of people,
+anyone, anywhere, all trade the same asset together all from one live stream.
+This is going to be one of the new frontiers in social finance.
+And lastly, of course, we cannot forget podcasts.
+Soon, you're going to be able to buy Tramaut's newest back,
+maybe some Uber from Jason
+maybe buy some Bitcoin or some
+Solana or make a bet on a prediction market
+all while you're watching your favorite besties
+Internet Capital Markets are going to have a profound effect
+on how we view and think about and understand markets
+as they become embedded into media
+markets are no longer just going to exist in some silo
+in London or Wall Street
+markets are going to become the media
+and the media is going to become the channel
+just as software is eating the world
+over the last 20 years, internet capital markets are going to absorb every function of capital
+formation, trading, settlement, and risk. The legacy system is not going to adapt. It's going to be
+consumed. And this shift is not going to happen alone. It's happening in parallel with AI, one of the
+most transformative technologies of our lifetimes. If AI is rewriting how companies are built, then
+internet capital markets are rewriting how companies are going to be financed, traded, and owned.
+exciting time to be an investor and a builder in the space. This is truly a generational
+opportunity that only presents itself when the conditions are just right. We finally have the
+alignment on both the technology side and the regulatory side to get there. When we look back in 20
+years, the year 2025 is going to be remembered as the year that the dam broke. It's going to be
+akin to how the Telecommunications Act of 1996 unleashed the power of the internet.
+everyone here all of the builders and entrepreneurs in the room and all the investors here
+along with everyone who's watching at home online has a chance not just to witness this shift
+but to be an active participant in it because internet capital markets are open to everybody thank you

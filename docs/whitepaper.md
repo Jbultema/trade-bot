@@ -1,6 +1,6 @@
 # Trade Bot System Whitepaper
 
-Status: canonical overview. Last reviewed: 2026-07-08.
+Status: canonical overview. Last reviewed: 2026-07-15.
 
 ## Executive Summary
 
@@ -27,10 +27,12 @@ explicit off-ramp and re-entry logic. In practical terms, the best candidates
 have not been permanently defensive systems, nor simple buy-and-hold clones.
 They have generally kept exposure to strong growth assets while using trend,
 breadth, volatility, credit, scenario pressure, drawdown controls, and decision
-sanity checks to reduce severe drawdowns and re-enter after stress. Current
-research artifacts show leading candidates in the approximate range of 14-16%
-CAGR with max drawdowns near 20-23%, depending on the exact model and validation
-gate. Those numbers are historical research outputs, not forecasts.
+sanity checks to reduce severe drawdowns and re-enter after stress. The leading
+candidate family currently sits in the high-growth, moderate-drawdown area of
+the research frontier, but those figures are historical research outputs, not
+forecasts. The validation framework explicitly preserves skepticism around
+theme concentration, transaction-cost sensitivity, live availability of newer
+assets, and whether the historical leadership regime can persist.
 
 Trade Bot is also built around the reality that implementation matters. A
 strategy that looks good in a backtest still has to be monitored from a specific
@@ -112,6 +114,7 @@ The main components are:
 | Research Lab | Compares experiments, strategy families, outcome frontier, validation, factor attribution, and candidate details. |
 | Simulation Lab | Projects selected strategies through deterministic, bootstrap, and regime-conditioned forward paths, then validates those simulations with rolling-origin calibration tests. |
 | Launch Lab | Tests whether new or scale-up capital should enter a selected strategy now, gradually, or wait, with Simulation Lab diagnostics acting as a forward-risk guardrail. |
+| Experiment Operator | Converts a selected candidate into a paper/live trial contract with suggested horizon, trial capital, launch path, checkpoint criteria, and validate/continue/fail language. |
 | Monitoring | Tracks champion/challenger/reference windows from chosen start dates using paper valuations. |
 | Forward Test | Records locked recommendations, paper/live executions, current book alignment, and allocation history. |
 
@@ -219,12 +222,28 @@ for the intended use case is not maximum smoothness. It is high terminal wealth
 with drawdowns that are painful but survivable.
 
 Current research artifacts show several high-ranking candidates near the
-growth-constrained frontier. Examples include re-entry volatility target
-variants and high-CAGR AI/growth escape variants. Leading scorecard rows have
-shown approximate CAGRs in the 14-16% range, max drawdowns around 20-23%, high
-walk-forward positive rates, and average turnover around one trade event per
-week or less. These are backtested and validated research results, not live
-performance promises.
+growth-constrained frontier. The daily operating family is centered on
+re-entry, volatility targeting, trend repair, and drawdown guards rather than a
+single static allocation. The operating choice should not be treated as simply
+the highest CAGR row. It is a compromise among historical return, drawdown,
+turnover, human-operable cadence, current launch evidence, and validation
+quality.
+
+Those are still backtested and validated research results, not live performance
+promises. The QC gauntlet is designed to keep the strong result from being
+over-read. It checks whether the result survives future-price perturbation,
+added execution lag, transaction-cost stress, rebalance-day changes, and removal
+of important assets or themes. The leadership diagnostics separately measure how
+much of the result depends on technology, AI, semiconductor, or mega-cap growth
+leadership. These warnings do not invalidate the leading candidate family, but
+they mean the result should be treated as a promising growth strategy with
+concentration risk, not as a generic market timing law.
+
+Later sector-regime and global-rotation experiments serve a different purpose.
+They have produced lower-CAGR candidates, often in the 3-6% range, with lower
+drawdowns and useful macro-rotation diagnostics. They are not currently
+displacing the i111 high-growth engine as the daily operating candidate. Their
+main value is as context, stress comparison, and future diversification research.
 
 The recurring traits of stronger candidates are:
 
@@ -282,14 +301,64 @@ is worth additional drawdown for a 15-year accumulation problem with ongoing
 monthly contributions. It estimates terminal wealth, benchmark-relative wealth,
 recovery return required after drawdown, Ulcer Index, drawdown penalties, and
 validation confidence. This makes it possible to compare an 11% CAGR, -15%
-drawdown system against a 15% CAGR, -22% drawdown system in terms of actual
-wealth utility.
+drawdown system against a 22% CAGR, -20% drawdown system in terms of actual
+wealth utility and recovery burden.
 
 The fifth layer is ablation and signal evidence. The system can ask whether a
 signal family improves CAGR, drawdown, re-entry, churn, or left-tail behavior
 after costs. This is how narrative or newly added indicators should earn their
 way into the action layer. If a signal cannot be tested or mapped to a relevant
 now-casting framework, it should remain explanatory context.
+
+The sixth layer is the backtest-QC gauntlet. This is a structural-skepticism
+audit for the leading candidate, not another performance chart. It perturbs
+future prices after a cutoff to detect look-ahead leakage, checks extra signal
+lag, stresses transaction costs, changes rebalance day, removes key assets or
+themes, and reports contributor concentration. A candidate that performs well
+but collapses under these stresses should remain research-only until the
+fragility is understood.
+
+The seventh layer is the probability-of-backtest-overfitting gauntlet. This is
+the multiple-comparisons audit. The system builds a synchronized return matrix
+for the selected candidate shelf, partitions history into equal blocks, tests
+every symmetric half-history train/test split, and asks whether the
+in-sample winner lands above or below the median out-of-sample result. Low PBO
+supports the research process. High PBO means the strongest-looking backtests
+may be artifacts of trying many variants on the same market history.
+
+The eighth layer is defensive-signal judgement. This audits moments when the
+strategy moved heavily into BIL or residual cash and asks whether that caution
+was historically useful, a false alarm, or mixed. It reports the episode count,
+correct-defense rate, false-alarm rate, missed upside, avoided drawdown,
+benchmark comparison, and re-risk behavior by horizon. The point is not to turn
+this into a separate sizing engine. It is an interpretability layer that says,
+in plain language, whether today's defensive posture resembles historical
+caution windows that helped or mostly missed upside.
+
+The ninth layer is leadership-dependence diagnostics. This exists because the
+strongest candidates can be excellent for reasons that are too concentrated.
+The diagnostic report measures each top candidate's historical and current
+exposure to QQQ, SMH, SOXX, IGV, and single-name mega-cap technology, its beta
+to QQQ, SMH, SOXX, SPY, VEA, IWM, GLD, and TLT, its return contribution by
+asset, its behavior when QQQ underperformed SPY, RSP, or VEA, and its
+performance across scenario buckets. It also runs leadership-impairment stresses
+that haircut technology returns or reallocate technology exposure toward global
+breadth, real assets, and defensive alternatives. The purpose is to separate a
+durable risk-managed growth process from a post-hoc expression of one dominant
+leadership theme.
+
+The same report includes a walk-forward strategy router. At each historical
+origin, the router uses only prior observations for the candidate set, scores
+which strategies performed best in similar prior scenario states, and then
+evaluates the selected or blended strategy over the next 1, 3, and 6 months.
+This is not a full research-process out-of-sample proof, because the candidate
+menu itself is known today. It is still useful because it answers a narrower
+operational question: given today's strategy shelf, would a state-aware,
+prior-only router have preferred a better candidate or blend when the world
+looked similar? The benefit is not automatic strategy switching. The benefit is
+knowing whether current scenario context historically improved candidate
+preference, whether the advantage appears only at longer horizons, and whether a
+blend is safer than a single winner.
 
 Simulation validation is now treated as its own test family rather than a visual
 nice-to-have. The rolling-origin simulation test chooses historical origin dates,
@@ -312,6 +381,13 @@ duration plus covariate-matched blocks, and factor-proxy paths where factor data
 is available. If the more complex model does not beat the simpler baseline on
 coverage, median error, severe-drawdown calibration, or launch-action quality,
 the system should not give the extra complexity more decision authority.
+
+Stored simulation validation runs should be read as calibration evidence rather
+than as predictions. A good run can support planning confidence when interval
+coverage, median miss, severe-drawdown calibration, and launch-action quality
+are all acceptable. A weak run should add friction to Launch Lab and reduce the
+authority of the forward fan chart. Simulation Lab is planning support, not a
+standalone launch authority.
 
 Scenario history is also separated by source. Saved snapshots are true
 date-stamped operating records. Reconstructed scenario history rebuilds the
@@ -529,17 +605,29 @@ can look strong while the forward simulator says the current state has elevated
 left-tail risk or weak calibration. Conversely, a simulated forward range can
 look acceptable while historical entry windows show repeated bad starts.
 
-The intended integration is a Simulation Gate inside Launch Lab. The gate should
-bring in horizon-specific validation status, simulated severe-drawdown
-probability, median miss, launch-action score, over-risk and under-risk rates,
-and the latest ablation read. Those diagnostics should not mechanically replace
-Launch Lab's historical entry score. Instead, they should apply conservative
-friction: weak simulation validation caps launch enthusiasm, high simulated
-left-tail risk argues for staging, and calibrated constructive simulation
-evidence can support a stronger ramp only when historical entry evidence agrees.
-The most useful human read is often the disagreement itself: "entry history is
-constructive, but simulation confidence is weak," or "simulation looks
-constructive, but past launches from similar windows had early drawdown pain."
+The Simulation Gate is the integration point between these two labs. It brings
+in horizon-specific validation status, simulated severe-drawdown probability,
+median miss, launch-action score, over-risk and under-risk rates, and the active
+ablation read. Those diagnostics should not mechanically replace Launch Lab's
+historical entry score. Instead, they apply conservative friction: weak
+simulation validation caps launch enthusiasm, high simulated left-tail risk
+argues for staging, and calibrated constructive simulation evidence can support
+a stronger ramp only when historical entry evidence agrees. The most useful
+human read is often the disagreement itself: "entry history is constructive, but
+simulation confidence is weak," or "simulation looks constructive, but past
+launches from similar windows had early drawdown pain."
+
+The Experiment Operator sits beside Launch Lab. Its question is narrower and
+more operational: if the user gives Trade Bot a small paper or live cash sleeve
+today, how long must that trial run before it proves anything? The operator
+builds a trial contract from the selected candidate, current launch gate,
+historical signal turnover, and benchmark choice. It recommends a minimum
+evidence horizon, a launch path, a trial capital preset, checkpoint language,
+and validate/continue/fail criteria. For the high-growth i111 family, the
+default benchmark context is QQQ plus BIL/cash, with SPY retained as secondary
+broad-market context. The key design principle is that the required horizon is
+set upfront, before the experiment starts, so the system cannot keep moving the
+goalposts after a lucky or unlucky first week.
 
 ## 9. Monitoring, Tickets, And Making It Real
 
@@ -554,6 +642,21 @@ valuations, cumulative return, benchmark comparison, drawdown, and forward
 status. This is critical because paper monitoring from different start dates can
 otherwise create misleading comparisons.
 
+Monitoring start dates are first-class evidence. The same strategy can have a
+paper champion window, a later challenger window, and a fresh experiment-start
+window. These start-date splits are deliberate. They make it possible to
+distinguish "this strategy caught a favorable early-year window" from "this
+strategy still behaves well from a fresh start."
+
+Research Lab exposes that distinction inside the selected candidate view.
+The Historical vs Running Experiment panel compares the current monitoring
+window with the candidate's own historical 3-month forward behavior: median
+strategy return, benchmark excess, drawdown envelope, false-alarm prior versus
+similar-setup posterior, and whether the live or paper experiment has re-risked
+below the defensive threshold. This is the bridge between backtest belief and
+forward evidence. The user no longer has to infer the gap by bouncing between
+Monitoring and Research Lab.
+
 The Forward Test section turns recommendations into an audit trail. It supports:
 
 - target/current book alignment,
@@ -567,7 +670,7 @@ The Forward Test section turns recommendations into an audit trail. It supports:
 - allocation history before and after the monitoring start.
 
 Book Alignment answers a narrow but important question: is the selected paper or
-live book already close enough to the latest target, or does it need a small or
+live book already close enough to the current target, or does it need a small or
 material rebalance? This prevents the top-line dashboard from repeatedly saying
 "reduce risk" after the user has already logged paper trades that implemented
 the prior recommendation.
@@ -576,8 +679,8 @@ The boundary between Launch Lab and Forward Test is important. Launch Lab is for
 new or scale-up capital before it becomes an actively monitored sleeve. Once a
 sleeve is running, Forward Test and Book Alignment become the operating source
 of truth. At that point the question is no longer "should I launch this
-strategy?" but "is my current paper or live book aligned with the latest target,
-and do I need a ticket?"
+strategy?" but "is my paper or live book aligned with the selected target, and
+do I need a ticket?"
 
 The system also includes a taxable-account framework. Taxable modeling is more
 complex than IRA-style trading because turnover can create realized gains,
@@ -604,14 +707,39 @@ The Insight Workbench then branches into focused sections:
 - **Risk & Scenarios**: risk engine, scenario map, stress, factors, and off-ramp
   logic.
 - **News & Macro**: current context, driver rotation, and latest inputs.
-- **Research Lab**: experiment comparison and strategy deep dives.
+- **Research Lab**: experiment comparison, outcome frontier, candidate deep
+  dives, QC diagnostics, false-alarm judgement, and live-versus-history
+  experiment comparison.
 - **Simulation Lab**: forward path modeling and scenario-conditioned outcomes.
 - **Launch Lab**: entry-gate evidence for new or scale-up capital, including
-  staged launch protocols and horizon sensitivity.
+  staged launch protocols, horizon sensitivity, and experiment-operator
+  contracts.
 - **Performance**: historical performance and custom windows.
 - **Monitoring**: champion/challenger forward evidence.
 - **Forward Test**: tickets, execution logs, book alignment, and allocation
   history.
+
+The Command Center also includes a Change-Over-Time station for the operating
+metrics where direction matters. It shows compact trend charts for risk score,
+1-month risk-off probability, risk-budget multiplier, risk constraints, regime
+instability, macro drivers, monitoring evidence, and simulation quality. This
+helps distinguish "the system just changed today" from "the system has been
+operating defensively for weeks." The history is powered by local snapshot and
+operating-history retention rules: recent periods can be kept at higher
+granularity, while older backfilled history can be thinned to weekly snapshots
+to avoid uncontrolled local data growth.
+
+The News & Macro workflow includes an external macro comparison lane. Public
+42 Macro videos can be stored as local video metadata and transcripts, classified
+for tactical risk posture, compared with point-in-time Trade Bot operating
+history, and scored against subsequent market outcomes where horizon data is
+available. This is a disagreement and outcome audit, not an attempt to clone a
+proprietary macro model. Transcript coverage, YouTube access limits, and the
+fact that many macro claims are long-horizon or qualitative remain important
+caveats. The useful output is narrower: when Trade Bot and an external human
+macro process disagree during large-change moments, the system can preserve that
+record and later ask which posture handled the next 1 week, 1 month, or 3 months
+better.
 
 The right-side quick-reference panel explains terms, metrics, tickers, and
 workflow objects. This matters because the system uses many concepts that are

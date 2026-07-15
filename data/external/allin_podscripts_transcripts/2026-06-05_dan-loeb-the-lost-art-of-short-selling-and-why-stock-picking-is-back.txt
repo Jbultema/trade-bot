@@ -1,0 +1,488 @@
+source: allin_podscripts
+published_date: 2026-06-05
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/dan-loeb-the-lost-art-of-short-selling-and-why-stock-picking-is-back
+title: Dan Loeb: The Lost Art of Short Selling, and Why Stock Picking is Back
+
+Legendary activist investor, Dan Loeb. He, of course, is the CEO and CIO of Third Point.
+The lost art of short selling has come back, and it's absolutely critical.
+It doesn't matter what you do. You have to be really selective. People talk about stock pickers market.
+This is a bond in credit pickers market. When we were small, our main tool was a shame and humor.
+Dan Loeb turning up the heat on Nestle over the weekend. The shift has really been more towards a dare-to-be-great message.
+Activism without proxy contest is like Catholicism without hell.
+You're very active on the Twitter as well.
+Oh, wow.
+You found your voice.
+A lot of emotion brewing there.
+Can we actually start with that?
+Before Twitter, you were actually quite active, but they were in very different places.
+I mean, you were in Wall Street beds before Wall Street beds existed.
+Can you just walk us through your evolution as a public persona?
+Sure.
+I mean, there was this brand new technology that came out called the Internet.
+And really shortly that thereafter, long before Reddit or any of these other things,
+there were a series of chat boards.
+There was Yahoo.
+There was something called Silicon Investor, a few other ones.
+And people would congregate in Kibbets.
+It was done mostly anonymously.
+And it was an interesting place to exchange ideas.
+It was really the Wild West.
+People could pretty much say or do anything,
+but there was a lot of substance there, too.
+It's not actually that much different than from today.
+Did you engage at all in any trolling, per se?
+Well, some people use the term, OG.
+Sometimes I say I was the OT.
+The original troll.
+Yeah, no, I did.
+I mean, it was fun.
+I didn't know I was one day going to run institutional money
+and have a big fund.
+And, you know, I was just having fun.
+and blowing off steam and yeah, it was fun.
+I mean, investing is fun, and particularly on the short side.
+I mean, there's so much humor in it when you detect these companies, especially in the 90s.
+I mean, it was really unsupervised.
+There were some incredibly fraudulent companies out there, and it was just fun to uncover
+them and kind of taunt the management teams and ultimately,
+prevail. You have one story above others that kind of stands out in that era?
+I mean, there were a bunch. There was, wow, there was a company called Act Trade that I remember
+run by a guy who was like a repeat fraudster, and we uncovered it. And I know, I know we
+really got under this person's skin, and ultimately, it was really just a factoring company
+trading at five, six, I don't remember what is that, some large multiple of book value,
+and they had created a new technology called TADs. I don't remember what Tad stood for,
+but they were basically repackaging factory securities and saying that they had some special
+technology. They were financing refrigerators and things like that. Tell us your evolution as an
+investor. When you started at third point, I mean, you started with very, very little capital. Now it's
+almost 30 billion of AUM. You're multistrat. But you learned at Jeffries. I think like you learned
+helping people like David Tepper allocate capitals. Just walk us through how you learned to invest.
+Well, I started really fascinated by investing and wanting to do it. I think when I, I remember when
+I was 10 years old, my dad took me, my dad was a, my dad was a
+notoriously bad investor himself. So he didn't give me any good examples. He's a great lawyer,
+not a great investor. But he took me to meet a broker and I started investing. And then in high school,
+in the 11th grade, I got a job at the branch office of Bair Stern, sorry, of Payne Weber working for a guy
+named Alan Crown who let me post his books and make cold calls. And I think we broke certain
+securities laws, but I think the statute of limitations is passed. I would trade options.
+on Occidental Petroleum and Teledyne.
+There was a lot of volatility.
+And I think I had flurries of making money
+and lost all of it a couple of different times.
+But it was a good lesson.
+I continued doing it in college.
+And then my learning started really formally at Warburg-Pinkus
+where I really learned to value enterprises.
+It was my first job.
+Kind of across the spectrum of private equity
+and venture capital.
+I worked at a risk ARB firm, which was really invaluable.
+And then skipping forward, I had way too many jobs in my 20s.
+But I got really serious at Jeffries.
+I had an amazing opportunity to work on the distressed debt desk there.
+I started out as a research analyst.
+And I was just like drinking out of a fire hose.
+There was so much activity.
+The securities were so cheap coming out of distressed.
+and it was, you know, the 10,000 hours, 10,000 reps, we would write up different things every day.
+There are big blocks of debt to move.
+And I really got, that was my real learning point.
+And, you know, I stress this to people that, you know, everyone kind of sees mentorship as this
+sort of hierarchical thing where you, you know, learn from some wise, older person.
+But it's, I learned a ton from my colleagues, from my own cohort.
+And I learned a ton from my customers.
+You know, like Eric Mindich was the boy wonder at Goldman.
+He was the youngest partner.
+Youngest partner at Goldman.
+Yeah, ran the Arb desk there.
+And he had this triumvirate or quadrumvirate, whatever.
+Four people, I don't want to leave them out, but Amos Morone, Dinnaker, and, you can't think,
+some other guys.
+Anyway, they were great.
+And they really kind of brought me into their thought process, thinking about,
+event-driven investing, and then, you know, I covered some of the smartest people in the business,
+including David Tepper. I got to watch their thought process. And I was like a, you know,
+like a Chinese corporation that was like copying and reverse engineering and taking everything
+in and creating my database of knowledge and my own operating system, kind of taking the best out
+of what all these different people did. And what was that style when you first started at Third Point?
+What was that expression?
+That was, well, I think, you know, we call it event-driven investing.
+It was really less focused on the quality of business, more focused on very complex transactions, takeovers, spinoffs, risk or arbitrage, bankruptcies, privatizations, demutualizations.
+And these transactions created unbelievable opportunities for Alpha because of the confluence of dislocation, opacity,
+kind of time, but also this goes, and nothing changes. I always quote this Jesse Livermore
+line, there's nothing new under the sun, a real focus on management incentives. So in all these
+different kinds of transactions, management was incentivized to sandbag their numbers during a time
+when there was an excess supply of securities where their options were being set, and we as co-investors
+got to come in with these depressed projections and ride along not just,
+the, well, we got to ride along a few different things that would happen.
+Greater transparency and understanding of the business coverage,
+companies that delivered a top line and margins and ROE and everything else
+better than expectations.
+So it was really a golden era for that type of investing.
+And from where that started to what third point is today,
+just describe that and where you want to, where do you go from here?
+Yeah.
+So stylistically, that event approach, it's still something we think about.
+It's in our framework.
+But I think what happened really when technology became a bigger force, but really everything
+changed is a greater focus on business quality and innovation and disruption and more
+thematic on the one hand, understanding of consumer trends, what's going on in financial services,
+what's the economic macro backdrop that's supporting all this? And of course, the big topic of
+this event, you know, AI is sort of the culmination of that, but all of these major technological
+innovations that have really happened since. You could make money before by not being
+technology savvy in the markets. You could be technologically illiterate or just say I don't do it.
+And you could also be even more or less, you know, up until the GFC, I think you could be more
+less economically illiterate and make a lot of money.
+And now?
+You wouldn't want to be either one of those things, I mean, given how much more important.
+Like the tech through line needs to be understood everywhere.
+Yeah.
+Even if you're like Blue Owl and you're trading, I mean, Blue Owl, obviously is very sophisticated in tech
+now, but any pool of capital that used to not be correlated is effectively correlated.
+I mean, yes. Yeah, you can say that. And I just want to answer your question, just to kind of fast forward and give people a snapshot of what we do today.
+Rob Schwartz is my partner, and we took Kempo Karate together when we're 10 years old. It was a purple belt. I think I never made it past yellow belt.
+But we reconnected at our 20-year reunion. And I'm aging both of us. Sorry to give up your secret, Rob, in 1990.
+It was our 20-year reunion.
+And he was working as a sales rep for wireless RF components.
+And I said, wow, this guy would be great to do channel checks for us.
+And then I asked him a couple years later to say, hey, you meet some smart people.
+If you ever come across a really savvy engineer, we should invest.
+We didn't know what we were doing.
+We weren't venture capitalists, but we were getting behind a person.
+There was a guy named Dave Fisher, started a company called Radio Communications.
+They made chips.
+He made chips that were, I still remember,
+ABG compatible for Wi-Fi base stations.
+And ultimately, the company was sold to Texas Instruments.
+And, you know, we've, I won't go deep into our venture business,
+but that we started to do within the fund.
+We've done a couple of dedicated funds.
+So we have that strand of activity.
+We can talk about a little bit more about what we're thinking
+and how we're seeing this.
+But I think what ultimately what you get to is that all these things are interconnected and come together under the platform that we have today.
+Because we have the main hedge fund, which does credit, equity long short, credit is both structured credit and high yield.
+We have a CLO business that we acquired.
+We started a private credit business.
+It does traditional private credit, direct sponsor financing, direct lending, and work out.
+which is very important. So credit solutions, as they call it, a lot to do there.
+And then we started an insurance company a few years ago. It's not the first
+insurance company we did. We did a PNC company, but this one is was wholly owned,
+now we owned half of it. And the insurance company captures basically the
+investment grade part of what we do. So private credit through structured
+vehicles, structured credit, whole loans.
+investment grade, both private and public, but we also can use our surplus capital in very
+interesting ways. So what's the role of the human? What's the role of Dan Loeb in running third
+point 10 years from now? Like 10 years before, Dan Loeb was 100% of third point. And then
+there's now, there's agents, there's AI, there's all this learning, there's all of this data.
+where do you see the role of the human,
+where do you see the role of systems,
+making decisions, allocating capital, managing risk?
+I mean, so first of all, investing now,
+like, first of all, my time is spent primarily
+on managing the hedge fund,
+which for now is the biggest capital pool
+and the most important business that we're in.
+Yeah.
+The human element,
+I think this is true for everyone you have here,
+like the element of the social component, the human network of knowing people, being able to capture
+opportunities, work with people, interact, like that's never going away.
+Like, you're never having, maybe you can theorize that there will be agents that will sit
+at Andreessen Horowitz and whoever else, your funds.
+But I think the human will always have to be there because people like to, you know.
+want to know who's making or losing the money.
+Yeah, and there's a, there's a thing that I think the, the agents that they have will never
+really be able to look in your eye and assess all the things that...
+You've expanded your philosophy of investing in companies from cheap securities with
+catalysts, I think, how you described it on a podcast recently.
+And now you're very concerned about motes, defensibility, and just the quality or the
+brittleness, as Chumath likes to remind us, of the revenue.
+So maybe can you tell us how you evolve that core thinking about the quality of companies and then
+maybe give us some examples of the companies that now fit through that filter where you feel they
+have a moat, you feel they have durability.
+Yeah, obviously that's everything right now.
+Chimov talks about the time-bounded value of companies, and I think that's essential.
+What are the companies that are going to be around seven to ten?
+to 20, like, what are the real moats that exist out there? And it's, it's, it is harder now. I don't think we can,
+I don't know that we can really go out, you know, 10 or 20 years ago. By the way, I think we
+diluted ourselves earlier, because I think if you ask people about the moat around, you know, IBM
+or, you know, some of the other companies. AOL. AOL, Yahoo, you know, you say the same thing.
+I mean, look, we're investing outside of tech into companies that have, you know, some great.
+Well, first of all, it also comes back to the management because we can't really just look at a product or technology and say, oh, this is going to be it forever.
+So we really look for a management team that we think will be adaptable.
+And just like you guys were saying last night, you don't want to be on boards of companies.
+These are things that they should be doing.
+So I think that's a huge part of it, like finding management teams that you really believe in that have a proven ability to stay ahead of.
+Is that quantifiable or is it still very much a subjective?
+Sorry, is what?
+Is it quantifiable assessing the management team?
+No.
+Have you built a rubric for doing that?
+No, it's still very subjective, qualitative.
+I think it's one of those things after 30 years.
+There's like a pattern recognition.
+Let me ask a question on screening.
+You know, I think you've said recently publicly that there's a lot of opportunities on the short side in the market right now for the first time in a long time.
+How do you start top down?
+Is that a top down or is it an opportunistic, you know, something comes across the wire and you guys jump on it in kind of an event-driven way?
+Or do you guys have kind of a systematic top-down approach to looking at the market and finding those opportunities?
+opportunities? Yeah, there's no one approach to it. I think one thing that we've avoided is kind of a
+valuation, a solely valuation based approach. I've just seen, I've seen too many people get
+run over by shorts that have dumb valuations, but they get captured on, you know,
+Reddit or one of these other things and they just get there, you know, or like some of these
+space companies right now that, you know,
+There was no rhyme or reason.
+We had a really strong view on home builders from last year that there were two things going
+on.
+It wasn't just rates, mortgage spreads that were depressing housing prices.
+That home prices, the home building industry was first structurally impaired because
+of the way that they were all pretending to be NVR, which
+which is they all pretending to be asset light,
+but they had massive commitments to these land pools,
+which in things that they said were options,
+but they were really very committed in the capital
+and that that value was going on.
+But that the home building industry
+was really the last industry
+that had this post-COVID hangover
+of inventory disruptions and pricing that really made no sense.
+You know, all those prices went up
+to unsustainable levels, but so did building costs went up, and buyers are no longer able to
+pay those prices at the current financing environment, but they've also gotten squeezed
+by inflation and costs. So that's been, you know, something, so we've been short and things
+related to that. Let me bring Sacks into the discussion here, Sacks. We've learned a little bit
+about distribution of public security
+as you're famous in the all-in theme song
+of this great quote,
+Let Your Winners Ride.
+I'm curious when you hear Dan talking about this,
+how you think about, as a private market investor,
+how to navigate distributing equities
+and how you've sharpened your blade
+about which ones have brittle
+or more robust revenue.
+I'm sure you guys show this.
+It's one of the most vexing questions.
+We were private investors in Palantir, and I think we sold all our stock in the 20s.
+Huge mistake.
+Gosh, I've done the same thing.
+We missed a 10-X after going public.
+Yeah.
+Or 8X or something.
+We were private.
+We led the B-Round in Upstart.
+That was one.
+I think we learned not to go on boards anymore because it restricts your ability to be liquid.
+But we're also early investors in Enfield.
+phase and we sold some stock on the IPO and then took a tax hit and I think sold it under a
+dollar and the stock I think had we stayed on would have made $4 billion.
+So I'm not claiming to have any great expertise in knowing how to best distribute our...
+Dude, markets are brutal.
+It's so hard.
+I mean, you're not so brutal.
+We've all struggled with this.
+Sacks.
+Where have you wound up?
+I think it's case by case.
+I mean, there's some companies where, I'll be.
+like I was on a board
+and you can't sell
+and you end up regretting that
+and then there's others
+where the best thing to do
+is just hold on
+to that stock forever.
+Examples.
+In your portfolio
+we've made great decision.
+I'm not going to talk about
+the ones that didn't do so well
+but no, I mean look
+I've owned
+Meta and Palantir
+as a private
+as a venture investor
+as an angel investor
+and you sold?
+And the question,
+well I sold some
+and held on to some.
+Obviously in hindsight
+you take meta.
+I think meta,
+IPOs, Facebook back then.
+IPO did a $50 billion.
+$20 billion.
+Now it's...
+Went down to 18.
+Yeah.
+Yeah.
+Can you imagine how alternate universe
+if Chimoth never sold
+his Facebook, how insufferable he'd be?
+Or if Freiburg
+never sold his Google,
+Freiburg would be worth $10 billion.
+I wouldn't be nearly as good.
+What's that?
+I wouldn't be nearly as good.
+It's like an analyst.
+Because it created tension.
+It's not real. It's not earned.
+So back in those days, 10 years ago, we thought $100 billion market cap company was pretty much as big as anything could get.
+Yeah.
+And so Facebook at 50 or whatever, it's like the upside was to 100.
+And things are just totally different now.
+We have multi-trillion dollar companies.
+The market's so much bigger.
+And that changes.
+I mean, that's a rub against InVIDIA, which is a $5 billion company.
+And people feel like it's sort of a ceiling on it.
+I think we'll look back at some point in time and say that was a foolish way to think about
+Nvidia given its dominant position and its valuation relative to it.
+Is it undervalued right now?
+Yeah, absolutely.
+On earnings over the next two or three years.
+And is it because people are having a hard time processing the largest entity that's
+ever existed in human history?
+I think that and the narrative that the, well, first of all, technically, there's all this
+other stuff that's growing faster and going up more. People are, and the long short pods are
+structured such that they have to be short something. So, invidia feels like a safe short. By the way,
+Google was a safe short. Amazon was a safe short. So, I mean, this just happens. And sometimes
+they'll languish at a valuation and they break out. I think that'll eventually happen with
+Nvidia. But there's probably some boundary condition discount to that, right? Like we've never
+seeing evaluation like this. You can't overbent that. I want to shift topics for a second. I just
+want to talk society and culture before we run out of time with you. There was this incredible thing
+that you told me, which I relate to these guys, which is you're very passionate about criminal
+justice reform. And specifically, you were a key person to get the pardon of Ross Ulbitt. Tell us your
+views on criminal justice, why it hit such a nerve, and then why Ross Ulbricht.
+What happened there that said, I must fight for this guy?
+Let me take a step back and just talk about my framework for philanthropy,
+which is, I think, not unlike Brad Gersner and many people in the room here,
+is that I care, I would say everybody up here,
+I care deeply about income inequality,
+I care deeply about making sure that as many people have opportunities
+to the incredible things that we've all had here.
+So my interest in criminal justice reform really started earlier with an interest in education and education reform.
+And I was very lucky to start supporting, get on the board, ultimately be chairman of Success Academies,
+which is a charter school network in New York.
+And I do think nobody talks about it, but the thing that's hiding out in plain sight for everybody is that the problems with income inequality isn't that, you know, Jeff Bates.
+is going to be a trillionaire or all these other people are gaining wealth,
+is that we're not equipping children,
+and particularly the most vulnerable children,
+with the intellectual tools that they need to succeed and compete.
+And it's not because poverty is this intractable thing that can't be overcome.
+We've proven that it can be.
+The problem is that the unions and the basic principles that we all use in business,
+which is accountability and merit,
+and cultivating talent is set aside
+for the benefit of adults who are part of these unions.
+It's a systemic thing.
+It's not a lack of money.
+It's really a lack of, it's just a broken structure.
+Accountability is, I think, what I'm hearing, yeah.
+So I spent a lot of time on that, just leave it.
+That I then became aware, and it was interesting.
+I was looking for issues that conservatives, you know,
+it's great to see Fetterman and McCormick up here,
+Like, what are issues that conservatives and liberals, progressives can agree on?
+Hopefully they can agree that we want young people to be better educated.
+I think we can also agree that whenever you put the government in charge of something,
+they'll f*** it up one way or another.
+I want to give you guys a shout out, though, for not f***ing up this private public partnership
+with the investments in the private sector.
+Because I think this administration has done enormously good job at backing companies.
+But let's put that aside.
+It's one of the rare instances where I've seen that.
+Can you give an example of that that's standing out in your mind?
+We have a company in our portfolio called Adam Computing
+that with many other quantum companies has gotten money from the government.
+And we were just super impressed that they,
+how they contracted with us to engage with them in cryptography
+and to meet the government's needs,
+but also in the financial component,
+they drove a really tough bargain.
+The government, the taxpayers are going to make a ton of money on this,
+and their involvement also will contribute meaningfully
+to the value of this business.
+It's just like a win all the way around.
+So they're an investor and a customer.
+Right.
+And they are capturing part of that value as a customer
+for the American people, which I think everybody deserves.
+Okay, so back to the...
+So criminal justice reform,
+First of all, there's a lot of bad people in jail.
+I'm not one to, you know, I think the criminal justice movement has been undermined by
+folks who see it as an opportunity to not prosecute, not deal with bad people that are out there.
+But there's also a lot of people that are rehabilitated.
+Well, there's really three different categories.
+There's people who are falsely convicted.
+There are people who have shown contrition and rehabilitation.
+And there are those who just had a really disproportionate sentence relative to what they did.
+There's a case right now of a guy named John McGrubman,
+who was a dealt in gray market diapers and formula.
+He got an 18-year sentence for dealing these goods.
+In the case of Ross Ulbric, I was approached by someone,
+And this just seemed, Ross, as people may know, probably this room knows.
+He was sort of a folk hero because he had this sort of cat and mouse game with the government.
+He ran Silk Road.
+Silk Road was one of the first, like, crypto-based exchanges.
+He acknowledges that he did things that were illegal that he should have done.
+He regrets it.
+Drugs were dealt on the exchange.
+But that's what he was accused of.
+The government later said that there were murder for hire incidents.
+He was never prosecuted for that, and he denies that that ever happened.
+But in any case, he was sentenced to a double life plus 40 years.
+Who knows how he got the extra 40 years on there and how he would spend that after he'd been there for two lifetimes.
+And there's a woman I met through Intel named Rivetaz who alerted me to this.
+He's friends with Olaf, Carlson Wee, and sort of the crypto insiders.
+And I thought about this.
+This guy's got no way out.
+There's no recourse through the system to get someone with a life sentence out of jail.
+This will only work with a presidential pardon.
+And we worked on it.
+We had some familiarity with the pardon process.
+Worked on it.
+Then I approached Charlie Kirk about this.
+And Charlie really embraced this and embraced this individual as someone who had been falsely,
+or not falsely, but unfairly sentenced.
+He took it to the president.
+Charlie had a, also had an attorney named David Warrington, who's currently the,
+White House Council.
+White House counsel.
+I just found out a couple days ago
+because I was talking to him
+that he was his lawyer for a decade.
+So I'm not taking credit for this.
+I'm not saying Charlie does.
+It takes a village.
+But David had been working on it.
+And on the last day of
+Trump's
+45th term,
+we were certain that he was going to get out
+and the Justice Department
+for whatever reason said
+if you commute his sentence, we're going to go after you to the president.
+So he, as I understand, he withdrew the commutation.
+So four years went by and really Charlie took the lead on this.
+This was his only ask of the president.
+And the president, to libertarians and to the crypto community promised to deal with this.
+not only was sentenced commuted, but he's pardoned, and today Charlie is married, not Charlie, sorry.
+Ross is married as having a child and living a free life after spending a decade,
+which is probably argue whether that was the right amount or not.
+And you feel like you should, is there a role for you to play in doing more of this?
+Was this a one-off?
+No, I continue to work on cases.
+There's an organization called Aleph, and we work.
+you know, constantly on different people.
+And I think it's, you know, look, I feel like as philanthropists,
+it's great to do, to work with organizations.
+And there's a lot of great organizations I work with.
+I do a lot fighting anti-Semitism and supporting Jewish identity also.
+But I also think that we can help people one at a time.
+I think it just really nurtures the soul.
+And I think it just good thing to do.
+All right, let's give it up for Dan.
+Dan Logan.

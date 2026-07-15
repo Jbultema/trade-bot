@@ -25,6 +25,7 @@ def build_signal_state_report(
     prices: pd.DataFrame,
     strategy: StrategyConfig | None,
     execution: ExecutionConfig,
+    include_overlay_backtest: bool = True,
 ) -> SignalStateReport:
     """Build a transparent top-down/bottom-up confirmation read for a candidate.
 
@@ -42,6 +43,9 @@ def build_signal_state_report(
         result=result,
         defensive_ticker=strategy.defensive_ticker,
     )
+    if not include_overlay_backtest:
+        latest = latest_signal_state_readout(latest_assets, pd.DataFrame())
+        return SignalStateReport(latest, latest_assets, pd.DataFrame(), None)
     gated_weights = confirmation_gated_weights(
         result.target_weights,
         signal_frame,

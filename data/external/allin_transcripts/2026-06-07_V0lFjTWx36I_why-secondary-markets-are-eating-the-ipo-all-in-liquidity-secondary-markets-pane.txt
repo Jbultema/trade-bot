@@ -1,0 +1,1099 @@
+source: allin_youtube
+published_date: 2026-06-07
+video_id: V0lFjTWx36I
+url: https://www.youtube.com/watch?v=V0lFjTWx36I
+title: Why Secondary Markets Are Eating the IPO | All-In Liquidity Secondary Markets Panel
+
+Everybody wants access to these private
+markets. Joining [music]
+>> us right now to discuss all of this is
+Kelly Rodriguez. He's a Forge CEO. We
+see a world where the [music] private
+market opens up and is accessible to any
+US and global investor. There's 19
+companies in the private market AI
+basket. These companies have grown on
+average 300%.
+>> Please join us in welcoming Gavin Baker,
+managing partner and CIO of Atrades. The
+ROI on AI has
+empirically, factually, unambiguously
+been positive. Investing is the search
+for truth. We welcome in Brad Gersonner.
+It's good to be back with you. You have
+a program called Invest America.
+>> I think we have a historic moment right
+now to get [music] everybody into the
+game of capitalism.
+>> Do we have a few slides from Brad to
+kick this off?
+>> You know, let's startic like old times.
+like old times. This uh this panel I I
+actually was backstage. I said, "Gavin,
+do you know we're talking about
+secondaries?" He's like, "What do you
+mean?" And I said, "Okay, so here, let's
+just set this up for everybody. The
+room's full of people who are
+allocators. People are looking for
+distributions. So this is um secondary
+markets over the course of the last
+decade. This is the amount of money
+going into VC each year, the amount of
+money coming out of VC each year. The
+red line represents the net effect of
+that. So Jamath, we're in like 5 years,
+right, where a lot more is going in
+than's coming out. But the secondary
+market is at record volume. So this is,
+you know, I call these companies quasi
+public companies. These are these later
+stage companies. There's buying and
+selling that's going on every day. Look
+at that, Jason. Relative to the 21 peak.
+We thought that was crazy at the end of
+21. We're double that now in terms of
+secondary transactions. This is the
+amount of employee secondary. So this is
+people buying into Anderal, Anthropic,
+SpaceX now represents 31% of all primary
+venture activity is buying into these
+secondaries in 2025.
+Secondaries are now competing with IPOs
+and acquisitions as the principal way
+that these guys are exiting. So, I
+thought that was a decent setup to start
+the conversation this morning just to
+level set how important secondaries
+[clears throat] have become. And then
+the final one is secondaries over the
+last couple years were trading at a
+discount to market. So, if we wanted to
+sell shares in one of our companies,
+right, to buyers out there, they were
+willing to give us 80 cents on the
+dollar in order for us to get liquid so
+that we could send DPI back to our LPS.
+Today it's at 106. Uh uh so a premium in
+the market as a coupon.
+>> And this doesn't include some of the
+wild west of SPVS that have been
+unraveled recently.
+>> People charging 10% loadin fees, double
+carry and a lot of gray market offmarket
+stuff. This is also having a profound
+impact, Gavin, on employees at these
+companies that I want to hear about
+because you've seen it up close and
+personal with SpaceX and they have a
+very orderly process here. So, why don't
+we start there? What impact is this
+having on the employees, Gavin? And then
+on the market, how orderly is this? And
+and who are the buyers? Are the buyers
+the sucker at the table? are these
+family offices, high netw worth
+individuals who keep hearing us talk
+about Anthropic or SpaceX or Andril and
+they just say I have to own the name and
+they're not discerning. So Gavin, maybe
+you can start about the impact on the
+SpaceX employees you saw firsthand, etc.
+Well, maybe broadening it beyond SpaceX,
+I do just think if companies are going
+to be staying private longer, this is
+absolutely necessary. There I think
+there are a lot of people who are very
+um very wealthy on paper but actually
+cash poor and if you're making
+tremendous sacrifices
+uh because you know you work for a
+company that you really believe in and
+you're contributing a lot to that
+company. It's hard if you can't buy a
+nice house for your family. It's hard if
+you can't afford to do nice things,
+>> especially in year seven, eight or nine
+of working at the company and you tell
+your spouse we're worth 10 million on
+paper, 30 million on paper and you don't
+own your home.
+>> Yeah. Or year 15. And so I think this is
+necessary and important and you know
+whether it is good or bad, I think it is
+very clear that companies um are going
+to stay private for longer.
+>> What's the reason to stay private
+longer? Truly
+>> I I I don't think there is actually a
+good reason to stay private longer
+>> here. Here
+>> and
+>> I completely agree with you too.
+>> Yeah. And I
+>> Why has it happened? This is founders
+don't want let's just call it what it
+is. Founders don't want to be under a
+microscope. They want to build and enjoy
+life and have it easier than being on
+the public market microscoped.
+>> Yeah. I think there is a perception that
+life as a private company is easier and
+you have more freedom and you can think
+long term.
+I don't agree with this. I always think
+about um Mark Zuckerberg's commentary
+that had he been public. So just you
+know Facebook um I won't call it a
+near-death experience but long ago it's
+difficult to believe but I don't 10 112
+um Facebook did not believe in apps they
+believed in something called HTML 6
+>> and HTML 5
+>> HTML 5 HTML 5 Yes. You you you you were
+the actual
+>> it was the cataclysmic debate and it was
+me and Brett Taylor. Me versus Brett. I
+was like apps I want to go build a
+phone. Brett was like HTML 5. Zuck
+picked Brett. Spent the next three years
+unwinding that decision.
+>> Absolutely. And Mark Zuckerberg and
+basically the idea was you know the
+iPhone comes out and initially there was
+not a big app app ecosystem and there
+was a thought that hey there's no need
+for apps. you're just going to use the
+web browser on your phone and HTML 5 was
+a way of look of making websites look
+mobile native
+>> dynamic.
+>> Yeah. And this seemed like kind of the
+future to a lot of very smart people
+including Google, Facebook. Um but it
+was not the future. Um it was wrong. And
+what Mark Darker has said, I think
+several times in public is he profoundly
+believes that had he been a public
+company
+um when you know there was this internal
+debate between the and the detail was
+actually I went to Zuck and I said I
+need a billion dollars to build this
+phone and we are in this moment in 2010
+where we can have the third leg of the
+stool. there's Android, there's iPhone,
+neither have really taken off yet.
+And and he's like, we don't have a
+billion. And I said, but the public
+markets will give us a billion. And he
+said, no, but then we went public a year
+later,
+>> but that year made all the difference.
+>> Made all the difference. And he said
+that had I had the constant pressure
+testing from public market investors,
+you there's a dynamic. I was I was
+talking to another CEO here this
+morning. When you're the CEO of a
+private company, you are the most
+special flower to all of your investors.
+[laughter] You're like, you are as
+important to your board members,
+particularly if you're really
+successful. You know, maybe as the board
+members families or parents, you know,
+the board members think about you a lot.
+Um, once you're public, you're one of
+thousands of companies. Um, and that's
+its own dynamic. But the consequence of
+this is is that private investors are
+often selling to management teams. And
+at some level that can mean telling
+management teams what they need to hear
+because you want to be able to keep
+participating in the rounds. Once a
+company's public, you can buy or sell as
+you wish. And this means that investors
+feel freer to give companies management
+teams. And Zuckerberg Zuckerberg said,
+"Had I been public, had I been getting
+rigorous, detailed questions from really
+smart public equity investors, I think I
+would have, you know, by the way, the
+second unwritten story of that, which
+has never been said, he called me. He's
+like, "Hey, man, what the is going on
+over there?" Uh, and I was like, "Yeah,
+I know." Cuz I had just left and then we
+wrote a deck
+and I walked over to Zuck and I'm like,
+"Here's the deck of what you need to
+do." Yeah,
+>> do these things. Well, this is a key
+point. I think Gavin is when you're
+private, you do not get clean
+information as the CEO and the
+management team because people want
+access and once you give the truth or
+you ask the hard questions, you might
+lose access
+>> 100%.
+>> The sickopantic nature of private
+markets is real.
+>> Now, an exceptional CEO
+>> Elon
+>> seeks out negative feedback. looking for
+that.
+>> But not many and actively discards, but
+not many CEOs maybe are are wired that
+way. And by the way, I do think we have
+to give Brad credit. That was a very
+good deck. You said back in 2012.
+>> No, cuz he did a second one. He had
+>> when he did the second one, he did the
+open letter to Zuckerberg at the end of
+Was that at the end of 22?
+>> October 22.
+>> Why don't you call it? Get fit. What was
+the uh time to get fit?
+>> Time to get fit. That was an impact.
+Those are two very impactful.
+>> Okay. So look, there's you're you're
+hearing the bulls on going public, but
+Kelly, take the red team the other side
+because you're on the other side. You
+built a private business, you sold it to
+Schwab, so clearly one of the largest
+financial institutions now is going to
+ram its way into this market. But then
+you're seeing a lot of push back.
+Anthropic is like, "Hey, uh, dissolve
+these SPVS." OpenAI, I think, was saying
+today now, dissolve these SPVS.
+Should we dissolve the SPVS? Where are
+they coming from? And why are you on the
+right side of history?
+>> And and have you had to dissolve any of
+the ones on your marketplace?
+>> No.
+>> No. Look, I think that uh first of all,
+being a private company CEO for most of
+my career and then being a public
+company CEO for three years, I recognize
+the job is incredibly different. It's
+much less fun. Uh you're not doing
+>> Hold on. What do you mean when you say
+much less fun? Turning into an
+investment manager primarily as a public
+company CEO
+is a very different job than being a
+visionary [clears throat]
+product first uh first principles
+business when you become a public
+company CEO everything changes and I
+would say in the world we're in now the
+kind of capital you can raise the kind
+of capital that was represented in the
+very last discussion allows you to
+extend extend your private life. SpaceX
+private company for 24 years. Um but the
+reality is these SPVS that are now
+emerging because these companies are
+getting so big is because a market's
+trying to happen
+and a company like SpaceX has done this
+extraordinarily well. They've run
+essentially liquidity programs for
+almost a decade
+because there's so much pent-up interest
+in both being an investor and getting
+liquidity for some of the reasons that
+Gavin was mentioning. So I think what we
+see now is the next phase of this this
+Schwab deal with Forge basically says to
+the world this is a real asset class.
+It's more than just secondaries.
+We're going to put these companies, the
+company's equity into fund products into
+very well-managed, regulated SPV
+structures because they do serve a
+purpose in the market.
+>> Yeah. But if you're how do you convince
+Elon specifically to give you access to
+that when he wants to do it himself and
+he has a team and every six months he
+runs it himself? How do you get access
+to that? What's your pitch to the next
+Elon?
+>> Here's the pitch. The pitch is you're
+going to go from being a private company
+eventually to a public company. What
+Schwab represents is 46 million
+investors and 12 trillion.
+This will change capital access and the
+way that you distribute your shares
+moving from private to public.
+>> How did that work when you pitched them
+on that?
+>> Were you Well, I'll tell you. We got our
+first SPVS on SpaceX in 2018 and 2019.
+Were they was he okay with it?
+>> Absolutely. Totally permissioned. And
+then as we got closer to the IPO, we
+said, "Guess what? Um, we've got 30
+million retail investors that would like
+to have a $50,000 slice of SpaceX."
+And and he went out [snorts] publicly
+and talked about having broad-based
+distribution
+>> at the IPO price.
+>> At the IPO price and Schwab was named
+one of the IPO allocations.
+>> Beautiful. I do think this is actually a
+very effective pitch. I think a lot of
+these CEOs, they're a little bit
+ambivalent about, you know, and I think
+they understand that maybe the
+institutions who are investing in these
+private rounds, you know, they may
+represent, you know, unions, they may
+represent retirement plans, but I do
+think they like the idea of
+democratizing access and if they're
+building something that they think is
+great, giving ordinary Americans an
+opportunity to participate. I actually
+think that's a very appealing story to
+to a lot of these CEOs
+>> because they're capitalists and and they
+understand the power of equity. So Brad,
+>> what is the downside then of cuz you're
+part of the go direct movement now? BG2
+pod officially fifth bestie. Gavin
+officially sixth bestie. You [laughter]
+got that's Gavin. That's new news. We
+officially made you six bestie today.
+>> But does that mean I'm definitively
+behind Brad? Cuz [laughter] that that's
+the real news.
+>> I can You're standing behind Brad.
+You're just giving him that big bear hug
+right behind him.
+>> Wow.
+>> So, are you saying I'm the big spoon?
+>> You're the big spoon now [laughter] in
+the in the side draw with the extra
+spoons.
+>> But Brad, it's getting very weird very
+quick.
+>> In all seriousness, with great power
+comes great responsibility.
+Sometimes the, you know, the enthusiasm
+people can have can exceed reality.
+>> Correct.
+>> Going direct, you've become more
+measured. I've noticed as your profile
+has gone up.
+>> I think all of us have to like just make
+sure people don't blindly follow trades.
+Don't
+>> you were talking stuff down on CNBC a
+couple of times saying, "Hey, I don't
+think the average American needs to be
+in some of these companies. There's
+time."
+>> I get worried. I get worried at this
+point in the market stage, particularly
+on CNBC where you're talking to retail
+investors at home. Yes,
+>> I was one of those retail guys looking
+up to everybody on this stage, trusting
+everybody on this stage. And when people
+are telling you to yolo into right
+double fee structure, SPVS and all this,
+you know, like it's time to be careful,
+to do your work, to be thoughtful. We're
+in this because we want this to be
+durable democratization for a long time.
+Yeah.
+>> We want to build trust among those who
+feel left out and left behind in
+capitalism. We all think that we need to
+go public sooner. The reason I think we
+it is destabilizing
+when you're creating trillions of
+dollars in private value and 80% of
+America think it's a scam where they're
+left out and left behind. That's
+>> and then they come rushing in
+>> and they could be
+not so good cards,
+>> right? So, all I'm saying, like I said
+about they asked the question on CNBC
+last week, if you had $100,000 of fresh
+capital and you were sitting at home, is
+today the day that you would shove it
+all into the market? And I said, no, I
+think about it in sizes, right? We just
+had two of the biggest months in the
+last 10 years in the public markets.
+They've been big months. So, if I had a
+stack of a hundred, I may put 30 to work
+today. I'm never going to pick the
+bottom. I'm never going to pick the top,
+but I certainly wouldn't be putting it
+all to work. And I'd say the same thing
+about latestage privates, people who are
+yoloing into this stuff, and then they
+feel really disappointed. They're like,
+"Hold on a second. I bought the SpaceX
+IPO and it didn't go up 3x."
+>> Let me ask you then.
+>> Yeah.
+>> Do you view this as exit liquidity for
+you? Like, would you shape your
+portfolio and returns and increasingly
+say, "You know what? I don't know when
+this guy's going to go public."
+>> Yes.
+>> Let me just pump the stuff out. Let me
+get the distribution. and let me send it
+to my LPs and just call it a day.
+>> We we are selling into this.
+>> You're selling into this,
+>> right? So, I have LPs in this room who
+say, "Listen, we invested in your VC5 or
+VC6 7 or 8 years ago. If you can go sell
+a slice of that at four or 5x and we get
+DPI and it's priced really high, then go
+sell some of it." And we often don't
+talk about this in Venturland. Half of
+what we do is in the public markets.
+Gavin and I get up every morning and we
+think to ourselves, should we buy today
+or should we sell today? Venture
+capitalists don't think about the sell
+part. They think about the buy part. So
+one of if we're going to stay private
+for longer and we're going to have
+trillion dollar you know private
+companies and data bricks at $200
+billion you got to think about is today
+a day we should be selling some and
+returning it to our investors because
+>> doesn't it create though as as what
+Jason said these very complicated
+personality dynamics where maybe you get
+shut out of a new company maybe you get
+shut out of an incremental round and you
+know there's bad blood because you're a
+credible investor And there's this
+signaling risk. Whereas in the privates,
+if you and Gavin decide to sell, nobody
+knows.
+>> Well, no. In the in in the private,
+nobody knows.
+>> Exactly. The public's they don't know
+until our 13F comes out. Okay.
+>> But in the private market, it's always a
+conversation between me and the founder
+to say, "Listen, we're we're going to
+sell 30% of our position." They never
+like it, Chimath. They're always like,
+"We wish you wouldn't do that. They
+don't want it known, etc." But my job as
+a fiduciary to the LPs of this is to do
+that.
+>> It does feel Gavin like we have crossed
+over for early stage venture to a point
+in which there is a third way. Either
+your company had M&A and we saw in the
+presentation yesterday that during the
+wrath of Lena there was no M&A and they
+just froze the market. Now it's coming
+back. IPOs we did have some freezing of
+that market for certain periods. But
+this third way is now fantastic. I can
+tell you as the earliest of the early we
+are now pari pursu selling into every
+chance we get because our average
+investment is at 10 to$20 million
+valuations. When they hit 500 million I
+tell the founder you're going to start
+selling at 500 million. I'm going to
+sell right alongside you so that I can
+invest in the next you coming into the
+market. Everybody's fine with it. I but
+I can tell you six or seven years ago
+when I did this with a company they
+begged me to not participate when they
+hit peak zerp 2021 they begged me Jay
+Cal you have to be loyal to us you can't
+sell paru and I said you you guys are
+clearing 40 million of the $110 million
+[clears throat] round I'm just asking to
+be next to you same amount can I ask
+Kelly a question how do you systematize
+this so that it's like an exchange so
+like if we just want to hit the bid we
+can do it like what I don't like about
+the secondary markets is, you know, I
+ask my CFO, he calls five guys, then my
+fun CFO, she calls like four. You know,
+>> it's like ticket brokers. We get a bunch
+of bids. None of it makes any sense. And
+I'm like,
+>> and I'm already dealing with, as Brad
+said, the agit from the CEO.
+>> It's got to be easier than this. Like,
+>> yes. Yeah. Look, we 10 years ago, we
+said there needs to be infrastructure to
+pull this off. This can't just be a big
+shadow market. We're sort of in this
+tipping point now where we spent the
+last 3 years building this brand new
+platform so that a company could plug
+into it the same way they could list on
+an exchange and say we're going to offer
+liquidity. And furthermore, if you're a
+VC and you're on that cap structure for
+10 years and you want to offer LP
+liquidity, you can do it in
+>> to be specific. What do you mean you're
+like we would be plugging into Schwab's
+30 million humans that are buying stuff
+on? There's there's a platform. We
+brought a a platform with about 3
+million investors and now we're going to
+add 46 million investors to them.
+>> Yeah. But wait, hold on a second. Aren't
+those are those accredited investors? Do
+they need to be? Because we just had the
+chair of the SEC on
+>> So today, if you are trading individual
+shares, whether it's in an SPV or direct
+on a cap table, you're accredited.
+However, there are products coming to
+market, we can talk about this in detail
+later, that have 60 companies, including
+SpaceX, that are listed products for
+unacredited $500 minimums. And that
+capital for those funds will be the
+underlying
+>> closed end funds.
+>> These are interval funds.
+>> Interval funds. He's got one out now.
+>> I think Naval just did USVC as one of
+these. He's gonna contribute to
+>> now. the closed end funds
+>> are are a very different bet because
+you're betting on FOMO because if you
+look at the underlying value of some of
+the assets and those closed end funds
+they have no bearing to reality of what
+those underlying shares are actually
+worth. So price discovery is another key
+component of this structural shift. But
+to answer your question specifically, if
+a VC's LPs want to recycle or want to
+get liquid, then a platform like this
+will allow them to recycle that capital
+and put it back into the next vintage
+fund if they want.
+>> I have a I have a question for you based
+on this. When these returns come out,
+the mean
+return in venture is going to look
+incredible.
+The median return is still going to be
+So walk us through how people will sort
+through that and the reality of what's
+going to happen in the next year.
+>> Well, so I think there's there's two
+very important things. one, I observe if
+you if you were a venture firm and you
+do not have material exposure to one of
+these trillion dollar plus companies
+that you had many many chances, you
+know, to to buy into. You're not only
+your returns not going to be good, but
+you're not going to have DPI on a
+relative basis, but you're not going to
+have DPI. And you know, there's
+exceptions. you know are you know you
+know great series A firms they may not
+have this but their returns are still
+amazing with great DPI but in so I am
+beginning to see venture firms who don't
+have exposure to one of these companies
+behave in strange ways because I think
+they're starting to feel a little bit of
+franchise risk because their DPI and
+their returns are going to go from you
+know hey top quintile top tile tile
+>> so they're doing unnatural ads doing
+unnatural things. They're writing what I
+see as call options, like a bunch of
+these, you know, Neolabs. Well, I need a
+story. I've done something. And maybe
+some of these call options pay off, but
+I do think they're engaging at some
+level and maybe
+>> they're chasing it.
+>> They're chasing gambling terms. Whereas
+the people who have exposure to this, I
+are being a lot more disciplined because
+they know they're in in in a great
+position. I think another very important
+dynamic is going to happen in the world
+of longon only mutual funds and
+crossover funds. So, Long Only Mutual
+Funds, uh, you know, my for former
+employer, Fidelity, amazing place, love
+it. Uh, Bailey Gford, Capital Research,
+Wellington,
+>> Tro, they all can, per SEC rules,
+allocate up to 15% of their funds into
+privates. And these are the biggest
+pools of capital in the world. They
+dwarf sovereign wealth funds. But, you
+know, most firms, because they don't
+want to get in trouble with the SEC,
+they say, "Hey, we're going to cap it at
+3% or 5% or 7%. It was very public.
+Bailey Gford was forced to sell SpaceX
+last year
+>> for regulatory reasons. And um what's
+going to happen as these companies go
+public? All of these long only mutual
+funds are by and large finding it hard
+to participate in private markets right
+now because they're at the limits of
+their self-imposed
+>> 3%
+>> 3 5%.
+>> When a company goes public and the
+lockup expires, it moves out of that
+bucket. Nice.
+>> So, this is going to be hundreds of
+billions of dollars of new late stage
+demand that is coming back to the market
+after kind of being out out of the
+market for a while.
+>> That's a lot of dry powder. There's a
+lot of dry powder.
+>> The net trade is up. Then the the
+marginal trade is is up.
+>> Founders are going to be in the cap bird
+seat. People are going to be looking to
+put money to work. Interesting
+buzz going around about accreditation
+rules. We had the head of the SEC on
+Allins interview show. We did it. And
+they're going to have a sophisticated
+investor test, something I've been
+talking about for a long time that would
+really democratize the way Invest
+America has access. Um, and then funds.
+I've been getting pitched for years on,
+oh, put your fund on blockchain or sell
+your fund into this ETF. Maybe you could
+talk a little, Kelly, about the
+possibilities around venture funds being
+more tradable like secondaries are. Is
+that on your road map? Obviously,
+there's demand for it. What would that
+because I can tell you what that would
+do for my LPs, you know, Brad Chamat's
+LPs and and previous funds. If you could
+come in and out of these funds, the way
+you can come in and out of anthropic, my
+lord, that could be just incredible for
+folks who, I don't know, they have a
+divorce, they have a life event, you
+know, just a little more fluidity.
+>> So, there's been there's been secondary
+fund trading for a long time. Um, I
+think blockchain and tokenization makes
+it more efficient. That world will will
+come. But the question we're asking
+ourselves now is if you're an LP in a
+fund that's holding something as
+valuable as this, uh, are are you really
+interested in trading your fund position
+or do you just want to get out of
+>> the big winner, that name?
+>> Um, and and our view is it's probably
+the latter.
+Um, and in some cases funds will come to
+us and say, "We've got a vintage fund
+that has two companies in it that are 15
+years old and we can't clear that fund."
+And so that's that's an application of
+liquidity to the market that we think is
+coming to the market.
+>> Are you are you worried at all over this
+next year about this idea of retail
+being exit liquidity for these three
+ginormous companies? like is is there
+any risk? Like how do you bucket the
+risk? How do you manage the risk? Yeah.
+>> What is the risk if something were to
+happen? What's the blowback?
+>> I was talking with Brad about this
+yesterday. We're we're watching these
+valuations and these multiples. We had
+this conversation at dinner last night
+and saying, "Wow, these are these are
+extraordinary and people should come
+into this market." And
+>> extraordinary is a coded word for
+>> uh it's you know, it's okay fine. Um
+>> it's a bubble. You're saying you're
+saying you think they're high the
+valuation.
+>> I think the retail investor coming into
+this space needs to look down market and
+look at interesting opportunities that
+aren't the things that are on CNBC every
+day and have access to them earlier. And
+we had a bunch of retail investors show
+up in 2018 and 2019 that wanted to be in
+SpaceX and they're and they're thrilled
+that they got in when the valuation was
+30 billion.
+>> Yeah.
+>> Um and I think if the market opens up,
+that's what we'll be talking about. what
+what's what what do I want to get into
+now that's not you know at the very very
+top of the market getting ready to go
+public
+>> also Brad and Gavin we're getting better
+shout out to um Gurley we're getting
+better at pricing these IPOs and not
+leaving money on the table they're fully
+valued in most cases when they go public
+yeah or in some cases
+>> they're still mispriced they're
+massively mispriced
+>> well no we we have seen some that have
+gone down you know after they go out so
+you know
+>> nothing good that anybody wants
+>> I mean listen anyway what what do you
+guys think is are we are we closer to
+correctly pricing them?
+>> I mean Gav and I have been doing this 25
+years. There are moments that the public
+market is undervalued relative to
+privates and moments where privates are
+undervalued relative to public. Right
+now everything in the world of
+technology is pretty fully valued,
+right? Like it's you can't have the
+parabolic moves we've had and think that
+everything is cheap. That's not to say
+that we're not going to go higher, but
+when you've been punched in the faces
+many times, as all of us have over the
+last 15 years in technology, we know
+it's a jagged line up and to the right.
+So for the retail investor, so long as
+they have staying power, so if if you're
+going to launch a product, as long as
+the retail investor can stay in that
+product through the draw down, they're
+going to do fine. The problem is most of
+them yolo at the top because everybody
+gets them all jimmied up and excited and
+so they're, you know, they're levering
+up. They're doing 2x levered, you know,
+memory trades and all this that Gav
+and I are. There are 14 ETFs launching
+on the day of the SpaceX IPO that are
+levered ETFs into SpaceX at like
+whatever 1.75 trillion. So, this just
+tells me that there's a lot of signal.
+We may not be at the top, but we ain't
+at the bottom.
+>> We're bouncing along. The top might be a
+fair, you know, you got to allocate
+accordingly. And that's what active
+management is about. If we do not if
+we're not thinking about that, when when
+people are puking into their garbage
+cans at the start of the Iran war and
+the market is down, Gavin and I are
+looking at each other and saying, "Good
+God, these anthropic revenues are off
+the charts. We got to get more dollars
+at risk. shove more onto the table in
+both anthropic and public market stocks.
+But then 75 days later, it's all
+changed. Right now, the market,
+>> have you guys ever been in a market
+cycle [clears throat] where these moves
+are just so concentrated in time where
+you take like a year or two's worth of
+moves and you compress it into 30 days,
+60 days?
+>> I mean, this is nothing relative to 99
+and 2000.
+>> Nothing.
+>> This is nothing relative to that.
+>> Like, I mean, describe describe. Yeah.
+Just package. Sometimes they wake up.
+>> What was 992000 like in terms of like a
+if this is a roller coaster, what was
+that?
+>> Yeah.
+>> And what was that? I mean, I don't you
+know, this is this is this is like a uh
+this is a roller coaster that's um like
+kind of a gentle sinewave.
+>> 99 was Vegas on a Friday night after way
+too many drugs.
+>> Okay. Like it was out of control nuts.
+CMGI had no revenue and the stock went
+from $2 to $2,000 over the course of,
+you know, six months. They buy Foxboro
+Stadium. They're on the cover of Time
+magazine and they're out of business 2
+years later, right? Like that is very
+different than Anthropic, Open AAI, and
+SpaceX. These are extraordinarily real
+businesses. So, I think the better
+compare is like 2021. Yeah.
+>> Right. Where valuations get ahead of
+themselves or they're at the top end of
+the range. We could have a normal
+run-of-the-mill consolidation in the
+public markets in the semi-index of 10
+or 20% which means high beta would be
+down 30 to 40% and a lot of people who
+just got in would be panicking right but
+the people who have been in for 6 months
+or 3 years would would would notice that
+that's just a blip. So I don't think
+it's at all like that.
+>> Okay. I have a question for the three of
+you. Four. Yeah. Final question.
+>> I have final question. Take the top 10
+names private companies off. Okay.
+Forget those. You can't pick those. Give
+me a sub,
+you know, in the tens of billions, few
+hundred billion private company that you
+could buy today a secondary in that you
+do not own that you would want to own.
+I'll start with you, Brad. Just go
+around the horn. Something you don't
+own, but if you had the chance to buy a
+secondary, you would.
+>> I mean, I take a company, you know, in
+that what I call inflection growth,
+Jamas. So, these are companies, the
+thousand companies that are over 3
+billion, but let's call it sub50
+billion. I think it's the trickiest area
+of the investing landscape. Um, because
+they're the beneficiaries of high
+valuations, yet they still have binary
+risk.
+>> Right.
+>> Right. Like Anthropic, OpenAI, SpaceX, I
+don't think these companies have binary
+risk, but there are a lot in, you know,
+in that bucket that do. Um, and so I
+mean, we own most of the ones I want to
+own. I I I can't give you one that we
+don't.
+If I want to own it, I I generally own
+it.
+>> It's a hard question. [laughter] I'll
+give you How about the last one you say?
+I'd say like Sierra Brett Taylor's
+company. Um, you know, what do they do?
+>> So, they're building basically
+Salesforce
+>> agent native.
+>> Got it.
+>> So, sales, marketing, customer service
+agents that are agent native. I'll give
+you the downside and the upside. We also
+own a company called Parlo and the same
+space in Europe that I think is really
+interesting. downside open AI and
+anthropics say we're going to do this
+and all of a sudden it eviscerates their
+hundreds of millions of dollars in
+revenue. The upside on on these
+businesses is that they actually have
+already built very sophisticated agentic
+layers and that all these guys Meta,
+Google, uh SpaceX come along and say we
+want to buy you because we want to
+accelerate our path into agent.
+>> I I'll give you the name that I was
+convinced of today yesterday by um by
+Thomas Leant which was Revolute.
+>> You know, I had always the kind of like
+I had some early Jack like I owned some
+Coinbase, I owned some Robin Hood, we
+did all of that stuff. It was fine. Kind
+of ignored fintech and Thomas backstage
+gave me an incredibly we were together
+an incredibly compelling pitch for
+Revolute and and I and I actually went
+and I was like, "Okay, show me what the
+Revolute share prices in these secondary
+markets." I got kind of curious. Maybe I
+should pick up some that. So [snorts]
+that that would be my
+>> What does Revolute do? Explain for the
+audience.
+>> It's a bank. It's a bank. And what's
+interesting is it's a neo bank that has
+a completely next generation stack. kind
+of what Brad said is like that theme of
+you rebuild it in the modern era and you
+unbundle the incumbent that that has a
+lot of legs and in a regulated market
+that has a ton of legs and so you know
+they're doing really well in Europe
+they're coming to the United States the
+founder seems to be just an absolute
+star
+>> tens of millions of customers 14 lines
+of business they're like a billion
+curious like that I I have Gavin do you
+have one that you've bought recently
+>> no I would just say um well you know two
+names that um we've been involved in
+publicly is leading are Arya and Drivets
+and they're both in the networking space
+and basically as um data centers get
+more specialized and complicated
+you you're going to have increasingly
+specialized chips it's called the
+disagregation of inference and pre-fill
+and decode and to make all of these
+chips to work together like a symphony
+and have the kind of the right chip for
+the right job at the right time I do
+think we need to reinvent networking and
+Arya and driveets are coming at the
+in a very different way. And if you're
+an AI lab,
+>> you've been one of the earliest. I'll
+give you credit. I think that you you
+you framed this on one of on a podcast
+that I saw, which is there is an
+impending super cycle in infra
+networking, silicon, and you've really
+been at the front of it. I buy into it
+completely now, too. Really, it's a
+really It's really good. It's really any
+names.
+>> Uh Neuroobotics
+in Europe.
+>> Neuroobotics is a company name.
+>> Yes. and uh AI powered um logistics
+robotics.
+>> Love it.
+>> Um they're not in the main strip of high
+value real estate in Silicon Valley.
+They're in Germany.
+>> Uh quiet company, big investors, 100
+million revenue, kicking ass.
+>> Love it. Jason, well, I you know, I I
+have a couple of thesis uh that I've
+been looking at. One is what is Elon
+helping put into space as the price goes
+down. And so we did uh direct on the cap
+table and SPV for vast which is building
+space stations and we think they're
+going to win. The other one is what I'll
+just call Uber 2.0. You know, we girly
+and I took a lot of notes on that, Brad,
+as well. And so we were able to do
+zipline and we we put a small ticket
+size into zipline as well because if you
+can take the delivery cost down from $15
+to five and then eventually two, that's
+going to just drive consumption
+massively and it's going to happen in
+the air. And these actual drones had
+such a false start that everybody gave
+up on the entire sector and now it
+works. And it was just a very simple
+innovation that Keller told me, which
+was it's the drone stays up in the air
+and drops a tether with the box in your
+burrito. If you grab the tether and you
+pull it, it just comes down. You don't
+have to land like this giant robot in
+your backyard with blades spinning to
+kill your dog. Well, I think there's
+actually a very important like on
+Zipline. It's an amazing It has done
+great things for the world. Um so my my
+at trades is also uh in involved in
+zipline but zipline started so the hard
+thing is to make anything autonomous
+work you need to get it out in to the
+world and gathering real world data.
+This is how AI works and it's hard to
+get approval to fly things around um
+autonomously in American airspace. So
+Keller had the idea of we're going to go
+to African countries and we are going to
+de you know if a we're going to help or
+deliver medicines to these small
+villages and they focused on maternity
+and they have cut the maternal mortality
+rate in some of these African countries
+by 90 to 95%. And so you're in a small
+village, there's a one midwife, there's
+an app, a woman goes into labor, they
+press a button, and you know, an hour
+later, a zipline drone drops a
+refrigerated package of modern medicine,
+blood, and everything needed. They did
+it for seven years
+>> and it's had a huge impact on health
+outcomes in these African countries
+>> and now it's come to America.
+>> I I this is an incredible story and I've
+basically now reconstructed my firm to
+do the barbell. I missed the seed
+investment. I turned him down because I
+was like, "We don't invest on that
+continent. We don't have any insight
+into it. We don't understand it and
+hardware is hard." And he has the email,
+whatever. And I've stayed in touch with
+him and he said, "Listen, I figured it
+out." And I said, "Hey, you know, I have
+the syndicate. Let me see if I can
+correct that mistake. May I invest?" He
+said, "I I you're my dream investor.
+I've wanted you on this whole time and
+it's just so important." Um, no. No.
+we've been friends for all this time and
+I've you know I have had him on the pod
+three times
+>> and he said when are you going to be on
+the cap table and I said you know what I
+learning from you guys specifically this
+late stage stuff I'm like well I can do
+that and here we are and
+>> on that note
+>> yes
+>> let's wrap up
+>> yes well done guys thank you so much
+>> thank you Kelly thank you
+>> thank Thank you. [music]
+[music]

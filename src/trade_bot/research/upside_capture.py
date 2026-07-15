@@ -33,7 +33,7 @@ from trade_bot.features.indicators import (
 from trade_bot.strategies.momentum import build_strategy_weights
 
 DEFAULT_UPSIDE_CAPTURE_OUTPUT_DIR = Path("reports/upside_capture_lab")
-DEFAULT_PRIMARY_STRATEGY = "i111_reentry_vol_target_fast_21d"
+DEFAULT_PRIMARY_STRATEGY = "i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145"
 
 
 @dataclass(frozen=True)

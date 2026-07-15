@@ -1,0 +1,1367 @@
+source: allin_podscripts
+published_date: 2025-07-19
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/trump-vs-powell-solving-the-debt-crisis-the-10t-agi-prize-genius-act-becomes-law
+title: Trump vs Powell, Solving the Debt Crisis, The $10T AGI Prize, GENIUS Act Becomes Law
+
+So Gavin, were you at the Coldplay concert in Boston last night?
+Sadly, I missed that. It's
+Who are you with?
+Exactly. I was at home with my wife. But yeah, wow, how insane.
+There's just so many layers to that story. It's impossible to get away from.
+It'll be 72 hours of memes. Dave, were you at the Coldplay concert in Boston last night?
+And if so, were you with Woody, your astronaut friend?
+Did you take Woody to the concert?
+No counselor, I was here in Santa Cruz last night.
+Oh, you were in Santa Cruz on a business trip?
+Okay.
+The funny thing is, if they had not reacted
+the way they did, the camera would have just panned away.
+Yeah. Nothing. No camera would have just panned away. Yeah.
+Nothing.
+No one would have ever known.
+There is some great irony to the head of people and human
+resources being in an affair with the CEO, apparently.
+Allegedly.
+Don't jump to conclusions, Jason.
+No, it could have.
+He could have been cracking her back,
+you know, like when you get your back tight.
+Yes, it could have been a chiropractic.
+Yeah, chiropractic move.
+Oh my god. back, you know, like when you get your back tight. Yes, it could have been a chiropractic, chiropractic move.
+All right, let's get to work. It is the
+slow, slow news weeks of summer. And we are delighted, delighted
+have fan favorite super intelligent bestie, Gavin Baker with us from a treaties. How are you, sir? How's your summer
+shaping up?
+Fantastic. It's been awesome.
+Stock market is back. That's good for you because you invest in both public and
+private companies. Yeah.
+My firm does. Yes. Yeah.
+Gavin, let me ask you a question. How do you price tariffs today? So where do you
+think this ends up? Obviously, there's a lot of back and forth and you know,
+everyone's trying to make a read on what the end game is.
+What's your market take as you're making investments right now and where we end up on the tariff run?
+It is a good question. It's it's open. We're going to see what happens with
+sectoral tariffs. I think it's it's hard. You're doing the winning AI summit. It's
+going to be hard to win an AI if we put tariffs on semiconductors. But for a lot of what I do for now,
+tariffs are not super relevant. But you know, for for the
+market for the economy, they are relevant. But for AI, there may
+be a little less relevant because I think everyone is is
+maybe a little more sophisticated about the
+downsides of tariffs for constructing data centers here
+in the United States.
+And ultimately, don't we look at the tariff situation and say,
+despite the shock and awe of the opening salvo,
+it's quite a boring position now.
+It just seems to be reciprocity and reasonable reciprocity at that.
+Yeah, that's how we would sort of categorize the end game here
+I would say for everyone but China, you know it is and you know, we're we've clearly reached some sort of deal up
+With China, you know rare earths for H 20s and mi 308 X's
+but it's interesting and one of the
+The trade deals that has been finalized is Vietnam and there's a special carve out
+For goods that were trans shipped from China through Vietnam The trade deals that have been finalized is Vietnam and there's a special carve out for
+goods that were trans-shipped from China through Vietnam.
+So they are clearly focused on China, more than almost in any other country, rightly
+or wrongly.
+But yeah, and I do think there is, you know, there was maybe three months where Trump said
+he did not care about the stock market, but
+now he's back to quoting the market at all-time highs.
+He clearly cares and is clearly very sensitive to market feedback.
+So I think that that will be a dampening mechanism on tariff volatility.
+But they passed the bill and he immediately went back to tariffs. And you know,
+we'll see where we land in August. But I just think the most important thing in the market by
+far is AI kind of overwhelms everything else. Absolutely. And I guess the other big story with
+the market and we'll get into the H 20s. David Sachs will be joining us in a moment. So he'll be jumping in halfway through it. But let's start with
+maybe this soft launch of the firing of Jerome Powell. On
+Wednesday morning, Bloomberg reported that Trump was likely
+to fire Powell soon after talking with Republican
+lawmakers shortly after that, the New York Times reported that
+Trump had actually drafted Powell's termination letter,
+market instantly reacted
+negatively dropped 1%. Bonnie yields rose about 10 basis points. You can see the blips here on
+the charts starting around 1130am when the article was published. Polymarket reported Jerome Powell
+out as Fed chair in 2025 spiked up to 30% on Wednesday before dropping back down to 20%. Trump quickly
+swashed these rumors markets rebounded. And Trump said we're not planning on doing anything
+regarding Powell. Some people speculating maybe this was Trump testing the market reaction and
+she talked about earlier Gavin he he does seem to care about the market as most presidents do.
+If you remember Trump nominated Powell as Fed chair November 2 2017. And he has gone on a tirade the last couple of months calling
+Powell stupid numbskull stubborn low IQ, a knucklehead mentally average. It's a long
+list of descriptors of the person he placed. Powell's term ends May of next year, White
+House officials have confirmed Trump is in the process of selecting his successor. Polymarket says that could be Kevin Warsh, 22% Kevin Hassett, 19% Scott
+Besson 15%. This hasn't actually ever happened, right? We've
+never had a Fed share fired. But we have inflation coming back a
+bit. If you all remember, there's a dual mandate for the
+Fed keep unemployment low check, that's a dual mandate for the Fed,
+keep unemployment low, check, that's pretty good.
+And keeping inflation under control,
+that's been going very well
+since our massive inflation spike
+over the past couple of years.
+And here we go.
+CPI ticked up 10% from 2.4 to 2.7%,
+30 basis point increase over May.
+So any thoughts Gavin on
+these macro issues around inflation coming back a bit?
+The the stock market and all time high and unemployment. If
+you believe the unemployment data, and we've had a bunch of
+debates here about that, you know, how correct is it being
+at close to an all time low in our lifetimes?
+Let's go macro.
+Yeah, I wouldn't read too much into the CPI bouncing up a little bit.
+There's base rate effects, I think on a month over month basis.
+And if you looked at, you know, what economists call core, super core, different, you know,
+ways to maybe smooth out CPI, I think inflation is still relatively contained.
+As far as, but I mean, a lot of very smart people are convinced that tariffs will lead
+to inflation.
+We'll see.
+There's certainly sound theoretical arguments for why they will, but it does look like maybe the overseas exporters
+are eating a little bit more of the tariffs than people thought that they would, which is good for
+US inflation. But the combination of a very weak dollar and tariffs, theoretically, should lead to
+a little more inflation. Firing pal, I worry that the market only went down 1%.
+I do think the market would go down quite a bit more if Trump did fire Powell.
+I think it would be a mistake.
+I hope he doesn't do it.
+And there are very sound reasons for the Federal Reserve to be independent.
+And I hope he does not read from that
+trial balloon down 1% that that's all that would happen.
+Look, the world would continue spinning, America would go on.
+But it would be a mistake.
+Freiburg, we have this idea that there would be a couple of rate
+cuts. And maybe we get monetary velocity going again, people will
+be able to take more loans out invest more
+in business. But with the stock market tearing it up, there's a lot of wealth being put into the
+system with the big beautiful bill. There's a lot of spending in there, as we've talked about here,
+putting that aside, it feels like the economy is in really great shape. Chances of a rate cut has
+now flipped. No change is now the favorite option for September, whereas a week ago, the favorite option was 25 BIPs.
+So this idea that we're going to cut, or the feds going to cut
+that seems to be changing as well. So your thoughts on the
+the macro picture here?
+So I'm not sure like, the firing of Jerome Powell necessarily
+solves the US fiscal challenge,
+which is rising interest rates
+on the long end of the treasury curve.
+So if you look at the 30-year treasury yield over time,
+and Nick, maybe you could pull this up while I'm talking,
+but as of today, we're at exactly 5% on the 30-year.
+And you can see that this 5% yield,
+which is what the market is demanding
+the United States government pay
+in order to be loaned the money to make the bill payments
+that the US government has to make every year,
+is the highest it's been.
+The borrowing cost is the highest it's been
+since going all the way back to 2007 as of today. And I think this is the
+real story for the United States. We have $36 trillion of debt. The average interest rate we're
+paying on that debt today is 3.3%. That's the average of all the treasuries that the federal
+government has issued, the Treasury Department has issued to borrow the money that it is using
+and has used to pay all its bills. And if you look at the 5%
+number, that's a 1.7% hike. At 3.3%, which is the current average rate we're paying across $36
+trillion, we have a run rate interest expense. So just the money we're paying each year in the
+interest of the outstanding debt is $1.2 trillion a year. And if the spikes up to 5% from 3.3, we're talking about nearly $2 trillion a year in
+interest expense.
+And that number is only going to get bigger as we borrow more money each year and the
+loan balance goes up, the outstanding debt goes up, because we are still running a deficit.
+The government is spending more than it's making every year. So the crisis that America faces is a more profound fiscal
+crisis, where the rates that we're having to pay
+are a function of what the market is telling us.
+The market does not want to loan the United States money
+over a 30-year period for less than 5% as of today.
+And so making adjustments to the short end of the Treasury
+curve, making overnight loans cheaper, which is what the Fed can do, will stimulate the economy and make more money flow easily because now you'll be able to borrow money overnight to do stuff like build a building and then sell the building next week or next month or take out a car loan and pay it down and use your car to go drive for Uber and grow the economy and other things. So the theory is that if we can drive rates down
+on the short end of the curve, we'll grow the economy such
+that we'll be able to make those payments on the long end
+of the curve.
+But there comes a point where, again, you're
+only going to be able to move the market so much
+until the more important fiscal situations are going
+to be addressed, which is spending, taxation, and some
+of the other key policy issues.
+So I think what the market is saying is it's not as much
+about Jerome Powell and frankly, getting rid
+of a prudent individual may be more challenging
+than it is beneficial when the real challenges
+facing the United States need to be more heartily addressed.
+So I think that's my kind of take on this whole point.
+Yeah, go ahead, Gavin, build on it.
+So point number one, the 30 year has
+gone up since Powell started cutting rates. So that is just empirical proof that what David is
+saying I think is right. And second, the deficit has been a feature of American politics dating
+back to Ross Perot's, you know, 1992 presidential run.
+His independent third party run.
+His independent third party run.
+Here we go.
+But yes, but it, the deficit never really mattered because interest rates kept going
+down such that even as our debt grew, interest expense has kind of a percentage of the government's
+budget stayed relatively low. Now that rates
+have gone up, and don't seem like they're, you know, going
+down anytime soon, the deficit does matter. And it really
+matters. And you can kind of run a couple of scenarios, but like
+pick your, pick your metric. If the deficit kind of run a couple of scenarios, but like pick your metric. If the deficit kind of continues
+at current levels and we were to refinance the debt at the prices that David was talking about,
+it's only a few years before spending on interest is significantly larger than spending on Medicare
+and Medicaid or Social Security or the military.
+So pick something you care about.
+But our current course in speed, it's
+in the not too distant future where interest expense is
+the biggest line item for the government.
+And that is not healthy.
+And that's why the deficit finally matters.
+It's just that rates are higher.
+But the great thing is, is there is a virtuous cycle here.
+Has you closed the deficit, rates should theoretically come down.
+And then those both feed on each other to kind of help the problem.
+And it is possible there's no silver bullet here, but some combination of slowing government
+spending, extra revenue, and you know, tariffs are
+effectively we've never had a consumption tax here in America,
+which I think is a good thing because consumption taxes are
+very regressive. But the reality is like, even when Obama
+controlled the House, the Senate, and was the most popular
+Democratic President of our lifetime, I don't think federal government tax receipts has a percentage of GDP got above 18, 19%.
+So that's kind of the ceiling for income taxes alone.
+Tariffs are really just a consumption tax that kind of incents domestic manufacturing.
+There's all sorts of reasons they're bad ideas.
+You know, David Ricardo, the theory of
+comparative advantage, 100% correct, free trade is a good
+thing. But introducing some sort of a consumption tax, growing
+the economy a little bit faster through deregulation, and
+slowing government spending. I think there is a way out of this
+for America. Yeah, but it's important to find the way
+because the deficit finally does matter after really never
+mattering in my political lifetime. It is interesting.
+We've never had to worry about our debt. It was always
+manageable because it wasn't that large. And even when it
+got large, it wasn't compared to GDP because the country was
+doing so well. We had the PC revolution. We had the
+internet boom. I mean, we've had boom after boom
+after boom and efficiency that we've led the world and these
+companies like Google or Apple, take over the world and all
+those tax receipts and income comes into our country. That
+does sort of make you not look at it. I guess I you know, I
+haven't talked to you Gavin, not to make this super political,
+but both parties have proven that they have no interest,
+historically and in the current one, with cutting spending, and not to make this super political, but both parties have proven that they have no interest,
+historically and in the current one, with cutting spending.
+It's just the nature of it.
+So we can sit here, whether you're a Biden fan, Trump fan,
+put it all aside, both parties love spending
+and they're not stopping.
+One of our friends has proposed,
+hey, maybe in the midterms,
+we have a couple of these house positions,
+couple of senators, maybe we try to flip them and create a new party that
+cares about this issue. What are your thoughts broadly on that?
+If a couple of more Joe Manchin types were in the House, the
+Senate, could this country maybe start to make this the deciding
+issue? And maybe could we see some movement on the other two
+parties, some pressure on them by a third
+party, an America party, perhaps?
+Yeah, well, I think a few things. I do think there is room
+for a much more centrist party in America. You know, the way
+the primaries work, it, you know, leads to more maybe extreme
+candidates than anyone would actually want, being each
+party's candidate.
+So I think a third party would be helpful.
+I think there's plenty of room for a party that is kind of fiscally conservative, you know, reasonably socially liberal, pro American
+energy production, all kinds of energy production, including solar, importantly.
+So I think there's room for that. And I think it is right that if you just target a few races,
+you can have a big impact. But I would just say, yeah, humbly, I think the American Party is a great idea. I just don't know that it is the highest and best use of Elon's talents.
+Oh, no.
+At this moment in time with what's happening with AI. And just, you know, to the extent,
+Elon is a friend of the pod. I just think staying focused AI Mars,
+that might be the highest and best use of his particular
+talents.
+100%
+Hasn't that been the case for for some time, Gavin, and anytime
+there's something whether it's Neuralink or Boring Company or
+some other new project that there's these claims that this
+is a distraction away from the highest priority work that should be done.
+I mean, is the political stuff unique? And then his point of view on the political stuff,
+just like it was with Twitter, is that it's existential to society and civilization and
+our ability to function and to achieve the progress that he aims to achieve in his core function.
+So obviously he is succeeding being the CEO of many different companies. But, you know, I think a big part of what makes him kind of exceptional
+as a CEO is the perfectionism, the drive. And you know, politics is not a game of perfection,
+it's a game of compromise. So I am sure if he sets his mind to the America Party, that he will succeed. But I think there are other things
+for him to focus on. And you know, the boring company
+Neuralink, these are games of perfection. These are, you know,
+this is about engineering. This is about solving a problem. It's
+not, you know, compromise in the art of the possible. So I think
+he would succeed. I just think that there are other things that
+maybe a higher calling for him. Yeah,
+yeah, I mean, and the, the cost of being away from his
+businesses this last time around, as he said very publicly
+was severe, it was intense, and he's had to really regroup. But
+we got this incredible news when grok four came out. And I think
+we should maybe talk a little bit here about what that big
+prize is the big prize, biggest most. Well, it's actually going
+to be an open question. freeburg, I think the big prize
+is whoever wins general intelligence, super
+intelligence, or the biggest cluster or the most power to
+power the biggest cluster that powers general super intelligence. So where do
+we sit on the language models today, Gavin, and Elon's recent
+let's just call it what it is. I mean, incredibly dominant
+release of grok four, I don't think people expected that they
+didn't expect him to be able to leapfrog everybody. And
+let's be honest, people are leapfrogging each other every four to six months. So I fully expect
+Gemini will leapfrog rock and opening I will have their time in the sun again as well. But this was
+pretty impressive, right? I'd say this is the biggest leapfrog we've seen in quite some time.
+And I think the benchmarks that matter are RKGI 2 and Humanity's last exam, where it did
+in the case of Arc AGI 2.
+It's called semi-private, which is important because it means that some of the questions
+were held back because the criticism of these models is they memorized the answer.
+Arc AGI 2 has not seen the questions before, and it did roughly twice as good as the state
+of the art Google OpenAI and Anthropic models.
+And then on Humanities last exam, we can call it 50 to 75% better.
+And exceptional humans score 5% on that.
+It scores in the 40s.
+So this is incredible progress.
+And I think it's worth mentioning this model was
+trained on Hopper. This model is probably about as far as you can take the last generation
+of NVIDIA GPUs. The next models we see, Grok 5, O5 from OpenAI, whatever they're going
+to call the next Gemini, they will be trained on Blackwell.
+And I think that will be a really big step function.
+But I do think the ultimate prize here is artificial superintelligence.
+I think artificial general intelligence will create a lot of economic value, and maybe
+we will be able to work class as humans.
+But I think ASI, artificial superintelligence is what is really exciting, you know, in
+terms of maybe, you know, being able to live longer, you know,
+really kind of fundamentally kind of change the fabric of our
+lives.
+Can you take a stab at explaining that difference in
+definition to the audience who they hear these terms, and we
+kind of bundle them into either a transcendent intelligence that
+we haven't seen before that we as humans can't comprehend,
+it goes beyond human intelligence, or this is the smartest human on the planet, and where
+we are right now in this journey, because I think these terms are all getting muddled
+together. And I think we have an interesting conversation here if we parse them.
+I think artificial general intelligence, I would define it as an AI that can take economically useful actions in a variety of domains and
+be better than the average human in most domains, all domains.
+But that's very different than super intelligence.
+You know, being, you know, being able to draft a contract, that's not super intelligence,
+but it is useful.
+Being able to do a medical diagnosis is not super intelligence, but it is useful.
+You know, being able to book my travel, so on and so forth.
+Super intelligence means exactly what you said, that it is smarter
+than any human, but it has, you know, access to all of human
+knowledge. And I think one of the most interesting questions is
+what will the economic returns to super intelligence be? And
+they're definitely unknowable
+because we have never seen superintelligence before.
+If as humans, we have kind of pushed the limits
+of physics, biology, chemistry, the laws of the universe,
+then maybe the economic returns to superintelligence
+won't be that high.
+But if superintelligence is curing cancer
+and inventing warp drives, then the returns are
+going to be really, really high. And it's fundamentally
+unknowable. Yeah, okay, so we're at general intelligence. Hey,
+your lawyer, your tax or account, it's going to go much
+faster. They'll have a co pilot, this is all going to be great
+for business. Every business gets 10% more efficient a month
+seems like a reasonable bogey,
+which means every seven, eight, nine months, every business is going to get twice as efficient at these kind of chores. Yeah.
+I think that I wouldn't say that's a reasonable bogey. I
+think that might be a little aggressive. It's, you know, the
+world, the world always it's you know, I think it's a Bill
+Gates quote, you know, the, the world always changes less than you expect
+over the next one, two, three years,
+but way more than you expect over 10 years.
+Just takes time for technologies to diffuse.
+You know, maybe really nimble startups
+will see some of the gains that you were talking about.
+But I mean, if we doubled productivity,
+I mean, that would be like an economic revolution.
+I mean, we're seeing it in programming.
+For sure.
+You talk to the average developer,
+they I think would say they're getting 5% to 10% better
+a month, better being defined as faster, shipping more code.
+Rule of 72, hey, you know, every year at least
+you're going to be twice as good.
+I think that actually seems to be happening with developers.
+I think it is happening with software. I think software is
+the first area where you've seen a real true kind of economic
+productivity impact. generalized, a lot of companies
+are having incredible success with AI for customers, you know,
+support for sales, I think you see it more in startups and big
+companies. But the impact it has had on coding is undeniable.
+Freeberg, let me swing this around to you.
+We've got the super intelligence out there.
+We've got AGI out there.
+One of the things Gavin said was, by definition, you can't quantify the gains of super intelligence.
+That is the big prize here.
+That's why people are putting this much money into these kinds of data centers.
+Yeah.
+In your mind, it's not just the general intelligence, that would be the silver medal, people are going for the gold here.
+Not general intelligence, super intelligence breakthroughs that we can't imagine. Am I,
+would you say that's a fair way to sum up the massive interest in investing in these projects?
+Yeah, I mean, I think there's something where everyone has
+identified this asymptotic return moment where if you get
+to that moment, you're limitless in terms of the upside. Is there
+one winner? I don't know. I don't think so. But I would also
+kind of reframe this as being some binary condition that I think we're talking about it as being quote, general intelligence, super intelligence as being on a spectrum of leverage towards complexity. task, like instead of writing a letter and putting it in an envelope and having some
+guy carry it to my mom, you know, and she gets the next day, I can digitally get her
+that message instantly over email. That creates an incredible amount of leverage and solves
+a lot of the complexity of getting her that communication from me. So if I, as a human
+said, I would like to harness fusion power,
+similar to what the sun uses to make energy, and I want to do that on Earth. Today, we're
+in call it year 40 or 50 of a research cycle of humans trying to solve that particularly
+complex problem. It's a scientific problem, it's a discovery problem, it's an engineering
+problem. And this idea of super intelligence is that it could give us immense leverage in solving
+that complex problem that we otherwise may be challenged to solve over decades or hundreds
+of years.
+Or think about one day solving a problem that would take humans thousands of years to solve.
+I don't think that humans are limited in our ability to solve problems. I think we're limited in terms of time and what intelligence, what digital intelligence
+gives us is leverage on time so that we can now tackle ever more complex tasks that as
+you think about these tasks, the amount of time isn't just an incremental one year or
+two years, but it becomes a hundred years or maybe a thousand years.
+So this relates to, I think, projects around physics,
+around chemistry, around transportation, around biology, where we're probably fundamentally
+scratching the surface today, and where the superintelligence is an enormous leverage
+crater for us. And so I don't view it as some species or race that independently persists in its own intentions,
+but it is a tool that provides leverage in a way
+that is orders of magnitude greater than the leverage
+we got from yesteryear's digital tools
+and probably today's AI tools
+and probably tomorrow's general intelligence tools
+is kind of how I would think about it.
+And maybe it's because one model does so much stuff
+better than any human, you can call it super intelligence.
+But I think functionally, leverage into complexity
+is where this becomes super compelling for humans.
+And it's why I think we can and should be highly optimistic
+about living very long lives and traveling anywhere we want
+and having abundance in food and having abundance
+in resources and having abundance in recouping
+our time to do the things we want to do instead of the things
+that we have to do today, because we don't have access to
+this incredible leverage. So that's where I get kind of
+free. I think it's a great way to look at it. But I want to go
+back to the silver medal here in this sort of competition, gold
+being super intelligence, we start solving fusion and really big problems on deep research
+cycles, and the velocity of that goes up. But just going back to
+the silver, you know, everybody in the economy becomes, I don't
+know, single digit, some more efficient every month. And you
+know, some amount every year, I've been trying to back up the
+envelope, what I think the value is for a human being in the West, in the modern world, and what they should spend on AI per month, I've come up with a number of about 75 150 bucks, somewhere in that range is a no brainer to spend on your AI per month, as an individual working in the world.
+spend on your AI per month, as an individual working in the world. If that's the premise, right, I think there's a billion
+people in the developed world who could spend, let's call it
+100 a month, 1200 a year, doesn't take a genius to figure
+out this is a trillion dollars in revenue. Based on market cap,
+that's probably $10 trillion in market cap. And then we just
+have to back into the spending or what it costs to
+build this you're doing these kinds of calculations, I'm sure
+the treaties Yeah. And we're this general back of the
+envelope that I've come up with in my mind for a mental model
+that there's a $10 trillion prize, a trillion dollars in
+revenue, just in the silver medal. Does that jive with the
+spending we're seeing today? I think people are putting in $10 billion worth of equipment a
+year across five different companies, right?
+Well, I think they're putting in quite a bit more than 10
+billion per year.
+Each.
+No, no, no, no, no.
+Each.
+Google alone is doing 70 billion this year. Each is putting 70.
+Yeah.
+Is that 70 billion they're putting in this year going to be
+repeated for the next five years?
+So it'd be 350 billion? If you look at TBD, the future is always uncertain. But if there are
+economic returns to that, they will keep doing it for sure. Something interesting is AI is,
+as we've discussed in previous All In's, extremely compute intensive. It's just at no point in my career as a tech investor except the very beginning, which
+was kind of the end of the PC wars, which Dell won by being a low-cost producer, going
+direct, cutting out the working capital, the components in a PC depreciate.
+If you have to go through a store where it sits on the shelves, you're at a big disadvantage
+from either a cost or quality
+perspective.
+But at no point in the 25 years I've been a tech investor has being the low-cost producer
+mattered.
+Being the low-cost producer is really going to matter in AI because, at some level, the
+amount of tokens you produce is intelligence because of test time compute, post-training
+reinforcement learning.
+And so if you can produce those tokens at a lower cost, you'll have a big advantage.
+If for that $75 billion or $30 billion or $50 billion that you're spending per year in CapEx,
+you can produce more tokens. That is a profound advantage.
+I don't like your calculations just calculations, like just has a back of the envelope. You know, kind of scratch, they seem
+reasonable to me,
+the trillion dollars a year in revenue because of AI seems
+quite reasonable when you frame it as $1,000 for a person to be
+whatever 3040 50% more efficient at work every year.
+Yeah, and it's just you, we could probably go back and look to be whatever 30 4050% more efficient at work every year.
+Yeah. And it's just, we could probably go back and look at kind of like the early days of, you know,
+cell phones and what were people willing to pay
+relative to disposable income.
+Your PC analogy would actually be the perfect one.
+A PC at back in the era, that era was what?
+Three, $4,000 per person.
+They lasted for three years.
+So it was exactly a thousand a year.
+But this is why, this is why creating such delineated distinction between different types
+of AI, I think is, is also like the equivalent of trying to create distinctions between other
+types of technology. So the, the automobile, the airplane, the telephone, the computer, all of these technologies
+are tools that created leverage,
+leverage on things that were otherwise complexity
+and reduce them down to simplicity.
+From a human perspective, pick up the phone, make a call,
+instead of getting up on your horse
+and going across the country to deliver a message
+or using a computer to do a spreadsheet
+that calculated everything for you
+rather than calculate it by hand and so on and so forth.
+Like all of these tools reduce complexity
+to simple tasks for humans.
+And the ever increasing complexity
+of what we can accomplish with digital tools
+is continuing in this kind of era now.
+But that's why I think it's very similar, Jason.
+This is not some new concept. It's the continuation of human productivity. It's the continuation of the
+improvement of what humans can do and what we can produce. And yes, there's a concept now that
+intelligence has become such a, like it's caught up to everything. And Gavin, I don't know if you
+think that there is this concept of some moment of singularity, but it does feel to me like there's just extraordinary leverage that's being created.
+For sure that's true.
+I hope that's true.
+I hope your vision of it being a productivity enhancer for humans is correct.
+I do think people deep in AI do think there's some probability that it goes sideways, but
+I hope that you're right.
+But coming back to Jcal's $10 trillion prize and relative to the market caps of the companies
+involved, it needs to be at least $10 trillion.
+Something that I think is interesting and relevant, particularly to Croc 4 being the
+best product, is the best product doesn't always win in technology. No, and it's
+yeah, yeah. And sports, you know, they say defense wins
+championships. And on the internet distribution wins
+championships. And Grok for has formidable competitors with lots
+of distribution and Google and meta meta if they get their act
+together, Microsoft.
+And so from an industrial logic perspective, something that I think makes a lot of sense,
+particularly since OpenAI bought Johnny Ives' hardware startup, which will place them into
+competition with Apple at some point, is XAI and Apple are natural partners.
+There's been a lot of news about Apple thinking about buying Perplexity or McStrawl, but that's just a bandaid. Those companies don't get Apple what they need.
+Apple's had an incredible partnership for many years now with Google that's generating tens of
+billions of dollars for both companies. I think there is solid industrial logic for partnership.
+You could have Apple Grok, Safe Grok, whatever you want to call it, you know,
+so that Apple feels comfortable. And that probably also helps
+grok in the enterprise. And then it also helps both Apple and
+Google with this DOJ trial. And so I think, in this, you know,
+incredibly high ELO chess match that is being played between the
+leading labs, Like that is that
+partnership makes a lot of sense. First time I've heard anybody sort of make that natural
+connection. But you're right. Eric Schmidt and Steve Jobs at one point had this discussion,
+which was, hey, we've got search and you've got a browser now because the iPhone didn't have a browser,
+you know, you know, they could have built their own search engine, they could have partnered
+with Yahoo, but they decided to make this long term partnership with Google.
+And then that dropped what 20 30 billion to the bottom line at Apple and cemented Google's
+search franchise.
+Absolutely.
+And right now that deal is being litigated by the DOJ, and the DOJ is considering
+remedies. And so if you bring on a really kind of effective, credible AI provider, I
+think you could help both Google and Apple with their antitrust issues. And at the end
+of the day, you know, Google, they have Android in their Pixel phones, open eyes making hardware. Anthropic is kind of a captive of Amazon meta
+is kind of a, you know, they're they're in a deathmatch with
+Apple. So I think there is really sound logic for that
+partnership. I think it'd be good for both companies love to
+see it happen.
+It feels to me like the interface is going to be the
+browser. I know this sounds crazy, but I've been playing with the comment browser feels to me like the interface is going to be the browser.
+I know this sounds crazy, but I've been playing with the common browser from perplexity. Did you
+play with it yet, Gavin, or look at some of the demos? Yeah. What are your thoughts here?
+Because it's really and then chat GPT just launched a virtual desktop that pops up
+desktop that pops up to go do who your, you know, little web based scrapes, agents, assignments, whatever you I'm
+gonna call it assignments, you know, homework chores, go do
+your chores. What are your thoughts on this modality?
+Yeah, the browser is part of distribution winning
+championships, Apple has Safari, Google has Chrome. And if
+you're not going to strike a partnership with one of those
+distribution channels, you will eventually need to do your own Apple has Safari, Google has Chrome. And if you're not gonna strike a partnership
+with one of those distribution channels,
+you will eventually need to do your own browser
+and you can extend that logic all the way.
+That's why they Google, they did a browser,
+they did a phone.
+But I also do think the companions from Grok
+have been interesting to play with
+and they certainly make it more engaging.
+That becomes the agent. It's a kind of incredible, mind blowing
+concept for that to be the interface. All right, listen,
+here we go. Calling in live. Got a breaking bestie coming on
+board here. David sacks, calling in live, I see
+the pale yellow paint, and an ancient building, you must be in
+some sort of wing of the great White House. Is that correct,
+David?
+I am well, I'm actually not in the White House per se, I guess
+I'm on the White House grounds. We're in the Eisenhower
+executive office building. That's for my ass.
+I can tell from that.
+We were getting been here.
+Yeah, no, they said great things.
+And I checked my calendar.
+I'll send you some photos, it's great.
+Well, no, but the calendar's wide open
+between now and the All In Summit,
+allin.com slash yada, yada, yada.
+So the window's there, Sachs.
+The window's wide open.
+And I'll see you in the cafeteria, I guess.
+Play your cards right on stage next week, J.K.
+You might get invited after the AI Summit stage next week. Jay, you might get
+invited after the summit we're doing. Yeah, absolutely. DC next
+Wednesday, which has been publicly announced. So it's
+going to be exciting.
+David, you you brought a friend today, maybe introduce your
+friend and tell us what you got done. What have you gotten done
+in the last week for the American people they want to
+know what because you weren't here last week doing the pod. So
+you must have gotten something done for the American people. They want to know what because you weren't here last week doing the pod. So you must have gotten something done for the American people. Let's hear it.
+Well, first of all, this is the czar behind the czar,
+boha. He's the executive director of the president's working group on digital assets.
+So that's the working group that I chair, but he actually does all the work. He's the executive
+director and he's here every day. And he's been working
+on crypto pretty much nonstop since we started the administration.
+And he's kind of the unsung hero within our operation here on these two bills that just
+passed the house, which are historic and quite momentous.
+bills that just passed the House, which are historic and quite momentous. So Bo, welcome to the program.
+And maybe you could tell us a little bit about these bills and what they do for the American
+people.
+Yeah.
+Well, first of all, David, you're, you're too kind.
+We've had a blast working together.
+I mean, we connected back in transition, I think in late November, and we started mapping
+out a plan for this
+and to see it come to fruition this week is really like,
+it's unbelievable.
+The fact that we had the bipartisan votes
+we did today in the House is remarkable.
+It's unprecedented.
+And it shows you that leaders on both sides of the aisle
+understand that our country has to be at the forefront
+of this technological development.
+But let's start with Genius because I think Genius is really the foundation for everything else
+we can build upon in this space. A lot of industry cares about
+market structure, as do we, and we want to see it done on the
+president's desk as well. But Genius is unique, because it
+really updates the payment rails inside of our current financial
+system. I mean, the payment rails have been archaic. And I've
+likened to the fact of the ways in which we've communicated have changed quite
+dramatically over the course of the last several decades. The ways in which we move money really
+haven't, and we have the technology there and blockchain technology. So what we're doing here
+is we're fixing the plumbing of our financial system or securing US dollar dominance for decades
+to come. If you want to access our capital markets, you're going to have to use a dollar back stable.
+You're also providing a pathway for, you know,
+tokenization of public securities in 24 seven markets
+and the things that people have dreamed about
+for quite some time.
+This is a revolutionary piece of legislation.
+And the fact that it had this much bipartisan support
+is incredible.
+It's a testament to president Trump's leadership.
+It's a testament to our fantastic AI and crypto czar, David's leadership.
+I mean, he's truly been the guiding star behind the ideology and what we're pushing here.
+And he has a phenomenal team as well.
+I'd be remiss not to thank Tracy, who's David's chief of staff.
+I mean, in the midst of all of the chaos to get this done, and there were so many steps
+to this, you had to beat the banking lobby to get it past the Senate.
+Then it moved over to the House in which we had to basically fight some members that really
+misinterpreted or misunderstood what this bill actually did.
+The president stepped up, David stepped up in an enormous way.
+It wouldn't have happened without either of them.
+Now we have this bill heading to his desk tomorrow.
+To pivot to market structure really briefly, this provides the rules of the road for the
+exchanges, the brokers, everyone in this space.
+They desperately need it so that we can break down the wall between traditional financial
+institutions and these digital asset players.
+I think that's well underway.
+Obviously, getting a vote as strong as they did in the House is indicative of what can
+happen in the Senate. If we deliver on these two pieces of legislation, I mean, that a vote as strong as they did in the House is indicative of what can happen in the Senate.
+If we deliver on these two pieces of legislation, I mean, that's about 90% of what needs to
+be done for crypto to make the U.S. crypto a capital of the world.
+And, you know, it's, it's just remarkable.
+I mean, we're, we're over the moon.
+Okay, Sachs, you got these two things over the finish line.
+Congratulations on that.
+Lots of compromises you had to make.
+So I want to get into what were the compromises to get this done. Just to clarify one thing when you say finish line. Congratulations on that. Lots of compromises you had to make. So I want to get into what were the compromises to get this done.
+Just to clarify one thing when you say finish line. So like Bo was saying, there's two bills.
+There's the Genius Act, which is the stable coin legislation. And then there's a clarity
+act, which is market structures, basically all the other tokens besides stable coins.
+Where we are is at both past the house today, but GDS has already passed the Senate.
+So it is going to the president's desk tomorrow and it will become law.
+We're doing a bill signing with the president.
+By the time this pot is released, it will probably be law.
+I think we will have the signing.
+Clarity started in the House and so it has passed the House and now it's going to the
+Senate and they still have to do their hearings and markup on it.
+And we expect that will happen over the next couple of months.
+In fact, the chairman of the Senate Bank Committee, Tim Scott, has said that he wants to finish
+with the market structure legislation by the end of September.
+So if all goes well, then we could be looking at a second bill signing in say October.
+And like Bo said, that would be pretty much the crypto industry's wish list for
+having a clear legal framework in the United States for both stablecoins and other crypto tokens.
+So it's really pretty amazing. I mean, when I started this job, I'll just tell you, one of my friends in Silicon Valley
+said that, you know, you may be able to get some AI things done, but you'll never get
+anything done on crypto.
+And the reason is because the entrenched interests are too powerful and they'll stop it.
+The banking lobby will stop it or Elizabeth Warren will stop it or just all the status
+quo players who could get disrupted
+by blockchain based technology will somehow find a way to stop it.
+And that didn't happen.
+Like we've actually now moved forward.
+Genius is about to become law.
+And I think clarity is looking like it's going to have the votes in the Senate as well become
+law.
+So it's really pretty amazing how much progress we've made in just six months.
+And like both said, this really comes down to President Trump's leadership.
+He made the promises during the campaign to prioritize crypto, to make the United States
+the crypto capital of the planet.
+And it was his negotiating skills and deal making that made this all happen.
+I mean, this past week has been a little bit of a roller coaster.
+There were reports over the last couple of days that the whole thing was falling apart.
+And would it happen?
+There was a moment, I think this has been publicly reported, but I'll give you some
+color on it, is there were 12 members of the House whose votes were necessary to advance
+the bill to this vote today.
+And at a certain point, President Trump brought them into his office, the Oval Office, and
+worked out all the differences personally.
+And that's what put this bill over the top.
+If it wasn't for the president's direct involvement and action and understanding of the issues,
+he listened to all the concerns and he paid attention to the ones that were real and then
+rebutted the ones that weren't.
+If it wasn't for his direct involvement, we would not be here today.
+And he understands crypto, he's involved in it is seems to have an understanding of the
+value of stable coins for the US dollar.
+That seems to be a key motivator for this being bipartisan.
+You got to twice as many Democrats as you thought you would get.
+Is that because people want to make sure the dollar supremacy gets locked in and stable coins is a way to do that because you can't
+have a stable coin unless it's backed by a dollar?
+Yeah, I mean, like I've talked about on the show before, it shouldn't be that hard to
+sell regulation to Democrats. I mean, what we're doing here is providing a regulatory
+framework for the industry. They didn't have one before. And that's why the number one
+stable coin player in the world right now is an offshore entity. They didn't have one before and that's why the number one stablecoin player in the world
+right now is an offshore entity.
+They will have to come onshore as part of this bill in the next three years.
+So what we're doing here is creating a regulatory framework.
+But the reason why it's substantially bipartisan is because the industry wants this regulation
+because they want the stability it gives them in terms of having that legal authorization.
+They want to make sure that if four years, eight years from now, 12 years from now,
+whatever, there's not some new Gary Gensler who comes in and turns the whole industry upside down
+because he doesn't like some aspect of what they're doing and he just starts prosecuting them,
+which is what the industry experienced over the past four years with Biden's war on crypto.
+So we, meaning that the Trump administration could fix the Gensler issues just with agency rulemaking,
+and we're certainly on that path to do that.
+If you want long-term stability that goes beyond just this administration, you have
+to get legislation, you have to canonize it into law.
+That's why the industry was so interested in getting these bills passed.
+I think that's why you're seeing some bipartisanship here.
+Like both said, I do think that there's a substantial number of Democrats who understand
+that this technology is the future and it's a positive thing for the US.
+What could be bad about allowing digital dollars, which extends the dollar's dominance online,
+so that it basically bolsters the dollar status as the world's
+reserve currency.
+Over time as we get challengers from BRICS, for example, this is going to make the US
+dollar stronger.
+Every time a dollar token trades somewhere in the world on a crypto wallet, there has
+to be a physical dollar in a US bank account invested in a US treasury.
+That creates demand for our debt,
+which is another positive thing.
+And there've been studies done that show that
+the results of this bill could be
+trillions of dollars of new demand for our debt,
+which is only a positive thing.
+And if you don't allow a legal way to do this,
+and you don't have a proper framework,
+you've been dancing around this person
+who has three years to get their act together. That's tether, I'll
+say it. You can type you can do a search for tether controversies
+or shenanigans and you'll find plenty of them.
+I don't think it's fair to say they don't have their act
+together. I think they have their act together. It's just
+that they did not know how they'd be treated operating
+onshore in the US under Gary Gensler and the Biden
+administration.
+And so they operated offshore.
+And what was happening under the last administration is that the last administration, by creating
+all this uncertainty and doubt, was driving all the innovation offshore.
+Okay, fine.
+They have a sorted past.
+That's my statement, not yours.
+But now they have to clean up whatever messy stuff they have in their past. That's me saying it, not
+you, you can have your opinion, I'll take mine. But I we're in
+agreement that if you don't have a framework, they would be doing
+even more things that were maybe off the reservation of my mind.
+Gavin, any thoughts here on crypto? I'm not sure you've
+participated in in particularly because it didn't have a
+framework. Yes,
+I would just say one David, congratulations. Seems like an
+incredible achievement to I try to invest in areas where I feel
+like I at least believe I have some sort of competitive
+advantage. And it's not clear to me that I have any sort of
+competitive advantage in crypto. But three, David, I am curious
+for the stable coins. Is it does the genius act limit them to dollar backed
+stablecoins?
+So it's not like you can create the stablecoin and then swap in something other than a dollar.
+Is that true?
+Well, I mean, anybody can create a stablecoin that's backed by anything.
+And in fact, I think there are like euro backed stablecoins out there, for example, but nobody
+uses them.
+I think if you look at the stablecoin market share, it's like 98% US dollars, 2% euros, because there's a flight to quality.
+Everyone wants to use the best one, right? This is why it's in the interest of the United States to
+basically enable this technology to continue flourishing is because as the best fiat currency,
+we're the one that's going to get used the most.
+There's no reason to have multiple fiat stable points, not really.
+So that this is going to accrue to the benefit of the United States.
+Jake, let me go back to something you said.
+So I don't necessarily agree with your criticisms of that particular company, but where I will agree is that this bill will provide additional comfort for consumers
+and additional protection for consumers because now all the stablecoin companies will have to
+operate in the United States. They'll be subjected to quarterly audits and we will know that every
+stablecoin that's been issued is fully reserved or backed up by a dollar in a US bank account. And so, therefore,
+when a stablecoin holder eventually wants to cash out and they go to basically an off-ramp,
+the money will actually be there. Now, I'm not saying that the money isn't there with any of
+the current providers. In fact, I think it is, but now consumers will have the additional protection
+and confidence to know that all
+these entities have been audited.
+They've passed these audits and they're regulated entities under US law.
+And that creates confidence for the market and it's good for everybody.
+And it will spread the adoption of this stable coin product.
+And if they don't, they can't participate in our market.
+Right.
+So that's the good news here is,
+you know, if you choose to not go through those audits and do a test stations or other
+fugazi fugazi stuff offshore, you're not saying anybody's doing that, but people have, you know,
+then you just don't get to participate. And this is the great thing about having some basic rules
+of the road. We should talk a little bit here about infrastructure sacks. You were in Pittsburgh
+this week. There were some announcements. This was another bipartisan win. I think Shapiro
+was there. A bunch of investment going on there. Maybe tell us a little bit about the
+progress made in Pittsburgh with regards to AI and infrastructure.
+This was an energy and innovation summit that was organized by the Pennsylvania Senator
+Dave McCormick and his wife, Dina Powell McCormick.
+They did an amazing job bringing together all of these different companies and interests
+that have a stake in energy in Pennsylvania and the development of AI.
+Pennsylvania is, I think, it's the number two energy-producing state in the US.
+It has tremendous amounts of natural gas.
+They feel like they can expand that.
+I think there's been a lot of fracking in the past there, for example.
+They even have nuclear Westinghouses there.
+It makes sense to have the data centers near the power source.
+We know that these big AI data centers can be powered by either natural gas or nuclear.
+Pennsylvania just makes a lot of sense as a place to build this AI infrastructure.
+So this was a summit to announce new investment in Pennsylvania, something like $90 billion.
+President Trump was there to keynote the summit and talk about these investments.
+It's his policies towards energy that he started describing long ago.
+I mean, remember, he made the campaign promise of drill baby drill.
+He's been talking about the need for energy expansion in America for many years.
+And I think he was very farsighted in seeing that energy is the basis for everything.
+It's the basis for AI.
+It's the basis for all other kinds of growth.
+So by promoting energy dominance, we also get AI dominance.
+We've talked on this show before about how we're going to need that energy to power the
+electricity of all these new AI data centers.
+This summit brought together all these different groups.
+The thing I thought was really interesting, the thing I learned from it was just how diverse
+the business interests are that are going to participate in this whole AI boom.
+It wasn't just big tech.
+Yes, Ruth Porat from Google was there.
+It's also small tech.
+There was hardware companies, there were robotics companies, but there were also these energy
+companies.
+There was nuclear, there was gas.
+The trade associations were there.
+It's construction, it's electricians, it's carpenters.
+And so there was a huge diverse array
+of different parts of the economy
+that are gonna experience growth
+from this AI boom that's taking place.
+It's not just a Silicon Valley thing.
+So that was what I took away from Pittsburgh.
+And it was a really cool experience being there.
+There were two interesting notes as well.
+Hydro, I saw Google was investing in hydro
+and upgrading some dams there. This is,
+I think Gavin, one of the great upshots of the AI boom is that the AI companies, whether it's Meta
+or Google, they're so motivated that they'll actually go and upgrade the infrastructure.
+They'll invest in the, you know, small modular nuclear reactors that are coming.
+in the, you know, small modular nuclear reactors that are coming.
+And even gas turbines, obviously natural gas as a major part of this as well. And you saw that up close and personal with the build out of Colossus. Yeah, Gavin? Yeah, absolutely. I mean, electrical
+production is fundamental to AI. If we do not significantly increase kind of domestic energy
+production and electricity generation, you know, we're already at a disadvantage to China.
+And I do think we want to close that kind of electrical generation gap as quickly as
+we can.
+You know, natural gas is great, nuclear is great, solar is great, batteries are great.
+We need it all.
+Yeah.
+All of it.
+And Sachs, I saw your favorite governor,
+Josh Shapiro was there. And he was being very positive about finding common ground on energy,
+economic development, and saying, Hey, this is like a great example of bipartisan bipartisan
+efforts to collaborate. So maybe you can talk a little bit about that because you had two great
+moments of collaboration between the Trump administration and the Democrats.
+This is this is good for the American people. Yeah, both on the crypto project and on AI in Pennsylvania.
+I've never met Shapiro. I did see him there at the event, but I didn't see him on the stage. I don't know if he was part of the roundtable.
+So I don't know exactly what his status was. But what's interesting about Pennsylvania right now is that it's a state that's turning red.
+And so you see that Federman, who's probably the most right-wing member of the Democrat
+party in the Senate, and Josh Shapiro obviously is tacking towards the center because they see
+the direction of travel in Pennsylvania.
+So yeah, I think you've got some centrist Democrats in that state.
+Yeah, working out pretty well.
+Josh Shapiro every two days tweets something about how he's deregulated something, he's
+made it easier to do business. Like he is, he's on the program. He seems like a sensible
+man.
+100%.
+I'll just give a final shout out to Bo here for all the work that he did on genius. I mean, he's kind of the unsung hero. How are
+you? How are you doing all this while finishing up your degree?
+When do you when do you graduate from college? It looks like
+he's 20 years old. How old are you both have the baby face? I'm
+29 turning 30 next month. Look at you 29 in the White House lead
+and working with David sacks. This is a dream come true for
+you, huh?
+It is I mean, David's been incredible. I've learned so much
+from him just the way that he negotiates and the way that his
+brain works has been it's, it's been a blast just to be a part
+of it. But I have a 10 month old now so I should have bags under
+my eyes from lack of sleep. But Jason, I'll make one more point
+before I jump off on the tether topic like the one thing that I
+think your viewers should know is this year,
+there'll be the fourth largest purchase of US Treasuries.
+And I think that's something that, you know, we should really contemplate.
+You know, I agree with David's sentiment on this.
+I'm excited to see what they do here in the US.
+I'm glad that you're going to be a part of our system under the regulatory regime.
+But so everyone else, and I think that's a great thing for our country.
+It allows us to have control.
+That's great that you guys are backing them up because they've been banned so many times by other governments
+I'm glad you got their act together. I'm gonna i'm gonna keep on those tether guys until they get their act together
+So keep qualifying that you speak only for yourself. I only speak for myself
+I've been following that tether story for a long time and I think it's great. I want to make this point
+I always know that I've been following that tether story for a long time. And I think it's great. I want to make this point.
+I always know that our critics have never actually
+watched the pod when they start talking about the all-in point
+of view on something, right?
+As if there's a singular point of view from the all-in pod.
+Like, you know, it's like the all-in pros
+who ever think something.
+When anyone who's watched the show
+knows that we've been fighting
+like cats and dogs for years. And there's four distinct points of view. And sometimes we agree,
+but there's almost always some disagreement. So we've disagreed about this issue. We also,
+Trump and I, as you know, are relentless supporters of Ukraine. We believe we should be giving them
+weapons and support. And David, you happen
+to disagree with me and our president on that you've had a different position historically.
+So here we are.
+I'm going to stay in my lane on that one.
+David, can we talk about the H 20s? Or would you rather not? As I feel like you have been
+like, let's go so dead right about this. And I am, you
+know, I, it seems like the export, they're going to get the
+licenses. And that is 100% the right decision for America. And
+I do give you credit for championing that I'm happy to
+talk about why I think it's great, but we're just, you
+know, if
+can you frame it for a second for the audience, Gavin, what
+we're talking about here in video, Nvidia obviously was banned from selling their latest
+and greatest to China and even the last generation,
+the H20s, and obviously that creates an opening for Huawei
+and other players to create competitive products
+as opposed to using the standards built here in America.
+Yeah.
+Well, I think, I mean, I think you said it well,
+but first of all, it's not the latest and greatest.
+The H20 is not the latest and greatest.
+We're not going to.
+I don't think we're going to let the latest.
+It's not even the last gen.
+It's a deprecated version of the last generation.
+Right. Yeah.
+So remnants.
+It's a less powerful version of the Hopper chip.
+And now they're on to Blackwell.
+So it's anyway, Gavin can explain.
+Yeah, it is. It's many, many years behind, but while it's many years behind the kind of state
+of the art here in America, it is, I think, kind of devilishly clever because it's
+called two years ahead of kind of the chips from Huawei.
+And so it kind of gives America an advantage while preventing China from
+developing kind of a domestic and video alternative.
+And the real threat is cause China, they do have more electricity.
+They can do things that we cannot do here in America.
+You know, the Blackwell racks are exquisitely designed to be as power efficient as possible.
+If you don't care about power, you can make very different kind of design decisions.
+Huawei has something called the Cloud Matrix 384,
+which uses fiber optics
+instead of copper to link the chips together.
+And while it's not nearly as power efficient as the Blackwell NVL-72,
+they have all the power they need.
+And so I think it's very, it's, it's, it's a smart decision for America
+to sell this chip that gives America America advantage in AI and keeps China from developing
+their own domestic alternatives, which could eventually challenge NVIDIA, AMD, other American
+AI accelerator champions globally.
+We don't want that to happen.
+So I thought it was a mistake when they banned the chips.
+And I'm really happy and think it's really good for America if that is being reversed.
+And kudos to you, David.
+Gavin, you said it so well, I don't think I have anything to add.
+Can I just say one thing on crypto, you guys can put it in or not, but I saw it as interesting.
+David, I was always worried about stablecoins as a risk to the dollar.
+But I think you make a very good point that when you are the dominant currency, they entrench the dominance.
+And I just should not have thought of them that way.
+I think what's going to happen with these dollar-based stable coins is they'll start
+being used all over the world.
+Let's say that you're in a country, maybe it's a developing world country, where the
+fiat currency is not trusted.
+And now all of a sudden, you can transact in dollars using a wallet on a phone.
+The merchant also has a wallet on a phone, and now you can just transact in dollars.
+You could see a large portion of these economies dollarizing from the bottom up.
+Because again, once you have your choice of fiat currencies
+through stable coin, why wouldn't you just use the best one?
+And that's what I think is really interesting.
+So I do think it extends the dollar's dominance
+internationally into the online realm.
+Yeah, and previously people were basing their stable coins
+on a basket of assets, some treasuries,
+some real estate investments
+because they were seeking yield, Gavin.
+So they would buy real estate or, you know,
+short-term, long-term treasuries.
+They might put equities into it.
+They might keep some in cash.
+And none of that was known.
+And so that's where this big fear came.
+Hey, these things are getting pretty big.
+There's obviously demand to use this concept
+of a stable coin, but what if there's a run
+on the stable coins? And that was always the big fear with
+various players was what if everybody wants to withdraw
+their stable coins? Are there enough dollars or liquid assets
+in there? And that's where I think certain players have maybe,
+you know, move the asset allocation and in order to be in
+the US market, tether is going to have to be 100% in
+treasuries, right?
+They're not going to be allowed to be, say, in real estate, there was a, you know, concept
+that maybe they were buying Chinese paper for real estate back in the day, and people
+were concerned about that.
+So this cleans all that up, and they have an easy path.
+But you can't make interest on it.
+That's actually a very interesting portion of this.
+So that will have to come at a later time.
+So the banks don't lose anything here, right? Well, just to clarify one point on that, one of
+the concessions that was made to community banks is not to have an interest feature because the
+community banks were worried that this new stablecoin industry would put them out of business. I
+think that that fear was wildly overblown on their part. I don't think that's what's gonna happen remotely.
+But when you have a new technology like this
+in a very established industry,
+you can see why maybe they'd be afraid.
+But the bill allows for all sorts of marketing,
+promotions, rebates, that kind of stuff.
+So maybe it's not called interest,
+but there are mechanisms to create,
+let's say rewards for
+stable coin holders. So it's not as like black and white as just
+oh, there's like nothing a stable coin issuer can do to
+attract or incentivize or reward one of their holders, it is a
+dimension they could compete on.
+So maybe if I were to buy $10,000 worth of a stable coin,
+I could get mileage like points or maybe a load in gift card or something.
+Yeah, we have to interpret the language, but the mechanism is there.
+Okay. Well, there you have it folks. All right reporting
+from our capital David Sachs, our czar of AI and
+Cryptocurrency, I'll see you next Wednesday in DC for a very important summit.
+All right besties, I'm here at the White House with Senator Bill Haggerty from Tennessee, the principal author of the genius act. He I would say along with the leadership president Trump are the reason why this bill happened.
+by President Trump. Bill, you did a phenomenal job. I got to observe this whole process and you really played the critical role. You were a very skillful legislator, crafting delicate
+compromises. You were kind of the glue that held the whole thing together. Congratulations
+on getting this done. Is this your first bill that you've gotten done as a senator?
+It is. I've served in the Senate for over four years, but we were in the minority for
+the past four years. So this is the first opportunity since the Senate was taken by the Republicans to actually drive legislation through.
+And the fact that we had the House of Representatives, the Senate, and the White House
+made this possible. It was just a threshold concern. We worked so hard, as you know,
+to retake the Senate in 2024, to retake the White House in 2024, and hold on to the House
+of Representatives. It worked. And that's the only thing that's enabled us to deliver this type of meaningful legislation.
+And I say this too, it's been a great team that has done this. I may be the author of
+the legislation, but the leadership that you've brought to bear from the White House coming
+in and donating your time from the private sector, working as a volunteer here, but making
+certain that the leadership and the vision is present here at the executive branch, you've
+been absolutely great. And that vision, I think vision is present here at the executive branch, you've been absolutely great.
+And that vision, I think, has carried forward into the Senate, the House.
+More and more people are understanding this and catching on.
+And I think what we've done today is launch the catalyst for what's going to make America
+the crypto capital of the world.
+Yeah, it's been really amazing and interesting for me to watch this whole process.
+They say that you shouldn't watch legislation
+or sausages being made.
+But earlier in the week,
+the media was reporting that this bill was dead
+because there were a dozen holdouts
+and President Trump made calls late into the night.
+He gathered people at the Oval Office.
+He cajoled, he twisted arms, and he also persuaded.
+And he got us over the finish line.
+It was pretty incredible.
+Well, I think the founding fathers made it actually quite difficult to legislate for a reason. And he also persuaded and he got us over the finish line. It was pretty incredible.
+Well, I think the founding fathers made it actually quite difficult to legislate for
+a reason, but it is difficult.
+It's taken months upon months to get to this point and legislation, the genius act has
+been killed a couple of times in the media.
+Elizabeth Warren declared victory early on that she killed the bill.
+That didn't happen.
+She didn't have the juice to do it, but there have been many, many attempts.
+That's a big deal because until now,
+the crypto community's been living
+under Elizabeth Warren's reign of terror.
+That's exactly right.
+She basically was calling the shots
+during the Biden administration on crypto.
+And I was there when the Genius Act passed the Senate,
+I was up in the bleachers or whatever,
+and she was not happy.
+I mean, there were photos of her
+and she did not like losing.
+There's a fundamental reason for this, David,
+because Elizabeth Warren and her crowd
+want to see a central bank digital currency.
+What they want is control of our transactions.
+They want the ability, they're the ones that wanted
+to get to a $600 threshold for your Venmo transactions
+reporting everything.
+They want the ability to do choke point 3.0.
+And if you think about it,
+they had visibility in our transactions, the ability to centralize and 3.0. And if you think about it, they had visibility in our transactions,
+the ability to centralize and control them.
+They could control our lives.
+Maybe okay for the Chinese Communist Party,
+but that's not gonna work here in America.
+And this legislation put the final nail
+in the coffin to that.
+It's really amazing that you got it through.
+And to get this passed, the Senate,
+you had to have 60 votes, right?
+Because reconciliation, you only need 50 plus one,
+but for regular order,
+I guess, to get past the potential for a filibuster, you need 60.
+That's exactly right.
+So what demands did that put on you in terms of getting Democrat votes? Because the Republicans
+have what, 53?
+Yes. So we didn't have all the Republicans, we didn't have all the Republicans, but what
+enabled me to get the other nine Democrats to come on board
+was really an education process.
+Because at its core, this shouldn't be a partisan issue.
+This is about taking America's payment system in the 21st century.
+This is about making our nation more competitive.
+This is about expanding demand for the U.S. Treasury securities that we issue.
+This is about the dominance of the U.S. dollar.
+It's hard not to like it, but I think there's a partisan bent here in Washington that's so strong that their objective is just
+to keep Republicans or Donald Trump or David Sacks from getting a win here. And through
+education and through listening, and frankly, I don't think it's my legislative skills,
+I think it's the business skills that I brought to the legislative branch. I think it's through
+the business skills and the ability to negotiate that we've actually gotten to this point today.
+And so tell us about that. So before this, you were a businessman, then you became ambassador
+of Japan. You met President Trump, you told him you wanted to run for center of town.
+He told the story up at the end of speech. He said that you had learned Japanese in like
+six months as ambassador of Japan.
+It was a little longer than that.
+Okay.
+There's a piece of the story missing because I started my career at a place called the
+Boston Consulting Group.
+Oh, of course.
+And they sent me to Tokyo for three years back in the late 80s, early 90s.
+That's when I learned the language.
+And to go back as U.S. Ambassador to Japan under President Trump in 2017, the honor of
+a lifetime.
+I can tell you, representing the greatest nation in the world, any place in the world,
+is an honor But particularly in a region like that that has so much strategic
+You know so many strategic initiatives that are underway right now you think about this
+Japan has more US military station there than any place else in the world
+Japan is one of the toughest environments in the world if you think about the neighborhood that they're in North Korea Russia China right at your doorstep
+If you think about the neighborhood that they're in, North Korea, Russia, China right at your doorstep.
+The time that I spent as ambassador really helped me
+dig in deeply in terms of the national security issues
+that our nation confronts
+and those that our allies confront.
+At the same time, we did two trade deals with Japan.
+Nobody thought it could be done.
+And we were able to navigate that
+with Jameson Greer working right beside Bob Bleidheiser.
+I loved working with those guys
+and we got two great trade deals done.
+James is back now as the US Trade Representative
+and I'm very optimistic that we're gonna see
+more trade flourish.
+President Trump knows how to do this.
+I've been with him in the trade negotiations.
+He knows exactly how to navigate this
+and I'm looking forward to great results
+from our trade negotiations as well.
+Excellent and so we're only six months
+into this administration.
+It feels like so much has happened.
+So much has been done.
+I mean, we just had the one big, beautiful bill.
+Now we have this legislation.
+What's next in your view?
+What do you think is gonna happen next?
+What's happening right now in the United States Senate?
+We just put through a rescission package
+for a little bit over $9 billion.
+That's a small amount.
+It's a large amount of money, of course,
+but it's a small amount relative to the entire budget.
+And the Democrats have had, they've just gone apoplectic over this. That's a small amount, it's a large amount of money of course, but it's a small amount relative to the entire budget.
+And the Democrats have had, they've just gone apoplectic over this.
+Any effort to cut back on spending, somehow they've got to be against that.
+They're only for spending and we're trying to bring physical sanity back to America.
+So the focus is going to be to continue to find opportunities to basically legislate
+what has been found in Doge.
+The other activity is found in Doge, the
+other activities well beyond Doge, every department head, every agency is looking for ways to
+streamline regulations and to cut costs and to operate more efficiently.
+And I've got to believe there are tremendous opportunities there and many billions more
+dollars that will come out of the budget as a result.
+But we've gone into a fairly partisan mode right now, and I think it's going to be tough
+for the next little while.
+While we're in this sort of partisan gap, I think what we should be doing is focusing
+on market structure for digital assets and we're working on that.
+I just talked to some of my colleagues in the house today about how we're gonna marshal
+that forward.
+I'm gonna look forward to your leadership there as well and many people in the industry.
+But just so everyone knows what that is.
+So market structure is the legal framework.
+It's the rules for all the crypto tokens that are not stable coins.
+So the Genius Act just passed.
+I gave the legal framework for stable coins.
+Now we got market structure for all the other tokens.
+And it deals with questions like what's a crypto security?
+What's a currency?
+What's a commodity?
+Who regulates those things?
+Just providing clarity.
+That's the name of the bill.
+So that market participants know what the rules are.
+Because the last four years under Genzer they're basically prosecuted without
+knowing you know how to how to abide. Yeah they called it regulation by
+enforcement you don't know what the rules are but they just launched an
+enforcement proceeding against you and President Trump was funny today because
+he looked at the audience he said I guess half of you were being prosecuted
+here about a year ago by the previous administration. Things aren't gonna change.
+He was on fire today.
+He was, I mean, people should go back and watch.
+I mean, he spoke off the cuff, basically,
+like he normally does for 20 minutes and was very funny.
+But the reason why he said that is,
+when we did the crypto summit at the White House
+back in March, the Winklevoss brothers,
+Tyler and Cameron were there.
+And they told the story about how a year before,
+they thought it would be more likely
+that they'd be in the big house and the White House.
+It was like the fact that they were at the White House was-
+Rather than in the big house.
+Because that's the way it was looking.
+They were dealing with so much unfair lawfare.
+But in any event, we've moved past that.
+So thank you for your leadership on this.
+And by the way, on the rescissions,
+I know that this is the one issue
+that I think all of the hosts,
+the four hosts of the All In Pod all agree on
+is that deficit spending is out of control.
+Anything we can do to try and rein it in
+and have more fiscal sanity is appreciated.
+Even Calcans can agree with that one.
+He's sort of like the token lib on the podcast.
+We're gonna continue to work along those lanes.
+The big, beautiful bill is doing,
+it's oriented toward growth stimulation, right?
+Everything that we can do to stimulate
+more capital investment in the United States
+is embodied in the tax law as part of that bill.
+So with the growth coming out of the big, beautiful bill,
+and if we continue to go through the cuts with decisions,
+I'm very optimistic that we're gonna get back
+on the right path.
+That's the objective, that's the goal.
+Meanwhile, taking us into the 21st century
+with our payments, with digital assets,
+we're gonna continue to work along those lanes as well,
+and I appreciate your leadership in that regard.
+Well, and we appreciate you.
+I think the state of Tennessee,
+where by the way, I grew up, I grew up in Memphis,
+it's very lucky to have you as our Senator.
+The Republican party is really lucky to have you.
+The Senate's very lucky to have you,
+to have someone with your business background,
+to have your skills, who has now gotten through
+this first piece of legislation through, again,
+this wasn't a budget bill.
+It took 60 votes in the Senate.
+I mean, when's the last time that even happened?
+I mean, it's been years.
+I heard the Senate Committee, I mean,
+I heard they hadn't passed a bill
+in like 10 years, basically, because it takes 60.
+So.
+It's been over 10 years to get out of the Senate Bank.
+One of my friends wrote me yesterday and he said,
+I didn't think you could get the 10 commandments passed
+out of the United States Senate.
+So congratulations.
+And I don't want to take the credit for it
+because it's been a wonderful team.
+As I said, your leadership in the White House
+and the executive branch,
+our friends in the House of Representatives,
+my great staff led by Luke Pettit,
+done just a terrific job.
+Luke Pettit was amazing, we work closely with him.
+Bo Hines, he was the director of the crypto council,
+who was on the show earlier today.
+Tyler was wonderful at Treasury.
+Yep, Tyler Williams at Treasury,
+who was Secretary Besson's staff person.
+The staff will never get the credit they deserve
+for all the work they do, right?
+But Tyler, Luke, and Bo were amazing through this process.
+And in the Senate too, we've had great leadership. Our chairman for the Senate Banking Committee
+is Tim Scott. He's been a true proponent of this. Cynthia Lummis is very focused on
+digital assets, was very supportive of me as she chairs the digital asset subcommittee
+of our banking committee. So we've had great support in the Senate and I think it's
+going to continue to grow both sides of the aisle.
+Cynthia Lummis, she's been great. I've met with her many times. Tim Scott's been
+great. I understand that Kristen Gillibrand, the Democrat Senator for New York,
+she brought in a lot of Democrat votes. I think you got 18.
+The great thing about Kristen too, she was a Wall Street lawyer at Davis Polk.
+She understands the markets and to have her level of technical expertise was a huge asset.
+And she was able to really convey to the Democrat side that we were here trying to get the right
+thing done for the country.
+This was not a partisan effort.
+This was something that really is aimed at growth, leadership, technology leadership,
+and frankly dollar dominance that we all should be for.
+Amazing.
+So I think it's really amazing that we got this done.
+When you compare this to where we were a year ago,
+I mean, it was nonstop, I guess, regulation by enforcement
+is basically regulation through prosecution,
+lawfare and the crypto community was being driven offshore.
+There wouldn't have been a crypto community
+in the United States.
+And then President Trump won the election.
+Now, thanks to the efforts of Bill and others, it's law.
+The genius act is now law.
+We have a legal framework for stable coins and market structure is next.
+The clarity bill is next.
+We're going to try and do that by October.
+So it's really amazing that this is a, you know, I thought that working for
+President Trump would be a once in a lifetime opportunity because he's a
+president who really wants to get things done and that's what's happening. It's really been amazing. So thank you, Bill, for being here. Thank you, David. Great to be a once in a lifetime opportunity, because he's a president who really wants to get things done, and that's what's happening.
+It's really been amazing.
+So thank you both for being here.
+Thank you, David.
+We appreciate it.
+Thank you.
+Thank you. and they've just gone crazy withgy because they're all just useless.
+It's like this sexual tension, but they just
+need to release them out.
+What?
+Your feet.
+What?
+Your feet.
+What?
+Your feet.
+Your feet.
+What?
+What?
+We need to get merch.
+Fetches are back.
+I'm doing all in.
+I'm doing all in.

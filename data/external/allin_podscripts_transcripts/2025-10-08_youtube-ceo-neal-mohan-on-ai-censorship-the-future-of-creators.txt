@@ -1,0 +1,436 @@
+source: allin_podscripts
+published_date: 2025-10-08
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/youtube-ceo-neal-mohan-on-ai-censorship-the-future-of-creators
+title: YouTube CEO Neal Mohan on AI, Censorship & the Future of Creators
+
+The man himself CEO of YouTube!
+I didn't realize that when I took over the CEO gig,
+a big part of my job would be being a straight man for a lot of YouTubers out there.
+YouTube is now by far the biggest streamer in the world.
+Shorts, I think, has just surpassed 70 billion views a day.
+Mohan was one of the pioneers of internet advertising,
+and keeping the world's largest creator economy afloat.
+We think we're really still in the early days of our growth story,
+growth story and fulfilling what our mission is, which is to give everyone a voice and
+show them the world.
+Ladies and gentlemen, please welcome YouTube CEO Neil Mohan.
+Good to see you, brother. Thanks.
+Nice to see you.
+All right. All right. Welcome, Neil.
+Neil. Neil.
+that together. I mean, you could have. What did you think? We talked to him a little bit about
+which platform is the most important. He said the one that pays us the most. You don't pay for content
+upfront. You've done some experiments. You do it all with the 55% revenue split. You sweep 45%. Seems like
+you're doing pretty well. Are you taking too much money from creators? Let's get into it. Can we get
+that down to 30%? Well, first of all, thank you all for having me. It's a privilege to be with you
+guys like they say a long-time listener first-time caller so it's great to be here with all of you
+do you listen to the pub yeah uh i watch it oh you watch it where do you watch it what did you like
+spotify video oh on youtube yes we're there now we are there now yes can you please be prepared
+yes yes i didn't know we had a youtube channel really how's it doing how many folks watch it on
+watch it on youtube just out of curious there we go all right okay it is about half yeah the channel
+is growing you guys are close to a million subs watch time
+views all up and to the right, so congrats to all of you guys on that.
+But on your question, Jason, so we've paid out in the last three years over $70 billion
+to the creator economy. We are the original and world's largest creator economy.
+And so that innovation, which is called the YouTube Partner Program, is well over a decade now,
+the 55-45 that you're referring to.
+And so we pay out billions to creators, creators, our media company partners, the music partners, et cetera.
+I'm using that term creator and I'll use it for the next 30 minutes, sort of in the broadest sense of the term.
+It's just that the way that we do it is very different.
+I mean, we're a creator economy in the true entrepreneurial sense of the word, which is if you're a creator on YouTube, contrasts to the traditional model, you're betting on yourself, which is,
+kind of the opposite of sort of the way that traditional media models have worked.
+And as you grow, as your audience grow, as your success grows, your monetization grows,
+your business grows as well.
+And not every creator on our platform is going to become, you know, Mr. Beast or Dude Perfect,
+but there are, you know, north of three million creators that are in that partner program
+to a earning revenue.
+Back to my question, I feel like you've created all these stars and you look at the Tucker's,
+You look at the Megan's, you know, we'll put ourselves maybe right behind them.
+We all choose to turn off monetization because the take rate's too high and we can do it better ourselves.
+Should you not start to think about two classes of folks, the up-and-comers who don't have sales teams,
+who don't have distributions, maybe it's more about building an audience,
+and then maybe looking at the folks like us slightly differently.
+And this seems to be a weakness in your game, your take?
+I would say that, you know, the way I think about it is...
+He doesn't speak for us.
+I speak for myself.
+I just want to be clear that I love you.
+But it's clear that people who are at this level take it on themselves
+because the 45% is just an absurdly high take rate for that level of person,
+the Tucker's, the Meggins, they'd rather just bake their ads in.
+So how do you think about that level of folks?
+They participate, but you don't monetize them?
+I think that that's not the way I would characterize it, first of all.
+I think the way that I think about it is all of these monetization models should be available to you
+depending on what your business objectives are and what they're not.
+And I've talked to a bunch of you guys about sort of how you think about that monetization question
+and what's important versus audience building and not.
+And by the way, it's the same type of conversation that happens with sports leagues or studios or what have you.
+And so my vision on all of this is whatever model works for you as a creator, podcast or what have you, should be the model that you adopt.
+And so, for example, you take, you know, what Tucker's doing and Megan's doing, and they, you know, they have had enormous success on our platform, mostly driven because they're incredibly talented at what they do.
+And the audience and the algorithm have figured that out.
+But it might be that the monetization model that works best is something.
+where they're representing their inventory themselves.
+And that, I think, is less about sort of take rate or what have you,
+but sort of the best way to actually package it up.
+And so that's really the way that I think about it.
+But if you're a creator getting started today,
+you're not even concerned with that at all
+because the monetization is really only a byproduct
+of what you've been able to do from an audience engagement standpoint.
+The net is what matters, right?
+At the end of the day...
+That's my point, yes.
+Yeah, take rate's 55, 20, 90.
+If you're making more money doing this,
+than other things.
+I mean, a great example, again.
+Maybe you can speak to the quality of the algorithm and the ads placement.
+You come from the ads business.
+You're a double-click.
+Yeah.
+How good YouTube's ad placement and ad quality is relative to other platforms
+and how that actually increases.
+Yeah.
+I mean, I think what I'd say on that is it's really, it's two things.
+One is, you know, obviously we invest very heavily in making it so that the advertising you see,
+whether you're watching YouTube on a television screen or on your phones or your laptops
+is relevant, it's targeted, the creative formats are there.
+We are a platform that caters to advertisers that are brand advertisers,
+brand builders, as well as direct response.
+And so that is a big area of investment.
+But the reason why, and I spend a lot of time talking to advertisers,
+why they're also excited about the ROI is that the engagement is differentiated.
+And that turns into ROI for advertisers.
+And what I mean by that is if you go,
+to YouTube, you are really leaned in into what you're watching. You are a Mr. Beast superfan.
+You're a, you know, Michelle Carrey super fan. You're a name your favorite creator superfan,
+and that is a different type of engagement that actually translates into different ROI regardless
+of where your objectives are in the marketing funnel. And that's our secret sauce. That's where
+this $70 billion that we pay out to the creator economy and all these, you know, hundreds
+of thousands of jobs that we create and that create our ecosystem on a daily basis come from.
+Let me just up-level this in more general question.
+Ten years ago, 15 years ago, the cable channels and the way that we consumed content was
+largely live.
+You know, we would tune in for shows.
+And one of the byproducts of that was national culture, right?
+There would be these things that would enter the zeitgeist, and we'd all talk about it,
+and we would be unified by it.
+And on the plus side of all of this infinite distribution is you get to watch what you want.
+The downside of it is there's really no connective thread almost that we all talk about that's the same.
+How does YouTube view that problem?
+Is it a problem?
+Like, is there a responsibility or are there things that you can do to kind of make things that are a little bit less on demand,
+a little bit more appointment viewing that kind of builds identity and culture?
+Yeah, I think it's a really interesting question.
+And again, you know, one of the consequences of what you're talking about vis-à-vis the algorithm or what have you is, you know, you guys open up your phones right now.
+That YouTube feed of yours is going to look like you, right?
+Like, it really is about what you're genuinely interested in and watching, and that does lead to, it can lead to that type of, that fragmentation that you're describing.
+Having said that, you know, if you ask, you know, someone, a Gen Z or, you know, a millennial sort of what were the top four or five sort of really big sort of breakout pop culture trends, a lot of them are actually an aggregation of a lot of these types of things.
+And, you know, they could be trends that might be not the most relevant to all of us or this audience, but they are for a particular sort of age group.
+And so we do, so the answer is that we do see a lot of those sort of national,
+and in many cases, because YouTube's a global platform, 2 billion people come to it every single day,
+there's enough aggregation even amongst these sort of niche areas where you do see some of that.
+The other thing that I will say about, about sort of how I think about it is I do think that live and sort of like those water cooler type moments are really important.
+You saw, you know, you saw the biggest one of those happen on YouTube just two days ago.
+That Brazil game that Ari was mentioning was on YouTube.
+And the reason why it was such a success, I would argue,
+is because of that aperture of what YouTube can obviously do from a reach standpoint.
+But the other reason, and to the NFL's credit, was you guys saw how relevant we were trying to make it
+for kind of this YouTube generation.
+And again, you obviously saw the integration with things like DeStraint.
+and Mr. Beast in the actual live stream of the game itself.
+But that sort of creator engagement through the lens of creators
+is something that sports leagues are leading to,
+which is sort of like what I describe as a new water cooler moment.
+What percent of watched media minutes do you guys have, do you think?
+If you look at all media, broadcast movies,
+I mean, you guys know we're...
+Netflix.
+We're the number one streaming platform here in the U.S.,
+so I think the latest Nielsen's number was,
+and we've been the number one streamer in the U.S.
+for two years. And I think the number, the latest Nielsen number was, I think, something
+about roughly about 13, 14% of the TV watching audience. But remember, that number doesn't
+include YouTube on mobile. And so it's a television number. But to Ari's point, do you see that
+growing? Are people spending more time consuming media because it's more personalized, it's more
+engaging, and they're finding perhaps more free time? I mean, I do, I mean, look, our numbers are
+growing. I think other streaming platforms are growing. Other, you know, mobile platforms are
+growing. I think if you look at sort of the totality of sort of human time, it's still sort of a
+relatively, you know, small portion of that. May I may shift gears to a different topic for a
+second. I think during COVID, there's a real sense that the censorship was out of control
+on social media, not just YouTube, but Twitter, Facebook, all of them. If you question the
+efficacy of vaccines or social distancing or even on topics like the trans agenda or even
+climate change. There was a risk that you could be censored or shadow banned or demonetized.
+It feels like the industry's kind of pulled back from that and things have opened up again.
+And a lot of that's, I think, due to what Elon did in terms of buying Twitter and opening things
+back up. I guess my question is, has the industry actually learned from that? Or is censorship
+just on pause during the Trump years.
+There's another festival.
+I like it.
+I like it.
+That's why I'm here.
+It's a great question.
+You know, I think that, actually,
+I'll just say a couple things about that.
+And one of them will sound,
+it's sort of actually connecting the dots
+between the questions that you guys asked,
+which is, you know,
+the way I answer Dave's question is,
+first of all,
+I think a lot of these platforms
+are actually,
+pretty different, right? Like what Twitter does is different than what, you know, some of
+the meta platforms do, which of course is very different than what YouTube does. And you could
+argue, as witness from the rest of this conversation, that we probably have a lot more
+similarity with, you know, a streaming platform than we do with a social media platform.
+So that's one point, but I think it's an important context into what I'm about to say.
+And the reason I say that is because, you know, 99% of what happens on YouTube is all the
+creators that I talked about, all the podcasters, you know, the Taylor Swiss of the world,
+all the music, obviously. Music is our largest and, you know, most important vertical, for example.
+We're a music platform. So that is like, even during COVID, that is where a lot of the watch
+time on YouTube versus a discourse that might be happening in a social feed somewhere.
+That doesn't mean that we don't have comments on our videos and all that sort of piece,
+which is where some of this, you know, discourse that you're alluding to, David, might have
+happened. I do think, yeah, so I think that at the highest level, I do think that there is something
+about the fact that that was a very different time. I remember kind of March, April of 2020,
+where like, oh my God, like, do you get this this way or is it this way or mask or this? I mean,
+I literally woke up one day and there were like people climbing 5G cell towers and falling from
+cell towers because now it was like
+you could literally get the thing from
+cell powers, but it sounds
+crazy today, but that
+was the nature of sort of the types of things
+that were popping up on. So some lessons learned
+or regrets there? Let me just finish.
+So that's
+the context in which
+we were having to sort of make some of
+these decisions. Fast forward to
+today, like obviously in a completely
+different world, but just in terms of the
+nature of the disease and all that sort of
+a thing. So all of those
+sort of policies that existed back then are non-existent today and it's my way
+of answering your question of like well is it a temporal thing or not I would argue
+that a lot of these sort of like and by the way YouTube in particular was was
+criticized to an extreme amount because of all the content that we left up on
+the platform around you know the Wuhan virus controversy around like you
+know whatever all sorts of other things that
+we were leaving up that other places were acting differently on.
+And so we got beat up a lot sort of from one side of the spectrum then.
+And I think that our approach really just has to be flexible to the environment and the
+context of it.
+I think we're always going to get criticized by being an open platform.
+There's a lot of magic that happens because of the open platform.
+All these amazing creators wouldn't exist if we didn't have an open platform and we didn't stand
+for free speech.
+But there's also a lot of, I mean, yeah, hold I sort of follow up on this if I may.
+There are two categories that I have in my feed because of the algorithm, firearms and poker.
+Both of those groups of creators are a little bit up in arms, no pun intended, because they are being demonetized.
+So how do you make a decision on who's allowed to earn and who's not allowed to earn and be part of the ad network?
+Poker folks and people who do firearm safety and firearm training.
+and best practices, they're demonetized and they're complaining about it now.
+How do you make those kind of decisions?
+A lot of them are incredibly successful creators on our platform, Jason.
+But not monetized?
+No. So many of them are monetized as well.
+So we do have a clear set of rules, and we've had these for a long time in terms of
+sales of firearms and those types of things, and obviously there's legal frameworks
+and all those types things around it.
+But I think, you know, in terms of firearms community and learning about firearms and safety,
+which obviously is an important thing, especially for young people,
+we're one of the largest places where those audiences exist as well as monetization of that type of content.
+Now, the balance, and, you know, obviously, and some of this comes from, you know,
+experts that we've worked with in that vertical itself around something might be appropriate for an adult user of that type of
+content that may not be appropriate for a child and those types of things.
+So there's a lot of nuance behind it, but the poker, I don't, I mean, are we, like, there's
+probably something around sports gambling, legality, and all that sort of stuff.
+But generally speaking, as you guys know, there's an enormous amount of poker content
+that's incredibly successful in our platform.
+It's back to what Chamath was saying, which is like, whatever niche there is out there,
+however big or however small, you're going to find a set of creators that are just as passionate
+about it as you are.
+the interesting question is how do you organize yourself across all the different countries
+in your end and the scale that you're at to deal with the cultural nuances of every different
+country and then to deal with the laws of every different country and then to deal, as David
+said, sometimes the vicissitudes of social policy in every country. How do you deal with that
+organizationally? Like what does that actually look like? Yeah, it's the part that turns my hair
+hair white. But look, I think part of it, I say this to my team all the time, which is
+it is a challenge, right? Because we, but I think it's a challenge that honestly, like,
+I view it as a bit of a privilege in the sense that it wouldn't be important if we weren't
+such an important place, especially for young people to connect, get information, entertain
+themselves learning. We're the largest learning platform in the world. We know that, obviously,
+just given all the use cases and the watch time, et cetera. And so, at least from my standpoint,
+I try to be as global as we possibly can in terms of principles. You know, one of the things
+that I always say about YouTube is like, you know, our North Star principle and, you know,
+has always been give everyone a voice and show them the world. That's our mission statement.
+It stands for freedom of expression, freedom of speech.
+We are, you know, an American company, and that notion, that sort of value of freedom of speech is core to our ethos.
+And we really do try to start with that as a global position.
+Having said that, you're right.
+Like there is an enormous patchwork of legislation and regulation that exists in every country.
+Are there people that are writing policies that then some folks just have to understand and they're manually trying to react to,
+here's how we deal with this issue in India,
+here's how we deal with this issue in Brazil,
+here's how we deal with it in France.
+Yeah, I mean, look, the answer is...
+Or is it algorithmic, or is it a combination of it?
+It's always some combination,
+because, you know, the scale of YouTube is,
+you know, hundreds of hours of content
+is uploaded to YouTube every single minute
+of every single day.
+We want to be as core to that North Star as possible.
+And, you know, frankly, there's situations
+where we have to push back
+on that core, push back on sort of what might be an encroachment on that sort of a
+principle. Having said that, we also, of course, you know, have to legally operate in all of these
+countries, just like any other platform.
+There's three products, Neil, I'm super obsessed with, and I just would love to get your
+take on them in terms of priorities for you. YouTube TV, unbelievable.
+Unbelievable.
+YouTube Brad.
+That is a great product.
+YouTube Brad, which I think is YouTube premium, taking the ads off.
+unbelievable. And then I think a sleeper is you've kind of built in Patreon-like functionality
+subscriptions. So maybe you can walk us through the footprint of each of those and the
+prioritization of those because they do seem to have had a significant impact on engagement
+and how people look at the platform. Yeah. And I'm super proud of all three of those products
+as a product guy myself. Like that's the fun part of the job is actually building all of these
+amazing products. And, you know, the, there,
+origin story on YouTube TV, I'm a sports nut. I'm like, and actually the people on my team,
+a lot of them who've been involved with YouTube TV since the very early days are also big sports
+guys, and I'm also a news junkie. And that's the core use case of YouTube TV in many ways.
+If you think about sort of the features that we build, multi-view, key plays, even some of the
+fantasy integrations that you see. So that's the lens through which you should think about
+how we're going to continue to develop that product. And the thought, and the question I would
+always get is like, well, why are you guys doing this?
+Like, look at what's happening to that part of the paid ecosystem, right?
+Like, why are you diving into this thing that's like this sort of like, you know, shrinking,
+shrinking thing?
+And our thought was like, well, a lot of it has to do with the fact that, like, reinventing
+that whole experience from the standpoint of a fan or a consumer.
+And so that's the YouTube TV origin and sort of where it's going.
+The one thing that you should, you know, pay attention to is, you know, you know,
+is something that we call primetime channels in YouTube,
+which is a lot of those same sort of linear channels
+or sort of traditional media channels,
+but that you can buy a la carte in the main YouTube app.
+And so there's connectivity between those two products.
+Yeah, I was wondering when that would happen,
+because for me, it's just CNBC.
+I want to have it inside of YouTube.
+But I have to load it.
+And then when I travel, it's always like, oh, what region are you in?
+Premium.
+How many premium subscribers are there now?
+How is that growing?
+How does that affect the ad business?
+Because for me, the ads are death.
+I need my time back.
+So how do you think about that?
+Yeah.
+I do think that for our business,
+advertising is going to remain, is today,
+and will remain the predominant way
+through which we monetize on behalf of creators.
+That's $70 billion number that I mentioned.
+Most of it comes from ads.
+And the reason is because, you know,
+at a fundamental level,
+we are a platform of scale, $2 billion.
+2 billion people come to it every single day.
+Having said that, like giving consumer choice, you know,
+uninterrupted experience, is important.
+It's about 125 million subscribers.
+125 million.
+YouTube premium.
+Amazing.
+How does that money get split with the creator?
+So if I'm watching Mr. Beast without ads, how do you...
+There's a kind of roughly sort of engagement watch time type calculation.
+And is YouTube TV basically the biggest cable subscriber base?
+Equivalent? Are we? Are you?
+Yeah. What do you guys rank in cable subscribers?
+Actually, you know, it's interesting the way that even the way you guys are talking about it is like, well, that's like your uninterrupted sort of TV subscription tier, which is how I think lots of people think about it.
+Right. The origin of YouTube Premium was actually a music subscription service, right? It was called YouTube Music and Premium. And so a lot of those 125 million subs are not just people who are watching it just the way that they would watch like, you know, net.
+or Amazon without ads. There's a lot of that. But a lot of it is just actually music fans, too.
+Like people who, for whom their music service is actually, is YouTube, right? Like, where they
+discover music, where they listen to, you know, or watch their favorite videos is YouTube.
+So how do you have, like, a interrupted music service?
+When you have all these incredible AI models all over the place, people will be generating
+all kinds of content. Some of that content could be news content, topical content. You know,
+it could talk about a vaccine. It could talk about whatever.
+guys feel you have a responsibility to figure out whether that's real or not? Do you think that's
+the role of the actual creators? Do you think it should be, you know, the CDC should have a
+YouTube channel where they watermark the stuff that they put out and then, like, whose responsibility
+is this going to be? Yeah, I think that's, how much of it is our responsibility as a consumer?
+I mean, look, I think that, here's how I think about it. First, with the growth of these
+AI enablement tools,
+you're going to see that, like, the distinction between, like,
+was it completely AI generated, was it AI-assisted, etc.,
+is going to be a continuum.
+So that's the first piece.
+And we're already seeing that.
+We see that on YouTube.
+Obviously, you know, you open up the YouTube app,
+you hit that plus button.
+You can type in a text prompt,
+and it will generate a video for you using our VO models, right?
+So that is already happening.
+One of the things that we do is there is a label that says that, you know, hashtag AI generated.
+And we will put that, we call it sort of front of the box.
+We will literally put that on the video, in some cases.
+Usually it's in the metadata.
+That's obviously not foolproof.
+But I think the way, at least from a principal standpoint, the way I think about it is, you know,
+YouTube has these, you know, community guidelines.
+We try to be transparent about them.
+We publish them on our website.
+And I think that's sort of like a a priori distinction between,
+well, it was AI generated, therefore it must be violative versus not actually is not the way to do it.
+And it's really just about giving as much transparency to the users as possible.
+And then the other thing that's really important is in the creator business,
+in the creativity business, whether you're a Hollywood celebrity or a YouTube,
+or an artist, the thing that I hear over and over that they really care about is their likeness.
+And so if you're Taylor Swift, it's your voice.
+If it's, if you're, you know, Marquez Brownlee, it is your face, like your library.
+No, I mean, there are people doing live chima things to give Bitcoin away, and I send it to him
+and I report it sometimes.
+Oh, I send it to Neil.
+Yeah, send it to Neil.
+And I'll tell you, the AI slop issue is getting bad.
+Send it to me directly instead of tagging me.
+No, the issue really is like I'm a Corvette fan and the incentive is so perverse.
+I've had to ban a bunch of these channels that show me thumbnails of this is the new Corvette.
+This is the new prototype and it's AI slop and it's obvious what they're doing is they're trying to insert themselves into the algorithm and then I just ban them.
+So you do give control, but I do think really labeling them is important.
+And I don't want to put the burden on you to do that.
+I think the labeling is one piece, but the thing that I was going to say is the other thing,
+and we have a track record of content ID, which is basically the rights management system,
+that you could argue basically created that whole creator economy in the first place.
+And enabled YouTube success.
+Correct.
+Saved YouTube.
+So content ID is, think about that metaphor as it applies to AI.
+Yeah, wonderful.
+So we are working on this notion of, I call it sort of likeness detection,
+where if it's a chamath base, the algorithm should be.
+good enough to actually detect that and then give you a choice as to whether that should come down?
+Is that you?
+Right.
+Does that come down?
+Or, you know, there might be some creators that choose to monetize it and give...
+So giving...
+Oh, we can take ownership of it, yeah.
+You can take ownership of it.
+So if people take our clips, make versions of us as dogs or...
+And for us it's not just words.
+We actually have a track record of doing that because of something like content ID.
+Ladies and gentlemen, Neil Mohn.
+Thank you for being here.
+Thanks, brother.
+Appreciate it.
+Thank you, yeah, of course.

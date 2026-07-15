@@ -1,0 +1,391 @@
+source: allin_podscripts
+published_date: 2025-09-17
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/uber-ceo-dara-khosrowshahi-on-self-drivings-future-changing-business-model-job-displacement
+title: Uber CEO Dara Khosrowshahi on self-driving's future, changing business model, job displacement
+
+The driving force behind one of America's most influential companies.
+Record high today for Uber.
+100% up last year.
+Waymo and Uber have announced a partnership when you have a CEO that's done what Dara has done,
+you set the bar higher and higher.
+The impact we have on society is significant.
+We hope to keep building on that impact going forward,
+and I'm quite optimistic about what the future is going to bring.
+Ladies and gentlemen, please welcome
+Uber's CEO, Dara Khazer Shahi.
+All right.
+Darra, I wasn't sure if you were aware,
+but I was an early investor in Uber.
+I've heard you say it once or twice.
+And I'm curious how my investment's doing.
+I don't know.
+Okay, based on today.
+Today's looking pretty good.
+So autonomy is the discussion I think everybody wants to have in the timeline.
+How many partners does Uber have in autonomy today?
+So we have over 20 partners across both mobility and the delivery business.
+I'd say mobility now is in the field as we speak.
+Obviously we've got a partnership with Waymo who is, I think, the best of the best in
+Atlanta and Austin, but there are a number of other players that we are partnered with,
+a number of Chinese players, autonomy in China is hitting the big time, and a lot of these
+companies that want to expand outside of China we're partnering with. And then in the U.S.,
+even in the second half of this year, we will have a couple of partnerships kind of hit the road
+in Texas, and then in Europe and the rest of the world. So you will see, we've announced a bunch
+partnerships we're doing a ton of work with these partners you'll see these cars hit the road
+with safety drivers eventually and the safety drivers will come out this year and then especially
+going to next year we're going to have significant number of cars on the road how many people in
+China have level four no safety driver today and what's your assessment of those companies and their
+safety record you know it's a different market obviously so there are bydo we ride pony are all
+on the road today, no safety driver.
+We are partners with all of them.
+Their capabilities are amazing.
+You can imagine driving in China
+in these big cities is quite a complex undertaking.
+They take safety just as seriously
+as the Western companies do.
+So I think their safety record is excellent.
+Ultimately, we think autonomous can be both superhuman
+in terms of safety and can save millions of lives
+over the course of time on the road.
+and over per time, as the cost of especially the hardware stack comes down,
+we think that it can bring the cost of mobility down
+and make mobility on demand available to many, many more people than it is now.
+So it's going to be a very big kind of market expander for us.
+So that was the debate, Dara, that maybe kind of exploded a little bit on X
+between you and Elon were you guys, I mean, very respectfully just debating the pros and the cons,
+maybe just set it up for the folks in the audience,
+the difference between Elon's approach and the Waymo approach
+and maybe the relative pros and cons as you see it.
+Yeah, I mean, I think they're the ones building the cars.
+So I'm to some extent a very, very, very interested bystander.
+But the way that I put it is Elon's approach depends on excellent software
+to do a bunch of the heavy lifting in that there are some, you know,
+early on whenever you're building product, there may be some cheat codes that you undertake.
+So for example, you could call it cheat codes or, you know, good engineering.
+Some of the things you see in early systems is one is camera, radar, light or so multiple
+sensors, redundancy on the sensor stack to make sure that your perception algos are
+seeing the world as it really is. Elon is doing camera only.
+Puffer on the software, cheaper for the hardware, okay?
+Second, I would say big difference is many of the players use HD maps.
+And what HD maps do is, is essentially you map out an area so that it's much easier for
+the software to determine what are permanent aspects of a certain view, you know, the lines
+on the road, traffic lights, etc. Because of the HD maps, it's very, very easy for that
+piece of software to determine what's permanent, and then what's impermanent, vehicles, people,
+etc. So it makes the job of the software much easier to figure out what's going on and then determine
+what to do. Elon's approach doesn't depend on HD maps, and again, it makes the job of software
+harder. And then the other, I would say, significant factor is the compute. So when you look at
+the compute and many of the other players, the compute in terms of flops and memory, et cetera,
+in the back of the car.
+A car is pretty expensive, pretty extensive.
+And I think Tesla's approach is with a much tighter compute stack.
+Do you see a world where you try to pour your distribution into all those solutions,
+assuming that everybody's amenable to working with you, and it meets your threshold for what
+you're looking for, safety or cost?
+Exactly.
+I'd say safety comes number one.
+So we have a certain safety case that we want to make sure that our partners adhere to or exceed.
+And it's sorry, just about, is that an e-val or is that like, is that certain rates that they
+have to publish to you or how do they demonstrate to you?
+It's, it's the technical approach and the eval together.
+And listen, it is a dialogue, right?
+Because different people take different approaches to safety.
+We want to make sure that if it's showing up on the Uber platform, it is as safe as it can be.
+And our different definition of safety is multiple.
+time safer than a human being, which is achievable. Waymo is showing that it's
+achievable. Many of the Chinese players are showing that it's achievable as well. So if it
+meets our safety criteria and the economics are attractive and the economics as the cost of
+hardware comes down, you know, LiDAR was 20, 30,000 bucks a pop like five, six years ago. Now
+solid state, LiDAR is 300 to 500 bucks a pop. So the cost of hardware is coming way down. It is
+going to need to continue to come down because these cars are very expensive, then we'll do
+business with them. We want to be the platform and we want to essentially help the entire AV
+ecosystem thrive. And we think there's enough economics for the network player to have a great
+business and the software providers and the vehicle owners to have a great business. And then
+obviously there's fleet operations in terms of housing, the cars, reaching.
+charging the cars, you know, all of the kind of in the world work that's necessary as well.
+When you, you're going to get to a tipping point, I'm going to assume, in driver miles, let's say,
+where one of the most interesting things that I've thought of is, could you tell a city how it
+should actually be designed for optimal traffic?
+So we work, I wouldn't say for optimal traffic, I think,
+theoretically it's possible, but, you know, a Google could, there are lots of other players
+who can help with that, but we're certainly helping cities in terms of where you should put
+charging infrastructure, for example, parking, drop-offs, et cetera, to help traffic flows.
+I think we can be a partner for cities, and we do have a small operation where essentially we
+offer our data for free for cities to embark on city planning, so to speak.
+Do they take it?
+Some do. Some of the more sophisticated cities take it, but I wouldn't call it a big part of our business.
+So, Darry, I want to ask you about the business model impact of basically robo-taxies or self-driving.
+In the old world, Uber's network effect was a marketplace effect where you connected drivers and riders.
+And if you had the most geographic density in an area, then you could promise riders' faster,
+and the drivers got higher utilization,
+and that was a very powerful network effect.
+But we're moving into a new world
+where anyone who has a fleet of self-driving cars,
+in theory, could just make them available to the public
+and start competing.
+How do you see that impacting your mode?
+And do you have to go from being an asset-like business
+to now owning all these cars and deploying them?
+And is that a good thing or a bad thing for your business?
+So I think that the same economics apply,
+right, which is if we,
+if we have that fleet owner is not going to have as many vehicles available in a certain
+market than, let's say, a network like ours. And we will have a hybrid network. We're
+going to have humans and autonomous cars together, and that's going to continue for a while.
+You know, the autonomous of the machines are going to, aren't going to replace all humans,
+at least for the physical future. So for us, if you're a part of our network, you are going to
+get more requests than the player who's doing a standalone because we already have the demand,
+the request is going to come from much closer. So instead of, you know, pick up who's 15 minutes
+away for a 10 minute ride, you're going to get a pickup that's three minutes away for a 10
+minute ride. So the utilization in terms of the revenue generating miles as a percentage of
+total miles driven is much, much higher on our network. So the player that, you know, if you
+have Fleet Player A who's going direct, standalone,
+fleet player B who's working with us
+Fleet player B will have much more business
+will have many more miles that are
+that are creating revenue as a percentage of the total
+miles driven and as a result each of their cars
+are going to get much more revenue per car per day
+than the fleet player who isn't working with us
+so I mean that ultimately is you know even if you think about Uber Eats
+right there's this drama which is hey do you go direct only
+or do you work with a marketplace and the fact is
+Because every major food player, McDonald's, has a direct channel.
+But they have a box, and they want that box to create as much revenue as possible.
+So they have a direct channel, and they work through our marketplace, DoorDash Marketplace,
+other marketplaces as well, because that's how you drive utilization.
+And so I think that most of these players, there are going to be some players like a Waymo,
+like a Tesla, who can build their direct channel.
+we think if they want to drive maximum economics out of these really expensive cars for now,
+they're going to also want to work with us.
+Do you think you will need to buy and deploy your own fleets,
+or can you rely purely on third-party fleet owners?
+So I think that there's going to, ultimately, if you look at the end state,
+I think all of these cars are going to be financeable.
+So if you look, again, in the hotel business, I used to be in the travel business,
+a Hilton or a Marriott, who's the brand, doesn't own any.
+other hotels. Those hotels are owned by financial-only players. And I think 10 years down the
+line, you know, there are these things called REITs, real estate investment trots. You're going to have
+fleets. You're going to have financial owners that own big fleets of cars that are on our network,
+maybe on other networks. The new Hertz, the new enterprise kind of thing. I'd say it's going to be
+more financial players. So it's not, you know, Hertz and Enterprise are operators. These are
+going to be like the blackstones of the world. And they own fleets and they're just
+trying to monetize those fleets as much as possible.
+That's the end state.
+Between now and the end state, we will take balance sheet risk
+because we can sign up.
+We know exactly how much revenue a car can produce in said market
+because cars are already producing revenue.
+So we can sign up for the revenue.
+We will prove out the business model.
+We'll use our balance sheet to prove out the business model.
+And then at some point, the whole thing's
+going to get financialized and we'll be able to take it
+off balance sheet. Is Waymo willing to work with you?
+Waymo is working with us now in Austin and Atlanta. Okay. So in Austin, Atlanta, if you're
+using Uber, you can be picked up with a Waymo. Our customers love it. Is it the driverless
+aspect of it that they love? You know, they're, so the privacy that you get. I think one is
+they're new cars, they're really nice cars. Yeah. It's kind of freaking cool. Yeah. And you do
+have privacy in that car as well.
+So I think the combination of it works out really well.
+We see customers who experience the product.
+They rate it really highly.
+They use it again.
+And so it's just an absolute dynamic product.
+So we've mostly only spoken about the X, Y, axis.
+And we have a couple of our friends who've built businesses that are, you know,
+trying to launch these EV-Tal businesses.
+Some of our other friends who are experimenting with small drone delivery.
+Tell us where all of those things play
+in your infrastructure going forward.
+So we're absolutely believer in Evital.
+We're an investor in Jobi,
+and we are going to work with them
+as those vehicles become available.
+We know that there are some other vehicles.
+But I think the kind of Z-axis,
+if you want to call that,
+makes a ton of sense.
+Listen, in cities of the world,
+essentially they have built in the third dimension
+because there's only so much that you can expand,
+you know, in the X and Y dimension.
+So businesses have expanded in a third dimension,
+residences have expanded in a third dimension,
+but our transportation infrastructure
+has only expanded into two dimensions.
+Right.
+So it's no wonder that traffic just keeps getting
+worse and worse and worse,
+because that third dimension isn't available.
+So we are absolutely believers
+in both EVTALs and drone delivery.
+Now, I think on the third dimension
+the delivery side, there are two areas that we're working on. One is sidewalk robots. It's
+easier tech to develop. Explain what that is a sidewalk robot. So sidewalk robots, there are some
+of them in LA and Santa Monica. They are autonomous vehicles that drive on the sidewalks. They
+drive pretty slowly. They're very, very safe. They look kind of cute. And they're appropriate for
+deliveries that are a mile or less long. So, deliveries in a tight space. And so there's a certain
+addressable market for us in deliveries where those sidewalk robots work in, and we're working
+with Serve, Cardigan, a number of other players in the U.S., in Japan, in a number of other markets.
+Then on the other side is drone delivery. And drone delivery is a proper for markets where,
+you know, they're more spread out, suburban, no high rises, et cetera. Those two together,
+we think can cover 50% of our delivery TAM, so to speak,
+but then there's another 50% that we're going to have to work on
+in terms of the first and the last mile.
+You know, coming out of the restaurant
+and then getting the food into your apartment as well,
+humans take care of their own first and last mile.
+But you need something to take care of the first and last mile of the food.
+That's where the challenge is going to come in
+and we're working with a number of players to see
+how we can get that first and last mile for food.
+I want to talk to you for a minute, if I may, about the balance sheet.
+Yeah.
+One of the great, you know, sort of early insights we had at Uber was around profitability.
+And the press and the narrative was, oh, Uber could never be profitable.
+And I would talk to TK about it and William and all the Josh in New York.
+And they're like, yeah, we could flip it at any moment in time to $2 more ride.
+We would lose no rides.
+It would be wildly profitable.
+And in fact, under your stewardship, Uber has become.
+a money printing machine to the point at which you announced a $20 billion stock buyback.
+Yes.
+And I saw it and I said, wow, this is just incredible.
+However, did you tweet about it by chance?
+I might have.
+Once in a while, I'll retweet you and give you a little shine.
+But I did have this thought that, and I had Chris from Nuro on the program and you have
+this great partnership to put 20,000 Lucid's on the road.
+Wrong podcast.
+What's that?
+Keep going.
+The other podcast.
+And so I'm wondering how you think about the war chest, the money printing machine, and deployment of that asset.
+How do you decide $20 billion stock buyback versus putting $300 million into Nuro?
+Or we had Travis on the podcast and he said he's had many opportunities to look at things like Pony, which has been in the press.
+And it would be pretty great to have the original founder maybe, I don't know, you've got a couple of billion laying around and maybe help him have Pony come to the
+the West. So how do you think about deploying that capital in order to, you know, continue to
+grow from where are we at? One percent of rides globally are ride sharing approximately? A little more,
+but it's between one and two percent. It's a very low number. It's clear it's going to go to
+20 with autonomy. And so if we all believe that and that's obvious, is that the best use of the
+capital? How do you make that decision? So I think the good news for us is it's not either or.
+We can walk and chew gum at the same time. In the past 12,
+months, we've had over $8.5 billion of cash flow. The business is growing, you know, top
+line, 18 percent, bottom line, 35 percent. So that cash flow is going to grow by a lot over the next
+three to five years. And we announced the $20 billion buyback because in looking forward
+to areas in which we could invest aggressively, for example, in AV, because we should, because
+It's an enormous opportunity, whether it's vehicles or fleets, et cetera.
+We are very comfortable that we've got enough capital to be super aggressive there appropriately.
+And at the same time, buy back our stock.
+There's a great company we know of.
+Management team can get a little better, but they're okay.
+And we think it's a great deal.
+So it's not an either or.
+It's an and for us.
+And we're lucky to be in that position at this point.
+You have a very big business in Uber Eats.
+Yes.
+It competes with folks like DoorDash.
+When Travis was on the pod a few weeks ago, maybe a month ago,
+he talked about sort of the robotization of food and all of that.
+Can you just talk to us about your vision of where all of that stuff goes to?
+So we actually work with Travis and his Cloud Kitchens business.
+He's also built a restaurant tech business in Otter as well.
+And I do think that you are, you know, any food business that is not deep in delivery is going to lose share, period, for the foreseeable future.
+So every single player, food player, grocery player, even now retail player, has to get into delivery and has to get into on-demand delivery.
+Otherwise, they're kind of missing the most attractive segment of consumers out there.
+And I think as the cost of labor is going up, all of these businesses are building or investing increasingly a robotic station.
+It's not something that we are getting into, but as more food, healthy food, delicious food becomes more available, lower prices,
+then our delivery business kind of will benefit along with the partners.
+I'm hearing consistently from you, and you can just tell me if this is wrong, that you are becoming increasingly an asset.
+asset light, highly liquid distribution network.
+Like you have this incredible network effect.
+You have these hundreds of millions, maybe approaching a billion users,
+and you can just pour them into all of these things.
+We are essentially, we bring demand to the assets that are driving the movement of people and things and food and grocery,
+and these are all asset-heavy businesses.
+So the next incremental piece of demand that comes from our network is incredibly valuable for them.
+and we can do so staying largely capital light
+at the same time to the extent that I can use my capital
+to invest in the AV ecosystem or fleets, et cetera,
+we can also do that.
+There's one company that wants to go on its own.
+A friend of ours runs it.
+I think that you probably have had some conversations.
+Obviously, publicly you have.
+What's the best pitch to Elon to put 100,000 robo-taxies
+into the Uber fleet?
+while still doing his own
+because his app is doing spectacularly well
+and the pilots are doing well
+so he'll obviously figure it out
+but what's your best pitch to him
+to joining the Uber network?
+I think listen the pitch is simple
+which is if you're looking to maximize
+the revenue of those robo taxis
+today we are your ticket
+to the maximization of that revenue
+to the extent that you're looking
+to have these fleets owned by
+people you know kind of the digital shepherds
+which is an amazing vision
+that Elon has
+to the extent that those owners are not able to monetize their assets on the Uber network,
+they will under-monetize.
+And if there's a competitor who is offering those vehicles to be on the Uber network,
+the monetization of those vehicles are going to be superior,
+and those digital shepherds are going to go elsewhere.
+So I think that is the pitch.
+And, again, Elon is, you know, he kind of believes in full stack.
+Yes.
+And he's proven it.
+And I think that this market is large enough for there to be multiple winners.
+Clearly.
+But in the end, to the extent that we would love to partner with them, but at this point,
+they're looking to go it alone.
+And I think the market is large enough to carry a number of winners in this ecosystem.
+Well, I ask you a tough question about humans.
+I was talking to Will Barnes, who ran originally in Los Angeles and then half of the country for Travis.
+And Will Barnes had a pretty amazing insight, which was in the early days, we had,
+humans protesting humans competing for, you know, the taxi drivers versus the ride chair
+drivers in China, in Wuhan, in fact, there's been a lot of civil unrest, and they're
+talking about limiting the number of licenses for self-driving cars because of the disruption
+that would happen if young men who have those jobs are not able to have a job.
+And we saw the Waymos get called to their death here in Los Angeles, and that was a pretty
+clear message as well. How do you think about that group of people losing their jobs,
+these drivers who built the Uber network, who built Lyft, who built Doordash, and China's overwhelming
+concern about this, because these are robots taking human jobs. And there's a lot of discussion
+about this. And I think maybe in the tech industry, we don't talk about it head on.
+I think, listen, this is, it's a big issue for AI in general and job displacement. You see it
+with younger graduates as well.
+I think for us, at least for the next five years,
+the number of robot cars coming onto the platform
+are not going to be displacing people
+because the platform is just growing so quickly
+that we can very easily take that demand.
+And there is a natural turnover of our driver base.
+So in a market like in Austin or other markets
+in which we're launching autonomous, we will turn
+down the driver recruitment machine so the robots can come in and the drivers
+who are currently driving in the platform can make as much money so Austin
+drivers now are making as much or more money than they were before we introduced
+Waymo so I think for the next five to seven years we're gonna have more human
+drivers and delivery people just because we're going so quickly but I think you
+know 10 to 15 years from now this is gonna be a real issue and Jason I don't
+have a neat answer for it now we're finding like
+other kinds of work. We've got drivers and couriers, you know, labeling AI labels and looking,
+you know, we have a whole Uber AI solutions business. So we're essentially, one way to look at Uber
+is we are a platform for work in transportation as a first kind of work. And now we're expanding
+into other kinds of on-demand work as well to be able to adjust the kind of work available to
+people who want to earn our platform, but I think long-term, this is a big, big societal question
+that we're going to have to struggle with, and lots of others are going to struggle with, too.
+Absolutely.
+All right.
+Thank you very much.
+Thank you.
+Really appreciate it.
+Thanks, sir.
+Thanks, sir.
+Crushed it.
+Thank you, my brother.

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import html
 import json
 from typing import Any
@@ -87,14 +88,6 @@ def _render_simulation_lab(
 
     _render_simulation_planning_cards()
     _render_simulation_method_guide()
-    selected_strategy, selected_scorecard, selected_result = _selected_simulation_strategy(
-        bot_config=bot_config,
-        baseline_run=baseline_run,
-        experiment_scorecards=experiment_scorecards,
-    )
-
-    scenario_source = _scenario_source_frame(baseline_run)
-    probabilities = scenario_probability_frame(scenario_source)
     simulation_view = (
         st.pills(
             "Simulation Lab view",
@@ -112,9 +105,22 @@ def _render_simulation_lab(
     )
     _render_simulation_view_runtime_notice(simulation_view)
 
+    selected_strategy: str | None = None
+    selected_scorecard: pd.Series | None = None
+    selected_result: BacktestResult | None = None
+    if simulation_view in {"Strategy Simulations", "Interpretability"}:
+        selected_strategy, selected_scorecard, selected_result = _selected_simulation_strategy(
+            bot_config=bot_config,
+            baseline_run=baseline_run,
+            experiment_scorecards=experiment_scorecards,
+        )
+
     if simulation_view == "Future-State Map":
+        scenario_source = _scenario_source_frame(baseline_run)
+        probabilities = scenario_probability_frame(scenario_source)
         _render_future_state_map(baseline_run, scenario_source, probabilities)
     elif simulation_view == "Strategy Simulations":
+        scenario_source = _scenario_source_frame(baseline_run)
         _render_strategy_simulations(
             selected_strategy=selected_strategy,
             selected_scorecard=selected_scorecard,
@@ -125,9 +131,11 @@ def _render_simulation_lab(
     elif simulation_view == "Validation History":
         _render_simulation_validation_history(
             warehouse_path=warehouse_path,
-            selected_strategy=selected_strategy,
+            selected_strategy=None,
         )
     else:
+        scenario_source = _scenario_source_frame(baseline_run)
+        probabilities = scenario_probability_frame(scenario_source)
         _render_simulation_interpretability(
             selected_strategy=selected_strategy,
             selected_scorecard=selected_scorecard,
@@ -2292,6 +2300,7 @@ def _strategy_option_frame(
         bot_config=bot_config,
         baseline_run=baseline_run,
         experiment_scorecards=experiment_scorecards,
+        include_defensive_judgement=False,
     )
     if not frame.empty:
         return frame
@@ -2324,6 +2333,10 @@ def _result_for_strategy(
     if matches.empty:
         return baseline_run.results.get(strategy_name)
     row = matches.iloc[0]
+    cache = st.session_state.setdefault("_simulation_lab_result_cache", {})
+    cache_key = _simulation_result_cache_key(row, baseline_run)
+    if cache_key in cache:
+        return cache[cache_key]
     try:
         strategy = strategy_from_catalog_row(row)
         execution = execution_for_catalog_row(row, bot_config.execution)
@@ -2339,7 +2352,43 @@ def _result_for_strategy(
         )
     except (KeyError, ValueError, TypeError, AttributeError, json.JSONDecodeError):
         return baseline_run.results.get(strategy_name)
+    cache[cache_key] = result
+    if len(cache) > 32:
+        oldest_key = next(iter(cache))
+        cache.pop(oldest_key, None)
     return result
+
+
+def _simulation_result_cache_key(row: pd.Series, baseline_run: BaselineRun) -> str:
+    prices = getattr(baseline_run, "prices", pd.DataFrame())
+    price_marker: dict[str, object] | str
+    if prices.empty:
+        price_marker = "empty"
+    else:
+        price_marker = {
+            "rows": int(len(prices)),
+            "columns": list(map(str, prices.columns)),
+            "start": str(prices.index.min()),
+            "end": str(prices.index.max()),
+        }
+    payload = {
+        "price_marker": price_marker,
+        **{
+            column: str(row.get(column, ""))
+            for column in [
+                "approach_id",
+                "strategy",
+                "strategy_json",
+                "execution_json",
+                "scenario_sizing_json",
+                "future_state_model_json",
+                "strategy_drawdown_model_json",
+                "decision_sanity_json",
+            ]
+        },
+    }
+    encoded = json.dumps(payload, sort_keys=True, default=str).encode("utf-8")
+    return hashlib.sha256(encoded).hexdigest()
 
 
 def _scenario_source_frame(baseline_run: BaselineRun) -> pd.DataFrame:

@@ -1,0 +1,492 @@
+source: allin_podscripts
+published_date: 2025-09-12
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/google-deepmind-ceo-demis-hassabis-on-ai-creativity-and-a-golden-age-of-science-all-in-summit
+title: Google DeepMind CEO Demis Hassabis on AI, Creativity, and a Golden Age of Science | All-In Summit
+
+A genius who may hold the cards of our future.
+CEO of Google DeepMind, which is the engine of the company's artificial intelligence.
+After his Nobel and a knighthood from King Charles, he became a pioneer of artificial intelligence.
+We were the first ones to start doing it seriously in the modern era.
+AlphaGo was the big watershed moment, I think not just for DeepMind in my company, but for AI in general.
+This was always my aim with AI from a kid, which is to use.
+Use it to accelerate scientific discovery.
+Ladies and gentlemen, please welcome Google DeepMinds Demas Hesabas.
+Welcome.
+Great to be here.
+Thanks for following Tucker, Mark Cuban, at all.
+First off, congrats on winning the Nobel Prize.
+Thank you.
+Thanks.
+For the incredible breakthrough of Alpha,
+Maybe you may have done this before, but I know everyone here would love to hear your recounting of
+how you, where you were when you won the Nobel Prize. How did you find out?
+Well, there's a very surreal moment, obviously, you know, everything about it is surreal.
+The way they tell you, they tell you like 10 minutes before, it all goes live.
+It's just, you know, you can't really, it's, you're sort of shell-shocked when you get that call from Sweden.
+It's the call that every scientist dreams about.
+And then the several ceremonies, the whole week in Sweden with the royal family, it's amazing.
+obviously it's been going for 120 years and the most amazing bit is they bring out the this
+Nobel book from the from the vaults in the safe and you get to sign your name next to you know all
+the other greats so it's quite an incredible moment sort of leafing back to the other pages and
+seeing Feynman and fire Marie Curie and Einstein and Niels Bohr and you just carry on going backwards
+and you get to put your name on that in that book it's incredible did you have an inkling you had been
+nominated and that this might be coming your way well you you get you hear really
+It's amazingly locked down, actually, in today's age, how they keep it so quiet, but it's sort of like a national treasure for Sweden.
+And as you hear, you know, maybe Alpha Fold is the kind of thing that would be worthy of that recognition,
+and it has, they look for impact as well as the scientific breakthrough impact in the real world.
+And that can take 20, 30 years to arrive.
+So you just never know, you know, whether how soon it's going to be and whether it's going to be at all.
+So it's a surprise.
+Well, congrats.
+Yeah, thank you.
+And thank you.
+You let me take a picture with it a few weeks ago.
+And that's something I'll cherish.
+What is DeepMind within Alphabet?
+Alphabet is a sprawling organization, sprawling business units.
+What is DeepMind?
+What are you responsible for?
+Well, we sort of see DeepMind now,
+and Google DeepMinders has become.
+We sort of merged a couple of years back,
+all of the different AI efforts across Google and Alphabet,
+including DeepMind.
+Put it all together, bringing the strengths
+of all the different groups together into one division.
+And really, the way I describe it now
+is that we're the engine room of the whole of Google
+and the whole of Alphabet.
+So Gemini, our main model that we're building,
+but also many of the other models
+that we also build the video models
+and interactive world models,
+we plug them in all across Google now.
+So pretty much every product, every surface area
+has one of our AI models in it.
+So billions of people now interact with Gemini models,
+whether that's through AI overview, AI mode, or the Gemini app.
+And that's just the beginning.
+You know, we're kind of incorporating it into workspace, into Gmail, and so on.
+So it's a fantastic opportunity, really, for us to do cutting-edge research,
+but then immediately ship it to billions of users.
+And how many people, what's the profile?
+Are these scientists, engineers?
+What's the makeup of your organization?
+Yeah, there's around 5,000 people in my org, in Google DeepMind.
+And, you know, it's predominantly, I guess, 80% plus engineers and PhDs.
+researchers so yeah about you know three three or four thousand so there's an
+evolution of models a lot of new models coming out and also new classes of models
+the other day you released this a genie world model yes so what is the genie
+world model and I think we got a video of it is it worth looking at and we can
+talk about it live yeah we can watch sure because I think you have to see it to
+understand it because it's so extraordinary can we pull up the video and then
+demos can narrate a little bit about what we're looking at
+What you're seeing are not games or videos.
+They're worlds.
+Each one of these is an interactive environment generated by Genie 3, a new frontier for world
+models.
+With Genie 3, you can use natural language to generate a variety of worlds and explore
+them interactively, all with a single text prompt.
+Yeah, so all of these videos, all these interactive worlds that you're seeing.
+So you're seeing someone actually can control the video.
+It's not a static video, it's just being generated by a text prompt, and then people are
+able to control the 3D environment using the arrow keys and the space bar.
+So everything you're seeing here is being fully, all these pixels are being generated on the fly.
+They don't exist until the player or the person interacting with it goes to that part of
+the world.
+So all of this richness.
+And then you'll see in a second, so this is fully generated, this is not a real video, this
+is generated someone painting their room and they're painting some stuff on the wall and
+then the player is going to look to the right and then look back.
+So now this part of the world didn't exist before, so now it exists, and then they look
+back and they see the same painting marks they left just earlier.
+And again, this is fully, every pixel you can see is fully generated, and then you can
+type things like a person in a chicken suit or a jet ski, and it will just in real
+time include them in the scene.
+So, you know, it's quite mind-blowing, really.
+But I think what's hard to grok when looking at this,
+because we've all played video games that have a 3-D element to them
+when you're in an immersive world.
+Yeah.
+But there's no objects that have been created.
+There's no rendering engine.
+You're not using Unity or Unreal, which are the 3-D rendering engines.
+Yeah.
+This is actually just 2D images that are being rendered, like, created on the fly by the AI.
+This model is reverse engineering intuitive physics.
+So, you know, it's watched.
+many millions of videos and YouTube videos and other things about the world.
+And just from that, it's kind of reversed engineered how a lot of the world works.
+It's not perfect yet, but it can generate a consistent minute or two of interaction as you as the user.
+In many, many different worlds.
+There are some videos later on where you can control a dog on a beach or a jellyfish or it's not limited to just human things.
+Because the way a 3D rendering engine works is you type in, the
+programmer programs all the laws of physics.
+How does light reflect off of an object?
+You create a 3D object, light reflects off.
+And then, so what I see visually is rendered by the software
+because it's got all the programming on how to create physics,
+how to do physics.
+But this was just trained off of video
+and it figured it all out.
+Yeah, it was trained off of video
+and some synthetic data from game engines.
+And it's just reverse engineered it.
+And for me, it's very close to my heart
+this project, but it's also quite mind-blowing,
+because in the 90s in my early career,
+I used to write video games and AI for video games
+and graphics engines.
+And I remember how hard it was to do this by hand,
+program all the polygons and the physics engines.
+And it's amazing to just see this, do it effortlessly.
+All of the reflections on the water
+and the way materials flow and objects behave.
+And it's just doing that all out of the box.
+I think it's hard to describe
+like how much complexity was solved for
+with that model it's it's really really really mind-blowing where does this lead us so fast
+forward this model yes gen 5 yeah so the reason we're building these kind of models is um we feel and
+we've always felt uh we're obviously progressing on the normal language models like with our jemini model
+but from the beginning with jemini we wanted it to be multimodal so we wanted it to input and take any
+kind of input images audio video and it can output anything and uh and and and
+And so we've been very interested in this because for an AI to be truly general, to build AGI,
+we feel that the AGI system needs to understand the world around us and the physical world around us,
+not just the abstract world of languages or mathematics.
+And of course, that's what's critical for robotics to work.
+It's probably what's missing from it today.
+And also things like smart glasses, a smart glasses system that helps you in your everyday life.
+It's got to understand the physical context that you're in and how the intuitive physics of the world works.
+We think that building these types of models, these genie models, and also VO, the best text of video models,
+those are expressions of us building world models that understand the dynamics of the world, the physics of the world.
+If you can generate it, then that's an expression of your system understanding those dynamics.
+And that leads to a world of robotics, ultimately, one aspect, one application.
+But maybe we can talk about that.
+What is the state of the art with the vision, language, action models today?
+So a generalized system, a box, a machine that can observe the world with a camera,
+and then I can use language, I can use text or speech, to tell it,
+I want you to do it, and then it knows how to act physically to do something in the physical world for me.
+Yeah, that's right.
+So if you look at our Gemini Live version of Gemini,
+where you can hold up your phone to the world around you.
+I'd recommend any of you try it.
+it's kind of magical what it already understands about the physical world.
+You can think of the next step as incorporating that in some sort of more handy device like glasses.
+And then it will be an everyday assistant.
+It'll be able to recommend things to you as you're walking the streets,
+or we can embed it into Google Maps.
+And then with robotics, we've built something called Gemini Robotics models,
+which are sort of fine-tuned Gemini with extra robotics data.
+And what's really cool about that is,
+and we released some demos of this over the summer,
+was you can have, you know, we've got these tabletop setups of two hands
+interacting with objects on a table, two robotic hands.
+And you can just talk to the robot.
+So you can say, you know, put the yellow object into the red bucket or whatever it is.
+And it will just, it will interpret that instruction, that language instruction,
+into motor movements.
+And that's the power of a multimodal model rather than just a robotic specific model.
+Right.
+Is that it will be able to bring in real world understanding to the way you interact with it.
+So in the end, it will be the UI, UX that you need as well as the understanding the robots need to navigate the world safely.
+I asked Sundar this, does that mean that ultimately you could build what would be the equivalent of call it either a Unix, like an operating system layer, or like an Android, for generalized robotics, at which point if it works well enough across enough devices, there will be a proliferation of robotics devices and companies and products that will suddenly take off in the world because this software exists to do this generally.
+Exactly. That's certainly one strategy we're pursuing is a kind of Android play, if you like,
+a crossroids as a kind of robotics, almost an OS layer, cross robotics. But there's also some
+quite interesting things about vertically integrating our latest models with specific robot
+types and robot designs and some kind of end-to-end learning of that too. So both are actually
+pretty interesting and we're pursuing both strategies. Do you think that there's humanoid robots as a good
+kind of form factor? Does that make sense in the world?
+Some folks have criticized it as being good for humans because we're meant to do lots of
+different things. But if we want to solve a problem, there may be a different form factor
+to fold laundry or do dishes or clean the house or whatever. Yeah, I think there's going to be
+a place for both. So actually, I used to be of the opinion maybe five,
+five, ten years ago that will have form-specific robots for certain tasks. And I think in
+industry, industrial robots will definitely be like that, where you can optimize the
+robot for the specific task, whether it's a laboratory or a production line, you'd want
+quite different types of robots. On the other hand, for general use or personal use robotics
+and just interacting with the ordinary world, the humanoid form factor could be pretty
+important because, of course, we've designed the physical world around us to be for humans.
+And so steps, doorways, all the things that we've designed for ourselves, rather than changing
+all of those in the real world, it might be easier to design the form factor to work seamlessly
+with the way we've already designed the world. So I think there's an argument to be made
+that the humanoid form factor could be very important for those types of tasks. But I think
+there is a place also for specialized robotic forms. Do you have a view on hundreds of millions,
+millions, thousands over the next five years, seven years? I mean, do you have a, like in your
+head, do you have a vision? Yeah, I do. And I spend quite a lot of time on this. And I think
+we're still, I feel we're still a little bit early on robotics. I think in the next couple
+of years, there'll be a sort of real wow moment with robotics. But I think the algorithms need a bit
+more development. The general purpose models that these robotics models are built on still need to
+be better and more reliable and better understanding the world around it. I think that will come
+in the next couple of years. And then also on the hardware side, the key is, I think eventually
+we will have millions of robots helping, helping society and increase.
+productivity but the key there is when you talk to hardware experts is at what
+point do you have the right level of hardware to go for the scaling option
+because effectively when you start building factories around trying to make
+tens of thousands hundreds of thousands of particular robot type you know it's
+harder for you to update quickly iterate the the robot design so it's one of
+those kind of questions where if you call it too early then then the next
+generation of robot might be invented in six months time that's just more
+reliable and better and more dexterous.
+Sounds like using a computing analogy,
+we're kind of in the 70s era PC DOS kind of.
+Yeah, potentially.
+But of course, I think maybe that's where we are,
+but I think the, except that 10 years happens in one year probably.
+Right.
+So you're going to update quickly.
+One of those years.
+Right, exactly.
+Yeah.
+So let's talk about other applications,
+particularly in science, true to your heart.
+Yes.
+as a scientist, as the Nobel Prize-winning scientist,
+I always felt like the greatest things that we would be able to do with AI
+would be the problems that are intractable to humans
+with our current technology and capabilities and our brains and whatnot,
+and we can unlock all of this potential.
+What are the areas of science and breakthroughs in science
+that you're most excited about,
+and what kinds of models do we use to get there?
+Yeah, I mean, AI to accelerate scientific discovery
+and help with things like human health
+as the reason I spent my whole career on AI.
+And I think it's the most important thing we can do with AI,
+and I feel like if we build AGI in the right way,
+it will be the ultimate tool for science.
+And I think we've been showing a deep mind
+a lot of the way of that, obviously,
+the alpha-fold most famously,
+but actually we've applied our AI systems
+to many branches of science,
+whether it's material design,
+helping with controlling plasma and fusion reactors,
+predicting the weather, solving, you know,
+Mass Olympiad math problems.
+And the same types of systems with some extra fine tuning
+can basically solve a lot of these complex problems.
+So I think we're just scratching the surface
+of what AI will be able to do,
+and there are some things that are missing.
+So AI today, I would say,
+doesn't have true creativity in the sense
+that it can't come up with a new conjecture yet
+or a new hypothesis.
+It can maybe prove something
+that you give it, but it's not able to come up with a sort of new idea or new theory itself.
+So I think that would be one of the tests actually for AI.
+What is that? Creativity as a human.
+Yeah.
+What is creativity then?
+Well, I think it's this sort of intuitive leaps that we often celebrate with the best scientists in history and artists, of course.
+And, you know, maybe it's done through analogy or analogical reasoning.
+There are many theories in psychology and neuroscience as to how we as human scientists do it.
+But a good test for it would be something like give one of these modern AI systems a knowledge cut off of 1901
+and see if it can come up with special relativity like Einstein did in 1905, right?
+If it's able to do that, then I think we're onto something really, really important,
+perhaps we're nearing an AGI.
+Another example would be with our AlphaGo program that beat the world champion at Go.
+Not only did it win in, you know, back 10 years ago, it invented new strategies.
+that had never been seen before for the game of Go.
+This is famously Moose 37 in Game 2
+that is now studied,
+but can an AI system come up with a game
+as elegant, as satisfying, as aesthetically beautiful as Go?
+Not just a new strategy.
+And the answer to those things at the moment is no.
+So that's one of the things I think that's missing
+from a true general system and AGI system
+is it should be able to do those kinds of things as well.
+Can you break down what's missing
+and maybe related
+it to the point of view shared by Dario, Sam, others about AGI's a few years away.
+Do you not subscribe to that belief and maybe help us understand what is it, in your
+understanding of structure, and your understanding of the system architecture, what's lacking?
+Well, so I think the fundamental aspect of this is can we mimic these intuitive leaps
+rather than incremental advances that the best human scientists seem to be able to do?
+I always say, like, what separates a great scientist from a good scientist is they're both technically very capable, of course, but the great scientist is more creative.
+And so maybe they'll spot some pattern from another subject area that can be, can sort of have an analogy or some sort of pattern matching to the area they're trying to solve.
+And I think one day, AI will be able to do this, but it doesn't have the reasoning capabilities and some of the thinking capabilities that are going to be,
+needed to make that kind of breakthrough. I also think that we're lacking consistency, so
+you often hear some of our competitors talk about, you know, these modern systems that we have
+today are PhD intelligences. I think that's a nonsense. They're not PhD intelligences. They have
+some capabilities that are PhD level, but they're not in general capable, and that's exactly
+what general intelligence should be, of performing across the board at the PhD level. In fact,
+as we all know, interacting with today's chatbots,
+if you pose the question in a certain way,
+they can make simple mistakes with even like high school maths
+and simple counting.
+So that shouldn't be possible for a true AGI system.
+So I think that we are maybe, you know,
+I would say sort of five to ten years away
+from having an AGI system that's capable of doing those things.
+Another thing that's missing is continual learning,
+this ability to like online teach the system something new.
+or some, or adjust its behavior in some way.
+And so a lot of these, I think, core capabilities are still missing.
+And maybe scaling will get us there, but I feel, if I was to bet,
+I think there are probably one or two missing breakthroughs that are still required
+and will come over the next five or so years.
+In the meantime, some of the reports and the scoring systems that are used seem to be demonstrating two things.
+One, perhaps, and tell me if we're wrong on this, a convergence of performance of large
+language models. And number two, perhaps, is a slowing down or a flatlining of improvements
+and performance on each generation. Are those two statements generally true or not so much?
+No, I mean, we're not seeing that internally, and we're still seeing a huge rate of progress.
+But also, we're sort of looking at things more broadly. You see with our genie models and VO models
+and recently nano banana is insane. It's bananas. Yes. It's bananas. Can I see who's used it? Has anyone
+use Nano Banana? It's incredible, right? I mean, I'm a nerd who used to use Adobe Photoshop as a kid
+and Kai's power tools and I was telling you Bryce 3D. So like the graphic systems and like
+recognizing what's going on there was just like mind-blowing. Well, I think that's the future of a lot of
+these creative tools is you're just going to sort of vibe with it or just talk to them. And it'll
+be consistent enough where like with Nano Banana, what's amazing about it is that it's an image
+generator, best in, you know, it's state of the art and best in class. But it's one of the things
+that makes it so great is that it's consistency. It's able to under instruction follow what you
+want changed and keep everything else the same. And so you can iterate with it and eventually
+get the kind of output that you want. And that's, I think, what the future of a lot of these
+creative tools is going to be and sort of signals the direction. And people love it. And they
+love creating with it. So democratization of creativity I think it's really powerful. I remember having
+to buy books on Adobe Photoshop as a kid and then you'd read them to learn how to remove something
+from an image and how to fill it in and feather and all the stuff. Now anyone can do it with
+nanobanana and just begin to explain to the software what they wanted to do and it just does it.
+Yeah, I think you're going to see two things, which is that this sort of democratization of
+these tools for everybody to just use and create with without having to learn, you know,
+you know, incredibly complex UXs and UIs, like we had to do in the past.
+But on the other hand, I think we're, and we're also collaborating with filmmakers
+and top creators and artists.
+So they're helping us design what these new tools should be, what features would they want.
+People like the director, Darren Aronofsky, who's a good friend of mine, an amazing director,
+and he's been making, and his team, he's been making films using VO and some of our other
+tools.
+And we're learning a lot by observing them and collaborating them.
+And what we find is that it's it also superpowers and turbocharges the best professionals too
+Because they're suddenly the best creatives the professional creatives they're suddenly able to be 10x hundred X more productive
+They can just try out all sorts of ideas they have in mind, you know very low cost and then get to the beautiful thing that they wanted
+So I actually think it's sort of both things are true we're democratizing it for everyday use
+For YouTube creators and so on but on the other hand at the high end the people who are who understand these tools and it's and it's not
+not everyone can get the same output out of these tools.
+There's a skill in that, as well as the vision and the storytelling
+and the narrative style of the top creatives.
+And I think it just allows them, they really enjoy using these tools,
+it allows them to iterate way faster.
+Do we get to a world where each individual describes what sort of content they're interested in?
+Play me music like Dave Matthews, and it'll play some new track.
+Yes.
+Or I want to play a video game set in the movie Braveheart,
+I want to be in that movie and I just have that experience.
+Do we end up there or do we still have a one to many creative process in society?
+How important culturally, and I know this is a little bit philosophical, but it's interesting
+to me which is are we still going to have storytelling where we have one story that we all
+share because someone made it?
+Or are we each going to start to develop and pull on our own kind of virtual?
+I actually foresee a world and I think a lot about this having started in the games industry as
+a game designer and programmer is that in the 90s is that, you know, I think the future
+of entertainment this is what we're seeing is the beginning of the future of entertainment
+maybe some new genre or new art form and where there's a bit of co-creation i still think that
+you'll have the top creative visionaries they will be creating these compelling experiences and
+dynamic storylines and they'll be of higher quality even if they're using the same tools than
+the everyday person can do but also and so millions of people will potentially dive into those
+worlds but maybe they'll also be able to create co-create certain parts of those worlds and
+and perhaps that, you know, the main creative person is almost an editor of that world.
+So that's the kind of things I'm foreseeing in the next few years,
+and I'd actually like to explore ourselves with technologies like Jeannie.
+Right, incredible.
+And how are you spending your time?
+Are you at, maybe you can describe is what isomorphic,
+what isomorphic is, and are you spending a lot of your time there?
+I am.
+So I also run Isomorphic, which is our spin-out company to revolutionize drug discovery,
+building on our alpha fold breakthrough in protein folding.
+And of course, knowing the structure of a protein
+is only one step in the drug discovery process.
+So, isomorphic, you can think of it as building
+many adjacent alpha folds to help with things like
+designing chemical compounds that don't have any side effects,
+but bind to the right place on the protein.
+And I think we could reduce down drug discovery
+from taking years, sometimes a decade to do,
+down to maybe weeks or even days.
+over the next 10 years.
+It's incredible. Do you think that's in clinic soon, or is that still in the discovery phase?
+We're building up the platform right now, and we have great partnerships with Eli Lilly.
+I think you had the CEO speaking earlier, and Novartis, which are fantastic, and our own
+internal drug programs, and I think we'll be entering sort of pre-clinical phase sometime next year.
+So candidates get handed over to the pharma company, and they then take them forward.
+That's right, and we're working on cancers and immunology and oncology, and we're working with
+places like
+MD Anderson. How much of this requires
+and I just want to go back to your point about AGI
+as it relates to what you just said.
+Models can be
+probabilistic or deterministic and tell
+me if I'm reducing this down too simplistically
+that the model takes an input
+and it outputs something very specific
+like it's got a logical
+algorithm and it outputs the same thing
+every time and it can be probabilistic where it can change
+things and make selections. The probability
+is 80% I'll select this letter, 90%
+I'll select this letter, next, etc.
+How much do we have to kind of develop deterministic models that sync up with, for example, the physics or the chemistry underlying the molecular interactions as you do your drug discovery modeling?
+How much are you building novel deterministic models that work with the models that are probabilistic trained on data?
+Yeah, it's a great question. Actually, for the moment, and I think probably for the next five years or so, we're building what maybe you could call hybrid models.
+So AlphaFold itself is a hybrid model where you have the learning.
+component, this probabilistic component you're talking about, which is, you know, based on your
+networks and transformers and things, and that's learning from the data you give it, you know, any
+data you have available. But also, in a lot of cases with biology and chemistry, there isn't
+enough data to learn from. So you also have to build in some of the rules about chemistry and
+physics that you already know about. So, for example, with alpha fold, the angle of bonds
+between atoms. So, and make sure that the alpha fold understood you couldn't have atom,
+overlapping with each other and things like that now in theory it could learn that but it would
+waste a lot of the learning capacity so actually it's better to kind of have that as a as a yeah as a
+as a as a as a constraint in there now the trick is with all hybrid systems is and alpha go was another
+hybrid system where there's a neural network learning about the game of go and what's what kind
+of patterns are good and then we had monte carlo's research on top which was doing the planning
+and so the trick is how do you marry up a learning system with a more handcrafted system bespoke
+system and actually have them work well together. And that's pretty tricky to do.
+Does that sort of architecture ultimately lead to the breakthroughs needed for AGI, do you think?
+Are there deterministic components that need to be solved? Well, I think ultimately what you want
+to do is when you figure out something where there's one of these hybrid systems, what you ultimately
+want to do is upstream it into the learning component. So it's always better if you can do end-to-end
+learning and directly predict the thing that you're after from the data that you're given. So once
+you figured out something using one of these hybrid systems, you then try and go back and
+reverse engineer what you've done and see if you can incorporate that learning, that information
+into the learning system. And this is sort of what we did with Alpha Zero, the more general form
+of AlphaGo. So AlphaGo had some Go specific knowledge in it. But then with Alpha Zero, we got
+rid of that, including the human data, human games that we learned from, and actually just did
+self-learning from scratch. And of course, then it was able to learn any game, not just
+discard. A lot of hype and hoopla has been made about the demand for energy arising from
+AI. This is a big part of the AI summit we held in Washington, D.C. a few weeks ago. It seems to be
+the number one topic. Everyone talks about in tech nowadays. Where's all this power going to come
+from? But I ask the question of you, are there changes in the architecture of the models or the
+hardware or the relationship between the models and the hardware that brings down the energy
+per token of output or the cost per token of output that ultimately maybe say
+mutes the energy demand curve that's in front of us or do you not think that that's the case
+and we're still going to have a pretty kind of geometric energy demand curve well look
+interestingly again I think both cases are true in the sense that especially us at google and a
+deep mine we focus a lot on very efficient models that are powerful because we have our own internal
+use cases of course where we need to serve say AI overviews to billions of users every day
+and it has to be extremely efficient, extremely low latency, and very cheap to serve.
+And so we've kind of pioneered many techniques that allow us to do that,
+like distillation, where you sort of have a bigger model internally that trains the smaller model, right?
+So you train the smaller model to mimic the bigger model.
+And over time, if you look at the progress of the last two years,
+the model efficiencies are like 10x, you know, even 100x better for the same performance.
+Now, the reason that that isn't reducing demand is because we're still not got to age,
+yet. So also the frontier models, you keep wanting to train and experiment with new ideas
+at larger and larger scale, whilst at the same time, at the serving side, things are getting
+more and more efficient. So both things are true. And in the end, I think from the energy
+perspective, I think AI systems will give back a lot more to energy and climate change and
+these kind of things than they take in terms of efficiency of grid systems and electrical
+systems, material design, new types of properties, new energy sources. I think AI will help with all of that
+over the next 10 years that will far outweigh the energy that it uses today. As the last question
+describe the world 10 years from now. Wow. Okay. Well, I mean, you know, 10 years, even 10 weeks is a
+lifetime in AI. So, but I don't feel like if we will have AGI in the next 10 years,
+you know, full AGI, and I think that will usher in a new golden era of science, so a kind of
+new renaissance, and I think we'll see the benefits of that right across from energy to
+human health.
+Amazing.
+Please join me in thanking Nobel laureate Dennis.
+Thank you.
+That was great stuff.
+Thank you.

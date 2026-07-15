@@ -11,8 +11,8 @@ from trade_bot.dashboard.components import _render_metric_info_rail
 from trade_bot.dashboard.formatting import _safe_timezone
 from trade_bot.dashboard.loaders import (
     load_experiment_dashboard_frames,
+    load_experiment_scorecards_frame,
     load_live_run,
-    load_previous_snapshot_dashboard_run,
     load_snapshot_dashboard_run,
     load_snapshot_dashboard_run_by_id,
     load_snapshot_jobs_frame,
@@ -375,21 +375,6 @@ if snapshot_manifest is not None:
 elif not snapshot_loaded:
     st.sidebar.info("Dashboard is using a live pipeline run.")
 
-previous_snapshot_payload = load_previous_snapshot_dashboard_run(
-    str(config_path),
-    str(events_path),
-    str(macro_path),
-    str(news_path),
-    str(run_store_path),
-    str(artifact_dir),
-    str(job_log_dir),
-    current_run_id=snapshot_manifest.run_id if snapshot_manifest is not None else None,
-    before_created_at_utc=(
-        snapshot_manifest.created_at_utc if snapshot_manifest is not None else None
-    ),
-)
-previous_baseline_run = previous_snapshot_payload[0] if previous_snapshot_payload else None
-
 journal = TradeJournal(journal_path)
 headline_open_tickets = journal.load_recommendation_tickets(status="open")
 default_book_alignment = build_book_alignment(
@@ -418,13 +403,7 @@ action_headline = build_action_headline(
         default_book_alignment=default_book_alignment,
     ),
 )
-(
-    experiment_scorecards,
-    experiment_regimes,
-    experiment_walk_forward,
-    experiment_candidates,
-    decision_sanity_impacts,
-) = load_experiment_dashboard_frames()
+experiment_scorecards = load_experiment_scorecards_frame()
 if show_quick_reference:
     _render_metric_info_rail()
 
@@ -439,10 +418,24 @@ render_operating_overview(
     open_ticket_count=len(headline_open_tickets),
     experiment_scorecards=experiment_scorecards,
     default_book_alignment=default_book_alignment,
-    previous_run=previous_baseline_run,
+    previous_run=None,
     execution_book_alignment=execution_book_alignment,
 )
 selected_section = render_dashboard_workbench_selector()
+if selected_section == "Research Lab":
+    (
+        experiment_scorecards,
+        experiment_regimes,
+        experiment_walk_forward,
+        experiment_candidates,
+        decision_sanity_impacts,
+    ) = load_experiment_dashboard_frames()
+else:
+    empty_experiment_frame = experiment_scorecards.iloc[0:0].copy()
+    experiment_regimes = empty_experiment_frame
+    experiment_walk_forward = empty_experiment_frame
+    experiment_candidates = empty_experiment_frame
+    decision_sanity_impacts = empty_experiment_frame
 render_selected_section_guide(selected_section)
 st.markdown(
     '<div class="dashboard-workbench-divider" aria-hidden="true"></div>',

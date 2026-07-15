@@ -51,6 +51,10 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
+from trade_bot.research.backtest_pbo import (
+    pbo_candidate_tickers,
+    run_backtest_pbo_gauntlet,
+)
 from trade_bot.research.backtest_qc import DEFAULT_QC_STRATEGY, run_backtest_qc_gauntlet
 from trade_bot.research.baselines import run_configured_baselines
 from trade_bot.research.defensive_judgement import write_defensive_judgement_report
@@ -75,6 +79,10 @@ from trade_bot.research.forward_simulation import (
     summarize_simulation_validation,
     summarize_simulation_validation_by_horizon,
     summarize_strategy_rank_validation,
+)
+from trade_bot.research.leadership_diagnostics import (
+    leadership_candidate_tickers,
+    run_leadership_diagnostics,
 )
 from trade_bot.research.operating_history import (
     DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
@@ -1427,6 +1435,209 @@ def audit_backtest_qc_cmd(
     console.print(gauntlet.readout)
 
 
+@app.command("run-leadership-diagnostics")
+def run_leadership_diagnostics_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = Path("reports/leadership_diagnostics"),
+    experiment_root: Annotated[
+        Path,
+        typer.Option("--experiment-root"),
+    ] = DEFAULT_EXPERIMENTS_DIR,
+    strategies: Annotated[
+        str,
+        typer.Option(
+            "--strategies",
+            help="Comma-separated strategies to force; defaults to primary/configured plus top candidates.",
+        ),
+    ] = "",
+    top_n: Annotated[
+        int,
+        typer.Option("--top-n", help="Maximum top candidate count before configured strategies."),
+    ] = 5,
+    router_horizons: Annotated[
+        str,
+        typer.Option(
+            "--router-horizons",
+            help="Comma-separated trading-day horizons for the walk-forward router.",
+        ),
+    ] = "21,63,126",
+    router_step_days: Annotated[
+        int,
+        typer.Option(
+            "--router-step-days",
+            help="Spacing between walk-forward router origins. Lower is deeper but slower.",
+        ),
+    ] = 126,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    """Audit tech leadership dependence and run the prior-only strategy router."""
+
+    bot_config = load_config(config)
+    strategy_names = tuple(
+        strategy.strip()
+        for strategy in strategies.split(",")
+        if strategy.strip()
+    )
+    tickers = leadership_candidate_tickers(
+        bot_config,
+        experiment_root=experiment_root,
+        strategies=strategy_names,
+        top_n=top_n,
+    )
+    prices = load_or_fetch_yahoo_prices(
+        tickers,
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        adjusted=bot_config.data.adjusted,
+        refresh=refresh_data,
+    )
+    horizons = tuple(
+        int(value.strip())
+        for value in router_horizons.split(",")
+        if value.strip()
+    ) or (21, 63, 126)
+    result = run_leadership_diagnostics(
+        config=bot_config,
+        prices=prices,
+        output_dir=output_dir,
+        experiment_root=experiment_root,
+        strategies=strategy_names,
+        top_n=top_n,
+        router_horizons=horizons,
+        origin_step_days=router_step_days,
+    )
+
+    table = Table(title="Leadership Diagnostics")
+    for column in [
+        "strategy",
+        "current tech/AI",
+        "avg tech/AI",
+        "current mega-cap",
+        "current non-tech",
+    ]:
+        table.add_column(column)
+    for _, row in result.tech_dependence.head(12).iterrows():
+        table.add_row(
+            str(row["strategy"]),
+            _format_optional_percent(row.get("current_tech_ai_weight")),
+            _format_optional_percent(row.get("avg_tech_ai_weight")),
+            _format_optional_percent(row.get("current_mega_cap_tech_weight")),
+            _format_optional_percent(row.get("current_non_tech_weight")),
+        )
+    console.print(table)
+    if not result.router_summary.empty:
+        router_table = Table(title="Walk-Forward Router Summary")
+        for column in [
+            "horizon",
+            "folds",
+            "pick excess",
+            "pick hit",
+            "blend excess",
+            "blend hit",
+        ]:
+            router_table.add_column(column)
+        for _, row in result.router_summary.iterrows():
+            router_table.add_row(
+                str(int(row["horizon_days"])),
+                str(int(row["folds"])),
+                _format_optional_percent(row.get("selected_mean_excess_vs_benchmark")),
+                _format_optional_percent(row.get("selected_hit_rate")),
+                _format_optional_percent(row.get("top3_blend_mean_excess_vs_benchmark")),
+                _format_optional_percent(row.get("top3_blend_hit_rate")),
+            )
+        console.print(router_table)
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("audit-backtest-pbo")
+def audit_backtest_pbo_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = Path("reports/pbo_diagnostics"),
+    experiment_root: Annotated[
+        Path,
+        typer.Option("--experiment-root"),
+    ] = DEFAULT_EXPERIMENTS_DIR,
+    strategies: Annotated[
+        str,
+        typer.Option(
+            "--strategies",
+            help="Comma-separated strategies to force; defaults to primary plus top candidates.",
+        ),
+    ] = "",
+    top_n: Annotated[
+        int,
+        typer.Option("--top-n", help="Maximum candidate count in the PBO matrix."),
+    ] = 20,
+    partitions: Annotated[
+        int,
+        typer.Option("--partitions", help="Even CSCV block count. 8 gives 70 train/test splits."),
+    ] = 8,
+    metric: Annotated[
+        str,
+        typer.Option("--metric", help="Selection metric: sharpe, mean_return, or total_return."),
+    ] = "sharpe",
+    min_observations: Annotated[
+        int,
+        typer.Option("--min-observations", help="Minimum return observations per candidate."),
+    ] = 252,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    """Estimate Probability of Backtest Overfitting using CSCV over candidate returns."""
+
+    bot_config = load_config(config)
+    strategy_names = tuple(
+        strategy.strip()
+        for strategy in strategies.split(",")
+        if strategy.strip()
+    )
+    tickers = set(configured_tickers(bot_config)) | pbo_candidate_tickers(
+        bot_config,
+        experiment_root=experiment_root,
+        strategies=strategy_names,
+        top_n=top_n,
+    )
+    prices = load_or_fetch_yahoo_prices(
+        tickers,
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        adjusted=bot_config.data.adjusted,
+        refresh=refresh_data,
+    )
+    gauntlet = run_backtest_pbo_gauntlet(
+        config=bot_config,
+        prices=prices,
+        output_dir=output_dir,
+        experiment_root=experiment_root,
+        strategies=strategy_names,
+        top_n=top_n,
+        partitions=partitions,
+        metric=metric,  # type: ignore[arg-type]
+        min_observations=min_observations,
+    )
+    summary = gauntlet.result.summary.iloc[0]
+    console.print(
+        "[bold]Backtest PBO result:[/bold] "
+        f"PBO {_format_optional_percent(summary.get('pbo_probability'))}, "
+        f"OOS loss {_format_optional_percent(summary.get('oos_loss_probability'))}, "
+        f"label {summary.get('pbo_label')}."
+    )
+    table = Table(title="Backtest PBO Artifacts")
+    table.add_column("artifact")
+    table.add_column("path")
+    for name, path in gauntlet.artifacts.items():
+        table.add_row(name, str(path))
+    console.print(table)
+    console.print(gauntlet.readout)
+
+
 @app.command("migrate-warehouse")
 def migrate_warehouse_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -1813,7 +2024,7 @@ def run_upside_capture_lab_cmd(
     primary_strategy: Annotated[
         str,
         typer.Option("--primary-strategy"),
-    ] = "i111_reentry_vol_target_fast_21d",
+    ] = "i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145",
     refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
 ) -> None:
     bot_config = load_config(config)

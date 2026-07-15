@@ -1,0 +1,456 @@
+source: allin_podscripts
+published_date: 2025-09-18
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/solanas-anatoly-yakovenko-on-cryptos-next-era-quantum-ai-and-the-future-of-money
+title: Solana’s Anatoly Yakovenko on Crypto's Next Era: Quantum, AI, and the Future of Money
+
+Anatoly is the CEO of a little crypto project known as Solana.
+One of the fastest growing blockchains in the world.
+A CEO of Salana Labs, he's driving Web3 innovation.
+BlackRock, the world's largest asset manager, expanded its $1.7 billion tokenized money market fund to Solana.
+Why don't we all switch to Solana?
+Salada sounds like it's actually commercial, and the other guys sound like that they're antique.
+Everybody in the world should be a customer.
+Crypto will eventually win.
+It's inevitable.
+Ladies and gentlemen,
+please welcome Solana
+co-founder Anatoly
+Yakavenko.
+There he is.
+Oh man. Thanks for having me.
+You doing.
+Thank you.
+Welcome.
+Thank you.
+How much of a difference has David Sacks
+made in the first six months as CryptoZar for your industry?
+Oh, it's been incredible.
+I mean, I think it's night and day.
+I don't know if the industry would have survived another four years of the Gensler regime.
+The Genius Act, I think, is going to unlock, you know, people estimate one to ten trillion
+dollars with the stable coins that are going to be on public permissionless chains.
+So if you kind of look at those charts who owns treasuries and be with China,
+Japan, et cetera, countries, right now, I think Tether is somewhere around number five,
+I think within five years, the Internet is going to be the largest holder of U.S. Treasuries.
+And at such a scale that I think, you know, I'm an engineer, I cannot honestly comprehend
+how that's going to change finance, but I think it will be transformative.
+Upside, downside? I mean, are there concerns there as well with that huge impact
+in democratization, or are you kind of, you know, libertarian,
+let the chips fall where they may, so to speak.
+I think it's a huge opportunity to really accelerate American innovation
+and spread American finance around the world.
+I think we actually have the best financial system in the world.
+It's the most trusted, the most robust,
+the best regulatory environment for what it's worth as well.
+But it was built after World War II before the Internet.
+So its APIs are kind of like a fax machine based.
+What crypto is allowing, I think, is this,
+new technology stack built on top of the internet that's completely Western aligned.
+It's for transparency. It's for capitalism. But now we can actually interface Western
+U.S.-based finance to the rest of the world. And I think America is going to benefit
+primarily from this, like more so than... Not just similar to our media business going around
+the world and, you know, infecting people's consciousness.
+When you were getting Solana off the ground, how much of it was a technical and
+architectural vision that you had versus maybe a set of tradeoffs that you were trying to
+solve that ETH didn't fill or Bitcoin didn't fill. And you said, I'm just going to try and do
+this. I think, you know, I can't speak for all founders, but, you know, I think founders are driven
+by kind of a crazy vision. They have to be a little bit insane. So my insane vision is always this
+idea, like imagine finance 20 to 50 years from now, the science fiction version of finance.
+What I imagine is a single giant ledger,
+a single computer for every market in the world.
+That means it's available in Nairobi, New York,
+in London, in Singapore.
+And all of these things are synchronized
+at the round-trip time of speed of light
+through fiber around the world or through Elon satellites.
+That's 120 milliseconds.
+So a dollar can be in New York, in London,
+and Singapore, in Nairobi, in 120 milliseconds.
+So velocity of money, velocity of assets,
+are as fast as physics allow.
+This is what nerd-pilled me on building this.
+It's a physics problem.
+It's a massive finance problem.
+It's a really fun engineering, low latency.
+And did you feel that you had missed it somehow?
+When I had my kind of eureka moment and I did the back of the envelope calculation for design,
+I'm like, oh, this is a thousand times faster than ETH.
+And when I started talking to folks in the ETH,
+folks in the eighth community, they're focused on settlement.
+Settlement doesn't have these latency problems.
+You can do settlement in minutes, and that's fine.
+So I always felt that, you know,
+Ethereum being world's settlement layer,
+Solana is the world's execution layer.
+And, you know, I...
+So far so good.
+Yeah, so far so good.
+Execution is where all the money's made.
+So I think we're on the right track.
+And a fast execution engine can also do settlement.
+That's kind of a feature.
+You've been super critical about two projects, meme coins, even though they do throw off, I think, some revenue for Solana, and also the idea of a crypto-strategic reserve.
+What about those two projects tweak you a bit?
+I think primarily we could not predict what's going to happen on chain.
+We called it blockchain, and that's XP, that was our tagline, and the idea was always how do we get stuff?
+stocks and bonds and treasuries and real world assets on chain
+from all around the world to be traded
+by everybody around the world.
+But it turns out that is a much harder legal
+and regulation problem than it is an engineering problem.
+But anybody in the world can create markets for anything,
+including meme coins, including NFTs,
+and those things took off.
+I think in part because of how slow regulation was
+to catch up with the technology.
+Which makes it annoying that those are the things
+that come out instead of your true mission.
+Yep. For sure.
+We saw Dina from NASDAQ here yesterday.
+She announced the tokenization of securities that we're going to trade on the exchange.
+There seem to be a lot of regulated exchanges and businesses that come from that kind of deeply regulated background,
+starting to experiment with blockchain technology.
+Do you think they're going to be advantaged or disadvantaged given where they're coming from?
+Does the lock-in with regulators, the relationship with the regulators to lock-in with the market participants give them some leg up?
+or do you think that the disruptors are ultimately going to be able to operate more freely and more quickly?
+This is the big challenge.
+I think the advantage that we have that we are very nimble and we can operate everywhere in the world.
+The advantage that they have is that they're already regulated.
+They're already operating with those assets that we want on chain in the United States.
+But they don't have global availability.
+NASDAQ is still in this little sandbox.
+So we'll see what happens.
+I think once the regulators allow public keys like cryptography to manage and transfer assets,
+that's the interface that you can wrap around and start moving anything from inside NASDAQ to Salon and vice versa.
+Like once that interface exists, I think you kind of, the genies out of the bottle, you know, the toothpaste is out of the tube.
+Do you ever meet with the regulated exchanges and are there ways to kind of build integration and partnership that benefits both?
+Yeah, of course.
+Yeah, so we've talked to folks, I think, across the spectrum, from banks to regulate exchanges and regulators themselves.
+Salana is fundamentally a protocol.
+It's like an email standard.
+It's a bunch of software.
+The people that run it don't report to me.
+I can't fire them, so I can't stop it if I wanted to.
+And if we succeed, if the protocol is awesome and globally synchronous and super fast,
+NASDAQ would make more money by just running a Salana note and integrating with it more direct.
+So, like, to me, it's ultimately a win-win.
+We're never going to build an exchange that is onboarding U.S. institutional and serving U.S. customers.
+We want NASDAQ to do that and to run it on Solana, and that would be great.
+There's a common claim by the masses, meaning – masses, meaning not everybody that's sort of all in on crypto,
+that it's still extremely complicated to understand.
+You know, even if it's like just minting and burning or, you know, yield farming,
+you say it to just like the norm core person and their eye.
+glaze over what's the turn in the abstraction of all of this stuff that makes
+crypto truly mass market I actually think that the human brain has to change
+to adjust to it I agree with you it's really complicated but I landed in the
+States in 1992 from the USSR effectively and there's no way my parents
+could understand what a web link was right so it's all whenever you have a new
+technology it just takes people a long time to adopt it
+and build a mental model for it.
+But now they do.
+They understand the web
+after years of using it.
+So I think as stable coins proliferate
+to the back office in a lot of companies,
+people will figure out,
+oh, this secret key is actually really important.
+I need hardware, I need PKI,
+I need trusted displays,
+all of the security stuff.
+And they will build a mental model
+for cryptography,
+having true ownership over something
+that is globally transferable.
+I saw a chart recently that showed
+that the number of L1 and L2
+projects, keep growing year over year over like the last three or four years. Why is that happening?
+I think because there's... What need are they filling? Well, I think the opportunity is so big
+to be the Google of finance, right? If you're like the one place for all the finance, all markets
+run, that is a massive opportunity. So I think people are going to keep launching L1s and
+L2s and all competitive. They're all competing with Solana and that's fine. I love competition.
+until somebody wins it.
+I think as long as we're laser focused on improving the product,
+making it faster, cheaper, more reliable,
+we have a really good shot of actually becoming that global execution engine
+that's serving all of finance.
+Outside of finance, what do you think is the vertical
+that has the most promise over the next five years?
+In crypto or in general?
+In crypto.
+Whether it's for Solana or any crypto project,
+where do you think people aren't putting enough attention?
+I think all the stuff that people have tried,
+it's kind of like early 90 days, experimentation, Frontster,
+all of those things failed
+until there was a critical mass of people
+that understood how the web works
+and then Facebook took off.
+So I think even the weird experiments with NFTs
+being a way to create a community of artists
+to build a movie or story and create true new IP,
+all that will happen just five years from now,
+10 years once we hit critical math.
+So a lot of false starts.
+And somewhere in that graveyard, you might find some really good ideas.
+Absolutely.
+Just like what happened.
+And then the social network concept always seemed to me to be such a winner.
+You know, whether it would be like a dig or a Reddit format where you could vote
+things up with a cryptocurrency, your comments were somehow related to that.
+And there were a couple of little experiments I remember looking at for investment,
+but candidly I didn't think the founders would pull it off and I was right in that case.
+Is that the one that you think could break out if Elon put into X,
+doge going or put in Solana,
+and there was some sort of currency inherent to the objects and the behaviors?
+I personally think that you could build a competitive product to TikTok with crypto
+if the magic you caught that kind of lightning in a bottle
+because the monetization mechanism with crypto is so different than the ad-based one.
+And the ad-based one kind of creates this forcing function for a lot of spam
+and duplication to ride to the top.
+How would that work?
+Just describe your product thinking there, that new kind of experience.
+How do you think it would work?
+I think you're kind of seeing some of these things play out with meme coins
+where you have creators that are associated with a coin
+that continues to have market cap and traction.
+And now the regulatory environment isn't here yet
+to clearly tie the success of that creator to the value of that coin.
+You need to remove a whole bunch of bottlenecks there,
+but the product exists.
+people watch that particular
+creator stream and go buy that
+coin. Like once
+it actually looks like
+an investment thing that Jason would
+be like, okay, I have all legal protection
+to actually put money in here.
+This is related to the financing question
+I was asking Neil and Ari about, which is
+can creators raise funding this way
+and then can they deploy that funding, but
+then the coin holders can actually have
+equity in that project and in the performance
+of that project over time, rather
+than it just be, you know,
+If the regulatory environment changes, like, people have been dancing around this, but, like,
+there's this project that I love, Kleinosaurus, it's these cute little dinosaurs that are,
+they've, like, kids love, it looks like a Pixar dinosaur.
+They've won awards for their animations, and they raised funding because they created this
+collective set of dynos.
+Now, it would be awesome if those dynos could actually have copyright and revenue association
+in the future, but, like, we can't do that yet, and that's frustrating.
+but it could totally happen once we have enough clarity.
+Well, just imagine, like, we bought collectibles,
+and if we all bought Marvel comics when we were younger,
+but we had equity in Marvel,
+and 30, 40 years later, those characters hit, and you own...
+It could be Beast.
+I mean, it could be Mr. Beast.
+Or it could also be the next creator.
+Like, you're watching an up-and-coming crater.
+You want to bet on them.
+Is that the next piece Sacks is working on?
+Is that the...
+The Clarity Act is the big piece.
+It's kind of a big piece of legislation.
+Explain it for everybody, yeah.
+So, again, I'm a...
+engineer this is from my lens is raising money in the US and trying to launch a
+token we raised a seed in Iran it was about 14 million bucks which is amazing
+it was you know like outright crazy success for a new a first-time founder I
+had to spend two million of that on lawyer fees which is a more than 10% of my
+runway to figure out or launch a token in the United States and because I have
+kids in the US this is my home never leaving it so I had to do it in America a lot
+of founders actually just left to do it outside of the U.S. So the Clarity Act is a whole
+bunch of complicated legislation to try to minimize, hopefully, that cost to make it much easier
+for founders to launch. It's far too much friction right now. It provides clarity. Our partner,
+David Sachs, launched a company a few years ago that was trying to tie crypto to real estate,
+like a real world asset. Tell us about what that movement is all about and what the utility
+is that that is there if it works?
+So people want real world assets on chain
+because there's demand in DFI for non-correlated assets.
+Like if everything that is in crypto,
+all this innovation around risk management
+in real time between borrowers and lenders,
+it's useless because if everything's a meme coin,
+everything's correlated, it'll all crash at the same time.
+There's no hedging.
+And the only free luncheon,
+in finances on correlated assets if you have true hedging.
+So we need real estate, bonds, insurance, whatever have you, that has oil,
+oil, exactly, commodities, but like even California fire insurance,
+it would be awesome to put that on chain because then people could actually buy insurance.
+All those assets, if, thank you, all those assets, if they exist
+in this kind of global synchronized giant state machine,
+and environment can all be used together to reduce risk
+for the entire system because they're uncorrelated.
+And that's actually the only free lunch you can get in finance.
+So there's a lot of demand for them.
+And the technology is there to leverage them.
+Now we just need the regulatory side to catch up.
+Can I change tracks a little bit?
+You're an engineer.
+You work in cryptography.
+Have you visited quantum projects?
+What do you think is the state of development,
+quantum computing?
+Everyone's got a different story, how much is kind of hype
+in marketing, how much is real, and what do you think is going to happen?
+Honest answer, I feel like 50-50 within five years, there is a quantum breakthrough.
+And part of that is because of how fast they are...
+Just define breakthrough?
+You can run short algorithm?
+We should migrate Bitcoin to a quantum-resistant signature scheme.
+This is my bet.
+And this is because we're just so many technologies are converging right now, and this is some
+isototic rate AI and how fast is accelerating going from a research paper to an implementation
+is like astounding. So I would try to encourage folks to speed things up. My key for this is
+Google and Apple adopt a quantum resistant cryptographic stack. This is a time to go migrate
+because now the consumer side of it is effectively solved and you don't have to kind of...
+So you watch where Google is going? Yeah. But yeah, I would, I think
+The people, you should be worried if you're in the field, but for the general public,
+quantum computing is such a massive unlock in terms of how much we can process
+that it's going to be as big of a wealth creator if we pull it off as AI.
+So I think this is to me like a lot of work, engineering work.
+We have the right people to do it.
+But like for everyone else, it should be like a huge opportunity.
+But to your point, the reports on the breakthroughs on the Willow project at Google are driven by AI modeling.
+And AI is unlocking a lot of the capabilities to make it real, which seems to be an accelerator.
+It's pretty powerful.
+What's the intersection of all of that world of just AI in general and crypto?
+This is a funny thing to ask because I feel like AI is going to be everywhere and crypto's going to be everywhere.
+But where those lines cross is just really, really hard to pinpoint.
+I don't want to say something lame, like, oh, we all have agents sending money around because that's kind of obvious.
+I mean, I think the first attempt was to kind of say maybe there are distributed networks of compute
+and maybe we can run distributed learning or distributed inference,
+but those projects really haven't taken off and really generated any momentum.
+Yeah, not yet.
+And again, because they're competing with a data center that is all co-located,
+that is funded with traditional finance and those things.
+And yeah, you can put those assets on chain and that's a lot of ways how I think things are going to integrate.
+probably the most kind of like singularity bet we can make is you have an agent that is a creator
+that is like an ex-personality that you can interface with tokens and buy into and pay for the GPUs.
+That could be fun.
+Bitcoin has turned out to be surprisingly resilient, but now we're starting to see certain players
+corner the market on large percentages of it, and that was never supposed to happen.
+And so if something like MicroStrategy owns 6%,
+that's actually maybe 50% more than that
+because there's so many dead coins out there,
+does that worry you the centralization of Bitcoin?
+And does that mean there's an opportunity
+to start the game anew?
+I think Bitcoin is resilient to these entities collapsing.
+Now, it's not going to be without painful risk
+that in terms of people that own Bitcoin,
+but the thing is it'll survive that and all the properties of Bitcoin that people value
+will remain through that transition.
+So if you really value Bitcoin, you should see that as like an opportunity to own more
+of it.
+Even if somebody were to own 20 or 30 percent, it seems like there are people who actually
+have this intent, that's why I'm asking.
+I think as long as it's an open global competition for to acquire Bitcoin and anyone can
+participate in that.
+and we don't end up in some kind of regulated nightmare, you know,
+like you can't acquire gold or something like in the 70s.
+I think Bitcoin would survive those kinds of shocks.
+Is Bitcoin valuable enough now where it makes sense for,
+I guess North Korea does this,
+but I was just going to generalize and say like state-sponsored ways
+of either trying to penetrate it, hack it, take individual accounts.
+It just seems like there's an emergent trend here of this.
+It is, it's beauty is that it's the simplest protocol you can build.
+Because it is focused on just settlement, it's very easy to understand from an engineering point of view.
+And proof of work is kind of a, I don't know, it is a brilliant.
+It's a masterpiece.
+Yeah, it's a masterpiece in terms of like elegance and simplicity.
+And it's very robust to, I think, all sorts of attacks.
+Now, that doesn't mean that, you know, you can't have an attack that could cause, you know, rollback that's unexpected.
+I think it's extremely hard to pull off, very unlikely, and the internet is so super connected
+that it can automatically kind of respond and take action.
+I actually meant more just like, you know, states targeting accounts that have large Bitcoin
+holdings and trying to figure out who owns them and then just basically getting them to give
+them the coins.
+Yeah, those kind of state-sponsored wrench attacks.
+I think what like we should do, living in the West,
+is really have strong opinions about property rights
+and how important they are
+and how foundational they are to wealth creation
+in the West and America.
+I completely agree with this.
+And this is our best defense.
+I completely agree with this.
+And be hyper-transparent who owns the coins.
+Because then it's like you can't take away something
+that everybody knows you own.
+But when you try to hide your ownership of it,
+more likely it's easier for somebody to take it away.
+I think privacy is the right,
+so it's somebody's right to be able to do that.
+But I think our best bet in, you know,
+wealth creation is actually defending these rights
+and defending the right of somebody to own Bitcoin
+if they want to. It's extraordinary
+that it hasn't been hacked
+with so much at stake. Maybe you could speak
+to it as just an architect
+herself and...
+The reason it hasn't
+been hacked is because it's so simple and
+you know as an engineer you always strive
+for simplicity to achieve a certain
+outcome. You can't always
+achieve that. Salana is much more complicated
+because the outcome we're just striving is
+hyper performance and it's just hard.
+So, like, Solana is much more complicated as a result of that, but Bitcoin is designed for a
+very simple settlement layer that is, I think, you know, the coolest thing, the coolest piece
+of software written in the last 20 years is, I would say, the Bitcoin, like Nakamoto
+implementation.
+There's been an enormous reanimation in the ETH market recently.
+Where do you think that comes from?
+Is that market-driven and speculatively driven, or do you think that there's a fundamental
+reimagining of where Eith lay?
+lives in, you know, between Bitcoin over here and Solana over here?
+I'm honestly a huge fan of Ethereum.
+Like, I think Vitalik is an amazing person, amazing engineer, and has a very strong vision.
+It's very different from my vision for Solana, and it's really cool to see those two play out.
+If I could predict what I do could cause a price change, I'd be a lot more successful.
+Well, you've been pretty successful, too.
+But, right, it's just really, really hard.
+to attribute the work that you do.
+OK, so look, your transaction network is quite liquid.
+It's going to become more and more and more
+as you have more validators, more clients, all that stuff.
+Another market that seems has built a monopoly
+or a duopoly around transactions who's a little bit at risk
+is Visa and MasterCard.
+What do you think about that?
+My contrary opinion is that I think Visa and MasterCard
+are more technology companies.
+And if you look at their profit margin on the growth
+cost payment volume, it's like 10 basis points.
+It's like vapor.
+I think the issuer and receiver bank,
+those are the most disruptable pieces on there
+because their profit margins are like 2%,
+like much, much bigger.
+And Visa is a technology company that owns end to end the customer.
+If they could remove the banks out of the loop
+and just do stable cone transfers behind the scenes,
+I think they become a lot more successful
+and they can do a lot more for a lot less.
+long, stable coin, short banks?
+That was, I'm not an investor, but yeah, maybe.
+Chamoth?
+Seems like a good premise?
+I can't comment on us.
+So that's a yes, everybody.
+Everybody short the banks and go on that, stop that, not that, not that.
+Everybody, I'm telling you to do this, this is financial advice.
+Guys, unless it doesn't work out.
+That's totally, yeah, go back to everybody.
+Thank you, thank you so much.
+Yeah, it's an honor.
+Appreciate it.
+I appreciate it.
+Thank you so much. Thank you. You're awesome dude. Appreciate it

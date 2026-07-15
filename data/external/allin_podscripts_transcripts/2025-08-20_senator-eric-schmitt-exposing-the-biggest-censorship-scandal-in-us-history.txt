@@ -1,0 +1,868 @@
+source: allin_podscripts
+published_date: 2025-08-20
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/senator-eric-schmitt-exposing-the-biggest-censorship-scandal-in-us-history
+title: Senator Eric Schmitt: Exposing the Biggest Censorship Scandal in US History
+
+I put on a jacket because, you know, we're interviewing a senator, but I see that...
+It's Polo Day.
+Senator Schmidt's pulled a Zelensky here.
+I did, but I told them I do have these stiff, I have these stiff collar on the polo, which is...
+You look great.
+It looks great.
+And, you know, I lost the weight.
+Thanks for noticing, Senator.
+And I've been hitting the weights unlike sacks.
+And so I am too trying to get the gun show going like you have a she in there.
+I'm going all in.
+All right, besties.
+I think that was another epic discussion.
+people love the interviews. I could hear him talk for hours. Absolutely. We crushed your questions
+a minute. We are giving people ground truth data to underwrite your own opinion. What's you
+going to say? That was fun. How is great? All right, everybody, welcome back to a very special
+interview. Yeah, you know, we're doing these interviews here with me, my amazing co-host, and
+your czar of crypto and AI, the rain man himself, David Sacks. David, how you doing,
+How's your summer wrapping up?
+Good to be here.
+The summer ended way too soon.
+Way too soon.
+So sad.
+Isn't it?
+It's just like zip-to-zip.
+Kids going back to school, all that.
+And look, you're a civil servant now.
+You are working for the people.
+Public servant.
+The people demand, you're a public servant.
+Yes.
+And the people demand results.
+And hey, we have another civil servant here.
+David, why don't you introduce our guest today?
+This is Senator Eric Schmidt from the state of Missouri.
+How did we meet?
+It was through another former senator, now vice president,
+J.D. Vance, I believe. That's right. That's right. Yeah. And you guys entered the Senate together at
+the same time. We did. And I got to be very close and shared a lot of life experiences. And our
+freshman group got pretty tight. We go to dinner once a month and try to keep that going now that he's
+even VP, which is a lot of fun. But yeah, we got introduced through him and have enjoyed getting
+to know you. And you now have a new book called The Last Line of Defense, which is about your time
+in your previous job, which was as Attorney General of the state of Missouri. And I remember talking
+about before I even knew you on the all-in pod when we were dealing with censorship and talking about
+that issue, the Twitter files, this is back in, I don't know, this is like three or four years ago.
+2022, I would say, yeah, a few years ago now. My time is moving. We talked about the case Biden v.
+Missouri, which you were the one who brought that case when you were attorney general. When I met you and
+then found that out, I knew that we had some views in common, let's say, about free speech and
+the need to avoid censorship. And you went right at the show me. Don't tell me what your fancy
+speak. What's going on? You went directly to discovery. So maybe you could talk a little bit
+about the approach from the senator from the show me state. There were rumors and kind of this
+feeling people were being censored, but nobody knew exactly how it was occurring. So you had
+some intuition that if we do some discovery here, there's got to be something under the surface
+or had somebody leaked something to you? How did you know to go after this? I guess was my question.
+Yeah, and one of the reasons I wrote the book was just to, you know, I think it's easy.
+The book starts with, you know, in November 2024, the fever broke.
+And so if you think about the four previous years, you know, this was a time of lockdowns and compulsory COVID shots and forced masking of five-year-olds,
+but also this vast censorship enterprise that existed that, in my view, was the greatest affront to the First Amendment we've ever seen in the history of our country.
+And so if you go back in time, right, to in 20.
+You had seen, to your point, Jason, you had seen sort of Jen Saki at the podium talking about, hey, we're flagging this for Facebook.
+There were rumors of a disinformation governance board with the Mary Poppins herself, right, talking about how this misinformation and disinformation.
+You know, Jankovets, I think. Right. Right. That they needed to flag this stuff and do something about it.
+We knew that if they were willing to talk about that stuff so publicly, there had to be something much more beneath the surface.
+So in May of 2022, when I was Attorney General, Missouri, we sued the Biden administration and sort of this leviathan of agencies that were working to censor American speech.
+And we filed the lawsuit and we knew that it would be, you know, highly scrutinized, be called sort of furthering conspiracy theories.
+But we knew that there was something there.
+and a really important strategic decision in the case was normally when you file a lawsuit like that, you immediately seek a temporary restraining order or preliminary injunction to get the government or another party to stop what they're doing. But we felt like we needed to get evidence first, right? We had the allegations in the complaint. So we sought discovery. And the judge granted that discovery. And what we found from that discovery was shocking, right? We got reams and reams, tens of thousands of documents, emails, text messages about this communication, the special porter.
+that existed for, you know, these folks in big government to work with big tech to silence Americans.
+And so it really was shocking. And then, of course, we got to the point where we were able to
+take depositions. We took the deposition of Anthony Fauci. We took the deposition of Elvis Chan,
+who was the FBI agent in charge of Northern California that was pre-bunking the Hunter Biden
+laptop story, even though the FBI had the laptop in 2019, right? So we took the deposition
+of a CDC official who was basically flagging specific words and phrases that the government
+government within censor, and then agencies like SISA, all of these groups were part of this
+enterprise. And that's one of the reasons I wrote the book, The Last Line Defense, that people
+can get on Amazon right now. We go inside those deposition rooms. You go inside the prep for that.
+What were we trying to find out? What did we find out how we uncovered this? Because you've got to
+remember, this was before Elon bought Twitter. Yeah. And before the Twitter fires.
+Yeah. We joined a man for those first couple of days. Yeah. What's interesting about this is that
+you were taking the discovery from the government side.
+So you were getting the government documents.
+You were deposing government witnesses.
+And then Elon released the Twitter files, I don't know, about six months later.
+And then we saw it from the Twitter side.
+Yeah.
+And this was happening at Facebook too, right?
+Like you had information on the Facebook side.
+Yeah.
+Yeah, you had meta.
+You had YouTube.
+We, you know, all this was all happening.
+And the way it was working was, as you guys know, these big tech platforms have something
+called section 230 protection, right, which is basically in the 90s, when the internet's becoming
+a thing, Congress says, you're not a publisher, you're a platform, so you can't be sued. That is a huge
+advantage. And by the way, if they're actually acting as a platform, as a proponent of free speech,
+almost as a free speech absolutist, that's a great thing. The problem was a lot of these
+entities were then becoming publishers. They were throttling things they didn't like.
+They were taking down opinions. They didn't support, that sort of thing. And so what you had
+was Joe Biden saying maybe there's criminal liability. You saw these text messages in the lawsuit from
+Rob Flaherty, who is the Deputy Communications Director of the White House, cussing these guys out,
+saying you need to know that from the highest levels of the White House, we see this, you're not doing
+enough. And so as much as I think some of the people at these big tech companies were willing
+participants, there was a coercion that was happening. And that's the basis of the lawsuit,
+which was, we all know the government can't censor speech. But you also can't outsource that
+censorship to private companies, which is exactly what was going down. And I think exposing that was
+really important. Of course, Elon and all the work that he's done in making that a true free speech
+platform then. And then, of course, the congressional hearings that followed. I think all of this
+has sort of laid the groundwork for this kind of free speech renaissance that we're experiencing.
+One of the things, you know, when I was in college, you know, in the late 90s, I was, I was always
+pretty conservative. One thing I was kind of jealous of liberals was that they kind of had the
+high ground on free speech. They were viewed as sort of like the vanguard and even the ACLU
+actually did things like protect free speech. That's all gone now. Like that there's no like it's
+about power and control and limiting and labeling things, misinformation, disinformation to
+suppress speech. So I think it's an interesting moment right now for this new coalition that
+came together to elect President Trump, which is for me exciting. It's kind of a working class
+coalition. Just a steel man at Senator, we know that our foreign adversaries, this is bipartisan for
+many decades interfere in our elections. We know they do that. You would agree? Yeah.
+Yeah, certainly would try to influence. Certainly try, right. And of course we could be like,
+hey, is it possible in 50 different states with 50 different set of regulations? Pretty hard to actually
+tip an election, as we've seen, right? If you look at that, if we steal man a foreign
+adversary, because this is the cover that they were seeking, hey, we're doing this to protect
+America and democracy. But the truth was, you know, they were doing.
+doing it for their own personal reasons and their affiliation with one particular party.
+If you just look at the percentage of people who are Democrats at those companies, it's like 80, 90,
+95%. So I think we all agree on that. Is there a way for the FBI, for the CIA, for our government
+to say to Twitter, to Facebook, hey, you've got people here who are foreign adversaries.
+They're doing something that is against the American public. We need you to monitor this account
+and take them down.
+What would have been the proper channel
+as opposed to setting up a covert back channel
+where they kind of threatened them?
+One layer here that I've never heard anybody connect,
+but when I was listening to your Tucker interview,
+it just dawned on me.
+They also put Lena Kahn in.
+Now, Zuckerberg is a cutthroat business executive.
+He likes to buy companies.
+That's his thing.
+And Twitter was known for buying a lot of companies.
+So now you got Lena Kahn saying,
+we're going to come down hard on you,
+not let you buy anything.
+And at the same time,
+this other group from the buy,
+administration and saying, hey, take this stuff down. So they had two really big clubs to
+threaten these folks. But what would be the proper channels to say, hey, these things are stolen,
+right? Yeah, there's a difference between sort of making people aware versus the coercion
+that was happening under the threat of investigations or losing Section 230 protections, right?
+That was our argument, which was this went beyond informing and this was about,
+colluding and coercing, which, of course, then crosses the line of what the government can do, you know, as far as violating the First Amendment.
+There's also, to your point, there's a couple of things that are happening at the same time here.
+The first is kind of this, honestly, is kind of legacy of the whole Russia Gate hoax stuff in that they concocted this theme that is playing out now, like Tulsi Gabbard is exposing a lot of stuff.
+But that gave them the, in their view, that gave them the guys to talk about Russia this, Russia, that, everything that they don't like is misinformation, disinformation, right?
+The other thing that was happening with Zuckerberg in particular, you know, you got to remember, if you go back to 2016, a lot of people blamed him.
+If he didn't like Trump, they blamed him because they thought that somehow what was happening on Facebook contributed to his election and it shouldn't have happened.
+But then, of course, he then is part of the whole Zuckerbuck's movement in the lead up to 2020.
+then he comes back around and Biden's in office and he's pressured and he kind of you know on the road on Joe Rogan kind of talks about the the links at which they went to pressure him and now it seems as though maybe he's been red pilled again I don't really know where that's at no no I can tell you he's a weather vein that's just how you know which way the wind's blowing is Zuckerberg so yeah like it's out of expedient who he's behind is just the but it's interesting like him as sort of this kind of maybe that's the right word of kind of how this was vacillating from from one place to the next well
+If Kamala won, he would have been all in for Kamala, 100%.
+He would have been at the inauguration for her.
+He would have donated to her.
+Trust me, we know him.
+It's my opinion.
+Well, I give him a little more credit in the following sense, is that Zuckerberg gave a speech
+a while back where he talked about how social networking was the fourth estate.
+And you've got the media and then you got social networking.
+And it's very disruptive and therefore people want to censor it.
+And he basically supported that we should have freedom of speech for social networking like
+we do for the press because it's equally important. And I think that is his actual view. It's just
+that the question is, you know, how much stomach does he have for fighting the government when
+is pressuring him and coercing him? And some other part of the government is basically threatened to
+break up his company. Right. Right. Like a fifth estate. Right. And so I think that if he wasn't
+being pressured by the government at all and just left his own devices, I think he'd be fairly pro-free
+speech, but I just think that he wasn't really willing to take up the banner and fight the way that
+Elon was, you know, and really- He's the anti-E-Lon in that respect. He's the anti-E-Lon. He cares about his
+stock price. He cares about money. This is my interpretation. And he's going to protect the franchise and
+the stock price. But that's what most business people would do. I mean, I think Elon was an outlier in
+terms of being willing to fight for principle, which is why I think that going back to the central
+premise of Biden v. Missouri, when the government is jawboning these companies, instructing them to
+take down content or highly suggesting it and basically threatening that there'll be repercussions
+if they don't. Most business people are going to give into that. Of course. And it is and it is de facto
+censorship. Well, and if you think about it too, I mean, there's just a couple of things that they
+didn't happen. All of this stuff would still be considered a conspiracy theory or we wouldn't
+know about it. Like if we didn't, nobody else had filed, if we didn't file that lawsuit and
+seek discovery and if the richest guy on the planet doesn't choose to buy Twitter and expose all of that,
+people would still be claiming that this was some conspiracy theory, right?
+Like, we wouldn't, if you just think of the world would be a much different place right now.
+And so I think that's a big success.
+Well, I agree.
+And just to take people back here, you're exactly right, that conservatives were called crazy
+and conspiracy theorists for believing that Twitter, you know, then Twitter, was shadow banning
+and throttling traffic.
+And I remember when Elon took over, you know, we had the Twitter transition and
+Jake Hal and I were there.
+And we were just helping out the first couple of weeks.
+And it was mostly just getting org charts and trying to rationalize the work structure.
+And Elon went in and started making cuts.
+But then I think I left around Thanksgiving.
+And we were all kind of with our families.
+And, you know, I think we went down to Mexico.
+And Elon was still there working.
+And I remember I got a text from him at like two in the morning.
+Like, are you up?
+You up?
+You up?
+You up?
+It's going to be a bagger.
+Yeah, I'm like, sure.
+Yeah.
+So anyway, he calls.
+And basically what he told me was that all the conspiracy theories are true, that we've now gone
+into the admin tools that the trust and safety team was using.
+And they literally have checkboxes to throttle accounts based on exclude them from search.
+And they had all these different tools that they had created, again, to throttle traffic,
+which was effectively shadow banning.
+So they could just ban you outright or they could prevent your content from being seen.
+In other words, everything that conservatives had claimed was true.
+And just to add to that, Senator, before you respond, the thing that's particularly interesting
+about this is you talked about 230. We want platforms to have 230. But when you start making
+editorial decisions, when you're the New York Times and you say, hey, this is going on the front page.
+It's an editorial decision. When you assign the story, that's an editorial decision, the 230 was given
+to platforms that didn't make editorial decisions. This is an editorial decision to say Milo Yiannopoulos
+or Laura Lumer or Alex Jones, whatever the reason is. They could be anti-Semitic. They could
+could be crazy. They could, you know. Or the president of the United States, which was ultimately
+We'll get into that one for sure. There's a lot of good questions there. This is one of the things
+that Elon had done that very day was he opened up the Twitter jails and let Trump back onto
+the platform. And there were some others. Jordan Peterson was censor, Jay Bottacharya. It was a little
+bit of like Arkham's Asylum. You did let a couple of crazy people back on to.
+No, all the bad boys of free speech were let out. I mean, it was Trump, Tate, Jordan Peterson,
+J. Potichara, folks like that.
+I don't think the public doesn't need to be protected from any of these people.
+I mean, Milo Inopoulos and Alex Jones, you may find them loathsome or funny or anything
+in between, but it is freedom of speech. But, Senator, this has led to a discussion of
+230 being repealed. And this is where I think, you know, the lawsuit you did and there could
+be further work is clarifying the nuance of 230. Should an algorithm de facto be an editorial
+decision. So if you have an algorithm and you say, hey, I'm going to show you more MAGA stuff. I'm
+going to show you more AOC. That's an editorial decision in my mind. Should that break Section 230
+if somebody decides to build an algorithm that shapes the content you see when you open the app,
+just like the New York Times editors do. Right. That's sort of like in the last line defense book,
+who's sort of like, what are the solutions are? We talk about what's the proper role of Section
+230? Because I actually think if you are a true platform as somebody, again, the
+believes in free speech. It's a very important thing. One of the concerns, like, I'm not a
+doomsday guy on AI. I think there's, I think he can add to human flourishing. I think he can
+actually make us more productive. And there's a lot of, there's a lot of opportunities that
+roll with it. One of the things I'm most concerned, though, is about censorship creeping in to
+AI, right? And so I think you have to be very clear that if you're going to start making these,
+whether it's, you know, somebody individually is flagging it, or you have an algorithm that is essentially
+excluding 50% of the points of view. You should not get the multi-billion dollar subsidy that effectively
+what Section 230 protection is, right? It's a huge advantage. And it should, and by the way,
+I'm all for that. But I think this manipulation that, by the way, is sort of sewn into the hearts.
+So specifically, though, the algorithm, because you know what an algorithm is. You're like a tech-savvy guy
+and it's great enough senators who are. But you can't, but, but like, just like government can't sort of.
+How can you have an algorithm that's designed to produce a certain output? How can you have that coexist with
+2.30 is my question. I have my own answers, but I'm curious in your answer. Yeah, I think I think you
+got to get back to one of the First Amendment principles, which is it has to be content neutral.
+That's how I view it. Now, you can have protections. You know, there are certain public safety
+protections are going to play. You could have protections against people, you know,
+sort of pedophilia that, that, you know, would violate terms of service. There is a role
+to violate laws, right? I mean, correct. Yeah. But I also think what's interesting is when you go
+back and look at this case, the pressure on the platforms wasn't just about phrases. They made
+them altered terms of service to actually meet with the desired outcomes that they wanted.
+And also, and David, you guys were, you saw this, interestingly, the kind of how deep the rot really
+was, let's just take Twitter for an example. James Baker, who's James Baker? James Baker was the
+general counsel for the FBI during the Hunter Biden, or I'm sorry, the briefings during the Russia
+Gate back then at the end of 2016. He then, after a stent at some think tank, becomes
+the General Counsel at Twitter. He was the one inside Twitter. We now know from the Twitter files
+was advocating to censor the Hunter Biden laptop story, even though he should have known,
+based on his time at the FBI, that the laptop was authentic, i.e., it was Hunter Biden's
+actual laptop. And the grounds upon which that story was censored was that the laptop was
+Russian disinformation. This was the tried and true tactic for years, is that
+any speech that was inconvenient and that Democrats wanted to censor, they just called Russian
+disinformation, even though the Russians had nothing to do with that laptop.
+And to dig even further into that, what's interesting is, so Elvis Chan is the guy of the FBI
+in in late 2019, 2020, is briefing the big tech companies monthly, at least monthly.
+Then it becomes weekly.
+And we took his deposition in the Missouri versus Biden.
+Biden lawsuit. And it was kind of shocking. You read about it in the book. But like what he what he talked about was they had the they had the hundred Biden laptop in in November of 2019. The FBI did. They knew it was real. Like they knew it was real. Hunter Biden's laptop. Yoll Roth, as you remember, who was like the integrity guy at Twitter, signs an affidavit with the FEC after complaint was filed against Twitter, noting specifically that the FBI was telling them that this could be a Hunter Biden. So this wasn't just going to be some random hack and.
+leak operation for the Russians. It was related specifically to Hunter Biden.
+Senator, in fairness, the Russians did hack Hillary Clinton's email. That was confirmed.
+We don't know that.
+Of course we do. The FBI confirmed it. Absolutely was confirmed.
+I think that's all part of the hoax.
+Okay. Well, let me give you a couple of reasons why I could see the New York Post,
+oh, I'm sorry, we could see the platform saying if the FBI calls and says it's a Russian hack,
+and we've had a bunch of Russian hacks before.
+And the president said, you should, hey, Russia, if you're listening, send me the emails.
+And you had Paul Manafort be indicted for having all these connections.
+You're like the last person who still believes in this Russiagate hoax.
+You're missing the key point, which is the laptop was authentic and the FBI and you can get
+your key point, David, let me finish mine.
+Let me finish mine and you can give me the key point and tell me why I'm wrong.
+There was a bunch of noise around Russia.
+I think Russia did this on purpose to cause chaos here.
+I don't think they cared who got in.
+I think they just want chaos.
+That's my person with.
+But if you were Twitter and the FBI.
+calls and says, hey, this was hacked. And we have these previous instances of hacking that the
+FBI has confirmed and has told the world, this is what happened. And you have Paul Manafort being
+indicted. And you have all this other noise. It's a reasonable thing for Facebook or Twitter in my mind
+to say, okay, maybe we wait a week. Maybe this is like the Russians really are doing this. I don't blame
+them as much. Do you? Well, the truth is, like, there's parallel tracks here. First of all, we know now
+that the Russia, that Trump was some Russian asset, that's totally fake. That's like it, like,
+he's not an asset. We all agree on that. It did, it didn't happen. But they used that, of course,
+then to spy on the presidential candidate. That's what Barack Obama did. And then you had, of course,
+Brennan and Clapper and Comey continue this and really tried to sidetrack in a presidential administration.
+So I think indictments are probably coming. That's a sort of a separate issue. The reality is,
+because even though statute of limitation may have expired a conspiracy, if ongoing, the statute
+limitation has not expired. So we'll see where that all goes. But if you're making the point
+that the government shouldn't be having that much influence and coercing and threatening these
+big tech companies, I would agree that that's a violation of the First Amendment. My point is I just
+the idea that the big big tech was so willingly going along with all this though, right, is a little
+scary. These are some of the biggest companies in the history of the world. And the idea that
+something that the FBI knew to be true wasn't out there for the American people to sort of weigh in
+on 10 days before an election is kind of Orwellian. But that's on the FBI, I think. Yeah,
+not the platform. I'm totally unclean hands here. There's no doubt about that. Okay. Yeah,
+let me jump in here with a couple of points. So, okay, let's just focus on this Hunter Biden's story,
+because I think there is a very plausible argument that the censorship of
+this story could have swung the results of the 2020 election, okay? Because the Hunter Biden
+laptop showed a bunch of shady foreign business dealings between the Biden family and China and
+Ukraine and other countries. And if that had been properly examined by the media instead of
+being censored by social media, 10 days before the election, who knows what the outcome would have
+been? So this was a major, major deal. Now, why did that story get censored? We now know from the
+Twitter files, this was the reporting of Matt Taibi, who was given access to the Twitter files,
+that like Eric is saying, the FBI knew in late 2019 that the laptop was real because they
+had it in their possession and therefore authenticated it. What was their reaction to it? In my
+view, they could have done three different things. Number one is they could have investigated
+the crimes that were suggested by the evidence on that laptop. They didn't do that. Number two is they
+could have just sat on it and had done nothing. They didn't do that. They did number three, which is they
+They basically began a campaign to suppress the contents of the laptop.
+How do they do that?
+Elvis Chan representing the FBI was engaged in weekly meetings with these social networks.
+Again, this is from the Twitter files.
+And Elvis Chan represented the intelligence community.
+One of the emails described his group as the belly button of the conduit between the social networks and the intelligence community.
+And remember, Elvis Chan had something like 80 FBI agents who are submitting 10.
+takedown requests to Twitter and other social networks.
+So this is the scale of the censorship that was happening.
+In any event, in these weekly IC meetings, and a lot of the evidence has been destroyed
+because they're using that disappearing tool, teleport, in any event, in these weekly
+meetings, we now know that they were warning the social networks be on the lookout for a
+Russian disinformation campaign in which Hunter Biden is accused of something.
+And so they, for months, were priming the social networks to view any story, any revelations
+about Hunter Biden as being Russian disinformation.
+Now, why were they doing that?
+In fact, there was at one point there was what was called a quote-unquote tabletop exercise
+where all the heads of trust and safety at these social networks were brought.
+I think they were brought to the Aspen Institute.
+And they literally ran a tabletop exercise where they said, okay, two weeks before the election,
+the Russians are going to do an opo dump on Hunter Biden, what's your response to that going to be?
+And where they all ended up is that they would censor the story.
+I mean, this is like crazy Orwellian stuff.
+It makes sense for just a steel manate, for them to want to do the right thing if the FBI is telling them it's Russian disinformation.
+Oh, I don't blame the social networks.
+Yeah, that's the only point I'm trying to make.
+And Zuckerberg went on Rogan.
+Remember when Zuckerberg went on Rogan and he said, the reason why we censor that story
+is because the FBI had told us to.
+Most people in that situation would have believed the FBI.
+All three of us would.
+The point is, though, that the FBI, again,
+they could have investigated the crimes on the laptop.
+They could have sat on the laptop and done nothing.
+That's not what they did.
+Instead, they began this campaign to discredit the eventual revelations as Russian disfirmation.
+Senator, what happened to those individuals at the FBI?
+I'm curious if you can get to that as well, who were involved in all this.
+Were they ever brought up on charges?
+No.
+Do we ever figure out who they are?
+There needs to be accountability here because I also think it's important to point out that,
+so take SISA, which is the cybersecurity infrastructure security agency.
+No one's ever heard of it.
+It was created effectively to protect infrastructure from cyber attacks.
+In that Erow and Trump was present underground, they work on under the guise of Russian disinformation,
+what's called the election integrity project.
+So they work with Stanford.
+They work with University of Washington to flag posts to work with social media companies.
+then when you get into COVID, they just flip the switch and turn it on any, you know, if you're
+questioning the efficacy of the vaccine or you're questioning the efficacy of masks, they
+turn that around in the American people too. So part of the point that's outlined in the book,
+last line of defense, which you can order right now on Amazon, the part of the point was exposing all this
+was this was a Leviathan. This wasn't just like one person making a phone call. This was all these
+agencies that were lined up with the regime's narrative and then working and coercing and
+threatening social media companies, you will take this down or there will be consequences.
+And so, you know, the CDC, I mentioned the CDC, what were they doing?
+The government went to him and said, tell us the phrases that you want us to flag and take
+down and then we will work with social media companies effectively, right, to go do that.
+And so the FBI was involved in this, CISO was involved with this, the CDC was involved with
+this. And then, of course, when we had the opportunity to take Anthony Fauci's deposition
+at NIH, that was mind-blowing. It's only the second time his deposition was taken. We find out all
+the links at which he went to to undermine people, like, by the way, Dr. J. Badacharya, who was a
+plaintiff in Missouri v. Biden with me, to undermine his efforts to say things like, well,
+natural immunity is kind of a thing still. I mean, they tried to take down this guy's career
+in anybody like that who would just sort of question anything.
+other than what Anthony Fauci said.
+So it really was a time that was wild and crazy, and we can't ever let happen again.
+That's the sort of the point.
+And for me, as you guys, I know, I know this is a long, as I told Jason, first time, long time on the show now.
+The first amendment really is the beating heart of the Constitution.
+One of the great tests of this American experiment is our ability to tolerate people's point of view or their expression of a point of view that we vehemently disagree with, even if we think,
+it's dangerous. Like, that's really a big part of what this whole thing's about. And what you saw
+during COVID in particular was people who had, who never should have had this power were
+exercising in ways that you would have thought was from another country. You know what I mean?
+Like, this couldn't happen here, but it was happening here. I don't know if you remember
+the foil lady. Literally the person who was supposed to be policing and making sure that
+things were on the up and up at the CDC was teaching them, allegedly, how to use hacker
+speak or their personal email addresses to subvert freedom of information requests. I mean,
+I'll put allegedly in front of it, but I think this was all, you know, discoverable and it was in
+the email. She just taught people how to lie and how to subvert FOIA request. So when you start saying
+Orwellian, it does feel like this absolute power has that ability to absolutely, you know,
+Eric mentioned the NGOs that are part of this Leviathan. I think that is a really important part of it because I think that one of the ways that the Biden administration was able to kind of create cover for the censorship they wanted is to kind of launder those censorship requests through some of these NGOs in addition to using the FBI and the IC and their connections to trust and safety. One of NGO in particular I want to talk about or ask about is Hamilton 68. Did you look at this at all, Eric?
+Remind me which one Hamilton 68 is?
+The reason I wanted to talk about this one is this idea of Russian disinformation, because
+Hamilton 68 was another one of these groups.
+This is all exposed in Matt Tai B's reporting, where it was set up by another former FBI official
+named Clint Watts.
+These former FBI guys are kind of all over.
+And they claimed that they were tracking 600 or so Russian disinformation accounts or boss.
+And they claimed to know which accounts.
+accounts these were, and they would put out stories that whenever there was a story that
+Democrats didn't like, they would accuse the Russians of being behind it, amplifying that
+story.
+And this was the source for thousands of MSNBC stories, thousands of CNN reports, and so on,
+claiming that the Russians were involved in our politics, they were engaging in disformation.
+Well, why is this relevant?
+Well, during the Twitter files, we found out there was U.L. Roth, you mentioned, was the head of
+trust and safety and definitely not a conservative. There was correspondence inside of Twitter saying,
+hey, we looked at their so-called API, and these are just regular accounts. And he said, basically,
+this is all bullshit. I mean, I think he used that word, bullshit. In other words, the whole idea
+they were tracking Russian accounts was just total nonsense. These were, you know, it was just a
+random smattering of some more conservative accounts, some were Canadian accounts. They were just
+random accounts. And so anytime they needed to oppose conservative opinion on an issue,
+They would just supposedly point to this Hamilton 68 created this dashboard that supposedly
+showed, you know, this vast Russian influence campaign.
+It all ended up being nonsense.
+Well, and I think it totally created a thin air.
+I think it speaks to-
+There's a long track record of the Russians hacking, including the RNC, recently.
+So, you know, I do think you are painting a very one-sided picture here, Sacks.
+Maybe it's all bullshit.
+You think the Russians are not hacking foreign adversaries at all?
+You don't believe any of it.
+Russia's got a lot of good hackers in it, and I'm sure they have cyber operations and things like that.
+But again, that's a little different than saying that the Russians are heavily involved in our elections.
+I believe that that was largely a made-up story.
+Now, look, do I want to say that no Russian ever was involved in some sort of operation?
+I'm not going to say that.
+But we know Hamilton 68 was total nonsense.
+In fact, it was worse than that.
+It was a hoax.
+Okay, it was a hoax.
+And for years, it was the basis for thousands of stories that the Russians were
+interfering in our politics. We also know that the Steele dossier was a hoax, and that was the whole
+basis once laundered through the FBI and that whole investigation that somehow the Russians
+interfered in the 2016 election. So when you start to peel away all these bogus accusations, Jason,
+yeah, I don't really believe any of this stuff. When I hear the words Russian disformation,
+what I hear now is Red Scare. Senator, I'm going to have you, Senator, I'm going to have you chime in
+here and maybe balance out our two opinions. Obviously, the Russians have been hacking political
+organizations in the United States and other countries for decades. They did it to the RNC.
+They did it to Hillary. They do it as a tactic. That is a fact. And also, I don't think
+anybody thinks like Trump is a Manchurian candidate. So you tell me where reality is between
+these two. Chinese do it too. There's no question. Yeah, Chinese are big. Sure. Of course.
+But I think what separates this, though, was that now that we know what we know, I mean, actually, in the documents that were released by, released by Tulsi Gabbard, the director of national intelligence was that Hillary Clinton was the preferred candidate.
+They had the goods on her.
+They had her medical records, all this stuff.
+So Trump was not like this preferred Putin candidate.
+The Russians had all that hacked information.
+The Russians.
+Yeah, they had that.
+And so what was done was Hillary Clinton knew that she had an email problem.
+And then she works with the George Soros funded NGOs.
+right? They come up with this plan to say, well, Trump is is cozy with Russia. The steel dossier finds this opo, whatever is fake opo. Then they, as David said, they laundered through intelligence agents. Then that became the thing. And I think the problem is and why people have lost trust in a lot of institutions, in many cases, rightfully so is because they were really weaponized against political opponents and they were weaponized against the American people. And there's going to be a have to be sort of a lot of accountability, but I think before people gain that trust back. So I think that was my next question is how.
+do we get past this because we're sitting here with like one group who feels, hey, there's
+all these really suspicious rushing connections to Trump and the people around him.
+Jason, can't you see that this was manufactured?
+It's mainly, you have to start with some parts of the realization, yes, and then some parts
+to be real.
+The steel DOSTA manufactured.
+It was a hoax.
+We get it.
+There's, there's Hamilton 68 and all the stories based on it, manufactured hoax.
+How do we get to reality where we can trust the, you got to peel back, you got to peel back
+all the fakeness.
+Well, I think also you have to accept that the Russians are hackers and don't have our best interests and they actually want to come after us politically, David.
+I'm sure the Russians have cyber operations. I'm sure they do. But they hacked Hillary's and, you know, he knows. And this has all been confirmed.
+The problem here is that that was used as a as a predicate. Again, this is why it's so jarring. It was used as a predicate to spy. Barack Obama authorizes to spy on a presidential candidate. And then as a
+predicate then to investigate a president in waiting. And then as a predicate to try to destroy his
+administration, it was used and it gobbled up so much time in those first two years. That to me is
+a pretty unique circumstance. And beyond just, yeah, foreign nations are trying to get information.
+Since we're here, there's this lawsuit that is now happening or this investigation, I guess,
+as an attorney and you were the AG. Explain to the American people what the case is right now that
+they're going after, you know, with this Russia Gate allegations. And then where is it in the courts?
+Give us the mechanics of it and where do you think it winds up? So the question is, was there,
+was anything done illegal during this sort of Russia Gate hoax stuff that could be chargeable?
+I think you've got, ironically, Barack Obama has presidential immunity because of the case that
+President Trump won at the Supreme Court, which, by the way, my solicitor general at the time
+in Missouri was John Sauer. He's now the Solicitor General in the United States. He was also
+Trump's lawyer who argued that presidential immunity case about a year ago.
+But so he probably has immunity from official acts when he was in office, but not when he's
+out of office. So the real question will be, you sort of a conspiracy, I think the most likely
+charge, you can make the case, is a conspiracy against, a conspiracy to defraud the United
+States. This is a very elaborate scheme, again, to undermine people. And whether they get
+indictments or not, I think they should pursue them. And we'll see if that happens. But I think
+the most likely targets of that are Comey, Clapper, and Brennan for their role.
+And they're being accused of what exactly? Of manipulating this, and manipulating these falsehood.
+into actionable intelligence, again, against the president of the United States, Donald Trump.
+What are they being charged with, I guess, is what I'm getting at?
+Well, you can't make up.
+You can't be the head of the FBI or the head of the CIA and have information you know is false
+to then open up a criminal investigation against the president, which is what happened, right?
+And so that's kind of a big thing.
+So, again, most people would say probably the statute of limitations has run on.
+on many of those charges, but again, an ongoing conspiracy is something different.
+And by the way, the conspiracy doesn't need to involve you from point A to point Z.
+Once you sort of begin the conspiracy, so like, you know, again, it's just go down this rabbit
+hole a little bit. Like, what was Jack Smith looking for at Mara Lago when he went down there?
+Like, he's probably looking for some of the information related to the steel dossier that
+thought that he probably took with him. I don't know that for certain, but that's certainly a
+plausible explanation. So this, and again, you have to remember, Jason, that President Trump leaves
+office. He announces he's running for president in the fall of 2022. Three days later, a few things
+happen then. The assistant district attorney in Atlanta in a state case visits the White House
+Counsel's office. The number three person at DOJ leaves the Department of Justice and goes work for
+Alvin Bragg, who then later brings a case against President Trump.
+Jack Smith is appointed a special counsel who's in prosecutor world.
+You know he's this hired gun.
+He goes out and tries to put President Trump in jail for the rest of his life.
+They try to bankrupt his family.
+So like, it is very obvious to anyone paying attention that this lawfare that was
+aimed against Donald Trump was meant to make sure he never got back in office again.
+And by the way, if he never got back in office again, all this stuff that Tulsi Gabbard discovered
+and laid out there that Cash Patel found in burn bags wouldn't be out in the open.
+So much like how we expose the corruption in Missouri v. Biden, I think that's kind of what we're
+at right now with Russia.
+This is a big jump, though, because the FBI rate on Moralago was because Trump wouldn't
+give back these specific documents that they were asking for.
+Right.
+What were the documents they were looking for? And that he was obstructing justice and that they
+were, you know, deleting video cameras, et cetera.
+And that case didn't get past a motion to dismiss.
+Right.
+You're making the jump from that that they were looking for something related to the Steele dossier.
+And Trump could have just given those document back.
+So I always wondered in that one, why he just didn't give the documents back?
+Why was he so steadfast against him?
+He could classify anything as president, which was the likely scenario.
+But they did it anyway.
+I mean, I think.
+But what would he just, I mean, if you were advising him, wouldn't you just sound like, hey, just give the documents back?
+I think he was in touch with the archivist.
+And that was an ongoing conversation.
+And then Jack Smith with the federal prosecutor.
+down in Florida moved with guns to seize these documents, right? I mean, it's very unusual.
+It was dramatic for sure. I just don't, I mean, I just never understood what he just didn't give
+the documents back. It would just, I mean, I know Trump does unique things in the world,
+but I would have just given the documents back, which is what every other president did when
+they were asked to give documents back. Sure. But except, remember, Joe Biden, who wasn't ever
+president, he was vice president, who can't declassified document, had boxes and boxes of classified
+He didn't even know.
+In his garage, we're 100 by a live.
+So, you know, he had no idea.
+I'm going to you're down to now, J-Cal.
+You started believing that Trump was a Russian asset.
+He was a Russian spy based.
+Yeah, you did.
+You were tweeting it at the time for years.
+No, no, I didn't.
+I always thought that was like a crazy concept.
+You've deleted those tweets, but you did.
+No, no.
+It's okay.
+You were fooled by the media.
+It's okay.
+A lot of people were fooled.
+I said this very clear on the pod.
+I always believe the Russians wanted to create chaos,
+like we're experiencing here in this discussion,
+amongst Americans to distract us, and that they would do it even-handedly with anybody.
+They would do it with- The people who were actually the people who perpetrated this coup attempt
+against the president, the people who perpetrated the Hamilton-68 dashboard fraud.
+Those are the people who perpetrated the chaos.
+Sure. I think if the Russians weren't hacking everything.
+You don't have specific evidence. You don't have specific evidence of a Russian hack.
+Go read Matt Tabie's reporting. This is refuted.
+I just gave it to you. The RNC, the head of the-
+the RNC said, yes, we were hacked. Our partners were hacked. They explicitly said this. This is all
+facts, David. But anyway, we got the senator here. We can have our Russia gay debate forever.
+You can tell me that I think Trump's a Russian-Assad. I don't think Trump's a Russian-Ass. I think that's
+insane. But I do think the Russians like to cause chaos. Moving on. Brennan, I believe it was
+Brennan. And these Tulsi documents that just got released, here's what I think is so notable
+about them. I mean, other people may have their own opinion, is that it shows that I think
+there's a document there where Brennan, Brennan was like the head of the CIA.
+Correct.
+He received an intelligence assessment from the organization in which they said, look, there's
+nothing to this.
+It's bogus.
+We have it.
+The Steele dossier, you're saying?
+Not just a Steele de Acia, but the whole idea of somehow that the Russians had run this
+elaborate interference operation in the 2016 election and that somehow Trump was compromised.
+In other words, the intelligence analysts did their job and came up with the correct.
+conclusion. And nonetheless, Brennan said that the steel dossier should be included in the
+official intelligence assessment because it had the, quote, ring of truth to it. Okay. So he was
+advised by his own analyst that this was nonsense, and yet he pushed to include it in the official
+intelligence report. And then that became the basis for opening the investigation. You see how
+this worked? Allegedly, and we'll find out who'll have their day in court. I mean, I'm totally
+fine with... Allegedly, this is what's in the documents. Well, I mean, we'll find out if this is a
+theatrical exercise or if it's actually going to go to court. What do you think? I think it'll go to
+court. I think this is... And by the way, I think it's one of the reasons why they were so obsessed
+in making sure President Trump never got back into office. One of the reasons. I mean, again,
+in the book, I talk about how there's this an emergency, really...
+are perceived than you other people and then you try to silence dissent. I think it happened with
+COVID. It happened with this. Anybody that claimed that Russia didn't have, you know, that President
+Trump wasn't a Russian asset was a traitor and a Putin lover. I mean, this stuff, it's kind of wild,
+honestly, but I think we're on the other side of the fever dream, but there does need to be
+some accountability now. This is your first term of Senator, I believe? Yes. Yeah, so I was elected in
+2022. Yep. I'm curious, one, any great stock tips.
+Two, because we-
+Are we done with the Rushagate now?
+We're just trying to get some inside information with the trade on number two.
+Look, I think one of the reasons why the Russia, we can stop talking about Russia gate,
+but I think one of the reasons why it was so important, first of all, it was effectively
+a coup against the President of the United States, because these were executive branched
+officials who owe a duty of loyalty to the elected president.
+Instead, they were working to subvert and undermine him based on, essentially,
+essentially lies and hoaxes and manufactured material. I mean, that is basically the definition
+of a coup. So I think that is a big deal in and of itself. But I think the other reason why
+it's such a big deal is I do think that it helped create this intense Russophobia in the United
+States that has led us to the point we're at right now, which is we are basically in a war with
+Russia, or at least we're backing Ukraine in a war with Russia. And actually, you heard this at the
+Alaska Summit, I think that this whole Russiagate thing, which we now know is completely bogus,
+poisoned relations between the United States and Russia for years, because the media kept
+reporting this bogus idea that somehow Trump was a Russian asset, and somehow they had interfered
+in our elections. And I think this helped create a very hostile relationship between the
+United States and Russia. Clearly, Russiagate led to the Putin invading Ukraine. It led to a
+I'm crossing the border and murdering.
+It led to a souring of the relationship.
+It led to a souring of the relationship.
+Doesn't justify his murderous campaign in Ukraine, David, you would agree.
+That's not the argument I'm making.
+I know, but I'm forcing you to agree that he invaded Ukraine and murdered people and he's a war criminal.
+And, you know, those are just facts as well, David.
+I'm sorry.
+I think those are clichés that basically attempt to strip that complicated war of all of its context so that we can't achieve
+a peaceful solution to it. Obviously, you got to accept reality. Obviously, Putin invaded the
+country, but the conflict there goes back 10 years. There's a long history to it. I'm not looking
+to rehash all of that. The point is we could have worked out a resolution to this conflict,
+maybe before it started, if we didn't have hostile relationships with Russia. That's the point I'm trying
+to make. Senator, I'll give you the choice. I want to talk to you about just the Senate in general
+and then I wanted to talk a little in your experiences there, or we could just go right into
+what's happening with this Russian peace deal and the status of that.
+Yeah, we can do both.
+I think I was actually, I was on a Sunday show yesterday.
+Yeah, so I consider myself firmly in the camp of being an American realist.
+I think that a lot of the people that are really critical of President Trump's efforts right now
+have been wrong about foreign policy for a very, very long time, Jake Sullivan included, right,
+who presided over the disastrous withdrawal in Afghanistan, who basically on his watch.
+watch Russia invaded Ukraine.
+What is their position, Senator?
+What do you think their position is?
+Well, that's the part of the problem is.
+Why are they so tweaked that he met with Putin, do you think?
+I don't know.
+Because there is no plan.
+There's never been a plan.
+The only plan they ever had was is that the United States taxpayer would continue to funnel over
+$200 billion, but out of plan.
+And I had a problem with that in my first couple years.
+Vice President Vance viewed the world kind of similarly with that in the same way.
+I think we ought to focus on our core national interests, the homeland.
+We have to figure out a way to pivot to China.
+We have to get our NATO.
+allies to step up in a much more meaningful way. I think one of the great
+ironies of all this is that, you know, these European countries who are going to be in the
+White House in the Oval Office today, they talk about Putin being this existential threat. Well,
+they sure don't act like it. They don't, you know, they don't spend like it. You mean,
+correct. And by the way, if they spent what we spent on national defense, that would free about
+$300 billion for us to focus actually on the end of Pacific where China now has a bigger Navy than we
+have, not a better Navy, but a bigger Navy. They're in space for real. This is Trump.
+Trump's biggest accomplishment is probably geopolitically getting Nido to spend what they're
+supposed to spend, yeah?
+Yeah, I went over to, I was actually at the Munich Security Conference.
+I went over there.
+I'm a bit of a contrary in there, I guess.
+I would say the ascending wing of the Republican Party on this kind of realism versus
+this kind of Wilsonian adventurism that's dominated permanent Washington for a long time,
+just to tell them the truth, which is not what they wanted to hear, but the truth,
+which is the things I just said.
+You need to step up a more meaningful way.
+You know, if you think about the Cold War, it was meant to sort of prop them up to defeat Soviet communism.
+Our trade deals were never renegotiated.
+We never expected much more from them and all that's happening now.
+So this is kind of the place that I've been hoping to be.
+But I think President Trump's trying to broker a peace here.
+The problem with the critics is they just don't have an alternative.
+This is a meat grinder.
+This is a war of attrition.
+This is what Russia does.
+That's what they've done for centuries.
+So if your solution is that, well, we shouldn't we shouldn't talk to Putin, I don't know how you get to a peace deal.
+Diplomacy means you talk to some people that you would never want your daughter to marry, but like you accept the world as it is and try to move forward.
+And I think that's what he's trying to do.
+And David, I think the chances of successfully negotiating anything with a dictator who gets to do whatever he wants is like five or ten percent on a good day.
+Are you talking about Zelensky?
+My Lord, you have it in for the emerging democracy that was invaded.
+Zelensky is now in his, what is it, fifth or six year of a four-year turn.
+Hold on, no, this is just me saying.
+I'm not attributing anyone else.
+I know.
+You're out of your lane.
+He basically banned opposition political parties.
+He basically cracked down on the press.
+You don't get to be a reporter in Ukraine unless you get a license from the government.
+He cracked down on religion on the Russian Orthodox Church, priest.
+none and so forth. He's basically seized the assets of his political opponents. And most importantly,
+he's now in the like fifth year of a four-year term. He canceled elections. So I'm not quite
+sure upon what exactly you're making these highly moralistic condemnations. I just think the
+conflict is much more complicated than you would like it to be. And, you know, this whole idea
+that Zelensky represents democracy, whereas Putin represents authoritarianism, that's not what's
+going on. Just statistically, you're wrong. If you were to look at any of the ratings of
+democracies in the world, Russia would be amongst the lowest scores, and the Ukraine would be
+in the high middle scores compared to the truly free countries.
+Maybe before, once he canceled elections, but I'd have to, you have to think twice about that
+since you cancel elections. Look, there is no democracy in Ukraine right now. There's just not.
+Well, they're at war. Yeah. Okay, fine. But we had, we had elections when we were in, you know,
+the Civil War, and we were in World War II, we had elections. I don't know that that's a
+great reason. Senator, which is a more democratic country, Ukraine or Russia? Russia is an authoritarian
+regime, but I think David makes some, like, I'll let's give you one example. When we were going
+to just answer the question. I know, I mean, I understand you're a senator. I'm in. Just,
+you're using, Jake, Al, you're using democracy as a bumper sticker and a buzzword instead of
+actually thinking about what it really means. And actually, if we're really going to think about
+what democracy means, then let's ask what the people of Ukraine think. That's what
+To me, democracy means you actually listen to the people.
+Gallup just did a survey of the people of Ukraine.
+Let's put these numbers on the screen.
+This is Gallup, and this before the Alaska summits.
+This was not politically motivated in any way.
+And what they found is that Ukrainians have lost their appetite for war.
+Support for the war has collapsed.
+A year ago, support for the war was in the 60s or 70s.
+Now it's collapsed to 24%.
+So the vast majority of Ukrainians now want a,
+resolution to the conflict, even if it means making concessions.
+Yeah, I know.
+I wouldn't, you can't dispute this.
+Of course, they've got war fatigue like they should.
+This is what democracy means to me is that we should actually listen to the desires of the
+Ukrainian people.
+Russia has five times the people, three times the munitions, are three times the people,
+five times the munitions.
+They have an industrial base.
+This, you know, for Ukraine, I think the next step here is, um, there has to be a
+negotiated piece here.
+This, this can't go on forever.
+Europe is not in a position, I think, to provide what they claim to want to provide.
+In the United States of America, I mean, part of the problem is, in other people have made this point, that even if you spent, let's just say we wanted to spend another hundred billion dollars, the industrial base doesn't exist to build all of the stuff that they need right now anyway.
+Like, there's a real problem here.
+And I think President Trump campaigned on the idea of negotiating a piece.
+I don't know why that's so controversial.
+And I'm not saying from you, I'm saying, but the pundits.
+Yeah.
+It's like he can't, you know, the idea that, you know, Russia has nuclear weapons.
+The idea that he wouldn't have a one-on-one conversation.
+Yeah.
+That's why I asked that question, like, is there any steel manning of this position that we shouldn't meet with Putin or, you know, President Xi or Kim Jong-un?
+We should obviously meet with all of them.
+It makes sense if we have even a 1% chance of making forward progress.
+When should the United States, Senator, say enough is enough?
+if we're out, figure it out for yourselves. You've got the EU right there. You got Europe. They've
+got plenty of money. But America's out. If you want to buy some weapons, we sell weapons. That's
+fine. And I think Trump has done an amazing job of enforcing the loan lease that Biden set these
+up. So when we keep saying we're spending $100 billion, that's no longer true, right? We're getting
+all that money back because Trump forced Zelensky to the negotiating table. We're getting all that
+money back. But when should we, just so we have clear facts here that it's not costing the American
+people, you know, there's hundreds of billions of dollars anymore, thanks to President Trump,
+deaf negotiator. I'll give him credit, where credit is due. But when should we, in your mind,
+step back and say, you know what? Not our problem anymore. You guys figure it out. Because
+that seemed Vice President J.D. Vance, a friend of the pod's position as well. At some point,
+we have to say enough. And Trump sort of said that, too. He alluded to that. At some point,
+we're out. Are we at that point if this doesn't get resolved this time around you,
+I think. Yeah, I think that that's what this phase is all about, which is to give a legitimate
+peace process a chance. But the idea that we're going to be voting on, I mean, I wouldn't
+support it more a taxpayer aid to Ukraine for a war that, you know, doesn't seem to look like it's
+ever going to end and is a blank check. It's just unacceptable as a senator for a state in the
+United States of America, right? Like, it's just not. Now, President Trump, I think, has opened up
+avenues to sort of make it clear to both parties that there's pressure that could be ramped up to
+try to bring this to a head. And I think that's where we're at. It's not going to all happen
+today. It's not going to all happen tomorrow. But that's really what this diplomacy, in this TikTok
+aves that we live in, I think we think it's instant gratification. But diplomacy is difficult when you're
+dealing with other countries with their own national interests and their own sort of inner dynamics.
+Possible we walk away this year from the situation, you think?
+I don't know.
+I wouldn't want to put a timetable on.
+I would not want to get in front of the president who's actually sitting in front of the across the table from these world leaders.
+But look, I think that he's been pretty clear.
+This is not our war.
+It's not our war.
+But I think that up to this point, we've wanted to try to provide a time and space for a solution.
+And I do think if there's anybody who can do it, it's Trump.
+There's nobody else on the planet.
+I mean, Macron could not broker this.
+I mean, you know what I mean?
+So it's the last best hope.
+My hope is that you do get to a peace process because you're just going to have billions
+and more people die in really at this point.
+What do you think, Sacks?
+You think we should walk away if we can't get this resolved with this latest volley of negotiations
+or at some point, should we, to the president say enough?
+Because he seems exacerbated based on his public statements about this.
+He's kind of exacerbated with the two parties, it seems.
+Well, look, you're asking me what the president should do, and I'm not on the foreign policy team.
+I'm not going to venture and wait into that.
+Is it a possibility?
+I'll just say this.
+I'll just say this.
+Listen to what the Ukrainians want.
+I mean, Zelensky's interests may not be the same as his peoples, because as long as there's a war, there's no election.
+They've canceled democracy over there while the war is going on.
+And as long as that is true, he stays in power.
+So he has incentives that may not be true for all of his people.
+His people want a negotiated peace.
+And you think if they give up the Dombas and whatever other regions, you know, are on the table here, do you think Putin stops here?
+Or do you think we'll see him invade another country?
+Do you worry about that, Sachs?
+Do you worry that this is enabling his behavior, his worst demons?
+I don't think the Russians have the intention to invade another country and they don't have the capability.
+Look at how much trouble they've had.
+We're now three and a half years into the war.
+They're definitely winning the war, but they've only conquered this eastern part of Ukraine.
+Pretty humbling for them, yeah.
+They haven't made it to the kneebird.
+I don't even think they can conquer all of Ukraine, or at least it would be extraordinarily
+difficult and resource consuming.
+So I just think that this threat of Putin conquering or attempting to invade all of Europe,
+this is threat inflation.
+That's my takeaway from his senator.
+It's like, Putin couldn't even take.
+Ukraine? I mean...
+Agreed. This is part of the inconsistency of the argument that I've heard in the Senate
+for two and a half years, which is that he's Hitler, that he's about ready to march through
+Europe. And this is a, we can't be Neville Chamberlain. And this is the moment. But at the
+same time, he can't get to Kiev, right? Like, both things can't be true at the same time.
+And he's got... I think he just have to recognize the realities.
+I mean, like, recruiting North Koreans to fright on the front line. I mean, like, what? It's so
+humiliating for him. All right, listen, Senator, you're welcome on the pot anytime. Great having you
+here. Everybody by the book. It's out right now. I don't know if this interview you were expecting,
+but no, I talked to him before you came on and I said, hey, listen, to keep it not like a monoculture
+here like, Tucker and the senator were like high-fiving the whole interview, but it was great. It was a great
+interview. It was a great Tucker classic. You need to have a little spicier to figure out. I love the debate.
+I love free speech, which is why I wrote the book.
+book, the last line of defense, how to be the left and court available on Amazon right now.
+All right, everyone check it out.
+Everybody buy the book.
+All right, everybody.
+We'll see you next time.
+Bye, bye, bye.
+Great guys.
+Thanks.
+Great job, everybody.
+It was fun.
+I'm a moderate, truth be told.
+left calls me a maga retard and then the right calls me a libtard so the only thing they have in
+common is they both think right i'm an idiot right yeah so i'm uh well if everybody agrees then
+maybe there's something to it it could be consensus if you finally there's your cold open folks

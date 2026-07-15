@@ -1,0 +1,845 @@
+source: allin_youtube
+published_date: 2026-06-09
+video_id: 0umrMuUClC4
+url: https://www.youtube.com/watch?v=0umrMuUClC4
+title: Bill Maris: How Google Could Crush AI Competitors, Why Small Funds Win, and AI's Atari Stage
+
+After [music] saying he was out, now
+Bill Maris is returning to the investing
+world. The founding CEO of Google
+Ventures has raised [music] $150 million
+for his new fund called Section 32.
+>> With a smaller fund, I have the
+advantage to be very selective in the
+companies that I invest in, the people
+that I hire. We're going to invest for a
+financial return. Any other metric is
+impossible to measure and therefore
+won't succeed.
+>> Think of the change that [music] has
+happened just in the last 100 years and
+what's about to happen in the next 100
+years with the advent of AI. The world's
+going to change by orders of magnitude.
+>> Thank you very much for that warm
+welcome. I am Bill Maris. I'm the
+founder of Section 32. Prior to that, I
+was the founder and CEO of Google
+Ventures. I was also Google's Vice
+President of Special Projects where I
+incubated Waymo and Google X, Calico,
+and many other
+projects as well. And before that, I
+founded a web hosting and data center
+company,
+which we're going to talk a little bit
+about.
+And
+today I think I'm going to talk to you
+about a few of the lessons I've learned
+on these interesting experiences I've
+had in life. So, we'll start We're going
+to have four lessons I'm going to talk
+about and we're going to go back to 1997
+to start when I was a fresh college
+graduate. I had a degree in
+neuroscience.
+And I found myself on Wall Street.
+Somehow managed to land a job there, but
+I was miserable having to wear a suit
+and trudge to work in the heat, but one
+good thing came of that, which was I
+looked in the closet of the office one
+day and I saw a server. And I asked,
+"Well, what is this
+thing beneath our jackets?" And they
+said, "Well, that's where our email and
+websites
+live." And And as can happen to many of
+us, I I had a moment where I felt like I
+was bathed in the light of inspiration
+and and I thought
+I thought
+I think I've glimpsed the future.
+Uh I I I I think I can maybe make a
+business out of this because
+if you can have our website and email in
+your closet, how many websites and
+emails could I put in my closet? So, I
+immediately quit my job
+I because I I had I had kind of glimpsed
+through a keyhole and through that
+keyhole I thought I saw the internet and
+I saw a data center and it looked
+something like this or maybe when I say
+data center
+you think of a something like this or
+something like this, but in 1997
+the state-of-the-art data center looked
+almost exactly like this.
+We had three servers,
+a small, medium, and large. Uh
+business grew, we eventually had five
+servers
+and this isn't a data center at all.
+This was my apartment where I founded
+the company
+with credit cards
+and the servers lived in one room.
+The work happened in the other room
+and we get very hot in that room
+and this was in Vermont. So, I opened
+the windows and then we get very cold.
+So cold in fact
+that by noon if you had a glass of water
+on your desk it would ice over.
+You may think though
+this isn't so bad, but but actually this
+was also my apartment as well. This was
+the bed
+and you may look at that and think well
+you've got a mattress and a nice pillow
+and then look at that nice blanket, but
+this is a rug I got from Home Depot to
+keep myself warm on those nights and one
+day
+there was a thunderstorm.
+The roof started to leak
+and I knew I needed to do something
+because water and computers and servers
+don't mix well. So, so I called the
+landlord and said
+the roof's leaking. The landlord said,
+well, that happens sometimes.
+But I knew that I needed to do
+something. So, when you don't know what
+to do, you go to Home Depot. I got a
+bucket of tar and a mop, and I went up
+on the roof,
+and there was lightning, and there was
+rain, and I went up there and I I tarred
+the roof.
+And I did not glimpse the future in that
+case because I didn't know when you're
+tarring the roof that you should start
+at the far corner and work towards the
+door rather than
+the reverse, and I tarred myself into a
+corner, but the choice that I faced was
+either
+the servers get electrocuted, or perhaps
+I get electrocuted, but as an
+entrepreneur, I was willing to take that
+risk, which, you know, news flash, I
+survived. Uh my shoes, though, are still
+stuck on that roof uh in Vermont, which
+takes me uh to uh
+lesson two, which is
+to see the future, sometimes you need to
+be a little bit insane.
+Uh
+it may appear to those around you that
+you were tarring the roof in the
+thunderstorm,
+and to that point, I'm going to share a
+few slides here that a friend named
+Stewart Butterfield was kind enough to
+share with me.
+And here's the inauguration 1989,
+>> [snorts]
+>> and
+there's someone taking a picture.
+That makes sense, probably a film
+camera, and
+2005, it it's not very different.
+There's still someone back there taking
+a picture, and then
+let's go just 4 years later, to another
+inauguration,
+and if we look closely, it's quite a bit
+different
+because now everybody's got a camera.
+Everybody's got a camera, and this was
+kind of before cameras were mushed into
+cell phones. It was kind of around that
+time it was starting to happen, but but
+that's not the most interesting thing
+about this photo because in this crowd
+is someone who, to his friends, I'm sure
+seemed insane, who also did glimpse the
+future. If we look closely,
+this gentleman has decided to, I don't
+know, live stream, or record the
+inauguration on his laptop. Uh
+he knew something that those around him
+didn't know, which is one of the things
+that I've always looked for in
+entrepreneurs is they know a secret
+about the future that most of us don't
+believe.
+Let's fast forward to 2007.
+I find myself somehow at Google.
+Uh and a challenge was given to me.
+Uh the challenge was Google needs a
+venture fund.
+Uh we were starting to make some
+investments. Uh we didn't have a
+coherent strategy. There were no
+budgets. I had to figure out what to do.
+Uh so I
+first found a friend, Rich Miner, who's
+the co-founder of Android,
+uh and he became my partner in crime as
+we conceptualized what what could Google
+Ventures be. Uh we went up and down Sand
+Hill Road and we
+we talked to
+everyone. Anyone that was willing to
+talk to us and have a conversation, we
+were willing to talk to to see what we
+what we could learn.
+Uh
+we came up with a plan.
+Our plan was to obtain all the data of
+venture that we could find. And being
+Google, you can imagine it was a lot of
+data. Historical data, you name it.
+Uh
+then we decided we would as step two use
+AI, but at that time
+Google would not let us use the term AI.
+And this persisted for many years.
+Bill,
+AI is science fiction. It is it's a
+hundred years away if it's ever going to
+happen.
+Uh let's stick to machine learning. By
+the way, when you say AI, it freaks
+people out. So stop freaking So we had
+to call it machine learning
+and we used machine learning to do two
+things: design
+the ideal portfolio construction by
+running millions and millions of
+simulations and back testing and all of
+the things you can imagine that data
+scientists would do.
+And and to determine what the ideal fund
+size would be. And people were excited.
+Here's a headline from TechCrunch at the
+time.
+And and people that inside of Google
+were also pretty excited. This is one of
+the senior execs I later learned had
+this to say.
+And you know, I I have to admit it
+seemed crazy. The plan seemed crazy at
+the time, but let's look at how it
+turned out. So over this time period
+2009 to 2018, top quartile VC returns
+looked like this and top decile looked
+like this.
+Using publicly available information,
+I'm not sharing any
+non-public proprietary Google
+information. We would estimate Google
+Ventures returns at about 4.1x.
+And I
+adhered more closely [snorts] to the
+strategy and the investments that I led
+and the investments that I led turned
+out like this, which takes me to lesson
+three, which is don't bet against
+computer science. I've seen it
+happen many many times and many many
+fields. If you apply the right kind of
+computer science at the right time to
+the right problem,
+you will get to the right answers. I
+would not bet against it.
+Even if it looks like you're tarring the
+roof in a thunderstorm. So let's fast
+forward to 2017.
+I decided to start my own fund. And
+again, those around me said, "You're
+insane. Why would you do that? You're in
+the warm womb of Google. Lunch is free
+and the massages are plenty and so
+forth." But after the idea, you know,
+sunk in, I the advice turned into raise
+as much money as possible. You know,
+that's the right way to run a fund.
+You'll get a big management fee. You'll
+be happy. Things are going to work out
+really well for you.
+And I thought about that relative to
+everything I had done up to that point
+and I decided to to not take that
+advice. And
+over the course of my time at Section
+32, we've had six funds. We've invested
+in companies like CrowdStrike and Cohere
+and Coinbase.
+And all six of those funds have
+averaged
+about 400 million in size and all are
+performing in their top decile. And to
+the extent there is DPI to measure,
+that's the only measure as far as I'm
+concerned in venture that counts is DPI,
+which takes me to lesson four. That this
+is this will be heresy to some, but
+small funds outperform large funds. This
+is simply the math. This is not
+an opinion I'm trying to convince you
+of, but there are many reasons for this.
+Smaller funds you can have more focus.
+You have I mean I've I've already
+managed a multi-billion dollar fund with
+hundreds of employees. It's distracting.
+You cannot give the attention to
+founders that I would like to give.
+It
+There There are many reasons for this.
+And if we look at
+top decile performance of DPI,
+um
+funds smaller than 750 million average
+return of 4.76x and funds larger than a
+billion
+2.42x.
+Funds below 750 million across that time
+period represented 95% of top decile
+performers with discontinuous return
+compression above 750 million.
+Why is this? There's a lot of reasons
+for this.
+You can use your own numbers, but I'll
+just do a little thought experiment. If
+you have a 500 million dollar fund
+and let's say on average these days you
+can own 10% of a company,
+you need 5 billion dollars of exits to
+get your money back. Let's just remind
+ourselves that the 75th percentile of
+venture loses money
+and there is persistence of performance
+of the top quartile. So So if you need 5
+billion to get your money back and and
+if you want to be in this business for
+the long term, let's say you set your
+your goal at 3x, you you need to return
+15 billion dollars of exit value in your
+companies. Now if you have a 7 billion
+dollar fund and we do the same math
+through
+you know, you've got to return 210
+billion. 7 billion to to 70 * 3x is 210
+billion, which uh
+exceeds the total venture-backed M&A and
+IPO exit value in most years.
+Uh
+this year may be an exception, but I
+that is something I'm looking forward to
+talking about when we sit down. For
+those of you we've crunched the numbers,
+we've done all the math. Those are
+Bill's four lessons for today. I hope
+that they're somewhat useful. There's a
+lot of stories behind all this and I'm
+looking forward to talking about them
+for a few minutes with the guys. Thanks
+so much.
+>> You guys are old friends.
+>> Yes, we are.
+>> We go way back. Well, Bill's when he
+started Google Ventures
+I was the first ex-Google
+company you invested in.
+>> That's correct. And
+>> How did it go?
+>> Climate Corp. A billion-dollar exit to
+Monsanto.
+>> What was your multiple? What was the
+return?
+>> Oof, I don't know.
+>> It was actually good for you guys.
+>> It was quite good, yes.
+>> Yeah, you guys were in the B and the
+>> Yeah. It was when billion dollars was a
+a lot of money then.
+>> That back then that was a good deal.
+>> That would have been That would have
+been the seed round.
+>> Like an A round?
+>> Yeah, that would have been your A round.
+Now we're going to do it again with A
+Halo, so
+>> Now we're going to do it again with A
+Halo. Um so
+you know, I just want to juxtapose what
+you said with what Thomas shared.
+They've got a very large kind of capital
+base that they invest and they're
+investing significantly in these later
+stage rounds of these well-proven
+companies where it's, you know, the data
+he shared is that you can get
+significant multiples to get to that
+next phase. You know, you're more likely
+to go from a billion to 10 billion and
+then you're more likely to go from 10
+million to 100 and 100 to a trillion,
+trillion to whatever.
+Um you know, doesn't that justify an
+alternative strategy to what you're
+saying of having smaller funds focused
+on venture that you can maybe barbell
+it, have smaller vehicles focused on
+venture, and then very large vehicles
+that bet on the sure things that have
+that durability and that compounding
+advantage, and you can kind of have the
+two together both be 3x return.
+>> So, my observation on that would be one,
+I haven't seen the data science to
+support that second conclusion of the
+late stage companies that that can be an
+an ongoing trend other than this one
+moment, this weird moment in time with
+these multi kind of trillion-dollar
+exits that are coming. That that would
+be kind of observation one. Two,
+um would be at a certain point and this
+is not a negative, it's just an
+observation. If you're an RIA and
+you're, you know, collecting assets,
+that is not venture. You know, venture,
+as I practice it at least, is a
+different craft where you are making
+concentrated bets of your time and
+capital on entrepreneurs and helping
+them build a business. And there's
+nothing wrong with late stage investing.
+However, I also have a an observation
+that
+I I a uh a bit of an objection to
+uh companies that wrap themselves up in
+public benefit
+language and then
+uh
+keep the value creation uh to themselves
+and an elite group of investors through
+a big part of the curve and then say,
+"Well, we're here to benefit humanity."
+Well, what humanity needs is money. So,
+it would it might be better to go public
+sooner because we'll see how these
+multi-trillion-dollar IPOs go. However,
+if I'm Google and I don't speak for
+Google and I decide to arbitrarily cut
+the cost of, you know,
+tokens to 80%. I'm going to cut them in
+What happens to the business models of
+Open AI and Anthropic at that point?
+>> What happens? Tell us.
+>> Actually, what you know, what does
+happen?
+>> well, if you're a company and you can go
+to Google and Gemini and you can pay 80%
+less
+for that
+basically identical product
+why wouldn't you do that? And then the
+compression and the pressure on those
+other businesses goes super critical.
+>> What are the chances that the other shoe
+has fallen that
+>> might happen.
+>> If I were Google, that's what I'd do.
+>> Walk us through the scenario where
+Google decides with their war chest
+with their money printing machine, you
+know what?
+Their margin is my opportunity.
+I'm going to give tokens out 20 cents on
+the dollar. Every time they lower their
+price, I lower our price.
+What happens
+on the playing field? Walk us through
+that.
+>> Would that not be the rational thing for
+>> It's clear they're going to do it.
+>> Well, it may not
+>> be a margin though to the
+>> They they may be burning investor cash
+sort of like an Uber type model, grab
+market share,
+>> Capital as a weapon, tokens as a weapon.
+>> Token as a weapon, grab market share,
+grab an install base on consumer and
+enterprise. But fundamentally at some
+point, you got to have cash generation.
+>> So that's 100% possible.
+It's 100% probable.
+>> Look, I'll just it's been said before, a
+trillion for spend commitments
+on 60 billion dollars of revenue. And
+now you're going to go to the public and
+hope that retail is going to pick that
+up.
+>> Yeah, tell tell us about companies
+staying private longer
+and how unfair that is to the bottom
+half of society who don't get to
+participate in it.
+>> for those 99% who are mostly not us,
+right? So So your 401, you know, those
+401ks, those retirement plans to get
+into those companies now which are
+getting bizarre exceptions to S&P 500
+rules that they're all of the rules are
+being broken.
+Uh the passive funds, the uh ETFs are
+going to have to pick them up. And where
+do you think we are on that curve of
+value creation? Could they go 3x from
+here? Sure, but
+>> So the
+just to say it as plainly as possible,
+we're going to force overpriced products
+on the 401k holders of America who
+didn't get to participate early. This is
+your position that this is profoundly
+unfair and creates more wealth creation
+for the people who don't need it and it
+makes the people's retirement accounts
+the bag holders.
+>> There's a lot of risk in that and my my
+my objection is don't say you're doing
+this for the benefit of humanity and do
+the other thing.
+>> Make the public's retirement accounts
+the bag holders.
+>> Or just say this is how we're running
+our business and this isn't for the
+benefit of humanity.
+>> Bill, do you think that
+what happens to venture? I asked Thomas
+this question.
+When these dollars get distributed,
+there's going to be a handful of funds
+that have ginormous returns. I mean just
+unbelievably excessive. Founders two,
+you know, is going to print a hundred
+billion dollar return on two hundred
+million dollars of invested capital.
+But that's one fund in isolation.
+>> Right.
+>> Right. And there'll be a few. Your funds
+when you were at GV are going to print
+an enormous
+upside.
+And so if you don't look closely though
+at beyond the averages, venture's going
+to look incredible. If you look past the
+averages, you're still going to look
+extremely bimodal. A handful of winners
+and a ton of losers.
+>> How does that play out?
+>> one, that's how venture is, right? 75%
+of funds lose money. But two, in order
+for Founders Fund or pick any fund to
+get that hundred billion out, they have
+to sell that stock to someone else.
+Otherwise it's just on paper. So who's
+the buyer for that? Is it is it retail?
+Is it
+you know, what
+you've got to make a a business case in
+the public market that can show that
+this business is worth a discounted
+value of its future cash flows. And so
+whether it's SpaceX or Anthropic or so
+forth, like can that case be made? We'll
+see six months after or so. I know
+they're playing with the
+with the lockups to kind of drag that
+out, but we'll we'll see what the public
+market thinks of that.
+>> Okay,
+so we have we have this one set of
+companies
+and then there's everything else. What
+do you like in the everything else
+bucket as a venture investor?
+>> So so I'm going to make an analogy to
+the gaming industry. We all I get asked
+and we all think about, "Well, what does
+the future look like, you know, when
+when AI is everywhere?" And and there's
+doomers on one side and utopians
+>> Zork?
+>> on the other. That's Zork. I'm going to
+get to that. Just just give me Bear with
+me 30 seconds. It's probably not as bad
+or as great as everyone says. So, let's
+look at the gaming industry. So, I used
+to play this game, Zork. There's one
+called Planetfall back in the '80s. And
+it was very brittle. It was turn
+response, turn response. Grab the lamp.
+Oh, I didn't It's a lantern. I should
+have said lantern. Go north. And and you
+wait for the computer to respond. Let's
+show the most sophisticated retail
+available AI system out there today on
+the next slide. And tell me how
+different it looks. So, so what what's
+happened to the gaming industry from the
+'80s to today is going to happen in AI,
+but in the next like five years. So,
+that will be compressed in terms of how
+quickly that change happens. But, we
+would all agree games are better today
+than they were then. They're photo
+realistic. You can like inhabit them.
+And they're they're they're moving very
+quickly. On the AI side, there'll be
+ambient computing. There'll be uh
+The problems that Zork had will be
+solved for AI. Lack of memory, lack of
+consistency, session resets, and and so
+forth. How did we get there? You have To
+answer your question,
+I don't plan on investing in kind of
+larger models, right? Just like wasn't
+uh better stories that would make better
+games. It was controllers and physics
+engines and GPUs and and those are the
+parts of the AI uh cycle that I'm
+interested in, which is which is all the
+platforms that need to be built to
+>> machinery.
+>> You're correct. That is going to make
+this reality real in the next five
+years. And it's not just bigger models.
+I think we're at the Atari command line
+stage of of AI. And we're going to get
+to the, you know, PlayStation 10 stage
+in the next five years.
+>> You uh you also used to do a a of stuff
+in life sciences.
+>> Yeah.
+>> Um not as much anymore.
+Yeah.
+>> My interest in life science, I founded
+Calico and been very interested in that
+space and we were investors in Flatiron
+uh and Veer and lots of other companies.
+Uh I'm very interested in that space
+because it has a dual benefit of helping
+people and also do good, do well.
+>> Correct. However, uh the uh the
+therapeutic space that requires human
+clinical trials is a specialist
+investment area that uh
+we're not uh spending a lot of time on.
+I'm very interested in computational
+biology and and and those areas, which
+is
+>> if you just look on X that there's a
+renaissance happening in human health.
+I don't know if that's true, whether
+it's cures for pancreatic cancer, cancer
+vaccines, peptides, obviously. There's
+just an explosion and a lot of it seems
+to come back to computation.
+Um
+but this class of winners so far is not
+really computationally driven. It was
+just really good science 10 years ago.
+>> Yeah.
+>> And so do you think that we're about to
+see this massive
+>> I hope so. So I started Calico and and
+again it was like fringe science
+longevity at the time. And now we're
+investors in uh um New Limit, which is
+Blake Byers and uh and Brian Armstrong's
+company and a number of other companies
+in that space, which doesn't seem so
+crazy anymore. However, because of the
+human biology and the FDA, if you find a
+compound and you think you've got
+something, that's like 5% of the work.
+We there's still all kinds of titrating
+and safety testing that needs to go on.
+And so I don't think it's going to go
+quite as exponential as we would all
+like it to. However, if we can achieve a
+realistic simulation of a human cell in
+silico, then you will see that
+accelerate as well. We're not quite
+there yet.
+>> But generally we're seeing some might
+say a flight of capital to India and
+China right now. Are you seeing that
+that their biotech path to market is
+faster if you invest in firms that are
+based offshore versus the US.
+>> has always um uh
+indexed on human safety over speed to
+market, and that has cost us in some
+ways. However,
+some other countries are indexed in the
+opposite direction, which costs lives in
+that. So, there's a balance there, uh
+but there are certainly
+there's research going on in China and
+other places, experiments in cloning and
+all sorts of things that that as far as
+I know aren't happening here. Uh so,
+yes, and I think the gutting of the CDC
+and the NIH and and anti-science
+vibe that has now pervades this country
+has driven a lot of mind share elsewhere
+as funding is drying up for basic
+research.
+>> China's got their own paper clip model
+now. They're recruiting some of the best
+scientists from Europe and India, and
+they're all emigrating to China
+>> Yeah.
+>> to go do work, and that used to be a
+scientific pool that we used to access,
+and we used to recruit.
+>> And we're losing We really need the the
+the neurological reserves here.
+Uh and this business with
+>> Or brain trust would be another way to
+say that, but yeah.
+>> well. But the the H-
+the the the pushing out of H1B holders
+like there's so much happening now that
+it's causing it's just easier to go
+elsewhere. That's not good for science.
+>> What's your view on what's been called
+deep tech for the last decade? These
+traditionally long investment cycle,
+capital intensive, high-risk like Elon
+is one of the few entrepreneurs that has
+successfully tackled uh deep tech
+business model with SpaceX and Tesla. Is
+this becoming a more tractable area for
+entrepreneurs to activate and for
+investors to invest in because of AI
+enablement and physics engines and
+>> Absolutely, cuz things are moving so
+much faster. What
+>> like that are you focused on investing
+in?
+>> I mean human biology and healthcare
+that's probably the largest TAM in the
+world. So super interested in that. And
+then all of the others I I mentioned
+that kind of underlay
+the AI revolution which are the the
+physics engines and the controllers and
+the GPUs and the everything that is
+going to take to to get us there.
+>> I want to
+bring I want to bring Sax and Freeburg
+before we run out of time if it's
+possible. Sax
+I'm curious your thoughts on the venture
+capital business. I think you've did
+five craft funds or four?
+>> Well, we've done four venture and two
+growth.
+>> I'm assuming you're going to be going
+back into the venture business. But I'm
+curious your take on when you started in
+venture and when we started as
+entrepreneurs 25 30 years ago, this was
+a much different playing field. What are
+your plans based on you know sort of
+Bill's
+um look at this and do you believe in
+the $500 million fund sweet spot or do
+you think you need to become Andreessen
+Horowitz when you go back to the private
+sector?
+>> Well, I don't I don't think we need to
+become Andreessen Horowitz um but um
+you know, I I look I think fund size
+determines fund strategy.
+And the size of your fund cuz you're
+going to divide your fund size by 20 to
+25 names to achieve some
+portfolio diversification and
+construction. That'll determine your
+check size and that sort of determines
+where you play in the market.
+The thing that's spinning through my
+head after Tom's presentation
+is you know, are you better off just
+focusing on you know, let's call it what
+used to be called I don't know late
+venture early growth. You know, you're
+writing $50 million checks. You just
+kind of wait for the breakouts as
+opposed to playing in this really noisy
+super early stage game. Well, I think
+the problem
+with that is we have to look at the
+incentive structure of venture. So a
+$5 billion venture fund that returns
+1.01 X gets to say that they are in the
+75th percentile and can raise their next
+fund, and no one at the Stanford
+endowment is going to get in trouble for
+writing that check. They need to put two
+or 500 million into a fund multiple
+times.
+So, so I understand that dynamic. So,
+now let's look at the GP dynamic. Well,
+if I have a $5 billion fund, I return
+1.01 X, I'm going to make more money
+than Bill with his $500 million fund
+that returns 3 X.
+Okay? So, that's also a strange
+incentive. So, now let's look at the
+entrepreneur side. I am researcher X
+from Open AI. I'm going to start a
+company.
+Bill says, "I'll give you $20 million at
+a $100 million valuation. I want to buy
+20% of your company."
+Giant fund Y, we're friends, it's a
+different model, but giant fund Y says,
+"Well, we have this giant fund. We need
+to put 250 million in."
+And then an entrepreneur says, "Well,
+but my company's valuation is 100." No,
+your valuation is now 4 billion. And
+we'll give you 250 million for a percent
+of your company.
+They're going to take that deal every
+day.
+Unless you're a seasoned entrepreneur
+who has kind of been down the road and
+knows the pitfalls of that. And so, the
+incentives are broken in all those ways,
+and the pendulum will swing back. So, I
+don't think just staying late stage and
+waiting to snipe her at larger companies
+will be a long-term The The data would
+suggest that's not going to work in the
+long term.
+>> Okay, let's thank Bill. Amazing job.
+>> Thank you.
+Thanks, Bill.
+>> [music]
+[music]
+[music]

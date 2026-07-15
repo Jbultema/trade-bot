@@ -8,7 +8,7 @@ execution:
   transaction_cost_bps: 10.0
   rebalance: D
   signal_lag_days: 1
-primary_strategy: i111_reentry_vol_target_fast_21d
+primary_strategy: i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145
 universe:
   broad:
   - SPY

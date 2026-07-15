@@ -1,0 +1,500 @@
+source: allin_podscripts
+published_date: 2025-10-15
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/how-orlando-bravo-built-one-of-the-most-successful-firms-in-private-equity
+title: How Orlando Bravo Built One of the Most Successful Firms in Private Equity
+
+With one of the best track records in private equity,
+Homa Bravo manages $179 billion in assets.
+Homa Bravo has grown at a blistering pace.
+Last year, the firm returned over $13 billion to investors.
+In 2019, Orlando became the first Puerto Rico-born billionaire.
+Private equity firms, the good ones, definitely beat the public markets.
+We are in the business of turning great innovators into great businesses.
+Ladies and gentlemen, please welcome.
+Telma Bravo's Orlando Bravo.
+Nice to see you.
+Thanks for coming.
+David.
+Good see you.
+For those that don't know, let me just do a couple of data points
+and then we'll just jump into the story
+because Orlando hasn't in...
+Wait, Jamath.
+Are we seriously going to ignore whatever virtue signal?
+laying J-Cal is doing over here.
+Okay.
+What's this virtue signal you got going on?
+What are you doing right now?
+This is in virtue system.
+This is my bestie, Tulsi, gave me an official scarf from her office for my wife,
+and I stole it for my wife.
+So I'm wearing it.
+Orlando, Umi probably didn't see it yesterday, but Jason was run over by the Director of National
+Intelligence, Tulsi Gabbard, yesterday.
+He was so tilted, she was walking through the Russia hoax.
+He was so tilted, he had his phone.
+Googling and grokking trying to get
+and all he could come up with is this
+and literally in this tone
+what about Paul Manafort
+and nobody knew what that meant
+because nobody knows who he is
+including her
+okay so
+oh chamas amore
+why do you not have beat up on a Jason so much
+you should be a nicer to him he is
+you're the bestie
+sorry continue
+Orlando has an incredibly inspiring story
+but let me just set the backdrop
+of what Toma Bravo is
+Toma Bravo started in 2008, so what is that, 17 years now, and now has just a little under 200 billion, which is incredible.
+But here are the two stats that stunned me.
+In June, you raised $34.4 billion in basically like a set of fun vehicles, which is, I want to understand how that is even possible.
+And then you basically have owned now or 500 companies, and many of the big software companies that we probably interact with and have to deal with.
+But before we get into all those details, I think what's inspiring is you are a child of Puerto Rico,
+a small town in Puerto Rico.
+And I've texted you this before, but I just wanted you to tell everybody, how does a guy,
+and I'm saying this in a nice way, from literally the middle of nowhere, get here.
+How does that happen?
+Your parents, your family, like, how does that happen?
+Well, by the way, thanks so much for having me.
+And I'm not sure how we're supposed to talk about.
+serious stuff and private equity when we have this, but I'll not. You persevere. I got this.
+Look, that touches my heart that you ask that question. Because when Hurricane Maria hit Puerto Rico,
+kind of everything stopped for me because my best friends are there, my family's there,
+cousins, my whole upbringing. I got there on a plane the day after. And where were you at the time?
+I was in San Francisco. Okay. And we had gotten a message.
+from Puerto Rico saying there's some shelters, particularly one that was really close to my hometown
+of Mayaguay, that had only two days supply of food and water. And there were all these kids
+and everything else. And the government of Puerto Rico, they had trouble serving these towns.
+So we said, we'll go from San Francisco and bring you a bunch of food and water. We'll be there
+tomorrow. And they actually showed up. When I landed, three of my friends that I hadn't seen in
+a while, my best high school friends, one of them asked me, oh, now you're doing all this business
+stuff, how did that happen? And I said, well, the odds are one of us had to get lucky.
+Out of everybody here, one, I mean, there's some odds to that. But was that something like
+your parents gave you, where they're like, you have to go, you have to do something, or?
+Yes. Now, at every turn, I tell you this, how exactly I got here, I've never created anything
+new, but I always had my mom, who was a Cuban immigrant, and for her, just me staying there,
+it didn't feel right to her.
+She was always, you know, she would put me in positions where I would always have to be traveling
+to San Juan to play tennis, the sport of tennis, individual.
+Then if I did well, I remember I played my first tournament when I was 10 years old in Caracas,
+Venezuela, and I saw wealth back then.
+Caracas, Venezuela in 1982, was quite a place, and you played in this fancy club,
+and then you know if I do really well I get to play in Florida so she was always always kind of giving me a road map for that
+I was lucky that I wasn't that good to go pro so I went so so that I went into business but then the same thing at work you know I had the two best mentors and the only thing I give myself credit for is at a young age I really listened I had discipline and I would kind of kind of take it all in you are also the beneficiary of an incredible mentor and there's these great stories yesterday we heard you know Vlad tried to get a job at climate
+couldn't, started Robin Hood, you know, famously, my HR lead at Facebook introduced me to her
+then boyfriend, Ben Silberman. We interviewed Ben. We ended up not hiring him. He immediately started
+Pinterest. And when you graduated from Stanford, you only got one job offer from like a three-person
+firm, basically. Do you want to tell us about that story? Yeah. In 1997, there was not much
+private equity and the venture business, you didn't hire a lot of people. It was also small.
+Now, I want to add this to the story. I got one interview with one of the largest private equity
+firms at the time, and the head of the firm spent time with me. Very, very nice guy. But you know
+what he said, and this is 1997? There's not much opportunity in our industry anymore,
+and the industry is taken. Now our firm is multiples bigger. Yeah.
+They are, and the same thing will happen in the future.
+For the few of you that may be interested in private equity,
+you'll come by and create a firm and the American spirit and entrepreneurialism
+and being at the right place at the right time because we started doing software,
+and it's hard not to do well if you started doing software back then
+and had all this win behind your back.
+So I couldn't get a job.
+There weren't many, and then Carl Toma hired me.
+And at the end of the process, it's interesting.
+There were a few private equity firms that kind of opened up a position for me,
+to do Latin American private equity.
+And I'm like, no, I've spent too much time in the South.
+The money's in the North.
+I, you know, I want to do U.S. buyout tech.
+That's what I wanted to do.
+And Carl was great.
+He said, if you want to do tech, that's not something we do, but, you know, start looking
+at it and we'll help you.
+And so just tell us about how the decisions you've made now to build this business.
+How many people do you have?
+How do you run $200 billion effectively?
+How do you raise $34?
+What do you tell people to raise $34 billion?
+I don't even comprehend that.
+I think you do.
+Come on.
+You guys have done pretty well.
+I appreciate that.
+But it's, okay, so we have, we are very, very focused on keeping the team very small.
+So we have about 230 people at Toma Bravo within the organization.
+The reason is if you have too big of a team, you become internally focused.
+and start dreaming about conversations internally.
+And as I always say, the deal's not in the office,
+the company's not in the office,
+and the buyer of your company is not in the office.
+So you always have to be outward facing.
+The second thing is I got the benefit,
+and so did my senior partners of incredible mentorship.
+I can tell you so many stories about Carl Thomas spending time with me
+in 1998 on the deal we were going to lose.
+And I would be like, why did you spend all that time with the CEO
+and me on his kitchen table?
+He wanted to teach him.
+We had a cell.
+He wanted to teach me how to do a deal.
+And that was just incredible.
+So if we have too many of those, we can't touch the next generation leadership.
+So that is part of our philosophy.
+Now, how do we raise that money?
+Look, our first deal, it's always been one step at a time.
+Our first deal was $50 million.
+The second deal was $100 million enterprise value.
+The third was data tell at $250 million.
+We didn't buy a company in Silicon Valley until 2010.
+That was Sonic Wall, that we paid $550 million and it take private.
+And that was our first foray into real cyber in higher growth businesses.
+So one little step at a time, there was a time that we couldn't raise a billion dollars,
+but now we have enough of a following that, you know, people trust the role of private equity
+in the U.S. economy, do you think?
+What is the role that it should play?
+I think it's a great change agent.
+It's a business in a way similar to venture where what matters is the returns that you
+put up and you have incredible alignment with the sources of capital. They give you the money and
+if you make the return, you can stay in business and if they give you the money and you don't
+make the return, no matter how big we may be, we slowly lose that and we're out of business.
+And that alignment is so important because you're such a big change agent to companies.
+These software companies are not meant to be owned by the same group for 30 or 40 years.
+management gets tired. It's exhausting to run. It's exhausting to be a CRO. And the more they trade hands,
+you have somebody with maybe a new idea, maybe a perspective, and maybe a perspective that was
+right for the company at that time. And that buyer, like private equity, can assume it be super
+entrepreneurial and try to do something special. So Orlando, though, just building on that,
+it clearly has alignment with the investors. But maybe you can talk a little bit about the
+broader alignment with society jobs. The reputation of PE sometimes is,
+a bit too cutthroat. And if you hear, oh, a PE firm bought my favorite brand, or our firm got
+bought by, you know, our startup got bought by a PE firm. It's like, okay, they're going to cut half
+the people and there's going to be layoffs, or maybe this brand is going to get saddled with debt
+and absolutely gutted for parts. So what's fair or unfair about that sort of PR crisis? Maybe
+there is with PR, with PE. That is 100% fair in the 80s, 90s, and maybe early 2000.
+private equity has nothing to do with that now.
+About 50% of the private equity deal volume is in technology.
+We do that.
+We're very narrow.
+We only do software.
+If you look at any software deal we've done in the last 12, 13 years,
+after SaaS became irreversible in 05,
+you're paying seven to eight times revenue,
+and the financing on seven to eight times revenue is maybe two turns of revenue.
+So you're putting in five to six turns of equity in the company,
+30% debt, 70% equity.
+If you're not building and growing that business,
+especially if it's big,
+nobody's going to buy it from you.
+It used to be that for those old-school deals,
+if you look at the return,
+two-thirds of the return will come today
+from the cash flow of the business,
+from your yield,
+and a little bit in the terminal value.
+It's flipped.
+About two-thirds or more is terminal value appreciation,
+and you make very little.
+So you're a growth investor.
+On your yield, we really are.
+We have to transfer to that
+because, look, the lucky thing we had,
+was after I personally made a lot of mistakes,
+97 to the Internet bubble bursting.
+Carl Toma was going to fire me, and this is also true.
+He talked about it in his 70th birthday,
+and he gave me another chance.
+And I said, okay, I'm not good at what we were doing then.
+I'm going to go for existing management,
+really established companies,
+and software in 2000,
+you could buy recurring revenue in software cheaper
+than in all the other categories
+that private equity liked.
+Think about radio, cable,
+whatever we could, outdoor advertising anything.
+So the partnership said, sure, let's try it.
+Let's try it with something small.
+At that time, you could buy cheap.
+But what happened is in 2010, after the financial crisis,
+most of our competitors that were doing those deals,
+and it was heavily competitive then for these smaller transactions,
+they left the business because now software became super expensive.
+So there's a...
+But we said, Chama, but then we said,
+oh, instead of complaining that we cannot do what we were doing before because everything changes,
+now we have the word without to buy the best and the number one.
+So let's go for the number one player that can grow.
+So you started doing a lot of these SaaS deals in 2010.
+When you sit there with your partners in 2025,
+is there a risk of SaaS being cannibalized from within by AI or, you know,
+how it can just be rebuilt in different ways?
+How do you underwrite it today, which is different from how you may,
+would have underwritten it in 2010?
+Our investors don't love to hear this because for, right, our investors, especially the large
+institutions, that's kind of our market. Those are our people that have backed us for a long
+time. Besides good returns, they need consistency and predictability. They would rather have us do
+what we were doing in 2002 in these deals. I'm wondering, why can't you just keep doing the same
+thing and it all changes. One is there is a big risk of AI in this business. I mean, in a big,
+big way. There are so many verticals that are going to get disrupted. There are so many areas
+that are very confusing and you don't want to touch. So it limits the space significantly. Even if you
+believe what we believe, which is in the enterprise, it's going to take a while, because we
+always say technology is evolutionary, not revolutionary, because our customers are buying this
+stuff for cost. They want the ROI and you need to see the plan and everything else. But one is
+there's a big disruption and that's another, all these areas we don't get into. And we have to
+keep learning and updating ourselves. That's a lot of work that the young people in the firm
+as well will have to do. But we have another equally big or even bigger challenge, which is
+if you look at our trajectory, it's not like one day we woke up and said, oh, we can do a $10 billion
+dollar deal. No, we started 50, that trajectory. In 2010, we did three billion dollars
+in a row. We bought Blue Code. We took a private, Deltick, we took private, we bought digital
+insight from Intuit. When those worked, then we did a two and a half billion dollar deal. That
+became Dinah Trace. That was computer. Then when that worked, we did a five and a half billion
+dollar deal, which Adina was here yesterday. That was the business that we sold to NASDAQ, and that
+worked. But now we're doing $10 billion deals. We have to sell those.
+for 25 to make money.
+Wow.
+Our alternative here, what we have to underwrite
+is an IPO at a big discount
+to the COPS, when we paid a 30% premium
+to the COPS to buy that company in the first place.
+So we kind of start 50% in the hole
+to do that, so you have to, anyway...
+I wanted to ask you this question
+because I asked a friend of mine about you
+and he was competing with you
+to get the Boeing business.
+And you bought the Boeing avionics business
+recently for $10.5 billion,
+which I think all of us
+care about because hopefully it'll improve flight safety and all of that other stuff. But we can talk
+about that in one second. But he said, Orlando's incredibly difficult to compete with because
+he's so ready to buy the thing he wants to buy. And he doesn't really, you know, nickel and dime
+at the edges. It's like, let's find a fair price and we'll just transact. And it makes it very hard
+for everybody else to compete with. When you get that conviction, are you just willing to just basically
+put that much money on the line and say, we're going to figure this out? We are. That's sort of Warren
+Buffett's mentality, isn't it? That he already knows all the companies. He knows which
+ones he wants to buy. And when they come up, that he doesn't nickel and dime, he just
+quickly works out a deal. Is that something, is that a mentality that you have?
+100%. It all fits together with having a small team. We also have a small portfolio.
+So in every fund, we'll buy 10 to 12 companies. We strive for the two core competencies that we
+try to have. One is buy the best and operate the best.
+and just focus on that.
+In a three to four year time frame for our funds,
+for investing our funds,
+we cannot say with a straight face
+that there are 30 of the greatest companies
+that were available to be bought at that time.
+Right.
+So that's why.
+And two, we cannot say with a straight face
+that we can try to influence management
+with everything we learned from an incredible mentor
+if we had a portfolio of 30.
+That's as much as we can handle.
+So we have to go for it.
+Now, I do want to add that
+what I love about the private equity business, one of the items, is that those deals.
+Because the decisions that you make with your partners an hour before the bid is really, really important.
+It's really telling.
+Well, can you take us behind the TikTok of this Boeing asset?
+I think it touches all of us, even if most of us don't understand that it even existed, actually.
+Well, it basically runs, maybe you cannot fly an airplane, right, without Jeppeson and its system.
+And the way the deal started, we called the CEO of Boeing, actually sent him an email saying,
+hey, we could buy this division and we're paying these good prices.
+So there was some interest.
+The process started, and they were about 15 private equity groups, all excellent groups involved in the deal.
+But why would Boeing want to sell its avionics business?
+I guess maybe start with that.
+Yeah, it seems pretty core.
+It's a good business, and I'm happy that they decided that.
+So you're saying that was a bad decision to sell the cockpit.
+We'll take it.
+Fair enough.
+I wanted to ask you a question about...
+Could we get the answer to that?
+What is the strategic rationale for Boeing to want to solve its avionics business?
+Is the idea that other plane manufacturers can then use that avionic system?
+I'll give my answer.
+Maybe you can...
+I think Boeing is in this incredibly difficult position where there's a lot of diffuse things
+that were happening inside of the...
+business and they had to make a real rationalization. What are the few things we can be good at?
+So, you know, one of our friends, Brian Utko, was put in charge of new plane development.
+I think, you know, you can guess what's going to happen there. That's a clear strategic bet.
+You know, getting the 737 or the Max program back online, that was a clear bet.
+But when you do that, you have all kinds of debt and stuff that you just need to clean out.
+And sometimes you have to sell. And by the way, you are right.
+Your instincts are right, because my friends who called me basically said, this is the gem asset inside of Boeing.
+I mean, he's being very gracious by not, so, yeah.
+But Jepson is the thing that everybody uses United, Delta, everybody needs this information to fly accurately.
+And it was Boeing's business, and now it's Orlando's business.
+Okay, so.
+It's our funds business.
+It's our fund business.
+Orlando, we don't buy stuff.
+We're generally year zero, year one, two investors who help build things, but Saxon.
+and I got to watch our friend Elon by Twitter, and that was quite eye-opening. It was also the
+first thing that I think he ever bought in a major way like that. What is the playbook for coming
+into one of these technology companies? And you have, like you said, tired management. Maybe the
+people who are still saying at this company are the ones who couldn't find other work or maybe
+weren't as ambitious. What's it like day zero, day one, day two when you get in there? What's the
+playbook, what's, you know, one, two, three, we got to do these things in the first 30 days.
+It's almost always the same. We try to buy companies, and Jeppeson is a tweener in that
+because their margins were about 25%, but we feel that business can be running like a Denza
+that we sold to NASDA for 50% plus, running it like a software company and making the right
+investments. The playbook is this. You meet with a company, usually a public company,
+that trades for a revenue multiple
+because they're not that profitable.
+And our mentality is
+we try to turn what we call a good innovator
+into a good business.
+We have all these meetings with management,
+and after we listen a lot to them,
+we come back to them,
+and we put together a plan with them to cut cost.
+So there is that element
+because you have to get in the game
+with a certain level of fundamental earnings
+to be able to afford the deal.
+You basically are,
+what we're trying to do is turn a revenue multiple day one,
+say we buy it for six or seven times to an EBITDA multiple in day four.
+If that company grew 20% and you achieve a 50% margin, you've done that.
+And then you say, what are the comps?
+What is this thing worth?
+Is it a 20 PE, a 25 PE?
+A 20 PE is about 15 times EBITDA, you could double your asset value
+without the benefit of that at 30% leverage, which you pay down a bit.
+And that's how you create your return.
+So we talk to management very openly during the process, even before we won the deal,
+even if they're not going to like us, it's better, and we say, hey, can we put together a plan
+where you can make the right investment decisions, but can you cut 15% of the cost of the
+company? At closing, the deal in private equity, talk about the change agent. If you don't do that
+at closing in private equity, why are you going to shock the employees afterwards?
+Years 2, 3, 4. The deal, since everybody's thinking there's a new owner that's going to provide
+change, gives you the opportunity for immediate change. Now, as my mentor, Marcel Bernard,
+to say he was the greatest operator I've ever met, 35 years of Motorola, running different
+divisions. That was an exceptional school of management. No matter how profitable you are,
+you can always cut 10%. No matter how unprofitable you are, it's difficult to cut more than 20%.
+Because you have to change the way people make decisions, the way management interacts, etc.
+How do you evaluate the talent stack? That was something that actually David was exceptional
+at during the Twitter acquisition. We sat there in a room and he said, well, who's
+exceptional at their job. And then Elon said, and who's absolutely critical for this business?
+And I just walked up to the whiteboard. I drew four quadrants. Exceptional, essential. And then there
+was this sort of exceptional, but not essential. And we then had a playbook.
+To be clear, Elon proved that you could cut 85% of Twitter and it would still work just fine.
+And all the journalists were like, Twitter's going to go down any day now. And then they were
+like, every day they would write the same story. Twitter went down.
+and be like, oh, no, you lost your internet connection on your phone.
+And they'd be like, no, it's not coming up.
+And it's like, yeah, yeah, we put the Wi-Fi password in.
+It never went down.
+It was pretty crazy.
+But how do you assess talent when you're coming into one of these legacy businesses,
+you know, 10 years, 20 years into the business?
+History tells you a lot of that.
+So you're trying to identify, not everybody's good at everything.
+And it starts with a leader.
+If the leader is good, everything is good.
+If the leader is not good, nothing is good.
+You don't want to work around them to deal with sales and product and stuff because nothing is going on now.
+What does a good leader mean, right?
+There's so many judgments that come in.
+Is the company hitting bookings?
+Is it missing?
+Are they good at customer service?
+What's their retention?
+How do they make decisions?
+What we look for overall, because nobody's perfect, is to back what they're good at.
+We love to do out on acquisitions for our company.
+So the reason we like to take out the cost once
+is the rest is about booking's growth and add-ons.
+We don't want to revisit margin too much.
+We want profitable growth going forward.
+Let's be done with that, and then let's go forward.
+The leader can stand up in front of the entire employee base
+and said, we need to do this.
+This deal probably gave us the courage to do what we need to do.
+Let's go build the business.
+So when we look at a leader and we say,
+if they're open-minded, if they care about numbers,
+and if they have the following of their employees
+and customers and really know the business,
+That is something that we really, really, really try to work with.
+With all the changes we make, we've been pretty contrarian in the industry
+because we first try to make them with the existing people.
+And sometimes, you know, we make a mistake on that and they change their mind, but we try to do that.
+Before you do a deal, what's the secret to figuring out how good the asset is?
+Do you go talk to customers back to our references?
+Do you go find the employees who quit and started companies and interview them?
+Like, there's got to be some tricks to assess a company before you even let them know you're interested.
+in them. What are those tricks? All of that. All of that. Now, we've usually owned a competitor or a
+partner to the company as well. And we've usually known them for a long time. Like, we recently
+announced that we were doing the DeForce deal for $12.5 billion. My partner, Holden Spade,
+met with the CEO of DeForse in 2008. And we tracked that company for so long, watching it.
+Patience. When does it miss? When does it hit its numbers and everything else? It's, um,
+You get, you also, once you sign them up or are in a process where the company is giving you all their raw data, you have so much information to make those choices.
+Like, for example, a company cannot say that it has really, really good product if its gross margins on support are very low.
+And we can bring technology people to assess that, and we have that on our team, and they look at the architecture and the talent and everything else.
+But then you go, how come your support costs are so high?
+It's a bad product.
+Yeah, it all fits together.
+We have great retention, great margins on support.
+It's like, for example, take support.
+Many people look to offshore support, and now maybe AI would get on that, and there's no need for that.
+What we say is eliminate the reason for the call altogether.
+Is there something you can do in product?
+So we're evaluating all that.
+We love it.
+We geek out over it.
+There's a handful of PE firms, obviously, that are now linchpins of the capital markets, Blackstone, Apollo,
+KKR, Carlisle, they're public, they are multistrat, they're huge pillars.
+And, I mean, you've built an incredible business, you have the credibility to do it.
+Is there an impetus to do it?
+Is there an impetus to kind of grow beyond that technology focus?
+And if not, how do you stay in your knitting?
+Because, you know, how do you do that?
+Where does a discipline come from?
+Look, I think we are very pure to our investment.
+and our colleagues, the two of them at the same time.
+What I say matters to them is the return.
+So what matters for us to grow the business is get the money, get the deal, improve the deal.
+Going public does not help any of those things for us.
+That's number one.
+Two is we're really, I'm just so grateful.
+I really, really am for my mentors.
+I mean, Carl Toma gave me and my partners the company.
+Right.
+And he mentored us.
+So we want to do the same thing for the next generation,
+and we actually feel we'll make more money
+by investing behind the next generation when that time comes
+than by going public and having a great day
+and a great multiple, and then what?
+So so far, we're just going to stay where we are.
+As we wrap, I just want to ask you a question
+about Puerto Rico, again, where we started.
+You're the first Puerto Rican billionaire, I understand.
+It's just a number, obviously, but should Puerto Rico
+become the 51st state?
+You know, we have Trump talking about Greenland, whatever, you know, we have these ambitions.
+The people of Puerto Rico seem to want to have a deeper relationship with America.
+It seems profoundly unfair that they're in this, you know, sort of middle state.
+Yeah. It's such a divided place. The turnouts and elections in Puerto Rico, when I was a kid, used to be like 90%.
+It's a whole festival in the island when elections happen between the party that wants the status quo and the party that wants statehood.
+Now the party that one statehood has grown quite a bit,
+and some of the tax incentives of being kind of in this commonwealth status
+have gone away.
+I'm going to say something I've never said before,
+and I do believe it'll be better for Puerto Rico to be a state
+if the U.S. would allow that.
+I'm for it. I'm here for it.
+Ladies and gentlemen, Orlando Bravo.
+Thanks, ma'am.
+Wow. Thank you.
+Incredible, huh?
+I'll talk to you for you.
+Great job. Thank you.
+Yeah, amazing.
+Thank you.
+Thank you.

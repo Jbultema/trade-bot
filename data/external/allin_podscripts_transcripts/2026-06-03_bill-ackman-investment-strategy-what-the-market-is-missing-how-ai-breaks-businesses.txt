@@ -1,0 +1,547 @@
+source: allin_podscripts
+published_date: 2026-06-03
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/bill-ackman-investment-strategy-what-the-market-is-missing-how-ai-breaks-businesses
+title: Bill Ackman: Investment Strategy, What the Market is Missing, How AI Breaks Businesses
+
+One of the most provocative and interesting investors in the country.
+A legendary activist investor.
+Pershing Square CEO and founder Bill Ackman.
+Taking a short position and going public with it is a pretty serious business.
+Interestingly, some of the best businesses in the world are trading at the lowest multiples.
+We're kind of the rebirth of the closed-end investment company universe.
+What did you think of Zara, the CEO of Open AI?
+I'm sorry, CFO.
+Felt like the CEO.
+Yeah, I was.
+What's up with that stuff?
+Actually, I was super impressed.
+Made me a lot more bullish on Open AI.
+And I thought...
+Right?
+I thought she should be CEO of Open AI.
+That's what I thought.
+I think Sam should be chair.
+I think he's much better.
+There was a question I wanted to ask her that we didn't get time, which was what's it like working with Sam?
+I mean, that could have been like three hours in the documentary.
+I wanted to kick this off.
+So thank you so much for being here.
+We've tried a number of times to get you to all in, and it's great to finally have.
+you, you obviously are a legend that doesn't need much of an introduction. Lately, in the last number
+of, call it years or months or quarters or what have you, it seems like your investment philosophy
+may be changing, your model, where you've been activist and you've entered positions and exited
+positions, and lately you've talked a lot about more kind of permanent long-term holdings.
+We'd love to hear a little bit about if that is actually a change and how your evolution and
+your investment model has kind of changed over time. Sure. So I would say the biggest change
+over time is an appreciation for the importance of what we call business quality, long-term, durable,
+protected, non-disruptible growth. I would say early days, you're smaller, more liquid investor.
+You don't have to think as long-term as you become a bigger concentrated investor.
+And over time, you learn the importance of durable kind of growth. That's the most important
+factor. I would say I'm as activist as I've ever been, but more of it's on Twitter than I would
+say in the corporate context. And the reason for that is when I started in Pershing Square,
+no one sort of knew who we were. And so I actually, one of our first investments was Wendy's
+International, Wendy's own Tim Hortons, the Canadian coffee and donut chain. And the value of Tim Hortons
+was more than the entire value of Wendy's. So we had this very simple idea, buy Wendy's,
+Tim Hortons, double our money.
+And we bought 10% of the company, and I called the CEO, and he didn't return my call.
+And I called him again, he didn't return my call.
+I literally couldn't get a return phone call from the beginning.
+So we actually called a friend who worked at Blackstone, and Steve Schwartzman agreed to write a
+fairness opinion on what Wendy's would be worth if we spun off Tim Hortons.
+We kind of mailed it in and filed it publicly, and six weeks later, they spun off.
+Wow.
+And then the CEO finally called me back, and he thanked me.
+And he had gotten fired, but he thanked me because he had a huge exit package.
+And he was very happy.
+So in the beginning, we couldn't get a return phone call.
+So we had to, and we were small, so we had to go to a conference,
+and we had to do presentations and go on CNBC.
+What happens over time is you join boards of directors to become known as an investor.
+We're kind of a constructive shareholder.
+I know pretty much every CEO in S&P 500, either directly or one person,
+removed. And, you know, maybe I age, we've aged a bit, but you build kind of a reputation.
+And today we buy a stake in a company. Sometimes they'll put out a tweet saying, you know,
+we welcome purchasing square as a shareholder, but they opened the door for us. In the beginning,
+we had to bang down the door and today. So we get very deeply involved in our companies,
+if it's needed. Other companies we own, there's nothing for us to do, just be to, you know,
+just clap. So you aren't considered a value-ad investor at this point? Yeah, but we only want to add value.
+The conversation last night was kind of an interesting one.
+You know, the best investments are one where you don't need to join the board and do anything.
+Well, that may be in a startup, but in a mature business, it may be...
+No, I think in the public company context, one of the valuable things we can do,
+the problem of being a public company today is kind of the very short-term nature of markets,
+analysts, et cetera.
+And obviously to run a business, a business is a good one, is a forever thing.
+You want to make decisions in the context of decades sometimes, or certainly three, five years,
+How can you do that when someone's asking about the tax rate in the second quarter?
+And having a big shareholder on the board where you can kind of test ideas out with the big shareholder before you expose them to the public,
+where the big shareholder can say, I'm supportive of this initiative, even though it's going to hurt earnings in the next few quarters, is a helpful thing.
+I just want to connect this last conversation with Sarah to this.
+Are you an investor in the AI complex?
+And how do you underwrite business model quality from what you see on the outside in the entire complex?
+I mean, yes, effectively. We're an investor. Actually, today we own Microsoft. We own meta. We own Amazon.
+Actually, I think you're either directly or indirectly, you're invested in AI. Or it's a threat. So you have to understand it.
+How do I think about AI in a business model context?
+Yeah, business model quality. Yeah. When you're a concentrated investor or investor generally and your long-term investor, the most important and most challenging thing to do is determine what's the risk of disruption?
+What's the risk of two guys, two women from Stanford in a garage, you know, coming up with something?
+That risk, I think, has gone up dramatically.
+This is the greatest era in history just to build a business, right?
+There's unlimited access to compute, you know, certainly for a startup, unlimited access to capital,
+and a lot of incredible talent, which means that the probability of your being disrupted has gone up enormously.
+So the hardest thing you have to do as an investor is understand, you know,
+And that's really where we spend most of our time.
+What's your tendency in a moment like this, then?
+Do you swing towards the chaos, or do you reposition to things that are maybe more durable
+and defensible from AI where the disruptability is less?
+What's interesting about markets is people always bring their eye to the new, new thing.
+And the new new thing is sort of chips and semiconductors and energy, and that's where, you know,
+the shorter term capital is going.
+What tends to happen is really high-quality things get left behind.
+And the same thing really happened.
+I was there in 2000, you know, in that sort of bubble.
+This is different.
+I'm not saying this is, but there's some analogies.
+And the analogies are people got excited about Internet stocks,
+and Berkshire Hathaway traded at the lowest valuation,
+I think it ever traded out of its history,
+is people said, oh, that's all old stuff.
+I think a similar thing is happening today, in a sense,
+to Amazon and Meta, Microsoft.
+Those are the ones that are...
+These are old-fashioned companies in...
+kind of this, you know, the open AI era.
+So they're undervalued in your mind?
+Yes.
+What else is undervalued?
+What about the SaaSpocalypse?
+So is it oversold at this point?
+Again, I think it's a careful analysis.
+I worry more about a Salesforce than I do about your kind of,
+I think you've got to do the work.
+I think it's one company at a time.
+But I think if, you know, if you're a software company today,
+you have to be as AI enabled as you can.
+I think there have been sort of monopolistic type profit-taking
+off of customers when someone had a kind of a niche software product, they're charging, you know,
+30,000 a year or something like this. I think those companies are really at risk. You know,
+Microsoft, when the average customer is paying, I don't know, 50 bucks a seat or some small number,
+that platform is worth a lot more. It's less at risk. I want to go back to COVID because you
+had an incredibly viral moment where you were on CNBC at that moment and you pounded the
+and you said, this is what's going to happen.
+And literally, the market just ripped and you were,
+well, first it went traded massively down.
+You were right on that side of the trade,
+and then you were on the right side of the trade
+when it ripped back up.
+And then I think it was maybe a month or two ago.
+I think publicly you basically pounded the table
+and said, this market's going way higher.
+Can you just put us in your head?
+Like, where does that desire to be so active
+And it gives you so much room to be wrong,
+but then when you're right,
+it does add to the lore of Bill Ackman,
+of which you have a lot.
+So how do you balance that?
+Where does it come from?
+Like, why in these moments do you just get so convicted
+that the conviction just has to spill out
+and then you're just so out there?
+So I've always been like my high school yearbook epithet
+was most verbose.
+You too.
+And actually my friend actually lives around here.
+he is quote that he put next to my name in my yearbook.
+It says a closed mouth gathers no foot.
+That was his.
+And so that's kind of what I've lived by.
+I've always had this sort of desire to speak the truth about things.
+And I was just talking with Jake, actually.
+We had breakfast this morning.
+And we're talking about my Ronda post.
+You remember that one?
+There's just certain things that need to be shared and discussed.
+But with respect to markets, actually what happened was
+I was concerned about the country because I felt we needed to have basically a two-week pause.
+This is March or February, I guess it was March of 2020.
+And I assumed we were going to just do a short-term shutdown, let the virus cool down,
+as hospitals were going to getting overwhelmed.
+And the president hadn't done that yet.
+I was kind of surprised by this.
+And that was what inspired me to go on TV as a way to reach president.
+Trump and say, look, we need to shut down the country just for two weeks.
+And I said, look, you do this, okay, the virus will blow over,
+stocks are at an incredibly cheap valuation.
+If we handle this correctly, you're going to make a ton of money, and we're buying.
+Valuation is like a tether on the market, right?
+When it gets too high, it's like this rubber band that's stretching.
+Inevitably, it bounces back.
+But it works the other way as well.
+When stocks get too cheap, there's this, you know, the rubber band's actually pulling valuations up.
+And so there are a certain moment where it gets to that place.
+And sometimes actually, if you call that out, it causes people to have kind of a psychological reset.
+What happened recently that caused you to call that out?
+Stocks just got crazy cheap, just incredibly cheap of really high-quality companies.
+Right.
+I don't know.
+Define extremely cheap in fundamentals.
+Fundamentals, based on the value of a financial asset, the present value of the cash, it generates over his life.
+On that basis, stocks are really high-quality companies, are really cheap.
+Is there any way to underrate, and I don't want to pick on specific companies,
+but we have the three that are going public, and then you have like a Palantir, let's say.
+And these things have become very popular in pop culture, in retard maxing on subredits,
+on the public's consciousness, high net worth individuals, wanting to buy into SPVs that are double loaded
+and then getting wiped off the cap tables?
+is there any way to underwrite 100 times revenue, 50 times revenue,
+150 times revenue in these companies,
+or are these just tremendously overvalued because of the demand side?
+I think you underwrite a SpaceX the way you underwrite a venture capital investment.
+Interesting. Explain that, unpack it.
+So everyone here invest in venture, right?
+You know, you bet on who's running it, right?
+The talent is enormous.
+It's people, they taught me, I had a professor of business school,
+He said people, opportunity, context, deal.
+So on people, SpaceX.
+One of one.
+Opportunity, one of one.
+Context, you know, incredible and actually, you know, feel bad for Blue Origin,
+but not harmful to SpaceX, the fact that, you know, their biggest way behind.
+Then you get to deal, okay?
+That's the more complicated question for SpaceX.
+Again, we don't know what the valuation is going to be,
+but if it's a billion, $750 billion, then you say, okay, well,
+Well, let's think five years out.
+What does this company look like?
+What is Starlink?
+What's the trajectory of Starlink?
+You know, SpaceX is near monopoly in terms of low-cost space launch.
+That's going to become increasingly important.
+And even Amazon is going to have to become an even bigger customer
+because they're not, you know, blue origins.
+And time, I would say, has become increasingly valuable in the AI era.
+You delay a model.
+We were talking, David and I were talking about administration
+and his kind of stepping in for the press.
+not to sign that executive order to slow us down.
+Allegedly.
+You lose a month.
+You lose a couple of months today, and it means a lot.
+So I think the only question I have, and I haven't done the math, I, you know,
+I actually invested in X, I invested in X AI.
+I'm in an SBV.
+Ron Barron said, Bill, you got to invest in SpaceX.
+So I'm in, so now I have, so obviously I'm rooting for kind of a good outcome.
+I just doesn't, I haven't done the, you have to.
+What about it's a present value?
+And speak.
+Okay.
+Sorry.
+Anthropic Open AI.
+Pallentier also fall into this category. Do you underwrite those as venture investments as well?
+And have you done the work on those?
+They're venture investments that do. What's helpful is they're not CED or Series A, right?
+They're, you know, D or E. But they're still like venture investments.
+These companies have proven they can generate a lot of revenues. And actually, I was just saying
+on Sarah, I thought she had a very, very thoughtful explanation on how they think about committing
+capital, right? And that's the thing I haven't heard from on Open AI.
+which is why if I were opening I would be getting that message out.
+Because from the outside, you're like,
+it's a pretty interesting business model.
+You get a company that's spending,
+making capital commitments, they're massively in excess of revenues.
+And how do you do that and get, you know,
+it's a degree of difficulty, I would say, is hard.
+Your perch on the boards of, let's call it these more traditional Fortune 500-type businesses
+and your conversations with those CEOs,
+how are they thinking about AI?
+Is it something that they're tipping into with pilots,
+Are they doing transformation initiatives?
+Do they think this doesn't really apply to us?
+We'll deal with it later.
+What's your sense of how they're adopting or embracing AI?
+I would say every CEO in America today is like, how do I use AI?
+How does it apply to my business?
+How does it a threat?
+They've got to find an internal champion.
+They maybe have to recruit someone from the outside.
+I would say on the hierarchy of things they worry about,
+it's probably number one as both an opportunity and a threat.
+So if you're not paying attention to it,
+I mean, your board is going to be asking you the first question every meeting about, you know,
+how are we dealing with the AI threat?
+How are we dealing with the AI opportunity?
+So it's absolutely top of mind.
+Are you seeing much early success?
+I mean, are through your, you know, again, through your visibility into these companies.
+I mean, there's a lot of mixed signals that we get like McKinsey did a study and said that
+95% of enterprise initiatives actually fail.
+Jamath, you've made this point around 80, 90.
+that a lot of these enterprises don't really know how to deploy AI.
+The fanciest title in Silicon Valley these days
+is a four-deployed engineer,
+which is basically like an IT consultant
+who can close the gap between the promise of AI
+and the ROI of it.
+And I think people are just trying to figure out,
+like how do we use this thing?
+I mean, have you seen much actual success?
+Is this the question right now?
+Is this how do we bridge this gap?
+So I haven't seen much success.
+Other than, I mean, I'll give you the Persian Square story.
+We're tiny little company.
+How are we using AI today?
+The first use case is really on the legal side.
+And almost what you call it a compliance back office type functionality.
+I think we're still super, super early in terms of big companies using AI effectively.
+Can I ask or test a thesis with you, the venture underwriting model where you think about people,
+you're underwriting a founder and their capacity to lead and redirecting.
+the organization in a changing environment, in technology environment, market environment, and
+whatnot. And we have seen repeatedly similar success at scale if the company is still founder-led,
+where the founder feels like they have the authority to make all the radical decisions needed
+to make sure that that company persists and changes as needed in a changing environment. Have you
+looked at founder-led companies versus non-founder-led companies where perhaps the founders really do
+have an inherent advantage in being able to navigate the changing environment and actually generate
+outsized returns over time.
+And I asked this particularly as it relates to the SaaSpocalypse.
+And if you take a look at the companies that are founder-led today versus not, if you're
+not founder-led, you have an incentive to not make a mistake and get fired.
+If you're founder-led, you don't give a shit your job is to make sure the company.
+Yeah, I think the answer is exactly what you said.
+I think the problem is that the average life of an S&P 500 CEO is probably, I don't know,
+four years or three-and-a-half years or something like this.
+you're focused on you know kind of shorter term compensation you don't generally don't have a big
+economic stake in the business you're a founder this is your entire life it's your entire reputation
+it's not like you're going to go get another job you got to kind of make it work and also when
+you're in the boardroom you have the authority of either being a major voting you know voice or a
+you've got a huge economic stake in the company and when we join a board of a company we're
+often the largest or the largest non index fund type shareholder that kind of gives us you know a little
+little bit of a disproportionate voice in the boardroom.
+Imagine if you have that and you're a CEO of the company.
+So I think that does give you, and also if you've gotten to be a successful founder
+over time, guaranteed that you've made a number of very challenging calls over time that
+turned out to be right.
+Otherwise, you wouldn't be there.
+And so you look at Mark Zuckerberg, right, when he bought, I don't know, Instagram,
+everyone's like shocked at the price paid or WhatsApp.
+They seemed like, you know, sort of outside the company only had, whatever, 19 employees
+or something when he paid a billion something.
+But you make enough of those calls, and you can make the other challenging goal.
+Is this antithetical to a Ben Graham investing model?
+Like you have to have a different set of skills as an investor to identify this talent.
+Yeah, so I mean, Ben Graham is a really important voice for investors,
+and that he said, look, you've got to think about a business.
+A stock certificate is an interest in a business, as opposed to just this piece of paper.
+That's probably one of his most important kind of aphorisms.
+but he was investing for the most part in liquidations.
+He was invest, you know, in the days of Ben Graham,
+where there weren't, there's no Edgar system,
+and in order to get a 10K filing,
+you had to go to the headquarter of the company.
+There were a lot of stocks trading at, you know,
+basically the cash on the balance sheet,
+and his business model was, you know, buying these things
+at stupidly cheap prices and eventually.
+But Ben Graham made most of his money investing in,
+I don't know, Geico or something, you know, not.
+Tell us a little bit about, you know,
+there's this sort of activist and significant
+shareholder, but then there's Howard Hughes, and you've talked a little bit about Berkshire
+Hathaway 2.0 or just being inspired by that. Chimap, you were inspired by it for a long time.
+Bill just took Pershing's Republic.
+Yeah, but with the Howard Hughes Corporation specifically, tell us about that effort,
+because you're operating that business.
+There's a book, I think it's called The Financial History of Berkshire Hathaway, and that's for geeks.
+Basically, this guy went back and read every 10-Q, whatever, you actually went through the
+filings, looked at every deal that Buffett ever did, and you follow him over a 60-year period of time.
+And the vast majority of the value he created at Berkshire was through actually the ownership
+of insurance operation. And what's interesting about insurance is that running an insurance company
+you have two jobs. One is you write business, right? You take risk. You collect premiums in
+exchange for the obligation to pay future claims. And then you get that, you get money up front,
+and responsibility is to invest that money.
+the vast majority of insurance companies focus only on the liability side of the balance sheet.
+Buffett was really the first to do focus on, actually more on the asset side of the balance sheet
+than on the liability side.
+And over time, on that liability side, if you manage the assets of an insurance company well
+and the liabilities well, you can build this enormously profitable compounding tax-efficient machine over time.
+The question is, why haven't other people done this?
+And the answer is, if you're really good at investing, you go work for a hedge fund, you go work
+for Fidelity, you go work for Wellington, but you don't go work for an insurance company.
+So the insurance company's ability to recruit investment talent is very limited.
+Buffett owned half the company who's really good at investing, which is why it worked.
+So what we're doing is where Buffett started with a crappy textile company,
+effectively liquidated it over time, reinvested in insurance, and then invested the assets well.
+Howard Hughes is actually a really interesting company, but it's a business that Wall Street
+has not cared about for a long period of time.
+We created it out of the bankruptcy of general growth.
+It was a spinoff of all the other assets.
+And it's a company that owns these small cities.
+So I bet a lot of people here have heard of Summerland,
+because a lot of the tech community has moved from California to Las Vegas.
+But we own this small city, 26,000 acres of land.
+We own all the commercial land.
+We own all the residential land.
+We sell lots of home builders.
+We build a downtown.
+We build buildings.
+It's a bit like the Irvine Company.
+You know, Don Brenn created probably $100 billion of personal wealth managing a small city.
+So, super cool company, but the time frame is decades as opposed to quarters.
+So Wall Street's never cared.
+It's always traded a huge discount.
+So Buffett bought into a textile business at a discount to liquidation value.
+At $63 a share, you're owning Howard Hughes at a discount to liquidation value.
+What we're doing is instead of reinvesting all the cash the business generates into real estate,
+we're going to reinvest all the cash into insurance.
+we're in the next, within the next week or so.
+You're in the business of building this flywheel.
+We're going to build this into a compounding machine over the next 50 years.
+It's something I've always wanted to do.
+We have the benefit of understanding both the insurance side of the business,
+and we can manage the assets well.
+And you can buy it at, you know, whatever, 60 cents on the dollar.
+How do you think about investing the assets of this insurance company?
+So what Buffett did is he took 100% of the insurance float
+and put the money in short-term treasuries.
+So he took no risk on kind of policyholder funds.
+and he took 100% of the surplus of the insurer, the equity, and invest in common stocks,
+and that's what we're going to do.
+And I think we can build a really profitable insurance company.
+We're starting at a very small scale.
+The company's got like a $4 billion market cap, and the goal is to build it into a trillion
+thing over time.
+The other thing Buffett did well is that he didn't issue any stock, or not for a very long time.
+So he started with a million shares, and today is effectively like a million and a half.
+I think this is the future for very talented managers like yourself versus
+is the traditional long short fund or do you think they sit side by side?
+I think it's hard to do this because you need control of a public company and you have to be
+not in a get rich quick mindset. And if you're in the get rich quick, it's easier to go to
+Citadel or Millennium or one of these.
+Why does it have to be public?
+Why does it have to be public?
+It doesn't have to be public.
+Why did you choose to take it?
+You know, we got here by accident, right?
+So the most successful equity investment we've ever made is we bought this company called General Growth.
+We bought the stock of a company going bankrupt.
+Sort of the most contrarian investment you can make.
+Stock went from $20 billion market cap to $100 million.
+And we bought basically a third of the company, or 27% of the company,
+at $200 million market cap.
+There was $27 billion of debt.
+And the bankruptcy emerged.
+And the strategy we said is, look, the assets are worth more than liabilities.
+We're going to do the first restructuring where the equity gets to keep their investment in the company.
+Two years later, we emerged from Chapter 11.
+in the stock fund from $34 to $34.
+But part of the restructuring was spinning off
+this thing called Howard Hughes.
+And it was really all of the junk that didn't belong
+in the company that the analysts hated.
+And so we did it sort of an inadvertent investment.
+And 15 years later, we haven't really created much value with it.
+So we said, look, we've got to, you know,
+the market doesn't like this thing.
+A company has to earn a return in excess of its cost of capital
+in order for a stock to go up.
+And Elon's done an amazing job, keeping the cost
+capital of this company is really low. If SpaceX goes public at a trillion, $750 billion,
+it'll probably be the lowest cost of capital, equity capital, transaction, and the history of the
+world. The problem of this company, because it's real estate, because it's development, because
+it's land ownership, the market says the cost of capital is really high, and you can only earn a certain
+return of real estate. So what we're doing is we're repurposing the real estate assets,
+and we're transforming the company into a much higher returning kind of business.
+last few years, you've become incredibly famous. I mean, just to kind of put a fine point on the word.
+How does that change and influence the way that markets work? Because, like, you know, your voice
+gets amplified now. You also have other places where other voices get heard. Many people whose
+names you don't even know, you go into Wall Street bets. It's every random Tom Dick and Harry with an
+opinion. Tell us the way the markets have changed with notoriety, fame, social media, influence,
+not just yours, but in general. Yeah. I don't think market.
+have changed as a result of anything that's happened with me or follower growth on Twitter.
+I think the Ryan Cohen guy, you know, the GameStop guy, you know, that is a change in markets
+when, you know, a stock can trade at a valuation well above its value simply on the personality
+and the ability to...
+Vibes.
+Vibes.
+To gather up, you know, armies of followers.
+You know, the fascinating thing about liquidity.
+and valuation is the higher a stock price goes,
+and it's going to sound sort of intuitive, but it's not,
+the more valuable the company becomes.
+You know, there's actually the increase in value of the company
+increases the value of the company, right?
+Because it lowers the cost of capital.
+It gives you more flexibility.
+It gives you the ability to issue stock,
+raise capital, acquire other businesses.
+And so, you know, getting back to the Elon example,
+it's really his, I mean, I would say he's a better example of this.
+We've not taken advantage of this at all.
+Maybe we should.
+But he builds an army of believers and followers
+that enabled Tesla to be built, you know, in Poplaricus.
+And as we wrap up with a somewhat of a point of question,
+you're an incredible investor.
+If there are people, if we want to be maximally aligned with Bill Ackman,
+is the best way to be an LP in Pershing Square
+or is it best to go into the market and buy?
+So we have two, I think there are three ways you can invest with us
+that are all different and little cheap different things.
+One is an entity called Pershing Square,
+which is the management company at Pershing Square.
+I think it's one of the most interesting kind of intellectually businesses
+because it's the entity that receives fees
+on these three permanent capital vehicles we manage.
+It's a royalty on the compounding of investments in these entities.
+and there's no CAP-X in the business.
+So we're going to pay out basically all of our profits
+and we're going to grow as quickly
+as the underlying assets compound.
+So if you invested a dollar
+in Pershing Square, you know,
+22 years ago,
+that became, you know,
+20, I should know this number.
+It's like 27 or 28 times net of all fees.
+Wow. Okay? Over 22 years.
+Had we charged the fees of this public vehicle
+that number would have been, you know, 37 times.
+I'm sorry, no, more than something in the mid-40s.
+Okay.
+What this means is we now have a public vehicle that charges only a 2% fee.
+We've got one in London that charges an incentive fee.
+If we compounded the rates we have historically,
+we'll have 35 times the assets under management in 22 years.
+So we'll go from 25 billion of assets to something approaching a trillion.
+We don't have to hire another person, and we don't have to spend another dollar, if you will,
+on overhead. That's a pretty interesting business. So I like that one. So Persian Square.
+Do you want to invest with us as a investor, invest in something called PSUS. You own a portfolio
+of our best ideas, and it's trading out an 18% discount to cash. You want to believe that we can
+build the next Berkshire Hathaway. You own Howard Hughes. We've got three different ways.
+Yeah, I've got some Howard Hughes. I think following you on Twitter and the going direct movement
+does allow you to communicate directly your vision, and that actually makes it much easier to
+place the bat. And so I do think it has a profound impact because prior to your extremely
+long tweets that have been parodied now, there's an incredible meme of a Bill Ackman tweet coming in,
+which is an extended iPhone that's a foot tall. No, it was, that was my Halloween costume. Yes.
+But you would have written something shorter. You just didn't have the time, yeah?
+Yeah, I guess. I don't let other people read, you know. Do you, do you like how?
+write all my own stuff.
+Does I write all my own stuff?
+Anybody read it?
+On the Ronda tweet, which had some legal implications,
+I did have my communications guy and a lawyer,
+a friend who's a lawyer read it.
+But I only gave him a few minutes because I was so excited.
+Once I write something I really like, I just want to, I got to push closed.
+I agree.
+I agree.
+And the torpedoes.
+Tomoff does this too.
+He starts getting a little bit frantic when he's writing something,
+and then he's like,
+I just hit Sarah.
+By the way, it's a very powerful thing to be able to share your view and push a button
+and reach 2.2 million.
+people so I'll have to want me just a picture on stage and I'll send it out let's do it
+let's great let's do it yeah liquidity gone all in all right all right all right relax this

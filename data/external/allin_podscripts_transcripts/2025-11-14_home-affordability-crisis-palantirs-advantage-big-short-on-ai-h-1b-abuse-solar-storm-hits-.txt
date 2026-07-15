@@ -1,0 +1,813 @@
+source: allin_podscripts
+published_date: 2025-11-14
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/home-affordability-crisis-palantirs-advantage-big-short-on-ai-h-1b-abuse-solar-storm-hits-earth
+title: Home Affordability Crisis, Palantir's Advantage, Big Short on AI, H-1B Abuse, Solar Storm Hits Earth
+
+All right, everybody, Shamath is here. I'm here. Freiburg's here. But Saxie Poo, he was up late at
+the White House. We'll show some pictures later. He couldn't make it today. But let's get started.
+We wanted to get you a show and we wanted to get it to you on time for your weekend.
+Let's start with Michael Burry in his shirt. So you guys know, obviously, Michael Burry. He's the
+capital allocator from the big short. And he just deregistered his firm with the SEC.
+He made a big bet against AI and Palantir. He disclosed the shorts against Power.
+volunteer a couple of weeks ago. They weren't huge. CNBC apparently reported that the value was like
+900 million. Burry says CNBC was wrong, that it was just 9 million. But he had a really
+interesting accusation. And it's related to what we've been talking about here on the show with
+the buildout of... I'm sorry, but can we just talk about the complete and total financial
+illiteracy of the mainstream meeting? How do you confuse?
+9 million and 900 million.
+How do you do that?
+I think maybe it's the cost of the shorts versus the value of the stock that the shorts represent?
+No, it's because there's 100 shares per option.
+Oh, I see, yes, because the options have 100.
+Of course.
+They applied a multiple and they got it wrong.
+Got it.
+Okay.
+So the math, the calculator.
+Because they got the calculator.
+It's not that they got the calculator wrong.
+It's just that they're so uninvested in,
+assets that they don't know how asset markets work, I think is the more logical explanation,
+meaning if you've ever bought a home, you probably know what people are talking about when they're
+talking about financial elements related to a home. But I guess if you've never owned a stock
+or you've never hedged a position or had an option, you don't really know how any of it works.
+But then the problem isn't the person that wrote it. Then there's no fact checking. And the whole
+thing just gets an entire new cycle on its own, which, by the way, helped his short and it never
+should have, because if you heard that some random dude had a $9 million bet against the market,
+you would think nothing of it. But then to manufacture a headline about somebody who had a
+moment, it was almost 20 years ago, but whatever, he had a moment where he was kind of right,
+is short the market and you get it two orders of magnitude wrong. That seems quite wrong. Yeah. And to
+your point, there is a ramification of it, which is it created a headwind against the already
+AI bubble, which was deflating after Brad Gersner poppin. I'll take a walk down conspiracy corner.
+Maybe the actual person is not economically illiterate, but the exact opposite, and then writes
+the error on purpose, knowing that whoever has to review it has absolutely no idea what they're
+talking about, and then they themselves are short. So I wonder if CNBC should investigate whether
+of this person actually had a trade on.
+Oh, there you go.
+Conspiracy Corner.
+Let's get our Timphal hats.
+The individual.
+You're either a complete moron, and you don't know how the financial markets work,
+in which case you probably should be working at some other media outlet, not CNBC covering
+the markets, or you know how well they work and you know the people above you have no idea.
+And so you yourself shorts the market.
+You're basically copying the Bury trade, but then you rewrite the headline to look like
+it's two orders of magnitude bigger, which actually could have moved the market. If you saw
+a yard short, I mean, yeah, like, that would have probably gotten my attention had I read it.
+A billion dollars is, you know, reasonable position to have. He was accusing also, he's got
+the Pallinger short, but on the AI side, he was saying, hey, meta and Oracle have been cooking
+the books with 176 billion in hidden depreciation to inflate earnings by over 20% in 2028. And so here's
+The chart, basically, we've talked about what is the reasonable life of an each 100 of an
+invidia chip or really an invidia server, if you think of it that way.
+Do these things have a three-year lifespan, a four or five, six-year lifespan?
+Core weave might be putting them at six-year.
+And that dramatically changes your expenses, which then, of course, given the scale of the data
+build-out, the data center build-out, could radically change your earnings.
+because dividing the cost of a data center that cost $100 billion by $6 or $3 or $2.X.
+So your thoughts, Freibir?
+Yeah.
+So just to go into accounting corner, it's our most favorite, but least often visited a corner here on the All-in podcast.
+Sharping your pencils.
+Yeah.
+So in accounting, we need a jingle for accounting corner.
+Sharping your pencils.
+Get your calculator.
+Under GAAP standards, he's generally accepted accounting principles.
+when you report your operating expenses every quarter as a public company or a gap filer,
+you take your CAPX, anything that you know, you make a big investment in and you depreciate it
+over some lifetime. And there's an accounting process by which you can do an internal review
+and determine that if your depreciation schedule doesn't actually map to reality, you should
+make an adjustment. And so there's a periodic assessment that's done to do that. And just to give you a
+sense to your point, Jason, on the math, Google in the last,
+months, made $120 billion in operating profit. Okay, and let's assume they're making $70 billion
+in CAPEX this year. That CAPEX does not get deducted from their operating profit when they report
+earnings. You take the 70 billion and you divide it by what's called its useful life and you report
+that every year. So if you do it over three years, to your point, it's about $24 billion a year
+versus six years, it's $12 billion a year. So that would impact the operating profit by on the order of
+call it 10% if the difference between three and six years. And so what Michael Burry's saying
+is that all of these hyperscalers have extended their depreciation schedule or the useful life
+of their data centers by roughly 2x, which cuts the operating costs in half when they report it
+in earnings. And so it's making their earnings inflate. So he's claiming they're cooking the books.
+But if you go back to the chart that you showed, or I could just speak to this, Google first made
+this change in Q1 of 21, where they said the servers are now going from three to four years.
+The chart shows the combination of servers and networking equipment.
+Separately, in 2021, Google took networking equipment from three to five years, and then in
+2023, they took it from five to six years. And so this is a result of this effort where they
+went in and did an analysis. So what happened? What happened in the data centers is that the
+data centers transitioned from being primarily data storage and data transfer systems,
+where you would use hard drives and RAM and memory to store data and then transmit it back out
+to being data processing centers because of the AI boom.
+So as AI became more important in the data center, more of the dollars that are going into
+data centers were allocated towards chips from data storage, which initially was hard drives
+and you throw away the hard drives every 18 or 36 months.
+And then solid state memory, solid state memory would last two years, four years, six years,
+depending on the type of memory you're using.
+And RAM, and RAM had this kind of variable life.
+time as well. And then suddenly when you put these processors in to process the data to do AI,
+that's the majority of the spend and the majority of the energy is going towards the processors.
+So if you pull up this clip, this is Google's head of AI and infrastructure, speaking at a conference
+here recently.
+Where are we, do you think, in the CAPEX spend cycle? But more importantly, what are the signals
+that you guys use internally, right, in your thinking? I mean, you have to plan data centers,
+whatever, four or five years in advance. You have to buy you.
+nuclear reactors and whatnot. So how do you think about the demand signals as well as your
+technology signals and Jitu is the same thing for you but from the point of view of enterprise
+and new clouds, etc. We're early in the cycle is what I would say certainly relative to
+the demand that we're seeing. Our internal users are we've been building TPUs for 10 years
+so we have now seven generations in production for internal and external use are seven
+and eight-year-old TPUs have 100% utilization.
+And I think that's the key part that's been going on.
+I made some calls, and I checked around with some other friends, and everyone says the same
+thing, that these seven- and eight-year-old TPUs and GPUs that are sitting in the data
+centers are still being used, and they're being used at 100% utilization.
+So that actually justifies and validates the depreciation schedule being much longer versus
+shorter.
+And I actually think Michael Burry's got this wrong.
+Jamath, what do you think?
+You're involved in, obviously, inference.
+How long will the Grock inferences be out there doing jobs?
+And it does seem like, to Freiburg's point in the gentleman in the video, that there
+are other jobs to do, right?
+So as these things move down, the life cycle, there'll be something for them to do.
+When would you actually unplug them, I guess, is the question and stop using?
+The business models of these companies are just far too good for them to get to the point
+of having exhausted every other operational tactic that then they have to cook the books.
+These are not the seven companies that are going to cook the books.
+The practical thing that's happening that Michael is not technical enough to understand
+is that there are meaningful iterations in how kernels are working,
+in how the intention mechanisms of these models are being rewritten,
+in how people are swapping out HBM for S-RAM in these designs,
+in how they're building, in some cases, really huge dyes, in some cases much smaller chiplets.
+All of this creates more and more utilization.
+So these things last longer, and they also need more.
+I think that in order to make these accusations, you need to have some modicum of technical
+groundy that I don't think he has.
+Here's a thing with shorts in general, which I don't like shorting.
+So let me just say this.
+There is supposed to be a check on financial malfeasance.
+but it's not that. When you look at these short-selling firms, for every one of them that actually
+uncovers malfeasance, what it really is, is them creating chaos and innuendo under the guise of
+their right to free speech. And what they do is they put out some screed that tries to move
+the market. They're positioned against the stock before it comes out. And then they hope to close
+the position out and make some money. I think that's just a pretty,
+sad and terrible way to live one's life. But it's legal, and so you're allowed to do it. It almost
+makes no sense for Michael to become technically literate because he probably wouldn't have written it.
+And to your point, the fear, uncertainty, doubt you can create if you're Michael Burry,
+if you did the big short and you shorted the housing crisis correctly. Now, that took two years
+for him to be correct. So these things are painful to execute on in his defense. You don't make any
+money. Outside of my venture fund, I ran a hedge fund for, I don't know, seven years, eight years.
+And here are our longs, okay? We, and you can find these clips on the internet. You know,
+Tesla in 2015, Amazon 2016, Salesforce, 2018, just tagged it. And you know how much money I made
+on the short side? Because we always felt like we had to hedge. And so what we would do is we would
+bumble around looking for shorts, never made any money. The one short we found was a wireless
+telecom operator, and it was a legitimate fraud. Its company's corporate address was a pizza parlor
+in Barcelona. Diversified revenue streams. Otherwise, my point is that shorting is just somebody's
+ability to cry fire in a theater, quite honestly. It's extremely hard to impossible to commit
+financial fraud as a public company in 2025. I guess the other short we should take.
+a look at is the Palantir one because Palantir is, man, it's way out there.
+Alex Carp has been doing some great interviews. He's a national treasure, incredibly entertaining.
+They obviously have a great business. They're on a $3.5 billion run rate according to their last
+quarter. But the valuation is $480 billion. This puts them at 137 times their sales. It is
+extraordinary. It's way out there. Data Dog and Snowflake.
+Microsoft, you know, these are at 13 times their sales. And I guess Cloudflare is out there at 37 and
+Croucherike at 30. So this is truly an outlier, Friedberg. If you were to give Palantir the same
+price to sales ratio as some of those highly valued ones, probably be a $60 billion company,
+$29 a share instead of 170. So what do you think?
+of his palenteer short, Friedberg.
+Based on the statement you just made, you're saying that a company is worth their historical
+sales numbers.
+And I don't think that that's how shareholders often do or perhaps should think about what
+they're buying, which is an ownership interest in the future of the enterprise that they're
+buying a piece of.
+When you invest in a startup, you're not saying, hey, that startup is worth what the employees
+did last year before they even started the company.
+you're making a bet on the future potential of the business and what you think the cash generation
+over time will be. Your time horizon may be different than mine, and that's how a market finds a price.
+As a result, I think there's probably a market trying to find a price for Palantir where folks
+have a great deal of difference in opinion over what the future potential of the business is.
+And as a result, what the earnings generation will be at different timescales in the future.
+and that's how they're getting to the current market price.
+Who am I to judge?
+I am the person who would make my own decision of my own time scale and my own estimation of the
+future of that business if I were putting my own capital into the business.
+I've not studied the business well.
+I don't have a strong point of view or opinion on the value of the business relative to its
+future earnings potential.
+That's how I would look at it.
+I would make an investment for the long term if I were to buy the shares, not look at
+the last year's numbers and say that there's a valuation arbitrage opportunity and that's
+what I'm buying.
+So, you know, to each their own, over time, the market corrects itself, as they say, you know, it's a voting matter today and it's a weighing matter in the future. That's Warren Buffett's famous quote that the actual earnings generation in the future will determine whether someone paid a good price or a bad price, depending on the point at which they bought in the past, meaning at 400 billion market cap, you could be getting a steal or you could be significantly overpaying. That's going to be based on your assessment, your judgment as an investor.
+And I think people are looking at like 30 to 45% year-over-year growth, Chama, and saying, yeah, it's got a lot of, to fill in that valuation, we just take a lot of growth. Maybe the growth accelerates. We saw that with Invidia, right? They started to have unprecedented growth. Any thoughts on Palantir Short while we move on to our next subject, Jamah? Well, I think the Palantir Short is stupid. And I think that those people will lose money. The thing with all of these other companies, put your
+chart up there. The thing that the people that are shorting this company don't understand is that
+all of these other businesses that you put up there, there is a viable competitor of some
+kind that you can switch to. And so what I would say is the opposite of what they're saying,
+which is you have a low multiple to sales when the churn risk is higher. So look at the one with the
+lowest multiple to sales, MongoDB. There's 90 versions of what MongoDB does. I'm not going to say
+whether MongoDB is good or bad. It's actually a good company. It's an extremely well-run business,
+but it's not unique. It's just extremely well-run. Snowflake is not unique, but it is well-run.
+Palantir is both unique and well-run, and there's no clear alternatives, so there's no place to
+churn, too. And so I think the reason why it has a premium valuation,
+is because the duration and the durability of these cash flows are much longer than what you
+typically see in any of these other companies. And if people took one, one thousandth of a second
+to actually use their brain, they'd come to that conclusion.
+Lack of competitors would be the reason you think it's more indefensible.
+By the way, I'm neither long nor short. I was long in the private markets. I was an investor
+in the series B a pound to. I'm not long anymore. I wish I was, but I'm not. So it's not like
+I've invested interest in this being right. But it's just so obvious that what they do is completely
+unique and completely differentiated. There is no alternative in the market for it. That's why they
+trade as such a huge premium to sales. And if you look at any market for any product that is unique
+and is effectively where they are the only competitor for what they offer, you will see an equivalent
+market dynamic like this. And there is no competitor to the greatest holiday party ever happening
+December 6th in San Francisco coming to besties. God, I'm such a bad mood. I have not. I have
+I've gotten no fucking sleep.
+I'm so tired.
+I know, you're cranky.
+You're cranky spanky.
+I couldn't sleep.
+I couldn't sleep.
+Sacks goes in the back.
+Sacks sleeps.
+He's like fresh as a daisy when we land.
+By the way, when we landed, the winds in San Francisco, I don't know what's going on.
+We landed in Oakland.
+Holy shit, man.
+It was like a category four hurricane going on in the West Coast this week.
+Unbelievable.
+You were coming in, of course, from the West Coast.
+You were, I guess, in D.C., meeting with, I don't know.
+Oh, you had some business meetings there or some political meetings?
+Oh, you can, let's play Where's Waldo?
+Here, Nick, post the picture.
+You can see.
+You see Where's Waldo?
+Okay, here we got.
+Here we got a picture here.
+No, Nick, zoom out.
+Yeah, to the Zoom out photo.
+Where's Waldo?
+Let's see.
+Okay, here's a bunch of people in the White House.
+Bill Ackman is right in the back.
+You can see his hand right beside Nats.
+That's Ken Molesis, obviously, Steve Schwartzman, me, Bergam.
+Look at you all the way.
+Great guys, Will McDonough.
+Yeah, yeah.
+One of these guys is not like the other.
+Yeah, it was awesome.
+What happened was we were having dinner.
+And then he said at 945, I'm going to go down to the Oval and sign the bill to reopen the government.
+He said, do you guys want to come?
+So we all came all of this.
+And when you say you were having dinner, you and Nat were having dinner with the president.
+No, no, no, no.
+No, he was hosting a dinner for financial leaders.
+And you were there.
+We were right.
+It was cool.
+The dinner.
+Very nice.
+You went to dinner with the president.
+And yeah, that looks like almost as amazing an extravaganza as the.
+I got a cologne.
+You know the cologne where he sprayed it on?
+Yeah, he's spraying off foreign leaders.
+They come in.
+He sprays it on them.
+And then they're allowed to come in the White House.
+Me and Steve Schwartzman, we got a push, push on both sides of the neck.
+And we got a collar.
+Was Trump carrying the cologne with him and spraying people at the dinners?
+No, after the press conference was done, he reopened government.
+He's like, hey, you guys want to come back?
+I think they should have like a little gift shop at the White House with all the Trump stuff, the stakes.
+I will be honest with you.
+It smells very good.
+Oh, so anyway, come to the holiday.
+party. It's going to be a blast. There's a couple of tickets left, not many.
+We're going to burn it down this year with our besty, Tony Hinch Cliff. Casino Night with
+Poker. We got a celebrity DJ coming. Friedberg's going to be on the ones and twos,
+all in.com slash events. Allin.com slash events. And hey, the tequila has shipped. So if you
+bought tequila, we started shipping the tequila bottles. Thank you to everybody for your patience.
+We were getting the bottles. But David, it seems like the bottles have, uh, the bottles have a
+started to ship, yeah? People feeling pretty good about it. Yeah, it's exciting. I think the world's
+greatest tequila is going to be surprisingly well received. Okay, from the number one podcast in the
+world with the world's greatest moderator. All right, listen, there is an affordability crisis. We talked
+about it here for the last couple of weeks. Last weekend, the Trump administration floated a pretty
+wild idea of a 50-year mortgage that would ostensibly cut payments, monthly payments,
+by 20, 30 percent and maybe theoretically boost home ownership, and we'll discuss this in depth here,
+for young people. The idea was slammed by many people in MAGA saying, hey, this is debt slavery,
+and it's going to triple the lifetime interest. You can just be paying through the nose for your
+entire life, and you'll be an indentured servant. Politico said the idea was brought about
+by FHFA Director Bill Pulte.
+Pulte tweeted that the FHFA was, quote, actively evaluating portable mortgages.
+Now, this is a really good idea.
+That means you can take your mortgage with you if you go buy another home.
+If you upgrade a home, that would obviously get people out of homes that maybe they've outgrown
+or that their kids have left and there's extra bedrooms.
+And that is not happening because people are afraid to unwind a 2% or 3% mortgage to upgrade it to a 6 or 7%.
+percent one. And there's been some data going viral on X. National Association of Realtors released a
+report last week. The average age of a first-time home buyer is now 40 years old. That's up from
+28 years old in 1991 when I was in college. And in the 30 years from 1991 to 2021, it only increased
+a modest 18 percent from 28 to 33 years old. So in the last four years, it's jumped from 33,
+years old to 40 years old for the average first-time home buyer.
+Day later, clip of Friend of the Pod, Ben Shapiro went viral.
+Here's a 25-second clip, and we'll talk about it after.
+If you're a young person and you can't afford to live here, then maybe you should not live here.
+I mean, that is a real thing.
+I know that we've now grown up in a society that says that you deserve to live where you grew up,
+but the reality is that the history of America is almost literally the opposite of that.
+The history of America is you go to a place where there is opportunity.
+And if the opportunities are limited here and they're not changing,
+then you really should try to think about other places where you have better opportunities.
+Pretty obvious statement there from Ben Shapiro.
+Your thoughts, generally on affordability, Chima.
+It's a real problem.
+I think that this is the keystone topic that has to be navigated correctly for the Republicans to win the midter.
+I think there are three critical issues if I had to sort of put my finger on it.
+Issue number one is one of housing.
+So Ben is right there.
+Specifically, the problem is that older folks own all the homes and own multiple homes
+and younger folks just cannot get into the housing market.
+And cities and states do not do a good job of creating incentives for new homes to be built.
+That's one.
+The second, I think, is still around healthcare.
+The emergent data on the cost of Obamacare is horrible.
+Obamacare has been an unmitigated failure.
+The concept of capping gross margin, while it seemed good theoretically, has really turned
+out to be an incredibly stupid thing.
+So what that meant, Jason, is in Obamacare.
+There was this feature that said, you can only make a 15% gross margin, right?
+And what the folks in the White House at the time thought would happen is that costs would go down because their gross margin would be limited.
+Instead, what they did was they just started to raise the gross prices of everything so that the 15% applied to a much bigger number.
+And so you saw the president this week trying to see if he could just take the health incentives and give them directly to people and put it in their HSA accounts so that it didn't need to flow through the healthcare infrastructure and the insurance companies.
+So that needs to get fixed.
+And then the third is on the student debt side.
+I said it last week, I'll say this week.
+I'm sort of copying Peter Thiel here,
+but he's been saying for a while
+that we have to be much more sympathetic
+to the loan forgiveness.
+And I think he's right.
+So I think if we get these three issues addressed,
+something in housing,
+something in healthcare,
+and something on the student loan side,
+it is a transformational
+domestic policy agenda.
+that puts affordability front and center that will impact 50 to 75 million American households.
+Freeberg, your thoughts?
+If you pull up this article from yesterday, yesterday LA City Council held a vote.
+The vote was 12 to 2.
+In this vote, they limited the amount that a landlord can increase the rent every year.
+This is rent stabilization?
+Yeah, rent control.
+So it limits what a landlord can charge in rent.
+And basically, they passed the vote 12 to 2.
+And what they voted is that the landlord cannot increase the rent on an annual basis
+by more than 90% of CPI.
+CPI is the Consumer Price Index, which is published by a federal agency every year, as we know.
+It's the inflation index number that we often talk about on the show with a floor of 1%,
+so the landlord, regardless of CPI, can increase rent by 1%, and a cap of 4%.
+So if CPI spikes, for some reason, which I don't think has happened in recent times, you can charge up to 4% increase.
+So it limits what a landlord can charge in rent.
+And fundamentally, to think about this as an investor, so if you're buying a building or building a new building, you are now going to have your equity cap.
+You're upside, the amount of cash flows that you can generate from that asset, meaning the apartment building you're buying, is now limited by the amount that you can increase.
+to rent every year. So that creates a disincentive for capital, for investors, to buy new buildings
+or put money into upgrading buildings or put money into building new buildings. At the same time,
+as we know, the city of Los Angeles, the state of California, and the federal government of the United
+States, have passed law after law, regulation after regulation, statute after statute has gone into
+effect that makes it more expensive, take more time, and more difficult to build housing.
+The increase in regulation combined with the cap in the economic access to free markets,
+I think has made it increasingly difficult for there to be a free flow of capital to go and
+build new housing and develop units for people to live in and for sale. Every time the government
+gets involved in a market, it distorts the market. It lords the market. It
+limits the flow of liquidity, and it limits the market finding lower prices. And I think that's
+fundamentally what's gone on. The government is now trying to limit what a landlord can charge
+in such a dramatic way that it's ripped out all of the incentive for landlords to buy and own
+these buildings, because they're now only going to be small yielding investments, and there's no
+upside. So there's no incentive to go and build new housing. And then the government's made it difficult
+to build new housing for lots and lots of different reasons. Same thing happened with Prop 13,
+which we passed in California in 1978, I think, which creates a huge disincentive for people
+to sell their homes and reduces liquidity in the market. Now, I'll just flip to the federal
+agencies. So Fannie and Freddie combined have issued or supported about $8 trillion of home loans.
+The initial view on that would be, okay, great, they're creating liquidity for a market that
+doesn't have liquidity for people that need access to capital for banks that don't have assets to
+lend. And as a result, it's going to make housing more accessible to more people. That was the
+fundamental premise of setting up a government lending agency to support the purchase of housing.
+But as you fast forward over many years, the fundamental reality in a very liquid, well-capitalized
+marketplace that we have today is that that capital is actually excess liquidity that can in fact
+drive prices up. And much like we've seen in many other markets like education with student loans
+or like healthcare with Medicare, Medicaid, Obamacare, and so on, when the government gets involved
+and provides capital to, quote, support a market and make it more accessible, the prices skyrocket.
+So people will use a Fannie or Freddie Mac loan to buy a first home and then they can go buy
+their second home or their third home, or they can now afford to buy a more expensive home that the
+otherwise might not have bought. And so over time creates an inflationary effect in the markets.
+And I think that this is a fundamental question on like, how are we going to get out of this
+doom cycle? Because fundamentally, we're adding restrictions for building new homes. We're
+capping the amount you can make on homes. And we're giving liquidity to markets to drive up the
+price of homes, all of which create this perfect storm of disaster where we're just raising our hands.
+And you know what we say? Please, government, do more. And if the government does more, I can tell you
+one thing for sure, prices are going to go up even more. And so I think one of the, the challenging
+and hardest things to do is say, hey, government do less and figure out a way to kind of back out
+of this situation. Perfect segue to what I'm seeing on the ground. And I lived in New York,
+Los Angeles, San Francisco, and as folks know now, I live in Austin, Texas. And if you,
+perfect segue there, David, there's really two different countries here. You have people living
+in coastal cities where you're not allowed to build units. And rent is incredibly expensive.
+and you make the same amount of money. If you look at when I grew up in Brooklyn and I went to
+school at night, I took five years to get my degree from Fordham University, I had 12K in student
+loan debt. I was making $40,000 to $60,000 a year while I was in college doing IT. It's a big
+salary for back then, but my apartment, Freiburg in Brooklyn was $500 a month. I lived in an apartment,
+an addict apartment. And so if you were to take two people like that in America today, they're making
+$60,000 to $70,000.
+that's the average salary for college educated people who are 27 years old. If you live in Austin,
+it is absolutely no problem for you to own a home. Let me explain to you how easy it is,
+Freebird. We have so many units in Austin, Texas, and in Houston, it's even more pronounced,
+but Nick, pull up the chart there, just on rent, because you start as renters, obviously.
+Austin rent has gone down 20% in the last three years because we build units. When you build
+units when you have supply, prices go down. And the stupid people in San Francisco with their
+woke bullshit are like, oh, you're building luxury units. Let me tell you what happens,
+dumbasses when you build luxury units. The rich hipsters who are living in shi apartments in the
+mission upgrade to luxury buildings. How do I know this? They're doing it in Austin. If you live in a
+crummy apartment in Austin and you see these beautiful apartments being made with luxurious
+pools and restaurants, cafes, co-working spaces, you just.
+you move to one of those and that frees up that unit? In Austin, if you make $130,000 a year,
+your $130,000 as a couple, your rent is going to be 10%, 15% max of your income. And you're going to be
+able to make a down payment of 10% because the homes within 25 miles under 45 minutes of
+driving to the city center. Do you know how much they are per square foot, Friedberg?
+How much? They are $200 to $300 per square foot. You can buy a free bedroom for $300,000 to $300,000 to
+$500,000. You can buy a brand new one, Freeburg for $500,000. So Ben Shapiro is absolutely correct.
+The people who are upset at Ben Shapiro are a bunch of dipshit hipsters who went hundreds of
+thousand dollars in debt are paying $5,000 or $6,000 a month in the
+their rent can never get out from under their rent payment or their liberal arts bullshit degree.
+If you're a smart person, go to the University of Texas, graduate with little to no debt,
+live in a modest apartment, put down a down payment, and buy a $500,000 home.
+This problem doesn't exist in Texas.
+It doesn't exist in a lot of markets.
+Last night at dinner, Jason, the president asked, what could we do?
+What are some ideas around student debt?
+and Bill Ackman had a great idea, which was, we need to put the university on the hook as the first loss.
+Yes.
+And his suggestion was 20,000 was what he said. I don't know if that's the right number or not.
+But the logic that he made, which I thought made a lot of sense, was if the universities are forced to underwrite these degrees and they know that they'll take the first dollar loss up to a certain amount, 2030, 40,000, they'll be much more circumspect about what degrees,
+they force onto people and the amount of money that they're willing to actually underwrite via
+these loans. And that will be a telltale sign that a lot of these degrees don't make any sense.
+And right now, we don't have a market check to tell young people that. And so we push them all
+into school, thinking that it's the right thing to do. And then they're just completely saddled
+and they'll never get up. You have to do math. You have to have agency and you have to be
+self-reliant. When I went to school, there were some kids, and it's happening now, where they think
+they have to live on campus. They think they have to go for four years. If you have a job and you take
+five years to get your degree and you don't live on campus, your debt position when you graduate is
+going to be much different. If you have a job that is, you know, in demand in the world, you'll make
+60, 70, 80K. If you come out with less debt, if you live in an addict department, if you do a little
+austerity people, and you do a spreadsheet of your finances, which I had to do because my dad was a
+bartender, my mom was a nurse, I had to pay for college myself. I had to think it through.
+These elite lunatic kids in New York City or San Francisco think they deserve to live in Manhattan.
+You don't have a God-given right to live in Tokyo, France, Hong Kong, or any of the major cities.
+You need to live in the suburbs. You need to commute an hour to school.
+France is a country.
+In Paris, thank you.
+In Paris, sorry.
+If you live in Paris, London, these are not your God-given right.
+live an hour outside the city center and take the two people.
+These lunatics think they deserve it.
+And this is why Mondami and the Legion of Dopes.
+Can we just title this episode, Grumpy Chamoth and Soapbox, J-Cow?
+Absolutely.
+No, I just, people are so dumb.
+Did you bring your own soapbox?
+Did you bring your own soapbox at Tokyo?
+Did you buy one day?
+Soapbox.
+Soapbox.
+Yeah.
+Did you buy Japanese soapbox?
+I mean, you're going to.
+Soba-a-box.
+So-a-box.
+You're going to upset so many of the private equity wives that you spend most of your time curing favor from.
+I don't even know where any private.
+I haven't met any private equity wives.
+I don't know where they are.
+But literally, these kids are so boldly.
+They're in your comments, for sure.
+I don't think they're following me on X.
+I'm sure your bot army pays for some of them to.
+They're not, I'm telling you something.
+They're not, they're definitely not in public equity wives for J-Cal.
+When you run for, when you, listen,
+you're such a narcissist.
+You will eventually run for some political office.
+And that'll be the sign.
+P.E.Y's for J-Cal.
+Absolutely.
+You'll be the first to donate to my campaign.
+Give me a break.
+Bro,
+you know why I would?
+Because you're one of my best friends and I love you.
+So yes,
+sight unseen.
+You tell me how much you need.
+I'll give it to you.
+But it's not because I believe you're right or you should win.
+Okay?
+I'm coming back to New York.
+After my Donnie,
+it has nothing.
+Mayorjason.com.
+Bookmark.
+I am donating to you.
+It has no alignment to philosophy.
+ideology or your potential chances of winning. It's purely fair. There it is. Hey, guys, book it now. I'm
+controlled by big tech and finance interests. I guess related to the angst about affordability was the
+flare-up of H-1Bs again. Trump went viral after Laura Ingram on Fox kind of pushed him pretty
+hard on H-1B visas. And he stood his ground, President Trump, stood his ground that we need
+high-skilled workers in America. Here's your 25-second clip. We'll be back on the other side.
+H-1B visa thing will not be a big priority for your administration. Because if you want to raise
+wages for American workers, you can't flood the country with tens of thousands or hundreds of
+thousands of foreign workers.
+But you also do have to bring in talent.
+Well, we have plenty of talented people here. No, you don't. No, you don't. We don't have talented
+people here.
+have certain talents and you have to people have to learn. You can't take people off an
+unemployment line and say, I'm going to put you into a factory who are going to make missiles
+or I'm going to put you into a factory or we're going to make missiles. How do we ever do it before?
+Your thoughts here? We've obviously talked to a blue in the face about the value and the
+abuse of H1B visas, but it's coming up again. And I guess, you know, at a time when
+Trump's popularity is a little bit low and people are suffering with the inflation.
+not going down, yada yada, this seems to be like another point of contention.
+I think that we have to overhaul the H-1B program.
+Last night at dinner, actually, Howard Lutnik explained how some of these abuses happen.
+It's really unfair, actually, how it works.
+What he described is that when the application window opens for what is a very small number
+of H-1Bs, a company that has, you know, call it 300,000 employees abroad,
+will apply on behalf of all 300,000, because they're all roughly the same kind of employee.
+Whoever gets it gets to come over.
+Now, if you're filing 300,000 applications, obviously you have a disproportionately larger chance
+than Freebrook company or my company or your company, Jason, who's filing one, obviously.
+And so when those kinds of things happen and you can now use the data to understand it,
+you have to fix it.
+So that's one very material and obvious change we need to make right away, which is we
+have to allow American companies to find these folks and have it be very precise.
+The second thing is that we're introducing a price that each of these companies can pay for
+so that then you can signal clearly the disproportionate economic value that that person can
+create and the fact that after all the effort possible, you can't find that person here.
+And that's why you're willing to pay $100,000, which is a non-trivial amount of money.
+So I think that when both of those two things, the $100,000 thing is introduced and the visa
+application abuse is fixed, I think that we will go a long way to cleaning up the H-1B thing
+and putting ourselves back in a much better place.
+But right now, there's just a lot of abuse.
+And so the program itself is not working the way it should have.
+And I think this has largely been solved.
+I think it's a communication issue for the Trump administration because they did put this
+$100,000 fee on it.
+That's already in effect.
+And I've been saying this here at CNBC, this week in startup.
+for a decade. There's massive abuse on the bottom half, and it's necessary on the top half.
+If you're bringing in IT people for $40 to $80,000 to $80,000, it's not viable to put a $20,000, $40,000
+fee on top of that. But if you're Google or Facebook and you're bringing in a PhD and AI who's
+going to get paid a million dollars, well, that $100,000 fee, $20,000 a year, whatever it winds up
+being is nothing. It's de minimis. I take it one step further, Freiburg. I think we should be
+auctioning these.
+Using a more narrow example.
+Yeah.
+Let's say Freiburg, it's a startup.
+He has capital, but he has to return it.
+Freebrook, would you pay $100,000 for the right person that you could not find?
+And are there jobs where right now you're like, man, I can't find people that are highly specialized or not yet?
+I could see that.
+Yeah.
+I mean, certainly I could see being, I mean, unfortunately, I have, we can recruit those sorts of people in my industry because we're very special.
+but yeah, I can understand, like, particularly as it relates to software, I could see people
+definitely doing that.
+Yeah.
+And the way to really do this, and this is Trump's superpower, is turning something that's
+a cost center into a profit center.
+I always give him credit when he does something brilliant.
+And the brilliant thing to do is to take the $100,000 and make it an auction.
+I would auction off half of these to the highest bidder.
+And then you would have Google, Facebook, and Medici, instead of give me, you know,
+100,000 of these at the rack rate, they would be saying, hey, I need 10 of these, for sure,
+I'm going to bid a million. I need another hundred of these. I'm willing to bid 750. And then take
+that money and just allocate it to vocational training and retraining. The problem is this administration
+has two different sides. You have the brilliant people in this administration who I admire
+very much, like Lutnik and Sachs and the business people. And then you have the knuckleheads in
+my mind, the people who are doing the stuff that ICE agents and the deportations. And the perfect
+example of this has come up with the H-1B visas. They took the Hyundai plant where you needed
+high-skilled workers and they arrested and they deported a bunch of South Koreans. They, in a very
+brutal way, very disrespectful way, at the same time that Lutnik is out there trying to get people
+to invest in the country and build factories here. You can't be deporting people with Stephen Miller's
+deranged process of running people down and treating them inhumanely. And,
+then at the same time be saying, hey, we want you to reinvest and build a battery factory.
+Hyundai has a battery factory. These lunatics came there and arrested and chained up South Koreans
+who are our partners who are helping us rebuild our Navy. This is where the administration has to
+speak with one voice and it needs to be the professional smart people. And this is another
+example of it. They already solved this problem and they can't communicate it properly.
+Let Besson go out there and communicate this over and over again.
+It's a profit center now.
+And don't arrest the South Koreans who we're trying to get to build factories here.
+Disgratia.
+Next topic.
+There was a massive, three massive coronal mass ejections this week.
+These are giant waves of charged particles, protons and electrons mostly, that shot off from the sun.
+You can see a graphic here.
+You have to pick better words.
+That looks like Uranus right now.
+Did you have a burrito?
+Mass, mass ejections shot out.
+Mass shot out right from Uranus.
+Okay, so the sun goes through an 11-year cycle.
+As you know, the sun is a giant ball of plasma.
+Plasma is where the particles are so hot.
+They're so energetic that the electrons and the protons and the protons and all the particles
+kind of split apart.
+And so you have these subatomic particles moving around at extremely high energy levels.
+And when the protons smash into each other, that's what fusion is and that's what causes
+the energy that we get from the sun.
+And because these are charged particles, protons have a positive charge and electrons
+have a negative charge.
+When they're moving around at this high energy in such a dense space, they actually
+create very powerful magnetic fields.
+and those magnetic fields pull and stretch the physics of the surface of the sun.
+And over time, there are these cycles where those magnetic field strengths get so strong
+that once in a while they snap and shoot out a chunk of those particles into space.
+That is the fundamental physics that drives these coronal mass ejections,
+these big waves of charged particles that shoot flying through space at thousands of miles a second
+is how fast they move.
+high-energy waves of charged particles. And then when they hit the Earth, because they're charged
+particles and we have a magnetic field around the Earth, they interact with the magnetic field and they
+disturb it. And the disturbance of the magnetic field on Earth can actually have dramatic effects on
+GPS, on communications, and it can actually create shorts in conducting material on the surface
+of the planet. So for years, we've always talked about there could be an extinction-level event
+one day, if one of these coronal mass ejections are so large, they could actually wipe out
+satellite communication, they could turn off all computers, they could cause shorts in the electrical
+grids around the planet, there's all these major risks. So this is often talked about as like,
+when's this big event going to happen? And this week, it was a very big event. There were three
+major coronal mass ejections that happened in a row. Two of them kind of combined and hit the
+earth at the same time. And we had the highest level recorded geomagnetic storm, which was G5. So this
+G5 storm caused massive disruptions in the magnetic field strength of the earth.
+Fortunately, there was not a lot of reported damage, but we did get to enjoy the beautiful
+Aurora as far south as Texas in the United States, because these charged particles with magnetic
+field, they kind of move towards the north and south pole, and then they combine with molecules
+in the atmosphere, they release light, and you can see these beautiful waves of orange, yellow,
+red, green, purple lights that look like they're coming down from the heavens all over the planet.
+It was really an amazing and spectacular site. So it was a scary week from a solar storm perspective,
+but it created a beautiful view here on Earth. So that was the explanation for what happened
+with the geomagnetic storm this week. But to be clear, there were no other adverse effects
+from the CME. So far, there's some reports of communications going out in Africa and
+on small networks and things like that.
+I did not hear about widespread satellite failures,
+which is obviously always a big risk with these things,
+because these things can actually short out satellites.
+I mean, these are clouds of protons moving very densely.
+Actually, you know what, Nick, can you pull up?
+This is one chart to look at.
+So this chart actually shows on a log scale,
+which means every step up on the chart is 10 times bigger
+than the number before it.
+But you can see that right around midnight,
+London time on November 12th, which by the way,
+was just before I got on the airplane to fly from Japan to San Francisco.
+So I was actually considering not getting on my flight around this time.
+Really?
+But there was a, yeah, very seriously.
+Well, he didn't want to have a mass ejection on his flight.
+That would have been really bad.
+Well, you thought like the GPS could go out or something?
+No, no.
+So this has happened in the past, and they do have redundancy for the GPS going out,
+but the radiation level spikes when you're that high up,
+but only at higher latitude.
+So I was looking at the latitude of my flight path,
+but they actually turned off all flights going over the North Pole
+because the radiation gets so high.
+You can't fly over the North Pole
+when you have this much magnetic flux happening,
+particularly in the northern latitude.
+So you can see in this image, that red bar is protons
+that are moving, that have an energy greater than 10 mega electron volts,
+which is not a super high energy, but more scarily,
+is the green one. The green one is actually 100 mega electron volts. This is a massive amount of
+energy in a proton. That can cause serious damage on a microscopic level. So it can shred DNA,
+for example, it can shred circuits and so on. So this is a very powerful set of positively charged
+protons. And they count how many they're picking up on these satellites where they have these
+kind of detectors as they come from the sun, how many of them they're hitting. And you can see this
+extraordinary spike, where it spiked up from normally you see, call it one, to all the way up
+to a thousand.
+So it's spiked by a thousand X in five minutes.
+And so this is a massive increase in the natural background effect of charged protons
+shooting at this extremely high energy through space at hitting Earth.
+There was that Carrington event, which was the largest one ever recorded.
+I'm sure you're aware, Friedberg, like in the 1800s.
+what would happen if we had that level of event today given the infrastructure?
+Because back then we had telegrams, right?
+We didn't have a lot of equipment, but some of that equipment got fried during the Carrington event.
+Yeah, I mean, that's the sort of event that can absolutely short-circuit electronic equipment,
+either in satellites, and then they would be rendered permanently unusable.
+It can also, if it hits the surface of the Earth, because remember, what protects the Earth
+is the magnetic field we have, and the reason we have a magnetic field around the Earth is because
+we have an iron core at the earth.
+And as that iron core rotates, it creates a magnetic field.
+And we're very lucky to have that because that magnetic field actually is like a shield.
+It's like a force field around the earth.
+And it shoots charged particles away from the earth and keeps them from hitting the surface
+of the earth, which would kill all life on Earth over time.
+That's why we can't go live on the surface of the moon without protection.
+We're preparing for a Carrington event.
+Like if it happened, you could turn off all the equipment.
+No.
+Like power grids and stuff like that.
+So what would happen is you could have these voltage spikes that can actually short circuit physically
+destructure the microchips, the little wire connectors. So this is a very serious risk to civilization,
+which is why people always talk about these solar storms being those black swan events, those one in a million
+year events, or those one in a hundred year events that could render us back into the Stone Age,
+as some people say, it's unclear the probability of that, but the sun does go through an 11-year cycle.
+And during that 11-year cycle, there's a minimum and a maximum.
+We're kind of close to the maximum right now.
+So we are seeing these events very predictably every 11 years.
+But how big they are is something that's unknown to us.
+I mean, we try and study the dynamics of the sun,
+but it's very difficult for us to be very predictive
+about how big these CMEs are going to be when they're going to happen.
+So we have to be on top of observing as they happen.
+But then we only have a few hours to say,
+oh my gosh, this thing's coming for us.
+Beware.
+Everyone watch out.
+Be careful.
+but there's not very much we can do to prepare. I will say, I have a belief that I think electron-based
+computing is going to go by the wayside by the end of the century and be replaced with
+photon-based computing. And I think we're going to move most of what we do today with copper
+and semiconductor material over to photonic material and photonic systems and what will
+ultimately be quantum meets photonic systems, probably some point this century. When that happens,
+these risks go away. But for now, while we're relying on electrons and moving electrons around,
+through copper wire and so on, we run the very strong risk of these geomagnetic storms having
+an adverse effect on the planet and on our core infrastructure.
+Freyberg, I got to see you earlier this week.
+In Tokyo, we shared a little tempura.
+Good times, yeah.
+Good times in Tokyo.
+Definitely a lot of expats making their way from the tech industry to Tokyo.
+It's a booming town, booming tech scene.
+There's a lot of people from America who have come to the conclusion that the great
+confiscation is upon us.
+This is what I'm calling it, the Great Confiscation, whether it's California or New York,
+they're coming for your bags, and so people are now looking for not one, but two escape
+hatches.
+A state, a sovereign state, Friedberg, in the United States, the great state of Texas,
+where I hail from the past few years, and people are looking for an international.
+Everybody's getting themselves a passport or a golden visa.
+And Riyadh, where I've spent the last two weeks, are amongst the top choices.
+Do you see this image behind me?
+This is that forest city in Malaysia.
+It's the craziest thing I've ever seen.
+You what there?
+I went there last week.
+They put a hundred billion dollars into building this island, a whole city.
+This is the thing that Bollagy owns?
+No, he rented a hotel.
+They have a big resort hotel.
+He rented the whole hotel.
+That's where he's running his network school.
+He's running essentially like an in-person Y Combinator network state.
+You pay one fee for your apartment, your food, your gym, and you hang out with other people
+who want to be part of a new society with their own rules.
+Kind of interesting.
+Yeah.
+But between Matt and Singapore and Tokyo, I mean, there was like a really interesting
+cross-section of people that I would say are kind of on the frontier of.
+tech that feel like it's not in the United States anymore. And they're looking for what feels like
+the Wild West. Where can we go? Where can we put down roots? Where can we establish a new town for a
+new era? Because a lot of people view the U.S. at the end of the cycle. And look, it may not be
+a massive community today, but it's a burgeoning community. It's a growing community. And there's this
+really, I think, interesting,
+maybe scary trendline
+of folks,
+you know, wanting to kind of see
+this stuff happen outside the U.S. and making an
+effort to... I'm going to...
+I'm going to start my own little community.
+For Vikuna.
+Vikunia and Wagu, those are the
+two litmus tests for entry.
+Chamatha Apopolis?
+It's going to be...
+You can only wear Vikunia and you can only eat Wajgian.
+All right, everybody.
+another amazing episode.
+The All-In Podcasts is in the can.
+Love you, Besties.
+We'll let your winners ride.
+Rain Man, David Sachs.
+Open source it to the fans, and they've just gone crazy with it.
+Love you, Westis.
+You're going to notice in your driveways, sex.
+One big you, George, because they're all just useless.
+It's like this sexual tension, but they just need to release them out.
+What?
+Your...
+Beard feet.
+We need to get merchies are back.
+and all in

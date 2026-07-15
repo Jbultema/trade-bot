@@ -1,0 +1,1491 @@
+source: allin_podscripts
+published_date: 2025-08-01
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/trump-ai-speech-action-plan-dc-summit-recap-hot-gdp-print-trade-deals-altman-warns-no-privacy
+title: Trump AI Speech & Action Plan, DC Summit Recap, Hot GDP Print, Trade Deals, Altman Warns No Privacy
+
+How much founder mode did you do?
+You're saying that I popped an out.
+I need an out right now.
+Hold on.
+You don't need anything right now.
+Are you chewing it?
+What are you doing?
+No, you put this nicotine patch, you upper deck it, releases it, and then you become a god.
+Is that the app that Tucker said you?
+Yeah.
+Tucker and I are going to do a crossover.
+Wait, did you work out a side hustle here?
+I haven't presented it to the group for a vote yet.
+You're preempting the-in second.
+Are you being paid for this plug right now?
+Yes, he is.
+I'm just saying, if you use the promo code J-Cal.
+Wait a second.
+promo code j 15
+okay he broke up
+which is good
+is he on drugs is he taking drugs
+he's on drugs
+no i'm not on drugs and he's doing a deal with
+this is like a PSA for not taking this stuff
+you're so out of control
+do you take two of them what are you doing
+I thought this stuff relaxes you
+what the hell is going on
+your internet's on the fritz too
+I fixed it I fixed it I fixed it I fixed it that was Putin
+Putin's got my internet
+put my god
+what flavor are you eating
+Or using...
+Oh, today's chilled mint.
+Today's chilled mint.
+You don't seem very chill.
+You seem...
+You seem agitated and angry.
+No, I'm trying to get us back to that original all-in energy where we laughed and we had fun and we enjoyed each other's company.
+No, but Jake Al, seriously, do you have a side deal going on without right now?
+No, I don't have a deal yet.
+I don't know if I have a deal.
+There's no deal.
+I'm texting Tucker now just to cut you.
+to let your winners ride.
+Rain Man, David Sack.
+And it said,
+We open source it to the fans, and they've just gone crazy with it.
+Love you, what's nice?
+Queen of Kinwa.
+All right, everybody, welcome back to what Jensen from Nvidia has confirmed is the number one podcast in the world.
+Yes, the All In podcast is here.
+We had an amazing time in D.C. last week.
+and we'll get into that.
+But, hey, Freeberg, you crushed it on all those incredible speakers last week.
+Ten days you had to pull off that event, Friedberg, and you did it.
+Chimoth and I just parachuted in to D.C. last week for the AI summit.
+Sacks was busy working with POTUS to get all those executive orders done.
+Take us behind the scenes, Freiburg.
+All of these incredible speakers, you got Lisa from AMD, you had Lutnik, I liked him,
+Bessent, I liked him.
+We had to say no to a lot of tech company CEOs that found out about the event and wanted
+to speak on stage.
+So there was a big kind of cutoff that we had to make around making sure that we got our message
+across.
+I think if you watch the content, we talked briefly about it at the beginning, but the focus
+was really on trying to dispel the negative AI narrative and myth that AI is just here
+to destroy jobs because there's this big economic boom that's happening both with respect
+to new industries that are emerging, which is why we showcased Hadrian and others. But then also
+the infrastructure needed to support the AI race with data centers, chips, mining, and energy. And so we
+highlighted each of those four industries. And then the cabinet people found out about it and wanted
+to get involved. So we were unfortunately squeezing people on and off stage. It's kind of crazy
+to tell the secretary of treasury he has to get off the stage because he's passed his 20-minute
+allocation, but we had to line everything up so that the president could get his
+Secret Service detail to clear the stage and get set up in time. That's why we were rushing
+everyone. But man, what a week. What a rush. It was awesome. Thanks to David Sacks for the
+leadership and pulling it all together, bringing those folks to the table. And Sacks,
+congrats on getting your EO signed and your action plan published. That's pretty cool. Pretty awesome
+to meet the president and meet all those cabinet members and have all of this day come together
+because of the work you've been doing. How does it feel? Sacks, how are you doing in the afterglow
+there? I can see that you're in the afterglow. You sent me a picture of the four besties
+with our incredible 47th president. How are you feeling right now? Are you going to put that on the
+screen? I mean, if we have it. I don't know if that's allowed. Can we allow to put that on the
+screen? I don't know what the protocol is. Yeah, I think we can. Yeah. I mean, I haven't gotten my
+picture. I did notice that I was unfortunately when they took the picture of the four of us with
+the president. Somehow I got cropped out by accident. I think maybe they weren't using a wide lens.
+What was it like for you to meet the president? Because just for the audience, we all stood in line
+and then we took a photo with the president backstage. And then we did a photo with the four of us.
+But Jason, when you had your moment with the president, what did you say? Did you ask him about immigration?
+Did you have your photo, by the way. I have your photo with the president. Oh, fantastic.
+It's on my phone. Did you bring up solar panels with him? Like, what was your big moment all about?
+I didn't know we were taking a picture. That was like sprung on me.
+So I was like, oh, we're taking a picture.
+So my brother, Josh, who runs security for us, was like, they need you in the back to take a picture with the president.
+And I was like, yeah, I'm good.
+I got to prepare for, you know, some side of the past.
+Well, I thought he was joking with me.
+So I was like, yeah, yeah, I'm good.
+He's like, no, no, I'm serious.
+You're taking pictures with the president.
+I was like, we are?
+Okay.
+So I ran back and they put us in line.
+And then I was like, I think I'm getting punked here because.
+They kept repeating to me, okay, Jason, you're last, you're last.
+And they, you know, and I know you guys like to put in a joke or two.
+So, you know, I just got in line last.
+And it's obviously, you know, it's a big deal to take a picture with the president.
+So I didn't want to, you know, use that time inappropriately or anything.
+So I just said it's a pleasure to meet you.
+Just say it already.
+You like them.
+Just let's get it over.
+Just get to the end.
+You like them.
+You tried not to.
+You know, you're all Mr. Friken big shot, Mr. Big Talk.
+And then you got in front of him and you like him.
+Just say it.
+What I will say is,
+Jesus Christ.
+I don't like him, I dislike him.
+What a joke.
+You're such a goon.
+I had a great time.
+I had a great time in D.C.
+You're a predictable.
+You're a predictable goon.
+You don't even know what goon is.
+Okay, stop Riz.
+Stop aura farming.
+You don't know what gooning is, okay?
+No, I had a great time meeting him.
+It was a great event.
+You're oral farming, obviously.
+He's trying to get his Riz up to impress his kids.
+but it was great
+and I didn't know what to do in the picture
+so he did the thumb and we can move on.
+What do you think of his speech?
+After he gave you a shout out.
+Jason or even acknowledged
+after the president gave you a shout out.
+I don't know about love.
+He said even Jason.
+How many times have you listened
+to that clip over and over?
+How many times?
+How many times?
+How many people have you shared that with?
+Play the clip.
+Play the clip.
+I want to also say hello and thank
+to Jamest.
+and his wonderful wife, Nat.
+Thank you very much for being here.
+Thank you very much.
+It was great seeing you again.
+Great couple.
+David Friedberg and even, as we know, Jason Gallicator.
+I say even.
+Thank you, Jason.
+I appreciate that.
+Yeah, he's a good person.
+He called you a good person.
+He called me a good person, so here we are.
+What president's ever called you a good person this one? Come on. I mean, it's obviously, like, surreal
+for all of us, I think, to be this close to the administration and then for SACs to be part of it.
+What I will say is you have to give a lot of credit to this administration for the velocity they're going,
+what they're accomplishing, even if you disagree with certain items on the margins,
+and their ability to engage with leaders doing important work. And if we compare that to Biden and
+Kamala, like, they weren't even letting people come to the White House.
+Is this like, so you like this administration. I love the administration. I like Trump.
+This is a cabinet of CEOs. Let me just say this. I'm not in love with Trump. I'm in like with
+Trump. That's where I'm at. I'm not in love with Trump. I'm in like with Trump.
+But what better team has ever been put together? It is a cabinet of CEOs. It is a cabinet of
+managers. Absolutely. People who know how to get done. And every time I go there, I'm impressed
+by this cabinet. I pull my hair out when I mean with members of Congress. So will you admit that?
+You're pro-Trump. Finally, Friedberg. You've been splitting it. You've been dancing around the issue.
+Are you full 100% in support of Trump? You want to sit here and put me on the spot? I put you
+on the spot. I support my president. I support the president. Okay. So you voted for him and you
+love Trump. You voted for him and you love Trump. I love what he's doing. And you voted for him.
+and I have issues with the spending, and that's not been resolved.
+So, like I said before, here we are, folks.
+My full-throated endorsement will come around when Doge actions are taken seriously
+and or the White House puts pressure on Congress to take action on spending and the budget.
+What is everybody's favorite moment?
+Favorite other than Trump, you know, being absolutely amazing, great speech.
+He said he's hilarious, whatever.
+We'll put POTUS outside that because it's hard to compete with the president of the United States.
+Sacks, did you have a couple of favorite moments?
+gives a couple of favorite moments. First of all, I think we should talk about the substance of the
+speech because I think this was the first speech that President Trump has given on AI since the AI boom
+began. He's spoken about it before, but this was a full-length policy speech. And he declared that
+the United States was in an AI race. It's a global competition. I think the language that he
+used was reminiscent of how President John Kennedy declared that America was in a space race.
+And in a similar way, President Trump declared that we had to win the AI race.
+I think you could argue that the AI race is more important than the space race.
+It's going to reshape the global economy.
+It's going to determine who the superpowers are of the 21st century.
+And President Trump was really clear that we had to win it and that he was going to support a strategy for winning it.
+And then he laid out with some of those key pillars are.
+Number one was innovation.
+We have to get the red tape out of the way and let our geniuses cook.
+and clearly was very supportive to a lot of the CEOs and entrepreneurs in the crowd.
+Number two is infrastructure.
+He touted the hundreds of billions of dollars of investments in energy and power generation
+and grid upgrades and data centers that he's supporting.
+And then he also supported AI exports.
+He said that we have to make America's tech stack the global standard.
+So I think those were really important messages.
+And then on top of that, I think there was also some parts of the speech that
+maybe have gotten less attention, but are also important, where he said that it's not only
+important that we win, he said it's important how we win. And he sort of mentioned three
+non-negotiables here. Number one was that American workers have to be at the center of the
+prosperity that we create. Number two is that the AI models that the government procures and
+buys must be free of ideological bias, so no woke AI. And he also saw,
+an executive order to prohibit woke AI in the federal government.
+We could talk about that in a second.
+That probably was my favorite moment.
+That was my favorite moment.
+That was my favorite moment.
+That was the red meat moment.
+I thought that was a red meat.
+Yeah.
+That was a red meat for the base.
+Yeah.
+The third thing is he did say that we do want to prevent our technologies from being misused
+or stolen by malicious actors.
+And look, we are going to monitor for emerging and unforeseen risk.
+So, you know, we're not going to disregard the risk.
+But he had this really good line in the speech about how even though AI, look, it's a daunting
+technology because it's so powerful. And like any revolutionary technology like that, it can be
+used for bad as well as good. But the daunting nature of it is all the more reason why we have
+to do it in the United States. Why the United States has to be the pioneer and the leader is because
+we don't want the power of that technology being developed in other parts of the world, at least
+other parts of the world are going to have it, but we want to be the ones on the cutting edge
+we're defining it and leading it. Fantastic. Okay. So I think it was a really important.
+important speech, I think, this idea of an AI race that is similar to the space race, I think
+is going to be the dominant frame on AI policy for years to come.
+Well, it's pretty clear, you know, this presidency, this term is going to be earmarked,
+I think, by four key initiatives, AI, crypto, immigration, and tariffs.
+I think that feels like what they're locking into as what's important for the next three and a half
+years, I think you would agree with that. And it's just great that you're spearheading and
+helping the president with two of those four. And just the velocity to me is what's super
+impressive. Any way you could take us behind the scenes of how this stuff is getting done so
+quickly. It feels like there's some operational cadence here that we didn't see in his first
+term. Certainly didn't see in the Biden term. But there's a cadence here that's different. Yeah?
+startup speed? How is that being driven? He's working at tech speed. I just think that the president's
+constantly working. I mean, he's just so energetic. I mean, he basically works like two full
+work days. I think it's well known that he doesn't need a lot of sleep and he continues to work late
+into the night. And I just think his energy propels everything forward. I also think that there's a
+very cohesive team at the White House under the chief of staff, Susie Wiles. I think it's very important.
+I think she runs a tight ship and then got the deputy chief of staffs under her.
+And I think most of the people have been working together for a long time.
+And it's a team that works well together.
+And I just feels very coherent and cohesive to me.
+So I think it's a very effective team.
+It does feel like that.
+The pace is great.
+It means you're going to get more shots on goal.
+You'll be able to try more things and get more accomplished, just like we see in startups.
+Chimath, outside of the president's talk, we'll go around the horn here.
+Top two or three moments from the discussions, just lightning around here, rapid fire.
+What do you got?
+Top two or three moments for you, Chama.
+Just in the discussions that were enlightening to you, inspiring to you, notable to you.
+I came out of it very motivated.
+I think that the combination of the speech, the executive orders, and the clarity of the big, beautiful bill,
+now give those of us that are in these markets a ton of runway to go and execute.
+And so those things reinforced by the various members of the cabinet, I think, were very important.
+That was one.
+And then the second thing were the market commentary from both Lisa Sue and Jensen, I thought, was really valuable.
+And then the third was Chris Wright and Doug Bergam talking about energy.
+And I tweeted this yesterday.
+But we are sort of back to basics almost in a sense where in the absence of power, I think AI is not going to be the thing that we think it can be.
+So that's going to create an enormous amount of appetite by the federal government to do deals and get players on the field.
+And that's, to me, very exciting.
+So, yeah, I came away really, really risk on, I guess is the best way to say it.
+I love it.
+Freeberg, did you have two or three moments outside of the president's speech?
+obviously, that's the pinnacle there. So let's just go below the pinnacle. What were the other
+two or three moments for you that were salient, inspiring, notable? I thought Jensen did a great job.
+I don't know what you guys thought, but he is very compelling and has an incredible vision and
+view on where AI is taking us, where it's headed, and what the challenges are. So I really
+appreciated him taking the time to come and join us. Last minute, he rearranged his schedule to come
+out for it. And it was great. By the way, on the point on energy,
+which I still think is the biggest unsolved issue right now in America besides the federal deficit
+and the debt problem. Chris Wright agreed to rearrange his schedule to come and join us at the
+All-In Summit in September to continue the conversation. We didn't get enough time to talk about it,
+so we are going to hear more from Chris, particularly with a particular focus, which is what I wanted
+to spend time on it. We didn't get a chance last week on nuclear. And where are we? Because he actually
+is very passionate, like he said at the thing, it's where he's spending most of his time right now.
+And I think it's very good to hear the deep dive on where we are in the cycle on trying to
+accelerate nuclear energy deployment in the United States.
+Zach, same question to you?
+After POTUS, you got two or three moments that stood out?
+Let's just talk about the executive orders for a second, because I think it's pretty cool
+that the President of the United States signed three executive orders at the Allens Summit
+that we just hosted.
+I mean, that was pretty amazing.
+One of them was to promote AI exports because we want the American Tech Stack to be at
+come to the global standard. The second was around AI infrastructure to make permitting easier
+so we can help solve those energy problems you're talking about Freeberg. And then the third one
+was on preventing Woke AI in the federal government. And that, to me, is probably my personal
+favorite because we spent a couple of years on the show talking about how when we're talking
+about woke, you're really talking about censorship, right? We were talking about censoring people's
+views based on... Bias. Ideological bias, ideological dogmas. We saw it was happening.
+in social media before Elon bought X that helped bring things back. But we were on a track,
+I think, before President Trump's election, to repeat that whole social media censorship
+apparatus in the form of AI bias or AI censorship. And we saw this with the whole Black George
+Washington and where some AI models were saying it was worse to misgender someone than to have
+a global thermonuclear war. Yeah. And this wasn't an accident.
+because if you go back to the Biden executive order on AI, there was something like 20 pages of
+language on there encouraging DEI values to be infused into AI models.
+So again, we were on track to repeat all the social media censorship, all the trust and safety
+stuff in this new world of AI, but it would have been even more insidious because at least
+when someone gets censored, you kind of find out about it.
+It's explicit.
+It's not explicit.
+Yeah.
+But with AI, it would have been worse because you wouldn't have been.
+even known. It would just be there rewriting history in real time to serve a current political agenda.
+We've been brainwashing our kids. Oh, and people trust these AIs more than they should.
+I mean, these things are making a prediction of the next word coming. This is not like God-given
+truth here. And so, Freeberg, you wanted to interject about this one. Because this is actually,
+I'll be honest, Sacks. I'm surprised you're saying this was the most important one to you. I like
+that you clarified it because it was the one that was mocked or kind of like people were like, what?
+Why is this important?
+I think you made a good case for why it's important.
+Freiburg, your response, yeah.
+But, Sachs, this is not about broadly making, quote, AI non-ideological.
+Private companies should still have the right through freedom of speech or freedom of expression
+or freedom to operate to make AI that does whatever they wanted to do.
+What the EO was was that the federal government would not procure ideologically biased AI.
+Is that correct?
+Yes, exactly.
+No, we're aware.
+Just to make sure that the federal government is not trying to instruct private companies,
+how to operate. It's simply saying if you want to sell to us, these are the rules of the road.
+Yes, that's true. So we were very careful about the First Amendment issues. And you're right,
+that if a private company wants to put out a biased AI product, we're not going to tell people
+they can't use it. Right. And it could work. It could be successful. People might like it.
+Yeah, we're just saying that the federal government is not going to spend taxpayer money
+buying AI models that have compromised their accuracy and quality because they're beholden
+to some ideological agenda.
+Which is similar to the approach with the universities, right?
+Hey, listen, you could have a biased university.
+We're just not going to fund it.
+We're not participating.
+I think it's quite reasonable in that way.
+And by the night.
+I would just say that, you know, we were a lot more careful about this than the Biden administration
+was when they required that DEI be inserted into all these models.
+They didn't distinguish between public and private money or government procurement versus
+private models.
+So they just, they were trying to suffuse DEI into every.
+And what we're looking for here is just neutrality, right?
+We're looking for a lack of ideological bias.
+The first step was to get rid of that Biden EO, which the president did his first week in office.
+This goes a little bit further.
+And it's a little bit of a shot across the bow of these Silicon Valley companies saying,
+look, you need to play it straight.
+You need to be ideologically unbiased.
+As the default.
+As the default, when you sell to the government, you can't insert your values at the expense of accuracy.
+Look, at the end of the day, accuracy and truth seeking.
+is the standard, right?
+That's the goal.
+That's the goal.
+So we don't want the quality, accuracy,
+and truth seeking to be sacrificed
+because of these ideological biases.
+Are you still seeing that?
+Like when you say these Silicon Valley companies,
+I mean, is this still kind of a widespread concern
+or widespread deployment from your point of view where you're sitting?
+Like, are you still seeing a lot of the models being trained on ideological systems
+that, you know,
+are preferential to one group and not to another?
+I think it was a much bigger concern six months ago.
+I think there's been such a huge vibe shift since President Trump's election and taking
+office that like the woke stuff is sort of going away on its own.
+But I think that's the trajectory we're headed.
+But you still think it's important enough to make sure that there's an error.
+Yeah, it's like, look, this is make sure this thing doesn't come back from the dead.
+I think there's been a huge vibe shift since President Trump's election.
+And woke has definitely fallen out of favor.
+And it seems to be going away on its own.
+But we could still get, you know, Orwellian outcomes with AI.
+And I do think it's very important to just keep underscoring that what AI models should be
+focused on is the truth, is on accuracy.
+And we don't want ideological agendas to sacrifice that.
+And I think that even though this is a less saline issue now than six months ago,
+precisely because of the vibe shift, I still think it's important to underscore this point
+that we don't want.
+Would you go so far?
+We don't want AI taking an Orwellian direction.
+Yeah, would you go so far as to limit free speech and make it non-ideologically biased?
+Like, would you make that law if you could?
+No, I wouldn't.
+Again, the decision about the federal government procuring versus what these private companies can choose to reflect as their, quote, values in their system.
+No, he just, you already answered that.
+You know, he would not.
+Yeah, no, look, we understand the difference between public procurement and private speech.
+And again, in a way that the Biden administration did not, because.
+because they were saying that all AI models had to be subfused with...
+To the CEI stuff.
+Yes, it was an ideology they wanted embedded in it.
+You're saying, don't put it in ideology in.
+But just to be clear here, I want to make one point.
+This is the defaults.
+Anybody who wants to, when they start their prompt or they set up their preferred language model, could say, I'm an atheist.
+Here's what I believe.
+Please speak to me with this in mind.
+Or I'm a Catholic.
+You know, I'm a Protestant, whatever you want.
+That's right.
+Here's my belief system.
+So please never reference, you know, these three subject matters in this way.
+So this is the default.
+I think it's a great thing you've explained it perfectly.
+I think that's a great example, J-Cal, I do think we'll end up seeing religious AI.
+I think we'll see AI that's tuned to people's religious beliefs and other ideological.
+But I think, yeah.
+I have one of the startups we did was doing the learning app and they were struggling and
+they just made a prayer app and their prayer app went parabolic and now they're just like
+printing money.
+So there is definitely a huge.
+market here. Check out, what were your highlights? It was great to be, you know, included in everything.
+So I appreciate that. We had a son. No, I mean, that's serious. Your invitation finally didn't get
+lost in the mail. No, but here's the thing. I think this could have been a non-all-in thing.
+It could have just been, you know, you could have done it and just invited who you wanted to.
+So I like that it was under the all-in umbrella and that we didn't censor anything. And we went
+right at hard topics. I'm a moderate. I know people want to make me into like a stupid lib,
+but I am an independent moderate. And there were moments in time.
+when we had great debate, too. This wasn't just a love letter to the administration.
+One of the great moments was J.D. Vance. It was just great that he wanted to come, chop it up,
+and just hang with the besties. And he came out, and he went right at me. He was like, hey,
+you treated me like, at the thing. We had a big debate. And, you know, he went right at me.
+And then I was like, okay, it's on. We want to talk about stuff. And he said, yeah, let's get into it.
+And that's what I love about J.D. To me, seems like the politician of the future.
+I know this is like the Trump's administration.
+So you like him.
+No, no.
+I'm in like with Trump.
+I'm in love with JD because he's young.
+He's opinionated and he likes to mix it up.
+He's on Twitter all day long.
+He engages people on Twitter.
+He engages people in other groups.
+I'll leave it at that.
+And we had a really, I think, honest discussion about immigration.
+And we got back to the high-skilled immigration question.
+That's the third rail for MAGA and for the country right now, immigration, recruiting.
+You mean, you brought it up, right?
+off the bat. No, no. He said he wanted to talk about. No, you brought it up. No, no, no, no, no, no. He's your
+hobby horse. He said, I want to continue the debate. And I said, okay, let's continue the debate.
+So here we go. He was super spicy. And he made a great super spicy point that I want to point out here
+on Amplify. If companies are going to be laying people off and there was an incredible
+chart that came out, it was in the Financial Times. And they showed male college graduates
+versus non-college graduate males.
+And there was usually a huge gap in unemployment between those two.
+In other words, if you had the college degree, you had a much better chance than the
+non-college degree male.
+And now those two things have flipped, or they're like neck and neck.
+If you have a college degree, you have no advantage as a man coming out in this, you
+know, 20 to 27-year-old range.
+This is men.
+Women are actually doing better, more women in college than men, yada, yada.
+But he's very attuned to this.
+And he said he's got big concerns right now.
+So this is, again, why I love JD, because JD is very tuned into the fact that people
+are asking for more H-1B visas, and that typically is to save money and supposed to be very
+skilled people.
+But why is Microsoft laying off 9,000 people than asking for more, you know, H-1B visas?
+This is a really honest truth-seeking question.
+And it's hard for this administration to talk about this issue, because I know you've got
+Steve Miller, Bannon, whatever.
+people all the way on one side who wanted to deport 20, 30 million people, Tucker,
+and then you have other people who are more moderate.
+And I thought that was like a really great moment in time for America and for us as a podcast
+to challenge and have a really important discussion.
+And he made some great points there.
+Number two, we had a great debate, I think, about energy.
+No, disagree.
+Go ahead.
+You disagree.
+Okay.
+I disagree with the, because I think you challenged him with, I think you challenged him with
+things that were not facts and not true.
+And I'm happy to debate that with you offline.
+he was caught off guard, but I think it was pretty
+like rough and inappropriate.
+If you think it's inappropriate, that's fine.
+Jakehouse's favorite moments were all the ones
+where he got to combatants with the guests.
+That's what you're describing.
+No, no, where there were debates.
+When you got into it with the vice president,
+you got into it with the Secretary of Energy.
+Those are your favorite moments when you got to.
+Okay, great.
+So, okay, fine.
+I like when there's a little conflict,
+a little debate about an important issue.
+And when I walk the audience, which was, you know,
+90%
+Republican GOP, MAGA, et cetera, people said that was a great moment.
+I really liked that debate because he kept saying like non-reliable energy and whatever.
+So you're talking about solar?
+And I think there was a little misinformation there.
+No, it's not misinformation.
+When you put it with a battery, right now, Texas is 30 percent some days, wind and energy.
+You know, like, I can tell you, I live in the great state of Texas.
+Texas is roughly 5 percent solar, just so you know.
+What's that?
+Texas is roughly 5 percent solar.
+Right.
+And wind puts it up to 25 to 30 percent.
+on the top days is coming from that.
+My point about that is,
+and it's cheaper to put in a solar and battery farm
+than a new coal plant.
+It is 100%.
+We can pull up the stats.
+It is twice the cost to do solar
+than it is to do nat gas.
+It takes 4,000 acres.
+No, I said coal.
+I said coal.
+I said coal.
+I said coal.
+The big advocacy with these guys
+is to use nat gas, to use methane.
+Oh, no, he would say clean coal, clean coal.
+He said it 50 times.
+These methane plants are half the cost of solar.
+They can get stood up in less than two years.
+To generate a gigawatt.
+And instead of being 4,000 acres of solar, you can get it done for, you know, call it 20 acres.
+Now, talk a little bit about pollution.
+And that's a big part of why they're doing this.
+Well, a big part of methane is that it's actually cleaner than coal, which is why they're using it.
+Cleaner than oil.
+And the two duriest ways of getting energy.
+Now science guy.
+Now do solar batteries and nuclear.
+I'm trying to give you the fact about why it is cheaper and faster, which is what he was making an advocacy for, right?
+not about like solar yes you're right it has a lower carbon footprint when you're running it
+but at the end of the day what these guys are focused on and a big challenge for america is how do we
+scale energy production in the states yes scaling energy production i personally think we need to
+fix the regulatory roadblocks in nuclear and chris wright's been very vocal on this we all agree
+on that but the fact is this nat gas supply that we have in the united states and the fact that
+we can deploy nat gas energy production very quickly is what makes it such a reliable source right
+now if the U.S. wants to have a chance at scaling from one terawatt to two faster than we're currently
+projected today. And that's the reason. You know, it's not about like solar is being bad. Solar is bad.
+Like, that's not the argument. It's just like, dude, we got to get moving fast and we got to have
+reliable energy. I just want to point out in our debates, I just want to point in our debates
+when there's bad faith moments. I think it's a bad faith moment for when I say coal versus solar.
+And then you say, no, you're wrong. It's solar versus Nat gas. And that's what he was doing.
+This is what politicians do. You're on all.
+in, we like to do, you know, fact-based, truth-first stuff, not biased stuff. And so solar, you're
+comparing, you know, solar and how fast it is versus how fast it is to go to net gas. Of course,
+it's faster to go to net gas if we have those available. Let's put that aside. It's an important
+debate. The fact that you and I are debating it is important. And I also thought Lisa from
+AMD was fantastic. I haven't heard from her. By the way, I just want to point out that when I got
+back to the conference. So I left
+for a time to go back to the White House
+and then I came back. The first thing everyone
+said to me when I got back
+was, did you
+see Jekal being a jerk to
+Chris Wright? Everyone was like
+all a tizzy about that. Yeah, a jerk.
+He's a civil servant. He
+has to answer hard questions. You didn't
+talk to him in a, in the way
+that you would. Basically, everyone thought you were a jerk
+to Chris Wright and you were kind
+of a jerk to J.D. And what are your favorite
+moments? What are your favorite? What are your favorite?
+moments from the conference you're reminiscing about that you were an asshole to me
+anyway the point is one thing you're going to get here at the all-in podcast I'm all right
+this is what everyone was saying two out of three with everyone was saying this you almost derailed
+the whole thing no wait my derailed it you're a civil servant mr. sacks you're a civil servant
+you're all civil servants you work for us and you will take the hard questions it was perfect
+training for government services, beyond the podcast being interrupted by you for five years.
+Yes.
+That's why I'm so ready.
+You learned well.
+You work for us, all of you, and you're all going to take hard questions, and you're all
+going to take hard questions on September 7th, 8th, and 9th, when we have the all-in summit
+in Los Angeles.
+By the way, one thing I'll say is Chris Wright's chief of SACO to me afterwards, and I said,
+I'm sorry I heard Jake Al was a jerk to Secretary Wright.
+And he's like, oh, no, Chris loved it.
+He loves mixing it up.
+Okay, of course.
+And he's coming to, on Summit on September 8th.
+Can't wait to debate him more.
+Can't wait to mix it up more.
+So he likes mixing it up.
+So kudos, thank you.
+And so did J.D. Vance, the vice president to you.
+Stop calling J.D. by the way.
+Well, I mean, listen, I just want to say,
+Vice President, J.D. Vance and I have been directly communicated.
+Really?
+Yes.
+No, you have it.
+David Sacks, your worst nightmare.
+Oh, my God.
+Your worst nightmare.
+The nation is ruined.
+What the fuck?
+We let J. Kell into Washington and now look what's happening.
+Yeah.
+Listen, I want a level set with everyone.
+We, I am going to ask whatever fucking question I want to whatever guest we have and nobody's stopping.
+The only way you're going to stop me is by writing me a huge fucking check to buy me out of this podcast and replacing me with some mid.
+Until that time happens.
+Or if the Secret Service keeps you offstage, which might be an option.
+Or Secret Service keeps upstage.
+But the truth is, this is one of the great things about this administration sects is that they love to mix it up.
+They like great debate.
+You know who didn't like great debate and ran from it?
+Kamala, ding-dong.
+She wouldn't even come on this fucking podcast.
+You know who doesn't like debate?
+Weekend at Bernie's Biden, who didn't even know what a podcast fucking is.
+Tim Walts, who doesn't own an equity.
+You definitely have your moments, bro.
+You definitely have an equity.
+He literally doesn't own one share.
+of any company. He doesn't own his fucking home.
+And Tim Walts is on there, giving a
+hard time about the Trump
+savings accounts.
+I mean, I don't even know if that's on the fucking docket.
+He owns a Camo hat, though, which you loved.
+You thought that was going to win the election.
+I thought he might be able to speak to, like,
+the middle of America. And then I find out, like,
+when they do the deep opo research that the guy
+doesn't own one stock, the guy doesn't own
+his home, he's financially illiterate, and we're making him
+the vice president. He's been employed by the government.
+He's been employed by the government its whole life.
+I mean, have you, there it is.
+There it is.
+That's what Jake L thought would win them the election.
+You're never going to live that down.
+I remember when you tweet.
+You thought that was it.
+You thought that was the master stroke.
+I thought it by the master stroke that was going to win them the election.
+Listen, no strachanis does not bat a thousand.
+No, even no stracanis cannot bat a thousand.
+But it did come out, by the way, that Nancy Pelosi wanted to do the speed run primary.
+I remember if you saw that, just not to rehash too much stuff.
+Sacks, I want to say there was.
+one point of difference if you want to get into it around the content part of it, and this is
+something that the press was having a field day with, and they really keyed on, which was, hey,
+respecting IP, respecting copyright. What's the feedback been so far on that, which was a pretty
+spicy part of President Trump's speech? Well, I think what the president said was just very
+pragmatic. He said we had to have a common sense approach towards intellectual property.
+And he said, if you have to make a deal with every single article on the internet,
+every single website, every single book, every piece of IP, in order to train an AI model,
+it wasn't feasible. He said, look, I appreciate the work that went into people creating
+these works. But you're not going to able to negotiate a deal for every single one of them.
+And if we require our AI models to do that, and China doesn't, and they won't, they're just
+training on everything, whether it's pirated or not, then we're going to lose AI race.
+So I think he took the side of a fair use definition.
+I don't know if he used the term fair use, but effectively, he was taking the side of a reasonable
+fair use.
+What did you think of that part, Dave, Freeberg?
+Do you have any thoughts or trauma on that part?
+I think he's absolutely right.
+I've said this before.
+If something's in the Internet, if something's in the open domain, and I strongly
+disagree with the idea that AI getting trained is the same as AI replicating copyright material.
+If AI outputs tech or outputs audio or outputs video that contains copyright material,
+it is 100% in violation of copyright.
+And he said that, by the way.
+Yes. And if the AI is learning, it is understanding patterns, it is understanding reasoning,
+it is understanding concepts by reading copyright material, just like humans do.
+a writer, an author, reads a bunch of fiction, learns good techniques, learns good concepts,
+learns good theory from reading all those books, and then goes and writes his or her own
+book, they are not violating copyright material.
+What if it's all behind a paywall, Freedberg?
+What if it's all, the New York Times content, and it's not on the open internet?
+You're 100% correct.
+That should be paid for or licensed.
+I'm talking about the open internet.
+I'm talking about open material.
+I'm talking about stuff that's in the open domain.
+Common crawl. There's a thing called common crawl. Now, if there was, if somebody stole a hundred books, let's say, and put them on their website and it was a pirated Russian website with a thousand books on it, and you accidentally crawled it, you would be obligated to take that out then. I think we all agree. Correct. Okay. Correct. Because that's what a lot of the lawsuits are around. So I think we're reaching something. I just want to say, you know, this is such an important point, especially to me as a content creator and somebody who spent his career in this, I've been thinking about the end game. And I'm here. I'm here. I'm here.
+in Park City, I was just giving us a keynote, and I wanted to show you something I made,
+a SACS, because I think we have to get to the end game here. So in my talk, I talked a little bit
+about how can we get through this fight and then maybe getting to a solution. So I had my team mock
+up the New York Times website here and chat GPT doing a deal with them. So here you see,
+you're on the New York Times website, and you ask it a question powered by GPD. You ask it, hey,
+You might ask this question.
+In fact, you log in with your chat GPT credentials, and it could be GROC, it could be Gemini.
+Give me the earliest mentions of Putin, you know, if you were a fan of Putin or something,
+and it would then go through that and give you your Putin references.
+And then I made another one.
+And then obviously, this would be an exclusive to chat GPT.
+It would be one of those things where, you know, they get an exclusive.
+And then here on the Disney Plus channel, imagine you could make yourself into a Jedi
+night and you could then upload your photo.
+You know, kids might really get into this.
+You upload your photo.
+You talked about this Freeberg a couple of times of the future of narrative storytelling, you up your photo, and then it makes you into a Jedi night.
+There's Darth Calacanis.
+That looks to me like you're infringing on their trademark.
+What's that?
+Are you infringing on their copyrights?
+This is fair use.
+This is fair use.
+This is a perfect example of fair use for editorial.
+You're also infringing on some ozempic.
+That's absolutely scary, right?
+Trust me.
+I am definitely infringing on so much Zemping here.
+Guys, I'm past thosempic.
+I'm on to peptides now, man.
+I'm on the Wolverine Protocol, so look at it.
+Are you?
+Yeah, I started doing the, I mean, I don't take a pot.
+What could go wrong?
+Don't take a podcasters advice.
+Don't take a podcaster's advice on your health care.
+Rule number one.
+Take Chimot's advice because he's got 6% body fat,
+which I think attributes to much of your pomp and circumstance around your privates.
+I think it has to do with the lack of fat, but I'm going to leave it at that.
+First of all, it's 11.5.
+But, you know, that's like, that's like right before I go on summer vacation.
+Then it ends up at 12 or 13.
+Did you go get that, did you go get that gelato?
+What was that place we went that we love?
+Lulumi.
+I've gone there every day, every day so far.
+Did you do two or one?
+Be honest.
+Two or one?
+I've had, I've been doing.
+No, no, per session.
+Do you do two or one?
+Be on per session, too.
+I start with the medium and I finish with a small.
+Yeah, exactly.
+This stuff is so good.
+I've never tasted any gelato like this.
+It's incredible.
+I mean, it's just unbelievable.
+We have to license it.
+for the United States and put it to the all-in brand.
+We have to license it from them.
+It's really incredible.
+But Chamatha, just generally speaking, or anybody who wants to have at it, Freedberg, Sacks,
+what do we think about the end game here?
+Because there's some major lawsuits here.
+They're going to get settled in the next year or two.
+What do we think about sort of the future I've shown here today?
+I think what Sachs just highlighted is exactly right.
+Look, we've got to have a common sense approach here or we're going to lose the AI race.
+I mean, one of the key, hold on, one of the key determinants of AI quality.
+is the amount of data that you have.
+It's very simple, right?
+There's a few building blocks.
+There's energy, there's chips, and there's data, and there's algorithms.
+And if you lose on any one of those dimensions, then you're in trouble.
+Right.
+So, look, you just can't have a situation where China can train on the entire internet
+and RAI models are hamstrung by needing to contract, negotiate contracts with every
+single website.
+But right now, Elon owns X, right?
+He owns Twitter, now X.
+Does Sam Altman have the right to use X in his corpus?
+It's publicly available?
+No, it's not.
+No, it is not a public endpoint.
+It's not a public endpoint.
+I just honestly, I don't know the answer to that.
+There's some edge cases here.
+We're going to have to come up a fair use.
+It's not about whether it's behind it at paywall or not.
+It's whether these APIs exist and whether you're actually contractually allowed to use them or not.
+The terms of service, correct.
+The terms of service, it's published on every website what the terms of service are with respect to the content.
+I think it would be okay to let people.
+opt out, you know. So we already have this with Common Crawl. You can put in the footer of the
+website you put in Robos.t.commoncrawl is like this nonprofit organization that basically
+archives the entire web every few months. Funded by Gil Elbaz. Formerly of Google. Formerly of Google.
+Great fan of the pod. Shows up to our summit. Great guy. And all of Open AI was built off
+of Common Crawl originally. Yeah. And he, but they're very clear, by the way. They say you have to
+are copyrights. You don't get you just use open Chrome. Can I go out on a limb? I don't know if you
+guys saw this Amazon deal with the New York Times for $25 million. Did you see that today?
+No. I didn't see today. Explain it, please. I think that the New York Times licensed Amazon,
+all of their content, including the athletic and a bunch of other things for training. 20 million,
+sorry, 20 million a year. Okay. I read that and I thought this is the peak of these deals. These
+deals will only go down in terms of dollar value from here. And it actually brought me to this
+point where I was thinking to myself, is it even realistic to believe that patents and
+copyrights actually exist in five years? And I went through this exercise of like, if a computer
+studies the periodic table and also understands the laws of,
+of physics, the laws of biology, the laws of chemistry, and then independently derives some
+material that is otherwise patented, what will happen.
+And then separately, if two competing AIs invent a new material from scratch, how will
+the international courts deal with this?
+And if you take all of these examples to the limit, at the limit, the idea that there
+are copyrights, enforceable copyrights.
+I think is a very fragile assumption.
+So I'm actually thinking more that we have to spend some time understanding the landscape
+of a world that doesn't have copyrights in patent protections.
+And instead, what is the surface area in which you compete?
+What is trade secret?
+What does that mean in a world of AI?
+And I think it's quite an interesting thing to think about.
+Patents are a totally different piece.
+I think that's a fascinating string to pull on.
+I will tell you, I will take the other side of the bet.
+If we want to make a polymarket on this, I will guarantee that this will be the beginning
+of the deals and the deals will go up from here.
+I'll tell you why.
+The reason the New York Times made that deal is to make it apparent that what Open AI has done
+has damaged their business because now they have a customer.
+And their customer is Jeff Bezos at Amazon and Jassy.
+And now they can show damages because now those damages could give them an injunction against
+Open AI and Open AI has got to take it out of their crawl, of their, you know, construct.
+And that's going to be really expensive for them.
+It's not doable, but it's going to be expensive.
+And let's think on a societal basis of what we want as a society.
+Do we want a society in which journalists, writers, artists, musicians, filmmakers,
+actors cannot make a living, podcasters, or do we want a world in which they can?
+And I think technologists, hold on, let me finish.
+But you're assuming that copyrights.
+As a technologist, we typically think, if we can crawl it, it's ours.
+What I can tell you as an artist is, if I make it, it's mine.
+And you need my permission because it's my art.
+And I think the industry will do better if they respect them because now the New York Times can hire more fact checkers.
+But can I just ask you a question?
+Yeah, go ahead.
+Sure.
+But why do you have to connect the two as immutable things, meaning why can't somebody make something still, you know, let's just say it's a song.
+but that song can now be made by multiple AI models, but if they make the song, there's a reasonable
+claim that even if they don't have the copyright, more people will want them to perform the song
+than some random AI. So can't you make a living without having the copyright?
+Which is the choice of the artist. Some artists were very well known for not wanting their art
+to exist in some mediums. As a perfect example, the Rolling Stones for a long time thought
+they would be sellouts if they had their music used in commercials. And when they did start me up with
+Windows, that was a really big concession from them. And that's up to the artist to make that
+decision. You make a valid claim. Hey, yeah, you go on tour, you make more money. But that's the
+artist's decision, not the technologists or the people stealing their content. And by the way,
+$20 million a year is a $200,000, highly paid journalist, fact checkers at the New York Times.
+They're going to get 10 of those deals. And it's going to create a golden era age of journalism and
+content. And we should be happy about that. I told you this example, Jason, but at Beast,
+we did a licensing deal of our content to allow open AI to learn to run training runs on our
+videos. And at the board, the thing that we kept talking about was I was really concerned, like,
+let's just do a couple year deal max. And the reason is we have no idea what this looks like
+in five or ten years. And there's just as much chance to your point that we get it wrong.
+is right. Now, that was about six months ago. And so the intuition that I had back then was maybe we should
+keep the deal term as short as possible. But now when I see how important AI is in the global
+landscape and what China is doing, I think on the margins that this idea that these copyrights
+will mean something, in my mind, I am underwriting the value of these things going to zero. And I'm
+asking myself instead for my businesses, how are we actually building a real defensible moat and
+not a piece of paper that we can use to sue somebody? Okay. Freeberg, you want the last word here?
+We've got to move on to some other topics. I just want to be clear. I just want to be clear that
+nobody is losing their copyright. Copyright is the right not to have your work copied. And if an
+AI model produces outputs that copy or plagiarize your work, then that's a violation of the
+law. And I think the president specifically said that, we're not allowing, copying, or plagiarizing.
+The question is whether AI models are allowed to do math on the internet, you know.
+Pattern recognition. Basically, that's what it is. And it's, and JCal, I think you're conflating the two.
+And I don't want to be interrupted. I just, I understand the distinction. And I think that this idea
+that like, I can't, for example, go to the library rent a book, read it, and then learn some of the
+good techniques on how to write it a good book should be restricted to humans in this AI
+context. Like, this is exactly what they're doing. They're identifying patterns and then they're
+building predictive algorithms that allow them to output stuff that starts to fit within different
+kind of, you know, variable settings. Do you guys think it's possible that if you allocated
+enough compute at the problem, you could write Michael Crichton's Jurassic Park de novo without
+ever having read it? Yeah. Me too.
+me too i think i don't know what that would mean like well this is my point i know michael priton
+i know what i know what it means i don't know what it means to say can a i write that like
+but you guys remember the ed shiren lawsuit do you remember that oh yeah i did but let me just make one
+point here on this because you're saying i don't understand it i spend my career in it i understand
+it much better than you do and i understand it from lawsuits and being in the weeds on it like i
+understand it from first principles which you do not and i will say this is what we're talking about here
+is the definition. It's the definition of a derivative work. And the output matters. So if you were to
+take my knowledge and then create a derivative work from it and you used a percentage of my work,
+and that's where this will get into the nuance, is what percentage of the original work is used
+in the derivative work. And under what context, a commercial context or a non-commercial.
+This is clearly a commercial one. If Open AI was a nonprofit right now, we'd be having a
+distinctly different discussion because it would, there would be, you wouldn't be competing,
+with me as the copyright holder to use this new medium and create the derivative works.
+And it has to change substantially.
+So if it's a, if it's a cliff notes, when China has the only models that are able to meet
+your stringent definitions of copyright.
+Well, no, here's the thing.
+I think the China fear, the China fear is bullshit.
+I'll be totally honest here.
+Just because China steals IP does not mean you get to steal from Americans.
+In America, we have rules.
+And by way, we've spent the last 30 years, the major issue with China is not
+Taiwan, it has been respecting copyright. Let me reframe this issue, Jason. Let me finish. The technology
+industry itself has leaned on our government for 30, 40 years, including Microsoft, including Google,
+to make sure our trade secrets are not stolen, our IP is not stolen, our movies are not stolen.
+That is the key issue with China. So just because China's a feat does not mean American companies
+get to be used. Have you seen the latest batch of Chinese open source models or open weight models?
+They steal everything. Does that mean you should be able to steal Windows? Should you be able to steal
+Let me ask you a question. Jason, let me ask you.
+We don't think it's stealing.
+Elon has said this pretty clearly, but GROC 5 and for sure GROC6 will not use Common Crawl.
+It will not use the Internet, okay?
+It'll just be an enormous amount of synthetic data.
+And back to what Freedberg and I just agreed upon, if you synthetically go and try to
+generate all this content to learn across, you're invariably going to produce something
+that's already been created.
+And so deep.
+I mean, that's like some sci-fi level world.
+I understand, but that's what's happening now.
+It's happening now.
+If somebody happens to free-
+happens to GROC-5 or GROC-6, is that violating copyright?
+It didn't even know that it existed.
+On the output, yeah, that's fine.
+If it, on the output, created a similar work,
+they would need to then take it down.
+And so that would be a really interesting new,
+that's a new space we're going to have to contend with.
+So you've described if it does happen
+is a new concept that we would have to address
+in a new way.
+I'll give you a science corner example.
+There's this Evo 2 model that they published at the ARC Institute,
+which Patrick Collison, you know, is the name founder.
+So that Evo 2 model, they just ingested all the DNA data they could find in the world,
+trillions and trillions of base pair of data that they ingested.
+And then they looked at patterns in DNA.
+And that's it.
+They had no context for what the DNA represented.
+They had no context for the concept of genes.
+None of the structured understanding of what that DNA does, what it is.
+And you know what it did?
+They fed in the BRCA gene variant, and the thing output a warning saying, I think that
+this is a pathogenic variant to DNA without having any context.
+This is the breast cancer allele.
+And it didn't have any knowledge, and it wasn't trained on that at all.
+It had no knowledge that there are pathogenic variants for cancer, and it identified that
+this was a genetic variant that can cause some sort of pathogenic outcome in the organism.
+So that's a great example where there's a lack of understanding at the human level.
+on what really drives some of the patterns in nature, the patterns in society, the patterns
+and behavior that are kind of emergent phenomena, perhaps, that these AI models are starting to
+identify. And I think to Chimov's point, we may end up seeing this in things like entertainment as
+well. All right. This has been an amazing debate. We've got to move on. And you know what?
+We're going to have more amazing debates, September 7th through 9th in Los Angeles at the All-In
+Summit. The lineup is stacked. Alibaba's co-founder, Josai, Toma Bravo, co-founder,
+Ark Invest, Kathy Wood, Uber CEO, Dara, Sequoia's Rolloff Botha. You. You.
+YouTuber, Cleo Abram, and many, many more coming to actually get the last word here.
+Go.
+I was just highlighting this tweet that I saw where talking about Chinese open wave models
+are basically open source models.
+So basically all the leading American models are closed source and all the leading Chinese
+models are open source.
+They're behind.
+They've played out.
+It's a pretty good technique for catching up is to open source because then you get the larger
+open source developer community helping you out.
+That's great.
+But the point is just that these open source models are catching up pretty fast.
+We're ahead in many other aspects.
+Our chips are a lot better.
+Our data centers are better and so on.
+And I'd say our close source models are better.
+But they have this one area of open source models.
+So again, if you hamstring our AI models access to data by creating a whole bunch of new
+requirements for contract negotiations, like we could really lose AI race.
+This is a really big deal.
+It's not a made up concern.
+I don't know why you think it's made up.
+I never said that it's made up.
+I think it's an opportunity for America to actually have a distinct advantage, which is that
+$20 million from Amazon alone is 1% of the New York Times revenue.
+And that's going to go directly to the bottom line.
+It's going to allow them to hire more journalists.
+Then that protected site will be giving in real time something these language models are going to have
+to go hack and steal.
+That real time data is going to be a distinct advantage for Gemini, Open AI, Amazon, whoever
+chooses to do it.
+And we can create a flybookie.
+You have this like nostalgic sort of quasi-romantic,
+notions about, like, journalism and the need to save the New York Times and all this stuff.
+It's all, I mean, you can say all the derogatory things you want about me personally, Sacks.
+That argument doesn't work.
+No, no, you just said I have this whole nostalgia, whatever.
+Yeah, you do.
+You're nostalgic for journalism as it used to exist.
+When I know I've beat you in the debate is when you make it personal like that, it's not
+personal.
+I'm not being nostalgic.
+I'm trying to create a sustainable, a sustainable advantage for America.
+And you are our public servant and you're trying to create, you will take my feet.
+feedback. You're trying to create. We're going to ignore your feedback. We're going to ignore your feedback. We're throwing in the
+trash. No. You take it and I will be showing up at the White House for my tour. You have this crazy
+idea that we're going to win the ARAs by tying one hand behind our back so that you can subsidize
+journalists. So you can subsidize the New York Times broken business model. You'll get more content.
+You said before you want more training data. It's insane. Pay for it. Pay for more training data.
+You're the czar. Take it back to POTUS.
+All right. Let's keep moving here. We have to keep moving. We have a great. This is great debate. Great debate here on the All-in podcast. It's not going to stop, folks. It's only going to yelling. It's just you yelling. It's just you yelling saying that. You only have like three topics, Dr. Cal. I don't know what's going to. You can personally attack you like that? It's like we got to let in more immigrants, number one.
+High-skilled immigrants. AI is going to put everyone out of work. By the way, no sense of perceived contradiction between those two things. Number three, we need to like subsidize.
+Here comes the personal attacks.
+You know, the audience says to me all the time.
+No, it's the same topics every time.
+When the three of you guys attack me.
+No, Jason, he's literally, hold on.
+When the audience, you get rid of your job.
+And the three of you gang up on me and you personally attack me,
+the audience comes up to me and they say, wow, you really nailed and beat them.
+Have I done that today?
+No, not yet, not yet, but a little bit of the ozempic.
+But we've just been eating.
+Yeah, that's true.
+Let me eat.
+He's been strangely unenvolved and just eating.
+He's emaciated.
+He's 11% body fat.
+Let him eat.
+Let him cook.
+All right, listen.
+You and I, Sacks, will do more debate, and it's going to be amazing.
+All-In.com slash yada, yada, yada for tickets.
+Get in there, folks.
+We have to get to the docket.
+We're an hour in, and we still have all the news.
+We should talk about this AI privacy issue that Sam Alman mentioned.
+All right, that's a great segue, because I saw that as well, David Sacks.
+And as our civil servant working on AI, this is something where you could have an additional
+contribution.
+There's more work we can give you.
+All right, listen, here it is.
+AI user privacy is becoming an issue because friend of the pod, Sam Altman, says there is no legal
+confidentiality when using his product, chat GPT. Here's a 30 second clip. Again, friend of the pod,
+FOP, Sam Altman, on Theo Vaughn. People talk about the most personal shit in their lives to chat GPT.
+Young people especially, like use it as a therapist, a life coach, having these relationship problems,
+what should I do? And right now, if you talk to a therapist,
+or a lawyer or a doctor about those problems, there's like legal privilege for it.
+We haven't figured that out yet for when you talk to chat chbtee.
+So if you go talk to chat chit about your most sensitive stuff and then there's like a lawsuit
+or whatever, like we could be required to produce that.
+And I think that's very screwed up.
+I think we should have like the same concept of privacy for your conversations with AI
+that we do with a therapist or whatever.
+Okay, Sacks.
+This is bringing up something super important.
+What's your take on it?
+Okay.
+Well, I think this is an interesting topic because like,
+copyright. This is an area where we have existing law, but it does make you rethink whether
+those laws are truly applicable or make as much sense in this new world. So the existing law,
+the existing example, is search history. You know, the government can get a copy of your search
+history. They can subpoena it. Yeah, every true crime story starts with the person's search for
+how do I kill my husband slowly with poison and then they, yeah, that's right. Exactly. The
+point is, though, that I think Sam is right about the legal treatment right now, which is that
+your chat history isn't any different than the search history in the eyes of the law, but it is
+much more personal. It's much more interactive than your search history. You are using it,
+like you said, you could use it as your doctor. You could use it as your therapist. You could use
+it as your lawyer. And so the ability for the federal government to be intrusive is so much
+greater than with your search history. So I don't know what like the right policy should be yet,
+but I will say it does make me uncomfortable. Yeah, there's a market. Can I make a recommendation
+to my AIs are? Yes, please. He's our service. Why don't we let AI models get bar certified
+and get medically certified? So if the AI models, it turns out, are actually proving to be more
+accurate, more thoughtful, more responsive, more reasonable, whatever it is, whatever metric we're
+using, and they pass the same criteria as one would need to pass to qualify for the bar or to
+qualify for a doctor certificate, why don't we do that for the AI? If that then happens,
+then the same privilege accrues to the AI as it does to the individual human that does it.
+And now if you extrapolate from where that takes us, if we're suddenly giving AI the same
+sort of privileged rights that we give to privileged humans, where is that going to take us
+ultimately with respect to the overall rights for AI?
+Well, and they have responsibility.
+Hold on a second.
+I just want to point out here, once again, you have a mind-blowing concept here.
+I've never heard anybody vocalize that.
+Could they actually be certified in that knowledge?
+And if they pass the test, it makes sense they would.
+But then you also get responsibility.
+So with a great power comes great responsibility.
+I will tell you this.
+You can turn this stuff off, but this is an opportunity.
+I'm going to send a note to you on after this.
+And it sounds crazy today, but I guarantee if you put it on Polymark,
+There will be a date when this happens.
+Let's do it.
+That's a great polymark.
+Shout out to shame.
+Let's get that up there.
+I just want to point out.
+I'm going to email Elon about this when I get off the pod.
+This is an opportunity to create the signal of the signal equivalent of an LLM.
+All of your chat should be encrypted.
+All of it should be by default.
+Encrypt it by default on GROC.
+Make it so that GROC can't even see it.
+They don't have it.
+So when you try to subpoena it, you can do what Tim Cook does.
+Which he says, like, I don't have it.
+If you want to try to backdoor it, you can.
+That's a market opportunity.
+I can tell you, I only use the Brave browser and Brave search for this reason.
+I don't want my search history like save somewhere or whatever.
+You can take control of this as an individual, but the defaults matter and you have to do the work.
+It's a great market opportunity, Chmop.
+I don't even want to know what you're talking to chat GPT about.
+What are you?
+What's in your chat, CBT logs?
+What's in there, Chimap?
+How to extend, how to get the extra centimeter?
+What's in there?
+What's in there?
+What's in there?
+I keep asking it to find me a.
+moderator. Oh, great. I keep asking it to find me a participant who's not a douche.
+My God, you are so deep in your villain era and you're leaning into it and I'm so here for it from up. I love your villanara.
+You know I. I am so. Why are you going into your villain era? I am so risk on right now. It's like, it's liberating, actually. It's amazing. It's really amazing. Is there any blowback to how outlandish you've become?
+this year, any blowback at all has it had any negative consequence on business or hiring or
+anything? No, but outlandish, how? How have I been outlandish? You're just filter off.
+Your filter off. And I think it's great. I think they're over two windows back. It's absolutely
+fantastic. We're seeing here. I asked chat GPT about my future and my IQ. It's very interesting
+when you ask chat GPT to analyze you. I suggest everyone do it. Well, actually, yeah, when you just
+ask chat GPT or whatever, what do you know about me? And it's scary how much it's ready.
+It's scary.
+There's this great personality test.
+You can put this personality test into GROC, and this guy, like, made this prompt, and it goes
+and it tells you all your personality based on your Twitter X history.
+It is wild how accurate it is.
+What does it say about you, TECAL?
+I'm actually curious.
+It says the same thing about all of us.
+We're all, like, network, narcissists, ENTJ.
+You can literally run the Myers-Briggs against your chat history, it's actually.
+But I like your mind-blowing concept there, by the way, of, like.
+like them becoming certified in some way. Okay, fresh economic news. It's time for the administration
+to take their victory lap. GDP growth was 50% higher than expectations in Q2 as the Fed held rates at
+4.25%. In Q1, GDP declined 50 basis points. That's probably due to the imports. People were
+stockpiling goods. That's the most pointless chart ever. Okay. And then, yeah, it is. I agree.
+It's a little bit. Yeah. That's distorted by one of that. I wanted to have both. I wanted to have both
+as bar charts. This one, because of me. You're totally on drugs. Just say it. It's okay. What drugs are you
+on? I'm not. I'm coffee in an out. I'm out. We're all friends. You can tell us. Is it really just
+out? All right. That's it. I'm taking it out. I took it out. And now let's get back to the
+here. Okay. The Fed cap rates unchanged for the fifth straight meeting this time. Two out of
+11 Fed governors dissented from Powell's decision. Two of the dissenters were both Republicans
+nominated by Trump. So it seems like the Fed is becoming a little polarized now too. First time in
+32 years that more than one governor dissented. And, yeah, even one person dissenting is rare.
+Here's a 25-second clip of Powell explaining how GDP factored into the cut decision. Nick,
+please play the clip.
+Recent indicators suggest that growth of economic activity has moderated.
+GDP rose at a 1.2% pace in the first half of this year, down from 2.5% last year.
+Although the increase in the second quarter was stronger at 3%.
+Focusing on the first half of the year helps smooth through the volatility in the quarterly figures related to the unusual swings in net exports.
+The PCE index, and then I'll throw this over to you, Sacks, for the official position here.
+For June dropped on Thursday, PC is the Fed's preferred gauge of inflation over CPI.
+PCE rose 30 bibs in June in line with estimates.
+And if you remember, we talked about it in a previous episode, CPI.
+rose a bit, 13% or 30 bibs from May to June. So we're not any, we're not close to the 2%
+target. And that's what the Fed keeps saying. We're not there yet. And the economy is El Puego.
+Sacks, you know, I don't know if you notice the Sacks, but people are talking about the
+QDP, the second quarter print, which was amazing for GDP. You were talking about it a bunch
+Chimoth on the socials. He keeps referencing the first half. So he's trying to blend those two together,
+I think because of the tariff differences or maybe to smooth it out, as he said. What's your take
+on this? The GDP boomed in, you know, 3%, which is pretty great. But is that-
+The problem, no, the problem that Jerome Powell has is that he's trying to smooth it because
+it allows him to justify his political decision. But the reason why you have to segregate Q1
+and Q2, Q1 was before tariffs and Q2 was after tariffs. So I think you have to segregate these two things.
+if you look at the run rate from Q2, what you're probably going to see in Q3 and beyond
+is more similar to Q2, which is to say a large surplus, good GDP expansion, and moderating
+inflation.
+So why does the Fed not cut?
+Because at this point, not cutting is the only thing that you can do to slow the Trump
+administration down going into the midterms if you wanted to politicize the job.
+If, however, on the other hand, you just take the data as is and you ignore Q1 because it
+was pre-tariff and you start to look at Q2 and you project forward, if you inject a hundred
+basis point cut into the economy, this thing is going to go gangbusters and Trump is going
+to look like an economic genius going into 2026. So I think that, again, in the absence of
+politics, you cut. Okay, Sachs. What's to take from inside the administration and around
+it? I know you're not speaking for the president on this issue, but you're in the administration,
+I'm assuming you're...
+Yeah, look, I'm not speaking for anyone, but obviously the 3% number is way ahead of expectations.
+It's a fantastic number.
+It just feels like, you know, everything's humming on all cylinders here.
+One thing you didn't mention, but I think is relevant, is the new trade deal with the EU.
+We're about to get to that, by the way.
+That's the next story.
+Okay.
+Well, I mean, I would include that because...
+Okay, I mean, I think it was a deal that just got announced where the EU is going to open its markets to U.S. products.
+no tariff on U.S. products, but they will pay a 15% tariff coming into the U.S.
+They're going to be investing $600 billion in the U.S.
+They're going to be buying $750 billion of U.S. energy, and then some very large number.
+I guess they didn't specify a number on defense products, basically American military products,
+hundreds of billions, which is the follow-up to their commitment to raise their contribution
+to NATO to 5% of GDP up from, I guess it was sort of like 2% before.
+So, I mean, this is a huge deal for the United States.
+I think it's a huge win for the Trump administration.
+And the deal is so good that what I'm seeing from European sources on X, European publications, just commenters, is that they were like outrage.
+They felt like they got taken to the cleaners here.
+Good.
+And you see a lot of that on X by European side.
+A lot of the European leaders are saying that Ursula, chicken.
+out. So, you know, all those stupid taco memes are going away now because people are realizing
+that Trump's willingness to raise tariffs on these countries as a threat to renegotiate better
+trade deals is working. It's working extraordinarily well. Just this EU deal only to think about
+it is you add it all up. It's about $2 trillion. It's effectively $2 trillion of stimulus into the
+U.S., but without money printing. Yeah, over the next three years. So it's not.
+It's not insignificant. Friedberg, your thoughts on the Fed, the GDP print, and maybe you could get
+into the granular details of that print. If you pull up the schedule of data, so this is the
+national income and product accounts data from the Bureau of Economic Analysis. So this is where the
+inflation print comes from. I think there are two lines worth taking significant note of the first
+is the furnishings and durable household equipment line. So in June, the cost for furnishings
+and household stuff jump 1.3% month over month. On an annualized basis, right, that's almost
+15% year over year if it were to continue at that level. And then the second one is this recreational
+goods and vehicles. That jumped 0.9% month over month. Neither of those categories have jumped
+that much in kind of recent history. So part of the argument that's being made,
+is that what we are seeing in these jumps is actually some of the first effects of the tariffs
+and the cost of goods that are being imported because these are largely imports having an
+adverse effect on the consumer. And so I think this is kind of a wait and see moment on some of
+these categories that are predicted to have a tariff price effect starting to show through.
+So I think this is where a lot of folks are keeping a close eye on and it kind of provides a little
+bit of the support for the economists that are saying we should keep rate steady because if we
+are seeing a significant inflationary effect here, it's worth noting that there's something that we
+need to be thoughtful about in rate policy. I think this is a really good point. If you look
+in this debate, which is obviously highly political, we're at inflation 2.567 percent. Spending is
+increasing, obviously. Stock market at an all-time high. Unemployment trending down again. So we're
+at like 4.1 percent. And people are just yoloing into crypto and they're doing sports betting,
+at an all-time high. I think the Fed now is in a position where cutting rates seems like putting
+kerosene on the fire. If Trump tanked the economy in Q2, he probably would have gotten the rates,
+but now I don't think it's reasonable, as you're saying, Dave, the reasons to not cut are
+building because the economy's on fire. So maybe the shock and bore approach to tariffs,
+which is now becoming a playbook. I had a nice talk with Lutnik about this, who I love, by the way.
+describe to me how they're doing these. And the shock and bore playbook is basically Trump says
+something completely outrageous, shocking. Everybody goes crazy. The media loses their mind,
+business leaders lose their mind. Lutnik told me that what he does is he sets the table and proposes
+something reasonable because, you know, now I'm a big, you know, direct contact with all the
+administration sacks. Thank you for that. Lutnik. And he described it, Trump comes in,
+sees all the stuff, and then he starts making these micro tweaks. So it's on the finish line.
+It's in the red zone, five-yard line.
+Trump comes in, and then he sticks it to them again with three or four extra asks, and then
+they wrap it up, and that this is becoming really effective.
+So it was chaotic at first.
+It seemed nonsensical.
+But they've put the Fed in a really bad position because they've never seen this before.
+They've never seen this before.
+So now they're going to be in this defensive position of what if we cut it and the market
+rips to your point from off.
+You just said the market will rip the second they cut that.
+And a cynical view of this is the market rips as we go into the midterms, which is the same claim the Republicans made about the cuts that Biden did in September right before the election.
+So there is some level of politics and gamesmanship going on here, but you have to hand it to the Trump administration for what they're doing with this sort of 2.0 playbook.
+If this was Sachs premeditated and we all just didn't understand it, fine.
+The outcome here is this administration has to live or die by the results of these.
+600 billion from the EU, $550 billion in investment from Japan.
+You put those two together.
+I.S. Lutnik, is that at the event, is that going into the sovereign wealth fund?
+And how does that get, you know, spent?
+And he said, at the discretion of the president, and he's advising him to spend it on putting more nukes in.
+So that's fascinating.
+We have a trillion dollars now that we can put into nuclear power plants and these small
+modular reactors.
+And that's what Lutnik said.
+He wanted to spend it on.
+He's going to advise the president to spend it on.
+But now we've got them investing in our country.
+It's absolutely brilliant if it works out.
+Look at where we are.
+April 2nd was Liberation Day.
+And the media went crazy.
+They were predicting a Black Monday.
+The market crashed.
+They basically tried to spook the markets and create fear.
+they said that we're going to go into recession or depression, and now look at where we are.
+Just a few months later, all the markets are at all-time highs.
+Trump has extracted trillions of dollars in these trade deals.
+Was it premeditated? Tell us the truth. Was this premeditated? Hold on. President Trump has
+extracted trillions of dollars from other countries using powers that other presidents didn't even
+know they had. 100%. Was it premeditated? Because it was chaotic. The market didn't make those
+Because of the media, by the way.
+And we just had those moves because they were scared.
+And we just had a 3% GDP growth print.
+So I don't see how things could be.
+What I think happened is that President Trump saw an opportunity here that other people
+ignored.
+It's like when a CEO comes in to a company, a new CEO comes in.
+And that company's been mismanaged for a decade.
+But it's got wonderful assets on its balance sheet.
+It's got a market position that's still very strong.
+This has been underutilized.
+And he came in and understood that the United States had tremendous leverage in all these trade negotiations.
+Actually, they weren't even trade negotiations then in all these trade relationships.
+And he was able to essentially renegotiate all of them.
+And look at the results.
+I mean, they're just staggering.
+And, you know, everyone said that, oh, Trump's going to chicken out.
+He's not going to hang tough.
+It's all these other countries that have folded like, I don't know, lawn chairs.
+I mean, they have all capitulated.
+Yeah, they've folded.
+It's really remarkable.
+But you're not answering my question.
+Was this premeditated?
+Give us some insight here.
+I don't know what this is.
+What are you talking about?
+When they came out and it was like, oh, 100% tariffs, 200% tariff, the market was not
+making that reaction based upon the media.
+They were making it based on Trump was saying.
+So was it premeditated this shock and bore, shock and reasonable negotiating strategy?
+Or do you not know?
+Well, you're not privy to it.
+Look, I'm not speaking as an insider here.
+But we said at the time that all of that was happening and Larry Summers was on the pod.
+preaching doom is that all of that was an opening bid. It was all the start to a negotiation. And we had to
+see where it ended up and that the administration still had to stick the landing. But I got to say,
+based on EU, Japan, and South Korea, I mean, this is looking really good right now.
+Well, listen, it's the top five that are like 90% of the negotiation. As Trump said, there was another
+little note he did in the keynote when he kind of drifted into his, you know, different things he
+wanted to talk about where he said, I don't even need to know about the bottom countries. I've never
+even heard that names of some of these countries. He's just got to nail the what, the top five,
+the top 10, and we're done. And this administration has to stick the landing as well because these
+are handshake deals right now. They have to be inked. They have to be approved. So there's a lot more
+work left to be done. But I am cautiously optimistic. There's one of the pieces of it as well.
+There's one of the piece of it. So we talked about the, you know, the fact that Europe has zero percent
+tariffs on American products, but but even after this deal that the European products and
+coming into the U.S. will have a 15% tariff, and we're not including the $600 billion
+of European investment in the U.S. We're not including the 750 billion of sales of American
+energy to Europe. Okay, just talking about the tariff, that 15%. And what we're seeing now across
+the board is generating about $300 billion a year of additional tariff revenue that goes to
+help balancing the budget. Yeah. So 300 billion a year over 10 years is $3 trillion. That is a big
+number. It's incredible, yeah. So I don't know if that completely satisfies Freiburg, but
+that's a big help. Freeberg, do you think that there is a chance that inflation is going to
+tick up because of all this? Like, there's a lot of money being pushed into the system again.
+So could we see a three handle on inflation in the next six months? Or what's the probability of
+that in your mind? That's the big concern everybody has. I don't know. I don't know. I think
+the big question, if you look at each of these categories, one way to think about it is how much
+margin is the seller making? If they're making 30% margin and we charge a,
+15% tariff, does their margin go down to 15% or do they take their margin down to 20% and
+raise the price by 5%? What's the right balance? And what will happen is that now with this
+effective tariff, which is a sort of tax on the system, a tax on the market, market will find
+its kind of new equilibrium where the buyers are willing to pay X and the sellers are willing to sell
+it Y. And I think every market's going to be a bit different. So I think in some of these categories,
+we will see significant inflation where there is a very thin margin that the seller has in selling.
+And in some of the categories where there's a monopoly and they have a big margin,
+they're going to eat it because they don't want to have competition.
+And they don't want to see pricing competition emerge.
+So I think we'll see it vary by category and we'll see how it goes.
+All right, listen, this has been another amazing, amazing episode of the number one podcast in the world,
+according to Jensen Woon from Nvidia and me.
+And great job, everybody.
+Great job, everybody.
+It's a classic all-in episode.
+Even J-Cal.
+Even Jason Cuthan.
+It's a great job.
+And actually, I want to thank Freeberg.
+Could Freebert do most of the work to organize the AI summit?
+Let's give him a big shout out.
+There's me and the president.
+Great job.
+I mean, guys, can we just make a note here?
+One of us can run for Manchurian candidate president in eight years.
+And look at me and the president.
+I put on the red tie out of respect.
+I put my blue suit on out of respect for the president.
+Does it not look like I'm running?
+President Jason
+dot com
+all right listen
+that photo could be like
+you know that famous photo
+of Bill Clinton meeting
+JFK you know
+that could be the thing that
+I'm in like
+that famous image
+that propels you to the presidency
+I'm in like thank you for giving me that
+and for putting me in touch with each member
+of the administration directly
+thank you for that
+and we had a wonderful tour
+of the White House the next day
+what a wonderful tour some of us had at the White House
+us the next day. But in all honesty, no, I was... Did you? No, I was taking the pictures.
+That was my joke. This was all of you guys were there.
+You would have given you a tour. We could have gotten you a tour. I mean, listen, I love
+J.D. Did you ask for a tour? I did ask for a tour? I'm not the kind of got to ask.
+Some of us have actual meetings to do, bro. I mean... It's all good. It's all good. I got a lot
+going on. I got a lot to announce to happen in the coming weeks. But Sachs, do take us
+behind the scene here. And I think it was hilarious. So I don't mind getting troubled by the
+president. It was great. But how did you... How did that go about behind the scenes that he
+No, don't tell him.
+Don't tell him.
+Leave it.
+Leave it.
+What did you do?
+I mean, because that looked like it was workshops or is he just naturally?
+I mean, he's obviously naturally comedic, but did you put that in with him?
+Did you have to clear that with him?
+Hey, dunk on J-Cal, whatever?
+Well, they asked me for the names of, you know, my co-hosts and so they could do shout-outs.
+So I gave him the list.
+Oh, no.
+And I just, I said, and I put even J-Cals.
+But I mean, he went for it.
+no he he he got we went through it so he got the joke he got the joke he went through he got the laugh
+he got it he heard the laugh he heard the laugh and he doubled down i thought it'd be funny but no
+we went through everyone's names beforehand and uh who i mean talk about EQ the guy's EQ is off
+the charts man he just he's actually i i suggested i suggested the name jCal and he's like no
+no give me his full name he thought was more courteous oh he's actually a very yeah courteous man
+He wanted to use your full name, not just your nickname.
+I think what he probably realized was for my parents who were just over the moon.
+So thank you for that.
+It meant a lot to my dad.
+That's lovely.
+Yeah, he's been struggling a bit.
+And it really, let me get a little choked up here, but my dad's been struggling a bit.
+And I got to see him in Brooklyn after that.
+And we were on a tech stream.
+And it meant a lot, you know, because for a kid from Brooklyn to get a shout out from the President of the United States is...
+You made it.
+I mean, it's just whatever.
+Your father should be really proud of you.
+Thank you, man. Appreciate it. I appreciate it, boys. All right, listen, for your Sultan of Science, the amazing Dave Freyberg, we put that event together in 10 days and then jumped right in. He's got to run a hollow at the same time. So I just want to give our MVP of the week to give us to the Hillen Valley guys for partnering with us. Jacob. Jacob Helberg did a great job. I love Jacob. I love Jacob. I love Jacob. I love Jacob. And Delian and Chris Gray. Thank you, thank you guys. They were our partners on the event. Hillen Valley did a great job. Yeah, I love those guys. But yeah, just I'm giving the MVP of the week for of the besties to you.
+David Freeberg, you put a lot of work into this.
+And we appreciate it.
+You're running O'HOLO, and then you went right into working on the All-Nus Summit,
+which we'll be at in a couple weeks.
+Chmott, thank you for buttoning up.
+We're getting a little complaints from the HR department about the buttons.
+And so we've now renegotiated that.
+I'm going to unbutton three buttons now and walk around Forte.
+Perfect.
+And Sacks, I will see you at the White House.
+J.D. and I will be in the commissary, so we'll invite you to lunch with us.
+J.D.
+It's called the Navy Mess.
+Actually, in the mess.
+Yeah.
+And you know what?
+Lutnik's joining us as well.
+And who's our energy guy, Chris?
+Chris said he wanted to jump in on that.
+So maybe you can join us.
+I'll invite you now that I am deep into the administration.
+Thank you for tuning in, everybody, all-in.com events.
+The scholarship tickets are up.
+So if you want to try to get one of the very few scholarship tickets,
+we always like our up-and-comers.
+Please, if you're of means, don't apply for the scholarship.
+You won't get it in.
+But if you're up-and-coming and you're part of the audience
+and you want to get one of those discounted tickets,
+we have a limited number of those available, all-in.com slash events.
+Love your besties.
+Bye-bye.
+Love you, guys.
+We'll let your winners ride.
+Rain Man, David Sack.
+I'm going all in.
+And it said, we open source it to the fans, and they've just gone crazy with it.
+Love you, Westis.
+Queen of Kinwa.
+I'm going to all it.
+What, your winners ride.
+Besties are bad.
+Gold 13.
+That's my dog taking it on your driveway.
+We should all just get a
+We should all just get a room
+And just have one big huge orgy
+Because they're all just useless
+It's like this like sexual tension
+But they just need to release them out
+Wet your beat
+We need to get merches are fast
+I'm doing all in
+Thank you.

@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import html
+from datetime import date
 from typing import Any
 
 import pandas as pd
@@ -13,6 +14,10 @@ from trade_bot.dashboard.components import (
     _helped_metric,
     _render_metric_dataframe,
     _render_runtime_notice,
+)
+from trade_bot.dashboard.decision_sniff import (
+    build_operational_sniff_read,
+    render_operational_sniff_read,
 )
 from trade_bot.dashboard.formatting import (
     _display_metrics,
@@ -31,18 +36,24 @@ from trade_bot.DEFAULTS import (
     DEFAULT_LAUNCH_TARGET_FRACTION,
 )
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.research.experiment_operator import (
+    build_experiment_operator_plan,
+)
 from trade_bot.research.launch_readiness import (
     AggregateLaunchReadinessRun,
     LaunchReadinessRun,
     build_aggregate_launch_readiness,
     build_launch_readiness,
 )
+from trade_bot.storage.warehouse import TradingWarehouse
 
 
 def _render_launch_lab(
     bot_config: Any,
     baseline_run: BaselineRun,
     experiment_scorecards: pd.DataFrame,
+    *,
+    warehouse_path: str = "",
 ) -> None:
     st.subheader("Launch Lab")
     st.caption(
@@ -69,11 +80,15 @@ def _render_launch_lab(
         return
 
     input_cols = st.columns([1.0, 0.75, 0.9, 0.85, 0.9])
+    benchmark_options = _benchmark_options(baseline_run)
     benchmark_name = input_cols[0].selectbox(
         "Launch benchmark",
-        _benchmark_options(baseline_run),
+        benchmark_options,
         index=0,
-        help="Reference for start-date beat rates. SPY is the default broad-market hurdle.",
+        help=(
+            "Reference for start-date beat rates. For the high-growth i111 family, QQQ is the "
+            "default hurdle; BIL/cash remains the floor and SPY is secondary context."
+        ),
         key="launch_lab_benchmark",
     )
     horizon_options = list(DEFAULT_ENTRY_HORIZONS)
@@ -117,21 +132,47 @@ def _render_launch_lab(
         start_frequency=start_frequency,
     )
     _render_launch_decision(run, selected_strategy, benchmark_name)
+    render_operational_sniff_read(
+        build_operational_sniff_read(
+            baseline_run=baseline_run,
+            bot_config=bot_config,
+            strategy_name=selected_strategy,
+            result=selected_result,
+            benchmark_ticker=benchmark_name,
+        ),
+        title="Selected Strategy Sniff Test",
+        include_details=True,
+        expanded_details=False,
+    )
 
     launch_view = (
         st.pills(
             "Launch Lab view",
-            ["Aggregate View", "Why / Why Not", "Entry Backtest", "Ramp Plan", "How to Use This"],
+            [
+                "Experiment Operator",
+                "Aggregate View",
+                "Why / Why Not",
+                "Entry Backtest",
+                "Ramp Plan",
+                "How to Use This",
+            ],
             selection_mode="single",
-            default="Why / Why Not",
+            default="Experiment Operator",
             key="launch_lab_view",
             width="stretch",
         )
-        or "Why / Why Not"
+        or "Experiment Operator"
     )
     _render_launch_view_runtime_notice(launch_view)
 
-    if launch_view == "Aggregate View":
+    if launch_view == "Experiment Operator":
+        _render_experiment_operator(
+            selected_strategy=selected_strategy,
+            selected_result=selected_result,
+            run=run,
+            warehouse_path=warehouse_path,
+        )
+    elif launch_view == "Aggregate View":
         with st.spinner("Building aggregate launch read across candidate strategies..."):
             aggregate_run = _build_aggregate_launch_run(
                 bot_config=bot_config,
@@ -415,7 +456,7 @@ def _render_aggregate_launch_cards(
 
 
 def _benchmark_options(baseline_run: BaselineRun) -> list[str]:
-    preferred = ["buy_hold_spy", "buy_hold_qqq", "i41_ref_us_60_40", "buy_hold_bil"]
+    preferred = ["buy_hold_qqq", "buy_hold_bil", "buy_hold_spy", "i41_ref_us_60_40"]
     options = [name for name in preferred if name in baseline_run.results]
     return options or sorted(baseline_run.results.keys())[:1]
 
@@ -557,6 +598,147 @@ def _render_ramp_plan(run: LaunchReadinessRun) -> None:
     _helped_metric(cols[3], "Reserved Cash", _format_currency(latest.get("cash_reserved")))
     st.plotly_chart(_ramp_figure(run.ramp_plan), use_container_width=True)
     _render_metric_dataframe(_display_metrics(run.ramp_plan), hide_index=True)
+
+
+def _render_experiment_operator(
+    *,
+    selected_strategy: str,
+    selected_result: BacktestResult,
+    run: LaunchReadinessRun,
+    warehouse_path: str,
+) -> None:
+    st.markdown("**Experiment Operator**")
+    st.caption(
+        "Paper/live trial contract for answering: if fresh cash starts following this strategy now, "
+        "how long must it run and what evidence validates or fails the launch?"
+    )
+    controls = st.columns([0.45, 0.9, 0.65])
+    mode = controls[0].radio(
+        "Experiment mode",
+        ["paper", "live"],
+        horizontal=True,
+        key="launch_experiment_mode",
+    )
+    account = controls[1].text_input(
+        "Account label",
+        "default_paper_account" if str(mode) == "paper" else "default_live_account",
+        key="launch_experiment_account",
+    )
+    start_date = controls[2].date_input(
+        "Experiment start",
+        date.today(),
+        key="launch_experiment_start_date",
+        help="This is the monitoring-window start date used to judge the experiment.",
+    )
+
+    windows, valuations = _load_launch_monitoring_frames(warehouse_path)
+    plan = build_experiment_operator_plan(
+        selected_result,
+        launch_run=run,
+        mode=str(mode),
+        account=str(account),
+        monitoring_windows=windows,
+        valuations=valuations,
+    )
+    _render_experiment_operator_cards(plan)
+    st.info(plan.status_read)
+
+    st.markdown("**Success Contract**")
+    _render_metric_dataframe(plan.success_contract, hide_index=True)
+    st.markdown("**Checkpoint Contract**")
+    _render_metric_dataframe(plan.checkpoint_contract, hide_index=True)
+    if not plan.current_status.empty:
+        with st.expander("Current matching monitoring read", expanded=False):
+            _render_metric_dataframe(_display_metrics(plan.current_status), hide_index=True)
+
+    action_cols = st.columns([0.75, 1.0])
+    with action_cols[0]:
+        st.markdown("**Start or Update Experiment Monitoring**")
+        st.caption(
+            "This creates or updates a normal Monitoring window, so the experiment flows into "
+            "the same champion/challenger valuation tables used elsewhere."
+        )
+        if st.button("Start / Update Experiment Window", type="primary"):
+            if not warehouse_path:
+                st.error("No warehouse path is configured for monitoring.")
+            else:
+                try:
+                    result = TradingWarehouse(warehouse_path).monitor_strategy(
+                        selected_strategy,
+                        role="challenger",
+                        mode=plan.mode,
+                        account=plan.account,
+                        capital_base=plan.recommended_capital,
+                        start_date=start_date.isoformat(),
+                    )
+                except ValueError as exc:
+                    st.error(str(exc))
+                else:
+                    _load_launch_monitoring_frames.clear()
+                    st.success(
+                        f"Monitoring {result.strategy_name} as an experiment challenger "
+                        f"with {_format_currency(plan.recommended_capital)}."
+                    )
+                    st.rerun()
+    with action_cols[1]:
+        st.markdown("**Operator Notes**")
+        st.write(
+            f"Use **{plan.required_horizon}** as the first decision horizon. "
+            f"The primary hurdle is **{plan.primary_benchmark}** with **{plan.cash_floor}** "
+            f"as the cash floor; **{plan.secondary_benchmark}** is context only."
+        )
+        st.write(plan.capital_rationale)
+
+
+def _render_experiment_operator_cards(plan: Any) -> None:
+    cards = []
+    for _, row in plan.summary_cards.iterrows():
+        metric = str(row.get("metric", ""))
+        value = row.get("value")
+        if metric == "Trial capital":
+            answer = _format_currency(value)
+            tone = "success" if float(value or 0.0) >= 5_000 else "warning"
+        elif metric == "Launch confidence":
+            answer = _format_decimal(value)
+            tone = "success" if float(value or 0.0) >= 0.65 else "warning"
+        elif metric == "Signal cycle":
+            answer = f"{int(value or 0)} trading days"
+            tone = "neutral"
+        elif metric == "Current status":
+            answer = str(value).replace("_", " ").title()
+            tone = _experiment_status_tone(str(value))
+        else:
+            answer = str(value).replace("_", " ").title()
+            tone = "neutral"
+        cards.append(
+            {
+                "label": metric,
+                "answer": answer,
+                "detail": str(row.get("detail", "")),
+                "tone": tone,
+            }
+        )
+    _render_launch_card_grid(cards, class_name="launch-summary-grid")
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def _load_launch_monitoring_frames(warehouse_path: str) -> tuple[pd.DataFrame, pd.DataFrame]:
+    if not warehouse_path:
+        return pd.DataFrame(), pd.DataFrame()
+    warehouse = TradingWarehouse(warehouse_path)
+    return warehouse.list_monitoring_windows(status=None), warehouse.read_table(
+        "strategy_daily_valuations"
+    )
+
+
+def _experiment_status_tone(status: str) -> str:
+    if status == "validate":
+        return "success"
+    if status == "fail":
+        return "critical"
+    if status == "continue":
+        return "warning"
+    return "neutral"
 
 
 def _render_launch_vs_operating() -> None:

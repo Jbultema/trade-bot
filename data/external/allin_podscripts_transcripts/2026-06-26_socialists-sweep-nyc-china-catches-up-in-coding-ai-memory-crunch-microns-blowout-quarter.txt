@@ -1,0 +1,1643 @@
+source: allin_podscripts
+published_date: 2026-06-26
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/socialists-sweep-nyc-china-catches-up-in-coding-ai-memory-crunch-microns-blowout-quarter
+title: Socialists Sweep NYC, China Catches Up in Coding, AI Memory Crunch, Micron's Blowout Quarter
+
+All right, everybody, welcome back.
+Welcome back to the number one podcast in the world, the All In Podcast, episode 278.
+And Freiburg, he took a mental health day today after the socialist sweep in New York City.
+So we invited two guests.
+They both said yes.
+Travis Kalanick is here from Adams.
+How are you doing, brother?
+I'm good.
+I'm good.
+Good to see you.
+Good to see you.
+Good to see you.
+And after a triumphant week at Starbase, the one the only.
+everybody's favorite, Gavin Baker of a Treaties.
+Management. How are you doing, Gavin?
+Great, man. Thanks for having me.
+You're still floating on Cloud 9 after the SpaceX IPO?
+Yeah.
+That was a very special moment, and it was a culmination of, you know, decades of hard work.
+But, man, to quote Bill Belichick, onto Cincinnati.
+Yeah. Yeah. Exactly right.
+Yeah.
+Zero, zero is how the Knicks talked about the next game in every season.
+series, they're like, it's zero-zero. We come into this as if it's like the first game of the
+series, even if we're up two games or three games. The socialists have swept New York in the
+Congressional Democratic primaries. On Tuesday, New York City Mayor Mondami went three-for-three
+in the candidates, which he endorsed, and they all won their primaries. Tenth district
+leader Brad Lander, defeated two-term incumbent Dan Goldman. Tenth is one of New York's richest
+districts, includes the West Village, all those townhouses.
+Wall Street, Dumbo, Cobble Hill, Carol Gardens, Park Slope.
+That's some weird geography put together there.
+In New York's 13, Chevalier beat a five-term incumbent, who was backed by House Speaker Hakeem Jeffreys.
+And apparently, the socialists are coming for him.
+13 is one of the poorest districts, Harlem and West Bronx, the Boogie Down Bronx.
+She's a 32-year-old Democrat socialist with a history of spicy remarks.
+New York's 7th district, Claire Valdez, won the open seat over the handpicked successor,
+the incumbent.
+Seven is a DSA stronghold, Bushwick, Williamsburg, Long Island City, Greenpoint, known as the Kami Corridor.
+A lot of hipsters and baristas with suspenders in that neighborhood.
+According to our partners, Polly Market, this was a pretty big upset.
+The Mondami Suite.
+Chances were just 26 before Election Day.
+Yeah, that would be like the trifecta there if you were gambling.
+These candidates, just like Mondami did a lot better with younger college-educated and high-income
+folks, the folks who can afford to be socialist.
+And these are all saved Democratic seats.
+The DSA will very likely win.
+So the DSA caucus.
+That's the best thing you just said.
+People who can afford to be socialist.
+It's always the rich poor.
+They're rich, but they pretend to be poor.
+It's perfect.
+I mean, this is the history of our country from the 30s, the 50s, Red Scare, Black,
+Panthers, I mean, we'll get into it, Chamath. But basically, if you're intelligent and you get
+into business, you become a capitalist. If you're super intelligent and you go into academia,
+eventually you have the luxury belief that socialism is awesome. What's your take here,
+Chamoth? And then I'll go to you, Saksie Poo. Because I know I can see you're chomping on something
+over there. You're just ready to go. Honestly, I think that we are losing the script. And
+part of it is because we've been our own worst enemy. I'll just keep saying this, that I think
+AI is a very good prism into this problem. I think AI is the greatest economic leveler
+will ever find in our lifetime. I think it's the thing that can create the greatest amount
+of equality. I think that it can even the starting line for every single person on Earth.
+But we've done such a poor job in representing it, in bringing it to market, in talking about it.
+We've let all of our own personal trials and tribulations and insecurities and fights spill
+out into the open.
+As a result, Silicon Valley has lost even more credibility with the people at large.
+And in that vacuum, what other people can paint is a picture of how anything other than
+what capitalism looks like today is a better version of what they see.
+And this is why you're seeing, I think, a lot of these people get a lot of momentum.
+I think if you look at some of the key congressional races, they were a referendum on AI.
+And the good news is we were able to hold the line in some of these key places, but just barely.
+In Utah and in New York, there was a couple of very important races where it was essentially
+anthropic-funded anti-AI groups, which is, again, insane, against, in some ways,
+open AI funded pro-AI groups, and the pro-AI groups won.
+You just explained that. It's a great leveler. Can you give a couple of examples and just expand on that briefly? How is it a great leveler? I mean, I know, but for the audience's sake, you've said this a couple of weeks now, so I think unpack it a bit.
+The best way to explain it is, I think that the first real major unlock of economic productivity was when the internet and specifically Google went and harvested and collected all the world's knowledge and all the world's information.
+and they made it available via search.
+What we figure out, though, 25 years later,
+despite the fact that they built a great business,
+is what was missing was then being able to take that knowledge and information
+and transform it into expertise and intelligence.
+And that's effectively what AI does.
+It takes that world's knowledge and it allows you to act upon it
+so that every single man, woman, and child,
+has an equivalent Travis Kalanick as his co-founder,
+a super founder, this brilliant person that can think through all your problems, can out-engineer
+people, can out-think people, and they sit beside you, and you have that. And there is no gatekeeping
+that can prevent you from having them. And so now, you're only as good as your ability to direct
+that energy into something productive that you value. That is an incredibly powerful thing.
+And instead, we've gotten caught up in dumerism and jobs being lost and, you know, water being
+consumed all of which are lies, all of which are complete fabrications and misinformation,
+and these have been created in order to specifically help one small set of actors inside
+the AI race, and it's been fed and funded by those folks. So in this vacuum, Jason,
+we've allowed all these other people to paint the other version. And right now, the other
+version looks way more compelling than the current version, because the current version has very
+for brand ambassadors.
+Sachs, what's your take on this?
+I guess some people are looking at this as the left's version of the populist takeover that
+Trump did over the last 10 plus years.
+What's your take on what we're seeing here with socialism?
+And it's amazing appeal and it's winning at the election box.
+I think there is some truth to that.
+I mean, I think the choices of the future are going to be communism or if you want to call
+it's socialism of the Democrat Party or nationalism in the Republican Party. I mean, that is
+where we're headed. Those are the two populist directions. But let's look at what these DSA candidates
+stand for. So let's look at what their platform is. They actually say they want to abolish the
+Senate. They want to abolish the carceral state. That means basically police forces and prisons.
+They want to abolish ICE and grant amnesty for all. They do not support
+any deportations whatsoever. They want to replace the president and Supreme Court with an executive
+and judiciary that is chosen by and subordinate to Congress, which basically now, I guess this means
+this House. And with respect to House elections, they want to abolish the Electoral College.
+They want to replace the two-party system with a multi-party democracy, and they want to expand
+the House of Representatives, implement proportionate representation, and ranked choice voting in all elections.
+So this would be a total makeover of our constitutional system.
+They want a free Palestine.
+They want public ownership of major corporations.
+They want to defund the Department of War.
+This is a very radical organization.
+And you would laugh at a lot of these types of proposals, but you can't really laugh at it anymore because these guys are taking over the Democratic Party.
+And you can see the Democratic establishment is in complete panic right now because they have lost control of the party.
+to Zoram, Mamdani, and his allies.
+So, Jason, like you said, I mean, let's take this one race here.
+New York 13, you've got this ally of Hakeem Jeffries,
+longtime incumbent Congressman Espalat, I guess, is his name.
+He is the chair of the Congressional Hispanic Caucus,
+and he was defeated by an unemployed, 32-year-old Ph.D. candidate.
+She's never had a job.
+She's been in college for 10 years, I guess, writing this PhD thesis.
+And I think even by DSA standards, she might be kind of a lunatic.
+So she has declared that she wants to end Western civilization.
+She wants to eradicate Western civilization.
+Wait a second.
+What?
+We're soaking in it.
+Yeah.
+She actually said she used the American flag as a napkin to clean her hands.
+She attended a rally one day after October 7th celebrating the slaughter of Israeli civilians.
+I mean, she's very pro-Palestine, but even to the point of celebrating Israeli civilian deaths.
+She calls white women ugly colonizers.
+She's called for the complete defunding the police and abolishing all prisons and borders, doesn't want a single deportation, hates the police, openly calls them pigs or has on social media before, calls U.S. service members war criminals, and says the U.S. is a disgrace of a country.
+she's written favorably about communism and seizing the means of production and on and on and on.
+So this is basically the new Democratic Party.
+It's going to be, even if the Democrats do take the House in November and Hakeem Jeffries become Speaker,
+this is going to prove to be a huge headache for him managing all these new DSA members because they do not actually see the traditional establishment wing of the Democratic Party as an ally.
+They see it as an obstacle.
+This is the DSA co-chair Josh Block said, we're using the Democratic Party as a ballot access vehicle.
+Oh, my God.
+Not because we share its goals.
+We build our own organization, get elected under the Democratic label, caucus with Democrats when it's useful, and push our own agenda from the inside.
+We see the Democratic establishment as an obstacle, not a home.
+So the DSA is coming for the Democratic Party.
+It controls the base now.
+It's where all the energy is.
+I think this takeover will continue.
+I think the DSA will gradually take over more and more of the Democratic Party.
+And all I can say to these establishment Democrats is play stupid games, win stupid prizes.
+You supported this open border policy that brought in this wave of mass migration.
+That is a huge part of the base of this new DSA wing.
+Mamdani would not have won the mayoral election in New York if it had just been native-born New Yorkers voting.
+It was the mass migrant vote in New York that swung it to Mamondy,
+Donnie. It's not exclusively the DSA base. It's the migrants plus these overeducated
+white progressives who I say overeducated because they're more downwardly mobile. They
+end up going to work in academia or NGOs, that kind of thing. They're hard left wing.
+They're kind of the vanguard. And it's this combination of these recent college graduates
+who are kind of the organizers and this migrant movement who are really taking over the Democratic
+Party. But again, this all goes back to Democratic Party policies. They may not have intended
+for this to happen. They may not have intended for them to lose control, but it was their open
+border policy. It was also the fact that they have cracked the melting pot and the policy we had
+for many years in America of assimilating migrants, right, immigrants. Yep.
+That all got cracked by multiculturalism and wokeism. We don't really do that anymore.
+So now you've got these candidates like Chevalier openly declaring they're not just anti-American, they're post-American. They don't have any respect for the American system, our constitutional order, our free enterprise system. They want to introduce something in much different. And it's going to look a lot like the countries where these migrants are coming from. Yeah. So again, you know, if you import massive numbers of migrants don't assimilate them into our system. And then you have these Marxist leaders.
+you're going to end up with the American system coming to resemble the countries from which
+it's really interesting you mentioned like how she wants to get rid of all of these you know delete all of
+these units it's very similar to Trump's you know he wanted to delete a separate set of things like the
+IRS and USAID Department of Education EPA they each use that playbook as well like hey we're going to
+delete some of this stuff Travis you uh famously had the fountain head Trump didn't want to delete the US
+Constitution. No, definitely not. Travis, you're used to... Slight difference. Slight difference. I agree.
+He didn't want to delete Western culture. I don't think he wants to delete Western culture.
+No. You might want to delete USAID because it was a festering, it was basically a front for all these
+NGOs. CIA and CIA. By the way, you may have noticed that in South America, we've had seven elections
+where the countries have swung to the right. And I think a big part of the reason why might be you don't have
+The USAID there conducting all these left-wing regime change operations.
+Paola disappeared.
+Paola disappeared.
+Yeah, totally.
+And the incentives disappeared with it.
+Travis, you famously had the Fountainhead, Anne Rand's novel.
+As your Twitter avatar for a decade or two.
+I don't know.
+It was literally, no, they've been writing about it for a decade or two.
+This is like a six-month thing where I would read a book and then rotate at my avatar.
+Yeah.
+Yeah, had Hamilton for a while. I had Ender's game for a while. But yeah, it became a thing.
+But I mean, you, having known you for a while, I think believe in the individual and their exceptionalism and trying to have a little ruggedness there.
+This is obviously the exact opposite. What's your take on what's happening in these pockets? Because it's not national yet, but it's definitely notable.
+All right. I've got I've got sort of two aphorism.
+for us.
+First is truth and justice is the immune system for society.
+When the immune system is suppressed, all the social ills flare up.
+So if you're seeing us losing truth, like social media, mainstream media, whatever you call it,
+like that's an early indicator for bad things happening in society.
+And it's not just like social media mainstream media.
+It's just everything around us.
+And the same on the justice side too.
+If people commit crimes and there's no consequences,
+it's a nice early indicator.
+So you can kind of watch these things and say,
+is truth winning today or is it losing?
+Is justice winning today or is it losing?
+And what is the trajectory?
+We'll tell you, are we going to get worse or are we going to get better?
+Right. COVID makes, and the Fauci case, now we're seeing a lot more information come out. We have a really hard time getting the truth and maybe we'll get justice eventually. It seems like we're getting a little more truth five years later, but it's like a perfect example of what you're discussing. There's a lot packed into that, but you can unpack it if we had a lot of time, we could unpack it. But those become the sort of atomic things that you look at. And then the other thing I'd say, and some people get a little surprised when I say this, which is,
+communism is in all of us.
+Communism is in our blood as humans.
+And people go, what the hell are you talking about?
+You're crazy.
+What do you mean?
+Well, I'm like, well, have you ever in your life been lazy?
+And everybody's like, yes, I've been lazy in my life before.
+I said, have you ever in your life wanted something for nothing?
+Yeah.
+the difference is do you make that a way of life? And when you have ecosystems that essentially allow you
+to do both of those things without consequence, those ecosystems get a critical mass and start taking
+hold. And I think that's what we're seeing. Well said. Yeah, I think it's well said. Gavin,
+I know you, I don't know you to talk too much about politics, but talk about markets, but these
+two things do relate, I think. So give us the economic.
+perspective here on why this is happening, because obviously different generations have had
+different economic experiences. So I don't want to lead the witness here, but I have had conversations
+with you about this before. Yeah, well, so I do think, um, I risk it obviously AI is, I think
+going to be the defining political issue of the midterms and for sure the next presidential election.
+But I feel like what is going on with the DSA is really a fusion of two things. So the Democratic
+party. I was a Democrat for most of my life. And it was the party of the working class people
+that was trying to create opportunities, you know, maybe level out equality, you know, help
+black Americans, help Hispanic Americans. And, you know, you can agree or disagree with their methods.
+But I think those are all noble goals. And to a large extent, none of those are really
+present in the DSA. None of them. If you look at who voted for which candidate, the voting
+base of the DSA are relatively wealthy, white liberals who are downwardly mobile. They're losing
+votes with working class people. They're losing votes with poor people. They're losing
+votes with black Americans. They're losing votes with Hispanic Americans. And those, you know,
+the people that the Democratic Party, I think, for a long time, tried, and whether they failed
+or succeeded, is up to try to represent and give a voice to. They are not of interest to the DSA.
+And I think the DSA is dangerous. It's tragic that we are electing profoundly anti-American candidates,
+who in some cases have called for violence to eradicate America. And I just think,
+there's there's a whole class of people who went to an elite school they grew up in really nice
+circumstances and instead of going into industry they went into this kind of giant NGO non-profit
+machine and their outcomes have been very different from people who did productive things for the
+world you know i've said on the show many times elan has done more
+to decarbonize the planet than every activist combined.
+Yeah, times 10.
+Yeah, times 10.
+And I think these NGOs and the fact that the government is increasingly outsourcing a lot of funding to them is a really big part of this problem.
+And they are pursuing policies, you know, I think we talked about it last time, but the Curly effect, a mayor of Boston, you pursue policies.
+that you know are going to be disastrous for your constituents,
+but they drive out your rivals.
+And then you can give jobs, $600,000 a year jobs,
+run an NGO that does nothing productive to your friends and allies.
+And it's really organized corruption happening at a massive scale.
+You know, the one thing, whatever you want to say about the Trump administration,
+A lot of people are up in arms about this new plane.
+He's getting from Qataris.
+Well, one, sounds like we needed a new plane,
+but two, it's right there for you to see.
+I think there are tens of billions,
+maybe hundreds of billions of these payments flowing to these NGOs.
+And if you look in California and New York,
+it's like I think the per capita spending on homelessness
+has more than doubled,
+and it's all gone to NGOs.
+and outcomes have gotten worse.
+In California, it's like quadrupled,
+and outcomes have gotten worse.
+So I think this is dangerous,
+and I hope that the mainstream Democrats
+can find a compelling candidate
+because I think the reason that the DSA is increasingly ascendant
+is not because of their ideas.
+I think their ideas appeal to this very narrow subset,
+doubly mobile, rich white people who, you know, increasingly maybe live in, you know, quasi-gentile
+poverty, because they're not doing productive things. They may be well attention, but they're not
+doing productive things and can find a compelling candidate because I think the reason their
+ascendant is Zoramam Dhani. I think he is one of the most talented politicians I've ever seen
+in my lifetime. You know, he can give a great speech. He's good in an interview. He can tap into all
+of this. He's kind of a chameleon who can shift. But I think he is a singularly talented politician,
+and he is the reason that the DSA is ascendant. Not their ideas or not dissatisfaction with AI,
+but it's him. And there is no one else in the Democratic Party. I used to think AOC was by far the
+most talented Democratic politician. That was the warm up. Yeah. She was talented. She's nothing.
+Clearly.
+Like Zeron.
+From a political talent.
+And if you combine his charisma and ability to communicate with generations, like we're now
+like two of these lost generations that feel like they're going to do worse than their parents.
+And if you look at housing and college debt, health care, they don't believe that they can
+participate in the system.
+They feel the system's rigged.
+And if somebody comes along who speaks to them and they have no conception of socialism
+and what happened, you know, in Germany or during the Red Scare, they have no idea what socialism or communism is.
+They have this incredible rapper they've put around this, which is, you know, they're democratic socialist.
+It's like, it's the Coke light. It's a Coke zero of socialism. It's actually just communism.
+They want to literally seize people's assets. They want to seize half of, you know, these company stock.
+They want to seize their wealth. They just want to take from the people who have made stuff, as we talked about last week.
+and we've done nothing to change their mind.
+We haven't made more houses.
+We haven't made college more affordable.
+Healthcare is a disaster.
+Inflation's a disaster.
+And starting pointless wars,
+obviously the support of Israel is somewhere in here as part of all this.
+Can I say something? Yeah, sure, of course.
+Yeah.
+I was on Megan Kelly yesterday.
+And I had this theory that I've been kind of working through,
+and I'll just share it with you guys because I'd love your reaction.
+if you look at the scourge of socialism,
+if you take the rhetoric away and you actually look at the outcomes,
+there are three countries that I think have veered
+far towards socialism well before the United States,
+Canada, the UK, and Australia.
+And I think when you look at any sort of reasonable measure of their progress,
+it's been an unmitigated disaster.
+So all of the virtue signaling on socialism,
+issues, all of the virtue signaling on immigration and open borders, all of the virtue signaling
+on climate change has left each of those three countries in some state of disrepair with
+enormous amounts of infighting, tremendous political instability. They are all sort of powder kings.
+And there's an interesting thing that happened in each of those three countries that I think
+has the potential to turn the tide, and it speaks to what Gavin said. Each of those
+those three countries now have banned social media when you're 16 and under. And I think it's
+sort of like making sure the kid doesn't get addicted to the drug too early. And when you look at
+somebody like Zoran Mamdani, I think Gavin is right. I'll go even further. He, AOC, the lady that
+just won. Chevalier. Let's just break it down. They're all good looking. They're all charismatic.
+they have their pulse on the gestalt of the moment.
+They know how to use social media,
+and they are essentially curating an army.
+Now, if you cut the legs off by saying young people should actually age into social media,
+I suspect that the most important channel of information consumption,
+being taken away from them, actually starts to give them the opportunity
+and the rest of us, quite honestly,
+because we have to deal with kids who are just really fucking.
+stupid, constantly asking for this stuff. The chance to actually show you how a balanced diet
+actually allows you to be much healthier in your later life. And I think as relates to information
+consumption, I think you are going to see, I suspect, a far less radicalized youth aging into the
+voting roles in those three countries. And I suspect if you start to see political stability
+and predictability in Canada, the UK and Australia, you can put your finger right on
+this ban as the reason why. And Florida has already done it in the United States. And I think we need to
+deeply consider it across the rest of the United States.
+Social media ban is now starting at 16. And Canada has it. It may come to the U.S.
+Go ahead, Travis. I'm a full counter to Shemoth on this one. I think we all agree social media
+is bad for the kids and for the adults. Like, too much of that stuff is very bad. It's brain
+rot for real. And it's going to be worse than cigarettes. It's all the things. But
+The real point of banning under 16 is so that you can force adults to identify themselves
+and de-anonymize themselves so you can set up a full-scale censorship regime, which they're
+sort of contemplating in the UK.
+And what censorship is really about is not about harmful content.
+It's about content that the people in power don't want you to see that disagrees with
+them.
+If it agreed with them, it's not harmful.
+It's the stuff that doesn't agree with them.
+And so what they're doing is they're criminalizing, disagreeing with them.
+And so there's a derivative of this age-based stuff.
+Age-gating.
+Which is really about the adults, not the kids.
+That is the downside to it.
+Gavin, you wanted to add?
+No, I super agree that I think that a social media ban under 16 would be great,
+but I think it comes at a really high cost outlined by Travis.
+And that's what's really going on, is they want to restrict anonymous accounts on X,
+who say things that particularly the powers that be in the EU do not like.
+And if there's a way to do that while preserving anonymity and free speech, I'm all for it.
+But I think if it were not for free speech and X, like I think we'd be living in a very different world today that would be a lot worse.
+And just to riff on a few things that all of you have said,
+on communism, it is communism and the great tragedy of human experiences we can't learn from
+the experiences of others. And it may not matter that communism has failed utterly and ended in
+death and misery wherever it has been tried in a variety of different cultures with a variety
+of different mechanisms. And every generation may need to experiment with it. I think the saving
+grace and the importance of preserving free speech is that the DSA's policies, and I would say in
+particular, super progressive democratic policies, are measurably bad. They lead to bad outcomes.
+If you care about black lives, there's a study that is uncontested that when you elect a Republican
+DA all-cause mortality for young black men in that city drops by 7%. That's all it takes.
+You care about the environment?
+Well, progressives, there's so many regulations that you can't build solar, which is really the only thing that matters and like the world is going to run on sunlight.
+You care about education, their approach to education of getting rid of these elite schools that allows low-income people to have a real chance.
+You know, getting rid of math in California, it is profoundly disadvantageous to people.
+It leads to terrible outcomes.
+And we all know what happens with crime.
+It turns out that there's a certain percentage of people who, you know, are, I think it's like
+60, over 60% of the violence or 75% of the violence comes from people who have like 10 or more
+convictions.
+Yeah, I think the specific stat is like 0.1% commits 70% of the crimes.
+And if you just dealt with the 0.1%, you have effectively no crime.
+And so I just think the scary thing is, and I do worry for the first time, like as a student of history, the United States has been like a very stable political economic entity, geographically stable for a long time.
+And that's to its credit because we could have literally taken over the world after World War II.
+But man, if they get total control of some of these cities and drive out everyone who is productive, I don't know how you.
+come back. And so that's, that is a little worrisome to me in terms of the future of the United
+States. Well, and by the way, I don't think it's just New York. I mean, that race for mayor in
+L.A. where was it Rahman somehow beat Spencer Pratt, thanks to ballot harvesting after voting
+day? Or I should say votes that were found and counted after election day. I mean, that will be a test
+of the DSA because they are highly organized and they have learned how to take advantage of all these
+rules, these ballot harvesting rules and all these types of things. The DSA, I think they've got something
+like half the city council seats now in L.A. And they're growing. So especially in these low turnout elections,
+and look, this was a Democratic primary in New York, which is a strongly blue state. So I think maybe
+17% turned out. So it was very low. But this is where the DSA really thrives and excel.
+because they care passionately and they're highly organized and they know how to take advantage.
+This is why they want all these like rank choice voting and all these types of things.
+They know how to manipulate and take advantage of those kinds of systems.
+So I think that you're going to see this in lots of other jurisdictions.
+Wherever they're organized, I think L.A. will be a really interesting test.
+So I don't think we can just chalk this up to Zoran's popularity.
+This is a national movement and we're going to see in a lot of places.
+But there's no question that Mamm Dani is now.
+kind of the spiritual leader. I mean, all of these people don't, they think AOC is a sellout,
+you know, or Bernie is a sellout. You know, they are way more radical than even, even those types.
+To add to that, Sacks, they did learn something from Trump, which is built into a big tent.
+So you're seeing Bernie, Mondami, Rokana, they're all kind of like, yeah, we're different,
+but there's enough room in this tent. Well, what's happening is that these sort of more
+established progressive leaders, they want to tap into this energy. And even the establishment
+wing of the Democratic Party is now bending the knee. And so what you're going to see is,
+regardless of how many DSA candidates actually get elected, the rest of the party is now
+responding to this, and they're going to bend, they're going to blow in this direction,
+because they don't want to get challenged in a primary. I mean, think about this. You had three
+major congressional races where the Mamdani candidate won, two of them unseated, you know,
+really strong incumbents. These were big upsets. So you've got to think now that every,
+congressional race in a pretty blue district, those members are now going to have to take into
+account that they could get primaried. And they're going to have to tilt their voting and their
+views and their rhetoric in this DSA direction because they don't want to have happened to them
+what just happened to Dan Goldman in the New York 10th district. And just to make one last point
+on that. So, Jal, you mentioned the Israel issue. And I actually think that is a hugely important
+and salient issue now in the Democratic Party, in Democratic primaries. Obviously, you saw that as part of the DSA
+platform, one of the legs is free Palestine. This defeat of Dan Goldman, two-time congressman, he led the
+impeachment effort against Trump. He had all the right progressive credentials. He checked the box
+and all the left-wing policies. He was on the right cable news channels all the time. No one
+expected him to lose. He lost to Brand Lander really just over this issue of Israel. Dan Goldman is
+is very pro-Israel. He basically defended Israel's actions over the past few years, whereas Lander,
+who like Oldman, is also Jewish. So this was, again, you know, white Jewish congressman against
+white Jewish, longtime New York politician. So on paper, they're very similar. It was just in this
+issue of Israel where they disagreed. And Lander went to a mosque in order to denounce what he
+called the genocide in Gaza. So this was really as close as you can get to,
+a straight up vote on that one issue in this primary and lander won pretty handily. Now, the reason for this
+is if you look at polling, 80% of Democrats now say they disapprove of Israel. So, you know, the approval
+disapproval rating, Israel used to have high approval ratings pretty much across the board. I mean,
+it was sort of a consensus both Democrats and Republicans. Now 80% of Democrats say they disapprove.
+you really can't underestimate how much of a motivator this is for young Democrats.
+They believe that-
+Well, we saw that they were all over campuses, X.
+They, we see.
+I mean, it draws people out.
+And it has been quite polarizing just to call balls and strikes here inside the Republican
+party as well.
+You have Tucker leaving the party over this.
+You have Megan Kelly going mental over this.
+And you have, you know, a lot of civil war inside this administration, according to the report.
+So this is the-
+Well, let me, look, I mean, I'm not taking a side in this.
+I'm just trying to describe what's-
+what's going on. Absolutely, same as me. I think the Republican Party is a little bit more mixed
+on this issue, and it really comes down to age. So if you're part of the older, more establishment
+Republicans, let's say you're a Fox News viewer, you still have high approval ratings for Israel.
+But if you're under 50, which means you're probably not watching Fox out much anymore,
+you're probably on to the podcast. I think the disapproval rating for Israel is now 57%.
+So it really comes down to age. Young people across the board,
+have serious problems with what Israel is doing. And then, you know, as you get into older age
+groups, that's where you see a big difference between the Democrats and Republicans.
+I think Chamath, you did a wonderful job of explaining this on Meg and Kelly. There's Jewish people.
+There's the state of Israel. There's Israelis who live in the state of Israel who are also Jewish.
+And then there's Bebe Netanyahu. And I think there's a lot of concern on Bebe Netanyahu is just
+absolutely out of control is the consensus. I think amongst many people across many religions,
+and political parties.
+Not to react this whole thing,
+but there are a lot of parallels
+from what happened in 10-7
+and what happened in 9-11
+in the following ways.
+When you invade a country
+and you slaughter their people,
+it creates an enormous injury,
+an enormous emotional, physical, psychological injury.
+And what that country typically does
+is respond by giving the authority
+to the leader at that time,
+to set the table right.
+And you have to remember,
+there was a lot of things that happened post-9-11
+that under any other circumstance
+would never have happened.
+At the top of the list
+would have been the Patriot Act,
+which in any other world
+would never have gotten past
+and would have seen the light of day,
+but not for 9-11.
+So there are moments where leaders
+are put in a position
+and they essentially act
+on behalf of their country
+and their people to right or wrong.
+I understand that.
+I think everybody understands that.
+What's happened now, though,
+is that people cannot logically disambiguate Jews, Israelis, and BB.
+And I think that's very unfortunate,
+because we're at a point in time where everything gets conflated,
+and this thing has become this third real issue,
+and I find it absolutely shocking.
+It's completely reasonable for people to have a point of view on BB
+and say, hey, you know what, it's enough,
+or it's gotten too far, or whatever it is.
+And I think that there is a very reasonable claim to make that it's time to find different
+leadership, new leadership inside of Israel and have an opportunity to reset their standing
+on the global stage.
+They deserve that.
+The Israeli people are incredible.
+Jews are incredible.
+But the idea that you fold it all together and you look at one person and then you apply
+it to an entire country and an entire religion is insane.
+May I have one thing?
+I think there's two things really, and I'll be quick.
+One, Israel has a giant PR problem.
+They need a young sub 35 year old American Israeli who's super fluent in English, conversant in social
+media, and is their kind of spokesperson to America.
+And they need that in France, in Germany, in every country.
+And they do not have that.
+There was a young, I think his name, I forget his name, but there was a young Israeli who
+was doing a really good job, Israeli-American representing Israel after October 7th and evidently
+BB Net and Yahoo's wife didn't like him, so they canned him.
+And they've never really found a replacement.
+And I do think this is an urgent issue for Israel, because it's like they are taking
+body blows every second, and they're not even responding.
+And what I think they do, what they tend to do is they'll sometimes roll out someone who's
+a great man or woman in Israel and is in their 60s and a hero of a war.
+war. But isn't that fluent in social media? Maybe the command of English is, you know,
+technically precise, but there's an accent. And those are great people, but they're not great
+spokespersons. And this is an urgent issue. As far as the antidote, going back to Chama's comment,
+I do think a big reason Trump got elected, many of the Democrats I know who voted for Trump,
+a big part of it was that during COVID,
+they heard what their children were being taught.
+And it was the first time.
+And it was radicalizing for them.
+Yeah.
+And I think it's just really important that, like,
+as part of the American educational system,
+just they're not be overtly anti-American things.
+Listen, we've made mistakes as a country.
+We're not perfect.
+We're about as good as it gets.
+Yeah.
+And we need to tell that story in,
+in every grade consistently.
+And we can have a debate.
+We've done so many things wrong.
+Let's learn from them.
+But just, you know, slavery was endemic to the world
+apart from some countries in East Asia.
+Like it's not a uniquely American problem.
+And we need to tell those stories
+because I think a lot of kids,
+the reason they're so susceptible to this social media propaganda
+is they brought up being ashamed to be American,
+and ashamed of various things in their identity
+and being told that America is evil
+and we need to unwind that
+because America is awesome
+and we're the only vaguely successful
+multicultural society on planet Earth.
+Yeah, the melting pot.
+And if you say that, Gavin,
+if you say the melting pot is a beautiful thing,
+you're going to get canceled
+because, oh my God,
+you're getting rid of people's culture.
+It's like, no, no, keep your culture
+and then join this culture
+and we can all have this great smorgish board.
+Yeah.
+You know what my culture is?
+You know what my culture is?
+I don't know.
+It's no longer Laurel Piana.
+I know that.
+I know you're off the train.
+Winning.
+Winning.
+The culture of winning.
+I love it.
+That's it.
+Learning.
+Progress.
+Adventure.
+Do you piss excellence to quote Ricky Bobby?
+Oftentimes.
+I piss excellent.
+Just to wrap up here.
+But oftentimes.
+Just to warn the dopey Democrats who have been unable to get anything done.
+The socialists are using your party. And this guy went viral. They're just a host. Like,
+they literally want to infect the, oh, yeah, good image. They want to infect the Democratic Party and then, like,
+just literally get the voting base. And this guy, Gustavo Gordillo, I don't know if you guys saw this.
+He's a DSA co-chair in New York City. And he just said it outright. It was to read you the quote.
+We're part of the Democratic Party caucus, but we don't agree with the way the Democratic Party runs its apparatus.
+is so we're trying to build our own independence by focusing on volunteer-led movement.
+We think everyone should be able to be trained and become someone who can participate
+in the political process, and we don't think the Democratic Party has run that way.
+In terms of the agenda, there's a problem in the Democratic Party.
+They are funded by billionaire donors.
+And at the same time, they're trying to represent the working class in our opinion.
+You have to choose between the billionaire class and the working class.
+They are just taking over the party.
+And again, back to the playbook.
+This worked really well for Trump.
+He took the Republican Party over and he owned them. And they tried to get him out. They tried to get him out. But his message and his communication style was just too on point. He knew exactly what people wanted to hear. And he knew exactly how to deliver it. He is a all-time comedic performer. Like of non-comedians, he's the number one comedian in the world. And of actual comedians, he's in the top 20. So he communicates perfectly. And that's exactly what Mondami's done. He's taken the Trump playbook and he has applied it here.
+He is taking over with this communication.
+You guys know I'm a diehard Nick fan my whole life cried.
+It was at game five when they won the finals.
+And then Mondami gave this speech that somebody wrote for him about the Knicks.
+And I was just absolutely flabbergasted and upset that it was so great.
+He's got that Obama Trump charisma and he is going to destroy your party from the inside out.
+Socialism is communism and is the road to suffering and pain, as Gavin said.
+It's no good we'll come out of it.
+Isn't it amazing?
+Oh, here we go.
+Okay.
+You know, you know, Mdani is a communist and what he represents is basically evil.
+And yet, because he just gave a speech about the Knicks, you love him now.
+No, I love the speech.
+That's all it takes.
+That's all it takes.
+We're screwed.
+That's all it takes.
+It's true, though.
+By the way, I mean, this guy, he's a total phony.
+I mean, he doesn't stop smiling.
+He's got this, like, crocodile smile all the time.
+He's talking about, you know, eating you.
+Yeah.
+And it's totally fake.
+I mean, come on.
+He had to be hypnotized.
+He was making Knicks references, and it was the most get out of your seat, standing ovation
+cheer, you know, speech I've ever heard about the Nix.
+And I was infuriated.
+This fucking guy is such a good orator.
+You got programmed.
+I hate him.
+We're going to have to deprogram you now.
+No, no, no.
+It was like getting like hypnotized and I just pulled myself out.
+I got like pulled in for a second.
+Next topic.
+Next topic for sure.
+Oh, my God.
+Greg, this strong first topic. I didn't know you guys were going to go all in, so to speak.
+Topic two, Chinese open source models appear to be catching up with the U.S. Frontier models.
+Let's start with a GLM 5.2 released by ChinaZ.A.I. This is a frontier class open source free
+to download anywhere model, 744 billion parameters, one million token context window, and it's under
+the MIT license. If you don't know what that is, open source licenses have very simple.
+Open source.
+It's super open source.
+Thank you.
+The most open source.
+The most open source of all open source.
+If you open it up, you can use it however you like.
+You can fork it.
+You can build your own company based on that.
+No regional restrictions.
+No API.
+Fully self-hostable.
+No, no Dario.
+It's just yours.
+It's just yours.
+It's just yours.
+And you just got to reference the, you just got to reference the license.
+That's it.
+Yeah.
+You shout out the license and you're good.
+scored 51 points on the artificial analysis intelligence index.
+That's the highest score of any open weight model ever.
+Stacks up nicely next to the frontier models beat GPT 5.5 on the Frontier Coding benchmark.
+That's a software one.
+Trails Claude Opus 4.8 by less than one percentage point API usage cost obviously much cheaper,
+85% cheaper, in fact, than GPT 5.5 for comparable performance.
+Z.a.I. founder told Elon Musk,
+open weight, fable capabilities will be here sooner than Q1, 2027. Gavin, in other words,
+all this hand-wringing, all of these legal restrictions, self-imposed restrictions, are now
+completely or close to completely moot if they're going to have a model in Q1. Does this six months
+even matter? Does six months in the grand arc of AI matter or not? And what does this mean for
+frontier models? I do think how good
+GM 5.2 is as challenged some of my beliefs. And there's a great post from a TPU engineer that for sure
+distillation has happened. There's been an immense amount of distillation. No question.
+Please explain to the audience what that means. Disillation is when you have, you know, a,
+like, you know, we all have seen videos of these Chinese iPhone farms. Just picture a farm like that.
+Tens of thousands of phones, iPads, and computers that are actually.
+asking the Cloud API through masked accounts, very specific questions,
+and then these what's called reasoning traces are being harvested.
+Because if you're on the API, you get to see every token.
+And those reasoning traces are then fed back into the model
+during the reinforcement learning process and probably during the pre-training process.
+And that is a way that you can get really, really close to the frontier at a fraction of the cost.
+And this is for sure going on and has gone on for a long time.
+It's a cheat sheet.
+It would be like it would be like asking Google every question you could ever imagine,
+every search imaginable, getting all the results and then putting your own search
+and change together to make it very simple.
+Exactly.
+But now that this model is so good, it is good enough to do its own RL.
+And, you know, the kind of cat may be out of the bag.
+Now, I don't think we really know how good mythos is.
+We don't really know how good the next Open AI model is.
+We haven't seen the next SpaceX model.
+So maybe that gap opens up again.
+But either way, I profoundly believe the future is composable models.
+And you're going to every enterprise, you're going to have what Andre Carpathie called
+the Council of LELands.
+You're going to have, you're going to have Groch, you're going to have Anthropic,
+you're going to have Open AI, Google.
+You're going to have at least two of those.
+I would argue Groch should always be one of the two because of its dedication to
+the truth and it will tell you as a business owner, a politically inconvenient truth that you
+need to know for your data. But you're also going to have your own open weights model that you
+are old on your data and you're going to put those two together, the frontier models and your own
+model. And you are going to get, you know, real Pareto-dominant outcomes. And, you know, half the queries
+are going to be go to the open source model, maybe 85%. And only the hardest ones are they,
+then maybe they all go to open source for,
+and only the hardest ones are then checked by the frontier models.
+So I think this is the future.
+It's coming.
+And a misconception that a lot of people have is that open source models are,
+you know, somehow bad for AI.
+They're awesome for the AI infrastructure providers.
+They just shift economic value from the margins of the frontier labs to the infrastructure.
+And that's not bad for AI.
+That's great for them.
+It's great for them.
+It's great for them.
+But I do think there's still a role for these frontier models, and it may be true.
+To date, frontier tokens are capturing 90% of the economic value, and open source tokens are probably 80% plus of tokens processed.
+And those ratios may be here to stay, but I just think composable models are the future.
+What does that mean composable model?
+A composable model where you have, if you're a corporation, if you're, um,
+Is there a new name for your super secret startup, Travis?
+What's the new name?
+The name is called Adams.
+It's not super secret.
+It's super awesome.
+Super awesome.
+Super awesome.
+For your super awesome startup Adams,
+which, man, loads of people have been calling me to say how they've been in the,
+you know, they've spoken to you.
+Yeah.
+Investor, your dog is hunting with investors, Travis.
+Fair enough.
+Fair enough.
+Okay.
+You're going to have a router, and every query that somebody comes in, every task that needs to be done at your company, that router is going to send it to, you know, your RF SFTed version of P.
+Of course.
+Of course.
+Point two or Demetron.
+Yes.
+Then at some point in the workflow, a frontier model may or may not come in to kind of check it, add to it.
+And that's what I mean by a composable model.
+when you have kind of a symphony of models working together with kind of the frontier models being,
+you know, maybe the contractors.
+But that's what I mean when I say composable.
+Yeah.
+Understood.
+Thank you.
+Sacks formerly A.I. Tsar and now running P-Cast.
+What are your thoughts on China's ascension in open source?
+And we're still looking for our open source champion, obviously, are in the U.S., but it feels like.
+Can I just say one thing?
+InVVinia is the American open source change thing.
+Thank you.
+They can release GOM 5.2 or better whenever they want.
+Okay.
+But why haven't they done that?
+They don't want to screw their customers too much of a conflict to be like pushing it out there too often?
+All of the above.
+Who knows?
+We'll see.
+Okay.
+Yeah.
+And you've got to be delicate there.
+I see.
+Okay.
+So I'll say it not you.
+Chanson doesn't.
+I mean, it's a classic channel conflict, right?
+You don't want to compete with your customers.
+And he is competing with Elon on self-driving now, and Elon's making his own chips.
+So I think these frontier model companies should think very, very carefully about A6.
+And the incentive that creates for Nvidia on the model perspective.
+Open AI, which launched their jalapeno chip this week and announced it being built by, I believe, Broadcom.
+And they are saying, hey, FU to Jensen and Invidia.
+and they already were full contact with him,
+don't be surprised if Nvidia says, you know what,
+we kind of like the area you're operating in.
+Now that you're going to make chips
+and maybe OpenA sells those chips to other people,
+don't be surprised if Nvidia starts an Open AI competitor.
+You heard it here first on All In.
+Sax, did you want to jump in there?
+Sure.
+I mean, look, I think that China's been good at open source for a while here.
+There's nothing new about that.
+But there are a few things that are significant
+about GLM 5.2.
+So the first one is it is now, like you said, the best open weight model for coding,
+software engineering, and long context agent work.
+And you gave a couple of the suede bench scores.
+I mean, it was just a tick below Opus 4.8, and it was right up there with GBT 5.5.
+So if you compare this to, again, the state of the art of the frontier models from Anthropic
+and Open AI, it is.
+right there with the previous model.
+But you have to remember now that the current model,
+Fable for Anthropic and 5.6 for OpenAI,
+is now in a little bit of a purgatory
+because of all the reasons we covered last week.
+Now, look, I, like I said last week,
+I ultimately blame Dario and the way he communicated
+and the way that he primed officials
+to be on a hair trigger
+with respect to these models.
+and when the government got a credible report about a jail break from, you know, one of Anthropics'
+own most trusted partners, you're going to say roll that back.
+But that is the situation we're in right now is that Fable has been rolled back and GBT 5.6
+is trying to navigate these new approval hoops.
+So we now have a Chinese open weight model that is as good as the currently available
+models from Open AI and Anthropic.
+And look, this is a point I've been making really since I joined the administration is that
+we are in a very competitive situation with China.
+I've been saying this from the beginning.
+Our whole AI strategy from the get-go was about winning this AI race, defining it as a race,
+as being globally competitive.
+And we cannot afford to do things unnecessarily that slow our companies down.
+I hope that by that.
+David, can I ask, do you think Dario got exactly what he wanted?
+It seems to me there's some chance.
+This has been a very calculated strategy to provoke the U.S.
+government into doing what they just did, and this is what he wants.
+He has a regulatory moat now.
+He can keep his future models behind this, you know, give it out to glass wing,
+use it to distill it for themselves.
+Do you think this is what they wanted?
+I think that on a certain level it is what they wanted
+because they've been advocating to have a federal regulator, basically a new agency. In fact, Dario
+posted a blog just a few weeks ago saying he wants an FAA for AI. They wanted government approval,
+a government approval process for AI models. And so in a sense, they've gotten exactly what they
+wanted. Now, that being said, I don't think they're happy about the fact that Fable has been
+rolled back. So in a sense, you could say that Dario got hoisted on his own potard here, or it could be a
+F-A-F-O situation.
+But look, my view on it is we should not reward Dario by giving him exactly what he's always
+craved, which is some sort of labyrinthine government approval process that does reward
+regulatory capture.
+So I hope that very soon now, I do think that as long as Anthropic has resolved the
+jailbreak issue, then I do think they should be allowed to come back to market.
+And similarly, for Open AI, I don't think we should be delaying them unnecessarily.
+We do not have months to give away in this race.
+And let me just say one other thing, which, again, is something I've been saying for months,
+which is, with respect to risks like cyber, it is undoubtedly a risk.
+But what is the response to that?
+The only thing you can do is go out and find all the vulnerabilities first yourself,
+the White Hats.
+I have the White Hats, find all the vulnerabilities, and do a big upgrade cycle, roll out the
+patches before they can be exploited. The reality is that if you just clamp down in a way that
+doesn't even allow these models to be used, the Chinese are going to have these capabilities
+imminently anyway. They're already at Opus 4.8 level. And the founder of Z.aI, he said that
+before Q1, they'll have Fable Level capability. I believe them. Because look, the Chinese have been,
+I'd say nine months behind our models plus or minus three months, depending on capability.
+But it's when they know there's been a breakthrough around something like cyber,
+they can deploy more resources against that particular problem and catch up faster.
+Like I said, we're on a shock clock here.
+I've been saying for months that we're on a shock clock,
+we have to do smart things.
+We can't just slow everything down because that will not slow down the Chinese.
+They're not under our jurisdiction.
+We have to basically get these tools in the hands.
+of our cybersecurity industry.
+They're the force multiplier.
+They're the enabler.
+We have to basically go out
+and do this big upgrade cycle quickly
+because we only have a few months left.
+They're six months behind on the model
+and they're 24 months behind on the Silicon,
+yet they're only a few months behind in total.
+So what game are we playing?
+This is insane.
+We are going to lose if we keep doing this stuff to ourselves.
+So let me make a point about that.
+So on the Silicon,
+there's been a huge push in China
+by the government to push their AI labs to develop and train on Huawei chips.
+And look, you can take these claims with a grain of salt.
+Maybe they're not true, but it was claimed that DeepSeek V4 was trained on Huawei chips.
+And now Z.a.i, they are saying that the GLM5 family was trained entirely on clusters of
+Huawei Ascend 910B chips.
+So now look, maybe they're lying.
+Maybe they smuggled in some Nvidia chips.
+but the claim is that this was all done on indigenous chips.
+And what I believe is that China is engaged in a strong indigenousization push right now.
+They want to prop up Huawei as the national champion.
+They want all their companies using Huawei chips.
+They still need to scale some of the manufacturing, but they're going to do that pretty quickly.
+And then what they're going to do is they're going to take these Huawei chips.
+They're going to take these Huawei optimized models.
+Remember that GLM 5.2, the inference is optimized for the Huawei chips.
+Okay, we know that.
+And they are basically going to package these things up.
+They call it AI in a box.
+They're going to sell it at a fraction of the cost globally.
+Which is what they do with every technology, right?
+Better, cheaper, faster, or almost as good.
+And that's another thing is I've been saying since the beginning of this administration,
+we have to be pro-export because China is going to be there within a one or two years.
+year, as I said, we're going to be kicking ourselves because we could have had the whole global
+market to ourselves. We invented reasons not to sell abroad to our friends and partners, and now China
+is going to be there imminently. Yeah, and with that lower price, say, when you play with
+this new GL, you get some really interesting responses. I asked it about the country of Taiwan,
+was not pleased and didn't give me an answer. I asked it about Tiananmen Square. No answer as well. I'm
+using the hosted version at z.a.i. But when I asked places to visit in Paris, it did an exceptional
+job, except when I said make these ideas into an infographic and make me like a three-day agenda,
+it was like, hey, we don't have enough time to do that. And it said, use the other model because
+this model's too busy. But you can go play with it at z.aI.
+Just on a point about the censorship. So there's no question that these Chinese models have,
+you can say censorship, and, you know, there's political bias in there.
+they're out of the box. But American companies have taken Chinese models and then essentially
+worked around and basically fixed the censorship inside their own forked version. So, for example,
+Perplexity did this very early on with Chinese models. They showed that you could sort of put
+back the content on Tiananmen Square and things like that. So I think, Jay Cal, you're absolutely right
+about the censorship, but it's not a fatal problem. It's something that American companies can fix when
+they take an open source model and fork it and customize it.
+Yeah.
+In the hosted version, you're not going to get a great answer of what agenda you should use
+for tourism in the great country of Taiwan or your visit to Tiananmen Square.
+All right, let's keep moving here on the dock at Micron Smash.
+Their earnings.
+If you don't know, Micron, they're one of only three companies on Earth that make high
+bandwidth memory.
+These are specialized chips.
+They sit on top of the Nvidia.
+GPU, and their entire 2026 supply is sold out and has been for some time.
+S.K. Heinex and Samsung also make HBM. Micron smashed earnings. Revenue up. 4X.
+4x year over year, $9 billion to $42 billion, beat expectations by 16%. Big jump in guidance
+for Q4, 50 billion versus $43 billion. Their stock is up 10X. Shout out to Gavin.
+In our 2025 prediction show, he gave a call on HV.
+HBM makers like Micron as the best performing asset.
+Since that time, Microtov 14X.
+I'm not crying in my suit.
+You're not crying in your suit.
+I got a ton of information here.
+I think this, I'll just end on the Apple price increases.
+Everybody knows Apple has been really been a beneficiary of the run local models movement
+that I'm part of and people are buying 128 gig, 256 gig, MacBook pros, Mac studios.
+But the gig is up, apparently, because now Apple, which had not passed on those costs to customers, is having to pass those increases on.
+So everything from, you know, the new MacBook Neo, which is their $699 laptop, you know, kind of competing with Chromebooks, is now $7.99 up 15%, and Mac Studio up 25%. The costs are just going to be very significant.
+inflation has come to the desktop.
+If your thoughts, Gavin, Micron and the impact on the industry,
+and is this a temporary bottleneck or does this mean everybody has to get into this business quickly?
+No, one, DRAM is the most important bottleneck.
+There's a whole segment to people on X who are very focused on bottleneck.
+Bottlenacks, I call them the bottleneck bros.
+You know, they'll do some work with Claude, find some esoteric Japanese company.
+The bottleneck that matters is DRAN.
+And DRAM and HBMD RAM, this is the most important bottleneck,
+simply because memory capacity and bandwidth are foundational to the performance of every AI model.
+So this is the most important bottleneck.
+Elon is focusing the TerraFab on memory because he sees it as the most important bottleneck,
+not lasers, not capacitors, not power supply semiconductors, not NAND flash, not HDDs, DRAM.
+And I think this bottleneck is going to be with us for a while.
+And it is kind of astonishing.
+So a few thoughts.
+Like what was important about the quarter?
+They announced that they have these SEAs, these supply chain agreements that have a floor and a ceiling for prices with increasingly large group of large customers.
+And this covers essentially 50% of their revenue, I think, which is four customers.
+And the floor pricing in these new contracts is ahead of prior cycle.
+peaks from a gross margin perspective.
+And so this is really, I think, pretty, maybe end up being very transformational for the
+industry.
+Most other parts of the semiconductor supply chain have re-rated, you know, lamb research,
+you know, the way for fab equipment suppliers, you know, they all trade at huge
+premiums to DRAM relative to prior cycles and their business models have improved.
+But, you know, so has the industry structure.
+and business models of DRAM because HBMD RAM is increasingly a customized chip.
+But as far as other people being able to do this, look, CXMT is going public in China.
+They may be the cure for Apple's Hills.
+They will flood the market with, to some degree, cheap consumer grade DRAM.
+But for the DRAM you need in these AI servers, there are three companies that can make it.
+It's really hard to do.
+This is as close to magic as science can get.
+And, you know, I think Terrafab,
+TeraFab, you know, is going to be an important part of this solution.
+But, you know, these stocks still trade are cross-sectionally cheap
+relative to the rest of AI.
+Something I've been thinking about, memory is DRAM is probably going to be 30 to 40%
+of all hyperscalor CAPEX next year.
+Every, hundreds of billions of dollars that are spent, you know,
+going straight to DRAM.
+It's wild.
+But this may actually be very valuable for society because it is probably, you know, going to, you know,
+inflate the costs of building a gigawatt data center to the point where, like, you know, even for the
+hyper-scalers, economics matter, we're caught in this prisoner's dilemma.
+And this may give us as a society time to adapt, to adapt, you know, what our friend Brad Gershner
+calls the social contract.
+So the high iPhone prices, you know, one, CXMT is coming for consumer grade DRAM, but two, this may be good for AI.
+It may be good for us as a society.
+And making it is just really pure silicon, right?
+Like making memory.
+It's just incredibly refined silicon.
+And that might be the pre-bottleneck?
+Yeah, making the HBMD RAM, making what in video calls SOCAM, making LPC.
+making LPDR.
+These are the types of DRAM that are really hard to make, not consumer grade DRAM,
+and they are increasingly what you need in these AI data centers.
+Yeah.
+Semiconductor grade.
+Yeah.
+So my understanding of HBM stands for high bandwidth memory.
+Again, this is part of the GPUs that go in the data center to run AI, is that you
+take the DRAM wafer or die, and you actually stack them.
+them. And so I think HBM 3 is like eight, it's stacked eight dyes high, but now they're increasing
+to 12 and even 16. And to basically stack them and then package them all together is that's an
+advanced technology in and of itself. So you're seeing now, like Gavin's saying, there's only three
+companies that can do it. But also, this is creating significant price pressure for all the consumer
+electronics businesses. Apple had huge news today where they announced massive price increases. And again,
+is because DRAM now is less available because it's just being hoovered up by all the data centers.
+And if you're a data center and you need to buy GPUs, again, those chips, they're using immense amounts of DRAM because, again, one HBM chip is using multiple, like, stacks of DRAM.
+So it's just getting slurped up.
+And then it takes a couple of years to ramp up new capacity.
+So these companies are going to do that, but that could take a while.
+We saw that a New York member that was that Micron plant that had just broken ground and then got shut down the same day because of some crazy environmental issue.
+So it's not easy to ramp the stuff in the U.S.
+Although Micron is the one provider that's in the U.S.
+S.K. Heinex is in South Korea.
+Samsung's in South Korea too.
+But anyway, we're going to see again more of this AI flation they're calling it.
+It's just another reason I hate AI is it is in this narrow area of consumer electronics where there's,
+competition for DRAM, it is leading to price inflation now.
+Microsoft raised the price of the Xbox.
+It's coming for the Switch.
+It's coming for the PlayStation.
+There's demand destruction because the price is in consumer,
+whereas AI demand is relatively price insensitive.
+David, I would modify one statement.
+It's hard to build a microt.
+It's hard to build a new fab and a deep blue state.
+You can build fab.
+Why were they trying in New York?
+It's kind of crazy.
+New York gave them all these incentives.
+But it doesn't know those incentives matter.
+It's a little bit like solar power.
+You can be as pro-environmental as you want, but if you can't build and install solar because
+the regulations, it doesn't matter.
+So, you know, maybe that micron plant ends up getting, you know, built in my home state
+of Texas.
+The incentive game has kind of flip-flopped.
+It's like it used to be the states we're courting the factories and the fabs.
+Now it's the fabs are like, which state can actually build this?
+We'll pay you whatever you want.
+Just tell us where to send the envelope.
+We'll drop a couple of envelopes off.
+It's not a problem.
+Gavin, can you say how long it's going to take to stand up the fab at TerraFab?
+Well, I mean, if it was a normal fab, it would be a two, three, three and a half year process.
+But, you know, we've seen what Elon has done to other construction processes.
+And, you know, he's starting with some advantages with the Intel partnership.
+So I don't think anyone knows, but based on past history, he's probably going to stand up
+TerraFab faster than other fabs have been stood up.
+But this is really hard.
+It's really hard.
+It's the intersection of magic and science.
+You can't believe how complicated this is.
+So it's going to be hard.
+But, you know, he has a track record of doing, you know, what Jensen called impossible, superhuman.
+And so we'll see.
+We'll see how long it takes.
+You know, one other point here.
+that I guess it might be relevant to SpaceX AI,
+although you don't have to limit it to this,
+is I think there's an assumption that over time
+it would get cheaper and easier to stand up new data centers, right?
+But what you're saying is actually it might be getting harder.
+It might be getting more expensive, right?
+Because there's competition for these components,
+the memories get more expensive.
+I'm not sure that the GPUs are getting any cheaper.
+I guess some of these...
+The transformers, the switch gear.
+It's impossible.
+And the energy might be getting cheaper.
+And then the entitlements are.
+are getting harder, and the political situation is getting harder.
+There's very few places you can even stand up new data centers.
+So is it the case that actually it's going to get more and more expensive to?
+100%.
+So to stand up a one gigawatt data center, it's $35 billion of semiconductors and Vitiya semiconductors,
+and it's $25 billion of power and cooling equipment.
+And that is clearly inflationary because a lot of that $25 billion is the human labor
+required to install it.
+So the calculation that needs to be done for orbital compute is it's $35 billion of silicon in each space,
+and, you know, in literally outer space in orbit and on ground.
+But if you can get the cost of launch significantly below that $25 billion,
+then the math starts to really math.
+And when Starship is reusable, it's going to cost $5 billion to put a gigawatt of compute into space.
+And something drives me crazy as people picture these Pentagon-sized data centers.
+It's racks in space, linked with lasers.
+It's kind of a virtual data center in space.
+Wait, $5 billion.
+Is that $5 billion of launch cost?
+Five billion of launch cost.
+Now you're at $40 billion to put the gig into space.
+You're at $60 billion terresturally.
+And the $25 billion that is power and compute is clearly inflationary.
+And so it may be that in three or four years, it's $70 billion versus $40 billion.
+And that $5, as Starship becomes rapidly reusable, is like,
+likely deflationary. So this is the economics that underpin orbital compute from first principles.
+And then on an ongoing basis, you're maybe paying a billion dollars a year for the power to
+run those chips and cool them.
+If I had to make a guess, I think what's going to happen is that since 2021, about 40% of all
+data centers get contested, right? I think that number is going to go up. So, Sachs, I suspect that
+whatever forecasted energy consumption that we are looking at in AI is grossly imbalanced.
+There is very, very meager supply, and there's effectively infinite demand.
+So that probably pulls forward the economic equation to want to go to space.
+But then again, that's going to prefer SpaceX and their compute stack and their compute
+decisions over the hypers and over anybody else. And so you're going to have a cost of an output
+token, I think, terrestrially, particularly from the hyperscalers, be a little economically lopsided
+versus SpaceX. Once they get it to scale, now that's the key statement. Whatever is left on the
+ground, though, will be incredibly, incredibly valuable. It'll be a diamond. These are diamonds.
+And the thing is, you have to find reasonable size, right? You can't have a 10 kilowatt diamond.
+That's like a little pebble of shit.
+Nobody cares.
+But if you're in the reasonable hundreds of megawatts to gigawatts, man, those are like hope diamonds.
+Those are just lock them down, which I own.
+Travis, there was a interesting trademark filed this week.
+So more in the investigator, investor, investigator of the Tesla plus SpaceX marriage that everyone
+seems to believe is going to happen shortly.
+You can say that you can give me credit for it.
+Of course, yes.
+As Chamath has architected in his high perch.
+By the way, how cool would that be?
+How cool would it be for those two to come together?
+It's going to happen.
+It's going to happen.
+It'll be incredible.
+And if you're lucky enough to be an owner of both, oh,
+who's the top and who's the bottom?
+Chimoth is the top.
+Everybody can decide to be an owner of both.
+Jason, Jason,
+I'll be making love to myself when this happens.
+There'll be no different than any other Thursday.
+So just another day.
+On the top and the bottom.
+You'll be the top and the bottom, just like any other Saturday night.
+Here's the trademark for Megapod that came out.
+This is a filing date of 618, 2026, so a very recent June 18th.
+Modular Data Center hardware for artificial intelligence computing comprised of network of computer servers,
+computer hardware for artificial intelligence processing, computer network hardware,
+where electric power distribution units and cooling systems sold as a unit,
+self-contained modular computing,
+hardware systems for artificial intelligent workloads, yada, yada, yada,
+essentially...
+Well, just to explain what this is.
+Well, you know, let me just...
+By the way, that description makes...
+I don't know what it is.
+Essentially, what people are saying is this is going to be a giant battery pack
+with GPUs at the supercharger stations,
+which have already been approved.
+That's the back channel.
+Chamatha, go ahead.
+You have a couple of issues right now to turn on compute.
+terrestrially. So assume you have land, that's relatively straightforward. Assuming you can get
+it zoned, less straightforward. Assuming you can get power, very difficult. Then you have a very
+critical design decision. So all of these folks publish these things called the basis of design.
+And your BODs essentially tell you, here's the Anthropics spec, here's the OpenAI spec,
+here's the CoreWeave spec, here's the AWS spec, here's GCP. And you get these 50 and
+upwards of 500 page documents. Of all these technical details,
+The issue that we have is, I don't know if you guys have used Open AI or Anthropic recently
+where you get the whole thing of like comeback later.
+That comeback later is completely unacceptable.
+It just means that they have no compute.
+So in trying to find...
+Search pricing is coming.
+Yeah, let's go.
+So in trying to find this solution, what is happening is these basis of design, the restrictions,
+the specificity is being relaxed.
+And one of the key constraints is we've moved to an architectural model.
+from Google and Nvidia that has said, look, we have to liquid cool these racks.
+These are very complicated, big girth supercomputer racks essentially.
+And now we're also going back and saying, you know what, maybe some of these older stuff
+that's a little bit less proficient and a little bit less useful, but we can air cool them
+is useful.
+And everybody's like, yeah, you know what?
+We should try to use everything that's available.
+In that second class, what some very smart people are doing are like, wow, well, here's a shipping
+container that you can just drop on a concrete pad somewhere, plug in the power and let it rip.
+And so, Jason, what you're seeing is that level of investment that's happening. So there are
+companies, you know, like Dell makes these racks, companies like Verve makes these modules.
+And I think if Tesla can make them available, folks like us for my data center project,
+we would be enormous buyers of these things because we would just literally prefab them in a warehouse,
+right, get the chips, prefab them, truck them to the place, crane them in, turn it on, off to
+the races you go. You have like a 90-day build cycle, which is unheard of. So that's where
+these megapods are coming from. I hope it's not entirely consumed by Tesla and SpaceX internally.
+Well, that's the rumor is that he's going to put them at the supercharging station, the supercharging
+network where he has a lot of land and he's got power there already, and those are lightly used
+in some cases, you know?
+There are other requirements.
+The problem with some of these things is that you need to have certain levels of access.
+There are certain InfoSec requirements.
+There's certain liquid cooling requirements that make many of the workload applications
+unfeasible at a place like a supercharger center where random bumble f***s are like traipsing
+around.
+Security guard.
+Put an optimist.
+So guys, I've got 500 properties with lots of energy, lots of mechanical cooling systems,
+and lots of LNG access,
+or sorry, not LNG, natural gas, sorry,
+already piped in.
+So on all the stuff I'm doing on robotics,
+AI, physical AI,
+we're literally looking at putting some of our compute
+into our kitchens.
+Compute kitchens!
+You're going to be able to buy small,
+modular,
+let's put data center in a quote.
+Yeah, but it doesn't,
+It doesn't matter.
+Like, I just go buy the GPUs and I'll just,
+I just set it up in a kitchen, right?
+It's like Bitcoin mining.
+Hold on.
+It's not that easy.
+No, no, no.
+Hold on, hold on.
+It's not that easy.
+Okay.
+Like, if you guys want to build a cloud and contribute it to a pool,
+you're going to have to sign up for liquidated damages.
+And you're not going to sign up to these SLAs.
+I'm not a hyper scaler.
+I'm just using it for myself.
+Yeah.
+Rack and stack you.
+Oh, okay.
+Sure.
+You can use it for yourself.
+I'm saying the more interesting opportunity is when that,
+Whatever Travis says, let's talk about the interesting stuff.
+No, no, I'm just saying, like, what I thought you were going with this, Travis, is like,
+you could build a synthetic pool and contribute it to a neoscaler.
+And all I'm saying is to do that is a leap of things that you'd have to do that you probably
+don't want to do because it veers you away from what you're good at.
+I think the security thing is the main issue around non-data center type real estate, to be
+honest.
+It's the big one.
+Look, you've got to do liquid cooling.
+You've got to do mechanical systems for air cooling.
+you have energy.
+There's a lot of things you got to do,
+but assuming you even had all that,
+the architecture of a data center is set up.
+They have man traps,
+right?
+Where you go into a room,
+the door closes behind you that you got into with your fingerprint.
+Then you go into the next part of it,
+again,
+with your fingerprint,
+only when that door closes.
+Well,
+I don't continue in curiosity,
+how much does one of those mantraps cost?
+Like,
+why can't you put some of those in your...
+Yeah, maybe you could.
+Are you interested in putting into a mantras?
+I'm just trying to help.
+Tramp some men,
+I'll try to interpret where Chimot's going a little bit is like a megapod that's sitting at a chart,
+like a public charging situation because of the physical access of it,
+like there's probably some stuff you've got to do if you're going to resell it.
+But if you're going to use it for yourself, you can use it for yourself.
+The real value, I think, in the Travis example, which I find super exciting,
+is if you can contribute it to a distributed training pool or a distributed inference pool that has a lower SLA,
+which is more of how this community-based oriented work.
+Jason, I think you've talked about BitTensor.
+I think Venice is a project.
+I think Pluralis is another project.
+Travis, that's where I think it's super exciting.
+But the one thing I'll just throw out there, guys,
+the distributed training stuff,
+if these things are far away from each other,
+meaning not right next to each other,
+they're so less efficient.
+Like the efficiency drops dramatically.
+You want these things to be right next to each other physically.
+you get like multiple orders of bank,
+at least in order of magnitude type efficiency,
+maybe plus plus plus,
+it's a big deal.
+So like you could have two,
+we have two facilities that are like two kilometers.
+From one GPU to the other is super important.
+And if it's on a peer to peer network,
+it's going to have lag.
+Honestly, guys,
+even if it's on your own fiber connected like two kilometers away,
+you're screwed.
+It's not a thing.
+This is 100% true.
+But everything that
+cuts against training works for inference.
+Respect.
+Respect.
+Well, latency is super important.
+And I do think, you know, a distributed inference.
+Distributed inference clubs are coming.
+Yes. I get that.
+That's fair.
+And to riff on like what Tumas said and all of this, like one, I mean, there is actually
+a startup that is trying to put four GPU units with kind of a battery on people's houses
+and give them a discount on their power.
+and then you can do inference for that neighborhood
+from those four GPUs,
+and it's like lock sealed so nobody can get in.
+But there's another dynamic
+that I think we should talk about with all of this
+and can play into the megapods
+and other people are kind of working on data centers.
+Crusoe is working on modularly assembling data centers,
+kind of like a data center
+and think of it as like an 18-wheeler.
+What do you call those things?
+The 18-wheeler, you know,
+shipping container, whatever it is.
+But that is the disaggregation of inference into pre-fill and decode.
+When a model is answering your question, it's doing two things.
+The pre-fill part is understanding the question and it's answered thus far.
+And think of that has the more you can remember, the bigger your memory capacity,
+literally the more words you can remember, the better.
+Decode is the process of generating the next token.
+And that is a memory bandwidth bound problem.
+and think of it as the faster you can speak, the better.
+And these two types of inference are increasingly being disaggregated.
+And Chamath was an investor in Grok, which Invidia bot, and they're going to use this.
+Cerebris is the other solution today that is available.
+And you can put GROC or Cerebrus, decode, you know, optimized chips.
+They would both say you can do more than decode on them, and that's true, in front
+of old Nvidia GPUs like H100s.
+So you can lift H-100s, A-100s out of some old data center,
+put them in one of these megapods, a rack in a shipping container,
+put a grok or a cerebus in front of it,
+and you can get a very competitive solution.
+And so I do think the disaggregation of inference,
+we're going to be using GPUs for seven years,
+10 years, 12 years, and that's great
+because it lowers the cost to finance them,
+which makes this AI revolution more financeable.
+Chimoth, do you want to riff on GROC? Should we, should we?
+I really agree with everything. You're incredibly well-steeped in the space. It's so exciting.
+I don't have any investments or anything in the distributed compute space, but at the intersection
+of competing against China, having a vibrant American open-source community,
+having a bunch of distributed models for purposes of free speech and otherwise that Travis
+mentioned earlier, I do think this idea of distributed inference has a real place in the American
+ecosystem. I don't exactly know where and how and how homeowners would get paid, but whoever
+figures out out as a pan-American idea, I think, is really on to something. It'd be awesome. And yes,
+Travis, obviously slower, but people are contributing compute to this. That's like kind of surplus
+computer or compute that's available. Recycling unused compute. Recycling unused compute.
+And then there's Targonne, which is just straight up, people are putting, and you can rent H-200s,
+buy the hour for three bucks, four bucks, and it's permissionless, anybody can contribute provided,
+and this is kind of the magic of BitTensor is there are validators that make sure you're putting
+in what you're saying you're putting into the network. And so if somebody just had the hardware,
+and Tesla said from now on every power wall, and I don't put it past him to do this,
+you buy a power wall, we give you a discount on it. Every power wall has our GPUs in it.
+Part of the offering is you can't buy a power wall without putting GPUs in it.
+And when you're not using it, we will pay you for your battery.
+And you put a Starlink on your roof.
+And now you've got a distributed system where you get a couple of these power walls
+with their own silicon in it and a Starlink.
+And now Elon's created an infinite number of home battery backup systems.
+People get their battery system for free.
+He gets the exclusive use for.
+20 years. You guys see that there's a rumor that Elon's going to buy T-Mobile?
+By the way, just because Cerebus has blown up and bought through deal price. We should talk
+about Cerebris a little. So Cerebris had an incredible IPO. Give us an update on where these
+IPOs are happening. Obviously, SpaceX had an incredible IPO, but has retreated from this, you know,
+otherworldly $200 share price. So to the extent you can talk about these two, as well as the two
+IPOs to come, $4 trillion in backlog. We've obviously got Open AI and Claude, I'm sorry,
+Anthropic, which makes Claude. Both of those would be worth a billy plus. You put all this
+together, four trillion of new offerings plus cerebrus in there in the mix. How does the market
+manage this much new inventory being put on the market? Obviously, the flow to SpaceX is
+notably small, but over time, people like yourselves and other insiders, founders fund,
+etc. will be unlocked and have the ability to distribute to their LPs. So this is going to be
+a moving target, I think, on terms of share price. And can the market absorb this? Where does the
+money come from retail? Or does it come from people selling their Bitcoin and moving it over to
+something more exciting? What's the dynamic here in the market? I know we're an uncharted territory,
+Gavin. Well, for sure. There's no precedent for any of this. But a few things, I would say, like,
+just in no particular order. I get dropics worth $3 trillion dollars today. And it's very important.
+I'm sorry. Did you say Anthropics is worth $3 trillion?
+Yeah, I think that is roughly where it would probably trade as a public company.
+And, wow.
+I mean, look, they're going to do, they're going to end this year.
+Oh, man.
+They're going to end this year well over $100 billion.
+Holy shit.
+What's the 28 number?
+What's the $28 number?
+Is it $200?
+Is it $300 billion?
+It's probably not going to trade it 10 times that number.
+and it will be very profitable at that scale because it'll be inference dominated and people
+reporting they have 85% gross margins on inference.
+But in terms of the market absorbing this, the market's already absorbed it.
+It's just shifting from private to public.
+And so in the scale of global capital markets, these seem like really big numbers.
+You're just moving from the private markets to the public markets, which are even bigger.
+As far as SpaceX specifically, I think one of the more important things,
+is everybody who's a SpaceX investor or employee
+has had a chance to sell every six months
+for the last 10 years.
+So they may not be the wall of liquidity
+that some people are thinking about.
+I read this New York hedge fund short report
+that you could just short SpaceX on the lockup
+because so many people are going to sell.
+Really? Well, everybody who's on a cap table,
+they had an opportunity to sell.
+And almost half the employees at SpaceX bought on the IPO.
+Now, I do think cerebrous...
+But, Gavin, one thing, though, I've got to say,
+so I've had SpaceX since 2018.
+What, what?
+But their little liquidity thing every year,
+like last year was like $350, $350 billion last year.
+So you got an 8X in one year.
+You could have a lot of people selling, right?
+They were doing little 20% up, 30% up clips for many years.
+and then an 8Xer could create that liquidity.
+Maybe, but we'll see.
+That's possible, but the employees are buying at the new price,
+and they're probably at some level,
+one of the biggest pools of ownership that's going to unlock.
+And then, you know, I do think a lot of people probably own SpaceX through SBVs,
+and those probably don't unlock or get distributed anytime soon.
+So I just, you know, I would be careful with assuming,
+I don't think Elon's a seller of his 50.
+No, he's definitely not, obviously.
+Yeah.
+So.
+And a lot of us, and a lot of us aren't sellers, you know, and that's great.
+Yeah.
+Yeah.
+I mean, a lot of people who had large SpaceX positions were large buyers on the IP.
+On Cerebris, so Cerebris has had a tough two days since they reported their first
+quarter as a public company.
+And I think there, there are, there are two things that are very, that are worth discussing here.
+One is there is a whole generation of portfolio managers.
+There's a lot of people who are advocating for kind of squeezing the blood out of the stone on IPO prices.
+And the flip side of that is that there are a lot of portfolio managers who, if a stock breaks deal price, they sell it, no matter what.
+They consider it a promise that was broken.
+And so this is what has happened with Cerebrus to some degree over the last two days.
+And you know, this may seem irrational, but there are people who run giant funds who I know
+personally, or if a stock breaks deal price, they sell no matter what.
+And so if stock breaks deal price, it can sometimes, you know, go to places you wouldn't
+think it would go.
+And this means that shorts, if a stock gets close to deal price, they short it because
+they want to break deal price and then, you know, they make a quick 10 or 20 percent.
+So it becomes a pile on.
+Because you have this price insensitive selling that can be triggered.
+And this is what has happened to Cerebrose.
+You know, people talk about hate selling, but they broke deal price.
+And so just if you're going public and you're listening to this, tell your bankers,
+price this in such a way that we're not going to break deal price in our first nine months as a
+public company.
+And that's what I always advise everyone to do.
+And I think it's important.
+But I also think, you know, it takes companies a while to learn how to tell their story and communicate to public markets.
+It's a very different audience than VCs.
+And the way, like the way I would have respectfully told the Cerebrus story, because what happened to Cerebrus is they're reported a quarter and they're growing fast, but relative to the rest of AI, they're not growing that fast.
+in the March quarter. So what I would have said is we signed this transformational, you know,
+$20, $25 billion, I don't know the exact number, contract with Open AI in December,
+December of 2025. We immediately ordered more waifers from Taiwan Semi. It takes 100, it takes four
+months from when we make that order, Taiwan Semi, you know, says yes, they start producing,
+it takes four months to make the chip. Then we, then it takes us,
+two months plus or minus to turn that chip into a server. And then if we're lucky and we can find
+the power, it takes us a month to energize that chip and start making tokens with it. So the first
+time you're going to see the impact of this Open AI deal at the earliest is probably around
+Labor Day. So you'll see a little bit of it in the third quarter. But then it really starts to build.
+and just like really simple math.
+So like let's just use some rough numbers.
+Let's say, let's take some invidia numbers.
+It takes some $35 billion to bring on a gigawatt and $15 billion that you can generate $15 billion in token revenue and cloud revenue out of that gigawatt.
+And somebody on the call talked about adding 50 megawatts a month.
+If they could add 50 megawatts a month in 2007, forget 26.
+that means they exit the year at roughly a $9 billion cloud computing run rate.
+And we're at less than $40 billion of market cap.
+Now, that is going to be really hard to do.
+And they've never done anything like that before.
+But I would focus, as an investor, I think what matters here is not where they sit
+competitively, not what new demand they can bring on, but just how quickly
+can they bring on power?
+And listen,
+like outside of the hypers
+the only companies
+that have ever brought on
+more than a gigawatt,
+I think are Correweave,
+Crusoe,
+and SpaceX AI.
+To bring it on 600 megawatts,
+it's really hard.
+And that is what,
+like,
+I'm focused on,
+as an investor.
+How many megawatts can they bring on?
+Because we know what they're going to monetize that,
+and that is the question,
+and we'll see.
+Yeah.
+I think that's well said.
+Yeah, the other companies that have had this happen of late, I guess Rivian and famously
+Chimoth, Facebook traded below IPO price in the first year, I think. And so this isn't necessarily
+I mean a bad company. It just means a lot of hype or maybe going for it in the IPO and
+pricing it to perfection. And it can go one or two ways. You can either grossly underprice,
+grossly overpriced. And it's really hard to get right. And this is why doing auctions or, you know,
+Auctions are the way.
+Auctions are the way.
+And so it's not hard to price if you just do it the way it's supposed to be done.
+It's hard to price when you want it to be a certain number.
+Yeah, and you have many mouths to feed, and that influences the price.
+I don't think that happened here.
+I think there was a good faith effort to price this thoughtfully.
+But just, you know, there was such an in-demand IPO.
+I think it was a hard IPO to price.
+All right.
+Gavin, you just auction it.
+I think that's different than underwriting it.
+You're underwriting.
+But the bankers, like, I think they just need to get more in the mode of just doing the auction, you know.
+Yeah.
+Final topic was this $3 trillion, or actually now it's your $3 trillion call on Anthropic would make it like $6 trillion in offerings.
+What do we think broadly in the market?
+It's not an offerings because they're going to offer a small slice of.
+of that. Sure. And that small slice is very easy to absorb in the context. I believe we have
+no precedent. We'll see. I might be wrong. But it's not hard for global capital markets to absorb
+50 billion of an offering. It's not like, it's not like somebody has to come up. Yeah, it's a five
+per percent load is 150 billion. There's enough. Yeah. Guys, remember, remember with 15 billion used to be
+a whole lot of money? Yeah. How weird is what's going on? How weird is crazy. Where is all this
+money coming.
+Oh, yeah, where was it all this time?
+Can we just reminisce, man?
+We got my, when I was at Fidelity, my colleagues and I, we got pilloried.
+I think we priced Uber at $14 billion.
+And we got pilloried in the press for not knowing what we're doing.
+And it was seen as, you know, then of course, like six months later, I think you guys did
+around at what, like $42 billion or something.
+But it's like, yeah, $14 billion.
+That was groundbreaking for a private company back there.
+Yeah, for sure.
+It was 17, but you know, no one's counting.
+17.
+You're right.
+I wanted 14 and we had like a big negotiation.
+And we ran an auction.
+No, we just ran an auction.
+Yeah, you wanted 20 and maybe we landed at 17.
+What we did, what we did was every person who want to be involved had to fill out a sheet
+of how much money they put it at 10, 11, 12, 13, all the way up to 20.
+And then we just did the Dutch auction.
+and we said we want to clear one and a half bill.
+We just did the auction and cleared it.
+Went back to people and said,
+hey, you're not going to get it.
+You have another shot.
+They update their Excel sheet,
+and it just moves the number up a little bit,
+and then you close it down.
+But yeah, it started, that round started at,
+I think it was nine or ten or something like that,
+and ended up at 17.
+Thank you for your service.
+Yes, it used to be that that was a lot of money.
+And that was unheard of at the time.
+And that was, well, look, it was 10 years ago when we used to walk to school uphill both ways.
+Yes.
+We used to have to.
+Yeah.
+We used to eat potatoes with no butter, just hot potatoes.
+Sometimes we were lucky that they were cooked.
+Sometimes they were cooked.
+No, my dad would tell me that story.
+This is a famous John the Beard story.
+He'd say his mom would put like four potatoes in the oven.
+They'd wrap him in tinfoil, one in each pocket because they couldn't afford gloves.
+So you put your hands in your pocket with the hot potatoes.
+You get to school, you eat one for breakfast, one for lunch.
+I mean, his sister, Johanna, God rest for my aunt, who died too young.
+And they would just go eat these potatoes.
+That was their life walking to school.
+Yeah.
+And our kids are trying to.
+Both ways.
+Yeah, they're trying to get the new iPhone 16 or 17.
+I don't know.
+Remember when it used to be hard to raise $5 billion?
+It's just crazy.
+It's just crazy.
+It was hard to raise $1.5 million.
+I remember, yeah, I remember when it was hard to raise.
+Anyways, we don't have to do this.
+It's okay.
+We already sound like grandpas.
+It's fine.
+We sound like unc.
+It was so hard to raise that first 1.5.
+It's just we don't need to go there.
+It's so funny, though.
+What's with this art piece, Gavin, behind you?
+Is that like an art piece or you made it?
+No, this is, I'm staying at a rented house in Atherton.
+Oh, okay, there you go.
+It's just an Airbnb art.
+All right, everybody, for the dictator.
+Ah, do you want to probably hop a teap.
+and for David Sacks, TK, G.B.
+We'll see you next time on the Wallin Podcast.
+Bye-bye.
+Great job, everybody.
+Brainman, David Sack.
+Open source it to the fans, and they've just gone crazy with it.
+Love you, West.
+The queen of kin women just have one big huge orgy because they're all just like this sexual tension,
+but they just need to release them out.
+What?
+Your feet.
+We need to get merchies are back.
+I'm going on.

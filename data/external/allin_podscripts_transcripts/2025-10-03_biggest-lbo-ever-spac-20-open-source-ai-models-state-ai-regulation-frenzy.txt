@@ -1,0 +1,1381 @@
+source: allin_podscripts
+published_date: 2025-10-03
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/biggest-lbo-ever-spac-20-open-source-ai-models-state-ai-regulation-frenzy
+title: Biggest LBO Ever, SPAC 2.0, Open Source AI Models, State AI Regulation Frenzy
+
+All right, everybody, welcome back to the number one podcast in the world.
+Of course, that's the all-in podcast.
+I'm your host, Jason Callaghanis, with me again, your chairman dictator,
+Shemoth Palli Hopatia, and the Sultan of Science, David Freeberg.
+David Sachs will be calling in from the Skift.
+He's in some deep negotiations for the United States of America.
+From the skiff.
+Skiff. It's not, there's no tea at the end.
+It's just skiff.
+No tea.
+No, skiff to my little.
+He's in a skiff doing something with his Blackberry and a bunch of generals.
+Nobody knows what's going on in Sacks' life.
+But he'll crack in from the skiff any moment now.
+But we'll start with...
+You guys see that Pete Hanks have announced a PT and a fitness test for the generalist?
+Could you imagine if Sacks had to pass a P.T.
+Oh, my God.
+They should totally make it for the administration.
+Sacks, we need you to do up one push-up, Sacks.
+What do they do if you don't pass?
+They remove you from your...
+You probably get a cure period.
+We should do a push-up contest.
+That would be great.
+Winner take off.
+How many push-ups can you do, Freebird?
+You have to adjust for people's heights.
+I'm the tallest of all of you.
+I have a much longer limb system.
+What does that mean?
+20 for me is much harder than 20 for you, Jason.
+I mean, 20 is easy for me at this point.
+You're like Bill Bull Baggins.
+It'll take you like eight seconds to put on it.
+I'm a tank, man.
+Bilbo Baggins.
+How about Thor?
+I'm like Thor at this.
+I'm going to my Daniel Craig era.
+Jake L has an elbow to my Daniel Craig era.
+The weight ratio that's highly advantaged.
+All right, let's get started.
+Enough shenanigans.
+E.A. is being taken.
+Jake out, do you have a good arm link?
+My wingspan?
+My wingspan technically is enough to kick your ass with one hand and tie behind my back.
+That's actually what it was.
+Okay, EA is being taken private and the largest take private deal in.
+history. Fifty-five billion dollars. Man, that just stacks up to, let's see, Texas Power Company
+2007, HCA health care, 33 billion. This is a large deal. Investors in the Take Private
+Include Saudi's PIF, Silver Lake, and Friend of the Pod, Jared Kushner's Affinity Partners,
+$210 a share, $25 premium on the stock. Cushner's largest LP added affinity, as you know, Saudi
+PIF as well. The PIF has invested over $900 billion. When you know many of the things,
+Lucid Motors, LiveGolf, the SoftBank Vision Fund, Uber back in the day, Newcastle, the Premier League.
+Electronic Arts obviously is in the video game business. They were founded at Sequoia's office in
+1982 in San Matea. Shout out to our guy Rulof Botha, who joined us for the Allens Summit.
+Their headquarters still in Redwood City. Madden NFL.
+The Sims. Oh, that's why you have the background in the Sims this week. Need for Speed. Pretty
+insane deal here, Chamoth. And this is a high watermark for private equity. Anyway, you look at it.
+And the PIF loves games. They are the biggest shareholder in Nintendo, savvy games, scoply. I mean, they just keep buying games.
+What are your thoughts here on this deal happening right now?
+I really like it. Let me give you the bull case and then let me give you what the bear
+their case would have to believe. The thing to remember is that video games is the anchor pillar
+of usage across the entire internet. Last week at our poker game, we had Matt Bromberg join
+in just for dinner, who's the CEO of Unity, and Alex Blum, who's the CEO of Unity. And one of
+the stats that they shared with us at dinner was it's about three billion Dal play games.
+Wow.
+Exactly. It's an incredible, incredible stats.
+So in many ways, it's much bigger than social networking and social media or as big.
+And in that, EA is sort of this 800-pound gorilla.
+But I think the problem is that they've always been these gatekeepers.
+And I think that there's a risk and a chance that these gatekeepers get eroded away,
+specifically who I'm talking about are folks like Microsoft and Xbox.
+And at the point that this company is going private, there's some really interesting things
+that are happening.
+So Xbox, I think the day after the EA deal got announced,
+decided to hike prices 50% to their subscription service. And what happened over the subsequent few
+days is that so many people tried to cancel that the site went down. So what are you seeing
+happening? You have distribution gatekeepers trying to raise prices and take share. And then you
+have the original IP owners who have not had a well-funded way of fighting back in a category
+that is basically as important and frankly more important than social media.
+So I think if you take an asset like this private, it allows you to take your time to clean
+up the OPEX model, figure out who does what, be able to use the best of all these next-gen
+tools, and then be able to find ways of finding distribution outside the scope of Xbox
+and PlayStation so that you can take more of your share.
+If you do those things, this is a multi-hundred billion dollar asset.
+And in that, I think it could be just an enormous win.
+So I think it's very smart.
+What's the bear case?
+I think the bare case is extending a theme that I've talked about here a few times, which
+is I think the value of patents and by extension IP and copyrights are going to go away.
+And in that, there's going to be a spectrum where certain content IP holders lose and other
+ones win. I think gaming is on the winning side, to be honest, and I think content studios
+in general, like traditional content, the Disney's, the Hulus, the Netflix's, are on the losing
+side. But the bare case would be that these tool chains allow the number of games to be built
+to increase by two, three, four orders of magnitude and that they are distributed by other
+places like the social media sites. I just think that that's a pretty low probability. So on
+balance, I think that Jared and Egon did a killer deal. I really like it. And for people who don't
+know, Unity makes the 3D software that people build games in. It's a public company, $16 billion,
+also backed by Rulov and Sequoia back in the day, a credible company. Freiburg, what are
+your thoughts on the gaming industry versus, say, social media?
+versus traditional media. We're seeing massive amounts of money being put into each of these,
+but this is time. And for this next generation, let's say millennials and younger, we're seeing a
+big mix. Obviously, they don't have cable TV, so that's been plummeting, but they do play games.
+They do like the YouTube, the TikTok, et cetera, and they do love social media. What's the future
+here as you see it? One way to answer that question is to think about how people spend their time.
+more minutes on social media or on traditional media or playing games? And how is that
+trending? But importantly, which of those will accrue more benefit and as a result, drive
+more hours spent from AI? Is AI going to create more social media engagement? Is AI going to
+create more traditional media engagement? Or is AI going to create more video game engagement?
+And I think that one way to kind of think about this thesis is that AI is going to ultimately accrue
+to video game entertainment far more than social media entertainment or traditional content.
+Why is that? Why? Explain to you. Because I think you can create dynamic, more engaging
+experiences that will benefit from kind of a back and forth sort of relationship than you can
+with traditional content or with social media. And what we see now in a lot of gaming systems
+that didn't exist, call it 12 years ago, is AI-driven players embedded in the games that act and
+feel a lot more like real human engagement that is very hard to kind of mimic from traditional
+programming methods that were used in gaming. And so that makes a big difference. Like, for example,
+if you're playing Fortnite, I don't know if you guys played Fortnite or have played Fortnite,
+but if you're a nub in Fortnite, like your early player in Fortnite, you're mostly playing,
+even though you go online and play against what are supposed to be kind of other players,
+you're mostly playing against AI because what they do is they tune the AI to be easier to beat.
+so that you can slowly develop your skills. Because what was happening early was they were seeing a high
+degree of churn in Fortnite because kids would go on and play for the first time and they'd get paired
+up with kids that were better than them. And so they would never win and they would get frustrated and
+they would quit the game and stop. So the churn rate was high. So AI unlocked higher engagement
+and higher retention on the Fortnite platform. And I think we're seeing that in a lot of different
+gaming platforms now. So AI can be used, for example, to maximally increase time, engagement,
+satisfaction, happiness. I think the Saudis saw this, and if they're trying to diversify away
+from their oil holdings, entertainment and how people spend their free time, which by the way,
+I think is a general macro bet that everyone should consider making. Because if you believe in
+AI and you believe in the improvements in productivity, generally speaking, people in the
+industrialized world will generally have more free time on their hands and be able to support
+themselves with the deflationary effects of AI over time. So if there's more time on people's
+hands, the general market for entertainment is growing.
+And if the general market for entertainment is growing, gaming is the future of entertainment
+and the future of gaming is AI.
+Now, the Saudis own 10% of this company prior to the deal.
+And I don't know if you guys have tracked the investments they've made, but they've been
+extremely aggressive with gaming.
+So they have this like investment division called Savvy Games.
+And within Savvy Games, they bought Scopely for $4.9 billion in 23.
+And then earlier this year, they spent $3.5 billion.
+buy Niantic, the company that makes Pokemon Go. And then they also own 4% of Nintendo. They own
+6% of Take 2. They own a sizable percent of Activision Blizzard. So they've put quite a bit of
+capital in small investments in other gaming platforms. They own a few gaming platforms. So this is
+clearly like a big thesis and a big investment that they see as the future of entertainment over
+time. Jared's firm, Affinity is going to own about 5% of the company post-transaction. The Saudis
+are going to be the majority owners. So I think that this is going to end.
+up being the next big platform play for them. And it allows them to make the important long-term
+investment in furthering the transition to AI and not have to worry about quarter-to-quarter
+earnings, but really making a 10-year bet. And they do talk a lot about this 2030 vision.
+So if you look at across those three categories we've been discussing here, video game usage,
+about 60% of U.S. adults do it every week. Social media, about 75% of Americans use it
+every week and streaming traditional media, the Netflix's, Disney Pluses in the world, that's
+still 83%. So these are the three buckets of people's time, books, and going to the movies.
+Those are obviously the big losers. By the way, you know that the market was totally getting
+this wrong because the TikTok of the deal is super interesting. When they were looking for the
+debt financing, it was about 36 billion of equity, 20 billion of debt. They called Jamie Diamond
+and Jamie basically ripped the $20 billion in on the same day,
+just because I think he also could underwrite this pretty fast.
+I mean, some of the biggest deals are frankly so obvious
+that it just takes the courage to put it together,
+and then everybody's like, oh, this just makes so much sense.
+And then Andrew Wilson, who's the CEO, is going to stay on,
+he's a great guy, super, super compelling.
+It's worth talking a little bit about the impact, I think, of private equity.
+If you spend any time in the region, I'm going to be in Saudi and Dubai in the first week of
+November doing my founding university. And I've been out there twice a year, maybe for the last three
+years. They will tell you, whether you're in Doha, Abu Dhabi, or Riyadh. We've got six or seven
+industries we really care about. Technologies at the top of the list. Private equies at the top
+of the list. Live entertainment and sports at the top of the list. And then actually hospitality,
+also at the top of the list, real estate, building new places for people to go. And if you look at
+private equity, pull up that chart I had there. This is just stunning how big this industry is
+getting, you know, $5 trillion is what we're up to here. And it just keeps growing. I think private equity's
+totally screwed. I don't think Silver Lake or Affinity or this deal are screwed, but I think
+private equity in general is totally owes. All right. Well, it's gotten huge.
+since 2015 and tripling in size. So why is this, I guess, my question for the gentleman here
+and for the audience, why is private equity becoming so large? And what impact does that have
+on society if people can't put EA into their retirement account? They can't put Stripe into
+their retirement account. If we take all the great companies and we start to privatize them,
+SpaceX, let's say it never goes public, what impact does that have on people's retirement accounts?
+Okay, look, I think the history of this is important. There was a longstanding belief that the best way to generate the best risk-adjusted return, what does that mean? That means to manage through periods where the stock markets go down and to manage through periods of volatility. The best way to do that was to have what's called a 60-40 allocation, 60% to bonds and 40% to equities. Over many years, especially when we
+artificially suppressed rates at zero through Obama, a lot of people started to move their
+allocations away from 6040, and they started to make more and more investments further out
+on the risk curve. The biggest beneficiaries of that were venture capital, private equity,
+and hedge funds. The thing with private equity is that because rates were zero, they had an
+infinite amount of borrowing capacity, had very little downside to them, and so they were able to
+manufacture returns much faster than venture capital and hedge funds could. So as a result,
+you had an initial group of people that were defining the asset class, making a ton of money,
+and then you had all these fast followers that said, well, if they're doing it, I can do it too.
+So far so good. But then always what happens is then you have this flood of laggards that just
+flood the zone. And it's these laggards that make it very difficult to generate returns,
+because they start overpaying for assets.
+They start mismanaging and undermanaging the assets that they do own.
+And so where we are is that private equity has seen a very consistent way of returning money
+to help improve that 6040 portfolio.
+As a result, they got a lot of money, but then that created a lot of competition.
+And so that's why you see this hockey stick graph, Jason.
+And when you see that kind of graph, it doesn't matter what asset class it is.
+The returns go to zero.
+And so we've seen this in venture capital.
+We've seen this in hedge funds.
+And we're now going to see this in private equity.
+Too much money going in, to be clear, what you're saying, Schmoff, means you kind of index it, right?
+There's no returns.
+And so, again, I've said in any of these alternative asset classes, there's only one thing you should always ask.
+If you had to have one critical question, what are your distributions?
+Don't show me your IRA.
+what is your DPI, the distributions on your paid in capital.
+And if the answer is zero, then it is a very challenged asset class.
+And what I will tell you in private equity is that over the last four or five years,
+distributions have been few and far between.
+So I think what's going to happen is that the money is going to come out of private equity
+and it's going to get concentrated into the few companies that know what they're doing,
+of which Silver Lake has generated over, you know, the last 15, 20 years,
+tens and tens of billions of dollars of distributions.
+They are just an exceptionally well-run organization.
+They've done these huge buyout deals successfully before.
+So we need to go through that in PE.
+Where does the money go?
+The money's already leaked into private credit,
+which is the next big bubble that's building.
+It looks like this chart that you just showed.
+Which is loaning businesses money.
+It's super interesting because you make such a good point.
+What we're seeing in private equity is these continuation funds.
+Now continuation funds are coming to venture.
+So I've been getting pitched on these continuation funds.
+We're like, hey, take all your assets, sell it to a new group of people, and then reset the clock.
+And then there's never an exit.
+The good news is, I will say the last year, we've seen a lot more activity for shares of our companies that are still
+private, so the secondary market, Freiburg, is coming back in a major way. But I do get worried
+about these continuation funds because now you're just moving an asset from one class to the
+other. And we need to have a functioning IPO market. How functioning is the IPO market today,
+would we say? It's completely dysfunctional. How dysfunction is the IPO market? Let me say in another
+way. And how do we correct that? And this leads into your new spec. Look, there are three ways
+to go public. There's the traditional way IPO, there's the direct listing, and then there's the
+reverse merger or the SPAC. Up until I floated IPOA in 2018, I think it was, the first way
+was really the only way. I was involved in two direct listings, Slack and Coinbase. And in both
+of those, what I learned, is that it has the same vagaries as the traditional IPO. So in the
+traditional IPO, you go to a bank, they underwrite you, they act as a gatekeeper, and they take
+six, seven, eight percent fees as a result, and then they allocate what is essentially underpriced
+stock to their best customers. Then you see a one-day pop, maybe a two- or three-day pop,
+all of those customers tend to unload, and then the stock tends to drift down. So the IP
+is expensive and it typically is mispriced.
+The direct listing, you have a different dynamic,
+which is the first trade is always the highest trade.
+And then it just goes straight down.
+That happened with Slack and it happened with Coinbase.
+Spotify would be in that group as well.
+Yeah, with Slack, I remember, I was like offside a billion dollars
+and I was like, well, I'm never letting this happen again.
+And so when I had the Coinbase thing, I sold it the first day.
+And I texted Brian, I said, this is not a directional indication of your company
+is the dynamics of the direct listing because I,
+learned it the hard way that the time to sell is on day one. So where does the SPAC come in?
+You know, especially now in version two, version two being the thing that I have been tinkering
+and refining with and I'm trying to push in this new version. I think that it's creating an
+incredibly competitive vehicle where you can have a ton of money go into these private
+companies, take them public at a very, very low cost of capital. And I think that that should be
+very enticing. So you close your financing. Can you just tell us what the capital raise was like
+as you went out and met with folks? What do you hear? Yeah, so you know, Nick, maybe you can find
+it. You know that image of the Raptor engines? Yes, super complex to being elegantly simple.
+Yeah, Nick, can you maybe just throw that up? What I would say is like SPAC 1.0, of which I was right in the
+front of the parade, had a bunch of misfires, and it was complicated. But it worked. There
+were some hot fires that worked, but then there were some clear misfires. And the whole point
+was to prove that you could create a competitive alternative to the IPO. The thing that I'm
+the most proud of, quite honestly, is for all intents and purposes, I started a normalization
+of this vehicle that's now raised more than $150, $200 billion for American companies. I am very
+proud of them. That's an important thing for the American capital markets. I think what we did
+in American exceptionalism is Raptor 2. It's not yet perfect, but I do think it tries to improve
+on the things that I noticed was not working in Raptor 1. And in that is a lot of the compensation
+and incentives. And so when I showed that to investors, they were quite excited. I think that they
+want a competitive IPO market that brings many, many American businesses to the public market
+so that they can be owned by everybody, the transparency they like, and the fact that the
+incentives are such now where there's absolutely no compensation unless this thing really works.
+And historically, they received warrants in the company, typically with a strike price of 1150,
+so 15% above the issue price of the stock.
+And founder shares that were basically, and there was founder shares.
+But like, did you have a reaction from them saying, hey, we want some warrants?
+We need a little extra kicker here.
+Like, there's some sort of desire for that?
+No, in fact, it was the opposite.
+I think that the institutional investors, and, you know, my investors in this,
+98.7 of the capital was allocated to these guys are the best of the best.
+You know who they are.
+So they're every single blue chip A plus institutional investor.
+And what they wanted was great companies.
+They want great companies to be public.
+And the reason is the thing that Freeberg, I think you mentioned this before, when a good
+company gets public, the amount of money that they can raise in the public's, and then the
+amount of growth that they have in the public's far out classes what they'll ever do as a private
+company.
+And so they want the simplest and cheapest way of great businesses to get out.
+Jamat, do you think that the transaction, when you find a merger partner, the traditional
+SPAC has been announced as a merger concurrent with a pipe being done, where new investors
+are underwriting the valuation of the deal and saying, we like this company at this price,
+because we are now going to write money in in the form of a pipe.
+And historically, the pipe was for common shares.
+So it kind of was like, this is a good price and everyone felt good about it.
+number one, do you anticipate that there'll still be a pipe being done and concurrent with the merger in this transaction?
+And then number two is, do you think it'll look like a common pipe?
+Because after the SPAC frenzy died down, in order to get deals done, the pipe started to get done with convertible preferred security.
+So they were senior to common and they almost were like debt.
+How do you think this is going to play out?
+Because a clean deal has not happened in quite some time where a SPAC has announced a merger and simply raised
+money via common in the form of a pipe. It's a great question. I think it comes down to the
+underlying asset, but there are some incredible companies that are private that if they go public
+will be able to demand common pipe capital. I think that the future may be just prognosticating
+and guessing, what does Raptor 3 look like in this back? I think the Raptor 3 will look like
+where somebody, a sponsor like me,
+rolls everything up into one thing
+so that it's already pre-wired from the beginning
+where I'll just speak to
+a billion, two billion, three billion,
+whatever it is, flexible capital
+that can come in as common
+so that it's a totally pre-baked IPO
+had a very fair price.
+I think that that's what the Raptor 3
+version of a SPAC will look like.
+So more capital,
+and then they put their full trust and faith
+in the sponsor to run the deal.
+Well, no, then meaning
+then there's no conversion risk that all the money comes over right from it comes over right and so
+then you have to fully commit in you set your compensation to be a bit Elon like in terms of
+your compensation as the sponsor comes if I read it correctly Chamov when it hits certain milestones
+in terms of share price yeah nothing can be earned unless the stock is up 50% yeah and then there's a
+tranche at 50 then when the stock is up 75% there's another tranche and when the stock is up 100%
+founder warrants in the deal?
+Or there are founder, there's no founder wards.
+Nothing.
+I think this is great.
+You know, I was asked by one of ours.
+The reason why this is important is all of those things that you guys mentioned increases
+the cost of capital to the founder and to the private company board and to the employees.
+All that's unnecessary dilution.
+So now we take it all off the table.
+Yeah.
+Smart.
+The thing I, you know, the observation I had at the time, not just for your collection of
+SPACs in the 1.0 era, but just all of them in general.
+And I tried to explain this to our syndicate members and investors, as well as the CEOs, because a lot of my CEOs were like, should we do a SPAC? And one of them, desktop metal did. This felt like venture investing. And if you look at Open Door, Virgin Galactic, Jobi, which I don't think was one of yours, SOFI, MP materials, all of these companies, you have to look at it. If it is a venture type investment, 80% of venture goes to zero, 20% pays up for the other.
+percent. I think people were looking at this like it was Netflix and they were not thinking of these
+companies and the stages they were at. Well, can I just say something? Yeah, and then I'll drop it to a
+question because so far and MP materials, they did extraordinary. So in this class of companies
+you're going to be taking out, is it going to be the same early stage or are you thinking
+more robust, more predictable revenue, let's call it resilient revenue, maybe, rugged revenue?
+I think it's the latter, but I think it's also important to note that this time around
+I've tried to really minimize retail exposure to this.
+I don't think that retail is well suited right now to have these things.
+And my honest advice is avoid, maybe not all SPACs, but definitely my SPAC, just avoid it.
+I think that there is more than enough liquidity on the institutional side for us to do an
+interesting deal, but it fits in our portfolio and our construction, which is a very different
+risk model. And so I would hate that, you know, people are out on the risk curve without really
+understanding the risks because, Jason, you can't predict the market. You don't know where these
+things are going to go. Yeah. I mean, desktop metal 3D printing, this is like a very cutting
+edge nascent technology. Company should have stayed private a couple more years. For people
+investing it need to understand. You're now acting like a venture capitalist, which means the return
+profile and how the portfolio management works is distinctly different than doing Netflix and
+NVIDIA and whatever other publicly traded
+companies. I would just say, do not invest in these
+things. Don't, at least, you know,
+just, I think you're just inspired people to do it.
+I know that's not your intent, but would you say don't do it?
+Well, that's stupid. I'm being very honest.
+Don't do it. No, no, I know. Don't buy SPACs unless it's like
+less than 1% of your portfolio. It would be my advice.
+Before we move on, can I just make one comment?
+And I'd like your guys know about the private equity stuff.
+Because Chimov made a comment that private equity is big.
+But I think one of the things to take note of in this take private of EA, and we talked about
+it as the theme of AI, empowering EA to kind of transform the business.
+And Jared's brother, Josh, has, at Thrive, been executing a roll-up of CPA accounting firms
+that he's then applying AI to to reinvent that business.
+Oh, is he really?
+Yeah.
+Oh, I should talk to him because we have an investment in a company called TaxGPT.com that is basically
+like co-pilots with AI for accountants that's doing spectacular.
+So what he's done is he's bought these kind of traditional accounting firms at some
+multiple of EBITDA, and then he can transform the business with AI and really create a new
+opportunity. And I've said, like, I think this is one of those few moments in history
+where there really is an opportunity to beat the market and make money in the public markets
+if you can be thoughtful and selective about the companies that stand to benefit from an
+AI execution strategy. Because in all of these traditional kind of
+markets where you have competition, everything's commoditized, and the market is mature.
+It's very hard for any of these players to differentiate product, service, and obviously,
+unit economics. But with AI, it's completely transformative and has transformative potential
+in nearly every industry. So as a public market investor, if you can identify those opportunities,
+select them where the management team has the right leadership in place to execute against this,
+you could make real money. The problem is most of these companies are not led by folks
+that understand AI or software first.
+And so I think there's an opportunity for more buyouts.
+They're not going to be of the $55 billion scale.
+It's worse than that.
+In what sense?
+So we at 80, 90, have done the dance with all the big major private equity firms.
+And here's how it goes.
+It always goes the same way.
+The partners love it because they're looking at minimal distributions.
+companies that are like good
+but not great in many cases
+and they want to see
+improvements to EBITDA and performance
+so that they can either sell them or move them out.
+And you're saying you've looked at this
+you've looked at this with their portfolio company each month.
+Yeah, all of them. Yeah, all of them. With their
+existing portfolio companies. So the GPs are like,
+this is genius. We should do it. Then they're like,
+here's a handful of companies to go talk to.
+And I'll be really honest with you. What you find in most
+private equity portfolios are
+B and C companies run by C and D folks.
+Yes.
+And so the ability for them to go and embrace this is basically next to none.
+So if I look at my customer distribution and concentration at 8090, okay, run rating
+into nine figures already, working on a three, four hundred million dollar deal, okay,
+about a single dollar comes from a private equity firm, although we spent initially a lot
+of time trying to sell it, trying to sell our software factory and trying to sell work.
+work into them, it's really hard. And it's what you said before, Freeburg, which is the people
+incentives at these businesses are misaligned to the AI outcome. And you can't fire these people.
+And I don't think the right answer is to fire them. So I don't know what the right answer is.
+This is why I think private equity is very challenging. Do you think there's a power loss situation
+where perhaps a handful of investors in the public markets and perhaps a handful of investors
+in the private markets can identify and then put the right people in place.
+and execute against these strategies, like Josh is trying to do with his CPA role.
+Well, I think Josh is smart, so I think Josh will figure it out no matter what. What I'm saying
+is, if I can show you 20, 30 customers, a ton of revenue, all these white papers that show
+upside, and I still can't get it done inside one of these companies, I think it's not us,
+it's them. Right. So it's not inherent in traditional private equity to do this either,
+which maybe begs the question, is there a new kind of private equity that can execute this?
+maybe that's an opportunity.
+Like Josh is showing, right?
+Like, he's a venture investor that's executing a private equity strategy.
+And maybe that becomes the play.
+I think if this works well, two of our biggest customers are individual deca billionaires
+who own businesses and they're like, you're doing this.
+So to the extent that Josh looks more like that, which is an owner of 100% of the business
+where it's like, you're going to do it, then I think it can work.
+That's like the Saudis.
+I think the owner-operated model is the owner-operated model is the owner.
+only way the AI transformation really works. And then at the other end of the spectrum,
+it's the public's market CEO who realizes that they have to do something real because
+they'll otherwise lose their job or they'll be disrupted. Those are the two cohorts that I feel
+today are on their forward foot. Everybody else is like sticking their head in the sand.
+Just on the EA front, I forgot to ask you, Sir Demas, my Greek brother, didn't he show a,
+always the Greeks who get these things done?
+didn't he show like the 3D engine that would make like infinite games?
+Yeah, so it's not actually a 3D engine.
+It's a class of these AI models that can render what the experience is,
+looks like and feels like a 3D world,
+but it doesn't have an underlying kind of traditional object rendering engine.
+It doesn't have a traditional 3D physics engine.
+So it's a new way of experiencing these kind of world interaction systems.
+And there's several startups.
+I think Faye Faye, is her name, the Stanford AI professor.
+And she has one of these.
+That's a virtual world's company that has the same principle.
+I asked Bromberg and Alex about exactly this at dinner.
+What was her take?
+He said it's just really, really hard to get these things to actually be legitimate engines
+at the scale of what Unity offers for the quality of game that needs to be made for it to work.
+The interim step is going to be the assets in it are created by AI.
+That's what I've seen a lot of startups doing.
+So you want to make a character, you know, dropping characters and they can be done in real time.
+I think you're exactly right.
+The whole thing is Unify and Unity as the rendering engine and the AI sits on top.
+And the AI basically can render objects, can render concepts, can render structure, can render the direction that you as an engineer would typically provide to the end, to the unity or unified 3D engine.
+And that's going to unlock not just in video games, but also in film and other content.
+Can I tell you an example?
+Yesterday, there was a, you know, in our group chat, a bunch of people sent around the SORA.
+The Slop app.
+Yeah.
+And I downloaded it just to play with SORL yesterday.
+Hmm.
+And the first video that came up was exactly this.
+It was like a ATP tennis match.
+Yeah.
+Where it was a guy's face, the guy, like imagine you, and then playing against like a Federer.
+And then I thought, well, what if he was playing against his friend?
+And that was the actual video game.
+To your point, you get away from all this IP license.
+gatekeeping stuff, and you can just get to good games faster, good content faster.
+I think they're adaptive in terms of the competition, so you're not playing somebody who's
+going to just dominate you. It just get 5% better every time you play it. You'll get 4% better,
+and it'll just make it perfectly challenging. So you don't quit, and you'll learn as you go.
+It's really going to be an interesting new world. The same will exist in like content,
+J-Cal, like you'll make shorts and films, and then the ones that have the most engagement,
+be AI prompting system will get better and better,
+and ultimately it will yield like, you know, bits of content that people are going to say like, oh,
+you can see that happening with Star Wars or Marvel.
+If all of a sudden, Silver Surfer is an interesting character to you or Ashoka Tano is interesting to you,
+it'll sort of make that world or enhance that character and tell you more of their backstory.
+And that could be really interesting as a...
+How you can sit in your seat and, like, make fun of me, call me a nerd,
+and you actually know the name of this Star Wars character.
+I don't even know who you're talking about.
+This is a very important character.
+Ashoka is Anakin Skywalker's Padawan.
+She's a very important character.
+If you watch the Clone Wars, you would know this.
+The animated series that threads through the first.
+If you had to watch the Club Wars.
+Actually.
+Oh, look who dropped in.
+Oh, David Sachs is here.
+Did you get out of your, were you in a skiff or something?
+What's going on?
+czar i was in some meetings but actually no i was just uh buying some domain names
+oh you are did you get mahalo dot com so i got i got i got mahalo for the bargain price of
+one million dollars i mean that's what it's worth go to mahalo dot com i'm selling it for a million
+i mean it's it's in the dictionary yeah i have some old assets somebody else should use them i just
+i have begin dot com and i'm going to be working on that in partnership probably with
+one of the large language model i might give you an equity squab for that i'll give you uh mahalo is the
+second most important name in the second most important word after aloha in the um
+Hawaiian language wait I'm sure I'm surprised Benioff hasn't tried to ask you for yeah totally he
+always does I was just texting with Benny off give it to him as a gift dude he's a great guy just
+give it I will give him the I will give Benny off Mahalo dot com if he gives me four weeks in one of
+his Hawaii resorts per year he would he would do that oh for the next 20 oh my god
+Imagine I have me, J-Cal for 80 weeks.
+Oh, my God, is a house guest.
+J-Cal for 80 weeks as a house guest.
+He can be there.
+He can be there.
+It doesn't matter.
+I'll give him the money so he buys it.
+Donate it to a non-profit foundation.
+Then you can take a tax write-off.
+When I have something to sell, the guy with the lowest net worth on the program,
+when I'm trying to pay off my jet, you guys all have criticism.
+How come I can't wet my beat?
+I got jet bill.
+Actually, let me ask you a serious question.
+So you had investors in Mahalo, right?
+Yes.
+This is their domain.
+This is their domain.
+It would go to them.
+Oh, so it will.
+Oh, okay.
+It will go to those investors.
+You're paying off liquidation preference.
+Correct.
+Oh, okay.
+Just sitting there.
+So now instead of losing 100%, I'll lose 99.5%.
+Something like that.
+It's just startups are hard, folks.
+But I have the begin.com, and I've been talking to folks.
+You know, Mahalo was originally a human-powered search engine like Wikipedia, which we're about
+to get to.
+And my concept was to do comprehensive search like naver.com or down in Korea.
+had seen those services.
+Yeah.
+And it turned out to be exactly like perplexity, but at the time, we tested machine learning,
+which sort of everybody called AI back then, and it just didn't work.
+So we were trying to hand roll search results and then back them up with, you know,
+computer generated ones, algorithmically generated ones, but the tech wasn't there now.
+But I want to do something again with begin.com.
+I'm really excited about that domain name.
+All right.
+Listen, we brought up Slop.
+Let's get into it.
+Two Slop apps in a fortnight here, no pun intended.
+Zuck and Sammy the Bull.
+have both released
+the bull
+I just like it for him
+what a deep pole
+Sammy the bull Gravano
+there is and here's a look at
+Sora it's objectively
+extremely impressive
+here's Sam Altman
+people don't know this early in his career
+when he was starting opening I didn't have
+the money from Elon
+and here's
+Sam Altman stealing
+an H100 here's Sam
+Altman also this is when he was
+storming the capital
+on January 6th. Here he is when he was working at Google. Yeah, lots of, but it's really good. And
+they are basically taking a ton of risk and solving some problems with IP. As we all know,
+the IP outputs is where people think you're going to have to be really thoughtful or get a bunch
+of lawsuits. On this app, you can opt in and make your persona like Sam did available to everybody
+to use. So that whole concept of notable persons allowing their image to be used, you
+opt into that. And that's pretty clever. So you can let your, and you can make it so your
+friends can, you know, basically make videos of you, but nobody else can. It's a thoughtful way
+of doing it. However, very controversially, this thing had everybody's IP in it. And you have to
+opt out if you don't want your IP use. That's going to get them another whole collection of lawsuits
+to go at the New York Times and Ziv Davis ones. And there have obviously been a bunch of settlements
+now, Anthropics settling their book thing for $1.5 billion. So anybody play with these
+tools yet? And what do you think, folks? And what's the point of these? Do we think this is like
+a TikTok competitor, Chama? Do you think it's just a way back door to training data? What do you
+think? The closest thing is a TikTok competitor. But I use it. I thought it was okay. But again,
+the thing that I keep in mind whenever I try these apps for the first time is, today is the worst
+it'll ever be. Sure. It only gets better from here. And so if you look at the starting point,
+it won't take but a year where this thing, I think, or maybe two years, where this thing is
+legitimately excellent. It has to get the scripting right. It has to get the prompting right.
+It has to be a little bit easier for you to use. There was a bunch of prompts that I used that
+were rejected by the IP, right? Well, it just said use me, but I couldn't validate that I was
+me. And so they have to take a picture of yourself. It's a little clunky the app right now,
+but you're right. It's going to get better in each version. The one by
+Zuckerberg is called vibes.
+I, you know, I was looking at these sacks,
+and I don't know that this is intended to be like the next great social media app
+as much as it's a data play to get folks to train data.
+When you see them, any thoughts on them other than interesting?
+Yeah.
+I haven't played with it yet, so it's hard for me to say.
+Freeberg, you got any thoughts on it?
+Just, no, I don't have, like, thoughts.
+I think, you know, we're kind of early innings.
+I do think there's like new categories of media that none of us are really considering today.
+The traditional media, as I've mentioned in the past, is like centrally produced and then broadly
+consumed. And I think that there's models of media that are going to emerge that are going
+to create new business categories or new business models and also new media categories that are all
+about kind of distributed production and not necessarily like central production, distributed
+consumption. So that kind of changes things quite a bit. And I think maybe this is going to start
+to open that door a bit.
+One of the things, because I thought about this, and I mentioned this in the past,
+where I'm like, everyone's going to make their own movie, their own video game, their own music.
+But there is this notion of like shared cultural context.
+Like, everyone wants to talk about, you know, how did the 49ers do this weekend?
+Or did you guys see that show, adolescence?
+Did you guys?
+Like, we want to have a conversation about some shared stories.
+That's the basis of kind of societal interaction and memetics.
+So I think, like, there are elements of this being the beginning of the enabling tools,
+but I don't think we've actually seen what's going to happen, which is how do you take one story
+and then create a distributed way of consuming that story where everyone experiences and consumes it
+differently?
+So I do think, like, this notion, it's like, hey, everyone's making fun of Sam or does some,
+like, maybe there's some cultural context about Sam Alman that we all share.
+And then we're all, like, engaging with Sam Altman in different ways, you know?
+So I think, like, we're very early and we don't yet know kind of how it's all going to play out.
+But I think that's really critical to keep in mind that we're so like that it is something is lost because we used to all talk about the latest Tarantino movie or the latest, you know, Sopranos episode. We don't do it anymore. And I have to share stuff. We do talk about tweets and stuff. And, you know, there's other forms of media that we share. But it's it's not like it used to be where 30, 40 million people would see Raiders of the Lost Ark and it would be the discussion of the summer or whatever it is. And so I literally bought 20 tickets to the.
+the new Paul Thomas Anderson, one battle after another,
+just so I could have a conversation with 20 friends about the new PTA.
+And so people really are longing for this shared experience.
+Paul Thomas Anderson, he did the master.
+They never heard of them.
+Just there will be blood.
+One of the great, I know that, yeah.
+He's top five director of all time, but I know you don't care about culture.
+But is he like, is he like Michael Bay?
+It would, no.
+The opposite of that actually.
+Michael Bay makes things that go boom.
+Paul Thomas Anderson's that makes things that make you go.
+Michael Bay, super cool.
+Fun to hang out with, fun to party with.
+Right.
+Okay, well, way to bring it back to you.
+Okay, hold on.
+You dropped a name here at your mother is.
+I don't know Paul Thomas Anderson, but it was a heck of a film.
+As Sacks.
+Sacks is actually very cultured when it comes to cinema.
+Did you see it yet, Sacks?
+I have not seen it yet, no.
+It's of the moment.
+And it's quite a road concern.
+Heard it was anti-conservative, so.
+It doesn't have some left-way take?
+No, it kind of mocks the left and the right.
+It's kind of mocking both extremes.
+You love it.
+I think you very much appreciate it.
+All right, I'll check it out.
+Yeah, I'll check it out.
+Hey, I have an idea.
+Why don't we find a topic that's interesting to talk about?
+Yeah, okay, great.
+Yeah, well, if you contributed to the docket or showed up on time, maybe we could do that.
+Unbelievable.
+Just so you know the inner workings right now, there's a little resentment in the group
+because one of us decides to change the time of the pod for four weeks in a row and then show up
+half an hour late. I won't say which person that is, Sax. But here's an interesting topic from
+Red Meat for you. DeepSeek, the Chinese LLM just dropped their latest model 3.2. EXP. It's faster,
+it's cheaper, and it has a new feature called DSA. Deep Seek sparse attention, which makes it
+faster to do training and inference at larger tasks. The key takeaway is it can reduce API costs by
+up to 50%. The new model charges 28 cents per million inputs, 42 cents per million outputs.
+Claude, which is a leading model from Anthropic, that a lot of developers use, a lot of
+startup views, is like $3.15, so 10 times, 35 times, more expensive. Obviously, people are
+cutting their prices pretty quick. But, uh, Sachs, this is your wheelhouse as our czar of
+crypto and AI for the United States of America. What are your thoughts here on the continued execution
+of the Chinese government with TEPC.
+Well, I want you to hear Friber's thoughts on this
+because he was paying attention to this, weren't you?
+Yeah, I mean, I think there's a total re-architecture underway,
+and we're at the earlier stages of cost per token
+in terms of dollar and energy.
+My understanding is there's actually a lot of work going on
+with U.S. labs right now in a similar kind of track
+that's going to result in similar results.
+Maybe they're a little bit ahead of the curve.
+But we should really pay attention to the curves.
+I think, you know, what are the models say
+in terms of energy demand, in terms of cost per token,
+if these architectural changes really do drive down 10x, 100x, 1,000 X, 10,000 X over the coming months.
+And this is open source.
+So just so everybody understands, it's available on AWS.
+It's available on GCP, at least 3.1 is.
+I don't know if 3.2 is available there now.
+But I'm hearing from a lot of startups.
+I don't know if you're hearing this in the field, Chimoff,
+that they're testing it and playing with it, in some cases, using it because it's so
+much cheaper. Are you seeing that? We are a top 20 consumer of Bedrock. So let me tell you
+what it looks like on the ground. We redirected a ton of our workloads to Kimi K2 on GROC
+because it was really way more performant and frankly just a ton cheaper than OpenAHI and
+Anthropic. The problem is that when we use our coding tools, they route through Anthropic,
+which is fine because Anthropic is excellent,
+but it's really expensive.
+The difficulty that you have is that when you have all this leapfrogging,
+it's not easy to all of a sudden just like, you know,
+decide to pass all of these prompts to different LLMs
+because they need to be fine-tuned and engineered to kind of work in one system.
+And so like the things that we do to perfect code gen
+or to perfect back propagation on Kimi or on Anthropic,
+you can't just hot swap it to deep speed all of a sudden it comes out and it's that much cheaper it takes some weeks it takes some months so it's a it's a complicated dance and we're always struggling as a consumer what do we do do we just make the change and go through the pain do we wait on the assumption that these other models will catch up so yeah it's it's a very hard making tools now that and
+By the way, I can't just go to my engineers.
+To make it easier to switch between them.
+No, and like, you know, this weekend, a different company with a huge model came to us and gave us the preview of their next-gen model.
+Okay.
+And it's incredible.
+But then when I sit on Monday morning with my team and I'm like, okay, what do we do?
+We don't know what to do.
+Do we cut it?
+Do we move over and say, great, we'll refactor all these workloads to run on this new model?
+it's a really hard problem
+and it's getting worse
+the more complicated tasks
+that we undertake.
+Okay, and just for people
+who don't know,
+Kimi is made by Moonshot AI.
+That's another Chinese startup
+in the space.
+Actually, those?
+Well, I think this is actually
+a really interesting topic,
+this topic of open source.
+I'm a big fan of
+open source software
+because it's a check
+on the power of big tech
+in a way.
+What we've seen in the past
+and the history of technology
+is that these major
+categories end up getting
+dominated
+by one or two big tech companies and they have all the power and control. And open source
+provides an alternative path, right? Because the community of open source developers just puts
+things out there and then you can take it and run it on your own hardware. And you're not
+dependent, right? It's a path to sort of software freedom, if you will. So so far, so good.
+I think the thing that is now tricky about this is that all the leading open source models
+are from China these days. China has made a really big push on open source, obviously
+Deepseek is an open source Chinese model.
+That was the first big one.
+Kimmy is one, Quinn from Alibaba.
+And so I think that if you want the U.S. to win the AI raise, then we're all kind of
+of two minds about this.
+On the one hand, it's good that there are open source alternatives to the closed source
+proprietary models.
+On the other hand, they're all coming from China.
+Now, there were some American efforts that have been important.
+So meta, most notably, has invested billions of billions of dollars.
+in Lama. But the release of Lama 4, I think, was considered disappointing by a lot of people.
+And now there's statements by meta that they might be backing away from open source and just going
+proprietary. Open AI released an open source model, but it's nowhere near their frontier.
+And there are some startups that are trying. So there's one called Reflection that looks promising
+is developing an open source American model. But so far, this is maybe the one area in AI where the U.S.
+behind China as this sort of open source models. I'd say every other part of the stack,
+closed models, chip design, chip manufacturing, semiconductor manufacturing equipment,
+every other part of the stack, even data centers, I would say we're ahead, but this one area
+of open source is a little bit concerning. Interestingly, sex, the two things of note is
+opening I, who the open was originally that they were supposed to do open source. So that's kind
+of hilarious. But the second is that Apple, which is the furthest behind of everybody,
+they have a really interesting open source model. So when you're behind, like Apple is or the
+Chinese were, you're open. You do open source. And when you're ahead, like opening I became
+with chat chbtee, you close it down. But watch that. Can I tell you what's going to
+open elm? Open ELM, yeah, efficient language models from Apple. Keep an eye on that one.
+Can I tell you what's going to make this open source close source battle even worse? Because
+effectively what this is is the U.S. versus China, the U.S. is closed, and China is open, at least
+at the scaled models at work.
+But that doesn't have to be the case, right? Because we could release open models, too.
+No, no, no, you're right. I'm just saying, today, if you look at the conditions on the field,
+the close source, highly performant models are American. The open source, highly performant
+models are Chinese. And you would say, okay, well, what is the next downstream thing?
+It's what Freeberg mentioned, which is the energy and the cost of generating these output tokens.
+And I talked to somebody yesterday who runs a huge energy business.
+And I have to tell you, it's not in a good place, meaning you saw, I think, this week
+where the residents of Indianapolis were able to reject or get their city to reject a billion
+dollar data center that Google was going to build near Indianapolis, largely because
+of concerns of price inflation around electricity.
+And what this energy CEO told me is, look, the next five years are baked.
+And if we don't find some compelling solves, and I'll tell you what the two ideas were,
+but if we don't find some compelling solves, electricity rates will double in the next five years.
+Now, if you think about how then consumers will view the use of AI,
+and then if you think about companies like us and others, trying to use the cheapest version so that we are minimally impacting,
+the downstream cost of these things
+because it will become an energy problem,
+this is a very complicated thing.
+Now, his idea, and it's a huge PR crisis,
+because if you want to take Big Tech,
+which is already viewed negatively,
+and make their perception even worse,
+if you start to finger point to them
+and say, these guys are the reason
+my electricity costs have doubled
+in the last five years,
+that is no Bueno for them.
+And they need to find an off-ramp ASAP.
+It's a bad look.
+You're saying,
+your energy's doubling,
+and this could take your jobs, right?
+Yeah, it's terrible.
+Whether you believe that's true or not,
+that is the perception of the public.
+There are two off-ramps that he suggested,
+which I think are worth considering.
+Off-ramp number one is what's called a cross-subsidy,
+which is essentially to say that they pay a rate card,
+which they can absorb with all their free cash flow,
+materially higher than what other rate payers would pay in that geographic area.
+So the homeowner, his or her,
+electricity costs stay flat to down.
+The data center costs are higher,
+and it's the metas, the Googles, the apples,
+the Amazon's who have hundreds of billions of free cash,
+they absorb it.
+That was idea number one.
+And idea number two is to start to set up some mechanism
+so that they can install things like batteries
+at every single home in and around these data centers
+to allow those homes to have a better chance
+of actually absorbing some of this inflation,
+without having to pay it. That's a really good idea. And this is playing out SACS in Virginia in a major way,
+because that's where Data Center Alley is, and 40% of the energy in Virginia now is going to data centers.
+This is becoming acute. So what are your thoughts here, Zah? Well, Chris Wright spoke to this pretty
+well at the Allent Summit in terms of what we have to do. I mean, there's no question that AI is going
+to create a huge need for power over the next five or 10 years. I think on a five to 10 year time frame,
+the answer is probably nuclear, or at least that's a big part of it.
+But nuclear takes at least five years.
+Within the next five years, it's probably gas, natural gas.
+But the issue there is there's a huge backlog for gas turbines, basically the engines that burn the gas to create power.
+And there's like a two to three year backlog for those to spend those up.
+So the question is, what are you doing in the next few years?
+And I think Chris Wright talked to this, and I've heard this from other energy executives,
+which is we just need to squeeze more out of the grid.
+If we were to shed just 40 hours a year of peak to say backup generators, diesel, things like that,
+you could get an extra 80 gigawatts out of the grid.
+This is what one energy executive told me.
+The reason is because they build the grid and they have regulations on it based on the peak, right?
+Which is basically the coldest day in winter or the hottest day in summer.
+And the same way that you build your church for Easter Sunday, the rest of the year it runs at 50%.
+same thing with the grid.
+So if they could just reduce the peak 40 hours, if they could shed that load to backup,
+to generators, to diesel, things like that, then they could run the grid to squeeze an extra
+80 gigawatts out of it.
+And I think that's the bridge over the next few years that we need to then get a lot more
+gas and then eventually some nuclear as well.
+But unless you want to keep talking about electricity, I think there's some other things to talk
+about on the open source because I think that's a pretty interesting.
+topic actually, and if, can we just go back to that?
+I mean, I was just trying to paint the case that my economic model for going to
+open source is better, because I can't pay $3 an output token and then also pay for all this.
+Yeah, actually, I want to, Tomah, I want to ask you, when you're running like Kimi or something
+like that, so I think it would be good to just explain to the audience how this works,
+because I think there's a lot of confusion about what it means to be an open source model.
+A lot of people think that when a Chinese company publishes one of these.
+models, it's still somehow theirs.
+No.
+But the reality is, once it's published, it's no longer theirs.
+It belongs to anyone who wants to take that code.
+And you're not running that on a Chinese cloud or something like that.
+The data's not going back to China.
+No, not even close.
+You're taking that model and you're running it on your own infrastructure.
+100%.
+Can you just explain this?
+Yeah.
+So when I first started 80-90, my only solution was Bedrock, which is a service that Amazon
+provides that allows you to essentially get inference as a service, right?
+So as we are building our product and we need inference and we need inference tokens,
+Bedrock basically handles everything.
+So it's what AWS is, but for this vertical of AI, right?
+So they have the servers.
+These are in American data centers.
+They're managed by Americans.
+And what they do is they take a handful of models and they make sure that they can
+support usage of those models.
+That was how we started.
+but as with everything, we have to manage our costs and our operating profile, and so we're
+always looking for, are there other models and other places other than Amazon that can service
+our needs? Because in fairness, Amazon is very expensive. So a different company that I help get
+off the ground, GROC with the Q, they have a cloud. And what they've been doing is they've been
+working with
+initially Lama
+then they work
+with open AI
+to bring their
+open source model
+but they also
+brought online
+a couple of these
+Chinese models
+and what they do
+exactly as you
+set Saks
+they take the source
+code
+they basically implement that
+they fork it
+they fork it
+and now it's
+implemented
+domestically
+on American soil
+by Americans
+inside of an
+American data center
+so there's
+China gave us
+kind of the way
+the roadmap if you will
+the architectural
+plans, but we, as in, you know, the American company, in this case, GROC, built the house
+and then launched it. And so now we as 8090 basically made a cost decision to move to this
+open source model because it was just materially cheaper. Right. And what GROC with a queue will
+give you, at your application company, 8090s. They're like Amazon for us. They'll give
+an API. Exactly. So the same way, if you want to use a closed model like OpenAI or, you know,
+chat GPT, they'll give you an API. You submit prompts to give you answers, basically tokens
+and tokens and tokens out. What GROC does is they will take this open source model, run it on its
+own infrastructure, and then give you the API so that you can then get tokens and tokens out
+through their API. So for me, as a consumer, it reduces us to a pure economic decision.
+Where is it cheaper? And, you know, it's not dissimilar to the last generation of the
+internet. You'd run on AWS, but then you'd bid it against GCP. You'd bring in Azure. You'd
+say, who is cheaper? Because ultimately, you're running a database. You know, you're running, I don't
+know, pick, pick your service, Snowflake. It didn't really matter where it was. You were just
+really trying to find the cheapest vendor. Right. Now, here's what's compelling about it.
+So first of all, like you said, it's cheaper to just run it on your own infrastructure if you know
+what you're doing. Also, enterprises like it because it's more customizable. And there's
+going to be a lot of fine-tuning of these open source models for specific applications.
+100%. And enterprises frequently want to run these models on-prem in their own data centers because
+they want to keep their own data on their own infrastructure. But now the challenge is you've got
+these models that they're no longer Chinese. They've been forked. It's an American company,
+but they originated in China. That's right. And they could be running on some critical infrastructure.
+And that does raise issues. I mean, what is Grock doing, I guess, to like test whether
+these models are safe, whether they can be backdoored? I mean, how do they think about that?
+They have an entire pipeline of stuff that they do. The details of which I don't exactly.
+exactly no, because I've not asked exactly what they run through.
+But, yeah, they're a big rub in this.
+They go through an incredibly rigorous.
+They basically do, like, safety testing to make sure.
+Absolutely.
+So, I mean, because a lot of people think that if you run a Chinese model, the data must be
+going back to China, but it's not if it's being run on your own infrastructure.
+I think the issue is more theoretical that, like, could a Chinese model somehow
+be backdored with an exploit or vulnerability somehow?
+Well, if you take a compiled version, sure.
+But if you take the open source and you do it yourself, no.
+Right.
+Well, that's the thing.
+So, I mean, and if someone did discover a vulnerability,
+it would get widely shared in the community very, very quickly, and then I'm going to attach it.
+I think at this point you can expect that every single major company that is in security,
+that is in a cloud vendor, and also every single major model maker is trying to prove and
+invalidate how the other models are inferior or bad in some way. And so that's where the
+competitive cycle, I think, is really valuable because you do have the best and the brightest
+computer scientists. Like, you know, yesterday a certain person, he's Italian, that's I know,
+this leading security guy at one of these model makers just talking to him, he's in charge of
+the security stuff. They're hammering everything to try to figure out whether there's a,
+there's a vulnerability because it slows these other folks down. So that made me feel quite
+positive that we haven't seen anything yet on any of these models, which is to say that
+generally everybody has actually been a pretty good actor so far. The other piece to the
+puzzle sacks is. There's a lot of crypto distributed projects. The one I've been working on is
+BitTensor and Tao. I think you've also done a deep dive on this, Chamoth, and I'm a partner in a, you know,
+an emerging crypto fund called Stillcore Cap. And we're buying Tao and we're looking at BitTensor
+and all of these subnets that are being made to do distributed computing. And this is a big push for
+Apple as well. A lot of these M4 Mac minis you've seen out there, their plan is to put
+all of this, all these LLM sacks on people's personal computers and then distribute them
+and have this like SETI at home and an incentive layer. And I think that's going to be a big
+part of this. People are not going to want their AI jobs to go to the cloud necessarily.
+They might want to do it locally. And I think that's where the phones and all this Silicon
+is going with, you know, Apple's big focus on it. It's going to be brave new world.
+Yeah, you bring up an interesting point. You know, in the early years of this AI revolution,
+I'm talking about like 2023, 24.
+I mean, this just started in the last three years.
+There was this analogy that AI was like nuclear weapons.
+I mean, you hear the Dumer crowd, the safety advocates saying this,
+like AI was this really threatening technology.
+And they would even say things like GPUs are like plutonium, you know, things like that.
+And I think that model of the world is just wrong, right?
+Because what we're seeing is, and Jensen actually had a pretty good line about this.
+He says, nobody needs nuclear weapons.
+Everyone needs AI.
+And it's true, like every consumer, every business is going to want to run AI.
+A lot of them are going to want to run it on their own infrastructure.
+Consumers are going to want to run it on their own phone.
+You're going to have an AI that's highly personalized to you.
+And so everyone's going to have AI.
+It's not like a nuclear weapon where we want to stop all proliferation.
+AI is first and foremost, a consumer product that is going to proliferate.
+And so the question is bearing that in mind, how do you then create an appropriate response?
+for the national security risk.
+But this idea that we're just going to stop AI
+and only have two or three companies who have it,
+which I think was the view a few years ago among policymakers.
+Yeah, it's ridiculous to even think that now.
+Yeah, they were thinking in very centralized terms.
+And I think what we're seeing now is,
+regardless of what certain policymakers might want,
+it's already highly decentralized, right?
+You've got five major American disclosed-source companies.
+You've got eight major Chinese models.
+And then you've got everything that's happening with startups.
+So this is going to be highly decentralized and verticalized, right?
+All the hugging face models, there's specific ones on images, specific ones for video.
+Like, it's going to be super fragmented.
+The vast majority of this activity is benign.
+I mean, that's the thing.
+These are business solutions.
+These are consumer products.
+These are viral videos.
+Most of the stuff does not rise to the level of a nuclear weapon or something like that.
+This is a good chance for us maybe to talk about AI regulation.
+There is a lot of, and maybe we'll get it to Wikipedia as well, but there's a lot of states
+that are starting to look into regulating AI. California SB 53, the Transparency in Frontier
+Artificial Intelligence Act is working through the system. It's going to serve as a template
+possibly for other states. It was introduced in January as an alternative to the more sweeping
+bill the SB 1047.
+This would require AI developers to conduct extensive safety tests before rolling out the
+models.
+It got a lot of pushback from tech, obviously, and Newsom ultimately vetoed it.
+But this new law focuses only on the most advanced large frontier models that we just
+talked about, and it requires companies to release a framework for knowing how they're
+approaching safety issues, including standards and best practices, whatever that means.
+and however safety is defined.
+These are models, I guess, in this definition
+that have half a billion in annual revenue.
+I don't know how they pick that out.
+But it requires these companies
+to release transparency reports before deploying.
+So they're going to be like the App Store,
+I guess, if this gets through
+to approve frontier models with updates.
+Oh, that sounds great.
+You've got to go to the government
+to release a new model.
+Your thoughts?
+David Sachs?
+Yeah.
+I mean, look, I think it's very concerning.
+there's a regulatory frenzy happening at the states right now.
+Just to be very clear about what happened in California, there was an original bill.
+SB was at 1047 that was incredibly obtrusive.
+Newsom vetoed that, but now they've passed a new one, which is called SB 53.
+And like you said, it's not as burdensome and intrusive as.
+The previous version, it focuses on making frontier AI models report.
+safety risks. They're supposed to report if they have...
+Can I stop you there for a sacks? What is the safety risk they're going to be required to report?
+It's such a nebulous term. What, safety, what? That it's going to jump out of the computer and
+murder me, safety, that it's going to give me the wrong answer. Safety. They're supposed to
+report on potential catastrophic harms related to cyber attacks, bio-threats, model autonomy,
+which is the Terminator scenario. And they're supposed to...
+let the government know if there's a safety incident. I mean, look, all these things are quite
+nebulous right now. So it's almost like a nuclear power plant having to report if there was an
+incident. Are any of these, in your mind, thoughtful? Like a cyber attack? Let me just, let me just
+interrupt for a second. I think it's the equivalent of saying, I need any factory to report to me
+on the risk of something of a nuclear explosion, even though the factory might not be working with
+nuclear material. You see, it uses a terminal. That's what I'm trying to get out here. I'm confused.
+I mean, it effectively uses terminology that makes everyone nod their head and say, oh, yeah,
+that makes sense. That's a good idea. When the reality is that the legislators have actually
+no concept of what they're talking about. They have no concept of how these models are built.
+They have no concept of how they're deployed. And they're using language that they think is inevitably
+going to result in giving them ultimately tools and control over a private market.
+system. And that's fundamentally what I think a lot of this comes down to. Think about this issue
+that's going on with free speech in California, this hate speech bill, SB 771 that's sitting
+on the governor's desk to be signed right now, where effectively the state of California's
+administrators have the ultimate say of what is deemed hate speech and not, which if you think
+about it, if they had this bill in Alabama during the civil rights era, there would have never
+been the ability to have the protest and realize the equal rights that arose from the civil
+rights movement because the government would have said those are inappropriate hate speech things
+that you guys are saying. And we're now putting those same tools in the hands of the legislators.
+They're going to do the same thing with AI. They're giving onerously powerful tools to the
+legislators to let them decide what is and isn't appropriate for private market actors when
+they actually have no sense and no sensibility about what they're talking about.
+Yeah, I'd actually, I think that's a really important point. Does we give you some stats on this
+regulatory frenzy that's happening? So all things.
+50 states have introduced AI bills in 2025. There's been over 1,000 bills in state legislatures.
+118 AI laws have already been passed across the 50 states. The red state proposals for AI in
+general have a lighter touch than the blue states, but everyone just seems to be motivated by the
+imperative to do something on AI, even though no one's really sure what that something should be.
+Exactly. And there's no real agreement on like what all these AI regulations are supposed to do,
+so they're just making things up. Or what the risks are.
+Yeah, that's what I'm trying to get out.
+So, Sax, let me ask you a specific question, though.
+Well, it's going to finish the point about California.
+So look, California, they've kind of gotten to this point where now it's about reporting on all these safety risks.
+And if this is all it was, then it would just be basically a bunch of red tape and it wouldn't be so bad.
+The problem is that you've got to multiply this by 50 states.
+So you've got 50 different states, each with their own reporting regime, which is going to be a trap for startups.
+Because they've all got to figure this out about what there's.
+supposed to report on, what the deadlines are, who to report to. I mean, this is like very
+European-style regulations, actually maybe even worse than the EU, because the EU tried to basically
+harmonize to get to one authority. We're going to have 50. They're going to have one. But the other
+problem is that this is just the Campbell's nose under the tent. So even in California, Scott Wiener,
+who's the legislator who did SB 1047, now he did this, he's got a block of legislators,
+and they have 17 more AI regulation bills that they want to pass. So this is just the beginning. And if
+you want to see where this is going, okay, look at Colorado. We should talk about this Colorado
+bill because this has already been passed into law. It's called SB 24-205 Consumer Protection for
+Artificial Intelligence. It was passed all the way in May of 2024. So it was one of the first
+to pass, even though they didn't really know what they were trying to regulate. No one's quite
+sure how to implement it. But what the law does is it bans something they call algorithmic
+discrimination, okay? And algorithmic discrimination is defined as unlawful, differential
+treatment, or disparate impact based on protected characteristics. So things like age,
+raise, sex, disability. If any of those factors drive an AI decision and it results in a
+disparate impact, then both the developer of the AI model and the deployer, which means basically
+the business that's using it, can be in violation of this law.
+law and they can be prosecuted by the Colorado Attorney General. Let me give you a practical
+application here. So let's say that you got someone like a mortgage loan officer who's reviewing
+applications. Okay. And let's say they don't even discuss race. It's not on the form. Okay. They're
+just using race neutral criteria like a credit rating or financial holdings, something like that.
+If the result of their decision nevertheless had a disparate impact on a particular protected
+group, its decisions could be found to be discriminatory. And, moreover, the developer of that
+model could be liable, even though their model just gave an answer that under the circumstances
+was truthful. The only way that I see for model developers to comply with this law is to build
+in a new DEI layer into the models to basically somehow prevent models from giving outputs
+that might have a disparate impact on protected groups.
+So we're back to Woke AI again.
+And I think that's the whole point.
+That's the whole point of this Colorado law.
+Let's get Shemoth in on this discussion.
+Shemak, I think that this is really, really dumb what's happening.
+If you have 50 sets of rules, what you will have are some conservative versions of AI.
+You'll have some progressive-leaning versions of laws.
+These 50 series of laws will essentially just render this industry impotent.
+and incapable of maximizing itself and actually doing what's necessary to drive productivity
+and GDP on behalf of the country.
+There is no conceivable way, as Freepard said, that anybody in Sacramento or Little Rock
+or, you know, name your state capital, will have the intellectual wherewithal to get to
+an answer as good as the federal government will and as Sachs will, just to be totally honest
+with everybody.
+So what should happen here is that there needs to be a complete.
+moratorium, and the federal government should be given the time to figure out what the framework
+should be so that there is a one-size, one set of rules. Now, if that doesn't happen and this is
+allowed to stand, there is a perfect example of where this has happened before, and that is
+in the car market. Because in the car market, what happened was there is a complete set of
+rules in California for emissions. That is entirely different than the rest of the
+the country. And you can look and see what it did. Now, that's just two sets of rules.
+Well, hold on, let me finish. Let me finish. Okay. And so what these two sets of rules,
+going from one set of rules to two, what did it do? It drove most of these companies to go
+towards barely break-even or massively money losing. It has been something that the entire
+industry has been fighting back on for now 10 plus years. Now, can you imagine instead of two
+sets of rules, you have 50, I think you know what the economic consequences will be. You'll
+render this entire category incapable of being able to generate any positive economic output.
+So I guess the steel man, if we were to make one, is transportation, education, abortion,
+taxes, alcohol, cannabis, I think I mentioned. Those are all state.
+Cannabis is a poison, and it is the worst thing in the world.
+Right, but for our children.
+Okay, that's your opinion.
+Great.
+But should states have some level?
+Are trash.
+Okay.
+We know your position on that.
+I'm talking about the difference, which is what should state zombies.
+Perfect.
+What are, I don't disagree with that statement.
+The question I'm asking is, we let states, just to steal man this for the audience,
+decide how they want to execute against things like taxes, alcohol, education, abortion,
+transportation, should David Freiburg,
+states have some rights here.
+This is the, I'm just stealing in here.
+I'm not saying this is my opinion,
+but if this is the most transitional technology
+of our lifetime, shouldn't states have a say?
+Or what's the argument for states having a say?
+It's the United States.
+It's a federated republic.
+I am 100% in favor.
+I think what we're pointing out
+is the idiocy of these decisions.
+Number one, number two,
+so the internet created a virtual
+network system for media, communications, content, productivity.
+So, you know, we're talking about something that stretches across the federal landscape.
+What needs to happen is there needs to be federal preemption.
+So the federal government, Congress, needs to pass a law that says, here are the standards
+that we are going to set, or here's the rules that we think are relevant for AI.
+Here are the things that states can and can't do.
+if we want this country to succeed
+on the opportunities and advantages
+that will arise from AI.
+The second thing I'll say
+is that much of the law
+that's being drafted by the state legislators
+are regulatory oversight laws,
+not laws that define a new
+civil or criminal penalty
+because of something you did that caused harm.
+They are specifically written in such a way
+that they say, we need to have oversight,
+we need to have review,
+we need to have control over your systems because we get to review them.
+They don't say, for example, if your AI kills someone, you are going to jail.
+That is what they should say.
+And in fact, one could argue that much of the civil and criminal statutes that already exist in the states
+cover much of the harm that is already being talked about as the potential safety risks associated
+with AI, you don't actually need more.
+Because at the end of the day, if the AI system, the producer of the tool, the user
+of the tool causes harm to someone or something or some business, there is already statute
+to protect against that harm. The statute that's being drafted is all about oversight.
+It is about giving the government, the regulatory control, the ability to go in and interrogate,
+and investigate, and create approval systems on whether or not what you're creating as a private
+market business or citizen is appropriate to be used. And it is one of many points of overreach
+that this federated republic has been able to withhold itself against historically, and after
+250 years, the day may be up.
+So, Sachs, in the case of a large language model, being constructed in a non-thoughtful way
+so that it could be used to do cyber attacks and, you know, docs people or I don't know,
+be used for impersonation, the law should be able to. I'm trying to think of a scenario here
+when they give the security things, that would be concerning.
+And the law should, I don't know, if Open AI allowed their tool to go hack people's credit cards,
+that's already illegal, right?
+It's already illegal to conduct a cyber attack.
+And if you manage to take an AI model and uses a tool to perform a cyber attack, that's still going to be illegal.
+Same thing in Colorado, okay?
+They've got this bill that they want to outlaw algorithmic discrimination, but discrimination is already a violation of the law.
+So what they're doing there is they're not just going after the business that's performing discrimination.
+That's already illegal.
+What they want to do is get into the tool itself, right?
+And they want to make the developer liable if their model creates an output that supposedly ends up creating a disparate impact in a decision.
+And imagine if we did this with the internet.
+Imagine if we went back to the start of the internet.
+We said, hey, if someone uses the internet to do something bad, therefore the government needs to approve everything that's done on the internet.
+I mean, you can do it. You can talk about mobile communications. You can say, okay, Verizon's responsible if people use it in a terrorist attack. Verizon's not responsible if people use it to coordinate a bank robbery. That's so obvious. So, yeah, this does seem like it's overreach.
+What is the situation on Capitol Hill and having a conversation about creating federal preemption passing a bill that says the federal government's going to set standards around AI utilization that states cannot kind of intervene on and creating a mechanism that allows this market to develop and allows things.
+to prosper. Well, here's the situation. In the Big Beautiful Bill, there was a federal moratorium on state
+AI regulation, and I think it was well-intentioned and well-motivated by the fact that we do see this
+huge knee-jerk reaction to state legislature is wanting to do something without knowing what it is they want
+to do. However, there was not enough Republican support. There wasn't enough Republican or Democrat support for
+it. And I think that part of the reason why Republicans in particular have been opposed is just because
+there's so much anger at the big tech companies right now for all the censorship that happened
+during especially COVID, but even before, and you still see it. You saw it with this Wikipedia
+news where they're banning all conservative publications from being sources. There's just a lot
+of anger towards the big tech companies and tech bros. And basically, there's a lot of Republicans
+who don't want to get on board with anything that is perceived as helping tech. Now, the reality is
+who does that ultimately benefit? I mean, ultimately,
+it benefits the blue states who are in the lead on this type of regulation. It's Gavin Newsom
+who just signed this new bill. It's, you know, again, it's Jeropolis in Colorado who ultimately
+signed this Colorado law. And if there is no federal standard, what you're going to see is that
+the blue states will drive this ban on quote-unquote algorithmic discrimination, which will
+lead to DEI being promoted in models, which is what the Biden administration wanted. You will
+see the return of woke AI at the state level. It's not something any Republicans should
+want. I mean, I understand the justifiable anger at these tech companies because their behavior
+in the past has been really bad towards conservatives. I mean, they did engage in a lot of
+censorship, shadow banning, demonetization, debanking, all that kind of stuff. So I get it. But we have
+to look at what the results are going to be. And a single federal standard is the best way to make
+sure that we do not have woke AI, that we do not have insanely burn some regulations that
+allow China to basically get ahead of us in this AI race. And it's to ensure that we actually have
+truthful, unbiased AI instead of highly ideological AI. Do you think you can get it done?
+Let me go to Polymarket. The U.S. enacts AI safety bill in 2025, not getting done this year.
+20% chance. Here's the good news. It doesn't really matter what I think. The important thing is what
+President Trump thinks. And in his July 23rd speech on AI, he was really clear that there needs
+to be a single national standard for AI. He said it was impractical. It doesn't make sense to have
+50 different regulatory regimes and that that could cost us the AI race. And he would like there to be
+a single federal standard, just like he promoted for vehicle emissions. Because again, we didn't have
+a federal standard there. And then it was California taking the lead. And then the blue states
+set the standards. President Trump didn't think that made sense for California to be setting
+the rules for the whole country. So the feds preempted that. And I think we should do the same thing
+on AI. That's what the president basically said in his speech. So I think the administration
+ultimately will support this. And I think more Republicans will come on board as they realize
+what the blue states are doing here is not helpful for conservatives. It's not helpful for
+having an unbiased information environment. I'm torn on this one. I, you know, I moved
+to the great state of Texas to get rid of, you know, to have certain freedoms that we have here
+that we don't have in other states. And I kind of like the idea of states having certain rights,
+but I don't like the way these laws are being written. So I remain torn and the devil's going to
+be in the details on this one. Chamath had to bounce. Well, do you like the Colorado law? Would
+you like to have? No, of course not. So it's how these laws are executed that, you know, are my
+concern, you know, and I had this concern with gun rights in California. Like, you should have the
+right to own a gun. And then they're just like, well, you can't have a gun. Okay, well, you know,
+and then the states have to go back and forth in these lawsuits to see can New York City, San Francisco,
+ban guns. And one of the recent crime is out of control in some of these places is because homeowners
+can't have guns and understand your ground laws and et cetera, et cetera. And one of the nice things
+about this country is you can pick a state where, hey, I want to live in a state where abortion's
+legal. I don't want to live in a state where abortion is legal. I want to live in a state without
+taxes, state taxes, ones with taxes. You get to choose. It's one of the powerful things,
+and we get to debate these things in real time. So I do have a concern of centralized government
+and overreaching federal governments, especially with the way executive power is being
+deployed these days from Obama to Biden and to Trump. This is too much executive power in
+my mind. So I have concerns on both sides of it, but, you know, this is the devil's in the details
+of the execution, and I trust you to come up with something good as our civil servant. So come
+up with something good, Sachs. Well, we will. But just to go back to one of your points on
+states' rights, look, there's a commerce clause of the Constitution, and the reason that exists is to
+create a seamless national market economy. One of the reasons why the U.S. has such a strong
+economy, why it's the number one economy in the world, is because we have a single national
+economy, which is the largest market for products. Imagine if we had 50 separate markets,
+each with their own rules and regulations, and then doing business in the U.S. would be like Europe.
+Remember, one of the reasons why the U.S. dominated the Internet in the 90s is because if you launched a startup in America and you won the American market, you were basically right there in terms of winning the global market.
+Whereas if you were in a European country and you won your local country, whether it was the U.K. or Netherlands or France or something, you would just want a small part of Europe.
+And then you would have to go figure out all the rules and regulations to get into just the other 30 European countries, never mind the rest of the world.
+So it's that seamless national market that's given our companies the scale, they need to then dominate across the world.
+And if you restrict that by making every state have different laws for every product, we're going to lose that massive advantage that we have.
+Here's the thing.
+You know, I look at the car standards with which Chimov brought up Friedberg and, you know, Trump, I guess, doesn't want to have California having their own car standards.
+That got rid of 70% of the pollution in California.
+I was in favor of that.
+I wanted to see higher standards, not lower standards, because I don't want to pollute.
+And the smog over California was just, especially Los Angeles, was insufferable at times.
+Those standards, which led the nation, which have led the world, did they add extra cost, of course.
+But it made California a great place to live because it's car culture there, and people were dying and taking years off their lives from the smog.
+So that's an example of it, I think, working really well.
+And I am for cannabis regulation and for it being legal.
+And California led the country in that, whereas other states want to ban cannabis and they don't want to have higher standards for pollution.
+I like the fact that California led in those two ways.
+Now, it's all in the execution, of course.
+The problem is that because California is such a big market, those vehicle emission standards that may or may not have been right for California apply to every other state because the car companies can't manufacture different models for different states, nor should they have to.
+Well, they did, though.
+Practically, they did produce different models for different states, but yeah, it definitely
+was friction.
+You want to have different AI models for every state?
+You want to have a DEI model for Colorado?
+You want to have it?
+In the case of cars, I do like the fact that they, California did push the car companies
+to make cleaner cars.
+Now, in the case of AI, that's why I was asking you which safety concerns you have.
+Because I'm trying to find a safety concern that we can all say is a legit concern for AI.
+and we can't come up with one.
+So that's the interesting part about this,
+is like they're obviously overreaching laws right now
+because we can't come up with something
+where AI is going to jump out of the computer
+and do something in the real world
+that regular laws don't account for.
+We can't come up with an example here
+and we're deep in this industry.
+Can you come up with a single example of AI
+doing something bad in the world
+that we should be concerned about
+that isn't covered by existing laws?
+I can't.
+Somebody in the audience figures that out.
+Please email me.
+Another amazing episode of the All-Inns.
+podcast. Great to see you. Chimoth, who had to jump, David Freeberg, and of course, my bestie.
+My bestie David Sachs, our czar, getting it done in D.C. for the country. Well done,
+and we'll see you all next time on the podcast. Bye-bye.
+We'll let your winners ride.
+Rain Man, David Sachs.
+And it said, we open-sourced it to the fans, and they've just gone crazy with it.
+Love you, West.
+Holy!
+What, your winner's wine?
+What, your winner's wine?
+Besties are gone.
+That's my dog taking in a year driveway.
+Sex.
+Oh, man.
+My Appetacher will meet me as well in social.
+We should all just get a room and just have one big huge orgy because they're all just like this sexual tension, but they just need to release them out.
+Wet your beat.
+Wet your beat.
+Be.
+Be.
+That's going to be a.
+to get merches are back.

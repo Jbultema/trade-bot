@@ -19,10 +19,12 @@ def outcome_candidate_scorecards(
     baseline_run: BaselineRun,
     bot_config: Any,
     experiment_scorecards: pd.DataFrame,
+    include_defensive_judgement: bool = True,
 ) -> pd.DataFrame:
     runtime_scorecards = runtime_outcome_scorecards(
         baseline_run=baseline_run,
         bot_config=bot_config,
+        include_defensive_judgement=include_defensive_judgement,
     )
     frames = [frame for frame in [runtime_scorecards, experiment_scorecards] if not frame.empty]
     if not frames:
@@ -48,6 +50,7 @@ def runtime_outcome_scorecards(
     *,
     baseline_run: BaselineRun,
     bot_config: Any,
+    include_defensive_judgement: bool = True,
 ) -> pd.DataFrame:
     metrics = getattr(baseline_run, "metrics", pd.DataFrame())
     if metrics.empty:
@@ -105,9 +108,10 @@ def runtime_outcome_scorecards(
         )
         if not window_values.empty:
             runtime[output_column] = runtime["strategy"].astype(str).map(window_values)
-    defensive_scorecards = _runtime_defensive_judgement_values(baseline_run)
-    if not defensive_scorecards.empty:
-        runtime = runtime.merge(defensive_scorecards, on="strategy", how="left")
+    if include_defensive_judgement:
+        defensive_scorecards = _runtime_defensive_judgement_values(baseline_run)
+        if not defensive_scorecards.empty:
+            runtime = runtime.merge(defensive_scorecards, on="strategy", how="left")
     return runtime
 
 
@@ -193,11 +197,13 @@ def outcome_strategy_option_frame(
     baseline_run: BaselineRun,
     experiment_scorecards: pd.DataFrame,
     limit: int = 80,
+    include_defensive_judgement: bool = True,
 ) -> pd.DataFrame:
     scorecards = outcome_candidate_scorecards(
         baseline_run=baseline_run,
         bot_config=bot_config,
         experiment_scorecards=experiment_scorecards,
+        include_defensive_judgement=include_defensive_judgement,
     )
     if scorecards.empty or not {"strategy", "cagr", "max_drawdown"}.issubset(
         scorecards.columns

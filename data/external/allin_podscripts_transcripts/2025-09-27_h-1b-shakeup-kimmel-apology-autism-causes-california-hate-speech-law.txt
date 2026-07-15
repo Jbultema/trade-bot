@@ -1,0 +1,1284 @@
+source: allin_podscripts
+published_date: 2025-09-27
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/h-1b-shakeup-kimmel-apology-autism-causes-california-hate-speech-law
+title: H-1B Shakeup, Kimmel Apology, Autism Causes, California Hate Speech Law
+
+All right, everybody, welcome back to the number one podcast in the world.
+The all-in podcast.
+We're back.
+We've got the original crew here.
+It's a tight foursome with me again.
+He's returned from, I believe, the UAE and Mina, the one, the only, your chairman, your
+dictator, Jamar, Polly Hopatia.
+He puts the dick and dictator.
+That's what they all say.
+How are you doing?
+Good.
+You?
+Hmm.
+So you went and you got that, wow, what's that beautiful heirland?
+that we all take to the region.
+Emirates first class, yeah.
+Oh, Emeritus first class, cabin.
+It's insane.
+With the wine?
+Take everybody in,
+because I do business class
+for 14 times round trip.
+Emirates is unbelievable.
+The problem is there's like literally
+a thousand movies, a thousand.
+So you have to like favor it out 30 or 40 of them.
+There was like 95 different menu choices.
+I had probably 8,000 calories.
+Oh, really?
+And that was just the wine, I take it.
+Yeah.
+By the way, the wine is incredible.
+The wine list, like 1996 Montrose, and I was like, is this an air?
+I never see an airline wine list.
+It was pretty strong.
+Did you bring your Somelier, Josh?
+Was he in the cabin next to you in his own?
+I didn't need it.
+No, I didn't need it.
+I like that.
+I like that.
+And of course, your Sultan of Science.
+We got a great docket for him.
+It's kind of like the Super Bowl for Sultan fans this week because, yeah.
+I hope I deliver, bro.
+I mean, you're putting the pressure on that.
+Well, Trump cured autism, and you're going to comment on it.
+It's a pretty big deal.
+It's a pretty big deal.
+And then, of course,
+and then, of course, ah, the one the only, he puts the bizarre and czar David Zarr,
+David Snar Hacks calling in from his.
+You got that backwards.
+It's you put the czar and bazaar, not the bazaar and czar.
+Yeah, I kind of was, I'm playing with it.
+I'm workshopping.
+It's, I've been trying both ways.
+But yes.
+And you're calling in, you're echoing, which is great.
+I'm on the road.
+You're on the road between meetings?
+Well, what is it?
+Are you in a motorcade?
+No.
+No.
+Okay, listen, the topic of the week, H-1B visas are being overhauled.
+Trump administration announced a new $100,000 fee for all future H-1B applications.
+It's a one-time fee.
+There's been a little confusion about it and the details, but, you know, that's how they do things in the 47th.
+There is some excitement, a big announcement, and then we figure out the details.
+Lutnik originally said it would be $100,000 a year, but then the White House clarified it will be a one-time fee.
+This is a huge jump.
+The current fee is nothing.
+It's like $2 to $5K that you pay to the government.
+You might pay a lawyer, you know, double that or triple that to do the work for you if you're a big corporation.
+But, you know, this hits on a lot of the Trump campaign promises, tougher on immigration, looking out for U.S. workers.
+We've talked before here about the abuse in the H-1B system.
+I'll give some of my personal, you know, insights in that after maybe I throw to you, Chimoff.
+And before I do, they had an interesting polym market.
+Will courts block Trump's 100K H-H-1B by September 30th?
+3% chance in that happening. So it looks like everybody's kind of aligned with this program.
+All right, Sacks, I know you're on the road, but your fans demand to hear your take on this.
+What's your team?
+I think it's a good idea to have this $100,000 fee, and I'll tell you the reason why is because
+right now there's something like five times as many H-1B applications as there are slots.
+So I think they grant about 85,000 H1Bs a year and many more apply for it.
+And as a result, they have a lottery where they just kind of, I guess they randomly choose who the winners are going to be.
+And if you look over the past decade, roughly half the H1Bs go to these like IT consulting firms.
+And the average salary is like $65,000 a year.
+So it kind of puts the lie to this idea that you hear that H1Bs are for like high skilled engineers.
+AI researchers, things like that, that's not in practice what happens. In practice, what happens
+is you have this lottery and a huge chunk of them end up going to low-end IT jobs. And I think by
+putting this $100,000 fee on it, you encourage the applications to go to the actual higher-skilled,
+higher-paid jobs where there's actually a shortage of Americans. And you encourage U.S. companies
+to try to fill those jobs with Americans first.
+And so I think, you know, putting aside some of the details, I think the big picture here is
+that they're using market forces to put some scarcity around the H-1B application.
+And I think what that's going to do is encourage applicants to actually be these higher-paid,
+higher-skilled jobs that the program is supposed to be for instead of these lower-end IT shop shops.
+Yeah, these are supposed to be for highly specialized workers.
+I can tell you.
+you know, when I was in IT in the early 90s, the abuse was happening all the time. And it was
+indentured servitude. It was disgraceful. The IT people would hire, typically Indians, and they would
+say stuff to the effect of, these guys are going to work for half as much and twice as long.
+And they can't say no. That's the best part of it. They can't say no when we put them on
+weekend coverage. They can't say no if we want to do a build-out and they have to work 10 days
+in a row because we can kick them out of the country. And they have 30 days to find a new
+job. And so it's a giant scam on the bottom half of these. I witnessed it firsthand. Every
+discussion I've ever had about H-1B's, you know, in relation to IT and consulting has always been
+about saving money. And the truth is, it's been abused. And I talked about this in 2015 on
+CNBC, Chamath, when Trump first started to talk about it. He's been on this for a while.
+And it's just great to see them. I had suggested 20K a year. And that's kind of where they
+wound up, I additionally think they should do an auction for one-third of these. Let all these big
+tech companies that are truly trying to get in very unique PhDs from Oxford in AI, man, let them
+just put out how many they want to buy and at what price, do a reverse auction and fill one-third
+of them with, I don't know, maybe Open AI or XAI or Microsoft jumps the fence and pays 100K,
+200K per person. What do you think, Chimov, just broadly speaking on this and the policy
+the abuse, everything.
+I came to the United States initially on a TN visa, which is the NAFTA visa between Canada
+and America, and then I switched to an H-1B, and then I got my green card and my citizenship
+in the early 2010s. Elon came in on an H-1B, Sundarpa Chaya came on an H-1B, Satina Della
+came in on an H-1B. There's a lot of folks that have done a lot of good things that have
+use this specific visa. That being said, I think Sachs is right that people have found an
+end around and have been abusing this H-1B system. There was an incredibly exhaustive thread by
+Robert Sterling, I think it was about a year ago, but I wanted to use that as a jumping-off point
+to explain a couple of reasons why I think that there's been rampant abuse. The first thing is
+the H-1B program is supposed to be
+85,000 visas a year.
+But here is the data.
+And so what you see is that
+in many years, including the last several,
+it's been upwards of 10 times that number.
+And so there are a lot of people
+that are getting shoehorned into this program.
+And when you see this,
+you can start to see why a lot of people are saying
+that there is wage suppression and that it's taking away from American jobs. Because if the program
+was meant to be for $85,000, you would think, well, listen, that's a drop in the bucket. Nobody would
+feel that in the American economy. But when you start talking about almost a million people a year,
+600,000 to a million a year, that starts to be perceptible. And that is absorbing a lot of
+revenue and wages that would otherwise go to domestic-born and legal immigrants that are already
+here. So that's thing number one. Thing number two is there was a myth that these H-1Bs
+were these extremely highly skilled people. And what Robert found out in the data is that
+actually no. It's not really that case. And so I think the average salary, I just want to get
+this exactly right, it's slightly under $120,000. Now, if you started to tell me that these were
+the best in class PhDs in all of these whizbang industries where the companies are raising
+billions and billions of dollars, you guys already know that this salary would not pass the
+smell test. Most executive assistants at tech startups make more than $119,000 a year. So the idea
+that some qualified grad is making this should already sort of set off alarm bells that may be
+where there's smoke, there's fire. So that's the second thing. So number one, we've been over-allocating
+by 5 to 10x.
+Number two, these salaries aren't these incredible salaries that you think of, which
+tends to mean that there is the potential, as Jason, you said, in some form of indentured
+servitude and wage suppression.
+That's not good.
+And then the third thing is you would ask the question, well, who gets these things?
+And it turns out, as SAC said, a large plurality of these visas don't actually go to American
+companies that are looking to hire talent to make this American business do better.
+These are foreign companies that are arbitraging labor and bringing people in.
+So crazy.
+Cognizant is not an American business.
+Tata.
+InfoSys is not an American business.
+Tata, WIPRO.
+It's not to say that that in and of itself is wrong, but you need to find the right visa
+class to do this under.
+Yeah, they're hacking it.
+And so when you put all of this together, I think,
+the sort of broad takeaway is from where this started and what it was intended to do, we've
+deviated pretty wildly. And I think that this is a very important reset. Now, the last comment
+I want to make is about the people that say, hold on, we are going to cut our nose off to spite
+our face. And it's going to stop an inflow of incredible talent. And what I would just remind people
+is that it is really important to remember that when you are in the United States for a master's
+a PhD, you already get an automatic visa. It's called OPT. So you have multiple years when you graduate
+from a useful degree program in the United States to find a job. I have several of these folks
+that work from me at 8090. These are incredible grads from Carnegie Mellon. They are off the
+chart smart. But because they did a master's or a PhD, they come with a couple of years,
+and you can oftentimes extend that. And that will give us a very good amount of time to figure out
+how exceptional they are. And then quite honestly, I would gladly pay the 100,000 to get these guys
+on an H-1B program. So I think if we're going to try to return this to what it was meant to be,
+which is to help American companies excel, get the best of the brightest, these changes,
+I think, are very good measures to course correct and get us towards that.
+And to just give people the history of this, this was something that was started after World War II
+to get really specialized people like Polish and German, like geniuses, building out rockets.
+And I had a really interesting discussion.
+If you could pull this tweet up, there's another sinister wrinkle to this.
+I had this gentleman Colin on, and he went to apply for a product manager.
+I had him on this week and started.
+It's my other podcast.
+And he applied and sent a resume with the reference number to the specific job, Friedberg,
+that he wanted at a company New Relic.
+And he did this because in order to have an H-1B visa,
+you have to put the job in a newspaper, right?
+So what these companies allegedly are doing
+is putting these jobs in these, like, obscure newspapers
+so that Americans don't see them.
+They're not putting them in places, you know, that you might see them.
+And there's a group of Americans who are going and finding these jobs
+and saying to Americans, go ahead and apply.
+Here's the shadow jobs, I think is what they call them.
+And so he put the reference number in there and they wouldn't even interview him.
+And I talked to him and he's kind of crestfallen.
+He's like, you know, I would like to apply for this job, but it's obvious that I can't get into it.
+This is like, I think just shows the entitlement of these tech companies.
+And I don't know New Relix's position on this.
+They can email us and I'll give it in the next episode.
+But they're basically listing fake jobs.
+And somebody, Abby, from Peopleops over there, just kind of doesn't even let him
+interview for the job. The whole thing is just really dirty at the low end. And at the high end,
+it's under monetized. So, Freebert, your thoughts on this. I know you have a lot of friends. You're
+an immigrant yourself. I'm not sure how you got here and what visa you came under. But I think it came
+when you were a kid, right? I'm not sure what your parents came under. But what are your thoughts
+on this and the impact it might have? Well, I think there should be two separate programs for what we
+could call highly skilled workers. What you were referring to after the end of World War II,
+There was a secret U.S. operation called Operation Paperclip where we tried to recruit
+German scientists and engineers. Between 1945 and 1959, America recruited, I think, 1,600 of these
+scientists. So it was both call it disabling to an American rival or adversary, but also expansive
+because that was when the nuclear industry was growing, and much of nuclear science was being
+pioneered in the earlier days in Germany. And so the kind of American workforce expanded, but more
+importantly, a new industry was able to be enabled and unlocked and grown in the U.S.
+And then the German state was disabled by losing these scientists. One could make the case
+that a similar sort of scenario should exist today, that we should have a second operation
+paperclip. And perhaps it should be a continuing process rather than necessarily
+kind of this laissez-faire process that we have today, where we identify some of the top
+industries and the top scientists and the top domains and go after those scientists proactively
+with government action, government support, in partnership with private industry, if you look
+at papers being published across mainstream scientific journals, the majority of papers
+today across nearly every scientific domain are being published out of China.
+And this ranges from physics to chemistry, to material science, to biotech.
+And there's a real case to be made that perhaps those scientists would be better off
+and America would be better off if they were doing their research, pioneering here
+rather than there.
+So I think that there's a very good strategic case to be made that perhaps like a more
+directed high energy, high effort kind of operation paperclip be undertaken again around
+the world.
+The H-1B program, I do agree, has been heavily abused as a way of kind of compensation arbitrage.
+And, you know, if you find a highly qualified, excellent talent, as we all know, for a high-skilled laborer in engineering or science today, that person, if you amortized the H-1B over seven years at 100K, that application fee, that's 15K a year, call it.
+That certainly seems worth it for the right sort of talent.
+and it forces the question about can this person be found in the United States or not,
+the alternative would be to force a higher salary range such that you as a company are now
+basically being forced to pay a higher salary, which means you have to justify that this person
+is worth it to bring them in from XUS and you can't find the talent locally.
+I'll tell you a program where we do this where it doesn't work in the U.S. is called the H-2A program.
+This is the immigrant farm worker program that we use for temporary labor on farms.
+And the way that program is set up today is you have to pay the farm worker that comes in on
+an H2A some amount over minimum wage.
+And the amount that you have to pay over minimum wage is a function of the average wage
+in that state across all industry.
+In the case of Florida, they're paying $5 to $10 over minimum wage for farm workers,
+and they cannot get any Americans to work on the farm.
+and they're being forced to pay $5 to $10 overage.
+And by the way, these farmers and these farm businesses are being heavily subsidized
+by the government.
+One way to think about the ridiculousness of what's going on is the U.S. taxpayer is paying
+a premium salary to foreign workers.
+What we should be doing is enabling when there's no workers available in the U.S.,
+we should be enabling a free flow of labor, but only in the case where there's no workers
+available in the U.S.
+But there is a downside to that model, as we're now seeing in the ag industry, farmers
+are losing money across the board, and they're having to pay a premium for foreign workers
+to come and work on the farm, and they can't get U.S. workers. There's two sides to the sword on
+this is my point, but I do think this operation paperclip notion should be taken on as a separate
+kind of strategic mandate. Absolutely, yeah, and that was a lot of the Jewish scientists had
+already fled Germany. My understanding paperclip was for the Nazis, the former Nazi scientists,
+and they were working on some pretty dark and cutting-edge stuff and chemical and biological and
+biologically, it just wasn't rockets, right? Well, it was everything. It was everything.
+Remember, at this era, we were just developing quantum theory, and quantum theory led to
+nuclear science, which led to the development of the atomic bomb. So, yeah, I think Operation
+Paperclip was pretty far reaching. But today, as an American, you really want all of the
+cutting-edge research in material science, in physics, in chemistry, et cetera, to accrue to
+crew to China or should we be thoughtful about it's intellectual talent that's making these
+breakthroughs. It's not necessarily institutional capacity. It's not like they have better institutions
+per se than we do. We have amazing institutions, amazing capacity, amazing place to live and so on.
+So there's a real kind of mandate that we should probably think about undertaking here, not just
+for extension of our industry base, industrial base, but also for disabling what we would consider
+rivals or what American might consider rivals. Just on this operation paperclip point,
+It's interesting that China, the Chinese government, took away the passports of the engineers at Deepseek after the launch of that model, or at least it was publicly reported.
+I can't attest to this from first-hand knowledge, but there are definitely a lot of reports about this, and you can see why.
+I mean, if we could recruit or snap up a few hundred or at most a couple of thousand of these top AI engineers,
+That would be a game changer in the AI race.
+So China is hard to see those people as a strategic asset,
+and they're not going to let them immigrate, I don't think.
+But it would be something for us to think about.
+Similarly, on the chip design front,
+there's probably just a few thousand people.
+That's all we're talking about.
+That would be a game changer on that side,
+although they're largely in Taiwan, not China.
+And again, I don't think that Taiwanese governments will be too excited for us to
+snap them all up and move them to America.
+moving to America. But in both these fields, there are a relatively small number of people,
+kind of like in the space race, who, if they were all in America, it would be a huge game changer.
+Here's the thing. We do have a really rich diversity of people from all around the world
+in higher ed institutions in the United States, getting masters and getting PhDs.
+We just need to be better organized about what to do with them. And we need to sort of reach out
+to those people, build relations with them, take advantage of OPT, and then we can always create a
+different class of visa for them. We have the ability to do these things called national interest
+waivers. So all of the infrastructure exists, and I think that if we can clean the decks
+on the H-1B stuff, it'll give people a lot more incentive to support the national interest
+waiver concept. I think the reason why people don't believe in this entire immigration
+conversation is on every part of the distribution of immigration, people see problems.
+They see an open border on the one side. Well, they're worried it's going to be abused.
+Yeah, exactly. Exactly. Yeah, it's abuse. And it feels terrible.
+There's been too many of these horror stories where an American is told to train their
+H-1B replacement who's making 25% as much. Look, I shouldn't even tell this story.
+But it was told to me yesterday, and I don't know this to be true, so I don't want to fan
+the flames of speculation here.
+But what I was told is that in certain countries, there are these puppy farms that essentially
+get these kids onboarded into U.S. colleges.
+They're not the great colleges, but they are decent enough in all far-flung corners of America,
+get them into master's programs, they pay for their school, and then these folks have to then
+send money back to pay off their degree. So if that's happening, then these kids are being abused
+as well, right? So the whole thing has just completely run amok, and I think we need to clean
+it up. At that point, we have the chance of rebuilding trust where then we can propose what
+Freiburg talked about, and everybody would be supportive because they see that the system
+works as intended. I think closing of the border, I think, has made people feel a lot better
+about it because that was so abused that people just look at immigration in one bucket. And they don't
+separate it into multiple buckets. There's compassionate, you know, people who are true dissidents who we
+want to show compassion for. It's a small number of people. Then you have all these folks who were being
+taken with mules and coyotes over the border and then using that same compassionate designation and
+abusing that. And when you do see that abuse, I think people, when they hear Trump come on here and
+When he was a presidential candidate, President Trump came on and said, hey, we're going to staple
+a green card right to those degrees. And then he immediately got backlash. Well, now I think
+if things have calmed down, and now President Trump and the administration have the high ground,
+they could say, look, we close the border. Now we should have a really thoughtful discussion.
+We're giving these people American educations. They want to start companies. They want to build
+our companies. I want to build products and services. Those products and services are going to create
+more jobs. And look, we're at 4% unemployment, 4.X. You know, we're in good shape.
+because we closed the border
+and that's where you had millions of people coming in
+and that was the true problem
+and this isn't the actual problem.
+You make a really great point, take out.
+I mean, using the one word immigration
+to wrap up all of people
+that are coming to the United States,
+I think masks the real series of things
+or set of things that are underlying
+people seeking asylum, people in need,
+but then also people that we want to go attract
+and bring here actively.
+And it's probably not the right term
+to use just the word immigration.
+The word you want to use is recruitment
+and a qualifier for every term.
+Yeah, the term is recruitment, what you described,
+the paper clip mode, that's recruitment.
+Then you have dissidents,
+and that is compassion for true dissidents.
+And then there's...
+And family, and family.
+Great, so you have compassionate dissidents
+and family members.
+And then you have this big thing in the middle,
+which is everybody in the world wants to live here.
+Everybody can't.
+That's immigration.
+And so just put it in three buckets,
+and then our leaders need to have discussions
+three different discussions and have it in a thoughtful way, not muddy the waters and politicize
+this. That's what's been causing such a big problem. Both sides of this argument have been so
+charged. Hopefully now that the biggest one has been deathly done by Trump. Trump said it at the
+UNGA. He said, you know how many people have crossed the border since I came into office? He said
+exactly zero. Yeah. Yeah. That's incredible. I mean, we have the greatest military
+in the world, we can't close the border to people who are coming on, you know, with backpacks
+across a border. Like, we should be able to secure the border with drones and cameras.
+It was done deliberately. They opened the border. And you know that. Of course. Because remember
+when Texas tried to put a barbed wire to enforce their own border, that's right.
+The Biden controlled border patrol got rid of it. They removed it. That was a test.
+So this was done deliberately. Yeah. That was a.
+perfect tell. I remember when we covered that last year. That was the total tell. Okay,
+Freyberg, some major news in science this week. Let's talk about autism and the press
+conference that happened this week with Bobby Kennedy. And President Trump, here is the chart.
+Autism has increased dramatically over the years. There's a big debate of what's causing this.
+And there's obviously correlations. There's causations. There's the testing of this. And maybe we're just testing
+a little bit too loosely around this,
+but we went from one in 10,000 in 1970 to one in 1,000 in 1995
+to one in 32 in 2002.
+The press conference, Freiburg,
+was a little spicy and unique, performative maybe,
+or some of the criticisms, but there's a real issue here,
+and why don't you take us through it and educate us
+so we can kind of get to reality,
+because the press is having a field day with this,
+obviously on both sides.
+I think autism, just like Alzheimer's,
+there may be several underlying conditions that lead to what we would call the phenotype of
+autism. That is, what we all observe is autism. You know, it's considered a spectrum disorder.
+There's many different variations of it. There may actually be many different underlying conditions
+or underlying drivers, biological drivers, that are causing it. One of the drivers that came up
+during the press conference and in the subsequent interviews that Marty McCarrie, head of the FDA,
+has done is that they've identified and shared papers that have been out for some time
+that there is a receptor that absorbs folate, a type of vitamin B, and that that folate receptor
+may be attacked by the immune system, and as a result, you can't really uptake vitamin B.
+And so those cells dysfunction, and when those cells are dysfunctional, you end up having
+what looks like what we call autism. And so one of the things that they announced is they're
+going to work on getting the label updated for Lucavoren, which will resolve for many people
+the folate receptor issue. The other thing they brought up is a paper that was done by
+Andrea Baccarelli, who's dean of the Harvard T.H. Chan School of Public Health. This paper is a bit
+old where he took several studies and analyzed them and showed that across 46 studies,
+nine of them showed no association with acetaminophen,
+the main active ingredient Tylenol.
+Four showed a negative association,
+mean it was actually protective and good for the fetus.
+And 27 had a slightly positive association,
+which means that it was having some contributory effect
+to both ADHD and autism spectrum disorder
+when women would take acetaminopin while pregnant.
+And Nick, if you want to just pull up that image from the paper,
+this is the original paper that was published.
+by Baccarelli. So again, he didn't do any primary research. He didn't actually go and study
+patients. He took the data from 46 other studies and then he added it all together to run this
+kind of macro analysis. And you can see here that he showed some risk. There's no specific
+way to quantify that risk, but there's some increased risk of having attention deficit hyperactivity
+or autism as a result of taking acetaminophen while pregnant.
+Now, I think autism, again, one of the underlines might be this autoimmune condition associated
+the folate receptor.
+What causes autoimmunity is a whole other conversation, and we can get into the vaccine stuff
+if you guys want to, because there's obviously a lot of conversations going on right now
+about the immune system being primed to have kind of an auto-antibody response.
+but there may be other things contributing to it.
+So I think it's pretty clear that our modern world in the last couple of decades,
+there's a cumulative effect of environmental exposures that children are getting,
+whether it's microplastics, whether it's chemicals in the food,
+whether it's just the environmental exposure in the air related to small molecules,
+whether it's related to other things we're putting in our body.
+Every one of these things, the way to think about it is maybe if it has a positive effect,
+it might increase your chance of autism by 0.05%.
+And then another thing might increase your chance by 0.07 percent, and so on and so forth.
+And so when you add up all the things in our environment, there may be a cumulative effect
+that has a result in different underlying conditions in our body that may result in what
+looks like things that we call autism.
+And so none of these are very specific.
+There's one shot and one path and one specific thing.
+And I think that's very important.
+Yeah, let me just ask two clarifying questions.
+lightning round for you, Freiburg. Number one, for the audience, how is autism diagnosed in these
+studies? Is there a blood test, a genetic test, or is it just a bunch of questions? I know the answer,
+but I wanted you to clarify it for everybody. And then how does this, the geographical differences
+in autism, just like we saw with trans kids, you know, there's many in certain cities and none in
+others. So maybe you could talk a little bit about those two issues, which I think many people
+have been talking about. So I don't think that there's one specific diagnostic test for autism
+as if it was one disease. Again, these are phenotypes. These are behaviors that are being
+measured that people call autism spectrum disorder. And so the diagnostic criteria falls under a set
+of screening and behavioral tests that go on. And, you know, one of the things that. There's a survey. There's an
+observation and there's a bunch of things is it like a score is it a score yeah so it's there's a
+scoring system exactly and so then there's different levels what did you and sacs score yeah
+where are you guys because we could we could bet hold on us chamois and i aren't going to bet on it
+i'm going to say that sacks feet cream hurt by 16 points make it over under over under i think
+these guys are well what's who's got who's highest on the spectrums said well sacks may have
+gotten in the 90th percent he's definitely in the 90th percent we need a polymarket we need a polymarket we
+What did Seths, Freepard, get all those squaw?
+By the way, just to go back on the acetaminophen study,
+so great.
+There's the emotional detachment.
+Go ahead, Freepard, go ahead.
+No reaction.
+You would hire laughing.
+Well, I mean, I'm making an active choice not to engage.
+But the...
+I am making an active choice to repress my emotions.
+One thing to note, and one of the controversies about all of this,
+the paper that was published by this guy Baccarelli from,
+and I don't know if I'm pronouncing his name right,
+from Harvard, it's actually been challenged because in 2023, he was called as an expert witness
+in a lawsuit against the maker of Tylenol. And in that lawsuit, the judge throughout his testimony
+is unreliable because he was being paid $150,000 to give the expert testimony to work on the
+case. And so because of the payment that he- Was he on? So this is the guy who published the paper
+that linked, that showed an increase in- On the expert testimony, was he pro-tylonor or anti-tylonal? So
+He was an expert witness for the lawyers that were filing the claim against Tylenol.
+I will say in the last couple of days since this press conference, he has publicly said
+that we are not yet certain or sure about the link.
+And I want to remind everyone that this association study indicates an increased risk,
+but that doesn't mean that if you take Tylenol, your child is going to have autism.
+That doesn't mean that there is a determinism here.
+There is a statistical chance that there is a slight increase, and the more acetaminifin you take,
+the more the chance.
+And that's what the paper showed.
+Let me take the other side of this.
+Here's what we know.
+We know for sure that there is this potential autoimmune issue
+that you as the mother can express as an antibody.
+There's an antibody test for it.
+We also know that the child can be tested for it.
+So at a minimum, we're now at a point
+where we can create a very thorough, well-funded study
+to get to the core of this issue.
+Separately, to the extent that you do test positive,
+there will be some doctors and some parents
+that may decide to take lucaverin prophylactically
+and then also to administer it to the child
+before it's clear whether they do or do not have autism.
+I have several friends who have kids on the spectrum.
+I talk to them about lucaverin.
+What they say is that when you have extreme autism,
+the drug is very effective.
+but when you have kids that are more sort of mild on the spectrum, then there's a lot of benefit
+from behavioral modifications and behavioral training, and that it's not clear how effective
+that drug is, but in one specific case, one of my friends is considering it for their job.
+Here's the point, though.
+I think the point is that we need to test for this, and I think that some combination of
+governments and industry should come together.
+Beyond that, the point that I want to make, though, is, and I think Freeberg, I don't think
+you're adding to the conversation when you say that there's no determinism. Because on the off
+chance that there is, I would say that we don't know yet, when you see women taking acetaminifin
+in this performative art way, basically to like try to like pone Donald Trump and it's all over
+TikTok and it's all over X, I just think it's reckless. And I think it solves nothing. You're
+supposed to go talk to your doctor about it in all weather conditions anyways. But then when you
+transform it into some sort of like protest vote without really knowing, I think is really dumb.
+Yeah, and this test, by the way, Chabot, I'll say this folate receptor auto-antibody,
+there has been a test available, I think, since 2012.
+This has been around for some time.
+In fact, there was a paper-
+Patra patients take this test.
+Of course.
+Yeah, and there was a paper published on this.
+I'm trying to find this paper.
+I'm not sure how much follow-up there's been.
+This is a SUNY paper where these guys went and found folks that were
+scored very high on the autism spectrum disorder diagnostic test, and they found a highest prevalence
+over 70% had this folate receptor auto antibody. This was one paper, so I don't want to give it
+like a ton of credence. There's a lot of follow-up that's happened since then, and I'm not an expert
+in this space, but I did kind of do some research on what the history is of this. And so this is a
+very well-known kind of correlative effect, and it could be a very big contributor. But obviously,
+like no one should feel like, hey, if I don't have auto-antibody, then my kid is fine. That doesn't
+necessarily mean the case. Again, there may be several paths to autism. And the thing about
+acetaminophen, just like, hey, have a drink or smoke a cigarette. The more you do, the higher the
+risk, this is the case with anything we put in our body. And I think that's the point about, like,
+what they've identified in the paper that was published regarding acetaminopin. And so there's
+still a lot to be kind of determined on how they're going to provide guidance to women that are pregnant
+on, do you have a fever? Do you take it for pain? What's the right criteria? Let's just say,
+we all agree. Medicating yourself to make a political point is done.
+What are we doing? It's absolutely. It's absolutely, absolutely happy. This is true.
+It's stupid. It's stupid. Yeah. I think for his next trick, President Trump should warn people
+not to snort rat poison. Yes, also not a good idea. Somebody was tweeting, next,
+President Trump's going to recommend not using toasters while you're in the bathtub.
+Yeah.
+Just to see what people do.
+My fellow Americans, in light of recent studies, I wanted to warn against the use
+of toasters in your bath tub or your shower.
+Don't do it.
+Don't put the toaster in the...
+You know, people are going to do it if he tells them not to.
+Exactly.
+I mean, I have such an inappropriate joke right now.
+I'm not going to say it.
+Let's take Friedberg's math when I saw that and you think maybe there's a 0.05% chance.
+Well, guess what?
+If you stack that up, and it actually turns out to be true across the thousands of women that then performatively did this idiotically, you could actually have an extra kid or two with autism that didn't need to have it.
+What is going on in America?
+Well, look, I think there are a lot of people who instantly had a snarky reaction because it was Trump and Bobby Kennedy making these claims about Tylenol, and the media played into that.
+And look, I don't know what the truth of it is, but there are...
+Even Tylenol tells you to not take it.
+They say call your doctor.
+Yeah, exactly.
+There are...
+How stupid are these people?
+There are plenty of articles establishing this risk.
+There's a paper from Johns Hopkins from 2019 called taking Tylenol during pregnancy,
+associated with elevator risk for autism and ADHD.
+Pull this up.
+This is to your point.
+This is CNN's coverage on when these acetaminopin studies came out historically.
+And you can see that when it was announced at the Trump conference yesterday, they said
+Trump links autism to acetydominifin used during pregnancy, despite decades of evidence, it's safe.
+And then if you read back, so this is 2017, 2016, acetaminopin during pregnancy may
+increase risk of hyperactivity, studies linked acetaminininin and pregnancy.
+So when Trump says it, they take the negative back in the headline, in that, no, in the
+headline, they dismiss it.
+But every other time, every other time they've taken the paper and they've published a news article on the paper itself.
+I just couldn't believe all this, all this like CNN, yeah.
+They ignore all their previous reporting on the subject.
+I mean, that's what's kind of crazy about it.
+This supercut was hilarious.
+Check out the, this is the supercut of Trump saying Tylenol.
+It was hilarious.
+Don't take Tylenol.
+Don't take it.
+With Tylenol, don't take it.
+Don't take it.
+Don't use Tylenol.
+Don't take Tylenol.
+Don't take Tylenol.
+Tylenol, fight like hell not to take it.
+I think you shouldn't take it.
+It's just hilarious how we presents information.
+Don't take Tylenol.
+Don't take Tylenol.
+Great week for Motrin, though.
+So I heard cells are up for them.
+No, because it's also been established for a very long time.
+You don't take ibuprofen asthma.
+Yeah, you definitely don't think ibuprofen.
+Those two things are even worse.
+Yeah, ibuprofen is terrible if you're pregnant.
+So wait a minute.
+Why is it specifically that this one mechanism of action was completely inoculated
+and every other mechanism of action for things like pain relief and headaches?
+are known to be pretty bad for women and babies.
+Come on, guys.
+Freeberg, explain to us the disparity in different regions of the world and autism.
+Would you think that's the surveys, and maybe people in the United States are a little more?
+Again, I'm not an expert in this stuff, Jekyll.
+I can opine on kind of what I've read and I've done some studying, but think about my, like, level of knowledge being in the range of hours compared to years,
+Oh, well, no.
+Yeah.
+But I would say, like, I'm a complete expert on this because I've watched all seasons of love on the spectrum.
+And I love that show.
+Yeah.
+You've seen that show about love on the spectrum?
+What is it?
+Oh, watch it with Nat.
+She'll love it.
+It's great.
+I do agree with the general notion that we have a cumulative effect.
+Like, many studies that are done, by the way, are very organized around short duration, high exposure when it relates to novel molecules in the environment and how they're, and how we're exposed to.
+them. The cumulative long-term effect of these things, as we learned recently with respect to
+like the amount of microplastics and the endocrine disrupting-disrupting nature of
+microplastics where they can actually bind to specific receptors and as a result
+block the expression or binding of other proteins, which can have a systemic kind of effect
+on you, we didn't realize that until recently after we've been making plastics for 70 years.
+And then we didn't realize these plastics were breaking down and cumulatively kind of, you know,
+growing in our environment, in our water supply, in our balls, in our food, in our balls,
+in our brains, in our hearts. And so what are these molecules doing as they accumulate in our
+body? And that now needs to be studied and understood. And then we have this big challenging
+industrial question of what do we do about it. But that's true for nearly every novel molecule
+we've developed over the past 100 years on Earth. Some of them, by the way, we could make the case.
+We can show deterministically. They break down. They don't persist. They're fine. And then some of them
+we could say like, look, there's a cumulative effect.
+As more of these molecules enter our body and some of them stay in our body,
+they over time increase the probability of things like DNA breaks resulting in cancer
+or things like endocrine disruption resulting in metabolic effects
+or things like we might be seeing now with folate receptor auto-antibody presentations
+that drive autism spectrum disorder.
+So I think that there's a lot to be said, generally speaking about the cumulative effect
+about a lot of the stuff we put in our environment. And as much as I could disagree with things
+that Bobby Kennedy might say, I can tell you asking these questions is critically important.
+As scientists, we have to constantly interrogate, and this cannot be just a political point.
+I'm not going to sit here and say, I agree with the statements that might be made by the
+president when he says never take a seat a minifan. I think it's a little more nuanced than that,
+frankly. But I do think that the idea that we should be asking the questions and interrogating
+for answers is very, very important. And so I think that's some important takeaway, because
+if you talk to people who have been impacted by this and people in the community, the reaction
+was, we're glad we're getting a lot of attention. Yeah, that was some weird press conference
+on the margins, but we're glad that this is a focus now. And I think people are also glad about
+vaccines. Again, I don't think we should be banning vaccines, but I do like the idea that we're
+questioning all these things, and we're not just giving the medical industrial complex a complete
+pass on this and that we're spending money and investing in it. So let's go on to our next story
+around censorship. How much money do you think is spent in the USA annually on autism? Gosh, do you think
+it's enough to fund a longitudinal trial? Yeah, I mean, that's, I don't have the data to know.
+And then I guess you would, on a societal basis, you would be thinking, is there a better use of
+capital, right? But we're a rich country. We have the ability to fund some of the stuff. And there's
+private companies who probably would fund this too, right? I bet you, we're wasting money in all kinds
+random places where finding a few billion dollars to run this trial is a good thing. Yeah,
+that probably makes sense. All right, we've got a lot of news in the censorship space. So this is
+this week in censorship. So much to talk about. First story up, Jimmy Kimmel is back on the air.
+Earlier this week, Disney announced that EBC would resume airing Kimmel's show. And I think that
+was Tuesday night. Disney explained why they suspended Kimmel last week to avoid further inflaming a
+situation at an emotional moment for our country. And they call Kimmel's comments ill-timed and thus
+insensitive. He came back and had a massive amount of reach. But Nexar and Sinclair's
+affiliates, they decided to not err it. And that was 60% of the market. So interesting,
+Polly Market had Jimmy Kimmel canceled by September 30th. It was nearly 80% after Kimmel was
+suspended last week, but that's plummeted to 1%.
+since then
+it was quite emotional
+I'm guessing everybody watched it
+and I didn't know I didn't watch it
+oh you didn't watch it okay we'll play a clip here
+it was I felt you should watch what he said and yeah it was incredibly
+heartfelt and deft in terms of its execution
+it was sincere and here it is
+I don't think what I have to say is gonna make much of a difference
+if you like me you like me if you don't you don't I have no illusions
+about changing anyone's mind but I do want to make something clear
+because it's important to me as a human
+And that is, you understand that it was never my intention to make light of the murder of a young man.
+I don't think there's anything funny about it.
+I posted a message on Instagram on the day he was killed, sending love to his family, and asking for compassion.
+And I meant it, I still do.
+Nor was it my intention to blame any specific group for the actions of what it was obviously a deeply disturbed individual.
+that was really the opposite of the point I was trying to make.
+But I understand that to some that felt either ill-timed or unclear or maybe both.
+And for those who think I did point a finger, I get why you're upset.
+If the situation was reversed, there was a good chance I'd have felt the same way.
+I have many friends and family members on the other side who I love and remain close to,
+even though we don't agree on politics at all.
+I don't think the murderer who shot Charlie Kirk represents anyone.
+And this was a sick person who believed violence was a solution, and it isn't, ever.
+Yeah, and he references later in this apology of sorts.
+I think it was pretty clear he was apologizing his own faith, his Christianity,
+and just how beautiful it was that the widow of Charlie Kerr had forgiven the shooter.
+And he got broken up about that as well.
+He then went on to do a bunch of jokes and have a normal show.
+It was massive ratings.
+Obviously, everybody was tuned into it, and we'll see where it goes from here.
+I didn't hear an apology.
+Okay.
+Did he apologize?
+Do you know what that means in the English language?
+My understanding, if you look at Twitter and stuff, was it there was not technically an apology.
+Okay.
+He didn't apologize and he didn't say what he had done wrong.
+I guess what he said is that I didn't mean to make light of the situation.
+Yeah, wasn't my.
+intent, yeah. It wasn't his intent. So it was an explanation more than an apology? Okay.
+Nobody was accusing him of making light of the murder. What he did and what people were upset about is that he lied and said that the shooter was MAGA. And he did not hit the nail on the head in terms of addressing that. And he's being called out for that. Now, look, I still think that his statement there, let's call an apology, was constructive and positive because at least he is showing empathy.
+towards the other side. He obviously feels bad for Erica Kirk and for Charlie Kirk. And in the
+current overheated political environment, just expressing empathy for the other side is the
+positive statement. And I think he definitely brought the temperature down. And I think later in the
+statement, he also makes an important point about, he says, you know, just selfishly, I have threats
+on me and what he was basically saying is look we don't want to get into a civil war here we don't want
+to get into a cycle of tit for tat retaliation let's not play had fields and mccoy's this is my
+words he didn't say this but that was sort of the intimation of what he was saying and i think
+that is a good thing to say i mean no one here should want a civil war and this thing can go
+off the rails really badly so look i think that his statements were positive and welcome and
+they showed empathy for the other side, but he did not fess up to what he really did wrong here,
+which was to claim that the shooter was MAGA.
+That was a thing that was deeply offensive.
+Yeah.
+And hold on.
+And the reason why he did that is he was not the only one doing it.
+In the early days of this shooting, of this assassination, it was a talking point on the left
+that the shooter could be right wing.
+And the reason why people on the left were saying that is,
+It was exculpatory.
+It was basically to put the blame on the other side, instead of looking in the mirror
+and hopping to the fact that there is this rise of left-wing political violence and assassination
+culture.
+As we demonstrated on the pod last week, by looking at all the data and all the numbers,
+there really is this poisonous ideology that is on the left, and yes, there's some of it on
+the right, but way more of it on the left, that political violence can be used to solve
+problems. And the left really does need to look in the mirror and rid itself of that ideology.
+And by not admitting that this assassin was motivated by that ideology, they are ignoring that
+opportunity for self-reflection and for progress. That last part is important. I think the
+point is that when you say that somebody is mentally deranged, what most normal people do is then
+say, oh, it was an aberration, it was an outlier. And I think that that is a dangerous
+way to try to sweep under the rug what is something that's more virulent and is increasingly
+acceptable in society. This guy might have been crazy in the sense that he was willing to use
+murder to achieve his objectives. I think we can all say on some level that's crazy. It doesn't
+mean he wasn't animated by ideology that lots of people believe. And I think the proof of this
+was the celebratory reaction to the assassination of Charlie Kirk. You saw it on TikTok.
+You saw it on blue sky.
+You saw it on corners of social media.
+You definitely saw it on Reddit, where you had thousands, maybe hundreds of thousands of people celebrating the death of Charlie Kirk.
+And basically buying it to this idea of political violence as a solution to their problem and to the idea that it was acceptable to use violence against people they hated.
+And so, again, this is the problem with the random nut theory is that it really ignores all the evidence we have.
+have about the larger reaction to the Charlie Kirk assassination.
+And this is the thing that the left really doesn't want to confront.
+It does not want to look in the mirror here and say that we have a problem on the left with
+this assassination culture.
+And we talked about this last week.
+And if you look at polling, they just did polling around this.
+And there's still millions of people on the left who believe that the shooter was MAGA.
+And Jimmy Kimmel helped foster that belief with this disinformation that he put.
+out there. And he really should have hit the nail on the head in terms of saying that he got that
+wrong, that it was wrong to say that. And he could have been a little bit clear about that. I'm not
+dismissing the positive things he said, because I do think it was good for him to show that. I mean,
+I'm going to give him credit for getting emotional. I know a lot of people on the right think that it
+wasn't sincere. I think that it probably was sincere. I'm going to give him credit for that. I think
+his comments were constructive, but he did not apologize for the thing he actually did wrong.
+And in fact, he just replaced that original lie with a new form of left-wing spin, which was the random nut theory.
+And I think, yeah, let me stop there.
+But the point is that really we need to come to grips with the fact that there is this toxic political ideology now that's mostly on the left that does need to be confronted.
+I'm going to go ahead and say, you know, we should clean up a little bit here, or I'm going to clean up.
+He should have, I think, made it clear that this wasn't a MAGA person, but I'm just going to
+repeat the quote, we hit some new lows over the weekend with the MAGA gang, desperately trying
+to characterize this kid who murdered Charlie Kirkus, anything other than one of them in doing
+everything they can to score political points from it. Now, he should have said that turned out
+not to be true. It was actually a liberal. And I think it was not that he said the guy was MAGA.
+He said people were speculating he was MAGA.
+That actually was true.
+So just to be clear here, he never said the person was MAG.
+Wait, who was speculating?
+The MAGA people were never speculating.
+Hold on Charlie Kirk's fans, his loved ones, his coworkers weren't speculating about this.
+It was people on the left, hold on, people on the left of which Jimmy Kimmel was one,
+were trying to plant the story that this assassin could be MAGA.
+Well, I mean, this is, and this is the problem. Hold on. That was done deliberately as disinformation to take the blame off of the political ideology. Yeah, I don't think anybody, no. And the culture of political assassination that's been rising on the left. Okay. So over that weekend, there was definitive speculation that this might be a Groyper, one of Nick Fuentes' fans. There was also significant speculation. And this is why people shouldn't speculate in a breaking news environment because you'll frequently get it wrong. And people had gotten it wrong.
+because they assumed that this individual was MAGA because his parents were.
+And then when it turned out it wasn't true, that's when the record got corrected.
+But this was one of these instances where people actually were speculating.
+And they were wrong.
+And that's why you should always wait in a breaking news environment.
+Well, you're using a lot of passive tense in order to avoid who said what.
+How so?
+You said there was a lot of speculation.
+I'm talking about social media speculating.
+There was an effort to create a narrative, a false narrative, that somehow MAGA was to blame for this.
+And Jimmy Kimmel was one of the leading people who did that.
+We covered last week the rundown, the timeline of what was known at the time that Jimmy Kimmel said that.
+And Megan Kelly did an excellent job summarizing everything we knew.
+We knew what was written on the bullet casings.
+We knew what the parents had said.
+We knew what the friends had said.
+Megan's tweet on this is very exhaustive.
+So you're acting like there was a legitimate basis for Jimmy to say what he said, and there
+wasn't.
+And I don't know why you're covering for him right now.
+No, no, no.
+I'm not covering for him.
+But I'm clarifying a factual error.
+He did not say the person was mag.
+He said there was speculation that weekend, which that weekend, there was speculation that
+this was a groiper and that the family was mag.
+And I'm just on social media, everybody was speculating about this.
+That's, and I think the problem here is that we're saying that the,
+left wants to assassinate people. The left has assassination culture. I know many people on the
+left. I don't know anybody. I haven't talked to a single person on the left who is in favor of what
+happened or in any way supports it. And it's quite the opposite. Every single person I know on the
+left, every single person, you know, who is a high profile person on the left, with the exception
+of maybe one or two really dark people, they have all said that this is horrible and
+tragic and there is no place in civil society for violence. So I'm trying to actually balance this
+down and say, this wasn't the left. This is not the left strategy. The strategy does not want to
+murder people. That is absolutely false. And the left is not pro-assination culture, all the
+leadership on the left. You certainly changed your tune because last week, we showed you plenty of
+data showing that there was three times as many people on the left who are celebrating
+or endorsing political violence, you didn't object to that then. You didn't show me data
+on the opposite. You're just saying that no one you know. Well, I'm glad that no one you know
+is celebrating political murder. I'm happy to hear that. And the only leader I saw was Ilhan
+Omar, who was just saying, like, Charlie Kirk's got a terrible legacy, et cetera, like inappropriate
+comments there obviously, but every other person uniformly condemn this. Now, I know there's
+tons of surveys out there. And I think if we're going to talk about political violence,
+the right also has a political violence problem and that they need to do. We saw on January 6th,
+MAGA and all of these people beat police officers and destroy the capital. That is also political
+violence. It's not an assassination. It's obviously distinctly different, but they were beating
+cops, okay? And the price they paid for that was they were all given pardons for beating police
+officers. Okay? So there needs to be better leadership from the Democrats and the right on this.
+And everybody needs to calm this down and say, this is not acceptable. Whether you're beating
+cops up on January 6, assassinating somebody, threatening people that they have to fight,
+this is all terrible. Everybody has to calm everything down. And that's an example I'm trying to
+make here on this program is to have productive dialogue, even though we disagree about things.
+every person I know who's on the left every person I know was absolutely believes this is abhorrent
+and they would never condone it period full stop and every leader with the exception of like one
+or two people who I don't understand why they would ever criticize you know a Christian who was
+murdered in cold blood I'm sorry it's that's totally unacceptable but anyway that's my position on it
+look I understand this is a heated issue let me just make one final point I know that both sides have
+their quote-unquote nut cases, violent extremists who engage in horrific crimes and they should all
+be denounced equally. The difference here that I think we saw with the Charlie Kirk assassination
+is that you saw thousands, maybe even upwards of 100,000 people on the left, on social media,
+rejoice and celebrate his assassination or downplay it and minimize it on the grounds that
+somehow he deserved it for the things he said. And I just have to say, I don't. I don't
+think we've seen that behavior before on the part of the right whenever there's been some
+horrific crime i don't remember anyone on the right ever celebrating that it was not something that
+was mainstream discourse by any means i certainly did not see thousands of videos and reddit posts
+celebrating that and i think what you see in the polling data is that yes there are some people
+on the right who feel that political violence is acceptable or a solution but that number is three
+times greater on the left.
+I'm glad J-Cal doesn't know any of those people.
+That's reassuring.
+But nonetheless, it's there in large amounts of data.
+And I think that we need to address that problem
+without minimizing it or both-sidesing it
+or else we're never going to make progress as a country.
+Okay, J-Cal and Tammoth both had to run.
+We started late today and we ran a little bit too long for both of them.
+Sacks and I are going to wrap it up with a quick conversation on AI.
+Sacks, I don't know if you saw,
+but there were two papers that were published this week,
+each of which on their own, I would say, were pretty kind of important.
+I'll highlight the first one.
+And Nick, if you could just pull this first one up, this is the MIT paper.
+So this paper is called Teaching LLMs to Plan.
+And effectively what this team did, and again, they were out of MIT in collaboration
+with a scientist at Microsoft AI in Mountain View.
+They basically created an instruction tuning framework that teaches LLLL
+to do symbolic planning, which basically means that the LLMs think about step by step or chain of thought
+in a smarter way by making them generate explicit state action state chains, and then they
+trained that model by giving them feedback with an external plan validator, which is effectively
+going to be a human or a software tool that says, did this series of steps make sense to do
+the thing you're trying to do. If not, here's what you did wrong. Here's what you should have done
+better. And they were able to achieve planning accuracy of up to 94% on some standardized
+benchmarks that are used for chain of thought, reasoning, and planning using LLMs. This is a 66%
+absolute improvement over baseline models. And so this is pretty substantial. They took Lama
+3 and they were able to increase the performance from 1% to 64%. The outcome of this,
+basically is that this sort of a system can be used to train LLMs to do better reasoning
+and better chain of thought in such a dramatic way that LLMs will look like they are starting
+to reason.
+And so by training them effectively on the steps in planning on how to reason, the LLMs get
+better at looking like they're doing reasoning using this kind of symbolic planning method
+that they then built a tuning framework around.
+That sounded a little bit complicated, but I think ultimately what it translates to is
+they figured out a method to get AI to act in a more reasoned way in developing step-by-step
+plans and execute against those plans. And the results and the benchmarks are incredible.
+So this was a big breakthrough, I would say, this week, Sacks. I don't know if you spent
+any time looking at this paper from MIT or talk where you came about it.
+I haven't seen it. But what exactly is the symbolic framework they're talking about?
+What exactly is that? I mean, I understand chain of thought. But what is it that that improves
+actually. There's an old language called PDDL or planning domain definition language.
+PDDL is kind of an attempt to standardize AI planning languages. So it's been around for a long time.
+I think it's been around since like the late 90s. And it's effectively a series of symbols that define
+planning. What they were then doing is basically using PDDL to try and set a series of steps that the LLM would use to
+reason and get to an answer on doing a task or running an action. And then they tuned the PDDL
+using this tuning framework that they developed, giving it feedback. And then they also fed it good
+plans and bad plans and said, this is a good plan, this is a bad plan. And so overall, the
+LLM was then run in such a way that it actually had a better set of steps that it would use
+to solve a particular problem. And so this can then lead to all of the underlying machinery
+of an LLM being better utilized to solve a bigger problem, to solve kind of a chain of thought
+or to solve some reasoning problem that requires several steps or planning. I think it was a very
+good breakthrough. The benchmark data that they shared was pretty impressive, and it's getting
+quite a bit of attention this week. That was one, I think, really interesting paper that came out
+this week. The other one, and Nick, maybe you can pull this one up. So this one's really
+impressive, Sacks. This comes from a team in Germany. This paper was published.
+in the journal Nature Computational Science.
+These folks took a GPU,
+and for each token, typically,
+you'll have the entire key value chain
+transferred from high bandwidth memory to cache memory.
+So this means that you're moving a lot of data
+between one type of memory and another type of memory.
+And what they were able to do
+is they were actually able to reduce
+the physical memory size that's needed
+to run the attention window,
+As a result, the energy and the total token cost to run inference went down significantly.
+I'm trying to simplify this down as best I can, but what matters is the end data that they provided.
+Their architecture led to a speed up of 7,000x compared to the Nvidia Jetson Nano,
+300x compared with Nvidia RTX 4090, and then 100x compared to the Nvidia H100.
+and the energy was reduced by 40,000 X compared to Jetson Nano,
+90,000 X compared to RDX4090,
+and a 70,000 X energy reduction for the same outcome over an H100.
+So I think that this mechanism, if it scales,
+this new kind of technique,
+can have a pretty dramatic effect on the energy consumption needed to run AI.
+And importantly, because you need far less memory,
+you can actually move a lot of AI inference to the edge of the network,
+meaning you could put, for example, a very high-powered LLM model
+that could be run in a robot or in a piece of equipment
+or in a computer or on your phone
+that historically you'd need to run in a data center
+because you needed a very high-powered GPU chip stack.
+And so this architecture, I think, could be one of these big architectural breakthroughs.
+We've spoken with Sergey Brin and Eric Schmidt,
+And Sundar and Demas about the big architectural breakthroughs that are coming in AI that could
+ultimately lead to many orders of magnitude reduction in the energy cost needed to run inference
+and to run AI models.
+Again, if the scales, then all of our assumptions about the data center, about the energy
+can start to kind of be thought about under this new kind of architectural framework,
+which might naturally result in much, much lower need states, we'll see.
+But it was a really, I think, important paper, and folks are going to look up this paper and say,
+this could be a pivot point in how we think about the energy and infrastructure needs to support AI.
+I don't know if you and your team have reviewed it, but it's definitely worth spending some time on.
+Yeah, look, I think the writing was on the wall that models are going to get smaller and smaller
+and more efficient to the point where they can run on the edge on local devices.
+I mean, that was one of the implications of deep seek.
+but if you look more recently
+at I think the launch of Lama 4
+their smallest model
+I think it's called Scout
+runs on a single GPU
+right so I think
+we're going to have
+a whole range of smart devices
+that will have a single
+GPU running a pretty
+decent AI model
+and I mean obviously your phone will have one too
+probably a much better one
+have you and your team talked about
+like what the energy demand curve looks
+like as these better architectures. Like if we're talking about 10,000 X reduction in energy to run a token,
+have you guys thought about, well, does energy scale as we've projected it to scale? Does
+data center need scale like we've projected it to? Or do you think that because they're more
+efficient, we'll actually have more demand? That just sounds a little too good to be true right now.
+Right. As between papers and products, I pay a lot of attention to the launch of products.
+I don't pay a lot of attention to papers. I know that some papers end up being really important.
+for example, the paper on the transformer architecture back in 2017 turned out to be
+enormously important, but I think that a lot of papers just don't really go anywhere for
+whatever reason. Maybe they're hard to reproduce, so they don't scale, what have you.
+So I just don't really pay that much attention to the academic literature.
+I do pay a lot of attention to product launches. And when someone launches something
+revolutionary, then it immediately gets everyone's attention because you don't have to speculate
+about whether a proof of concept is going to be possible or not. You actually
+see it. I guess what I'm saying is that the proof of the pudding is in the eating.
+Right. I think we're going to need a lot more power, a lot more electricity. I think that's
+pretty well known. We haven't even gotten to the robot revolution yet. That's coming in the next five
+years. That's going to be energy intensive. If this thing's even close to being correct,
+then you could run the most kind of sophisticated LLMs in a robot without it needing to be run
+out of a data center going forward, and the robots can simply make a request for information
+from the internet that they need. But all of the actual computation, the reasoning, all of the
+base knowledge would sit locally in that device. It's really incredible to think about.
+We are going to end up with these robots. It's amazing. Yeah. Well, I think that's right.
+I mean, I think that self-driving wouldn't work if you had to run all the inference on the cloud.
+I mean, it's run locally, right, by powerful AI chips.
+And then obviously you can connect when it needs to.
+But no, I would expect that robots are going to have a local AI model.
+Yeah.
+Okay, cool.
+Well, that's it.
+I mean, those were the two papers I thought were really pretty impressive this week.
+Hey, Freeberg, what exactly happened with YouTube?
+Do you have an update on what happened with our episodes from Allens Summit that appear to be shadow band?
+Yeah, tell us what happened there.
+Okay, so thank you to the folks at YouTube.
+They actually worked all weekend to help us figure out what happened,
+and there was nothing nefarious, there was no shadow banning going on.
+What happened was, you guys may recall, a couple of months ago,
+we stopped bleeping out curse words in our episodes, and we muted them instead.
+And when we muted them, the YouTube algorithm still thought that we were saying the curse word
+quietly, and it still showed up in the YouTube transcript.
+When you have a curse word in a video, YouTube marks it as restricted.
+so it's kind of not age appropriate.
+And so that's why it was getting the restricted mark.
+When we went back, the episodes that did get restricted all had a curse word in them
+and we understand clearly what happened.
+So going forward, we are going to use the bleeping again instead of just muting.
+It was very benign, not nefarious.
+YouTube did a great job supporting us.
+We went back and fixed all the old episodes.
+So they're all out of restricted mode.
+And we started reposting all of our summit videos again.
+So, yeah, I mean, conspiracy corner is closed on that one.
+Well, hold on. Do creators know about this that if you have F-bombs in your show that you go on to
+restricted mode? You know, that's a great question. There's no, and we were talking to the YouTube
+product team about this. There's no easy way for YouTube creators to see that a video has been
+tagged as restricted. And so they need to fix that. They're going to fix that they told us.
+And so I think we should all kind of continue to hold them to that because it's important that
+creators don't know why. One of the questions we had for them,
+which we thought was a theory
+was if people report
+your video, does it automatically
+go into restricted mode?
+And the answer is no.
+So the reporting triggers a review separately,
+but the restricted mode algorithm is distinct.
+But when it comes to this restricted mode
+being triggered, you don't know that it happened.
+You don't get a notice.
+You're not aware of it.
+And they need to address that, obviously.
+They need to have like a dashboard
+that shows you any kind of restriction
+on your videos and a reason code.
+for why.
+That's right.
+And specific timestamps, because their engineers were able to pull it up for us,
+look at the timestamps, point us to them, and we could see what happened.
+That should be apparent.
+Like, they should present that to the creators.
+They know why they got restricted.
+I think part of the argument was like, well, restricted mode in YouTube isn't a big deal.
+It turns out it is a big deal.
+We saw it in our traffic.
+We had big drop off because a lot of network administrators,
+so the people that run the Wi-Fi at Starbucks or on your public bus and subway
+or in your office, they have a network setting that's called Safe Mode.
+And Safe Mode was originally designed to block porn or other not safe for work content at
+work, but it also triggers the restricted mode being blocked on YouTube.
+And so if you're in one of those public networks and you're trying to access YouTube
+and you're in a restricted video, you lose that entire audience.
+So it turns out, I think it actually is a bigger deal than folks realized that videos are
+getting tagged as restricted mode.
+At least I think it is.
+and they should do a better job
+kind of surfacing things
+and then people should be able
+to go back in creators
+and correct any issues
+that might be causing that
+to be restricted.
+But I don't feel like
+the policy itself was bad.
+I think there was an algorithm
+problem where their software
+didn't pick up
+that we had muted bad words
+and it was more apparent
+previously when we bleeped them
+so we're going to go back to bleeping
+until they think
+was there any weaponized reporting
+of content
+or we just don't think that was a thing.
+No, we know that to not
+be true. We check that. I check that at the high level, and the answer is no. And I think we feel
+very good about that. There's no mechanism either that if people do blast reporting or they
+try and, you know, as we used to joke, Brigadune you, it doesn't actually trigger anything.
+So that's got it. And speaking of YouTube, there was a really important report out this week
+where I think we kind of knew this, but YouTube acknowledged that during the Biden administration,
+I think this was like roughly 2019 and 2022, that time frame
+that they censored, I think, something like a million videos
+at the behest of the Biden administration.
+I guess that would have started in 2021.
+And they admitted that they were pressured by the administration.
+Zuckerberg had said the same thing about meta,
+and the Twitter files informed us about the same thing,
+but now YouTube has finally acknowledged that.
+And there was a big release on that.
+I'll tell you my view on this.
+I think that the censorship that happened during that era is very important to have happened
+because it has brought a light to it in a way that now there is a hyper sensitivity to it
+not happening again. And I actually think that that's very good. So the fact that it happened has
+now created a real sense that going forward, the policy limits, the boundaries are now more clear
+than they ever were. It's not just about the Trump admin, which I think a lot of mainstream media
+tries to make it about, but it really is about the importance of free speech and censorship
+and who decides what's objective truth or not. I mean, going back to all of the COVID-era discussions,
+not allowing people to have discussions, clearly is a problem. And speaking of this topic,
+I don't know if you saw this, but there is this kind of hate speech bill that passed out of the
+Assembly and the Senate in California that's now on Gavin Newsom's death to sign, which basically
+would find social networks that allow content.
+to show up on their social network
+that the state of California
+deems to be hate speech.
+And so whatever language or terms
+the state of California calls hate speech
+and you could see how this could become
+a very slippery slope very fast,
+they can now find a social media company
+millions of dollars
+which in and of itself
+could actually propagate a whole new censorship regime
+where people that are using certain terms
+that in that era are considered bad terms
+or hate speech terms,
+they're afraid that they don't want to get fined
+tens of millions of dollars
+so they block all that content.
+And I do think that if this gets signed by Governor Newsom,
+it could trigger a whole new kind of censorship battle in the months and years ahead.
+We'll see.
+Well, I think that's exactly right.
+I think the bill you're referring to is SB 771,
+and it is an EU-style suppression of quote-unquote hate speech on social networks.
+The problem is that there is no definition of hate speech.
+That's not a category that exists.
+It's just whatever the people in power say it is.
+That's right. And so there is no constitutional exception for hate speech under the First Amendment.
+They reference in the bill, the California bill, because I read it, civil rights statutes which speak to
+certain types of discrimination, certain types of hate speech. But to your point, those words are not
+defined. And so what ends up happening is you could say, well, using that word is discriminatory to this
+group in some way or using that word is hateful because it offends another group. And suddenly
+you start to blur the line between what the average person might call hate speech and what
+perhaps some people in an administrative body are calling hate speech. And suddenly it becomes
+more like, hey, is this really a civil rights violation or is it just offensive content? And it's
+a very slippery slope that offensive content suddenly can get wrapped up and be called hate speech.
+and then the government starts to tell us all
+what we aren't allowed to say
+and we're obviously seeing the repercussions
+of that in the UK right now
+where the police are knocking down doors
+to arrest people for putting stuff on Twitter.
+The direction I thought you were going in a minute ago
+was that it sounded like you were saying
+that it's good that we've learned
+all these lessons from this COVID period
+where YouTube and metadata
+and I change my mind.
+Yeah, and I think that's exactly right.
+I don't see any evidence
+that I'd say especially the political left
+has learned its lesson.
+You got Gavin Newsom now
+trying to ban hate speech in California.
+By the way, he also signed that bill
+was it like a year ago
+banning parody.
+Remember that parody videos?
+I do remember that.
+Yeah.
+Political AI, it was like political AI videos.
+Yeah.
+Yeah.
+Because it was in the wake of a humorous fake
+advertisement for Kamala Harris.
+Then you've got these folks
+who on the left are already saying that Sinclair and Nextel need to be punished for not putting
+Jimmy Kimmel back on the air. So in other words, the same people who were saying a week ago
+that the Trump administration jaw-boned ABC Disney that that was fascism. But if they jawbone
+Nexel and Sinclair, that's democracy. I mean, it's completely hypocritical. I'm not convinced
+anyone's learned a lesson from this. And just to be clear, I don't think Jimmy Kimmel should be taken
+off the air or censored or whatever. I'm pretty sure that his show is not going to be back next year
+because it's got such low ratings. I don't think there's really a need to censor him. It is true that
+there is a public interest requirement for using public spectrum, but nobody seems to agree anymore
+on what's in the public interest. I completely agree with what you said last time. We just got to
+auction off that spectrum. We don't think we don't need that spectrum. We have the thing called the
+internet now. And so we don't longer need broadcast television. And there shouldn't be a government
+regulated broadcast television system where they're deciding what is and isn't appropriate content
+and in the public interest. That just doesn't make sense for the government to do in a market
+that's supposed to fully support free speech. And I agree. I agree. I think the Jimmy Kimmel issue
+should be up to the people that are spending their money to put Jimmy Kimmel on the air and they can
+decide what they want to do with, you know, if no one watches it, they'll take them off. And if people
+watch it, they'll keep them on. That's their decision. We shouldn't.
+You know, I don't think that it makes sense to quote cancel or ban someone for saying something
+that's offensive. And I think that if you do it on one side, eventually it'll happen on the other
+side. But that's a tried and true point in free speech advocacy, obviously.
+Yeah. I mean, look, you could definitely argue that throughout history, both the right and the left
+have sought to censor inconvenient speech when they've been in power. But again, I just think
+this is one of those issues where just because both sides have done it throughout history,
+doesn't mean that in the present day, one side isn't a lot more guilty of it than the other.
+And you see this with whether it's Scott Weiner and Elizabeth Warren, jawboning, Sinclair
+and Nextelda to keep Jimmy Kimmel on the air, or whether it's Gavin Newsom, possibly signing this bill
+to ban hate speech in California.
+Well, do you think he'll sign it?
+I don't know.
+If he does not sign it, if he vetoes it, will you give him credit?
+Yeah, for sure.
+That would be a good sign.
+Yeah.
+like when he vetoed that AI bill
+I thought that was fantastic
+and I give him a lot of credit for that
+I think he's
+look he's not a completely unreasonable person
+and there's points when he realizes things
+across the line
+yeah which by the way is scary
+because then I think about who's the next governor
+these things pass out of the Senate
+and the Assembly
+and he's the only thing standing in the way
+scary
+Gavin Newsom isn't even the craziest person on the left
+I think we can all agree on
+yeah
+I'm not a fan, but they're way crazier people.
+But let's see, I suspect he will sign it because I think the left very much likes this sort of thing.
+You see it in Europe.
+You saw it in the Twitter files.
+See it in these acknowledgments that YouTube has just made.
+You see it in what Zuckerberg told Rogan about the censorship that meta was pressured to do.
+I think there is a clamoring on the part of the left to silence speech that they don't agree with.
+And they do call it hate speech.
+It's speech they hate.
+and the right in a fit of peak when they're angry about the assassination and one of their heroes,
+are they capable of saying that Jimmy Kimmel should be taken off the area? Yeah, but is that something
+that's been broadly acted upon on the part of the right? No, it's not. The left is the one
+that's engaged in massive amounts of speech suppression over the last few years. It's not a both-sized
+problem. So I hope Nussim will veto that bill, but let's see what happens. I hope he vetoes it.
+I think it would be an incredible statement if he did. But if he doesn't, I could
+see why this creates effectively a free option for him, for the Democrats, for whoever's in charge
+with administering California statute, giving themselves basically a free option on whether or not
+to enforce it and how to enforce it, it creates a mechanism. And I just don't like that mechanism
+existing, obviously, but I could see how a system in power can find this to be a good mechanism
+for maintaining power and influence or at least influence over speech. I think Newsom's going to have
+to sign it into law because that's what his base wants
+and he intends on running for president in a few years
+and it's not just the California base
+it's the overall base of the Democrat Party.
+I don't think he's going to want to risk alienating them.
+And even if he harbors some qualms,
+which I'm not sure he does,
+he probably realizes he's got the Supreme Court
+to back him up in the sense
+that they're probably going to find this unconstitutional.
+They're going to throw it out,
+but he can still send a message to the left
+that he's with them,
+that he wants to suppress
+conservative speech just like they do
+so I suspect you'll sign it well we'll see
+all right thanks everyone
+sacks have a good drive wherever you're going
+thank you guys for joining us
+sorry we lost our other besties this has
+been your favorite podcast
+the all-in podcast
+I am your closing host
+Dave Friedberg joined by David Sacks
+goodbye to Chimoth Polly Hopatia
+and JCal will miss you guys
+bye bye
+let your winners ride
+Rain Man, David Sack.
+I'm going all in.
+And it said, we open source it to the fans, and they've just gone crazy with it.
+Love you, West.
+Queen of Kinwa.
+I'm going all in.
+What, your winners are fine.
+Besties are gone.
+That's my dog taking a lot of your driveway sex.
+Right, no, no.
+Oh, man.
+My habitatacher will meet me at play.
+We should all just get a room and just have a room.
+get a room and just have one big huge orgy because they're all just useless.
+It's like this like sexual tension but they just need to release them out.
+Wet your beat, wet your beat.
+We need to get merches are fast.
+I'm doing all in.

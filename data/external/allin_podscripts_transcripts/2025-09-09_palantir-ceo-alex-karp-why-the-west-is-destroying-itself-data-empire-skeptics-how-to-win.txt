@@ -1,0 +1,668 @@
+source: allin_podscripts
+published_date: 2025-09-09
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/palantir-ceo-alex-karp-why-the-west-is-destroying-itself-data-empire-skeptics-how-to-win
+title: Palantir CEO Alex Karp: Why the West is Destroying Itself, Data Empire, Skeptics, How to Win
+
+Sometimes traditional stock analysis just let you down.
+That's how I feel about the stock of Poundier.
+A billion dollars in quarterly revenue for the first time ever.
+The stock has just ripped.
+They have delivered here beyond the expectation,
+and the expectations were obviously remarkably high.
+Carp's the kind of guy who kicks you, you know what,
+and then he gets in your face afterwards,
+and he tells you that he just did that.
+As usual, I've been cautioned to be a little modest about our bombastic numbers.
+If you work for Palantir, everyone knows you're good.
+And to all supporters of Palantir,
+Merry Christmas and a Happy New Year's,
+and to all people who hated on us, enjoy your call.
+Ladies and gentlemen, please welcome Palantir CEO Alex Carp.
+Great to see you.
+Thanks for coming out.
+Amen.
+All right, I'll see you.
+Thank you.
+Thank you.
+How are you?
+Doing well.
+Thanks for coming out.
+By the way, thank all of you guys.
+Great crowd.
+You have the best people.
+So you have a lot of fans here.
+Yesterday we also had a number of protesters.
+Hopefully enough.
+What are they protesting?
+They're protesting Alex Karp being here.
+Categorize for me what's going on.
+Who are the protesters?
+Why do they protest?
+Who are the fans? Why do they love you? What can you see? Good taste.
+Good taste. Well, there is an issue of taste and I think actually, you know, like, you always have to kind of try to steal man the other side.
+And so like probably the people protesting me just have heard that they should protest me. But, you know, if you ask why could they
+have an argument or why do why should you like me love me some cases honestly
+some of you guys like and love me more than I like myself which takes a little
+work but the I think this audience as an example though is almost unfair because
+builders basically learn from watching like highly highly talented people
+basically put a discount rate on everything anyone says
+and measure accomplishment based on outperformance against that discount rate.
+And you'll find if you're managing future builders,
+anyone who's palatarian shape,
+that de facto you get street cred by outperforming against expectations
+where expectations are kind of multiplied against a high discount rate.
+So I think what you'd find in this audience is,
+two things converging. One, you know, the journey of Palantir is completely counterintuitive and
+especially technical experts. You know, the FDA thing was viewed as like you weren't going to get
+a multiple. I was viewed as like this magical wizard who could get the smartest people in the
+world to work on something that was de facto stupid. We were quote unquote terrible at public relations
+and we stood up for the U.S. government even when it was really, really unpopular. And then
+And there are a lot of people in the audience who agree with that, but I think as importantly,
+look at the results, look at the fruits we bore, look at the people we have on our side, and
+then you get to the other side.
+And again, it would be easy just to dismiss the other side is, I don't know, stupid, they
+don't know what's going on.
+Let's just take the intellectually rigorous version of why you would be against what we're doing.
+There's a misconception that AI and tech is going to exclude everyone who's not
+in this room and so a lot of people who are protesting actually what they're
+protesting is there's no way to get in this room and in fact the way the way
+aptitude and the way the implementation of things this work they're just
+wrong and because they've assumed that they then go into what I would call
+super regressive non-working philosophical or empirical models where they
+assume the losers are noble but actually what they're really assuming is
+they can't win
+And then you get to more subtle things.
+I do think there's an issue with our lead institutions that have taken the best and brightest
+and most valuable things you could teach someone and have turned it into some kind of
+Stalinistic bullshit that is anti-correlated with everything that works in the West,
+which is like individual accomplishment.
+And if you had to say, what is the central value, what is the central
+thing we do in America better than anyone else. It's like allowing people to express their
+individual artistry in a way where you fucking win, like with no apologies. And then because they
+think they're on the loser side of this, they assume morality can't be against them. And then they
+are trained to believe that and to understand it. Of course, if you're a professor of Berkeley
+teaching about Heidegger, you think losing is good because you lost.
+That's, of course, the whole reason you think that.
+You think that because you are the noble loser.
+And this, but again, where it gets super, super dangerous and where I do think we have to do a better job is,
+you can't just assume there's no truth in what they believe, which is like we have not done an even adequate job of helping people at the bottom.
+Is some part of their criticism about the situation?
+situation in Gaza? Oh, so I'm getting, now you can get to, no, well, first of all, I get yelled
+out about, you know what I get yelled at most about is actually enforcing the border. That's
+number one. So like I get, our southern border. Our southern border. Like, so again, I'll go through
+all three years. I get yelled at about, first of all, for decades I got yelled. So there are legitimate
+issues to go over, but I just want, for those of you don't know the history, I've been
+yelled at for 20 years and protested, primarily for supporting special operations.
+in America. And you just got to imagine that. I'm being protested for bringing soldiers home alive
+and killing our enemies. And these are people who serve our country and have been largely
+screwed by both parties. Like, both parties have totally screwed them. And so I've been
+yelled, so that's what I got yelled at. And then I got yelled at about that every single day.
+Then I got yelled at under Biden, under Obama, Biden, and especially obviously, obviously, if Trump's
+doing it, you're definitely getting yelled at, for enforcing the border.
+Now, I want to say, I don't understand how in the world of AI you cannot be for somewhat
+of a constrained border, because we can make it work for every single person who's actually
+American, and we can make laborers more valuable.
+We need extra labor that's not either completely the most talented in the world, like many
+people in this room, or who are bringing skills.
+Also, we have enough transparency, you can't say you don't know who's in your country.
+It's complete BS.
+It's completely anti-correlated, by the way, with being progressive.
+I grew up in the most progressive family ever, and every Friday night at Shabbat,
+there was a lecture on how the Republicans are screwing our country by undermining the worker
+and bringing in cheap labor.
+So, okay, so I got yelled out about that.
+And then I fought about that, actually mostly, and then commercially got yelled at about
+how could you have these FTEs is going to blow up your multiple.
+Now everybody wants to be an FTE.
+But, okay, so now I'm getting yelled at primarily about ICE.
+What's going on?
+How's it going on?
+Is it treatment just?
+The one thing I would say, and we can go through each one of these individual things.
+The weird, the obvious fact is, if you care about not being surveilled illegally, if you
+care about the treatment of people who come into the country illegally but deserve adequate
+treatment.
+If you care about lives in Gaza, in Ukraine, and all over the world,
+where Poundeers use, you're going to want the best software in the world because this is the only
+way you can reduce and more precisely target the people and justify the way. And actually,
+the only way where you can say, this person did this and they deserve to go. And so, you know,
+and in each one of these things has to be steel manned and then. Let's do that for the second
+one, the border. Tucker said yesterday when he spoke to President Trump, there was no way to know,
+Is there 30 million, are there 30 million people here illegally, 40, 50, whatever it happens to be?
+You say you call BS on that.
+We could easily do it.
+I just say we could easily do it, and I'm not calling BS on that.
+I'm actually saying it's a very, very hard problem.
+But in the world of AI and software, you can't say it can't be done.
+It could very easily be done if we put cameras everywhere and we just did facial recognition.
+But we don't want to live in that.
+It could be very easily done if you eviscerate our civil liberties.
+Yeah, that's not being done.
+Right.
+That's like, I could grow your revenue at 400%, but I'll lose money in perpetuity
+is not a business.
+Yeah, of course.
+And so let's talk about what the solution to that would be.
+The border issue is actually a bit overstated.
+You have 80, 90% of the country believes the border should be orderly.
+That is actually something that most people believe.
+Okay, sorry, I just got to interrupt you.
+89% of people believing it in it happening are completely just non-connected.
+Well, of course.
+Whatever the reason the Biden administration didn't do it, you know,
+That's over and now we're here and it's closed, but what would your solution be to identifying the people who are...
+Well, again, I think you're jumping over a lot of things.
+There's like, it's, it happened, okay.
+What's interesting about political parties in America is that they're anti-correlated with what they claim.
+Democrats claim to be progressive like me, having a border is not progressive.
+President Trump is conservative, having a border is progressive.
+And unfortunately, until we change our polity to the people,
+actually get a say on the border. By the way, the single best example of this is in Europe.
+So how do you explain the complete dysfunction in Europe? You know, most Europeans, Germans,
+there are many Germans in an audience. Hello. How many of you guys don't, how many
+you guys are happy with the immigration situation you have in Germany? None. How many will talk
+about it publicly? How many will do anything? And then you get to these issues. The polity
+will frame the issue so that there is no solution. The only solution is to accept a
+solution no one wants. And that's what we had. And it's not, and part of the problem, the reason
+the border is such an interesting thing is the reason you get an open border is politicians do not
+want to address the real problems of the society, which would mean the workers of today have more
+value tomorrow than they have today. Because they have no earthly clue how to do that, they're like,
+we'll just open the border and we'll get free labor. And if you're on the left, we'll get people
+who will vote for us. And it's like, but, and the reason, the way in which if you kind of
+to steal man your questions, Gaza, Ukraine, border, you have to raise the moral standard.
+So it's not, again, the way you led this is like if we just put up a camera.
+Yes, you can stop terrorism or you can have civil liberties.
+It's a little bit like you can have growth without revenue or you can have revenue
+without growth.
+If you want to solve the problem, you have to increase civil liberties and stop people
+from being in your country illegally.
+And the reason it doesn't happen is because there's slippage in the execution.
+which is absolutely purposeful.
+And if we don't want this country to be what Europe is now,
+and I lived in Europe most of my life,
+my grandmother, if German law,
+would make any sense, would be German,
+and I would have a German passport.
+If we don't want that,
+you have to close the border,
+you have to make sure that people who have a right to be here
+get to stay, people don't have a right to stay,
+get treated fairly.
+By the way, both sides have to step up.
+It's not enough to say,
+I'm against the border or whatever,
+but I have no solution for what's going to happen for people, which is unfortunately what my part is.
+What's your solution for, just your personal solution, for what to do with 30 million people who are
+here illegally? What would you do? Well, first of all, I mean, my personal solution would be you
+divide the pie. Everybody who's criminal, criminal adjacent or has anything to do with crime
+is going to leave, and I'm going to make it so that they self-deport because I'm going to come
+tomorrow in a way you don't like it. That's number one. And there's,
+That's easy.
+That's easy.
+Yeah.
+No, you have a lot of...
+No, no, it's easy to agree on.
+Nobody wants felons here.
+It's easy.
+Yeah, but the paradigm is like, it's easy because, again, you're like civil...
+At any case, these things are much, much harder than they look.
+As an example, how do you do that without eviscerating our civil liberties?
+How do we make sure the criminals...
+How do you know someone's criminal?
+What standard of practice to use to define if someone's criminal?
+Are all criminals the same?
+Because de facto, if you go broad brush the way you basically...
+are, it's like, yes, but being in the country illegally is a felon, killing someone
+or potentially kill someone a different kind.
+How do you deal with the people that are around them?
+How do you deal with law enforcement people, databases that are not made public to you?
+How do you deal with imputed data?
+How do you do, do you do predict?
+That's the question, so you're restating the question.
+I'm asking you to answer it.
+Well, I'm restating the question, so it's a question.
+Okay.
+That's the thing.
+I'm hoping you'd answer it.
+Let me flesh this out a bit.
+So look, everyone on the right at least agrees that we should have a strong border.
+One of the criticisms or concerns that I hear on the right or from civil libertarians is that Palantir has a large-scale data collection program on American citizens.
+So not foreign terrorists, not illegals, but American citizens.
+Can you just clear that up and say that either Palantir is not doing that or under what circumstances you do?
+Yeah, so, first of all, I just want to, like, Palantir, like, there's a technical version,
+which I'm going to give you, but we had a Democratic administration come to us and basically
+ask us to do a Muslim database.
+Now, you would think, given the way I'm kind of besmirched as, like, some kind of, I don't
+know, it's like a Jewish conspiracy, that would be the first thing, according to them, I would
+do.
+We've never done anything like this.
+I've never done anything like this.
+To actually understand the answer, and I love these questions about the skeptics,
+I actually love skeptics.
+Like I tend to divide the world into, you have Pallentier derangement system syndrome,
+which I don't spend a lot of time on, and I think they're anti-builder.
+You have Pallentier skeptics, and you have people who don't like Pallentier.
+If you're a Pallentier skeptic or you don't like us, I want to engage.
+And any technology that works can be abused.
+We are the single worst technology to use to use to
+abuse civil liberties, which is, by the way, the reason why we could never get the NSA or
+the FBI to actually buy our product.
+And until recently, like, SIGN institutions would never buy our product.
+Yeah, you laugh because it's like obvious.
+If you want to do data analytics in a way that eviscerates our civil liberties, you don't
+want accels, you don't want branching, you don't want pipelining.
+You don't want logs.
+You don't want logs.
+And like, you don't want serialization and deseriorization in your product.
+If you have serialization and deserialization in your product that's intelligible, you are basically
+creating a product that's going to be really, really hard to abuse.
+And the logs are immutable in Palantir.
+So like, and by the way, the single most civil liberties heavy place in the world is hating
+on us every day.
+And you know what they're buying every day?
+Palantir.
+It's called Europe.
+And you know why?
+Sorry, I want to get to this because this is important.
+Because I get basically attacked by skeptics and anti-Palentire people that deserve any.
+And by the way, do not.
+This is a lesson for you.
+Do not believe anything I'm saying.
+And if you're online watching, I don't know, Nick Plentes, call me the Jewish conspiracy,
+do yourself a favor and say, yeah, that could be really interesting.
+Spend 20 minutes looking at the product, 20 minutes looking at the product and say, is this
+not the hardest product to abuse in the world?
+Is it not built to be?
+And by the way, and then I'll get to direct answers of your questions.
+And by the way, that's made me very rich because the civil liberties protections we built
+into PG are the same things that we use to orchestrate large language models, the same
+way we orchestrate internally, and the same things you will need to make any enterprise
+in the world work, because every enterprise in the world, public or private, needs deserilization,
+accels, branching, some kind of scaffolding to make the LLMs work, which means the LLMs
+have an ability to do a taxonomy on your business, but without touching the business, that
+you can control where they're deployed, that they don't have access to your data, that you
+have immutable logs and that you can measure the output against both any, against high fidelity
+data sets that can be viewed in any way permissible, and that the permissions are enforced.
+So, hardest product in the world to abuse, I'm telling you, we've never done anything like
+this, please verify, do not trust me, certainly do not trust the people.
+By the way, as a rule, and the one thing I would say critical on the outside, do not trust
+anyone who's never built anything it's so easy to have all these opinions you have all these
+fucking opinions about how the world works how data works how businesses work how we got off
+the ground I'm a conspiracy somehow they gave it to me but not you even though like I be the
+least likely person to get to sue the US government twice we had to hire the most important
+engineers in the world and be laughed and chat upon by the whole world for 20 years before
+anyone took it seriously because we were a conspiracy and you know why people believe it
+because they've never had a job, they've never built anything.
+And anyone who has, no, that's just not the way the world works.
+For me to succeed, just like for you to succeed,
+you're going to have to be 10x better than anyone else in the room, or you will fail.
+And that's true for me, that's true for you, that's true for every American.
+And it's always been true.
+Sorry, I've got to get to this.
+And anyone who tells you, anyone, anyone who tells you that's not true
+is you are the mark.
+You are the mark.
+If you're being taught, and that's what I would tell the protesters or the college, you're the mark.
+They're telling you, I'm succeeding because I just got it handed it to me, and somehow it's unfair.
+No, no one handed anything to anyone at Palantir.
+PG is still the best product on the market.
+No one even tries to compete it.
+Foundry, go ahead.
+Go try to organize a team of people as good as Palantirians.
+Go ahead, try.
+Try to do it for 20 years.
+Try to build a revisioning day.
+I would like to try to ask a question.
+Sorry, one second.
+All I want to say is, I'm glad you're on our side.
+Side.
+My Lord.
+Bigotene pouch?
+Try to...
+Try to...
+I don't need it.
+Try...
+Try to build ontology and FTEs five, six years before anyone thought it was...
+Try to raise the capital.
+Try to be left it.
+But to your questions, no, we are not surveilling U.S. citizens.
+No, our data is not being used to aggregate and to create imputed weight.
+Because you could say, do you do it directly?
+Do it do it indirectly?
+That's a fair question.
+No.
+Don't have to believe me, but I've never done it in 20 years.
+I've told every single important, I do a lot of constructive engagement internally, like with countries, because, you know, people know I'm kind of on their side in the West.
+I've told every single major leader that's out of that I would not do something, and it's cost.
+And by the way, it's cost Pallantier a lot of money.
+We never worked with China.
+We never worked with Russia.
+We never worked with adversarial.
+We got laughed out of the same room.
+Okay.
+Okay.
+This morning, there was a report that there was some sort of an attack that Israel affected
+inside of Qatar against the terrorists of Hamas.
+I just want to give you a chance to talk about Israel, Gaza, that whole conflict.
+You've talked about it a lot.
+You have a lot of opinions.
+People have tried to obviously attack you and mischaracterize some of the things you said.
+Well, actually, they've often characterized what I've said correctly.
+Oh.
+So, but okay.
+Yeah.
+Yeah, I suppose, look, they're, the Israel, they're for me just, before he gets as big,
+they're fundamental issues.
+Does Israel have a claim to the land?
+Yes.
+Does Israel, yeah, so again, like, does Israel have a right to defend itself?
+Yes.
+Has Israel done something America would not have done under certain circumstances?
+I think America would have been a lot more brutal.
+And again, now, then you get to the humanitarian thing, and I'll say, abstracting from there,
+I believe progressives in this country are working day and night to hurt poor people in this
+country.
+I don't believe they're progressive.
+And I would say, I do not, I believe through direct and indirect engagement, I'm clearly
+not in favor of Palestinian innocent people being killed.
+I am not in favor of that.
+And I'll tell you, so then the question.
+is, are you allowed to fight war? And then the other point is, if you want to minimize human
+life, innocent human life being killed, you're going to have to use software. And this is going
+to have to be better in the future than it is now. It's true Israel's ratio of, like,
+casualty, innocent to non-innocent is better than anyone else ever had in the history
+humanity. And it's going to have to be better in the future. Does your software help send
+aid to the refugees or Kenet? You have to be very careful. I like, I want to,
+avoid, like, I can't go into exact, like, I'm not allowed to say where we're used,
+where we're not used. But then there's some times a trick people do. It's like,
+oh, I'm not used for this and I'm not used for that. When in fact, you know, we are used in
+Israel. And like, I would say, as a generalization, where we're used in Israel, most people
+in this audience would be very supportive of. And it's, and it actually has been very precise
+and deadly. And I support that. Alex, yesterday we had Tucker here. And he made some references
+to opening borders, declining fertility rates,
+and actual programs for assisted suicide in Canada,
+all of which may speak to the West's intention of committing suicide.
+Do you think the West generally is committing suicide?
+If so, why?
+What gets us here?
+I mean, you have to disambiguate America.
+Like, I walked around your audience.
+this isn't not an audience committing suicide.
+This is an audience fighting to win.
+And before I get to this question,
+and the one thing I would tell you guys
+is you're going to have to fight to win
+because currently I'm one of the few people,
+other people on stage who speak up,
+you're going to have to speak up
+and explain to people
+why you have the right to win
+or it may be taken from you.
+And so you're going to have to fight.
+And by the way, here I mean,
+I don't mean left right here.
+Both parties need a little bit of kick in the ass here.
+like it's like it's just you know we we have a right to win we need to win and you have an
+individual right to fight to win in this country and it should not be taken away from you and it
+could be if you don't stand up and tell people no your idea is ridiculous and this is let me
+explain to you how this works then i mean the country i for those of you don't know i spent half
+my life and i wrote this PhD in germany and so it's a country i know france reasonably
+well actually but um so when i'm talking about europe europe is obviously not europe you have
+East and West Europe and Eastern European countries are very, very different than Western European countries.
+Denmark's very different and the Nordics are very different.
+But generally when people in this country are in general talking about, you know, committing suicide,
+they're really thinking in their mind's eye Germany.
+It's like you have a country with, you know, arguably, you know, had, you know, pre-software AI,
+the best industrial base in the world, the best schools in the world, they have vocational schools.
+So like, you know, Germany, unlike, you know, they never neglected, they're working
+class. Like you have two different kinds of vocational schools in Germany. You have for
+like lower level and high level vocational training in Germany puts you on the factory
+floor doing important things and you earn a real salary with real benefits your whole life
+and have rights. It has best health care, best life. And for those of you who embrace
+a lascivious lifestyle, by far the best. Think about it. And so really the high, and the highest
+level of data protection, highest level of integrity, best position to win. And okay,
+And suddenly you got, you know, the energy, they basically blew up the energy market, they blew up immigration, and they blew up essentially, you know, their tech scene.
+And it's like, and now it's like very hard to ask and answer the question, what is the future?
+And I mean, as a kind of sideline diagnostic, and like Peter and I, who they should be calling every day on Speeddale, like they spend every day talking about us, for those of you're German, you'll know, like every single day, three times a day is Peter.
+is Darth Vader, and I'm Lord Sith.
+It's like, and like, meanwhile, they should be calling us.
+The way you commit suicide in the West is you stop believing that your particular culture
+has something superior in it.
+Like, yes, Germany screwed up a lot of stuff in World War II.
+But to believe that there's nothing special, unique, and uniquely valuable about German culture
+is insanity.
+It's like complete insanity.
+And there's nothing wrong with saying you're proud to be German.
+Like in German, you're literally far right of center if you're like, yeah, he's been
+Stolte, Stoiches-Ein.
+That will put you like, I'm proud to be German.
+So like, like there are, even at Palantir, one of the crazy things about Palantir is
+how German we, like we take everything to like every question to like the nth degree and
+then recantinate the thing before we make a decision, every single person.
+person at Palantir. So, you know, I get that, you know, Germany has this problem to some
+degree with being able to look in the mirror. But what about France and Britain, right? They won
+World War II. Why, what's, why are they pursuing the same policies?
+Canada. And the policy we're talking about, just to be clear, is just allowing an extreme amount
+of immigration. Well, I'm trying to, I'm trying to, I'm trying to ask if there's a thread
+that connect declining. But again, the jump off place here is for very different,
+and very non-connected reasons,
+they all decided there was nothing special about their culture.
+And again, France's would be an even better example
+because they have a much better narrative.
+They actually had a resistance.
+It wasn't as big as people say, but it existed.
+France, you know, the crazy thing about LLMs is
+it should have been built and, I mean,
+the whole center of gravity should be in France.
+Like, the two best math cultures in the world are Russia and France.
+And like, we hire a,
+nauseam from France. So, but France, they gave up on two things, and France actually might even
+be the better example. If you, in France, for those you are in French, France is religiously
+focused on meritocracy. So they have this one school you have to get into. It's all about math,
+and the reasons about math is the socialist in French, and France decided that having like
+verbal, high verbal IQ was a class-based thing. And so they religiously into meritocracy,
+and the whole definition of it is mathematical aptitude.
+France is complicated.
+You have far right, far left in between.
+Somehow and in other countries,
+it's very hard to articulate in France
+why you think French culture is better
+than any other culture in Europe
+from a French perspective.
+And then, for example, concretely,
+if you want to build a product,
+if you build it in France,
+it should be absolutely mathematical and aesthetic.
+If you build it in Germany,
+going to have to be conceptual and manufacturing base. You're going to have a different tech scene,
+a different way of organizing it. And then last not least, and this is the thing we have to fight for
+the most, they become anti-meritocratic. So like if you're in Germany or France and you're the best
+of the best of the best, you're going to wait 30 years before you have a real job. Why? Because
+why did they become anti-meritocrat? Well, there's, again, the people out there protesting or
+people, the faculty members at Berkeley have taught them to protest.
+The, yeah.
+A lot of strays for Berkeley.
+Well, we can pick on Stanford.
+The chance it will be in a few hours.
+But they equate morally losing in the real world with winning in the, like, immorally.
+And it seems like a crazy way to think because in the end everyone losing.
+So, and I asked this because I heard someone have a talk about,
+this where the moral spectrum used to be strong and weak, you know, cavemen, the strongest
+would survive and the weakest would die, and that was how we measured what was right and what
+was wrong.
+And then what became right and wrong was this notion of good and evil, turn the cheek,
+compassion, et cetera.
+Now, I mean, there are many, many different schools of Christianity, and so, like, even
+in this case, like Lutheran Christianity and Catholic French Christianity are basically
+correlated. They're both Christian. What's special about America was Calvinism. Like, we are the most
+Calvinist culture in the world. And actually, the protesters are anti-Calvinism. What does Calvinism mean?
+Calvinism celebrates success. De facto, almost everybody in America that is, whether you're Jewish,
+Muslim, Christian, the underlying backdrop of America is this Calvinist view. And the anti-Calvinist cultures
+of Europe, Lutheranism, other kinds of cultures, they do equate, like, you know, behind every
+great success is a great crime, is a famous Volterian classic. And it's, and we don't have
+this in this country. If this slips, you basically end up in a situation where everybody who
+is is succeeding or is perceived to be in a group that is disproportionately succeeding ends up
+on the firing wall. And what does that happen to the whole society? You know, one of the more
+Are we seeing that with anti-Semitism?
+One of the more interesting facts about France is between 61 and 91, their GDP grew faster than America's.
+So this is a very special culture.
+Now, the anti-Semitism, well, I don't particularly, like, I actually think it should be disambiguated.
+I actually, like, someone liking or not liking a Jewish person or being skeptical of Jews, that's irrelevant.
+Somebody who has Jewish derangement syndrome that wants to burn down the whole society to get rid of the obvious fact that Jews do well in their meritocratic situation.
+That's a problem for everybody, not just for Jews.
+And it should be very much focused.
+Like, you know, in private, I'm very critical of, like, these advocacy groups,
+and I'm constantly hanging up on them.
+And, of course, I'm not going to give you any fucking money.
+This is the most ridiculous bullshit ever.
+Like, it's like, what the fuck?
+It's like the best culture in the world.
+We got some, but like, the, like, the thing that becomes dangerous
+is when you have, like, derangement syndrome.
+And the derangement syndrome comes from, yeah,
+You know, if you're a classic, the classic liberal inputs have to be really, really fair as fair as we can make them, and outputs are never going to be fair.
+Alex, can I ask you about China for one second?
+So we talked with Tulsi yesterday, and one of the things, you know, just to connect the dots, like we were able to designate these cartels as terrorist organizations, there's all this drugs flowing in, we're trying to shut that down.
+The precursors are still coming in very aggressively from China.
+And so I'm just curious, what is the geopolitical frame that we need to think about China in?
+How much are they facilitating everything that's happening at the southern border?
+How responsible may they be for the fentanyl epidemic in the United States?
+What should we do about it?
+Well, you know, it's funny.
+Like, obviously Palantir and I are wildly skeptical of the CCP.
+But, you know, I think I'm the highest ranked Chi Chi practitioner in corporate life in the world.
+and it's like in you have like sorry say that again you're like s level tai chi
+well you know like that video that was very high level internal martial arts i'm not at
+that level but i i mean among my corporate peers it's like yeah i have the equivalent in v o two max
+terms of like a 72 right or something like that and uh in tai chi and the the you you the way
+the way the kind of part of the culture that i admire
+works like in Tai Chi is you put pressure on all parts of the system to expose the weak part
+of the system internally of your adversary. And that is just the way Chinese, like at least
+Tai Chi martial arts works. I mean, they're not useful for fighting, but it is very useful for
+thinking Tai Chi or as useful for fighting as, you know. So, and if you want to engage the way
+the way in engagement with China works is you make your, or in Tai Chi terms, you want to
+engage with China, you better make sure the internal dynamics of this country are very strong.
+It's magically the external dynamics over there will shift. Are they trying to destabilize our country
+with fentanyl, with TikTok, and do you have concerns about that? Well, okay, obviously, yeah,
+obviously, but again, I'll tell you what, so they're obviously. I'm in full agreement.
+No, yeah, no, but like, but my version always of this is it's their job to destabilize us. It's our job
+to be stable. And like, you know, it's like when you're, most people here,
+running successful businesses.
+It's like,
+it's like, it's like, it's our stable.
+Like, if you want to, the Tai Chi version of like,
+you're not going to have to enter the fight if you're strong.
+There is no fight.
+If there's a fight, you, like the famous martial arts thing is like,
+if you're in a fight, you're not a martial artist.
+Correct.
+And this is like the same thing in business.
+Like when you get to the point where you're competing with someone,
+you've really sucked something up.
+Like, if you look at the Pallentier version, yeah, do FTEs, do ontology,
+do, do, do, do ontology.
+orchestrate them at scale, grow 93%.
+People don't want or work with the U.S. government.
+Like, it's people are like, that's kind of hard and really unfun.
+Let me give you a precise question here about these cartels
+who are bringing fentanyl into the country.
+They're killing 100,000 Americans a year.
+9-11, we lost 3,000 people tragically.
+If they're not terrorists, then how would you define them?
+And should we be using the same test?
+as to our engagement with them, and should we be eliminating them as terrorists with prejudice?
+Well, I obviously agree with that.
+I think, honestly, the problem is they even think they can get away with this.
+Like, one of the more interesting things is when you read people who are against America
+taking out these narco terrorists, it's always something like we've got to use a reified
+meaning overly deterministic form of law to the point where America has to die.
+Back to your question.
+Yeah, due process for al-Qaeda makes no sense.
+Well, it's like the interesting thing here actually with a point of agreement is if you allow,
+okay, just take like an obvious example of like fraud, human rights watch, okay, so they'll take
+a standard, they'll move the standard and then the downstream consequences of it is that we've got a
+disappear and die. Right? And then, but then even worse than that, they're actually paving the
+way for a fascism because Americans and no one else are going to tolerate that level of
+dysfunction. These fuckers are killing 50, 100,000 of our people. The fact that they think they can
+get away with this is a real problem. We should just, and it's like, and the fact that somebody's
+going to say, it's, again, you have the European version, it's like, you know, or any, it's like,
+if you allow, you have to protect the data and find the terrorist.
+because otherwise you get a form of fascism.
+You get it on the left because we have terror attacks
+and fentanyl across our street, and you get it on the classic far, far right,
+Alex, what did you mean earlier when you said progressives want you to be poor?
+I may be paraphrasing incredible.
+The modern progressive movement is clearly not progressive.
+Progressive is defined by the working class, do better tomorrow,
+than they did today,
+and know it.
+Right.
+Okay.
+To do that, you need things that you can do at scale now.
+Vocational training on AI-based systems.
+Making our laborers more valuable.
+Obviously, closing the border so that you don't reduce the amount that you pay people
+and also eviscerate legal protections.
+This is not progressive.
+It's not progressive, by the way, to have so little competence or willing to use force
+that we get overrun by drugs.
+Who do those drugs go to?
+Disproportionately poor people of color.
+It's not progressive to have crime reach.
+You know, to be a civil war zone, to be a war zone,
+you have to have five deaths per 100,000.
+That's like half our cities.
+How's that progressive?
+What you mean, you care about poor people so much,
+you're just going to let them kill each other?
+All right, can you put your shift gears here.
+So, Alex, I think you've developed a little bit of a reputation
+of a defender of the West,
+and you've talked about that here.
+I'm wondering, can you criticize any aspects?
+of Western foreign policy, like, for example, during the war on terror, was it a good idea
+to occupy Afghanistan, Iraq?
+I've never been a neocon.
+Like, this is the thing.
+It's like, I've never been a neocon.
+I actually don't think that's the pro-Western.
+The pro-Western superiority thing is, we do what we do really well.
+Why are we trying to make people us?
+I've never understood this.
+By the way, the neocon thing, the pro-migration people and the pro-occupation people abroad,
+It's the same philosophy.
+I don't actually think migration's working in the West because people don't want to change.
+I don't think, like, and why are we teaching the Arab Middle East how to live better?
+The countries that I won't go into names that seem to love and revere me in Pallinger,
+they're doing really well.
+Like, they have a way of living their life, it works really well.
+It largely involves different ways of living than we would.
+There's no First Amendment, there's really not a Fourth Amendment.
+And I'm not that interested in that.
+And so I don't, and by the way, I think that destabilizes everyone.
+So I completely, I am against, I am very in favor of using force where it's needed,
+but force where it's needed and doing occupation are completely different things.
+And you will see across the world people who want to convince, like, I don't know,
+convince Afghani villagers to be pro-feminist will also explain to you that the people
+that end up coming here are going to be pro-Western and their values three generations out.
+It's completely ridiculous.
+Alex, I want to thank you for being on our side and I want to thank my wife for buying your stock at $20.
+Thank you.
+No, Alex, we deeply appreciate you being here.
+And I think that your voice is one of the most important voices in the world today.
+And I thought this was such an important voice to bring forward.
+I don't see you do a lot of long form.
+I don't see a lot of your long form get public.
+I think this is so important for everyone to hear, to swallow, to digest,
+and hopefully to evolve and grow from it.
+And I really appreciate you.
+Thank you so much for being here.
+today. Please join me in thanking Alex Carr.
+Thank you.
+Thanks.
+Fuck yeah.
+Fuck yeah.
+Thank you, sir.
+Thank you.
+That's great.
+Yeah.

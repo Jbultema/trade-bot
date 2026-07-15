@@ -1,0 +1,868 @@
+source: allin_youtube
+published_date: 2026-06-06
+video_id: jLICvWE7w2Q
+url: https://www.youtube.com/watch?v=jLICvWE7w2Q
+title: The IPO Comeback: Why Tech Giants Are Finally Going Public | All-In Liquidity IPO Panel
+
+Hey, 2026 could be an all-time [music]
+record for IPOs.
+>> The AI IPO of the year so far. That
+company is Cerebras.
+>> Cerebras Systems founder and CEO Andrew
+Bubman. We are participating [music] in
+something extraordinary on everything we
+do. We are the fastest bar none.
+>> Well, Marshall is the co-founder and CEO
+of Planet [music] Labs.
+>> Space and AI are really um a match made
+in heaven. They're getting married. In
+fact, just like Google figured out how
+to index the internet and make it
+searchable, we are indexing the earth
+and making it searchable. [music] He's
+got his glasses, the famous red glasses.
+Brad Gersner is here, founder and CEO of
+Autoimmet [music] Capital, a leading
+tech investment firm.
+>> I believe that the wave is the biggest
+wave in the history of technology,
+[music] will be incredibly beneficial
+for America. I'm rooting for all of them
+because I'm rooting for America. Ladies
+and gentlemen, please welcome Brad
+Gersonner, Will Marshall, and Andrew
+Feldman.
+[music]
+>> On the couch, we switch on the couch.
+>> Nice to see you, my friend.
+>> Hey, [music] big boy.
+>> Nice to see you.
+>> Last last time I saw you, we were in
+Davos.
+>> Yes,
+>> we were in Davos causing another drop.
+Another JL. Do you hear that little
+Davos?
+>> We were just, you know, it was preipo.
+We're chopping it up
+>> with Davos.
+>> We're in Davos.
+>> Hanging out at Davos.
+>> Well, no. Listen, I was Everybody knows
+the story. I'm supposed to go on my
+yearly Japan ski trip. Sax calls me
+>> with Tucker.
+>> Yeah. Well, anyway, we don't drop that
+name, but [laughter] I'll pick it up for
+you. Put it over here.
+>> Tucker. Anyway, so I cancel on Tucker. I
+cancel because Sax calls me. He says,
+"Listen, Pus needs you, the world's
+greatest moderator in Davos." I said,
+"No problem."
+>> I said, "Saxs, POTUS, and Davos." So I
+said, "When?" He says, "In 3 days." I
+say, "You got it." I go and they give me
+a badge. And it's like the special green
+badge and they buzz you through the
+security and I look at the monitor and
+it says Jason McCabe Calacanis with
+Donald J. Trump.
+>> Oh wow. How did you feel?
+>> I thought it was hilarious. [laughter]
+So then I went and we did a great
+interview there and we did like six or
+seven of these great all-in interviews
+and it was fun.
+>> Let's start this because uh the two of
+you guys run two of the most interesting
+and consequential newly public companies
+in the stock market. Andrew Feland is
+the founder and CEO of Cerebrus. Will
+Marshall is the founder and CEO of
+Planet Labs. But you are also the
+insight and a gateway for all of us to
+understand these two big trends. One is
+in AI silicon, the other one is in space
+data centers. I think it would be a
+really interesting thing to
+>> and emerging.
+>> And emerging. Yeah. Um but let's just
+take one step back. Uh you just heard
+the last conversation about being
+public, going public early. Let's just
+talk about that cuz I'm just very
+curious. How's it been? It's been 3
+weeks or so for you. It's been about a
+year and a half or two years for you. Uh
+>> it's more fresh.
+>> Was it Was it everything that you
+thought it would be? Like
+>> what's clear so far is I need to upgrade
+my namerop game. I mean that that was a
+tour to force. [laughter]
+>> But by the way, you were you were in
+Davos with
+>> J. I was I was there but that um uh
+>> tour [laughter] to force
+uh look I I I think you do all this work
+and I I think it's really difficult to
+to overestimate the amount of garbage
+that's involved in in going public. the
+number of meetings where you you look on
+the the Zoom and there are 130 attendees
+and the amount of times you review these
+documents and the commas move and and
+just no value added. You go there and
+you have this enormous event and the
+next morning you've sold no more stuff.
+your engineering projects have made no
+progress since the day you weren't
+public. And you go back to work and um
+you you have some new constituents that
+that you have to to to address and
+communicate with, but the core parts of
+your business, you have more money in
+the bank. Um but not a damn thing
+changes in the important parts of your
+business. um if you still if you need
+new supply or if your relationships with
+your vendors are bad, they're still bad.
+If they're good, they're still good. And
+and so I I think what what we've seen is
+um you your employees have a party,
+everybody's really excited, and you put
+your head back down, you high five, and
+you go back to work. Can
+>> can I can I just give a little context
+and then I want to hear from Will. You
+know, if if I can, Andrew, you know, we
+were investors in Cerebrus. I was on the
+board a year earlier where we were
+trying to go public. Um, and you know,
+aside from just being a warrior who
+weathered a decade worth of storms that
+would have taken out any normal human
+being, the path to going public for
+Cerebras was a particularly challenging
+one. One of their investors was the UAE.
+So there was questions about CPHAS, you
+know, in in the prior under the Biden
+administration challenging to get
+public. My observation outside looking
+in is everything was really hard until
+it got really easy like n 9 and a half
+years of really hard and then 12 months
+you know of of of really easy where
+everybody wanted to get in.
+>> They priced the IPO at 185 which was up
+the range was taken up two times. Okay.
+The stock opened at $320 a share I
+think. Today it's at 230 bucks a share,
+5060 billion dollars in market cap for a
+business like you know and andrew is
+just one of these people. Let's let's
+get back to work and build But my
+my just add-on question to that is from
+an employee morale perspective like
+distraction perspective etc. has the
+last 3 weeks you got a lot more capital
+you got a lot more profile presumably
+it's easier to sell to enterprise
+customers today. net net if you were
+advising me if I was in a similar
+position would you say go public?
+>> I I I think the first thing is a lot of
+people asked us about how we got the
+timing right.
+>> Right.
+>> And I I think the answer is by getting
+it wrong for a decade. I mean that's
+really the right way to get timing
+right. Um I I think um first I we we
+we've been at this for for more than a
+decade and and we we brought everybody
+who'd been with the company more than
+nine years to share and we brought their
+families. [snorts] And first I learned
+that engineers owned ties. I didn't
+actually know that. [laughter] Um and
+they didn't die when they wore them. And
+second I was surprised at how big a deal
+it was for them and their family. they
+they were really proud in a way that
+sort of their parents [clears throat]
+might have heard of it or uh that that
+somehow this was like a a bar mitzvah or
+kinera or something.
+>> Um
+>> and then you you had these sort of the
+the children of immigrants, one of our
+uh one of our leaders, her father,
+Chinese immigrants said, "I thought it
+would have happened faster."
+[laughter]
+>> Right. And but I I think um we are sort
+of by nature
+uh
+sort of in the uh in the trenches
+people. And so um we we love solving
+hard problems. And so when when we had
+this excitement, everybody went and they
+were so excited and we had a party and
+um I I think it it gave external
+validation. And then everybody turned
+around and said, "Now what are we now
+back to work?" And and so I I I think um
+>> and so you you started off kind of bang
+right out of the gates. Will you had a
+little bit different experience in terms
+of you know the entry to the public
+markets, but over the last 12 months
+your stock has gone from five bucks a
+share to 50 bucks a share, some 10x move
+in the public markets. So talk us
+through the other side of this where you
+come public, nobody really notices until
+they notice.
+>> Well, we were one of the first space
+stocks and and I think people just had
+no idea what earth is going on in space,
+how it was changing everything and they
+were just like what the heck is that?
+And and but but you know, I have similar
+opinions. I mean, in the end, you've
+just got to get on with executing the
+business. uh the going public gives you
+access to liquidity uh for early
+shareholders whether that's the employ
+early employees or early investors and
+that's great it gives you cash for the
+company that's great and I do think um
+it helps your business as well because
+the maturing event gives you more
+credibility to various customers and for
+us we work with biggest agricultural
+customers big governments civil
+governments defense and intelligence all
+of those sort of actors they want to
+know you're going to be around.
+>> Exactly.
+>> And not going to disappear. I mean, we
+have countries that are fully dependent
+on us giving them information. They
+don't want to just disappear. So, they
+really care that we're going to be
+around and and being a public company
+gives you the kind of force in the world
+that people go, "Okay, you're here to
+stay and you have access to capital if
+you need it and so on, right? It's
+legitimizing
+>> and you know, you you know where the
+stock is at any one day. You know, we're
+not focused on that dayto-day. We're
+focused on how we build long-term value
+for our shareholders, right? And um you
+know the market is I think started to
+really understand where space is going,
+why it is changing the the the world.
+You know people forget how space is part
+of your everyday life. Every time you
+use a phone you're using communications
+using satellites or GPS using satellites
+or satellite data in some way or another
+that's sort of integrated in your lives.
+you may not realize it um but it's just
+booming now there's there's a
+>> and the the story's changed as well
+obviously with SpaceX going public but
+has the framing of
+planet gone from like a data source for
+people who need data from space and maps
+to hey this is a tool to accomplish
+tasks and military like post Andrew's
+success like you probably would have
+been bucketed into Andrew as a military
+tech company. So is that framing what's
+driving a lot of
+>> I think it's a bit more nuance than
+that. I mean firstly for the audience's
+benefit what planet does we have
+satellites doing earth imaging. We have
+the largest earth imaging fleet about
+200 satellites. They image the entire
+earth every day. So think of it like the
+Google uh satellite lay on Google maps
+that you can look at except it's today's
+date rather than 3 years old and we have
+every day going back. So it's a time
+series analysis of everything going on
+on the earth. That's useful for farmers.
+It's useful for energy companies. It's
+useful for civil governments, flooding
+and fires. It's useful for security
+applications like you're getting at. And
+it's a wide variety of use cases. Um, I
+think that where we're seeing this is
+that AI is now enabling the it's
+basically reducing the barrier to entry
+so that more people can get access to
+this, right? And uh, you know, there's a
+lot more to say on that, but AI is only
+as good as the data it's trained upon.
+percentage is military. I'm curious.
+Sorry.
+>> What percentage of revenue customer bas
+um uh security is part of the initial
+thing that we said we would do um out of
+the gate, but it's true there's a bigger
+fraction today than perhaps we would
+have guessed. Um but the needs of the
+geopolitical situation right now demand
+what we're doing. Um you know, just as
+an example, what this does is enable
+them to see threats around the corner.
+>> Yes. and then uh you know give them
+weeks or months advanced warning of
+things and then that enables them to
+more likely do things that stop
+conflict. So we believe this is you know
+really better for the world.
+>> Are you reticent to be perceived as a
+military company?
+>> Not really. I but I wouldn't say we're
+limited to being perceived like that,
+right? um we we are helping farmers, we
+are helping uh you know uh energy
+companies, civil governments, we work
+with NASA, we work with what have you
+and and so um it's a it's a bigger it's
+a bigger play than that but back to the
+space uh piece of it what has changed
+obviously rocket costs have come down
+about four or 5x over the last uh 10
+years which has helped tremendously but
+a thing that people don't know that is
+actually perhaps more important is that
+we've had a miniaturization of
+satellites. So that the same satellite
+that used to cost a billion dollars and
+weigh 20 tons now cost a few kg or a few
+tens or hundreds of kg
+>> and can do just as much stuff if not
+more. It's it's the same as the sort of
+mainframe computer to desktop revol
+computer revolution for space and it's
+unlocking just like mainframes to
+desktops unlock loads of applications.
+This is unlocking loads of applications
+and it's so both go in combo the launch
+cost coming down and this
+>> let's build let's build on this. So I
+think I I'd like first you maybe take a
+few minutes and then I I want to talk to
+Andrew the same question. Both of you
+guys are at the foot of what are
+probably huge secular trends in
+technology. How I would frame this is we
+are rebuilding the data processing
+infrastructure that has existed on the
+earth in the sky.
+And first you do the satellites, but I
+would love for you to explain
+space-based data centers because I think
+everybody's hearing about that.
+>> Are they really viable? What are they?
+How will they work? etc. And then
+Andrew, this is the rebirth of silicon.
+We're going to find the next version of
+Moore's law, which I think is more
+timebounded, not transistor density
+bounded. We now hear a lot about domain
+specific architectures. we hear I mean
+your chip was just a complete
+transformation in terms of the design
+principles that you know like at Grock
+we took a very different approach
+Nvidia's taken a very different approach
+you took a big pizza shaped die and said
+it yolo this is it and you were
+right just explain where we're going in
+silicon so maybe will you start and then
+Andrew you start
+>> I mean what we're seeing firstly in
+space is is all these new applications
+based on data and AI so you know we
+we're collecting vastly more data about
+the planet. And with SpaceX and Starlink
+and One Webb, they're they're
+transporting far more data around the
+planet. As you say, we're sort of
+changing um uh the nature of data using
+satellites. And that's basically doing
+what was once the province of
+governments only and giving everyone
+else access to uh satellite
+capabilities. And that's going to I I
+mean I I estimate there's a 75 to$100
+billion market just on Earth
+observation. this kind of data we
+collect and AI on top of that unleashing
+all that application. So that's the
+near-term thing. Applying large language
+models to earth imagery data, unlocking
+agriculture, you know, um energy, civil
+government applications, permitting, you
+name it. This is going to make
+everything more efficient. Um and then
+where we're going is indeed space is is
+we did a study with uh our partners at
+Google about eight or nine years ago uh
+looking at what are the costs of data
+centers on the ground, what are the
+costs that it would take to put them in
+space and when might it make sense to uh
+do it non-aterrestrially.
+And we figured out that when launch
+costs come down to about $200 to $300 a
+kilogram um uh it would be cheaper, just
+simply cheaper to put the data centers
+in space. Now we're about $1,000 a
+kilogram, just over that in right today.
+Uh but that's come down about 10x in the
+last 10 years. Um on the current
+trajectory with Starship in particular,
+I would expect it the launch cost come
+down there in 2 to 3 years. Elon might
+say it's next week, but at least
+realistically a couple of years. So
+we're not far away from it literally
+just being cheaper. Then in addition and
+the intuition there that is that helps
+people understand that is you would
+naturally use solar panels for doing uh
+the the data centers are a power
+problem. It's a power game and you would
+normally use solar panels. That's the
+cheapest way to get a watt uh today by
+far. But you you don't want intermittent
+power. So then you have to have
+batteries or you then you have to have
+gas or then you have to have nuclear and
+then it gets really expensive. Um in
+space you can put a solar panel in a
+suns synchronous uh dawn dusk orbit
+where you're 24/7 looking at the sun. So
+you can have a solar panel that collects
+and gathers five times more energy per
+solar panel than on the ground and you
+don't have to have batteries or anything
+else. Uh so the infrastructure for
+comput in space is literally just solar
+panels and the chips and then the RF
+signals up and down. So it's actually
+really quite simple. It was just a
+question of when it's going to be
+cheaper to launch all those solar panels
+and chips into space than putting on the
+ground. And it turns out that's going to
+be in a few years. So we're partnering
+uh with Google to launch some of their
+TPUs into space. We've already launched
+Nvidia's uh uh some of Nvidia's GPUs
+into space. We're launching Google's
+TPUs into space on an early test.
+There's lots of technology to figure
+out.
+>> Let's have a conversation. Um, but it's
+an early it's early days, but I think no
+question within 10 years most compute
+will be putting in space, which to give
+you a sense is a lot of money,
+[laughter]
+like trillions, and um will be bigger
+than any of the other space businesses
+today. comes Earth imaging. This is why
+we're getting into this.
+>> Do you believe this? Do you believe
+sending data centers to space makes more
+sense or is it just the regular
+>> Can you have him explain the business
+first and then
+>> Oh, yeah, of course. Yeah. So, I think
+they're, you know, with all due respect,
+one or two hard problems still left be
+beyond putting putting GPUs in in in
+space right now. I I think um we we
+we're not super good yet at
+building the clusters in space necessary
+for the communication
+>> between
+>> between Exactly. between
+>> We're not good at doing it on the
+ground.
+>> We're not good at doing it on the
+ground. We're really not good at doing
+it in space. I I think this is an
+extraordinarily important and
+interesting problem and one we should be
+spending money and attacking. I've got
+it in a slightly different time frame,
+but one that certainly will occur. And
+the the hard part is is it is it one of
+those problems where uh the last 10% is
+80% of the time.
+>> Now, self-driving was a problem like
+that, right? Where the last 10% proved
+to be a decade's worth of work and just
+now we're over the hump. And we don't
+know yet, but I think the interesting
+work they're doing uh at Planet is
+really important. And I think the
+fundamental driver to experiment to even
+get insight into whether I'm right or
+not is to get down the cost of launch
+vehicles. Then you can start doing
+experiments and getting it wrong and
+fixing it and figuring it out. And until
+then it was unpaid.
+>> For the foreseeable future, you're going
+to be terrestrial. explain your business
+and how you made these critical
+decisions that kind of took you on a
+different path and you know you versus
+Nvidia versus AMD and what you think the
+future of AI silicon looks like. I I I I
+think there were two parts your your
+first question was around sort of the
+rise of silicon in general and I I think
+what AI did and it's it's rarely sort of
+framed this way but it allowed computers
+to address a class of problems that
+before AI computers were bad at.
+We were bad at images for almost the
+entire history of compute. We could
+store them and that's about it. We were
+bad at language. We could store it but
+that's about it. We could transform
+numbers. We were magical with numbers.
+And what AI did starting in about 2015
+16 is it opened the door the aperture to
+say maybe we could use computers on
+images.
+All right. Maybe we could find insight
+in images. Maybe not only could we store
+language but we could generate it. All
+right. maybe we could understand it
+rather than storing it and regurgitating
+it. And what this did is it it opened up
+sort of to compute
+huge areas that were previously
+foreclosed and at the same time we were
+adding to those areas. we were taking
+vastly more images,
+all right, terrestrially
+in satellites. And what this did is it
+it simultaneously opened up this entire
+area and allowed compute to attack it.
+And this is what's underpinning both
+Nvidia's growth and and sort of all the
+growth you're hearing about in in AI
+compute is as a as a processor builder
+as a hardware builder suddenly our tools
+could attack more and different parts of
+knowledge
+and and that was sort of the first part
+to to to answer your question. Now how
+you do that there are lots of different
+strategies tons of different ways to
+skin cats. What we saw in 2015 were
+several things. First, we saw that AI
+would be an enormous consumer of
+compute.
+All right. And historically for computer
+architects,
+new workloads were the opportunity for
+share to change,
+right? Share changed when the rise of
+graphics emerged and you got the
+dedicated GPU. That's how Nvidia was
+born. Share changed when cell phone
+compute emerged and Intel and AMD who
+had fabs and the best architects got
+zero share and it all moved to ARM.
+Right? Share changed in the late '9s
+when Nortell and all these companies
+we've forgotten about couldn't build
+chips and couldn't do uh uh data
+networking and and what you got with
+Cisco and Juniper and Arist and this
+collection of new companies. So we knew
+that um this new problem
+would present an opportunity for massive
+change.
+So we saw that we we made two bets. Um
+the first was dedicated silicon would be
+the answer. The second was it couldn't
+look like a GPU.
+And our view as computer architects is
+if you want to be 20 times better than
+somebody, right? Your architecture can't
+look like them,
+right? It it it can't. They have they
+have enjoyed and and eaten all the
+lowhanging fruit. So, if you build a
+GPU, the odds that you're better than
+Nvidia in our view are approximately
+zero. That led us to a fundamentally
+different architecture. All right. The
+hard part here, the hard part is moving
+data from memory to compute.
+>> This is the fundamental problem in AI.
+And we solved it with a way that that
+very few others had even attempted,
+which was to build a very big chip and
+to put memory right next to compute. And
+by building a big chip, a chip the size
+of a dinner plate, whereas most chips
+are the size of a postage stamp, we
+could use a different type of memory.
+And by using a different type of memory,
+a memory that was vastly faster, we
+opened up all sorts of opportunity.
+So when OpenAI uses us, we're 15 or 18
+times faster than a GPU.
+That means your answers are delivered
+more quickly. It means your engagement
+with with the AI is more enjoyable. It
+means you can use the AI to solve harder
+problems and not wait.
+And the way to think about this is sort
+of to ask yourself the the counter
+factual question. How big is the market
+for slow search today?
+Right. Right. Is zero. How big is the
+market for dialup? It's zero. H how long
+do you wait for a website to resolve
+before you click away? 3 seconds, 5
+seconds. You will not wait for AI. We
+have to deliver it to you in a in in
+real time. And that's what we saw.
+That's what we built.
+>> So the panel's on going public. A lot of
+LPs in the room. They need to get
+liquid. I'm curious about the journey
+for your investors. Yeah.
+>> Okay. So, well, you guys went public
+what year?
+>> Uh 2021.
+>> 2021 by way of a spa.
+>> Correct.
+>> Okay. And your VCs were who?
+>> Um Drake Professor Jverson was one of
+the earliest Capricorn. Um Peter Te's
+founders fund. Then we got uh Yuri
+Milner's DST.
+>> Okay. So your your investors come in,
+you go public at 2 billion via a spa.
+>> Now we're four years later. Really, it
+wasn't until year three or four that 90%
+of the value was created. Okay. So did
+those early investors capture this 90%
+move? Did they stay in it?
+>> Most of them did. Yeah, most of them
+did, which is really smart on their
+part. Obviously, I think they should
+hold on even more. Uh, if I didn't think
+that, you should.
+>> I'm a little bit self-interested.
+>> What's interesting about this is
+>> No, but really they did. And and I mean,
+Google hasn't sold a share. They're our
+largest single investor. Um, uh,
+Capricorn didn't until very recently.
+So, basically, most of them stayed
+really well in and they got all of that
+upside. And good for them. And the
+reason I think this is so important
+>> is that there are a lot of LPs in this
+room
+>> who they're like when a company goes
+public give us the shares.
+>> No no
+>> give us give us the shares. This is a
+counter example right? This happened to
+us in 10 years ago. We invested
+preipo at a billion dollars. We
+distributed the shares I think at three
+or four billion and then it went to 50
+billion over you know the course of the
+next 24 months. And we had people who
+called us who said well why didn't you
+hold on to the shares? And we're like
+because you're pounding on us, right, to
+distribute to the shares. So you're an
+example. Now
+>> in your case, Andrew,
+>> you have an innovation, right? You're
+just now uh public. So all of your
+investors are still under lockup like
+like Altimeter, but you guys have
+innovated with the banks on what I call
+a dribble lockup. So over 6 months the
+shares can be dribbled out according to
+a bunch of performance hurdles which
+SpaceX is going to have a very similar
+>> when did we start this process of the of
+the dribble
+>> the dribble [laughter]
+>> concept you started it years ago but
+>> yes
+>> but u we're all of that with respect to
+the lockup I think this is the the most
+innovative and I think SpaceX is going
+to have a very similar innovation but
+Andrew for your investors if you were
+talking to ILPs right in the room.
+Should Alimter be distributing the
+shares when they come out of lock? How
+do you think about you know your VCs
+holding on to the shares kind of post
+lock?
+>> Well, I I I think historically more
+money's made after IPO than before.
+>> Yeah.
+>> I I I think every single study shows
+that uh there is more money to be made
+both in percentage and in in what we
+care about which is absolute.
+>> Yes. and and and so uh the amount of
+money that it's possible to put to work
+in most venture companies is very
+modest. I mean there are two or three or
+five outliers but for the most part you
+can only put a relatively little bit of
+money to work. Um by the time we get
+public there's a lot more money there if
+things are going well and the
+opportunity to make vastly more is after
+IPO not before. Hey, if I could just add
+on that, one interesting question is
+what's going to happen with SpaceX on
+this because you know a lot of the value
+is is in the future, right? But I mean
+most of the big tech companies went
+public at a few billion,
+>> not a few trillion. Like there's a lot
+of zeros in between those, right? And
+you got all this upside afterwards. Now,
+for the equivalent liftoff, SpaceX would
+have to be aiming at quadrillion
+valuations. Now, I know Elon has those
+sort of ambitions, but you really have
+to believe in that uh to get, you know,
+>> this is this is kind of the point I'm
+getting to, right? We have three mega
+IPOs, you know, we keep talking about
+that are multi- trillion.
+>> Yeah.
+>> All of that value acrewed to private
+market investors.
+>> Planet Labs is a great example of
+venture capital in the public markets
+where the 10X has occurred in the public
+markets. We're all advocates of these
+companies coming public sooner. Had
+Andrew had his way, he would have been
+public 18 months ago, probably at $10
+billion rather than $50 billion. And
+that 5x over the course of the last two
+years would have gone to public market
+investors. So go ahead.
+>> Way better to be lucky than good.
+>> Yeah.
+>> So, so I think that I hear a lot of
+people thinking that anthropic open AI
+and SpaceX are the new normal. I
+actually think the public markets may be
+shifting back in this direction and a
+lot of the companies in our portfolios
+are now thinking about going public at a
+billion or three billion or 5 billion.
+>> We had this period of a decade where
+Andrees was really pushing stay private
+forever and I see the pendulum swinging
+back to companies are like man I want to
+be like Planet Labs and get public,
+>> right? and and have to play in the big
+leagues and do it in the public markets
+like
+>> here's what I'll say maybe just like to
+the two of you guys both of you guys
+have had enormous pressure because
+there's visible competition that's
+always sort of in your periphery
+but I do think that getting public
+sooner having the scrutiny of public
+markets having the scrutiny of having to
+deliver sharpens the focus it steel
+sharpens steel iron sharpens iron
+>> and I think innovation tends to get
+better And so the idea that you allow
+everybody to participate but you also
+put yourself in the spotlight to me is
+where great things happen.
+>> I agree.
+>> Um and so anyways I just wanted to say
+to both of you um just as we wrap you
+guys are an incredible testament to
+entrepreneurship both of you. I mean
+we've been talking literally since day
+one me and Andrew because we went in
+different paths and then we kind of
+recon converged and then Will same with
+you.
+>> I'm happy it worked out for you Jimoth.
+>> Well it's worked out for both of us so
+it's [laughter] fine. Um you guys are
+incredible testament to entrepreneurship
+and uh I just want to say thank you for
+everything you guys are doing and the
+next few years are going to be really
+spicy.
+>> Yeah, if I could just spend a 30 seconds
+on the next few years because I think
+it's going to be so exciting with um as
+I mentioned AI and space merging
+together. We're going to see a take off
+our applications. I like to say like all
+the cool stuff that we're doing on the
+with LLMs now is really based on just
+the text of the internet being absorbed
+into these models which is incredibly
+powerful already but they don't know
+about the real world. I call them
+blind to you know they don't know about
+that farm field that flood that security
+situation around the corner. If you give
+them real world data, then they can
+answer real world problems. And that's
+going to open up gazillions of
+applications for these uh AI models. I
+call them instead of having large
+language models, large earth models or
+uh instead of AI, planetary intelligence
+where you have planetary sensing systems
+in space, planetary compute systems in
+space. And we can disagree or agree on
+on exact time frame, but I think it's
+going to happen. and and then that's
+going to enable a huge economy. So, it's
+an exciting time in the next few years.
+>> Will Andrew, thank you guys very much.
+Well done. [applause]
+>> Thanks, guys. Okay. [music]
+Thanks, buddy. Appreciate you. Really
+appreciate it. Great seeing you,
+brother. Congrats.

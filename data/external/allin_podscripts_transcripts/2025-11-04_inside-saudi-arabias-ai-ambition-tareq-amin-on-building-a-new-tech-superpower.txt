@@ -1,0 +1,420 @@
+source: allin_podscripts
+published_date: 2025-11-04
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/inside-saudi-arabias-ai-ambition-tareq-amin-on-building-a-new-tech-superpower
+title: Inside Saudi Arabia's AI Ambition: Tareq Amin on Building a New Tech Superpower
+
+I believe connectivity is a human right.
+I felt that this is a great opportunity to really build and enable a country like Saudi Arabia
+that has a incredible potential capability to really build a digital champion and a digital hub for the region.
+This is the first time I landed in a place where I feel I'm home.
+Ladies and gentlemen, please welcome Humane's Tariq Amin.
+So I've been spending a lot more time in the Middle East in the region.
+It's changing so dramatically year after year.
+And I'm going to be announced on the podcast two weeks ago.
+I'll be doing Founder University in Riyadh, November 3rd, 4th, and 5th.
+And I'm really excited to partner with such a dynamic country.
+Maybe you could fill us in on what's changed over the last.
+five years in the region.
+Well, thank you very much.
+First of all, I must say, it's the first time I did an event that's only 45 minutes away
+from my home.
+My flight from Riyadh obviously was 23 hours, but just to give you some context, I was
+born in Amman, Jordan, before coming to the U.S. to finish my studies and, you know,
+progressed in my life and my career.
+So I moved from Tokyo to Saudi Arabia, but this is the first time I ever worked in
+the region. And I didn't know what to expect. You know, sometimes it depends on your perspective
+on how you look at the world. You know, I wanted to really discover and understand everything I used
+to hear under the massive opportunity of transformation and the diversification on the economy.
+You know, my first observation is really started with discovery of how amazing the people were
+in terms of hospitality, welcomeness.
+I really felt like I'm back home.
+It felt very, very different feeling to me.
+The second thing, the population is awfully young,
+and hungry for new things and new advancements.
+So to me, it was really a pleasant surprise
+because what I was really worried about
+and what everybody keeps talking about.
+Maybe Tarek have done great things in his life,
+talent and opportunity, maybe a big challenge,
+may be a big challenge in his new venture. And it was remarkable, you know, in every aspect,
+whether you look at the government side, in terms of society, the transformation, it has changed
+dramatically. It's really, really an area that I feel the opportunity is remarkable and the
+embracement of the society towards looking at the future in which digital and AI is fundamental
+to their transformation. Tar, can you maybe explain what humane is?
+and how it came to be because it was sort of an evolution, right?
+Yeah, I mean, it's, you know, for you to know, I'll tell you,
+we take things for granted in the U.S. to a certain extent.
+Let's assume you're a startup here and you want to access compute.
+It's as simple as obviously go into a hyperscalor and within 30 seconds you're ready to go.
+So this story is fascinating because my first discovery, let's say, in the role I was in at the time,
+I was hired to really run a subsidiary of Aramco, a new company that was intended to diversify out of its core business in which Digiton AI was a really core component of it.
+One of the biggest surprises I had is lack of AI infrastructure.
+I mean, I did not know that the ability for startups companies to access AI infrastructure is a challenge.
+I mean, it took – look how large Aramco is.
+Took them nine months from the process of purchase order, export control process, deployment, installation.
+That means we have hindered a company to really achieve its objectives by nine months.
+So that was the first opportunity that I saw that we need to address in the country.
+I tell you this story because this is how the humane story started.
+So I started meeting with several ministers in the country.
+I told them I see nothing but opportunity.
+I see something that the country could really do
+and participate at a global space.
+I think we have an abundance of land,
+an abundance of power,
+amazing connectivity,
+and an opportunity to really participate
+in the digital infrastructure.
+So last year, during my birthday,
+I got a call,
+and it was like really a strange number.
+So I answered it.
+It says it was from the Royal Court,
+And it said, His Royal Highness wants to meet with you.
+I said, okay, what did I do?
+You know, it was a, so anyway, we all came in.
+I said, what's the topic?
+The topic was AI brainstorming.
+And this was the first time I had the opportunity to meet His Royal Highness and
+Mohammed bin Saladin.
+Yeah, and let me tell you, it was not about brainstorming.
+It was about really addressing what the country needs to do
+to accelerate, to address some of the fragmentation that exist.
+And the idea and the concept of Humane is in order for us to really accelerate our development,
+let us now bring public and private entity, combines and take AI investments, projects, initiatives,
+and put under one umbrella company that is really focused on the entire AI total value chain.
+So honestly in that meeting, I could tell you it took about 10 minutes to come to realization that the opportunity is massive, but we need to really unite the fragmented effort and put our energy to address the basics.
+And you were given a pretty large balance sheet to do this with.
+Yeah, I mean, look, I mean, to start with, as you know, building infrastructure is not necessarily a small task.
+So to do this and to participate and to make an impact, you need to be very well-funded.
+So, you know, even though we call Humane as a startup, but it's actually a very well-funded startup
+between our data center segment, our models, team, applications, and also our ventures
+that we will soon have in the United States is a very well-funded company that I'm feeling
+really comfortable about the opportunities that we could capture between capital, people, talent,
+and in the partnership.
+So should we think about this as there's, you know, we live in a world, as you said,
+when you're back home here in the U.S., there's AWS, there's GCP, there's, you know,
+Azure, it's just simple, straightforward, but the rest of the world, a little bit more complicated.
+Do you see Humane being that competitive alternative for the rest of the world?
+Is that how it starts?
+Well, I think look at it.
+In certain areas, we partner really well, and all of them are colleagues and friends.
+I mean, I've known the CEOs of these companies really well through my tenure in Japan and India.
+But I will tell you, I think many companies do not see the Middle East the way I see it today.
+And they don't understand the requirements and the needs of what we have to do to build the depth and the talent.
+So I see in certain areas great partnerships.
+And in certain other areas, I think that we will be a compelling alternative, but it doesn't mean that we don't partner.
+Certainly, when you see now the partnerships that we announced with the likes of AWS and Google,
+clearly I want to see the companies invest in addressing the lack of infrastructure that I saw.
+So a portion of what we do today will be built on things with our own technology,
+and a portion will be done also with partnerships with the hyperscalers.
+And what gives us the lay of the land from the foundational model side,
+The Open AIs, the Anthropics, the GROCs.
+How is that moving?
+How do you work with them?
+How do you make sure that everybody can get access to the latest models?
+So a couple of things we have done and look for people in this audience that have participated in the build a foundation model.
+You know, it's not trivial and it's not easy.
+One of the acquisitions that has happened in Humane, and this is where I was really, really surprised to see the depth of science team I have.
+today in Humane. I mean, this is the first comment I get in my social post to say,
+yes, you have capital, but there is no people, no talent. So we ended up building a foundation
+model, and I'll tell you the reason we did this, we built it from the scratch. It was not distilled
+of any open source tool. Well, for two reasons. I just wanted to see, I mean, A, let's venture
+into this to understand the depth and the capability of the organization. Second thing,
+when it comes to culture, language, and biases, you know, I felt that.
+that it's important for us to really participate in this arena.
+So we launched in Saudi Arabia, what we call Humane Chat.
+I just wanted to see the reaction from the people that uses this model.
+And the whole objective of it, Arabic first preference is the way we train this model,
+not English first preference.
+And sorry, just on that, you see huge differences in how the foundational models
+process and digest data.
+I think for us, on any model that is used today, quality of data is always much better than, I think, just feeding it quantity of data.
+Our model today has a proprietary set of data in Arabic language that you cannot find on the public Internet.
+So we had a proprietary data set that was important.
+And obviously, within the Arabic language, the government today uses all its correspondence, transactions, translations is in Arabic.
+So the preference of training first in Arabic is very different than you're starting in English
+and then you add to it the Arabic components.
+So we built that, we launched it.
+It actually now became the number one app in the app store in the country.
+It's really an important thing for us and I'm going to be really specific.
+We didn't do this to say we're better than OpenEI or we're better than X or rather than that.
+It was important for us to train the team on understanding.
+how to build the entire stack.
+It's really, really critical.
+And I would tell you, there's nothing else I would do different
+than the last nine months in building this foundation model.
+We have great partnerships today with discussions with open AI.
+Anthropic, we use a lot for our AI coding tool.
+So I see this is not an option of use this or that.
+I think we are trying to formulate a strategy on the model.
+But I will tell you where we differentiate, hugely differentiate.
+I think we have found the answer that I heard everybody talking about.
+I am a huge believer that AI is not into a bubble.
+And the reason I believe in this, I think we are one of the few companies
+that have found true value realization.
+And this is really a mind-blowing story.
+When I took on the CEO-Rol Fihmian,
+so I had an option to say, how do you run a large enterprise?
+Do you run it the same old way where you have legacy systems in play?
+You have hundreds of IT tools that do the job for finance, legal, HR, cybersecurity,
+or you do something different.
+What we have differentiated on, while I'm excited about the model,
+is what we build on top of the model.
+So we will launch in October this year, a platform we call Humane One.
+It is truly the AI operating system for the enterprise.
+Imagine the era, I believe Windows was embedded in the,
+in 1981. We all got taught that you use icons on the desktop. If you want to take a vacation,
+you go to Success Factor or other HR tool. If you want finance, go to Oracle, SEP. If you want
+something else, there's another tool, another application, another icon. Well, now we change
+this enterprise world. We're really intent-driven system, multi-agent orchestration system,
+and its impact is unreal. What has happened in driving true value realization, at least in my
+company I could tell you it is remarkable the efficiencies now that we have derived out of changing
+these legacy systems and maybe the biggest challenge that I had had nothing to with the technology
+nothing and this is maybe my own personal opinion about the struggles that company is going to go through
+as they embrace AI into their operation it's the mindset mentality culture organization it's
+underestimated efforts so so yeah between the model of what we build but I I'm more
+excited about what we have done on top of the model. Let me ask you a point of question. You're in Saudi.
+There's an enormous amount of energy, almost a surfeative energy. Do you have this unfair
+advantage where if you need a vast amount of energy to throw out a compute problem, do you
+effectively get it for free or do you have to pay for it as well? No, of course not. I mean, look,
+even though it might seem like I wish I could get it for free. That would change my business
+model dramatically. So when I took this role, I think one of the key things I said, look,
+what can we really compete and what can we do to offer to the world something that the world
+desperately needs today? I think everybody in this room maybe realize we are really just
+at the beginning of what I would call the AI inferencing world. While the model training
+will continue to evolve, but now as we move into accelerated compute, I think,
+think the demand is going to become much larger than it exists today. So how do we, and what's
+the challenge? The challenge is really simple power. You know, how do you really find power? So that's
+where I think Saudi Arabia has a big role to participate. And I was bullish enough to tell the
+world, I said outside of the United States, outside of China, I really think Saudi Arabia has a good
+shot to be the third largest country in infrastructure. So we have to go through processes to
+secure power from the Ministry of Energy through the local electric company.
+I am treated as fairly as any other entity that comes to the country.
+My rates, my tariff is equivalent to what Google would get, to what AWS get.
+But however, the energy generation that exists in Saudi Arabia is just remarkable.
+I mean, I think what I told many people, maybe Saudi Arabia today led the world and energy
+exports via oil, we should look at an operational.
+to lead the world through energy exports via tokens.
+You know, but that's really a key area that I think we could differentiate.
+Let's talk about the energy infrastructure.
+Let's talk a little bit about the talent pool there.
+This was shocking to me when I got there,
+but so many of the young people, even up to Gen X,
+our generation, have been educated in the West.
+In fact, the woman who we are in partnership with,
+with Senabel, has an MBA from Stanford.
+and Oxford and all these incredible schools,
+and they've all come back after these incredible scholarships that are given by the country.
+Talk about the talent that has come back to Saudi and the application level and golden visas as well,
+just how open they are to having companies set up shop there.
+And there's a bit of a competition, is there or not, between, you know, Doa, Dubai, Abu Dhabi, Riyadh, Bahrain.
+There's a really great competition that's emerging for talent, and you've got the entire country,
+all the nationals, very engaged in starting companies.
+Yeah, so, I mean, this is such an important point because I think this is a key fact that
+people don't realize yet.
+I didn't, yeah.
+Yeah, if you look at it, you know, 30 years ago, the investment in the strategy for Saudi Arabia
+to send many of their citizens abroad across the world to be.
+pursue degrees is really paying off, you know, in a really large way.
+Again, back into the example I mentioned about my models team, I have 40 PhD students, not students, 40 PhD scientists today in my team.
+I sometimes, honestly, when I sit with them, I said, I'm really, maybe I don't have enough credentials to sit with you guys in the room.
+But they're graduated from, yes, some are a PhD from Stanford, MIT.
+Harvard, Oxford, you know, from anywhere that you want, they really have obtained now the foundation
+knowledge to really take to that next step. Now, when you talk about competition, I mean,
+the beauty... Sorry, Tark. When they graduated, was it that they were thinking about staying in the U.S.,
+getting an O.PT. staying, or was it this pull to go back and say, okay, we're now trained,
+let's go back and help our mother country? What is the motivation of these individuals? I think there's a
+couple things that happened. I mean, I mean, this is my own view, and I talked to my colleagues in
+Saudi Arabia. I really think that they had a sense of responsibility to take in the build process
+of what tomorrow is going to look like. I would have done the same if I was in their shoes.
+I would have went back and really helped into this build process. So they learned a lot,
+and mostly from, I would say, United States and the UK, and now they all came back looking at
+the opportunity because the inflection point has happened. If you look at the fast-paced transformation,
+it's an opportunity. I don't think they want to miss. It's really changing rapidly. How much of that
+maybe is a desire to work in the era of MBS? And maybe you can use that as a jumping off point
+to tell us what is it like to work with this person that's young and beloved? So a couple of things.
+I mean, look, I'll tell you my honest opinion. I mean, first of all, the first meeting that we had with him,
+key observation and takeaway.
+His vision blew my mind.
+I don't think I have seen someone with such a bold vision
+towards what the future looks like.
+His responsibility to the citizens of Saudi
+and the diversification and the transformation initiatives
+that are happening is second to none.
+It's really, really incredible.
+Actually, I was delayed yesterday.
+I was supposed to be here,
+but the man doesn't sleep, really.
+He's on all the time.
+thinking about initiatives that needs to be done and fast-tracking them.
+So everybody now is really rallied.
+If you go into Saudi Arabia today, one thing that is surprising,
+you take a taxi cab or you go to a hotel or you talk to a government official,
+everybody is intertwined with the Vision 2030 mission.
+Everybody.
+So this is something that rallied the society around an idea,
+and the idea has incredible merits,
+especially I would tell you.
+And is it both the old and the young?
+I mean, what I'm seeing now across the board,
+even when I talk to the older generation
+or the younger generation,
+this mentality shift transformation has happened.
+Now, I'm not representing everybody.
+I'm telling you the segments I'm interacting with.
+I see nothing but optimism,
+but you guys know very well better than me.
+This is such a key point.
+That was what I took away from
+when I started spending time there.
+Over three years,
+I saw the change every year.
+The enthusiasm level reminded me of New York and San Francisco in the 90s, early 2000s.
+The opportunity to build anything.
+The culture was on fire.
+You've got movies and cinemas coming back and all this great stuff happening.
+And they're so engaged and they want to learn how to build businesses.
+And they've got this real, you know, the 2030 mark has inspired everybody to think, well, what's possible?
+We have this incredible energy business, sure.
+But as they explained it to me, we can take that energy business, and over the next five, 10, 20 years, we can transform this entire region and be a global leader.
+And it's really inspiring.
+And to add to your point, look back into your question about competition.
+You know, this is really interesting.
+See, there's a lot I have learned, and I owe a lot for what I learned in the U.S. quite a bit, a lot.
+I learned innovation here.
+When I moved to India, I learned scale.
+when I went to Japan, I learned precision and quality.
+You come to Saudi Arabia, and I'm learning optimism and vision, truly.
+Hopeful.
+You know, I find it to be really remarkable.
+I'm living there almost full time.
+And what I have done, if you come to Humane office today, in my opinion, it is no different
+than a Silicon Valley office.
+Not at all, yeah.
+So I encourage you, come visit, see how you mean.
+from the basics of the basics, how the building layout is, how the open office design is,
+to remove barriers and thoughts, mentalities. And I want now, really, my team has to become
+product creator, not just a reseller. So that's very important. Tark, as you are building your
+infrastructure, there's supply chain and strategic partnerships and relationships that I'm sure
+emerge here in the United States, but also in China. And Saudi Arabia seems to be in this really
+kind of interesting position as a large energy supplier, as a large partner in capital and now in
+building that could create tension between the rivalry, the global rivalry between the U.S. and
+China.
+How do you think about managing each of those two markets and how you establish relationships
+and where do you align yourself?
+So if you see how Humane was launched, and I wish I could take a small credit for this,
+but I've asked for one thing before President Trump came to visit Saudi Arabia, we should, you know,
+Please launch the company 3 p.m. before.
+Because we wanted to ensure that the alignment that we are going after,
+we're going after really where the innovation is,
+the talent that exists, the infrastructure that exists.
+And let's be really realistic and truthful.
+Today, the U.S. is leading, especially on the semiconductor side,
+and we don't want to miss this opportunity.
+So if you see our partnership that we have done with EMD,
+with a startup called ROC, Nvidia, Qualcomm,
+it shows you clearly our commitment to this relationship and partnership,
+and it's really deep.
+Not only on the Silicon side, but the same thing you're going to hear very soon
+on the AI and the software application.
+And that's why humane to succeed really needs deeper engagement, relationship.
+I spend a lot of time with startups in the U.S.
+And as long as, to be very honest with you,
+the hope and the optimism I have,
+and David and the team has been doing really a great job with this,
+is our ability to say, we understand very, very well
+the concerns that one might have.
+But if you see about my partners that we have selected
+from software layer in the cloud to manage tenant management,
+to the security on the data center,
+to make sure that these servers are secured,
+we will do everything that is required
+with the optimism that Humane will be thought through
+as a trusted supplier for the US.
+David Sacks.
+how important is the American and the kingdom's relationship globally and for humanity in terms of the president's agenda and his prioritization?
+Well, it's been a critical relationship for the U.S. and for Saudi Arabia since I think 1945, if not before,
+when the founder of Saudi Arabia, the king Ibn Saud met with our president, our king, so to speak, FDR,
+a battleship and they hammered out the foundation of the modern world, which is the U.S.
+would provide security for the region in exchange for the steady flow of crude.
+And that, you know, that was, I think FDR did that on his way back from Yalta.
+And people don't know as much about that as they do the Yalta meeting, but that was a
+very important understanding.
+And then the relationships evolved over the last 80 years.
+But what I can tell you, I went with the president on the trip in May to the Middle East.
+And number one, like you said, the business culture in Saudi Arabia is very Americanized.
+many of the Saudi elite have studied in the U.S.
+Second, they want to have a good relationship
+and a partnership with the United States.
+There's nothing competitive at all about that relationship.
+And third, when it comes to high tech and AI,
+they want to be part of our technology ecosystem.
+When I got back to Washington,
+I was really surprised at how controversial it was
+that we wanted to do business with the Gulf States
+and Saudi Arabia in particular.
+The way I see it is very simple.
+Saudi Arabia is going to have data centers. Of course. Every sovereign country that can afford them is going to have
+data centers. Is that going to be American technology or Chinese technology? It's basically going to be
+our companies or it's going to be Huawei. It's binary. It's binary. And why would we want to push any
+country into the arms of Huawei? Especially when their preference is to work with America.
+Well, I think it's especially for two reasons. One is the proximity that that region has to four billion people.
+If you think about building data centers, ultimately inferences, there's a certain window of time,
+and you have to be under several hundred milliseconds.
+But if you do that and you draw that radius, you're counting half the world's population.
+We can't strategically ignore that.
+Otherwise, you'll be forced to do it with somebody else.
+We'll talk in a second, but just I think that these restrictions on the region,
+they were placed in October of 2023.
+And at the time, by previous administration, at the time that happened, it was justified on the grounds.
+that the U.S. was the only game in town. We were the only ones who could really make advanced
+semiconductors. So therefore, we can impose whatever restrictions we wanted, nobody would have a choice.
+But since then, if you're reading the headlines over the past few months, it's all been about
+Huawei, CamberCon, SMIC. China is rapidly advancing. Dylan Patel from Semi-analyst just had a
+report. By next year, China's going to be making millions of chips. Admittedly, they're not as good as
+American chips. But if we deny the rest of the world the ability to participate in the American
+Tech Stack, then they will participate in the Chinese Tech Stack. And I think the question of what
+we sell to China will always be a complicated question for obvious reasons. But when it comes to
+the Middle East and the rest of the world, I think it should be an easy question that as long as
+these countries are abiding by our security requirements and they want to be partners and allies
+in the United States, we should allow them into the American tech ecosystem because otherwise we're just
+creating a Huawei Belt and Road. Maybe one important thing. We got approval last year,
+and this is a really, really important case study for you. When we looked at our business model,
+actually the number we use is exactly $4.4 billion. 4.4, sure. We could reach within the tolerance
+of fiber latency that inferencing would become really still ultra-responsive. We got approval
+after a few months on a startup in the U.S.
+And this is a classic example.
+I mean, you could really validate what I'm going to tell you now.
+We supported this U.S. startup.
+Look at where they are now today
+and what their valuation post-engagement with us.
+So we picked at that time for inferencing GROC
+because I thought it was really an interesting startup
+that could help us democratize the cost of inferencing.
+Out of the data center that we have deployed this in,
+we have about 19,000 of their chips deployed.
+Overnight, 130 countries are using now this inferencing cluster.
+5% of the traffic from Saudi.
+The rest is from abroad.
+Why?
+Because we're able to offer differentiated inferencing costs.
+And we offer to the world.
+Now, keep in mind what we also did for security guarantees, we said,
+GROC cloud, you manage this.
+So now I don't have to worry about KYC, requirements.
+you follow U.S. rules.
+Oh, what I care about is I have revenue that I participate in,
+and it was really a win-win for both of us.
+And I hope we'll repeat the same thing
+with the deployment that we're doing with Nvidia and AMD,
+and then something really, really exciting
+that we're going to do with Qualcomm on the edge as well.
+Thank you so much for joining us.
+And I'll see you at Mamunori.
+Thank you very much. Thank you.
+Thank you. Thank you very much.
+Thank you.
+I got a great shwarm a place for us.
+Thank you.
+When we're in town.
+Thank you.

@@ -1,0 +1,1312 @@
+source: allin_podscripts
+published_date: 2025-11-07
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/does-openai-need-a-bailout-mamdani-wins-socialism-rising-filibuster-nuclear-option
+title: Does OpenAI Need a Bailout? Mamdani Wins, Socialism Rising, Filibuster Nuclear Option
+
+Brad Gersner's here joining us hot after crashing the stock market and popping the AI bubble.
+Well done, Brad, we're going to get into it.
+All of our portfolios, thank you.
+We're all down 15% this week.
+Can we ask Open AI to just put a moratorium on any more public statements or appearances for another couple months?
+Good job, Brad.
+You decided you'd be a podcaster.
+You're like, hey, let me ask a couple of hard questions here.
+And you pop up the AI bubble.
+Yeah.
+Something like that.
+Do as I say, not as I do.
+Rain Man, David's at.
+Love you, that's nice.
+Queen of Kin.
+Are we getting into it?
+Because I think it is interesting, actually.
+It's super interesting.
+Super interesting.
+Let's get it.
+Sam, of course, if you're not in the industry,
+Sam Altman appeared on the fabulous BG2 podcast last Friday.
+And it got a little frisky when our fifth bestie here asked what I thought was a
+completely legitimate,
+mundane question. Hey, you're making
+$13 billion. It's actually a
+softball question, to be honest. It was an
+underhanded pitch. The way that it was
+asked, I think you did a very reasonable job of
+asking a good question in a very fair way. So let's
+just show this clip here and then
+I want to go behind the pod with you, Brad.
+So I think this single biggest question I've heard all
+week and hanging over the market
+is how can the company with $13 billion
+in revenues make 1.4 trillion of spend commitments, you know, and you've heard the criticism,
+Sam.
+We're doing well more revenue than that.
+Second of all, Brad, if you want to sell your shares, I'll find you a buyer.
+I just, enough.
+Like, you know, people are, I think there's a lot of people who would love to buy Open AI shares.
+I don't think you want to sell.
+Including myself.
+Including myself.
+Who talk with a lot of, like, breathless concern about our compute stuff or whatever.
+that would be thrilled to buy shares.
+So I think we could sell your shares or anybody else's
+to some of the people who are making the most noise on Twitter,
+whatever, about this very quickly.
+We do plan for revenue to grow steeply.
+Revenue is growing steeply.
+We are taking a forward bet that it's going to continue to grow.
+There are not many times that I want to be a public company,
+but one of the rare times it's appealing
+is when those people are writing these ridiculous,
+open AI is about to go out of business and whatever.
+I would love to tell them they could just short the stock,
+and I would love to see them get burned on that.
+So, Brad, you asked, I think, like, you know, Tomoth and I were just saying,
+a pretty mundane question.
+You said it very nicely.
+I guess we could give Sam a little bit of grace.
+I don't know if he was being a little cheeky or maybe he's tired of answering the question,
+but the internet took this and ran with it in a very viral way that he was angry and he was hostile.
+How did you take it?
+That's the interesting thing, right?
+I mean, listen, we bust each other's chops all the time.
+We get feisty with one another.
+Sometimes it runs amok.
+Like we don't know if somebody's being serious or not serious.
+And, you know, Sam and I had a good laugh after.
+You know, I think Sam was, he was feisty.
+But I think he also intended it as a joke.
+He knows that I don't want to sell my shares.
+He knows that I would like to buy more shares in the company, etc.
+But I think the reason that it went so viral is because it is a super important question.
+People are really nervous.
+They're wondering, are we walking in to an AI bubble?
+like how can these huge numbers, how can you be talking about $1.4 trillion in spending when you,
+you know, have kind of gap revenue that's been reported a $13 billion this year. So I was,
+I was a little disappointed and I tweeted about this afterwards that kind of the feistyness got in the
+way of the answer. But if you listen to his words during the rest of the segment, he basically
+said, listen, we think we're going to have $100 billion in revenues over the course of the next
+couple years and you know jay calli sent the team a chart that that basically just shows the
+information's forecast for what open ai and anthropics revenues are going to be over the course
+of the next several years and like the information is reporting that their internal numbers are both
+over a hundred you know this is the information reporting on leaked internal numbers or the
+information is taking a guess what no i think this is i think they report this is on leaked internal
+numbers according to the information and so you know
+I think Sam's in his head saying, I believe, and he says multiple times on the pod, we're going to have
+revenues in excess of $100 billion. And the $1.4 trillion, it's super important to remember.
+This is over a period of five or six years. I estimate about half of that spending is going to be
+borne by the partners. So now we're talking $700 billion in spending. Spread that over five or
+six years. In the out years, you're probably talking about $150 billion of CapEx to open AI. So he's
+probably sitting there saying, and he said, we're going to have over 100 billion of revenue. So if we
+have 150 billion of revenue and 150 billion in CapEx, now it begins to pencil out a little bit more.
+But importantly, he said, and if we don't have those revenues, we've got to match our revenues
+to our expenses, right? I think they will just extend, recut the deals in order to make those
+expenses doable for the company? This is an important point because we don't know, we haven't seen
+these actual deals, and if they have conditions or outs or if they can push it out or they can
+cancel it. Maybe, you know, they have, and that will come out, I guess, in the public filings,
+but putting all that aside, the market was not happy about this. Microsoft, Nvidia, Oracle,
+Broadcom, Corweave, who all are the partners we're talking about, who are close to, and when you see
+these charts of all the deals Sam has done and Sam's a great deal maker, obviously, they
+were all down six to 20 percent. So this has, in fact, been a significant correction in terms
+of the AI boom. So before we get into their CFO's comments, Chamath, I'd love to hear
+your just general response to. I think it's fun to give these guys, but they're totally and
+completely uncorrelated. Okay. Every now and then you have a bad day.
+I've done thousands of hours on TV.
+I've had a couple of really bad days.
+You guys have been there.
+Yeah.
+I suspect that if Sam had to do it over,
+he wouldn't have said what he said in the way he said it.
+And even if he was joking,
+he would have practiced it a little bit more and just landed it.
+So what's actually going on?
+I think right now we are in a period of getting a little risk off and rebalancing.
+Why?
+There are two sets of things that are happening.
+The first set of things is the market is learning to digest all of the CAPEX that has happened,
+and they're all breathlessly trying to build models that try to predict what the ROI is of that spend.
+The second part of that is they're trying to figure out how this new spend will actually impact future earnings.
+And this is less to do with OpenAI, but it has much more to do with the big stalwarts of the Mag 7.
+Google's earnings were phenomenal.
+Their AI numbers were blazing hot.
+Facebook's was terrible.
+Apple is now in this really interesting place
+where it seems like they're going to cede their AI business to Google
+and pay them billions of dollars a year,
+like they get paid billions of dollars a year for search from them.
+I think that that's what's happening.
+The second part is, as you go into year end,
+there's just a little bit of all in the market and people are like, let me just consolidate.
+Let me book some wins.
+Let me get ready for the new year.
+Let me tax loss harvest.
+Let me do all the things that people used to wait until mid-December.
+And now they are smart enough to know that mid-December, the price action is shit.
+And so now this price action starts in mid-November.
+So I wouldn't pin this on Brad and Sam.
+I just think this is natural market machinations.
+But to be clear, we are very much getting into a face.
+of risk off.
+Yeah, and this got exacerbated, SACS, because on Wednesday, opening I decided to be in
+the news again when their CFO, Sarah Fryer, told the Wall Street Journal, she hopes the U.S.
+government, that's you, Sacks, will backstop the financing of its $1.4 trillion in data
+centers.
+Here's a direct quote, the backstop, the guarantee that allows the financing to happen.
+she said that the federal guarantees would, quote, really drop the cost of finance.
+Of course, it would.
+And this would allow Open AI to borrow more money at lower rates from a much larger pool
+of lenders.
+That went viral.
+And everybody said, oh, my God, it started feeding, I think, the narrative that maybe
+Open AI is insolvent, in fact, and there's no way for them to pay their bills, which
+obviously is a little bit ridiculous.
+And people are trying to correlate this to obviously the dot-com bust and then the great financial
+crisis.
+But on Wednesday night, Fryer walked back her comments.
+I want to clarify for my comments.
+Open AI is not seeking a government backstop for our infrastructure commitments.
+I use the word quote, backstop and it muddied the point.
+I was making the point that American strength and technology will come for building real
+industrial capacity, which requires the private sector and government playing their part. And she also
+said that Open AI was on pace to generate $13 billion. I'll get to you on this one, Brad, because he took offense to the $13 billion revenue number and disputed that. So we'll see if there's some clarity there. But, Sachs, you came over the top and tweeted that there will be. No federal bailout. There's plenty of people available to pick up the mantle if Open AI needed a bailout. You've got five.
+major frontier model companies, Graw, Claude, Gemini, plenty of them. So, Saks, you came in,
+Daddy's home, and you settled it. Daddy came home. Everybody has to sit down in the kitchen
+and explain what's going on. Take us through, you know, how you think about this as our czar.
+Well, this morning, my entire feed was full of comments by people, analysts, consumers, business people,
+and politicians saying that we can't allow Open AI to have a federal bailout. And I think they were kind of
+connecting Sam's original comments or prickliness to what Brad talked about, like, hey, do they have the
+money? Can they justify this? With Friars comments that they need a backstop to say, hey, this company's not
+solvent, it's going out of business, and they're demanding a federal bailout. So I think that's kind of how
+the pieces got put together. And what I said is, look, there's not going to be a federal bailout for
+AI. Not going to happen. We have five, maybe.
+major frontier model companies right now, and there are new companies being formed all the time.
+And if one of them fails, hey, it's going to go out of business and the other ones are going to
+replace it. So nobody is talking about a bailout. In fact, I would say that the AI sector is
+maybe one of the healthiest, meaning most competitive sectors of the entire American economy right
+now to the extent that you just love ruthless competition driving innovation. That's what we have
+right now. So if one of these companies gets over at skis and ends up going bankrupt, the chips
+are going to fall where they may. And I've never heard anyone serious disputing that fact.
+Now, I also made the point, which I think is important, that to give Open AI the benefit of the
+doubt, I don't think anyone at Open AI was asking for a bailout. If you watch the video with
+Sarah Fyer, she's clearly searching for the right word to describe what she's trying to say.
+And then she settles on a word that she now regrets, which is backstop. Definitely not.
+not the right word. So I don't think they are asking for a bailout. I don't know what she meant by
+backstop. Doesn't make sense. So I think this is a little bit of a tempest and a teapot. What I think
+is important, and I think maybe where she was going, is that I do think that we want to make it
+easier to build infrastructure in this country. And that means making permitting easier,
+making power generation easier. That's all about regulatory reform. And I think,
+that the goal here is to enable a rapid infrastructure build out without increasing residential
+rates for electricity, which nobody wants. And that's in the process of potentially creating
+a little bit of a nimbie backlash is when local communities fear that their electricity rates
+are going to go up because someone wants to build a data center. That's the thing we have to
+combat. But the way that you solve that problem is by making it easier for these AI companies to
+stand up their own power generation behind the meter. And that requires regulatory reform. That's what the
+president has called for is allowing the AI companies to do behind the meter. So no one's talking
+about bailout. Nobody's talking about backstop. We are talking about making permitting easier and making
+it easier to do build out. So build out, not bailout. Yes. Should be our motto here.
+Build out not bail out. Now, there was a little bit of sort of reading the tea leaves.
+There have been times when loans were given to incentivize an industry. So I just want to be clear
+with you, there's no discussions of like Cylindra, you know, type loans.
+Nobody's discussed any of that with me.
+So it's not even on the radar, I would say, from the government standpoint.
+And why would it be if there's so many people trying to pour capitalists capital into this, Brad,
+and there's so many people trying to buy your shares in a company making $13 billion
+that's currently valued at $500 billion, which I think is like a 30 to 40 price to sales ratio.
+I mean, this company is fully valued and people are still trying to buy the shares.
+So Brad, wrap us up here, yeah.
+Yeah.
+I think I was brilliantly said by David.
+Listen, it's a national imperative that we accelerate the build out of AI infrastructure across the country.
+I've said before, the $4 trillion that Jensen Huang has estimated will be built out over the next five years
+is 10 times the size of the Manhattan Project that was totally federally funded.
+Okay.
+And this is all being privately funded.
+But it wouldn't be possible without the government, Secretary Wright, others, Bergram, et cetera,
+clearing out of the way the regulatory hurdles, you know, you're not.
+You heard on the pod, same pod, that power is really the gating issue here.
+And so it's been amazing to see what the federal government is doing.
+I think that's what Sarah was trying to get to.
+They need to have a public-private partnership.
+They're going to do their job, raise their money.
+Backstop was not the right choice of words.
+But they, I know, and I talked to Sarah this morning about this,
+are deeply grateful for what the federal government is doing to accelerate the build-out
+of power and infrastructure.
+And the federal government could do that without taking risk on their own balance sheet.
+In fact, we've seen some of the investments they've made as a result of the Japanese deal they got on tariffs.
+They can reinvest those dollars to accelerate some of the nuclear buildout, etc.
+By the way, Sam just posted something about 15 minutes ago.
+And he was pretty authoritative in addressing the three critical questions.
+The first thing he says is that we will, we meaning open AI, will end the year on a $20 billion forward run rate.
+which means December revenue will be $1.666 billion, at least.
+So we kind of know where the revenue is going from 1.2 to 1.6 over these next few months,
+which is a pretty staggering growth rate.
+If they were at 13 and they're going to end up 20.
+And then he goes and addresses the whole too big to fail and whether they want government sponsorship.
+And he's pretty unequivocal here.
+I think this is a tempest and a teapot.
+I think people are on pins and needles.
+They're agitated.
+Some people have had no gains.
+Other people have had incredible gains.
+Everybody's agitated.
+I think we are getting in the risk off phase for at least two or three months.
+We will be back firmly in risk on mode in February, is my suspicion.
+But these next few months, I think people will overblow every random little thing.
+Well, and in fairness, $1.4 trillion is a very large number.
+I mean, this is a number we've never seen.
+one company say they're going to do a build out of it.
+Okay, well, can I take the other side of this?
+Please.
+If I was the U.S. government, to the extent that we are doing public-private partnerships,
+if there is a way for U.S. taxpayers to own a piece of open AI, I would say, great.
+So, Brad, do you sell your shares to the Trump's sovereign wealth fund?
+So hold on.
+So before everybody breathlessly complains, whether you see it or not, there is an enormous
+sovereign wealth fund that is being built.
+built by President Trump. And it is for the benefit of all American taxpayers. And so to the extent
+the people in government could underwrite an investment structure like they have done in
+things like MP materials, which is way up, things like intel, which is way up, these guys are like
+really good, smart people. Mike Grimes, Dave Shapiro, Stephen Feinberg and his team at DOD,
+they're cutting hard deals, tough deals.
+So I don't know if they did do a deal with Open AI,
+I think they probably get the best of it,
+and the American taxpayer would win,
+and I wouldn't be angry at that.
+I think, as you see from Sam's tweet,
+they're not looking for the government to invest,
+they're not looking for a government bailout.
+What they are doing, and I think David said it well,
+is they're pushing us very hard
+as a matter of national security and economic growth
+to go faster, to accelerate,
+to build out infrastructure and to give a little credit where credit is due, right? All of this build
+out, right? All of the Stargate stuff that people were laughing about 18 months ago, thank
+God as an American citizen that we are running this fast. China has 100 nuclear fission plants
+under construction and we were sitting on our hands. So I think if anything, they've helped jump
+start that conversation and get us moving faster. And I think that's good for all of us.
+Great segue, Brad. Thank you. Jensen told the FT, straight up, quote,
+China is going to win the AI race.
+His argument is that U.S. state-by-state regulations and power constraints are making it harder for U.S. AI companies, as we've discussed here, countless times.
+Whereas the CCP is obviously they're just making it super affordable to run all those GPUs.
+Invidia put out the following statement from him.
+As I have long said, China is nanoseconds behind America and AI.
+It's vital that America wins by racing ahead and winning development.
+developers worldwide, obviously.
+He's 100% right.
+He's 100% right.
+I don't know if you guys saw,
+but Curser 2.0 launched this week.
+My team at 80, 90, use it.
+It's an incredible product.
+Guess what they did?
+They swapped out Anthropic
+for an open source Chinese model.
+Yep.
+Do you know what they're using?
+Is it like Kimi or what is it?
+I think it's Quinn.
+I think they're using a spin of Quinn.
+To be clear, they're cleansing these Chinese
+open source models, but they are,
+I don't know about cursor, but there are a lot of companies.
+Yes.
+and then setting them up themselves, obviously.
+My point is we are right now running with one hand tied behind our back.
+We are going to have to deal with 50 different sets of legislation from state legislators
+who think they know what AI is.
+They don't.
+Sachs knows.
+So there should be a federal framework and that should be it.
+And then meanwhile, the Chinese open source models get better and better and better and better.
+and so we're making technology decisions that tie our wagons to that steel threat. And so Jensen is right. We need to
+clean this up quickly. I was a little bit disappointed to see. I thought it was reasonable for certain
+politicians, especially Republican ones, to say, look, there's not going to be a federal bailout
+for AI. Great. We all agreed. No one's asking for it. But I was a little disappointed to see that some of them
+were associating a bailout with a single federal framework as opposed to the,
+the patchwork in 50 state regulatory regimes. Because if Republican governors think that they're the
+ones who are going to be writing the rules, they're certainly mistaken about this. 25% of the bills
+going through state legislatures are in four states, California, New York, Colorado, and Illinois.
+In other words, the biggest blue states. Those also happen to be the states where these big AI
+companies are all headquartered, with the one exception of XAI, which is in Texas. But these
+companies are in California, the blue states have the most market power. And if they end up
+creating the regulations, I just think it's naive to think that the AI companies won't write
+their models to those regulations of the blue states. I don't think the red states are somehow
+going to find themselves exempted from the blue state regulations that are being imposed. And I've
+talked about in a previous podcast how what the blue states are going for here is to reinsert
+DEI into AI models to achieve ideological capture. And the way they do this, they don't say we're
+requiring DEI. They say that we're prohibiting algorithmic discrimination, which means that the
+model says something bad about a protected group. You end up with the same end result,
+which is, again, ideological capture. I think all Republicans should be opposed to this.
+There's only one way to stop it, which is with federal preemption. Otherwise, the states will do what
+they want, and the blue states will basically dominate. Now, I think that part of what's going on
+here is that Republicans have muscle memory around what happened during the Biden years. And what
+happened during the Biden years is that the Biden administration pushed for censorship and shadow
+banning and deplatforming, all that kind of stuff. They were working very close with the big tech
+companies to push the censorship agenda. The only pushback that Republicans were able to achieve was at the
+state level. And so you had cases like Biden v. Missouri, where we had Senator Eric Schmidt was on the
+pod talking about that when he was attorney general. And so he was able to make a state's rights argument
+to push back on the Biden censorship. So I think that Republicans remember that and they think, well,
+state's rights is our solution. But now we have a completely different situation. I mean,
+the board's been completely reversed where Republicans are in power in Washington and the states
+are making a bunch of bad decisions with respect to AI. And so I think that, to be honest,
+I think we need to kind of just realize that.
+And I think the arguments that make the most sense right now are the Commerce Clause arguments,
+where, look, the Constitution wants to create a single national market for interstate commerce.
+AI clearly qualifies.
+And let's get President Trump, not Gavin Newsom or J.B. Pritzker or Kathy Hochel or Jared Polis,
+the ability to write the rules.
+Let's have a single federal framework that will prevent ideological capture of AI, keep it on bias,
+which every conservative should want.
+I'll just reiterate again, if you want to see the impact of having a state set of regulations
+that basically munge a market up, just go and use your favorite AI tool and ask what happened
+when California passed carb, which are the emission standards that forced the entire American
+U.S. auto industry to have two sets of cars, one for California and one for the rest of the
+market.
+And what did it do?
+It completely flipped demand upside down on its head.
+and it has made it very difficult for the auto industry to be sustainable.
+And I think if you apply that same idea across four states instead of just one,
+across the most important technological revolution we've had,
+I just don't think it's going to be a good outcome.
+The steel man, first of that, Chamoth, would be,
+we got rid of smog in California,
+and that it did an amazing job in terms of getting rid of pollution,
+which also matters.
+And I'm trying to think of the steel man.
+Are you sure that that's the steel man that you've come up with, or do you think that the tax credits did that?
+Do you think making two cuts of everything was the way that solves smog, or do you think the $7,500 federal tax credit solves smog?
+Well, no, but the smog regulations predated the EV ones.
+Those have been going on for decades, so it did get rid of smog, so, you know, putting better, using cleaner gas and then having better exhausts on those cars.
+That would be the steel man of it. I'm not saying I'm for or against state regulations,
+but Sachs, have you heard any, aside from the federalism argument in states rights,
+have you heard any great defense of states having some say in how AI is deployed in their communities?
+Well, they can have some say. There's definitely areas where you don't preempt. I mean, you have to
+decide how wide the preemption is. But when it comes to things like notifications,
+about model safety instance, things like that, it doesn't make sense to have model companies
+needing to report to 50 different states, 50 different agencies within those states, each with a
+different definition of what needs to be reported, each with different reporting deadlines.
+Like, why would you have that? It doesn't make any sense. Why would you allow the big blue states
+to essentially insert DEI into the models, which will affect the red states too? You're not
+to be able to keep that out. I mean, if California pushes algorithmic discrimination, you know,
+Florida and Texas and Arkansas are going to be affected as well. So I think we need to use the opportunity
+we have right now by the fact that we have a majority in Washington to set a sensible federal
+standard that preempts the excesses of the blue states. And look, the constitutional arguments
+you can make either way. I personally believe in the Commerce Clause, but I think when it comes
+to the merits of the policy argument, we should let Donald Trump write these rules.
+Let me just say one other thing.
+Part of what's going on here on the right is that there's so much anger towards the
+big tech companies for what happened during the Biden years with censorship and
+deplatforming that I think there's just this knee-jerk reaction where we don't want to do
+anything to help the tech companies.
+We just want to hurt them.
+And I think we just have to have a more nuanced approach than that because the question is,
+what will the result be?
+Look, no one was more critical of the big tech companies engaging in censorship in Silicon
+Valley than me when Donald Trump was kicked off every big tech.
+tech platform, I think I was literally the only person in Silicon Valley who was publicly
+objecting to that on this podcast. So I'm perfectly willing to criticize the big tech companies
+when they make a mistake. But when they're engaging in healthy competition and innovation,
+and we want to prevent ideological capture, and that's what we're talking about,
+let's make sure it ends up in the right place, not disengage in this knee-jerk anti-tech reaction,
+which will play into the hands of the Blue State.
+governors. We're in this race to win AI globally. And one of the major concerns I have is that
+AI is becoming deeply unpopular in America, right? Silicon Valley is losing the battle around AI.
+Dumers are now scaring people about jobs. They think all these job cuts that are going on in America
+are the result of AI. And number two, they're seeing their electric bills go up and they think that's
+also the result of AI. I've talked with a lot of Republican senator and House members who say
+they are afraid to mention the words AI because their popularity ratings go down.
+We need to get on the other side of that because that is a losing proposition for America.
+If what takes hold here is that, you know, it's politically popular, right, to push back against
+AI, then David, I think that's what you're seeing at these state levels with Republican governors as well.
+And so, you know, I think both of those are false narratives, but we need to get on the other side.
+In China, they're not going to slow down.
+So if we do an own goal here and slow down because we think somehow that this is the path to
+greater economic growth, it's going to be a real problem, both national security as well
+as economic security, three, five years down the line.
+Yeah, can I build on that, actually?
+So in terms of the public discourse, it's true that the Dumer narratives have had this
+tremendous effect that you can see in the poll numbers and then the politicians feel like
+they can basically play into that in one way or another.
+But where do these narratives come from?
+three big tech billionaires who are on the left contributed over a billion dollars to these
+Duma think tanks basically was Dustin Moskowitz, Jan Talon, and Vitalik Buterin.
+And from open philanthropy and from some of these other entities, they have spun up hundreds
+of these astroturfed organizations that are spending literally hundreds of millions of
+dollars to spread these Dumer narratives. A writer named Nirozweissblatt on Substack has basically
+broken down how this all works. It's actually a great.
+article I'll put on the screen. So people need to understand that these narratives are coming from
+somewhere. They're astroturfed. I don't think they're true. And the narratives are contradictory.
+So let me give you an example. Right now, the two biggest narratives that we're seeing on social
+media and in mainstream media are number one, the idea that there's a huge AI bubble right now.
+In other words, it's all totally fake. The other biggest narrative is that AI is on the verge of super
+intelligence and we're all going to get replaced. Also fake. In other words, AI is completely
+real and super powerful. Well, these two things are contradictory. If it's a bubble, it's not going to be
+on the verge of superintelligence. And if the AI is really that powerful, then obviously, on some level,
+this economic activity is justified. So these narratives are completely contradictory. I think that
+is possible to believe in neither one of them, which is where I'm at, but it makes no sense for people
+to believe in both. And you literally have the same people on social media and in mainstream media
+pushing both of these dumer narratives. So I think,
+to increase somehow our immune defenses or our antibodies.
+We need to improve our antibodies to, I think, these memes that are being pushed out
+by groups that have these weird dumer ideologies like effective altruism.
+And they literally just want progress to stop on AI.
+And if we do that, like Brad's saying, China will end up winning this AI race.
+Progress in AI is not going to stop.
+It'll just all be in China.
+Brad, let's talk brass tax before we move on to our next topic about chat GPT and their revenue.
+If they're at 20 billion in revenue run rate, I think it's pretty well known.
+Their majority of their revenue is consumer.
+75% is the number I heard.
+You can tell me if that aligns with your estimates as well.
+And cost 20 bucks a month, 240 a year.
+That's about 60 million paid subscriptions a year.
+and then on the other side, you got Anthropic,
+which is kind of got the opposite, right?
+They're mostly APIs.
+And do those roughly correlate with what you know, Brad?
+Well, I would just say they correlate
+with what the information is reported is leaked,
+you know, data from both companies.
+And that makes them both the fastest growing companies
+in the history of Silicon Valley.
+But specifically, the 75% coming from consumer from Open AI.
+Yeah, more.
+I think it's well-known.
+More comes from consumer at Open AI
+and more comes from enterprise.
+is at NCP.
+So, two challenging questions for you, since you have a big bet here.
+Google, Apple, make these products free.
+They have pretty robust ad networks.
+That's a massive headwin.
+And then on top of that, in the startup community, we just talked about Cursor, people are not
+trusting Open AI and their API anymore because they know Open AI is creating competing services.
+And so there is a big movement in the startup community to not use Open AIS API products.
+How confident are you that with those two headwinds, free for consumers and better products,
+right? Gemini is a great product, rocks a great product, Claude's a great product, a lot of great
+product out there. And I don't think consumers can tell the difference. Why would they pay 240
+if they can get it for free from Google? And then second, startups are realizing, hey, Sam has to make
+a lot of money. Therefore, he's going to do what Microsoft did. There was a company called Lotus
+123. There's a company called Word Perfect that were on the Microsoft platform, Windows,
+Windows and then Microsoft killed them. People right now are experiencing that from OpenAI. How concerned
+are you about the revenue growth? Yeah, I mean, listen, I'm betting in the super cycle. This is the
+biggest super cycle of all of our lives. I'm an investor in Open AI and Anthropic and Google and
+Microsoft and Nvidia, et cetera. And so I don't think you have to make the call right now one of these
+companies winning. The fact of the matter, as SAC said, we have one of the most vibrant and competitive
+ecosystems in AI in the world. I love the fact that Sundar's coming off the mat swinging. I think Gemini
+3 is going to be great at Google. They may in fact make it free. I think Apple, I love seeing Apple pay
+Google to, you know, make Siri better. I think that's going to be a great consumer experience.
+And the only way that Open AI wins is they got to build a product that we all love. You've seen those
+cohort curves. The reality is they are the verb at the moment. It's theirs to lose in consumer.
+the cohort curves are things of dreams, right?
+This is the retention rate and the engagement rate as people stay with the service longer.
+And then by the way, Anthropics numbers, despite cursor doing some of their own thing,
+Anthropics numbers are off the charts.
+I think that this market is as big or bigger than current estimates are out there,
+but it's not going to be a straight line up and to the right.
+We're going to have these moments, as Jemah said, of risk off panic,
+just as we did with Internet, just as we did with mobile, just as we did with cloud.
+The key here is as an investor is conviction.
+There is a massive conviction tax to be paid, right?
+If you lack conviction and sell when these things are down, I'm going to bet on the
+super cycle, but I'm betting over a much longer period of time than most people.
+And amongst the startups out there, they basically believe Claude is not trying to take
+their business.
+And Claude has been very careful to say, hey, we're not going to encroach into the application
+layer.
+So, all right.
+Yeah.
+By the way, the most impressive revenue chart when you showed that,
+leak from OpenAI was anthropic. If that revenue chart is real, what's really impressive is
+anthropic is not really in a J-curve at all. And they get to very similar points of free cash
+flow, but will not have burned through near as much capital to get there. That's my singularly
+interesting observation about this chart. Can I say, again, those numbers are... If it's real.
+Yeah, as reported by the information. But what I would say,
+about that is this. I've been forecasting companies for 25 years. I know the numbers today. Sam just
+told us $20 billion run rate end of the year for Open AI. Everybody who is forecasting three years out on these
+companies is totally guessing, right? Like that's why I said time is on your side if you're betting
+over a five to 10 year horizon. But if you think with precision that the company itself can forecast what's
+going to be happening in three years, I think you're misleading yourself, right? So we'll see.
+I think it's going to be a lot bigger. Could be even bigger than those numbers. But, you know,
+those forecasts are highly uncertain because the rate of growth has never been seen before.
+How do you think about expenses then? Because you're going to have to have some sense of whether
+this spend is accurate or reasonable. I think you have to build in an expense structure that has the
+flexibility. So if the numbers don't show up, that you have the ability to extend your, you know,
+your obligation. So that's why I was saying, I don't think this 1.4 trillion, I think it's kind of
+the red herring out there. I think it's kind of a fake made up number. It's all of the obligations
+of all of the deals that have been announced. And the truth of the matter is only a portion of that
+is borne by Open AI. And I'm certain there's flexibility in all of those deals to match the
+expenses with the revenue side. But listen, let's steal them on the opposite case, Chama. Let's just say
+that all of these revenues start flatlining for Anthropic, for X, for, you know, for Google,
+people aren't willing to pay for these products. Then our, then our CAPX build out for AI is going
+to be a lot slower. Because at the end of the day, there's got to be somebody either in the
+enterprise or a consumer willing to pay real money to pay back all of this infrastructure
+build out or it doesn't happen. Well said. And, um, hey, just a quick plug here. We're going to
+have an amazing holiday party. Come spend another Christmas with your besties at the all.
+All in holiday extravaganza.
+With Kill Tony?
+Yeah.
+Thank you.
+You got the announcement.
+We're burning it down this year.
+Joining us on stage, it's going to be a shit show.
+The host of Giltony is going to mercilessly roast everyone in Silicon Valley and the besties.
+Tony Hinchcliff is coming to the Bay Area.
+We're going to have the same great stuff we always do, casino nights, poker, DJs, open bar, food, cocktails.
+You guys have the courage to go up there and do a little set?
+I'm going to do a set.
+That's what we're going to do.
+It's going to be the four of us.
+People are going to come up and do a set.
+We're going to roast each other.
+It's going to be absolutely brutal and fun.
+So you can.
+I'm going to have to bring in some firepower.
+I'm going to have to bring in my.
+I know exactly what you do.
+You're calling Kevin Hart, aren't you?
+That's fine.
+I'm going to get Chappelle.
+I got a way to get to Chappelle.
+So I'm going to get my own writing team going.
+You guys were all there.
+I mean, Nat threw a birthday party for me, what was it, five years ago?
+Yeah.
+Four years ago.
+And Kevin and Sky and Diego, they all flew up from L.A.
+Al, Roble.
+We all did speeches.
+Sacks did a great roast.
+J-Cal did one.
+Freedberg did one.
+Nat did an incredible one.
+And then Kevin just ad-libs and destroyed everyone.
+Singularly destroyed everybody in the room one-by-one.
+And the mores was about a little.
+Like a sniper.
+Like a sniper.
+She said, I'm going to do a quick, tight five minutes on your piece of medillo,
+which is so small and pathetic.
+And so go to all-in.com slash events, and you get to come.
+Make jokes about Chamat's tiny penis.
+Join us for the All-In spectacular.
+That's worth the price of admission alone.
+All-in.com slash events.
+It's going to be off the chain.
+If you want to do something fun, you know, it's hard to throw a holiday party.
+Why not buy 20 tickets?
+You bring your whole company and you can buy a group ticket.
+Individual tickets available, group tickets available.
+And, you know, you get your logo on the step and repeat all kinds of great stuff.
+Outsource your holiday party to us.
+We'll make it back.
+Oh, okay. I'll do that at 8090.
+Yeah.
+I'll outsource our holiday party.
+Yeah.
+You know, just outsource it.
+Sacks, you could outsource it for your 370 domestic staff.
+They can also.
+All right, listen, we got to talk about markets.
+We got Brad here, our fifth besty stock market pulling back, as Chimov just said,
+hey, we're going to be risk off.
+And we have been getting a lot of data, a lot of hand-wringing going on, Brad, GDP growth.
+Hey, maybe that's mostly due to AI, the unemployment rates ticking up, inflation's ticking up.
+Lots of concerning signs.
+Help us make sense of this, Brad.
+I think, you know, Chimath teed this up perfectly, which is, you know, let's rewind the clock a
+little bit to April of this year. I think on an intraday basis, the NASDAQ was down 20% year-to-date in April.
+We're now up 20% so a 40% move higher in a few months. Same with the S&P. I think it was down over 10%.
+Now it's up 14% on the year. So we've had some pretty massive moves. And I think you have to,
+you know, reflect on where we are. You know, and we used to do this on market checks when I was on.
+and you say, you know, where is Altimiter? And so early in the year, where we're worried about
+tariffs, Altimiter was positioned small, right? By May, we thought they would land the plane with
+the Bessent consensus, you know, on trade. We'd get the big, beautiful bill passed, and we went to kind of
+extra large positioning, and we've been there most of the year. And so now we're back to kind of
+Chumat just nailed it. You know, we're back to kind of medium, medium small positioning in the market.
+And I'll walk through a couple of slides as to the reasoning for that. Maybe we can kick it around a little bit.
+The first one is just there's growing signs. You know, the consumer is pulling back. And, you know,
+you heard it out of Chipotle, you heard it out of Kava, you heard it out of NCL, you heard it out of JetBlue.
+And, you know, the nature of it is we have this two-tier economy. The low-end consumer is faltering,
+the higher-end consumer is hanging in there. But the consumer thing is making people nervous.
+Now, compounding that is U.S. credit card delinquencies are now back to 2009 levels, right?
+And so you have, okay, consumer cracking a little bit, delinquencies, you know, and now we're seeing
+regional banks roll over, et cetera.
+We're seeing the credit markets beginning to crack a little bit, credit spreads blowing out a little bit.
+And then if you go to this next slide, you know, this goes about what Sachs has talked a lot about
+on this pod that we're still in highly restrictive territory when you look at the 10-year tips.
+You know, the Fed is still, you know, got the market tight because they're seeing, you know,
+the market at all-time highs, they're seeing AI stocks rip. But under the surface, I think there's
+a lot of concern and question about what's going on. The good news about this is we still have
+firepower. So what's gone on in this earnings season? You know, this next slide, basically earnings have
+come in really strong. You know, so we have 70% of companies that are beating. They're beating by
+wide margins, you know, in earnings. But if you look at the forecast, you know, basically
+earnings have come in about 11% higher than last year. And the stocks are up about 13 or 14%. But the real
+question is as we roll into next year. And so, you know, Scott Besson on the one hand is saying,
+listen, in Q1, we're going to have some big tax refunds because of no tax on tips,
+no tax on overtime, and he thinks that'll give it a boost.
+But clearly you hear them pounding the table that we need to get rates down.
+I tend to agree the low-end consumer who pays a lot on their credit cards, on their car loan,
+etc.
+is clearly hurting.
+We see these layoffs.
+These layoffs are hurting some of these people as well.
+And so when you look at the multiples of the market, how do we look at it from a
+an altimeter perspective. We still believe that owning all of compute like we have for three years
+and this AI trade has room to run, but there obviously multiples have come up a lot. I talked about
+a 40% move from the bottom this year. And so you can just take your position size and make it a
+little bit smaller. So in the world of less or more, I think Chimass exactly right. There's a pause
+as we head in over the course of the next couple months reflected by the stuff that we're doing.
+but I do think the economy is set up as we head into next year.
+There's been a total decoupling.
+Yeah.
+It used to be the case that as goes Main Street, so goes Wall Street or vice versa.
+The unfortunate reality is that there's a handful of companies that have bids that are, as you said,
+totally speculative and well into the future, but they are so well bid and they're so highly
+valued that they drag the entire indices forward.
+Even though underneath the waterline, you're leaving 493.
+companies behind. And the reality is that those companies that more accurately reflect what's happening
+to middle income America are not doing so well. And so we need to find some visible wins in the
+domestic policy arena. I think that that's what we need now. Because if you think of each year
+of a presidency as an act in three parts, I think Act one was tariffs. I think Act two has been
+foreign policy, and now it's an opportunity for Act 3 to refocus on domestic earnings
+and the domestic wealth effect of middle-income Americans.
+I think that's what has to happen.
+And there's a lot of clever ways, by the way, that we can do this.
+I've mentioned this before, but I think the really interesting opportunity for us is to use
+the money that's been committed by all of these countries as part of their trade negotiations,
+Like, if you add up the money that was committed from Japan to South Korea to the Middle Eastern
+countries, you're talking trillions of dollars.
+I think it's like $3.2 trillion is the number.
+So it's an enormous amount of capital that can improve the state of earnings of the middle
+class.
+And I think we need to figure out a way to more aggressively put that money to work now.
+I think that that's what needs to happen, I think.
+If you look at some of these other markets, it's really incredible.
+Bitcoin is about to break through 100,000 to the downside, which I think is a psychological barrier
+that probably has another 5 or 10 percent more to run. There's a dispersion happening in the Mag 7
+as of this past quarter earnings. So I think all of it has to get sorted out. You nailed it.
+29 days ago, I talked to you guys a little bit about the net approval rating here and how the
+country's feeling. And you can see Trump's net approval rating, 9.4. We're going to get into the election as well
+because it dovetails really nicely with this discussion. It's gotten worse. Here's the numbers
+from November. It's gotten 30% worse. Now Trump's down 13%. I attribute it, I think, to the fact that
+we've had all this layoff news, inflation ticked up to 3%. Everybody knows it was down at 2.3.
+We had made great progress on it, but now it went back up. And there's a lot of survey data going on
+right now. And I think if you look at this next chart, it's super interesting. What gets all the press
+is the foreign policy, right? We're talking about war's ending and great job in the Middle East
+for Trump and Jared and the team. Border security immigration, of course, a big win in terms of
+shutting the border. Pick controversial on ice. But that's my personal stuff. So I'll leave it out
+here and we'll just talk about brass tax. If you look at where the country feels Trump has
+fallen short, it's where he's strongest or where he was elected for being so strong. Look at these
+last three here, Chimov, the economy, 63% believe Trump has fallen short. Looking out for
+the middle class, this is the one that should be the most disturbing. Sixty-five percent of
+the country believes he's fallen short and inflation in the cost of living, 66%. If you look at this
+next chart, this one has been trending online. And I've been talking about unemployment,
+and I've been attributing it to AI. I know some people think I'm crying wolf here, or I'm the
+boy who cried wolf, but the statistics are starting to trend towards my position.
+I believe. And if you look at people who are age 20 to 24, they're at 9.2% unemployment,
+and it is spiking. Why is it spiking? I can tell you from the front lines, you know, hiring
+young people and being at startups with young people in them and talking to them about their
+contemporaries, as companies cut and they use AI to solve problems, they're saying hiring
+young people and training them is not as rewarding or efficient as training in AI to do the same
+task.
+Why do you keep thinking it's AI?
+Even the Amazon cuts, Andy Jassy on the earnings call said this is not AI.
+This is us digesting all this hiring through ZERP and DEI.
+Yeah, I can answer that.
+Yeah, for sure, he did say that.
+He did also say in his memo before that that he thought there would be a lot of changes because
+of AI, and they had the leak memo that they would.
+would not be hiring those, but I'm talking here specifically about youth people. And so I'll take
+Jesse at his word, those 30,000 people are just redundancies. But what I'm seeing on the ground,
+because I work with startups and I work with young folks who are in them, their contemporaries are
+not finding jobs. And the companies that we see and the companies that are selling the technology
+solutions are getting rid of what I'll call the like entry-level white-collar work. In addition to this,
+Student loan delinquencies also going up massively.
+They had a big hiatus.
+But doesn't this indicate that there's no ROI to this expensive degree in a lot of cases
+that these kids are being sold?
+They're being foisted to all this debt.
+This has been going on before November of 2022 when ChatGPT launched.
+I don't think AI has had enough time to have a huge impact on this.
+In this case, I think you're wrong respectfully, even though you're the czar of AI.
+I'm seeing it with young folks.
+and I'm seeing it with the software that the companies I'm investing in are deploying in other
+companies. But we'll see who's right in the coming months and that inflation back up to 3%.
+And so this is going to make it particularly hard to cut rates because the reason, when we go back
+to slide number three there, the reason why people feel Trump has fallen so short on the economy
+and taking care of the middle class is because of inflation. Trump said over and over again
+and some people in the administration have been very publicly gaslighting, in my opinion,
+the country saying, hey, inflation's not happening.
+Inflation is happening.
+And Trump sold people that price it would go down.
+We're back up to 3% inflation folks.
+Not only is it not going down, it's going up.
+And I think when you put together what people are seeing, this focus on a big ballroom
+being added, focus on tariffs, things that Americans are not.
+seeing hit their wages and they're seeing their kids not be able to get jobs, that 9%,
+this is what's concerning Americans.
+Trump has failed the middle class.
+That's the bottom line here.
+I don't think that that's true.
+The country does, 66% of them.
+I think everybody can find a piece of data to hang their bias on.
+And I think that what this most recent spate of elections show is that most people are looking
+for some form of a price break. And so if you're a New York mayoral candidate and you offer
+giveaways, you get a lot of attention. If you're running for governor and you offer giveaways,
+you get a lot of attention. The question is why is that happening? And I think it's fair to say
+that the reason why that's happening is that we have now spent a lot of time setting the table
+for a wave of domestic policy initiatives.
+And I think now is just the opportunity to follow through on those.
+I think that what we need to do is we need to just figure out where the pressure is.
+And I think Trump is doing this.
+So, for example, today he announced the Eli Lilly and Noah Nordus could be selling GLP1s for like $149 a dose.
+I think like that's good.
+Is it as expansive?
+I think it could be probably more expansive.
+but there are all of these other programs that I think need to get addressed.
+The student loan thing is a key one.
+It's time for legislation that says we're going to stop federally underwriting these things.
+Force it into the public market.
+Force it into the open.
+Allow transparent pricing of loans and risk.
+And you can stop that curve dead in its tracks.
+We need to clean up the AI stuff.
+So there's a bunch of things now where when the government shutdown ends,
+we just got to get to a legislative agenda and start to fix them.
+domestic policy. But you can't do that when folks won't even come together, folks won't even
+end the shutdown. So I think, Jason, part of this is a frustration that's going to keep brewing
+that I think is less a reflection on him, but more reflection on the point where we're at
+is that people want these structural problems fixed. That can only happen through legislation.
+But that can't happen if the House and the Senate are not even convening because there's still
+a shutdown. Yeah. And people are seeing equity holders like us, people in crypto get rich. We're all
+up 20, 30 percent this year, and the working man in this country and the working woman is not.
+That's the truth of it. And I think that's why, and 60 percent, by the way, 60, 65 percent
+of the country blame the Republicans for the shutdown and people aren't getting food stamps
+and, you know, people aren't getting paid and people see their health care prices are about
+to spike. So we're doing all these tax cuts. It's great that the economy's ripping for equity
+holders. But there's a reason why two-thirds of the country feels this administration
+has failed the working man. It's time to get back to work. It's time for Trump and his group to get
+focused on the people who put him there, not just the people like us who are extremely affluent or
+ready. What do you think, Brad? If you're right and we have inflation over 3% next November
+and you have higher youth unemployment and the economy is only growing at one and a half percent
+and interest rates stay high, then I think it'll be a rough midterm for the Republicans.
+I don't actually think that's the flight path for the country.
+I actually think you are going to get three to four rate cuts.
+I actually think you are going to see a reacceleration of GDP.
+I don't think that these job cuts are the result of AI, but that's what makes a market.
+I think you heard the president say after the elections this week, that, you know,
+that there are a lot of things around affordability that got to be delivered, that aren't being
+delivered. And that number one affordability issue starts with interest rates being lower. And he's
+been pounding the table on that all year long. But listen, I think a big mistake by Republicans in this
+last election cycle is they weren't talking about affordability. And the people they lost to were
+talking about affordability. So I think on that score, you're correct. But I happen to think that
+inflation is going to continue rolling over. I think you see some one-time effects in here.
+And so I'll take the under, Jason, with you. And I can have a little side wager.
+I'm just sharing the data next year. Can I respond? Of course. Yeah. And that's why we're here.
+You're really good at finding these cherry-pick charts. So let me show you a couple of them.
+So with respect to the job. Well, you find, like Jamah said, you find charts or polls that support
+the point you're trying to make, which is fine. But let me just show you a couple of other ones to provide
+some balance. So U.S. white-collar jobs as a percent of total employment in the U.S.
+Very steady line. You see a blip there around COVID because so many blue-collar jobs were lost.
+That created the percentage of white-collar to bounce up. But post-COVID, it's been on a very
+stable trajectory. If it were true that we were seeing massive AI job loss, you would see the
+percent of white-collar jobs dropping in the economy. That has not happened. Okay. And every time
+there is some sort of job loss story, you glom onto it being AI related like you did with Amazon.
+And then Andy Jassy comes out and refutes that.
+Then you're like, oh, no, no, I'm talking about something in the future.
+So like you want to toggle.
+You'd like to toggle.
+That chart ends in the first quarter of 2025.
+So it's missing the last two quarters.
+So now you're saying that all of a sudden this has just happened in the last six months.
+No, no, it's flat.
+You can see it's flat there for the four years, the percentage on your own chart.
+And that only goes to Q1.
+But sure, keep going.
+I don't see a big change here in the percent of white-collar jobs.
+Yeah, I'm not even sure this is relevant without the last.
+Of course it is.
+If there was some sort of job shock in the economy, it would be white-collar jobs
+who'd be affected, right?
+Well, I think the white-collar jobs amongst young people who are one showing up.
+Whenever we point out-out, I was very clear.
+I think it's happening with young folks.
+And then the number of layoffs right now is the largest number of layoffs we've had in a quarter
+since 2003.
+So this has been a lot of layoffs.
+know it's hard to hear, Sacks, but this has been the largest number of layoffs in 20 years.
+It's not hard to hear. I think, look, you keep bringing up these anecdotes, and the plural of
+anecdotes is not data. So in any event, when I look at this chart, I see that there is no job-loss shock
+in the economy, and that's what you've been claiming. And every time we specifically refute,
+your anecdote, you're like, oh, no, no, no, that's going to happen in the future. So you don't know
+what the cause of that is. The cause of that could be the fact that all these kids,
+graduating from college are woke and majored in degrees that don't have economic value.
+You don't know what the problem is.
+You're just glomming onto this AI story because you just like it.
+You like this narrative.
+And you're repeating this like, dumer narrative that's been fed to the by the media.
+Okay.
+No, no, I told you what it is.
+I'm just seeing the anecdotal stuff I see on the front lines is what I base it on.
+It's not just me glomming on to random data.
+Okay.
+The second chart I want to bring up, what you see here is median, real wage.
+earnings are going up. Now, if it's true that inflation is high and wages don't increase,
+then people's purchasing power will go down. But what we're seeing here is purchasing power is still
+going up. And we have seen that during the first year of the Trump administration. So look,
+it is true that Republicans need to focus on affordability. The price of gas and eggs, for example,
+has gone down. And we need to keep making progress in that area. I don't know if you saw the tweet
+by J.D. Vance, but he basically said that. Republicans need to focus.
+on the domestic picture, and they will. Now, if you're talking about the election, one thing I want to
+point out is that all the major races were in blue territory, and we got blue results. So this wasn't
+like unexpected. And furthermore, Trump wasn't on the ballot. Now, I can see to you that Republicans
+have a problem that when Trump is not on the ballot, our voter turnout is lower. So in this election,
+the only thing that was a little disappointing, I think, was the gap in excitement.
+between the Democrats and the Republicans.
+Democrats were able to turn out their voters.
+Republicans were not.
+And again, that's the problem that Republicans are going to have to solve for the midterms
+and in 2028, which is how do we turn out our base when Trump is not on the ballot.
+But you can't really lay that problem at Trump's feet.
+I mean, when he's on the ballot, he turns out the base and he wins.
+And that is the problem that we have to solve.
+So I agree with that part of it.
+And I agree with the part of it that said that Republicans now need to focus on the domestic
+picture.
+But look, one of the biggest problems we have right now is the government is shut down.
+Who does the public blame for that?
+Unfortunately, they're going to blame the party that's in power, not realizing that the
+reason why the Democrats are able to shut down the government is because of the filibuster.
+So, unfortunately, I think the public perceives that they gave power to Republicans,
+but the government is shut down.
+The reason for that is because Democrats can shut down the government with just 41 votes,
+basically. And President Trump has called for getting rid of the filibuster. If the Democrats won't
+reopen the government, I think we should do that. By the way, just to go off on this tangent for a
+second, most people don't understand the filibuster or how it works or why that's even a part of democracy.
+Basically, what it says is that for votes where the filibuster's in play, you need 60 votes,
+you need a supermajority in the Senate as opposed to 50. If you ask most people in the country,
+what is democracy? They would say it's 50.
+plus one in the House, 50 plus one in the Senate and the presidency. That's all you need. But that's not
+true. And the question is, if Democrats won't reopen the government, then I think Republicans are
+within their rights to get rid of this filibuster. And we know the Democrats will do it. The next
+time the Democrats have the trifecta, they will absolutely get rid of the filibuster.
+We know that's true because when we interviewed Joe Manchin, he was very clear. He was asked by
+Schumer and Biden, let's vote out the filibuster. And he drew a bright line in the San
+and said, no, but you're right, they would have. And we're getting to a place where if these folks
+in the Senate and the House don't get back to work soon, there will be no domestic policy agenda
+that gets past. There's critical crypto legislation, AI legislation, there's domestic healthcare
+and other legislation that has to have a chance to see the light of day. And so if you're not
+going to show up, then it doesn't leave many other options except to get rid of the fieldbuster.
+Now, that has all these downstream effects for when you're not in charge.
+Right? Just because then it'll be a simple majority for the other team as well.
+Right.
+But you're right, Sachs.
+Like, we're getting to a point where...
+There are two Democrats who are opposed to getting rid of the filibuster was Manchin and cinema.
+They're now both gone.
+So the moderate Democrats are largely out of the caucus now.
+And if and when, because at some point, the Democrats will at some point return to power,
+you know they're going to get rid of the filibuster.
+And here's the crazy thing.
+You can get rid of the filibuster with 50 votes in the Senate.
+I don't think people will realize that.
+So basically, you've got this custom, because that's all it is, is a customer convention or tradition in the Senate of having this filibuster vote.
+But the majority can just get rid of it.
+And the Democrats already said they're going to.
+So why would the Republicans foolishly abide by this sort of gentleman's agreement that doesn't exist anymore, hold themselves to a 60 vote majority?
+The country gave President Trump a mandate.
+They gave him a sweeping re-election, seven out of seven swing states.
+the House and the Senate.
+And they want results.
+And those results are being thwarted by a government shutdown and, more generally, by this
+crazy filibuster rule.
+Why wouldn't we get rid of it now and actually pass the reform that the country wants?
+And then let's be judged on that in the midterms than in 2028.
+And if it ends up not being good, then we'll pay the price.
+That's the right.
+So we should get to the election results.
+And then just as the, this is with a chart.
+I was mentioning sacks.
+Here's the layoffs for any October highest since 2003.
+So, hey, listen, we're all trying to figure things out in real time here.
+But it's not just the All-InPod talking about what's going on here with jobs.
+It's a big discussion on CNBC and everywhere in between social media.
+I know.
+And I remember that article that got pulled up when we discussed for Amazon was basically
+automating its warehouses.
+And you were saying that this is like all AI-related job loss.
+And then the article itself said that they bought a robotics company at debt.
+decade ago, and this was all on trend for what they've been planning for a decade, and the
+humanoid robots aren't even here. And then you're like, oh, yeah, yeah, I'm talking about the,
+you know, the Tesla optimist robot that'll be here in a few years. It's like, you keep pivoting
+between what's going to happen in the future and what's happening right now. I know you're trying to win
+the debate club, but you're, you're misconstruiting my point. You're trying to spin, like,
+my point of view, and you're the greatest debate club, captain. I'm not trying to debate.
+I'm just putting out facts here for the audience. You are debating me. No, no, no, I'm just putting out
+facts here as the world's greatest moderator. You're putting out spin. It's okay. It's
+Go ahead, spin.
+Okay.
+Spin away.
+Take it easy.
+Debate Club caption.
+Don't pretend you're not debating when you're debating.
+Okay.
+Just debate.
+It's okay.
+Don't be a poffey.
+Say it.
+It's okay to debate.
+Just disagree with me.
+Don't pretend you're not.
+Here's the thing.
+The 600,000 jobs is what they were saying in a leaked document, Amazon, that they were
+not going to fail, the automation group.
+You want to be a defender of the weak and the plighted.
+And the problem is.
+Once again, you're trying to diminish me by saying this
+I'm not diminishing you.
+What I'm trying to do is balance out the fact that you two guys are captured and are no longer
+objective on this podcast.
+You say something about a company where the CEO said the exact opposite and you won't
+take him at your word.
+He said that a week later.
+Okay.
+So you get a week to make up your own bullshit.
+Doesn't make it right.
+He was very clear.
+They literally were saying in the leaked documents that they had a PR crisis on their hand
+and they were going to try to spin the AI job losses.
+The CEO of a multi-trillion dollar public companies said on the right.
+record and filed with the SEC, that the reason he did these layoffs was because of ZERP and DEI.
+There's two sets of layoffs.
+One of them is the 30,000 white-collar people.
+Sure, we'll take them on his word.
+The other one is that they're canceling jobs explicitly because of the AI that they're planning
+to deploy and that they're making PR plans to cover themselves for how bad that looks to them.
+Let's move on to Mondami.
+I want to read you something for Morgan Stanley this week on this question of, are there
+the job loss is caused by AI or they caused by something else. And the title of this section is
+flatter is faster. It says, you know, the cynical take has always been that this just wouldn't last,
+that companies wouldn't be able to maintain this level of discipline, and that they were doomed
+to repeat the mistakes of the past. It's never different this time, as they say. But the cynical
+take seems wrong again. And the number of examples of companies that have adopted this mindset,
+culture, behavior of efficiency and getting fit appears to be growing quarterly.
+Guess what?
+It's cool to have fat margins, no debt, maximum flexibility, and be efficient and more
+faster.
+Credit to Ashton Curtis.
+But they're saying, you know, they're out there talking to the companies.
+I'm not saying that there's no AI effect, but the idea that you're going to hang all
+of these layoffs on AI, I would never hang them all on AI.
+I think there's, if you're a CEO.
+Hold on.
+I'm going to be very clear here.
+I am not hanging them all right.
+I'm saying for the young folks, that's what I suspect is happening there.
+For the existing folks, I do agree that they're all getting rid of excess fat and they want to be a leader and they want to juice their earnings.
+Those are two different things.
+Okay, now let's go on to Mondami because it's getting boring.
+We're starting a circle here.
+The Zoran has won New York City.
+The Dems won across the board.
+Zoron won every borough except Staten Island.
+He finished with 50.4% of the vote, 9-point lead over Cuomo.
+Curtis was a distant third at 7%.
+No surprise if you're on Polly Market because they have been saying this for months.
+Pull up the chart, producer Nick, thank you.
+He's been a big favorite since he crushed Cuomo in the primary in June and he's held the lead the whole way.
+He's self-proclaimed Democratic Socialists.
+Some people think he's a communist, and he's the first Muslim mayor and the youngest
+in over 100 years.
+Big promises seem to have resonated with young folks, especially women in New York,
+affordability, rent free, public transit, higher taxes on the rich.
+You're going to pay an extra 2%.
+I think it'll be 54% with the highest tax rate in New York, the highest tax rate in the
+nation.
+And hilariously, he had supervill and Lena Khan to his transition team.
+And she's going to go break up the bodegas and shout out to our friend who's not here today.
+The Sultan of Science, David Freerberg, predicted the rise of socialism on this very show, about six months before anybody knew who Zoran was.
+Here's the clip.
+Give him his flowers.
+He's not here.
+The party line is that socialism was defeated in this election cycle and that there was a resounding kind of vote from the American politics.
+populace against socialism. And I actually think my contrarian belief is that we'll see a rise,
+a dramatic rise in socialist movements in 2025 in the United States. We're going to see an
+unleashing of economic growth because of deregulation and AI. There's going to be some parts of
+the economy that are going to be big winners and some parts of the economy that are going to be
+big losers. When you have this sort of a change, this fast, there are often large contingents of
+people that are left behind. And when that happens, I do think that the socialist policies and the
+socialist movements gain steam. Growth does not mean that it benefits everyone equally. And I think
+that some folks will see people go from being billionaires to 100 billionaires to the world's first
+trillionaire. And it will also start to fuel this rise. So I think that we will see an increase in
+the breadth and depth of socialist movements in the United States. Chamah, what can we learn from
+the Mamdami effect? Peter Thiel predicted this in 2020. There was a bunch of leaked memos between
+Peter and Zuck and Andresen. But he put his finger on it in January of 2020. I retweeted it out.
+Basically what Teal said was, from the perspective of a broken generational compact, there seems to be
+a pretty straightforward answer to me, namely that when one has too much student debt or if housing
+is too unaffordable, then one will have negative capital for a long time and or find it very
+hard to start accumulating capital in the form of real estate. And if one has no stake in the capitalist
+system, then one may well turn against it.
+This has been floating around for years, and I think Teal, yet again, has seen the forest
+from the trees many years ago.
+So, yeah, what is happening?
+I think that we've put our finger on it.
+We need to come back and now focus on domestic policy and fix some of these core pernicious
+issues.
+One is clearly that we now need to address how student loans are unconstitutional.
+underwritten. We cannot allow generation after generation of people to graduate from degrees that
+they don't quite understand with hundreds and hundreds of thousands of dollars of debt that they
+have zero chance of paying off. That is a horrible way to start your life. And we have not done right
+by these folks. We need the free market to be able to tell somebody, as hard as it may sound
+to hear that an art history PhD will cost you $800,000 so that the people that take it
+have the money or are willing to bear that cost. Meanwhile, if you became an electrician,
+it would only cost you $40,000 or $50,000 and you could have an incredible life. Or if you go and
+get a degree in AI or stats or something. My point is that we need to differentially price
+degrees based on the value and the earnings power that it creates for people. That is a policy
+level initiative that needs to cascade through America. That cannot happen if the government is not
+working. So we need to fix that. The problem with housing is much more state and local. And I'm not sure
+I have a great diagnosis for how to fix that, except that certain states just need to get their act
+together. I mean, in California, we have just absolutely abysmal building regulations that prevent
+anything and anybody from doing anything. So that's what we need to do. We need to fix these things
+legislatively. We need to do it right away, and we need to fix this broken generational compact.
+This was the first moment in years where I have now become sympathetic to this idea of
+student loan forgiveness. I was never sympathetic to this idea. I am sympathetic to it now.
+Why are you sympathetic to it, Chama? Because I think that we should have fixed this problem a long
+time ago. We should have not allowed these loans to be underwritten the way that it was for
+so long, not allowed all of these effective subsidies to pervert the free market's ability to tell
+people that some of these degrees were not worth their time. We have Palantir today saying that
+they're not going to hire from college anymore. Let me build on that. Okay, so look, just on the
+narrow loan forgiven this point. So I actually agree that maybe loans should be forgiven if you
+get a total overhaul of the system. What you don't want to do is acknowledge that all the loans are
+bad and they need to be written off and then continue making them. And that was the problem with,
+I think, the Biden loan forgiveness program is he's going to write off trillions of dollars of loans
+while keep funding the system without any reform. So let's talk about a big reform package where we
+completely re-underwrite how we do this and maybe some loan forgiveness can be part of that so that we
+don't have all these kids graduating who are basically socialist because they're so deeply in debt,
+they're never going to own capital in the system. By the way, J-Cal, maybe the fact that all of these
+millennials are socialists might have something to do with the fact they're unemployable. Who the
+hell wants to hire young Lenin 2.0 communist revolutionary to be in their company. If they don't
+believe in capitalism, how are they going to work the way up through a capitalist system?
+That's your best point so far. Yeah, it's your best point. Just saying.
+Best point so far. Maybe it has something to do with the fact that all these kids are socialists
+and junior communist revolutionaries rather than blaming our favorite scapegoat AI.
+Okay, so anyway, that's that point. Now, in terms of Mamdani getting elected, you got to remember, New York City is like 80, 20, 20 Democrat, and he won very narrowly. It was like 50.4% of the vote. So this was not some overwhelming victory. It was a narrow victory. He squeaked by, but he did win, and it's because the base of the Democratic Party is energized by this socialist ideology. So what we saw in this election, I think, was blue cities and states getting bluer, meaning moving.
+to the left. And that is a problem that is a little bit scary because historically in this country,
+the politics was played between the 40-yard lines. You didn't have one of the parties being fundamentally
+a revolutionary party. And it does seem like the Democrat Party is gradually becoming a party of
+Mem, Donnies and Katie Porter's and genuine socialist revolutionaries. And, you know, if we ultimately
+lose, then the country's going to be in for a big shock. But I don't think that's going to happen, though.
+But this is why I think we should take very seriously the idea of if the shutdown continues
+and the filibuster, because while the country has empowered Republicans with all the different
+parts of the federal government, we have to deliver genuine results now.
+Otherwise, these socialists are going to take over in three years.
+Brad, what was your take on this?
+I know you were involved in a debate, a ban the billionaires debate that you did very
+bravely. I don't know if you can talk about it or not. I know it was at a certain university.
+I'll leave it at that. But if you were willing to talk about it a little bit, I think it relates and
+dovetails quite nicely with what happened in New York. And by the way, I think the most important
+statistics since my hometown, I think a lot of New Yorkers don't fall for this kind of bullshit that
+he's spinning. And if you look at the chart, if you can pull up the chart, Nick, of people who
+were born in New York, as opposed to people who have been there. So if you look at that bottom one,
+I was born in New York City.
+38% of those people went for Mondami and the other 60% went for the other two candidates.
+But if you were there for less than five years or less than 10 years, 78 and 85% chance you voted for him, the people who were not born there, they fell for it.
+This guy's a charlatan.
+Nothing he says he's going to do is going to happen.
+It's going to be total, complete, utter chaos.
+Brad, your thoughts on what we're seeing like bigger picture, not just.
+just what's happening in New York, but what you heard when you debated kids about ban the billionaires
+and socialists. Yes. Yeah, so the debate was at Stanford sponsored by the economics department or
+whether or not billionaires should be allowed to exist in America. I can't talk about, you know,
+what we debated in the room is Chatham House rules, but I will tell you this, that a preponderance
+of people on their way in, you know, thought that they should, you know, ban billionaires in the
+United States, right? I think it's a fundamental fight for the soul of America going on right now. This
+goes to the very basic premise of the American dream. You know, is there economic mobility in America?
+But I think Republicans have to get real about this. I think they have. The president ran on a
+main street agenda. He passed the Invest America Act. I think he absolutely gets what's at stake.
+70% of people feel left out and left behind. They feel like the system is rigged against him.
+And when you have somebody like Mondami who comes along and promises everything under the sun for free,
+that he can solve all of these problems, I think it's very entit.
+seen for young people who are frustrated.
+They also don't do any diligence because he can't deliver on any of these promises.
+He's not allowed to his mayor.
+And he takes a state assembly.
+You know, Chimath and I were with Vivek Ramoswami last night.
+And Vivek tweeted about this yesterday.
+Republicans have to talk about the issue of affordability, right?
+And I think they really have a good game plan around the Main Street agenda for affordability.
+Remember, no tax on tips.
+That doesn't help rich people.
+Helps people who are feeling left out.
+no tax on overtime helps people who are feeling left out. But that's getting drowned out,
+you know, Jason, as you pointed out in the moment by people who feel like their grocery bills
+are going up, the cost of rent is going up, et cetera. So that is going to be the struggle over the
+course of the next 12 months. That is the battling narrative. And in the Democratic Party, clearly,
+this was, remember, this was a fight within the Democratic Party between Andrew Cuomo and Mamdani
+and the centrist Democrats are losing to, you know, kind of the more socialist wing of the party.
+And I think on a national level, folks in Indiana, Ohio, Wisconsin, they don't fall for that.
+They believe in the American dream. They believe in economic mobility. They may be frustrated by affordability,
+but they're not ready to burn down capitalism in the way that Mamdani is suggesting.
+Those voters may not want to burn down capitalism, but that's what they're going to get,
+because we have a two-party system in America. If the Democrats go social,
+and then they get the trifecta and they get rid of the filibuster, that's what they're going to
+impose. I think the person who wins 2028 is the person who puts as much energy into, say,
+building data centers or ballrooms as puts into building affordable housing. That will be
+a great thing for somebody running in 2028 to champion. Why do you guys think young women
+overwhelmingly supported Mom Donnie? The vibes?
+No, look, I think there's a lot of polling showing that between young people and old people,
+young people are much further left, and as between women and men, women are much further left.
+So like the most left-wing group of the electorate is young female professionals,
+add the professionals versus blue collar. So basically professional class versus working classes.
+There's another very important overlay.
+It might also be there's the overlay sacks of Cuomo being me-tued as well.
+so maybe some women didn't feel comfortable voting for him.
+He's a particularly odious candidate, by the way.
+The worst candidate ever, yeah.
+I agree that he is a weak candidate.
+He kind of represents this like washed up establishment vibe.
+It's just not a fresh candidate at all.
+That's a problem.
+But look, the Democratic establishment did a terrible job here that not only was
+Quim of the candidate they put forward, but also they lawfaired Eric Adams.
+They basically wrecked his mayorship through this really weak lawfare based on like
+airplane upgrades or whatever. And they did that because they thought they're going to be able to
+get a more compliant establishment figure in the role. And it completely backfired. And they end up
+with Mamdani, who hates them as much as they hate Trump. So the establishment Democrat wing of that
+party has completely failed. But look, this is what we're seeing across the country is that the so-called
+centrist's Democrats, the mansions, the cinemas, they're being driven out of the party.
+And all the energy is with this base that's turned socialist. And so, Brad, this is where I get very
+nervous. Yeah, it's true. Like the American Heartland does not want a communist revolution. But if these
+guys get power, then that's what we're in for. So it is. It's pretty scary.
+Billed affordable homes and this will end. How ironic is that San Francisco ran this experiment.
+We have people, you know, feces in the street. We had people dying in the street,
+etc. Daniel Lurie, a centrist Democrat, gets elected in San Francisco, now is putting the city
+back on a right trajectory. And New York is heading in the exact opposite direction.
+That's going to be a really interesting A-B test for America, because I think San Francisco is trending in the right direction.
+I think that, you know, to the extent that Mamdani can do any of these things he's talking about, he's going to put New York City on a very, very bad track.
+In addition to all the economic redistribution, the idea the government's going to run grocery stores and things like that, he's also said he's going to abolish all the gifted programs in New York City schools.
+And he wants to close Rikers, and he believes in, you know, cashless bail.
+That's the plot of the second dark night movie by Christopher Nolan?
+It's when they opened.
+Darkham asylum.
+Like the Joker and the Sandman come out.
+Okay.
+So speaking of which, at least I think New York City has got multiple jails.
+In L.A. right now, there's only one county jail.
+It's like I think it's called like the Men's County Jail or something like that.
+And the board of supervisors for L.A. County has been talking about shutting that down because
+it has fallen to disrepair.
+It needs to be upgraded.
+They have a $50 billion budget.
+They haven't allocated any money towards building a new jail.
+And now they're talking about demolishing that jail without a replacement and just having
+all the inmates basically be sent to diversion or social services, which means they get an ankle
+bracelet and they're turned out in the street.
+There's 7,000 of the most hardened criminals are in that jail and half of them are like severe
+mentally disturbed cases, like the guy who killed Brianna Kupfer.
+So they're talking about doing this right now.
+There was supposed to be a vote a couple weeks ago.
+But they're going to make new jails is the idea.
+They're going to shut down.
+No, they have not allocated any money towards building a new jail.
+They should have done it years ago.
+And they're actively discussing whether they are going to shut down this jail, whether they're going to demolish it, and send all the inmates to diversion of social services.
+This is a serious possibility in L.A. County right now.
+That's insane.
+So they've gone from defund the police to demolish the jails.
+Yeah, Mondami's been trying to clean that up and saying he's not going to shut it down without.
+the new one's belt, but, yeah, Arkham, Arkham Asylum.
+It is not a great idea. It's like releasing all the crazy people.
+Yeah. I mean, and a lot of these people who are in jail are actually suffering for mental
+illness, and we should definitely have addressed that as well at the same time.
+Jake, how are you doing Founder University or trying to raise money? What are you doing over there?
+So we did a deal with Sanobel to bring Founder University to Riyadh, and we were going to have
+25 companies, and mostly Saudi nationals, and then teach up.
+how to build companies and like the best practices from America.
+We had so many applications that went to 50.
+Then it was like all these people we know trying to get people into the program.
+So we wound up with 60 companies.
+And I spent three days working with them.
+Really great like fintech construction technology, real estate stuff.
+It was really inspiring.
+And I saw all of our friends from Saudi there.
+I saw that.
+I think did you have Tariq from Humane actually talked to the founders?
+Yeah.
+And he made an offer to them to give them.
+He matched the Google offer for cloud computing with all of them.
+So he's giving him a bunch of credits.
+And, yeah, Tariq came by.
+And it was really nice of him to come by.
+He was going to his board meeting.
+And he came to speak to, you know, 60 founders, 70.
+Well, they were probably like, there were 60 teams, but maybe like 90 founders in the room.
+Like, it's a tiny little thing.
+And a lot of people came out to support it because they're trying to get more domestic, you know, startup.
+Totally.
+Totally.
+So it was really good.
+And then since that went so well, the JETRO, which is the enterprise trade organization of Japan, called me and said, we want to do it in Japan.
+So I'm leaving here to go to Japan and announce the launch of it.
+Oh, wow.
+Then we'll have it in three cities, the United States, or three countries, United States, Saudi, and Japan, which will officially start in January.
+I'm just going there to do like a press door about it.
+Now, are those to feed the funnel of angel investments for you or are you making money on this?
+So, you know, we got to feed and run the program, but it's not going to, you know, match venture investing, obviously.
+It just kind of underwrites the cost of it.
+And then that creates the funnel about 5% of the companies that come to 5% to 10% of the companies that come to founding university, wind up going to the accelerator or we make a direct investment.
+So it's a pre-accelerator, but it lets us get to the companies before tech stars or Ycommody.
+or other folks even know they exist because half of them aren't incorporated yet, right?
+So that's kind of the exciting part about it.
+As we meet them when they're just two or three people working on a prototype.
+It is there were, I've had two angels, three angels come in, or three founders come in here
+over the course of the last two years.
+Two, I did angel investments in.
+The third I did not, unfortunately.
+But they, their valuations of those three companies.
+One is cognition, now at 15 billion.
+One is Decagon, now at 4 billion.
+And the other one is distilled that just raised at 2 billion.
+I mean, the rate at which these companies are scaling for the best companies, really.
+I mean, it's pretty...
+Angel money is now real money.
+It's going to be interesting to see, you know, how resilient and robustness revenue is, you know,
+in turn and people sampling stuff.
+but it's feeling pretty good right now.
+The cohort data for people who have had products out for six, seven, eight months,
+starting to turn into the smile where the cohorts like go down, down,
+but then they turn back up,
+which means people who, you know, signed up for it, forgot they were using it,
+and then they came back and started using it again.
+It's a really good sign for some of these companies.
+All right, listen.
+Great show, everybody.
+We got through a lot.
+And everybody come to the holiday.
+We're going to be a holiday cheer.
+Sax and I will be pouring eggnog and singing paroling songs.
+It's going to be wonderful.
+Saturday, December 6th, join us, AllIn.com slash events.
+Brad, are you going to join us as Fifth Bestie at the All In Holiday Special?
+Who's dealing?
+We got some poker up there?
+Oh, there's plenty of poker.
+Absolutely, there'll be some poker.
+Yes.
+Christmas poker with the besties.
+Love it.
+All right, everybody.
+We'll see you next time.
+Bye, bye-bye.
+Love you, Bruce.
+Bye-bye.
+David Sachs.
+...orce it to the fans and they've just gone crazy with it.
+Love you, Ski.
+The queen of kin...
+We all just get a room and just have one big Hugh Georgie because they're all just...
+It's like this sexual tension but they just need to release them out.
+They need to get merch.
+I'm doing all...

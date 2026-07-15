@@ -1,0 +1,609 @@
+source: allin_podscripts
+published_date: 2025-10-27
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/nobel-prize-in-physics-winner-john-martinis-on-the-state-of-quantum
+title: Nobel Prize in Physics Winner: John Martinis on the State of Quantum
+
+Welcome today. I'm very excited for this all-in interview with this week's Nobel laureate,
+winner of the Nobel Prize in Physics in 2025. John Martinez, John, welcome to the all-in interview.
+Yeah, thanks for inviting me. I'm quite excited about this talk and, you know, love to explain to people
+about, you know, what this prize is all about.
+All right, besties, I think that was another epic discussion. People love the interview.
+I could hear him talk for hours.
+Absolutely.
+We crushed your questions.
+Admit it.
+We are giving people ground truth data to underwrite your own opinion.
+What are you going to say?
+That was fun.
+I was going all in.
+Well, the Nobel Prize is the most prestigious honor,
+and particularly in physics, that I think can be awarded.
+You're in the record books.
+It's going to be an incredible ceremony coming up for you.
+Maybe we could go back to the beginning in your history.
+I'd love to hear a little bit about, you know,
+where did you grow up?
+How do you get started with your interest in physics?
+Well, so I grew up in San Pedro, California, and grew up there my whole time.
+My father is a fireman, and my mom stayed at home, took care of us.
+And, you know, through the years, I was always interested in science, technology.
+I'm going to say one of the things is, you know, my dad, you know, actually didn't have a high school education, but very smart.
+person. He was always building things in the garage, various projects. So I grew up kind of
+knowing how to build things, which also kind of tells you how things work, you know, kind of
+empirical view, you know, tactical view of how physics works. So when I took physics in high
+school, I actually loved it because there was actually some math behind it and concepts and, you know,
+really made sense to me. And, you know, I just really, you know, fell in love with the subject. And
+Then went to UC Berkeley and did pretty well there and enjoyed it, enjoyed it a lot.
+And then in my senior year at UC Berkeley, I had a class from John Clark, who was my advisor,
+and found out what he was doing.
+He was just starting to look at these quantum mechanics and electrical devices stuff.
+And it sounded really interesting for me.
+I guess I have, you know, I guess I could see when something maybe would take all.
+So I started to do the graduate school work with him.
+You went to Berkeley for graduate school, right?
+I went to Gertrity for Badger School, which you're not supposed to do.
+I was originally a physics and math undergrad at Cal.
+Okay.
+I changed my major later and actually got my degree in astrophysics.
+There was some upper division math class that really turned me off to math as a major.
+There was just so many proofs.
+It drove me nuts.
+Right, right.
+And then physics was always exciting, but I liked working in the Astro Lab.
+and I worked actually at Lawrence Berkeley Lab.
+Oh, okay, yeah.
+But then you stayed at Berkeley and went to grad school, right?
+Yeah, it stayed at Berkeley, went to grad school.
+We started this project a couple of years into grad school.
+I forget exact date.
+And what was interesting is this was a question that was actually posed by Professor
+Anthony Leggett, who won the Nobel Prize for, you know, Healing 3 physics in, I think,
+in 2003.
+Was that superfluid work?
+Super fluid helium-3, yeah, that's right.
+So he showed, like, if you put helium-3 cold enough, it kind of almost has this new sort of
+characteristics with the physics and how it moves and how it works.
+Well, it has this super-fluid behavior, but it has a very complicated behavior
+because of the more complicated nuclei of the helium-3.
+And this had been discovered, and people worked for a while to figure that out.
+And he, you know, helped develop the theory for that.
+So he was quite well-known, very, very smart person.
+And although he won the Nobel Prize for that, okay, there's not much helium-3 physics going on,
+but for the question that led to our experiment, okay, there's a huge field.
+And the question was, do macroscopic objects behave quantum mechanically?
+Okay, and this is a macroscopic object, might be a small ball.
+in our case, it's an electrical circuit with billions of electrons in it, billions of atom,
+and is the collective motion of, say, the ball, quantum mechanical.
+Now, you know, if you think about throwing a ball against the wall, it's going to bounce off.
+But if you make the wall thin enough and the ball light enough,
+it'll then every once in a while tunnel through because of the laws of quantum mechanics.
+So...
+Hold on. Let's just pause on that for a second.
+And I think that's really worth spending a moment on it.
+Yeah, great.
+So when we talk about quantum mechanics, when we talk about the relative position or energy
+or movement of a particle at the atomic scale, as small as an atom or smaller than an atom,
+we have to use kind of probabilities to describe where things are going to be.
+That was what was really kind of the big understanding of quantum mechanics in the early 20th century,
+right? Is that there's a probability of things being where they are and moving as they're moving.
+It's not like deterministic like we can see with the ball that we throw around.
+When you get very, very small, things get very fuzzy and it's very hard to know what things are.
+So you hit upon the key idea here, maybe by accident, but it's very important.
+Quantum mechanics was developed for the theory of small things, you know, electrons, atoms, you know,
+things that are the fundamental constituents of it, but very small. And, you know, if you take an
+atom, it's made from electron and the nucleus. You know, classically, they attract each other,
+and they would just, you know, combine together. And then atoms basically would have no size.
+Why do atoms have size? Okay. That, you know, that was one of the strange things. And it's because
+this atom is kind of not a point particle. I used to say to my kids that the electrons were fuzzy,
+okay? And quantum mechanically, it has some wave function and extended. You can think of the
+electrons being all around the nucleus at the same time. So it's just a very strange behavior,
+but of small things. And of course, very important as how atoms work and how we describe nature.
+So quantum mechanics ultimately became a field that people say is very non-intuitive in terms of
+understanding where small particles are, the energy they have, where they're moving to. And basically
+we resolved to figuring out that we have to use these functions. It's not just a single
+point, but it's a distribution. It's a whole bunch of places. And there's a probability of where
+the atom could be or where the electron could be. It's also a probability of how fast it might be
+moving, all of these things become probability function. And you develop a mathematical theory
+for doing this that, you know, takes you until your third year in university to really know
+enough math to understand that. But basically, these are forming waves, waves of the electron.
+So you have kind of a wave and electron around the nucleus describing what the electrons are.
+And these are kind of like standing waves.
+You know, it's like hitting the string, you know, different length strings, different tangent
+strings form different notes.
+These vibrations of the electrons around the atom can vibrate at different frequencies.
+So rather than think about an electron moving around an atom in a pre-described path and I can
+know where it is at any point in time, the right way to think about an electron around an atom
+is it's in a wave, and it's a long, there's a wave that describes kind of where it is
+and what it's doing.
+And you have the electron and you have the proton attracting it.
+So the whole wave theory combines all those two and, you know, gives you a description of
+how the atom works and quite accurate description too.
+And so one of the other kind of features that arises from the fact that everything at a microscale
+is described by wave functions
+is that there's a small probability
+of something kind of extreme or extraordinary happening
+like the one example is Stephen Hawking
+figured out that you could have a particle
+and an antiparticle come out of nowhere
+in space and the antiparticle goes into the black hole
+the particle shoots off
+and the probability of that happening is so low
+but it happens enough
+that the antiparticle actually starts to delete
+part of a black hole
+and that's how black holes evaporate
+and this theory, all these interesting things.
+But can you tell us how, what quantum tunneling is?
+So this is another one of these sort of features of quantum mechanics that arises from the fact
+that these things are kind of waves and probability functions.
+Yeah, so if you have an electron just traveling through space hitting a wall, let's say,
+there's a little wave packet, wave function to it.
+So it's not a single particle.
+It has some extent to it.
+And what happens is when that particle hits the wall, quantum mechanics say there is some amount, small amount of this wave function, or if you like, the particle going through the wall and then to the other side.
+Now, most of the time, it bounces off, but every once in a while, it goes through.
+And, you know, this is seen in everyday devices.
+is this is not, if you build very small memory circuit, you have to worry about electrons
+tunneling and charge leaking off your capacitor. They have magnetic memories that depend on these
+tunnel junctions. So this is a very well-known phenomenon. If you make this barrier, this insulator,
+just the, you know, 10-20 atoms thick, then that's thin enough for it to go through.
+to go through. So this is what's so interesting. You can actually predict the number of electrons that
+might tunnel through one of these barriers, one of these insulating barriers, as they're called,
+over to the other side, which really is crazy to think about. It's just like walking through walls,
+right? I mean, like particles. Yeah, that's the idea. Yeah. So going back to the story you were sharing,
+you're in grad school. Right. And then Leggett proposes this idea. Maybe you can share a little bit more
+now that we've got, I think, a bit of the basics on what was discussed, which was zooming
+out a bit, rather than just think about all of this happening at a microscopic scale, is it
+possible for it to happen at a bigger scale?
+Yeah.
+And again, we've been talking about quantum mechanics as the physics nature at this
+microscopic atomic scale.
+But the question was, if you made a macroscopic object, would it obey quantum mechanics also?
+okay and then you know that was the basic question and it turns out that there's a very natural
+system to look at looking at an electrical system and look seeing for quantum mechanics an electrical
+system where the currents and voltages of essentially electrical oscillator does it behave like
+classical physics or does it behave with this quantum mechanical nature to it and that was the
+question. Now, it turns out that when you think about quantum mechanics and thinking about, well,
+there's the quantum behavior, but then at some point you have to measure it, which then turns it
+into a probability. There's something called the Schrodinger cat paradox, where in the paradox
+you have your radioactive decay, and then you let it happen for, let's say, half of the
+radioactive decay time, and then you say, and then you have a ready to decay, a detector,
+and then a bottle of cyanide, which will kill a cat. And then do you say, you know, after some
+amount of time is the cat in the dead and alive state. Okay. And, you know, physicists, you know,
+and this is a good question. Einstein brought it up, or Schroenner brought it up. A lot of
+people discussed it. But Elegat pointed out that the reason this is a paradox is you can believe
+that a macroscopic object like a cat could be in a quantum superposition state. And in fact,
+there was no experimental evidence that this could happen. And that was his point. So he said,
+well, you know, people should be testing this. And let's see if it's true. And as a young graduate
+a student who just, you know, learned about quantum mechanics. And it's like, oh, that's a really
+great, great question. That's something that we should try to do. And we should try to do an
+experiment, you know, on the suggested system to look for quantum mechanics. And the original
+proposal was looking for the tunneling. Well, it turned out to be more than that, but look for
+tunneling. Let me just kind of describe another way. It's, you know, the macroscopic
+system could be my entire body, could I walk through a wall?
+That's right.
+And then the probability of all of my atoms being in the perfect moment, perfect position,
+you know, to be able to kind of cross through the wall is so low, it would never happen in
+this or many other universes.
+And that's the problem is that most macroscopic objects, when you try to think about
+the quantum mechanics, that won't happen.
+Okay.
+So there's a small probability, one eleven,
+electron can cross over a barrier. But the probability that many cross over at once is lower and
+lower and lower, and that makes it very difficult to see at scale. And what happens is if you look at
+an electrical circuit, then the parameters become favorable for seeing this kind of macroscopic
+behavior. And, okay, it's hard to go into the whole physics of all that. But it's basically
+because you can make a circuit that operates at microwave frequencies.
+So instead of you trying to go through the wall once a second,
+it tries to go through the wall five billion times a second.
+So then it's a lot, you know, more, you know, you have more chances to go through.
+And the other thing is just the various parameters that involved in quantum mechanics,
+you know, are favorable for seeing this kind of phenomenon.
+You have to do the experiment right, but it's favorable for doing that.
+So one of the parts of your experiment, you created what's called a Josephson Junction.
+Is that correct?
+So this is two superconductors with a barrier between them, right?
+I got really fascinated by superconductors when I was maybe 12 years old.
+I went and bought a superconducting disc, Etrium, Barium, Copper Oxides.
+Oh, yes, yes, that's right.
+From the back of popular science.
+And then I went to UCLA and I got a jug of liquid nitrogen.
+And then I floated a magnet above the disk because of the Meisner effect.
+And I had it at the science fair.
+And I did very well with the science fair that year because I showed this really cool.
+What year was that?
+Was that when it was discovered?
+That would have been 91, 92.
+Okay, yeah, that was close enough that that was good.
+Yeah, the hard part's giving the liquid nitrogen.
+Yeah.
+And I had a friend whose dad was like a doctor at UCLA or something like that.
+So he was able to get the liquid nitrogen for our demonstration.
+Right.
+Yeah, that was the hard part.
+Okay.
+I've always been fascinated by the physics of superconductors.
+And maybe you can just explain one of these important features of superconductors as it relates to kind of resistance and current flow.
+And then we can talk about your experiment.
+So what happens is when a material goes superconducting, all the electrons condense into one state.
+Okay?
+Now, just to give you an analogy of how it's not a perfect analogy, it's close analogy.
+If you have a normal metal, any metal we have at room temperature, it's like a gas of electrons.
+It's like, you know, gas in the air.
+And then when you get below the superconducting temperature...
+Sorry, I think we should just explain that.
+So when you have a metal, all the electrons are kind of moving around, they're perturbed.
+They're different energies, different states.
+That's right.
+They're different energies, different states.
+you know, there's some firm statistics, does not go into that, but it's more or less looks like a gas.
+You think of a gas.
+And then when you cool it below, you know, a certain temperature, it then coalesces into, let's say, a solid like atoms will.
+And the electrons coalesce into something, Cooper Pair, BCS condenset, this is the name,
+where all the electrons are kind of locked together and doing the same thing.
+Now, the nice thing about that, it's not like they're frozen in place,
+but they have a free parameter that allows them all the currents, all the electrons,
+the flow in some direction, which is the supercurrent.
+In a superconductor, meaning a material that's cool enough that it reaches its superconducting
+critical temperature, right?
+So suddenly all the electrons can still move.
+They can still create a current, but they all have the same state.
+But they're moving together like in, like in my analogy, like they're in a solid instead of the gas.
+And because they're moving together, okay, then when you work through all the physics,
+they are not, you know, they aren't randomly scattering off things.
+They're just moving together.
+And then you get a supercurrent where, for example, if you made a ring a superconductor,
+that current would basically flow forever around the ring.
+This is what you saw with the floating magnet.
+Right.
+That's so interesting.
+I've always thought, and there's obviously been company started around the idea of creating
+an infinite battery where you could store technically forever electricity because the electrons
+are just moving around if it's superconducting.
+They can just spin forever around that circuit and never stop.
+People actually do use big superconducting magnets to store energy.
+And when you get an MRI, you're in a liquid helium machine.
+with a superconducting magnet, they charge it up, and that magnetic field is basically there forever,
+you know, waiting for people to go inside it. It's kind of strange to be inside this super cold magnet there.
+But they've designed it very well. It works well.
+So this Josephson Junction is two superconductors. They're on either side of a barrier that you create,
+an insulating barrier. And then maybe just explain the experiment and what you guys measured.
+And this was all while you were in grad school, right?
+Yeah, yeah.
+And, and this is, this Joseph's injunction, because the Cooper pairs have to tunnel through it,
+but they kind of tunnel through it together without any loss, this, this actually forms
+what's called an electrical inductor in circuits.
+So an inductor is normally a coil of wire that stores energy and it's a magnetic field.
+here, this just stores energy of the electrons tunneling through here.
+It's something we call it kinetic inductance, and it happens with this.
+But that forms a non-linear inductance, and with a capacitor in the circuit, that forms an
+inductor capacitance resonance circuit, which is like in your radios, you have filters of
+LC resonant circuits to filter your signal and do anything. So this is a very common microwave and
+radio frequency element that you use all the time to make electrical circuits. So I just want to
+simplify that you have these two superconductors split by this barrier. There's some tunneling.
+Some of these electrons are actually going through the barrier to the other side. And then you can
+effectively measure all of these different changes as you change the temperature. You guys were
+putting different voltage states into the circuit that you built. And what you saw and what you
+measured and what you demonstrated was that there were these very kind of discrete or specific
+changes that happened that basically demonstrated quantum mechanics at scale.
+That's right. So this inductor capacitor resonator, which you just treat as a, you know,
+is a charge and a current going through. But because it's quantum mechanics, there's this wave
+function to it, so there's some uncertainty in these. And then given just the way that the
+simple electrical circuit works, you can then demonstrate the quantum mechanics, one of the
+tunneling, which is a little bit hard to describe here, but you can see tunneling. But I think the
+little bit easier thing, maybe easier, is to look at the energy levels of this. And let me kind
+have explained that. When people discovered, you know, atomic physics and started doing this,
+they excited a gas of, you know, some gas. And the light coming out of that gas would be at certain
+colors of frequencies. So if you go outside and you have the sodium lamps on, these are kind of the
+yellow lamps. You have, you know, kind of a single frequency coming out of that lamp. Or nowadays,
+you look at LEDs, there are certain frequencies that come out of that. And this is a quantum
+mechanical effect that see how the electrons travel around the atom. There's only certain
+kind of frequencies that they oscillate at. Now, classically, you would expect there to be all
+different frequencies that spirals around or spirals into the nucleus. So that's what you
+expect. But we saw these discrete frequencies. And so by measuring those discrete frequencies,
+you now had proof that there was quantum mechanics happening at a macro scale. That's right.
+And you published this work. And was there a lot of attention when you published this work?
+This was in 1985, 86. Yeah, 85 or 8. I actually forget, but 85 or 86.
+And so was there much attention on this work at the time?
+Yeah.
+This was a big question, and people wanted to, you know, understand that.
+And, you know, we published it in physical review letters and it got a lot of attention.
+And I think we had a little article in Scientific American that was very proud of.
+Yeah.
+That wrote about that.
+And, yeah, it was, you know, it was kind of a kind of a big deal.
+What did you go on to do at that point?
+Was it considered groundbreaking Nobel Prize winning work?
+And what was the story at that time when this came out?
+Yeah.
+So, you know, it was an important piece of work and people noticed it.
+But, you know, we showed that quantum mechanics worked and quantum mechanics worked on the macro scale, which was nice.
+But one could still, you know, argue, well, what is it good for?
+What are you going to do?
+and in fact the secret of an important scientific breakthrough is does it lead to other experiments
+and other papers and other inventions and the like and that kind of took you know many decades
+to happen because it was so new and people had to do do that so I would say it was noteworthy at
+the time but you know not necessarily you know something for a Nobel Prize because it
+was just kind of, you know, weird and went off and, you know, what are you going to do with
+it? But what happened at the time was very interesting. And at the end of my thesis time,
+there was a conference in UC Santa Barbara, where I came here for the first time. And they
+were talking about this experiment. But the very last day, last talk was by Richard Feynman,
+very well-known physicists.
+Of course, the greatest, yeah.
+The great, yeah, right.
+You know, I kind of idolized him and read his books and whatever.
+And he was talking about using quantum mechanics for computation, which is building a quantum
+computer.
+So he gave a talk that was, you know, really kind of amazing.
+I'm going to be honest as a student, I didn't quite catch everything.
+and Michelle Deverey, my dear friend, said, yeah, maybe some of the things wasn't quite
+figured out at the time.
+But afterwards, he was absolutely mobbed by people asking him questions because it's so
+interesting to think about taking this, this, you know, basic law and actually doing computation
+with it.
+Right.
+And I was a graduate student.
+So I was kind of at the outside ring, you know, you have the professors in close and
+whatever. I'm just a lowly graduate soon. So I could hear a little bit. Well, what I learned from
+this, it was a great question and something that would be kind of worth doing, you know, for your life
+work, because it's so deep and so interesting and maybe practical and the like. So that really
+motivated me. Yeah. So that big idea is to use quantum mechanics and these properties of quantum
+and mechanics to do computing.
+Yeah, that's right.
+And I would say soon after that, other people in the field got a little bit more specific
+and showed how you would do it.
+And then it was in the early 1990s, maybe five years later, that Peter Shore came up
+with this factoring algorithm to solve a real-world problem with it.
+Yeah.
+And it took a while to people figure out.
+It was very abstract.
+And, you know, people aren't what to do.
+But like I said, I could see that in all of the crowd around Feynman asking them questions,
+that this was the most, you know, most interesting fundamental question, you know,
+how to combine quantum mechanics with doing computation.
+It's really amazing.
+And so you started to do that with your life's work pretty much.
+You go on to a very good career.
+Yeah.
+So my career path was, of course, quantum computing was getting developed, and it took me a while to really get, go all in on it, okay?
+Yeah.
+So what happened is Michelle Deverey was from France, from CEA, France, went to Berkeley, went back.
+I went there as a postdoc and worked with them.
+And they were young and known at the time, and people were like, well, you're going to go to Europe and you're not going to get connected to U.S. science.
+But I knew Michelle and Daniel Estev and Christianabino, the people that are working with, were
+absolutely brilliant, okay?
+And they've had a very illustrious career.
+So I went over there because I knew that was great.
+And we continued to do experiments on this.
+And then after that, I came back to the U.S.
+and I worked for the National Institute of Standards and Technology.
+And it turns out just down the hall from Dave Weinland in his group, who went on Nobel
+prize for atomic physics for, you know, doing quantum computation. And I worked on some
+with doing experiments on counting electrons and working for metrology and then did other experiments.
+And then in late 90s, I just, again, went all in on building a quantum computer. There was
+funding available at that time. It had progressed enough theoretically that the U.S. government
+started, you know, funding this to see if people can do it.
+And so then a couple years after 2014, I think you ended up at Google's quantum lab in Santa
+Barbara. Is that right? I was at UCSB for 10 years or so, which was wonderful, and built up
+the lab to go from very basic things to building a five and then nine-cubic quantum computer.
+And then during that time, Google got interested. And I kind of decided that although
+academia was great, it would be hard to get the team together and keep them together for a long time
+to build this complicated machine. And Google have the money, okay? Yeah. So we went there and we started
+off fairly small, mostly from people coming from my UCSB group. And then in 2019, we published
+this quantum supremacy experiment with 53 qubits, where we made a lot of cubits, and we made them
+really good and, you know, fast and whatever, so that we could run some algorithm, mathematical
+algorithm that produced some output that took, you know, much, much longer on a classical computer
+to emulate and do that.
+It was not practical, but it was a demonstration of the power of a quantum computer.
+That it worked.
+Well, just maybe give your description of a qubit, and maybe we can relate, you know,
+how do we build these quantum computers from qubits to the Josephson Junction and some of the early
+work you had done that you ended up winning the prize for?
+So very simply, we have a metal wire and a metal wire that gets put together on this Joseph's,
+junction, which represents an inductor flowing through here.
+And then from this wire to this wire, we have a capacitor.
+And then we set that up to oscillate at about 5 gigahertz, cell phone frequencies,
+you know, to form the qubit.
+Okay, this oscillating thing.
+And then there's at low temperatures, superconductors, you know, all this magic, we can get
+quantum mechanical behavior out of that.
+And then you can measure that quantum mechanical behavior, create a representation, and use that
+to run your computing circuit.
+That's right.
+What you can do is you put on microwave pulses to change the state of the quantum computer,
+change the way it oscillates, and then we connect it to, it's a complicated readout circuitry
+to, you know, in the end, figure out what state it's in.
+okay and then and then you you connect just an array of these and you just use capacitive coupling
+from you know one one wire to the to the next one to couple them together and it's more
+complicated than that but that gives you a good idea and then just to understand your work that you
+won this Nobel Prize for that demonstrated this quantum mechanical phenomena at scale is that
+part of the design of a qubit and the circuitry, did that inform that design work, or explain it
+rather? Yeah, it was the very basic simplest circuit. You know, we were using analog simulators
+at the time, not even the, I took data with a computer, but this is far back enough that, you
+know, it was very rudimentary. And then over the years, we just got more sophisticated design by
+the whole field, you know, many, many people. And we were able to put things together in a way to
+actually build a computer. Now, I would say the reason why it's interesting from the Nobel Prize
+thing is what it led to. And what it led to right now is a thousand, maybe several thousand
+people around the world doing research to build this superconducting quantum computer.
+and it just turned into enormous field, large number of papers, large number of people,
+people selling quantum computers, IBM is selling quantum computers, people are selling
+time on the quantum computers, and the fact that it was a useful idea, okay, that led and brought
+into form all these different experiments ideas, and many, many people contributed this.
+I mean, it's very interesting, and I think just this broad question or observation that sometimes inquisitive minds
+leads to research that leads to some set of discoveries that are completely not apparent until 40 years later,
+the effect or the impact it may have had on building an industrial field.
+Like there's now quantum computing everyone feels is on the brink of actually achieving what people have talked about
+in theory for decades, but seems to be getting very close to doing it.
+Yeah, I can talk on that. But I would say, you know, this field, many other ideas on how
+to build a quantum computer has been generated. And it's a very exciting field, quite large
+field. And I would say that the science was very, very deep, too. To get these things to work,
+you have to invent lots of different devices. You have to think about material.
+you have to fabricate it, build complex control systems, engineering and physics is to me quite
+beautiful. And just to tell you a little bit about me, you know, I grew up building things. And as an
+experimentist, you know, I like to build instruments, you know, build experiments to show this. And this was
+kind of the ideal project for me because, you know, from very early on, it was like, well, let's, you know,
+do this great physics, but let's also build something. And by saying, well, what do we have to do
+to build a quantum computer? That kind of led me to know what physics we have to test and what are
+the kinds of things we have to build. And that's just the way my mind works. I'm much more
+practically oriented. So it was a perfect field for me to get in. And that's kind of what, you know,
+intuitively led me to, you know, want to do this in graduate school. And I think it's just so fascinating
+the amount of engineering and technology you have to do to make this work.
+Where are we in quantum computing evolution today?
+So what's the state, at what point will we have, call it generally accessible and
+generally useful quantum computers that can do all of the amazing things everyone's kind
+of talked about for decades that one would be able to do with quantum computing?
+That's right.
+So right now we're about 50 or 100 cubits for the.
+superconducting case, but they can be fully controlled and run real algorithms and do very complicated
+things. They have a lot of other systems that can do that. I think the newcomer on the block,
+which looks good as neutral atoms, where they've made big neutral atom systems, but they're still
+working to get the gates controlled really well and the like. But what's happened right now
+is we can run genuine algorithms on that and people have, you know, have ideas they want to run.
+But because these qubits are not perfect, okay, it's an analog control system.
+And fundamentally, these quantum bits have a little bit of error to it, little bit of noise to it.
+You can only run so complicated of a project.
+And it's good enough to write scientific papers and try thinking.
+out. Every once in a while, people say they've done something, you know, that's hard to compute. And
+well, that's fine. But they aren't really big enough to be useful yet. They have to get bigger and
+they have to get better. Less noise. Do you have a point of view on the timelines? This is everyone's
+speculation and there's been more hype than reality. Yeah, there's more hype than reality.
+And it's hard. I used to not want to speculate that. But since I started,
+a company, then I can do that. And what we want to do, and it's a timeline of many other groups,
+is to do something in, let's say, in the next eight, 10 years, something like that. But the
+problem is, you know, people are predicting 10 years, you know, for a while now. So, okay, we have
+to do that. But I can tell you for what we're doing is that we've identified what are kind
+of the technology bottlenecks of the current fabric,
+current ways to make a quantum computer.
+We've written some papers on it.
+And we're working with people in the semiconductor industry
+to manufacture this in a much more cost-effective quality way,
+the way you make these GPUs or something.
+And we think, you know, when we get that to work,
+we can scale up very rapidly.
+So in a, let's say, 10,000.
+year time scale, something like that. In a lot of technically difficult fields like fusion energy,
+perhaps even quantum computing, they are seeing profound acceleration in getting to their crazy
+big goals on these very big technical projects because of AI. Is AI starting to play a role in
+solving some of the engineering, material science, scaling, noise issues that we've seen
+historically in quantum computing? And do you think that there's an acceleration on
+underway in performance improvements because of AI?
+There may be my particular, and there's things we can maybe do modeling and the like.
+We also think what we can do is use the quantum computer and AI together to solve the problems
+better.
+So that's what our theory team is proposing.
+I used to work with Google quantum AI.
+That's what they're proposing.
+So there's a general feeling of that.
+My particular view, though, is that in terms of this control, if you don't build your system
+cleanly enough and, you know, that the control is clear enough, you're not going to get the great
+performance out of it. So I'm a little bit old school here and working on, you know, building it
+that way. There's certainly some elements where you can use AI, you know, in the decoding circuit for the error
+correction and the like. But the one thing to mention to you is that, you know, these cubits are
+naturally very noisy. And you can maybe do sometimes 100 for bad cubits and maybe a thousand,
+maybe few thousand operations before they kind of lose their memory. You know, you can think of it
+as like dynamic RAM where you have to refresh it. Well, you have to refresh it with error correction.
+And because of that, you're talking about a million cubic quantum computers to be general purpose and solve really hard problems.
+There might be a million.
+A million is a good round number for it, maybe a little bit more.
+And right now we're at, you know, a hundred or, you know, a little bit more than that.
+So we have a way to go.
+What is your view on China and the progress that they're making in this technology versus the U.S.?
+This is the topic de jure in every field, industrial field, computing science is where's China at
+compared to the U.S., the comparisons, and everyone's worried about the progress in China versus
+the U.S. and what that means.
+So I can talk about my own field, but when I have read the papers that duplicated what we did
+at Google on the quantum supremacy experiment, you know, they know what they're doing.
+I mean, they go through the theory, they talk about.
+A lot of it is very similar to what we're doing, but they know what they're doing,
+and they're getting great results.
+And the thing that scares me a little bit is, you know, last December, the Google group published
+the latest results, which is really much nicer.
+They made some real improvement.
+But then China soon afterward published something kind of indicating they were, you know,
+on par or near par or something to it. And, you know, I'm worried that the Chinese government is saying,
+well, you can't publish anything until it's in the Western press. And then you can, you know,
+then it's open and you can talk about it. That's precisely what I've heard. Yeah. So, you know,
+I'm a, I'm a little bit concerned about that. Now, what we're doing with our company is we're doing a new generation
+of fabrication of the devices.
+And I would consider in my research,
+we have the simple fabrication with the original papers in 85.
+And then around 2000, we had more sophisticated fabrication.
+And then for the quantum supremacy experiment,
+we did something even more complicated, other groups too.
+But we want to do a similar jump in the fabrication.
+And what's interesting about this is we're going to be using,
+applied materials and the modern fabrication processes that they have, which on 300-millimeter
+tools, you know, you can't get in China, for example, you can get it for CMOS. And then they're
+developing, we're developing standard processes, but new recipes and new ways to put it
+together. And we think by doing that, we can do a huge leapfrog and then get there faster and
+get there in a way that, you know, we'll protect our lead. There's other things we're doing, too.
+You know, that's a small part of it. But, you know, we think there's a way to, you know, really lead
+the field. And we're happy. We have good industrial partners of applied materials, synopsis,
+design tools, Cula Packard Enterprise, some startups who do the theory work. So, you know, we have a good
+consortium, and we want to use all that knowledge and expertise of engineering to make this
+happen. Where were you when you got the news this week that you won the Nobel Prize and how
+surprised were you? Because this is a 40-year-old research effort. Had anyone given you a call,
+rumor, gossip mill saying, hey, you're on the list this year, potentially being considered?
+So let me give you a little bit of the insight story. You know, we've known that this was important
+experiment from the beginning. We've attained some other prizes that are, you know, much less
+well known and really appreciative of all that. And you, what happens is the Nobel system put together
+Nobel symposiums where they get together physicists in a certain field, which is quantum
+information and this kind of thing. And they give, have all the scientists give talks and
+And they want to kind of check on the vitality of the, you know, of the field, how big is it?
+And then, you know, also maybe some of the leaders that maybe think about it, you know, can they give a good talk?
+Would they be a good representative?
+So, Michelle and John and I have been to these symposiums before, and we kind of knew, you know, what was going on, you know, that at least we were considered.
+And I'll just tell you, as a scientist, just to be invited to these and be considered is a fantastic honor.
+You know, and having, giving the prize is just so kind of unbelievable that you shouldn't think that way.
+So, you know, I've known about it for a few years.
+And in fact, to be very honest, in the past, when the dates have come around, it's like, oh, is this going to happen?
+And then you wake up in the morning.
+And it's like, oh, it didn't happen.
+And you're kind of down for a day, you know, it didn't happen this year.
+And that's a very bad attitude.
+I don't like that at all.
+And, you know, you should not covet some, you know, insanely difficult prize that, you know, only goes to a few people.
+So what happened this year is I kind of worked through this over several years.
+And this year, I just kind of forgot about it.
+Okay.
+So I went to bed.
+And then we got the call at 3, and my wife answered the phone and found that what happened.
+But she didn't wake me up right away because she knew if the day was going to be hectic and I needed my sleep, did not be grumpy.
+It was nice of her.
+I don't want to be grumpy talking it.
+So she woke me up at 5.30.
+You know, as I looked at the computer, oh, my God, you know.
+And then we had some reporters coming over at 6, which, you know, interviewed me, you know, right?
+when I had found out, half hour after I'd found out.
+And it's, it's great.
+It's a great honor.
+And it's just been really fun.
+And then, you know, I've been getting a lot of emails from people I've worked with
+or students I've had in the past congratulating me and you exchange those stories and
+the like.
+And it's, it's kind of a very special time.
+That's great.
+Any science or technology fields that you've been following outside of your core discipline
+that you think are really exciting?
+I always like to hear what major kind of thinkers and scientists are serving.
+I'm just so focused on doing this, especially when you start a company, you better be focused, right?
+So I'm doing that.
+But one of the fields that I find, this is someone, Ben Mazin at UC Center,
+Barbara is looking for exoplanets and they're using superconducting detectors that are somewhat
+similar to what we're doing. In fact, in the 1990s or so, I helped establish that field
+with other people and did that for five, six, seven years to do that. He's doing in a different
+way. And I really like how, you know, this instrumentation, you know, that we've been
+working on is their quantum devices are now able to do these astronomy detectors and
+look for look for these and of course there's so much going on in astronomy these ways with
+gravitational detectors and exoplanet searches and it's just really fascinating to me and again
+it's very much technology oriented where people are building good detectors this is what I
+like, okay, I like building, building instruments. So that, that's particularly interest me.
+Yeah, that's great. I mean, very exciting field and hopefully we'll develop quantum computers
+that will help us build materials and technology to help us get there one day. So many rungs
+on the ladder of human progress. Well, congratulations again on winning the Nobel Prize in physics
+this year. Very well deserved. It's a fantastic moment. Enjoy it.
+enjoy the ceremony and we're excited for your continued work in the field of material, quantum
+computing, and thank you. Yeah, and thank you. I really enjoyed the questions and the flow
+where you were asking questions to explain it at the right level for people. And I really
+appreciate that. This is a great, great podcast. Great. Thank you.
+I'm doing all in

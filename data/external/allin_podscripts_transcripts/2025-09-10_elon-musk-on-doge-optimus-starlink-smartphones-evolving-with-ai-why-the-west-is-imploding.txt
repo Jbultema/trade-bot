@@ -1,0 +1,678 @@
+source: allin_podscripts
+published_date: 2025-09-10
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/elon-musk-on-doge-optimus-starlink-smartphones-evolving-with-ai-why-the-west-is-imploding
+title: Elon Musk on DOGE, Optimus, Starlink Smartphones, Evolving with AI, Why the West is Imploding
+
+I believe Optimus is going to be the greatest product ever created by humanity.
+Elon Musk and his ex-AI startup have built the largest and most powerful artificial intelligence training supercomputer in the world.
+As far as I know, there's only one person in the world who could do that, you know?
+This is an arms race of epic proportions.
+He's a big thinker.
+You guys went on Fox the other day with the Doge team.
+You saw Elon's face nodding while they were speaking with a...
+grin here to hear. He was proud. He is proud.
+X-A.I has acquired X in an all-stock transaction.
+Tesla's first robotaxies are officially on the road.
+The company's board proposed a new compensation package for the CEO that could pay him just about a trillion dollars in stock.
+He gets nothing if he doesn't hit the numbers.
+SpaceX will buy wireless spectrum licenses from Echo Star for its Starlink satellite network for about $17 billion.
+Three, two, one.
+There's a phoing.
+There's a flashdown.
+How do you have time?
+I never understand you.
+Yeah, well, I do work a lot.
+Ladies and gentlemen, please welcome Elon Musk.
+All right. Where are you?
+Alto.
+You're in Palo Alto and not Washington, D.C.
+I'm at Tesla Global Engineering Headquarters in Palo Alto.
+Yeah. So no more Washington, D.C. You're back at work. You're focused. Yeah.
+Yeah, I haven't been to D.C. since May.
+Okay.
+That was a hell of a side quest.
+That was a good side. Any lessons from your time?
+time in Washington, D.C.?
+The government is basically
+unfixable.
+I quote David's
+noble efforts. It's good
+to have talented people in the administration
+but at the end of the day
+if you look at our national debt
+which is insanely
+high, the interest payments
+exceed the
+Defense Department, I guess, sorry,
+War Department,
+budget.
+And they keep rising.
+So, if AI and robots
+don't solve our national debt,
+we're toast.
+Which is a great segue.
+Optimus is,
+I think,
+going to be the greatest
+product in the history
+of humanity
+what's the progress like
+and how many of your cycles
+are going specifically to optimist
+what's the timeline
+I think you're on version three maybe four
+tell us everything
+well
+yeah
+everything would take a long time
+we've got time
+we've got time
+we're finalizing
+the design of optimist
+version three. And that really is going to be a very remarkable robot. It will have the
+essentially the manual dexterity of a human, so meaning a very complex hand, an AI mind
+that can navigate and comprehend reality and be made in very high volume. Those are the
+three things that are missing like if you see any other robotics company they're
+missing those three things those are the three really hard things and I spend
+actually at this point it might be more of my mental cycles than anything
+anything else any other single thing on optimist that's that's solving
+for real-world AI, all of the electromechanical issues of Optimus, the supply chain
+and production challenges of it, because there is no supply chain that exists for human
+or robust.
+So it has to be, we have to recreate it from scratch, and which requires doing a lot of
+vertical integration.
+None of the actuators in Optimus are available from an existing supply chain.
+So, but I think it is accurate to say that if successful, optimist will be the biggest product ever.
+And the cost of it at scale, $20,000, $40,000 a robot, what do you think the first wave of them will cost?
+And, yeah, when will we be able to buy one to work on the ranch?
+I think that the marginal cost of production
+once you hit a million units per year
+is probably around the $20,000 range.
+It sort of depends on how much you spend
+on the AI chip in the robot
+and you need to achieve a lot of efficiencies
+in the actuators.
+there are 26 actuators per arm like 26 electric motors gearboxes and power electronics
+um so so it but the the the AI chip will be pretty expensive like that that might be like
+five five or six thousand dollars of the of the bill of materials maybe more and um but but
+But I think at volume, at a million units a year, the production cost is probably on the order of $20,000, maybe $25, something like that.
+And the price will be as a function of demand.
+Elon, can you maybe explain to everybody why the hand is so important to get right and why the actuator design is so unique and why it's so difficult, why nobody makes it,
+and why you have to start there almost
+to build the rest of the robot properly?
+Well, it turns out human hands are incredibly,
+they've evolved to be this incredibly sophisticated machine.
+Like your hand is actually a remarkable thing.
+It's, look closely at your hands.
+And think of all the things you can do with your hands, which is a lot.
+I can think of many things.
+Yeah, I was just thinking about something.
+Your hands are very versatile instrument.
+Yeah.
+You could give a high five.
+Very versatile.
+You know, you can swing a baseball bat.
+You can thread in a needle.
+You can play the piano with violin.
+You know, you could disassemble or assemble a car.
+The hands are incredible.
+very versatile instruments.
+And most of the muscles of the hand are actually in the forearm.
+So your hand is kind of like a, like it's like a puppet.
+Like it's mostly a puppet.
+The muscles are coming from the forearm and they're pulling the tendons,
+which are, you know, also human tendon designs or human tendon evolution is
+incredibly good.
+So you've got this wave of tendons.
+you've got um i think i think that the human hand is something like depending on how you counted
+27 or 28 degrees of freedom per you know in the hand it's uh it's amazing so in order to create
+a robot that can uh be a generalized uh humanoid you you must solve the hand the hands problem
+yeah we had uh we had already it's got hands knees hands
+And so is it like when you were first building Tesla where the supply chain doesn't exist
+and now you have to go out and find folks to work with and, you know, build all this
+vertical integration, get support?
+Is it literally like it's just nowhere to be found and you're going to have to build all
+of this stuff up?
+Yes, we could not actually buy the actuators for any amount of money.
+They simply didn't exist.
+Even though there are 10,000, electric motors out there of various sizes and shapes,
+we've had to design every electric motor gearbox
+and the controlling electronics from scratch
+basically from physics first principles
+the good news is you've got a lot of experience
+with factories over the last couple of decades
+so how challenging is this versus
+cyber truck Model Y
+Gigafactory you know
+the yeah the Faberge egg known as the Model X
+Yeah.
+Right.
+It's harder than any of those things.
+Okay.
+Yeah.
+Much harder, significantly, yeah.
+Yes.
+Harder than starship?
+No, starship's hotter.
+Okay.
+So somewhere between a Model X and a Starship.
+Yeah.
+Is it, is the, what's harder, the hardware or the software?
+Right now we're
+with the final design of the hardware.
+Like I said, it's really primarily the hand.
+Not to just dismiss the rest of the robot.
+The rest is also important,
+but the hands inclusive of the forearm
+are a majority of the engineering difficulty
+of the entire robot.
+And then let's assume you get past the hardware challenges.
+How much do you sort of get for free
+based on all the progress that's happening with LLMs?
+Will, you know, will consumers
+just be able to interact with this, talk to the robot, ask you to do things, it'll understand.
+Oh, yeah.
+Yeah, no problem.
+You're spending a lot of time with Annie, I noticed, online.
+Not that long.
+Maybe I went a little over the top for Morning Grock Imagine, but...
+Well, but in all seriousness, those characters and these robots, that seems to be, you know, like maybe they...
+You could get the embodiments of Annie, I suppose.
+Yeah.
+Why the human form factor, Elon, you could make something that's maybe better than a human,
+or maybe simpler than a human to do specific tasks and maybe better than a human to do more things than a human can do?
+How do you decide to make it just like a human?
+Well, if you wanted to do all the things that a human can do, it turns that you need a human-robot.
+So if you want to just do a subset, that's much easier.
+but it turns out humans evolved to the shape and capabilities that we have
+um it for for good reasons uh it actually is that there is there is there is
+there is value to having five you know four fingers in the thumb um and even the pinky
+actually is quite useful um toes are a much
+more a question walk, but
+the fingers
+Well, also, humans
+have designed the world as well,
+so we designed it for us.
+Exactly. If we can make a humanoid robot,
+it'll be immediately backwards compatible with what we've
+built the world for. Exactly.
+Elon, there's another
+part of
+the robot. So there's
+the LLMs, there's the actuation
+the hands, but also
+there's the
+silicon that runs it.
+And there was
+you know, Dojo, I think you posted on X
+AI5 and AI6
+and it just seemed like you were incredibly excited
+about the direction in which the silicon layer was also going.
+Can you tell us about that and what that is
+and what are we building here?
+What is being built?
+Is it a complement to everything that exists in the world?
+Is it a potential long-term competitor?
+What is it?
+Yeah, so
+So at Tesla we basically had two different chip programs, one Dojo and one, dojo on the training
+side, and then what we call AI4, it's just our inference chip.
+The AI4 is currently shipping in all vehicles, and we're finalizing the design of AI5,
+which will be an immense jump from AI4.
+by some metrics
+the improvement in AI5
+will be 40 times
+better than AI 4
+so 40%
+40 times
+and this is because
+we work so closely at a very
+fine grade level on
+the AI software and the AI
+hardware so we know exactly
+where the limiting factors are
+and so effectively the AI hardware
+and software teams are co-designing the chip
+so a 40x improvement in the silicon i think then as it as everybody here in the audience experiences it
+is that just an almost like an order of magnitude increase in the quality of fSD and the safety that
+you experience as a tesla driver and then the quality of the robot like where does it all manifest
+when you when you you know bring it up and actually get it into production yeah to be precise the
+40X is on, if you say, like, compared to the worst limitation on AI4, which is running the softmax operation.
+Yeah.
+We currently have to run softmax in around 40 steps in emulation mode, whereas that'll just be done in a few steps natively in AI5.
+AI5 chip will also be easily handle mixed precision models.
+So you don't have, it'll dynamically handle mixed precision.
+There's a bunch of sort of technical stuff that AI-Fi will do a lot better.
+In terms of nominal sort of raw compute, it's eight times more compute.
+About nine times more memory, roughly five times more memory bandwidth.
+But because we're addressing some core limitations in AI4,
+you multiply that by that 8x compute improvement by another 5x improvement
+because of optimization at a very fine-grained silicon level
+of things that are currently sub-optimal in AI-4,
+that's where you get the 40x improvement.
+You had... I'll keep going.
+So, now that said, I am confident that the current chips,
+AI-4 chips that are in the cars,
+will achieve self-driving safety
+that is at least two to three times that of human,
+and maybe even 10x and the software that will be released for that is coming out over the next few months
+so version 14 will be the biggest upgrade in Tesla software since version 12 we are increasing the
+parameter count by an order of magnitude the there's this there's a lot of reinforcement learning
+that's been used as we there there's like you can think of AI sort of as a way of
+compressing reality and and some of those compression steps we were too lossy and we
+address the lossiness in the compression steps so these are all software updates that'll
+that'll go out so just over there updates your car is going to feel like it is sentient by
+at the end of the year.
+It feels that way already, to be honest.
+I saw in the trades that you spent about $17 billion on some spectrum.
+Oh, yeah.
+So some couch change to enable your satellites and the Starlink network to connect directly with phones.
+What will that look like in a year or two?
+Are we going to drop our Verizon account and just expand our Starlink account?
+we're kind of hoping because Verizon kind of sucks
+how many of you want a Starlink phone
+who wants a Starlink phone
+is it technically possible
+I know you can't see it but it's everyone
+yeah it's okay cool
+so this is kind of a long-term thing
+it will allow
+SpaceX to
+deliver high bandwidth connectivity directly from the satellites to the phones.
+But there are hardware changes that need to happen in the phones.
+Since these frequencies are not supported in current phones, the chip set has to be modified
+to add these frequencies, and that probably is a two-year time frame.
+So the phones that are able to use the spectrum that was acquired probably still ship
+in around two years.
+And then we also need to build the satellites
+that are going to communicate on those frequencies.
+So in parallel, we're building the satellites
+and working with the handset makers
+to add these frequencies to the phones.
+And then the satellites and the phones
+will then handshake very well
+to achieve high bandwidth connectivity.
+But the net effect is that you should be able to watch
+videos anywhere on your phone.
+Wow.
+That's going to be crazy.
+And do these frequencies, would they work indoors inside buildings, you know,
+like your phone currently does?
+Okay.
+And so will you be able to have basically like...
+If you're in a building with like a thick metal roof, then no, but...
+No, the same types of...
+Yeah, normal homes, yes, yes.
+Elon, is your vision for this that instead of, you know, having an 18T account
+and then roaming when you're in the UK or you're in India, it's...
+It's just we could have one direct deal with Starlink.
+It works all over the world, eventually, not today, but at some point.
+Is that the end goal that basically we don't need a regional carrier?
+We have a global carrier and that would be you.
+That would be one of the options.
+To be clear, we're not going to put the other carriers out of business.
+They're still going to be around because they own a lot of spectrum.
+So there's – but yes, you should be able to have a Starlink like you have an AT&T or.
+P-Mobile or Verizon or whatever, you could have an account with Starlink that works
+with your Starlink antenna at home for your Wi-Fi as well as on your phone.
+And yeah, it would be a comprehensive solution for high bandwidth at home and for high bandwidth
+direct to sell.
+Could you buy some carriers to have more spectrum?
+Maybe you could buy Verizon?
+Not out of the question, I suppose, if that may happen.
+Let's talk about Starship.
+You just had a really, what appeared to be a phenomenal launch.
+How close is it to being predictable and ready to go in a commercial setting?
+I think we'll recover the ship next year.
+We've got one more launch of the Starlink version 2 stack.
+There's only one booster in ship left that's in the version 2 design.
+And then thereafter it's version 3, which is a gigantic upgrade because that's got Raptor 3
+and pretty much everything changes on the rocket with version 3.
+So version 3 might have some initial teething pains
+because it's such a radical redesign
+But it's capable of over 100 tons to orbit fully reusable
+And I think it's I think I think
+Unless we have some very major setbacks
+SpaceX will demonstrate full reusability next year
+Catching both the booster and the ship
+and being able to deliver over 100 tons to a useful orbit.
+What is the best rocket in the world do now in terms of tonnage to space?
+Well, in terms of commercial rockets, there's Falcon Heavy,
+which we'll do in, with side booster reuse, we'll do about 40 tons.
+So this is five times bigger, yeah.
+Well, two and a half times bigger, but StarShip would be full reuseability.
+Got it, okay.
+So everything comes back.
+Elon, after the explosion that happened with the failed launch, there was a lot of...
+Sorry?
+Which failed?
+Oh, the more recent one.
+The more recent with the Starship had...
+The big boom.
+The big boom on the base.
+And there was a lot of proclamations that there's going to be environmental and FAA and all these other sorts.
+The recovery back to the launch pad again was incredibly fast.
+How did you get back so fast, not just technically and work-wise, but just like regulatory clearance-wise,
+because they said there were going to be all these questions and reviews and so on.
+How did you guys manage that?
+Well, there were a lot of questions and reviews.
+We got through them all.
+and credit to the SpaceX team.
+They worked incredibly hard,
+and they got the next
+driven booster tested and on the pad
+and flown, and
+huge credit to the SpaceX team.
+I'm very proud of them for doing such a job,
+a great job recovering.
+I mean, creating a fully reusable orbital rocket
+is one of the hottest engineering problems ever.
+It's certainly, you know,
+a candidate form.
+most difficult engineering project ever you know it's on the podium at least um so it's a that's
+been the goal of SpaceX from the beginning from 2002 and here we are 23 years later so it's
+it's a long journey and um with with a super talented like by far the I think the most
+talented group of rocket engineers that's ever been assembled um and uh
+And we're finally, next year, I think we'll be able to achieve full reusability.
+Elon, what are the big technical blockers that you're focused on there between now and that full reusability?
+Are there some showstoppers where you're just kind of literally just obsessing over trying to figure out still?
+Or is it more about getting through a side of a laundry list of your learnings and just integrating it into the next launch?
+Well
+For full reusability of the ship
+There's still a lot of work that remains on the heat shield
+So no one's ever made a fully reusable orbital heat shield
+Like the shuttle heat shield
+Had to go through nine months of repair after every flight
+Right
+So no one has ever made a fully reusable orbital heat shield
+And is that a material science?
+problem or is that an engineering problem or both uh yeah i mean it's a material science engineering
+problem so it's but we really are uh looking at the fundamental physics here um again physics
+post principles and trying to figure out how do we make something that um is uh it you know it can withstand
+the heat is very light doesn't transmit the heat to the primary heat
+the primary structure.
+And
+But then whose integrity is intact.
+All the tiles stay on and they don't crack.
+Yeah.
+And then
+as you ascend, if you hit some
+rain, the tiles don't dissolve
+in rain. There's
+a lot of different issues.
+And then you really need to know that these tiles are working.
+You can't
+you know, go through this laborious.
+inspection. So it really needs to be, you know, these tens of thousands of tiles all work and
+don't need to be repoverished or checked one by one. That was the case with the shuttle.
+Can we maybe switch now? I mean, who else were you talked about Tesla? Then you go to SpaceX.
+Yeah. Now, I'd like to ask you some questions about GROC and XAI. You want to just give us an update? I think you kind of
+talked about where the next-gen model is, and you said something incredible. I still don't
+think people really understand it, which is, you know, there's going to be a next training run
+where you expect, you know, not to start from the, you know, common web and common crawl,
+where you expected an enormous amount of synthetic data. Just tell us about how the evolution
+of GROC is going and this innovation and why it's so important.
+Yeah, so we're running a lot of, using a lot of inference compute and reasoning to look at all of the source data, which is really the corpus of human knowledge.
+And then thinking about each piece of information and then adding what's missing and correcting mistakes and removing mistakes and removing falsehoods from.
+that's from that training data.
+So it's, it's, like, if you take the Wikipedia as an example,
+but this really applies to books, PDFs,
+the websites, every form of information.
+GROC is using heavy amounts of inference compute.
+Let's say, to look at, as an example, a Wikipedia page
+and say, what is true, partially true or false?
+or missing in this page.
+Now rewrite the page to correct the, remove the falsehoods, correct the half-truths, and add the missing
+context.
+Well, Elon, by the way, could you just publish that?
+Could we create like a grocopedia?
+Yeah, especially for our bio pages, which are a disaster.
+Wikipedia is so biased and it's a constant war, you know.
+if something gets corrected five minutes later there'll be an army of people trying to i mean it's
+become hyper-partisan and there's hyper-politics all over it so if you do fix for example
+wikipedia as a source of truth it'd be great to publish that just so the world has it
+all right i'll talk about that so talk to the team about that like a grocpedia or whatever
+this here's the grocphedia version it'd be interesting yeah and then just have it out there for this
+Where in terms of people here like it, in terms of training GROC-5, you're scaling up your supercluster in Colossus in Memphis.
+Clossus 2, yeah, but we have a second one.
+Yeah, could you give us an update on that?
+And then also, as part of that, where are we in the scaling laws?
+If you scale a bigger cluster, do you get a more powerful AI model?
+Is there a point of diminishing returns?
+or, like, how much more compute,
+if you throw twice as much compute at it,
+do you get a 10% better model?
+Do you get 100% better model?
+Like, is it log linear?
+What, I guess,
+how much more juice is there left in scaling hardware, do you think?
+I think there's a natural logarithmic function
+associated with the amount of compute.
+So, then, like, say for argument's sake,
+like, 10x more compute will double the intelligence.
+Maybe that might be a rough rule of them.
+But, you know, that still means that, you know, you go from 100 IQ to 200 IQ.
+It's still a pretty big deal.
+So I think we'll see intelligence continue to scale all the way up to where, you know,
+most of the power of the sun is fondest for compute and then ultimately most of the power of the galaxy.
+You know, sort of Kaudershev 2, Kaudershev 3 scale compute.
+So I guess, once you think about our personal intelligence, not as sort of this, you know, a destination that you reach, but really as part of the overall escalation of intelligence that we are aware of.
+human intelligence is also scaled as you have as the population has increased and we've been able to store more and more information human intelligence is scaled now human because of population declines and low growth rate human intelligence is is somewhat plateauing and will actually decline and my guess is that I think that we might have
+have AI smarter than any single human at anything as soon as next year.
+Wow.
+Yeah.
+And then probably within 5, like say 2030, probably AI is smarter than the sum of all humans.
+Do you think humans are on the decline because the AI is evolving?
+Do you think there's this evolution of the ecosystem on Earth that's under way that we don't really understand the structure of what's going on?
+but maybe yeah maybe we implicitly know that it's coming um yeah i mean i i hope the birth rates
+turn around i'm a big proponent of increased birth rate uh obviously
+it or no?
+Yeah, I'm trying to say a good example.
+You know, we had a big conversation at this conference we didn't expect, which is suicidal
+empathy, the West, this declining birth rate.
+I noticed you've been pretty active about it.
+And open borders.
+And open borders.
+Which is like let the invaders in.
+Tucker talked about it.
+Could all three of those be the same thing?
+It seems like there's a number of symptoms of the West being suicidal, the most obvious one being
+the birth rate is not a replacement level.
+So obviously, if that continues indefinitely,
+then the West will literally not reproduce enough to replace itself.
+But there's other things, too.
+There's the fact that the borders were totally opened to the point
+where Western culture, the social fabric started to come apart.
+And you see this especially in Europe where the indigenous cultures of the UK
+or France or Germany are starting to potentially be taken over by cultures
+of people who are brought in and aren't.
+assimilating. You have crime where, you know, we have this case on social media right now,
+this young woman, Irina, who's just killed in a senseless way on a subway, which is horrific
+enough in and of itself. But then in addition to that, the elite media just, for whatever
+reason, just refuse to cover it, like it didn't exist. So you have this issue of crime that's not
+being addressed or even acknowledged. And no acknowledgement of this. It's almost like we're trying
+to deny the reality of the spiral and this, yeah, that spiral.
+So you have the, you have all these data points that seem to suggest that the West is suicidal
+or doesn't, you know, doesn't seem to want to defend itself or propagate itself.
+Look, I think everyone in this room thinks that life is awesome, right?
+It's pretty great.
+And I think worth living.
+Yeah.
+And when Alex Karp was here earlier today defending the West,
+that got some of the loudest applause at the conference.
+So I guess we probably don't really understand what's going on.
+We don't really...
+Yeah, what's your take, Elon?
+What's your take on the suicide of the West?
+Yeah.
+What's going on?
+I'm very worried about it.
+Yeah.
+I'm very worried about it.
+You know, I think there's...
+Let's just say that the actions of the West are indistinguishable from suicide.
+So it's...
+And look, at least in America,
+There's generally a sense of optimism, but when's the last time you talked to someone from Europe who lives in Europe who's optimistic?
+Not for a while.
+Decades.
+Like even one?
+It's rare.
+So I think unless people have a sense of optimism and purpose about the future, they, suicide might be just what happens.
+like having a child
+is an act of optimism about the future
+so
+if you're not optimistic
+to this
+yeah
+so I think we need to maybe
+give people a sense of optimism
+and excitement about the future
+and I believe that the future will be better than the past
+and they'll be more interested in having kids
+did religion play a role in the past
+Elon to kind of placate and make
+folks feel that way?
+Yeah, I think so
+the nature
+of whores a vacuum
+and if you take away religion
+then I think you actually
+you get something in this place which is
+actually worse than
+what was there before. I mean it's like destructive
+basically. You get like the white work mind
+virus filling the hole that
+religion used to have
+taking the place
+of religion.
+You get these dystopian
+de facto religions
+that
+are very
+self-destructive.
+So
+I think perhaps
+some sort of
+revival of religion or at least
+what we need is
+some coherent philosophy
+that people can get
+excited about.
+You know, I mean, for me, it's
+philosophy of curiosity. I'm curious about the nature of the universe and I want to go out there
+and I want humanity to be out there exploring the stars, maybe meeting alien civilizations. Maybe
+in some cases we see the ruins of a long-dead alien civilization, but they were very strong
+for 10 million years. You know, the kind of stuff that you see in Star Trek in a non-dispopian
+in a sci-fi book or movie or show and so I'm just I have a philosophy of curiosity of
+like I just want to know what's going on and in order to know what's going on we must have
+an increase in this in the scope and scale of consciousness we must we must expand as
+consciousness we must grow humanity and we must extend humanity in order to comprehend
+to understand the universe or even what questions we should we should ask about the answer
+that is the universe you know Douglas Adams book the Hitchhaggers Guides the Galaxy is
+actually a deep book on philosophy disguised as humor and what the point he was trying to
+make in that book was that the questions are the really the hard part the answer is
+the universe like the answer is everything you see around you but
+But what are the questions that we don't know to ask?
+Now, some of the questions, I guess I do know.
+I'd like to know, is the standard model of physics correct
+about the origins of the universe?
+Are we actually 13.8 billion years old?
+How does the universe end?
+Does it end in a heat death or in some other way?
+You know, where are we in a black hole?
+We might be.
+Elon, can you talk about the whole sort of simulation question?
+Are we a simulation?
+Maybe.
+Where does the, where do you think we find the answer first in AI or in the stars?
+Because you're pursuing both, obviously.
+Yeah.
+I don't know if, I hope more people can get behind a philosophy of curiosity.
+Because I think it's very exciting.
+and inherently optimistic
+because there's this
+amazing sense of wonder
+about the nature of the universe
+and when you just
+when you uncover some secret to the universe
+that's amazing
+and you're like
+a whole world of understanding
+has opened up
+I mean we used to not even know
+where all the continents were
+you know it used to be like
+just the map would be, there'd be dragons.
+And like, all we know is that when they sailed in that direction, they didn't come back.
+I mean, the moon base.
+That's all that's all they knew.
+I kind of feel like the moon base or just going to the moon for real this time would be a big step in the right direction.
+You still have the moon planned?
+What's the status of that?
+Is that still on the agenda?
+Yeah, I think having, I think we want to try to reach new heights as a civilization.
+so I think it's fine to go to the moon
+but we should go to the moon
+in order to establish a lunar base
+like a lunar research base
+I mean there are parts of the moon
+that are perhaps older than parts of Earth
+and we might understand more about the nature of the universe
+if we had a science base on the moon
+that would be very cool
+and then we obviously want to go beyond the moon to Mars
+and well they self-sustaining city on Mars
+I do think that there is a fork in the road of human destiny where if we can establish
+a self-sustaining city on Mars with the key test being if the resupply shifts from Earth
+stop coming for any reason, does Mars continue to prosper or does it die out?
+At the point at which Mars is able to prosper and grow on its own, the probable lifespan of consciousness
+is dramatically greater because we are no longer dependent on everything going right on Earth.
+You know, there's always some possibility of self-annihilation on Earth with the World War III
+or a super virus or a meteor like extinct, you know, that destroyed the dinosaurs.
+We know from the fossil record that there have been many mass extinction events.
+So the question that I sort of always wondering about is will civilization can, will the civilization, will the
+civilizational arc continue to ascend such that we can make Mars self-sustaining before the
+civil civilizational art descends because the window of opportunity to make life
+faulty planetary exists now for the first time in the four and a half billion year history of
+earth yeah Elon let's assume that we get there and you're there you know you'd be the
+elder statesman you'd have the moral authority of Mars
+How do you run Mars?
+But there's this point that I think I want to just emphasize again that's it's more important than the form of governance on Mars or who's there in the early days.
+What really matters is that Mars is a self-sustaining, that we are truly a multi-planet species and such that we're achieving.
+such that we've achieved planetary redundancy so that if if something to and obviously we should
+do everything possible to make sure life on earth is great but there's always some risk that
+of an annihilation event on earth like it's itself annihilation or some natural disaster and and so
+the probable lifespan of consciousness increases dramatically as soon as as soon as we are multi-planet species
+with the key test being, can Mars survive if the resupply ships stop coming?
+So the first missions to Mars are not that important.
+What matters is can you get sufficient tonnage to Mars
+such that Mars can prosper on its own?
+And that means it has to have all of the ingredients of civilization.
+It's not just that you need to build, for example,
+a chip factory on Mars or ship fab on Mars,
+but you need the ability to build chip fabs.
+Do you have a sense of the time?
+scale? Like, let's assume Starship is at a state starting in, you know, 2026, then there's
+going to be a bunch of testing, obviously. There's going to be a bunch of early testing.
+We only have certain launch windows. So there's a bunch of time constraints. Is that,
+is this a 50-year thing in your mind? Is it 150-year thing? Is it something that is for our
+generation, or is it our children's generation? Where do you see that point if it's optimally
+possible? You know, things go and break our way?
+I think it can be done in in 30 years.
+It provided there's an exponential increase in the tonnage to Mars
+with each success of Mars transfer windows, which is every two years.
+So every two years, the planets align and you can transfer to Mars.
+So I think in roughly 15, but maybe as few as 10,
+but 10 to 15-ish Mars transfer windows,
+if you're seeing exponential increases
+in the tonnish to Mars with each Mars transfer window,
+then it should be possible to make Mars self-sustaining
+in about, quote, roughly 25 years.
+Amazing.
+That's incredible.
+All right, ladies and gentlemen, Elon Musk.
+We'll see you when we're back in town.
+We miss you.
+See you in person next time.
+Thank you, brother.

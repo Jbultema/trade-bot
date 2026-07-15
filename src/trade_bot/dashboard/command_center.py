@@ -6,6 +6,10 @@ import pandas as pd
 import streamlit as st
 
 from trade_bot.dashboard.components import _helped_metric, _render_metric_dataframe
+from trade_bot.dashboard.decision_sniff import (
+    build_operational_sniff_read,
+    render_operational_sniff_read,
+)
 from trade_bot.dashboard.formatting import _display_metrics
 from trade_bot.dashboard.trends import (
     compact_metric_line_figure,
@@ -25,6 +29,7 @@ from trade_bot.trading.book_alignment import BookAlignmentRun
 
 
 def _render_command_center(
+    bot_config: object,
     baseline_run: BaselineRun,
     book_alignment: BookAlignmentRun | None = None,
     *,
@@ -70,6 +75,17 @@ def _render_command_center(
         )
         _helped_metric(decision_cols[3], "Authority", str(decision_summary["decision_authority"]))
         st.write(str(decision_summary["human_explanation"]))
+        sniff_read = build_operational_sniff_read(
+            baseline_run=baseline_run,
+            bot_config=bot_config,
+            strategy_name=str(getattr(bot_config, "primary_strategy", "")),
+        )
+        render_operational_sniff_read(
+            sniff_read,
+            title="Today’s Decision Sniff Test",
+            include_details=True,
+            expanded_details=False,
+        )
         execution_plan = (
             book_alignment.position_plan
             if book_alignment is not None and not book_alignment.position_plan.empty

@@ -1,0 +1,1429 @@
+source: allin_podscripts
+published_date: 2025-08-29
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/trump-takes-on-the-fed-us-intel-deal-why-bankruptcies-are-up-openais-longevity-breakthrough
+title: Trump Takes On the Fed, US-Intel Deal, Why Bankruptcies Are Up, OpenAI's Longevity Breakthrough
+
+Oh, look at that.
+Sorry, guys.
+We got a little visitor.
+The moose.
+Hey, buddy.
+The moose has landed.
+Oh, he's up on my desk.
+Oh, how's your uncle Jason, huh?
+Let's see that handsome face.
+There he is.
+There's the moose.
+The moose is loose.
+Let's see.
+So I want to do a side by side?
+What a handsome visage.
+That's the good stuff.
+That's a stately animal.
+You're here, buddy.
+You ready for ranch time?
+All right, get him out of here.
+Get him out of here.
+We got a show to produce.
+Let your winners ride.
+Rain Man, David Sack.
+And instead, we open source it to the fans, and they've just gone crazy with it.
+Love you, my name.
+I'm going to all in.
+All right, everybody, welcome back to the number one podcast in the world, the all-in podcast.
+We're back, we're back.
+It's the original crew.
+You got your classic.
+You got your classic.
+And speaking of a classic, Freiburg's been tearing it up.
+What an amazing.
+event. We're going to have
+September 8th and 9th
+in Los Angeles, the fourth annual,
+All In Summit, all-in.com
+slash events.
+And now comes the
+incredibly awkward moment in the program,
+David Sachs, where we see
+Freiburg attempt to do an ad read.
+I'll let him just try to do the first one,
+and then I'll interrupt him and say, let a
+professional handle it. But let's give it a shot here.
+Let's see how Friedberg does
+with his uncomfortable promo.
+These are not your typical
+event sponsorships.
+Every summit partner is building an insane activation.
+All right, stop.
+It's terrible.
+Three, two.
+All right.
+Oracle's coming and they've done an amazing job.
+They're going to build out this amazing bar in the Expo Hall drinks on our friends at Oracle.
+Yes, and they're going to be sponsoring the P.E. and V.C. dinner as well as the AII infrastructure dinner.
+We have all these bird of a feather dinners where you can meet people in your tribe.
+our friend Jeremy O'Lear at Circle.
+He's also supporting it.
+He's building out a huge teched-out networking lounge right in the heart of the event.
+And Circle and BVNK are also partnering to sponsor the Stable Coin Dinner.
+Chamoth loves his stable coins.
+He'll be there.
+And Iran, they operate data centers powered by my favorite renewable energy.
+And they're putting on casino.
+That's me.
+You're going to be at that, yeah.
+Absolutely.
+Me and my pal, Chris Wright, are going to go there.
+And we're going to be in the solar tent, and it's going to heat up.
+Yeah.
+And we also have, how crazy is this?
+BVNK.
+It's not enough they're doing the stable coin dinner with Circle.
+They're going to build out an arcade in the Expo Hall so you can get some.
+We have to have a competition.
+You want to do a arcade showdown on J-K?
+What do you want to do?
+You want to play Stargate, Tempest.
+What are you going to?
+Whatever they have.
+What's your game?
+Tell me your game.
+You and I, we'll see, Street Fighter 2 maybe, Championship Edition.
+We'll do a 1v1, 10K, you know, two out of three.
+I feel like I'm getting angling.
+shot here. Did you like, did you write the code in that? Did you write the emulator? We rented the
+arcade for my bar mitzvah. So I played a lot. That makes sense. Yeah. And all seven people showed up
+for your bar mitzvah lying. We was in the backyard. We had Street Fighter 2 with the arcade. That was
+kind of the highlight. It was in the backyard. I didn't have a fancy thing. That was the big deal.
+We got to rent an arcade game. Your mom rented an arcade game. That's like a big deal. And you didn't
+That was a big deal.
+But, you know, but then we had it in the backyard, and that was it.
+It was pretty chill.
+Very nice.
+Very nice.
+All right.
+Well, David Sachs is with us again.
+Where do you have your bar mitzvice, jackel?
+I'm from Brooklyn.
+We didn't have any of this.
+You know what we had for our birthday parties?
+You had a choice.
+Pizza, bowling, or both.
+And basically, we rent a bowling alley.
+Get a couple of lanes.
+You get a couple of pizzas, and, you know, you can invite a dozen of your friends.
+And that was fun.
+It was fun.
+There you go.
+There you go.
+And after that, we robbed some stores and tagged some, tag the R train, did some petty crime.
+So very basic, yeah.
+How about you, Sacks?
+Did you have a bar mitzvah, Sax?
+What was your theme when you were a mitzvah?
+Was it Reagan?
+Was it Reagan, Bush?
+Was you a theme?
+What did you have as your theme there?
+The Reagan bar mitzvah?
+No.
+I mean, when would this have been?
+This had been in 1985, I guess.
+Yes, it's a tribute to Richard Nixon or was it?
+I wasn't involved in politics back then.
+You weren't into politics yet?
+I was not. No, I didn't know anything about it.
+When did you get the political bug?
+Was it in Stanford when you...
+Pauli Stanford, yeah.
+When they tried to shove political correctness down our throat, then had a negative reaction to that.
+They created a reactionary.
+Kind of like this whole Gen Z.
+I mean, if you look at the polling, this generation of kids are like super conservative
+because it's a big reaction to wokenness being shoved down their throats.
+And they're total squares.
+They do not like to do anything that is on the margin in any way unethical or a hack.
+I have my daughters.
+I pieced off the matriety to skip the line.
+My daughters wouldn't let me hear at the end of it.
+And I said, what do you think the matrily is there for?
+What do you think $50 bills are for?
+They designed the 50 to get a table before everybody else.
+They felt like it was inequality that was unfair?
+They literally gave, you know, everybody else is waiting.
+online and then you went to the front of the line. You gave the woman $50 and she sat you
+immediately. That's not right. There's other people who can't afford to do that. And I said,
+yeah, that's their problem. Work harder. It's important lesson from you. I don't know what I told
+them. How are you doing, Chamath? You're back. Shammoth, you're back. I'm back. I can tell.
+You're back. How is your, um, how is your decompression? You did a decompression stop?
+In Vegas or something? How did you decompress? Did you stop at like Laura Piana and do a decompression
+stop? Well, what did you do?
+No, Nat and I went to this island last week, which is between Sicily and Tunisia, called Pantelaria.
+It's an incredibly beautiful island, but she got really sick, so we didn't have much of a vacation last week at you.
+When I was posting from there, she was not well at all.
+And we were going to consider flying home early, but then she got better.
+Then we went to Milan and decompressed for a few days and packed her bags and came home on Monday.
+Do a little shopping, Milan?
+Good shopping, Milan.
+No?
+You're all geared up.
+By the way, by the way, let me say something.
+Nat and I bought a pair of ons.
+Do you guys have a pair of ons?
+On running.
+You're talking about the fun on running shoes.
+Yeah.
+We bought the walking shoes.
+And I walked all summer.
+These shoes kick ass.
+They're really good.
+I'm ditching all my Nikes.
+Titching your Nikes for on running.
+Yeah.
+On cloud is actually technically.
+Yeah, I think I bought like the cloud monster, I think or something like that.
+Very nice.
+Fantasticly comfortable.
+Use the promo code, Chamath, and you'll get 50.
+15% off on here.
+If my friend Roger Federer is listening, which I know he does from time to time, I would
+love to help on.
+Oh my God, hold on a second.
+You dropped that.
+Here's the name back.
+This guy named dropping on the pod.
+You know, he did a great deal with Han.
+He got like a bunch of equity and he helped build that business.
+He deserves all the success in the world.
+He's a phenomenal human being.
+A lot of brand extensions going on.
+My friend Ben Stiller, I was talking with him this one.
+I'm sorry, I dropped another name here.
+Let me get that back on the table.
+I was talking to my friend Ben Stiller.
+He's doing, you're going to love this, David, Stiller's sodas.
+He's doing his own soda brand.
+So we did a little powwow.
+A little powwow.
+Wait, who's Ben Stiller?
+The comedian.
+The comedian, the actor, the genius.
+The Jewish Tom Cruise?
+Wait, was that guy?
+I haven't heard that name in a long time.
+Is he still relevant?
+He shots fired.
+Shots?
+Oh, Jason, you had an announcement this week, you wanted to make?
+I did. We just sort of soft-launched that we're going to be bringing Founder University.
+It's one of the things I do. My day job is invest in startups. So we created this Founder University.
+We do it here in the United States. But we had a lot of interest to bring this course on how to build companies around the world.
+And we decided our first city would be Riyadh. So we will be bringing our Founder University, along with Sanobal, which is the leading venture.
+firm in the region there in November. So I'm going to be spending a week there and I'm really excited
+about it. If anybody's starting a company and you want to come, just go to Mina, mena, mena.launch.com.
+And you can apply. But yeah, I'm really excited. And then we're going to launch it in Asia next.
+So we'll have it in three cities starting next year.
+Do you take equity in the startups that they start? This is like YC?
+It's kind of a pre-accelerator. So what we do.
+do is we, most of the teams are not incorporated yet. Some are, some are, and we teach them how to do that. And then some of them, like tax GPT, went on to Y Combinator or they'll go onto our accelerator or another one. And when we watch them work for 12 weeks, we will invest in maybe 10% of them. So we don't have a fund in no lease yet. We're not obligated, but we're not obligated. We just do it to help the community and get more startups built in. But that must be good. So it sounds like it's deal flow for you too, right? So you get to see the companies.
+Yeah, what happens is a couple thousand people apply, and we meet with half of them on a Zoom
+call, and then we accept the best, and then we invest in the best after that.
+So it goes from like 5,000 people applying to 50 people going to 10 of them we invest in.
+So yeah, it's a filtering mechanism.
+Okay.
+So lots of stuff going on here, and I think the number one story remains that Trump is still
+fighting with the Fed.
+They say you can't fight the Fed sacks, but apparently...
+President Trump is fighting the Fed.
+You remember he was threatening to replace Jay Powell and he did the site visit and all that drama.
+Well, Trump recently fired one of the members of the Fed, Governor Lisa Cook.
+And you remember he called Powell too late, stupid, numskull, all these great adjectives here.
+But breaking, as we're taping this on Thursday, Lisa Cook has officially sued the president arguing that the White House has no authority to fire her.
+And to just give a little background before we get everybody's opinions, she's one of seven Fed
+governors, the governor's vote, obviously on the rate cuts. We've talked about here. Maybe they were
+too late to raise rates. Maybe they're too late to cut rates now. Big debate going on. She was
+nominated by Joe Biden in 2022. And two weeks ago, the Federal Housing Finance Agency,
+director accused Cook of Mortgage Fraud, claiming she had two different homes listed as her primary
+residents. You're obviously only allowed to have one. This is allegedly. And she did this long before
+she was Fed governor. But they have sent a criminal refer to the DOJ. And Cook has not been charged in any
+crime yet. So that's important to put out there. And this is all important because Fed governors can
+only be fired for cause. You need to have cause. And so Trump has asked Cook to resign.
+She declined on Monday. He said he was firing Cook for cause for deceit.
+and potentially criminal conduct, the first time in U.S. history that a president has fired a Fed
+governor. This has brought up Chamath a lot of issues around the independence of the Fed, which it's
+supposed to be in its best iteration. We can debate that as well. And important note,
+there is an emergency hearing set for 10 a.m. Friday morning in D.C. So by the time we published,
+there might be a decision of whether she can continue serving or not ABC News.
+reported this will likely go to the Supreme Court. Here's your Polly Market, folks. Shout out to my guy, Shane. Congratulations on the investment from Donald Trump Jr., also joining the board. There's a 25% chance that Lisa Cook will be out by the end of the year. So it's not huge, but it's not a long shot. Let's stop there. There's more to discuss about the Fed mechanically. Chamath, start with you from the market's perspective. The Fed's supposed to be independent. So do you have concerns about
+it being independent. And then does this feel like lawfare or ticky-tacky or they're weaponizing
+the Justice Department to you to, you know, get what they want, which is rate cuts faster and more
+of them? I think that the Fed is no different than any other appointee to a part of the government,
+which is that they are partisan, meaning if I said to you, is the Supreme Court viewed as
+partisan or nonpartisan, I think that most people at this point would say that the president
+that appointed them did so because they aligned with his ideology. If I asked you the political
+appointees to any department of the United States federal government, are they political or
+non-political? And the answer is that they're political. And the idea that we still can't
+admit that the Federal Reserve is political is part of the problem. The reality is,
+that the people that appointed these governors did so because the people that were appointed
+were aligned with their philosophy.
+And so we should stop pretending that they're independent because they're not.
+And inasmuch as they are closer to a regular civil servant than the Supreme Court
+appointee, which is to say a lifetime appointment, which it's not, then I think it's
+very reasonable to say that any sitting president should be allowed to remove a federal
+governor, if he believes it's not aligned with the wishes of the electorate and the voters
+and the plan that was voted in. I think that that's a reasonable thing. It's true for the
+rest of government. It should be true here. That's the narrow issue. But the bigger issue,
+I think, is asking from first principles, what does the Fed actually do in 2025? So we have an
+extremely vibrant and complicated and interconnected $130 trillion global economy. It's moving
+at the speed of light. The Fed gets together once a month, tries to divine what monetary policy,
+what the money supply should look like based on data that is often incorrect. We see that in the
+BLS data. We see that in the GDP prints. We see it in all of the inputs.
+And so we've turned over responsibility to a handful of humans using bad inputs.
+So I think the real question is there are certain parts of what the Fed does that they can
+continue to do, and I think everybody would probably say it's an okay thing.
+So just to be very specific here, so I get this right.
+Could they be a lender of Flavs Resort?
+Personally, in my opinion, no.
+I think that Treasury does a better job.
+I think we saw Treasury do that during GFC,
+and I think that Treasury has a better mechanism
+to get the American taxpayer a win
+than the Fed does.
+Do they actually create monetary policy and price stability?
+I would say that the capital markets
+and the free markets actually do a better job of that.
+They define much more what the spread is.
+I think SOFA is a much better rate mechanism
+than the Fed funds rate at this point?
+Do they do banking supervision and regulation?
+Yeah, they probably do a reasonably good job of that.
+That is probably something that most people would say they could continue to do.
+Do they do a good job as a payment system in a clearinghouse?
+Again, probably something that's pretty uncontroversial that they could continue to do.
+So I guess my point is, Jason, the bigger picture is the two things that are the most dynamic,
+they are the worst at doing.
+and so I would actually question whether that responsibility should sit with a handful of humans
+looking at faulty month old data.
+So for example, today the Commerce Department did something that was pretty exceptional.
+They said we're going to start publishing data to the blockchain.
+All the GDP data is now going into a blockchain.
+So can you imagine what this starts?
+I think, and we've talked about this before, I think employment data from all these employment
+companies and payroll companies should get published this way, GDP data can get published
+this way, all kinds of economic measures scrub for anonymity should get published so that you can
+have pricing oracles that actually tell you what's happening in real time. And the markets will
+then react and set rates in real time. Those are the two most sensitive things that I think
+the Fed does that creates controversy that they shouldn't be doing anymore. Freeberg, I guess
+the question that Chumat didn't get to there when he zoomed up was, do you have to have?
+concerns about the independence of the Fed. It's designed to be a very rigorously independent
+group. They're not independent. They're partisan. I know that. But the question I had also for you,
+do you have concerns about, you know, whether it's President AOC in four years or eight years or
+President Shapiro, moving these things around and firing people like this and the weaponization
+of the government against government workers, as some people are claiming.
+That was the sort of other piece.
+Why do you have to use the word weaponization?
+Like, when you appoint somebody to the Commerce Department or to Treasury, is that weaponizing
+that?
+No, it's a political appointee.
+You know, no, no.
+The concern people have is that this, that the head of FHFA is the one who is researching, you know,
+her mortgages, and that that felt like lawfare to people.
+You know, the same way people accuse lawfare of, you know,
+Letitia James against Trump, right?
+First of all, Bill Pulte is an exceptional American.
+He's a brilliant businessman.
+He's actually probably better served sitting at the Fed in some role, quite honestly,
+because he has been in the rate markets and the mortgage markets his whole entire life.
+So if Bill Pulte was able to get this in a reasonable, fair, and transparent way,
+which I have no doubt that he would have done anything other than that,
+the data is what the data is.
+And I don't know, I'll let somebody else litigate whether that's important.
+The more important issue for me is just acknowledging these people are political appointees,
+these are partisan employees, and this idea that Fed is independent is maybe something that we should revisit
+it because most of the things that they do can be done by Treasury and other people better.
+Okay. Freyberg, what are your thoughts?
+The members of the Board of Governors at the Fed, they're appointed to 14-year terms specifically
+to try and insulate them from the political cycles that occur. I think that that system has
+meant to kind of create a bit more resiliency to the institution. And so it can operate
+without necessarily being affected by the, you know,
+intra-election your kind of whims of politics.
+It seems like there's a lot of declarations to basically reduce the overnight rates,
+the short end of the curve, so the short-term rates come down,
+interest rates come down.
+The problem is, as a lot of economists have talked about,
+and as we've seen in the bond market,
+is that that could really push up the long end of the curve.
+Because if you suddenly start to flood the market with capital
+in the short term by dropping rates today. So everyone will borrow, everyone will buy, it'll
+stimulate the economy, it'll stimulate growth, but it'll also stimulate inflation, and it'll
+stimulate government spending, then the ability for the government to make its debt payments
+and the cost of the inflation bears out in the long range, so you end up having 30-year rates
+spike up. So there's a sensitivity that's like worth noting here that it's not just, hey, the Fed is
+in control of the money supply, but there's a consequence to the effect the money supply will have,
+ultimately on the cost of borrowing over the long term and the U.S. ability to service its debt.
+And so I do think it's very important to have an independent board of economists that makes those
+trade-off assessments that looks at short-term inflation, short-term money supply, short-term demand
+for capital, elasticity of pricing in the market, and also has considerations for the long-term
+cost of capital. So this independence notion, I think, is very critical. The 14-year appointment
+term, to me, solves this problem. We have the same issue in the Supreme Court.
+where they serve till the end of their life.
+And so I do think that the consideration here isn't just about taking action to fire a member of the board,
+but perhaps we should go back and relitigate whether the 14-year term is appropriate
+and whether it would be much more specific about the rights that we want to impart on the executive branch of the government
+to be in charge of the money supply.
+Any concerns about the, and we'll go to your next, Axe, you'll back cleanup,
+but any concerns, Freiburg, on how this is going down, that you have enough,
+other governing agency looking into the feds, governors, and then looking for ways to remove
+them if they're in the other political party? Do you have concerns about that at all? And this is,
+by the way, a concern that Republicans have also said, hey, this feels like lawfare, this feels like
+weaponization. Yeah, I mean, obviously, I just think that once people are appointed, if there's
+reasons that they're breaking the law, then they should be investigated. Everyone in government should be
+all the time. So there should be ethics and there should be rules and they should be
+investigated. But I don't think that we should use that as a mechanism to get around the 14-year
+term. The 14-year term is the term. And if we want to affect that, we should change the 14-year
+term and actually get Congress to do its job, which both sides may agree on to reduce the term.
+Okay, Sachs, what's your take on what we're seeing here? You were obviously
+quite animated about lawfare in the previous administration against Trump. What do you think
+about what's going down here? Well, this isn't lawfare. This is the president pushing back
+on, I think, a Fed that's been overly political. And just to agree with Chamath on something,
+I have to kind of push back on this chivaleth that the Fed is strictly apolitical. All the Fed
+governors are politically savvy and connected people, and they understand the politics of
+and the best example is Powell himself. So let's just go back through the history. So in the summer of
+2021, we got that 5% shock inflation print. And it was Powell who played along with Biden and
+Yellen that this was transitory. And that transitory narrative they used to basically avoid
+any interest rate cuts or any change of policy for six months. Now, what was the importance of
+that timing? Well, Powell was renominated for a second term by Biden on
+November 22nd, 2021. So in other words, he went along with this whole transitory narrative to get
+re-nominated by Biden. And then a week later, on November 30th, he said it was time to retire the word
+transitory. And he then essentially announced that there'd be a policy shift, and then they
+didn't raise interest rates for another several months. And it was a historic tightening cycle,
+meaning the shock to the economy was incredible because the rate and the velocity of which he raised rates
+was unprecedented. So the real question is, had he been truthful going into a nomination process
+and done it much sooner, would the economy have been better off? And the answer is probably.
+Yeah, for sure, because in that second half of 2021, we had a bubble. We had an asset bubble.
+We saw it in startups. We saw it in real estate. And that bubble was caused not just by artificially
+low rates, but also by the continued QE buying. I think Stan Druckmiller has noted that the Fed, I
+I think they bought something like 180 billion of government bonds and added them to the Fed's balance
+sheet.
+So not only were they resisting rate increases during that roughly six-month period, they were
+continuing a QE policy designed to simulate the economy, even though we were clearly
+in a new type of inflationary period.
+But do you think that was incompetence or do you think that was political sex?
+It was obviously political because think about it, if Powell had stood up and said, no, I think
+Biden and Yellen are wrong, and this isn't transitory. Or even if it might be transitory,
+it's still a 5% inflation print. We got to raise rates, or at least we got to stop QE. That's
+what he should have done. We didn't do that because it would have been, hold on, it would have been
+contradicting the Biden administration, and it probably would have cost him getting re-nominated
+for a second term. So that was intensely political behavior by Powell, and it's the only reason
+he's in the job right now. And it caused an asset bubble in 2021.
+it caused the 9% inflation that we had the following year, and it caused the crash that we saw
+in 2022 and 2023. And it's causing what we'll talk about later, all these bankruptcies now.
+So just to give the counter here.
+I think about all those real estate deals that got done in late 2021, because rates were
+artificially low, and they were able to finance them, and valuations were artificially high,
+and now, you know, that wall of debt needs to be refinanced.
+Jason, what should the Fed do that is value?
+today, meaning when it was created, I could understand how the government moved faster than
+industry. I think I can give that claim. It was about providing liquidity, too. But 50, 60, 70 years
+later, where all of private industry is operating literally at nanosecond scale using infinite data,
+using a financial motive to price risk,
+how is it possible that a handful of humans
+looking at data that it's a month old
+has any sense of what's really happening?
+How is it even possible that?
+I think it's probably unfair to say
+they're looking at only data that's one-year-old,
+and it's also unfair to say that they're a partisan group
+because if you just look at statistically,
+they meet monthly.
+That's true, but I don't think
+that they take the other 29 days off, obviously.
+And if you look just statistically,
+two of them are nominated by Trump,
+and one was made chairman by Trump, and then three were nominated by Biden.
+There's one vacant seat.
+So right now, when you look at it, it doesn't make sense that it would be political,
+and they have been acting with very little dissent in their decisions.
+So just, I hate to bring the facts to the table here, gentlemen,
+but it doesn't seem like they're doing this in a partisan way.
+It seems like they're doing it.
+You could argue maybe they're too slow to react or they're not perfect,
+but it's certainly not partisan if half.
+They don't want to publicly contract the Fed chairman.
+By the way, you didn't let me present. Hold on. Before you say that, they have dissent. There's been dissent. There's been one or two people who will dissent and say, I think we should have a rate cut now. And they vote. It's not like Powell has like five of the votes. They each vote. It's not a god king kind of situation. So just factually and statistically, it's an even balance, unlike, say, the Supreme Court at the moment. And there's one seat open. And there might be two seats open now.
+Powell is the leader of the Fed. He needs to get renominated. This is why we had a six-month delay.
+in stopping QE and not recognizing the fact that we had this big inflation spike. And that
+lines up perfectly. Look at the timing. He was re-nominated. But you said it was political. You just
+glossed over what I just explained that. It's that Trump placed him. Okay. Maybe it's just a huge
+coincidence, Jake Hal. But Biden nominies Powell for a second term on November 22nd, 2021. And then on
+November 30th, Powell finally acknowledges that transitory is wrong. A week later. Okay. You don't
+think that's a big coincidence. Let me give you another one. I didn't get to present the
+second part of my argument here, which is that Powell started the rate cutting cycle last fall
+with a 50 basis point cut right before the election shortly after Elizabeth Warren sent him a letter
+demanding a cut. And let me just read you. Let me just, hold on. I want to bring up this letter for a
+second. I want to read this because there's so much hypocrisy here on this issue. By the way, it was
+expected to be a 25 basis point cut and you ripped in a 50 going into the election. But everybody was
+saying, by the way, we were all saying at that time, not just Elizabeth Warren. We were all
+saying that a cut was due, hold on let me finish my sentence, please. We were all saying on this
+very podcast that there should be rate cuts because we had seen that six, seven percent inflation
+come down and that you were arguing at that time, Chimoff, that it was time for a rate cut.
+It wasn't just Elizabeth Warren. There was consensus that they were slow to cut rates during that
+time period. So again, I don't buy a political argument. We could, we could all read it and realize
+what was happening to the economy, which was like, okay, it's time to find a glide path.
+But meaning, a glide path means 25, 25, wait, 25, not 50, then zero.
+Okay.
+That's not a plan.
+This is from Elizabeth Warren to Powell on September 16th, 2024.
+So a few months before the election, she says that we're writing to urge the Fed to cut the Fed funds rate.
+And she says for months, we've been calling on you to cut the Fed funds rate.
+And it says, in fact, it may be too late.
+Your delays are threatened the economy and left the Fed behind the curve.
+Inflation has fallen to 2.5%, well below the mid-22 peak of 7%.
+And then it goes on to basically say that employment numbers adjust slowly, so the Fed
+should front load rate cuts to avoid sliding towards a potential crisis.
+So the bottom line here is that Elizabeth Warren was saying that Powell needed.
+to cut dramatically when inflation was at 2.5%. Now Elizabeth Warren is saying that Powell needs to
+stand up to Trump and not cut rates. So you can see the hypocrisy here. You've got Democrats like
+Elizabeth Warren were brow beating Powell to cut rates before the election. He apparently gave into
+that pressure, cut rates 50 basis points. And then once Trump won instead of Kamala, then he stopped
+the rate cutting cycle. Just a little correction there. You keep saying that Powell makes his decision.
+He is but one vote when they had that September 50 basis point cut, which we were all a little bit shocked by.
+People thought it was going to be 25.
+So it was double.
+There was one dissenting vote from one of Trump's appointees.
+So basically the Trump appointees were opposed to it.
+One was.
+The other two weren't.
+And you'll remember that at the last, I think it was July, two people voted out of step with Powell.
+So they do have dissent there sometimes.
+So this idea that it's just nakedly political just does.
+He doesn't add up.
+He's putting together the majorities.
+You're cherry picking the Elizabeth Warren because Elizabeth Warren is about one person.
+You just think all these things are coincidences.
+This argument that it was political just can't be true if there's other Republicans
+who also voted for it.
+Well, they're established Republicans.
+Okay, sure.
+And they don't like Trump.
+I know, I know, well, okay.
+I mean, I know there's some conflict within the, uh, within both parties, actually.
+So he does a 50 basis point cut a few months before the election, which can only help the incumbent
+administration, Kamala, that didn't work. And then when Trump gets elected, he pauses the
+rate-cutting cycle. That is factually true. What is also factually true is that inflation started
+to tick up a bit. Additionally, that what the Fed said, not just Powell, the entire Fed said,
+we don't know the impact of Trump's tariff policy. And since they didn't understand that,
+and it was unprecedented as well, and we all admit it was unprecedented, and we all admit that it was
+kind of shocking, which is why the stock market took a nose dive when he started, you know,
+making really like intense tariff demands. They said, hey, when the tariff stuff, when the data
+comes in for tariffs, which came in in May, June, and they were good. When that, when that tariff
+data came in, then they said, we were going to work towards a cut in September. So we're talking
+about a five-month period here. Hold on a second. You're saying something really important.
+Okay. I just want to pause on this. Okay. You talked about
+and what you said was the markets reacted and they went down. You're absolutely right. But you know
+what they did? They also repriced that risk well before the Fed got back together. It was within a few
+weeks that the market had completely repriced what was happening with tariffs. This is why I'm
+telling you that we are better off imparting the rate-setting mechanism to the free market
+because when you have places like commerce and treasury increasingly publish all this real-time
+data into a blockchain, you can have pricing oracles, Jason, that make these decisions
+in real time and reprice this, just like the stock market does every day.
+When you say Oracle, explain to the audience what you mean by that? You mean an AI would
+tell us what the rate should be? No, every bank will have oracles that divine what they believe
+the risk-free rate would be. Then what happens?
+is when you have a Treasury auction, in an auction, you submit a bid. And when people submit
+bids, what happens is you converge on a market clearing rate. That happens independent of the Fed.
+And so what I'm saying is that if you actually inspect the ability to finance the United States
+government, the two critical things that happen can be done and are done well today by Treasury
+plus the free market. So you want to abolish the Fed? No. For this purpose, for setting the rate?
+Listen to me. They have four major responsibilities. I think that if you revisit what's happening,
+you can find two of those responsibilities that probably they can continue to do with a lot of
+usefulness. But it is clear that the free market does a much better job of setting the actual
+rate. It's called SOFER. We all use it. We use Fed Funds as a guide, but Fed Funds isn't even
+specific anymore. It's now a range. They don't give a specific rate. They give a specific rate. They
+arranged because they don't know. And it's okay to not know, but we should just acknowledge that
+that's where we are today, which is we have precise data in the free markets, imprecise data
+in a group of people. So there are 12 people that vote in these meetings. Seven are the Fed
+governors that we've talked about. And then five of the Fed bank presidents who also get
+a votes. And it's very simply the majority wins. And there's a vacant slot now. So there's
+11 votes now. We've all been in large board meetings. And we all know that the dynamics of
+these meetings, there's a leader, that person's either the CEO and chairman or just the chairman of
+the board, and they're the ones who lead the discussion, and they put together the majorities,
+and they set the agenda, and it takes a revolt by the rest of the group to basically stop their
+decisions. So you're trying to diffuse accountability for Powell's decisions here when he's a leader
+of the Fed, and he ultimately has responsibility for their decisions. And by the way, I don't
+think you'd be seeking to diffuse accountability that way if Powell had made a bunch of good
+decisions, right? Why would you be trying to diffuse that accountability? I don't have a horse in
+this race. I don't have zero horses. But clearly you're trying to defend. You're trying to defend the
+Fed here. I'm just trying to correct the facts. There are 12, well, there's 11 people. He's the
+leader of the institution. He's the one. He gets one vote. He gets one vote. And just in the last,
+he's putting together the majorities. Just again, I hate to bring facts into the discussion.
+But there were two dissenting votes, Bowman and Waller. They preferred a 25% rate cut in July. So there
+is dissent in this organization. They're going to cut 25, obviously, in September. Some of them
+wanted to do it in July. And then August, they said, yeah, it's time to do it. And so we, that's why
+the market popped and palmy market is showing that's going to happen in September. So we're talking
+about a 60-day period. You let's move on. Here's the, well, let me just, just.
+You want up the last word. Go ahead, Sachs. You get the last one. Look, here's the bottom line
+is, I think Trump is right to be frustrated. Powell has been intensely political. He went along with the
+transitory narrative on inflation to get re-nominated for six months. That created a horrible
+misallocation of capital. And then a few months before the election, he went along with the 50
+basis point rate cut. There was no outrage about Elizabeth Warren jawboning him then,
+like there is now about Trump. And then he stopped the rate cutting cycle when Trump won.
+When Elizabeth Warren said that, we actually said she shouldn't be doing that. So that wasn't
+like Elizabeth Warren speaks for the country. She's totally irrelevant, Sax. We all know she's
+irrelevant. And we all agreed that they were behind in the rate cuts.
+We all agree she's behind the rate cuts.
+Okay, let's go to the next story.
+Okay.
+We're not going to agree on this one, and there's going to be a rate cut in September,
+so it's all good.
+The U.S. government just took a 10% stake in Intel.
+Last Friday, Trump announced that the U.S. government would require 10% of the chip maker.
+As we all know, there was this Chips Act to try to onshore chip manufacturing.
+There's a lot of chip companies that are U.S., but they don't actually make the chips here in the United States.
+most of chips in the world are made in Taiwan, obviously, by TSM.
+And so these grants were created.
+Nine billion of them were grants.
+There were also tens of billions in loans.
+And that was the Chips Act.
+We talked about it here many times two years ago.
+These grants have been allocated.
+They were not paid out.
+So Trump and Lutnik came in and said,
+hey, instead of giving this money for free,
+we would like to get something
+for it. And they are going to get non-voting shares. There's no golding share like in China where,
+you know, you get a board representation and you can kind of control the board. This will be
+passive, no board seats, no governance rights. Letnik was very clear about that on CNBC. This all
+happened three weeks after Trump called Intel's CEO or called for Intel CEO to resign over his
+ties to China. President Trump said, quote, the CEO of Intel is highly conflicted and must resign
+immediately. There was no other solution to this problem, but they found a solution, which was
+to take 10% of the company. Let's stop there. This has been pretty controversial, I think,
+Chimov, in terms of people wondering if this is going to become a playbook. Do you have any concerns
+with swapping the grant to getting equity? And do you think they should become a playbook where
+the U.S. government starts to own percentages of companies?
+in exchange for loans and grants as opposed to giving loans and grants.
+Yeah, I think some historical context is important. In 2006, Hujintau gave this speech. And
+in that speech, he talked about, you know, six or seven boxes. And the way that he described
+these boxes was that these are the critical parts of the Chinese economy, that they must persevere
+and win over the next 20 or 30 years to ensure safety, security, and prosperity for the Chinese
+people. And in those boxes were things like semiconductors, were things like rare earths, were
+things like pharmaceutical APIs. And what it described was a willingness by state governments
+in China as well as the federal government in China to use the balance sheet to support those
+companies. Incrementally, Jason, as you said correctly, they would also ask for a golden vote.
+In return, what did they do?
+I can talk to you about rare earths as one very specific example through my involvement
+with NP and now with Intelis.
+The Chinese have an extremely sophisticated market-driven approach to how they help
+when they are on the cap table.
+They'll price shape, they'll price dump, they will change the spot markets, they'll
+perturb the ability for other people to compete.
+And what that does is it locks the capital markets because it says we can't compete
+with these companies, so we're not going to finance an alternative. That has long-term strategic
+negative consequences for everybody that isn't those Chinese companies. So let me just pause
+there. Now look at the United States. What the United States has always done is we have been
+the lender of last resort, but we've never participated in the upside that being that lender
+of last resort has given us as the American taxpayer. So, for example, in 2008, you know, we created
+tarp where we bailed out all kinds of toxic assets. What did we get in return for that? Nothing. We barely
+got our money back. When Warren Buffett stepped in to backstop Goldman Sachs, he was able to get the
+United States government to help him backstop that. Who got all the gains, Buffett and shareholders
+of Berkshire Hathaway? Who put up more money, the United States taxpayer? Those are but two examples.
+I think that this approach is the much better approach, which is to say,
+We can do exactly what China did with a couple of tweaks.
+It's way better, as you said, Jason, to just put in the equity, own something on the balance
+sheet of the United States, not have a golden vote, have complete transparency, allow the capital
+markets to finance these businesses, but give them a chance to compete all around the
+world, and then the U.S. taxpayer gets some of the upside.
+That is awesome.
+What we have done up until now, until what Lutnik has done and what the president has done,
+is the opposite, which is, we have given money away in times of duress with absolutely no
+upside, and I think it has to change.
+Sachs, what are your thoughts here on this model?
+It is something to think about when it comes to, as Chimov correctly points out, China will
+subsidize their champions.
+It's happening right now with BYD.
+The car company, allegedly, all these car companies are dumping cars all around the
+and supposedly they're being underwritten by the Chinese government explicitly to do this,
+to take away American, German, European auto manufacturers' ability to compete.
+So what do you have thoughts on this?
+Do you want to see it continue, or do you think this is kind of a one-off specialized situation?
+Well, I agree with Jamath that if you're going to give large amounts of money to chip manufacturers,
+it's better to get equity for that than for it to be a freebie.
+And I think there's two reasons for it.
+One is it's a better deal for taxpayers.
+We might build a recoup the money and even make a return on it.
+But the other is the incentive for companies, right?
+We don't really want our companies going to the federal government to try and get bailed out.
+And at least if they have to give up equity or warrants, things like that, there's a cost to it.
+We would rather that these companies get financed privately.
+But that didn't happen here until received something like, you know, over $8 billion under the Chipsack
+because we let the free market do its thing.
+and it resulted in chip manufacturing being offshoreed, and it all ended up on the island of
+Taiwan. And that's a huge national security issue for the United States, because now our whole
+supply chain for this critical resource is single-threaded on Taiwan. So we made the decision
+as a country to onshore chip manufacturing. That's what the CHIPDAQ Act was about. It had
+large bipartisan support. So there's this priority to bring chip manufacturing back on
+shore, and the question is how you do it. And I think that if you are going to hand out billions
+of dollars to these companies, you're better off at least, again, getting something for it,
+having the taxpayers have some upside in it, allowing the government to recoup, and creating
+the right incentive for these companies. They're not constantly seeking bailouts. So I think this is a
+big improvement over where the Chipsack started. But to answer your question, I mean, would I be
+looking for lots more opportunities to do this? I think there has to be a national security interest
+or something of that kind, and I think it has to be a situation where, for whatever reason,
+the free market has failed to deliver on that priority.
+Freeburg looks like we're going to have consensus here that we all agree it's better to get
+some upside or equity for the American taxpayers as opposed to giving free money.
+There have been some pushback as to the style in which this was done, the bullying of the
+CEO and then three weeks later a deal.
+So thoughts on that criticism of the administration?
+Well, just taking a step back, I think it is an indication that the free market has failed in some way.
+If the government is stepping in to either provide unique regulatory unlock or the government is providing capital or the government is basically stepping in to be the biggest or primary buyer of a private company's products or services, those are the three kind of reasons why I think these scenarios are emerging.
+So regulatory unlock that's unique, providing capital, or being a buyer.
+All three, I think, indicate that the free market has failed and the government is playing
+too big a role in our economy.
+So I think that that's just the unfortunate circumstance that we find ourselves in and we can
+recount, as we have many times here before, why the government has become so big, why it is
+too big, and why it is having such an outsized influence on job creation, on economic growth,
+on stimulus, on market strategy, etc.
+And I hear Sachs' point that there are very specific circumstances where we have to fix free market action.
+And I totally get that.
+But I think there's these bigger, broader kind of things that are happening, which is the government's also the biggest buyer of products for a lot of companies.
+And the government's providing capital, either through contracts or procurement or some structure that is stimulating a very large percentage of economy.
+So I do think there is a notion that some have shared, which I don't fully disagree with, which is that there is some degree of socialism underway.
+that the government is providing such a large role in the economy and replacing so much of the
+free market. And we can argue why that is and have different points of view on why that is,
+but that de facto state is an unfortunate state. Now, I think the question is under these
+circumstances, should the government be getting equity? I think the answer is yes. I agree with that.
+And if the government is getting equity, the key question I want to ask is, where does it go?
+There's three places that equity could land. It could just sit on the balance sheet of the federal
+government, in which case, there's no real goals or oversight of the investments. There's no
+overarching strategy on what to do with that equity over time. How do we, how does the American
+taxpayer benefit the most? When does the government sell? How does the government choose to
+sell? Who makes that decision? So the second is then when you form a new sovereign wealth
+fund to hold all these equity assets. You form a new sovereign wealth fund, then you have a whole
+group of people that are going to be hired to oversee those investments. They're going to make good
+decisions, hopefully, they're going to be good investors, good fiduciaries on behalf of the American
+taxpayer. But I would argue that what we should be doing instead, and as I've mentioned in the
+past, is use what we already have, which is the OASI, the old agent survivor's insurance fund,
+which is the trust fund behind Social Security. That's actually where Social Security's assets
+lie. Today, the only thing in that trust fund is U.S. treasuries, and they're actually a special
+form of treasuries. So if you've paid into Social Security, you're effectively loaning the federal
+government your money, and then they're supposed to pay you back your retirement benefits in the
+future. Rather than just loan the federal government money, those assets should be held
+and will become the largest sovereign wealth fund who make strategic investments and grow those
+assets over time on behalf of those American taxpayers as retirees. So I would argue that the
+right solution of the three options, form a sovereign wealth fund, sit on the balance sheet with no
+strategy, instead would be to have that sovereign wealth fund sit within OASI that would require statutory
+changes because the Social Security trust funds were set up in the 1930s and Congress passed
+an act that said, you know, you kind of got a hold only treasuries. So we would have to get
+Congress to kind of revisit that concept. But I do think that if we are going to be in the state
+where the federal government's playing this outsized role in the market, we should take equity,
+but we should be very strategic about where that equity goes. And I think the best place to put
+it is in the Social Security trust funds. And it can kill two birds with one stone. So rather
+than create new holes in the government, meaning new spending, new debt, creation of new vehicles
+for us to spend capital, I think we should fill holes. And one of the holes we need to fill
+with Social Security, which is going to go bankrupt sometime between 2030 and 20303. I would
+encourage us to kind of strategically think about evolving this system. I think it's a major
+moment, by the way, because as I've mentioned in the past, in addition to setting up an equity
+vehicle based on these deals, the Social Security Trust Fund could also be buying public
+equities on behalf of the retirees, which would have a significant compounding effect for them.
+J-Kal, what do you think?
+So, I love the substance of it.
+We talked about it actually back in the day here.
+There were a series of loans that Obama set up for Tesla, Cylindra, and Fisker.
+A bunch of those companies blew out, didn't pay back their loans.
+Elon paid back his ahead of time.
+But the government had no upside.
+With interest, of course, yes.
+And imagine if they just owned but warrants for one percent of Tesla or something.
+It could have been incredible.
+And I'm sure Tesla would have still taken that deal.
+It wouldn't have been crazy.
+The thing I don't like about this is the bullying of the CEO of Intel.
+This is giving a lot of, you know, this is a lot of my challenge with Trump is, sorry, President Trump, is sometimes the style in which he does something detracts from the actual substance of it.
+The sumstance of this is great, but we are now getting into a situation where it feels like
+our narco-capitalism, like this is crazy that the president goes and bullies the CEO of a company
+and then says they're going to be deported and then settles a deal like this.
+The optics look terrible and it would have just been much better to say, instead of giving
+you a grant, we'd like the option to have equity, what would you prefer and then have a decent
+negotiation when you don't have to threaten to kick the guy out of the country?
+Do you think maybe that happened, J-Cal, and it just wasn't public?
+And this was, like, a lot of things, a public negotiating strategy?
+Yeah, I mean, I think probably that is what Trump does.
+He beats somebody up and then says they're incredible.
+I just think it detracts from the substance and the good work when you do those techniques
+because it's now very easy for...
+Do you think we should have a sovereign wealth fund?
+Not when we're in debt.
+The president addressed what happened.
+Tom Cotton, you know, senator, wrote a letter that,
+attacking Intel and questioning the CEO, Libu Tan's past.
+And the president posted a truth in response to that,
+but he hadn't met Libu before.
+And so the CEO of Intel went in there,
+got an audience and told his side of the story,
+which was that, yes, he invested in China,
+but when everybody was doing it,
+it wasn't controversial at the time.
+And I think he hasn't been involved in China
+for like six years or something like that.
+So he cleared up the situation,
+and that's how the conversation happened.
+But look, I don't – Fire aim ready is like the thing I don't like about when Trump does these things.
+So, yes.
+Well, I think the American people like when Trump gets results.
+Me too.
+Absolutely.
+You got to break some eggs to make an omelet.
+And the question is, is he getting good results?
+And I think the American people are happier getting something in exchange for billions of dollars as opposed to just being handed out.
+Also, can I say something, Jason?
+To your point?
+I just wish you would do it in a more thoughtful way.
+But here we are.
+It would have worked.
+Absolutely, it wouldn't work.
+You mentioned that you don't think that there should be a sovereign wealth fund until we're out
+of debt.
+I didn't finish my thought on that.
+So that's an interesting question.
+If we had a sovereign wealth fund and we're $36, $37 trillion in debt, I'm with Lutnik's position.
+Like maybe we pay down that debt and then we can think about that.
+But sovereign wealth funds usually come from some natural resource, Norway's, you know,
+UAE, you know, Saudis.
+We don't have some natural resource that is throwing off all the,
+this money. So I don't know how we get one. I'll take the other side. I think that we should
+start a sovereign wealth fund right now. And who should fund it? Well, the great news is that these
+Trump tariff deals come with huge amounts of capital that these other countries have committed
+to spending inside the United States. For example, there is $600 billion now that Japan has to spend
+inside the United States. There's $300 billion that Korea has to spend. There's another several
+hundred billion, that Europe has to spend. If you add that all up, we've exceeded a trillion
+dollars of inbound capital on the investment side. And in those things, we get 90% of the upside,
+if you remember. So I think that a lot of that capital should be the seed capital for a
+sovereign wealth fund. You're right, Jason, that we can then choose to direct some of those gains
+to things like debt reduction. Freebrook is right, we could direct some of those gains to fund
+social security. I think we should set that up right now. And it can be
+additive. So, for example, there's the trillion dollars that these countries are investing
+in the U.S. 90-10 carry. It's unbelievable. All of that should go into a balance sheet that
+the American taxpayer can benefit from, number one. Two, when we do these programs like we did
+with MP and we've done with Intel, they're really smart. We need it anyways for strategic
+reasons, but now we get the back-end participation of the equity. That should go into a sovereign
+wealth fund. All these things make a ton of sense, I think. More of them is what I would say.
+The concern I have is any time we create a new income stream at the federal government
+or we have some sort of growing asset that you mark up on the book, someone tends to invest
+ahead of the curve on that, meaning someone takes that and they're like, oh, great, I can spend
+more now.
+I mean, we even saw this in California, you know, Gavin Newsom and the budget skyrocketed as
+the income went up.
+And rather than take the surplus and book it for a rainy day, they went and spent ahead
+of it and then all of a sudden they had a huge deficit.
+And I do worry that the tendency in the federal government, which is what happened with Social Security, is it's like, okay, all these people are providing this income every year to the federal government, which they're supposed to be paying into their Social Security trust fund.
+But then what happened is we raided the coffers.
+We took all that money and we started spending it on random new programs.
+And the problem is by giving the government more assets, by giving the government more income, we set ourselves up for a circumstance with a federal government, the Congress says, great, we got more money to spend.
+let's do X, Y, and D program, and let's do this great. Let's build a high speed train. Let's do
+this. These are all good for American people. And all of a sudden, you know, you don't actually
+solve any real problems. And this is why my argument is like we should use it to fill the hole
+that we have, for example, in Social Security. And that needs to become an asset that's strictly
+used as an offset on Social Security. Because if you don't put it in that box, it just becomes
+another spending mechanism. I don't like the sound of taking people's Social Security savings
+or the money that's earmarked for Social Security and having the government act as a venture capitalists
+and start investing willy-nilly trying to get us out of this whole. I mean, I don't think that's
+going to go very well. But what I think makes sense is that any time... It's an offset, Sacks. I mean,
+maybe it's just, you know, it's just incremental where it goes liquid. It can be used to pay down the
+Social Security Treasury obligations, is my point. Yeah, look, I think we should just be selective
+about this. I think it makes sense in situations where the government was going to do a bailout
+anyway, because there's a national security priority or some other kind of priority that the
+government's determined we have to do. You want to get equity for it. It doesn't make sense to,
+you know, give, I mean, frankly, even Cylinder and Tesla. Where does that equity go? Where does that
+equity go? Well, I think it's, I think that would be held by the soft. And how do you keep everyone's
+grubby hands off of it, right? So, like, how do we use it as an asset rather than have it be another
+mechanism of spending? He wants to be a civil servant. I like the idea of putting, I like
+the idea of putting that equity in the sovereign wealth fund. And yeah, it could go to social
+security. I think that makes a lot of sense. I just want Sacks on record saying he agrees
+that it should go into social security. Well, I like that idea. I don't like the idea of taking
+people's social security funds. I agree. That's a bad idea. By the way, it's not it. Those funds
+don't exist. Those funds were already taken by the government and spent and there's an IOU
+sitting in a fucking account. He's like a piece of paper. It is, look, you know, your retirement.
+We're talking about situations, we're talking about situations like TARP, where you had all these
+Wall Street firms bailed out.
+Yeah, I agree.
+And then some of them paid back, but the government should have equity.
+100%.
+I should have equity in those firms.
+I want to make sure that equity goes somewhere.
+Because people book it as income and then they take a lower deficit year and they're like,
+great, the deficit was lower.
+We can spend more.
+That's how this gets booked.
+Perfect segue.
+If it's not accounted for separately, it gets blown out.
+That's what I hate.
+It's a perfect segue.
+Grover Norquist wrote an op-ed in the Dallas News.
+You can pull it up.
+Nick and show it there about the,
+discussion we had here on the podcast a month ago. I had talked about this, you know, he has
+his taxpayer protection pledge that Republicans made back in the 80s where, you know, people
+signed on to agree not to increase taxes. Well, we had talked here and I had proposed something
+similar for spending because we all have concerns about the debt. And he pointed out that this
+is very difficult to do, but he had a really interesting piece of information that I hadn't
+heard in Colorado, a Democrat state, they have limited the size of the budget to be based upon
+the population and inflation. So they have been returning money to taxpayers and lowing their state
+interest rate. And he says this model pioneered in Colorado, but other states are now
+getting on to this, that this could be the model that saves America and that we could have a
+situation where the population plus a little bit of inflation equals what you're allowed to spend.
+Gentlemen, your thoughts on Grover Norquest responding to our pitch on the Olin Pod, or my pitch
+on the pod, I guess.
+What?
+Okay. Crickets. Somebody's got to have an opinion.
+This is so uncontroversial. I don't know what there is to talk about.
+What's the analysis we're going to do? Yeah.
+It'd be a good thing of every politician pledge to not increase spending.
+But let me ask this. Were you guys aware of Colorado doing this, that they had this device set up?
+Yeah, nobody was aware of it. Yeah, it's pretty interesting. So Grover Norquest, come on the pot anytime. I actually told Elon, and I tweeted as well, this is what the America Party should do. This should be the entire America Party platform, just get senators, House of Representatives who believe in this and just work on that one issue, balancing the budget. That's the thing that neither party will take on. All right, let's talk about corporate bankruptcies. According to N. S&P Global Report, so far in 2025, we've seen the most corporate bank.
+bankruptcy filings since 2010. That was after the great financial crisis, you remember,
+or some of you might have been too young. So corporate bankruptcies, according to the S&P,
+are public companies with debt of at least $2 million and private companies with assets or
+liabilities of at least $10 million. I'm not sure why the public companies is less than the
+private. It didn't make sense to me, but there must be a reason. These are also called large
+bankruptcies. Here's a chart showing you corporate bankruptcy since 2008. The blue bar is through
+July, Graybar is the full year. So we're looking at a partial year here, obviously, in
+2025. We're at 446 large bankruptcies, seven months into 2025, which would put us on track
+for the most since 2010. And yeah, nothing close to GFC numbers, but, you know, it's not
+trending well. And if you look at corporate bankruptcies broken down by months since 2020,
+you can see that bankruptcies are increasing after the massive rate hike cycle in 2022 and
+2023. So obviously, rates have something to do with this. What are your thoughts,
+Chamatha, on what we're seeing here? It's not like super dramatic, but it's definitely
+notable. Yeah, it's notable, but I think it's notable not for the reasons that the mainstream
+media tries to describe it in. I read these articles and I was a little bit caught off guard
+because initially what it said was the tariffs were causing this.
+And I was like, large companies don't go bankrupt 30, 60 days.
+Yeah, that doesn't make sense.
+This makes no sense.
+But the narrative was very strong, basically trying to paint the Trump administration as having caused this.
+So I just started to look into this.
+And a couple of interesting things to note that I had the conclusions that I came to.
+I think the most interesting is that there were a lot fewer.
+bankruptcies over the last four or five years, then there should have been. And I think that
+there are two reasons. The first reason is that you had rates artificially suppressed at zero
+for an incredibly long amount of time. And so you had all kinds of companies able to raise
+enormous, enormous amounts of capital that they probably shouldn't have been able to,
+or at a minimum should have done it much higher rates,
+which weren't really there because the poor rate was at zero.
+So what that means is that many companies were able to fill the reservoir of money.
+And then when the core structural business started to fail,
+they had a lot more oxygen in the tank to survive a lot longer.
+So I think a lot of what you're seeing,
+and if you look, Jason, at some of these companies like Joanne's fabrics and Party City,
+these were businesses that were upside down for years.
+And a number of these, right, were PE buyouts that, you know, their strategy is to saddle them up with a bunch of debt too.
+So that speaks to what you're saying.
+So I think the reason why bankruptcies are up right now is because the reservoir of free money, the money printer that printed, frankly since 2010 up until about 2021, because, you know, we still gave an enormous amount of money in COVID, is finally starting to run out.
+That's number one.
+But the second is that we actually haven't had a process of creative destruction in American company formation for a while.
+Yeah, probably since GFC, right?
+Yeah.
+A similar thing happened at that time, too, Jamoff, right?
+We had all those backed up companies that probably should have died.
+And it kind of, well, what I think what happened was like, you know, startups ran out of money.
+There's certain parts of industries that had some trouble.
+But by and large, there was no transformation.
+or catalyzing M&A that could have actually happened.
+And that in part was a structural issue because of the way the federal bureaucracy reacted
+to it, not just in the United States, to be fair, but around the world.
+And I think when you relax those constraints, what you can start to see are companies
+identify assets that they want inside of other businesses, be much more aggressive in getting
+them, businesses that are floundering, being able to see that they're about to run out of money
+and have the confidence to try to do an M&A deal to survive.
+you need all of these things to work in lockstep for a market to be efficient. The market was
+incredibly inefficient since 2010. Artificially suppressed rates, a regulatory regime that disallowed
+any form of M&A in consolidation. Now that those constraints are lifted, you're going to see a lot
+of this creative destruction work its way through the economy. That's one big trend. The other big
+trend, and I think we saw this in Nick, can you please find the tweet from Delian, where he
+talked about the Chipotle competitor that TK launched. I just want to point to this because I think
+this is another wave of competition that's going to put a bunch of categories of business under
+duress, which is, you know, our friend Travis Kalanick, who's the founder of city. What is it called?
+City Logistics. Is that what it's called? Cloud Kitchens. Yeah, Cloud Kitchens. He launched a
+Chipotle competitor and it's apparently totally kick-ass and way better than Chipotle. And it just
+starts to show that there is a wave of competition that's also coming from completely different
+companies you never would have expected going after a bunch of these businesses. So if you put
+these two things together, I think you're going to see more, not less bankruptcies, but I think the
+outcome is probably positive in that you clean out a bunch of businesses that were taking up
+time and resources. You should allocate a lot of the human capital that are in those companies
+to different businesses
+and I think we'll be better off.
+Man, it's a long list of companies,
+but I just want to know which one hit you harder.
+Forever 21 or Hooters?
+Which one of those bankruptcies hit harder for you?
+We're trying to game it out here.
+I think that we should buy Hooters.
+We should buy Hooters Chabot.
+Guys, if you have a teenage daughter,
+if you have a teenage daughter,
+what I'll tell you is Forever 21 was shit,
+that was going to go to zero anyways.
+Like, you need to be long Brandy Melville.
+You need to be long.
+god what is this other one that's like the clothes are so alo like yoga pass alo hold on let me ask
+that kids wear a lot of those they're into the athletic wear what's the name of that clothing
+store viori you know we're sloan like always wants the you know the skirts and stuff not brandy melville
+but the other one oh um anyways there's all these brands yeah forever 21 was not it yeah
+what do you guys think should we do uh should we buy out hooters and put sydney's
+a CEO. This could be a great brand extension. I don't know. The chicken wings are amazing.
+Sacks, any thoughts here on the creative destruction and what we're seeing? Obviously,
+you can't have to do with tariffs because they're only three months old and it seems largely
+the companies absorb them. Every company you've mentioned, every company you've mentioned is a retail
+business. They have physical locations that people have to go to do stuff or get stuff. And I think
+that this on demand delivery. You had 20 me, you had wag. You had a, yeah, but yeah, I think,
+But I think Chimov got it right.
+It seems like the retail channel getting flushed out makes sense given the age of Amazon
+and Sheen and Target, yeah.
+Well, the retail channel like others is highly levered because in order to have a retail store,
+you have to pay a monthly fee to the physical real estate owner.
+And so it's unlike other businesses that are services or are more nimble and can relocate.
+You actually, it's the equivalent of having debt.
+When you sign a lease, you're stuck in a 10-year debt cycle.
+You have to pay every month a fixed amount of money and you can't get out.
+of it. So the retailers make a lot of sense. They were basically levered businesses in addition to all
+of the kind of macro trends of people not going to physical locations and COVID. But I think
+Shamath has it right, which is this is all kind of Zurp era, you know, indigestion that's being
+washed out. And to the point, like some percentage of overfunded negative unit economic type
+businesses are also getting cleaned up in the kind of call it tech space, which involves
+typically a lot of companies that are not tech, but math does tech.
+So that definitely makes sense to me.
+Sacks, any insights here?
+Well, just to pick up on this.
+So, you know, when you showed those charts on the bankruptcies, I didn't see a huge trend there.
+I mean, I can see that there's some pickup since the ZERP era, but it doesn't look like
+a huge trend to me.
+We just had a 3.3% GDP print for Q2.
+I think it was restated, right?
+That's what happened today is they restated it.
+Well, no, there was an estimate. Remember the Atlanta Fed had this 3.3% estimate and they reduced it to 3.0, but now the actual number is in those 3.3%. So the economy seems pretty hot and it's doing well. But I would say that there is some softness in the economy in those sectors that are exposed to high interest rates. And the best example of this is real estate. I remember on this program a year and a half ago, we talked about the wall of debt on commercial real estate that was coming due and had to be refinanced.
+And there's 2.2 trillion of debt, CRE debt that's maturing before 2028.
+And what we talked about back then was the banks don't really want to foreclose on these
+buildings because then it hits their balance sheet.
+So everyone has an incentive to restructure this debt.
+And there were a lot of these blend and extend type deals where they would extend
+the debt and work out a lower interest rate.
+Some people call these deals pretend and extend because you're pretending that the real
+state sponsor still has equity in these buildings and they might have been wiped out.
+What's happened since? Have these started to come back? What I'm seeing is that some real estate
+developers are starting to lose buildings now. The reason for that is that the debt is coming
+due and it has to be refinanced. And there's two problems when you refinance. One is you're paying
+a higher interest rate. So now you take a building that was cash flowing. And now at that higher
+interest rate, it might have negative cash flow. In other words, it's basically bankrupt. So those
+buildings don't make sense anymore. And those are situations where you're going to lose
+the building to the bank. The other problem is when you refinance, you might not be able to get
+the loan to value that you had before because valuations have also come down because real
+estate valuations are inverse to interest rates. Right. So in other words, if, you know,
+let's say you had a building that was worth $100 million before at ZERP era interest rates,
+you could borrow two-thirds of that, so call it $66 million. Now, if the building's only worth, I don't know, $60 million, then you can only borrow $40 million. So the amount of proceeds you can get when you refinance is much lower. And that gap has to be replaced with something. So in that situation, the equity holders would have to come in and do an equity in refinancing, where they've got to put up that gap. And the example I gave that gap would be $26 million. So the equity holders
+have to come out of pocket, which is very difficult to do. And they might not want to do it.
+And in that case, you're also going to lose the building. Sacks, I have a question. Nick, can you show
+this image? Sachs, how does this trend build on top of that other trend, which is on top of everything
+else now, it just seems like the real estate financing flows are moving far away from
+typical office construction towards data centers? So if you add that to the mix, then people seeking
+funding for traditional office are going to find, or refinancing are going to find fewer
+lenders. Is that true or not true? Well, yeah, I think there has been a little bit of a credit
+crunch, but also there's no reason to really be building so much office space when there's
+so many buildings that are underwater. Vacant. Yeah, like a third of the real estate in San Francisco
+is basically vacant. Still. Still. So why would you build any more real estate? But what needs to
+happen is those buildings effectively need to go back to the bank and then they need to be auctioned off
+at some lower price so that new equity holders can come in and new cap tail is going to be formed.
+And then you can get the money you need to do the tenant improvements, the TIs,
+so that you can get more tenants in there.
+Because right now, one of the reasons why a lot of these buildings are empty is because
+the equity holders don't have an incentive to put in more money to do the TIs,
+necessary to sign new tenants.
+So you got these zombie buildings that even if there was a tenant who wanted the space at
+some lower rent, the owners of the building have no incentive to do that because they can't put
+any money into the deal. So, like, we finally need a bunch of these buildings to go back to the
+bank, or we need rates to come down so that you can do refinancings without them being these
+punitive refinancings. And I do think that there is a lot of risk in the economy in this sector
+because, again, of this wall of commercial real estate debt that's coming due. And I think this is
+the problem. You got Powell sitting there. You got too late Powell sitting there in his ivory tower.
+he's willing to keep rates artificially low so he can get re-nominated and he can help Biden and
+Yellen. He's willing to cut rates to help Kamala. But as soon as Trump gets in there, he stops the
+rate-cutting cycle, even though inflation's down to 2.0%. So you got this too late pal and the rest of
+his Fed cronies. J-Cal wants to make it sound like they have some dissenting voice that's nonsense.
+In any event, they're all collectively seeing there in their ivory tower, completely out of touch
+with what's happening in the economy. And they're being slow to cut rate.
+and I do think that at least sectors like real estate do need these cuts.
+Preberg, tell us about Yamanaka factors.
+Yeah, how long can I make this bulldog last? Can I make them last 40 years? That's what I got
+left. Well, in mice, they're using these Yamanaka factors to make the mice age the
+equivalent of like 250 years now. It's really incredible. And there are human clinical trial
+starting. So the Yamanaka factors, you guys will recall, are the four proteins that were
+identified that basically can turn any cell back into a stem cell. And we'll call those four
+proteins OS, K, and M. When these four proteins are applied to a cell, it basically starts to
+trigger a bunch of gene expression that then turns that cell back into a stem cell. And so that
+cell becomes youthful again, and you can then turn it into any other cell. Later, there was research
+done where they took those four Yamanaka factors and they applied a low dose of them to a
+cell. And rather than have the cell turn all the way back into a stem cell, that cell effectively
+became young again. It started to repair and heal itself, repair its DNA, repair its gene
+expression networks, and the cell returned back to its original state. So the equivalent to think
+about this in a body is now you've got skin that loses its wrinkles, eye cells that start to see better,
+brain that starts to work better, muscles that start to work better, and so that is rejuvenation.
+And so the search has been on on how do we turn this incredible discovery of using these four
+proteins into therapeutics that we can then apply and humans can take that rejuvenates cells,
+reverse aging, and create youthfulness, which has been done, by the way, in mice, and then
+the mice end up living for the equivalent of hundreds of years, and there's incredible phenotype
+meaning physical characteristics that you can see.
+So this week, it was announced amazingly by OpenAI
+that they developed a model that they called GPT4B Micro.
+So what they did is they took the GPT4 model
+and they reduced it down so that they just had like,
+you know, typical good general knowledge, language capabilities and so on.
+And then they added on a bunch of training data.
+And the training data that they added on was mostly protein sequences
+and some biological text data.
+And then they also said tokenized 3D structure data.
+So that is describing a 3D structure with words
+or with some sort of textual form.
+And so this was kind of a really interesting data set
+that they then built into the model.
+And then they used this to say,
+okay, what else can we do with the OSK and M
+to make those proteins more effective?
+So remember, a protein is a series of amino acids.
+That O protein that I mentioned is a 360 amino acid.
+It's long. There's 20 different amino acids. So that you were to change just one of those
+amino acids and perturbed them a little bit, you have 20 to the 360th power. That's how many
+changes you could make to just that O protein to just to try and perturb it. That's more than there
+are atoms in the universe. So this is a very like numerically difficult problem to tackle if you're
+going to try and make more efficient proteins. So the goal was like, how do you make a new
+protein by changing the amino acid sequence. And so they asked that question of this trained
+LLM and they got a bunch of results back. And remember, each amino acid, by the way, is encoded by
+three letters of DNA. So you can easily make new proteins by creating DNA, sticking it in a
+bacteria or yeast, and it'll make the protein you want it to make. And so you can run all these
+different DNA sequences, try them out and see what happens with that protein. So that's exactly
+what they did. They did it in partnership with a group called Retro-Biosciences. They had the LLM or the
+4B micro model come up with all these ideas on how OSK&M could become more effective. And why do they
+want to make them more effective? Well, today, less than 0.1% of the cells that you apply those
+proteins to actually convert, actually go through the rejuvenation. So we have a long way to go
+to discover new proteins or getting these proteins to be more efficient. So rather than doing
+3D modeling and all the other stuff that other people might be doing, this LLM basically predicted
+a bunch of proteins and said, here's the amino acid sequence, and here's the DNA you need to
+make those proteins. Retrobio made them. They tested them. And then they got these incredible
+results. They actually got these new proteins to be 50 times more effective than the OSK&M proteins
+in basically rejuvenation or cellular reset. Within seven days, they got more than 30% of the
+cells to show the markers, and by day 12, 85% of them expressed critical stem cell markers.
+So this really showed that these new proteins that this model came up with worked.
+The results really are amazing.
+But I think a couple of things to take away from this.
+Number one, we have a really incredible path we're on to reversing aging using proteins.
+We have identified so many new proteins just with this experiment.
+There are multiple other companies like Altos and others that are investing.
+heavily in this area. We're going to develop therapeutics around these proteins, and they're
+going to have an incredible ability to reset ourselves, make them young again, fix all the DNA damage,
+fix all the gene expression damage that causes aging. The functional driver of aging is that
+gene expression networks are messed up in ourselves, and it turns out that this sort of therapy
+can reset that. So that's number one. It's like we should be very optimistic about the path
+we're on in reversing aging. Number two is like it's incredible what these LLMs can do.
+This kind of follows that Evo 2 model story I mentioned a few weeks ago that the
+Ark Institute put out where they just took DNA data, the model didn't know what the DNA data
+represented, and they found that if you fed DNA into it, they'll tell you if there's an error
+in it. And they identified all these variants, pathogenic variants in DNA in genes that, you know,
+they had no knowledge of. It just identified patterns. Some of the stuff in protein structure,
+protein shape, protein function may actually be these kind of emergent phenomena,
+and we can simply reduce them down to letters of DNA.
+And these LLNs can come up with new ones and write new ideas, and they're working.
+So there's this whole new area that we don't need to build completely new neural networks
+that are using graph nets or something else to try and develop predictive models
+and protein structure, which is going to open up new areas for therapeutic drugs.
+Free Brook 1?
+Yeah, it's working with just text.
+Yeah.
+When do you think we go from cellular level to packages of cells,
+to multicellular, to...
+Like, how does that cascade work?
+Do these guys have an idea of other words?
+What I've heard is that a couple of the therapeutic companies
+that are working on this reverse aging stuff
+is they're actually targeting specific health conditions,
+and then they have their therapeutics in clinicals now
+to test for efficacy in that particular target.
+The idea that aging itself...
+Is in like a 2A, 2B, or you're still like your past talks
+and now you're...
+Yeah, they're still in one with everything.
+They're testing, make sure humans can handle it and what the dosing is and all that sort of stuff.
+So it's still like stage one.
+They got lots of animal model data that seems pretty good.
+But as we know, that stuff can all change as you go into 2A.
+But for now, they are targeting specific disease indications.
+That's how they're going to get approval of the first batch.
+And then as that happens, the goal over time is to get aging itself to become an indication and then apply for aging.
+But, you know, what's your result?
+Under on the first drug using these pathways, using these mechanisms of action, that get approved?
+When do you think?
+Just knowing the clinical path there, I would say we're probably somewhere between seven and 12 years.
+Seven and 12 years away.
+Okay.
+Yeah, so the midpoint is like 10.
+Like a decade.
+Yeah.
+Yeah.
+And then, you know, what will happen, just like we see 10.
+You think there's a version where people fly to Costa Rica, making Costa Rica up, I'm just saying,
+and can do something for themselves in the next three to four years?
+Yeah, that's a great question.
+That's a great question.
+I think that's a very interesting idea that might happen.
+That's a really interesting idea that might happen.
+Because these are proteins.
+Because I own land in Costa Rica, so I'd love to develop kind of like a hospital.
+Okay, here we don't.
+Hospitality.
+I'm just kidding.
+Well, I mean, people are doing this for stem cells right now.
+So Freiburg.
+I'm totally kidding.
+I own no land to Costa Rica.
+No, I mean, people are using peptides and stem cells and all of these kind of call
+it alternative modalities.
+But, you know, the risk with these historically.
+But we could partner with Jay Chang and open something in Wyoming.
+Is it Wyoming?
+Right.
+But when you get overdosed on the early version of these proteins, and they gave too much to someone
+or to an animal, when you have your cells reverse.
+all the way back to being a stem cell, it starts dividing and growing like crazy,
+and that looks like cancer, and you can't stop it.
+It doesn't know how to differentiate back into senescent cells.
+So there's a major risk in this therapy still, because you're actually changing the gene
+expression networks in cells and taking a skin cell and turn, if it turns all the way back
+into a stem cell, you don't want a bunch of stem cells growing on your skin.
+That's not going to be good.
+Those are going to end up turning into what looks like and acts like cancer.
+And so there's a real path that needs to be explored here.
+on how do you mediate that?
+And how do you modulate that?
+I thought this was both incredible
+from a breakthrough perspective
+for this cellular rejuvenation work,
+but also unlike what you can do with LLMs.
+I mean, this is not like something
+that people were like,
+hey, let's use LLMs.
+And by the way, I think it also shows importantly
+that we're going to have these fine-tuned
+smaller models for specific applications
+rather than have one massive AI model
+that does everything for everyone in every context,
+people are going to take these base models, tune them, and they're going to be far less
+compute intensive and be extraordinary at specific applications. And this is one very narrow
+example of that, but it certainly seems to be a use case that should open up the door for many
+others like it. Yeah, agreed. Hey, Freeberg, I am not fully briefed on this, and it wasn't on the
+docket, so we can skip this if you are not as well. But RFKs made a lot of decisions about
+MRNA vaccines and funding them by the government and who should get the COVID vaccine and
+should we be spending for it? What are your thoughts generally? And have you been monitoring?
+I want to be more prepared for that conversation. Yeah, I think it's like an interesting.
+Because I think I've heard different things about the funding and then I've heard different
+things about the rule change. So I just want to make sure I know the fact.
+We'll tackle it next week. Yeah, it was interesting. I think he largely wound up where we all wound up,
+which was like healthy people, maybe it's not necessary, people at risk, it is necessary,
+but they're codifying that now, and some people are losing their minds and other people
+or not.
+What happened?
+So this is all like sort of moving target right now, but RFK withdrew federal funding for
+mRNA vaccine development, and he removed the COVID vaccine from the CDC recommendations for
+healthy children and pregnant women.
+And if you want to go get a COVID vaccine, healthy individuals must consult with the physician first.
+Remember, you could just go to any pharmacy and get shot.
+Now you have to, like, consult with the physician.
+So it's, I'm very, I think the COVID, the COVID-obsessed people are losing their minds.
+Everybody else is like, isn't that kind of standard where we wound up anyway?
+Yeah.
+I'm really interested in hearing or reading his report on autism linkages that he says he seems to have.
+I really want to know what they're going to publish on that.
+That, I think, is such an incredibly important conversation to be had.
+And I'd really like to see what they come up with.
+What's the story then, Freeberg, why people are so bent out of shape of even talking about
+the number of vaccines we give to kids.
+I mean, I understand people are scared or whatever, but it just feels like people are
+losing their mind over even having a study or a discussion of it.
+It's one of these dogmatic things, man.
+I mean, you know, it's like fall in line
+or there's something wrong with you, asking questions.
+It's this idea that you may have made a mistake
+about the most precious thing in your life,
+which is your child.
+I think that there are a certain group of people
+that when they underwrite a decision,
+it's just so firm and set in stone
+that anything that sort of says
+you made a bad choice.
+Yeah.
+Cognitive dissonance, right?
+Sends them off the rails.
+I mean, I, I, I,
+re-underwrite my decision.
+I was like, yeah,
+I was excited to get it because they told me it would be good for society and it would stop the spread.
+So I was like, okay, I'm more than willing to do that.
+You're so magnanimous, Jason.
+I still want grandma and grandpa to die.
+They're like Mr. Magnanimous.
+You did your part.
+You did your part.
+That's what it felt like.
+That's explicitly how they said to healthy people.
+They said to healthy people, do your part.
+And I was like, okay, I'll do my part.
+You're like the, you're like the Mohammed Yunus of, uh,
+I mean, I'm not saying I'm Gandhi over here of vaccines.
+You should be nominated for Nobel.
+I mean, maybe I should be nominated for getting the vaccine.
+Yeah, you're taking medical advice from Stephen Colbert.
+And then you wonder why you regret your decision.
+From the CDC, I thought that they could be trusted.
+I thought they would tell us the truth.
+Sorry.
+I didn't get the memo that these guys were all in goof.
+Here's a little news.
+With the pharma companies and they were lying about the origin.
+Here's a news for you, Jason.
+If your underwriting process is going to,
+to LinkedIn and looking at somebody's educational credentials, you're an idiot.
+Yeah, I would agree with that.
+Yeah, I would agree with that.
+Yeah.
+All right, everybody is, if you've come to this realization about the CDC, why can't you
+come to it about the Fed?
+In other words, these are hyper-partisan actors who are very political.
+Totally.
+And they don't know what they're doing.
+Totally.
+They're not like this high cast of priests who are making these decisions.
+I'm all for questioning everything.
+I'm for questioning.
+I question everything, of course.
+Nick, Nick, make a grok, make a grok.
+Oh my God, here we go.
+Smoke bubbling out of a cauldron.
+No, there are folks.
+Okay.
+I think the rate should be the same.
+Hold on.
+What a joke.
+I mean, what is Uber trading at?
+Is it over $88?
+Okay, fine.
+Let it rip.
+Let's go for the full 75 bibs.
+Let's go.
+Free money for everybody.
+I'm in.
+Let it rip.
+All right, everybody.
+Too late.
+pal. He'll cut for Biden. He'll cut for Yelan. He'll cut for Kamala. He will not cut for Trump.
+All right. There's the party position. Okay. Even though we have 2.0% PCE.
+What's your favorite? What's your favorite government agency?
+I'm in favor of less government. I could take that seriously.
+Nick, pull this image up. Do I have a favorite agency? Maybe it's a
+Look, the secret camera from the Fed.
+Here's your Fed meeting.
+The scrolls.
+Isn't it hilarious, Chimov?
+None of us are part of any clubs.
+You two knuckleheads had to start your own club.
+I'm the part of a club.
+You had to start one.
+I'm a founding member of executive branch.
+There you go.
+You had to start your own.
+I have locker number 27 at Shadow Creek in Las Vegas.
+Oh.
+Four lockers down for my hero, Michael Jordan.
+Oh, really?
+Which is right next to Phil Helmuth, actually.
+Philhelmute is.
+No, he does not have a locker.
+No, no, Phil Helmuth shares Michael Jordan's with him.
+It's like it says MJ and P.H.
+They share their locker.
+They both have their shoes in the same locker.
+All right, shout out to our guy.
+I'm also a member of Zero Bond in New York and Little Beach House in Malibu.
+Oh, look at you.
+Look at you.
+But it's called the Groucho Marx rule.
+We don't want to be members of any club that would have us as a member.
+Absolutely.
+Can I say one club that I went to by accident, I was invited, never been invited again,
+was the Lynx Club in New York,
+but here's the hack at the Lynx Club,
+which I think is incredible.
+They have bought so much wine
+over so many years
+that the menu shows the price of the wine
+when they bought it.
+So I saw...
+Buck 75?
+No, dude, there was like a 82...
+Well, dude, that's like that...
+What's that place?
+...Linch, Baj, and it was 120 bucks.
+Yeah.
+That's like Deutsche's Club in New York.
+It's Deutsche's Club.
+That place.
+Incredible.
+But what a thoughtful hack for a member.
+And we tried to buy all the wine because we're like, what the fuck?
+They sell it.
+These prices make no sense.
+And then they wouldn't let us buy it because we weren't fucking members.
+But isn't it an incredible benefit for that?
+It's the price you buy it at.
+They keep it at that.
+Why don't we start an all-in club?
+The all-in club.
+Maybe I'll get my membership approved.
+I don't know.
+I'm waiting.
+I mean, I don't know what club all four of us would want to be in.
+I'll be honest with you.
+I don't know if that's going to have.
+If it was a poker table, I think we're done.
+A poker table, some cigars.
+We have that club.
+It's in my house.
+Well, no, but I mean, imagine we had one like in five major cities and you can go and play
+backgammon or smoke a stogie.
+All right, everybody.
+This has been.
+Love you, boys.
+Absolutely amazing.
+Fun episode of the All In podcast.
+Your favorite podcast, the number of podcasts in the world.
+But while you're at it, why don't you tell you knucklehead friends who haven't heard of the pod,
+all three of that are left that haven't heard of this podcast.
+click to subscribe and tell them to link and subscribe and whatever go to all in dot com put your email
+in maybe you get invited to a party uh see at the summit everybody it's going to be super exciting
+uh sacks came over the top the last minute and he added three spectacular speakers that i'm not
+going to say but sacks came through in the final minute he added three amazing speakers surprise
+speakers come in action bye bye love you bruce bye
+ride.
+Rain Man, David Sack.
+I'm going all in.
+And it said, we open source it to the fans, and they've just gone crazy with it.
+Love you, Skiy.
+I'm going to win.
+I'm going to win.
+What, your winner's ride.
+Besties are bad.
+Gold 13.
+That's my dog taking it.
+Notice in your driveway.
+Sex.
+Wait at a thing.
+Oh, man.
+My Appetacher will meet me at least.
+We should all just get a room and just have one big you, Georgie, because they're all just like this sexual tension, but they just need to release them out.
+Wet your beat, wet your beat.
+We need to get merches are fast.

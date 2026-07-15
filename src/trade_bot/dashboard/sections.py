@@ -36,6 +36,7 @@ def _render_dashboard_section(
 ) -> None:
     if section == "Command Center":
         _render_command_center(
+            bot_config,
             baseline_run,
             book_alignment=book_alignment,
             run_store_path=warehouse_path,
@@ -58,7 +59,12 @@ def _render_dashboard_section(
             warehouse_path=warehouse_path,
         )
     elif section == "Launch Lab":
-        _render_launch_lab(bot_config, baseline_run, experiment_scorecards)
+        _render_launch_lab(
+            bot_config,
+            baseline_run,
+            experiment_scorecards,
+            warehouse_path=warehouse_path,
+        )
     elif section == "Monitoring":
         _render_monitoring(warehouse_path)
     elif section == "Research Lab":
@@ -70,6 +76,7 @@ def _render_dashboard_section(
             experiment_walk_forward,
             experiment_candidates,
             decision_sanity_impacts,
+            warehouse_path=warehouse_path,
         )
     elif section == "News & Macro":
         _render_news_and_macro(

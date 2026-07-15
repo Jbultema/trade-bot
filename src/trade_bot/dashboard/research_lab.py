@@ -82,6 +82,7 @@ from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.curation import rank_strategy_candidates, select_curated_strategy_shelf
 from trade_bot.research.defensive_judgement import (
     build_defensive_judgement_audit,
+    current_defensive_setup_context,
     defensive_false_alarm_bayes_update,
     defensive_judgement_label,
     effective_defensive_weight,
@@ -117,10 +118,13 @@ from trade_bot.research.strategy_outcome_utility import (
     enrich_strategy_outcome_utility,
     terminal_wealth_from_cagr,
 )
+from trade_bot.storage.warehouse import TradingWarehouse
 
 _OUTCOME_FRONTIER_PLOT_KEY = "outcome_frontier_plot"
 _OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY = "outcome_frontier_selected_strategy"
 _OUTCOME_FRONTIER_SELECTBOX_KEY = "outcome_frontier_strategy_label"
+_LEADERSHIP_DIAGNOSTICS_DIR = Path("reports/leadership_diagnostics")
+_PBO_DIAGNOSTICS_DIR = Path("reports/pbo_diagnostics")
 
 
 def _render_taxable_estimate_summary(scorecard: pd.DataFrame) -> None:
@@ -1267,6 +1271,7 @@ def _render_approach_detail_workbench(
         baseline_run=baseline_run,
         experiment_scorecards=experiment_scorecards,
         limit=20,
+        include_defensive_judgement=False,
     )
     runtime_leaders = (
         set(runtime_leader_frame["strategy"].dropna().astype(str))
@@ -1838,6 +1843,7 @@ def _render_outcome_frontier(
     baseline_run: BaselineRun,
     experiment_scorecards: pd.DataFrame,
     experiment_candidates: pd.DataFrame,
+    warehouse_path: str = "",
 ) -> None:
     st.markdown("**Outcome Frontier**")
     st.caption(
@@ -2009,6 +2015,7 @@ def _render_outcome_frontier(
         baseline_run=baseline_run,
         experiment_scorecards=outcome_scorecards,
         peer_frame=plot_frame,
+        warehouse_path=warehouse_path,
     )
 
     comparison_columns = [
@@ -2273,6 +2280,7 @@ def _render_outcome_decision_cards(
     baseline_run: BaselineRun,
     experiment_scorecards: pd.DataFrame,
     peer_frame: pd.DataFrame,
+    warehouse_path: str = "",
 ) -> None:
     wealth_column = f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y"
     wealth = _safe_float(row.get(wealth_column))
@@ -2347,12 +2355,23 @@ def _render_outcome_decision_cards(
             "peer_max": "Highest raw value among displayed outcome candidates.",
         },
     )
-    _render_signal_state_section(
+    with st.expander("Confirmation sniff-test detail", expanded=False):
+        _render_signal_state_section(
+            row,
+            result=result,
+            bot_config=bot_config,
+            experiment_scorecards=experiment_scorecards,
+            prices=getattr(baseline_run, "prices", pd.DataFrame()),
+        )
+    with st.expander("Tech leadership dependence", expanded=False):
+        _render_candidate_leadership_diagnostics(str(row.get("strategy", "")))
+    with st.expander("Backtest overfit PBO", expanded=False):
+        _render_candidate_pbo_diagnostics(str(row.get("strategy", "")))
+    _render_running_experiment_comparison(
         row,
         result=result,
-        bot_config=bot_config,
-        experiment_scorecards=experiment_scorecards,
         prices=getattr(baseline_run, "prices", pd.DataFrame()),
+        warehouse_path=warehouse_path,
     )
     _render_defensive_judgement_section(
         result,
@@ -2368,10 +2387,11 @@ def _render_signal_state_section(
     experiment_scorecards: pd.DataFrame,
     prices: pd.DataFrame,
 ) -> None:
-    st.markdown("**Signal State / Confirmation Sniff Test**")
+    st.markdown("**Signal State / Confirmation Diagnostic**")
     st.caption(
         "Transparent confirmation read: top-down market pressure plus bottom-up "
-        "volatility-adjusted momentum. This is a challenge layer, not the native sizing engine."
+        "volatility-adjusted momentum. The overlay backtest below is an experimental "
+        "negative-control audit, not a proposed sizing engine."
     )
     if result is None or prices.empty:
         st.info("Signal-state confirmation is not available for this candidate yet.")
@@ -2415,12 +2435,17 @@ def _render_signal_state_section(
     backtest_label = str(latest.get("backtest_label", "not tested")).replace("_", " ")
     if not report.backtest.empty and len(report.backtest) >= 2:
         gated = report.backtest.iloc[1]
-        st.info(
+        cagr_delta = _safe_float(gated.get("delta_vs_native_cagr"))
+        backtest_message = (
             "Confirmation overlay backtest: "
             f"{backtest_label}. Delta versus native strategy: "
             f"CAGR {_format_percent(gated.get('delta_vs_native_cagr'))}, "
             f"max drawdown {_format_percent(gated.get('delta_vs_native_drawdown'))}."
         )
+        if "hurt" in backtest_label or (cagr_delta is not None and cagr_delta < 0):
+            st.warning(backtest_message)
+        else:
+            st.info(backtest_message)
         _render_metric_dataframe(
             _display_metrics(report.backtest),
             hide_index=True,
@@ -2464,6 +2489,599 @@ def _render_signal_state_section(
     )
 
 
+def _render_candidate_leadership_diagnostics(strategy_name: str) -> None:
+    st.markdown("**Tech Dependence / Leadership Impairment Diagnostic**")
+    st.caption(
+        "Report-backed readout: tech/AI exposure, factor beta, contribution concentration, "
+        "leadership-impairment stress, and scenario-bucket performance. This is a validation "
+        "audit, not a sizing override."
+    )
+    diagnostics = _load_leadership_diagnostic_frames(str(_LEADERSHIP_DIAGNOSTICS_DIR))
+    if not diagnostics:
+        st.info(
+            "No leadership diagnostics have been generated yet. Run "
+            "`poetry run trade-bot run-leadership-diagnostics` to populate this section."
+        )
+        return
+    tech = _strategy_slice(diagnostics.get("tech_dependence"), strategy_name)
+    betas = _strategy_slice(diagnostics.get("factor_betas"), strategy_name)
+    contribution = _strategy_slice(diagnostics.get("return_contribution"), strategy_name)
+    impairment = _strategy_slice(diagnostics.get("leadership_impairment"), strategy_name)
+    heatmap = _strategy_slice(diagnostics.get("scenario_heatmap"), strategy_name)
+    router_selection = _strategy_slice(diagnostics.get("router_selection"), strategy_name)
+    if tech.empty and betas.empty and impairment.empty and heatmap.empty and router_selection.empty:
+        st.info("Leadership diagnostics do not include this strategy yet. Re-run the report.")
+        return
+
+    if not tech.empty:
+        row = tech.iloc[0]
+        cols = st.columns(5)
+        _helped_metric(cols[0], "Current Tech/AI", _format_percent(row.get("current_tech_ai_weight")))
+        _helped_metric(cols[1], "Avg Tech/AI", _format_percent(row.get("avg_tech_ai_weight")))
+        _helped_metric(cols[2], "Current Mega-Cap", _format_percent(row.get("current_mega_cap_tech_weight")))
+        _helped_metric(cols[3], "Current Non-Tech", _format_percent(row.get("current_non_tech_weight")))
+        _helped_metric(cols[4], "Max Tech/AI", _format_percent(row.get("max_tech_ai_weight")))
+
+    if not betas.empty:
+        beta_view = betas[betas["factor"].isin(["QQQ", "SMH", "SOXX", "SPY", "VEA", "IWM"])].copy()
+        if not beta_view.empty:
+            st.caption("Factor beta and correlation")
+            _render_metric_dataframe(
+                _display_metrics(beta_view[["factor", "beta", "correlation", "observations"]]),
+                hide_index=True,
+            )
+
+    if not contribution.empty:
+        st.caption("Top return contributors")
+        top_contributors = contribution.sort_values(
+            "share_of_abs_contribution",
+            ascending=False,
+        ).head(10)
+        _render_metric_dataframe(
+            _display_metrics(
+                top_contributors[
+                    [
+                        "ticker",
+                        "is_tech_ai",
+                        "return_contribution",
+                        "share_of_total_contribution",
+                        "share_of_abs_contribution",
+                    ]
+                ]
+            ),
+            hide_index=True,
+        )
+
+    if not impairment.empty:
+        st.caption("Leadership impairment stress")
+        _render_metric_dataframe(
+            _display_metrics(
+                impairment[
+                    [
+                        column
+                        for column in [
+                            "scenario",
+                            "cagr",
+                            "max_drawdown",
+                            "sharpe",
+                            "calmar",
+                            "delta_cagr_vs_native",
+                            "delta_drawdown_vs_native",
+                        ]
+                        if column in impairment
+                    ]
+                ]
+            ),
+            hide_index=True,
+        )
+
+    if not heatmap.empty:
+        st.caption("Scenario-bucket behavior")
+        _render_metric_dataframe(
+            _display_metrics(
+                heatmap[
+                    [
+                        column
+                        for column in [
+                            "scenario_bucket",
+                            "observations",
+                            "state_cagr",
+                            "max_drawdown",
+                            "hit_rate",
+                            "benchmark_excess",
+                        ]
+                        if column in heatmap
+                    ]
+                ].sort_values("scenario_bucket")
+            ),
+            hide_index=True,
+        )
+
+    if not router_selection.empty:
+        st.caption("Walk-forward router selection evidence")
+        router_columns = [
+            "horizon_days",
+            "selected_count",
+            "selection_rate",
+            "mean_forward_return",
+            "mean_excess_vs_benchmark",
+            "hit_rate",
+            "mean_similar_prior_windows",
+            "fallback_share",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(
+                router_selection[[column for column in router_columns if column in router_selection]]
+            ),
+            hide_index=True,
+        )
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def _load_leadership_diagnostic_frames(report_dir: str) -> dict[str, pd.DataFrame]:
+    root = Path(report_dir)
+    paths = {
+        "tech_dependence": root / "strategy_tech_dependence.csv",
+        "factor_betas": root / "strategy_factor_betas.csv",
+        "return_contribution": root / "strategy_return_contribution.csv",
+        "qqq_underperformance": root / "qqq_underperformance_periods.csv",
+        "leadership_impairment": root / "leadership_impairment.csv",
+        "scenario_heatmap": root / "scenario_strategy_heatmap.csv",
+        "router_summary": root / "walk_forward_router_summary.csv",
+        "router_folds": root / "walk_forward_router_folds.csv",
+        "router_selection": root / "walk_forward_router_selection.csv",
+        "router_scenarios": root / "walk_forward_router_scenarios.csv",
+        "router_comparison": root / "walk_forward_router_comparison.csv",
+        "router_scores": root / "walk_forward_router_scores.csv",
+    }
+    frames: dict[str, pd.DataFrame] = {}
+    for name, path in paths.items():
+        if path.exists():
+            try:
+                frames[name] = pd.read_csv(path)
+            except pd.errors.EmptyDataError:
+                frames[name] = pd.DataFrame()
+    return frames
+
+
+def _strategy_slice(frame: pd.DataFrame | None, strategy_name: str) -> pd.DataFrame:
+    if frame is None or frame.empty or "strategy" not in frame:
+        return pd.DataFrame()
+    return frame[frame["strategy"].astype(str).eq(str(strategy_name))].copy()
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def _load_pbo_diagnostic_frames(report_dir: str) -> dict[str, pd.DataFrame]:
+    root = Path(report_dir)
+    paths = {
+        "summary": root / "pbo_summary.csv",
+        "splits": root / "pbo_splits.csv",
+        "strategy_selection": root / "pbo_strategy_selection.csv",
+        "strategy_stats": root / "pbo_strategy_stats.csv",
+    }
+    frames: dict[str, pd.DataFrame] = {}
+    for name, path in paths.items():
+        if path.exists():
+            try:
+                frames[name] = pd.read_csv(path)
+            except pd.errors.EmptyDataError:
+                frames[name] = pd.DataFrame()
+    return frames
+
+
+def _render_candidate_pbo_diagnostics(strategy_name: str) -> None:
+    st.markdown("**Backtest Overfit / CSCV Diagnostic**")
+    st.caption(
+        "Report-backed readout from combinatorial symmetric cross-validation. It asks whether "
+        "the research process tends to pick in-sample winners that fall below median out-of-sample."
+    )
+    diagnostics = _load_pbo_diagnostic_frames(str(_PBO_DIAGNOSTICS_DIR))
+    if not diagnostics:
+        st.info(
+            "No PBO diagnostics have been generated yet. Run "
+            "`poetry run trade-bot audit-backtest-pbo` to populate this section."
+        )
+        return
+    summary = diagnostics.get("summary", pd.DataFrame())
+    selection = _strategy_slice(diagnostics.get("strategy_selection"), strategy_name)
+    stats = _strategy_slice(diagnostics.get("strategy_stats"), strategy_name)
+    splits = diagnostics.get("splits", pd.DataFrame())
+    if selection.empty and stats.empty:
+        st.info("PBO diagnostics do not include this candidate yet. Re-run the report.")
+        return
+
+    if not summary.empty:
+        row = summary.iloc[0]
+        cols = st.columns(4)
+        _helped_metric(cols[0], "PBO Probability", _format_percent(row.get("pbo_probability")))
+        _helped_metric(cols[1], "OOS Loss Prob.", _format_percent(row.get("oos_loss_probability")))
+        _helped_metric(cols[2], "Candidate Count", _format_decimal(row.get("strategy_count")))
+        _helped_metric(cols[3], "PBO Label", str(row.get("pbo_label", "n/a")))
+
+    if not selection.empty:
+        row = selection.iloc[0]
+        cols = st.columns(4)
+        _helped_metric(cols[0], "Selected In-Sample", _format_percent(row.get("selection_rate")))
+        _helped_metric(cols[1], "Candidate Overfit Rate", _format_percent(row.get("overfit_rate")))
+        _helped_metric(cols[2], "Median OOS Rank", _format_percent(row.get("median_relative_rank")))
+        _helped_metric(cols[3], "Median Degradation", _format_decimal(row.get("median_degradation")))
+        st.caption("Candidate selection behavior across CSCV splits")
+        _render_metric_dataframe(_display_metrics(selection), hide_index=True)
+
+    if not stats.empty:
+        st.caption("Full-sample candidate stats used only as context")
+        _render_metric_dataframe(_display_metrics(stats), hide_index=True)
+
+    if not splits.empty and "selected_strategy" in splits:
+        split_view = splits[splits["selected_strategy"].astype(str).eq(str(strategy_name))].copy()
+        if not split_view.empty:
+            with st.expander("CSCV split rows for this candidate", expanded=False):
+                split_columns = [
+                    "split_id",
+                    "train_blocks",
+                    "test_blocks",
+                    "train_metric",
+                    "test_metric",
+                    "test_total_return",
+                    "relative_rank",
+                    "overfit",
+                    "oos_loss",
+                    "test_best_strategy",
+                    "performance_degradation",
+                ]
+                _render_metric_dataframe(
+                    _display_metrics(split_view[[column for column in split_columns if column in split_view]]),
+                    hide_index=True,
+                )
+
+
+def _render_pbo_diagnostics_overview() -> None:
+    st.markdown("**Backtest Overfit PBO Gauntlet**")
+    st.caption(
+        "Combinatorial symmetric cross-validation over the candidate return matrix. "
+        "This is the multiple-comparisons audit: when the research process picks an "
+        "in-sample winner, did that candidate stay above median out-of-sample?"
+    )
+    diagnostics = _load_pbo_diagnostic_frames(str(_PBO_DIAGNOSTICS_DIR))
+    if not diagnostics:
+        st.info(
+            "No PBO diagnostics have been generated yet. Run "
+            "`poetry run trade-bot audit-backtest-pbo`."
+        )
+        return
+
+    summary = diagnostics.get("summary", pd.DataFrame())
+    selection = diagnostics.get("strategy_selection", pd.DataFrame())
+    stats = diagnostics.get("strategy_stats", pd.DataFrame())
+    splits = diagnostics.get("splits", pd.DataFrame())
+
+    if not summary.empty:
+        row = summary.iloc[0]
+        cols = st.columns(6)
+        _helped_metric(cols[0], "PBO Probability", _format_percent(row.get("pbo_probability")))
+        _helped_metric(cols[1], "OOS Loss Prob.", _format_percent(row.get("oos_loss_probability")))
+        _helped_metric(cols[2], "Median OOS Rank", _format_percent(row.get("median_relative_rank")))
+        _helped_metric(cols[3], "Valid Splits", _format_decimal(row.get("valid_splits")))
+        _helped_metric(cols[4], "Candidates", _format_decimal(row.get("strategy_count")))
+        _helped_metric(cols[5], "Label", str(row.get("pbo_label", "n/a")))
+        label = str(row.get("pbo_label", ""))
+        if "high" in label:
+            st.warning(
+                "High PBO means the candidate-selection process often chooses an in-sample "
+                "winner that lands below median out-of-sample. Treat top backtests as fragile."
+            )
+        elif "moderate" in label:
+            st.info(
+                "Moderate PBO means the top rows still need paper evidence and family-level "
+                "confirmation before they should be trusted."
+            )
+        elif "low" in label:
+            st.success(
+                "Low PBO supports the candidate-selection process, but it does not remove "
+                "future-regime or survivorship risk."
+            )
+
+    if not selection.empty:
+        st.caption("Strategy selection and out-of-sample rank by CSCV split")
+        selection_columns = [
+            "strategy",
+            "selected_count",
+            "selection_rate",
+            "overfit_rate",
+            "oos_loss_rate",
+            "median_relative_rank",
+            "median_train_metric",
+            "median_test_metric",
+            "median_degradation",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(selection[[column for column in selection_columns if column in selection]]),
+            hide_index=True,
+        )
+
+    if not stats.empty:
+        with st.expander("Full-sample strategy stats", expanded=False):
+            stats_columns = [
+                "strategy",
+                "observations",
+                "total_return",
+                "cagr",
+                "max_drawdown",
+                "sharpe",
+            ]
+            _render_metric_dataframe(
+                _display_metrics(stats[[column for column in stats_columns if column in stats]]),
+                hide_index=True,
+            )
+
+    if not splits.empty:
+        with st.expander("CSCV split drilldown", expanded=False):
+            selected_options = ["All", *sorted(splits["selected_strategy"].dropna().astype(str).unique())]
+            selected_strategy = st.selectbox(
+                "Selected in-sample strategy",
+                selected_options,
+                key="pbo_split_selected_strategy",
+            )
+            split_view = splits.copy()
+            if selected_strategy != "All":
+                split_view = split_view[
+                    split_view["selected_strategy"].astype(str).eq(selected_strategy)
+                ]
+            split_columns = [
+                "split_id",
+                "train_blocks",
+                "test_blocks",
+                "selected_strategy",
+                "train_metric",
+                "test_metric",
+                "test_total_return",
+                "relative_rank",
+                "overfit",
+                "oos_loss",
+                "test_best_strategy",
+                "performance_degradation",
+            ]
+            _render_metric_dataframe(
+                _display_metrics(split_view[[column for column in split_columns if column in split_view]].head(300)),
+                hide_index=True,
+            )
+
+
+def _render_leadership_diagnostics_overview() -> None:
+    st.markdown("**Leadership Diagnostics**")
+    st.caption(
+        "Top-strategy audit for tech/AI dependence, factor beta, leadership-impairment stress, "
+        "scenario-bucket behavior, and the walk-forward strategy router."
+    )
+    diagnostics = _load_leadership_diagnostic_frames(str(_LEADERSHIP_DIAGNOSTICS_DIR))
+    if not diagnostics:
+        st.info(
+            "No leadership diagnostics have been generated yet. Run "
+            "`poetry run trade-bot run-leadership-diagnostics`."
+        )
+        return
+
+    tech = diagnostics.get("tech_dependence", pd.DataFrame())
+    impairment = diagnostics.get("leadership_impairment", pd.DataFrame())
+    heatmap = diagnostics.get("scenario_heatmap", pd.DataFrame())
+    router = diagnostics.get("router_summary", pd.DataFrame())
+    router_selection = diagnostics.get("router_selection", pd.DataFrame())
+    router_scenarios = diagnostics.get("router_scenarios", pd.DataFrame())
+    router_comparison = diagnostics.get("router_comparison", pd.DataFrame())
+    router_scores = diagnostics.get("router_scores", pd.DataFrame())
+
+    if not tech.empty:
+        st.caption("Highest current tech/AI dependence")
+        tech_columns = [
+            "strategy",
+            "current_tech_ai_weight",
+            "avg_tech_ai_weight",
+            "current_mega_cap_tech_weight",
+            "current_non_tech_weight",
+            "max_tech_ai_weight",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(
+                tech.sort_values("current_tech_ai_weight", ascending=False)[
+                    [column for column in tech_columns if column in tech]
+                ].head(15)
+            ),
+            hide_index=True,
+        )
+
+    if not impairment.empty:
+        st.caption("Leadership impairment stress: worst CAGR deltas")
+        stress = impairment[~impairment["scenario"].astype(str).eq("native")].copy()
+        if not stress.empty:
+            stress_columns = [
+                "strategy",
+                "scenario",
+                "cagr",
+                "max_drawdown",
+                "delta_cagr_vs_native",
+                "delta_drawdown_vs_native",
+            ]
+            _render_metric_dataframe(
+                _display_metrics(
+                    stress.sort_values("delta_cagr_vs_native")[
+                        [column for column in stress_columns if column in stress]
+                    ].head(15)
+                ),
+                hide_index=True,
+            )
+
+    if not heatmap.empty:
+        st.caption("Scenario-by-strategy heatmap: CAGR by bucket")
+        heat = heatmap.pivot_table(
+            index="strategy",
+            columns="scenario_bucket",
+            values="state_cagr",
+            aggfunc="mean",
+        )
+        if not heat.empty:
+            fig = go.Figure(
+                data=go.Heatmap(
+                    z=heat.values,
+                    x=[str(column) for column in heat.columns],
+                    y=[str(index) for index in heat.index],
+                    colorscale="RdYlGn",
+                    zmid=0.0,
+                    hovertemplate="%{y}<br>%{x}<br>CAGR %{z:.1%}<extra></extra>",
+                )
+            )
+            fig.update_layout(
+                height=max(420, min(850, 28 * len(heat.index))),
+                margin={"l": 20, "r": 20, "t": 20, "b": 80},
+                xaxis_title="Scenario bucket",
+                yaxis_title="Strategy",
+            )
+            st.plotly_chart(fig, use_container_width=True)
+
+    if not router.empty:
+        st.caption("Walk-forward strategy router summary")
+        router_columns = [
+            "horizon_days",
+            "folds",
+            "selected_mean_excess_vs_benchmark",
+            "selected_hit_rate",
+            "top3_blend_mean_excess_vs_benchmark",
+            "top3_blend_hit_rate",
+            "shrinkage_blend_mean_excess_vs_benchmark",
+            "shrinkage_blend_hit_rate",
+            "prior_best_mean_excess_vs_benchmark",
+            "equal_candidate_mean_excess_vs_benchmark",
+            "benchmark_mean_forward_return",
+            "mean_similar_prior_windows",
+            "fallback_share",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(router[[column for column in router_columns if column in router]]),
+            hide_index=True,
+        )
+
+    if not router_comparison.empty:
+        st.caption("Router variant vs static baseline comparison")
+        horizon_values = sorted(pd.to_numeric(router_comparison["horizon_days"], errors="coerce").dropna().unique())
+        selected_horizon = st.selectbox(
+            "Router comparison horizon",
+            options=[int(value) for value in horizon_values],
+            index=len(horizon_values) - 1 if horizon_values else 0,
+            key="leadership_router_comparison_horizon",
+        )
+        comparison_view = router_comparison[
+            pd.to_numeric(router_comparison["horizon_days"], errors="coerce").eq(selected_horizon)
+        ].copy()
+        comparison_columns = [
+            "model",
+            "folds",
+            "mean_forward_return",
+            "mean_excess_vs_benchmark",
+            "hit_rate_vs_benchmark",
+            "q25_forward_return",
+            "median_forward_return",
+            "q75_forward_return",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(
+                comparison_view[[column for column in comparison_columns if column in comparison_view]]
+            ),
+            hide_index=True,
+        )
+
+    if not router_selection.empty:
+        st.caption("Router strategy selection frequency")
+        selection_columns = [
+            "horizon_days",
+            "strategy",
+            "selected_count",
+            "selection_rate",
+            "mean_excess_vs_benchmark",
+            "hit_rate",
+            "mean_similar_prior_windows",
+            "fallback_share",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(
+                router_selection[
+                    [column for column in selection_columns if column in router_selection]
+                ].sort_values(["horizon_days", "selected_count"], ascending=[True, False])
+            ),
+            hide_index=True,
+        )
+
+    if not router_scenarios.empty:
+        st.caption("Router utility by scenario bucket")
+        scenario_columns = [
+            "horizon_days",
+            "scenario_bucket",
+            "folds",
+            "selected_mean_excess_vs_benchmark",
+            "selected_hit_rate",
+            "top3_blend_mean_excess_vs_benchmark",
+            "equal_candidate_mean_forward_return",
+            "benchmark_mean_forward_return",
+            "mean_similar_prior_windows",
+            "fallback_share",
+        ]
+        _render_metric_dataframe(
+            _display_metrics(
+                router_scenarios[[column for column in scenario_columns if column in router_scenarios]]
+            ),
+            hide_index=True,
+        )
+
+    if not router_scores.empty:
+        with st.expander("Router fold drilldown", expanded=False):
+            horizon_options = sorted(
+                pd.to_numeric(router_scores["horizon_days"], errors="coerce").dropna().unique()
+            )
+            scenario_options = sorted(router_scores["scenario_bucket"].dropna().astype(str).unique())
+            score_cols = st.columns(3)
+            drill_horizon = score_cols[0].selectbox(
+                "Horizon",
+                options=[int(value) for value in horizon_options],
+                index=len(horizon_options) - 1 if horizon_options else 0,
+                key="leadership_router_score_horizon",
+            )
+            drill_scenario = score_cols[1].selectbox(
+                "Scenario",
+                options=["All", *scenario_options],
+                key="leadership_router_score_scenario",
+            )
+            selected_only = score_cols[2].checkbox(
+                "Selected rows only",
+                value=True,
+                key="leadership_router_score_selected_only",
+            )
+            score_view = router_scores[
+                pd.to_numeric(router_scores["horizon_days"], errors="coerce").eq(drill_horizon)
+            ].copy()
+            if drill_scenario != "All":
+                score_view = score_view[score_view["scenario_bucket"].astype(str).eq(drill_scenario)]
+            if selected_only and "selected" in score_view:
+                score_view = score_view[score_view["selected"].astype(str).str.lower().isin(["true", "1"])]
+            score_columns = [
+                "origin_date",
+                "scenario_bucket",
+                "rank",
+                "strategy",
+                "selected",
+                "score_source",
+                "score",
+                "shrinkage_weight",
+                "median_excess_return",
+                "q25_drawdown",
+                "similar_windows",
+                "scenario_windows",
+                "fallback_windows",
+                "mean_state_distance",
+            ]
+            _render_metric_dataframe(
+                _display_metrics(score_view[[column for column in score_columns if column in score_view]].head(200)),
+                hide_index=True,
+            )
+
+
 def _selected_approach_catalog_row(
     strategy_name: str,
     *,
@@ -2477,6 +3095,465 @@ def _selected_approach_catalog_row(
     if matches.empty:
         return None
     return matches.iloc[0]
+
+
+def _render_running_experiment_comparison(
+    row: pd.Series,
+    *,
+    result: BacktestResult | None,
+    prices: pd.DataFrame,
+    warehouse_path: str,
+) -> None:
+    st.markdown("**Historical vs Running Experiment**")
+    st.caption(
+        "Candidate-specific operator view: compares the selected strategy's historical 3m "
+        "behavior with the matching paper/live monitoring window currently being valued."
+    )
+    if result is None:
+        st.info("Running experiment comparison needs a selected backtest result.")
+        return
+    benchmark_ticker = (
+        "QQQ" if "QQQ" in prices.columns else "SPY" if "SPY" in prices.columns else ""
+    )
+    if not benchmark_ticker:
+        st.info("Running experiment comparison needs QQQ or SPY benchmark prices.")
+        return
+
+    historical = _historical_experiment_expectations(
+        result,
+        prices,
+        benchmark_ticker=benchmark_ticker,
+        horizon_days=63,
+    )
+    windows, valuations = _load_research_monitoring_frames(warehouse_path)
+    window = _select_running_experiment_window(str(row.get("strategy", result.name)), windows)
+    window_valuations = _window_valuations(window, valuations)
+    current = _running_experiment_metrics(window, window_valuations, historical)
+    defensive = _historical_defensive_context(
+        result,
+        prices,
+        benchmark_ticker=benchmark_ticker,
+        threshold=0.65,
+    )
+    status = _running_experiment_status(current=current, historical=historical)
+
+    cols = st.columns(5)
+    _helped_metric(cols[0], "Experiment Status", status["label"].replace("_", " ").title())
+    _helped_metric(
+        cols[1],
+        "Elapsed",
+        f"{int(current.get('elapsed_days') or 0)} / {int(current.get('required_days') or 63)}d",
+    )
+    _helped_metric(cols[2], "Current Return", _format_percent(current.get("return")))
+    _helped_metric(cols[3], "Current Excess", _format_percent(current.get("excess")))
+    _helped_metric(cols[4], "Current Drawdown", _format_percent(current.get("drawdown")))
+
+    readout = status["read"]
+    if status["label"] in {"fail", "warning"}:
+        st.warning(readout)
+    elif status["label"] == "validate":
+        st.success(readout)
+    else:
+        st.info(readout)
+
+    comparison = _historical_running_comparison_frame(
+        historical=historical,
+        current=current,
+        defensive=defensive,
+        benchmark_ticker=benchmark_ticker,
+    )
+    _render_metric_dataframe(
+        comparison,
+        hide_index=True,
+        column_help={
+            "metric": "Question this row answers for the selected candidate.",
+            "historical_baseline": "Candidate-specific historical expectation from rolling 3m windows.",
+            "running_experiment": "Latest matching monitoring valuation for this candidate.",
+            "read": "Plain-English interpretation of the gap.",
+        },
+    )
+
+
+@st.cache_data(ttl=60, show_spinner=False)
+def _load_research_monitoring_frames(warehouse_path: str) -> tuple[pd.DataFrame, pd.DataFrame]:
+    if not warehouse_path:
+        return pd.DataFrame(), pd.DataFrame()
+    warehouse = TradingWarehouse(warehouse_path)
+    return warehouse.list_monitoring_windows(status=None), warehouse.read_table(
+        "strategy_daily_valuations"
+    )
+
+
+def _select_running_experiment_window(strategy_name: str, windows: pd.DataFrame) -> pd.Series:
+    if windows.empty or "strategy_name" not in windows:
+        return pd.Series(dtype=object)
+    matches = windows[windows["strategy_name"].astype(str).eq(strategy_name)].copy()
+    if matches.empty:
+        return pd.Series(dtype=object)
+    matches["start_date_ts"] = pd.to_datetime(matches.get("start_date"), errors="coerce")
+    matches["status_rank"] = (
+        matches.get("status", pd.Series("", index=matches.index))
+        .astype(str)
+        .map({"active": 0, "watch": 1, "paused": 2, "closed": 3})
+        .fillna(4)
+    )
+    matches = matches.sort_values(
+        ["status_rank", "start_date_ts", "created_at_utc"],
+        ascending=[True, False, False],
+    )
+    if len(matches) == 1:
+        return matches.iloc[0]
+
+    options = [
+        (
+            f"{r.get('mode', '')} / {r.get('account', '')} / "
+            f"{r.get('start_date', '')} / {r.get('window_role', '')} / {r.get('status', '')}"
+        )
+        for _, r in matches.iterrows()
+    ]
+    selected = _clearable_selectbox(
+        "Running experiment window",
+        options,
+        key=f"running_experiment_window_{strategy_name}",
+    )
+    if not selected:
+        return matches.iloc[0]
+    selected_index = options.index(selected)
+    return matches.iloc[selected_index]
+
+
+def _window_valuations(window: pd.Series, valuations: pd.DataFrame) -> pd.DataFrame:
+    if window.empty or valuations.empty or "window_id" not in valuations:
+        return pd.DataFrame()
+    window_id = str(window.get("window_id", ""))
+    value_frame = valuations[valuations["window_id"].astype(str).eq(window_id)].copy()
+    if value_frame.empty:
+        return pd.DataFrame()
+    value_frame["valuation_date_ts"] = pd.to_datetime(
+        value_frame.get("valuation_date"),
+        errors="coerce",
+    )
+    return value_frame.sort_values("valuation_date_ts")
+
+
+def _historical_experiment_expectations(
+    result: BacktestResult,
+    prices: pd.DataFrame,
+    *,
+    benchmark_ticker: str,
+    horizon_days: int,
+) -> dict[str, float | int | None]:
+    returns = pd.to_numeric(result.returns, errors="coerce").dropna()
+    if returns.empty or len(returns) <= horizon_days:
+        return {"windows": 0, "horizon_days": horizon_days}
+
+    benchmark_returns = _benchmark_returns_for_index(prices, benchmark_ticker, returns.index)
+    step = max(1, horizon_days // 3)
+    strategy_forward: list[float] = []
+    benchmark_forward: list[float] = []
+    excess_forward: list[float] = []
+    drawdowns: list[float] = []
+    for start in range(0, len(returns) - horizon_days, step):
+        strategy_slice = returns.iloc[start : start + horizon_days]
+        benchmark_slice = benchmark_returns.iloc[start : start + horizon_days]
+        strategy_ret = float((1.0 + strategy_slice).prod() - 1.0)
+        benchmark_ret = float((1.0 + benchmark_slice).prod() - 1.0)
+        equity = (1.0 + strategy_slice).cumprod()
+        drawdown_value = float((equity / equity.cummax() - 1.0).min())
+        strategy_forward.append(strategy_ret)
+        benchmark_forward.append(benchmark_ret)
+        excess_forward.append(strategy_ret - benchmark_ret)
+        drawdowns.append(drawdown_value)
+
+    if not strategy_forward:
+        return {"windows": 0, "horizon_days": horizon_days}
+    drawdown_series = pd.Series(drawdowns)
+    return {
+        "windows": len(strategy_forward),
+        "horizon_days": horizon_days,
+        "median_return": float(pd.Series(strategy_forward).median()),
+        "median_benchmark_return": float(pd.Series(benchmark_forward).median()),
+        "median_excess": float(pd.Series(excess_forward).median()),
+        "median_drawdown": float(drawdown_series.median()),
+        "drawdown_envelope": float(drawdown_series.quantile(0.10)),
+    }
+
+
+def _benchmark_returns_for_index(
+    prices: pd.DataFrame,
+    benchmark_ticker: str,
+    index: pd.Index,
+) -> pd.Series:
+    if benchmark_ticker not in prices:
+        return pd.Series(0.0, index=index)
+    benchmark = pd.to_numeric(prices[benchmark_ticker], errors="coerce")
+    benchmark_returns = benchmark.pct_change().reindex(index).fillna(0.0)
+    return benchmark_returns.astype(float)
+
+
+def _running_experiment_metrics(
+    window: pd.Series,
+    value_frame: pd.DataFrame,
+    historical: dict[str, float | int | None],
+) -> dict[str, float | int | str | bool | None]:
+    required_days = int(historical.get("horizon_days") or 63)
+    if window.empty:
+        return {
+            "status": "not_started",
+            "elapsed_days": 0,
+            "required_days": required_days,
+            "read": "No matching monitoring window exists yet for this candidate.",
+        }
+    start_date = pd.to_datetime(window.get("start_date"), errors="coerce")
+    if value_frame.empty:
+        return {
+            "status": "not_valued",
+            "elapsed_days": 0,
+            "required_days": required_days,
+            "window_id": str(window.get("window_id", "")),
+            "start_date": str(window.get("start_date", "")),
+            "read": "Monitoring window exists, but no valuation has been recorded yet.",
+        }
+    latest = value_frame.iloc[-1]
+    valuation_date = pd.to_datetime(latest.get("valuation_date"), errors="coerce")
+    elapsed_days = (
+        int((valuation_date - start_date).days * 5 / 7)
+        if pd.notna(start_date) and pd.notna(valuation_date)
+        else 0
+    )
+    defensive_path = value_frame.apply(_defensive_weight_from_valuation, axis=1).dropna()
+    has_rerisked = bool((defensive_path < 0.65).any()) if not defensive_path.empty else None
+    return {
+        "status": "valued",
+        "window_id": str(window.get("window_id", "")),
+        "start_date": str(window.get("start_date", "")),
+        "valuation_date": str(latest.get("valuation_date", "")),
+        "elapsed_days": elapsed_days,
+        "required_days": required_days,
+        "return": _safe_float(latest.get("cumulative_return")),
+        "benchmark_return": _safe_float(latest.get("benchmark_cumulative_return")),
+        "excess": _safe_float(latest.get("excess_return")),
+        "drawdown": _safe_float(latest.get("drawdown")),
+        "defensive_weight": _defensive_weight_from_valuation(latest),
+        "has_rerisked": has_rerisked,
+    }
+
+
+def _defensive_weight_from_valuation(latest: pd.Series) -> float | None:
+    parsed_weights: dict[str, float] = {}
+    raw_weights = latest.get("latest_weights_json")
+    if isinstance(raw_weights, str) and raw_weights.strip():
+        try:
+            raw_parsed = json.loads(raw_weights)
+            if isinstance(raw_parsed, dict):
+                parsed_weights = {
+                    str(ticker).upper(): float(weight)
+                    for ticker, weight in raw_parsed.items()
+                    if _safe_float(weight) is not None
+                }
+        except (TypeError, ValueError, json.JSONDecodeError):
+            parsed_weights = {}
+    defensive_total = sum(
+        weight
+        for ticker, weight in parsed_weights.items()
+        if ticker in {"BIL", "SGOV", "SHV", "CASH", "USD"}
+    )
+    if defensive_total:
+        return defensive_total
+    return _safe_float(latest.get("defensive_percent_of_max_sleeve"))
+
+
+def _historical_defensive_context(
+    result: BacktestResult,
+    prices: pd.DataFrame,
+    *,
+    benchmark_ticker: str,
+    threshold: float,
+) -> dict[str, float | int | None]:
+    try:
+        scenario_context = load_scenario_context()
+        audit = build_defensive_judgement_audit(
+            result,
+            prices,
+            benchmark_ticker=benchmark_ticker,
+            scenario_context=scenario_context,
+        )
+        summary = audit.summary.copy()
+        if summary.empty:
+            return {}
+        summary["threshold_distance"] = (
+            pd.to_numeric(summary.get("threshold"), errors="coerce") - threshold
+        ).abs()
+        summary["horizon_rank"] = summary.get("horizon", pd.Series("", index=summary.index)).map(
+            {"3m": 0, "1m": 1, "1w": 2}
+        )
+        selected = summary.sort_values(["threshold_distance", "horizon_rank"]).iloc[0]
+        current_setup = current_defensive_setup_context(
+            result,
+            prices,
+            benchmark_ticker=benchmark_ticker,
+            scenario_context=scenario_context,
+        )
+        bayes = defensive_false_alarm_bayes_update(
+            audit.events,
+            threshold=_safe_float(selected.get("threshold")) or threshold,
+            horizon=str(selected.get("horizon", "3m")),
+            current_defensive_weight=_current_defensive_weight(result),
+            current_setup=current_setup,
+        )
+    except Exception:
+        return {}
+    return {
+        "historical_false_alarm_rate": _safe_float(selected.get("false_alarm_rate")),
+        "historical_correct_defense_rate": _safe_float(selected.get("correct_defense_rate")),
+        "updated_false_alarm_rate": _safe_float(bayes.get("posterior_false_alarm_rate")),
+        "similar_false_alarm_rate": _safe_float(bayes.get("similar_false_alarm_rate")),
+        "similar_episode_starts": _safe_float(bayes.get("similar_episode_starts")),
+        "rerisk_within_horizon_rate": _safe_float(selected.get("rerisk_within_horizon_rate")),
+    }
+
+
+def _running_experiment_status(
+    *,
+    current: dict[str, float | int | str | bool | None],
+    historical: dict[str, float | int | None],
+) -> dict[str, str]:
+    if current.get("status") == "not_started":
+        return {
+            "label": "early",
+            "read": "No matching monitoring window exists yet; start the experiment before judging it.",
+        }
+    if current.get("status") == "not_valued":
+        return {
+            "label": "early",
+            "read": "The experiment is configured, but it has not produced valuation evidence yet.",
+        }
+
+    elapsed = int(current.get("elapsed_days") or 0)
+    required = int(current.get("required_days") or 63)
+    drawdown = _safe_float(current.get("drawdown")) or 0.0
+    envelope = _safe_float(historical.get("drawdown_envelope")) or -0.08
+    excess = _safe_float(current.get("excess"))
+    current_return = _safe_float(current.get("return"))
+    drawdown_breach = drawdown <= envelope
+
+    if drawdown_breach:
+        label = "fail" if elapsed >= max(required // 3, 1) else "warning"
+        return {
+            "label": label,
+            "read": (
+                "Current drawdown is worse than the candidate's historical 3m stress envelope; "
+                "treat the live experiment as thesis-risk until reviewed."
+            ),
+        }
+    if elapsed < required:
+        if excess is not None and excess < -0.02:
+            return {
+                "label": "warning",
+                "read": (
+                    f"Early read: {elapsed} of {required} trading days are in, and the "
+                    "experiment is trailing the benchmark by more than 2%."
+                ),
+            }
+        return {
+            "label": "on_track",
+            "read": (
+                f"Early read: {elapsed} of {required} trading days are in. Do not validate "
+                "yet; compare drift, drawdown, and benchmark excess as evidence accumulates."
+            ),
+        }
+    if excess is not None and excess > 0 and (current_return or 0.0) >= 0:
+        return {
+            "label": "validate",
+            "read": "The experiment reached its 3m checkpoint ahead of benchmark without a drawdown-envelope breach.",
+        }
+    if excess is not None and excess < -0.02:
+        return {
+            "label": "fail",
+            "read": "The experiment reached its checkpoint materially behind benchmark; review before scaling.",
+        }
+    return {
+        "label": "continue",
+        "read": "The experiment reached its checkpoint but evidence is mixed; continue rather than validate or fail.",
+    }
+
+
+def _historical_running_comparison_frame(
+    *,
+    historical: dict[str, float | int | None],
+    current: dict[str, float | int | str | bool | None],
+    defensive: dict[str, float | int | None],
+    benchmark_ticker: str,
+) -> pd.DataFrame:
+    current_excess = _safe_float(current.get("excess"))
+    historical_excess = _safe_float(historical.get("median_excess"))
+    current_drawdown = _safe_float(current.get("drawdown"))
+    historical_envelope = _safe_float(historical.get("drawdown_envelope"))
+    rerisk_rate = _safe_float(defensive.get("rerisk_within_horizon_rate"))
+    updated_false_alarm = _safe_float(defensive.get("updated_false_alarm_rate"))
+    historical_false_alarm = _safe_float(defensive.get("historical_false_alarm_rate"))
+    has_rerisked = current.get("has_rerisked")
+    rows = [
+        {
+            "metric": "3m strategy return",
+            "historical_baseline": _format_percent(historical.get("median_return")),
+            "running_experiment": _format_percent(current.get("return")),
+            "read": "Current path versus the candidate's median historical 3m forward return.",
+        },
+        {
+            "metric": f"3m excess vs {benchmark_ticker}",
+            "historical_baseline": _format_percent(historical_excess),
+            "running_experiment": _format_percent(current_excess),
+            "read": _comparison_read(current_excess, historical_excess, higher_is_better=True),
+        },
+        {
+            "metric": "3m drawdown envelope",
+            "historical_baseline": _format_percent(historical_envelope),
+            "running_experiment": _format_percent(current_drawdown),
+            "read": _comparison_read(current_drawdown, historical_envelope, higher_is_better=True),
+        },
+        {
+            "metric": "Defensive false-alarm prior",
+            "historical_baseline": _format_percent(defensive.get("historical_false_alarm_rate")),
+            "running_experiment": _format_percent(defensive.get("updated_false_alarm_rate")),
+            "read": (
+                "Recent similar-setup posterior is lower than the long-history prior."
+                if updated_false_alarm is not None
+                and historical_false_alarm is not None
+                and updated_false_alarm < historical_false_alarm
+                else "Posterior is not improving versus the long-history false-alarm prior."
+            ),
+        },
+        {
+            "metric": "Re-risk behavior",
+            "historical_baseline": _format_percent(rerisk_rate),
+            "running_experiment": "n/a" if has_rerisked is None else "Yes" if has_rerisked else "No",
+            "read": "Shows whether the live path has already moved below the 65% defensive threshold.",
+        },
+        {
+            "metric": "Sample size",
+            "historical_baseline": f"{int(historical.get('windows') or 0)} rolling 3m windows",
+            "running_experiment": str(current.get("start_date") or "not started"),
+            "read": "Use this to separate historical evidence from a thin live sample.",
+        },
+    ]
+    return pd.DataFrame(rows)
+
+
+def _comparison_read(
+    current: float | None,
+    baseline: float | None,
+    *,
+    higher_is_better: bool,
+) -> str:
+    if current is None or baseline is None:
+        return "Not enough data for a live-vs-history read yet."
+    ahead = current >= baseline if higher_is_better else current <= baseline
+    return (
+        "Running path is favorable versus the historical baseline."
+        if ahead
+        else "Running path is lagging the historical baseline."
+    )
 
 
 def _render_defensive_judgement_section(
@@ -2551,14 +3628,21 @@ def _render_defensive_judgement_section(
             benchmark_ticker=selected_benchmark,
         )
     )
+    current_setup = current_defensive_setup_context(
+        result,
+        prices,
+        benchmark_ticker=selected_benchmark,
+        scenario_context=scenario_context,
+    )
     bayes = defensive_false_alarm_bayes_update(
         events,
         threshold=selected_threshold,
         horizon=str(primary.get("horizon", "1m")),
         current_defensive_weight=current_defensive,
+        current_setup=current_setup,
     )
-    st.markdown("**Recent False-Alarm Sniff Test**")
-    bayes_cols = st.columns(4)
+    st.markdown("**Contextual False-Alarm Sniff Test**")
+    bayes_cols = st.columns(5)
     _helped_metric(
         bayes_cols[0],
         "Long-History False Alarm",
@@ -2566,20 +3650,47 @@ def _render_defensive_judgement_section(
     )
     _helped_metric(
         bayes_cols[1],
-        "Recent False Alarm",
-        _format_percent(bayes.get("recent_false_alarm_rate")),
+        "Similar Setup False Alarm",
+        _format_percent(bayes.get("similar_false_alarm_rate")),
     )
     _helped_metric(
         bayes_cols[2],
+        "Similar Correct Defense",
+        _format_percent(bayes.get("similar_correct_defense_rate")),
+    )
+    _helped_metric(
+        bayes_cols[3],
         "Updated False Alarm",
         _format_percent(bayes.get("posterior_false_alarm_rate")),
     )
     _helped_metric(
-        bayes_cols[3],
-        "Recent Episodes",
-        _format_decimal(bayes.get("recent_episode_starts")),
+        bayes_cols[4],
+        "Similar Episodes",
+        _format_decimal(bayes.get("similar_episode_starts")),
     )
     st.info(str(bayes.get("sniff_test_readout", "")))
+
+    follow_cols = st.columns(4)
+    _helped_metric(
+        follow_cols[0],
+        "Median Avoided Drawdown",
+        _format_percent(primary.get("median_avoided_drawdown")),
+    )
+    _helped_metric(
+        follow_cols[1],
+        "Median Missed Upside",
+        _format_percent(primary.get("median_missed_upside")),
+    )
+    _helped_metric(
+        follow_cols[2],
+        "Re-Risked In Horizon",
+        _format_percent(primary.get("rerisk_within_horizon_rate")),
+    )
+    _helped_metric(
+        follow_cols[3],
+        "Strategy vs Benchmark",
+        _format_percent(primary.get("avg_strategy_excess_vs_benchmark")),
+    )
 
     chart_events = events[
         events["threshold"].eq(selected_threshold)
@@ -2604,6 +3715,11 @@ def _render_defensive_judgement_section(
         "mixed_rate",
         "avg_benchmark_excess_vs_cash",
         "median_benchmark_forward_max_drawdown",
+        "median_avoided_drawdown",
+        "median_missed_upside",
+        "rerisk_within_horizon_rate",
+        "median_days_to_rerisk",
+        "avg_strategy_excess_vs_benchmark",
     ]
     _render_metric_dataframe(
         _display_metrics(
@@ -2622,6 +3738,18 @@ def _render_defensive_judgement_section(
             "avg_benchmark_excess_vs_cash": (
                 "Average selected-benchmark forward return minus BIL forward return after "
                 "defensive episode starts."
+            ),
+            "median_avoided_drawdown": (
+                "Median benchmark drawdown magnitude among episodes classified as correct defense."
+            ),
+            "median_missed_upside": (
+                "Median benchmark excess versus BIL among episodes classified as false alarms."
+            ),
+            "rerisk_within_horizon_rate": (
+                "Share of episodes where the strategy moved back below the selected defensive threshold before the horizon ended."
+            ),
+            "avg_strategy_excess_vs_benchmark": (
+                "Average strategy forward return minus benchmark forward return after defensive episode starts."
             ),
         },
     )
@@ -3339,6 +4467,7 @@ def _render_runtime_snapshot_leaders(
         baseline_run=baseline_run,
         experiment_scorecards=experiment_scorecards,
         limit=20,
+        include_defensive_judgement=False,
     )
     if leaders.empty or "source" not in leaders:
         return
@@ -3371,6 +4500,7 @@ def _render_experiment_monitor(
     experiment_walk_forward: pd.DataFrame,
     experiment_candidates: pd.DataFrame,
     decision_sanity_impacts: pd.DataFrame,
+    warehouse_path: str = "",
 ) -> None:
     st.subheader("Experiment Monitor")
     if experiment_scorecards.empty:
@@ -3597,6 +4727,7 @@ def _render_experiment_monitor(
             baseline_run=baseline_run,
             experiment_scorecards=experiment_scorecards,
             experiment_candidates=experiment_candidates,
+            warehouse_path=warehouse_path,
         )
 
     elif aggregate_view == "Signal Evidence":
@@ -3617,6 +4748,8 @@ def _render_experiment_monitor(
             "Confidence Gauntlet",
             "Paper Readiness",
             "Regime Tests",
+            "Backtest PBO",
+            "Leadership Diagnostics",
         ]
         validation_view = (
             st.pills(
@@ -3693,6 +4826,10 @@ def _render_experiment_monitor(
                             ]
                         )
                     )
+        elif validation_view == "Backtest PBO":
+            _render_pbo_diagnostics_overview()
+        elif validation_view == "Leadership Diagnostics":
+            _render_leadership_diagnostics_overview()
 
     elif aggregate_view == "Manifests":
         if experiment_candidates.empty:
@@ -4569,6 +5706,7 @@ def _render_research_lab(
     experiment_walk_forward: pd.DataFrame,
     experiment_candidates: pd.DataFrame,
     decision_sanity_impacts: pd.DataFrame,
+    warehouse_path: str = "",
 ) -> None:
     _render_experiment_monitor(
         bot_config,
@@ -4578,6 +5716,7 @@ def _render_research_lab(
         experiment_walk_forward,
         experiment_candidates,
         decision_sanity_impacts,
+        warehouse_path=warehouse_path,
     )
     st.divider()
     st.subheader("Research Diagnostics / QC")

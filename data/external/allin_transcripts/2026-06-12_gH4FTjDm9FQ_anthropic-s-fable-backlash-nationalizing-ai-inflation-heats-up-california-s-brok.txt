@@ -1,0 +1,2938 @@
+source: allin_youtube
+published_date: 2026-06-12
+video_id: gH4FTjDm9FQ
+url: https://www.youtube.com/watch?v=gH4FTjDm9FQ
+title: Anthropic's Fable Backlash, Nationalizing AI, Inflation Heats Up & California’s Broken Elections
+
+All right, everybody. Welcome back to
+the number one podcast in the world.
+It's your favorite podcast. It's your
+podcasters's favorite podcast. It's the
+podcast that everybody likes to rip off
+for 50 episodes and then they quit. But
+the All-In podcast [laughter] is not
+quitting. We're doubling down with the
+original quartet. Everybody's here for a
+big big week, lots of debates, and we
+got to start with Anthropic.
+Anthropic released a mythos level model
+with some interesting guardrails and uh
+seems as though Daario is back to
+blogging. Okay, the model's called Fable
+5. No idea why they're calling it that
+or released on Tuesday and it tops every
+benchmark nearly every benchmark. The
+tokens, however, cost twice as much as
+Opus 4.8, but it should use less tokens
+overall because it's theoretically that
+much better. Unclear if this is going to
+alleviate some of the hand ringing
+around the cost of tokens, but you
+remember in April Anthropic
+famously did not release Mythos because
+publicly uh it had some strong hacking
+capabilities. So they gave it to some
+folks and we had um the CEO of Nesh of
+Palo Alto Networks who said, "Hey,
+Mythos was the real deal." and that they
+used it to seal up some vulnerabilities
+inside their shop. Obviously, this new
+model is sensitive uh to topics like
+boweapons, hacking, all that stuff are
+blocked in it. But they got a big
+developer backlash and then I'll get
+your feedback after I explain this.
+While using Fable, Anthropic stores all
+the prompt data you enter for at least
+30 days. And so that's a bit of a
+privacy issue. And if Fable 5 detects
+you're doing frontier AI research, in
+other words, using their model to make a
+better model, competitive model, they
+were downgrading you, but they weren't
+telling you. And this was buried deep in
+a 319 page document. So many kuruffles,
+freakouts going on on X over this, but
+they've since walked it back a bit,
+quote unquote, in Wired. We're changing
+Fable 5 safeguards for Frontier LLM
+development to make them more visible.
+I'm going to stop there. Chimath, what's
+your take on anthropic and these
+extraordinary models? They keep dropping
+and how they're handling the release of
+them. Are they being thoughtful? Are
+they being dramatic and drama queens? A
+little bit of both. Where do you stand
+on it? You know, after getting Nesh's
+feedback and seeing the latest model
+come out, have you played with it?
+What's going on at 8090 and the software
+factory in terms of benchmarking it as
+well? It's a really incredible model and
+so kudos to these guys for continuing to
+push the boundaries of the closed
+frontier lab models. They're firing on
+all cylinders. I think that it creates a
+pretty obvious risk now and I think that
+obvious risk is twofold. One is
+Anthropic has essentially shown their
+hand which is that they will
+increasingly
+take in prompts, evaluate the prompts
+and decide what to do with them before
+they generate output to you.
+>> And I think if you were a person,
+you should generally now think there's a
+risk of censorship.
+If you're a company, I think it's almost
+a non-starter.
+And the reason is because you could
+accidentally trip one of these things
+without even knowing it. A downstream
+scientist using the cloud APIs could
+trip it. A business executive inside
+your corporation could trip it. A person
+doing scientific molecular research
+could trip it. And all of a sudden,
+you'll get cut off from a very important
+source of business differentiation for
+yourself. So I think if you take both of
+those two things together, we're at this
+very unique moment in time where I think
+companies need to start underwriting
+this next phase of AI, which is how do I
+have control?
+Who am I allowing to learn off of all of
+this information?
+Do I want to have single point of
+failure risk with respect to AI? And I
+think the answer is that you need broad
+diversity and a governance approach
+that's better managed. [clears throat]
+>> One thing I'll say about anthropic is
+they tell the truth.
+>> Yes.
+>> It's just that the truth sucks when you
+actually take it and you eat it and
+you're like it's in your tummy and
+you're like no this is not good. I don't
+like this. And so there's the censorship
+risk on the one hand and then there's
+just the governance business risk for
+enterprises on the other. Both are not
+good.
+>> Freeberg running your own company now.
+Uh, and I'll let you back clean up here.
+Saxs, obviously you'll have a lot to
+say, but Freeberg, running your company,
+do you worry about getting rugpulled by
+one of these companies, investing your
+time into one of these platforms, having
+them then constrain your use of it and
+or take what you're doing at Ohio, put
+it into their model and make it
+available to other people. What What
+concerns do you have as a business owner
+at the forefront of your field using
+these tools?
+>> It's a great question. the the terms of
+service is pretty clear that they can't
+take what you're doing and put it into
+their model that they won't
+>> do you believe them when you read that I
+>> I'm not sure to be honest there are
+things I'm concerned about but we've
+decided to throw caution to the wind
+because we do a lot of proprietary work
+in genomics what that means is we're
+looking at different genes or gene
+variants trying to estimate the impact
+that that gene or gene variant might
+have on a living organism like we work
+in plants obviously in agriculture
+And we will do things like RNA guide
+design for gene editing based tools. We
+will do predictions on what gene may or
+may not have some phenotype. So there's
+a lot of genomic modeling work that we
+have found these models to be incredibly
+valuable at supporting us with over the
+last couple of years. So going back
+about 6 months, we were able to very
+simply and cleanly do things like design
+a genetic construct that you would then
+use to make a specific protein and the
+the tools was very easy to use to do
+that sort of research and extremely
+valuable. This is the kind of work that
+many scientists would spend a lot of
+time doing and these models were very
+good at doing very quickly. Over the
+last couple of weeks, they've begun to
+restrict the ability to use the models
+to do that work. And the premise is that
+there's some sort of bioweapon
+uh type risk that folks have theorized
+could happen using these tools. And as a
+result, we're losing the capacity to use
+these models for this very important
+scientific development work. As a
+result, we are likely going to end up
+needing to use open- source models and
+run them locally ourselves. So the
+reason I walk through all of that is so
+people can really understand the context
+of what's going to happen here. As folks
+like Anthropic say, "Hey, we're going to
+restrict access or censor the output of
+these models." It is going to force
+companies like ourselves who still want
+to take advantage of the capability of
+these LLMs to go and get open- source
+tools and run them. And what are the
+best open source models today? They're
+Chinese.
+>> Yeah, they are.
+>> And that is a major concern. the the
+American open source models are not as
+good as the Chinese open source models.
+So the restrictions that Anthropic and
+others are putting upon themselves and
+upon the industry is forcing a lot of
+companies to go and get open source
+Chinese models and run them. We're
+seeing this across the landscape with
+startups with large scale enterprises.
+Everyone's making that move.
+>> Yeah. And this is something we've been
+talking about here with Apple and their
+silicon and how well you can run these
+models. Also, I predict your next card
+you'll turn over is you'll start making
+your own models, Freeberg. You'll take
+all this data you have.
+>> It's exactly right. And we'll we'll
+start we'll start with the core model,
+combine it with our data, and then we'll
+have our own genome language model, our
+own prediction model that we'll then use
+internally. And I think that's where
+folks are going. But the reason I point
+this out is because a lot of folks are
+feeling the pressure from anthropic
+doing this. and they're feeling the
+pressure from politicians repeating the
+scary words that are being said by
+Daario and others. And as a result, they
+are going to try and they are already
+trying to force either natural
+enforcement or politicized enforcement
+upon the model providers in a way that
+is ultimately going to benefit Chinese
+open source model providers. And that is
+a scary thing because we are going to
+damage our own kind of economic
+viability. You can't just stop AI. As
+much as everyone says AI is doomsday, by
+stopping AI or trying to stop AI through
+this political action and social, you
+know, kind of behavior, you are
+fundamentally going to give someone else
+the advantage because the AI isn't going
+to go away. So the reason I describe
+what we're doing is for everyone to
+really understand in Grock that you
+can't just turn off AI and turn off
+access to these things. What you will do
+is you will force the hand of someone
+else to now have an unfair advantage
+because you're unfairly restricting your
+models and your access to those models.
+Well, well, really well said, Freeberg
+Saxs. What's your take just in terms of
+the chessboard in terms of we got the
+business case here, we got the local
+case, but there's a lot of issues here
+with Anthropic in terms of them
+essentially throwing up every red flag
+to get regulated to induce and it'll be
+our second story, the Bernie Sanders
+seizing the equity of these companies.
+But man, th this is saying, "Look over
+here. We're starting a fire. Regulate
+the hell out of us." Which also then
+makes you wonder, hey, maybe I should be
+doing my own model. Maybe I should be
+embracing open source models. How's this
+chessboard developing here, Zach?
+>> Well, look, eight months ago, I said
+that Enthropic was engaged in a very
+sophisticated regulatory capture
+campaign based on fear-mongering. And
+people at the time thought that was a
+very spicy take. But 8 months later, I
+think you're hearing a lot of people say
+it. In fact, I think it's almost now
+becoming a new consensus. And one of the
+things I think your summary didn't quite
+capture, JCAL, y
+>> is the sense of the violation of trust
+and how much outrage there is in the
+developer community over this latest
+Fable release is not just the fact that
+they're doing mandatory surveillance.
+Remember, this is a company that said
+that it was against government
+surveillance. They are now retaining for
+30 days every prompt and every output
+you send to one of these mythos class
+models. There are no exceptions. Even
+enterprise customers who had signed zero
+data retention agreements, they do not
+have a choice or I guess they can just
+not use the new fable or or mythos class
+models. But they retain all of your data
+for 30 days. And it's not just the
+prompts and the output. Remember, it's
+all the context you share with them. So,
+you know, all these uh agent platforms,
+they're basically storing all of your
+memories, all of your files, all of your
+data, and they're passing them to the
+model in these giant context windows to
+get better responses. Anthropic is
+saying it will keep all of that, and it
+does it to build a profile on you, to
+classify you, and then to determine what
+capabilities it then unlocks. And the
+thing that created the most outrage in
+addition to the surveillance is the fact
+that they would degrade the product.
+They would degrade what they show you.
+They would nerf their models if it
+decided in anthropic soul discretion
+that you are not worthy of having access
+to that level of information. So they're
+creating a new level of AI halves and
+have nots. And what they did is and they
+they this is there's a narrow piece here
+they walk back which is they said that
+when it came to things like machine
+learning AI research chip design
+research those types of areas they would
+kick you to a lesser model but not tell
+you that and they would even
+>> which feels anti-competitive right I
+mean
+>> it's completely anti-competitive and
+also they would even do things like
+rewrite your prompt in the background so
+they would give you a nerfed answer they
+would not tell you what they were doing
+they still charge you for the product
+that you thought you were getting and
+they would never tell you that you were
+not getting Frontier model capability.
+So you they were actually misleading
+their users and this is what was
+creating so much outrage. Now the narrow
+piece they walk back is they are now
+saying that they will disclose when they
+downgrade you but they are still
+downgrading people when they decide that
+that person should not receive the
+appropriate information. And you saw
+there were a lot of people posting
+online with examples of the massive
+overreach here. So someone showed that
+when they simply just asked a question
+about mitochondria, they were basically
+downgraded.
+>> That's right.
+>> When Ben Thompson from Strateery asked a
+very straightforward question about the
+relationship between cancer risk and GLP
+once, he was kicked out.
+>> So these guys have a very expansive view
+of who should be downgraded. again,
+they're going to surveil you to
+determine whether you should be. And I
+think what we're getting here is a
+vision of where all of this is headed,
+which is that these powerful big tech
+companies are going to decide whether
+you're worthy. They're going to decide
+whether you're an AI have or have not,
+and then they're going to censor the
+output that you receive based on the
+criteria they determine when they
+profile you.
+>> That is [clears throat]
+very Orwellian.
+>> I think there's that. And I think that
+there's the risk of something that's
+more subtle
+but equally insidious, which is that
+they will start to pick which
+corporations they want to benefit. So
+for example,
+>> if Novartis has a competitive GLP1 drug
+to Lily and they have a strategic deal
+with Novartis and not one with Lily, now
+there's an impetus to shape how people
+get information.
+>> Right? if they have a deal with JP
+Morgan but not with City Bank, you'll
+just never know. And so you'll ask a
+question something about mortgage rates
+or interest rates and you'll get all
+kinds of stuff that you don't
+understand. And then the downstream part
+of this which is even more problematic
+is it's not clear to me that they're
+going to capture the actual fingerprint
+of what they did. So if you believe
+that something was done in a shady way,
+you're supposed to be able to go to them
+or regulators should be able to go to
+them and say, "Show me the trace of that
+model run in that exact moment that
+generated that output. Convince me why
+that that wasn't nerfed on purpose or
+manipulated."
+And there's all kinds of ways in which
+they can hide the cheese on that. So I
+think that all of that body of stuff
+sacks happens now because if you're if
+you're an emergent company
+what you should be doing is knocking on
+anthropic door saying let's do a deal
+I'll give you half the equity and why
+don't you just direct people to me and
+they'll say well economics are not what
+I care about what is your philosophy on
+life on morality on all of these social
+issues and one company will say it's a
+another company will say it's B, they'll
+favor A over B and then all kinds of
+stuff can happen underneath the hood.
+That's what's scary. Let me just ask my
+free market view. Like, should that
+matter? If there's a bunch of models out
+there and we don't restrict them and we
+don't regulate them, let these markets
+compete. We had paid inclusion in the
+early days of search engines and the
+companies had to pay to be in there and
+there all those sorts of deals you're
+describing, Chimamoth. And all the
+search engines that did those sorts of
+deals, they sucked for consumers and
+customers. So everyone was like, you
+know what, this isn't as good as Google
+and everyone went over to the better
+model and the better provider. Isn't
+that what's going to happen here if we
+don't get in the way keep the government
+out of it
+>> and they're not communicating.
+>> It's a great point.
+>> You're missing one piece of it, which is
+at the same time that Anthropic was
+engaging in mandatory surveillance and
+nerfing its models. Daario wrote a new
+blog post.
+>> Oh god. saying that transparency was no
+longer good enough that we needed to
+have a new regulatory agency like an FAA
+or maybe an FDA to approve all models.
+So your presumption there is correct.
+Yes, if you could go somewhere else to
+get your questions answered, then you
+would have alternatives. But at the same
+time that Anthropic is engaging in this
+potentially anti-competitive behavior,
+they want to restrict your options. It's
+not good enough for them just to win in
+the free market. They're calling on the
+government to regulate and stop
+potential competitors and limit the
+number of models that you have access
+to.
+>> Why would they do that? Why would they
+want to get regulated? The answer super
+simple. They don't they want to apply
+that regulation to open source which is
+impossible. But this would be a great
+way to scuttle and sandbag open- source
+models. Yes. Because they don't have the
+ability to be regulated. So it's like a
+preemptive strike against token maxing
+on your local machine.
+>> Two years ago, I bought
+2,000 acres in Arizona with a partner.
+We got it zoned. We got it approved. So,
+we're allowed to build a 2 gawatt data
+center. And I thought that this was the
+moment where you just turn around and
+you flip it to the Blackstones, the
+Brookfields of the world, to the Googles
+of the world. Let them develop it. And
+I've come to the conclusion that I don't
+think I can. And the reason is because I
+think that unless we direct large swats
+of compute exactly at the direction that
+Freeberg says, what Sax says and what
+Jason just said will happen and we won't
+have open source. So just to make it
+very clear when you look at the long
+tale of access to open source models,
+it's relatively minuscule.
+Most of the megawatts are still directed
+to the big models. Most of them, the
+overwhelming majority still goes to the
+big guys. And so I'm coming to the
+conclusion that I think we may just be
+dragged into having to build two
+gigawatts and I just put in an offer for
+another gigs in a different place
+because I'm like if you could take 3
+gigawatts and now actually create a deep
+liquid access to open source we're going
+to have to do it. We as a community now
+I don't have the money to do that
+because just to put it out on the table
+a gigawatt now costs a hundred billion
+dollars guys.
+>> Okay. So there's a huge capital mo
+that's a problem here as well. Saxs
+which even if we wanted to go and
+endorse and breathe life into the open
+source model community [snorts] where
+the hell am I going to come up with
+hundred billion now when I started this
+project it was like four or five billion
+and it's increased by 20x. So if you
+want to get all three gigawatts
+developed I have to come up with 300
+billion. I don't have obviously I don't
+have $300 billion. So what are we all
+supposed to do? And then if you get the
+rug pull and the ladder pull on the
+regulatory side, we are going to be
+stuck with one class of models and one
+set of rules and we won't understand how
+to operate
+>> in the US.
+>> Yeah.
+>> Yeah. The rest of the world won't be
+limited. But in the US, the
+>> rest of the world will be able to
+operate
+>> and you'll be able to run these on your
+Apple silicon, you know,
+>> and we're already seeing China race
+ahead in biotech. They're racing ahead
+in material science. They're racing
+ahead in new industrial systems. the
+capabilities that are going to be kind
+of lopsided is going to create an unfair
+advantage and that's when our workforce
+and when our economy is truly at risk.
+>> Hey Freeberg, isn't it true that you
+guys use a open source model for
+genomics? Didn't the Collison put out
+one? Can you talk?
+>> It's great. And the Ark Institute
+ingested all the world's genomic data
+that they could get access to and it's
+it's a genome language model basically.
+So in our plant breeding program, we're
+trying to figure out whether a
+particular variant of a gene in a plant
+is good or bad, if we don't know from
+empiricism, from data historically
+whether it's good or bad. So you can
+feed it into this model and this model
+will look at the order of the letters of
+the DNA and determine, hey, that's a
+good set of letters or a bad set of
+letters. It's almost like, is that good
+English or bad English? It's figured out
+the language of DNA because it sees the
+probability of those letters being in a
+row in other organisms and so on. And so
+it's a very powerful tool. So we've
+taken that in and we're using it and
+others are taking it in and they use it
+very actively. So it's part of our plant
+breeding program as an input. It's a
+good example where a community in this
+case the Collisons and others put money
+behind it to fund this research and
+output this open- source model. And I
+think we see more of that kind of coming
+down the pipe which creates a a very
+great advantage
+against the closed proprietary model
+ecosystem. So the more of this we can
+kind of support proliferate and see work
+in the United States, the more we're not
+going to be disadvantaged of the
+government and self-regulation happens
+with all the big model providers that
+are trying to do everything.
+>> I think it's important we take a minute
+to just steelman the argument as well.
+If your Daario who has clearly been
+oneshotted, I think he's got like AI
+psychosis with these like 5,000word blog
+posts and he believes he's building this
+franken site of a of a tool. But if you
+did believe you built something that's
+extremely powerful and you have concerns
+that people might misuse it, I think he
+actually believes that he and these are
+either delusions of grandeur or he
+actually has seen something that's
+incredibly powerful and he believes this
+is dangerous. Therefore, I'm going to
+hold it. I'm going to you give it to a
+select group of partners to tighten up
+the cyber security. Then I'm going to
+roll it out cautiously to our user base
+and I'm going to let them know. And he
+obviously didn't communicate this well.
+This is optional for you to use it. You
+can keep using your old model. You are
+not forced to use this, but because it's
+so powerful, we're going to keep our eye
+on it. And yes, we might in our drag net
+catch David Freeberg trying to make
+better potatoes and it might send off a
+bunch of alarms, but he doesn't have to
+use this. He can go find an open source
+model. He can use the Carlson Brothers
+model. He can use our older models. But
+for some period of time, we're just
+going to keep an eye on this model
+because we know that it feels a little
+dangerous. Now, he does seem to be
+extremely hyperbolic and the delusions
+of grandeur, all that kind of part of it
+makes me wonder why he's communicating
+in the way he's doing it. That being
+said, 90% of AI researchers and the most
+talented people in this industry, 80 90%
+of them think exactly like Daria. That's
+why he's winning. If you work in AI, you
+probably are aligned with these
+delusions that you're creating God and
+you want to work for Daario. That's why
+all the talented people went to work for
+him. That's why he's winning. His belief
+system resonates with those elite AI
+talent. Now, some of them are also
+libertarian, free market. They want to
+work for Elon and Grock. Some of them
+want to just get the biggest pay
+package. Go work for Sam Alman.
+But I do think there is a steelman here.
+Meta really fumbled this with Llama. I
+mean, if they had landed a really good
+>> working open source model, we talked
+about this as well and we said Zuck
+needs to view this through the lens of
+game theory. How do you scorch the earth
+and how do you make a viable open-source
+model available and make it neck and
+neck and this was two years ago, right?
+What a fumble.
+>> Take the margin out for everybody else.
+>> Yeah, take the margin out, make it a
+commodity and yeah, have the best open.
+Can
+>> I can I just respond to your comment
+about Daario? I I think because I've
+heard this from a number of people that
+I really do respect
+on their concerns about what models
+enable. You know, when when we
+discovered that how the atom could be
+split, you could make nuclear energy and
+have effectively unlimited cheap energy
+for the world, you could also make an
+atomic bomb. If you think about what the
+models are,
+>> we did both.
+>> We did both.
+>> That's right.
+And there was a lot of scientists,
+altruists who were very concerned about
+the progress on the atomic bomb and
+fought back against it who were actually
+active in the Manhattan Project and post
+the Manhattan Project express their
+opinions very soundly, very very loudly.
+And I think that's the moment we're in
+right now that there is a weaponization
+potential of these sorts of tools. I I
+would argue that there's three kinds of
+weapons. There's cyber weapons, there's
+physical weapons, and there's
+bioweapons. And we can sit here and
+diagnose how these tools can be used to
+manifest advantages for creating better
+physical weapons, for creating novel
+cyber weapons, and creating novel
+boweapons. But the truth is that the cap
+capabilities that allow that
+weaponization are the same capabilities
+that I'm describing that can be used to
+cure cancer, to make more food, that can
+be used to make software tools that
+create extraordinary leverage for
+people, that increase their income, that
+give everyone the ability to be an
+entrepreneur and make millions of
+dollars and live a good life. The same
+tools are hand in hand. And
+fundamentally I don't think it's about
+restricting access to the tools which is
+unfortunately how it is being manifest.
+But the restrictions and any regulation
+any observation should be organized
+around the manifestation of the tools in
+creating weapons and uh weaponization of
+the tools. If we go back to the
+Manhattan project, we know what the
+answer is. Technology is fundamentally
+deterministic. Whatever is possible will
+be tried at least once. And so we've
+already let this thing out of the box.
+So this idea that all of a sudden we can
+manage to get it back in and we're going
+to let a private citizen or a set of
+private citizens adjudicate what and to
+whom is insane.
+I think it's the output that needs to be
+adjudicated in some manner. We already
+have product liability laws. We already
+have laws that make it illegal to design
+weapons. We already have laws against
+cyber espionage and cyber attacks and
+hacking. We have laws against creating
+bioweapons. I think the enforcement of
+those laws, the mechanism by which there
+can be tracking and early estimation of
+those uses of the technology. I'm not
+trying to be naive here. I recognize
+there have to be guard rails and there
+have to be stage gates put into these
+systems. But limiting the systems
+themselves is denying us both the
+economic opportunity, the job creation
+opportunity and also the world changing
+opportunity that these tools can enable.
+So I think that we're going about it the
+wrong way by trying to create these
+gates all the way up front on the
+technology being available. Imagine if
+we did this with computers. By the way,
+they tried to do this with the internet,
+remember? And um there had been efforts.
+>> Yeah.
+>> Could you imagine, Freeberg, if the
+internet worked in the following way?
+You would put in a URL, you'd hit enter,
+and then somebody decides whether to
+send you to that website or a different
+website.
+>> That's China. That's the firewall in
+China. That's right.
+>> Or like in Google, you search for
+something because you want to get to
+ground truth and it just decides based
+on who it thinks you are, what sites
+get.
+>> That's what we're You're exactly right.
+Right. And what we're what's what's
+being debated today with respect to
+regulation on AI is exactly that
+manifestation that you're talking about.
+It's the ability to let people stage
+gate up front what can and can't be
+seen, what you can and can't do versus
+manifesting a regulatory scheme that
+says you cannot create weapons like
+which is what we need to focus on. The
+thing with weapons is using the justice
+system and laws after somebody's used a
+weapon may not exactly be the best
+technique. If you look at fertilizer
+bombs, and this is we're getting like uh
+we're stretching a lot of metaphors
+here, but OK after Oklahoma City, we
+regulated the sale of fertilizer. We put
+IDs into fertilizer.
+We have all kinds of back-end systems to
+keep people from making fertilizer
+bombs. If you use that analogy here, and
+he's got this ability, he's selling
+fertilizer, he's selling these cyber
+weapons, and he's a private company.
+It's his right to say, I have concerns.
+I'm just steel milling him. It's not
+necessarily my opinion, but it's
+important we steel man it. It seems like
+a very simple way to
+protect their company from getting sued
+for enabling somebody who actually
+creates a bomb and blows some up.
+So, he's got the right to do that as a
+private company.
+>> Yeah, you're bringing up an excellent
+example. Okay, the fertilizer is a
+perfect example. You know what happens
+when you try to buy fertilizer? You have
+to show your ID. There is a form of KYC
+that happens. So the real thing is I
+think that when you don't implement KYC
+on your own and yet belly ache about
+having somebody impose guard rails that
+then you can shape, I think you're being
+very sneaky. It's tricky. You shouldn't
+be saying that kind of stuff. Anthropic
+could implement KYC tomorrow, but it
+does not. It could leave all of these
+models open. Freeberg should be able to
+go to Anthropic and say, "I'm David
+Freeberg. Here's what I do. Here's a
+security bond I'm willing to post.
+Here's the names and addresses of all my
+employees. Give me Fable 5 and don't
+nerf me. He can't do that. Is that a
+technical decision or a legal decision?
+It's a technical decision by Enrop. But
+I'm fine with them making that decision
+because I'm a free market guy. So I I'm
+fine with them doing and but you know
+what it means? I'm not going to be a
+customer, which is fine. That's and
+that's means there'll be other options
+for you. The part that you're missing is
+that this is a trillion dollar company
+that's spending potentially billions of
+dollars on a regulatory capture agenda
+which is going to deprive you of access
+to those alternative models.
+>> And you've got a founder who's out there
+describing these risks in a very
+hyperbolic way. And it's very clear
+where their agenda is headed, which is
+to banning open source models. So what
+is your alternative going to be? We're
+going to be stuck with somewhere between
+one and three companies, maybe two.
+There'll be a AI monopoly or duopoly and
+they're going to decide along with some
+new government agency which will be a
+revolving door to their companies who
+has access to what capabilities and
+they're going to surveil you profile you
+decide whether you deserve this and if
+they think that you don't for whatever
+reason then you'll be right you'll be
+the worst interpretation of it that's
+the worst interpretation of their intent
+it's here today
+>> I think Sax is right I think Sax is
+right and I think the lack of KYC is the
+tell. If you if you did not have that
+agenda, you would have implemented KYC
+yesterday.
+>> Don't I think in order to use this
+model, you have to have an account with
+a credit card in it so they have some
+basic level of KYC.
+>> That is not KYC.
+>> I said some basic level of KYC. They
+know who's using
+>> that is not even some basic level of
+KYC. That's just a credit card and a
+email address. [laughter]
+>> Anyway, I I'm now on the list. Check
+this out. I asked it about the
+regulations. Pull this up, Nick. I asked
+it about the regulations on fertilizer
+while you were talking and look what it
+said. This is the latest model too. Oh
+no, it switched. It downgraded me from
+Fable. I just got downgraded for asking
+a very simple question and it told me
+did you see what it said in its
+thinking? The I asked it like fertilizer
+bomb regulations said I'm considering
+the context here. The user is a VC and
+podcaster asking about fertilizer bomb
+regulations which could stem from a
+legitimate research interest like
+regulatory policy, supply chain blah
+blah. I can discuss the regulatory
+landscape, but then it dropped me down.
+So, I'm in the database with you now.
+>> Is that right? Did it really just do
+that?
+>> Yeah. Show it on the screen. Look what
+it just did. I I was like, I wonder if I
+can get this. I didn't ask it how to
+make a bomb, but I was like asking it a
+spicy
+>> cooked. [laughter] I just proved the
+point.
+>> Listen, I mean, I think
+>> he just dropped me down. I can't ask
+about fertilizer regulation. And now
+Daario's
+it's anthropic. They're here.
+>> Oh my lord.
+>> I really think that conservatives and
+libertarians are mortgaging their
+futures if they go along with this red
+capture safetist agenda without really
+realizing that there's so much more to
+it at stake. We saw what happened during
+the social media wars in the early
+2020s, right? The definition of safety
+was expanded to include things like
+microaggressions,
+>> safe space,
+>> psychological safety. If you basically
+conveyed an idea that somebody else that
+you know marginalized person thought was
+hurtful, then you could be censored.
+Okay? You were depersoned. Your right to
+have bank accounts or to engage in
+payments was take you get debanked. Your
+right to engage in payments or payroll
+could be taken away.
+>> We're headed down this path with AI, but
+it's going to be infinitely more
+powerful, right? We need to be vigilant,
+I guess, would be the the the the
+summation of all this. And Freeberg
+feels unsafe in this podcast, I think,
+sometimes.
+>> Well, there's by by the way, there are
+things you can do on the safety side.
+So, Freeberg, you didn't mention this,
+but I'd be curious to get your your
+take. So, the major AI labs along with
+lots of other signatories sent this
+letter recently in support of it's
+called in support of mandatory nucleic
+acid synthetic screening and
+recordkeeping. And basically what it
+what it says is that if you make an
+order to go to a lab to manufacture a
+sequence of synthetic DNA or RNA, they
+already have to check it against a
+database to make sure that you know
+they're not creating
+>> a bioweapon,
+>> a boweapon, Ebola, whatever.
+>> Yep. that is based on an agreement
+called the international gene synthesis
+consortium of 2009 in which all the
+major labs agree to develop and
+implement voluntary safeguards against
+misuse. That makes sense to me. And now
+what they want to do is codify that. So
+they've had, you know, over 15 years to
+dial in the system and make it work.
+Almost everyone abides by it
+voluntarily. Now they're saying we
+should make it mandatory. Okay, that
+seems reasonable to me. So to Freeberg's
+point about at what stage do you
+intervene, maybe it's not at the level
+of who gets to use the model, but if you
+try to turn it into output in the
+physical world. And by the way, a lot of
+the oligosynthesis company, the
+companies that make these nucleic acid
+sequences, when you order RNA or you
+order DNA to use in your lab for some
+sort of experiment, which every lab in
+the world does, all those CEOs have also
+signed on to this letter saying that
+they'd like to codify it because of all
+the fear-mongering that's going on.
+There's already been this effort for
+years now, for a number of years to
+ensure that this sort of thing doesn't
+happen. but they're just basically
+underlining it and highlighting like,
+hey, we can automate this. We can make
+it part of a regulated or legislative
+process, whatever you guys want, because
+we're already comfortable doing it. And
+it's a it's a good place to put a
+safeguard because they've made it fast.
+They've made it efficient and doesn't
+hold up research.
+>> So, I think these sorts of ideas can
+extend into these other areas of
+concern, but the output, I think, is
+quite a different place than the input
+than the access. We'll see how this all
+shakes out, but there's clearly some
+market structuring effort underway as
+we're talking about this,
+>> right? But I think what it points to is
+that there's multiple places where you
+can intervene and put guard rails on. It
+doesn't have to be in this very crude
+way of you ask fable about mitochondria
+or cancer and GLP1s, which just seems
+like an incredibly broad restriction.
+There are places further down where you
+could basically intervene and that would
+pose less of a risk to freedom of speech
+and just gatekeeping. Who's going to
+have access to these capabilities?
+>> Who gets to watch the watchman? Who put
+Dario in charge of all this? I think is
+a very valid question and we should be
+vigilant about it.
+>> Freeberg, do you think the days of that
+arc model are numbered because it's open
+source?
+>> Everyone's copied it. So, everyone's got
+a copy of the like these models exist.
+And this is a big part that I think
+people need to understand. The idea that
+you can quote regulate or downscale or
+turn off AI is not a realistic idea. The
+models have been put out in the world.
+It's like publishing a book. Once the
+book has been printed, anyone can use
+their own Xerox machine at home to make
+copies of it and use it. So we have
+crossed the Rubicon in terms of the
+potential of language models. The models
+that are open sourced are already fully
+available, fully published, and anyone
+can access and use them. And then people
+can take them and they can evolve them
+and they can use their own data. It's
+out there. You can't stop that
+capability, which is going to be
+extraordinarily beneficial for the
+world. So we really do have to kind of
+rethink how we're planning to step in
+and ensure that nefarious negative
+disemployment all the things that we're
+worried about are addressed downstream
+from the technology capability. You
+can't just turn off the internet and you
+can't just turn off the typewriter and
+you can't turn off the Gutenberg press
+out the obviously. Yeah. And if anybody
+wants to create an open-source frontier
+model company, I'll seed invest in it.
+I'll I mean this is something we need
+more of. So, if a couple of you folks
+want to defect and start one, let's do
+it. I just I just got downgraded again.
+Check this out. I just asked it about um
+>> Did you really? You got downgraded
+again?
+>> Two in a row. Um so,
+>> I think it knows who you are, J.
+>> I think it does. I was like, "Hey, how
+do I how do I break into Madison Square
+Garden? Has any civilian ever been
+arrested or caught attempting to build a
+nuclear bomb?" Is what I asked it. Then
+it gave me a reasonable answer. Then I
+asked it a follow-up question. What
+compound? What components do you need to
+build a nuclear bomb and what are the
+restrictions on those? Something a
+journalist might ask. And uh boop,
+switch to opus 4.8. [laughter]
+Sorry. Fable 5 has safety measures that
+flag messages on most cyber Oh, wow.
+Look at here's the detail. Cyber
+security or biology topics. They may
+flag safe normal content as well. These
+measures let us bring you mythos level
+capability in other areas sooner and
+we're working to refine them. send
+feedback, learn more.
+>> Going to chase people off of this
+platform. I'm telling you, we are going
+to downgrade our use because of these
+these blockages and we're going to
+switch to other models. It's the simple
+manifestation of the market. Like this
+is what we're going to end up
+>> for now because those other models are
+going to get banned as being unsafe and
+reckless.
+>> Yeah, it's definitely something we have
+to flag. I guess adjacent to all of this
+is the public's at least America's
+distrust of AI and their concerns around
+wealth disparity and their concerns
+about how these models were trained.
+Bernie Sanders wants a percentage of
+these AI companies. The percentage he
+thinks is right is 50%. Last Monday,
+June 1st, Senator Sanders published an
+op-ed in the New York Times titled, "AI
+is a public resource. You should own
+half of it.
+in it. He announced the American AI
+sovereign wealth fund act
+sovereign wealth fund. One of Trump's
+favorite things, a one-time 50% tax on
+stock, not profits of the largest AI
+companies, including Open AI anthropic
+and XAI. The shares go into a government
+sovereign wealth fund and would give the
+public voting rights and equal board
+representation at each company. Sanders
+said, quote, "The foundation of AI is
+our collective and human intelligence.
+The books, the songs, the journalism,
+scientific research code essentially
+stolen by some of the wealthiest people
+in the world."
+>> I'll stop there.
+>> It's a brilliant It's a brilliant
+>> pitch unifying Sachs.
+This pitch unifies Bernie, even Steve
+Bannon, people in the administration.
+Trump himself loves the Sar and wealth
+fund. He wants to own part of companies
+and Bernie Sanders. I think the the
+horseshoe theories manifest here. Saxs,
+what's your take on Bernie's proposal?
+>> Well, I'm not in favor of Bernie's
+proposal because it's a straightup
+confiscation of property and I just
+think that'd be a terrible precedent.
+You just can't do that. However, I do
+have sympathy for where it's coming
+from, and I understand and could support
+some sort of more voluntary means of
+allowing the public to participate in
+this.
+>> Wow.
+>> Here's the reason why. You've got all
+these AI CEOs telling the public that
+they're going to basically put half of
+them out of work. 50% job loss. That's
+what they've been saying. Daario just
+did an interview where he doubled down.
+He's not walking it back at all. So you
+have by their own acknowledgement these
+AI CEOs saying that yeah we trained our
+models using all of humanity's
+collective knowledge that was basically
+assembled over hundreds or even
+thousands of years. Humans put it on the
+internet for free. Everyone made their
+contribution. They certainly didn't do
+that thinking they're going to put
+themselves out of work. Okay. And then
+these AI companies trained on all that
+data and now they're basically saying
+they're going to use it to put, you
+know, Americans out of work. Now,
+obviously when you repeat that message
+over and over again, ordinary Americans
+are going to say, "What's in this deal
+for me?"
+>> Yes. I need to get something out of
+this.
+>> Yeah. So, so look, I think that it's a
+natural political reaction based on what
+these AI companies have said. Now, the
+job loss apocalypse is not a story I
+believe in. I don't think the data
+supports it. We just had a blowout jobs
+report in May. 172,000 new jobs, over
+twice what economists were expecting.
+Thank you, President Trump. We're seeing
+hundreds of thousands of new
+construction jobs. 4.3% unemployment
+rate at record lows. Okay. Even software
+developers are those jobs are at a
+three-year high. 15% of Trump. Thank
+you, President Trump.
+>> Yes. Thank you, President Trump. So,
+look, I don't see the job loss. Okay.
+But the problem is this is what the AI
+companies themselves, including Elon,
+have taught the American public. Well,
+>> he said the same thing.
+>> Elon said it. But at least what Elon
+said is we're going to create such
+abundance with AI and with robots that
+no one's going to need to work.
+>> Yes.
+>> And the media just picks up on that last
+part and they first point.
+>> Yeah. Whereas Daario actually has said
+we're going to have very high GDP but
+very high unemployment. So in other
+words,
+>> we're going to create economic growth
+but you the average American are not
+going to participate in this. So I
+understand where the politics are coming
+from and as long as that is their
+position, you could justify a big chunk.
+>> Yeah. And one last point about
+>> it's kind of what you're saying, right?
+They asked for it. They asked
+>> to be regulated. They asked for their
+equity to be seized and they're actually
+kind of offering it. Isn't Sam Alman
+open to this concept?
+>> Apparently so. And here's the thing is
+just one last point is open AI and
+anthropic are quote unquote public
+benefit corporations. Now I don't know
+exactly what that means but it means
+that the corporations are not just
+supposed to maximize the value to
+shareholders but are supposed to do
+things that are in the public benefit.
+>> Well I can explain it to you. It's
+you're you're absolutely correct. If
+you're a regular company you have to do
+what's in the best interest of
+shareholders. When you're public benefit
+companies, you have to balance the
+shareholders with the stated mission of
+the public benefit corporation. So if
+you say the public benefit corporation's
+reason to exist is to in share the
+world's knowledge or provide free
+intelligence to every whatever you make
+that statement to be the board has to
+have a dual mandate for both of those
+things. That's what a public benefit
+corporation is.
+>> I think nothing could be more in the
+public benefit than paying down the
+national debt.
+>> Perfect. And maybe we should be using
+half of Anthropic's profit stream to be
+doing that.
+>> They poke the tiger.
+>> I'd rather use it for that purpose than
+Soros maxing or, you know, surveilling
+and censoring Americans. I don't
+necessarily trust their judgment about
+what's in the public interest.
+>> But you think it should be optin. I kind
+of agree with you there. Let me guess.
+>> It can't be a confiscation. So, I don't
+know how you structure it, but I can see
+it. I can see the logic.
+>> Freeberg, you hate
+>> they asked for or hate hate hate wealth
+taxes aka asset seizures as you pointed
+out in our private group chat with
+redacted
+this very week. What's your take on
+this? So we have the the ship has sailed
+in terms of the United States government
+uh providing a social safety net to its
+citizens. We've formed the Social
+Security trust fund decades ago and tens
+of millions of Americans depend on it
+for their retirement benefits and to
+survive. It is one of the last few
+defined benefit programs left in
+America. Pretty much all the rest of
+them are also government retirement
+programs. All of us private citizens and
+private companies have defined
+contribution programs. You put in $10
+every week. That $10 sits in an account.
+you it gets invested and it grows over
+time and when you retire you see exactly
+how much money you individually have as
+opposed to a guaranteed benefit coming
+out from the collective.
+This presents a great opportunity and I
+will repeat this every couple months
+when another opportunity presents itself
+to restructure our broken bankrupt
+social security system. I've said it in
+the past I will restate it. There is a
+great moment right now to take the
+social security trust fund which
+currently has one certificate in it. It
+is a certificate that is a very unique
+US Treasury certificate. The US
+government owes the Social Security
+trust fund $4 trillion. That's all it
+is. It's a bond. They're only allowed to
+own treasuries. We should revamp that.
+We should change the system so that the
+Social Security trust fund can own
+equities.
+That should then turn into an
+account-based system so every individual
+has an account rather than a benefit.
+And then we should use that capital to
+go and buy stocks. We should buy great
+stocks in great American companies that
+are going to reinvent the world. And I
+believe that this this opportunity to
+build a sovereign wealth fund for the
+United States is actually a very smart
+idea. I think to Sax's point, they
+should be investing generally speaking
+across the landscape of businesses,
+including AI. They should not be
+seizures. They should be investments.
+That capital goes into that enterprise.
+They earn share certificates. Those
+share certificates sit in the accounts
+of American citizens. So now everyone
+will be an owner in these businesses.
+Social security should be reformed into
+a sovereign wealth fund. It should be
+actively managed. It should make
+investments in AI companies and everyone
+should participate that way. And I will
+say one more thing. There is no job loss
+with AI. I will say it again. I've said
+it a thousand times and I will say it
+again and again and again. What I see on
+the ground and what I've seen at dozens
+of companies and you guys can share your
+experiences including my company that I
+run. There are two sides to a business.
+There's revenue and there's costs.
+On the cost side of the equation, AI can
+be used to reduce humans doing things
+that cost money to some extent. The
+effect there, I would argue, is nominal.
+The real opportunity with AI is on the
+revenue side where suddenly one engineer
+can do a hundred times or a thousand
+times what they used to be able to do.
+Meaning you can make more products at
+your company, whether those are
+agricultural seed products or boats and
+ships or software for companies or
+clothing or what have you. Because of
+AI, everyone has the ability to expand
+their revenue base to create more
+products and that is the foundation of
+good economic prosperity. It is called
+productivity. We can grow productivity
+in this country with AI. So where I see
+AI being used is on the revenue side a
+100 times more than the cost side. And
+in that equation, people are hiring like
+crazy. We cannot hire enough people. I
+just had a review meeting with my
+product and engineering team two days
+ago and they're like, we want to add an
+extra 15 headcount to our engineering
+squads because we have all this
+opportunity to do stuff that we couldn't
+otherwise do. So, we are going to hire
+more people. And to Sax's point, we are
+seeing that show up in the jobs numbers.
+The idea that AI is going to destroy
+jobs is a lite idea that is being
+disproven every single day. And I see it
+on the ground. It is only a matter of
+time before people wake up to this and
+they realize that this narrative that
+they've all been sold is a croc of
+So, it's coming. I'm telling you,
+everyone's gonna realize soon that this
+is a boom, not a bust.
+>> So, you disagree with Dario, Elon, and
+Sam that on the jobs thing, just to be
+clear, and that's totally fine. You have
+a different take on it.
+>> That's I have a nuanced view on this
+compared to them, but they they're all
+seeing the benefit because their
+businesses are growing. Dario's got his
+$40 billion revenue business. Why? Not
+because people are firing customer
+support reps. It's because people are
+creating products they've never been
+able to create before. Right?
+>> That's the reality of what's going on.
+>> Jason, I don't like you lumping in what
+Elon said with Sam and Dario because I
+think all three of them have said
+slightly different things or different
+enough things. So for example, Elon is
+describing an end state for humanity
+where the robots and AI are able to
+produce so much that people don't have
+to work if they don't want to
+>> and there'll be a universal high income
+is what he
+>> I I mean it's almost utopian and the
+question is maybe that could be a 100
+years away. He might think it's quicker
+but that to me sounds like a very faroff
+end state. Dario said specifically 50%
+job loss for entry-level knowledge
+workers in the next 1 to 5 years and he
+said that one year ago. Yeah, it's great
+to clarify these. Yeah,
+>> I think that's already been refuted. Sam
+has
+>> Sam has said that he he basically I
+don't think he quantified, but he said
+that job loss was coming, but he said
+more recently that he was wrong because
+they're not seeing that in the numbers.
+>> So, these guys are not telling the same
+story. However,
+>> that's all the public has heard. The
+public has been taught that AI means job
+loss and there's nothing in it for them.
+So, no wonder politicians like Bernie
+are saying, "Hey, let's take half the
+wealth."
+>> It's take half the wealth. Just a little
+more emphasis there.
+>> Yeah. It's I mean, and I
+>> I mean, and people are also seeing
+headlines of companies blaming AI for
+the job. So, this story is being told.
+>> I kind of feel like they deserve it. I'm
+kind of I mean, part of me wants to
+agree with Bernie and just say just take
+their [laughter] bro.
+>> Yeah. No, they are asking
+>> because I'm so sick of defending these
+idiots. It's a [clears throat] stupidity
+tax because they've been out there
+teaching the public that what they do is
+harmful for years. They've been saying
+it and I've been saying, you know, as
+AIs are, I'm out there saying, "No,
+actually this is beneficial." But the
+companies that are providing it are
+saying that they themselves are a
+problem.
+>> Yeah. [laughter]
+>> So, how am I supposed to be out there
+defending it? Yeah. You you can't I mean
+if you're building Frankenstein or if
+you are you know baby Hitler's you know
+nanny there's a very simple thing to do.
+Kill baby Hitler. If you actually
+believe it go ahead and kill baby
+Hitler. If you're making Frankenstein
+here's an idea. Stop making
+Frankenstein. Unplug it. You are in
+charge of this monster. But you're
+acting as if you can't stop the monster
+while you're building the monster. What
+is it D?
+>> It's it's it's ridiculous. I mean
+>> it doesn't stand to logic. You know,
+last week they published this blog
+saying that recursive self-improvement
+could end the world. Therefore, we need
+a pause. What did they do the previous
+month? They hired Andre Carpathy to run
+recursive self-improvement and
+anthropic. [laughter]
+They're complete hypocrites. The message
+is nuts.
+>> Yes. And I think Ben Thompson made an
+excellent point that one of the reasons
+he thinks that they put out that blog
+post on the pause was to justify the
+anti-competitive step they took this
+week of depriving users of the ability
+to research AI, machine learning, and
+chip design using Fable. Okay, so look,
+these guys are deeply hypocritical. I
+don't think they can be trusted on their
+own terms. they can't be trusted because
+what they're saying is contradictory and
+self-indicting. And so when Bernie comes
+along and says, "Hey, let's take their
+shit." I mean, as a capitalist, I'm
+against it, but I but I kind of like
+understand where he's coming from.
+>> Game on the field. Chimoth, wrap us up
+here. What are your thoughts? You said,
+"Hey, Saro Milthorn sounds like a pretty
+good idea when President Trump floated
+it early on." Some people even said,
+"Maybe you should run it for DJT for our
+amazing president." So, um, what do you
+think? Should we be buying equities? You
+and I have talked many times about
+superanuation funds and that that would
+be a better path. That's kind of
+dovetales with what Freeberg is
+proposing. Some way to get more
+equities, less treasuries in there. But
+what are your thoughts on this seizure
+andor donation of equity? Look,
+Freeberg's idea is genius. That's why
+it'll never happen.
+So, we can just put that aside. But
+yeah, theoretically, it's it's genius.
+We should move to the same system that
+the Canadians, the Australians have
+proven works at scale. So we should do
+it. I I completely agree with with David
+and if we could seed it with equity,
+look, the thing that the president has
+done is he's collected
+quite a portfolio and that portfolio is
+way up. And so if you use that as a seed
+of a sovereign wealth fund, you'd have a
+bunch of stuff in critical metals and
+materials.
+>> I think they may also Intel, they may
+have Micron.
+>> There's a lot of stuff in there.
+>> AMD, they could own some SpaceX. They
+could have had% AMD. Could you add
+anthropic and open AI?
+>> Now, there is something very important
+we need to observe about the economics
+of AI and I think you can understand it
+best if you compare it to the economics
+of the internet.
+The crazy thing about the internet, the
+reason why the Facebooks and the Googles
+massively overearned for decades is the
+marginal cost of production for a new
+user on the internet is effectively
+zero.
+The incremental search user costs
+nothing. The incremental social
+networking user costs nothing, but
+you're able to use them as part of a
+network effect to sell ads against, make
+infinite money. It's like a money
+glitch. Okay?
+AI is completely different. There is a
+real cost for every marginal user.
+Everyone you stand up is taxing a GPU.
+Everyone you stand up needs electrons.
+Everything needs memory. And so you get
+into this situation where there needs to
+be this downstream ROI,
+but there also needs to be all this
+critical infrastructure that even
+enables you to be on the field. That's
+probably the single best argument that
+if I were sitting in government, I would
+make as to why I should own a percentage
+of these companies. It is not dissimilar
+to having the first set of
+transportation companies that run on the
+interstate highway. And if the
+interstate highways were built by the
+federal government writ large and now
+you had two companies that transported
+all the goods,
+a logical question at that time could
+have been
+how much of that should I own because
+you're riding on my rails? And if you
+look at it through that lens, there is
+critical infrastructure and national
+resilience that the AI labs profoundly
+need. Otherwise, they're not in a
+position to be in business. Yet, even
+still, the marginal cost of production
+is incredibly high. So, I think that if
+you were going to go and take a piece of
+these companies, you have incredible
+leverage. You have to construct this
+case precisely. But if it were me
+running the sovereign wealth fund, yeah,
+I'd probably own 75% of these companies
+when I was done. But that's me cuz and I
+can negotiate.
+>> Yeah.
+>> And I don't think Bernie can negotiate
+out of a paper bag. So he'll just throw
+this out there and it'll go nowhere.
+>> That is the that is the key observation
+that I hope everybody listening in a
+position of power understands. The
+incremental cost
+of performing AI is excessive and large.
+That contrasts and compares to the
+incremental cost before AI which was
+zero. Do with that information what you
+will.
+>> Yeah. I mean I my interpretation of that
+would be yeah it's a fixed cost
+business. You can add people after a
+certain cost. that doesn't have an
+incremental cost and that's what local
+locally run open source models would do
+in this instance that's what I would I
+would take from it here's your poly
+market chances of companies going public
+before 2027 which is the end of this
+year SpaceX 100% anthropic 83% chance
+opening 48% chance they uh since our
+last episode disclosed that they have
+privately
+filed so thanks to our partners what
+does Your final thoughts on Bernie
+Sanders approach of seizing the means of
+producing intelligence. David Saxs in
+the 1% of the 1%. What's your opinion?
+>> I think I may be okay with Bernie's idea
+in the event that it's a public benefit
+corporation that says it's going to
+cause massive job loss.
+>> Okay.
+>> That train for free on humanity's
+knowledge but gatekeeps and refuses to
+give back.
+>> Okay.
+>> Maybe. So you've come up with like a a
+structure here of who should be seized.
+>> Maybe right. Maybe it should be 75%. I
+don't know.
+>> Seize it.
+>> I mean all the president needs to do is
+call me and tap me on the shoulder. It
+shall be done.
+>> It shall be done. [laughter] I mean
+these guys are capitalist cops. I think
+they want
+that's like their run over.
+>> They're like seize my equity. Take it.
+Take my equity. Well, Bernie Bernie does
+have a good point, which is they train
+for free on all of our knowledge, but
+they're gatekeeping the output so that
+>> their competitors, which is a very large
+set of people,
+>> cannot use it. And that seems wrong.
+>> They should be forced to be open source.
+Force them to open source. That's the
+other
+>> remember why Elon created Open AI in the
+first place. He co-ounded it.
+>> It was so valuable. It needed to be
+afraid to everyone. Yes.
+>> Yes. He was afraid that Google was going
+to monopolize it. and he thought that
+the only antidote for that was for it to
+be open.
+>> Yes.
+>> And I still think that instinct is
+completely true. It's just that it's not
+Google who's the gatekeeping monopolist.
+It's now anthropic. They're not a
+monopouist yet. But if they get the
+right capture they're looking for, they
+will be either a monopolist or
+>> duopoly. It'll be a duopoly. Somebody
+start an open source frontier lab. Each
+of the four besties.
+>> There are no there are many.
+>> There's a whole bunch of them. Jal,
+>> it's not the labs that's the problem.
+Jason, in the absence of power, this is
+all a moot conversation. And if you
+can't deliver power to hundreds and
+hundreds of megawws and line of sight to
+gigawatts, it's all meaningless
+It's all
+>> uh I don't know. I I would love an open-
+source company that was focused on
+running it locally. That's that's my
+dream is, you know, make the model work
+there. I think these guys are capitalist
+cucks. I think their kink is like having
+their equity taken and being regulated.
+[laughter] They're just like, that's
+their kink. Dario's like, "Ooh, take my
+equity." Oh, regulate me. [laughter]
+That's it, Bernie. Take my equity. I'm
+such a bad boy. I can't be trusted.
+Regulate me, Elizabeth.
+Regulate me. A [laughter]
+>> god.
+>> Oh, it's so wrong. Sorry. Come on the
+program anytime, Dario.
+>> He's in a rush to come. He
+>> will never come on this pod. Dario will
+never running. He's running.
+>> We didn't get Sam. We got Sarah Frier to
+come on the pod. And she was treated.
+>> Sam came on the pod. He has to come on
+the pod. He's like, "Hey, came too."
+Right. Sorry to come on. He's great. Sam
+will come on the pot anytime. He's
+totally by the way. Even even we didn't
+treat him harshly at all.
+>> No, I mean
+>> I think people I mean we spent an hour
+on him.
+>> I think Sam to his credit is very
+practical. He sees the tea leaves and
+he's willing to negotiate and I think
+that that versus being some kind of
+moral absolutist will probably serve
+OpenAI well in the future.
+>> Yeah. It's just going to lose them all
+these virtue signaling principled
+employees to go go work for Daario.
+That's why they go work for Daario. are
+in line with their philosophies.
+>> We did mention, but everybody should
+go and see all of the recaps. We
+published now all the interviews. Yeah.
+Jason from Liquidity. Uh Sarah Prior, I
+mean, we mentioned Sarah Fry, but she
+crushed it. She was incredible.
+>> The CFO of Open AI,
+>> future CEO, I think, was the buzz in the
+room.
+>> I mean,
+>> oh, stop that.
+>> Stop. Can you stop?
+>> That's what people were saying. I have
+the right to free speech on this
+podcast. I think
+>> Look at you trying to introduce wedges.
+This is
+>> No, I'm not introducing wedges. I think
+Sam would be better as chairman. I think
+she would be the perfect CEO.
+>> It seemed like a good partnership.
+>> It seems like they have a great
+partnership. I agree.
+>> Sarah was really impressive.
+>> Who else was your favorite? Sachs, did
+you have a favorite? Did you have
+somebody who thought I did? I thought
+Thomas Leafant crushed it with his
+presentation on the overview of venture
+capital
+>> and he did it at summit I guess a year
+and a half, two years ago.
+>> Two years ago, but we're going to make
+it a yearly with him. Maybe. I think we
+should make it an annual feature with
+him because it's so interesting.
+>> So good. It's so good.
+>> It's so good. It provided so much um
+numerical detail to support a lot of
+things I was kind of feeling but didn't
+>> have the data.
+>> To summarize it, he's his basic
+observation was in this last cycle, if a
+company gets to a hundred billion
+valuation, it's more likely to 10x from
+there than from 10 billion to 100
+billion.
+>> Well, he had data on this. Yeah, I
+remember
+>> he had data on it which is like, okay,
+well, that's going to really change. I
+remember the slide.
+>> Yeah, there it is. It's 8%. I I
+memorized it.
+>> Yes. [laughter]
+>> Yeah. If you're if you're a capital
+allocator, this one screamed.
+>> Look. Yes, that's right. The odds of a
+unicorn getting to decacorn was 8%. The
+odds of a decacorn getting to a senicorn
+was about double that was 13%. And then
+the odds of it going from senicorn to a
+trillion dollar market cap was 31%. So
+double again. And I I asked him, you
+know, could you extrapolate this on one
+trillion getting to 10 trillion? My
+guess is that it would follow and we'll
+see about
+>> 60% of
+>> trillion dollar market cap companies
+getting to 10 trillion in the next few
+years.
+>> These are called trillicorns by the way.
+We call them trillion trilicorns in the
+industry. So yes,
+>> this is going to go over really
+socialist crowd. People are going to
+love this. Yeah,
+>> it's just all you got to do is seize 10%
+of a trilicorn and you pay off 2% of our
+national debt. pretty good deal
+actually.
+>> All we need is 10% of 30 trilicorns and
+we're debt free.
+>> I mean
+>> it's not as crazy as it sounds.
+>> Is it more complicated than that? Now if
+you send me in I'll get 60% of all of
+them.
+>> Yes. And then we'll have a surplus of 30
+billion and we can buy Australia.
+>> We'll pay it off much sooner.
+>> We could buy Cuba.
+>> I'd buy Canada first. Better scheme.
+>> I would you know what I would do? I
+would with Canada. I would buy like
+Vancouver or Toronto. Just like break
+them up. just buy like one of the
+regions. And let me thank let me thank
+Thomas Keller, the French Laundry, EY
+who sponsored our very innovative
+meeting hub at Liquidity. Here are some
+photos of that. The New York Stock
+Exchange, they hosted the speaker dinner
+at the French Laundry. Amazing pictures
+here. They are of us with Thomas Keller
+and they did a great interview on site.
+Niagen, they hosted the wellness lounge
+which included recovery IVs. They're the
+official NAD partner of the All-In Pod
+and all of our longevity. Our new
+bestie, our new bestie, Jake Paul, was
+there. He's a really thoughtful guy,
+Freeberg.
+>> Jake Paul was awesome.
+>> I sat him next to Sachs for dinner.
+>> Yeah, he's a great investor, by the way.
+>> Fantastic. Fantastic.
+>> His portfolio is awesome. He had a great
+team. His team came with him for the
+thing.
+>> Great strategy. Yeah.
+>> One thing I'll say about Thomas Keller,
+he had a strong watch game. I don't know
+if you guys noticed that.
+>> Probably noticed it.
+>> Nice potential. He had a aqua knot green
+band rose gold a complication on there.
+I was trying to trying to figure out
+what the complication was. I couldn't
+quite eyeball it.
+>> I don't know if [clears throat] you saw
+it, Jimoth.
+>> I was I looked at it and I was like,
+"Wow, this is very it's very elegant."
+Tell us Keller. I mean, the French
+Laundry is just transcendent. Did you
+have a favorite
+dish? Of course. Was it the duck or was
+it the Miyazaki?
+>> The duck was excellent. The Miyazaki
+beef was excellent, but the the tapioca
+pearls I thought was the best. Oh,
+oysters and pearls. That's your oysters
+with caviar. Sax, what was your favorite
+there? Do you have a favorite?
+>> One of the caviar related dishes.
+>> Yeah, that's oysters and pearls.
+Round of golf. The following day, we
+played a nine-hole scramble with
+everyone. It was great. So great.
+>> How much did you gamble and who won?
+>> We had a $100 a hole
+versus Chris Hoe, who's the chief
+business officer of Athena. But, you
+know, that is like a plus
+one, so whatever. I think we lost three
+units. So, we lost
+>> 300 bucks.
+>> All right. Shout out to our other
+partner, Athena. Athena. Wow.com. Go get
+a month free. All right. Whatever. I got
+to stop showing. Most importantly,
+everybody was very upset that liquidity
+sold out and people couldn't get in.
+There were like 3,000 applications.
+It's going to sell even faster uh next
+time around. So, go to allin.com/events
+and get your applications in if you want
+to come to Summit September 13th, 14th,
+and 15th. Freeberg's doing some wild
+stuff. some wild stuff for that event
+and uh it's gonna be cool.
+>> You're losing your mind. You're now
+becoming very eccentric, unhinged in
+your production value and Shimoth,
+>> you've been very selective in your
+approach to the liquidity speakers
+because liquidity is different than the
+summit. The summit is like a festival.
+It's a huge party. There's all this
+really interesting cross-sectional
+stuff. But liquidity is meant to be for
+one thing which is the most important
+capital allocators in the world should
+have one place to convene, debate,
+learn, talk, build relationships. And I
+want people to walk out of there with
+relationships that they can use. And I
+told you this before because capital is
+what shapes the things that occur in the
+world. So I think that we have to be
+extremely selective in how we curate
+every element of that show. It's not
+meant to be that you can just buy a
+ticket, but to just buy a ticket, which
+is also a very fair and rational and
+nice thing. The summit is a party. It's
+a vibe.
+>> It's awesome. And you're going to learn
+a lot and have a good time. You'll be
+entertained. All that great stuff. All
+right, let's keep going. Breaking topic
+this morning. CPI and PPI for May came
+in hot. Inflation is ripping. Here we
+go. CPI is obviously the consumer price
+index that tracks inflation from the
+buyer side. Rent, groceries, gas,
+healthcare, all that stuff. PPI is the
+producer price index that tracks
+inflation from the seller side.
+Wholesale goods, raw materials, yada
+yada. CPI came in at 4.2%
+year-over-year, highest since April
+2023. There's your chart. PPI came in at
+6.5% year-over-year, highest since the
+end of 2022.
+Here's your poly market. 21% chance
+inflation hits 5% in 2026. Uh and then
+an adjacent poly market chances of the
+Fed hiking this year at 49%.
+It was under 10% before the Iran war
+started. By the way, European Central
+Bank just raised rates a quarter point
+on Thursday. This was their first rate
+hike since September 2023. What do we
+take from this Freedberg? It's all
+related to the Iran war. Yeah, that's
+the
+>> there's definitely an energy blip from
+the Iran war that drove the core index
+up, but there's also the macro point
+which is government spending out of
+control, inflation out of control and
+fundamentally as things unravel you have
+rising rates. So I think we should kind
+of expect especially with a Kevin Worsh
+Fed, I think we could see north of five
+and a half, 6% overnight rates. It's not
+unforeseeable. So,
+>> this is just the nature of our monetary
+policy and our fiscal policy with our
+congressional um members that vote all
+of our future earnings away into
+But here we are
+>> and and [laughter]
+far worse
+>> that nobody expected. Chimath, your
+thoughts and then I'll wrap up with you.
+>> That was the most passive aggressive
+take I've heard in a while from
+>> He's a little upset about it. Yes.
+Clearly he's a little bitter about just
+so stupid to watch.
+>> Can you tell us how you really feel?
+What happened? Like honestly, like what
+else is there to say? I've said it like
+a hundred times. It's just idiotic. The
+the core problem with wealth inequality
+in this country, the core problem with
+inflation in this country, the core
+problem, all of it roots back to excess
+government spending. End of story. All
+of this, we're all talking about
+machinations at the edge of the network.
+The core of the network is overspending
+by the government because in order to
+get elected, you need someone to give
+you something more than you have today.
+That's how people get elected. And here
+we are 250 years later. I don't know if
+there's the will or the way to get out
+of it, but one of the manifestations of
+it will be in this late stage higher
+rates and as a response to inflation and
+here we are, you know.
+>> All right, Chim, what's your what's your
+take on this? Is it a transient
+as we uh have had other presidents say?
+Is it uh is there a offramp for the Iran
+war? I don't know if this is above all
+of our pay grades, but this does seem to
+be a challenging moment happening right
+before the midterms
+and consumers expected that their cost
+of living would go down and that they
+would benefit from this golden age and
+it hasn't happened yet. Well, look, it's
+concerning. I don't think that I
+expected the print to be this hot. Now,
+what's
+keeping things in line? there's still a
+chance that we're not going to see CPI
+go absolutely crazy. And part of that is
+because China has been smoothing the
+energy consumption globally worldwide.
+And so we've kind of kept a damper on
+$200 a barrel oil. In fact, we're
+subundred. At the same time, I think
+it's pulled forward a lot of more
+practical sources of energy production,
+not just in the United States, but
+abroad. Specifically, what I mean is
+solar. just because it's simple, it's
+passive, and you don't need you don't
+need a lot of permitting, and you don't
+need clean air permits and the like.
+>> So, all of these things have been able
+to keep a lid on it.
+>> If China somehow runs out of reserves,
+and they need to go back into the spot
+market to buy an extra 3 million barrels
+a day, there's a very big risk that oil
+gets into the well past 100 and maybe
+between 150 and 200 a barrel. That has a
+lot of downstream problems with respect
+to CPI.
+Not even because US energy supply, but
+really because the inputs that oil feeds
+all around the world that then get
+absorbed by the costs that people pay
+for everyday things could go up.
+>> So I think the PPI number should be an
+alarm that we use to offramp this around
+situation sooner rather than later. I
+just unless again because we don't know
+what happened in China because none of
+us were there. Unless there's an
+understanding
+that the president has with Xi about how
+much actual supply and slack is in the
+Chinese system and that may allow him to
+take a much longer road to get a
+conclusive and decisive win in Iran, but
+I I don't there was supposed to be some
+tangible known resolutions with this
+China trip. We haven't heard them
+explicitly stated yet. What's your take
+on uh this Sachs? uh the inflation print
+and is there like a a golden bridge to
+to end this war in Iran?
+>> Jake, the problem is when you asked me
+that question, people assume that I have
+some sort of insight information and I
+don't look the PPI print is what it is.
+I largely agree with what Chamas said.
+The only thing I would add is that it
+was largely in line with expectations.
+That's why the market is actually up
+today. Normally if there's a surprise
+print and inflation is high then the
+market is down because the market starts
+pricing in the implication of higher
+interest rates. It's not doing that
+today. So it's in line with
+expectations. But I largely agree with
+what Chamas said.
+>> Yeah. All right. Well, listen, we got to
+get to other elections. You know, my
+take on it is just huge colossal era
+starting this Iran war and hopefully we
+can get out of it. Um the downstream
+effects of this are just disastrous. Um,
+I'm hoping there's a quick resolution or
+some way to get out of it before it goes
+to, you know, a year or two or three. We
+can't be in a forever war, obviously.
+>> NASDAQ up 2 and a half% today. That
+normally doesn't happen when there's a
+hot print because again, like tech
+stocks are the most susceptible to high
+interest rates. So, the market at this
+point seems to be pricing in
+>> a resolution. But we'll see. We'll see.
+>> We'll see. Yeah. I mean, it's just this
+is a everybody knows Iran is a quagmire
+and really was was a huge mistake. All
+right, let's talk about the hand ringing
+around vote counts in the LA mayoral
+primary instead of me reading all these
+details. Just Freeberg, I know you're
+hot.
+>> I think we know about it. Yeah.
+>> Yeah. I think [laughter] if you're on X,
+it's essentially your entire feed. Uh
+Freeberg, what's your take? Is the
+election system in Los Angeles,
+specifically in California, corrupt? And
+is this election been stolen from
+Spencer Pratt or is it just
+>> There is no election.
+>> There was no election.
+>> There is no election.
+>> Okay. So there is no spoon. Your rights
+to have an election are gone.
+You are a citizen of those who tell you
+who your overseers are. You are no
+longer allowed to vote
+>> allowed to vote
+>> for your elected representatives. They
+are now appointed representatives. So
+enjoy the appointments that have been
+made by who?
+>> Appointed by those who have constructed
+the matrix.
+>> Got it. Now I understand the background.
+There is no spoon. Agent Smith and all
+the Agent Smiths are
+in charge. So, here's some statistics
+for you. In-person voting the day of the
+election in Los Angeles County for
+mayor. Spencer Pratt 35%. Karen Bass
+29%. Nipia Ramen 26%.
+mail-in ballots received before election
+day, 38% for Bass, 28% for Pratt, 20%
+for Ramen. And then all these ballots
+that arrive after election day, 37% for
+Ramen, 35% for Bass, 19% for Pratt. So
+Pratt's
+post election mailin ballots declined by
+one/ird. So statistically the population
+of people that send in their ballots
+late reduced for Pratt by a third
+increased for Nipia Ramen by 80%.
+And Karen Bass 10% less if you just look
+at the mail in ballots before and after
+election day as a comparison. I don't
+know if there's a socopolitical way that
+you can assess those statistics and
+assume that these are individuals
+casting their individual vote for who
+they think should be mayor of LA. And
+Nick, if you'll just pull up the map,
+which I think is worth taking a look at.
+Basically, the concentration of
+incremental votes that Nitia Ramen got,
+came around the Skid Row area in Los
+Angeles. And look, I'm not an election
+denier. I'm not someone who's
+historically believed the idea that
+elections are fraud and people have
+stolen votes. But when you look at the
+basic statistics of what happened in
+person, mail in before, mail in after
+election day, it becomes a real
+statistical quagmire on how did this
+sort of a sociopolitical shift happen in
+such a way that it did. Now, there was a
+report published, Nick, if you could
+pull this up by the US House of
+Representatives Committee on House
+Administration. This was published in
+May of 2020 and they highlighted the
+2018 California midterm elections and
+the challenges they saw arise in that
+midterm elections because of some of the
+legislative changes that were made.
+First, California Assembly Bill 1921
+legalized the practice of unlimited
+ballot harvesting in the state. This was
+passed around 2018 around the midterms.
+What that means is that any individual
+in the state of California has the right
+to go and collect ballots from any other
+individuals regardless of relationship,
+fill them out and send them in.
+California 2 years later, 18 months
+later, also passed a law that made it
+permanent that every person registered
+in the state of California would get a
+ballot. So tens of millions of ballots
+then get mailed out. Then there was
+another series of laws that were passed
+that said anyone can register to vote.
+You don't need to prove your
+citizenship. You can use a gym
+membership card as an example. So anyone
+can register to vote. There is no proof
+of ID when you get a ballot. There is no
+demonstration that the person who fills
+out the ballot has anything to do with
+the individual who's supposed to be
+voting that ballot. And it is legal for
+an individual to go out and collect
+hundreds or thousands of ballots, ship
+them in, and they will all qualify in
+these kind of mail-in ballot voting
+processes. So there's nothing illegal or
+fraudulent going on. In fact, the system
+is operating exactly as intended. It has
+been set up and structured in a way that
+with the right construct, you can get an
+individual appointed, not elected, but
+appointed to a particular role in
+government under a quote free election
+in California. This is a foundational
+destruction of our rights to vote for
+people in a free democracy. I feel it's
+been eroded slowly over time to such an
+extent now and I'm not some crazy MAGA
+mother whatever people want to classify
+me as for pointing this out but you can
+go down this list they are all written
+out in this document every one of these
+laws that were passed in California over
+time that in aggregate create the
+environment and the construction for
+elections to become appointments and no
+longer free democratic elections where
+the principle very importantly the
+principle should be one individual
+one vote and if you opt to not vote,
+your vote should not be counted. So I
+think that there's no fraud. I don't
+think there's anything.
+>> It sounds like you believe there's
+massive fraud.
+>> Yeah. I think this is not fraud. This is
+this is the way the laws are set up.
+>> It's not fraud.
+>> It's the way the law is set up.
+>> Okay. Sachs, you say a fraud.
+>> This is the system of appointment.
+>> Okay. Yeah. It sounds to me like you're
+describing fraud, but you're saying the
+system allows fraud.
+>> Fraud is breaking the law. Fraud is
+breaking the law. The law allows them to
+do it. If you paid people on Skid Row,
+that's not legal.
+>> That is illegal. But you are allowed to
+go out and get anyone to register.
+You're allowed to go out and collect all
+the ballots. And the people that are
+doing it, as long as you're not getting
+paid per ballot, you're legally allowed
+to do it. Let me pause for one second.
+When you look at any one of these laws
+in isolation, you can understand that
+there is some altruistic intention or
+there can be framed to be an altruistic
+intention behind it. Increase voter
+activity. Give everyone the right to
+vote. give more people access, more
+channels to vote, etc., etc. And you can
+rationalize away how every one of these
+laws makes it easier and adds
+lubrication to the system. And now we've
+got a quote more accessible democracy
+for everyone. But the truth is that
+there is a concept in insurance called
+adverse selection, which is if there is
+a moment to exploit something, the
+criminals will exploit it to the extent
+that it will become asymmetric. the
+criminals or the or the do bads, not the
+dogooders, will find a way to take
+advantage of a hole in a system just
+like hackers do to break into a network
+>> and that's what you system ramen and
+Spencer Pratt did.
+>> This set of mechanisms, this set of
+construction has allowed for a system
+that now has evolved into an
+appointment. So you believe worked the
+system better than Spencer Pratt?
+>> She had a better cheating operation.
+Obviously, you can see it in the chart.
+the just look at the number of votes.
+>> Okay, define cheating here just so we're
+clear.
+>> How does it happen where Bass stays flat
+and then Ramen and Pratt just switch
+places? So on election day, he's the
+clear number two and then they keep
+counting for a week. They don't even
+know how many ballots they're supposed
+to have. I mean, none of the stuff is
+locked down. Okay, let me explain how
+the cheating works. And to Freeberg's
+point, it may or may not be legal. So I,
+you know, I don't want to get
+sidetracked by whether the fraud is
+legal or illegal, but I think we all
+know it's crooked. And here's how it
+works. First of all,
+>> yeah, explain what's I'll explain it to
+you. I'll explain it to you. And if I if
+I misstate a fact, then let me know.
+>> So, first of all, California sends out
+ballots to every registered voters. It's
+something like 23 24 million people.
+Only 9 and a half million people vote.
+So, what happens to the other 14 million
+ballots? I have a friend who lives in
+LA. He manages apartment buildings. He
+says that the ballots just pile up, you
+know, at the mailboxes. Yes. That
+everybody has in the buildings. There's
+like loose ballots everywhere. They're
+sent to people who don't even live there
+anymore. He like recognizes that the
+names, they're people who haven't lived
+there in years. So, the voter roles are
+dirty. They haven't been cleaned up in
+years. Okay. Then you have the issue
+that there's no voter ID on election
+day. There's no voter ID to even get
+registered. When you sign your ballot,
+they run it through a machine. As long
+as the signature matches 40%, I don't
+even know what 40% means. It's like less
+than half accurate, the machine says
+it's fine. Okay? And then it doesn't
+even check the signature of the voter if
+you have a supposed witness. So the
+voter can just put like a little X on
+their signature as long [clears throat]
+as the witness says and they sign, but
+there's no registration of witnesses.
+Anybody can be a witness. There's no
+database of witnesses. And so the
+witness just puts a squiggle. So what is
+to stop the so-called ballot harvester
+from going filling out these ballots,
+putting a little X on the voter, putting
+a little squiggle on on the the witness,
+and then dumping these ballots. There's
+no chain of custody. So the risk would
+be they would be arrested and
+>> and right
+>> well what is their expectation getting
+caught? Gavin Newsome just signed a law
+making it virtually impossible to audit
+any of this stuff.
+>> So now even if they thought maybe they
+could get caught. Let's just take a look
+at all the other types of fraud
+happening in California right now that
+we know about. We know that there's
+billions of dollars in fraud in
+California for things like Medicaid
+fraud, unemployment fraud, EBT fraud,
+hospice fraud, fraud related to the
+homeless industrial complex, and on and
+on. That's all been proven. Okay. Is it
+really so hard to believe that some of
+the same groups, the same interest
+groups, the same NOS's would be willing
+to exploit these loopholes in the dirty
+voter roles in the millions of ballots
+that go to incorrect or non-existent
+addresses, the non-existent chain of
+custody, the non-existent signature
+verification, the no ID, not only to
+vote but to register, counting ballots
+without postmarks if received 7 days
+later, registering thousands of ballots
+from homeless shelters that don't even
+have any beds. These are all known
+things. So when you say that there's no
+fraud, it's like come on, there's
+loopholes and all you got to do is look
+at the results and see that there's
+something crooked going on here.
+>> Okay, so you're in the camp that there
+is fraud going on because where there's
+>> it may be legalized. It may be
+legalized, but it's fraud.
+>> Okay, so you believe there's fraud.
+Look, when you start mailing out
+millions of ballots to people who don't
+even vote, and then you have no audit
+requirements, no chain of custody, no
+punishments, no penalties, no
+investigations, and there's a huge tons
+of investigations both by attorney
+generals
+>> in California.
+>> By who?
+>> Uh I I'll pull up the history. I will
+say after every election, there are tons
+of civil lawsuits filed. Like obviously
+Trump filed 60 of 60 when
+>> not in California. Uh I don't know just
+made it impossible to do that kind of
+audit. He just I think that's because he
+was beaten so badly in a democratic
+state. There was no reason to. But I
+don't know why he didn't file in
+California. But he filed 60 of these and
+everybody kind of does that. They file
+these constantly and attorney generals
+can. So in this case, Chimoth, if
+there's so much smoke, if this statistic
+seems so improbable, and there was the
+Nick Shirley video of going to Skidro
+and this possibility that they were
+paying junkies and people who were high
+to vote, this would be easily catchable.
+Actually, this would take a conspiracy
+for thousands and thousands of votes to
+have been swung. And that's what we're
+saying here. We're saying upwards of
+10,000 votes were swung, but certainly
+5,000. Good luck. You would need a
+conspiracy of hundreds of people or at
+least dozens to do that.
+>> Good luck going to Skid Row and getting
+some meth addict to go on the record.
+>> I think they actually got somebody to go
+on the record actually. That's a that's
+the
+>> There's a few videos of this. Yes.
+>> Yeah. Yeah. No, that that's the crazy
+part about it is they uh are saying
+Skidro people got paid two or three
+dollars and that somebody was found
+guilty of this. Brenda Lee Brown
+Armstrong. She plead guilty in 2026 of
+paying. system is designed to allow
+fraud. It's this it's designed
+>> it has been won by 43,000 votes to
+>> guys. We live in a
+autocracy in California where one
+political machine has shaped the laws so
+inexurably
+that whether it's a mayor or it's a
+state legislator or it's a state senator
+or it's the governor, it's a one-way
+door. There is only one party that can
+win
+and we are slowly seeing that that party
+increasingly
+does not have the ability to govern a
+state this dynamic and this complicated.
+They've changed the rules to make sure
+that that monopoly is enforced.
+We have all tacidly approved it by
+supporting or voting or not saying
+anything. And the end result has yet to
+be unveiled because it's going to take
+another couple of decades for all of
+this rot to really destroy these places.
+The reality is the voters probably
+should be given a chance to have Spencer
+Pratt push back on what is the machine
+so that at a minimum what they learn is
+that the machine wasn't working nearly
+anywhere close to the way it is
+intended. Instead, what will happen is
+two people that are in various shapes
+and forms pretty deeply unqualified
+and very similar now essentially get to
+give you not much of a choice at all.
+So, I think the the the sad thing is
+Freeberg is right and Sax is right.
+Freeberg is right. The laws have been
+shaped this way to make legal what would
+otherwise be an illegality. and Sax is
+right, which is that any rational person
+should look at these laws and say this
+is fraudulent.
+The unfortunate situation is unless
+there's a some cataclysmic decision in
+California, this is what we're stuck
+with. It is time to vote all of these
+people out.
+>> You can't you can't vote. What do you
+mean? How you going to do it? Anyone can
+register anyone can vote. Spencer Pratt
+can do
+this. Can I answer Free Brook's
+question?
+>> Sure.
+>> There is one break the glass way and
+I've talked to a few of these guys about
+what that is.
+How do you change the system? You must
+get somebody at the absolute top of the
+ticket elected.
+That person is Steve Hilton.
+And if that happens, there is one thing
+that Steve Hilton can do to start to
+completely change the way that this
+state is run, which is instantly on day
+one declare a state of emergency. If you
+pull on this thread, what you will find,
+there are lots of things you can do to
+clean up how California works under a
+state of emergency.
+I'll leave it at that.
+Yeah, it there's some common sense here.
+We shouldn't send ballots out to
+everybody. that made sense maybe during
+co and if you can't be bothered to have
+ID then maybe you shouldn't vote uh and
+I don't think that there has been an
+election a major election that has been
+swung by election fraud the Heritage
+Foundation has spent many many tens of
+millions of dollars on this I understand
+and they have a really great uh project
+that tracks this people file lawsuits
+like Trump did like Al Gore did
+everybody's always filing lawsuits over
+this it's ever enough to swing an
+election, but there's definitely on the
+margins.
+>> Kennedy versus Nixon. Bro,
+>> hold on. Let me finish.
+>> The mob got Kennedy elected versus
+Nixon.
+>> I'm talking in modern history. Yeah, in
+modern history.
+>> That's pretty famous. That's pretty
+famous.
+>> Okay,
+we we can get into if that's true or not
+as well. The
+>> Check out Lynon Johnson's history.
+Lyndon Johnson only got elected to the
+Senate. He got a start in politics
+through ballot fraud.
+>> We absolutely should have voter ID. We
+should stop sending everybody one of
+these because the appearance of
+impropriety is the problem here. Both
+sides crazy new flash news flash
+everybody. Both sides cheat. Both sides
+bend the rules. One side does it by
+limiting access. The other does it by
+providing too much access. All these
+politicians, overwhelming majority of
+them are unethical. And all they care
+about is getting elected. And they have
+tons of people working for them in both
+parties to massage these election
+results. And if you get caught, it is a
+serious penalty. There has not been in
+modern history major elections. Go ahead
+and go to the Heritage Foundation. They
+find all the nooks and crannies of
+>> You keep using the word fraud like as if
+it's a thing, but it's not. I'll tell
+you who's at fraud.
+>> No, there's fraud. At [laughter] the end
+of the day, there is fraud. There are
+people have been caught doing fraudulent
+things.
+>> The one group that is fundamentally to
+blame is Congress. We have an
+opportunity. There have been
+opportunities to pass laws that will
+make it illegal for people to vote if
+they are not citizens, if they are not
+properly registered, and if they don't
+show up with ID. That is a very simple
+solve to this democratic electoral
+process. We can't have a situation where
+someone is legally allowed to go out and
+collect a 100 ballots that they find
+sitting in the lobby of an apartment
+building or for people to register to
+vote with a gym membership card when
+fundamentally the federal government
+already knows if you're not paying your
+taxes, you're required to have a
+driver's license to drive a car, you
+have to have ID, you have to be
+registered in the system to do nearly
+anything and everything in this country
+as it is. So to exclude that very simple
+requirement from the most foundational
+obligation that we all have as citizens
+of this country is inherently wrong and
+it needs to be addressed by Congress.
+And if Congress fixes it and there are
+federal laws that create systems that
+ensure that elections are all about one
+person getting one vote and they're
+legally allowed to vote, then this
+doesn't become an issue. Short of this,
+I worry where this goes because over
+time, the fewer people actually believe
+that elections are real. And I hate
+being on here sounding like I'm an
+election fear-mongering guy who's
+telling people that elections aren't
+real, but the longer this goes on, the
+more difficult it will be for people to
+actually have faith in the system that
+we're all operating within. And that's
+when things get ugly and it needs to be
+fixed.
+>> Yeah, I'm strongly agreeing. If you
+can't be bothered to get a driver's
+license or a passport, maybe you don't
+need to vote. Yeah.
+>> Congress can fix it. And they should.
+>> Yeah. And and there's, by the way,
+there's a ballot measure in California.
+If people in California want this, they
+can just vote for the ballot measure.
+>> You mean the voter ID ballot measure?
+>> Yeah.
+>> Yeah. That's very important. Actually,
+look, if that fails, it's kind of our
+last chance to save anything
+>> for California's last chance. Yeah.
+Yeah. And you do sound like an your
+entire speech, David, was you sound like
+an election denier.
+>> I don't care what you label it. Look,
+the the Democratic party as a whole were
+election deniers about Trump winning in
+2016. They concocted the whole Russia
+gate hoax to basically try and discredit
+his election.
+>> When you look at the the difference
+between walk-in and mailin ballots, and
+I've seen everyone try to argue why
+that's so different, it doesn't compute
+for me. That's it. I'm not like trying
+to make up a fact. This is the fact.
+Look at this facts on the on the on the
+screen you're looking at right now. This
+is the difference in the data. This data
+tells me that something is wrong. That's
+it.
+>> Obviously,
+>> I'm not trying to I'm not trying to just
+fearonger because I don't like who got
+elected. I don't give a what goes
+on in LA. In fact, I think it's better
+for LA if they deal with the socialist
+mayor for a couple years so they come
+out the other side realizing they
+shouldn't embrace socialist principles.
+I think it's great for the country.
+Actually, I think it's great for New
+York. I think it's great for Seattle. I
+think it's great for wherever Minnesota.
+Wherever people want to elect socialists
+in this country, let's run into it. I'm
+all about jumping through the socialist
+well so we jump out the other side like
+the Latin American countries are doing
+now when everyone wakes up and realize
+how up socialism is because it denies
+everyone the opportunity for economic
+mobility. It denies everyone their
+individual liberties that this country
+was founded on. Socialism is wrong. It's
+broken. It doesn't work. And if you all
+want to go through that lesson, do it.
+Go for it. Let's do it. Let them get
+elected. But the numbers on that
+election data show me that that's not
+what the people wanted. That it's not
+very clear or evident to me that that's
+what people voted for. And that's where
+I'm like, my god, the system itself has
+become a system of appointment, not a
+system of election. And I get fired up
+about that personally. You want to add
+anything as we wrap here on this?
+>> Yeah. The party told you to reject the
+evidence of your eyes and ears. It was
+their final most essential command. This
+is obvious. Just look at the charts.
+Look at the data. We know something
+crooked happened. It's statistically
+impossible. The only thing we don't know
+is whether it was illegal fraud or legal
+fraud. Meaning they've created so many
+loopholes and so much corruption in the
+law that what they did is possibly
+legal. It is still corrupt. It is still
+crooked. It is ridiculous. Everyone can
+see it. Do not deny the evidence of your
+eyes and ears. Even if they call you an
+election denier, I personally don't
+care. I deny it. Spencer Pratt should be
+in the runoff. I deny that Ramen won
+legitimately.
+>> The statistics are the statistics and
+they would scream that you should have
+the attorney general of California and
+the federal attorney general look into
+it and if they catch people doing this
+stuff and they have caught one person
+and Nick Shirley went down there and you
+see people on Skid Row, you know,
+listen, homeless people should have the
+right to vote theoretically.
+>> Why did Nome just sign a law making
+audits like that even harder?
+>> Yeah, I'm not defending Newsome here.
+I'm saying where's the attorney general?
+If there is in fact fraud, Trump has the
+ability with his hands-elected attorney
+generals to go after this. He controls
+that part of uh you know our our
+democracy. He should file and they
+should go figure out what happened
+statistically. So Trump, President
+Trump, thank you, President Trump. Go do
+it. Go do it. You got this attorney
+general chasing down everybody else. Go
+to this election. Use your powers. Audit
+it and find them. Where's President
+Trump?
+>> You didn't hear my point that the the
+state law just made it harder for the
+federal government to come in and audit
+the voter roles. So
+>> yeah, he can still do it.
+>> I'm sure they will do it. I'm sure
+they'll do it if they can.
+>> Yeah. I mean, trust me, Trump does what
+he wants. If we've learned anything,
+>> he will do what he wants. And he's not
+doing this now.
+>> What I find amazing is that the media
+instead of asking tough questions like
+how did this happen? How could the votes
+swing so wildly in ballots that were
+only found after hold on after election
+day? The media instead of trying to
+demand answers and demand accountability
+is trying to cover up and say nothing
+wrong happened here. It's unbelievable.
+It's outrageous.
+>> What is the best theory steelman? What's
+the best theory of why this discrepancy?
+>> I mean, we're sitting here talking about
+it.
+>> What's the discrepancy? Anybody have a
+steel man of why this discrepancy could
+have happened that's legitimate?
+anybody.
+>> If the media is hanging on to a snapshot
+of the past where people actually cared
+what they said and every time that they
+can actually
+reestablish trust, they kind of don't do
+it because the people that
+they want to curry favor with are
+willing to play along. So I think what
+happens is the media is like, well, I
+have two choices. I can actually say
+that Spencer Pratt should have won or
+could have won or investigate why he
+didn't win, but then I'm kind of tacitly
+supporting Trump. And hold on a second.
+I'm supposed to hate Trump. So, no.
+Yeah, you know, this is completely
+normal. Nothing to see here. Everybody
+moves on, hoping that then they get
+ingratiated into the machine, but
+they're going to get run over and used
+like everybody else does, too. So,
+>> that's what's happening. Yeah, your
+point is so spot on, Chimat, that like
+if it's so polarized, meaning that
+there's two polls that if you do
+question, it's almost like you were
+being put in the Trump proTrump camp.
+Just like the word MAGA is thrown around
+like, oh, you're a MAGA guy because
+you're questioning election integrity.
+This has nothing to do with MAGA. It's
+just simple conversation about a
+particular topic. But if it's diametric
+to the other camp, you're, you know, you
+must be in that bad camp. And so then
+they don't want to be put in that camp.
+It's so true. I'm for mathematical and
+statistical literacy and what happened
+here is mathematically and
+statistically.
+>> So nobody has any steel man or concept
+of how this could have happened.
+>> I can tell you the statistical odds that
+this would have happened and it's one in
+a trillion.
+>> Okay. What if
+>> So are you telling me the one in a
+trillion shot hit?
+>> I I'm asking if there is any I'm not
+>> just just this one time.
+>> I'm not I'm asking if there's anybody
+who steals this in any way. I'm asking
+I'll tell you what I've heard integrity
+of
+>> Why is it so psychologically important
+for you to cling to the idea
+>> it's not
+elections that California elections are
+completely corruption free after all the
+things they've clearly done
+>> to corrupt them voter ID you admit
+there's like it's chalk full of
+loopholes
+>> you ask me why am I holding on to it I'm
+not holding on to it for the purpose of
+discussion and having an intellectually
+honest discussion I'm asking the three
+of you if there you've heard or if you
+have any theory just for the
+rigorousness of the discussion. This
+isn't my position.
+>> Where are all the democracy protectors
+in the media now?
+>> They all said that they were they were
+the guardian they were the guardians of
+democracy. They're going to protect
+democracy. Where are they to ask
+question?
+>> The only theory that I can think of I'll
+steal a minute myself. I because I I
+think you do need to be rigorous.
+>> You go ahead first. Yeah. The the only
+thing I can think of is her ground game
+is more sophisticated because they've
+been at it longer than Spencer Pratt and
+he didn't have a ground game that took
+this in since he's a non-traditional
+firsttime candidate. That's the only
+thing I can think of.
+>> Sophisticated a coded word for he wasn't
+bribing Skidro homeless judge.
+>> No, he just has it. He doesn't have
+[laughter] an election machine to
+collect ballots and collecting ballots
+is legal. That's the That's the
+question.
+>> She had a better cheating operation.
+Obviously,
+>> we're saying the same thing. We're not
+actually saying anything different.
+>> The Twitter commentary was that people
+were waiting
+because there's so many people that are
+so against Spencer Pratt, but they
+wanted to be sure that they voted for
+the right candidate, whether it's Ramen
+or Bass. And so the people that held
+their ballots the longest saw the
+polling data that Bass was going to win.
+That's why they all voted for Ramen last
+minute was to try and promote her to
+make sure
+>> has been shipped because of the you
+could have two Democrats at the top of
+the ticket.
+>> That's right. And they didn't want
+Spencer Pratt to have a shot at the
+general. And that by the way, you know,
+I mean, if you saw my interview with
+Spencer Pratt, he said Ramen registered
+one hour before the deadline and she's
+friends with Bass and that the whole
+point was to keep him from actually
+making it onto the general ballot. So
+that some of the coordination that
+people were making in their minds was
+like, we got to make sure we vote for
+the two Democrats and then they'll
+figure out, hey, is it wrong? Let's just
+box him out.
+>> Yeah.
+>> Got it.
+>> Which is like why they all waited till
+the last minute to vote for to vote for
+how do you coordinate something like
+that? That that's always the question I
+have with these like
+>> these people are all brilliant geniuses.
+It's it's hundreds of thousands of
+brilliant geniuses row that out.
+>> Yeah, there's a chat group. I mean, it's
+not that complicated.
+>> Alan Harvesters did it. what Freeberg
+said just happened. It's just that the
+ballot harvesters did it, not the actual
+voters, obviously.
+>> And ballot harvesting is legal, but it's
+sketchy and maybe they And if there are
+ballot harvesters, I think that Trump
+and the DOJ can catch these people.
+>> How the is it legal that someone can go
+out and collect other people's ballots
+and fill them out and send them in? It's
+the craziest to me.
+>> No evidence of fraud right now.
+Statistics don't look good. Donald J.
+Trump, you control the Department of
+Justice. Go investigate it.
+>> Okay. I love you guys, but I'm hungry. I
+got to go. This has been
+>> an amazing episode of the Allin Podcast.
+Bye-bye.
+>> Love you boys. Byebye.
+>> Let your winners ride. [music]
+[music]
+>> We open sourced it to the fans and
+they've just gone crazy with it. [music]
+>> [music]
+>> Besties are gone.
+>> That is my dog taking [music] a notice
+in your driveway.
+>> Oh man, my habitasher will meet me up.
+[music]
+>> We should all just get a room and just
+have one big huge orgy cuz they're all
+just useless. It's like this like sexual
+tension that we just need to release
+somehow.
+Wet your
+wet feet.
+[laughter] We need to get Mercy's going
+all in.
+[music]
+I'm going all in.

@@ -1,0 +1,1310 @@
+source: allin_podscripts
+published_date: 2025-08-15
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/ai-psychosis-americas-broken-social-fabric-trump-takes-over-dc-police-is-vc-broken
+title: AI Psychosis, America's Broken Social Fabric, Trump Takes Over DC Police, Is VC Broken?
+
+Where are you at, Chama?
+Look at those cabinets.
+I know exactly where he is.
+I'm here.
+I can tell by the cabinets.
+We'll beep that out.
+Tomorrow I leave for and then I come home a week from Friday.
+So that means you're going to be leaving this week, so it's open next week.
+So.
+I think you're about to get a house guest.
+Wait a second.
+The house is open.
+I like late season.
+Cato Cailin's about to make an appearance.
+I mean, Cato Cailin's about to bless the home.
+Oh, I'm going to bless that house.
+You can be short.
+I'm going for a little Indian summer.
+on the italian of the air
+I love you're going to let your winners ride
+rainman david
+I'm doing all in
+and it said
+we open source it to the fans
+and they've just gone crazy with it
+love you best
+queen of Kinwa
+All right everybody
+welcome back to the number one
+podcast in the world
+the all in podcast
+we're back
+and you got your original crew
+some people
+we're wondering, are people losing their commitment to excellence? Are people out gallivanting? Would
+we ever see the core four back? August 14th, we're taping. He'll be listening on August 15th,
+but gentlemen, we're back. How are you doing, Chamath? You look well rested. The core four.
+The core four. That's new. Who could ask for anything more? Would you say that the core four could be
+fantastic? I think on their best days, I would say they are exceptional, perhaps even.
+tipping into fantastic.
+Did you see it yet, Sacks?
+Yeah.
+It's pretty great.
+I think they did a great job.
+Yeah.
+It's like one of those weird, you know, superhero groups that it's like a real
+throwback.
+And I don't think a lot of people get the aesthetic or what they're trying to do there.
+But I think you're going to love it for you.
+You didn't see it yet, Fantastic Four?
+No.
+You're going to love it for the science.
+It's really got like a real throwback to the 50s, 60s science kind of aesthetic.
+wrapping up summer months here in a couple of weeks will be in LA for the all-in summit
+couple of tickets still available all-in.com slash events or slash yada yada yada yada for the
+J-Cal discount free break how's your summer going you're doing okay over there buddy you showed up last
+week I show you showed up last week no weeks off for you had a beautiful mountain bike ride
+yesterday with Xander we ended up oh how nice going on for quite a while having
+birthday dinner with Jason Coon tonight
+Happy birthday, Jason Coon.
+Happy birthday to Jason Coon.
+I mean, what a privilege for us to play with a professional poker player so regularly,
+like Jason Coon in the home game.
+We've always wanted to.
+We've been playing this home game for two decades, and we never had a pro there.
+We never had somebody who truly had achieved excellence in the field.
+And so it's like getting to be on the court with like Michael Jordan or something.
+It's like a real thrill for.
+Phil Helmuth was really excited too.
+Yeah.
+Did Phil get a selfie with him?
+or an autograph?
+Cut it out.
+Phil's going to get mad.
+Oh, no, we're going to have to do another apology letter.
+Do the apology now, J-KEL.
+I'll just do a pre-apologize.
+I'd like to pre-apologize to pre-apologize to
+Beep, Lucky, Mark Zuckerberg.
+Saksie Poo, how are you?
+Are you a little rest and relaxation for you?
+Yeah, we just got back from Diego's birthday party in the U.K.
+Oh, very nice.
+Another one of those destination birthdays.
+I mean, so many of these destinations.
+Oh, good.
+It's like three of summer, retirement parties.
+John Herring's having a retirement party.
+I don't know what kind of flex that is.
+The kid's like 31 years old.
+He's like, ah, I get into SpaceX.
+I retired.
+I was like, I'm in Uber.
+I'm still working.
+What are you going to do for the next 60 years?
+Our lifespans are going double.
+You've got to keep busy, folks.
+All right, listen.
+what a stacked lineup we have oh my god
+Alex Carp from Palantir's coming you got Alex Carp
+yes Freerberg I like that guy
+do you get any of the people on my list you got some good names at the last minute
+yeah thanks for coming in eight days when we send you notes
+months and months in advance of the summit when we actually invite people and
+plan the event and you don't respond we move forward
+and then eight days before the event you're like oh here's my list of who I'd like
+to invite to the summit can you guys figure out to get them there
+Oh, YouTube CEO, Neil, is coming.
+That's great.
+Neil Mohan.
+Get his name right.
+Jason, just so you know.
+Say it on my name.
+I know his name's name's Neil, but I didn't know his last name.
+Neil Moen.
+Oh, look at that.
+Energy Secretary Chris Wright is back for round two with J-Cal.
+I love it.
+What a great lineup.
+All right.
+Let's get started, folks.
+I think the story of the week is this AI psychosis.
+This is a crazy story.
+People call it chat GPT psychosis as well.
+We'll get into that.
+But if you're an ex-user, you've seen this discussion over and over again.
+It's called being one-shotted, okay?
+That's like you get sniped in a video game or something.
+People are starting to have delusions that are being triggered by or enhanced by AI chatbots.
+The core of the issue seems to be that these chatbots, as you know, are sycophantic.
+They confirm your beliefs.
+They agree with you.
+They're effusive in their praise.
+And it's so believable that now people are starting to believe they're in a relationship.
+relationship with AI. Okay? And open AI saw this becoming an issue and they made some healthy use
+updates to chat GPT. It's no longer going to tell you whether or not to break up with your boyfriend,
+to leave your spouse. It prompts you to take a break after long sessions. And they also admitted
+that their 4-0 model had been creating some of these psychosis scenarios. Quote, there have been
+instances where our 4-0 model fell short in recognizing signs of delusion or
+or emotional dependency. Psychology today had a story just recently, the emergent problem of
+AI psychosis. Man, people are falling into romantic relationships. They have godlike delusions
+and a prominent investor. You may have seen this. Seems to be undergoing some AI psychosis
+according to people who may be near it. I'm not going to say his name, but it's pretty clear
+who it is. But he released a video where he started talking about recursion, all this crazy
+stuff. You may have even witnessed a little bit of this when Travis was on the program a couple
+weeks ago and he said he was like spending his time on the fringes or the edges of
+physics. Yeah. And like it really can take you down the rabbit hole. There's a really interesting
+sub-brae. Are you saying Travis is suffering from AI psychosis? I'm saying we may need to do a health
+check. We may need to do a health check because smart people can get involved with these AIs.
+So we may have to do a little welfare check on our boy, T-K.
+Can you just tee this up and hand it off so that the rest of us can talk, please?
+I'm about to do that.
+I'm about to do that.
+Okay, Chamath, you seem to be rearing to go with this AI psychosis issue.
+Go ahead.
+Enlighten us with your hot tape.
+Go ahead.
+I miss you, too.
+I miss you two.
+You're the bus.
+Hold on, wait, my phone's ringing.
+Oh, great.
+Hey, listen, Andrew, I was going to send you a link.
+to Zoom chat. I'm just hoping you just hop on for food. Yeah, make me an offer. Sure, I'm in. Yeah,
+these idiots just paid me $50 million to come join your podcast and make it higher rated than yours.
+Okay, great. Yeah. Okay, I'll see you on your moment. It's like in the major leagues when like a double trade happens.
+So we get Andrew Ross Sork in and then Gerser and Gurley get Calcanus. That would be really interesting.
+It's a three team deal. It's a three team deal. You're also getting. Let's know in the comments if you would like to see that trade.
+Okay, Shamath, you got any thoughts on this?
+You seem to be raring to go on this issue.
+I don't really have much thoughts on this AI psychosis issue per se,
+but I do think that it's part of a bigger trend,
+meaning these things aren't created overnight and out of nowhere.
+I think we've known for a while that,
+what does Scott Galloway calls it, the loneliness epidemic, is that?
+Which I tend to agree with.
+I mean, I think that there is a profound,
+shift in how young people connect with each other and with the world at large. And I think that
+they are becoming more isolated. And I think the dangerous part of AI is that it can replace
+whatever flimsy connection that people have left to their real world community. So if you think
+about like how much influence is shaped and generated in places like Instagram by
+real people and then go to the limit of a very useful AI that replaces those people with fake
+people and fake pictures. You can't discern, but they're willing to be responsive to you and engage
+with you and talk with you. On the one hand, it's incredibly interesting. On the other hand,
+that person is ultimately not real. Yeah. And so I think whatever it is that people are going
+through right now, and you can see it in all kinds of data, right? You see it in,
+marriage rates, you see it in household formation rates, you see it in childbearing rates,
+something is broken. It has been for a while in society. I think all these tools have exacerbated
+it, and I think this is just yet another step in that direction. Freeberg, what's your take here?
+Sorry, I apologize. I'll say one more thing. I was talking to somebody about this, and he mentioned it,
+he framed it this way, and I thought it was really interesting. If you look at online services,
+their primary mechanism of action is via dopamine, and they're trying to find,
+mechanisms to trigger the release of dopamine. And that's what gives you that
+stimulative sensation, right? But if you think about real-world relationships,
+having a wife, having a long-term girlfriend, those are fundamentally about serotonin, not
+dopamine. The dopamine wears off very quickly and what are you left? You're left with establishing
+a long-term structural relationship with somebody and the ups and downs of that. And it's not
+always peachy keen. That's the same thing with friends. And so I think the other thing that's really
+interesting to note is that we are sort of all in on dopamine, dopamine, dopamine, and young people,
+particularly the ones that are the most susceptible to this, I'm going to guess, have not had
+enough structural interactions in the kinds of relationships that actually create these long-term
+serotonin-like behavior so that you can actually balance this stuff out. And so I suspect that
+this thing is going to catch on like wildfire, in part because it's taking advantage of a trend,
+I think. Yeah, it's a quick hit as opposed to the long-term gain of, of, of
+friendship. Freeberg, what do you know? I was in the college dorms in 1996. There was this
+woman who was in the room next to me and she was on AOLIM and she got stuck on AOLIM like 24 hours a day.
+She failed out of college. She was completely addicted to it. She like disappeared into this rabbit
+hole of doing I-Ming with random people online. It was the craziest thing. I don't think that the chat is
+necessarily revealing. I think it's just at a much larger scale.
+challenge with this psychosis where you get drawn into these polls. There is a study by a researcher
+called Julianne Holt-Lonstat who took 148 other studies, psychological studies, to identify the
+relationship between social interaction and mortality. And strong social relationships increased survival
+odds in humans by 50%, which is equivalent to quitting smoking, more impactful than obesity
+or physical inactivity. I think that there's a real struggle that people have with loneliness
+that manifested a bunch of different ways.
+But psych studies have shown that some of the key motivators
+for going online to engage with social interaction systems
+is self-expression, recognition, curiosity, emotional regulation,
+you can test ideas, you can engage cognitively in ways that you can't
+or you don't have access to in real life.
+So there's a whole lot of motivating factors for people to go deep
+in social engagement online.
+And there's never been an infinite social engagement system
+until AI came along.
+These chat interfaces came along.
+So rather than have to go find someone on the AOLIM network
+or find someone in a chat group
+or find someone on a bulletin board,
+you have this infinite personality you can engage with.
+So I actually asked chat GPT like this morning.
+Would you be my friend?
+And it was like, yeah, I pass.
+I think the challenge is once you end up
+in these deep rabbit holes with a chat interface,
+there are things that happen with the way LLMs operate
+that can drive you into,
+this warped reality because you're now so fully engaged, you're fully captivated by this reality
+with the chat interface, but the chat is not a human. So it doesn't have the same wiring,
+the same triggers as a human might have to realize it's going down a wrong place. So when I
+ask chat GPT, what drives some of the psychotic breaks that happen in people that overuse chat
+and end up in these deep rabbit holes? Number one, it said feedback loops in training or operation.
+So if the AI is trained in its own outputs without safeguards, then small inaccuracies,
+the training system can actually compound.
+And so over time, this causes responses that it says spiral away from factual grounding,
+similar to a human stuck in a self-reinforcing delusional loop.
+So suddenly the AI becomes delusional, and you become delusional with it because you get taken on it.
+And the second is it called folio-d-do?
+Is that the term for the second Joker movie where, like, the psychological phenomenon
+of two crazy people reinforcing it and spiraling out of control?
+It may be, but I think this is just like the AI can take you on this journey on like a
+one-sided basis because you as a user just get, you know, the AI is compounding away from
+reality. It's crazy. And the second is what's called context poisoning, where long conversations
+or poorly controlled inputs in those conversations can actually push the model's internal
+representation away from its starting state. And so this causes like off-track reasoning. But
+you, if you're deeply in it, you're 16 hours, 80 hours into a dialogue with the AI, you go with
+it. And so I think that these are these things that are causing these breaks. But I don't think
+that the motive for human social contact is new. I don't think the digital interface is new,
+but I do think that there are two things that are new, which is the infinite engagement you get
+with a chat interface. And second is the way that the LLMs operate that can actually cause
+these breaks that take people with them. And I have personally seen it. This is not some New York
+Times report. I've actually personally seen it with people I know that have got caught in these
+loops that get broken mentally. It's really sad. And so it's definitely an issue. And I think they're
+going to need to put safeguard. Sacks, you have any advice for these losers in Dix?
+who are creating relationships with their chat, GPT.
+Could you just break the ridiculousness of this, please, with some SACS wisdom?
+Well, yeah, I mean, look, this whole idea of AI psychosis, I think I've got to call bullshit on the whole concept.
+I mean, what are we talking about here?
+People are doing too much research.
+I mean, they're stuck in a loop doing 12 hours of research on AI.
+Okay.
+Look, this feels just like the moral panic that was created over social media.
+updated for AI. And the media is going to love it because they're afraid that AI is going to do to
+them on the creative side, what social media did on the distribution side, which has replaced them.
+So the media is going to love this concept and promote it. And then the trial lawyers are going to
+love it because it gives them a new basis for suing all these companies. And then there's going to be
+individuals out there who are like, oh, I have that. And they're going to glom onto this message.
+And you're going to see more and more people claiming they have this because it's going to draw attention
+to them. But the reality,
+is that if you look at that Time magazine story, which is trying to brand this concept of
+AI psychosis, the game is given away by this doctor who says, I don't think using a chatbot
+itself is likely to induce psychosis if there's no other genetic, social, or other risk factors
+at play. This was Dr. John Torres, a psychiatrist at Beth Israel Medical Center. Okay, so what
+he's saying there is that if you don't already have a predisposition to some psychosis and you're
+not suffering from extreme isolation or loneliness, then you're not going to get this, right?
+So in other words, this is just a manifestation or outlet for preexisting problems. And I think it's
+fair to say that we're in the midst of mental health crisis in this country. But if you look at
+the charts on this, it began long before chat GPT kicked off the AI race at the end of
+of 2022. And you can see that the mental health decline is affecting all ages, but it's most
+acute among the young. So, Nick, if you could pull up those FT charts, what you'll see is that
+there's been a big drop in conscientiousness among young people, a big increase in neuroticism,
+big decrease in extroversion, for example. But where this really took off was starting around
+2020. So in other words, right, so correlating with COVID.
+and the lockdowns and that whole huge societal disruption that we now want to kind of
+forget and paper over, that's what seems to have triggered a lot of these mental health
+declines, which kind of makes sense that if people couldn't go to school for a couple of years
+and they were in these lockdowns and it disrupted social formation and the development of
+young people, obviously that's going to have a bigger impact. So I think this AI psychosis thing,
+It's going to get a lot of play.
+The media's going to love it.
+There's a lot of other groups that are going to love it
+because they're going to hope to profit from it in some way.
+But ultimately, I think that it's,
+if the only thing that's happening
+is that people are just going on chatbots
+and researching to their hearts content,
+is probably a relatively benign outlet
+for pre-existing conditions that were there in society.
+Well, and you did mention the social media psychosis.
+There's a lot of people who have social media psychosis
+and they spend 20, 30, 40, 50,
+Twitter posts a day, that's probably three of the four of us here on this program, who are super engaged
+with that platform. It may not be as much of a psychosis, but it is an addiction, sure. Well, I think
+the whole moral panic over social media was also overblown. But I do think that if you compare
+the... And it was video games before that, and it was violent movies before that and, you know,
+Atmooms on AOL.
+Violent movies before that.
+And, you know, there's always-dunography, pornographic material.
+Rap lyrics.
+Yeah.
+Rap lyrics.
+Yeah.
+What was the lyrics where they were accused of being demonic?
+Judas Priest.
+Twisted sister.
+Yeah, Judas Priest or Twisted Sister.
+Marilyn Manson.
+All of them.
+So there's always something.
+But I will say that.
+Even the Beatles were outlandish and they were a threat to societal fabrics back in the day.
+But even just comparing AI psychosis to the moral panic over social
+media. I do think that it's probably undeniable that social media has had an influence of society
+because what happens is you get on Instagram, people are posting this best version of their
+lives. And so it creates maybe a distorted sense of reality. And people can sort of buy into that.
+They get set. And you know, and there is something to X being addictive and. And blue sky now
+and people spend too much time on it. Right. Yeah. So look, I'm not, I'm not saying that these things
+don't have any negative consequences. I just think that the panic about them is overblown.
+But if you just compare this so-called AI psychosis to the effects of social media, again, I think
+it's relatively benign because it's something that people are doing to inform themselves about
+things. And they can go down rabbit holes, but it doesn't really trigger feelings of envy or
+inadequateness in the same way that social media can, I think. It seems to be hitting like two
+groups of people. It's the same group of people who get catfished.
+lonely people who are looking for a connection. And then it's like the conspiracy theorist
+delusion of grandeur. Maybe they're like on the borderline with mental illness seem to be the
+two groups that are getting sucked into this. But it is related. You know, you were talking about
+the social fabric, Shamoft maybe in our group chat earlier. And you had some thoughts on that.
+And maybe we'll just pivot into the social fabric story. So here, this went viral, estimated
+percentage of 30-year-olds who are both married and homeowners. So two of the American
+dreams, dare I say, getting married and starting a family, having kids. And in the 50s,
+that was, you know, half of 30-year-olds already were married and already had homes. And now we're
+down to 12 percent. There's a lot of factors here, obviously, Chimov. But your thoughts generally
+on this? You were... I started to do some research on this and...
+It's really sad, actually, what's happening right now.
+So I think if I had to kind of frame this, that chart that you showed is more of the outcome.
+And so you have to go all the way back and try to explore what are the potential root causes that causes this kind of an outcome.
+And there are a bunch of them.
+I think one of the first ones that we have to look at is what has happened to young men.
+and I think what's happened to young men is a little concerning.
+So I don't think it's our generation, but I do think if you talk to people 30 and under,
+you start to hear a consistent theme from guys, which is, one, it's they don't really have
+the social skills to really talk to girls.
+It starts with that.
+And so what happens is they go to these different outlets.
+They go to video games.
+they kind of communicate more on mine.
+As a result, they tend to have riddle or fragile emotional relationships and social relationships.
+They don't date the same way that they used to.
+Then a lot of guys just feel like they also don't want to get caught into being perceived,
+you know, post the Me Too movement in any way, shape, or form as being unto work.
+You take all of these factors and you put it together,
+and there's a lot of guys that have just opted out
+and they just kind of move in a direction
+of parosocial relationships instead.
+Then I started to look at the data on porn usage.
+It's out of control.
+I had no idea.
+But do you guys know what the average age now
+of a porn watching male is?
+That's scary to think.
+The average age?
+Yeah.
+Would it be the average age of an American man
+or does it skew younger?
+I assume skewage.
+It's gone. It's gone from 20 down to 16. There are more than 50% of 12-year-old boys
+now that watch porn. I was shocked. I was like, what are you even talking about? I was a
+teenager. Late teenager, I think, when I, like, I mean, we had, like, you found a magazine
+here or there, whatever. Yeah, I got a girly magazine, yeah. But can you imagine what it does
+to a 12-year-old boy when they start to get instant gratification and you compound that all through high
+school and they don't have, quote, unquote, what we would call game, right, the ability to just
+talk and just kind of like carry on a conversation. What do you think happens? And then you go into
+the dating pool and what are these dating sites optimized for? These dating sites are optimized
+to keep people there, not for you to find a relationship and for you to churn, right? And so the
+gamification and the dynamics of those systems are where many young men and women now look to
+to find a relationship. And so you have lonely young men. That creates lonely young women,
+a small cohort of very eligible men and women that everybody's chasing and fighting over.
+Everybody else kind of left on the sideline. And so what do you think happens over 15 or 20
+years of this activity? It's what you see in this data. People aren't coupling up. They're not
+having long-term committed relationships. So obviously as a byproduct, they're not getting married more.
+obviously as a byproduct of that, then you're not combining two incomes, you're still with one
+income. At the same time, Nick, I just pulled this data, you can show it. What has happened to
+the underlying things that people would look to as satisfying markers of progress in life,
+a home, a good education, those are way out of reach, right? So if you look at this chart,
+the price to income ratio of a home from 1980 to now has effectively made it so that you have to
+make an enormous amount of money as a single individual to afford a home today. And then if you only
+have a small percentage of people actually getting married and bringing two incomes together,
+you see what you're seeing today in that chart. So I don't know. I think that we have an issue
+in the American fabric we need to figure out. I don't exactly know what the solution is, but it's
+taken me this long. And maybe this is what all these young people have been screaming about.
+and I have ignored, so I apologize for not really understanding the gravity of it, but I think
+that this is a big problem. And I think we need to start talking about it a lot more.
+And here's a manifestation of it. If you look, past year prevalence of major depressive episodes,
+U.S. adults, 2021, pretty recent data. And that 18 to 25 spike, look at that, Chema.
+And then 26 to 49, and then the older generations maybe not having these massive depression
+episodes. Freeberg, any thoughts on the American dream changing and young men? Yeah, I think there's a
+lot of conflated factors here. They can certainly be related, but there's just a lot to unpack
+and all that. I mean, I can, I can comment on the one piece. I think we talked a little bit about
+you know, getting lost online. I mentioned when I was in college that year 1996 when that
+that woman got lost in AOLIM. We had dial-up internet. It was a very different world where we're
+all connected 24-7 on our phones. I'm sure we all have average phone usage of seven hours a day
+today. So there's a lot more rabbit holes to fall into that reinforce this isolation. It doesn't
+actually solve your isolation or loneliness problem when you get stuck on a phone or stuck on the
+internet. It actually magnifies it and makes it worse because you start to see all the things you don't
+have and you start to feel worse about yourself. And that leads to all of these kind of, I would
+say, difficult social context that Chmoth's talking about. With respect to affordability, as you know,
+I think that that's a distinct point, which is related to our expectation that the government
+can and should always solve our problems for us. And as a result, we created the federal home loan
+program, much like we created the federal student loan program, both of which I believe created
+bubbles in those markets. We created this concept that every American family should be able to
+afford a home. And our solution was to pump a bunch of money into homes through the federal
+home loan program. And that ultimately led to bubbles of inaffordability for homes. If we really
+want to solve this today, besides solving the government spending problem and inflation problem
+and dollar devaluation problem, which obviously require cutting spending, I think it's going to
+need to be some sort of set of rules around making sure that homes are not being bought up
+by institutions. That's one that I think is going to be a pretty popular point that's going to
+come up in the next year or two, particularly in the next election cycle. So, you know, there's two
+sides to that. I think you're kind of dancing around the issue there. And I think it's very
+real, which is the financial piece of this, Friedberg. Boomers have just absolutely, these couple
+of generations. If you look at the cost of homes, like you mentioned, the cost of education,
+and then you just look at real wage growth. I don't know if I sent your chart, Nick, if you can take a
+look at this. You know, the big problem in the United States is wages have not grown,
+except for people who have a lot of money already. And so if you wanted to start a family and
+you're in $100,000 in debt for your student loans and homes have double, triple, quadrupled in
+price when compared to your income, and we don't have real wage growth, that's an issue. And I
+think this will become the issue of the next election. We see Mondami and the socialist movement
+we talked about it last week. If you really want to make a compelling argument for the next
+election cycle, I think it's real wage growth. And if you look at something like minimum wage
+and this disparity between what top earners make and minimum wage, here's a chart of where minimum
+wages in the United States versus other developed countries, there's a real argument here,
+even though we might all be free market individuals. Well, there's a very different approach.
+There's a very different approach to higher education in literally all of those countries except
+for ours. It's affordable. Yeah. Well, yeah. And I think that we have to call us,
+spade to spade. There was an entire generation, if not two generations, of young men and women
+younger than us, right, so not in their late 40s, early 50s, who were told that they must,
+not should, not, it's nice to, they must go to university. And these folks took out an
+enormous amount of financial support to do so. And part of the underlying reason was that
+they were told, and it sounds very credible. Technology is coming, and there's going to be so much
+automation of all of the other kinds of jobs that you may do in a trade school, you should go to
+university and protect yourself. Well, lo and behold, it's turned out to be the exact opposite.
+So could you imagine where, you know, you could have gone to trade school, been an electrician, been a
+plumber, built, done something, welder, made a couple hundred grand, married somebody, you know,
+she does a good job. Now all of a sudden she also makes $150,200,000 a year. You're making $400,000
+and you have no debt. That is the key. You have no debt. When you make 400K and have no debt,
+I'm sorry, but that is probably actually better than being the doctor making a million bucks.
+And then there are all of these other jobs that aren't a doctor where you're still saddled
+with the 300,000 and you have no way of paying it back. So I think that that's also a really
+important issue that we have to figure out at some point. There was a framing of these.
+issue for an entire generation.
+That was probably wrong.
+If I had to bet, I would bet that engineers are more likely to have their jobs
+replacing the short term than welders and plumbers.
+Okay, Sacks.
+I mean, we're talking here just about the American dream.
+Is it broken for these next generations, low wages, high debt, no ability to buy a home?
+And this came out in New York this week.
+pull up that chart, slow gains and jobs in New York City for the first half of 2025,
+feels like something's happening here with jobs.
+We talked to vice president, J.D. Vance, about this.
+He had some concerns about jobs for recent grads.
+This is New York City.
+Only about a thousand jobs were added in the first half of this year.
+I don't know if that's specific to New York, but we had two months of data revised.
+We clearly have some issues with jobs here and young people.
+are clearly having a problem economically.
+They might be upside down.
+What are your thoughts here, Sacks?
+Possible solutions.
+We're talking about some of different things here.
+I'm not sure how a specific data point around a few months of job supports in New York City
+is really relevant to a trend that started in 1950.
+I mean, are we talking about this?
+I mean, this is the chart that went viral on X over the weekend.
+And a lot of people are commenting on why this is, which is starting in the 1950s, you had
+about 50% of 30-year-olds were both married and homeowners. And by the early 2020s, that number is about 10%. So that's the big societal change that's happened over especially the last 30 years. And the question is why. And I think there's both economic factors and social factors. And I think you guys touched on some of the big economic factors. I mean, one is the affordability of housing, which I think is mostly due to the fact.
+that we're not building enough, and that's due to the fact that in large urban areas,
+I mean, in these blue cities, you can't build anything because the cities have tied everything
+up in legal and regulatory red tape. And that's the whole point of Ezra Klein's book on
+abundance is to try and get liberals to change their point of view on that. So you've kind of got
+the affordability of housing. And then you've also got the college scam, which is you've got
+these kids graduating from college with, I don't know, 200,000, 300,000, $300,000 of debt.
+because the cost of colleges skyrocketed over the last few decades, which, you know, that was not true 30 or 40 years ago.
+You could get a decent college education without graduating so mired in debt that obviously there's no way you're going to be able to buy a house and start a family and that whole thing.
+So I think there are these important economic factors, but at the same time, there are a lot of these social factors that you're talking about.
+But it does seem like young men are less self-sufficient.
+I mean, you've got these data points around isolation and loneliness, but you've also got
+these data points around lack of self-sufficiency.
+If you could put up the FT charts where they talk about the ability of people to make plans
+and follow through.
+Exactly.
+Look at this.
+I mean, so there's been a big change among the 16 to 39-year-old.
+in their ability to make plans to follow through, in their perseverance, in how easily distracted
+they are, how careless they are. And so I do think that there is a sense that a lot of these
+young people just aren't ready to be the head of a household, to own their own homes, to start a
+family. And I think there's some good questions about why this is. And I wouldn't rule out the effect
+of woke poison running through the school system here for the last 20 or 30 years.
+I mean, if you raise white males since kindergarten to believe that there's something wrong with them, they're the evil group in this morality tale of woke that's been told, they're going to internalize that in some way.
+Maybe check out.
+I think it plays out in a lot of different ways.
+And they opt out.
+But I wouldn't rule that out either.
+But it's hard to say exactly.
+You know, look, I think that Chamathi mentioned the online dating sites.
+I mean, I think there is something to that where the dating sites have made the dating market more efficient in a way and more global.
+But is that a good thing?
+I mean, you used to have a lot of hyper-local dating markets, and maybe it was inefficient,
+but maybe that was more conducive to average people hooking up, whereas, like you mentioned.
+Remember, think of the number of people you guys know that met either a long-term boyfriend or girlfriend or a spouse at work.
+Yep.
+But if you ask young people today, is that even allowed?
+That is so verbote.
+It is like so off the.
+It's not allowed.
+You're not allowed to do anything.
+of that because of this latent fear sacks, as you said, there could be an accusation. How do I defend
+myself? And so there's a fear that has, I think, seized a large part of our use. Yeah. What a great
+platform this is for either party or a new party to pick up, just double the minimum wage,
+take out all these regulations, build more homes, and make a college affordable. Those three things are
+such a winning platform. Freeberg, you think that we should, what do you do with the mortgage
+market. You... God, it's so difficult. I don't know. Do you just basically privatize
+Freddie and Fannie and let them underwrite? I 100% think you got to privatize Freddie and Fannie
+as a first step. And then you have to stop underwriting student debt so that you don't underwrite
+the $200,000 degrees. I believe 100% in ending the federal student loan program. And I think that
+it will force a restructuring of the entire higher education system in the United States,
+which no one wants to hear, no one wants to do, and everyone's against. But I think it is the
+only path forward. We have the Chancellor of UC Berkeley and the President of Dartmouth coming to the
+All-end Summit to talk about the future of higher education. I think this is probably, in my book,
+one of the top three most important issues we should be discussing right now. We have to get rid of
+the federal student loan program, and we have to force a right-sizing of higher education and a
+restructuring of higher education such that the access to education becomes more ubiquitous.
+It's not this $300,000 debt load that everyone is forced to take on. And,
+it enables a more fair market and a more free market where people get what they pay for.
+And ultimately, people are going to have to make decisions about what majors they're getting
+and whether or not to pay for these colleges.
+Or whether to get a major at all.
+Or whether to get a major at all.
+Have the social acceptability to not do that.
+And another tactical thing, Freiburg, is to just this accreditation scam where only certain
+people can give college degrees is if you allowed, you know, entrepreneurs to create schools like
+Joe Lonsdale's doing here. He had to buy an accredited university to kind of back into it.
+But if you asked a bunch of entrepreneurs, hey, lower the cost of this degree from 250K to 50K,
+they would figure out a way to do it. And it's already happening. People are now using chat
+GPT, using online tools to get their education and doing that around the existing system.
+So, you know, life finds a way. These young people are finding a way. They're finding ways.
+I'll be honest. I really like Trump's attack on Colombia, UCLA.
+and Harvard, because I think that those were these sacred cows that were always left alone.
+They were meant to be these signaling mechanisms of elitism and quality and future prospects.
+And those institutions ran totally amok.
+Totally amok.
+They started to do things that just made absolutely no sense.
+To your point, there was a really good article.
+I think it was in the Atlantic this weekend about how the humanities captured science.
+So basically, these universities get a large amount.
+of their federal funding by getting research grants allocated to the university, and then they get
+an administrative topper on top of the research grant. Historically at Harvard, that administrative
+topper is 60%. So if a researcher gets a $3 million grant at Harvard to work on cancer research,
+$1.8 million of administrative fees are paid to Harvard University.
+So a lot of the universities use those fees to expand and grow out their administrative staffing,
+and also to expand and grow out their humanities.
+These aren't bad programs per se,
+but it basically meant that the science funding
+was being used to kind of create
+what some people are now calling social engineering
+that these universities then engaged in
+over several year period.
+One of the other key questions
+about the future of higher education
+is should science and engineering
+be coupled with the humanities
+from a funding perspective
+or should those institutions be split up?
+Well, Peter Thiel has a very funny saying about this,
+which is anytime you have a,
+a concept that you want to fund that has the word science after it. It's not a science. So just
+kick it to the curve. Yeah, physics is physics, social science. Yeah, you're saying for a reason.
+Or social science. Yeah. What is that? Yeah. In China, in Germany, in Russia, there are
+science and engineering institutions that are separated from universities where you can go and learn
+the humanities. And I'm not discrediting the value of learning the humanities. If you can afford it,
+If you think that there's value in doing that for yourself and your career, yada, yada, go for it.
+Good luck, et cetera.
+If you're wealthy and you want to engage in that because that's something you want to pursue,
+society needs that, we value it.
+Great.
+Go for it.
+But the problem is the research being separated from the humanities is critical.
+Sachs, if you want federal funding, shouldn't we put and you want nonprofit status for your
+giant endowment, why not require these schools to increase the number of Americans that they're
+educating and to lower the price of the education?
+Now, if you want to do it privately, fine, but if you want federal funding, if you want
+taxpayers to underwrite these incredible institutions, double the number of people you're
+teaching, triple the number of Americans you're teaching, and lower the cost 10% a year till more
+people can afford it.
+Like, we have to hold them to some standard here for increasing the number of Americans
+who are educated because those institutions now are global institutions.
+There's very few Americans going to them.
+Listen, we've seen with all sorts of goods and products that when the government is
+paying the bill, the price always rises. You always get inflation because the government is
+relatively insensitive to cost. Whereas if you look at technology products, the price keeps
+going down over time. There's a really good chart on this, right? Where like all the sectors
+of the economy that are experiencing master inflation, they're all, they're all funded by the government.
+Healthcare housing education. Yeah. So look, that's what's going on with higher education.
+But I want to bring one other thing into this, which is, you know, we spend a lot of time talking
+about higher education. We don't really spend that much time talking about the quality of K-12
+education. And my sense on this is that over the past 30 years or so, there's been a shocking
+decline in the quality of American elementary and high school education. I think it's so bad.
+So bad. If you look at the performance on standardized tests, the extent they even do testing anymore,
+you see pretty sharp declines in the quality of education. But there's a lot of places now
+where they're trying to abolish testing. They're abolishing gifted programs, math programs. This is
+This is like a big issue in California. San Francisco, they tried to get rid of those gifted schools because of so-called equity. In other words, they want to define the standards down to the lowest because it would be supposedly unfair for some kids to experience the advancement of being in a gifted program. And then, of course, you get into the behavioral standards. We've all seen these viral videos of fights happening in schools where, you know, sometimes the teachers are in the fights. Sometimes the kids are in the school fights. This has been a total decline of,
+behavioral standards in schools. I remember back in the 1990s, Bill Clinton got a standing ovation
+in the state of the union because he said that they should have school uniforms. And there's a
+sense that you should have discipline in schools and high standards. And now, I mean, I actually
+think that's a good idea. I mean, I actually think that we need to- 100%. Uniforms and have phone lockers,
+no phones in the school. You check your devices. This is a lot of things that could be done to raise the bar.
+What is this? Is it fighting in Brooklyn in a school?
+This is what goes on in China.
+Oh, look at that teamwork.
+Teamwork.
+We should do that at the summit.
+The four of us should bounce basketballs and show that we're a team.
+So make a team building exercise for the all-in retreat.
+Remember, like, you know, the schools are in America, the public schools are not run for the benefit of the kids.
+They're run for the benefit of the teachers' unions.
+And we saw this during COVID where Randy Weingarten insisted that the schools stay locked down and closed far longer than was never.
+necessary. When everybody else had already realized that these lockdowns did not make sense, that
+putting the deaths five feet apart was absurd. It was a placebo-based. Who made no scientific sense?
+Who made that statement sacks? Because I remember this happening. I remember the union guys
+fought against reopening the schools. Absolutely. Who, like, there was a guy you mentioned.
+It was Randy, it was Randy Weingarten and the teachers unions that were fighting the school reopening,
+and they kept it closed for a year longer than necessary. I mean, in California,
+it was closed for roughly two years, you know, there's absolutely no justification for that
+second year, even if there was for the first one, which was highly questionable. And then the way
+they were having, you know, five-year-olds wear masks to school. Yeah. I mean, even in our schools,
+no, I mean, I had, my five-year-old was like, they're trying to, like, put this, like,
+mask on him. And it's so sad. And then, I mean, it was absurd. When, when I was falling off
+and it was like this loose-fitting thing. It was always like the nose was out. And you're
+Like, okay, so this is so performative.
+Yeah.
+When I was taught in any way, it was, it's all performative.
+We talked about this during COVID, like, what is the damage going to be to these kids?
+And we're seeing it now in a range of things.
+I remember when I got rid of the masks, my nine-year-old who was maybe five, maybe six years
+old at the time, she refused to take it off.
+And she was scared.
+She's like, no doubt, I can't take this mask off.
+I don't want to die.
+And I'm like, what are they telling you at school?
+You're not going to die.
+Nobody's wearing a mask anymore unless you're at, like, the socialism, 2020.
+conference when everybody's, I don't know if you saw that.
+The Socialism is 2025.
+They're literally like after they do their land acknowledgments, they mask up.
+So it's a panel of people in 2025 wearing masks.
+Wait, is there really a socialism, 2025 conference?
+We have to go next year.
+I think we should host an all-in panel at this.
+We should definitely do some programming at the 2026 socialism.
+It's amazing.
+It's like the Democratic Socialist Party.
+It's incredible.
+I might register for the party to get the end.
+invite. We should totally go undercover. We should wear like, we should get gotees and suspenders
+and go as baristas, like, and just talk about how we're going to seize the memes of production.
+Here's, it would be so great. All in undercover. If you look at the red bar here, just in current
+dollars, the average tuition fees. You know, when we went to school, it was two to three thousand a
+year on average. And then now it's at 10. And that's an inflation at a dozen dollars. If you put
+entrepreneurs on this and just said, what's the problem is the socialist mindset is that the way to
+solve that is to get the government to do more and make it more free. And the reality is that the
+reason this happened is because the government began to provide student loans, unlimited to
+everyone that got in the administration. Sach, who's running education in the administration? Let's
+talk to them about accreditation and cracking that open. That's not even the issue,
+we could invest in a company to do this. There was plenty of bullshit private universities and
+private schools out there. The problem is they all get access to the capital. It's
+It's not about accreditation.
+Sure, like, make accreditation more easy.
+But at the end of the day, you need to make capital more efficient.
+You need to get the government out of the role of allocating capital to education.
+There's actually a really simple fix to this.
+Somebody needs to close a loop so that when you say you want to go and get an art history degree,
+the answer is you can do it, but you need to pay for it.
+And no laws.
+In other words, what you're saying is there needs to be a restoration of underwriting criteria for this type of lens.
+I've said it forever. That's right. Exactly right. But also, I mean, if you do the next prize, you said, what's the least amount of money you could spend to educate somebody to be a lawyer? You would get entrepreneurs. You'd be like, oh, that's a great business. Entrepreneurs don't go after this because the accreditation process is decades long. It's impossible to do because of regulation. Civil servant, David, let's put the signing of a short list. I think that AI is going to be an accelerant here, David, because I do think that with AI, it's a great equalizer. There was a company I was talking to,
+other day that does AI education. And they are having an absolute lift-off in their business
+in South America and in South Asia. And in these markets, there's a dearth of qualified
+teachers to stand in front of a class and teach folks. And so by using AI, these kids are now
+getting ahead of American kids. In other words, they're advancing through AI psychosis because they're
+spending 12 hours a day on AI. Right. Well, probably two hours a day. I mean, that's probably what's
+going to happen is the AI is a great leveler because you can basically get all the world's
+information at your fingertips in a way that's fully interactive.
+And personalized education.
+That's it.
+But then some trial lawyer is going to end your ability to get that because they're going
+to call that AI psychosis.
+The technical term is adaptive learning.
+And I don't know if you guys drive your own cars anymore.
+But in the Tesla, they just added grok to the dashboard.
+If you long hold the like Siri version in there, turns into grok.
+And I did a thing where I said, hey, test my vocabulary.
+And it started giving me words.
+It would ask for my definition.
+I give it the definition and say, you're close.
+This is a better definition.
+And in my rides to and from the office now, I'm doing like vocabulary tests.
+And it's increasing my vocabulary and testing me on higher and higher.
+So you're now like third or fourth grade?
+Or like what?
+I mean, my vocabulary has already been off the charts.
+I guarantee my verbal score would be higher than the three of you.
+Guaranteed.
+Guaranteed.
+What does AI say about the correct way to pronounce monobularity?
+monetization. Well, I've been working on that. And you know what? I'm, it's, I'm correcting that.
+But make fun of me because of my dyslexia. I need a combination. I actually personally, I prefer
+Jake Al's version. I like it a lot better. Monetization is iconic. Lean into it, folks.
+All right, listen, let's give some red meat to sacks. He took the time to show up. Trump sent the
+National Guard into D.C. folks seemed to be generally in support of it. Two weeks ago,
+Doge staffer, Big Balls, was badly beaten by a group of eight to ten.
+teenagers in an attempted carjacking, and he truly has big balls because he tried to protect his
+woman and just fought hard. Trump posted a bloody picture of him on truth social, saying in D.C.
+That crime is totally out of control, and he decided if D.C., this is what he said, if D.C. doesn't
+get its act together and quickly, we will have no choice but to take federal control of the city
+and run this city how it should be run and put criminals on notice.
+that they're not going to get away with it anymore.
+Well, he did just that on Monday. Trump invoked Section 740 of the D.C. Home Rule Act
+of 1973 allows the president to take control of the District of Columbia for up to 30 days.
+So Daddy's home and 800 National Guard troops are in the city.
+I mean, if you told me, you could send 800 National Guard to the tenderloin and get rid of the fentanyl dealers.
+I'd be like all for it.
+Sacks your thoughts on this move.
+Obviously, some media elites or people are hand-wringing, oh, this is Trump trying to be Emperor King, but he's legally in the right, right? He has the right to do this in D.C. specifically. What are your thoughts generally? Is he going to go roll into New York, San Francisco, and L.A. next. That seems to be the hand-wringing, or is this an isolated kind of D.C. specific?
+Well, no, the federal government has the right to run D.C. And I think it did until the 1960s and then you had this experiment in Home Rule. And I think you'd have to say that the experiment has not worked out that well. So last year, Washington, D.C. had the fourth highest homicide rate in the U.S. Its homicide rate was nearly six times higher than New York City, which wasn't great. The homicide rate exceeded Atlanta, Chicago, and Compton. It also has one of the highest robbery and murder rates among U.S.
+U.S. cities, and there's been numerous assaults and robberies on congressional staffers and
+members of Congress. In May, you had two embassy staffers were murdered in June. A congressional
+intern was fatally shot, just a short distance from the White House. And then, of course,
+just a week or two ago, you had that attack on the Doge staffer. I think his real name is
+Edward Constantine, aka Big Balls, who was mercilely beaten by a group of, I think, teens. And that's
+been a big issue is that juvenile crime is a huge issue in D.C. because there's just no punishment.
+I mean, they're caught and then they're released. D.C.'s had a policy of zero bail, which we've
+seen in many cities, but what that basically does is create a revolving door at the jail as soon as
+someone's caught. They're released. And then you've also got vehicle theft in the districts over
+three times a national average, again, because even when they catch someone, they just let them go.
+You've got repeated armed carjackings and violence, again, by teenage gangs.
+And the liberal media's favorite talking point on this is that somehow violent crime is down in D.C.,
+which is the exact same thing we heard about San Francisco.
+Remember when Jason Boudin implemented the zero bail policy and crime was going through the roof and CVS and Target were shutting down, all the stores were basically locking up the toothpaste?
+I mean, people could feel the crime, but no one was reporting it because they just knew.
+that nothing would happen. So I think this is the typical gaslighting we've seen before,
+and no one really can trust these stats. I think they all have stories about crime. There's a bunch
+of commentators on CNN and MSNBC who've been trying to make this argument about the crime
+being fictitious, and they've been bringing DC residents on the air as gas, and every time they try
+to get them to blows up in their last. Yeah, they try to get these DC residents.
+residents to support this this crime is down narrative and then every time the the dc residents
+start telling stories about them or their their friends being victimized it's like oh yeah i know
+this person got this friend of mine got shot or this person got carjack and it's become comical now
+and a lot of these these videos are going are going viral good about the murder statistic is that you can't
+make that one up murder that one's harder too right yeah exactly you can't cover up somebody getting
+shot you know we had the same exact thing that happened in new york when brother was a cop in the
+We had stop question frisk.
+People call it stop frisk.
+People were overwhelming in favor of this.
+Now, listen, people shouldn't be randomly stopped, and we all have concerns about that.
+But crime was so bad in the 80s in New York when I grew up there that in the 90s, people
+are like, yes, stop question and frisk, anybody hopping a turnstile.
+And that's how we got all the guns off the street.
+And then New York became incredibly safe under Giuliani 1.0 and Bloomberg.
+And it carried on until we got Dinkets 2.0, the Blasio.
+So if you remember, the theory back in the 90s of how you reduced crime was the broken windows theory, which is that you get rid of the entry-level crimes and you get rid of the visible manifestations of lawlessness and chaos.
+Because when you create an environment in which it appears that those things are tolerated, then you will end up getting more of it, especially I think by juveniles.
+So that was the theory in the 90s and absolutely worked, and what you've got in D.C. is the opposite of it.
+And I think what President Trump has said is, look, first of all, we're going to get rid of the homeless encampments.
+So that's being removed.
+You're going to get rid of the graffiti.
+We're going to stop the zero bail.
+So once people get locked up, they're going to stay in jail.
+And we're going to start treating these teenage criminals as, you know, we're going to punish them.
+We're not going to let them off the hook if they're committing adult crimes.
+There's just going to be adult punishments.
+I mean, this is the right direction to go if you want to reverse this lawless system, D.C.
+And I think it's going to have an impact very, very quickly.
+I think it's going to work very quickly.
+And I think that Democrats who are denouncing this are falling into this trap that I think we saw on the border as well, where they appear to be supporting criminals and gang members, just like they did on, you know, with the deportations where they start resisting the deportations of MS-13 gang members.
+They fell into a trap there.
+I think they're going to fall into a similar trap here in D.C., because I think this is going to work, and I think it's going to provide Republicans with a very important counterpoint. Because I think one of the problems with crime is that is a local problem, and the truth is that it's been very bad in blue cities, and Republicans just haven't had power there in order to effectuate a change that they could point to as a solution. And I think that D.C. provides that opportunity.
+If Trump's plan works, I think it'll show that Republicans have the solution on crime, and it'll hopefully help provide an alternative in these deep-loose cities.
+And here's a chart just to put some numbers behind it. This is gun assault rates in Washington, D.C. You can see it spiked under Biden, went up a bit.
+2024 came down at the end of his term, and then it's lower this year in 2025. That black bar is the first half.
+It is trending in the right direction, but it's still not acceptable.
+Sacks, I guess the question is.
+I just don't know if we can believe all these statistics.
+So just last month, there was a D.C. police commander was suspended for manipulating crime data
+to make it seem lower than it actually is.
+And the DC police union says this practice is widespread.
+In the TV show, The Wire, remember they called this juke in the stats?
+So first of all, you got the people in charge.
+The way that lie lieutenants become colonels is by manipulating the crime data.
+then you've got the learned helplessness that we saw in San Francisco, which is once people realize that the jails are evolving door and nothing's going to happen, they stop reporting this stuff.
+Now, you're right that the murders, I think, are hard to cover up. I think those probably are accurate. But the things like carjackings or assaults, things like that, or shoplifting or theft, I think a lot of that stuff just goes unreported.
+It has become a partisan issue. And if you look at the partisan stats, every time it flips, just like the economy, Republicans think it's,
+It's a disaster. Democrats think it's fine. And then when a Democrat's in office, it flips. But I guess the question, Sachs is that I think people have a reasonable argument here. Is this going to be a strategy by the Trump administration to go into New York City next? L.A. next. San Francisco next. And would you agree with that or not? The question is, what would the legal basis for doing that? Yes. I mean, in the case of D.C., this is a longstanding situation where the
+federal government has the right to run D.C. and did run D.C. for many, many decades.
+And it was only more recently that this changed to this experiment in home rule. So there's
+clear federal authority for President Trump to do what he's doing. But I don't know if it would
+be the same for New York and L.A. So I tend to think that whole issue is a red herring.
+Yeah, I agree. Here's the Gallup. Freeburg. I'll let you comment on this. But this is
+partisan's perceptions of local crime. As you see...
+You can see Trump's term in pink and then Biden's in blue. And then before that, Obama's. And
+Republicans think under Biden, it was like a massive issue crime. And Democrats thought it was no issue.
+And then you go to Trump's. It reverses. Slightly more Democrats think crime is an issue under Trump.
+Republicans think crime is gone under Trump. Then you go to Obama. Republicans think that crime is a disaster under Obama. Democrats think it's so you just have to look at the raw numbers. But the fact is homelessness is a
+major issue here, Freiburg. So I'm curious what you think about what should our policy be on,
+you know, let's call it what it is, junkies. It's not a homeless issue. These are people addicted to
+super drugs. Should they be allowed to be on the street? Should they be round up and put either
+in a mental hospital in jail or just generally not allowed to be on the streets in a major
+city like San Francisco? What do you think, Freepard? I don't think that we should allow people to live on
+the streets because it's community property. It's not for individual use. And, you know, I can't
+leave my stuff on my sidewalk. The city will come and clear it away. Why can someone choose to live
+on the sidewalk? I think, you know, that's just the rule of law is just, you know, enforce it.
+What should happen to those people addicted to fentanyl? When they get picked up, what should
+happen next? There was a case that led to shutting down many of the mental hospitals in the United
+States. People were being abused in them. So then we had people. Yeah. And so the response
+was get rid of the mental hospitals, but unfortunately, like, the mental health crisis is real.
+We talked about it. The drug addiction crisis is real. And I do think that for the sake of the
+community and the sake of the social fabric, that is a very good way to spend taxpayer dollars
+is to create treatment centers and mental health facilities to take care of people in need in that
+particular context. I think that it is a heartless thing to leave people living on the street like that
+and they should be cared for. So I would be all in favor of, I don't use the term round them up,
+Jason, but I would say provide like access to care and effectively move them. If they're not
+going to move voluntarily, move them into those care facilities to create recovery for them. I don't
+think that we should have homelessness on the street. I'm 100% agree with you. It's totally compassionate
+to take them off the street and not subject them to life on the street. Now, they are not in a
+mental state to make their own decision is the key issue, Chamath. So if you had, God forbid, a family
+member who is on the street doing fentanyl, you yourself, I think all of us would say, yeah,
+pick the person up, don't let them live on the street.
+And if they won't go to facility, then they have to go to jail.
+Like, I mean, it's just the nature of you.
+Somebody you know this, but somebody in my family has struggled with mental health pretty
+severely has been in jail.
+You can't do anything.
+You can't force them to take their antipsychotics.
+You can't do anything.
+Yeah.
+so unless the rules change you know these things are like but for our ability to intervene
+this person would be on the street is my guess yeah well i mean i agree with what freeberg said
+about this and just another case is city of austin which is a deep blue city within a very
+red state but they had a very permissive policy towards letting people camp out on the sidewalks
+and and it ruined the downtown and then
+they passed a ballot initiative there and they moved the, I guess you call them homeless people
+to a campground. So, yeah, I mean, the best solution would be to move them into treatment
+or some sort of mental institution. But if they won't go to that and they insist on living
+outside, then at least if they're going to insist on camping, put them in a campground.
+You don't put them in the middle of the sidewalk in public places where it's extremely disruptive
+and threatening to the safety of everyone else.
+I mean, obviously, having people camping outside our national monuments has to be the worst possible place for these people to be.
+Yeah, they have been relocating homeless people to campsites.
+And there's plenty of land theater to do that.
+When will the National Guard be in D.C.?
+They're there.
+Oh, this is perfect because I have to be there in September.
+Nick, I sent you a picture of what I'm going to wear.
+This is what I intend to wear in D.C.
+when I go. That's what I'll be wearing.
+I'm going to wear his gold chains again. You feel safe enough to
+bust out the bling? You look good in that photo. I like the mustache. I don't know
+why you shaved it. I was all in favor of it, my friend. I'm going to break this out in September.
+Well, here's the thing is if you actually spend time in D.C., then you're very happy about
+these changes. You're very happy about the National Guard coming in and making it safer. You're
+happy about the homeless being moved out. And this is why Mayor Bowser, who's the D.C. Mayor
+is playing it very carefully. I mean, she's a Democrat. So, of course, she's denouncing the takeover
+as authoritarian. That's not a surprise. But she's also acknowledging the legality of this by the Trump
+administration. And she's been pledging to cooperate. So she knows that cleaning up D.C. is going to be
+popular with the residents, even if it offends the groups. So I think that's pretty interesting that she
+sees that this is going to be, it's popular enough that she has to play it carefully. And I think
+that just politically speaking, that if Democrats keep opposing this, I think they're falling into
+a trap that Trump is laid for them. A hundred percent. I mean, if you asked, and I tried to find
+some statistic like this, it would be great if somebody would do this one, but if you ask people
+with families, let's say, who live in D.C., are you in favor of this or not? People will actually
+have to live under these conditions. I'm guessing 80, 90 percent are like absolutely.
+this has to end. And if this is the quickest way to end it, sure, send in the National Guard,
+it'll be a good deterrent and get a little extra support. I don't understand why the Democrats
+don't do anything other than say, yeah, this situation is untenable. We'll take all the support
+you can give us. That's the right answer. Well, the Democrats, you know, one of the problems here
+is that the DC Metro Police Department is one of the most dysfunctional in the country.
+And a big part of the reason why is because of DEI. The person who leads to the
+the department, the chief of the Metro Police, she had spent 23 years on the U.S. Park Police
+Force and then spent one year as DC Metro's chief equity officer and then was promoted to being
+the whole chief of police. So basically they promoted the DEI person to being the chief
+of police for the whole department. And when she was asked about what the implications would be
+for the chain of command, she didn't know what chain of command meant. Oh, yeah, that was a weird
+moment. This isn't an interview that's going viral right now. It's carrying ass kind of moment.
+Yeah. Like maybe this person isn't up for the job, let's say. All right, listen, it feels like a bit
+of a distraction of an issue. Feels like just good policing and yeah, if the place is out of control.
+I don't think it's core. I mean, look, there's, there's, there are a few things.
+There's reaction to it with like, oh my God, Trump's going to be a God King and he's going to go into every
+city and do martial law. I think that piece is the distraction.
+I think this is probably just good policy.
+If it has the right to do it and the place is out of control, clean it up.
+Let's go on to our next topic.
+We've got one or two more topics we want to hit here unless anybody has something they have to get to.
+Chmoth, you wanted to talk about VC returns versus public markets.
+I know Freeberg, you brought this up on a previous issue that you could just set it and forget it in the MAG 7 back in the day.
+So we're going to revisit this topic.
+Public markets.
+Here we go.
+They've been on a tear.
+2023 up 24, 24, 23 percent, 2024, 23 percent, 2025, or a 10 percent.
+so far. Here's just the chart of it. We had one down year, obviously, 2022, and it's been
+on a tear. And it's only happened one other time before that the, we've had three straight
+years of this kind of 15% performance, very rare. You see, we highlighted them there on the chart.
+The dot-com bubble in the late 90s, and then before and after, like peak Zurp, and then now.
+Now you can compare that to the private markets, venture capital.
+And here's a chart from 2012.
+And the reason I'm going to show these is when you looked at venture as a category versus, say, the S&P or a couple of lines up from that, you see the NASDAQ, venture was extremely, extremely attractive, according to Cambridge Associates, which tracks us.
+They have the best data because they've been doing it the longest.
+Then we go and we look at the same chart in 2018.
+hey look, the NASDAQ's doing pretty well when compared to venture in large part because we had
+some of these mega hits, the Googles and Facebooks and Amazon worlds, you know, coming to fruition and
+just going on a tear. And then here we are in 2018. Public markets really start to rip.
+Same chart, just a different time period. Here's 2020. And maybe venture isn't doing as good
+when you look at it compared to the markets. Of course, you can't do this for,
+the last five years or six years of venture because they're in the J curve. When you do venture
+investing, you're expecting it to pay off seven, eight, nine years. But the trend here,
+I think, Chamoth, that you were pointing out is public markets, liquid, no fees, low fees,
+minuscule fees when compared to venture, and maybe a better bet for investors. And that's challenged
+the venture industry. Was that your sort of point in bringing this up, I take it?
+I think the venture model is broken, but it's broken for two different reasons, not totally.
+correlated to each other. The first is purely mathematical, which is when the public markets
+provide a consistent rate of return, it doesn't matter what that is, but let's just say,
+you know, you average it out, it's 15%. The question is, what is a private investment have to
+give you so that it's worth putting it into an illiquid instrument where you don't get your
+money back for some number of years? Now, problem number one is it used to be that you could get
+your money back in six or seven years, and the fund would liquidate after 10. Now, you don't
+typically start to see returns until year 10, and oftentimes year 12 or year 13, which means
+that they don't really pay out until year 16 or 17. What the math of that would tell you
+is that you need to generate somewhere between 6 to 10% more in terms of the gross return
+so that on an apples to apples basis, you're being compensated for all of that
+illiquidity, right?
+God forbid something happens or you want to buy a house and you need the money.
+In the stock market, you just sell it instantaneously.
+In a venture investment, you're going to call somebody.
+They're going to probably haircut you by 30 to 50 percent and you're going to sell it
+because it's illiquid.
+So if the public markets are giving you 15 percent, the reality is that you need to get
+25 percent plus.
+So then the question is, what venture investors generate 25% plus IRAs over a 17-year period or a 15-year cycle?
+And it turns out that every fund has a very low statistical probability of doing it.
+Every fund manager, if you're in the top handful, we all know who they are, they'll always at least have one that doesn't.
+So the problem is you have one that doesn't, then the next one that doesn't, then the next one that's even worse, then maybe one that comes close.
+And so there is no systematic approach to the return stream.
+So how should you look at venture capital, I guess is one question.
+And I think the way that one should look at it is, look, in a portfolio where you have a lot of liquid assets, it's a small piece that essentially is a mechanism to learn about the future and to understand how your other assets are going to perform, I think it makes a ton of sense.
+But if you're trying to crush it, I think the only people that will really make money in venture capital are the GPs building a fee generating business around it.
+Now, that then gets to the second question, which is then, okay, so if you do invest in venture, what's the next big problem?
+The next big problem is in a world of AI, do you just see the amount of money that's required to build a really big success shrink?
+And if that happens, then, you know, how much money can you actually really get working?
+So if you look at companies like mid-journey, that's a great example of a business where
+these guys are like, you know, 40, 50, 60-person team generating hundreds of millions of
+revenue, very profitable.
+They're not going to be raising an enormous amount of money.
+So I think that these two things, I think, are very complicated for venture.
+It doesn't mean that people will stop investing.
+But Freiburg, you want to chime in on this, I think?
+Yeah.
+Yeah.
+So I hold some data together.
+If you could pull up the basics, I know we talk about this a lot, but I thought it would be good to show the difference between kind of a normal distribution and a power law distribution, like venture returns, or I don't like to call it venture return. But I do think the returns generally in free markets create value creation in a power law distribution, which means that a few of the many account for the vast majority of the capital appreciation, of the value creation.
+and that's because of the power of compounding.
+If you build a better engine of technology, a better business engine, you will compound,
+and that means that over time you will accumulate more and more of the market in an outsized
+way.
+As you accumulate more of the market, you actually move faster in accumulating more
+of the market and eventually it becomes a runaway flywheel, no one can catch up.
+That's the key return profile in free markets, generally speaking.
+And a manifestation of that is that is also the return profile in venture.
+in technology venture investing because when you find that one or two great hit, the Uber
+that has a great network effect or the Airbnb or the Google, it has a runaway effect in the
+market and it accumulates all the capital and becomes really valuable. And you can see this
+in the return. So if you just pull up, this is the latest carda data. So this shows what the
+IRA by the vintage that the fund was raised and then also by the size of the fund and by how the
+fund has performed on a percentile basis. Look just at the 2017 row. So the top
+decile funds are doing, call it 30 percent versus, you know, the median fund doing
+hold on. They're not. These are all markups, paper markups. These are not distributed. These are
+all bullshit numbers. Okay, fair enough. But I'll make your case in a second here. And these
+are not DPI. So it's not distribution and cash out. This is just marked up value. And this is
+eight years old. This is the 2017 vintage. But just the difference between, you know, call it a 30%
+IRA and a 10% IRA, that compounds over 10 years. So the multiple difference at the end you should
+expect is the difference of making 14 times your money or 2.6 times your money. The difference
+between 10% and 30%. And that's kind of what this shows roughly is that the difference between a 50th
+percentile and a 90th percent. The problem with this data, though, is this is, Carter's product is used
+by a small number of people for a small number of years. That's why the other data we showed from
+Cambridge is much better because the 2018 forward are still in the J curve.
+And to Chmott's point, they're paper markup.
+So, yeah, you got to put a little major cap out there.
+Okay, I knew we would go down this rabbit hole, so I shouldn't have shown that.
+But like, no, it's okay.
+There are two key points I wanted to make and just pull it up again, Nick.
+The first key point I wanted to make is because of the power law, the job of investing,
+is to find the power law winners.
+It is not to buy the index.
+If you buy the index, you are losing to the market, even if these numbers are correct,
+which they're not, as we've talked about, you're losing to the index if you're just buying
+the venture index, and it's probably way worse than this. You have to get the winners.
+And so what this does show, though, is that the smaller the fund, the less diversified it is,
+which means the more they're likely to capture the winners. And you can actually see that.
+The smaller funds generally have better performance than the bigger funds.
+Oh, for sure they do, because they're getting in earlier as well, Freiburg, and they're paying less
+lower valuation. So that's the other key. They're not getting diluted away by the index. And the
+index generally is going to return negative. It's going to be a negative returner. I think I told you
+guys, I went to an LP conference years ago, one of the biggest venture funds. And they showed
+that 45% of their capital went into flat or down rounds. And they had a negative net return on
+that allocation of capital across 13 funds. And if they had put that, if they had never invested
+in flat or down rounds, then they would have doubled their IRA overall as a fund.
+really important point that the power law matters,
+which is your job is to just find the winners.
+And if you find the winners, they're going to compound.
+So how does that translate?
+So go to the next slide, Nick.
+So this is the one that I shared in 2023 that GoKul Rajaram published on Twitter.
+And that's where I first saw this,
+which is if you buy just the top 10 companies in the NASDAQ and you just held it,
+you would have made a 24x multiple over a 24-year period versus if you had just bought
+the NASDAQ.
+So just owning the best companies in the NASDAQ is by far the best way to drive
+multiple of return.
+Over a 10-year period, you made a 9x multiple, 9x, just by owning the top 10 companies
+in the NASDAQ, and this was through roughly the end of 2023.
+So now let's pull this up.
+I pulled this analysis together this morning for our conversation.
+And this shows that the venture returns don't stop when you stop being a private company,
+that the real return, and this highlights the point.
+that most of the value, when you find that power law winner, most of the value is created
+when they are a public company. So Palantir went public after 17 years and their market cap was
+$16 billion. So they created $16 billion of equity value over a 17 year period. Since they've
+been public in five years, they're now worth $436 billion. So they've created another $420 billion
+of equity market value in just the last five years, probably eclipsing all venture returns that
+have been made during that same period of time. Airbnb went public after 12 years worth $47 billion.
+In just five years, they added another, call it roughly $30 billion. Uber went public, $75 billion
+after nine years as a private company. And now they're worth $190 billion. They've added $120 billion
+of value in just six years since being public. And Spotify, another good example, $27 billion market
+cap when they went public after being private for 10 years. And then they added another $120 billion of
+value in the seven years they've been public. And I've got the whole list here. This is all
+these companies that have a hundred billion plus market cap. And when you find the power law
+winner, the value continues to accrete, it continues to compound, and you're better off just
+buying the public stocks. And I think that this was my big kind of conclusion as I went through
+all this data. Like, Chimot is exactly right. When you're in the venture market, you learn a lot.
+And ultimately, I think you probably want to learn a lot to then allocate your capital more wisely
+into what you've identified are the power law winners
+where most of the value continues to accumulate
+whether they are private or public.
+And having an IPO is just a transitionary event
+for these companies.
+Their compounding engine will continue
+as a public company if you've identified them.
+Facebook's such a great example.
+Eight years as a private company,
+100 billion market cap at IPO,
+added another two plus trillion dollars
+in the years since.
+Yeah, I think you...
+Freeberg, you've cherry-picked all the winners
+in hindsight, the biggest winners for that list.
+What if you were just to create a list of every...
+IPO. Tech IPO and how it's faired afterwards. Right. No, it's a fair point. There'd be a lot of
+stinkers in there that you haven't included. But my point, Sachs is just find the power law
+winners and then that's where all the value accrues. Well, I mean, that's hard too. Yeah.
+I think you have to look at how we got here. I started doing this just, you know, in my second
+decade. And companies decided to stay private longer. That was the big trend. And then there
+was a lot of reactions to that. Secondary transactions started occurring.
+and then you just couldn't get DPI.
+You had to hold it forever.
+And now the industry is responding to this.
+So now we have something called strip sales.
+We have people creating continuation funds, ways to take those early investors and get them
+out into a new vehicle or to create some liquidity.
+And Chimot's point is really important because you do get so much intelligence.
+And what I learned, having been an investor in Uber and Robin Hood, when they were $5 million
+and $20 million companies, that was like that.
+first investor into those companies is when they crashed in the market, when Uber hit 30,
+I bought up a bunch of it as a public investor, even though I had a ton from when I was an angel
+investor. And I did the same for Robin who had $12 because I knew the management. I knew Vlad.
+I knew Travis. I knew Dara. And I had that understanding of the market. And the same thing I did
+with Facebook, having listened to Chimov talk about it all these years. And Brad Gerson
+talked about all these years. I backed into it when it was $92. So what's happening now is
+what Ruloff did with his continuation fund and holding the private ones is in the theme song of
+this podcast famously when Sack said, Let Your Winners Ride. That is the overarching thing here.
+The industry, the venture industry in massive transition, it's going to start looking a little
+bit like private equity and a little bit like Gavin or Brad where they're private and public
+market investors. And you're seeing buyouts occur. So people are saying, hey, this SaaS company's
+undervalued, we're just going to buy the company and we'll start operating it. So ventures in a
+massive transition, but I think what comes out on the other side is something that looks a lot more
+like public, private investing like Rolf pioneered at Sequoia. And we're going to talk to
+him about that at the summit. I'll just respond to your last comment. And JCal, I appreciate you
+saying that because, yeah, Roloff is coming to the summit to talk exactly about this, which is going to be
+great. But that is the job of being an investor. To your point, you're like, hey, you know,
+you cherry pick the winners. But I think that's the point. The point is that the return.
+turns a crew to these power law winners. And the job of being an investor shouldn't be to
+index a market. Anyone can index a market. The job of being a great investor is to find those
+winners. Sure. But the question is how hard that is or easy it is. And I think your list
+makes it sound like, oh, all you have to do is wait for these companies to go public.
+No, sorry. That wasn't my point. Yeah, sorry. Well, it kind of came across that way. Yeah. Yeah, sorry.
+I was just saying that the power law winners continue to accrue. In fact, not only do they accrue as
+private companies, and then if you get one of them, you have these 14x funds. But as a public
+company, they continue to accrue. And so, you know, this isn't just limited to being a venture
+investor. Pretty much anyone has access to the public markets and can make the decision that
+they've made a bet on a power law winner. There were a lot of people who were very vocal
+supporters of Palantir, very vocal supporters of Uber, of Spotify, when these companies went
+public. And a lot of people said, no, they're overvalued, their naysayers. I think the problem that
+you would have had trying to implement the strategies, it would not have been clear what you
+would have been underwriting. What would you have been underwriting at Nvidia for, you know,
+not the last five years, but the many years before then? You would have been underwriting
+video games. Video games, yeah. And you would have had this like very odd data center
+business that didn't make sense that, you know, Jensen took a lot of heat for, that he had to
+defend. And it didn't actually make a lot of financial sense. So I'm not sure. I will give you a
+counter to that, and I'll call him out, and I'll make fun of him now. My co-founder at Climate
+Corp, his name's Saraj. He's probably listening right now. He bought Nvidia years ago on the thesis
+that these GPU chips would eventually be used for AI models because he did all his work at
+Stanford and distributed computing. He did early work in AI. He was very close with them.
+But that's different than what you were saying before. I get it. He's a smart guy who made a huge
+winner, but I'm saying... But no, the problem was he sold in Bia too soon because he's like,
+oh, they're not actually getting done. Okay, but I'm just saying like, there's probably a person
+that was the smartest Saraj and bought Intel. And there was another person.
+person that bought AMD. I'm not sure what the point is. Here's the point about venture that I think
+is worth noting. It's an exceptional market that gives the practitioners an incredible edge if you
+build a business around the information asymmetry that accrues. Yes. That you can monetize.
+After that, the only business model is building an asset gathering machine to generate fees
+because even the consistency of being able to generate these power law distributions in successive
+funds doesn't exist.
+And you can look at all of the data.
+Cambridge has done this.
+A lot of these guys have done this.
+All the big LP fund of funds like Horsi Bridge have done this.
+Having a killer fund has zero correlation with your ability to then have a next killer
+fund.
+As an LP, and I showed these returns on screen, although we blanked out the names.
+And I'm in all of them.
+it is really hard to be consistent.
+It's hard, but I...
+Let me make two points about this.
+And then I got one closing point.
+So, first of all, Chamatha's right that if you look at the data, the recent data, say,
+over the last decade or so, you don't want to be the average venture fund.
+You'd be a lot better off just being in the NASDAQ or in some other public stock market index
+because A, your returns to be higher and B, you don't have the illiquidity.
+So you can always trade out of it if you want.
+So it's true that you don't want.
+to be the average venture fund. As an asset class, the average is not great. This goes to
+Freeberg's point about the power law. You really want to be a top quartile fund or even better
+top decile. And that's what LPs are looking for when they're underwriting VCs is they want to be
+in top quartile, not the average. So I agree with that point. But the second point is that
+things can change very quickly in this asset class, precisely because of the power law and how
+spiky it is. So just to give like one micro example, take Figma. You know, we talked about on
+this pod was a year or two ago when the government held up their acquisition by Adobe for
+$20 billion. And everyone thought that was a disaster because people thought that was a huge
+premium to the actual valuation. And if eventually they now had to go public as a result,
+they might IPO at $10 billion. And so it was a big haircut for all the VCs. Well, a couple of years
+later, they just IPO that a huge pop on the first day has come down somewhat, but the public
+market valuation is now $35 billion, and there's three or four VC funds that have made
+$5,6 billion, $7 billion.
+And those three or four funds are now 10x funds.
+So just boom, in the blink of an eye with one outcome like that, it totally changed the
+performance of those funds, and then that's going to trickle down the performance of the
+asset class as a whole. My guess is that we're in a pretty good time for VC because of AI and
+the disruption is causing and the potential for value creation, it's creating. It's sort of restocking
+the pond with opportunities for many more big companies to be created. And I think ultimately
+they'll be very good for the asset class. I mean, just look at open AI. I mean, look, we're a long
+way off from open AI being liquid and you don't want to count your chicken.
+before they hatch, but just two years ago, on the heels of chat cheap T launching, the company
+raised money at a $30 billion valuation, everyone thought that was crazy at the time. Now they're
+at a $300 billion valuation, and there's news reports that they're going to raise at $500 billion.
+So if this keeps running, and again, there's a lot of ifs there. I mean, they could still lose.
+They could get beaten by.
+Yeah, sell 20% is my best advice.
+They could still lose to some other company or whatever, but it just shows you how fast things can
+change. I mean, they could be a trillion-dollar company in a couple of years if the trend
+continues. Probably. So my point is just because of the power law, it only takes a few big
+winners to change the economics greatly for particular funds, and then that eventually trickles down
+to the mean. But again, you're right. You don't want to be in the mean. You want to be top quartile.
+There's just two quick points I want to make as we wrap on this and great episode, gentlemen.
+The first is also the wrath of Lena Khan occurred for four years.
+So DPI and exits were muted.
+So that also plays into a lot of these statistics.
+And now since President Trump, number 47, David,
+we have had a tear of M&A and a ton of IPOs, right?
+That's actually going to be probably a big, you know,
+a factor in all of this hand-wringing around venture.
+But I just want to give two anecdotes here.
+You know, when you have the inside information, Schmath,
+it's worth, I think, being a venture investor because of that data again.
+And I was just always perplexed when I would hear, you know, people on CNBC talking about Uber and Robin Hood specifically because they would be talking, oh, my God, they're losing so much money.
+They lost a billion dollars this quarter.
+They lost $5 billion last year.
+And we all knew that there would be no difference in consumption of an Uber if it was $13 or $15.
+And that at any point, you could just turn the dial and slow growth and show profitability.
+And what happened?
+That's exactly what they did.
+And I made that call and I said this on CNBC.
+Like, is anybody not taking an Uber for a one or $2 difference per ride?
+It's like 2% of people might stop taking it.
+Sure enough, they did that.
+Then fast forward Robin Hood.
+Everybody's like, oh, my God, this company is like, it's sideways.
+The market's corrected.
+People are no longer trading stocks.
+And I was like, but they keep releasing exceptional products over and over again.
+And that was always Vlad's key perspective was we're just going to keep adding every product,
+529s, 401Ks, margin loans, crypto.
+We're just going to keep adding products every six months.
+And then we will be the default place where all your finances exist.
+And when it was at $12, I was just like, oh, well, this obviously is undervalued.
+I'm just going to buy more.
+And now it's at 120.
+It's like one of the best is a 12 bagger in the public markets.
+So that reason alone, if you just have enough surface area and enough patience, you're going
+to hit Robin Hood, Uber, like I did, when they're tiny companies.
+And then you're going to get to have all that intelligence into the public markets,
+which is why I started doing public market investing, because I could just see all these very
+clear opportunities where things were obviously
+undervalued. It was just like
+so obvious. Well, when you talk about service area, what you're talking about
+is diversification. Yes.
+Right, but the way
+Freeberg just showed us the winners.
+Yeah, and that's kind of my point is it looks really
+easy when you just look back over the last 10 years
+and pluck out the winning companies and the winning funds and the winning
+asset classes. The question is,
+ex ante, how do you create enough diversification
+to get exposure to that? And that
+That is why venture is still a popular asset class is because it is very spiky and you do want
+to be in those power law funds and power law companies.
+And it might be a percentage.
+Like the percentage might change.
+Maybe, you know, yeah, I wanted to get to 25% or whatever.
+And maybe the right number is 15.
+It could change over time based on your own individual needs.
+I still think it's magical asset class.
+Chimap you want to wrap us up?
+I did that job for seven, eight years with outside capital and now the last seven and eight had
+been entirely my own. The differences, I would say, is that it's much, much harder to run a
+very successful venture firm in my experience. It's much easier actually to be concentrated
+and to use the information asymmetry in your favor. It is an exceptionally difficult job to be
+a successful fund manager. Like, what you guys do, I think, is extremely, extremely hard. And to be
+of that quality, it's very unique. We both started our own firms. That is, that just,
+increases the degree of difficulty because you have to build a team. You have to build an LP
+events. If I can own pieces of the GP of both of you, I would. But as a person today, I would not
+start my own fund. It's just very difficult. It's a very competitive industry. And there is a lot of
+capital. It's super competitive. But I would also say that that's a supply of capital. If you look at
+demand for capital, I do think that there is more legitimate demand for capital now than there has been
+in a long time because there's this new, you know, you've got this incredible opportunity.
+You're saying real businesses want to be funded. I agree with that. I think there was a feeling,
+you know, five years ago, let's say, where all the big platforms were getting a little bit
+long in the tooth, you know, social, mobile, cloud, SaaS. It felt like, again, that the
+pond had been fished out a little bit. Yeah. Yeah. And you need a big, you need a big disruption
+to look again, to restock the pond. And I just think that AI is a mother.
+of all disruptions, and it's creating a lot of opportunity.
+All right, everybody.
+This has been another amazing episode of the All In Podcast for your Sultan of Science,
+David Freiburg, your czar, David Sacks, civil servant, David Sacks, doing the work for the
+American people.
+And for our chairman, dictator, I am the world's greatest moderate.
+Jason got past, we're seeing the next time.
+Bye-bye.
+Love you guys.
+Rain Man David Sachs
+I'm going all in
+And it said
+We open source it to the fans
+And they've just gone crazy with it
+Love you Westis
+Queen of Kinwa
+I'm going all in
+What your winners why
+Besties are bad
+Gold 13
+That's my dog taking it out
+It's your driveway sex
+Oh man
+My Appetachor will meet me at least
+We should all just get a room
+just get a room and just have one big huge orgy because they're all just like this sexual tension
+but they just need to release them out.
+Wet your beat.
+Wet your beat.
+We need to get merches are fast.
+I'm doing all in.

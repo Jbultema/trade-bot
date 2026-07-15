@@ -1,0 +1,1105 @@
+source: allin_podscripts
+published_date: 2025-10-17
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/national-guard-in-sf-us-vs-china-on-rare-earths-trump-xi-meeting-price-floors-ais-pr-crisis
+title: National Guard in SF? US vs China on Rare Earths, Trump-Xi Meeting, Price Floors, AI's PR Crisis
+
+All right, you guys were talking about the fun shenanigans you were having in San Francisco
+and at Mark Benioff's Dreamforce.
+Did you see Brian Johnson?
+Was that Benioff's CEO dinner?
+Oh, I didn't see him.
+Yeah.
+Matthew McCona was at our table at dinner.
+All right, all right, all right, David Sack.
+McCona's fabulous.
+He is funny.
+Did you see where I was sitting at that dinner?
+Yeah, table one.
+Right next to the king himself.
+The king himself, exactly.
+King, who? The king and I? Benioff is a king. Well, he's a king at San Francisco. At his party.
+He's the king of San Francisco. Yeah. I mean, obviously he has to bend the knee to the king of kings, which is Trump. But I was sitting next to Bennyoff there.
+It got weird. They got a little weird. No, well, what happened was, did you see that SF standards? Yeah. I don't even know how they can write a headline like this. So it's a San Francisco standard. Yeah. So Benny Off interviewed me at Dreamforce. And somehow,
+this was like headline worthy for SF standard and they said that Mark Benioff dodges
+political questions then fall into over David Saxon through first day one that was just
+referring to the interview we did so we trolled them by taking that photo that's um yeah it's a
+little weird I thought the fireside chat you guys it was great it was great yeah it's just
+an interview it was really good actually he's a very good interview yeah totally but
+apparently to SF standard it's like some sort of transgression that I was
+was even interviewed.
+They didn't get the memo that cancel culture is over.
+Yeah.
+I know.
+That's what it feels like, right?
+They're like trying to,
+they're trying to gin up some sort of brouhaha over the fact that I was speaking.
+Yeah.
+Oh, you can't talk to David Sacks.
+He's in the Trump administration.
+Not a lot of talk to him.
+He's literally,
+about 100 people a week who say that.
+Literally the AI guy and the AI CEO shouldn't talk to him.
+It's like, you know, like, what the f***?
+Yeah, I'm an AI company.
+I should not talk to the government's AI person.
+Right.
+By the way, did you see.
+that there was one other very important conference in town at the same time as Dreamforce.
+Okay.
+I discovered this on my X-Feed.
+Feel like a cold open about to have what, the young socialists or was it the Republicans?
+It was called SlutCon.
+Oh, SlutCon?
+Yeah.
+Yeah.
+Oh, my lord.
+Look at this website.
+Oh, this is the agenda.
+How to be good at sex with Elia.
+We cannot do this.
+Cut this out.
+Women venting.
+Oh, Sacks.
+That one's for you.
+I would have planned an or is.
+Oh, Freedberg. Here, Freedberg's giving a talk. A Fluffer's Guide to B. Jobs by David Freedberg. Is that a panel or is it a fireside Freepard? Which one?
+Reinforcement learning. Hove feedback. Small groups.
+Oh, you could re-underite your positions. I see that. Reunderwriting your sexual positions by Chmott.
+Here's Chmoph's the last one, the VIP Room. Yeah, that's Chimov. Yeah, that's for a short job. Sacks, how did you hear about this? Don't tell us that you ran out of bed in dinner on dinner.
+and went over to the East Bay.
+Sacks, are you on the mailing list?
+Did they invite you to speak?
+My X-Feed just, you know,
+it's the new AI algorithm,
+is just trying to find things
+you might be interested in.
+Sacks also keynoting this.
+My X-Suite showed me SlutCon.
+So I clicked on it,
+and now it's been nothing but SlutCon
+for a couple of days.
+Let your winners ride.
+Rain Man, David Sack.
+And it said,
+we open source it to the fans,
+and they've just
+Chimoth, what did you think about walking around San Francisco?
+So we went on a walk around downtown San Francisco.
+We had a walk-in-talk?
+Well, we were trying to find a place to get a drink in between the Benioff dinner and Sax's talk.
+We ended up at the W hotel, but I was worried for Chimov because it was his first time on the streets of San Francisco
+walking around with his own two legs.
+How was it, Chama?
+Did you throw out those shoes?
+The Llor Piano shoes?
+I burned.
+The souls, I'm sure, were sullied beyond repair.
+Those are one use for your mouth.
+Those are single use.
+Those are legal use.
+Once I got in the car, I gave Eugene my shoes, and I said, burn these.
+Eugene, I never want to see these ever again.
+They've touched the pavement of San Francisco, and all I said was, yeah.
+Why don't you just have your domestic staff carry you on their shoulders?
+I don't understand.
+Why did you break the crowd to make so sense?
+So, Benioff pulls off this awesome convention, this conference, and then Trump does
+this press conference yesterday saying he's going to send proofs into San Francisco. Did you guys see
+this? Yeah. Well, yeah, but the Benioff thing happened first, right? So Benioff made news because
+he said sending the National Guard to clean up San Francisco. But I actually, I talked to him about
+it and got a little bit of context, which of course, was it quoted or? No, he wasn't misquoted,
+but it happened in a more innocuous way. He wasn't trying to weigh in on a political issue.
+Basically what happened is I think he was describing the security at Dream Force and how they bring in a
+couple of hundred extra off-duty cops, provide security. So then the reporter tried to stir the
+pop by saying, well, would you bring in the National Guard? And Beniof said, sure, if they can be
+cops. And that was kind of the end of it. And then it turns into this massive story that
+Benioff is supporting the National Guard coming to San Francisco, which I think he should support it.
+But it's not exactly what he said. He was saying for Dreamforce, he would hire them.
+Yeah. I mean, who knows exactly what he was trying to say. But the point is that it could have just
+been talking. He wasn't seeking to make the news.
+that ultimately he made.
+But it's not a bad idea.
+You cannot.
+Do you think Trump teed off on that press cycle when he was doing that press conference
+and it was kind of off the cuff sacks when he said,
+oh, they should send the National Guard in to San Francisco next?
+Well, I don't know.
+Yeah.
+I wasn't there for that.
+But San Francisco is a pretty obvious city to send in the National Guard because we have
+this downtown area where, you know, it's like that zombie city area, the Walking Dead
+part on Market Street. And everybody understands that it's because they won't stop the drug dealing.
+So you've got open-air drug markets there on the main business thoroughfare of town,
+which is Market Street. And by the way, let me just back up and say that we have the best mayor
+we've had in decades now. Dan Lurie. Dan Lurie's great. And I think Brooke Jenkins was the DA that
+we'd support it to replace Chase Boudian and after we were called him. So I think she's good, too.
+But they're still working within the confines of a legal system here.
+which is very left wing, you've got all these leftist judges, and I think they're somewhat
+constrained or hamstrung in terms of what they can do. Again, the evidence of that is that you've
+got hundreds of these drug dealers who are just operating with impunity in downtown, and you've got
+this sort of zombie city of people who are so sick with drug addiction that they're pretty much
+living on the street. So I think it would be a relatively easy thing to clean up if they send them
+the National Guard. I would argue that they're like, because I've been working in San Francisco
+and I think it's gotten a lot better this year. So I looked up after all this Benioff, Bruhaha,
+and the National Guard thing that Trump said yesterday. And so the city's publication shows crime
+down 30% citywide and down 40% downtown. Homicides on a 70 year low this year. There are record
+lows of the number of tents left on the street. They've cleaned up all the tents. And I've seen
+this because I drive to my place in the city and they're all gone. And for the first time in seven
+years, they've actually got a net gain in total police officers on the force. And now they've got
+convention bookings up 50 percent with hotel bookings up 60 percent because of it. And so here's
+what D.A. Jenkins put out. She said felony convictions in cases this year, narcotics, 88 percent of
+cases have resulted in convictions. Robbery, 85 percent have resulted in convictions. Burglary, 70
+22% in convictions and gun possession, 70% of cases result.
+And all the car break-ins are down to a 25-year low.
+And so I've noticed it acutely in my experience in the city.
+So it felt a little shocking to be like, oh, we need the National Guard.
+This is like a city on the upswing, in my opinion.
+And I think things are getting much better anecdotally.
+And the statistics represented too.
+So, you know, it just feels like there's a little bit of a runaway narrative with San
+Francisco relative to what I think we, those of us who are in the city are experiencing.
+Let me thread these two stories together and hand it to you, Sacks.
+So the interesting thing, when Sacks and I were ousting Chesa Boudine, one of the things we learned was Chesa Boudine had this famous quote where we were saying, oh, well, we can't get rid of the fentanyl dealers.
+I'm for drug regulation, but not for fentanyl because it's a super drug that kills people very quickly.
+And it turned out, he said all these Honduran nationals were victims, which I guess theoretically could be true, but it's kind of like in that, what do they call it?
+suicidal empathy category.
+But it turns out
+this is something where ICE
+and the DEA have done some work.
+They actually started deporting these people last year
+because the people in San Francisco
+pre-Dan Lurie refused to do it.
+So the federal government
+actually has been taking action
+on this specific issue.
+And we've also been taking out the boats
+bringing the drugs here.
+Pretty controversially.
+You're not seeing a city government
+try to block federal action either,
+which is different than what you see
+in other cities. By the way, this is a good forewarning of what Mamdani's New York is going to
+look like. When Mamdani's New York kind of, you know, takes off, imagine what's going to come into
+the city because there's now going to be permissive culture and, you know, kind of permissive society
+to do this sort of stuff. Yeah. So, I mean, this is where we get strong alignment and
+agreement, like deporting Honduran fentanyl dealers, like, what's taking so long?
+I would ask the administration to take a beat on the San Francisco thing because this city is like
+making major improvements, and I feel very good about the direction. It's not like other cities
+that are on the downstream. And also, I think AI companies are setting up in San Francisco.
+Yeah, it's trending. Money's coming back. Yeah. How many prices are really about. I say the power move
+by Dan Lurie would be to say to the Trump administration, hey, can we get, I don't know,
+three months of National Guard just to be in every BART station and then on these four corners
+in the tenderloin, just as a deterrent? You know what people would do if they did that? People would
+protest and riot because they're like, we don't want.
+federal policing of our city.
+I wouldn't be too sure.
+I think you would get like 10, 20% even in San Francisco riding.
+I think the rest of the people would be like, okay, it's a short duration.
+It's on these corners for this purpose.
+Okay, bring it.
+That's why I think the Democrats are making such a stupid decision.
+But if the city's doing their job and the city's improving, why do you need that?
+It's getting better.
+You know, like this is not the time.
+If things are worse and you're in a spiral down, then it is a backstop.
+Sure.
+Yeah.
+I mean, maybe the reason it's getting better is because that backstop is.
+is there. What? The National Guard backstop? They're hiring more police. They haven't done that in
+seven years in San Francisco. They're finally adding to the police force. Who would be a cop under?
+And they're enforcing and they're getting convictions. It's kind of working. Well, I'll partially
+agree with both of you. So I agree with Freeberg that we have the best mayor we've had in decades
+with Daniel Lurie. And I think he is making progress. And the city is bouncing back. I think we
+probably had the lowest low during COVID. And so a lot of that is just the finally the bounce back.
+And then we got the AI boom, which is creating a lot of wealth.
+And it's bringing a lot of people back to the city.
+And it's starting to absorb all the vacancy we have.
+So in any event, all those are good things.
+Nonetheless, we still have this problem of this blighted area of Main Street where, of all people, Gavin Newsom proved that we could clean it up.
+Remember when President Xi came to town from China for that summit?
+And all of a sudden, magically, that whole area was cleaned up in 48 hours.
+and, you know, all the drug addicts and all the drug dealers basically disappeared.
+I don't know where they sent them to.
+So it shows that there is a way to clean this up virtually overnight.
+And I think that somehow the mayor and the DA are constrained in what they can do.
+So you could have a targeted operation here by the federal authorities to go in and clean that up.
+And I think that would be a good thing.
+What do you think would happen in the city if they did that with respect to the population?
+are they going to welcome or not welcome federal policing of their streets?
+Well, again, I don't think we should be held hostage by lawbreakers who basically threaten
+violent protests and chaos in response to law enforcement authorities doing their job.
+I don't think we should be blackmailed by that or threatened by that or held hostage by that.
+But they're getting convictions.
+They're making arrests.
+Great.
+I think that's awesome.
+I'm applauding their efforts and I'm not criticizing them.
+What I'm saying is we still have this intractable problem.
+of this area of downtown where like J-Cal said, there's a network of drug leaders, just to build
+on your point, J-Cal about the Honduras. There's actually an article in the San Francisco
+Chronicle talking about this where the majority of the drug trade in San Francisco
+comes from a single town in South America. And so, yeah, it's like, why couldn't you just round
+up this whole network in a very targeted operation and deport them? And that would clean up a huge
+part of San Francisco. I think there's an opportunity here. If you look at the cities where it's
+been very successful. So Muriel Bowser, who's the mayor of D.C., obviously, she wasn't thrilled
+about the president sending in the National Guard, and she said so publicly, that being said,
+she also cooperated with it, and it redounded to the benefit of all the citizens of Washington, D.C.
+So I think there's an opportunity here for the mayor to cooperate with the Trump administration
+and do a targeted exercise and clean up the streets of San Francisco. I think that-
+Or he can do it himself. They could do it very quickly. But he's constrained. Did you guys see this
+interview with this woman in D.C. who is describing what it's been like in D.C. over the last
+40 years and see the changes. Yeah, she feels safe. Elon retweeted it. Nick, I sent you the link
+on Signal. Just listen to what she says. It's really, to your point, Sachs, it's like, it's just such a
+no-brainer thing to do. The question now is, I think, is a political calculation who wants to take
+credit for it? Because everybody should be doing this. Oh, yes, listen to this. I'm always got to be
+the person to say it. And I don't want to be the person to say it. But,
+Donald Trump has been president for nine months.
+Nine months.
+And I'm seeing videos from Chicago, D.C., where people are like, yo, I feel safe.
+My kids feel safe.
+This is the best thing he ever did for us.
+So what was happening all these years at this shit?
+Like literally, I've known D.C. and Virginia to have this type of shit going my whole life.
+And I'm in my 40s.
+Okay?
+Almost touching it.
+So what was really true going on?
+If a motherfucker became president nine months ago and cleared that shit out, just a flick on a pin.
+I'm just thinking like, did y'all really ever care?
+Exactly.
+So I think that the point she's making there is we don't have to live this way.
+This is a choice, okay?
+Yeah.
+And we don't have to live in San Francisco with our main drag, our main street, market street,
+basically being an open-air drug market where you've got hundreds of people who are addicted.
+doing drugs in the street, you know, doing other things in the street. And again, Gavin Newsom proved
+that it could all be cleaned up very, very quickly. So look, I think it's great that Daniel Lurie and
+Brooke Jenkins and the new administration are doing a better job, but they're still constrained
+and hamstrung by their own. Well, what they say that said? Hold on by the city's liberal mindset,
+extreme liberal mindset towards what's possible. And I think, like that person just said in the video,
+Trump just did it with a stroke of a pen. This is a choice. We don't have to.
+live this way. It's the biggest unforced era since opening the southern border. These are just
+the two stupidest decisions the Democrats ever made. And obviously the easiest thing to do to split the
+two approaches here, Friedberg, is to have Dan Lurie say, thank you for offering Trump. We would
+like to have it for this period of time in this location. Then you could communicate to the people
+of San Francisco. It's just a test. It's just on these three streets. When it comes top down and you don't
+have a choice. And J.B. Pritzker does what he did, which is, I'm going to ban you from
+coming in and reducing crime. Like, do you hear yourself, Pritzker? Like, I want to stop you from
+lowering crime. There's something else we got to do as well, which is we got to stop funding the
+drug addiction because the city provides something like $2 billion a year to these NGOs
+who are supposedly there to, quote, take care of this homeless slash addicted population.
+And they manage them like their flock, because for every addicted person they add to the
+flock, they get paid more money.
+And so obviously, this is why we have this problem here.
+And in fact, the homeless we have in San Francisco are not predominantly from San Francisco.
+They're from all over the country, all over the surrounding area.
+They come here for the benefits.
+So we create the magnet for all these people.
+So part of it's law enforcement, then also part of it is just cut off the flow of money
+that's funding their drug addictions.
+You are 100% correct on that.
+I completely agree with you on that point.
+and I think that forced treatment center transitions is needed, obviously.
+You know, we have a program.
+I've mentioned this on the show before,
+but for those who haven't heard about it,
+to hear about the absurdity of these programs in San Francisco,
+there's a program called the Managed Alcohol Program.
+Five million dollars per year out of the San Francisco City Budget
+is spent on this program where you can walk into a hotel.
+They have free beer.
+You ask for a beer?
+They give you a beer.
+What?
+You drink the beer, you go out, you party, you come back, you get another beer.
+So they have all these studies that rationalize this program, which is, oh, this is a way to
+help alcoholics recover from alcoholism when they're homeless and they need this treatment.
+But here, you can see this is from last year.
+Yeah, so the treatment is beer.
+Yeah, that works for alcoholism.
+I've heard.
+But it's one of these absurd things where now it's kind of a joke because there's also this
+close part of downtown where, you know, it's a little bit of.
+kind of do what you want where they kind of keep folks. It's like, hey, you can use your needles
+here. Then folks will get a drink. They'll play music. They'll go out to the thing. It's really
+sad how these programs obviously well-intentioned initially become of the most absurd thing that you can
+think of. If you want more of something, keep spending money on it. In fact, there is a program
+for people who are addicted to gambling and they give Chmoth free flags and cranberries at the win to
+help him with his crafts in the chance.
+That will land.
+Yeah, it's amazing if you...
+If I keep going, one's going to land.
+You send a private jet and extend a massive credit line.
+It's amazing.
+How many gambling addicts you'll attract to your casino?
+By the way, did you guys see that J.B. Pritzker disclosed his income from
+2024 and...
+Oh, let's guess.
+Over under. Give us an over under.
+Out of the 10.3 million, 1.4 million of it was gambling winnings from Vegas.
+What?
+Yum, yum.
+Okay, all new respect.
+One point four million, playing blackjack.
+So he's doing cards.
+Yeah, definitely count cards with sacks, yeah.
+Well, no, I'll just tell you, like, look,
+to win $1.4 million in blockchain,
+you basically need to be betting $100k a hand.
+Even I don't do that.
+That's the only way you can win that much,
+which is a lot of money per hand.
+Not judging.
+I'm just saying.
+Sex?
+I mean, that's Dana White level.
+He's stayed a white level.
+That's David Sachs at Caesars.
+I mean, I'm not at that level.
+Come on.
+David plays at the $100 a hand table.
+He's got great.
+By the way, just to put some numbers behind it.
+Speaking of Vegas, aren't we going next month?
+Yes, yes.
+Yum yum.
+Yum.
+Just to put some numbers on it.
+Homeless budget.
+San Francisco, unbelievably.
+High estimate, like $800 million.
+Lower estimate, $700 million.
+And low estimate for homeless people is like $8,000 high estimates.
+It's like 20.
+if we cut in between these two, they're spending $52,000 a year per homeless person.
+$52,000 a year.
+It is a complete utter grift.
+Well, they don't have an incentive to solve the problem because, again, a lot of this money goes
+to NGOs, and they get paid for every addict they can add to their flock.
+Thomas All had a great line about this.
+He said that you get as much homelessness as you're willing to pay for.
+Well, and your point before is other places don't give the services, so therefore the
+homeless slash junkies converse about this, and then they pick the right distinction.
+We don't have to live this way. I appreciate the mayor. I appreciate the DA, but we don't
+have to live this way. There's more that can be done. That is exactly it. You do not have to live
+this way. Yes. Do not stand for it, folks. Okay, here we go. Lots of topics. The U.S.-China
+trade battle is continuing, and this time we have a new wrinkle. Trump and Xi are set to meet in
+South Korea. Later this month, they're going to work out a grand trade deal. And this would be their
+first in-person meeting since 2019, six years ago. But last Thursday, China announced new export
+controls on 12 of 17 critical rare earth minerals effective December 1st. Obviously, we need these for
+EVs, batteries, your AirPods, everything. And on Friday, Trump threatened 100% tariff on all
+Chinese imports on top of the existing tariffs as of November 1st and accused the CCP of trying
+to, quote, hold the world captive stock market tanked, recovered on Monday when Trump told
+everybody, don't worry about it, it's going to be all good. So far this week, things have
+mostly de-escalated. Friend of the pod, Treasury Secretary Scott Bessent, said the Trump
+she meeting is still on track, and quote, we have substantially de-escalated.
+Also, he said the 100% tariff does not have to happen.
+However, on Wednesday, Besson called the export control is unacceptable, and that it's China
+versus the free world.
+Let's take a pause here.
+Freiburg, thoughts on price controls generally, and if you want to expand into the overall
+relationship with China as it relates to rare earth metals, go for it.
+Besson's comments on the price controls speak to what he calls a non-market economy.
+meaning that the Chinese government is intervening and creating artificial surplus in the
+market, which drives prices down and effectively eliminates competition. And so the Chinese push
+in the 90s, supported by the CCP, ultimately eradicated competition and made it non-competitive
+for U.S. companies. So they exited the market, and now the United States finds itself
+completely dependent on Chinese suppliers. Particularly as it relates to rare earths, there was this
+company called Mollicorp that ended up going out of business, the asset, the Mountain Pass mine
+that Mollicorp operated, became MP materials, which Chimov knows well, and did this big deal recently
+with the U.S. government as they've tried to revitalize production at this mine and increase
+output. Freeberg, can you explain price floors for people just in case? So price floors are that
+the government is going to mandate that things have to cost at least X. So they increase the price of
+inputs and basically make it more difficult for China to undercut pricing, which increases
+the rationale for capital to invest in starting competitors because now they can have a
+guarantee of revenue or a guarantee of price. But the problem is that I would argue the government's
+role maybe shouldn't be in setting price floors because that creates a very bad effect long term
+on the market. The government should deregulate and create a more free market in the U.S.
+A large reason why mining and processing of the ores moved offshore was because of the regulatory
+environment in the United States, which made it difficult to compete with China.
+We could argue about the environmental laws and how extensive and how relevant they may be
+today relative to the 90s. But this created a real challenge for companies to compete because
+it was so much more expensive to operate in the U.S. So I would argue we should be focusing not so much
+on setting price floors to create an incentive for folks in the U.S. to get involved in the industry,
+but rather to deregulate and to provide perhaps tax incentives and other economic incentives
+so you don't inflate the cost of things, but you create a much more kind of liquid market
+and drive much more volume and interest in building on this side.
+All right. Price floors. When we were talking about Kamala Harris running for president,
+she was asking for price flaws and price fixing and making sure the government got involved
+in this. How is this different sex?
+Well, look, as a general matter, I agree that the federal government shouldn't be setting the
+prices of goods and it shouldn't be picking winners and losers in the economy. But I think
+this is a different situation because over the past 30 years, we haven't really had a free market
+in rare earths. What's basically happened, like Freeberg was saying, China has been allowed to
+dominate this industry. And specifically, what they did is, starting 30 years ago, they identified
+rare earth and rare earth magnets, the rare earth processing, as a very strategic,
+element in the supply chain, and they set out to dominate it, and they did that by
+massively subsidizing their businesses and driving all of the U.S. competitors and the global
+competitors out of business. And they were partially allowed to do that by stupid WTO rules that
+allowed, quote-unquote, developing nations to subsidize their own industries, even though
+China is not developing. I mean, their economy is comparable to ours, and yet these WTO rules
+allowed them to effectively cheat by subsidizing their industries at the expense of our industries.
+And the result of this is that they do now have course of leverage over the supply chain.
+And over the last few weeks, they just used that imposing this vast new expert control regime
+on rare earth.
+And their idea is to tighten the screws when they feel like it and to use rare earth as a form
+of leverage in the relationship with the United States.
+So we're well past economics here and we're into international relations.
+We're into the balance of power.
+We're into national security.
+And I don't think that the price floors here are designed to make the government,
+the mediator of what prices should be in the free market.
+They're designed to create enough certainty for U.S. investors that they can reinvest in rare earths
+and reshore the processing and the casting of rare earth magnets.
+And I just don't see another way to be able to create the incentives for investors,
+because they know that if they invest a lot of money in rare processing, that all China has to do
+is slash the prices and drive them out of business. And China continually uses that tactic.
+So I think you have to address that if you want to alleviate the American dependency on this
+critical resource, which China currently has control over.
+This started in 2007 or eight with Hu Jintao. And what he basically said is we're going to
+create six or seven national champions. And he was,
+wanted to create them in the critical areas that they needed to dominate over the next 20 years.
+And one of those was rare earths. Another one was batteries and EVs. And yet another one was
+around the active principal ingredients or APIs that are the core inputs for pharmaceuticals.
+So what do they do? And when G came into power, Ging being continued that huge entow strategy.
+What did they do? It's exactly what SAC said, which is they have this very aggressive form of
+mercantilism. How do they affect that? They are willing through provincial balance sheets,
+through federal balance sheets, through loan guarantees, through organizations that are quasi-public
+private partnerships. They step into markets and they can effectively change the spot price on
+demand. Now, why is that problematic? In America, I'll tell you the example of one of our
+businesses. You do these deals that are called take or pay agreements. So MP has a deal with
+General Motors, one of my businesses that makes LFP cathode, same deal with GM. You do what's
+called a take or pay, which means a General Motors steps up and says, great, I will buy X amount
+of volume from you at Y price. And so you go and you take that deal to Wall Street and you say,
+I need financing to build a factory or a capability. Contrast that to the Chinese company
+who just goes to the government, and the government says, here's a bunch of incentives.
+and money and price breaks, just go build it. So already we're a little bit behind. But it's much
+more free market and it's more transparent. So you take a deal, you go to Wall Street, they
+give you money, you start building it, you start to produce it, and then you expect General Motors
+or Ford or Tesla to start buying this stuff. But as SAC said, if all of a sudden China sees it,
+what they do is they enter the market and they will dump an enormous volume of that product
+into the spot market. What happens? The price craters. Now, all of these end buyers are in a really
+tough position because their competitors can buy at a much bigger discount that they can. They have to
+flow that price through their products. Their prices are more expensive. They have less demand.
+And that's the huge negative cycle that China has complete control of. So why is the federal
+government stepping in to create what is essentially a last resort buyer of record, it is so critical
+in these markets because the U.S. balance sheet is the only one that can create a strategic
+reserve around these inputs, not dissimilar to how we do with petroleum. We can nominate now
+things that are critical, disposium, copper, NDPR, all of these things that can now absorb the
+price shocks that China may otherwise be able to affect.
+So I think this structure where we now have these public-private partnerships,
+frankly, is the only practical antidote to dealing with this issue.
+Otherwise, we're always going to be prone to this very clever and accurate and smart
+mercantilism from the Chinese.
+So I'm a big fan of this general market structure.
+It's the only way that you cannot be theoretical and actually respond to the conditions
+on the ground.
+Yeah, we've been doing a little research on this, and here is neodyneum.
+This is one of the two inputs for magnets, for permanent magnets.
+And you can see here, $50,000 for a ton.
+Back in 2020, during COVID, it spiked almost up to a quarter million dollars, and then it came back down.
+So look, you can imagine, like, it's incredibly difficult when there's that much volatility to try to buy CAPEX, to try to plant OPEX, to try to extract from
+the ground, go through all of the regulatory rigamarole that Western countries have to go through,
+and then all of a sudden have a sale price that you can't control.
+And if you look at the cost, we were just doing some research on it.
+If you get your AirPods, it's one or two percent of the cost of that.
+Medical devices, it's a lot more.
+But even in a Tesla model Y, it's less, it's less the, I think this is an inaccurate way
+of looking at it.
+You have to look at the actual mass.
+And so the real problem is in cars, in engines, you're talking.
+talking about tens of kilos ultimately. And that's where the real costs build up. And then separately,
+the permanent magnets that go into cars, you can work your way around. The real in future
+markets that really matter is in robotics because these permanent magnets are the key input
+to the actuation mechanism of the robots, meaning how do the robots move, how do the joints
+move through actuation? That happens because of rare earths and permanent magnets.
+And as Elon said at the summit, he's building all those himself.
+right now only seven percent of the known deposits of it have been found. There's plenty of it out
+there. But to your point, I came to the same conclusion as you, Chimov, which is we should be building
+a strategic reserve of these. And if you look, we could be, you know, buying them when these things are
+down and deploying them. I think we have to do something different. I think instead of trying to
+like time the market, I think what the United States can be much better at is having a broad
+forecast of demand, knowing how many million tons of this stuff we will need, and just thoughtfully
+and methodically being a purchaser of record to create these strategic reserves.
+And then the worst case that can happen is you can do a swap with these customers.
+So Tesla all of a sudden can't go into the spot market.
+They should be able to come to the strategic reserve and be able to buy lithium.
+You know, General Motors need something, whomever, right?
+Figure robots need something.
+I think that mechanism is the only way we can compete effectively on a day-to-day basis with the Chinese.
+I mean, I would argue, I think we actually, if we let the market work and we create the necessary
+kind of structure to allow the market to operate, meaning the regulatory barriers are diminished
+to develop mines and to conduct the processing of the oars. So there's two sides of the equation
+when it comes to this kind of industry of rare earth. The one is mining the ore. You know, this
+Mountain Pass site, which is kind of on the border of California, Nevada, which is now
+MP Materials, they've got this rare earth ore called Bassna site. That's the ore that you get
+out of the ground. And then you have to process that ore to get the elements out of the ore
+that you want to use in manufacturing. The processing steps, I kind of went a little bit deep on this
+over the last week because I got really interested in why we don't do this anymore in the United
+States. And there is so much nasty output from this process. You're using very strong
+acids to do leaching. You do processing, you do extraction, refinement. All of the material
+kind of gets separated out from the rock. And it's dirty. And as a result, there's byproducts
+and waste and environmental exposure, but also human personnel exposure. But the technology hasn't been
+deeply developed in 40 years. It's still kind of 40-year-old chemical engineering technology.
+And we stopped developing it about 40 years ago in the United States. It's not even technology.
+It's no. Yeah, it's not. It's just metallurgy and chemistry. But there are techniques now
+that can be applied that can do this in a kind of scalable, safer way without any of the
+environmental hazards. But this is largely why this shifted over to China is they didn't have the
+sort of regulatory burdens that we have in the United States, which made it much cheaper,
+and the labor cost is much lower. But with automation and certain systems, we can actually
+process this ore. It's not super complicated. It's a series of well-understood steps of chemistry
+and mechanical separation. So we could process oars. The other kind of important point is there
+could be well over a thousand times the proven reserves of rare earths in the existing proven
+reserve catalog using new discovery techniques. So USGS, the geological survey in the United
+States, has this kind of Earth MRI system where they're trying to do new mapping. But there's
+also several private companies that can use radar and microwave imaging. And then you can use
+the system of interferometry where you actually put multiple beams down underground. And you can
+get a better read or a better understanding of where these ores might lie. And there are
+unproven reserves in Texas, in Wyoming, in Colorado, in Missouri, all over the continental
+United States. So if we did decide, hey, this is strategic to us, I do think one of the
+important points is that we can unlock both new kind of discoveries and new refinement systems
+in the United States and actually be truly competitive with China if we put the will behind it.
+So I think like this is a good moment for the United States to observe what's going on and
+not just kind of be, you know, focused on China's production. I think we could outpace them and
+and accelerate through this if we chose to. So, Sachs, where does all of this fit in to the broader
+agreement? And you think that they're going to go to South Korea and come out with a deal? And do you have
+a sense of like what the contours have to be to make this a success? Well, the Treasury Secretary,
+Scott Besson, who we know, just said that the Trump meeting is still on track. And he also said
+that we have substantially de-escalated and that the 100% tariff does not need to happen. So he says
+it's still on track. By the way, I think he's doing a phenomenal job here. He really understands
+the intricacies of this trade relationship, and I think he's capable of both applying pressure,
+but then also finesse. So I think he's doing a great job on this. But in any event, I think the
+reason why you want to have the leaders meet President Trump and President Xi is that I think
+that this relationship, this bilateral relationship between the U.S. and China, will work best
+when there's an agreement at the top. And what I mean by that is that when you just let the
+various bureaucracies deal with each other, you're more likely to have misunderstandings or food
+fights. So let me give you an example. Over the past few weeks, obviously you've had this
+Chinese Ministry of Commerce pass these export controls on the rare earth, which created the possibility
+of greatly limiting the access of not just American companies, but companies all over the world
+to Chinese rare earths, they've sort of backed away from that. Separately in the U.S., you had
+movements by our government to greatly expand the export control list. And basically, there was
+an interim final rule that was issued by the Commerce Department on September 29th that said
+that if a Chinese company is on the export control list, that restriction should also apply
+to any of its affiliates or subsidiaries that are more than 50% owned by that company,
+which is kind of obvious, right? You don't want a Chinese company like Huawei to circumvent the
+entity list by simply setting up a shell organization. So I think it was a perfectly reasonable
+rule to issue, but then China reacted to that very strongly. And so there's just such a high
+chance of the two sides miscommunicating with each other and over-escalating when you just
+allow the bureaucracies to talk to each other. And I think what's most needed right now is to have
+a grand bargain between President Trump and President Xi. And that will then calm down the
+relationship. And obviously, this is going to be a very competitive relationship for as far as
+I can see because there's both security and economic competition going on. But I do think that
+when you have an understanding at the top, it creates conditions for more stability.
+All right. Traders on polymarket think, or no, depending on the situation that we are going to
+see cooler heads prevail, 15% chance of the 100% tariff on China going to effect by November 1st.
+In other words, 85% chance.
+It's not going to happen.
+73% chance of U.S.-China trade agreement by November 10.
+Who do you think has the greatest incentive to decouple?
+The U.S. or China?
+I think both sides understand that they can no longer be dependent on the other
+for things that they consider to be critical.
+So, I mean, the U.S. has realized, wait a second, we can't allow China to have a monopoly on rare earths.
+And by the way, it's not just the rare earths, the processing,
+it's also the casting of the rare earth into magnets.
+So there's this long tail of, I don't know, 20,000 different kinds of magnets that are made
+from rare earths that are used in the industrial supply chain.
+And if China were to cut those off, then it would greatly impede manufacturing of pretty
+much every different kind of electric motors from cars to other goods.
+So in any event, my point is just the U.S. clearly cannot be dependent.
+I'm sure that China is reaching a similar conclusion.
+that doesn't mean that trade can't happen between the two countries. I'm sure it will continue,
+but I don't think either side wants to be in a position where the other side can use its leverage
+beyond just economic terms into geopolitics. But with respect to the Belt and Roads initiative,
+like don't you think China's been planning for the decoupling in kind of a very long-viewed way
+relative to the United States? And they're more, I would say, prepared and active to execute the decoupling,
+is the U.S. still is waking up to the fact that there are certain kind of critical supply chain
+dependencies that we have with China, and maybe we shouldn't be decoupling as quickly as we stated
+our intention to? Like, it feels like they're in a pretty advantaged position, sex, and
+both the buy side and the sell side. They have 20% youth unemployment. They have a demographic
+time bomb that's gone off. They have a pretty moribund real estate market. They have very little to none
+foreign direct investment. So I don't agree with you.
+Well, I would just say that I think what China has been doing,
+meaning they're just as challenges we are. They have different challenges.
+Yeah, no, it's good. It's a good point. Yeah.
+I would just say that I think that China is a rising great power. I think that over the last
+decade, their economy grew to the point where it's roughly the size of the U.S.
+economy, certainly on a on a PPP basis, it might even be bigger. Right.
+But on an international currency basis, it's still smaller. But anyway, the point being that as China
+has risen as a great power, it sought to create its own international institutions. And so if you think
+about what the U.S. has, the U.S. has NATO obviously and the G7 and the World Bank and the IMF and all that
+kind of stuff. And what China has sought to do is create, you know, they created the Shanghai
+cooperation organization, which is a security focused organization. I wouldn't call it quite the
+equivalent to NATO, but it's trending in that direction. They've been probably the main sponsor behind
+bricks. And Belt and Road, I think is part of that.
+They're creating their own network of relationships.
+They're creating their own international order.
+And it is a challenge to the U.S. order.
+I mean, during the unipolar moment from, say, 1991 to, I don't know, 2017, the U.S. was the only
+great power in the system.
+And we basically defined all the key international institutions.
+And China, as it's risen, has done what all great powers seek to do, which is to create
+their own order.
+And so, yeah, I think they do want to be somewhat independent of the U.S.
+they don't want to be dependent on us. And I think we're realizing that we have to act the same way.
+And the shame of it is that when we were running all the key institutions during the unipolar
+moment, like the WTO, we engage in so many foolish policies that allow China to dominate rare earths.
+I mean, we should never have let that happen.
+Can I clarify one thing, which is I think that a lot of people don't know this historical
+artifact, which I think is so fascinating, which is I don't think China is a rising power.
+I think China is a reassending power.
+And the reason I say that is if you go back to 1,500 to now, over all of those years,
+China had the world's largest GDP 70% of those years, 7.0%.
+So if you think about it in that context, especially as a Confucian society,
+I think the Chinese think about this as, hold on, this is reasserting the dominance that we've always had.
+And I think if you start to look at it through that lens, that's why they view the blending
+of public-private partnerships, the organizations that go and help backstop private companies
+in China.
+The other interesting thing, which I learned studying China, is how they allocate capital.
+The capital allocation system is both rigid, but it's incredibly flexible.
+What do I mean?
+The way that China allocates money is the following.
+You have Xi Jinping and his close circle of people.
+they dictate the priorities, right? I would think there was an article, Nick, you can find it,
+but Xi is personally right now helping to draft the five-year business plan of China. But what happens
+is, is it goes from that central group of like seven, eight, nine people to the Politburo. And when it
+gets approved by the Paula Bureau, it gets sent to all the provinces, and then it gets sent to the
+prefectures. So an example was in 2006 and seven, when they decided to prioritize EVs, what you
+effectively have is a cascading set of venture capitalists who are operating against a national
+priority. And then they are rewarded for it. And so you essentially have 300 VCs running around
+organizing human capital and all of these different provinces against all of these different
+priorities. And at the end of that, you get a B.D or you get a ShaoMe or you get these great
+companies. And I think that that is what's so daunting if you think about it. So that's another thing
+that we have to factor as well.
+They have...
+And they have one of those plants,
+Chimov for every industry.
+It's not just...
+So they have like an agriculture five-year plan.
+They have an energy five-year plant.
+And in each one, it details out their forecast
+of not just like how to catch up,
+but what's possible.
+And that's why they're charting new avenues
+of innovation in nuclear power.
+Yeah.
+It's about them, I think,
+getting back to where they have been,
+as opposed to them realizing
+that they could potentially be
+the world's largest economy. It's more of them saying we were the largest for so long. We took
+our eye off the ball, and now we need to get refocused. I think that's more of a national pride
+kind of motivation here, but it's obviously different people, different country, different governing
+structure, et cetera. Isn't that incredible though? 70% of the years since 1500, they had the largest
+GDP in the world? It is incredible. It's stunning. Yeah, I mean, there were these innovations that
+drove some of these ships. The technology of ships and fleets of ships drove the Dutch Empire
+to its prowess and then the British Empire to its prowess. And there were these moments of technological
+innovation. But you're right, always on the heels with China. And this may be China's moment of
+resurgence across the board. The person who really saw this ahead of the curve was Li Kuan Yu
+from Singapore, basically the founder of Singapore. And Graham Allison wrote a book about
+Lee Kuan Yew, where he talks about his insights. And there's a couple of quotes here that I think
+are really good on this. What Li Kuan Yu said is that it's not possible to pretend that this, China, is just
+another big player. This is the biggest player in the history of the world. And he also said
+that the size of China's displacement of the world balance is such that the world must find a new
+balance. So, Jamath, like you're saying, China was the biggest power in the world for hundreds
+of years, and then it was kind of overtaken by the Western powers, and now it's kind of reasserting
+itself. But in any event, this is why I think that during the unipolar moment, the U.S. should
+have been a lot more careful about facilitating China's rise.
+Because we created a monster.
+And this is the point that Professor Meersheimer has made many times.
+And he wrote about this going back to 2002, saying in his article about whether China could
+rise peacefully, and he said the answer is no, because if we facilitate their rise, we will
+create a geopolitical competitor.
+And we'll go from being a unipolar world order to a multipolar world order.
+And that's basically what's happened.
+But at the time, just to remember, like when they were admitted to the WTO and the motivation
+was really about lowering the cost of goods and services.
+for the American consumer, which was like an intrinsically reasonable motivation.
+It wasn't like there was some nefarious intention at the time, but it was short-sighted in
+that it didn't do the calculus. Fast forward 20, 30, 40 years to determine, well, if we then
+kneecap our ability to actually produce anything, where are we going to be if they do start
+to decouple? It was hubris, though. It was hubris because we thought that there was only one great
+power in the system, and that's the way it would always be. We thought great power politics was
+off the table, and we thought that we were at the end of history.
+It wasn't hubris. It was greed. The CEOs at the time and the people who were influential
+and making donations to politicians wanted to make more money. That's why they did it. They
+didn't do it with anything other than a profit motivation, which is greed. Part of American
+like mindset at the time was that we had a monopoly on knowledge work, right? And this was, I think,
+very key. This speaks to the hubris of the decision making was that this knowledge work is where
+you create a separation of labor from intellect, and that there was this idea that America
+would move into a services economy fully and not have to be in a labor economy, and the labor
+economy could be outsourced. Ultimately, that didn't yield true. The internet kind of created
+a rival to knowledge work or a diffusion of knowledge and diffusion of knowledge capacity
+to societies around the world, which really did create a different structure than we anticipated at
+the time. I think that's looking in the review mirror of Freiburg. I think the CEO is at the
+time. We're like, how do we increase the profit margin on an iPhone, on a PC, on any product being
+created? And the way to do that is find the lowest labor source possible, and that was China.
+They just did it out of just pure capitalism. So that was part of it. But there is another
+factor here as well, which I do think the ideology was really powerful. And remember, in the 1990s,
+the leading philosopher or international relations theorist, the most celebrated book, was the end
+of history by Francis Fukuyama. And what he basically said is that we're at the end of history,
+because liberal democracy has won, and it's only a matter of time before the whole world becomes
+liberal democracies. You're right. And the theory about China was that if they got rich,
+they had become more like us, that people would rise up and demand a liberal democratic government
+as they became rich. And so we then justified, and there probably was an element of greed
+to this as well, we then justified helping China rise on the grounds that somehow this wealth
+would turn them into a democracy. And in fact, all that it did,
+was make them richer and more powerful.
+It didn't change their government.
+It just turned them into a huge geopolitical competitor to the U.S.
+The author who actually predicted this,
+well, there's Meersheimer who predicted in the early 2000s.
+Also, Samuel Huntington wrote a book called The Clash of Civilizations in the mid-90s
+that was sort of the opposite of, you know,
+end of history was celebrated.
+Class of civilizations was sort of reviled.
+But what Huntington said is that what these other civilizations
+want around the world is not westernization. They want modernization. And as they modernize and become
+richer, they're not going to basically westernize. They're going to become competitors to the Western
+order. And that's basically what happened. I thought for sure you were going to say Freedmen's,
+the world is flat, which was, I think, air cover for all this, because you would get the peace dividend
+if everybody had McDonald's and everybody was watching the same movies. Go ahead, Shemoth, you have some thoughts?
+That Huntington book is actually exceptional. The thing with Francis Fukuyama is he writes
+in this beautiful way, but he literally bats zero.
+It's like, you could basically read a Francis Fukuyama book and understand that whatever
+the opposite of what he wrote is likely going to happen.
+Anyway, that's neither here nor there.
+But I just wanted to pick on what Jason said, because I agree with him.
+The thing is, you had a lot of this geopolitical tension sacks, which I think you articulated
+it well, like the elites were coming together, like, we're going to convert China, we're
+going to do all of this stuff.
+And I think that was a trend.
+but then what hyper-accelerated it, in my opinion, was something that was very tactical,
+which J-Cal mentioned, which is the compensation plans of most of the executives and CEOs of these
+public corporations started to get very tuned to gameable metrics like EPS in and around that same time.
+And so Jason's right, the direct financial incentives to basically think about this as a
+monocultural global world where you can just export things to every nook and cranny of the world
+to optimize for the flow of profits back to you, trap them in any country you want because
+it doesn't ultimately matter to your compensation. That perversion also happened at the same
+time, which I think accelerated what otherwise would have given us maybe another decade or two
+to realize that we weren't in complete control of our destiny.
+It gets, you can see it also in Taiwan. How in the world did 90% of the chips come out
+of one tiny island? It's just capitalism. It's the best place to do it at the cheapest price
+the most efficiently, and then you have now this dependency on Taiwan because we didn't think about
+redundancy and supply chain Freeberg. In related international news, Trump is put up, or the Trump
+administration has put up about $40 billion to help out Argentina. Can you explain what's going on
+there? They're trying to bolster the credit rating of Argentina with the currency swap. That's related
+to the financial condition, the pro-Millay proponents would argue he inherited. The opponents would
+say, you know, he's making things worse. The U.S. is stepping into support his free market
+kind of principles that are ultimately going to drive cross-border cooperation. So I think that
+the swap agreement puts in place a bolstering of support. I thought this was related directly to
+the rare earths. To rare earths? I'm not sure about rare earth. All right, Chumap, I saw you retweeting some
+of this, and there's been a little bit of a back channel in the last 48 hours, kind of breaking
+news here. Data centers are spiking the cost of energy, or people are perceiving it to be doing
+so, in different geographies here in the United States, and, I guess, not wanting to be hated
+or get into wars with consumers, some big tech companies are standing down plans.
+Explain what's going on here, Chimoff, and if this is a trend yet.
+I put this out there when I wrote that because I do think that this is the beginning of a trend.
+Just to be very specific, Google was planning a $1 billion spend on a data center in Indianapolis County or Indianapolis.
+And essentially what happened was there was enough pushback that it looked like if it went to vote in the city council,
+they would have voted against the approval of the data center,
+against the necessary zoning and other regulatory approvals.
+And so I think to avoid what would have been an awkward press cycle,
+Google just pulled it and said,
+don't worry, we're not going to do this here.
+And so that in and of itself, I think, is an isolated incident,
+except that in this same week, it happened two other times.
+In Wisconsin, there was a proposal very similar
+to Google's, but this time from Microsoft, where, again, those local residents got pretty upset,
+and in the 11th hour, Microsoft pulled it. And then in the third example, there was an attempt
+by an Amazon data center to get built near Tucson that I think also was Mothball. So why is this
+happening? When I tweeted this out, or when I posted it, rather, the comments were pretty instructive.
+there are three things that I took away from it. Thing number one is that people are seeing
+their prices of electricity go up in the local areas where the data centers are being built.
+The second is that people are worried about the water consumption of these data centers
+and the cost of water and the access to clean water and that the plans to be net neutral
+on water consumption may or may not be real.
+So there's a concern there.
+And then the third that many of the people commented was about the actual noise pollution
+that it was creating.
+But I took a step back from this and my thought is very simple, which is it actually speaks
+to one of three very important inflection points that we're dealing with on the AI side.
+So one of them we talked about last week, which is you can't have 50 state laws, right?
+It needs to come from the federal government so that there's one set of regulation and that
+there's clarity. So effectively what Sachs has been able to execute on the crypto side, I think his
+intention is to try to do this on the AI side. And I think the federal government needs to be
+given a chance to do that. Otherwise, locally, in the United States, the only winners are going
+to be lawyers and then we're going to create an own goal and China's going to win. Okay. Second,
+we just talked about it, is the government needs to be the economic backs.
+stop to the U.S. supply chain that powers AI, right?
+And we talked about all these things, the metals, the minerals, the rare earths, so that the
+tax that companies can extract are mostly market driven and not exploitative and doesn't
+create air pockets in the funding cycle.
+Okay, so we talked about that.
+But here's the thing that nobody talks about.
+When you look at these data centers, I think what it's saying bottoms up is that these
+hyperscalers need to get these communities on their side.
+I think that there is no understanding of what a token is.
+What is a token?
+I don't think if you ask the average person on the street, they know what it is.
+What they know is that tokens are not jobs.
+And if AI is going to be embraced by the public,
+I think what we need to do a better job of is to show the tangible economic benefits,
+especially in places like Wisconsin and Indiana,
+that may feel like they're missing out.
+So we can't have this narrative that AI may take.
+take your job away while it's also doubling your electricity price? Because they're not feeling
+and seeing the abundance that we think that it can offer. This is exactly right, Chama.
+If you think about the average American citizen, you know, they have somebody in their family
+who drives for Uber or DoorDash. They have truck drivers. They have Amazon factory workers. And all
+those jobs are going away. It's just a matter of when. And some people believe we can handle the
+displacement. Others don't. I had Freiburg.
+Jake, my idea, just sorry, my idea, my idea is you have to use the balance sheet of these big companies, use that free cash flow, and it can act as a cushion for a lot of what needs to happen. So they can pay higher tariffs for electricity. They can also just frankly go and pay for some amount of the electricity bill of these local folks. They could pay for solar and storage if they wanted to. There's a plethora of ideas here where they probably are going to need to step into market.
+to get folks on their side, and I think they have to do it.
+It's interesting, you mentioned that, because I just had Zach Dell from base power
+on this weekend startups last week, and what they do is they put batteries on the side of your house.
+Outside, they're square ones, so they're not as Schfeldt as the...
+Industrial.
+Yeah, industrial.
+It's like industrial ones.
+And then they will fill those batteries when the electricity's cheap.
+They'll deploy it when it's expensive.
+They get the arbitrage.
+And I said to them on the show, like, it's only the only charge of consumers, I think, $500,000,
+to install it, just so they have some skin in the game.
+You don't have to rip your roof apart and put solar on.
+It's just batteries.
+And they said, well, why don't you do that and, like, do an entire neighborhood, like,
+when they build these 3,000 home infill neighborhoods, why don't you put them on every single one
+and then create a network for data centers?
+And he said, standby, that's exactly what we're working on.
+So it kind of combines your idea.
+Sachs, you're the czar.
+What do you thoughts on what Chimov points out is, which is,
+the average working American and their perception of AI, you have job loss, you have electric bills
+going up, and then you have, hey, fake news, the reality, is this real or not? These sore-slop videos
+I'm seeing. It feels like there's a little bit of a trend towards a negative framing of the AI
+innovation, and maybe it's not going to help the bottom half of society. Are you seeing that? Do you
+believe it? And do you have plans to counter it? Well, what I see is that,
+we just came off a quarter of 3.8% economic growth, of which 40% was attributable to AI.
+So in other words, if we didn't have this AI boom going on, by my math, our GDP growth rate
+in Q2 would have been 2.3% said 3.8%. So AI is the difference between having great GDP growth,
+say around 4%, and modest GDP growth around 2%. So it seems to me that everyone who wants to have a great
+economy should be supportive of this AI boom that's happening. The job loss narrative is just
+that. It's just a narrative. It's a story. The media loves to tell it. It's mostly theoretical.
+It's mostly anecdotal. You can point to a few jobs here and there, but there's no evidence of
+widespread job loss. This is just something that people are prognosticating about the future.
+And in every previous technological revolution that we've had, yes, the jobs have shifted,
+but they've shifted from more rote jobs to more sophisticated jobs that create a higher standard
+of living for everybody. The best example being that in the year in 1900, 50% of the U.S.
+economy was involved in agriculture. In other words, one of every two people were farmers.
+By the year 2000, that number dropped to 2%. The difference, the 48% did not become unemployed.
+They went off and did other things. They worked in factories, for example, and they went into the
+service is part of the economy. So I think what's going to happen here is that AI is going to
+enable people to shift their work to more gratifying and less wrote parts of the economy that will
+increase productivity and standards of living for everybody. Bology has a really good way of explaining
+this. And I think this goes to the heart of why the job loss narrative is a fallacy is because
+humans are end to end. What makes them really good and irreplaceable is that they can do an entire job
+end to end and they can pivot their objective and figure out what their objective should be.
+AI is not like that. It has to be told what to do. It has to be prompted. And then when it gives
+your result, that result has to be validated to make sure it's not hallucinating. And then
+frequently you don't really get the result you're looking for. So you have to iterate and you
+have to reprompt and you go through this loop where you do it over and over again until you get
+something that's valuable. So in other words, humans do the things at the end. They do the prompting
+and validation. AI does the stuff in the middle. So as Bologi said,
+as humans are end to end, AI is middle to middle. This is why fundamentally, I think that AI and
+humans will be very synergistic. AI will not be a replacement for humans. They're going to do
+the stuff in the middle that humans don't like to do, and it's going to allow humans to be much
+more productive. So right now, I'm very optimistic about this boom, and I do think that people who
+are criticizing it should really think about whether they want the U.S. to have 2% growth rates or
+4% growth rates, because that's what we're really talking about here.
+are CEO of Uber and Tesla believe the opposite.
+They think these driver jobs are gone pretty quickly.
+The data is showing there's a bit of a serious problem right now
+with young people getting jobs specifically because of AI.
+And obviously, GDP is not wages.
+The people we're talking about who are affected by these job losses don't own equities.
+The top 50, 55% of the country own equities.
+So what do you think about this narrative?
+Do you think it's a false narrative, a true narrative somewhere in between?
+Okay, here's how I would think about what may happen.
+Rather than think about someone, quote, losing their job, which, you know, is a term you keep using and others keep using.
+And it honestly, I think would, I don't know it.
+Whatever it is.
+You're acting like they're passively in a victim state.
+We have the lowest unemployment in history.
+And there's an extraordinary demand for new capacity of work by humans to do stuff in the United States right now because of the extraordinary.
+manufacturing build-out that is underway, driven largely by AI and soon-to-be robotics
+and several other industries. We just talked about rare earths mining and processing. There
+are many industries that are taking off in this country that have not existed. And there's a
+demand for labor. And when there's a demand for labor and there's a shortage of people to do the
+work, the employer typically says, let's go recruit, let's go spend, let's go train. And when you
+have an innovation cycle like is underway right now, the hiring for the new jobs happens before
+the loss of the old jobs happens. So you have to have someone that builds all the model T's
+before people stop becoming horse buggy drivers. So who's going to do all the model T building?
+They're going to get paid. They're going to get offered money to go do those jobs. So what typically
+happens in these cycles is that there's a recruitment exercise, a recruiting cycle that happens
+up front. And so rather than say all these drivers are going to lose their jobs, another way to
+frame it is that all of these drivers are going to be offered new, higher paying jobs
+before there's lower demand for driving. And they're going to say, I can go make twice as much
+money per hour by going over to take this new job. And then they're going to say, I'd rather do
+that than drive. I'm getting paid twice as much and I get to work on more interesting stuff. I like
+that. That's how this is likely going to go. That is the more positive view on how what you're
+calling job displacement actually plays out in the U.S. economy in the decade ahead. A recruiting cycle
+precedes the elimination of old jobs that aren't needed anymore. That recruiting cycle is a net
+positive for people. They say, wow, that is an amazing improvement in my income and improvement in
+my lifestyle. I get to work on more interesting things. My life is better because of it. And then years
+later, the demand for those old jobs starts to die down. But at that point, everyone's been recruited away
+anyway. So Freeberg, you mentioned the Model T putting all the horse and buggies out of business.
+And if we had today's media environment around back in the days of Henry Ford, that's exactly
+what they would have been bemoaning. Is that all the horse and buggy guys are going to put out
+of business? And part of the reason why that would have been a very bad take is because it's
+easy to see the people who are being displaced in the short term, like maybe the Uber
+drivers or something like that. But it's hard to see all the new industries and all the new businesses
+and all the new jobs that don't even exist yet
+that are going to be created.
+So, for example, what were the downstream effects
+of the Model T?
+Well, first of all, it created this new kind of industrial assembly line,
+which applied not just to cars,
+but to all sorts of goods.
+I mean, Henry Ford pioneered that,
+and that had huge ramifications for the U.S.
+becoming the industrial power that it ultimately became,
+which led it to winning World War II.
+Then, just in terms of the car,
+you had things like the build out of the interstate highway system.
+The tire industry?
+Yeah, but this is,
+You think, by the highways, that led to Holiday Inn and hotels and motels and drive-through windows and McDonald's and car culture and the taxi cab industry itself emerged.
+George Lucas got his start as a director by making the film American graffiti, which was all about car culture in the 1950s.
+So that led to Star Wars.
+I mean, there's all these butterfly effects of the Model T being invented, which are absolutely massive.
+and it would have been impossible to foresee all of that stuff a hundred years ago.
+When you have these new industrial revolutions or these new technological revolutions,
+it's going to increase the capacity of humans to design all sorts of new products,
+create all sorts of new businesses.
+And what we've seen is that this lump of labor fallacy that you have all these humans
+that we don't know what to do with, so you have to keep them busy,
+has always proven to be a fallacy throughout human history.
+And by the way, those buggy drivers did not lose their jobs.
+they chose to go into one of these new industries where they were offered more money.
+I don't think this is the issue at all.
+I would say that when you look at Arizona, Indiana, and Wisconsin, what you are looking at
+are people whose jobs are not at risk today, tomorrow, or the next day because of AI.
+I don't think that's what it is.
+And I think that they probably, on the margins, benefit.
+The question is more, how are they getting information and how are they processing their point
+to view so that they show up to these local municipality meetings and essentially cancel progress.
+That is a very important thing to diagnose because it is not isolated.
+So I'm trying to ask the question, which I think is a more practical and important one,
+is what do we do to make sure that the narrative and the facts are clear?
+Because right now you're seeing very different and diverse pockets of people in largely purple
+and then some red states voting against the exact.
+things we need to bring this abundance forward. And I think we need to figure out why and how that's
+happening and have a version that counteracts that. Otherwise, this will become more slowed. It will not go
+faster. Well, you bring up a good point. I'd say there's legitimate and illegitimate reasons to be
+skeptical of AI. So the one that you bring up, Jamath, that I think is very legitimate,
+it is that we are going to have to stand up a lot more electricity, power generation.
+Otherwise, it could drive residential rates up, and that will create a backlash to AI and the
+build-out of data centers, and we don't want that. So that's a legitimate issue that has to be
+solved. However, there are what I would call illegitimate reasons to fear AI, and that's got
+everything to do with the media environment, and they're spreading of all of these unproven
+narratives, in many cases based on contrived studies where they're saying that, you know, there's
+going to be 50% job loss in the next few years, or you have all the Terminator type scenarios
+where AI is going to grow beyond our control, all of these dumer narratives that are being created
+that are scaring people and creating a knee-jerk reaction at the state level, which we talked
+about last week, where there's now a thousand bills going through state legislatures,
+mostly because the legislators feel a need to, quote-unquote, do something, not because
+they know what they want to do. So there's a lot of unnecessary fear out there that's been
+created by the media and then by organizations and companies who have a regulatory capture
+agenda around this.
+What I'm saying is we need to figure out how to fix this because you can't have Google,
+Microsoft, and Amazon cancel essential projects that advance this entire sector and economy
+for it.
+We're not talking about some random fly-by-night business here.
+We're talking about three of the five pinnacle horsemen of the AI race that we are fielding
+on the field.
+Well, we're looking for suggestions. Do you have any off the top of your head? Do you think it's in education? Do you think it's in explaining the value of AI and how those people in those states would benefit from it? Do you think it's just simple economics, lower their electricity bill?
+I think there are two things. The people in Indiana and Wisconsin said, again, electricity prices, water, and noise, I think that we can fix those problems. And I think we, we meaning our industry and specifically the hypers,
+need to start using these gobs of free cash that today, public markets don't value anyways.
+It's not like Google, Amazon, Facebook gets credit for their cash. In fact, Facebook stock price
+went up when they basically burned through all their cash. You want to see them invest.
+And so if you really want to take the CAPEX around AI and make it a true super cycle,
+there's another avenue of where capital can be deployed. I would encourage the CEOs of
+these companies to wake up and get their act together and do it. That's number one. And
+Then the second thing is I think that we need to have better spokesmen for our industry.
+So meaning, every time you see somebody talking about all these naval gazing technologies
+and then can't translate it into simple English into product value, for example, this week,
+on the one side we have anthropic AI dumerism that Sachs had to confront,
+but on the other side, there were all of these people that got freaked out because open AI
+wants to push towards erotica. And all they could think of was the impact to their children.
+Again, this is not necessarily true or not true. But the point is we need to have better,
+more eloquent, reasonable spokesman who can articulate a vision that everybody can buy into.
+And I said this on X. What is Arabella and Soros going to get behind now to find a boogeyman?
+You don't have Israel. You're not going to have Ukraine soon. So what are you going to find as a boogeyman?
+And it's unfortunately sitting right in our backyard.
+Yeah, I'm not sure Altman is the greatest spokesperson for the industry.
+Just to clean up a little bit here, Freiburg, my position isn't Dumerism.
+I just think displacement's going to be more significant than we think.
+And the evidence I have of that is just watching what's happening with young people
+applying for jobs and the increase in unemployment there.
+And then looking at the people who deploy AI at the highest velocity,
+which are obviously tech companies.
+if you look at Alphabet, you know, they had peak Googlers in 2022, 190,000, and they've had
+massive earnings and profits increase and have 187,000 people now, in other words, less.
+And then you do the same for meta-Ur and Amazon, you know, meta peaked at 86,000 employees
+now at 75, Uber at 33, now at 31, and Amazon, where you'd think you'd have a lot of growth here.
+they peaked at 1.6 and now they're down at 1.55. So these companies are not hiring. The gains
+they're talking about publicly in the deployment of AI are significant and they all have
+aggressive plans to use automation specifically in robots and self-driving and obviously
+knowledge work to reduce headcount increase profits. And I think that's going to become the
+narrative that's going to be very challenging for our industry because if you look at our
+own companies, they're saying, wait a second, your companies aren't growing. And my kid got a
+computer science degree. If you look at the unemployment level of people graduating with computer
+science degrees who are developers, it's increasing. Unemployment amongst developers is increasing.
+And that's just really notable. So I wouldn't say I'm a dumerous, but I am concerned that the
+new jobs might not show up as quickly as the old jobs or the static team size trend continues.
+because we've had static team sizes for years now.
+Okay, this has been another amazing episode
+of the number one podcast in the world,
+the all-in podcast.
+Tell your friends, write a review
+about how much you love the all-in podcast.
+We'll see you.
+This is episode 247.
+Thank you to our Sultan of Science.
+We missed you last week.
+To our czar,
+have a great time this weekend at SluckCon.
+Be safe at SlutCon.
+Sleckons already happened, to be clear.
+I'm not going.
+We missed it? Where's the after party?
+There's got to be a post-play party this weekend.
+Who knows?
+It's got to be an after-party.
+And, of course, puts the Dick and Dictator, your chairman.
+He puts the dick and dictator.
+You put the slut and slut-con.
+I'm sure.
+You put this bizarre and bizarre, and he puts the anus in your anus.
+And Calcanus?
+And he puts the anus.
+I don't think you want to use.
+Is that word? I don't think that's one you want to use.
+Paneus. All right, everybody. And Moose is doing
+great. Thanks for us. Good. I love all of you. I love all
+you guys. We'll let your winners ride.
+Rain Man, David Sack.
+And it's said, we open source it to the fans, and they've just gone crazy with it.
+Love you, Ski.
+I'm going all in.
+What? Your winners are gone.
+That's my dog taking it.
+I don't know it's your driveway.
+We're not, no.
+Oh, man.
+My habitation will meet me at place.
+We should all just get a room and just have one big you, George, because they're all just like this sexual tension, but they just need to release them out.
+Wet your beat.
+Wet your beat.
+We need to get merchies are fast.
+I'm doing all in.
+I'm doing all in

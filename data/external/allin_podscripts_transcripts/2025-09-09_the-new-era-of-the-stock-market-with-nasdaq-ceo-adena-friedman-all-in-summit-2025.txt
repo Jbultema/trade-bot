@@ -1,0 +1,517 @@
+source: allin_podscripts
+published_date: 2025-09-09
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/the-new-era-of-the-stock-market-with-nasdaq-ceo-adena-friedman-all-in-summit-2025
+title: The New Era of the Stock Market with Nasdaq CEO Adena Friedman | All-In Summit 2025
+
+Over the last year to date, up 14%.
+Over the last year, NASDAQ shares up 40% over the five-year period,
+more than doubled up over 100%.
+You've been on a real tear.
+She is often on the list of not just the most influential women in finance,
+but just the most influential.
+Adina transformed NASDAQ into a global tech powerhouse.
+Adina is a dealmaker at her core.
+NASDAQ is in the business of deals.
+We are here to advance economic progress for all.
+and gentlemen, please welcome
+NASDAQ CEO
+Adina Friedman.
+Welcome.
+Hey, Jason, how are you?
+How are you?
+Hi, Tama.
+It's great to see you.
+Hey, Dina.
+Great, it's great to be here.
+Welcome.
+Thanks for coming out.
+What a day you've been having.
+Yeah, so you caught some of the action
+earlier today, right?
+I did. I did. I've been watching
+from behind the scenes. It's been amazing to watch.
+You've been hanging backstage.
+Did you have a favorite moment or speaker?
+Oh, I'd never like to pick favorites.
+At NASDAQ, we don't pick favorites.
+We have great companies, but obviously, Renee is a wonderful NASDAQ listed company,
+and I've gotten to know very well with Arm.
+So I would say I always have great conversations.
+You know, sorry, but NASDAQ's more than a market.
+I think I wanted to start with this real important question,
+because when we were talking, I didn't realize that NASDAQ was more than just the
+NASDAQ market that we all know.
+Maybe just for the audience, you could just share a little bit more about the
+brought our business.
+Sure, thank you.
+Well, so first of all, we are really proud of our foundation as a market, but as we started
+to grow and expand the business, first of all, you know, when I became CEO, we had about
+two and a half million dollars in revenue.
+Today or as of the end of last year, we had a little over two and a half billion dollars
+of EBITDA.
+So we've grown and expanded the business quite dramatically.
+And how we've done that is taking our core as a market and saying what more can we do for
+our clients.
+So we are an architect of modern markets.
+We provide our technology to our 17 markets.
+And we sell it to 135 other markets around the world.
+So market infrastructure is our business, and we do that globally.
+Then the second is really being powering that innovation economy,
+like companies like Renee, you know, Arm and other great companies.
+So we've expanded that.
+So our index business now has about $700 billion of assets under management
+that are tied to those great innovators in addition to creating better abilities
+for companies to navigate the public markets and investors to find investments.
+And you had a big announcement today.
+And then the third is also building trust across the financial system.
+And that is anti-financial crime technology, market surveillance technology,
+other technologies that the banking industry and the broker-dealer industry really need
+to manage their lives in the markets.
+And you're right, we had a big investment, we had a big announcement today.
+Which almost Vlad foreshadowed before you actually.
+Yeah, and actually it goes right back to that first pillar of being, you know,
+being the architect of modern markets.
+You want to tell people what?
+You think we should?
+Yeah, yeah.
+Okay. So this morning we announced that we're going to be bringing tokenization into our market.
+So making sure that equities are tokenized and traded on market, in the markets,
+not in a side sleeve, but actually in the core markets.
+So the eventual goal, or is it today? 24 by 7, 365, equities just let it rip constantly.
+I mean, I think we are all moving in that direction.
+We announced several months ago that we're moving to 24-5.
+So we're going to be moving that way.
+So Saturday and Sunday, not?
+Not for equities yet.
+I think that, you know, we have to, we're walking before we run.
+But I think that getting to 24-5 is a major advancement for the U.S. equities markets.
+And then on top of that, now with tokenization, if we can introduce that also into the markets,
+it allows us to really think about streamlining the post-trade processing,
+bringing and modernizing elements of the markets that have a lot of friction.
+You know, we are hyper-resilient and we're hyper-scaled.
+You know, we manage, like today, we had.
+95 billion messages come into our systems today, and we had a median return time of 20 microseconds
+from order to trade. We handle like 3 million messages a second. It's hugely scaled. But then at the
+same time, you know, once that trade occurs, there's a different process. And then the post-trade
+process, as we know, is an area where tokenization really shines and really cutting down the
+friction, managing capital flows across the global ecosystem, and really bringing that capability
+into the market. I'm curious. I get your reaction to this. You know,
+there's this very famous curve which is like you get this early font of insanity and then
+there's the trough of disillusionment and then you grow through and it's is it does it seem like
+crypto is actually in blockchain it's just it's finally real it's like there's real companies
+doing real things stable coins what sacks did with the genius act it's well i actually want to point
+to that because you know honestly having regulators who want to to work on bringing it into the
+mainstream and want to create the rules of the road is such a refreshing thing because I think
+that it allows us all to understand how we can operate within a world where there are tenants
+of investor protection. The technology is going to have things we can and can't do, but also
+being forward thinking and forward leaning and how the technology is going to be applied is going
+to be critical. So we're very excited about the fact that we finally have this convergence of
+regulatory, of regulation between the traditional markets, the digital markets, how do we bring
+it all together to frankly advance all markets. And we're very, very excited about that.
+And I don't mean this to be glib or anything, but wasn't there like a concept around the
+markets having an end of the day at four o'clock, allowing people to have a life and to sleep
+and to not have this anxiety? Are we all going to live in a world where we have to check our
+stocks at two in the morning or some crazy event happens in the world? God forbid a terrorist
+attack or a hack or something? And now we've all got to wake up at three in the
+and decide do we trade or not? Was that the resistance to this? And then how do you
+justify it like, hey, it's going to be worth the fact that none of us are ever going to sleep
+again? So I think first of all, I've been, I started at NASDAG in 1993. And back in the 90s,
+we had a vision to go to 24-7 markets. And we just couldn't achieve it both technologically. It
+wasn't, the technology wasn't there to do it, but also regularly. And a big part of that was
+that resistance from the industry saying, I liked it.
+to be able to finish my day and go home.
+And actually, we need those points in the day.
+I mean, the market open and the market close
+will continue to exist in a world of 24 or 5 markets.
+But you'll have like a U.S. trading day
+and you'll have non-U.S. trading day.
+And so, and we already, our systems turn on at four
+and they turn off at 8 o'clock at night.
+Four in the morning at 8 o'clock.
+Trading occurs during that entire period of time.
+But the official trading days of the United States
+are 9.34.
+I don't anticipate that changing
+because we have to have those moments for,
+like the NAVs to be set for mutual funds and things like that. But allowing the entire world
+to trade these securities, I mean, we have the NASAC itself. We have the top seven companies in the
+world that's on NASAC. Those companies are global. Investors have global interests. The NASDAQ 100 is one
+of the most traded products in the world. The futures trade 24 or 5, so why shouldn't the underlying?
+So that's how we look at those non-U.S. trading hours and then the trading hours and trying to find
+that confluence in the way it was. There's a lot of hands.
+ringing about the number of companies that have gone public, the weight of being a public
+company, the stay private longer moment took Uber 11 long years, Stripe is private now close to 15
+years, SpaceX. So, and we have some folks who maybe think things should run differently.
+We had Spotify go public in a direct listing. You have Chamath experimenting with SPACs.
+What should the IPO market look like? And how can we make it now that we have a government
+that's maybe a little more engaged, let's say,
+and less napping as administration.
+How should the IPO market change and that process change
+to encourage people to maybe not stay private so long
+because all the gains are being captured by the elites,
+by the qualified purchasers,
+the accredited investors can barely get in,
+and let alone the public, by the time the public gets in,
+it does feel like, oh, I'm getting into Instacart,
+and it's going to go sideways for a year or two,
+or three. Yeah. So, I mean, first of all, I think it's really good to remind all of us
+why the public markets are so important for the economy. When a company goes public, they get
+access to billions of investors. And every citizen in this country gets a chance to become an
+owner in the economy. And when we look at just the performance of the NASDAQ 100 over 40 years
+of its existence, the average return on the NASDAQ 100 over those 40 years is a 14.25% annual
+return. So that's double the broader market. It's an incredible return. If individuals have
+access to these great companies, as you know, I saw your pot a few weeks ago showing the performance
+of the public markets, it's such an important part of our economy to engage the population
+in the economy and the growth of the economy and the success of the economy. So I've always believed
+in the balance between public and private markets. I think there are reasons for them both
+to thrive and be great, great for everyone. But the public market experience,
+has become this massive burden.
+And I think that we call it,
+you have to cross the Rubicon to become public,
+and it's become very daunting for CEOs and companies
+to take that decision.
+So we have talked very closely with the SEC and others
+about what can we do to lighten the load
+to make it so that it's not such a huge change.
+We've advocated for changes in disclosure reforms,
+proxy reform, litigation reform,
+all of those things.
+there's such a different existence.
+It shouldn't be so different.
+Does the burden actually improve the quality of the companies that are public?
+Does it improve the fraud rates?
+It's a good question.
+And I actually do think that you will find that there is really good, valid reasons for certain disclosures.
+I think disclosure is a cleansing, you know, as a cleansing event.
+But, and so having the response, but they have to disclose so much more than that's actually
+necessary for an investor to make a smart investment decision.
+Let's strip that away and get back to the,
+core disclosures, and then offering different ways to actually enter the public markets.
+We think the direct listing, we've actually worked closely with Bill and others,
+on a direct listing with the capital raise.
+Like, why not have that?
+We have that ability today.
+And then SPACs are another avenue to public markets.
+ICOs over time, we'd like to kind of bring that as a, that to me is frankly a direct listing,
+a tokenized direct listing.
+So how do we bring all those capabilities into the markets and make them available
+and make these companies feel like it's exciting?
+What that requires, the SEC holder, just one follow up, if I may, that requires the SEC to take a little bit more risk, and they seem like an organization that is incredibly risk off and, you know, very conservative in their approach.
+Did they need to change their approach to be a little bit more forward thinking in your mind?
+Well, I, first of all, I would say that Chair Atkins is, my first meeting with him was just amazing.
+He's great.
+You know, he is forward leaning.
+He wants to create change.
+He wants to make IPOs great again.
+He wants to really support the public markets
+while also, frankly, looking at elements
+of the market structure in the established markets
+and saying, does this all need to exist?
+Because there's a lot of that too.
+And then also really embracing the crypto ecosystem
+to say what elements of this could be brought in
+that regulatory convergence is real.
+How can we create a regulatory road for crypto markets?
+How can we actually create a regulatory road
+for tokenized security?
+markets, how do this things kind of converge?
+Can I ask you?
+He's a great, I mean, I would say he's off to a great start.
+Outside of the equity markets, the biggest liquid pools that are trading right now,
+whether it's the actual tokens or perps or what have you, or the crypto markets themselves,
+it would seem relatively logical that you guys or others would want to play in that game,
+and why don't you?
+Yeah, I mean, I think what's held us back is the lack of regulatory clarity.
+I say that NASDAQ is really good at operating regulated markets.
+And so you ask us to go into a completely unregulated space.
+That's a pretty different existence.
+The risk tolerance is much higher.
+We want to make, I mean, we are always, investor protection first, always.
+So how do we make sure that we create the right structure with fairness and equality for our investors,
+while also being really big innovators?
+You know, we've moved our markets to cloud.
+We've kind of really brought forth a lot of modern.
+our technology into markets, but we also operate best when we have the rules of the road.
+What's happening now in Washington is the potential for rules of the road, and that gives us
+an opportunity to participate in a market that really has not been available to us.
+And is that something that if the federal government just creates that clarity, you know,
+you could compete with Coinbase, you can compete with Binance, you can compete with OKX,
+you can compete with the decentralized.
+I would say that what we would want to do is really work with our institutional clients
+because they also have not been able or willing to play in the markets.
+their risk tolerance has, we have a similar profile.
+So if we can actually bring the essential ecosystem into crypto assets,
+we bring tokenization into securities assets.
+That's a really interesting way for us to play a role
+in really helping evolve these markets
+and bring them to the mainstream.
+And many flowers will bloom in that ecosystem.
+Today, all of your markets are equities.
+These are securities that have secured interest
+in an underlying business asset.
+There's a business that's buying and selling stuff and as employees and those stuff.
+But much of what we see the volume today in prediction markets and crypto markets, there aren't underlines.
+These are, there's a point of view on some value of, for example, in the prediction markets, an event.
+And historically, you'd have to figure out a way to play that event with some equity trade.
+does the prediction markets actually kind of create a new way to express investment
+species that are kind of going to perhaps be a superset of the way we trade equities?
+Or are these just fundamentally different, that owning an interest in a business is different
+than having a point of view on a thesis?
+I mean, I have to say the options markets are as much a prediction market as the other
+prediction market.
+So we own and operate the largest options marketplace in the United States.
+And so we are really, you know, we're very engaged in looking at how do you think about
+you are making a decision as to with the direction of travel in an underlying equity.
+But you're not actually trading in the underlying equity.
+So options are, I think, a great reflection of a prediction market.
+The difference, though, is that in a prediction market, it's a binary yes, no,
+versus an option market you're layering in your bets across multiple price points
+and different durations.
+There's, by the way, a million and a half strikes in the options markets today.
+So I think that in some ways, the prediction markets make these types of bets
+more accessible to more people, because the options markets are quite complex.
+Prediction markets are a little bit more simple.
+So there is an opportunity, and I think it's also good that the SEC and the CFTC, by the,
+are joining forces to think about these markets much more comprehensively.
+Because if we can bring that regulatory paradigm across the markets and make more of these
+type of asset classes more accessible, I think that's good for everyone.
+Maybe you could talk about private markets and the secondary sales that are occurring.
+There's an SPV boom.
+We heard Vlad talk earlier today about tokenizing open AI and SpaceX.
+And I know when Masayoshi-San wanted to buy a bunch of Uber when it was a private company,
+They did that through NASDAQ and, I guess, second market.
+Yeah, NASDAQ private market.
+NASDAQ private markets, which came through the acquisition for second market.
+That's right.
+If I remember my history, correct?
+That's pretty good.
+So how do you think about those opportunities and aggressively going after them right now?
+I take it you are invited into those and people hire you to do that.
+But what about making markets for an open AI share or SpaceX shares or Stripe shares?
+So I think the first thing we focus on in NASDAQ private market is being issuer first in how we work with these private companies.
+So, you know, they are private companies and they're private for a reason.
+They want to have control over their shareholder base.
+And yet they want to create liquidity for their employees, their early investors, etc.
+And there is a second market that is created on the back of these private shares.
+So how do we work with them to allow that to happen in a fair way to make it so that we can introduce them to other investors that they're
+want to have in their cap table.
+SPVs are a way to do that.
+You can roll up a lot of wealth interests in a company
+and create an SPV through a known institution.
+And so the institution becomes the owner.
+Remember, the wealth clients are not actual owners of the shares.
+They're owners of the SPV that are owners of the shares.
+But letting the issuer have the ultimate decision
+on whether or not they invite those investors in,
+I think it's actually really important in the private context.
+And that's kind of part of, I believe, is,
+what makes now that private market different than other providers in the private space
+is we always partner with the issuer.
+Because they're going rogue, basically.
+They're going around the backs of the CFO and CEO of those companies at times,
+and it does piss them off.
+Yeah, I think it's important always to realize that, you know, the issuers,
+the companies, especially private companies, are being very mindful of who they have as the owners.
+Let's let them continue to do that as private companies.
+Once you enter the public market, then you've got public investors,
+and it is a different responsibility.
+And there is different risk that's involved
+in opening the aperture to billions of people.
+But I think, and there should be disclosures also
+provided as a result of that.
+So in that private marketplace,
+let's make sure that we keep some controls in place around that.
+Yeah, the stock market has mostly flipped
+from individual stock pickers
+to just an absolute abundance of index funds.
+It kind of compresses,
+is returns in some way.
+It's hard to find like a lot of alpha in the market.
+You have an enormous concentration
+with the top seven, eight or nine companies
+as a percentage of the overall market.
+When you see these kinds of structural things,
+what does it tell you about the moment of the cycle?
+Because you've seen it now for 30 years.
+Yeah, yeah, I have.
+Well, first of all, I think that the rise of index investing
+is making investing more accessible in general.
+It's a very, very inexpensive,
+very accessible and very liquid way
+to have a view into a sector
+or a return profile or a theme
+and not have to pick stocks.
+And as retail investors,
+it's hard to sit there and be a stock picker.
+It takes a lot of time.
+I worked with my son when he was a teenager.
+He really wanted to do it.
+So I had to teach him how to read an S1 or a 10K.
+It's tough.
+You spend some time on it.
+But indexes makes, I think,
+investing much more accessible.
+However, I also agree with you
+that you also have to balance it
+with active management, you have to have active investors.
+And at the end of the day, I always say
+that there's a balance between the passive
+and active world within the markets.
+And whenever it skews towards the passive,
+what happens is that that creates arbitrage opportunities
+for the active.
+If the herd really kind of starts to move the socks
+in a certain direction, the active manager should step in
+and take advantage of that arbitrage.
+But the real foundation of it, though, Chimot,
+is this that the NASDAQ 100 or these innovative companies
+are, they are performing,
+performing the way they're performing for a reason. And it becomes very difficult to beat the index
+because these companies are very hard. It's hard to find companies that deliver a better return than
+they do. And I think that's where active management has struggled just because they are trying
+to beat a benchmark, but that benchmark is such an attractive benchmark. Let me ask a question
+unrelated to NASDAQ. Your role on the board of the New York Fed, from where you sit and your role
+in capital markets, do you think that there is a trend of de-dollarization underway?
+There's a report that just came out on central bank holdings that have shown dollar
+denominated, I think it was treasury declining from 60 to 40%, gold going from 10 to 20% over just
+the last decade with some acceleration perhaps underway.
+Obviously, China's selling down treasuries.
+What's your view on where we are with respect to spending, with respect to central bank
+interest in dollar-denominated assets and what that implies for our markets.
+Yeah.
+I mean, I think, first of all, I am a huge believer in dollar as a reserve currency,
+and the fact we will be persistent as a reserve currency over a long period of time.
+I think our economy is just such a powerhouse.
+I think that the rule of law and the stability that we have and that we deliver to the
+world is going to continue to provide that anchor for the dollar to be the reserve currency.
+But, you know, investors will express themselves
+that they see certain risks start to manifest.
+I do think, as you guys talk about a lot,
+you know, the amount of debt that we have in the country
+is something that we're starting to see manifest itself
+in the markets, and we'll make it so that they look for alternatives
+if they feel like the return characteristics of a treasury
+are different than what they could get in another,
+the risk weight of returns versus other currencies or other treasuries.
+They're going to express themselves.
+I believe in the U.S., I feel like I believe in the power
+of the U.S. economy to work its way through this.
+I believe that you guys talking about it a lot
+is actually going to help us make ourselves work our way through it.
+Does the Fed?
+And the Fed, I think the Fed is a staunch believer
+and the reserve currency.
+I don't think that they have any, you know,
+at least my experience with them is that they don't have any significant concerns
+that have arisen from what you talked about.
+Do you think that there's a data issue at the Fed?
+You know, I've talked about this before.
+I just, I worry that, you know,
+sort of bad inputs, bad decisions.
+And they don't necessarily benefit from the best of what's available
+and quite frankly, the best of what's available is, you know, held close by certain companies
+and not really shared broadly because that they think is their edge.
+So I'm just curious how enabled the Fed is to actually see the tea leaves
+and actually see what's actually happening on the field.
+I can only say, I mean, I can just speak from my own experience,
+the Fed is very data-driven.
+They get sources of data, private sources of data, public sources of data.
+They'll get private databases of information,
+that they're not gonna disclose
+or they're not gonna share with others as an input.
+But there are many, many inputs
+that they take into consideration.
+And they share every 10 days,
+we go through and understand a market updated,
+economic update to help us understand
+and frame what's happening in the economy
+and they use that data.
+They're quite wedded to understanding the data.
+But they'll take in new sources.
+If new sources become available
+or they find something that could be useful,
+they will absolutely take that into consideration,
+but it won't supplant everything else
+that they're looking at.
+Do you have concerns about the Fed remaining independent?
+We've seen a bit of pressure from this administration.
+We've seen it from other administrations in the past,
+but were your thoughts broadly on the Fed and independence
+and the importance of that and their mandate.
+Yeah, I mean, I know there's a debate, you know, even in the...
+Healthy debate, yeah.
+A health debate, I would say, on that point.
+I do have a point of view.
+I do think that the Fed, we've benefited for almost 250 years
+on having Fed independence.
+I think that it's important to allow the Fed to think long-term
+And that's why the term of the Fed chair is six years, like to think longer term than through individual political cycles and to be data dependent.
+And I agree to Moth, like there should be new sources of data that are made available to allow the Fed to continue to make those smart decisions.
+And I think in terms of the decision making within the Fed, that independence allows them to look through a lot of different noise in the economy and to think longer term.
+Are they going to make perfect decisions every time?
+No.
+Are they a political?
+With 2020 hindsight, we could all look back and say, oh, we would have done it differently.
+Are they a political, politically driven organization in your experience?
+Yeah, my perspective in my experience is that it is a very data-driven, very apolitical.
+I mean, the New York Fed has been very, very focused on just looking at the economy,
+looking at the markets.
+They take pride in that, I take it?
+A huge amount of pride in that.
+And they have, you know, there's definitely, I mean, they've gone through some very different political cycles.
+I've been there for almost six years, and yet it's been a very steady process of evaluating the monetary policy, very steady.
+While they also do a lot to operate the economy, it's pretty cool.
+Yeah.
+Do you think that we need to think more about the underlying leverage that the Fed enables in market participants?
+And specifically, you know, I've said this, I worry that we financialize so much of the economy that,
+you know, hedge funds.
+They can take on so much leverage that even if you have, you know, 60, 70 billion, you're
+running a trillion long, and, you know, a trillion is not what it used to be, but it's still
+a lot of money where you can really screw up the infrastructure of America if you blow up
+or if, you know, things go wrong. And there just doesn't seem to be this robust check
+and balance anymore yet again. I mean, we had it for a few years coming out of the GFC because
+everybody was so burned by it. But I think that all these risk men,
+measures. If you look at them, many of them say, you know, a lot of these folks are running
+very levered. So I don't know if you see that from your vantage point.
+I mean, certainly NASA, as the CEO of NASDAQ, we do see it in not so much in our specific
+ecosystem, although there are, you know, highly levered, let's say, ETFs and other things
+like that. Certainly outside the regulated markets in the crypto space, there's a lot
+of leverage there too. In the derivatives markets there is. But so, but at the same time, I think
+there are a lot of checks and balances within the securities ecosystem that forces us to go back
+towards a mean and there is an oversight that the SEC has on what levered products are at least
+brought into the public markets. In terms of the Fed and looking at levered, I think that the way
+that they focus it is what really truly creates systemic risk. And the GFC really introduced
+the fact that there are certain banks that introduce systemic risk by capitalizing the banks the way
+they have. They feel like have addressed a lot of that.
+Yes, some of that activity moves off outside the banking system
+that they don't necessarily have complete control over,
+but their view is that it's distributed enough
+that it doesn't necessarily create systemic risk
+or having a too big to fail hedge fund, for instance.
+But that's how they kind of manage that risk.
+Leverage is a part of the system,
+but I think there's a responsibility we all have to think about how much...
+Where do you see the biggest risk in the markets today, all markets?
+All markets.
+There's a lot of talk about climbing defaults,
+in commercial real estate
+and the catalyzing effect
+that may result from delinquency rates
+starting to climb.
+Private credit.
+Can I just say I've heard about this now
+for several years.
+And I also would say that the banks,
+to the extent they have a lot of real estate
+in their portfolio, they've been working through that.
+I do think that as we start to be in an environment
+where we can start to see rates come down,
+I think that there'll be a lot of pressure
+that's eased off of some of those concerns.
+And people are also,
+coming back to work. Like, you know, commercial real estate's going through a cycle, but it's
+going to go through a different cycle. So, but I do think that a lot of banks have been working
+through those issues and had been managing actually quite well. We have over 5,000 banks in
+this country, so it's also, again, it's pretty distributive risk. So I'm going to go buy stocks
+tomorrow. I think that's a great idea. Everyone was saying, thank Tina Freedman for being here
+today. Thank you. Thank you. Thank you. Thank you.

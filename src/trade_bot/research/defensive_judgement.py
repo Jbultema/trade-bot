@@ -123,6 +123,11 @@ def build_defensive_judgement_audit(
                 "episode_start": bool(episode_start.iloc[position]),
                 "nonpanic_defensive": bool(defensive_weight.iloc[position] < 0.90),
                 "panic_defensive": bool(defensive_weight.iloc[position] >= 0.90),
+                **_episode_setup_features(
+                    prices[benchmark_ticker],
+                    defensive_weight,
+                    position,
+                ),
             }
             day_rows.append(row)
             if not bool(episode_start.iloc[position]):
@@ -148,6 +153,16 @@ def build_defensive_judgement_audit(
                     position,
                     horizon.trading_days,
                 )
+                lifecycle = _episode_lifecycle_metrics(
+                    signal,
+                    prices[benchmark_ticker],
+                    prices[cash_ticker],
+                    returns,
+                    defensive_weight,
+                    common_index,
+                    position,
+                    horizon.trading_days,
+                )
                 event_rows.append(
                     {
                         **row,
@@ -162,6 +177,12 @@ def build_defensive_judgement_audit(
                             else pd.NA
                         ),
                         "benchmark_forward_max_drawdown": benchmark_drawdown,
+                        "strategy_excess_vs_benchmark": (
+                            strategy_return - benchmark_return
+                            if pd.notna(strategy_return) and pd.notna(benchmark_return)
+                            else pd.NA
+                        ),
+                        **lifecycle,
                         "judgement": classify_defensive_judgement(
                             benchmark_forward_return=benchmark_return,
                             cash_forward_return=cash_return,
@@ -253,6 +274,25 @@ def summarize_defensive_judgement(events: pd.DataFrame) -> pd.DataFrame:
                         errors="coerce",
                     ).median()
                 ),
+                "avg_strategy_forward_return": float(
+                    pd.to_numeric(eligible["strategy_forward_return"], errors="coerce").mean()
+                ),
+                "avg_strategy_excess_vs_benchmark": float(
+                    pd.to_numeric(
+                        eligible.get("strategy_excess_vs_benchmark"),
+                        errors="coerce",
+                    ).mean()
+                ),
+                "median_avoided_drawdown": _median_avoided_drawdown(eligible),
+                "median_missed_upside": _median_missed_upside(eligible),
+                "rerisk_within_horizon_rate": _bool_rate(eligible, "rerisked_within_horizon"),
+                "median_days_to_rerisk": float(
+                    pd.to_numeric(eligible.get("days_to_rerisk"), errors="coerce").median()
+                ),
+                "after_recovery_rerisk_rate": _rerisk_timing_rate(
+                    eligible,
+                    timing="after_recovery",
+                ),
             }
         )
     if not rows:
@@ -330,10 +370,55 @@ def defensive_judgement_scorecard(
             "defensive_median_forward_drawdown": float(
                 row["median_benchmark_forward_max_drawdown"]
             ),
+            "defensive_median_avoided_drawdown": _safe_float(
+                row.get("median_avoided_drawdown")
+            ),
+            "defensive_median_missed_upside": _safe_float(row.get("median_missed_upside")),
+            "defensive_rerisk_within_horizon_rate": _safe_float(
+                row.get("rerisk_within_horizon_rate")
+            ),
+            "defensive_avg_strategy_excess_vs_benchmark": _safe_float(
+                row.get("avg_strategy_excess_vs_benchmark")
+            ),
             "defensive_judgement_label": defensive_judgement_label(row),
         }
     )
     return output
+
+
+def current_defensive_setup_context(
+    result: BacktestResult,
+    prices: pd.DataFrame,
+    *,
+    defensive_ticker: str = "BIL",
+    benchmark_ticker: str = "SPY",
+    scenario_context: pd.DataFrame | None = None,
+) -> dict[str, float | str | pd.Timestamp | None]:
+    """Return point-in-time setup features for the latest strategy date."""
+
+    if result.weights.empty or prices.empty or benchmark_ticker not in prices:
+        return {}
+    common_index = result.weights.index.intersection(prices.index)
+    if common_index.empty:
+        return {}
+    prices = prices.reindex(common_index).sort_index()
+    defensive = effective_defensive_weight(
+        result,
+        defensive_ticker=defensive_ticker,
+    ).reindex(common_index).ffill().fillna(0.0)
+    position = len(common_index) - 1
+    context: dict[str, float | str | pd.Timestamp | None] = {
+        "date": pd.to_datetime(common_index[position], errors="coerce"),
+        "defensive_weight": float(defensive.iloc[position]),
+        "risk_weight": max(0.0, min(1.0, float(1.0 - defensive.iloc[position]))),
+        **_episode_setup_features(prices[benchmark_ticker], defensive, position),
+    }
+    scenario_row = _latest_scenario_context_row(
+        pd.to_datetime(common_index[position], errors="coerce"),
+        scenario_context,
+    )
+    context.update(scenario_row)
+    return context
 
 
 def defensive_judgement_label(summary_row: pd.Series) -> str:
@@ -359,6 +444,7 @@ def defensive_false_alarm_bayes_update(
     threshold: float,
     horizon: str = "1m",
     current_defensive_weight: float | None = None,
+    current_setup: dict[str, object] | None = None,
     recent_years: float = 3.0,
     similar_band: float = 0.10,
     prior_strength: float = 20.0,
@@ -377,6 +463,12 @@ def defensive_false_alarm_bayes_update(
         "recent_false_alarm_rate": None,
         "similar_episode_starts": 0,
         "similar_false_alarm_rate": None,
+        "similar_correct_defense_rate": None,
+        "similar_median_avoided_drawdown": None,
+        "similar_median_missed_upside": None,
+        "similar_avg_strategy_excess_vs_benchmark": None,
+        "similar_similarity_score": None,
+        "similarity_basis": "defensive_weight_only",
         "posterior_false_alarm_rate": None,
         "posterior_false_alarm_low": None,
         "posterior_false_alarm_high": None,
@@ -405,15 +497,12 @@ def defensive_false_alarm_bayes_update(
     latest_date = eligible["date"].max()
     recent_cutoff = latest_date - pd.Timedelta(days=int(recent_years * 365.25))
     recent = eligible[eligible["date"] >= recent_cutoff]
-    similar = pd.DataFrame()
-    if current_defensive_weight is not None and "defensive_weight" in eligible:
-        defensive = pd.to_numeric(eligible["defensive_weight"], errors="coerce")
-        similar = eligible[
-            defensive.between(
-                max(0.0, current_defensive_weight - similar_band),
-                min(1.0, current_defensive_weight + similar_band),
-            )
-        ]
+    similar, similarity_basis = _similar_setup_events(
+        eligible,
+        current_setup=current_setup,
+        current_defensive_weight=current_defensive_weight,
+        similar_band=similar_band,
+    )
     contextual = _concat_contextual_evidence(recent, similar)
     if contextual.empty:
         contextual = recent
@@ -428,11 +517,14 @@ def defensive_false_alarm_bayes_update(
     low, high = _beta_normal_interval(posterior_alpha, posterior_beta)
     recent_rate = _false_alarm_rate(recent)
     similar_rate = _false_alarm_rate(similar)
+    similar_judgement = similar["judgement"].astype(str) if not similar.empty else pd.Series(dtype=str)
     label = _false_alarm_sniff_label(
         historical_rate=historical_false_rate,
         recent_rate=recent_rate,
+        similar_rate=similar_rate,
         posterior_rate=posterior_rate,
         recent_count=len(recent),
+        similar_count=len(similar),
     )
     output.update(
         {
@@ -442,6 +534,29 @@ def defensive_false_alarm_bayes_update(
             "recent_false_alarm_rate": recent_rate,
             "similar_episode_starts": int(len(similar)),
             "similar_false_alarm_rate": similar_rate,
+            "similar_correct_defense_rate": (
+                float(similar_judgement.eq("correct_defense").mean())
+                if not similar_judgement.empty
+                else None
+            ),
+            "similar_median_avoided_drawdown": _median_avoided_drawdown(similar),
+            "similar_median_missed_upside": _median_missed_upside(similar),
+            "similar_avg_strategy_excess_vs_benchmark": (
+                float(
+                    pd.to_numeric(
+                        similar.get("strategy_excess_vs_benchmark"),
+                        errors="coerce",
+                    ).mean()
+                )
+                if not similar.empty
+                else None
+            ),
+            "similar_similarity_score": (
+                float(pd.to_numeric(similar.get("setup_similarity_score"), errors="coerce").mean())
+                if not similar.empty and "setup_similarity_score" in similar
+                else None
+            ),
+            "similarity_basis": similarity_basis,
             "posterior_false_alarm_rate": float(posterior_rate),
             "posterior_false_alarm_low": low,
             "posterior_false_alarm_high": high,
@@ -450,8 +565,10 @@ def defensive_false_alarm_bayes_update(
                 label=label,
                 historical_rate=historical_false_rate,
                 recent_rate=recent_rate,
+                similar_rate=similar_rate,
                 posterior_rate=posterior_rate,
                 recent_count=len(recent),
+                similar_count=len(similar),
             ),
         }
     )
@@ -594,6 +711,181 @@ def _forward_max_drawdown(series: pd.Series, position: int, days: int) -> float 
     return float(drawdown.min())
 
 
+def _episode_lifecycle_metrics(
+    signal: pd.Series,
+    benchmark: pd.Series,
+    cash: pd.Series,
+    returns: pd.Series,
+    defensive_weight: pd.Series,
+    index: pd.Index,
+    position: int,
+    horizon_days: int,
+) -> dict[str, object]:
+    rerisk_position = _rerisk_position(signal, position)
+    days_to_rerisk = None if rerisk_position is None else int(rerisk_position - position)
+    benchmark_recovery_position = _benchmark_recovery_position(
+        benchmark,
+        position,
+        horizon_days,
+    )
+    recovery_days = (
+        None
+        if benchmark_recovery_position is None
+        else int(benchmark_recovery_position - position)
+    )
+    rerisk_timing = _rerisk_timing_label(
+        rerisk_position=rerisk_position,
+        benchmark_recovery_position=benchmark_recovery_position,
+        episode_position=position,
+    )
+    days = days_to_rerisk if days_to_rerisk is not None else horizon_days
+    evaluation_days = min(days, max(0, len(index) - position - 1))
+    rerisk_date = index[rerisk_position] if rerisk_position is not None else pd.NaT
+    return {
+        "episode_end_date": rerisk_date,
+        "days_to_rerisk": days_to_rerisk,
+        "rerisked_within_horizon": (
+            bool(days_to_rerisk <= horizon_days) if days_to_rerisk is not None else False
+        ),
+        "defensive_weight_at_rerisk": (
+            float(defensive_weight.iloc[rerisk_position])
+            if rerisk_position is not None
+            else pd.NA
+        ),
+        "benchmark_return_to_rerisk": _forward_return(benchmark, position, evaluation_days),
+        "cash_return_to_rerisk": _forward_return(cash, position, evaluation_days),
+        "strategy_return_to_rerisk": _forward_strategy_return(
+            returns,
+            position,
+            evaluation_days,
+        ),
+        "benchmark_drawdown_to_rerisk": _forward_max_drawdown(
+            benchmark,
+            position,
+            evaluation_days,
+        ),
+        "benchmark_recovery_days": recovery_days,
+        "rerisk_timing": rerisk_timing,
+    }
+
+
+def _rerisk_position(signal: pd.Series, position: int) -> int | None:
+    for next_position in range(position + 1, len(signal)):
+        if not bool(signal.iloc[next_position]):
+            return next_position
+    return None
+
+
+def _benchmark_recovery_position(
+    benchmark: pd.Series,
+    position: int,
+    horizon_days: int,
+    *,
+    material_drawdown: float = -0.02,
+) -> int | None:
+    end = min(position + horizon_days, len(benchmark) - 1)
+    if position < 0 or end <= position:
+        return None
+    path = benchmark.iloc[position : end + 1].dropna()
+    if path.empty:
+        return None
+    start = float(path.iloc[0])
+    if start == 0.0:
+        return None
+    relative = path / start - 1.0
+    trough_label = relative.idxmin()
+    if float(relative.loc[trough_label]) > material_drawdown:
+        return position
+    trough_position = benchmark.index.get_loc(trough_label)
+    if isinstance(trough_position, slice) or not isinstance(trough_position, int):
+        return None
+    recovery = benchmark.iloc[trough_position : end + 1]
+    recovered = recovery[recovery >= start]
+    if recovered.empty:
+        return None
+    recovery_position = benchmark.index.get_loc(recovered.index[0])
+    return recovery_position if isinstance(recovery_position, int) else None
+
+
+def _rerisk_timing_label(
+    *,
+    rerisk_position: int | None,
+    benchmark_recovery_position: int | None,
+    episode_position: int,
+) -> str:
+    if benchmark_recovery_position is None:
+        return "no_benchmark_recovery_observed" if rerisk_position is not None else "not_rerisked"
+    if rerisk_position is None:
+        return "not_rerisked"
+    if benchmark_recovery_position == episode_position:
+        return "no_material_drawdown"
+    if rerisk_position < benchmark_recovery_position:
+        return "before_recovery"
+    if rerisk_position == benchmark_recovery_position:
+        return "at_recovery"
+    return "after_recovery"
+
+
+def _episode_setup_features(
+    benchmark: pd.Series,
+    defensive_weight: pd.Series,
+    position: int,
+) -> dict[str, float | pd.NA]:
+    return {
+        "benchmark_trailing_21d_return": _trailing_return(benchmark, position, 21),
+        "benchmark_trailing_63d_return": _trailing_return(benchmark, position, 63),
+        "benchmark_trailing_21d_vol": _trailing_volatility(benchmark, position, 21),
+        "benchmark_drawdown_from_63d_high": _drawdown_from_high(benchmark, position, 63),
+        "defensive_weight_change_21d": _trailing_change(defensive_weight, position, 21),
+    }
+
+
+def _trailing_return(series: pd.Series, position: int, days: int) -> float | pd.NA:
+    start = position - days
+    if start < 0 or position >= len(series):
+        return pd.NA
+    start_value = series.iloc[start]
+    end_value = series.iloc[position]
+    if pd.isna(start_value) or pd.isna(end_value) or float(start_value) == 0.0:
+        return pd.NA
+    return float(end_value / start_value - 1.0)
+
+
+def _trailing_change(series: pd.Series, position: int, days: int) -> float | pd.NA:
+    start = position - days
+    if start < 0 or position >= len(series):
+        return pd.NA
+    start_value = series.iloc[start]
+    end_value = series.iloc[position]
+    if pd.isna(start_value) or pd.isna(end_value):
+        return pd.NA
+    return float(end_value - start_value)
+
+
+def _trailing_volatility(series: pd.Series, position: int, days: int) -> float | pd.NA:
+    start = position - days
+    if start < 0 or position >= len(series):
+        return pd.NA
+    returns = series.iloc[start : position + 1].pct_change().dropna()
+    if returns.empty:
+        return pd.NA
+    return float(returns.std(ddof=0) * math.sqrt(252.0))
+
+
+def _drawdown_from_high(series: pd.Series, position: int, days: int) -> float | pd.NA:
+    start = max(0, position - days)
+    if position >= len(series):
+        return pd.NA
+    path = series.iloc[start : position + 1].dropna()
+    if path.empty:
+        return pd.NA
+    high = float(path.max())
+    current = float(path.iloc[-1])
+    if high == 0.0:
+        return pd.NA
+    return float(current / high - 1.0)
+
+
 def _attach_scenario_context(events: pd.DataFrame, scenario_context: pd.DataFrame) -> pd.DataFrame:
     if "date" not in scenario_context:
         return events
@@ -608,6 +900,43 @@ def _attach_scenario_context(events: pd.DataFrame, scenario_context: pd.DataFram
         direction="backward",
         tolerance=pd.Timedelta(days=65),
     )
+
+
+def _latest_scenario_context_row(
+    date: pd.Timestamp | pd.NaT,
+    scenario_context: pd.DataFrame | None,
+) -> dict[str, float | str | None]:
+    if scenario_context is None or scenario_context.empty or "date" not in scenario_context:
+        return {}
+    timestamp = pd.to_datetime(date, errors="coerce")
+    if pd.isna(timestamp):
+        return {}
+    frame = scenario_context.copy()
+    frame["date"] = pd.to_datetime(frame["date"], errors="coerce").dt.tz_localize(None)
+    frame = frame.dropna(subset=["date"]).sort_values("date")
+    if frame.empty:
+        return {}
+    eligible = frame[frame["date"] <= timestamp]
+    if eligible.empty:
+        return {}
+    row = eligible.iloc[-1]
+    if timestamp - row["date"] > pd.Timedelta(days=65):
+        return {}
+    output: dict[str, float | str | None] = {}
+    for column in [
+        "risk_off",
+        "transition",
+        "risk_on_fragile",
+        "risk_on",
+        "defensive_or_transition_probability",
+        "constructive_probability",
+    ]:
+        value = _safe_float(row.get(column))
+        if value is not None:
+            output[column] = value
+    if "scenario_context" in row:
+        output["scenario_context"] = str(row.get("scenario_context"))
+    return output
 
 
 def _safe_float(value: object) -> float | None:
@@ -625,6 +954,116 @@ def _false_alarm_rate(events: pd.DataFrame) -> float | None:
         return None
     judgement = events["judgement"].astype(str)
     return float(judgement.eq("false_alarm").mean())
+
+
+def _similar_setup_events(
+    eligible: pd.DataFrame,
+    *,
+    current_setup: dict[str, object] | None,
+    current_defensive_weight: float | None,
+    similar_band: float,
+    max_events: int = 24,
+) -> tuple[pd.DataFrame, str]:
+    if eligible.empty:
+        return pd.DataFrame(), "none"
+    setup = dict(current_setup or {})
+    if current_defensive_weight is not None and "defensive_weight" not in setup:
+        setup["defensive_weight"] = current_defensive_weight
+    feature_scales = {
+        "defensive_weight": 0.10,
+        "defensive_weight_change_21d": 0.20,
+        "risk_off": 0.10,
+        "transition": 0.12,
+        "defensive_or_transition_probability": 0.15,
+        "constructive_probability": 0.15,
+        "benchmark_trailing_21d_return": 0.08,
+        "benchmark_trailing_63d_return": 0.14,
+        "benchmark_trailing_21d_vol": 0.16,
+        "benchmark_drawdown_from_63d_high": 0.10,
+    }
+    usable_features = [
+        feature
+        for feature in feature_scales
+        if feature in eligible and _safe_float(setup.get(feature)) is not None
+    ]
+    if len(usable_features) >= 2:
+        scored = eligible.copy()
+        distances: list[pd.Series] = []
+        for feature in usable_features:
+            current = _safe_float(setup.get(feature))
+            if current is None:
+                continue
+            values = pd.to_numeric(scored[feature], errors="coerce")
+            distance = (values - current).abs() / feature_scales[feature]
+            distances.append(distance)
+        if distances:
+            scored["setup_similarity_score"] = pd.concat(distances, axis=1).mean(axis=1)
+            scored = scored.dropna(subset=["setup_similarity_score"]).sort_values(
+                ["setup_similarity_score", "date"],
+            )
+            close = scored[scored["setup_similarity_score"] <= 1.0]
+            if len(close) >= 5:
+                return close.head(max_events), "multi_feature_context"
+            if not scored.empty:
+                return scored.head(min(max_events, max(5, min(8, len(scored))))), (
+                    "nearest_multi_feature_context"
+                )
+    if current_defensive_weight is None or "defensive_weight" not in eligible:
+        return pd.DataFrame(), "none"
+    defensive = pd.to_numeric(eligible["defensive_weight"], errors="coerce")
+    similar = eligible[
+        defensive.between(
+            max(0.0, current_defensive_weight - similar_band),
+            min(1.0, current_defensive_weight + similar_band),
+        )
+    ].copy()
+    if not similar.empty:
+        similar["setup_similarity_score"] = (defensive.loc[similar.index] - current_defensive_weight).abs()
+    return similar, "defensive_weight_only"
+
+
+def _median_avoided_drawdown(events: pd.DataFrame) -> float | None:
+    if events.empty or "judgement" not in events:
+        return None
+    correct = events[events["judgement"].astype(str).eq("correct_defense")]
+    if correct.empty or "benchmark_forward_max_drawdown" not in correct:
+        return None
+    drawdown = pd.to_numeric(correct["benchmark_forward_max_drawdown"], errors="coerce")
+    drawdown = drawdown[drawdown < 0.0]
+    if drawdown.empty:
+        return None
+    return float((-drawdown).median())
+
+
+def _median_missed_upside(events: pd.DataFrame) -> float | None:
+    if events.empty or "judgement" not in events:
+        return None
+    false_alarms = events[events["judgement"].astype(str).eq("false_alarm")]
+    if false_alarms.empty or "benchmark_excess_vs_cash" not in false_alarms:
+        return None
+    missed = pd.to_numeric(false_alarms["benchmark_excess_vs_cash"], errors="coerce")
+    missed = missed[missed > 0.0]
+    if missed.empty:
+        return None
+    return float(missed.median())
+
+
+def _bool_rate(frame: pd.DataFrame, column: str) -> float | None:
+    if frame.empty or column not in frame:
+        return None
+    values = frame[column].dropna()
+    if values.empty:
+        return None
+    return float(values.astype(bool).mean())
+
+
+def _rerisk_timing_rate(frame: pd.DataFrame, *, timing: str) -> float | None:
+    if frame.empty or "rerisk_timing" not in frame:
+        return None
+    rerisked = frame[frame["days_to_rerisk"].notna()] if "days_to_rerisk" in frame else frame
+    if rerisked.empty:
+        return None
+    return float(rerisked["rerisk_timing"].astype(str).eq(timing).mean())
 
 
 def _concat_contextual_evidence(*frames: pd.DataFrame) -> pd.DataFrame:
@@ -649,9 +1088,16 @@ def _false_alarm_sniff_label(
     *,
     historical_rate: float,
     recent_rate: float | None,
+    similar_rate: float | None,
     posterior_rate: float,
     recent_count: int,
+    similar_count: int,
 ) -> str:
+    if similar_count >= 5 and similar_rate is not None:
+        if similar_rate >= historical_rate + 0.12 and similar_rate >= 0.35:
+            return "similar_setups_false_alarm_prone"
+        if similar_rate <= historical_rate - 0.12 and similar_rate <= 0.30:
+            return "similar_setups_support_defense"
     if recent_count < 4:
         return "thin_recent_evidence"
     if recent_rate is not None and recent_rate >= historical_rate + 0.12 and posterior_rate >= 0.35:
@@ -670,11 +1116,20 @@ def _false_alarm_sniff_readout(
     label: str,
     historical_rate: float,
     recent_rate: float | None,
+    similar_rate: float | None,
     posterior_rate: float,
     recent_count: int,
+    similar_count: int,
 ) -> str:
     recent_text = "not enough recent episodes" if recent_rate is None else f"{recent_rate:.1%}"
-    if label == "recent_false_alarms_elevated":
+    similar_text = (
+        "not enough similar setups" if similar_rate is None else f"{similar_rate:.1%}"
+    )
+    if label == "similar_setups_false_alarm_prone":
+        prefix = "Historically similar defensive setups have false-alarmed more often than the long-run base rate."
+    elif label == "similar_setups_support_defense":
+        prefix = "Historically similar defensive setups have supported staying defensive."
+    elif label == "recent_false_alarms_elevated":
         prefix = "Recent defensive signals have false-alarmed more often than long history."
     elif label == "recent_evidence_supports_defense":
         prefix = "Recent defensive signals have been more useful than long history."
@@ -688,8 +1143,8 @@ def _false_alarm_sniff_readout(
         prefix = "Recent evidence is mixed."
     return (
         f"{prefix} Historical false-alarm rate is {historical_rate:.1%}; recent rate is "
-        f"{recent_text} across {recent_count} recent episodes; Bayesian-updated rate is "
-        f"{posterior_rate:.1%}."
+        f"{recent_text} across {recent_count} recent episodes; similar-setup rate is "
+        f"{similar_text} across {similar_count} episodes; Bayesian-updated rate is {posterior_rate:.1%}."
     )
 
 

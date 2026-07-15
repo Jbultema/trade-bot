@@ -1,0 +1,366 @@
+source: allin_podscripts
+published_date: 2025-09-15
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/robinhood-ceo-vlad-tenev-on-tokenizing-stocks-expanding-access-to-private-shares-fintechs-future
+title: Robinhood CEO Vlad Tenev on tokenizing stocks, expanding access to private shares, fintech's future
+
+I am Vlad Tenev, the founder of Robin Hood.
+We're talking about Robin Hood.
+The stock's more than doubled since this last report.
+Its stock surged 180% this year, after nearly doubling in 2024.
+Shares of the trading platform now up more than 400% in the last year.
+Glad, your presence there speaks volumes.
+Robin Hood Gold, which hit a record 3.5 million subscribers.
+Most financial services get worse, the more money you have.
+but we wanted to kind of invert that.
+Ladies and gentlemen, please welcome Robin Hood CEO Vlad Tennard.
+My guy.
+Good to see you, brother.
+Chamath, good to see you.
+Glad, it's so great.
+You're sure the reason Jake Health's here.
+I mean, it is a great story.
+It's so true.
+J-Cal bumbles into eight shares of Robin Hood.
+Vlad builds a $100 billion company.
+It's unbelievable.
+I mean, people know me for the Uber investment.
+It was $4 or $5 million valuation, but there's...
+When do I flip that?
+Well, yeah, it's going to take a little more.
+They get 20x left to go, but...
+Wait, was J-Kal the third or fourth investor in Robin Hood?
+It was $20 million valuation, but it's a good story, I think, because you hadn't launched,
+and we're at Antonio's Nut House.
+I went for a drink with my friend
+Addeo. He brought his college roommate
+Elon. We're hanging out at Antonio's
+Nut House in Palo Alto. Rest in peace, Antonio.
+He's dropping these names one second here.
+So, Vlad comes over,
+and I knew each other a little bit,
+and Vlad pitches me
+on this idea, and he says,
+I'm a quant. I said,
+what's a quant? He said,
+quantitative analysis? I said, yeah, I heard of it.
+Hit me with the idea.
+And then he goes, is that Elon Musk?
+I said, yeah. Just hit me with the idea. I know you've got
+to start up. He says, well,
+I want to get this generation, these millennials, the Gen Zs,
+I want to get them to trade stocks.
+I said, love it.
+They don't care about, like, getting a driver's license.
+They're still on their mom and dad's, Netflix.
+You're going to try to get people who don't care about the future to trade stocks.
+He says, yeah.
+I said, what's the business model?
+I said, that's the best part.
+We're going to let him trade for free.
+So I said, okay, let me repeat this back to you, kid.
+You want to get a group of people who don't have any interest in the future.
+to trade stocks and then you're going to make money you're going to make money thank you Vlad
+I said I'm in okay I'm in not only that but he said this is probably the best idea you'll ever have
+I just say that to him too I was like this is the best idea what if it works and here we are 10 years
+later what's worked and last week you're outed to the S&P 500 I was last week or yesterday two days
+ago it was Friday I mean what a huge accomplishment thank you I mean I think I think it was
+because I rejected you for a job, right?
+You heard about that.
+Well, this is a tale of two cities.
+Thank you guys for upgrading me, by the way.
+I guess that's been the best part of being added to the S&P going from just a Jason
+interview to the whole squad here.
+We were doing the rehearsal yesterday, and everyone wanted to do the interview.
+So we said, let's all do it together.
+Yeah, I said, why don't we all get in here?
+Can I, let's maybe start.
+So look, you've built an incredible business.
+There's a part of it that looks like the, you know, what comes after the e-trades of the
+world, et cetera.
+But there's an enormous other part of your business, and there's all these emergent paths.
+I want to just start by double-clicking in something that you announced a few months ago in France.
+And maybe you want to talk us through it what the goal was.
+You got a lot of support, but you got a lot of blowback as well.
+There was a lot of people that were like, wow, this is a little too disruptive, tokenizing these stocks, putting them on the blockchain.
+Maybe talk us through the business and then just double-click on that narrow thing so we can understand what you're up to.
+Yeah. So we had an event in the south of France that we called to catch a token. And the idea behind that event was we wanted to show what Robin Hood, the app, the platform would look like if it was built from the ground up on crypto technology. So what that looked like was stocks on blockchains. Obviously, we added a bunch of crypto native features like perps. We launched in now 31 countries. And then,
+And we also wanted to demonstrate to the U.S. what the power of putting traditional financial services on blockchains was.
+And to me, I think a lot of people talk about 24-7 stock trading, instant settlement, these things that do have real value.
+But I think the most powerful thing is taking inaccessible, illiquid assets and making them available.
+And so we were actually, I think, the first to tokenize Open AI and SpaceX, and we made that
+available to our retail customers in Europe in the form of a giveaway.
+And that was very, very exciting.
+You know, not without its controversy, but I felt like it was such a powerful thing.
+So how do you do it?
+How did you enable that?
+It's actually very similar to stable coin in a way.
+So if you're a stable coin issuer, and it's a little bit oversimplifying, but.
+But you can think of it as we keep some dollars or treasuries in a bucket over here.
+We mint and burn tokens against that bucket, but back at one-to-one, and the tokens can actually
+trade publicly on a variety of blockchains.
+So it's just extending that tokenization concept from stable coins to public and private
+security.
+So you had to go and secure your own block of SpaceX and OpenAI stock.
+and then put it somewhere.
+Were the company's okay with it?
+It depends.
+I think that I'll say a couple of things.
+I think a lot of people are okay with it in principle,
+but if you're a company and you're focused on your mission like OpenAI is
+and you hear about some new thing, it's kind of a distraction.
+So I don't really blame them for tokenization or private access not being
+their top priority. But I did want to be the first to tokenize OpenAI. Did Sam give you a call?
+I have had a couple of conversations with Sam before and after. Yeah, he's a spicy individual. What was his
+take? Did he tell you to stop? I think that actually I'd like to think we get along quite well.
+I think he understood why we were doing it. Again, the distraction aspect when they have so much going on
+is a real thing. But at the end of the day, where do you take it from here? Are you going to go and get
+50, 100 of these well-known private companies? Is that the goal? Is it every private company? How,
+like what do you do from here to build on top of it? Yeah, so we've been hard at work trying to
+figure out how to do it in the U.S. I think that's everyone's interested in that since the
+France announcement, obviously expanding what we do in Europe as well. And there'll probably be
+different mechanisms in the U.S. and in Europe, at least for some time. But yeah, you should
+expect that we go bigger and deeper into the space and have plenty of things to do in the future.
+I'm curious what the relationship has been with the new administration. The last administration
+was not very pro-innovation, crypto, and now you got David running that specifically.
+How has the change in the administration changed how you look at innovation,
+Robin Hood and then Sachs I'm sure you have some follow-up questions here yeah it's been
+very positive I mean just by nature of how many times I've been to Washington the last
+administration didn't invite me to the White House once I asked for meetings and they
+wouldn't even meet in person they were all working remotely until I think 2023 early
+24 it was funny how remote work kind of broke down along political lines it's
+It's sort of like the Republicans wanted to get back into the office.
+I think you're referring to remote work as not working.
+I mean, that is, I wasn't going to say it, but yeah.
+Yeah, it was funny how that works out.
+But it's been very positive.
+I mean, last administration, we were playing a lot of defense.
+It was just sort of like one enforcement action, and we had a well's notice,
+and all aspects of our business were sort of under assault.
+So I think the most direct thing was when that went away, we had to think, okay, well, the administration now wants to work with us rather than just trying to attack us from all these angles.
+And for a while, we didn't even know how to operate in that environment because we were just completely not used to it.
+Yeah, you were on your heels.
+Have you met with Elizabeth Warren?
+I have not.
+No, I just receive letters from time to time.
+But she really, she hates you.
+She told me personally, you really can't take it.
+No, the reason I ask is, what is the core motivation of the idea of we need to enforce, we need to kind of restrict, we need to prohibit?
+Is it consumer protection that the belief is that systems like yours that are more open, more accessible, more usable, more consumers will trade more and potentially lose money, and therefore they have to try and play a role in restricting consumer access to these markets and these marketplaces?
+and that's what they're ultimately kind of driving towards?
+Or do you think that there's something more vested interest-wise that's motivating?
+I mean, I think there's probably both.
+Certainly, consumer protection is the stated reason,
+but obviously these folks have funders and backers and lots of interests.
+I mean, there's powerful financial services companies in the state of Massachusetts.
+So I don't know what's happening behind the scenes,
+but I do think the consumer protection,
+angle is what they're kind of pulling up.
+Sacks, how do you look at this type of innovation in your role at the White House to support it
+and to foster it while still, you know, having some rules on the field?
+Well, I think Vlad's vision around tokenization is very exciting.
+You wrote an op-ed, I think it's on the Washington Post, that I thought was very good on this topic.
+We now have a regulatory framework in place, the Genius Act, which the president signed in
+July that creates the set of rules for stable coins, which are just tokenized dollars.
+And like Vlad's saying, if you can tokenize a dollar, you can tokenize anything.
+You just basically create a reserve of that asset and a secure account at a bank somewhere
+or a broker, and then you mint tokens on a one-to-one basis.
+So I think it's very exciting.
+There's no reason why we can't tokenize.
+Let's start with public securities.
+I think that's the easy case because with public companies, there's ready to be.
+disclosure requirements, there's an abundance of information, and anybody can buy a public
+security, right, because of those disclosure requirements. And the companies don't really
+care who their stockholders are, right? I mean, because they know that the public owns these
+securities. So what we could get right away with tokenized security, public securities, is, like
+you're saying, a 24-7 global marketplace with instantaneous blockchain-based settlement. And that
+could be really exciting. There's no reason why trading has to be on this like nine to five exchange
+with all this, you know, we could enable stocks to trade as easily as you, you know, transfer a
+stable coin. Now, the private security part is interesting. That is, I think, more complicated
+because first of all, the companies, like you're saying, they do care who their shareholders are
+and they do generally restrict those things, and that's why you probably got the phone call from Sam.
+And then the regulators care also because there's not as much public disclosure.
+So there's more of an impetus to protect the public.
+By the way, I'm not saying we can't get there on private securities.
+About a decade ago, I founded a startup to tokenize real estate called Harbor,
+and we were just way too far ahead of the curve.
+But that was basically to tokenize private real estate security.
+So I think we can get there, but I think the place to start that would be really exciting
+would just be like, let's do the public securities first because it's easy or easier from a
+regulatory standpoint, and then we can work our way into private. Yeah, it's certainly easier
+technologically. I mean, we've made both available to some extent in the EU. I think private
+could be more meaningful long-term, and I'll tell you why I think so. If you look at the technologies
+that are transforming society right now and that we feel so optimistic about it.
+over the next five years it's AI and to some extent you know space exploration and I
+think with AI in particular there's a lot of fear right now I mean you talk to a
+random person on the street more than half the time they're a little bit nervous about
+what AI is going to do to them now imagine the scenario if you know 20 to 30% of
+someone's net worth is in AI companies now suddenly they're not fighting against this thing
+They want it to succeed because if AI succeeds and gets better and better.
+So you create a broad-based ownership as a way to let more people participate in the boom?
+Yeah, because I worry about the status quo.
+I mean, these AI companies in particular are getting into valuations of hundreds and hundreds of billions
+with zero retail ownership.
+And that technology could completely disrupt, you know, how normal people live their lives.
+And we actually expect it to drive that sort of disruption because if you look at
+Kathy's presentation, you know, you're talking about negative inflation,
+high GDP growth rates, giant productivity improvements. I don't think you're going to get
+there without some significant labor force disruption. Okay, so what do you need from,
+let's say the U.S. government broadly, whether it's the SEC or whether it's maybe a new
+legislation on Capitol Hill, what exactly do you need to bring about this revolution?
+I think, I think relaxation of accreditation standards.
+towards more self-certification.
+You mentioned a test.
+I think a test I consider to be one form of self-certification,
+but the simplest form is just someone saying,
+I understand the risks,
+I understand I could lose 100% of what I put in this investment.
+You can even put like a skull and crossbones.
+No crying in the casino.
+Yeah, exactly.
+You put somebody crying in the casino, yes.
+Yeah.
+Literally in the app.
+No crying in the casino.
+I think that would help.
+I mean, the point you're making is you can't, on the one hand, cry for access and on the other hand, cry in the casino.
+Exactly.
+Can't do that.
+And the executive order on 401k access, I think, was a step in the right direction.
+So we could also ease into it by extending that to individual retirement accounts, which are great short-term vehicles, and then give it to...
+Do you even need a secure interest?
+Why can't you just create a synthetic or like a fast contract saying, if and when open a guy,
+eye goes public, because you can see how many shares there are. You know what the legal
+registration of the corporation is. Can't you create like a synthetic contract that just
+creates the value of the stock and ultimately needs to settle at some point after the company
+goes public? We can't do that currently. And Open AI in particular is a tricky one.
+Right. Well, pick another property. Yeah, pick any other LLC or CQRF or something. Right.
+But yeah, we're continuing to look at all angles, but I think some clarity would be helpful.
+Because this is the whole value of like, sorry, Chimot, but like futures markets and prediction markets is you can effectively create a synthetic on some underlying without actually having ownership or a secured interest in the underlying or delivery of the commodity.
+You could basically just say, when this thing goes public, it's above 20 bucks a share, below 20 bucks a share on some number of days after something like that.
+But, I mean, I guess one question for you is, is that where prediction markets can take us?
+So the difference with prediction markets is you can create a prediction market, but it has to have an expiry date for the contract.
+So, for example, we have a prediction market live on the platform now about which companies are going to IPO.
+You could do something like that.
+There have been prediction markets in the past, not on our platform, but some other platforms that make a market around the IPO price.
+but if you just want exposure to underlying equity in a private,
+I don't think we can do that at this point.
+How do you think about the one criticism people have had,
+which is, hey, we have got a young generation,
+they're frisky, they want to take all this risk,
+they want to bet,
+and your responsibility as a platform that is giving that access,
+if you're the on-ramp, the education you give,
+and I remember with the options and people being up to short,
+but you came up with an incredibly elegant solution.
+When you try to short something, you give people a test.
+You give them education in that moment before they do it.
+So how do you think broadly about young people getting into wagering,
+they're playing cards, you know, they're betting on fantasy football and doing sports
+betting, but they also want to, you know, have their hand in crypto and in puts and calls
+and pretty sophisticated stuff.
+So what's your responsibility as a platform then?
+introducing them to those sophisticated ways of betting and investing.
+I have a lot of thoughts.
+Actually, when you interviewed me for a job in 2008,
+which by the way, it was one of two final job interviews
+that I got, most people just rejected me.
+I never even got a call from Google or any of the others,
+but it was either Weather Bill, later Climate Corp,
+or Optiver where I interviewed to be an options
+trader. So I got very, very close. We had a math team. Yeah, yeah. I got very, very close.
+He probably don't even remember. You remember Alex Matralka? Of course, yeah. Yeah, I think he was
+he's going to look at right now. I forget my recruiter's name, but that guy was great.
+Anyway, and then I became an entrepreneur. So it might not surprise you to know that me personally,
+I'm sort of like adverse to control on the level of risk that I would take
+because my entire career path was sort of like maximally levered bet on one company
+which is the one that I started.
+So I would be reluctant to discourage people from being entrepreneurs to doing what they want to do with their money or time.
+Of course, I'm in favor of like reasonable things.
+Like you should, it should be clear to you what you're investing in.
+but yeah generally speaking i think if it's available to wealthy people high net worth individuals
+it should be made available to retail as well let me broaden the conversation um it used to be
+historically we would have banks we would have brokerages we'd have payment processors we'd have
+merchant acquirers they were all disaggregated they could all be public they could all build thriving
+companies now with stable coins and everything else there's this creeping convergence you're
+issuing a credit card, Coinbase has a credit card, SoFi has a federal banking license,
+Stripe just launched a new L1 called Tempo. Everybody's competing with everybody. Tell us the scope
+of where you think Robin Hood goes in the next four or five years and what the financial
+landscape and infrastructure looks like. The visas, the MasterCards, the J.P. Morgans, what roles
+do these companies play? As you guys just become more and more ambitious and girthy,
+and big and you know market cap and all that stuff yeah i think the industry goes through periods of
+consolidation and then divergence i think robin hood has a unique advantage which is that our customers
+put an increasing amount of their dollars into robin hood so what we're thinking about and it
+became pretty clear to us as soon as we rolled out our second product we kind of saw what happened
+customers spent more time on Robin Hood.
+The two products help each other.
+So, for example, with retirement, we noticed, you know, the big question was, well, if we
+launch retirement, is it going to cannibalize the core brokerage business?
+But what we saw was the opposite.
+If someone opens up a retirement account, they tend to actually increase the amount they
+put in their individual account.
+And we saw that, again, with the credit card.
+If they're a credit card primary user, top of wallet, they actually put more money.
+into Robin Hood.
+So then that gets us to a future where we ask ourselves,
+can we be your comprehensive financial platform?
+Can you put your direct deposit into Robin Hood?
+Can you put all of your money into Robin Hood?
+Can you get to gold subscriber premium status
+as soon as possible?
+And then can we get all of your family members
+onto Robin Hood as well and your kids?
+So yeah, I don't think anyone's really thinking about it
+from that angle, but I think that,
+that there's going to be over $130 trillion that changes hands from silent generation and baby boomers to younger people.
+And I think Robin Hood's actually very well positioned to be one of the, if not the number one, primary institution that benefits from that transfer.
+We've got over a quarter trillion assets on the platform already, which seems like a big number, but it's actually just a drop in the bucket compared to what's going to happen.
+Where do you see the J.P. Morgan's and the master cards and visas? How do they compete with an elegant product, with hundreds of millions of users, that just, you know, the product velocity that you have, the risk you're willing to take?
+Yeah, I mean, I think that if you think about an incumbent, they have certain benefits.
+They're, like, very muscular from a regulatory standpoint. Like, they know how to deal with regulators. They've got global scale. They've got, you know, tens, hundreds of millions of customers, lots of assets.
+But the disadvantage is that they're sometimes slow
+to adopt new technologies.
+They don't have the best engineering teams.
+They can't move very fast.
+And they can't hire the best talent.
+And so I think that we don't have those downsides.
+We have great talent.
+We move really quickly.
+We use the best technology.
+We haven't been super acquisitive historically,
+even though we're doing more.
+And that prevents us from being bogged down
+by these like massive,
+integration things that take multiple years.
+And so it's a question of, can we get the benefits of scale
+while also maintaining the nimbleness of a technology startup?
+Do you want to give the audience, before we run out of time,
+maybe last question, but tell them about the LLM
+you guys are building.
+This is a different project for you.
+Oh, yeah.
+And the goal of that and why you decided to fund
+that sort of outside the scope of Robin Hood?
+Yeah, so he's talking about Harmonic, which
+a company that I started two years ago and I'm chairman of and completely separate from
+Robin Hood and basically the goal there is to build what we call mathematical super intelligence
+so this is mathematical reasoning that is exceeding the capability of any individual human
+researcher and we had a pretty cool result a couple weeks ago where we announced gold
+metal level performance at the International Math Olympiad, which is the biggest mathematics
+competition in the world. And I think, to my knowledge, we're the only formal model.
+You're the only formal one that got IMO gold, yeah. Yeah, so opening eye and Gemini.
+Open Eye and Gemini did it with informal. Gemini's formal model got a silver last year.
+Explain why it's going to be so critical to have a mathematical superintelligence model.
+Yeah, so two reasons. One that has to do with how these models are trained and the other which is more of a consumer pain point. The thing that we've figured out with formal is how to verify that a statement is true very precisely. And when you're doing reinforcement learning of these models, having a strong reward signal is very helpful because you can just discard all the data that's not helpful and train on the high quality like correct data. And when you're a user of these AI,
+models. Sometimes they hallucinate. And this is actually not just a consumer problem, but also
+an enterprise problem. Because basically, if you're a software engineer using a coding model,
+your job has become, over the past couple of years, it's turned from writing a whole bunch of
+high-quality code to reviewing LLM-generated code and making sure that that's correct. So in a world
+where you've got, you know, LLMs producing thousands and thousands of pages of code.
+Human verification just doesn't scale, particularly for back-in.
+So we want to solve that problem.
+Okay, give it up for David Sachs' second favorite Vlad.
+Good to see you, guys.
+Thank you.
+Thanks, brother.
+My man, I'll see you in Vegas.
+Thank you.

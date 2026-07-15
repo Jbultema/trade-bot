@@ -1,0 +1,1885 @@
+source: allin_podscripts
+published_date: 2025-07-23
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/winning-the-ai-race-part-1-michael-kratsios-kelly-loeffler-chris-power-shyam-sankar-paul-buchheit-jake-loosararian
+title: Winning the AI Race Part 1: Michael Kratsios, Kelly Loeffler, Chris Power, Shyam Sankar, Paul Buchheit, Jake Loosararian
+
+5, 4, 3, 2, 1, 0, all engines running.
+Lift off, we have a lift off.
+That's one full step for man, one giant leap for mankind.
+The world's largest airliner, each wing is big enough to hold five tennis courts.
+This new technology made it possible to meet the user's crucial needs.
+Enter the computer and a new age.
+What a computer is to me is it's the most remarkable tool that we've ever come up with
+and it's the equivalent of a bicycle for our minds.
+Here I am playing a game of chess with a computer, which is
+analyzing board positions and applying a certain kind of intelligence to figure out what its
+next move should be. That's the subject of our program today, artificial intelligence.
+The good future of AI is one of immense prosperity where there is an age of abundance.
+Everyone can have whatever they want.
+We're still in the very early innings of AI.
+I would say the rate of progress is exponential right now.
+Every time I think that we are overstating the impact of artificial intelligence,
+something comes along that tells me we aren't making enough of it on the show.
+You know, there's no 60-minute clock on this thing.
+This is an infinite game.
+Think about solving a problem that would take humans thousands of years to solve.
+Those who can harness and govern the things that are technologically superior will win
+and it will drive economic vibrancy and military supremacy.
+The Trump administration believes that AI will have
+countless revolutionary applications.
+We believe that America's destiny is to dominate every
+industry and be the first in every technology.
+And that includes being the world's number one superpower
+in artificial intelligence.
+It feels like every tech revolution of our lifetime has
+been leading to this moment.
+All right, everybody. Welcome to winning the AI raise. This is our first event in DC.
+Can I get permission from our leader to sit down?
+Yes, you may sit.
+Thanks for coming out everybody.
+We put this event together in just a couple of weeks
+in order to have a really important discussion
+winning the AI race.
+This is something America has to do
+and it's something we will do.
+We're going to do it through the way we've won every other technological race,
+through grit, entrepreneurship, and dogged competition.
+The difference with this administration is they're actually engaging with the technology
+industry. And today we're bringing together many members, or all members of the administration
+here to talk about it.
+And none of this would have been possible without our bestie, David Sachs, deciding
+that he would take some time and become our czar of crypto and AI.
+And I would like to just start with a huge round of applause for David Sachs.
+David, you've been here for six months.
+I'm sorry, but did you actually prepare?
+This is excellent so far.
+No, I'm just speaking from afar.
+No, it's excellent.
+Keep going.
+Keep going.
+He wants to be invited back to DC.
+They told me I've got 12 hours left on the ground.
+I think that White House tour is going to happen after all.
+It might just happen.
+It might just happen. It was in the air. But in all seriousness, you've been here for six months. I think that White House tour is gonna happen after all
+But in all seriousness, you've been here for six months and we all know how capable you are
+But my lord this administration is on a heater when it comes to crypto and AI I am absolutely and I think I speak for everybody in our industry thankful and wildly impressed but not surprised
+At the pace at which you've led
+crypto and AI. What's the first six months been like for you?
+It's really been incredible. I mean, I never expected to go
+into government at all. And really, as a result of President
+Trump coming on our podcast, a year or so ago, that began a
+relationship that, you know, eventually led to me being offered this job.
+And I took it because I just thought it was a once in a lifetime opportunity to work for a president
+who really wants to get things done for the American people. And you can see that.
+Just every day he worked so hard to push forward his agenda for the American people.
+And I think AI and crypto have just been two of those issues.
+But there's been a lot of fun to work on these things because we are getting a lot done.
+Yeah, last week-
+And this date today, we put together
+in just like the last 10 days as an opportunity
+to talk about your action plan that was getting,
+the president's action plan getting published today.
+But we should invite Jacob out
+because Jacob partnered with us from Hill and Valley
+from Jacob Helberg.
+Come on out and join us.
+Yep, our new fifth bestie, Jacob Helberg. Come on out and join us. Yep, our new fifth bestie, Jacob Helberg.
+There you go. Nice to see you, brother.
+Good to see you.
+And, um, Freeberg, your team and Jacob's put a ton of work into this, and we have a lineup
+that is just absolutely outstanding.
+So thank you, Jacob, for the hard work from your team
+and Freeberg, the hard work from your team
+to put this all together.
+Maybe you could give everybody an idea
+of the questions we wanna address today
+and what the format's gonna be.
+Absolutely.
+So the Hill and Dye Forum is a community of technology,
+of builders and policymakers who believe that technology is an engine of wealth creation and is an indispensable pillar for American national security.
+And it was incredibly exciting to have the opportunity to engage in this event, which is actually going to cover a lot of the topics that everyone in our community cares about. Ultimately, we believe that the,
+and I actually said this in my confirmation hearing
+not too long ago, that we're at an inflection point.
+We are in an AI race.
+And so the different parts of the programming today
+will be a series of conversations
+that will cover the different facets
+of how technology will actually create welfare country.
+I think it's like very important as we talked about
+who do we wanna have on stage and how do we wanna talk
+about the President's action plan that David shared with us
+was to highlight that there are new industries
+being created because of AI.
+Industries that couldn't have existed a decade ago.
+And so we've got a couple of those examples.
+And then there are these industries that are enabling
+and accelerating AI. And that's
+mining, energy, chips, fabs, and data centers. So we've got conversations across each of those.
+That's kind of this enabling conversation. And then fortunately, we've been able to get a lot
+of folks from the administration to join us today to talk about the government's role in enabling
+this economic transformation that's already underway. And I just wanna say one point.
+I think what's become apparent to me,
+and I think is wrong in the press narrative today
+is that AI is destroying jobs.
+I think what we are seeing on the ground
+is an incredible job creation engine that's underway.
+And so I think it's very important to highlight that
+and share those stories because they're not told enough.
+And I think there's a real opportunity
+to kind of bring them to light and
+That's hopefully what we can kind of get through today and Chamath just coming around the horn here
+Doesn't matter sure a Democrat Republican independent moderate this issue transcends party
+This is the issue of our lifetime and there's a lot of hard questions and a lot of hard debate
+Maybe you could just speak to
+This administration's ability to bring in a lot of disparate opinions
+and work together across the aisle and with all members of the industry.
+I mean, look, I think historically you've had a fork in the road where you can view technology as either optimistic and glass half full
+or pessimistic and glass half empty.
+The optimistic glass half full view says that the country
+that can harness AI or any of these leading critical edge
+technologies is able to garner most of the gains.
+And then those economic gains can be spread.
+Then it's a debate about how to spread those gains
+within a country and within economy.
+And then from there with economic supremacy,
+you also have military dominance and now you're a superpower and you remain strong.
+The problem is that historically we've gone in the other direction where there has been this mistrust.
+And in that mistrust, you've had global competitors emerge and create, I think, real fundamental existential risk for our place as a superpower. Well said. So the great thing over these last, you know, frankly,
+six months has been a massive pivot
+back into this idea that America is the best.
+We should not be ashamed of the things that we've created.
+And these incredible technologies and these incredible people
+should be celebrated.
+Yeah.
+And let's go and win the race.
+Let's win.
+By the way, how are we going to win the race. Let's win. Okay.
+By the way, how we're going to win the race?
+The action plan, Sachs, I know you invited Michael Kratios to join us here today, director
+of the Office of Science and Technology Policy.
+Should we have Michael come out?
+Yes, Michael come out.
+Yeah.
+Michael, come on out.
+Please welcome Michael.
+How are you guys?
+Good to see you.
+Thank you.
+What's up?
+So I'll kick this off. How are you guys? Good to see you. Thank you.
+I'll kick this off.
+So, President Trump in his first week in office
+signed an executive order that directed us to create this action plan,
+Michael and myself and the National Security Advisor.
+And the objective was to figure out how the US would dominate in AI.
+From his first week in office, President Trump has made this a priority.
+And we see it, we do see it as this global competition or global race.
+And the consequences of losing that race would just be unthinkable because AI is going to
+have such huge ramifications for our economy and also for our national security.
+So the United States has to win it and working with Michael in the
+Office of OSTP, we put out a plan today that has 90 concrete actions that at
+least the executive branch can take to help us win the AI race. And I want to
+call on Michael in just one second. I'm just going to outline the three big
+pillars of the plan. So number one is innovation. There's just no substitute
+for innovation. You have to out innovate your global competition
+You can't regulate your weight just to winning the the AI race
+So number one is we have a lot of things in the plan that are going to help our private sector our startups or our
+tech community
+Out innovate the competition number two is infrastructure. We have to have more and better AI infrastructure, data centers, energy manufacturing in the
+United States.
+And number three is the AI ecosystem.
+We want to have the biggest ecosystem.
+We know from Silicon Valley that the companies that create the biggest ecosystems are the
+ones that win.
+You have the most developers on your platform.
+You have the most apps in your app store.
+Those are the companies that create, you know, those are the companies that dominate industries.
+In a similar way, the United States has to dominate by creating the AI stack for the entire
+world. So those are the three big pillars of this plan. Let me call on Michael, can you, I guess,
+tell us how, you know, maybe speak to the process of how this plan was created last six months.
+I know your office did a ton of work on this and then I guess if you want, flesh out some more of
+the important details as you see it.
+Yeah, absolutely.
+Once the president signed the executive order
+assigning us this task, the first thing we did
+was actually issue an RFI, very exciting government activity.
+And we asked the country, hey, what
+should we include in this plan?
+And I think to be honest, we were all
+surprised with what came back.
+We had over 10,000 responses come
+from all corners of the country.
+We had Hollywood actors sending us responses. We obviously had tech companies. We had everyone 10,000 responses come from all corners of the country. We had Hollywood actors sending us responses.
+We obviously had tech companies.
+We had everybody you can imagine.
+And I think it really showed how impactful this particular technology is to everyone
+and every industry in the U.S.
+So we ingested a lot of those comments, went out to all the agencies
+that work with and in some ways touch AI and came together with this with this plan.
+Now, if you think about it, you it, there's been a lot of national strategies that companies put it,
+that countries put out there over the last five or six years. And what we really wanted to focus on
+is in the title itself, an action plan. We wanted things that we could accomplish in the next six
+to nine months to accelerate and ensure that we can win this race. So if you think about the first
+pillar, which David talked about, which was the innovation pillar,
+what's really key about innovation is we want
+the next great AI discoveries to continue to happen
+here in the United States.
+We have to create an environment that allows that to happen.
+And when we talk about deregulation,
+the way I like to think about it is, you know,
+you can't create, there's never really gonna be a law
+that says, hey, this is how you regulate AI.
+What ultimately is gonna happen is these AI technologies are gonna be a law that says, hey, this is how you regulate AI. What ultimately is going to happen is these AI technologies
+are going to be built into so many other technologies,
+whether it's drones flying, self-driving cars, whether it's
+FDA-approved AI-powered medical diagnostics.
+All these different agencies are going
+to be touching technologies that are powered by AI.
+And it is incumbent on us to create a regulatory environment
+where these technologies can thrive and not
+to be hindered by the government
+The next piece of innovation one thing is really key is
+Using the power of and the data that the government has to drive
+Scientific discovery through artificial intelligence, you know
+We have seen in this first wave of AI great great progress in the way that LMS are able to handle coding for example
+But we can do so much more than that.
+There's incredible data sets the Department of Energy has, for example, at their national
+labs that can help power a lot of next generation discoveries and things in material science,
+in medicine, and that's what this AI plan calls for and drives.
+The next pillar, which is about infrastructure, people talk about this all the time, and it's
+about how do you create a regulatory environment that
+encourages and actually accelerates
+the ability of our power generators and our chip
+builders to be able to do what they need to do here
+in the United States.
+We can plan calls for categorical exclusions
+for AI-related activities, which can allow data centers
+and other power generation to happen on federal lands. And that's going to be coupled with all
+sorts of other efforts to really accelerate the velocity that we can
+build power and ultimately run these data centers.
+So let's talk about before we run out of time, one of the most important issues,
+which is the talent wars. Yeah, we are going to stay focused on AI here, we'll
+leave the border and deportations off the table,
+but we'll talk about something super important,
+which is recruiting talent from around the world.
+This administration, we've gotten different signals,
+and obviously it's a very controversial issue
+here in the United States.
+What do we have to do in terms of immigration,
+and let's just call it recruitment,
+because that's really what it is.
+Recruiting the best and brightest from around the world
+to come work on our team as opposed to say team China
+What do we have to do? What is the administration's philosophy on recruiting the world's best AI talent in the action plan?
+I think what we bring to light and I don't think it's talked about enough is to power and successfully drive
+Continued American leadership in this domain. It is not simply about having the greatest AI engineers
+But is also
+having all the other parts of the workforce which needs to drive this forward. You know, we talked
+to some companies like Caruso and others who are building these large infrastructure builds around
+the U.S. The challenge that they're facing is in electricians and HVAC talent, and the AI plan
+itself spends a lot of time and energy directing various agencies, whether it's Department of Labor
+and others who have these re-skilling and programs to sort of train these people up to be able to spends a lot of time and energy directing various agencies, whether it's Department of Labor and
+others who have these re-skilling and programs to sort of train these people up to be able to fill
+that void. So for us, it's about attracting here to the US the greatest scientists and engineers,
+but it's also to be able to train the American workforce to be able to do the necessary jobs.
+To put that forward. Michael, what's the philosophy going forward on the thing you mentioned just
+before this, which is there's these
+Enormously valuable data sets that sit inside the DOE that sit inside of FDA
+Were presumably if we made them available to private industry particularly American private industry the gains could be incredible
+Is that an open source philosophy? Is that a licensing philosophy?
+How do you think it should best serve the American economy to get this stuff out there?
+Generally government has taken an open source approach to this. And the general challenge
+that we've seen over the years is there's been a lot of lip service to, hey, let's unlock
+data for the American people. And the main challenge is, and for all of us who are in
+AI, the format of that data itself actually matters a lot. If it's like dirty, nasty data that isn't homogenized
+in any way, it's not particularly helpful. And I think that's going to be a big effort that the DOE
+is going to, Department of Energy is going to try to do to make this better and possible. And what
+was great in the recent legislation that was passed in BBB was an actually $150 million ticket
+to the Department of Energy to build an AI for Science program,
+that very much is going to be working on this exact problem.
+Should there be federal preemption on AI regulatory schemes?
+So there's been a conversation about doing this to ensure, I think right now there's
+over a thousand state laws that have been proposed or passed that have some regulatory
+effect on AI and tech related technology.
+Should the federal government preempt all of that and raise it up?
+I think generally preemption is an issue that comes up very often broadly in technology.
+You have this issue with privacy for many years.
+What we're trying to face today and what we talk about in the plan itself
+are actions that the executive branch can take itself.
+And a lot of preemption discussion revolves around what Congress can or can't do.
+So we don't necessarily lean hard on that because we focus on things
+We can accomplish right and just to just to add to that
+So it's true the the action plan doesn't speak to that issue Fieberg very much
+But I do think there is a real threat to national security
+That's brewing by virtue of the fact that like you said
+We've got a thousand bills going through state legislatures right now all regulating AI in different ways
+If this continues we're gonna have a patchwork of 50 different state regulatory regimes bills going through state legislatures right now, all regulating AI in different ways.
+If this continues, we're going to have a patchwork of 50 different state regulatory regimes, as
+opposed to one seamless national network.
+And look, China is, they've declared that AI is a national priority for them.
+They understand how strategic it is.
+And I think if we hobble our AI innovation with a patchwork of 50 different state regimes,
+I think it's going to hurt us.
+So I don't, you know, we weren't ready to declare a policy yet in the action plan,
+but I think it's something that's
+going to have to be looked at over the next year or so.
+Thanks for joining us, Michael.
+Everyone, the director of the Office of Science and Technology
+at the White House.
+Thanks, well done, Greg.
+Thanks.
+Thanks.
+Thanks.
+Great job.
+Great job.
+Great job.
+That's good.
+Thank you, everyone, to the besties in the Hill Valley Forum for the warm welcome.
+I'm Chris Power, the founder and CEO of Hadrian.
+And I'm here to talk to you today about our company.
+The mission is to re-industrialize America.
+We do this by building AI powered factories in the United States.
+So you might ask, why is this important and why should you care about manufacturing in
+the United States?
+Well, what I realized before I came to this country is that we're in a global race.
+So every great nation gets built by having the best industrial power first.
+That gives you the best military, usually the Navy.
+Then you end up with the reserve currency after a conflict and you kind of rule the
+free world in what we've called Pax Americana.
+Like all great companies, you kind of get lazy through that success and you end up off-shoring
+all your heavy industrials to the developing country.
+And then when a conflict comes around, you're kind of in real trouble because you off-shored
+the thing that gave you the power in the first place, which is heavy industry.
+The last three times this happened, it was a pretty good trade for the West.
+It went from the Dutch, the British, the American Empire, where we won World War II.
+This time around, in this kind of two-decade period where we're fighting the AI race, the
+climate, settling the stars, it's really the United States versus the CCP.
+And bear in mind that we won World War II not because we had a defense industrial base
+necessarily, but because we were the industrial powerhouse of the world.
+And when there was a time of crisis, we had all our commercial manufacturing companies
+pivoted defense when we really needed them the most.
+And you had watchmakers making warship navigation equipment, Ford switched from building cars
+to building bombers.
+And it was because of this industrial power, you know, our tanks weren't so great.
+We just had tons of them.
+This is how we won.
+Unfortunately, since the 1970s through the 2020s,
+we've basically hollowed out the middle of America
+and offshored every bit of manufacturing we possibly can.
+It started with Nixon opening up China,
+let them into the WTO, they were the world's factory.
+This was like a huge strategic mistake
+and it's completely hollowed out.
+Good jobs in America as well as left us
+in a very strategically dangerous position
+in terms of our industrial power.
+So while China deindustrialized us,
+they industrialized themselves,
+and they treated manufacturing not as economic
+but a national security priority.
+And now we're in this 20 year window
+where staring down the threat of Taiwan,
+we're in real trouble.
+So just how far behind China are we? We're in this 20-year window where, staring down the threat of Taiwan, we're in real trouble.
+So just how far behind China are we?
+Well, in munitions, China has automated factories that can produce a thousand a year.
+Whereas we run out of missiles in the first seven days of any wargame conflict, and then
+we can't reproduce that ammunition for like three years.
+In shipbuilding, they're 200 times greater than us.
+We produced a grand total of five ships last year.
+Pharmaceuticals are all offshore.
+Drones, iPhones, we don't make any of them.
+And bear in mind in pharmaceuticals,
+the CCP makes a lot of antibiotics.
+This is why industrialization is so important.
+And more importantly, this gets back to the AI race
+for talent is while the US is still the global powerhouse in software and AI talent
+We made China into the global powerhouse for manufacturing talent and what we realized through building this company is that
+While US defense manufacturing which is all we have left because we offshored everything else is really important
+Because we let all those jobs go the entire base is basically a bunch of
+Because we let all those jobs go, the entire base is basically a bunch of patriotic Americans that still know how to do skilled trades that are in their 60s, retiring faster and faster
+and faster.
+So the undependings of our entire defense industrial base is this American talent that
+knows how to do the job, but the rest of the country forgot how to manufacture.
+This is a screenshot of one of China's munitions factories.
+You can Google this online.
+And it's a myth that it's just low cost labor in China anymore. They are very advanced at production. Whereas
+in the United States, underpinning all our defense primes and our industrial base, we
+basically have skilled Americans that are retiring faster and faster and faster, supporting
+hundred to two hundred billion dollar industries across all these different ways to bend, cut,
+ship metal that you need to then put it into drones, ships, satellites, rockets. So while China is racing ahead of us, we're
+really falling far behind and we forgot how to manufacture. So what we realized was
+we have to build full-stack AI powered factories to solve this problem.
+Secondly, the number one issue was this massive skilled talent shortage. Remember
+if you look at shipbuilding or any of these other industries, we are begging
+for millions and millions of welders or machinists that you could give me a billion dollars and
+we can't hire them in this country anymore because we lost that skill.
+The production not having inventory is real deterrence.
+And that you've got to do this by re-industrializing the country to create more jobs, not replace
+them or automate away.
+And that it's always about national security, not economics.
+So we set out to solve this problem by building automated
+factories driven by AI in the US.
+Three years ago when we started this journey,
+we figured out how we're going to do this.
+Well, the answer was just start running a factory
+and build all the AI software at the same time,
+which was a hilariously painful journey
+in the early days of the company.
+This is what Factory One looked like.
+We partnered with some of America's greatest aerospace companies to really beta test this for a good 18 months.
+What can we automate? What can't we? This is one of our first tiny parts that we shipped to America's
+greatest rocket provider. And now we're up to the point where we're building whole products.
+We built Opus, which is a full stack platform for AI autonomy of factories that does a couple
+of really important things.
+In 2024, we launched Factory 2 once out of this beta phase, scaled 10x in a single year
+with the fastest growing manufacturer in the country and now lucky enough to support America's
+greatest companies, both startups, defense primes.
+And this is what the most advanced factory, in our opinion, looks like in America today.
+This is our scale factory too in LA.
+Here you see cutting metal, coming from raw material,
+shaving this down into micron precision tolerance components that go on rockets, satellites, jets and drones.
+And what you see as you go through this is in legacy industry,
+in a deindustrialized nation, you've got really skilled people
+on every machine.
+Hadrian's advanced factories look and operate more
+like a data center.
+We're really proud of having pulled this off,
+but the journey is not over yet, because again, this
+is a whole of nation, $100 to $200 billion problem.
+So where do we actually get to?
+And what sort of productivity gains can you get in AI manufacturing and are we creating more jobs? So firstly
+most factories in the US run at only a 20% uptime, it's not really that
+productive. We have a four times jump in manufacturing productivity. Secondly and
+more importantly we have a 10x jump in workforce productivity and again because
+we have such a scarcity of skilled talent
+in this country, you actually need that AI-powered jump
+to even create the capacity in this nation
+to be able to build ships, drones, and rockets.
+The second important thing is speed
+to get people in these jobs.
+So if you're an advanced manufacturer,
+it can take you up to a decade to get really good at what
+you do, whereas at Hadrian, we've
+managed to make it so that we can train anyone in 30 days.
+And most importantly, 100% of our workforce are from non-factory backgrounds.
+They've never set foot inside a factory before.
+These are folks straight out of high school.
+They retired from the military.
+They had a desk job.
+They were a bus driver from 18 up to 40.
+And this is the most important thing that people have got to realize about the power
+of advanced AI and manufacturing is that we need this productivity boost to just be able
+to compete with China and catch up on these skilled trades that we lost.
+And this is the most important thing that AI is doing for us is enabling huge, huge
+workforce growth.
+So where are we at?
+You know, we've been on this journey.
+In 2025, we're going multi-category and multi- multi factory, and I'll show you a new factory that's launching AI powered in six months, the great state of Arizona,
+as well as launching a dedicated gigafactory. You can think about this as like everyone
+in defense and aerospace needs a Tesla Model 3 factory. This is our beautiful new facility.
+It's about four times the size of the one in LA. Launching by Christmas, we signed the
+lease a couple of weeks ago. It will be online in six months.
+And the most important thing is we'll be creating 350 plus new AI powered jobs in scarce talent
+industries where America just needs this leverage to get ahead.
+The other thing, if you listen to the Secretary of the Navy at Reindustrialize, what is the
+number one problem in shipbuilding, submarine base, and munitions?
+It's actually that there's millions and millions of jobs
+that we need to fill
+because we don't have skilled trades anymore.
+We don't have the volume of the people,
+so we need this productivity boost.
+So in 2026, we're launching advanced factories
+targeted at America's greatest production challenges,
+submarines, ships, and munitions.
+So by the end of this year,
+we'll have three facilities up and running,
+our headquarters, Factory 2 and Factory 3 in LA. But as we re-industrialize the country of this year, we'll have three facilities up and running, our headquarters Factory 2 and Factory 3 in LA.
+But as we re-industrialize the country powered by AI, where is this really going to get us
+to?
+Well, to solve this problem for the country and fulfill the mission, we need to have factories
+in every state.
+And you've got to remember that AI in manufacturing is creating thousands of jobs because we offshored
+everything.
+And we need this productivity boost to give our nation the capacity it needs.
+Reshore all these jobs, pull them back into the middle of the country and make sure
+that we're creating millions and millions of jobs along the way. Thank you
+for having me. It was a pleasure to be here.
+Chris, I think we wanted to kick this off. We have a couple minutes to just cover what you've introduced, which is, I think, like
+a really important opportunity.
+China has roughly 3 million factories.
+The US has 250,000.
+The assumption is they've got cheap labor.
+Looks like they've got automation.
+Things are very different on the ground than what folks read about.
+As we try and compete, what industries are going to be first from a manufacturing
+perspective that we can actually compete successfully and do we need trade tariffs in order to succeed
+on the competitive landscape?
+So I think there's two really important points.
+One is there's industries that we have to reshore specifically in defense.
+We have to produce submarines and ships and munitions.
+We have to produce things like rare earth magnets and drones.
+We just have to do it.
+The tariffs really help and this trade policy
+is really important because you've got to understand
+that yes, China is more competitive than us,
+but the CCP also nationally subsidizes the cost of energy,
+the cost of raw material.
+And because we've kind of degraded this capacity,
+like not having nuclear in the US,
+like we can't compete on those raw inputs.
+So it'll start with our most critical industries first,
+but I think as AI goes through manufacturing,
+you'll create millions of jobs,
+and that will allow us to reshore more commercial volume,
+not just in defense,
+and I think that's the most important thing.
+And you've talked about this degrading infrastructure
+and what that means in terms of workforce,
+but then how reshoring also requires this upskilling.
+I know you guys had this associate named Owen
+that you guys took, I think,
+literally straight out of Home Depot.
+Can you give us a little bit of his story
+and just what that represents
+in terms of you guys upskilling labor?
+It's really incredible.
+So as I said in the presentation,
+100% of our people have never
+settled inside a factory before.
+And I think we really didn't do a great job as a nation
+by convincing everyone they needed a four-year college degree
+to have a really good job.
+And we've hired people that are packing shelves at Home Depot.
+Now they're running 10 machines at once.
+And actually what we are seeing is that most of those people,
+when they're exposed to software AI, they're very smart.
+And we've promoted a lot of those people
+into leadership management or software engineering roles.
+And I think re-industrialization with AI
+is about creating new jobs, but also reattaching people
+to the Silicon Valley economy, and not just having it on the coast
+and the cities.
+How are you going to compete with people having gig labor and
+making 3040 bucks an hour being a door dasher? And we have the
+lowest unemployment in our lifetimes 4% right now, is it
+realistic to find all this labor
+out there? Or do we have to have some people immigrate to this
+country in order to fill those jobs?
+For us specifically in defense, we can't, we have no choice in
+immigration because it's a regulated environment. So we
+have to upskill Americans. Secondly, what we see maybe not
+in LA or the coastal cities, but across the country, there's
+lots of underemployment.
+Some of our favorite people have desk jobs where they're a paralegal and they were filling
+out forms and they hate it and they want to come in factories and work on the national
+mission.
+And I think for us, it's a lot about getting people inspired.
+And then secondly, with this level of productivity jump, we can actually afford to give people
+incredibly good healthcare and incredibly good pay.
+And I think a lot of Americans want to go back to work in a real environment that's for the national mission.
+You showed some incredible images and video
+of these very intricate machines.
+Do you make the machines that then make all the machines
+or is there a supply chain risk as?
+There is a huge supply chain risk.
+So we actually invented via the Air Force
+a lot of these advanced machines and we forgot how to make them. So the main sources of supply are actually our
+allies in China is number one, we don't buy for them because they've got cyber security
+holes all over the place, Germany, South Korea, Japan. The insight that we had was they're
+actually just really dumb computers and software and AI can actually up skill and overpower
+them and really have a leap
+But it is a huge supply chain risk of not building the machines and build machines in the country
+Right to economically compete though
+Do you I was trying to parse if you were asking for the government to give you support?
+Since the Chinese government is underwriting their companies with free energy
+Are you explicitly asking the government to help with, say, paying for re-skills training
+or maybe in some way deferring your energy costs
+or can you make this economically work?
+We make it economically work because in the US
+there are really two markets.
+There's the stuff that has to be onshore
+for defense and aerospace,
+and then there's this offshore market
+that's 10 times larger.
+Commercial aircraft, a lot of that is in China.
+For us, we can compete in the US
+because we've got to create all these new advanced jobs
+because we just don't have the skills anymore.
+If we want to reshore the commercial volume
+that is not regulated to be onshore,
+we have to do tariffs and economic policy
+because it's not an even playing field.
+It is right now companies versus the CCP.
+What would that look like in terms of execution? You would want
+them to pick up the retraining, the energy costs, part of their salaries? It's really three things.
+It's the cost of energy, it's the cost of raw materials, aluminum, steel, 90% of the cost of
+that is actually energy. And if we level that playing field, then we can go compete in what
+we're great at, which is the American software and the American spirit and AI powered workforce.
+So the silver bullet is energy.
+Yeah.
+And then tell us about the actual software.
+You have a team that's writing a lot of control systems and or AI models themselves, or you're
+taking things that are off the shelf and you're fine tuning them.
+How are you how are you doing it?
+Unfortunately, because American manufacturing software is 30 years behind Silicon Valley,
+we have to build everything ourselves from scheduling systems to the deep tech.
+And the key insight that we had is the faster we grow, the more data we are labeling.
+Right.
+So we always do things 80% automated with a human in the loop.
+And as we label this complex manufacturing data, you know, this is where our AI models
+actually kick in because manufacturing has been offline for 30 years.
+So there is no stack overflow. There's no GitHub code base to train a
+model on. We have to train it ourselves off our own label data as our experts
+were ticking in time the automation. I mean, like traditional automation is
+purpose-built, does one thing, a lot of engineering goes into making it do that
+one thing really well. Are you leveraging things like to Chamath's question, vision
+action models that allow you more extensibility with one particular piece of machinery and like
+when does that start to happen from a tech perspective in your view?
+Right from the start, so the way oddly that customers translate data to their
+supply chain is by giving them 20 page PDFs full of hierarchical effects. So we
+actually have to train huge vision models on interpreting that. What does
+that mean? It's very complicated and it usually takes an expert 50 hours to pour over that. So it's vision models,
+it's training engines on the data,
+it's also training engines on reinforcement learning of hey, we made a part with automation,
+was it high quality or not? Did it actually work? And embedding all of these in the workflow real-time is the magic trick here with AI.
+You're not doing this stuff just like on the coast, right?
+Your next factory is sort of more middle America. Like how'd you end up choosing where to put that? the stock floor real time is the magic trick here with AI. And you're not doing this stuff just like on the coast, right?
+Your next factory is sort of more middle America.
+Like how'd you end up choosing where to put that?
+The most important reason why we selected Arizona
+was because of permitting energy regulations.
+You know, we've got to go fast, right?
+We've got to build this in six months.
+And then we will expand into the middle of the country,
+kind of left to right on the map.
+And I think that's the most important thing
+is we're going to be able to expand
+into all these cities and states
+where the manufacturing jobs were destroyed and we're going to bring
+them back.
+Are you guys investors?
+Oh, yeah.
+Just led the series C, which we just announced last week and joined the board much to Chris'
+is a grin.
+You're on his board?
+I'm on his board.
+Yeah.
+Is that terrifying?
+It is very terrifying.
+How long have you guys known each other?
+Too long.
+Yeah.
+Too long.
+Yeah.
+I was board observer for a while and tried to avoid getting the official seat. Awesome. You got a date for a while. Now we got married. Well, I was bored observer for a while and you know tried to avoid getting official see you got a
+Date for a while. No, we got married. Yeah, well Chris. Thanks for being here today
+Thank you for hosting me. Yeah, appreciate it. Yeah. Thanks for the education
+Thanks, man
+There's a huge fire going on right now at Philadelphia Energy Solutions. Oh my gosh again. Look at this guys. Look at this video right now
+solutions. Oh my gosh, again, look at this guys, look at this video right now. Today the Navy remains a formidable fighting force, but even officers within
+the service have questioned its readiness. Developing right now, gushing
+for hours with no end in sight, thousands of barrels of crude oil spilling from a
+tank. The report does an estimate of what the need is to bring the overall grade
+up to a B,
+which is what the society sort of determines to be adequate,
+and it's like $4.59 trillion. Music A company that started in my college dorm is now a company that manages over 500,000
+of the world's most critical pieces of infrastructure.
+Now, at GatGo, we build robots and AI models to help unlock the physical world.
+Now you see, when we rebuild robots,
+we wanted to build them that could fly, swim, crawl and walk on any surface
+to gather the most amazing information and data sets
+that have been forgotten about, the physical data layers.
+Now, all those data layers are incredibly valuable
+when you're able to unlock and use AI models
+to drive incredible and important outcomes.
+Now I started the company in the energy sector,
+deploying the technology to help prevent catastrophic
+failures and downtime of power plants.
+Now we've been able to expand into mining, metals,
+and manufacturing, as well as for the defense.
+And so we're helping to deter conflict
+by getting ships out of dry dock on time
+and not, and patrolling the borders.
+Also, we are helping the Air Force ensure
+that planes are in the air and not in hangars.
+And then just last week,
+when the president was in Pittsburgh, my hometown,
+we just signed an amazing deal
+that ensures that we can help revitalize manufacturing
+in the United States again by helping to build ships and subs.
+Now the energy sector has been incredible and we are in a lot of other sectors as well, but what
+I began to realize is that the most impactful thing that gecko robotics can do to help ensure
+that we deter conflict and are most impactful for national security is actually in the energy sector
+You see President Trump is absolutely right in his executive order today calls out extremely important
+a three extremely important reality that the companies that can unlock energy
+Are going to be the ones that can dominate in the AI race
+However, as you can see from the graph here
+that can dominate in the AI race. However, as you can see from the graph here,
+China is on pace by 2030 to 3x the amount of generation
+against the US.
+But this isn't the whole story.
+You see, we constantly think about AI as an energy consumer.
+However, I'm here to tell you that artificial intelligence
+can actually be used in unlocking energy production
+in ways that you've never seen before.
+Now, inputs really matter to being able to unlock this potential.
+And CEO after CEO that I talk to in the energy mining, manufacturing,
+and defense sectors will tell you that we're trying to figure out how to unlock
+artificial intelligence to supercharge everything.
+However, the value is just not there, and it's no wonder.
+The consistent common factor between each one of these sectors is Joe.
+Joe is out there gathering information by hand,
+trying to diagnose and get physical data to drive really impactful decisions.
+But it's important to understand that Silicon Valley artificial intelligence researchers
+and software engineers, they can't do much with data sets coming off of the backs of
+Joe.
+And Joe's been armed with the same technology for the past century.
+So it's no wonder that impact isn't being unlocked in these sectors.
+And unfortunately for Joe, it's a very dangerous job as well.
+And someone dying doing this job was actually one of the things that inspired me to build
+Gecko.
+We have to give Joe better tools in the new century.
+So what I'm going to walk you through right now is an example of exactly how we do that
+for the power sector.
+We send in robots, robots that are gathering information and data sets about the physical
+environment, in this case, a natural gas power plant.
+We're understanding what the physical environment looks like.
+And then we send in other robots, like this dog over here.
+Now, the robot dog is gathering operational data sets
+to help supercharge Cantilever, our AI-powered platform,
+where all the data sets are coming into.
+You see, we sell an operations platform.
+And data sets gathered in the physical world
+is what's enabling that.
+We also send in wall climbing of robots.
+And you can see the wall climbing robots to your left
+and to your right.
+Now, these robots are going in to the physical environments
+and gathering health data, all while the power
+plant is actually online.
+Now, the health data is really important
+because we have to understand process health
+data to be able to optimize and feed into AI models. But again, this data set just never
+existed before. So we had to go out and actually get it physically in the real world. So robots
+like this supercharge our ability to be able to drive models to create largest amount of
+efficiency gains. So this power plant, for example, is supposed to be operating at 620 megawatts,
+but it's not reaching its capacity.
+It's only operating at 580.
+So how do you unlock that?
+Well, when you have all this information in data
+sets that we've captured with robots, plus all the data
+sets that customers have, you're actually able to drive optimization
+to see how to impact efficiency and production.
+And so what this AI model is doing
+is looking at the data sets from the robot dogs,
+as well as the data sets from the health data from the robots,
+to pinpoint that there's actually a steam
+issue going into the turbine.
+Now, an ability to fix these things
+has actually been able to unlock for this site
+and for many others that we work on, a one percent improvement to efficiency.
+And this is just the first place that we looked.
+Now, it's also important to understand
+that the assets that power the grid
+are failing at a really fast rate.
+Now, this power plant had assets like this tank
+that was decaying at incredible rates
+and was supposed to be reaching retirement pretty soon,
+but we were able to determine predictively
+how to extend the useful life of this asset by 10, 20, and 30 years
+from all this data set.
+It's really important to understand when you culminate all the kinds of impacts that you
+can have from this kind of technology, you get things like this.
+The efficiency gains on the dozens of power plants that we've been able to work at, if you extrapolate that across the thermal fleet in the US, that'll give you 11.9 gigawatts
+of new power without putting a shovel in the ground.
+The energy is able to be unlocked using artificial intelligence.
+It's really important to understand the statement.
+AI shouldn't just consume, it should create energy.
+And that's what we're showing here. Not to freak anybody out,
+but the DOE just came out with a study
+that showed we have about four years left
+of useful life on the assets that power our grid.
+Now, in this trend, it means that there's gonna be
+100 times the amount of blackouts by 2030
+if we don't reverse this trend.
+But what we're able to show, not just with power plants,
+but mining, metal manufacturing, as well as defense assets,
+you can actually extend the useful life of infrastructure
+in some cases by 30 years.
+And on average, it's been about 35.
+This is extremely important in ensuring
+that we're able to reverse that trend
+and ensure that America is well positioned
+to ensure that we lead in the energy race
+to enable and unlock artificial intelligence.
+Now let me summarize this.
+We've spent so much time,
+and I think JD Vance has done a great job
+at highlighting how much effort
+and how much data set have been gathered
+to power AI models in the digital world.
+And it's what makes chat GPC so addictive.
+But remember, the physical world has been forgotten about.
+And our robots are going into the fog of war to try and decipher and unlock the massive
+amounts of information and data sets that gives America and our allies unfair advantages,
+unfair advantages to unlock things that we didn't even realize were there.
+And if you build software with an ontology based on first principles,
+gathering the data and building software up from there,
+you're actually able to deliver impactful things for Joe.
+Turning Joe into a PhD scientist or engineer,
+instead of forgetting about him,
+like a lot of Silicon Valley companies have in the past.
+Unlocking potential physical intelligence data drives artificial intelligence.
+And that's how we're going to win the AI race.
+Thank you.
+My name is Laura DeBerdinas, and I'm a registered nurse here at Tampa General Hospital.
+The last 17 years I've been able to serve the neuro intensive care unit where we care
+for the most vulnerable and critical care patients.
+So before utilizing AI, it would take hours to gather information, looking in chart reviews, talking
+to nurses, talking to physicians. We relied on paper, pencil, a lot of paper stapled together
+with sometimes outdated data by the time I was done going through 32 patients. And this is how we would try and give reports.
+Bringing in AI, it has significantly changed
+the culture on the unit.
+I had a charge nurse who never gave
+a multidisciplinary round or a report out.
+She came on board, she said, this is an amazing tool.
+Look at this, it has all my information already
+gathered and collected.
+And she was able to report out on the patients.
+It was completely user friendly.
+She's like, Laura, what is this?
+It is creating excitement throughout the nursing community.
+Using AI has provided more time to be with you or your loved one at the bedside where
+nurses should be.
+We are the heart of healthcare.
+Matt Troutman, I'm the Vice President General Manager for PRL Industries, supplier of components
+for nuclear submarines that our servicemen and women lives depend on.
+We are a fully integrated foundry, pouring metal all the way through
+finished machine components.
+Two months ago, we weren't getting after
+any of the problems on the shop floor.
+Engineering director told me all his team was doing
+was quoting a three day process to quote apart
+paper files, old archives, data tables,
+emails, side communications,
+all this which ends up getting lost in the fray.
+Now using an AI tool, they are getting halfway through that process in minutes.
+Freeze them up to get back out on the floor and do what an engineer does best,
+which is solve problems. To provide the Navy with the best quality products in
+the shortest amount of time, this is what AI is going to help us do.
+Understanding part location and status,
+that is a game changer.
+We can now talk very clearly with the customer.
+If that part is now to become the primary focus
+of the business, because it's a critically needed part
+for a ship construction, you get notified.
+It's an automatic notification.
+We can see the exact status.
+Here is the impact.
+How can we be better?
+How can we do more?
+And this is how we were answering that call.
+With AI, we match the speed of the quality management process
+to the speed of the workforce and the machine capabilities,
+and we will truly see a multi-step change in the amount of product
+that can come out of any company in the supply chain.
+More jobs for American workers here at PRO.
+My name's Julie Nordberg.
+I'm a registered nurse leader here at UP Health System Marquette
+in the heart of Michigan's Upper Peninsula.
+And we are really the only game in town,
+as some of you like to say it.
+The next closest hospital to us that can service us is Downstate,
+which is about a four-hour drive.
+Prior to using AI,
+it took a lot of time to go through the patient's charts to see where
+they need to be.
+It took a lot of time just to try to communicate with people.
+I think that's a fear that everybody has is that AI is going to replace people, but AI
+in the way it's being used here could never replace our frontline staff.
+You know, that the vibe is, I think it's just one of excitement that everybody's just proud
+to be part of this.
+And to say that we're doing it here and we're honing it in and tweaking it and using it
+to enhance our care and using it to help our staff, having this kind of communication hub
+and facility snapshot has helped everybody.
+For the nursing staff, I think being able to see everything in one spot
+is just revolutionized kind of how they are able to provide care. I don't think anybody is sad to
+get rid of a meeting. The impact on patients is earlier detection, which means earlier treatment,
+which is a better outcome, life-saving for some of them. That's where I think this is going to
+help us a lot is because we don't have
+as much manpower as those big academic centers, so having the AI in the background doing some of
+that light work for us is huge. I joined PECNA in 2018. We have built over 11 billion batteries in
+the last eight years. I walked out onto their massive production floor for the first time.
+I knew right then and there I wanted to make this technology accessible for anyone who wanted to
+learn it. People coming from the tourism industry and the hospitality industry,
+quite a few technicians that have fixed slot machines in a past life, people from
+automotive companies, people who are used to repairing cars, however have never
+seen equipment you equipment at this scale
+and with this complexity.
+We don't really have to pick and choose
+what people's backgrounds are
+because we do have this very powerful learning tool
+that makes it easy for anyone
+to be able to enter this industry.
+It is taking our historical maintenance records,
+pairing it with our machine data,
+and is now starting to understand early warning signs
+of a breakdown and deploy our technicians to equipment
+before it ever actually breaks.
+This helps minimize our production losses,
+keep our technicians safer.
+We're taking reactive events,
+turning them into predictive events.
+We used to honestly lose a lot of technicians
+because they would lose their confidence, think, hey,
+maybe this isn't for me.
+I pulled the supervisor off the floor and said, hey,
+you've got to come listen to this idea,
+and you have to help us make it better because you're
+the one who lives it every day.
+And they immediately started suggesting new features.
+They were telling us what was wrong with the old systems,
+and we were coming up with solutions on the spot. So this is really helping people feel like they belong
+here. We don't believe AI should replace human talent. We believe it should elevate it. Our
+workers are very excited. They have a tool that they can turn to, to help them learn
+at their own pace. It really puts the power back into their hands. All right.
+Christian's joined us from Hill and Valley and 137.
+And Sean, welcome.
+Thank you.
+Great to be here.
+Christian, you want to kick us off?
+Yeah.
+Thanks for having me.
+It's nice to be here.
+I definitely feel for the first time
+like a guestie of the besties.
+Don't fuck it up.
+And yeah, this is great.
+So Sean, thanks for coming.
+We were talking a little bit earlier.
+Maybe this is a great place to start.
+Obviously, we have the good fortune to be investors and palanters for 15 years. We've seen the growth of the company.
+But particularly lately, you've been pushing this messaging.
+I think it's been incredibly exciting of how AI is not a force for job destruction. It's a force for job creation.
+It's also a way that you can give superpowers to the average American worker.
+And obviously, we've seen a little bit of content here and how it's already doing that today.
+I want to start by saying many of the workers in the video
+are actually here today joining.
+Laura, the nurse from Tampa General,
+actually brought her 12-year-old daughter.
+So I think the ultimate litmus test is not just
+how excited are the American worker to leverage AI,
+but how excited are they for their children
+to exist in an America that's really embraced AI.
+And Julie has four kids, and she would tell you how much this has not only transformed
+her view of her job, but the view of her children's future.
+I think the right frame here really is how do we give the American worker superpowers?
+We should not be aspiring to build things that make them 50% more efficient, but really
+50 times more productive.
+And to use that as our asymmetry in the competition
+here.
+You know, our strengths are not only AI, which is clearly an American phenomenon, but also
+the ingenuity of the American worker.
+And if you spend time on the factory floor, on the front line, you see a very different
+narrative emerging, or you see people are actually excited about these tools.
+Every single one of those workers to a T said, AI is giving them more time to do what they
+do best, to spend time with the patient delivering delivering care to actually build the parts as an engineer
+to solve the problems not to be cut up and all the coordination and the paperwork that's around
+these things. That's the future we should be unleashing. Can you generalize the adoption curve?
+What is it about a particular industry or use case that makes it an early adopter versus mid versus late
+that you're seeing?
+Because now that you're touching all these different
+industries, you probably have a good point of view on this.
+Yeah, my take is actually a different dimension
+of slicing that, which is where does the institution
+liberate their worker to drive the adoption
+versus where are they trying to force fit
+some sort of solution top down? AI is a method of unleashing the agency of the worker, the creativity of the individual,
+and they're the ones coming up with these use cases.
+Chris was talking about it from Hadrian where you'd be surprised at how people with deep
+mechanical intuition, traditionally considered blue collar workers, are the ones who are
+able to pick up the skills, build the applications, innovate on their own processes, and have that spread through
+the organization.
+And are you seeing that you have to build vertical tools or generalized tools for some
+horizontal kind of set of users somewhere in the organization?
+Well I think that the opportunity with AI is really that you can unleash what's different
+about your business than all the others.
+So there's a degree to which you can have generalized solutions, but there's a lot of
+alpha to be captured by understanding what's unique about how we do things. How do we lever
+up human taste? Everyone is afraid of AI replacing the human. That's not what I'm seeing. I'm seeing
+it make the person with the greatest taste more valuable and an ability to spread that to the breadth of the organization.
+Let's talk about something beyond taste
+which is also like knowledge and skill.
+And tell us about AI inside of healthcare.
+I think that a lot of people probably think
+that we have an incredibly cutting edge system
+of tools and software that helps doctors and nurses
+actually provision great care.
+What's the actual reality that you guys are seeing?
+Well, sadly, I think with the forced adoption of EHRs
+what we saw is roughly a halving in the productivity of how many patients you can see per hour.
+A halving.
+A halving, yes.
+So we became half as productive and we really need to, you know, the opportunity is to work backwards from
+what is the care that
+needs to be delivered?
+How do we build the tools around that?
+How do we help the nurses, the care staff,
+spend more time with the patients
+and less time with the computer?
+And do you guys see a world where, in order
+to facilitate that end market versus a different end market,
+you have a ensemble of many, many, many different techniques
+and approaches in
+AI, or do you think it all sort of gets form-fit into this one trillion parameter huge ginormous
+thing that kind of tries to do everything?
+I think the cardinality of agents and models is very high.
+I think there will always be alpha to be achieved, improved differentiation, improved outcomes
+by specializing to the use case.
+Now it's great to start with the general models,
+but you will specialize over time.
+And do you feel pressure to do that now,
+or do you think that'll just be a natural evolution
+over time as?
+Yeah, I think it's a journey that people kind of get on.
+Like you realize like, wow,
+look how much better things have gotten with this.
+Now how do I go get the next incremental piece
+of performance out of it?
+You know, I'm just having this thought
+as we sit here and discuss this.
+If you think about any experience we have in service that has a long wait time, where
+we feel like we got more time with the practitioner, it's the perfect place for AI to create more
+abundance and healthcare and education are the two that come to mind, where people could
+just offload their chores and the people who are getting the service can use AI
+to maybe start the conversation on second base or third base.
+What other industries are you seeing after health care,
+education, where AI can have that dramatic of an effect,
+where the six-week wait time to see a doctor,
+the three or four other students who are getting tutored
+are ahead of you and maybe you don't
+need as much help. So you don't you never get the tutoring.
+The place I'm most excited about it is really in reindustrialization. So because there's
+so much dwell time in the value chains around. What does that mean? Dwell time in industrialization?
+Where you're just waiting for someone else to figure out how to approve something or
+the coordination costs mean that it's essentially deadweight loss.
+Give an example there, yeah.
+You saw it with the submarine industrial based partners there where they're working on quoting
+a part to the Navy.
+That means you have to go gather all of this data.
+You have to look at historical archives.
+All of that is time you're not making a part or solving problems.
+That's just, it's just sitting there.
+The factory floor is idle, right?
+So how do we get
+rid of that dwell time so that you can be utilizing the capex that you actually have to the maximum
+extent possible? And then if you start, if you zoom out, that's like one part manufacturer, you're
+you exist in a massively complicated supply chain, and you just end up with all these busy
+weights along the way here. Yeah, that's so profound. A friend of mine said, who's in that
+industry, you're only as efficient as your worst supplier.
+Exactly. A second part of that, which the Panasonic energy example really touched on, is how do we train our workers?
+So here you have exquisite Japanese technology. It used to take three years to train a worker on it.
+Now with an AI assistant, the workers who are prior casino workers, they're not from this industry, are able to get up the curve in three months.
+So you think about how we can use that to more quickly absorb
+the slack that's happening as we adopt AI
+and democratize opportunities.
+So much so, I have so much conviction,
+is that we've launched the American Tech Fellows program
+at Palantir to find blue collar workers at our customers
+in the heartland, overlooked folks who
+have a natural proclivity to building.
+But how do you find them?
+How do you find them?
+Well, some of them are-
+Beyond just saying apply, like how?
+Yeah, some of them are at our current customers.
+The idea really came from us organically,
+where it's like, wow, who is building
+the most compelling applications?
+It's the guy on the factory floor,
+not a formally credentialed computer scientist,
+mostly in auto didact, but there's immense,
+not only grit, but ambition.
+That's phenomenal.
+They have the drive to reshape their own organization to reshape the processes
+Let's bet on that person going earlier. Does that mean and I'll ask the same question many times today that college education
+The traditional for your liberal arts degree doesn't matter as much that kids can go from high school or earlier in their careers
+into a new workforce and get well trained
+and well suited to make money and succeed in life?
+I think the traditional college degree is dead
+and we should be betting on the American worker.
+Well, on that point, can you talk about the Tech Fellowship?
+I got to recently see a bunch of demos
+from the first cohort with you
+and it's really incredible what you guys are doing there.
+Maybe give a little bit there
+and then maybe also talk about the opportunity
+for other companies to follow this trade school framework
+as we end here.
+Yeah, I mean, it's really kind of an elite trade school.
+So like finding people with mechanical intuition
+who have done things, some of them are right out of college,
+some of them are 20 years of experience,
+but they're reinventing themselves.
+This is your first trade school
+that you guys have done, right?
+Yeah, that's right.
+And we have just enormous demand from our customers.
+We're like, who are people who have these skills?
+And it's not classically trained,
+college-educated people.
+They don't have these skills, actually.
+So the market's not meeting,
+and they don't know how to source these folks.
+So I can credential them.
+I can put them through the bootcamp in four weeks
+and place them with my customers
+to go unleash AI within their organizations.
+It's incredible.
+It's incredible. Sean, thank you.
+Sean, thank you. Thank you so much.
+Thank you.
+Well done.
+Thanks, man.
+Thank you.
+That was great.
+Thanks, bro.
+Thank you so much.
+Cheers.
+All right, next up, we have Paul from Y Combinator.
+Please welcome Paul.
+Paul Bluhite.
+Bluhite.
+Paul Bluhite, are you here?
+Paul Bluhite, there he is. Paul Bluhite, are you here? Paul Bluhite, here he is. Hello.
+Paul, you created Gmail talking about efficiency and making it all more efficient.
+Hey, man.
+How are you?
+Hey, good to see you.
+And also, I believe-
+We work together.
+You came up with the slogan-
+We work together, too.
+The slogan, don't be evil.
+Yes.
+Yeah.
+How did that turn out?
+I don't know.
+It's an attempt at alignment, right?
+Like, we worry about AI alignment.
+What do you tell the super AI once you've built it? Yeah. How did that turn out? I don't know. It's an attempt at alignment.
+We worry about AI alignment.
+What do you tell the super AI once you've built it?
+Yeah.
+You're at Y Combinator now.
+Although you recently said you're stepping down, right?
+Partner emeritus.
+We're starting a new firm, Standard Capital.
+Oh, that's exciting.
+Wow.
+Let's talk about the game on the field with startups.
+You get to see startups in year 0 and year 1.
+And one of the primary pieces I think we all have
+is vibe coding and making coding not a roadblock.
+I think Paul Graham's great innovation at Y Combinator
+was saying, I'm just going to accept two or three people who actually build the product.
+In fact, in the YC application, it
+says, who wrote the code for this?
+Who's writing the code?
+Just so you can make sure that you're actually hiring coders,
+what are you seeing on the field in terms of vibe coding?
+Because people are now.
+Great question.
+English is the new programming language.
+It's only 2% or 3% of the country knows how to code.
+Probably half that code well enough to do a startup.
+So here we are.
+Could we be on the precipice of 10 times as many startups,
+100 times as many startups?
+Absolutely, I mean, that's the dream.
+That was actually, you know,
+YC was started 20 years ago based on PG's insight
+that actually it's getting easier to start a
+startup, right? It used to be you had to have a big mountain of money, you hire a big team, etc. And
+his realization was you can start a startup with just a couple of people and basically ramen.
+Few kids living off of ramen, And that's proven to be true.
+And our belief is with AI,
+that actually just goes that much further, right?
+Because the universe of people who are able to create apps
+using something like Replet is enormous.
+And so my, I think maybe most optimistic vision
+of what we're doing with all the AI
+is essentially putting all of these tools of wealth creation in as many hands as possible.
+Do you think that English is, I think it's Andrej Karpathy who said this, right?
+Like, do you think English is the ultimate destination language that everybody will use
+to code?
+Or do you think it gets abstracted even further beyond that where you sort of think things
+and they just kind of appear?
+I think it might be a little while until we can just think them.
+But clearly, that's the direction, right,
+is that you have a dialogue with the AI.
+And so you describe, OK, not quite like that, more like this.
+And the direction is essentially just that it becomes easier
+and easier for us to realize our visions
+and for everyone to realize our visions, not just people who are.
+Well, let me ask you this question.
+That clearly grows the funnel.
+So now we have 100 million, 500 million, a billion people,
+2 billion people, whoever can speak English can now code.
+How do you think about that as one of the best computer
+scientists that America's ever created?
+How do I think about all those people having the ability? Yeah, I mean, I think it's great right any anything
+You know our philosophy is that I don't want to see all of the power
+Concentrated in a small number of large organizations. I think that's bad for
+Everyone it's bad for freedom
+And so what we want is to give that power to as many people as possible so that everyone can create
+You know apps and it might just be something for their own local community
+It's not not every one of those apps is going to be the next Google obviously
+But the more people can create wealth in their own community and in their own lives
+We spread the prosperity everywhere. Are you seeing in the applications you get to YC
+or that you've heard of more physical AI, robotics,
+automation, those sorts of tooling,
+because as this becomes easier, it actually leads to the leap,
+hey, maybe I could do this as a robot
+and I can get a robot to do a particular thing
+and that creates an opportunity for a new business.
+Has that become a big kind of growth curve right now
+as physical AI? Yeah.
+Physical AI and- Absolutely. The number of robot arms at the most recent demo day was striking.
+I think everyone is starting to work on that. And again, as the things that used to be difficult
+get easier, we just start doing more difficult things, right? But absolutely, I think-
+The nature of all technology curves.
+Yeah, exactly. And I think that's going to open up whole new realms that were previously impossible
+or impractical.
+So does that create new industries is, I think, a key point.
+Absolutely.
+Which is what I think is most misunderstood about AI is it's not about the displacement
+of doing old things, but it's about activating new things that are complex and historically
+not tractable, but now they're tractable.
+Right, exactly.
+So, I mean, if you think about just the fundamentals
+of wealth creation,
+the inputs are essentially energy and intelligence.
+And we're about to unleash essentially
+an abundance of intelligence,
+where, like, the total global intelligence
+is going to 10x, right?
+And so that will enable us to 10x our total wealth.
+And that's gonna come in a lot of different forms,
+like, you know, as we start to have AI science labs, for example,
+where the AI can actually start running its own experiments,
+producing its own data,
+I think our understanding of biology
+is gonna be incredible.
+In 20 years, we'll be able to know
+how a drug affects the body without ever actually testing it.
+And my prediction is actually our AI models will be more predictive than today's clinical trials.
+You know, it's interesting hearing you talk about this, Paul, is really the power of great
+conversations. There was a troll over the last couple of years when somebody lost their job in
+journalism, like, learn to code, learn to code. And now you think about it, there's multiple types of intelligence.
+Startups were limited or gate-kept in some ways by mathematical intelligence, the ability
+to write code.
+Opening up that to people who are high intelligence or high design, high emotional intelligence
+could lead to many more beautiful, interesting products
+that maybe people who are math intelligence,
+you know, focused just would never get to.
+Absolutely.
+And this is an abundance that I think people are
+maybe not even realizing yet,
+is that a whole group of journalists, writers
+who are being displaced or, you know, Uber drivers
+or people working in factories.
+Well, if they can embrace this technology,
+and we saw it with no code.
+Remember the no code kind of ghetto
+that was emerged for a couple years.
+Oh, startups are gonna be no code.
+It was kind of like the false start,
+but you did see a bunch of new entrants
+applying for Y Combinator or other things.
+This could really be accretive to humanity.
+Yeah, absolutely.
+And it reaches people who are perhaps otherwise
+left behind, right?
+It shouldn't be just people in Silicon Valley
+who can create apps.
+There's a whole country full of people who have ideas.
+And the same thing goes not just for apps, but for media.
+I think a lot about, you know, again,
+when we look at where the generative video models
+are going, it's pretty amazing, right?
+Pretty incredible.
+In a couple of years, that means a kid
+in wherever, middle America, five-hour country,
+who has, like, a vision for their own Disney movie
+can actually just create the Disney movie.
+You don't need the $100 million budget.
+And so that's going to give a lot of voices that are currently
+not represented in media because they don't have access
+to the Capitol or Hollywood connections.
+And Shamaf, the elite version of this would be, oh my god,
+we're losing this job creating at Netflix,
+but you're creating a million other jobs for people
+to create their own superhero. represents them that represents their country
+represents their sensibility
+Exactly, and ask you a question as a as a technologist for a second when you see the landscape of these foundational models and how good they're getting
+Is your belief that the number of those will grow?
+Or do you think that they'll consolidate and they'll just be fewer but better?
+How do you see all of this investment
+that's happening now play out?
+And feel free to name companies
+while you're doing your analysis.
+Yeah, go ahead and brand them.
+Which ones will go away?
+Yeah, no, I mean, I expect that it'll probably
+stay relatively stable, honestly,
+because the cost of building these foundation models
+is astronomical, right?
+We just saw XAI is raising another $20 billion,
+something like that.
+And so just the capital requirements
+are going to limit how many there are.
+But I certainly hope that it doesn't consolidate down
+to just like one or two, because again,
+I think part of what's important for preserving freedom
+is just that we have many options.
+And so
+actually a lot of people don't know we started OpenAI at Y Combinator 10 years ago. In 2015,
+we saw that AI was on the rise. We saw that this was happening. But at the time we were
+concerned that it was essentially all locked up inside of Google. And so that would be
+bad arguably for the world, but certainly for our companies. We have thousands of companies.
+If our companies don't have access
+to that next wave of technology, we're
+going to be out of business.
+And so OpenAI was kind of like a moonshot project
+that we were actually going to take this out,
+whereas not just locked up inside of Google.
+How did you feel when they made it closed AI?
+You know, there was never specifically promised to be open source, but I think...
+Sure it was. It was explicitly in the chart.
+If you go back, it's a little bit...
+But again, I think what's most important is that we actually just have a lot of choice, right?
+And I certainly support open source, because I think open source is the thing that...
+Do you think open source wins?
+I think we'll have both.
+It seems like the balance is that there's reasons to have both.
+But the importance of having open source as an option forces all of the closed source vendors to be honest, right?
+Like if they start censoring the models, they start disabling too many abilities, then people will all switch to the open source.
+Paul, you worked at Google, you worked at Facebook.
+Oh, this was my question.
+Google has done an incredible job with their ensemble of Gemini apps, I mean, Gemini models.
+Facebook has had some missteps with Llama.
+I'm just curious if you were the CEO of Facebook today, are they making the right bet?
+Or Google.
+Well, I'm actually more curious about Facebook.
+Are they making the right bet with respect to just the talent
+war that's been created, or is there
+a different technological approach?
+For example, one thing that we talked about before
+was this concept of the bitter lesson, which is always
+that compute overpowers humans.
+I don't know.
+How do you think about that?
+Or what would you do if you were running that business?
+I mean, I think he's doing what needs to be done, right?
+Like Facebook has clearly fallen behind.
+And that's a real threat, right?
+Because Facebook actually competes with AI.
+Like people are switching from Instagram to chat GPT.
+Like my kids are not on social media.
+They're talking to the AI.
+And so if they-
+It's fundamentally cannibalistic,
+is what you're saying.
+Yes, yes.
+So I-
+That's an interesting concept.
+Like there's a finite amount of time
+and which is, forget about the categories we put on them.
+I mean, the compound question is just-
+It's just time.
+You can ask a great agent is incredible.
+The way that you can speak.
+Yes, and that they're actually now
+with Grok having the avatar,
+kind of leaning into this concept of personality
+We as old people in Gen Xers might be totally missing the script, right? Sure. Well actually so
+Character AI is an example that actually no made that bet in
+Noam is a friend from Google who actually basically invented transformers, right?
+And then got frustrated that he couldn't launch anything
+at Google, so started Character AI.
+But that was the entire thing, is making characters
+that people want to talk to.
+And so the usage on characters is amazing.
+It's unbelievable.
+Yeah.
+Paul, thank you for being here.
+Oh, we're over.
+Yeah, we're a little bit over.
+Well, to be continued, we have to have you on the pie.
+And good luck in the new fund.
+That's amazing.
+Yeah, yeah.
+Congratulations on the new fund.
+Thank you.
+Yeah. Thank you, Paul. Appreciate it. That's amazing. Yeah, congratulations on the new fund. Thank you. Yeah.
+Thank you, Paul.
+Appreciate it.
+Oh, Keith, hello.
+Oh, Keith is back.
+Oh, Keith is back.
+Oh, look what the cat dragged in.
+Guys, Keith Rabaugh.
+How are you?
+It's great to be here live.
+Everything we've done has been remote.
+Over Zoom.
+Yeah.
+This is what you look like.
+Exactly.
+You look great.
+This is what elite looks like.
+You've been going to berries?
+Yeah. Clearly. It's what 8% body fat looks like. Exactly. You look great. This is what elite looks like. You've been going to berries?
+Yeah.
+Clearly.
+It's what 8% body fat looks like.
+Nine.
+I know.
+Who's counting?
+Apparently the both of you.
+How are you, David?
+Good to see you. Keith. Great to be with you. Yeah. How are you, David?
+Good to see you.
+Keith, great to be with you.
+Hey, Kelly.
+Oh my gosh, J.K.
+How are you?
+Good.
+Good to see you.
+Kelly, thanks for being here today.
+Not sure you've been following the panels, but a lot of conversations going on around
+AI, particularly around job displacement.
+You're the 28th administrator of the SBA.
+I think more than half of the American workforce
+is employed by or are small business owners.
+You and I had a conversation a week or so ago
+about what you're seeing on the ground
+with small businesses in an AI workplace setting.
+The conversation is always, are they gonna get out competed?
+Are they gonna get displaced? What's gonna happen, are they going to get out competed? Are they going to get displaced?
+What's going to happen to American jobs
+and to the small business?
+But what are you seeing on the ground?
+And how does the SBA kind of associate
+with the transition underway?
+Yeah, Dave, first of all, great to be here.
+Look, a small business is big business in America.
+But small business is big business for AI.
+And I have been walking hundreds of factory floors
+for the last six months.
+Most manufacturers in America are small businesses.
+And without AI, we would not be winning back
+these industries.
+And I will just tell you a case in point.
+I actually bought a slide to show you
+workforce development in action, modern workforce,
+we call it the new collar boom,
+I don't know if they can put it up,
+but it's a factory in Seymour, Indiana,
+it's a bike factory.
+We had lost the bike industry over the last 30 years,
+thousands of jobs, 98% imports,
+we're now for the first time in this country
+building bikes in America
+because of AI, advanced manufacturing techniques. Imagine we replicate this
+industry after industry, and these are small businesses. This is a 60-person
+factory in Seymour, Indiana, where they have no jobs. So it's a, AI is a job
+creation machine for reshoring, on-shoring, and advanced manufacturing.
+So manufacturing, you're seeing a big heavy influence,
+potential for kind of redefining.
+What about in the services businesses?
+What do you see there?
+Across the board, we have 7 and 1 half million jobs
+open in America.
+Most of them are open at small businesses.
+Number one concern of small business
+is a skilled workforce.
+That's because President Trump solved inflation,
+regulation, taxes.
+Now they're saying, okay, we're booming.
+We've got $15 trillion of investment coming in.
+A lot of that's gonna trickle down to small business.
+We need the skilled workforce.
+So President Trump is ensuring
+that we have that skilled workforce
+through some of his workforce initiatives,
+but small business is gonna be driving the AI boom
+from the bottom up.
+And I guess what is needed
+for workforce training and transition?
+Yeah, technology is gonna be a big part of it.
+So when you think about, go back to 1940,
+our workforce size was 56 million.
+And people say, well, as technology advances,
+our workforce gets competed away.
+Today our workforce is 170 million and compute power has been asymptotic.
+So essentially, 85% of the jobs that exist today have been driven by advances in technology
+and only 40% of the jobs that we had back in 1940 still exist today.
+So we are relying on innovation as a job creation engine.
+It's just that people have a fear of the unknown
+and they're saying, I can't envision what it is.
+Well, I can't envision what my life would have been like
+when I started a small business
+if I could have had Figma or Canva instead of PowerPoint.
+Oh my gosh.
+So just these are, we're to create millions of solopreneurs
+who are going to have massive software companies
+or manufacturing companies thanks to AI.
+Is there something the government can do, the SBA, for?
+And what is the role of the SBA?
+I mean, I know one of the big focuses of this administration
+was to make government smaller.
+So is that a goal you have to make government smaller
+and then maybe give the ability to give loans to the state?
+What is the role of the government
+in getting one and two person companies up and running,
+if anything?
+Well, the mission of the SBA is to grow the economy
+and to support small businesses.
+And that's what we're doing.
+And the last four years, it had not been doing that.
+In fact, with regard to AI, the Biden administration
+banned the use of SBA-based loans
+for use of purchasing technology in AI.
+I had the rules rewritten,
+so now small business entrepreneurs,
+solopreneurs up to 500, 1,500-person factories
+can use the proceeds of their loan
+toward AI implementation, advanced
+manufacturing.
+Our role is to get out of the way.
+Yeah, but educate us on the loans because we hear about that, but we're in venture capital
+where we have an incredible ecosystem of angel investors doing this.
+How do SBA loans work?
+Who are they for?
+How much do the American taxpayers put into this and what's the result?
+Yeah, I'm glad you asked.
+So the SBA does not do direct lending.
+We span out across a network of thousands of banks
+in this country that offer SBA,
+which are government-backed loans,
+but we also operate the Small Business Innovation
+Company Guarantee that has been responsible
+for backing many massive startups.
+SBIC money was in Tesla, for example.
+So we have an equity piece as well as the SBA loans,
+but those loans have to be repaid over 30 years,
+but they simply give small businesses
+that banks wouldn't normally lend to
+that government guarantee that gives them the confidence.
+We do about 2000 Main Street loans every single week.
+So far this year, we are on pace for a record year
+because we've made the SBA right size, which means we've taken it back
+to the pre pandemic size.
+It had doubled during the pandemic.
+90% of the employees were working from home, not focused on small business.
+We took it back down and the spending had doubled.
+So we took the spending down,
+we took the headcount back to pre-pandemic,
+and now we have record level.
+Have people shown up in the office?
+Oh yeah, we're back every day.
+Wow, so the American taxpayers are paying people for a job
+and they're doing it in an office.
+Not only that, outside of Washington,
+we sent them out to the field.
+Do you think that at some point you
+will look at either adding new types of SBA
+back loans or changing some of the conditions to do,
+as you said, even further incentivize the investment
+in AI?
+Yes, absolutely.
+We are looking right now at critical industries
+like metals, minerals, medical device, reshoring and on-shoring.
+We have a massive at the SBA.
+We're leading the Make On-Shoring Great Again portal, which is on the SBA website.
+It's a resource of one million on-shore manufacturers.
+We're leading the Made in America charge.
+So focusing on smart manufacturing and looking at loan types.
+And we're trying to double the size of SBA loans
+so that for buying advanced technology,
+equipment, CNC machines, training,
+that there are many more resources available for that.
+And how do you think about energy on top of that?
+Yeah, I was just talking to Secretary Burgum
+and Wright last night at the White House,
+and we were talking about the convergence of small business
+with the physical and the digital,
+and energy is gonna be a big part for small business there
+because the innovation is gonna be coming
+from smaller businesses.
+And in manufacturing, you can be a small business
+and have 1,500 employees.
+But frankly, I'm seeing a lot of energy companies
+and others with 300 people.
+So small business is going to drive it.
+If you stipulate that there are 34 million small businesses
+in America and 20,000 large companies,
+this is a small business driven energy and AI boom.
+Well, your vision is something that some
+of the leading entrepreneurs in Silicon Valley
+have been pushing for as well.
+This idea that there is an entire boom that will happen of solopreneurs, the two and three
+person companies that are vibrant, successful, profitable, growing.
+And what they just need is a little bit of help at the edges, potentially on maybe paying
+for some compute resources or whatever, and then they're off to the races.
+And that's certainly backed up by the data we have at the SBA.
+So 60% of the 21 billion that we've lent this year
+have gone to companies with one to five employees.
+So that's where the growth is coming.
+Certainly we know that they're going to scale from there,
+but we're seeing all the trends say that putting more technology into
+the hand of small businesses is growing the economy,
+and small business is still growing the jobs boom in America.
+720,000 jobs created this year led by small businesses.
+Keith, I'm curious, you're a free markets guy.
+What are your thoughts on the government's role in maybe a juicing up the
+this on shoring specifically in categories where maybe China has
+dominated for a couple of decades?
+Well, as Kelly pointed out, the government's actually not
+extending the loans, the community banks in America are
+extending the loans. So it really isn't deviation for free
+market principles. We think about it AI is really this
+rocket fuel
+to turbocharge small businesses and entrepreneurs,
+at least in three dimensions.
+First, F, access to information.
+Typically, if you're starting a business,
+you have to compete with very large incumbents
+that have expertise in market research, marketing,
+legal, accounting.
+Now, tap your fingers or your voice,
+you have the same expertise
+that all these large companies have.
+So you've leveled the playing field. Secondly, you have access to products like building an app. Like
+everybody can compete with a large company. Anybody can code an app. So you're like a
+HVAC repair person. You have an app that's on par with a Shopify store or better. Like
+that allows you to compete. So we're going to see more propellant there. And then third,
+you can save money. Like you used to have to have a G and A team. Like you'd have accountants and bookkeepers and HR. AI can do all that, maybe even do it
+better than humans, but certainly at zero cost. So the economics of running a small business are
+going to be much better. The risk of running a small business, starting a small business is going
+to go down, which we're going to have an increase. And then finally, you can save money through
+things like ramp. You can use AI to audit your expenses and not waste five to fifteen percent
+Which will make you more successful
+So all these trends are going to combine and we're going to see in this administration an explosion of successful small businesses
+Does that mean that there's just more competitive forces in the marketplace?
+So big companies are gonna now have more competitors and it just ultimately drives net productivity gains
+Well, hopefully net productivity gains and insofar as some substitution, I suspect you
+wind up with a barbell.
+So the largest players, the Nvidia's of the world do benefit the more people that run
+compute, et cetera.
+But then I think that the smaller businesses actually eat at mid-market companies because
+they can compete now and they've been at an economic disadvantage for decades.
+And we're going to be in industries that we couldn't have even imagined
+that we would be in when people say, what, you know, why do we need to make bikes in
+America? America, because it creates 60 great paying jobs in a tiny town.
+And I want to do it. That's right. That's right.
+P.P.P.P. and eat like whatever the you know, during covid
+pharmaceuticals, we should be making that here.
+We can do that with smart making and factoring with 100 people in the factory.
+You must give the criteria or some guidelines to the banks of how to pick.
+And I'm assuming you take diversity and inclusion and gender
+and all these important factors into account, or do you do it based on merit?
+I was just trying to trigger the two of you.
+They said that's your fun.
+Yes, I don't do any DEI, but jokingly, what's the criteria?
+Like when somebody comes and says, I want to raise 100,000 and go to their local
+bank, how do they get picked?
+Yeah, we have strict underwriting guidelines.
+And we've stripped out the DEI that the last administration had put in.
+They had a green lender initiative
+to preference where money went under the Green New Deal.
+I mean, we've gone back to saying,
+if you qualify for these loans, have at it.
+We're not gonna pick winners and losers.
+We want everyone to compete on a level playing field
+and have access to that capital.
+But what had happened on the last administration,
+they had lowered the underwriting guardrails. As a result, the loan loss portfolio on the
+portfolio went way up $400 million. We've reversed that, strengthened the underwriting
+standards to make sure that the money goes to small businesses who are building these
+factories to onshore drones and pharmaceuticals and defense and aerospace.
+What are the target performance ratios in the loan portfolios?
+Oh my gosh. I mean, our loss ratio should be 3% or less, and they are.
+Including on the SBA is one of the largest disaster lenders in the country.
+We're the recovery lender.
+And they do well.
+It's very low, very low.
+And in fact, there's a secondary market for SBA loans
+because they perform well because of the strict underwriting standards.
+Part of-
+Oh, zero subsidies.
+Sorry, Tramad.
+It operates at no cost to taxpayers when we enforce prudent underwriting standards, which
+we're getting back to that.
+Yes.
+One of the things that helps burnish entrepreneurship is imitation is the sincerest form of flattery. You must have so many successes, but they're not always
+well-marketed or known, which would then pull other people
+to say, well, if they could do it, I could do it.
+How do you think about that in a world of social media
+and all of this?
+You've picked up on one of my key problems.
+I run an agency that starts with the word small.
+Small does not mean insignificant.
+In fact, small business is significant.
+And President Trump and I talk about that all the time.
+He loves small business.
+He knows the innovation starts there.
+The manufacturing is small business.
+So we are working on a massive resetting
+of what the SBA does, but more importantly,
+what small business means to America. and I think people are waking up that
+Mainstreet is going mainstream and we have to continue to push the
+Understanding that if we don't protect our small businesses our innovation pipeline our job creation engine is going to shut down
+How do you interface with?
+state agencies and state senators and state governors who have
+50 different views of the world, but you know, you're responsible for at least supporting
+the underpinning of the business people that are there.
+How does that tension play out?
+It's really important, in fact, we've started an initiative where I'm meeting with governors
+across the country and their economic development departments essentially
+because they know best what they need in their state and if we can push more of this out of
+Washington and say this needs to return to the states they need to know the SBA is a resource
+for recruiting companies into their state to create jobs in manufacturing like in my home
+state in Georgia that has done that. So we're gonna continue to partner at the state and local and across the administration.
+I mean, having David Sachs and this administration
+to be an ambassador for AI and crypto has been huge
+because it gives us a way to work across the administration
+and then we can focus with the governors at the state level.
+Can I ask one question on that?
+Because your comment was really striking
+that you guys have strong underwriting performance in the loan portfolio. There are many other insurance programs across
+the federal government that do not have good underwriting standards and run a terrible
+loss ratio and they're highly inefficient for the taxpayer and then they cause all of
+these market inefficiencies as a result and I won't start to name them but you know who
+they are. Given your background financial services and Finech, your experience here, is there an opportunity,
+do you get drawn in and is there an opportunity
+to go in and try and address some of these other
+very, very, very large insurance programs
+and underwriting programs that the federal government
+operates?
+Dave, I think there is because we've recruited to the SBA
+really an elite group of financial services leaders
+who understand this.
+I served in the Senate previously in the US Senate.
+I was the only CFA to have ever served in Congress.
+And I found out when I went to Washington that-
+In Congress ever?
+Ever.
+They don't like people with financial services experience
+in Washington because we know how to read a P&L.
+And, but yeah, so we're bringing that discipline.
+We're happy to share it, very open source.
+Please do.
+Yeah, so like you say, we've open sourced it
+and the fans have just gone crazy, so.
+Kelly, we have a word for small businesses
+in our community that's called startups.
+Maybe it's time to rebrand the SBA.
+I'm completely open to it.
+That's right.
+I was gonna call it Main Street Manufacturing,
+but I like startups a lot too.
+I love that because by the way, the point about China we made earlier, there's three
+million factories in China, but these aren't massive 100, 400 acre facilities.
+These are very often small warehouses that were turned into a small manufacturing facility.
+And we could recreate that in America across all of these great states where people are
+looking for
+economic expansion over and over.
+Yeah, David, actually, many of those opportunities exist, but people don't know that they can
+find local sourcing.
+So what's now possible through AI, you can say, I have this product and historically
+I've got it through China or I've got it through Indonesia or wherever.
+I want a US based manufacturer.
+Yeah.
+And you can use AI to go across the entire country and find local manufacturers.
+There's almost always a choice in the United States.
+It's just people don't know where to find them
+and how to negotiate with them and how
+to get in touch with them even.
+And so that's a solved problem now through AI.
+Do you think that there is a place where the SBA, maybe
+in partnership with the White House House says, here are these industries
+that frankly are just a little bit more important, or kinds of companies that maybe are just
+a little bit more important for a bunch of strategic reasons, or maybe you relax the
+underwriting criteria or you just try to get a lot more people on the field, chips on the
+table.
+How do you think about that?
+Well, first of all, I'm a taxpayer champion
+because as a small business person,
+I know that small businesses are taxpayers too.
+And we can't put some small businesses on the hook
+for other small businesses.
+So we've got to have an efficient market
+that discovers the right funding mechanism.
+So we're looking at making sure that we're,
+we have the right underwriting
+standards for critical industries. As we're working on some things with Department of
+Defense right now, we have our SBIC program that we're experimenting with some different
+equity structures. So there's more to come on that. I think financial engineering is
+important, but we have to first and foremost not put taxpayers on the hook for it.
+I think that's a really interesting point,
+the equity structures.
+If you look at Solyndra, Tesla, and that cohort,
+Tesla paid back their loan with interest early.
+That's right.
+If the government had gotten just 10% of that in equity,
+that would have paid for 100 cylinders and mistakes. So some equity component or warrants
+could change the SBA into, you know, having an American
+taxpayer by proxy having some upside in these investments.
+Yeah,
+yes, taxpayers have all the downside and none of the upside.
+You like and you like the taxpayers having equity?
+It's tricky. It's more complicated than that. You know,
+you have adverse selection issues and it's not a one size upside. You like the taxpayers having equity? It's tricky. It's more complicated than that.
+You have adverse selection issues.
+It's not a one size fits all and it's all good, but having flexibility for certain industries
+to have a different corporate structure or different investment structure is, you know,
+Pareto optimal.
+You don't do that at all today, Kelly, at SBA?
+Not today.
+So very plain vanilla, but we're continuing to have the conversations about how
+to be creative, particularly around defense,
+critical technologies.
+There's a lot to do there, and we need to do it very quickly.
+And there's some great success stories that we can replicate.
+And they may not even require massive re-engineering.
+Just in the last few minutes, Kelly,
+can you give us a very quick contrast?
+Your life as a senator versus your life as a head of the SBA.
+Well, I'd much rather be an executive than a politician.
+So I was humbled and honored to serve in the Senate as a kid that grew up on
+a farm and the first in my family to graduate from college.
+It was amazing.
+But being able to run this agency,
+which at 7,000 people is considered small, is amazing.
+But I'm really an entrepreneur and a businesswoman at heart.
+So I'm approaching this as a businesswoman, a service to taxpayers, the government, and
+I'm incredibly blessed to be able to do it.
+So I love it.
+Thank you for doing it.
+Yeah, thank you.
+Please join us in thanking Kelly Loeffler.
+Thank you.
+Great to be with you.
+Thank you.
+Thank you.
+Thank you.
+Thank you.
+Thank you.
+Thank you.
+Thank you.
+Thank you.

@@ -1,0 +1,923 @@
+source: allin_youtube
+published_date: 2026-06-02
+video_id: TjrShuj_Zsg
+url: https://www.youtube.com/watch?v=TjrShuj_Zsg
+title: OpenAI CFO Sarah Friar: IPO, AI Rivalries, New Device, and Spending $100B+ on Compute
+
+Open AI's CFO, Sarah Friar.
+>> We're going to get right to it. You have
+just completed what I regard [music] as
+the most successful fundraising round in
+history.
+>> We're going to raise [music] actually
+north of a hundred and twenty billion
+dollars. We think AI is the biggest era
+that we've seen [music] today. We're
+just starting to understand what it's
+going to mean for global productivity
+and with that, you [music] know,
+hopefully more affluence, better lives
+for everyone. Luck is whatever the
+preparation meets [music] opportunity,
+but you got to grab it.
+Long time listener, first time caller.
+Quite exciting.
+To get to hang out with all the bros
+here. Hello.
+>> [laughter]
+>> We weren't sure how to start this off,
+but I thought the best thing was to
+allow our erstwhile crypto czar to maybe
+>> erst
+>> say a few comments and
+>> I saw an article today. I think it might
+have been in the Wall Street Journal
+that the perception is that there's an
+advantage to IPOing earlier if you're an
+AI company. So now we know SpaceX is
+going and then the question is when's
+when are Open AI and Anthropic going to
+go? And I'm curious, how do you think
+about that? Do you think there is a
+little bit of a race on or, you know,
+you haven't made a decision about that
+yet?
+>> Like in the end, an IPO, I say this to
+the team all the time, it's a milestone.
+It is not a destination. Do not run your
+company as if that's some sort of
+destination. It's just another way to
+fund raise. We just did, you heard me on
+on the the the sizzle reel, raise a
+hundred and twenty-two billion dollars
+in March and that was to give ourselves
+maximum flexibility. I feel like my job
+as a CFO is create optionality
+for this, not just this company, but
+just this era that we're living in.
+>> was that
+that point in fundraising, is that the
+biggest private or public up until the
+SpaceX IPO?
+>> It is.
+>> Right.
+>> It is by orders of magnitude. I think
+the largest IPO to date was the Saudi
+Aramco, which was about $30 billion.
+So, it is actually incredible that
+you're going to have potentially three
+IPOs at a scale that will be bigger even
+than 2001,
+2000 that that time frame. There was a
+lot that went on in the market, too.
+But, the market has grown. And by the
+way, the other thing going on in the
+market is like if you look at buybacks,
+M&A, and so on, it's actually a lot of
+capital keeps being returned back to
+shareholders in cash. So, there is a lot
+of money sitting on the sidelines. But,
+in the spirit of like the question,
+David, I think in the end you want to
+you'll be measured, right? It's the In
+the end, the market is a weighing
+machine, not a popularity machine. No
+one remembers who won first, Google or
+Yahoo, Lyft or Uber. And I say that not
+because well, I want to be first or
+second, but I just think it's you know,
+the the press loves a bit of drama, but
+in the end we're going to have to build
+big, sustainable, durable companies. And
+fundraising will be a key component of
+doing exactly that.
+>> Sarah, breaking news.
+>> Oh my god, so many people coming at me.
+Hi, Jason. [laughter]
+>> I know, it is it is it is it is hard
+balancing four interviewers at the same
+time.
+>> This is my world, by the way. So, I'm
+good with this. Jason.
+>> and Anthropic just
+uh confidentially filed their S-1. So,
+does that mean you're third place in
+terms of the filing?
+>> It does not mean anything yet because
+[laughter] you have to run now the
+gauntlet of the SEC, and who knows how
+long that takes for anyone.
+>> Yeah, is it Is there though a
+benefit to them going forward? And I
+think unpacking the rivalry with
+Anthropic is on everybody's minds. So,
+just
+I guess you can't talk too much about
+IPOs, so I'll just pivot to Anthropic
+was far behind, and now they've really
+um I think everybody would agree in the
+industry now blown past OpenAI in terms
+of developers and corporations, and it
+seems revenue.
+So, did
+how did that happen at OpenAI when you
+had such a tremendous lead? How did
+Anthropic blow past you guys?
+>> So, let's talk a little bit about our
+strategy. Our strategy is different,
+right? So, we are building the AI layer,
+the infrastructure, and it's really
+important that there's a single
+foundation, but then with many
+interfaces out into the world. So,
+ChatGPT is one to the consumer. Over 900
+million people use ChatGPT weekly, and
+it's become the noun and the verb. It's
+how most people experience AI for the
+first time. Kind of fun fact, our
+economic research team just showed me
+the fastest growing continents now are
+Africa, probably not totally surprising
+since it started a small base. Fastest
+growing languages are
+Azerbaijani and
+what Kazakhstani? What is It's Kazakh.
+>> Kazakh.
+>> Um which is kind of incredible to talk
+about where it's going. So, multiple
+interfaces, ChatGPT, of course there's
+Codex, um just hit 5 million over the
+weekend. We're really proud of that
+coming from almost zero in January.
+>> users.
+>> Go Codex. Um help me prepare for this
+little special up here, too.
+Um there's of course Frontier, our
+enterprise offering, and everything
+every other way that we can get out
+there to reach businesses of all sizes.
+That is a very different strategy. We
+think that because it's served up on one
+model, there's a compounding element of
+advantage that comes from that. More
+users, more data, more ability to
+personalize. ChatGPT acts as a front
+door. As we as models get bigger,
+there's more efficiency that should
+lower the overall cost to give you a
+token in the world. That should compound
+to higher gross margins, ultimately more
+ways to pay for compute, and then access
+to compute is one of the really big
+competitive advantages at the moment.
+So, you know, we have to all run our own
+races, but we all have to recognize
+we're part of an ecosystem that also
+needs to bring people along
+collectively.
+>> Did you spread a little bit too then too
+many projects? People are talking about
+this new gadget, Sora, and and then
+maybe not enough focus on enterprise. Is
+that a fair assessment of if there was a
+mistake in the last year, that was it?
+>> No, I I think that the world loves to go
+to binaryisms. Like, are you a consumer
+company, Sarah? Are you an enterprise
+company? The reality is we're very much
+both. We're not one or the other. Right
+now, our revenue's getting pretty
+balanced, about 50/50. We are incredibly
+focused on the enterprise. Like, I spend
+so much of my time with I mean, just
+even in the last week, I could tell you
+I've been to see Thermo Fisher in
+Boston. I was with a bunch of banks in
+New York. I was on the phone with
+Travelers on Friday. I spent this
+morning on the phone with a tech
+company. Doesn't matter the vertical,
+people are really moving on AI right
+now. Our new head of revenue, Denise
+Dresser, in seat since December, she is
+a force of nature. And so, I think the
+enterprise, broadly speaking, is really
+firing on all cylinders. But, we don't
+want to leave the consumer behind.
+Remember, our mission at OpenAI is AGI
+for the benefit of humanity, not for the
+benefit of humanity who can pay, or for
+the benefit of humanity who live in an
+enterprise, but very broad-based.
+Um it's why we offer so much free,
+because we want people to get a taste.
+Once they get a taste of intelligence,
+the ability to come up with commitment
+curve is incredible. Our free users do
+about seven turn seven questions a day.
+Our first paid tier do double that,
+about 15. Our our real paid tier, the
+plus, 20 bucks, hopefully you're all on
+it or higher, about 3x. And pro, about
+um 11x
+over a free user. So, remember when you
+got your flip phone, and you're like,
+yeah, I don't know what it does, make
+some calls. Now, that same phone, think
+of all the things it does for you.
+That's the path we're on with
+intelligence right now. Sorry, Sam.
+>> You said something very influential, I
+think it was about 18 months ago, for a
+lot of us in the industry where you
+framed a very simple economic trade-off,
+which was gigawatts to cash. And I think
+you said 1 gigawatt is roughly
+equivalent to about 10 billion dollars a
+year of revenue to OpenAI.
+So, comment number one was this 1
+gigawatt equals 10 billion dollars a
+year of revenue for you. But, it's not
+just you cuz you can probably
+extrapolate that to
+Anthropic and other folks, Gemini.
+But, then you were really at the
+forefront of getting access to power and
+data centers and powered land. It seemed
+a little crazy, but now it looks like,
+"Hold on, there's a huge deficit of
+supply." Can you just unpack all of that
+and explain
+both the spectrum of where we are and
+then those specific economics and if
+that's changed?
+So, first of all, yes, compute is a very
+scarce resource at the moment. We what
+we see in our business, we're going up
+that kind of vertical wall of demand
+right now, and there's just not enough
+tokens available. So, I'm very grateful
+that I got to work alongside Greg and
+Sam. I think we really pressed hand on
+this. And last year, we were definitely
+taking some, you know, arrows in the
+back about, "Why are they out there
+buying all this computes?" And I think,
+thank God we did because in '26, we
+still won't have enough compute. Um,
+where are we on the compute continuum?
+There's kind of choke points everywhere,
+and and I think they will continue to
+move back and forth. I mean, you all
+talk about this and know this.
+as well as anyone here, whether it's
+energy, first and foremost, um, land,
+power, how we get regulatory, um,
+environments such that we can build
+quickly. Um, when you get into the racks
+and chips themselves, clearly, do we
+have enough, um, in that supply chain?
+Memory spike is is on at the moment.
+Access to great talent. Um, do we have
+enough people coming through our
+education system? I really worry about
+this right now. I'm a trustee at
+Stanford and you know, I see just that
+you know, we need to keep the focus on
+education and science.
+And then trust. I mean, I actually put
+that as part of the supply chain.
+Sam right now is in Saline, Michigan.
+He's going to be cutting the ribbon in
+about 2 hours. So you are getting a
+sneak preview, but they told me it was
+okay to say it in the room.
+That will be, you know, sticking shovels
+in the ground on a 1 gigawatt data
+center, which is part of our Oracle
+complex.
+Really important there on the trust side
+that we don't leave communities behind.
+I spent 7 years of my life working at
+Nextdoor doing the hard work of what it
+means to be local. And you cannot tell
+people from top down what they need cuz
+they will tell you thank you, but no
+thank you. I will tell you what I need.
+And so in a data center like that, we're
+actually spending a lot of time in the
+community saying, "Number one, we're not
+going to raise your electricity bills.
+We're going to pay for our
+infrastructure and our power. It will
+not be the ratepayer that has to pay."
+Number two, we're going to bring jobs.
+2,500 union jobs.
+Good jobs. Like electricians, HVAC, and
+so on.
+We are going to pay our taxes. A billion
+dollars in taxes just for that data
+center into Michigan. And on top of
+that, we're going to invest 45 million
+dollars going into education for Codex
+credits to do what you all talked about
+this weekend is like anyone who's not
+like coming in facile to their new job.
+I have teenagers using Codex. It would
+be like I would never hire a finance
+person didn't know how to use Excel and
+I pretty much probably wouldn't hire a
+finance person today that doesn't know
+how to use a tool like Codex. So that,
+you know, so when I think about
+investment, we're having to invest ahead
+of demand. That means we need to both be
+able to find all of the compute and all
+the pieces and then pay for it. So that
+goes back to your capital question on
+IPO. And then on the other side on the
+economics, look, the economics do
+continue to get better. They're getting
+better on multiple fronts. I think we
+are doing a better job of actually
+showing true value to our customers. And
+I think you get beyond kind of a cost
+plus type pricing into something that
+feels more akin to the value being
+created. Now, scarcity of tokens helps
+cuz it's causing a bit of a compression
+in time.
+>> about that in just like without specific
+names, where you know the landscape
+exists today in terms of all the power
+that's available and all the demand that
+exists across everybody?
+>> Yeah.
+>> What's going to happen over the next
+year just at the current course and
+speed of what is available? Of the data
+centers that's available, of the tokens
+that's available, of the infrastructure
+that's available for everybody because I
+you know I told this story last week but
+you know I'll use Anthropic and one of
+the frustrating things is at some point
+it just says you know 10:30 it's like
+all right Chamath see you at 2:30.
+>> Yeah.
+>> And that's not a viable experience.
+>> Right.
+Um
+>> And in fairness to ChatGPT actually I've
+never had that with
+>> Yeah, we we're quite generous with our
+tokens and again on purpose we're trying
+to drive access so people understand cuz
+if you're on that free tier not actually
+getting the latest model but we're
+trying to put it in your hands so you
+get a sense for it by the way because
+you know if you're a kid um doing
+homework like I think about when I grew
+up and the Encyclopedia Britannica's
+showed up at the front door in Northern
+Ireland in a tiny little community in
+the middle of the troubles it was like
+the clouds parted we want to make sure
+that people get that feeling by the way.
+But the landscape right now in 26 if you
+want to buy more compute good luck to
+you. Like tell me cuz I don't know where
+else to find it. I mean as you know I
+was going to say Elon ironically ended
+up being the one person that had too
+much compute in a way. Um but good job
+on like figuring out how to sell that
+off.
+Um in 27 it's pretty limited as well
+frankly. Now there's a couple of things
+shifting around. When we talk about
+compute, there's training that mostly
+still all happens here in the United
+States. For USG reasons, for making sure
+that a national asset in effect is
+happening on US soil. For inference, we
+want that to be global. And I think
+particularly in an agentic world, you
+want much more kind of real-time. Even
+for things like Sora and video, which by
+the way, yeah, we have you know, we had
+to make a really tough choice cuz we
+didn't have enough compute.
+>> And it uses a lot.
+>> Right now, yeah, video does. But video
+is not over. Like in particular, when
+you start to think about where AI is
+taking us into more multimodality. So,
+remember, we've all been taught by the
+last generation of technology to talk
+with our thumbs. It's a disease. You
+walk around, everyone's looking down,
+they don't look up anymore. Teenagers
+sit on my sofa at night and talk to each
+other with their thumbs. I'm like, "Who
+are you talking to?" And then my son
+will be like, "Him." I'm like, "Okay."
+Talk. Multimodality is here. Um
+hopefully, I think you all talked about
+it this weekend. You're talking to your
+tool. I talk to Codex every day. And so
+that is changing rapidly, but that is
+going to need much more kind of
+real-time compute cuz it's an odd
+experience. If I was talking to Chamath
+>> Johnny Ive this puck and ear pieces. So,
+maybe tell us a little bit about that
+project. You've admitted it now.
+>> If I If I tell you it's an ear piece,
+Johnny will come and steal my teenage
+son. I might give it to him. Give him to
+him.
+Uh but we are
+we're changing into a consumer substrate
+that I cannot tell you what it is, but
+by the end of this year, we will unveil
+it. Early next year, you'll be able to
+buy it. I have seen it. I've tried it. I
+am a hand talker. Right now, I'm sitting
+on my hands.
+>> Did you have a Did you have a paradigm
+shift? When Yeah, when you used it, was
+it like having an iPhone for the first
+time?
+>> It's very
+what Johnny and team are really good at
+is
+bringing humanity to devices and I don't
+really know how to explain that well,
+but when you see it, you feel it.
+>> It feels natural in some way?
+>> It feels very natural, but it feels very
+lovable.
+>> Really?
+>> And I can't really explain what that
+emotion is cuz so much
+>> Intimate in some way in terms of
+>> technology is
+>> Not taking your phone out and it's it's
+seamless is what I've heard from people
+who played with it.
+>> is very um can be very mechanistic, but
+we all know great design just makes
+everything fade away, right? It's what
+um at the time, you know, the simple is
+hard.
+>> Yeah.
+>> Um but I I think this is a drop set.
+>> This story just going back to the
+earlier question, so putting on
+the CFO hat, help us understand the
+capital allocation model that you use.
+Cuz a lot of businesses over the last
+decade, two decades that have kind of
+been these outsized returners have found
+some unique way to deploy capital at a
+higher ROC than anyone else and then you
+end up plowing all your capital into
+that higher ROC bucket. What is that for
+you guys and how do you think about that
+led that portfolio approach to having
+more of these kind of big returner shots
+and is there an engine where that gets
+better over time?
+>> There has to be because
+in the end, the durable, high value
+companies created in this era, I don't
+think they're not going to be magical.
+They're going to look like the great
+companies of prior eras. They're going
+to create customer value. Starts with
+the customer um and really helps the
+customer do something different, better,
+more revenue, more efficiency, right?
+Thermo Fisher wants to be able to get um
+patient screening done faster so they
+get FDA approval faster. That's really
+important. Like if you have a form of
+cancer where you have weeks to live, the
+difference between a breakthrough in
+four weeks and two weeks can literally
+be life or death.
+They also have, I'm going to misquote
+this, but something like 30,000, 38,000
+people in the field selling those
+amazing like if you walk into any lab in
+the country, you'll just see Thermo
+Fisher plastered all over every device.
+Those people want to be more efficient
+going to work. Like the the fastest
+takeoff of Codex within Open AI right
+now is actually in our go-to-market
+team. Our devs are there, but like if
+you look at the pace of growth kind of
+month over month, it's all in GTM. So,
+they want more productivity out of their
+GTM team. And of course, um they're
+doing things in areas like finance,
+which I get really excited about. But
+so, customer value first. From that, now
+you need to get to a great gross margin.
+So, how do you get to a great gross
+margin? You're looking at like the cost
+of revenue. The main input is compute.
+The good news on compute is that there
+is a massive deflationary curve on cost.
+Right from chat GPT uh five to five
+four, I think the deprecation cost was
+something like 97%. It's like a kind of
+an amazing curve. Actually, I'm slightly
+from four to five four, it was 97%. But
+that happened in like two years. It's
+kind of wowing, right?
+>> That's it.
+>> Um even our newest model, if you look at
+five five that we just released, we're
+trying to now translate that back to the
+customer. So, we actually raised prices
+on five five two X. But if you look at
+what the cost of the customer is,
+they're probably still getting a break
+of about 20 to 30% cost reduction per
+token because just much more efficient
+per token. So, there's a lot to do in
+that envelope.
+>> Yep.
+>> And and part of making an a capital
+allocation decision is having to
+if you make it on today's cost profile,
+you actually might misprice the
+outcomes. You have to lean in a little
+on the cost profile. And then as we
+think about like the builds, yeah, you
+are having to make like really my focus
+today on compute is what's the compute I
+can buy for 28 onwards. Like that
+Michigan data center in Saline, I don't
+think we will be getting compute out of
+it until probably end of 27 or early 28.
+So, that's where you're starting to make
+your bets. And in fact, where I feel
+most short of compute right now is
+starting to look at 30, 31, 32. So,
+you're having to create a business
+model. Um now, the good news is each
+year goes by, we get more confidence in
+the build. We're seeing it massively
+outperform. And so, that's giving us
+more and more confidence. And the market
+is coming towards us much more.
+>> All right. So, how are you making the
+compute need forecast multiple years
+out, accounting for all of the
+architectural and model advancements
+that are happening, where quality value
+or utility per unit of power is going
+up? And help us understand how you kind
+of estimate that given that there's a
+lot of technology development going on
+that has a high kind of variance to it.
+>> Yeah, yeah. So, we we do have to make
+multiple
+assumptions both on the compute itself.
+So, we assume right now that compute it
+actually on a per gigawatt is getting
+more expensive cuz power is getting more
+expensive, memory is getting more
+expensive, and so on. However, the the
+intelligence that we get on the other
+side out because of the deprecation on
+the chip side is is more than making up
+for that. So, in a terms of a per unit
+sold to a customer, it should actually
+get a lot less expensive for the
+>> improvement in that.
+>> Yeah, exactly.
+>> Yeah, exactly. That's just the chip
+itself. We don't want to overestimate on
+the model side cuz sometimes like 55 is
+an incredibly good model on the
+efficiency side, but if you look at
+something like 54, the prior model, it
+was a really large pre-trained model. It
+was very expensive. It was actually hard
+to serve. And sometimes we want to do
+that really big pre-trained moment. And
+then we take multiple model turns to be
+able to kind of drive down on the cost
+side. I mean, in the in the near term,
+like in 26 and 27, I clearly build a
+model that's bottom up. So, I know what
+my products are, I have a sense of what
+the pricing will be.
+You know, P times you know, consumer P
+times Q. How many wild do I think I
+have? I can see what the shape of the
+line is. How many of them will
+subscribe? Advertising coming in is also
+still related to how many weekly
+actives, how many dailies, how many
+messages and so on. So, you can you can
+do actually a pretty good model job in
+26 and 27. That said, the shape of the
+line keeps taking us by surprise to the
+upside. When you get into the outer
+years, you're actually looking more at
+the compute you've bought and almost
+just doing an algorithm the other way
+that's saying this amount of compute
+should equate somewhat this amount of
+revenue. I don't know for certain
+exactly where it will all come from.
+Like a year ago, I built a model for
+investors that showed agentic revenue.
+And the story was we're going to have
+this thing, we're going to be in the
+agentic era, we're going to hand it to a
+developer with natural language. They're
+going to be able to build and we think
+they will pay upwards of maybe $2,000 a
+month for it, which is kind of laughable
+in hindsight. But nobody believed. They
+were like, I don't even know what she's
+talking about. There's no way that will
+happen and $2,000 a month? Remember when
+people were losing their minds over
+ChatGPT Pro being at $200? Like, oh my
+god, no one will ever pay for that.
+>> Right.
+>> Yeah.
+>> So, why $122 billion? Does it take you
+to 2031, 2032? Like, how do you get the
+calculus on the capital needs as you do
+that modeling?
+>> Right. And you'll maybe get more
+specific. So, the estimates I've seen is
+that to stand up 1 gigawatt of AI
+compute costs about $50
+in capital. Land, power, shell, chips,
+everything. All in around 50 billion.
+Do you have to front all of that money
+when you create a new data center? Or
+how much of it do you do? How much of it
+can you get debt for? Does a hundred
+billion raise only get you two gigawatts
+or does it get you five? Like, what does
+it get you?
+>> It's It's a great question. So, if you
+look at our compute strategy,
+um and it's crazy how fast the world has
+changed. So, just two years ago, we were
+literally one. We had one CSP we worked
+with, Microsoft Azure.
+Um we we sat on one chip, Nvidia. We had
+one product, ChatGPT. One price point,
+$20 a month. So, I often use a Rubik's
+Cube as kind of my metaphor. So, we were
+like one cube in the bottom. Today, if
+you look at our strategy, it's been to
+go, first of all, multi multiple CSPs.
+Because what CSPs do for us, in effect,
+is they shift CapEx into OpEx. So, you
+pay as you get the revenue, so as you're
+actually utilizing the data centers. So,
+in effect, we are riding somewhat on
+their ability to build and have CapEx
+and um financing. So, today, we sit on
+top of every CSP, Oracle, um CoreWeave,
+um Microsoft, GCP, AWS, and a bunch of
+small neoscalers. On the chip side,
+we've also um gone for a program of
+being multi-chip. Um cuz we want to make
+sure you're always on the frontier. I
+think if you're only on one chip,
+there's just inherently a moment where
+you can't be on the frontier because
+there's some leapfrogging that happens.
+So, today, Nvidia remains our absolute
+priority partner. They have the frontier
+chip. Our next big trading run in the
+fall will be done on Vera Rubin's. We're
+really excited about that. And now we're
+plotting kind of the Simon series that's
+coming. But, we also now have chips in
+the pipeline from AMD. Um Cerebras is
+already online. It's been an incredible
+low-latency chip, great for devs, for
+example, that want real-time coding. And
+there's our own chip that we're working
+on with Broadcom. And then beyond that,
+there's other ways we've diversified.
+So, now think about that Rubik's Cube.
+It's become much more multi-dimensional,
+and it allows us to effectively utilize
+investment-grade CSPs in order to be
+able to go fast and push it back to be
+more opex, not capex. Now, we are
+starting to shift gears into more of a
+built-to-suit type environment. We
+announced a data center we're building
+with SoftBank Energy um down in Texas.
+That's the beginning of something that's
+beyond a CSP. There's a little bit more
+capex required there. And then finally,
+I think as the world progresses,
+remember we've done all that just in 2
+years. The reason I like a Rubik's Cube
+is again, please chat GPT this, but I
+think a Rubik's Cube has something like
+a quintillion different um forms it can
+come up with. And so it just gives us a
+lot of optionality. So remember what I
+said, my job is maximum optionality. And
+in a moment where I'm not yet an
+investment-grade type of entity where I
+can go get lower cost debt financing,
+being able to work with partners to do
+that is really important.
+>> think that in 5 years from now the stack
+is just merged together? What do I mean?
+In traditional or historical markets,
+you'd have Nvidia sell the chips, but
+that's all they do. And then you'd have,
+you know, Microsoft just run a cloud.
+That's all they would do. And then you
+would have a consumer app. That's all
+you would do. But now we see everybody
+doing everything. You know, you guys
+have silicon that you're spinning. You
+have models that you make.
+You may or may not eventually decide
+that you need to be some form of a neo
+cloud yourself. If you look at Nvidia,
+they have incredible silicon, but they
+also have their own open-source models.
+They're increasingly becoming an
+off-taker. Google is a cloud company
+first, but they also have a chip. Now
+they have models. So it's all
+merging.
+Is if that continues to happen, does
+that make
+the competitive landscape simpler or
+easier?
+>> I mean, I think where everyone is trying
+to make sure they reside is the layer
+that is closest to the customer where
+usually you take the the largest portion
+of the profits of the ecosystem, right?
+No one wants to find themselves
+>> They're searching for profit pools.
+away. Absolutely. And so, that's why
+today, when I think about our position,
+it comes back to where I started, why we
+want to be that AI intelligence layer,
+is because a year ago people talked
+about the commoditization of the LLMs.
+Um and frankly, it's gone the opposite
+because as you start building an agentic
+layer, and we all started use this word
+harness, but the harness is what brings
+the context, the memory, right? It I
+have in my Codex, I have a whole
+ginormous memory file where it knows
+that I'm me. It knows I'm the CFO of
+OpenAI. It knows how I like to write
+things, well, how I like to say things.
+It knows what I'm interested in. It
+actually also knows that I'm a mom
+teenagers. I mean, it just carries all
+this memory.
+And that makes the model more powerful
+for me. Now, think about what happens
+when that memory and that context is
+brought into an actual enterprise
+environment. So, now it's not just even
+about the data that resides there, but I
+always think about the the intuition of
+like back when I worked on Wall Street,
+right? There was all the data in the
+world that told you what a stock should
+do post an earnings call.
+But, give me one second.
+Then you called your trader.
+And the trader would be like, "Yeah,
+that stock's not going up, Sarah." Now,
+I'm like, "What are you talking about?
+Like all the numbers say it did this,
+did this, did this." And he's like,
+"Yeah, no, but I know this fund is under
+pressure, and they need to sell down
+their book, and that is going to kill
+this stock for the next week." Right?
+That is the intuition
+of an enterprise. Like it's the best
+example I always think of cuz I came out
+of a financing world, but there's this
+intuition in every walk of life. And
+that's where I think the models are now
+getting very connected to the memory and
+context and intuition of your company.
+And that's what gets CEOs and C-suite
+really excited cuz they're like, "Okay,
+now I really see how this is going to
+add value to drive my revenue line, my
+top line, but also, you know, I can
+think about it as an efficiency play as
+well." And so, back to what you're
+asking, I think what people want to make
+sure is they stay as close to that value
+as possible.
+>> And be flexible enough to pivot as you
+can see we have to wrap, yeah.
+>> But
+>> Sorry, Jason.
+>> It's quite all right. Um
+it's been wonderful and and you've been
+so great with the details. One final
+detail question, rapid fire. Three great
+greatest consumer businesses of our
+lifetime, iPhone, Meta
+advertising network, and Google's
+advertising network. Two of those three
+are ad-based, and and even Apple has a
+sprinkling of that ads.
+Haven't heard you talk about ads much.
+People tell me they're seeing some ads
+in the experiment in the free version.
+What is your commitment to the ad
+version? You guys got a little
+uh trolled by Anthropic during the Super
+Bowl. Oh, you're going to have ads. But
+is ads the solution to making this free
+for the world?
+>> Yeah. So, first of all, on the ad front,
+you know, we we want to stick by our
+principles. We want to make sure that
+you know you're always getting the best
+result based on the model, not by
+something that was sponsored. So, that
+has to hold true. And I think the second
+thing is that we'll always provide a
+free a tier, sorry, an ad-free tier for
+people that just don't want ads. But
+>> If they pay.
+>> If you took If you took what I Fiji says
+this really well. If, you know, Google
+and Meta had a baby, it would be
+ChatGPT. Cuz what you have in Google
+Search, and by the way, we know we have
+at least 11% of the search market. It's
+a lot more because actually, when you do
+a Google search and the page refreshes,
+that counts as one. In ChatGPT, when you
+do a whole conversation where you might
+ask 50 questions, that also only counts
+as one. So, in reality, we have a much
+higher portion. Very high intent. That
+is great for advertisers because I'm
+effectively telling you what I'm doing,
+right? I want really cool shoes to sit
+on the stage. I'm telling you what I
+want to go buy. In Meta's case, right,
+they use this like people like you sort
+of intent, so they have the demographic.
+We have more than that cuz we have
+memory, right? I just told you it knows
+who I am. So, imagine putting memory and
+context next to intent, you should have
+a very potent ad platform, which gives
+you an ability to offer up massive
+access to the world writ large because
+now you can pay for it. And I think back
+to a question you asked Freeberg, like
+if you look at them the revenue per
+token right now. If I was optimizing
+only for today, I would give every token
+to the API.
+>> Right.
+>> Every token to the API. Order of
+magnitude more than to the consumer.
+However, I told you we're playing our
+own game. We have a strategy where we
+believe there's an AI infrastructure
+layer utility like electricity. And in a
+future state, you'll want to be able to
+serve the world writ large, consumers,
+small businesses, large enterprises,
+governments. That's our strategy.
+>> Ladies and gentlemen, the CFO of OpenAI,
+Sarah Friar.
+>> Well done.
+>> Fabulous. [music]
+>> [music]
+[music]

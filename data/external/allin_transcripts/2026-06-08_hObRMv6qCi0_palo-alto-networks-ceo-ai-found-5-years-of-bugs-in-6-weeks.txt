@@ -1,0 +1,1085 @@
+source: allin_youtube
+published_date: 2026-06-08
+video_id: hObRMv6qCi0
+url: https://www.youtube.com/watch?v=hObRMv6qCi0
+title: Palo Alto Networks CEO: "AI Found 5 Years of Bugs in 6 Weeks"
+
+One of the biggest winners right now.
+[music] The big daddy of the
+cybersecurity space. Palo Alto Networks
+is a now performer in the space.
+CEO Nikesh Arora
+>> This might [music] come as news to you,
+but humans have been writing bad code
+for a very long time.
+>> I spent 10 years [music] at Google and
+you know, Google search was
+democratizing information. If you take
+that analogy and think about what AI is
+doing, AI is democratizing [music]
+intelligence.
+>> Money is a way to keep track.
+>> Yeah.
+>> It's not the goal.
+>> You've been a CEO of Palo Alto Networks
+for 8 years?
+>> Coming up on 8 years this week.
+>> And I think when you started it was $17
+billion market cap if I remember
+correctly.
+>> There about.
+>> And this morning I checked it's $238
+billion. Which if you listen to what we
+said yesterday, now that you passed 100,
+you're more likely to actually 10X. So
+the first 10X was actually much much
+harder. So you're on your way to a
+trillion dollars.
+>> From your mouth to God's ears.
+>> Well, I I think you are. Okay, so let's
+just double click into what you see
+because you are
+sort of in a really interesting position
+to see all of it.
+You see the birth of AI. Maybe you see
+you've seen the rise and fall of SAS.
+All the models talk to you. You were one
+of
+>> The rise again, right?
+>> The rise again.
+Uh you were one of the first and the few
+that got access to Mythos. So just Let
+me just push the button. Go Nikesh,
+start.
+>> [laughter]
+>> Well, uh first of all, thank you for
+having me here.
+I think AI is exciting.
+I think it's exciting to see all the
+stuff that's gone down in the last
+possibly 24 months.
+Um
+I think Sarah just said it. They were
+right in anticipating the huge amount of
+compute that was going to be needed. So
+all that stuff's going on. But
+you can see
+that
+you know, this this notion which we
+talked about briefly last time that AI
+is really democratizing intelligence.
+What that means is I have 250 people in
+marketing. They produce varied forms of
+output. Now you can get 90% of the
+output to be consistent across those 250
+people. I have 5,000 people who talk to
+customers.
+There's My my failure mode is when 5,000
+people do different things, where people
+say, "I want to talk to Joe because he
+knows how to solve the problem and Jim
+doesn't."
+So now you can get 5,000 people to act
+almost consistently in their
+interactions with people on the other
+side. So I think it's going to have a
+phenomenal impact to how we run
+businesses, how we operate. It's going
+to change the entire landscape.
+Now,
+in that context, you touched upon
+Mythos, and you know, Dave has been very
+involved with this.
+Mythos has shown us that all the bad
+code that humans have written over the
+last 50 years
+can be assessed by AI and shown uh the
+vulnerabilities can be shown. We tested
+for 6 weeks, and in 6 weeks we found
+what would have taken us 5 to 7 years.
+>> Wow. Say that one more time.
+>> In 6 weeks we found vulnerabilities
+which would have normally taken us 5 to
+7 years to find.
+>> So Mythos, but these are vulnerabilities
+where?
+>> Sorry?
+>> These are vulnerabilities in your own
+code base or in your customer or in your
+own code?
+>> Oh, wow.
+>> So Mythos was not oversold. It was
+legit.
+>> The capabilities of AI in being able to
+assess vulnerabilities in code are real.
+Not just that,
+if you put it on ultra mode, which is
+persistent thinking, so it keeps trying
+until it gets an answer, you can
+actually daisy chain vulnerabilities,
+i.e., finding a new attack path into
+your company into your vulnerabilities.
+Now, we pride ourselves as a top
+percentile of companies that test our
+code because we're in cyber security
+business. If you take that and compound
+that across all the companies that exist
+in the world that write their own code
+or the 10 million developers write code,
+this thing is going to find stuff which
+would have taken us 10 years to find.
+>> How much did it cost? Like did you track
+the token cost? Was it a hundred million
+dollars, ten million dollars?
+>> No, it was in the low millions. But
+again, you know, the cost as Sarah said,
+the cost curve is going to come down.
+Already OpenAI has got a model which is
+cheaper and more consistent. You know,
+Anthropic's come out with another model
+>> you buy the hype.
+>> It's not hype, it's true.
+>> It's That's the point.
+>> the capabilities are
+>> The You know that.
+>> The capabilities are true.
+>> Yes.
+>> I mean, you saw IBM announce a project
+for five billion dollars to fix open
+source. That's the biggest problem.
+>> What would have happened if Claude
+didn't have the restraint and they put
+it out in the public? Do you think it
+would have been like a real attack
+vector and caused chaos in corporations?
+>> we're three months away, if not already
+there, from this being available in
+the wild.
+>> Okay, open source.
+>> Yeah, just three months.
+>> Yeah.
+>> Yeah, cuz I mean, we've been saying that
+it's roughly six months away before
+mythos-level capabilities are available
+in Chinese models, you know, open
+models, whatever. But you're saying it
+could be three months.
+>> Well, look, there's what, is 4.8 is
+already out, 5.5 is already out. They
+have similar capabilities. And look, you
+don't need to
+crack the hardest code to crack. Just
+need to find a few vulnerabilities in
+code that are out there. Just take an
+Take an old industrial system which is
+running, you know, OT code on the edge.
+You can find that vulnerability
+reasonably easily.
+>> So, so we're in a race right now between
+the cyber defenders finding these
+vulnerabilities and patching them before
+the cyber attackers do the same thing.
+>> Yes.
+>> And how do you feel like we're doing in
+that race?
+>> So,
+not as well as we should be doing, which
+is great for our business, but that's a
+different story.
+>> [laughter]
+>> So, like, every company has to go look
+at their code base and figure out where
+the vulnerabilities are and fix them.
+So, if you talk to CIOs today, their
+biggest problem is all the vendors are
+showing up saying, "Please patch my
+piece of boxes that hardware that you
+have please patch my code that you have
+because I found vulnerabilities fix it.
+While the CISOs are busy finding their
+own vulnerabilities to fix their own
+vulnerabilities and then this huge thing
+called open source which nobody knows
+quite how to solve.
+>> So is it is it fair to say that it as
+model capabilities go up
+systemic business risk of large
+enterprises also goes up?
+>> On the cyber side, yes.
+There are antidotes being built by
+people like us and others where we're
+going to provide some capability where
+you don't have to patch everything. But
+look, cyber has done something very
+interesting around harnesses, memory and
+context. Right?
+The part we don't talk about here is
+organizations don't have memory and
+context of everything they do every day.
+That's why you need to store a lot more
+data
+enterprise-wide to learn what good looks
+like and what bad looks like.
+>> Right. The same problem is in
+cybersecurity.
+>> We need to collect We need to collect 10
+times the data in the enterprise from a
+cyber perspective to be able to
+understand how to
+defend ourselves against the AI
+attackers.
+>> Do you think that the traditional
+companies like the SaaS businesses that
+have existed
+in this world, what is their place?
+As all this knowledge becomes more
+persistent and stored, what happens to
+SaaS?
+>> Well,
+you see SaaS is as Bill said, SaaS is
+different pieces, right?
+>> Okay.
+>> If you're an analytical SaaS company,
+it's over.
+>> It's over. What is an analytical SaaS
+company?
+>> Somebody that says I'm going to collect
+a lot of data for you and analyze it for
+you. I don't need you to analyze it for
+me. I can run
+models against data and analyze them
+myself. So if you think about there's a
+lot of every SaaS company has a
+marketplace. You can buy Salesforce
+marketplace. What do they say? You have
+Salesforce data, I'm a marketplace app,
+take me and I'll help you analyze the
+data. I don't need you.
+>> You don't need that.
+>> I can just go run an LM against the
+data. So the entire incrementality that
+has been sold as incremental software
+modules to all of us
+doesn't need to be sold to us because
+I'd much rather have LLMs running
+against that.
+>> Interesting you bring this up. We had an
+instance with a SaaS product with 20
+seats.
+Nobody was logging in and using it, but
+the data was there.
+>> Yes. So, we created like three accounts,
+got rid of 17, connected it to Slack,
+connected it to Claude, and now
+everybody can interface it through
+natural language and we've reduced our
+bill by 90%.
+>> Well, not just that, what are you going
+to do next? They
+Jason said, you're going to take data
+from different products, put them in one
+place, run the analytics against that. I
+want my data for my sales reps, my
+productivity data, my you know,
+inventory data from SAP. I want it all
+in one place so I can run analytics
+against it and say, "Who's selling a
+lot? Where do I have less inventory?
+Let's build inventory in a region where
+my sales people are extremely
+productive." To run that query, you'd
+have to have talked to three different
+SaaS products. Tomorrow, you can put all
+the data in one place. So, so that's
+sort of category one.
+>> Analytics SaaS today. The analytics
+>> Okay,
+category one analytics dead.
+>> Yes. In the medium term, you get all
+these bounces today and tomorrow that's
+these are marginally irrelevant.
+Infrastructure software undervalued.
+>> Okay, what is infrastructure software?
+>> Stuff that gives you databases. You
+collect data into it. Stuff that allows
+infrastructure to work, whether it's a,
+you know, database software.
+>> Databricks, Snowflake, like that.
+>> Databricks, Snowflake, MongoDB, Oracle,
+Oracle, all these things you need
+core storage infrastructure, core data.
+You're going to need 10 times the data
+stored in an enterprise than we have
+today. Right, 3 years. 10 times.
+So, anything that helps you collect
+infrastructure data, manage it, you
+need.
+I think the category in the middle is
+called, let's call it system of work
+or system, you know, of record, people
+call them.
+Those are deeply embedded in the way
+businesses work. I have 6,000 sales
+people, they know how this works. What's
+going to happen is step one, we will
+take away UI and let agents do the work.
+UI
+enterprise software and consumer
+software UI is the worst thing we did as
+technologists.
+>> You had a couple of examples of this.
+You told me this story, I don't know if
+you want to repeat it, of this one
+company they tried to hold you hostage
+on a license.
+>> Yes, that was analytical SAS, so that's
+over.
+>> just pointed AI at it and you just
+>> Yes, we just got rid of them. That's a
+different issue. But, I mean, think
+about it. Today, we spend our lives
+having product managers design UI so all
+humans can interact with data behind the
+UI.
+>> Yeah.
+>> If all like if you believe agents are
+going to work, and I say, I just tell an
+agent, look, figure out from my sales
+call, figure out the key points, and go
+post it into
+you know, whatever sales tracking system
+I have, whether it's Oracle or
+Salesforce, right? An agent conceptually
+should be able to do it. we're
+spending trillion dollars building these
+agentic backends, we need these agents
+to be able to do it. If that happens, UI
+goes away.
+If UI goes away, I can rewire my system
+of work.
+Right? I have sales guy should have to
+say, I had the sales call, do all the
+paperwork and all the that needs to
+happen in the back of the company, and
+just
+I'm done.
+>> Right.
+>> If I can change the way
+work happens, which is where you will
+get true efficiency, where five people
+become one in a company,
+all these SAS software that does system
+of work needs to be re-engineered for
+the next five years.
+>> And it's also happening passively, which
+is really interesting. It's looking at
+email, it's automatically taking the
+Zoom transcript and summary. So, the
+sales system of record is now like, you
+don't even need to input it. It's like,
+I already have the Zoom call notes, I
+have the deck the deck was made, the
+sales deck was made by AI. It's just
+we're we're all going to be looking at a
+chat window and just saying, here's what
+I want.
+>> Your audit trail becomes a lot better
+because humans are not touching your
+data. It's always being managed by
+agents, so I think the whole system of
+work, system of record, gets reinvented
+in the next five years.
+>> Yeah, there's no data entry. That's an
+interesting point. Yeah. Let's talk
+about national security for a second. I
+just want to maybe zoom out. So,
+the one side of Mythos, as you said, is
+like the value that it has to you and to
+your and to enterprises.
+The red team version of Mythos is where
+foreign state actors or you know, can
+essentially create economic havoc inside
+of a country.
+>> Yes.
+>> As these models escalate in their
+capability, what do you think should
+happen when these models are ready?
+>> You know, the sad truth is, you know,
+here there's a few thousand
+breaches or attacks that happen.
+They happen for pretty rudimentary
+reasons. It's not because somebody
+cracked a hard to crack thing. It
+happens because 89% of attacks happen
+because credentials get stolen.
+>> Or your username and password.
+>> That's it.
+>> I bet my password is password.
+>> Yeah, I'm sure it is. Did you have
+dollar sign?
+>> Dollar sign password.
+>> Fantastic. Well done, see? You're
+already ahead of everybody else. So,
+89% of breaches happen because of simple
+things. So, I don't think we need more
+models to go crack this stuff. Now, we
+will need these models can attack
+critical infrastructure and things we
+try and protect from a national security
+perspective. Yes, we need defenses
+there. I'm not worried about
+the national security part being
+protected because they're very on it.
+They're the right people. They spend 10%
+of their budgets on IT on security. I'm
+worried about the small offices across
+the country where they're using some
+piece of packaged software and you're
+running a dentist's office or doctor's
+office. Remember when then Change
+Healthcare got breached?
+>> Every physician's office shut down.
+>> Shut down and it's ransomware.
+>> Because of ransomware to Change
+Healthcare. That's was the clearing
+system. That's when
+United Health had to actually have give
+billions of dollars of credits to the
+physicians to be able to run their
+businesses at that point in time.
+>> That's what one should worry about. It's
+less about
+>> the big nuts will get cracked.
+>> about cracking some PG&E power
+generation facility. It's more economic
+chaos. Yes.
+And so, what what what do we do?
+>> I don't think there's a sort of a silver
+bullet. I think this will take time. I
+think this will basically take a while
+until every system gets upgraded,
+renewed, fixed over time. I just think
+it increase the terminal value of the
+industry, right?
+>> Do you think that there's a world in
+which these models become so good that
+you could see yourself advocating for
+more nationalism around how they're
+controlled and
+how they're managed and how they're
+where we point them? Or do you think
+there should be a maybe a set of these
+models that never see the light of day
+that only the NSA and other folks get
+have access to or guys like you?
+>> I have a slightly differentiated view
+about models and how they will evolve
+versus what we heard earlier from an
+open AI perspective.
+I think
+I still believe models are going to
+become a utility layer.
+You'll be able to buy intelligence on
+the [snorts] fly.
+Or you can say, "I don't need a 180 IQ
+person to go do this task. Give me a 120
+IQ and I need a 250 IQ to do this task.
+I'll pay $10 for this or for this I'll
+pay 1 cent." So, I don't know there's a
+one-size-fits-all
+give you the most up-to-date model to
+answer my customer call saying, "Sorry,
+sir. I have no idea how to solve your
+problem."
+So,
+I think models will get differentiated
+from utilitarian perspective.
+Um so, if you look at already what's
+happening in the market, right? The
+profit pools are in applications, not in
+models. More Sarah talked about Codex
+running away. She didn't say
+Open AI is running away. She just Codex
+is running away. Just say that's the way
+I'm sure Dario says Claude code is
+running away. So, you're seeing that
+>> They're attacking profit pools.
+>> They're attacking profit pools because
+that's where the money's going to come
+from. The profit pools are in
+applications that companies can use. The
+profit pools are not in model usage by
+companies because most companies have no
+idea how to use the models.
+>> at these companies in a way Open AI and
+Anthropic as the new Microsoft Office
+coming in and doing all applications,
+all productivity software for
+organizations.
+>> No, I see there's going to be
+application companies that are going to
+arbitrage between models and solve your
+business problem.
+>> So, you still think they won't go to the
+application layer? Because this is a big
+debate. Should you engage with OpenAI
+and train their systems to then take
+your business from you?
+And Anthropic keeps releasing their
+legal model, their accounting model. And
+it does feel like in order for them to
+hit their revenue numbers, they might
+need to do what Microsoft did, which is
+release the Office product on top of the
+operating system.
+>> See, if I'm a company, I don't want to
+write every piece of software myself. I
+want my HR system software, which is
+agentic enabled and AI enabled to be
+delivered by some application company.
+It'll be a new AI application company. I
+want my sales management system built by
+the new agentic AI sales force of the
+world, whether it's sales force or
+somebody else. So, I want applications.
+Now, what
+Sarah said is the profit pools are in
+the application layer. That's why they
+want to be the application layer. So, I
+think we're still waiting for that layer
+of companies to be invented or created
+where applications will sit. Because
+50,000 uh companies need the same
+application. Why would I build it
+myself? It's highly inefficient. It's
+silly for me to use OpenAI directly and
+rewrite my entire sales system because
+uh I'm smart. Right? I'm not. I want
+somebody to do it for me. So, I think
+that layer of companies is still not
+fully formed.
+>> Or so, we're going to be waiting for it.
+>> control plane, a harness, and then
+>> That's right. They will build the
+harnesses and the memory into those
+application layers. Now, the question is
+how big is the application layer? Is it
+one application? Is it Is one, you know,
+enterprise application that does
+everything? Or is it specialized
+application?
+>> and you kicked out this software vendor,
+you did it because they were being
+abusive in pricing. So, that
+>> use a different vendor.
+>> What's that?
+>> We swapped out for a different vendor.
+We just took more control.
+>> Love it. So, it really is a pricing
+issue. And and that's why the SAS
+apocalypse in some ways makes sense.
+They're not having pricing power because
+you could say, "Well, I'll just put 10
+developers on this and I'll save $10
+million." Yes.
+>> I think the part back to what Chamath
+said about the regulation or whether you
+want to regulate these higher-powered
+models, the question is at some point in
+time
+when these newer models, which are even
+more powerful, get built, they will come
+at a different price point and they
+might have to go through a certain
+vetting process to understand what their
+capabilities are. But I think we're in a
+global race.
+I don't think holding back our models
+for 3 to 6 months is going to help us
+any. Somebody else is going to put them
+out in open source.
+I I was
+I was shocked to hear when I was talking
+to the CEO of one of these model
+companies. He says, "The entire weights
+of their most recent model can fit on a
+USB stick."
+>> Say that again. The entire weights
+>> model weights of their newest model fits
+on a USB stick. That's the IP.
+>> Yeah.
+>> That's incredible because all the data
+can be distilled in under 24 to 48 hours
+and model comes out.
+>> I'm curious
+>> That's the IP. So, are you telling me
+that
+you know we can hold on to that for 6
+months?
+>> Right.
+We we have a debate about um how
+difficult it is to make a frontier
+model. Some companies are starting to
+think about making frontier models using
+their data advantage to to build their
+own.
+Have you thought about that at
+Palo Alto because it [clears throat]
+does seem like you have proprietary
+knowledge on how security works. Could
+you build your own large language model
+or a VSML, a small language model that
+would give you some advantage in the
+future?
+>> nobody talks about
+is the false positive rates on the
+models.
+What is the false positive rate on 4.8
+and 5.5?
+>> No idea.
+>> You guys don't talk about it. You
+should. The false positive rate on MSO
+was 30%.
+>> Oh, wow.
+>> Right?
+>> So, it thought it found something, but
+it hadn't.
+>> Yes. So, the problem is
+it's great for attack, it's horrible for
+defense.
+Cuz you find 30 times 30% of the time
+you find something that says, "I found a
+problem." And you say, "Let's plug the
+hole." Wait, there wasn't a hole there
+in the first place.
+>> No missile inbound.
+>> Right.
+>> Yeah.
+>> So, now the same problem applies in
+enterprise. If you use a If you use a
+model without the right harnesses, the
+right training, you could be running
+into 10 20% false positive rates. Let's
+use the model to pay I don't know,
+insurance claims.
+>> Yeah.
+>> Oh, great. 10% 20% false positive. I
+just lost money.
+>> The sycophantic nature of these is
+ridiculous, yeah.
+>> So, so the problem is not who wants the
+newest model. The problem is how do you
+take that model with 20% or 10% false
+positive and make it 0.01% false
+positive. In my business, I want 0%.
+>> Without losing the false negative.
+>> Sorry?
+>> Without losing the negative, the false
+negative.
+>> Yes, but it's like saying, "Hey, let's
+take the new self-driving car. Mercedes
+is going to use Opus 4.8 and you can
+just sit in the car and it's going to
+drive you." I'm not putting my kids in
+that car with a 10% false positive rate.
+Are you?
+So, there's a lot of work that happens
+post a model, which needs to happen to
+make this thing
+useful and effective in the business
+context.
+>> Let me slightly pivot for a second. You
+were for a very long time the chief
+business officer at Google.
+You were the president of SoftBank.
+Now you're the CEO of Palo Alto
+Networks. So, let's play armchair CEO.
+>> Armchair CEO.
+>> Armchair CEO.
+>> I'm still I'm still bristling from David
+Feiberg trying to create a distinction
+between founder CEOs and non-founder
+CEOs. Just saying.
+>> [laughter]
+>> Just saying, David.
+>> By the way, false positives.
+>> Sorry?
+>> And false negatives, too.
+Give us what you would keep, what you
+would change, and what you like about
+the following companies.
+>> This is going to get recorded and put
+out there to say that really something I
+don't know.
+>> thoughts. You're one of the smartest
+business people
+>> don't like get to live with the glory of
+these all-in podcast sessions.
+>> Don't
+>> Okay, ready?
+>> people and roasting people.
+>> ready?
+>> Yeah, sure.
+>> Okay.
+>> [laughter]
+>> What you keep, what you change, what you
+like, what you don't like. Uber.
+In a world of a
+>> it, dude. I can't talk about my
+>> on the board of Uber?
+>> I'm on the board of Uber. I'm not going
+to talk about Uber.
+>> I didn't know that. Sorry. Okay.
+>> Dr. Dara, he's the CEO. He's a great
+guy.
+>> Okay. [laughter]
+Uh Waymo.
+>> You're trying to get me fired.
+>> Waymo.
+>> What do I like about Waymo? The cars
+work. It's amazing.
+They should have more.
+In many more cities around the world,
+faster. I I I would say that at the rate
+that I'm going to be fired.
+>> Google red large.
+>> I think Google's underrated.
+I think it's going to be the first
+trillion-dollar company in our lifetime.
+I think they have all the assets that
+are
+that are needed to make this successful.
+I think people underestimate. You can be
+a model company, you still need to have
+a sales force that convinces customers
+to go out there and embrace these models
+and buy them. And if you think about it,
+three hyper scalers have the biggest
+number of sales people out there. So,
+they should
+>> of why they're a little bit undervalued
+is just the conglomerate nature is hard
+to understand?
+>> I don't know. You guys are smarter than
+I am. I'm just a hired hand CEO.
+>> I didn't say that. Reeboks said that.
+Let's just be clear.
+>> I know. I know.
+>> I was I was providing a thesis on
+recovery out of the SAS pack. Let's just
+say.
+>> Okay. Okay. Got it.
+>> Just to be clear,
+there's there's a way to segment that
+basket. Okay? And you're not in that
+basket.
+>> I thought you were making a distinction
+about how people who are founders CEOs
+have
+uh have the right to take more risk
+and are allowed to take more risk.
+>> saying that.
+And I think and I and I think you you
+provide a unique counterpoint to that.
+And and there's not a lot of people like
+you. I think the same would be true of
+Jeff Weiner. And I think that there's a
+few other
+uh really great CEOs, but they are like
+Neo in the Matrix type anomalies. And I
+think you're one of those people. And
+there's a very rare kind of personality
+profile of someone that's willing to
+take risk and take ownership of
+something that wasn't theirs in the
+first place and they make it theirs. And
+uh it's a it's a extraordinarily unique
+trait. Far more unique actually than
+being a scalable founder.
+>> That's an incredible save.
+>> You're forgiven.
+>> Yeah, good save. Incredible save.
+>> back to Armchair CEO.
+>> Wow, that was incredible.
+>> He's more sycophantic than ChatGPT.
+[laughter] He's like, "Actually, I'm
+actually I'm actually the best."
+>> Let's go Let's go back to Armchair CEO.
+>> I'm liking this. He has Open AI more
+often. Yes. [laughter]
+>> They do sell faster.
+>> Open AI.
+>> They should sell faster, right?
+>> They should sell faster.
+>> I mean, I I you said it. Didn't you just
+say it when you were Sarah was here that
+>> And Anthropic seems to have improved
+their ARR much faster than Open AI.
+>> I mean, that's just the statistics.
+>> They kind of went all in on enterprise,
+and including specifically.
+>> I think I think that's like
+the the conversation right now is it's a
+race to take over the profit pools.
+If you are going to need tens and tens
+of billions of dollars every year to get
+What is that? 1 gigawatt is 10 billion
+of revenue.
+>> to build you? What are the most
+What are the most exciting profit pools
+then?
+>> So, what are the most exciting
+>> It costs 50. So, this is not a great
+deal.
+>> So, what are the most exciting profit
+pools then? So, we
+>> You've got coding. That's been the
+breakout application over the past year.
+It's massive.
+You've got infrastructure, like you
+said, the new databases. I think
+cybersecurity is clearly one of them
+because of the threats and patching
+cycles so much more dynamic.
+>> There's There's a slight difference in
+in Yes, as you can see, these models are
+trying to be the the enablers of better
+cybersecurity, which is good because all
+of us need to use them to test. And
+you're probably going to see I mean, you
+you saw Anthropic is already
+uh made their cyber capable model
+available generally, so that everyone
+can use it. And Open AI has got one. I'm
+sure Google has one, too. But they
+understand this is a place where CISOs
+or chief security officers want to use
+it to test the code. So, this is another
+profit pool. Uh I think we haven't seen
+the onslaught against the application
+software companies yet. I mean, there's
+tens and tens of billions of dollars in
+application software, which is waiting
+to get reinvented, as we talked about. I
+think eventually you'll see these people
+saying, "What if I took this 40, 50, 100
+million dollar time down, I can build a
+whole brand new backbone with a
+generative AI, and it'd be so
+differentiated that it will cause
+customers to move."
+>> We are seeing it as a playbook in the
+accelerators
+now. The year zero and year one
+companies, people are coming to us with
+the pitch, "This is a thousand dollar a
+seat per year,
+five hundred dollars a month seat SaaS
+software. We can do it for less. We're
+going to charge them based on
+consumption. We're going to take 80, 90%
+of the cost out as
+>> What are the two fastest places to make
+revenue?
+>> The two fastest places to make revenue?
+>> Yeah.
+>> In enterprise a replacement apps. If you
+replace something, I already have a
+budget, it's easy. I take something bad,
+I replace it something better,
+I get money. So, replacement apps are
+beautiful. If you can replace an
+industry, replace the profit pool, it's
+great. The second place is consumer
+revenue. It's a lot easier to get five
+bucks from a per user on a consumer
+side.
+>> Netflix.
+>> So, that's where I mean, look at it. I
+think we collectively probably pay more
+on subscriptions per month than we ever
+did historically, and you thought your
+cable bill was high.
+>> Yeah.
+Do you think that you're going to end up
+building more or less hardware in the
+future if you had to guess?
+>> Hardware, even today, is the cheapest
+way to uh
+manage low latency, high throughput
+bits.
+You still need a data center.
+>> Yeah.
+>> What's a data center doing is just
+managing high throughput, low latency
+bits.
+>> Yeah.
+>> That's why if you look financial
+services is the most reluctant industry
+to go to the cloud
+because you increase latency.
+If you increase latency, you reduce
+profit. So, if you look at every of your
+largest financial services company,
+whether it's Goldman or JP Morgan,
+Morgan Stanley, or
+these guys, they're using hardware.
+>> Try to get them to run their business in
+the cloud, they can't because they will
+have higher latency, they will lose
+money.
+>> Right.
+>> So, hardware is still being made. I
+mean, I remember when I used to advise
+Silver Lake, and I had have Dell was
+done. Nobody wanted hardware. I think
+Dell's might be back to like a 3 400
+billion dollar market cap. So, hardware
+is still going to be around. We're going
+to need it. It's the fastest uh way to
+move it.
+>> Are our hardware development cycles
+changing because of AI? Like are you
+seeing a lot of like generative design
+stuff moving in silica that historically
+was manual and long cycle?
+>> Yeah, but the long pole in the tent is
+their design, right? The long pole in
+the tent is production. Today, you can't
+get a box produced because every
+every
+piece of hardware componentry is back
+ordered. Everything's expensive and
+every factory in the world is back
+ordered because we're trying to build
+all these GPUs based, you know, chip
+cards for every data center in the
+world. So,
+>> Do you think the US is equipped to fill
+that supply chain need?
+Can we do that here? Or do you think
+we're just done?
+>> 10 years.
+>> With a with a with a firm top-down
+commitment.
+>> Well, I mean, the good news is that
+I think the hardware industry
+is seeing a bonanza of a lifetime.
+And generally, when you see a bonanza of
+a lifetime, you can go commit 10, 20,
+50, 100 billion dollars. I mean, I've
+seen a CEO on television committing a
+100 billion dollar plan to go build more
+memory.
+So, that's good. That means they have
+the money to go put the money in the
+ground, literally, to go build these
+things for the future. So, I think that
+gets us more certain that the fact
+>> I think the tax incentive has a big has
+a lot to do with that. The accelerated
+depreciation on the the CapEx. You get a
+100% write-off in the first year, right?
+Under the under the year.
+>> Just a Just a final question as we wrap
+up. You, over the last 8 years,
+you've grown organically very
+aggressively, but you've also been
+pretty acquisitive. You'll, you know,
+you'll take shots and they've generally
+worked. So, you have a ton of permission
+in the market.
+When you hear what Bill Ackman said
+about how there's this kind of
+over beaten companies, there's a few
+that get celebrated, that's a ripe pool
+for you to pick from.
+But some of that would require you to go
+maybe a little horizontally far afield,
+some would say.
+How do you maintain the discipline or do
+you see yourself at some point
+considering things that are
+not nearly so much right down the middle
+of of cyber?
+>> So, I'll tell you what. Um
+until about a year and a half ago, we
+used to buy product companies and throw
+them into our go-to-market engine.
+We could rewire their back end so they
+can work better with our go-to-market
+engine. So, for me, if I'm selling $10
+million to a customer, next time I go to
+her later if I can sell them 20, it's
+the most efficient way for me to
+amortize my go-to-market spend, right?
+So, that was the model. We played that
+we ran that playbook to north of 150
+billion. Then we got to a point where it
+says, "Oh, we see an inflection arriving
+in identity. It's going to be important
+from an agentic perspective, security
+perspective." So, we bought a $25
+billion company, which we closed 3
+months ago.
+Um
+now it's actually a very different
+opportunity has presented itself.
+And the different opportunity sort of
+goes like this. If you can be the best
+at leveraging AI to run the most
+efficient enterprise business in the
+world,
+your operating margin can be far in
+excess of the industry.
+And if you can if you can crack that
+code
+>> Gross and net, you're saying? Gross in
+the 90s, net in the 40s.
+>> Yeah, if you can crack that code, then
+it doesn't matter what you buy.
+>> Yeah.
+>> I think the problem right now is the
+execution problem. Most subscale
+companies cannot afford to go optimize
+their company and run it better.
+So, if we can run our company much
+better than everybody else and have a
+higher operating margin, then the street
+will say, "Fine." If you take something
+at a 20% margin, make it a
+>> Your first M&A was really tough, no?
+Like they were pretty skeptical and then
+you kind of shoved it in their face.
+>> pretty skeptical when they found a guy
+who didn't know cybersecurity, didn't
+know enterprise show up, who worked at
+Google, and their you know, the track
+record of people leaving Google and
+being successful out of Google is still
+>> Yeah.
+>> varied.
+>> So, basically you're saying the menu's
+open. And
+>> I I think we need the next 6 to 12
+months to figure out how this AI settles
+down and how can we use that effectively
+in enterprises? I think if you think
+about it, uh you know, the
+the the people keep hoping that less
+people we need to run companies. I
+actually have a counter view. I think
+we're going to have more people at Palo
+Alto on the technology side than we've
+ever had before because I think AI is
+causing
+everything to ask for a transformation.
+So, I have more technical people today
+than I would have had if AI didn't
+exist.
+>> Ladies and gentlemen, CEO Palo Alto
+Networks, Nikesh Arora.
+>> Thank you, guys.
+>> [applause]
+[music]
+>> Thank you, sir.

@@ -24,6 +24,13 @@ from trade_bot.storage.run_store import RunStore, SnapshotManifest, build_snapsh
 
 
 @st.cache_data(show_spinner=False, ttl=DEFAULT_EXPERIMENT_CACHE_TTL_SECONDS)
+def load_experiment_scorecards_frame(
+    root: str | Path = DEFAULT_EXPERIMENTS_DIR,
+) -> pd.DataFrame:
+    return load_experiment_scorecards(_active_experiment_root(root))
+
+
+@st.cache_data(show_spinner=False, ttl=DEFAULT_EXPERIMENT_CACHE_TTL_SECONDS)
 def load_experiment_dashboard_frames(
     root: str | Path = DEFAULT_EXPERIMENTS_DIR,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:

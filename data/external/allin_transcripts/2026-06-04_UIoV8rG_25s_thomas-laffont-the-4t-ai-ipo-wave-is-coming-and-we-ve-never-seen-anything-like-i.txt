@@ -1,0 +1,943 @@
+source: allin_youtube
+published_date: 2026-06-04
+video_id: UIoV8rG_25s
+url: https://www.youtube.com/watch?v=UIoV8rG_25s
+title: Thomas Laffont: The $4T AI IPO Wave Is Coming… and We’ve Never Seen Anything Like It
+
+Why do you think I waited to make my
+world podcast premiere for all in? All
+the ankle biters called and I said, "No,
+I'm just going to wait. [laughter] I'm
+going to wait till the besties call."
+>> Coatue is one of the most successful
+hedge [music] funds of the last two
+decades.
+>> $55 billion under management.
+>> This is their flagship hedge fund.
+>> The reason we decided to kind of get
+into this business is to find great
+entrepreneurs and find great companies.
+>> And they're looking to raise a whole
+billion dollars more [music]
+to invest in AI.
+>> We're in an idea business and when you
+have a truly revolutionary idea, it can
+get really big.
+>> I hope to do something a little bit
+different. Besties, you've been on for a
+couple hours, so you can take a break
+now for a few minutes. Sit back. We are
+going to show you some slides.
+And
+we're going to walk you through really
+an update on the unicorn economy. So,
+the markets are back. We can see that
+the unicorn economy on average since
+September of '24 is up 70%. I think
+that's intuitive to a lot of us.
+But, what's even more amazing is that
+the public market has really
+made the same move up.
+So, if we look at the share of the
+unicorn economy of the NASDAQ, which had
+a significant move up since 2015, it's
+really kind of plateaued
+over the past few years and I think it
+speaks to the performance of public
+companies like Palo Alto and others. So,
+AI is dominating fundraising.
+What's kind of interesting in this slide
+is you can see their share continues to
+increase.
+So, multiple years in a row now that AI
+is increasing its wallet share of
+fundraising.
+But, the composition of that funding has
+changed. If you look at the unicorn
+factory, which really peaked in the ZIRP
+era of 2021,
+we've now really normalized at a much
+lower level pre-COVID.
+So, mathematically, if you put both
+together, you can see that the funding
+per unicorn has increased 5x
+since 2021.
+So, we have fewer unicorns that are each
+raising more.
+Now, I'm going to spend a minute on this
+slide because this slide is really about
+the health of our ecosystem.
+So, the way you interpret this is if you
+look at the green line,
+which is the pre-ZIRP era unicorn
+cohort,
+of which there's about 73,
+you can see that 20 quarters after
+becoming a unicorn,
+80% of them had either raised a new
+round or exited,
+which is, I would say, pretty healthy.
+Now, if we look at the 2021 cohort,
+which is the red line, two things stand
+out. First, that 20 quarters in, you can
+see
+less than 20% less
+had either exited or raised.
+But, look at the number, 479 versus 73
+in the prior cohort.
+So, now here comes this new cohort, what
+we'll call our 2024 cohort of AI
+companies, and the key question is, what
+will happen in the future?
+Which of these cohorts will they
+resemble the most?
+So, we talked about how AI is
+concentrating the funding base of
+unicorns, but what we also see is the
+top 10
+is capturing a significant share of
+funding. So, it's not just AI companies,
+it's a small number of AI companies,
+which probably makes sense since we know
+that Anthropic and OpenAI are raising
+massive rounds.
+And so, what I like to think is we kind
+of have a new index. If we really
+thought about what the index of the
+future is,
+what for now I'll be able to call the
+Magnificent Eight, but that number is
+going to shrink as these companies go
+public,
+the first thing that jumps to my mind
+is, "Wow, what an incredible group of
+companies."
+And look at the diversity. SpaceX,
+Stripe, Anthropic, Databricks, Revolut,
+ByteDance,
+Anduril. We have internet, we have AI,
+we have fintech,
+we have space tech.
+I'd feel pretty comfortable owning this
+index if I could for the next decade
+plus.
+And obviously the performance of this
+index has been incredible. It represents
+almost $4 trillion of value
+and has really crushed the traditional
+kind of Mac 7.
+Almost every single one of these names
+has outperformed that index.
+We'll go to the next slide.
+Now, another positive sign is that if we
+look at the exits,
+the exits are thawing.
+So, one of the things that we've talked
+a lot about with the besties over the
+years is
+we know the unicorn economy is great at
+consuming cash, but how much cash is it
+really returning?
+We need to have a balance between the
+amount of cash consumed to the amount of
+cash returned. That's how an ecosystem
+stays in balance.
+And if we look, 2026 is actually on a
+pretty good trend.
+Not quite where 2021 was, but pretty
+good. And we still have half a year to
+go.
+But,
+that doesn't include
+three companies that we know will be
+coming public pretty shortly. SpaceX
+obviously in the next few weeks.
+And we know Anthropic just today the
+headlines hit that they've submitted
+confidentially for their S-1.
+And if you add up the totality of just
+those three companies, you can see
+that it's basically going to be more
+than the 10 years kind of combined.
+Which ultimately means, if you remember
+and you were there when I presented the
+first all-in summit in 2024, we knew our
+ecosystem was out of balance.
+We were consuming way more cash than we
+were returning.
+Which is just a fundamental imbalance
+and you can see that now
+even pre-the
+liquidity events that I just mentioned,
+our ecosystem is significantly more
+balanced.
+And that will continue to improve.
+Part of it is that the growth rates of
+OpenAI and Anthropic are unlike anything
+that we've ever seen.
+So if you look at this chart, just
+remember this chart starts in January of
+2025.
+That was only a year and a half ago.
+Just a few months in, these companies
+passed Workday, a pretty incredible HR
+company.
+Then it was ServiceNow.
+It was Adobe by the end of the year.
+Salesforce on the way just in January.
+Now even bigger than Google Cloud and
+Azure.
+So what can that look like in the
+future? Well,
+this is just based on kind of some
+assumptions and some forecasts, but you
+can see
+that we estimate that only not only is
+it bigger than Azure, but
+by the end of the year could be bigger
+than AWS
+and potentially bigger than all of
+Microsoft
+by 2028.
+Now these hyperscalers aren't sitting
+still. They're seeing the disruption.
+But actually they're doing more than
+seeing it, they're actually funding it.
+Because if you look at the ChatGPT
+moment that we know happened, look at
+how much these companies, the largest in
+the world, have invested in enabling
+and creating this change. Truly
+unprecedented.
+So, I know SpaceX, a lot of people are
+going to talk about SpaceX, so I thought
+I would share a little bit of how we as
+investors think about SpaceX.
+So that as you think about whether it's
+a stock that you want to own or you just
+want to seem smarter at a cocktail
+party, you can benefit from our
+knowledge.
+The first thing that pops out when we
+look and study SpaceX is that
+the number one driver correlated to the
+valuation of SpaceX is cadence of
+launches.
+Which intuitively makes sense. If your
+business is the launch business, the
+more you launch, the higher your value
+should be.
+So I think we see that in the data.
+But there's another fundamentally
+different
+ratio that I'm going to point you to,
+which is what if we took the valuation,
+we divided it by the number of launches,
+what would that look like?
+Well, you can see it was kind of in a
+fixed range for a while and then it
+really started to move up.
+And we believe that markets are rational
+and so we started thinking, well, why is
+it that the market is valuing SpaceX uh
+higher on a per launch basis when it's
+launching more than when it was just
+starting out?
+And my fundamental view, and we'll kind
+of call this our coat your framework, is
+that the reason is
+that the quality of SpaceX's business
+model increases the more you launch.
+So in phase one, which we call
+pre-constellation, you're just trying
+your rockets. And we know rockets are
+hard.
+And maybe you have a few government
+customers and that's a one-time revenue
+business and it's unpredictable.
+Then you get into your initial ramp and
+now you might have one constellation. So
+why is a constellation important? Well,
+it's an end market
+and it's a recurring revenue business.
+The more satellites you put up, the more
+subscribers you have, the more revenue,
+etc.
+Now, you can move from ramp into scale.
+Now, you don't just have one
+constellation, you have multiple
+constellations.
+And ultimately, we believe that a wide a
+wide variety of companies and
+governments
+and militaries will want to own their
+own constellations so they can control
+their own
+destiny.
+So, now you move into being a scaled
+business, which ultimately becomes a
+platform. And we know how valuable these
+platforms are in this technology age.
+And platform means not only do you have
+many more customers in your core
+business, but you also have new
+businesses.
+It could be space
+data centers, it could be the
+optionality of the moon and Mars and
+other space applications.
+Now, we know when defining feature of
+this era has been how quickly these
+companies are scaling and if we just
+look at whether it's the PC or the
+internet or the mobile,
+Antarctic in particular is scaling like
+no other company that we've ever seen.
+Now, this was kind of an interesting
+analysis and this is what I'm I'm
+curious to kind of
+discuss with the besties, but we looked
+at essentially three buckets of
+companies.
+And we said, "Okay, within each bucket,
+what is the likelihood that you will
+have a 10x?"
+Which I would view as an investor, maybe
+not a seed investor like Jay Cal, but
+for us as growth investors, wow, a 10x
+is pretty good.
+They're hard to find.
+So, the data showed us that if you're a
+unicorn,
+the odds of you one day becoming a
+decacorn are about 8%.
+If you're a decacorn, so that means
+you're over 10 billion,
+the odds of you becoming a hundred
+billion dollar company, not much better.
+8% to 13%.
+But how interesting that if you're a
+centacorn, hundred billion or more,
+the odds, and by the way, we're putting
+in public and private companies,
+you now have a 31% chance of having had
+a 10x.
+This kind of flies, in my opinion,
+in different than maybe we would have
+expected.
+And if we look at how quickly these
+companies are creating value, this is a
+chart that I kind of added at the last
+minute because the data is so fresh, but
+you can see it typically takes multiple
+years to go from 500 billion to a
+trillion in market cap.
+Well, something happened very recently
+in the public market, which is that not
+only did we have three companies do it
+in the same year,
+but we had two companies do it in a
+matter of weeks.
+So, we can talk about what conclusions
+to take from that.
+Now, even as these companies were
+scaling incredibly quickly from 500
+billion to a trillion,
+we had other companies take a long time
+to succeed.
+And this is a company called Cerebras
+that just went IPO, so I thought it'd be
+a good candidate.
+I was very proud to be a board member
+for a long time and led the series B.
+But if you look at the company's funding
+history, you can see why I put the
+little construction icon,
+that it took a long time and there were
+some dark periods, multiple years,
+of no new capital, of hard grind to
+develop their technology,
+all of that time leading up to a massive
+OpenAI contract,
+which then quintupled the value of the
+company.
+But, we know Cerebras has been
+successful and frankly, it's not just
+Cerebras. Semis are on a generational
+run. I was just talking about this with
+my friend Brad Gerstner earlier. This is
+just since 2024, the All-In Summit.
+You can see how much
+the semiconductor industry has
+outperformed the index.
+What will happen in the future? Well,
+one takeaway from having listened to a
+lot of speakers this morning is that
+there seems to be wide agreement that
+the more an AI system knows about your
+business
+or you as a user, the more useful it is.
+You want to know when you go and book a
+restaurant that it knows already your
+preferences, whether it's what time you
+like to eat or what food you like to
+have, etc.
+So, we think ultimately that in this
+era, the amount of memory per user
+could quintuple just based on the demand
+that these AI systems are requiring to
+provide their services.
+That helps explain why we've seen some
+of these moves in these memory
+companies.
+And then I want to finish on a point
+that I think has a lot of controversy,
+which is where's the revenue?
+If we remember over the past 12 to 24
+months, there's been a lot of discussion
+about is there revenue? Is there ROI?
+Where is this associated with?
+So, we tried to look and see, okay, what
+is the size ultimately of the AI
+ecosystem?
+We believe that it's about 140 billion
+today.
+It'll be about 300 billion this year and
+it'll double in 2027. So, where is that
+revenue coming from?
+Well, if we break it down, we can see we
+kind of estimate three key pillars
+to this industry. One we know,
+consumer.
+Number of subs times an ARPU, that gives
+you your consumer revenue.
+One that I think a lot of people forget,
+but it's ads.
+We estimate currently that about a
+quarter of ads served by Meta and Google
+are AI enabled.
+We think that penetration will
+eventually go to 100%. That's 150
+billion.
+And then obviously we all know about the
+breakthroughs in enterprise.
+And what Claude Code and Codex are doing
+inside of those businesses. So if you
+add all these together, you get a good
+sense of the size of this ecosystem.
+So this will be kind of my second to
+last slide.
+One thing that's different to me about
+this era versus the prior eras in which
+I was an investor
+is that almost every sector of the
+economy is being transformed at the
+moment. So we know some of the obvious
+ones, software,
+but look at Telco.
+I believe that within a few years
+Starlink will power a device which will
+actually enable you to make a phone call
+anywhere in the world, and we think
+that's a solved problem, but
+every time we get a dropped call we get
+reminded that there's a better
+technology out there. So back to
+Nikesh's framework on profit pools, I
+think the Starlink profit pool is the
+Telco global profit pool of broadband
+and wireless.
+We know compute is driving massive
+changes in semis.
+We had senators earlier on telling us
+how data centers have changed the energy
+equation in Pennsylvania.
+Just think about the auto business. I'm
+sure a lot of us followed what happened
+to Ferrari last week trying to introduce
+a new technology of electric and
+autonomous.
+Begging the question of what is the
+future of that franchise in an
+autonomous and electric world and I
+think the response to that
+car kind of fed into this narrative.
+And then obviously in consumer, we know
+GLPs are having a profound impact on
+consumption of food, alcohol,
+composition of diet,
+and a huge focus kind of on wellness.
+So, if we put all that together, what
+are our takeaways? Well,
+my first takeaway is that the new
+unicorn economy is healthier.
+And we really have kind of AI to thank
+for that.
+The winners are compounding faster than
+ever, which means the cost of not being
+in a winner
+are higher than ever.
+Disruption is impacting every part of
+the global economy.
+And by the way, we don't even have super
+intelligence yet.
+So, if I think that it was about 2 years
+since my last All-In Summit,
+I started thinking, well, gee, what
+could this look like in 2 years? And we
+know it's going to be a really
+interesting time, and thankfully, we
+have a great group to help us navigate
+what the next 2 years will look like.
+We're going to give this a title,
+the power law rules our lives. The power
+law rules our lives. All the great gains
+are being consolidated into small
+numbers of companies. Uh but we're still
+seeing strength in those. How do you see
+the private market
+uh
+ecosystem, the game on the field,
+evolving because of the stay private
+longer and these extraordinary outcomes.
+Obviously, I operate in the earliest
+stages. You have people who are doing
+Series A's like Craft Ventures. You have
+uh yourselves dipping down into private,
+but I was talking to Brad Gerstner, who
+you um
+discussed earlier. He was like, I I I
+have to figure out where to put my time.
+You know, we have early stage and and
+they and they do obviously public like
+yourselves. So,
+and then add to that,
+you have people like Andreessen Horowitz
+maybe going for the average in a major
+way and indexing venture. What what is
+the playing field going to look like for
+people who are LPs, angel investors,
+venture firms? What How does this all
+sort out into a cohesive strategy over
+the next decade or two? Because it's
+clearly the private markets are
+operating much differently than the
+playbook 20 years ago.
+>> Yeah, so I think the the first breakdown
+I would I would submit is
+on the positive side of the ledger, the
+outcomes are big, right? We're seeing
+outcomes that we never thought possible
+in private companies.
+And I think that's good just generally
+for our ecosystem. So, we have big
+outcomes.
+It's really why I wanted to kind of show
+that SpaceX slide. It was somewhat
+counterintuitive to me on the launch
+business. Why is it that the company
+would be valued more as it launched
+more?
+So, I think at least we have a number of
+big outcomes.
+And those outcomes will be public
+within, it seems like a 12-month period.
+So, if I think about, you know, the ZIRP
+era where the outcomes were smaller and
+companies were not going public, I think
+at least in this era, we have
+big outcomes and a desire of these
+companies to go public. Right? I think
+both Anthropic and OpenAI are both
+publicly saying that they want to be
+public. So, I would say that's good.
+I'd say the biggest issue is
+the
+It seems like we're talking about
+K-shape and power law in every aspect of
+life.
+>> Yeah.
+>> And it seems like that's the case in
+startups as well. So, we've seen, if you
+looked at my centacorn slide, we've
+really kind of been stuck at this number
+for a little bit now.
+So, I think Jay Kyle, I think the point
+that you're asking is if we were to see
+no new centaurs horns right in the next
+decade, we've basically not really seen
+any new one in the past couple of years.
+I think that's going to be a warning
+sign kind of for us.
+>> What does this mean for where capital
+allocators should be thinking about
+putting their money? Because what you're
+showing here, a rational person who's an
+LP, would just say
+wait for whoever gets to a hundred
+billion and yolo every dollar you can in
+there cuz it's the most sure thing, it's
+the least brittle, it's the least amount
+of effort, and it's the quickest return.
+But as we know, supply demand equals
+valuation.
+These valuations are disconnecting from
+any valuation metric we've ever had.
+Uh we had it explained to us today by
+Bill Ackman, I think quite accurately.
+You're making venture investments in
+trillion-dollar companies and giving
+them 50 times revenue, 100 times revenue
+valuation. So talk a little bit about
+where people should rationally, as a
+limited partner, as a private investor,
+a high-net-worth individual,
+ultra-high-net-worth, where should they
+be putting their money to work?
+And do you worry about this everybody
+racing to be in three names?
+>> Yeah, look, that obviously was the right
+strategy for the past five years. The
+question is about the next five years.
+>> Correct.
+>> Right? So
+the one pushback I would have just on
+the valuation argument is these are not
+fake companies.
+>> No, absolutely not.
+>> I think we have to I remember the bubble
+of 2000. I also remember 2021. Right?
+These are companies generating
+substantial revenue at scale
+that are growing faster than anything
+we've ever seen. So, you know, these
+businesses are
+real and they're performing, and I think
+it was widely
+shown that Anthropic even had a
+profitable month, I believe is what was
+reported. So,
+you know, they're they're also kind of
+profitable.
+But ultimately, and I think Chamath, you
+agree with this,
+the public market is the great
+test
+>> equalizer.
+>> Yes.
+>> Yeah.
+>> The scale. It will be the great
+antiseptic. It will not care about my
+presentation or, you know, um
+and so I love that. I love that these
+companies are going to have to face the
+scrutiny, both SpaceX, OpenAI, and
+Anthropic, of the market, right? And
+ultimately, I'm a big believer in the
+market. And so I'm very excited to see
+these companies go public, withstand the
+scrutiny of short sellers,
+pontificators, debaters, politicians,
+kind of etc.
+>> Let me Let me ask you two questions on
+that. The first is very tactical, which
+is
+normally we would say that the
+antiseptic or the disinfectant happens
+on T equals one day, right?
+>> Yeah.
+>> Now the rules are changing. There's
+going to be a lot of passive buying. So
+it's going to move out that date cuz
+you're going to have to wash through a
+lot of supply demand. So that's that
+could maybe
+>> Six month plus one.
+>> Six month plus one is when you'd say we
+can really start to get a sense of what
+these companies are.
+>> Okay, so that's a tactical question.
+The more strategic question, Thomas, is
+do you think that there's something
+structurally inefficient or wrong that's
+allowing these compounders to accelerate
+at scale? Like is that a market
+efficiency problem or do you think
+that's just a survivor bias and we
+shouldn't look too much into that? How
+do you look at that?
+>> I don't want to read too much into it
+because the end of those companies is so
+small and look at Anthropic, right?
+Anthropic pre-Claude code was a
+completely different company than
+post-Claude code, right? So one one
+event completely dented the trajectory
+of almost that entire industry.
+So it's hard for me to know whether
+that's truly,
+you know, whether these companies were
+like the mule in the Foundation series,
+something that could never be predicted
+and just came out of nowhere and it was
+just a one-time thing.
+You know, um we'll see. I do think that
+the narrative of oh, these models are
+commodities and these companies are
+going to get I think that's been pretty
+thoroughly disproven now.
+Right? Um and
+>> How do you as
+you know, your asset base has swelled,
+you've gone into
+you've expanded strategy, you're now
+doing you know, data centers, you're
+doing many things.
+How do you keep it all organized
+when maybe a slide like that would say,
+"Hold on a second, maybe we should have
+just plowed $10 billion into Micron?"
+Like how do you balance that
+>> reason I I make a deck like this and in
+some ways I should thank you guys
+because
+when we when I do something like this
+for you guys and it is tremendous amount
+of time from uh myself and our team and
+um we really want to present you with
+accurate information. So, the past 2
+weeks has pretty much been a full-time
+job doing this.
+But, for me it re-anchors my conviction
+around what to do. You know, I I can't
+go and listen to a thousand people and
+then I get distracted and I I don't know
+what I'm thinking anymore. So, going
+back to these ground truths of numbers
+and valuation bring me back to a point
+of okay, conviction. Right? So, for me
+whenever I try and understand the world,
+I go back to okay, what do I understand?
+I understand models, I understand
+numbers. Let me go back and kind of peel
+this out. What I think hopefully the
+deck will show is, "Look, there is
+substantial reasons for why right? If
+you look at the the trillion-dollar
+companies that became trillion-dollar
+companies in a matter of weeks,
+these are not fake companies. Like these
+companies have been around for decades,
+right? And they trade at the lowest
+multiple of earnings of the S&P 500 of
+almost any other company.
+So, there is kind of something kind of
+real happening.
+>> energy there that just got released.
+>> Correct. And now it's like, "Well,
+someone made a point to me on on um on
+uh you'll like this on memory, right?"
+They said well if if I want to design a
+chip like open AI, I can go to TSMC. And
+I know it's hard, but at least I have
+TSMC to help me. If I want to make
+memory, well there is no TSMC.
+>> Right.
+>> So what should the memory multiples be
+versus ASIC chips as an example?
+>> The wrath of Lina Khan can be seen seen
+clearly in this and Zach's I want to get
+your input into how policy and elections
+matter when it comes to outcomes.
+>> As I saw, I don't know if it was this
+chart, but the the chart where you show
+the odds of each category reaching the
+next level. The
+>> Would you have predicted that out out of
+curiosity?
+>> very counterintuitive. Where I mind went
+was extrapolating one more, which is
+what are the odds that trillion dollar
+market cap companies get to 10?
+>> Yeah.
+>> Yeah.
+>> And the last one was 31%. I mean it
+seems to me would be like 50%? 100%? I
+don't know. It seems I'm thinking is it
+going to be greater than or less than
+30? And it seems to me it's greater than
+30% are going to hit that.
+>> It's It's It's probably the filtering
+mechanism of what's the compounding
+advantage or the durability of earnings
+of that company. And for every step you
+have a filter that says, do you have a
+compounding advantage? Do you increase
+Do you have a stronger durability of
+earnings? And if so, you're going to
+accelerate to the next phase. It's
+almost like fundamental to business um
+valuation analysis, like Ben Graham
+style analysis.
+>> To get to that level that's called the
+trillion dollar club, you have to have a
+dominant business. And then the question
+is just at what point do you hit
+saturation? And it seems like all of
+these markets have ended up being so
+much bigger than anyone would have
+predicted.
+>> Yeah.
+>> I mean just
+>> And monopoly or or government
+intervention cuz fundamentally if you
+think about the breakup of the Bell
+system, I mean who knows where that
+would have gone over time. They could
+have had a monopoly on the internet.
+They could have had a monopoly on
+commerce. They could have had a monopoly
+e-commerce and on and on and on.
+>> But but as a trading strategy, what
+you'd like to do is have a bot that just
+starts buying up shares of a company
+once it hits 1 trillion.
+>> [laughter]
+>> And actually, if you had done that, I
+mean, a lot of the
+>> I remember who Who was the first company
+to hit a trillion? Was it Apple?
+>> I believe so, yeah.
+>> Yeah, and then everyone was like, "Oh my
+god, well, you know, now there's what,
+like five or something?"
+>> Well, by the way, that's what I
+>> study that showed if you bought I'm
+sorry to interrupt, but that if you
+bought the Nasdaq
+um over a 10-year period, you get like a
+3x multiple or something quite
+significant. You just rebalanced every
+year on the top 10 companies in the
+Nasdaq. So, just buy the top 10
+companies by market cap and you
+outperform over a decade by like 3x.
+>> Yeah, Thomas, why didn't you do that?
+What is your maybe maybe just the last
+question so we make sure we wrap up
+about something that I think you are
+uniquely positioned to tell us. What
+happens when all this money gets
+distributed back?
+Like, what do you think happens to your
+competitive dynamics? What do you think
+happens to entrepreneurial dynamics?
+What happens in Silicon Valley when
+three or four trillion dollars gets put
+back to GPs, then to LPs, and then the
+recycling happens?
+>> Well, the first thing that comes to mind
+is I remember when David was so bearish
+California real estate
+um
+>> [laughter]
+>> We'll see whether this influx of capital
+uh
+>> Time to sell.
+>> San Francisco homes are still
+>> Yeah, maybe buy the mausoleum.
+>> Anybody Anybody interested in a 40,000
+square foot mausoleum?
+>> [laughter]
+>> Protesters not included.
+>> The one thing I'll say on SpaceX, and
+look, I don't know whether 1.75 is the
+right price for the IPO, and you know,
+frankly, I have no clue.
+What I do know is that the global profit
+pool of telco and service providers
+across the world
+is anywhere between two to 400 billion,
+depending on who you want to address,
+right? So, you do have to think about a
+company that just in a core business,
+which by the way wasn't even in a couple
+years ago,
+is addressing a profit pool of multiple
+hundreds of billions of dollars with a
+substantially better product, right? I
+think all of us, when you think about
+Starlink
+works all the time, no radio towers, you
+know, etc.
+So,
+I go back to it and I think
+it's hard to know, Chamath, cuz we've
+never had anything like this before,
+right? Um
+the ultimate question would be if you
+look a bit in the in the ride-sharing
+wars and in food delivery wars, at some
+point that excess capital was used to
+have a price war.
+>> Right.
+>> Could we see a price war between OpenAI
+and Anthropic as a question, right? If
+these companies have so much capital, is
+one of them ever going to pull a price
+lever to try and compete with the other?
+>> Rationally, they should.
+>> They should. So,
+we might see things that we can't
+predict today, right? Where companies
+might say, "Well, I have my 200 billion
+of cash." Now, the issue is they're
+spending so much on infrastructure,
+right? So, it's it's not obvious, but I
+do think we're going to see some
+counterintuitive
+um changes.
+You guys will discuss them on the show
+every week, and hopefully I'll come back
+in 2 years and
+and analyze what went right and what
+went wrong.
+>> Honestly, I think what should happen is
+you should come back here every year and
+we should get the benefit of
+>> Yeah, let's lock it in.
+>> We'll lock it in.
+>> We'll pay We'll pay We'll pay We'll pay
+for the two years.
+>> pay for the two weeks of work that's
+done.
+>> [laughter]
+>> Which we really appreciate, by the way.
+>> Really do appreciate the work and the
+effort. I know it's a lot. Yeah.
+>> And it's it's really great to have you
+bring this to the audience.
+>> It just shows also the power of
+sometimes slowing down
+>> Yeah.
+>> and to meditate on you know, the the
+actual state of reality, and it was
+incredibly grounding.
+>> Incredibly rich coming from you.
+Incredibly grounding.
+>> I think it's a compliment or an insult.
+I'm
+>> Compliment to Thomas.
+>> enough to know.
+>> Thank you.
+>> I'll just say thank you.
+>> To you, Chamath, for that incredible
+compliment, and for you, Thomas, for
+coming. Thank you.
+>> [applause]
+[music]
+>> Thanks, bro. Yeah, thanks. Great job,
+guys.
+>> [music]
+[music]
+>> Woo!

@@ -1,0 +1,430 @@
+source: allin_podscripts
+published_date: 2025-09-24
+url: https://podscripts.co/podcasts/all-in-with-chamath-jason-sacks-friedberg/eric-schmidt-on-ai-the-battle-with-china-and-the-future-of-america
+title: Eric Schmidt on AI, the Battle with China, and the Future of America
+
+I honestly believe that the AI revolution is under-hyped.
+Now, why is this all important?
+Eric Schmidt is here. He's the former Google Executive Chairman and CEO.
+These agents are going to be really powerful, and they'll start to work together.
+We're soon going to be able to have computers running on their own deciding what they want to do.
+Now we have the arrival of a new non-human intelligence,
+which is likely to have better reasoning skills than humans can have.
+can have.
+So if you were emperor of the world for one hour,
+the most important thing I'd do is make sure
+that the West wins.
+Ladies and gentlemen, please welcome Eric Schmidt.
+Hi.
+Yeah, hi.
+Good.
+Good to see you.
+Good to see you.
+You're looking Schfeldt, Eric.
+You're looking Schfeldt.
+Very nice.
+Oh, my God, David.
+Good to see you.
+David Sachs is here as well.
+It's like a reunion of all of our former companies, David.
+Why did you quit after all?
+Yes.
+My old boss.
+What was it like working with Young Friedberg?
+Take us back.
+Can I tell a story?
+We have to come down to Orange County and they're like, hey, we're going to take the plane.
+And it was Eric's plane.
+We get on the plane and then he goes up and flies the plane.
+I'm in the back of the plane by myself.
+Is it a King Air?
+I'm like the CEO of Google's flying me down to Orange County.
+It was incredible.
+that was my first time actually hanging out with Eric it was my gulf stream that's right
+he was way too smart way too smart way too smart was he focused did he contribute
+no move the needle but he was very smart okay that's kind of our consensus on the pot as well
+look you guys know this guy well he's really that smart so he taught me more stuff than
+most of any of the employees at Google and then you left well tell us what you've been doing so
+No, no, wait. Before that, I got to ask you this question. There was a recently deleted video from Stanford.
+Oh, no. You had a moment of clarity where you said, hey, you know, like at Google, people are like too much work-life balance. They need to commit. They need to work harder.
+We had Sergey at the last event. He's going back to work. So Sergey got the message?
+predicting Sergei's behavior is something I can fail at I tried for 20 years I am not in favor of
+essentially working at home and the reason I mean many you guys all work at home to some degree
+but your careers are already established but think about a 20-something who has to learn how the
+world works and you know they come out of Berkeley or Dartmouth and they're very well educated
+when I think about how much I learned when I was at Sun
+just listening to these elder people
+who were five or ten years older than I was
+argue with each other in person
+I don't know how do you recreate that in this new thing
+and I'm in favor of work-life balance
+and that's why people work for the government
+sorry
+strays sorry sorry sorry if you're going to be in tech
+and you're going to win you're going to have to make some trade
+And you remember, we're up against the Chinese.
+The Chinese work-life balance consists of 9-96, which is 9 a.m. to 9 p.m. 6 days a week.
+By the way, the Chinese have clarified that this is illegal.
+However, they all do it.
+That's who you're competing against.
+I brought everybody back to office. It's so much better.
+So let's just pick up on that theme.
+You don't need to defend the government.
+No, no, believe me, I don't see the need to.
+I'm an unpaid part-time advisor to the government.
+So, but we are in this high-tech competition with China.
+They obviously care about AI too.
+They're trying to race ahead.
+How do you, I understand that you recently made a trip there.
+How do you handicap this competition?
+Well, you and I just talked about this as part of your incredibly important work in the White House.
+I had thought that China and the United States were competing at the peer level in AI,
+and that the good work that you have done and your predecessors did to restrict chips were slowing them down.
+They're really doing something more different than I thought.
+They're not pursuing crazy AGI strategies, partly because the hardware limitations that you've put in place,
+but partly because the depth of their capital markets don't exist.
+They can't raise, based on a wing and a prey or $100 million or, remember being equivalent,
+to build the data centers.
+They just can't do it.
+So the result is they're very focused on taking AI and applying it to everything.
+And so the concern I have is that while we're pursuing AGI, which is incredibly interesting
+and we should talk about, and all of us will be affected by this, we better also be competing
+with the Chinese in day-to-day stuff.
+Consumer apps, this is something you understand very well, Chimov.
+Consumer apps, robots, and so forth and so on.
+I saw all the Shanghai robotics companies, and these guys are attempting to do in robots what
+they've successfully done with electric vehicles. And their work ethic is incredible. They're well
+funded. It's not the crazy valuations that we have in America. They can't raise the capital,
+but they can win across that. The other thing the Chinese are doing, and I want to emphasize
+this as a major geopolitical issue, is that my own background is open source. In the audience,
+you all know, open source means open code, open weights means open training data. China is
+competing with open weights and open training data, and the U.S. is largely, and majority
+focused on closed weights, closed data. That means that the majority of the world, think of it as
+the Belt and Road Initiative, are going to use Chinese models and not American models. Now, I happen
+to think the West and democracies are correct, and I'd much rather have the proliferation of large
+language models than that learning be done based on Western values. Eric, we had a major open source
+initiative with Meta, you know, incredible balance sheet, tremendous technical firepower,
+but they seem to have mis-executed and now are taking a step back and reformulating something
+to your point that looks a little bit more closed source. It's not clear. You know, Alex Wang's a
+good friend. He's come in. He's taking it over. He's obviously incredibly capable. I would not
+hold, keep, I would not say that they're going fully closed. And I think also they got screwed up
+because the deep seek people, R1, did such a good job, right? If you look at the reasoning
+model in deep seek and in particular their ability to do reinforcement learning forward and
+back, forward and back and forward and back, this is a major achievement and it appears that
+they're doing it with less precision than numeric precision than the American models. As a bit of
+technical things, there's something called FP64, FP32, FP16. The American models are typically
+using 16-bit precision for their training. The Chinese are pushing eight and now even four.
+Is there something that the American, you know, bigger companies need to be doing in open source
+so that we can actually combat this? Well, a number of the large companies have said that they
+want to be leaders in open source as well. Sam Altman indicated that the smallest version of the
+O3 model would be released, I believe, open weights, and they have done so. And he told me anyway that this
+model is much smaller than 10 to the 26th. It's much easier to train and it will fit or can
+fit on your phone. So one path is to say that we'll have these supercomputers doing AGI, which
+will always be incredibly expensive and so forth. But we also have to watch to make sure that
+the proliferation of these models for handheld devices is under American control, whether it's
+open AI or meta or Gemini or what have you. Recently you took over
+relativity space. And I think
+for the people that don't know, this is
+a business that effectively
+whose ambition is to compete with SpaceX.
+I think you were the first investor
+or the earliest investor in it?
+I was. I'm sorry.
+It's okay. You lost some money in the first group.
+What happened? Did you get crammed down?
+No, no, no. I mean, this is... All of us did.
+All of us did. I mean, look,
+I mean, I've been
+very happily, you know, an investor
+in SpaceX and Swarm and Starlink.
+Relativity was... And by the way, Swarm
+is a big deal. Created Starlink. So, thank you.
+Thank you.
+Yeah.
+Swarm has been a really great success for them and I think for the world.
+But what I was going to ask you is walk us through the evolution of the space market.
+Why you decided, of all the companies, you have the capital base to kind of put your money anywhere,
+why did you pick that?
+Why did you pick that business?
+Why now?
+Rockets are really cool and they're really hard.
+I had, as you know, I'm a pilot and I know lots about jets.
+And I had assumed that rockets were as mature as jet engines.
+not. It is an art and a science. These things are very hard to do. The amounts of power,
+in our case, the rocket is 4 million pounds of thrust. You have to hold the thing down
+to test it, and you can't even hold it with metal things. You have to have other things
+to hold it down as well. There's so much force, otherwise it will take off. Another interesting
+thing about rockets is that a rough number is that 2% of the weight of the rocket is
+the payload, 18% is roughly the rocket, and 80% is the propellant.
+And my reaction, as a new person, is you're telling me you can't do any better.
+And the physicists say, after 60 years of physics, that's the best we can do to get out of the gravitation of the Earth.
+And so I think rockets are interesting and they're challenging.
+There's always an opportunity for competition.
+In relativity spaces area, it's essentially a Leo competitor.
+So low earth orbit, satellites, that sort of thing.
+The order book is full.
+We just have to launch the rocket.
+And this entry into space happened, and I'm not sure how well known this is, so you can go as far as you want to go into this, but you've done a lot as well in next generation warfare as well.
+Do you want us just to talk about that and how you ended up there and what role that plays?
+And just give us a landscape.
+Maybe David asked about the China question, but they're kind of almost interrelated.
+Well, at first place, I'm a softer person, not a hardware person.
+I explain to people that hardware people go to different schools than software people, and they think slightly differently.
+so I'm always at a limitation in these new industries.
+I had worked for the Secretary of Defense
+and have a top secret clearance and all that.
+I was given a medal, et cetera,
+for trying to help the Pentagon reorganize itself.
+And when the Ukraine war started, I was watching
+and I thought, well, here's an opportunity to see
+a country that has no Navy and no Air Force
+how they do this with automation.
+And indeed, it has been a spectacular success
+as a matter of innovation.
+And outnumbered three to one with huge differences in kinetic strength, weapons, mobilization, and so forth and so on, Ukraine has held on really quite well.
+And what's happening now is you're seeing essentially the birth of a completely new military national security structure.
+One way to think about it is that we all, so first place, and I've seen it live, and I will tell you that real war is much worse than the worst movies you have ever seen about it.
+war and that's all I'll say it's really horrific it's to be avoided at all
+cost and then right for obvious reasons and the the and I love all these
+people say well well you know the warmongering talk be careful what you wish for
+because the other side gets a vote when I started working and trying to
+understand what Ukraine was doing Russia was pushed back and they've come
+back with a very very strong second and third round so the
+enemy gets a vote in the situation. But to go on, the rough way in which war will
+evolve is first things will have to be very, very mobile and very much not in
+fixed places. This takes out most of the military infrastructure that exists in the
+world. Things like tanks, of which we're now building a whole bunch more, even
+stronger tanks here in America, don't make any sense in a world where a two
+kilogram payload from a well-armed drone can destroy the tank. It's called the kill ratio and
+that drone costs retail $5,000, $4,000. The tank, the American tank cost $30 million. You can
+send an awful lot of those drones to destroy those tanks. The likely evolution goes something
+like this. So first, people learn that drones are like rifles and like artillery. So it's more
+efficient to use drones now than to use mortars, grenades, artillery. That's clear. If you just
+look at the economics, economics in terms of cost or effectiveness, as it's called. The next thing
+that happens is that both sides develop drone capabilities, which is what you're seeing now,
+and each then becomes a war of drone against drone. So you have drone against anti-dron. And so
+then the shift moves to how do you detect the enemy drone and how do you destroy it before it
+destroys you. So the doctrine ultimately is the drones are forward and the people are
+behind. And I've seen operations in, for example, sitting in Kiev where the Ukrainians are
+commanding things over Starlink, I might add, in the distant war, and they're very, very
+effective. So we've solved the latency problems, we've solved the timing problems and so forth
+in that area. The ultimate state is very interesting. And I don't think anyone has foreseen this.
+If you go back to our conversation about RL and planning, which is what you're seeing
+with AI, let's say that we're on one side and we have a million drones and there's
+another side over here that has another million drones.
+Each side will use reinforcement learning AI strategies to do battle plans, but neither side can figure
+out what the other side's battle plan is.
+And therefore the deterrence against attacking each other will be very high.
+Today the way military planners operate is that they count weapons.
+They say, well, you have this many and I have this many,
+and you can do this kind of maneuver and so forth.
+But in an AI world where you're doing reinforcement learning,
+you can't count what the other side is planning.
+You can't see it, you don't know it,
+and I believe that that will deter what I view
+is one of the most horrendous things ever done by humans, which is war.
+Because unless there's a perfect balance between either side,
+there will be some mutual destruction of the drone supply,
+like there would be with any artillery stock in traditional warfare,
+and whoever's left ends up winning.
+like they're just well it's very important to understand that there's no winners in war
+by the time you had a drone battle of the scale I'm describing the entire infrastructure
+of your side will be destroyed the entire infrastructure of the other side will be destroyed
+these are lose lose scenarios isn't there like an equilibrium though that that can also create
+where they're because of that mutually assured destruction there's a detent or is that
+well I'm arguing that it's it's not a detent it's a deterrence right that as a deterrent
+can be understood is I want to hit you, which I don't, but I want to hit you so much,
+but that if I do that, the penalty is, the penalty is greater than the value of me hitting
+you. Right. And that's how to turn. But that seems like a great advantage and upside of
+this move to sort of drones and automation that we don't have today. Well, there are many advantages
+to moving to drones and automation. One, they're much, much cheaper, right? They're much much
+cheaper. Yeah. And two, and two, you can stockpile algorithms. You can essentially learn and learn and
+learn. And remember, you can also build training data, right, that's synthetic, so you could be
+even better than the others. The final question I've been asked by our military is, what's the role
+of the, of a traditional land army? And I wish I could say that all of these human behaviors can
+occur without humans being at risk. I don't think so. I think so.
+think that the way robot war, essentially drone war will occur is there will be these destructive
+waves, but eventually humans are going to have to cross a line. They're going to have to invade.
+After we've depleted them? So you're investing in this drone technology, and then do you think
+optimists and humanoid robots are the next, you know, volley in this new warfare?
+It's going to be a long time before humanoid robots, which is what we see in the movies all day, right?
+a very long time before we see that. What you're going to see is very, very fast mobility
+solutions, right? Air-based solutions and also hypersonics. Also things underwater. There's a lot of
+that going on. It's a different domain. If you look at the Maguro and some other boats that the
+Ukrainians used, they have essentially used USVs to destroy the Russian fleet in the Black Sea.
+This was crucial for them because they needed to be able to export the grain from Odessa around,
+and it's like 6% or 10% of their economy.
+It's a very big deal, and they did that with drones.
+Eric, it seems like there's this overarching worldview that you have,
+meaning you have this view on AI,
+there's all the stuff you're doing now in drones and warfare in rocketry.
+It all converges, quite honestly, because in the next five or ten years,
+these things will all come to pass.
+What is the, like, how do you view the world?
+Like, what is the role of America?
+What is your role as a capitalist, as a technologist, as like a statesman?
+I want America to win.
+Right.
+I am here because the American dream,
+the people who invested in me, in my case Berkeley, and so forth,
+people took a chance on me.
+I want the next generation to have that.
+I also want you all to remember.
+I was just as part of the World War II surrender ceremony in Honolulu,
+and they talked about fighting tyranny.
+We forget that our ancestors, or great grandparents or whatever,
+fought the Great War to keep liberalism and democracy alive.
+I want us to do that.
+How do we do that as Americans?
+We use our strengths.
+What are our strengths?
+We're chaotic, confusing, loud, you know, but we're clever.
+We allocate capital smartly.
+We have very deep financial markets.
+We have this enormous industrial base of universities and entrepreneurs which are represented
+here.
+We should celebrate this.
+We should stoke it.
+We should make it go faster and faster.
+I spent lots of time in Europe because of the Ukraine stuff.
+They are so envious of us.
+When you're in Asia, they are envious of us.
+Don't screw it up, guys.
+That's what I want.
+want to work on.
+Eric, can I just ask you, outside of this external conflict, we had a conversation with
+Alex Karp today, and we actually had Tucker Carlson here yesterday.
+And some of the dialogue was around the, I don't know if the right term is the erosion
+of the West, that there may be social issues that are brewing in the West, that may be hurting
+us from the inside.
+How much do you observe or spend time on these issues?
+the metric that often is cited now is declining birth rates in the West and that our population
+and we're going to talk with Elon in a few minutes about this.
+Oh, sorry.
+Oh, we just ruined the surprise.
+Oops.
+There's your surprise guest.
+Sorry, sorry, sorry, sorry.
+Slip.
+But, um, it's okay.
+Elon is a good friend and he's addressing this issue of population directly himself.
+I'm all for it.
+Is it a reflection of something going on?
+There's a rise of Mamdani getting elected in New York.
+Some of the historic values of the West seem to be kind of under a state of transformation right now.
+One metric of the success of a society is its ability to reproduce.
+And so I think this is a legitimate concern of the West.
+It's much worse in Asia.
+The Chinese number is about 1.0 for two parents.
+In Korea, it's now down to 0.78 for two.
+So it's really important to recognize that we as humans are collectively choosing to depopulate.
+And the numbers are staggering, right?
+And imagine a situation where instead of having growth, you have shrinkage, and furthermore, they're getting older.
+And so as a business, all of a sudden, your revenue is declining, and there's nothing you can do
+because you can't innovate with fewer and fewer customers.
+So if you just put it in a business context, ignoring the moral issues, which are all very real, it's just bad, right?
+So we have to solve that problem.
+I happen to be in favor broadly of immigration because I think immigration helps us solve that problem,
+but as a global mechanism, we have to address that.
+In any case, from my perspective, you're going to have these issues, but America is organized around the concept of American exceptionalism.
+And as long as we understand that the way we make progress is we invest in the right people, in the right businesses, we have a strong capital market, we invest in the infrastructure that they need, will be fine.
+That is my actual opinion.
+Can we go back to AI for a second?
+So, Eric, I think you can help us get to, let's call it a bipartisan understanding of these issues because I think you think really clearly about this.
+You know, in the wake of ChatGBTGPT launching at the end of 2022, I think the discourse was really dominated in 2023 and 24 by this idea of AGI, and that AGI was imminent.
+And I think it created almost like a panicky atmosphere in Washington among policymakers.
+And you saw things like, we got to restrict open source because, you know, then China will get it.
+And this is before deep seek launched.
+And then we saw that actually they're ahead of us in open source.
+But it feels like there's been a pullback a little bit from the AGI narrative, which I think it's actually a good thing.
+I think it's more conducive to calm, rational policymaking.
+What's your perception of AGI right now?
+Where are we on that whole train?
+So first place, the speech that the president delivered about a month ago about AI strategy, which I think you probably wouldn't say it, but you kind of wrote it for him, was exactly right.
+So thank you.
+collaborated with an amazing leader who we all respect and admire so much Eric yes so
+nevertheless saying I wrote it was was way too strong I mean actually if you
+didn't if you didn't write it then it must have been your twin but in any case the
+you got you got the emphasis right which was that investment in research investment in
+the kind of stuff that we do is really really important
+I don't agree with you on this on this AI thing because there's this group which I call the San Francisco
+narrative because they all live in San Francisco and their narrative goes something like this
+today we're doing agents the agenic revolution will change businesses which I agree with
+that what happens is the systems will become recursively self-intelligent with recursive self-improvement as it's called
+if you have a scale-free problem, and a scale-free problem, for example, is programming or math
+where you can just keep doing it, you get these enormous fast gains, if you buy enough
+hardware, do enough software, so forth and so on, that is still underway. The collective
+of that says that in the next three-ish years, they believe that we will get forms of super
+intelligence, and the way they define it is basically a savant, a chemist-savant, a chemist-savant,
+a physics savant, a mathematician savant. I don't agree with the three years, but I do agree
+that it'll be maybe six or seven years. But if it's a savant in a particular area, is that
+general intelligence? It's not general intelligence yet. General intelligence is when it can set
+its own objective function. Right. And there's no evidence of that. There's no evidence right now
+of the ability to set your own objective function. The thinking, and I'm writing a paper on this,
+so I've been studying it, is that the technical problem
+is non-stationarity of mathematical proofs.
+And what you're doing is you're trying to solve
+against an objective function,
+but the objective function keeps changing,
+which is how humans operate.
+Your goal changes every day,
+whereas computers have trouble with that.
+As a math problem, we don't have an algorithm yet
+for LLMs that can do that.
+People are working on it.
+And the test will be, can you basically,
+using the information available in 1902 can you derive the same thing that Einstein did
+with special relativity followed by general relativity? We cannot do that today and most
+people believe that the way this will be solved is through analogy. So the theory of great
+geniuses is that they understand one area of extremely well and they're so brilliant
+the lady or man can then take their ideas and apply it to a completely
+different domain. If we can solve that problem, then I think it's over. Then we get to AGI and then it's
+a whole different world. I think one of the reasons why it's hard to replace a human, and, you know,
+Jake and I debate this, is that humans are end-to-end. You know, we can do the whole job. You have
+sort of a complete understanding. You can pivot very easily. AI, at least as we know it today,
+is not end-to-end. It has to be prompted. You get an answer. That answer has to be
+validated, then you have to ask a new question because it never gives you exactly what you
+want. You have to apply more context. You have to go through an iterative loop. Finally, you get to an
+answer that has business value. The way biology puts it is that AI is not end to end. It's middle
+to middle. Humans are end to end. And so as a result of that, instead of AI replacing all of us,
+AI will be very synergistic with humans because we can define the objective function. We do the
+prompting, and we work with it to iterate, and it does a lot of the work in the middle.
+That seems to me like a very optimistic, less dumeristic take on it.
+What you just said is exactly what's going to happen for the next few years,
+that each of us will have assistance, which on our command and our prompting,
+will be incredibly helpful to whatever problem we have.
+You know, personal, you have people who are using these things for relationship advice,
+for, you know, talking to their kids.
+I mean, it's all crazy stuff.
+But the factor matters, that's it.
+To me, the real question is, when does it cross over to having its own volition, its own ability to seek information and solve new problems?
+That's a different animal.
+But have we seen any evidence of recursive self-improvement yet?
+Not yet.
+I've funded a number of startups which claim to be close to it.
+But, of course, these are startups, and you never know.
+Which tells me it's five, ten years kind of numbers.
+How do you think Google's doing on this front?
+Well, I'm not at Google anymore.
+Every issue of Gemini is top of the leaderboard.
+So 2.5 just overcame everybody, and I'm sure there's another one coming.
+Demis is working really hard on this question about scientific discovery.
+So that is a path to getting to AGI.
+Eric, we appreciate the work you're doing.
+We appreciate you being here with us.
+We appreciate what you've done, the impact you've had.
+on Silicon Valley.
+A society, it's really, yeah.
+No, but it's really been...
+I am so happy to be part of this.
+You created this incredible community,
+and there's all of these smart people
+that spend all their time listening to you.
+Very concerning.
+Wow, straight, Eric.
+Thank you, David.
+Thank you, thank you.
+Thank you, Mark.
+Thanks, Eric.
+Appreciate you.
+All right.

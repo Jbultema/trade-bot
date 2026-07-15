@@ -1,0 +1,2916 @@
+source: allin_youtube
+published_date: 2026-07-03
+video_id: wgdxSCsmS-Q
+url: https://www.youtube.com/watch?v=wgdxSCsmS-Q
+title: AI Sovereignty Wars, Palantir-Nvidia Deal, SCOTUS Birthright Ruling, Newsom’s CA Budget Lie
+
+All right, everybody. Welcome back to
+the number one podcast in the world.
+It's your favorite podcast. It's your
+podcast's favorite podcast. It's the
+All-In podcast. Episode 279. With me,
+Fredberg, Sax, Chimath, you know the the
+squad. You know the squad. We're here.
+It's the summer and we're ready to rock
+and roll. We got a power docket. We got
+a rocket docket. Palunteer and Nvidia
+have announced a sovereign AI
+partnership. Where have we heard that
+term before? Palanteer is going to use
+Nvidia's Neotron. Neotron like the Pixar
+film open models to build a custom
+frontier quality model to serve the US
+government. Palanteer is calling this
+new platform sovereign AI operating
+system. The US government agencies will
+own the hardware, the data, and the
+model waits. Palanteer also shared a
+viral tweet manifesto laying out the
+concept, "Data retention is your
+treasure. Transfer it at your own peril.
+Transferring that data hands over access
+to your pre-existing winning plays and
+yields the means of production for new
+ones. CEO Alex Karp went on CNBC to
+announce the partnership in a classic
+Karp
+Robin Williams style monologue. Here's a
+clip from his 20inut interview where he
+where he basically went after the
+frontier models like Anthropic. Play the
+clip. Our clients are just to say
+they're unhappy with the Frontier Labs
+is to say I'm welcome at the Berkeley
+faculty. It's like there's just a level
+of discomfort and loss of trust. Sam and
+and and Daario, there's nothing more fun
+than debating Daario in private. So this
+is I'm not throwing shade at them, but
+something has gone completely wrong. And
+the basic view among enterprises in this
+country is I'm going to chill lax uh and
+waste my time with tokens. I'm going to
+get no value and they're going to get my
+IP. When the do department of war goes
+to you and says I need this application,
+do they get to control the weights to do
+it or do you get to control the weights?
+Are we really going to outsource the
+battlefield of this country to the
+consensus view in Silicon Valley? That
+is effing insane.
+>> All right. And so some folks uh refer to
+this as a televised nervous breakdown.
+We here at Allink call that Alex Garp on
+a Tuesday.
+And we talked about this Chimath uh Sax
+Freedber. We talked about this a whole
+bunch back in February.
+I coined the term intelligence
+sovereignty here. Here's your victory
+fact. Do I want to give all of the
+secrets in our organization, every piece
+of intellectual property to Sam Alman
+who's got to make a billion dollars a
+year to keep up with his spend, right?
+He's going to build every application.
+I've been talking about AI sovereignty
+here for a bit just in terms of how much
+more coste effective it is and how
+you're not training other people's AIs
+with your knowledge and your insights.
+This is why it's super important that
+open-source open- source agents and
+local hardware be able to run these
+models and that consumers and companies
+learn how to roll their own language
+models. The intelligent sovereignty is
+different than privacy. Privacy is oh,
+you can't see my photos. You can't peek
+into my notes app and what I wrote there
+in my journal. Intelligent sovereignty
+is you can't tell me what to think. You
+can't use your AI to analyze my photos,
+to analyze my emails, to analyze my
+messages, and tell me how to interpret
+the world. That's actually going to be
+the next key piece here. All right. And
+uh Sax, you are in your long post era.
+Another long post this week from you on
+this very topic. And obviously as uh
+AISAR there for the first half of the
+Trump administration, you uh been very
+involved and very close to this. I would
+love to hear inside I'd love to hear
+your take on this and your long posts
+over 300 words. You can follow
+x.com/davidsax,
+but also like the palace intrigue here
+and what this means in terms of
+the relationship with the government,
+which we're going to get into in our
+second story.
+Well, look, Jay Cal, I got to give you
+some credit there. The first part of
+your take was spot on. After that, it
+was kind of diminishing returns. I'm not
+sure why we had to listen to the next 30
+seconds of it, but [laughter] anyway,
+uh, it started off really strong. But
+let's go back to the supposed crash out
+by Karp on CNBC. It was nothing of the
+sort. It was all these legacy media
+types making that claim. And that's the
+first clue that he's actually saying
+something insightful and maybe kind of
+brilliant. And I think the thing that he
+said that I hadn't really thought about
+in quite those terms is he started
+talking about AI safety in the
+enterprise and what that really looks
+like. And what he said is that what
+technical customers want is control over
+their compute, their models, their data
+stack and their alpha, meaning their
+proprietary knowledge. They want to know
+they own the means of production, he
+said, and it's not being transferred to
+someone else. And what he's referring to
+there is that these enterprises are at
+risk of transferring their knowledge,
+their knowhow, their trade secrets,
+their customer data to these model
+providers who might eventually decide to
+compete with them. Like you said, JCAL
+and you can see that enterprises are
+waking up to this threat and they're not
+happy about it. And I think KARP is
+exactly right about that. Now,
+I think this is a really interesting
+take on AI safety because what safety
+means for an enterprise is again that
+they get to control their own data,
+their model weights, their compute. So,
+a frontier lab can't hoover up their
+proprietary knowledge, their alpha and
+turn it into their next product. And if
+you don't think that can happen, just
+look at what happened to Figma. So
+according to the information, Anthropic
+quote unquote blindsided its then
+business partner with the launch of
+Clawude Design. So this was a new
+vertical app that Anthropic launched to
+compete in the design category. And
+Figma's founder said that Anthropic had
+not been completely honest with them.
+Enthropic chief product officer had
+actually even served on Figma's board
+and didn't resign until 3 days before
+the launch of Claude Design. So
+obviously Figma again felt blindsided by
+this and you can see the resulting
+impact on their stock price. Figma's
+stock has fallen something like 50% this
+year while Anthropic's valuation has
+surged. This is not an isolated example.
+Anthropic has also launched Cloud
+Science, Claude Security, Claude Legal,
+Claude Financial, and of course Claude
+Code. And every single one of these
+vertical apps expanded into categories
+that was previously served by companies
+building on top of Anthropic's own
+models. And really, if you want to go
+back to when Anthropic's revenue
+explosion began, it was with the launch
+of Claude Code. And how did they know to
+launch that product? Because they saw
+that cursor was doing extremely well.
+Curser was one of their biggest
+customers. They created the coding
+assistant first. they created that
+category and anthropic said oh like why
+don't we vertically integrate so in
+other words they're watching where the
+value is being created on top of their
+models then they're moving in directly
+and this is a formula that I think is
+very Microsoft like you could say it's
+very Google like they want to dominate
+the model layer you could call that the
+operating system and then use that
+position that monopolistic position to
+capture the most lucrative verticals so
+if you want to think about like the
+Microsoft example they had the Windows
+monopoly and then systematically they
+went and dominated every lucrative
+category of business software. It
+started with spreadsheets and word
+processing and then eventually it went
+to the browser so forth and so on. If
+you want to look at Google, they
+basically had a monopoly or dominant
+position in search. And if you go back
+to the early days of Google, the search
+results picked you off site. And in
+fact, they really pride themselves on
+how quickly they could send you off
+site. But gradually over time, they use
+that traffic to tell themselves where to
+build properties. And today, fewer than
+half of searches kick you off site. You
+stay on Google properties. And I think
+something similar is happening with
+Anthropic here. the pattern is clear,
+they are going to use their dominant
+position in the model to then grab more
+and more territory in any interesting
+and lucrative vertical. So again, back
+to Alex Karp's point, if you're an
+enterprise customer or a developer, why
+in the world would you ever want to
+share any proprietary data with them?
+You are mortgaging your future. You are
+sealing your fate. You are going to lead
+to disaster for your company. Just one
+last point then I'll turn over JCL is
+that Daario at the same time that they
+pursue this business strategy has been
+arguing that open- source models are
+dangerous and need to be restricted.
+Well, dangerous to whom? Not to
+enterprises that want to retain control
+over their data.
+>> It's dangerous to his business model
+because his business model requires
+>> that customers don't have a lot of
+choice at the model layer. And what Karp
+is pointing out here is that if you want
+to have true AI safety as an enterprise,
+you have to retain the ability to choose
+at the model layer who gets to see and
+use your alpha.
+>> Yeah, this is well said. I think you you
+picked that carcass to the bone a bit,
+but Chimath, you're actually doing
+specific examples of this uh at 8090.
+You've been testing uh some of the open
+source models. I saw you share that on
+Twitter X. So maybe you could give us a
+little feedback on what you've learned
+as uh the CEO of 8090 and you know your
+firsthand experience now with using open
+source for the first time in the last
+couple weeks for this specific use case
+in enterprises. When you start a company
+I mean you guys all know this
+you're not starting it for the moment
+that exists today. you're almost sort of
+trying to forecast if such and such a
+set of things happen then here is the
+scene that that gets created because it
+takes time to build something and it
+takes time to get enough reps to know
+what you're doing in your go to market.
+This for me was the moment that I
+thought would arrive which is the point
+where everybody wakes up and realizes
+wait hold on a second two things are
+true. The first is that my business is
+complicated. I want AI to be able to
+accelerate it, but I want to be able to
+protect myself in doing so. And then the
+second is I want the flexibility where
+there's an independent third party
+control plane that I use to get all
+these benefits so that I don't leak and
+seed my advantages away. And I think
+Alex is an incredible,
+smart, brilliant guy and he completely
+nailed it. And I think he called out on
+its face the huge risk of this. So let
+me just give you this narrative in three
+tweets. The first one is I read this
+really interesting study from BCG and
+what they looked at was the return on
+capital employed or ROCE of various
+businesses. And this is what's
+incredible. The cost of capital has now
+with long-term rates
+moved back to what its long run average
+is which is around 8 to 11%. What that
+means is like that is the actual cost
+that you would borrow money at
+effectively. The problem is that half of
+large US companies now cannot deliver
+returns that exceed that. That is a
+really big problem. And then second
+there's a further problem which is that
+persistently low returns. So in the you
+know 1 2 3 4 5% is about one in seven
+companies all around the world. Okay. So
+why is this important to note? It means
+that being in business is complicated.
+It's hard. Not everything works all the
+time. There's a bunch of underperforming
+businesses. There's a bunch of
+underperforming segments. So in that
+lens, when you, you know, think about
+what Sax said, which is you have this
+company that comes to you and says, I
+have a magic box and all you have to do
+is tell me everything you're doing, and
+this magic box will make everything
+better. But then all of a sudden, from
+the shadows, the magic box says, you
+know what, I've decided to compete with
+you. That is a huge risk. And now that
+you've seen enough examples of it, I
+think you have to figure out a different
+way to do it. So then you go to the next
+tweet that I saw, which I thought was
+interesting. And this is a woman who's
+an ex meta PM. And what she essentially
+says is like, hey, hold on a second.
+There is this assumption that you can't
+use an open- source model because it's
+all Chinese.
+And what she says was, well, even if
+it's 100x cheaper, and their response
+is, no, because we care about safety and
+security. And her perspective is, don't
+you understand that you can actually
+host open- source models with your own
+GPUs in US data centers that doesn't
+share any data back to anybody? And
+instead, what you're accidentally or
+purposefully doing is giving away all
+your data to a couple of frontier labs
+rather than owning it privately
+yourself.
+And 100x, it turns out, is a really big
+number to pay to do all of that by
+accident.
+And that's what Alex Karp is saying.
+He's like, why would anybody do this
+when there are alternatives? And so the
+third post that I'll talk about is
+something that we did. So we took our
+software factory which is an agnostic
+third party control plane and we just
+wanted to see and we ran it on a very
+typical enterprise task which is you
+have an old piece of code you want to
+migrate it and you want to maintain it
+in a new framework so that it's easier
+and more flexible. pretty
+straightforward task. And so we ran it
+and we ran an experiment where we did
+Claude by itself, then we did us plus
+Claude, and then we ran it on the best
+frontier open-source model and then us
+plus that model. And the data is crazy.
+So when you use our harness with Claude,
+it was simultaneously 1.4x 4x cheaper
+and 1.5x faster than just using
+anthropic opus 48 alone. But if you wrap
+the open source model with our software
+factory, it was 16.4x cheaper. Now it
+was three times slower. But you know,
+you're talking about a couple of extra
+hours to save 16.4x
+>> on that one. The slowness Chimath, is
+that slowness because of the hardware
+being served up by Claude or is it
+>> This is all using open router. know this
+was all using open rudder on a very
+traditional hardware stack. So
+>> look I think the reality is could that
+be optimized even further? Absolutely.
+But my my point is if you take Sax's
+points and then if you take Alex Karp's
+point and just this actual data there is
+a very legitimate question which is if
+you are a reasonable company
+why are you not finding an independent
+way to access this intelligence in a way
+that doesn't leak your edge away to do
+so at this point now is kind of becoming
+derelict and irresponsible. Back then
+you could be experimenting because you
+didn't know any better. But now when you
+know all of these data points to
+continue to make the same decision I
+think is really insanely dumb. All right
+Dave Friedberg you are also a CEO of the
+surging oh and you have a lot of
+proprietary data. Let me ask you point
+blank. Do you trust your data to the
+frontier model companies or are you
+doing what there seems to be consensus
+here protecting your data protecting the
+crown jewels so to speak and using open
+source are you experimenting with it and
+just yes or no do you trust the frontier
+models with Ohio's data so I'll tell you
+there's been an effort by anthropic to
+go around and sign up life sciences
+companies to contributing to a new life
+sciences
+focused model that effort has been
+they're approaching these large
+companies with large proprietary data
+sets and saying hey if you share your
+data we will give you early access some
+sort of proprietary value sign this NDA
+and you can participate with us and I
+think nearly everyone I've spoken with
+has woken up to the fact that they are
+basically trying to commoditize
+everyone's business because
+fundamentally if all of the tens of
+billions of dollars you as a life
+sciences company have invested
+in experiments and product development
+and you've generated all of this
+proprietary data along the way. That
+data is a true asset of your
+organization. It's an asset that you've
+spent billions of dollars developing.
+And by handing it over to a model
+company to then combine with other
+people's data, you are effectively
+commoditizing the asset that you have,
+the one kind of core differentiation
+that you have. And so everyone is
+largely saying no. The way I see this
+evolving is very much in line with what
+Alex Karp suggested on CNBC. If you go
+back a couple of years, I think we all
+assumed there was going to be this large
+hub, large spoke model for AI model
+development and deployment. Meaning
+there would be these very large
+clusters. These large clusters would be
+ultimately capital advantaged. So those
+who had the most capital, which is why
+everyone's raised tens and hundreds of
+billions of dollars, would be able to
+train models. And then there would be
+these large spokes, these large clusters
+for deploying those models with
+inference. So everyone's using the
+NeoClouds and the hyperscalers and
+whatnot to run models. And then maybe
+they've got their own proprietary data
+layer that sits in front of that. But I
+think what everyone's realizing is
+they're better off developing their own
+weights and their own models using
+either an open-source basis or there
+might be some intermediary business
+model that evolves. Meaning there will
+end up being several large hubs that do
+all of the core foundational model
+development. Then smaller hubs meaning
+like clusters for training that
+enterprises will use to train and
+develop their own proprietary advantaged
+models using their own data and then
+there will be these much more
+distributed spokes because I think
+everyone's also realizing the value of
+onrem by putting a set of servers and
+building a cluster in your own data
+center or even in your own enterprise
+you know IT closet you can run a lot of
+the workflows that you're using AI for
+for your enterprise locally. And so I
+think the model is shifting where we're
+going from large hubs, large spokes to
+large hubs, medium hubs, and then a
+distributed spoke model where there will
+still be, you know, NeoClouds and
+hyperscalers that are being used for
+inference, but people will also have
+their own inference instances that
+they're going to run for their own
+enterprise setting. And everyone I think
+is walking this path and they're going
+to walk this path over the next couple
+of months because they're realizing
+quite quickly that in order to compete
+in a world of commoditizing knowledge
+and commoditizing
+capabilities, you have to leverage the
+core differentiating assets that you
+have, which means you have to build your
+own models and you will likely end up
+having to run your own inference with
+your own proprietary models.
+>> Yeah. And to just give a a little bit of
+texture to how that's going to look, if
+you follow the Microsoft example, which
+we've talked about here before, Lotus
+123, Word Perfect were their partners.
+They were replaced with Excel. They were
+replaced obviously with Microsoft Word.
+You don't even know those other two.
+Word Perfect, Wordar, Lotus 123,
+Vizzyalc. That's exactly what they have
+to do. And they have no choice but to do
+that now because they have a trillion
+dollar market cap. They must win the
+application layer. And Sam Alman went to
+Y Combinator and he said, "We'll give
+you $2 million worth of free tokens."
+And I came out and I said, "Listen,
+there's nothing personal against Sam.
+You know, Sam's a very aggressive
+dealmaker." And he wants to get access
+to those startups cuz he knows having
+run Y Combinator that if he can get
+their innovations, those founders latest
+thoughts about what's around the corner,
+he can incorporate them into the
+platform. There is no free pizza.
+There's no free beer. When somebody like
+Sam Walman comes to you and says,
+"Here's some free tokens. Your alarm
+should go up." Zuckerberg did the same
+thing. He said, "Hey, I'm going to give
+people a bunch of access. Going to give
+them money. Come to the Facebook
+platform." Nobody who went to bed with
+Microsoft in the 80s, Facebook in the
+2000s, or Sam Alman now in in the 2020s
+did not wake up with their throats slit.
+This is a message to founders. If you
+partner with any of these people, they
+will slit your throat and take your
+business wholesale. There is nothing to
+discuss here. Don't trust them. Use your
+own models.
+>> I think I think it's less Sam and Open
+AI to be honest. I think that the
+diversity of Open AI in terms of its
+revenue streams and specifically its
+consumer business may actually be its
+savior in a relative value basis. Right
+now, OpenAI equity I think is more
+reasonably priced than entropic equity.
+And the reason is not because of the
+quality of the models or the teams
+because they're both excellent teams,
+but the reason is that OpenAI can fall
+back on a really healthy consumer
+business.
+>> Sure,
+>> the difficulty that Anthropic is going
+to face is that I think what Sax said is
+true that they have lost this
+fundamental trust about being able to
+stay within their sandbox. And if you
+consistently demonstrate this tendency
+to learn and then to try to disrupt your
+host organism,
+eventually you get sort of pigeonholed
+and you get cornered and people find
+ways to work around it. And so, look, I
+sent that text that I had about the or
+that post that I had about uh our
+testing of of our harness on these
+Chinese models to somebody well known in
+the industry. And he says, "Look, if you
+also add some post training with all of
+the telemetry that you're going to get
+from the harness itself, he's like, I
+suspect you'll find that it gets as good
+as Mythos." And and I thought, well, if
+that's true, then why don't I just take
+GLM, control it entirely, soup to nuts,
+on my own hardware
+inside of the United States with only US
+citizens that can touch it. It just
+seems like the brain dead obvious thing
+to do, and it's much much cheaper.
+>> Yeah, and 100% correct. I will say
+if you're going to do this, you'll
+eventually wind up rolling your own LLM.
+I mentioned a company, Abacus,
+goabacus.co, that we seated in our
+accelerator. What they're doing now for
+HIPPA client people is they're actually
+giving you this go one box. They're
+literally saying we're going to make
+your own model for you. So once you
+start this you you start with you know
+claude and use their wrapper and
+everything or open AIS. Then you move on
+to the next step. The next step is I'm
+going to use an open source model use my
+own try to find a harness etc. Where you
+will eventually wind up is you're going
+to fork these models you're going to
+build your own. That is the end state on
+prem on your own hardware. Don't trust
+anybody because there's too much at
+stake. You cannot risk your entire
+business. You might as well be part of
+the vanguard and start investing here.
+You're going to slow down to speed up is
+what's going to happen. Whether you're
+using 8090, Abacus, or any of these
+other solutions or rolling your own, you
+must have AI sovereignty. You must have
+intelligent sovereignty or you're just
+giving your business over to your
+competitors. The only company, the only
+company at scale that's ever respected
+the developer community in this way is
+Apple. Apple took a very strategic
+approach to wanting to build an app
+store business to wanting to support
+developers. And they explicitly told
+people, if you make something super
+obvious that you can build in a week or
+two, it eventually might wind up in our
+basic collection of apps, the stock app
+in your iPhone, the notepad app in your
+iPhone, those apps are incredibly basic.
+But if you looked at, you know, Robin
+Hood's uh or Google Finance and then you
+looked at something like say Evernote
+back in the day, which was an advanced
+notetaker, it took 10 years for Notepad
+to add the features that Evernote had 7
+8 9 10 years ago. They specifically slow
+their apps down to make them simple for
+users and not f with their ecosystem
+because they want to take the 30% tax.
+That's your choice here. There is no 30%
+tax here when it comes to anthropic.
+There is no 30% tax equivalent with open
+AI.
+>> The thing with Apple is that Apple was
+renting distribution. This is not
+renting distribution. This is where
+you're renting intelligence and
+judgment. And so the problem that a
+company has is you can't rent the same
+in this is why your point is actually
+right. I think it's for a different
+reason. You can't rent intelligence from
+the same place that rents it to your
+competitor.
+>> Correct.
+>> You just can't. You can't. It's just
+stupid. It
+>> It will overflow. it will go over the
+wall in your competitor's lap.
+>> It's it becomes the lowest common
+denominator problem where you and your
+competitors now look exactly the same.
+Why would you do that? And again, if you
+go back to that that thing that BCG
+identified, so many companies are
+already teetering on a very difficult
+position where they cannot generate
+returns on their invested equity. And so
+why would you then go and pay all this
+money so that you end up with the same
+answer as your competitor?
+>> You can't do it. It's just not a it's
+not a choice. and Sachs, part of what's
+going on here is the deflationary nature
+of technology. Every single one of these
+tools is getting cheaper. Tokens are
+getting cheaper, Sachs. And if you look
+at Nvidia's role in all of this, they
+have something called Neotron. You can
+try it if you uh use Perplexity. You can
+just pick the drop down menu. It has
+deep thinking. You will not be able to
+tell the difference between Jensen
+Wong's open-source LLM sacks and Claude
+for 95% of your searches. I guarantee
+you now why why why has Nvidia and
+Jensen downplayed their open- source
+model until this moment? Why would he do
+that? Why would he never bring it up in
+the all interview? Never bring it up
+because his top customers were uh very
+concerned from what I understand about
+the fact that they had made so much
+project progress on their open source
+model. But suddenly after open AI
+announced their jalapeno chips, after
+Anthropic started uh making chips, after
+AMD did successful uh projects with both
+of these companies, after Elon said he's
+going to do his own fab, Nvidia's taken
+the gloves off, David, they are going to
+own the whole stack. They are going to
+be talking about open source a whole
+bunch. So maybe you could talk a little
+bit about Nvidia and their role in this
+as the open-source atscale full stack
+provider. You get the hardware from them
+and you're gonna get a model that's
+competitive with open AIS for free and
+all you have to do is use one of their
+hosting companies, Cory, whoever is
+buying Nvidia's, Colossus, etc. What are
+your thoughts on Nvidia suddenly being
+willing to talk about their open source
+projects today? Well, look, I think part
+of it is they needed time to make the
+offering compelling and you know,
+they're up against some pretty great AI
+labs and I think some of it is just,
+hey, it takes time to train up these
+models. Now, one question is why is it
+that Nvidia and Palunteer are
+partnering? Like what makes them natural
+partners? And I want to just explain
+that. If you want to think about the AI
+stack for a minute at the most basic
+level, there's three layers to the
+stack. It's basically the chips, it's
+the models, and then it's the
+applications. Well, right now we have in
+the middle layer at the model layer of
+the stack, you've got two dominant
+companies. You've got Anthropic and Open
+AAI. We know that Enthropic is around
+60some billion of ARR. Open AAI is at 40
+something billion of ARR. As far as we
+know, no one else is really generating
+meaningful revenue at the model layer.
+So, we already have, let's say, an
+emerging duopoly situation. We have
+Anthropic pushing for a regulatory
+capture agenda that would probably
+enshrine that duopoly situation at a
+regulatory level because they're pushing
+for a safety agenda where Daria
+explicitly says that these other models
+are not safe. You shouldn't have access
+to them. So you've kind of got that
+situation. You got the market producing
+duopoly. You got the government now
+potentially leaning not to bust up the
+duopoly but maybe to enforce it. So
+that's sort of the emerging situation at
+the model layer. And so if you're an
+application at the top of the stack like
+Palunteer or you're a chip company at
+the bottom of the stack, that's the last
+thing you want. You want a competitive
+model layer. Why? Because if you're an
+application, you don't want to be
+beholden to one model provider, right?
+You want to have a choice. And if you're
+an enterprise, you want to have a choice
+because you don't want have to give up
+all of your proprietary knowledge. And
+if you're a chip company, you you don't
+want a monopsiny buyer situation where
+there's only one or two companies who
+can buy your chips and by the way,
+they're producing their own. You want to
+have as diverse and healthy an ecosystem
+as possible where there's lots of
+potential buyers for your chips. And if
+enterprises are rolling their own using
+open models, that's kind of an ideal
+situation because now there's like a
+long tale of buyers. So I think really
+the whole ecosystem in a way the chip
+companies, developers, applications,
+enterprises, everybody has an incentive
+for a competitive layer of the stack at
+the model layer. Really the only
+companies who don't are anthropic and
+open AI because obviously they want to
+dominate. They want to be a duopoly. And
+my view is, look, if you earn a monopoly
+or duopoly in our system, we don't ban
+monopolies in the United States. We ban
+anti-competitive tactics, but if you
+lawfully achieve a monopoly through
+amazing performance, we don't, you know,
+nationalize you or make you illegal, and
+I think that's fine. However, the
+government, in my view, should do
+nothing to make monopoly or duopoly more
+likely. They should make it harder for
+these companies to engage in monopoly
+tactics and they should do everything
+they can to keep the model layer
+competitive because competition is what
+brings out the best and it's good for
+the ecosystem and it ensures our civil
+liberties and consumer choice. So,
+>> and it's going to be amazing for pricing
+sacks if you think about what this
+competition is about to do and you've
+been very vocal about this in your time
+in Washington DC. We want to have a
+level playing field. We want to see
+massive competition. I'll give you your
+flowers and your lay. You did a great
+job of now setting the table for this in
+2026 and 2027 going forward by letting
+people compete. The cost of tokens,
+Freeberg, is going to go down 90% a year
+for the next 3 years. You're going to be
+able to buy a thousand times as many
+tokens that are more intelligent because
+you're going to have free options. The
+price will be free or close to free for
+many of these and that could be
+incredibly disruptive. Yes, Dave.
+>> Yeah. And I think people are going to
+again deploy their own hardware against
+it. I think there's going to be a buying
+frenzy in the enterprise, not just with
+the Neoclouds and the hyperscalers. I
+think the the enterprise is going to be
+a buyer. And when that happens, you do
+the simple math and you don't want to
+have a dependency on server availability
+and cloud downtime and you don't want to
+put these models on some third party
+cloud and you want to do stuff that's
+very cheap. Like a lot of people are
+running I mean you guys do this. You're
+running day-to-day workflows for your
+enterprise and you realize, hey, I could
+run these workflows on an open source
+model on a machine in my office and we
+don't need to be sending this stuff back
+to some fancy scalable cloud service
+provider.
+>> Right? The industry spent so many years
+convincing everybody to flip to the
+cloud and the realization may be that
+all this this idea of shared
+infrastructure may not be the best idea
+in a world of intelligence
+>> and this is what I mean by like a
+distributed spoke model because I do
+think it's not going to be all or none.
+And I think you're going to end up being
+like 7020 20110 in how you're going to
+allocate your resources for model
+inference and running models. You're
+going to probably be 70% in some big
+cloud. Maybe you'll do 20% local 10%
+you'll try other clouds. You know,
+you'll kind of mix stuff up, but I don't
+think you're going to end up doing
+things the way you've been doing them
+historically. You you'll very quickly
+realize that it's okay to waste tokens.
+It's okay to let your employees make
+stupid apps that last for a couple weeks
+but burn through billions of tokens. If
+it's running on your own hardware, then
+all you're paying for is the electricity
+in your office or in your [laughter]
+>> what I've been talking about here for
+like everyone's realizing. Yeah.
+>> Like I'm totally fine, you know, uh for
+my kids to eat sugar if I don't have to
+deal with them, you know, like go ahead.
+[laughter]
+>> Have you guys noticed that like in the
+last 3 days we've now seen other people
+trying to get their own lock in?
+Microsoft just announced a$ two and a
+half billion dollar investment to stand
+up an FTE or Amazon is spending a
+billion dollars
+>> forward deployed engineers for the
+people in the audience for deployed
+engineers has one open AI has one.
+>> Yeah. And when they come knocking Jam
+they're knocking like hey can I send my
+engineers to study your business and put
+it into my model? I mean people are
+going to be slamming the door on these.
+It's like getting a Jehovah's Witness at
+your door. Like no I don't want to be
+part of your cult. I want to own this.
+>> And that's what I've been saying. Just
+let me make one quick point and I'll
+hand it to you for free break. This is
+what I've been saying with when I when I
+was going on my open claw which now is
+like Hermes and some other products.
+Everybody in your organization is going
+to have a max studio or a Dell with a
+massive amount of RAM and you're going
+to spend 10 $20,000 per employee on
+local compute so that they can token max
+to a maxing level. Who cares what
+they do on their local computer? Who
+cares? Let them rip. And then you're
+going to give them a laptop that
+connects to it and it syncs so you can
+control it. It's literally going to be a
+server per individual in your company.
+That's the way to model this in your
+brain. Everybody has their own language
+model that they're crafting 100% of the
+time as they work and it's all local so
+you don't have data leaks. Go ahead,
+Freeberg. I'll give you the final word.
+I mean, I think one of the things that
+this reveals quite clearly is that there
+is no buttered slippery slide to job
+loss.
+>> I think everyone is realizing that, you
+know,
+>> I was wondering where you were going
+with that buttering it up. So is Truman.
+>> But I think, you know, the idea that
+everyone had in their head two years
+ago, the narrative that was formed and
+everyone clutched on to, and by the way,
+you will not see the media reverse on
+this narrative. I've realized
+the importance when when
+>> media
+>> if you're a reporter or you're a
+journalist
+>> and you come up with some story that
+says something that's happening or is
+going to happen or has happened or is
+about the future, you destroy your own
+credibility if the narrative shifts. You
+cannot ever let go of the narrative. And
+I think this is one of the things that
+that we can kind of acknowledge is going
+on with this job loss narrative problem
+is that even as all the data comes out
+as all of the reconfiguring of how
+enterprises are using AI as it's
+revealing to all of them that they're
+actually not just going to cut cost but
+they're going to grow revenue and it's
+going to be a kind of clunky way of
+getting there. It's not going to happen
+overnight. It's not this slippery slope
+to job loss to nealism. Everyone's gonna
+kind of wake up and be like, "Wait, this
+reality that we all thought we were
+living in is not really the reality that
+we are living in. We're living in a
+reality where AI is clunky. It takes
+some putting together. It's a little
+more complicated than we thought. It's
+definitely going to deliver value, but
+it's not about just turning off all the
+jobs and letting the genius AI solve all
+my enterprise problems and scale me into
+infinity without humans." And I think
+that that's a big kind of narrative
+shift. And you will not see the media
+accept that their narrative is wrong.
+Because as soon as they have to
+acknowledge that they were wrong in what
+they were saying about job loss and all
+the other senators and people that are
+proclaiming job loss, job loss, job
+loss, by the way, the reason they're
+making that proclamation is so that they
+can step in and control AI and they can
+drive their systems of socialism, which
+is what they're all looking to deploy.
+But if they had to come in and say,
+"Look, the data doesn't map to the
+narrative, their credibility is
+destroyed." So they'll double down on
+it. and they'll double down on it. And
+I'm telling everyone that's listening,
+look at the data. There is no job loss
+with AI. It is an absolute scam to tell
+the world that AI is taking away jobs
+and destroying jobs and the world is
+shifting. It is clunky. It is valuable.
+It is going to take some time and it is
+going to create far more jobs than it is
+destroying.
+>> We're a bunch of monkeys. We've been
+given this new tool. We're going to
+solve more problems with the new tool.
+There will be job displacement. And the
+problem is people do not understand the
+nuance between these two terms. Certain
+jobs will be retired and they're going
+to be retired at a faster rate than you
+can imagine, but other jobs will happen.
+And you pointed this out, Shimoth. Hey,
+it's the it's the most I don't know if
+you did it here or on your personal
+channel on YouTube, but you know, it's
+the most empowering tool ever. If you
+can What jobs are getting replaced?
+>> I I challenge very simpl,
+>> but you're saying some of them are going
+to go away faster than you can see.
+What? What are those jobs that are going
+to go away faster than you can see? Cuz
+I'm just I'm still not seeing the
+categories.
+>> Totally. Customer support jobs. Those
+are going to go away very quickly.
+>> Where? Where? You're just making up
+cuz it's not I see it in enterprises all
+the time.
+>> Where do you see it? Show me the
+customer support enterprise shutdown
+that's happening. Just show it to me.
+>> Is it in the room with us right now?
+Like where is it? [laughter] I will
+literally, you know, I'll I'll do that
+research and and I'll give it to you.
+>> I'll give you some research. Hold on.
+Can I can I provide some research?
+He asked me a question. Just let me
+finish my answer and then you can take
+it. You asked me the question. Customer
+service jobs are going to go away
+because consumers prefer to talk to the
+AI and it's perfect at that. Entrylevel
+jobs around data entry around business
+process outsourcing those are going to
+go away. So will driving cabs and those
+kind of jobs. Those ones are obvious
+lowhanging fruit. Just like we had the
+typing pool and messengers and other
+products go away when we had word
+processors on every desk. Those jobs
+will be displaced 100%. And those jobs
+>> year we're on year 20 of cab drivers
+going away, dude. Like when Uber came
+out, everyone said all the driving jobs
+were going to go away. It's all over.
+>> Well, no. Whimo is stuck at 3,000.
+Tesla's stuck at like 30 cars. But
+that's all going to change in the very
+near future.
+>> Everything you're saying is perspective.
+This is my point. You are still being
+perspective in the future with
+everything you're saying. And every
+point that we turn, every time we turn a
+page, it's like, wait, do you happen to
+think self-driving is real? Is that your
+premise? Is that self-driving is not
+going to get rid of cab drivers? Is that
+your premise?
+>> I think it's real, but like like I think
+it's real for sure.
+>> Do you think it will get rid of cab
+drivers? You're arguing as if like I'm
+wrong here, but I think that every day I
+get in the car every day and my car
+drives me and I get on my phone and I do
+work.
+>> Okay. But do you think cabs and cities
+are not going to be self-driving? Do you
+think zipline's not going to deliver?
+Bailey thing again. Jal,
+>> it's not Mont belly. I see this from my
+investments. I have a company auto lane
+that is doing this right now.
+>> But just go to customer support again
+cuz you've been saying Yeah.
+>> I literally we've had this debate
+verbatim and
+>> displacement not job loss is is my only
+point.
+>> Yeah. Yeah. Yeah. Yeah. What Freeberg is
+pointing out is that whenever anyone
+pushes back on the fact that you don't
+have any data to support this in the
+present, you say you're talking about
+the future. Okay, fine. It's a
+prediction. You know, there's no data to
+support it in the present. That's fine.
+You're saying it's gonna happen in the
+future?
+>> No, no. I'll give you the data point.
+>> You can dismiss I want. I will. Yes. If
+you talk to Uber and Whimo, in the
+cities where Whimo is present and has
+gotten past a couple hundred cars,
+they've stopped recruiting drivers.
+Drivers are either static or going down
+in those markets. So that is absolute
+evidence that this is happening and the
+roll out is going to be fast and
+furious. So it is not a future
+prediction. You can talk to the CEO of
+Whimo. You can talk to the CEO of Lyft
+and Uber and they will tell you this
+explicitly. Market
+interview Darren. He said jobs were
+increasing at Uber.
+>> Yeah, cuz you're delivering more like
+those because productivity is going up
+with with delivery. Productivity goes up
+means people drive more% lying. You're
+being dis you're being last time we no
+the last time we disingenuous
+in markets where Whimo is in markets
+where Whimo is you're you're there might
+be other markets where things are
+growing because they don't allow
+self-driving or they haven't gotten
+there yet. In markets where Whimo has
+hit critical mass, the number of human
+drivers is going down. This is just a
+fact.
+Stop recruiting in some narrow
+arbitrarily defined subset of their
+jobs. You're pointing to flatness.
+>> Meanwhile, Dar told us that hiring a
+cost of the company has gone up in the
+face of these drivers.
+>> No, no, you're wrong. Okay. Anyway, we
+we'll agree to disagree here.
+>> Let me give you some actual data. Can I
+provide us this study? So, RAMP and
+Rellio Labs just released a new study in
+the past week.
+>> Yeah, that was great.
+>> And it was an actual study of over
+21,000 firms in the US and they looked
+at their payroll data combined with
+their spending on AI. And what they saw
+is that firms that spent the most on AI
+actually grew the fastest and they
+tended to grow their headcount roughly
+10% in the two years following the
+adoption of AI. And entry level
+headcount rose even faster, it grew at
+12%. So all this stuff about how entry-
+level headcount's going to get wiped
+out, not true. The more firms adopted
+AI, the more hiring they did. At least
+that was a correlation. Obviously, they
+can't prove causation, but that was the
+correlation. And then companies that
+were not highintensity adopters of AI,
+they were either didn't adopt or they
+were low intensity adopters, they just
+saw flatness in their headcount. So, no
+one is really showing a trend here of
+job loss. What they're showing is that
+the more you adopt AI, those companies
+also tend to grow headcount. So I you
+know there's just no data to support
+this idea that in the present AI is
+causing job loss.
+>> Job displacement will happen. Jobs will
+increase because of AI. Sovereignty will
+increase and people will make more
+money. Corporations will be more will
+have more earnings. But there will be
+jobs being retired. And I think if you
+look at translators, if you look at
+telephone operators, if you look at bill
+collectors, if you look at Whimo
+drivers, these very simple tasks are
+being automated. How do I know that?
+Because I invest in startups that are
+raising hundreds of millions of dollars
+to replace these jobs with AI. We had
+the pilot uh we we had people building
+the perfect pilot, the perfect driver,
+the perfect customer support rep. That
+is the point of AI. Every single sales
+pitch of these AI companies is to retire
+these jobs that are not great jobs.
+There is no way in God's green earth
+that humans will be at Amazon sorting
+packages. There's not. It's not going to
+happen. All those factory jobs are being
+replaced. Elon is explicitly building
+Optimus for this purpose. And when I say
+it's future, I have always contended
+it's future. Sachs, you cannot use your
+silly debate techniques to say that I'm
+using some crazy thing. It is happening
+as we speak. We're soaking in it. This
+is the transition period.
+What I'll tell you is that in every
+environment in which 8090 operates,
+every customer, I don't think we've seen
+layoffs. Not a single one.
+>> Yeah. In this in this RAM card study,
+they said, quote, "Gains emerge
+gradually and are broad across roles,
+including engineering, sales,
+administration, and customer service.
+So, they're not seeing like one category
+of jobs getting wiped out." By the way,
+it could happen in the future. I mean,
+none of us can say for sure what's going
+to happen in the future, but if you're
+looking for data in the present, we're
+not seeing it yet.
+>> I think there's going to be a strong
+human alpha. You know, like when vending
+machines came along, it's not like
+bartenders went away. Like I like going
+to a bar talking to the bartender and
+they make a great drink. And those
+bartenders make better money today than
+they did 20 years ago. I don't and and
+maybe the vending machine replacement
+model isn't the right one in that case,
+but I I think that there's a lot of
+value in human interaction that's going
+to get a premium in the future because
+as more stuff gets automated, I want to
+have an actual driver when I go to Las
+Vegas. I don't want to go in a Whimo. I
+want to have a great driver in a nice
+car that takes me to the dinners, drives
+me around New York City, same thing. I
+don't want to go in a Whimo, per se. I
+want to have, you know, people that can
+do things that could otherwise be
+automated. I'll pay a huge premium. I
+could sit in a freaking massage chair.
+Why do I go pay someone $200 for an hour
+massage? You know, I think there's
+there's an aspect to the alpha of
+[laughter]
+we could cut that one. But uh
+but I do think there's a premium to
+humans and I don't think that um and I
+actually to humans
+>> no the count
+JL this is really important. I think
+that the counternarrative to automation
+generally is that we're going to realize
+the importance of human interaction and
+humans in the loop and we're going to
+pay a premium for it.
+>> Well, do you remember like a
+>> I don't believe I don't believe in AGI
+and the singularity happening next year.
+I'm just not there.
+>> Do you remember like a year ago when CLA
+said they're going to replace their
+whole customer service department with
+AI and they did they did a lot of hype.
+It was peak RF farming and well lo and
+behold they flipped the decision back
+after a year. They said that from a
+brand perspective, a company
+perspective,
+it's just so critical that you are clear
+to your customer that there will always
+be a human if if you want it.
+>> Human in the loop will be the premium
+and we will all realize in the next year
+and a half the importance of human in
+the loop even in the context of AI and
+automation working.
+>> Human in the loop is going to be more
+valuable and then you're going to pay a
+premium for human in the loop. There's
+so many CEOs who want to tap into the
+media's hype cycle. This is the thing is
+that whenever the media gets a hold of
+one of these narratives, there's so many
+CEOs who are not like Karp, right, who
+just are not original and they don't
+really have anything important to say.
+So, the only way for them to get
+publicity is to glom onto that press
+cycle and try to use it. And then
+they'll chime in with, you know, how
+they're going to do crazy things to
+eliminate their whole customer sport
+department and then lo and behold, it
+turns out just to be total totally fake.
+I think the ramp data is directionally
+accurate. In our experience, I would say
+the same thing. I think people that use
+AI tend to grow faster. They tend to
+hire more. They tend to make more%.
+>> Yeah, 100%.
+>> By the way, I actually agree with 100%
+agreement on that.
+>> From a career standpoint, I would not
+want to be a level one customer support
+rep because I do think that like if all
+you're doing is like answering forgotten
+password requests, that's not a great
+place to be. However, those jobs were
+basically outsourced to the Philippines
+and places like that a long time ago. I
+mean, most enterprises are not doing
+kind of that level zero, level one
+customer support in the US. They do have
+customer support centers, but they're
+doing like level two, level three.
+They're doing the escalations, the
+higher value stuff that's going to be a
+lot harder to replace with AI.
+>> Totally. I do kind of worry about well
+what happens in some of these other
+countries that are doing the super entry
+level stuff because I think that is job
+loss but I don't know if it'll be
+massive but that's where the risk is. I
+mean frankly it's not in the US.
+>> This is um so maybe we're getting to
+some consensus here.
+>> Job displacement versus job loss. Here
+is Brett Atcock sharing what they're
+doing at Figure. They had an 8-hour
+challenge to have this uh robot they're
+building sort packages and they did it
+for 200 hours. That's today. This is the
+least
+good it will ever be. This is the worst
+it's going to ever be. These things are
+getting really good. I spent time with
+Elon. I've looked at Optimus. I can tell
+you Optimus is better than what Figure
+is doing. What Optimus is going to do
+when Bezos and Andy Jasse unleash
+Optimus inside of the Amazon factories
+is it's going to get rid of every, let
+me state this very clearly, every single
+package sorting, every single package
+delivery will not be done by humans in
+10 years. And it's starting today. Just
+like the idea that you would put
+together some of this consumer
+electronic stuff in factories with
+humans has gone away over time. and
+other countries. I think you're making a
+very good point here, Saxs, are going to
+experience it first. In America,
+knowledge workers, the entrepreneurial
+spirit. I think we're going to see a
+Cambrian explosion in startups, which
+means we're going to be the ones who
+benefit from it. But if you're looking
+at those other countries, they'll see it
+acutely first. We're just going to see
+it here with drivers, and that's 5 10
+million people, like we saw it with
+cashiers. The idea of going to a cashier
+at a fast food restaurant, which I know
+you guys don't go to all that often,
+where Starbucks, the idea that you would
+interact with a cashier has been going
+away slowly because it's just consumers
+don't even want it. We'll agree to
+disagree here to a certain extent. Maybe
+we may
+>> Look, I went to McDonald I went to
+McDonald's recently and I ordered from
+one of those monitors. Zero.
+>> What did you order? You filet a fish
+guy? I'm a flay of fish guy. What'd you
+get? What's your
+>> I'm a Big Mac. I like a Big Mac.
+>> You like a Big Mac? What about you, Sax?
+What? What's your order? What's your Did
+you get a McFlurry?
+They had a thing called a homegrown
+burger which was some new I think it was
+kind of like more like an In-N-Out type
+burger situation they were testing.
+>> Smash Patty.
+>> Yeah, it was good.
+>> Anyway, my point is just the automation
+obviously they didn't have a cashier
+there already, but there's zero robots
+involved. Similarly, there's already a
+lot of automation going on in those
+Amazon warehouses. I don't know if
+you've ever been to like a FedEx
+packaging or routing depot. It's all
+conveyor belts and you know
+>> Yeah, robots pushing it and directing.
+But it's not it's not humanoid robots.
+There's already tons and tons of
+automation at these places.
+>> The last but this last mile part is the
+one I think that is going to shock
+people. When you have an optimist
+walking the Tesla self-driving car and
+then they walk it to your porch, ring
+your doorbell and knock on your door and
+put it on your front step porch. That's
+where this is going to get super
+interesting.
+>> I think it's going to lead to a boom
+because think about like just something
+like building a house. Okay. You know
+how long it takes to build a house
+>> in California? Three years. Yeah. Yeah.
+Yeah. Multiple years now
+>> in
+>> China one day. [laughter]
+>> There you go.
+>> But imagine if you have like a like a
+construction crew and I don't know it's
+like 20 humans and 50 robots or
+something. The humans have to tell the
+robots what to do. I don't
+>> supervisors.
+>> I think it's going to take a long long
+time for the robots to be able to do
+that super high skill work. But they can
+be given tasks
+>> and then gradually they can do. So maybe
+it only takes a year to build a house
+instead of two or three and that's the
+solution to our housing crisis.
+>> 100%. All right, listen.
+>> In a related story, by comedant Howard
+Lutnik's decree, subject Dario Amade
+will be permitted to bring his powerful
+new model Fable 5 to market for the
+glory of the realm and at the pleasure
+of his majesty Lord Trump. Remember two
+weeks ago the US government put export
+restrictions on Fable and Mythos and the
+Iliad and the Odyssey and whatever else
+they're doing over there at Anthropic
+and Anthropic expanding Mythos uh to 50
+unauthorized entities according to
+sources that included SK Telecom which
+allegedly perhaps maybe has li ties to
+China on June 30th. Howy in the commerce
+department. That's my guy, Howard
+Lutnick, my favorite in the
+administration. No disrespect to you,
+Saxs. Um, he lifted controls on Fable 5.
+Mythos 5 was restored to US customers
+this past week, June 26th. Many
+suspected this would happen because
+Anthropic replaced Daario as their lead
+negotiator. Here is the Palace Intrigue
+I was referencing earlier. Co-founder
+Tom Brown, whoever that is, took the
+spot and appears to be getting along
+better with the Trump organization. For
+example, he proactively genulected
+showed the tweet to Lutnik's tweet
+announcing the export restricting
+restrictions had been lifted. Tom Brown,
+thanks for your partnership on this
+secretary explanation point. Look at
+that smile. Tom Brown coming in to save
+the day. In a postmortem blog post,
+Anthropic said the jailbreak that
+triggered the shutdown was not unique to
+Claude. Remember Andy Jasse reported to
+the Commerce Department what was going
+on with this. Okay, Saxs, former AISAR.
+What's going on? Give us the palace
+intrigue, please.
+>> Well, look, the export control letter
+was taken down after 2 weeks. I think
+that this was a highly unusual
+circumstance, and it was brought about
+by three things, three conditions, and
+you really needed all three in order for
+this to happen. Number one, you had
+Daario running around for months saying
+that he had created a cyber weapon. He
+almost boasted about it. It was mythos.
+Okay, so that was number one. Number two
+is you have a trusted partner of
+Anthropic which is Amazon which did its
+testing of Fable which was Mythos with
+guardrails and they reported that the
+guardrails failed. So therefore Fable
+was according to Daario a cyber weapon.
+So that was important fact number two.
+And then fact number three is that when
+confronted with this information, Daario
+basically refused to roll back Fable
+until the jailbreak could be fixed. Or
+at least that's what he communicated to
+the administration and that's what the
+administration heard. So I think if you
+change any one of those three facts,
+this would have ended up not causing the
+government to basically send that that
+letter to Anthropic. I think if Daario
+hadn't primed officials to see Mythos as
+a cyber weapon, it wouldn't have
+happened. If their trusted partner
+Amazon hadn't reported the jailbreak,
+wouldn't have happened. And if Daario
+hadn't refused to take action when he
+did, then this wouldn't have happened. I
+think this was sort of a unique
+circumstance. I guess what I'm trying to
+say is that a lot of people are reading
+a lot into this letter. I know that
+foreign companies or foreign actors or
+allies and partners of the US are
+wondering does this mean that our
+ability to access US technologies is
+going to be limited? I don't think it
+does. I think that the administration
+reacted with the tools at its disposal.
+And I think that what the president
+cares about is what he's always said,
+which is he wants to be pro- innovation.
+He wants to be pro export. He wants to
+be pro infrastructure. He wants to
+support American companies in the AI
+race and I don't think people should
+overextrapulate based on what just
+happened over the past few weeks. I
+think highly particular to this fact
+pattern.
+>> We a lot of discussion of exports. Let's
+talk about imports for a reason. It
+seems to me
+>> that importing Chinese models when we in
+fact have open- source models here from
+Nvidia and other players. Why have you
+not or in your during your time did you
+not advise or talk about here blocking
+access to import? We will not allow the
+importation of Huawei products into the
+United States or self-driving technology
+from China. Why are we allowing open
+source models? Why don't we put an
+edict? And why didn't you suggest that
+when you were thesar of AI? Why didn't
+we stop Kimmy and Deepseek from coming
+into this country in order to drive our
+open source technology and to keep the
+leakage
+from those model sacks?
+>> Well, if you is that a concern of yours?
+Well, number one is that once a model is
+open- sourced, it stops being Chinese in
+a way, right? Because you can now take
+that model, you can fork it, you can
+create your own version, you run it in
+an American data center on your own
+hardware. There's no packets going back
+to China. There's no data leakage going
+back to China. In some sense, they've
+made a contribution to the open source
+community. And then people can take it
+from there. Now, should you still
+exercise caution? Absolutely. because
+you have to make sure that the model is
+safe. It doesn't contain back doors. I
+mean, this is a relatively new surface
+area for cyber security. So, look, you
+should obviously be cautious. But the
+bottom line is that when an American
+company takes an open source model and
+converts it and runs it itself, it is
+now theirs.
+>> But it builds consensus around that
+model and makes that model stronger by
+more people participating in it, which
+was your argument for allowing people to
+get on the hardware stack.
+Well, but then that I think that leads
+me to argument number two, which is if
+you were to do something like ban open
+source in the United States, you'll put
+the United States on an island. The rest
+of the world is not going to follow
+suit. The rest of the world wants to use
+open models because of the advantages
+they offer. They're cheaper. They're
+more customizable. They offer more
+control. And again, they stop being
+Chinese models once you can take them
+and adapt them and run them on your own
+hardware. So the rest of the world's not
+going to stop using these models just
+because we do. And what we will do then
+is subject American enterprises to a
+token tax. You're going to end up paying
+for closed models in the US.
+>> No, but we have open source models now.
+Nvidia has theirs, for example. There
+are other ones. So if there are open
+source models here that are equally
+competitive, [snorts]
+>> would you then support an import control
+so that more people in America put their
+effort into American open source models?
+Well, I've been I've one of the things
+I've been saying for
+>> and Google's open source models.
+Obviously,
+>> one of the things I've been saying for
+over a year is that we need more strong
+offerings in open source from the United
+States. So, I hope we win the open
+category of models just like I do the
+closed. I mean, I hope America wins the
+AI race in both open and closed models.
+I don't really want anyone being forced
+to use models they don't want. But look,
+if American models, open models are
+better than Chinese open models, they
+will win and people will want to adopt
+them. So if what you're saying is true
+that our open models are better or
+getting better or going to surpass the
+Chinese ones, leave that to the market
+to decide. And just one last point on
+this is, you know, I'm not against
+limiting the import of certain Chinese
+products in the US. For example, I don't
+think we allow Chinese connected cars.
+>> We don't
+>> I think we should think twice about
+whether we allow, you know, Chinese
+robots into the US. I mean,
+>> yeah, we wouldn't want to have like a
+like a fifth column of,
+>> you know, of backdoor Chinese robots or
+something in the US potentially. I'm
+just brainstorming here. Okay. So, I'm
+not against limiting certain things, but
+we should understand that when we do
+that, we are inviting retaliation by
+them as well and we are in a trade
+relationship with them. We still need
+things from them. We still need rare
+earths, things like that. One day we
+won't hopefully. I do think we should
+try to be as independent and autonomous
+as possible, but while we do, we have to
+think very carefully about the larger
+trade relationship. Yeah, Trump banned
+the import of Chinese drones. It's a
+signature part of the legislation. So,
+um, all right. So, a little housekeeping
+here. All-in summit is coming back
+September 13th, 14th and 15th. Fifth
+year of the summit. Keep raising the
+bar. Man, if you knew the speakers that
+I knew that Freeberg's lined up, your
+brain would explode this year. The
+nights are as good as the days because
+let's face it, Freeberg likes to party.
+He's been known to have a cocktail or
+two. We're doing the biggest poker
+tournament we've ever done at the summit
+this year. Gaming will happen at the
+welcome party and we're going to have a
+full casino night at an exclusive
+mansion in LA. Ooh la la. Applications
+open now. Allin.com. Don't miss our
+biggest event of the year. I think we
+have 12 trillion in market cap books so
+far. It's probably going to double.
+Okay, next topic. Topic number three.
+It's a hot scot this summer. The
+justices released 11 decisions in the
+final few days of the term. Let's
+discuss the top three right now.
+Birthright citizenship case was Trump
+versus Barbara. On the first day of his
+second term, Trump, as you know, signed
+an EO ending automatic citizenship for
+children born to illegal immigrants or
+those on temporary visas. Uh this is
+codified, I guess, in the 14th
+amendment. Court struck it down 63,
+maybe 54. There's some nuance here.
+255,000 children are born every year to
+non-citizen parents. Chief Justice
+Roberts wrote, "The majority, joined by
+all three liberal members." The court is
+still a bit uh polarized citizenship
+then and now was the right to have
+rights. We keep that promise today
+according to Chief Justice's majority.
+Kavanaaugh carved out a lane for
+Congress to tighten up on birthright
+citizenship. That's still consistent
+with the 14th Amendment. Uh, as you
+know, the administration has been
+pointing out, and you've watched Fox
+News, you've heard this a million times.
+If you watch CNN and Not All In, you're
+going to maybe have heard of this once
+or twice. Birth tourism. A Chinese
+national, Dong Wan Lee, plead guilty in
+2019 to a scheme to help pregnant
+Chinese women enter the US under false
+pretenses so their babies would be
+granted US citizenship. She pled guilty
+to one count of conspiracy to commit
+immigration fraud and one count of visa
+fraud. So we we handled that through the
+legal system. She served 10 months in
+prison. Trump's response to the loss.
+Quote, "Congress should start today to
+work on ending birthright citizenship.
+They will have my complete and total
+support for Trump. Feels like a loss for
+Trump objectively,
+but he's going to keep fighting this
+one." Close decision. Uh if you ask
+Steven Miller, he doesn't like
+immigrants like you three dudes. But I
+would let all three of you in. Again,
+>> that's not his position.
+>> Okay. Well, you can explain. I know he
+doesn't like immigrants.
+>> We're legal immigrants. We're legal
+immigrants.
+>> Yes. Well, but
+>> you understand the difference, right?
+>> Well, birthright would also be legal
+according to the Constitution.
+>> Yeah. But that's the whole point is it
+doesn't really make sense that let's say
+an illegal immigrant runs across the
+border, is like 9 months pregnant, plops
+out a baby, and all of a sudden they're
+an American citizen. How does that make
+sense? Uh, what about somebody who's
+been here for 20 years, Sachs, worked
+really hard, they're illegal, and they
+have a baby. Should the baby kicked out
+and that baby not be a citizen? You're,
+let's say it's somebody's nanny,
+somebody's gardener. We have 20 million,
+30 million illegal immigrants we've let
+into this country. We wave them in
+across many different Republican and
+Democratic terms over the last 30 years.
+What do you say to that person who has a
+baby? Should they be deported? Should
+they be given citizenship?
+>> Well, look, the question here is what
+the Constitution says. And my view is
+that the original purpose and
+understanding of the 14th amendment was
+to make sure that the children of freed
+slaves would have citizenship rights.
+That was the purpose of it. That it's
+obvious. And I don't think it speaks to
+the situations you're talking about and
+Congress should just make the law about
+those situations. But now Congress
+cannot make the law because the Supreme
+Court has ruled that citizenship is
+determined by birthright. So in that
+case, My question was somebody who's
+been here 20 years as an illegal
+immigrant underrange.
+>> I'm saying Congress should
+>> What do you think? I'm asking you your
+personal opinion. Should they get
+>> I mean, look, that's you're talking
+about an edge case. It's complicated.
+But the point is that we all know why
+the 14th Amendment was ratified. It was
+to protect freed slaves, obviously. And
+now we're in territory that's like very
+different. But the Supreme Court has
+decided that if you're born here for any
+reason whatsoever, even if you're an
+illegal, even if you weren't supposed to
+be in the country, now your children are
+American citizens. By the way, I don't
+think any country in the world has this
+policy. It's kind of a crazy policy. So,
+I agree with Stephen Miller about this.
+>> I'm not sure it's an edge case. I think
+I think the majority case is people
+who've been here illegally for for
+decades. And I think the edge case, the
+one you proposed is the edge case, like
+a pregnant woman running across the
+border.
+>> Let Congress decide that. I don't think
+the Constitution ever spoke to this.
+What's your personal opinion on this,
+Shimat? Should the person who's been
+here for 10, 20 years, paid their taxes,
+but they're illegal, and they have a
+child, should that child be a citizen or
+not? What's Shmat's personal opinion
+here?
+>> I haven't thought about this.
+>> Great. Okay. It's uh I mean, that's the
+key to the uh I think what we're talking
+about here. Free.
+>> No, no, no, no. Because J, there's a big
+difference between making something
+constitutional and then doing it via a
+law of Congress. And what Supreme Court
+has said here is that Congress does not
+get to make the decision. The majority
+of the American people don't get to make
+the decision. The Constitution requires
+a certain point of view and there's no
+way to change that without a
+constitutional amendment, which will
+never happen. So, we're kind of now
+stuck with this position. Hm. Well, if
+you read the language and someone posted
+this, this was the debate that when the
+14th amendment was being debated,
+Senator Jacob Howard, I'll give credit
+to Guyer Capital for pointing this out.
+There's a transcript of the debate that
+took place and it says um every person
+born within the limits of the United
+States and subject to their jurisdiction
+is by virtue of natural law, national
+law a citizen of the United States. This
+will not of course include persons born
+in the United States who are foreigners,
+aliens who belong to the families of
+ambassadors or foreign ministers
+accredited to the government of the
+United States, but will include every
+other class of persons. Because if you
+go to the history in 1868, there was
+this Dread Scott decision which denied
+citizenship to the children of slaves.
+And the intention at the time was to
+ensure citizenship for newly freed
+slaves and their descendants. That was
+the original intention of the 14th
+amendment at the time. So this goes back
+to the great debate that happens at the
+Supreme Court all the time, which is the
+textual or the intentional reading of
+the Constitution or its amendments. The
+textual reading is you look strictly at
+the words, the plain literal meaning of
+those words. And then the intentional
+reading is what was intended at the time
+by the framers of the constitution or
+the amendment that may be the subject of
+the debate. And so I think that's
+ultimately what this comes down to. If
+you think about the intention at the
+time, it was really built around free
+slaves. There wasn't a consideration at
+that time of having this massive
+movement of immigration that was taking
+place or that has taken place since.
+that wasn't even in the kind of realm of
+consciousness or consideration when this
+amendment was being passed. So the
+intentionalism kind of argument would be
+hey wait a second you know this wasn't
+really what they intended but the
+textual representation is what it is and
+that's what the ruling kind of led to in
+this particular case. my personal
+opinion, if you're asking it,
+>> I'm trying to get personal opinions
+here.
+>> I do think birthright citizenship um
+should be endowed to the children of uh
+legal residents of the United States,
+whether they're a citizen or not. So,
+yeah, I think that's critical. So, if
+you're a visitor, if you get on an
+airplane and fly here for a weekend on a
+vacation and you have a visa or you
+have,
+>> you know, temporary visitor status to
+come.
+>> Yeah. or or you have a temporary visitor
+status to come to the United States to
+visit, you are not a resident of the
+United States. So, your children should
+not become citizens of the United States
+unless you're a resident. And remember,
+we don't just have like citizens and
+non-citizens. We also have resident
+status in this country. And a resident
+status is a green card. I mean, for
+years, I was on a green card. Three of
+us were immigrants. We all went through
+this process. Once you get resident
+status, you're now a permanent resident
+of the United States. You haven't been
+given citizenship rights yet. But if you
+have a child, I think it's reasonable
+for your child to have citizenship
+rights if you're a legal resident rather
+than a legal visitor or illegal visitor
+to the United States. That would be my
+personal assessment. I you know, it
+would be great for that to be the law,
+but obviously this is now kind of,
+>> you know, gone explain that really well.
+I didn't even know all of this. I'm I'm
+on your side. I agree.
+>> Yeah. I mean, I I agree with that.
+You're saying in addition, people
+shouldn't be able to do the tourism
+thing. We should handle that. Um, I do
+think we should have an exception here
+for people who have been
+noncriminals who are here illegally
+because we as America, Republicans
+especially, uh, during the time when
+they were pro free trade, NAFTA and
+really waved in a large percentage of
+the immigrants who here, obviously Biden
+did that as well. I think we have a
+moral obligation to those people since
+we waved them in and we waved them in to
+work at our businesses because we wanted
+to pay under minimum wage to them. those
+people suffered here in our country to
+take those jobs to make us richer, to
+make our country richer. We have a moral
+and ethical obligation to them and to
+their children. We should give them a
+path to citizenship unless they're
+criminals and their children should be
+Americans. Since they came here to live
+the American dream, whether it was
+illegal or not, we waved them in. That
+was our mistake. And now that we've
+closed the border, we should make amends
+to those 20 million people. That's my
+personal opinion. I don't think we have
+need more time to think about it and
+Saxur.
+>> Well, my my point is we're all just
+making arguments about what the law
+should be and these are the kinds of
+arguments that Congress should be making
+and deliberating over
+>> and these are the edge cases. These are
+the nuances that should be handled in a
+citizenship law. And what the Supreme
+Court has done here is remove that space
+for Congress to legislate. And I think
+Congress needs that space because there
+are these edge cases and instead it's
+interpreted the 14th amendment in a way
+that I don't think is consistent with
+why it was ratified in the first place.
+And Freeberg is totally right about
+about Dread Scott which was one of the
+most awful probably the most awful
+Supreme Court ruling of all time. It
+came out in 1857
+and it ruled that black people whether
+enslaved or free were not US citizens
+and therefore they had no right to sue
+in federal courts. And the chief justice
+Roger Tony wrote the decision I mean
+it's extremely racist. He wrote that
+black people had quote no rights which
+the white man was bound to respect. And
+that decision furthermore ruled that
+Congress could not ban slavery in the
+new western territories which meant that
+it struck down the Missouri compromise
+which was the law that had kept the
+peace between the free and slave states
+for decades. And that is one of the
+direct things that then triggered the
+civil war 3 years later. So it was this
+historically bad decision that I guess
+then the 14th amendment tried to correct
+by saying that no
+you know freed slaves and their children
+would be
+>> totally different context than someone
+visiting from China for the weekend and
+having a baby.
+>> Yeah, which we obviously that one is an
+easy one to adjudicate. Chimath, I'm
+curious feels like as a society we have
+now because of the closure of the border
+give Trump a lot of credit for that. It
+was easily done, which means it could
+have been done at any time by Biden. And
+that created a big rift in our society
+that we're still working through. The
+other rift that was created over the
+past year, we've had many debates here
+about ICE and what some people,
+including myself, believe was a brutal
+way to deport people and a cruel way to
+deport people. Some people might
+disagree with my opinion, but it seems
+like Trump stood down on that and calmed
+it down, I think, because it was so
+unpopular, at least according to the
+metrics that we saw from Pew and other
+uh studies. What do you think the road
+the the the path forward is now? The ICE
+um aggressiveness has stopped. The
+border has been shut. We seem to be in a
+sort of holding pattern here which I
+think was very wise by Trump to do that.
+Put us like calm the situation down. I
+would have liked to seen him calm it
+down a little earlier. What do you think
+the go forward should be? If we go look
+at 27, 28, 29, do you think obviously we
+all want legal immigration, but what do
+you think we should be aspiring to do as
+a country now that the issue has
+seemingly is not boiling over? What are
+your what are your thoughts? Jamaal,
+have you given it any thought?
+>> I think that Western countries are
+losing their
+cultural representation that makes them
+unique and I think that that's very bad.
+When my parents
+went to Canada and then stayed, I think
+part of what they were doing, whether
+they knew it or not, was making an
+explicit decision to be Canadian first,
+which who happened to be of Sri Lankan
+origin.
+When I came to the United States, I was
+making an explicit decision to become an
+American and then my Canadian and then
+my Sri Lankan ancestry was second and
+third respectively.
+I think if you seed your immigration,
+you're seeding your culture. And I think
+that people have a responsibility
+to keep the values of what made that
+country unique in the first place. And
+you don't need to look too far because
+you can look across the pond and you can
+look at the UK and you can look at
+Germany and you can look at France and
+you have to ask yourself
+is the cultural deviation from where
+they were. Has it been better or worse
+for those countries? And I think in
+general it has been worse. So I think
+people should want to come here to be a
+part of the American ideal, the American
+culture. And so I think you have to have
+a rational immigration policy that has
+compassion but ultimately
+favors this idea that you can't come
+here to build your own version of your
+previous country here. So assimilation
+is part and parcel of a functioning
+immigration system. I strongly agree.
+Freebrook, how should we go forward as
+Americans? We know Europe has had an
+issue with uh or the populace is there I
+think are in agreement that they may
+have gone too far in terms of uh
+unmitigated massive amounts of
+immigration specifically amongst groups
+that maybe are explicitly not wanting to
+assimilate. What's your thoughts on what
+America could should do going forward?
+Do you believe we should be
+>> It's a Yeah, it's a great question and I
+think there's an easy answer going back
+to my makers versus takers point. If the
+primary motivation for an individual to
+come to this country is to be given
+benefits, to be given payments, to be
+given social services, to be given
+support, I think that that person should
+be denied immigration. If the primary
+motivation for the individual to come to
+the United States is to work to progress
+themselves, to become a maker, to create
+things, to work in such a way that they
+can generate income, save capital, buy
+things, advance their family's position
+because they are denied those rights due
+to the tyranny of the place that they're
+coming from, then they should be granted
+immigration status to come to this
+country and contribute. Because at the
+end of the day, what people may not like
+to hear, which is the truth, is that
+every single one of those people is
+actually net positive in growing our
+economy. And everyone thinks it's a zero
+sum game with respect to jobs in the
+United States. And we shouldn't let
+people into this country that create
+jobs. But the fundamental truth is that
+anyone that is productive, meaning they
+create more value than they take in,
+grows the economy and more jobs get
+created. And overall, we all benefit
+from having those individuals here in
+this country. Well, I would say
+>> so I'm all about I'm I'm all about
+discerning immigration not on the lines
+of some cultural like definition but
+really around that simple framing of are
+you going to get social support services
+or are you going to work and if you're
+going
+>> are you a train or a gain very simple
+way if you are going to work you are
+going to culturally assimilate because
+that is what the United States is based
+on which is productivity work hard
+create things and have individual agency
+have the ability to progress self in
+this world, in this society. And if you
+take advantage of that opportunity,
+you're going to love the American ideals
+that this country was founded upon. And
+there are ways to do that. Freeberg, you
+can look at people's desire to learn the
+language and understand the political
+system and culture here. If you said at
+the border, speaking fluent English,
+understanding our systems here, you
+know, and doing some learning before you
+come here, that would give you more
+points in a point-based system. Canada,
+Australia, New Zealand, most of the
+great functioning democracies in the
+world have pointbased systems. And part
+of that point-based system could be
+you're provisional here and you get a
+visa for a certain amount of time
+provided you don't commit crimes, you
+don't tap the welfare system, an
+entitlement system, and you do create
+jobs. We'll take an unlimited number of
+Elon Musk, David Freebergs, David Saxes,
+and Chimath Polyhetas in my America as a
+seventh, eighth generation American. And
+speaking for the people who've been here
+the longest, we'll take an unlimited
+number of the besties I just mentioned
+and we should recruit them actively. We
+should be trying to increase the
+population of the United States with
+those people. Every single person sachs
+we take that's a high performer like
+yourself from another country like South
+Africa, Sri Lanka, uh, or pick the
+country. Every time we recruit one of
+those people, that gives us a gain. It
+also in a super hyper competitive world
+is a loss for China, for Iran, for
+wherever we can recruit the best and
+brightest who want to assimilate Saxs.
+I'll let you have the final input here.
+What when you are um JD Vance's chief of
+staff in uh 3 years, what will your
+advice to JD be? [laughter] And how will
+you frame this during the election
+cycle? How will you win my vote as a
+moderate? That'd be awesome.
+>> Chief of Staff David Sax.
+>> No, that's that's not going to happen.
+But 100% going to happen. I talked to J.
+>> Well, I can give you I mean I can give
+you the actual polling data. So, first
+of all, I think it's broadly popular in
+America to seal the border and not allow
+illegal immigration. J, you're even on
+board with that obviously. Now, the only
+people who really aren't are these DSA
+types who want open borders. They want
+to abolish ICE. They want ma mass
+amnesty. They are lunatics. Now
+communist politics
+>> if you look at deportations about a
+third of US adults say all immigrants in
+the US who here illegally should be
+deported and then half say some should
+be. So 32% are in favor of deporting all
+illegals and 51% are in favor of
+deporting some and almost everybody in
+that group says that anyone who's
+committed a violent crime should be
+deported. And then 16% which is the DSA
+group says none should be deported. So
+deportations are popular provided that
+the illegals have committed violent
+crimes and have done other things that
+people think should be unacceptable. But
+you're right. Only 32% believe that
+every single one should be deported.
+That's from Pew.
+Now, I guess I agree with Freeberg's
+point about the incentives. I mean, if
+you're coming here to get on welfare
+programs, forget about it. I mean, we
+should only allow people in if they're
+here to work and be successful and are
+not a net like, would you say, a gain,
+not a drain?
+>> I agree with that. And yeah,
+>> and even in the days of Ellis Island,
+>> you can have it
+>> where the US was very accepting of
+immigrants, onethird of immigrants who
+arrived at Ellis Island actually
+returned home. 2% were not allowed entry
+due to health or criminal problems, but
+a third actually went back. And that was
+because there was no social welfare. And
+if you didn't make it in the United
+States, you would leave. And now anyone
+can walk across the border. They
+download an app and they get $5,000 a
+month in welfare. And during the Biden
+administration, they were getting luxury
+hotel rooms and buses and flights all
+over the country. It was insane.
+>> So I mean, we got to stop that. If you
+do get in, there should be some sort of
+moratorum on any kind of social program
+for maybe while you have a visa.
+>> Can I just come up with that? I mean, it
+seems like the simplest thing you could
+ever do is just say you cannot tax the
+welfare system. You cannot tax social
+security benefits, which I don't think
+you can right now. You just can't tax
+anything. You can't take anything from
+the system for the 5 years you're here.
+Period. Full stop. The end. And if
+that's okay with you, then come. And if
+you produce jobs and you create x amount
+of economic activity, let's say you
+create $10 million worth of economic
+activity. When you hit $10 million in
+economic activity, you are uh pushed to
+the front of the line and we review your
+case on a one-off basis. If you hit 5
+million, you go next. And that would be
+actually like let's put some goalposts
+there. Let's set some targets. Hey, you
+come to the country. You're an Iranian
+Persian amazing entrepreneur. You're a
+developer. You're an AI developer from
+Ukraine. You want to come here with your
+team. Great. What amount of money can
+you raise on your way in the door?
+You've got $6 million in venture
+funding. Great. You go to the front of
+the line. Let's go. Let's take these
+great entrepreneurs and creators and
+builders. Let's sweep the table with
+them now that we've calmed down this
+rhetoric around immigration and shut the
+border, which was a key piece of doing
+that. Uh, all right, let's keep moving.
+>> The GSA has calmed it down. They still
+want to go back.
+>> They're lunatics. These commies.
+Honestly,
+>> the Democrat party.
+>> I mean,
+>> let's talk about California, shall we,
+Jal?
+>> I mean, yes. Yes. Hold on a second. I
+mean, if they take over the Democratic
+party, then I guess I'm a Republican.
+Colorado a 15ter term congresswoman 30
+years list lost to a DSA so it's not
+just New York it's not just because of
+Zoran Mdani the DSA is very popular now
+>> socialism is going to win any city
+>> this is this is a quick way to I mean to
+Roana and Rahm Emanuel and to well I
+mean Rohan is a lost cause but to Rahm
+Emanuel to Shapiro
+to anybody
+in Democrat is a lost cause. I've been
+telling you for a long time that you may
+disagree with what Roana is doing and
+saying, but it's popular in the
+Democratic party. I think he's got his
+finger on the pulse.
+>> Well, he wants to win. I get it. But I
+think you have to the quick win, the
+quick hit, the quick bump of the
+fentinol or methamphetamine
+of communism and socialism to get you a
+couple ratings point is not worth it
+long term. You will not win. You're
+going to lose every moderate, every
+swing voter, every adult in the room is
+not voting for a socialist
+communist lunacy.
+>> We'll see.
+>> They're going to implode the Democratic
+party. All right, we we'll leave off the
+other um Scotas hottest summer for
+another time.
+>> Let's talk about Gavin with the good
+hair Newsome. He says he just balanced
+the California budget.
+Nuome announced $351 billion in balance
+zero deficit budget through 2028. Over
+to you, Freedberg, from your bunker, the
+last California stand in the Freedberg.
+>> I'm going to call it I'm going to call
+this this the state of California.
+>> The state the state of California. The
+lower
+>> the state of California.
+>> That's right. The state of California.
+>> The state of the state.
+>> And there are five the state of the
+state. And there are five
+>> Got it. chapters to this ballooning
+costs, the accounting tricks, the
+revenue dependency problem, and now the
+big exodus and spiraling that's
+happening, and the looming unaccounted
+liabilities. These are the problems that
+California is facing as Gavin puts his
+bow on his final budget, calls it
+balanced, and walks away while the House
+burns. California's state budget
+ballooned from 215 billion a year in
+2019, 6 years ago, to 355 billion today.
+So, a 65% jump in the state budget. And
+there were a number of these kind of
+accounting tricks that took place to try
+and make it look like it's a balanced
+budget this year. But there's revenue
+and there's spending. When they call it
+a balanced budget,
+that's not the way we all talk about it
+in the business world where you have
+like a P&L, you have revenue and
+expenses. They have revenue and expenses
+and the expenses exceed the revenue. And
+that little difference they do a bunch
+of borrowing against and then they then
+they call it a balanced budget. So
+[laughter] all that they've done
+>> so they were able to raise enough debt
+to cover their whole question.
+>> So there's somewhere between 20 and 40
+billion of debt that they have a legal
+ability to just pencil away and that is
+now a liability that the state has that
+the taxpayers are all going to have to
+pay at some point that allows them to
+quote balance the budget this year. And
+I'm not going to get into all the
+details of what went into this budget.
+all the money that's being spent. It's
+crazy. But I think that's what's worth
+taking note of is the revenue dependency
+the state has. As you all know, the top
+tax rate in California is 14.4% today.
+Personal income tax is $142 billion of
+the state's revenue. Okay, that is 211
+billion of revenue the state generates.
+142 of it comes from personal income
+tax. The top 1% 150,000 people pay 70
+billion pay half of that tax of that
+income. So 70 billion of the state's 210
+billion income comes from just the top
+1% of payers, 150,000 people who are
+already paying the highest tax rate in
+the country. The top thousand people in
+the state of California pay roughly 22
+billion a year. So more than you know
+11% of the state's income. The corporate
+tax is one of the highest in the country
+at 8.9% $43 billion. So it's cheaper to
+move out of state. If you look at some
+of the other states, Florida 5.5%,
+Texas, Tennessee is 6 and a half and
+Texas is zero.
+So now if you kind of look at what's
+happening, there's a massive exodus
+underway. the corporate exodus because
+of the high tax rates. Since 2019, at
+least 15 Fortune 500 companies have
+moved out of California, moved their
+headquarters out. Not to mention all the
+local franchises and everything that
+moved out. 2100 companies that are mid
+or large size have moved out of
+California since 2019. At least 5% of
+California jobs have been lost as these
+companies have moved out of the state.
+And this is the more important and crazy
+statistic. No one pays attention to
+this, but we are seeing an average
+annual exodus of 1 to one and a half% of
+personal income, meaning the AGI, the
+adjusted gross income. So people that
+earn money, about 1 to 1.5% of that
+income is leaving the state every year
+right now. That might not sound like a
+lot, but after 10 years, you've seen 15%
+of the state's income leave. And
+obviously with the new billionaire tax
+that's being proposed, we're going to
+see an acceleration as the numbers come
+out for 2025. There's, as we all know,
+personal friends that have left the
+state in 25 and many more that'll leave
+in 26, including our friend David Sachs.
+So there is a spiraling of a loss of
+revenue while there is a ballooning in
+costs. And this is fundamental to the
+spiraling problem that's occurring. So
+now in order to try and make more money,
+the state has to go further down. They
+can't just go to the corporates and the
+high net worth earners. They're now
+going to the average Californian. So,
+they're increasing sales tax rates this
+year by creating a new sales tax on
+software. So, if you buy Microsoft Word
+or you pay for your Gmail subscription
+or even your Chat GPT account, you have
+to pay an 8% sales tax on that this
+year. They're estimating that that sales
+tax is a brand new one. It'll generate
+about a billion dollars a year in
+incremental revenue for the state.
+They're also creating a new tax on
+healthcare insurance that corporates are
+going to have to pay that's ultimately
+going to pass down to the individual.
+That's going to create another $2
+billion a year in taxes on health
+insurance. The final thing that they
+did, which we all know about, is they
+made the temporary top income tax
+bracket permanent. So, you know, it was
+only meant to be a temporary to bridge a
+major budget deficit problem back in
+2012, 13.3%. And that became permanent
+and now it's increased to 14.4%.
+So, this is the spiraling that takes
+place. The costs are ballooning, the
+revenue is leaving, and now there's a
+scrambling underway in the state of
+California to try and make up this
+difference. And they're still falling
+short. In the out years, 2028 29, the
+projection is $40 billion a year in
+budget deficits every year. Now, looming
+over the state of California is the fact
+that there's this insane unaccounted
+debt problem. California already has
+$1.4 trillion in public debt. The state
+has 500 billion and the local
+governments have another, call it 800
+billion. The state has a reported $664
+billion in unfunded pension liabilities.
+That number by many estimates is closer
+to 1.5 trillion.
+And then there's a retirey healthcare
+obligation deficit of $175 billion. You
+add this all up, there's somewhere
+around 1.5 to2 trillion
+of incremental liabilities that the
+state has to come up with. And remember,
+all of those pension liabilities, that
+trillion dollar plus of pension
+liabilities sits senior to the bonds of
+the state of California because of
+something that's known as the California
+rule. So the state has this looming kind
+of cliff ahead of it and there's already
+this spiraling problem where they're
+increasing costs because of the demands
+of the unions and the cost of living and
+so on and there's an exodus of
+corporations and high netw worth
+individuals that pay the taxes. So, I
+would argue that Governor Nuomo did not
+exactly put a bow tie on the budget and
+create a balanced budget and leave
+California in a great state as he is
+wrapping up his final term and his final
+budget here in the state. But in fact, I
+think that this state, which, as I've
+said in the past, threatens to bring
+down the union, is on the brink of
+defaults that are going to be so
+significant that if the federal
+government was called in to bail them
+out because a state cannot declare
+bankruptcy legally, that all of the red
+states and all of the other taxpayers in
+the United States will say, "Why the
+hell should I pay federal taxes to bail
+out California?"
+And I think that's what the story will
+be over the next decade with the state
+the fiscal condition
+>> AOC and Mandami president vice president
+AOC Mandami can't be VP he wasn't born
+here
+>> I do predict yeah so I predict AOC will
+be president I mean obviously there's a
+lot of dispersion in what could happen
+here but I would say AOC would be my
+front runner based on the the movement
+for the extraordinary cost of living in
+the United States right now largely
+because of government spending
+>> the fact that people are seeing this
+wealth disparity those two things are
+going to continue to drive socialist
+movement over the next 24 months. And if
+AOC comes in and they bail out
+California and they federalize
+California's liabilities, you're going
+to see parts of this union, the red
+states as they're called, the Texas of
+the world, that are going to say, why
+should we be part of this union anymore?
+>> We don't want to pay for all of these
+liabilities that these blue states have
+accured and that we are now being asked
+to bail out. And that is where I think
+you face a crisis of the union in the
+years ahead.
+>> Okay.
+Sachs Texas
+the first Yeah. Yeah.
+>> In this scenario, I mean, it's pretty
+farfetched, but it's not farfetched that
+you would you would need a federal
+bailout to get California out of this in
+the next couple of years, and the
+government needs a bailout itself with
+the massive uh we're going to add two to
+three trillion dollars a year for the
+next couple years. So, go ahead,
+Shimothia.
+>> There's something that's going to
+happen. I think that Freeberg is right
+up until the point of the federal
+absorption. I think what'll happen is
+that you will wipe out the California
+pensions and you'll wipe out the pension
+obligations and you'll do some sort of
+negotiated settlement. And I think
+that's where you're going to have a
+wholesale replacement of the California
+Constitution.
+You'll have a complete redistricting. I
+think you will have a complete red wave
+in the state. and you will disassemble
+and dismantle
+everything that caused California to be
+so poorly run that got them to this
+place. So I I agree with David. All of
+the issues that he painted are it's
+unbelievable. By the way, there's an
+incredible tweet. I think her name is
+Joanna Ives. Maybe Nick, you can find
+it, but she compared the last eight
+years of Dantis versus JB Pritsker. And
+I asked my team, hey, can you create a
+table that actually adds Newsome to the
+list so that you can do the three-person
+comparison because it's quite staggering
+how broken these blue states have become
+and how they continue to try to spend
+their way out of what is being shown is
+just general incompetence. They're not
+good at managing. They're not good at
+running things. They're not good at
+delivering results. And unfortunately,
+until they feel the brunt of what
+mismanagement actually means, which is
+that all the people that have paid into
+this system, sadly and unfortunately and
+avoidably will be the ones that get
+punished, we will unfortunately not
+learn in California. Find this tweet and
+read it and you would just be shocked at
+how unbelievably good Dantis has been in
+running Florida and how unbelievably
+tragically bad JB Pritsker is. And then
+just ask your favorite AI, compare
+California
+on the spectrum of Florida versus
+Illinois. And what you'll find is
+California is even worse than Illinois
+in most of those comparisons.
+>> Sax, you want to uh give us the last
+word here?
+>> Yeah. I mean, I guess my decision to go
+to Texas is looking better and better.
+Yes.
+>> I mean, I said when this when this BTA
+thing, the so-called billionaire tax act
+was proposed
+>> and everyone was saying that's very low
+probability this happens. I was like, I
+don't really see why it would be low
+probability. I think it's going to get
+on the ballot. All you have to do is
+collect a certain number of signatures.
+It's not that hard. And then once it's
+on the ballot, I don't see why it
+wouldn't pass. And everyone's like, "No,
+no, no. Gavin Newsome has assured us
+that he'll kill it. He'll make some
+backroom deal, get rid of it." And on
+the day, the final day where BTA was
+going to be dropped from the ballot or
+not, Newsome came out with a video on X
+where he basically endorsed more taxes
+on billionaires. And this was right
+after the the DSA candidates won in New
+York. So, he sees the writing on the
+wall. He's not going to come out. By the
+way, the the problem with the
+billionaire tax is that if it does get
+passed and it isn't obiated by the three
+other ballot initiatives that actually
+negate it,
+you're going to have two or 300
+individual lawsuits that will take a
+decade to meander through the courts and
+ultimately I think a lot of people have
+standing here. And I just wonder what
+will they have proven at that point
+because it'll be a decade later. It'll
+be 2036
+and the California government will have
+had to spend billions of dollars on
+legal fees to to fight all these
+billionaires all all to end up losing at
+the Supreme Court. Anyways,
+>> by then they'll probably have like a
+federal wealth tax or something like
+that.
+>> The tragedy is that California at
+various points in recent history has had
+a surplus because of the massive tax
+base from Silicon Valley. They could
+have managed this. Their incompetence,
+their selfishness, and their corruption
+is what has caused this. They could
+have, if any state could have balanced
+its budget, it is California because of
+our massive tax receipts.
+>> There needs to be a hard landing. I
+really hope it doesn't result in the
+wipeout of these pensions. I think the
+pensioners should be extremely upset
+>> with California Democratic politics.
+Look, this idea that somehow things get
+bad enough where you get a red wave in
+super blue California and everything
+gets magically fixed, not going to
+happen. What's going to happen is a blue
+state's going to get bluer and
+>> that's right, socialism.
+>> The remedy for more and more socialism
+is going to be to intensify the
+socialism and there's going to be a
+giant final confiscation.
+>> Then we're going to deal with a
+California bankruptcy in the next 10
+years. And it is unfortunately
+>> No. and it will unfortunately result in
+a complete restructuring of those debt
+and obligations. And this is where I
+think you're going to wipe out a lot of
+these things that people are
+guaranteeing. I don't think you're going
+to see these pensions honored. If you
+just look at the budget per person, uh
+places like Texas and Florida spend
+about $5,000 per uh citizen on services.
+You know, if you divide the budget by
+the population, and then you look at New
+York City, it's close to $13,000. And
+you look at California, close to 9,000.
+And you simply do not get two or two and
+a half times or 2.x times the value
+living in those states in terms of
+services.
+>> The problems are all worse.
+>> And it's competence. Yes, it's worse.
+And it really the more you look to that
+state government to solve your problems,
+the more problems you will have in Texas
+if you got a
+just seems these blue states attract
+these derelict incompetent people. I
+mean, unbelievable. Incompetence.
+They're so incompetent. My god. This has
+to do with competence. And it also is
+the populace being self-reliant. If you
+live in Texas,
+>> when you get your ranch, they say, hey,
+>> you know, here's your ranch. And then
+it's up to you to figure out, hey, who's
+going to pick up my garbage? And oh, do
+I want a well? Do I want to use a city
+water? What's my energy situation going
+to be? And people make these kind of
+thoughtful decisions with us. They don't
+look to the state for every single
+handout or handholding. There's a
+ruggedness and a rugged individualism
+and self-reliance that makes the state
+not have to tax everybody to 54 60 65%.
+I guarantee you Freedber and Shimoth you
+will be paying 60 to 65% tax if you stay
+in California. And I tell you New York
+it's at 54 right now. I guarantee you it
+breaks 60 by the or it will be proposed
+to break 50. We'll see if they stop it
+by the end of Mandami's reign in my
+hometown.
+>> Look, let me let me tell you what
+leftism is, okay? It's basically just
+people trying to string together words
+to justify taking your money, okay? And
+they'll they're just experimenting. It's
+like monkeys typing on a keyboard with
+words to try and hack everyone's brains
+to basically figure out how to steal all
+of their money. And some of those words
+are virtue signaling. Some of them are
+guilt, tripping, and moral accusations.
+>> Whatever it is, there's always some new
+words.
+>> But it's never to solve a problem. In
+fact, all the problems just get worse.
+>> It's just to figure out how to separate
+you from your money. And I had this
+>> thought when I saw that like McKenzie
+Bezos, you know, just giving away like
+>> 26 billion uh 26 billion of Jeff Bezos's
+money to all these leftwing causes. Hey,
+she earned it too.
+>> And well, but putting that aside, she
+gave away all this money. I'm like, "Oh,
+okay. So now, like world hunger is
+fixed, right?" Because remember how they
+told us that it was because of Elon's
+Musk re that he refused to hand over, he
+didn't fork over a big chunk of his
+money. And with that money, we could
+have fed the whole world and solved
+world hunger. So why isn't the problem
+solved now that she just donated 26
+billion? That's what they said Elon
+needed to do to solve world hunger. They
+always treat your money as if it belongs
+to them or it belongs to the government
+and it's your greed and selfishness
+that's creating all these problems. None
+of these problems have been fixed.
+What's the proof that any of that money
+did anything? All it did was go to line
+the pockets of all these leftist NOS's
+and you know buy them more houses or or
+pay them
+>> better off investing in oh no problems
+companies if if literally I I hate to
+break this news. What does the poly
+market say on Gavin's chances of uh
+>> Oh, he's down to becoming He's
+plummeting. He's plummeting.
+>> Yeah, Gavin's down to 20. He peaked at
+40.
+>> That's quite high, though.
+>> I I I mean, I think people are real
+realizing it's a great haircut and uh
+you know, a really smooth talker, but
+just like he stole other things in his
+life, he's going to steal your money.
+Period. Full stop. I'm not going to get
+into detail. I think he's lowering these
+polls because the Democratic party is
+moving left is moving to the TSA and
+people think he's too moderate
+>> is going up and this John Oaf guys come
+out of nowhere. They're all to the left
+of Gavin Newsome's
+problem and this is why he put out that
+video on the day that he was supposed to
+kill the BTA. He puts out a a video
+endorsing billionaire taxes is because
+he needs to position himself to being
+more DSA adjacent. Well, to be fair to
+Newsome, he also on the same day said
+he's against the billionaire tax act and
+he's voting against it. This was his
+hedging video, which is to to kind of
+zoom out his policy on, hey, this BTA
+doesn't make sense. But I do agree we
+need more taxation, I think, was kind of
+the intent. Also, he failed he failed to
+kill BTA. Everyone thought all these
+California billionaires and these chat
+groups thought Nome would be their
+savior.
+>> That's right.
+>> And that was a big mistake.
+>> What's it like, Sax? What's it like in
+that group chat? Tell us about that
+group chat.
+>> What's it like in there? What's the
+meme? What's the meme like in there in
+the billionaire group chat? Go ahead.
+>> I It's It's 8:06 p.m. here. I have a
+meeting I have to go to. I want to say I
+love you and I miss all of you.
+>> And I want to say
+>> a huge happy birthday to the most
+incredible country in the world.
+>> I could not have imagined my life being
+any better in any place. I feel so
+blessed and so lucky to be an American.
+>> I feel so thankful. I feel so grateful.
+It really is the best country in the
+world.
+>> We have to fight for it.
+>> Yeah. We have to fight for it.
+>> Fight for it.
+>> Yeah. And on behalf of those of us
+>> Happy birthday, America.
+>> Happy birthday. And for those of us who
+have been here for seven generations,
+>> we think you're doing a good job. We're
+going to let you stay here. We're going
+to let you stay on behalf.
+>> How can we take away your citizenship?
+That's what I want is a law where we can
+revoke JL citizenship.
+>> Citizenship, I've been here
+>> which the four of us should be deported.
+I think you would lose. [laughter]
+>> Oh no.
+>> We'll find some constitutional loophole.
+>> Enemy Aliens Act.
+>> Bye, Jason. [laughter]
+>> All right, feel free. On that note,
+happy birthday, America. And uh 250 more
+great ones. Best country in the world.
+Give a you think democratic
+socialist commie scumbags. All right,
+we'll see you next time. Bye-bye. Love
+you. Bye-bye.
+>> [music]
+>> Let your winners ride.
+>> Rainman David
+and it said we open sourced it to the
+fans and they've [music] just gone crazy
+with it. Love you queen of
+>> besties are
+my dog taking notice your driveways.
+Oh man, my habitasher will meet me up.
+>> We should all just get a room and just
+have one big huge orgy cuz they're all
+just It's like [music] this like sexual
+tension that we just need to release
+somehow.
+>> Your feet.
+[laughter]
+We need to get mercy.
+>> I'm going
+[music]
+[music]
+all in.

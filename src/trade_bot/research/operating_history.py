@@ -26,7 +26,9 @@ from trade_bot.research.news_monitor import NewsMonitorRun
 from trade_bot.research.regime_instability import build_regime_instability_index
 from trade_bot.research.trade_decision import TradeDecisionRun
 
-DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY = "drawdown_managed_dual_momentum"
+DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY = (
+    "i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145"
+)
 DEFAULT_OPERATING_HISTORY_SOURCE = "reconstructed_price_fast_point_in_time"
 DEFAULT_OPERATING_HISTORY_NOTE = (
     "Reconstructed by truncating local prices and strategy outputs at the history date. "
