@@ -1,6 +1,6 @@
 # Trade Bot System Whitepaper
 
-Status: canonical overview. Last reviewed: 2026-07-15.
+Status: canonical overview. Last reviewed: 2026-07-16.
 
 ## Executive Summary
 
@@ -107,7 +107,7 @@ The main components are:
 | Component | Purpose |
 | --- | --- |
 | Data intake | Loads market prices, macro series, curated events, and news/context into local caches. |
-| Current-state engine | Builds the daily market read: risk status, confirmation matrix, regime pulse, scenarios, drivers, and current posture. |
+| Current-state engine | Builds the daily market read: risk status, confirmation matrix, 0M regime pulse/instability nowcasts, scenarios, drivers, and current posture. |
 | Strategy engine | Constructs target weights for baselines, research candidates, and selected operating systems. |
 | Backtest engine | Applies execution lag, rebalance cadence, transaction costs, target weights, and equity compounding. |
 | Risk engine | Applies scenario-aware sizing, expected shortfall, stress loss, factor exposure, concentration checks, and defensive floors. |
@@ -359,6 +359,31 @@ looked similar? The benefit is not automatic strategy switching. The benefit is
 knowing whether current scenario context historically improved candidate
 preference, whether the advantage appears only at longer horizons, and whether a
 blend is safer than a single winner.
+
+The tenth layer is the Scenario / Phase Frontier, also called the Speculative
+Cycle Tracker. This layer addresses a narrower question raised by the current
+AI/growth leadership debate: if the market is in a speculative cycle, what phase
+does it most resemble now, what phases are plausible over 1-month to 1-year
+horizons, and which assets historically behaved better after similar prior-only
+phase reads? The phase taxonomy includes normal cycle, acceleration, pre-break,
+early unwind, liquidation, bottoming, recovery, and post-unwind compounding.
+This is not a crash timer and it is not an allocation override. It is a
+research/watch layer that organizes evidence about phase risk and possible
+post-unwind winners.
+
+The Cycle Tracker has strict leakage controls. Each historical origin rebuilds
+phase features only from prices available through that date, then evaluates
+forward returns starting on the next trading session. Current scenario
+probabilities can shape the current horizon frontier, but historical validation
+does not apply today's scenario state to past origins. The module writes
+artifact CSVs and DuckDB tables for phase probabilities, horizon phase
+frontiers, evidence components, current-phase conditional candidate scores,
+phase-by-horizon winner shelves, and prior-only validation metrics. The winner
+shelf is deliberately conditional: it lets a user inspect candidates for
+acceleration, pre-break, unwind, liquidation, bottoming, recovery, or
+post-unwind compounding instead of pretending that one deterministic future
+state is known today. V2 Research reads those persisted outputs rather than
+running the expensive validation in the dashboard.
 
 Simulation validation is now treated as its own test family rather than a visual
 nice-to-have. The rolling-origin simulation test chooses historical origin dates,

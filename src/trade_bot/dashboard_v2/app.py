@@ -33,7 +33,7 @@ from trade_bot.dashboard_v2.session_state import DEFAULT_ROUTE_KEY, route_state_
 from trade_bot.dashboard_v2.styles import install_v2_styles
 from trade_bot.DEFAULTS import DEFAULT_MONITORING_COHORT_START_DATE, DEFAULT_MONITORING_TOP_N
 
-st.set_page_config(page_title="Trade Bot Dashboard V2", layout="wide")
+st.set_page_config(page_title="Trade Bot Dashboard", layout="wide")
 _install_dashboard_styles()
 install_v2_styles()
 st.session_state["dashboard_v2_perf_samples"] = []
@@ -53,14 +53,14 @@ st.markdown(
             <span class="v2-chip">Snapshot first</span>
             <span class="v2-chip">DuckDB backed</span>
             <span class="v2-chip">Heavy work gated</span>
-            <span class="v2-chip">V1 intact</span>
+            <span class="v2-chip">Primary UI</span>
         </div>
     </div>
     """,
     unsafe_allow_html=True,
 )
 
-st.sidebar.markdown("### Dashboard V2")
+st.sidebar.markdown("### Dashboard")
 run_source = st.sidebar.radio(
     "Run source",
     ["Latest snapshot (fast)", "Selected snapshot", "Live pipeline"],

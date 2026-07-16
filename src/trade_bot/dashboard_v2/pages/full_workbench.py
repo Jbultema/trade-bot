@@ -12,7 +12,7 @@ from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
 
 def render_risk_scenarios_page(runtime: DashboardRuntime) -> None:
     render_callout(
-        "Risk & Scenarios is using the legacy renderer in V2. It reads snapshot data and saved trend tables.",
+        "Risk & Scenarios is using the full renderer in V2. It reads snapshot data and saved trend tables.",
         heavy=True,
     )
     _render_risk_and_scenarios(
@@ -25,7 +25,7 @@ def render_risk_scenarios_page(runtime: DashboardRuntime) -> None:
 
 def render_news_macro_page(runtime: DashboardRuntime) -> None:
     render_callout(
-        "News & Macro is using the legacy renderer in V2. Narrative and macro diagnostics are artifact-backed.",
+        "News & Macro is using the full renderer in V2. Narrative and macro diagnostics are artifact-backed.",
         heavy=True,
     )
     _render_news_and_macro(
@@ -38,7 +38,7 @@ def render_news_macro_page(runtime: DashboardRuntime) -> None:
 
 def render_launch_page(runtime: DashboardRuntime) -> None:
     render_callout(
-        "Launch Lab is compatibility-rendered. Internal view pickers gate the heavier aggregate reads.",
+        "Launch Lab uses the full workbench renderer. Internal view pickers gate the heavier aggregate reads.",
         heavy=True,
     )
     _render_launch_lab(
@@ -64,4 +64,3 @@ def render_forward_test_page(runtime: DashboardRuntime) -> None:
         bot_config=runtime.bot_config,
         warehouse_path=str(runtime.paths.run_store_path),
     )
-

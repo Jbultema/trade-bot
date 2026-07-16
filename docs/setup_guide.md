@@ -501,6 +501,12 @@ Use another port:
 poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
 ```
 
+The archived V1 dashboard is available only when you need comparison/debugging:
+
+```bash
+poetry run trade-bot run-dashboard-v1
+```
+
 ### Dashboard is stale
 
 Run:

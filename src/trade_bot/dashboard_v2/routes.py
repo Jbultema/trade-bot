@@ -20,7 +20,7 @@ class DashboardRoute:
 
 def routes() -> tuple[DashboardRoute, ...]:
     from trade_bot.dashboard_v2.pages.command_center import render_today_page
-    from trade_bot.dashboard_v2.pages.legacy import (
+    from trade_bot.dashboard_v2.pages.full_workbench import (
         render_forward_test_page,
         render_launch_page,
         render_performance_page,
@@ -69,7 +69,7 @@ def routes() -> tuple[DashboardRoute, ...]:
             title="Research",
             question="Which candidates still deserve belief?",
             runtime="Fast by default",
-            runtime_note="Loads scorecard summaries first; legacy workbench and raw artifacts are gated.",
+            runtime_note="Loads scorecard summaries first; full workbench and raw artifacts are gated.",
             render=render_research_page,
         ),
         DashboardRoute(

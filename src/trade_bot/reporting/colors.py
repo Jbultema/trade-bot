@@ -3,18 +3,18 @@ from __future__ import annotations
 from collections.abc import Iterable, Mapping
 
 SERIES_COLOR_SEQUENCE: tuple[str, ...] = (
-    "#2563eb",
-    "#10b981",
     "#f97316",
-    "#ec4899",
     "#8b5cf6",
-    "#06b6d4",
-    "#84cc16",
+    "#ec4899",
+    "#0f766e",
+    "#dc2626",
     "#f59e0b",
-    "#ef4444",
-    "#14b8a6",
+    "#0891b2",
+    "#84cc16",
     "#a855f7",
     "#64748b",
+    "#2563eb",
+    "#10b981",
 )
 
 PREFERRED_SERIES_COLORS: dict[str, str] = {

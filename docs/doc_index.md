@@ -1,6 +1,6 @@
 # Documentation Index
 
-Status: canonical navigation. Last reviewed: 2026-07-06.
+Status: canonical navigation. Last reviewed: 2026-07-16.
 
 Use this file to decide which docs are current operating references and which
 ones are historical research notes. When a doc captures a dated plan or
@@ -25,6 +25,7 @@ like live system behavior.
 | `docs/forward_testing_protocol.md` | Paper/live ticket workflow and scaling gates | Update when journal, ticket, or monitoring workflows change. |
 | `docs/ml_research_framework.md` | Classical ML/Bayesian seams, cadence, validation gates | Update when ML moves from research-only to operating recommendations. |
 | `docs/taxable_account_framework.md` | Estimated taxable brokerage model, after-tax research semantics, tax lots, wash-sale checks, and TLH candidates | Update when account-aware scoring, tax-lot logic, dashboard tax views, or taxable assumptions change. |
+| `docs/cycle_tracker_design.md` | Scenario/phase frontier and speculative-cycle tracker design, leakage controls, artifact contract, and UI placement | Update when phase taxonomy, validation rules, persistence, or V2 Cycle Tracker UI changes. |
 
 ## Maintained Research Notes
 

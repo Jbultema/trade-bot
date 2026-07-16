@@ -15,6 +15,8 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.features.indicators import daily_returns
 
+NOWCAST_CLASSIFICATION_HORIZON = "0m"
+
 
 def build_regime_instability_index(
     prices: pd.DataFrame,
@@ -68,6 +70,7 @@ def build_regime_instability_index(
         [
             {
                 "market_date": str(clean.index.max().date()),
+                "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
                 "regime_instability_score": score,
                 "regime_instability_state": _instability_state(score),
                 "regime_instability_read": _instability_read(score),
@@ -92,6 +95,7 @@ def _large_move_component(returns: pd.Series, *, window: int) -> dict[str, objec
     score = _blend_score(percentile, absolute_score)
     return {
         "component": f"large_move_share_{window}d",
+        "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
         "component_score": score,
         "latest_value": latest,
         "latest_percentile": percentile,
@@ -115,6 +119,7 @@ def _realized_vol_component(returns: pd.Series, *, window: int) -> dict[str, obj
     score = _blend_score(percentile, absolute_score)
     return {
         "component": f"realized_vol_{window}d",
+        "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
         "component_score": score,
         "latest_value": latest,
         "latest_percentile": percentile,
@@ -135,6 +140,7 @@ def _cross_section_dispersion_component(returns: pd.DataFrame) -> dict[str, obje
     score = _blend_score(percentile, absolute_score)
     return {
         "component": "cross_section_dispersion_21d",
+        "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
         "component_score": score,
         "latest_value": latest,
         "latest_percentile": percentile,
@@ -156,6 +162,7 @@ def _vol_proxy_component(clean: pd.DataFrame, returns: pd.DataFrame) -> dict[str
     score = _blend_score(percentile, absolute_score)
     return {
         "component": "volatility_proxy_pressure",
+        "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
         "component_score": score,
         "latest_value": latest,
         "latest_percentile": percentile,
@@ -176,6 +183,7 @@ def _correlation_shift_component(returns: pd.DataFrame) -> dict[str, object]:
     score = float(np.clip((latest_shift + 0.15) / 0.45, 0.0, 1.0)) if pd.notna(latest_shift) else np.nan
     return {
         "component": "correlation_shift_21d_vs_126d",
+        "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
         "component_score": score,
         "latest_value": latest_shift,
         "latest_percentile": _percentile_rank(shift),
@@ -206,6 +214,7 @@ def _breadth_concentration_component(clean: pd.DataFrame) -> dict[str, object]:
     score = float(np.nanmean(scores))
     return {
         "component": "breadth_concentration_pressure",
+        "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
         "component_score": score,
         "latest_value": score,
         "latest_percentile": score,
@@ -222,6 +231,7 @@ def _credit_stress_component(clean: pd.DataFrame) -> dict[str, object]:
     score = 1.0 - _percentile_rank(credit)
     return {
         "component": "credit_stress_pressure",
+        "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
         "component_score": score,
         "latest_value": _latest(credit),
         "latest_percentile": score,

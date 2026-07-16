@@ -87,6 +87,7 @@ def test_equity_drawdown_figure_keeps_series_colors_aligned() -> None:
     assert figure.data[2].line.color == figure.data[3].line.color
     assert figure.data[2].legendgroup == figure.data[3].legendgroup == "custom_strategy"
     assert figure.data[0].line.color != figure.data[2].line.color
+    assert figure.data[2].line.color == "#f97316"
 
 
 def test_window_performance_stats_exclude_pre_window_boundary_return() -> None:

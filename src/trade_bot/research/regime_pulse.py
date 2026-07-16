@@ -5,6 +5,8 @@ from dataclasses import dataclass
 import numpy as np
 import pandas as pd
 
+NOWCAST_CLASSIFICATION_HORIZON = "0m"
+
 
 @dataclass(frozen=True)
 class RegimePulseDefinition:
@@ -55,6 +57,7 @@ def build_regime_pulse_asset_table(cycles: pd.DataFrame) -> pd.DataFrame:
         rows.append(
             {
                 "asset_class": asset,
+                "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
                 "regime_pulse_score": score,
                 "regime_pulse_read": _asset_read(score),
                 "top_tailwind": top_tailwind,
@@ -83,6 +86,7 @@ def build_growth_inflation_map(cycles: pd.DataFrame) -> pd.DataFrame:
         rows.append(
             {
                 "regime": regime,
+                "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
                 "probability": probability,
                 "growth_impulse": growth,
                 "inflation_impulse": inflation,
@@ -188,6 +192,7 @@ def _cycle_row(definition: RegimePulseDefinition, macro_signals: pd.DataFrame) -
     tailwind_score = -pressure_score if pd.notna(pressure_score) else np.nan
     row = {
         "cycle": definition.cycle,
+        "classification_horizon": NOWCAST_CLASSIFICATION_HORIZON,
         "horizon": definition.horizon,
         "series_count": usable,
         "source_categories": pressure_groups,

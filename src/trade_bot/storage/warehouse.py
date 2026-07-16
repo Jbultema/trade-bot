@@ -1106,6 +1106,104 @@ class TradingWarehouse:
             params,
         )
 
+    def save_cycle_tracker_run(
+        self,
+        *,
+        snapshot_run_id: str,
+        market_date: str,
+        output_dir: str,
+        horizons: str,
+        min_train_days: int,
+        origin_step_days: int,
+        phase_probabilities: pd.DataFrame,
+        transition_forecast: pd.DataFrame,
+        evidence: pd.DataFrame,
+        candidate_scores: pd.DataFrame,
+        phase_candidate_frontier: pd.DataFrame,
+        validation_metrics: pd.DataFrame,
+        readout: str,
+    ) -> str:
+        cycle_run_id = _new_cycle_run_id()
+        created_at_utc = utc_now_iso()
+        dominant_phase = ""
+        dominant_probability = float("nan")
+        if not phase_probabilities.empty and "probability" in phase_probabilities:
+            top_row = phase_probabilities.sort_values("probability", ascending=False).iloc[0]
+            dominant_phase = str(top_row.get("phase", ""))
+            dominant_probability = _optional_float(top_row.get("probability")) or float("nan")
+        run_record = pd.DataFrame(
+            [
+                {
+                    "cycle_run_id": cycle_run_id,
+                    "created_at_utc": created_at_utc,
+                    "snapshot_run_id": snapshot_run_id,
+                    "market_date": market_date,
+                    "output_dir": output_dir,
+                    "horizons": horizons,
+                    "min_train_days": int(min_train_days),
+                    "origin_step_days": int(origin_step_days),
+                    "dominant_phase": dominant_phase,
+                    "dominant_phase_probability": dominant_probability,
+                    "candidate_rows": int(len(candidate_scores)),
+                    "frontier_rows": int(len(phase_candidate_frontier)),
+                    "validation_rows": int(len(validation_metrics)),
+                    "readout": readout,
+                }
+            ]
+        )
+        self._upsert_frame("cycle_tracker_runs", run_record, "cycle_run_id")
+
+        if not phase_probabilities.empty:
+            frame = phase_probabilities.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "phase", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_phase_probabilities", frame, "metric_id")
+        if not transition_forecast.empty:
+            frame = transition_forecast.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "forecast", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_transition_forecast", frame, "metric_id")
+        if not evidence.empty:
+            frame = evidence.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "evidence", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_evidence", frame, "metric_id")
+        if not candidate_scores.empty:
+            frame = candidate_scores.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "candidate", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_candidate_scores", frame, "metric_id")
+        if not phase_candidate_frontier.empty:
+            frame = phase_candidate_frontier.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "frontier", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_phase_candidate_frontier", frame, "metric_id")
+        if not validation_metrics.empty:
+            frame = validation_metrics.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "validation", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_validation_metrics", frame, "metric_id")
+        return cycle_run_id
+
+    def cycle_tracker_runs(self, *, limit: int = 10) -> pd.DataFrame:
+        if not self.table_exists("cycle_tracker_runs"):
+            return pd.DataFrame()
+        return self._query(
+            """
+            SELECT *
+            FROM cycle_tracker_runs
+            ORDER BY created_at_utc DESC
+            LIMIT ?
+            """,
+            [limit],
+        )
+
     def _monitoring_runtime_results(
         self,
         baseline_run: Any,
@@ -1774,6 +1872,161 @@ class TradingWarehouse:
             )
             connection.execute(
                 """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_runs (
+                    cycle_run_id VARCHAR PRIMARY KEY,
+                    created_at_utc VARCHAR NOT NULL,
+                    snapshot_run_id VARCHAR NOT NULL,
+                    market_date VARCHAR NOT NULL,
+                    output_dir VARCHAR NOT NULL,
+                    horizons VARCHAR NOT NULL,
+                    min_train_days INTEGER NOT NULL,
+                    origin_step_days INTEGER NOT NULL,
+                    dominant_phase VARCHAR NOT NULL,
+                    dominant_phase_probability DOUBLE,
+                    candidate_rows INTEGER NOT NULL,
+                    frontier_rows INTEGER DEFAULT 0,
+                    validation_rows INTEGER NOT NULL,
+                    readout VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_phase_probabilities (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    as_of_date VARCHAR,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    phase VARCHAR NOT NULL,
+                    probability DOUBLE,
+                    dominant_phase VARCHAR NOT NULL,
+                    source VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_transition_forecast (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    phase VARCHAR NOT NULL,
+                    probability DOUBLE,
+                    dominant_phase VARCHAR NOT NULL,
+                    source VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_evidence (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    as_of_date VARCHAR,
+                    component VARCHAR NOT NULL,
+                    component_score DOUBLE,
+                    state VARCHAR NOT NULL,
+                    latest_value DOUBLE,
+                    interpretation VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_candidate_scores (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    ticker VARCHAR NOT NULL,
+                    asset_role VARCHAR NOT NULL,
+                    current_phase VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    candidate_score DOUBLE,
+                    candidate_role VARCHAR NOT NULL,
+                    current_momentum_21d DOUBLE,
+                    current_momentum_63d DOUBLE,
+                    current_drawdown_252d DOUBLE,
+                    phase_forward_median_return DOUBLE,
+                    phase_median_excess_vs_spy DOUBLE,
+                    phase_median_excess_vs_qqq DOUBLE,
+                    phase_hit_rate_vs_qqq DOUBLE,
+                    phase_median_forward_drawdown DOUBLE,
+                    phase_origins INTEGER,
+                    interpretation VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_phase_candidate_frontier (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    as_of_date VARCHAR,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    phase VARCHAR NOT NULL,
+                    phase_probability DOUBLE,
+                    ticker VARCHAR NOT NULL,
+                    asset_role VARCHAR NOT NULL,
+                    frontier_score DOUBLE,
+                    frontier_role VARCHAR NOT NULL,
+                    current_momentum_21d DOUBLE,
+                    current_momentum_63d DOUBLE,
+                    current_drawdown_252d DOUBLE,
+                    median_forward_return DOUBLE,
+                    median_excess_vs_spy DOUBLE,
+                    median_excess_vs_qqq DOUBLE,
+                    hit_rate_vs_qqq DOUBLE,
+                    median_forward_drawdown DOUBLE,
+                    origins INTEGER,
+                    interpretation VARCHAR NOT NULL,
+                    rank INTEGER
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_validation_metrics (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    dominant_phase VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    ticker VARCHAR NOT NULL,
+                    asset_role VARCHAR NOT NULL,
+                    origins INTEGER,
+                    median_forward_return DOUBLE,
+                    mean_forward_return DOUBLE,
+                    median_forward_drawdown DOUBLE,
+                    worst_forward_drawdown DOUBLE,
+                    median_excess_vs_spy DOUBLE,
+                    median_excess_vs_qqq DOUBLE,
+                    median_excess_vs_bil DOUBLE,
+                    hit_rate_vs_spy DOUBLE,
+                    hit_rate_vs_qqq DOUBLE,
+                    hit_rate_vs_bil DOUBLE,
+                    severe_drawdown_rate DOUBLE,
+                    phase_rank_score DOUBLE
+                )
+                """
+            )
+            self._ensure_table_columns(
+                connection,
+                "cycle_tracker_runs",
+                {
+                    "frontier_rows": "INTEGER DEFAULT 0",
+                },
+            )
+            connection.execute(
+                """
                 CREATE TABLE IF NOT EXISTS external_macro_videos (
                     video_id VARCHAR PRIMARY KEY,
                     source VARCHAR NOT NULL,
@@ -2255,6 +2508,15 @@ def _forward_status(row: pd.Series) -> str:
 def _new_validation_run_id() -> str:
     timestamp = utc_now_iso().replace("+00:00", "Z").replace(":", "").replace("-", "")
     return f"simval-{timestamp}-{uuid.uuid4().hex[:8]}"
+
+
+def _new_cycle_run_id() -> str:
+    timestamp = utc_now_iso().replace("+00:00", "Z").replace(":", "").replace("-", "")
+    return f"cycle-{timestamp}-{uuid.uuid4().hex[:8]}"
+
+
+def _metric_ids(run_id: str, scope: str, count: int) -> list[str]:
+    return [f"{run_id}:{scope}:{index:06d}" for index in range(int(count))]
 
 
 def _simulation_validation_summary_metric_row(

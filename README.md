@@ -150,17 +150,21 @@ Then open `http://localhost:8501`.
 
 Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. Use `Live pipeline` only when you intentionally want the dashboard open to recompute the full pipeline.
 
-Dashboard V2 is available for review on the refactor branch. It keeps the same
-local snapshots, DuckDB warehouse, and research artifacts, but reorganizes the
-UI into summary-first workbenches so Research, Simulation, and Monitoring do
-not load deep diagnostics until requested:
+The primary dashboard is the V2 workbench. It keeps the same local snapshots,
+DuckDB warehouse, and research artifacts, but reorganizes the UI into
+summary-first workbenches so Research, Simulation, and Monitoring do not load
+deep diagnostics until requested:
 
 ```bash
-poetry run trade-bot run-dashboard-v2
+poetry run trade-bot run-dashboard
 ```
 
-Then open `http://localhost:8502`. V1 remains available through
-`run-dashboard` while V2 is tested.
+Then open `http://localhost:8501`. The old V1 dashboard is archived for
+comparison/debugging only:
+
+```bash
+poetry run trade-bot run-dashboard-v1
+```
 
 ## Daily Operating Loop
 
@@ -177,12 +181,6 @@ Daily command:
 ```bash
 poetry run trade-bot run-daily-update
 poetry run trade-bot run-dashboard
-```
-
-To review the faster V2 workbench instead:
-
-```bash
-poetry run trade-bot run-dashboard-v2
 ```
 
 Stop the managed dashboard with:
@@ -245,7 +243,7 @@ flowchart TD
 | Command Center | Current-state trade decision | What is the target posture, and which tickers are affected? |
 | Risk & Scenarios | Off-ramp and sizing discipline | Are factor risk, stress loss, scenarios, or expected shortfall forcing lower risk? |
 | Simulation Lab | Future-state and path-risk simulation | What could the future range look like for a selected strategy under deterministic, bootstrap, and scenario-conditioned models? |
-| Research Lab | Strategy research and diagnostics | Which approaches worked, why, and across which windows/regimes? Includes **Taxable Impact** for after-tax survivability. |
+| Research Lab | Strategy research and diagnostics | Which approaches worked, why, across which windows/regimes, and under which speculative-cycle phase? Includes **Cycle Tracker** and **Taxable Impact** for after-tax survivability. |
 | Monitoring | Champion/challenger forward paper testing | Which monitored systems are ahead, lagging, or in drawdown review? |
 | News & Macro | Narrative and macro source review | What news or macro pressure is active, stale, or missing? |
 | Performance | Backtest and selected-window charts | Did the approach work recently and through transitions? |
@@ -303,6 +301,8 @@ map materially changes the simple CAGR story.
 Use this for strategy research, not same-day execution. The Research Lab is split into two layers: an upper aggregate section for cross-experiment comparisons and a lower candidate deep-dive for one selected strategy.
 
 The upper aggregate section includes the overview, leaderboard, curated shelf, outcome frontier, signal evidence, family map, taxable impact, validation/QC, and manifests. Default aggregate views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants remain available through explicit all-approach filters.
+
+The **Cycle Tracker** tab is the Scenario / Phase Frontier. Refresh it with `poetry run trade-bot run-cycle-tracker` when you want the current speculative-cycle phase read, horizon phase probabilities, current-phase conditional candidates, phase-by-horizon winner shelves, and prior-only validation metrics. It is a research/watch layer, not a crash timer or allocation override.
 
 The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart. Outcome Frontier shows the configured accumulation assumptions and deterministic wealth math for aggregate tradeoff comparison; open **Simulation Lab** for historical bootstrap and regime-conditioned forward path distributions.
 

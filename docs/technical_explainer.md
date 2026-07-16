@@ -1,6 +1,6 @@
 # Trade Bot Technical Explainer
 
-Status: canonical technical reference. Last reviewed: 2026-07-05.
+Status: canonical technical reference. Last reviewed: 2026-07-16.
 
 This document explains how the major pieces of Trade Bot work behind the scenes.
 It is intended for developers, reviewers, and technical users who need to answer:
@@ -20,6 +20,7 @@ Trade Bot is a local Python application with these main layers:
 | Current state | `research/current_state.py` | Builds market health, momentum state, confirmation matrix, macro state, scenarios, and regime diagnostics. |
 | Risk and sizing | `portfolio/risk.py`, `research/trade_decision.py` | Converts scenarios and constraints into target posture and position deltas. |
 | Research scoring | `research/validation.py`, `research/strategy_outcome_utility.py`, `research/curation.py` | Scores candidates for robustness, outcome utility, and monitoring readiness. |
+| Cycle tracking | `research/cycle_tracker.py` | Builds speculative-cycle phase nowcasts, horizon phase frontiers, conditional candidate scores, and prior-only validation artifacts. |
 | Monitoring/journal | `storage/warehouse.py`, `trading/journal.py`, `trading/book_alignment.py` | Stores paper windows, valuations, tickets, executions, and book alignment. |
 | Dashboard | `dashboard/*.py` | Streamlit UI over snapshots, warehouse tables, and research artifacts. |
 | CLI | `cli.py` | Operational commands for daily updates, snapshots, experiments, ML, monitoring, and valuation. |
@@ -177,6 +178,70 @@ and macro state. The scenario buckets include states such as:
 
 The scenario output is used by `trade_decision.py` to shape risk budget and
 target posture. It does not directly forecast exact prices.
+
+## Scenario / Phase Frontier
+
+`research/cycle_tracker.py` builds the Speculative Cycle Tracker. It is a
+batch-backed research/watch layer for markets where speculative leadership,
+liquidity, and unwind risk matter. It translates price-observable evidence into
+0M nowcast phase probabilities, then blends the current phase read with the
+current scenario lattice to create forward horizon phase frontiers.
+
+The phase taxonomy is:
+
+- normal cycle,
+- acceleration,
+- pre-break,
+- early unwind,
+- liquidation,
+- bottoming,
+- recovery,
+- post-unwind compounding.
+
+The tracker uses price-available features such as growth leadership
+acceleration, narrow leadership pressure, breadth improvement, credit pressure,
+volatility pressure, large-move share, QQQ/semiconductor unwind pressure, deep
+drawdown, short reversal, and broad trend. The 0M row is the current phase
+classification only; current scenario probabilities can affect today's 1-month,
+3-month, 6-month, and 1-year phase frontier. Historical validation does not use
+current scenario probabilities at old origins.
+
+The candidate layer has two surfaces. `cycle_candidate_scores.csv` ranks assets
+for the current dominant phase. `cycle_phase_candidate_frontier.csv` ranks
+assets for every available phase/horizon pair so a user can ask, "if
+liquidation, bottoming, recovery, or renewed acceleration dominates this
+horizon, what historically worked better in similar prior states?" Those
+frontier scores combine prior-only validation metrics with current momentum,
+drawdown, phase fit, and current phase probability. They are an inspection
+shelf, not optimized portfolio weights.
+
+The leakage rule is explicit: at each historical origin the feature snapshot is
+built from prices through that origin only, and the evaluated return window
+starts on the next trading session. This prevents the tracker from using future
+price data to classify the phase being validated.
+
+Run:
+
+```bash
+poetry run trade-bot run-cycle-tracker
+```
+
+The command writes artifact CSVs under `reports/cycle_tracker/` and persists
+summary tables to DuckDB:
+
+- `cycle_tracker_runs`,
+- `cycle_tracker_phase_probabilities`,
+- `cycle_tracker_transition_forecast`,
+- `cycle_tracker_evidence`,
+- `cycle_tracker_candidate_scores`,
+- `cycle_tracker_phase_candidate_frontier`,
+- `cycle_tracker_validation_metrics`.
+
+Dashboard V2 reads these persisted outputs in Research -> Cycle Tracker. The
+dashboard should not run the cycle tracker validation directly on cold start.
+Use the output to understand current phase risk, plausible next phases, and
+conditional winner candidates under similar historical phase reads. Do not use
+it as an exact bubble-top timer or a standalone allocation override.
 
 ## Trade Decision
 
@@ -550,7 +615,7 @@ The system uses local storage:
 
 ## Dashboard Structure
 
-The legacy dashboard is split into:
+The archived V1 dashboard is split into:
 
 - app shell and sidebar: `dashboard/app.py`,
 - top overview: `dashboard/overview.py`,
@@ -562,10 +627,7 @@ The legacy dashboard is split into:
 - explanations: `dashboard/metric_explainers.py` and
   `dashboard/ticket_explainers.py`.
 
-The dashboard should read snapshots and warehouse outputs; expensive research
-jobs should run through CLI commands.
-
-Dashboard V2 adds a parallel summary-first shell under `dashboard_v2/`. It does
+The primary dashboard is the summary-first shell under `dashboard_v2/`. It does
 not introduce a second storage system. Instead, it puts service wrappers around
 the existing snapshot store, DuckDB warehouse, and artifact directories, then
 renders pages from small view-specific summaries. The important performance
@@ -573,13 +635,14 @@ rule is that Research, Simulation, and Monitoring overview pages should not
 hydrate deep diagnostics, raw split files, full candidate workbenches, or path
 engines until the user selects that subview.
 
-Start V2 with:
+Start the primary dashboard with:
 
 ```bash
-poetry run trade-bot run-dashboard-v2
+poetry run trade-bot run-dashboard
 ```
 
-V1 remains available with `run-dashboard` while V2 is reviewed.
+The archived V1 fallback remains available with `run-dashboard-v1` for
+comparison/debugging only.
 
 ## Testing Strategy
 

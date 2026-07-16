@@ -95,7 +95,7 @@ def test_filter_history_time_range_supports_presets_and_custom_dates() -> None:
     assert custom["value"].tolist() == [2, 3]
 
 
-def test_dashboard_v2_uses_separate_entrypoint_and_process_defaults() -> None:
+def test_dashboard_v2_is_primary_entrypoint_with_archived_v1_fallback() -> None:
     assert DEFAULTS.DEFAULT_DASHBOARD_APP_PATH != DEFAULTS.DEFAULT_DASHBOARD_V2_APP_PATH
     assert DEFAULTS.DEFAULT_DASHBOARD_V2_APP_PATH.as_posix().endswith(
         "src/trade_bot/dashboard_v2/app.py"

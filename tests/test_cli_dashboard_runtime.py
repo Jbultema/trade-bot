@@ -41,11 +41,39 @@ def test_run_dashboard_starts_managed_streamlit_process(monkeypatch, tmp_path: P
     assert pid_path.read_text(encoding="utf-8").strip() == "12345"
     command = popen_calls[0][0]
     assert command[:3] == [cli_module.sys.executable, "-m", "streamlit"]
+    assert "src/trade_bot/dashboard_v2/app.py" in command
     assert "--server.fileWatcherType" in command
     assert "none" in command
     assert "--server.port" in command
     assert "8765" in command
     assert popen_calls[0][1]["start_new_session"] is True
+
+
+def test_run_dashboard_v1_starts_archived_fallback(monkeypatch, tmp_path: Path) -> None:
+    popen_calls: list[tuple[list[str], dict[str, object]]] = []
+
+    class FakePopen:
+        pid = 12345
+
+        def __init__(self, command: list[str], **kwargs: object) -> None:
+            popen_calls.append((command, kwargs))
+
+    monkeypatch.setattr(subprocess, "Popen", FakePopen)
+    monkeypatch.setattr(cli_module, "_process_exists", lambda pid: False)
+
+    result = CliRunner().invoke(
+        app,
+        [
+            "run-dashboard-v1",
+            "--pid-path",
+            str(tmp_path / "streamlit-v1.pid"),
+            "--log-path",
+            str(tmp_path / "streamlit-v1.log"),
+        ],
+    )
+
+    assert result.exit_code == 0, result.output
+    assert "src/trade_bot/dashboard/app.py" in popen_calls[0][0]
 
 
 def test_stop_dashboard_escalates_when_graceful_shutdown_hangs(

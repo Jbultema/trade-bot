@@ -1254,6 +1254,9 @@ def _render_approach_detail_workbench(
     experiment_regimes: pd.DataFrame,
     experiment_walk_forward: pd.DataFrame,
     experiment_candidates: pd.DataFrame,
+    selected_strategy: str | None = None,
+    key_prefix: str = "approach",
+    show_selector: bool = True,
 ) -> None:
     st.caption(
         "Canonical drill-down for strategy research: explanation, historical performance, "
@@ -1286,12 +1289,14 @@ def _render_approach_detail_workbench(
         "All non-pruned research + core baselines",
         "All approaches and archived rows",
     ]
-    selected_scope = st.radio(
-        "Approach set",
-        scope_options,
-        horizontal=True,
-        key="approach_detail_scope",
-    )
+    selected_scope = "All non-pruned research + core baselines"
+    if show_selector:
+        selected_scope = st.radio(
+            "Approach set",
+            scope_options,
+            horizontal=True,
+            key=f"{key_prefix}_detail_scope",
+        )
     default_reference = _default_reference_catalog_mask(catalog)
     if selected_scope == "Runtime leaders + curated shelf + core baselines":
         visible_catalog = catalog[default_reference | catalog["is_curated"] | runtime_leader_mask]
@@ -1310,16 +1315,33 @@ def _render_approach_detail_workbench(
     if visible_catalog.empty:
         visible_catalog = catalog
 
-    selected_label = _clearable_selectbox(
-        "Approach to inspect",
-        visible_catalog["label"].tolist(),
-        key="approach_detail_label",
-        placeholder="Search approaches...",
-    )
-    if selected_label is None:
-        st.info("Choose an approach to inspect its details.")
-        return
-    approach_row = visible_catalog[visible_catalog["label"] == selected_label].iloc[0]
+    approach_row: pd.Series | None = None
+    if selected_strategy:
+        strategy_matches = visible_catalog[
+            visible_catalog["strategy"].astype(str).eq(str(selected_strategy))
+        ]
+        if strategy_matches.empty:
+            strategy_matches = catalog[catalog["strategy"].astype(str).eq(str(selected_strategy))]
+        if not strategy_matches.empty:
+            approach_row = strategy_matches.iloc[0]
+        elif not show_selector:
+            st.info(
+                "This candidate has fast metrics, but it is not rebuildable in the current "
+                "approach catalog yet. Full performance/allocation/mechanics tabs need the "
+                "strategy manifest or configured strategy definition."
+            )
+            return
+    if approach_row is None:
+        selected_label = _clearable_selectbox(
+            "Approach to inspect",
+            visible_catalog["label"].tolist(),
+            key=f"{key_prefix}_detail_label",
+            placeholder="Search approaches...",
+        )
+        if selected_label is None:
+            st.info("Choose an approach to inspect its details.")
+            return
+        approach_row = visible_catalog[visible_catalog["label"] == selected_label].iloc[0]
     approach_strategy = strategy_from_catalog_row(approach_row)
     approach_execution = execution_for_catalog_row(approach_row, bot_config.execution)
     scenario_sizing = scenario_sizing_from_catalog_row(approach_row)
@@ -1389,7 +1411,7 @@ def _render_approach_detail_workbench(
             detail_views,
             selection_mode="single",
             default="Summary",
-            key="approach_detail_view",
+            key=f"{key_prefix}_detail_view",
             label_visibility="collapsed",
             width="stretch",
         )

@@ -26,6 +26,9 @@ def test_regime_pulse_translates_macro_pressure_to_asset_reads() -> None:
     inflation = cycles[cycles["cycle"] == "inflation"].iloc[0]
     stocks = assets[assets["asset_class"] == "stocks"].iloc[0]
 
+    assert set(cycles["classification_horizon"]) == {"0m"}
+    assert set(assets["classification_horizon"]) == {"0m"}
+    assert set(grid["classification_horizon"]) == {"0m"}
     assert growth["cycle_state"] == "meaningful_tailwind"
     assert inflation["cycle_state"] == "meaningful_headwind"
     assert stocks["regime_pulse_read"] in {

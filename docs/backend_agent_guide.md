@@ -99,14 +99,17 @@ poetry run trade-bot run-daily-update --cached-data --cached-macro --cached-news
 
 The dashboard exposes the same workflow as the primary sidebar button labeled `Run Full Daily Update`. That button queues the job in the local run store so the app can keep serving the latest completed snapshot while the refresh runs in the background. The sidebar also exposes targeted background jobs for warehouse migration, paper valuation, monitoring-window seeding, and standard/research ML diagnostics. Those buttons should call `RunStore` job helpers rather than launching untracked subprocesses from Streamlit.
 
-Dashboard V2 lives under `src/trade_bot/dashboard_v2/` and can be started with:
+The primary dashboard lives under `src/trade_bot/dashboard_v2/` and can be
+started with:
 
 ```bash
-poetry run trade-bot run-dashboard-v2
+poetry run trade-bot run-dashboard
 ```
 
-V2 is intentionally parallel to the legacy app. It uses a small service layer
-over the same storage surfaces:
+The old Streamlit app under `src/trade_bot/dashboard/` is archived for
+comparison/debugging through `poetry run trade-bot run-dashboard-v1`. New
+dashboard work should target V2 unless there is a specific fallback bug to
+inspect. V2 uses a small service layer over the same storage surfaces:
 
 - `services/runtime.py` for config paths, snapshots, live fallback, book
   alignment, and action headline construction,
@@ -114,14 +117,14 @@ over the same storage surfaces:
   summaries,
 - `services/experiment_service.py` for scorecard and aggregate experiment
   artifacts,
-- `services/artifact_service.py` for PBO, leadership, router, and other report
-  artifacts,
+- `services/artifact_service.py` for PBO, leadership, router, Cycle Tracker,
+  and other report artifacts,
 - `services/job_service.py` for sidebar-triggered background jobs.
 
 The V2 rule is summary-first rendering. Pages should load cards and compact
-tables first, then put expensive charts, full legacy workbenches, raw artifacts,
-and path engines behind explicit view selectors or buttons. Avoid `st.tabs()`
-for heavyweight areas because Streamlit can execute hidden tab contents.
+tables first, then put expensive charts, full workbenches, raw artifacts, and
+path engines behind explicit view selectors or buttons. Avoid `st.tabs()` for
+heavyweight areas because Streamlit can execute hidden tab contents.
 
 Keep broad experiment sweeps, dependency management, Git operations, and live-broker execution out of one-click dashboard buttons. They are long-running, parameterized, environment-sensitive, or intentionally require explicit review.
 

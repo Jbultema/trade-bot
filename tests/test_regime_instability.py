@@ -21,6 +21,8 @@ def test_regime_instability_index_detects_large_moves_and_dispersion() -> None:
     assert float(unstable_summary.iloc[0]["regime_instability_score"]) > float(
         calm_summary.iloc[0]["regime_instability_score"]
     )
+    assert unstable_summary.iloc[0]["classification_horizon"] == "0m"
+    assert set(unstable_components["classification_horizon"]) == {"0m"}
     assert "watch_only" in str(unstable_summary.iloc[0]["trading_use"])
     assert "large_move_share_21d" in set(unstable_components["component"])
 

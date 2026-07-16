@@ -1,6 +1,6 @@
 # Trade Bot User Guide
 
-Status: canonical user-facing guide. Last reviewed: 2026-07-05.
+Status: canonical user-facing guide. Last reviewed: 2026-07-16.
 
 This guide explains how to use Trade Bot as a full workflow: daily operation,
 strategy research, paper monitoring, execution journaling, taxable review, and
@@ -135,15 +135,11 @@ If port 8501 is busy:
 poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
 ```
 
-To review the faster V2 workbench, start it separately:
+The old V1 dashboard is archived for comparison/debugging only:
 
 ```bash
-poetry run trade-bot run-dashboard-v2
+poetry run trade-bot run-dashboard-v1
 ```
-
-Then open `http://localhost:8502`. V2 keeps the same local data but starts with
-summary pages and loads heavy Research, Simulation, and Monitoring detail only
-when selected.
 
 Stop the managed dashboard with:
 
@@ -340,9 +336,11 @@ Recommended flow:
 1. Leaderboard: find high-scoring candidates.
 2. Curated Shelf: see candidates chosen for diversity and operability.
 3. Outcome Frontier: compare CAGR versus drawdown and projected terminal wealth.
-4. Family Map: understand whether many strategies are the same bet.
-5. Signal Evidence: see which signal families helped historically.
-6. Candidate Details: inspect one strategy before monitoring.
+4. Cycle Tracker: inspect the Scenario / Phase Frontier and conditional winner
+   candidates for speculative-cycle phases.
+5. Family Map: understand whether many strategies are the same bet.
+6. Signal Evidence: see which signal families helped historically.
+7. Candidate Details: inspect one strategy before monitoring.
 
 Outcome Frontier uses the configured accumulation assumptions from
 `src/trade_bot/DEFAULTS.py`: starting account value, annual contribution,
@@ -351,6 +349,18 @@ contribution timing splits the annual total into monthly period-end deposits.
 The headline 15-year wealth metric is deterministic CAGR planning math. Use
 Simulation Lab when you need sequence-aware simulation, current-scenario
 simulation, path-risk ranges, or interpretability for a selected strategy.
+
+Cycle Tracker is a research/watch layer, not a launch command. Use it when the
+main question is "what phase of a speculative cycle does the market resemble,
+what phases are plausible over the next 1 month to 1 year, and which assets have
+historically worked better after similar prior-only phase reads?" The useful
+outputs are the dominant 0M nowcast phase, the stacked forward horizon phase frontier,
+evidence components, current-phase conditional candidates, phase-by-horizon
+winner shelves, and prior-only validation metrics. Refresh it from the CLI:
+
+```bash
+poetry run trade-bot run-cycle-tracker
+```
 
 ### Monitoring
 

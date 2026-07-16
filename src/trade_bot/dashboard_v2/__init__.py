@@ -1,7 +1,6 @@
-"""Dashboard V2.
+"""Primary summary-first Streamlit dashboard.
 
-This package keeps the faster dashboard shell separate from the legacy
-Streamlit app while reusing the same snapshots, warehouse tables, and research
-artifacts.
+This package reuses the same snapshots, warehouse tables, and research artifacts
+as the archived V1 renderer while keeping heavy diagnostics behind explicit
+views.
 """
-

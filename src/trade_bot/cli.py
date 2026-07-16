@@ -60,6 +60,11 @@ from trade_bot.research.backtest_pbo import (
 )
 from trade_bot.research.backtest_qc import DEFAULT_QC_STRATEGY, run_backtest_qc_gauntlet
 from trade_bot.research.baselines import run_configured_baselines
+from trade_bot.research.cycle_tracker import (
+    DEFAULT_PHASE_MIN_TRAIN_DAYS,
+    DEFAULT_PHASE_VALIDATION_STEP_DAYS,
+    run_cycle_tracker,
+)
 from trade_bot.research.defensive_judgement import write_defensive_judgement_report
 from trade_bot.research.entry_date_analysis import build_entry_date_analysis
 from trade_bot.research.experiment_monitor import (
@@ -700,7 +705,7 @@ def list_snapshot_jobs_cmd(
 
 @app.command("run-dashboard")
 def run_dashboard_cmd(
-    app_path: Annotated[Path, typer.Option("--app-path")] = DEFAULT_DASHBOARD_APP_PATH,
+    app_path: Annotated[Path, typer.Option("--app-path")] = DEFAULT_DASHBOARD_V2_APP_PATH,
     port: Annotated[int, typer.Option("--port")] = DEFAULT_DASHBOARD_PORT,
     pid_path: Annotated[Path, typer.Option("--pid-path")] = DEFAULT_DASHBOARD_PID_PATH,
     log_path: Annotated[Path, typer.Option("--log-path")] = DEFAULT_DASHBOARD_LOG_PATH,
@@ -716,7 +721,7 @@ def run_dashboard_cmd(
         typer.Option("--stop-existing/--keep-existing"),
     ] = False,
 ) -> None:
-    """Start the dashboard as a managed background process with a PID file."""
+    """Start the primary Dashboard V2 as a managed background process."""
 
     if stop_existing:
         _stop_dashboard_from_pid_file(pid_path, timeout_seconds=5.0, force=True)
@@ -782,8 +787,42 @@ def run_dashboard_v2_cmd(
         typer.Option("--stop-existing/--keep-existing"),
     ] = False,
 ) -> None:
-    """Start the summary-first Dashboard V2 as a managed background process."""
+    """Compatibility alias for starting Dashboard V2 on its review port."""
 
+    run_dashboard_cmd(
+        app_path=app_path,
+        port=port,
+        pid_path=pid_path,
+        log_path=log_path,
+        file_watcher_type=file_watcher_type,
+        stop_existing=stop_existing,
+    )
+
+
+@app.command("run-dashboard-v1")
+def run_dashboard_v1_cmd(
+    app_path: Annotated[Path, typer.Option("--app-path")] = DEFAULT_DASHBOARD_APP_PATH,
+    port: Annotated[int, typer.Option("--port")] = 8503,
+    pid_path: Annotated[Path, typer.Option("--pid-path")] = Path("reports/streamlit-v1.pid"),
+    log_path: Annotated[Path, typer.Option("--log-path")] = Path("reports/streamlit-v1.log"),
+    file_watcher_type: Annotated[
+        str,
+        typer.Option(
+            "--file-watcher-type",
+            help="Streamlit file watcher mode. 'none' avoids common local shutdown hangs.",
+        ),
+    ] = DEFAULT_STREAMLIT_FILE_WATCHER_TYPE,
+    stop_existing: Annotated[
+        bool,
+        typer.Option("--stop-existing/--keep-existing"),
+    ] = False,
+) -> None:
+    """Start the archived Dashboard V1 fallback for comparison/debugging only."""
+
+    console.print(
+        "Dashboard V1 is archived. Use it only for fallback comparison/debugging; "
+        "`poetry run trade-bot run-dashboard` is the primary V2 workbench."
+    )
     run_dashboard_cmd(
         app_path=app_path,
         port=port,
@@ -1360,6 +1399,136 @@ def validate_simulation_engine_cmd(
         ablation_summary=ablation_frame,
     )
     console.print(f"Saved simulation validation history to DuckDB as {validation_run_id}.")
+
+
+@app.command("run-cycle-tracker")
+def run_cycle_tracker_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = Path("reports/cycle_tracker"),
+    horizons: Annotated[
+        str,
+        typer.Option(
+            "--horizons",
+            help="Comma-separated horizon labels or label=trading_days entries.",
+        ),
+    ] = "0m,1m,3m,6m,1y",
+    min_train_days: Annotated[
+        int,
+        typer.Option("--min-train-days", help="Minimum prior trading days before validation origins."),
+    ] = DEFAULT_PHASE_MIN_TRAIN_DAYS,
+    origin_step_days: Annotated[
+        int,
+        typer.Option(
+            "--origin-step-days",
+            help="Spacing between historical validation origins. Lower is deeper but slower.",
+        ),
+    ] = DEFAULT_PHASE_VALIDATION_STEP_DAYS,
+    candidate_tickers: Annotated[
+        str,
+        typer.Option(
+            "--candidate-tickers",
+            help="Optional comma-separated candidate tickers. Defaults to the configured broad research universe.",
+        ),
+    ] = "",
+) -> None:
+    """Build the speculative cycle tracker and conditional-winner frontier."""
+
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+    if snapshot_payload is None:
+        console.print("No completed snapshots found. Build a snapshot before running the cycle tracker.")
+        raise typer.Exit(code=1)
+    baseline_run, manifest = snapshot_payload
+    prices = getattr(baseline_run, "prices", pd.DataFrame())
+    if not isinstance(prices, pd.DataFrame) or prices.empty:
+        console.print(f"Snapshot {manifest.run_id} does not include historical prices.")
+        raise typer.Exit(code=1)
+
+    parsed_horizons = tuple(days for _label, days in _parse_cycle_tracker_horizons(horizons))
+    scenario_lattice = getattr(
+        getattr(baseline_run, "current_state", None),
+        "scenario_lattice",
+        pd.DataFrame(),
+    )
+    result = run_cycle_tracker(
+        prices=prices,
+        scenario_lattice=scenario_lattice,
+        output_dir=output_dir,
+        candidate_tickers=tuple(_parse_csv_option(candidate_tickers)) or None,
+        horizons=parsed_horizons,
+        min_train_days=min_train_days,
+        origin_step_days=origin_step_days,
+    )
+    cycle_run_id = TradingWarehouse(store).save_cycle_tracker_run(
+        snapshot_run_id=manifest.run_id,
+        market_date=manifest.market_date,
+        output_dir=str(output_dir),
+        horizons=horizons,
+        min_train_days=min_train_days,
+        origin_step_days=origin_step_days,
+        phase_probabilities=result.phase_probabilities,
+        transition_forecast=result.transition_forecast,
+        evidence=result.evidence,
+        candidate_scores=result.candidate_scores,
+        phase_candidate_frontier=result.phase_candidate_frontier,
+        validation_metrics=result.validation_metrics,
+        readout=result.readout,
+    )
+
+    phase_table = Table(title="Cycle Tracker Nowcast")
+    phase_table.add_column("phase")
+    phase_table.add_column("probability")
+    for _, row in result.phase_probabilities.sort_values("probability", ascending=False).iterrows():
+        phase_table.add_row(str(row["phase"]), _format_optional_percent(row["probability"]))
+    console.print(phase_table)
+
+    forecast_table = Table(title="Scenario / Phase Frontier")
+    forecast_table.add_column("horizon")
+    forecast_table.add_column("dominant phase")
+    forecast_table.add_column("probability")
+    for horizon, group in result.transition_forecast.groupby("horizon", sort=False):
+        top_row = group.sort_values("probability", ascending=False).iloc[0]
+        forecast_table.add_row(
+            str(horizon),
+            str(top_row["phase"]),
+            _format_optional_percent(top_row["probability"]),
+        )
+    console.print(forecast_table)
+
+    candidate_table = Table(title="Conditional Winner Candidates")
+    for column in ["ticker", "role", "score", "phase return", "excess vs QQQ"]:
+        candidate_table.add_column(column)
+    for _, row in result.candidate_scores.head(12).iterrows():
+        candidate_table.add_row(
+            str(row["ticker"]),
+            str(row["candidate_role"]),
+            _format_optional_decimal(row["candidate_score"]),
+            _format_optional_percent(row.get("phase_forward_median_return")),
+            _format_optional_percent(row.get("phase_median_excess_vs_qqq")),
+        )
+    console.print(candidate_table)
+    if not result.phase_candidate_frontier.empty:
+        frontier_table = Table(title="Top Scenario / Phase Winners")
+        for column in ["horizon", "phase", "ticker", "role", "score", "excess vs QQQ"]:
+            frontier_table.add_column(column)
+        top_frontier = (
+            result.phase_candidate_frontier[result.phase_candidate_frontier["rank"].eq(1)]
+            .head(16)
+        )
+        for _, row in top_frontier.iterrows():
+            frontier_table.add_row(
+                str(row["horizon"]),
+                str(row["phase"]),
+                str(row["ticker"]),
+                str(row["frontier_role"]),
+                _format_optional_decimal(row["frontier_score"]),
+                _format_optional_percent(row.get("median_excess_vs_qqq")),
+            )
+        console.print(frontier_table)
+    console.print(f"Saved cycle tracker history to DuckDB as {cycle_run_id}.")
+    console.print(f"Reports: {output_dir}")
 
 
 @app.command("audit-defensive-judgement")
@@ -2411,6 +2580,45 @@ def _parse_validation_horizons(value: str) -> tuple[tuple[str, int], ...]:
                 raise typer.BadParameter(msg)
             days = int(defaults[label])
         if not label or days <= 0:
+            msg = f"Invalid horizon: {item!r}"
+            raise typer.BadParameter(msg)
+        horizons.append((label, days))
+    return tuple(horizons)
+
+
+def _parse_cycle_tracker_horizons(value: str) -> tuple[tuple[str, int], ...]:
+    requested = _parse_csv_option(value)
+    if not requested:
+        msg = "At least one horizon is required."
+        raise typer.BadParameter(msg)
+    defaults = {
+        "0m": 0,
+        "nowcast": 0,
+        "1w": 5,
+        "1m": 21,
+        "2m": 42,
+        "3m": 63,
+        "6m": 126,
+        "1y": 252,
+    }
+    horizons: list[tuple[str, int]] = []
+    for item in requested:
+        if "=" in item:
+            label, raw_days = item.split("=", 1)
+            label = label.strip()
+            try:
+                days = int(raw_days.strip())
+            except ValueError as error:
+                msg = f"Invalid horizon day count: {item!r}"
+                raise typer.BadParameter(msg) from error
+        else:
+            label = item.strip()
+            if label not in defaults:
+                available = ", ".join(defaults)
+                msg = f"Unknown horizon {label!r}; use one of {available} or label=days."
+                raise typer.BadParameter(msg)
+            days = defaults[label]
+        if not label or days < 0:
             msg = f"Invalid horizon: {item!r}"
             raise typer.BadParameter(msg)
         horizons.append((label, days))

@@ -92,7 +92,7 @@ def render_monitoring_page(runtime: DashboardRuntime) -> None:
             st.plotly_chart(figure, use_container_width=True)
     else:
         render_callout(
-            "This loads the legacy Monitoring workbench, including management controls and detail tables.",
+            "This loads the full Monitoring workbench, including management controls and detail tables.",
             heavy=True,
         )
         _render_monitoring(warehouse_path)
