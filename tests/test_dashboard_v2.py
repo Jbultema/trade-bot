@@ -3,8 +3,11 @@ from __future__ import annotations
 import inspect
 from pathlib import Path
 
+import pandas as pd
+
 from trade_bot import DEFAULTS
 from trade_bot.dashboard import forward_test, launch_lab
+from trade_bot.dashboard.trends import filter_history_time_range
 from trade_bot.dashboard_v2 import routes
 from trade_bot.dashboard_v2.components import cards
 from trade_bot.dashboard_v2.pages import command_center, macro, monitoring, research, simulation
@@ -52,6 +55,41 @@ def test_dashboard_v2_native_pages_are_summary_first() -> None:
         "_render_simulation_lab("
     )
     assert macro_source.index("Visual Explorer") < macro_source.index("_render_news_and_macro(")
+
+
+def test_dashboard_v2_monitoring_trends_have_time_window_controls() -> None:
+    monitoring_source = inspect.getsource(monitoring.render_monitoring_page)
+    legacy_source = inspect.getsource(monitoring._render_monitoring_trend_range_controls)
+
+    assert "_render_monitoring_trend_range_controls(trends)" in monitoring_source
+    assert "Time range" in legacy_source
+    assert "dashboard_v2_monitoring_trend_range" in legacy_source
+    assert "filter_history_time_range(" in legacy_source
+
+
+def test_filter_history_time_range_supports_presets_and_custom_dates() -> None:
+    frame = pd.DataFrame(
+        {
+            "history_time": pd.to_datetime(
+                ["2026-01-01", "2026-03-15", "2026-06-15", "2026-07-15"]
+            ),
+            "value": [1, 2, 3, 4],
+        }
+    )
+
+    one_month = filter_history_time_range(frame, "1M")
+    assert one_month["value"].tolist() == [3, 4]
+
+    ytd = filter_history_time_range(frame, "YTD")
+    assert ytd["value"].tolist() == [1, 2, 3, 4]
+
+    custom = filter_history_time_range(
+        frame,
+        "Custom",
+        custom_start=pd.Timestamp("2026-03-01"),
+        custom_end=pd.Timestamp("2026-06-30"),
+    )
+    assert custom["value"].tolist() == [2, 3]
 
 
 def test_dashboard_v2_uses_separate_entrypoint_and_process_defaults() -> None:

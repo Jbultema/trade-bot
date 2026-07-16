@@ -1,12 +1,18 @@
 from __future__ import annotations
 
+from datetime import date, timedelta
+
 import pandas as pd
 import streamlit as st
 
 from trade_bot.dashboard.components import _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
 from trade_bot.dashboard.monitoring import _render_monitoring
-from trade_bot.dashboard.trends import load_monitoring_trend_frame, long_metric_line_figure
+from trade_bot.dashboard.trends import (
+    filter_history_time_range,
+    load_monitoring_trend_frame,
+    long_metric_line_figure,
+)
 from trade_bot.dashboard_v2.components.cards import render_callout, render_card_grid
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
@@ -69,6 +75,7 @@ def render_monitoring_page(runtime: DashboardRuntime) -> None:
     elif selected_view == "Trends":
         render_callout("Forward trend plots read valuation history from DuckDB.", heavy=True)
         trends = load_monitoring_trend_frame(str(warehouse_path))
+        trends = _render_monitoring_trend_range_controls(trends)
         figure = long_metric_line_figure(
             trends,
             category_column="window_label",
@@ -95,3 +102,37 @@ def _count_role(frame: pd.DataFrame, role: str) -> int:
     if frame.empty or "window_role" not in frame:
         return 0
     return int(frame["window_role"].astype(str).eq(role).sum())
+
+
+def _render_monitoring_trend_range_controls(trends: pd.DataFrame) -> pd.DataFrame:
+    control_cols = st.columns([1, 1, 1, 2])
+    range_choice = control_cols[0].selectbox(
+        "Time range",
+        ["1M", "3M", "6M", "YTD", "1Y", "All", "Custom"],
+        index=5,
+        key="dashboard_v2_monitoring_trend_range",
+    )
+    custom_start = None
+    custom_end = None
+    if range_choice == "Custom":
+        custom_start = control_cols[1].date_input(
+            "Start",
+            value=date.today() - timedelta(days=92),
+            key="dashboard_v2_monitoring_trend_start",
+        )
+        custom_end = control_cols[2].date_input(
+            "End",
+            value=date.today(),
+            key="dashboard_v2_monitoring_trend_end",
+        )
+    filtered = filter_history_time_range(
+        trends,
+        range_choice,
+        custom_start=custom_start,
+        custom_end=custom_end,
+    )
+    control_cols[3].caption(
+        f"Showing {len(filtered):,} valuation rows"
+        + (f" across {filtered['window_label'].nunique():,} windows" if "window_label" in filtered else "")
+    )
+    return filtered

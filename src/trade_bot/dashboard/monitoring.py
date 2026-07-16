@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from datetime import date
+from datetime import date, timedelta
 from pathlib import Path
 
 import pandas as pd
@@ -14,6 +14,7 @@ from trade_bot.dashboard.components import (
 )
 from trade_bot.dashboard.formatting import _display_metrics, _display_trade_frame
 from trade_bot.dashboard.trends import (
+    filter_history_time_range,
     load_monitoring_trend_frame,
     long_metric_line_figure,
 )
@@ -268,6 +269,10 @@ def _render_monitoring_forward_trends(warehouse_path: str, display_frame: pd.Dat
     if history.empty:
         return
     st.caption("Champion/challenger forward trends")
+    history = _render_monitoring_trend_range_controls(history, key_prefix="legacy_monitoring")
+    if history.empty:
+        st.info("No monitoring valuation rows are available for the selected time range.")
+        return
     cols = st.columns(2)
     with cols[0]:
         figure = long_metric_line_figure(
@@ -322,6 +327,45 @@ def _render_monitoring_forward_trends(warehouse_path: str, display_frame: pd.Dat
         )
         if figure.data:
             st.plotly_chart(figure, use_container_width=True)
+
+
+def _render_monitoring_trend_range_controls(
+    history: pd.DataFrame,
+    *,
+    key_prefix: str,
+) -> pd.DataFrame:
+    control_cols = st.columns([1, 1, 1, 2])
+    range_choice = control_cols[0].selectbox(
+        "Trend time range",
+        ["1M", "3M", "6M", "YTD", "1Y", "All", "Custom"],
+        index=5,
+        key=f"{key_prefix}_trend_range",
+        help="Filter the monitoring valuation history before drawing forward trend charts.",
+    )
+    custom_start = None
+    custom_end = None
+    if range_choice == "Custom":
+        custom_start = control_cols[1].date_input(
+            "Trend start",
+            value=date.today() - timedelta(days=92),
+            key=f"{key_prefix}_trend_start",
+        )
+        custom_end = control_cols[2].date_input(
+            "Trend end",
+            value=date.today(),
+            key=f"{key_prefix}_trend_end",
+        )
+    filtered = filter_history_time_range(
+        history,
+        range_choice,
+        custom_start=custom_start,
+        custom_end=custom_end,
+    )
+    window_count = filtered["window_label"].nunique() if "window_label" in filtered else 0
+    control_cols[3].caption(
+        f"Showing {len(filtered):,} valuation rows across {int(window_count):,} windows."
+    )
+    return filtered
 
 
 def _monitoring_start_cohorts(windows: pd.DataFrame) -> list[str]:

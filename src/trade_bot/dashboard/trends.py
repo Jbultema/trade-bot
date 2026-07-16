@@ -315,6 +315,39 @@ def long_metric_line_figure(
     return figure
 
 
+def filter_history_time_range(
+    frame: pd.DataFrame,
+    range_choice: str,
+    *,
+    custom_start: object | None = None,
+    custom_end: object | None = None,
+    time_column: str = "history_time",
+) -> pd.DataFrame:
+    if frame.empty or time_column not in frame:
+        return frame
+    working = frame.copy()
+    working[time_column] = pd.to_datetime(working[time_column], errors="coerce")
+    working = working[working[time_column].notna()].sort_values(time_column)
+    if working.empty or range_choice == "All":
+        return working
+    end = pd.to_datetime(custom_end) if custom_end is not None else working[time_column].max()
+    if range_choice == "Custom":
+        start = pd.to_datetime(custom_start) if custom_start is not None else working[time_column].min()
+    elif range_choice == "YTD":
+        start = pd.Timestamp(year=int(end.year), month=1, day=1)
+    else:
+        days = {
+            "1M": 31,
+            "3M": 92,
+            "6M": 183,
+            "1Y": 365,
+            "3Y": 365 * 3,
+            "5Y": 365 * 5,
+        }.get(range_choice, 365)
+        start = end - pd.Timedelta(days=days)
+    return working[(working[time_column] >= start) & (working[time_column] <= end)]
+
+
 def latest_per_market_date(frame: pd.DataFrame, subset: list[str] | None = None) -> pd.DataFrame:
     if frame.empty or "market_date" not in frame or "snapshot_time" not in frame:
         return frame.copy()
