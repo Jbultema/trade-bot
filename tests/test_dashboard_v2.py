@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import inspect
+from pathlib import Path
 
 from trade_bot import DEFAULTS
 from trade_bot.dashboard import forward_test, launch_lab
@@ -60,6 +61,16 @@ def test_dashboard_v2_uses_separate_entrypoint_and_process_defaults() -> None:
     )
     assert DEFAULTS.DEFAULT_DASHBOARD_V2_PID_PATH != DEFAULTS.DEFAULT_DASHBOARD_PID_PATH
     assert DEFAULTS.DEFAULT_DASHBOARD_V2_LOG_PATH != DEFAULTS.DEFAULT_DASHBOARD_LOG_PATH
+
+
+def test_dashboard_v2_restores_gated_reference_rail() -> None:
+    app_path = Path("src/trade_bot/dashboard_v2/app.py")
+    source = app_path.read_text()
+
+    assert "Show quick reference rail" in source
+    assert "_install_quick_reference_rail_layout()" in source
+    assert "_render_metric_info_rail()" in source
+    assert "if show_quick_reference:" in source
 
 
 def test_dashboard_v2_artifact_service_missing_files_are_empty(tmp_path) -> None:

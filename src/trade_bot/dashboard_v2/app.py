@@ -5,7 +5,11 @@ from datetime import date
 
 import streamlit as st
 
-from trade_bot.dashboard.styles import _install_dashboard_styles
+from trade_bot.dashboard.components import _render_metric_info_rail
+from trade_bot.dashboard.styles import (
+    _install_dashboard_styles,
+    _install_quick_reference_rail_layout,
+)
 from trade_bot.dashboard_v2.perf import render_perf_footer, timed
 from trade_bot.dashboard_v2.routes import route_by_key, routes
 from trade_bot.dashboard_v2.services.job_service import (
@@ -62,6 +66,16 @@ run_source = st.sidebar.radio(
     ["Latest snapshot (fast)", "Selected snapshot", "Live pipeline"],
     index=0,
 )
+show_quick_reference = st.sidebar.toggle(
+    "Show quick reference rail",
+    value=False,
+    help=(
+        "Show the fixed right-side lookup rail for metrics, ticket fields, workflows, "
+        "and ticker symbols."
+    ),
+)
+if show_quick_reference:
+    _install_quick_reference_rail_layout()
 paths = render_path_controls(DashboardPaths())
 
 selected_snapshot_run_id: str | None = None
@@ -211,5 +225,8 @@ st.markdown(
 
 with timed(f"page.{route.key}"), st.spinner(f"Loading {route.title}..."):
     route.render(runtime)
+
+if show_quick_reference:
+    _render_metric_info_rail()
 
 render_perf_footer()
