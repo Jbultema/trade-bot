@@ -30,3 +30,25 @@ def test_metric_help_resolves_outcome_simulation_terms() -> None:
     assert "hard drawdown limit" in (metric_help("Severe DD Prob") or "")
     assert "planned contributions" in (metric_help("Capital Shortfall Prob") or "")
     assert metric_detail("Median Sim Ulcer") is not None
+
+
+def test_metric_help_resolves_finance_glossary_terms() -> None:
+    expected_terms = {
+        "beta": "Sensitivity",
+        "risk-off": "capital preservation",
+        "BIL": "Treasury bill ETF",
+        "value at risk": "Loss threshold",
+        "stress test": "what-if loss",
+        "benchmark": "Reference portfolio",
+        "excess return": "Return above or below",
+        "concentration": "small number of positions",
+        "long-only": "does not short",
+    }
+
+    for term, expected_text in expected_terms.items():
+        help_text = metric_help(term) or ""
+        assert expected_text.lower() in help_text.lower()
+
+    glossary = metric_guide_frame(category="Finance Glossary", search="credit spread")
+    assert not glossary.empty
+    assert "Credit Spread" in set(glossary["metric"])
