@@ -121,6 +121,13 @@ def test_dashboard_app_renders_action_headline(
     strategy_selectors = [
         selectbox for selectbox in app.selectbox if selectbox.label == "Strategy to simulate"
     ]
+    assert len(strategy_selectors) == 0
+    simulation_view = next(pills for pills in app.pills if pills.label == "Simulation Lab view")
+    simulation_view.set_value("Strategy Simulations").run(timeout=20)
+    assert not app.exception
+    strategy_selectors = [
+        selectbox for selectbox in app.selectbox if selectbox.label == "Strategy to simulate"
+    ]
     assert len(strategy_selectors) == 1
 
     dashboard_section = next(pills for pills in app.pills if pills.label == "Dashboard section")
@@ -155,10 +162,14 @@ def test_dashboard_app_renders_action_headline(
 
 def test_simulation_lab_strategy_selector_renders_before_lazy_internal_view() -> None:
     source = inspect.getsource(simulation_lab_module._render_simulation_lab)
+    direct_source = inspect.getsource(simulation_lab_module._render_simulation_lab_direct_view)
 
-    assert source.index("_selected_simulation_strategy(") < source.index("st.pills(")
     assert "Simulation Lab view" in source
+    assert "_render_simulation_lab_direct_view(" in source
     assert "st.tabs(" not in source
+    assert direct_source.index("_selected_simulation_strategy(") < direct_source.index(
+        "_render_strategy_simulations("
+    )
 
 
 def test_strategy_simulations_gate_expensive_path_engines() -> None:

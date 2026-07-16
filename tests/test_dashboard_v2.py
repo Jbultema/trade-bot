@@ -54,6 +54,9 @@ def test_dashboard_v2_native_pages_are_summary_first() -> None:
     assert simulation_source.index("Validation summary") < simulation_source.index(
         "_render_simulation_lab("
     )
+    assert "Strategy simulations" in simulation_source
+    assert "Full workbench" in simulation_source
+    assert "Full legacy workbench" not in simulation_source
     assert macro_source.index("Visual Explorer") < macro_source.index("_render_news_and_macro(")
 
 

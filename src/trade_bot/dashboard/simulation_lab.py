@@ -103,6 +103,23 @@ def _render_simulation_lab(
         )
         or "Future-State Map"
     )
+    _render_simulation_lab_direct_view(
+        simulation_view,
+        bot_config=bot_config,
+        baseline_run=baseline_run,
+        experiment_scorecards=experiment_scorecards,
+        warehouse_path=warehouse_path,
+    )
+
+
+def _render_simulation_lab_direct_view(
+    simulation_view: str,
+    *,
+    bot_config: Any,
+    baseline_run: BaselineRun,
+    experiment_scorecards: pd.DataFrame,
+    warehouse_path: str = "",
+) -> None:
     _render_simulation_view_runtime_notice(simulation_view)
 
     selected_strategy: str | None = None
@@ -115,11 +132,7 @@ def _render_simulation_lab(
             experiment_scorecards=experiment_scorecards,
         )
 
-    if simulation_view == "Future-State Map":
-        scenario_source = _scenario_source_frame(baseline_run)
-        probabilities = scenario_probability_frame(scenario_source)
-        _render_future_state_map(baseline_run, scenario_source, probabilities)
-    elif simulation_view == "Strategy Simulations":
+    if simulation_view == "Strategy Simulations":
         scenario_source = _scenario_source_frame(baseline_run)
         _render_strategy_simulations(
             selected_strategy=selected_strategy,
@@ -133,7 +146,7 @@ def _render_simulation_lab(
             warehouse_path=warehouse_path,
             selected_strategy=None,
         )
-    else:
+    elif simulation_view == "Interpretability":
         scenario_source = _scenario_source_frame(baseline_run)
         probabilities = scenario_probability_frame(scenario_source)
         _render_simulation_interpretability(
@@ -144,6 +157,10 @@ def _render_simulation_lab(
             scenario_source=scenario_source,
             probabilities=probabilities,
         )
+    elif simulation_view == "Future-State Map":
+        scenario_source = _scenario_source_frame(baseline_run)
+        probabilities = scenario_probability_frame(scenario_source)
+        _render_future_state_map(baseline_run, scenario_source, probabilities)
 
 
 def _render_simulation_view_runtime_notice(simulation_view: str) -> None:

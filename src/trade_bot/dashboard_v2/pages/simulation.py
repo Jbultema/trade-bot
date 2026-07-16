@@ -5,7 +5,10 @@ import streamlit as st
 
 from trade_bot.dashboard.components import _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
-from trade_bot.dashboard.simulation_lab import _render_simulation_lab
+from trade_bot.dashboard.simulation_lab import (
+    _render_simulation_lab,
+    _render_simulation_lab_direct_view,
+)
 from trade_bot.dashboard_v2.components.cards import render_callout, render_card_grid
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.experiment_service import scorecards
@@ -34,7 +37,7 @@ def render_simulation_page(runtime: DashboardRuntime) -> None:
 
     view = st.pills(
         "Simulation view",
-        ["Validation summary", "Per-horizon metrics", "Full legacy workbench"],
+        ["Validation summary", "Per-horizon metrics", "Strategy simulations", "Full workbench"],
         default="Validation summary",
         selection_mode="single",
         key="dashboard_v2_simulation_view",
@@ -57,9 +60,17 @@ def render_simulation_page(runtime: DashboardRuntime) -> None:
             else latest_metrics
         )
         _render_metric_dataframe(_display_metrics(summary.head(100)))
+    elif selected_view == "Strategy simulations":
+        _render_simulation_lab_direct_view(
+            "Strategy Simulations",
+            bot_config=runtime.bot_config,
+            baseline_run=runtime.baseline_run,
+            experiment_scorecards=scorecards(),
+            warehouse_path=str(runtime.paths.run_store_path),
+        )
     else:
         render_callout(
-            "This loads the full legacy Simulation Lab. Path engines remain gated inside that page.",
+            "This loads the full Simulation Lab. Path engines remain gated inside that page.",
             heavy=True,
         )
         _render_simulation_lab(
@@ -88,4 +99,3 @@ def _fmt_pct(value: object) -> str:
         return f"{float(value):.2%}"
     except (TypeError, ValueError):
         return "n/a"
-
