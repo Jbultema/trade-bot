@@ -9,6 +9,7 @@ import pytest
 from streamlit.testing.v1 import AppTest
 
 import trade_bot.dashboard.launch_lab as launch_lab_module
+import trade_bot.dashboard.loaders as dashboard_loaders_module
 import trade_bot.dashboard.research_lab as research_lab_module
 import trade_bot.dashboard.simulation_lab as simulation_lab_module
 import trade_bot.research.baselines as baselines_module
@@ -34,6 +35,21 @@ def test_dashboard_app_renders_action_headline(
         baselines_module,
         "run_configured_baselines",
         lambda *args, **kwargs: _baseline_run(),
+    )
+    monkeypatch.setattr(
+        dashboard_loaders_module,
+        "load_snapshot_dashboard_run",
+        lambda *args, **kwargs: None,
+    )
+    monkeypatch.setattr(
+        dashboard_loaders_module,
+        "load_live_run",
+        lambda *args, **kwargs: _baseline_run(),
+    )
+    monkeypatch.setattr(
+        dashboard_loaders_module,
+        "load_snapshot_jobs_frame",
+        lambda *args, **kwargs: pd.DataFrame(),
     )
     monkeypatch.setattr(run_store_module, "RunStore", _FakeRunStore)
     monkeypatch.setattr(journal_module, "DEFAULT_JOURNAL_PATH", tmp_path / "journal.sqlite")

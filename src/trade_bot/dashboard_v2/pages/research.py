@@ -465,12 +465,16 @@ def _render_path_cycle_state(
     data = path_history.copy()
     data["as_of_date"] = pd.to_datetime(data["as_of_date"], errors="coerce")
     latest = data.sort_values("as_of_date").iloc[-1]
+    duration_days = pd.to_numeric(
+        pd.Series([latest.get("phase_duration_days", 0)]),
+        errors="coerce",
+    ).fillna(0).iloc[0]
     render_card_grid(
         [
             ("Path Phase", latest.get("path_phase", "n/a")),
             ("Evidence Phase", latest.get("evidence_phase", "n/a")),
             ("Path Probability", _fmt_pct(latest.get("path_probability"))),
-            ("Duration", f"{int(float(latest.get('phase_duration_days', 0))):,}d"),
+            ("Duration", f"{int(duration_days):,}d"),
             ("Duration State", latest.get("phase_duration_bucket", "n/a")),
             ("Transition Read", latest.get("transition_reason", "n/a")),
         ]
@@ -533,8 +537,15 @@ def _render_path_cycle_reliability(
     if not selected_horizon:
         return
     selected = data[data["horizon"].astype(str).eq(str(selected_horizon))].copy()
+    if selected.empty:
+        st.info("No path reliability rows are available for this horizon.")
+        return
     current = selected[selected["path_phase"].astype(str).eq(str(path_phase))]
-    headline = current.iloc[0] if not current.empty else selected.sort_values("origins", ascending=False).iloc[0]
+    headline = (
+        current.iloc[0]
+        if not current.empty
+        else selected.sort_values("origins", ascending=False).iloc[0]
+    )
     render_card_grid(
         [
             ("Path Fit Rate", _fmt_pct(headline.get("path_fit_rate"))),
@@ -590,8 +601,15 @@ def _render_cycle_reliability(reliability: pd.DataFrame, *, dominant_phase: str)
     if not selected_horizon:
         return
     selected = data[data["horizon"].astype(str).eq(str(selected_horizon))].copy()
+    if selected.empty:
+        st.info("No phase reliability rows are available for this horizon.")
+        return
     current = selected[selected["dominant_phase"].astype(str).eq(str(dominant_phase))]
-    headline = current.iloc[0] if not current.empty else selected.sort_values("origins", ascending=False).iloc[0]
+    headline = (
+        current.iloc[0]
+        if not current.empty
+        else selected.sort_values("origins", ascending=False).iloc[0]
+    )
     render_card_grid(
         [
             ("Current Phase", dominant_phase),
@@ -658,6 +676,8 @@ def _render_crisis_playback(crisis: pd.DataFrame) -> None:
         selection_mode="single",
         key="dashboard_v2_cycle_crisis_horizon",
     )
+    if not selected_horizon:
+        return
     selected = data[
         data["crisis"].astype(str).eq(str(selected_crisis))
         & data["horizon"].astype(str).eq(str(selected_horizon))
@@ -943,21 +963,20 @@ def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
             row=1,
             col=1,
         )
-    outcomes = (
-        data[
-            [
-                "origin_date",
-                "qqq_forward_return",
-                "spy_forward_return",
-                "bil_forward_return",
-                "qqq_forward_drawdown",
-                "dominant_phase",
-                "phase_fit",
-            ]
+    outcome_columns = [
+        column
+        for column in [
+            "origin_date",
+            "qqq_forward_return",
+            "spy_forward_return",
+            "bil_forward_return",
+            "qqq_forward_drawdown",
+            "dominant_phase",
+            "phase_fit",
         ]
-        .drop_duplicates()
-        .sort_values("origin_date")
-    )
+        if column in data
+    ]
+    outcomes = data[outcome_columns].drop_duplicates().sort_values("origin_date")
     outcome_series = [
         ("QQQ forward return", "qqq_forward_return", "#2563eb"),
         ("SPY forward return", "spy_forward_return", "#16a34a"),
@@ -978,7 +997,10 @@ def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
                 name=name,
                 line={"color": color, "width": 2},
                 marker={"size": 5},
-                customdata=outcomes[["dominant_phase", "phase_fit"]].to_numpy(),
+                customdata=outcomes.reindex(
+                    columns=["dominant_phase", "phase_fit"],
+                    fill_value="n/a",
+                ).to_numpy(),
                 hovertemplate=(
                     "<b>%{x|%Y-%m-%d}</b><br>"
                     f"{name}: " + "%{y:.1%}<br>"
