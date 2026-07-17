@@ -548,27 +548,6 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
                 ),
             )
         )
-    label_rows = rotation.sort_values(
-        ["current_activation", "proven_relevance"],
-        ascending=False,
-    ).reset_index(drop=True)
-    for ordinal, row in label_rows.iterrows():
-        label_style = _driver_rotation_label_style(row, ordinal)
-        fig.add_annotation(
-            x=float(row["proven_relevance"]),
-            y=float(row["current_activation"]),
-            text=str(row["driver_label"]),
-            xref="x",
-            yref="y",
-            showarrow=False,
-            xshift=label_style["xshift"],
-            yshift=label_style["yshift"],
-            xanchor=label_style["xanchor"],
-            yanchor=label_style["yanchor"],
-            align="left",
-            font={"size": 12, "color": "#667085"},
-            opacity=0.86,
-        )
     for _, row in (
         rotation.dropna(subset=["previous_30d_activation"])
         .assign(abs_change=lambda frame: frame["change_30d"].abs())
@@ -580,6 +559,7 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
         current = float(row["current_activation"])
         if abs(current - previous) < 0.08:
             continue
+        arrow_color = "#16a34a" if current > previous else "#dc2626"
         fig.add_annotation(
             x=float(row["proven_relevance"]),
             y=current,
@@ -590,11 +570,11 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
             axref="x",
             ayref="y",
             showarrow=True,
-            arrowhead=2,
-            arrowsize=1.1,
-            arrowwidth=1.2,
-            arrowcolor="#111827",
-            opacity=0.55,
+            arrowhead=3,
+            arrowsize=1.7,
+            arrowwidth=3.2,
+            arrowcolor=arrow_color,
+            opacity=0.92,
         )
     fig.add_vline(x=0.45, line_dash="dash", line_color="#94a3b8")
     fig.add_hline(y=0.45, line_dash="dash", line_color="#94a3b8")
@@ -610,47 +590,6 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
         height=520,
     )
     return fig
-
-
-def _driver_rotation_label_style(row: pd.Series, ordinal: int) -> dict[str, int | str]:
-    x = float(row.get("proven_relevance", 0.0))
-    y = float(row.get("current_activation", 0.0))
-    xshift = 12 if x < 0.55 else -12
-    yshift = 16
-    xanchor = "left" if x < 0.55 else "right"
-    yanchor = "bottom"
-
-    if x <= 0.08:
-        xshift = 18
-        xanchor = "left"
-    elif x >= 0.92:
-        xshift = -20
-        xanchor = "right"
-
-    if y >= 0.92:
-        yshift = -22
-        yanchor = "top"
-    elif y <= 0.08:
-        yshift = 22
-        yanchor = "bottom"
-
-    if y >= 0.75 and 0.25 <= x <= 0.50:
-        xshift = 14 if ordinal % 2 == 0 else -14
-        xanchor = "left" if xshift > 0 else "right"
-        yshift = -22 - 8 * (ordinal % 3)
-        yanchor = "top"
-    elif y >= 0.75 and 0.50 < x < 0.82:
-        xshift = 14 if ordinal % 2 == 0 else -14
-        xanchor = "left" if xshift > 0 else "right"
-        yshift = -18 - 8 * (ordinal % 2)
-        yanchor = "top"
-
-    return {
-        "xshift": xshift,
-        "yshift": yshift,
-        "xanchor": xanchor,
-        "yanchor": yanchor,
-    }
 
 
 def _driver_rotation_heatmap_figure(rotation: pd.DataFrame) -> go.Figure:

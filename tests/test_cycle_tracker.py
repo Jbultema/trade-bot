@@ -11,6 +11,7 @@ from trade_bot.research.cycle_tracker import (
     build_cycle_validation_observations,
     build_path_candidate_validation_observations,
     build_path_transition_forecast,
+    build_path_validation_observations,
     build_phase_candidate_frontier,
     run_cycle_tracker,
     summarize_path_phase_reliability,
@@ -85,6 +86,8 @@ def test_cycle_tracker_writes_artifacts(tmp_path) -> None:
     assert not result.candidate_scores.empty
     assert not result.phase_candidate_frontier.empty
     assert not result.path_validation_metrics.empty
+    assert "0m" in set(result.phase_reliability["horizon"].astype(str))
+    assert "0m" in set(result.path_reliability["horizon"].astype(str))
     assert (tmp_path / "cycle_phase_probabilities.csv").exists()
     assert (tmp_path / "cycle_transition_forecast.csv").exists()
     assert (tmp_path / "cycle_candidate_scores.csv").exists()
@@ -228,6 +231,46 @@ def test_path_reliability_summarizes_path_fit() -> None:
     assert row["path_fit_rate"] == pytest.approx(0.5)
 
 
+def test_path_reliability_includes_nowcast_agreement() -> None:
+    prices = _cycle_prices("acceleration", periods=340)
+    origin = str(prices.index[260].date())
+    path_history = pd.DataFrame(
+        [
+            {
+                "as_of_date": origin,
+                "path_phase": "post_unwind_compounding",
+                "evidence_phase": "post_unwind_compounding",
+                "path_probability": 0.72,
+                "phase_duration_days": 63,
+            },
+            {
+                "as_of_date": origin,
+                "path_phase": "post_unwind_compounding",
+                "evidence_phase": "acceleration",
+                "path_probability": 0.64,
+                "phase_duration_days": 42,
+            },
+        ]
+    )
+
+    observations = build_path_validation_observations(
+        prices,
+        path_history,
+        horizons=(0, 21),
+    )
+    nowcast = observations[observations["horizon"].astype(str).eq("0m")]
+
+    assert len(nowcast) == 2
+    assert nowcast["path_phase_fit"].tolist() == [True, False]
+    assert nowcast["qqq_forward_return"].isna().all()
+    assert (pd.to_datetime(nowcast["entry_date"]) == pd.to_datetime(nowcast["origin_date"])).all()
+
+    reliability = summarize_path_phase_reliability(observations)
+    nowcast_summary = reliability[reliability["horizon"].astype(str).eq("0m")].iloc[0]
+    assert nowcast_summary["path_fit_rate"] == pytest.approx(0.5)
+    assert "no forward realized outcome" in str(nowcast_summary["expected_behavior"])
+
+
 def test_path_candidate_validation_uses_decoded_path_phase() -> None:
     prices = _cycle_prices("unwind", periods=420)
     path_history = pd.DataFrame(
@@ -300,13 +343,16 @@ def test_phase_reliability_summarizes_classifier_fit() -> None:
 def test_crisis_playback_replays_phase_probabilities() -> None:
     prices = _cycle_prices("unwind", periods=900, start="2018-01-01")
 
-    playback = build_cycle_crisis_playback(prices, horizons=(21,), origin_step_days=21)
+    playback = build_cycle_crisis_playback(prices, horizons=(0, 21), origin_step_days=21)
 
     assert not playback.empty
     assert {"crisis", "stage", "phase", "phase_probability", "phase_fit"}.issubset(
         playback.columns
     )
-    assert set(playback["horizon"]) == {"1m"}
+    assert set(playback["horizon"]) == {"0m", "1m"}
+    nowcast = playback[playback["horizon"].astype(str).eq("0m")]
+    assert nowcast["qqq_forward_return"].isna().all()
+    assert nowcast["phase_fit"].astype(bool).all()
 
 
 def test_liquidation_phase_favors_defensive_candidates() -> None:

@@ -1,6 +1,6 @@
 # Research Pruning and Regrowth Protocol
 
-Status: maintained research-policy note. Last reviewed: 2026-06-29.
+Status: maintained research-policy note. Last reviewed: 2026-07-17.
 
 This project is intentionally experimental, but the dashboard should not treat every experiment as equally alive. Historical artifacts remain auditable; pruning only changes the default research queue.
 
@@ -14,22 +14,25 @@ The active reset-era experiment archive is classified into research statuses:
 - `pruned_dead_end`: failed risk/return, low-growth, or validation-failed experiment. Keep for audit, hide from default curation.
 - `reference`: static or configured benchmark rows.
 
-The working read after the ML and outcome-utility expansion is sharp:
-broad future-state ML can easily become too conservative, while bounded ML and
-re-entry overlays preserve high CAGR better. Strategy-specific drawdown ML
-improved CAGR and Calmar slightly in the best cases, but it is not a promoted
-default driver for material max-drawdown reduction versus the best raw high-CAGR
-AI escape controls.
-Reactive classic drawdown-control hybrids were worse and should not be promoted
-for the AI escape engine without a new reason.
+The working read after the ML, outcome-utility, launch, simulation, and
+Cycle-Tracker expansions is sharper than the original reset-era read: broad
+future-state ML can easily become too conservative, while explicit off-ramp and
+re-entry systems have preserved high CAGR better. Strategy-specific drawdown ML
+improved CAGR and Calmar slightly in some cases, but it is not a promoted
+default driver for material max-drawdown reduction versus the strongest
+high-growth re-entry families. Reactive classic drawdown-control hybrids were
+worse and should not be promoted for the growth engine without a new reason.
 
-The growth-constrained outcome lens changed the curation objective. A strategy
-with roughly 14-15 percent CAGR and a tolerable -20 to -22 percent drawdown can
-rank above an 11 percent CAGR strategy with a smaller drawdown when validation is
-comparable. The hard pruning boundary for drawdown is the growth hard limit,
-not a blanket -25 percent cutoff. The broad/sector growth-frontier pass was
-useful evidence but did not dethrone the existing high-CAGR re-entry and AI-escape
-guardrail families.
+The growth-constrained outcome lens changed the curation objective. The leading
+runtime snapshot candidates have recently clustered near the 20-22 percent
+historical CAGR and roughly -18 to -22 percent max-drawdown area. That is strong
+research evidence, not a live-return promise. The correct comparison is not
+"highest CAGR wins"; it is whether the extra terminal wealth justifies drawdown,
+turnover, concentration, execution, launch, paper-monitoring, and validation
+risk. The hard pruning boundary for drawdown is the configured growth hard
+limit, not a blanket -25 percent cutoff. The broad/sector growth-frontier pass
+was useful evidence but did not dethrone the existing high-CAGR re-entry and
+growth-guardrail families.
 
 This section is empirical, not a permanent truth. Revisit it after major
 experiment batches, material data changes, or sustained forward paper evidence.

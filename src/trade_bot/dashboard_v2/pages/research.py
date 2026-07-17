@@ -2,8 +2,8 @@ from __future__ import annotations
 
 import pandas as pd
 import plotly.graph_objects as go
-from plotly.subplots import make_subplots
 import streamlit as st
+from plotly.subplots import make_subplots
 
 from trade_bot.dashboard.components import _clearable_selectbox, _render_metric_dataframe
 from trade_bot.dashboard.formatting import _display_metrics
@@ -19,7 +19,12 @@ from trade_bot.dashboard.strategy_candidates import (
     runtime_benchmark_metrics,
     scorecard_option_label,
 )
-from trade_bot.dashboard_v2.components.cards import render_callout, render_card_grid
+from trade_bot.dashboard_v2.components.cards import (
+    render_callout,
+    render_card_grid,
+    render_chart,
+    render_section_header,
+)
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.artifact_service import (
     cycle_tracker_frames,
@@ -108,7 +113,7 @@ def render_research_page(runtime: DashboardRuntime) -> None:
 
 
 def _render_leaderboard(frame: pd.DataFrame) -> None:
-    st.subheader("Top Candidate Summary")
+    render_section_header("Top Candidate Summary")
     if frame.empty:
         st.info("No experiment scorecards are available.")
         return
@@ -131,7 +136,7 @@ def _render_leaderboard(frame: pd.DataFrame) -> None:
 
 
 def _render_candidate(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> None:
-    st.subheader("Candidate Deep Dive")
+    render_section_header("Candidate Deep Dive")
     if scores.empty or "strategy" not in scores:
         st.info("No candidates are available.")
         return
@@ -203,7 +208,7 @@ def _render_candidate(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> Non
     )
     _render_candidate_artifact_read(selected_strategy)
     st.divider()
-    st.subheader("Candidate Detail Tabs")
+    render_section_header("Candidate Detail Tabs")
     st.caption(
         "Full drilldown for the selected candidate: performance, allocation, decision "
         "timeline, factor attribution, mechanics, robustness, and manifest/risk notes."
@@ -275,27 +280,27 @@ def _render_candidate_artifact_read(strategy_name: str) -> None:
 
 
 def _render_validation_artifacts() -> None:
-    st.subheader("Validation Artifacts")
+    render_section_header("Validation Artifacts")
     pbo = pbo_frames()
     leadership = leadership_frames()
     if not pbo["summary"].empty:
-        st.markdown("**PBO summary**")
+        render_section_header("PBO Summary")
         _render_metric_dataframe(_display_metrics(pbo["summary"]))
     if not pbo["selection"].empty:
-        st.markdown("**PBO selections**")
+        render_section_header("PBO Selections")
         _render_metric_dataframe(_display_metrics(pbo["selection"].head(20)))
     if not leadership["summary"].empty:
-        st.markdown("**Leadership summary**")
+        render_section_header("Leadership Summary")
         _render_metric_dataframe(_display_metrics(leadership["summary"].head(20)))
     if not leadership["router"].empty:
-        st.markdown("**Router comparison**")
+        render_section_header("Router Comparison")
         _render_metric_dataframe(_display_metrics(leadership["router"].head(40)))
     if all(frame.empty for frame in [*pbo.values(), *leadership.values()]):
         st.info("No validation artifacts found yet.")
 
 
 def _render_cycle_tracker() -> None:
-    st.subheader("Scenario / Phase Frontier")
+    render_section_header("Scenario / Phase Frontier")
     st.caption(
         "Research/watch layer for speculative-cycle phases, horizon phase probabilities, "
         "and conditional winners. This view reads persisted artifacts only."
@@ -340,9 +345,16 @@ def _render_cycle_tracker() -> None:
     render_callout(
         "Cycle Tracker is not a crash timer or allocation override. It asks which speculative-cycle phase the current market resembles, which phases are plausible by horizon, and which assets historically performed better in similar prior states.",
     )
+    _render_current_phase_candidates_expander(candidates)
 
     if not path_history.empty:
-        _render_path_cycle_state(path_history, path_forecast, path_reliability)
+        _render_path_cycle_state(
+            path_history,
+            path_forecast,
+            path_reliability,
+            frontier,
+            path_validation if not path_validation.empty else validation,
+        )
     else:
         st.info(
             "This cycle tracker run does not include path-aware cycle state yet. Re-run `poetry run trade-bot run-cycle-tracker`."
@@ -362,43 +374,16 @@ def _render_cycle_tracker() -> None:
             "This cycle tracker run does not include crisis playback yet. Re-run `poetry run trade-bot run-cycle-tracker`."
         )
 
-    forecast_to_show = path_forecast if not path_forecast.empty else forecast
-    if not forecast_to_show.empty:
-        title = (
-            "0M nowcast + path-constrained forward phase frontier"
-            if not path_forecast.empty
-            else "0M nowcast + forward phase frontier"
+    if path_forecast.empty and forecast.empty and not phase.empty:
+        render_section_header("0M Nowcast Phase Probabilities")
+        render_chart(
+            _phase_frontier_figure(phase),
+            title="Scenario / Phase Frontier",
+            key="dashboard_v2_cycle_nowcast_phase_frontier_chart",
         )
-        st.markdown(f"**{title}**")
-        st.plotly_chart(_phase_frontier_figure(forecast_to_show), use_container_width=True)
-        _render_metric_dataframe(_display_metrics(forecast_to_show.head(80)))
-    elif not phase.empty:
-        st.markdown("**0M nowcast phase probabilities**")
-        st.plotly_chart(_phase_frontier_figure(phase), use_container_width=True)
-
-    if not candidates.empty:
-        st.markdown("**Current-phase conditional candidates**")
-        candidate_columns = [
-            column
-            for column in [
-                "ticker",
-                "asset_role",
-                "candidate_role",
-                "candidate_score",
-                "current_momentum_21d",
-                "current_momentum_63d",
-                "phase_forward_median_return",
-                "phase_median_excess_vs_qqq",
-                "phase_hit_rate_vs_qqq",
-                "phase_origins",
-                "interpretation",
-            ]
-            if column in candidates
-        ]
-        _render_metric_dataframe(_display_metrics(candidates[candidate_columns].head(30)))
 
     if not frontier.empty:
-        st.markdown("**Scenario / phase winner frontier**")
+        render_section_header("Scenario / Phase Winner Frontier")
         _render_phase_candidate_frontier(frontier)
 
     if not evidence.empty:
@@ -453,12 +438,42 @@ def _render_cycle_tracker() -> None:
             )
 
 
+def _render_current_phase_candidates_expander(candidates: pd.DataFrame) -> None:
+    if candidates.empty:
+        return
+    candidate_columns = [
+        column
+        for column in [
+            "ticker",
+            "asset_role",
+            "candidate_role",
+            "candidate_score",
+            "current_momentum_21d",
+            "current_momentum_63d",
+            "phase_forward_median_return",
+            "phase_median_excess_vs_qqq",
+            "phase_hit_rate_vs_qqq",
+            "phase_origins",
+            "interpretation",
+        ]
+        if column in candidates
+    ]
+    display = candidates[candidate_columns] if candidate_columns else candidates
+    with st.expander(
+        f"Current-phase conditional candidates ({len(candidates):,})",
+        expanded=False,
+    ):
+        _render_metric_dataframe(_display_metrics(display.head(30)))
+
+
 def _render_path_cycle_state(
     path_history: pd.DataFrame,
     path_forecast: pd.DataFrame,
     path_reliability: pd.DataFrame,
+    frontier: pd.DataFrame,
+    validation: pd.DataFrame,
 ) -> None:
-    st.markdown("**Path-aware cycle state**")
+    render_section_header("Path-Aware Cycle Tracker")
     st.caption(
         "Sequential decoder: turns simultaneous phase evidence into one plausible path using allowed transitions, phase duration, and prior unwind/recovery memory."
     )
@@ -480,10 +495,14 @@ def _render_path_cycle_state(
         ]
     )
     render_callout(
-        "This is the cycle tracker answer to path dependence: bottoming and post-unwind states are constrained unless prior drawdown, unwind, or recovery memory exists. The evidence model remains visible as diagnostics, but the path phase is the operational read."
+        "This is the cycle tracker answer to path dependence: bottoming and post-unwind states are constrained unless prior drawdown, unwind, or recovery memory exists. If raw evidence and path phase disagree, treat the path phase as the operational read and the evidence phase as a diagnostic."
     )
     if not path_forecast.empty:
-        st.plotly_chart(_phase_frontier_figure(path_forecast), use_container_width=True)
+        _render_path_phase_behavior_inspector(
+            path_forecast,
+            frontier,
+            validation,
+        )
     if not path_reliability.empty:
         _render_path_cycle_reliability(
             path_reliability,
@@ -511,6 +530,232 @@ def _render_path_cycle_state(
         _render_metric_dataframe(_display_metrics(data[columns].tail(80)))
 
 
+def _render_path_phase_behavior_inspector(
+    path_forecast: pd.DataFrame,
+    frontier: pd.DataFrame,
+    validation: pd.DataFrame,
+) -> None:
+    render_section_header(
+        "Path Phase Behavior Inspector",
+        help_text=(
+            "Select a horizon and phase from the path-aware forecast to inspect expected return, "
+            "drawdown, benchmark excess, and the conditional winner set for that slice."
+        ),
+    )
+    st.caption(
+        "Use this paired view to ask: if this horizon/phase dominates, what has usually happened next and which assets ranked best in similar prior states?"
+    )
+    forecast = path_forecast.copy()
+    if "horizon_days" in forecast:
+        forecast["horizon_days"] = pd.to_numeric(forecast["horizon_days"], errors="coerce")
+    else:
+        forecast["horizon_days"] = range(len(forecast))
+    if "probability" in forecast:
+        forecast["probability"] = pd.to_numeric(forecast["probability"], errors="coerce").fillna(0.0)
+    else:
+        forecast["probability"] = 0.0
+    horizon_order = (
+        forecast[["horizon", "horizon_days"]]
+        .drop_duplicates()
+        .sort_values("horizon_days")["horizon"]
+        .astype(str)
+        .tolist()
+    )
+    selected_horizon = st.pills(
+        "Behavior horizon",
+        horizon_order,
+        default="3m" if "3m" in horizon_order else (horizon_order[0] if horizon_order else None),
+        selection_mode="single",
+        key="dashboard_v2_cycle_behavior_horizon",
+    )
+    if not selected_horizon:
+        return
+    horizon_frame = forecast[forecast["horizon"].astype(str).eq(str(selected_horizon))].copy()
+    if horizon_frame.empty:
+        st.info("No path-aware phase rows are available for this horizon.")
+        return
+    phase_options = (
+        horizon_frame[["phase", "probability"]]
+        .drop_duplicates()
+        .sort_values("probability", ascending=False)
+    )
+    phase_labels = [
+        f"{row.phase} ({float(row.probability):.1%})"
+        for row in phase_options.itertuples(index=False)
+    ]
+    label_to_phase = dict(
+        zip(phase_labels, phase_options["phase"].astype(str).tolist(), strict=False)
+    )
+    selected_label = st.selectbox(
+        "Phase slice to inspect",
+        phase_labels,
+        index=0,
+        key="dashboard_v2_cycle_behavior_phase",
+    )
+    selected_phase = label_to_phase.get(str(selected_label), "")
+    selected_probability = 0.0
+    selected_probability_rows = horizon_frame[horizon_frame["phase"].astype(str).eq(selected_phase)]
+    if not selected_probability_rows.empty:
+        selected_probability = float(selected_probability_rows["probability"].iloc[0])
+
+    render_chart(
+        _phase_frontier_figure(
+            forecast,
+            selected_horizon=str(selected_horizon),
+            selected_phase=selected_phase,
+        ),
+        title="Path-Aware Transition Model",
+        help_text=(
+            "Stacked bars show phase probabilities by horizon after sequence rules are applied. "
+            "The highlighted marker is the horizon/phase slice being inspected below."
+        ),
+        key=f"dashboard_v2_cycle_path_transition_model_chart_{selected_horizon}_{selected_phase}",
+    )
+
+    frontier_slice = _slice_horizon_phase(
+        frontier,
+        horizon=str(selected_horizon),
+        phase_column="phase",
+        phase=selected_phase,
+    )
+    validation_slice = _slice_horizon_phase(
+        validation,
+        horizon=str(selected_horizon),
+        phase_column="dominant_phase",
+        phase=selected_phase,
+    )
+    summary = _phase_behavior_summary(validation_slice)
+    top_ticker = (
+        str(frontier_slice.sort_values(["rank", "frontier_score"], ascending=[True, False]).iloc[0]["ticker"])
+        if not frontier_slice.empty and "ticker" in frontier_slice
+        else "n/a"
+    )
+    render_card_grid(
+        [
+            (
+                "Selected Slice",
+                f"{selected_horizon} / {selected_phase}",
+                "The path-aware horizon and phase currently being inspected.",
+            ),
+            (
+                "Phase Odds",
+                _fmt_pct(selected_probability),
+                "Current path-constrained probability assigned to this phase at the selected horizon.",
+            ),
+            (
+                "Historical Origins",
+                int(summary.get("origins", 0)),
+                "Prior-only historical examples behind the selected phase and horizon.",
+            ),
+            (
+                "Median Forward Return",
+                _fmt_pct(summary.get("median_forward_return")),
+                "Median next-window return across assets measured in historical origins for this phase.",
+            ),
+            (
+                "Median Drawdown",
+                _fmt_pct(summary.get("median_forward_drawdown")),
+                "Median peak-to-trough drawdown during the selected forward window. More negative means rougher path risk.",
+            ),
+            (
+                "Top Frontier Asset",
+                top_ticker,
+                "Highest-ranked ticker in the current conditional winner frontier for this phase.",
+            ),
+        ]
+    )
+    render_callout(
+        f"For {selected_horizon} `{selected_phase}`, the inspector combines the current path probability "
+        "with prior-only historical outcome behavior and the current conditional winner frontier. Treat this as scenario planning, not an allocation override."
+    )
+
+    outcome_figure = _phase_outcome_profile_figure(validation_slice, phase=selected_phase)
+    if outcome_figure is not None:
+        left, right = st.columns([0.46, 0.54])
+        with left:
+            render_chart(
+                outcome_figure,
+                title="Selected Phase Outcome Profile",
+                help_text=(
+                    "Bars summarize what usually happened after historical origins with this phase and horizon: "
+                    "returns, benchmark excess, and drawdown."
+                ),
+                key=f"dashboard_v2_cycle_phase_outcome_profile_{selected_horizon}_{selected_phase}",
+            )
+        with right:
+            if frontier_slice.empty:
+                st.info("No conditional winner frontier rows are available for this slice.")
+            else:
+                render_chart(
+                    _phase_winner_figure(
+                        frontier_slice.sort_values(
+                            ["rank", "frontier_score"],
+                            ascending=[True, False],
+                        ).head(8)
+                    ),
+                    title="Conditional Winner Frontier",
+                    help_text=(
+                        "Ranks assets that historically did best in similar phase/horizon settings, blended with current momentum and role rules."
+                    ),
+                    key=f"dashboard_v2_cycle_behavior_winner_chart_{selected_horizon}_{selected_phase}",
+                )
+    elif not frontier_slice.empty:
+        render_chart(
+            _phase_winner_figure(
+                frontier_slice.sort_values(["rank", "frontier_score"], ascending=[True, False]).head(8)
+            ),
+            title="Conditional Winner Frontier",
+            key=f"dashboard_v2_cycle_behavior_winner_chart_{selected_horizon}_{selected_phase}",
+        )
+
+    with st.expander("Selected phase detail table", expanded=False):
+        if validation_slice.empty and frontier_slice.empty:
+            st.info("No validation or frontier rows are available for this selection.")
+        if not validation_slice.empty:
+            st.caption("Historical outcome behavior for the selected phase and horizon.")
+            validation_columns = [
+                column
+                for column in [
+                    "dominant_phase",
+                    "horizon",
+                    "ticker",
+                    "asset_role",
+                    "origins",
+                    "median_forward_return",
+                    "median_excess_vs_spy",
+                    "median_excess_vs_qqq",
+                    "hit_rate_vs_qqq",
+                    "median_forward_drawdown",
+                    "severe_drawdown_rate",
+                    "phase_rank_score",
+                ]
+                if column in validation_slice
+            ]
+            _render_metric_dataframe(_display_metrics(validation_slice[validation_columns].head(40)))
+        if not frontier_slice.empty:
+            st.caption("Current conditional winner frontier for the selected phase and horizon.")
+            frontier_columns = [
+                column
+                for column in [
+                    "rank",
+                    "ticker",
+                    "asset_role",
+                    "phase_window_role",
+                    "frontier_role",
+                    "frontier_score",
+                    "median_forward_return",
+                    "median_excess_vs_spy",
+                    "median_excess_vs_qqq",
+                    "hit_rate_vs_qqq",
+                    "median_forward_drawdown",
+                    "origins",
+                    "interpretation",
+                ]
+                if column in frontier_slice
+            ]
+            _render_metric_dataframe(_display_metrics(frontier_slice[frontier_columns].head(40)))
+
+
 def _render_path_cycle_reliability(
     path_reliability: pd.DataFrame,
     *,
@@ -526,6 +771,14 @@ def _render_path_cycle_reliability(
         .sort_values("horizon_days")["horizon"]
         .astype(str)
         .tolist()
+    )
+    has_nowcast = data["horizon_days"].eq(0).any()
+    render_section_header(
+        "Path Reliability",
+        help_text=_path_reliability_intro_text(has_nowcast=bool(has_nowcast)),
+    )
+    render_callout(
+        _path_reliability_callout_text(has_nowcast=bool(has_nowcast))
     )
     selected_horizon = st.pills(
         "Path reliability horizon",
@@ -546,15 +799,49 @@ def _render_path_cycle_reliability(
         if not current.empty
         else selected.sort_values("origins", ascending=False).iloc[0]
     )
+    is_nowcast = int(pd.to_numeric(pd.Series([headline.get("horizon_days")]), errors="coerce").fillna(-1).iloc[0]) == 0
+    fit_help = (
+        "For 0M, this is the share of historical origins where the path-constrained phase agreed with the raw evidence phase on the same date. It is a nowcast coherence check, not a forward prediction score."
+        if is_nowcast
+        else "For forward horizons, this is the share of historical origins where the next market window behaved the way this path-aware phase implies."
+    )
     render_card_grid(
         [
-            ("Path Fit Rate", _fmt_pct(headline.get("path_fit_rate"))),
-            ("Path Origins", int(headline.get("origins", 0))),
-            ("Path Label", headline.get("reliability_label", "n/a")),
+            (
+                "Path Fit Rate",
+                _fmt_pct(headline.get("path_fit_rate")),
+                fit_help,
+            ),
+            (
+                "Path Origins",
+                int(headline.get("origins", 0)),
+                "Historical prior-only origins available for this path phase and horizon. More origins make the read less fragile.",
+            ),
+            (
+                "Path Label",
+                headline.get("reliability_label", "n/a"),
+                "Reliability summary based on fit rate and sample size. Supportive labels mean the operational phase has historical backing.",
+            ),
         ]
     )
-    st.caption(str(headline.get("expected_behavior", "")))
-    st.plotly_chart(_path_reliability_figure(selected), use_container_width=True)
+    if is_nowcast:
+        render_callout(
+            f"For 0M, path-aware `{headline.get('path_phase', path_phase)}` agreed with the raw evidence phase "
+            f"{_fmt_pct(headline.get('path_fit_rate'))} of the time across {int(headline.get('origins', 0))} historical origins. "
+            "This does not score a future return; it scores whether the sequence-aware operational state usually lines up with same-date evidence."
+        )
+    else:
+        render_callout(
+            f"For {selected_horizon}, path-aware `{headline.get('path_phase', path_phase)}` fit history "
+            f"{_fmt_pct(headline.get('path_fit_rate'))} across {int(headline.get('origins', 0))} origins. "
+            f"Expected behavior: {headline.get('expected_behavior', 'n/a')}"
+        )
+    render_chart(
+        _path_reliability_figure(selected),
+        title="Path Reliability",
+        help_text=_path_reliability_chart_help_text(has_nowcast=bool(has_nowcast)),
+        key=f"dashboard_v2_cycle_path_reliability_chart_{selected_horizon}",
+    )
     with st.expander("Path reliability audit table", expanded=False):
         columns = [
             column
@@ -575,10 +862,54 @@ def _render_path_cycle_reliability(
         _render_metric_dataframe(_display_metrics(selected[columns]))
 
 
+def _path_reliability_intro_text(*, has_nowcast: bool) -> str:
+    if has_nowcast:
+        return (
+            "Trust check for the sequential operational read. 0M is a nowcast agreement check between "
+            "path-constrained phase and raw evidence phase. Forward horizons ask whether realized next-window "
+            "behavior matched what that path phase implies."
+        )
+    return (
+        "Trust check for the sequential operational read. Available forward horizons ask whether realized "
+        "next-window behavior matched what the path-constrained phase implies."
+    )
+
+
+def _path_reliability_callout_text(*, has_nowcast: bool) -> str:
+    if has_nowcast:
+        return (
+            "Operational trust check: 0M measures whether the sequential path decoder agrees with same-date raw phase evidence. "
+            "1M and longer horizons measure whether the following market window behaved the way that path phase implies. "
+            "This uses prior phase memory, allowed transitions, duration, prior unwind/bottoming evidence, and drawdown preconditions."
+        )
+    return (
+        "Forward-horizon trust check: available horizons measure whether the following market window behaved the way "
+        "that path phase implies. This uses prior phase memory, allowed transitions, duration, prior unwind/bottoming "
+        "evidence, and drawdown preconditions."
+    )
+
+
+def _path_reliability_chart_help_text(*, has_nowcast: bool) -> str:
+    if has_nowcast:
+        return (
+            "For 0M, bars show same-date agreement between path-constrained state and raw evidence state. "
+            "For 1M and longer, bars show historical hit rates for the phase's expected forward behavior."
+        )
+    return (
+        "Bars show historical hit rates for the selected forward horizon and each path phase's expected behavior."
+    )
+
+
 def _render_cycle_reliability(reliability: pd.DataFrame, *, dominant_phase: str) -> None:
-    st.markdown("**Historical phase reliability**")
+    render_section_header(
+        "Historical Phase Reliability",
+        help_text=(
+            "Trust check for the raw evidence label before path-aware sequence rules. It asks whether "
+            "historical evidence-only phase labels were followed by the behavior that phase implies."
+        ),
+    )
     st.caption(
-        "Prior-only audit: when Cycle Tracker labeled a historical origin with a phase, did the next horizon behave the way that phase implies?"
+        "Raw evidence audit: when Cycle Tracker evidence labeled a historical origin with phase X, did the next horizon behave the way that phase implies?"
     )
     data = reliability.copy()
     data["horizon_days"] = pd.to_numeric(data["horizon_days"], errors="coerce")
@@ -610,18 +941,54 @@ def _render_cycle_reliability(reliability: pd.DataFrame, *, dominant_phase: str)
         if not current.empty
         else selected.sort_values("origins", ascending=False).iloc[0]
     )
+    is_nowcast = int(pd.to_numeric(pd.Series([headline.get("horizon_days")]), errors="coerce").fillna(-1).iloc[0]) == 0
+    fit_label = "Nowcast Confidence" if is_nowcast else "Fit Rate"
+    fit_help = (
+        "Median raw evidence probability assigned to this phase on historical 0M nowcast origins. No forward return is measured."
+        if is_nowcast
+        else "How often this raw phase evidence label was followed by the expected forward behavior at the selected horizon."
+    )
     render_card_grid(
         [
-            ("Current Phase", dominant_phase),
-            ("Fit Rate", _fmt_pct(headline.get("phase_fit_rate"))),
-            ("Historical Origins", int(headline.get("origins", 0))),
-            ("Reliability Label", headline.get("reliability_label", "n/a")),
+            (
+                "Current Phase",
+                dominant_phase,
+                "Current raw evidence phase before path constraints. This can differ from the operational path phase.",
+            ),
+            (
+                fit_label,
+                _fmt_pct(headline.get("phase_fit_rate")),
+                fit_help,
+            ),
+            (
+                "Historical Origins",
+                int(headline.get("origins", 0)),
+                "Historical prior-only examples available for this raw phase and horizon. Thin samples should stay research-only.",
+            ),
+            (
+                "Reliability Label",
+                headline.get("reliability_label", "n/a"),
+                "Reliability summary for the raw evidence classifier, not the path-aware operational read.",
+            ),
         ]
     )
-    render_callout(
-        f"For {selected_horizon}, `{headline.get('dominant_phase', dominant_phase)}` means: {headline.get('expected_behavior', 'n/a')}",
+    if is_nowcast:
+        render_callout(
+            f"For 0M, raw `{headline.get('dominant_phase', dominant_phase)}` evidence had median nowcast confidence "
+            f"{_fmt_pct(headline.get('phase_fit_rate'))} across {int(headline.get('origins', 0))} origins. "
+            "This audits same-date classifier confidence before the sequential path rules; no forward outcome is scored.",
+        )
+    else:
+        render_callout(
+            f"For {selected_horizon}, raw `{headline.get('dominant_phase', dominant_phase)}` evidence fit history "
+            f"{_fmt_pct(headline.get('phase_fit_rate'))} across {int(headline.get('origins', 0))} origins. "
+            f"This audits the evidence classifier before the sequential path rules. Expected behavior: {headline.get('expected_behavior', 'n/a')}",
+        )
+    render_chart(
+        _phase_reliability_figure(selected),
+        title="Historical Phase Reliability",
+        key=f"dashboard_v2_cycle_phase_reliability_chart_{selected_horizon}",
     )
-    st.plotly_chart(_phase_reliability_figure(selected), use_container_width=True)
     columns = [
         column
         for column in [
@@ -643,7 +1010,7 @@ def _render_cycle_reliability(reliability: pd.DataFrame, *, dominant_phase: str)
 
 
 def _render_crisis_playback(crisis: pd.DataFrame) -> None:
-    st.markdown("**Historical crisis playback**")
+    render_section_header("Historical Crisis Playback")
     st.caption(
         "Replay Cycle Tracker phase probabilities through named historical stress windows: lead-up, unwind, and recovery."
     )
@@ -651,6 +1018,10 @@ def _render_crisis_playback(crisis: pd.DataFrame) -> None:
     data["origin_date"] = pd.to_datetime(data["origin_date"], errors="coerce")
     data["horizon_days"] = pd.to_numeric(data["horizon_days"], errors="coerce")
     data["phase_probability"] = pd.to_numeric(data["phase_probability"], errors="coerce")
+    data["dominant_phase_probability"] = pd.to_numeric(
+        data["dominant_phase_probability"],
+        errors="coerce",
+    )
     data["stage_order"] = pd.to_numeric(data["stage_order"], errors="coerce").fillna(0).astype(int)
     data["phase_fit"] = data["phase_fit"].astype(str).str.lower().isin({"true", "1", "yes"})
     crisis_options = data["crisis"].dropna().astype(str).drop_duplicates().tolist()
@@ -685,26 +1056,53 @@ def _render_crisis_playback(crisis: pd.DataFrame) -> None:
     if selected.empty:
         st.info("No crisis playback rows are available for this selection.")
         return
+    is_nowcast = selected["horizon_days"].eq(0).all()
     dominant = (
-        selected[["origin_date", "stage", "stage_order", "dominant_phase", "phase_fit"]]
+        selected[
+            [
+                "origin_date",
+                "stage",
+                "stage_order",
+                "dominant_phase",
+                "dominant_phase_probability",
+                "phase_fit",
+            ]
+        ]
         .drop_duplicates()
         .sort_values("origin_date")
     )
-    stage_summary = (
-        dominant.groupby(["stage_order", "stage", "dominant_phase"])
-        .agg(origins=("origin_date", "nunique"), fit_rate=("phase_fit", "mean"))
-        .reset_index()
-        .sort_values(["stage_order", "origins"], ascending=[True, False])
-    )
+    if is_nowcast:
+        stage_summary = (
+            dominant.groupby(["stage_order", "stage", "dominant_phase"])
+            .agg(
+                origins=("origin_date", "nunique"),
+                avg_confidence=("dominant_phase_probability", "mean"),
+            )
+            .reset_index()
+            .sort_values(["stage_order", "origins"], ascending=[True, False])
+        )
+        playback_metric = ("Avg Confidence", _fmt_pct(dominant["dominant_phase_probability"].mean()))
+    else:
+        stage_summary = (
+            dominant.groupby(["stage_order", "stage", "dominant_phase"])
+            .agg(origins=("origin_date", "nunique"), fit_rate=("phase_fit", "mean"))
+            .reset_index()
+            .sort_values(["stage_order", "origins"], ascending=[True, False])
+        )
+        playback_metric = ("Playback Fit", _fmt_pct(dominant["phase_fit"].mean()))
     render_card_grid(
         [
             ("Window", str(selected_crisis).replace("_", " ").title()),
             ("Origins", int(dominant["origin_date"].nunique())),
             ("Most Common Phase", dominant["dominant_phase"].mode().iloc[0]),
-            ("Playback Fit", _fmt_pct(dominant["phase_fit"].mean())),
+            playback_metric,
         ]
     )
-    st.plotly_chart(_crisis_playback_figure(selected), use_container_width=True)
+    render_chart(
+        _crisis_playback_figure(selected),
+        title="Historical Crisis Playback",
+        key=f"dashboard_v2_cycle_crisis_playback_chart_{selected_crisis}_{selected_horizon}",
+    )
     with st.expander("Crisis stage summary", expanded=True):
         _render_metric_dataframe(_display_metrics(stage_summary))
 
@@ -763,7 +1161,11 @@ def _render_phase_candidate_frontier(frontier: pd.DataFrame) -> None:
             ("Top Role", selected.iloc[0].get("frontier_role", "n/a")),
         ]
     )
-    st.plotly_chart(_phase_winner_figure(selected.head(8)), use_container_width=True)
+    render_chart(
+        _phase_winner_figure(selected.head(8)),
+        title="Scenario / Phase Winner Frontier Chart",
+        key=f"dashboard_v2_cycle_phase_winner_chart_{selected_horizon}_{selected_phase}",
+    )
     frontier_columns = [
         column
         for column in [
@@ -826,10 +1228,108 @@ def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
     return figure
 
 
+def _slice_horizon_phase(
+    frame: pd.DataFrame,
+    *,
+    horizon: str,
+    phase_column: str,
+    phase: str,
+) -> pd.DataFrame:
+    if frame.empty or "horizon" not in frame or phase_column not in frame:
+        return pd.DataFrame()
+    return frame[
+        frame["horizon"].astype(str).eq(str(horizon))
+        & frame[phase_column].astype(str).eq(str(phase))
+    ].copy()
+
+
+def _phase_behavior_summary(frame: pd.DataFrame) -> dict[str, float]:
+    if frame.empty:
+        return {
+            "origins": 0.0,
+            "median_forward_return": float("nan"),
+            "median_forward_drawdown": float("nan"),
+            "median_excess_vs_spy": float("nan"),
+            "median_excess_vs_qqq": float("nan"),
+            "hit_rate_vs_qqq": float("nan"),
+        }
+    summary: dict[str, float] = {}
+    origins = (
+        pd.to_numeric(frame["origins"], errors="coerce").dropna()
+        if "origins" in frame
+        else pd.Series(dtype=float)
+    )
+    summary["origins"] = float(origins.max()) if not origins.empty else float(len(frame))
+    for column in [
+        "median_forward_return",
+        "median_forward_drawdown",
+        "median_excess_vs_spy",
+        "median_excess_vs_qqq",
+        "hit_rate_vs_qqq",
+    ]:
+        values = (
+            pd.to_numeric(frame[column], errors="coerce").dropna()
+            if column in frame
+            else pd.Series(dtype=float)
+        )
+        summary[column] = float(values.median()) if not values.empty else float("nan")
+    return summary
+
+
+def _phase_outcome_profile_figure(frame: pd.DataFrame, *, phase: str) -> go.Figure | None:
+    if frame.empty:
+        return None
+    summary = _phase_behavior_summary(frame)
+    metrics = [
+        ("Forward return", "median_forward_return", "#16a34a"),
+        ("Excess vs SPY", "median_excess_vs_spy", "#06b6d4"),
+        ("Excess vs QQQ", "median_excess_vs_qqq", "#2563eb"),
+        ("Forward drawdown", "median_forward_drawdown", "#ef4444"),
+    ]
+    labels = []
+    values = []
+    colors = []
+    for label, column, color in metrics:
+        value = summary.get(column)
+        if value is None or pd.isna(value):
+            continue
+        labels.append(label)
+        values.append(value)
+        colors.append(color)
+    if not labels:
+        return None
+    figure = go.Figure(
+        go.Bar(
+            x=labels,
+            y=values,
+            marker_color=colors,
+            hovertemplate="<b>%{x}</b><br>%{y:.1%}<extra></extra>",
+        )
+    )
+    figure.add_hline(y=0, line_color="#7f8ea3", line_width=1)
+    hit_rate = summary.get("hit_rate_vs_qqq")
+    title_suffix = f" | QQQ hit rate {_fmt_pct(hit_rate)}" if hit_rate is not None and not pd.isna(hit_rate) else ""
+    figure.update_layout(
+        title_text=f"{phase.replace('_', ' ').title()} outcome profile{title_suffix}",
+        yaxis_title="Median outcome",
+        yaxis_tickformat=".0%",
+        margin={"l": 20, "r": 20, "t": 48, "b": 20},
+        height=340,
+        showlegend=False,
+    )
+    return figure
+
+
 def _phase_reliability_figure(frame: pd.DataFrame) -> go.Figure:
     data = frame.copy()
     data["phase_fit_rate"] = pd.to_numeric(data["phase_fit_rate"], errors="coerce").fillna(0.0)
     data["origins"] = pd.to_numeric(data["origins"], errors="coerce").fillna(0.0)
+    if "horizon_days" in data:
+        data["horizon_days"] = pd.to_numeric(data["horizon_days"], errors="coerce")
+        is_nowcast = data["horizon_days"].eq(0).all()
+    else:
+        is_nowcast = False
+    metric_label = "Nowcast confidence" if is_nowcast else "Phase-fit rate"
     data = data.sort_values("phase_fit_rate", ascending=True)
     color_map = {
         "historically_supportive": "#16a34a",
@@ -837,6 +1337,7 @@ def _phase_reliability_figure(frame: pd.DataFrame) -> go.Figure:
         "weak_or_context_only": "#ef4444",
         "not_reliable": "#991b1b",
         "thin_sample": "#7f8ea3",
+        "nowcast_confidence": "#0f766e",
     }
     figure = go.Figure(
         go.Bar(
@@ -849,13 +1350,13 @@ def _phase_reliability_figure(frame: pd.DataFrame) -> go.Figure:
             ],
             customdata=data[["origins", "reliability_label"]].to_numpy(),
             hovertemplate=(
-                "<b>%{y}</b><br>Fit rate: %{x:.1%}<br>"
+                f"<b>%{{y}}</b><br>{metric_label}: %{{x:.1%}}<br>"
                 "Origins: %{customdata[0]:.0f}<br>Label: %{customdata[1]}<extra></extra>"
             ),
         )
     )
     figure.update_layout(
-        xaxis_title="Phase-fit rate",
+        xaxis_title=metric_label,
         xaxis_tickformat=".0%",
         yaxis_title="Cycle phase",
         margin={"l": 20, "r": 20, "t": 20, "b": 20},
@@ -904,7 +1405,9 @@ def _path_reliability_figure(frame: pd.DataFrame) -> go.Figure:
 
 def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
     data = frame.copy()
+    data["horizon_days"] = pd.to_numeric(data.get("horizon_days"), errors="coerce")
     data = data.sort_values(["origin_date", "stage_order"])
+    is_nowcast = data["horizon_days"].eq(0).all()
     horizon = (
         data["horizon"].dropna().astype(str).iloc[0]
         if "horizon" in data and not data["horizon"].dropna().empty
@@ -939,7 +1442,9 @@ def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
         row_heights=[0.68, 0.32],
         subplot_titles=(
             "Phase read at each historical origin",
-            f"What happened over the selected {horizon} horizon",
+            "Nowcast confidence at each historical origin"
+            if is_nowcast
+            else f"What happened over the selected {horizon} horizon",
         ),
     )
     for phase in phase_order:
@@ -972,17 +1477,22 @@ def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
             "bil_forward_return",
             "qqq_forward_drawdown",
             "dominant_phase",
+            "dominant_phase_probability",
             "phase_fit",
         ]
         if column in data
     ]
     outcomes = data[outcome_columns].drop_duplicates().sort_values("origin_date")
-    outcome_series = [
-        ("QQQ forward return", "qqq_forward_return", "#2563eb"),
-        ("SPY forward return", "spy_forward_return", "#16a34a"),
-        ("BIL forward return", "bil_forward_return", "#64748b"),
-        ("QQQ max drawdown", "qqq_forward_drawdown", "#ef4444"),
-    ]
+    outcome_series = (
+        [("Dominant phase confidence", "dominant_phase_probability", "#0f766e")]
+        if is_nowcast
+        else [
+            ("QQQ forward return", "qqq_forward_return", "#2563eb"),
+            ("SPY forward return", "spy_forward_return", "#16a34a"),
+            ("BIL forward return", "bil_forward_return", "#64748b"),
+            ("QQQ max drawdown", "qqq_forward_drawdown", "#ef4444"),
+        ]
+    )
     for name, column, color in outcome_series:
         if column not in outcomes:
             continue
@@ -1005,7 +1515,11 @@ def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
                     "<b>%{x|%Y-%m-%d}</b><br>"
                     f"{name}: " + "%{y:.1%}<br>"
                     "Dominant phase: %{customdata[0]}<br>"
-                    "Phase fit: %{customdata[1]}<extra></extra>"
+                    + (
+                        "<extra></extra>"
+                        if is_nowcast
+                        else "Phase fit: %{customdata[1]}<extra></extra>"
+                    )
                 ),
             ),
             row=2,
@@ -1037,34 +1551,55 @@ def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
                 "layer": "below",
             }
         )
+        stage_midpoint = row.start
+        try:
+            stage_start = pd.to_datetime(row.start)
+            stage_end = pd.to_datetime(row.end)
+            stage_midpoint = stage_start + (stage_end - stage_start) / 2
+        except (TypeError, ValueError):
+            stage_midpoint = row.start
         annotations.append(
             {
                 "xref": "x",
                 "yref": "paper",
-                "x": row.start,
-                "y": 1.04,
+                "x": stage_midpoint,
+                "y": 1.055,
                 "text": str(row.stage).replace("_", " ").title(),
                 "showarrow": False,
                 "font": {"size": 11},
+                "xanchor": "center",
+                "yanchor": "bottom",
             }
         )
-    subplot_annotations = tuple(figure.layout.annotations or ())
+    subplot_annotations = []
+    for annotation in tuple(figure.layout.annotations or ()):
+        annotation_config = annotation.to_plotly_json()
+        if annotation_config.get("text") == "Phase read at each historical origin":
+            annotation_config.update({"y": 1.12, "yanchor": "bottom"})
+        subplot_annotations.append(annotation_config)
     figure.update_layout(
         yaxis_tickformat=".0%",
         yaxis_title="Phase probability",
         yaxis2_tickformat=".0%",
-        yaxis2_title=f"{horizon} return / drawdown",
+        yaxis2_title="Dominant phase confidence"
+        if is_nowcast
+        else f"{horizon} return / drawdown",
         xaxis2_title="Historical origin date",
         legend_title_text="Series",
         shapes=shapes,
         annotations=list(subplot_annotations) + annotations,
-        margin={"l": 20, "r": 20, "t": 40, "b": 20},
+        margin={"l": 20, "r": 20, "t": 82, "b": 20},
         height=680,
     )
     return figure
 
 
-def _phase_frontier_figure(frame: pd.DataFrame) -> go.Figure:
+def _phase_frontier_figure(
+    frame: pd.DataFrame,
+    *,
+    selected_horizon: str | None = None,
+    selected_phase: str | None = None,
+) -> go.Figure:
     data = frame.copy()
     if "horizon" not in data:
         data["horizon"] = "0m"
@@ -1105,6 +1640,7 @@ def _phase_frontier_figure(frame: pd.DataFrame) -> go.Figure:
         )
     else:
         horizons = data["horizon"].astype(str).drop_duplicates().tolist()
+    phase_values: dict[str, list[float]] = {}
     for phase in phase_order:
         phase_rows = data[data["phase"].astype(str).eq(phase)]
         if phase_rows.empty:
@@ -1113,14 +1649,74 @@ def _phase_frontier_figure(frame: pd.DataFrame) -> go.Figure:
         for horizon in horizons:
             row = phase_rows[phase_rows["horizon"].astype(str).eq(horizon)]
             y_values.append(float(row["probability"].iloc[0]) if not row.empty else 0.0)
+        phase_values[phase] = y_values
+        line_widths = [
+            3
+            if selected_horizon
+            and selected_phase
+            and str(horizon) == str(selected_horizon)
+            and phase == selected_phase
+            else 0
+            for horizon in horizons
+        ]
         figure.add_trace(
             go.Bar(
                 x=horizons,
                 y=y_values,
                 name=phase.replace("_", " ").title(),
                 marker_color=color_map.get(phase),
+                marker_line_color="#f8fafc",
+                marker_line_width=line_widths,
+                customdata=[
+                    [phase.replace("_", " ").title(), horizon]
+                    for horizon in horizons
+                ],
+                hovertemplate=(
+                    "<b>%{customdata[0]}</b><br>"
+                    "Horizon: %{customdata[1]}<br>"
+                    "Probability: %{y:.1%}<extra></extra>"
+                ),
             )
         )
+    if (
+        selected_horizon
+        and selected_phase
+        and str(selected_horizon) in horizons
+        and selected_phase in phase_values
+    ):
+        horizon_index = horizons.index(str(selected_horizon))
+        selected_value = phase_values[selected_phase][horizon_index]
+        if selected_value > 0:
+            lower = 0.0
+            for phase in phase_order:
+                if phase == selected_phase:
+                    break
+                lower += phase_values.get(phase, [0.0] * len(horizons))[horizon_index]
+            midpoint = lower + selected_value / 2
+            figure.add_trace(
+                go.Scatter(
+                    x=[str(selected_horizon)],
+                    y=[midpoint],
+                    mode="markers+text",
+                    name="Selected phase slice",
+                    marker={
+                        "symbol": "diamond",
+                        "size": 14,
+                        "color": "#f8fafc",
+                        "line": {"color": "#0f172a", "width": 2},
+                    },
+                    text=[f"{selected_phase.replace('_', ' ')}<br>{selected_value:.1%}"],
+                    textposition="middle right",
+                    hovertemplate=(
+                        "<b>Selected slice</b><br>"
+                        f"Phase: {selected_phase}<br>"
+                        f"Horizon: {selected_horizon}<br>"
+                        "Probability: %{customdata:.1%}<extra></extra>"
+                    ),
+                    customdata=[selected_value],
+                    showlegend=False,
+                )
+            )
     figure.update_layout(
         barmode="stack",
         yaxis_tickformat=".0%",
@@ -1154,13 +1750,19 @@ def _count_nonempty(frame: pd.DataFrame, column: str) -> int:
 
 def _fmt_pct(value: object) -> str:
     try:
-        return f"{float(value):.2%}"
+        numeric = float(value)
     except (TypeError, ValueError):
         return "n/a"
+    if pd.isna(numeric):
+        return "n/a"
+    return f"{numeric:.2%}"
 
 
 def _fmt_float(value: object) -> str:
     try:
-        return f"{float(value):.2f}"
+        numeric = float(value)
     except (TypeError, ValueError):
         return "n/a"
+    if pd.isna(numeric):
+        return "n/a"
+    return f"{numeric:.2f}"

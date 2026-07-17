@@ -9,7 +9,11 @@ from trade_bot.dashboard.simulation_lab import (
     _render_simulation_lab,
     _render_simulation_lab_direct_view,
 )
-from trade_bot.dashboard_v2.components.cards import render_callout, render_card_grid
+from trade_bot.dashboard_v2.components.cards import (
+    render_callout,
+    render_card_grid,
+    render_section_header,
+)
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.experiment_service import scorecards
 from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
@@ -32,35 +36,19 @@ def render_simulation_page(runtime: DashboardRuntime) -> None:
         ]
     )
     render_callout(
-        "Simulation V2 starts from persisted validation results. Bootstrap/regime/factor path engines are loaded only from the full workbench."
+        "Simulation V2 starts with strategy paths and persisted validation results. Bootstrap/regime/factor engines remain explicit loads."
     )
 
     view = st.pills(
         "Simulation view",
-        ["Validation summary", "Per-horizon metrics", "Strategy simulations", "Full workbench"],
-        default="Validation summary",
+        ["Strategy simulations", "Validation", "Full Workbench"],
+        default="Strategy simulations",
         selection_mode="single",
         key="dashboard_v2_simulation_view",
     )
-    selected_view = view or "Validation summary"
-    if selected_view == "Validation summary":
-        if runs.empty:
-            st.info("No simulation validation runs are persisted yet.")
-            return
-        _render_metric_dataframe(_display_metrics(runs.head(25)))
-    elif selected_view == "Per-horizon metrics":
-        if latest_metrics.empty:
-            st.info("No per-horizon simulation metrics are available yet.")
-            return
-        summary = (
-            latest_metrics[
-                latest_metrics.get("metric_scope", pd.Series(dtype=str)).astype(str).eq("horizon_summary")
-            ]
-            if "metric_scope" in latest_metrics
-            else latest_metrics
-        )
-        _render_metric_dataframe(_display_metrics(summary.head(100)))
-    elif selected_view == "Strategy simulations":
+    selected_view = view or "Strategy simulations"
+    if selected_view == "Strategy simulations":
+        render_section_header("Strategy Simulations")
         _render_simulation_lab_direct_view(
             "Strategy Simulations",
             bot_config=runtime.bot_config,
@@ -68,6 +56,24 @@ def render_simulation_page(runtime: DashboardRuntime) -> None:
             experiment_scorecards=scorecards(),
             warehouse_path=str(runtime.paths.run_store_path),
         )
+    elif selected_view == "Validation":
+        render_section_header("Validation Summary")
+        if runs.empty:
+            st.info("No simulation validation runs are persisted yet.")
+        else:
+            _render_metric_dataframe(_display_metrics(runs.head(25)))
+        render_section_header("Per-Horizon Metrics")
+        if latest_metrics.empty:
+            st.info("No per-horizon simulation metrics are available yet.")
+        else:
+            summary = (
+                latest_metrics[
+                    latest_metrics.get("metric_scope", pd.Series(dtype=str)).astype(str).eq("horizon_summary")
+                ]
+                if "metric_scope" in latest_metrics
+                else latest_metrics
+            )
+            _render_metric_dataframe(_display_metrics(summary.head(100)))
     else:
         render_callout(
             "This loads the full Simulation Lab. Path engines remain gated inside that page.",

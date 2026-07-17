@@ -13,7 +13,14 @@ from trade_bot.dashboard.trends import (
     latest_per_market_date,
     load_snapshot_trend_frames,
 )
-from trade_bot.dashboard_v2.components.cards import render_callout, render_card_grid
+from trade_bot.dashboard_v2.components.cards import (
+    help_icon,
+    render_callout,
+    render_card_grid,
+    render_chart,
+    render_section_header,
+)
+from trade_bot.dashboard_v2.help import metric_help
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
 
@@ -46,7 +53,7 @@ def render_today_page(runtime: DashboardRuntime) -> None:
     selected_view = view or "Decision"
 
     if selected_view == "Decision":
-        st.subheader("Trade Decision")
+        render_section_header("Trade Decision")
         plan = (
             runtime.execution_book_alignment.position_plan
             if runtime.execution_book_alignment is not None
@@ -101,13 +108,13 @@ def render_today_page(runtime: DashboardRuntime) -> None:
         if figure is None:
             st.info("No saved trend history is available yet.")
         else:
-            st.plotly_chart(figure, use_container_width=True)
+            render_chart(figure)
     else:
-        st.subheader("Raw Evidence")
+        render_section_header("Raw Evidence")
         st.dataframe(trade_decision.evidence, use_container_width=True)
-        st.subheader("Trading Alerts")
+        render_section_header("Trading Alerts")
         st.dataframe(current_state.strategy_alerts, use_container_width=True)
-        st.subheader("Scenario Outlook")
+        render_section_header("Scenario Outlook")
         _render_metric_dataframe(_display_metrics(current_state.scenario_outlook.copy()))
 
 
@@ -186,7 +193,7 @@ def _render_decision_context(
 def _decision_card_html(label: str, answer: object, detail: object) -> str:
     return (
         '<div class="v2-decision-card">'
-        f'<p class="v2-card-label">{html.escape(str(label))}</p>'
+        f'<p class="v2-card-label">{html.escape(str(label))}{help_icon(metric_help(str(label)))}</p>'
         f'<p class="v2-decision-answer">{html.escape(str(answer))}</p>'
         f'<p class="v2-decision-detail">{html.escape(str(detail))}</p>'
         "</div>"

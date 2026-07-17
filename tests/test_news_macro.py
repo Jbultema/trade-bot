@@ -100,19 +100,38 @@ def test_driver_rotation_figures_render_core_traces() -> None:
                 "change_90d": 0.8,
                 "data_support": "thin_proxy",
             },
+            {
+                "driver_label": "Volatility",
+                "model_role": "validated_context",
+                "primary_rotation_state": "fading_importance",
+                "proven_relevance": 0.6,
+                "current_activation": 0.2,
+                "previous_30d_activation": 0.7,
+                "previous_90d_activation": 0.8,
+                "change_30d": -0.5,
+                "change_90d": -0.6,
+                "data_support": "validated_market_or_macro_proxy",
+            },
         ]
     )
 
     scatter = _driver_rotation_scatter_figure(rotation)
     heatmap = _driver_rotation_heatmap_figure(rotation)
 
-    assert len(scatter.data) == 2
+    assert len(scatter.data) == 3
     assert len(heatmap.data) == 1
     assert "Historical Relevance" in str(scatter.layout.title.text)
     assert all(trace.mode == "markers" for trace in scatter.data)
-    label_annotations = [
+    permanent_label_annotations = [
         annotation
         for annotation in scatter.layout.annotations
         if annotation.showarrow is False and annotation.text in {"Credit conditions", "AI capex pressure"}
     ]
-    assert len(label_annotations) == 2
+    movement_arrows = [
+        annotation
+        for annotation in scatter.layout.annotations
+        if annotation.showarrow is True
+    ]
+    assert not permanent_label_annotations
+    assert {annotation.arrowcolor for annotation in movement_arrows} == {"#16a34a", "#dc2626"}
+    assert all(float(annotation.arrowwidth) >= 3.0 for annotation in movement_arrows)

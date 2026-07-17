@@ -1,6 +1,6 @@
 # Trade Bot System Whitepaper
 
-Status: canonical overview. Last reviewed: 2026-07-16.
+Status: canonical overview. Last reviewed: 2026-07-17.
 
 ## Executive Summary
 
@@ -83,6 +83,13 @@ Poetry-managed environment, local cached data, and DuckDB-backed storage. The
 dashboard is intentionally not the only system. Most heavy work is designed to
 run as batch or CLI jobs, then the dashboard reads precomputed snapshots so the
 interactive experience stays responsive.
+
+Dashboard V2 is now the primary operating surface. It is summary-first and
+snapshot-backed: routine pages read the latest saved snapshot, DuckDB warehouse
+tables, and persisted research artifacts before loading expensive diagnostics.
+The archived V1 dashboard remains available only for comparison/debugging. This
+keeps the daily workflow fast while preserving access to the full workbench
+when the user intentionally opens deeper diagnostic views.
 
 At a high level:
 
@@ -384,6 +391,17 @@ acceleration, pre-break, unwind, liquidation, bottoming, recovery, or
 post-unwind compounding instead of pretending that one deterministic future
 state is known today. V2 Research reads those persisted outputs rather than
 running the expensive validation in the dashboard.
+
+The Cycle Tracker deliberately separates two trust checks. Path Reliability
+audits the path-constrained operational read after sequence rules, prior phase
+memory, duration, and drawdown preconditions are applied. It asks whether
+historical origins with that path-aware label behaved as the label implied over
+the selected horizon. Historical Phase Reliability audits the raw evidence
+label before those path constraints. This split is important because raw
+evidence can look acceleration-like while the path-aware state says the market
+is better framed as post-unwind compounding. The operational read is the
+path-aware one; the raw evidence remains visible so disagreements can be
+inspected instead of hidden.
 
 Simulation validation is now treated as its own test family rather than a visual
 nice-to-have. The rolling-origin simulation test chooses historical origin dates,
@@ -700,6 +718,14 @@ material rebalance? This prevents the top-line dashboard from repeatedly saying
 "reduce risk" after the user has already logged paper trades that implemented
 the prior recommendation.
 
+Book Alignment is based on logged executions, not on recommendation tickets.
+Locking a ticket records what the system suggested; it does not change the
+tracked book. The book changes only after an execution is logged. The dashboard
+can then recalculate alignment from the local journal and latest target. DuckDB
+warehouse tables may lag until the journal is migrated, so monitoring and
+audit-table views should be read as warehouse snapshots while Forward Test is
+the operating surface for the freshest logged-book state.
+
 The boundary between Launch Lab and Forward Test is important. Launch Lab is for
 new or scale-up capital before it becomes an actively monitored sleeve. Once a
 sleeve is running, Forward Test and Book Alignment become the operating source
@@ -726,23 +752,26 @@ The top of the page is not a research dump. It starts with the action headline,
 operating brief, and book alignment. That answers "what do I need to do today?"
 before showing the deeper evidence.
 
-The Insight Workbench then branches into focused sections:
+Dashboard V2 branches into focused sections:
 
-- **Command Center**: current target posture and trade decision.
-- **Risk & Scenarios**: risk engine, scenario map, stress, factors, and off-ramp
-  logic.
-- **News & Macro**: current context, driver rotation, and latest inputs.
-- **Research Lab**: experiment comparison, outcome frontier, candidate deep
-  dives, QC diagnostics, false-alarm judgement, and live-versus-history
-  experiment comparison.
-- **Simulation Lab**: forward path modeling and scenario-conditioned outcomes.
-- **Launch Lab**: entry-gate evidence for new or scale-up capital, including
-  staged launch protocols, horizon sensitivity, and experiment-operator
-  contracts.
+- **Today**: action headline, operating brief, current posture, and book-aware
+  recommendation.
+- **Macro**: macro driver state, raw macro/ticker explorers, signal tables, and
+  external narrative comparison where local transcript artifacts exist.
+- **Risk**: portfolio risk engine, operating exposure, instability, scenario
+  lattice, confirmation matrix, market health, and momentum diagnostics.
+- **Forward Test**: tickets, execution logs, latest book alignment, and
+  allocation history.
+- **Research**: outcome frontier, Cycle Tracker, candidate deep dive, QC
+  diagnostics, false-alarm judgement, and live-versus-history experiment
+  comparison.
 - **Performance**: historical performance and custom windows.
-- **Monitoring**: champion/challenger forward evidence.
-- **Forward Test**: tickets, execution logs, book alignment, and allocation
-  history.
+- **Launch**: entry-gate evidence for new or scale-up capital, including staged
+  launch protocols, horizon sensitivity, and experiment-operator contracts.
+- **Simulation**: strategy simulations, validation calibration, and full
+  simulation workbench.
+- **Monitoring**: champion/challenger/reference forward evidence by start-date
+  cohort.
 
 The Command Center also includes a Change-Over-Time station for the operating
 metrics where direction matters. It shows compact trend charts for risk score,
@@ -775,9 +804,11 @@ metric means or how it can mislead.
 
 The left sidebar controls daily operations. Most routine refreshes can be run
 from the UI: full daily update, snapshot rebuild, warehouse migration, paper
-valuation, monitoring-window seeding, and ML diagnostics. Long experiment
-sweeps, dependency changes, Git operations, and any live-broker activity remain
-outside the one-click path because they require explicit human intent and review.
+valuation, monitoring-window seeding, and ML diagnostics. The dashboard also
+exposes local refresh controls for book alignment after executions are logged.
+Long experiment sweeps, dependency changes, Git operations, and any live-broker
+activity remain outside the one-click path because they require explicit human
+intent and review.
 
 ## 11. Governance, Limitations, And Appropriate Use
 

@@ -238,16 +238,30 @@ def run_cycle_tracker(
         path_validation_metrics if not path_validation_metrics.empty else validation_metrics
     )
     phase_reliability = summarize_phase_reliability(validation_observations)
+    if 0 in horizons:
+        phase_nowcast_reliability = build_phase_nowcast_reliability(
+            clean,
+            min_train_days=min_train_days,
+            origin_step_days=origin_step_days,
+        )
+        if not phase_nowcast_reliability.empty:
+            phase_reliability = pd.concat(
+                [phase_nowcast_reliability, phase_reliability],
+                ignore_index=True,
+            ).sort_values(
+                ["horizon_days", "phase_fit_rate", "origins"],
+                ascending=[True, False, False],
+            ).reset_index(drop=True)
     path_reliability = summarize_path_phase_reliability(
         build_path_validation_observations(
             clean,
             path_state_history,
-            horizons=validation_horizons,
+            horizons=horizons,
         )
     )
     crisis_playback = build_cycle_crisis_playback(
         clean,
-        horizons=validation_horizons or tuple(h for h in DEFAULT_PHASE_HORIZONS if h > 0),
+        horizons=horizons or DEFAULT_PHASE_HORIZONS,
     )
     candidate_scores = build_cycle_candidate_scores(
         clean,
@@ -732,7 +746,7 @@ def build_path_transition_forecast(
                 distribution = evidence
             source = "path_constrained_nowcast"
         else:
-            distribution = {phase: 0.0 for phase in PHASES}
+            distribution = dict.fromkeys(PHASES, 0.0)
             distribution[current_phase] = 1.0
             simulated_duration = duration_days
             monthly_steps = max(1, int(np.ceil(horizon_days / 21)))
@@ -790,7 +804,7 @@ def build_path_validation_observations(
     clean = _clean_prices(prices)
     if clean.empty or path_state_history.empty:
         return pd.DataFrame()
-    horizons = tuple(int(horizon) for horizon in horizons if int(horizon) > 0)
+    horizons = tuple(int(horizon) for horizon in horizons if int(horizon) >= 0)
     if not horizons:
         return pd.DataFrame()
     index = clean.index
@@ -805,7 +819,32 @@ def build_path_validation_observations(
         else:
             origin_pos = int(index.get_loc(origin_date))
         phase = str(state.get("path_phase", "normal_cycle"))
+        evidence_phase = str(state.get("evidence_phase", ""))
         for horizon in horizons:
+            if horizon == 0:
+                rows.append(
+                    {
+                        "origin_date": str(index[origin_pos].date()),
+                        "entry_date": str(index[origin_pos].date()),
+                        "end_date": str(index[origin_pos].date()),
+                        "path_phase": phase,
+                        "path_probability": _safe_float(
+                            state.get("path_probability"),
+                            default=np.nan,
+                        ),
+                        "phase_duration_days": int(
+                            _safe_float(state.get("phase_duration_days"), default=0.0)
+                        ),
+                        "horizon": _horizon_label(horizon),
+                        "horizon_days": horizon,
+                        "qqq_forward_return": np.nan,
+                        "spy_forward_return": np.nan,
+                        "bil_forward_return": np.nan,
+                        "qqq_forward_drawdown": np.nan,
+                        "path_phase_fit": bool(phase == evidence_phase),
+                    }
+                )
+                continue
             start_pos = origin_pos + 1
             end_pos = min(start_pos + horizon, len(index) - 1)
             if end_pos <= start_pos:
@@ -953,7 +992,12 @@ def summarize_path_phase_reliability(path_observations: pd.DataFrame) -> pd.Data
                 "median_spy_forward_return": float(group["spy_forward_return"].median()),
                 "median_bil_forward_return": float(group["bil_forward_return"].median()),
                 "median_qqq_forward_drawdown": float(group["qqq_forward_drawdown"].median()),
-                "expected_behavior": _phase_expected_behavior(str(phase)),
+                "expected_behavior": (
+                    "Nowcast consistency check: path phase should agree with raw evidence phase; "
+                    "no forward realized outcome is measured."
+                    if int(horizon_days) == 0
+                    else _phase_expected_behavior(str(phase))
+                ),
                 "reliability_label": _phase_reliability_label(
                     origins=int(len(group)),
                     fit_rate=fit_rate,
@@ -1135,6 +1179,67 @@ def summarize_phase_reliability(observations: pd.DataFrame) -> pd.DataFrame:
     ).reset_index(drop=True)
 
 
+def build_phase_nowcast_reliability(
+    prices: pd.DataFrame,
+    *,
+    min_train_days: int,
+    origin_step_days: int,
+) -> pd.DataFrame:
+    """Summarize same-date raw phase nowcast confidence by historical origin."""
+
+    clean = _clean_prices(prices)
+    if clean.empty:
+        return pd.DataFrame()
+    start = max(int(min_train_days), 252)
+    if start >= len(clean.index):
+        return pd.DataFrame()
+    rows: list[dict[str, object]] = []
+    for origin_pos in range(start, len(clean.index), max(1, int(origin_step_days))):
+        origin_date = clean.index[origin_pos]
+        feature = build_cycle_feature_snapshot(clean.iloc[: origin_pos + 1])
+        rows.append(
+            {
+                "origin_date": str(origin_date.date()),
+                "dominant_phase": str(feature.get("dominant_phase", "normal_cycle")),
+                "phase_probability": _safe_float(
+                    feature.get("dominant_phase_probability"),
+                    default=np.nan,
+                ),
+            }
+        )
+    if not rows:
+        return pd.DataFrame()
+    frame = pd.DataFrame(rows)
+    frame["phase_probability"] = pd.to_numeric(frame["phase_probability"], errors="coerce")
+    summary_rows: list[dict[str, object]] = []
+    for phase, group in frame.groupby("dominant_phase", dropna=False):
+        confidence = float(group["phase_probability"].median())
+        origins = int(group["origin_date"].nunique())
+        summary_rows.append(
+            {
+                "dominant_phase": str(phase),
+                "horizon": "0m",
+                "horizon_days": 0,
+                "origins": origins,
+                "phase_fit_rate": confidence,
+                "median_phase_probability": confidence,
+                "median_qqq_forward_return": np.nan,
+                "median_spy_forward_return": np.nan,
+                "median_bil_forward_return": np.nan,
+                "median_qqq_forward_drawdown": np.nan,
+                "severe_qqq_drawdown_rate": np.nan,
+                "expected_behavior": (
+                    "Nowcast confidence check: no forward realized outcome is measured."
+                ),
+                "reliability_label": "thin_sample" if origins < 10 else "nowcast_confidence",
+            }
+        )
+    return pd.DataFrame(summary_rows).sort_values(
+        ["horizon_days", "phase_fit_rate", "origins"],
+        ascending=[True, False, False],
+    ).reset_index(drop=True)
+
+
 def build_cycle_crisis_playback(
     prices: pd.DataFrame,
     *,
@@ -1146,10 +1251,11 @@ def build_cycle_crisis_playback(
     clean = _clean_prices(prices)
     if clean.empty:
         return pd.DataFrame()
-    horizons = tuple(horizon for horizon in horizons if int(horizon) > 0)
+    horizons = tuple(int(horizon) for horizon in horizons if int(horizon) >= 0)
     if not horizons:
-        horizons = (21, 63)
-    max_horizon = max(horizons)
+        horizons = (0, 21, 63)
+    positive_horizons = tuple(horizon for horizon in horizons if horizon > 0)
+    max_horizon = max(positive_horizons) if positive_horizons else 0
     rows: list[dict[str, object]] = []
     index = clean.index
     for crisis, stage, start, end, stage_order in CRISIS_STAGES:
@@ -1169,6 +1275,28 @@ def build_cycle_crisis_playback(
             dominant_phase = str(feature.get("dominant_phase", "normal_cycle"))
             dominant_probability = float(feature.get("dominant_phase_probability", np.nan))
             for horizon in horizons:
+                if horizon == 0:
+                    for phase in PHASES:
+                        rows.append(
+                            {
+                                "crisis": crisis,
+                                "stage": stage,
+                                "stage_order": int(stage_order),
+                                "origin_date": str(origin_date.date()),
+                                "horizon": _horizon_label(horizon),
+                                "horizon_days": int(horizon),
+                                "phase": phase,
+                                "phase_probability": float(probabilities.get(phase, 0.0)),
+                                "dominant_phase": dominant_phase,
+                                "dominant_phase_probability": dominant_probability,
+                                "qqq_forward_return": np.nan,
+                                "spy_forward_return": np.nan,
+                                "bil_forward_return": np.nan,
+                                "qqq_forward_drawdown": np.nan,
+                                "phase_fit": True,
+                            }
+                        )
+                    continue
                 start_pos = origin_pos + 1
                 end_pos = min(start_pos + int(horizon), len(index) - 1)
                 if end_pos <= start_pos:

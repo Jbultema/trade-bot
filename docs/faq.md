@@ -1,6 +1,6 @@
 # Trade Bot FAQ
 
-Status: canonical user-facing reference. Last reviewed: 2026-07-05.
+Status: canonical user-facing reference. Last reviewed: 2026-07-17.
 
 This FAQ explains what Trade Bot is, what it is not, how to operate it, and how
 to interpret common dashboard and research terms. It is written for users who can
@@ -323,9 +323,12 @@ weak walk-forward evidence, poor left-tail behavior, overfit risk, and churn.
 
 ### Why can a lower Calmar strategy still be preferred?
 
-For a long accumulation account, a strategy with 14-15% CAGR and -20% to -22%
-drawdown can produce more terminal wealth than an 11% CAGR strategy with -15%
-drawdown, if the larger drawdown is behaviorally and financially tolerable.
+For a long accumulation account, a higher-growth strategy with a roughly
+-20% drawdown can still be preferred over a lower-growth, smoother strategy if
+the larger drawdown is behaviorally and financially tolerable and the validation
+evidence supports the mechanism. That does not mean the highest CAGR row wins by
+default; turnover, concentration, launch evidence, forward monitoring, and
+overfit risk still matter.
 
 ### What does Launch Lab tell me?
 

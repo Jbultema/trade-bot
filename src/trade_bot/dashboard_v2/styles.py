@@ -104,6 +104,74 @@ def install_v2_styles() -> None:
             font-size: .84rem;
             font-weight: 740;
         }
+        .v2-help-wrap {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            vertical-align: .08rem;
+            outline: none;
+        }
+        .v2-help-dot {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 1.05rem;
+            height: 1.05rem;
+            margin-left: .38rem;
+            border: 1px solid var(--tb-card-border, #d1d5db);
+            border-radius: 999px;
+            color: var(--tb-card-muted, #6b7280);
+            font-size: .68rem;
+            font-weight: 900;
+            line-height: 1;
+            cursor: help;
+        }
+        .v2-help-wrap:hover .v2-help-dot,
+        .v2-help-wrap:focus-within .v2-help-dot {
+            color: var(--tb-card-text, #111827);
+            border-color: #0f766e;
+        }
+        .v2-help-popover {
+            position: absolute;
+            left: .35rem;
+            top: calc(100% + 8px);
+            z-index: 10000;
+            width: min(320px, 72vw);
+            padding: 10px 12px;
+            border: 1px solid var(--tb-card-border, #d1d5db);
+            border-radius: 8px;
+            background: var(--tb-card-bg, #fff);
+            color: var(--tb-card-text, #111827);
+            box-shadow: 0 14px 34px rgba(15, 23, 42, .20);
+            font-size: .78rem;
+            font-weight: 650;
+            line-height: 1.35;
+            text-transform: none;
+            white-space: normal;
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-2px);
+            transition: opacity .12s ease, transform .12s ease, visibility .12s ease;
+        }
+        .v2-help-popover::before {
+            content: "";
+            position: absolute;
+            top: -5px;
+            left: 12px;
+            width: 8px;
+            height: 8px;
+            border-left: 1px solid var(--tb-card-border, #d1d5db);
+            border-top: 1px solid var(--tb-card-border, #d1d5db);
+            background: var(--tb-card-bg, #fff);
+            transform: rotate(45deg);
+        }
+        .v2-help-wrap:hover .v2-help-popover,
+        .v2-help-wrap:focus-within .v2-help-popover {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
         .v2-card-value {
             margin: 0;
             color: var(--tb-card-text, #111827);
@@ -111,6 +179,22 @@ def install_v2_styles() -> None:
             font-weight: 840;
             line-height: 1.12;
             overflow-wrap: anywhere;
+        }
+        .v2-section-heading h3 {
+            display: inline-flex;
+            align-items: center;
+            margin: 22px 0 10px;
+            color: var(--tb-card-text, #111827);
+            font-size: 1.5rem;
+            font-weight: 850;
+        }
+        .v2-chart-heading {
+            display: inline-flex;
+            align-items: center;
+            margin: 6px 0 2px;
+            color: var(--tb-card-text, #111827);
+            font-size: 1rem;
+            font-weight: 850;
         }
         .v2-callout {
             border: 1px solid rgba(37, 99, 235, .24);

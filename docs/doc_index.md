@@ -1,6 +1,6 @@
 # Documentation Index
 
-Status: canonical navigation. Last reviewed: 2026-07-16.
+Status: canonical navigation. Last reviewed: 2026-07-17.
 
 Use this file to decide which docs are current operating references and which
 ones are historical research notes. When a doc captures a dated plan or
@@ -19,7 +19,7 @@ like live system behavior.
 | `docs/technical_explainer.md` | Behind-the-scenes architecture, data flow, model semantics, risk engine behavior, storage, ML, monitoring, and extension rules | Update when implementation architecture, module boundaries, defaults, data contracts, or model/risk semantics change. |
 | `docs/learnings.md` | Maintained research summary from experiment batches and operating experience | Review after major experiment batches, after significant dashboard pruning, and before promoting new operating systems. |
 | `docs/backend_agent_guide.md` | Backend onboarding for engineers and future AI agents | Update when architecture, storage, command flow, dashboard structure, or ownership changes. |
-| `docs/experiment_plan.md` | Current roadmap and Phase 1/Phase 2 boundary | Keep current; archive outdated plans instead of accumulating stale queues. |
+| `docs/experiment_plan.md` | Current operating roadmap, active priorities, and pruning guardrails | Keep evergreen; do not let executed phase plans remain as apparent current work. |
 | `docs/iteration_protocol.md` | Research loop, promotion rules, curation, and artifact roots | Update when experiment scoring, roots, or promotion semantics change. |
 | `docs/math_model_audit.md` | Locked formulas, model semantics, and caveats | Update with any formula or interpretation change in the same PR/change. |
 | `docs/forward_testing_protocol.md` | Paper/live ticket workflow and scaling gates | Update when journal, ticket, or monitoring workflows change. |
@@ -48,6 +48,9 @@ like live system behavior.
   it evergreen.
 - If a plan has already been executed, move it under `docs/archive/` and add an
   archive header explaining what replaced it.
+- If a doc says simulation, Cycle Tracker, V2 dashboard, Launch Lab, or
+  Experiment Operator are future-only work, either update it to current behavior
+  or archive it as a dated plan.
 - If dashboard behavior changes, update `README.md` and `docs/backend_agent_guide.md`.
 - If math, labels, risk semantics, or ML promotion rules change, update the
   relevant technical doc and tests together.

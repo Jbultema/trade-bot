@@ -131,6 +131,14 @@ TICKET_LABEL_REFERENCE = pd.DataFrame(
 )
 
 
+def _rerun_after_journal_mutation(message: str) -> None:
+    st.success(message)
+    st.caption(
+        "Refreshing the page so Book Alignment, open tickets, and execution-derived positions re-read the local journal."
+    )
+    st.rerun()
+
+
 def _render_forward_test_and_journal(
     journal: TradeJournal,
     baseline_run: BaselineRun,
@@ -219,6 +227,21 @@ def _render_forward_test_and_journal(
     )
 
     st.markdown("### 1. Book alignment")
+    st.caption(
+        "Book Alignment uses logged executions as the current book of record. Locked tickets are recommendations only; they do not change holdings until the fill is logged."
+    )
+    recalculation_cols = st.columns([1, 3])
+    if recalculation_cols[0].button(
+        "Recalculate Book Alignment",
+        help=(
+            "Re-read logged executions, latest loaded prices, and latest target weights for "
+            "the selected mode/account. Use this after logging fills or changing account value."
+        ),
+    ):
+        recalculation_cols[1].info(
+            "Re-reading the local execution journal and recomputing book alignment."
+        )
+        st.rerun()
     book_alignment = build_book_alignment(
         journal=journal,
         trade_decision=trade_decision,
@@ -279,7 +302,9 @@ def _render_forward_test_and_journal(
                     sizing=sizing,
                     tickets=ticket_preview,
                 )
-                st.success(f"Locked {len(ticket_preview):,} recommendation tickets: {decision_id}")
+                _rerun_after_journal_mutation(
+                    f"Locked {len(ticket_preview):,} recommendation tickets: {decision_id}"
+                )
 
     open_tickets = journal.load_recommendation_tickets(status="open")
     ticket_status = st.selectbox(
@@ -423,7 +448,7 @@ def _render_forward_test_and_journal(
                 fees=float(execution_fees),
                 notes=execution_notes,
             )
-            st.success(f"Logged execution: {execution_id}")
+            _rerun_after_journal_mutation(f"Logged execution: {execution_id}")
 
     if not open_tickets.empty:
         with st.expander("Update open ticket status", expanded=False):
@@ -449,7 +474,9 @@ def _render_forward_test_and_journal(
                 )
                 if st.button("Update Ticket Status"):
                     journal.update_ticket_status(status_ticket, status_update)
-                    st.success(f"Updated ticket {status_ticket} to {status_update}.")
+                    _rerun_after_journal_mutation(
+                        f"Updated ticket {status_ticket} to {status_update}."
+                    )
 
     executions = journal.load_executions()
     execution_columns = [
@@ -474,7 +501,7 @@ def _render_forward_test_and_journal(
 
     st.markdown("### 4. Records and audit")
     st.caption(
-        "Use these derived records to reconcile the book after trades have been logged."
+        "Use these derived records to reconcile the book after trades have been logged. If Monitoring ticket-audit tables lag after new fills, run the warehouse migration refresh; Book Alignment itself reads the local journal directly."
     )
     position_summary = journal.execution_position_summary(
         mode=journal_mode,

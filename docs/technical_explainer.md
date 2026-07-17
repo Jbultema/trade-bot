@@ -1,6 +1,6 @@
 # Trade Bot Technical Explainer
 
-Status: canonical technical reference. Last reviewed: 2026-07-16.
+Status: canonical technical reference. Last reviewed: 2026-07-17.
 
 This document explains how the major pieces of Trade Bot work behind the scenes.
 It is intended for developers, reviewers, and technical users who need to answer:
@@ -583,6 +583,21 @@ book derived from logged executions.
 
 It is not a broker import. It answers whether the locally tracked paper/live
 book is close enough to the latest model target.
+
+The source-of-truth boundary matters:
+
+- recommendation tickets record suggested actions and do not change holdings;
+- logged executions change the locally tracked paper/live book;
+- Forward Test can recalculate alignment from the freshest SQLite journal
+  state;
+- DuckDB journal and monitoring tables are warehouse mirrors and can lag until
+  the migration/valuation jobs are rerun.
+
+After logging executions, the user should refresh/recalculate Book Alignment
+before treating a dashboard rebalance warning as still actionable. If the
+warehouse-backed monitoring tables disagree with Forward Test immediately after
+logging, prefer Forward Test for current book state and rerun the warehouse
+migration or paper valuation job before using monitoring/audit tables.
 
 ## Taxable Layer
 

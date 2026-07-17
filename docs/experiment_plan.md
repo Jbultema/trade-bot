@@ -1,77 +1,90 @@
-# Experiment Roadmap
+# Experiment And Operating Roadmap
 
-Status: maintained roadmap. Last reviewed: 2026-06-22.
+Status: maintained roadmap and pruning guardrail. Last reviewed: 2026-07-17.
 
-This document defines the project phase boundary and research direction. The
-original planning note is archived at `docs/archive/experiment_plan_2026-06-17.md`.
+This document is the current roadmap for Trade Bot research and operating
+hardening. It replaces the old Phase 1 / Phase 2 boundary plan. The original
+planning note remains archived at `docs/archive/experiment_plan_2026-06-17.md`.
 
-## Phase Boundary
+The important maintenance rule is simple: do not let dated build plans remain
+visible as if they describe current system behavior. When a plan is executed,
+either update this roadmap to the new operating reality or archive the dated
+plan.
 
-### Phase 1: Current-State Trade Bot
+## Current Operating Platform
 
-Phase 1 is the active operating system. It answers: given the latest local
-prices, macro data, news/events, scenarios, strategy evidence, and portfolio
-risk constraints, what long-only action should be considered now?
+Trade Bot is now a V2-first local research and monitoring system. The dashboard
+loads saved snapshots, DuckDB warehouse tables, and persisted research artifacts
+before hydrating expensive workbench views. V1 is retained only as an archived
+fallback for comparison/debugging.
 
-Current Phase 1 capabilities:
+Current operating capabilities include:
 
-- local data ingestion and cached reproducibility
-- snapshot-based dashboard loading for fast daily review
-- current market regime, risk-state, scenario, macro, news/event, and decision
-  sanity diagnostics
-- long-only baseline, momentum, sector-rotation, dip-reentry, risk-cycle, and
-  reference-portfolio strategy tests
-- risk management, scenario-aware sizing, factor/stress checks, expected
-  shortfall, and portfolio constraints
-- rolling-window, calendar-year, walk-forward, regime, drawdown, and selected
-  custom-window diagnostics
-- Research Lab curation, strategy-family maps, allocation-history review, and
-  experiment monitor views
-- paper-monitoring windows, recommendation tickets, execution journal, and
-  forward valuation
-- targeted classical ML and Bayesian overlays for future-state probabilities,
-  off-ramp/re-entry diagnostics, strategy drawdown guards, and research
-  diagnostics
+- local market, macro, news/event, and snapshot ingestion;
+- fast V2 dashboard pages for Today, Macro, Risk, Forward Test, Research,
+  Performance, Launch, Simulation, and Monitoring;
+- current-state risk, scenario, confirmation, instability, macro-driver, and
+  decision-sanity diagnostics;
+- long-only baseline, momentum, sector-rotation, dip-reentry, risk-cycle,
+  high-growth, and reference-portfolio strategy tests;
+- scenario-aware sizing, expected shortfall, stress loss, beta/factor checks,
+  concentration checks, and defensive floors;
+- Research Lab outcome frontier, candidate deep dive, PBO/backtest-QC,
+  leadership dependence, false-alarm judgement, and walk-forward router
+  diagnostics;
+- Simulation Lab deterministic, bootstrap, regime-conditioned, duration-aware,
+  covariate-matched, factor-proxy, and rolling-origin validation views;
+- Scenario / Phase Frontier and Cycle Tracker with 0M nowcast, path-constrained
+  horizon frontiers, crisis playback, historical reliability, and conditional
+  winner shelves;
+- Launch Lab entry testing, ramp protocols, aggregate launch reads, and
+  Experiment Operator trial contracts;
+- paper/live Forward Test tickets, execution journal, book alignment, and
+  monitoring windows with explicit start dates;
+- estimated taxable-account research support for paper monitoring and planning.
 
-Phase 1 remains paper-first. A dashboard recommendation is a decision-support
-object, not an order.
+The platform remains paper-first and human-reviewed. A dashboard recommendation
+is a decision-support object, not an order.
 
-### Phase 2: Simulated-Future-Enabled Trade Bot
+## Active Priorities
 
-Phase 2 remains future work. It should start only after Phase 1 has enough
-paper-monitoring history to make behavior drift, missed-trade reviews, and
-forward execution quality measurable.
+The useful next work is not unlimited strategy proliferation. Favor work that
+improves confidence, operability, and interpretability.
 
-Phase 2 should answer: given the current state, which future states are
-plausible, how do candidate strategies behave across those paths, and which
-current action has the best risk-adjusted expected utility?
+1. **Operate and observe the strongest candidates.** Keep the default monitored
+   set small. Use paper/live experiments, start-date cohorts, and book
+   alignment to see whether the best candidates still behave like their
+   historical evidence.
+2. **Harden source-of-truth boundaries.** Keep strategy identity, runtime
+   snapshot metrics, experiment scorecards, candidate manifests, tickets,
+   executions, and warehouse mirrors consistent enough that all UI panes point
+   at the same strategy and book state.
+3. **Improve reliability labels before adding authority.** Cycle Tracker,
+   Simulation Lab, Launch Lab, false-alarm judgement, and router diagnostics
+   should explain confidence and sample limits before they influence operating
+   posture.
+4. **Keep macro and narrative inputs in the right lane.** They should explain
+   and challenge the current read unless validated tests promote them into
+   sizing authority.
+5. **Continue UI simplification.** Prefer fast summary pages, explicit full
+   workbench loads, hover help, and high-value visuals over large raw tables at
+   the top of each page.
 
-Candidate Phase 2 work:
+## Parked Or Higher-Bar Work
 
-- probabilistic scenario generation and transition models
-- return, volatility, correlation, and drawdown path simulation
-- stress-state injection for credit, inflation, AI concentration, liquidity,
-  policy, and geopolitical shocks
-- strategy-policy testing across simulated futures
-- decision rules based on expected return, drawdown risk, regret, and
-  survivability
+These items are not rejected, but they need stronger justification than routine
+dashboard work:
 
-## Current Research Direction
-
-The useful next work is not more one-off strategy variants. Favor work that
-improves confidence, operability, and risk/re-entry behavior:
-
-- preserve high-CAGR candidates while limiting left-tail drawdown
-- improve re-risking after defensive periods without catching falling knives
-- test strategy-specific failure-mode labels, not only broad market-state labels
-- strengthen sector and factor rotation as alternatives to simple risk-on/cash
-  switches
-- evaluate whether ML/Bayesian overlays improve sizing and transitions after
-  costs, churn, and walk-forward validation
-- keep the default monitored set small, with baselines and only a few
-  champion/challenger systems
-- add taxable-account evaluation as a parallel research mode, not as a silent
-  change to existing pre-tax/IRA-like scorecards
+- broker-linked automatic trading;
+- options, leverage, shorting, or intraday execution;
+- proprietary macro data replication;
+- vintage macro/news reconstruction beyond point-in-time safe price-derived
+  backfills;
+- direct stock-price forecasting as an allocation authority;
+- broad new strategy sweeps that do not improve the current champion/challenger
+  evidence set;
+- live taxable-account trading logic without broker lot reconciliation and tax
+  review.
 
 ## Validation Rules
 
@@ -81,23 +94,32 @@ improves confidence, operability, and risk/re-entry behavior:
 - Report turnover and transaction costs for every strategy.
 - Report full-history, calendar-year, rolling-window, walk-forward, regime, and
   custom-window performance. A single 2005-to-present score is never enough.
-- Treat thresholds as policy-constrained hyperparameters, not values chosen
-  only because one backtest won.
+- Treat thresholds as policy-constrained hyperparameters, not values chosen only
+  because one backtest won.
 - Track strategy behavior through market transitions, drawdowns, off-ramps, and
   re-entry periods.
 - Promote candidate operating systems only after reviewing allocation history,
   drawdown behavior, robustness diagnostics, and forward paper-monitoring
   readiness.
-- Label account semantics explicitly. Base strategy results remain pre-tax / IRA-like unless fields are explicitly labeled as estimated taxable outputs.
+- Label account semantics explicitly. Base strategy results remain pre-tax /
+  IRA-like unless fields are explicitly labeled as estimated taxable outputs.
+- For cycle and scenario tools, keep the point-in-time boundary explicit:
+  historical origins may use only data available through that origin, and
+  forward windows start after the origin.
 
 ## Related Docs
 
-- `docs/iteration_protocol.md`: experiment loop, promotion rules, artifact roots,
-  and curation rules.
+- `docs/whitepaper.md`: canonical system narrative.
+- `docs/technical_explainer.md`: implementation architecture and model
+  semantics.
+- `docs/cycle_tracker_design.md`: Scenario / Phase Frontier and Cycle Tracker
+  design contract.
+- `docs/iteration_protocol.md`: experiment loop, promotion rules, artifact
+  roots, and curation rules.
 - `docs/math_model_audit.md`: locked formulas and model semantics.
 - `docs/ml_research_framework.md`: ML/Bayesian seams and validation gates.
 - `docs/forward_testing_protocol.md`: paper/live monitoring and ticket workflow.
 - `docs/taxable_account_framework.md`: estimated taxable-account and after-tax
   research semantics.
-- `docs/research_pruning_and_growth.md`: current pruning rules and growth
+- `docs/research_pruning_and_growth.md`: pruning rules and high-value regrowth
   direction.

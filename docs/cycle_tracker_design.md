@@ -117,7 +117,7 @@ It writes:
 | `reports/cycle_tracker/cycle_validation_observations.csv` | Origin-level validation evidence for audit/debug. |
 | `reports/cycle_tracker/cycle_phase_reliability.csv` | Phase-level classifier audit: when a historical origin was labeled with a phase, did the next horizon behave the way that phase implies? |
 | `reports/cycle_tracker/cycle_path_validation_metrics.csv` | Prior-only forward metrics by decoded path phase, horizon, and ticker. This is the default evidence source for the winner frontier. |
-| `reports/cycle_tracker/cycle_path_reliability.csv` | Path-phase audit: when the decoded path was in a phase, did the next horizon match that phase's expected behavior? |
+| `reports/cycle_tracker/cycle_path_reliability.csv` | Path-phase audit. At 0M, this is same-date agreement between decoded path phase and raw evidence phase. At forward horizons, it asks whether the next horizon matched that path phase's expected behavior. |
 | `reports/cycle_tracker/cycle_crisis_playback.csv` | Historical playback through named crisis windows, split into lead-up, unwind, and recovery stages. |
 | `reports/cycle_tracker/summary.md` | Plain-language summary. |
 

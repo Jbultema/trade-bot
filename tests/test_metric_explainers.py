@@ -52,3 +52,26 @@ def test_metric_help_resolves_finance_glossary_terms() -> None:
     glossary = metric_guide_frame(category="Finance Glossary", search="credit spread")
     assert not glossary.empty
     assert "Credit Spread" in set(glossary["metric"])
+
+
+def test_metric_help_resolves_cycle_tracker_terms_for_quick_reference() -> None:
+    expected_terms = {
+        "Cycle Tracker": "speculative-cycle phases",
+        "Path Phase": "operational cycle phase",
+        "Evidence Phase": "raw phase",
+        "0M Nowcast": "same-date cycle read",
+        "Path Fit Rate": "historical path-phase origins",
+        "Historical Phase Reliability": "raw phase evidence",
+        "Playback Fit": "historical crisis playback",
+        "Post-Unwind Compounding": "healthier compounding",
+    }
+
+    for term, expected_text in expected_terms.items():
+        help_text = metric_help(term) or ""
+        assert expected_text.lower() in help_text.lower()
+
+    cycle_terms = metric_guide_frame(category="Cycle Tracker", search="path")
+
+    assert not cycle_terms.empty
+    assert "Path Phase" in set(cycle_terms["metric"])
+    assert "Path Reliability" in set(cycle_terms["metric"])

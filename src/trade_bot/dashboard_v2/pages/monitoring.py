@@ -13,7 +13,12 @@ from trade_bot.dashboard.trends import (
     load_monitoring_trend_frame,
     long_metric_line_figure,
 )
-from trade_bot.dashboard_v2.components.cards import render_callout, render_card_grid
+from trade_bot.dashboard_v2.components.cards import (
+    render_callout,
+    render_card_grid,
+    render_chart,
+    render_section_header,
+)
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
 from trade_bot.dashboard_v2.services.warehouse_service import (
@@ -45,14 +50,32 @@ def render_monitoring_page(runtime: DashboardRuntime) -> None:
 
     view = st.pills(
         "Monitoring view",
-        ["Readout", "Trends", "Controls / full workbench"],
-        default="Readout",
+        ["Trends", "Readout", "Controls", "Full Workbench"],
+        default="Trends",
         selection_mode="single",
         key="dashboard_v2_monitoring_view",
     )
-    selected_view = view or "Readout"
-    if selected_view == "Readout":
-        st.subheader("Champion / Challenger Readout")
+    selected_view = view or "Trends"
+    if selected_view == "Trends":
+        render_callout("Forward trend plots read valuation history from DuckDB.", heavy=True)
+        trends = load_monitoring_trend_frame(str(warehouse_path))
+        trends = _render_monitoring_trend_range_controls(trends)
+        figure = long_metric_line_figure(
+            trends,
+            category_column="window_label",
+            value_column="cumulative_return",
+            title="Cumulative Return by Monitoring Window",
+            yaxis_title="Cumulative return",
+            percent=True,
+            top_n=8,
+            height=420,
+        )
+        if figure is None:
+            st.info("No monitoring trend history is available yet.")
+        else:
+            render_chart(figure)
+    elif selected_view == "Readout":
+        render_section_header("Champion / Challenger Readout")
         if frame.empty:
             st.info("No active monitoring rows are available. Seed or start a monitoring window.")
             return
@@ -72,27 +95,15 @@ def render_monitoring_page(runtime: DashboardRuntime) -> None:
             if column in frame
         ]
         _render_metric_dataframe(_display_metrics(frame[columns].head(80)))
-    elif selected_view == "Trends":
-        render_callout("Forward trend plots read valuation history from DuckDB.", heavy=True)
-        trends = load_monitoring_trend_frame(str(warehouse_path))
-        trends = _render_monitoring_trend_range_controls(trends)
-        figure = long_metric_line_figure(
-            trends,
-            category_column="window_label",
-            value_column="cumulative_return",
-            title="Cumulative Return by Monitoring Window",
-            yaxis_title="Cumulative return",
-            percent=True,
-            top_n=8,
-            height=420,
+    elif selected_view == "Controls":
+        render_callout(
+            "Controls opens the operating management surface for starting, updating, and valuing monitoring windows.",
+            heavy=True,
         )
-        if figure is None:
-            st.info("No monitoring trend history is available yet.")
-        else:
-            st.plotly_chart(figure, use_container_width=True)
+        _render_monitoring(warehouse_path)
     else:
         render_callout(
-            "This loads the full Monitoring workbench, including management controls and detail tables.",
+            "This loads the complete Monitoring workbench, including management controls and detail tables.",
             heavy=True,
         )
         _render_monitoring(warehouse_path)

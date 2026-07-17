@@ -54,6 +54,14 @@ Trade tickets are not broker orders. They are auditable decision records.
 - Price bands define the intended acceptable execution range.
 - Size bands define the intended notional/share range.
 - Whole-share sizing can be toggled depending on the actual brokerage/account constraint.
+- Locking or generating a recommendation ticket does not update the tracked
+  book. Only logged executions change the paper/live book used for Book
+  Alignment.
+- After logging executions, refresh/recalculate Book Alignment before deciding
+  whether a rebalance warning is still active.
+- Warehouse-backed monitoring tables can lag the SQLite execution journal until
+  the migration/valuation jobs run, so Forward Test is the freshest operating
+  view immediately after execution logging.
 
 
 ## Taxable Account Forward Testing
@@ -97,4 +105,3 @@ Before real trades, the system should have:
 - benchmark-relative scorecards for the candidate set
 - a written reason for why the strategy is expected to work now
 - a written off-ramp for when the strategy stops working
-

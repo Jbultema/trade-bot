@@ -150,19 +150,19 @@ def _render_launch_lab(
         st.pills(
             "Launch Lab view",
             [
-                "Experiment Operator",
-                "Aggregate View",
-                "Why / Why Not",
+                "How to Use This",
+                "Why/Why Not",
                 "Entry Backtest",
                 "Ramp Plan",
-                "How to Use This",
+                "Aggregate View",
+                "Experiment Operator",
             ],
             selection_mode="single",
-            default="Experiment Operator",
+            default="How to Use This",
             key="launch_lab_view",
             width="stretch",
         )
-        or "Experiment Operator"
+        or "How to Use This"
     )
     _render_launch_view_runtime_notice(launch_view)
 
@@ -186,7 +186,7 @@ def _render_launch_lab(
                 target_fraction=target_fraction,
             )
         _render_aggregate_launch_lab(aggregate_run, str(primary_horizon))
-    elif launch_view == "Why / Why Not":
+    elif launch_view in {"Why/Why Not", "Why / Why Not"}:
         _render_launch_gate(run)
     elif launch_view == "Entry Backtest":
         _render_entry_backtest(run)
