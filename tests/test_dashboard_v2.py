@@ -136,6 +136,35 @@ def test_dashboard_v2_card_helper_emits_renderable_html(monkeypatch) -> None:
     assert "\n            <div" not in captured["body"]
 
 
+def test_cycle_crisis_playback_figure_shows_horizon_outcomes() -> None:
+    frame = pd.DataFrame(
+        {
+            "crisis": ["sample"] * 4,
+            "stage": ["lead_up"] * 4,
+            "stage_order": [1] * 4,
+            "origin_date": pd.to_datetime(["2026-01-01"] * 2 + ["2026-02-01"] * 2),
+            "horizon": ["3m"] * 4,
+            "horizon_days": [63] * 4,
+            "phase": ["normal_cycle", "liquidation"] * 2,
+            "phase_probability": [0.7, 0.3, 0.2, 0.8],
+            "dominant_phase": ["normal_cycle", "normal_cycle", "liquidation", "liquidation"],
+            "dominant_phase_probability": [0.7, 0.7, 0.8, 0.8],
+            "qqq_forward_return": [0.05, 0.05, -0.12, -0.12],
+            "spy_forward_return": [0.03, 0.03, -0.08, -0.08],
+            "bil_forward_return": [0.01, 0.01, 0.01, 0.01],
+            "qqq_forward_drawdown": [-0.02, -0.02, -0.18, -0.18],
+            "phase_fit": [True, True, True, True],
+        }
+    )
+
+    figure = research._crisis_playback_figure(frame)
+    trace_names = {trace.name for trace in figure.data}
+
+    assert "QQQ forward return" in trace_names
+    assert "QQQ max drawdown" in trace_names
+    assert figure.layout.yaxis2.title.text == "3m return / drawdown"
+
+
 def test_launch_and_execution_interaction_guardrails_are_present() -> None:
     launch_source = inspect.getsource(launch_lab._render_launch_lab)
     forward_source = inspect.getsource(forward_test._render_forward_test_and_journal)

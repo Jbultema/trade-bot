@@ -7,6 +7,7 @@ from dataclasses import dataclass
 import pandas as pd
 
 from trade_bot import DEFAULTS as defaults
+from trade_bot.dashboard.instrument_registry import instrument_profile
 
 
 @dataclass(frozen=True)
@@ -372,28 +373,59 @@ def _ticker_lookup_explainers() -> tuple[TicketExplainer, ...]:
             continue
         groups = tuple(sorted(ticker_groups[ticker]))
         role = _ticker_role(groups)
+        profile = instrument_profile(ticker)
+        article = _article_for_role(role)
+        if profile is not None:
+            plain_english = (
+                f"{profile.identity} Trade-bot tracks it as {article} {role} ticker or proxy."
+            )
+            calculation = (
+                f"Pulled as a price series when available. Local identity metadata: "
+                f"{profile.name}; {profile.asset_type}; "
+                f"{profile.sector or 'unclassified'}"
+                f"{f' / {profile.industry}' if profile.industry else ''}. Used by "
+                "strategies, risk diagnostics, tactical matrices, or research watchlists "
+                "depending on the selected context."
+            )
+            how_to_read = (
+                f"{profile.description} In trade-bot, read {ticker} through its active "
+                "context: it may be a direct holding, benchmark, factor proxy, or watch-only "
+                "confirmation signal."
+            )
+            caution = (
+                "The identity metadata explains what the instrument is, but lookup coverage "
+                "does not mean it is automatically tradable, approved for the current account, "
+                "or allowed to drive allocation sizing."
+            )
+            aliases = tuple(dict.fromkeys((*groups, *profile.aliases, profile.name)))
+        else:
+            plain_english = (
+                f"{ticker} is tracked by trade-bot as {article} {role} ticker or proxy."
+            )
+            calculation = (
+                "Pulled as a price series when available and used by strategies, "
+                "risk diagnostics, tactical matrices, or research watchlists depending "
+                "on the selected context."
+            )
+            how_to_read = (
+                f"Read {ticker} through its active context: it may be a direct holding, "
+                "a benchmark, a factor proxy, or a watch-only confirmation signal."
+            )
+            caution = (
+                "Lookup coverage does not mean the ticker is automatically tradable, "
+                "approved for the current account, or allowed to drive allocation sizing."
+            )
+            aliases = groups
         generated.append(
             TicketExplainer(
                 term=ticker,
                 category="Ticker",
                 kind="Ticker",
-                plain_english=(
-                    f"{ticker} is tracked by trade-bot as a {role} ticker or proxy."
-                ),
-                calculation=(
-                    "Pulled as a price series when available and used by strategies, "
-                    "risk diagnostics, tactical matrices, or research watchlists depending "
-                    "on the selected context."
-                ),
-                how_to_read=(
-                    f"Read {ticker} through its active context: it may be a direct holding, "
-                    "a benchmark, a factor proxy, or a watch-only confirmation signal."
-                ),
-                caution=(
-                    "Lookup coverage does not mean the ticker is automatically tradable, "
-                    "approved for the current account, or allowed to drive allocation sizing."
-                ),
-                aliases=groups,
+                plain_english=plain_english,
+                calculation=calculation,
+                how_to_read=how_to_read,
+                caution=caution,
+                aliases=aliases,
             )
         )
     return tuple(generated)
@@ -446,7 +478,7 @@ def _default_name_to_group(name: str) -> str:
 def _ticker_role(groups: tuple[str, ...]) -> str:
     joined = " ".join(groups)
     if "ai" in joined or "semiconductor" in joined or "growth" in joined:
-        return "AI/growth or semiconductor"
+        return "AI/growth, software, or semiconductor"
     if "defensive" in joined or "tbill" in joined:
         return "defensive cash/T-bill"
     if "credit" in joined:
@@ -462,6 +494,12 @@ def _ticker_role(groups: tuple[str, ...]) -> str:
     if "broad equity" in joined or "sector" in joined or "cyclical" in joined:
         return "equity"
     return "tracked"
+
+
+def _article_for_role(role: str) -> str:
+    if role[:1].lower() in {"a", "e", "i", "o", "u"}:
+        return "an"
+    return "a"
 
 
 ALL_TICKET_EXPLAINERS: tuple[TicketExplainer, ...] = (

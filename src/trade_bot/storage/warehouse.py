@@ -1121,6 +1121,12 @@ class TradingWarehouse:
         candidate_scores: pd.DataFrame,
         phase_candidate_frontier: pd.DataFrame,
         validation_metrics: pd.DataFrame,
+        path_validation_metrics: pd.DataFrame | None = None,
+        path_state_history: pd.DataFrame | None = None,
+        path_transition_forecast: pd.DataFrame | None = None,
+        phase_reliability: pd.DataFrame | None = None,
+        path_reliability: pd.DataFrame | None = None,
+        crisis_playback: pd.DataFrame | None = None,
         readout: str,
     ) -> str:
         cycle_run_id = _new_cycle_run_id()
@@ -1147,6 +1153,8 @@ class TradingWarehouse:
                     "candidate_rows": int(len(candidate_scores)),
                     "frontier_rows": int(len(phase_candidate_frontier)),
                     "validation_rows": int(len(validation_metrics)),
+                    "reliability_rows": int(len(phase_reliability)) if phase_reliability is not None else 0,
+                    "crisis_rows": int(len(crisis_playback)) if crisis_playback is not None else 0,
                     "readout": readout,
                 }
             ]
@@ -1171,6 +1179,18 @@ class TradingWarehouse:
             frame.insert(1, "cycle_run_id", cycle_run_id)
             frame.insert(2, "created_at_utc", created_at_utc)
             self._upsert_frame("cycle_tracker_evidence", frame, "metric_id")
+        if path_state_history is not None and not path_state_history.empty:
+            frame = path_state_history.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "pathstate", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_path_state_history", frame, "metric_id")
+        if path_transition_forecast is not None and not path_transition_forecast.empty:
+            frame = path_transition_forecast.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "pathforecast", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_path_transition_forecast", frame, "metric_id")
         if not candidate_scores.empty:
             frame = candidate_scores.copy()
             frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "candidate", len(frame)))
@@ -1189,6 +1209,30 @@ class TradingWarehouse:
             frame.insert(1, "cycle_run_id", cycle_run_id)
             frame.insert(2, "created_at_utc", created_at_utc)
             self._upsert_frame("cycle_tracker_validation_metrics", frame, "metric_id")
+        if path_validation_metrics is not None and not path_validation_metrics.empty:
+            frame = path_validation_metrics.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "pathvalidation", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_path_validation_metrics", frame, "metric_id")
+        if phase_reliability is not None and not phase_reliability.empty:
+            frame = phase_reliability.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "reliability", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_phase_reliability", frame, "metric_id")
+        if path_reliability is not None and not path_reliability.empty:
+            frame = path_reliability.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "pathreliability", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_path_reliability", frame, "metric_id")
+        if crisis_playback is not None and not crisis_playback.empty:
+            frame = crisis_playback.copy()
+            frame.insert(0, "metric_id", _metric_ids(cycle_run_id, "crisis", len(frame)))
+            frame.insert(1, "cycle_run_id", cycle_run_id)
+            frame.insert(2, "created_at_utc", created_at_utc)
+            self._upsert_frame("cycle_tracker_crisis_playback", frame, "metric_id")
         return cycle_run_id
 
     def cycle_tracker_runs(self, *, limit: int = 10) -> pd.DataFrame:
@@ -1886,6 +1930,8 @@ class TradingWarehouse:
                     candidate_rows INTEGER NOT NULL,
                     frontier_rows INTEGER DEFAULT 0,
                     validation_rows INTEGER NOT NULL,
+                    reliability_rows INTEGER DEFAULT 0,
+                    crisis_rows INTEGER DEFAULT 0,
                     readout VARCHAR NOT NULL
                 )
                 """
@@ -1938,6 +1984,57 @@ class TradingWarehouse:
             )
             connection.execute(
                 """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_path_state_history (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    as_of_date VARCHAR NOT NULL,
+                    evidence_phase VARCHAR NOT NULL,
+                    evidence_probability DOUBLE,
+                    path_phase VARCHAR NOT NULL,
+                    path_probability DOUBLE,
+                    previous_path_phase VARCHAR NOT NULL,
+                    transition_allowed BOOLEAN,
+                    transition_reason VARCHAR,
+                    phase_duration_days INTEGER,
+                    phase_duration_bucket VARCHAR,
+                    prior_unwind_seen_504d BOOLEAN,
+                    prior_bottoming_seen_504d BOOLEAN,
+                    qqq_drawdown_252d DOUBLE,
+                    spy_drawdown_252d DOUBLE,
+                    days_since_qqq_peak_252d DOUBLE,
+                    normal_cycle_probability DOUBLE,
+                    acceleration_probability DOUBLE,
+                    pre_break_probability DOUBLE,
+                    early_unwind_probability DOUBLE,
+                    liquidation_probability DOUBLE,
+                    bottoming_probability DOUBLE,
+                    recovery_probability DOUBLE,
+                    post_unwind_compounding_probability DOUBLE
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_path_transition_forecast (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    phase VARCHAR NOT NULL,
+                    probability DOUBLE,
+                    dominant_phase VARCHAR NOT NULL,
+                    current_path_phase VARCHAR NOT NULL,
+                    current_phase_duration_days INTEGER,
+                    transition_allowed BOOLEAN,
+                    precondition VARCHAR,
+                    source VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
                 CREATE TABLE IF NOT EXISTS cycle_tracker_candidate_scores (
                     metric_id VARCHAR PRIMARY KEY,
                     cycle_run_id VARCHAR NOT NULL,
@@ -1976,6 +2073,7 @@ class TradingWarehouse:
                     ticker VARCHAR NOT NULL,
                     asset_role VARCHAR NOT NULL,
                     frontier_score DOUBLE,
+                    phase_window_role VARCHAR,
                     frontier_role VARCHAR NOT NULL,
                     current_momentum_21d DOUBLE,
                     current_momentum_63d DOUBLE,
@@ -2018,12 +2116,114 @@ class TradingWarehouse:
                 )
                 """
             )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_path_validation_metrics (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    dominant_phase VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    ticker VARCHAR NOT NULL,
+                    asset_role VARCHAR NOT NULL,
+                    origins INTEGER,
+                    median_forward_return DOUBLE,
+                    mean_forward_return DOUBLE,
+                    median_forward_drawdown DOUBLE,
+                    worst_forward_drawdown DOUBLE,
+                    median_excess_vs_spy DOUBLE,
+                    median_excess_vs_qqq DOUBLE,
+                    median_excess_vs_bil DOUBLE,
+                    hit_rate_vs_spy DOUBLE,
+                    hit_rate_vs_qqq DOUBLE,
+                    hit_rate_vs_bil DOUBLE,
+                    severe_drawdown_rate DOUBLE,
+                    phase_rank_score DOUBLE
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_phase_reliability (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    dominant_phase VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    origins INTEGER,
+                    phase_fit_rate DOUBLE,
+                    median_phase_probability DOUBLE,
+                    median_qqq_forward_return DOUBLE,
+                    median_spy_forward_return DOUBLE,
+                    median_bil_forward_return DOUBLE,
+                    median_qqq_forward_drawdown DOUBLE,
+                    severe_qqq_drawdown_rate DOUBLE,
+                    expected_behavior VARCHAR NOT NULL,
+                    reliability_label VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_path_reliability (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    path_phase VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    origins INTEGER,
+                    path_fit_rate DOUBLE,
+                    median_path_probability DOUBLE,
+                    median_phase_duration_days DOUBLE,
+                    median_qqq_forward_return DOUBLE,
+                    median_spy_forward_return DOUBLE,
+                    median_bil_forward_return DOUBLE,
+                    median_qqq_forward_drawdown DOUBLE,
+                    expected_behavior VARCHAR NOT NULL,
+                    reliability_label VARCHAR NOT NULL
+                )
+                """
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS cycle_tracker_crisis_playback (
+                    metric_id VARCHAR PRIMARY KEY,
+                    cycle_run_id VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    crisis VARCHAR NOT NULL,
+                    stage VARCHAR NOT NULL,
+                    stage_order INTEGER,
+                    origin_date VARCHAR NOT NULL,
+                    horizon VARCHAR NOT NULL,
+                    horizon_days INTEGER,
+                    phase VARCHAR NOT NULL,
+                    phase_probability DOUBLE,
+                    dominant_phase VARCHAR NOT NULL,
+                    dominant_phase_probability DOUBLE,
+                    qqq_forward_return DOUBLE,
+                    spy_forward_return DOUBLE,
+                    bil_forward_return DOUBLE,
+                    qqq_forward_drawdown DOUBLE,
+                    phase_fit BOOLEAN
+                )
+                """
+            )
             self._ensure_table_columns(
                 connection,
                 "cycle_tracker_runs",
                 {
                     "frontier_rows": "INTEGER DEFAULT 0",
+                    "reliability_rows": "INTEGER DEFAULT 0",
+                    "crisis_rows": "INTEGER DEFAULT 0",
                 },
+            )
+            self._ensure_table_columns(
+                connection,
+                "cycle_tracker_phase_candidate_frontier",
+                {"phase_window_role": "VARCHAR"},
             )
             connection.execute(
                 """

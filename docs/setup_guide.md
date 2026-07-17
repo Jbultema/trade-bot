@@ -261,10 +261,16 @@ http://localhost:8501
 If the port is busy:
 
 ```bash
+poetry run trade-bot run-dashboard --stop-existing
+```
+
+Use a separate port only when you intentionally want another dashboard instance:
+
+```bash
 poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
 ```
 
-When you are done, stop the managed dashboard without relying on Ctrl-C:
+When you are done, stop the managed dashboard without relaunching:
 
 ```bash
 poetry run trade-bot stop-dashboard
@@ -495,7 +501,13 @@ poetry install
 
 ### Streamlit port is busy
 
-Use another port:
+Restart the managed dashboard first:
+
+```bash
+poetry run trade-bot run-dashboard --stop-existing
+```
+
+Use another port only for a deliberate second instance:
 
 ```bash
 poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log

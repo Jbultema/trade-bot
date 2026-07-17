@@ -38,9 +38,22 @@ def cycle_tracker_frames(report_dir: str | Path = "reports/cycle_tracker") -> di
         "phase_probabilities": read_csv_artifact(root / "cycle_phase_probabilities.csv"),
         "transition_forecast": read_csv_artifact(root / "cycle_transition_forecast.csv"),
         "evidence": read_csv_artifact(root / "cycle_evidence_components.csv"),
+        "path_state_history": read_csv_artifact(root / "cycle_path_state_history.csv"),
+        "path_transition_forecast": read_csv_artifact(
+            root / "cycle_path_transition_forecast.csv"
+        ),
         "candidate_scores": read_csv_artifact(root / "cycle_candidate_scores.csv"),
         "phase_candidate_frontier": read_csv_artifact(
             root / "cycle_phase_candidate_frontier.csv"
         ),
         "validation_metrics": read_csv_artifact(root / "cycle_validation_metrics.csv"),
+        "path_validation_metrics": read_csv_artifact(
+            root / "cycle_path_validation_metrics.csv"
+        ),
+        "validation_observations": read_csv_artifact(
+            root / "cycle_validation_observations.csv"
+        ),
+        "phase_reliability": read_csv_artifact(root / "cycle_phase_reliability.csv"),
+        "path_reliability": read_csv_artifact(root / "cycle_path_reliability.csv"),
+        "crisis_playback": read_csv_artifact(root / "cycle_crisis_playback.csv"),
     }

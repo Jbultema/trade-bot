@@ -25,6 +25,29 @@ drawdown, or the right day to rebalance. It is not an allocation override. It is
 an explanatory and validation layer that should inform Research Lab,
 Simulation Lab, Launch Lab, and human review.
 
+## Path-Aware State Model
+
+The tracker produces two related reads:
+
+- **Evidence probabilities**: simultaneous feature evidence for each phase.
+  These behave like regime probabilities and can coexist.
+- **Path-constrained phase state**: one decoded latent cycle path that applies
+  transition rules, phase memory, and duration pressure.
+
+The path-constrained state is the safer default for interpretation. It is a
+transparent hidden semi-Markov approximation: phases have allowed transitions,
+minimum/maximum duration bands, and preconditions. For example, `bottoming`
+requires prior drawdown or unwind memory, `post_unwind_compounding` requires
+prior unwind/recovery memory, and active severe stress can force the path from
+`normal_cycle` or `acceleration` into `early_unwind` or `liquidation`.
+
+This path layer is deliberately not a generic "phase affinity" score. It exists
+because speculative-cycle phases are sequential. A market can show mixed
+evidence, but it cannot be in a true post-unwind state without a prior unwind.
+The UI should therefore show both views: evidence explains what signals are
+firing now, while the path state explains which cycle states are currently
+legal and historically plausible.
+
 ## Research Basis
 
 The design uses conservative pieces of the bubble/crisis literature:
@@ -85,11 +108,17 @@ It writes:
 | --- | --- |
 | `reports/cycle_tracker/cycle_phase_probabilities.csv` | Current 0M phase nowcast probabilities. |
 | `reports/cycle_tracker/cycle_transition_forecast.csv` | 0M current phase plus forward horizon phase frontier using current phase evidence and scenario-risk priors. |
+| `reports/cycle_tracker/cycle_path_state_history.csv` | Path-constrained decoded phase history with prior phase, duration, drawdown memory, and transition reason. |
+| `reports/cycle_tracker/cycle_path_transition_forecast.csv` | 0M current path phase plus legal forward path probabilities using transition, duration, and precondition rules. |
 | `reports/cycle_tracker/cycle_evidence_components.csv` | Feature components and raw values behind the current read. |
 | `reports/cycle_tracker/cycle_candidate_scores.csv` | Conditional candidate scores for assets/sleeves in the current phase. |
-| `reports/cycle_tracker/cycle_phase_candidate_frontier.csv` | Phase-by-horizon conditional winner shelf: for each plausible future phase and horizon, ranks assets using prior-only phase validation plus current momentum/drawdown context. |
+| `reports/cycle_tracker/cycle_phase_candidate_frontier.csv` | Phase-by-horizon conditional winner shelf: for each plausible future phase and horizon, ranks assets using path-conditioned prior-only validation plus current momentum/drawdown context. |
 | `reports/cycle_tracker/cycle_validation_metrics.csv` | Prior-only historical forward metrics by phase, horizon, and ticker. |
 | `reports/cycle_tracker/cycle_validation_observations.csv` | Origin-level validation evidence for audit/debug. |
+| `reports/cycle_tracker/cycle_phase_reliability.csv` | Phase-level classifier audit: when a historical origin was labeled with a phase, did the next horizon behave the way that phase implies? |
+| `reports/cycle_tracker/cycle_path_validation_metrics.csv` | Prior-only forward metrics by decoded path phase, horizon, and ticker. This is the default evidence source for the winner frontier. |
+| `reports/cycle_tracker/cycle_path_reliability.csv` | Path-phase audit: when the decoded path was in a phase, did the next horizon match that phase's expected behavior? |
+| `reports/cycle_tracker/cycle_crisis_playback.csv` | Historical playback through named crisis windows, split into lead-up, unwind, and recovery stages. |
 | `reports/cycle_tracker/summary.md` | Plain-language summary. |
 
 It also persists run history and metrics in DuckDB tables:
@@ -97,10 +126,16 @@ It also persists run history and metrics in DuckDB tables:
 - `cycle_tracker_runs`
 - `cycle_tracker_phase_probabilities`
 - `cycle_tracker_transition_forecast`
+- `cycle_tracker_path_state_history`
+- `cycle_tracker_path_transition_forecast`
 - `cycle_tracker_evidence`
 - `cycle_tracker_candidate_scores`
 - `cycle_tracker_phase_candidate_frontier`
 - `cycle_tracker_validation_metrics`
+- `cycle_tracker_path_validation_metrics`
+- `cycle_tracker_phase_reliability`
+- `cycle_tracker_path_reliability`
+- `cycle_tracker_crisis_playback`
 
 ## UI Location
 
@@ -110,13 +145,65 @@ phase validation remains a CLI/job step.
 
 The V2 view should show:
 
-- dominant 0M nowcast phase
+- dominant 0M evidence phase and dominant 0M path-constrained phase
 - phase probability
-- horizon phase frontier chart
+- independent horizon phase frontier chart
+- path-constrained horizon phase frontier chart
 - current-phase conditional winner candidate table
 - scenario/phase winner frontier with horizon and phase selectors
+- historical phase reliability and path-phase reliability cards/charts
+- crisis playback selector for prior lead-up, unwind, and recovery periods
 - evidence components
-- prior-only validation metrics
+- prior-only validation metrics and path-conditioned validation metrics
+
+## Reliability Read
+
+The reliability read is deliberately phase-specific. It does not ask whether a
+single top ticker won. It asks whether the phase label implied useful forward
+behavior:
+
+- `acceleration`: QQQ should beat SPY and cash-like exposure.
+- `pre_break`: fragility should appear through drawdown, QQQ
+  underperformance, or cash outperformance.
+- `early_unwind`: QQQ should lag cash-like exposure or suffer a meaningful
+  drawdown.
+- `liquidation`: QQQ should lag cash-like exposure and suffer a severe
+  drawdown.
+- `bottoming`: risk assets should beat cash-like exposure without another deep
+  leg down.
+- `recovery`: QQQ and SPY should beat cash-like exposure with positive forward
+  returns.
+- `post_unwind_compounding`: broad risk assets should compound while QQQ
+  remains positive without severe drawdown.
+- `normal_cycle`: SPY should beat cash-like exposure without a large QQQ
+  drawdown.
+
+The UI reports fit rate, origin count, median forward benchmark behavior, and a
+label such as `historically_supportive`, `mixed_but_useful`,
+`weak_or_context_only`, `not_reliable`, or `thin_sample`. This makes sparse or
+weak phase reads visible before users lean on the frontier.
+
+Use the path reliability read first for sequential phases. The independent
+phase reliability read remains useful for signal diagnostics, but it can
+overstate states that are not sequentially legal yet.
+
+## Frontier Interpretation
+
+The winner frontier is conditional, not a recommendation list. It answers:
+"if this phase dominates over this horizon, what historically worked from
+similar prior-only path states?"
+
+For `early_unwind` and `liquidation`, horizon matters:
+
+- Short horizons (`1m`, `3m`) are defensive windows. Cash-like and ballast
+  assets can be marked `defend` or `ballast`; speculative names are capped at
+  `watch` even if a sparse historical sample happened to rebound.
+- Longer horizons (`6m`, `1y`) can become reentry-after-stress windows. Growth
+  or cyclicals may rank well there, but only with visible origin counts and
+  drawdown context.
+
+This prevents a one-off rebound from being misread as "buy speculative tech
+during liquidation."
 
 ## Limitations
 

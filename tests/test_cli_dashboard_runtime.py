@@ -21,6 +21,7 @@ def test_run_dashboard_starts_managed_streamlit_process(monkeypatch, tmp_path: P
 
     monkeypatch.setattr(subprocess, "Popen", FakePopen)
     monkeypatch.setattr(cli_module, "_process_exists", lambda pid: False)
+    monkeypatch.setattr(cli_module, "_listening_pids_on_port", lambda port: [])
     pid_path = tmp_path / "streamlit.pid"
     log_path = tmp_path / "streamlit.log"
 
@@ -60,6 +61,7 @@ def test_run_dashboard_v1_starts_archived_fallback(monkeypatch, tmp_path: Path) 
 
     monkeypatch.setattr(subprocess, "Popen", FakePopen)
     monkeypatch.setattr(cli_module, "_process_exists", lambda pid: False)
+    monkeypatch.setattr(cli_module, "_listening_pids_on_port", lambda port: [])
 
     result = CliRunner().invoke(
         app,
@@ -94,6 +96,7 @@ def test_stop_dashboard_escalates_when_graceful_shutdown_hangs(
 
     monkeypatch.setattr(cli_module, "_signal_process", fake_signal_process)
     monkeypatch.setattr(cli_module, "_process_exists", fake_process_exists)
+    monkeypatch.setattr(cli_module, "_listening_pids_on_port", lambda port: [])
     monkeypatch.setattr(cli_module.time, "sleep", lambda seconds: None)
 
     result = CliRunner().invoke(
@@ -110,3 +113,79 @@ def test_stop_dashboard_escalates_when_graceful_shutdown_hangs(
     assert result.exit_code == 0, result.output
     assert signals == [signal.SIGTERM, signal.SIGKILL]
     assert not pid_path.exists()
+
+
+def test_run_dashboard_reports_exact_restart_command_for_existing_pid(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    pid_path = tmp_path / "streamlit.pid"
+    pid_path.write_text("12345\n", encoding="utf-8")
+    monkeypatch.setattr(cli_module, "_process_exists", lambda pid: pid == 12345)
+    monkeypatch.setattr(cli_module, "_listening_pids_on_port", lambda port: [])
+
+    result = CliRunner().invoke(
+        app,
+        [
+            "run-dashboard",
+            "--pid-path",
+            str(pid_path),
+        ],
+    )
+
+    assert result.exit_code == 0, result.output
+    assert " ".join(result.output.split()).find(
+        "poetry run trade-bot run-dashboard --stop-existing"
+    ) >= 0
+
+
+def test_run_dashboard_stop_existing_cleans_port_listener(
+    monkeypatch,
+    tmp_path: Path,
+) -> None:
+    pid_path = tmp_path / "streamlit.pid"
+    pid_path.write_text("12345\n", encoding="utf-8")
+    log_path = tmp_path / "streamlit.log"
+    stopped_pids: list[int] = []
+    popen_calls: list[tuple[list[str], dict[str, object]]] = []
+
+    class FakePopen:
+        pid = 77777
+
+        def __init__(self, command: list[str], **kwargs: object) -> None:
+            popen_calls.append((command, kwargs))
+
+    def fake_process_exists(pid: int) -> bool:
+        return pid in {12345, 50186} and pid not in stopped_pids
+
+    def fake_stop_pid(pid: int, *, timeout_seconds: float, force: bool) -> bool:
+        stopped_pids.append(pid)
+        return True
+
+    monkeypatch.setattr(subprocess, "Popen", FakePopen)
+    monkeypatch.setattr(cli_module, "_process_exists", fake_process_exists)
+    monkeypatch.setattr(cli_module, "_stop_dashboard_pid", fake_stop_pid)
+    monkeypatch.setattr(
+        cli_module,
+        "_listening_pids_on_port",
+        lambda port: [50186] if port == 8765 and 50186 not in stopped_pids else [],
+    )
+
+    result = CliRunner().invoke(
+        app,
+        [
+            "run-dashboard",
+            "--pid-path",
+            str(pid_path),
+            "--log-path",
+            str(log_path),
+            "--port",
+            "8765",
+            "--stop-existing",
+        ],
+    )
+
+    assert result.exit_code == 0, result.output
+    assert stopped_pids == [12345, 50186]
+    assert pid_path.read_text(encoding="utf-8").strip() == "77777"
+    assert popen_calls

@@ -148,6 +148,13 @@ poetry run trade-bot list-snapshots --limit 10
 
 Then open `http://localhost:8501`.
 
+If a dashboard is already running and you want the latest code, restart the
+managed V2 process in one command:
+
+```bash
+poetry run trade-bot run-dashboard --stop-existing
+```
+
 Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. Use `Live pipeline` only when you intentionally want the dashboard open to recompute the full pipeline.
 
 The primary dashboard is the V2 workbench. It keeps the same local snapshots,
@@ -183,7 +190,13 @@ poetry run trade-bot run-daily-update
 poetry run trade-bot run-dashboard
 ```
 
-Stop the managed dashboard with:
+Restart the managed dashboard after code changes with:
+
+```bash
+poetry run trade-bot run-dashboard --stop-existing
+```
+
+Stop it without relaunching with:
 
 ```bash
 poetry run trade-bot stop-dashboard
@@ -302,7 +315,7 @@ Use this for strategy research, not same-day execution. The Research Lab is spli
 
 The upper aggregate section includes the overview, leaderboard, curated shelf, outcome frontier, signal evidence, family map, taxable impact, validation/QC, and manifests. Default aggregate views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants remain available through explicit all-approach filters.
 
-The **Cycle Tracker** tab is the Scenario / Phase Frontier. Refresh it with `poetry run trade-bot run-cycle-tracker` when you want the current speculative-cycle phase read, horizon phase probabilities, current-phase conditional candidates, phase-by-horizon winner shelves, and prior-only validation metrics. It is a research/watch layer, not a crash timer or allocation override.
+The **Cycle Tracker** tab is the Scenario / Phase Frontier. Refresh it with `poetry run trade-bot run-cycle-tracker` when you want the current speculative-cycle phase read, 0M nowcast, path-constrained horizon phase probabilities, current-phase conditional candidates, phase-by-horizon winner shelves, and prior-only validation metrics. It is a research/watch layer, not a crash timer or allocation override. The tracker shows both simultaneous phase evidence and a path-aware cycle state; use the path-aware view for sequential questions such as unwind, liquidation, bottoming, recovery, and post-unwind compounding.
 
 The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart. Outcome Frontier shows the configured accumulation assumptions and deterministic wealth math for aggregate tradeoff comparison; open **Simulation Lab** for historical bootstrap and regime-conditioned forward path distributions.
 

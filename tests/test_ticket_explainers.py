@@ -45,6 +45,31 @@ def test_generated_ticker_lookup_covers_ai_semiconductor_proxies() -> None:
     assert soxx_detail.kind == "Ticker"
 
 
+def test_generated_ticker_lookup_includes_instrument_identity() -> None:
+    snow_detail = ticket_detail("SNOW")
+    crwd_detail = ticket_detail("CRWD")
+
+    assert snow_detail is not None
+    assert snow_detail.kind == "Ticker"
+    assert "Snowflake Inc." in snow_detail.plain_english
+    assert "cloud data platform" in snow_detail.how_to_read
+    assert "Trade-bot tracks it as an AI/growth" in snow_detail.plain_english
+    assert crwd_detail is not None
+    assert "CrowdStrike Holdings" in crwd_detail.plain_english
+    assert "cybersecurity" in crwd_detail.how_to_read
+
+
+def test_ticker_lookup_can_search_company_names() -> None:
+    snow_frame = ticket_guide_frame(search="Snowflake")
+    crowdstrike_frame = ticket_guide_frame(search="CrowdStrike")
+
+    assert not snow_frame.empty
+    assert snow_frame.iloc[0]["term"] == "SNOW"
+    assert "Snowflake Inc." in str(snow_frame.iloc[0]["plain_english"])
+    assert not crowdstrike_frame.empty
+    assert crowdstrike_frame.iloc[0]["term"] == "CRWD"
+
+
 def test_combined_lookup_prefers_exact_ticker_over_metric_text_match() -> None:
     smh_frame = _lookup_guide_frame(search="SMH")
     soxx_frame = _lookup_guide_frame(search="SOXX")

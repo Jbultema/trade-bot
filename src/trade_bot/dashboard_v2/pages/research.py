@@ -2,6 +2,7 @@ from __future__ import annotations
 
 import pandas as pd
 import plotly.graph_objects as go
+from plotly.subplots import make_subplots
 import streamlit as st
 
 from trade_bot.dashboard.components import _clearable_selectbox, _render_metric_dataframe
@@ -303,9 +304,15 @@ def _render_cycle_tracker() -> None:
     phase = frames["phase_probabilities"]
     forecast = frames["transition_forecast"]
     evidence = frames["evidence"]
+    path_history = frames.get("path_state_history", pd.DataFrame())
+    path_forecast = frames.get("path_transition_forecast", pd.DataFrame())
     candidates = frames["candidate_scores"]
     frontier = frames["phase_candidate_frontier"]
     validation = frames["validation_metrics"]
+    path_validation = frames.get("path_validation_metrics", pd.DataFrame())
+    reliability = frames.get("phase_reliability", pd.DataFrame())
+    path_reliability = frames.get("path_reliability", pd.DataFrame())
+    crisis = frames.get("crisis_playback", pd.DataFrame())
     if all(frame.empty for frame in frames.values()):
         st.info("No cycle tracker artifacts found. Run `poetry run trade-bot run-cycle-tracker`.")
         return
@@ -326,6 +333,7 @@ def _render_cycle_tracker() -> None:
             ("Candidate Rows", len(candidates)),
             ("Frontier Rows", len(frontier)),
             ("Validation Rows", len(validation)),
+            ("Path Validation Rows", len(path_validation)),
             ("Top Candidate", top_candidate),
         ]
     )
@@ -333,10 +341,37 @@ def _render_cycle_tracker() -> None:
         "Cycle Tracker is not a crash timer or allocation override. It asks which speculative-cycle phase the current market resembles, which phases are plausible by horizon, and which assets historically performed better in similar prior states.",
     )
 
-    if not forecast.empty:
-        st.markdown("**0M nowcast + forward phase frontier**")
-        st.plotly_chart(_phase_frontier_figure(forecast), use_container_width=True)
-        _render_metric_dataframe(_display_metrics(forecast.head(80)))
+    if not path_history.empty:
+        _render_path_cycle_state(path_history, path_forecast, path_reliability)
+    else:
+        st.info(
+            "This cycle tracker run does not include path-aware cycle state yet. Re-run `poetry run trade-bot run-cycle-tracker`."
+        )
+
+    if not reliability.empty:
+        _render_cycle_reliability(reliability, dominant_phase=dominant_phase)
+    else:
+        st.info(
+            "This cycle tracker run does not include phase reliability yet. Re-run `poetry run trade-bot run-cycle-tracker`."
+        )
+
+    if not crisis.empty:
+        _render_crisis_playback(crisis)
+    else:
+        st.info(
+            "This cycle tracker run does not include crisis playback yet. Re-run `poetry run trade-bot run-cycle-tracker`."
+        )
+
+    forecast_to_show = path_forecast if not path_forecast.empty else forecast
+    if not forecast_to_show.empty:
+        title = (
+            "0M nowcast + path-constrained forward phase frontier"
+            if not path_forecast.empty
+            else "0M nowcast + forward phase frontier"
+        )
+        st.markdown(f"**{title}**")
+        st.plotly_chart(_phase_frontier_figure(forecast_to_show), use_container_width=True)
+        _render_metric_dataframe(_display_metrics(forecast_to_show.head(80)))
     elif not phase.empty:
         st.markdown("**0M nowcast phase probabilities**")
         st.plotly_chart(_phase_frontier_figure(phase), use_container_width=True)
@@ -390,6 +425,268 @@ def _render_cycle_tracker() -> None:
                 if column in validation
             ]
             _render_metric_dataframe(_display_metrics(validation[validation_columns].head(100)))
+    if not path_validation.empty:
+        with st.expander("Path-conditioned validation metrics", expanded=False):
+            st.caption(
+                "Used by the path-aware winner frontier when available: each historical origin is labeled by decoded path phase before forward ticker outcomes are measured."
+            )
+            path_validation_columns = [
+                column
+                for column in [
+                    "dominant_phase",
+                    "horizon",
+                    "ticker",
+                    "asset_role",
+                    "origins",
+                    "median_forward_return",
+                    "median_excess_vs_spy",
+                    "median_excess_vs_qqq",
+                    "hit_rate_vs_qqq",
+                    "median_forward_drawdown",
+                    "severe_drawdown_rate",
+                    "phase_rank_score",
+                ]
+                if column in path_validation
+            ]
+            _render_metric_dataframe(
+                _display_metrics(path_validation[path_validation_columns].head(100))
+            )
+
+
+def _render_path_cycle_state(
+    path_history: pd.DataFrame,
+    path_forecast: pd.DataFrame,
+    path_reliability: pd.DataFrame,
+) -> None:
+    st.markdown("**Path-aware cycle state**")
+    st.caption(
+        "Sequential decoder: turns simultaneous phase evidence into one plausible path using allowed transitions, phase duration, and prior unwind/recovery memory."
+    )
+    data = path_history.copy()
+    data["as_of_date"] = pd.to_datetime(data["as_of_date"], errors="coerce")
+    latest = data.sort_values("as_of_date").iloc[-1]
+    render_card_grid(
+        [
+            ("Path Phase", latest.get("path_phase", "n/a")),
+            ("Evidence Phase", latest.get("evidence_phase", "n/a")),
+            ("Path Probability", _fmt_pct(latest.get("path_probability"))),
+            ("Duration", f"{int(float(latest.get('phase_duration_days', 0))):,}d"),
+            ("Duration State", latest.get("phase_duration_bucket", "n/a")),
+            ("Transition Read", latest.get("transition_reason", "n/a")),
+        ]
+    )
+    render_callout(
+        "This is the cycle tracker answer to path dependence: bottoming and post-unwind states are constrained unless prior drawdown, unwind, or recovery memory exists. The evidence model remains visible as diagnostics, but the path phase is the operational read."
+    )
+    if not path_forecast.empty:
+        st.plotly_chart(_phase_frontier_figure(path_forecast), use_container_width=True)
+    if not path_reliability.empty:
+        _render_path_cycle_reliability(
+            path_reliability,
+            path_phase=str(latest.get("path_phase", "n/a")),
+        )
+    with st.expander("Path state history", expanded=False):
+        columns = [
+            column
+            for column in [
+                "as_of_date",
+                "evidence_phase",
+                "path_phase",
+                "path_probability",
+                "previous_path_phase",
+                "phase_duration_days",
+                "phase_duration_bucket",
+                "prior_unwind_seen_504d",
+                "prior_bottoming_seen_504d",
+                "qqq_drawdown_252d",
+                "spy_drawdown_252d",
+                "transition_reason",
+            ]
+            if column in data
+        ]
+        _render_metric_dataframe(_display_metrics(data[columns].tail(80)))
+
+
+def _render_path_cycle_reliability(
+    path_reliability: pd.DataFrame,
+    *,
+    path_phase: str,
+) -> None:
+    data = path_reliability.copy()
+    data["horizon_days"] = pd.to_numeric(data["horizon_days"], errors="coerce")
+    data["path_fit_rate"] = pd.to_numeric(data["path_fit_rate"], errors="coerce")
+    data["origins"] = pd.to_numeric(data["origins"], errors="coerce").fillna(0).astype(int)
+    horizon_order = (
+        data[["horizon", "horizon_days"]]
+        .drop_duplicates()
+        .sort_values("horizon_days")["horizon"]
+        .astype(str)
+        .tolist()
+    )
+    selected_horizon = st.pills(
+        "Path reliability horizon",
+        horizon_order,
+        default="3m" if "3m" in horizon_order else (horizon_order[0] if horizon_order else None),
+        selection_mode="single",
+        key="dashboard_v2_cycle_path_reliability_horizon",
+    )
+    if not selected_horizon:
+        return
+    selected = data[data["horizon"].astype(str).eq(str(selected_horizon))].copy()
+    current = selected[selected["path_phase"].astype(str).eq(str(path_phase))]
+    headline = current.iloc[0] if not current.empty else selected.sort_values("origins", ascending=False).iloc[0]
+    render_card_grid(
+        [
+            ("Path Fit Rate", _fmt_pct(headline.get("path_fit_rate"))),
+            ("Path Origins", int(headline.get("origins", 0))),
+            ("Path Label", headline.get("reliability_label", "n/a")),
+        ]
+    )
+    st.caption(str(headline.get("expected_behavior", "")))
+    st.plotly_chart(_path_reliability_figure(selected), use_container_width=True)
+    with st.expander("Path reliability audit table", expanded=False):
+        columns = [
+            column
+            for column in [
+                "path_phase",
+                "horizon",
+                "origins",
+                "path_fit_rate",
+                "median_path_probability",
+                "median_phase_duration_days",
+                "median_qqq_forward_return",
+                "median_qqq_forward_drawdown",
+                "reliability_label",
+                "expected_behavior",
+            ]
+            if column in selected
+        ]
+        _render_metric_dataframe(_display_metrics(selected[columns]))
+
+
+def _render_cycle_reliability(reliability: pd.DataFrame, *, dominant_phase: str) -> None:
+    st.markdown("**Historical phase reliability**")
+    st.caption(
+        "Prior-only audit: when Cycle Tracker labeled a historical origin with a phase, did the next horizon behave the way that phase implies?"
+    )
+    data = reliability.copy()
+    data["horizon_days"] = pd.to_numeric(data["horizon_days"], errors="coerce")
+    data["phase_fit_rate"] = pd.to_numeric(data["phase_fit_rate"], errors="coerce")
+    data["origins"] = pd.to_numeric(data["origins"], errors="coerce").fillna(0).astype(int)
+    horizon_order = (
+        data[["horizon", "horizon_days"]]
+        .drop_duplicates()
+        .sort_values("horizon_days")["horizon"]
+        .astype(str)
+        .tolist()
+    )
+    selected_horizon = st.pills(
+        "Reliability horizon",
+        horizon_order,
+        default="3m" if "3m" in horizon_order else (horizon_order[0] if horizon_order else None),
+        selection_mode="single",
+        key="dashboard_v2_cycle_reliability_horizon",
+    )
+    if not selected_horizon:
+        return
+    selected = data[data["horizon"].astype(str).eq(str(selected_horizon))].copy()
+    current = selected[selected["dominant_phase"].astype(str).eq(str(dominant_phase))]
+    headline = current.iloc[0] if not current.empty else selected.sort_values("origins", ascending=False).iloc[0]
+    render_card_grid(
+        [
+            ("Current Phase", dominant_phase),
+            ("Fit Rate", _fmt_pct(headline.get("phase_fit_rate"))),
+            ("Historical Origins", int(headline.get("origins", 0))),
+            ("Reliability Label", headline.get("reliability_label", "n/a")),
+        ]
+    )
+    render_callout(
+        f"For {selected_horizon}, `{headline.get('dominant_phase', dominant_phase)}` means: {headline.get('expected_behavior', 'n/a')}",
+    )
+    st.plotly_chart(_phase_reliability_figure(selected), use_container_width=True)
+    columns = [
+        column
+        for column in [
+            "dominant_phase",
+            "horizon",
+            "origins",
+            "phase_fit_rate",
+            "median_phase_probability",
+            "median_qqq_forward_return",
+            "median_qqq_forward_drawdown",
+            "severe_qqq_drawdown_rate",
+            "reliability_label",
+            "expected_behavior",
+        ]
+        if column in selected
+    ]
+    with st.expander("Reliability audit table", expanded=False):
+        _render_metric_dataframe(_display_metrics(selected[columns]))
+
+
+def _render_crisis_playback(crisis: pd.DataFrame) -> None:
+    st.markdown("**Historical crisis playback**")
+    st.caption(
+        "Replay Cycle Tracker phase probabilities through named historical stress windows: lead-up, unwind, and recovery."
+    )
+    data = crisis.copy()
+    data["origin_date"] = pd.to_datetime(data["origin_date"], errors="coerce")
+    data["horizon_days"] = pd.to_numeric(data["horizon_days"], errors="coerce")
+    data["phase_probability"] = pd.to_numeric(data["phase_probability"], errors="coerce")
+    data["stage_order"] = pd.to_numeric(data["stage_order"], errors="coerce").fillna(0).astype(int)
+    data["phase_fit"] = data["phase_fit"].astype(str).str.lower().isin({"true", "1", "yes"})
+    crisis_options = data["crisis"].dropna().astype(str).drop_duplicates().tolist()
+    if not crisis_options:
+        return
+    selected_crisis = st.selectbox(
+        "Historical stress window",
+        crisis_options,
+        index=len(crisis_options) - 1,
+        key="dashboard_v2_cycle_crisis_window",
+    )
+    horizon_options = (
+        data[["horizon", "horizon_days"]]
+        .drop_duplicates()
+        .sort_values("horizon_days")["horizon"]
+        .astype(str)
+        .tolist()
+    )
+    selected_horizon = st.pills(
+        "Playback horizon",
+        horizon_options,
+        default="3m" if "3m" in horizon_options else (horizon_options[0] if horizon_options else None),
+        selection_mode="single",
+        key="dashboard_v2_cycle_crisis_horizon",
+    )
+    selected = data[
+        data["crisis"].astype(str).eq(str(selected_crisis))
+        & data["horizon"].astype(str).eq(str(selected_horizon))
+    ].copy()
+    if selected.empty:
+        st.info("No crisis playback rows are available for this selection.")
+        return
+    dominant = (
+        selected[["origin_date", "stage", "stage_order", "dominant_phase", "phase_fit"]]
+        .drop_duplicates()
+        .sort_values("origin_date")
+    )
+    stage_summary = (
+        dominant.groupby(["stage_order", "stage", "dominant_phase"])
+        .agg(origins=("origin_date", "nunique"), fit_rate=("phase_fit", "mean"))
+        .reset_index()
+        .sort_values(["stage_order", "origins"], ascending=[True, False])
+    )
+    render_card_grid(
+        [
+            ("Window", str(selected_crisis).replace("_", " ").title()),
+            ("Origins", int(dominant["origin_date"].nunique())),
+            ("Most Common Phase", dominant["dominant_phase"].mode().iloc[0]),
+            ("Playback Fit", _fmt_pct(dominant["phase_fit"].mean())),
+        ]
+    )
+    st.plotly_chart(_crisis_playback_figure(selected), use_container_width=True)
+    with st.expander("Crisis stage summary", expanded=True):
+        _render_metric_dataframe(_display_metrics(stage_summary))
 
 
 def _render_phase_candidate_frontier(frontier: pd.DataFrame) -> None:
@@ -453,6 +750,7 @@ def _render_phase_candidate_frontier(frontier: pd.DataFrame) -> None:
             "rank",
             "ticker",
             "asset_role",
+            "phase_window_role",
             "frontier_role",
             "frontier_score",
             "median_forward_return",
@@ -475,8 +773,11 @@ def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
     color_map = {
         "scale_candidate": "#16a34a",
         "starter_reentry": "#2563eb",
+        "scale_reentry": "#2563eb",
+        "reentry_watch": "#8b5cf6",
         "watch": "#f59e0b",
         "defend": "#06b6d4",
+        "ballast": "#0ea5e9",
         "avoid": "#ef4444",
     }
     colors = [
@@ -501,6 +802,242 @@ def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
         yaxis_title="Ticker",
         margin={"l": 20, "r": 20, "t": 20, "b": 20},
         height=340,
+    )
+    return figure
+
+
+def _phase_reliability_figure(frame: pd.DataFrame) -> go.Figure:
+    data = frame.copy()
+    data["phase_fit_rate"] = pd.to_numeric(data["phase_fit_rate"], errors="coerce").fillna(0.0)
+    data["origins"] = pd.to_numeric(data["origins"], errors="coerce").fillna(0.0)
+    data = data.sort_values("phase_fit_rate", ascending=True)
+    color_map = {
+        "historically_supportive": "#16a34a",
+        "mixed_but_useful": "#f59e0b",
+        "weak_or_context_only": "#ef4444",
+        "not_reliable": "#991b1b",
+        "thin_sample": "#7f8ea3",
+    }
+    figure = go.Figure(
+        go.Bar(
+            x=data["phase_fit_rate"],
+            y=data["dominant_phase"].astype(str),
+            orientation="h",
+            marker_color=[
+                color_map.get(str(label), "#7f8ea3")
+                for label in data.get("reliability_label", pd.Series(dtype=str)).astype(str)
+            ],
+            customdata=data[["origins", "reliability_label"]].to_numpy(),
+            hovertemplate=(
+                "<b>%{y}</b><br>Fit rate: %{x:.1%}<br>"
+                "Origins: %{customdata[0]:.0f}<br>Label: %{customdata[1]}<extra></extra>"
+            ),
+        )
+    )
+    figure.update_layout(
+        xaxis_title="Phase-fit rate",
+        xaxis_tickformat=".0%",
+        yaxis_title="Cycle phase",
+        margin={"l": 20, "r": 20, "t": 20, "b": 20},
+        height=360,
+    )
+    return figure
+
+
+def _path_reliability_figure(frame: pd.DataFrame) -> go.Figure:
+    data = frame.copy()
+    data["path_fit_rate"] = pd.to_numeric(data["path_fit_rate"], errors="coerce").fillna(0.0)
+    data["origins"] = pd.to_numeric(data["origins"], errors="coerce").fillna(0.0)
+    data = data.sort_values("path_fit_rate", ascending=True)
+    color_map = {
+        "historically_supportive": "#16a34a",
+        "mixed_but_useful": "#f59e0b",
+        "weak_or_context_only": "#ef4444",
+        "not_reliable": "#991b1b",
+        "thin_sample": "#7f8ea3",
+    }
+    figure = go.Figure(
+        go.Bar(
+            x=data["path_fit_rate"],
+            y=data["path_phase"].astype(str),
+            orientation="h",
+            marker_color=[
+                color_map.get(str(label), "#7f8ea3")
+                for label in data.get("reliability_label", pd.Series(dtype=str)).astype(str)
+            ],
+            customdata=data[["origins", "reliability_label"]].to_numpy(),
+            hovertemplate=(
+                "<b>%{y}</b><br>Path fit rate: %{x:.1%}<br>"
+                "Origins: %{customdata[0]:.0f}<br>Label: %{customdata[1]}<extra></extra>"
+            ),
+        )
+    )
+    figure.update_layout(
+        xaxis_title="Path phase-fit rate",
+        xaxis_tickformat=".0%",
+        yaxis_title="Path phase",
+        margin={"l": 20, "r": 20, "t": 20, "b": 20},
+        height=360,
+    )
+    return figure
+
+
+def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
+    data = frame.copy()
+    data = data.sort_values(["origin_date", "stage_order"])
+    horizon = (
+        data["horizon"].dropna().astype(str).iloc[0]
+        if "horizon" in data and not data["horizon"].dropna().empty
+        else "selected"
+    )
+    phase_order = [
+        "normal_cycle",
+        "acceleration",
+        "pre_break",
+        "early_unwind",
+        "liquidation",
+        "bottoming",
+        "recovery",
+        "post_unwind_compounding",
+    ]
+    color_map = {
+        "normal_cycle": "#7f8ea3",
+        "acceleration": "#16a34a",
+        "pre_break": "#f59e0b",
+        "early_unwind": "#ef4444",
+        "liquidation": "#991b1b",
+        "bottoming": "#8b5cf6",
+        "recovery": "#06b6d4",
+        "post_unwind_compounding": "#2563eb",
+    }
+    dates = data["origin_date"].drop_duplicates().tolist()
+    figure = make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        vertical_spacing=0.10,
+        row_heights=[0.68, 0.32],
+        subplot_titles=(
+            "Phase read at each historical origin",
+            f"What happened over the selected {horizon} horizon",
+        ),
+    )
+    for phase in phase_order:
+        phase_rows = data[data["phase"].astype(str).eq(phase)]
+        if phase_rows.empty:
+            continue
+        y_values = []
+        for date in dates:
+            row = phase_rows[phase_rows["origin_date"].eq(date)]
+            y_values.append(float(row["phase_probability"].iloc[0]) if not row.empty else 0.0)
+        figure.add_trace(
+            go.Scatter(
+                x=dates,
+                y=y_values,
+                mode="lines",
+                stackgroup="one",
+                name=phase.replace("_", " ").title(),
+                line={"color": color_map.get(phase, "#7f8ea3"), "width": 1},
+                hovertemplate="<b>%{x|%Y-%m-%d}</b><br>%{y:.1%}<extra></extra>",
+            ),
+            row=1,
+            col=1,
+        )
+    outcomes = (
+        data[
+            [
+                "origin_date",
+                "qqq_forward_return",
+                "spy_forward_return",
+                "bil_forward_return",
+                "qqq_forward_drawdown",
+                "dominant_phase",
+                "phase_fit",
+            ]
+        ]
+        .drop_duplicates()
+        .sort_values("origin_date")
+    )
+    outcome_series = [
+        ("QQQ forward return", "qqq_forward_return", "#2563eb"),
+        ("SPY forward return", "spy_forward_return", "#16a34a"),
+        ("BIL forward return", "bil_forward_return", "#64748b"),
+        ("QQQ max drawdown", "qqq_forward_drawdown", "#ef4444"),
+    ]
+    for name, column, color in outcome_series:
+        if column not in outcomes:
+            continue
+        values = pd.to_numeric(outcomes[column], errors="coerce")
+        if values.notna().sum() == 0:
+            continue
+        figure.add_trace(
+            go.Scatter(
+                x=outcomes["origin_date"],
+                y=values,
+                mode="lines+markers",
+                name=name,
+                line={"color": color, "width": 2},
+                marker={"size": 5},
+                customdata=outcomes[["dominant_phase", "phase_fit"]].to_numpy(),
+                hovertemplate=(
+                    "<b>%{x|%Y-%m-%d}</b><br>"
+                    f"{name}: " + "%{y:.1%}<br>"
+                    "Dominant phase: %{customdata[0]}<br>"
+                    "Phase fit: %{customdata[1]}<extra></extra>"
+                ),
+            ),
+            row=2,
+            col=1,
+        )
+    stage_rows = (
+        data[["stage", "stage_order", "origin_date"]]
+        .drop_duplicates()
+        .groupby(["stage_order", "stage"])
+        .agg(start=("origin_date", "min"), end=("origin_date", "max"))
+        .reset_index()
+        .sort_values("stage_order")
+    )
+    shapes = []
+    annotations = []
+    for position, row in enumerate(stage_rows.itertuples(index=False)):
+        color = "rgba(245, 158, 11, 0.08)" if position % 2 == 0 else "rgba(37, 99, 235, 0.06)"
+        shapes.append(
+            {
+                "type": "rect",
+                "xref": "x",
+                "yref": "paper",
+                "x0": row.start,
+                "x1": row.end,
+                "y0": 0,
+                "y1": 1,
+                "line": {"width": 0},
+                "fillcolor": color,
+                "layer": "below",
+            }
+        )
+        annotations.append(
+            {
+                "xref": "x",
+                "yref": "paper",
+                "x": row.start,
+                "y": 1.04,
+                "text": str(row.stage).replace("_", " ").title(),
+                "showarrow": False,
+                "font": {"size": 11},
+            }
+        )
+    subplot_annotations = tuple(figure.layout.annotations or ())
+    figure.update_layout(
+        yaxis_tickformat=".0%",
+        yaxis_title="Phase probability",
+        yaxis2_tickformat=".0%",
+        yaxis2_title=f"{horizon} return / drawdown",
+        xaxis2_title="Historical origin date",
+        legend_title_text="Series",
+        shapes=shapes,
+        annotations=list(subplot_annotations) + annotations,
+        margin={"l": 20, "r": 20, "t": 40, "b": 20},
+        height=680,
     )
     return figure
 

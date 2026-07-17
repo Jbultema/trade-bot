@@ -5,10 +5,16 @@ import pytest
 
 from trade_bot.research.cycle_tracker import (
     build_cycle_candidate_scores,
+    build_cycle_crisis_playback,
     build_cycle_feature_snapshot,
+    build_cycle_path_state_history,
     build_cycle_validation_observations,
+    build_path_candidate_validation_observations,
+    build_path_transition_forecast,
     build_phase_candidate_frontier,
     run_cycle_tracker,
+    summarize_path_phase_reliability,
+    summarize_phase_reliability,
 )
 
 
@@ -78,11 +84,229 @@ def test_cycle_tracker_writes_artifacts(tmp_path) -> None:
     assert 0 not in set(result.validation_observations["horizon_days"])
     assert not result.candidate_scores.empty
     assert not result.phase_candidate_frontier.empty
+    assert not result.path_validation_metrics.empty
     assert (tmp_path / "cycle_phase_probabilities.csv").exists()
     assert (tmp_path / "cycle_transition_forecast.csv").exists()
     assert (tmp_path / "cycle_candidate_scores.csv").exists()
     assert (tmp_path / "cycle_phase_candidate_frontier.csv").exists()
+    assert (tmp_path / "cycle_phase_reliability.csv").exists()
+    assert (tmp_path / "cycle_path_validation_metrics.csv").exists()
+    assert (tmp_path / "cycle_path_state_history.csv").exists()
+    assert (tmp_path / "cycle_path_transition_forecast.csv").exists()
+    assert (tmp_path / "cycle_path_reliability.csv").exists()
+    assert (tmp_path / "cycle_crisis_playback.csv").exists()
     assert (tmp_path / "summary.md").exists()
+
+
+def test_path_state_history_adds_memory_and_duration() -> None:
+    prices = _cycle_prices("unwind", periods=420)
+
+    path = build_cycle_path_state_history(
+        prices,
+        min_train_days=252,
+        state_step_days=21,
+    )
+
+    assert not path.empty
+    assert {
+        "evidence_phase",
+        "path_phase",
+        "phase_duration_days",
+        "phase_duration_bucket",
+        "prior_unwind_seen_504d",
+        "prior_bottoming_seen_504d",
+        "transition_reason",
+    }.issubset(path.columns)
+    assert pd.to_numeric(path["phase_duration_days"], errors="coerce").ge(0).all()
+    assert path["transition_allowed"].astype(bool).all()
+    assert set(path["path_phase"]).intersection({"early_unwind", "liquidation"})
+
+
+def test_path_state_history_breaks_out_of_stale_normal_during_deep_stress() -> None:
+    prices = _cycle_prices("unwind", periods=520)
+
+    path = build_cycle_path_state_history(
+        prices,
+        min_train_days=252,
+        state_step_days=21,
+    )
+
+    deep_stress = path[
+        pd.to_numeric(path["qqq_drawdown_252d"], errors="coerce").le(-0.18)
+    ]
+    assert not deep_stress.empty
+    assert set(deep_stress["path_phase"]).intersection({"early_unwind", "liquidation"})
+
+
+def test_path_transition_constrains_post_unwind_without_prior_unwind() -> None:
+    phase_probabilities = pd.DataFrame(
+        [
+            {
+                "phase": "post_unwind_compounding",
+                "probability": 0.70,
+                "dominant_phase": "post_unwind_compounding",
+                "horizon": "0m",
+                "horizon_days": 0,
+                "source": "test",
+            },
+            {
+                "phase": "normal_cycle",
+                "probability": 0.30,
+                "dominant_phase": "post_unwind_compounding",
+                "horizon": "0m",
+                "horizon_days": 0,
+                "source": "test",
+            },
+        ]
+    )
+    path_history = pd.DataFrame(
+        [
+            {
+                "as_of_date": "2026-07-16",
+                "path_phase": "normal_cycle",
+                "path_probability": 0.80,
+                "phase_duration_days": 90,
+                "prior_unwind_seen_504d": False,
+                "prior_bottoming_seen_504d": False,
+                "qqq_drawdown_252d": -0.02,
+                "spy_drawdown_252d": -0.01,
+                "normal_cycle_probability": 0.80,
+                "post_unwind_compounding_probability": 0.20,
+            }
+        ]
+    )
+
+    forecast = build_path_transition_forecast(
+        phase_probabilities,
+        path_history,
+        scenario_lattice=None,
+        horizons=(0, 21),
+    )
+
+    one_month = forecast[forecast["horizon"].astype(str).eq("1m")]
+    post = one_month[one_month["phase"].astype(str).eq("post_unwind_compounding")].iloc[0]
+    normal = one_month[one_month["phase"].astype(str).eq("normal_cycle")].iloc[0]
+    assert float(post["probability"]) < float(normal["probability"])
+    assert "needs unwind/recovery path" in str(post["precondition"])
+
+
+def test_path_reliability_summarizes_path_fit() -> None:
+    observations = pd.DataFrame(
+        [
+            {
+                "path_phase": "liquidation",
+                "path_probability": 0.80,
+                "phase_duration_days": 21,
+                "horizon": "1m",
+                "horizon_days": 21,
+                "qqq_forward_return": -0.10,
+                "spy_forward_return": -0.08,
+                "bil_forward_return": 0.001,
+                "qqq_forward_drawdown": -0.15,
+                "path_phase_fit": True,
+            },
+            {
+                "path_phase": "liquidation",
+                "path_probability": 0.65,
+                "phase_duration_days": 42,
+                "horizon": "1m",
+                "horizon_days": 21,
+                "qqq_forward_return": 0.05,
+                "spy_forward_return": 0.03,
+                "bil_forward_return": 0.001,
+                "qqq_forward_drawdown": -0.03,
+                "path_phase_fit": False,
+            },
+        ]
+    )
+
+    reliability = summarize_path_phase_reliability(observations)
+
+    assert not reliability.empty
+    row = reliability.iloc[0]
+    assert row["path_phase"] == "liquidation"
+    assert row["path_fit_rate"] == pytest.approx(0.5)
+
+
+def test_path_candidate_validation_uses_decoded_path_phase() -> None:
+    prices = _cycle_prices("unwind", periods=420)
+    path_history = pd.DataFrame(
+        [
+            {
+                "as_of_date": str(prices.index[260].date()),
+                "path_phase": "liquidation",
+                "path_probability": 0.82,
+                "phase_duration_days": 21,
+            }
+        ]
+    )
+
+    observations = build_path_candidate_validation_observations(
+        prices,
+        path_history,
+        tickers=("QQQ", "BIL"),
+        horizons=(21,),
+    )
+
+    assert not observations.empty
+    assert set(observations["dominant_phase"]) == {"liquidation"}
+    assert (
+        pd.to_datetime(observations["entry_date"])
+        > pd.to_datetime(observations["origin_date"])
+    ).all()
+
+
+def test_phase_reliability_summarizes_classifier_fit() -> None:
+    observations = pd.DataFrame(
+        [
+            {
+                "origin_date": "2020-01-01",
+                "dominant_phase": "acceleration",
+                "phase_probability": 0.70,
+                "horizon": "1m",
+                "horizon_days": 21,
+                "ticker": "QQQ",
+                "forward_return": 0.08,
+                "forward_max_drawdown": -0.02,
+                "spy_forward_return": 0.04,
+                "qqq_forward_return": 0.08,
+                "bil_forward_return": 0.001,
+            },
+            {
+                "origin_date": "2020-02-01",
+                "dominant_phase": "acceleration",
+                "phase_probability": 0.65,
+                "horizon": "1m",
+                "horizon_days": 21,
+                "ticker": "QQQ",
+                "forward_return": -0.04,
+                "forward_max_drawdown": -0.09,
+                "spy_forward_return": -0.02,
+                "qqq_forward_return": -0.04,
+                "bil_forward_return": 0.001,
+            },
+        ]
+    )
+
+    reliability = summarize_phase_reliability(observations)
+
+    assert not reliability.empty
+    row = reliability.iloc[0]
+    assert row["dominant_phase"] == "acceleration"
+    assert row["phase_fit_rate"] == pytest.approx(0.5)
+    assert row["expected_behavior"]
+
+
+def test_crisis_playback_replays_phase_probabilities() -> None:
+    prices = _cycle_prices("unwind", periods=900, start="2018-01-01")
+
+    playback = build_cycle_crisis_playback(prices, horizons=(21,), origin_step_days=21)
+
+    assert not playback.empty
+    assert {"crisis", "stage", "phase", "phase_probability", "phase_fit"}.issubset(
+        playback.columns
+    )
+    assert set(playback["horizon"]) == {"1m"}
 
 
 def test_liquidation_phase_favors_defensive_candidates() -> None:
@@ -227,8 +451,78 @@ def test_phase_candidate_frontier_scores_phase_horizon_winners() -> None:
     assert frontier.iloc[0]["rank"] == 1
 
 
-def _cycle_prices(kind: str, *, periods: int = 320) -> pd.DataFrame:
-    index = pd.bdate_range("2024-01-01", periods=periods)
+def test_liquidation_frontier_reentry_role_requires_longer_horizon() -> None:
+    prices = _cycle_prices("unwind", periods=420)
+    phase_probabilities = pd.DataFrame(
+        [
+            {
+                "as_of_date": "2026-07-16",
+                "horizon": "0m",
+                "horizon_days": 0,
+                "phase": "liquidation",
+                "probability": 0.70,
+                "dominant_phase": "liquidation",
+                "source": "test",
+            }
+        ]
+    )
+    transition_forecast = pd.DataFrame(
+        [
+            {
+                "horizon": "1m",
+                "horizon_days": 21,
+                "phase": "liquidation",
+                "probability": 0.65,
+                "dominant_phase": "liquidation",
+                "source": "test",
+            },
+            {
+                "horizon": "1y",
+                "horizon_days": 252,
+                "phase": "liquidation",
+                "probability": 0.30,
+                "dominant_phase": "liquidation",
+                "source": "test",
+            },
+        ]
+    )
+    validation_metrics = pd.DataFrame(
+        [
+            {
+                "dominant_phase": "liquidation",
+                "horizon": horizon,
+                "horizon_days": horizon_days,
+                "ticker": "QQQ",
+                "asset_role": "ai_growth",
+                "origins": 12,
+                "median_forward_return": 0.30,
+                "median_forward_drawdown": -0.08,
+                "median_excess_vs_spy": 0.10,
+                "median_excess_vs_qqq": 0.20,
+                "hit_rate_vs_qqq": 0.90,
+                "severe_drawdown_rate": 0.0,
+                "phase_rank_score": 0.50,
+            }
+            for horizon, horizon_days in [("1m", 21), ("1y", 252)]
+        ]
+    )
+
+    frontier = build_phase_candidate_frontier(
+        prices,
+        phase_probabilities,
+        transition_forecast,
+        validation_metrics,
+        tickers=("QQQ",),
+    )
+
+    short_role = frontier[frontier["horizon_days"].eq(21)].iloc[0]["frontier_role"]
+    long_role = frontier[frontier["horizon_days"].eq(252)].iloc[0]["frontier_role"]
+    assert short_role == "watch"
+    assert long_role in {"scale_reentry", "reentry_watch", "watch"}
+
+
+def _cycle_prices(kind: str, *, periods: int = 320, start: str = "2024-01-01") -> pd.DataFrame:
+    index = pd.bdate_range(start, periods=periods)
     data: dict[str, list[float]] = {}
     base_returns = {
         "SPY": 0.00045,

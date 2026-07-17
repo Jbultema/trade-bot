@@ -132,6 +132,12 @@ poetry run trade-bot run-dashboard
 If port 8501 is busy:
 
 ```bash
+poetry run trade-bot run-dashboard --stop-existing
+```
+
+Use another port only when you intentionally want a second dashboard instance:
+
+```bash
 poetry run trade-bot run-dashboard --port 8502 --pid-path reports/streamlit-8502.pid --log-path reports/streamlit-8502.log
 ```
 
@@ -141,7 +147,7 @@ The old V1 dashboard is archived for comparison/debugging only:
 poetry run trade-bot run-dashboard-v1
 ```
 
-Stop the managed dashboard with:
+Stop the managed dashboard without relaunching with:
 
 ```bash
 poetry run trade-bot stop-dashboard
@@ -354,9 +360,13 @@ Cycle Tracker is a research/watch layer, not a launch command. Use it when the
 main question is "what phase of a speculative cycle does the market resemble,
 what phases are plausible over the next 1 month to 1 year, and which assets have
 historically worked better after similar prior-only phase reads?" The useful
-outputs are the dominant 0M nowcast phase, the stacked forward horizon phase frontier,
-evidence components, current-phase conditional candidates, phase-by-horizon
-winner shelves, and prior-only validation metrics. Refresh it from the CLI:
+outputs are the dominant 0M evidence nowcast, the path-constrained 0M cycle
+state, the stacked forward horizon phase frontier, evidence components,
+current-phase conditional candidates, phase-by-horizon winner shelves, crisis
+playback, and prior-only reliability metrics. For sequential questions, prefer
+the path-constrained view: it applies phase memory, duration rules, transition
+rules, and constraints such as "bottoming requires prior drawdown" and
+"post-unwind requires prior unwind/recovery." Refresh it from the CLI:
 
 ```bash
 poetry run trade-bot run-cycle-tracker

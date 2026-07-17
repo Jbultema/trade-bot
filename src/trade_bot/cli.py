@@ -724,12 +724,25 @@ def run_dashboard_cmd(
     """Start the primary Dashboard V2 as a managed background process."""
 
     if stop_existing:
-        _stop_dashboard_from_pid_file(pid_path, timeout_seconds=5.0, force=True)
+        _stop_dashboard_from_pid_file(
+            pid_path,
+            port=port,
+            timeout_seconds=5.0,
+            force=True,
+        )
     existing_pid = _read_pid_file(pid_path)
     if existing_pid is not None and _process_exists(existing_pid):
         console.print(
             f"Dashboard appears to already be running as PID {existing_pid}. "
-            "Use `poetry run trade-bot stop-dashboard` or pass --stop-existing."
+            "Use `poetry run trade-bot run-dashboard --stop-existing` to restart it."
+        )
+        return
+    port_pids = _listening_pids_on_port(port)
+    if port_pids:
+        console.print(
+            f"Dashboard port {port} appears to already be in use by PID(s) "
+            f"{', '.join(str(pid) for pid in port_pids)}. "
+            "Use `poetry run trade-bot run-dashboard --stop-existing` to restart it."
         )
         return
 
@@ -767,6 +780,7 @@ def run_dashboard_cmd(
     console.print(f"Dashboard started on http://localhost:{port} as PID {process.pid}.")
     console.print(f"Log: {log_path}")
     console.print("Stop it with: poetry run trade-bot stop-dashboard")
+    console.print("Restart it with: poetry run trade-bot run-dashboard --stop-existing")
 
 
 @app.command("run-dashboard-v2")
@@ -836,6 +850,13 @@ def run_dashboard_v1_cmd(
 @app.command("stop-dashboard")
 def stop_dashboard_cmd(
     pid_path: Annotated[Path, typer.Option("--pid-path")] = DEFAULT_DASHBOARD_PID_PATH,
+    port: Annotated[
+        int,
+        typer.Option(
+            "--port",
+            help="Also stop any Streamlit process still listening on this dashboard port.",
+        ),
+    ] = DEFAULT_DASHBOARD_PORT,
     timeout_seconds: Annotated[float, typer.Option("--timeout-seconds")] = 5.0,
     force: Annotated[
         bool,
@@ -846,6 +867,7 @@ def stop_dashboard_cmd(
 
     stopped = _stop_dashboard_from_pid_file(
         pid_path,
+        port=port,
         timeout_seconds=timeout_seconds,
         force=force,
     )
@@ -1474,6 +1496,12 @@ def run_cycle_tracker_cmd(
         candidate_scores=result.candidate_scores,
         phase_candidate_frontier=result.phase_candidate_frontier,
         validation_metrics=result.validation_metrics,
+        path_validation_metrics=result.path_validation_metrics,
+        path_state_history=result.path_state_history,
+        path_transition_forecast=result.path_transition_forecast,
+        phase_reliability=result.phase_reliability,
+        path_reliability=result.path_reliability,
+        crisis_playback=result.crisis_playback,
         readout=result.readout,
     )
 
@@ -1496,6 +1524,22 @@ def run_cycle_tracker_cmd(
             _format_optional_percent(top_row["probability"]),
         )
     console.print(forecast_table)
+
+    if not result.path_transition_forecast.empty:
+        path_table = Table(title="Path-Constrained Phase Frontier")
+        path_table.add_column("horizon")
+        path_table.add_column("dominant phase")
+        path_table.add_column("probability")
+        path_table.add_column("current phase")
+        for horizon, group in result.path_transition_forecast.groupby("horizon", sort=False):
+            top_row = group.sort_values("probability", ascending=False).iloc[0]
+            path_table.add_row(
+                str(horizon),
+                str(top_row["phase"]),
+                _format_optional_percent(top_row["probability"]),
+                str(top_row.get("current_path_phase", "")),
+            )
+        console.print(path_table)
 
     candidate_table = Table(title="Conditional Winner Candidates")
     for column in ["ticker", "role", "score", "phase return", "excess vs QQQ"]:
@@ -1527,6 +1571,32 @@ def run_cycle_tracker_cmd(
                 _format_optional_percent(row.get("median_excess_vs_qqq")),
             )
         console.print(frontier_table)
+    if not result.phase_reliability.empty:
+        reliability_table = Table(title="Phase Reliability")
+        for column in ["horizon", "phase", "fit rate", "origins", "label"]:
+            reliability_table.add_column(column)
+        for _, row in result.phase_reliability.head(12).iterrows():
+            reliability_table.add_row(
+                str(row["horizon"]),
+                str(row["dominant_phase"]),
+                _format_optional_percent(row.get("phase_fit_rate")),
+                str(row.get("origins", "")),
+                str(row.get("reliability_label", "")),
+            )
+        console.print(reliability_table)
+    if not result.path_reliability.empty:
+        path_reliability_table = Table(title="Path Phase Reliability")
+        for column in ["horizon", "path phase", "fit rate", "origins", "label"]:
+            path_reliability_table.add_column(column)
+        for _, row in result.path_reliability.head(12).iterrows():
+            path_reliability_table.add_row(
+                str(row["horizon"]),
+                str(row["path_phase"]),
+                _format_optional_percent(row.get("path_fit_rate")),
+                str(row.get("origins", "")),
+                str(row.get("reliability_label", "")),
+            )
+        console.print(path_reliability_table)
     console.print(f"Saved cycle tracker history to DuckDB as {cycle_run_id}.")
     console.print(f"Reports: {output_dir}")
 
@@ -2882,17 +2952,33 @@ def _print_strategy_rank_validation_summary(summary: dict[str, object]) -> None:
 def _stop_dashboard_from_pid_file(
     pid_path: Path,
     *,
+    port: int | None = None,
     timeout_seconds: float,
     force: bool,
 ) -> bool:
+    stopped = False
     pid = _read_pid_file(pid_path)
     if pid is None:
         pid_path.unlink(missing_ok=True)
-        return False
-    if not _process_exists(pid):
+    elif not _process_exists(pid):
         pid_path.unlink(missing_ok=True)
-        return False
+    else:
+        stopped = _stop_dashboard_pid(pid, timeout_seconds=timeout_seconds, force=force)
+        pid_path.unlink(missing_ok=True)
 
+    if port is not None:
+        for port_pid in _listening_pids_on_port(port):
+            if port_pid == pid and stopped:
+                continue
+            if _stop_dashboard_pid(port_pid, timeout_seconds=timeout_seconds, force=force):
+                console.print(f"Dashboard port {port} listener PID {port_pid} stopped.")
+                stopped = True
+    return stopped
+
+
+def _stop_dashboard_pid(pid: int, *, timeout_seconds: float, force: bool) -> bool:
+    if not _process_exists(pid):
+        return False
     _signal_process(pid, signal.SIGTERM)
     if not _wait_for_process_exit(pid, timeout_seconds=timeout_seconds):
         if not force:
@@ -2903,7 +2989,6 @@ def _stop_dashboard_from_pid_file(
         console.print(f"Dashboard PID {pid} required SIGKILL.")
     else:
         console.print(f"Dashboard PID {pid} stopped.")
-    pid_path.unlink(missing_ok=True)
     return True
 
 
@@ -2927,6 +3012,30 @@ def _process_exists(pid: int) -> bool:
     except PermissionError:
         return True
     return True
+
+
+def _listening_pids_on_port(port: int) -> list[int]:
+    if port <= 0:
+        return []
+    try:
+        result = subprocess.run(  # noqa: S603, S607
+            ["lsof", "-nP", f"-iTCP:{port}", "-sTCP:LISTEN", "-t"],
+            check=False,
+            capture_output=True,
+            text=True,
+            timeout=2.0,
+        )
+    except (FileNotFoundError, subprocess.SubprocessError):
+        return []
+    pids: list[int] = []
+    for raw_line in result.stdout.splitlines():
+        try:
+            pid = int(raw_line.strip())
+        except ValueError:
+            continue
+        if pid > 0 and pid not in pids:
+            pids.append(pid)
+    return pids
 
 
 def _signal_process(pid: int, sig: int) -> None:
