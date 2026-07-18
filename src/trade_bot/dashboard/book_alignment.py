@@ -58,6 +58,9 @@ def _render_book_alignment(
         ''',
         unsafe_allow_html=True,
     )
+    account_value_warning = str(row.get("account_value_warning", "")).strip()
+    if account_value_warning:
+        st.warning(account_value_warning)
 
     cols = st.columns(5)
     cols[0].metric("Book Status", _status_label(status))

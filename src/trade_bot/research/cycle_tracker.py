@@ -38,6 +38,9 @@ DEFAULT_PHASE_STATE_STEP_DAYS = 21
 DEFAULT_PHASE_MIN_TRAIN_DAYS = 756
 DEFAULT_PHASE_MAX_CANDIDATES = 60
 CORE_BENCHMARKS = ("SPY", "QQQ", "BIL")
+FRONTIER_ROBUST_ORIGINS = 20
+FRONTIER_MIN_SCALE_ORIGINS = 8
+FRONTIER_ONE_OFF_ORIGINS = 3
 PHASE_MIN_DURATION_DAYS = {
     "normal_cycle": 63,
     "acceleration": 42,
@@ -1482,23 +1485,51 @@ def build_phase_candidate_frontier(
                 continue
             metrics = matches.sort_values("phase_rank_score", ascending=False).iloc[0].to_dict()
             role = _asset_role(ticker)
+            origins = int(_safe_float(metrics.get("origins"), default=0.0))
+            exposure_family = _exposure_family(ticker, role)
             momentum_21 = _absolute_return(clean, ticker, 21)
             momentum_63 = _absolute_return(clean, ticker, 63)
             drawdown_252 = _drawdown(clean, ticker, 252)
             rank_score = _safe_float(metrics.get("phase_rank_score"), default=0.0)
-            validation_score = float(np.clip(0.5 + rank_score, 0.0, 1.0))
+            origin_confidence = _origin_confidence(origins)
+            origin_penalty = _origin_penalty(origins)
+            validation_score_raw = float(np.clip(0.5 + rank_score, 0.0, 1.0))
+            validation_score = float(
+                np.clip(
+                    0.5 + ((validation_score_raw - 0.5) * origin_confidence),
+                    0.0,
+                    1.0,
+                )
+            )
             momentum_score = _average_scores(
                 _threshold_score(momentum_21, calm=-0.05, stressed=0.08),
                 _threshold_score(momentum_63, calm=-0.08, stressed=0.15),
             )
             drawdown_penalty = _threshold_score(-drawdown_252, calm=0.05, stressed=0.30)
             phase_fit = _phase_role_fit(phase, role)
+            theme_fragility_penalty = _theme_fragility_penalty(
+                phase,
+                role,
+                horizon_days=horizon_days,
+                origins=origins,
+            )
             frontier_score = (
                 0.40 * validation_score
                 + 0.20 * phase_fit
                 + 0.15 * momentum_score
                 + 0.15 * phase_probability
                 - 0.10 * drawdown_penalty
+                - origin_penalty
+                - theme_fragility_penalty
+            )
+            evidence_quality = _evidence_quality(origins)
+            evidence_flags = _frontier_evidence_flags(
+                origins=origins,
+                origin_confidence=origin_confidence,
+                origin_penalty=origin_penalty,
+                momentum_score=momentum_score,
+                drawdown_penalty=drawdown_penalty,
+                theme_fragility_penalty=theme_fragility_penalty,
             )
             rows.append(
                 {
@@ -1509,13 +1540,25 @@ def build_phase_candidate_frontier(
                     "phase_probability": phase_probability,
                     "ticker": ticker,
                     "asset_role": role,
+                    "exposure_family": exposure_family,
                     "frontier_score": float(frontier_score),
+                    "validation_score_raw": validation_score_raw,
+                    "validation_score": validation_score,
+                    "phase_role_fit": phase_fit,
+                    "origin_confidence": origin_confidence,
+                    "origin_penalty": origin_penalty,
+                    "momentum_score": momentum_score,
+                    "drawdown_penalty": drawdown_penalty,
+                    "theme_fragility_penalty": theme_fragility_penalty,
+                    "evidence_quality": evidence_quality,
+                    "evidence_flags": evidence_flags,
                     "phase_window_role": _phase_window_role(phase, horizon_days),
                     "frontier_role": _candidate_role(
                         frontier_score,
                         phase,
                         role,
                         horizon_days=horizon_days,
+                        origins=origins,
                     ),
                     "current_momentum_21d": momentum_21,
                     "current_momentum_63d": momentum_63,
@@ -1540,7 +1583,7 @@ def build_phase_candidate_frontier(
                         metrics.get("median_forward_drawdown"),
                         default=np.nan,
                     ),
-                    "origins": int(_safe_float(metrics.get("origins"), default=0.0)),
+                    "origins": origins,
                     "interpretation": _phase_candidate_interpretation(ticker, phase, role),
                 }
             )
@@ -1551,12 +1594,14 @@ def build_phase_candidate_frontier(
         ["horizon_days", "phase", "frontier_score"],
         ascending=[True, True, False],
     ).reset_index(drop=True)
-    frame["rank"] = (
-        frame.groupby(["horizon_days", "phase"])["frontier_score"]
-        .rank(method="first", ascending=False)
-        .astype(int)
-    )
-    frame = frame[frame["rank"] <= int(top_n_per_phase)].copy()
+    selected_groups = [
+        _select_diversified_frontier(group, top_n=int(top_n_per_phase))
+        for _, group in frame.groupby(["horizon_days", "phase"], sort=False)
+    ]
+    frame = pd.concat(selected_groups, ignore_index=True) if selected_groups else pd.DataFrame()
+    if frame.empty:
+        return frame
+    frame["rank"] = frame.groupby(["horizon_days", "phase"]).cumcount() + 1
     return frame.sort_values(
         ["horizon_days", "phase_probability", "phase", "rank"],
         ascending=[True, False, True, True],
@@ -1722,6 +1767,144 @@ def _asset_role(ticker: str) -> str:
     if ticker in DEFAULT_RISK_BROAD_EQUITY_TICKERS:
         return "broad_equity"
     return "other"
+
+
+def _exposure_family(ticker: str, role: str) -> str:
+    ticker = ticker.upper()
+    if ticker in {"SPY", "VOO", "IVV", "SPLG", "VTI", "VT", "IWB", "MGC"}:
+        return "us_large_cap_beta"
+    if ticker == "RSP":
+        return "equal_weight_breadth"
+    if ticker == "DIA":
+        return "dow_value_beta"
+    if ticker == "MDY":
+        return "midcap_beta"
+    if ticker in {"QQQ", "QQQM", "XLK", "IGV", "SKYY", "CLOU"}:
+        return "mega_cap_growth_index"
+    if ticker in {"SMH", "SOXX", "NVDA", "AMD", "AVGO", "TSM", "ASML", "ARM", "SMCI", "MU", "MRVL"}:
+        return "ai_compute_semis"
+    if ticker in {"MSFT", "GOOGL", "GOOG", "META", "AMZN", "ORCL", "TSLA"}:
+        return "ai_platforms"
+    if ticker in {"CRWD", "SNOW", "DDOG", "NET", "APP", "PLTR", "DELL", "ANET"}:
+        return "ai_software_cloud"
+    if role == "cash_defensive":
+        return "cash_defensive"
+    if role in {"gold", "duration", "credit", "commodity", "international", "defensive_equity"}:
+        return role
+    return f"{role}:{ticker}"
+
+
+def _origin_confidence(origins: int) -> float:
+    return float(np.clip(max(0, int(origins)) / FRONTIER_ROBUST_ORIGINS, 0.0, 1.0))
+
+
+def _origin_penalty(origins: int) -> float:
+    origins = max(0, int(origins))
+    if origins <= FRONTIER_ONE_OFF_ORIGINS:
+        return 0.18
+    if origins < FRONTIER_MIN_SCALE_ORIGINS:
+        return 0.10
+    if origins < FRONTIER_ROBUST_ORIGINS:
+        return 0.04
+    return 0.0
+
+
+def _evidence_quality(origins: int) -> str:
+    origins = max(0, int(origins))
+    if origins >= FRONTIER_ROBUST_ORIGINS:
+        return "robust"
+    if origins >= FRONTIER_MIN_SCALE_ORIGINS:
+        return "moderate_sample"
+    if origins > FRONTIER_ONE_OFF_ORIGINS:
+        return "thin_sample"
+    return "one_off_sample"
+
+
+def _theme_fragility_penalty(
+    phase: str,
+    role: str,
+    *,
+    horizon_days: int,
+    origins: int,
+) -> float:
+    if role != "ai_growth":
+        return 0.0
+    if phase == "liquidation":
+        base = 0.16 if horizon_days <= 63 else 0.08
+    elif phase == "early_unwind":
+        base = 0.14 if horizon_days <= 63 else 0.07
+    elif phase == "pre_break":
+        base = 0.08
+    elif phase == "normal_cycle" and origins < FRONTIER_MIN_SCALE_ORIGINS:
+        base = 0.04
+    else:
+        return 0.0
+    if origins <= FRONTIER_ONE_OFF_ORIGINS:
+        base += 0.04
+    return float(base)
+
+
+def _frontier_evidence_flags(
+    *,
+    origins: int,
+    origin_confidence: float,
+    origin_penalty: float,
+    momentum_score: float,
+    drawdown_penalty: float,
+    theme_fragility_penalty: float,
+) -> str:
+    flags: list[str] = []
+    if origins < FRONTIER_MIN_SCALE_ORIGINS:
+        flags.append("thin_sample")
+    if origin_confidence < 1.0:
+        flags.append("shrunk_validation")
+    if origin_penalty > 0.0:
+        flags.append("sample_penalty")
+    if theme_fragility_penalty > 0.0:
+        flags.append("ai_fragility_conflict")
+    if origins < FRONTIER_ROBUST_ORIGINS and momentum_score >= 0.85:
+        flags.append("current_momentum_dominated")
+    if drawdown_penalty >= 0.60:
+        flags.append("drawdown_risk")
+    return "; ".join(flags) if flags else "none"
+
+
+def _frontier_family_cap(exposure_family: str) -> int:
+    if exposure_family in {
+        "us_large_cap_beta",
+        "equal_weight_breadth",
+        "dow_value_beta",
+        "midcap_beta",
+        "mega_cap_growth_index",
+    }:
+        return 1
+    if exposure_family in {"ai_compute_semis", "ai_software_cloud", "ai_platforms", "cash_defensive"}:
+        return 2
+    return 2
+
+
+def _select_diversified_frontier(group: pd.DataFrame, *, top_n: int) -> pd.DataFrame:
+    candidates = group.sort_values("frontier_score", ascending=False).copy()
+    selected: list[int] = []
+    family_counts: dict[str, int] = {}
+    for index, row in candidates.iterrows():
+        family = str(row.get("exposure_family", ""))
+        cap = _frontier_family_cap(family)
+        if family_counts.get(family, 0) >= cap:
+            continue
+        selected.append(index)
+        family_counts[family] = family_counts.get(family, 0) + 1
+        if len(selected) >= top_n:
+            break
+    if len(selected) < top_n:
+        selected_set = set(selected)
+        for index, _ in candidates.iterrows():
+            if index in selected_set:
+                continue
+            selected.append(index)
+            if len(selected) >= top_n:
+                break
+    return candidates.loc[selected].copy().reset_index(drop=True)
 
 
 def _phase_role_fit(phase: str, role: str) -> float:
@@ -2054,12 +2237,16 @@ def _candidate_role(
     role: str,
     *,
     horizon_days: int = 0,
+    origins: int = FRONTIER_ROBUST_ORIGINS,
 ) -> str:
+    can_scale_from_sample = int(origins) >= FRONTIER_MIN_SCALE_ORIGINS
     if phase in {"early_unwind", "liquidation"}:
         if role == "cash_defensive":
             return "defend"
         if role in {"gold", "duration", "defensive_equity"} and horizon_days <= 63:
             return "ballast"
+        if not can_scale_from_sample:
+            return "thin_sample_watch" if score >= 0.15 else "avoid"
         if horizon_days <= 63:
             return "watch" if score >= 0.15 else "avoid"
         if score >= 0.55:
@@ -2069,6 +2256,8 @@ def _candidate_role(
         if score >= 0.15:
             return "watch"
         return "avoid"
+    if not can_scale_from_sample and role not in {"cash_defensive", "gold", "duration"}:
+        return "thin_sample_watch" if score >= 0.15 else "avoid"
     if score >= 0.55:
         return "scale_candidate"
     if score >= 0.35:

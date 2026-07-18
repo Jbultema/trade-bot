@@ -102,6 +102,78 @@ def test_trade_journal_persists_snapshot_tickets_and_execution(tmp_path: Path) -
     assert position_summary["net_quantity"].abs().sum() == 1.0
 
 
+def test_trade_journal_manages_named_books(tmp_path: Path) -> None:
+    journal = TradeJournal(tmp_path / "journal.sqlite")
+
+    default_book = journal.get_promoted_book()
+    assert default_book.book_name == "Default Paper Book"
+    assert default_book.is_promoted
+
+    live_book_id = journal.upsert_book(
+        book_name="Live IRA",
+        mode="live",
+        account="vanguard_ira",
+        strategy_name="scenario_adjusted_trade_decision",
+        account_value=50_000.0,
+        promote=True,
+    )
+    live_book = journal.get_promoted_book()
+
+    assert live_book.book_id == live_book_id
+    assert live_book.mode == "live"
+    assert live_book.account == "vanguard_ira"
+    assert live_book.account_value == 50_000.0
+
+    journal.delete_book(default_book.book_id)
+    books = journal.list_books()
+    assert set(books["book_name"]) == {"Live IRA"}
+
+    try:
+        journal.delete_book(live_book_id)
+    except ValueError as exc:
+        assert "Promoted book cannot be deleted" in str(exc)
+    else:  # pragma: no cover - defensive assertion
+        raise AssertionError("promoted book deletion should fail")
+
+
+def test_trade_journal_filters_tickets_by_book_scope(tmp_path: Path) -> None:
+    journal = TradeJournal(tmp_path / "journal.sqlite")
+    trade_decision = _trade_decision()
+    prices = pd.DataFrame(
+        {"QQQ": [500.0], "BIL": [100.0]},
+        index=pd.to_datetime(["2026-06-17"]),
+    )
+    sizing = TicketSizingConfig(account_value=1000.0, whole_shares=False)
+
+    for account in ["paper_a", "paper_b"]:
+        tickets = build_recommendation_tickets(
+            trade_decision,
+            prices,
+            mode="paper",
+            account=account,
+            strategy_name="scenario_adjusted_trade_decision",
+            sizing=sizing,
+        )
+        journal.save_decision_snapshot(
+            mode="paper",
+            account=account,
+            strategy_name="scenario_adjusted_trade_decision",
+            trade_decision=trade_decision,
+            sizing=sizing,
+            tickets=tickets,
+        )
+
+    scoped = journal.load_recommendation_tickets(
+        status="open",
+        mode="paper",
+        account="paper_a",
+        strategy_name="scenario_adjusted_trade_decision",
+    )
+
+    assert not scoped.empty
+    assert set(scoped["account"]) == {"paper_a"}
+
+
 def _trade_decision() -> TradeDecisionRun:
     return TradeDecisionRun(
         summary=pd.DataFrame(

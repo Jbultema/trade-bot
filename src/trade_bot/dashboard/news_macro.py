@@ -559,7 +559,7 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
         current = float(row["current_activation"])
         if abs(current - previous) < 0.08:
             continue
-        arrow_color = "#16a34a" if current > previous else "#dc2626"
+        arrow_color = "#2f855a" if current > previous else "#b91c1c"
         fig.add_annotation(
             x=float(row["proven_relevance"]),
             y=current,
@@ -570,11 +570,12 @@ def _driver_rotation_scatter_figure(rotation: pd.DataFrame) -> go.Figure:
             axref="x",
             ayref="y",
             showarrow=True,
-            arrowhead=3,
-            arrowsize=1.7,
-            arrowwidth=3.2,
+            arrowhead=2,
+            arrowsize=1.05,
+            arrowwidth=2.3,
             arrowcolor=arrow_color,
-            opacity=0.92,
+            opacity=0.78,
+            standoff=8,
         )
     fig.add_vline(x=0.45, line_dash="dash", line_color="#94a3b8")
     fig.add_hline(y=0.45, line_dash="dash", line_color="#94a3b8")

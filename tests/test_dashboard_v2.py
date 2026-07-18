@@ -12,9 +12,10 @@ from trade_bot import DEFAULTS
 from trade_bot.dashboard import forward_test, launch_lab
 from trade_bot.dashboard.trends import filter_history_time_range
 from trade_bot.dashboard_v2 import routes
-from trade_bot.dashboard_v2.components import cards
+from trade_bot.dashboard_v2.components import cards, tones
 from trade_bot.dashboard_v2.pages import (
     command_center,
+    full_workbench,
     macro,
     monitoring,
     research,
@@ -22,6 +23,7 @@ from trade_bot.dashboard_v2.pages import (
     simulation,
 )
 from trade_bot.dashboard_v2.services.artifact_service import pbo_frames, read_csv_artifact
+from trade_bot.dashboard_v2.services import runtime as runtime_service
 
 
 def test_dashboard_v2_routes_cover_core_workflows() -> None:
@@ -44,6 +46,60 @@ def test_dashboard_v2_routes_cover_core_workflows() -> None:
     assert routes.route_by_key("research").runtime == "Fast by default"
     assert routes.route_by_key("simulation").runtime == "Fast by default"
     assert routes.route_by_key("macro").runtime == "Fast by default"
+
+
+def test_dashboard_v2_uses_named_book_selector_for_runtime_and_forward_test() -> None:
+    app_source = Path("src/trade_bot/dashboard_v2/app.py").read_text()
+    selector_source = inspect.getsource(runtime_service.render_book_selector)
+    runtime_source = inspect.getsource(runtime_service.load_runtime)
+    forward_page_source = inspect.getsource(full_workbench.render_forward_test_page)
+    forward_source = inspect.getsource(forward_test._render_forward_test_and_journal)
+
+    assert "render_book_selector(paths.journal_path)" not in app_source
+    assert "selected_book=book_selection.selected_book" not in app_source
+    assert "promoted_book=book_selection.promoted_book" not in app_source
+    assert "Create named book" in selector_source
+    assert "Book controls" in selector_source
+    assert "delete_book" in selector_source
+    assert "Strategy to follow" in selector_source
+    assert "_strategy_selector_options" in selector_source
+    assert "mode=promoted_book.mode" in runtime_source
+    assert "account=promoted_book.account" in runtime_source
+    assert "operating_trade_decision" in runtime_source
+    assert "selected_book=runtime.selected_book" in forward_page_source
+    assert "baseline_run=runtime.baseline_run" in forward_page_source
+    assert "bot_config=runtime.bot_config" in forward_page_source
+    assert "book_selector()" in forward_source
+    assert "resolve_trade_decision_for_strategy" in forward_source
+    assert forward_source.index("Forward Test / Trade Journal") < forward_source.index(
+        "book_selector()"
+    )
+    assert forward_source.index("book_selector()") < forward_source.index("brief-grid")
+
+
+def test_dashboard_v2_book_strategy_options_prioritize_primary_and_preserve_existing() -> None:
+    baseline_run = SimpleNamespace(
+        results={
+            "primary_candidate": object(),
+            "challenger_candidate": object(),
+        }
+    )
+    bot_config = SimpleNamespace(primary_strategy="primary_candidate")
+
+    options = runtime_service._strategy_selector_options(
+        current_values=["journal_only_scope"],
+        baseline_run=baseline_run,
+        bot_config=bot_config,
+    )
+
+    assert options["strategy_name"].tolist() == [
+        DEFAULTS.DEFAULT_FORWARD_TEST_STRATEGY,
+        "primary_candidate",
+        "challenger_candidate",
+        "journal_only_scope",
+    ]
+    assert "Scenario-adjusted trade decision" in str(options.iloc[0]["label"])
+    assert "Existing journal value" in str(options.iloc[-1]["label"])
 
 
 def test_dashboard_v2_native_pages_are_summary_first() -> None:
@@ -223,13 +279,27 @@ def test_dashboard_v2_card_helper_emits_renderable_html(monkeypatch) -> None:
         captured["unsafe"] = unsafe_allow_html
 
     monkeypatch.setattr(cards.st, "markdown", fake_markdown)
-    cards.render_card_grid([("Risk", "Yellow"), ("Score", "0.43")])
+    cards.render_card_grid([("Risk", "Yellow", None, "warning"), ("Score", "0.43")])
 
     assert captured["unsafe"] is True
+    assert '<div class="v2-card v2-card-warning">' in captured["body"]
     assert '<div class="v2-card">' in captured["body"]
     assert 'class="v2-help-dot"' in captured["body"]
     assert "Current traffic-light risk state" in captured["body"]
     assert "\n            <div" not in captured["body"]
+
+
+def test_dashboard_v2_card_tones_are_domain_aware() -> None:
+    assert tones.risk_status_tone("yellow") == "warning"
+    assert tones.risk_status_tone("red") == "critical"
+    assert tones.risk_status_tone("green") == "success"
+    assert tones.portfolio_risk_tone("risk_reduced") == "warning"
+    assert tones.portfolio_risk_tone("constraint_breach") == "critical"
+    assert tones.portfolio_risk_tone("within_limits") == "success"
+    assert tones.instability_tone("ELEVATED") == "warning"
+    assert tones.instability_tone(0.62) == "critical"
+    assert tones.sleeve_exposure_tone("defensive", 0.77) == "warning"
+    assert tones.sleeve_exposure_tone("crypto", 0.0) == "neutral"
 
 
 def test_dashboard_v2_section_and_chart_helpers_emit_hover_context(monkeypatch) -> None:
@@ -417,6 +487,8 @@ def test_forward_test_recalculates_book_alignment_after_journal_changes() -> Non
     source = inspect.getsource(forward_test._render_forward_test_and_journal)
 
     assert "Recalculate Book Alignment" in source
+    assert "Update After-Logged Book Comparison" in source
+    assert "_render_after_logged_book_comparison(updated_book_alignment)" in source
     assert "Locked tickets are recommendations only" in source
     assert "warehouse migration refresh" in source
     assert "_rerun_after_journal_mutation" in inspect.getsource(
@@ -431,3 +503,51 @@ def test_forward_test_recalculates_book_alignment_after_journal_changes() -> Non
         mutation_index = source.index(mutation)
         rerun_index = source.index("_rerun_after_journal_mutation", mutation_index)
         assert mutation_index < rerun_index
+
+
+def test_after_logged_book_comparison_frame_orders_largest_gap_first() -> None:
+    frame = pd.DataFrame(
+        [
+            {
+                "ticker": "BIL",
+                "action": "ADD",
+                "current_weight": 0.10,
+                "scenario_adjusted_weight": 0.20,
+                "delta_weight": 0.10,
+                "current_notional": 100.0,
+                "target_notional": 200.0,
+                "delta_notional": 100.0,
+                "net_quantity": 1.0,
+                "reference_price": 100.0,
+            },
+            {
+                "ticker": "QQQ",
+                "action": "REDUCE",
+                "current_weight": 0.70,
+                "scenario_adjusted_weight": 0.40,
+                "delta_weight": -0.30,
+                "current_notional": 700.0,
+                "target_notional": 400.0,
+                "delta_notional": -300.0,
+                "net_quantity": 1.4,
+                "reference_price": 500.0,
+            },
+        ]
+    )
+
+    comparison = forward_test._after_logged_book_comparison_frame(frame)
+
+    assert list(comparison["ticker"]) == ["QQQ", "BIL"]
+    assert list(comparison.columns) == [
+        "ticker",
+        "action",
+        "current_weight",
+        "scenario_adjusted_weight",
+        "delta_weight",
+        "current_notional",
+        "target_notional",
+        "delta_notional",
+        "net_quantity",
+        "reference_price",
+    ]
+    assert comparison.iloc[0]["delta_weight"] == -0.30

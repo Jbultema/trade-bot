@@ -382,10 +382,6 @@ def _render_cycle_tracker() -> None:
             key="dashboard_v2_cycle_nowcast_phase_frontier_chart",
         )
 
-    if not frontier.empty:
-        render_section_header("Scenario / Phase Winner Frontier")
-        _render_phase_candidate_frontier(frontier)
-
     if not evidence.empty:
         with st.expander("Evidence components", expanded=False):
             _render_metric_dataframe(_display_metrics(evidence))
@@ -740,9 +736,19 @@ def _render_path_phase_behavior_inspector(
                     "rank",
                     "ticker",
                     "asset_role",
+                    "exposure_family",
                     "phase_window_role",
                     "frontier_role",
+                    "evidence_quality",
+                    "evidence_flags",
                     "frontier_score",
+                    "validation_score",
+                    "origin_confidence",
+                    "origin_penalty",
+                    "phase_role_fit",
+                    "momentum_score",
+                    "drawdown_penalty",
+                    "theme_fragility_penalty",
                     "median_forward_return",
                     "median_excess_vs_spy",
                     "median_excess_vs_qqq",
@@ -1107,96 +1113,27 @@ def _render_crisis_playback(crisis: pd.DataFrame) -> None:
         _render_metric_dataframe(_display_metrics(stage_summary))
 
 
-def _render_phase_candidate_frontier(frontier: pd.DataFrame) -> None:
-    data = frontier.copy()
-    data["horizon_days"] = pd.to_numeric(data["horizon_days"], errors="coerce")
-    data["phase_probability"] = pd.to_numeric(data["phase_probability"], errors="coerce").fillna(0.0)
-    data["rank"] = pd.to_numeric(data["rank"], errors="coerce").fillna(999).astype(int)
-    horizon_order = (
-        data[["horizon", "horizon_days"]]
-        .drop_duplicates()
-        .sort_values("horizon_days")["horizon"]
-        .astype(str)
-        .tolist()
-    )
-    selected_horizon = st.pills(
-        "Frontier horizon",
-        horizon_order,
-        default=horizon_order[0] if horizon_order else None,
-        selection_mode="single",
-        key="dashboard_v2_cycle_frontier_horizon",
-    )
-    if not selected_horizon:
-        return
-    horizon_frame = data[data["horizon"].astype(str).eq(str(selected_horizon))].copy()
-    phase_options = (
-        horizon_frame[["phase", "phase_probability"]]
-        .drop_duplicates()
-        .sort_values("phase_probability", ascending=False)
-    )
-    phase_labels = [
-        f"{row.phase} ({float(row.phase_probability):.1%})"
-        for row in phase_options.itertuples(index=False)
-    ]
-    label_to_phase = dict(
-        zip(phase_labels, phase_options["phase"].astype(str).tolist(), strict=False)
-    )
-    selected_label = st.selectbox(
-        "Dominant phase to inspect",
-        phase_labels,
-        index=0,
-        key="dashboard_v2_cycle_frontier_phase",
-    )
-    selected_phase = label_to_phase.get(str(selected_label), "")
-    selected = horizon_frame[horizon_frame["phase"].astype(str).eq(selected_phase)].copy()
-    selected = selected.sort_values(["rank", "frontier_score"], ascending=[True, False])
-    if selected.empty:
-        st.info("No candidate evidence is available for the selected phase and horizon.")
-        return
-    render_card_grid(
-        [
-            ("Selected Phase", selected_phase),
-            ("Phase Odds", _fmt_pct(selected["phase_probability"].iloc[0])),
-            ("Top Ticker", selected.iloc[0].get("ticker", "n/a")),
-            ("Top Role", selected.iloc[0].get("frontier_role", "n/a")),
-        ]
-    )
-    render_chart(
-        _phase_winner_figure(selected.head(8)),
-        title="Scenario / Phase Winner Frontier Chart",
-        key=f"dashboard_v2_cycle_phase_winner_chart_{selected_horizon}_{selected_phase}",
-    )
-    frontier_columns = [
-        column
-        for column in [
-            "rank",
-            "ticker",
-            "asset_role",
-            "phase_window_role",
-            "frontier_role",
-            "frontier_score",
-            "median_forward_return",
-            "median_excess_vs_spy",
-            "median_excess_vs_qqq",
-            "hit_rate_vs_qqq",
-            "median_forward_drawdown",
-            "origins",
-            "interpretation",
-        ]
-        if column in selected
-    ]
-    _render_metric_dataframe(_display_metrics(selected[frontier_columns]))
-
-
 def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
     data = frame.copy()
     data["frontier_score"] = pd.to_numeric(data["frontier_score"], errors="coerce").fillna(0.0)
+    if "origins" not in data:
+        data["origins"] = 0
+    data["origins"] = pd.to_numeric(data["origins"], errors="coerce").fillna(0).astype(int)
+    for column in ["median_forward_return", "median_forward_drawdown"]:
+        if column not in data:
+            data[column] = 0.0
+        data[column] = pd.to_numeric(data[column], errors="coerce")
+    for column in ["asset_role", "exposure_family", "evidence_quality", "evidence_flags"]:
+        if column not in data:
+            data[column] = "unknown"
+        data[column] = data[column].fillna("unknown").astype(str)
     data = data.sort_values("frontier_score", ascending=True)
     color_map = {
         "scale_candidate": "#16a34a",
         "starter_reentry": "#2563eb",
         "scale_reentry": "#2563eb",
         "reentry_watch": "#8b5cf6",
+        "thin_sample_watch": "#f97316",
         "watch": "#f59e0b",
         "defend": "#06b6d4",
         "ballast": "#0ea5e9",
@@ -1213,9 +1150,26 @@ def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
             orientation="h",
             marker_color=colors,
             text=data.get("frontier_role", pd.Series([""] * len(data))).astype(str),
+            customdata=data[
+                [
+                    "asset_role",
+                    "exposure_family",
+                    "evidence_quality",
+                    "evidence_flags",
+                    "origins",
+                    "median_forward_return",
+                    "median_forward_drawdown",
+                ]
+            ],
             hovertemplate=(
                 "<b>%{y}</b><br>Frontier score: %{x:.2f}<br>"
-                "Role: %{text}<extra></extra>"
+                "Role: %{text}<br>"
+                "Asset role: %{customdata[0]}<br>"
+                "Family: %{customdata[1]}<br>"
+                "Evidence: %{customdata[2]} (%{customdata[4]} origins)<br>"
+                "Flags: %{customdata[3]}<br>"
+                "Median return: %{customdata[5]:.1%}<br>"
+                "Median drawdown: %{customdata[6]:.1%}<extra></extra>"
             ),
         )
     )

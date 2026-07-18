@@ -7,6 +7,7 @@ from trade_bot.backtest.engine import BacktestResult
 from trade_bot.research.event_risk import (
     MarketEvent,
     classify_news_text,
+    load_market_events,
     run_event_risk_study,
 )
 
@@ -100,6 +101,30 @@ def test_classify_news_text_maps_hyperscaler_capex_to_fcf_pressure() -> None:
     assert classification.direction == "escalation"
     assert "free_cash_flow" in classification.risk_channels
     assert "MSFT" in classification.candidate_proxies
+
+
+def test_classify_news_text_maps_compute_leasing_to_hyperscaler_fcf_pressure() -> None:
+    classification = classify_news_text(
+        "Meta is in talks to lease computing power to Anthropic as it considers a cloud "
+        "push and ways to monetize AI infrastructure capacity."
+    )
+
+    assert classification.category == "hyperscaler_capex_fcf"
+    assert classification.direction == "escalation"
+    assert "free_cash_flow" in classification.risk_channels
+    assert "META" in classification.candidate_proxies
+
+
+def test_classify_news_text_maps_open_model_competition_to_ai_unit_economics() -> None:
+    classification = classify_news_text(
+        "Moonshot Kimi K3 is an open-weight frontier model with aggressive pricing, "
+        "strong agent benchmarks, and performance competitive with Claude Opus."
+    )
+
+    assert classification.category == "ai_unit_economics"
+    assert classification.direction == "uncertain"
+    assert "model_competition" in classification.risk_channels
+    assert "IGV" in classification.candidate_proxies
 
 
 def test_classify_news_text_maps_ai_memory_shortage_to_inflation_channel() -> None:
@@ -283,3 +308,23 @@ def test_classify_news_text_maps_retail_sentiment_to_crowding() -> None:
     assert classification.direction == "escalation"
     assert "ARKK" in classification.candidate_proxies
     assert "crowding" in classification.risk_channels
+
+
+def test_user_curated_ai_news_items_load_as_current_watch_context() -> None:
+    events = {
+        event.event_id: event
+        for event in load_market_events("configs/events.yaml")
+        if event.event_id
+        in {
+            "meta_anthropic_compute_lease_2026_07_17",
+            "kimi_k3_frontier_cost_pressure_2026_07_17",
+        }
+    }
+
+    assert set(events) == {
+        "meta_anthropic_compute_lease_2026_07_17",
+        "kimi_k3_frontier_cost_pressure_2026_07_17",
+    }
+    assert all(event.current for event in events.values())
+    assert all(not event.sizing_authority for event in events.values())
+    assert {event.phase for event in events.values()} == {"leading_warning"}

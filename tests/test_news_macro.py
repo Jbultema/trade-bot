@@ -133,5 +133,6 @@ def test_driver_rotation_figures_render_core_traces() -> None:
         if annotation.showarrow is True
     ]
     assert not permanent_label_annotations
-    assert {annotation.arrowcolor for annotation in movement_arrows} == {"#16a34a", "#dc2626"}
-    assert all(float(annotation.arrowwidth) >= 3.0 for annotation in movement_arrows)
+    assert {annotation.arrowcolor for annotation in movement_arrows} == {"#2f855a", "#b91c1c"}
+    assert all(float(annotation.arrowsize) <= 1.1 for annotation in movement_arrows)
+    assert all(2.0 <= float(annotation.arrowwidth) <= 2.5 for annotation in movement_arrows)

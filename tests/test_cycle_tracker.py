@@ -495,6 +495,134 @@ def test_phase_candidate_frontier_scores_phase_horizon_winners() -> None:
     assert frontier.iloc[0]["ticker"] == "BIL"
     assert frontier.iloc[0]["frontier_role"] == "defend"
     assert frontier.iloc[0]["rank"] == 1
+    assert {"origin_confidence", "evidence_quality", "evidence_flags", "exposure_family"}.issubset(
+        frontier.columns
+    )
+
+
+def test_phase_candidate_frontier_caps_one_off_ai_stress_winner() -> None:
+    prices = _cycle_prices("acceleration", periods=420)
+    transition_forecast = pd.DataFrame(
+        [
+            {
+                "horizon": "1m",
+                "horizon_days": 21,
+                "phase": "liquidation",
+                "probability": 0.65,
+                "dominant_phase": "liquidation",
+                "source": "test",
+            }
+        ]
+    )
+    validation_metrics = pd.DataFrame(
+        [
+            {
+                "dominant_phase": "liquidation",
+                "horizon": "1m",
+                "horizon_days": 21,
+                "ticker": "QQQ",
+                "asset_role": "ai_growth",
+                "origins": 1,
+                "median_forward_return": 0.40,
+                "median_forward_drawdown": -0.05,
+                "median_excess_vs_spy": 0.25,
+                "median_excess_vs_qqq": 0.30,
+                "hit_rate_vs_qqq": 1.0,
+                "severe_drawdown_rate": 0.0,
+                "phase_rank_score": 0.50,
+            },
+            {
+                "dominant_phase": "liquidation",
+                "horizon": "1m",
+                "horizon_days": 21,
+                "ticker": "BIL",
+                "asset_role": "cash_defensive",
+                "origins": 24,
+                "median_forward_return": 0.01,
+                "median_forward_drawdown": -0.001,
+                "median_excess_vs_spy": 0.05,
+                "median_excess_vs_qqq": 0.08,
+                "hit_rate_vs_qqq": 0.83,
+                "severe_drawdown_rate": 0.0,
+                "phase_rank_score": 0.20,
+            },
+        ]
+    )
+
+    frontier = build_phase_candidate_frontier(
+        prices,
+        pd.DataFrame(),
+        transition_forecast,
+        validation_metrics,
+        tickers=("QQQ", "BIL"),
+    )
+
+    assert frontier.iloc[0]["ticker"] == "BIL"
+    qqq = frontier[frontier["ticker"].eq("QQQ")].iloc[0]
+    assert qqq["frontier_role"] in {"thin_sample_watch", "avoid"}
+    assert qqq["evidence_quality"] == "one_off_sample"
+    assert "ai_fragility_conflict" in qqq["evidence_flags"]
+    assert qqq["origin_confidence"] < 0.10
+
+
+def test_phase_candidate_frontier_limits_redundant_exposure_families() -> None:
+    prices = _cycle_prices("acceleration", periods=420)
+    prices["VOO"] = prices["SPY"] * 1.001
+    prices["IVV"] = prices["SPY"] * 0.999
+    prices["SPLG"] = prices["SPY"] * 1.002
+    transition_forecast = pd.DataFrame(
+        [
+            {
+                "horizon": "3m",
+                "horizon_days": 63,
+                "phase": "normal_cycle",
+                "probability": 0.40,
+                "dominant_phase": "normal_cycle",
+                "source": "test",
+            }
+        ]
+    )
+    validation_metrics = pd.DataFrame(
+        [
+            {
+                "dominant_phase": "normal_cycle",
+                "horizon": "3m",
+                "horizon_days": 63,
+                "ticker": ticker,
+                "asset_role": "broad_equity",
+                "origins": 30,
+                "median_forward_return": 0.04,
+                "median_forward_drawdown": -0.04,
+                "median_excess_vs_spy": 0.0,
+                "median_excess_vs_qqq": -0.02,
+                "hit_rate_vs_qqq": 0.45,
+                "severe_drawdown_rate": 0.0,
+                "phase_rank_score": rank_score,
+            }
+            for ticker, rank_score in [
+                ("SPY", 0.35),
+                ("VOO", 0.34),
+                ("IVV", 0.33),
+                ("SPLG", 0.32),
+                ("RSP", 0.25),
+                ("QQQ", 0.20),
+                ("SMH", 0.19),
+            ]
+        ]
+    )
+
+    frontier = build_phase_candidate_frontier(
+        prices,
+        pd.DataFrame(),
+        transition_forecast,
+        validation_metrics,
+        tickers=("SPY", "VOO", "IVV", "SPLG", "RSP", "QQQ", "SMH"),
+        top_n_per_phase=4,
+    )
+
+    assert len(frontier) == 4
+    assert frontier["exposure_family"].tolist().count("us_large_cap_beta") == 1
+    assert "RSP" in set(frontier["ticker"])
 
 
 def test_liquidation_frontier_reentry_role_requires_longer_horizon() -> None:
@@ -563,8 +691,8 @@ def test_liquidation_frontier_reentry_role_requires_longer_horizon() -> None:
 
     short_role = frontier[frontier["horizon_days"].eq(21)].iloc[0]["frontier_role"]
     long_role = frontier[frontier["horizon_days"].eq(252)].iloc[0]["frontier_role"]
-    assert short_role == "watch"
-    assert long_role in {"scale_reentry", "reentry_watch", "watch"}
+    assert short_role in {"watch", "avoid"}
+    assert long_role in {"scale_reentry", "reentry_watch", "watch", "avoid"}
 
 
 def _cycle_prices(kind: str, *, periods: int = 320, start: str = "2024-01-01") -> pd.DataFrame:

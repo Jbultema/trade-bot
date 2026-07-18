@@ -12,6 +12,8 @@ from typing import Any, cast
 import pandas as pd
 
 from trade_bot.DEFAULTS import (
+    DEFAULT_FORWARD_TEST_ACCOUNT,
+    DEFAULT_FORWARD_TEST_STRATEGY,
     DEFAULT_JOURNAL_PATH,
     DEFAULT_TICKET_MIN_TRADE_NOTIONAL,
     DEFAULT_TICKET_PRICE_BAND_PCT,
@@ -30,6 +32,24 @@ class TicketSizingConfig:
     size_band_pct: float = DEFAULT_TICKET_SIZE_BAND_PCT
     min_trade_notional: float = DEFAULT_TICKET_MIN_TRADE_NOTIONAL
     whole_shares: bool = DEFAULT_TICKET_WHOLE_SHARES
+
+
+@dataclass(frozen=True)
+class JournalBook:
+    book_id: str
+    book_name: str
+    mode: str
+    account: str
+    strategy_name: str
+    account_value: float
+    is_promoted: bool
+    created_at_utc: str
+    updated_at_utc: str
+
+    @property
+    def label(self) -> str:
+        prefix = "Promoted: " if self.is_promoted else ""
+        return f"{prefix}{self.book_name} ({self.mode}/{self.account})"
 
 
 class TradeJournal:
@@ -196,6 +216,162 @@ class TradeJournal:
                 (status, utc_now_iso(), ticket_id),
             )
 
+    def list_books(self) -> pd.DataFrame:
+        return self._read_sql(
+            """
+            SELECT *
+            FROM books
+            ORDER BY is_promoted DESC, updated_at_utc DESC, book_name ASC
+            """,
+            (),
+        )
+
+    def get_book(self, book_id: str) -> JournalBook:
+        frame = self._read_sql(
+            """
+            SELECT *
+            FROM books
+            WHERE book_id = ?
+            """,
+            (book_id,),
+        )
+        if frame.empty:
+            raise ValueError(f"Unknown journal book: {book_id}")
+        return _journal_book_from_row(frame.iloc[0])
+
+    def get_promoted_book(self) -> JournalBook:
+        books = self.list_books()
+        if books.empty:
+            raise ValueError("No journal books are configured.")
+        promoted = books[books["is_promoted"].astype(int).eq(1)]
+        row = promoted.iloc[0] if not promoted.empty else books.iloc[0]
+        return _journal_book_from_row(row)
+
+    def upsert_book(
+        self,
+        *,
+        book_name: str,
+        mode: str,
+        account: str,
+        strategy_name: str,
+        account_value: float,
+        book_id: str | None = None,
+        promote: bool = False,
+    ) -> str:
+        book_name = book_name.strip()
+        mode = mode.strip().lower()
+        account = account.strip()
+        strategy_name = strategy_name.strip()
+        if not book_name:
+            raise ValueError("Book name is required.")
+        if mode not in {"paper", "live"}:
+            raise ValueError("Book mode must be paper or live.")
+        if not account:
+            raise ValueError("Book account is required.")
+        if not strategy_name:
+            raise ValueError("Book strategy name is required.")
+        if account_value <= 0:
+            raise ValueError("Book account value must be positive.")
+
+        now = utc_now_iso()
+        with self._connect() as connection:
+            if promote:
+                connection.execute("UPDATE books SET is_promoted = 0, updated_at_utc = ?", (now,))
+            if book_id:
+                existing = connection.execute(
+                    "SELECT book_id FROM books WHERE book_id = ?",
+                    (book_id,),
+                ).fetchone()
+                if existing is not None:
+                    connection.execute(
+                        """
+                        UPDATE books
+                        SET book_name = ?,
+                            mode = ?,
+                            account = ?,
+                            strategy_name = ?,
+                            account_value = ?,
+                            is_promoted = CASE WHEN ? THEN 1 ELSE is_promoted END,
+                            updated_at_utc = ?
+                        WHERE book_id = ?
+                        """,
+                        (
+                            book_name,
+                            mode,
+                            account,
+                            strategy_name,
+                            float(account_value),
+                            int(promote),
+                            now,
+                            book_id,
+                        ),
+                    )
+                    return book_id
+            new_book_id = book_id or str(uuid.uuid4())
+            connection.execute(
+                """
+                INSERT INTO books (
+                    book_id,
+                    book_name,
+                    mode,
+                    account,
+                    strategy_name,
+                    account_value,
+                    is_promoted,
+                    created_at_utc,
+                    updated_at_utc
+                )
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                """,
+                (
+                    new_book_id,
+                    book_name,
+                    mode,
+                    account,
+                    strategy_name,
+                    float(account_value),
+                    int(promote),
+                    now,
+                    now,
+                ),
+            )
+            return new_book_id
+
+    def set_promoted_book(self, book_id: str) -> None:
+        now = utc_now_iso()
+        with self._connect() as connection:
+            existing = connection.execute(
+                "SELECT book_id FROM books WHERE book_id = ?",
+                (book_id,),
+            ).fetchone()
+            if existing is None:
+                raise ValueError(f"Unknown journal book: {book_id}")
+            connection.execute("UPDATE books SET is_promoted = 0, updated_at_utc = ?", (now,))
+            connection.execute(
+                """
+                UPDATE books
+                SET is_promoted = 1,
+                    updated_at_utc = ?
+                WHERE book_id = ?
+                """,
+                (now, book_id),
+            )
+
+    def delete_book(self, book_id: str) -> None:
+        with self._connect() as connection:
+            row = connection.execute(
+                "SELECT is_promoted FROM books WHERE book_id = ?",
+                (book_id,),
+            ).fetchone()
+            if row is None:
+                raise ValueError(f"Unknown journal book: {book_id}")
+            if int(row["is_promoted"]) == 1:
+                raise ValueError("Promoted book cannot be deleted. Promote another book first.")
+            count_row = connection.execute("SELECT COUNT(*) AS book_count FROM books").fetchone()
+            if count_row is not None and int(count_row["book_count"]) <= 1:
+                raise ValueError("Cannot delete the last journal book.")
+            connection.execute("DELETE FROM books WHERE book_id = ?", (book_id,))
+
     def load_decision_snapshots(self, *, limit: int = 50) -> pd.DataFrame:
         return self._read_sql(
             """
@@ -211,27 +387,36 @@ class TradeJournal:
         self,
         *,
         status: str | None = None,
+        mode: str | None = None,
+        account: str | None = None,
+        strategy_name: str | None = None,
         limit: int = 200,
     ) -> pd.DataFrame:
+        conditions: list[str] = []
+        params: list[object] = []
         if status:
-            return self._read_sql(
-                """
-                SELECT *
-                FROM recommendation_tickets
-                WHERE status = ?
-                ORDER BY created_at_utc DESC
-                LIMIT ?
-                """,
-                (status, limit),
-            )
+            conditions.append("status = ?")
+            params.append(status)
+        if mode is not None:
+            conditions.append("mode = ?")
+            params.append(mode)
+        if account is not None:
+            conditions.append("account = ?")
+            params.append(account)
+        if strategy_name is not None:
+            conditions.append("strategy_name = ?")
+            params.append(strategy_name)
+        where_clause = f"WHERE {' AND '.join(conditions)}" if conditions else ""
+        params.append(limit)
         return self._read_sql(
-            """
+            f"""
             SELECT *
             FROM recommendation_tickets
+            {where_clause}
             ORDER BY created_at_utc DESC
             LIMIT ?
             """,
-            (limit,),
+            tuple(params),
         )
 
     def load_executions(
@@ -346,6 +531,21 @@ class TradeJournal:
 
     def _ensure_schema(self) -> None:
         with self._connect() as connection:
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS books (
+                    book_id TEXT PRIMARY KEY,
+                    book_name TEXT NOT NULL UNIQUE,
+                    mode TEXT NOT NULL,
+                    account TEXT NOT NULL,
+                    strategy_name TEXT NOT NULL,
+                    account_value REAL NOT NULL,
+                    is_promoted INTEGER NOT NULL,
+                    created_at_utc TEXT NOT NULL,
+                    updated_at_utc TEXT NOT NULL
+                )
+                """
+            )
             connection.execute(
                 """
                 CREATE TABLE IF NOT EXISTS decision_snapshots (
@@ -463,6 +663,40 @@ class TradeJournal:
                 )
                 """
             )
+            self._ensure_default_book(connection)
+
+    def _ensure_default_book(self, connection: sqlite3.Connection) -> None:
+        row = connection.execute("SELECT COUNT(*) AS book_count FROM books").fetchone()
+        if row is not None and int(row["book_count"]) > 0:
+            return
+        now = utc_now_iso()
+        connection.execute(
+            """
+            INSERT INTO books (
+                book_id,
+                book_name,
+                mode,
+                account,
+                strategy_name,
+                account_value,
+                is_promoted,
+                created_at_utc,
+                updated_at_utc
+            )
+            VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+            """,
+            (
+                str(uuid.uuid4()),
+                "Default Paper Book",
+                "paper",
+                DEFAULT_FORWARD_TEST_ACCOUNT,
+                DEFAULT_FORWARD_TEST_STRATEGY,
+                10_000.0,
+                1,
+                now,
+                now,
+            ),
+        )
 
     def _load_tax_table(
         self,
@@ -755,6 +989,20 @@ def build_recommendation_tickets(
 
 def utc_now_iso() -> str:
     return datetime.now(UTC).replace(microsecond=0).isoformat()
+
+
+def _journal_book_from_row(row: pd.Series) -> JournalBook:
+    return JournalBook(
+        book_id=str(row.get("book_id", "")),
+        book_name=str(row.get("book_name", "")),
+        mode=str(row.get("mode", "paper")),
+        account=str(row.get("account", "")),
+        strategy_name=str(row.get("strategy_name", "")),
+        account_value=float(row.get("account_value", 10_000.0)),
+        is_promoted=bool(int(row.get("is_promoted", 0))),
+        created_at_utc=str(row.get("created_at_utc", "")),
+        updated_at_utc=str(row.get("updated_at_utc", "")),
+    )
 
 
 def _latest_prices(prices: pd.DataFrame) -> dict[str, float]:

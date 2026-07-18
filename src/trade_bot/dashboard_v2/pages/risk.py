@@ -17,6 +17,16 @@ from trade_bot.dashboard_v2.components.cards import (
     render_card_grid,
     render_section_header,
 )
+from trade_bot.dashboard_v2.components.tones import (
+    beta_delta_tone,
+    beta_tone,
+    expected_shortfall_tone,
+    instability_tone,
+    portfolio_risk_tone,
+    risk_budget_tone,
+    sleeve_exposure_tone,
+    stress_loss_tone,
+)
 from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
 from trade_bot.research.operating_exposure import (
     aggregate_beta_adjusted_spy_delta,
@@ -43,18 +53,31 @@ def render_risk_page(runtime: DashboardRuntime) -> None:
         else float("nan")
     )
     instability = _first_row(getattr(current_state, "regime_instability", pd.DataFrame()))
+    risk_level = _value(risk_summary, "portfolio_risk_level", "n/a")
+    risk_multiplier = _value(risk_summary, "portfolio_risk_multiplier")
+    es95 = _value(risk_summary, "post_expected_shortfall_95")
+    max_stress_loss = _value(risk_summary, "post_max_stress_loss")
+    equity_beta = _value(risk_summary, "post_equity_beta")
+    ai_beta = _value(risk_summary, "post_ai_beta")
+    defensive_fraction = _sleeve_fraction(sleeve_exposure, "defensive")
+    instability_state = str(_value(instability, "regime_instability_state", "n/a")).upper()
 
     render_card_grid(
         [
-            ("Risk Level", _value(risk_summary, "portfolio_risk_level", "n/a")),
-            ("Risk Multiplier", _fmt_float(_value(risk_summary, "portfolio_risk_multiplier"))),
-            ("ES 95", _fmt_pct(_value(risk_summary, "post_expected_shortfall_95"))),
-            ("Max Stress Loss", _fmt_pct(_value(risk_summary, "post_max_stress_loss"))),
-            ("Equity Beta", _fmt_float(_value(risk_summary, "post_equity_beta"))),
-            ("AI Beta", _fmt_float(_value(risk_summary, "post_ai_beta"))),
-            ("Beta-Adjusted S&P Delta", _fmt_pct(beta_delta)),
-            ("Defensive % of Max", _sleeve_percent(sleeve_exposure, "defensive")),
-            ("Instability", str(_value(instability, "regime_instability_state", "n/a")).upper()),
+            ("Risk Level", risk_level, None, portfolio_risk_tone(risk_level)),
+            ("Risk Multiplier", _fmt_float(risk_multiplier), None, risk_budget_tone(risk_multiplier)),
+            ("ES 95", _fmt_pct(es95), None, expected_shortfall_tone(es95)),
+            ("Max Stress Loss", _fmt_pct(max_stress_loss), None, stress_loss_tone(max_stress_loss)),
+            ("Equity Beta", _fmt_float(equity_beta), None, beta_tone(equity_beta, warning_at=0.75, critical_at=1.00)),
+            ("AI Beta", _fmt_float(ai_beta), None, beta_tone(ai_beta, warning_at=0.60, critical_at=0.90)),
+            ("Beta-Adjusted S&P Delta", _fmt_pct(beta_delta), None, beta_delta_tone(beta_delta)),
+            (
+                "Defensive % of Max",
+                _fmt_pct(defensive_fraction),
+                None,
+                sleeve_exposure_tone("defensive", defensive_fraction),
+            ),
+            ("Instability", instability_state, None, instability_tone(instability_state)),
         ]
     )
 
@@ -177,14 +200,24 @@ def _render_operating_exposure(
     if current_weights.empty:
         st.info("No current target weights are available for exposure diagnostics.")
         return
+    stocks_fraction = _sleeve_fraction(sleeve_exposure, "stocks")
+    defensive_fraction = _sleeve_fraction(sleeve_exposure, "defensive")
+    gold_fraction = _sleeve_fraction(sleeve_exposure, "gold")
+    crypto_fraction = _sleeve_fraction(sleeve_exposure, "crypto")
+    credit_fraction = _sleeve_fraction(sleeve_exposure, "credit")
     render_card_grid(
         [
-            ("Beta-Adjusted S&P Delta", _fmt_pct(beta_delta)),
-            ("Stocks % of Max", _sleeve_percent(sleeve_exposure, "stocks")),
-            ("Defensive % of Max", _sleeve_percent(sleeve_exposure, "defensive")),
-            ("Gold % of Max", _sleeve_percent(sleeve_exposure, "gold")),
-            ("Crypto % of Max", _sleeve_percent(sleeve_exposure, "crypto")),
-            ("Credit % of Max", _sleeve_percent(sleeve_exposure, "credit")),
+            ("Beta-Adjusted S&P Delta", _fmt_pct(beta_delta), None, beta_delta_tone(beta_delta)),
+            ("Stocks % of Max", _fmt_pct(stocks_fraction), None, sleeve_exposure_tone("stocks", stocks_fraction)),
+            (
+                "Defensive % of Max",
+                _fmt_pct(defensive_fraction),
+                None,
+                sleeve_exposure_tone("defensive", defensive_fraction),
+            ),
+            ("Gold % of Max", _fmt_pct(gold_fraction), None, sleeve_exposure_tone("gold", gold_fraction)),
+            ("Crypto % of Max", _fmt_pct(crypto_fraction), None, sleeve_exposure_tone("crypto", crypto_fraction)),
+            ("Credit % of Max", _fmt_pct(credit_fraction), None, sleeve_exposure_tone("credit", credit_fraction)),
         ]
     )
     exposure_view = st.pills(
@@ -218,13 +251,24 @@ def _render_instability(runtime: DashboardRuntime) -> None:
         st.info("No regime-instability diagnostics are available.")
         return
     row = regime_instability.iloc[0]
+    instability_state = str(row.get("regime_instability_state", "n/a")).upper()
+    instability_score = row.get("regime_instability_score")
+    large_move_share = row.get("spy_ytd_large_move_share")
     render_card_grid(
         [
-            ("Instability", str(row.get("regime_instability_state", "n/a")).upper()),
-            ("Score", _fmt_float(row.get("regime_instability_score"))),
-            ("SPY +/-1% YTD", _fmt_pct(row.get("spy_ytd_large_move_share"))),
-            ("Large Move Days", f"{int(row.get('spy_ytd_large_move_days', 0))}/{int(row.get('spy_ytd_trading_days', 0))}"),
-            ("Use", "Watch Only"),
+            ("Instability", instability_state, None, instability_tone(instability_state)),
+            ("Score", _fmt_float(instability_score), None, instability_tone(instability_score)),
+            (
+                "SPY +/-1% YTD",
+                _fmt_pct(large_move_share),
+                None,
+                instability_tone(large_move_share),
+            ),
+            (
+                "Large Move Days",
+                f"{int(row.get('spy_ytd_large_move_days', 0))}/{int(row.get('spy_ytd_trading_days', 0))}",
+            ),
+            ("Use", "Watch Only", None, "warning"),
         ]
     )
     read = str(row.get("regime_instability_read", "")).strip()
@@ -360,12 +404,16 @@ def _fmt_float(value: object) -> str:
 
 
 def _sleeve_percent(sleeve_exposure: pd.DataFrame, sleeve: str) -> str:
+    return _fmt_pct(_sleeve_fraction(sleeve_exposure, sleeve))
+
+
+def _sleeve_fraction(sleeve_exposure: pd.DataFrame, sleeve: str) -> float:
     if sleeve_exposure.empty or "sleeve" not in sleeve_exposure or "percent_of_max_sleeve" not in sleeve_exposure:
-        return "n/a"
+        return float("nan")
     row = sleeve_exposure[sleeve_exposure["sleeve"].astype(str) == sleeve]
     if row.empty:
-        return "n/a"
-    return _fmt_pct(row["percent_of_max_sleeve"].iloc[0])
+        return float("nan")
+    return float(pd.to_numeric(row["percent_of_max_sleeve"].iloc[0], errors="coerce"))
 
 
 def _lead_regime_label(current_state: object) -> str:

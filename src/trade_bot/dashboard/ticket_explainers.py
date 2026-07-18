@@ -126,11 +126,11 @@ TICKET_EXPLAINERS: tuple[TicketExplainer, ...] = (
     TicketExplainer(
         term="Strategy Name",
         category="Ticket Field",
-        plain_english="Strategy or operating-system label that generated a ticket.",
-        calculation="Stored from the selected strategy label when tickets are locked.",
+        plain_english="Strategy or operating-system decision layer that generated a ticket.",
+        calculation="Stored from the selected Strategy to follow when tickets are locked.",
         how_to_read="Use it to separate champion, challenger, and reference recommendations.",
         caution="A generic label can make later performance attribution harder.",
-        aliases=("strategy_name", "strategy label"),
+        aliases=("strategy_name", "strategy to follow"),
     ),
     TicketExplainer(
         term="Ticker",

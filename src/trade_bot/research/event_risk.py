@@ -199,6 +199,70 @@ def classify_news_text(text: str) -> NewsEventClassification:
     if _contains_any(
         normalized,
         (
+            "kimi",
+            "moonshot",
+            "deepseek",
+            "zhipu",
+            "glm",
+            "open-weight",
+            "open weight",
+            "open-source ai",
+            "open source ai",
+            "frontier model",
+        ),
+    ) and _contains_any(
+        normalized,
+        (
+            "benchmark",
+            "pricing",
+            "price",
+            "cost",
+            "rival",
+            "compete",
+            "claude",
+            "anthropic",
+            "openai",
+            "opus",
+            "agent",
+        ),
+    ):
+        return NewsEventClassification(
+            category="ai_unit_economics",
+            direction="uncertain",
+            confidence=0.66,
+            risk_channels=(
+                "model_competition",
+                "ai_pricing",
+                "ai_moat",
+                "inference_costs",
+                "market_concentration",
+            ),
+            candidate_proxies=(
+                "QQQ",
+                "XLK",
+                "IGV",
+                "MSFT",
+                "GOOGL",
+                "META",
+                "AMZN",
+                "PLTR",
+                "NVDA",
+                "SMH",
+                "SOXX",
+                "VIXY",
+            ),
+            tradable_question=(
+                "Are cheaper frontier-adjacent AI models compressing proprietary model "
+                "pricing and moats, or lowering adoption friction enough to support demand?"
+            ),
+            phase=phase,
+            phase_reason=phase_reason,
+            confirmation_window=confirmation_window,
+        )
+
+    if _contains_any(
+        normalized,
+        (
             "hyperscaler",
             "hyperscalers",
             "microsoft",
@@ -223,6 +287,17 @@ def classify_news_text(text: str) -> NewsEventClassification:
             "debt issuance",
             "cash burn",
             "spending cliff",
+            "lease computing power",
+            "lease compute",
+            "rent computing power",
+            "rent compute",
+            "sell computing power",
+            "sell compute",
+            "cloud push",
+            "excess capacity",
+            "capacity utilization",
+            "monetize ai infrastructure",
+            "monetize compute",
         ),
     ):
         return NewsEventClassification(

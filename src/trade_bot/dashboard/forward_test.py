@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Callable
 import json
 from datetime import UTC, date, datetime
 from pathlib import Path
@@ -24,9 +25,11 @@ from trade_bot.research.approach_explorer import (
     strategy_from_catalog_row,
 )
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.research.strategy_decision import resolve_trade_decision_for_strategy
 from trade_bot.storage.warehouse import TradingWarehouse
-from trade_bot.trading.book_alignment import build_book_alignment
+from trade_bot.trading.book_alignment import BookAlignmentRun, build_book_alignment
 from trade_bot.trading.journal import (
+    JournalBook,
     TicketSizingConfig,
     TradeJournal,
     build_recommendation_tickets,
@@ -83,6 +86,28 @@ TICKET_COLUMN_HELP = {
     "sell_execution_id": "Execution that realized this lot.",
 }
 TICKET_COLUMN_HELP = {**TICKET_COLUMN_HELP, **ticket_column_help()}
+
+_AFTER_LOGGED_BOOK_SESSION_KEY = "forward_test_show_after_logged_book_comparison"
+_AFTER_LOGGED_BOOK_COLUMN_LABELS = {
+    "current_weight": "after_logged_weight",
+    "scenario_adjusted_weight": "recommended_weight",
+    "delta_weight": "gap_weight",
+    "current_notional": "after_logged_value",
+    "target_notional": "recommended_value",
+    "delta_notional": "trade_needed",
+}
+_AFTER_LOGGED_BOOK_COLUMN_HELP = {
+    "ticker": "Ticker in either the logged book or the latest recommended book.",
+    "action": "Recommended next adjustment after comparing the after-logged book to the target.",
+    "after_logged_weight": "Current account weight inferred from logged executions and latest loaded prices.",
+    "recommended_weight": "Latest scenario- and risk-adjusted recommended target weight.",
+    "gap_weight": "Recommended weight minus after-logged weight. Positive means add; negative means reduce.",
+    "after_logged_value": "Marked value of the after-logged holding using latest loaded prices.",
+    "recommended_value": "Dollar target implied by the recommended weight and account value.",
+    "trade_needed": "Approximate dollar change still needed to move the logged book toward the recommendation.",
+    "net_quantity": "Net shares accumulated from logged executions.",
+    "reference_price": "Latest loaded price used to mark the logged book.",
+}
 
 
 TICKET_LABEL_REFERENCE = pd.DataFrame(
@@ -145,12 +170,15 @@ def _render_forward_test_and_journal(
     *,
     bot_config: object | None = None,
     warehouse_path: str | Path | None = None,
+    selected_book: JournalBook | None = None,
+    book_selector: Callable[[], JournalBook] | None = None,
 ) -> None:
-    trade_decision = baseline_run.trade_decision
     st.subheader("Forward Test / Trade Journal")
     st.caption(
         "Operational record keeping for paper/live decisions: configure the book, review alignment, lock recommendation tickets, log executions, and audit what happened."
     )
+    if book_selector is not None:
+        selected_book = book_selector()
 
     st.markdown(
         """
@@ -184,19 +212,39 @@ def _render_forward_test_and_journal(
     st.caption(
         "These inputs define which local book receives tickets and executions. They do not change the strategy backtest."
     )
-    journal_cols = st.columns(4)
-    journal_mode = journal_cols[0].selectbox("Mode", ["paper", "live"])
-    journal_account = journal_cols[1].text_input("Account", DEFAULT_FORWARD_TEST_ACCOUNT)
-    journal_strategy = journal_cols[2].text_input(
-        "Strategy label",
-        DEFAULT_FORWARD_TEST_STRATEGY,
-    )
-    account_value = journal_cols[3].number_input(
-        "Account value",
-        min_value=1.0,
-        value=10000.0,
-        step=1000.0,
-    )
+    if selected_book is not None:
+        journal_book_name = selected_book.book_name
+        journal_mode = selected_book.mode
+        journal_account = selected_book.account
+        journal_strategy = selected_book.strategy_name
+        account_value = float(selected_book.account_value)
+        journal_cols = st.columns(5)
+        journal_cols[0].metric(
+            "Selected book",
+            journal_book_name,
+            "Promoted" if selected_book.is_promoted else None,
+        )
+        journal_cols[1].metric("Mode", journal_mode)
+        journal_cols[2].metric("Account", journal_account)
+        journal_cols[3].metric("Strategy to follow", journal_strategy)
+        journal_cols[4].metric("Account value", f"${account_value:,.0f}")
+        st.caption("Use the book controls above to create, select, edit, delete, or promote books.")
+    else:
+        journal_cols = st.columns(4)
+        journal_mode = journal_cols[0].selectbox("Mode", ["paper", "live"])
+        journal_account = journal_cols[1].text_input("Account", DEFAULT_FORWARD_TEST_ACCOUNT)
+        journal_strategy = journal_cols[2].text_input(
+            "Strategy to follow",
+            DEFAULT_FORWARD_TEST_STRATEGY,
+        )
+        account_value = journal_cols[3].number_input(
+            "Account value",
+            min_value=1.0,
+            value=10000.0,
+            step=1000.0,
+        )
+
+    trade_decision = resolve_trade_decision_for_strategy(baseline_run, journal_strategy)
 
     with st.expander("Ticket sizing controls", expanded=False):
         st.caption(
@@ -218,14 +266,6 @@ def _render_forward_test_and_journal(
             step=25.0,
         )
         whole_shares = sizing_cols[3].checkbox("Whole shares", value=True)
-    sizing = TicketSizingConfig(
-        account_value=float(account_value),
-        price_band_pct=float(price_band_pct),
-        size_band_pct=float(size_band_pct),
-        min_trade_notional=float(min_trade_notional),
-        whole_shares=bool(whole_shares),
-    )
-
     st.markdown("### 1. Book alignment")
     st.caption(
         "Book Alignment uses logged executions as the current book of record. Locked tickets are recommendations only; they do not change holdings until the fill is logged."
@@ -253,6 +293,23 @@ def _render_forward_test_and_journal(
     )
     _render_book_alignment(book_alignment, heading="Selected Book Alignment")
     alignment_summary = book_alignment.summary.iloc[0] if not book_alignment.summary.empty else {}
+    effective_account_value = _effective_ticket_account_value(
+        book_alignment,
+        fallback=float(account_value),
+    )
+    sizing = TicketSizingConfig(
+        account_value=effective_account_value,
+        price_band_pct=float(price_band_pct),
+        size_band_pct=float(size_band_pct),
+        min_trade_notional=float(min_trade_notional),
+        whole_shares=bool(whole_shares),
+    )
+    if abs(effective_account_value - float(account_value)) > 1e-6:
+        st.info(
+            "Ticket sizing is using the marked logged-book value "
+            f"(${effective_account_value:,.0f}) because it exceeds the configured "
+            f"account value (${float(account_value):,.0f})."
+        )
 
     st.markdown("### 2. Recommendation tickets")
     st.caption(
@@ -306,14 +363,22 @@ def _render_forward_test_and_journal(
                     f"Locked {len(ticket_preview):,} recommendation tickets: {decision_id}"
                 )
 
-    open_tickets = journal.load_recommendation_tickets(status="open")
+    open_tickets = journal.load_recommendation_tickets(
+        status="open",
+        mode=journal_mode,
+        account=journal_account,
+        strategy_name=journal_strategy,
+    )
     ticket_status = st.selectbox(
         "Ticket ledger filter",
         ["open", "all", "executed", "skipped", "expired"],
         help="Filter the locked recommendation ledger. Open tickets still need execution, skip, or expiration.",
     )
     stored_tickets = journal.load_recommendation_tickets(
-        status=None if ticket_status == "all" else ticket_status
+        status=None if ticket_status == "all" else ticket_status,
+        mode=journal_mode,
+        account=journal_account,
+        strategy_name=journal_strategy,
     )
     stored_ticket_columns = [
         "created_at_utc",
@@ -450,6 +515,30 @@ def _render_forward_test_and_journal(
             )
             _rerun_after_journal_mutation(f"Logged execution: {execution_id}")
 
+    update_cols = st.columns([1, 3])
+    if update_cols[0].button(
+        "Update After-Logged Book Comparison",
+        help=(
+            "Re-read the local execution journal and compare the after-logged book "
+            "against the latest recommended target weights."
+        ),
+    ):
+        st.session_state[_AFTER_LOGGED_BOOK_SESSION_KEY] = True
+    if st.session_state.get(_AFTER_LOGGED_BOOK_SESSION_KEY, False):
+        update_cols[1].info(
+            "Recomputed from logged executions, latest loaded prices, and latest target weights."
+        )
+        updated_book_alignment = build_book_alignment(
+            journal=journal,
+            trade_decision=trade_decision,
+            prices=baseline_run.prices,
+            mode=journal_mode,
+            account=journal_account,
+            strategy_name=journal_strategy,
+            account_value=float(account_value),
+        )
+        _render_after_logged_book_comparison(updated_book_alignment)
+
     if not open_tickets.empty:
         with st.expander("Update open ticket status", expanded=False):
             status_cols = st.columns(2)
@@ -478,7 +567,10 @@ def _render_forward_test_and_journal(
                         f"Updated ticket {status_ticket} to {status_update}."
                     )
 
-    executions = journal.load_executions()
+    executions = journal.load_executions(
+        mode=journal_mode,
+        account=journal_account,
+    )
     execution_columns = [
         "executed_at_utc",
         "execution_id",
@@ -520,6 +612,101 @@ def _render_forward_test_and_journal(
         warehouse_path=warehouse_path,
         mode=journal_mode,
         account=journal_account,
+    )
+
+
+def _render_after_logged_book_comparison(alignment: BookAlignmentRun) -> None:
+    if alignment.summary.empty:
+        return
+
+    row = alignment.summary.iloc[0]
+    st.markdown("#### After-logged book vs recommended book")
+    st.caption(
+        "This is rebuilt from the current execution journal, latest loaded prices, and latest recommended target weights."
+    )
+    account_value_warning = str(row.get("account_value_warning", "")).strip()
+    if account_value_warning:
+        st.warning(account_value_warning)
+
+    cols = st.columns(4)
+    cols[0].metric(
+        "Book Status",
+        str(row.get("alignment_status", "unknown")).replace("_", " ").title(),
+    )
+    cols[1].metric(
+        "Next Action",
+        str(row.get("recommended_action", "")).replace("_", " ").title(),
+    )
+    cols[2].metric("Max Gap", f"{float(row.get('max_abs_delta', 0.0)):.1%}")
+    cols[3].metric("Trade Rows", f"{int(row.get('material_trade_count', 0))}")
+    st.caption(
+        f"After-logged book: {row.get('current_position', 'cash/unallocated')}. "
+        f"Recommended book: {row.get('target_position', 'cash/unallocated')}."
+    )
+
+    comparison = _after_logged_book_comparison_frame(alignment.position_plan)
+    if comparison.empty:
+        st.write("No logged or recommended holdings are available for this context.")
+        return
+
+    st.caption("Sorted by largest remaining weight gap after the logged executions.")
+    display = _display_trade_frame(comparison).rename(columns=_AFTER_LOGGED_BOOK_COLUMN_LABELS)
+    _render_metric_dataframe(
+        display,
+        use_container_width=True,
+        column_help=_AFTER_LOGGED_BOOK_COLUMN_HELP,
+    )
+
+
+def _effective_ticket_account_value(
+    alignment: BookAlignmentRun,
+    *,
+    fallback: float,
+) -> float:
+    if alignment.summary.empty:
+        return float(fallback)
+    value = pd.to_numeric(alignment.summary.iloc[0].get("account_value"), errors="coerce")
+    if pd.notna(value) and float(value) > 0:
+        return float(value)
+    return float(fallback)
+
+
+def _after_logged_book_comparison_frame(position_plan: pd.DataFrame) -> pd.DataFrame:
+    columns = [
+        "ticker",
+        "action",
+        "current_weight",
+        "scenario_adjusted_weight",
+        "delta_weight",
+        "current_notional",
+        "target_notional",
+        "delta_notional",
+        "net_quantity",
+        "reference_price",
+    ]
+    if position_plan.empty:
+        return pd.DataFrame(columns=columns)
+
+    data = position_plan.copy()
+    for column in columns:
+        if column not in data:
+            data[column] = "" if column in {"ticker", "action"} else 0.0
+    for column in [
+        "current_weight",
+        "scenario_adjusted_weight",
+        "delta_weight",
+        "current_notional",
+        "target_notional",
+        "delta_notional",
+        "net_quantity",
+        "reference_price",
+    ]:
+        data[column] = pd.to_numeric(data[column], errors="coerce").fillna(0.0)
+
+    data["_abs_delta_weight"] = data["delta_weight"].abs()
+    return (
+        data.sort_values(["_abs_delta_weight", "ticker"], ascending=[False, True])[columns]
+        .reset_index(drop=True)
     )
 
 

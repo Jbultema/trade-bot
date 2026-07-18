@@ -20,6 +20,17 @@ from trade_bot.dashboard_v2.components.cards import (
     render_chart,
     render_section_header,
 )
+from trade_bot.dashboard_v2.components.tones import (
+    decision_sanity_tone,
+    normalize_tone,
+    portfolio_risk_tone,
+    posture_calibration_tone,
+    probability_pressure_tone,
+    risk_budget_tone,
+    risk_score_tone,
+    risk_status_tone,
+    target_defensive_tone,
+)
 from trade_bot.dashboard_v2.help import metric_help
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
@@ -28,17 +39,36 @@ from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
 def render_today_page(runtime: DashboardRuntime) -> None:
     run = runtime.baseline_run
     current_state = run.current_state
-    trade_decision = run.trade_decision
+    trade_decision = runtime.operating_trade_decision
     summary = _first_row(trade_decision.summary)
 
     render_card_grid(
         [
             ("Market Date", current_state.market_date),
-            ("Risk", str(current_state.risk_status).upper()),
-            ("Risk Score", f"{float(current_state.risk_score):.2f}"),
-            ("Open Tickets", runtime.open_ticket_count),
-            ("Risk Budget", _fmt_pct(summary.get("risk_budget_multiplier"))),
-            ("1M Risk-Off", _fmt_pct(summary.get("one_month_risk_off_probability"))),
+            ("Risk", str(current_state.risk_status).upper(), None, risk_status_tone(current_state.risk_status)),
+            ("Risk Score", f"{float(current_state.risk_score):.2f}", None, risk_score_tone(current_state.risk_score)),
+            (
+                "Open Tickets",
+                runtime.open_ticket_count,
+                None,
+                "warning" if runtime.open_ticket_count else "success",
+            ),
+            (
+                "Risk Budget",
+                _fmt_pct(summary.get("risk_budget_multiplier")),
+                None,
+                risk_budget_tone(summary.get("risk_budget_multiplier")),
+            ),
+            (
+                "1M Risk-Off",
+                _fmt_pct(summary.get("one_month_risk_off_probability")),
+                None,
+                probability_pressure_tone(
+                    summary.get("one_month_risk_off_probability"),
+                    warning_at=0.15,
+                    critical_at=0.35,
+                ),
+            ),
         ]
     )
     render_callout(str(getattr(runtime.action_headline, "headline", "")) or current_state.risk_summary)
@@ -143,46 +173,54 @@ def _render_decision_context(
             "Risk State",
             f"{str(current_state.risk_status).upper()} ({_fmt_float(current_state.risk_score)})",
             current_state.risk_summary,
+            risk_status_tone(current_state.risk_status),
         ),
         (
             "1M Scenario Mix",
             _scenario_probability_summary(run.trade_decision.scenario_links),
             "These scenarios set the starting risk budget before event, macro, and portfolio-risk clamps.",
+            _scenario_mix_tone(summary),
         ),
         (
             "Current Event Pressure",
             _event_pressure_summary(run.news_monitor.triage),
             f"Event pressure: {_fmt_pct(summary.get('event_pressure'))}. News can pressure sizing, but it should not override tradable confirmation by itself.",
+            probability_pressure_tone(summary.get("event_pressure"), warning_at=0.01, critical_at=0.12),
         ),
         (
             "Target Posture",
             str(summary.get("scenario_adjusted_position", "n/a")),
             f"Base systematic posture: {summary.get('base_position', 'n/a')}.",
+            target_defensive_tone(summary.get("target_defensive_weight")),
         ),
         (
             "Portfolio Risk Engine",
             str(summary.get("portfolio_risk_level", "n/a")).replace("_", " "),
             _portfolio_risk_sentence(summary),
+            portfolio_risk_tone(summary.get("portfolio_risk_level")),
         ),
         (
             "Macro Inclusion",
             _macro_inclusion_summary(run.signal_inclusion.summary),
             f"Macro pressure in the current decision summary: {_fmt_pct(summary.get('macro_pressure'))}.",
+            probability_pressure_tone(summary.get("macro_pressure"), warning_at=0.04, critical_at=0.12),
         ),
         (
             "Decision Sanity",
             str(summary.get("decision_sanity_signal", "n/a")).replace("_", " "),
             str(summary.get("decision_sanity_note", "n/a")),
+            decision_sanity_tone(summary.get("decision_sanity_signal")),
         ),
         (
             "Posture Calibration",
             str(summary.get("posture_calibration_signal", "n/a")).replace("_", " "),
             str(summary.get("posture_calibration_note", "n/a")),
+            posture_calibration_tone(summary.get("posture_calibration_signal")),
         ),
     ]
     st.markdown(
         '<div class="v2-decision-grid">'
-        + "".join(_decision_card_html(label, answer, detail) for label, answer, detail in cards)
+        + "".join(_decision_card_html(label, answer, detail, tone) for label, answer, detail, tone in cards)
         + "</div>",
         unsafe_allow_html=True,
     )
@@ -190,9 +228,11 @@ def _render_decision_context(
         st.caption("Material target weights and current-book drift are shown below.")
 
 
-def _decision_card_html(label: str, answer: object, detail: object) -> str:
+def _decision_card_html(label: str, answer: object, detail: object, tone: object | None = None) -> str:
+    tone_text = normalize_tone(tone)
+    tone_class = "" if tone_text == "neutral" else f" v2-decision-card-{html.escape(tone_text)}"
     return (
-        '<div class="v2-decision-card">'
+        f'<div class="v2-decision-card{tone_class}">'
         f'<p class="v2-card-label">{html.escape(str(label))}{help_icon(metric_help(str(label)))}</p>'
         f'<p class="v2-decision-answer">{html.escape(str(answer))}</p>'
         f'<p class="v2-decision-detail">{html.escape(str(detail))}</p>'
@@ -267,6 +307,29 @@ def _macro_inclusion_summary(frame: pd.DataFrame) -> str:
         watched_categories = ", ".join(watched[category_col].astype(str).head(3).tolist())
         return f"{len(accepted)} authority row(s); {len(watched)} watch/rejected row(s): {watched_categories}"
     return f"{len(accepted)} authority row(s); {len(watched)} watch/rejected row(s)"
+
+
+def _scenario_mix_tone(summary: dict[str, object]) -> str:
+    risk_off = _float_or_none(summary.get("one_month_risk_off_probability")) or 0.0
+    transition = _float_or_none(summary.get("one_month_transition_probability")) or 0.0
+    risk_on = _float_or_none(summary.get("one_month_risk_on_probability")) or 0.0
+    if risk_off >= 0.35:
+        return "critical"
+    if risk_off + transition >= 0.25:
+        return "warning"
+    if risk_on >= 0.45:
+        return "success"
+    return "neutral"
+
+
+def _float_or_none(value: object) -> float | None:
+    try:
+        number = float(value)
+    except (TypeError, ValueError):
+        return None
+    if pd.isna(number):
+        return None
+    return number
 
 
 def _first_existing_column(frame: pd.DataFrame, columns: tuple[str, ...]) -> str | None:

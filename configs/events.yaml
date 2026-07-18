@@ -252,3 +252,71 @@ events:
       Current market commentary emphasized compute-capacity constraints and upward-sloping AI input
       costs. The tradable question is whether this remains a supplier tailwind, becomes a hyperscaler
       margin problem, or evolves into a broader AI capex repricing catalyst.
+
+  - event_id: meta_anthropic_compute_lease_2026_07_17
+    name: Meta-Anthropic compute lease talks raise AI capex utilization questions
+    date: "2026-07-17"
+    category: hyperscaler_capex_fcf
+    direction: uncertain
+    current: true
+    sizing_authority: false
+    phase: leading_warning
+    phase_reason: >
+      A hyperscaler potentially leasing AI compute externally can be read as compute scarcity,
+      monetization optionality, or excess-capacity/utilization pressure. The signal is important,
+      but direction is ambiguous until price, breadth, credit, and margin proxies confirm.
+    confirmation_window: >
+      Watch META, MSFT, AMZN, GOOGL, ORCL, QQQ/RSP, SMH/SOXX, NVDA, cloud margins, capex/free-cash-flow
+      commentary, HYG/LQD, and VIXY before treating this as a portfolio-sizing input.
+    tags:
+      - ai
+      - anthropic
+      - meta
+      - ai_capex
+      - compute_capacity
+      - hyperscalers
+      - cloud_margins
+      - semiconductor_demand
+      - leading_warning
+      - watch_context
+    source_url: "https://www.reddit.com/r/BetterOffline/comments/1uz4vf5/ed_called_it_meta_in_talks_to_lease_computing/"
+    description: >
+      User-provided news thread pointed to reporting that Meta is in talks to lease AI computing
+      power to Anthropic in a potential $10B deal. The tradable question is whether this validates
+      scarce compute demand or exposes AI infrastructure overbuild, weak internal ROI, and future
+      pressure on hyperscaler cash flow and semiconductor demand.
+
+  - event_id: kimi_k3_frontier_cost_pressure_2026_07_17
+    name: Kimi K3 launch raises open-model competition and AI pricing questions
+    date: "2026-07-17"
+    category: ai_unit_economics
+    direction: uncertain
+    current: true
+    sizing_authority: false
+    phase: leading_warning
+    phase_reason: >
+      A frontier-adjacent open-weight model at aggressive pricing can pressure proprietary AI moats
+      and inference economics, but it can also broaden adoption. Treat as model-competition context
+      until independent benchmarks, hosting quality, latency, and market proxies confirm.
+    confirmation_window: >
+      Watch independent evals, July 27 weight-release follow-through, second-party hosting latency,
+      API pricing, AI software/platform equities, QQQ/RSP, SMH/SOXX, NVDA, and cloud margins before
+      giving this item sizing authority.
+    tags:
+      - ai
+      - kimi
+      - moonshot
+      - open_weights
+      - model_competition
+      - inference_costs
+      - ai_unit_economics
+      - china_ai
+      - leading_warning
+      - watch_context
+    source_url: "https://www.reddit.com/r/better_claw/comments/1uyzlis/kimi_k3_beats_opus_on_paper_and_sits_one_point/"
+    description: >
+      User-provided agent-harness writeup flagged Kimi K3 as frontier-adjacent, long-context,
+      aggressively priced, and potentially useful for batch agent workflows, while official and
+      news coverage describe a large open-weight Moonshot model challenging U.S. frontier labs.
+      The tradable question is whether cheaper capable models compress AI pricing power, shift
+      demand toward open stacks, or simply increase AI usage without hurting infrastructure demand.

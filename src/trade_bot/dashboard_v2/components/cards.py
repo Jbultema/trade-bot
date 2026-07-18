@@ -7,18 +7,24 @@ from typing import Any
 import streamlit as st
 from plotly.graph_objects import Figure
 
+from trade_bot.dashboard_v2.components.tones import normalize_tone
 from trade_bot.dashboard_v2.help import chart_help, metric_help, section_help
 
-type CardSpec = tuple[str, object] | tuple[str, object, str | None]
+type CardSpec = (
+    tuple[str, object]
+    | tuple[str, object, str | None]
+    | tuple[str, object, str | None, object | None]
+)
 
 
 def render_card_grid(cards: Iterable[CardSpec]) -> None:
     html_cards = []
     for card in cards:
-        label, value, help_text = _normalise_card(card)
+        label, value, help_text, tone = _normalise_card(card)
         resolved_help = help_text or metric_help(label)
+        tone_class = _tone_class(tone)
         html_cards.append(
-            '<div class="v2-card">'
+            f'<div class="v2-card{tone_class}">'
             f'<p class="v2-card-label">{html.escape(label)}{_help_icon(resolved_help)}</p>'
             f'<p class="v2-card-value">{html.escape(str(value))}</p>'
             "</div>"
@@ -71,12 +77,22 @@ def help_icon(help_text: str | None) -> str:
     return _help_icon(help_text)
 
 
-def _normalise_card(card: CardSpec) -> tuple[str, object, str | None]:
+def _normalise_card(card: CardSpec) -> tuple[str, object, str | None, object | None]:
     if len(card) == 2:
         label, value = card
-        return str(label), value, None
-    label, value, help_text = card
-    return str(label), value, help_text
+        return str(label), value, None, None
+    if len(card) == 3:
+        label, value, help_text = card
+        return str(label), value, help_text, None
+    label, value, help_text, tone = card
+    return str(label), value, help_text, tone
+
+
+def _tone_class(tone: object | None) -> str:
+    normalized = normalize_tone(tone)
+    if normalized == "neutral":
+        return ""
+    return f" v2-card-{normalized}"
 
 
 def _figure_title(figure: Figure) -> str | None:
