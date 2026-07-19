@@ -4,6 +4,7 @@ import pandas as pd
 import pytest
 
 from trade_bot.research.cycle_tracker import (
+    PHASES,
     build_cycle_candidate_scores,
     build_cycle_crisis_playback,
     build_cycle_feature_snapshot,
@@ -693,6 +694,138 @@ def test_liquidation_frontier_reentry_role_requires_longer_horizon() -> None:
     long_role = frontier[frontier["horizon_days"].eq(252)].iloc[0]["frontier_role"]
     assert short_role in {"watch", "avoid"}
     assert long_role in {"scale_reentry", "reentry_watch", "watch", "avoid"}
+
+
+def test_phase_candidate_frontier_penalizes_current_ai_break_theme() -> None:
+    prices = _cycle_prices("unwind", periods=420)
+    prices["CRWD"] = prices["QQQ"] * 1.01
+    transition_forecast = pd.DataFrame(
+        [
+            {
+                "horizon": "1m",
+                "horizon_days": 21,
+                "phase": "early_unwind",
+                "probability": 0.65,
+                "dominant_phase": "early_unwind",
+                "source": "test",
+            }
+        ]
+    )
+    validation_metrics = pd.DataFrame(
+        [
+            {
+                "dominant_phase": "early_unwind",
+                "horizon": "1m",
+                "horizon_days": 21,
+                "ticker": "CRWD",
+                "asset_role": "ai_growth",
+                "origins": 24,
+                "median_forward_return": 0.25,
+                "median_forward_drawdown": -0.08,
+                "median_excess_vs_spy": 0.14,
+                "median_excess_vs_qqq": 0.20,
+                "hit_rate_vs_qqq": 0.88,
+                "severe_drawdown_rate": 0.0,
+                "phase_rank_score": 0.45,
+            },
+            {
+                "dominant_phase": "early_unwind",
+                "horizon": "1m",
+                "horizon_days": 21,
+                "ticker": "BIL",
+                "asset_role": "cash_defensive",
+                "origins": 24,
+                "median_forward_return": 0.01,
+                "median_forward_drawdown": -0.001,
+                "median_excess_vs_spy": 0.05,
+                "median_excess_vs_qqq": 0.08,
+                "hit_rate_vs_qqq": 0.80,
+                "severe_drawdown_rate": 0.0,
+                "phase_rank_score": 0.22,
+            },
+        ]
+    )
+
+    frontier = build_phase_candidate_frontier(
+        prices,
+        pd.DataFrame(),
+        transition_forecast,
+        validation_metrics,
+        tickers=("CRWD", "BIL"),
+    )
+
+    assert frontier.iloc[0]["ticker"] == "BIL"
+    crwd = frontier[frontier["ticker"].eq("CRWD")].iloc[0]
+    assert crwd["theme_fragility_penalty"] > 0.0
+    assert "ai_fragility_conflict" in crwd["evidence_flags"]
+    assert "cycle_leader_unwind_risk" in crwd["evidence_flags"]
+    assert crwd["frontier_role"] in {"watch", "avoid"}
+
+
+def test_phase_candidate_frontier_penalizes_ubiquitous_winners() -> None:
+    prices = _cycle_prices("acceleration", periods=420)
+    prices["CRWD"] = prices["QQQ"] * 1.01
+    transition_forecast = pd.DataFrame(
+        [
+            {
+                "horizon": "3m",
+                "horizon_days": 63,
+                "phase": "pre_break",
+                "probability": 0.55,
+                "dominant_phase": "pre_break",
+                "source": "test",
+            }
+        ]
+    )
+    validation_rows = [
+        {
+            "dominant_phase": phase,
+            "horizon": "3m",
+            "horizon_days": 63,
+            "ticker": "CRWD",
+            "asset_role": "ai_growth",
+            "origins": 24,
+            "median_forward_return": 0.20,
+            "median_forward_drawdown": -0.08,
+            "median_excess_vs_spy": 0.10,
+            "median_excess_vs_qqq": 0.12,
+            "hit_rate_vs_qqq": 0.75,
+            "severe_drawdown_rate": 0.0,
+            "phase_rank_score": 0.45,
+        }
+        for phase in PHASES
+    ]
+    validation_rows.append(
+        {
+            "dominant_phase": "pre_break",
+            "horizon": "3m",
+            "horizon_days": 63,
+            "ticker": "BIL",
+            "asset_role": "cash_defensive",
+            "origins": 24,
+            "median_forward_return": 0.01,
+            "median_forward_drawdown": -0.001,
+            "median_excess_vs_spy": 0.04,
+            "median_excess_vs_qqq": 0.07,
+            "hit_rate_vs_qqq": 0.72,
+            "severe_drawdown_rate": 0.0,
+            "phase_rank_score": 0.45,
+        }
+    )
+
+    frontier = build_phase_candidate_frontier(
+        prices,
+        pd.DataFrame(),
+        transition_forecast,
+        pd.DataFrame(validation_rows),
+        tickers=("CRWD", "BIL"),
+    )
+
+    assert frontier.iloc[0]["ticker"] == "BIL"
+    crwd = frontier[frontier["ticker"].eq("CRWD")].iloc[0]
+    assert crwd["ubiquity_penalty"] > 0.0
+    assert "weak_phase_specificity" in crwd["evidence_flags"]
+    assert "ubiquitous_winner" in crwd["evidence_flags"]
 
 
 def _cycle_prices(kind: str, *, periods: int = 320, start: str = "2024-01-01") -> pd.DataFrame:

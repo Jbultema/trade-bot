@@ -137,11 +137,10 @@ def run_news_monitor(
     *,
     cache_dir: str | Path,
     refresh: bool = False,
-    now: pd.Timestamp | None = None,
+    now: str | pd.Timestamp | None = None,
 ) -> NewsMonitorRun:
     config = load_news_config(config_path)
-    if now is None:
-        now = pd.Timestamp.now(tz="UTC")
+    now = _as_utc_timestamp(now)
     if not config.sources:
         return _empty_news_monitor(config)
 
@@ -240,17 +239,19 @@ def triage_news_items(
     items: tuple[NewsItem, ...],
     *,
     lookback_days: int,
-    now: pd.Timestamp | None = None,
+    now: str | pd.Timestamp | None = None,
 ) -> pd.DataFrame:
-    if now is None:
-        now = pd.Timestamp.now(tz="UTC")
+    now = _as_utc_timestamp(now)
 
     rows: list[dict[str, object]] = []
     min_date = now - pd.Timedelta(days=lookback_days)
     for item in items:
         published_at = _parse_timestamp(item.published_at)
-        if published_at is not None and published_at < min_date:
-            continue
+        if published_at is not None:
+            if published_at > now:
+                continue
+            if published_at < min_date:
+                continue
 
         classification = classify_news_text(f"{item.title}. {item.summary}")
         score = _urgency_score(item, classification, published_at, now)
@@ -475,6 +476,15 @@ def _parse_timestamp(value: str | None) -> pd.Timestamp | None:
     timestamp = pd.Timestamp(value)
     if pd.isna(timestamp):
         return None
+    if timestamp.tzinfo is None:
+        return timestamp.tz_localize("UTC")
+    return timestamp.tz_convert("UTC")
+
+
+def _as_utc_timestamp(value: str | pd.Timestamp | None) -> pd.Timestamp:
+    if value is None:
+        return pd.Timestamp.now(tz="UTC")
+    timestamp = pd.Timestamp(value)
     if timestamp.tzinfo is None:
         return timestamp.tz_localize("UTC")
     return timestamp.tz_convert("UTC")

@@ -86,6 +86,7 @@ def test_run_store_prunes_snapshot_artifacts_after_dry_run(
             events_path=events_path,
             macro_path=macro_path,
             news_path=news_path,
+            auto_prune=False,
         )
         for _ in range(3)
     ]
@@ -125,9 +126,7 @@ def test_run_store_prunes_to_recent_daily_and_older_weekly_snapshots(
         job_log_dir=tmp_path / "jobs",
     )
     market_dates = pd.bdate_range("2026-05-01", "2026-07-15")
-    timestamps = iter(
-        f"{market_date.date()}T20:00:00+00:00" for market_date in market_dates
-    )
+    timestamps = iter(f"{market_date.date()}T20:00:00+00:00" for market_date in market_dates)
     monkeypatch.setattr("trade_bot.storage.run_store.utc_now_iso", lambda: next(timestamps))
     manifests = [
         store.save_snapshot(
@@ -136,6 +135,7 @@ def test_run_store_prunes_to_recent_daily_and_older_weekly_snapshots(
             events_path=events_path,
             macro_path=macro_path,
             news_path=news_path,
+            auto_prune=False,
         )
         for market_date in market_dates
     ]
@@ -158,6 +158,150 @@ def test_run_store_prunes_to_recent_daily_and_older_weekly_snapshots(
     assert older.dt.to_period("W-WED").nunique() == len(older)
     assert len(remaining) == len(recent_dates) + market_dates[:-5].to_period("W-WED").nunique()
     assert all(Path(manifest.artifact_path).exists() for manifest in manifests[-5:])
+
+
+def test_run_store_auto_prunes_duplicate_market_date_snapshots(
+    tmp_path: Path,
+    monkeypatch: object,
+) -> None:
+    config_path, events_path, macro_path, news_path = _config_files(tmp_path)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+    timestamps = iter(
+        [
+            "2026-07-01T00:00:00+00:00",
+            "2026-07-01T12:00:00+00:00",
+            "2026-07-01T20:00:00+00:00",
+        ]
+    )
+    monkeypatch.setattr("trade_bot.storage.run_store.utc_now_iso", lambda: next(timestamps))
+
+    manifests = [
+        store.save_snapshot(
+            _baseline_run("2026-07-01"),
+            config_path=config_path,
+            events_path=events_path,
+            macro_path=macro_path,
+            news_path=news_path,
+        )
+        for _ in range(3)
+    ]
+    remaining = store.list_snapshots(limit=10)
+
+    assert remaining["run_id"].tolist() == [manifests[-1].run_id]
+    assert Path(manifests[-1].artifact_path).exists()
+    assert not Path(manifests[0].artifact_path).exists()
+    assert not Path(manifests[1].artifact_path).exists()
+
+
+def test_run_store_auto_prunes_to_recent_daily_and_older_weekly_snapshots(
+    tmp_path: Path,
+    monkeypatch: object,
+) -> None:
+    config_path, events_path, macro_path, news_path = _config_files(tmp_path)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+    market_dates = pd.bdate_range("2026-06-01", "2026-07-15")
+    timestamps = iter(f"{market_date.date()}T20:00:00+00:00" for market_date in market_dates)
+    monkeypatch.setattr("trade_bot.storage.run_store.utc_now_iso", lambda: next(timestamps))
+
+    for market_date in market_dates:
+        store.save_snapshot(
+            _baseline_run(str(market_date.date())),
+            config_path=config_path,
+            events_path=events_path,
+            macro_path=macro_path,
+            news_path=news_path,
+            prune_keep_latest=0,
+            prune_keep_per_market_date=1,
+            prune_keep_recent_market_days=5,
+            prune_keep_weekly_older=1,
+            prune_weekly_frequency="W-WED",
+        )
+
+    remaining = store.list_snapshots(limit=100)
+    remaining_dates = pd.to_datetime(remaining["market_date"])
+    recent_dates = set(market_dates[-5:].date)
+    older = remaining_dates[~remaining_dates.dt.date.isin(recent_dates)]
+
+    assert remaining["market_date"].duplicated().sum() == 0
+    assert set(remaining_dates.dt.date).issuperset(recent_dates)
+    assert older.dt.to_period("W-WED").nunique() == len(older)
+    assert len(remaining) == len(recent_dates) + market_dates[:-5].to_period("W-WED").nunique()
+
+
+def test_run_store_lists_snapshots_by_market_date_before_created_at(tmp_path: Path) -> None:
+    config_path, events_path, macro_path, news_path = _config_files(tmp_path)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    old_created_later_market = store.save_snapshot(
+        _baseline_run("2026-07-02"),
+        config_path=config_path,
+        events_path=events_path,
+        macro_path=macro_path,
+        news_path=news_path,
+        created_at_utc="2026-07-02T22:00:00+00:00",
+        auto_prune=False,
+    )
+    new_created_earlier_market = store.save_snapshot(
+        _baseline_run("2026-07-01"),
+        config_path=config_path,
+        events_path=events_path,
+        macro_path=macro_path,
+        news_path=news_path,
+        created_at_utc="2026-07-03T22:00:00+00:00",
+        auto_prune=False,
+    )
+
+    snapshots = store.list_snapshots(limit=2)
+
+    assert snapshots["run_id"].tolist() == [
+        old_created_later_market.run_id,
+        new_created_earlier_market.run_id,
+    ]
+
+
+def test_run_store_purges_snapshot_store(tmp_path: Path) -> None:
+    config_path, events_path, macro_path, news_path = _config_files(tmp_path)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+    manifests = [
+        store.save_snapshot(
+            _baseline_run(f"2026-07-0{day}"),
+            config_path=config_path,
+            events_path=events_path,
+            macro_path=macro_path,
+            news_path=news_path,
+            created_at_utc=f"2026-07-0{day}T22:00:00+00:00",
+            auto_prune=False,
+        )
+        for day in range(1, 4)
+    ]
+
+    dry_run = store.purge_snapshots(apply=False)
+    assert len(dry_run) == len(manifests)
+    assert dry_run["pruned"].tolist() == [False, False, False]
+    assert all(Path(manifest.artifact_path).exists() for manifest in manifests)
+
+    applied = store.purge_snapshots(apply=True)
+
+    assert len(applied) == len(manifests)
+    assert applied["pruned"].tolist() == [True, True, True]
+    assert store.list_snapshots(limit=10).empty
+    assert all(not Path(manifest.artifact_path).exists() for manifest in manifests)
 
 
 def test_run_store_starts_daily_update_job(tmp_path: Path, monkeypatch: object) -> None:

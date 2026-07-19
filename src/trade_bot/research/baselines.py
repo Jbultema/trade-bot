@@ -21,6 +21,7 @@ from trade_bot.portfolio.risk import PortfolioRiskRun
 from trade_bot.research.current_state import CurrentStateRun, build_current_state
 from trade_bot.research.event_risk import (
     EventRiskRun,
+    MarketEvent,
     load_market_events,
     run_event_risk_study,
 )
@@ -62,7 +63,9 @@ def run_configured_baselines(
     event_config_path: str | Path | None = DEFAULT_EVENTS_PATH,
     macro_config_path: str | Path | None = DEFAULT_MACRO_PATH,
     news_config_path: str | Path | None = DEFAULT_NEWS_PATH,
+    as_of: str | pd.Timestamp | None = None,
 ) -> BaselineRun:
+    as_of_utc = _as_of_timestamp(as_of)
     prices = load_or_fetch_yahoo_prices(
         configured_tickers(config),
         start=config.data.start,
@@ -122,11 +125,12 @@ def run_configured_baselines(
         macro_data=macro_data,
         macro_catalog=macro_catalog,
     )
-    events = load_market_events(event_config_path)
+    events = _events_as_of(load_market_events(event_config_path), as_of_utc)
     news_monitor = run_news_monitor(
         news_config_path,
         cache_dir=config.data.cache_dir,
         refresh=refresh_news,
+        now=as_of_utc,
     )
     news_monitor = activate_news_events(news_monitor, events)
     event_risk = run_event_risk_study(prices, results, (*events, *news_monitor.activated_events))
@@ -178,3 +182,31 @@ def _strategy_prices(
     columns = list(dict.fromkeys([*tickers, *([defensive_ticker] if defensive_ticker else [])]))
     available = prices[columns].dropna(how="all")
     return available
+
+
+def _as_of_timestamp(value: str | pd.Timestamp | None) -> pd.Timestamp | None:
+    if value is None:
+        return None
+    timestamp = pd.Timestamp(value)
+    if pd.isna(timestamp):
+        return None
+    if timestamp.tzinfo is None:
+        return timestamp.tz_localize("UTC")
+    return timestamp.tz_convert("UTC")
+
+
+def _events_as_of(
+    events: tuple[MarketEvent, ...],
+    as_of_utc: pd.Timestamp | None,
+) -> tuple[MarketEvent, ...]:
+    if as_of_utc is None:
+        return events
+    cutoff_date = as_of_utc.tz_convert("UTC").date()
+    return tuple(event for event in events if _event_date(event) <= cutoff_date)
+
+
+def _event_date(event: MarketEvent) -> object:
+    timestamp = pd.Timestamp(event.date)
+    if timestamp.tzinfo is not None:
+        timestamp = timestamp.tz_convert("UTC")
+    return timestamp.date()

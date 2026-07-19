@@ -27,6 +27,11 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_LATEST,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
+    DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
 )
 from trade_bot.research.baselines import BaselineRun
 
@@ -122,9 +127,18 @@ class RunStore:
         refresh_data: bool = False,
         refresh_macro: bool = False,
         refresh_news: bool = False,
+        created_at_utc: str | None = None,
+        auto_prune: bool = True,
+        prune_keep_latest: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_LATEST,
+        prune_keep_per_market_date: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
+        prune_keep_recent_market_days: int | None = (
+            DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS
+        ),
+        prune_keep_weekly_older: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
+        prune_weekly_frequency: str = DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
     ) -> SnapshotManifest:
         fingerprint = build_snapshot_fingerprint(config_path, events_path, macro_path, news_path)
-        created_at_utc = utc_now_iso()
+        created_at_utc = created_at_utc or utc_now_iso()
         run_id = _new_run_id(created_at_utc, fingerprint)
         artifact_path = self.artifact_dir / f"{run_id}.pkl"
         with artifact_path.open("wb") as handle:
@@ -161,6 +175,15 @@ class RunStore:
             strategy_count=int(len(run.results)),
         )
         self._upsert_manifest(manifest)
+        if auto_prune:
+            self.prune_snapshots(
+                keep_latest=prune_keep_latest,
+                keep_per_market_date=prune_keep_per_market_date,
+                keep_recent_market_days=prune_keep_recent_market_days,
+                keep_weekly_older=prune_keep_weekly_older,
+                weekly_frequency=prune_weekly_frequency,
+                apply=True,
+            )
         return manifest
 
     def load_snapshot(self, run_id: str) -> tuple[BaselineRun, SnapshotManifest]:
@@ -231,7 +254,7 @@ class RunStore:
                 SELECT *
                 FROM run_snapshots
                 WHERE status = 'completed'
-                ORDER BY created_at_utc DESC
+                ORDER BY market_date DESC, created_at_utc DESC, run_id DESC
                 LIMIT ?
                 """,
                 [limit],
@@ -242,11 +265,11 @@ class RunStore:
     def prune_snapshots(
         self,
         *,
-        keep_latest: int = 12,
-        keep_per_market_date: int = 2,
-        keep_recent_market_days: int | None = None,
-        keep_weekly_older: int = 1,
-        weekly_frequency: str = "W-WED",
+        keep_latest: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_LATEST,
+        keep_per_market_date: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
+        keep_recent_market_days: int | None = DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
+        keep_weekly_older: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
+        weekly_frequency: str = DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
         apply: bool = False,
     ) -> pd.DataFrame:
         if keep_latest < 0:
@@ -267,9 +290,14 @@ class RunStore:
             return _empty_prune_frame()
 
         snapshots = snapshots.copy().reset_index(drop=True)
-        snapshots["_rank_all"] = snapshots.index + 1
-        snapshots["_rank_market_date"] = snapshots.groupby("market_date").cumcount() + 1
-        latest_mask = snapshots["_rank_all"] <= keep_latest
+        snapshots["_rank_market_date"] = snapshots.groupby("market_date", sort=False).cumcount() + 1
+        # Keep-latest is market-date scoped so same-day save bursts do not preserve stale artifacts.
+        latest_market_dates = set(
+            snapshots.loc[snapshots["_rank_market_date"] == 1, "market_date"].head(keep_latest)
+        )
+        latest_mask = (snapshots["_rank_market_date"] == 1) & snapshots["market_date"].isin(
+            latest_market_dates
+        )
         if keep_recent_market_days is None:
             retention_mask = latest_mask | (snapshots["_rank_market_date"] <= keep_per_market_date)
         else:
@@ -289,7 +317,9 @@ class RunStore:
             weekly_mask = pd.Series(False, index=snapshots.index)
             if keep_weekly_older > 0 and older_mask.any():
                 weekly_periods = market_dates.dt.to_period(weekly_frequency).astype(str)
-                weekly_ranks = snapshots.loc[older_mask].groupby(weekly_periods[older_mask]).cumcount() + 1
+                weekly_ranks = (
+                    snapshots.loc[older_mask].groupby(weekly_periods[older_mask]).cumcount() + 1
+                )
                 weekly_mask.loc[older_mask] = weekly_ranks <= keep_weekly_older
             retention_mask = latest_mask | recent_market_date_mask | weekly_mask
 
@@ -323,6 +353,58 @@ class RunStore:
                     """
                     DELETE FROM run_snapshots
                     WHERE run_id IN (SELECT run_id FROM snapshot_prune_ids)
+                    """
+                )
+            finally:
+                connection.close()
+            candidates["pruned"] = True
+
+        return candidates[
+            [
+                "created_at_utc",
+                "run_id",
+                "market_date",
+                "risk_status",
+                "artifact_path",
+                "artifact_exists",
+                "artifact_size_bytes",
+                "pruned",
+                "prune_reason",
+            ]
+        ].reset_index(drop=True)
+
+    def purge_snapshots(self, *, apply: bool = False) -> pd.DataFrame:
+        snapshots = self.list_snapshots(limit=100_000)
+        if snapshots.empty:
+            return _empty_prune_frame()
+
+        candidates = snapshots.copy().reset_index(drop=True)
+        artifact_sizes: list[int] = []
+        artifact_exists: list[bool] = []
+        safe_paths: list[Path] = []
+        for artifact_path_string in candidates["artifact_path"]:
+            artifact_path = self._safe_artifact_path_for_prune(str(artifact_path_string))
+            safe_paths.append(artifact_path)
+            artifact_exists.append(artifact_path.exists())
+            artifact_sizes.append(artifact_path.stat().st_size if artifact_path.exists() else 0)
+
+        candidates["artifact_exists"] = artifact_exists
+        candidates["artifact_size_bytes"] = artifact_sizes
+        candidates["pruned"] = False
+        candidates["prune_reason"] = "snapshot_store_rebuild_purge"
+
+        if apply:
+            for artifact_path in safe_paths:
+                if artifact_path.exists():
+                    artifact_path.unlink()
+            run_ids = candidates[["run_id"]].copy()
+            connection = self._connect()
+            try:
+                connection.register("snapshot_purge_ids", run_ids)
+                connection.execute(
+                    """
+                    DELETE FROM run_snapshots
+                    WHERE run_id IN (SELECT run_id FROM snapshot_purge_ids)
                     """
                 )
             finally:

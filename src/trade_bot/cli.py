@@ -51,6 +51,14 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
     DEFAULT_SIGNAL_EVIDENCE_DIR,
     DEFAULT_SIMULATION_REFERENCE_STRATEGIES,
+    DEFAULT_SNAPSHOT_BACKFILL_DAILY_TAIL_DAYS,
+    DEFAULT_SNAPSHOT_BACKFILL_MARKET_CLOSE_UTC_HOUR,
+    DEFAULT_SNAPSHOT_BACKFILL_YEARS,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_LATEST,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
+    DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
 )
 from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
@@ -107,6 +115,11 @@ from trade_bot.research.signal_evidence import (
     build_signal_family_evidence,
     build_signal_family_marginal_tests,
     tag_scorecard_signal_families,
+)
+from trade_bot.research.snapshot_backfill import (
+    SnapshotBackfillPlan,
+    build_snapshot_backfill_plan,
+    snapshot_created_at_for_market_date,
 )
 from trade_bot.research.upside_capture import (
     DEFAULT_UPSIDE_CAPTURE_OUTPUT_DIR,
@@ -582,29 +595,35 @@ def prune_snapshots_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
     artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
     job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
-    keep_latest: Annotated[int, typer.Option("--keep-latest")] = 12,
-    keep_per_market_date: Annotated[int, typer.Option("--keep-per-market-date")] = 1,
+    keep_latest: Annotated[
+        int,
+        typer.Option("--keep-latest"),
+    ] = DEFAULT_SNAPSHOT_RETENTION_KEEP_LATEST,
+    keep_per_market_date: Annotated[
+        int,
+        typer.Option("--keep-per-market-date"),
+    ] = DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
     keep_recent_market_days: Annotated[
         int,
         typer.Option(
             "--keep-recent-market-days",
             help="Keep this many recent market dates at daily granularity.",
         ),
-    ] = 30,
+    ] = DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
     keep_weekly_older: Annotated[
         int,
         typer.Option(
             "--keep-weekly-older",
             help="Keep this many snapshots per older weekly bucket.",
         ),
-    ] = 1,
+    ] = DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
     weekly_frequency: Annotated[
         str,
         typer.Option(
             "--weekly-frequency",
             help="Weekly retention bucket frequency for older snapshots.",
         ),
-    ] = "W-WED",
+    ] = DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
     apply: Annotated[
         bool,
         typer.Option(
@@ -665,6 +684,152 @@ def prune_snapshots_cmd(
             str(bool(row["pruned"])),
         )
     console.print(table)
+
+
+@app.command("backfill-snapshots")
+def backfill_snapshots_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    events: Annotated[Path, typer.Option("--events")] = DEFAULT_EVENTS_PATH,
+    macro: Annotated[Path, typer.Option("--macro")] = DEFAULT_MACRO_PATH,
+    news: Annotated[Path, typer.Option("--news")] = DEFAULT_NEWS_PATH,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+    refresh_macro: Annotated[bool, typer.Option("--refresh-macro")] = False,
+    refresh_news: Annotated[bool, typer.Option("--refresh-news")] = False,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    start_date: Annotated[str | None, typer.Option("--start-date")] = None,
+    end_date: Annotated[str | None, typer.Option("--end-date")] = None,
+    years: Annotated[int, typer.Option("--years")] = DEFAULT_SNAPSHOT_BACKFILL_YEARS,
+    daily_tail_days: Annotated[
+        int,
+        typer.Option("--daily-tail-days", help="Keep all available market dates in this tail."),
+    ] = DEFAULT_SNAPSHOT_BACKFILL_DAILY_TAIL_DAYS,
+    weekly_frequency: Annotated[
+        str,
+        typer.Option(
+            "--weekly-frequency",
+            help="Weekly bucket for older snapshots; the latest available date per bucket is used.",
+        ),
+    ] = DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
+    market_close_utc_hour: Annotated[
+        int,
+        typer.Option("--market-close-utc-hour"),
+    ] = DEFAULT_SNAPSHOT_BACKFILL_MARKET_CLOSE_UTC_HOUR,
+    max_snapshots: Annotated[int | None, typer.Option("--max-snapshots")] = None,
+    purge_existing: Annotated[
+        bool,
+        typer.Option(
+            "--purge-existing/--keep-existing",
+            help="Delete existing snapshot artifacts and manifest rows before rebuilding.",
+        ),
+    ] = False,
+    plan_only: Annotated[
+        bool,
+        typer.Option("--plan-only/--run", help="Print the rebuild schedule without writing."),
+    ] = False,
+) -> None:
+    """Rebuild historical snapshots with daily recent and weekly older retention."""
+
+    bot_config = load_config(config)
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    prices = load_or_fetch_yahoo_prices(
+        configured_tickers(bot_config),
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        adjusted=bot_config.data.adjusted,
+        refresh=refresh_data,
+    )
+    plan = build_snapshot_backfill_plan(
+        prices.index,
+        start_date=start_date,
+        end_date=end_date,
+        years=years,
+        daily_tail_days=daily_tail_days,
+        weekly_frequency=weekly_frequency,
+    )
+    selected_dates = plan.market_dates
+    if max_snapshots is not None:
+        if max_snapshots <= 0:
+            msg = "max_snapshots must be positive when provided."
+            raise typer.BadParameter(msg)
+        selected_dates = selected_dates[-max_snapshots:]
+
+    _print_snapshot_backfill_plan(
+        plan,
+        selected_dates=selected_dates,
+        purge_existing=purge_existing,
+        plan_only=plan_only,
+    )
+    if plan_only:
+        return
+
+    purged = run_store.purge_snapshots(apply=True) if purge_existing else pd.DataFrame()
+    if purge_existing:
+        console.print(_snapshot_delete_summary("Purged existing snapshots", purged))
+
+    saved_manifests: list[SnapshotManifest] = []
+    total = len(selected_dates)
+    for index, market_date in enumerate(selected_dates, start=1):
+        market_date_text = str(market_date.date())
+        historical_config = bot_config.model_copy(
+            update={
+                "data": bot_config.data.model_copy(
+                    update={"end": market_date_text},
+                )
+            }
+        )
+        created_at_utc = snapshot_created_at_for_market_date(
+            market_date,
+            market_close_utc_hour=market_close_utc_hour,
+        )
+        baseline_run = run_configured_baselines(
+            historical_config,
+            refresh_data=False,
+            refresh_macro=refresh_macro,
+            refresh_news=refresh_news,
+            event_config_path=events,
+            macro_config_path=macro,
+            news_config_path=news,
+            as_of=created_at_utc,
+        )
+        manifest = run_store.save_snapshot(
+            baseline_run,
+            config_path=config,
+            events_path=events,
+            macro_path=macro,
+            news_path=news,
+            refresh_data=False,
+            refresh_macro=refresh_macro,
+            refresh_news=refresh_news,
+            created_at_utc=created_at_utc,
+            auto_prune=False,
+        )
+        saved_manifests.append(manifest)
+        console.print(
+            f"[{index:,}/{total:,}] saved {manifest.market_date} "
+            f"{manifest.risk_status} {manifest.run_id}"
+        )
+
+    recent_market_days = _selected_daily_market_day_count(
+        selected_dates,
+        daily_cutoff_date=plan.daily_cutoff_date,
+    )
+    final_prune = run_store.prune_snapshots(
+        keep_latest=0,
+        keep_per_market_date=DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
+        keep_recent_market_days=recent_market_days,
+        keep_weekly_older=DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
+        weekly_frequency=weekly_frequency,
+        apply=True,
+    )
+    console.print(_snapshot_delete_summary("Final retention prune", final_prune))
+    console.print(
+        f"Backfill complete: saved {len(saved_manifests):,} snapshot(s) from "
+        f"{saved_manifests[0].market_date if saved_manifests else 'n/a'} to "
+        f"{saved_manifests[-1].market_date if saved_manifests else 'n/a'}."
+    )
 
 
 @app.command("list-snapshot-jobs")
@@ -1438,7 +1603,9 @@ def run_cycle_tracker_cmd(
     ] = "0m,1m,3m,6m,1y",
     min_train_days: Annotated[
         int,
-        typer.Option("--min-train-days", help="Minimum prior trading days before validation origins."),
+        typer.Option(
+            "--min-train-days", help="Minimum prior trading days before validation origins."
+        ),
     ] = DEFAULT_PHASE_MIN_TRAIN_DAYS,
     origin_step_days: Annotated[
         int,
@@ -1460,7 +1627,9 @@ def run_cycle_tracker_cmd(
     run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
     snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
     if snapshot_payload is None:
-        console.print("No completed snapshots found. Build a snapshot before running the cycle tracker.")
+        console.print(
+            "No completed snapshots found. Build a snapshot before running the cycle tracker."
+        )
         raise typer.Exit(code=1)
     baseline_run, manifest = snapshot_payload
     prices = getattr(baseline_run, "prices", pd.DataFrame())
@@ -1557,10 +1726,9 @@ def run_cycle_tracker_cmd(
         frontier_table = Table(title="Top Scenario / Phase Winners")
         for column in ["horizon", "phase", "ticker", "role", "score", "excess vs QQQ"]:
             frontier_table.add_column(column)
-        top_frontier = (
-            result.phase_candidate_frontier[result.phase_candidate_frontier["rank"].eq(1)]
-            .head(16)
-        )
+        top_frontier = result.phase_candidate_frontier[
+            result.phase_candidate_frontier["rank"].eq(1)
+        ].head(16)
         for _, row in top_frontier.iterrows():
             frontier_table.add_row(
                 str(row["horizon"]),
@@ -1627,14 +1795,10 @@ def audit_defensive_judgement_cmd(
     store = RunStore()
     baseline_run, _manifest = store.load_latest_snapshot(require_matching_config=False)
     strategy_names = [
-        strategy.strip()
-        for strategy in strategies.split(",")
-        if strategy.strip()
+        strategy.strip() for strategy in strategies.split(",") if strategy.strip()
     ] or None
     benchmark_tickers = [
-        benchmark.strip().upper()
-        for benchmark in benchmarks.split(",")
-        if benchmark.strip()
+        benchmark.strip().upper() for benchmark in benchmarks.split(",") if benchmark.strip()
     ] or ["SPY"]
     outputs = write_defensive_judgement_report(
         results=baseline_run.results,
@@ -1680,9 +1844,7 @@ def audit_backtest_qc_cmd(
         refresh=refresh_data,
     )
     benchmark_tickers = tuple(
-        benchmark.strip().upper()
-        for benchmark in benchmarks.split(",")
-        if benchmark.strip()
+        benchmark.strip().upper() for benchmark in benchmarks.split(",") if benchmark.strip()
     ) or ("SPY", "QQQ")
     gauntlet = run_backtest_qc_gauntlet(
         config=bot_config,
@@ -1749,9 +1911,7 @@ def run_leadership_diagnostics_cmd(
 
     bot_config = load_config(config)
     strategy_names = tuple(
-        strategy.strip()
-        for strategy in strategies.split(",")
-        if strategy.strip()
+        strategy.strip() for strategy in strategies.split(",") if strategy.strip()
     )
     tickers = leadership_candidate_tickers(
         bot_config,
@@ -1768,9 +1928,7 @@ def run_leadership_diagnostics_cmd(
         refresh=refresh_data,
     )
     horizons = tuple(
-        int(value.strip())
-        for value in router_horizons.split(",")
-        if value.strip()
+        int(value.strip()) for value in router_horizons.split(",") if value.strip()
     ) or (21, 63, 126)
     result = run_leadership_diagnostics(
         config=bot_config,
@@ -1865,9 +2023,7 @@ def audit_backtest_pbo_cmd(
 
     bot_config = load_config(config)
     strategy_names = tuple(
-        strategy.strip()
-        for strategy in strategies.split(",")
-        if strategy.strip()
+        strategy.strip() for strategy in strategies.split(",") if strategy.strip()
     )
     tickers = set(configured_tickers(bot_config)) | pbo_candidate_tickers(
         bot_config,
@@ -1987,7 +2143,9 @@ def seed_operating_history_cmd(
         try:
             snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
         except (FileNotFoundError, TypeError, OSError, AttributeError, ValueError) as error:
-            console.print(f"Could not load latest snapshot; falling back to baseline recompute: {error}")
+            console.print(
+                f"Could not load latest snapshot; falling back to baseline recompute: {error}"
+            )
     if snapshot_payload is not None:
         baseline_run, manifest = snapshot_payload
         source_label = f"latest snapshot {manifest.run_id}"
@@ -2153,9 +2311,7 @@ def prioritize_42macro_transcripts_cmd(
     console.print(f"Wrote {len(priority):,} missing transcript priorities: {path}")
     if not priority.empty:
         console.print(
-            priority[
-                ["priority_score", "published_date", "video_id", "title", "transcript_url"]
-            ]
+            priority[["priority_score", "published_date", "video_id", "title", "transcript_url"]]
             .head(top_n)
             .to_string(index=False)
         )
@@ -2958,9 +3114,7 @@ def _stop_dashboard_from_pid_file(
 ) -> bool:
     stopped = False
     pid = _read_pid_file(pid_path)
-    if pid is None:
-        pid_path.unlink(missing_ok=True)
-    elif not _process_exists(pid):
+    if pid is None or not _process_exists(pid):
         pid_path.unlink(missing_ok=True)
     else:
         stopped = _stop_dashboard_pid(pid, timeout_seconds=timeout_seconds, force=force)
@@ -3092,6 +3246,54 @@ def _print_migration_table(title: str, results: list[WarehouseMigrationResult]) 
             str(result.table_name),
         )
     console.print(table)
+
+
+def _print_snapshot_backfill_plan(
+    plan: SnapshotBackfillPlan,
+    *,
+    selected_dates: tuple[pd.Timestamp, ...],
+    purge_existing: bool,
+    plan_only: bool,
+) -> None:
+    selected_index = pd.DatetimeIndex(selected_dates)
+    daily_cutoff = pd.Timestamp(plan.daily_cutoff_date)
+    daily_count = int((selected_index >= daily_cutoff).sum()) if len(selected_index) else 0
+    weekly_count = len(selected_dates) - daily_count
+    table = Table(title="Snapshot Backfill Plan")
+    table.add_column("field")
+    table.add_column("value")
+    table.add_row("mode", "plan only" if plan_only else "run")
+    table.add_row("purge existing", str(purge_existing))
+    table.add_row("start date", plan.start_date)
+    table.add_row("end date", plan.end_date)
+    table.add_row("daily cutoff date", plan.daily_cutoff_date)
+    table.add_row("weekly frequency", plan.weekly_frequency)
+    table.add_row("selected snapshots", f"{len(selected_dates):,}")
+    table.add_row("older weekly snapshots", f"{weekly_count:,}")
+    table.add_row("recent daily snapshots", f"{daily_count:,}")
+    if selected_dates:
+        table.add_row("first selected", str(selected_dates[0].date()))
+        table.add_row("last selected", str(selected_dates[-1].date()))
+    console.print(table)
+
+
+def _snapshot_delete_summary(title: str, candidates: pd.DataFrame) -> str:
+    if candidates.empty:
+        return f"{title}: no snapshots deleted."
+    total_mb = float(candidates["artifact_size_bytes"].sum()) / (1024 * 1024)
+    return f"{title}: deleted {len(candidates):,} snapshot(s), {total_mb:,.1f} MB."
+
+
+def _selected_daily_market_day_count(
+    selected_dates: tuple[pd.Timestamp, ...],
+    *,
+    daily_cutoff_date: str,
+) -> int:
+    if not selected_dates:
+        return 0
+    selected_index = pd.DatetimeIndex(selected_dates).normalize()
+    daily_cutoff = pd.Timestamp(daily_cutoff_date).normalize()
+    return int((selected_index >= daily_cutoff).sum())
 
 
 def _print_snapshot_manifest(manifest: SnapshotManifest) -> None:

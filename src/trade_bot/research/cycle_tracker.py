@@ -400,6 +400,12 @@ def build_cycle_feature_snapshot(prices: pd.DataFrame) -> dict[str, object]:
         _threshold_score(-smh_63, calm=-0.04, stressed=0.25),
         _threshold_score(-smh_drawdown, calm=0.06, stressed=0.25),
     )
+    cycle_leadership_fragility = _weighted_mean(
+        (concentration_pressure, 0.30),
+        (qqq_unwind, 0.25),
+        (smh_unwind, 0.30),
+        (volatility_pressure, 0.15),
+    )
     market_liquidation = _average_scores(
         _threshold_score(-spy_63, calm=-0.03, stressed=0.16),
         _threshold_score(-spy_drawdown, calm=0.03, stressed=0.18),
@@ -490,6 +496,7 @@ def build_cycle_feature_snapshot(prices: pd.DataFrame) -> dict[str, object]:
             "large_move_pressure": large_move_pressure,
             "qqq_unwind": qqq_unwind,
             "smh_unwind": smh_unwind,
+            "cycle_leadership_fragility": cycle_leadership_fragility,
             "market_liquidation": market_liquidation,
             "deep_drawdown": deep_drawdown,
             "short_reversal": short_reversal,
@@ -1349,6 +1356,8 @@ def build_cycle_candidate_scores(
 ) -> pd.DataFrame:
     clean = _clean_prices(prices)
     dominant_phase = _dominant_phase_from_probabilities(phase_probabilities)
+    current_feature = build_cycle_feature_snapshot(clean)
+    cycle_leadership_fragility = _cycle_leadership_fragility_score(current_feature)
     latest = clean.iloc[-1]
     rows: list[dict[str, object]] = []
     for ticker in tickers:
@@ -1374,25 +1383,63 @@ def build_cycle_candidate_scores(
         )
         drawdown_penalty = _threshold_score(-drawdown_252, calm=0.05, stressed=0.30)
         role = _asset_role(ticker)
+        exposure_family = _exposure_family(ticker, role)
         phase_fit = _phase_role_fit(dominant_phase, role)
+        origins = int(metrics.get("origins", 0)) if metrics is not None else 0
+        phase_distinctiveness = _phase_distinctiveness_score(
+            validation_metrics,
+            phase=dominant_phase,
+            ticker=ticker,
+            horizon_days=horizon_days,
+        )
+        ubiquity_penalty = _phase_ubiquity_penalty(
+            validation_metrics,
+            phase=dominant_phase,
+            ticker=ticker,
+            horizon_days=horizon_days,
+        )
+        theme_fragility_penalty = _theme_fragility_penalty(
+            dominant_phase,
+            role,
+            exposure_family=exposure_family,
+            horizon_days=horizon_days,
+            origins=origins,
+            cycle_leadership_fragility=cycle_leadership_fragility,
+        )
         candidate_score = (
-            0.45 * validation_score
-            + 0.25 * momentum_score
-            + 0.20 * phase_fit
+            0.38 * validation_score
+            + 0.18 * phase_fit
+            + 0.12 * phase_distinctiveness
+            + 0.12 * momentum_score
             - 0.10 * drawdown_penalty
+            - ubiquity_penalty
+            - theme_fragility_penalty
+        )
+        candidate_role = _candidate_role(candidate_score, dominant_phase, role)
+        candidate_role = _apply_fragility_role_guard(
+            candidate_role,
+            dominant_phase,
+            role,
+            horizon_days=horizon_days,
+            theme_fragility_penalty=theme_fragility_penalty,
         )
         rows.append(
             {
                 "ticker": ticker,
                 "asset_role": role,
+                "exposure_family": exposure_family,
                 "current_phase": dominant_phase,
                 "horizon": _horizon_label(horizon_days),
                 "horizon_days": int(horizon_days),
                 "candidate_score": float(candidate_score),
-                "candidate_role": _candidate_role(candidate_score, dominant_phase, role),
+                "candidate_role": candidate_role,
                 "current_momentum_21d": momentum_21,
                 "current_momentum_63d": momentum_63,
                 "current_drawdown_252d": drawdown_252,
+                "phase_distinctiveness": phase_distinctiveness,
+                "ubiquity_penalty": ubiquity_penalty,
+                "cycle_leadership_fragility": cycle_leadership_fragility,
+                "theme_fragility_penalty": theme_fragility_penalty,
                 "phase_forward_median_return": (
                     _safe_float(metrics.get("median_forward_return"), default=np.nan)
                     if metrics is not None
@@ -1418,9 +1465,7 @@ def build_cycle_candidate_scores(
                     if metrics is not None
                     else np.nan
                 ),
-                "phase_origins": (
-                    int(metrics.get("origins", 0)) if metrics is not None else 0
-                ),
+                "phase_origins": origins,
                 "interpretation": _candidate_interpretation(ticker, dominant_phase, role),
             }
         )
@@ -1454,6 +1499,8 @@ def build_phase_candidate_frontier(
     if not tickers:
         return pd.DataFrame()
 
+    current_feature = build_cycle_feature_snapshot(clean)
+    cycle_leadership_fragility = _cycle_leadership_fragility_score(current_feature)
     as_of_date = ""
     if not phase_probabilities.empty and "as_of_date" in phase_probabilities:
         as_of_values = phase_probabilities["as_of_date"].dropna().astype(str)
@@ -1507,19 +1554,35 @@ def build_phase_candidate_frontier(
             )
             drawdown_penalty = _threshold_score(-drawdown_252, calm=0.05, stressed=0.30)
             phase_fit = _phase_role_fit(phase, role)
+            phase_distinctiveness = _phase_distinctiveness_score(
+                validation_metrics,
+                phase=phase,
+                ticker=ticker,
+                horizon_days=horizon_days,
+            )
+            ubiquity_penalty = _phase_ubiquity_penalty(
+                validation_metrics,
+                phase=phase,
+                ticker=ticker,
+                horizon_days=horizon_days,
+            )
             theme_fragility_penalty = _theme_fragility_penalty(
                 phase,
                 role,
+                exposure_family=exposure_family,
                 horizon_days=horizon_days,
                 origins=origins,
+                cycle_leadership_fragility=cycle_leadership_fragility,
             )
             frontier_score = (
-                0.40 * validation_score
-                + 0.20 * phase_fit
-                + 0.15 * momentum_score
+                0.35 * validation_score
+                + 0.18 * phase_fit
+                + 0.10 * phase_distinctiveness
+                + 0.10 * momentum_score
                 + 0.15 * phase_probability
                 - 0.10 * drawdown_penalty
                 - origin_penalty
+                - ubiquity_penalty
                 - theme_fragility_penalty
             )
             evidence_quality = _evidence_quality(origins)
@@ -1529,6 +1592,23 @@ def build_phase_candidate_frontier(
                 origin_penalty=origin_penalty,
                 momentum_score=momentum_score,
                 drawdown_penalty=drawdown_penalty,
+                theme_fragility_penalty=theme_fragility_penalty,
+                cycle_leadership_fragility=cycle_leadership_fragility,
+                phase_distinctiveness=phase_distinctiveness,
+                ubiquity_penalty=ubiquity_penalty,
+            )
+            frontier_role = _candidate_role(
+                frontier_score,
+                phase,
+                role,
+                horizon_days=horizon_days,
+                origins=origins,
+            )
+            frontier_role = _apply_fragility_role_guard(
+                frontier_role,
+                phase,
+                role,
+                horizon_days=horizon_days,
                 theme_fragility_penalty=theme_fragility_penalty,
             )
             rows.append(
@@ -1545,21 +1625,18 @@ def build_phase_candidate_frontier(
                     "validation_score_raw": validation_score_raw,
                     "validation_score": validation_score,
                     "phase_role_fit": phase_fit,
+                    "phase_distinctiveness": phase_distinctiveness,
+                    "ubiquity_penalty": ubiquity_penalty,
                     "origin_confidence": origin_confidence,
                     "origin_penalty": origin_penalty,
                     "momentum_score": momentum_score,
                     "drawdown_penalty": drawdown_penalty,
+                    "cycle_leadership_fragility": cycle_leadership_fragility,
                     "theme_fragility_penalty": theme_fragility_penalty,
                     "evidence_quality": evidence_quality,
                     "evidence_flags": evidence_flags,
                     "phase_window_role": _phase_window_role(phase, horizon_days),
-                    "frontier_role": _candidate_role(
-                        frontier_score,
-                        phase,
-                        role,
-                        horizon_days=horizon_days,
-                        origins=origins,
-                    ),
+                    "frontier_role": frontier_role,
                     "current_momentum_21d": momentum_21,
                     "current_momentum_63d": momentum_63,
                     "current_drawdown_252d": drawdown_252,
@@ -1820,28 +1897,132 @@ def _evidence_quality(origins: int) -> str:
     return "one_off_sample"
 
 
+def _cycle_leadership_fragility_score(feature: Mapping[str, object]) -> float:
+    components = dict(feature.get("components", {}))
+    raw = _safe_float(components.get("cycle_leadership_fragility"), default=0.0)
+    return _threshold_score(raw, calm=0.45, stressed=0.80)
+
+
+def _phase_distinctiveness_score(
+    validation_metrics: pd.DataFrame,
+    *,
+    phase: str,
+    ticker: str,
+    horizon_days: int,
+) -> float:
+    if validation_metrics.empty or "phase_rank_score" not in validation_metrics:
+        return 0.5
+    frame = validation_metrics.copy()
+    frame["horizon_days"] = pd.to_numeric(frame["horizon_days"], errors="coerce")
+    frame["phase_rank_score"] = pd.to_numeric(frame["phase_rank_score"], errors="coerce")
+    matches = frame[
+        frame["ticker"].astype(str).eq(str(ticker))
+        & frame["horizon_days"].eq(int(horizon_days))
+    ].dropna(subset=["phase_rank_score"])
+    if matches.empty:
+        return 0.5
+    selected = matches[matches["dominant_phase"].astype(str).eq(str(phase))]
+    if selected.empty:
+        return 0.5
+    selected_score = float(selected["phase_rank_score"].max())
+    other_scores = matches.loc[
+        ~matches["dominant_phase"].astype(str).eq(str(phase)),
+        "phase_rank_score",
+    ]
+    if other_scores.empty:
+        return 0.5
+    spread = selected_score - float(other_scores.median())
+    return _threshold_score(spread, calm=-0.04, stressed=0.12)
+
+
+def _phase_ubiquity_penalty(
+    validation_metrics: pd.DataFrame,
+    *,
+    phase: str,
+    ticker: str,
+    horizon_days: int,
+) -> float:
+    if validation_metrics.empty or "phase_rank_score" not in validation_metrics:
+        return 0.0
+    frame = validation_metrics.copy()
+    frame["horizon_days"] = pd.to_numeric(frame["horizon_days"], errors="coerce")
+    frame["phase_rank_score"] = pd.to_numeric(frame["phase_rank_score"], errors="coerce")
+    matches = frame[
+        frame["ticker"].astype(str).eq(str(ticker))
+        & frame["horizon_days"].eq(int(horizon_days))
+    ].dropna(subset=["phase_rank_score"])
+    if matches["dominant_phase"].nunique() < 4:
+        return 0.0
+    selected = matches[matches["dominant_phase"].astype(str).eq(str(phase))]
+    if selected.empty:
+        return 0.0
+    selected_score = float(selected["phase_rank_score"].max())
+    other_scores = matches.loc[
+        ~matches["dominant_phase"].astype(str).eq(str(phase)),
+        "phase_rank_score",
+    ]
+    near_selected = int(other_scores.ge(selected_score - 0.03).sum())
+    broadly_strong = int(other_scores.ge(0.20).sum())
+    if near_selected >= 4 or broadly_strong >= 5:
+        return 0.08
+    if near_selected >= 3 or broadly_strong >= 4:
+        return 0.05
+    if near_selected >= 2 or broadly_strong >= 3:
+        return 0.025
+    return 0.0
+
+
 def _theme_fragility_penalty(
     phase: str,
     role: str,
     *,
+    exposure_family: str,
     horizon_days: int,
     origins: int,
+    cycle_leadership_fragility: float,
 ) -> float:
-    if role != "ai_growth":
+    exposure_weight = _cycle_leader_exposure_weight(exposure_family, role)
+    if exposure_weight <= 0.0:
         return 0.0
+    fragility = float(np.clip(cycle_leadership_fragility, 0.0, 1.0))
     if phase == "liquidation":
-        base = 0.16 if horizon_days <= 63 else 0.08
+        base = 0.12 if horizon_days <= 63 else 0.06
+        dynamic = 0.20 if horizon_days <= 63 else 0.10
     elif phase == "early_unwind":
-        base = 0.14 if horizon_days <= 63 else 0.07
+        base = 0.10 if horizon_days <= 63 else 0.05
+        dynamic = 0.18 if horizon_days <= 63 else 0.09
     elif phase == "pre_break":
-        base = 0.08
+        base = 0.06
+        dynamic = 0.14
     elif phase == "normal_cycle" and origins < FRONTIER_MIN_SCALE_ORIGINS:
         base = 0.04
+        dynamic = 0.03
+    elif phase == "acceleration" and fragility >= 0.65:
+        base = 0.00
+        dynamic = 0.05
+    elif phase in {"bottoming", "recovery"} and horizon_days <= 63 and fragility >= 0.75:
+        base = 0.00
+        dynamic = 0.04
     else:
         return 0.0
     if origins <= FRONTIER_ONE_OFF_ORIGINS:
         base += 0.04
-    return float(base)
+    return float((base + dynamic * fragility) * exposure_weight)
+
+
+def _cycle_leader_exposure_weight(exposure_family: str, role: str) -> float:
+    family = str(exposure_family)
+    if family == "ai_compute_semis":
+        return 1.0
+    if family == "ai_software_cloud":
+        return 0.85
+    if family == "ai_platforms":
+        return 0.75
+    if family == "mega_cap_growth_index":
+        return 0.60
+    if role == "ai_growth":
+        return 0.50
+    return 0.0
 
 
 def _frontier_evidence_flags(
@@ -1852,6 +2033,9 @@ def _frontier_evidence_flags(
     momentum_score: float,
     drawdown_penalty: float,
     theme_fragility_penalty: float,
+    cycle_leadership_fragility: float,
+    phase_distinctiveness: float,
+    ubiquity_penalty: float,
 ) -> str:
     flags: list[str] = []
     if origins < FRONTIER_MIN_SCALE_ORIGINS:
@@ -1862,11 +2046,40 @@ def _frontier_evidence_flags(
         flags.append("sample_penalty")
     if theme_fragility_penalty > 0.0:
         flags.append("ai_fragility_conflict")
+    if theme_fragility_penalty >= 0.08 or (
+        theme_fragility_penalty > 0.0 and cycle_leadership_fragility >= 0.60
+    ):
+        flags.append("cycle_leader_unwind_risk")
+    if phase_distinctiveness < 0.35:
+        flags.append("weak_phase_specificity")
+    if ubiquity_penalty > 0.0:
+        flags.append("ubiquitous_winner")
     if origins < FRONTIER_ROBUST_ORIGINS and momentum_score >= 0.85:
         flags.append("current_momentum_dominated")
     if drawdown_penalty >= 0.60:
         flags.append("drawdown_risk")
     return "; ".join(flags) if flags else "none"
+
+
+def _apply_fragility_role_guard(
+    role_label: str,
+    phase: str,
+    role: str,
+    *,
+    horizon_days: int,
+    theme_fragility_penalty: float,
+) -> str:
+    if role != "ai_growth" or phase not in {"pre_break", "early_unwind", "liquidation"}:
+        return role_label
+    if theme_fragility_penalty >= 0.18 and horizon_days <= 63:
+        return "avoid"
+    if theme_fragility_penalty >= 0.10 and role_label in {
+        "scale_candidate",
+        "starter_reentry",
+        "scale_reentry",
+    }:
+        return "watch"
+    return role_label
 
 
 def _frontier_family_cap(exposure_family: str) -> int:

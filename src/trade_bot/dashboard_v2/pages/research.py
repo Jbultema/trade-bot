@@ -300,10 +300,10 @@ def _render_validation_artifacts() -> None:
 
 
 def _render_cycle_tracker() -> None:
-    render_section_header("Scenario / Phase Frontier")
+    render_section_header("Cycle Path Frontier")
     st.caption(
-        "Research/watch layer for speculative-cycle phases, horizon phase probabilities, "
-        "and conditional winners. This view reads persisted artifacts only."
+        "Zoom-out research layer for speculative-cycle path phases, horizon probabilities, "
+        "and historical analog winners. This view reads persisted artifacts only."
     )
     frames = cycle_tracker_frames()
     phase = frames["phase_probabilities"]
@@ -343,7 +343,7 @@ def _render_cycle_tracker() -> None:
         ]
     )
     render_callout(
-        "Cycle Tracker is not a crash timer or allocation override. It asks which speculative-cycle phase the current market resembles, which phases are plausible by horizon, and which assets historically performed better in similar prior states.",
+        "Cycle Tracker is a zoom-out cycle map, not a risk-budget or allocation override. It asks which larger speculative-cycle phase the current market resembles, which phases are plausible by horizon, and which assets historically worked in similar prior states.",
     )
     _render_current_phase_candidates_expander(candidates)
 
@@ -378,7 +378,7 @@ def _render_cycle_tracker() -> None:
         render_section_header("0M Nowcast Phase Probabilities")
         render_chart(
             _phase_frontier_figure(phase),
-            title="Scenario / Phase Frontier",
+            title="Cycle Phase Nowcast Frontier",
             key="dashboard_v2_cycle_nowcast_phase_frontier_chart",
         )
 
@@ -442,8 +442,13 @@ def _render_current_phase_candidates_expander(candidates: pd.DataFrame) -> None:
         for column in [
             "ticker",
             "asset_role",
+            "exposure_family",
             "candidate_role",
             "candidate_score",
+            "phase_distinctiveness",
+            "ubiquity_penalty",
+            "cycle_leadership_fragility",
+            "theme_fragility_penalty",
             "current_momentum_21d",
             "current_momentum_63d",
             "phase_forward_median_return",
@@ -456,7 +461,7 @@ def _render_current_phase_candidates_expander(candidates: pd.DataFrame) -> None:
     ]
     display = candidates[candidate_columns] if candidate_columns else candidates
     with st.expander(
-        f"Current-phase conditional candidates ({len(candidates):,})",
+        f"Current-phase analog candidates ({len(candidates):,})",
         expanded=False,
     ):
         _render_metric_dataframe(_display_metrics(display.head(30)))
@@ -532,14 +537,14 @@ def _render_path_phase_behavior_inspector(
     validation: pd.DataFrame,
 ) -> None:
     render_section_header(
-        "Path Phase Behavior Inspector",
+        "Cycle Path Behavior Inspector",
         help_text=(
             "Select a horizon and phase from the path-aware forecast to inspect expected return, "
-            "drawdown, benchmark excess, and the conditional winner set for that slice."
+            "drawdown, benchmark excess, and the historical analog winner set for that slice."
         ),
     )
     st.caption(
-        "Use this paired view to ask: if this horizon/phase dominates, what has usually happened next and which assets ranked best in similar prior states?"
+        "Use this paired view to ask: if this larger cycle phase dominates, what has usually happened next and which assets ranked best in similar prior states?"
     )
     forecast = path_forecast.copy()
     if "horizon_days" in forecast:
@@ -656,13 +661,13 @@ def _render_path_phase_behavior_inspector(
             (
                 "Top Frontier Asset",
                 top_ticker,
-                "Highest-ranked ticker in the current conditional winner frontier for this phase.",
+                "Highest-ranked ticker in the historical analog winner frontier for this phase.",
             ),
         ]
     )
     render_callout(
         f"For {selected_horizon} `{selected_phase}`, the inspector combines the current path probability "
-        "with prior-only historical outcome behavior and the current conditional winner frontier. Treat this as scenario planning, not an allocation override."
+        "with prior-only historical outcome behavior and the current historical analog winner frontier. Treat this as cycle analog research, not an allocation override."
     )
 
     outcome_figure = _phase_outcome_profile_figure(validation_slice, phase=selected_phase)
@@ -680,7 +685,7 @@ def _render_path_phase_behavior_inspector(
             )
         with right:
             if frontier_slice.empty:
-                st.info("No conditional winner frontier rows are available for this slice.")
+                st.info("No historical analog winner frontier rows are available for this slice.")
             else:
                 render_chart(
                     _phase_winner_figure(
@@ -689,9 +694,9 @@ def _render_path_phase_behavior_inspector(
                             ascending=[True, False],
                         ).head(8)
                     ),
-                    title="Conditional Winner Frontier",
+                    title="Historical Analog Winner Frontier",
                     help_text=(
-                        "Ranks assets that historically did best in similar phase/horizon settings, blended with current momentum and role rules."
+                        "Ranks assets that historically did best in similar phase/horizon settings, then downgrades thin samples, non-specific winners, and current-cycle leadership fragility."
                     ),
                     key=f"dashboard_v2_cycle_behavior_winner_chart_{selected_horizon}_{selected_phase}",
                 )
@@ -700,7 +705,10 @@ def _render_path_phase_behavior_inspector(
             _phase_winner_figure(
                 frontier_slice.sort_values(["rank", "frontier_score"], ascending=[True, False]).head(8)
             ),
-            title="Conditional Winner Frontier",
+            title="Historical Analog Winner Frontier",
+            help_text=(
+                "Ranks assets that historically did best in similar phase/horizon settings, then downgrades thin samples, non-specific winners, and current-cycle leadership fragility."
+            ),
             key=f"dashboard_v2_cycle_behavior_winner_chart_{selected_horizon}_{selected_phase}",
         )
 
@@ -729,7 +737,9 @@ def _render_path_phase_behavior_inspector(
             ]
             _render_metric_dataframe(_display_metrics(validation_slice[validation_columns].head(40)))
         if not frontier_slice.empty:
-            st.caption("Current conditional winner frontier for the selected phase and horizon.")
+            st.caption(
+                "Historical analog winner frontier for the selected phase and horizon, with current-cycle robustness guards."
+            )
             frontier_columns = [
                 column
                 for column in [
@@ -746,6 +756,9 @@ def _render_path_phase_behavior_inspector(
                     "origin_confidence",
                     "origin_penalty",
                     "phase_role_fit",
+                    "phase_distinctiveness",
+                    "ubiquity_penalty",
+                    "cycle_leadership_fragility",
                     "momentum_score",
                     "drawdown_penalty",
                     "theme_fragility_penalty",
@@ -1119,7 +1132,14 @@ def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
     if "origins" not in data:
         data["origins"] = 0
     data["origins"] = pd.to_numeric(data["origins"], errors="coerce").fillna(0).astype(int)
-    for column in ["median_forward_return", "median_forward_drawdown"]:
+    for column in [
+        "median_forward_return",
+        "median_forward_drawdown",
+        "phase_distinctiveness",
+        "ubiquity_penalty",
+        "cycle_leadership_fragility",
+        "theme_fragility_penalty",
+    ]:
         if column not in data:
             data[column] = 0.0
         data[column] = pd.to_numeric(data[column], errors="coerce")
@@ -1159,6 +1179,10 @@ def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
                     "origins",
                     "median_forward_return",
                     "median_forward_drawdown",
+                    "phase_distinctiveness",
+                    "ubiquity_penalty",
+                    "cycle_leadership_fragility",
+                    "theme_fragility_penalty",
                 ]
             ],
             hovertemplate=(
@@ -1169,7 +1193,11 @@ def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
                 "Evidence: %{customdata[2]} (%{customdata[4]} origins)<br>"
                 "Flags: %{customdata[3]}<br>"
                 "Median return: %{customdata[5]:.1%}<br>"
-                "Median drawdown: %{customdata[6]:.1%}<extra></extra>"
+                "Median drawdown: %{customdata[6]:.1%}<br>"
+                "Phase specificity: %{customdata[7]:.1%}<br>"
+                "Ubiquity penalty: %{customdata[8]:.1%}<br>"
+                "Leadership fragility: %{customdata[9]:.1%}<br>"
+                "Theme penalty: %{customdata[10]:.1%}<extra></extra>"
             ),
         )
     )

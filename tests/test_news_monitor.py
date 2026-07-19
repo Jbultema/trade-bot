@@ -117,6 +117,26 @@ def test_news_activation_keeps_low_priority_sources_in_triage_only() -> None:
     assert activated.triage.iloc[0]["activation_status"] == "triage_only_low_priority"
 
 
+def test_news_triage_excludes_items_published_after_as_of_time() -> None:
+    now = pd.Timestamp("2026-06-17T18:00:00Z")
+    items = (
+        NewsItem(
+            source="Future Feed",
+            source_url="https://example.com/rss",
+            source_priority=5,
+            title="OpenAI losses and AI capex pressure",
+            summary="AI capex, compute costs, and losses are rising.",
+            url="https://example.com/future",
+            published_at="2026-06-18T14:00:00Z",
+            topics=("ai",),
+        ),
+    )
+
+    triage = triage_news_items(items, lookback_days=7, now=now)
+
+    assert triage.empty
+
+
 def test_news_source_config_covers_required_narrative_buckets() -> None:
     config = load_news_config("configs/news_sources.yaml")
     coverage = build_news_source_coverage(config.sources)
