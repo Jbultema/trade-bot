@@ -24,15 +24,19 @@ high-growth re-entry families. Reactive classic drawdown-control hybrids were
 worse and should not be promoted for the growth engine without a new reason.
 
 The growth-constrained outcome lens changed the curation objective. The leading
-runtime snapshot candidates have recently clustered near the 20-22 percent
-historical CAGR and roughly -18 to -22 percent max-drawdown area. That is strong
-research evidence, not a live-return promise. The correct comparison is not
-"highest CAGR wins"; it is whether the extra terminal wealth justifies drawdown,
-turnover, concentration, execution, launch, paper-monitoring, and validation
-risk. The hard pruning boundary for drawdown is the configured growth hard
-limit, not a blanket -25 percent cutoff. The broad/sector growth-frontier pass
-was useful evidence but did not dethrone the existing high-CAGR re-entry and
-growth-guardrail families.
+runtime snapshot candidates are persisted in DuckDB as `snapshot_strategy_metrics`
+and have recently clustered near the 20-22 percent historical CAGR and roughly
+-18 to -22 percent max-drawdown area. These are operable latest-snapshot rows,
+not the same source as archived `experiment_scorecard` rows, which may rank
+differently. Use `poetry run trade-bot audit-strategy-sources` when reconciling
+"best strategy" claims across runtime snapshots, experiment scorecards, rolling
+windows, and docs. That is strong research evidence, not a live-return promise.
+The correct comparison is not "highest CAGR wins"; it is whether the extra
+terminal wealth justifies drawdown, turnover, concentration, execution, launch,
+paper-monitoring, and validation risk. The hard pruning boundary for drawdown is
+the configured growth hard limit, not a blanket -25 percent cutoff. The
+broad/sector growth-frontier pass was useful evidence but did not dethrone the
+existing high-CAGR re-entry and growth-guardrail families.
 
 This section is empirical, not a permanent truth. Revisit it after major
 experiment batches, material data changes, or sustained forward paper evidence.

@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from datetime import date
 import inspect
+from datetime import date
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -22,8 +22,13 @@ from trade_bot.dashboard_v2.pages import (
     risk,
     simulation,
 )
-from trade_bot.dashboard_v2.services.artifact_service import pbo_frames, read_csv_artifact
 from trade_bot.dashboard_v2.services import runtime as runtime_service
+from trade_bot.dashboard_v2.services.artifact_service import (
+    defensive_signal_audit_frames,
+    pbo_frames,
+    prebreak_hindsight_frames,
+    read_csv_artifact,
+)
 
 
 def test_dashboard_v2_routes_cover_core_workflows() -> None:
@@ -269,6 +274,21 @@ def test_dashboard_v2_artifact_service_missing_files_are_empty(tmp_path) -> None
     frames = pbo_frames(tmp_path / "missing_pbo_dir")
     assert set(frames) == {"summary", "selection", "stats"}
     assert all(frame.empty for frame in frames.values())
+    prebreak = prebreak_hindsight_frames(tmp_path / "missing_prebreak_dir")
+    assert set(prebreak) == {
+        "snapshot_signal_panel",
+        "signal_predictiveness_rank",
+        "action_timing",
+        "staged_risk_behavior",
+        "late_trigger_mesh",
+        "hard_defense_attribution",
+        "policy_variant_results",
+        "current_best_signal_readout",
+    }
+    assert all(frame.empty for frame in prebreak.values())
+    defensive = defensive_signal_audit_frames(tmp_path / "missing_defensive_dir")
+    assert set(defensive) == {"current_defensive_exposure", "summary", "scorecards"}
+    assert all(frame.empty for frame in defensive.values())
 
 
 def test_dashboard_v2_card_helper_emits_renderable_html(monkeypatch) -> None:
@@ -367,6 +387,87 @@ def test_cycle_crisis_playback_figure_shows_horizon_outcomes() -> None:
     assert "QQQ forward return" in trace_names
     assert "QQQ max drawdown" in trace_names
     assert figure.layout.yaxis2.title.text == "3m return / drawdown"
+
+
+def test_prebreak_event_behavior_figure_layers_actions_and_outcomes() -> None:
+    frame = pd.DataFrame(
+        {
+            "event_name": ["sample"] * 3,
+            "market_date": pd.to_datetime(["2026-01-01", "2026-01-08", "2026-01-15"]),
+            "event_break_date": ["2026-01-20"] * 3,
+            "risk_budget_multiplier": [0.8, 0.5, 0.3],
+            "action_severity_score": [0.0, 0.5, 1.0],
+            "forward_spy_return_3m": [0.02, -0.04, -0.08],
+            "forward_qqq_return_3m": [0.04, -0.06, -0.12],
+            "forward_smh_return_3m": [0.05, -0.08, -0.18],
+            "forward_min_max_drawdown_3m": [-0.03, -0.12, -0.22],
+        }
+    )
+
+    figure = research._prebreak_event_behavior_figure(frame)
+    trace_names = {trace.name for trace in figure.data}
+
+    assert "Risk budget multiplier" in trace_names
+    assert "Action severity" in trace_names
+    assert "Worst 3m drawdown" in trace_names
+    assert any(shape.type == "line" for shape in figure.layout.shapes)
+
+
+def test_prebreak_signal_rank_figure_marks_current_risk_reads() -> None:
+    frame = pd.DataFrame(
+        {
+            "signal": ["health_qqq_drawdown", "cycle_component_qqq_unwind"],
+            "predictive_score": [0.35, 0.33],
+            "risk_direction": ["higher_is_riskier", "lower_is_riskier"],
+            "current_risk_read": ["elevated", "contained"],
+            "historical_percentile": [0.95, 0.2],
+            "spearman_to_break_severity": [0.28, -0.27],
+            "event_auc": [0.71, 0.30],
+            "high_minus_low_break_severity": [0.05, -0.04],
+        }
+    )
+
+    figure = research._prebreak_signal_rank_figure(frame)
+
+    assert len(figure.data) == 1
+    assert "Market: Qqq Drawdown" in set(figure.data[0].y)
+    assert "#ef4444" in list(figure.data[0].marker.color)
+
+
+def test_prebreak_event_selector_options_filter_rollups_and_default_alias() -> None:
+    signal_panel = pd.DataFrame(
+        {
+            "event_name": [
+                "gfc_credit_bubble_peak",
+                "ALL_SEVERE_0-21d",
+                "covid_crash_peak",
+            ]
+        }
+    )
+    action_timing = pd.DataFrame(
+        {
+            "event_name": [
+                "q4_2018_liquidity_break",
+                "gfc_credit_bubble_peak",
+            ]
+        }
+    )
+
+    options = research._prebreak_event_options(signal_panel, action_timing)
+
+    assert options == [
+        "q4_2018_liquidity_break",
+        "gfc_credit_bubble_peak",
+        "covid_crash_peak",
+    ]
+    assert (
+        research._default_prebreak_event_for_crisis("global_financial_crisis", options)
+        == "gfc_credit_bubble_peak"
+    )
+    assert (
+        research._default_prebreak_event_for_crisis("unknown_cycle_window", options)
+        == "q4_2018_liquidity_break"
+    )
 
 
 def test_cycle_phase_frontier_figure_highlights_selected_slice() -> None:
@@ -471,6 +572,31 @@ def test_crisis_playback_figure_uses_confidence_for_nowcast() -> None:
 
     assert "Dominant phase confidence" in trace_names
     assert figure.layout.yaxis2.title.text == "Dominant phase confidence"
+
+
+def test_crisis_playback_market_figure_shows_ticker_paths_and_drawdowns() -> None:
+    frame = pd.DataFrame(
+        {
+            "origin_date": pd.to_datetime(["2026-01-01", "2026-02-01"]),
+            "stage": ["lead_up", "unwind"],
+            "stage_order": [1, 2],
+            "qqq_playback_index": [1.0, 0.85],
+            "qqq_playback_drawdown": [0.0, -0.15],
+            "qqq_playback_close": [100.0, 85.0],
+            "spy_playback_index": [1.0, 0.92],
+            "spy_playback_drawdown": [0.0, -0.08],
+            "spy_playback_close": [100.0, 92.0],
+        }
+    )
+
+    figure = research._crisis_playback_market_figure(frame, tickers=["QQQ", "SPY"])
+    trace_names = {trace.name for trace in figure.data}
+
+    assert {"QQQ indexed price", "QQQ drawdown", "SPY indexed price", "SPY drawdown"}.issubset(
+        trace_names
+    )
+    assert figure.layout.yaxis.title.text == "Index"
+    assert figure.layout.yaxis2.title.text == "Drawdown"
 
 
 def test_launch_and_execution_interaction_guardrails_are_present() -> None:

@@ -16,6 +16,7 @@ from rich.console import Console
 from rich.table import Table
 
 from trade_bot.config import configured_tickers, load_config
+from trade_bot.data.fred_data import load_fred_catalog, load_or_fetch_fred_data
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
 from trade_bot.DEFAULTS import (
     DEFAULT_CONFIG_PATH,
@@ -59,6 +60,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
     DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
     DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
+    DEFAULT_STRATEGY_SOURCE_AUDIT_DIR,
 )
 from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
@@ -67,7 +69,10 @@ from trade_bot.research.backtest_pbo import (
     run_backtest_pbo_gauntlet,
 )
 from trade_bot.research.backtest_qc import DEFAULT_QC_STRATEGY, run_backtest_qc_gauntlet
-from trade_bot.research.baselines import run_configured_baselines
+from trade_bot.research.baselines import (
+    run_configured_baselines,
+    run_configured_baselines_from_frames,
+)
 from trade_bot.research.cycle_tracker import (
     DEFAULT_PHASE_MIN_TRAIN_DAYS,
     DEFAULT_PHASE_VALIDATION_STEP_DAYS,
@@ -105,6 +110,19 @@ from trade_bot.research.operating_history import (
     DEFAULT_OPERATING_HISTORY_SOURCE,
     reconstruct_operating_history,
 )
+from trade_bot.research.prebreak_hindsight import (
+    DEFAULT_POSTBREAK_FOLLOWTHROUGH_DAYS,
+    DEFAULT_PREBREAK_HORIZON_DAYS,
+    DEFAULT_PREBREAK_LOOKBACK_DAYS,
+    DEFAULT_PREBREAK_OUTPUT_DIR,
+    DEFAULT_PREBREAK_RUN_STORE_ARTIFACT_DIR,
+    DEFAULT_PREBREAK_RUN_STORE_DB_PATH,
+    DEFAULT_PREBREAK_RUN_STORE_JOB_LOG_DIR,
+    DEFAULT_PREBREAK_WEEKLY_FREQUENCY,
+    analyze_prebreak_hindsight,
+    build_prebreak_snapshot_plan,
+    write_prebreak_hindsight_outputs,
+)
 from trade_bot.research.scenario_history import (
     clean_scenario_history,
     reconstruct_scenario_history_from_prices,
@@ -121,6 +139,7 @@ from trade_bot.research.snapshot_backfill import (
     build_snapshot_backfill_plan,
     snapshot_created_at_for_market_date,
 )
+from trade_bot.research.strategy_source_audit import write_strategy_source_audit
 from trade_bot.research.upside_capture import (
     DEFAULT_UPSIDE_CAPTURE_OUTPUT_DIR,
     run_upside_capture_lab,
@@ -741,6 +760,14 @@ def backfill_snapshots_cmd(
         adjusted=bot_config.data.adjusted,
         refresh=refresh_data,
     )
+    macro_catalog = load_fred_catalog(macro)
+    macro_data = load_or_fetch_fred_data(
+        macro_catalog,
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        refresh=refresh_macro,
+    )
     plan = build_snapshot_backfill_plan(
         prices.index,
         start_date=start_date,
@@ -774,23 +801,21 @@ def backfill_snapshots_cmd(
     for index, market_date in enumerate(selected_dates, start=1):
         market_date_text = str(market_date.date())
         historical_config = bot_config.model_copy(
-            update={
-                "data": bot_config.data.model_copy(
-                    update={"end": market_date_text},
-                )
-            }
+            update={"data": bot_config.data.model_copy(update={"end": market_date_text})}
         )
         created_at_utc = snapshot_created_at_for_market_date(
             market_date,
             market_close_utc_hour=market_close_utc_hour,
         )
-        baseline_run = run_configured_baselines(
+        historical_prices = prices.loc[:market_date_text].dropna(how="all")
+        historical_macro = macro_data.loc[:market_date_text].dropna(how="all")
+        baseline_run = run_configured_baselines_from_frames(
             historical_config,
-            refresh_data=False,
-            refresh_macro=refresh_macro,
+            prices=historical_prices,
+            macro_data=historical_macro,
+            macro_catalog=macro_catalog,
             refresh_news=refresh_news,
             event_config_path=events,
-            macro_config_path=macro,
             news_config_path=news,
             as_of=created_at_utc,
         )
@@ -830,6 +855,247 @@ def backfill_snapshots_cmd(
         f"{saved_manifests[0].market_date if saved_manifests else 'n/a'} to "
         f"{saved_manifests[-1].market_date if saved_manifests else 'n/a'}."
     )
+
+
+@app.command("generate-prebreak-snapshots")
+def generate_prebreak_snapshots_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    events: Annotated[Path, typer.Option("--events")] = DEFAULT_EVENTS_PATH,
+    macro: Annotated[Path, typer.Option("--macro")] = DEFAULT_MACRO_PATH,
+    news: Annotated[Path, typer.Option("--news")] = DEFAULT_NEWS_PATH,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+    refresh_macro: Annotated[bool, typer.Option("--refresh-macro")] = False,
+    refresh_news: Annotated[bool, typer.Option("--refresh-news")] = False,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_PREBREAK_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[
+        Path, typer.Option("--artifact-dir")
+    ] = DEFAULT_PREBREAK_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[
+        Path, typer.Option("--job-log-dir")
+    ] = DEFAULT_PREBREAK_RUN_STORE_JOB_LOG_DIR,
+    lookback_days: Annotated[
+        int,
+        typer.Option("--lookback-days", help="Calendar days before each break date."),
+    ] = DEFAULT_PREBREAK_LOOKBACK_DAYS,
+    postbreak_days: Annotated[
+        int,
+        typer.Option("--postbreak-days", help="Calendar days after each break date."),
+    ] = DEFAULT_POSTBREAK_FOLLOWTHROUGH_DAYS,
+    weekly_frequency: Annotated[
+        str,
+        typer.Option("--weekly-frequency", help="Weekly bucket frequency for event-window dates."),
+    ] = DEFAULT_PREBREAK_WEEKLY_FREQUENCY,
+    market_close_utc_hour: Annotated[
+        int,
+        typer.Option("--market-close-utc-hour"),
+    ] = DEFAULT_SNAPSHOT_BACKFILL_MARKET_CLOSE_UTC_HOUR,
+    max_snapshots: Annotated[int | None, typer.Option("--max-snapshots")] = None,
+    skip_existing: Annotated[
+        bool,
+        typer.Option(
+            "--skip-existing/--rebuild-existing",
+            help="Skip market dates already present in the snapshot store.",
+        ),
+    ] = True,
+    plan_only: Annotated[
+        bool,
+        typer.Option("--plan-only/--run", help="Print the pre-break schedule without writing."),
+    ] = False,
+) -> None:
+    """Generate weekly snapshots around known bubble-break windows."""
+
+    bot_config = load_config(config)
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    prices = load_or_fetch_yahoo_prices(
+        configured_tickers(bot_config),
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        adjusted=bot_config.data.adjusted,
+        refresh=refresh_data,
+    )
+    macro_catalog = load_fred_catalog(macro)
+    macro_data = load_or_fetch_fred_data(
+        macro_catalog,
+        start=bot_config.data.start,
+        end=bot_config.data.end,
+        cache_dir=bot_config.data.cache_dir,
+        refresh=refresh_macro,
+    )
+    plan = build_prebreak_snapshot_plan(
+        prices.index,
+        lookback_days=lookback_days,
+        postbreak_days=postbreak_days,
+        weekly_frequency=weekly_frequency,
+    )
+    if plan.empty:
+        console.print("No bubble-break market dates were available.")
+        return
+    existing_market_dates = set()
+    if skip_existing:
+        existing = run_store.list_snapshots(limit=100_000)
+        if not existing.empty:
+            existing_market_dates = set(existing["market_date"].astype(str))
+        plan = plan[~plan["market_date"].astype(str).isin(existing_market_dates)].copy()
+    if max_snapshots is not None:
+        if max_snapshots <= 0:
+            msg = "max_snapshots must be positive when provided."
+            raise typer.BadParameter(msg)
+        plan = plan.tail(max_snapshots).copy()
+    _print_prebreak_snapshot_plan(
+        plan,
+        lookback_days=lookback_days,
+        postbreak_days=postbreak_days,
+        weekly_frequency=weekly_frequency,
+        skipped_existing=len(existing_market_dates) if skip_existing else 0,
+        plan_only=plan_only,
+    )
+    if plan_only or plan.empty:
+        return
+
+    saved_manifests: list[SnapshotManifest] = []
+    total = len(plan)
+    for index, row in enumerate(plan.itertuples(index=False), start=1):
+        market_date = pd.Timestamp(row.market_date)
+        market_date_text = str(market_date.date())
+        historical_config = bot_config.model_copy(
+            update={"data": bot_config.data.model_copy(update={"end": market_date_text})}
+        )
+        created_at_utc = snapshot_created_at_for_market_date(
+            market_date,
+            market_close_utc_hour=market_close_utc_hour,
+        )
+        historical_prices = prices.loc[:market_date_text].dropna(how="all")
+        historical_macro = macro_data.loc[:market_date_text].dropna(how="all")
+        baseline_run = run_configured_baselines_from_frames(
+            historical_config,
+            prices=historical_prices,
+            macro_data=historical_macro,
+            macro_catalog=macro_catalog,
+            refresh_news=refresh_news,
+            event_config_path=events,
+            news_config_path=news,
+            as_of=created_at_utc,
+        )
+        manifest = run_store.save_snapshot(
+            baseline_run,
+            config_path=config,
+            events_path=events,
+            macro_path=macro,
+            news_path=news,
+            refresh_data=False,
+            refresh_macro=refresh_macro,
+            refresh_news=refresh_news,
+            created_at_utc=created_at_utc,
+            auto_prune=False,
+        )
+        saved_manifests.append(manifest)
+        console.print(
+            f"[{index:,}/{total:,}] saved {manifest.market_date} "
+            f"{row.event_name} {manifest.risk_status} {manifest.run_id}"
+        )
+    console.print(f"Bubble-break snapshot generation complete: saved {len(saved_manifests):,}.")
+
+
+@app.command("analyze-prebreak-hindsight")
+def analyze_prebreak_hindsight_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_PREBREAK_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[
+        Path, typer.Option("--artifact-dir")
+    ] = DEFAULT_PREBREAK_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[
+        Path, typer.Option("--job-log-dir")
+    ] = DEFAULT_PREBREAK_RUN_STORE_JOB_LOG_DIR,
+    reference_store: Annotated[
+        Path,
+        typer.Option(
+            "--reference-store",
+            help="Snapshot store used for current prices, current readout, and reference controls.",
+        ),
+    ] = DEFAULT_RUN_STORE_DB_PATH,
+    reference_artifact_dir: Annotated[
+        Path,
+        typer.Option("--reference-artifact-dir"),
+    ] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    reference_job_log_dir: Annotated[
+        Path,
+        typer.Option("--reference-job-log-dir"),
+    ] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    include_current_snapshot: Annotated[
+        bool,
+        typer.Option("--include-current-snapshot/--skip-current-snapshot"),
+    ] = True,
+    include_reference_snapshots: Annotated[
+        bool,
+        typer.Option(
+            "--include-reference-snapshots/--skip-reference-snapshots",
+            help="Include ordinary snapshots from the reference store as non-event controls.",
+        ),
+    ] = True,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_PREBREAK_OUTPUT_DIR,
+    lookback_days: Annotated[int, typer.Option("--lookback-days")] = DEFAULT_PREBREAK_LOOKBACK_DAYS,
+    postbreak_days: Annotated[
+        int,
+        typer.Option("--postbreak-days", help="Calendar days after each break date."),
+    ] = DEFAULT_POSTBREAK_FOLLOWTHROUGH_DAYS,
+    horizon_days: Annotated[int, typer.Option("--horizon-days")] = DEFAULT_PREBREAK_HORIZON_DAYS,
+    severe_drawdown_threshold: Annotated[
+        float,
+        typer.Option("--severe-drawdown-threshold"),
+    ] = -0.10,
+    major_drawdown_threshold: Annotated[
+        float,
+        typer.Option("--major-drawdown-threshold"),
+    ] = -0.15,
+) -> None:
+    """Rank saved snapshot signals by hindsight 3m drawdown predictiveness."""
+
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    reference_run_store = (
+        RunStore(
+            reference_store,
+            artifact_dir=reference_artifact_dir,
+            job_log_dir=reference_job_log_dir,
+        )
+        if include_current_snapshot or include_reference_snapshots
+        else None
+    )
+    result = analyze_prebreak_hindsight(
+        run_store,
+        reference_run_store=reference_run_store,
+        include_reference_snapshots=include_reference_snapshots,
+        include_current_snapshot=include_current_snapshot,
+        lookback_days=lookback_days,
+        postbreak_days=postbreak_days,
+        horizon_days=horizon_days,
+        severe_drawdown_threshold=severe_drawdown_threshold,
+        major_drawdown_threshold=major_drawdown_threshold,
+    )
+    write_prebreak_hindsight_outputs(result, output_dir=output_dir)
+    console.print(
+        f"Wrote pre-break hindsight analysis to {output_dir} "
+        f"({len(result.snapshot_signals):,} snapshots, "
+        f"{len(result.signal_rankings):,} ranked signals)."
+    )
+    if not result.signal_rankings.empty:
+        table = Table(title="Top Hindsight Signals")
+        for column in [
+            "signal",
+            "predictive_score",
+            "spearman_to_break_severity",
+            "risk_direction",
+            "latest_value",
+        ]:
+            table.add_column(column)
+        for _, row in result.signal_rankings.head(12).iterrows():
+            table.add_row(
+                str(row["signal"]),
+                _format_optional_decimal(row["predictive_score"]),
+                _format_optional_decimal(row["spearman_to_break_severity"]),
+                str(row["risk_direction"]),
+                _format_optional_decimal(row["latest_value"]),
+            )
+        console.print(table)
 
 
 @app.command("list-snapshot-jobs")
@@ -2096,6 +2362,56 @@ def migrate_warehouse_cmd(
     console.print(warehouse.table_counts())
 
 
+@app.command("audit-strategy-sources")
+def audit_strategy_sources_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_STRATEGY_SOURCE_AUDIT_DIR,
+    experiment_dir: Annotated[
+        list[Path] | None,
+        typer.Option(
+            "--experiment-dir",
+            help=(
+                "Experiment roots to reconcile. Defaults to reports/experiments and "
+                "data/experiments_reset_v2."
+            ),
+        ),
+    ] = None,
+    top_n: Annotated[int, typer.Option("--top-n")] = 50,
+) -> None:
+    roots = (
+        tuple(experiment_dir)
+        if experiment_dir
+        else (DEFAULT_EXPERIMENTS_DIR, DEFAULT_RESET_EXPERIMENTS_DIR)
+    )
+    audit = write_strategy_source_audit(
+        output_dir=output_dir,
+        warehouse_path=store,
+        experiment_roots=roots,
+        top_n=top_n,
+    )
+    console.print(f"Wrote strategy source audit to {output_dir}.")
+    if audit.full_history_top.empty:
+        console.print("No full-history strategy metrics found.")
+        return
+    table = Table(title="Top Full-History Strategy Sources")
+    for column in ["source_scope", "strategy", "cagr", "max_drawdown", "calmar", "source_path"]:
+        table.add_column(column)
+    for _, row in audit.full_history_top.head(10).iterrows():
+        table.add_row(
+            str(row.get("source_scope", "")),
+            str(row.get("strategy", "")),
+            _format_optional_percent(row.get("cagr")),
+            _format_optional_percent(row.get("max_drawdown")),
+            _format_optional_decimal(row.get("calmar")),
+            str(row.get("source_path", ""))[:90],
+        )
+    console.print(table)
+    console.print(
+        f"High-CAGR metric hits: {len(audit.high_cagr_metric_hits):,}; "
+        f"text/doc references: {len(audit.ambiguous_references):,}."
+    )
+
+
 @app.command("seed-operating-history")
 def seed_operating_history_cmd(
     config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
@@ -3275,6 +3591,49 @@ def _print_snapshot_backfill_plan(
         table.add_row("first selected", str(selected_dates[0].date()))
         table.add_row("last selected", str(selected_dates[-1].date()))
     console.print(table)
+
+
+def _print_prebreak_snapshot_plan(
+    plan: pd.DataFrame,
+    *,
+    lookback_days: int,
+    postbreak_days: int,
+    weekly_frequency: str,
+    skipped_existing: int,
+    plan_only: bool,
+) -> None:
+    table = Table(title="Bubble-Break Snapshot Plan")
+    table.add_column("field")
+    table.add_column("value")
+    table.add_row("mode", "plan only" if plan_only else "run")
+    table.add_row("lookback days", f"{lookback_days:,}")
+    table.add_row("postbreak days", f"{postbreak_days:,}")
+    table.add_row("weekly frequency", weekly_frequency)
+    table.add_row("existing market dates checked", f"{skipped_existing:,}")
+    table.add_row("selected snapshots", f"{len(plan):,}")
+    if not plan.empty:
+        table.add_row("first selected", str(plan["market_date"].iloc[0]))
+        table.add_row("last selected", str(plan["market_date"].iloc[-1]))
+        table.add_row("events", f"{plan['event_name'].nunique():,}")
+    console.print(table)
+    if not plan.empty:
+        preview = Table(title="Bubble-Break Snapshot Preview")
+        for column in [
+            "event_name",
+            "market_date",
+            "break_date",
+            "days_to_break",
+            "postbreak_snapshot",
+        ]:
+            preview.add_column(column)
+        for _, row in plan.head(20).iterrows():
+            preview.add_row(
+                str(row["event_name"]),
+                str(row["market_date"]),
+                str(row["break_date"]),
+                str(row["days_to_break"]),
+            )
+        console.print(preview)
 
 
 def _snapshot_delete_summary(title: str, candidates: pd.DataFrame) -> str:

@@ -28,8 +28,10 @@ from trade_bot.dashboard_v2.components.cards import (
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.artifact_service import (
     cycle_tracker_frames,
+    defensive_signal_audit_frames,
     leadership_frames,
     pbo_frames,
+    prebreak_hindsight_frames,
 )
 from trade_bot.dashboard_v2.services.experiment_service import (
     dashboard_frames,
@@ -318,6 +320,8 @@ def _render_cycle_tracker() -> None:
     reliability = frames.get("phase_reliability", pd.DataFrame())
     path_reliability = frames.get("path_reliability", pd.DataFrame())
     crisis = frames.get("crisis_playback", pd.DataFrame())
+    prebreak = prebreak_hindsight_frames()
+    defensive_audit = defensive_signal_audit_frames()
     if all(frame.empty for frame in frames.values()):
         st.info("No cycle tracker artifacts found. Run `poetry run trade-bot run-cycle-tracker`.")
         return
@@ -368,7 +372,11 @@ def _render_cycle_tracker() -> None:
         )
 
     if not crisis.empty:
-        _render_crisis_playback(crisis)
+        _render_crisis_playback(
+            crisis,
+            prebreak=prebreak,
+            defensive_audit=defensive_audit,
+        )
     else:
         st.info(
             "This cycle tracker run does not include crisis playback yet. Re-run `poetry run trade-bot run-cycle-tracker`."
@@ -1028,7 +1036,12 @@ def _render_cycle_reliability(reliability: pd.DataFrame, *, dominant_phase: str)
         _render_metric_dataframe(_display_metrics(selected[columns]))
 
 
-def _render_crisis_playback(crisis: pd.DataFrame) -> None:
+def _render_crisis_playback(
+    crisis: pd.DataFrame,
+    *,
+    prebreak: dict[str, pd.DataFrame] | None = None,
+    defensive_audit: dict[str, pd.DataFrame] | None = None,
+) -> None:
     render_section_header("Historical Crisis Playback")
     st.caption(
         "Replay Cycle Tracker phase probabilities through named historical stress windows: lead-up, unwind, and recovery."
@@ -1122,8 +1135,1050 @@ def _render_crisis_playback(crisis: pd.DataFrame) -> None:
         title="Historical Crisis Playback",
         key=f"dashboard_v2_cycle_crisis_playback_chart_{selected_crisis}_{selected_horizon}",
     )
+    playback_tickers = _available_crisis_playback_tickers(selected)
+    if playback_tickers:
+        default_tickers = [
+            ticker for ticker in ["QQQ", "SPY", "VTI"] if ticker in playback_tickers
+        ] or playback_tickers[:3]
+        selected_tickers = st.multiselect(
+            "Playback market tickers",
+            playback_tickers,
+            default=default_tickers,
+            key=f"dashboard_v2_cycle_crisis_playback_tickers_{selected_crisis}_{selected_horizon}",
+        )
+        if selected_tickers:
+            render_chart(
+                _crisis_playback_market_figure(selected, tickers=selected_tickers),
+                title="Historical Crisis Market Path",
+                key=(
+                    "dashboard_v2_cycle_crisis_market_path_chart_"
+                    f"{selected_crisis}_{selected_horizon}"
+                ),
+            )
     with st.expander("Crisis stage summary", expanded=True):
         _render_metric_dataframe(_display_metrics(stage_summary))
+    if prebreak:
+        _render_prebreak_hindsight_layers(
+            selected_crisis=str(selected_crisis),
+            prebreak=prebreak,
+            defensive_audit=defensive_audit or {},
+        )
+
+
+def _render_prebreak_hindsight_layers(
+    *,
+    selected_crisis: str,
+    prebreak: dict[str, pd.DataFrame],
+    defensive_audit: dict[str, pd.DataFrame],
+) -> None:
+    signal_panel = prebreak.get("snapshot_signal_panel", pd.DataFrame())
+    signal_rank = prebreak.get("signal_predictiveness_rank", pd.DataFrame())
+    action_timing = prebreak.get("action_timing", pd.DataFrame())
+    staged_risk = prebreak.get("staged_risk_behavior", pd.DataFrame())
+    late_trigger = prebreak.get("late_trigger_mesh", pd.DataFrame())
+    hard_defense_attribution = prebreak.get("hard_defense_attribution", pd.DataFrame())
+    policy_variants = prebreak.get("policy_variant_results", pd.DataFrame())
+    current_readout = prebreak.get("current_best_signal_readout", pd.DataFrame())
+    if all(
+        frame.empty
+        for frame in [
+            signal_panel,
+            signal_rank,
+            action_timing,
+            staged_risk,
+            late_trigger,
+            hard_defense_attribution,
+            policy_variants,
+            current_readout,
+        ]
+    ):
+        return
+
+    render_section_header(
+        "Pre-Break Behavior And Early Warning",
+        help_text=(
+            "Historical snapshot layer for checking whether trade-bot became defensive before "
+            "known bubble breaks, which signals carried the warning, and whether today's read "
+            "resembles normal behavior or pre-break defensive behavior."
+        ),
+    )
+    render_callout(
+        "This layer uses hindsight-labeled historical snapshots. It does not predict a crash by "
+        "itself; it shows whether the same signals that helped before are quiet, mixed, or elevated now."
+    )
+    if not current_readout.empty:
+        _render_current_prebreak_monitor(current_readout, defensive_audit=defensive_audit)
+    if not signal_panel.empty or not action_timing.empty:
+        selected_event = _select_prebreak_event(
+            selected_crisis=selected_crisis,
+            signal_panel=signal_panel,
+            action_timing=action_timing,
+        )
+        _render_selected_prebreak_event_behavior(
+            selected_crisis=selected_event,
+            signal_panel=signal_panel,
+            action_timing=action_timing,
+        )
+        _render_prebreak_margin_experiment(
+            selected_crisis=selected_event,
+            staged_risk=staged_risk,
+            late_trigger=late_trigger,
+            hard_defense_attribution=hard_defense_attribution,
+            policy_variants=policy_variants,
+        )
+    if not signal_rank.empty:
+        _render_prebreak_signal_attribution(signal_rank, current_readout=current_readout)
+
+
+def _select_prebreak_event(
+    *,
+    selected_crisis: str,
+    signal_panel: pd.DataFrame,
+    action_timing: pd.DataFrame,
+) -> str:
+    event_options = _prebreak_event_options(signal_panel, action_timing)
+    if not event_options:
+        return selected_crisis
+    default_event = _default_prebreak_event_for_crisis(selected_crisis, event_options)
+    selected = st.selectbox(
+        "Pre-break event to inspect",
+        event_options,
+        index=event_options.index(default_event),
+        format_func=lambda value: str(value).replace("_", " ").title(),
+        key="dashboard_v2_prebreak_event_to_inspect",
+        help=(
+            "This selector controls the hindsight snapshot behavior panel below. "
+            "It is separate from the Historical stress window selector above, which controls "
+            "the Cycle Tracker crisis playback."
+        ),
+    )
+    return str(selected)
+
+
+def _prebreak_event_options(
+    signal_panel: pd.DataFrame,
+    action_timing: pd.DataFrame,
+) -> list[str]:
+    events: list[str] = []
+    for frame in [action_timing, signal_panel]:
+        if frame.empty or "event_name" not in frame:
+            continue
+        for value in frame["event_name"].dropna().astype(str).drop_duplicates().tolist():
+            if value.startswith("ALL_SEVERE_"):
+                continue
+            if value not in events:
+                events.append(value)
+    return events
+
+
+def _default_prebreak_event_for_crisis(
+    selected_crisis: str,
+    event_options: list[str],
+) -> str:
+    aliases = {
+        "global_financial_crisis": "gfc_credit_bubble_peak",
+        "q4_2018_tightening": "q4_2018_liquidity_break",
+        "covid_liquidity_crash": "covid_crash_peak",
+        "inflation_tech_unwind": "inflation_rates_growth_peak",
+    }
+    preferred = aliases.get(str(selected_crisis), "")
+    if preferred in event_options:
+        return preferred
+    return event_options[0]
+
+
+def _render_current_prebreak_monitor(
+    current_readout: pd.DataFrame,
+    *,
+    defensive_audit: dict[str, pd.DataFrame],
+) -> None:
+    render_section_header("Current Early Warning Monitor")
+    data = current_readout.copy()
+    for column in [
+        "latest_value",
+        "historical_percentile",
+        "predictive_score",
+        "spearman_to_break_severity",
+    ]:
+        if column in data:
+            data[column] = pd.to_numeric(data[column], errors="coerce")
+    latest_date = (
+        str(data["market_date"].dropna().iloc[0])
+        if "market_date" in data and not data["market_date"].dropna().empty
+        else "n/a"
+    )
+    read_counts = (
+        data["current_risk_read"].fillna("unknown").astype(str).str.lower().value_counts()
+        if "current_risk_read" in data
+        else pd.Series(dtype=int)
+    )
+    top = (
+        data.sort_values("predictive_score", ascending=False).iloc[0]
+        if "predictive_score" in data and not data.empty
+        else pd.Series(dtype=object)
+    )
+    top_read = str(top.get("current_risk_read", "n/a"))
+    render_card_grid(
+        [
+            (
+                "Read Date",
+                latest_date,
+                "Latest market date in the current pre-break signal readout.",
+            ),
+            (
+                "Top Monitor",
+                _signal_label(top.get("signal", "n/a")),
+                "Highest-ranked current signal from the pre-break hindsight monitor set.",
+                _risk_read_tone(top_read),
+            ),
+            (
+                "Top Read",
+                top_read.title(),
+                "Current interpretation for the highest-ranked pre-break monitor.",
+                _risk_read_tone(top_read),
+            ),
+            (
+                "Elevated",
+                int(read_counts.get("elevated", 0)),
+                "Count of best historical monitors currently reading elevated.",
+                "critical" if int(read_counts.get("elevated", 0)) else "neutral",
+            ),
+            (
+                "Mixed",
+                int(read_counts.get("mixed", 0)),
+                "Count of best historical monitors currently reading mixed.",
+                "warning" if int(read_counts.get("mixed", 0)) else "neutral",
+            ),
+            (
+                "Contained",
+                int(read_counts.get("contained", 0)),
+                "Count of best historical monitors currently reading contained.",
+                "success" if int(read_counts.get("contained", 0)) else "neutral",
+            ),
+        ]
+    )
+    if not data.empty:
+        columns = [
+            column
+            for column in [
+                "signal",
+                "market_date",
+                "latest_value",
+                "historical_percentile",
+                "risk_direction",
+                "current_risk_read",
+                "predictive_score",
+                "spearman_to_break_severity",
+            ]
+            if column in data
+        ]
+        display = data[columns].head(12).copy()
+        if "signal" in display:
+            display["signal"] = display["signal"].map(_signal_label)
+        with st.expander("Current monitor detail", expanded=True):
+            _render_metric_dataframe(_display_metrics(display))
+    _render_defensive_posture_bridge(defensive_audit)
+
+
+def _render_defensive_posture_bridge(defensive_audit: dict[str, pd.DataFrame]) -> None:
+    exposure = defensive_audit.get("current_defensive_exposure", pd.DataFrame())
+    scorecards = defensive_audit.get("scorecards", pd.DataFrame())
+    if exposure.empty and scorecards.empty:
+        return
+    render_section_header(
+        "Defensive Posture Cross-Check",
+        help_text=(
+            "Separate audit for whether current high defensive weights historically avoided "
+            "drawdowns or acted as false alarms. Use this beside, not instead of, pre-break monitors."
+        ),
+    )
+    exposure_row = exposure.iloc[0] if not exposure.empty else pd.Series(dtype=object)
+    score_row = scorecards.iloc[0] if not scorecards.empty else pd.Series(dtype=object)
+    render_card_grid(
+        [
+            (
+                "Current Risk Weight",
+                _fmt_pct(exposure_row.get("current_risk_weight")),
+                "Current risk-asset weight from the defensive signal audit.",
+            ),
+            (
+                "Current Defensive",
+                _fmt_pct(exposure_row.get("current_defensive_weight")),
+                "Current defensive or cash-like weight from the defensive signal audit.",
+            ),
+            (
+                "Defensive Label",
+                score_row.get("defensive_judgement_label", "n/a"),
+                "Historical quality label for similar defensive episodes.",
+            ),
+            (
+                "Correct Defense",
+                _fmt_pct(score_row.get("defensive_correct_rate")),
+                "Share of audited defensive episodes that were followed by enough drawdown to justify defense.",
+            ),
+            (
+                "False Alarm",
+                _fmt_pct(score_row.get("defensive_false_alarm_rate")),
+                "Share of audited defensive episodes that looked more like missed upside.",
+            ),
+        ]
+    )
+
+
+def _render_selected_prebreak_event_behavior(
+    *,
+    selected_crisis: str,
+    signal_panel: pd.DataFrame,
+    action_timing: pd.DataFrame,
+) -> None:
+    render_section_header("Selected Crisis Trade-Bot Behavior")
+    event_rows = _prebreak_event_rows(signal_panel, selected_crisis=selected_crisis)
+    timing = _prebreak_timing_row(action_timing, selected_crisis=selected_crisis)
+    if event_rows.empty and timing.empty:
+        st.info("No pre-break hindsight rows are available for this selected crisis.")
+        return
+    if not event_rows.empty:
+        event_rows["market_date"] = pd.to_datetime(event_rows["market_date"], errors="coerce")
+        event_rows["days_to_break"] = pd.to_numeric(event_rows["days_to_break"], errors="coerce")
+    worst_drawdown = (
+        pd.to_numeric(event_rows.get("forward_min_max_drawdown_3m"), errors="coerce").min()
+        if not event_rows.empty and "forward_min_max_drawdown_3m" in event_rows
+        else float("nan")
+    )
+    render_card_grid(
+        [
+            (
+                "Snapshots",
+                int(timing.get("snapshots", len(event_rows))),
+                "Historical weekly snapshots available for the selected event.",
+            ),
+            (
+                "First Defensive",
+                _days_before_label(timing.get("first_defensive_days_before_break")),
+                "How early the bot first recommended any defensive action before the break date.",
+            ),
+            (
+                "First Hard Defense",
+                _days_before_label(timing.get("first_hard_defensive_days_before_break")),
+                "How early the bot first showed hard defensive behavior before the break date.",
+            ),
+            (
+                "Aligned When Severe",
+                _fmt_pct(timing.get("aligned_when_severe_share")),
+                "Among severe hindsight windows, share where trade-bot was already defensive.",
+            ),
+            (
+                "Median Risk Budget",
+                _fmt_pct(timing.get("median_risk_budget_multiplier")),
+                "Median risk budget multiplier across this event's snapshots.",
+            ),
+            (
+                "Worst Forward DD",
+                _fmt_pct(worst_drawdown),
+                "Worst 3-month forward max drawdown seen from the selected event's snapshots.",
+            ),
+        ]
+    )
+    if not event_rows.empty:
+        render_chart(
+            _prebreak_event_behavior_figure(event_rows),
+            title="Trade-Bot Behavior Into Break",
+            help_text=(
+                "Risk budget and action severity are what the bot knew at the snapshot date. "
+                "Forward returns and drawdowns are hindsight outcomes used to judge timing."
+            ),
+            key=f"dashboard_v2_prebreak_event_behavior_{selected_crisis}",
+        )
+        columns = [
+            column
+            for column in [
+                "market_date",
+                "days_to_break",
+                "risk_status",
+                "recommended_action",
+                "risk_budget_multiplier",
+                "defensive_action_flag",
+                "hard_defensive_action_flag",
+                "hindsight_action_aligned",
+                "forward_spy_return_3m",
+                "forward_qqq_return_3m",
+                "forward_smh_return_3m",
+                "forward_min_max_drawdown_3m",
+                "break_severity_3m",
+                "forward_break_label_3m",
+            ]
+            if column in event_rows
+        ]
+        with st.expander("Snapshot behavior and what-if outcomes", expanded=True):
+            _render_metric_dataframe(_display_metrics(event_rows[columns]))
+
+
+def _render_prebreak_margin_experiment(
+    *,
+    selected_crisis: str,
+    staged_risk: pd.DataFrame,
+    late_trigger: pd.DataFrame,
+    hard_defense_attribution: pd.DataFrame,
+    policy_variants: pd.DataFrame,
+) -> None:
+    selected_stages = _selected_prebreak_stages(staged_risk, selected_crisis=selected_crisis)
+    selected_mesh = _selected_late_trigger_mesh(late_trigger, selected_crisis=selected_crisis)
+    selected_attribution = _selected_hard_defense_attribution(
+        hard_defense_attribution,
+        selected_crisis=selected_crisis,
+    )
+    selected_variants = _selected_policy_variants(
+        policy_variants,
+        selected_crisis=selected_crisis,
+    )
+    if (
+        selected_stages.empty
+        and selected_mesh.empty
+        and selected_attribution.empty
+        and selected_variants.empty
+    ):
+        return
+    render_section_header(
+        "Can We Shrink The Margin?",
+        help_text=(
+            "Research-only audit of whether hard defense could be delayed while preserving "
+            "late-stage drawdown coverage. This uses hindsight event dates, so treat it as a "
+            "candidate policy screen rather than a live rule."
+        ),
+    )
+    if not selected_mesh.empty:
+        mesh = selected_mesh.copy()
+        for column in [
+            "trigger_days_before_break",
+            "hard_defense_lead_cut_days",
+            "missed_severe_label_share_if_gated",
+            "mean_candidate_risk_budget_lift",
+            "pre_trigger_false_alarm_share",
+        ]:
+            if column in mesh:
+                mesh[column] = pd.to_numeric(mesh[column], errors="coerce")
+        best = mesh.sort_values(
+            [
+                "missed_severe_label_share_if_gated",
+                "mean_candidate_risk_budget_lift",
+                "trigger_days_before_break",
+            ],
+            ascending=[True, False, True],
+        ).iloc[0]
+        render_card_grid(
+            [
+                (
+                    "Best Gate",
+                    _days_before_label(best.get("trigger_days_before_break")),
+                    "Lowest missed severe-label share, then highest candidate risk-budget lift.",
+                    _late_trigger_tone(best.get("mesh_read")),
+                ),
+                (
+                    "Lead Cut",
+                    _days_before_label(best.get("hard_defense_lead_cut_days")),
+                    "How many days of hard-defense lead time this gate would remove.",
+                ),
+                (
+                    "Missed Severe",
+                    _fmt_pct(best.get("missed_severe_label_share_if_gated")),
+                    "Share of severe hindsight labels before the gate that would be ignored.",
+                    "critical"
+                    if pd.to_numeric(
+                        pd.Series([best.get("missed_severe_label_share_if_gated")]),
+                        errors="coerce",
+                    ).iloc[0]
+                    > 0.25
+                    else "neutral",
+                ),
+                (
+                    "Budget Lift",
+                    _fmt_pct(best.get("mean_candidate_risk_budget_lift")),
+                    "Average extra risk budget allowed before the hard-defense gate.",
+                    "success"
+                    if pd.to_numeric(
+                        pd.Series([best.get("mean_candidate_risk_budget_lift")]),
+                        errors="coerce",
+                    ).iloc[0]
+                    >= 0.10
+                    else "neutral",
+                ),
+            ]
+        )
+    if not selected_stages.empty:
+        render_chart(
+            _prebreak_staged_risk_figure(selected_stages),
+            title="Actual Risk Budget Vs Staged Target",
+            help_text=(
+                "Compares the bot's median risk budget by event stage against a staged policy "
+                "target: long-lead 100%, early watch 75%, warning 60%, confirmed pre-break 35%, "
+                "break/unwind 20%."
+            ),
+            key=f"dashboard_v2_prebreak_staged_margin_{selected_crisis}",
+        )
+        stage_columns = [
+            column
+            for column in [
+                "prebreak_stage",
+                "snapshots",
+                "min_days_to_break",
+                "max_days_to_break",
+                "target_staged_risk_budget_multiplier",
+                "median_risk_budget_multiplier",
+                "mean_candidate_risk_budget_lift",
+                "hard_defensive_snapshot_share",
+                "early_hard_false_alarm_share",
+                "severe_label_share",
+            ]
+            if column in selected_stages
+        ]
+        with st.expander("Staged-risk behavior detail", expanded=False):
+            display = selected_stages[stage_columns].copy()
+            if "prebreak_stage" in display:
+                display["prebreak_stage"] = display["prebreak_stage"].map(_stage_label)
+            _render_metric_dataframe(_display_metrics(display))
+    if not selected_attribution.empty:
+        attribution_columns = [
+            column
+            for column in [
+                "prebreak_stage",
+                "hard_defense_source",
+                "hard_defensive_snapshots",
+                "source_share_of_stage_hard_defense",
+                "median_risk_budget_multiplier",
+                "median_current_risk_asset_weight",
+                "median_scenario_event_macro_multiplier",
+                "median_portfolio_risk_multiplier",
+                "early_hard_false_alarm_share",
+            ]
+            if column in selected_attribution
+        ]
+        with st.expander("What caused early hard defense?", expanded=True):
+            display = selected_attribution[attribution_columns].copy()
+            if "prebreak_stage" in display:
+                display["prebreak_stage"] = display["prebreak_stage"].map(_stage_label)
+            if "hard_defense_source" in display:
+                display["hard_defense_source"] = display["hard_defense_source"].map(
+                    _stage_label
+                )
+            _render_metric_dataframe(_display_metrics(display))
+    if not selected_mesh.empty:
+        mesh_columns = [
+            column
+            for column in [
+                "trigger_days_before_break",
+                "actual_first_hard_defensive_days_before_break",
+                "hard_defense_lead_cut_days",
+                "pre_trigger_hard_defensive_share",
+                "pre_trigger_false_alarm_share",
+                "severe_label_coverage_inside_trigger",
+                "missed_severe_label_share_if_gated",
+                "mean_candidate_risk_budget_lift",
+                "median_forward_return_when_lifted",
+                "median_forward_drawdown_when_lifted",
+                "mesh_read",
+            ]
+            if column in selected_mesh
+        ]
+        with st.expander("Late-trigger mesh detail", expanded=True):
+            _render_metric_dataframe(_display_metrics(selected_mesh[mesh_columns]))
+    if not selected_variants.empty:
+        variant_columns = [
+            column
+            for column in [
+                "policy_name",
+                "median_actual_risk_budget_multiplier",
+                "median_policy_risk_budget_multiplier",
+                "mean_early_risk_budget_lift",
+                "mean_false_alarm_risk_budget_lift",
+                "mean_severe_label_risk_budget_lift",
+                "mean_incremental_return_proxy_3m",
+                "mean_incremental_drawdown_proxy_3m",
+                "candidate_score",
+                "policy_read",
+            ]
+            if column in selected_variants
+        ]
+        with st.expander("Research policy variants", expanded=True):
+            _render_metric_dataframe(_display_metrics(selected_variants[variant_columns]))
+
+
+def _render_prebreak_signal_attribution(
+    signal_rank: pd.DataFrame,
+    *,
+    current_readout: pd.DataFrame,
+) -> None:
+    render_section_header("What Worked To Detect Break Risk")
+    data = signal_rank.copy()
+    for column in [
+        "predictive_score",
+        "absolute_spearman",
+        "spearman_to_break_severity",
+        "event_auc_edge",
+        "event_auc",
+        "high_minus_low_break_severity",
+        "latest_value",
+    ]:
+        if column in data:
+            data[column] = pd.to_numeric(data[column], errors="coerce")
+    if not current_readout.empty and "signal" in current_readout:
+        current = current_readout[
+            ["signal", "current_risk_read", "historical_percentile"]
+        ].copy()
+        data = data.merge(current, on="signal", how="left")
+    render_chart(
+        _prebreak_signal_rank_figure(data.head(12)),
+        title="Most Predictive Pre-Break Signals",
+        help_text=(
+            "Ranks snapshot signals by correlation with future break severity, event-classification "
+            "edge, and high-minus-low outcome spread."
+        ),
+        key="dashboard_v2_prebreak_signal_rank_chart",
+    )
+    durable = data.head(8).copy()
+    if "signal" in durable:
+        durable["signal"] = durable["signal"].map(_signal_label)
+    columns = [
+        column
+        for column in [
+            "signal",
+            "observations",
+            "predictive_score",
+            "risk_direction",
+            "current_risk_read",
+            "historical_percentile",
+            "spearman_to_break_severity",
+            "event_auc",
+            "high_minus_low_break_severity",
+            "latest_value",
+        ]
+        if column in durable
+    ]
+    with st.expander("Signal attribution table", expanded=True):
+        _render_metric_dataframe(_display_metrics(durable[columns]))
+
+
+def _prebreak_event_rows(
+    signal_panel: pd.DataFrame,
+    *,
+    selected_crisis: str,
+) -> pd.DataFrame:
+    if signal_panel.empty or "event_name" not in signal_panel:
+        return pd.DataFrame()
+    frame = signal_panel[
+        signal_panel["event_name"].fillna("").astype(str).eq(str(selected_crisis))
+    ].copy()
+    if frame.empty:
+        return frame
+    sort_columns = [
+        column for column in ["market_date", "days_to_break", "run_id"] if column in frame
+    ]
+    return frame.sort_values(sort_columns).reset_index(drop=True)
+
+
+def _prebreak_timing_row(
+    action_timing: pd.DataFrame,
+    *,
+    selected_crisis: str,
+) -> pd.Series:
+    if action_timing.empty or "event_name" not in action_timing:
+        return pd.Series(dtype=object)
+    selected = action_timing[
+        action_timing["event_name"].fillna("").astype(str).eq(str(selected_crisis))
+    ]
+    return selected.iloc[0] if not selected.empty else pd.Series(dtype=object)
+
+
+def _selected_prebreak_stages(
+    staged_risk: pd.DataFrame,
+    *,
+    selected_crisis: str,
+) -> pd.DataFrame:
+    if staged_risk.empty or "event_name" not in staged_risk:
+        return pd.DataFrame()
+    selected = staged_risk[
+        staged_risk["event_name"].fillna("").astype(str).eq(str(selected_crisis))
+    ].copy()
+    if selected.empty:
+        return selected
+    if "prebreak_stage_order" in selected:
+        selected["prebreak_stage_order"] = pd.to_numeric(
+            selected["prebreak_stage_order"],
+            errors="coerce",
+        )
+        selected = selected.sort_values("prebreak_stage_order")
+    return selected.reset_index(drop=True)
+
+
+def _selected_late_trigger_mesh(
+    late_trigger: pd.DataFrame,
+    *,
+    selected_crisis: str,
+) -> pd.DataFrame:
+    if late_trigger.empty or "event_name" not in late_trigger:
+        return pd.DataFrame()
+    selected = late_trigger[
+        late_trigger["event_name"].fillna("").astype(str).eq(str(selected_crisis))
+    ].copy()
+    if selected.empty:
+        return selected
+    if "trigger_days_before_break" in selected:
+        selected["trigger_days_before_break"] = pd.to_numeric(
+            selected["trigger_days_before_break"],
+            errors="coerce",
+        )
+        selected = selected.sort_values("trigger_days_before_break")
+    return selected.reset_index(drop=True)
+
+
+def _selected_hard_defense_attribution(
+    hard_defense_attribution: pd.DataFrame,
+    *,
+    selected_crisis: str,
+) -> pd.DataFrame:
+    if hard_defense_attribution.empty or "event_name" not in hard_defense_attribution:
+        return pd.DataFrame()
+    selected = hard_defense_attribution[
+        hard_defense_attribution["event_name"].fillna("").astype(str).eq(str(selected_crisis))
+    ].copy()
+    if selected.empty:
+        return selected
+    if "hard_defense_source" in selected:
+        selected = selected[
+            selected["hard_defense_source"].fillna("").astype(str).ne("not_hard_defensive")
+        ].copy()
+    for column in [
+        "prebreak_stage_order",
+        "source_share_of_stage_hard_defense",
+        "hard_defensive_snapshots",
+    ]:
+        if column in selected:
+            selected[column] = pd.to_numeric(selected[column], errors="coerce")
+    sort_columns = [
+        column
+        for column in [
+            "prebreak_stage_order",
+            "source_share_of_stage_hard_defense",
+            "hard_defensive_snapshots",
+        ]
+        if column in selected
+    ]
+    if sort_columns:
+        selected = selected.sort_values(
+            sort_columns,
+            ascending=[True, False, False][: len(sort_columns)],
+        )
+    return selected.reset_index(drop=True)
+
+
+def _selected_policy_variants(
+    policy_variants: pd.DataFrame,
+    *,
+    selected_crisis: str,
+) -> pd.DataFrame:
+    if policy_variants.empty or "event_name" not in policy_variants:
+        return pd.DataFrame()
+    selected = policy_variants[
+        policy_variants["event_name"].fillna("").astype(str).eq(str(selected_crisis))
+    ].copy()
+    if selected.empty:
+        return selected
+    if "candidate_score" in selected:
+        selected["candidate_score"] = pd.to_numeric(selected["candidate_score"], errors="coerce")
+        selected = selected.sort_values("candidate_score", ascending=False)
+    return selected.reset_index(drop=True)
+
+
+def _prebreak_staged_risk_figure(frame: pd.DataFrame) -> go.Figure:
+    data = frame.copy()
+    if data.empty:
+        return go.Figure()
+    for column in [
+        "target_staged_risk_budget_multiplier",
+        "median_risk_budget_multiplier",
+        "hard_defensive_snapshot_share",
+        "early_hard_false_alarm_share",
+    ]:
+        if column in data:
+            data[column] = pd.to_numeric(data[column], errors="coerce")
+    stage_labels = [_stage_label(value) for value in data["prebreak_stage"].astype(str)]
+    figure = go.Figure()
+    figure.add_trace(
+        go.Bar(
+            x=stage_labels,
+            y=data["median_risk_budget_multiplier"],
+            name="Median actual budget",
+            marker_color="#2563eb",
+            hovertemplate="<b>%{x}</b><br>Actual budget: %{y:.1%}<extra></extra>",
+        )
+    )
+    figure.add_trace(
+        go.Bar(
+            x=stage_labels,
+            y=data["target_staged_risk_budget_multiplier"],
+            name="Staged target",
+            marker_color="#16a34a",
+            opacity=0.72,
+            hovertemplate="<b>%{x}</b><br>Target budget: %{y:.1%}<extra></extra>",
+        )
+    )
+    if "hard_defensive_snapshot_share" in data:
+        figure.add_trace(
+            go.Scatter(
+                x=stage_labels,
+                y=data["hard_defensive_snapshot_share"],
+                mode="lines+markers",
+                name="Hard-defense share",
+                line={"color": "#ef4444", "width": 3},
+                marker={"size": 8},
+                hovertemplate="<b>%{x}</b><br>Hard-defense share: %{y:.1%}<extra></extra>",
+            )
+        )
+    if "early_hard_false_alarm_share" in data:
+        figure.add_trace(
+            go.Scatter(
+                x=stage_labels,
+                y=data["early_hard_false_alarm_share"],
+                mode="lines+markers",
+                name="Early hard false alarm",
+                line={"color": "#f59e0b", "width": 2, "dash": "dash"},
+                marker={"size": 7},
+                hovertemplate="<b>%{x}</b><br>Early false alarm: %{y:.1%}<extra></extra>",
+            )
+        )
+    figure.update_layout(
+        barmode="group",
+        yaxis_title="Share / risk budget",
+        yaxis_tickformat=".0%",
+        xaxis_title="Pre-break stage",
+        legend_title_text="Series",
+        margin={"l": 20, "r": 20, "t": 20, "b": 20},
+        height=420,
+    )
+    return figure
+
+
+def _prebreak_event_behavior_figure(frame: pd.DataFrame) -> go.Figure:
+    data = frame.copy().sort_values("market_date")
+    for column in [
+        "risk_budget_multiplier",
+        "action_severity_score",
+        "forward_spy_return_3m",
+        "forward_qqq_return_3m",
+        "forward_smh_return_3m",
+        "forward_min_max_drawdown_3m",
+    ]:
+        if column in data:
+            data[column] = pd.to_numeric(data[column], errors="coerce")
+    figure = make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        vertical_spacing=0.12,
+        row_heights=[0.48, 0.52],
+        subplot_titles=(
+            "Known-at-the-time behavior",
+            "Hindsight 3-month what-if outcomes",
+        ),
+    )
+    x_values = data["market_date"]
+    if "risk_budget_multiplier" in data:
+        figure.add_trace(
+            go.Scatter(
+                x=x_values,
+                y=data["risk_budget_multiplier"],
+                mode="lines+markers",
+                name="Risk budget multiplier",
+                line={"color": "#2563eb", "width": 3},
+                marker={"size": 7},
+                hovertemplate="<b>%{x|%Y-%m-%d}</b><br>Risk budget: %{y:.1%}<extra></extra>",
+            ),
+            row=1,
+            col=1,
+        )
+    if "action_severity_score" in data:
+        figure.add_trace(
+            go.Bar(
+                x=x_values,
+                y=data["action_severity_score"],
+                name="Action severity",
+                marker_color="#f59e0b",
+                opacity=0.48,
+                hovertemplate="<b>%{x|%Y-%m-%d}</b><br>Action severity: %{y:.1%}<extra></extra>",
+            ),
+            row=1,
+            col=1,
+        )
+    outcome_series = [
+        ("SPY 3m return", "forward_spy_return_3m", "#16a34a"),
+        ("QQQ 3m return", "forward_qqq_return_3m", "#2563eb"),
+        ("SMH 3m return", "forward_smh_return_3m", "#8b5cf6"),
+        ("Worst 3m drawdown", "forward_min_max_drawdown_3m", "#ef4444"),
+    ]
+    for name, column, color in outcome_series:
+        if column not in data or data[column].notna().sum() == 0:
+            continue
+        figure.add_trace(
+            go.Scatter(
+                x=x_values,
+                y=data[column],
+                mode="lines+markers",
+                name=name,
+                line={"color": color, "width": 2},
+                marker={"size": 6},
+                hovertemplate=f"<b>%{{x|%Y-%m-%d}}</b><br>{name}: %{{y:.1%}}<extra></extra>",
+            ),
+            row=2,
+            col=1,
+        )
+    break_dates = data.get("event_break_date", pd.Series(dtype=object)).dropna().astype(str)
+    if not break_dates.empty:
+        break_date = pd.to_datetime(break_dates.iloc[0], errors="coerce")
+        if pd.notna(break_date):
+            figure.add_shape(
+                type="line",
+                xref="x",
+                yref="paper",
+                x0=break_date.isoformat(),
+                x1=break_date.isoformat(),
+                y0=0,
+                y1=1,
+                line={"color": "#ef4444", "dash": "dash", "width": 2},
+            )
+            figure.add_annotation(
+                xref="x",
+                yref="paper",
+                x=break_date.isoformat(),
+                y=1.02,
+                text="Break",
+                showarrow=False,
+                font={"size": 11, "color": "#ef4444"},
+                xanchor="left",
+            )
+    figure.add_hline(y=0, line_color="#7f8ea3", line_width=1, row=2, col=1)
+    figure.update_layout(
+        yaxis_title="Risk budget / severity",
+        yaxis_tickformat=".0%",
+        yaxis2_title="Forward outcome",
+        yaxis2_tickformat=".0%",
+        xaxis2_title="Snapshot market date",
+        legend_title_text="Series",
+        margin={"l": 20, "r": 20, "t": 70, "b": 20},
+        height=560,
+    )
+    return figure
+
+
+def _prebreak_signal_rank_figure(frame: pd.DataFrame) -> go.Figure:
+    data = frame.copy()
+    if data.empty:
+        return go.Figure()
+    data["predictive_score"] = pd.to_numeric(
+        data["predictive_score"],
+        errors="coerce",
+    ).fillna(0.0)
+    data = data.sort_values("predictive_score", ascending=True)
+    colors = [
+        _risk_read_color(value)
+        for value in data.get("current_risk_read", pd.Series("", index=data.index)).astype(str)
+    ]
+    y_labels = [_signal_label(signal) for signal in data["signal"].astype(str)]
+    customdata = data.reindex(
+        columns=[
+            "risk_direction",
+            "current_risk_read",
+            "historical_percentile",
+            "spearman_to_break_severity",
+            "event_auc",
+            "high_minus_low_break_severity",
+        ],
+        fill_value="n/a",
+    ).to_numpy()
+    figure = go.Figure(
+        go.Bar(
+            x=data["predictive_score"],
+            y=y_labels,
+            orientation="h",
+            marker_color=colors,
+            customdata=customdata,
+            hovertemplate=(
+                "<b>%{y}</b><br>Predictive score: %{x:.2f}<br>"
+                "Risk direction: %{customdata[0]}<br>"
+                "Current read: %{customdata[1]}<br>"
+                "Current percentile: %{customdata[2]:.1%}<br>"
+                "Spearman: %{customdata[3]:.2f}<br>"
+                "Event AUC: %{customdata[4]:.2f}<br>"
+                "High-low severity spread: %{customdata[5]:.1%}<extra></extra>"
+            ),
+        )
+    )
+    figure.update_layout(
+        xaxis_title="Predictive score",
+        yaxis_title="Signal",
+        margin={"l": 20, "r": 20, "t": 20, "b": 20},
+        height=420,
+    )
+    return figure
+
+
+def _signal_label(value: object) -> str:
+    text = str(value or "n/a")
+    cleaned = text.replace("cycle_component_", "cycle: ")
+    cleaned = cleaned.replace("health_", "market: ")
+    cleaned = cleaned.replace("instability_", "instability: ")
+    return cleaned.replace("_", " ").title()
+
+
+def _stage_label(value: object) -> str:
+    labels = {
+        "long_lead_context": "Long Lead",
+        "early_watch": "Early Watch",
+        "warning": "Warning",
+        "confirmed_prebreak": "Confirmed Pre-Break",
+        "break_unwind": "Break / Unwind",
+        "postbreak_followthrough": "Post-Break",
+    }
+    text = str(value or "")
+    return labels.get(text, text.replace("_", " ").title() or "n/a")
+
+
+def _late_trigger_tone(value: object) -> str:
+    text = str(value).strip().lower()
+    if text == "promising":
+        return "success"
+    if text == "too_late":
+        return "critical"
+    if text == "limited_lift":
+        return "warning"
+    return "neutral"
+
+
+def _risk_read_tone(value: object) -> str:
+    text = str(value).strip().lower()
+    if text == "elevated":
+        return "critical"
+    if text == "mixed":
+        return "warning"
+    if text == "contained":
+        return "success"
+    return "neutral"
+
+
+def _risk_read_color(value: object) -> str:
+    tone = _risk_read_tone(value)
+    return {
+        "critical": "#ef4444",
+        "warning": "#f59e0b",
+        "success": "#16a34a",
+    }.get(tone, "#7f8ea3")
+
+
+def _days_before_label(value: object) -> str:
+    parsed = pd.to_numeric(pd.Series([value]), errors="coerce").iloc[0]
+    if pd.isna(parsed):
+        return "n/a"
+    if float(parsed) < 0:
+        return f"{abs(int(parsed))}d after"
+    return f"{int(parsed)}d before"
 
 
 def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
@@ -1381,6 +2436,132 @@ def _path_reliability_figure(frame: pd.DataFrame) -> go.Figure:
         yaxis_title="Path phase",
         margin={"l": 20, "r": 20, "t": 20, "b": 20},
         height=360,
+    )
+    return figure
+
+
+def _available_crisis_playback_tickers(frame: pd.DataFrame) -> list[str]:
+    tickers: list[str] = []
+    for column in frame.columns:
+        if not str(column).endswith("_playback_index"):
+            continue
+        ticker = str(column).removesuffix("_playback_index").upper()
+        if f"{ticker.lower()}_playback_drawdown" in frame.columns:
+            tickers.append(ticker)
+    preferred = ["QQQ", "SPY", "VTI", "SMH", "IWM", "LQD", "TLT", "BIL"]
+    ordered = [ticker for ticker in preferred if ticker in tickers]
+    ordered.extend(sorted(ticker for ticker in tickers if ticker not in preferred))
+    return ordered
+
+
+def _crisis_playback_market_frame(frame: pd.DataFrame, *, tickers: list[str]) -> pd.DataFrame:
+    columns = ["origin_date", "stage", "stage_order"]
+    for ticker in tickers:
+        key = ticker.lower()
+        columns.extend(
+            [
+                f"{key}_playback_index",
+                f"{key}_playback_drawdown",
+                f"{key}_playback_return_since_window_start",
+                f"{key}_playback_close",
+            ]
+        )
+    available = [column for column in columns if column in frame.columns]
+    if "origin_date" not in available:
+        return pd.DataFrame()
+    data = frame[available].drop_duplicates().copy()
+    data["origin_date"] = pd.to_datetime(data["origin_date"], errors="coerce")
+    if "stage_order" in data:
+        data["stage_order"] = pd.to_numeric(data["stage_order"], errors="coerce")
+    return data.sort_values(["origin_date", "stage_order"]).reset_index(drop=True)
+
+
+def _crisis_playback_market_figure(frame: pd.DataFrame, *, tickers: list[str]) -> go.Figure:
+    data = _crisis_playback_market_frame(frame, tickers=tickers)
+    figure = make_subplots(
+        rows=2,
+        cols=1,
+        shared_xaxes=True,
+        vertical_spacing=0.10,
+        row_heights=[0.58, 0.42],
+        subplot_titles=(
+            "Ticker path indexed to crisis-window start",
+            "Ticker drawdown from prior crisis-window high",
+        ),
+    )
+    colors = {
+        "QQQ": "#2563eb",
+        "SPY": "#16a34a",
+        "VTI": "#06b6d4",
+        "SMH": "#8b5cf6",
+        "IWM": "#f59e0b",
+        "LQD": "#64748b",
+        "TLT": "#0f766e",
+        "BIL": "#94a3b8",
+    }
+    for ticker in tickers:
+        key = ticker.lower()
+        index_column = f"{key}_playback_index"
+        drawdown_column = f"{key}_playback_drawdown"
+        close_column = f"{key}_playback_close"
+        if index_column not in data or drawdown_column not in data:
+            continue
+        if close_column not in data:
+            data[close_column] = float("nan")
+        if "stage" not in data:
+            data["stage"] = "n/a"
+        customdata = data[[close_column, "stage"]].to_numpy()
+        figure.add_trace(
+            go.Scatter(
+                x=data["origin_date"],
+                y=pd.to_numeric(data[index_column], errors="coerce"),
+                mode="lines+markers",
+                name=f"{ticker} indexed price",
+                line={"color": colors.get(ticker, "#7f8ea3"), "width": 2},
+                marker={"size": 5},
+                customdata=customdata,
+                hovertemplate=(
+                    "<b>%{x|%Y-%m-%d}</b><br>"
+                    f"{ticker} index: "
+                    "%{y:.2f}<br>"
+                    "Close: %{customdata[0]:.2f}<br>"
+                    "Stage: %{customdata[1]}<extra></extra>"
+                ),
+            ),
+            row=1,
+            col=1,
+        )
+        figure.add_trace(
+            go.Scatter(
+                x=data["origin_date"],
+                y=pd.to_numeric(data[drawdown_column], errors="coerce"),
+                mode="lines+markers",
+                name=f"{ticker} drawdown",
+                line={"color": colors.get(ticker, "#7f8ea3"), "width": 2, "dash": "dot"},
+                marker={"size": 5},
+                customdata=customdata,
+                hovertemplate=(
+                    "<b>%{x|%Y-%m-%d}</b><br>"
+                    f"{ticker} drawdown: "
+                    "%{y:.1%}<br>"
+                    "Close: %{customdata[0]:.2f}<br>"
+                    "Stage: %{customdata[1]}<extra></extra>"
+                ),
+            ),
+            row=2,
+            col=1,
+        )
+    figure.add_hline(y=1.0, line_color="#7f8ea3", line_width=1, row=1, col=1)
+    figure.add_hline(y=0.0, line_color="#7f8ea3", line_width=1, row=2, col=1)
+    figure.update_layout(
+        yaxis_title="Index",
+        yaxis_tickformat=".2f",
+        yaxis2_title="Drawdown",
+        yaxis2_tickformat=".0%",
+        xaxis2_title="Historical origin date",
+        legend_title_text="Ticker",
+        margin={"l": 20, "r": 20, "t": 70, "b": 20},
+        height=520,
     )
     return figure
 

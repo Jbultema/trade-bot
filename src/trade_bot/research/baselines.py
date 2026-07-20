@@ -65,7 +65,6 @@ def run_configured_baselines(
     news_config_path: str | Path | None = DEFAULT_NEWS_PATH,
     as_of: str | pd.Timestamp | None = None,
 ) -> BaselineRun:
-    as_of_utc = _as_of_timestamp(as_of)
     prices = load_or_fetch_yahoo_prices(
         configured_tickers(config),
         start=config.data.start,
@@ -81,6 +80,36 @@ def run_configured_baselines(
         end=config.data.end,
         cache_dir=config.data.cache_dir,
         refresh=refresh_macro,
+    )
+    return run_configured_baselines_from_frames(
+        config,
+        prices=prices,
+        macro_data=macro_data,
+        macro_catalog=macro_catalog,
+        refresh_news=refresh_news,
+        event_config_path=event_config_path,
+        news_config_path=news_config_path,
+        as_of=as_of,
+    )
+
+
+def run_configured_baselines_from_frames(
+    config: BotConfig,
+    *,
+    prices: pd.DataFrame,
+    macro_data: pd.DataFrame | None = None,
+    macro_catalog: tuple[FredSeries, ...] = (),
+    refresh_news: bool = False,
+    event_config_path: str | Path | None = DEFAULT_EVENTS_PATH,
+    news_config_path: str | Path | None = DEFAULT_NEWS_PATH,
+    as_of: str | pd.Timestamp | None = None,
+) -> BaselineRun:
+    as_of_utc = _as_of_timestamp(as_of)
+    prices = prices.dropna(how="all").sort_index()
+    macro_data = (
+        macro_data.dropna(how="all").sort_index()
+        if isinstance(macro_data, pd.DataFrame)
+        else pd.DataFrame()
     )
 
     results: dict[str, BacktestResult] = {}

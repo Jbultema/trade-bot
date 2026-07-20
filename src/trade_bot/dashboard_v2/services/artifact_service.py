@@ -32,6 +32,41 @@ def leadership_frames(report_dir: str | Path = "reports/leadership_diagnostics")
     }
 
 
+def prebreak_hindsight_frames(
+    report_dir: str | Path = "reports/prebreak_hindsight",
+) -> dict[str, pd.DataFrame]:
+    root = Path(report_dir)
+    return {
+        "snapshot_signal_panel": read_csv_artifact(root / "snapshot_signal_panel.csv"),
+        "signal_predictiveness_rank": read_csv_artifact(
+            root / "signal_predictiveness_rank.csv"
+        ),
+        "action_timing": read_csv_artifact(root / "action_timing.csv"),
+        "staged_risk_behavior": read_csv_artifact(root / "staged_risk_behavior.csv"),
+        "late_trigger_mesh": read_csv_artifact(root / "late_trigger_mesh.csv"),
+        "hard_defense_attribution": read_csv_artifact(
+            root / "hard_defense_attribution.csv"
+        ),
+        "policy_variant_results": read_csv_artifact(root / "policy_variant_results.csv"),
+        "current_best_signal_readout": read_csv_artifact(
+            root / "current_best_signal_readout.csv"
+        ),
+    }
+
+
+def defensive_signal_audit_frames(
+    report_dir: str | Path = "reports/defensive_signal_audit",
+) -> dict[str, pd.DataFrame]:
+    root = Path(report_dir)
+    return {
+        "current_defensive_exposure": read_csv_artifact(
+            root / "current_defensive_exposure.csv"
+        ),
+        "summary": read_csv_artifact(root / "defensive_signal_summary.csv"),
+        "scorecards": read_csv_artifact(root / "defensive_signal_scorecards.csv"),
+    }
+
+
 def cycle_tracker_frames(report_dir: str | Path = "reports/cycle_tracker") -> dict[str, pd.DataFrame]:
     root = Path(report_dir)
     return {

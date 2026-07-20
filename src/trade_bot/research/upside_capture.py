@@ -60,7 +60,7 @@ def run_upside_capture_lab(
     primary_strategy: str = DEFAULT_PRIMARY_STRATEGY,
     refresh_data: bool = False,
 ) -> UpsideCaptureLabResult:
-    """Run four rounds of upside-capture experiments inspired by 42 Macro gaps."""
+    """Run targeted upside-capture experiments inspired by 42 Macro gaps."""
 
     report_dir = Path(output_dir)
     report_dir.mkdir(parents=True, exist_ok=True)
@@ -1765,6 +1765,251 @@ def _candidate_rounds(base: StrategyConfig) -> tuple[UpsideCaptureCandidate, ...
                         ),
                     ),
                     None,
+                ),
+            ],
+        ),
+        (
+            19,
+            "late exit mesh",
+            [
+                (
+                    "r19_min025_vol185_guard155_mult60",
+                    "Stay risk-on slightly longer with a 15.5% drawdown trigger and softer throttle.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.185,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.155,
+                            risk_multiplier=0.60,
+                        ),
+                    ),
+                    None,
+                ),
+                (
+                    "r19_min025_vol185_guard16_mult60",
+                    "Push the winning exit threshold to 16% while keeping the same vol cap.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.185,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.16,
+                            risk_multiplier=0.60,
+                        ),
+                    ),
+                    None,
+                ),
+                (
+                    "r19_min025_vol185_guard17_mult65",
+                    "Test whether a meaningfully later break line captures more pre-break upside.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.185,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.17,
+                            risk_multiplier=0.65,
+                        ),
+                    ),
+                    None,
+                ),
+                (
+                    "r19_min025_vol185_guard18_mult70",
+                    "Aggressive contrast: defer de-risking until an 18% trailing drawdown.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.185,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.18,
+                            risk_multiplier=0.70,
+                        ),
+                    ),
+                    None,
+                ),
+            ],
+        ),
+        (
+            20,
+            "vol stretch mesh",
+            [
+                (
+                    "r20_min025_vol19_guard145_mult55",
+                    "Raise the risk budget to 19% while preserving the best 14.5% guard.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.19,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.145,
+                            risk_multiplier=0.55,
+                        ),
+                    ),
+                    None,
+                ),
+                (
+                    "r20_min025_vol19_guard15_mult60",
+                    "Pair the 19% vol budget with a later 15% guard and softer throttle.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.19,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.15,
+                            risk_multiplier=0.60,
+                        ),
+                    ),
+                    None,
+                ),
+                (
+                    "r20_min025_vol195_guard145_mult55",
+                    "Probe whether 19.5% volatility adds upside without breaking the left tail.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.195,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.145,
+                            risk_multiplier=0.55,
+                        ),
+                    ),
+                    None,
+                ),
+                (
+                    "r20_min025_vol20_guard145_mult50",
+                    "Aggressive contrast: 20% vol target with harder post-break throttle.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.20,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.145,
+                            risk_multiplier=0.50,
+                        ),
+                    ),
+                    None,
+                ),
+            ],
+        ),
+        (
+            21,
+            "constructive floor on winner",
+            [
+                (
+                    "r21_min025_vol185_guard145_floor60",
+                    "Keep a 60% risk floor when broad trend, breadth, and credit are constructive.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.185,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.145,
+                            risk_multiplier=0.55,
+                        ),
+                    ),
+                    {
+                        "mode": "risk_on_floor",
+                        "floor": 0.60,
+                        "signal": "balanced",
+                        "lookback": 42,
+                        "top_n": 4,
+                    },
+                ),
+                (
+                    "r21_min025_vol185_guard15_floor65",
+                    "Combine the later 15% guard with a 65% constructive risk floor.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.185,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.15,
+                            risk_multiplier=0.55,
+                        ),
+                    ),
+                    {
+                        "mode": "risk_on_floor",
+                        "floor": 0.65,
+                        "signal": "balanced",
+                        "lookback": 42,
+                        "top_n": 4,
+                    },
+                ),
+                (
+                    "r21_min025_vol19_guard145_floor60",
+                    "Pair a modestly higher vol cap with the constructive risk floor.",
+                    clone(
+                        min_return=0.025,
+                        trend_filter_days=None,
+                        volatility_target=VolatilityTargetConfig(
+                            annualized_volatility=0.19,
+                            lookback_days=21,
+                            max_leverage=1.0,
+                        ),
+                        drawdown_control=DrawdownControlConfig(
+                            equity_lookback_days=84,
+                            max_drawdown=-0.145,
+                            risk_multiplier=0.55,
+                        ),
+                    ),
+                    {
+                        "mode": "risk_on_floor",
+                        "floor": 0.60,
+                        "signal": "balanced",
+                        "lookback": 42,
+                        "top_n": 4,
+                    },
                 ),
             ],
         ),

@@ -38,6 +38,7 @@ DEFAULT_PHASE_STATE_STEP_DAYS = 21
 DEFAULT_PHASE_MIN_TRAIN_DAYS = 756
 DEFAULT_PHASE_MAX_CANDIDATES = 60
 CORE_BENCHMARKS = ("SPY", "QQQ", "BIL")
+CRISIS_PLAYBACK_MARKET_TICKERS = ("QQQ", "SPY", "VTI", "SMH", "IWM", "LQD", "TLT", "BIL")
 FRONTIER_ROBUST_ORIGINS = 20
 FRONTIER_MIN_SCALE_ORIGINS = 8
 FRONTIER_ONE_OFF_ORIGINS = 3
@@ -1266,6 +1267,10 @@ def build_cycle_crisis_playback(
         horizons = (0, 21, 63)
     positive_horizons = tuple(horizon for horizon in horizons if horizon > 0)
     max_horizon = max(positive_horizons) if positive_horizons else 0
+    crisis_window_starts = {
+        crisis: min(pd.Timestamp(start) for item_crisis, _, start, _, _ in CRISIS_STAGES if item_crisis == crisis)
+        for crisis, _, _, _, _ in CRISIS_STAGES
+    }
     rows: list[dict[str, object]] = []
     index = clean.index
     for crisis, stage, start, end, stage_order in CRISIS_STAGES:
@@ -1284,6 +1289,13 @@ def build_cycle_crisis_playback(
             probabilities = dict(feature.get("probabilities", {}))
             dominant_phase = str(feature.get("dominant_phase", "normal_cycle"))
             dominant_probability = float(feature.get("dominant_phase_probability", np.nan))
+            window_start_pos = int(index.searchsorted(crisis_window_starts[crisis], side="left"))
+            market_path_metrics = _playback_market_path_metrics(
+                clean,
+                tickers=CRISIS_PLAYBACK_MARKET_TICKERS,
+                start_pos=window_start_pos,
+                origin_pos=origin_pos,
+            )
             for horizon in horizons:
                 if horizon == 0:
                     for phase in PHASES:
@@ -1304,6 +1316,7 @@ def build_cycle_crisis_playback(
                                 "bil_forward_return": np.nan,
                                 "qqq_forward_drawdown": np.nan,
                                 "phase_fit": True,
+                                **market_path_metrics,
                             }
                         )
                     continue
@@ -1341,6 +1354,7 @@ def build_cycle_crisis_playback(
                                     qqq_drawdown,
                                 )
                             ),
+                            **market_path_metrics,
                         }
                     )
     return pd.DataFrame(rows)
@@ -2073,7 +2087,7 @@ def _apply_fragility_role_guard(
         return role_label
     if theme_fragility_penalty >= 0.18 and horizon_days <= 63:
         return "avoid"
-    if theme_fragility_penalty >= 0.10 and role_label in {
+    if theme_fragility_penalty >= 0.08 and role_label in {
         "scale_candidate",
         "starter_reentry",
         "scale_reentry",
@@ -2788,6 +2802,41 @@ def _forward_max_drawdown(prices: pd.DataFrame, ticker: str, start_pos: int, end
     wealth = series.astype(float) / float(series.iloc[0])
     drawdown = wealth / wealth.cummax() - 1.0
     return float(drawdown.min())
+
+
+def _playback_market_path_metrics(
+    prices: pd.DataFrame,
+    *,
+    tickers: tuple[str, ...],
+    start_pos: int,
+    origin_pos: int,
+) -> dict[str, float]:
+    rows: dict[str, float] = {}
+    if prices.empty or origin_pos < 0:
+        return rows
+    start_pos = max(0, min(int(start_pos), len(prices) - 1))
+    origin_pos = max(start_pos, min(int(origin_pos), len(prices) - 1))
+    for ticker in tickers:
+        if ticker not in prices.columns:
+            continue
+        series = prices[ticker].iloc[start_pos : origin_pos + 1].dropna()
+        key = ticker.lower()
+        if series.empty:
+            rows[f"{key}_playback_close"] = np.nan
+            rows[f"{key}_playback_index"] = np.nan
+            rows[f"{key}_playback_return_since_window_start"] = np.nan
+            rows[f"{key}_playback_drawdown"] = np.nan
+            continue
+        start_value = float(series.iloc[0])
+        latest_value = float(series.iloc[-1])
+        peak = float(series.cummax().iloc[-1])
+        rows[f"{key}_playback_close"] = latest_value
+        rows[f"{key}_playback_index"] = latest_value / start_value if start_value > 0 else np.nan
+        rows[f"{key}_playback_return_since_window_start"] = (
+            latest_value / start_value - 1.0 if start_value > 0 else np.nan
+        )
+        rows[f"{key}_playback_drawdown"] = latest_value / peak - 1.0 if peak > 0 else np.nan
+    return rows
 
 
 def _threshold_score(value: float, *, calm: float, stressed: float) -> float:

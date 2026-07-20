@@ -219,6 +219,7 @@ Most refresh work can be run from the dashboard left sidebar:
 | **Run Full Daily Update** | `poetry run trade-bot run-daily-update` | Normal daily path. Refreshes data, scenarios, snapshot, warehouse, and paper valuations. |
 | **Build Snapshot Only** | `poetry run trade-bot build-snapshot` | Rebuilds the dashboard snapshot without downstream warehouse or paper valuation steps. |
 | **Migrate Warehouse** | `poetry run trade-bot migrate-warehouse` | Re-reads experiment, registry, journal, and scorecard artifacts into DuckDB. |
+| **Audit Strategy Sources** | `poetry run trade-bot audit-strategy-sources` | Reconciles top strategy claims across latest snapshot metrics, experiment scorecards, rolling/window diagnostics, and docs. |
 | **Run Paper Valuation** | `poetry run trade-bot run-paper-valuation` | Updates active champion/challenger/reference paper valuations from the latest snapshot. |
 | **Seed Monitoring Windows** | `poetry run trade-bot seed-monitoring-windows` | Adds top paper windows from the current strategy registry. |
 | **Run ML Diagnostics** | `poetry run trade-bot run-ml-diagnostics --profile standard` | Refreshes ML diagnostic artifacts used by research views. |

@@ -354,6 +354,11 @@ def test_crisis_playback_replays_phase_probabilities() -> None:
     nowcast = playback[playback["horizon"].astype(str).eq("0m")]
     assert nowcast["qqq_forward_return"].isna().all()
     assert nowcast["phase_fit"].astype(bool).all()
+    assert {"qqq_playback_index", "qqq_playback_drawdown", "spy_playback_index"}.issubset(
+        playback.columns
+    )
+    assert nowcast["qqq_playback_index"].notna().any()
+    assert nowcast["qqq_playback_drawdown"].le(0.0).all()
 
 
 def test_liquidation_phase_favors_defensive_candidates() -> None:
@@ -760,6 +765,56 @@ def test_phase_candidate_frontier_penalizes_current_ai_break_theme() -> None:
     assert "ai_fragility_conflict" in crwd["evidence_flags"]
     assert "cycle_leader_unwind_risk" in crwd["evidence_flags"]
     assert crwd["frontier_role"] in {"watch", "avoid"}
+
+
+def test_current_phase_candidate_role_applies_ai_fragility_guard() -> None:
+    prices = _cycle_prices("unwind", periods=420)
+    prices["CRWD"] = [100.0 * (1.002**day) for day in range(len(prices.index))]
+    phase_probabilities = pd.DataFrame(
+        [
+            {
+                "phase": "pre_break",
+                "probability": 0.70,
+                "dominant_phase": "pre_break",
+                "horizon": "0m",
+                "horizon_days": 0,
+                "source": "test",
+            }
+        ]
+    )
+    validation_metrics = pd.DataFrame(
+        [
+            {
+                "dominant_phase": phase,
+                "horizon": "1m",
+                "horizon_days": 21,
+                "ticker": "CRWD",
+                "asset_role": "ai_growth",
+                "origins": 24,
+                "median_forward_return": 0.20,
+                "median_forward_drawdown": -0.05,
+                "median_excess_vs_spy": 0.12,
+                "median_excess_vs_qqq": 0.15,
+                "hit_rate_vs_qqq": 0.82,
+                "severe_drawdown_rate": 0.0,
+                "phase_rank_score": 1.0 if phase == "pre_break" else 0.0,
+            }
+            for phase in PHASES
+        ]
+    )
+
+    candidates = build_cycle_candidate_scores(
+        prices,
+        phase_probabilities,
+        validation_metrics,
+        tickers=("CRWD",),
+        horizon_days=21,
+    )
+
+    crwd = candidates.iloc[0]
+    assert crwd["candidate_score"] >= 0.55
+    assert crwd["theme_fragility_penalty"] >= 0.08
+    assert crwd["candidate_role"] == "watch"
 
 
 def test_phase_candidate_frontier_penalizes_ubiquitous_winners() -> None:

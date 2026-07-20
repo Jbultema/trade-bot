@@ -11,6 +11,7 @@ data/cache/
 data/raw/
 data/processed/
 data/run_store/
+data/prebreak_hindsight/
 data/*.sqlite
 reports/
 data/experiments*/
