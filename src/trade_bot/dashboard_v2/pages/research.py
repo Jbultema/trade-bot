@@ -1561,8 +1561,11 @@ def _render_defensive_posture_bridge(defensive_audit: dict[str, pd.DataFrame]) -
             "drawdowns or acted as false alarms. Use this beside, not instead of, pre-break monitors."
         ),
     )
-    exposure_row = exposure.iloc[0] if not exposure.empty else pd.Series(dtype=object)
-    score_row = scorecards.iloc[0] if not scorecards.empty else pd.Series(dtype=object)
+    exposure_row, score_row = _defensive_posture_rows(exposure, scorecards)
+    episode_count = pd.to_numeric(
+        pd.Series([score_row.get("defensive_episode_starts")]), errors="coerce"
+    ).iloc[0]
+    raw_label = str(score_row.get("defensive_judgement_label", "n/a"))
     render_card_grid(
         [
             (
@@ -1576,9 +1579,9 @@ def _render_defensive_posture_bridge(defensive_audit: dict[str, pd.DataFrame]) -
                 "Current defensive or cash-like weight from the defensive signal audit.",
             ),
             (
-                "Defensive Label",
-                score_row.get("defensive_judgement_label", "n/a"),
-                "Historical quality label for similar defensive episodes.",
+                "Historical 65%+ Read",
+                _defensive_label_display(raw_label),
+                "Historical quality label for the focus strategy's 65%+ defensive episodes.",
             ),
             (
                 "Beneficial Under Rule",
@@ -1592,6 +1595,68 @@ def _render_defensive_posture_bridge(defensive_audit: dict[str, pd.DataFrame]) -
             ),
         ]
     )
+    if not score_row.empty:
+        threshold = pd.to_numeric(
+            pd.Series([score_row.get("defensive_threshold")]), errors="coerce"
+        ).iloc[0]
+        horizon = str(score_row.get("defensive_judgement_horizon", "1m"))
+        benchmark = str(score_row.get("defensive_benchmark_ticker", "SPY"))
+        current_defensive = pd.to_numeric(
+            pd.Series([exposure_row.get("current_defensive_weight")]), errors="coerce"
+        ).iloc[0]
+        cohort = (
+            f"{int(episode_count)} historical episodes"
+            if pd.notna(episode_count)
+            else "historical episodes"
+        )
+        threshold_text = f"{threshold:.0%}+" if pd.notna(threshold) else "high-defensive"
+        current_context = ""
+        if pd.notna(current_defensive) and pd.notna(threshold) and current_defensive < threshold:
+            current_context = (
+                f" Today's {current_defensive:.1%} defensive weight is below that audit trigger, "
+                "so this is context for stronger historical defenses, not a resolved label for today."
+            )
+        render_callout(
+            f"This read uses {cohort} for the focus strategy at {threshold_text} defense, "
+            f"measured over {horizon} against {benchmark}.{current_context}"
+        )
+
+
+def _defensive_posture_rows(
+    exposure: pd.DataFrame,
+    scorecards: pd.DataFrame,
+) -> tuple[pd.Series, pd.Series]:
+    """Pair the focus exposure with its own SPY scorecard instead of row order."""
+    exposure_row = exposure.iloc[0] if not exposure.empty else pd.Series(dtype=object)
+    if scorecards.empty:
+        return exposure_row, pd.Series(dtype=object)
+
+    selected = scorecards.copy()
+    focus_strategy = exposure_row.get("strategy")
+    if focus_strategy is not None and "strategy" in selected:
+        matching = selected[selected["strategy"].astype(str).eq(str(focus_strategy))]
+        if not matching.empty:
+            selected = matching
+    if "defensive_benchmark_ticker" in selected:
+        spy = selected[selected["defensive_benchmark_ticker"].astype(str).eq("SPY")]
+        if not spy.empty:
+            selected = spy
+    if "defensive_judgement_horizon" in selected:
+        one_month = selected[
+            selected["defensive_judgement_horizon"].astype(str).eq("1m")
+        ]
+        if not one_month.empty:
+            selected = one_month
+    return exposure_row, selected.iloc[0]
+
+
+def _defensive_label_display(label: str) -> str:
+    labels = {
+        "mixed_but_informative": "Mixed / informative",
+        "weak_defensive_signal": "Weak defensive signal",
+        "not_enough_history": "Insufficient history",
+    }
+    return labels.get(label, label.replace("_", " ").strip().title() or "n/a")
 
 
 def _render_selected_prebreak_event_behavior(

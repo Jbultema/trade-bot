@@ -296,6 +296,53 @@ def test_dashboard_v2_artifact_service_missing_files_are_empty(tmp_path) -> None
     assert all(frame.empty for frame in defensive.values())
 
 
+def test_defensive_posture_bridge_joins_focus_strategy_scorecard() -> None:
+    exposure = pd.DataFrame(
+        [
+            {
+                "strategy": "focus_strategy",
+                "current_defensive_weight": 0.60,
+                "current_risk_weight": 0.40,
+            }
+        ]
+    )
+    scorecards = pd.DataFrame(
+        [
+            {
+                "strategy": "buy_hold_spy",
+                "defensive_benchmark_ticker": "SPY",
+                "defensive_judgement_horizon": "1m",
+                "defensive_judgement_label": "not_enough_history",
+                "defensive_episode_starts": 0,
+            },
+            {
+                "strategy": "focus_strategy",
+                "defensive_benchmark_ticker": "QQQ",
+                "defensive_judgement_horizon": "1m",
+                "defensive_judgement_label": "weak_defensive_signal",
+                "defensive_episode_starts": 42,
+            },
+            {
+                "strategy": "focus_strategy",
+                "defensive_benchmark_ticker": "SPY",
+                "defensive_judgement_horizon": "1m",
+                "defensive_judgement_label": "mixed_but_informative",
+                "defensive_episode_starts": 42,
+            },
+        ]
+    )
+
+    exposure_row, score_row = research._defensive_posture_rows(exposure, scorecards)
+
+    assert exposure_row["strategy"] == "focus_strategy"
+    assert score_row["strategy"] == "focus_strategy"
+    assert score_row["defensive_benchmark_ticker"] == "SPY"
+    assert score_row["defensive_judgement_label"] == "mixed_but_informative"
+    assert research._defensive_label_display(str(score_row["defensive_judgement_label"])) == (
+        "Mixed / informative"
+    )
+
+
 def test_dashboard_v2_card_helper_emits_renderable_html(monkeypatch) -> None:
     captured = {}
 
