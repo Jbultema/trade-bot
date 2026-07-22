@@ -316,7 +316,7 @@ if not snapshot_jobs.empty:
             "log_path",
             "error_message",
         ]
-        st.dataframe(snapshot_jobs[job_columns], use_container_width=True)
+        st.dataframe(snapshot_jobs[job_columns], width="stretch")
 
 snapshot_manifest: SnapshotManifest | None = None
 snapshot_loaded = False
@@ -348,13 +348,25 @@ if run_source == "Latest snapshot (fast)":
         baseline_run, snapshot_manifest = snapshot_payload
         snapshot_loaded = True
 elif run_source == "Selected snapshot" and selected_snapshot_run_id is not None:
-    baseline_run, snapshot_manifest = load_snapshot_dashboard_run_by_id(
+    snapshot_payload = load_snapshot_dashboard_run_by_id(
         str(run_store_path),
         str(artifact_dir),
         str(job_log_dir),
         selected_snapshot_run_id,
     )
-    snapshot_loaded = True
+    if snapshot_payload is None:
+        baseline_run = load_live_run(
+            str(config_path),
+            str(events_path),
+            str(macro_path),
+            str(news_path),
+            refresh_data,
+            refresh_macro,
+            refresh_news,
+        )
+    else:
+        baseline_run, snapshot_manifest = snapshot_payload
+        snapshot_loaded = True
 else:
     baseline_run = load_live_run(
         str(config_path),

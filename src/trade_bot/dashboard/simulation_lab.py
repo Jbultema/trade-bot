@@ -264,18 +264,18 @@ def _render_simulation_validation_history(
         if not origin_metrics.empty:
             st.plotly_chart(
                 _simulation_validation_band_figure(origin_metrics),
-                use_container_width=True,
+                width="stretch",
             )
     with visual_cols[1]:
         if not latest_ablation.empty:
             st.plotly_chart(
                 _simulation_ablation_comparison_figure(latest_ablation),
-                use_container_width=True,
+                width="stretch",
             )
         elif not origin_metrics.empty:
             st.plotly_chart(
                 _simulation_validation_error_figure(origin_metrics),
-                use_container_width=True,
+                width="stretch",
             )
 
     run_columns = [
@@ -290,6 +290,8 @@ def _render_simulation_validation_history(
         "primary_coverage_error",
         "primary_median_abs_error",
         "primary_launch_decision_accuracy",
+        "primary_distribution_calibration_read",
+        "primary_action_readiness_read",
         "primary_validity_read",
     ]
     available_run_columns = [column for column in run_columns if column in runs]
@@ -314,6 +316,8 @@ def _render_simulation_validation_history(
             "launch_action_score",
             "launch_overrisk_rate",
             "constructive_capture_rate",
+            "distribution_calibration_read",
+            "action_readiness_read",
             "validity_read",
         ]
         _render_metric_dataframe(
@@ -348,6 +352,8 @@ def _render_simulation_validation_history(
             "launch_decision_accuracy",
             "launch_action_score",
             "launch_overrisk_rate",
+            "distribution_calibration_read",
+            "action_readiness_read",
             "validity_read",
         ]
         _render_metric_dataframe(
@@ -411,6 +417,8 @@ def _render_simulation_horizon_summary(horizon_metrics: pd.DataFrame) -> None:
         "launch_action_score",
         "launch_overrisk_rate",
         "constructive_capture_rate",
+        "distribution_calibration_read",
+        "action_readiness_read",
         "validity_read",
     ]
     _render_metric_dataframe(
@@ -452,7 +460,7 @@ def _render_simulation_quality_history(
             height=300,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
     with cols[1]:
         figure = long_metric_line_figure(
             summary,
@@ -465,7 +473,7 @@ def _render_simulation_quality_history(
             height=300,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
     cols = st.columns(3)
     with cols[0]:
         figure = long_metric_line_figure(
@@ -479,7 +487,7 @@ def _render_simulation_quality_history(
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
     with cols[1]:
         figure = long_metric_line_figure(
             summary,
@@ -492,7 +500,7 @@ def _render_simulation_quality_history(
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
     with cols[2]:
         figure = long_metric_line_figure(
             summary,
@@ -505,7 +513,7 @@ def _render_simulation_quality_history(
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
 
 
 def _render_simulation_validation_conclusion(
@@ -1153,7 +1161,7 @@ def _render_future_state_map(
 
     chart_cols = st.columns([1.05, 1.0])
     with chart_cols[0]:
-        st.plotly_chart(_scenario_probability_figure(probabilities), use_container_width=True)
+        st.plotly_chart(_scenario_probability_figure(probabilities), width="stretch")
     with chart_cols[1]:
         st.caption("Current scenario records")
         scenario_columns = [
@@ -1499,7 +1507,7 @@ def _render_strategy_simulations(
                 color="#0f766e",
                 hovertemplate="Terminal wealth %{x:$,.0f}<br>Paths %{y}<extra></extra>",
             ),
-            use_container_width=True,
+            width="stretch",
         )
     with chart_cols[1]:
         st.plotly_chart(
@@ -1525,7 +1533,7 @@ def _render_strategy_simulations(
                 value_label="Terminal wealth",
                 value_format="currency",
             ),
-            use_container_width=True,
+            width="stretch",
         )
 
     drawdown_cols = st.columns(2)
@@ -1539,7 +1547,7 @@ def _render_strategy_simulations(
                 color="#dc2626",
                 hovertemplate="Max drawdown %{x:.1%}<br>Paths %{y}<extra></extra>",
             ),
-            use_container_width=True,
+            width="stretch",
         )
     with drawdown_cols[1]:
         st.plotly_chart(
@@ -1565,7 +1573,7 @@ def _render_strategy_simulations(
                 value_label="Max drawdown",
                 value_format="percent",
             ),
-            use_container_width=True,
+            width="stretch",
         )
 
     if reference_simulations:
@@ -2253,7 +2261,7 @@ def _render_simulation_interpretability(
     )
     if not resemblance.empty:
         st.caption("How much do the simulated futures resemble the tested past?")
-        st.plotly_chart(_regime_resemblance_figure(resemblance), use_container_width=True)
+        st.plotly_chart(_regime_resemblance_figure(resemblance), width="stretch")
         _render_metric_dataframe(_display_metrics(resemblance), hide_index=True)
 
     st.caption("What the simulation may be missing")

@@ -7,7 +7,7 @@ import pandas as pd
 import pytest
 
 import trade_bot.storage.warehouse as warehouse_module
-from trade_bot.config import ExecutionConfig, StrategyConfig
+from trade_bot.config import ExecutionConfig, StrategyConfig, load_config
 from trade_bot.storage.warehouse import TradingWarehouse
 
 
@@ -121,6 +121,42 @@ def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_pa
     assert json.loads(str(champion.iloc[0]["latest_weights_json"])) == {"BIL": 0.5, "QQQ": 0.5}
 
 
+def test_warehouse_freezes_fixed_prospective_cohort_without_backfill(tmp_path) -> None:
+    warehouse = TradingWarehouse(tmp_path / "trade_bot.duckdb")
+    config = load_config("configs/baseline.yaml")
+
+    seeded = warehouse.seed_prospective_monitoring_cohort(
+        config,
+        start_date="2026-07-20",
+    )
+    windows = warehouse.list_monitoring_windows(status="active")
+
+    assert len(seeded) == 5
+    assert set(windows["strategy_name"]) == {
+        "i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145",
+        "i111_native_risk_repair_guard17_relief85_ai85_div",
+        "i111_reentry_vol_target_fast_21d_no_trend_min25",
+        "buy_hold_qqq",
+        "buy_hold_spy",
+    }
+    assert set(windows["start_date"]) == {"2026-07-20"}
+    assert set(windows["evidence_basis"]) == {"prospective_no_backfill"}
+    assert not windows["historical_backfill_allowed"].any()
+    assert windows["strategy_json"].astype(str).str.len().gt(10).all()
+    assert windows["execution_json"].astype(str).str.len().gt(10).all()
+    assert windows["strategy_version"].astype(str).str.len().eq(64).all()
+    assert int((windows["window_role"] == "champion").sum()) == 1
+    assert int((windows["window_role"] == "challenger").sum()) == 2
+    assert int((windows["window_role"] == "reference").sum()) == 2
+    assert (
+        warehouse.seed_prospective_monitoring_cohort(
+            config,
+            start_date="2026-07-20",
+        )
+        == []
+    )
+
+
 def test_warehouse_persists_simulation_validation_history(tmp_path) -> None:
     warehouse = TradingWarehouse(tmp_path / "trade_bot.duckdb")
     validation = pd.DataFrame(
@@ -196,6 +232,8 @@ def test_warehouse_persists_simulation_validation_history(tmp_path) -> None:
             "coverage_error": 0.2,
             "median_abs_error": 0.005,
             "launch_decision_accuracy": 1.0,
+            "distribution_calibration_read": "interval_too_wide",
+            "action_readiness_read": "action_checks_ready_for_research",
             "validity_read": "calibrated_enough_for_research",
         },
         validation=validation,
@@ -212,13 +250,67 @@ def test_warehouse_persists_simulation_validation_history(tmp_path) -> None:
     assert runs.iloc[0]["validation_run_id"] == validation_run_id
     assert runs.iloc[0]["strategy"] == "strategy_a"
     assert runs.iloc[0]["target_interval_coverage"] == pytest.approx(0.60)
+    assert runs.iloc[0]["primary_distribution_calibration_read"] == "interval_too_wide"
+    assert runs.iloc[0]["primary_action_readiness_read"] == "action_checks_ready_for_research"
     assert set(metrics["metric_scope"]) == {
         "primary_summary",
         "rolling_origin",
         "ablation_summary",
     }
+    primary_metric = metrics[metrics["metric_scope"].eq("primary_summary")].iloc[0]
+    assert primary_metric["distribution_calibration_read"] == "interval_too_wide"
+    assert primary_metric["action_readiness_read"] == "action_checks_ready_for_research"
     assert ablation_metrics.iloc[0]["variant"] == "duration_covariate"
     assert bool(ablation_metrics.iloc[0]["uses_covariate_matching"])
+
+
+def test_warehouse_migrates_split_simulation_read_columns(tmp_path) -> None:
+    db_path = tmp_path / "trade_bot.duckdb"
+    TradingWarehouse(db_path)
+    connection = warehouse_module.duckdb.connect(str(db_path))
+    try:
+        connection.execute(
+            "ALTER TABLE simulation_validation_runs "
+            "DROP COLUMN primary_distribution_calibration_read"
+        )
+        connection.execute(
+            "ALTER TABLE simulation_validation_runs DROP COLUMN primary_action_readiness_read"
+        )
+        connection.execute(
+            "ALTER TABLE simulation_validation_metrics DROP COLUMN distribution_calibration_read"
+        )
+        connection.execute(
+            "ALTER TABLE simulation_validation_metrics DROP COLUMN action_readiness_read"
+        )
+    finally:
+        connection.close()
+
+    TradingWarehouse(db_path)
+    connection = warehouse_module.duckdb.connect(str(db_path), read_only=True)
+    try:
+        run_columns = {
+            str(row[1])
+            for row in connection.execute(
+                "PRAGMA table_info('simulation_validation_runs')"
+            ).fetchall()
+        }
+        metric_columns = {
+            str(row[1])
+            for row in connection.execute(
+                "PRAGMA table_info('simulation_validation_metrics')"
+            ).fetchall()
+        }
+    finally:
+        connection.close()
+
+    assert {
+        "primary_distribution_calibration_read",
+        "primary_action_readiness_read",
+    }.issubset(run_columns)
+    assert {
+        "distribution_calibration_read",
+        "action_readiness_read",
+    }.issubset(metric_columns)
 
 
 def test_warehouse_persists_reconstructed_operating_history(tmp_path) -> None:

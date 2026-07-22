@@ -98,8 +98,7 @@ def run_prebreak_risk_policy_backtest(
     for candidate in candidates:
         candidate_prices = _strategy_prices(
             prices,
-            candidate.strategy.tickers,
-            candidate.strategy.defensive_ticker,
+            candidate.strategy,
         )
         base_result = _run_candidate_backtest(config, candidate, prices, candidate_prices)
         policy_metrics.append(

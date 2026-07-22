@@ -283,8 +283,114 @@ def test_rolling_origin_simulation_backtest_scores_calibration() -> None:
         "too_bullish",
         "too_bearish",
         "drawdown_miscalibrated",
-        "calibrated_enough_for_research",
+        "return_bands_calibrated__action_checks_not_ready",
+        "return_bands_calibrated__action_checks_marginal",
+        "return_bands_and_action_checks_ready_for_research",
     }
+
+
+def test_rolling_origin_simulation_checkpoint_resumes_without_recomputation(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path,
+) -> None:
+    index = pd.bdate_range("2024-01-02", periods=160)
+    returns = pd.Series([0.001] * 70 + [-0.006] * 20 + [0.002] * 70, index=index)
+    config = ForwardSimulationValidationConfig(
+        origin_frequency="quarterly",
+        horizons=(("1m", 20),),
+        min_train_days=50,
+        paths=8,
+        block_days=5,
+        random_seed=31,
+        min_regime_observations=1,
+    )
+    checkpoint = tmp_path / "simulation_checkpoint.csv"
+    original = rolling_origin_simulation_backtest(
+        returns,
+        config=config,
+        checkpoint_path=checkpoint,
+        checkpoint_every_origins=1,
+    )
+
+    def fail_if_recomputed(*args: object, **kwargs: object) -> pd.DataFrame:
+        raise AssertionError("completed origins should be loaded from the checkpoint")
+
+    monkeypatch.setattr(
+        "trade_bot.research.forward_simulation.simulate_regime_conditioned_paths",
+        fail_if_recomputed,
+    )
+    resumed = rolling_origin_simulation_backtest(
+        returns,
+        config=config,
+        checkpoint_path=checkpoint,
+        resume=True,
+        checkpoint_every_origins=1,
+    )
+
+    resumed_comparable = resumed.astype(object).where(resumed.notna(), None)
+    original_comparable = original.astype(object).where(original.notna(), None)
+    pd.testing.assert_frame_equal(resumed_comparable, original_comparable, check_dtype=False)
+    assert checkpoint.exists()
+    assert checkpoint.with_suffix(".csv.meta.json").exists()
+
+
+def test_rolling_origin_simulation_checkpoint_rejects_changed_inputs(tmp_path) -> None:
+    index = pd.bdate_range("2024-01-02", periods=140)
+    returns = pd.Series([0.001] * 140, index=index)
+    config = ForwardSimulationValidationConfig(
+        origin_frequency="quarterly",
+        horizons=(("1m", 20),),
+        min_train_days=50,
+        paths=5,
+        min_regime_observations=1,
+    )
+    checkpoint = tmp_path / "simulation_checkpoint.csv"
+    rolling_origin_simulation_backtest(
+        returns,
+        config=config,
+        checkpoint_path=checkpoint,
+        checkpoint_every_origins=1,
+    )
+
+    changed = returns.copy()
+    changed.iloc[-1] = -0.01
+    with pytest.raises(ValueError, match="do not match"):
+        rolling_origin_simulation_backtest(
+            changed,
+            config=config,
+            checkpoint_path=checkpoint,
+            resume=True,
+        )
+
+
+def test_simulation_validity_does_not_hide_weak_action_accuracy() -> None:
+    validation = pd.DataFrame(
+        [
+            {
+                "origin_date": f"2024-{month:02d}-01",
+                "horizon": "3m",
+                "realized_in_interval": index % 2 == 0,
+                "target_interval_coverage": 0.5,
+                "p50_error": 0.01,
+                "simulated_severe_drawdown_probability": 0.2,
+                "realized_severe_drawdown": False,
+                "simulated_launch_decision": "full_launch",
+                "realized_launch_decision": "wait" if index < 8 else "full_launch",
+                "launch_action_error": 2 if index < 8 else 0,
+                "launch_overrisk": index < 8,
+                "launch_underrisk": False,
+                "avoided_bad_launch_action": False,
+                "captured_constructive_launch": True,
+            }
+            for index, month in enumerate(range(1, 13))
+        ]
+    )
+
+    summary = summarize_simulation_validation(validation)
+
+    assert summary["distribution_calibration_read"] == "return_bands_calibrated_for_research"
+    assert summary["action_readiness_read"] == "action_checks_not_ready"
+    assert summary["validity_read"] == "return_bands_calibrated__action_checks_not_ready"
 
 
 def test_rolling_origin_simulation_backtest_accepts_utc_scenario_history_dates() -> None:

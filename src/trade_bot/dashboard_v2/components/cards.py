@@ -38,7 +38,7 @@ def render_card_grid(cards: Iterable[CardSpec]) -> None:
 def render_callout(message: str, *, heavy: bool = False) -> None:
     class_name = "v2-callout v2-heavy-callout" if heavy else "v2-callout"
     st.markdown(
-        f"<div class=\"{class_name}\">{html.escape(message)}</div>",
+        f'<div class="{class_name}">{html.escape(message)}</div>',
         unsafe_allow_html=True,
     )
 
@@ -58,7 +58,7 @@ def render_chart(
     *,
     title: str | None = None,
     help_text: str | None = None,
-    use_container_width: bool = True,
+    width: str | int = "stretch",
     **kwargs: Any,
 ) -> None:
     chart_title = title or _figure_title(figure)
@@ -70,7 +70,11 @@ def render_chart(
             unsafe_allow_html=True,
         )
         _strip_figure_title(figure)
-    st.plotly_chart(figure, use_container_width=use_container_width, **kwargs)
+    st.plotly_chart(
+        figure,
+        width=width,
+        **kwargs,
+    )
 
 
 def help_icon(help_text: str | None) -> str:

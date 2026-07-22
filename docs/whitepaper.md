@@ -1,6 +1,11 @@
 # Trade Bot System Whitepaper
 
-Status: canonical overview. Last reviewed: 2026-07-17.
+Status: canonical overview. Last reviewed: 2026-07-21.
+
+For an exhaustive machine-oriented audit packet, including exact formulas,
+current attribution, provenance boundaries, empirical tables, failure modes,
+and questions for an independent LLM reviewer, see
+[`ai_review_whitepaper.md`](ai_review_whitepaper.md).
 
 ## Executive Summary
 
@@ -117,7 +122,7 @@ The main components are:
 | Current-state engine | Builds the daily market read: risk status, confirmation matrix, 0M regime pulse/instability nowcasts, scenarios, drivers, and current posture. |
 | Strategy engine | Constructs target weights for baselines, research candidates, and selected operating systems. |
 | Backtest engine | Applies execution lag, rebalance cadence, transaction costs, target weights, and equity compounding. |
-| Risk engine | Applies scenario-aware sizing, expected shortfall, stress loss, factor exposure, concentration checks, and defensive floors. |
+| Risk engine | Applies price-state sizing, calibration-gated scenario authority, expected shortfall, stress loss, factor exposure, concentration checks, and defensive floors. |
 | Research Lab | Compares experiments, strategy families, outcome frontier, validation, factor attribution, and candidate details. |
 | Simulation Lab | Projects selected strategies through deterministic, bootstrap, and regime-conditioned forward paths, then validates those simulations with rolling-origin calibration tests. |
 | Launch Lab | Tests whether new or scale-up capital should enter a selected strategy now, gradually, or wait, with Simulation Lab diagnostics acting as a forward-risk guardrail. |
@@ -146,8 +151,8 @@ important objects include:
 
 - **Risk status**: a compact label such as green, yellow, orange, or red that
   summarizes current market pressure.
-- **Risk score**: a numeric summary behind the status. Higher is generally more
-  constructive; lower is more defensive.
+- **Risk score**: a numeric pressure summary behind the status. Higher means
+  more risk/defense pressure; lower is more constructive.
 - **Confirmation matrix**: a collection of market, credit, breadth, trend,
   volatility, macro, and related checks that can be bullish, neutral, or bearish.
 - **Scenario lattice**: probabilities for possible future market regimes across
@@ -158,8 +163,12 @@ important objects include:
 
 The scenario layer does not claim to predict exact index levels. It maps current
 conditions into broad future-state probabilities. Examples include risk-off,
-transition, broad risk-on, fragile risk-on, or risk-off-then-relief. The sizing
-engine uses these probabilities to adjust risk budgets and defensive floors.
+transition, broad risk-on, fragile risk-on, or risk-off-then-relief. As of the
+July 2026 calibration, those probabilities are research context rather than an
+allocation driver: their one-month Brier skill was negative and their earned
+one-month sizing authority was zero. The raw probabilities remain visible, but
+they do not adjust risk budgets or portfolio limits until walk-forward
+calibration earns authority through an explicit configuration change.
 
 One important design principle is model authority. Signals are not all equal.
 Trade Bot distinguishes:
@@ -176,6 +185,24 @@ This prevents the system from drifting into "trade by vibes." A compelling
 headline can enter the daily brief, but a large de-risking move should generally
 require confirmation from price, breadth, volatility, credit, trend, or another
 validated driver.
+
+The operating decision now stores a sequential causal attribution. It begins
+with the base strategy, then records the marginal defensive percentage points
+from quantitative risk status, scenario probabilities, event/news pressure,
+accepted macro signals, independent portfolio constraints, and the final
+governance guardrail. A layer with zero marginal effect is not described as a
+reason for the target. Permanent counterfactuals rerun the decision with news
+disabled, news visible but informational-only, and news sizing enabled as a
+research comparison.
+
+In the July 21 snapshot, the base strategy supplied 59.70% defense and yellow
+price-derived risk status added 4.03 percentage points, producing 63.73% final
+defense. Scenario probabilities, news/events, macro categories, portfolio hard
+constraints, and decision sanity each added zero. The news-disabled and
+news-informational-only counterfactuals reproduced the same risk score, risk
+budget, scenario probabilities, weights, equity beta, and beta-adjusted S&P
+delta. This is direct evidence that the current recommendation is not the
+research narrative being reflected back through sizing.
 
 ## 4. Strategy Construction And Risk Management
 
@@ -195,7 +222,8 @@ The system separates three concepts that are often mixed together:
 
 For example, a growth-oriented strategy may select QQQ, SMH, SPY, IWM, or
 related growth proxies. Its sizing logic may use momentum, drawdown repair,
-volatility targeting, or scenario pressure. Its risk control may impose
+or volatility targeting. Scenario pressure can regain sizing authority only
+after calibration. Its risk control may impose
 defensive allocations to BIL, Treasuries, gold, or cash-like assets when
 confirmation breaks.
 
@@ -211,14 +239,34 @@ raw target violates broader portfolio constraints. It can adjust for:
 - expected shortfall,
 - stress loss,
 - concentration,
-- scenario-weighted downside risk,
+- scenario-weighted downside risk as an advisory diagnostic unless separately
+  granted authority,
 - minimum defensive allocation.
 
-A separate decision-sanity overlay exists because news and narrative pressure
-can make a system too bearish. The overlay can cap event-only defensive moves
-unless enough market-confirmed breaks appear. That is especially important in
-fragile bull markets where the narrative risk is real but the market has not
-yet confirmed a broad break.
+The balanced-asymmetric operating profile keeps news and narrative
+informational-only. A separate decision-sanity overlay remains as a governance
+backstop for research configurations that intentionally grant event sizing
+authority: it caps event-only defensive moves unless enough market-confirmed
+breaks appear.
+
+Risk and narrative semantics are now explicit. The configured defensive asset
+is exempt from the risk-asset single-position cap, constraint comparisons use
+small absolute and relative tolerances so machine-precision noise cannot create
+a breach, and the headline summary is built from the same complete hard-
+constraint set as the detailed report. News cache fallback is marked with its
+original data-as-of time and is triage-only: degraded source health cannot
+create a sizing-authority event. Curated and news-derived events can decay and
+expire, so old narrative pressure cannot remain at full strength indefinitely.
+
+Portfolio risk is separated into independently measurable hard constraints and
+scenario-conditioned research. Equity beta, expected shortfall, and maximum
+stress loss remain hard under the active utility profile. Scenario-conditioned
+tightening and the scenario-weighted-stress clamp currently have zero authority,
+which removes the structural tendency to converge near 77% BIL while preserving
+true catastrophic-risk controls. Utility profiles make the distinction explicit:
+growth, balanced-asymmetric, and capital-preservation profiles carry different
+normal-tail and catastrophic-stress tolerances; they do not override a failed
+scenario-calibration gate.
 
 ## 5. What The Research Has Found About Strong Strategies
 
@@ -245,6 +293,23 @@ much of the result depends on technology, AI, semiconductor, or mega-cap growth
 leadership. These warnings do not invalidate the leading candidate family, but
 they mean the result should be treated as a promising growth strategy with
 concentration risk, not as a generic market timing law.
+
+The latest execution work makes that caveat concrete: ordinary rebalance-day
+and signal-lag changes materially alter the i111 path. Neither the V2.2 native
+hardening mechanisms nor the V2.3 fixed-slate smoothing transforms cleared
+their replacement gates, so they remain research evidence rather than operating
+strategy upgrades.
+
+A subsequent fixed cross-sectional study tested one causal hypothesis rather
+than another parameter grid. When six of the native strategy's eight AI-stress
+components agreed, AI exits stayed immediate but new or increased AI targets
+were redirected to either BIL or RSP. Neither policy passed. At configured
+costs, the reference produced 21.01% Wednesday CAGR and a -30.60% worst
+execution-profile drawdown. BIL deferral reduced Wednesday CAGR to 18.85%,
+barely improved the worst drawdown to -30.32%, and increased execution failures
+from seven to eight. RSP deferral produced 19.29% Wednesday CAGR, worsened the
+worst drawdown to -34.29%, and also had eight failures. This closes that fixed
+hypothesis as `no_robust_improvement`; it does not justify a strategy change.
 
 Later sector-regime and global-rotation experiments serve a different purpose.
 They have produced lower-CAGR candidates, often in the 3-6% range, with lower
@@ -295,12 +360,16 @@ only works in one historical era is not enough. The user can inspect periods
 such as 2008, 2011, 2018, 2020, 2022, and recent AI-led markets to understand
 where a strategy exited, stayed defensive, re-entered, or failed.
 
-The third layer is walk-forward validation. In walk-forward testing, the system
-trains or selects based on one historical segment and evaluates on a later
-segment. The purpose is to reduce overfit risk. A strong candidate should not
-only have a good full-history score; it should have a positive walk-forward
-rate, a tolerable worst rolling period, and reasonable performance in left-tail
-regimes.
+The third layer separates two tests that should not be conflated. The common
+`walk_forward.csv` artifacts are sequential fixed-strategy holdouts: the same
+already-defined strategy is evaluated across later one-year windows. They show
+time-local fragility, but they do not train, tune, or select on the preceding
+segment and therefore are not proof against selection overfit. True
+walk-forward selectors and routers use only an earlier segment to choose a
+model or rule, then score that frozen choice on a later segment. A strong
+candidate should have positive sequential-holdout behavior, tolerable worst
+rolling periods, reasonable left-tail performance, and—where selection is part
+of the mechanism—a genuinely nested train/select/test record.
 
 The fourth layer is outcome utility. For this project, the objective is not just
 "high Calmar." The Growth-Constrained Outcome Frontier asks whether extra CAGR
@@ -341,6 +410,71 @@ benchmark comparison, and re-risk behavior by horizon. The point is not to turn
 this into a separate sizing engine. It is an interpretability layer that says,
 in plain language, whether today's defensive posture resembles historical
 caution windows that helped or mostly missed upside.
+
+The calibration is also applied to the scenario probabilities themselves.
+Point-in-time weekly origins are matched to matured SPY-versus-BIL and drawdown
+outcomes at one week, one month, and three months. The report includes reliability
+bins, Brier score and skill, AUC, expected calibration error, block-bootstrap
+uncertainty, and expanding-history authority. In the July 21, 2026 run, one-week
+and one-month Brier skill were negative; three-month skill was slightly positive
+but its interval crossed zero. The active policy therefore assigns zero
+one-month sizing authority.
+
+The layered-defense audit found that the old intersection of base defense,
+scenario clamp, and portfolio stress clamp did not add reliable downside
+discrimination. At one month it had 27 independent episodes, a 22% correct-
+defense rate, and a 52% costly-false-positive rate; at three months it had 26
+episodes, a 27% correct-defense rate, and a 50% costly-false-positive rate.
+The old final defensive weight also clustered near 77%, confirming a structural
+attractor rather than a uniquely precise current estimate. These retrospective,
+small-sample findings justified removing authority.
+
+The replacement-policy replay then retested 1,020 weekly origins with the live
+calibration gates applied. Scenario probabilities added exactly zero defense at
+every origin, as required by the zero-authority configuration. At the study's
+materiality thresholds, the current state is not a three-layer agreement: the
+native strategy is 59.70% defensive, price-derived risk status adds 4.03
+percentage points (below the five-point layer threshold), and hard portfolio
+constraints add zero. No historical origin had native defense above 55%, a
+quantitative sizing addition above five points, and an additional hard-
+portfolio clamp above one point simultaneously.
+
+The closest active comparison, native defense plus quantitative risk-status
+sizing, was directionally better than native defense alone but not decisive. At
+one month it produced 50 episodes, a 50% correct-defense rate, and a 28% false-
+alarm rate, versus 40 native-only episodes at 48% and 35%. At three months the
+rates were 50% and 34%, versus 38% and 36%. By contrast, quantitative sizing
+plus a portfolio clamp without native defense had weaker one-month
+discrimination: 38% correct defense and 42% false alarms across 69 episodes.
+Raising the base-defense threshold from 55% to 60% did not reverse that result.
+Base-plus-quantitative episodes then improved correct-defense rates versus
+base-only by 6.8 points at one month and 12.5 points at three months, while
+false alarms fell by 17.4 and 11.9 points. This sensitivity supports the
+direction of the interaction, but it does not make the non-random cohorts
+independent or prove an optimal threshold.
+
+The non-overlapping weekly replay makes the opportunity cost explicit. Native
+strategy sizing produced a 20.6% CAGR and -24.8% maximum drawdown. Quantitative
+sizing reduced drawdown by 5.1 percentage points but reduced CAGR by 5.5 points;
+adding the hard portfolio layer reduced drawdown by 8.2 points but reduced CAGR
+by 8.1 points. A separate sparse pre-break overlay replay reduced median CAGR
+from 15.0% to 12.2% without improving median maximum drawdown. These are
+retrospective, current-universe results rather than prospective proof, but they
+show that the cost of optionality has not historically been small enough to
+treat aggressive overlay defense as a free improvement.
+
+A narrower replay that applied the final overlay only during the current
+material layer classification (`base_only` at the 55%/5%/1% thresholds) was
+nearly neutral: CAGR was 20.5% versus 20.6% for the native strategy and maximum
+drawdown was unchanged at -24.8%. That supports treating today's extra four
+points of price-status defense as a modest risk-budget adjustment, not as
+independent confirmation of a high-conviction break call.
+
+The separate strategy-native audit reaches a similarly measured conclusion. At
+the focus strategy's 65% defensive threshold, one-month episodes were 47.7%
+correct defense, 29.5% false alarms, and 22.7% mixed. At three months they were
+43.2%, 29.5%, and 27.3%. Native defense has useful but imperfect historical
+discrimination; it should not be described as a crash prediction.
 
 The ninth layer is leadership-dependence diagnostics. This exists because the
 strongest candidates can be excellent for reasons that are too concentrated.
@@ -403,6 +537,16 @@ is better framed as post-unwind compounding. The operational read is the
 path-aware one; the raw evidence remains visible so disagreements can be
 inspected instead of hidden.
 
+Research governance is also a test layer. New manifests record the declared
+trial roster and run a fail-closed point-in-time universe audit covering
+historical membership, holding-date eligibility, delisting returns, and source
+metadata. The consolidated 2026-07-21 ledger indexes 537 manifested completed
+trial rows across 11 study manifests, with explicit rosters recovered for all
+11. It also reports that all 537 rows still lack verified point-in-time universe
+evidence. That is a blocker, not a warning label. The ledger cannot reconstruct
+interrupted or unmanifested attempts, so complete historical trial-count proof
+also remains unfinished.
+
 Simulation validation is now treated as its own test family rather than a visual
 nice-to-have. The rolling-origin simulation test chooses historical origin dates,
 trains the simulator only on returns available through each origin, simulates
@@ -431,6 +575,17 @@ coverage, median miss, severe-drawdown calibration, and launch-action quality
 are all acceptable. A weak run should add friction to Launch Lab and reduce the
 authority of the forward fan chart. Simulation Lab is planning support, not a
 standalone launch authority.
+
+Rolling-origin validation is checkpointed and resumable. Checkpoints include a
+fingerprint of the exact returns, scenario/factor inputs, and validation
+settings; a changed-input resume fails closed. A bounded native-i111 smoke test
+verified the mechanism across 77 quarterly one-month origins with only 20 paths
+per origin. It produced 45.45% interval coverage against a 60% target, 4.57%
+median absolute error, 3.90% launch-decision accuracy, and a 44.16% launch-action
+score. The distribution label was research-usable, but the action layer was
+`action_checks_not_ready`. Because the run used a tiny path count, one horizon,
+quarterly origins, and fallback scenario probabilities, it is implementation
+evidence and a warning—not full native-i111 simulation validation.
 
 Scenario history is also separated by source. Saved snapshots are true
 date-stamped operating records. Reconstructed scenario history rebuilds the
@@ -685,6 +840,14 @@ valuations, cumulative return, benchmark comparison, drawdown, and forward
 status. This is critical because paper monitoring from different start dates can
 otherwise create misleading comparisons.
 
+The first genuine no-backfill V2.2 cohort was frozen on 2026-07-21. It contains
+the configured primary, the native risk-repair challenger, the Min-25 lower-risk
+challenger, QQQ, and SPY. Each window stores a frozen strategy definition,
+execution definition, version hash, cohort identifier, and
+`prospective_no_backfill` evidence basis. Its starting valuation is zero by
+construction. Reconstructed January or June slices remain useful recency views,
+but they do not count toward this prospective cohort's proof.
+
 Monitoring start dates are first-class evidence. The same strategy can have a
 paper champion window, a later challenger window, and a fresh experiment-start
 window. These start-date splits are deliberate. They make it possible to
@@ -795,6 +958,32 @@ macro process disagree during large-change moments, the system can preserve that
 record and later ask which posture handled the next 1 week, 1 month, or 3 months
 better.
 
+The July 21, 2026 refresh covered 256 transcript-backed videos through the same
+day. An audit found and fixed a material comparison bug: the old mapping treated
+the 90% risk-budget capacity as if it were total risk exposure, causing a 63.73%
+defensive Trade Bot portfolio to be labeled risk-on. The canonical mapping now
+uses final defensive allocation. On that basis, the newest 42 Macro transcript
+is `constructive_but_fragile` (-0.15) and Trade Bot is `cautious` (-0.27), an
+aligned 0.13-point gap. The qualitative agreement is strongest on extreme
+dispersion, leverage/concentration, AI-capex fragility, and credit as the
+confirmation channel. The horizon read is not identical: 42 Macro still calls
+the present regime risk-on and expects crowded positioning to make a short
+squeeze the likely first move, whereas Trade Bot currently holds only 36.27%
+risk exposure. Because Trade Bot's news, event, and scenario allocation
+authorities are zero, this sizing is not a reflection of the 42 Macro content,
+although both processes observe some of the same market-price evidence.
+
+The expanded July 14-21 review also exposed a limit in the comparison itself:
+the transparent keyword classifier can collapse mixed horizons incorrectly. It
+called the July 15 discussion `risk_on` even though the human read was a mixed
+cross-asset structural warning, not a clean equity allocation call. The current
+conclusion therefore uses the videos' horizon-specific substance: 42 Macro is
+more constructive over the next days or weeks because crowded shorts may support
+the index, while both systems are cautious over the next one to two quarters
+about AI-capex deceleration, dispersion, concentration, Fed uncertainty, and
+credit confirmation. Historical scalar scores remain screening proxies, not
+reconstructed 42 Macro positions.
+
 The right-side quick-reference panel explains terms, metrics, tickers, and
 workflow objects. This matters because the system uses many concepts that are
 easy to misuse. For example, max drawdown, Ulcer Index, recovery return needed,
@@ -823,6 +1012,10 @@ The main limitations are:
 - Regime labels are simplified representations of complex markets.
 - Forward simulations depend on historical analogues that may not repeat.
 - Human execution can differ from idealized target weights.
+- Historical universe membership and delisting evidence are not yet verified
+  for the current research corpus.
+- The persisted trial ledger cannot recover experiments that never wrote a
+  manifest or durable candidate artifact.
 
 The system tries to address these limitations through explicit model authority,
 validation gates, walk-forward tests, driver rotation, factor attribution,
@@ -834,7 +1027,9 @@ The most appropriate use is iterative:
 
 1. Refresh the daily snapshot.
 2. Read the action headline and book alignment.
-3. Review risk/scenario context if action is non-trivial.
+3. Review quantitative risk and hard portfolio constraints if action is
+   non-trivial; read scenarios as research context unless their displayed
+   authority is non-zero.
 4. Check monitored strategy evidence.
 5. Use Launch Lab before putting new or scale-up capital into a selected
    strategy.
@@ -846,7 +1041,7 @@ The most appropriate use is iterative:
 
 In that sense, Trade Bot is less a single model and more a research operating
 system for tactical allocation. Its value comes from the combination of
-strategy testing, risk-aware sizing, scenario-conditioned planning, paper
+strategy testing, risk-aware sizing, calibration-gated scenario planning, paper
 monitoring, and auditability.
 
 ## Conclusion

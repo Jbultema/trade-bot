@@ -1,9 +1,32 @@
 from __future__ import annotations
 
-from pytest import approx
+from pytest import approx, raises
 
-from trade_bot.config import configured_tickers, load_config
+from trade_bot.config import (
+    AllocationPolicyConfig,
+    StrategyConfig,
+    apply_excluded_ticker_policy_to_strategy,
+    configured_tickers,
+    load_config,
+    required_strategy_tickers,
+)
 from trade_bot.DEFAULTS import DEFAULT_CONFIG_PATH, DEFAULT_REBALANCE, DEFAULT_SIGNAL_LAG_DAYS
+
+
+def test_allocation_utility_profiles_set_distinct_tail_tolerances() -> None:
+    growth = AllocationPolicyConfig(utility_profile="growth")
+    balanced = AllocationPolicyConfig(utility_profile="balanced_asymmetric")
+    preservation = AllocationPolicyConfig(utility_profile="capital_preservation")
+
+    assert growth.normal_tail_loss_limit > balanced.normal_tail_loss_limit
+    assert balanced.normal_tail_loss_limit > preservation.normal_tail_loss_limit
+    assert growth.catastrophic_stress_loss_limit > balanced.catastrophic_stress_loss_limit
+    assert balanced.catastrophic_stress_loss_limit > preservation.catastrophic_stress_loss_limit
+
+
+def test_scenario_authority_fails_closed_without_calibration() -> None:
+    with raises(ValueError, match="requires provisional or validated calibration"):
+        AllocationPolicyConfig(scenario_sizing_authority=0.1)
 
 
 def test_baseline_execution_config_matches_default_cadence() -> None:
@@ -25,6 +48,13 @@ def test_default_operable_momentum_strategies_include_global_equity_choices() ->
     ]:
         strategy = config.strategies[strategy_name]
         assert expected_global_choices.issubset(set(strategy.tickers))
+
+
+def test_configured_tickers_include_native_risk_repair_dependencies() -> None:
+    config = load_config(DEFAULT_CONFIG_PATH)
+    strategy = config.strategies["i111_native_risk_repair_guard17_relief85_ai85_div"]
+
+    assert set(required_strategy_tickers(strategy)).issubset(configured_tickers(config))
 
 
 def test_load_config_applies_hard_ticker_exclusions(tmp_path) -> None:
@@ -70,3 +100,17 @@ def test_load_config_applies_hard_ticker_exclusions(tmp_path) -> None:
     assert "ORCL" not in config.strategies["cycle"].satellite_tickers
     assert config.strategies["fixed"].allocation_weights == {"SPY": approx(1.0)}
     assert "ORCL" not in configured_tickers(config)
+
+
+def test_hard_ticker_exclusions_apply_to_risk_repair_diversifiers() -> None:
+    strategy = StrategyConfig(
+        type="dual_momentum_risk_repair",
+        tickers=["QQQ", "SMH"],
+        defensive_ticker="BIL",
+        risk_repair_ai_diversifier_tickers=["SPY", "ORCL", "GLD"],
+    )
+
+    filtered = apply_excluded_ticker_policy_to_strategy(strategy)
+
+    assert filtered.risk_repair_ai_diversifier_tickers == ["SPY", "GLD"]
+    assert "ORCL" not in required_strategy_tickers(filtered)

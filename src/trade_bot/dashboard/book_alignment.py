@@ -48,14 +48,14 @@ def _render_book_alignment(
     level = _status_level(status)
     st.subheader(heading)
     st.markdown(
-        f'''
+        f"""
         <div class="action-banner action-{html.escape(level)}">
             <p class="headline-label">Book-Aware Recommendation</p>
             <div class="headline-title">{html.escape(_status_title(status, action))}</div>
             <p class="headline-copy">{html.escape(str(row.get("explanation", "")))}</p>
             <p class="headline-next">Scope: {html.escape(str(row.get("mode", "")))} / {html.escape(str(row.get("account", "")))} / {html.escape(str(row.get("strategy_name", "")))}.</p>
         </div>
-        ''',
+        """,
         unsafe_allow_html=True,
     )
     account_value_warning = str(row.get("account_value_warning", "")).strip()
@@ -91,7 +91,7 @@ def _render_book_alignment(
         available = [column for column in summary_columns if column in alignment.summary]
         _render_metric_dataframe(
             _display_trade_frame(alignment.summary[available]),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
             column_help=BOOK_ALIGNMENT_COLUMN_HELP,
         )
@@ -118,7 +118,7 @@ def _render_book_alignment(
     available = [column for column in position_columns if column in alignment.position_plan]
     _render_metric_dataframe(
         _display_trade_frame(alignment.position_plan[available]),
-        use_container_width=True,
+        width="stretch",
         column_help=BOOK_ALIGNMENT_COLUMN_HELP,
     )
 

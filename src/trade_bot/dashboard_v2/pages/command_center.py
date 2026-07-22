@@ -33,20 +33,69 @@ from trade_bot.dashboard_v2.components.tones import (
 )
 from trade_bot.dashboard_v2.help import metric_help
 from trade_bot.dashboard_v2.perf import timed
-from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
+from trade_bot.dashboard_v2.services.runtime import (
+    HISTORICAL_SNAPSHOT_NOTICE,
+    DashboardRuntime,
+)
 
 
 def render_today_page(runtime: DashboardRuntime) -> None:
     run = runtime.baseline_run
     current_state = run.current_state
+    if runtime.is_historical_snapshot_mode:
+        st.warning(HISTORICAL_SNAPSHOT_NOTICE)
+        render_card_grid(
+            [
+                ("Historical Market Date", current_state.market_date),
+                (
+                    "Snapshot Run",
+                    getattr(runtime.snapshot_manifest, "run_id", "live fallback"),
+                ),
+                ("Mode", "Display only"),
+            ]
+        )
+        st.caption(
+            "Use Macro, Performance, Monitoring, Research, or Simulation for point-in-time "
+            "inspection. Switch to Latest snapshot or Live pipeline before reviewing current "
+            "actions."
+        )
+        return
     trade_decision = runtime.operating_trade_decision
+    operating_error = getattr(runtime, "operating_strategy_error", None)
+    if (
+        operating_error
+        or trade_decision is None
+        or runtime.open_ticket_count is None
+        or runtime.book_alignment is None
+        or runtime.action_headline is None
+    ):
+        st.error(
+            "Operating decision unavailable for promoted book "
+            f"'{runtime.promoted_book.book_name}': {operating_error or 'unknown resolution error'}"
+        )
+        st.caption(
+            "Position plans, action headlines, open-ticket counts, and operating risk are "
+            "suppressed until the book names a strategy present in this run with an explicit "
+            "defensive policy. Use Forward Test to inspect or edit the book."
+        )
+        return
     summary = _first_row(trade_decision.summary)
 
     render_card_grid(
         [
             ("Market Date", current_state.market_date),
-            ("Risk", str(current_state.risk_status).upper(), None, risk_status_tone(current_state.risk_status)),
-            ("Risk Score", f"{float(current_state.risk_score):.2f}", None, risk_score_tone(current_state.risk_score)),
+            (
+                "Risk",
+                str(current_state.risk_status).upper(),
+                None,
+                risk_status_tone(current_state.risk_status),
+            ),
+            (
+                "Risk Score",
+                f"{float(current_state.risk_score):.2f}",
+                None,
+                risk_score_tone(current_state.risk_score),
+            ),
             (
                 "Open Tickets",
                 runtime.open_ticket_count,
@@ -71,7 +120,9 @@ def render_today_page(runtime: DashboardRuntime) -> None:
             ),
         ]
     )
-    render_callout(str(getattr(runtime.action_headline, "headline", "")) or current_state.risk_summary)
+    render_callout(
+        str(getattr(runtime.action_headline, "headline", "")) or current_state.risk_summary
+    )
 
     view = st.pills(
         "Today view",
@@ -112,12 +163,15 @@ def render_today_page(runtime: DashboardRuntime) -> None:
             heavy=True,
         )
         with timed("today.trends"):
-            metric_history, _component_history, _scenario_driver_history, _driver_rotation_history = (
-                load_snapshot_trend_frames(
-                    str(runtime.paths.run_store_path),
-                    str(runtime.paths.artifact_dir),
-                    str(runtime.paths.job_log_dir),
-                )
+            (
+                metric_history,
+                _component_history,
+                _scenario_driver_history,
+                _driver_rotation_history,
+            ) = load_snapshot_trend_frames(
+                str(runtime.paths.run_store_path),
+                str(runtime.paths.artifact_dir),
+                str(runtime.paths.job_log_dir),
             )
         metric_history = latest_per_market_date(metric_history)
         figure = compact_metric_line_figure(
@@ -141,9 +195,9 @@ def render_today_page(runtime: DashboardRuntime) -> None:
             render_chart(figure)
     else:
         render_section_header("Raw Evidence")
-        st.dataframe(trade_decision.evidence, use_container_width=True)
+        st.dataframe(trade_decision.evidence, width="stretch")
         render_section_header("Trading Alerts")
-        st.dataframe(current_state.strategy_alerts, use_container_width=True)
+        st.dataframe(current_state.strategy_alerts, width="stretch")
         render_section_header("Scenario Outlook")
         _render_metric_dataframe(_display_metrics(current_state.scenario_outlook.copy()))
 
@@ -156,7 +210,7 @@ def _first_row(frame: pd.DataFrame) -> dict[str, object]:
 
 def _fmt_pct(value: object) -> str:
     try:
-        return f"{float(value):.0%}"
+        return f"{float(str(value)):.0%}"
     except (TypeError, ValueError):
         return "n/a"
 
@@ -168,7 +222,7 @@ def _render_decision_context(
 ) -> None:
     run = runtime.baseline_run
     current_state = run.current_state
-    cards = [
+    allocation_cards = [
         (
             "Risk State",
             f"{str(current_state.risk_status).upper()} ({_fmt_float(current_state.risk_score)})",
@@ -176,21 +230,9 @@ def _render_decision_context(
             risk_status_tone(current_state.risk_status),
         ),
         (
-            "1M Scenario Mix",
-            _scenario_probability_summary(run.trade_decision.scenario_links),
-            "These scenarios set the starting risk budget before event, macro, and portfolio-risk clamps.",
-            _scenario_mix_tone(summary),
-        ),
-        (
-            "Current Event Pressure",
-            _event_pressure_summary(run.news_monitor.triage),
-            f"Event pressure: {_fmt_pct(summary.get('event_pressure'))}. News can pressure sizing, but it should not override tradable confirmation by itself.",
-            probability_pressure_tone(summary.get("event_pressure"), warning_at=0.01, critical_at=0.12),
-        ),
-        (
             "Target Posture",
-            str(summary.get("scenario_adjusted_position", "n/a")),
-            f"Base systematic posture: {summary.get('base_position', 'n/a')}.",
+            _target_posture_range(summary.get("target_defensive_weight")),
+            "A planning range is shown here; exact instrument weights remain in the auditable plan below.",
             target_defensive_tone(summary.get("target_defensive_weight")),
         ),
         (
@@ -199,12 +241,32 @@ def _render_decision_context(
             _portfolio_risk_sentence(summary),
             portfolio_risk_tone(summary.get("portfolio_risk_level")),
         ),
+    ]
+    research_cards = [
+        (
+            "1M Scenario Mix",
+            _scenario_probability_summary(run.trade_decision.scenario_links),
+            f"Research-only at {_fmt_pct(summary.get('scenario_sizing_authority'))} sizing authority; calibration status: {summary.get('scenario_calibration_status', 'unknown')}.",
+            _scenario_mix_tone(summary),
+        ),
+        (
+            "Current Event Pressure",
+            _event_pressure_summary(run.news_monitor.triage),
+            f"Raw pressure {_fmt_pct(summary.get('raw_event_pressure'))}; effective sizing pressure {_fmt_pct(summary.get('effective_event_pressure'))}. News is informational unless policy explicitly grants authority.",
+            probability_pressure_tone(
+                summary.get("raw_event_pressure"), warning_at=0.01, critical_at=0.12
+            ),
+        ),
         (
             "Macro Inclusion",
             _macro_inclusion_summary(run.signal_inclusion.summary),
             f"Macro pressure in the current decision summary: {_fmt_pct(summary.get('macro_pressure'))}.",
-            probability_pressure_tone(summary.get("macro_pressure"), warning_at=0.04, critical_at=0.12),
+            probability_pressure_tone(
+                summary.get("macro_pressure"), warning_at=0.04, critical_at=0.12
+            ),
         ),
+    ]
+    governance_cards = [
         (
             "Decision Sanity",
             str(summary.get("decision_sanity_signal", "n/a")).replace("_", " "),
@@ -218,17 +280,123 @@ def _render_decision_context(
             posture_calibration_tone(summary.get("posture_calibration_signal")),
         ),
     ]
-    st.markdown(
-        '<div class="v2-decision-grid">'
-        + "".join(_decision_card_html(label, answer, detail, tone) for label, answer, detail, tone in cards)
-        + "</div>",
-        unsafe_allow_html=True,
-    )
+    for title, cards in (
+        ("Allocation-authoritative system", allocation_cards),
+        ("Research context — does not imply allocation authority", research_cards),
+        ("Governance and calibration", governance_cards),
+    ):
+        st.markdown(f"#### {title}")
+        st.markdown(
+            '<div class="v2-decision-grid">'
+            + "".join(
+                _decision_card_html(label, answer, detail, tone)
+                for label, answer, detail, tone in cards
+            )
+            + "</div>",
+            unsafe_allow_html=True,
+        )
+    _render_attribution_and_counterfactuals(run.trade_decision)
+    _render_cost_of_defense()
+    _render_recommendation_changes(summary)
     if not plan.empty:
         st.caption("Material target weights and current-book drift are shown below.")
 
 
-def _decision_card_html(label: str, answer: object, detail: object, tone: object | None = None) -> str:
+def _target_posture_range(value: object) -> str:
+    parsed = _float_or_none(value)
+    if parsed is None:
+        return "n/a"
+    lower = max(0.0, 0.05 * int(parsed / 0.05))
+    upper = min(1.0, lower + 0.05)
+    return f"Defensive planning range {lower:.0%}–{upper:.0%}"
+
+
+def _render_attribution_and_counterfactuals(trade_decision: object) -> None:
+    attribution = getattr(trade_decision, "attribution", pd.DataFrame())
+    counterfactuals = getattr(trade_decision, "counterfactuals", pd.DataFrame())
+    st.markdown("#### Why this target changed")
+    if attribution.empty:
+        st.info("No causal attribution is available for this decision.")
+    else:
+        display = attribution[
+            [
+                "layer",
+                "role",
+                "authority",
+                "marginal_defensive_add_pp",
+                "defensive_weight",
+            ]
+        ].copy()
+        display["layer"] = display["layer"].str.replace("_", " ").str.title()
+        display["marginal_defensive_add_pp"] = display["marginal_defensive_add_pp"].round(1)
+        display["authority"] = display["authority"].map(lambda value: f"{value:.0%}")
+        display["defensive_weight"] = display["defensive_weight"].map(
+            lambda value: f"{value:.0%}"
+        )
+        st.dataframe(display, width="stretch", hide_index=True)
+        st.caption(
+            "Marginal effects are sequential and sum to the final defensive weight. A zero "
+            "effect is not presented as a reason for the recommendation."
+        )
+    with st.expander("Permanent news counterfactuals", expanded=False):
+        if counterfactuals.empty:
+            st.info("No counterfactual table is available.")
+        else:
+            st.dataframe(counterfactuals, width="stretch", hide_index=True)
+
+
+def _render_cost_of_defense() -> None:
+    path = "reports/defensive_layer_calibration/calibration_summary.csv"
+    try:
+        calibration = pd.read_csv(path)
+    except (FileNotFoundError, OSError, pd.errors.ParserError):
+        return
+    selected = calibration[
+        (calibration["cohort"] == "all_three")
+        & calibration["horizon"].isin(["1m", "3m"])
+    ]
+    if selected.empty:
+        return
+    st.markdown("#### Historical cost of defense")
+    cards = []
+    for _, row in selected.sort_values("horizon").iterrows():
+        cards.append(
+            (
+                f"{str(row['horizon']).upper()} layered-defense history",
+                f"Median return regret {float(row['median_regret_vs_base']):.1%}; drawdown improvement {float(row['drawdown_improvement_p50']):.1%}",
+                f"{int(row['episode_starts'])} non-overlapping episodes; correct defense {float(row['correct_defense_rate']):.0%}, costly false positive {float(row['false_alarm_rate']):.0%}.",
+                "warning",
+            )
+        )
+    st.markdown(
+        '<div class="v2-decision-grid">'
+        + "".join(_decision_card_html(*card) for card in cards)
+        + "</div>",
+        unsafe_allow_html=True,
+    )
+    st.caption("Retrospective, small-sample evidence; overlapping weekly observations are not counted as independent episodes.")
+
+
+def _render_recommendation_changes(summary: dict[str, object]) -> None:
+    st.markdown("#### What would change the recommendation?")
+    st.write(
+        "More risk requires the base market strategy to re-risk and the independent hard "
+        "portfolio limits to remain clear. Scenario sizing stays off until walk-forward "
+        "calibration earns positive skill with credible uncertainty; news alone cannot change "
+        "the target. Less risk requires a worse quantitative risk state or an actual beta, "
+        "expected-shortfall, or catastrophic-stress breach."
+    )
+    st.caption(
+        f"Active utility profile: {summary.get('utility_profile', 'unknown')}; "
+        f"normal-tail limit {_fmt_pct(summary.get('normal_tail_loss_limit'))}; "
+        f"catastrophic-stress limit {_fmt_pct(summary.get('catastrophic_stress_loss_limit'))}; "
+        f"scenario calibration: {summary.get('scenario_calibration_status', 'unknown')}."
+    )
+
+
+def _decision_card_html(
+    label: str, answer: object, detail: object, tone: object | None = None
+) -> str:
     tone_text = normalize_tone(tone)
     tone_class = "" if tone_text == "neutral" else f" v2-decision-card-{html.escape(tone_text)}"
     return (
@@ -297,11 +465,15 @@ def _portfolio_risk_sentence(summary: dict[str, object]) -> str:
 def _macro_inclusion_summary(frame: pd.DataFrame) -> str:
     if frame.empty:
         return "No macro inclusion rows"
-    decision_col = _first_existing_column(frame, ("decision", "inclusion_decision", "recommendation"))
+    decision_col = _first_existing_column(
+        frame, ("decision", "inclusion_decision", "recommendation")
+    )
     category_col = _first_existing_column(frame, ("category", "signal_group", "macro_category"))
     if decision_col is None:
         return f"{len(frame)} macro row(s) available"
-    accepted = frame[frame[decision_col].astype(str).str.contains("include|accept|authority", case=False)]
+    accepted = frame[
+        frame[decision_col].astype(str).str.contains("include|accept|authority", case=False)
+    ]
     watched = frame[~frame.index.isin(accepted.index)]
     if category_col is not None and not watched.empty:
         watched_categories = ", ".join(watched[category_col].astype(str).head(3).tolist())
@@ -324,7 +496,7 @@ def _scenario_mix_tone(summary: dict[str, object]) -> str:
 
 def _float_or_none(value: object) -> float | None:
     try:
-        number = float(value)
+        number = float(str(value))
     except (TypeError, ValueError):
         return None
     if pd.isna(number):
@@ -341,6 +513,6 @@ def _first_existing_column(frame: pd.DataFrame, columns: tuple[str, ...]) -> str
 
 def _fmt_float(value: object) -> str:
     try:
-        return f"{float(value):.2f}"
+        return f"{float(str(value)):.2f}"
     except (TypeError, ValueError):
         return "n/a"

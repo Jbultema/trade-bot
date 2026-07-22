@@ -104,6 +104,12 @@ def walk_forward_holdout_metrics(
     step_months: int = DEFAULT_WALK_FORWARD_STEP_MONTHS,
     min_observation_ratio: float = DEFAULT_WINDOW_MIN_OBSERVATION_RATIO,
 ) -> pd.DataFrame:
+    """Evaluate fixed strategy results on sequential later windows.
+
+    This compatibility name is retained for existing artifacts. The function
+    does not train, tune, or select a strategy in the preceding segment; callers
+    must not present it as nested walk-forward optimization.
+    """
     rows: list[dict[str, object]] = []
     for result in results.values():
         rows.extend(
@@ -263,6 +269,8 @@ def _walk_forward_result_folds(
         row["train_end"] = str(returns.index[train_end_position].date())
         row["test_start"] = metrics.start
         row["test_end"] = metrics.end
+        row["evaluation_method"] = "sequential_fixed_strategy_holdout"
+        row["selection_performed"] = False
         rows.append(row)
     return rows
 

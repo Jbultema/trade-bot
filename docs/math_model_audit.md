@@ -5,7 +5,7 @@ meant to prevent code drift: if a future change alters one of these formulas or
 interpretations, update this document and the formula-contract tests in the same
 change. It is a formula and semantics contract, not a daily market-status report.
 
-Original audit date: 2026-06-17. Last docs review: 2026-06-21.
+Original audit date: 2026-06-17. Last docs review: 2026-07-21.
 
 ## Audit Result
 
@@ -384,6 +384,21 @@ Activation:
 event_risk_generated if category != unclassified
     and urgency >= activation_threshold
     and source_priority >= 3
+    and source health is not degraded cache fallback
+```
+
+Cache-fallback items remain triage context, retain the source's original
+`data_as_of`, and have no sizing authority. News-generated events use
+`decay_after_days = 1` and `expires_after_days = 7`.
+
+Sizing authority over event age:
+
+```text
+authority = 1                                      if age <= decay_after_days
+authority = (expires_after_days - age)
+            / (expires_after_days - decay_after_days) during linear decay
+authority = 0                                      if age > expires_after_days
+effective_event_pressure = raw_event_pressure * authority
 ```
 
 Historical event windows:
@@ -422,10 +437,40 @@ max_equity_beta = max(0.35, base_max_equity_beta * (1 - 0.35 * risk_off - 0.15 *
 max_ai_beta = max(0.20, base_max_ai_beta * (1 - 0.45 * ai_unwind - 0.30 * risk_off - 0.15 * fragile))
 max_expected_shortfall_95 = max(0.0125, base_max_es95 * (1 - 0.35 * risk_off - 0.15 * transition))
 max_stress_loss = max(0.06, base_max_stress_loss * (1 - 0.35 * risk_off - 0.15 * transition))
+max_scenario_weighted_stress_loss = max(0.03, base_max_weighted_stress * (1 - 0.25 * risk_off - 0.10 * transition))
 min_defensive_weight = clip(base_min_defensive + 0.40 * risk_off + 0.20 * transition + 0.10 * fragile + 0.10 * ai_unwind, 0, 0.65)
 max_single_asset_weight = max(0.25, base_max_single * (1 - 0.25 * risk_off - 0.10 * transition))
 max_concentration_hhi = max(0.22, base_max_hhi * (1 - 0.25 * risk_off - 0.10 * transition))
 ```
+
+The formulas above are raw scenario-conditioned limits. Operating limits use
+effective_limit = base_limit + scenario_budget_authority times (raw_limit minus
+base_limit). At zero authority, beta, ES95, maximum stress loss, concentration,
+and defensive-floor limits remain at their independent base values.
+
+The scenario-weighted-stress scaler has separate authority:
+effective_scaler = 1 minus scenario_weighted_stress_authority times (1 minus
+raw_scaler), where raw_scaler = limit / observed. It is applied at most once.
+Below full authority the comparison is advisory rather than a hard headline
+breach. ES95 and maximum stress loss remain hard catastrophic-risk checks.
+
+The configured defensive ticker such as BIL is exempt from the non-defensive
+single-asset cap and is governed by the defensive floor and the other
+portfolio risk constraints, not falsely reported as a risk-asset concentration
+breach.
+
+Hard-constraint comparisons use both absolute and relative tolerance:
+
+```text
+tolerance = max(1e-10, 1e-9 * max(abs(actual), abs(limit)))
+upper_limit_breach = actual > limit + tolerance
+lower_limit_breach = actual < limit - tolerance
+```
+
+The portfolio-risk headline is derived from the configured hard-constraint set
+shown in detail: equity beta, AI beta, expected shortfall, maximum stress loss,
+max non-defensive single-asset weight, concentration HHI, and minimum defensive
+weight. Scenario-weighted stress joins that hard set only at full authority.
 
 Factor beta:
 
@@ -582,6 +627,9 @@ scenario_multiplier = 1 - 0.55 * risk_off_probability
                         - 0.20 * transition_probability
                         - 0.15 * fragile_upside_probability
 scenario_multiplier = clip(scenario_multiplier, 0.40, 1.00)
+effective_scenario_multiplier = 1
+                              - scenario_sizing_authority
+                                * (1 - scenario_multiplier)
 ```
 
 Event pressure:
@@ -596,6 +644,11 @@ event_pressure = min(
 event_multiplier = clip(1 - event_pressure, 0.75, 1.00)
 ```
 
+Each contribution is first multiplied by the age-based sizing-authority factor
+above, then aggregate event pressure is multiplied by the allocation policy's
+event sizing authority. Watch-only, degraded-cache, expired, and
+informational-only events contribute zero to target weights.
+
 Macro pressure:
 
 ```text
@@ -608,7 +661,7 @@ Pre-portfolio risk multiplier:
 ```text
 scenario_event_macro_multiplier = min(
     risk_status_multiplier,
-    scenario_multiplier,
+    effective_scenario_multiplier,
     event_multiplier,
     macro_multiplier
 )
@@ -636,7 +689,11 @@ Decision-sanity cap:
 
 ```text
 confirmation_break_count = count(negative gates among credit, volatility, breadth, trend)
-left_tail_confirmed = risk_status in {orange, red} or risk_off_probability >= 35 percent
+left_tail_confirmed = risk_status in {orange, red}
+                      or (
+                        scenario_sizing_authority > 0
+                        and risk_off_probability >= 35 percent
+                      )
 cap_eligible = event_pressure > 0
                and confirmation_break_count < 2
                and not left_tail_confirmed

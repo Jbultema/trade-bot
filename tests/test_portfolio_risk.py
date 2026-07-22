@@ -2,8 +2,41 @@ from __future__ import annotations
 
 import numpy as np
 import pandas as pd
+import pytest
 
-from trade_bot.portfolio.risk import build_portfolio_risk
+from trade_bot.portfolio.risk import (
+    PortfolioRiskConfig,
+    _max_constraint_row,
+    build_portfolio_risk,
+)
+
+
+def test_zero_scenario_authority_preserves_independent_base_limits() -> None:
+    config = PortfolioRiskConfig(
+        scenario_budget_authority=0.0,
+        scenario_weighted_stress_authority=0.0,
+    )
+    target_weights = pd.Series({"BIL": 0.80, "QQQ": 0.20})
+
+    risk = build_portfolio_risk(
+        _risk_prices(),
+        target_weights,
+        _scenario_lattice(),
+        current_weights=target_weights,
+        config=config,
+    )
+
+    budget = risk.scenario_risk_budget.iloc[0]
+    summary = risk.summary.iloc[0]
+    assert budget["max_equity_beta"] == pytest.approx(config.base_max_equity_beta)
+    assert budget["max_expected_shortfall_95"] == pytest.approx(
+        config.base_max_expected_shortfall_95
+    )
+    assert budget["max_stress_loss"] == pytest.approx(config.base_max_stress_loss)
+    assert budget["min_defensive_weight"] == pytest.approx(config.base_min_defensive_weight)
+    assert summary["scenario_budget_authority"] == 0.0
+    assert summary["scenario_weighted_stress_authority"] == 0.0
+    assert "scenario_weighted_stress" not in summary["applied_constraints"]
 
 
 def test_portfolio_risk_engine_builds_constraints_and_risk_adjusted_weights() -> None:
@@ -32,6 +65,33 @@ def test_portfolio_risk_engine_builds_constraints_and_risk_adjusted_weights() ->
     assert not risk.marginal_risk_contribution.empty
     assert not risk.scenario_risk_budget.empty
     assert risk.sizing_adjustments["ticker"].str.contains("BIL").any()
+
+
+def test_defensive_residual_is_not_reported_as_single_risk_asset_breach() -> None:
+    target_weights = pd.Series({"BIL": 0.80, "QQQ": 0.20})
+
+    risk = build_portfolio_risk(
+        _risk_prices(),
+        target_weights,
+        pd.DataFrame(),
+        current_weights=target_weights,
+    )
+
+    max_asset = risk.constraint_report.set_index("constraint").loc["max_single_asset"]
+    assert max_asset["post_value"] == pytest.approx(0.20)
+    assert max_asset["status"] != "breach"
+
+
+def test_constraint_comparison_ignores_machine_precision_boundary_noise() -> None:
+    row = _max_constraint_row(
+        "scenario_weighted_stress_loss",
+        0.10,
+        0.10 + 1e-17,
+        0.10,
+        (),
+    )
+
+    assert row["status"] == "ok"
 
 
 def _risk_prices() -> pd.DataFrame:

@@ -501,7 +501,12 @@ def _strategy_shadow_returns(target_weights: pd.DataFrame, prices: pd.DataFrame)
     common_columns = [column for column in aligned_weights.columns if column in aligned_prices.columns]
     if not common_columns:
         return pd.Series(0.0, index=aligned_prices.index, dtype=float)
-    asset_returns = aligned_prices[common_columns].pct_change().replace([np.inf, -np.inf], np.nan).fillna(0.0)
+    asset_returns = (
+        aligned_prices[common_columns]
+        .pct_change(fill_method=None)
+        .replace([np.inf, -np.inf], np.nan)
+        .fillna(0.0)
+    )
     execution_weights = aligned_weights[common_columns].shift(1).fillna(0.0)
     return (execution_weights * asset_returns).sum(axis=1)
 
@@ -942,11 +947,13 @@ def _price_series(prices: pd.DataFrame, ticker: str) -> pd.Series:
 
 
 def _daily_returns(series: pd.Series) -> pd.Series:
-    return series.astype(float).pct_change().replace([np.inf, -np.inf], np.nan)
+    return series.astype(float).pct_change(fill_method=None).replace([np.inf, -np.inf], np.nan)
 
 
 def _return(series: pd.Series, window: int) -> pd.Series:
-    return series.astype(float).pct_change(window).replace([np.inf, -np.inf], np.nan)
+    return series.astype(float).pct_change(window, fill_method=None).replace(
+        [np.inf, -np.inf], np.nan
+    )
 
 
 def _forward_return(series: pd.Series, horizon_days: int) -> pd.Series:

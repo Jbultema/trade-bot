@@ -5,7 +5,18 @@ from pathlib import Path
 import pandas as pd
 import yfinance as yf
 
-from trade_bot.DEFAULTS import DEFAULT_DATA_ADJUSTED
+from trade_bot.DEFAULTS import (
+    DEFAULT_DATA_ADJUSTED,
+    DEFAULT_MAX_PRICE_STALENESS_SESSIONS,
+)
+
+
+class MarketDataRefreshError(RuntimeError):
+    """Raised when an explicit market-data refresh cannot be completed honestly."""
+
+
+class StaleMarketDataError(RuntimeError):
+    """Raised when a price frame ends too far before its requested as-of date."""
 
 
 def load_or_fetch_yahoo_prices(
@@ -30,22 +41,35 @@ def load_or_fetch_yahoo_prices(
             end=end,
         )
         missing = _missing_or_empty_tickers(cached_filtered, ordered_tickers)
-        if not missing:
+        stale = _terminal_staleness_sessions(cached_filtered, end=end)
+        if not missing and stale <= DEFAULT_MAX_PRICE_STALENESS_SESSIONS:
             return cached_filtered
 
-        fetched = fetch_yahoo_prices(
-            missing,
-            start=start,
-            end=end,
-            adjusted=adjusted,
-        )
+        fetch_tickers = ordered_tickers if stale > DEFAULT_MAX_PRICE_STALENESS_SESSIONS else missing
+        try:
+            fetched = fetch_yahoo_prices(
+                fetch_tickers,
+                start=start,
+                end=end,
+                adjusted=adjusted,
+            )
+        except Exception as exc:
+            if stale > DEFAULT_MAX_PRICE_STALENESS_SESSIONS:
+                raise StaleMarketDataError(
+                    f"Cached market data is {stale} business sessions stale and its refresh "
+                    "failed; refusing to run on the stale frame."
+                ) from exc
+            raise
+        _require_usable_fetched_prices(fetched, fetch_tickers, explicit_refresh=False)
         prices = _merge_price_frames(cached, fetched, ordered_tickers)
-        prices.to_parquet(cache_path)
-        return _filter_prices(
+        filtered = _filter_prices(
             prices.reindex(columns=ordered_tickers),
             start=start,
             end=end,
         )
+        _require_terminal_freshness(filtered, end=end)
+        prices.to_parquet(cache_path)
+        return filtered
 
     try:
         fetched = fetch_yahoo_prices(
@@ -54,17 +78,13 @@ def load_or_fetch_yahoo_prices(
             end=end,
             adjusted=adjusted,
         )
-    except Exception:
-        if cached is None:
-            raise
-        cached_filtered = _filter_prices(
-            cached.reindex(columns=ordered_tickers),
-            start=start,
-            end=end,
-        )
-        if cached_filtered.empty:
-            raise
-        return cached_filtered
+    except Exception as exc:
+        raise MarketDataRefreshError(
+            "Explicit Yahoo price refresh failed; cached prices were not substituted."
+        ) from exc
+
+    _require_usable_fetched_prices(fetched, ordered_tickers, explicit_refresh=True)
+    _require_terminal_freshness(fetched, end=end)
 
     prices = _merge_price_frames(cached, fetched, ordered_tickers)
     filtered = _filter_prices(
@@ -72,14 +92,7 @@ def load_or_fetch_yahoo_prices(
         start=start,
         end=end,
     )
-    if filtered.empty and cached is not None:
-        cached_filtered = _filter_prices(
-            cached.reindex(columns=ordered_tickers),
-            start=start,
-            end=end,
-        )
-        if not cached_filtered.empty:
-            return cached_filtered
+    _require_terminal_freshness(filtered, end=end)
     prices.to_parquet(cache_path)
     return filtered
 
@@ -167,6 +180,51 @@ def _missing_or_empty_tickers(prices: pd.DataFrame, tickers: list[str]) -> list[
         if ticker not in prices.columns or prices[ticker].dropna().empty:
             missing.append(ticker)
     return missing
+
+
+def _require_usable_fetched_prices(
+    fetched: pd.DataFrame,
+    tickers: list[str],
+    *,
+    explicit_refresh: bool,
+) -> None:
+    unusable = _missing_or_empty_tickers(fetched, tickers)
+    if not unusable:
+        return
+    prefix = "Explicit refresh" if explicit_refresh else "Market-data update"
+    raise MarketDataRefreshError(
+        f"{prefix} returned no usable prices for {unusable}; cached columns were not substituted."
+    )
+
+
+def _require_terminal_freshness(prices: pd.DataFrame, *, end: str | None) -> None:
+    staleness = _terminal_staleness_sessions(prices, end=end)
+    if staleness <= DEFAULT_MAX_PRICE_STALENESS_SESSIONS:
+        return
+    latest = pd.to_datetime(prices.index, errors="coerce").max()
+    raise StaleMarketDataError(
+        f"Market data ends at {latest.date() if pd.notna(latest) else 'no valid date'}, "
+        f"{staleness} business sessions before the requested as-of date; maximum allowed is "
+        f"{DEFAULT_MAX_PRICE_STALENESS_SESSIONS}."
+    )
+
+
+def _terminal_staleness_sessions(prices: pd.DataFrame, *, end: str | None) -> int:
+    if prices.empty:
+        return DEFAULT_MAX_PRICE_STALENESS_SESSIONS + 1
+    valid_index = pd.to_datetime(prices.dropna(how="all").index, errors="coerce")
+    valid_index = valid_index[~pd.isna(valid_index)]
+    if len(valid_index) == 0:
+        return DEFAULT_MAX_PRICE_STALENESS_SESSIONS + 1
+    latest = pd.Timestamp(valid_index.max()).tz_localize(None).normalize()
+    expected = (
+        pd.Timestamp(end).tz_localize(None).normalize()
+        if end is not None
+        else pd.Timestamp.now().tz_localize(None).normalize()
+    )
+    if latest >= expected:
+        return 0
+    return len(pd.bdate_range(latest + pd.offsets.BDay(1), expected))
 
 
 def _filter_prices(prices: pd.DataFrame, *, start: str, end: str | None) -> pd.DataFrame:

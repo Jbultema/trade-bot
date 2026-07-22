@@ -5,7 +5,7 @@ from pathlib import Path
 from typing import Any, Literal
 
 import yaml
-from pydantic import BaseModel, ConfigDict, Field
+from pydantic import BaseModel, ConfigDict, Field, model_validator
 
 from trade_bot.DEFAULTS import (
     DEFAULT_CYCLE_MAX_STEP_CHANGE,
@@ -86,6 +86,64 @@ class ExecutionConfig(BaseModel):
     signal_lag_days: int = Field(default=DEFAULT_SIGNAL_LAG_DAYS, ge=1)
 
 
+class AllocationPolicyConfig(BaseModel):
+    """Govern which research layers may change an operating allocation."""
+
+    model_config = ConfigDict(extra="forbid")
+
+    utility_profile: Literal[
+        "growth",
+        "balanced_asymmetric",
+        "capital_preservation",
+    ] = "balanced_asymmetric"
+    scenario_sizing_authority: float = Field(default=0.0, ge=0, le=1)
+    scenario_budget_authority: float = Field(default=0.0, ge=0, le=1)
+    scenario_weighted_stress_authority: float = Field(default=0.0, ge=0, le=1)
+    event_sizing_authority: float = Field(default=0.0, ge=0, le=1)
+    macro_sizing_authority: float = Field(default=1.0, ge=0, le=1)
+    scenario_calibration_horizon: Literal["1w", "1m", "3m"] = "1m"
+    scenario_calibration_status: Literal[
+        "not_evaluated",
+        "insufficient",
+        "provisional",
+        "validated",
+    ] = "insufficient"
+    authority_source: str = "reports/scenario_probability_calibration/latest_authority.json"
+    normal_tail_loss_limit: float = Field(default=0.035, gt=0, lt=1)
+    catastrophic_stress_loss_limit: float = Field(default=0.18, gt=0, lt=1)
+
+    @model_validator(mode="before")
+    @classmethod
+    def apply_utility_profile_defaults(cls, values: object) -> object:
+        if not isinstance(values, dict):
+            return values
+        cleaned = dict(values)
+        profile = str(cleaned.get("utility_profile", "balanced_asymmetric"))
+        profile_limits = {
+            "growth": (0.040, 0.22),
+            "balanced_asymmetric": (0.035, 0.18),
+            "capital_preservation": (0.025, 0.12),
+        }
+        normal_limit, catastrophic_limit = profile_limits.get(
+            profile, profile_limits["balanced_asymmetric"]
+        )
+        cleaned.setdefault("normal_tail_loss_limit", normal_limit)
+        cleaned.setdefault("catastrophic_stress_loss_limit", catastrophic_limit)
+        return cleaned
+
+    @model_validator(mode="after")
+    def enforce_scenario_calibration_gate(self) -> AllocationPolicyConfig:
+        if self.scenario_calibration_status in {"not_evaluated", "insufficient"} and max(
+            self.scenario_sizing_authority,
+            self.scenario_budget_authority,
+            self.scenario_weighted_stress_authority,
+        ) > 0:
+            raise ValueError(
+                "Scenario allocation authority requires provisional or validated calibration."
+            )
+        return self
+
+
 class VolatilityTargetConfig(BaseModel):
     model_config = ConfigDict(extra="forbid")
 
@@ -160,6 +218,7 @@ class StrategyConfig(BaseModel):
         "absolute_momentum",
         "relative_momentum",
         "dual_momentum",
+        "dual_momentum_risk_repair",
         "dip_reentry",
         "dip_reentry_overlay",
         "ai_risk_cycle_overlay",
@@ -224,6 +283,24 @@ class StrategyConfig(BaseModel):
         ge=0,
         le=1,
     )
+    risk_repair_signal: Literal["balanced", "credit_breadth", "ai_leadership"] = "balanced"
+    risk_repair_constructive_floor: float = Field(default=0.0, ge=0, le=1)
+    risk_repair_defensive_cap: float | None = Field(default=None, gt=0, le=1)
+    risk_repair_defensive_release: float = Field(default=1.0, ge=0, le=1)
+    risk_repair_ai_soft_cap: float | None = Field(default=None, gt=0, le=1)
+    risk_repair_ai_hard_cap: float | None = Field(default=None, gt=0, le=1)
+    risk_repair_ai_soft_threshold: float = Field(default=0.70, ge=0, le=1)
+    risk_repair_ai_hard_threshold: float = Field(default=0.85, ge=0, le=1)
+    risk_repair_ai_cap_basis: Literal["total_portfolio", "risk_sleeve"] = "total_portfolio"
+    risk_repair_ai_excess_destination: Literal["defensive", "diversifier_mix"] = "defensive"
+    risk_repair_ai_diversifier_tickers: list[str] = Field(
+        default_factory=lambda: ["SPY", "RSP", "GLD", "TLT"]
+    )
+    risk_repair_lookback_days: int = Field(default=42, gt=1)
+    risk_repair_min_rebalance_change: float = Field(default=0.0, ge=0, le=2)
+    risk_repair_max_step_change: float = Field(default=2.0, gt=0, le=2)
+    risk_repair_min_hold_days: int = Field(default=0, ge=0)
+    risk_repair_risk_off_override_change: float = Field(default=0.15, ge=0, le=1)
 
 
 class BotConfig(BaseModel):
@@ -231,10 +308,53 @@ class BotConfig(BaseModel):
 
     data: DataConfig
     execution: ExecutionConfig
+    allocation_policy: AllocationPolicyConfig = Field(default_factory=AllocationPolicyConfig)
     tax_account: TaxAccountConfig = Field(default_factory=TaxAccountConfig)
     primary_strategy: str = "drawdown_managed_dual_momentum"
     universe: dict[str, list[str]]
     strategies: dict[str, StrategyConfig]
+
+
+RISK_REPAIR_SIGNAL_TICKERS = ("SPY", "QQQ", "SMH", "RSP", "HYG", "LQD")
+DIP_REENTRY_CREDIT_SIGNAL_TICKERS = ("HYG", "LQD")
+DIP_REENTRY_BREADTH_SIGNAL_TICKERS = ("RSP", "SPY")
+SECTOR_REGIME_SIGNAL_TICKERS = (
+    "HYG",
+    "LQD",
+    "RSP",
+    "SPY",
+    "SMH",
+    "QQQ",
+    "XLK",
+    "DBC",
+    "XLE",
+    "XLI",
+    "XLF",
+    "TLT",
+    "IEF",
+    "SHY",
+)
+
+
+def required_strategy_tickers(strategy: StrategyConfig) -> list[str]:
+    """Return every price series needed to evaluate a configured strategy."""
+
+    tickers = [*strategy.tickers, *strategy.satellite_tickers]
+    if strategy.allocation_weights:
+        tickers.extend(strategy.allocation_weights)
+    if strategy.defensive_ticker:
+        tickers.append(strategy.defensive_ticker)
+    if strategy.type in {"dip_reentry", "dip_reentry_overlay", "ai_risk_cycle_overlay"}:
+        if strategy.dip_credit_confirmation:
+            tickers.extend(DIP_REENTRY_CREDIT_SIGNAL_TICKERS)
+        if strategy.dip_breadth_confirmation:
+            tickers.extend(DIP_REENTRY_BREADTH_SIGNAL_TICKERS)
+    if strategy.type == "sector_regime_rotation":
+        tickers.extend(SECTOR_REGIME_SIGNAL_TICKERS)
+    if strategy.type == "dual_momentum_risk_repair":
+        tickers.extend(RISK_REPAIR_SIGNAL_TICKERS)
+        tickers.extend(strategy.risk_repair_ai_diversifier_tickers)
+    return list(dict.fromkeys(tickers))
 
 
 def filter_excluded_tickers(
@@ -277,6 +397,9 @@ def apply_excluded_ticker_policy_to_strategy(strategy: StrategyConfig) -> Strate
             "satellite_tickers": filter_excluded_tickers(strategy.satellite_tickers),
             "allocation_weights": _filter_excluded_allocation_weights(strategy.allocation_weights),
             "defensive_ticker": defensive_ticker,
+            "risk_repair_ai_diversifier_tickers": filter_excluded_tickers(
+                strategy.risk_repair_ai_diversifier_tickers
+            ),
         }
     )
 
@@ -310,8 +433,5 @@ def configured_tickers(config: BotConfig) -> list[str]:
     for group_tickers in config.universe.values():
         tickers.update(group_tickers)
     for strategy in config.strategies.values():
-        tickers.update(strategy.tickers)
-        tickers.update(strategy.satellite_tickers)
-        if strategy.defensive_ticker:
-            tickers.add(strategy.defensive_ticker)
+        tickers.update(required_strategy_tickers(strategy))
     return sorted(filter_excluded_tickers(tickers))

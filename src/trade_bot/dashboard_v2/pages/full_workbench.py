@@ -7,7 +7,11 @@ from trade_bot.dashboard.performance import _render_performance
 from trade_bot.dashboard.risk_scenarios import _render_risk_and_scenarios
 from trade_bot.dashboard_v2.components.cards import render_callout
 from trade_bot.dashboard_v2.services.experiment_service import scorecards
-from trade_bot.dashboard_v2.services.runtime import DashboardRuntime, render_book_selector
+from trade_bot.dashboard_v2.services.runtime import (
+    HISTORICAL_SNAPSHOT_NOTICE,
+    DashboardRuntime,
+    render_book_selector,
+)
 
 
 def render_risk_scenarios_page(runtime: DashboardRuntime) -> None:
@@ -64,9 +68,13 @@ def render_forward_test_page(runtime: DashboardRuntime) -> None:
         bot_config=runtime.bot_config,
         warehouse_path=str(runtime.paths.run_store_path),
         selected_book=runtime.selected_book,
-        book_selector=lambda: render_book_selector(
-            runtime.paths.journal_path,
-            baseline_run=runtime.baseline_run,
-            bot_config=runtime.bot_config,
-        ).selected_book,
+        book_selector=lambda: (
+            render_book_selector(
+                runtime.paths.journal_path,
+                baseline_run=runtime.baseline_run,
+                bot_config=runtime.bot_config,
+            ).selected_book
+        ),
+        allow_decision_actions=not runtime.is_historical_snapshot_mode,
+        decision_actions_disabled_reason=HISTORICAL_SNAPSHOT_NOTICE,
     )

@@ -50,8 +50,8 @@ The target user is someone who wants a rigorous local research system before ris
 | Data intake | Pulls price, macro, news, and event inputs into local caches. | Reusable local data and current signal inputs |
 | Snapshot builder | Freezes the current market state, scenarios, recommendations, and research artifacts. | Fast dashboard snapshot |
 | Operating overview | Turns the latest snapshot into a human-readable action surface. | Action headline, operating brief, and book alignment |
-| Risk engine | Applies scenario-aware sizing, factor risk, stress, drawdown, and constraint logic. | Risk budget and target posture |
-| Research loop | Tests strategy ideas across windows, regimes, and walk-forward diagnostics. | Candidate scorecards and curated operating systems |
+| Risk engine | Applies price-state sizing, calibration-gated scenario authority, factor risk, stress, drawdown, and hard constraint logic. | Risk budget and target posture |
+| Research loop | Tests strategy ideas across windows, regimes, sequential fixed-strategy holdouts, and true walk-forward selectors where applicable. | Candidate scorecards and curated operating systems |
 | Outcome simulation | Projects selected strategies through deterministic, bootstrap, and regime-conditioned forward paths. | Wealth ranges, sequence risk, and scenario-conditioned drawdown risk |
 | Monitoring | Tracks champion/challenger/reference paper windows forward from a chosen start date. | Paper valuations and promotion/demotion evidence |
 | Forward Test | Locks recommendations and records paper/live executions for auditability. | Exact recommendation and trade journal trail |
@@ -63,7 +63,7 @@ The target user is someone who wants a rigorous local research system before ris
 flowchart LR
     A[Market, macro, news, and events] --> B[Snapshot builder]
     B --> C[Current-state engine]
-    C --> D[Risk and scenario sizing]
+    C --> D[Risk sizing with calibration-gated scenario authority]
     D --> E[Action headline and operating brief]
     E --> F[Human review]
     F --> G[Paper or live journal]
@@ -75,14 +75,14 @@ flowchart LR
 
 The daily path starts with a snapshot: prices, macro series, curated news/events, strategy state, and paper valuations are frozen into local storage. The dashboard reads that snapshot first so the app opens quickly. Heavier research and ML diagnostics run as batch jobs, then write artifacts the dashboard can inspect.
 
-The strategy path is separate from the daily action path. Strategy experiments are evaluated through backtests, rolling windows, walk-forward checks, regime tests, ablations, taxable-account estimates, and forward paper monitoring before they influence the operating surface.
+The strategy path is separate from the daily action path. Strategy experiments are evaluated through backtests, rolling windows, sequential fixed-strategy holdouts, true walk-forward selection where applicable, regime tests, ablations, taxable-account estimates, and forward paper monitoring before they influence the operating surface.
 
 ## Operating Principles
 
 - Human review is mandatory before any real trade.
 - Long-only stocks and ETFs are the default. No default derivatives, shorting, or automated execution.
 - Holding periods are measured in trading days and weeks, not minutes.
-- Backtests must be judged across full history, recent windows, regime shifts, and walk-forward holdouts.
+- Backtests must be judged across full history, recent windows, regime shifts, sequential fixed-strategy holdouts, and true walk-forward selection when a mechanism learns or chooses among candidates.
 - Current-state recommendations and future-scenario research are related but separate systems.
 - Risk management, position sizing, and off-ramp behavior matter as much as return forecasts.
 
@@ -110,6 +110,7 @@ These are the canonical entry points for users and maintainers. Start with the f
 | Doc | Audience | Purpose |
 | --- | --- | --- |
 | [System Whitepaper](docs/whitepaper.md) | Users, reviewers, and technical readers | Semi-technical overview of what Trade Bot is, how the components work, what the research has found, and how monitoring makes the system operational. |
+| [AI Review Whitepaper](docs/ai_review_whitepaper.md) | Independent LLM reviewers and technical auditors | Machine-oriented specification of causal authority, formulas, evidence, provenance, failure modes, and open review questions. |
 | [Setup Guide](docs/setup_guide.md) | New users and maintainers | Step-by-step installation, local environment setup, dashboard launch, Git basics, and troubleshooting. |
 | [User Guide](docs/user_guide.md) | Operators and reviewers | Full workflow guide for daily monitoring, strategy research, paper tracking, live logging, taxable review, and periodic review. |
 | [FAQ](docs/faq.md) | Everyone | Comprehensive answers to common questions about safety, workflow, metrics, risk, data, ML, taxes, and governance. |
@@ -149,7 +150,7 @@ poetry run trade-bot list-snapshots --limit 10
 Then open `http://localhost:8501`.
 
 If a dashboard is already running and you want the latest code, restart the
-managed V2 process in one command:
+managed V2.2 process in one command:
 
 ```bash
 poetry run trade-bot run-dashboard --stop-existing
@@ -157,7 +158,7 @@ poetry run trade-bot run-dashboard --stop-existing
 
 Most dashboard opens should use the sidebar default, `Latest snapshot (fast)`. Use `Live pipeline` only when you intentionally want the dashboard open to recompute the full pipeline.
 
-The primary dashboard is the V2 workbench. It keeps the same local snapshots,
+The primary dashboard is the V2.2 workbench. It keeps the same local snapshots,
 DuckDB warehouse, and research artifacts, but reorganizes the UI into
 summary-first workbenches so Research, Simulation, and Monitoring do not load
 deep diagnostics until requested:
@@ -217,12 +218,32 @@ Most refresh work can be run from the dashboard left sidebar:
 | Sidebar Button | Equivalent CLI | Use |
 | --- | --- | --- |
 | **Run Full Daily Update** | `poetry run trade-bot run-daily-update` | Normal daily path. Refreshes data, scenarios, snapshot, warehouse, and paper valuations. |
-| **Build Snapshot Only** | `poetry run trade-bot build-snapshot` | Rebuilds the dashboard snapshot without downstream warehouse or paper valuation steps. |
+| **Build Snapshot Only** | `poetry run trade-bot build-snapshot` | Rebuilds the dashboard snapshot and synchronizes snapshot-derived strategy registry/metrics; it skips experiment migration and paper valuation. |
 | **Migrate Warehouse** | `poetry run trade-bot migrate-warehouse` | Re-reads experiment, registry, journal, and scorecard artifacts into DuckDB. |
 | **Audit Strategy Sources** | `poetry run trade-bot audit-strategy-sources` | Reconciles top strategy claims across latest snapshot metrics, experiment scorecards, rolling/window diagnostics, and docs. |
 | **Run Paper Valuation** | `poetry run trade-bot run-paper-valuation` | Updates active champion/challenger/reference paper valuations from the latest snapshot. |
 | **Seed Monitoring Windows** | `poetry run trade-bot seed-monitoring-windows` | Adds top paper windows from the current strategy registry. |
 | **Run ML Diagnostics** | `poetry run trade-bot run-ml-diagnostics --profile standard` | Refreshes ML diagnostic artifacts used by research views. |
+
+Calibration and allocation-authority audits are terminal research jobs. Run
+`poetry run trade-bot calibrate-defensive-layers --config configs/active_trading.yaml`
+first, then run `poetry run trade-bot calibrate-scenario-probabilities` with
+`--config configs/baseline.yaml`.
+After rebuilding pre-break snapshots, run `poetry run trade-bot
+analyze-prebreak-hindsight` and then `poetry run trade-bot
+backtest-prebreak-risk-policy`; the second command measures the return and
+drawdown cost of applying the sparse historical risk budgets to the candidate
+strategy shelf.
+
+The active balanced-asymmetric policy deliberately separates visibility from
+authority. The base market strategy and quantitative risk status can size the
+book. Independent beta, expected-shortfall, and catastrophic-stress limits
+remain hard. Scenario probabilities, scenario-conditioned portfolio tightening,
+scenario-weighted stress, and news/events currently have zero sizing authority
+because the July 2026 walk-forward calibration did not justify it. The Today page
+shows causal percentage-point attribution, news-disabled/informational
+counterfactuals, historical regret versus avoided loss, utility tolerances, and
+the evidence required to change the recommendation.
 
 Not everything belongs behind a single UI click. Large experiment sweeps,
 dependency installs, Git operations, and any live-broker execution remain
@@ -231,37 +252,36 @@ intentionally require explicit human review.
 
 ## Dashboard Map
 
-The dashboard is intentionally organized from action to evidence. Start at the top, then drill only where needed.
+The V2.2 dashboard is intentionally organized from action to evidence. Start at the top, then drill only where needed.
 
 ```mermaid
 flowchart TD
-    A[Action Headline] --> B[Operating Brief]
-    B --> C[Decision Brief Expander]
-    C --> D[Book Alignment]
-    D --> E{Need more detail?}
-    E -->|Current action| F[Command Center]
-    E -->|Sizing and off-ramp| G[Risk & Scenarios]
-    E -->|Forward path planning| L[Simulation Lab]
-    E -->|Strategy evidence| H[Research Lab]
-    E -->|Forward proof| I[Monitoring]
-    E -->|Execution trail| J[Forward Test]
-    K[Right-Side Term Lookup] -. explains .-> A
-    K -. explains .-> H
+    A[Today] --> B{Next question}
+    B -->|Market context| C[Macro]
+    B -->|Sizing and off-ramp| D[Risk]
+    B -->|Recommendation and execution| E[Forward Test]
+    B -->|Forward proof| F[Monitoring]
+    B -->|Strategy evidence| G[Research]
+    B -->|Historical behavior| H[Performance]
+    B -->|New-money timing| I[Launch]
+    B -->|Future range and validation| J[Simulation]
+    K[Quick Reference Rail] -. explains .-> A
+    K -. explains .-> D
+    K -. explains .-> G
 ```
 
 | Section | Use It For | Primary Questions |
 | --- | --- | --- |
-| Operating Overview | One-screen operating posture | Is today do-nothing, small-action, or critical-action? What changed? Is the paper book aligned? |
-| Right-Side Term Lookup | Metric and tracker explanations | What does this term mean, how is it calculated, and how can it mislead? |
-| Insight Workbench | Navigation to deeper evidence sections | Which detailed workbench should I open for the next question? |
-| Command Center | Current-state trade decision | What is the target posture, and which tickers are affected? |
-| Risk & Scenarios | Off-ramp and sizing discipline | Are factor risk, stress loss, scenarios, or expected shortfall forcing lower risk? |
-| Simulation Lab | Future-state and path-risk simulation | What could the future range look like for a selected strategy under deterministic, bootstrap, and scenario-conditioned models? |
-| Research Lab | Strategy research and diagnostics | Which approaches worked, why, across which windows/regimes, and under which speculative-cycle phase? Includes **Cycle Tracker** and **Taxable Impact** for after-tax survivability. |
-| Monitoring | Champion/challenger forward paper testing | Which monitored systems are ahead, lagging, or in drawdown review? |
-| News & Macro | Narrative and macro source review | What news or macro pressure is active, stale, or missing? |
-| Performance | Backtest and selected-window charts | Did the approach work recently and through transitions? |
-| Forward Test | Recommendation and execution journal | What was recommended, what was done, at what price, and why? |
+| Today | One-screen operating posture | What is the system asking me to do now, and is the promoted paper book aligned? |
+| Macro | Market context and source review | What context is active, and what is only watch-only narrative? |
+| Risk | Off-ramp, exposure, and sizing discipline | Why is promoted-book exposure being capped, expanded, or left alone? |
+| Forward Test | Recommendation and execution journal | What was recommended, locked, executed, and recorded? |
+| Monitoring | Champion/challenger forward paper testing | Are monitored strategies proving out after their start dates? |
+| Research | Candidate evidence and diagnostics | Which candidates still deserve belief across windows, regimes, costs, and robustness checks? |
+| Performance | Backtest and selected-window charts | Did the system work in the selected historical window? |
+| Launch | New-money timing | Should new money start, wait, or ramp into a selected strategy? |
+| Simulation | Future paths and validation | What future range is plausible, and are return-band and action-quality checks acceptable? |
+| Quick Reference Rail | Metric and tracker explanations | What does this term mean, how is it calculated, and how can it mislead? |
 
 ### Operating Overview
 
@@ -618,6 +638,7 @@ Keep `.env`, `.venv/`, `data/`, `reports/`, DuckDB files, parquet files, CSV exp
 | Run paper valuation | `poetry run trade-bot run-paper-valuation` |
 | List windows | `poetry run trade-bot list-monitoring-windows` |
 | Champion/challenger | `poetry run trade-bot list-champion-challenger` |
+| Freeze the fixed prospective cohort | `poetry run trade-bot seed-prospective-monitoring-cohort --config configs/active_trading.yaml` |
 
 ## Research Loop
 
@@ -640,6 +661,52 @@ poetry run trade-bot migrate-warehouse
 ```
 
 See [docs/iteration_protocol.md](docs/iteration_protocol.md), [docs/creative_strategy_backlog.md](docs/creative_strategy_backlog.md), [docs/experiment_plan.md](docs/experiment_plan.md), and [docs/research_pruning_and_growth.md](docs/research_pruning_and_growth.md).
+
+### V2.2 Evidence Controls
+
+The fixed prospective cohort is separate from reconstructed monitoring. It
+freezes the primary, native challenger, Min-25 challenger, QQQ, and SPY using
+the strategy and execution definitions in effect on the start date. Its first
+cohort is `v22-prospective-2026-07-21`; earlier performance is never counted as
+forward evidence.
+
+Research manifests now fail closed on point-in-time universe and delisting
+evidence, and the governance ledger consolidates every declared trial roster it
+can recover from persisted manifests and artifacts:
+
+```bash
+poetry run trade-bot build-research-governance-ledger
+```
+
+The ledger is an audit index, not proof of completeness. Interrupted or
+unmanifested historical attempts remain an explicit gap. A research result is
+not promotion-eligible until its holding dates, historical membership,
+delisting treatment, and source metadata pass the point-in-time audit.
+
+The fixed AI-stress replacement study can be reproduced with:
+
+```bash
+poetry run trade-bot run-i111-cross-sectional-replacement \
+  --config configs/active_trading.yaml
+```
+
+It is intentionally a three-policy study, not a sweep. The two replacement
+policies failed their retrospective gates and did not change the operating
+strategy.
+
+Rolling-origin simulation validation now checkpoints primary-strategy progress
+and resumes by default. A checkpoint is fingerprinted to the exact return
+series, scenario/factor inputs, and simulation settings; incompatible resumes
+fail closed. Use `--restart` to discard checkpoint progress intentionally:
+
+```bash
+poetry run trade-bot validate-simulation-engine \
+  --strategy i111_native_risk_repair_guard17_relief85_ai85_div \
+  --checkpoint-every-origins 5 --resume
+```
+
+Checkpoint support makes a full validation finishable; it does not make a
+small-path smoke test authoritative.
 
 ## Formula Audit
 

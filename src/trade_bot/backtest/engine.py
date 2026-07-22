@@ -5,7 +5,12 @@ from dataclasses import dataclass
 import pandas as pd
 
 from trade_bot.config import DrawdownControlConfig, ExecutionConfig, VolatilityTargetConfig
-from trade_bot.features.indicators import daily_returns, realized_volatility, rolling_drawdown
+from trade_bot.features.indicators import (
+    bounded_forward_fill,
+    daily_returns,
+    realized_volatility,
+    rolling_drawdown,
+)
 
 
 @dataclass(frozen=True)
@@ -20,6 +25,10 @@ class BacktestResult:
     transaction_costs: pd.Series
 
 
+class StaleHeldPositionError(ValueError):
+    """Raised when a backtest would mark an open position with an unusable price."""
+
+
 def run_backtest(
     name: str,
     prices: pd.DataFrame,
@@ -32,7 +41,17 @@ def run_backtest(
     prices = prices.sort_index()
     asset_returns = daily_returns(prices)
     target_weights = target_weights.reindex(prices.index).astype(float).fillna(0.0)
+    price_available = (
+        bounded_forward_fill(prices)
+        .notna()
+        .reindex(
+            columns=target_weights.columns,
+            fill_value=False,
+        )
+    )
+    target_weights = target_weights.where(price_available, 0.0)
     target_weights = _rebalance_weights(target_weights, execution.rebalance)
+    target_weights = target_weights.where(price_available, 0.0)
     target_weights = _normalize_long_only(target_weights)
 
     execution_weights = target_weights.shift(execution.signal_lag_days).fillna(0.0)
@@ -51,6 +70,9 @@ def run_backtest(
             drawdown_control,
         )
 
+    validate_held_price_availability(execution_weights, price_available)
+
+    execution_weights = execution_weights.where(price_available, 0.0)
     execution_weights = _normalize_long_only(execution_weights)
     turnover = (
         execution_weights.diff().abs().sum(axis=1).fillna(execution_weights.abs().sum(axis=1))
@@ -69,6 +91,29 @@ def run_backtest(
         target_weights=target_weights,
         turnover=turnover.rename(name),
         transaction_costs=transaction_costs.rename(name),
+    )
+
+
+def validate_held_price_availability(
+    execution_weights: pd.DataFrame,
+    price_available: pd.DataFrame,
+) -> None:
+    """Fail instead of inventing a zero-cost exit for an unpriced open holding."""
+
+    availability = price_available.reindex(
+        index=execution_weights.index,
+        columns=execution_weights.columns,
+        fill_value=False,
+    )
+    held_without_price = execution_weights.gt(1e-12) & ~availability
+    if not held_without_price.any(axis=None):
+        return
+    first_date = held_without_price.any(axis=1).idxmax()
+    held_tickers = held_without_price.columns[held_without_price.loc[first_date]].tolist()
+    raise StaleHeldPositionError(
+        "Cannot value held positions after the bounded price-staleness limit: "
+        f"date={pd.Timestamp(first_date).date()}, tickers={held_tickers}. "
+        "Supply a valid terminal price or explicitly model the loss/exit event."
     )
 
 

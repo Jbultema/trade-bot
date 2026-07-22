@@ -8,7 +8,7 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.backtest.metrics import PerformanceMetrics, calculate_metrics
-from trade_bot.config import BotConfig, configured_tickers
+from trade_bot.config import BotConfig, configured_tickers, required_strategy_tickers
 from trade_bot.DEFAULTS import DEFAULT_EXPERIMENTS_DIR
 from trade_bot.research.approach_explorer import (
     build_approach_backtest_result,
@@ -241,10 +241,7 @@ def required_tickers_for_catalog_rows(rows: pd.DataFrame) -> set[str]:
             strategy = strategy_from_catalog_row(row)
         except (TypeError, ValueError):
             continue
-        tickers.update(strategy.tickers)
-        tickers.update(strategy.satellite_tickers)
-        if strategy.defensive_ticker:
-            tickers.add(strategy.defensive_ticker)
+        tickers.update(required_strategy_tickers(strategy))
     return tickers
 
 
@@ -305,7 +302,10 @@ def build_factor_beta_frame(
             if ticker not in benchmark_returns:
                 continue
             aligned = pd.concat(
-                [strategy_returns.rename("strategy"), benchmark_returns[ticker].rename("benchmark")],
+                [
+                    strategy_returns.rename("strategy"),
+                    benchmark_returns[ticker].rename("benchmark"),
+                ],
                 axis=1,
                 join="inner",
             ).dropna()
@@ -345,7 +345,9 @@ def build_return_contribution_frame(
         total = float(contributions.sum())
         abs_total = float(contributions.abs().sum())
         positive_total = float(contributions.clip(lower=0.0).sum())
-        for ticker, contribution in contributions.sort_values(key=lambda s: s.abs(), ascending=False).items():
+        for ticker, contribution in contributions.sort_values(
+            key=lambda s: s.abs(), ascending=False
+        ).items():
             is_tech = ticker in TECH_LEADERSHIP_TICKERS
             rows.append(
                 {
@@ -647,7 +649,10 @@ def run_walk_forward_strategy_router(
             ),
             prior_top3_mean_excess_vs_benchmark=("prior_top3_blend_excess_vs_benchmark", "mean"),
             equal_candidate_mean_forward_return=("equal_candidate_forward_return", "mean"),
-            equal_candidate_mean_excess_vs_benchmark=("equal_candidate_excess_vs_benchmark", "mean"),
+            equal_candidate_mean_excess_vs_benchmark=(
+                "equal_candidate_excess_vs_benchmark",
+                "mean",
+            ),
             benchmark_mean_forward_return=("benchmark_forward_return", "mean"),
             mean_similar_prior_windows=("similar_prior_windows", "mean"),
             fallback_share=("fallback_windows", lambda s: float((s > 0).mean())),
@@ -679,7 +684,9 @@ def build_router_selection_summary(folds: pd.DataFrame) -> pd.DataFrame:
     )
     horizon_counts = folds.groupby("horizon_days")["origin_date"].count().rename("horizon_folds")
     grouped = grouped.merge(horizon_counts, on="horizon_days", how="left")
-    grouped["selection_rate"] = grouped["selected_count"] / grouped["horizon_folds"].replace(0, np.nan)
+    grouped["selection_rate"] = grouped["selected_count"] / grouped["horizon_folds"].replace(
+        0, np.nan
+    )
     return grouped.sort_values(
         ["horizon_days", "selected_count", "mean_excess_vs_benchmark"],
         ascending=[True, False, False],
@@ -958,9 +965,13 @@ def _router_state_features(prices: pd.DataFrame) -> pd.DataFrame:
     features["market_21d_return"] = _rolling_compound(asset_returns[market], 21)
     features["market_63d_return"] = _rolling_compound(asset_returns[market], 63)
     features["market_126d_return"] = _rolling_compound(asset_returns[market], 126)
-    features["market_21d_vol"] = asset_returns[market].rolling(21, min_periods=10).std() * np.sqrt(252.0)
+    features["market_21d_vol"] = asset_returns[market].rolling(21, min_periods=10).std() * np.sqrt(
+        252.0
+    )
     market_price = prices[market].ffill()
-    features["market_126d_drawdown"] = market_price / market_price.rolling(126, min_periods=21).max() - 1.0
+    features["market_126d_drawdown"] = (
+        market_price / market_price.rolling(126, min_periods=21).max() - 1.0
+    )
     for ticker in ("SPY", "RSP", "VEA", "IWM", "SMH", "SOXX", "GLD", "TLT", "XLE"):
         if ticker in asset_returns:
             features[f"{ticker.lower()}_63d_return"] = _rolling_compound(asset_returns[ticker], 63)
@@ -973,12 +984,16 @@ def _router_state_features(prices: pd.DataFrame) -> pd.DataFrame:
                     63,
                 )
     if "SMH" in asset_returns and "SPY" in asset_returns:
-        features["semis_vs_spy_63d"] = _rolling_compound(asset_returns["SMH"], 63) - _rolling_compound(
+        features["semis_vs_spy_63d"] = _rolling_compound(
+            asset_returns["SMH"], 63
+        ) - _rolling_compound(
             asset_returns["SPY"],
             63,
         )
     if "GLD" in asset_returns and "TLT" in asset_returns:
-        features["gold_vs_tlt_63d"] = _rolling_compound(asset_returns["GLD"], 63) - _rolling_compound(
+        features["gold_vs_tlt_63d"] = _rolling_compound(
+            asset_returns["GLD"], 63
+        ) - _rolling_compound(
             asset_returns["TLT"],
             63,
         )
@@ -1029,7 +1044,9 @@ def _router_candidate_scores(
         fallback_samples = pd.DataFrame()
         score_source = "state_similarity"
         if len(state_samples) >= 5 and len(samples) >= 5:
-            score = 0.70 * _score_router_samples(state_samples) + 0.30 * _score_router_samples(samples)
+            score = 0.70 * _score_router_samples(state_samples) + 0.30 * _score_router_samples(
+                samples
+            )
             score_source = "state_similarity_plus_scenario"
             scoring_samples = state_samples
         elif len(state_samples) >= 5:
@@ -1293,8 +1310,7 @@ def _markdown_readout(
         if not qqq.empty:
             top_beta = qqq.sort_values("beta", ascending=False).iloc[0]
             lines.append(
-                "Highest QQQ beta: "
-                f"`{top_beta['strategy']}` beta {float(top_beta['beta']):.2f}."
+                "Highest QQQ beta: " f"`{top_beta['strategy']}` beta {float(top_beta['beta']):.2f}."
             )
     if not impairment.empty:
         stressed = impairment[~impairment["scenario"].eq("native")]
@@ -1346,7 +1362,9 @@ def _markdown_readout(
             ]
         )
     if not router_selection.empty:
-        frequent = router_selection.sort_values(["selected_count", "mean_excess_vs_benchmark"], ascending=False).iloc[0]
+        frequent = router_selection.sort_values(
+            ["selected_count", "mean_excess_vs_benchmark"], ascending=False
+        ).iloc[0]
         lines.append(
             "- Most frequent selected strategy: "
             f"`{frequent['strategy']}` at {int(frequent['horizon_days'])}d "

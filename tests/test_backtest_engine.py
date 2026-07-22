@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from trade_bot.backtest.engine import run_backtest
+from trade_bot.backtest.engine import StaleHeldPositionError, run_backtest
 from trade_bot.config import DrawdownControlConfig, ExecutionConfig
 
 
@@ -94,3 +94,57 @@ def test_drawdown_control_does_not_use_same_day_returns_to_avoid_trigger_day() -
     assert result.weights["SPY"].iloc[2] == 1.0
     assert result.returns.iloc[2] == -0.50
     assert result.weights["SPY"].iloc[3] == 0.0
+
+
+def test_backtest_fails_closed_when_a_held_asset_exceeds_price_staleness_limit() -> None:
+    dates = pd.bdate_range("2024-01-02", periods=11)
+    prices = pd.DataFrame(
+        {
+            "DEAD": [100.0, 101.0, 102.0, *([float("nan")] * 8)],
+            "BIL": [100.0 + index * 0.01 for index in range(11)],
+        },
+        index=dates,
+    )
+    target_weights = pd.DataFrame(
+        {"DEAD": 1.0, "BIL": 0.0},
+        index=dates,
+    )
+
+    with pytest.raises(StaleHeldPositionError, match="DEAD"):
+        run_backtest(
+            "stale_exit",
+            prices,
+            target_weights,
+            ExecutionConfig(
+                initial_capital=100.0,
+                transaction_cost_bps=0.0,
+                rebalance="daily",
+                signal_lag_days=1,
+            ),
+        )
+
+
+def test_backtest_allows_an_unavailable_asset_that_was_never_held() -> None:
+    dates = pd.bdate_range("2024-01-02", periods=11)
+    prices = pd.DataFrame(
+        {
+            "DEAD": [100.0, 101.0, 102.0, *([float("nan")] * 8)],
+            "BIL": [100.0 + index * 0.01 for index in range(11)],
+        },
+        index=dates,
+    )
+    target_weights = pd.DataFrame({"DEAD": 0.0, "BIL": 1.0}, index=dates)
+
+    result = run_backtest(
+        "unused_stale_asset",
+        prices,
+        target_weights,
+        ExecutionConfig(
+            initial_capital=100.0,
+            transaction_cost_bps=0.0,
+            rebalance="daily",
+            signal_lag_days=1,
+        ),
+    )
+
+    assert result.weights["DEAD"].eq(0.0).all()

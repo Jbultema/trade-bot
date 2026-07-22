@@ -6,7 +6,12 @@ from pathlib import Path
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
-from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
+from trade_bot.config import (
+    BotConfig,
+    ExecutionConfig,
+    StrategyConfig,
+    required_strategy_tickers,
+)
 from trade_bot.DEFAULTS import (
     DEFAULT_DECISION_TIMELINE_CONTEXT_DAYS,
     DEFAULT_DECISION_TIMELINE_FORWARD_DAYS,
@@ -14,7 +19,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_RESET_EXPERIMENTS_DIR,
 )
-from trade_bot.features.indicators import drawdown
+from trade_bot.features.indicators import drawdown, unusable_required_price_columns
 from trade_bot.portfolio.risk import current_positions
 from trade_bot.research.curation import add_research_status
 from trade_bot.research.experiments import (
@@ -733,9 +738,7 @@ def build_approach_decision_events(
         after = risk_weight.iloc[risk_position + 1 : risk_position + 1 + context_days]
         forward = equity.iloc[risk_position : risk_position + 1 + forward_days]
         forward_return = (
-            float(forward.iloc[-1] / forward.iloc[0] - 1.0)
-            if len(forward) >= 2
-            else float("nan")
+            float(forward.iloc[-1] / forward.iloc[0] - 1.0) if len(forward) >= 2 else float("nan")
         )
         short_forward = equity.iloc[risk_position : risk_position + 1 + context_days]
         short_forward_return = (
@@ -748,9 +751,11 @@ def build_approach_decision_events(
         rows.append(
             {
                 "event": event,
-                "date": event_date.date().isoformat()
-                if hasattr(event_date, "date")
-                else str(event_date),
+                "date": (
+                    event_date.date().isoformat()
+                    if hasattr(event_date, "date")
+                    else str(event_date)
+                ),
                 "signal": (
                     f"{event}: risk {risk_change:+.1%}, defensive {defensive_change:+.1%}, "
                     f"total move {total_change:.1%}."
@@ -765,13 +770,17 @@ def build_approach_decision_events(
                 "total_change": total_change,
                 "risk_weight_change": risk_change,
                 "defensive_weight_change": defensive_change,
-                "risk_weight_before_1m": float(before.mean())
-                if not before.empty
-                else float(risk_weight.iloc[risk_position]),
+                "risk_weight_before_1m": (
+                    float(before.mean())
+                    if not before.empty
+                    else float(risk_weight.iloc[risk_position])
+                ),
                 "risk_weight_at_event": float(risk_weight.iloc[risk_position]),
-                "risk_weight_after_1m": float(after.mean())
-                if not after.empty
-                else float(risk_weight.iloc[risk_position]),
+                "risk_weight_after_1m": (
+                    float(after.mean())
+                    if not after.empty
+                    else float(risk_weight.iloc[risk_position])
+                ),
                 "defensive_weight_at_event": float(defensive_weight.iloc[risk_position]),
                 "drawdown_at_event": float(strategy_drawdown.iloc[risk_position]),
                 "forward_return_1m": short_forward_return,
@@ -1178,36 +1187,23 @@ def build_approach_risk_notes(strategy: StrategyConfig, row: pd.Series) -> pd.Da
 
 
 def build_latest_approach_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
-    columns = list(
-        dict.fromkeys(
-            [*strategy.tickers, *([strategy.defensive_ticker] if strategy.defensive_ticker else [])]
-        )
+    strategy_prices, strategy_for_prices, missing_columns = _prepare_strategy_prices(
+        prices, strategy
     )
-    available_columns = [column for column in columns if column in prices.columns]
-    missing_columns = sorted(set(columns) - set(available_columns))
-    available_risk_tickers = [ticker for ticker in strategy.tickers if ticker in available_columns]
-    if not available_risk_tickers:
+    if strategy_prices.empty or not strategy_for_prices.tickers:
         return pd.DataFrame(
             [
                 {
                     "ticker": "n/a",
                     "weight": 0.0,
-                    "note": "No strategy tickers are available in loaded prices.",
+                    "note": (
+                        "Missing required price inputs: " + ", ".join(missing_columns)
+                        if missing_columns
+                        else "No strategy tickers are available in loaded prices."
+                    ),
                 }
             ]
         )
-    strategy_prices = prices[available_columns].dropna(how="all")
-    strategy_for_prices = StrategyConfig.model_validate(
-        {
-            **strategy.model_dump(mode="json"),
-            "tickers": available_risk_tickers,
-            "defensive_ticker": (
-                strategy.defensive_ticker
-                if strategy.defensive_ticker in available_columns
-                else None
-            ),
-        }
-    )
     weights = build_strategy_weights(strategy_prices, strategy_for_prices)
     positions = current_positions(weights, top_n=20)
     frame = pd.DataFrame(
@@ -1260,13 +1256,11 @@ def _prepare_strategy_prices(
     prices: pd.DataFrame,
     strategy: StrategyConfig,
 ) -> tuple[pd.DataFrame, StrategyConfig, list[str]]:
-    columns = list(
-        dict.fromkeys(
-            [*strategy.tickers, *([strategy.defensive_ticker] if strategy.defensive_ticker else [])]
-        )
-    )
-    available_columns = [column for column in columns if column in prices.columns]
-    missing_columns = sorted(set(columns) - set(available_columns))
+    columns = required_strategy_tickers(strategy)
+    missing_columns = unusable_required_price_columns(prices, columns)
+    if missing_columns:
+        return pd.DataFrame(), strategy, missing_columns
+    available_columns = columns
     available_risk_tickers = [ticker for ticker in strategy.tickers if ticker in available_columns]
     if not available_risk_tickers:
         empty_strategy = StrategyConfig.model_validate(
@@ -1472,13 +1466,13 @@ def _allocation_event_row(
         "date": date.date().isoformat() if hasattr(date, "date") else str(date),
         "signal": signal,
         event_value_label: event_value,
-        "risk_weight_before_1m": float(before.mean())
-        if not before.empty
-        else float(risk_weight.iloc[position]),
+        "risk_weight_before_1m": (
+            float(before.mean()) if not before.empty else float(risk_weight.iloc[position])
+        ),
         "risk_weight_at_event": float(risk_weight.iloc[position]),
-        "risk_weight_after_1m": float(after.mean())
-        if not after.empty
-        else float(risk_weight.iloc[position]),
+        "risk_weight_after_1m": (
+            float(after.mean()) if not after.empty else float(risk_weight.iloc[position])
+        ),
         "drawdown_at_event": float(window_drawdown.iloc[position]),
         "forward_return_3m": forward_return,
         "interpretation": _allocation_event_interpretation(event, event_value, forward_return),

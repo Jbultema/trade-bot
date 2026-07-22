@@ -1,6 +1,6 @@
 # Trade Bot Technical Explainer
 
-Status: canonical technical reference. Last reviewed: 2026-07-17.
+Status: canonical technical reference. Last reviewed: 2026-07-21.
 
 This document explains how the major pieces of Trade Bot work behind the scenes.
 It is intended for developers, reviewers, and technical users who need to answer:
@@ -176,8 +176,12 @@ and macro state. The scenario buckets include states such as:
 - narrow AI-led melt-up,
 - risk-off then relief.
 
-The scenario output is used by `trade_decision.py` to shape risk budget and
-target posture. It does not directly forecast exact prices.
+The scenario output is displayed by `trade_decision.py` as a probabilistic map.
+It can shape risk budget or target posture only when the configured walk-forward
+calibration gate grants it nonzero authority. The active July 2026 policy grants
+zero scenario sizing, scenario-budget, and scenario-weighted-stress authority,
+so these probabilities are diagnostic rather than causal allocation inputs. It
+does not directly forecast exact prices.
 
 ## Scenario / Phase Frontier
 
@@ -267,22 +271,38 @@ The system distinguishes:
 
 ## Portfolio Risk Engine
 
-`portfolio/risk.py` applies risk controls after the scenario target. It includes:
+`portfolio/risk.py` applies risk controls after the quantitative strategy
+target. It includes:
 
 - beta/factor checks,
 - expected shortfall,
 - stress loss,
 - concentration constraints,
-- scenario minimum defensive allocation,
-- scenario-weighted stress constraints,
+- scenario minimum defensive allocation when calibration grants authority,
+- scenario-weighted stress as an advisory diagnostic unless separately granted
+  authority,
 - portfolio risk multiplier.
 
 The risk engine is a guardrail. It should not be treated as a complete
 institutional risk system, but it is more than a simple momentum toggle.
 
+Under the active balanced-asymmetric policy, scenario-conditioned limit
+tightening and scenario-weighted-stress sizing have zero authority. Independent
+equity beta, expected-shortfall, maximum-stress, concentration, and base-floor
+constraints remain hard. The Today page shows each layer's exact marginal
+defensive percentage points and keeps zero-effect research layers out of the
+causal explanation.
+
+The configured defensive ticker is not treated as a risk-asset
+single-position breach. Constraint checks use absolute and relative numeric
+tolerance, and headline status is computed from the same complete hard-
+constraint set as the detail table. This prevents BIL concentration and
+floating-point residue from creating contradictory risk labels.
+
 ## Decision-Sanity Overlay
 
-Decision sanity prevents context-only or event-only pressure from forcing huge
+News/events are informational-only in the active policy. Decision sanity
+prevents context-only or event-only pressure from forcing huge
 defensive moves without market confirmation. Larger defensive moves should
 generally require confirmation from at least some combination of:
 
@@ -313,6 +333,12 @@ News/event items can be:
 The important design rule is that news generally informs context and risk review.
 It should not become a direct trade driver unless validated or confirmed by
 market data.
+
+Source health is part of that authority rule. Cache-fallback items preserve the
+original `data_as_of` and remain triage-only; they cannot synthesize a sizing
+event. Events can define `decay_after_days` and `expires_after_days`, with
+sizing pressure fading linearly between those dates and reaching zero after
+expiry. News-derived events use a one-day decay start and seven-day expiry.
 
 ## Driver Rotation
 

@@ -45,6 +45,9 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.features.indicators import TRADING_DAYS_PER_YEAR, daily_returns
 
+CONSTRAINT_ABSOLUTE_TOLERANCE = 1e-10
+CONSTRAINT_RELATIVE_TOLERANCE = 1e-9
+
 
 @dataclass(frozen=True)
 class PortfolioRiskConfig:
@@ -68,6 +71,8 @@ class PortfolioRiskConfig:
     max_turnover: float = DEFAULT_RISK_MAX_TURNOVER
     correlation_shift_threshold: float = DEFAULT_RISK_CORRELATION_SHIFT_THRESHOLD
     min_risk_asset_multiplier: float = DEFAULT_RISK_MIN_RISK_ASSET_MULTIPLIER
+    scenario_budget_authority: float = 1.0
+    scenario_weighted_stress_authority: float = 1.0
     factor_proxies: tuple[tuple[str, str, str], ...] = DEFAULT_RISK_FACTOR_PROXIES
     stress_tests: tuple[RiskStressTestDefinition, ...] = DEFAULT_RISK_STRESS_TESTS
 
@@ -267,27 +272,27 @@ def _build_scenario_budget(
             scenario_multiplier, DEFAULT_SCENARIO_MIN_MULTIPLIER, DEFAULT_SCENARIO_MAX_MULTIPLIER
         )
     )
-    max_equity_beta = max(
+    raw_max_equity_beta = max(
         0.35,
         config.base_max_equity_beta * (1.0 - 0.35 * risk_off - 0.15 * transition),
     )
-    max_ai_beta = max(
+    raw_max_ai_beta = max(
         0.20,
         config.base_max_ai_beta * (1.0 - 0.45 * ai_unwind - 0.30 * risk_off - 0.15 * fragile),
     )
-    max_expected_shortfall = max(
+    raw_max_expected_shortfall = max(
         0.0125,
         config.base_max_expected_shortfall_95 * (1.0 - 0.35 * risk_off - 0.15 * transition),
     )
-    max_stress_loss = max(
+    raw_max_stress_loss = max(
         0.06,
         config.base_max_stress_loss * (1.0 - 0.35 * risk_off - 0.15 * transition),
     )
-    max_scenario_weighted_stress_loss = max(
+    raw_max_scenario_weighted_stress_loss = max(
         0.03,
         config.base_max_scenario_weighted_stress_loss * (1.0 - 0.25 * risk_off - 0.10 * transition),
     )
-    min_defensive = float(
+    raw_min_defensive = float(
         np.clip(
             config.base_min_defensive_weight
             + 0.40 * risk_off
@@ -298,14 +303,32 @@ def _build_scenario_budget(
             0.65,
         )
     )
-    max_single = max(
+    raw_max_single = max(
         0.25,
         config.max_single_asset_weight * (1.0 - 0.25 * risk_off - 0.10 * transition),
     )
-    max_hhi = max(
+    raw_max_hhi = max(
         0.22,
         config.max_concentration_hhi * (1.0 - 0.25 * risk_off - 0.10 * transition),
     )
+    authority = float(np.clip(config.scenario_budget_authority, 0.0, 1.0))
+
+    def blend(base: float, scenario_value: float) -> float:
+        return float(base + authority * (scenario_value - base))
+
+    max_equity_beta = blend(config.base_max_equity_beta, raw_max_equity_beta)
+    max_ai_beta = blend(config.base_max_ai_beta, raw_max_ai_beta)
+    max_expected_shortfall = blend(
+        config.base_max_expected_shortfall_95, raw_max_expected_shortfall
+    )
+    max_stress_loss = blend(config.base_max_stress_loss, raw_max_stress_loss)
+    max_scenario_weighted_stress_loss = blend(
+        config.base_max_scenario_weighted_stress_loss,
+        raw_max_scenario_weighted_stress_loss,
+    )
+    min_defensive = blend(config.base_min_defensive_weight, raw_min_defensive)
+    max_single = blend(config.max_single_asset_weight, raw_max_single)
+    max_hhi = blend(config.max_concentration_hhi, raw_max_hhi)
     return _ScenarioBudget(
         risk_off_probability=risk_off,
         transition_probability=transition,
@@ -393,6 +416,7 @@ def _metric_snapshot(
         else pd.Series(dtype=float)
     )
     correlation = _correlation_metrics(returns, weights, config)
+    risk_asset_weights = weights.drop(labels=[config.defensive_ticker], errors="ignore")
     return _MetricSnapshot(
         equity_beta=float(factor_beta.get("market_beta", 0.0)),
         ai_beta=max(
@@ -406,7 +430,11 @@ def _metric_snapshot(
         scenario_weighted_stress_loss=(
             float(weighted_loss.sum()) if not weighted_loss.empty else 0.0
         ),
-        max_single_asset_weight=float(weights.max()) if not weights.empty else 0.0,
+        # The defensive residual is intentionally exempt from the single-risk-asset cap.
+        # Reporting must use the same universe as the sizing constraint.
+        max_single_asset_weight=(
+            float(risk_asset_weights.max()) if not risk_asset_weights.empty else 0.0
+        ),
         concentration_hhi=float((weights**2).sum()) if not weights.empty else 0.0,
         defensive_weight=float(weights.get(config.defensive_ticker, 0.0)),
         risk_asset_weight=float(
@@ -720,6 +748,7 @@ def _apply_constraints(
 ) -> tuple[pd.Series, tuple[str, ...]]:
     weights = target_weights.copy()
     applied: list[str] = []
+    scenario_weighted_stress_applied = False
 
     weights, capped = _cap_single_assets(weights, scenario_budget.max_single_asset_weight, config)
     if capped:
@@ -736,31 +765,38 @@ def _apply_constraints(
     for _ in range(4):
         snapshot = _metric_snapshot(returns, weights, scenario_budget, config)
         scalers: list[tuple[str, float]] = []
-        if snapshot.equity_beta > scenario_budget.max_equity_beta > 0:
+        if _exceeds_limit(snapshot.equity_beta, scenario_budget.max_equity_beta):
             scalers.append(("equity_beta", scenario_budget.max_equity_beta / snapshot.equity_beta))
-        if snapshot.ai_beta > scenario_budget.max_ai_beta > 0:
+        if _exceeds_limit(snapshot.ai_beta, scenario_budget.max_ai_beta):
             scalers.append(("ai_beta", scenario_budget.max_ai_beta / snapshot.ai_beta))
-        if snapshot.expected_shortfall_95 > scenario_budget.max_expected_shortfall_95 > 0:
+        if _exceeds_limit(
+            snapshot.expected_shortfall_95,
+            scenario_budget.max_expected_shortfall_95,
+        ):
             scalers.append(
                 (
                     "expected_shortfall",
                     scenario_budget.max_expected_shortfall_95 / snapshot.expected_shortfall_95,
                 )
             )
-        if snapshot.max_stress_loss > scenario_budget.max_stress_loss > 0:
+        if _exceeds_limit(snapshot.max_stress_loss, scenario_budget.max_stress_loss):
             scalers.append(
                 ("stress_loss", scenario_budget.max_stress_loss / snapshot.max_stress_loss)
             )
-        if (
-            snapshot.scenario_weighted_stress_loss
-            > scenario_budget.max_scenario_weighted_stress_loss
-            > 0
-        ):
+        if _exceeds_limit(
+            snapshot.scenario_weighted_stress_loss,
+            scenario_budget.max_scenario_weighted_stress_loss,
+        ) and not scenario_weighted_stress_applied:
+            raw_scaler = (
+                scenario_budget.max_scenario_weighted_stress_loss
+                / snapshot.scenario_weighted_stress_loss
+            )
+            authority = float(np.clip(config.scenario_weighted_stress_authority, 0.0, 1.0))
+            effective_scaler = 1.0 - authority * (1.0 - raw_scaler)
             scalers.append(
                 (
                     "scenario_weighted_stress",
-                    scenario_budget.max_scenario_weighted_stress_loss
-                    / snapshot.scenario_weighted_stress_loss,
+                    effective_scaler,
                 )
             )
         if not scalers:
@@ -771,6 +807,8 @@ def _apply_constraints(
             break
         weights = _scale_risk_assets(weights, scaler, config)
         applied.append(constraint)
+        if constraint == "scenario_weighted_stress":
+            scenario_weighted_stress_applied = True
 
     weights, capped_after_scaling = _cap_single_assets(
         weights,
@@ -880,11 +918,26 @@ def _summary_frame(
     applied_constraints: tuple[str, ...],
     config: PortfolioRiskConfig,
 ) -> pd.DataFrame:
-    if (
-        post_snapshot.max_stress_loss > scenario_budget.max_stress_loss
-        or post_snapshot.expected_shortfall_95 > scenario_budget.max_expected_shortfall_95
-        or post_snapshot.equity_beta > scenario_budget.max_equity_beta
-        or post_snapshot.ai_beta > scenario_budget.max_ai_beta
+    if any(
+        (
+            _exceeds_limit(
+                post_snapshot.max_single_asset_weight,
+                scenario_budget.max_single_asset_weight,
+            ),
+            _below_limit(post_snapshot.defensive_weight, scenario_budget.min_defensive_weight),
+            _exceeds_limit(post_snapshot.max_stress_loss, scenario_budget.max_stress_loss),
+            config.scenario_weighted_stress_authority >= 1.0
+            and _exceeds_limit(
+                    post_snapshot.scenario_weighted_stress_loss,
+                    scenario_budget.max_scenario_weighted_stress_loss,
+                ),
+            _exceeds_limit(
+                post_snapshot.expected_shortfall_95,
+                scenario_budget.max_expected_shortfall_95,
+            ),
+            _exceeds_limit(post_snapshot.equity_beta, scenario_budget.max_equity_beta),
+            _exceeds_limit(post_snapshot.ai_beta, scenario_budget.max_ai_beta),
+        )
     ):
         risk_level = "constraint_breach"
     elif applied_constraints:
@@ -904,6 +957,10 @@ def _summary_frame(
                 "portfolio_risk_level": risk_level,
                 "scenario_risk_multiplier": scenario_budget.scenario_risk_multiplier,
                 "portfolio_risk_multiplier": float(np.clip(portfolio_risk_multiplier, 0.0, 1.0)),
+                "scenario_budget_authority": config.scenario_budget_authority,
+                "scenario_weighted_stress_authority": (
+                    config.scenario_weighted_stress_authority
+                ),
                 "applied_constraints": ", ".join(applied_constraints) or "none",
                 "pre_equity_beta": pre_snapshot.equity_beta,
                 "post_equity_beta": post_snapshot.equity_beta,
@@ -1067,6 +1124,7 @@ def _constraint_report_frame(
             post_snapshot.scenario_weighted_stress_loss,
             scenario_budget.max_scenario_weighted_stress_loss,
             applied_constraints,
+            hard=config.scenario_weighted_stress_authority >= 1.0,
         ),
         {
             "constraint": "max_turnover_soft_guardrail",
@@ -1111,9 +1169,9 @@ def _max_constraint_row(
     *,
     hard: bool = True,
 ) -> dict[str, object]:
-    if post_value > limit:
+    if _exceeds_limit(post_value, limit):
         status = "breach" if hard else "watch"
-    elif pre_value > limit or constraint in applied_constraints:
+    elif _exceeds_limit(pre_value, limit) or constraint in applied_constraints:
         status = "adjusted"
     else:
         status = "ok"
@@ -1135,10 +1193,10 @@ def _min_constraint_row(
     limit: float,
     applied_constraints: tuple[str, ...],
 ) -> dict[str, object]:
-    if post_value < limit:
+    if _below_limit(post_value, limit):
         status = "breach"
     elif (
-        pre_value < limit
+        _below_limit(pre_value, limit)
         or constraint in applied_constraints
         or "scenario_min_defensive" in applied_constraints
     ):
@@ -1164,6 +1222,32 @@ def _constraint_action(status: str, constraint: str) -> str:
     if status == "watch":
         return f"Watch {constraint}; not a hard sizing block."
     return "No action."
+
+
+def _exceeds_limit(value: float, limit: float) -> bool:
+    if limit <= 0:
+        return False
+    return bool(
+        value > limit
+        and not np.isclose(
+            value,
+            limit,
+            rtol=CONSTRAINT_RELATIVE_TOLERANCE,
+            atol=CONSTRAINT_ABSOLUTE_TOLERANCE,
+        )
+    )
+
+
+def _below_limit(value: float, limit: float) -> bool:
+    return bool(
+        value < limit
+        and not np.isclose(
+            value,
+            limit,
+            rtol=CONSTRAINT_RELATIVE_TOLERANCE,
+            atol=CONSTRAINT_ABSOLUTE_TOLERANCE,
+        )
+    )
 
 
 def _sizing_adjustments_frame(

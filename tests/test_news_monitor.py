@@ -117,6 +117,45 @@ def test_news_activation_keeps_low_priority_sources_in_triage_only() -> None:
     assert activated.triage.iloc[0]["activation_status"] == "triage_only_low_priority"
 
 
+def test_cache_fallback_news_cannot_generate_sizing_event() -> None:
+    now = pd.Timestamp("2026-06-17T18:00:00Z")
+    item = NewsItem(
+        source="Cached Feed",
+        source_url="https://example.com/rss",
+        source_priority=5,
+        title="OpenAI losses and AI capex pressure",
+        summary="Audited AI losses and compute costs are rising.",
+        url="https://example.com/cached-risk",
+        published_at="2026-06-17T14:00:00Z",
+        topics=("ai",),
+    )
+    monitor = NewsMonitorRun(
+        items=(item,),
+        triage=triage_news_items((item,), lookback_days=7, now=now),
+        source_health=pd.DataFrame(
+            {
+                "source": ["Cached Feed"],
+                "status": ["cache_fallback"],
+            }
+        ),
+        activated_events=(),
+        activation_threshold=0.50,
+        lookback_days=7,
+    )
+
+    activated = activate_news_events(monitor, existing_events=())
+
+    assert activated.activated_events == ()
+    assert (
+        activated.triage.iloc[0]["activation_status"]
+        == "triage_only_degraded_source_health"
+    )
+    assert (
+        activated.triage.iloc[0]["sizing_authority_status"]
+        == "denied_degraded_source_health"
+    )
+
+
 def test_news_triage_excludes_items_published_after_as_of_time() -> None:
     now = pd.Timestamp("2026-06-17T18:00:00Z")
     items = (

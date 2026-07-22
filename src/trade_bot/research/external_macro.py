@@ -4,9 +4,9 @@ import json
 import re
 import signal
 import time
-from html import unescape
 from dataclasses import dataclass
 from datetime import UTC, datetime
+from html import unescape
 from pathlib import Path
 from typing import Any
 
@@ -170,12 +170,7 @@ def sync_42macro_transcripts(
             publish_date = _fetch_video_publish_date(session, video_id) or ""
         transcript_path = str(prior.get("transcript_path") or prior.get("path") or "")
         existing_path = _resolve_transcript_path(output_dir, transcript_path)
-        if (
-            existing_path is not None
-            and existing_path.exists()
-            and not refresh
-            and publish_date
-        ):
+        if existing_path is not None and existing_path.exists() and not refresh and publish_date:
             word_count = _word_count(existing_path.read_text(encoding="utf-8", errors="ignore"))
             status = "skipped_existing"
             error = ""
@@ -284,7 +279,9 @@ def import_42macro_transcript_files(
     skipped = 0
     failed = 0
     supported = {".txt", ".md", ".html", ".htm"}
-    for input_path in sorted(path for path in import_root.rglob("*") if path.suffix.lower() in supported):
+    for input_path in sorted(
+        path for path in import_root.rglob("*") if path.suffix.lower() in supported
+    ):
         try:
             raw = input_path.read_text(encoding="utf-8", errors="ignore")
             header = _parse_transcript_header_text(raw)
@@ -299,7 +296,9 @@ def import_42macro_transcript_files(
                 or _video_id_for_title(title, manifest_by_title)
             )
             if not video_id:
-                raise ValueError("Could not infer YouTube video ID from file name, header, URL, or title.")
+                raise ValueError(
+                    "Could not infer YouTube video ID from file name, header, URL, or title."
+                )
             manifest_row = manifest_by_id.get(video_id, {})
             title = str(manifest_row.get("title") or title)
             published_date = (
@@ -309,9 +308,7 @@ def import_42macro_transcript_files(
                 or _date_from_text_or_filename(f"{input_path.name}\n{raw}")
             )
             url = (
-                header.get("url", "")
-                or str(manifest_row.get("url", ""))
-                or _youtube_url(video_id)
+                header.get("url", "") or str(manifest_row.get("url", "")) or _youtube_url(video_id)
             )
             transcript = _extract_manual_transcript_text(raw)
             if _word_count(transcript) < 20:
@@ -348,7 +345,9 @@ def import_42macro_transcript_files(
                 "input_path": str(input_path),
             }
             imported_rows.append(row)
-            manifest_by_id[video_id] = {key: value for key, value in row.items() if key != "input_path"}
+            manifest_by_id[video_id] = {
+                key: value for key, value in row.items() if key != "input_path"
+            }
         except Exception as exc:
             failed += 1
             imported_rows.append(
@@ -413,18 +412,22 @@ def write_missing_42macro_transcript_priority(
         priority.to_csv(report_dir / "missing_transcript_priority.csv", index=False)
         return priority
 
-    comparison_file = Path(comparison_path) if comparison_path else report_dir / "daily_comparison.csv"
+    comparison_file = (
+        Path(comparison_path) if comparison_path else report_dir / "daily_comparison.csv"
+    )
     outcome_file = Path(outcome_path) if outcome_path else report_dir / "forward_outcome_scores.csv"
     comparisons = pd.read_csv(comparison_file) if comparison_file.exists() else pd.DataFrame()
     outcomes = pd.read_csv(outcome_file) if outcome_file.exists() else pd.DataFrame()
-    comparison_by_id = {
-        str(video_id): frame
-        for video_id, frame in comparisons.groupby("video_id", dropna=False)
-    } if not comparisons.empty and "video_id" in comparisons else {}
-    outcome_by_id = {
-        str(video_id): frame
-        for video_id, frame in outcomes.groupby("video_id", dropna=False)
-    } if not outcomes.empty and "video_id" in outcomes else {}
+    comparison_by_id = (
+        {str(video_id): frame for video_id, frame in comparisons.groupby("video_id", dropna=False)}
+        if not comparisons.empty and "video_id" in comparisons
+        else {}
+    )
+    outcome_by_id = (
+        {str(video_id): frame for video_id, frame in outcomes.groupby("video_id", dropna=False)}
+        if not outcomes.empty and "video_id" in outcomes
+        else {}
+    )
 
     rows: list[dict[str, object]] = []
     newest_date = pd.to_datetime(missing["published_date"], errors="coerce").max()
@@ -434,7 +437,9 @@ def write_missing_42macro_transcript_priority(
         reasons: list[str] = []
         comparison_frame = comparison_by_id.get(video_id, pd.DataFrame())
         if not comparison_frame.empty:
-            if bool(comparison_frame.get("large_change_focus", pd.Series(dtype=bool)).astype(bool).any()):
+            if bool(
+                comparison_frame.get("large_change_focus", pd.Series(dtype=bool)).astype(bool).any()
+            ):
                 score += 100.0
                 reasons.append("large-change comparison")
             max_gap = float(comparison_frame.get("abs_disagreement", pd.Series([0.0])).max())
@@ -456,9 +461,13 @@ def write_missing_42macro_transcript_priority(
                 reasons.append("large realized forward move")
             if {"macro_action_score", "trade_bot_action_score"}.issubset(outcome_frame.columns):
                 action_gap = (
-                    outcome_frame["macro_action_score"].astype(float)
-                    - outcome_frame["trade_bot_action_score"].astype(float)
-                ).abs().max()
+                    (
+                        outcome_frame["macro_action_score"].astype(float)
+                        - outcome_frame["trade_bot_action_score"].astype(float)
+                    )
+                    .abs()
+                    .max()
+                )
                 if pd.notna(action_gap) and float(action_gap) >= 0.35:
                     score += 30.0
                     reasons.append("large outcome-score gap")
@@ -596,7 +605,9 @@ def build_forward_outcome_scores(
         )
         if pd.isna(origin_date):
             continue
-        origin_index = _first_market_index_on_or_after(clean_prices.index, pd.Timestamp(origin_date))
+        origin_index = _first_market_index_on_or_after(
+            clean_prices.index, pd.Timestamp(origin_date)
+        )
         if origin_index is None:
             continue
         for horizon_label, horizon_days in outcome_horizons.items():
@@ -652,9 +663,7 @@ def build_forward_outcome_scores(
                 "end_date": end_date.date().isoformat(),
                 "horizon": horizon_label,
                 "horizon_days": int(horizon_days),
-                "classification_text_source": str(
-                    comparison.get("classification_text_source", "")
-                ),
+                "classification_text_source": str(comparison.get("classification_text_source", "")),
                 "classification_confidence": _optional_float(
                     comparison.get("classification_confidence")
                 ),
@@ -745,19 +754,17 @@ def _outcome_summary_row(scope: str, horizon: str, frame: pd.DataFrame) -> dict[
             float(left_tail["trade_bot_overrisk"].mean()) if not left_tail.empty else np.nan
         ),
         "macro_constructive_underrisk_rate": (
-            float(constructive["macro_underrisk"].mean())
-            if not constructive.empty
-            else np.nan
+            float(constructive["macro_underrisk"].mean()) if not constructive.empty else np.nan
         ),
         "trade_bot_constructive_underrisk_rate": (
-            float(constructive["trade_bot_underrisk"].mean())
-            if not constructive.empty
-            else np.nan
+            float(constructive["trade_bot_underrisk"].mean()) if not constructive.empty else np.nan
         ),
     }
 
 
-def _first_market_index_on_or_after(index: pd.DatetimeIndex, date_value: pd.Timestamp) -> int | None:
+def _first_market_index_on_or_after(
+    index: pd.DatetimeIndex, date_value: pd.Timestamp
+) -> int | None:
     positions = np.flatnonzero(index.normalize() >= date_value.normalize())
     if len(positions) == 0:
         return None
@@ -915,9 +922,13 @@ def _outcome_summary_markdown(outcomes: pd.DataFrame, summary: pd.DataFrame) -> 
     ].copy()
     if not large.empty:
         large["action_score_gap"] = large["macro_action_score"] - large["trade_bot_action_score"]
-        top = large.reindex(large["action_score_gap"].abs().sort_values(ascending=False).index).head(12)
+        top = large.reindex(
+            large["action_score_gap"].abs().sort_values(ascending=False).index
+        ).head(12)
         lines.extend(["## Largest Transcript-Backed Outcome Gaps", ""])
-        lines.append("| date | horizon | environment | 42 score | bot score | gap | SPY fwd | SPY max DD |")
+        lines.append(
+            "| date | horizon | environment | 42 score | bot score | gap | SPY fwd | SPY max DD |"
+        )
         lines.append("|---|---|---|---:|---:|---:|---:|---:|")
         for _, row in top.iterrows():
             lines.append(
@@ -952,10 +963,7 @@ def classify_42macro_transcript(
     bullish = _weighted_term_score(combined, BULLISH_TERMS)
     defensive = _weighted_term_score(combined, DEFENSIVE_TERMS)
     total = bullish + defensive
-    if total <= 0:
-        posture_score = 0.0
-    else:
-        posture_score = (bullish - defensive) / total
+    posture_score = 0.0 if total <= 0 else (bullish - defensive) / total
     posture_score = float(max(-1.0, min(1.0, posture_score)))
     near_term_risk_score = float(max(0.0, min(1.0, defensive / max(total, 1.0))))
     medium_term_bullish_score = float(max(0.0, min(1.0, bullish / max(total, 1.0))))
@@ -1012,34 +1020,38 @@ def build_macro_tradebot_comparisons(
         disagreement = macro_score - trade_posture
         abs_disagreement = abs(disagreement)
         trade_delta = (
-            abs(trade_posture - previous_trade_score)
-            if previous_trade_score is not None
-            else 0.0
+            abs(trade_posture - previous_trade_score) if previous_trade_score is not None else 0.0
         )
         risk_delta = (
             abs((risk_score or 0.0) - previous_risk_score)
             if previous_risk_score is not None and risk_score is not None
             else 0.0
         )
-        large_change_focus = bool(row.get("large_change_flag")) or trade_delta >= 0.20 or risk_delta >= 0.15
+        large_change_focus = (
+            bool(row.get("large_change_flag")) or trade_delta >= 0.20 or risk_delta >= 0.15
+        )
         matched_date = pd.Timestamp(matched["market_date_dt"]).date().isoformat()
         rows.append(
             {
                 "comparison_id": _comparison_id(source, str(row.get("video_id")), matched_date),
                 "video_id": str(row.get("video_id", "")),
+                "title": str(row.get("title", "")),
                 "source": source,
                 "published_date": pd.Timestamp(published).date().isoformat(),
                 "matched_market_date": matched_date,
                 "matched_source": str(matched.get("source", "")),
                 "days_from_tradebot": int(
-                    abs((pd.Timestamp(published).normalize() - pd.Timestamp(matched["market_date_dt"]).normalize()).days)
+                    abs(
+                        (
+                            pd.Timestamp(published).normalize()
+                            - pd.Timestamp(matched["market_date_dt"]).normalize()
+                        ).days
+                    )
                 ),
                 "macro_posture_score": macro_score,
                 "macro_posture_label": str(row.get("macro_posture_label", "")),
                 "classification_text_source": str(row.get("classification_text_source", "")),
-                "classification_confidence": _optional_float(
-                    row.get("classification_confidence")
-                ),
+                "classification_confidence": _optional_float(row.get("classification_confidence")),
                 "trade_bot_posture_score": trade_posture,
                 "trade_bot_posture_label": _trade_bot_posture_label(trade_posture),
                 "disagreement": disagreement,
@@ -1055,6 +1067,12 @@ def build_macro_tradebot_comparisons(
                 ),
                 "trade_bot_portfolio_risk_multiplier": _optional_float(
                     matched.get("portfolio_risk_multiplier")
+                ),
+                "trade_bot_base_defensive_weight": _optional_float(
+                    matched.get("base_defensive_weight")
+                ),
+                "trade_bot_final_defensive_weight": _optional_float(
+                    matched.get("final_defensive_weight")
                 ),
                 "notes": _comparison_note(macro_score, trade_posture, large_change_focus),
                 "compared_at_utc": _utc_now_iso(),
@@ -1210,10 +1228,7 @@ def _extract_lockup_videos(payload: object) -> list[dict[str, object]]:
 
 def _extract_title(model: dict[str, Any]) -> str:
     title = (
-        model.get("metadata", {})
-        .get("lockupMetadataViewModel", {})
-        .get("title", {})
-        .get("content")
+        model.get("metadata", {}).get("lockupMetadataViewModel", {}).get("title", {}).get("content")
     )
     if title:
         return str(title)
@@ -1503,7 +1518,9 @@ def _html_to_plain_text(text: str) -> str:
     if "<" not in text or ">" not in text:
         return text
     without_scripts = re.sub(r"<(script|style)\b.*?</\1>", " ", text, flags=re.I | re.S)
-    with_breaks = re.sub(r"</?(p|div|br|h[1-6]|li|section|article)\b[^>]*>", "\n", without_scripts, flags=re.I)
+    with_breaks = re.sub(
+        r"</?(p|div|br|h[1-6]|li|section|article)\b[^>]*>", "\n", without_scripts, flags=re.I
+    )
     plain = re.sub(r"<[^>]+>", " ", with_breaks)
     plain = unescape(plain)
     return re.sub(r"\n{3,}", "\n\n", plain)
@@ -1569,7 +1586,11 @@ def _classify_manifest_transcripts(
             transcript_root,
             str(video.get("transcript_path", "")),
         )
-        if transcript_path is not None and transcript_path.exists() and not transcript_path.is_dir():
+        if (
+            transcript_path is not None
+            and transcript_path.exists()
+            and not transcript_path.is_dir()
+        ):
             text = transcript_path.read_text(encoding="utf-8", errors="ignore")
             classification = classify_42macro_transcript(
                 _strip_transcript_header(text),
@@ -1616,6 +1637,14 @@ def _nearest_operating_row(
 
 
 def _trade_bot_posture_score(row: pd.Series) -> float:
+    # The final defensive allocation is the canonical expression of Trade Bot's
+    # posture.  ``risk_budget_multiplier`` is only the scenario/risk-status
+    # capacity gate and can remain near one even when the selected strategy is
+    # substantially defensive.  Treating it as total exposure made a 64% BIL
+    # allocation appear risk-on in the external comparison.
+    final_defensive = _optional_float(row.get("final_defensive_weight"))
+    if final_defensive is not None:
+        return float(max(-1.0, min(1.0, 1.0 - (2.0 * final_defensive))))
     budget = _optional_float(row.get("risk_budget_multiplier"))
     risk_score = _optional_float(row.get("risk_score"))
     risk_off = _optional_float(row.get("one_month_risk_off_probability"))
@@ -1703,6 +1732,114 @@ def _write_alignment_outputs(
         _summary_markdown(summary, comparisons),
         encoding="utf-8",
     )
+    _write_alignment_diagnostic_outputs(output_dir, comparisons)
+
+
+def _write_alignment_diagnostic_outputs(
+    output_dir: Path,
+    comparisons: pd.DataFrame,
+) -> None:
+    """Refresh the legacy drilldown files from the canonical comparison frame."""
+
+    if comparisons.empty:
+        return
+    frame = comparisons.copy()
+    transcript_backed = frame[
+        frame["classification_text_source"].eq("transcript")
+    ].copy()
+    transcript_backed.to_csv(
+        output_dir / "daily_transcript_backed_comparison.csv",
+        index=False,
+    )
+
+    large_change = frame[frame["large_change_focus"].astype(bool)].copy()
+    large_change = large_change.sort_values(
+        ["abs_disagreement", "published_date"],
+        ascending=[False, False],
+    )
+    large_change.to_csv(output_dir / "large_change_moments.csv", index=False)
+
+    frame["year_month"] = pd.to_datetime(
+        frame["published_date"], errors="coerce"
+    ).dt.to_period("M").astype(str)
+    monthly = (
+        frame.groupby(["classification_text_source", "year_month"], dropna=False)
+        .agg(
+            rows=("video_id", "size"),
+            macro_mean=("macro_posture_score", "mean"),
+            trade_bot_mean=("trade_bot_posture_score", "mean"),
+            mean_gap=("disagreement", "mean"),
+            mean_abs_disagreement=("abs_disagreement", "mean"),
+            major_mismatch_rate=(
+                "disagreement_label",
+                lambda values: float(pd.Series(values).eq("major_mismatch").mean()),
+            ),
+            large_change_rows=("large_change_focus", "sum"),
+        )
+        .reset_index()
+    )
+    monthly.to_csv(output_dir / "monthly_alignment.csv", index=False)
+
+    aggregate_rows = []
+    for scope, scoped in (
+        ("all", frame),
+        ("transcript_backed", transcript_backed),
+        (
+            "title_only",
+            frame[frame["classification_text_source"].eq("title_only")],
+        ),
+    ):
+        if scoped.empty:
+            continue
+        aggregate_rows.append(
+            {
+                "scope": scope,
+                "rows": len(scoped),
+                "date_min": str(scoped["published_date"].min()),
+                "date_max": str(scoped["published_date"].max()),
+                "macro_mean": float(scoped["macro_posture_score"].mean()),
+                "trade_bot_mean": float(scoped["trade_bot_posture_score"].mean()),
+                "macro_minus_trade_bot": float(scoped["disagreement"].mean()),
+                "mean_abs_disagreement": float(scoped["abs_disagreement"].mean()),
+                "major_mismatch_rate": float(
+                    scoped["disagreement_label"].eq("major_mismatch").mean()
+                ),
+                "large_change_rows": int(scoped["large_change_focus"].sum()),
+                "large_change_major_mismatch_rate": float(
+                    scoped.loc[
+                        scoped["large_change_focus"].astype(bool),
+                        "disagreement_label",
+                    ].eq("major_mismatch").mean()
+                ),
+            }
+        )
+    aggregate = pd.DataFrame(aggregate_rows)
+    aggregate.to_csv(output_dir / "aggregate_analysis.csv", index=False)
+    (output_dir / "aggregate_analysis.md").write_text(
+        _aggregate_alignment_markdown(aggregate),
+        encoding="utf-8",
+    )
+
+
+def _aggregate_alignment_markdown(aggregate: pd.DataFrame) -> str:
+    lines = [
+        "# 42 Macro / Trade-Bot Aggregate Alignment Analysis",
+        "",
+        "This file is regenerated from the canonical comparison frame. The 42 Macro "
+        "score is a lexical transcript proxy, not a reconstruction of its proprietary "
+        "portfolio or horizon-specific model state.",
+        "",
+        "| scope | rows | dates | 42 mean | bot mean | mean abs gap | major mismatch |",
+        "|---|---:|---|---:|---:|---:|---:|",
+    ]
+    for _, row in aggregate.iterrows():
+        lines.append(
+            f"| {row['scope']} | {int(row['rows'])} | {row['date_min']} to "
+            f"{row['date_max']} | {row['macro_mean']:.2f} | "
+            f"{row['trade_bot_mean']:.2f} | {row['mean_abs_disagreement']:.2f} | "
+            f"{row['major_mismatch_rate']:.1%} |"
+        )
+    return "\n".join(lines) + "\n"
 
 
 def _write_manifest(output_dir: Path, videos: pd.DataFrame) -> Path:
@@ -1730,16 +1867,61 @@ def _summary_markdown(summary: dict[str, object], comparisons: pd.DataFrame) -> 
         f"Large-change comparisons: {summary['large_change_comparisons']}",
         f"Large-change major mismatches: {summary['large_change_major_mismatches']}",
         "",
-        "## Largest Mismatches",
+        "## Latest Transcript-Backed Read",
         "",
     ]
+    latest = comparisons.sort_values(["published_date", "video_id"]).iloc[-1]
+    final_defensive = _optional_float(latest.get("trade_bot_final_defensive_weight"))
+    lines.extend(
+        [
+            f"- Video: {latest.get('published_date', '')} — {latest.get('title', '')}",
+            f"- 42 Macro: {latest['macro_posture_label']} "
+            f"({latest['macro_posture_score']:+.2f}).",
+            f"- Trade Bot: {latest['trade_bot_posture_label']} "
+            f"({latest['trade_bot_posture_score']:+.2f})"
+            + (
+                f", from a {final_defensive:.1%} final defensive allocation."
+                if final_defensive is not None
+                else "."
+            ),
+            f"- Comparison: {latest['disagreement_label']} "
+            f"(absolute posture gap {latest['abs_disagreement']:.2f}).",
+            "",
+            "Trade Bot posture is derived from the final defensive allocation when that "
+            "field is available. Risk-budget capacity alone is not total exposure.",
+            "",
+            "## Most Recent Videos",
+            "",
+            "These are mechanical lexical classifications. Mixed-horizon commentary "
+            "must be read in context; the scalar is not a 42 Macro portfolio target.",
+            "",
+            "| date | video | 42 lexical proxy | Trade Bot | final defense | result |",
+            "|---|---|---:|---:|---:|---|",
+        ]
+    )
+    recent = comparisons.sort_values(["published_date", "video_id"]).tail(6)
+    for _, row in recent.iterrows():
+        row_defensive = _optional_float(row.get("trade_bot_final_defensive_weight"))
+        defense_label = f"{row_defensive:.1%}" if row_defensive is not None else "n/a"
+        title = str(row.get("title", "")).replace("|", "\\|")
+        lines.append(
+            f"| {row['published_date']} | [{title}]({_youtube_url(str(row['video_id']))}) | "
+            f"{row['macro_posture_label']} ({row['macro_posture_score']:+.2f}) | "
+            f"{row['trade_bot_posture_label']} ({row['trade_bot_posture_score']:+.2f}) | "
+            f"{defense_label} | {row['disagreement_label']} |"
+        )
+    lines.extend(
+        [
+            "",
+        "## Largest Mismatches",
+        "",
+        ]
+    )
     if comparisons.empty:
         lines.append("No comparisons were produced.")
         return "\n".join(lines) + "\n"
     top = comparisons.sort_values("abs_disagreement", ascending=False).head(10)
-    lines.append(
-        "| date | video_id | 42 Macro | trade-bot | gap | large-change | note |"
-    )
+    lines.append("| date | video_id | 42 Macro | trade-bot | gap | large-change | note |")
     lines.append("|---|---|---|---|---:|---|---|")
     for _, row in top.iterrows():
         lines.append(

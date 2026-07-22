@@ -228,9 +228,9 @@ def test_approach_backtest_reconstructs_strategy_drawdown_ml_overlay() -> None:
     )
     prices = pd.DataFrame(
         {
-            "SPY": 100.0 + trend * 0.20,
+            "SPY": (100.0 + trend * 0.20).to_numpy(),
             "QQQ": qqq.to_numpy(),
-            "BIL": 100.0 + trend * 0.01,
+            "BIL": (100.0 + trend * 0.01).to_numpy(),
         },
         index=index,
     )

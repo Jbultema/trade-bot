@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from typing import Any
 
+import duckdb
 import pandas as pd
 import plotly.graph_objects as go
 import streamlit as st
@@ -72,15 +73,40 @@ def load_snapshot_trend_frames(
     artifact_dir_string: str,
     job_log_dir_string: str,
     limit: int = DEFAULT_TREND_HISTORY_SNAPSHOT_LIMIT,
+    *,
+    force_snapshot_reconstruction: bool = False,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    store = RunStore(
+    return _load_snapshot_trend_frames(
         store_path_string,
-        artifact_dir=artifact_dir_string,
-        job_log_dir=job_log_dir_string,
+        artifact_dir_string,
+        job_log_dir_string,
+        limit=limit,
+        force_snapshot_reconstruction=force_snapshot_reconstruction,
     )
-    snapshots = store.list_snapshots(limit=limit)
-    warehouse = TradingWarehouse(store_path_string)
-    stored_frames = warehouse.operating_history_frames()
+
+
+def _load_snapshot_trend_frames(
+    store_path_string: str,
+    artifact_dir_string: str,
+    job_log_dir_string: str,
+    *,
+    limit: int,
+    force_snapshot_reconstruction: bool,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    stored_frames = _load_materialized_operating_history(store_path_string)
+    if _has_materialized_operating_history(stored_frames) and not force_snapshot_reconstruction:
+        return _clean_combined_snapshot_trend_frames(stored_frames)
+
+    try:
+        store = RunStore(
+            store_path_string,
+            artifact_dir=artifact_dir_string,
+            job_log_dir=job_log_dir_string,
+            read_only=True,
+        )
+        snapshots = store.list_snapshots(limit=limit)
+    except (duckdb.Error, OSError):
+        return _clean_combined_snapshot_trend_frames(stored_frames)
     if snapshots.empty or "run_id" not in snapshots:
         return _clean_combined_snapshot_trend_frames(stored_frames)
 
@@ -92,7 +118,14 @@ def load_snapshot_trend_frames(
         run_id = str(snapshot_row["run_id"])
         try:
             run, manifest = store.load_snapshot(run_id)
-        except (FileNotFoundError, TypeError, OSError, AttributeError, ValueError):
+        except (
+            duckdb.Error,
+            FileNotFoundError,
+            TypeError,
+            OSError,
+            AttributeError,
+            ValueError,
+        ):
             continue
         base = _snapshot_base_fields(
             market_date=str(getattr(manifest, "market_date", "")),
@@ -113,9 +146,27 @@ def load_snapshot_trend_frames(
     return _clean_combined_snapshot_trend_frames((*stored_frames, *snapshot_frames))
 
 
+def _load_materialized_operating_history(
+    store_path_string: str,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    try:
+        warehouse = TradingWarehouse(store_path_string, read_only=True)
+        return warehouse.operating_history_frames()
+    except (duckdb.Error, OSError):
+        return _empty_snapshot_trend_frames()
+
+
+def _has_materialized_operating_history(
+    frames: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame],
+) -> bool:
+    metrics = frames[0]
+    required_columns = {"history_time", "snapshot_time", "market_date", "run_id"}
+    return not metrics.empty and required_columns.issubset(metrics.columns)
+
+
 @st.cache_data(show_spinner=False, ttl=60)
 def load_monitoring_trend_frame(warehouse_path: str) -> pd.DataFrame:
-    warehouse = TradingWarehouse(warehouse_path)
+    warehouse = TradingWarehouse(warehouse_path, read_only=True)
     valuations = warehouse.read_table("strategy_daily_valuations")
     if valuations.empty:
         return pd.DataFrame()
@@ -142,7 +193,9 @@ def load_monitoring_trend_frame(warehouse_path: str) -> pd.DataFrame:
     snapshot_metrics = warehouse.read_table("snapshot_strategy_metrics")
     if not snapshot_metrics.empty and "strategy" in snapshot_metrics:
         metric_columns = [
-            column for column in ["strategy", "max_drawdown", "calmar"] if column in snapshot_metrics
+            column
+            for column in ["strategy", "max_drawdown", "calmar"]
+            if column in snapshot_metrics
         ]
         frame = frame.merge(
             snapshot_metrics[metric_columns]
@@ -183,7 +236,7 @@ def load_monitoring_trend_frame(warehouse_path: str) -> pd.DataFrame:
 
 @st.cache_data(show_spinner=False, ttl=60)
 def load_simulation_validation_trend_frame(warehouse_path: str, limit: int = 2_000) -> pd.DataFrame:
-    warehouse = TradingWarehouse(warehouse_path)
+    warehouse = TradingWarehouse(warehouse_path, read_only=True)
     metrics = warehouse.simulation_validation_metrics(limit=limit)
     if metrics.empty:
         return pd.DataFrame()
@@ -236,9 +289,11 @@ def compact_metric_line_figure(
                 y=values,
                 mode="lines+markers",
                 name=labels.get(column, column.replace("_", " ").title()),
-                hovertemplate="%{x|%Y-%m-%d}<br>%{fullData.name}: %{y:.2%}<extra></extra>"
-                if percent
-                else "%{x|%Y-%m-%d}<br>%{fullData.name}: %{y:.3f}<extra></extra>",
+                hovertemplate=(
+                    "%{x|%Y-%m-%d}<br>%{fullData.name}: %{y:.2%}<extra></extra>"
+                    if percent
+                    else "%{x|%Y-%m-%d}<br>%{fullData.name}: %{y:.3f}<extra></extra>"
+                ),
             )
         )
     if not figure.data:
@@ -296,9 +351,11 @@ def long_metric_line_figure(
                 y=ordered[value_column],
                 mode="lines+markers",
                 name=str(category).replace("_", " ").title(),
-                hovertemplate="%{x|%Y-%m-%d}<br>%{fullData.name}: %{y:.2%}<extra></extra>"
-                if percent
-                else "%{x|%Y-%m-%d}<br>%{fullData.name}: %{y:.3f}<extra></extra>",
+                hovertemplate=(
+                    "%{x|%Y-%m-%d}<br>%{fullData.name}: %{y:.2%}<extra></extra>"
+                    if percent
+                    else "%{x|%Y-%m-%d}<br>%{fullData.name}: %{y:.3f}<extra></extra>"
+                ),
             )
         )
     if not figure.data:
@@ -332,7 +389,9 @@ def filter_history_time_range(
         return working
     end = pd.to_datetime(custom_end) if custom_end is not None else working[time_column].max()
     if range_choice == "Custom":
-        start = pd.to_datetime(custom_start) if custom_start is not None else working[time_column].min()
+        start = (
+            pd.to_datetime(custom_start) if custom_start is not None else working[time_column].min()
+        )
     elif range_choice == "YTD":
         start = pd.Timestamp(year=int(end.year), month=1, day=1)
     else:
@@ -394,7 +453,9 @@ def _concat_frames(*frames: pd.DataFrame) -> pd.DataFrame:
     return pd.concat(populated, ignore_index=True, sort=False)
 
 
-def _snapshot_base_fields(*, market_date: str, created_at_utc: str, run_id: str) -> dict[str, object]:
+def _snapshot_base_fields(
+    *, market_date: str, created_at_utc: str, run_id: str
+) -> dict[str, object]:
     snapshot_time = pd.to_datetime(created_at_utc, errors="coerce", utc=True)
     market_timestamp = pd.to_datetime(market_date, errors="coerce")
     history_time = market_timestamp if pd.notna(market_timestamp) else snapshot_time
@@ -545,7 +606,15 @@ def _clean_long_frame(frame: pd.DataFrame, columns: list[str]) -> pd.DataFrame:
     output["history_time"] = pd.to_datetime(output["history_time"], errors="coerce")
     output["snapshot_time"] = pd.to_datetime(output["snapshot_time"], errors="coerce", utc=True)
     output["market_date"] = pd.to_datetime(output["market_date"], errors="coerce").dt.date
-    for column in ["component_score", "latest_value", "score", "current_activation", "proven_relevance", "change_30d", "change_90d"]:
+    for column in [
+        "component_score",
+        "latest_value",
+        "score",
+        "current_activation",
+        "proven_relevance",
+        "change_30d",
+        "change_90d",
+    ]:
         if column in output:
             output[column] = pd.to_numeric(output[column], errors="coerce")
     return output[[column for column in columns if column in output]].sort_values(
@@ -561,7 +630,7 @@ def _first_row(frame: pd.DataFrame) -> pd.Series:
 
 def _safe_float(value: object) -> float | None:
     try:
-        output = float(value)
+        output = float(value)  # type: ignore[arg-type]
     except (TypeError, ValueError):
         return None
     if pd.isna(output):

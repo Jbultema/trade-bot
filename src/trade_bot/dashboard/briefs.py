@@ -548,12 +548,12 @@ def _render_decision_brief(
             experiment_scorecards=experiment_scorecards,
         )
         st.caption("Interpretation layer: read this before scanning detailed tables.")
-        st.dataframe(conclusions, use_container_width=True, hide_index=True)
+        st.dataframe(conclusions, width="stretch", hide_index=True)
 
         watch_items = _decision_watch_items(baseline_run)
         if not watch_items.empty:
             st.caption("What would change the decision")
-            st.dataframe(_display_metrics(watch_items), use_container_width=True, hide_index=True)
+            st.dataframe(_display_metrics(watch_items), width="stretch", hide_index=True)
 
 
 def _decision_brief_cards(

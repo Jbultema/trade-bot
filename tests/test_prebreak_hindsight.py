@@ -7,9 +7,11 @@ import pandas as pd
 from trade_bot.research.prebreak_hindsight import (
     DEFAULT_PREBREAK_LOOKBACK_DAYS,
     BubbleBreakWindow,
+    _add_market_health_metrics,
     build_late_trigger_mesh,
     build_prebreak_snapshot_plan,
     current_best_signal_readout,
+    deduplicate_prebreak_snapshot_plan,
     evaluate_staged_policy_variants,
     rank_predictive_signals,
     snapshot_signal_row,
@@ -17,6 +19,24 @@ from trade_bot.research.prebreak_hindsight import (
     summarize_hard_defense_attribution,
     summarize_staged_risk_behavior,
 )
+
+
+def test_market_health_metrics_exclude_structural_vixy_lifetime_drawdown() -> None:
+    frame = pd.DataFrame(
+        {
+            "return_1m": {"SPY": 0.02, "VIXY": -0.10},
+            "return_3m": {"SPY": 0.04, "VIXY": -0.25},
+            "drawdown": {"SPY": -0.05, "VIXY": -0.9999},
+        }
+    )
+    row: dict[str, object] = {}
+
+    _add_market_health_metrics(row, frame)
+
+    assert row["health_spy_drawdown"] == -0.05
+    assert row["health_vixy_return_1m"] == -0.10
+    assert row["health_vixy_return_3m"] == -0.25
+    assert "health_vixy_drawdown" not in row
 
 
 def test_prebreak_snapshot_plan_selects_weekly_dates_before_break() -> None:
@@ -70,6 +90,35 @@ def test_prebreak_snapshot_plan_can_include_first_month_after_break() -> None:
     assert plan["postbreak_snapshot"].any()
     assert plan["days_to_break"].min() < 0
     assert pd.to_datetime(plan["market_date"]).max() <= pd.Timestamp("2020-03-21")
+
+
+def test_prebreak_snapshot_plan_deduplicates_overlapping_event_dates() -> None:
+    plan = pd.DataFrame(
+        [
+            {
+                "event_name": "event_a",
+                "family": "bubble",
+                "break_date": "2020-02-19",
+                "market_date": "2020-02-12",
+                "days_to_break": 7,
+                "postbreak_snapshot": False,
+            },
+            {
+                "event_name": "event_b",
+                "family": "crisis",
+                "break_date": "2020-02-20",
+                "market_date": "2020-02-12",
+                "days_to_break": 8,
+                "postbreak_snapshot": False,
+            },
+        ]
+    )
+
+    deduplicated = deduplicate_prebreak_snapshot_plan(plan)
+
+    assert len(deduplicated) == 1
+    assert deduplicated.iloc[0]["event_name"] == "event_a | event_b"
+    assert deduplicated.iloc[0]["event_count"] == 2
 
 
 def test_prebreak_default_lookback_extends_to_one_year() -> None:
@@ -221,8 +270,7 @@ def test_staged_risk_behavior_scores_early_hard_false_alarms() -> None:
 
     staged = summarize_staged_risk_behavior(frame)
     early = staged[
-        staged["event_name"].eq("test_break")
-        & staged["prebreak_stage"].eq("early_watch")
+        staged["event_name"].eq("test_break") & staged["prebreak_stage"].eq("early_watch")
     ].iloc[0]
 
     assert early["target_staged_risk_budget_multiplier"] == 0.75
@@ -284,8 +332,7 @@ def test_hard_defense_attribution_identifies_base_strategy_stickiness() -> None:
 
     attribution = summarize_hard_defense_attribution(frame)
     early = attribution[
-        attribution["event_name"].eq("test_break")
-        & attribution["prebreak_stage"].eq("early_watch")
+        attribution["event_name"].eq("test_break") & attribution["prebreak_stage"].eq("early_watch")
     ]
 
     assert {
@@ -294,6 +341,36 @@ def test_hard_defense_attribution_identifies_base_strategy_stickiness() -> None:
     }.issubset(set(early["hard_defense_source"]))
     base = early[early["hard_defense_source"].eq("base_strategy_already_defensive")].iloc[0]
     assert base["early_hard_false_alarm_share"] == 1.0
+
+
+def test_hard_defense_attribution_prefers_persisted_causal_layer() -> None:
+    frame = pd.DataFrame(
+        {
+            "event_name": ["test_break"],
+            "prebreak_stage": ["early_watch"],
+            "prebreak_stage_order": [1],
+            "hard_defensive_action_flag": [True],
+            "early_hard_false_alarm_flag": [False],
+            "risk_budget_multiplier": [0.55],
+            "current_risk_asset_weight": [0.60],
+            "target_risk_asset_weight": [0.45],
+            "scenario_event_macro_multiplier": [0.55],
+            "portfolio_risk_multiplier": [1.0],
+            "risk_status": ["orange"],
+            "recommended_action": ["REDUCE_RISK"],
+            "attribution_base_market_strategy_defensive_weight": [0.40],
+            "attribution_quantitative_risk_status_defensive_add_pp": [15.0],
+            "attribution_scenario_probabilities_defensive_add_pp": [0.0],
+            "attribution_news_event_pressure_defensive_add_pp": [0.0],
+            "attribution_macro_quantitative_defensive_add_pp": [0.0],
+            "attribution_portfolio_absolute_risk_defensive_add_pp": [0.0],
+            "attribution_decision_sanity_defensive_add_pp": [0.0],
+        }
+    )
+
+    attribution = summarize_hard_defense_attribution(frame)
+
+    assert attribution.iloc[0]["hard_defense_source"] == "quantitative_risk_status"
 
 
 def test_policy_variants_score_added_false_alarm_upside_against_crash_exposure() -> None:
@@ -333,12 +410,10 @@ def test_policy_variants_score_added_false_alarm_upside_against_crash_exposure()
 
     variants = evaluate_staged_policy_variants(frame)
     stage_floor = variants[
-        variants["event_name"].eq("ALL_EVENTS")
-        & variants["policy_name"].eq("stage_floor")
+        variants["event_name"].eq("ALL_EVENTS") & variants["policy_name"].eq("stage_floor")
     ].iloc[0]
     actual = variants[
-        variants["event_name"].eq("ALL_EVENTS")
-        & variants["policy_name"].eq("actual")
+        variants["event_name"].eq("ALL_EVENTS") & variants["policy_name"].eq("actual")
     ].iloc[0]
 
     assert stage_floor["mean_false_alarm_risk_budget_lift"] == 0.40

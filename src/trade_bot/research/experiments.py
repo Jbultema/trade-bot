@@ -25,6 +25,7 @@ from trade_bot.config import (
     VolatilityTargetConfig,
     apply_excluded_ticker_policy_to_strategy,
     configured_tickers,
+    required_strategy_tickers,
 )
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
 from trade_bot.DEFAULTS import (
@@ -57,6 +58,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_SCENARIO_STRESS_MULTIPLIER,
     DEFAULT_SCENARIO_TRANSITION_MULTIPLIER,
 )
+from trade_bot.features.indicators import unusable_required_price_columns
 from trade_bot.research.curation import add_research_status, rank_strategy_candidates
 from trade_bot.research.future_state_ml import (
     FutureStateModelConfig,
@@ -154,11 +156,7 @@ def run_experiment_iteration(
     results: dict[str, BacktestResult] = {}
     calculated_metrics: list[PerformanceMetrics] = []
     for candidate in candidates:
-        candidate_prices = _strategy_prices(
-            prices,
-            candidate.strategy.tickers,
-            candidate.strategy.defensive_ticker,
-        )
+        candidate_prices = _strategy_prices(prices, candidate.strategy)
         base_target_weights = build_strategy_weights(candidate_prices, candidate.strategy)
         target_weights = base_target_weights
         if candidate.future_state_model is not None:
@@ -1202,7 +1200,7 @@ def _active_trading_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                     "NVDA",
                     "AVGO",
                     "MSFT",
-                            ],
+                ],
                 lookback_days=30,
                 skip_days=2,
                 top_n=3,
@@ -2413,7 +2411,7 @@ def _final_deep_wide_candidates(iteration: int) -> tuple[ExperimentCandidate, ..
                     "NVDA",
                     "AVGO",
                     "MSFT",
-                                "META",
+                    "META",
                 ],
                 lookback_days=63,
                 skip_days=5,
@@ -3206,7 +3204,18 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Value, quality, cash-flow, dividend, and low-volatility ETFs act as fundamental "
                     "valuation proxies: buy the dip only in resilient equity cohorts, not the whole index."
                 ),
-                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "RSP", "SPY"],
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "VTV",
+                    "RSP",
+                    "SPY",
+                ],
                 trigger=-0.09,
                 deep=-0.20,
                 starter=0.20,
@@ -3243,7 +3252,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "AI beta dip buying is only allowed after semis/software/platforms are deeply "
                     "discounted and repair; otherwise this stays mostly in BIL."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN", "GLD", "TLT"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "AMZN",
+                    "GLD",
+                    "TLT",
+                ],
                 trigger=-0.14,
                 deep=-0.30,
                 min_recovery=0.030,
@@ -3262,7 +3283,20 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "AI-infrastructure dip buying tests whether power, grid, nuclear, and hardware "
                     "beneficiaries are better reentry vehicles than pure software beta."
                 ),
-                tickers=["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLI", "XLU", "GLD"],
+                tickers=[
+                    "VRT",
+                    "ETN",
+                    "PWR",
+                    "CEG",
+                    "GEV",
+                    "NRG",
+                    "CCJ",
+                    "SMH",
+                    "SOXX",
+                    "XLI",
+                    "XLU",
+                    "GLD",
+                ],
                 trigger=-0.12,
                 deep=-0.26,
                 min_recovery=0.025,
@@ -3281,7 +3315,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Mega-cap dip reentry tests whether platform leaders recover first after market "
                     "stress while avoiding single-name concentration."
                 ),
-                tickers=["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "AVGO", "TSLA", "BRK-B", "JPM", "GLD"],
+                tickers=[
+                    "AAPL",
+                    "MSFT",
+                    "NVDA",
+                    "GOOGL",
+                    "AMZN",
+                    "META",
+                    "AVGO",
+                    "TSLA",
+                    "BRK-B",
+                    "JPM",
+                    "GLD",
+                ],
                 trigger=-0.12,
                 deep=-0.25,
                 min_recovery=0.025,
@@ -3337,7 +3383,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "This harsh AI reentry variant requires credit and breadth repair; if both fail, "
                     "it intentionally refuses to buy the AI dip."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "HYG", "LQD", "RSP", "GLD"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "HYG",
+                    "LQD",
+                    "RSP",
+                    "GLD",
+                ],
                 trigger=-0.16,
                 deep=-0.32,
                 min_recovery=0.035,
@@ -3358,7 +3416,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Reentry after drawdowns may work best when equal-weight, small-cap, value, banks, "
                     "industrials, and materials confirm broadening rather than mega-cap-only bounces."
                 ),
-                tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "GLD", "IEF"],
+                tickers=[
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "COWZ",
+                    "GLD",
+                    "IEF",
+                ],
                 trigger=-0.10,
                 deep=-0.22,
                 min_recovery=0.020,
@@ -3376,7 +3446,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Small/value washouts can be powerful if bought after breadth and credit repair, "
                     "but the ladder caps concentration because these assets can keep falling."
                 ),
-                tickers=["IWM", "MDY", "VTV", "IWD", "XLF", "KRE", "XLI", "XLB", "XHB", "XRT", "GLD"],
+                tickers=[
+                    "IWM",
+                    "MDY",
+                    "VTV",
+                    "IWD",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XHB",
+                    "XRT",
+                    "GLD",
+                ],
                 trigger=-0.13,
                 deep=-0.28,
                 min_recovery=0.030,
@@ -3395,7 +3477,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "A quality/income discount ladder represents the fundamentals-aware version: buy "
                     "cash-flow, moat, dividend, and low-vol drawdowns before chasing high beta."
                 ),
-                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "VFQY", "QVAL", "GLD"],
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "VTV",
+                    "VFQY",
+                    "QVAL",
+                    "GLD",
+                ],
                 trigger=-0.08,
                 deep=-0.18,
                 min_recovery=0.012,
@@ -3414,7 +3508,20 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Sector washout reentry buys only sectors that are both discounted and repairing, "
                     "rather than buying the whole market after every dip."
                 ),
-                tickers=["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "GLD"],
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLY",
+                    "XLP",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLU",
+                    "XLB",
+                    "XLRE",
+                    "XLC",
+                    "GLD",
+                ],
                 trigger=-0.10,
                 deep=-0.24,
                 min_recovery=0.020,
@@ -3432,7 +3539,21 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Global equity dip buying tests whether cheap ex-U.S. and country ETFs can be "
                     "better rebound vehicles than crowded U.S. mega-cap exposure."
                 ),
-                tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "GLD", "UUP"],
+                tickers=[
+                    "SPY",
+                    "RSP",
+                    "EFA",
+                    "EEM",
+                    "VEA",
+                    "VWO",
+                    "VGK",
+                    "EWJ",
+                    "INDA",
+                    "EWZ",
+                    "EWC",
+                    "GLD",
+                    "UUP",
+                ],
                 trigger=-0.11,
                 deep=-0.24,
                 min_recovery=0.020,
@@ -3450,7 +3571,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "A strict cyclical reentry variant refuses to buy small/value/cyclicals unless the "
                     "short rebound is visible and volatility is settling."
                 ),
-                tickers=["IWM", "RSP", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "XHB", "IYT", "GLD"],
+                tickers=[
+                    "IWM",
+                    "RSP",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "XHB",
+                    "IYT",
+                    "GLD",
+                ],
                 trigger=-0.14,
                 deep=-0.30,
                 min_recovery=0.035,
@@ -3471,7 +3604,20 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Credit-led reentry waits for high yield, loans, banks, and investment-grade credit "
                     "to repair before letting equity risk scale up."
                 ),
-                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "KRE", "SPY", "RSP", "GLD", "IEF"],
+                tickers=[
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "SRLN",
+                    "JAAA",
+                    "JBBB",
+                    "KRE",
+                    "SPY",
+                    "RSP",
+                    "GLD",
+                    "IEF",
+                ],
                 trigger=-0.08,
                 deep=-0.18,
                 min_recovery=0.012,
@@ -3489,7 +3635,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "This tests the classic volatility-crush reentry: buy discounted risk only after "
                     "volatility, dollar, credit, and breadth pressure stop worsening."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "IWM", "HYG", "LQD", "UUP", "GLD", "TLT", "IEF", "SVXY"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "HYG",
+                    "LQD",
+                    "UUP",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "SVXY",
+                ],
                 trigger=-0.10,
                 deep=-0.22,
                 min_recovery=0.020,
@@ -3508,7 +3666,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "If market cheapness is caused by rates stress, reentry should prefer duration, "
                     "quality credit, gold, and equities only after rates relief is visible."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "VCIT", "VCSH", "TLT", "IEF", "TIP", "GLD"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "VCIT",
+                    "VCSH",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "GLD",
+                ],
                 trigger=-0.09,
                 deep=-0.20,
                 min_recovery=0.015,
@@ -3526,7 +3696,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Private-credit and BDC proxies test whether the bot should avoid dip buying when "
                     "illiquid credit stress is still leaking into public markets."
                 ),
-                tickers=["BIZD", "ARCC", "MAIN", "BXSL", "OBDC", "SRLN", "BKLN", "HYG", "LQD", "KRE", "IEF"],
+                tickers=[
+                    "BIZD",
+                    "ARCC",
+                    "MAIN",
+                    "BXSL",
+                    "OBDC",
+                    "SRLN",
+                    "BKLN",
+                    "HYG",
+                    "LQD",
+                    "KRE",
+                    "IEF",
+                ],
                 trigger=-0.10,
                 deep=-0.22,
                 min_recovery=0.018,
@@ -3544,7 +3726,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "A defensive bridge lets gold/duration/T-bill-like assets win first, then risk assets "
                     "must earn their way back through repair."
                 ),
-                tickers=["GLD", "IAU", "TLT", "IEF", "TIP", "SHY", "SGOV", "USFR", "SPY", "RSP", "QQQ"],
+                tickers=[
+                    "GLD",
+                    "IAU",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "SHY",
+                    "SGOV",
+                    "USFR",
+                    "SPY",
+                    "RSP",
+                    "QQQ",
+                ],
                 trigger=-0.08,
                 deep=-0.18,
                 min_recovery=0.012,
@@ -3563,7 +3757,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Equities, credit, duration, gold, dollar, and commodities compete as a macro "
                     "repair triangle after deep discounts."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "GLD", "TLT", "IEF", "UUP", "DBC", "USO"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "UUP",
+                    "DBC",
+                    "USO",
+                ],
                 trigger=-0.10,
                 deep=-0.22,
                 min_recovery=0.018,
@@ -3702,7 +3908,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Final core candidate: broad-market discount ladder with credit/breadth/volatility "
                     "repair, designed to complement off-ramp systems that otherwise stay too defensive."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "IEF", "DBC"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "IEF",
+                    "DBC",
+                ],
                 trigger=-0.11,
                 deep=-0.24,
                 min_recovery=0.018,
@@ -3720,7 +3938,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Final quality/value candidate: buy discounted fundamental-proxy cohorts first, "
                     "then let broader beta in only when repair is broad enough."
                 ),
-                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "RSP", "SPY", "GLD"],
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "VTV",
+                    "RSP",
+                    "SPY",
+                    "GLD",
+                ],
                 trigger=-0.08,
                 deep=-0.20,
                 min_recovery=0.012,
@@ -3739,7 +3969,20 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Final AI micro candidate: participate in AI crash rebounds only through small, "
                     "confirmed, scenario-cut allocations."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "GLD", "TLT", "HYG", "LQD"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "GLD",
+                    "TLT",
+                    "HYG",
+                    "LQD",
+                ],
                 trigger=-0.15,
                 deep=-0.32,
                 min_recovery=0.035,
@@ -3758,7 +4001,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Final credit/breadth gate: refuses to buy equity discounts unless credit and "
                     "equal-weight breadth are repairing, targeting fewer false bottoms."
                 ),
-                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "KRE", "SPY", "RSP", "IWM", "GLD", "IEF"],
+                tickers=[
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "SRLN",
+                    "KRE",
+                    "SPY",
+                    "RSP",
+                    "IWM",
+                    "GLD",
+                    "IEF",
+                ],
                 trigger=-0.09,
                 deep=-0.20,
                 min_recovery=0.016,
@@ -3776,7 +4031,20 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Final cyclical candidate: buy small/value/cyclical discounts only when the rebound "
                     "is broadening beyond mega-cap growth."
                 ),
-                tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "QUAL", "GLD", "IEF"],
+                tickers=[
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "COWZ",
+                    "QUAL",
+                    "GLD",
+                    "IEF",
+                ],
                 trigger=-0.11,
                 deep=-0.25,
                 min_recovery=0.022,
@@ -3794,7 +4062,19 @@ def _dip_reentry_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Final rare-event candidate: only acts in deep discounts, intended as a challenger "
                     "to staying over-defensive after major market washouts."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "IWM", "VTV", "COWZ", "QUAL", "HYG", "LQD", "GLD", "IEF"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "COWZ",
+                    "QUAL",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "IEF",
+                ],
                 trigger=-0.18,
                 deep=-0.34,
                 min_recovery=0.022,
@@ -3903,7 +4183,18 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Quality/value/income ETFs act as fundamentals proxies, so cash redeploys first "
                     "into resilient cohorts rather than the highest-beta losers."
                 ),
-                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "RSP", "SPY"],
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "VTV",
+                    "RSP",
+                    "SPY",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=4,
@@ -3944,7 +4235,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "AI-beta overlay tests whether an existing AI off-ramp can buy back only after "
                     "semis/platforms are discounted and repairing."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN", "HYG", "LQD", "GLD"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "AMZN",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -3965,7 +4269,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "AI-infrastructure overlay buys power/grid/hardware drawdowns when those assets "
                     "repair before pure software beta."
                 ),
-                tickers=["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLI", "XLU", "GLD"],
+                tickers=[
+                    "VRT",
+                    "ETN",
+                    "PWR",
+                    "CEG",
+                    "GEV",
+                    "NRG",
+                    "CCJ",
+                    "SMH",
+                    "SOXX",
+                    "XLI",
+                    "XLU",
+                    "GLD",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -3986,7 +4303,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Mega-cap overlay tests whether platforms can be bought after stress without "
                     "letting single-name concentration dominate the rebound."
                 ),
-                tickers=["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "AVGO", "TSLA", "BRK-B", "JPM", "HYG", "LQD"],
+                tickers=[
+                    "AAPL",
+                    "MSFT",
+                    "NVDA",
+                    "GOOGL",
+                    "AMZN",
+                    "META",
+                    "AVGO",
+                    "TSLA",
+                    "BRK-B",
+                    "JPM",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -4007,7 +4337,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Small high-beta probe buys only extreme speculative washouts with tight caps, "
                     "testing whether rebounds are worth the operational complexity."
                 ),
-                tickers=["SPHB", "ARKK", "IBIT", "FBTC", "XBI", "TAN", "BOTZ", "QQQ", "HYG", "LQD", "GLD"],
+                tickers=[
+                    "SPHB",
+                    "ARKK",
+                    "IBIT",
+                    "FBTC",
+                    "XBI",
+                    "TAN",
+                    "BOTZ",
+                    "QQQ",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                ],
                 lookback_days=42,
                 skip_days=5,
                 top_n=2,
@@ -4029,7 +4371,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Growth-defense overlay lets gold/duration/quality compete with QQQ and semis "
                     "during recovery, avoiding a one-note AI re-risk."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "SPY", "RSP", "QUAL", "USMV", "GLD", "TLT", "IEF", "HYG", "LQD"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "SPY",
+                    "RSP",
+                    "QUAL",
+                    "USMV",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=4,
@@ -4049,7 +4404,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Harsh AI overlay refuses to redeploy cash into AI unless credit and breadth "
                     "confirm that the selloff is no longer widening."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "HYG", "LQD", "RSP", "GLD"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "HYG",
+                    "LQD",
+                    "RSP",
+                    "GLD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=3,
@@ -4072,7 +4439,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Breadth overlay redeploys cash when equal-weight, small-cap, value, banks, and "
                     "industrials start confirming a market-wide recovery."
                 ),
-                tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "HYG", "LQD", "GLD"],
+                tickers=[
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "COWZ",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -4091,7 +4471,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Small/value overlay tests whether the strongest post-washout returns come from "
                     "breadth-sensitive assets after repair rather than QQQ."
                 ),
-                tickers=["IWM", "MDY", "VTV", "IWD", "XLF", "KRE", "XLI", "XLB", "XHB", "XRT", "HYG", "LQD"],
+                tickers=[
+                    "IWM",
+                    "MDY",
+                    "VTV",
+                    "IWD",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XHB",
+                    "XRT",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=4,
@@ -4112,7 +4505,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Quality/income overlay is the fundamentals-proxy version of buy-the-dip: cash "
                     "reenters through profitable, dividend, moat, and low-volatility cohorts."
                 ),
-                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "VFQY", "QVAL", "HYG", "LQD"],
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "VTV",
+                    "VFQY",
+                    "QVAL",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -4132,7 +4538,21 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Sector washout overlay buys only sectors that are simultaneously cheap, repairing, "
                     "and not too volatile."
                 ),
-                tickers=["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "HYG", "LQD"],
+                tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLY",
+                    "XLP",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLU",
+                    "XLB",
+                    "XLRE",
+                    "XLC",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -4151,7 +4571,22 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Global discount overlay tests whether ex-U.S. or country ETFs offer better "
                     "post-drawdown value than expensive U.S. mega-cap beta."
                 ),
-                tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "HYG", "LQD", "UUP"],
+                tickers=[
+                    "SPY",
+                    "RSP",
+                    "EFA",
+                    "EEM",
+                    "VEA",
+                    "VWO",
+                    "VGK",
+                    "EWJ",
+                    "INDA",
+                    "EWZ",
+                    "EWC",
+                    "HYG",
+                    "LQD",
+                    "UUP",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -4170,7 +4605,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Strict cyclical overlay redeploys cash only when small/value/cyclical assets "
                     "show repair and volatility is no longer expanding."
                 ),
-                tickers=["IWM", "RSP", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "XHB", "IYT", "HYG", "LQD"],
+                tickers=[
+                    "IWM",
+                    "RSP",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "XHB",
+                    "IYT",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=4,
@@ -4193,7 +4641,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Liquidity overlay buys the dip only after volatility, dollar, credit, and breadth "
                     "pressure stop worsening."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "IWM", "HYG", "LQD", "UUP", "GLD", "TLT", "IEF", "SVXY"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "HYG",
+                    "LQD",
+                    "UUP",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "SVXY",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -4213,7 +4673,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Credit-spread overlay redeploys cash into risk when high-yield, loans, banks, and "
                     "investment-grade credit repair together."
                 ),
-                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "KRE", "SPY", "RSP", "GLD", "IEF"],
+                tickers=[
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "SRLN",
+                    "JAAA",
+                    "JBBB",
+                    "KRE",
+                    "SPY",
+                    "RSP",
+                    "GLD",
+                    "IEF",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -4232,7 +4705,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Rates-relief overlay assumes some selloffs are duration shocks, so cash can "
                     "redeploy into duration, credit, gold, or equities as rates pressure fades."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "VCIT", "VCSH", "TLT", "IEF", "TIP", "GLD"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "VCIT",
+                    "VCSH",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "GLD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -4251,7 +4736,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Private-credit gate avoids buying equity dips while BDCs, loans, and regional "
                     "banks are still deteriorating."
                 ),
-                tickers=["BIZD", "ARCC", "MAIN", "BXSL", "OBDC", "SRLN", "BKLN", "HYG", "LQD", "KRE", "IEF"],
+                tickers=[
+                    "BIZD",
+                    "ARCC",
+                    "MAIN",
+                    "BXSL",
+                    "OBDC",
+                    "SRLN",
+                    "BKLN",
+                    "HYG",
+                    "LQD",
+                    "KRE",
+                    "IEF",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=4,
@@ -4270,7 +4767,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Defensive bridge lets gold/duration/cash-like ETFs hold the line, then replaces "
                     "BIL as risk assets repair."
                 ),
-                tickers=["GLD", "IAU", "TLT", "IEF", "TIP", "SHY", "SGOV", "USFR", "SPY", "RSP", "QQQ"],
+                tickers=[
+                    "GLD",
+                    "IAU",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "SHY",
+                    "SGOV",
+                    "USFR",
+                    "SPY",
+                    "RSP",
+                    "QQQ",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -4290,7 +4799,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Macro triangle overlay chooses among equities, credit, duration, gold, dollar, "
                     "and commodities after deep discounts instead of assuming equities lead."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "HYG", "LQD", "GLD", "TLT", "IEF", "UUP", "DBC", "USO"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "UUP",
+                    "DBC",
+                    "USO",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -4311,7 +4832,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Final core overlay: off-ramp first, then measured cash redeployment after broad "
                     "discount plus credit, breadth, volatility, and repair confirmation."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "IEF", "DBC"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "IEF",
+                    "DBC",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=4,
@@ -4330,7 +4863,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Final quality/value overlay redeploys cash into resilient valuation proxies before "
                     "high-beta market beta."
                 ),
-                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VTV", "RSP", "SPY", "HYG", "LQD"],
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "VTV",
+                    "RSP",
+                    "SPY",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -4350,7 +4896,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Final AI micro overlay participates in AI crash rebounds only through small, "
                     "confirmed, scenario-cut allocations."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "HYG", "LQD", "GLD", "TLT"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "TLT",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=3,
@@ -4372,7 +4931,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Final credit/breadth overlay refuses equity re-risking unless public credit and "
                     "equal-weight breadth are repairing."
                 ),
-                tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "KRE", "SPY", "RSP", "IWM", "GLD", "IEF"],
+                tickers=[
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "SRLN",
+                    "KRE",
+                    "SPY",
+                    "RSP",
+                    "IWM",
+                    "GLD",
+                    "IEF",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -4391,7 +4962,20 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Final cyclical overlay buys broadening rebounds only when small/value/cyclical "
                     "discounts begin repairing beyond mega-cap leadership."
                 ),
-                tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "QUAL", "HYG", "LQD"],
+                tickers=[
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "COWZ",
+                    "QUAL",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -4411,7 +4995,19 @@ def _dip_reentry_overlay_candidates(iteration: int) -> tuple[ExperimentCandidate
                     "Final rare-event overlay only replaces cash after very deep discounts and repair, "
                     "testing whether rare deployment improves compounding without twitchy trading."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "IWM", "VTV", "COWZ", "QUAL", "HYG", "LQD", "GLD", "IEF"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "COWZ",
+                    "QUAL",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "IEF",
+                ],
                 lookback_days=126,
                 skip_days=21,
                 top_n=4,
@@ -4443,7 +5039,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Layer aggressive AI satellite risk onto the best low-churn reentry posture: "
                     "stay broadly diversified, then let AI replace BIL only after repair is visible."
                 ),
-                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC", "HYG", "LQD"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=126,
                 skip_days=21,
@@ -4467,7 +5075,20 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Use credit/rates defense as the core; AI can reenter only when high-yield, "
                     "breadth, and AI price repair agree."
                 ),
-                core_tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "IEF", "TLT", "GLD", "SPY", "RSP"],
+                core_tickers=[
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "SRLN",
+                    "JAAA",
+                    "JBBB",
+                    "IEF",
+                    "TLT",
+                    "GLD",
+                    "SPY",
+                    "RSP",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -4533,7 +5154,22 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Pair AI upside with a global discount core so the system can re-risk outside "
                     "U.S. mega-cap tech when the U.S. setup is crowded."
                 ),
-                core_tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "HYG", "LQD", "UUP"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "EFA",
+                    "EEM",
+                    "VEA",
+                    "VWO",
+                    "VGK",
+                    "EWJ",
+                    "INDA",
+                    "EWZ",
+                    "EWC",
+                    "HYG",
+                    "LQD",
+                    "UUP",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -4555,7 +5191,23 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Use sector/factor breadth as the core and allow AI to become the satellite only "
                     "when the market confirms growth leadership is repairing."
                 ),
-                core_tickers=["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "QUAL", "COWZ", "HYG", "LQD"],
+                core_tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLY",
+                    "XLP",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLU",
+                    "XLB",
+                    "XLRE",
+                    "XLC",
+                    "QUAL",
+                    "COWZ",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -4627,7 +5279,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "AI re-risking is forbidden unless credit repair confirms; this directly tests "
                     "whether credit gates prevent false-bottom AI buying."
                 ),
-                core_tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "SPY", "RSP", "GLD", "IEF"],
+                core_tickers=[
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "SRLN",
+                    "JAAA",
+                    "JBBB",
+                    "SPY",
+                    "RSP",
+                    "GLD",
+                    "IEF",
+                ],
                 satellite_tickers=ai_concentrated,
                 lookback_days=84,
                 skip_days=10,
@@ -4672,7 +5336,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Whipsaw-control variant deliberately slows all exposure changes to see whether "
                     "less trading improves left-tail and operating quality."
                 ),
-                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC", "HYG", "LQD"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=126,
                 skip_days=21,
@@ -4696,7 +5372,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Breadth-unlock state machine tests whether equal-weight and cyclicals should "
                     "unlock AI reentry after broad selloffs."
                 ),
-                core_tickers=["RSP", "IWM", "VTV", "XLF", "KRE", "XLI", "XLB", "XLE", "COWZ", "HYG", "LQD"],
+                core_tickers=[
+                    "RSP",
+                    "IWM",
+                    "VTV",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "COWZ",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -4720,7 +5408,20 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Barbell allocator holds credit/rates defense until AI earns a satellite budget "
                     "through price repair and credit confirmation."
                 ),
-                core_tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "IEF", "TLT", "GLD", "SHY", "SGOV"],
+                core_tickers=[
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "SRLN",
+                    "JAAA",
+                    "JBBB",
+                    "IEF",
+                    "TLT",
+                    "GLD",
+                    "SHY",
+                    "SGOV",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -4742,7 +5443,20 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Gold/duration bridge protects the portfolio, then AI can take a satellite budget "
                     "when volatility and repair conditions improve."
                 ),
-                core_tickers=["GLD", "IAU", "TLT", "IEF", "TIP", "SHY", "SGOV", "USFR", "SPY", "RSP", "HYG", "LQD"],
+                core_tickers=[
+                    "GLD",
+                    "IAU",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "SHY",
+                    "SGOV",
+                    "USFR",
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -4765,7 +5479,21 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Policy/oil shock barbell competes energy, gold, duration, dollar, and AI, testing "
                     "whether AI should reenter when geopolitical shock fades."
                 ),
-                core_tickers=["SPY", "RSP", "XLE", "XOP", "USO", "BNO", "DBC", "GLD", "UUP", "TLT", "IEF", "HYG", "LQD"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "XLE",
+                    "XOP",
+                    "USO",
+                    "BNO",
+                    "DBC",
+                    "GLD",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=63,
                 skip_days=5,
@@ -4787,7 +5515,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Private-credit gate blocks AI reentry while BDCs, loans, and regional banks are "
                     "still breaking, then allows AI once credit stress repairs."
                 ),
-                core_tickers=["BIZD", "ARCC", "MAIN", "BXSL", "OBDC", "SRLN", "BKLN", "HYG", "LQD", "KRE", "IEF"],
+                core_tickers=[
+                    "BIZD",
+                    "ARCC",
+                    "MAIN",
+                    "BXSL",
+                    "OBDC",
+                    "SRLN",
+                    "BKLN",
+                    "HYG",
+                    "LQD",
+                    "KRE",
+                    "IEF",
+                ],
                 satellite_tickers=ai_concentrated,
                 lookback_days=84,
                 skip_days=10,
@@ -4809,7 +5549,18 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Rates-relief core tests if duration and credit should turn first, then AI follows "
                     "as a satellite only after repair."
                 ),
-                core_tickers=["SPY", "RSP", "HYG", "LQD", "VCIT", "VCSH", "TLT", "IEF", "TIP", "GLD"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "VCIT",
+                    "VCSH",
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "GLD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -4831,7 +5582,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Liquidity-volatility barbell uses SVXY, credit, dollar, gold, and duration as "
                     "the regime core before giving AI a reentry budget."
                 ),
-                core_tickers=["SPY", "RSP", "HYG", "LQD", "UUP", "GLD", "TLT", "IEF", "SVXY", "SHY", "SGOV"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                    "UUP",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "SVXY",
+                    "SHY",
+                    "SGOV",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=63,
                 skip_days=5,
@@ -5025,7 +5788,18 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Speculative liquidity parent tests whether AI and high-beta assets should only "
                     "activate after liquidity/volatility repair."
                 ),
-                core_tickers=["SVXY", "HYG", "LQD", "UUP", "GLD", "TLT", "SPY", "RSP", "SHY", "SGOV"],
+                core_tickers=[
+                    "SVXY",
+                    "HYG",
+                    "LQD",
+                    "UUP",
+                    "GLD",
+                    "TLT",
+                    "SPY",
+                    "RSP",
+                    "SHY",
+                    "SGOV",
+                ],
                 satellite_tickers=["QQQ", "SMH", "SOXX", "ARKK", "SPHB", "IBIT", "FBTC", "XBI"],
                 lookback_days=42,
                 skip_days=5,
@@ -5049,7 +5823,22 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Sector breadth parent checks whether AI should reenter only after broader sector "
                     "leadership confirms the move."
                 ),
-                core_tickers=["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "RSP", "HYG", "LQD"],
+                core_tickers=[
+                    "XLK",
+                    "XLF",
+                    "XLY",
+                    "XLP",
+                    "XLE",
+                    "XLV",
+                    "XLI",
+                    "XLU",
+                    "XLB",
+                    "XLRE",
+                    "XLC",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=63,
                 skip_days=5,
@@ -5071,7 +5860,21 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Policy/oil parent tests whether AI reentry can coexist with shock-aware energy, "
                     "gold, dollar, and duration allocations."
                 ),
-                core_tickers=["SPY", "RSP", "XLE", "XOP", "USO", "BNO", "DBC", "GLD", "UUP", "TLT", "IEF", "HYG", "LQD"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "XLE",
+                    "XOP",
+                    "USO",
+                    "BNO",
+                    "DBC",
+                    "GLD",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=63,
                 skip_days=5,
@@ -5093,7 +5896,23 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Global macro parent tests whether AI satellite risk is useful even when the best "
                     "core regime expression is outside U.S. equities."
                 ),
-                core_tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "INDA", "EWZ", "GLD", "UUP", "DBC", "TLT", "HYG", "LQD"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "EFA",
+                    "EEM",
+                    "VEA",
+                    "VWO",
+                    "VGK",
+                    "INDA",
+                    "EWZ",
+                    "GLD",
+                    "UUP",
+                    "DBC",
+                    "TLT",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -5115,7 +5934,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Final diverse core combines broad equity, credit, duration, commodities, and AI "
                     "satellite reentry as a candidate operating architecture."
                 ),
-                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "TLT", "IEF", "DBC"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -5139,7 +5970,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Cooldown version of the best hysteresis candidate: require a minimum hold period "
                     "unless a risk-off override fires, aiming to reduce noisy re-risk/de-risk cycles."
                 ),
-                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "GLD", "TLT", "IEF", "DBC", "HYG", "LQD"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=126,
                 skip_days=21,
@@ -5187,7 +6030,19 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Cooldown final-core variant tests whether a top diverse operating architecture "
                     "can keep most return while trading less often."
                 ),
-                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "TLT", "IEF", "DBC"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -5210,7 +6065,20 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Cooldown credit barbell prioritizes stability and lets AI reenter slowly from a "
                     "credit/rates defensive core."
                 ),
-                core_tickers=["HYG", "JNK", "LQD", "BKLN", "SRLN", "JAAA", "JBBB", "IEF", "TLT", "GLD", "SHY", "SGOV"],
+                core_tickers=[
+                    "HYG",
+                    "JNK",
+                    "LQD",
+                    "BKLN",
+                    "SRLN",
+                    "JAAA",
+                    "JBBB",
+                    "IEF",
+                    "TLT",
+                    "GLD",
+                    "SHY",
+                    "SGOV",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -5260,7 +6128,23 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
                     "Cooldown global macro tests whether global diversification plus AI satellite can "
                     "solve reentry without frequent target churn."
                 ),
-                core_tickers=["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "INDA", "EWZ", "GLD", "UUP", "DBC", "TLT", "HYG", "LQD"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "EFA",
+                    "EEM",
+                    "VEA",
+                    "VWO",
+                    "VGK",
+                    "INDA",
+                    "EWZ",
+                    "GLD",
+                    "UUP",
+                    "DBC",
+                    "TLT",
+                    "HYG",
+                    "LQD",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=84,
                 skip_days=10,
@@ -5279,7 +6163,6 @@ def _ai_risk_cycle_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]
         ),
     }
     return batches[iteration]
-
 
 
 def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
@@ -5307,8 +6190,34 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
     defensive_assets = ["BIL", "SGOV", "SHY", "IEF", "TLT", "GLD", "IAU", "UUP", "LQD"]
     ai_themes = ["QQQ", "SMH", "SOXX", "IGV", "CLOU", "SKYY", "BOTZ", "ARKK", "XLK", "XLC"]
     ai_infra = ["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLU", "XLI"]
-    reflation = ["XLE", "XOP", "USO", "BNO", "DBC", "XLB", "XLI", "XLF", "KRE", "IWM", "RSP", "COWZ"]
-    factors = ["VUG", "VTV", "IWF", "IWD", "MTUM", "QUAL", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "COWZ"]
+    reflation = [
+        "XLE",
+        "XOP",
+        "USO",
+        "BNO",
+        "DBC",
+        "XLB",
+        "XLI",
+        "XLF",
+        "KRE",
+        "IWM",
+        "RSP",
+        "COWZ",
+    ]
+    factors = [
+        "VUG",
+        "VTV",
+        "IWF",
+        "IWD",
+        "MTUM",
+        "QUAL",
+        "USMV",
+        "SPLV",
+        "SCHD",
+        "VIG",
+        "MOAT",
+        "COWZ",
+    ]
     global_assets = ["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC"]
     credit_assets = ["HYG", "JNK", "LQD", "VCIT", "VCSH", "BKLN", "SRLN", "JAAA", "JBBB"]
     batches = {
@@ -5522,7 +6431,17 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "AI capex basket tests whether the right response to AI-bubble risk is rotation among "
                     "semis, software, power, industrials, and utilities rather than only QQQ versus cash."
                 ),
-                tickers=[*ai_themes, *ai_infra, "XLI", "XLU", "XLF", *defensive_assets, "SPY", "RSP", "HYG"],
+                tickers=[
+                    *ai_themes,
+                    *ai_infra,
+                    "XLI",
+                    "XLU",
+                    "XLF",
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -5537,7 +6456,26 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Ex-mega-cap AI rotation tests whether AI leadership can be expressed through themes "
                     "and infrastructure without defaulting to QQQ or mega-cap platforms."
                 ),
-                tickers=["SMH", "SOXX", "IGV", "CLOU", "SKYY", "BOTZ", "ROBO", "VRT", "ETN", "PWR", "CEG", "GEV", "XLU", "XLI", *defensive_assets, "SPY", "RSP", "HYG"],
+                tickers=[
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "CLOU",
+                    "SKYY",
+                    "BOTZ",
+                    "ROBO",
+                    "VRT",
+                    "ETN",
+                    "PWR",
+                    "CEG",
+                    "GEV",
+                    "XLU",
+                    "XLI",
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -5552,7 +6490,24 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Power/grid barbell tests whether AI infrastructure creates tradable leadership in "
                     "utilities, industrials, uranium, and grid names before or after semis lead."
                 ),
-                tickers=["XLU", "XLI", "VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "URA", "SMH", "SOXX", *defensive_assets, "SPY", "RSP", "HYG"],
+                tickers=[
+                    "XLU",
+                    "XLI",
+                    "VRT",
+                    "ETN",
+                    "PWR",
+                    "CEG",
+                    "GEV",
+                    "NRG",
+                    "CCJ",
+                    "URA",
+                    "SMH",
+                    "SOXX",
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=4,
@@ -5567,7 +6522,23 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Software versus hardware split tests whether AI unit-economics pressure should rotate "
                     "away from software/cloud and into semis or infrastructure when leadership diverges."
                 ),
-                tickers=["IGV", "CLOU", "SKYY", "SMH", "SOXX", "BOTZ", "ROBO", "XLK", "XLC", "XLI", "XLU", *defensive_assets, "SPY", "RSP", "HYG"],
+                tickers=[
+                    "IGV",
+                    "CLOU",
+                    "SKYY",
+                    "SMH",
+                    "SOXX",
+                    "BOTZ",
+                    "ROBO",
+                    "XLK",
+                    "XLC",
+                    "XLI",
+                    "XLU",
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -5582,7 +6553,22 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "AI with quality/defensive ballast tests whether the system can stay invested in "
                     "durable compounders while reducing pure AI beta during fragile regimes."
                 ),
-                tickers=[*ai_themes, "QUAL", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "XLV", "XLP", "XLU", *defensive_assets, "SPY", "RSP", "HYG"],
+                tickers=[
+                    *ai_themes,
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "MOAT",
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -5597,7 +6583,16 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Fast AI sector reentry tests the stuck-in-cash failure mode by allowing AI themes "
                     "to reclaim risk when repair, breadth, and credit improve together."
                 ),
-                tickers=[*ai_themes, *ai_infra, *sector_expanded, *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                tickers=[
+                    *ai_themes,
+                    *ai_infra,
+                    *sector_expanded,
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=42,
                 skip_days=5,
                 top_n=5,
@@ -5616,7 +6611,23 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Policy/oil shock rotation tests whether energy, gold, dollar, and duration can win "
                     "while growth sectors step aside during geopolitical or inflation shocks."
                 ),
-                tickers=[*reflation, "GLD", "IAU", "UUP", "TLT", "IEF", "SHY", "BIL", "XLP", "XLU", "XLV", "SPY", "RSP", "HYG", "LQD"],
+                tickers=[
+                    *reflation,
+                    "GLD",
+                    "IAU",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                    "SHY",
+                    "BIL",
+                    "XLP",
+                    "XLU",
+                    "XLV",
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=42,
                 skip_days=5,
                 top_n=4,
@@ -5631,7 +6642,25 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Rates-relief rotation tests whether duration, real estate, growth, and credit should "
                     "lead re-risking when inflation and rates pressure eases."
                 ),
-                tickers=["TLT", "IEF", "TIP", "LQD", "HYG", "XLRE", "XLU", "XLK", "XLY", "QQQ", "SMH", "SPY", "RSP", "BIL", "SGOV", "SHY", "GLD"],
+                tickers=[
+                    "TLT",
+                    "IEF",
+                    "TIP",
+                    "LQD",
+                    "HYG",
+                    "XLRE",
+                    "XLU",
+                    "XLK",
+                    "XLY",
+                    "QQQ",
+                    "SMH",
+                    "SPY",
+                    "RSP",
+                    "BIL",
+                    "SGOV",
+                    "SHY",
+                    "GLD",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -5646,7 +6675,26 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Private-credit warning rotation tests whether BDCs, loans, banks, and credit ETFs "
                     "warn before equity sectors, and whether the system should route to cash/duration."
                 ),
-                tickers=["BIZD", "ARCC", "MAIN", "BXSL", "OBDC", "SRLN", "BKLN", "JAAA", "JBBB", "KRE", "XLF", "HYG", "LQD", "IEF", "TLT", "BIL", "SPY", "RSP"],
+                tickers=[
+                    "BIZD",
+                    "ARCC",
+                    "MAIN",
+                    "BXSL",
+                    "OBDC",
+                    "SRLN",
+                    "BKLN",
+                    "JAAA",
+                    "JBBB",
+                    "KRE",
+                    "XLF",
+                    "HYG",
+                    "LQD",
+                    "IEF",
+                    "TLT",
+                    "BIL",
+                    "SPY",
+                    "RSP",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -5661,7 +6709,27 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Inflation barbell rotates among commodities, energy, materials, dollar, gold, and "
                     "defensive equity instead of treating inflation shocks as a simple sell signal."
                 ),
-                tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XOP", "XLB", "XME", "GLD", "UUP", "XLP", "XLU", "XLV", "BIL", "SHY", "IEF", "SPY", "RSP", "HYG"],
+                tickers=[
+                    "DBC",
+                    "DBA",
+                    "USO",
+                    "BNO",
+                    "XLE",
+                    "XOP",
+                    "XLB",
+                    "XME",
+                    "GLD",
+                    "UUP",
+                    "XLP",
+                    "XLU",
+                    "XLV",
+                    "BIL",
+                    "SHY",
+                    "IEF",
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -5676,7 +6744,25 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Defensive-equity bridge tests whether healthcare, staples, utilities, quality, and "
                     "low-vol can keep compounding when risk is yellow but not fully red."
                 ),
-                tickers=["XLV", "XLP", "XLU", "QUAL", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "GLD", "TLT", "IEF", "BIL", "SPY", "RSP", "HYG", "LQD"],
+                tickers=[
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "MOAT",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "BIL",
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -5744,7 +6830,19 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Final AI-capex sector-regime system allows semis, software, power/grid, quality, "
                     "and defensive assets to compete rather than hard-coding QQQ exposure."
                 ),
-                tickers=[*ai_themes, *ai_infra, *factors, "XLV", "XLP", "XLU", *defensive_assets, "SPY", "RSP", "HYG", "LQD"],
+                tickers=[
+                    *ai_themes,
+                    *ai_infra,
+                    *factors,
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -5762,7 +6860,23 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Final macro barbell tests sector rotation under oil, dollar, duration, credit, and "
                     "defensive-equity regimes for non-AI market transitions."
                 ),
-                tickers=[*reflation, "XLV", "XLP", "XLU", "GLD", "IAU", "UUP", "TLT", "IEF", "SHY", "BIL", "HYG", "LQD", "SPY", "RSP"],
+                tickers=[
+                    *reflation,
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                    "GLD",
+                    "IAU",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                    "SHY",
+                    "BIL",
+                    "HYG",
+                    "LQD",
+                    "SPY",
+                    "RSP",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -5780,7 +6894,15 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Final global sector-regime system tests whether leadership can migrate outside U.S. "
                     "mega-cap technology while preserving off-ramp discipline."
                 ),
-                tickers=[*global_assets, *sector_spdrs, *factors, *defensive_assets, "HYG", "LQD", "UUP"],
+                tickers=[
+                    *global_assets,
+                    *sector_spdrs,
+                    *factors,
+                    *defensive_assets,
+                    "HYG",
+                    "LQD",
+                    "UUP",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -5798,7 +6920,14 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
                     "Final credit-reentry system lets credit and sectors rebuild together after stress, "
                     "targeting the gap between cash defense and early risk-on participation."
                 ),
-                tickers=[*credit_assets, *sector_expanded, *factors, *defensive_assets, "SPY", "RSP"],
+                tickers=[
+                    *credit_assets,
+                    *sector_expanded,
+                    *factors,
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=6,
@@ -5812,6 +6941,7 @@ def _sector_regime_rotation_candidates(iteration: int) -> tuple[ExperimentCandid
         ),
     }
     return batches[iteration]
+
 
 def _dip_reentry_candidate(
     *,
@@ -5931,7 +7061,6 @@ def _dip_overlay_candidate(
     )
 
 
-
 def _sector_regime_candidate(
     *,
     name: str,
@@ -6009,6 +7138,7 @@ def _sector_regime_candidate(
             cycle_min_hold_days=min_hold_days,
         ),
     )
+
 
 def _ai_cycle_candidate(
     *,
@@ -6166,15 +7296,40 @@ def _active_absolute_candidate(
     )
 
 
-
 def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
     """Reset-era macro-framework-inspired candidate batches with human-readable names."""
     sector_spdrs = ["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC"]
     defensive_assets = ["BIL", "SGOV", "SHY", "IEF", "TLT", "GLD", "IAU", "UUP", "LQD"]
-    factors = ["VUG", "VTV", "IWF", "IWD", "MTUM", "QUAL", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "COWZ"]
+    factors = [
+        "VUG",
+        "VTV",
+        "IWF",
+        "IWD",
+        "MTUM",
+        "QUAL",
+        "USMV",
+        "SPLV",
+        "SCHD",
+        "VIG",
+        "MOAT",
+        "COWZ",
+    ]
     ai_core = ["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN"]
     ai_infra = ["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLU", "XLI"]
-    reflation = ["XLE", "XOP", "USO", "BNO", "DBC", "XLB", "XLI", "XLF", "KRE", "IWM", "RSP", "COWZ"]
+    reflation = [
+        "XLE",
+        "XOP",
+        "USO",
+        "BNO",
+        "DBC",
+        "XLB",
+        "XLI",
+        "XLF",
+        "KRE",
+        "IWM",
+        "RSP",
+        "COWZ",
+    ]
     global_assets = ["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC"]
     credit_assets = ["HYG", "JNK", "LQD", "VCIT", "VCSH", "BKLN", "SRLN", "JAAA", "JBBB"]
 
@@ -6187,7 +7342,19 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Regime Pulse reset core: let growth, liquidity, credit, breadth, gold, "
                     "duration, and commodities compete before adding broad equity risk."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "IWM", "HYG", "LQD", "GLD", "IEF", "TLT", "DBC", "UUP"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "IEF",
+                    "TLT",
+                    "DBC",
+                    "UUP",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -6202,7 +7369,20 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Low-churn Regime Pulse core: same cross-asset decision layer, but target "
                     "changes must be large and persistent enough for human execution."
                 ),
-                tickers=["SPY", "QQQ", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "TLT", "IEF", "DBC"],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                ],
                 lookback_days=126,
                 skip_days=21,
                 top_n=5,
@@ -6220,7 +7400,20 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Inflation and policy barbell: when inflation/rates pressure dominates, the "
                     "strategy can own energy, commodities, gold, dollar, duration, or defensive cash."
                 ),
-                tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XLB", "GLD", "UUP", "TLT", "IEF", "SPY", "RSP"],
+                tickers=[
+                    "DBC",
+                    "DBA",
+                    "USO",
+                    "BNO",
+                    "XLE",
+                    "XLB",
+                    "GLD",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                    "SPY",
+                    "RSP",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -6258,7 +7451,19 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Growth-disinflation proxy: when growth assets lead without inflation stress, favor "
                     "growth, momentum, broad equities, and credit-sensitive risk."
                 ),
-                tickers=["SPY", "QQQ", "SMH", "MTUM", "VUG", "SPHB", "RSP", "IWM", "HYG", "LQD", *defensive_assets],
+                tickers=[
+                    "SPY",
+                    "QQQ",
+                    "SMH",
+                    "MTUM",
+                    "VUG",
+                    "SPHB",
+                    "RSP",
+                    "IWM",
+                    "HYG",
+                    "LQD",
+                    *defensive_assets,
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -6288,7 +7493,23 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Inflation-defense proxy: route away from duration-sensitive growth when energy, "
                     "commodities, gold, dollar, and defensive equity lead."
                 ),
-                tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XOP", "XLB", "GLD", "UUP", "XLP", "XLU", "XLV", *defensive_assets, "SPY", "RSP"],
+                tickers=[
+                    "DBC",
+                    "DBA",
+                    "USO",
+                    "BNO",
+                    "XLE",
+                    "XOP",
+                    "XLB",
+                    "GLD",
+                    "UUP",
+                    "XLP",
+                    "XLU",
+                    "XLV",
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -6303,7 +7524,22 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Deflation-quality proxy: test whether duration, quality, low-volatility, gold, "
                     "and T-bills protect better than a simple equity/cash switch."
                 ),
-                tickers=["TLT", "IEF", "SHY", "SGOV", "GLD", "IAU", "QUAL", "USMV", "SPLV", "XLV", "XLP", "LQD", "SPY", "RSP"],
+                tickers=[
+                    "TLT",
+                    "IEF",
+                    "SHY",
+                    "SGOV",
+                    "GLD",
+                    "IAU",
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "XLV",
+                    "XLP",
+                    "LQD",
+                    "SPY",
+                    "RSP",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=5,
@@ -6320,7 +7556,19 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Crowded upside trim: keep risk-on participation but force high-beta and AI "
                     "exposure to pass stricter return, trend, and risk-adjusted hurdles."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "SPHB", "MTUM", "SPY", "RSP", "QUAL", "USMV", "GLD", "TLT"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "SPHB",
+                    "MTUM",
+                    "SPY",
+                    "RSP",
+                    "QUAL",
+                    "USMV",
+                    "GLD",
+                    "TLT",
+                ],
                 lookback_days=42,
                 skip_days=5,
                 top_n=4,
@@ -6356,7 +7604,20 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "AI washout micro-sleeve: participate in sharp AI rebounds only with small, "
                     "confirmed allocations after deep discount and repair."
                 ),
-                tickers=["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "GLD", "TLT", "HYG", "LQD"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "IGV",
+                    "NVDA",
+                    "AVGO",
+                    "MSFT",
+                    "META",
+                    "GLD",
+                    "TLT",
+                    "HYG",
+                    "LQD",
+                ],
                 trigger=-0.15,
                 deep=-0.32,
                 min_recovery=0.035,
@@ -6428,7 +7689,19 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Macro-exposure state proxy: commodities, oil, gold, dollar, and duration compete "
                     "for long-only exposure based on current vol-adjusted momentum leadership."
                 ),
-                tickers=["DBC", "DBA", "USO", "BNO", "XLE", "XLB", "GLD", "UUP", "TLT", "IEF", "SHY"],
+                tickers=[
+                    "DBC",
+                    "DBA",
+                    "USO",
+                    "BNO",
+                    "XLE",
+                    "XLB",
+                    "GLD",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                    "SHY",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=4,
@@ -6466,7 +7739,19 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Retirement-core operating system: broad cross-asset defense plus metered AI "
                     "satellite reentry, tuned for low churn and left-tail control."
                 ),
-                core_tickers=["SPY", "RSP", "IWM", "EFA", "EEM", "HYG", "LQD", "GLD", "TLT", "IEF", "DBC"],
+                core_tickers=[
+                    "SPY",
+                    "RSP",
+                    "IWM",
+                    "EFA",
+                    "EEM",
+                    "HYG",
+                    "LQD",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "DBC",
+                ],
                 satellite_tickers=ai_core,
                 lookback_days=126,
                 skip_days=21,
@@ -6491,7 +7776,17 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Balanced macro swing system: sector, factor, credit, duration, gold, dollar, "
                     "and commodities all compete under scenario sizing."
                 ),
-                tickers=[*sector_spdrs, *factors, *credit_assets, *defensive_assets, "SPY", "RSP", "QQQ", "DBC", "UUP"],
+                tickers=[
+                    *sector_spdrs,
+                    *factors,
+                    *credit_assets,
+                    *defensive_assets,
+                    "SPY",
+                    "RSP",
+                    "QQQ",
+                    "DBC",
+                    "UUP",
+                ],
                 lookback_days=84,
                 skip_days=10,
                 top_n=6,
@@ -6533,7 +7828,24 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
                     "Policy/oil/inflation guard: keep the system from treating inflation shocks as "
                     "generic bearishness by letting energy, commodities, gold, dollar, and defense win."
                 ),
-                tickers=[*reflation, "GLD", "IAU", "UUP", "TLT", "IEF", "SHY", "XLP", "XLU", "XLV", "QUAL", "USMV", "SPY", "RSP", "HYG", "LQD"],
+                tickers=[
+                    *reflation,
+                    "GLD",
+                    "IAU",
+                    "UUP",
+                    "TLT",
+                    "IEF",
+                    "SHY",
+                    "XLP",
+                    "XLU",
+                    "XLV",
+                    "QUAL",
+                    "USMV",
+                    "SPY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -6547,6 +7859,7 @@ def _macro_reset_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
         ),
     }
     return batches[iteration]
+
 
 def _decision_sanity_overlay_candidates() -> tuple[ExperimentCandidate, ...]:
     selected = [
@@ -6873,7 +8186,9 @@ def _future_state_ml_candidates() -> tuple[ExperimentCandidate, ...]:
             base_core,
             "future_state_analog",
             "Feature-bagged analogs should reduce single-feature overfit while preserving nonlinear regime matching.",
-            _future_state_profile("feature_bag_knn", horizon_days=21, feature_set="all", k_neighbors=75),
+            _future_state_profile(
+                "feature_bag_knn", horizon_days=21, feature_set="all", k_neighbors=75
+            ),
         ),
         (
             "centroid_1m_cross_asset",
@@ -6901,7 +8216,9 @@ def _future_state_ml_candidates() -> tuple[ExperimentCandidate, ...]:
             base_core,
             "future_state_tail",
             "A risk-off specialist should prioritize left-tail classification, then distribute remaining probability across tradable states.",
-            _future_state_profile("tail_specialist", horizon_days=21, feature_set="core", k_neighbors=90),
+            _future_state_profile(
+                "tail_specialist", horizon_days=21, feature_set="core", k_neighbors=90
+            ),
         ),
         (
             "ensemble_1m_all",
@@ -6922,14 +8239,22 @@ def _future_state_ml_candidates() -> tuple[ExperimentCandidate, ...]:
             base_core,
             "future_state_regularized",
             "A three-month regularized classifier should test slower allocation state prediction for swing-horizon sizing.",
-            _future_state_profile("ridge_logit", horizon_days=63, feature_set="cross_asset", train_window_days=1008),
+            _future_state_profile(
+                "ridge_logit", horizon_days=63, feature_set="cross_asset", train_window_days=1008
+            ),
         ),
         (
             "ensemble_3m_sector",
             sector_core,
             "future_state_sector_rotation",
             "A three-month ensemble should help sector rotation avoid late-cycle traps while re-entering when state probabilities improve.",
-            _future_state_profile("ensemble", horizon_days=63, feature_set="all", train_window_days=1008, k_neighbors=95),
+            _future_state_profile(
+                "ensemble",
+                horizon_days=63,
+                feature_set="all",
+                train_window_days=1008,
+                k_neighbors=95,
+            ),
         ),
     )
     ml_candidates = tuple(
@@ -7046,7 +8371,9 @@ def _bayesian_future_state_candidates() -> tuple[ExperimentCandidate, ...]:
             base_core,
             "bayesian_ensemble",
             "A Bayesian ensemble blends priors, transition evidence, feature likelihoods, and tail specialization for a low-variance scenario overlay.",
-            _future_state_profile("bayesian_ensemble", horizon_days=21, feature_set="all", k_neighbors=75),
+            _future_state_profile(
+                "bayesian_ensemble", horizon_days=21, feature_set="all", k_neighbors=75
+            ),
         ),
         (
             "fast_transition_1m_core",
@@ -7081,28 +8408,36 @@ def _bayesian_future_state_candidates() -> tuple[ExperimentCandidate, ...]:
             ai_core,
             "bayesian_ai_cycle",
             "Short-horizon Bayesian transition probabilities test whether AI leadership should stay risk-on or de-risk during fragile concentration.",
-            _future_state_profile("bayesian_transition", horizon_days=5, feature_set="ai", recency_half_life_days=63),
+            _future_state_profile(
+                "bayesian_transition", horizon_days=5, feature_set="ai", recency_half_life_days=63
+            ),
         ),
         (
             "naive_bayes_1w_ai",
             ai_core,
             "bayesian_ai_cycle",
             "Bayesian feature likelihoods on AI proxies test whether QQQ/RSP, SMH/SPY, credit, and volatility features add signal beyond transition priors.",
-            _future_state_profile("bayesian_naive_bayes", horizon_days=5, feature_set="ai", recency_half_life_days=63),
+            _future_state_profile(
+                "bayesian_naive_bayes", horizon_days=5, feature_set="ai", recency_half_life_days=63
+            ),
         ),
         (
             "ensemble_1m_ai",
             ai_core,
             "bayesian_ai_cycle",
             "A one-month Bayesian ensemble tests whether AI-sensitive strategies can keep upside while avoiding fragile melt-up reversals.",
-            _future_state_profile("bayesian_ensemble", horizon_days=21, feature_set="ai", k_neighbors=75),
+            _future_state_profile(
+                "bayesian_ensemble", horizon_days=21, feature_set="ai", k_neighbors=75
+            ),
         ),
         (
             "transition_1m_sector",
             sector_core,
             "bayesian_sector_rotation",
             "Bayesian transition sizing tests whether sector rotation should lower aggregate risk when leadership looks narrow or unstable.",
-            _future_state_profile("bayesian_transition", horizon_days=21, feature_set="cross_asset"),
+            _future_state_profile(
+                "bayesian_transition", horizon_days=21, feature_set="cross_asset"
+            ),
         ),
         (
             "naive_bayes_3m_sector",
@@ -7233,77 +8568,110 @@ def _sklearn_future_state_candidates() -> tuple[ExperimentCandidate, ...]:
             base_core,
             "sklearn_feature_selection",
             "Sparse logistic probabilities test whether implicit feature selection improves future-state sizing and interpretability.",
-            _future_state_profile("sk_logit_l1", horizon_days=21, feature_set="core", sklearn_regularization_c=0.35),
+            _future_state_profile(
+                "sk_logit_l1", horizon_days=21, feature_set="core", sklearn_regularization_c=0.35
+            ),
         ),
         (
             "forest_1m_all",
             base_core,
             "sklearn_tree_state",
             "Random forests test nonlinear state interactions across trend, breadth, credit, vol, duration, dollar, and commodity features.",
-            _future_state_profile("sk_random_forest", horizon_days=21, feature_set="all", sklearn_max_depth=4),
+            _future_state_profile(
+                "sk_random_forest", horizon_days=21, feature_set="all", sklearn_max_depth=4
+            ),
         ),
         (
             "extra_trees_1m_all",
             base_core,
             "sklearn_tree_state",
             "Extra-trees probabilities test a faster nonlinear state model that is less brittle than one fitted decision tree path.",
-            _future_state_profile("sk_extra_trees", horizon_days=21, feature_set="all", sklearn_max_depth=4),
+            _future_state_profile(
+                "sk_extra_trees", horizon_days=21, feature_set="all", sklearn_max_depth=4
+            ),
         ),
         (
             "gb_1m_core",
             base_core,
             "sklearn_tree_state",
             "A bounded gradient-boosting state model tests whether sequential nonlinear learners add signal without dominating runtime.",
-            _future_state_profile("sk_gradient_boosting", horizon_days=21, feature_set="core", sklearn_max_depth=3),
+            _future_state_profile(
+                "sk_gradient_boosting", horizon_days=21, feature_set="core", sklearn_max_depth=3
+            ),
         ),
         (
             "logit_l2_3m_core",
             base_core,
             "sklearn_regularized_state",
             "A three-month regularized logistic model tests slower swing-horizon probabilities with a cheap, interpretable estimator.",
-            _future_state_profile("sk_logit_l2", horizon_days=63, feature_set="core", train_window_days=1008),
+            _future_state_profile(
+                "sk_logit_l2", horizon_days=63, feature_set="core", train_window_days=1008
+            ),
         ),
         (
             "forest_3m_cross_asset",
             base_core,
             "sklearn_tree_state",
             "A three-month forest tests slower future-state sizing for swing-horizon allocation, not next-day timing.",
-            _future_state_profile("sk_random_forest", horizon_days=63, feature_set="cross_asset", train_window_days=1008),
+            _future_state_profile(
+                "sk_random_forest",
+                horizon_days=63,
+                feature_set="cross_asset",
+                train_window_days=1008,
+            ),
         ),
         (
             "extra_trees_3m_all",
             base_core,
             "sklearn_tree_state",
             "Three-month extra-trees probabilities test slower nonlinear state sizing across the full signal stack.",
-            _future_state_profile("sk_extra_trees", horizon_days=63, feature_set="all", train_window_days=1008, sklearn_max_depth=4),
+            _future_state_profile(
+                "sk_extra_trees",
+                horizon_days=63,
+                feature_set="all",
+                train_window_days=1008,
+                sklearn_max_depth=4,
+            ),
         ),
         (
             "forest_1w_ai",
             ai_core,
             "sklearn_ai_cycle",
             "Short-horizon forests test whether AI concentration can be detected early enough to resize without overtrading.",
-            _future_state_profile("sk_random_forest", horizon_days=5, feature_set="ai", sklearn_max_depth=3),
+            _future_state_profile(
+                "sk_random_forest", horizon_days=5, feature_set="ai", sklearn_max_depth=3
+            ),
         ),
         (
             "extra_trees_1m_ai",
             ai_core,
             "sklearn_ai_cycle",
             "An AI-focused extra-trees model tests whether supervised probabilities retain upside while cutting fragile melt-up reversals.",
-            _future_state_profile("sk_extra_trees", horizon_days=21, feature_set="ai", sklearn_max_depth=4),
+            _future_state_profile(
+                "sk_extra_trees", horizon_days=21, feature_set="ai", sklearn_max_depth=4
+            ),
         ),
         (
             "forest_1m_sector",
             sector_core,
             "sklearn_sector_rotation",
             "A sector-rotation forest tests nonlinear regime signals for sizing the sector sleeve without forcing binary cash/equity behavior.",
-            _future_state_profile("sk_random_forest", horizon_days=21, feature_set="cross_asset", sklearn_max_depth=4),
+            _future_state_profile(
+                "sk_random_forest", horizon_days=21, feature_set="cross_asset", sklearn_max_depth=4
+            ),
         ),
         (
             "extra_trees_3m_sector",
             sector_core,
             "sklearn_sector_rotation",
             "Three-month extra-trees tests slower sector-cycle probabilities for rotation, defense, and re-entry discipline.",
-            _future_state_profile("sk_extra_trees", horizon_days=63, feature_set="all", train_window_days=1008, sklearn_max_depth=4),
+            _future_state_profile(
+                "sk_extra_trees",
+                horizon_days=63,
+                feature_set="all",
+                train_window_days=1008,
+                sklearn_max_depth=4,
+            ),
         ),
     )
     sklearn_candidates = tuple(
@@ -7376,7 +8744,14 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
         ),
     ]
     specs: tuple[
-        tuple[str, str, ScenarioSizingConfig | None, StrategyConfig, FutureStateModelConfig, DecisionSanityConfig | None],
+        tuple[
+            str,
+            str,
+            ScenarioSizingConfig | None,
+            StrategyConfig,
+            FutureStateModelConfig,
+            DecisionSanityConfig | None,
+        ],
         ...,
     ] = (
         (
@@ -7384,7 +8759,9 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "Random-forest 1M tail gate: only reduce the AI engine after risk-off probability crosses a material threshold.",
             base.scenario_sizing,
             base.strategy,
-            _return_preserving_ml_profile("sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.35),
+            _return_preserving_ml_profile(
+                "sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.35
+            ),
             _decision_sanity_profile("wide_cap"),
         ),
         (
@@ -7392,7 +8769,9 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "Extra-trees 1M tail gate: test a faster nonlinear guardrail while preserving almost all transition/upside exposure.",
             base.scenario_sizing,
             base.strategy,
-            _return_preserving_ml_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=0.35),
+            _return_preserving_ml_profile(
+                "sk_extra_trees", horizon_days=21, feature_set="ai", threshold=0.35
+            ),
             _decision_sanity_profile("wide_cap"),
         ),
         (
@@ -7400,7 +8779,9 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "Regularized-logit 1M tail gate: simple linear ML should be hard to beat if the signal is robust.",
             base.scenario_sizing,
             base.strategy,
-            _return_preserving_ml_profile("sk_logit_l2", horizon_days=21, feature_set="ai", threshold=0.35),
+            _return_preserving_ml_profile(
+                "sk_logit_l2", horizon_days=21, feature_set="ai", threshold=0.35
+            ),
             _decision_sanity_profile("wide_cap"),
         ),
         (
@@ -7408,7 +8789,9 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "Random-forest 3M tail gate: slower swing-horizon risk probabilities may avoid overreacting to noise.",
             base.scenario_sizing,
             base.strategy,
-            _return_preserving_ml_profile("sk_random_forest", horizon_days=63, feature_set="ai", threshold=0.40),
+            _return_preserving_ml_profile(
+                "sk_random_forest", horizon_days=63, feature_set="ai", threshold=0.40
+            ),
             _decision_sanity_profile("wide_cap"),
         ),
         (
@@ -7416,7 +8799,9 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "Extra-trees 3M tail gate: nonlinear slower-horizon ML with a higher activation threshold.",
             base.scenario_sizing,
             base.strategy,
-            _return_preserving_ml_profile("sk_extra_trees", horizon_days=63, feature_set="all", threshold=0.40),
+            _return_preserving_ml_profile(
+                "sk_extra_trees", horizon_days=63, feature_set="all", threshold=0.40
+            ),
             _decision_sanity_profile("wide_cap"),
         ),
         (
@@ -7424,7 +8809,13 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "Fast 1W AI tail gate: test whether short-horizon ML can catch abrupt AI-beta breaks without staying bearish.",
             base.scenario_sizing,
             base.strategy,
-            _return_preserving_ml_profile("sk_random_forest", horizon_days=5, feature_set="ai", threshold=0.45, refit_every_days=63),
+            _return_preserving_ml_profile(
+                "sk_random_forest",
+                horizon_days=5,
+                feature_set="ai",
+                threshold=0.45,
+                refit_every_days=63,
+            ),
             _decision_sanity_profile("wide_cap"),
         ),
         (
@@ -7432,7 +8823,9 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "Aggressive scenario plus ML tail gate: let scenario sizing stay risk-on unless ML assigns clear left-tail pressure.",
             _scenario_profile("aggressive"),
             base.strategy,
-            _return_preserving_ml_profile("sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.40, stress=0.68),
+            _return_preserving_ml_profile(
+                "sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.40, stress=0.68
+            ),
             _decision_sanity_profile("wide_cap"),
         ),
         (
@@ -7440,7 +8833,9 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "ML-only tail gate: remove hand-built scenario sizing to test whether ML can cut drawdown without permanently shrinking CAGR.",
             None,
             base.strategy,
-            _return_preserving_ml_profile("sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.45, stress=0.55),
+            _return_preserving_ml_profile(
+                "sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.45, stress=0.55
+            ),
             None,
         ),
         (
@@ -7448,7 +8843,9 @@ def _high_cagr_ml_guardrail_candidates() -> tuple[ExperimentCandidate, ...]:
             "High-octane ML guardrail: raise the volatility target and rely on thresholded ML plus wide-cap sanity to control the left tail.",
             base.scenario_sizing,
             high_octane,
-            _return_preserving_ml_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=0.38, stress=0.70),
+            _return_preserving_ml_profile(
+                "sk_extra_trees", horizon_days=21, feature_set="ai", threshold=0.38, stress=0.70
+            ),
             _decision_sanity_profile("wide_cap"),
         ),
     )
@@ -7577,7 +8974,9 @@ def _strategy_drawdown_ml_guardrail_candidates() -> tuple[ExperimentCandidate, .
             "rf_1m_dd8_ai",
             "Random forest predicts whether the current AI escape posture faces an 8% forward strategy drawdown over the next month.",
             base.strategy,
-            _strategy_drawdown_profile("sk_random_forest", horizon_days=21, feature_set="ai", threshold=-0.08),
+            _strategy_drawdown_profile(
+                "sk_random_forest", horizon_days=21, feature_set="ai", threshold=-0.08
+            ),
             None,
             _decision_sanity_profile("wide_cap"),
         ),
@@ -7585,7 +8984,9 @@ def _strategy_drawdown_ml_guardrail_candidates() -> tuple[ExperimentCandidate, .
             "extra_trees_1m_dd8_ai",
             "Extra trees tests a more variance-tolerant nonlinear drawdown guard on AI, credit, breadth, and vol features.",
             base.strategy,
-            _strategy_drawdown_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08),
+            _strategy_drawdown_profile(
+                "sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08
+            ),
             None,
             _decision_sanity_profile("wide_cap"),
         ),
@@ -7593,7 +8994,9 @@ def _strategy_drawdown_ml_guardrail_candidates() -> tuple[ExperimentCandidate, .
             "logit_1m_dd8_ai",
             "Regularized logistic drawdown guard is the transparent baseline: it should compete if the feature relationship is stable.",
             base.strategy,
-            _strategy_drawdown_profile("sk_logit_l2", horizon_days=21, feature_set="ai", threshold=-0.08),
+            _strategy_drawdown_profile(
+                "sk_logit_l2", horizon_days=21, feature_set="ai", threshold=-0.08
+            ),
             None,
             _decision_sanity_profile("wide_cap"),
         ),
@@ -7601,7 +9004,13 @@ def _strategy_drawdown_ml_guardrail_candidates() -> tuple[ExperimentCandidate, .
             "gradient_1m_dd8_ai",
             "Gradient boosting tests nonlinear interactions while staying shallower than a full tree ensemble.",
             base.strategy,
-            _strategy_drawdown_profile("sk_gradient_boosting", horizon_days=21, feature_set="ai", threshold=-0.08, estimators=64),
+            _strategy_drawdown_profile(
+                "sk_gradient_boosting",
+                horizon_days=21,
+                feature_set="ai",
+                threshold=-0.08,
+                estimators=64,
+            ),
             None,
             _decision_sanity_profile("wide_cap"),
         ),
@@ -7609,7 +9018,9 @@ def _strategy_drawdown_ml_guardrail_candidates() -> tuple[ExperimentCandidate, .
             "ensemble_1m_dd8_ai",
             "A simple sklearn ensemble tests whether model averaging improves drawdown probability stability.",
             base.strategy,
-            _strategy_drawdown_profile("sk_ensemble", horizon_days=21, feature_set="ai", threshold=-0.08, estimators=40),
+            _strategy_drawdown_profile(
+                "sk_ensemble", horizon_days=21, feature_set="ai", threshold=-0.08, estimators=40
+            ),
             None,
             _decision_sanity_profile("wide_cap"),
         ),
@@ -7681,7 +9092,9 @@ def _strategy_drawdown_ml_guardrail_candidates() -> tuple[ExperimentCandidate, .
             "extra_trees_future_state_combo",
             "Combine broad future-state risk with strategy-specific drawdown risk to test whether two independent ML views reduce false confidence.",
             base.strategy,
-            _strategy_drawdown_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08, stress=0.70),
+            _strategy_drawdown_profile(
+                "sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08, stress=0.70
+            ),
             _return_preserving_ml_profile(
                 "sk_extra_trees",
                 horizon_days=21,
@@ -7695,7 +9108,9 @@ def _strategy_drawdown_ml_guardrail_candidates() -> tuple[ExperimentCandidate, .
             "high_octane_extra_trees_dd8",
             "High-octane variant asks whether ML can support a higher-volatility target without letting drawdowns expand too far.",
             high_octane,
-            _strategy_drawdown_profile("sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08, stress=0.58),
+            _strategy_drawdown_profile(
+                "sk_extra_trees", horizon_days=21, feature_set="ai", threshold=-0.08, stress=0.58
+            ),
             None,
             _decision_sanity_profile("wide_cap"),
         ),
@@ -7781,7 +9196,13 @@ def _aggressive_drawdown_ml_hybrid_candidates() -> tuple[ExperimentCandidate, ..
         ),
     )
     specs: tuple[
-        tuple[str, str, StrategyConfig, StrategyDrawdownModelConfig | None, FutureStateModelConfig | None],
+        tuple[
+            str,
+            str,
+            StrategyConfig,
+            StrategyDrawdownModelConfig | None,
+            FutureStateModelConfig | None,
+        ],
         ...,
     ] = (
         (
@@ -8003,7 +9424,9 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 skip_days=0,
                 min_return=0.010,
                 trend_filter_days=63,
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.16, lookback_days=42),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.16, lookback_days=42
+                ),
             ),
             direct(
                 name="i106_reentry_fast_21d_pulse",
@@ -8014,7 +9437,9 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 min_return=0.000,
                 trend_filter_days=42,
                 top_n=4,
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.15, lookback_days=21),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.15, lookback_days=21
+                ),
             ),
             direct(
                 name="i106_reentry_fast_63d_no_skip",
@@ -8023,7 +9448,9 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 skip_days=0,
                 min_return=0.000,
                 trend_filter_days=63,
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.16, lookback_days=42),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.16, lookback_days=42
+                ),
             ),
             direct(
                 name="i106_reentry_fast_equal_weight_basket",
@@ -8091,7 +9518,19 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 name="i107_reentry_semis_convex_bounce",
                 family="reentry_convex_ai",
                 hypothesis="Test whether semis and AI hardware are the highest-convexity recovery vehicle.",
-                tickers=["QQQ", "SMH", "SOXX", "NVDA", "AVGO", "VRT", "ETN", "PWR", "CEG", "HYG", "LQD"],
+                tickers=[
+                    "QQQ",
+                    "SMH",
+                    "SOXX",
+                    "NVDA",
+                    "AVGO",
+                    "VRT",
+                    "ETN",
+                    "PWR",
+                    "CEG",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=4,
@@ -8109,7 +9548,19 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 name="i107_reentry_platform_leaders",
                 family="reentry_platform_ai",
                 hypothesis="Buy platform leaders early after discounts, but cap single-name concentration.",
-                tickers=["QQQ", "AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "AVGO", "TSLA", "HYG", "LQD"],
+                tickers=[
+                    "QQQ",
+                    "AAPL",
+                    "MSFT",
+                    "NVDA",
+                    "GOOGL",
+                    "AMZN",
+                    "META",
+                    "AVGO",
+                    "TSLA",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=5,
@@ -8323,7 +9774,9 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 weighting="equal",
                 max_asset_weight=0.18,
                 trend_filter_days=63,
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.16, lookback_days=42),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.16, lookback_days=42
+                ),
             ),
             direct(
                 name="i110_reentry_2011_qqq_floor_proxy",
@@ -8375,19 +9828,25 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 name="i111_reentry_vol_target_16",
                 family="reentry_vol_drag",
                 hypothesis="Raise the volatility target modestly to test whether recovery drag is mostly volatility throttling.",
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.16, lookback_days=42),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.16, lookback_days=42
+                ),
             ),
             direct(
                 name="i111_reentry_vol_target_18",
                 family="reentry_vol_drag",
                 hypothesis="A higher vol target tests whether more recovery participation is worth extra drawdown.",
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.18, lookback_days=42),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.18, lookback_days=42
+                ),
             ),
             direct(
                 name="i111_reentry_vol_target_fast_21d",
                 family="reentry_vol_drag",
                 hypothesis="A faster volatility estimate may restore exposure sooner after panic volatility fades.",
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.16, lookback_days=21),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.16, lookback_days=21
+                ),
             ),
             direct(
                 name="i111_reentry_no_vol_target_control",
@@ -8403,7 +9862,9 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 skip_days=0,
                 min_return=0.005,
                 trend_filter_days=63,
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.18, lookback_days=21),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.18, lookback_days=21
+                ),
             ),
         ),
         112: (
@@ -8413,7 +9874,11 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 hypothesis="Use ML only as a loose tail gate so it avoids permanent bearishness during recoveries.",
                 decision_sanity=_decision_sanity_profile("wide_cap"),
                 future_state_model=_return_preserving_ml_profile(
-                    "sk_random_forest", horizon_days=21, feature_set="ai", threshold=0.52, stress=0.78
+                    "sk_random_forest",
+                    horizon_days=21,
+                    feature_set="ai",
+                    threshold=0.52,
+                    stress=0.78,
                 ),
             ),
             direct(
@@ -8431,7 +9896,12 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 hypothesis="Short-horizon ML should release defensive pressure faster if risk-off odds fade.",
                 decision_sanity=_decision_sanity_profile("wide_cap"),
                 future_state_model=_return_preserving_ml_profile(
-                    "sk_random_forest", horizon_days=5, feature_set="ai", threshold=0.55, stress=0.82, refit_every_days=63
+                    "sk_random_forest",
+                    horizon_days=5,
+                    feature_set="ai",
+                    threshold=0.55,
+                    stress=0.82,
+                    refit_every_days=63,
                 ),
             ),
             direct(
@@ -8470,7 +9940,19 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 name="i113_reentry_sector_cyclical_broadening",
                 family="reentry_sector_vehicle",
                 hypothesis="Test whether post-bottom upside comes from cyclical broadening rather than AI beta.",
-                tickers=["RSP", "IWM", "XLF", "KRE", "XLI", "XLB", "XLE", "XLY", "COWZ", "HYG", "LQD"],
+                tickers=[
+                    "RSP",
+                    "IWM",
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "XLY",
+                    "COWZ",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=5,
@@ -8486,7 +9968,21 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 name="i113_reentry_sector_ai_infra",
                 family="reentry_sector_vehicle",
                 hypothesis="AI infrastructure may recover before pure AI software beta after capex/power-cycle shocks.",
-                tickers=["VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "SMH", "SOXX", "XLI", "XLU", "HYG", "LQD"],
+                tickers=[
+                    "VRT",
+                    "ETN",
+                    "PWR",
+                    "CEG",
+                    "GEV",
+                    "NRG",
+                    "CCJ",
+                    "SMH",
+                    "SOXX",
+                    "XLI",
+                    "XLU",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=5,
@@ -8502,7 +9998,20 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 name="i113_reentry_sector_defensive_to_growth",
                 family="reentry_sector_vehicle",
                 hypothesis="Let defensive sectors hold first, then rotate into growth as repair confirms.",
-                tickers=["XLU", "XLP", "XLV", "GLD", "TLT", "IEF", "XLK", "SMH", "QQQ", "RSP", "HYG", "LQD"],
+                tickers=[
+                    "XLU",
+                    "XLP",
+                    "XLV",
+                    "GLD",
+                    "TLT",
+                    "IEF",
+                    "XLK",
+                    "SMH",
+                    "QQQ",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=63,
                 skip_days=5,
                 top_n=5,
@@ -8570,7 +10079,9 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 trend_filter_days=63,
                 cycle_min_rebalance_change=0.08,
                 cycle_max_step_change=0.24,
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.16, lookback_days=42),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.16, lookback_days=42
+                ),
             ),
             _dip_overlay_candidate(
                 name="i114_reentry_operable_low_churn_overlay",
@@ -8608,7 +10119,9 @@ def _reentry_tuning_candidates(iteration: int) -> tuple[ExperimentCandidate, ...
                 trend_filter_days=63,
                 scenario_sizing=_scenario_profile("balanced"),
                 decision_sanity=_decision_sanity_profile("wide_cap"),
-                volatility_target=VolatilityTargetConfig(annualized_volatility=0.17, lookback_days=21),
+                volatility_target=VolatilityTargetConfig(
+                    annualized_volatility=0.17, lookback_days=21
+                ),
             ),
             _dip_overlay_candidate(
                 name="i115_reentry_final_overlay_bridge",
@@ -8685,12 +10198,39 @@ def _broad_risk_on_reentry_candidates(iteration: int) -> tuple[ExperimentCandida
 
     index_core = ["SPY", "VTI", "VOO", "RSP", "IWM", "MDY", "QQQ"]
     index_no_ai = ["SPY", "VTI", "VOO", "RSP", "IWM", "MDY"]
-    factors = ["VUG", "VTV", "MTUM", "QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "VFQY", "QVAL"]
+    factors = [
+        "VUG",
+        "VTV",
+        "MTUM",
+        "QUAL",
+        "USMV",
+        "SPLV",
+        "SCHD",
+        "VIG",
+        "COWZ",
+        "MOAT",
+        "VFQY",
+        "QVAL",
+    ]
     quality_value = ["QUAL", "VTV", "COWZ", "MOAT", "SCHD", "VIG", "USMV", "SPLV", "VFQY", "QVAL"]
     sectors = ["XLK", "XLF", "XLY", "XLP", "XLE", "XLV", "XLI", "XLU", "XLB", "XLRE", "XLC", "KRE"]
     cyclicals = ["IWM", "MDY", "RSP", "XLF", "KRE", "XLI", "XLB", "XLE", "XHB", "XRT", "IYT"]
     global_equity = ["SPY", "RSP", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC"]
-    anti_ai = ["RSP", "IWM", "MDY", "VTV", "COWZ", "QUAL", "SCHD", "VIG", "XLF", "XLI", "XLE", "XLV", "XLP"]
+    anti_ai = [
+        "RSP",
+        "IWM",
+        "MDY",
+        "VTV",
+        "COWZ",
+        "QUAL",
+        "SCHD",
+        "VIG",
+        "XLF",
+        "XLI",
+        "XLE",
+        "XLV",
+        "XLP",
+    ]
     diversified_high_beta = ["VUG", "MTUM", "IWM", "MDY", "XLY", "XRT", "XHB", "KRE", "XLI", "SVXY"]
 
     def unique(tickers: list[str]) -> list[str]:
@@ -8855,7 +10395,18 @@ def _broad_risk_on_reentry_candidates(iteration: int) -> tuple[ExperimentCandida
                 name="i117_lowvol_quality_starter",
                 family="factor_reentry_no_ai",
                 hypothesis="Re-enter through lower-volatility and quality factors first, then rotate only if momentum broadens.",
-                tickers=["USMV", "SPLV", "QUAL", "MOAT", "SCHD", "VIG", "COWZ", "VTV", "SPY", "RSP"],
+                tickers=[
+                    "USMV",
+                    "SPLV",
+                    "QUAL",
+                    "MOAT",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "VTV",
+                    "SPY",
+                    "RSP",
+                ],
                 lookback_days=63,
                 skip_days=0,
                 top_n=5,
@@ -8902,7 +10453,20 @@ def _broad_risk_on_reentry_candidates(iteration: int) -> tuple[ExperimentCandida
                 name="i118_sector_dip_repair_no_qqq",
                 family="sector_reentry_no_ai",
                 hypothesis="Use sector dip repair with no QQQ or semiconductor dependency in the explicit risk-on basket.",
-                tickers=["XLF", "KRE", "XLI", "XLB", "XLE", "XLV", "XLP", "IWM", "MDY", "RSP", "HYG", "LQD"],
+                tickers=[
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLB",
+                    "XLE",
+                    "XLV",
+                    "XLP",
+                    "IWM",
+                    "MDY",
+                    "RSP",
+                    "HYG",
+                    "LQD",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=5,
@@ -9012,7 +10576,19 @@ def _broad_risk_on_reentry_candidates(iteration: int) -> tuple[ExperimentCandida
                 name="i120_global_ex_us_reentry_no_qqq",
                 family="global_reentry_no_ai",
                 hypothesis="Test an ex-U.S. and equal-weight recovery sleeve with no QQQ dependency.",
-                tickers=["EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "RSP", "IWM"],
+                tickers=[
+                    "EFA",
+                    "EEM",
+                    "VEA",
+                    "VWO",
+                    "VGK",
+                    "EWJ",
+                    "INDA",
+                    "EWZ",
+                    "EWC",
+                    "RSP",
+                    "IWM",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=5,
@@ -9092,7 +10668,18 @@ def _broad_risk_on_reentry_candidates(iteration: int) -> tuple[ExperimentCandida
                 name="i121_anti_ai_income_quality_lowvol",
                 family="anti_ai_reentry",
                 hypothesis="Re-enter through quality, dividends, low-volatility, and defensive sectors if AI remains suspect.",
-                tickers=["QUAL", "USMV", "SPLV", "SCHD", "VIG", "COWZ", "MOAT", "XLV", "XLP", "XLU"],
+                tickers=[
+                    "QUAL",
+                    "USMV",
+                    "SPLV",
+                    "SCHD",
+                    "VIG",
+                    "COWZ",
+                    "MOAT",
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=5,
@@ -9105,7 +10692,19 @@ def _broad_risk_on_reentry_candidates(iteration: int) -> tuple[ExperimentCandida
                 name="i121_anti_ai_sector_bridge",
                 family="anti_ai_reentry",
                 hypothesis="Let non-tech sectors carry the re-risking cycle when AI leadership is a vulnerability, not an edge.",
-                tickers=["XLF", "KRE", "XLI", "XLE", "XLV", "XLP", "XLU", "XLB", "XHB", "XRT", "IYT"],
+                tickers=[
+                    "XLF",
+                    "KRE",
+                    "XLI",
+                    "XLE",
+                    "XLV",
+                    "XLP",
+                    "XLU",
+                    "XLB",
+                    "XHB",
+                    "XRT",
+                    "IYT",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=5,
@@ -9339,7 +10938,17 @@ def _broad_risk_on_reentry_candidates(iteration: int) -> tuple[ExperimentCandida
                 family="anti_ai_reentry_final_composite",
                 hypothesis="Use the cycle overlay with no-AI satellites so an AI-specific drawdown does not force re-entry into the same theme.",
                 core_tickers=["SPY", "RSP", "IWM", "MDY", "HYG", "LQD", "GLD", "TLT"],
-                satellite_tickers=["VTV", "COWZ", "QUAL", "SCHD", "VIG", "XLF", "XLI", "XLE", "XLV"],
+                satellite_tickers=[
+                    "VTV",
+                    "COWZ",
+                    "QUAL",
+                    "SCHD",
+                    "VIG",
+                    "XLF",
+                    "XLI",
+                    "XLE",
+                    "XLV",
+                ],
                 lookback_days=42,
                 skip_days=0,
                 top_n=5,
@@ -9407,12 +11016,78 @@ def _high_cagr_broadened_reentry_candidates(iteration: int) -> tuple[ExperimentC
     satellites instead of an uncapped narrow AI basket.
     """
 
-    broad_growth = ["QQQ", "QQQM", "IWF", "VUG", "MTUM", "SPHB", "XLK", "XLY", "XLC", "RSP", "IWM", "MDY"]
-    broad_growth_no_single_ai = ["QQQ", "QQQM", "IWF", "VUG", "MTUM", "SPHB", "XLK", "XLY", "XLC", "ARKK", "SKYY", "CLOU"]
-    high_beta_etfs = ["SPHB", "ARKK", "XBI", "TAN", "XHB", "XRT", "KRE", "XOP", "XME", "SVXY", "MTUM", "VUG"]
+    broad_growth = [
+        "QQQ",
+        "QQQM",
+        "IWF",
+        "VUG",
+        "MTUM",
+        "SPHB",
+        "XLK",
+        "XLY",
+        "XLC",
+        "RSP",
+        "IWM",
+        "MDY",
+    ]
+    broad_growth_no_single_ai = [
+        "QQQ",
+        "QQQM",
+        "IWF",
+        "VUG",
+        "MTUM",
+        "SPHB",
+        "XLK",
+        "XLY",
+        "XLC",
+        "ARKK",
+        "SKYY",
+        "CLOU",
+    ]
+    high_beta_etfs = [
+        "SPHB",
+        "ARKK",
+        "XBI",
+        "TAN",
+        "XHB",
+        "XRT",
+        "KRE",
+        "XOP",
+        "XME",
+        "SVXY",
+        "MTUM",
+        "VUG",
+    ]
     quality_compounders = ["BRK-B", "JPM", "V", "MA", "COST", "LLY", "NFLX", "GOOG", "AAPL", "MSFT"]
-    non_ai_compounders = ["BRK-B", "JPM", "V", "MA", "COST", "LLY", "NFLX", "XLF", "XLV", "XLP", "VTV", "COWZ"]
-    sector_themes = ["ITA", "PPA", "XBI", "IBB", "TAN", "URA", "XME", "XHB", "XRT", "OIH", "XOP", "XLE", "XLI"]
+    non_ai_compounders = [
+        "BRK-B",
+        "JPM",
+        "V",
+        "MA",
+        "COST",
+        "LLY",
+        "NFLX",
+        "XLF",
+        "XLV",
+        "XLP",
+        "VTV",
+        "COWZ",
+    ]
+    sector_themes = [
+        "ITA",
+        "PPA",
+        "XBI",
+        "IBB",
+        "TAN",
+        "URA",
+        "XME",
+        "XHB",
+        "XRT",
+        "OIH",
+        "XOP",
+        "XLE",
+        "XLI",
+    ]
     ai_satellite = ["QQQ", "SMH", "SOXX", "IGV", "NVDA", "AVGO", "MSFT", "META", "AMZN", "PLTR"]
     broad_core = ["SPY", "RSP", "IWM", "MDY", "VUG", "MTUM", "QUAL", "COWZ", "HYG", "LQD"]
 
@@ -10117,7 +11792,9 @@ def _high_cagr_broadened_reentry_candidates(iteration: int) -> tuple[ExperimentC
                 name="i135_final_broad_growth_dip_overlay",
                 family="broadened_high_cagr_final",
                 hypothesis="Final aggressive dip overlay: re-enter broad/high-beta recovery earlier, with caps to avoid one-theme dependence.",
-                tickers=unique([*broad_growth, *high_beta_etfs, *quality_compounders, "HYG", "LQD"]),
+                tickers=unique(
+                    [*broad_growth, *high_beta_etfs, *quality_compounders, "HYG", "LQD"]
+                ),
                 lookback_days=21,
                 skip_days=0,
                 top_n=8,
@@ -10156,11 +11833,49 @@ def _multi_asset_risk_on_rotation_candidates(iteration: int) -> tuple[Experiment
     """
 
     growth_tech = ["QQQ", "QQQM", "IWF", "VUG", "MTUM", "XLK", "SMH", "SOXX", "IGV", "XLC", "XLY"]
-    energy_commodities = ["XLE", "XOP", "OIH", "USO", "BNO", "DBC", "CPER", "XME", "URA", "GLD", "SLV"]
-    industrial_defense_infra = ["XLI", "ITA", "PPA", "PWR", "ETN", "VRT", "CEG", "GEV", "NRG", "CCJ", "XLU"]
+    energy_commodities = [
+        "XLE",
+        "XOP",
+        "OIH",
+        "USO",
+        "BNO",
+        "DBC",
+        "CPER",
+        "XME",
+        "URA",
+        "GLD",
+        "SLV",
+    ]
+    industrial_defense_infra = [
+        "XLI",
+        "ITA",
+        "PPA",
+        "PWR",
+        "ETN",
+        "VRT",
+        "CEG",
+        "GEV",
+        "NRG",
+        "CCJ",
+        "XLU",
+    ]
     cyclicals_financials = ["IWM", "MDY", "RSP", "XLF", "KRE", "KBE", "XHB", "XRT", "IYT", "XLB"]
     defensive_equity = ["XLV", "XLP", "XLU", "USMV", "SPLV", "SCHD", "VIG", "MOAT", "COWZ", "QUAL"]
-    global_equity = ["EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWA", "EWU", "EWW", "MCHI"]
+    global_equity = [
+        "EFA",
+        "EEM",
+        "VEA",
+        "VWO",
+        "VGK",
+        "EWJ",
+        "INDA",
+        "EWZ",
+        "EWC",
+        "EWA",
+        "EWU",
+        "EWW",
+        "MCHI",
+    ]
     credit_rates = ["HYG", "JNK", "LQD", "VCIT", "VCSH", "BKLN", "SRLN", "EMB", "TIP", "IEF", "TLT"]
     broad_equity = ["SPY", "VTI", "VOO", "RSP", "IWM", "MDY", "DIA"]
     no_tech_risk = [
@@ -10624,7 +12339,9 @@ def _multi_asset_risk_on_rotation_candidates(iteration: int) -> tuple[Experiment
                 name="i143_barbell_growth_inflation_rotation",
                 family="growth_inflation_barbell_rotation",
                 hypothesis="Barbell growth/tech with energy/commodity leadership so either disinflationary tech or inflationary cyclicals can win.",
-                tickers=unique([*growth_tech, *energy_commodities, *industrial_defense_infra, *credit_rates]),
+                tickers=unique(
+                    [*growth_tech, *energy_commodities, *industrial_defense_infra, *credit_rates]
+                ),
                 lookback_days=42,
                 top_n=8,
                 max_asset_weight=0.16,
@@ -10634,7 +12351,9 @@ def _multi_asset_risk_on_rotation_candidates(iteration: int) -> tuple[Experiment
                 name="i143_barbell_medium_rotation",
                 family="growth_inflation_barbell_rotation",
                 hypothesis="Medium-speed barbell checks whether category leadership survives beyond short-lived one-off shocks.",
-                tickers=unique([*growth_tech, *energy_commodities, *industrial_defense_infra, *credit_rates]),
+                tickers=unique(
+                    [*growth_tech, *energy_commodities, *industrial_defense_infra, *credit_rates]
+                ),
                 lookback_days=84,
                 skip_days=5,
                 top_n=8,
@@ -10645,7 +12364,9 @@ def _multi_asset_risk_on_rotation_candidates(iteration: int) -> tuple[Experiment
                 name="i143_barbell_regime_rotation",
                 family="growth_inflation_barbell_rotation",
                 hypothesis="Regime-aware growth/inflation barbell tests whether sector leadership changes can be traded without forecasting the story.",
-                tickers=unique([*growth_tech, *energy_commodities, *industrial_defense_infra, *credit_rates]),
+                tickers=unique(
+                    [*growth_tech, *energy_commodities, *industrial_defense_infra, *credit_rates]
+                ),
                 lookback_days=42,
                 skip_days=0,
                 top_n=8,
@@ -10661,7 +12382,9 @@ def _multi_asset_risk_on_rotation_candidates(iteration: int) -> tuple[Experiment
                 name="i143_barbell_drawdown_only",
                 family="growth_inflation_barbell_rotation",
                 hypothesis="Barbell rotation with drawdown-only control tests if we can keep risk-on optionality without scenario over-de-risking.",
-                tickers=unique([*growth_tech, *energy_commodities, *industrial_defense_infra, *credit_rates]),
+                tickers=unique(
+                    [*growth_tech, *energy_commodities, *industrial_defense_infra, *credit_rates]
+                ),
                 lookback_days=42,
                 top_n=8,
                 max_asset_weight=0.16,
@@ -11190,7 +12913,6 @@ def _operating_system_candidates() -> tuple[ExperimentCandidate, ...]:
     )
 
 
-
 def _growth_frontier_candidates(iteration: int) -> tuple[ExperimentCandidate, ...]:
     suffix = max(1, iteration - 145)
     variants = (
@@ -11314,9 +13036,44 @@ def _growth_frontier_candidates(iteration: int) -> tuple[ExperimentCandidate, ..
     label = str(variant["label"])
     broad_growth = ["SPY", "QQQ", "RSP", "IWM", "MTUM", "SCHG", "VUG", "XLK", "XLY", "XLC"]
     sector_theme = ["XLK", "XLY", "XLC", "XLI", "XLF", "XLE", "XLV", "SMH", "SOXX", "IGV"]
-    quality_compounders = ["QQQ", "SPY", "QUAL", "COWZ", "MOAT", "VIG", "SCHD", "USMV", "MTUM", "RSP"]
-    multi_asset_recovery = ["SPY", "QQQ", "RSP", "IWM", "MTUM", "QUAL", "HYG", "LQD", "GLD", "DBC", "XLE"]
-    high_beta_diversified = ["SPY", "QQQ", "IWM", "MTUM", "SCHG", "XLK", "XLY", "XLC", "SMH", "SOXX", "ARKK"]
+    quality_compounders = [
+        "QQQ",
+        "SPY",
+        "QUAL",
+        "COWZ",
+        "MOAT",
+        "VIG",
+        "SCHD",
+        "USMV",
+        "MTUM",
+        "RSP",
+    ]
+    multi_asset_recovery = [
+        "SPY",
+        "QQQ",
+        "RSP",
+        "IWM",
+        "MTUM",
+        "QUAL",
+        "HYG",
+        "LQD",
+        "GLD",
+        "DBC",
+        "XLE",
+    ]
+    high_beta_diversified = [
+        "SPY",
+        "QQQ",
+        "IWM",
+        "MTUM",
+        "SCHG",
+        "XLK",
+        "XLY",
+        "XLC",
+        "SMH",
+        "SOXX",
+        "ARKK",
+    ]
     scenario = _scenario_profile(str(variant["scenario"]))
     return (
         _candidate(
@@ -11623,7 +13380,9 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Separate AI-capex beneficiaries from hyperscaler cash-burn risk by letting "
                     "semis, power, grid, industrials, and utilities compete for the risk sleeve."
                 ),
-                tickers=unique([*ai_infra, "SMH", "SOXX", "XLI", "XLU", "PPA", "ITA", "HYG", "LQD"]),
+                tickers=unique(
+                    [*ai_infra, "SMH", "SOXX", "XLI", "XLU", "PPA", "ITA", "HYG", "LQD"]
+                ),
                 top_n=6,
                 max_asset_weight=0.18,
                 vol_target=0.21,
@@ -11636,7 +13395,9 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Explicit anti-concentration test: broad, equal-weight, factor, cyclical, and "
                     "global risk-on assets must carry returns without Mag 7 direct holdings."
                 ),
-                tickers=unique([*ai_adopters, *global_equity, "RSP", "IWM", "MDY", "VTV", "SCHD", "VIG"]),
+                tickers=unique(
+                    [*ai_adopters, *global_equity, "RSP", "IWM", "MDY", "VTV", "SCHD", "VIG"]
+                ),
                 top_n=8,
                 max_asset_weight=0.14,
                 vol_target=0.19,
@@ -11681,7 +13442,16 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Debasement proxy reference for Vanguard-compatible testing: global equity, "
                     "gold, commodities, inflation bonds, and T-bills."
                 ),
-                weights={"VT": 0.40, "SPY": 0.10, "EFA": 0.08, "EEM": 0.02, "GLD": 0.22, "DBC": 0.08, "TIP": 0.05, "BIL": 0.05},
+                weights={
+                    "VT": 0.40,
+                    "SPY": 0.10,
+                    "EFA": 0.08,
+                    "EEM": 0.02,
+                    "GLD": 0.22,
+                    "DBC": 0.08,
+                    "TIP": 0.05,
+                    "BIL": 0.05,
+                },
             ),
             fixed(
                 name="i152_tri_sleeve_deflation_duration",
@@ -11690,7 +13460,14 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Deflation-leaning tri-sleeve: equities plus duration instead of gold when "
                     "deflation, not inflation, is the dominant left-tail risk."
                 ),
-                weights={"VT": 0.42, "SPY": 0.12, "EEM": 0.06, "TLT": 0.22, "IEF": 0.08, "BIL": 0.10},
+                weights={
+                    "VT": 0.42,
+                    "SPY": 0.12,
+                    "EEM": 0.06,
+                    "TLT": 0.22,
+                    "IEF": 0.08,
+                    "BIL": 0.10,
+                },
             ),
             dual(
                 name="i152_tri_sleeve_dynamic_rotation",
@@ -11699,7 +13476,9 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Dynamic tri-sleeve lets productivity, financial-repression, inflation, dollar, "
                     "and duration sleeves compete rather than fixing gold/bond weights forever."
                 ),
-                tickers=unique([*broad_equity, *global_equity, *financial_repression, "HYG", "LQD"]),
+                tickers=unique(
+                    [*broad_equity, *global_equity, *financial_repression, "HYG", "LQD"]
+                ),
                 lookback_days=63,
                 skip_days=5,
                 top_n=7,
@@ -11714,7 +13493,9 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Growth-friendly tri-sleeve keeps the defensive/debasement sleeves available "
                     "but does not let them suppress risk-on when trend and credit remain healthy."
                 ),
-                tickers=unique([*broad_equity, "QQQ", "SMH", "RSP", "GLD", "DBC", "TIP", "HYG", "LQD"]),
+                tickers=unique(
+                    [*broad_equity, "QQQ", "SMH", "RSP", "GLD", "DBC", "TIP", "HYG", "LQD"]
+                ),
                 lookback_days=42,
                 top_n=6,
                 max_asset_weight=0.18,
@@ -11731,13 +13512,17 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Approximate risk-off volatility expansion by combining source-of-funds "
                     "rotation, volatility targeting, scenario sizing, and decision sanity."
                 ),
-                tickers=unique([*mag7, *ai_adopters, *ai_infra, *global_equity, "GLD", "TLT", "HYG", "LQD"]),
+                tickers=unique(
+                    [*mag7, *ai_adopters, *ai_infra, *global_equity, "GLD", "TLT", "HYG", "LQD"]
+                ),
                 top_n=8,
                 max_asset_weight=0.14,
                 vol_target=0.18,
                 scenario_sizing=_scenario_profile("balanced"),
                 decision_sanity=_decision_sanity_profile("wide_cap"),
-                drawdown_control=DrawdownControlConfig(equity_lookback_days=84, max_drawdown=-0.12, risk_multiplier=0.55),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84, max_drawdown=-0.12, risk_multiplier=0.55
+                ),
             ),
             dual(
                 name="i153_regime_vol_risk_off_pre_cut",
@@ -11754,7 +13539,9 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                 vol_target=0.16,
                 scenario_sizing=_scenario_profile("defensive"),
                 decision_sanity=_decision_sanity_profile("wide_cap"),
-                drawdown_control=DrawdownControlConfig(equity_lookback_days=63, max_drawdown=-0.10, risk_multiplier=0.50),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=63, max_drawdown=-0.10, risk_multiplier=0.50
+                ),
             ),
             dual(
                 name="i153_regime_vol_growth_tolerant",
@@ -11770,7 +13557,9 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                 vol_target=0.22,
                 scenario_sizing=_scenario_profile("aggressive"),
                 decision_sanity=_decision_sanity_profile("wide_cap"),
-                drawdown_control=DrawdownControlConfig(equity_lookback_days=84, max_drawdown=-0.20, risk_multiplier=0.68),
+                drawdown_control=DrawdownControlConfig(
+                    equity_lookback_days=84, max_drawdown=-0.20, risk_multiplier=0.68
+                ),
             ),
             dual(
                 name="i153_regime_vol_low_churn",
@@ -11779,7 +13568,9 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Low-churn regime-vol candidate checks whether the risk system can avoid "
                     "twitchy weekly reallocations while preserving drawdown control."
                 ),
-                tickers=unique([*broad_equity, *global_equity, *financial_repression, "HYG", "LQD"]),
+                tickers=unique(
+                    [*broad_equity, *global_equity, *financial_repression, "HYG", "LQD"]
+                ),
                 lookback_days=84,
                 skip_days=5,
                 top_n=8,
@@ -11869,7 +13660,21 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Sector-aware de-escalation should catch relief rallies without assuming "
                     "the same sector that led before the shock will lead afterward."
                 ),
-                tickers=unique([*ai_adopters, *ai_infra, "XLK", "XLV", "XLP", "XLU", "XLE", "GLD", "TLT", "HYG", "LQD"]),
+                tickers=unique(
+                    [
+                        *ai_adopters,
+                        *ai_infra,
+                        "XLK",
+                        "XLV",
+                        "XLP",
+                        "XLU",
+                        "XLE",
+                        "GLD",
+                        "TLT",
+                        "HYG",
+                        "LQD",
+                    ]
+                ),
                 lookback_days=42,
                 skip_days=0,
                 top_n=7,
@@ -11907,7 +13712,20 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "If term premium widens, duration can fail as defense; test gold, dollar, "
                     "commodities, T-bills, cyclicals, and global assets without TLT dependence."
                 ),
-                tickers=unique([*broad_equity, *global_equity, "GLD", "DBC", "TIP", "VTIP", "UUP", "BIL", "XLF", "XLE"]),
+                tickers=unique(
+                    [
+                        *broad_equity,
+                        *global_equity,
+                        "GLD",
+                        "DBC",
+                        "TIP",
+                        "VTIP",
+                        "UUP",
+                        "BIL",
+                        "XLF",
+                        "XLE",
+                    ]
+                ),
                 lookback_days=42,
                 top_n=8,
                 max_asset_weight=0.14,
@@ -11922,7 +13740,22 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "If bank-regulatory offset softens balance-sheet tightening, financials, "
                     "small caps, credit, and cyclicals should participate in risk-on."
                 ),
-                tickers=unique(["XLF", "KRE", "KBE", "IWM", "MDY", "RSP", "HYG", "JNK", "XLI", "XLB", "XLE", "SPY"]),
+                tickers=unique(
+                    [
+                        "XLF",
+                        "KRE",
+                        "KBE",
+                        "IWM",
+                        "MDY",
+                        "RSP",
+                        "HYG",
+                        "JNK",
+                        "XLI",
+                        "XLB",
+                        "XLE",
+                        "SPY",
+                    ]
+                ),
                 lookback_days=42,
                 top_n=6,
                 max_asset_weight=0.18,
@@ -11937,7 +13770,9 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Labor/inflation data-quality uncertainty argues for a bridge that can own "
                     "productivity growth while keeping inflation and liquidity hedges available."
                 ),
-                tickers=unique([*broad_equity, "QQQ", "SMH", "QUAL", "COWZ", "GLD", "TIP", "UUP", "HYG", "LQD"]),
+                tickers=unique(
+                    [*broad_equity, "QQQ", "SMH", "QUAL", "COWZ", "GLD", "TIP", "UUP", "HYG", "LQD"]
+                ),
                 lookback_days=63,
                 skip_days=5,
                 top_n=7,
@@ -11953,7 +13788,20 @@ def _interview_insight_candidates(iteration: int) -> tuple[ExperimentCandidate, 
                     "Treasury-demand stress and home-bias reversal should show up as global, "
                     "gold, dollar, commodity, and non-US equity leadership."
                 ),
-                tickers=unique([*global_equity, "GLD", "DBC", "UUP", "TIP", "VTIP", "EFA", "EEM", "EWJ", "MCHI"]),
+                tickers=unique(
+                    [
+                        *global_equity,
+                        "GLD",
+                        "DBC",
+                        "UUP",
+                        "TIP",
+                        "VTIP",
+                        "EFA",
+                        "EEM",
+                        "EWJ",
+                        "MCHI",
+                    ]
+                ),
                 lookback_days=63,
                 skip_days=5,
                 top_n=7,
@@ -11980,9 +13828,35 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
     ai_providers = ["AAPL", "MSFT", "NVDA", "GOOGL", "AMZN", "META", "TSLA", "QQQ", "XLK", "SMH"]
     ai_adopters = ["XLI", "XLF", "XLV", "XLY", "XRT", "IYT", "RSP", "IWM", "MDY", "COWZ"]
     ai_infra = ["SMH", "SOXX", "VRT", "ETN", "PWR", "CEG", "GEV", "NRG", "CCJ", "XLU", "XLI"]
-    global_equity = ["VT", "EFA", "EEM", "VEA", "VWO", "VGK", "EWJ", "INDA", "EWZ", "EWC", "EWW", "MCHI"]
+    global_equity = [
+        "VT",
+        "EFA",
+        "EEM",
+        "VEA",
+        "VWO",
+        "VGK",
+        "EWJ",
+        "INDA",
+        "EWZ",
+        "EWC",
+        "EWW",
+        "MCHI",
+    ]
     repression = ["GLD", "IAU", "TIP", "VTIP", "DBC", "UUP", "IEF", "TLT", "BIL"]
-    term_premium = ["GLD", "DBC", "TIP", "VTIP", "UUP", "BIL", "XLF", "KRE", "IWM", "RSP", "HYG", "LQD"]
+    term_premium = [
+        "GLD",
+        "DBC",
+        "TIP",
+        "VTIP",
+        "UUP",
+        "BIL",
+        "XLF",
+        "KRE",
+        "IWM",
+        "RSP",
+        "HYG",
+        "LQD",
+    ]
     factor_market = [
         "XLK",
         "XLI",
@@ -12093,7 +13967,15 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "Reference portfolio for productivity, financial-repression, and debasement "
                     "drivers without direct crypto exposure."
                 ),
-                weights={"VT": 0.42, "SPY": 0.12, "QQQ": 0.06, "GLD": 0.24, "DBC": 0.04, "TIP": 0.02, "BIL": 0.10},
+                weights={
+                    "VT": 0.42,
+                    "SPY": 0.12,
+                    "QQQ": 0.06,
+                    "GLD": 0.24,
+                    "DBC": 0.04,
+                    "TIP": 0.02,
+                    "BIL": 0.10,
+                },
             ),
             fixed(
                 name="i156_simple_systematic_risk_off_halved",
@@ -12102,7 +13984,15 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "Risk-off reference: halve the risk-driver sleeve and keep the same driver "
                     "mix instead of fully exiting equities."
                 ),
-                weights={"VT": 0.21, "SPY": 0.06, "QQQ": 0.03, "GLD": 0.12, "DBC": 0.02, "TIP": 0.01, "BIL": 0.55},
+                weights={
+                    "VT": 0.21,
+                    "SPY": 0.06,
+                    "QQQ": 0.03,
+                    "GLD": 0.12,
+                    "DBC": 0.02,
+                    "TIP": 0.01,
+                    "BIL": 0.55,
+                },
             ),
             dual(
                 name="i156_driver_sleeve_dynamic_vol",
@@ -12193,7 +14083,9 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "Use credit repair as the re-entry gate so a correction can be bought without "
                     "blindly catching a falling knife."
                 ),
-                tickers=unique([*ai_providers, *ai_adopters, *global_equity, "HYG", "JNK", "LQD", "GLD"]),
+                tickers=unique(
+                    [*ai_providers, *ai_adopters, *global_equity, "HYG", "JNK", "LQD", "GLD"]
+                ),
                 lookback_days=42,
                 skip_days=0,
                 top_n=8,
@@ -12216,7 +14108,9 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "Take some exposure down before a crowded-bull correction, but retain enough "
                     "growth sleeve to recover if liquidity remains supportive."
                 ),
-                tickers=unique([*ai_providers, *ai_adopters, *ai_infra, "RSP", "IWM", "HYG", "LQD", "BIL"]),
+                tickers=unique(
+                    [*ai_providers, *ai_adopters, *ai_infra, "RSP", "IWM", "HYG", "LQD", "BIL"]
+                ),
                 lookback_days=42,
                 top_n=8,
                 max_asset_weight=0.14,
@@ -12236,7 +14130,9 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "If liquidity is still rising, tolerate more volatility and rotate from "
                     "crowded providers toward adopters, infrastructure, and broadening."
                 ),
-                tickers=unique([*ai_providers, *ai_adopters, *ai_infra, "RSP", "IWM", "MDY", "HYG", "LQD"]),
+                tickers=unique(
+                    [*ai_providers, *ai_adopters, *ai_infra, "RSP", "IWM", "MDY", "HYG", "LQD"]
+                ),
                 lookback_days=42,
                 top_n=8,
                 max_asset_weight=0.13,
@@ -12258,7 +14154,9 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "If US home bias is stretched, global and ex-US equities should compete "
                     "for risk-on capital instead of letting US mega-cap concentration dominate."
                 ),
-                tickers=unique([*global_equity, "VT", "SPY", "RSP", "IWM", "MDY", "GLD", "UUP", "HYG", "LQD"]),
+                tickers=unique(
+                    [*global_equity, "VT", "SPY", "RSP", "IWM", "MDY", "GLD", "UUP", "HYG", "LQD"]
+                ),
                 lookback_days=63,
                 skip_days=5,
                 top_n=8,
@@ -12274,7 +14172,9 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "AI diffusion should create catch-up candidates outside the current provider "
                     "cluster: global equities, adopters, factors, and infrastructure compete."
                 ),
-                tickers=unique([*global_equity, *ai_adopters, *ai_infra, "QUAL", "COWZ", "RSP", "HYG", "LQD"]),
+                tickers=unique(
+                    [*global_equity, *ai_adopters, *ai_infra, "QUAL", "COWZ", "RSP", "HYG", "LQD"]
+                ),
                 lookback_days=63,
                 skip_days=5,
                 top_n=8,
@@ -12310,7 +14210,20 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "Strict anti-mega-cap test: if convergence is real, global, equal-weight, "
                     "small/mid, and factor ETFs can carry returns without direct mega-cap names."
                 ),
-                tickers=unique([*global_equity, "RSP", "IWM", "MDY", "QUAL", "COWZ", "VTV", "SCHD", "VIG", "GLD"]),
+                tickers=unique(
+                    [
+                        *global_equity,
+                        "RSP",
+                        "IWM",
+                        "MDY",
+                        "QUAL",
+                        "COWZ",
+                        "VTV",
+                        "SCHD",
+                        "VIG",
+                        "GLD",
+                    ]
+                ),
                 lookback_days=63,
                 skip_days=5,
                 top_n=8,
@@ -12343,7 +14256,21 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "If communication changes widen term premium, long-duration bonds may fail "
                     "as defense; favor gold, TIPS, dollar, bills, credit, and cyclicals."
                 ),
-                tickers=unique([*productivity, "GLD", "DBC", "TIP", "VTIP", "UUP", "BIL", "XLF", "XLE", "HYG", "LQD"]),
+                tickers=unique(
+                    [
+                        *productivity,
+                        "GLD",
+                        "DBC",
+                        "TIP",
+                        "VTIP",
+                        "UUP",
+                        "BIL",
+                        "XLF",
+                        "XLE",
+                        "HYG",
+                        "LQD",
+                    ]
+                ),
                 lookback_days=42,
                 top_n=8,
                 max_asset_weight=0.14,
@@ -12358,7 +14285,9 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "If revised labor and real-time inflation data create a dovish surprise, "
                     "quality growth, credit, and productivity exposures should regain leadership."
                 ),
-                tickers=unique([*productivity, "QQQ", "SMH", "XLK", "QUAL", "COWZ", "HYG", "LQD", "TLT", "IEF"]),
+                tickers=unique(
+                    [*productivity, "QQQ", "SMH", "XLK", "QUAL", "COWZ", "HYG", "LQD", "TLT", "IEF"]
+                ),
                 lookback_days=42,
                 top_n=8,
                 max_asset_weight=0.14,
@@ -12418,7 +14347,18 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "Growth-frontier version of the broad overlay: do not let macro hedges "
                     "dominate unless trend, credit, or drawdown evidence confirms."
                 ),
-                tickers=unique([*factor_market, *ai_providers, *ai_infra, *global_equity, "HYG", "LQD", "GLD", "BIL"]),
+                tickers=unique(
+                    [
+                        *factor_market,
+                        *ai_providers,
+                        *ai_infra,
+                        *global_equity,
+                        "HYG",
+                        "LQD",
+                        "GLD",
+                        "BIL",
+                    ]
+                ),
                 lookback_days=42,
                 top_n=10,
                 max_asset_weight=0.12,
@@ -12458,7 +14398,9 @@ def _long_form_macro_process_candidates(iteration: int) -> tuple[ExperimentCandi
                     "When the regime improves after stress, allow sector/factor leadership to "
                     "choose the recovery vehicle instead of defaulting to a narrow tech sleeve."
                 ),
-                tickers=unique([*factor_market, *ai_infra, "SPY", "RSP", "IWM", "HYG", "LQD", "GLD"]),
+                tickers=unique(
+                    [*factor_market, *ai_infra, "SPY", "RSP", "IWM", "HYG", "LQD", "GLD"]
+                ),
                 lookback_days=42,
                 skip_days=0,
                 top_n=8,
@@ -12609,7 +14551,9 @@ def _global_equity_pool_ablation_candidates() -> tuple[ExperimentCandidate, ...]
                 "Clone the systematic-break global-convergence thesis with a wider equity pool: "
                 "stay risk-on unless confirmation breaks, but let global and emerging ETFs win."
             ),
-            tickers=unique([*us_broad, *us_quality, *global_broad, *emerging, *credit_confirmers, "GLD"]),
+            tickers=unique(
+                [*us_broad, *us_quality, *global_broad, *emerging, *credit_confirmers, "GLD"]
+            ),
             lookback_days=84,
             skip_days=5,
             top_n=8,
@@ -12634,7 +14578,9 @@ def _global_equity_pool_ablation_candidates() -> tuple[ExperimentCandidate, ...]
                 "Low-churn global pool: give non-US equities, credit confirmers, gold, and "
                 "duration room to compete while keeping trading cadence human-operable."
             ),
-            tickers=unique([*us_broad, *us_quality, *global_broad, *credit_confirmers, *diversifiers]),
+            tickers=unique(
+                [*us_broad, *us_quality, *global_broad, *credit_confirmers, *diversifiers]
+            ),
             lookback_days=100,
             skip_days=5,
             top_n=8,
@@ -12930,7 +14876,9 @@ def _systematic_break_risk_on_candidates() -> tuple[ExperimentCandidate, ...]:
                 "When mega-cap leadership gets crowded, stay risk-on but rotate the source of "
                 "funds toward AI adopters, infrastructure, broadening, and credit-confirmed risk."
             ),
-            tickers=unique([*ai_adopters, *ai_infra, *broadening, *quality_value, *risk_confirmers]),
+            tickers=unique(
+                [*ai_adopters, *ai_infra, *broadening, *quality_value, *risk_confirmers]
+            ),
             lookback_days=42,
             top_n=10,
             max_asset_weight=0.12,
@@ -13050,7 +14998,16 @@ def _systematic_break_risk_on_candidates() -> tuple[ExperimentCandidate, ...]:
                 "Low-churn version of the systematic-break thesis: stay invested through noise, "
                 "rotate slowly, and require large confirmation before defensive moves."
             ),
-            tickers=unique([*growth_leadership, *broadening, *global_equity, *quality_value, *risk_confirmers, "GLD"]),
+            tickers=unique(
+                [
+                    *growth_leadership,
+                    *broadening,
+                    *global_equity,
+                    *quality_value,
+                    *risk_confirmers,
+                    "GLD",
+                ]
+            ),
             lookback_days=100,
             skip_days=5,
             top_n=8,
@@ -13172,7 +15129,9 @@ def _growth_core_source_funds_overlay_candidates() -> tuple[ExperimentCandidate,
                 "so source-of-funds rotation can choose equal-weight, midcap, quality, cyclicals, "
                 "or AI-adopter vehicles without defaulting to cash."
             ),
-            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]),
+            tickers=unique(
+                [*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]
+            ),
             scenario_sizing=None,
             top_n=7,
             max_asset_weight=0.20,
@@ -13187,7 +15146,9 @@ def _growth_core_source_funds_overlay_candidates() -> tuple[ExperimentCandidate,
                 "Same broadened growth core, but scenario/event pressure can only force large "
                 "defense after systematic trend, breadth, credit, or volatility confirmation."
             ),
-            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]),
+            tickers=unique(
+                [*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]
+            ),
             scenario_sizing=_scenario_profile("aggressive"),
             decision_sanity=sanity_gate(max_defensive_add=0.20),
             top_n=7,
@@ -13228,7 +15189,9 @@ def _growth_core_source_funds_overlay_candidates() -> tuple[ExperimentCandidate,
                 "Use metered dip re-entry to buy broadening vehicles earlier than the narrow "
                 "AI trend signal, while keeping the growth complex eligible when it repairs."
             ),
-            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]),
+            tickers=unique(
+                [*growth_core, *broadening, *quality_value, *cyclicals, *credit_confirmers]
+            ),
             lookback_days=42,
             skip_days=0,
             top_n=7,
@@ -13251,7 +15214,16 @@ def _growth_core_source_funds_overlay_candidates() -> tuple[ExperimentCandidate,
                 "Let the risk-on sleeve rotate among growth, quality, cyclicals, financials, "
                 "industrials, and broad equity when source-of-funds leadership changes."
             ),
-            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *ai_adopters, *credit_confirmers]),
+            tickers=unique(
+                [
+                    *growth_core,
+                    *broadening,
+                    *quality_value,
+                    *cyclicals,
+                    *ai_adopters,
+                    *credit_confirmers,
+                ]
+            ),
             lookback_days=42,
             skip_days=0,
             top_n=8,
@@ -13302,7 +15274,16 @@ def _growth_core_source_funds_overlay_candidates() -> tuple[ExperimentCandidate,
                 "Human-operable version: stay risk-on through noise, rotate only on durable "
                 "source-of-funds evidence, and avoid small daily changes."
             ),
-            tickers=unique([*growth_core, *broadening, *quality_value, *cyclicals, *global_equity, *credit_confirmers]),
+            tickers=unique(
+                [
+                    *growth_core,
+                    *broadening,
+                    *quality_value,
+                    *cyclicals,
+                    *global_equity,
+                    *credit_confirmers,
+                ]
+            ),
             scenario_sizing=_scenario_profile("aggressive"),
             decision_sanity=sanity_gate(max_defensive_add=0.18),
             lookback_days=63,
@@ -13323,7 +15304,9 @@ def _growth_core_source_funds_overlay_candidates() -> tuple[ExperimentCandidate,
                 "If capital rotates within the AI story rather than out of it, let infrastructure "
                 "and AI-adopter sleeves compete with semis and mega-cap growth."
             ),
-            tickers=unique([*growth_core, *ai_infra, *ai_adopters, *broadening, *credit_confirmers]),
+            tickers=unique(
+                [*growth_core, *ai_infra, *ai_adopters, *broadening, *credit_confirmers]
+            ),
             scenario_sizing=None,
             top_n=7,
             max_asset_weight=0.18,
@@ -14439,19 +16422,18 @@ def _adverse(signal: pd.Series) -> pd.Series:
 def _candidate_tickers(candidates: tuple[ExperimentCandidate, ...]) -> set[str]:
     tickers: set[str] = set()
     for candidate in candidates:
-        tickers.update(candidate.strategy.tickers)
-        tickers.update(candidate.strategy.satellite_tickers)
-        if candidate.strategy.defensive_ticker:
-            tickers.add(candidate.strategy.defensive_ticker)
+        tickers.update(required_strategy_tickers(candidate.strategy))
     return tickers
 
 
 def _strategy_prices(
     prices: pd.DataFrame,
-    tickers: list[str],
-    defensive_ticker: str | None,
+    strategy: StrategyConfig,
 ) -> pd.DataFrame:
-    columns = list(dict.fromkeys([*tickers, *([defensive_ticker] if defensive_ticker else [])]))
+    columns = required_strategy_tickers(strategy)
+    unusable = unusable_required_price_columns(prices, columns)
+    if unusable:
+        raise KeyError(f"Missing, empty, or stale price columns for strategy: {unusable}")
     return prices[columns].dropna(how="all")
 
 
@@ -14462,7 +16444,6 @@ def _window_stat(window_summary: pd.DataFrame, window: str, column: str) -> pd.S
     strategy_column = "strategy" if "strategy" in frame.columns else "name"
     selected = frame[frame["window"] == window].set_index(strategy_column)
     return selected[column]
-
 
 
 TAX_SCORECARD_NUMERIC_COLUMNS = (
@@ -14602,7 +16583,9 @@ def _transition_metrics_frame(
         defensive_ticker = candidate.strategy.defensive_ticker if candidate else None
         risk_weight = _risk_weight_series(weights, defensive_ticker)
         reentry_days = _reentry_days(risk_weight)
-        median_reentry_days = float(pd.Series(reentry_days).median()) if reentry_days else float("nan")
+        median_reentry_days = (
+            float(pd.Series(reentry_days).median()) if reentry_days else float("nan")
+        )
         low_risk_day_rate = float((risk_weight <= 0.35).mean())
         average_risk_weight = float(risk_weight.mean())
         min_risk_weight = float(risk_weight.min())
@@ -14687,12 +16670,10 @@ def _operability_score(
     )
     gap_score = _clip01(gap_value / DEFAULT_OPERABILITY_GOOD_MEAN_GAP_TRADING_DAYS)
     max_trade_range = (
-        DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_ZERO
-        - DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_START
+        DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_ZERO - DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_START
     )
     max_trade_score = 1.0 - _clip01(
-        (max_single_day_turnover - DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_START)
-        / max_trade_range
+        (max_single_day_turnover - DEFAULT_OPERABILITY_SCORE_MAX_TURNOVER_START) / max_trade_range
     )
     average_turnover_range = (
         DEFAULT_OPERABILITY_SCORE_AVERAGE_TURNOVER_ZERO
@@ -15009,7 +16990,10 @@ def _deployment_blockers_list(row: pd.Series) -> list[str]:
         blockers.append("weak_promotion")
     if str(row.get("benchmark_knockout_label", "")) in {"fails_index_bar", "mixed_benchmark"}:
         blockers.append("benchmark_gap")
-    if str(row.get("monitoring_readiness_label", "")) in {"inspect_before_paper", "research_archive"}:
+    if str(row.get("monitoring_readiness_label", "")) in {
+        "inspect_before_paper",
+        "research_archive",
+    }:
         blockers.append("readiness_gap")
     if str(row.get("operability_label", "")) == "too_twitchy":
         blockers.append("too_twitchy")

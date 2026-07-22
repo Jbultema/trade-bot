@@ -8,6 +8,18 @@ execution:
   transaction_cost_bps: 10.0
   rebalance: D
   signal_lag_days: 1
+allocation_policy:
+  utility_profile: balanced_asymmetric
+  scenario_sizing_authority: 0.0
+  scenario_budget_authority: 0.0
+  scenario_weighted_stress_authority: 0.0
+  event_sizing_authority: 0.0
+  macro_sizing_authority: 1.0
+  scenario_calibration_horizon: 1m
+  scenario_calibration_status: insufficient
+  authority_source: reports/scenario_probability_calibration/latest_authority.json
+  normal_tail_loss_limit: 0.035
+  catastrophic_stress_loss_limit: 0.18
 primary_strategy: i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145
 universe:
   broad:
@@ -547,3 +559,44 @@ strategies:
       equity_lookback_days: 84
       max_drawdown: -0.145
       risk_multiplier: 0.55
+  i111_native_risk_repair_guard17_relief85_ai85_div:
+    type: dual_momentum_risk_repair
+    tickers:
+    - QQQ
+    - SMH
+    - SOXX
+    - IGV
+    - NVDA
+    - AVGO
+    - MSFT
+    - META
+    - AMZN
+    - PLTR
+    lookback_days: 63
+    skip_days: 5
+    top_n: 4
+    defensive_ticker: BIL
+    min_return: 0.025
+    ranking_metric: risk_adjusted_return
+    weighting: risk_adjusted_score
+    volatility_lookback_days: 63
+    trend_filter_days: null
+    max_asset_weight: 0.35
+    risk_repair_defensive_cap: 0.85
+    risk_repair_defensive_release: 0.15
+    risk_repair_ai_soft_cap: 0.85
+    risk_repair_ai_soft_threshold: 0.90
+    risk_repair_ai_excess_destination: diversifier_mix
+    risk_repair_ai_diversifier_tickers:
+    - SPY
+    - RSP
+    - GLD
+    - TLT
+    volatility_target:
+      annualized_volatility: 0.185
+      lookback_days: 21
+      max_leverage: 1.0
+    drawdown_control:
+      equity_lookback_days: 84
+      max_drawdown: -0.17
+      risk_multiplier: 0.65

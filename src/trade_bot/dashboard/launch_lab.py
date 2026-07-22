@@ -341,16 +341,16 @@ def _render_aggregate_launch_lab(
     with chart_cols[0]:
         st.plotly_chart(
             _horizon_label_count_figure(aggregate_run.horizon_label_counts),
-            use_container_width=True,
+            width="stretch",
         )
     with chart_cols[1]:
         st.plotly_chart(
             _horizon_transition_figure(aggregate_run.horizon_transition_matrix),
-            use_container_width=True,
+            width="stretch",
         )
     st.plotly_chart(
         _protocol_separation_figure(aggregate_run.protocol_separation_by_horizon),
-        use_container_width=True,
+        width="stretch",
     )
 
     with st.expander("Aggregate launch detail tables", expanded=False):
@@ -413,9 +413,7 @@ def _render_aggregate_launch_cards(
         if not protocol_by_horizon.empty and "horizon" in protocol_by_horizon
         else pd.DataFrame()
     )
-    protocol_row = (
-        selected_protocol.iloc[0].to_dict() if not selected_protocol.empty else {}
-    )
+    protocol_row = selected_protocol.iloc[0].to_dict() if not selected_protocol.empty else {}
     material_rate = _safe_float(protocol_row.get("material_separation_rate"))
     median_spread = _safe_float(protocol_row.get("median_protocol_spread"))
     cards = [
@@ -430,9 +428,7 @@ def _render_aggregate_launch_cards(
         {
             "label": f"{primary_horizon} Set / Ready",
             "answer": f"{set_ready}/{aggregate_run.strategy_count}",
-            "detail": (
-                f"{wait_no_go} candidate(s) remain wait/no-go at the selected horizon."
-            ),
+            "detail": (f"{wait_no_go} candidate(s) remain wait/no-go at the selected horizon."),
             "tone": "success" if set_ready > wait_no_go else "warning",
         },
         {
@@ -498,11 +494,7 @@ def _start_frequency_selector(container: Any) -> str:
         "Annual starts": "A",
     }
     default_label = next(
-        (
-            label
-            for label, value in options.items()
-            if value == DEFAULT_LAUNCH_START_FREQUENCY
-        ),
+        (label for label, value in options.items() if value == DEFAULT_LAUNCH_START_FREQUENCY),
         "Monthly starts",
     )
     selected = container.selectbox(
@@ -582,9 +574,9 @@ def _render_entry_backtest(run: LaunchReadinessRun) -> None:
     _render_entry_backtest_read(run, windows)
     chart_cols = st.columns([1.15, 1.0])
     with chart_cols[0]:
-        st.plotly_chart(_entry_scatter(windows), use_container_width=True)
+        st.plotly_chart(_entry_scatter(windows), width="stretch")
     with chart_cols[1]:
-        st.plotly_chart(_protocol_bar(run.summary, primary_horizon), use_container_width=True)
+        st.plotly_chart(_protocol_bar(run.summary, primary_horizon), width="stretch")
 
     with st.expander("Launch start-date detail", expanded=False):
         columns = [
@@ -616,10 +608,12 @@ def _render_ramp_plan(run: LaunchReadinessRun) -> None:
     cols = st.columns(4)
     latest = run.ramp_plan.iloc[-1]
     _helped_metric(cols[0], "Final Deployment", _format_currency(latest.get("capital_deployed")))
-    _helped_metric(cols[1], "Final Sleeve", _format_percent(latest.get("account_fraction_deployed")))
+    _helped_metric(
+        cols[1], "Final Sleeve", _format_percent(latest.get("account_fraction_deployed"))
+    )
     _helped_metric(cols[2], "Ramp Weeks", str(int(latest.get("week", 0) or 0)))
     _helped_metric(cols[3], "Reserved Cash", _format_currency(latest.get("cash_reserved")))
-    st.plotly_chart(_ramp_figure(run.ramp_plan), use_container_width=True)
+    st.plotly_chart(_ramp_figure(run.ramp_plan), width="stretch")
     _render_metric_dataframe(_display_metrics(run.ramp_plan), hide_index=True)
 
 
@@ -848,13 +842,21 @@ def _render_launch_snapshot_cards(run: LaunchReadinessRun, benchmark_name: str) 
             "label": "Bad-Start Rate",
             "answer": _format_percent(recommendation.get("bad_start_rate")),
             "detail": "Share of historical launch windows that lost money or had an early drawdown breach.",
-            "tone": "critical" if _safe_float(recommendation.get("bad_start_rate"), 0.0) >= 0.25 else "neutral",
+            "tone": (
+                "critical"
+                if _safe_float(recommendation.get("bad_start_rate"), 0.0) >= 0.25
+                else "neutral"
+            ),
         },
         {
             "label": "Beat Rate",
             "answer": _format_percent(recommendation.get("beat_rate")),
             "detail": "Share of sampled starts where the launch protocol beat the selected benchmark.",
-            "tone": "success" if _safe_float(recommendation.get("beat_rate"), 0.0) >= 0.60 else "warning",
+            "tone": (
+                "success"
+                if _safe_float(recommendation.get("beat_rate"), 0.0) >= 0.60
+                else "warning"
+            ),
         },
         {
             "label": "Benchmark",
@@ -1185,13 +1187,15 @@ def _launch_evidence(run: LaunchReadinessRun) -> dict[str, str]:
             "current risk to improve before launching."
         )
     return {
-        "against_answer": " | ".join(part for part in against_reasons if part) or "No single blocker",
+        "against_answer": " | ".join(part for part in against_reasons if part)
+        or "No single blocker",
         "against_detail": (
             "These are the reasons the entry gate is not giving a clean launch read."
             if against_reasons
             else "No major hard blocker was detected; use the support and ramp cards to decide whether this is ready or only a starter setup."
         ),
-        "support_answer": " | ".join(part for part in support_reasons if part) or "Candidate remains worth monitoring",
+        "support_answer": " | ".join(part for part in support_reasons if part)
+        or "Candidate remains worth monitoring",
         "support_detail": "These are reasons to keep the strategy on deck instead of pruning it.",
         "next_answer": next_answer,
         "next_detail": next_detail,
@@ -1209,7 +1213,9 @@ def _diagnostic_detail(frame: pd.DataFrame, *, limit: int) -> str:
         return ""
     parts = []
     for _, row in frame.head(limit).iterrows():
-        parts.append(f"{row.get('read')}: {_format_diagnostic_value(row.get('metric'), row.get('value'))}")
+        parts.append(
+            f"{row.get('read')}: {_format_diagnostic_value(row.get('metric'), row.get('value'))}"
+        )
     return "; ".join(parts)
 
 

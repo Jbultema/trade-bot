@@ -29,6 +29,7 @@ from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.artifact_service import (
     cycle_tracker_frames,
     defensive_signal_audit_frames,
+    i111_evidence_frames,
     leadership_frames,
     pbo_frames,
     prebreak_hindsight_frames,
@@ -86,6 +87,8 @@ def render_research_page(runtime: DashboardRuntime) -> None:
             experiment_scorecards=scores,
             experiment_candidates=pd.DataFrame(),
             warehouse_path=str(runtime.paths.run_store_path),
+            include_defensive_judgement=False,
+            include_candidate_diagnostics=False,
         )
     elif selected_view == "Cycle Tracker":
         _render_cycle_tracker()
@@ -254,9 +257,7 @@ def _candidate_universe(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> p
     except (KeyError, ValueError, TypeError):
         pass
     if "research_status" in candidates:
-        active = candidates[
-            ~candidates["research_status"].astype(str).eq("pruned_dead_end")
-        ].copy()
+        active = candidates[~candidates["research_status"].astype(str).eq("pruned_dead_end")].copy()
         if not active.empty:
             candidates = active
     return candidates.reset_index(drop=True)
@@ -274,17 +275,58 @@ def _render_candidate_artifact_read(strategy_name: str) -> None:
         for frame in [selection, stats]:
             if not frame.empty and "strategy" in frame:
                 matches.append(frame[frame["strategy"].astype(str) == strategy_name])
-        combined = pd.concat([match for match in matches if not match.empty], ignore_index=True) if matches else pd.DataFrame()
+        combined = (
+            pd.concat([match for match in matches if not match.empty], ignore_index=True)
+            if matches
+            else pd.DataFrame()
+        )
         if combined.empty:
             st.info("This candidate is not present in the latest PBO artifact set.")
         else:
             _render_metric_dataframe(_display_metrics(combined))
+    if "i111" in strategy_name.lower():
+        evidence = i111_evidence_frames()
+        with st.expander("I111 evidence dossier", expanded=False):
+            matched = False
+            for label, key in (
+                ("Native metrics", "native_metrics"),
+                ("Adversarial robustness", "adversarial_robustness"),
+                ("QC headline", "qc_headline"),
+            ):
+                frame = evidence.get(key, pd.DataFrame())
+                if frame.empty:
+                    continue
+                name_column = next(
+                    (column for column in ("result_name", "strategy", "name") if column in frame),
+                    None,
+                )
+                selected = (
+                    frame[frame[name_column].astype(str).eq(strategy_name)]
+                    if name_column
+                    else pd.DataFrame()
+                )
+                if selected.empty:
+                    continue
+                matched = True
+                st.caption(label)
+                _render_metric_dataframe(_display_metrics(selected.head(10)))
+            smoothing = evidence.get("smoothing_gates", pd.DataFrame())
+            if (
+                strategy_name == "i111_native_risk_repair_guard17_relief85_ai85_div"
+                and not smoothing.empty
+            ):
+                matched = True
+                st.caption("Fixed-slate execution-smoothing challengers")
+                _render_metric_dataframe(_display_metrics(smoothing))
+            if not matched:
+                st.info("No strategy-specific V2.2/V2.3 evidence rows are persisted yet.")
 
 
 def _render_validation_artifacts() -> None:
     render_section_header("Validation Artifacts")
     pbo = pbo_frames()
     leadership = leadership_frames()
+    i111 = i111_evidence_frames()
     if not pbo["summary"].empty:
         render_section_header("PBO Summary")
         _render_metric_dataframe(_display_metrics(pbo["summary"]))
@@ -297,8 +339,75 @@ def _render_validation_artifacts() -> None:
     if not leadership["router"].empty:
         render_section_header("Router Comparison")
         _render_metric_dataframe(_display_metrics(leadership["router"].head(40)))
-    if all(frame.empty for frame in [*pbo.values(), *leadership.values()]):
+    if any(not frame.empty for frame in i111.values()):
+        render_section_header("I111 V2.2 / V2.3 Evidence Dossier")
+        render_callout(
+            "Readiness comes from persisted QC, adversarial, execution, PBO, and provenance evidence. Configuration presence alone does not imply paper or promotion readiness."
+        )
+        provenance_warning = _provenance_integrity_warning(i111.get("manifests", pd.DataFrame()))
+        if provenance_warning:
+            st.warning(provenance_warning)
+        for label, key in (
+            ("Fixed-slate smoothing gates", "smoothing_gates"),
+            ("Execution-hardening mechanisms", "execution_mechanisms"),
+            ("Adversarial gaps", "adversarial_gaps"),
+            ("Family smoothing PBO (15 strategies / 70 splits)", "smoothing_pbo"),
+            ("Artifact provenance", "manifests"),
+        ):
+            frame = i111.get(key, pd.DataFrame())
+            if frame.empty:
+                continue
+            st.caption(label)
+            _render_metric_dataframe(_display_metrics(frame.head(40)))
+    if all(frame.empty for frame in [*pbo.values(), *leadership.values(), *i111.values()]):
         st.info("No validation artifacts found yet.")
+
+
+def _provenance_integrity_warning(manifests: pd.DataFrame) -> str | None:
+    if manifests.empty:
+        return None
+    statuses = manifests.get(
+        "artifact_integrity_status",
+        pd.Series("unverified_no_hashes", index=manifests.index),
+    ).astype(str)
+    source_statuses = manifests.get(
+        "source_tree_status",
+        pd.Series("unavailable", index=manifests.index),
+    ).astype(str)
+    missing = int(
+        pd.to_numeric(
+            manifests.get("missing_artifact_count", pd.Series(0, index=manifests.index)),
+            errors="coerce",
+        )
+        .fillna(0)
+        .sum()
+    )
+    mismatched = int(
+        pd.to_numeric(
+            manifests.get("artifact_mismatch_count", pd.Series(0, index=manifests.index)),
+            errors="coerce",
+        )
+        .fillna(0)
+        .sum()
+    )
+    unverified_manifests = int(statuses.ne("verified").sum())
+    stale_manifests = int(source_statuses.eq("stale").sum())
+    if not any((missing, mismatched, unverified_manifests, stale_manifests)):
+        return None
+    parts = []
+    if missing:
+        parts.append(f"{missing} declared artifact(s) missing")
+    if mismatched:
+        parts.append(f"{mismatched} artifact hash/size mismatch(es)")
+    if unverified_manifests:
+        parts.append(f"{unverified_manifests} manifest(s) not fully hash-verified")
+    if stale_manifests:
+        parts.append(f"{stale_manifests} manifest(s) generated from a different source tree")
+    return (
+        "Provenance warning: "
+        + "; ".join(parts)
+        + ". Regenerate the affected study before treating its dossier as current evidence."
+    )
 
 
 def _render_cycle_tracker() -> None:
@@ -489,10 +598,14 @@ def _render_path_cycle_state(
     data = path_history.copy()
     data["as_of_date"] = pd.to_datetime(data["as_of_date"], errors="coerce")
     latest = data.sort_values("as_of_date").iloc[-1]
-    duration_days = pd.to_numeric(
-        pd.Series([latest.get("phase_duration_days", 0)]),
-        errors="coerce",
-    ).fillna(0).iloc[0]
+    duration_days = (
+        pd.to_numeric(
+            pd.Series([latest.get("phase_duration_days", 0)]),
+            errors="coerce",
+        )
+        .fillna(0)
+        .iloc[0]
+    )
     render_card_grid(
         [
             ("Path Phase", latest.get("path_phase", "n/a")),
@@ -560,7 +673,9 @@ def _render_path_phase_behavior_inspector(
     else:
         forecast["horizon_days"] = range(len(forecast))
     if "probability" in forecast:
-        forecast["probability"] = pd.to_numeric(forecast["probability"], errors="coerce").fillna(0.0)
+        forecast["probability"] = pd.to_numeric(forecast["probability"], errors="coerce").fillna(
+            0.0
+        )
     else:
         forecast["probability"] = 0.0
     horizon_order = (
@@ -635,7 +750,11 @@ def _render_path_phase_behavior_inspector(
     )
     summary = _phase_behavior_summary(validation_slice)
     top_ticker = (
-        str(frontier_slice.sort_values(["rank", "frontier_score"], ascending=[True, False]).iloc[0]["ticker"])
+        str(
+            frontier_slice.sort_values(["rank", "frontier_score"], ascending=[True, False]).iloc[0][
+                "ticker"
+            ]
+        )
         if not frontier_slice.empty and "ticker" in frontier_slice
         else "n/a"
     )
@@ -711,7 +830,9 @@ def _render_path_phase_behavior_inspector(
     elif not frontier_slice.empty:
         render_chart(
             _phase_winner_figure(
-                frontier_slice.sort_values(["rank", "frontier_score"], ascending=[True, False]).head(8)
+                frontier_slice.sort_values(
+                    ["rank", "frontier_score"], ascending=[True, False]
+                ).head(8)
             ),
             title="Historical Analog Winner Frontier",
             help_text=(
@@ -743,7 +864,9 @@ def _render_path_phase_behavior_inspector(
                 ]
                 if column in validation_slice
             ]
-            _render_metric_dataframe(_display_metrics(validation_slice[validation_columns].head(40)))
+            _render_metric_dataframe(
+                _display_metrics(validation_slice[validation_columns].head(40))
+            )
         if not frontier_slice.empty:
             st.caption(
                 "Historical analog winner frontier for the selected phase and horizon, with current-cycle robustness guards."
@@ -804,9 +927,7 @@ def _render_path_cycle_reliability(
         "Path Reliability",
         help_text=_path_reliability_intro_text(has_nowcast=bool(has_nowcast)),
     )
-    render_callout(
-        _path_reliability_callout_text(has_nowcast=bool(has_nowcast))
-    )
+    render_callout(_path_reliability_callout_text(has_nowcast=bool(has_nowcast)))
     selected_horizon = st.pills(
         "Path reliability horizon",
         horizon_order,
@@ -826,7 +947,14 @@ def _render_path_cycle_reliability(
         if not current.empty
         else selected.sort_values("origins", ascending=False).iloc[0]
     )
-    is_nowcast = int(pd.to_numeric(pd.Series([headline.get("horizon_days")]), errors="coerce").fillna(-1).iloc[0]) == 0
+    is_nowcast = (
+        int(
+            pd.to_numeric(pd.Series([headline.get("horizon_days")]), errors="coerce")
+            .fillna(-1)
+            .iloc[0]
+        )
+        == 0
+    )
     fit_help = (
         "For 0M, this is the share of historical origins where the path-constrained phase agreed with the raw evidence phase on the same date. It is a nowcast coherence check, not a forward prediction score."
         if is_nowcast
@@ -922,9 +1050,7 @@ def _path_reliability_chart_help_text(*, has_nowcast: bool) -> str:
             "For 0M, bars show same-date agreement between path-constrained state and raw evidence state. "
             "For 1M and longer, bars show historical hit rates for the phase's expected forward behavior."
         )
-    return (
-        "Bars show historical hit rates for the selected forward horizon and each path phase's expected behavior."
-    )
+    return "Bars show historical hit rates for the selected forward horizon and each path phase's expected behavior."
 
 
 def _render_cycle_reliability(reliability: pd.DataFrame, *, dominant_phase: str) -> None:
@@ -968,7 +1094,14 @@ def _render_cycle_reliability(reliability: pd.DataFrame, *, dominant_phase: str)
         if not current.empty
         else selected.sort_values("origins", ascending=False).iloc[0]
     )
-    is_nowcast = int(pd.to_numeric(pd.Series([headline.get("horizon_days")]), errors="coerce").fillna(-1).iloc[0]) == 0
+    is_nowcast = (
+        int(
+            pd.to_numeric(pd.Series([headline.get("horizon_days")]), errors="coerce")
+            .fillna(-1)
+            .iloc[0]
+        )
+        == 0
+    )
     fit_label = "Nowcast Confidence" if is_nowcast else "Fit Rate"
     fit_help = (
         "Median raw evidence probability assigned to this phase on historical 0M nowcast origins. No forward return is measured."
@@ -1075,7 +1208,9 @@ def _render_crisis_playback(
     selected_horizon = st.pills(
         "Playback horizon",
         horizon_options,
-        default="3m" if "3m" in horizon_options else (horizon_options[0] if horizon_options else None),
+        default=(
+            "3m" if "3m" in horizon_options else (horizon_options[0] if horizon_options else None)
+        ),
         selection_mode="single",
         key="dashboard_v2_cycle_crisis_horizon",
     )
@@ -1113,7 +1248,10 @@ def _render_crisis_playback(
             .reset_index()
             .sort_values(["stage_order", "origins"], ascending=[True, False])
         )
-        playback_metric = ("Avg Confidence", _fmt_pct(dominant["dominant_phase_probability"].mean()))
+        playback_metric = (
+            "Avg Confidence",
+            _fmt_pct(dominant["dominant_phase_probability"].mean()),
+        )
     else:
         stage_summary = (
             dominant.groupby(["stage_order", "stage", "dominant_phase"])
@@ -1209,6 +1347,7 @@ def _render_prebreak_hindsight_layers(
     if not current_readout.empty:
         _render_current_prebreak_monitor(current_readout, defensive_audit=defensive_audit)
     if not signal_panel.empty or not action_timing.empty:
+        render_section_header("Selected Crisis Trade-Bot Behavior")
         selected_event = _select_prebreak_event(
             selected_crisis=selected_crisis,
             signal_panel=signal_panel,
@@ -1431,7 +1570,6 @@ def _render_selected_prebreak_event_behavior(
     signal_panel: pd.DataFrame,
     action_timing: pd.DataFrame,
 ) -> None:
-    render_section_header("Selected Crisis Trade-Bot Behavior")
     event_rows = _prebreak_event_rows(signal_panel, selected_crisis=selected_crisis)
     timing = _prebreak_timing_row(action_timing, selected_crisis=selected_crisis)
     if event_rows.empty and timing.empty:
@@ -1582,25 +1720,29 @@ def _render_prebreak_margin_experiment(
                     "Missed Severe",
                     _fmt_pct(best.get("missed_severe_label_share_if_gated")),
                     "Share of severe hindsight labels before the gate that would be ignored.",
-                    "critical"
-                    if pd.to_numeric(
-                        pd.Series([best.get("missed_severe_label_share_if_gated")]),
-                        errors="coerce",
-                    ).iloc[0]
-                    > 0.25
-                    else "neutral",
+                    (
+                        "critical"
+                        if pd.to_numeric(
+                            pd.Series([best.get("missed_severe_label_share_if_gated")]),
+                            errors="coerce",
+                        ).iloc[0]
+                        > 0.25
+                        else "neutral"
+                    ),
                 ),
                 (
                     "Budget Lift",
                     _fmt_pct(best.get("mean_candidate_risk_budget_lift")),
                     "Average extra risk budget allowed before the hard-defense gate.",
-                    "success"
-                    if pd.to_numeric(
-                        pd.Series([best.get("mean_candidate_risk_budget_lift")]),
-                        errors="coerce",
-                    ).iloc[0]
-                    >= 0.10
-                    else "neutral",
+                    (
+                        "success"
+                        if pd.to_numeric(
+                            pd.Series([best.get("mean_candidate_risk_budget_lift")]),
+                            errors="coerce",
+                        ).iloc[0]
+                        >= 0.10
+                        else "neutral"
+                    ),
                 ),
             ]
         )
@@ -1657,9 +1799,7 @@ def _render_prebreak_margin_experiment(
             if "prebreak_stage" in display:
                 display["prebreak_stage"] = display["prebreak_stage"].map(_stage_label)
             if "hard_defense_source" in display:
-                display["hard_defense_source"] = display["hard_defense_source"].map(
-                    _stage_label
-                )
+                display["hard_defense_source"] = display["hard_defense_source"].map(_stage_label)
             _render_metric_dataframe(_display_metrics(display))
     if not selected_mesh.empty:
         mesh_columns = [
@@ -1721,9 +1861,7 @@ def _render_prebreak_signal_attribution(
         if column in data:
             data[column] = pd.to_numeric(data[column], errors="coerce")
     if not current_readout.empty and "signal" in current_readout:
-        current = current_readout[
-            ["signal", "current_risk_read", "historical_percentile"]
-        ].copy()
+        current = current_readout[["signal", "current_risk_read", "historical_percentile"]].copy()
         data = data.merge(current, on="signal", how="left")
     render_chart(
         _prebreak_signal_rank_figure(data.head(12)),
@@ -2345,7 +2483,11 @@ def _phase_outcome_profile_figure(frame: pd.DataFrame, *, phase: str) -> go.Figu
     )
     figure.add_hline(y=0, line_color="#7f8ea3", line_width=1)
     hit_rate = summary.get("hit_rate_vs_qqq")
-    title_suffix = f" | QQQ hit rate {_fmt_pct(hit_rate)}" if hit_rate is not None and not pd.isna(hit_rate) else ""
+    title_suffix = (
+        f" | QQQ hit rate {_fmt_pct(hit_rate)}"
+        if hit_rate is not None and not pd.isna(hit_rate)
+        else ""
+    )
     figure.update_layout(
         title_text=f"{phase.replace('_', ' ').title()} outcome profile{title_suffix}",
         yaxis_title="Median outcome",
@@ -2605,9 +2747,11 @@ def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
         row_heights=[0.68, 0.32],
         subplot_titles=(
             "Phase read at each historical origin",
-            "Nowcast confidence at each historical origin"
-            if is_nowcast
-            else f"What happened over the selected {horizon} horizon",
+            (
+                "Nowcast confidence at each historical origin"
+                if is_nowcast
+                else f"What happened over the selected {horizon} horizon"
+            ),
         ),
     )
     for phase in phase_order:
@@ -2744,9 +2888,7 @@ def _crisis_playback_figure(frame: pd.DataFrame) -> go.Figure:
         yaxis_tickformat=".0%",
         yaxis_title="Phase probability",
         yaxis2_tickformat=".0%",
-        yaxis2_title="Dominant phase confidence"
-        if is_nowcast
-        else f"{horizon} return / drawdown",
+        yaxis2_title="Dominant phase confidence" if is_nowcast else f"{horizon} return / drawdown",
         xaxis2_title="Historical origin date",
         legend_title_text="Series",
         shapes=shapes,
@@ -2814,12 +2956,14 @@ def _phase_frontier_figure(
             y_values.append(float(row["probability"].iloc[0]) if not row.empty else 0.0)
         phase_values[phase] = y_values
         line_widths = [
-            3
-            if selected_horizon
-            and selected_phase
-            and str(horizon) == str(selected_horizon)
-            and phase == selected_phase
-            else 0
+            (
+                3
+                if selected_horizon
+                and selected_phase
+                and str(horizon) == str(selected_horizon)
+                and phase == selected_phase
+                else 0
+            )
             for horizon in horizons
         ]
         figure.add_trace(
@@ -2830,10 +2974,7 @@ def _phase_frontier_figure(
                 marker_color=color_map.get(phase),
                 marker_line_color="#f8fafc",
                 marker_line_width=line_widths,
-                customdata=[
-                    [phase.replace("_", " ").title(), horizon]
-                    for horizon in horizons
-                ],
+                customdata=[[phase.replace("_", " ").title(), horizon] for horizon in horizons],
                 hovertemplate=(
                     "<b>%{customdata[0]}</b><br>"
                     "Horizon: %{customdata[1]}<br>"

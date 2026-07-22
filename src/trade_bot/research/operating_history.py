@@ -6,6 +6,7 @@ import numpy as np
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
+from trade_bot.config import AllocationPolicyConfig
 from trade_bot.portfolio.risk import PortfolioRiskConfig, PortfolioRiskRun, build_portfolio_risk
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.current_state import (
@@ -24,7 +25,19 @@ from trade_bot.research.future_scenarios import build_scenario_lattice
 from trade_bot.research.narrative_signals import build_narrative_signal_table
 from trade_bot.research.news_monitor import NewsMonitorRun
 from trade_bot.research.regime_instability import build_regime_instability_index
-from trade_bot.research.trade_decision import TradeDecisionRun
+from trade_bot.research.trade_decision import (
+    TradeDecisionRun,
+    _weights_with_defensive_residual,
+)
+from trade_bot.research.trade_decision import (
+    _risk_status_multiplier as _live_risk_status_multiplier,
+)
+from trade_bot.research.trade_decision import (
+    _scenario_adjusted_weights as _live_scenario_adjusted_weights,
+)
+from trade_bot.research.trade_decision import (
+    _scenario_context as _live_scenario_context,
+)
 
 DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY = (
     "i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145"
@@ -33,7 +46,8 @@ DEFAULT_OPERATING_HISTORY_SOURCE = "reconstructed_price_fast_point_in_time"
 DEFAULT_OPERATING_HISTORY_NOTE = (
     "Reconstructed by truncating local prices and strategy outputs at the history date. "
     "Current event/news overlays are intentionally excluded; macro history comes from live "
-    "snapshots, not this fast backfill."
+    "snapshots, not this fast backfill. Allocation authority matches the configured "
+    "calibration-gated policy."
 )
 
 
@@ -55,6 +69,7 @@ def reconstruct_operating_history(
     daily_tail_market_days: int = 30,
     min_history_days: int = 252,
     primary_strategy: str = DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
+    allocation_policy: AllocationPolicyConfig | None = None,
 ) -> OperatingHistoryFrames:
     """Reconstruct lightweight operating metric history without fabricating snapshots."""
 
@@ -79,6 +94,7 @@ def reconstruct_operating_history(
     driver_rotation_rows: list[dict[str, object]] = []
     event_risk = _empty_event_risk()
     news_monitor = _empty_news_monitor()
+    policy = allocation_policy or AllocationPolicyConfig()
 
     for history_date in dates:
         date_label = str(history_date.date())
@@ -94,6 +110,7 @@ def reconstruct_operating_history(
             primary_result=primary_result,
             current_state=current_state,
             prices=prices,
+            allocation_policy=policy,
         )
         portfolio_risk = trade_decision.portfolio_risk
         base = _base_fields(date_label)
@@ -236,14 +253,28 @@ def _build_fast_trade_decision(
     current_state: CurrentStateRun,
     prices: pd.DataFrame,
     defensive_ticker: str = "BIL",
+    allocation_policy: AllocationPolicyConfig | None = None,
 ) -> TradeDecisionRun:
-    base_weights = primary_result.weights.iloc[-1].astype(float)
-    scenario_context = _scenario_context(current_state.scenario_lattice)
-    risk_multiplier = _risk_status_multiplier(current_state.risk_status) * float(
-        scenario_context["risk_multiplier"]
+    policy = allocation_policy or AllocationPolicyConfig()
+    base_weights = _weights_with_defensive_residual(
+        primary_result.weights.iloc[-1].astype(float),
+        defensive_ticker=defensive_ticker,
+    )
+    scenario_context = _live_scenario_context(
+        current_state.scenario_lattice,
+        sizing_authority=policy.scenario_sizing_authority,
+    )
+    risk_multiplier = _quant_risk_multiplier(
+        current_state.risk_status,
+        float(scenario_context["risk_multiplier"]),
     )
     risk_multiplier = float(np.clip(risk_multiplier, 0.0, 1.0))
-    adjusted_weights = _scenario_adjusted_weights(
+    status_weights = _live_scenario_adjusted_weights(
+        base_weights,
+        risk_multiplier=_live_risk_status_multiplier(current_state.risk_status),
+        defensive_ticker=defensive_ticker,
+    )
+    adjusted_weights = _live_scenario_adjusted_weights(
         base_weights,
         risk_multiplier=risk_multiplier,
         defensive_ticker=defensive_ticker,
@@ -253,7 +284,13 @@ def _build_fast_trade_decision(
         adjusted_weights,
         current_state.scenario_lattice,
         current_weights=base_weights,
-        config=PortfolioRiskConfig(defensive_ticker=defensive_ticker),
+        config=PortfolioRiskConfig(
+            defensive_ticker=defensive_ticker,
+            base_max_expected_shortfall_95=policy.normal_tail_loss_limit,
+            base_max_stress_loss=policy.catastrophic_stress_loss_limit,
+            scenario_budget_authority=policy.scenario_budget_authority,
+            scenario_weighted_stress_authority=policy.scenario_weighted_stress_authority,
+        ),
     )
     portfolio_summary = _first_row(portfolio_risk.summary)
     correlation = _first_row(portfolio_risk.correlation_regime)
@@ -261,6 +298,37 @@ def _build_fast_trade_decision(
         portfolio_risk.risk_adjusted_weights
         if not portfolio_risk.risk_adjusted_weights.empty
         else adjusted_weights
+    )
+    base_defensive = float(base_weights.get(defensive_ticker, 0.0))
+    status_defensive = float(status_weights.get(defensive_ticker, 0.0))
+    quantitative_defensive = float(adjusted_weights.get(defensive_ticker, 0.0))
+    final_defensive = float(final_weights.get(defensive_ticker, 0.0))
+    attribution = pd.DataFrame(
+        [
+            {
+                "layer": "base_market_strategy",
+                "authority": 1.0,
+                "marginal_defensive_add_pp": 100.0 * base_defensive,
+            },
+            {
+                "layer": "quantitative_risk_status",
+                "authority": 1.0,
+                "marginal_defensive_add_pp": 100.0
+                * (status_defensive - base_defensive),
+            },
+            {
+                "layer": "scenario_probabilities",
+                "authority": policy.scenario_sizing_authority,
+                "marginal_defensive_add_pp": 100.0
+                * (quantitative_defensive - status_defensive),
+            },
+            {
+                "layer": "portfolio_absolute_risk",
+                "authority": 1.0,
+                "marginal_defensive_add_pp": 100.0
+                * (final_defensive - quantitative_defensive),
+            },
+        ]
     )
     summary = pd.DataFrame(
         [
@@ -280,6 +348,19 @@ def _build_fast_trade_decision(
                 "one_month_risk_off_probability": scenario_context[
                     "risk_off_probability"
                 ],
+                "base_defensive_weight": base_defensive,
+                "final_defensive_weight": final_defensive,
+                "quantitative_defensive_add_pp": 100.0
+                * (status_defensive - base_defensive),
+                "scenario_defensive_add_pp": 100.0
+                * (quantitative_defensive - status_defensive),
+                "portfolio_defensive_add_pp": 100.0
+                * (final_defensive - quantitative_defensive),
+                "scenario_sizing_authority": policy.scenario_sizing_authority,
+                "scenario_budget_authority": policy.scenario_budget_authority,
+                "scenario_weighted_stress_authority": (
+                    policy.scenario_weighted_stress_authority
+                ),
                 "portfolio_expected_shortfall_95": _safe_float(
                     portfolio_summary.get("post_expected_shortfall_95")
                 ),
@@ -300,35 +381,8 @@ def _build_fast_trade_decision(
         evidence=pd.DataFrame(),
         scenario_links=pd.DataFrame(),
         portfolio_risk=portfolio_risk,
+        attribution=attribution,
     )
-
-
-def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, float]:
-    if scenario_lattice.empty:
-        return {
-            "risk_multiplier": 1.0,
-            "risk_off_probability": 0.0,
-        }
-    one_month = scenario_lattice[scenario_lattice["horizon"] == "1m"].copy()
-    if one_month.empty:
-        one_month = scenario_lattice.copy()
-    risk_bucket = one_month["risk_bucket"].astype(str)
-    risk_off_probability = float(
-        one_month.loc[risk_bucket.str.contains("risk_off"), "probability"].sum()
-    )
-    transition_probability = float(
-        one_month.loc[risk_bucket == "transition", "probability"].sum()
-    )
-    fragile_probability = float(
-        one_month.loc[risk_bucket == "risk_on_fragile", "probability"].sum()
-    )
-    risk_multiplier = 1.0 - 0.55 * risk_off_probability
-    risk_multiplier -= 0.20 * transition_probability
-    risk_multiplier -= 0.15 * fragile_probability
-    return {
-        "risk_multiplier": float(np.clip(risk_multiplier, 0.40, 1.0)),
-        "risk_off_probability": risk_off_probability,
-    }
 
 
 def _risk_status_multiplier(risk_status: str) -> float:
@@ -340,27 +394,18 @@ def _risk_status_multiplier(risk_status: str) -> float:
     }.get(risk_status, 0.85)
 
 
-def _scenario_adjusted_weights(
-    base_weights: pd.Series,
-    *,
-    risk_multiplier: float,
-    defensive_ticker: str,
-) -> pd.Series:
-    adjusted = base_weights.copy().astype(float)
-    if defensive_ticker not in adjusted.index:
-        adjusted.loc[defensive_ticker] = 0.0
-    risk_assets = [ticker for ticker in adjusted.index if str(ticker) != defensive_ticker]
-    original_risk_weight = float(adjusted.loc[risk_assets].clip(lower=0.0).sum())
-    adjusted.loc[risk_assets] = adjusted.loc[risk_assets] * risk_multiplier
-    new_risk_weight = float(adjusted.loc[risk_assets].clip(lower=0.0).sum())
-    adjusted.loc[defensive_ticker] = adjusted.loc[defensive_ticker] + max(
-        0.0,
-        original_risk_weight - new_risk_weight,
+def _quant_risk_multiplier(risk_status: str, scenario_multiplier: float) -> float:
+    """Match the live decision engine's binding-constraint rule."""
+
+    return float(
+        np.clip(
+            min(_risk_status_multiplier(risk_status), scenario_multiplier),
+            0.0,
+            1.0,
+        )
     )
-    total = float(adjusted.clip(lower=0.0).sum())
-    if total > 1.0:
-        adjusted = adjusted / total
-    return adjusted.sort_values(ascending=False)
+
+
 
 
 def _risk_budget_multiplier_from_weights(
@@ -412,6 +457,26 @@ def _metric_fields(
             decision.get("one_month_risk_off_probability")
         ),
         "risk_budget_multiplier": _safe_float(decision.get("risk_budget_multiplier")),
+        "base_defensive_weight": _safe_float(decision.get("base_defensive_weight")),
+        "final_defensive_weight": _safe_float(decision.get("final_defensive_weight")),
+        "quantitative_defensive_add_pp": _safe_float(
+            decision.get("quantitative_defensive_add_pp")
+        ),
+        "scenario_defensive_add_pp": _safe_float(
+            decision.get("scenario_defensive_add_pp")
+        ),
+        "portfolio_defensive_add_pp": _safe_float(
+            decision.get("portfolio_defensive_add_pp")
+        ),
+        "scenario_sizing_authority": _safe_float(
+            decision.get("scenario_sizing_authority")
+        ),
+        "scenario_budget_authority": _safe_float(
+            decision.get("scenario_budget_authority")
+        ),
+        "scenario_weighted_stress_authority": _safe_float(
+            decision.get("scenario_weighted_stress_authority")
+        ),
         "portfolio_risk_multiplier": _coalesce_float(
             portfolio_summary.get("portfolio_risk_multiplier"),
             decision.get("portfolio_risk_multiplier"),

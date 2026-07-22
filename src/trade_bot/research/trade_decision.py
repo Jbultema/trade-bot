@@ -1,11 +1,12 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 
 import numpy as np
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
+from trade_bot.config import AllocationPolicyConfig
 from trade_bot.DEFAULTS import (
     DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS,
     DEFAULT_EVENT_CONFIRMATION_THEMES,
@@ -29,6 +30,8 @@ class TradeDecisionRun:
     evidence: pd.DataFrame
     scenario_links: pd.DataFrame
     portfolio_risk: PortfolioRiskRun | None = None
+    attribution: pd.DataFrame = field(default_factory=pd.DataFrame)
+    counterfactuals: pd.DataFrame = field(default_factory=pd.DataFrame)
 
 
 def build_trade_decision(
@@ -41,14 +44,32 @@ def build_trade_decision(
     prices: pd.DataFrame | None = None,
     defensive_ticker: str = "BIL",
     min_trade_weight: float = 0.02,
+    allocation_policy: AllocationPolicyConfig | None = None,
 ) -> TradeDecisionRun:
+    policy = allocation_policy or AllocationPolicyConfig(
+        scenario_sizing_authority=1.0,
+        scenario_budget_authority=1.0,
+        scenario_weighted_stress_authority=1.0,
+        event_sizing_authority=1.0,
+        scenario_calibration_status="validated",
+    )
     base_weights = _weights_with_defensive_residual(
         primary_result.weights.iloc[-1].astype(float),
         defensive_ticker=defensive_ticker,
     )
-    scenario_context = _scenario_context(current_state.scenario_lattice)
-    event_context = _event_context(event_risk.events)
-    macro_context = _macro_context(signal_inclusion.summary)
+    scenario_context = _scenario_context(
+        current_state.scenario_lattice,
+        sizing_authority=policy.scenario_sizing_authority,
+    )
+    event_context = _event_context(
+        event_risk.events,
+        as_of=current_state.market_date,
+        sizing_authority=policy.event_sizing_authority,
+    )
+    macro_context = _macro_context(
+        signal_inclusion.summary,
+        sizing_authority=policy.macro_sizing_authority,
+    )
 
     risk_multiplier = min(
         _risk_status_multiplier(current_state.risk_status),
@@ -67,6 +88,7 @@ def build_trade_decision(
         adjusted_weights=adjusted_weights,
         current_state=current_state,
         defensive_ticker=defensive_ticker,
+        allocation_policy=policy,
     )
     portfolio_risk_context = _portfolio_risk_context(portfolio_risk)
     if portfolio_risk is not None and not portfolio_risk.risk_adjusted_weights.empty:
@@ -143,6 +165,20 @@ def build_trade_decision(
                 "risk_budget_multiplier": total_risk_budget_multiplier,
                 "pre_sanity_risk_budget_multiplier": pre_sanity_risk_budget_multiplier,
                 "scenario_event_macro_multiplier": risk_multiplier,
+                "utility_profile": policy.utility_profile,
+                "scenario_calibration_status": policy.scenario_calibration_status,
+                "normal_tail_loss_limit": policy.normal_tail_loss_limit,
+                "catastrophic_stress_loss_limit": policy.catastrophic_stress_loss_limit,
+                "scenario_sizing_authority": policy.scenario_sizing_authority,
+                "scenario_budget_authority": policy.scenario_budget_authority,
+                "scenario_weighted_stress_authority": (
+                    policy.scenario_weighted_stress_authority
+                ),
+                "event_sizing_authority": policy.event_sizing_authority,
+                "raw_scenario_multiplier": scenario_context["raw_risk_multiplier"],
+                "effective_scenario_multiplier": scenario_context["risk_multiplier"],
+                "raw_event_pressure": event_context["raw_event_pressure"],
+                "effective_event_pressure": event_context["event_pressure"],
                 "portfolio_risk_multiplier": portfolio_risk_multiplier,
                 "decision_sanity_status": decision_sanity_context["status"],
                 "decision_sanity_signal": decision_sanity_context["signal"],
@@ -196,12 +232,37 @@ def build_trade_decision(
         news_monitor=news_monitor,
     )
     scenario_links = _scenario_links(current_state.scenario_lattice)
+    attribution = _decision_attribution(
+        base_weights=base_weights,
+        risk_status=current_state.risk_status,
+        scenario_context=scenario_context,
+        event_context=event_context,
+        macro_context=macro_context,
+        pre_sanity_final_weights=pre_sanity_final_weights,
+        final_weights=final_weights,
+        defensive_ticker=defensive_ticker,
+        policy=policy,
+    )
+    counterfactuals = _decision_counterfactuals(
+        prices=prices,
+        base_weights=base_weights,
+        final_weights=final_weights,
+        active_portfolio_risk=portfolio_risk,
+        current_state=current_state,
+        scenario_context=scenario_context,
+        event_context=event_context,
+        macro_context=macro_context,
+        defensive_ticker=defensive_ticker,
+        policy=policy,
+    )
     return TradeDecisionRun(
         summary=summary,
         position_plan=position_plan,
         evidence=evidence,
         scenario_links=scenario_links,
         portfolio_risk=portfolio_risk,
+        attribution=attribution,
+        counterfactuals=counterfactuals,
     )
 
 
@@ -221,10 +282,16 @@ def _weights_with_defensive_residual(
     return clean.sort_values(ascending=False)
 
 
-def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
+def _scenario_context(
+    scenario_lattice: pd.DataFrame,
+    *,
+    sizing_authority: float = 1.0,
+) -> dict[str, object]:
     if scenario_lattice.empty:
         return {
             "risk_multiplier": 1.0,
+            "raw_risk_multiplier": 1.0,
+            "sizing_authority": float(np.clip(sizing_authority, 0.0, 1.0)),
             "risk_off_probability": 0.0,
             "transition_probability": 0.0,
             "fragile_upside_probability": 0.0,
@@ -251,10 +318,12 @@ def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
     constructive_probability = float(
         np.clip(risk_on_probability + 0.50 * fragile_probability, 0.0, 1.0)
     )
-    risk_multiplier = 1.0 - 0.55 * risk_off_probability
-    risk_multiplier -= 0.20 * transition_probability
-    risk_multiplier -= 0.15 * fragile_probability
-    risk_multiplier = float(np.clip(risk_multiplier, 0.40, 1.0))
+    raw_risk_multiplier = 1.0 - 0.55 * risk_off_probability
+    raw_risk_multiplier -= 0.20 * transition_probability
+    raw_risk_multiplier -= 0.15 * fragile_probability
+    raw_risk_multiplier = float(np.clip(raw_risk_multiplier, 0.40, 1.0))
+    authority = float(np.clip(sizing_authority, 0.0, 1.0))
+    risk_multiplier = float(1.0 - authority * (1.0 - raw_risk_multiplier))
     top_scenarios = tuple(
         one_month.sort_values("rank")
         .head(3)[["scenario", "probability", "risk_bucket", "expected_bot_posture"]]
@@ -266,6 +335,8 @@ def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
     )
     return {
         "risk_multiplier": risk_multiplier,
+        "raw_risk_multiplier": raw_risk_multiplier,
+        "sizing_authority": authority,
         "risk_off_probability": risk_off_probability,
         "transition_probability": transition_probability,
         "fragile_upside_probability": fragile_probability,
@@ -276,24 +347,38 @@ def _scenario_context(scenario_lattice: pd.DataFrame) -> dict[str, object]:
     }
 
 
-def _event_context(events: tuple[MarketEvent, ...]) -> dict[str, object]:
+def _event_context(
+    events: tuple[MarketEvent, ...],
+    *,
+    as_of: str | pd.Timestamp | None = None,
+    sizing_authority: float = 1.0,
+) -> dict[str, object]:
     current_events = [event for event in events if event.current]
-    sizing_events = [event for event in current_events if event.sizing_authority]
-    escalation_events = [event for event in sizing_events if event.direction == "escalation"]
-    uncertain_events = [event for event in sizing_events if event.direction == "uncertain"]
-    leading_events = [event for event in escalation_events if event.phase == "leading_warning"]
-    event_pressure = min(
+    authority = {
+        event.event_id: _event_authority_multiplier(event, as_of=as_of)
+        for event in current_events
+    }
+    sizing_events = [
+        event
+        for event in current_events
+        if event.sizing_authority and authority[event.event_id] > 0
+    ]
+    raw_event_pressure = min(
         0.25,
-        0.07 * len(leading_events)
-        + 0.04 * (len(escalation_events) - len(leading_events))
-        + 0.02 * len(uncertain_events),
+        sum(
+            _event_pressure_contribution(event) * authority[event.event_id]
+            for event in sizing_events
+        ),
     )
+    sizing_authority = float(np.clip(sizing_authority, 0.0, 1.0))
+    event_pressure = raw_event_pressure * sizing_authority
     risk_multiplier = float(np.clip(1.0 - event_pressure, 0.75, 1.0))
     material_events = tuple(
         sorted(
             current_events,
             key=lambda event: (
                 not event.sizing_authority,
+                authority[event.event_id] <= 0,
                 event.direction != "escalation",
                 event.phase != "leading_warning",
                 event.date,
@@ -303,30 +388,103 @@ def _event_context(events: tuple[MarketEvent, ...]) -> dict[str, object]:
     evidence = "; ".join(
         (
             f"{event.name} ({event.category}, {event.direction}, {event.phase}, "
-            f"{'sizing' if event.sizing_authority else 'watch-only'})"
+            f"{_event_authority_label(event, authority[event.event_id])})"
         )
         for event in material_events
     )
     return {
         "risk_multiplier": risk_multiplier,
         "event_pressure": event_pressure,
+        "raw_event_pressure": raw_event_pressure,
+        "sizing_authority": sizing_authority,
         "current_event_count": len(current_events),
         "sizing_event_count": len(sizing_events),
         "watch_only_event_count": len(current_events) - len(sizing_events),
-        "escalation_event_count": len(escalation_events),
-        "leading_event_count": len(leading_events),
+        "expired_event_count": sum(
+            event.sizing_authority and authority[event.event_id] <= 0 for event in current_events
+        ),
+        "escalation_event_count": sum(
+            event.direction == "escalation" for event in sizing_events
+        ),
+        "leading_event_count": sum(
+            event.direction == "escalation" and event.phase == "leading_warning"
+            for event in sizing_events
+        ),
         "material_events": material_events,
         "evidence": evidence or "No current event pressure.",
     }
 
 
-def _macro_context(summary: pd.DataFrame) -> dict[str, object]:
+def _event_pressure_contribution(event: MarketEvent) -> float:
+    if event.direction == "uncertain":
+        return 0.02
+    if event.direction != "escalation":
+        return 0.0
+    return 0.07 if event.phase == "leading_warning" else 0.04
+
+
+def _event_authority_multiplier(
+    event: MarketEvent,
+    *,
+    as_of: str | pd.Timestamp | None,
+) -> float:
+    if not event.sizing_authority:
+        return 0.0
+    if as_of is None:
+        return 1.0
+    age_days = max(
+        (pd.Timestamp(as_of).normalize() - pd.Timestamp(event.date).normalize()).days,
+        0,
+    )
+    expires = event.expires_after_days
+    if expires is not None and age_days > expires:
+        return 0.0
+    decay_after = event.decay_after_days
+    if decay_after is None or age_days <= decay_after:
+        return 1.0
+    if expires is None or expires <= decay_after:
+        return 0.0
+    return float(np.clip((expires - age_days) / (expires - decay_after), 0.0, 1.0))
+
+
+def _event_authority_label(event: MarketEvent, multiplier: float) -> str:
+    if not event.sizing_authority:
+        return "watch-only"
+    if multiplier <= 0:
+        return "expired sizing signal"
+    if multiplier < 1:
+        return f"decayed sizing {multiplier:.0%}"
+    return "sizing"
+
+
+def _macro_context(
+    summary: pd.DataFrame,
+    *,
+    sizing_authority: float = 1.0,
+) -> dict[str, object]:
     if summary.empty:
         return {
             "risk_multiplier": 1.0,
             "macro_pressure": 0.0,
+            "raw_macro_pressure": 0.0,
+            "sizing_authority": float(np.clip(sizing_authority, 0.0, 1.0)),
             "paper_candidate_count": 0,
             "evidence": "No signal-inclusion results available.",
+        }
+    unavailable = summary[summary["decision"] == "not_evaluated_for_strategy"]
+    if not unavailable.empty:
+        return {
+            "risk_multiplier": 1.0,
+            "macro_pressure": 0.0,
+            "raw_macro_pressure": 0.0,
+            "sizing_authority": float(np.clip(sizing_authority, 0.0, 1.0)),
+            "paper_candidate_count": 0,
+            "evidence": str(
+                unavailable.iloc[0].get(
+                    "rationale",
+                    "Macro inclusion has no allocation authority for this strategy.",
+                )
+            ),
         }
     candidates = summary[summary["decision"] == "paper_candidate"].copy()
     if candidates.empty:
@@ -337,6 +495,8 @@ def _macro_context(summary: pd.DataFrame) -> dict[str, object]:
         return {
             "risk_multiplier": 1.0,
             "macro_pressure": 0.0,
+            "raw_macro_pressure": 0.0,
+            "sizing_authority": float(np.clip(sizing_authority, 0.0, 1.0)),
             "paper_candidate_count": 0,
             "evidence": (
                 "No macro category has allocation authority; "
@@ -344,11 +504,15 @@ def _macro_context(summary: pd.DataFrame) -> dict[str, object]:
             ),
         }
     active_candidates = candidates[candidates["latest_pressure_state"] == "risk_pressure"]
-    macro_pressure = min(0.15, 0.05 * len(active_candidates))
+    raw_macro_pressure = min(0.15, 0.05 * len(active_candidates))
+    sizing_authority = float(np.clip(sizing_authority, 0.0, 1.0))
+    macro_pressure = raw_macro_pressure * sizing_authority
     evidence = "; ".join(active_candidates["signal_group"].astype(str).head(3))
     return {
         "risk_multiplier": float(np.clip(1.0 - macro_pressure, 0.85, 1.0)),
         "macro_pressure": macro_pressure,
+        "raw_macro_pressure": raw_macro_pressure,
+        "sizing_authority": sizing_authority,
         "paper_candidate_count": int(len(candidates)),
         "evidence": evidence or "Paper-candidate macro signals are not currently pressuring risk.",
     }
@@ -418,6 +582,7 @@ def _build_portfolio_risk_if_available(
     adjusted_weights: pd.Series,
     current_state: CurrentStateRun,
     defensive_ticker: str,
+    allocation_policy: AllocationPolicyConfig,
 ) -> PortfolioRiskRun | None:
     if prices is None or prices.empty:
         return None
@@ -426,7 +591,15 @@ def _build_portfolio_risk_if_available(
         adjusted_weights,
         current_state.scenario_lattice,
         current_weights=base_weights,
-        config=PortfolioRiskConfig(defensive_ticker=defensive_ticker),
+        config=PortfolioRiskConfig(
+            defensive_ticker=defensive_ticker,
+            base_max_expected_shortfall_95=allocation_policy.normal_tail_loss_limit,
+            base_max_stress_loss=allocation_policy.catastrophic_stress_loss_limit,
+            scenario_budget_authority=allocation_policy.scenario_budget_authority,
+            scenario_weighted_stress_authority=(
+                allocation_policy.scenario_weighted_stress_authority
+            ),
+        ),
     )
 
 
@@ -495,10 +668,9 @@ def _add_decision_sanity_sizing_columns(position_plan: pd.DataFrame) -> pd.DataF
     ):
         return position_plan
     frame = position_plan.copy()
-    frame["decision_sanity_delta"] = (
-        pd.to_numeric(frame["scenario_adjusted_weight"], errors="coerce")
-        - pd.to_numeric(frame["risk_adjusted_weight"], errors="coerce")
-    )
+    frame["decision_sanity_delta"] = pd.to_numeric(
+        frame["scenario_adjusted_weight"], errors="coerce"
+    ) - pd.to_numeric(frame["risk_adjusted_weight"], errors="coerce")
     return frame
 
 
@@ -514,13 +686,12 @@ def _decision_sanity_context(
     risk_status = str(current_state.risk_status).lower()
     risk_off_probability = _as_float(scenario_context["risk_off_probability"])
     event_pressure = _as_float(event_context["event_pressure"])
-    left_tail_confirmed = risk_status in {"orange", "red"} or risk_off_probability >= 0.35
-    market_confirmed = break_count >= DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS
-    cap_eligible = (
-        event_pressure > 0
-        and not left_tail_confirmed
-        and not market_confirmed
+    scenario_has_authority = _as_float(scenario_context.get("sizing_authority", 0.0)) > 0
+    left_tail_confirmed = risk_status in {"orange", "red"} or (
+        scenario_has_authority and risk_off_probability >= 0.35
     )
+    market_confirmed = break_count >= DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS
+    cap_eligible = event_pressure > 0 and not left_tail_confirmed and not market_confirmed
 
     if market_confirmed:
         status = "market_confirmation_allows_derisk"
@@ -590,9 +761,7 @@ def _apply_decision_sanity_cap(
     )
     base_defensive = _weight_for_ticker(base, defensive_ticker)
     candidate_defensive = _weight_for_ticker(candidate, defensive_ticker)
-    max_defensive = float(
-        np.clip(base_defensive + DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD, 0.0, 1.0)
-    )
+    max_defensive = float(np.clip(base_defensive + DEFAULT_EVENT_ONLY_MAX_DEFENSIVE_ADD, 0.0, 1.0))
     context["max_defensive_weight"] = max_defensive
     context["pre_sanity_defensive_weight"] = candidate_defensive
     if candidate_defensive <= max_defensive + 1e-9:
@@ -673,8 +842,236 @@ def _risk_asset_weight_from_weights(weights: pd.Series, *, defensive_ticker: str
     if weights.empty:
         return 0.0
     clean = weights.astype(float).replace([np.inf, -np.inf], np.nan).fillna(0.0)
-    risk_assets = [ticker for ticker in clean.index if str(ticker).upper() != defensive_ticker.upper()]
+    risk_assets = [
+        ticker for ticker in clean.index if str(ticker).upper() != defensive_ticker.upper()
+    ]
     return float(clean.loc[risk_assets].clip(lower=0.0).sum())
+
+
+def _decision_attribution(
+    *,
+    base_weights: pd.Series,
+    risk_status: str,
+    scenario_context: dict[str, object],
+    event_context: dict[str, object],
+    macro_context: dict[str, object],
+    pre_sanity_final_weights: pd.Series,
+    final_weights: pd.Series,
+    defensive_ticker: str,
+    policy: AllocationPolicyConfig,
+) -> pd.DataFrame:
+    status_multiplier = _risk_status_multiplier(risk_status)
+    stage_multipliers = [
+        ("base_market_strategy", 1.0),
+        ("quantitative_risk_status", status_multiplier),
+        (
+            "scenario_probabilities",
+            min(status_multiplier, _as_float(scenario_context["risk_multiplier"])),
+        ),
+        (
+            "news_event_pressure",
+            min(
+                status_multiplier,
+                _as_float(scenario_context["risk_multiplier"]),
+                _as_float(event_context["risk_multiplier"]),
+            ),
+        ),
+        (
+            "macro_quantitative",
+            min(
+                status_multiplier,
+                _as_float(scenario_context["risk_multiplier"]),
+                _as_float(event_context["risk_multiplier"]),
+                _as_float(macro_context["risk_multiplier"]),
+            ),
+        ),
+    ]
+    authorities = {
+        "base_market_strategy": 1.0,
+        "quantitative_risk_status": 1.0,
+        "scenario_probabilities": policy.scenario_sizing_authority,
+        "news_event_pressure": policy.event_sizing_authority,
+        "macro_quantitative": policy.macro_sizing_authority,
+        "portfolio_absolute_risk": 1.0,
+        "decision_sanity": 1.0,
+    }
+    roles = {
+        "base_market_strategy": "allocation_authoritative",
+        "quantitative_risk_status": "allocation_authoritative",
+        "scenario_probabilities": (
+            "allocation_authoritative"
+            if policy.scenario_sizing_authority > 0
+            else "research_only"
+        ),
+        "news_event_pressure": (
+            "allocation_authoritative"
+            if policy.event_sizing_authority > 0
+            else "informational_only"
+        ),
+        "macro_quantitative": (
+            "allocation_authoritative"
+            if policy.macro_sizing_authority > 0
+            else "research_only"
+        ),
+        "portfolio_absolute_risk": "allocation_authoritative",
+        "decision_sanity": "governance_guardrail",
+    }
+    rows: list[dict[str, object]] = []
+    previous_defensive = 0.0
+    for layer, multiplier in stage_multipliers:
+        weights = (
+            base_weights
+            if layer == "base_market_strategy"
+            else _scenario_adjusted_weights(
+                base_weights,
+                risk_multiplier=multiplier,
+                defensive_ticker=defensive_ticker,
+            )
+        )
+        defensive = _weight_for_ticker(weights, defensive_ticker)
+        rows.append(
+            {
+                "layer": layer,
+                "role": roles[layer],
+                "authority": authorities[layer],
+                "defensive_weight": defensive,
+                "marginal_defensive_add": defensive - previous_defensive,
+                "effective_risk_multiplier": multiplier,
+            }
+        )
+        previous_defensive = defensive
+
+    for layer, weights in (
+        ("portfolio_absolute_risk", pre_sanity_final_weights),
+        ("decision_sanity", final_weights),
+    ):
+        defensive = _weight_for_ticker(weights, defensive_ticker)
+        rows.append(
+            {
+                "layer": layer,
+                "role": roles[layer],
+                "authority": authorities[layer],
+                "defensive_weight": defensive,
+                "marginal_defensive_add": defensive - previous_defensive,
+                "effective_risk_multiplier": _risk_budget_multiplier_from_weights(
+                    base_weights, weights, defensive_ticker=defensive_ticker
+                ),
+            }
+        )
+        previous_defensive = defensive
+    frame = pd.DataFrame(rows)
+    frame["marginal_defensive_add_pp"] = 100.0 * frame["marginal_defensive_add"]
+    return frame
+
+
+def _decision_counterfactuals(
+    *,
+    prices: pd.DataFrame | None,
+    base_weights: pd.Series,
+    final_weights: pd.Series,
+    active_portfolio_risk: PortfolioRiskRun | None,
+    current_state: CurrentStateRun,
+    scenario_context: dict[str, object],
+    event_context: dict[str, object],
+    macro_context: dict[str, object],
+    defensive_ticker: str,
+    policy: AllocationPolicyConfig,
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    base_portfolio_risk = _build_portfolio_risk_if_available(
+        prices=prices,
+        base_weights=base_weights,
+        adjusted_weights=base_weights,
+        current_state=current_state,
+        defensive_ticker=defensive_ticker,
+        allocation_policy=policy,
+    )
+    base_risk_summary = (
+        _first_row_or_empty(base_portfolio_risk.summary)
+        if base_portfolio_risk is not None
+        else {}
+    )
+    base_equity_beta = _as_float(base_risk_summary.get("pre_equity_beta", np.nan))
+    variants = (
+        ("active_policy", policy.event_sizing_authority, True),
+        ("news_disabled", 0.0, False),
+        ("news_informational_only", 0.0, True),
+        ("news_sizing_enabled_research", 1.0, True),
+    )
+    for name, event_authority, news_visible in variants:
+        variant_event_multiplier = float(
+            np.clip(
+                1.0 - event_authority * _as_float(event_context["raw_event_pressure"]),
+                0.75,
+                1.0,
+            )
+        )
+        combined_multiplier = min(
+            _risk_status_multiplier(current_state.risk_status),
+            _as_float(scenario_context["risk_multiplier"]),
+            variant_event_multiplier,
+            _as_float(macro_context["risk_multiplier"]),
+        )
+        pre_portfolio = _scenario_adjusted_weights(
+            base_weights,
+            risk_multiplier=combined_multiplier,
+            defensive_ticker=defensive_ticker,
+        )
+        if name == "active_policy":
+            variant_portfolio = active_portfolio_risk
+            variant_final = final_weights
+        else:
+            variant_portfolio = _build_portfolio_risk_if_available(
+                prices=prices,
+                base_weights=base_weights,
+                adjusted_weights=pre_portfolio,
+                current_state=current_state,
+                defensive_ticker=defensive_ticker,
+                allocation_policy=policy,
+            )
+            variant_final = (
+                variant_portfolio.risk_adjusted_weights
+                if variant_portfolio is not None
+                and not variant_portfolio.risk_adjusted_weights.empty
+                else pre_portfolio
+            )
+        risk_summary = (
+            _first_row_or_empty(variant_portfolio.summary)
+            if variant_portfolio is not None
+            else {}
+        )
+        post_beta = _as_float(risk_summary.get("post_equity_beta", np.nan))
+        rows.append(
+            {
+                "counterfactual": name,
+                "news_visible": news_visible,
+                "news_sizing_authority": event_authority,
+                "risk_score": current_state.risk_score,
+                "risk_budget_multiplier": _risk_budget_multiplier_from_weights(
+                    base_weights,
+                    variant_final,
+                    defensive_ticker=defensive_ticker,
+                ),
+                "scenario_risk_off_probability": scenario_context["risk_off_probability"],
+                "scenario_transition_probability": scenario_context["transition_probability"],
+                "combined_risk_multiplier": combined_multiplier,
+                "target_weights": _format_weight_vector(variant_final),
+                "target_defensive_weight": _weight_for_ticker(
+                    variant_final, defensive_ticker
+                ),
+                "equity_beta": post_beta,
+                "beta_adjusted_spy_delta": (
+                    post_beta - base_equity_beta
+                    if np.isfinite(post_beta) and np.isfinite(base_equity_beta)
+                    else np.nan
+                ),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _first_row_or_empty(frame: pd.DataFrame) -> dict[str, object]:
+    return {} if frame.empty else frame.iloc[0].to_dict()
 
 
 def _weight_for_ticker(weights: pd.Series, ticker: str) -> float:
@@ -711,7 +1108,9 @@ def _confirmation_row_is_negative(row: pd.Series) -> bool:
     state_text = " ".join(
         str(row.get(column, "")) for column in ("status", "state", "risk_state", "signal_state")
     ).lower()
-    if any(token in state_text for token in ("bearish", "risk_off", "risk-pressure", "risk_pressure")):
+    if any(
+        token in state_text for token in ("bearish", "risk_off", "risk-pressure", "risk_pressure")
+    ):
         return True
     score = _as_float(row.get("score", np.nan))
     return bool(np.isfinite(score) and score < 0)
@@ -944,10 +1343,24 @@ def _human_explanation(
         verb = "review adding risk toward"
     else:
         verb = "hold the current posture near"
+    authoritative_context = []
+    if _as_float(scenario_context.get("sizing_authority", 0.0)) > 0:
+        authoritative_context.append(f"scenario sizing is {top_scenarios}")
+    if _as_float(event_context.get("sizing_authority", 0.0)) > 0:
+        authoritative_context.append(f"event sizing evidence is {event_evidence}")
+    authority_clause = (
+        ", and " + "; ".join(authoritative_context) if authoritative_context else ""
+    )
+    research_clause = (
+        f" Scenario and event research remains visible but non-authoritative: {top_scenarios}; "
+        f"{event_evidence}"
+        if not authoritative_context
+        else ""
+    )
     return (
-        f"Because risk status is {current_state.risk_status.upper()} ({current_state.risk_score:.2f}), "
-        f"the one-month scenario mix is {top_scenarios}, and current event pressure is {event_evidence}, "
-        f"{verb} {adjusted_position}. Base systematic position is {base_position}. "
+        f"Because risk status is {current_state.risk_status.upper()} "
+        f"({current_state.risk_score:.2f}){authority_clause}, {verb} {adjusted_position}. "
+        f"Base systematic position is {base_position}.{research_clause} "
         f"Portfolio risk engine says: {portfolio_risk_evidence} "
         f"Macro inclusion tests say: {macro_evidence} "
         f"Decision sanity says: {decision_sanity_evidence} "
@@ -969,12 +1382,20 @@ def _decision_authority(
         "risk_reduced",
         "watch_correlation_shift",
     }:
-        return "scenario_event_risk_engine_review"
+        if (
+            _as_float(scenario_context.get("sizing_authority", 0.0)) > 0
+            or _as_float(event_context.get("sizing_authority", 0.0)) > 0
+        ):
+            return "scenario_event_risk_engine_review"
+        return "quantitative_portfolio_risk_review"
     if _as_float(macro_context["paper_candidate_count"]) > 0:
         return "scenario_plus_validated_macro_review"
     if (
         _as_float(event_context["event_pressure"]) > 0
-        or _as_float(scenario_context["risk_off_probability"]) > 0.20
+        or (
+            _as_float(scenario_context.get("sizing_authority", 0.0)) > 0
+            and _as_float(scenario_context["risk_off_probability"]) > 0.20
+        )
     ):
         return "scenario_event_review"
     return "systematic_hold"
@@ -1001,13 +1422,21 @@ def _evidence_table(
         {
             "evidence_type": "scenario_mix",
             "signal": "1m scenario probabilities",
-            "impact": "sizes scenario-adjusted risk budget",
+            "impact": (
+                "sizes risk budget"
+                if _as_float(scenario_context.get("sizing_authority", 0.0)) > 0
+                else "research-only; zero current sizing authority"
+            ),
             "detail": str(scenario_context["evidence"]),
         },
         {
             "evidence_type": "event_pressure",
             "signal": f"{event_context['current_event_count']} current events",
-            "impact": "can cap risk budget before price confirmation",
+            "impact": (
+                "can affect sizing subject to confirmation guardrail"
+                if _as_float(event_context.get("sizing_authority", 0.0)) > 0
+                else "informational-only; zero current sizing authority"
+            ),
             "detail": str(event_context["evidence"]),
         },
         {

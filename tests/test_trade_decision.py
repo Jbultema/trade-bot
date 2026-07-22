@@ -6,11 +6,47 @@ import pandas as pd
 import pytest
 
 from trade_bot.backtest.engine import BacktestResult
+from trade_bot.config import AllocationPolicyConfig
 from trade_bot.research.current_state import CurrentStateRun
 from trade_bot.research.event_risk import EventRiskRun, MarketEvent
 from trade_bot.research.news_monitor import NewsMonitorRun
 from trade_bot.research.signal_inclusion import SignalInclusionRun
 from trade_bot.research.trade_decision import _event_context, build_trade_decision
+
+
+def test_calibration_gated_policy_separates_research_from_allocation_authority() -> None:
+    index = pd.bdate_range("2026-06-01", periods=5)
+    weights = pd.DataFrame({"QQQ": 0.5, "IWM": 0.5}, index=index)
+    result = _backtest_result("primary", index, weights)
+
+    decision = build_trade_decision(
+        primary_result=result,
+        current_state=_current_state(),
+        event_risk=_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_signal_inclusion(),
+        allocation_policy=AllocationPolicyConfig(),
+    )
+
+    summary = decision.summary.iloc[0]
+    attribution = decision.attribution.set_index("layer")
+    counterfactuals = decision.counterfactuals.set_index("counterfactual")
+
+    assert summary["scenario_sizing_authority"] == 0.0
+    assert summary["event_sizing_authority"] == 0.0
+    assert attribution.loc["scenario_probabilities", "marginal_defensive_add_pp"] == 0.0
+    assert attribution.loc["news_event_pressure", "marginal_defensive_add_pp"] == 0.0
+    assert attribution["marginal_defensive_add"].sum() == pytest.approx(
+        summary["target_defensive_weight"]
+    )
+    assert (
+        counterfactuals.loc["active_policy", "target_defensive_weight"]
+        == counterfactuals.loc["news_informational_only", "target_defensive_weight"]
+    )
+    assert (
+        counterfactuals.loc["news_sizing_enabled_research", "target_defensive_weight"]
+        >= counterfactuals.loc["active_policy", "target_defensive_weight"]
+    )
 
 
 def test_trade_decision_reduces_risk_when_scenarios_and_events_are_adverse() -> None:
@@ -486,6 +522,30 @@ def test_watch_only_events_are_context_but_not_sizing_pressure() -> None:
     assert watch_context["risk_multiplier"] == 1.0
     assert "watch-only" in str(watch_context["evidence"])
     assert sizing_context["event_pressure"] == 0.07
+
+
+def test_event_sizing_authority_decays_and_expires() -> None:
+    event = MarketEvent(
+        event_id="dated_event",
+        name="Dated event",
+        date=pd.Timestamp("2026-06-01"),
+        category="ai_unit_economics",
+        direction="escalation",
+        description="test",
+        current=True,
+        phase="leading_warning",
+        decay_after_days=7,
+        expires_after_days=21,
+    )
+
+    fresh = _event_context((event,), as_of="2026-06-08")
+    decayed = _event_context((event,), as_of="2026-06-15")
+    expired = _event_context((event,), as_of="2026-06-23")
+
+    assert fresh["event_pressure"] == pytest.approx(0.07)
+    assert decayed["event_pressure"] == pytest.approx(0.035)
+    assert expired["event_pressure"] == 0.0
+    assert expired["expired_event_count"] == 1
 
 
 def _news_monitor() -> NewsMonitorRun:

@@ -162,7 +162,9 @@ def _render_risk_and_scenarios(
             f"{beta_delta:.1%}" if pd.notna(beta_delta) else "n/a",
             key="beta_adjusted_spy_delta",
         )
-        for column_index, sleeve in enumerate(["stocks", "defensive", "gold", "crypto", "credit"], start=1):
+        for column_index, sleeve in enumerate(
+            ["stocks", "defensive", "gold", "crypto", "credit"], start=1
+        ):
             sleeve_row = sleeve_exposure[sleeve_exposure["sleeve"].astype(str) == sleeve]
             percent_of_max = (
                 float(sleeve_row["percent_of_max_sleeve"].iloc[0])
@@ -271,7 +273,7 @@ def _render_risk_and_scenarios(
     )
 
     st.subheader("Risk Confirmation Matrix")
-    st.dataframe(current_state.confirmation_matrix, use_container_width=True)
+    st.dataframe(current_state.confirmation_matrix, width="stretch")
 
     st.subheader("Market Health")
     _render_metric_dataframe(_display_metrics(current_state.market_health))
@@ -284,7 +286,9 @@ def _render_risk_and_scenarios(
     )
     momentum_state_table = current_state.momentum_state.copy()
     if momentum_filter != "all":
-        momentum_state_table = momentum_state_table[momentum_state_table["momentum_state_label"] == momentum_filter]
+        momentum_state_table = momentum_state_table[
+            momentum_state_table["momentum_state_label"] == momentum_filter
+        ]
     _render_metric_dataframe(_display_metrics(momentum_state_table.head(75)))
 
 
@@ -305,13 +309,13 @@ def _render_scenario_probability_explanation(
     with chart_cols[0]:
         probability_figure = _scenario_probability_stack_figure(scenario_lattice)
         if probability_figure.data:
-            st.plotly_chart(probability_figure, use_container_width=True)
+            st.plotly_chart(probability_figure, width="stretch")
         else:
             st.write("No probability stack is available.")
     with chart_cols[1]:
         driver_figure = _scenario_driver_score_figure(scenario_drivers)
         if driver_figure.data:
-            st.plotly_chart(driver_figure, use_container_width=True)
+            st.plotly_chart(driver_figure, width="stretch")
         else:
             st.write("No driver-score chart is available.")
 
@@ -322,7 +326,7 @@ def _render_scenario_probability_explanation(
     with audit_cols[0]:
         heatmap = _scenario_probability_heatmap_figure(scenario_lattice)
         if heatmap.data:
-            st.plotly_chart(heatmap, use_container_width=True)
+            st.plotly_chart(heatmap, width="stretch")
     with audit_cols[1]:
         audit_frame = _scenario_horizon_differentiation_frame(scenario_lattice)
         if not audit_frame.empty:
@@ -358,7 +362,7 @@ def _render_regime_instability_history(
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
         else:
             st.info("No saved instability trend is available yet.")
     with cols[1]:
@@ -372,7 +376,7 @@ def _render_regime_instability_history(
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
         else:
             st.info("No saved instability component trend is available yet.")
 
@@ -407,7 +411,7 @@ def _render_portfolio_risk_history(
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
         else:
             st.info("No saved portfolio risk trend is available yet.")
     with cols[1]:
@@ -424,7 +428,7 @@ def _render_portfolio_risk_history(
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
         else:
             st.info("No saved beta or correlation trend is available yet.")
 
@@ -505,13 +509,13 @@ def _render_scenario_probability_history(
     with chart_cols[0]:
         bucket_figure = _scenario_bucket_history_figure(scoped_history)
         if bucket_figure.data:
-            st.plotly_chart(bucket_figure, use_container_width=True)
+            st.plotly_chart(bucket_figure, width="stretch")
         else:
             st.write("No risk-bucket history chart is available.")
     with chart_cols[1]:
         named_figure = _scenario_named_history_figure(scoped_history)
         if named_figure.data:
-            st.plotly_chart(named_figure, use_container_width=True)
+            st.plotly_chart(named_figure, width="stretch")
         else:
             st.write("No named-scenario history chart is available.")
 
@@ -850,7 +854,9 @@ def _scenario_bucket_history_pivot(history: pd.DataFrame) -> pd.DataFrame:
     return pivot[_ordered_buckets(pivot.columns)]
 
 
-def _largest_named_scenario_delta(history: pd.DataFrame, latest_time: object) -> dict[str, str] | None:
+def _largest_named_scenario_delta(
+    history: pd.DataFrame, latest_time: object
+) -> dict[str, str] | None:
     frame = history.copy()
     times = sorted(frame["history_time"].dropna().unique())
     if len(times) < 2:
@@ -941,7 +947,9 @@ def _scenario_horizon_differentiation_frame(scenario_lattice: pd.DataFrame) -> p
     pivot = pivot.reindex(columns=horizon_order, fill_value=0.0)
     result = pivot.reset_index()
     horizon_columns = [column for column in horizon_order if column in result.columns]
-    result["horizon_spread"] = result[horizon_columns].max(axis=1) - result[horizon_columns].min(axis=1)
+    result["horizon_spread"] = result[horizon_columns].max(axis=1) - result[horizon_columns].min(
+        axis=1
+    )
     result["highest_horizon"] = result[horizon_columns].idxmax(axis=1)
     result["lowest_horizon"] = result[horizon_columns].idxmin(axis=1)
     result["max_probability"] = result[horizon_columns].max(axis=1)
@@ -1016,9 +1024,7 @@ def _scenario_probability_heatmap_figure(scenario_lattice: pd.DataFrame) -> go.F
             zmin=0,
             zmax=max(float(pivot.max().max()), 0.01),
             colorbar={"title": "Probability", "tickformat": ".0%"},
-            hovertemplate=(
-                "<b>%{y}</b><br>Horizon: %{x}<br>Probability: %{z:.1%}<extra></extra>"
-            ),
+            hovertemplate=("<b>%{y}</b><br>Horizon: %{x}<br>Probability: %{z:.1%}<extra></extra>"),
         )
     )
     figure.update_layout(

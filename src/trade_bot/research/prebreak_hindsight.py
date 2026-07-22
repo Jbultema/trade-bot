@@ -181,6 +181,25 @@ def build_prebreak_snapshot_plan(
     )
 
 
+def deduplicate_prebreak_snapshot_plan(plan: pd.DataFrame) -> pd.DataFrame:
+    """Collapse overlapping event windows to one persisted snapshot per market date."""
+    if plan.empty or "market_date" not in plan:
+        return plan.copy()
+    rows: list[dict[str, object]] = []
+    for market_date, group in plan.groupby("market_date", sort=True, observed=True):
+        ordered = group.sort_values(["break_date", "event_name"]).copy()
+        canonical = ordered.iloc[-1].to_dict()
+        canonical["market_date"] = str(market_date)
+        canonical["event_name"] = " | ".join(dict.fromkeys(ordered["event_name"].astype(str)))
+        canonical["family"] = " | ".join(dict.fromkeys(ordered["family"].astype(str)))
+        canonical["break_date"] = " | ".join(dict.fromkeys(ordered["break_date"].astype(str)))
+        canonical["days_to_break"] = " | ".join(dict.fromkeys(ordered["days_to_break"].astype(str)))
+        canonical["postbreak_snapshot"] = bool(ordered["postbreak_snapshot"].any())
+        canonical["event_count"] = int(len(ordered))
+        rows.append(canonical)
+    return pd.DataFrame(rows).sort_values("market_date").reset_index(drop=True)
+
+
 def analyze_prebreak_hindsight(
     run_store: RunStore,
     *,
@@ -413,7 +432,9 @@ def snapshot_signal_row(
         "risk_score": _safe_float(getattr(current_state, "risk_score", np.nan)),
         "risk_status_score": _risk_status_score(str(getattr(current_state, "risk_status", ""))),
     }
-    trade_summary = _first_row(getattr(getattr(run, "trade_decision", None), "summary", pd.DataFrame()))
+    trade_summary = _first_row(
+        getattr(getattr(run, "trade_decision", None), "summary", pd.DataFrame())
+    )
     row["recommended_action"] = str(trade_summary.get("recommended_action", ""))
     row["risk_budget_multiplier"] = _safe_float(trade_summary.get("risk_budget_multiplier", np.nan))
     row["pre_sanity_risk_budget_multiplier"] = _safe_float(
@@ -453,9 +474,7 @@ def snapshot_signal_row(
     )
     row["opportunity_pressure"] = _safe_float(trade_summary.get("opportunity_pressure", np.nan))
     row["decision_sanity_status"] = str(trade_summary.get("decision_sanity_status", ""))
-    row["posture_calibration_status"] = str(
-        trade_summary.get("posture_calibration_status", "")
-    )
+    row["posture_calibration_status"] = str(trade_summary.get("posture_calibration_status", ""))
     row["portfolio_expected_shortfall_95"] = _safe_float(
         trade_summary.get("portfolio_expected_shortfall_95", np.nan)
     )
@@ -465,6 +484,10 @@ def snapshot_signal_row(
     row["portfolio_equity_beta"] = _safe_float(trade_summary.get("portfolio_equity_beta", np.nan))
     row["portfolio_ai_beta"] = _safe_float(trade_summary.get("portfolio_ai_beta", np.nan))
     row["portfolio_constraints"] = str(trade_summary.get("portfolio_constraints", ""))
+    _add_trade_attribution_metrics(
+        row,
+        getattr(getattr(run, "trade_decision", None), "attribution", pd.DataFrame()),
+    )
     row["defensive_action_flag"] = _defensive_action_flag(row)
     row["hard_defensive_action_flag"] = _hard_defensive_action_flag(row)
     row["action_severity_score"] = _action_severity_score(row)
@@ -494,8 +517,7 @@ def snapshot_signal_row(
     )
     _add_staged_risk_metadata(row)
     row["hindsight_action_aligned"] = bool(
-        _truthy_label(row.get("forward_break_label_3m"))
-        and row.get("defensive_action_flag", False)
+        _truthy_label(row.get("forward_break_label_3m")) and row.get("defensive_action_flag", False)
     )
     return row
 
@@ -968,7 +990,9 @@ def write_prebreak_hindsight_outputs(
         index=False,
     )
     result.policy_variant_results.to_csv(output_path / "policy_variant_results.csv", index=False)
-    result.current_signal_readout.to_csv(output_path / "current_best_signal_readout.csv", index=False)
+    result.current_signal_readout.to_csv(
+        output_path / "current_best_signal_readout.csv", index=False
+    )
     (output_path / "summary.md").write_text(result.summary, encoding="utf-8")
 
 
@@ -1014,7 +1038,9 @@ def build_prebreak_hindsight_summary(
     if action_timing.empty:
         lines.append("No event-window action timing rows were available.")
     else:
-        event_rows = action_timing[~action_timing["event_name"].astype(str).str.startswith("ALL_SEVERE_")]
+        event_rows = action_timing[
+            ~action_timing["event_name"].astype(str).str.startswith("ALL_SEVERE_")
+        ]
         for _, row in event_rows.head(10).iterrows():
             defensive_date = str(row.get("first_defensive_market_date", "")) or "none"
             defensive_days = row.get("first_defensive_days_before_break", np.nan)
@@ -1068,12 +1094,10 @@ def build_prebreak_hindsight_summary(
     else:
         attribution = hard_defense_attribution[
             hard_defense_attribution["event_name"].astype(str).eq("ALL_EVENTS")
-            & hard_defense_attribution["prebreak_stage"].astype(str).isin(
-                ["long_lead_context", "early_watch"]
-            )
-            & hard_defense_attribution["hard_defense_source"]
+            & hard_defense_attribution["prebreak_stage"]
             .astype(str)
-            .ne("not_hard_defensive")
+            .isin(["long_lead_context", "early_watch"])
+            & hard_defense_attribution["hard_defense_source"].astype(str).ne("not_hard_defensive")
         ].copy()
         attribution = attribution.sort_values(
             "source_share_of_stage_hard_defense",
@@ -1284,7 +1308,9 @@ def _staged_risk_summary_row(
         "median_days_to_break": _safe_float(days.median()),
         "target_staged_risk_budget_multiplier": target,
         "median_risk_budget_multiplier": _safe_float(risk_budget.median()),
-        "mean_candidate_risk_budget_lift": _candidate_lift_mean(data, pd.Series(True, index=data.index)),
+        "mean_candidate_risk_budget_lift": _candidate_lift_mean(
+            data, pd.Series(True, index=data.index)
+        ),
         "median_over_defensive_gap_to_stage_target": _safe_float(
             pd.to_numeric(data.get("over_defensive_gap_to_stage_target"), errors="coerce").median()
         ),
@@ -1297,7 +1323,9 @@ def _staged_risk_summary_row(
         ),
         "severe_label_share": float(_bool_label_series(data["forward_break_label_3m"]).mean()),
         "major_label_share": float(
-            _bool_label_series(data.get("forward_major_break_label_3m", pd.Series(index=data.index))).mean()
+            _bool_label_series(
+                data.get("forward_major_break_label_3m", pd.Series(index=data.index))
+            ).mean()
         ),
         "positive_forward_upside_share": float(
             (pd.to_numeric(data["forward_upside_proxy_3m"], errors="coerce") > 0).mean()
@@ -1330,9 +1358,7 @@ def _hard_defense_attribution_rows(event_name: str, group: pd.DataFrame) -> list
         hard_group = stage_group[_bool_flag_series(stage_group, "hard_defensive_action_flag")]
         if stage_group.empty:
             continue
-        source_hard = source_group[
-            _bool_flag_series(source_group, "hard_defensive_action_flag")
-        ]
+        source_hard = source_group[_bool_flag_series(source_group, "hard_defensive_action_flag")]
         rows.append(
             {
                 "event_name": event_name,
@@ -1380,6 +1406,29 @@ def _hard_defense_attribution_rows(event_name: str, group: pd.DataFrame) -> list
 def _hard_defense_source(row: pd.Series) -> str:
     if not bool(row.get("hard_defensive_action_flag", False)):
         return "not_hard_defensive"
+    attribution_sources = {
+        "quantitative_risk_status": "quantitative_risk_status",
+        "scenario_probabilities": "scenario_probabilities",
+        "news_event_pressure": "news_event_pressure",
+        "macro_quantitative": "macro_quantitative",
+        "portfolio_absolute_risk": "portfolio_absolute_risk",
+        "decision_sanity": "decision_sanity_guardrail",
+    }
+    marginal_adds = {
+        output: _safe_float(
+            row.get(f"attribution_{layer}_defensive_add_pp", np.nan),
+            0.0,
+        )
+        for layer, output in attribution_sources.items()
+    }
+    base_defensive = _safe_float(
+        row.get("attribution_base_market_strategy_defensive_weight", np.nan)
+    )
+    if pd.notna(base_defensive) and base_defensive >= 0.65:
+        return "base_strategy_already_defensive"
+    largest_source = max(marginal_adds, key=marginal_adds.get)
+    if marginal_adds[largest_source] > 1e-6:
+        return largest_source
     current_risk = _safe_float(row.get("current_risk_asset_weight", np.nan))
     target_risk = _safe_float(row.get("target_risk_asset_weight", np.nan))
     risk_budget = _safe_float(row.get("risk_budget_multiplier", np.nan))
@@ -1415,6 +1464,28 @@ def _hard_defense_source(row: pd.Series) -> str:
     ):
         return "risk_status_or_action"
     return "unknown"
+
+
+def _add_trade_attribution_metrics(
+    row: dict[str, object],
+    attribution: pd.DataFrame,
+) -> None:
+    required = {"layer", "defensive_weight", "marginal_defensive_add_pp"}
+    if attribution.empty or not required.issubset(attribution.columns):
+        return
+    for _, attribution_row in attribution.iterrows():
+        layer = _slug(str(attribution_row.get("layer", "")))
+        if not layer:
+            continue
+        row[f"attribution_{layer}_defensive_weight"] = _safe_float(
+            attribution_row.get("defensive_weight", np.nan)
+        )
+        row[f"attribution_{layer}_defensive_add_pp"] = _safe_float(
+            attribution_row.get("marginal_defensive_add_pp", np.nan)
+        )
+        row[f"attribution_{layer}_authority"] = _safe_float(
+            attribution_row.get("authority", np.nan)
+        )
 
 
 def _policy_variant_summary_row(
@@ -1586,6 +1657,8 @@ def _add_market_health_metrics(row: dict[str, object], frame: pd.DataFrame) -> N
         if ticker not in frame.index:
             continue
         for column in ("return_1m", "return_3m", "drawdown"):
+            if ticker == "VIXY" and column == "drawdown":
+                continue
             if column in frame:
                 row[f"health_{ticker.lower()}_{column}"] = _safe_float(frame.loc[ticker, column])
 
@@ -1597,12 +1670,8 @@ def _add_regime_instability_metrics(
 ) -> None:
     if not summary.empty:
         first = summary.iloc[0]
-        row["regime_instability_score"] = _safe_float(
-            first.get("regime_instability_score", np.nan)
-        )
-        row["spy_ytd_large_move_share"] = _safe_float(
-            first.get("spy_ytd_large_move_share", np.nan)
-        )
+        row["regime_instability_score"] = _safe_float(first.get("regime_instability_score", np.nan))
+        row["spy_ytd_large_move_share"] = _safe_float(first.get("spy_ytd_large_move_share", np.nan))
     if components.empty or not {"component", "component_score"}.issubset(components.columns):
         return
     for _, component_row in components.iterrows():
@@ -1873,7 +1942,9 @@ def _latest_date_per_week(
     return tuple(pd.DatetimeIndex(weekly).sort_values())
 
 
-def _normalize_dates(values: pd.DatetimeIndex | list[object] | tuple[object, ...]) -> pd.DatetimeIndex:
+def _normalize_dates(
+    values: pd.DatetimeIndex | list[object] | tuple[object, ...],
+) -> pd.DatetimeIndex:
     dates = pd.to_datetime(list(values), errors="coerce")
     dates = pd.DatetimeIndex(dates).dropna()
     if dates.empty:

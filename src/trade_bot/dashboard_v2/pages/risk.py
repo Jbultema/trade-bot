@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+from typing import Any
+
 import pandas as pd
 import streamlit as st
 
@@ -27,7 +29,10 @@ from trade_bot.dashboard_v2.components.tones import (
     sleeve_exposure_tone,
     stress_loss_tone,
 )
-from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
+from trade_bot.dashboard_v2.services.runtime import (
+    HISTORICAL_SNAPSHOT_NOTICE,
+    DashboardRuntime,
+)
 from trade_bot.research.operating_exposure import (
     aggregate_beta_adjusted_spy_delta,
     build_beta_adjusted_delta_table,
@@ -38,10 +43,29 @@ from trade_bot.research.operating_exposure import (
 
 
 def render_risk_page(runtime: DashboardRuntime) -> None:
+    if runtime.is_historical_snapshot_mode:
+        st.warning(HISTORICAL_SNAPSHOT_NOTICE)
+        st.caption(
+            "Risk is an operating surface tied to the current promoted book. Switch to Latest "
+            "snapshot or Live pipeline before interpreting exposure caps, stress loss, beta, "
+            "or scenario sizing as current."
+        )
+        return
+    operating_error = getattr(runtime, "operating_strategy_error", None)
+    if operating_error or runtime.operating_trade_decision is None:
+        st.error(
+            "Operating risk unavailable for promoted book "
+            f"'{runtime.promoted_book.book_name}': {operating_error or 'unknown resolution error'}"
+        )
+        st.caption(
+            "No promoted-book exposure or risk claim is shown because the named strategy "
+            "could not be resolved exactly and safely."
+        )
+        return
     current_state = runtime.baseline_run.current_state
     portfolio_risk = _portfolio_risk(runtime)
     risk_summary = _first_row(getattr(portfolio_risk, "summary", pd.DataFrame()))
-    current_weights = weights_from_position_plan(runtime.baseline_run.trade_decision.position_plan)
+    current_weights = weights_from_position_plan(runtime.operating_trade_decision.position_plan)
     sleeve_exposure = (
         build_sleeve_exposure_table(current_weights, runtime.baseline_run.prices)
         if not current_weights.empty
@@ -65,11 +89,26 @@ def render_risk_page(runtime: DashboardRuntime) -> None:
     render_card_grid(
         [
             ("Risk Level", risk_level, None, portfolio_risk_tone(risk_level)),
-            ("Risk Multiplier", _fmt_float(risk_multiplier), None, risk_budget_tone(risk_multiplier)),
+            (
+                "Risk Multiplier",
+                _fmt_float(risk_multiplier),
+                None,
+                risk_budget_tone(risk_multiplier),
+            ),
             ("ES 95", _fmt_pct(es95), None, expected_shortfall_tone(es95)),
             ("Max Stress Loss", _fmt_pct(max_stress_loss), None, stress_loss_tone(max_stress_loss)),
-            ("Equity Beta", _fmt_float(equity_beta), None, beta_tone(equity_beta, warning_at=0.75, critical_at=1.00)),
-            ("AI Beta", _fmt_float(ai_beta), None, beta_tone(ai_beta, warning_at=0.60, critical_at=0.90)),
+            (
+                "Equity Beta",
+                _fmt_float(equity_beta),
+                None,
+                beta_tone(equity_beta, warning_at=0.75, critical_at=1.00),
+            ),
+            (
+                "AI Beta",
+                _fmt_float(ai_beta),
+                None,
+                beta_tone(ai_beta, warning_at=0.60, critical_at=0.90),
+            ),
             ("Beta-Adjusted S&P Delta", _fmt_pct(beta_delta), None, beta_delta_tone(beta_delta)),
             (
                 "Defensive % of Max",
@@ -133,18 +172,20 @@ def _render_overview(
     beta_delta: float,
 ) -> None:
     render_section_header("Risk Operating Read")
-    scenario_lattice = getattr(runtime.baseline_run.current_state, "scenario_lattice", pd.DataFrame())
+    scenario_lattice = getattr(
+        runtime.baseline_run.current_state, "scenario_lattice", pd.DataFrame()
+    )
     top_scenario = _top_scenario_read(scenario_lattice)
     risk_level = _value(risk_summary, "portfolio_risk_level", "n/a")
     risk_multiplier = _fmt_float(_value(risk_summary, "portfolio_risk_multiplier"))
     defensive = _sleeve_percent(sleeve_exposure, "defensive")
     instability_state = str(_value(instability, "regime_instability_state", "n/a")).lower()
     render_callout(
-        
-            f"Current risk engine read is {risk_level} with risk multiplier {risk_multiplier}. "
-            f"Operating exposure is {defensive} defensive and beta-adjusted S&P delta is {_fmt_pct(beta_delta)}. "
-            f"Scenario pressure is led by {top_scenario}; instability is {instability_state}."
-        
+        f"Current risk engine read is {risk_level} with risk multiplier {risk_multiplier}. "
+        f"Operating exposure for promoted book '{runtime.promoted_book.book_name}' "
+        f"({runtime.promoted_book.strategy_name}) is {defensive} defensive and beta-adjusted "
+        f"S&P delta is {_fmt_pct(beta_delta)}. Scenario pressure is led by {top_scenario}; "
+        f"instability is {instability_state}."
     )
     _render_portfolio_risk_history(
         run_store_path=str(runtime.paths.run_store_path),
@@ -158,7 +199,7 @@ def _render_overview(
     )
 
 
-def _render_portfolio_risk(runtime: DashboardRuntime, portfolio_risk: object | None) -> None:
+def _render_portfolio_risk(runtime: DashboardRuntime, portfolio_risk: Any | None) -> None:
     render_section_header("Portfolio Risk Detail")
     if portfolio_risk is None or getattr(portfolio_risk, "summary", pd.DataFrame()).empty:
         st.info("No portfolio risk diagnostics are available.")
@@ -166,13 +207,16 @@ def _render_portfolio_risk(runtime: DashboardRuntime, portfolio_risk: object | N
     render_callout(
         "Use this view to see which guardrail changed target size: scenario stress, expected shortfall, factor beta, tail tests, or correlation."
     )
-    detail_view = st.pills(
-        "Portfolio risk detail",
-        ["Constraints", "Scenarios", "Factors / Betas", "Tail / Stress", "Correlation"],
-        default="Constraints",
-        selection_mode="single",
-        key="dashboard_v2_portfolio_risk_detail",
-    ) or "Constraints"
+    detail_view = (
+        st.pills(
+            "Portfolio risk detail",
+            ["Constraints", "Scenarios", "Factors / Betas", "Tail / Stress", "Correlation"],
+            default="Constraints",
+            selection_mode="single",
+            key="dashboard_v2_portfolio_risk_detail",
+        )
+        or "Constraints"
+    )
     if detail_view == "Constraints":
         _render_metric_dataframe(_display_metrics(portfolio_risk.summary))
         _render_metric_dataframe(_display_metrics(portfolio_risk.constraint_report))
@@ -197,6 +241,11 @@ def _render_operating_exposure(
     beta_delta: float,
 ) -> None:
     render_section_header("Operating Exposure")
+    render_callout(
+        f"Exposure is calculated from promoted book '{runtime.promoted_book.book_name}' "
+        f"and its resolved strategy target ({runtime.promoted_book.strategy_name}), not from "
+        "the configured default baseline when those differ."
+    )
     if current_weights.empty:
         st.info("No current target weights are available for exposure diagnostics.")
         return
@@ -208,25 +257,48 @@ def _render_operating_exposure(
     render_card_grid(
         [
             ("Beta-Adjusted S&P Delta", _fmt_pct(beta_delta), None, beta_delta_tone(beta_delta)),
-            ("Stocks % of Max", _fmt_pct(stocks_fraction), None, sleeve_exposure_tone("stocks", stocks_fraction)),
+            (
+                "Stocks % of Max",
+                _fmt_pct(stocks_fraction),
+                None,
+                sleeve_exposure_tone("stocks", stocks_fraction),
+            ),
             (
                 "Defensive % of Max",
                 _fmt_pct(defensive_fraction),
                 None,
                 sleeve_exposure_tone("defensive", defensive_fraction),
             ),
-            ("Gold % of Max", _fmt_pct(gold_fraction), None, sleeve_exposure_tone("gold", gold_fraction)),
-            ("Crypto % of Max", _fmt_pct(crypto_fraction), None, sleeve_exposure_tone("crypto", crypto_fraction)),
-            ("Credit % of Max", _fmt_pct(credit_fraction), None, sleeve_exposure_tone("credit", credit_fraction)),
+            (
+                "Gold % of Max",
+                _fmt_pct(gold_fraction),
+                None,
+                sleeve_exposure_tone("gold", gold_fraction),
+            ),
+            (
+                "Crypto % of Max",
+                _fmt_pct(crypto_fraction),
+                None,
+                sleeve_exposure_tone("crypto", crypto_fraction),
+            ),
+            (
+                "Credit % of Max",
+                _fmt_pct(credit_fraction),
+                None,
+                sleeve_exposure_tone("credit", credit_fraction),
+            ),
         ]
     )
-    exposure_view = st.pills(
-        "Exposure detail",
-        ["Sleeve Exposure", "Beta Delta", "Tactical Matrix"],
-        default="Sleeve Exposure",
-        selection_mode="single",
-        key="dashboard_v2_operating_exposure_detail",
-    ) or "Sleeve Exposure"
+    exposure_view = (
+        st.pills(
+            "Exposure detail",
+            ["Sleeve Exposure", "Beta Delta", "Tactical Matrix"],
+            default="Sleeve Exposure",
+            selection_mode="single",
+            key="dashboard_v2_operating_exposure_detail",
+        )
+        or "Sleeve Exposure"
+    )
     if exposure_view == "Sleeve Exposure":
         _render_metric_dataframe(_display_metrics(sleeve_exposure), hide_index=True)
     elif exposure_view == "Beta Delta":
@@ -347,7 +419,14 @@ def _render_confirmation(runtime: DashboardRuntime) -> None:
         _render_metric_dataframe(_display_metrics(confirmation))
     if not market_health.empty:
         render_section_header("Market Health")
-        _render_metric_dataframe(_display_metrics(market_health))
+        display_health = _market_health_for_display(market_health)
+        if "VIXY" in display_health.index:
+            render_callout(
+                "VIXY all-history drawdown is intentionally not reported. This short-term "
+                "VIX-futures proxy is evaluated through its 1-month/3-month returns and "
+                "momentum state instead."
+            )
+        _render_metric_dataframe(_display_metrics(display_health))
 
 
 def _render_momentum(runtime: DashboardRuntime) -> None:
@@ -367,8 +446,27 @@ def _render_momentum(runtime: DashboardRuntime) -> None:
     _render_metric_dataframe(_display_metrics(momentum.head(75)))
 
 
-def _portfolio_risk(runtime: DashboardRuntime) -> object | None:
-    return runtime.baseline_run.portfolio_risk or runtime.baseline_run.trade_decision.portfolio_risk
+def _portfolio_risk(runtime: DashboardRuntime) -> Any | None:
+    operating_decision = runtime.operating_trade_decision
+    return (
+        (operating_decision.portfolio_risk if operating_decision is not None else None)
+        or runtime.baseline_run.portfolio_risk
+        or runtime.baseline_run.trade_decision.portfolio_risk
+    )
+
+
+def _market_health_for_display(market_health: pd.DataFrame) -> pd.DataFrame:
+    """Normalize older snapshots to the current VIXY display contract."""
+
+    output = market_health.copy()
+    if "VIXY" not in output.index:
+        return output
+    if "drawdown" in output:
+        output.loc["VIXY", "drawdown"] = float("nan")
+    if "drawdown_basis" not in output:
+        output["drawdown_basis"] = "drawdown_from_available_history_peak"
+    output.loc["VIXY", "drawdown_basis"] = "not_applicable_short_term_volatility_proxy"
+    return output
 
 
 def _first_row(frame: pd.DataFrame) -> pd.Series:
@@ -383,7 +481,7 @@ def _value(row: pd.Series, column: str, default: object = float("nan")) -> objec
     return row.get(column, default)
 
 
-def _fmt_pct(value: object) -> str:
+def _fmt_pct(value: Any) -> str:
     try:
         number = float(value)
     except (TypeError, ValueError):
@@ -393,7 +491,7 @@ def _fmt_pct(value: object) -> str:
     return f"{number:.2%}"
 
 
-def _fmt_float(value: object) -> str:
+def _fmt_float(value: Any) -> str:
     try:
         number = float(value)
     except (TypeError, ValueError):
@@ -408,7 +506,11 @@ def _sleeve_percent(sleeve_exposure: pd.DataFrame, sleeve: str) -> str:
 
 
 def _sleeve_fraction(sleeve_exposure: pd.DataFrame, sleeve: str) -> float:
-    if sleeve_exposure.empty or "sleeve" not in sleeve_exposure or "percent_of_max_sleeve" not in sleeve_exposure:
+    if (
+        sleeve_exposure.empty
+        or "sleeve" not in sleeve_exposure
+        or "percent_of_max_sleeve" not in sleeve_exposure
+    ):
         return float("nan")
     row = sleeve_exposure[sleeve_exposure["sleeve"].astype(str) == sleeve]
     if row.empty:

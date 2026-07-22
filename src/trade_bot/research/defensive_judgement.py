@@ -8,6 +8,7 @@ from pathlib import Path
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
+from trade_bot.backtest.metrics import calculate_metrics
 
 
 @dataclass(frozen=True)
@@ -637,6 +638,7 @@ def write_defensive_judgement_report(
     output_dir: Path,
     strategy_names: Iterable[str] | None = None,
     benchmark_tickers: Iterable[str] = ("SPY", "QQQ"),
+    focus_strategy: str | None = None,
 ) -> dict[str, Path]:
     output_dir.mkdir(parents=True, exist_ok=True)
     selected_names = list(strategy_names) if strategy_names is not None else list(results)
@@ -668,17 +670,170 @@ def write_defensive_judgement_report(
             )
             scorecard["strategy"] = strategy_name
             scorecard_rows.append(scorecard)
+    days = _concat_or_empty(days_frames)
+    events = _concat_or_empty(event_frames)
+    summary = _concat_or_empty(summary_frames)
+    scorecards = pd.DataFrame(scorecard_rows)
+    focus = focus_strategy if focus_strategy in results else (selected_names[0] if selected_names else None)
+    exposures = _current_defensive_exposures(results, selected_names, focus_strategy=focus)
+    scenario_summary = _scenario_context_summary(events)
+    recent_focus = (
+        events[
+            events["strategy"].astype(str).eq(str(focus))
+            & pd.to_numeric(events["threshold"], errors="coerce").eq(0.65)
+            & events["horizon"].astype(str).eq("1m")
+        ]
+        .sort_values("date")
+        .tail(24)
+        if focus is not None and not events.empty
+        else pd.DataFrame()
+    )
     outputs = {
         "days": output_dir / "defensive_signal_days.csv",
         "events": output_dir / "defensive_episode_outcomes.csv",
         "summary": output_dir / "defensive_signal_summary.csv",
         "scorecards": output_dir / "defensive_signal_scorecards.csv",
+        "current_exposure": output_dir / "current_defensive_exposure.csv",
+        "scenario_context": output_dir / "defensive_signal_by_scenario_context.csv",
+        "recent_focus": output_dir / "focus_strategy_recent_65pct_1m_episodes.csv",
+        "readout": output_dir / "summary.md",
     }
-    _concat_or_empty(days_frames).to_csv(outputs["days"], index=False)
-    _concat_or_empty(event_frames).to_csv(outputs["events"], index=False)
-    _concat_or_empty(summary_frames).to_csv(outputs["summary"], index=False)
-    pd.DataFrame(scorecard_rows).to_csv(outputs["scorecards"], index=False)
+    days.to_csv(outputs["days"], index=False)
+    events.to_csv(outputs["events"], index=False)
+    summary.to_csv(outputs["summary"], index=False)
+    scorecards.to_csv(outputs["scorecards"], index=False)
+    exposures.to_csv(outputs["current_exposure"], index=False)
+    scenario_summary.to_csv(outputs["scenario_context"], index=False)
+    recent_focus.to_csv(outputs["recent_focus"], index=False)
+    outputs["readout"].write_text(
+        _defensive_judgement_markdown(
+            summary,
+            exposures,
+            focus_strategy=focus,
+            market_date=prices.index.max() if not prices.empty else None,
+        ),
+        encoding="utf-8",
+    )
     return outputs
+
+
+def _current_defensive_exposures(
+    results: dict[str, BacktestResult],
+    selected_names: list[str],
+    *,
+    focus_strategy: str | None,
+) -> pd.DataFrame:
+    rows: list[dict[str, object]] = []
+    ordered = sorted(selected_names, key=lambda name: (name != focus_strategy, name))
+    for name in ordered:
+        result = results.get(name)
+        if result is None or result.weights.empty:
+            continue
+        effective = effective_defensive_weight(result)
+        latest = result.weights.iloc[-1].astype(float)
+        explicit = float(latest.get("BIL", 0.0))
+        residual = max(0.0, 1.0 - float(latest.sum()))
+        metrics = calculate_metrics(
+            name=name,
+            returns=result.returns,
+            equity=result.equity,
+            turnover=result.turnover,
+            transaction_costs=result.transaction_costs,
+        )
+        defensive = float(effective.iloc[-1])
+        rows.append(
+            {
+                "strategy": name,
+                "cagr": metrics.cagr,
+                "max_drawdown": metrics.max_drawdown,
+                "current_defensive_weight": defensive,
+                "current_risk_weight": max(0.0, 1.0 - defensive),
+                "current_explicit_bil_weight": explicit,
+                "current_residual_cash_weight": residual,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _scenario_context_summary(events: pd.DataFrame) -> pd.DataFrame:
+    required = {"strategy", "benchmark_ticker", "threshold", "horizon", "scenario_context", "judgement"}
+    if events.empty or not required.issubset(events.columns):
+        return pd.DataFrame()
+    frame = events[events["judgement"].astype(str).ne("insufficient_forward_data")].copy()
+    if frame.empty:
+        return pd.DataFrame()
+    group_columns = ["strategy", "benchmark_ticker", "threshold", "horizon", "scenario_context"]
+    grouped = frame.groupby(group_columns, dropna=False, sort=False)
+    output = grouped.size().rename("episode_starts").reset_index()
+    for label, column in (("correct_defense", "correct_defense_rate"), ("false_alarm", "false_alarm_rate")):
+        rates = grouped["judgement"].apply(lambda values, expected=label: values.astype(str).eq(expected).mean())
+        output[column] = rates.to_numpy()
+    return output
+
+
+def _defensive_judgement_markdown(
+    summary: pd.DataFrame,
+    exposures: pd.DataFrame,
+    *,
+    focus_strategy: str | None,
+    market_date: object,
+) -> str:
+    lines = [
+        "# Defensive Signal False-Alarm Audit",
+        "",
+        f"Generated from the latest local snapshot through {pd.Timestamp(market_date).date() if market_date is not None else 'n/a'}.",
+        "",
+        "This is the strategy-native defense audit. It does not treat news or scenario probabilities as sizing inputs.",
+        "",
+    ]
+    exposure = exposures[exposures["strategy"].astype(str).eq(str(focus_strategy))]
+    if not exposure.empty:
+        row = exposure.iloc[0]
+        lines.extend(
+            [
+                "## Current Focus Strategy",
+                "",
+                f"- Strategy: `{focus_strategy}`",
+                f"- Current effective defensive weight: {float(row['current_defensive_weight']):.1%}",
+                f"- Current risk weight: {float(row['current_risk_weight']):.1%}",
+                "",
+            ]
+        )
+    focus_rows = summary[
+        summary["strategy"].astype(str).eq(str(focus_strategy))
+        & summary["benchmark_ticker"].astype(str).eq("SPY")
+        & pd.to_numeric(summary["threshold"], errors="coerce").eq(0.65)
+    ] if not summary.empty else pd.DataFrame()
+    lines.extend(["## Focus Strategy 65% Defensive Episode Read", ""])
+    if focus_rows.empty:
+        lines.append("No eligible completed episodes were available.")
+    else:
+        lines.extend(
+            [
+                "| Horizon | Episodes | Correct defense | False alarm | Mixed | Median forward SPY DD |",
+                "|---|---:|---:|---:|---:|---:|",
+            ]
+        )
+        order = {"1w": 0, "1m": 1, "3m": 2}
+        for _, row in focus_rows.sort_values("horizon", key=lambda values: values.map(order)).iterrows():
+            lines.append(
+                f"| {row['horizon']} | {int(row['episode_starts'])} | "
+                f"{float(row['correct_defense_rate']):.1%} | "
+                f"{float(row['false_alarm_rate']):.1%} | "
+                f"{float(row['mixed_rate']):.1%} | "
+                f"{float(row['median_benchmark_forward_max_drawdown']):.1%} |"
+            )
+    lines.extend(
+        [
+            "",
+            "## Caveats",
+            "",
+            "- Strategy-native defensive exposure is distinct from the final trade-decision overlay.",
+            "- Retrospective episode frequencies are not prospective probabilities.",
+            "- Scenario context is descriptive only and does not receive sizing authority.",
+        ]
+    )
+    return "\n".join(lines) + "\n"
 
 
 def _forward_return(series: pd.Series, position: int, days: int) -> float | pd.NA:

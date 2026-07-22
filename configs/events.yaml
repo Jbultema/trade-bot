@@ -115,6 +115,8 @@ events:
     category: ai_unit_economics
     direction: escalation
     current: true
+    decay_after_days: 7
+    expires_after_days: 21
     phase: leading_warning
     phase_reason: >
       Audited/private-company financial disclosure may precede full repricing across public
@@ -144,6 +146,8 @@ events:
     category: oil_chokepoint
     direction: deescalation
     current: true
+    decay_after_days: 7
+    expires_after_days: 21
     tags: [iran, hormuz, oil, ceasefire, policy_reversal_risk]
     source_url: "https://www.cfr.org/articles/is-a-u-s-iran-deal-within-reach-six-key-issues-that-could-shape-a-ceasefire"
     description: >
@@ -155,6 +159,8 @@ events:
     category: oil_chokepoint
     direction: uncertain
     current: true
+    decay_after_days: 7
+    expires_after_days: 21
     tags: [iran, hormuz, oil, sanctions, policy_reversal_risk]
     source_url: "https://www.theguardian.com/world/2026/jun/17/us-iran-deal-trump"
     description: >

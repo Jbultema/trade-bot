@@ -40,7 +40,6 @@ from trade_bot.research.narrative_signals import (
 )
 from trade_bot.research.operating_history import _build_fast_current_state
 
-
 _CURRENT_DRIVER_PLOT_LABEL = "Current snapshot"
 _CUSTOM_DRIVER_PLOT_LABEL = "Custom date"
 _MACRO_HISTORY_PRESETS: tuple[tuple[str, str], ...] = (
@@ -271,7 +270,9 @@ def _render_macro_driver_time_controls(
 
     historical_prices = _prices_as_of(prices, as_of_date)
     if len(historical_prices.dropna(how="all")) < 252:
-        st.warning("Historical reconstruction needs at least 252 trading days before the selected date.")
+        st.warning(
+            "Historical reconstruction needs at least 252 trading days before the selected date."
+        )
     historical_state = _build_fast_current_state(historical_prices)
     historical_narrative = build_narrative_signal_table(
         historical_prices,
@@ -400,7 +401,11 @@ def _render_visual_explorer(*, prices: pd.DataFrame, macro_data: pd.DataFrame) -
         )
 
     price_options = list(prices.columns.astype(str)) if not prices.empty else []
-    default_tickers = [ticker for ticker in ["SPY", "QQQ", "BIL", "VEA", "IWM", "GLD", "TLT"] if ticker in price_options]
+    default_tickers = [
+        ticker
+        for ticker in ["SPY", "QQQ", "BIL", "VEA", "IWM", "GLD", "TLT"]
+        if ticker in price_options
+    ]
     selected_tickers = st.multiselect(
         "Market tickers",
         price_options,
@@ -419,7 +424,9 @@ def _render_visual_explorer(*, prices: pd.DataFrame, macro_data: pd.DataFrame) -
     else:
         render_chart(price_figure)
 
-    numeric_macro = macro_data.select_dtypes(include="number") if not macro_data.empty else pd.DataFrame()
+    numeric_macro = (
+        macro_data.select_dtypes(include="number") if not macro_data.empty else pd.DataFrame()
+    )
     macro_options = list(numeric_macro.columns.astype(str))
     macro_defaults = macro_options[:5]
     macro_cols = st.columns([3, 1])
@@ -436,12 +443,18 @@ def _render_visual_explorer(*, prices: pd.DataFrame, macro_data: pd.DataFrame) -
         key="dashboard_v2_macro_scale",
     )
     macro_frame = _slice_time_range(
-        numeric_macro[selected_macro] if selected_macro and not numeric_macro.empty else pd.DataFrame(),
+        (
+            numeric_macro[selected_macro]
+            if selected_macro and not numeric_macro.empty
+            else pd.DataFrame()
+        ),
         range_choice,
         custom_start=custom_start,
         custom_end=custom_end,
     )
-    macro_figure = _macro_signal_figure(macro_frame, title="Selected Macro Signals", zscore=transform == "Z-score")
+    macro_figure = _macro_signal_figure(
+        macro_frame, title="Selected Macro Signals", zscore=transform == "Z-score"
+    )
     if macro_figure is None:
         st.info("No selected macro series are available.")
     else:
@@ -459,10 +472,8 @@ def _render_signal_drivers(
     current_state = runtime.baseline_run.current_state
     render_section_header("Signal Drivers")
     render_callout(
-        
-            f"{driver_summary['detail']} {narrative_summary['detail']} "
-            "Use this page to inspect whether pressure is broad, emerging, fading, or only explanatory."
-        
+        f"{driver_summary['detail']} {narrative_summary['detail']} "
+        "Use this page to inspect whether pressure is broad, emerging, fading, or only explanatory."
     )
     if not driver_rotation.empty:
         driver_cols = [
@@ -480,7 +491,9 @@ def _render_signal_drivers(
             "interpretation",
         ]
         _render_metric_dataframe(
-            _display_metrics(driver_rotation[[col for col in driver_cols if col in driver_rotation]]),
+            _display_metrics(
+                driver_rotation[[col for col in driver_cols if col in driver_rotation]]
+            ),
             hide_index=True,
         )
     else:
@@ -595,7 +608,9 @@ def _indexed_price_figure(frame: pd.DataFrame, *, title: str) -> go.Figure | Non
     if normalized.empty:
         return None
     normalized = normalized.ffill()
-    base = normalized.apply(lambda series: series.dropna().iloc[0] if not series.dropna().empty else pd.NA)
+    base = normalized.apply(
+        lambda series: series.dropna().iloc[0] if not series.dropna().empty else pd.NA
+    )
     indexed = normalized.divide(base.replace(0, pd.NA), axis=1) - 1.0
     fig = go.Figure()
     for column in indexed.columns:

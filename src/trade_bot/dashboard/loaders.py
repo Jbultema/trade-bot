@@ -2,6 +2,7 @@ from __future__ import annotations
 
 from pathlib import Path
 
+import duckdb
 import pandas as pd
 import streamlit as st
 
@@ -61,10 +62,13 @@ def load_snapshot_dashboard_run(
     artifact_dir_string: str,
     job_log_dir_string: str,
 ) -> tuple[BaselineRun, SnapshotManifest] | None:
+    if not Path(store_path_string).is_file():
+        return None
     run_store = RunStore(
         store_path_string,
         artifact_dir=artifact_dir_string,
         job_log_dir=job_log_dir_string,
+        read_only=True,
     )
     fingerprint = build_snapshot_fingerprint(
         config_path_string,
@@ -72,10 +76,13 @@ def load_snapshot_dashboard_run(
         macro_path_string,
         news_path_string,
     )
-    return run_store.load_latest_snapshot(
-        fingerprint=fingerprint,
-        require_matching_config=True,
-    )
+    try:
+        return run_store.load_latest_snapshot(
+            fingerprint=fingerprint,
+            require_matching_config=True,
+        )
+    except (OSError, duckdb.Error):
+        return None
 
 
 @st.cache_data(show_spinner=False, ttl=DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS)
@@ -84,13 +91,19 @@ def load_snapshot_dashboard_run_by_id(
     artifact_dir_string: str,
     job_log_dir_string: str,
     run_id: str,
-) -> tuple[BaselineRun, SnapshotManifest]:
+) -> tuple[BaselineRun, SnapshotManifest] | None:
+    if not Path(store_path_string).is_file():
+        return None
     run_store = RunStore(
         store_path_string,
         artifact_dir=artifact_dir_string,
         job_log_dir=job_log_dir_string,
+        read_only=True,
     )
-    return run_store.load_snapshot(run_id)
+    try:
+        return run_store.load_snapshot(run_id)
+    except (OSError, duckdb.Error):
+        return None
 
 
 @st.cache_data(show_spinner=False, ttl=DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS)
@@ -105,10 +118,13 @@ def load_previous_snapshot_dashboard_run(
     current_run_id: str | None = None,
     before_created_at_utc: str | None = None,
 ) -> tuple[BaselineRun, SnapshotManifest] | None:
+    if not Path(store_path_string).is_file():
+        return None
     run_store = RunStore(
         store_path_string,
         artifact_dir=artifact_dir_string,
         job_log_dir=job_log_dir_string,
+        read_only=True,
     )
     fingerprint = build_snapshot_fingerprint(
         config_path_string,
@@ -116,7 +132,10 @@ def load_previous_snapshot_dashboard_run(
         macro_path_string,
         news_path_string,
     )
-    snapshots = run_store.list_snapshots(limit=50)
+    try:
+        snapshots = run_store.list_snapshots(limit=50)
+    except (OSError, duckdb.Error):
+        return None
     if snapshots.empty or "combined_config_hash" not in snapshots:
         return None
     snapshots = snapshots[snapshots["combined_config_hash"] == fingerprint.combined_hash]
@@ -126,7 +145,10 @@ def load_previous_snapshot_dashboard_run(
         snapshots = snapshots[snapshots["created_at_utc"].astype(str) < before_created_at_utc]
     if snapshots.empty:
         return None
-    return run_store.load_snapshot(str(snapshots.iloc[0]["run_id"]))
+    try:
+        return run_store.load_snapshot(str(snapshots.iloc[0]["run_id"]))
+    except (OSError, duckdb.Error):
+        return None
 
 
 @st.cache_data(show_spinner=False, ttl=DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS)
@@ -135,12 +157,18 @@ def load_snapshot_jobs_frame(
     artifact_dir_string: str,
     job_log_dir_string: str,
 ) -> pd.DataFrame:
+    if not Path(store_path_string).is_file():
+        return pd.DataFrame()
     run_store = RunStore(
         store_path_string,
         artifact_dir=artifact_dir_string,
         job_log_dir=job_log_dir_string,
+        read_only=True,
     )
-    return run_store.list_jobs(limit=8)
+    try:
+        return run_store.list_jobs(limit=8)
+    except (OSError, duckdb.Error):
+        return pd.DataFrame()
 
 
 @st.cache_data(show_spinner="Running backtests...")

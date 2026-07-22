@@ -61,7 +61,7 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
             _render_monitoring_candidates(reference_candidates)
         if not counts.empty:
             st.caption("Warehouse table counts")
-            st.dataframe(counts, use_container_width=True)
+            st.dataframe(counts, width="stretch")
         return
 
     latest_valuation_rows = (
@@ -123,7 +123,9 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
         "walk_forward_positive_rate",
         "left_tail_regime_return",
     ]
-    available_columns = [column for column in leaderboard_columns if column in display_frame.columns]
+    available_columns = [
+        column for column in leaderboard_columns if column in display_frame.columns
+    ]
     _render_metric_dataframe(_display_metrics(display_frame[available_columns]))
     _render_monitoring_forward_trends(str(warehouse_path), display_frame)
 
@@ -153,7 +155,7 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
         ]
         st.dataframe(
             windows[[column for column in window_columns if column in windows.columns]],
-            use_container_width=True,
+            width="stretch",
         )
     with shortfall_tab:
         _render_shortfall_and_execution_audit(str(warehouse_path), display_frame)
@@ -186,9 +188,9 @@ def _render_monitoring(warehouse_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -
             registry_view = registry[
                 [column for column in registry_columns if column in registry.columns]
             ].rename(columns={"family": "category"})
-            st.dataframe(registry_view, use_container_width=True)
+            st.dataframe(registry_view, width="stretch")
     with warehouse_tab:
-        st.dataframe(counts, use_container_width=True)
+        st.dataframe(counts, width="stretch")
 
 
 def _render_shortfall_and_execution_audit(warehouse_path: str, frame: pd.DataFrame) -> None:
@@ -286,7 +288,7 @@ def _render_monitoring_forward_trends(warehouse_path: str, display_frame: pd.Dat
             height=300,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
     with cols[1]:
         figure = long_metric_line_figure(
             history,
@@ -299,7 +301,7 @@ def _render_monitoring_forward_trends(warehouse_path: str, display_frame: pd.Dat
             height=300,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
     cols = st.columns(2)
     with cols[0]:
         figure = long_metric_line_figure(
@@ -313,7 +315,7 @@ def _render_monitoring_forward_trends(warehouse_path: str, display_frame: pd.Dat
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
     with cols[1]:
         figure = long_metric_line_figure(
             history,
@@ -326,7 +328,7 @@ def _render_monitoring_forward_trends(warehouse_path: str, display_frame: pd.Dat
             height=280,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
 
 
 def _render_monitoring_trend_range_controls(
@@ -418,7 +420,9 @@ def _monitoring_display_frame(frame: pd.DataFrame, *, start_cohort: str) -> pd.D
             else pd.Series(pd.NaT, index=output.index)
         )
         fallback_end = pd.Timestamp(date.today())
-        elapsed_days = (valuation_dates.fillna(fallback_end) - start_dates.reindex(output.index)).dt.days
+        elapsed_days = (
+            valuation_dates.fillna(fallback_end) - start_dates.reindex(output.index)
+        ).dt.days
         output["monitoring_days"] = elapsed_days.where(elapsed_days >= 0)
     else:
         output["monitoring_days"] = pd.NA
@@ -469,7 +473,7 @@ def _render_monitoring_drift_envelope(frame: pd.DataFrame) -> None:
     _helped_metric(cols[1], "Watch", f"{int(status_counts.get('watch', 0)):,}")
     _helped_metric(cols[2], "Review", f"{int(status_counts.get('review', 0)):,}")
     _helped_metric(cols[3], "Breach", f"{int(status_counts.get('breach', 0)):,}")
-    st.plotly_chart(_monitoring_drift_envelope_figure(envelope), use_container_width=True)
+    st.plotly_chart(_monitoring_drift_envelope_figure(envelope), width="stretch")
     _render_metric_dataframe(_display_metrics(envelope), hide_index=True)
 
 
@@ -621,9 +625,13 @@ def _monitoring_envelope_status(envelope_used: float | None) -> str:
 def _monitoring_envelope_read(envelope_used: float | None) -> str:
     status = _monitoring_envelope_status(envelope_used)
     if status == "breach":
-        return "Forward drawdown has exceeded the historical max-drawdown envelope; review or pause."
+        return (
+            "Forward drawdown has exceeded the historical max-drawdown envelope; review or pause."
+        )
     if status == "review":
-        return "Forward drawdown is close to the historical envelope; inspect attribution and trades."
+        return (
+            "Forward drawdown is close to the historical envelope; inspect attribution and trades."
+        )
     if status == "watch":
         return "Forward drawdown is material but still within the tested envelope."
     if status == "inside":
@@ -706,7 +714,7 @@ def _render_monitoring_controls(
                         .to_frame("selected")
                         .T
                     )
-                    st.dataframe(_display_metrics(selected_summary), use_container_width=True)
+                    st.dataframe(_display_metrics(selected_summary), width="stretch")
 
                     cols = st.columns(5)
                     role = cols[0].selectbox(
@@ -964,7 +972,9 @@ def _render_monitoring_candidates(top_candidates: pd.DataFrame) -> None:
 def _monitoring_takeaway(frame: pd.DataFrame, *, start_cohort: str = "All starts") -> str:
     cohort = "" if start_cohort == "All starts" else f" for the {start_cohort} start cohort"
     if frame.empty:
-        return f"Monitoring windows exist, but no champion/challenger rows are available{cohort} yet."
+        return (
+            f"Monitoring windows exist, but no champion/challenger rows are available{cohort} yet."
+        )
     valued = frame[frame.get("valuation_date", pd.Series(dtype=object)).notna()]
     if valued.empty:
         return (

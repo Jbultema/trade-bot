@@ -8,7 +8,14 @@ import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
 from trade_bot.backtest.metrics import PerformanceMetrics, calculate_metrics
-from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig
+from trade_bot.config import (
+    BotConfig,
+    ExecutionConfig,
+    StrategyConfig,
+    required_strategy_tickers,
+)
+from trade_bot.features.indicators import unusable_required_price_columns
+from trade_bot.research.artifact_provenance import write_research_manifest
 from trade_bot.strategies.momentum import build_strategy_weights
 
 DEFAULT_QC_STRATEGY = "i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145"
@@ -53,7 +60,9 @@ def run_backtest_qc_gauntlet(
     headline = pd.DataFrame([_metrics_row("base", base_metrics)])
     benchmark_metrics = _benchmark_metrics(prices, benchmark_tickers, config.execution)
     data_coverage = _data_coverage(prices, strategy, benchmark_tickers)
-    causality = _future_perturbation_check(strategy_name, strategy, strategy_prices, config.execution)
+    causality = _future_perturbation_check(
+        strategy_name, strategy, strategy_prices, config.execution
+    )
     lag_stress = _lag_stress(strategy_name, strategy, strategy_prices, config.execution)
     cost_stress = _cost_stress(strategy_name, strategy, strategy_prices, config.execution)
     rebalance_stress = _rebalance_stress(strategy_name, strategy, strategy_prices, config.execution)
@@ -124,6 +133,18 @@ def run_backtest_qc_gauntlet(
     readout_path = output / "summary.md"
     readout_path.write_text(readout, encoding="utf-8")
     artifacts["summary"] = readout_path
+    manifest_path = write_research_manifest(
+        output,
+        study="backtest_qc_gauntlet",
+        config=config,
+        prices=prices,
+        parameters={
+            "strategy": strategy_name,
+            "benchmark_tickers": list(benchmark_tickers),
+        },
+        artifacts=[path.name for path in artifacts.values()],
+    )
+    artifacts["manifest"] = manifest_path
     return BacktestQCGauntlet(
         strategy_name=strategy_name,
         output_dir=output,
@@ -159,10 +180,10 @@ def _evaluate_strategy(
 
 
 def _strategy_prices(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
-    columns = list(dict.fromkeys([*strategy.tickers, *([strategy.defensive_ticker] if strategy.defensive_ticker else [])]))
-    missing = [ticker for ticker in columns if ticker not in prices.columns]
+    columns = required_strategy_tickers(strategy)
+    missing = unusable_required_price_columns(prices, columns)
     if missing:
-        raise KeyError(f"Missing price columns for strategy: {missing}")
+        raise KeyError(f"Missing, empty, or stale price columns for strategy: {missing}")
     frame = prices[columns].sort_index()
     valid_rows = frame.notna().any(axis=1)
     return frame.loc[valid_rows]
@@ -213,7 +234,7 @@ def _data_coverage(
     strategy: StrategyConfig,
     benchmark_tickers: tuple[str, ...],
 ) -> pd.DataFrame:
-    tickers = list(dict.fromkeys([*strategy.tickers, *([strategy.defensive_ticker] if strategy.defensive_ticker else []), *benchmark_tickers]))
+    tickers = list(dict.fromkeys([*required_strategy_tickers(strategy), *benchmark_tickers]))
     rows: list[dict[str, object]] = []
     for ticker in tickers:
         if ticker not in prices:
@@ -252,7 +273,9 @@ def _future_perturbation_check(
             path = anchor * (1.0 + 0.0005 * offset) ** np.arange(1, int(post_mask.sum()) + 1)
             perturbed.loc[post_mask, column] = path
     original_result, _ = _evaluate_strategy(strategy_name, strategy, prices, execution)
-    perturbed_result, _ = _evaluate_strategy(f"{strategy_name}_future_perturbed", strategy, perturbed, execution)
+    perturbed_result, _ = _evaluate_strategy(
+        f"{strategy_name}_future_perturbed", strategy, perturbed, execution
+    )
     pre = original_result.returns.index <= cutoff
     target_diff = _max_abs_frame_diff(
         original_result.target_weights.loc[pre],
@@ -262,7 +285,9 @@ def _future_perturbation_check(
         original_result.weights.loc[pre],
         perturbed_result.weights.loc[pre],
     )
-    return_diff = float((original_result.returns.loc[pre] - perturbed_result.returns.loc[pre]).abs().max())
+    return_diff = float(
+        (original_result.returns.loc[pre] - perturbed_result.returns.loc[pre]).abs().max()
+    )
     passed = target_diff <= 1e-12 and execution_diff <= 1e-12 and return_diff <= 1e-12
     return pd.DataFrame(
         [
@@ -286,7 +311,9 @@ def _causality_cutoff(index: pd.DatetimeIndex) -> pd.Timestamp:
 
 def _max_abs_frame_diff(left: pd.DataFrame, right: pd.DataFrame) -> float:
     columns = sorted(set(left.columns) | set(right.columns))
-    diff = left.reindex(columns=columns, fill_value=0.0) - right.reindex(columns=columns, fill_value=0.0)
+    diff = left.reindex(columns=columns, fill_value=0.0) - right.reindex(
+        columns=columns, fill_value=0.0
+    )
     if diff.empty:
         return 0.0
     return float(diff.abs().max().max())
@@ -357,21 +384,33 @@ def _universe_ablations(
     top_contributor = str(contributions.index[0]) if not contributions.empty else ""
     ablations = {
         "base": strategy.tickers,
-        f"no_top_contributor_{top_contributor}": [ticker for ticker in strategy.tickers if ticker != top_contributor],
+        f"no_top_contributor_{top_contributor}": [
+            ticker for ticker in strategy.tickers if ticker != top_contributor
+        ],
         "no_nvda": [ticker for ticker in strategy.tickers if ticker != "NVDA"],
-        "no_semiconductors": [ticker for ticker in strategy.tickers if ticker not in SEMICONDUCTOR_TICKERS],
+        "no_semiconductors": [
+            ticker for ticker in strategy.tickers if ticker not in SEMICONDUCTOR_TICKERS
+        ],
         "etf_only": [ticker for ticker in strategy.tickers if ticker in ETF_ONLY_TICKERS],
-        "no_post_2012_names": [ticker for ticker in strategy.tickers if ticker not in POST_2012_NAMES],
+        "no_post_2012_names": [
+            ticker for ticker in strategy.tickers if ticker not in POST_2012_NAMES
+        ],
     }
     rows: list[dict[str, object]] = []
     for label, tickers in ablations.items():
         tickers = list(dict.fromkeys(tickers))
         if len(tickers) < 2:
             continue
-        variant = strategy.model_copy(update={"tickers": tickers, "top_n": min(strategy.top_n, len(tickers))})
+        variant = strategy.model_copy(
+            update={"tickers": tickers, "top_n": min(strategy.top_n, len(tickers))}
+        )
         variant_prices = _strategy_prices(prices, variant)
-        _, metrics = _evaluate_strategy(f"{strategy_name}_{label}", variant, variant_prices, execution)
-        rows.append(_metrics_row(label, metrics, ticker_count=len(tickers), tickers=",".join(tickers)))
+        _, metrics = _evaluate_strategy(
+            f"{strategy_name}_{label}", variant, variant_prices, execution
+        )
+        rows.append(
+            _metrics_row(label, metrics, ticker_count=len(tickers), tickers=",".join(tickers))
+        )
     return pd.DataFrame(rows)
 
 
@@ -392,15 +431,23 @@ def _parameter_neighborhood(
                     )
                 }
             )
-            _, metrics = _evaluate_strategy(f"{strategy_name}_vol_{vol}", variant, prices, execution)
-            rows.append(_metrics_row(f"vol_{vol:.3f}", metrics, parameter="volatility_target", value=vol))
+            _, metrics = _evaluate_strategy(
+                f"{strategy_name}_vol_{vol}", variant, prices, execution
+            )
+            rows.append(
+                _metrics_row(f"vol_{vol:.3f}", metrics, parameter="volatility_target", value=vol)
+            )
     if strategy.drawdown_control is not None:
         guards = {-0.10, -0.12, float(strategy.drawdown_control.max_drawdown), -0.16, -0.18, -0.20}
         for guard in sorted(guards, reverse=True):
             drawdown_control = strategy.drawdown_control.model_copy(update={"max_drawdown": guard})
             variant = strategy.model_copy(update={"drawdown_control": drawdown_control})
-            _, metrics = _evaluate_strategy(f"{strategy_name}_guard_{guard}", variant, prices, execution)
-            rows.append(_metrics_row(f"guard_{guard:.3f}", metrics, parameter="drawdown_guard", value=guard))
+            _, metrics = _evaluate_strategy(
+                f"{strategy_name}_guard_{guard}", variant, prices, execution
+            )
+            rows.append(
+                _metrics_row(f"guard_{guard:.3f}", metrics, parameter="drawdown_guard", value=guard)
+            )
     for lookback in [42, int(strategy.lookback_days), 84, 126]:
         for min_return in [0.015, float(strategy.min_return), 0.035]:
             variant = strategy.model_copy(
@@ -461,7 +508,9 @@ def _period_metric_row(
     name: str,
     result: BacktestResult,
 ) -> dict[str, object] | None:
-    mask = (result.returns.index >= pd.Timestamp(start)) & (result.returns.index <= pd.Timestamp(end))
+    mask = (result.returns.index >= pd.Timestamp(start)) & (
+        result.returns.index <= pd.Timestamp(end)
+    )
     returns = result.returns.loc[mask]
     if returns.empty:
         return None
@@ -492,7 +541,9 @@ def _contribution_concentration(
                 "ticker": ticker,
                 "gross_return_contribution_sum": float(contribution),
                 "share_of_positive_contribution": (
-                    float(contribution / total_positive) if total_positive > 0 and contribution > 0 else 0.0
+                    float(contribution / total_positive)
+                    if total_positive > 0 and contribution > 0
+                    else 0.0
                 ),
                 "average_weight": float(average_weight.get(ticker, 0.0)),
                 "held_gt_1pct_share": float(held_share.get(ticker, 0.0)),
@@ -524,7 +575,11 @@ def _issue_flags(
         rows,
         "causality_future_perturbation",
         "pass" if bool(causality.iloc[0]["passed"]) else "fail",
-        "Future-price perturbation changed pre-cutoff targets/weights/returns." if not bool(causality.iloc[0]["passed"]) else "No future-price perturbation leakage detected.",
+        (
+            "Future-price perturbation changed pre-cutoff targets/weights/returns."
+            if not bool(causality.iloc[0]["passed"])
+            else "No future-price perturbation leakage detected."
+        ),
     )
     late_assets = data_coverage[data_coverage["starts_after_2012"].fillna(False)]
     _add_issue(
@@ -538,28 +593,52 @@ def _issue_flags(
         rows,
         "extra_execution_lag",
         "warning" if lag_2 is not None and float(lag_2["cagr"]) < base.cagr - 0.02 else "pass",
-        "CAGR decays by more than 2 percentage points under a two-day signal lag." if lag_2 is not None and float(lag_2["cagr"]) < base.cagr - 0.02 else "Two-day lag does not materially break the result.",
+        (
+            "CAGR decays by more than 2 percentage points under a two-day signal lag."
+            if lag_2 is not None and float(lag_2["cagr"]) < base.cagr - 0.02
+            else "Two-day lag does not materially break the result."
+        ),
     )
     cost_25 = _row_by_label(cost_stress, "cost_25_bps")
     _add_issue(
         rows,
         "high_cost_sensitivity",
         "warning" if cost_25 is not None and float(cost_25["cagr"]) < base.cagr - 0.04 else "pass",
-        "CAGR decays by more than 4 percentage points under 25 bps transaction costs." if cost_25 is not None and float(cost_25["cagr"]) < base.cagr - 0.04 else "25 bps transaction costs do not erase the result.",
+        (
+            "CAGR decays by more than 4 percentage points under 25 bps transaction costs."
+            if cost_25 is not None and float(cost_25["cagr"]) < base.cagr - 0.04
+            else "25 bps transaction costs do not erase the result."
+        ),
     )
     no_semis = _row_by_label(universe_ablations, "no_semiconductors")
     _add_issue(
         rows,
         "semiconductor_universe_dependence",
-        "warning" if no_semis is not None and float(no_semis["cagr"]) < base.cagr - 0.05 else "pass",
-        "Removing semiconductor/AI leaders reduces CAGR by more than 5 percentage points." if no_semis is not None and float(no_semis["cagr"]) < base.cagr - 0.05 else "No-semis universe ablation remains close to base.",
+        (
+            "warning"
+            if no_semis is not None and float(no_semis["cagr"]) < base.cagr - 0.05
+            else "pass"
+        ),
+        (
+            "Removing semiconductor/AI leaders reduces CAGR by more than 5 percentage points."
+            if no_semis is not None and float(no_semis["cagr"]) < base.cagr - 0.05
+            else "No-semis universe ablation remains close to base."
+        ),
     )
     top = concentration.iloc[0] if not concentration.empty else None
     _add_issue(
         rows,
         "top_contributor_concentration",
-        "warning" if top is not None and float(top["share_of_positive_contribution"]) >= 0.25 else "pass",
-        f"Top contributor {top['ticker']} accounts for {float(top['share_of_positive_contribution']):.1%} of positive gross contribution." if top is not None else "No concentration data.",
+        (
+            "warning"
+            if top is not None and float(top["share_of_positive_contribution"]) >= 0.25
+            else "pass"
+        ),
+        (
+            f"Top contributor {top['ticker']} accounts for {float(top['share_of_positive_contribution']):.1%} of positive gross contribution."
+            if top is not None
+            else "No concentration data."
+        ),
     )
     return pd.DataFrame(rows)
 
@@ -610,17 +689,37 @@ def _markdown_readout(
         f"- Issue flags: {fail_count} fail, {warning_count} warning.",
     ]
     if qqq is not None:
-        lines.append(f"- QQQ benchmark: CAGR {_pct(float(qqq['cagr']))}, max drawdown {_pct(float(qqq['max_drawdown']))}.")
+        lines.append(
+            f"- QQQ benchmark: CAGR {_pct(float(qqq['cagr']))}, max drawdown {_pct(float(qqq['max_drawdown']))}."
+        )
     if spy is not None:
-        lines.append(f"- SPY benchmark: CAGR {_pct(float(spy['cagr']))}, max drawdown {_pct(float(spy['max_drawdown']))}.")
+        lines.append(
+            f"- SPY benchmark: CAGR {_pct(float(spy['cagr']))}, max drawdown {_pct(float(spy['max_drawdown']))}."
+        )
     lines.extend(
         [
             "",
             "## Stress Read",
-            f"- Two-day signal lag: CAGR {_pct(float(lag_2['cagr']))}, max drawdown {_pct(float(lag_2['max_drawdown']))}." if lag_2 is not None else "- Two-day signal lag: unavailable.",
-            f"- 25 bps cost stress: CAGR {_pct(float(cost_25['cagr']))}, max drawdown {_pct(float(cost_25['max_drawdown']))}." if cost_25 is not None else "- 25 bps cost stress: unavailable.",
-            f"- No semiconductor/AI leader basket: CAGR {_pct(float(no_semis['cagr']))}, max drawdown {_pct(float(no_semis['max_drawdown']))}." if no_semis is not None else "- No semiconductor/AI leader basket: unavailable.",
-            f"- ETF-only basket: CAGR {_pct(float(etf_only['cagr']))}, max drawdown {_pct(float(etf_only['max_drawdown']))}." if etf_only is not None else "- ETF-only basket: unavailable.",
+            (
+                f"- Two-day signal lag: CAGR {_pct(float(lag_2['cagr']))}, max drawdown {_pct(float(lag_2['max_drawdown']))}."
+                if lag_2 is not None
+                else "- Two-day signal lag: unavailable."
+            ),
+            (
+                f"- 25 bps cost stress: CAGR {_pct(float(cost_25['cagr']))}, max drawdown {_pct(float(cost_25['max_drawdown']))}."
+                if cost_25 is not None
+                else "- 25 bps cost stress: unavailable."
+            ),
+            (
+                f"- No semiconductor/AI leader basket: CAGR {_pct(float(no_semis['cagr']))}, max drawdown {_pct(float(no_semis['max_drawdown']))}."
+                if no_semis is not None
+                else "- No semiconductor/AI leader basket: unavailable."
+            ),
+            (
+                f"- ETF-only basket: CAGR {_pct(float(etf_only['cagr']))}, max drawdown {_pct(float(etf_only['max_drawdown']))}."
+                if etf_only is not None
+                else "- ETF-only basket: unavailable."
+            ),
         ]
     )
     if top is not None:

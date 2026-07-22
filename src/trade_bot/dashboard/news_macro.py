@@ -118,7 +118,7 @@ def _render_news_and_macro(
     _helped_metric(coverage_cols[0], "Market Proxies", f"{baseline_run.prices.shape[1]:,}")
     _helped_metric(coverage_cols[1], "Macro Configured", f"{len(baseline_run.macro_catalog):,}")
     _helped_metric(coverage_cols[2], "Macro Loaded", f"{baseline_run.macro_data.shape[1]:,}")
-    st.dataframe(current_state.signal_coverage, use_container_width=True)
+    st.dataframe(current_state.signal_coverage, width="stretch")
 
     st.subheader("Regime Pulse / Growth-Inflation Map")
     if current_state.regime_pulse_cycles.empty:
@@ -214,7 +214,11 @@ def _render_news_and_macro(
     _helped_metric(
         driver_cols[0],
         "Normally Important",
-        f"{int(driver_rotation['normally_important'].sum()):,}" if not driver_rotation.empty else "0",
+        (
+            f"{int(driver_rotation['normally_important'].sum()):,}"
+            if not driver_rotation.empty
+            else "0"
+        ),
     )
     _helped_metric(
         driver_cols[1],
@@ -224,12 +228,20 @@ def _render_news_and_macro(
     _helped_metric(
         driver_cols[2],
         "Emerging",
-        f"{int(driver_rotation['emerging_importance'].sum()):,}" if not driver_rotation.empty else "0",
+        (
+            f"{int(driver_rotation['emerging_importance'].sum()):,}"
+            if not driver_rotation.empty
+            else "0"
+        ),
     )
     _helped_metric(
         driver_cols[3],
         "Fading",
-        f"{int(driver_rotation['fading_importance'].sum()):,}" if not driver_rotation.empty else "0",
+        (
+            f"{int(driver_rotation['fading_importance'].sum()):,}"
+            if not driver_rotation.empty
+            else "0"
+        ),
     )
     _helped_metric(driver_cols[4], "Driver Read", driver_summary["answer"])
     st.caption(
@@ -243,12 +255,12 @@ def _render_news_and_macro(
         with quadrant_tab:
             st.plotly_chart(
                 _driver_rotation_scatter_figure(driver_rotation),
-                use_container_width=True,
+                width="stretch",
             )
         with heatmap_tab:
             st.plotly_chart(
                 _driver_rotation_heatmap_figure(driver_rotation),
-                use_container_width=True,
+                width="stretch",
             )
         with table_tab:
             display_columns = [
@@ -348,7 +360,7 @@ def _render_news_and_macro(
         if news_monitor.source_health.empty:
             st.write("No news sources are configured.")
         else:
-            st.dataframe(news_monitor.source_health, use_container_width=True)
+            st.dataframe(news_monitor.source_health, width="stretch")
 
     if news_monitor.triage.empty:
         st.write("No recent news items were triaged.")
@@ -468,7 +480,7 @@ def _render_macro_driver_history(
             height=300,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
         else:
             st.info("No saved scenario-driver trend is available yet.")
     with cols[1]:
@@ -482,7 +494,7 @@ def _render_macro_driver_history(
             height=300,
         )
         if figure.data:
-            st.plotly_chart(figure, use_container_width=True)
+            st.plotly_chart(figure, width="stretch")
         else:
             st.info("No saved driver-rotation trend is available yet.")
 

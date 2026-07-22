@@ -17,6 +17,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_WEIGHTING,
 )
 from trade_bot.features.indicators import (
+    bounded_forward_fill,
     daily_returns,
     lookback_returns,
     moving_average,
@@ -73,6 +74,8 @@ def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd
             trend_filter_days=strategy.trend_filter_days,
             max_asset_weight=strategy.max_asset_weight,
         )
+    if strategy.type == "dual_momentum_risk_repair":
+        return dual_momentum_risk_repair_weights(prices, strategy)
     if strategy.type == "dip_reentry":
         return dip_reentry_weights(prices, strategy)
     if strategy.type == "dip_reentry_overlay":
@@ -244,6 +247,78 @@ def dual_momentum_weights(
     return weights
 
 
+def dual_momentum_risk_repair_weights(
+    prices: pd.DataFrame,
+    strategy: StrategyConfig,
+) -> pd.DataFrame:
+    """Dual momentum with native defensive relief and conditional AI stress caps."""
+    weights = dual_momentum_weights(
+        prices,
+        strategy.tickers,
+        lookback_days=strategy.lookback_days,
+        skip_days=strategy.skip_days,
+        top_n=strategy.top_n,
+        defensive_ticker=strategy.defensive_ticker,
+        min_return=strategy.min_return,
+        ranking_metric=strategy.ranking_metric,
+        weighting=strategy.weighting,
+        volatility_lookback_days=strategy.volatility_lookback_days,
+        trend_filter_days=strategy.trend_filter_days,
+        max_asset_weight=strategy.max_asset_weight,
+    )
+    risk_tickers = [ticker for ticker in strategy.tickers if ticker in weights.columns]
+    defensive_ticker = strategy.defensive_ticker
+    if not risk_tickers:
+        return weights
+
+    constructive_score = _risk_repair_constructive_score(prices, strategy)
+    ai_stress_score = _risk_repair_ai_stress_score(prices, strategy)
+    weights = _apply_risk_repair_defensive_relief(
+        prices,
+        weights,
+        risk_tickers=risk_tickers,
+        defensive_ticker=defensive_ticker,
+        constructive_score=constructive_score,
+        ai_stress_score=ai_stress_score,
+        floor=strategy.risk_repair_constructive_floor,
+        defensive_cap=strategy.risk_repair_defensive_cap,
+        release=strategy.risk_repair_defensive_release,
+        lookback_days=strategy.risk_repair_lookback_days,
+        top_n=strategy.top_n,
+        hard_stress_threshold=strategy.risk_repair_ai_hard_threshold,
+    )
+    weights = _apply_risk_repair_ai_cap(
+        prices,
+        weights,
+        ai_stress_score=ai_stress_score,
+        defensive_ticker=defensive_ticker,
+        soft_cap=strategy.risk_repair_ai_soft_cap,
+        hard_cap=strategy.risk_repair_ai_hard_cap,
+        soft_threshold=strategy.risk_repair_ai_soft_threshold,
+        hard_threshold=strategy.risk_repair_ai_hard_threshold,
+        cap_basis=strategy.risk_repair_ai_cap_basis,
+        excess_destination=strategy.risk_repair_ai_excess_destination,
+        diversifier_tickers=strategy.risk_repair_ai_diversifier_tickers,
+        lookback_days=strategy.risk_repair_lookback_days,
+    )
+    if strategy.max_asset_weight is not None:
+        weights = _cap_risk_weights(
+            weights,
+            risk_tickers=risk_tickers,
+            defensive_ticker=defensive_ticker,
+            max_asset_weight=strategy.max_asset_weight,
+        )
+    weights = _normalize_weight_rows(weights, defensive_ticker=defensive_ticker)
+    return _apply_weight_path_controls(
+        weights,
+        min_change=strategy.risk_repair_min_rebalance_change,
+        max_step_change=strategy.risk_repair_max_step_change,
+        min_hold_days=strategy.risk_repair_min_hold_days,
+        defensive_ticker=defensive_ticker,
+        risk_off_override_change=strategy.risk_repair_risk_off_override_change,
+    )
+
+
 def dip_reentry_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
     """Meter risk back in after large discounts only when repair signals confirm."""
     risk_tickers = [ticker for ticker in strategy.tickers if ticker != strategy.defensive_ticker]
@@ -253,7 +328,7 @@ def dip_reentry_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.Da
     if not risk_tickers:
         raise ValueError("dip_reentry strategies require at least one risk ticker.")
 
-    filled = prices.ffill().sort_index()
+    filled = bounded_forward_fill(prices).sort_index()
     risk_prices = filled[risk_tickers]
     asset_returns = daily_returns(risk_prices)
     basket_returns = asset_returns.mean(axis=1).fillna(0.0)
@@ -293,10 +368,14 @@ def dip_reentry_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.Da
         if strategy.dip_breadth_confirmation
         else pd.Series(1.0, index=filled.index)
     )
-    confirmation = pd.concat(
-        [recovery_score, short_repair_score, volatility_score, credit_score, breadth_score],
-        axis=1,
-    ).mean(axis=1).fillna(0.0)
+    confirmation = (
+        pd.concat(
+            [recovery_score, short_repair_score, volatility_score, credit_score, breadth_score],
+            axis=1,
+        )
+        .mean(axis=1)
+        .fillna(0.0)
+    )
 
     risk_budget = (
         strategy.dip_starter_weight * discount_score
@@ -436,7 +515,7 @@ def ai_risk_cycle_overlay_weights(prices: pd.DataFrame, strategy: StrategyConfig
     if not core_tickers:
         raise ValueError("ai_risk_cycle_overlay strategies require non-satellite core tickers.")
 
-    filled = prices.ffill().sort_index()
+    filled = bounded_forward_fill(prices).sort_index()
     _validate_tickers(filled, [*core_tickers, *satellite_tickers, strategy.defensive_ticker])
     base_weights = dual_momentum_weights(
         filled,
@@ -482,9 +561,13 @@ def ai_risk_cycle_overlay_weights(prices: pd.DataFrame, strategy: StrategyConfig
     reentry_risk = satellite_reentry[satellite_tickers].sum(axis=1).clip(lower=0.0, upper=1.0)
     risk_on_budget = strategy.cycle_satellite_risk_on_weight * momentum_risk * base_risk_weight
     reentry_budget = strategy.cycle_satellite_reentry_weight * reentry_risk * defensive_weight
-    satellite_budget = pd.concat([risk_on_budget, reentry_budget], axis=1).max(axis=1).clip(
-        lower=0.0,
-        upper=strategy.cycle_satellite_max_weight,
+    satellite_budget = (
+        pd.concat([risk_on_budget, reentry_budget], axis=1)
+        .max(axis=1)
+        .clip(
+            lower=0.0,
+            upper=strategy.cycle_satellite_max_weight,
+        )
     )
 
     momentum_mix = satellite_momentum[satellite_tickers].div(
@@ -508,9 +591,7 @@ def ai_risk_cycle_overlay_weights(prices: pd.DataFrame, strategy: StrategyConfig
         index=filled.index,
         columns=satellite_tickers,
     )
-    satellite_mix = satellite_mix.div(mix_sum.where(mix_sum > 0.0), axis=0).fillna(
-        equal_satellite
-    )
+    satellite_mix = satellite_mix.div(mix_sum.where(mix_sum > 0.0), axis=0).fillna(equal_satellite)
 
     weights = _empty_weights(filled)
     core_scale = (1.0 - satellite_budget).clip(lower=0.0, upper=1.0)
@@ -535,7 +616,6 @@ def ai_risk_cycle_overlay_weights(prices: pd.DataFrame, strategy: StrategyConfig
     )
 
 
-
 def sector_regime_rotation_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
     """Rotate across sectors/themes while a regime layer controls aggregate risk."""
     if strategy.defensive_ticker is None:
@@ -546,7 +626,7 @@ def sector_regime_rotation_weights(prices: pd.DataFrame, strategy: StrategyConfi
     if not investable_tickers:
         raise ValueError("sector_regime_rotation strategies require non-defensive tickers.")
 
-    filled = prices.ffill().sort_index()
+    filled = bounded_forward_fill(prices).sort_index()
     _validate_tickers(filled, [*investable_tickers, strategy.defensive_ticker])
     asset_prices = filled[investable_tickers]
     asset_returns = daily_returns(asset_prices)
@@ -565,10 +645,14 @@ def sector_regime_rotation_weights(prices: pd.DataFrame, strategy: StrategyConfi
         lower=0.0,
         upper=1.0,
     )
-    volatility_penalty = (volatility / strategy.dip_volatility_ceiling).clip(
-        lower=0.0,
-        upper=1.0,
-    ).fillna(0.5)
+    volatility_penalty = (
+        (volatility / strategy.dip_volatility_ceiling)
+        .clip(
+            lower=0.0,
+            upper=1.0,
+        )
+        .fillna(0.5)
+    )
 
     credit_score = relative_repair_score(filled, "HYG", "LQD", strategy.dip_recovery_days)
     breadth_score = relative_repair_score(filled, "RSP", "SPY", strategy.dip_recovery_days)
@@ -598,10 +682,14 @@ def sector_regime_rotation_weights(prices: pd.DataFrame, strategy: StrategyConfi
     )
     basket_returns = asset_returns.mean(axis=1).fillna(0.0)
     basket_volatility = realized_volatility(basket_returns, strategy.volatility_lookback_days)
-    volatility_calm = (1.0 - basket_volatility / strategy.dip_volatility_ceiling).clip(
-        lower=0.0,
-        upper=1.0,
-    ).fillna(0.5)
+    volatility_calm = (
+        (1.0 - basket_volatility / strategy.dip_volatility_ceiling)
+        .clip(
+            lower=0.0,
+            upper=1.0,
+        )
+        .fillna(0.5)
+    )
     risk_appetite = _mean_scores([credit_score, breadth_score, volatility_calm], filled.index)
     defensive_score = (1.0 - _mean_scores([credit_score, breadth_score], filled.index)).clip(
         lower=0.0,
@@ -680,9 +768,13 @@ def sector_regime_rotation_weights(prices: pd.DataFrame, strategy: StrategyConfi
         strategy.dip_starter_weight * discount_score
         + strategy.dip_step_weight * discount_score * repair_score
     ).clip(lower=0.0, upper=strategy.dip_max_risk_weight)
-    risk_budget = pd.concat([momentum_budget, discount_budget], axis=1).max(axis=1).clip(
-        lower=0.05,
-        upper=strategy.dip_max_risk_weight,
+    risk_budget = (
+        pd.concat([momentum_budget, discount_budget], axis=1)
+        .max(axis=1)
+        .clip(
+            lower=0.05,
+            upper=strategy.dip_max_risk_weight,
+        )
     )
     falling_knife = (
         (short_return < -0.020)
@@ -716,6 +808,7 @@ def sector_regime_rotation_weights(prices: pd.DataFrame, strategy: StrategyConfi
         risk_off_override_change=strategy.cycle_risk_off_override_change,
     )
 
+
 def _apply_weight_path_controls(
     weights: pd.DataFrame,
     *,
@@ -725,9 +818,7 @@ def _apply_weight_path_controls(
     defensive_ticker: str | None,
     risk_off_override_change: float,
 ) -> pd.DataFrame:
-    if weights.empty or (
-        min_change <= 0.0 and max_step_change >= 2.0 and min_hold_days <= 0
-    ):
+    if weights.empty or (min_change <= 0.0 and max_step_change >= 2.0 and min_hold_days <= 0):
         return weights
     controlled = weights.copy()
     current = controlled.iloc[0].copy()
@@ -858,6 +949,262 @@ def _raw_selected_weights(
     return score_weights.fillna(equal_weights).fillna(0.0)
 
 
+def _apply_risk_repair_defensive_relief(
+    prices: pd.DataFrame,
+    weights: pd.DataFrame,
+    *,
+    risk_tickers: list[str],
+    defensive_ticker: str | None,
+    constructive_score: pd.Series,
+    ai_stress_score: pd.Series,
+    floor: float,
+    defensive_cap: float | None,
+    release: float,
+    lookback_days: int,
+    top_n: int,
+    hard_stress_threshold: float,
+) -> pd.DataFrame:
+    if not defensive_ticker or defensive_ticker not in weights.columns:
+        return weights
+    if floor <= 0.0 and defensive_cap is None:
+        return weights
+
+    output = weights.copy()
+    aligned_constructive = constructive_score.reindex(output.index).fillna(0.0)
+    aligned_stress = ai_stress_score.reindex(output.index).fillna(0.0)
+    constructive = (aligned_constructive >= 0.60) & (aligned_stress < hard_stress_threshold)
+
+    risk_weight = output[risk_tickers].sum(axis=1).clip(lower=0.0, upper=1.0)
+    defensive_weight = output[defensive_ticker].clip(lower=0.0, upper=1.0)
+    floor_budget = (floor - risk_weight).clip(lower=0.0)
+    cap_budget = pd.Series(0.0, index=output.index)
+    if defensive_cap is not None:
+        cap_budget = (defensive_weight - defensive_cap).clip(lower=0.0) * release
+    add_budget = pd.concat([floor_budget, cap_budget], axis=1).max(axis=1)
+    add_budget = add_budget.clip(upper=defensive_weight).where(constructive, 0.0)
+    if add_budget.max() <= 0.0:
+        return output
+
+    mix = (
+        _risk_repair_momentum_mix(
+            prices,
+            risk_tickers,
+            lookback_days=lookback_days,
+            top_n=top_n,
+        )
+        .reindex(output.index)
+        .fillna(0.0)
+    )
+    allocation = mix.mul(add_budget, axis=0)
+    allocated_budget = allocation.sum(axis=1).clip(lower=0.0, upper=add_budget)
+    output.loc[:, risk_tickers] = output[risk_tickers].add(allocation, fill_value=0.0)
+    output.loc[:, defensive_ticker] = (output[defensive_ticker] - allocated_budget).clip(lower=0.0)
+    return output.clip(lower=0.0).fillna(0.0)
+
+
+def _apply_risk_repair_ai_cap(
+    prices: pd.DataFrame,
+    weights: pd.DataFrame,
+    *,
+    ai_stress_score: pd.Series,
+    defensive_ticker: str | None,
+    soft_cap: float | None,
+    hard_cap: float | None,
+    soft_threshold: float,
+    hard_threshold: float,
+    cap_basis: str,
+    excess_destination: str,
+    diversifier_tickers: list[str],
+    lookback_days: int,
+) -> pd.DataFrame:
+    ai_tickers = [
+        ticker for ticker in weights.columns if ticker in DEFAULT_STRATEGY_AI_GROWTH_TICKERS
+    ]
+    if not ai_tickers or not defensive_ticker or defensive_ticker not in weights.columns:
+        return weights
+    if soft_cap is None and hard_cap is None:
+        return weights
+
+    output = weights.copy()
+    stress = ai_stress_score.reindex(output.index).fillna(0.0)
+    cap = pd.Series(1.0, index=output.index)
+    if soft_cap is not None:
+        cap = cap.where(stress < soft_threshold, soft_cap)
+    if hard_cap is not None:
+        cap = cap.where(stress < hard_threshold, hard_cap)
+
+    ai_weight = output[ai_tickers].sum(axis=1).clip(lower=0.0)
+    if cap_basis == "risk_sleeve":
+        active_weight = output.sum(axis=1).clip(lower=0.0)
+        if defensive_ticker in output.columns:
+            active_weight = (active_weight - output[defensive_ticker]).clip(lower=0.0)
+        cap = cap * active_weight
+    excess = (ai_weight - cap).clip(lower=0.0)
+    if excess.max() <= 0.0:
+        return output
+
+    scale = ((ai_weight - excess) / ai_weight.where(ai_weight > 0.0)).fillna(1.0)
+    output.loc[:, ai_tickers] = output[ai_tickers].mul(scale, axis=0)
+    if excess_destination == "diversifier_mix":
+        available = [
+            ticker
+            for ticker in diversifier_tickers
+            if ticker in output.columns and ticker not in ai_tickers
+        ]
+        if available:
+            mix = (
+                _risk_repair_momentum_mix(
+                    prices,
+                    available,
+                    lookback_days=lookback_days,
+                    top_n=min(2, len(available)),
+                )
+                .reindex(output.index)
+                .fillna(0.0)
+            )
+            allocation = mix.mul(excess, axis=0)
+            allocated_excess = allocation.sum(axis=1).clip(lower=0.0, upper=excess)
+            output.loc[:, available] = output[available].add(allocation, fill_value=0.0)
+            output.loc[:, defensive_ticker] = output[defensive_ticker] + (
+                excess - allocated_excess
+            ).clip(lower=0.0)
+        else:
+            output.loc[:, defensive_ticker] = output[defensive_ticker] + excess
+    else:
+        output.loc[:, defensive_ticker] = output[defensive_ticker] + excess
+    return output.clip(lower=0.0).fillna(0.0)
+
+
+def _risk_repair_constructive_score(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.Series:
+    filled = bounded_forward_fill(prices)
+    index = filled.index
+    qqq = _trend_component(filled, "QQQ", 100) * _return_component(filled, "QQQ", 21, 0.0)
+    spy = _trend_component(filled, "SPY", 100) * _return_component(filled, "SPY", 21, -0.005)
+    breadth = _relative_component(filled, "RSP", "SPY", 21, -0.015)
+    credit = _relative_component(filled, "HYG", "LQD", 21, -0.010)
+    ai = _relative_component(filled, "SMH", "SPY", 21, -0.010) * _relative_component(
+        filled,
+        "QQQ",
+        "RSP",
+        21,
+        -0.010,
+    )
+    if strategy.risk_repair_signal == "credit_breadth":
+        components = [qqq, spy, breadth, credit]
+    elif strategy.risk_repair_signal == "ai_leadership":
+        components = [qqq, spy, ai, credit]
+    else:
+        components = [qqq, spy, breadth, credit, ai]
+    return _mean_scores(components, index)
+
+
+def _risk_repair_ai_stress_score(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.Series:
+    filled = bounded_forward_fill(prices)
+    index = filled.index
+    lookback = max(strategy.risk_repair_lookback_days, 21)
+    components = [
+        _drawdown_component(filled, "QQQ", 126, -0.08),
+        _drawdown_component(filled, "SMH", 84, -0.10),
+        1.0 - _trend_component(filled, "QQQ", 100),
+        1.0 - _trend_component(filled, "SMH", 100),
+        1.0 - _relative_component(filled, "SMH", "SPY", lookback, -0.035),
+        1.0 - _relative_component(filled, "QQQ", "RSP", lookback, -0.025),
+        1.0 - _relative_component(filled, "HYG", "LQD", 42, -0.015),
+        1.0 - _trend_component(filled, "SPY", 200),
+    ]
+    return _mean_scores(components, index)
+
+
+def _risk_repair_momentum_mix(
+    prices: pd.DataFrame,
+    tickers: list[str],
+    *,
+    lookback_days: int,
+    top_n: int,
+) -> pd.DataFrame:
+    available = [ticker for ticker in tickers if ticker in prices.columns]
+    if not available:
+        return pd.DataFrame(0.0, index=prices.index, columns=tickers)
+    momentum = lookback_returns(prices[available], lookback_days, 0)
+    volatility = realized_volatility(daily_returns(prices[available]), max(21, lookback_days))
+    score = momentum.where(momentum > 0.0).div(volatility.where(volatility > 0.0)).fillna(0.0)
+    positive = score > 0.0
+    selected = positive & (
+        score.rank(axis=1, ascending=False, method="first") <= min(top_n, len(available))
+    )
+    raw = score.where(selected, 0.0).clip(lower=0.0)
+    row_sum = raw.sum(axis=1)
+    mix = raw.div(row_sum.where(row_sum > 0.0), axis=0).fillna(0.0)
+    return mix.reindex(columns=tickers, fill_value=0.0).fillna(0.0)
+
+
+def _trend_component(prices: pd.DataFrame, ticker: str, days: int) -> pd.Series:
+    if ticker not in prices.columns:
+        return pd.Series(0.5, index=prices.index)
+    ma = moving_average(prices[[ticker]], days)[ticker]
+    valid = prices[ticker].notna() & ma.notna()
+    component = prices[ticker].gt(ma).astype(float)
+    return component.where(valid, 0.5)
+
+
+def _return_component(
+    prices: pd.DataFrame,
+    ticker: str,
+    days: int,
+    threshold: float,
+) -> pd.Series:
+    if ticker not in prices.columns:
+        return pd.Series(0.5, index=prices.index)
+    returns = prices[ticker].pct_change(days, fill_method=None)
+    component = returns.gt(threshold).astype(float)
+    return component.where(returns.notna(), 0.5)
+
+
+def _relative_component(
+    prices: pd.DataFrame,
+    numerator: str,
+    denominator: str,
+    days: int,
+    threshold: float,
+) -> pd.Series:
+    if numerator not in prices.columns or denominator not in prices.columns:
+        return pd.Series(0.5, index=prices.index)
+    relative = prices[numerator] / prices[denominator]
+    relative_return = relative.pct_change(days, fill_method=None)
+    component = relative_return.gt(threshold).astype(float)
+    return component.where(relative_return.notna(), 0.5)
+
+
+def _drawdown_component(
+    prices: pd.DataFrame,
+    ticker: str,
+    days: int,
+    threshold: float,
+) -> pd.Series:
+    if ticker not in prices.columns:
+        return pd.Series(0.5, index=prices.index)
+    drawdown = (
+        prices[ticker] / prices[ticker].rolling(days, min_periods=max(5, days // 5)).max() - 1.0
+    )
+    component = drawdown.le(threshold).astype(float)
+    return component.where(drawdown.notna(), 0.5)
+
+
+def _normalize_weight_rows(
+    weights: pd.DataFrame,
+    *,
+    defensive_ticker: str | None,
+) -> pd.DataFrame:
+    output = weights.clip(lower=0.0).fillna(0.0)
+    row_sum = output.sum(axis=1)
+    over_invested = row_sum > 1.0
+    output.loc[over_invested] = output.loc[over_invested].div(row_sum.loc[over_invested], axis=0)
+    if defensive_ticker and defensive_ticker in output.columns:
+        residual = (1.0 - output.sum(axis=1)).clip(lower=0.0)
+        output.loc[:, defensive_ticker] = output[defensive_ticker] + residual
+    return output.fillna(0.0)
+
+
 def _cap_risk_weights(
     weights: pd.DataFrame,
     *,
@@ -875,7 +1222,6 @@ def _cap_risk_weights(
 
 def _empty_weights(prices: pd.DataFrame) -> pd.DataFrame:
     return pd.DataFrame(0.0, index=prices.index, columns=prices.columns)
-
 
 
 def _mean_scores(scores: list[pd.Series], index: pd.Index) -> pd.Series:
@@ -899,6 +1245,7 @@ def _sector_regime_group(ticker: str) -> str:
     if ticker in DEFAULT_STRATEGY_GLOBAL_TICKERS:
         return "global"
     return "broad"
+
 
 def _validate_tickers(prices: pd.DataFrame, tickers: list[str]) -> None:
     missing = sorted(set(tickers) - set(prices.columns))

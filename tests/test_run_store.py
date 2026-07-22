@@ -1,8 +1,11 @@
 from __future__ import annotations
 
+import os
 from pathlib import Path
 
+import duckdb
 import pandas as pd
+import pytest
 
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.research.baselines import BaselineRun
@@ -12,6 +15,29 @@ from trade_bot.research.news_monitor import NewsMonitorRun
 from trade_bot.research.signal_inclusion import SignalInclusionRun
 from trade_bot.research.trade_decision import TradeDecisionRun
 from trade_bot.storage.run_store import RunStore, build_snapshot_fingerprint
+
+
+def test_read_only_run_store_skips_schema_setup_and_reads_existing_store(
+    monkeypatch: pytest.MonkeyPatch,
+    tmp_path: Path,
+) -> None:
+    db_path = tmp_path / "trade_bot.duckdb"
+    artifact_dir = tmp_path / "snapshots"
+    job_log_dir = tmp_path / "jobs"
+    RunStore(db_path, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+
+    def unexpected_schema_setup(_store: object) -> None:
+        raise AssertionError("read-only run store must not run schema setup")
+
+    monkeypatch.setattr(RunStore, "_ensure_schema", unexpected_schema_setup)
+    reader = RunStore(
+        db_path,
+        artifact_dir=artifact_dir,
+        job_log_dir=job_log_dir,
+        read_only=True,
+    )
+
+    assert reader.list_snapshots().empty
 
 
 def test_run_store_saves_loads_and_lists_snapshots(tmp_path: Path) -> None:
@@ -58,6 +84,50 @@ def test_run_store_tracks_snapshot_jobs(tmp_path: Path) -> None:
     assert jobs.iloc[0]["job_id"] == job.job_id
     assert jobs.iloc[0]["status"] == "completed"
     assert jobs.iloc[0]["run_id"] == "run-1"
+
+
+def test_run_store_migrates_legacy_snapshot_jobs_schema(tmp_path: Path) -> None:
+    db_path = tmp_path / "trade_bot.duckdb"
+    connection = duckdb.connect(str(db_path))
+    try:
+        connection.execute(
+            """
+            CREATE TABLE snapshot_jobs (
+                job_id VARCHAR PRIMARY KEY,
+                created_at_utc VARCHAR NOT NULL,
+                started_at_utc VARCHAR NOT NULL,
+                completed_at_utc VARCHAR NOT NULL,
+                status VARCHAR NOT NULL,
+                command VARCHAR NOT NULL,
+                log_path VARCHAR NOT NULL,
+                run_id VARCHAR NOT NULL,
+                error_message VARCHAR NOT NULL
+            )
+            """
+        )
+        connection.execute(
+            """
+            INSERT INTO snapshot_jobs
+            VALUES (
+                'legacy-job', '2026-01-01T00:00:00+00:00', '', '', 'queued',
+                'python -V', 'legacy.log', '', ''
+            )
+            """
+        )
+    finally:
+        connection.close()
+
+    store = RunStore(
+        db_path,
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    migrated = store.get_job("legacy-job")
+
+    assert "process_id" in store.list_jobs().columns
+    assert migrated is not None
+    assert migrated.process_id == 0
 
 
 def test_run_store_prunes_snapshot_artifacts_after_dry_run(
@@ -310,6 +380,7 @@ def test_run_store_starts_daily_update_job(tmp_path: Path, monkeypatch: object) 
     class DummyPopen:
         def __init__(self, *args: object, **kwargs: object) -> None:
             calls.append((args, kwargs))
+            self.pid = os.getpid()
 
     monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", DummyPopen)
     store = RunStore(
@@ -347,7 +418,177 @@ def test_run_store_starts_daily_update_job(tmp_path: Path, monkeypatch: object) 
     assert Path(job.log_path).exists()
     assert jobs.iloc[0]["job_id"] == job.job_id
     assert jobs.iloc[0]["status"] == "queued"
+    assert jobs.iloc[0]["process_id"] == os.getpid()
     assert "run-daily-update" in str(jobs.iloc[0]["command"])
+
+
+def test_run_store_reuses_recent_active_duplicate_job(
+    tmp_path: Path,
+    monkeypatch: object,
+) -> None:
+    calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
+
+    class DummyPopen:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            calls.append((args, kwargs))
+            self.pid = os.getpid()
+
+    monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", DummyPopen)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    first = store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+    duplicate = store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+
+    assert duplicate.job_id == first.job_id
+    assert len(calls) == 1
+    assert len(store.list_jobs(limit=10)) == 1
+
+
+def test_run_store_reuses_a_fresh_queued_duplicate_during_pid_registration(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
+
+    class DummyPopen:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            calls.append((args, kwargs))
+            self.pid = os.getpid()
+
+    monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", DummyPopen)
+    monkeypatch.setattr(RunStore, "_set_job_process_id", lambda *_args: None)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    first = store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+    duplicate = store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+
+    assert first.process_id == 0
+    assert duplicate.job_id == first.job_id
+    assert len(calls) == 1
+
+
+def test_run_store_fails_dead_duplicate_before_starting_replacement(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
+
+    class DummyPopen:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            calls.append((args, kwargs))
+            self.pid = 424_242
+
+    monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", DummyPopen)
+    monkeypatch.setattr(RunStore, "_process_is_alive", staticmethod(lambda _pid: False))
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    first = store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+    replacement = store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+    jobs = store.list_jobs(limit=10).set_index("job_id")
+
+    assert replacement.job_id != first.job_id
+    assert len(calls) == 2
+    assert jobs.loc[first.job_id, "status"] == "failed"
+    assert "no longer running" in jobs.loc[first.job_id, "error_message"]
+    assert jobs.loc[replacement.job_id, "status"] == "queued"
+
+
+def test_run_store_running_duplicate_age_uses_started_time(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    calls: list[tuple[tuple[object, ...], dict[str, object]]] = []
+
+    class DummyPopen:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            calls.append((args, kwargs))
+            self.pid = os.getpid()
+
+    now = pd.Timestamp.now(tz="UTC").isoformat()
+    timestamps = iter(
+        [
+            "2020-01-01T00:00:00+00:00",
+            "2020-01-01T00:00:00+00:00",
+            "2020-01-01T00:00:00+00:00",
+            now,
+            now,
+        ]
+    )
+    monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", DummyPopen)
+    monkeypatch.setattr("trade_bot.storage.run_store.utc_now_iso", lambda: next(timestamps))
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    first = store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+    store.mark_job_running(first.job_id)
+    duplicate = store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+
+    assert duplicate.job_id == first.job_id
+    assert len(calls) == 1
+
+
+def test_run_store_marks_job_failed_when_process_spawn_fails(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    class BrokenPopen:
+        def __init__(self, *args: object, **kwargs: object) -> None:
+            raise OSError("spawn unavailable")
+
+    monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", BrokenPopen)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    with pytest.raises(OSError, match="spawn unavailable"):
+        store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+
+    job = store.list_jobs(limit=1).iloc[0]
+    assert job["status"] == "failed"
+    assert "could not start: spawn unavailable" in job["error_message"]
+
+
+def test_run_store_marks_job_failed_when_log_open_fails(
+    tmp_path: Path,
+    monkeypatch: pytest.MonkeyPatch,
+) -> None:
+    original_open = Path.open
+
+    def failing_log_open(path: Path, *args: object, **kwargs: object) -> object:
+        if path.suffix == ".log":
+            raise OSError("log unavailable")
+        return original_open(path, *args, **kwargs)
+
+    monkeypatch.setattr(Path, "open", failing_log_open)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    with pytest.raises(OSError, match="log unavailable"):
+        store.start_daily_update_job(refresh_data=False, refresh_macro=False)
+
+    job = store.list_jobs(limit=1).iloc[0]
+    assert job["status"] == "failed"
+    assert "could not start: log unavailable" in job["error_message"]
 
 
 def test_run_store_starts_targeted_update_jobs(tmp_path: Path, monkeypatch: object) -> None:
@@ -356,6 +597,7 @@ def test_run_store_starts_targeted_update_jobs(tmp_path: Path, monkeypatch: obje
     class DummyPopen:
         def __init__(self, *args: object, **kwargs: object) -> None:
             calls.append((args, kwargs))
+            self.pid = os.getpid()
 
     monkeypatch.setattr("trade_bot.storage.run_store.subprocess.Popen", DummyPopen)
     store = RunStore(

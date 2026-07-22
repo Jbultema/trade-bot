@@ -1,0 +1,233 @@
+source: 42macro_youtube
+published_date: 2026-04-14
+video_id: yCR6mUJibjs
+url: https://www.youtube.com/watch?v=yCR6mUJibjs
+title: The Macro Minute: Are “dumb money” bulls going to leave “smart money” bears behind again?
+
+Happy Tuesday out there, team 42macro.
+Your skipper here, Darius Dale, to
+present our Macro Minute for Tuesday,
+April 14th, 2026. Hope everyone's having
+a great week. So, as always, we'll start
+with the executive summary from today's
+lead-off morning note. So, let's dive
+right in. Today's key macro question is,
+are dumb money bulls going to leave
+smart money bears behind again?
+Our answer is likely.
+2026 is already shaping up to be the
+fourth consecutive [clears throat] year
+in which investor consensus overreacted
+to transitory bearish headlines and
+failed to get back invested in time to
+maximize upside capture in the
+subsequent risk-on market regime.
+Here are the most important things we
+learned today regarding the six key
+macro cycles that influence the momentum
+and dispersion within and across asset
+markets on a trend basis, starting with
+the growth cycle. The March NFIB small
+business optimism survey data did not
+support our paradigm C or productivity
+boom themes. The data did, however,
+support our jobless recovery theme.
+Elsewhere, Aigintic AI was deployed by
+10,000-plus engineers at Citi to
+redevelop 30-plus years of legacy code
+in 2 days, supporting our productivity
+boom theme in the process. Recall that
+data integrity failures triggered errors
+and hundreds of millions in regulatory
+fines, prompting CEO Jane Fraser to
+commit to the successful remediation
+effort.
+In terms of the inflation cycle, the
+March NFIB small business optimism
+survey data and March existing home
+sales data supported our cooling housing
+and labor theme. March NFIB small
+business optimism survey data also
+supported our sticky inflation theme
+alongside the March PPI data.
+Recall that inflation is by far the most
+lagging indicator of the business cycle
+and is unlikely to durably return to the
+Fed's arbitrary 2% target without a
+recession or an AI-led productivity
+boom. We view the latter outcome as
+likely over the long term. All right,
+transition to the monetary policy cycle.
+The Senate Banking Committee will
+convene a confirmation hearing next week
+for Fed chair nominee Kevin Warsh,
+according to the panel's leading
+Republican, Tim Scott. Scott did not
+specify timing, though Punchbowl reports
+the hearing is slated for April 21st,
+which is a week from today.
+He indicated the Justice Department is
+expected to terminate its criminal probe
+into the Fed's renovation project within
+weeks, thereby enabling Senator Tom
+Tillis to support a favorable committee
+vote on Warsh. President Trump signaled
+indifference to the nomination timing
+risk, slight stating in in a February
+Fox Business interview, "If it happens,
+it happens." We continue to believe
+POTUS is setting up Powell to be the
+fall guy if anything goes awry in the
+economy prior to the midterm elections.
+Uh nothing actionable with respect to
+our Bayesian priors from the fiscal
+policy or liquidity cycles. And then
+finally, with respect to the positioning
+cycle, Iran is weighing a temporary halt
+to the Strait of Hormuz shipments to
+avoid provoking a US blockade and
+derailing negotiations. This is
+consistent with our sanguine take on the
+conflict's resolution and is why the
+Nasdaq 100 is engaged in its longest
+winning streak since 2021, i.e., 10
+consecutive gains. US dollar weakened
+for seventh consecutive session for the
+same reasons.
+Transitioning to our 42macro dashboard,
+as always, we'll wrap up with a question
+from our community. Uh this one's uh
+regarding liquidity. Uh it says, "Uh DD,
+can you explain why the 42macro view of
+global liquidity is so different from
+Michael Howell's view of a declining
+rate of liquidity, uh putting uh putting
+a risk-off regime?" Uh so, um you know,
+I'll be honest to say I'm not familiar
+with Michael Howell's latest thoughts on
+liquidity, but I assume they're uh as
+negative as implied by the question. And
+I apologize to you, Michael, if if the
+the question is uh uh wrong. Uh So, uh
+let me just uh quickly go to our uh
+global liquidity uh model, which we use
+to forecast leading indicators of
+private and public sector liquidity
+across geographies. According to uh the
+42macro global liquidity proxy, which is
+the sum of the uh major central bank
+balance sheets across the world, these
+10 largest um economies in the world,
+their central bank balance sheets,
+global broad money supply, as well as
+global as well as global fiat uh FX
+reserves, uh that metric, the sum of
+that metric dollar figure,
+is trending higher uh across the globe.
+It's trending higher in Australia, so we
+maintain our liquidity proxies at the
+country level as well. Uh it's trending
+higher in Brazil. It's trending higher
+in China, which is the largest uh pool
+of liquidity uh in the world. Uh India
+is trending higher as well, and it's
+trending higher in the US. So, uh some
+large major economies where liquidity is
+is continuing to trend higher uh and uh
+on a global basis as well. Uh so, if you
+look at our 42macro global liquidity uh
+model, uh we can see that it's a very
+it's a very clearly a key driver of
+asset markets. The black line in these
+charts uh indicate uh the 42macro global
+liquidity proxy on a year-over-year rate
+of change basis. The blue line in this
+chart here on the right uh shows the
+global stock market capitalization on a
+year-over-year rate of change basis. The
+orange line here in the chart on the
+left shows uh Bitcoin on a
+year-over-year rate of change basis. And
+as you can see, extremely tight
+correlation for uh over uh you know,
+over a decade here in terms of the our
+our liquidity model relative to global
+stock market uh stock market and our
+liquidity model relative to Bitcoin,
+with the exception of this very
+conspicuous divergence that we've
+observed since the fall of last year.
+We've talked about why we believe that
+divergence uh has developed and what is
+likely to cause it to dissipate uh in
+our recent Around the Horn weekly Around
+the Horn presentations. So, I'll leave
+that for for for for those who want to
+uh dig in further. Uh the final thing
+I'll say is on liquidity, twofold. One,
+it is not enough to just know that
+liquidity is currently trending higher.
+You got to forecast it accurately to
+have an informed outlook for asset
+markets. And so, the chart on the left
+shows the trailing 10-year correlation
+of key leading indicators of uh of the
+year-over-year rate of change of the
+42macro global liquidity proxy. Uh and
+the chart on the right shows the
+Z-scores of the latest values of those
+key leading indicators of the 42macro
+global liquidity proxy. And so, based on
+the correlations, which we uh apply
+three-month uh lead uh three-month lead
+and a six-month lead for these uh uh
+variables uh relative to their cyclical
+three Z-scores and structural Z-scores,
+we run an inverse normal distribution
+formula on the correlation-adjusted
+Z-scores for these key leading
+indicators of the global liquidity proxy
+relative to uh the uh global liquidity
+uh uh the the Z-score for the the global
+liquidity proxy itself and subtract the
+residual, we see that the uh the
+Z-score, the correlation-adjusted
+Z-scores for uh these variables are
+actually higher on and on a net basis
+than the Z-score, the year-over-year
+rate of change Z-score for the global
+liquidity proxy. So, by that, we
+surmise,
+based on the size of the residual, that
+the it's likely that the global
+liquidity has a meaningful uptrend over
+the medium term because these leading
+indicators, based on their three-month
+leading uh correlations and six-month
+leading correlations, have all achieved
+a level from a rate of change
+perspective that implies that global
+liquidity needs to catch up to that
+level in the coming three to six months.
+And so, that's how that's where how we
+develop our forecast. So, uh you know,
+again, that could be wrong, but at the
+end of the day, uh you know, I think the
+reason the market's returned to a
+risk-on market regime is because this is
+true, alongside the fact that our macro
+weather model's signaling a a tailwind
+for the growth cycle, it's signaling a
+tailwind for the monetary policy cycle,
+it's signaling a tailwind for the fiscal
+policy cycle, and it's signaling a
+tailwind for the liquidity cycle. So,
+that's just a whole lot of good news uh
+for any bear uh to have to fight uh with
+respect to the medium-term outlook for
+the economy and asset markets. So, uh
+we'll wrap it up there. Darius Dale here
+presenting our Macro Minute for Tuesday,
+April 4th 14th, 2026. Everyone have a
+great day out there. We'll catch you
+back here tomorrow. Cheers.

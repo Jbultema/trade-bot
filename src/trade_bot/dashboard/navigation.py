@@ -183,7 +183,7 @@ def render_selected_section_guide(selected_section: str) -> None:
         st.caption(
             "Use this map to route questions to the right workbench without scanning the whole app."
         )
-        st.dataframe(_section_map_frame(_SECTION_GUIDES.values()), use_container_width=True)
+        st.dataframe(_section_map_frame(_SECTION_GUIDES.values()), width="stretch")
 
 
 def _section_guide_html(guide: DashboardSectionGuide) -> str:

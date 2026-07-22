@@ -1,7 +1,7 @@
 from __future__ import annotations
 
-from collections.abc import Callable
 import json
+from collections.abc import Callable
 from datetime import UTC, date, datetime
 from pathlib import Path
 
@@ -25,7 +25,12 @@ from trade_bot.research.approach_explorer import (
     strategy_from_catalog_row,
 )
 from trade_bot.research.baselines import BaselineRun
-from trade_bot.research.strategy_decision import resolve_trade_decision_for_strategy
+from trade_bot.research.strategy_decision import (
+    StrategyDecisionUnavailableError,
+    operating_strategy_config,
+    resolve_trade_decision_for_strategy,
+    trade_decision_strategy_name,
+)
 from trade_bot.storage.warehouse import TradingWarehouse
 from trade_bot.trading.book_alignment import BookAlignmentRun, build_book_alignment
 from trade_bot.trading.journal import (
@@ -172,6 +177,8 @@ def _render_forward_test_and_journal(
     warehouse_path: str | Path | None = None,
     selected_book: JournalBook | None = None,
     book_selector: Callable[[], JournalBook] | None = None,
+    allow_decision_actions: bool = True,
+    decision_actions_disabled_reason: str = "",
 ) -> None:
     st.subheader("Forward Test / Trade Journal")
     st.caption(
@@ -179,6 +186,17 @@ def _render_forward_test_and_journal(
     )
     if book_selector is not None:
         selected_book = book_selector()
+    if not allow_decision_actions:
+        st.warning(
+            decision_actions_disabled_reason
+            or "This run is display-only; decision actions are unavailable."
+        )
+        st.caption(
+            "Book-management controls remain available above and apply to the current journal. "
+            "Historical book alignment, recommendation tickets, and execution guidance are "
+            "suppressed so an old market state cannot become a current action."
+        )
+        return
 
     st.markdown(
         """
@@ -244,7 +262,25 @@ def _render_forward_test_and_journal(
             step=1000.0,
         )
 
-    trade_decision = resolve_trade_decision_for_strategy(baseline_run, journal_strategy)
+    strategy_config = operating_strategy_config(
+        bot_config,
+        journal_strategy,
+        current_strategy=trade_decision_strategy_name(baseline_run.trade_decision),
+    )
+    try:
+        trade_decision = resolve_trade_decision_for_strategy(
+            baseline_run,
+            journal_strategy,
+            strategy_config=strategy_config,
+            allocation_policy=bot_config.allocation_policy,
+        )
+    except StrategyDecisionUnavailableError as exc:
+        st.error(f"Operating decision unavailable: {exc}")
+        st.caption(
+            "Book controls remain available above, but alignment, ticket creation, and "
+            "execution guidance are suppressed until the strategy resolves exactly."
+        )
+        return
 
     with st.expander("Ticket sizing controls", expanded=False):
         st.caption(
@@ -256,8 +292,7 @@ def _render_forward_test_and_journal(
             / 100.0
         )
         size_band_pct = (
-            sizing_cols[1].number_input("Size band %", min_value=0.0, value=20.0, step=5.0)
-            / 100.0
+            sizing_cols[1].number_input("Size band %", min_value=0.0, value=20.0, step=5.0) / 100.0
         )
         min_trade_notional = sizing_cols[2].number_input(
             "Min trade $",
@@ -348,7 +383,9 @@ def _render_forward_test_and_journal(
                 "No executable recommendation tickets from the current decision and sizing inputs."
             )
         else:
-            st.caption("These are not locked yet. Review them before creating an auditable ticket set.")
+            st.caption(
+                "These are not locked yet. Review them before creating an auditable ticket set."
+            )
             _render_ticket_table(ticket_preview[ticket_columns])
             if st.button("Lock Current Recommendation Set"):
                 decision_id = journal.save_decision_snapshot(
@@ -405,14 +442,16 @@ def _render_forward_test_and_journal(
         if stored_tickets.empty:
             st.write("No locked recommendation tickets for this filter.")
         else:
-            available_columns = [column for column in stored_ticket_columns if column in stored_tickets]
+            available_columns = [
+                column for column in stored_ticket_columns if column in stored_tickets
+            ]
             _render_ticket_table(stored_tickets[available_columns])
 
     st.markdown("### 3. Execution journal")
     st.caption(
         "After you paper-trade or live-trade a ticket, log the exact fill here. Manual entries are allowed for executions that did not come from a locked ticket."
     )
-    ticket_options = {"manual": None}
+    ticket_options: dict[str, str | None] = {"manual": None}
     if not open_tickets.empty:
         ticket_options.update(_ticket_option_map(open_tickets))
 
@@ -493,7 +532,10 @@ def _render_forward_test_and_journal(
         submitted_execution = st.form_submit_button("Log Execution")
 
         if submitted_execution:
-            if whole_shares and abs(float(execution_quantity) - round(float(execution_quantity))) > 1e-9:
+            if (
+                whole_shares
+                and abs(float(execution_quantity) - round(float(execution_quantity))) > 1e-9
+            ):
                 st.error("Quantity must be a whole number of shares when Whole shares is enabled.")
                 return
             local_execution_time = datetime.combine(execution_date, execution_time).replace(
@@ -653,7 +695,7 @@ def _render_after_logged_book_comparison(alignment: BookAlignmentRun) -> None:
     display = _display_trade_frame(comparison).rename(columns=_AFTER_LOGGED_BOOK_COLUMN_LABELS)
     _render_metric_dataframe(
         display,
-        use_container_width=True,
+        width="stretch",
         column_help=_AFTER_LOGGED_BOOK_COLUMN_HELP,
     )
 
@@ -704,10 +746,9 @@ def _after_logged_book_comparison_frame(position_plan: pd.DataFrame) -> pd.DataF
         data[column] = pd.to_numeric(data[column], errors="coerce").fillna(0.0)
 
     data["_abs_delta_weight"] = data["delta_weight"].abs()
-    return (
-        data.sort_values(["_abs_delta_weight", "ticker"], ascending=[False, True])[columns]
-        .reset_index(drop=True)
-    )
+    return data.sort_values(["_abs_delta_weight", "ticker"], ascending=[False, True])[
+        columns
+    ].reset_index(drop=True)
 
 
 def _render_forward_allocation_history(
@@ -856,7 +897,9 @@ def _render_forward_allocation_history(
                 key=end_key,
             )
             if custom_start > custom_end:
-                st.warning("Allocation start is after allocation end; showing the full available window.")
+                st.warning(
+                    "Allocation start is after allocation end; showing the full available window."
+                )
                 custom_start = min_allowed
                 custom_end = max_allowed
             historical_weights = _filter_weight_history(
@@ -896,7 +939,7 @@ def _render_forward_allocation_history(
         start_date=start_date,
         strategy_name=strategy_name,
     )
-    st.plotly_chart(figure, use_container_width=True)
+    st.plotly_chart(figure, width="stretch")
 
     if historical_note:
         st.caption(historical_note)
@@ -907,7 +950,7 @@ def _render_forward_allocation_history(
         _render_metric_dataframe(
             _display_trade_frame(_latest_weight_table(forward_weights)),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
         )
     with table_cols[1]:
         st.caption("Monitoring window")
@@ -928,7 +971,7 @@ def _render_forward_allocation_history(
                 ]
             ),
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
         )
 
 
@@ -1032,11 +1075,7 @@ def _reconstruct_candidate_weight_history(
     if matches.empty:
         return pd.DataFrame()
     sort_columns = [column for column in ["iteration", "created_at_utc"] if column in matches]
-    row = (
-        matches.sort_values(sort_columns).iloc[-1]
-        if sort_columns
-        else matches.iloc[-1]
-    )
+    row = matches.sort_values(sort_columns).iloc[-1] if sort_columns else matches.iloc[-1]
     try:
         strategy = strategy_from_catalog_row(row)
         execution = execution_for_catalog_row(row, bot_config.execution)
@@ -1130,17 +1169,11 @@ def _prepare_allocation_frames(
     if combined.empty:
         return historical_with_cash, forward_with_cash
     importance = combined.max(axis=0).sort_values(ascending=False)
-    keep = [
-        column
-        for column in ["cash_or_unallocated"]
-        if column in importance.index
-    ]
+    keep = [column for column in ["cash_or_unallocated"] if column in importance.index]
     keep.extend(
-        [
-            column
-            for column in importance.index
-            if column not in keep
-        ][:max(max_assets - len(keep), 0)]
+        [column for column in importance.index if column not in keep][
+            : max(max_assets - len(keep), 0)
+        ]
     )
     return (
         _compact_to_columns(historical_with_cash, keep),
@@ -1217,11 +1250,7 @@ def _allocation_date_bounds(
     historical_weights: pd.DataFrame,
     forward_weights: pd.DataFrame,
 ) -> tuple[pd.Timestamp | None, pd.Timestamp | None]:
-    indexes = [
-        frame.index
-        for frame in [historical_weights, forward_weights]
-        if not frame.empty
-    ]
+    indexes = [frame.index for frame in [historical_weights, forward_weights] if not frame.empty]
     if not indexes:
         return None, None
     combined = indexes[0]
@@ -1350,7 +1379,10 @@ def _latest_weight_table(weights: pd.DataFrame) -> pd.DataFrame:
     latest = weights.iloc[-1].sort_values(ascending=False)
     latest = latest[latest.abs() > 1e-8]
     return pd.DataFrame(
-        [{"ticker": str(ticker), "target_weight": float(weight)} for ticker, weight in latest.items()]
+        [
+            {"ticker": str(ticker), "target_weight": float(weight)}
+            for ticker, weight in latest.items()
+        ]
     )
 
 
@@ -1430,7 +1462,7 @@ def _render_tax_lot_panel(journal: TradeJournal, *, mode: str, account: str) -> 
 def _render_ticket_table(frame: pd.DataFrame) -> None:
     _render_metric_dataframe(
         _display_trade_frame(frame),
-        use_container_width=True,
+        width="stretch",
         column_help=TICKET_COLUMN_HELP,
     )
 

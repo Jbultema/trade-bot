@@ -1,0 +1,198 @@
+source: 42macro_youtube
+published_date: 2026-05-14
+video_id: lXhq_SA1KYI
+url: https://www.youtube.com/watch?v=lXhq_SA1KYI
+title: Lagging Fed Raises Risk for the AI Trade
+
+Today, let's talk about the macro now
+with Darius Dale, founder and CEO of
+macro research for firm 42 macro. It's
+been a long time, Darius, my friend. So,
+thank you so much for joining the
+program here. Look, all the data we've
+got this month has shown that things are
+holding up. I mean, even the retail
+sales today, claims looking okay as
+well. I mean, things are looking
+resilient, they're looking stable.
+Given what we've got on the macro side
+and the corporate reads we've got this
+earnings season, what has been your
+takeaways to the macro setup right now?
+Yeah, thanks again for having me. Always
+a real pleasure to be here, Sam. Uh so,
+the first thing I'll say is that you
+kind of take the 30,000 ft view, we're
+still in a risk-on market regime. We
+expect markets to be generally bullish
+over the next 3 to 12 months. However,
+when you look at the next 2 to 3 months,
+we're starting to see things from a
+macro standpoint that are mispriced
+relative to broader asset markets that
+could cause some trouble. Uh for
+starters, the Fed is lagging well beyond
+well behind uh its peer central banks in
+terms of the amount of tightening that
+is priced in over the next 12 months.
+So, we could see a catch-up trade uh in
+the coming months as the Fed and and
+Kevin Warsh and his colleagues on the
+Fed readjust their reaction function to
+what is a very clearly very hot uh core
+inflation dynamic here in the US
+economy. Now, on the flip side of that,
+I I as evidenced by today's retail sales
+print and some other data that we've
+received in recent weeks, the US
+consumer continues to be fine, the US
+economy continues to be fine. And so,
+ultimately, we think markets resolve the
+next couple of months of potential
+volatility positively, but we do believe
+that we could be seeing uh uh some sort
+of all in the next in the coming weeks
+and months.
+So, what do you think would be the
+catalyst then for the Fed to remove that
+easing bias? Given, of course, this
+repricing we've seen now of the markets
+now thinking, mhm, perhaps we could be
+in for a bit of a rate hike come 2027.
+Yeah, yeah. So, the catalyst is already
+on the table. It's already It's already
+been prepared. If you look at, uh for
+example, trim mean CPI, which is what
+Kevin Warsh highlighted as
+what he wants to pivot the Fed's
+reaction function to,
+the trim mean CPI is in a strong
+positive impulse right now. That means a
+3-month annualized of 3.4% is greater
+than the 6-month annualized of 3%, which
+itself is greater than the
+year-over-year rate of change of 2.9%,
+which obviously is well above uh the
+Fed's 2% uh target. And so, the first
+thing that he's going to have to do uh
+when he joins the FOMC is stop jawboning
+rates down and start to listen to his
+colleagues on the FOMC who have become
+incrementally hawkish in recent months,
+so that they can ultimately try to
+jawbone a lot of this rates volatility
+and currency volatility out of the
+market by committing uh to uh stop you
+know, stymieing inflation the build-up
+of inflation pressure.
+Darius, how do you think the market is
+likely to react to that given the clear
+distinction we're talking about between
+previous energy shocks and now, I'm
+thinking back to 2022. Is that you know,
+obviously conditions were similar in
+some ways, but we had a more sort of
+hawkish uh rate hiking bias in this
+system, which is not what we have now.
+And that is what is perhaps the view as
+to why we're seeing this resilience in
+the stock market and these record highs.
+I mean, how would a market react to a
+change in that jawboning?
+Yeah, it's a great question. Uh probably
+not well. So, there's two things that
+will cause some issues there. One, we
+have uh the return of crowd of bulls
+positioning, not quite where we were in
+January, but certainly uh something that
+it could cause a more material
+acceleration to the downside to the
+extent the markets get concerned about
+these uh hawkish dynamics. And in
+secondarily, uh you have the Fed as well
+like I said, it's well beyond well
+behind uh its peer central banks with
+respect to the amount of tightening that
+is priced in. So, to the extent markets
+have to price in more tightening on the
+short rates curve or a pullback of
+reserve management purchases, which are
+annualizing at about $600 billion,
+then you're going to start to see some
+uh have
+uh creep in. So, in our opinion, you
+know, we're still you know, we're in a
+very positive tailwind from the
+perspective of the global liquidity
+cycle. However, those tailwinds are
+starting to erode at the margin at the
+same time you're getting a hawkish
+repricing uh coming out of the Fed.
+Those are not good catalysts for
+markets.
+What's the risk of the Fed not
+moving in lockstep or following on from
+other central banks? Because arguably
+the view is that the US is in better
+shape than the rest of the world. I
+mean, particularly when you think about
+energy independence or a less
+vulnerability, particularly with the
+Europeans uh obviously the BOE, the ECB,
+the circumstances that they have on
+their hands right now. I know the
+Aussies have already hiked a number of
+times this year in a completely
+different situation.
+But what is the risk of the Fed not
+following suit here? I mean, is this
+about the dollar?
+Well, the risk of them not following
+suit is exactly what happened in 2021
+and 2022. The less they do now, the more
+they're going to have to do later in
+terms of catching up and ultimately
+rejecting uh this hawkish build-up of
+hawkish inflationary uh pressures. Uh
+and and the markets are already well
+aware of those dynamics you talked about
+with respect to the US's relative
+resiliency uh with regards to these
+inflation pressures and with regards to
+the global supply chain pressures.
+That's why tech is up 24% uh since our
+model signaled that we returned to a
+risk-on market regime globally on April
+11th. 24% compared to that I think the
+next closest sector is up I think about
+less than 5%. And so, clearly the
+markets and global investors have
+crowded capital aggressively crowded
+capital into our mega-cap growth sector,
+particularly technology, anything
+exposed to AI. However, the US is not
+resilient to the global liquidity cycle.
+The US is the world's largest net
+international investment deficit
+economy. If the supply chains remain
+broken and the Federal Reserve is
+pivoting its reaction function in a
+hawkish direction, both of those things
+are going to cause a drawdown in global
+liquidity that would ultimately cause a
+drawdown or wipeout in all that crowded
+bull's positioning in AI trade.
+Okay. And obviously the AI trade has
+held up pretty well in the face of these
+higher yields. I mean, obviously with a
+10-year at 444 and then a 30-year at
+what? North of 5% but you just wonder
+how much the bond vigilantes will push
+the Fed into a position where, you know,
+it might have to remove that easing bias
+as well, particularly if you look at the
+2-year. Darius, we've completely run out
+of time but fascinating chat. Thanks so
+much for jumping in and joining us this
+morning. Darius Dale, there founder and
+CEO of macro research firm 42 macro.

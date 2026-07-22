@@ -14,7 +14,6 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.storage.warehouse import TradingWarehouse
 
-
 DEFAULT_HIGH_CAGR_MIN = 0.20
 DEFAULT_HIGH_CAGR_MAX = 0.24
 _CAGR_COLUMN_PATTERN = re.compile(r"(^|_)cagr($|_)|cagr", re.IGNORECASE)
@@ -205,7 +204,9 @@ def _high_cagr_metric_hits(
                         {
                             "source_scope": _metric_scope_for_path(path, column),
                             "source_path": str(path),
-                            "strategy": str(match.get(strategy_column, "")) if strategy_column else "",
+                            "strategy": (
+                                str(match.get(strategy_column, "")) if strategy_column else ""
+                            ),
                             "metric_column": column,
                             "metric_value": float(match[column]),
                             "max_drawdown": _optional_float(match.get("max_drawdown")),
@@ -263,7 +264,9 @@ def _ambiguous_text_references(text_roots: tuple[str | Path, ...]) -> pd.DataFra
     )
 
 
-def _metric_hit(row: pd.Series, source_path: str, metric_column: str, value: float) -> dict[str, object]:
+def _metric_hit(
+    row: pd.Series, source_path: str, metric_column: str, value: float
+) -> dict[str, object]:
     return {
         "source_scope": str(row.get("source_scope", "")),
         "source_path": source_path,
@@ -349,7 +352,7 @@ def _summary_markdown(
 def _select_columns(frame: pd.DataFrame, mapping: dict[str, str]) -> pd.DataFrame:
     output = pd.DataFrame(index=frame.index)
     for source, target in mapping.items():
-        output[target] = frame[source] if source in frame else pd.NA
+        output[target] = frame.get(source, pd.NA)
     return output
 
 

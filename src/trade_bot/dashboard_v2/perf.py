@@ -35,7 +35,6 @@ def render_perf_footer() -> None:
                 {"step": sample.name, "elapsed_ms": round(sample.elapsed_ms, 1)}
                 for sample in samples[-20:]
             ],
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
-

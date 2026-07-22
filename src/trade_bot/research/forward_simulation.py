@@ -1,6 +1,9 @@
 from __future__ import annotations
 
-from dataclasses import dataclass
+import hashlib
+import json
+from dataclasses import asdict, dataclass
+from pathlib import Path
 
 import numpy as np
 import pandas as pd
@@ -506,6 +509,9 @@ def rolling_origin_simulation_backtest(
     scenario_history: pd.DataFrame | None = None,
     factor_returns: pd.DataFrame | None = None,
     config: ForwardSimulationValidationConfig | None = None,
+    checkpoint_path: str | Path | None = None,
+    resume: bool = False,
+    checkpoint_every_origins: int = 5,
 ) -> pd.DataFrame:
     """Backtest simulation calibration through historical rolling origins.
 
@@ -515,14 +521,34 @@ def rolling_origin_simulation_backtest(
     """
 
     cfg = config or ForwardSimulationValidationConfig()
+    if checkpoint_every_origins < 1:
+        raise ValueError("checkpoint_every_origins must be at least 1")
     returns = _clean_returns_series(daily_returns).sort_index()
     if returns.empty:
         return _empty_validation_frame()
     factor_history = _clean_factor_returns_frame(factor_returns)
 
-    rows: list[dict[str, object]] = []
+    checkpoint = Path(checkpoint_path) if checkpoint_path is not None else None
+    identity = _validation_checkpoint_identity(
+        returns,
+        scenario_history=scenario_history,
+        factor_returns=factor_history,
+        config=cfg,
+    )
+    checkpoint_rows, completed_origins = _load_validation_checkpoint(
+        checkpoint,
+        identity=identity,
+        resume=resume,
+        datetime_origins=isinstance(returns.index, pd.DatetimeIndex),
+    )
+
+    rows = checkpoint_rows.to_dict("records")
     origins = _validation_origin_dates(returns, config=cfg)
+    origins_since_checkpoint = 0
     for origin_position, origin_date in enumerate(origins):
+        origin_key = _checkpoint_origin_key(origin_date)
+        if origin_key in completed_origins:
+            continue
         train = _returns_through_origin(returns, origin_date)
         if len(train) < cfg.min_train_days:
             continue
@@ -555,9 +581,153 @@ def rolling_origin_simulation_backtest(
                     config=cfg,
                 )
             )
+        completed_origins.add(origin_key)
+        origins_since_checkpoint += 1
+        if checkpoint is not None and origins_since_checkpoint >= checkpoint_every_origins:
+            _write_validation_checkpoint(
+                checkpoint,
+                pd.DataFrame(rows),
+                identity=identity,
+                completed_origins=completed_origins,
+            )
+            origins_since_checkpoint = 0
     if not rows:
+        result = _empty_validation_frame()
+    else:
+        result = _ordered_validation_rows(pd.DataFrame(rows), cfg)
+    if checkpoint is not None:
+        _write_validation_checkpoint(
+            checkpoint,
+            result,
+            identity=identity,
+            completed_origins=completed_origins,
+        )
+    return result
+
+
+def _validation_checkpoint_identity(
+    returns: pd.Series,
+    *,
+    scenario_history: pd.DataFrame | None,
+    factor_returns: pd.DataFrame | None,
+    config: ForwardSimulationValidationConfig,
+) -> dict[str, object]:
+    payload = {
+        "schema_version": 1,
+        "config": asdict(config),
+        "returns_sha256": _pandas_object_sha256(returns),
+        "scenario_history_sha256": _pandas_object_sha256(scenario_history),
+        "factor_returns_sha256": _pandas_object_sha256(factor_returns),
+    }
+    encoded = json.dumps(payload, sort_keys=True, separators=(",", ":")).encode()
+    return {**payload, "identity_sha256": hashlib.sha256(encoded).hexdigest()}
+
+
+def _pandas_object_sha256(value: pd.Series | pd.DataFrame | None) -> str:
+    if value is None:
+        return "none"
+    normalized = value.copy()
+    if isinstance(normalized, pd.DataFrame):
+        normalized = normalized.sort_index(axis=1)
+    hashed = pd.util.hash_pandas_object(normalized, index=True).values.tobytes()
+    return hashlib.sha256(hashed).hexdigest()
+
+
+def _load_validation_checkpoint(
+    checkpoint_path: Path | None,
+    *,
+    identity: dict[str, object],
+    resume: bool,
+    datetime_origins: bool,
+) -> tuple[pd.DataFrame, set[str]]:
+    if checkpoint_path is None or not resume or not checkpoint_path.exists():
+        return _empty_validation_frame(), set()
+    metadata_path = _validation_checkpoint_metadata_path(checkpoint_path)
+    if not metadata_path.exists():
+        raise ValueError(
+            f"Checkpoint metadata is missing for {checkpoint_path}; use restart instead of resume."
+        )
+    try:
+        metadata = json.loads(metadata_path.read_text(encoding="utf-8"))
+    except (OSError, json.JSONDecodeError) as error:
+        raise ValueError(f"Checkpoint metadata is unreadable: {metadata_path}") from error
+    recorded_identity = metadata.get("identity") if isinstance(metadata, dict) else None
+    recorded_sha256 = (
+        recorded_identity.get("identity_sha256") if isinstance(recorded_identity, dict) else None
+    )
+    if recorded_sha256 != identity["identity_sha256"]:
+        raise ValueError(
+            "Checkpoint inputs or simulation settings do not match this run; "
+            "use restart instead of resume."
+        )
+    try:
+        frame = pd.read_csv(checkpoint_path)
+    except (OSError, pd.errors.ParserError) as error:
+        raise ValueError(f"Checkpoint rows are unreadable: {checkpoint_path}") from error
+    expected_columns = list(_empty_validation_frame().columns)
+    missing_columns = [column for column in expected_columns if column not in frame]
+    if missing_columns:
+        raise ValueError(f"Checkpoint is missing validation columns: {missing_columns}")
+    frame = frame.loc[:, expected_columns]
+    if datetime_origins and not frame.empty:
+        frame["origin_date"] = pd.to_datetime(frame["origin_date"], errors="raise")
+    completed = metadata.get("completed_origins", [])
+    if not isinstance(completed, list) or not all(isinstance(item, str) for item in completed):
+        raise ValueError(f"Checkpoint completed-origin metadata is invalid: {metadata_path}")
+    return frame, set(completed)
+
+
+def _write_validation_checkpoint(
+    checkpoint_path: Path,
+    rows: pd.DataFrame,
+    *,
+    identity: dict[str, object],
+    completed_origins: set[str],
+) -> None:
+    checkpoint_path.parent.mkdir(parents=True, exist_ok=True)
+    frame = rows if not rows.empty else _empty_validation_frame()
+    frame = frame.reindex(columns=_empty_validation_frame().columns)
+    temporary_rows = checkpoint_path.with_name(f".{checkpoint_path.name}.tmp")
+    frame.to_csv(temporary_rows, index=False)
+    temporary_rows.replace(checkpoint_path)
+
+    metadata_path = _validation_checkpoint_metadata_path(checkpoint_path)
+    temporary_metadata = metadata_path.with_name(f".{metadata_path.name}.tmp")
+    metadata = {
+        "schema_version": 1,
+        "identity": identity,
+        "completed_origins": sorted(completed_origins),
+        "completed_origin_count": len(completed_origins),
+        "validation_row_count": len(frame),
+    }
+    temporary_metadata.write_text(
+        json.dumps(metadata, indent=2, sort_keys=True) + "\n",
+        encoding="utf-8",
+    )
+    temporary_metadata.replace(metadata_path)
+
+
+def _validation_checkpoint_metadata_path(checkpoint_path: Path) -> Path:
+    return checkpoint_path.with_suffix(f"{checkpoint_path.suffix}.meta.json")
+
+
+def _checkpoint_origin_key(origin_date: object) -> str:
+    if isinstance(origin_date, pd.Timestamp):
+        return origin_date.isoformat()
+    return str(origin_date)
+
+
+def _ordered_validation_rows(
+    rows: pd.DataFrame,
+    config: ForwardSimulationValidationConfig,
+) -> pd.DataFrame:
+    if rows.empty:
         return _empty_validation_frame()
-    return pd.DataFrame(rows)
+    horizon_order = {label: position for position, (label, _days) in enumerate(config.horizons)}
+    ordered = rows.copy()
+    ordered["_horizon_order"] = ordered["horizon"].map(horizon_order).fillna(len(horizon_order))
+    ordered = ordered.sort_values(["origin_date", "_horizon_order"], kind="stable")
+    return ordered.drop(columns="_horizon_order").reset_index(drop=True)
 
 
 def summarize_simulation_validation(validation: pd.DataFrame) -> dict[str, object]:
@@ -585,6 +755,8 @@ def summarize_simulation_validation(validation: pd.DataFrame) -> dict[str, objec
             "launch_underrisk_rate": None,
             "bad_action_avoidance_rate": None,
             "constructive_capture_rate": None,
+            "distribution_calibration_read": "insufficient_history",
+            "action_readiness_read": "insufficient_history",
             "validity_read": "insufficient_history",
         }
 
@@ -616,7 +788,7 @@ def summarize_simulation_validation(validation: pd.DataFrame) -> dict[str, objec
     median_error_mean = _mean_or_none(median_error)
     median_abs_error = _mean_or_none(median_error.abs())
     launch_action_error_mean = _mean_or_none(action_error)
-    summary = {
+    summary: dict[str, object] = {
         "rows": int(validation.shape[0]),
         "origins": int(validation["origin_date"].nunique()),
         "horizons": int(validation["horizon"].nunique()),
@@ -640,6 +812,10 @@ def summarize_simulation_validation(validation: pd.DataFrame) -> dict[str, objec
         "bad_action_avoidance_rate": _mean_or_none(avoided_bad_action),
         "constructive_capture_rate": _mean_or_none(captured_constructive),
     }
+    distribution_read = _simulation_distribution_calibration_read(summary)
+    action_read = _simulation_action_readiness_read(summary)
+    summary["distribution_calibration_read"] = distribution_read
+    summary["action_readiness_read"] = action_read
     summary["validity_read"] = _simulation_validation_read(summary)
     return summary
 
@@ -681,6 +857,8 @@ def summarize_simulation_validation_by_horizon(validation: pd.DataFrame) -> pd.D
         "launch_underrisk_rate",
         "bad_action_avoidance_rate",
         "constructive_capture_rate",
+        "distribution_calibration_read",
+        "action_readiness_read",
         "validity_read",
     ]
     return pd.DataFrame(rows).reindex(columns=columns)
@@ -768,7 +946,7 @@ def summarize_strategy_rank_validation(rank_validation: pd.DataFrame) -> dict[st
     )
     top_hit = _mean_or_none(hit_rows["top_strategy_hit"])
     rank_corr = _mean_or_none(pd.to_numeric(correlations["rank_correlation"], errors="coerce"))
-    summary = {
+    summary: dict[str, object] = {
         "rows": int(rank_validation.shape[0]),
         "origin_horizons": int(origin_horizon.shape[0]),
         "top_strategy_hit_rate": top_hit,
@@ -1083,7 +1261,17 @@ def _validation_target_coverage(validation: pd.DataFrame) -> float:
 
 
 def _simulation_validation_read(summary: dict[str, object]) -> str:
-    rows = int(summary.get("rows") or 0)
+    distribution_read = _simulation_distribution_calibration_read(summary)
+    if distribution_read != "return_bands_calibrated_for_research":
+        return distribution_read
+    action_read = _simulation_action_readiness_read(summary)
+    if action_read != "action_checks_ready_for_research":
+        return f"return_bands_calibrated__{action_read}"
+    return "return_bands_and_action_checks_ready_for_research"
+
+
+def _simulation_distribution_calibration_read(summary: dict[str, object]) -> str:
+    rows = int(_safe_float(summary.get("rows")) or 0)
     if rows < 10:
         return "limited_sample"
     coverage_error = _safe_float(summary.get("coverage_error"))
@@ -1099,11 +1287,27 @@ def _simulation_validation_read(summary: dict[str, object]) -> str:
         return "too_bearish"
     if severe_brier is not None and severe_brier >= 0.20:
         return "drawdown_miscalibrated"
-    return "calibrated_enough_for_research"
+    return "return_bands_calibrated_for_research"
+
+
+def _simulation_action_readiness_read(summary: dict[str, object]) -> str:
+    rows = int(_safe_float(summary.get("rows")) or 0)
+    if rows < 10:
+        return "action_checks_limited_sample"
+    launch_accuracy = _safe_float(summary.get("launch_decision_accuracy"))
+    action_score = _safe_float(summary.get("launch_action_score"))
+    over_risk = _safe_float(summary.get("launch_overrisk_rate"))
+    if launch_accuracy is None or action_score is None or over_risk is None:
+        return "action_checks_incomplete"
+    if launch_accuracy < 0.40 or action_score < 0.55 or over_risk > 0.45:
+        return "action_checks_not_ready"
+    if launch_accuracy < 0.60 or action_score < 0.75 or over_risk > 0.25:
+        return "action_checks_marginal"
+    return "action_checks_ready_for_research"
 
 
 def _strategy_ranking_read(summary: dict[str, object]) -> str:
-    origin_horizons = int(summary.get("origin_horizons") or 0)
+    origin_horizons = int(_safe_float(summary.get("origin_horizons")) or 0)
     if origin_horizons < 5:
         return "limited_sample"
     hit_rate = _safe_float(summary.get("top_strategy_hit_rate"))

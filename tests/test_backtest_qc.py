@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from pathlib import Path
 
 import pandas as pd
@@ -64,6 +65,10 @@ def test_backtest_qc_gauntlet_writes_core_artifacts(tmp_path: Path) -> None:
     assert gauntlet.headline.iloc[0]["cagr"] == gauntlet.headline.iloc[0]["cagr"]
     assert "No direct leakage" in gauntlet.readout
     assert gauntlet.artifacts["summary"].exists()
+    manifest = json.loads(gauntlet.artifacts["manifest"].read_text(encoding="utf-8"))
+    assert manifest["study"] == "backtest_qc_gauntlet"
+    assert manifest["parameters"]["strategy"] == "candidate"
+    assert manifest["automatic_promotion_allowed"] is False
     assert (tmp_path / "qc" / "causality.csv").exists()
     assert (tmp_path / "qc" / "universe_ablations.csv").exists()
     causality = pd.read_csv(tmp_path / "qc" / "causality.csv")

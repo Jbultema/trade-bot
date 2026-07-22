@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 import json
 import sqlite3
 import uuid
@@ -13,16 +14,18 @@ import duckdb
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
-from trade_bot.config import ExecutionConfig, StrategyConfig
+from trade_bot.config import BotConfig, ExecutionConfig, StrategyConfig, required_strategy_tickers
 from trade_bot.DEFAULTS import (
     DEFAULT_EXPERIMENT_REGISTRY_LIMIT,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_JOURNAL_PATH,
     DEFAULT_MONITORING_COHORT_START_DATE,
     DEFAULT_MONITORING_TOP_N,
+    DEFAULT_PROSPECTIVE_MONITORING_COHORT,
     DEFAULT_RESET_EXPERIMENTS_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
 )
+from trade_bot.features.indicators import unusable_required_price_columns
 from trade_bot.research.curation import (
     add_research_status,
     default_reference_mask,
@@ -57,10 +60,17 @@ class MonitoringWindowSeedResult:
 class TradingWarehouse:
     """Canonical local DuckDB store for operational bot state."""
 
-    def __init__(self, db_path: str | Path = DEFAULT_RUN_STORE_DB_PATH) -> None:
+    def __init__(
+        self,
+        db_path: str | Path = DEFAULT_RUN_STORE_DB_PATH,
+        *,
+        read_only: bool = False,
+    ) -> None:
         self.db_path = Path(db_path)
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self._ensure_schema()
+        self.read_only = read_only
+        if not self.read_only:
+            self.db_path.parent.mkdir(parents=True, exist_ok=True)
+            self._ensure_schema()
 
     def migrate_experiment_outputs(
         self,
@@ -196,7 +206,7 @@ class TradingWarehouse:
             calmar = _optional_float(row.get("calmar"))
             max_drawdown = _optional_float(row.get("max_drawdown"))
             notes = (
-                "Snapshot-operable strategy" f"; CAGR={cagr:.2%}"
+                f"Snapshot-operable strategy; CAGR={cagr:.2%}"
                 if cagr is not None
                 else "Snapshot-operable strategy"
             )
@@ -333,6 +343,11 @@ class TradingWarehouse:
                     "promotion_rule": "Promote only after forward paper edge survives walk-forward, regime, and drawdown checks.",
                     "kill_rule": "Demote on broken thesis, unacceptable drawdown, repeated missed off-ramp, or deteriorating scenario fit.",
                     "notes": f"Seeded from experiment registry as {window_role}; registry role={role}.",
+                    "cohort_id": "",
+                    "evidence_basis": "reconstructed_historical",
+                    "historical_backfill_allowed": True,
+                    "strategy_json": "",
+                    "execution_json": "",
                 }
             )
             seeded.append(
@@ -343,6 +358,129 @@ class TradingWarehouse:
                     role=window_role,
                 )
             )
+        if rows:
+            self._upsert_frame("monitoring_windows", pd.DataFrame(rows), "window_id")
+        return seeded
+
+    def seed_prospective_monitoring_cohort(
+        self,
+        config: BotConfig,
+        *,
+        start_date: str,
+        account: str = "v22_prospective",
+        mode: str = "paper",
+        capital_base: float = 10_000.0,
+        cohort_id: str | None = None,
+    ) -> list[MonitoringWindowSeedResult]:
+        """Freeze the fixed V2.2 cohort without treating earlier history as forward evidence."""
+
+        start = _normalize_monitoring_start_date(start_date)
+        cohort = cohort_id or f"v22-prospective-{start}"
+        missing = [
+            strategy_name
+            for strategy_name, _role in DEFAULT_PROSPECTIVE_MONITORING_COHORT
+            if strategy_name not in config.strategies
+        ]
+        if missing:
+            raise ValueError(
+                "Prospective cohort cannot be frozen because configured strategies are missing: "
+                + ", ".join(missing)
+            )
+
+        existing = self.list_monitoring_windows(status=None)
+        existing_keys = (
+            set(
+                zip(
+                    existing.get("cohort_id", pd.Series("", index=existing.index)).astype(str),
+                    existing["strategy_name"].astype(str),
+                    existing["status"].astype(str),
+                    strict=False,
+                )
+            )
+            if not existing.empty
+            else set()
+        )
+        now = utc_now_iso()
+        execution_json = json.dumps(config.execution.model_dump(mode="json"), sort_keys=True)
+        rows: list[dict[str, object]] = []
+        registry_rows: list[dict[str, object]] = []
+        seeded: list[MonitoringWindowSeedResult] = []
+        for strategy_name, role in DEFAULT_PROSPECTIVE_MONITORING_COHORT:
+            if (cohort, strategy_name, "active") in existing_keys:
+                continue
+            strategy = config.strategies[strategy_name]
+            strategy_json = json.dumps(strategy.model_dump(mode="json"), sort_keys=True)
+            strategy_version = hashlib.sha256(
+                f"{strategy_json}\n{execution_json}".encode()
+            ).hexdigest()
+            strategy_id = _strategy_id(strategy_name)
+            window_id = self._unique_monitoring_window_id(
+                _monitoring_window_id(mode, account, strategy_id, start)
+            )
+            rows.append(
+                {
+                    "window_id": window_id,
+                    "created_at_utc": now,
+                    "updated_at_utc": now,
+                    "mode": mode,
+                    "account": account,
+                    "strategy_id": strategy_id,
+                    "strategy_version": strategy_version,
+                    "strategy_name": strategy_name,
+                    "window_role": role,
+                    "benchmark": "SPY",
+                    "start_date": start,
+                    "end_date": "",
+                    "status": "active",
+                    "capital_base": float(capital_base),
+                    "rebalance_cadence": str(config.execution.rebalance),
+                    "risk_budget": "frozen_strategy_policy",
+                    "promotion_rule": (
+                        "Prospective observations only; reconstructed history cannot satisfy a "
+                        "promotion checkpoint."
+                    ),
+                    "kill_rule": (
+                        "Demote on broken thesis, unacceptable drawdown, repeated missed off-ramp, "
+                        "or frozen-rule execution failure."
+                    ),
+                    "notes": (
+                        "Fixed V2.2 prospective cohort; no performance before start_date counts as "
+                        "forward evidence."
+                    ),
+                    "cohort_id": cohort,
+                    "evidence_basis": "prospective_no_backfill",
+                    "historical_backfill_allowed": False,
+                    "strategy_json": strategy_json,
+                    "execution_json": execution_json,
+                }
+            )
+            registry_rows.append(
+                {
+                    "strategy_id": strategy_id,
+                    "strategy_version": strategy_version,
+                    "strategy_name": strategy_name,
+                    "role": role,
+                    "status": "operable" if role != "reference" else "reference",
+                    "source": "prospective_cohort",
+                    "family": "reference_portfolio" if role == "reference" else "i111",
+                    "benchmark": "SPY",
+                    "universe": "frozen_configured_runtime",
+                    "params_json": strategy_json,
+                    "created_at_utc": now,
+                    "updated_at_utc": now,
+                    "notes": f"Frozen in prospective cohort {cohort}.",
+                }
+            )
+            seeded.append(
+                MonitoringWindowSeedResult(
+                    window_id=window_id,
+                    strategy_id=strategy_id,
+                    strategy_name=strategy_name,
+                    role=role,
+                )
+            )
+        if registry_rows:
+            self._upsert_frame("strategy_registry", pd.DataFrame(registry_rows), "strategy_id")
         if rows:
             self._upsert_frame("monitoring_windows", pd.DataFrame(rows), "window_id")
         return seeded
@@ -432,6 +570,11 @@ class TradingWarehouse:
                     "promotion_rule": "Promote only after forward paper edge survives walk-forward, regime, and drawdown checks.",
                     "kill_rule": "Demote on broken thesis, unacceptable drawdown, repeated missed off-ramp, or deteriorating scenario fit.",
                     "notes": f"Manually monitored from dashboard/CLI as {role}.",
+                    "cohort_id": "",
+                    "evidence_basis": "reconstructed_historical",
+                    "historical_backfill_allowed": True,
+                    "strategy_json": "",
+                    "execution_json": "",
                 }
             ]
         )
@@ -861,12 +1004,15 @@ class TradingWarehouse:
             windows,
             execution=execution,
         )
+        prospective_results = self._prospective_monitoring_results(baseline_run, windows)
         rows = []
         for _, window in windows.iterrows():
             strategy_name = str(window["strategy_name"])
-            if strategy_name not in runtime_results:
+            result = prospective_results.get(str(window["window_id"]))
+            if result is None:
+                result = runtime_results.get(strategy_name)
+            if result is None:
                 continue
-            result = runtime_results[strategy_name]
             if result.equity.empty:
                 continue
             equity_series = result.equity.dropna()
@@ -924,6 +1070,14 @@ class TradingWarehouse:
                     "strategy_name": strategy_name,
                     "mode": str(window["mode"]),
                     "account": str(window["account"]),
+                    "cohort_id": str(window.get("cohort_id", "") or ""),
+                    "evidence_basis": str(
+                        window.get("evidence_basis", "reconstructed_historical")
+                        or "reconstructed_historical"
+                    ),
+                    "historical_backfill_allowed": bool(
+                        _monitoring_backfill_allowed(window)
+                    ),
                     "equity": paper_equity,
                     "cash": 0.0,
                     "gross_exposure": _latest_gross_exposure(result),
@@ -940,10 +1094,7 @@ class TradingWarehouse:
                         else float("nan")
                     ),
                     **exposure_diagnostics,
-                    "notes": (
-                        "Start-date anchored ideal valuation from the monitoring window start; "
-                        "actual execution drift is tracked separately in Forward Test."
-                    ),
+                    "notes": _monitoring_valuation_note(window),
                 }
             )
         if not rows:
@@ -998,6 +1149,15 @@ class TradingWarehouse:
                     "ablation_output_path": ablation_output_path,
                     "rank_output_path": rank_output_path,
                     "primary_validity_read": str(validation_summary.get("validity_read", "")),
+                    "primary_distribution_calibration_read": str(
+                        validation_summary.get(
+                            "distribution_calibration_read",
+                            validation_summary.get("validity_read", ""),
+                        )
+                    ),
+                    "primary_action_readiness_read": str(
+                        validation_summary.get("action_readiness_read", "")
+                    ),
                     "primary_interval_coverage": _optional_float(
                         validation_summary.get("interval_coverage")
                     ),
@@ -1153,7 +1313,9 @@ class TradingWarehouse:
                     "candidate_rows": int(len(candidate_scores)),
                     "frontier_rows": int(len(phase_candidate_frontier)),
                     "validation_rows": int(len(validation_metrics)),
-                    "reliability_rows": int(len(phase_reliability)) if phase_reliability is not None else 0,
+                    "reliability_rows": (
+                        int(len(phase_reliability)) if phase_reliability is not None else 0
+                    ),
                     "crisis_rows": int(len(crisis_playback)) if crisis_playback is not None else 0,
                     "readout": readout,
                 }
@@ -1282,8 +1444,7 @@ class TradingWarehouse:
                 continue
             strategy_prices = _candidate_strategy_prices(
                 prices,
-                strategy.tickers,
-                strategy.defensive_ticker,
+                strategy,
             )
             if strategy_prices.empty:
                 continue
@@ -1305,6 +1466,44 @@ class TradingWarehouse:
                 drawdown_control=strategy.drawdown_control,
             )
         return runtime_results
+
+    def _prospective_monitoring_results(
+        self,
+        baseline_run: Any,
+        windows: pd.DataFrame,
+    ) -> dict[str, BacktestResult]:
+        if windows.empty or "evidence_basis" not in windows:
+            return {}
+        prospective = windows[
+            windows["evidence_basis"].astype(str).eq("prospective_no_backfill")
+        ]
+        prices = getattr(baseline_run, "prices", pd.DataFrame())
+        if prospective.empty or prices.empty:
+            return {}
+        results: dict[str, BacktestResult] = {}
+        cached: dict[str, BacktestResult] = {}
+        for _, window in prospective.iterrows():
+            strategy = _strategy_from_json(window.get("strategy_json"))
+            execution = _execution_from_json(window.get("execution_json"))
+            if strategy is None or execution is None:
+                continue
+            version = str(window.get("strategy_version", ""))
+            cache_key = f"{window['strategy_name']}:{version}"
+            if cache_key not in cached:
+                strategy_prices = _candidate_strategy_prices(prices, strategy)
+                if strategy_prices.empty:
+                    continue
+                target_weights = build_strategy_weights(strategy_prices, strategy)
+                cached[cache_key] = run_backtest(
+                    str(window["strategy_name"]),
+                    strategy_prices,
+                    target_weights,
+                    execution,
+                    volatility_target=strategy.volatility_target,
+                    drawdown_control=strategy.drawdown_control,
+                )
+            results[str(window["window_id"])] = cached[cache_key]
+        return results
 
     def _candidate_manifests_for_strategy_names(self, strategy_names: list[str]) -> pd.DataFrame:
         names = set(strategy_names)
@@ -1677,9 +1876,25 @@ class TradingWarehouse:
                     risk_budget VARCHAR NOT NULL,
                     promotion_rule VARCHAR NOT NULL,
                     kill_rule VARCHAR NOT NULL,
-                    notes VARCHAR NOT NULL
+                    notes VARCHAR NOT NULL,
+                    cohort_id VARCHAR,
+                    evidence_basis VARCHAR,
+                    historical_backfill_allowed BOOLEAN,
+                    strategy_json VARCHAR,
+                    execution_json VARCHAR
                 )
                 """
+            )
+            self._ensure_table_columns(
+                connection,
+                "monitoring_windows",
+                {
+                    "cohort_id": "VARCHAR",
+                    "evidence_basis": "VARCHAR",
+                    "historical_backfill_allowed": "BOOLEAN",
+                    "strategy_json": "VARCHAR",
+                    "execution_json": "VARCHAR",
+                },
             )
             connection.execute(
                 """
@@ -1694,6 +1909,14 @@ class TradingWarehouse:
                     risk_score DOUBLE,
                     one_month_risk_off_probability DOUBLE,
                     risk_budget_multiplier DOUBLE,
+                    base_defensive_weight DOUBLE,
+                    final_defensive_weight DOUBLE,
+                    quantitative_defensive_add_pp DOUBLE,
+                    scenario_defensive_add_pp DOUBLE,
+                    portfolio_defensive_add_pp DOUBLE,
+                    scenario_sizing_authority DOUBLE,
+                    scenario_budget_authority DOUBLE,
+                    scenario_weighted_stress_authority DOUBLE,
                     portfolio_risk_multiplier DOUBLE,
                     post_expected_shortfall_95 DOUBLE,
                     post_max_stress_loss DOUBLE,
@@ -1704,6 +1927,20 @@ class TradingWarehouse:
                     spy_ytd_large_move_share DOUBLE
                 )
                 """
+            )
+            self._ensure_table_columns(
+                connection,
+                "operating_metric_history",
+                {
+                    "base_defensive_weight": "DOUBLE",
+                    "final_defensive_weight": "DOUBLE",
+                    "quantitative_defensive_add_pp": "DOUBLE",
+                    "scenario_defensive_add_pp": "DOUBLE",
+                    "portfolio_defensive_add_pp": "DOUBLE",
+                    "scenario_sizing_authority": "DOUBLE",
+                    "scenario_budget_authority": "DOUBLE",
+                    "scenario_weighted_stress_authority": "DOUBLE",
+                },
             )
             connection.execute(
                 """
@@ -1770,6 +2007,9 @@ class TradingWarehouse:
                     strategy_name VARCHAR NOT NULL,
                     mode VARCHAR NOT NULL,
                     account VARCHAR NOT NULL,
+                    cohort_id VARCHAR,
+                    evidence_basis VARCHAR,
+                    historical_backfill_allowed BOOLEAN,
                     equity DOUBLE NOT NULL,
                     cash DOUBLE NOT NULL,
                     gross_exposure DOUBLE NOT NULL,
@@ -1789,6 +2029,9 @@ class TradingWarehouse:
                 connection,
                 "strategy_daily_valuations",
                 {
+                    "cohort_id": "VARCHAR",
+                    "evidence_basis": "VARCHAR",
+                    "historical_backfill_allowed": "BOOLEAN",
                     "beta_adjusted_spy_delta": "DOUBLE",
                     "stocks_percent_of_max_sleeve": "DOUBLE",
                     "defensive_percent_of_max_sleeve": "DOUBLE",
@@ -1820,6 +2063,8 @@ class TradingWarehouse:
                     ablation_output_path VARCHAR NOT NULL,
                     rank_output_path VARCHAR NOT NULL,
                     primary_validity_read VARCHAR NOT NULL,
+                    primary_distribution_calibration_read VARCHAR,
+                    primary_action_readiness_read VARCHAR,
                     primary_interval_coverage DOUBLE,
                     primary_coverage_error DOUBLE,
                     primary_median_abs_error DOUBLE,
@@ -1834,6 +2079,8 @@ class TradingWarehouse:
                     "interval_low": "DOUBLE",
                     "interval_high": "DOUBLE",
                     "target_interval_coverage": "DOUBLE",
+                    "primary_distribution_calibration_read": "VARCHAR",
+                    "primary_action_readiness_read": "VARCHAR",
                 },
             )
             connection.execute(
@@ -1868,6 +2115,8 @@ class TradingWarehouse:
                     bad_action_avoidance_rate DOUBLE,
                     constructive_capture_rate DOUBLE,
                     validity_read VARCHAR NOT NULL,
+                    distribution_calibration_read VARCHAR,
+                    action_readiness_read VARCHAR,
                     realized_return DOUBLE,
                     realized_max_drawdown DOUBLE,
                     realized_severe_drawdown BOOLEAN,
@@ -1905,6 +2154,8 @@ class TradingWarehouse:
                     "launch_underrisk_rate": "DOUBLE",
                     "bad_action_avoidance_rate": "DOUBLE",
                     "constructive_capture_rate": "DOUBLE",
+                    "distribution_calibration_read": "VARCHAR",
+                    "action_readiness_read": "VARCHAR",
                     "simulated_launch_action": "INTEGER",
                     "realized_launch_action": "INTEGER",
                     "launch_action_error": "INTEGER",
@@ -2403,7 +2654,7 @@ class TradingWarehouse:
             connection.close()
 
     def _connect(self) -> duckdb.DuckDBPyConnection:
-        return duckdb.connect(str(self.db_path))
+        return duckdb.connect(str(self.db_path), read_only=self.read_only)
 
 
 def utc_now_iso() -> str:
@@ -2533,13 +2784,44 @@ def _validate_window_status(status: str) -> None:
 
 
 def _strategy_from_candidate_manifest(row: pd.Series) -> StrategyConfig | None:
-    raw = row.get("strategy_json")
+    return _strategy_from_json(row.get("strategy_json"))
+
+
+def _strategy_from_json(raw: object) -> StrategyConfig | None:
     if not isinstance(raw, str) or not raw or raw == "nan":
         return None
     try:
         return StrategyConfig.model_validate(json.loads(raw))
     except (TypeError, ValueError, json.JSONDecodeError):
         return None
+
+
+def _execution_from_json(raw: object) -> ExecutionConfig | None:
+    if not isinstance(raw, str) or not raw or raw == "nan":
+        return None
+    try:
+        return ExecutionConfig.model_validate(json.loads(raw))
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return None
+
+
+def _monitoring_valuation_note(window: pd.Series) -> str:
+    if str(window.get("evidence_basis", "")) == "prospective_no_backfill":
+        return (
+            "Prospective frozen-rule valuation from start_date; no earlier history counts as "
+            "forward evidence. Actual execution drift is tracked separately in Forward Test."
+        )
+    return (
+        "Start-date anchored reconstructed valuation from the monitoring window start; actual "
+        "execution drift is tracked separately in Forward Test."
+    )
+
+
+def _monitoring_backfill_allowed(window: pd.Series) -> bool:
+    value = window.get("historical_backfill_allowed", True)
+    if value is None or value is pd.NA or (isinstance(value, float) and pd.isna(value)):
+        return True
+    return bool(value)
 
 
 def _scenario_sizing_from_candidate_manifest(row: pd.Series) -> ScenarioSizingConfig | None:
@@ -2560,14 +2842,12 @@ def _scenario_sizing_from_candidate_manifest(row: pd.Series) -> ScenarioSizingCo
 
 def _candidate_strategy_prices(
     prices: pd.DataFrame,
-    tickers: list[str],
-    defensive_ticker: str | None,
+    strategy: StrategyConfig,
 ) -> pd.DataFrame:
-    columns = list(dict.fromkeys([*tickers, *([defensive_ticker] if defensive_ticker else [])]))
-    available_columns = [column for column in columns if column in prices.columns]
-    if len(available_columns) != len(columns):
+    columns = required_strategy_tickers(strategy)
+    if unusable_required_price_columns(prices, columns):
         return pd.DataFrame()
-    return prices[available_columns].dropna(how="all")
+    return prices[columns].dropna(how="all")
 
 
 def _load_candidate_manifests_from_artifacts(strategy_names: set[str]) -> pd.DataFrame:
@@ -2783,6 +3063,10 @@ def _simulation_validation_summary_metric_row(
         "bad_action_avoidance_rate": _optional_float(summary.get("bad_action_avoidance_rate")),
         "constructive_capture_rate": _optional_float(summary.get("constructive_capture_rate")),
         "validity_read": str(summary.get("validity_read", "")),
+        "distribution_calibration_read": str(
+            summary.get("distribution_calibration_read", summary.get("validity_read", ""))
+        ),
+        "action_readiness_read": str(summary.get("action_readiness_read", "")),
         "realized_return": None,
         "realized_max_drawdown": None,
         "realized_severe_drawdown": None,

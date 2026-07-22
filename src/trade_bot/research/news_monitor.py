@@ -43,6 +43,7 @@ TRIAGE_COLUMNS = [
     "phase",
     "urgency_score",
     "activation_status",
+    "sizing_authority_status",
     "event_id",
     "confidence",
     "source_priority",
@@ -53,7 +54,15 @@ TRIAGE_COLUMNS = [
     "url",
     "summary",
 ]
-SOURCE_HEALTH_COLUMNS = ["source", "status", "fetched_at", "items", "message", "url"]
+SOURCE_HEALTH_COLUMNS = [
+    "source",
+    "status",
+    "fetched_at",
+    "data_as_of",
+    "items",
+    "message",
+    "url",
+]
 SOURCE_COVERAGE_COLUMNS = [
     "coverage_bucket",
     "required_topics",
@@ -265,6 +274,7 @@ def triage_news_items(
                 "phase": classification.phase,
                 "urgency_score": score,
                 "activation_status": "pending",
+                "sizing_authority_status": "pending_health_check",
                 "event_id": "",
                 "confidence": classification.confidence,
                 "source_priority": item.source_priority,
@@ -310,12 +320,20 @@ def activate_news_events(
         category = str(row["category"])
         urgency_score = float(row["urgency_score"])
         source_priority = int(row["source_priority"])
+        degraded_source_health = _source_health_is_degraded(
+            news_monitor.source_health,
+            str(row["source"]),
+        )
 
         if canonical_url in existing_by_url:
             event = existing_by_url[canonical_url]
             mutable_row["activation_status"] = "covered_by_curated_event"
+            mutable_row["sizing_authority_status"] = "curated_event_policy"
             mutable_row["event_id"] = event.event_id
             used_urls.add(canonical_url)
+        elif degraded_source_health and category != "unclassified":
+            mutable_row["activation_status"] = "triage_only_degraded_source_health"
+            mutable_row["sizing_authority_status"] = "denied_degraded_source_health"
         elif (
             category != "unclassified"
             and urgency_score >= news_monitor.activation_threshold
@@ -323,15 +341,19 @@ def activate_news_events(
         ):
             event = _market_event_from_news_row(mutable_row)
             mutable_row["activation_status"] = "event_risk_generated"
+            mutable_row["sizing_authority_status"] = "news_health_verified"
             mutable_row["event_id"] = event.event_id
             activated_events.append(event)
             used_urls.add(canonical_url)
         elif category != "unclassified" and urgency_score >= news_monitor.activation_threshold:
             mutable_row["activation_status"] = "triage_only_low_priority"
+            mutable_row["sizing_authority_status"] = "denied_low_priority"
         elif category != "unclassified":
             mutable_row["activation_status"] = "triage_only_below_threshold"
+            mutable_row["sizing_authority_status"] = "denied_below_threshold"
         else:
             mutable_row["activation_status"] = "unclassified"
+            mutable_row["sizing_authority_status"] = "denied_unclassified"
         rows.append(mutable_row)
 
     triage = pd.DataFrame(rows)
@@ -587,6 +609,8 @@ def _market_event_from_news_row(row: dict[str, object]) -> MarketEvent:
         phase=_phase_from_row(row),
         phase_reason=str(row.get("phase_reason", "")),
         confirmation_window=str(row.get("confirmation_window", "")),
+        decay_after_days=1,
+        expires_after_days=7,
     )
 
 
@@ -647,6 +671,7 @@ def _source_health_row(
         "source": source.name,
         "status": status,
         "fetched_at": fetched_at,
+        "data_as_of": fetched_at,
         "items": items,
         "message": message,
         "url": source.url,
@@ -657,10 +682,25 @@ def _cache_fallback_health(health: pd.DataFrame, now: pd.Timestamp) -> pd.DataFr
     if health.empty:
         return health
     fallback = health.copy()
+    if "data_as_of" not in fallback:
+        fallback["data_as_of"] = fallback.get("fetched_at", "")
+    else:
+        fallback["data_as_of"] = fallback["data_as_of"].fillna(
+            fallback.get("fetched_at", "")
+        )
     fallback["status"] = "cache_fallback"
     fallback["fetched_at"] = now.isoformat()
     fallback["message"] = "Using stale cached news because live fetch returned no items."
     return fallback
+
+
+def _source_health_is_degraded(health: pd.DataFrame, source: str) -> bool:
+    if health.empty or "source" not in health or "status" not in health:
+        return False
+    matches = health[health["source"].astype(str).eq(source)]
+    if matches.empty:
+        return False
+    return not bool(matches["status"].astype(str).str.lower().eq("ok").any())
 
 
 def _cache_is_fresh(cached: dict[str, Any] | None, max_age_minutes: int, now: pd.Timestamp) -> bool:
@@ -712,7 +752,11 @@ def _items_and_health_from_cache(
         )
         for raw in cached.get("items", [])
     )
-    health = pd.DataFrame(cached.get("source_health", []), columns=SOURCE_HEALTH_COLUMNS)
+    health = pd.DataFrame(cached.get("source_health", []))
+    for column in SOURCE_HEALTH_COLUMNS:
+        if column not in health:
+            health[column] = ""
+    health = health[SOURCE_HEALTH_COLUMNS]
     return items, health
 
 

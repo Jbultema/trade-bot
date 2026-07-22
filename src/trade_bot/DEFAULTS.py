@@ -24,6 +24,7 @@ from typing import Final, Literal
 
 # Global market calendar assumptions.
 TRADING_DAYS_PER_YEAR = 252
+DEFAULT_MAX_PRICE_STALENESS_SESSIONS = 5
 
 
 # Paths, local stores, and app/runtime behavior.
@@ -63,6 +64,13 @@ DEFAULT_SCENARIO_HISTORY_SNAPSHOT_LIMIT = 120
 DEFAULT_TREND_HISTORY_SNAPSHOT_LIMIT = 1_000
 DEFAULT_MONITORING_TOP_N = 5
 DEFAULT_MONITORING_COHORT_START_DATE = "2026-01-01"
+DEFAULT_PROSPECTIVE_MONITORING_COHORT = (
+    ("i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145", "champion"),
+    ("i111_native_risk_repair_guard17_relief85_ai85_div", "challenger"),
+    ("i111_reentry_vol_target_fast_21d_no_trend_min25", "challenger"),
+    ("buy_hold_qqq", "reference"),
+    ("buy_hold_spy", "reference"),
+)
 DEFAULT_MONITORING_ENVELOPE_WATCH_SHARE = 0.50
 DEFAULT_MONITORING_ENVELOPE_REVIEW_SHARE = 0.85
 DEFAULT_MONITORING_ENVELOPE_BREACH_SHARE = 1.00

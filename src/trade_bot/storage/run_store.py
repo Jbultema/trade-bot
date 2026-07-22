@@ -99,6 +99,7 @@ class SnapshotJob:
     log_path: str
     run_id: str
     error_message: str
+    process_id: int = 0
 
 
 class RunStore:
@@ -107,14 +108,18 @@ class RunStore:
         db_path: str | Path = DEFAULT_RUN_STORE_DB_PATH,
         artifact_dir: str | Path = DEFAULT_RUN_STORE_ARTIFACT_DIR,
         job_log_dir: str | Path = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+        *,
+        read_only: bool = False,
     ) -> None:
         self.db_path = Path(db_path)
         self.artifact_dir = Path(artifact_dir)
         self.job_log_dir = Path(job_log_dir)
-        self.db_path.parent.mkdir(parents=True, exist_ok=True)
-        self.artifact_dir.mkdir(parents=True, exist_ok=True)
-        self.job_log_dir.mkdir(parents=True, exist_ok=True)
-        self._ensure_schema()
+        self.read_only = read_only
+        if not self.read_only:
+            self.db_path.parent.mkdir(parents=True, exist_ok=True)
+            self.artifact_dir.mkdir(parents=True, exist_ok=True)
+            self.job_log_dir.mkdir(parents=True, exist_ok=True)
+            self._ensure_schema()
 
     def save_snapshot(
         self,
@@ -436,6 +441,7 @@ class RunStore:
             log_path=str(log_path),
             run_id="",
             error_message="",
+            process_id=0,
         )
         self._upsert_job(job)
         return job
@@ -479,37 +485,7 @@ class RunStore:
         if refresh_news:
             command.append("--refresh-news")
 
-        job = self.create_job(command, log_path)
-        command.extend(["--job-id", job.job_id])
-        self._upsert_job(
-            SnapshotJob(
-                job_id=job.job_id,
-                created_at_utc=job.created_at_utc,
-                started_at_utc=job.started_at_utc,
-                completed_at_utc=job.completed_at_utc,
-                status=job.status,
-                command=" ".join(command),
-                log_path=job.log_path,
-                run_id=job.run_id,
-                error_message=job.error_message,
-            )
-        )
-
-        env = os.environ.copy()
-        src_path = str(Path.cwd() / "src")
-        env["PYTHONPATH"] = (
-            f"{src_path}{os.pathsep}{env['PYTHONPATH']}" if env.get("PYTHONPATH") else src_path
-        )
-        with Path(job.log_path).open("ab") as log_handle:
-            subprocess.Popen(  # noqa: S603
-                command,
-                cwd=Path.cwd(),
-                env=env,
-                stdout=log_handle,
-                stderr=subprocess.STDOUT,
-                close_fds=True,
-            )
-        return job
+        return self._start_background_job(command, log_path)
 
     def start_daily_update_job(
         self,
@@ -714,6 +690,9 @@ class RunStore:
         return self._start_background_job(command, log_path)
 
     def _start_background_job(self, command: list[str], log_path: Path) -> SnapshotJob:
+        duplicate = self._active_duplicate_job(command)
+        if duplicate is not None:
+            return duplicate
         job = self.create_job(command, log_path)
         command.extend(["--job-id", job.job_id])
         self._upsert_job(
@@ -727,6 +706,7 @@ class RunStore:
                 log_path=job.log_path,
                 run_id=job.run_id,
                 error_message=job.error_message,
+                process_id=job.process_id,
             )
         )
 
@@ -735,16 +715,81 @@ class RunStore:
         env["PYTHONPATH"] = (
             f"{src_path}{os.pathsep}{env['PYTHONPATH']}" if env.get("PYTHONPATH") else src_path
         )
-        with Path(job.log_path).open("ab") as log_handle:
-            subprocess.Popen(  # noqa: S603
-                command,
-                cwd=Path.cwd(),
-                env=env,
-                stdout=log_handle,
-                stderr=subprocess.STDOUT,
-                close_fds=True,
-            )
-        return job
+        try:
+            with Path(job.log_path).open("ab") as log_handle:
+                process = subprocess.Popen(  # noqa: S603
+                    command,
+                    cwd=Path.cwd(),
+                    env=env,
+                    stdout=log_handle,
+                    stderr=subprocess.STDOUT,
+                    close_fds=True,
+                )
+            process_id = int(process.pid)
+            self._set_job_process_id(job.job_id, process_id)
+        except Exception as error:
+            self.mark_job_failed(job.job_id, f"Background job could not start: {error}")
+            raise
+        return self.get_job(job.job_id) or job
+
+    def _active_duplicate_job(self, command: list[str]) -> SnapshotJob | None:
+        jobs = self.list_jobs(limit=50)
+        if jobs.empty:
+            return None
+        command_prefix = f"{' '.join(command)} --job-id "
+        now = pd.Timestamp.now(tz="UTC")
+        for _, row in jobs.iterrows():
+            status = str(row.get("status", ""))
+            if status not in {"queued", "running"}:
+                continue
+            if not str(row.get("command", "")).startswith(command_prefix):
+                continue
+            job = _job_from_mapping(row.to_dict())
+            active_at = row.get("started_at_utc") if status == "running" else None
+            if not active_at:
+                active_at = row.get("created_at_utc")
+            active_since = pd.to_datetime(active_at, errors="coerce", utc=True)
+            age = now - active_since if pd.notna(active_since) else pd.Timedelta.max
+            if status == "queued" and age > pd.Timedelta(minutes=15):
+                self.mark_job_failed(
+                    job.job_id,
+                    "Queued background job exceeded its 15-minute startup lease.",
+                )
+                continue
+            if status == "running" and age > pd.Timedelta(hours=6):
+                self.mark_job_failed(
+                    job.job_id,
+                    "Running background job exceeded its 6-hour activity lease.",
+                )
+                continue
+            if status == "queued" and job.process_id <= 0:
+                if age <= pd.Timedelta(seconds=30):
+                    return job
+                self.mark_job_failed(
+                    job.job_id,
+                    "Queued background job did not record a process within 30 seconds.",
+                )
+                continue
+            if not self._process_is_alive(job.process_id):
+                self.mark_job_failed(
+                    job.job_id,
+                    "Background process is no longer running.",
+                )
+                continue
+            return job
+        return None
+
+    @staticmethod
+    def _process_is_alive(process_id: int) -> bool:
+        if process_id <= 0:
+            return False
+        try:
+            os.kill(process_id, 0)
+        except PermissionError:
+            return True
+        except OSError:
+            return False
+        return True
 
     def mark_job_running(self, job_id: str) -> None:
         job = self.get_job(job_id)
@@ -761,6 +806,7 @@ class RunStore:
                 log_path=job.log_path,
                 run_id=job.run_id,
                 error_message="",
+                process_id=job.process_id,
             )
         )
 
@@ -779,6 +825,7 @@ class RunStore:
                 log_path=job.log_path,
                 run_id=run_id,
                 error_message="",
+                process_id=job.process_id,
             )
         )
 
@@ -797,6 +844,7 @@ class RunStore:
                 log_path=job.log_path,
                 run_id=job.run_id,
                 error_message=error_message,
+                process_id=job.process_id,
             )
         )
 
@@ -833,7 +881,7 @@ class RunStore:
             connection.close()
 
     def _connect(self) -> duckdb.DuckDBPyConnection:
-        return duckdb.connect(str(self.db_path))
+        return duckdb.connect(str(self.db_path), read_only=self.read_only)
 
     def _ensure_schema(self) -> None:
         connection = self._connect()
@@ -881,8 +929,15 @@ class RunStore:
                     command VARCHAR NOT NULL,
                     log_path VARCHAR NOT NULL,
                     run_id VARCHAR NOT NULL,
-                    error_message VARCHAR NOT NULL
+                    error_message VARCHAR NOT NULL,
+                    process_id BIGINT NOT NULL DEFAULT 0
                 )
+                """
+            )
+            connection.execute(
+                """
+                ALTER TABLE snapshot_jobs
+                ADD COLUMN IF NOT EXISTS process_id BIGINT DEFAULT 0
                 """
             )
         finally:
@@ -934,7 +989,9 @@ class RunStore:
             connection.execute(
                 """
                 INSERT OR REPLACE INTO snapshot_jobs
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+                    (job_id, created_at_utc, started_at_utc, completed_at_utc,
+                     status, command, log_path, run_id, error_message, process_id)
+                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 [
                     job.job_id,
@@ -946,7 +1003,22 @@ class RunStore:
                     job.log_path,
                     job.run_id,
                     job.error_message,
+                    job.process_id,
                 ],
+            )
+        finally:
+            connection.close()
+
+    def _set_job_process_id(self, job_id: str, process_id: int) -> None:
+        connection = self._connect()
+        try:
+            connection.execute(
+                """
+                UPDATE snapshot_jobs
+                SET process_id = ?
+                WHERE job_id = ?
+                """,
+                [process_id, job_id],
             )
         finally:
             connection.close()
@@ -1063,6 +1135,7 @@ def _job_from_mapping(row: dict[str, Any]) -> SnapshotJob:
         log_path=str(row["log_path"]),
         run_id=str(row["run_id"]),
         error_message=str(row["error_message"]),
+        process_id=int(row.get("process_id", 0) or 0),
     )
 
 

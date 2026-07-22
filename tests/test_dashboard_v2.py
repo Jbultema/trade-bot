@@ -111,6 +111,7 @@ def test_dashboard_v2_native_pages_are_summary_first() -> None:
     today_source = inspect.getsource(command_center.render_today_page)
     monitoring_source = inspect.getsource(monitoring.render_monitoring_page)
     research_source = inspect.getsource(research.render_research_page)
+    assert "include_defensive_judgement=False" in research_source
     simulation_source = inspect.getsource(simulation.render_simulation_page)
     macro_source = inspect.getsource(macro.render_macro_page)
     risk_source = inspect.getsource(risk.render_risk_page)
@@ -126,8 +127,12 @@ def test_dashboard_v2_native_pages_are_summary_first() -> None:
     assert monitoring_source.index("Readout") < monitoring_source.index("Controls")
     assert monitoring_source.index("Controls") < monitoring_source.index("Full Workbench")
     assert monitoring_source.index("Trends") < monitoring_source.index("_render_monitoring(")
-    assert research_source.index("Outcome Frontier") < research_source.index("_render_research_lab(")
-    assert simulation_source.index('"Strategy simulations"') < simulation_source.index('"Validation"')
+    assert research_source.index("Outcome Frontier") < research_source.index(
+        "_render_research_lab("
+    )
+    assert simulation_source.index('"Strategy simulations"') < simulation_source.index(
+        '"Validation"'
+    )
     assert simulation_source.index('"Validation"') < simulation_source.index('"Full Workbench"')
     assert simulation_source.index("_render_simulation_lab_direct_view") < simulation_source.index(
         "_render_simulation_lab("
@@ -332,7 +337,7 @@ def test_dashboard_v2_section_and_chart_helpers_emit_hover_context(monkeypatch) 
 
     def fake_plotly_chart(*args, **kwargs) -> None:
         rendered_figures.append(args[0])
-        captured.append(("plotly", str(kwargs.get("use_container_width"))))
+        captured.append(("plotly", str(kwargs.get("width"))))
 
     monkeypatch.setattr(cards.st, "markdown", fake_markdown)
     monkeypatch.setattr(cards.st, "plotly_chart", fake_plotly_chart)
@@ -345,6 +350,7 @@ def test_dashboard_v2_section_and_chart_helpers_emit_hover_context(monkeypatch) 
     assert "Indexes selected price series" in markdown_bodies
     assert "v2-help-popover" in markdown_bodies
     assert any(kind == "plotly" for kind, _body in captured)
+    assert ("plotly", "stretch") in captured
     assert rendered_figures[0].layout.title.text == ""
 
 
@@ -468,6 +474,47 @@ def test_prebreak_event_selector_options_filter_rollups_and_default_alias() -> N
         research._default_prebreak_event_for_crisis("unknown_cycle_window", options)
         == "q4_2018_liquidity_break"
     )
+
+
+def test_prebreak_event_selector_renders_below_selected_behavior_heading(monkeypatch) -> None:
+    rendered: list[str] = []
+    signal_panel = pd.DataFrame({"event_name": ["covid_crash_peak"]})
+
+    monkeypatch.setattr(
+        research,
+        "render_section_header",
+        lambda title, **_kwargs: rendered.append(f"heading:{title}"),
+    )
+    monkeypatch.setattr(research, "render_callout", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(
+        research,
+        "_select_prebreak_event",
+        lambda **_kwargs: rendered.append("selector") or "covid_crash_peak",
+    )
+    monkeypatch.setattr(
+        research,
+        "_render_selected_prebreak_event_behavior",
+        lambda **_kwargs: rendered.append("behavior"),
+    )
+    monkeypatch.setattr(
+        research,
+        "_render_prebreak_margin_experiment",
+        lambda **_kwargs: rendered.append("margin"),
+    )
+
+    research._render_prebreak_hindsight_layers(
+        selected_crisis="covid_crash",
+        prebreak={"snapshot_signal_panel": signal_panel},
+        defensive_audit={},
+    )
+
+    assert rendered == [
+        "heading:Pre-Break Behavior And Early Warning",
+        "heading:Selected Crisis Trade-Bot Behavior",
+        "selector",
+        "behavior",
+        "margin",
+    ]
 
 
 def test_cycle_phase_frontier_figure_highlights_selected_slice() -> None:

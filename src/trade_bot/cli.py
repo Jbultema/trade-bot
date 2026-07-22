@@ -70,8 +70,11 @@ from trade_bot.research.backtest_pbo import (
 )
 from trade_bot.research.backtest_qc import DEFAULT_QC_STRATEGY, run_backtest_qc_gauntlet
 from trade_bot.research.baselines import (
+    assemble_configured_baseline_from_results,
+    build_configured_strategy_results,
     run_configured_baselines,
     run_configured_baselines_from_frames,
+    slice_backtest_results,
 )
 from trade_bot.research.cycle_tracker import (
     DEFAULT_PHASE_MIN_TRAIN_DAYS,
@@ -79,6 +82,10 @@ from trade_bot.research.cycle_tracker import (
     run_cycle_tracker,
 )
 from trade_bot.research.defensive_judgement import write_defensive_judgement_report
+from trade_bot.research.defensive_layer_calibration import (
+    DEFAULT_DEFENSIVE_LAYER_CALIBRATION_DIR,
+    run_defensive_layer_calibration,
+)
 from trade_bot.research.entry_date_analysis import build_entry_date_analysis
 from trade_bot.research.experiment_monitor import (
     load_experiment_candidates,
@@ -101,9 +108,41 @@ from trade_bot.research.forward_simulation import (
     summarize_simulation_validation_by_horizon,
     summarize_strategy_rank_validation,
 )
+from trade_bot.research.i111_adversarial_validation import (
+    DEFAULT_I111_ADVERSARIAL_VALIDATION_OUTPUT_DIR,
+    run_i111_adversarial_validation,
+)
+from trade_bot.research.i111_cross_sectional_replacement import (
+    DEFAULT_I111_CROSS_SECTIONAL_REPLACEMENT_OUTPUT_DIR,
+    run_i111_cross_sectional_replacement,
+)
+from trade_bot.research.i111_execution_hardening import (
+    DEFAULT_I111_EXECUTION_HARDENING_OUTPUT_DIR,
+    run_i111_execution_hardening,
+)
+from trade_bot.research.i111_execution_smoothing import (
+    DEFAULT_I111_EXECUTION_SMOOTHING_OUTPUT_DIR,
+    run_i111_execution_smoothing,
+)
+from trade_bot.research.i111_frontier_search import (
+    DEFAULT_I111_FRONTIER_SEARCH_OUTPUT_DIR,
+    run_i111_frontier_search,
+)
+from trade_bot.research.i111_orthogonal_search import (
+    DEFAULT_I111_ORTHOGONAL_SEARCH_OUTPUT_DIR,
+    run_i111_orthogonal_search,
+)
+from trade_bot.research.i111_risk_repair import (
+    DEFAULT_I111_RISK_REPAIR_OUTPUT_DIR,
+    run_i111_risk_repair_lab,
+)
 from trade_bot.research.leadership_diagnostics import (
     leadership_candidate_tickers,
     run_leadership_diagnostics,
+)
+from trade_bot.research.native_i111_risk_repair import (
+    DEFAULT_NATIVE_I111_RISK_REPAIR_OUTPUT_DIR,
+    run_native_i111_risk_repair_lab,
 )
 from trade_bot.research.operating_history import (
     DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
@@ -121,13 +160,24 @@ from trade_bot.research.prebreak_hindsight import (
     DEFAULT_PREBREAK_WEEKLY_FREQUENCY,
     analyze_prebreak_hindsight,
     build_prebreak_snapshot_plan,
+    deduplicate_prebreak_snapshot_plan,
     write_prebreak_hindsight_outputs,
+)
+from trade_bot.research.research_governance import write_research_trial_ledger
+from trade_bot.research.risk_policy_backtest import (
+    DEFAULT_POLICY_BACKTEST_OUTPUT_DIR,
+    DEFAULT_POLICY_SNAPSHOT_PATH,
+    run_prebreak_risk_policy_backtest,
 )
 from trade_bot.research.scenario_history import (
     clean_scenario_history,
     reconstruct_scenario_history_from_prices,
     scenario_history_from_snapshots,
     write_scenario_history,
+)
+from trade_bot.research.scenario_probability_calibration import (
+    DEFAULT_SCENARIO_CALIBRATION_DIR,
+    run_scenario_probability_calibration,
 )
 from trade_bot.research.signal_evidence import (
     build_signal_family_evidence,
@@ -140,11 +190,16 @@ from trade_bot.research.snapshot_backfill import (
     snapshot_created_at_for_market_date,
 )
 from trade_bot.research.strategy_source_audit import write_strategy_source_audit
+from trade_bot.research.trade_decision import build_trade_decision
 from trade_bot.research.upside_capture import (
     DEFAULT_UPSIDE_CAPTURE_OUTPUT_DIR,
     run_upside_capture_lab,
 )
-from trade_bot.storage.run_store import RunStore, SnapshotManifest
+from trade_bot.storage.run_store import (
+    RunStore,
+    SnapshotManifest,
+    build_snapshot_fingerprint,
+)
 from trade_bot.storage.warehouse import TradingWarehouse, WarehouseMigrationResult
 
 app = typer.Typer(no_args_is_help=True)
@@ -443,6 +498,11 @@ def build_snapshot_cmd(
             refresh_macro=refresh_macro,
             refresh_news=refresh_news,
         )
+        registry_rows = TradingWarehouse(store).refresh_strategy_registry_from_snapshot(
+            baseline_run,
+            run_id=manifest.run_id,
+            market_date=manifest.market_date,
+        )
         if write_report:
             write_baseline_report(
                 baseline_run.results,
@@ -464,6 +524,9 @@ def build_snapshot_cmd(
         raise
 
     _print_snapshot_manifest(manifest)
+    console.print(
+        f"Synchronized {registry_rows:,} snapshot strategy rows into the operating warehouse."
+    )
 
 
 @app.command("run-daily-update")
@@ -743,6 +806,17 @@ def backfill_snapshots_cmd(
             help="Delete existing snapshot artifacts and manifest rows before rebuilding.",
         ),
     ] = False,
+    replace_existing_market_dates: Annotated[
+        bool,
+        typer.Option(
+            "--replace-existing-market-dates/--use-planned-dates",
+            help=(
+                "Rebuild exactly one current-policy snapshot for every market date already "
+                "in the target store. Old generations are pruned only after all replacements "
+                "are saved and date coverage is verified."
+            ),
+        ),
+    ] = False,
     plan_only: Annotated[
         bool,
         typer.Option("--plan-only/--run", help="Print the rebuild schedule without writing."),
@@ -777,10 +851,58 @@ def backfill_snapshots_cmd(
         weekly_frequency=weekly_frequency,
     )
     selected_dates = plan.market_dates
+    replacement_created_at: dict[str, str] = {}
+    replacement_source_run_id: dict[str, str] = {}
+    already_replaced_market_dates: set[str] = set()
+    expected_market_dates: set[str] = set()
+    if replace_existing_market_dates:
+        if purge_existing:
+            raise typer.BadParameter(
+                "--replace-existing-market-dates cannot be combined with --purge-existing."
+            )
+        existing = run_store.list_snapshots(limit=100_000)
+        if existing.empty:
+            raise typer.BadParameter(
+                "The target store has no completed snapshots to replace."
+            )
+        latest_per_date = (
+            existing.sort_values(
+                ["market_date", "created_at_utc", "run_id"],
+                ascending=[True, False, False],
+            )
+            .drop_duplicates("market_date", keep="first")
+            .sort_values("market_date")
+        )
+        expected_market_dates = set(latest_per_date["market_date"].astype(str))
+        current_fingerprint = build_snapshot_fingerprint(config, events, macro, news)
+        already_replaced = latest_per_date[
+            latest_per_date["combined_config_hash"].eq(current_fingerprint.combined_hash)
+        ]
+        already_replaced_market_dates = set(
+            already_replaced["market_date"].astype(str)
+        )
+        pending_replacement = latest_per_date[
+            ~latest_per_date["market_date"].astype(str).isin(already_replaced_market_dates)
+        ]
+        selected_dates = tuple(pd.to_datetime(pending_replacement["market_date"]))
+        for row in pending_replacement.itertuples(index=False):
+            created_at = pd.Timestamp(row.created_at_utc)
+            if created_at.tzinfo is None:
+                created_at = created_at.tz_localize("UTC")
+            else:
+                created_at = created_at.tz_convert("UTC")
+            replacement_created_at[str(row.market_date)] = (
+                created_at + pd.Timedelta(microseconds=1)
+            ).isoformat()
+            replacement_source_run_id[str(row.market_date)] = str(row.run_id)
     if max_snapshots is not None:
         if max_snapshots <= 0:
             msg = "max_snapshots must be positive when provided."
             raise typer.BadParameter(msg)
+        if replace_existing_market_dates:
+            raise typer.BadParameter(
+                "--max-snapshots cannot be used for a 1:1 existing-date replacement."
+            )
         selected_dates = selected_dates[-max_snapshots:]
 
     _print_snapshot_backfill_plan(
@@ -797,28 +919,70 @@ def backfill_snapshots_cmd(
         console.print(_snapshot_delete_summary("Purged existing snapshots", purged))
 
     saved_manifests: list[SnapshotManifest] = []
+    full_results = (
+        {}
+        if replace_existing_market_dates
+        else build_configured_strategy_results(bot_config, prices)
+    )
     total = len(selected_dates)
     for index, market_date in enumerate(selected_dates, start=1):
         market_date_text = str(market_date.date())
         historical_config = bot_config.model_copy(
             update={"data": bot_config.data.model_copy(update={"end": market_date_text})}
         )
-        created_at_utc = snapshot_created_at_for_market_date(
-            market_date,
-            market_close_utc_hour=market_close_utc_hour,
+        created_at_utc = replacement_created_at.get(
+            market_date_text,
+            snapshot_created_at_for_market_date(
+                market_date,
+                market_close_utc_hour=market_close_utc_hour,
+            ),
         )
-        historical_prices = prices.loc[:market_date_text].dropna(how="all")
-        historical_macro = macro_data.loc[:market_date_text].dropna(how="all")
-        baseline_run = run_configured_baselines_from_frames(
-            historical_config,
-            prices=historical_prices,
-            macro_data=historical_macro,
-            macro_catalog=macro_catalog,
-            refresh_news=refresh_news,
-            event_config_path=events,
-            news_config_path=news,
-            as_of=created_at_utc,
-        )
+        if replace_existing_market_dates:
+            source_run, _source_manifest = run_store.load_snapshot(
+                replacement_source_run_id[market_date_text]
+            )
+            primary_strategy = historical_config.primary_strategy
+            if primary_strategy not in source_run.results:
+                raise RuntimeError(
+                    f"Existing {market_date_text} snapshot does not contain configured "
+                    f"primary strategy {primary_strategy!r}."
+                )
+            defensive_ticker = historical_config.strategies[
+                primary_strategy
+            ].defensive_ticker
+            if not defensive_ticker:
+                raise RuntimeError(
+                    f"Configured primary strategy {primary_strategy!r} has no defensive ticker."
+                )
+            trade_decision = build_trade_decision(
+                primary_result=source_run.results[primary_strategy],
+                current_state=source_run.current_state,
+                event_risk=source_run.event_risk,
+                news_monitor=source_run.news_monitor,
+                signal_inclusion=source_run.signal_inclusion,
+                prices=source_run.prices,
+                defensive_ticker=defensive_ticker,
+                allocation_policy=historical_config.allocation_policy,
+            )
+            baseline_run = replace(
+                source_run,
+                trade_decision=trade_decision,
+                portfolio_risk=trade_decision.portfolio_risk,
+            )
+        else:
+            historical_prices = prices.loc[:market_date_text].dropna(how="all")
+            historical_macro = macro_data.loc[:market_date_text].dropna(how="all")
+            baseline_run = assemble_configured_baseline_from_results(
+                historical_config,
+                prices=historical_prices,
+                results=slice_backtest_results(full_results, market_date_text),
+                macro_data=historical_macro,
+                macro_catalog=macro_catalog,
+                refresh_news=refresh_news,
+                event_config_path=events,
+                news_config_path=news,
+                as_of=created_at_utc,
+            )
         manifest = run_store.save_snapshot(
             baseline_run,
             config_path=config,
@@ -837,19 +1001,46 @@ def backfill_snapshots_cmd(
             f"{manifest.risk_status} {manifest.run_id}"
         )
 
-    recent_market_days = _selected_daily_market_day_count(
-        selected_dates,
-        daily_cutoff_date=plan.daily_cutoff_date,
-    )
-    final_prune = run_store.prune_snapshots(
-        keep_latest=0,
-        keep_per_market_date=DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
-        keep_recent_market_days=recent_market_days,
-        keep_weekly_older=DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
-        weekly_frequency=weekly_frequency,
-        apply=True,
-    )
+    saved_market_dates = {str(manifest.market_date) for manifest in saved_manifests}
+    covered_market_dates = saved_market_dates | already_replaced_market_dates
+    if replace_existing_market_dates and covered_market_dates != expected_market_dates:
+        missing = sorted(expected_market_dates - covered_market_dates)
+        extra = sorted(covered_market_dates - expected_market_dates)
+        raise RuntimeError(
+            "Replacement coverage validation failed before pruning: "
+            f"missing={missing[:10]}, extra={extra[:10]}."
+        )
+    if replace_existing_market_dates:
+        final_prune = run_store.prune_snapshots(
+            keep_latest=0,
+            keep_per_market_date=1,
+            keep_recent_market_days=None,
+            keep_weekly_older=0,
+            apply=True,
+        )
+    else:
+        recent_market_days = _selected_daily_market_day_count(
+            selected_dates,
+            daily_cutoff_date=plan.daily_cutoff_date,
+        )
+        final_prune = run_store.prune_snapshots(
+            keep_latest=0,
+            keep_per_market_date=DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
+            keep_recent_market_days=recent_market_days,
+            keep_weekly_older=DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
+            weekly_frequency=weekly_frequency,
+            apply=True,
+        )
     console.print(_snapshot_delete_summary("Final retention prune", final_prune))
+    if replace_existing_market_dates:
+        final_snapshots = run_store.list_snapshots(limit=100_000)
+        final_dates = set(final_snapshots["market_date"].astype(str))
+        if len(final_snapshots) != len(expected_market_dates) or final_dates != expected_market_dates:
+            raise RuntimeError(
+                "Post-prune 1:1 validation failed: "
+                f"expected {len(expected_market_dates)} dates, found "
+                f"{len(final_snapshots)} snapshots across {len(final_dates)} dates."
+            )
     console.print(
         f"Backfill complete: saved {len(saved_manifests):,} snapshot(s) from "
         f"{saved_manifests[0].market_date if saved_manifests else 'n/a'} to "
@@ -928,6 +1119,7 @@ def generate_prebreak_snapshots_cmd(
         postbreak_days=postbreak_days,
         weekly_frequency=weekly_frequency,
     )
+    plan = deduplicate_prebreak_snapshot_plan(plan)
     if plan.empty:
         console.print("No bubble-break market dates were available.")
         return
@@ -1050,12 +1242,18 @@ def analyze_prebreak_hindsight_cmd(
 ) -> None:
     """Rank saved snapshot signals by hindsight 3m drawdown predictiveness."""
 
-    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    run_store = RunStore(
+        store,
+        artifact_dir=artifact_dir,
+        job_log_dir=job_log_dir,
+        read_only=True,
+    )
     reference_run_store = (
         RunStore(
             reference_store,
             artifact_dir=reference_artifact_dir,
             job_log_dir=reference_job_log_dir,
+            read_only=True,
         )
         if include_current_snapshot or include_reference_snapshots
         else None
@@ -1132,6 +1330,51 @@ def list_snapshot_jobs_cmd(
             str(row["error_message"]),
         )
     console.print(table)
+
+
+@app.command("backtest-prebreak-risk-policy")
+def backtest_prebreak_risk_policy_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    snapshot_path: Annotated[
+        Path,
+        typer.Option("--snapshot-path"),
+    ] = DEFAULT_POLICY_SNAPSHOT_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_POLICY_BACKTEST_OUTPUT_DIR,
+    iteration: Annotated[int, typer.Option("--iteration")] = 164,
+    top_n: Annotated[int, typer.Option("--top-n", min=1)] = 8,
+    max_forward_fill_days: Annotated[
+        int,
+        typer.Option("--max-forward-fill-days", min=0),
+    ] = 10,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    """Replay saved pre-break budgets on the selected strategy shelf."""
+
+    result = run_prebreak_risk_policy_backtest(
+        load_config(config),
+        iteration=iteration,
+        snapshot_path=snapshot_path,
+        output_dir=output_dir,
+        top_n=top_n,
+        max_forward_fill_days=max_forward_fill_days,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="Pre-Break Risk Policy Backtest")
+    for column in ["policy", "median CAGR", "median max DD", "CAGR delta", "DD delta"]:
+        table.add_column(column)
+    for _, row in result.policy_summary.head(12).iterrows():
+        table.add_row(
+            str(row["policy_name"]),
+            _format_optional_percent(row.get("median_cagr")),
+            _format_optional_percent(row.get("median_max_drawdown")),
+            _format_optional_percent(row.get("median_delta_cagr_vs_base")),
+            _format_optional_percent(row.get("median_delta_max_drawdown_vs_base")),
+        )
+    console.print(table)
+    console.print(f"Reports: {output_dir}")
 
 
 @app.command("run-dashboard")
@@ -1711,6 +1954,21 @@ def validate_simulation_engine_cmd(
             help="Write a model-ablation readout comparing baseline, duration, covariate, and factor-proxy variants.",
         ),
     ] = False,
+    resume: Annotated[
+        bool,
+        typer.Option(
+            "--resume/--restart",
+            help="Resume the primary rolling-origin run from its verified checkpoint.",
+        ),
+    ] = True,
+    checkpoint_every_origins: Annotated[
+        int,
+        typer.Option(
+            "--checkpoint-every-origins",
+            min=1,
+            help="Persist primary validation progress after this many completed origins.",
+        ),
+    ] = 5,
 ) -> None:
     """Validate forward simulation calibration against historical realized paths."""
 
@@ -1767,6 +2025,7 @@ def validate_simulation_engine_cmd(
         interval_high=interval_high,
     )
     output_dir.mkdir(parents=True, exist_ok=True)
+    checkpoint_path = output_dir / f"{_slug_identifier(strategy)}_simulation_checkpoint.csv"
 
     console.print(
         f"Running rolling-origin validation for {strategy} across "
@@ -1776,6 +2035,9 @@ def validate_simulation_engine_cmd(
         returns_by_strategy[strategy],
         scenario_history=scenario_history_frame,
         config=config,
+        checkpoint_path=checkpoint_path,
+        resume=resume,
+        checkpoint_every_origins=checkpoint_every_origins,
     )
     validation_summary = summarize_simulation_validation(validation)
     horizon_summary = summarize_simulation_validation_by_horizon(validation)
@@ -1788,6 +2050,7 @@ def validate_simulation_engine_cmd(
         f"Validated {strategy} from snapshot {manifest.run_id} "
         f"({manifest.market_date}); wrote {validation_path}."
     )
+    console.print(f"Resumable checkpoint: {checkpoint_path}")
     _print_simulation_validation_summary(strategy, validation_summary)
     console.print(f"Wrote per-horizon validation summary to {horizon_path}.")
     _print_simulation_horizon_summary(horizon_summary)
@@ -2035,6 +2298,124 @@ def run_cycle_tracker_cmd(
     console.print(f"Reports: {output_dir}")
 
 
+@app.command("calibrate-defensive-layers")
+def calibrate_defensive_layers_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path(
+        "configs/active_trading.yaml"
+    ),
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_DEFENSIVE_LAYER_CALIBRATION_DIR,
+    frequency: Annotated[
+        str,
+        typer.Option("--frequency", help="Point-in-time origin frequency."),
+    ] = "W-WED",
+    max_points: Annotated[
+        int,
+        typer.Option(
+            "--max-points",
+            min=0,
+            help="Most recent origins to retain; zero uses all eligible history.",
+        ),
+    ] = 0,
+) -> None:
+    """Calibrate base, scenario, and portfolio defense separately and jointly."""
+
+    loaded = RunStore(read_only=True).load_latest_snapshot(require_matching_config=False)
+    if loaded is None:
+        raise typer.BadParameter("No completed snapshot is available.")
+    baseline_run, _manifest = loaded
+    result = run_defensive_layer_calibration(
+        baseline_run,
+        load_config(config),
+        output_dir=output_dir,
+        frequency=frequency,
+        max_points=max_points,
+    )
+    table = Table(title="Defensive Layer Calibration")
+    for column in [
+        "cohort",
+        "horizon",
+        "episodes",
+        "correct",
+        "false alarm",
+        "layered vs base",
+    ]:
+        table.add_column(column)
+    for _, row in result.calibration_summary.iterrows():
+        table.add_row(
+            str(row["cohort"]),
+            str(row["horizon"]),
+            str(int(row["episode_starts"])),
+            _format_optional_percent(row["correct_defense_rate"]),
+            _format_optional_percent(row["false_alarm_rate"]),
+            _format_optional_percent(row["layered_excess_p50"]),
+        )
+    console.print(table)
+    console.print(f"Reports: {output_dir} ({len(result.origin_states):,} origins)")
+
+
+@app.command("calibrate-scenario-probabilities")
+def calibrate_scenario_probabilities_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path(
+        "configs/baseline.yaml"
+    ),
+    origin_states: Annotated[
+        Path,
+        typer.Option(
+            "--origin-states",
+            help="Point-in-time states produced by calibrate-defensive-layers.",
+        ),
+    ] = DEFAULT_DEFENSIVE_LAYER_CALIBRATION_DIR / "origin_states.csv",
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_SCENARIO_CALIBRATION_DIR,
+    bootstrap_samples: Annotated[
+        int,
+        typer.Option("--bootstrap-samples", min=100),
+    ] = 1_000,
+) -> None:
+    """Calibrate scenario probabilities and compute walk-forward sizing authority."""
+
+    if not origin_states.exists():
+        raise typer.BadParameter(
+            f"{origin_states} does not exist; run calibrate-defensive-layers first."
+        )
+    loaded = RunStore(read_only=True).load_latest_snapshot(require_matching_config=False)
+    if loaded is None:
+        raise typer.BadParameter("No completed snapshot is available.")
+    baseline_run, _manifest = loaded
+    result = run_scenario_probability_calibration(
+        pd.read_csv(origin_states),
+        baseline_run.prices,
+        load_config(config),
+        output_dir=output_dir,
+        bootstrap_samples=bootstrap_samples,
+    )
+    table = Table(title="Scenario Probability Calibration")
+    for column in ["horizon", "observations", "Brier skill", "AUC", "ECE", "authority"]:
+        table.add_column(column)
+    authority = result.latest_authority.set_index("horizon")
+    for _, row in result.metrics.sort_values("horizon").iterrows():
+        horizon = str(row["horizon"])
+        table.add_row(
+            horizon,
+            str(int(row["observations"])),
+            _format_optional_decimal(row["brier_skill"]),
+            _format_optional_decimal(row["auc"]),
+            _format_optional_percent(row["ece"]),
+            _format_optional_percent(
+                authority.loc[horizon, "calibration_authority"]
+                if horizon in authority.index
+                else None
+            ),
+        )
+    console.print(table)
+    console.print(f"Reports: {output_dir}")
+
+
 @app.command("audit-defensive-judgement")
 def audit_defensive_judgement_cmd(
     output_dir: Annotated[
@@ -2072,6 +2453,11 @@ def audit_defensive_judgement_cmd(
         output_dir=output_dir,
         strategy_names=strategy_names,
         benchmark_tickers=benchmark_tickers,
+        focus_strategy=str(
+            baseline_run.trade_decision.summary.iloc[0].get("strategy", "")
+        )
+        if not baseline_run.trade_decision.summary.empty
+        else None,
     )
     table = Table(title="Defensive Judgement Audit")
     table.add_column("artifact")
@@ -2323,6 +2709,12 @@ def audit_backtest_pbo_cmd(
         f"OOS loss {_format_optional_percent(summary.get('oos_loss_probability'))}, "
         f"label {summary.get('pbo_label')}."
     )
+    console.print(
+        "Candidate audit: "
+        f"{int(summary.get('expected_candidate_count', 0) or 0)} expected, "
+        f"{int(summary.get('evaluated_candidate_count', 0) or 0)} evaluated, "
+        f"{int(summary.get('excluded_candidate_count', 0) or 0)} excluded."
+    )
     table = Table(title="Backtest PBO Artifacts")
     table.add_column("artifact")
     table.add_column("path")
@@ -2452,6 +2844,7 @@ def seed_operating_history_cmd(
         typer.Option("--primary-strategy"),
     ] = DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
 ) -> None:
+    bot_config = load_config(config)
     run_store = RunStore(store)
     source_label = "configured baselines"
     snapshot_payload = None
@@ -2468,7 +2861,6 @@ def seed_operating_history_cmd(
     else:
         if source == "latest-snapshot":
             console.print("No completed snapshot found; recomputing configured baselines.")
-        bot_config = load_config(config)
         baseline_run = run_configured_baselines(
             bot_config,
             refresh_data=False,
@@ -2487,6 +2879,7 @@ def seed_operating_history_cmd(
         daily_tail_market_days=daily_tail_market_days,
         min_history_days=min_history_days,
         primary_strategy=primary_strategy,
+        allocation_policy=bot_config.allocation_policy,
     )
     warehouse = TradingWarehouse(store)
     counts = warehouse.save_operating_history(
@@ -2800,6 +3193,403 @@ def run_upside_capture_lab_cmd(
     console.print(f"Reports: {output_dir}")
 
 
+@app.command("run-i111-risk-repair-lab")
+def run_i111_risk_repair_lab_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_I111_RISK_REPAIR_OUTPUT_DIR,
+    include_upside_research: Annotated[
+        bool,
+        typer.Option(
+            "--include-upside-research/--configured-only",
+            help="Include the strongest nearby upside-capture research variants.",
+        ),
+    ] = True,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    bot_config = load_config(config)
+    result = run_i111_risk_repair_lab(
+        bot_config,
+        output_dir=output_dir,
+        include_upside_research=include_upside_research,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="I111 Risk-Repair Lab")
+    for column in [
+        "variant",
+        "median CAGR",
+        "median max DD",
+        "delta CAGR",
+        "delta max DD",
+        "CAGR win",
+        "DD win",
+        "gate",
+    ]:
+        table.add_column(column)
+    for _, row in result.variant_summary.iterrows():
+        table.add_row(
+            str(row.get("variant_name", "")),
+            _format_optional_percent(row.get("median_cagr")),
+            _format_optional_percent(row.get("median_max_drawdown")),
+            _format_optional_percent(row.get("median_delta_cagr")),
+            _format_optional_percent(row.get("median_delta_max_drawdown")),
+            _format_optional_percent(row.get("cagr_win_rate")),
+            _format_optional_percent(row.get("drawdown_win_rate")),
+            str(row.get("promotion_gate", "")),
+        )
+    console.print(table)
+    console.print(f"Reports: {output_dir} ({len(result.candidate_roster):,} candidates tested)")
+
+
+@app.command("run-native-i111-risk-repair-lab")
+def run_native_i111_risk_repair_lab_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_NATIVE_I111_RISK_REPAIR_OUTPUT_DIR,
+    include_upside_research: Annotated[
+        bool,
+        typer.Option(
+            "--include-upside-research/--configured-only",
+            help="Include the strongest nearby upside-capture research variants.",
+        ),
+    ] = True,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    bot_config = load_config(config)
+    result = run_native_i111_risk_repair_lab(
+        bot_config,
+        output_dir=output_dir,
+        include_upside_research=include_upside_research,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="Native I111 Risk-Repair Lab")
+    for column in [
+        "result",
+        "variant",
+        "CAGR",
+        "max DD",
+        "src CAGR delta",
+        "src DD delta",
+        "AI/growth",
+        "gate",
+    ]:
+        table.add_column(column)
+    top_rows = result.strategy_metrics.sort_values("research_score", ascending=False).head(10)
+    for _, row in top_rows.iterrows():
+        table.add_row(
+            str(row.get("result_name", "")),
+            str(row.get("variant_name", "")),
+            _format_optional_percent(row.get("cagr")),
+            _format_optional_percent(row.get("max_drawdown")),
+            _format_optional_percent(row.get("delta_vs_source_cagr")),
+            _format_optional_percent(row.get("delta_vs_source_max_drawdown")),
+            _format_optional_percent(row.get("average_ai_growth_weight")),
+            str(row.get("promotion_candidate", "")),
+        )
+    console.print(table)
+    console.print(f"Reports: {output_dir} ({len(result.strategy_metrics):,} rows tested)")
+
+
+@app.command("run-i111-orthogonal-search")
+def run_i111_orthogonal_search_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_I111_ORTHOGONAL_SEARCH_OUTPUT_DIR,
+    max_new_combinations: Annotated[
+        int,
+        typer.Option("--max-new-combinations", help="Maximum new strategy combinations to test."),
+    ] = 50,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    bot_config = load_config(config)
+    result = run_i111_orthogonal_search(
+        bot_config,
+        output_dir=output_dir,
+        max_new_combinations=max_new_combinations,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="I111 Orthogonal Search")
+    for column in [
+        "result",
+        "family",
+        "CAGR",
+        "max DD",
+        "native CAGR delta",
+        "native DD delta",
+        "AI/growth",
+        "considerable",
+    ]:
+        table.add_column(column)
+    top_rows = result.strategy_metrics[result.strategy_metrics["role"].eq("new_combination")].head(
+        10
+    )
+    for _, row in top_rows.iterrows():
+        table.add_row(
+            str(row.get("result_name", "")),
+            str(row.get("mechanism_family", "")),
+            _format_optional_percent(row.get("cagr")),
+            _format_optional_percent(row.get("max_drawdown")),
+            _format_optional_percent(row.get("delta_vs_native_cagr")),
+            _format_optional_percent(row.get("delta_vs_native_max_drawdown")),
+            _format_optional_percent(row.get("average_ai_growth_weight")),
+            str(row.get("considerable_improvement", "")),
+        )
+    console.print(table)
+    new_count = int(result.strategy_metrics["role"].eq("new_combination").sum())
+    considerable = int(result.strategy_metrics["considerable_improvement"].sum())
+    console.print(
+        f"Reports: {output_dir} ({new_count:,} new combinations tested; "
+        f"{considerable:,} considerable improvements)"
+    )
+
+
+@app.command("run-i111-frontier-search")
+def run_i111_frontier_search_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_I111_FRONTIER_SEARCH_OUTPUT_DIR,
+    max_iterations: Annotated[
+        int,
+        typer.Option("--max-iterations", help="Maximum frontier iterations to test."),
+    ] = 250,
+    checkpoint_size: Annotated[
+        int,
+        typer.Option("--checkpoint-size", help="Checkpoint cadence for signal review."),
+    ] = 20,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    bot_config = load_config(config)
+    result = run_i111_frontier_search(
+        bot_config,
+        output_dir=output_dir,
+        max_iterations=max_iterations,
+        checkpoint_size=checkpoint_size,
+        refresh_data=refresh_data,
+    )
+    candidate_rows = result.strategy_metrics[
+        result.strategy_metrics["role"].eq("frontier_candidate")
+    ].sort_values("frontier_score", ascending=False)
+    table = Table(title="I111 Frontier Search")
+    for column in [
+        "result",
+        "topic",
+        "CAGR",
+        "max DD",
+        "native CAGR delta",
+        "native DD delta",
+        "AI/growth",
+        "big",
+    ]:
+        table.add_column(column)
+    for _, row in candidate_rows.head(10).iterrows():
+        table.add_row(
+            str(row.get("result_name", "")),
+            str(row.get("primary_topic", "")),
+            _format_optional_percent(row.get("cagr")),
+            _format_optional_percent(row.get("max_drawdown")),
+            _format_optional_percent(row.get("delta_vs_native_cagr")),
+            _format_optional_percent(row.get("delta_vs_native_max_drawdown")),
+            _format_optional_percent(row.get("average_ai_growth_weight")),
+            str(row.get("big_improvement", "")),
+        )
+    console.print(table)
+    new_count = int(result.strategy_metrics["role"].eq("frontier_candidate").sum())
+    big_count = int(result.strategy_metrics["big_improvement"].sum())
+    console.print(
+        f"Reports: {output_dir} ({new_count:,} frontier iterations tested; "
+        f"{big_count:,} big improvements)"
+    )
+
+
+@app.command("run-i111-adversarial-validation")
+def run_i111_adversarial_validation_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_I111_ADVERSARIAL_VALIDATION_OUTPUT_DIR,
+    max_candidates: Annotated[
+        int | None,
+        typer.Option("--max-candidates", help="Optional cap for faster smoke runs."),
+    ] = None,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    bot_config = load_config(config)
+    result = run_i111_adversarial_validation(
+        bot_config,
+        output_dir=output_dir,
+        max_candidates=max_candidates,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="I111 Adversarial Validation")
+    for column in [
+        "strategy",
+        "CAGR",
+        "max DD",
+        "Calmar",
+        "AI/growth",
+        "failures",
+        "status",
+    ]:
+        table.add_column(column)
+    for _, row in result.robustness_summary.head(10).iterrows():
+        table.add_row(
+            str(row.get("result_name", "")),
+            _format_optional_percent(row.get("cagr")),
+            _format_optional_percent(row.get("max_drawdown")),
+            _format_optional_decimal(row.get("calmar")),
+            _format_optional_percent(row.get("average_ai_growth_weight")),
+            str(row.get("adversarial_failure_count", "")),
+            str(row.get("review_status", "")),
+        )
+    console.print(table)
+    high_gaps = int(result.gap_audit["severity"].eq("high").sum())
+    console.print(
+        f"Reports: {output_dir} ({len(result.strategy_metrics):,} strategies; "
+        f"{high_gaps:,} high-severity adversarial gaps)"
+    )
+
+
+@app.command("run-i111-execution-hardening")
+def run_i111_execution_hardening_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_I111_EXECUTION_HARDENING_OUTPUT_DIR,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    bot_config = load_config(config)
+    result = run_i111_execution_hardening(
+        bot_config,
+        output_dir=output_dir,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="I111 V2.2 Execution Hardening")
+    for column in ["mechanism", "Wednesday CAGR", "worst DD", "median CAGR", "status"]:
+        table.add_column(column)
+    for _, row in result.mechanism_summary.iterrows():
+        table.add_row(
+            str(row["mechanism"]),
+            _format_optional_percent(row["wednesday_cagr"]),
+            _format_optional_percent(row["worst_execution_drawdown"]),
+            _format_optional_percent(row["median_execution_cagr"]),
+            str(row["research_status"]),
+        )
+    console.print(table)
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("run-i111-cross-sectional-replacement")
+def run_i111_cross_sectional_replacement_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_I111_CROSS_SECTIONAL_REPLACEMENT_OUTPUT_DIR,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    """Run the fixed AI-stress exit/replacement study without a parameter sweep."""
+
+    bot_config = load_config(config)
+    result = run_i111_cross_sectional_replacement(
+        bot_config,
+        output_dir=output_dir,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="I111 Fixed Cross-Sectional Replacement")
+    for column in ["policy", "Wednesday CAGR", "worst DD", "failures", "status"]:
+        table.add_column(column)
+    for _, row in result.policy_summary.iterrows():
+        table.add_row(
+            str(row["policy"]),
+            _format_optional_percent(row["wednesday_cagr"]),
+            _format_optional_percent(row["worst_execution_drawdown"]),
+            str(row["execution_failure_count"]),
+            str(row["research_status"]),
+        )
+    console.print(table)
+    console.print("Retrospective research only; automatic promotion is disabled.")
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("run-i111-execution-smoothing")
+def run_i111_execution_smoothing_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_I111_EXECUTION_SMOOTHING_OUTPUT_DIR,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    bot_config = load_config(config)
+    result = run_i111_execution_smoothing(
+        bot_config,
+        output_dir=output_dir,
+        refresh_data=refresh_data,
+    )
+    table = Table(title="I111 V2.3 Fixed-Slate Execution Smoothing")
+    for column in [
+        "transform",
+        "Wednesday CAGR",
+        "Wednesday DD",
+        "median weekday CAGR",
+        "worst weekday DD",
+        "range",
+        "status",
+    ]:
+        table.add_column(column)
+    base_cost = result.schedule_summary[result.schedule_summary["is_base_cost"]]
+    gates = result.promotion_gates.set_index("transform")
+    for _, row in base_cost.iterrows():
+        transform = str(row["transform"])
+        table.add_row(
+            transform,
+            _format_optional_percent(row["wednesday_cagr"]),
+            _format_optional_percent(row["wednesday_max_drawdown"]),
+            _format_optional_percent(row["median_schedule_cagr"]),
+            _format_optional_percent(row["worst_schedule_drawdown"]),
+            _format_optional_percent(row["schedule_cagr_range"]),
+            str(gates.loc[transform, "research_status"]),
+        )
+    console.print(table)
+    console.print(
+        "Retrospective research only; promotion remains disabled pending prospective monitoring."
+    )
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("build-research-governance-ledger")
+def build_research_governance_ledger_cmd(
+    report_root: Annotated[Path, typer.Option("--report-root")] = Path("reports"),
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = Path(
+        "reports/research_governance"
+    ),
+) -> None:
+    """Index manifested trials and expose universe/delisting evidence gaps."""
+
+    ledger_path, coverage_path, summary_path = write_research_trial_ledger(
+        report_root,
+        output_dir=output_dir,
+    )
+    ledger = pd.read_csv(ledger_path) if ledger_path.stat().st_size else pd.DataFrame()
+    coverage = pd.read_csv(coverage_path) if coverage_path.stat().st_size else pd.DataFrame()
+    console.print(
+        f"Indexed {len(ledger):,} manifested trial rows across {len(coverage):,} study manifests."
+    )
+    console.print(f"Ledger: {ledger_path}")
+    console.print(f"Coverage audit: {coverage_path}")
+    console.print(f"Summary: {summary_path}")
+
+
 @app.command("seed-monitoring-windows")
 def seed_monitoring_windows_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -2847,6 +3637,51 @@ def seed_monitoring_windows_cmd(
     for row in seeded:
         table.add_row(row.window_id, row.strategy_id, row.strategy_name, row.role)
     console.print(table)
+
+
+@app.command("seed-prospective-monitoring-cohort")
+def seed_prospective_monitoring_cohort_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    account: Annotated[str, typer.Option("--account")] = "v22_prospective",
+    capital_base: Annotated[float, typer.Option("--capital-base")] = 10_000.0,
+) -> None:
+    """Freeze the fixed primary/challenger/reference cohort from the latest market date."""
+
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+    if snapshot_payload is None:
+        console.print("No completed snapshot found; prospective cohort was not created.")
+        raise typer.Exit(code=1)
+    baseline_run, manifest = snapshot_payload
+    bot_config = load_config(config)
+    warehouse = TradingWarehouse(store)
+    warehouse.refresh_strategy_registry_from_snapshot(
+        baseline_run,
+        run_id=manifest.run_id,
+        market_date=manifest.market_date,
+    )
+    seeded = warehouse.seed_prospective_monitoring_cohort(
+        bot_config,
+        start_date=manifest.market_date,
+        account=account,
+        capital_base=capital_base,
+    )
+    if not seeded:
+        console.print("The latest prospective cohort is already frozen; no rows were added.")
+        return
+    table = Table(title=f"Prospective Monitoring Cohort — {manifest.market_date}")
+    for column in ["window_id", "strategy_name", "role", "evidence_basis"]:
+        table.add_column(column)
+    for row in seeded:
+        table.add_row(row.window_id, row.strategy_name, row.role, "prospective_no_backfill")
+    console.print(table)
+    console.print(
+        "Strategy and execution definitions are frozen. Performance before the cohort start "
+        "does not count as forward evidence."
+    )
 
 
 @app.command("run-paper-valuation")
@@ -3302,6 +4137,8 @@ def _simulation_ablation_validation(
                 "launch_action_score": summary.get("launch_action_score"),
                 "launch_overrisk_rate": summary.get("launch_overrisk_rate"),
                 "constructive_capture_rate": summary.get("constructive_capture_rate"),
+                "distribution_calibration_read": summary.get("distribution_calibration_read"),
+                "action_readiness_read": summary.get("action_readiness_read"),
                 "validity_read": summary.get("validity_read"),
             }
         )
@@ -3337,6 +4174,8 @@ def _print_simulation_validation_summary(strategy: str, summary: dict[str, objec
             "constructive capture",
             _format_optional_percent(summary.get("constructive_capture_rate")),
         ),
+        ("distribution calibration", summary.get("distribution_calibration_read")),
+        ("action readiness", summary.get("action_readiness_read")),
         ("validity read", summary.get("validity_read")),
     ]
     for metric, value in rows:

@@ -1,6 +1,6 @@
 # Documentation Index
 
-Status: canonical navigation. Last reviewed: 2026-07-17.
+Status: canonical navigation. Last reviewed: 2026-07-21.
 
 Use this file to decide which docs are current operating references and which
 ones are historical research notes. When a doc captures a dated plan or
@@ -13,6 +13,9 @@ like live system behavior.
 | --- | --- | --- |
 | `README.md` | Running the app, dashboard walkthrough, daily workflow | Keep user-facing and operational; avoid deep backend theory here. Update when the operating overview, Insight Workbench, Simulation Lab, Research Lab layout, or Term Lookup behavior changes. |
 | `docs/whitepaper.md` | Semi-technical system narrative for users, reviewers, and technical readers who need the full system in one document | Keep evergreen and concise relative to detailed guides; update after major architecture, strategy-family, testing, simulation, or monitoring changes. |
+| `docs/ai_review_whitepaper.md` | Deep machine-oriented specification for independent LLM or technical review | Update after causal-authority, snapshot-lineage, calibration, primary-strategy, or major evidence changes. Keep explicit claims, evidence limits, and reviewer questions. |
+| `docs/42macro_alignment.md` | External 42 Macro transcript comparison, outcome method, and latest interpretation | Update after transcript syncs or any posture/classification mapping change. Preserve horizon and independence caveats. |
+| `docs/ai_review_whitepaper.md` | Deep machine-oriented audit packet for an independent LLM review | Refresh exact snapshot metrics, evidence cut, causal authority, known gaps, and reviewer questions after material policy or validation changes. |
 | `docs/setup_guide.md` | Full local setup for users who do not regularly use GitHub, VS Code, Python, Poetry, or Codex | Update when Python version, install commands, environment assumptions, dashboard launch behavior, or onboarding workflow changes. |
 | `docs/user_guide.md` | Full product guide for daily operation, research, monitoring, paper tracking, live logging, taxable review, and review cadence | Update when any dashboard workflow, CLI workflow, monitoring workflow, or paper/live journal workflow changes. |
 | `docs/faq.md` | Comprehensive plain-English answers for users and reviewers | Update when recurring user questions appear, metric interpretations change, or safety/governance language changes. |
@@ -32,6 +35,8 @@ like live system behavior.
 | Doc | Use For | Caution |
 | --- | --- | --- |
 | `docs/research_pruning_and_growth.md` | Current pruning rules and high-value regrowth direction | It summarizes empirical reads that can age; review after major experiment batches. |
+| `docs/risk_repair_research.md` | i111 risk-repair architecture, current native challenger, commands, and interpretation | Maintained research note; do not treat the challenger as primary until promoted through the normal protocol. |
+| `docs/new_chat_seed_i111_adversarial_research_prompt.md` | Dated handoff that initiated the 2026-07-21 cross-sectional, prospective-monitoring, and simulation-tooling pass | Historical context only; refresh before reusing because the named work is now complete. |
 | `docs/institutional_macro_coverage_gap.md` | Macro/data coverage roadmap and public-data limitations | It is a capability gap map, not a claim of commercial parity. |
 | `docs/creative_strategy_backlog.md` | Falsifiable future candidate ideas | Backlog items are not approved strategies until tested and promoted. |
 

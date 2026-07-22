@@ -100,11 +100,11 @@ def _render_command_center(
         if book_alignment is not None and not book_alignment.summary.empty:
             with st.expander("Raw model position bridge", expanded=False):
                 _render_metric_dataframe(_display_metrics(trade_decision.position_plan))
-        st.dataframe(trade_decision.evidence, use_container_width=True)
+        st.dataframe(trade_decision.evidence, width="stretch")
         _render_metric_dataframe(_display_metrics(trade_decision.scenario_links))
 
     st.subheader("Trading Alerts")
-    st.dataframe(current_state.strategy_alerts, use_container_width=True)
+    st.dataframe(current_state.strategy_alerts, width="stretch")
 
     st.subheader("Future-State Scenario Rollup")
     _render_metric_dataframe(_display_metrics(current_state.scenario_outlook.copy()))
@@ -345,9 +345,9 @@ def _render_simulation_quality_trends(validation_history: pd.DataFrame) -> None:
         st.info("No simulation validation metrics are stored yet.")
         return
     summary = validation_history[
-        validation_history["metric_scope"].astype(str).isin(
-            ["primary_summary", "horizon_summary", "ablation_summary"]
-        )
+        validation_history["metric_scope"]
+        .astype(str)
+        .isin(["primary_summary", "horizon_summary", "ablation_summary"])
     ].copy()
     if summary.empty:
         st.info("No summary-level simulation validation metrics are stored yet.")
@@ -406,6 +406,6 @@ def _render_simulation_quality_trends(validation_history: pd.DataFrame) -> None:
 
 def _render_trend_or_empty(figure: object, empty_message: str) -> None:
     if getattr(figure, "data", None):
-        st.plotly_chart(figure, use_container_width=True)
+        st.plotly_chart(figure, width="stretch")
     else:
         st.info(empty_message)

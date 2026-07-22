@@ -3,9 +3,10 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
+from trade_bot.research import external_macro
 from trade_bot.research.external_macro import (
-    build_macro_tradebot_comparisons,
     build_forward_outcome_scores,
+    build_macro_tradebot_comparisons,
     classify_42macro_transcript,
     import_42macro_transcript_files,
     summarize_forward_outcome_scores,
@@ -88,6 +89,70 @@ def test_macro_tradebot_comparison_matches_nearest_operating_date() -> None:
     assert comparisons.iloc[0]["disagreement_label"] == "major_mismatch"
     assert bool(comparisons.iloc[0]["large_change_focus"])
     assert summary["major_mismatches"] == 1
+
+
+def test_macro_tradebot_comparison_uses_final_allocation_as_posture() -> None:
+    classifications = pd.DataFrame(
+        [
+            {
+                "video_id": "current",
+                "published_date": "2026-07-21",
+                "macro_posture_score": -0.15,
+                "macro_posture_label": "constructive_but_fragile",
+                "classification_text_source": "transcript",
+                "classification_confidence": 1.0,
+                "large_change_flag": True,
+            }
+        ]
+    )
+    operating_metrics = pd.DataFrame(
+        [
+            {
+                "market_date": "2026-07-21",
+                "source": "point_in_time",
+                "risk_score": 0.433333,
+                "risk_budget_multiplier": 0.9,
+                "one_month_risk_off_probability": 0.249,
+                "portfolio_risk_multiplier": 1.0,
+                "base_defensive_weight": 0.597,
+                "final_defensive_weight": 0.63727,
+            }
+        ]
+    )
+
+    comparisons = build_macro_tradebot_comparisons(classifications, operating_metrics)
+
+    row = comparisons.iloc[0]
+    assert row["trade_bot_posture_score"] == pytest.approx(-0.27454)
+    assert row["trade_bot_posture_label"] == "cautious"
+    assert row["trade_bot_final_defensive_weight"] == pytest.approx(0.63727)
+
+
+def test_alignment_diagnostics_refresh_legacy_drilldowns(tmp_path) -> None:
+    comparisons = pd.DataFrame(
+        [
+            {
+                "video_id": "recent",
+                "published_date": "2026-07-21",
+                "classification_text_source": "transcript",
+                "macro_posture_score": -0.15,
+                "trade_bot_posture_score": -0.27,
+                "disagreement": 0.12,
+                "abs_disagreement": 0.12,
+                "disagreement_label": "aligned",
+                "large_change_focus": True,
+            }
+        ]
+    )
+
+    external_macro._write_alignment_diagnostic_outputs(tmp_path, comparisons)
+
+    daily = pd.read_csv(tmp_path / "daily_transcript_backed_comparison.csv")
+    aggregate = pd.read_csv(tmp_path / "aggregate_analysis.csv")
+    monthly = pd.read_csv(tmp_path / "monthly_alignment.csv")
+    assert daily.iloc[0]["published_date"] == "2026-07-21"
+    assert aggregate.iloc[0]["date_max"] == "2026-07-21"
+    assert monthly.iloc[0]["year_month"] == "2026-07"
 
 
 def test_manual_transcript_import_accepts_youtubetotranscript_copy(tmp_path) -> None:
@@ -267,9 +332,7 @@ def test_warehouse_persists_external_macro_alignment(tmp_path) -> None:
     assert counts["external_macro_videos"] == 1
     assert warehouse.read_table("external_macro_videos").iloc[0]["video_id"] == "abc"
     assert (
-        warehouse.read_table("external_macro_classifications").iloc[0][
-            "macro_posture_label"
-        ]
+        warehouse.read_table("external_macro_classifications").iloc[0]["macro_posture_label"]
         == "risk_on"
     )
     assert warehouse.read_table("external_macro_tradebot_comparisons").iloc[0][
@@ -323,8 +386,7 @@ def test_forward_outcome_scores_reward_defense_before_left_tail() -> None:
     assert outcomes.iloc[0]["macro_action_score"] > outcomes.iloc[0]["trade_bot_action_score"]
     assert bool(outcomes.iloc[0]["trade_bot_overrisk"])
     assert not bool(outcomes.iloc[0]["macro_overrisk"])
-    assert summary[summary["scope"].eq("transcript")].iloc[0][
-        "macro_mean_action_score"
-    ] > summary[summary["scope"].eq("transcript")].iloc[0][
-        "trade_bot_mean_action_score"
-    ]
+    assert (
+        summary[summary["scope"].eq("transcript")].iloc[0]["macro_mean_action_score"]
+        > summary[summary["scope"].eq("transcript")].iloc[0]["trade_bot_mean_action_score"]
+    )

@@ -21,6 +21,7 @@ from trade_bot.dashboard_v2.services.job_service import (
     queue_warehouse_migration,
 )
 from trade_bot.dashboard_v2.services.runtime import (
+    HISTORICAL_SNAPSHOT_NOTICE,
     DashboardPaths,
     freshness_label,
     load_job_frame,
@@ -42,7 +43,7 @@ st.markdown(
     """
     <div class="v2-masthead">
         <div>
-            <p class="v2-kicker">Trade Bot V2</p>
+            <p class="v2-kicker">Trade Bot V2.2</p>
             <h1 class="v2-title">Fast Operations Workbench</h1>
             <p class="v2-subtitle">
                 Summary-first dashboard over the same local snapshots, DuckDB warehouse,
@@ -164,6 +165,15 @@ if runtime.snapshot_manifest is not None:
     st.sidebar.success(f"Snapshot loaded: {freshness_label(runtime)}")
 else:
     st.sidebar.info("Using a live pipeline run.")
+if runtime.operating_strategy_error and not runtime.is_historical_snapshot_mode:
+    st.error("Promoted operating book is unavailable: " + runtime.operating_strategy_error)
+if run_source == "Selected snapshot":
+    st.sidebar.warning(
+        "Point-in-time snapshot mode pins the baseline run only and is display-only. Current "
+        "action and risk surfaces are suppressed; persisted research artifacts retain their "
+        "own source dates."
+    )
+    st.warning(HISTORICAL_SNAPSHOT_NOTICE)
 
 jobs = load_job_frame(paths)
 if not jobs.empty:
@@ -180,7 +190,7 @@ if not jobs.empty:
             ]
             if column in jobs
         ]
-        st.dataframe(jobs[job_columns], use_container_width=True, hide_index=True)
+        st.dataframe(jobs[job_columns], width="stretch", hide_index=True)
 
 st.markdown(
     f"""
@@ -202,7 +212,7 @@ default_label = next(
     route_options[0].label,
 )
 selected_label = st.pills(
-    "V2 workbench",
+    "V2.2 workbench",
     [route.label for route in route_options],
     selection_mode="single",
     default=default_label,

@@ -1,0 +1,193 @@
+source: 42macro_youtube
+published_date: 2026-07-20
+video_id: D0N0Z9G87w4
+url: https://www.youtube.com/watch?v=D0N0Z9G87w4
+title: The Macro Minute: Will China's Low-Cost AI Trigger A Hyperscaler Capex Reset?
+
+Happy Monday out there, team. 42 macro
+skipper here, Darius Dale here to
+present our macro minute for Monday,
+July 20th, 2026. As always, we'll start
+with the executive summary from today's
+lead-off morning note. So, let's dive
+right in. Today's key macro question is,
+will intensifying competition from
+China's low-cost AI competitors cause US
+hyperscalers to reassess their capital
+allocation decisions?
+The short answer is the risk of this
+bearish outcome is as high as it's been
+to date. No idea on timing. In terms of
+analytical nuance, Alphabet and Tesla
+open the reporting season for
+Magnificent Seven constituents on
+Wednesday. Microsoft, Meta, Apple, and
+Amazon follow next week. Uh these names
+comprise a quarter of the S&P 500 index.
+Looking at Q2 earning season to date,
+among 49 uh S&P 500 reporters, 92%
+topped earnings estimates and 0% missed,
+uh which is we have record in data going
+back 2013. 74% companies uh positively
+surprised on sales, while 6% missed, in
+line with the previous quarter. Over 80
+index uh members report this week.
+Cost is a key driver of why China is
+winning the US's manufactured, quote, AI
+race at the inference layer. Energy is a
+key strategic advantage for China as
+well. China builds electricity capacity
+faster than any country in human
+history. For example, it added to in
+2025, it added 543 gigawatts, exceeding
+every nation's total electricity
+generation capacity except the US, which
+is mind-boggling.
+A broad reassessment of hyperscale AI
+CapEx represents a material risk to the
+stock market in the context of
+cyclically and structurally elevated
+estimates for S&P 500 sales and earnings
+growth. The good news is that S&P 500
+sales and earnings growth are currently
+on historical runs. There's a large
+cohort of slower-moving investors that
+will not sell on the first slowdown from
+a rate of change perspective.
+Despite efficiency gains at the training
+layer, accelerating inference demands
+means all these models are
+memory-intensive, hence investors'
+preferences for the quote, "picks and
+shovels" that semiconductors represent.
+Recall that the Philadelphia conductor
+Philadelphia semiconductor index is
+socks index jumped 105%
+from its March trough to last month's
+high. It has since dropped 20% entering
+bare market territory. There's a dip to
+be bought here, but perhaps not until
+after the hyperscalers signal a
+willingness to slow the growth of AI
+CapEx into signs of robust competition
+from China's low cost competitors.
+As always a wrap up with a question from
+our community. This was titled
+top notch to round the horn on AI
+skipper.
+Reads the AI driven marketing campaign
+was the best argument I've heard raised
+to continue to rely on risk management
+system through this AI CapEx buildout.
+No one is pricing in China winning this
+race and the US energy industry is so
+far behind in generating increased
+capacity. They will
+they will be able to outcompete us on
+cost. Yep, I agree with that. My
+favorite point is that you made that is
+spot on is that we really haven't
+defined what quote winning is and what
+outcomes it drives. It's wild to think
+about So appreciate the work as always
+and then just following up here with the
+second comment here.
+Says plus one truly exceptional analysis
+in the 718 round the horn to July 18th
+round the horn. I spend a lot of time in
+my head trying to piece all these
+economic technical political forces
+together as the news flow every day
+and then the round the horn provides
+great insights that puts my mind at ease
+in terms of providing a framework for
+how to put the pieces of the puzzle
+together. This service has raised the
+bar of what I consider value. So I
+really really thankful for those that
+that that feedback. I appreciate you
+guys.
+You know this key takeaway is that you
+know there's a lot of moving parts here
+and this is just one theme that
+investors need to be concerned about
+right now. There's a you know there's
+several orthogonal themes that are kind
+of impacting financial markets not the
+least of which is the you know kind of
+the Fed regime change what that's going
+to look like what the shapes and
+contours of that what's the timing of
+you know cyclical monetary policy
+adjustments on the tightening side.
+What's the timing of that regime change
+or what does it look like from a dovish
+or hawkish standpoint? Uh those are two
+different uh debates. Obviously, the
+inflation's going to be a key driver of
+what that looks like both cyclically and
+structurally. You have what's going on
+in the Strait of Hormuz is a big deal uh
+and so on and so forth. I mean, there's
+just a lot going on for investors to try
+to, you know, piece together that
+puzzle. So, you know, with us it always
+comes back down to, you know, where are
+we in the six key macro cycles? You
+know, are we headwinds or tailwinds in
+those six key macro cycles? And more
+importantly, uh from the perspective of
+being in a in a in a risk-on market
+regime, uh you know, your thought
+process as a as an investor should be,
+"Okay, what's the probability of having
+a severe correction or crash whenever
+you're in a risk-on market regime?" As a
+risk manager in a risk-off market
+regime, you need to be thinking about,
+"What's the probability of having a
+significant, you know, bounce or
+sustained recovery uh in asset markets?"
+And start to think about, "What could
+change across those six key macro cycles
+that could ultimately cause uh those
+outcomes?" So, right now, as we've
+talked about uh in the context of our
+macro weather model, uh you know, we're
+in a meaningful headwind. The macro
+weather model is currently uh signaling
+a meaningful headwind from the
+perspective of the positioning cycle,
+which ultimately means that if anything
+goes wrong in the other five key macro
+cycles being growth, inflation, monetary
+policy, fiscal policy, and liquidity, if
+anything goes wrong in those cycles, uh
+then you're uh you're incrementally
+wrong uh in the case of the growth
+cycle, uh you're you're going to have
+some issues. And so, this is why Q2
+earning season, as we've been warning
+about uh over the past few weeks, is a
+risk of that it becomes a sell-the-news
+catalyst for stocks. Uh and obviously,
+we've seen a lot of the AI exposed
+stocks, you know, already in drawdown
+territory and that could deepen uh in
+the coming weeks and months uh to the
+extent we start to see some negative
+uh uh revisions to AI CapEx. I'm not
+We're not making that forecast. I mean,
+I don't have any basis to make that
+forecast in terms of it's going to
+happen now. I don't think anybody really
+has a basis for that, but that's neither
+here nor there. The point we're making
+is that the risk of this bearish outcome
+is as high as it's been uh to date. So,
+investors need to be aware of that. So,
+we'll wrap it up there. Jerry Stahli
+here presenting our macro minute from
+Monday, July 20th, 2026. Best of luck
+out there today. We'll catch you back
+here tomorrow. Cheers.

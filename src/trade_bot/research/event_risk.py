@@ -36,6 +36,8 @@ class MarketEvent:
     phase_reason: str = ""
     confirmation_window: str = ""
     sizing_authority: bool = True
+    decay_after_days: int | None = None
+    expires_after_days: int | None = None
 
 
 @dataclass(frozen=True)
@@ -1165,6 +1167,8 @@ def _market_event_from_mapping(raw: dict[str, Any]) -> MarketEvent:
         phase_reason=str(raw.get("phase_reason", inferred_phase_reason)),
         confirmation_window=str(raw.get("confirmation_window", inferred_confirmation_window)),
         sizing_authority=bool(raw.get("sizing_authority", True)),
+        decay_after_days=_optional_nonnegative_int(raw.get("decay_after_days")),
+        expires_after_days=_optional_nonnegative_int(raw.get("expires_after_days")),
     )
 
 
@@ -1187,6 +1191,15 @@ def _phase(value: Any) -> NewsPhase:
         msg = f"Unsupported news phase: {phase}"
         raise ValueError(msg)
     return cast(NewsPhase, phase)
+
+
+def _optional_nonnegative_int(value: Any) -> int | None:
+    if value is None or str(value).strip() == "":
+        return None
+    parsed = int(value)
+    if parsed < 0:
+        raise ValueError("Event decay/expiry days must be non-negative.")
+    return parsed
 
 
 def _event_fields(event: MarketEvent) -> dict[str, object]:

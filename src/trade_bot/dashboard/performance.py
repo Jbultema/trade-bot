@@ -134,7 +134,7 @@ def _render_performance(
                 rebase=True,
                 title=f"Growth of $1: {window_start.date()} to {window_end.date()}",
             ),
-            use_container_width=True,
+            width="stretch",
         )
         window_stats = window_performance_frame(
             selected_results,
@@ -149,12 +149,12 @@ def _render_performance(
     st.subheader("Calendar Year Returns")
     st.dataframe(
         baseline_run.calendar_returns.map(lambda value: f"{value:.2%}"),
-        use_container_width=True,
+        width="stretch",
     )
 
     st.subheader("Latest Positions")
     positions = latest_positions_frame(selected_results)
-    st.dataframe(positions.map(lambda value: f"{value:.2%}"), use_container_width=True)
+    st.dataframe(positions.map(lambda value: f"{value:.2%}"), width="stretch")
 
 
 def _performance_option_frame(

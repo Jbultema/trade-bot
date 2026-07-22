@@ -521,7 +521,7 @@ def _render_performance_allocation_context(
             end=window_end,
             title=f"Performance, drawdown, and allocation: {window_start.date()} to {window_end.date()}",
         ),
-        use_container_width=True,
+        width="stretch",
     )
 
     stats_col, behavior_col = st.columns(2)
@@ -689,7 +689,7 @@ def _render_decision_timeline(
             start=window_start,
             end=window_end,
         ),
-        use_container_width=True,
+        width="stretch",
     )
     if event_frame.empty:
         st.caption("No material allocation decision events were detected in this window.")
@@ -903,33 +903,43 @@ def _decision_timeline_marker_frame(
         .ffill()
     )
     events["equity_marker"] = events["date"].map(equity_lookup)
-    events["drawdown_at_event"] = events["date"].map(drawdown_lookup).fillna(
-        pd.to_numeric(events.get("drawdown_at_event"), errors="coerce")
+    events["drawdown_at_event"] = (
+        events["date"]
+        .map(drawdown_lookup)
+        .fillna(pd.to_numeric(events.get("drawdown_at_event"), errors="coerce"))
     )
-    events["symbol"] = events["event"].map(
-        {
-            "Worst drawdown point": "x",
-            "Largest de-risking move": "triangle-down",
-            "Largest re-risking move": "triangle-up",
-            "De-risking move": "triangle-down",
-            "Re-risking move": "triangle-up",
-            "Risk rotation": "diamond",
-            "Defensive add": "triangle-down",
-            "Defensive reduce": "triangle-up",
-        }
-    ).fillna("circle")
-    events["color"] = events["event"].map(
-        {
-            "Worst drawdown point": "#ef4444",
-            "Largest de-risking move": "#f59e0b",
-            "Largest re-risking move": "#0f766e",
-            "De-risking move": "#f59e0b",
-            "Re-risking move": "#0f766e",
-            "Risk rotation": "#6366f1",
-            "Defensive add": "#d97706",
-            "Defensive reduce": "#14b8a6",
-        }
-    ).fillna("#4f46e5")
+    events["symbol"] = (
+        events["event"]
+        .map(
+            {
+                "Worst drawdown point": "x",
+                "Largest de-risking move": "triangle-down",
+                "Largest re-risking move": "triangle-up",
+                "De-risking move": "triangle-down",
+                "Re-risking move": "triangle-up",
+                "Risk rotation": "diamond",
+                "Defensive add": "triangle-down",
+                "Defensive reduce": "triangle-up",
+            }
+        )
+        .fillna("circle")
+    )
+    events["color"] = (
+        events["event"]
+        .map(
+            {
+                "Worst drawdown point": "#ef4444",
+                "Largest de-risking move": "#f59e0b",
+                "Largest re-risking move": "#0f766e",
+                "De-risking move": "#f59e0b",
+                "Re-risking move": "#0f766e",
+                "Risk rotation": "#6366f1",
+                "Defensive add": "#d97706",
+                "Defensive reduce": "#14b8a6",
+            }
+        )
+        .fillna("#4f46e5")
+    )
     numeric_defaults = {
         "risk_weight_at_event": float("nan"),
         "risk_weight_change": float("nan"),
@@ -997,7 +1007,7 @@ def _render_approach_performance(
             rebase=True,
             title=f"Growth of $1: {window_start.date()} to {window_end.date()}",
         ),
-        use_container_width=True,
+        width="stretch",
     )
     window_stats = window_performance_frame(
         chart_results,
@@ -1021,7 +1031,9 @@ def _render_factor_attribution(result: BacktestResult, *, baseline_run: Baseline
     summary = attribution.summary.iloc[0]
     cols = st.columns(5)
     _helped_metric(cols[0], "Factor R2", _format_percent(summary["factor_model_r_squared"]))
-    _helped_metric(cols[1], "Residual Share", _format_percent(summary["residual_contribution_share"]))
+    _helped_metric(
+        cols[1], "Residual Share", _format_percent(summary["residual_contribution_share"])
+    )
     _helped_metric(cols[2], "Dominant Factor", str(summary["dominant_factor"]))
     _helped_metric(cols[3], "Dominant Share", _format_percent(summary["dominant_factor_share"]))
     _helped_metric(
@@ -1037,12 +1049,12 @@ def _render_factor_attribution(result: BacktestResult, *, baseline_run: Baseline
     factor_view = attribution.factor_attribution.copy()
     st.plotly_chart(
         _factor_contribution_waterfall_figure(factor_view),
-        use_container_width=True,
+        width="stretch",
     )
     return_risk_similarity = _safe_float(
-        factor_view["absolute_contribution_share"].abs().corr(
-            factor_view["risk_contribution_pct"].abs()
-        )
+        factor_view["absolute_contribution_share"]
+        .abs()
+        .corr(factor_view["risk_contribution_pct"].abs())
     )
     contribution_fig = make_subplots(
         rows=1,
@@ -1078,7 +1090,7 @@ def _render_factor_attribution(result: BacktestResult, *, baseline_run: Baseline
         margin={"l": 20, "r": 20, "t": 50, "b": 20},
     )
     contribution_fig.update_xaxes(tickformat=".0%")
-    st.plotly_chart(contribution_fig, use_container_width=True)
+    st.plotly_chart(contribution_fig, width="stretch")
     if return_risk_similarity is not None:
         st.caption(
             "These panels can look similar when the same proxy factors both earned the returns and "
@@ -1308,7 +1320,9 @@ def _render_approach_detail_workbench(
         ]
     elif selected_scope == "All non-pruned research + core baselines":
         visible_catalog = catalog[
-            default_reference | runtime_leader_mask | ~catalog["research_status"].eq("pruned_dead_end")
+            default_reference
+            | runtime_leader_mask
+            | ~catalog["research_status"].eq("pruned_dead_end")
         ]
     else:
         visible_catalog = catalog
@@ -1451,7 +1465,9 @@ def _render_approach_detail_workbench(
                 "operability_label",
                 "material_trade_days_per_year",
             ]
-            available_summary_columns = [column for column in summary_columns if column in scorecard]
+            available_summary_columns = [
+                column for column in summary_columns if column in scorecard
+            ]
             st.caption("Selected candidate scorecard")
             _render_metric_dataframe(
                 _display_metrics(scorecard[available_summary_columns]),
@@ -1635,7 +1651,7 @@ def _render_approach_detail_workbench(
             ]
         if not manifest_rows.empty:
             st.caption("Candidate manifest")
-            st.dataframe(manifest_rows, use_container_width=True, hide_index=True)
+            st.dataframe(manifest_rows, width="stretch", hide_index=True)
         else:
             st.caption("No experiment manifest is available for this approach.")
 
@@ -1817,9 +1833,7 @@ def _render_strategy_family_map(
         if equity_filter != "all":
             strategy_view = strategy_view[strategy_view["equity_expression"] == equity_filter]
         if defensive_filter != "all":
-            strategy_view = strategy_view[
-                strategy_view["defensive_expression"] == defensive_filter
-            ]
+            strategy_view = strategy_view[strategy_view["defensive_expression"] == defensive_filter]
 
         strategy_columns = [
             "iteration",
@@ -1866,6 +1880,8 @@ def _render_outcome_frontier(
     experiment_scorecards: pd.DataFrame,
     experiment_candidates: pd.DataFrame,
     warehouse_path: str = "",
+    include_defensive_judgement: bool = True,
+    include_candidate_diagnostics: bool = True,
 ) -> None:
     st.markdown("**Outcome Frontier**")
     st.caption(
@@ -1878,6 +1894,7 @@ def _render_outcome_frontier(
         baseline_run=baseline_run,
         bot_config=bot_config,
         experiment_scorecards=experiment_scorecards,
+        include_defensive_judgement=include_defensive_judgement,
     )
     if outcome_scorecards.empty:
         st.write(
@@ -1993,7 +2010,7 @@ def _render_outcome_frontier(
     )
     selection = st.plotly_chart(
         fig,
-        use_container_width=True,
+        width="stretch",
         key=_OUTCOME_FRONTIER_PLOT_KEY,
         on_select="rerun",
         selection_mode="points",
@@ -2031,14 +2048,43 @@ def _render_outcome_frontier(
     selected_strategy = str(selected_row["strategy"])
     st.session_state[_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY] = selected_strategy
     selected_scorecard = plot_frame[plot_frame["strategy"].astype(str) == selected_strategy].iloc[0]
-    _render_outcome_decision_cards(
-        selected_scorecard,
-        bot_config=bot_config,
-        baseline_run=baseline_run,
-        experiment_scorecards=outcome_scorecards,
-        peer_frame=plot_frame,
-        warehouse_path=warehouse_path,
-    )
+    if include_candidate_diagnostics:
+        _render_outcome_decision_cards(
+            selected_scorecard,
+            bot_config=bot_config,
+            baseline_run=baseline_run,
+            experiment_scorecards=outcome_scorecards,
+            peer_frame=plot_frame,
+            warehouse_path=warehouse_path,
+        )
+    else:
+        wealth_column = f"terminal_wealth_with_contributions_{DEFAULT_OUTCOME_HORIZON_YEARS}y"
+        cols = st.columns(5)
+        _helped_metric(
+            cols[0],
+            "Utility",
+            _format_decimal(selected_scorecard.get("growth_constrained_utility_score")),
+        )
+        _helped_metric(cols[1], "CAGR", _format_percent(selected_scorecard.get("cagr")))
+        _helped_metric(
+            cols[2],
+            "Max Drawdown",
+            _format_percent(selected_scorecard.get("max_drawdown")),
+        )
+        _helped_metric(
+            cols[3],
+            "15Y Wealth",
+            _format_currency(selected_scorecard.get(wealth_column)),
+        )
+        _helped_metric(
+            cols[4],
+            "Readiness",
+            str(selected_scorecard.get("monitoring_readiness_label", "n/a")),
+        )
+        st.info(
+            "Selection saved. Open Candidate Deep Dive to run the candidate backtest, "
+            "confirmation audit, peer diagnostics, and monitoring comparison."
+        )
 
     comparison_columns = [
         "display_name",
@@ -2187,7 +2233,7 @@ def _render_outcome_planning_assumptions() -> None:
         st.dataframe(
             settings,
             hide_index=True,
-            use_container_width=True,
+            width="stretch",
         )
 
 
@@ -2538,10 +2584,16 @@ def _render_candidate_leadership_diagnostics(strategy_name: str) -> None:
     if not tech.empty:
         row = tech.iloc[0]
         cols = st.columns(5)
-        _helped_metric(cols[0], "Current Tech/AI", _format_percent(row.get("current_tech_ai_weight")))
+        _helped_metric(
+            cols[0], "Current Tech/AI", _format_percent(row.get("current_tech_ai_weight"))
+        )
         _helped_metric(cols[1], "Avg Tech/AI", _format_percent(row.get("avg_tech_ai_weight")))
-        _helped_metric(cols[2], "Current Mega-Cap", _format_percent(row.get("current_mega_cap_tech_weight")))
-        _helped_metric(cols[3], "Current Non-Tech", _format_percent(row.get("current_non_tech_weight")))
+        _helped_metric(
+            cols[2], "Current Mega-Cap", _format_percent(row.get("current_mega_cap_tech_weight"))
+        )
+        _helped_metric(
+            cols[3], "Current Non-Tech", _format_percent(row.get("current_non_tech_weight"))
+        )
         _helped_metric(cols[4], "Max Tech/AI", _format_percent(row.get("max_tech_ai_weight")))
 
     if not betas.empty:
@@ -2633,7 +2685,9 @@ def _render_candidate_leadership_diagnostics(strategy_name: str) -> None:
         ]
         _render_metric_dataframe(
             _display_metrics(
-                router_selection[[column for column in router_columns if column in router_selection]]
+                router_selection[
+                    [column for column in router_columns if column in router_selection]
+                ]
             ),
             hide_index=True,
         )
@@ -2726,7 +2780,9 @@ def _render_candidate_pbo_diagnostics(strategy_name: str) -> None:
         _helped_metric(cols[0], "Selected In-Sample", _format_percent(row.get("selection_rate")))
         _helped_metric(cols[1], "Candidate Overfit Rate", _format_percent(row.get("overfit_rate")))
         _helped_metric(cols[2], "Median OOS Rank", _format_percent(row.get("median_relative_rank")))
-        _helped_metric(cols[3], "Median Degradation", _format_decimal(row.get("median_degradation")))
+        _helped_metric(
+            cols[3], "Median Degradation", _format_decimal(row.get("median_degradation"))
+        )
         st.caption("Candidate selection behavior across CSCV splits")
         _render_metric_dataframe(_display_metrics(selection), hide_index=True)
 
@@ -2752,7 +2808,9 @@ def _render_candidate_pbo_diagnostics(strategy_name: str) -> None:
                     "performance_degradation",
                 ]
                 _render_metric_dataframe(
-                    _display_metrics(split_view[[column for column in split_columns if column in split_view]]),
+                    _display_metrics(
+                        split_view[[column for column in split_columns if column in split_view]]
+                    ),
                     hide_index=True,
                 )
 
@@ -2817,7 +2875,9 @@ def _render_pbo_diagnostics_overview() -> None:
             "median_degradation",
         ]
         _render_metric_dataframe(
-            _display_metrics(selection[[column for column in selection_columns if column in selection]]),
+            _display_metrics(
+                selection[[column for column in selection_columns if column in selection]]
+            ),
             hide_index=True,
         )
 
@@ -2838,7 +2898,10 @@ def _render_pbo_diagnostics_overview() -> None:
 
     if not splits.empty:
         with st.expander("CSCV split drilldown", expanded=False):
-            selected_options = ["All", *sorted(splits["selected_strategy"].dropna().astype(str).unique())]
+            selected_options = [
+                "All",
+                *sorted(splits["selected_strategy"].dropna().astype(str).unique()),
+            ]
             selected_strategy = st.selectbox(
                 "Selected in-sample strategy",
                 selected_options,
@@ -2864,7 +2927,11 @@ def _render_pbo_diagnostics_overview() -> None:
                 "performance_degradation",
             ]
             _render_metric_dataframe(
-                _display_metrics(split_view[[column for column in split_columns if column in split_view]].head(300)),
+                _display_metrics(
+                    split_view[[column for column in split_columns if column in split_view]].head(
+                        300
+                    )
+                ),
                 hide_index=True,
             )
 
@@ -2957,7 +3024,7 @@ def _render_leadership_diagnostics_overview() -> None:
                 xaxis_title="Scenario bucket",
                 yaxis_title="Strategy",
             )
-            st.plotly_chart(fig, use_container_width=True)
+            st.plotly_chart(fig, width="stretch")
 
     if not router.empty:
         st.caption("Walk-forward strategy router summary")
@@ -2983,7 +3050,9 @@ def _render_leadership_diagnostics_overview() -> None:
 
     if not router_comparison.empty:
         st.caption("Router variant vs static baseline comparison")
-        horizon_values = sorted(pd.to_numeric(router_comparison["horizon_days"], errors="coerce").dropna().unique())
+        horizon_values = sorted(
+            pd.to_numeric(router_comparison["horizon_days"], errors="coerce").dropna().unique()
+        )
         selected_horizon = st.selectbox(
             "Router comparison horizon",
             options=[int(value) for value in horizon_values],
@@ -3005,7 +3074,9 @@ def _render_leadership_diagnostics_overview() -> None:
         ]
         _render_metric_dataframe(
             _display_metrics(
-                comparison_view[[column for column in comparison_columns if column in comparison_view]]
+                comparison_view[
+                    [column for column in comparison_columns if column in comparison_view]
+                ]
             ),
             hide_index=True,
         )
@@ -3047,7 +3118,9 @@ def _render_leadership_diagnostics_overview() -> None:
         ]
         _render_metric_dataframe(
             _display_metrics(
-                router_scenarios[[column for column in scenario_columns if column in router_scenarios]]
+                router_scenarios[
+                    [column for column in scenario_columns if column in router_scenarios]
+                ]
             ),
             hide_index=True,
         )
@@ -3057,7 +3130,9 @@ def _render_leadership_diagnostics_overview() -> None:
             horizon_options = sorted(
                 pd.to_numeric(router_scores["horizon_days"], errors="coerce").dropna().unique()
             )
-            scenario_options = sorted(router_scores["scenario_bucket"].dropna().astype(str).unique())
+            scenario_options = sorted(
+                router_scores["scenario_bucket"].dropna().astype(str).unique()
+            )
             score_cols = st.columns(3)
             drill_horizon = score_cols[0].selectbox(
                 "Horizon",
@@ -3079,9 +3154,13 @@ def _render_leadership_diagnostics_overview() -> None:
                 pd.to_numeric(router_scores["horizon_days"], errors="coerce").eq(drill_horizon)
             ].copy()
             if drill_scenario != "All":
-                score_view = score_view[score_view["scenario_bucket"].astype(str).eq(drill_scenario)]
+                score_view = score_view[
+                    score_view["scenario_bucket"].astype(str).eq(drill_scenario)
+                ]
             if selected_only and "selected" in score_view:
-                score_view = score_view[score_view["selected"].astype(str).str.lower().isin(["true", "1"])]
+                score_view = score_view[
+                    score_view["selected"].astype(str).str.lower().isin(["true", "1"])
+                ]
             score_columns = [
                 "origin_date",
                 "scenario_bucket",
@@ -3099,7 +3178,11 @@ def _render_leadership_diagnostics_overview() -> None:
                 "mean_state_distance",
             ]
             _render_metric_dataframe(
-                _display_metrics(score_view[[column for column in score_columns if column in score_view]].head(200)),
+                _display_metrics(
+                    score_view[[column for column in score_columns if column in score_view]].head(
+                        200
+                    )
+                ),
                 hide_index=True,
             )
 
@@ -3549,7 +3632,9 @@ def _historical_running_comparison_frame(
         {
             "metric": "Re-risk behavior",
             "historical_baseline": _format_percent(rerisk_rate),
-            "running_experiment": "n/a" if has_rerisked is None else "Yes" if has_rerisked else "No",
+            "running_experiment": (
+                "n/a" if has_rerisked is None else "Yes" if has_rerisked else "No"
+            ),
             "read": "Shows whether the live path has already moved below the 65% defensive threshold.",
         },
         {
@@ -3722,7 +3807,7 @@ def _render_defensive_judgement_section(
     if not chart_events.empty:
         st.plotly_chart(
             _defensive_judgement_figure(chart_events),
-            use_container_width=True,
+            width="stretch",
             key=(
                 f"defensive_judgement_figure_{result.name}_"
                 f"{selected_benchmark}_{selected_threshold}"
@@ -4022,15 +4107,19 @@ def _outcome_peer_distribution_frame(
     if wealth_column in working:
         wealth = pd.to_numeric(working[wealth_column], errors="coerce")
         spy_multiple = pd.to_numeric(
-            working["wealth_multiple_vs_spy"]
-            if "wealth_multiple_vs_spy" in working
-            else pd.Series(pd.NA, index=working.index),
+            (
+                working["wealth_multiple_vs_spy"]
+                if "wealth_multiple_vs_spy" in working
+                else pd.Series(pd.NA, index=working.index)
+            ),
             errors="coerce",
         )
         qqq_multiple = pd.to_numeric(
-            working["wealth_multiple_vs_qqq"]
-            if "wealth_multiple_vs_qqq" in working
-            else pd.Series(pd.NA, index=working.index),
+            (
+                working["wealth_multiple_vs_qqq"]
+                if "wealth_multiple_vs_qqq" in working
+                else pd.Series(pd.NA, index=working.index)
+            ),
             errors="coerce",
         )
         working["extra_wealth_vs_spy"] = wealth - wealth / spy_multiple.replace(0.0, pd.NA)
@@ -4256,7 +4345,12 @@ def _benchmark_extra_wealth(
 def _outcome_metric_specs() -> list[dict[str, object]]:
     wealth_column = _outcome_wealth_column()
     return [
-        {"metric": "15Y Wealth", "key": wealth_column, "kind": "currency", "lower_is_better": False},
+        {
+            "metric": "15Y Wealth",
+            "key": wealth_column,
+            "kind": "currency",
+            "lower_is_better": False,
+        },
         {
             "metric": "Extra vs SPY",
             "key": "extra_wealth_vs_spy",
@@ -4793,7 +4887,9 @@ def _render_experiment_monitor(
             _render_paper_readiness(experiment_scorecards)
         elif validation_view == "Regime Tests":
             if experiment_walk_forward.empty and experiment_regimes.empty:
-                st.write("New robustness artifacts will appear after the next experiment iteration.")
+                st.write(
+                    "New robustness artifacts will appear after the next experiment iteration."
+                )
             else:
                 strategy_options = sorted(experiment_scorecards["strategy"].dropna().unique())
                 default_strategies = (
@@ -4867,7 +4963,7 @@ def _render_experiment_monitor(
             manifest_view = experiment_candidates[
                 experiment_candidates["iteration"].isin(selected_manifest_iterations)
             ]
-            st.dataframe(manifest_view, use_container_width=True)
+            st.dataframe(manifest_view, width="stretch")
 
     st.divider()
     st.subheader("Candidate Deep Dive")
@@ -4915,7 +5011,9 @@ def _render_signal_evidence(
     validated_count = int(
         evidence["evidence_label"].isin(["validated_contributor", "promising_mixed"]).sum()
     )
-    context_only_count = int(evidence["evidence_label"].isin(["context_only", "research_gap"]).sum())
+    context_only_count = int(
+        evidence["evidence_label"].isin(["context_only", "research_gap"]).sum()
+    )
     paired_count = int(evidence["paired_tests"].sum())
     cols = st.columns(4)
     _helped_metric(cols[0], "Signal Families", f"{len(evidence):,}")
@@ -4959,7 +5057,7 @@ def _render_signal_evidence(
         height=max(420, 32 * len(chart_frame) + 120),
         margin={"l": 20, "r": 20, "t": 60, "b": 20},
     )
-    st.plotly_chart(fig, use_container_width=True)
+    st.plotly_chart(fig, width="stretch")
 
     heatmap_frame = _signal_ablation_heatmap_frame(marginal_tests)
     if not heatmap_frame.empty:
@@ -4969,7 +5067,7 @@ def _render_signal_evidence(
         )
         st.plotly_chart(
             _signal_ablation_heatmap_figure(heatmap_frame),
-            use_container_width=True,
+            width="stretch",
         )
 
     evidence_tab, paired_tab, tagged_tab = st.tabs(
@@ -4998,7 +5096,9 @@ def _render_signal_evidence(
             "caveat",
         ]
         _render_metric_dataframe(
-            _display_metrics(evidence[[column for column in evidence_columns if column in evidence]]),
+            _display_metrics(
+                evidence[[column for column in evidence_columns if column in evidence]]
+            ),
             hide_index=True,
         )
     with paired_tab:
@@ -5111,9 +5211,7 @@ def _signal_ablation_heatmap_figure(heatmap_frame: pd.DataFrame) -> go.Figure:
                 [1.0, "#0f766e"],
             ],
             colorbar={"title": "Median delta"},
-            hovertemplate=(
-                "<b>%{y}</b><br>%{x}<br>Median paired delta: %{z:.2%}<extra></extra>"
-            ),
+            hovertemplate=("<b>%{y}</b><br>%{x}<br>Median paired delta: %{z:.2%}<extra></extra>"),
         )
     )
     figure.update_layout(
@@ -5266,7 +5364,7 @@ def _render_taxable_impact(*, bot_config: Any, experiment_scorecards: pd.DataFra
             yaxis_tickformat=".0%",
             margin={"l": 20, "r": 20, "t": 35, "b": 20},
         )
-        st.plotly_chart(fig, use_container_width=True)
+        st.plotly_chart(fig, width="stretch")
 
     top_columns = [
         "iteration",

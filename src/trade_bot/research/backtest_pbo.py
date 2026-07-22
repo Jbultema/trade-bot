@@ -2,7 +2,7 @@ from __future__ import annotations
 
 import itertools
 import math
-from dataclasses import dataclass
+from dataclasses import dataclass, field, replace
 from pathlib import Path
 from typing import Literal
 
@@ -10,7 +10,7 @@ import numpy as np
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.config import BotConfig
+from trade_bot.config import BotConfig, required_strategy_tickers
 from trade_bot.DEFAULTS import DEFAULT_EXPERIMENTS_DIR
 from trade_bot.research.approach_explorer import (
     build_approach_backtest_result,
@@ -25,6 +25,18 @@ from trade_bot.research.approach_explorer import (
 
 PBOMetric = Literal["sharpe", "mean_return", "total_return"]
 DEFAULT_PBO_STRATEGY = "i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145"
+PBO_CANDIDATE_AUDIT_COLUMNS = (
+    "candidate_order",
+    "strategy",
+    "reconstruction_status",
+    "reconstruction_reason_code",
+    "reconstruction_reason",
+    "missing_price_columns",
+    "return_observations",
+    "status",
+    "reason_code",
+    "reason",
+)
 
 
 @dataclass(frozen=True)
@@ -34,6 +46,13 @@ class PBOResult:
     splits: pd.DataFrame
     strategy_selection: pd.DataFrame
     strategy_stats: pd.DataFrame
+    candidate_audit: pd.DataFrame = field(default_factory=pd.DataFrame)
+
+
+@dataclass(frozen=True)
+class PBOCandidateBuild:
+    results: dict[str, BacktestResult]
+    audit: pd.DataFrame
 
 
 @dataclass(frozen=True)
@@ -72,12 +91,25 @@ def run_backtest_pbo_gauntlet(
         strategies=strategies,
         top_n=top_n,
     )
-    results = build_pbo_candidate_results(config, prices, rows)
-    returns = candidate_return_matrix(results, min_observations=min_observations)
+    candidate_build = build_pbo_candidate_results_with_audit(config, prices, rows)
+    returns = candidate_return_matrix(
+        candidate_build.results,
+        min_observations=min_observations,
+    )
+    candidate_audit = _finalize_pbo_candidate_audit(
+        candidate_build.audit,
+        returns,
+        min_observations=min_observations,
+    )
     result = estimate_probability_of_backtest_overfitting(
         returns,
         partitions=partitions,
         metric=metric,
+    )
+    result = replace(
+        result,
+        summary=_add_candidate_audit_summary(result.summary, candidate_audit),
+        candidate_audit=candidate_audit,
     )
 
     artifacts = {
@@ -86,12 +118,14 @@ def run_backtest_pbo_gauntlet(
         "strategy_selection": output / "pbo_strategy_selection.csv",
         "strategy_stats": output / "pbo_strategy_stats.csv",
         "returns": output / "pbo_candidate_returns.csv",
+        "candidate_audit": output / "pbo_candidate_audit.csv",
     }
     result.summary.to_csv(artifacts["summary"], index=False)
     result.splits.to_csv(artifacts["splits"], index=False)
     result.strategy_selection.to_csv(artifacts["strategy_selection"], index=False)
     result.strategy_stats.to_csv(artifacts["strategy_stats"], index=False)
     result.returns.to_csv(artifacts["returns"], index=True)
+    result.candidate_audit.to_csv(artifacts["candidate_audit"], index=False)
 
     readout = _markdown_readout(result)
     summary_path = output / "summary.md"
@@ -162,10 +196,7 @@ def pbo_candidate_tickers(
             strategy = strategy_from_catalog_row(row)
         except (TypeError, ValueError):
             continue
-        tickers.update(strategy.tickers)
-        tickers.update(strategy.satellite_tickers)
-        if strategy.defensive_ticker:
-            tickers.add(strategy.defensive_ticker)
+        tickers.update(required_strategy_tickers(strategy))
     return tickers
 
 
@@ -174,29 +205,217 @@ def build_pbo_candidate_results(
     prices: pd.DataFrame,
     rows: pd.DataFrame,
 ) -> dict[str, BacktestResult]:
+    """Reconstruct candidate backtests while preserving the legacy return type."""
+
+    return build_pbo_candidate_results_with_audit(config, prices, rows).results
+
+
+def build_pbo_candidate_results_with_audit(
+    config: BotConfig,
+    prices: pd.DataFrame,
+    rows: pd.DataFrame,
+) -> PBOCandidateBuild:
+    """Reconstruct candidate backtests and record every expected candidate outcome."""
+
     results: dict[str, BacktestResult] = {}
-    for _, row in rows.iterrows():
-        name = str(row.get("strategy", "") or "")
-        if not name or name in results:
+    audit_rows: list[dict[str, object]] = []
+    for candidate_order, (_, row) in enumerate(rows.iterrows(), start=1):
+        raw_name = row.get("strategy", "")
+        name = "" if raw_name is None or pd.isna(raw_name) else str(raw_name).strip()
+        if not name:
+            audit_rows.append(
+                _candidate_audit_row(
+                    candidate_order=candidate_order,
+                    strategy="",
+                    reconstruction_status="excluded",
+                    reason_code="missing_strategy_name",
+                    reason="Candidate row has no strategy name.",
+                )
+            )
+            continue
+        if name in results:
+            audit_rows.append(
+                _candidate_audit_row(
+                    candidate_order=candidate_order,
+                    strategy=name,
+                    reconstruction_status="excluded",
+                    reason_code="duplicate_strategy_name",
+                    reason="A prior candidate row already used this strategy name.",
+                )
+            )
             continue
         try:
             strategy = strategy_from_catalog_row(row)
             execution = execution_for_catalog_row(row, config.execution)
-            result, _missing = build_approach_backtest_result(
+            scenario_sizing = scenario_sizing_from_catalog_row(row)
+            future_state_model = future_state_model_from_catalog_row(row)
+            strategy_drawdown_model = strategy_drawdown_model_from_catalog_row(row)
+            decision_sanity = decision_sanity_from_catalog_row(row)
+        except (AttributeError, KeyError, TypeError, ValueError) as error:
+            audit_rows.append(
+                _candidate_audit_row(
+                    candidate_order=candidate_order,
+                    strategy=name,
+                    reconstruction_status="excluded",
+                    reason_code="catalog_reconstruction_error",
+                    reason=f"{type(error).__name__}: {error}",
+                )
+            )
+            continue
+        try:
+            result, missing = build_approach_backtest_result(
                 prices,
                 strategy,
                 execution,
-                scenario_sizing=scenario_sizing_from_catalog_row(row),
-                future_state_model=future_state_model_from_catalog_row(row),
-                strategy_drawdown_model=strategy_drawdown_model_from_catalog_row(row),
-                decision_sanity=decision_sanity_from_catalog_row(row),
+                scenario_sizing=scenario_sizing,
+                future_state_model=future_state_model,
+                strategy_drawdown_model=strategy_drawdown_model,
+                decision_sanity=decision_sanity,
                 name=name,
             )
-        except (AttributeError, KeyError, TypeError, ValueError):
+        except (AttributeError, KeyError, TypeError, ValueError) as error:
+            audit_rows.append(
+                _candidate_audit_row(
+                    candidate_order=candidate_order,
+                    strategy=name,
+                    reconstruction_status="excluded",
+                    reason_code="backtest_reconstruction_error",
+                    reason=f"{type(error).__name__}: {error}",
+                )
+            )
             continue
-        if result is not None:
-            results[name] = result
-    return results
+        missing_columns = sorted({str(column) for column in missing})
+        if result is None:
+            reason_code = "missing_price_inputs" if missing_columns else "no_backtest_result"
+            reason = (
+                "Missing required price inputs: " + ", ".join(missing_columns)
+                if missing_columns
+                else "Candidate reconstruction returned no backtest result."
+            )
+            audit_rows.append(
+                _candidate_audit_row(
+                    candidate_order=candidate_order,
+                    strategy=name,
+                    reconstruction_status="excluded",
+                    reason_code=reason_code,
+                    reason=reason,
+                    missing_price_columns=missing_columns,
+                )
+            )
+            continue
+        results[name] = result
+        return_observations = int(pd.to_numeric(result.returns, errors="coerce").notna().sum())
+        audit_rows.append(
+            _candidate_audit_row(
+                candidate_order=candidate_order,
+                strategy=name,
+                reconstruction_status="reconstructed",
+                reason_code="reconstructed",
+                reason="Candidate backtest reconstructed successfully.",
+                return_observations=return_observations,
+            )
+        )
+    audit = pd.DataFrame(audit_rows, columns=PBO_CANDIDATE_AUDIT_COLUMNS)
+    return PBOCandidateBuild(results=results, audit=audit)
+
+
+def _candidate_audit_row(
+    *,
+    candidate_order: int,
+    strategy: str,
+    reconstruction_status: str,
+    reason_code: str,
+    reason: str,
+    missing_price_columns: list[str] | None = None,
+    return_observations: int = 0,
+) -> dict[str, object]:
+    status = "evaluated" if reconstruction_status == "reconstructed" else "excluded"
+    return {
+        "candidate_order": candidate_order,
+        "strategy": strategy,
+        "reconstruction_status": reconstruction_status,
+        "reconstruction_reason_code": reason_code,
+        "reconstruction_reason": reason,
+        "missing_price_columns": ",".join(missing_price_columns or []),
+        "return_observations": return_observations,
+        "status": status,
+        "reason_code": "reconstructed" if status == "evaluated" else reason_code,
+        "reason": (
+            "Candidate awaits PBO return-matrix eligibility checks."
+            if status == "evaluated"
+            else reason
+        ),
+    }
+
+
+def _finalize_pbo_candidate_audit(
+    audit: pd.DataFrame,
+    returns: pd.DataFrame,
+    *,
+    min_observations: int,
+) -> pd.DataFrame:
+    if audit.empty:
+        return pd.DataFrame(columns=PBO_CANDIDATE_AUDIT_COLUMNS)
+    frame = audit.copy()
+    observations = (
+        pd.to_numeric(frame["return_observations"], errors="coerce").fillna(0).astype(int)
+    )
+    reconstructed = frame["reconstruction_status"].eq("reconstructed")
+    qualifying = reconstructed & observations.gt(0) & observations.ge(min_observations)
+    qualifying_count = int(qualifying.sum())
+    included_names = {str(column) for column in returns.columns}
+
+    for index in frame.index[reconstructed]:
+        name = str(frame.at[index, "strategy"])
+        candidate_observations = int(observations.loc[index])
+        if candidate_observations <= 0:
+            frame.at[index, "status"] = "excluded"
+            frame.at[index, "reason_code"] = "no_return_observations"
+            frame.at[index, "reason"] = "Reconstructed backtest has no usable return observations."
+        elif candidate_observations < min_observations:
+            frame.at[index, "status"] = "excluded"
+            frame.at[index, "reason_code"] = "insufficient_return_observations"
+            frame.at[index, "reason"] = (
+                f"Candidate has {candidate_observations} return observations; "
+                f"at least {min_observations} are required."
+            )
+        elif name in included_names:
+            frame.at[index, "status"] = "evaluated"
+            frame.at[index, "reason_code"] = "evaluated"
+            frame.at[index, "reason"] = "Included in the PBO return matrix."
+        elif qualifying_count < 2:
+            frame.at[index, "status"] = "excluded"
+            frame.at[index, "reason_code"] = "insufficient_candidate_family"
+            frame.at[index, "reason"] = (
+                "Candidate met the observation floor, but fewer than two candidates did; "
+                "PBO requires a comparison family."
+            )
+        else:
+            frame.at[index, "status"] = "excluded"
+            frame.at[index, "reason_code"] = "return_matrix_exclusion"
+            frame.at[index, "reason"] = "Candidate was not retained in the final PBO return matrix."
+    return frame.loc[:, PBO_CANDIDATE_AUDIT_COLUMNS]
+
+
+def _add_candidate_audit_summary(
+    summary: pd.DataFrame,
+    candidate_audit: pd.DataFrame,
+) -> pd.DataFrame:
+    frame = summary.copy()
+    expected = int(len(candidate_audit))
+    reconstructed = (
+        int(candidate_audit["reconstruction_status"].eq("reconstructed").sum())
+        if not candidate_audit.empty
+        else 0
+    )
+    evaluated = (
+        int(candidate_audit["status"].eq("evaluated").sum()) if not candidate_audit.empty else 0
+    )
+    frame["expected_candidate_count"] = expected
+    frame["reconstructed_candidate_count"] = reconstructed
+    frame["evaluated_candidate_count"] = evaluated
+    frame["excluded_candidate_count"] = expected - evaluated
+    return frame
 
 
 def candidate_return_matrix(
@@ -338,9 +557,7 @@ def _summary_frame(
     valid_splits = int(len(splits))
     pbo = float(splits["overfit"].mean()) if valid_splits and "overfit" in splits else float("nan")
     oos_loss = (
-        float(splits["oos_loss"].mean())
-        if valid_splits and "oos_loss" in splits
-        else float("nan")
+        float(splits["oos_loss"].mean()) if valid_splits and "oos_loss" in splits else float("nan")
     )
     row = {
         "strategy_count": strategy_count,
@@ -354,9 +571,7 @@ def _summary_frame(
         "median_logit_relative_rank": _median_or_nan(splits.get("logit_relative_rank")),
         "median_train_metric": _median_or_nan(splits.get("train_metric")),
         "median_test_metric": _median_or_nan(splits.get("test_metric")),
-        "median_performance_degradation": _median_or_nan(
-            splits.get("performance_degradation")
-        ),
+        "median_performance_degradation": _median_or_nan(splits.get("performance_degradation")),
         "pbo_label": _pbo_label(pbo),
     }
     return pd.DataFrame([row])
@@ -396,7 +611,9 @@ def _strategy_stats(returns: pd.DataFrame) -> pd.DataFrame:
         years = max(len(series) / 252.0, 1e-12)
         total_return = float(equity.iloc[-1] - 1.0) if not equity.empty else float("nan")
         cagr = float(equity.iloc[-1] ** (1.0 / years) - 1.0) if not equity.empty else float("nan")
-        drawdown = float((equity / equity.cummax() - 1.0).min()) if not equity.empty else float("nan")
+        drawdown = (
+            float((equity / equity.cummax() - 1.0).min()) if not equity.empty else float("nan")
+        )
         sharpe = _performance_stat(pd.DataFrame({strategy: series}), "sharpe").iloc[0]
         rows.append(
             {
@@ -439,12 +656,21 @@ def _markdown_readout(result: PBOResult) -> str:
     summary = result.summary.iloc[0] if not result.summary.empty else pd.Series(dtype=object)
     pbo = summary.get("pbo_probability", float("nan"))
     label = str(summary.get("pbo_label", "not_enough_data"))
+    candidate_lines: list[str] = []
+    if "expected_candidate_count" in summary.index:
+        candidate_lines = [
+            f"- Expected candidates: {int(summary.get('expected_candidate_count', 0) or 0)}",
+            f"- Reconstructed candidates: {int(summary.get('reconstructed_candidate_count', 0) or 0)}",
+            f"- Evaluated candidates: {int(summary.get('evaluated_candidate_count', 0) or 0)}",
+            f"- Excluded candidates: {int(summary.get('excluded_candidate_count', 0) or 0)}",
+        ]
     lines = [
         "# Backtest Overfit PBO Gauntlet",
         "",
         "Combinatorial symmetric cross-validation over synchronized candidate returns.",
         "",
         f"- Strategies: {int(summary.get('strategy_count', 0) or 0)}",
+        *candidate_lines,
         f"- Observations: {int(summary.get('observations', 0) or 0)}",
         f"- Partitions: {int(summary.get('partitions', 0) or 0)}",
         f"- Selection metric: `{summary.get('metric', '')}`",
@@ -472,7 +698,7 @@ def _markdown_readout(result: PBOResult) -> str:
 
 def _format_percent(value: object) -> str:
     try:
-        numeric = float(value)
+        numeric = float(str(value))
     except (TypeError, ValueError):
         return "n/a"
     if not math.isfinite(numeric):
@@ -482,7 +708,7 @@ def _format_percent(value: object) -> str:
 
 def _format_decimal(value: object) -> str:
     try:
-        numeric = float(value)
+        numeric = float(str(value))
     except (TypeError, ValueError):
         return "n/a"
     if not math.isfinite(numeric):

@@ -6,17 +6,23 @@ from pathlib import Path
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
-from trade_bot.backtest.metrics import PerformanceMetrics, calculate_metrics, metrics_frame
+from trade_bot.backtest.metrics import calculate_metrics, metrics_frame
 from trade_bot.backtest.windows import (
     calendar_return_pivot,
     calendar_year_metrics,
     rolling_window_metrics,
     summarize_windows,
 )
-from trade_bot.config import BotConfig, configured_tickers
+from trade_bot.config import (
+    BotConfig,
+    StrategyConfig,
+    configured_tickers,
+    required_strategy_tickers,
+)
 from trade_bot.data.fred_data import FredSeries, load_fred_catalog, load_or_fetch_fred_data
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
 from trade_bot.DEFAULTS import DEFAULT_EVENTS_PATH, DEFAULT_MACRO_PATH, DEFAULT_NEWS_PATH
+from trade_bot.features.indicators import unusable_required_price_columns
 from trade_bot.portfolio.risk import PortfolioRiskRun
 from trade_bot.research.current_state import CurrentStateRun, build_current_state
 from trade_bot.research.event_risk import (
@@ -112,10 +118,30 @@ def run_configured_baselines_from_frames(
         else pd.DataFrame()
     )
 
+    results = build_configured_strategy_results(config, prices)
+
+    return assemble_configured_baseline_from_results(
+        config,
+        prices=prices,
+        results=results,
+        macro_data=macro_data,
+        macro_catalog=macro_catalog,
+        refresh_news=refresh_news,
+        event_config_path=event_config_path,
+        news_config_path=news_config_path,
+        as_of=as_of_utc,
+    )
+
+
+def build_configured_strategy_results(
+    config: BotConfig,
+    prices: pd.DataFrame,
+) -> dict[str, BacktestResult]:
+    """Compute each configured causal strategy path once for reusable historical slicing."""
+
     results: dict[str, BacktestResult] = {}
-    calculated_metrics: list[PerformanceMetrics] = []
     for name, strategy in config.strategies.items():
-        strategy_prices = _strategy_prices(prices, strategy.tickers, strategy.defensive_ticker)
+        strategy_prices = _strategy_prices(prices, strategy)
         if strategy_prices.empty:
             raise RuntimeError(
                 f"Strategy {name!r} has no usable price rows for tickers "
@@ -136,16 +162,40 @@ def run_configured_baselines_from_frames(
                 "Check for all-empty price columns after the latest data refresh."
             )
         results[name] = result
-        calculated_metrics.append(
-            calculate_metrics(
-                name=result.name,
-                returns=result.returns,
-                equity=result.equity,
-                turnover=result.turnover,
-                transaction_costs=result.transaction_costs,
-            )
-        )
+    return results
 
+
+def assemble_configured_baseline_from_results(
+    config: BotConfig,
+    *,
+    prices: pd.DataFrame,
+    results: dict[str, BacktestResult],
+    macro_data: pd.DataFrame | None = None,
+    macro_catalog: tuple[FredSeries, ...] = (),
+    refresh_news: bool = False,
+    event_config_path: str | Path | None = DEFAULT_EVENTS_PATH,
+    news_config_path: str | Path | None = DEFAULT_NEWS_PATH,
+    as_of: str | pd.Timestamp | None = None,
+) -> BaselineRun:
+    """Assemble a point-in-time snapshot from already-computed causal strategy paths."""
+
+    as_of_utc = _as_of_timestamp(as_of)
+    prices = prices.dropna(how="all").sort_index()
+    macro_data = (
+        macro_data.dropna(how="all").sort_index()
+        if isinstance(macro_data, pd.DataFrame)
+        else pd.DataFrame()
+    )
+    calculated_metrics = [
+        calculate_metrics(
+            name=result.name,
+            returns=result.returns,
+            equity=result.equity,
+            turnover=result.turnover,
+            transaction_costs=result.transaction_costs,
+        )
+        for result in results.values()
+    ]
     rolling_windows = rolling_window_metrics(results)
     calendar_metrics_frame = calendar_year_metrics(results)
     current_state = build_current_state(
@@ -175,6 +225,12 @@ def run_configured_baselines_from_frames(
         config.execution,
         base_strategy_name=primary_strategy,
     )
+    primary_defensive_ticker = config.strategies[primary_strategy].defensive_ticker
+    if not primary_defensive_ticker:
+        raise ValueError(
+            f"Configured primary strategy {primary_strategy!r} needs an explicit defensive "
+            "ticker for scenario-adjusted operating decisions."
+        )
     trade_decision = build_trade_decision(
         primary_result=results[primary_strategy],
         current_state=current_state,
@@ -182,6 +238,8 @@ def run_configured_baselines_from_frames(
         news_monitor=news_monitor,
         signal_inclusion=signal_inclusion,
         prices=prices,
+        defensive_ticker=primary_defensive_ticker,
+        allocation_policy=config.allocation_policy,
     )
 
     return BaselineRun(
@@ -203,12 +261,38 @@ def run_configured_baselines_from_frames(
     )
 
 
+def slice_backtest_results(
+    results: dict[str, BacktestResult],
+    through: str | pd.Timestamp,
+) -> dict[str, BacktestResult]:
+    """Slice causal backtest paths through a historical market date."""
+
+    timestamp = pd.Timestamp(through)
+    output: dict[str, BacktestResult] = {}
+    for name, result in results.items():
+        sliced = BacktestResult(
+            name=result.name,
+            equity=result.equity.loc[:timestamp],
+            returns=result.returns.loc[:timestamp],
+            gross_returns=result.gross_returns.loc[:timestamp],
+            weights=result.weights.loc[:timestamp],
+            target_weights=result.target_weights.loc[:timestamp],
+            turnover=result.turnover.loc[:timestamp],
+            transaction_costs=result.transaction_costs.loc[:timestamp],
+        )
+        if not sliced.returns.empty and not sliced.weights.empty:
+            output[name] = sliced
+    return output
+
+
 def _strategy_prices(
     prices: pd.DataFrame,
-    tickers: list[str],
-    defensive_ticker: str | None,
+    strategy: StrategyConfig,
 ) -> pd.DataFrame:
-    columns = list(dict.fromkeys([*tickers, *([defensive_ticker] if defensive_ticker else [])]))
+    columns = required_strategy_tickers(strategy)
+    missing = unusable_required_price_columns(prices, columns)
+    if missing:
+        raise KeyError(f"Missing, empty, or stale price columns for strategy: {missing}")
     available = prices[columns].dropna(how="all")
     return available
 

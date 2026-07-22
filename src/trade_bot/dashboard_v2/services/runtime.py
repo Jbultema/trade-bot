@@ -3,8 +3,9 @@ from __future__ import annotations
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
-from typing import Literal
+from typing import Any, Literal
 
+import duckdb
 import pandas as pd
 import streamlit as st
 
@@ -28,7 +29,12 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.research.action_headline import ActionHeadline, build_action_headline
 from trade_bot.research.baselines import BaselineRun
-from trade_bot.research.strategy_decision import resolve_trade_decision_for_strategy
+from trade_bot.research.strategy_decision import (
+    StrategyDecisionUnavailableError,
+    operating_strategy_config,
+    resolve_trade_decision_for_strategy,
+    trade_decision_strategy_name,
+)
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.research.trade_decision import TradeDecisionRun
 from trade_bot.storage.run_store import RunStore, SnapshotManifest
@@ -39,6 +45,13 @@ from trade_bot.trading.book_alignment import (
 from trade_bot.trading.journal import JournalBook, TradeJournal
 
 RunSource = Literal["Latest snapshot (fast)", "Selected snapshot", "Live pipeline"]
+
+HISTORICAL_SNAPSHOT_NOTICE = (
+    "Historical snapshot mode is display-only. Today and Risk suppress current journal "
+    "tickets, book alignment, action guidance, and operating-risk claims. Forward Test keeps "
+    "book-management controls available, but historical decisions cannot create tickets or "
+    "execution guidance."
+)
 
 
 @dataclass(frozen=True)
@@ -64,11 +77,16 @@ class DashboardRuntime:
     journal: TradeJournal
     selected_book: JournalBook
     promoted_book: JournalBook
-    operating_trade_decision: TradeDecisionRun
-    open_ticket_count: int
-    book_alignment: BookAlignmentRun
+    operating_trade_decision: TradeDecisionRun | None
+    operating_strategy_error: str | None
+    open_ticket_count: int | None
+    book_alignment: BookAlignmentRun | None
     execution_book_alignment: BookAlignmentRun | None
-    action_headline: ActionHeadline
+    action_headline: ActionHeadline | None
+
+    @property
+    def is_historical_snapshot_mode(self) -> bool:
+        return self.run_source == "Selected snapshot"
 
 
 @dataclass(frozen=True)
@@ -200,7 +218,7 @@ def render_book_selector(
                     "updated_at_utc",
                 ]
             ],
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
         managed_book_id = st.selectbox(
@@ -284,7 +302,7 @@ def render_book_selector(
 
 
 def _strategy_selectbox(
-    container: object,
+    container: Any,
     label: str,
     current_value: str,
     option_frame: pd.DataFrame,
@@ -344,7 +362,7 @@ def _strategy_selector_options(
         if not strategy_name:
             return
         existing = rows.get(strategy_name)
-        if existing is None or int(existing["priority"]) > priority:
+        if existing is None or int(str(existing["priority"])) > priority:
             rows[strategy_name] = {
                 "strategy_name": strategy_name,
                 "label": label,
@@ -382,8 +400,18 @@ def _strategy_selector_options(
 
 
 def snapshot_choices(paths: DashboardPaths, *, limit: int = 100) -> pd.DataFrame:
-    store = RunStore(paths.run_store_path, artifact_dir=paths.artifact_dir, job_log_dir=paths.job_log_dir)
-    return store.list_snapshots(limit=limit)
+    if not paths.run_store_path.is_file():
+        return pd.DataFrame()
+    store = RunStore(
+        paths.run_store_path,
+        artifact_dir=paths.artifact_dir,
+        job_log_dir=paths.job_log_dir,
+        read_only=True,
+    )
+    try:
+        return store.list_snapshots(limit=limit)
+    except (OSError, duckdb.Error):
+        return pd.DataFrame()
 
 
 def snapshot_option_label(frame: pd.DataFrame, run_id: str) -> str:
@@ -430,13 +458,25 @@ def load_runtime(
             baseline_run, snapshot_manifest = snapshot_payload
             snapshot_loaded = True
     elif run_source == "Selected snapshot" and selected_snapshot_run_id:
-        baseline_run, snapshot_manifest = load_snapshot_dashboard_run_by_id(
+        snapshot_payload = load_snapshot_dashboard_run_by_id(
             str(paths.run_store_path),
             str(paths.artifact_dir),
             str(paths.job_log_dir),
             selected_snapshot_run_id,
         )
-        snapshot_loaded = True
+        if snapshot_payload is None:
+            baseline_run = load_live_run(
+                str(paths.config_path),
+                str(paths.events_path),
+                str(paths.macro_path),
+                str(paths.news_path),
+                refresh_data,
+                refresh_macro,
+                refresh_news,
+            )
+        else:
+            baseline_run, snapshot_manifest = snapshot_payload
+            snapshot_loaded = True
     else:
         baseline_run = load_live_run(
             str(paths.config_path),
@@ -451,35 +491,59 @@ def load_runtime(
     journal = TradeJournal(paths.journal_path)
     promoted_book = promoted_book or journal.get_promoted_book()
     selected_book = selected_book or promoted_book
-    operating_trade_decision = resolve_trade_decision_for_strategy(
-        baseline_run,
-        promoted_book.strategy_name,
-    )
-    open_tickets = journal.load_recommendation_tickets(
-        status="open",
-        mode=promoted_book.mode,
-        account=promoted_book.account,
-        strategy_name=promoted_book.strategy_name,
-    )
-    book_alignment = build_book_alignment(
-        journal=journal,
-        trade_decision=operating_trade_decision,
-        prices=baseline_run.prices,
-        mode=promoted_book.mode,
-        account=promoted_book.account,
-        strategy_name=promoted_book.strategy_name,
-        account_value=promoted_book.account_value,
-    )
-    execution_book_alignment = (
-        book_alignment if not book_alignment.position_plan.empty else None
-    )
-    action_headline = build_action_headline(
-        current_state=baseline_run.current_state,
-        trade_decision=operating_trade_decision,
-        news_monitor=baseline_run.news_monitor,
-        open_ticket_count=len(open_tickets),
-        position_plan=book_alignment.position_plan,
-    )
+    if run_source == "Selected snapshot":
+        operating_trade_decision = None
+        operating_strategy_error: str | None = HISTORICAL_SNAPSHOT_NOTICE
+    else:
+        operating_strategy_error = None
+        strategy_config = operating_strategy_config(
+            bot_config,
+            promoted_book.strategy_name,
+            current_strategy=trade_decision_strategy_name(baseline_run.trade_decision),
+        )
+        try:
+            operating_trade_decision = resolve_trade_decision_for_strategy(
+                baseline_run,
+                promoted_book.strategy_name,
+                strategy_config=strategy_config,
+                allocation_policy=bot_config.allocation_policy,
+            )
+        except StrategyDecisionUnavailableError as exc:
+            operating_trade_decision = None
+            operating_strategy_error = str(exc)
+
+    if operating_trade_decision is None:
+        open_ticket_count = None
+        book_alignment = None
+        execution_book_alignment = None
+        action_headline = None
+    else:
+        open_tickets = journal.load_recommendation_tickets(
+            status="open",
+            mode=promoted_book.mode,
+            account=promoted_book.account,
+            strategy_name=promoted_book.strategy_name,
+        )
+        open_ticket_count = len(open_tickets)
+        book_alignment = build_book_alignment(
+            journal=journal,
+            trade_decision=operating_trade_decision,
+            prices=baseline_run.prices,
+            mode=promoted_book.mode,
+            account=promoted_book.account,
+            strategy_name=promoted_book.strategy_name,
+            account_value=promoted_book.account_value,
+        )
+        execution_book_alignment = (
+            book_alignment if not book_alignment.position_plan.empty else None
+        )
+        action_headline = build_action_headline(
+            current_state=baseline_run.current_state,
+            trade_decision=operating_trade_decision,
+            news_monitor=baseline_run.news_monitor,
+            open_ticket_count=open_ticket_count,
+            position_plan=book_alignment.position_plan,
+        )
     return DashboardRuntime(
         paths=paths,
         run_source=run_source,
@@ -491,7 +555,8 @@ def load_runtime(
         selected_book=selected_book,
         promoted_book=promoted_book,
         operating_trade_decision=operating_trade_decision,
-        open_ticket_count=len(open_tickets),
+        operating_strategy_error=operating_strategy_error,
+        open_ticket_count=open_ticket_count,
         book_alignment=book_alignment,
         execution_book_alignment=execution_book_alignment,
         action_headline=action_headline,
@@ -501,7 +566,9 @@ def load_runtime(
 def freshness_label(runtime: DashboardRuntime) -> str:
     manifest = runtime.snapshot_manifest
     if manifest is None:
-        return f"{runtime.run_source} live at {datetime.now(UTC).replace(microsecond=0).isoformat()}"
+        return (
+            f"{runtime.run_source} live at {datetime.now(UTC).replace(microsecond=0).isoformat()}"
+        )
     return f"{manifest.market_date} | {manifest.risk_status.upper()} | {manifest.created_at_utc}"
 
 

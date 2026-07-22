@@ -45,7 +45,7 @@ def _clearable_selectbox(
             "x",
             key=f"{key}__clear",
             help=f"Clear {label}",
-            use_container_width=True,
+            width="stretch",
         ):
             st.session_state[key] = None
 
@@ -107,11 +107,11 @@ def _metric_column_config(
 def _render_metric_dataframe(
     frame: pd.DataFrame,
     *,
-    use_container_width: bool = True,
+    width: str | int = "stretch",
     hide_index: bool | None = None,
     column_help: Mapping[str, str] | None = None,
 ) -> None:
-    kwargs: dict[str, Any] = {"use_container_width": use_container_width}
+    kwargs: dict[str, Any] = {"width": width}
     column_config = _metric_column_config(frame, column_help=column_help)
     if column_config:
         kwargs["column_config"] = column_config
@@ -182,7 +182,7 @@ def _render_metric_guide() -> None:
             st.markdown(f"**Watch out:** {detail.caution}")
 
         guide_columns = ["metric", "category", "plain_english", "how_to_read", "caution"]
-        st.dataframe(guide[guide_columns], use_container_width=True, hide_index=True)
+        st.dataframe(guide[guide_columns], width="stretch", hide_index=True)
 
 
 def _render_metric_info_rail() -> None:
@@ -275,7 +275,7 @@ def _render_metric_info_rail_content() -> None:
     with st.expander("Matching terms", expanded=False):
         st.dataframe(
             guide[["term", "kind", "category", "plain_english"]].head(20),
-            use_container_width=True,
+            width="stretch",
             hide_index=True,
         )
 
@@ -318,10 +318,7 @@ def _lookup_guide_frame(
         return frame
     frame = frame.assign(
         lookup_key=frame["kind"].astype(str).str.lower() + "::" + frame["term"].astype(str),
-        lookup_label=frame["term"].astype(str)
-        + " ("
-        + frame["kind"].astype(str)
-        + ")",
+        lookup_label=frame["term"].astype(str) + " (" + frame["kind"].astype(str) + ")",
         match_rank=_lookup_match_rank(frame, search),
     )
     return (
@@ -403,4 +400,4 @@ def _render_action_headline(headline: ActionHeadline) -> None:
     _helped_metric(cols[4], "Active News", f"{int(metric_row['active_news_items'])}")
     _helped_metric(cols[5], "Open Tickets", f"{int(metric_row['open_ticket_count'])}")
     if not headline.drivers.empty:
-        st.dataframe(headline.drivers, use_container_width=True)
+        st.dataframe(headline.drivers, width="stretch")

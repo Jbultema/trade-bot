@@ -22,6 +22,7 @@ from trade_bot.config import (
     StrategyConfig,
     VolatilityTargetConfig,
     configured_tickers,
+    required_strategy_tickers,
 )
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
 from trade_bot.features.indicators import (
@@ -29,6 +30,7 @@ from trade_bot.features.indicators import (
     lookback_returns,
     moving_average,
     realized_volatility,
+    unusable_required_price_columns,
 )
 from trade_bot.strategies.momentum import build_strategy_weights
 
@@ -83,11 +85,7 @@ def run_upside_capture_lab(
     rows = []
     base_result: BacktestResult | None = None
     for candidate in candidates:
-        candidate_prices = _strategy_prices(
-            prices,
-            candidate.strategy.tickers,
-            candidate.strategy.defensive_ticker,
-        )
+        candidate_prices = _strategy_prices(prices, candidate.strategy)
         weights = build_strategy_weights(candidate_prices, candidate.strategy)
         if candidate.overlay:
             weights = _apply_constructive_overlay(candidate_prices, weights, candidate.overlay)
@@ -2422,21 +2420,16 @@ def _conditional_forward_return(returns: pd.Series, mask: pd.Series, days: int) 
 def _candidate_tickers(candidates: tuple[UpsideCaptureCandidate, ...]) -> set[str]:
     tickers: set[str] = {"SPY", "QQQ", "RSP", "HYG", "LQD", "SMH", "BIL"}
     for candidate in candidates:
-        tickers.update(candidate.strategy.tickers)
-        tickers.update(candidate.strategy.satellite_tickers)
-        if candidate.strategy.defensive_ticker:
-            tickers.add(candidate.strategy.defensive_ticker)
+        tickers.update(required_strategy_tickers(candidate.strategy))
     return tickers
 
 
 def _strategy_prices(
     prices: pd.DataFrame,
-    tickers: list[str],
-    defensive_ticker: str | None,
+    strategy: StrategyConfig,
 ) -> pd.DataFrame:
-    selected = list(dict.fromkeys([*tickers, defensive_ticker] if defensive_ticker else tickers))
-    available = [ticker for ticker in selected if ticker in prices.columns]
-    missing = sorted(set(selected) - set(available))
-    if missing:
-        raise ValueError(f"Missing required price columns: {missing}")
-    return prices[available].ffill()
+    selected = required_strategy_tickers(strategy)
+    unusable = unusable_required_price_columns(prices, selected)
+    if unusable:
+        raise ValueError(f"Missing, empty, or stale required price columns: {unusable}")
+    return prices[selected].dropna(how="all")

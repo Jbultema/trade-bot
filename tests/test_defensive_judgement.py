@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from pathlib import Path
 from types import SimpleNamespace
 
 import pandas as pd
@@ -13,6 +14,7 @@ from trade_bot.research.defensive_judgement import (
     current_defensive_setup_context,
     defensive_false_alarm_bayes_update,
     effective_defensive_weight,
+    write_defensive_judgement_report,
 )
 
 
@@ -48,6 +50,33 @@ def test_defensive_judgement_counts_residual_cash_as_defensive() -> None:
     assert defensive.iloc[0] == pytest.approx(0.20)
     assert defensive.iloc[1] == pytest.approx(0.65)
     assert defensive.iloc[3] == pytest.approx(0.80)
+
+
+def test_defensive_report_replaces_dashboard_facing_readout(tmp_path: Path) -> None:
+    dates = pd.bdate_range("2025-01-02", periods=90)
+    weights = pd.DataFrame({"QQQ": [0.40] * len(dates)}, index=dates)
+    result = _result(weights)
+    prices = pd.DataFrame(
+        {
+            "SPY": [100.0 + index * 0.1 for index in range(len(dates))],
+            "QQQ": [100.0 + index * 0.2 for index in range(len(dates))],
+            "BIL": [100.0 + index * 0.01 for index in range(len(dates))],
+        },
+        index=dates,
+    )
+
+    outputs = write_defensive_judgement_report(
+        results={"focus": result},
+        prices=prices,
+        output_dir=tmp_path,
+        focus_strategy="focus",
+    )
+
+    exposure = pd.read_csv(outputs["current_exposure"])
+    readout = outputs["readout"].read_text(encoding="utf-8")
+    assert exposure.iloc[0]["current_defensive_weight"] == pytest.approx(0.60)
+    assert str(dates.max().date()) in readout
+    assert "Current effective defensive weight: 60.0%" in readout
 
 
 def test_defensive_judgement_classifies_episode_outcomes() -> None:

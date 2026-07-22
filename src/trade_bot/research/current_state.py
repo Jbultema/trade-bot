@@ -98,9 +98,7 @@ def build_current_state(
     macro_category_summary = build_macro_category_summary(macro_signals)
     positioning_crowding = build_positioning_crowding_table(clean_prices)
     positioning_summary = build_positioning_summary(positioning_crowding)
-    regime_instability, regime_instability_components = build_regime_instability_index(
-        clean_prices
-    )
+    regime_instability, regime_instability_components = build_regime_instability_index(clean_prices)
     regime_pulse_cycles = build_regime_pulse_cycles(macro_signals, positioning_summary)
     regime_pulse_assets = build_regime_pulse_asset_table(regime_pulse_cycles)
     growth_inflation_map = build_growth_inflation_map(regime_pulse_cycles)
@@ -183,14 +181,26 @@ def momentum_state_table(
 
 def build_confirmation_matrix(prices: pd.DataFrame, momentum_state: pd.DataFrame) -> pd.DataFrame:
     signals = [
-        _relative_signal(prices, momentum_state, "High Beta vs Low Vol", "SPHB", "SPLV", "market_risk"),
-        _relative_signal(prices, momentum_state, "Cyclicals vs Defensives", "XLY", "XLP", "market_risk"),
-        _relative_signal(prices, momentum_state, "Small Caps vs Mega Caps", "IWM", "MGC", "market_risk"),
+        _relative_signal(
+            prices, momentum_state, "High Beta vs Low Vol", "SPHB", "SPLV", "market_risk"
+        ),
+        _relative_signal(
+            prices, momentum_state, "Cyclicals vs Defensives", "XLY", "XLP", "market_risk"
+        ),
+        _relative_signal(
+            prices, momentum_state, "Small Caps vs Mega Caps", "IWM", "MGC", "market_risk"
+        ),
         _relative_signal(prices, momentum_state, "Value vs Growth", "VTV", "VUG", "style_rotation"),
-        _relative_signal(prices, momentum_state, "Equal Weight vs Cap Weight", "RSP", "SPY", "breadth"),
-        _relative_signal(prices, momentum_state, "Nasdaq vs Equal Weight", "QQQ", "RSP", "concentration"),
+        _relative_signal(
+            prices, momentum_state, "Equal Weight vs Cap Weight", "RSP", "SPY", "breadth"
+        ),
+        _relative_signal(
+            prices, momentum_state, "Nasdaq vs Equal Weight", "QQQ", "RSP", "concentration"
+        ),
         _relative_signal(prices, momentum_state, "High Yield vs IG Credit", "HYG", "LQD", "credit"),
-        _relative_signal(prices, momentum_state, "Copper vs Gold", "CPER", "GLD", "growth_inflation"),
+        _relative_signal(
+            prices, momentum_state, "Copper vs Gold", "CPER", "GLD", "growth_inflation"
+        ),
         _relative_signal(prices, momentum_state, "Semis vs Broad Market", "SMH", "SPY", "ai_beta"),
         _absolute_signal(momentum_state, "SPY Trend", "SPY", "broad_market"),
         _absolute_signal(momentum_state, "QQQ Trend", "QQQ", "ai_beta"),
@@ -213,6 +223,15 @@ def build_market_health(prices: pd.DataFrame, momentum_state: pd.DataFrame) -> p
     latest["return_1m"] = prices[available].ffill().pct_change(21, fill_method=None).iloc[-1]
     latest["return_3m"] = prices[available].ffill().pct_change(63, fill_method=None).iloc[-1]
     latest["drawdown"] = prices[available].ffill().apply(lambda series: drawdown(series).iloc[-1])
+    latest["drawdown_basis"] = "drawdown_from_available_history_peak"
+    if "VIXY" in latest.index:
+        # VIXY is a short-term VIX-futures proxy whose long-run price path is
+        # structurally affected by futures rolling.  A drawdown from its
+        # all-history peak therefore does not describe current volatility
+        # pressure and routinely converges toward -100%.  Its short-horizon
+        # returns and momentum state remain the relevant health measures.
+        latest.loc["VIXY", "drawdown"] = np.nan
+        latest.loc["VIXY", "drawdown_basis"] = "not_applicable_short_term_volatility_proxy"
     return latest
 
 
@@ -310,7 +329,9 @@ def _absolute_signal(
         theme=theme,
         status=state,
         score=score,
-        latest_value=float(row["momentum_state_score"]) if pd.notna(row["momentum_state_score"]) else np.nan,
+        latest_value=(
+            float(row["momentum_state_score"]) if pd.notna(row["momentum_state_score"]) else np.nan
+        ),
         explanation=f"{ticker} is {state} on volatility-adjusted momentum.",
     )
 
@@ -371,9 +392,15 @@ def _risk_score(confirmation_matrix: pd.DataFrame, market_health: pd.DataFrame) 
         raw_risk += 0.10
     if "QQQ" in market_health.index and market_health.loc["QQQ", "drawdown"] < -0.10:
         raw_risk += 0.10
-    if "HYG" in market_health.index and market_health.loc["HYG", "momentum_state_label"] == "bearish":
+    if (
+        "HYG" in market_health.index
+        and market_health.loc["HYG", "momentum_state_label"] == "bearish"
+    ):
         raw_risk += 0.10
-    if "VIXY" in market_health.index and market_health.loc["VIXY", "momentum_state_label"] == "bullish":
+    if (
+        "VIXY" in market_health.index
+        and market_health.loc["VIXY", "momentum_state_label"] == "bullish"
+    ):
         raw_risk += 0.15
     return float(max(0.0, min(1.0, raw_risk)))
 
