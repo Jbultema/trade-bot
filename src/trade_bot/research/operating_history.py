@@ -11,12 +11,12 @@ from trade_bot.portfolio.risk import PortfolioRiskConfig, PortfolioRiskRun, buil
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.current_state import (
     CurrentStateRun,
-    _risk_score,
     _risk_status,
     _risk_summary,
     build_confirmation_matrix,
     build_market_health,
     build_scenario_outlook,
+    calculate_risk_score,
     momentum_state_table,
 )
 from trade_bot.research.driver_rotation import build_driver_rotation_table
@@ -25,12 +25,11 @@ from trade_bot.research.future_scenarios import build_scenario_lattice
 from trade_bot.research.narrative_signals import build_narrative_signal_table
 from trade_bot.research.news_monitor import NewsMonitorRun
 from trade_bot.research.regime_instability import build_regime_instability_index
+from trade_bot.research.risk_timing import assess_risk_timing
 from trade_bot.research.trade_decision import (
     TradeDecisionRun,
+    _authority_adjusted_multiplier,
     _weights_with_defensive_residual,
-)
-from trade_bot.research.trade_decision import (
-    _risk_status_multiplier as _live_risk_status_multiplier,
 )
 from trade_bot.research.trade_decision import (
     _scenario_adjusted_weights as _live_scenario_adjusted_weights,
@@ -212,9 +211,15 @@ def _build_fast_current_state(prices: pd.DataFrame) -> CurrentStateRun:
     momentum_state = momentum_state_table(clean_prices)
     confirmation_matrix = build_confirmation_matrix(clean_prices, momentum_state)
     market_health = build_market_health(clean_prices, momentum_state)
-    risk_score = _risk_score(confirmation_matrix, market_health)
+    risk_score = calculate_risk_score(confirmation_matrix, market_health)
     risk_status = _risk_status(risk_score)
-    risk_summary = _risk_summary(risk_status, risk_score, confirmation_matrix)
+    risk_timing = assess_risk_timing(risk_score, confirmation_matrix, market_health)
+    risk_summary = _risk_summary(
+        risk_status,
+        risk_score,
+        confirmation_matrix,
+        risk_timing_state=risk_timing.state,
+    )
     scenario_lattice, scenario_drivers = build_scenario_lattice(
         confirmation_matrix,
         market_health,
@@ -244,6 +249,11 @@ def _build_fast_current_state(prices: pd.DataFrame) -> CurrentStateRun:
         data_quality=pd.DataFrame(),
         regime_instability=regime_instability,
         regime_instability_components=regime_instability_components,
+        risk_timing_state=risk_timing.state,
+        risk_timing_multiplier=risk_timing.multiplier,
+        risk_timing_breaks=risk_timing.confirmation_breaks,
+        risk_timing_recoveries=risk_timing.recovery_confirmations,
+        risk_timing_evidence=risk_timing.evidence,
     )
 
 
@@ -264,14 +274,19 @@ def _build_fast_trade_decision(
         current_state.scenario_lattice,
         sizing_authority=policy.scenario_sizing_authority,
     )
+    effective_timing_multiplier = _authority_adjusted_multiplier(
+        current_state.risk_timing_multiplier,
+        policy.risk_timing_sizing_authority,
+    )
     risk_multiplier = _quant_risk_multiplier(
         current_state.risk_status,
         float(scenario_context["risk_multiplier"]),
+        timing_multiplier=effective_timing_multiplier,
     )
     risk_multiplier = float(np.clip(risk_multiplier, 0.0, 1.0))
     status_weights = _live_scenario_adjusted_weights(
         base_weights,
-        risk_multiplier=_live_risk_status_multiplier(current_state.risk_status),
+        risk_multiplier=effective_timing_multiplier,
         defensive_ticker=defensive_ticker,
     )
     adjusted_weights = _live_scenario_adjusted_weights(
@@ -336,6 +351,13 @@ def _build_fast_trade_decision(
                 "strategy": primary_result.name,
                 "risk_status": current_state.risk_status,
                 "risk_score": current_state.risk_score,
+                "risk_timing_state": current_state.risk_timing_state,
+                "risk_timing_multiplier": current_state.risk_timing_multiplier,
+                "effective_risk_timing_multiplier": effective_timing_multiplier,
+                "risk_timing_sizing_authority": policy.risk_timing_sizing_authority,
+                "risk_timing_break_count": len(current_state.risk_timing_breaks),
+                "risk_timing_breaks": ", ".join(current_state.risk_timing_breaks),
+                "risk_timing_recovery_count": len(current_state.risk_timing_recoveries),
                 "risk_budget_multiplier": _risk_budget_multiplier_from_weights(
                     base_weights,
                     final_weights,
@@ -394,12 +416,22 @@ def _risk_status_multiplier(risk_status: str) -> float:
     }.get(risk_status, 0.85)
 
 
-def _quant_risk_multiplier(risk_status: str, scenario_multiplier: float) -> float:
+def _quant_risk_multiplier(
+    risk_status: str,
+    scenario_multiplier: float,
+    *,
+    timing_multiplier: float = np.nan,
+) -> float:
     """Match the live decision engine's binding-constraint rule."""
 
     return float(
         np.clip(
-            min(_risk_status_multiplier(risk_status), scenario_multiplier),
+            min(
+                float(timing_multiplier)
+                if np.isfinite(timing_multiplier)
+                else _risk_status_multiplier(risk_status),
+                scenario_multiplier,
+            ),
             0.0,
             1.0,
         )

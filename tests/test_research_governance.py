@@ -75,6 +75,7 @@ def test_trial_ledger_indexes_declared_candidates_without_inventing_attempts(tmp
     ledger, coverage = build_research_trial_ledger(tmp_path / "reports")
 
     assert set(ledger["candidate"]) == {"raw", "replacement_guard"}
+    assert ledger["experiment_id"].equals(ledger["trial_id"])
     assert set(ledger["trial_status"]) == {"completed_manifested"}
     assert coverage.iloc[0]["status"] == "declared_roster_indexed"
 
@@ -84,3 +85,16 @@ def test_trial_ledger_indexes_declared_candidates_without_inventing_attempts(tmp
     )
     assert all(path.exists() for path in paths)
     assert "does not invent interrupted" in paths[-1].read_text(encoding="utf-8")
+
+
+def test_trial_ledger_exposes_unmanifested_research_artifacts(tmp_path) -> None:
+    orphan = tmp_path / "reports" / "abandoned_probe"
+    orphan.mkdir(parents=True)
+    (orphan / "summary.md").write_text("# Old probe\n", encoding="utf-8")
+
+    ledger, coverage = build_research_trial_ledger(tmp_path / "reports")
+
+    assert ledger.empty
+    row = coverage.iloc[0]
+    assert row["study"] == "abandoned_probe"
+    assert row["status"] == "artifact_directory_without_manifest"

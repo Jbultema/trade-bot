@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+from datetime import UTC, datetime
 from pathlib import Path
 
 import pandas as pd
@@ -69,6 +71,16 @@ def load_or_fetch_yahoo_prices(
         )
         _require_terminal_freshness(filtered, end=end)
         prices.to_parquet(cache_path)
+        _write_price_cache_metadata(
+            cache_path.with_suffix(".metadata.json"),
+            prices=prices,
+            fetched_tickers=fetch_tickers,
+            requested_tickers=ordered_tickers,
+            start=start,
+            end=end,
+            adjusted=adjusted,
+            refresh_mode="incremental",
+        )
         return filtered
 
     try:
@@ -94,7 +106,54 @@ def load_or_fetch_yahoo_prices(
     )
     _require_terminal_freshness(filtered, end=end)
     prices.to_parquet(cache_path)
+    _write_price_cache_metadata(
+        cache_path.with_suffix(".metadata.json"),
+        prices=prices,
+        fetched_tickers=ordered_tickers,
+        requested_tickers=ordered_tickers,
+        start=start,
+        end=end,
+        adjusted=adjusted,
+        refresh_mode="explicit" if refresh else "initial",
+    )
     return filtered
+
+
+def _write_price_cache_metadata(
+    path: Path,
+    *,
+    prices: pd.DataFrame,
+    fetched_tickers: list[str],
+    requested_tickers: list[str],
+    start: str,
+    end: str | None,
+    adjusted: bool,
+    refresh_mode: str,
+) -> None:
+    valid_index = pd.to_datetime(prices.dropna(how="all").index, errors="coerce")
+    valid_index = valid_index[~pd.isna(valid_index)]
+    payload = {
+        "schema_version": 1,
+        "vendor": "Yahoo Finance",
+        "client": "yfinance",
+        "fetched_at_utc": datetime.now(UTC).isoformat(),
+        "refresh_mode": refresh_mode,
+        "adjusted": bool(adjusted),
+        "price_field": "Close" if adjusted else "Adj Close",
+        "requested_start": start,
+        "requested_end": end,
+        "requested_tickers": requested_tickers,
+        "fetched_tickers": fetched_tickers,
+        "cache_rows": int(len(prices)),
+        "cache_start": valid_index.min().date().isoformat() if len(valid_index) else None,
+        "cache_end": valid_index.max().date().isoformat() if len(valid_index) else None,
+        "known_limitations": [
+            "current-universe replay unless separate membership evidence is supplied",
+            "delisting returns are not independently verified",
+            "vendor-adjusted history may be revised retroactively",
+        ],
+    }
+    path.write_text(json.dumps(payload, indent=2, sort_keys=True) + "\n", encoding="utf-8")
 
 
 def fetch_yahoo_prices(

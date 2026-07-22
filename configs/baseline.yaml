@@ -8,7 +8,7 @@ execution:
   initial_capital: 100000.0
   transaction_cost_bps: 5.0
   rebalance: "W-WED"
-  signal_lag_days: 1
+  signal_lag_days: 2
 
 # Research visibility is broader than allocation authority. Current one-month
 # scenario calibration earns no sizing authority; news/events remain informational.
@@ -18,7 +18,12 @@ allocation_policy:
   scenario_budget_authority: 0.0
   scenario_weighted_stress_authority: 0.0
   event_sizing_authority: 0.0
-  macro_sizing_authority: 1.0
+  macro_sizing_authority: 0.0
+  macro_calibration_status: insufficient
+  macro_data_vintage_status: revised_history
+  risk_timing_sizing_authority: 0.0
+  risk_timing_calibration_status: insufficient
+  risk_timing_policy_version: confirmed_v1
   scenario_calibration_horizon: 1m
   scenario_calibration_status: insufficient
   authority_source: reports/scenario_probability_calibration/latest_authority.json

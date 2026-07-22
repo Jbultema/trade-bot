@@ -26,7 +26,11 @@ The main risk is not arithmetic inversion. The main risk is semantic overclaimin
 - Long-only only. Negative weights are clipped to zero.
 - No shorting and no derivatives in the default operating system.
 - Cash or T-bill residual is implicit unless a defensive ticker such as `BIL` is explicitly present.
-- Signals are shifted by `signal_lag_days`, default 1, before returns are calculated.
+- Signals are shifted by `signal_lag_days`, default 2, before returns are calculated.
+  This is deliberately conservative for daily-close data: a target using close
+  `t` is modeled as filled at close `t+1` and first earns the following
+  close-to-close interval. Lag 1 is retained only as a labeled boundary-fill
+  research approximation and is not the operating convention.
 - Daily trading-day annualization uses 252 trading days.
 - Transaction costs are modeled as portfolio turnover times basis points.
 - Strategy recommendations are review targets, not automatic execution instructions.

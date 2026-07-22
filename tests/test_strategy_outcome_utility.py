@@ -101,6 +101,51 @@ def test_bootstrap_outcome_paths_capture_sequence_drawdown() -> None:
     assert paths["ulcer_index"].max() > 0.0
 
 
+def test_bootstrap_drawdown_is_not_masked_by_external_contributions() -> None:
+    returns = pd.Series([-0.10, 0.02, 0.03, 0.01])
+    base = OutcomeBootstrapConfig(
+        horizon_years=1,
+        starting_account_value=100.0,
+        annual_contribution=0.0,
+        trading_days_per_year=4,
+        paths=20,
+        block_days=2,
+        random_seed=11,
+    )
+    funded = OutcomeBootstrapConfig(**{**base.__dict__, "annual_contribution": 1_000.0})
+
+    without_contributions = bootstrap_outcome_paths(returns, config=base)
+    with_contributions = bootstrap_outcome_paths(returns, config=funded)
+
+    assert with_contributions["terminal_wealth"].gt(
+        without_contributions["terminal_wealth"]
+    ).all()
+    assert with_contributions["max_drawdown"].tolist() == pytest.approx(
+        without_contributions["max_drawdown"].tolist()
+    )
+    assert with_contributions["ulcer_index"].tolist() == pytest.approx(
+        without_contributions["ulcer_index"].tolist()
+    )
+
+
+def test_bootstrap_summary_reports_catastrophic_tail_and_target_attainment() -> None:
+    paths = pd.DataFrame(
+        {
+            "terminal_wealth": [80.0, 120.0, 150.0, 200.0],
+            "max_drawdown": [-0.35, -0.25, -0.15, -0.05],
+            "ulcer_index": [0.20, 0.15, 0.08, 0.03],
+        }
+    )
+
+    summary = summarize_bootstrap_outcomes(paths, target_terminal_wealth=140.0)
+
+    assert summary["drawdown_over_10_probability"] == pytest.approx(0.75)
+    assert summary["drawdown_over_20_probability"] == pytest.approx(0.50)
+    assert summary["drawdown_over_30_probability"] == pytest.approx(0.25)
+    assert summary["expected_drawdown_if_over_20"] == pytest.approx(-0.30)
+    assert summary["target_wealth_success_probability"] == pytest.approx(0.50)
+
+
 def test_drawdown_recovery_math() -> None:
     recovery = drawdown_recovery_return(pd.Series([-0.20]))
 

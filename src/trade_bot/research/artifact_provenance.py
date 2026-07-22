@@ -20,6 +20,23 @@ from trade_bot.research.research_governance import audit_point_in_time_universe
 RESEARCH_MANIFEST_SCHEMA_VERSION = 3
 
 
+def build_runtime_provenance(
+    prices: pd.DataFrame | None = None,
+    *,
+    repo_root: str | Path | None = None,
+) -> dict[str, object]:
+    """Return inspectable code, dependency, and input identity for persisted state."""
+
+    root = Path(repo_root) if repo_root is not None else _repo_root()
+    return {
+        **_git_metadata(root),
+        "source_tree_sha256": _source_tree_sha256(root),
+        "poetry_lock_sha256": _optional_file_sha256(root / "poetry.lock"),
+        "pyproject_sha256": _optional_file_sha256(root / "pyproject.toml"),
+        "price_input": _price_metadata(prices),
+    }
+
+
 def write_research_manifest(
     output_dir: str | Path,
     *,
@@ -35,7 +52,7 @@ def write_research_manifest(
     output.mkdir(parents=True, exist_ok=True)
     config_payload = _jsonable_config(config)
     repo_root = _repo_root()
-    git = _git_metadata(repo_root)
+    runtime_provenance = build_runtime_provenance(prices, repo_root=repo_root)
     artifact_names = sorted(dict.fromkeys(str(item) for item in artifacts))
     parameter_payload = _jsonable(parameters or {})
     universe_audit = audit_point_in_time_universe(prices, universe_membership)
@@ -51,8 +68,9 @@ def write_research_manifest(
         "parameters": parameter_payload,
         "price_input": _price_metadata(prices),
         "code": {
-            **git,
-            "source_tree_sha256": _source_tree_sha256(repo_root),
+            key: value
+            for key, value in runtime_provenance.items()
+            if key != "price_input"
         },
         "environment": {
             "python": platform.python_version(),
@@ -243,6 +261,10 @@ def _file_sha256(path: Path) -> str:
     return digest.hexdigest()
 
 
+def _optional_file_sha256(path: Path) -> str | None:
+    return _file_sha256(path) if path.is_file() else None
+
+
 def _jsonable_config(config: BaseModel | Mapping[str, object]) -> dict[str, object]:
     if isinstance(config, BaseModel):
         return _jsonable(config.model_dump(mode="json"))
@@ -312,9 +334,11 @@ def _repo_root() -> Path:
 
 def _git_metadata(repo_root: Path) -> dict[str, object]:
     sha = _git_output(repo_root, "rev-parse", "HEAD")
+    tree_sha = _git_output(repo_root, "rev-parse", "HEAD^{tree}")
     status = _git_output(repo_root, "status", "--porcelain=v1", "--untracked-files=all")
     return {
         "git_sha": sha or None,
+        "git_tree_sha": tree_sha or None,
         "git_dirty": bool(status),
         "git_status_sha256": hashlib.sha256(status.encode()).hexdigest(),
     }

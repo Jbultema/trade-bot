@@ -429,6 +429,8 @@ See also: `docs/math_model_audit.md`, `docs/iteration_protocol.md`, `docs/forwar
 The backtest engine should remain lag-safe:
 
 - Strategy signals are shifted by `signal_lag_days` before returns are applied.
+  The operating default is 2 for close-derived features: lag 1 implicitly uses
+  the feature close as the return-interval boundary and is research-only.
 - Volatility targeting and drawdown controls use shifted scaling.
 - Transaction costs are charged through turnover.
 - Long-only weights are clipped and normalized.

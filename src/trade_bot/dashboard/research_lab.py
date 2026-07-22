@@ -3704,7 +3704,7 @@ def _render_defensive_judgement_section(
     if summary.empty:
         st.info(
             "This candidate has not generated enough high-defensive episodes to score "
-            "false alarms versus correct defensive judgements."
+            "costly false positives versus defense beneficial under the declared rule."
         )
         return
 
@@ -3721,8 +3721,8 @@ def _render_defensive_judgement_section(
     current_defensive = _current_defensive_weight(result)
     cols = st.columns(5)
     _helped_metric(cols[0], "Current Defensive", _format_percent(current_defensive))
-    _helped_metric(cols[1], "Correct Defense", _format_percent(primary.get("correct_defense_rate")))
-    _helped_metric(cols[2], "False Alarm", _format_percent(primary.get("false_alarm_rate")))
+    _helped_metric(cols[1], "Beneficial Under Rule", _format_percent(primary.get("correct_defense_rate")))
+    _helped_metric(cols[2], "Costly False Positive", _format_percent(primary.get("false_alarm_rate")))
     _helped_metric(cols[3], "Mixed", _format_percent(primary.get("mixed_rate")))
     _helped_metric(cols[4], "Episode Starts", _format_decimal(primary.get("episode_starts")))
 
@@ -3762,7 +3762,7 @@ def _render_defensive_judgement_section(
     )
     _helped_metric(
         bayes_cols[2],
-        "Similar Correct Defense",
+        "Similar Beneficial Defense",
         _format_percent(bayes.get("similar_correct_defense_rate")),
     )
     _helped_metric(
@@ -3896,8 +3896,10 @@ def _defensive_judgement_readout(
     label_text = str(label).replace("_", " ")
     return (
         f"At the {threshold:.0%}+ defensive threshold, this candidate has {episodes:.0f} "
-        f"historical {horizon} episode starts. Correct-defense rate is {correct}; false-alarm "
-        f"rate is {false_alarm}. The average {benchmark_ticker} excess versus BIL after these "
+        f"historical {horizon} episode starts. Defense-beneficial-under-rule rate is {correct}; "
+        f"costly-false-positive rate is {false_alarm}. The rule counts benchmark underperformance "
+        f"versus cash or a declared drawdown breach as beneficial; it is not crash-prediction "
+        f"accuracy. The average {benchmark_ticker} excess versus BIL after these "
         f"signals was {excess}, with median forward {benchmark_ticker} drawdown of {drawdown}. "
         f"Label: {label_text}."
     )
@@ -3910,8 +3912,8 @@ def _defensive_judgement_figure(events: pd.DataFrame) -> go.Figure:
         "mixed_or_early": "#f59e0b",
     }
     label_map = {
-        "correct_defense": "Correct defense",
-        "false_alarm": "False alarm",
+        "correct_defense": "Beneficial under rule",
+        "false_alarm": "Costly false positive",
         "mixed_or_early": "Mixed",
     }
     fig = go.Figure()

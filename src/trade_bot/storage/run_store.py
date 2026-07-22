@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import hashlib
+import json
 import os
 import pickle
 import subprocess
@@ -33,9 +34,10 @@ from trade_bot.DEFAULTS import (
     DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
     DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
 )
+from trade_bot.research.artifact_provenance import build_runtime_provenance
 from trade_bot.research.baselines import BaselineRun
 
-SNAPSHOT_SCHEMA_VERSION = 1
+SNAPSHOT_SCHEMA_VERSION = 2
 
 
 @dataclass(frozen=True)
@@ -86,6 +88,7 @@ class SnapshotManifest:
     macro_columns: int
     strategy_count: int
     error_message: str = ""
+    provenance_json: str = "{}"
 
 
 @dataclass(frozen=True)
@@ -150,6 +153,11 @@ class RunStore:
             pickle.dump(run, handle, protocol=pickle.HIGHEST_PROTOCOL)
 
         trade_summary = _first_row(run.trade_decision.summary)
+        provenance_json = json.dumps(
+            build_runtime_provenance(run.prices),
+            sort_keys=True,
+            separators=(",", ":"),
+        )
         manifest = SnapshotManifest(
             run_id=run_id,
             created_at_utc=created_at_utc,
@@ -178,6 +186,7 @@ class RunStore:
             price_columns=int(run.prices.shape[1]),
             macro_columns=int(run.macro_data.shape[1]),
             strategy_count=int(len(run.results)),
+            provenance_json=provenance_json,
         )
         self._upsert_manifest(manifest)
         if auto_prune:
@@ -914,8 +923,15 @@ class RunStore:
                     price_columns BIGINT NOT NULL,
                     macro_columns BIGINT NOT NULL,
                     strategy_count BIGINT NOT NULL,
-                    error_message VARCHAR NOT NULL
+                    error_message VARCHAR NOT NULL,
+                    provenance_json VARCHAR NOT NULL DEFAULT '{}'
                 )
+                """
+            )
+            connection.execute(
+                """
+                ALTER TABLE run_snapshots
+                ADD COLUMN IF NOT EXISTS provenance_json VARCHAR DEFAULT '{}'
                 """
             )
             connection.execute(
@@ -948,8 +964,15 @@ class RunStore:
         try:
             connection.execute(
                 """
-                INSERT OR REPLACE INTO run_snapshots
-                VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                INSERT OR REPLACE INTO run_snapshots (
+                    run_id, created_at_utc, status, artifact_path, schema_version,
+                    config_path, events_path, macro_path, news_path, config_hash,
+                    events_hash, macro_hash, news_hash, combined_config_hash,
+                    refresh_data, refresh_macro, refresh_news, market_date,
+                    risk_status, recommended_action, risk_budget_multiplier,
+                    price_rows, price_columns, macro_columns, strategy_count,
+                    error_message, provenance_json
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 [
                     manifest.run_id,
@@ -978,6 +1001,7 @@ class RunStore:
                     manifest.macro_columns,
                     manifest.strategy_count,
                     manifest.error_message,
+                    manifest.provenance_json,
                 ],
             )
         finally:
@@ -1121,6 +1145,7 @@ def _manifest_from_mapping(row: dict[str, Any]) -> SnapshotManifest:
         macro_columns=int(row["macro_columns"]),
         strategy_count=int(row["strategy_count"]),
         error_message=str(row.get("error_message", "")),
+        provenance_json=str(row.get("provenance_json", "{}") or "{}"),
     )
 
 

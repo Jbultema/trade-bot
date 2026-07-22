@@ -1,6 +1,6 @@
 from __future__ import annotations
 
-from dataclasses import asdict, dataclass, field
+from dataclasses import asdict, dataclass, field, replace
 from typing import Literal
 
 import numpy as np
@@ -39,6 +39,7 @@ from trade_bot.research.regime_pulse import (
     build_regime_pulse_asset_table,
     build_regime_pulse_cycles,
 )
+from trade_bot.research.risk_timing import assess_risk_timing
 
 MomentumState = Literal["bullish", "neutral", "bearish", "insufficient_data"]
 
@@ -67,6 +68,11 @@ class CurrentStateRun:
     positioning_summary: pd.DataFrame = field(default_factory=pd.DataFrame)
     regime_instability: pd.DataFrame = field(default_factory=pd.DataFrame)
     regime_instability_components: pd.DataFrame = field(default_factory=pd.DataFrame)
+    risk_timing_state: str = "legacy_unassessed"
+    risk_timing_multiplier: float = np.nan
+    risk_timing_breaks: tuple[str, ...] = ()
+    risk_timing_recoveries: tuple[str, ...] = ()
+    risk_timing_evidence: pd.DataFrame = field(default_factory=pd.DataFrame)
 
 
 @dataclass(frozen=True)
@@ -109,9 +115,15 @@ def build_current_state(
     )
     confirmation_matrix = build_confirmation_matrix(clean_prices, momentum_state)
     market_health = build_market_health(clean_prices, momentum_state)
-    risk_score = _risk_score(confirmation_matrix, market_health)
+    risk_score = calculate_risk_score(confirmation_matrix, market_health)
     risk_status = _risk_status(risk_score)
-    risk_summary = _risk_summary(risk_status, risk_score, confirmation_matrix)
+    risk_timing = assess_risk_timing(risk_score, confirmation_matrix, market_health)
+    risk_summary = _risk_summary(
+        risk_status,
+        risk_score,
+        confirmation_matrix,
+        risk_timing_state=risk_timing.state,
+    )
     strategy_alerts = build_strategy_alerts(results, preferred_strategy=preferred_strategy)
     scenario_lattice, scenario_drivers = build_scenario_lattice(
         confirmation_matrix,
@@ -143,8 +155,42 @@ def build_current_state(
         positioning_summary=positioning_summary,
         regime_instability=regime_instability,
         regime_instability_components=regime_instability_components,
+        risk_timing_state=risk_timing.state,
+        risk_timing_multiplier=risk_timing.multiplier,
+        risk_timing_breaks=risk_timing.confirmation_breaks,
+        risk_timing_recoveries=risk_timing.recovery_confirmations,
+        risk_timing_evidence=risk_timing.evidence,
         signal_coverage=signal_coverage,
         data_quality=data_quality,
+    )
+
+
+def refresh_risk_timing(current_state: CurrentStateRun) -> CurrentStateRun:
+    """Recompute derived timing fields from a snapshot's point-in-time state.
+
+    Historical 1:1 replacements already contain causal confirmation and health
+    frames. Reusing those frames avoids recomputing unrelated research layers
+    while still applying the current timing policy exactly.
+    """
+
+    timing = assess_risk_timing(
+        current_state.risk_score,
+        current_state.confirmation_matrix,
+        current_state.market_health,
+    )
+    return replace(
+        current_state,
+        risk_summary=_risk_summary(
+            current_state.risk_status,
+            current_state.risk_score,
+            current_state.confirmation_matrix,
+            risk_timing_state=timing.state,
+        ),
+        risk_timing_state=timing.state,
+        risk_timing_multiplier=timing.multiplier,
+        risk_timing_breaks=timing.confirmation_breaks,
+        risk_timing_recoveries=timing.recovery_confirmations,
+        risk_timing_evidence=timing.evidence,
     )
 
 
@@ -382,7 +428,12 @@ def _relative_signal(
     )
 
 
-def _risk_score(confirmation_matrix: pd.DataFrame, market_health: pd.DataFrame) -> float:
+def calculate_risk_score(
+    confirmation_matrix: pd.DataFrame,
+    market_health: pd.DataFrame,
+) -> float:
+    """Return price fragility on the invariant scale 0=constructive, 1=risky."""
+
     if confirmation_matrix.empty:
         return 0.5
     risk_on_score = confirmation_matrix["score"].mean()
@@ -415,13 +466,25 @@ def _risk_status(risk_score: float) -> str:
     return "red"
 
 
-def _risk_summary(risk_status: str, risk_score: float, confirmation_matrix: pd.DataFrame) -> str:
+def _risk_summary(
+    risk_status: str,
+    risk_score: float,
+    confirmation_matrix: pd.DataFrame,
+    *,
+    risk_timing_state: str | None = None,
+) -> str:
     bearish = confirmation_matrix[confirmation_matrix["score"] < 0].shape[0]
     bullish = confirmation_matrix[confirmation_matrix["score"] > 0].shape[0]
     neutral = confirmation_matrix[confirmation_matrix["score"] == 0].shape[0]
+    timing_text = (
+        f" Allocation timing is {risk_timing_state.replace('_', ' ')}."
+        if risk_timing_state
+        else ""
+    )
     return (
         f"Risk status is {risk_status.upper()} with score {risk_score:.2f}. "
         f"Confirmation matrix has {bullish} bullish, {neutral} neutral, and {bearish} bearish signals."
+        f"{timing_text}"
     )
 
 

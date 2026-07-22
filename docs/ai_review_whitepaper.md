@@ -59,7 +59,9 @@ The system is not:
 - a license to treat news entered by the user as independent market evidence.
 
 The default execution cadence is weekly Wednesday rebalancing (`W-WED`) with a
-one-trading-day signal lag and configured transaction costs. Human review is
+close-safe two-row signal shift and configured transaction costs. A target using
+close `t` is modeled as filled at close `t+1` and first earns the next
+close-to-close interval. Human review is
 required before real action. The dashboard is primarily snapshot-backed so an
 interactive page does not silently rerun expensive research with different
 inputs.
@@ -121,7 +123,7 @@ chain is sequential and gated:
 
 ```text
 base strategy weights
-    -> quantitative risk-status multiplier
+    -> calibration-gated quantitative risk-timing multiplier
     -> scenario probability multiplier * configured authority
     -> event/news multiplier * configured authority
     -> accepted macro multiplier * configured authority
@@ -142,12 +144,12 @@ The July 21 `balanced_asymmetric` policy is:
 | Layer | Authority | Operating interpretation |
 | --- | ---: | --- |
 | Native/base market strategy | 1.00 | Sets the initial asset weights. |
-| Quantitative risk status | 1.00 | Can reduce native risk exposure. |
+| Quantitative risk timing | 0.00 | Visible research state; failed the promotion gate and cannot size. |
 | Scenario sizing | 0.00 | Probabilities are visible but cannot size. |
 | Scenario portfolio budget | 0.00 | Scenarios cannot tighten hard limits. |
 | Scenario-weighted stress | 0.00 | Advisory watch only. |
 | Event/news sizing | 0.00 | Narrative layer is informational only. |
-| Macro quantitative | 1.00 in config | Only an empirically accepted macro category can act; current categories add zero. |
+| Macro quantitative | 0.00 | Revised-history FRED inputs are descriptive only; nonzero authority requires calibrated point-in-time or first-release vintages. |
 | Absolute portfolio risk | 1.00 | Hard non-scenario limits can constrain. |
 | Decision sanity | 1.00 | Governance guardrail, not a forecast. |
 
@@ -155,6 +157,12 @@ Scenario authority is fail-closed. If calibration status is `not_evaluated` or
 `insufficient`, nonzero scenario authority is invalid configuration. Changing a
 report file does not itself grant authority; a reviewed configuration change is
 required.
+
+Risk-timing authority is independently fail-closed. The replacement distinguishes
+fragility from confirmed credit, volatility, breadth, and trend deterioration,
+but its 1,020-origin replay did not improve risk-adjusted return decisively. It
+therefore remains at zero authority with `insufficient` calibration status. Full rule and replay
+details are in `docs/risk_timing_research.md`.
 
 ### 3.2 Current-state risk score
 
@@ -247,8 +255,8 @@ Snapshot identity:
 ```text
 run_id: 20260721T223437.000001Z-31e37291-fda65c5b
 market_date: 2026-07-21
-config fingerprint prefix: 31e37291
-prices: 5,420 rows x 169 columns
+config fingerprint prefix: 44aebc35
+prices: 5,420 rows x 168 columns
 macro: 102 columns
 configured strategies: 22
 ```
@@ -262,20 +270,21 @@ The base strategy is
 | --- | ---: |
 | Risk score/status | 0.433333 / yellow |
 | Recommended action | HOLD |
-| Base defensive weight | 59.6967% |
-| Base risk-asset weight | 40.3033% |
-| Quantitative status addition | 4.0303 percentage points defense |
+| Base defensive weight | 60.6475% |
+| Base risk-asset weight | 39.3525% |
+| Quantitative timing addition | 0.0000 percentage points defense |
+| Risk-timing raw/effective multiplier | 1.00 / 1.00 at 0% authority |
 | Scenario addition | 0.0000 pp |
 | News/event addition | 0.0000 pp |
-| Macro addition | 0.0000 pp |
+| Macro addition | 1.9676 pp |
 | Portfolio hard-risk addition | 0.0000 pp |
 | Decision-sanity addition | 0.0000 pp |
-| Final defensive weight | 63.7270% |
-| Final risk-asset weight | 36.2730% |
-| Final risk-budget multiplier | 0.90 |
+| Final defensive weight | 62.6151% |
+| Final risk-asset weight | 37.3849% |
+| Final risk-budget multiplier | 0.95 |
 
-Rounded base weights are BIL 60%, SOXX 12%, SMH 11%, QQQ 11%, and AMZN 6%.
-Rounded final weights are BIL 64%, SOXX 11%, SMH 10%, QQQ 10%, and AMZN 5%.
+Rounded base weights are BIL 61%, IGV 10%, SOXX 10%, QQQ 10%, and SMH 9%.
+Rounded final weights are BIL 63%, IGV 10%, SOXX 9%, QQQ 9%, and SMH 9%.
 
 The portfolio risk engine reports `within_limits`, no applied hard constraints,
 ES95 1.52%, maximum stress loss 12.70%, equity beta 0.755, and AI beta 0.453.
@@ -390,16 +399,16 @@ Two distinct audits answer different questions.
 This audit measures the base strategy's effective BIL plus residual cash. At a
 65% defensive threshold for the focus strategy:
 
-| Horizon | Episode starts | Correct | False alarm | Mixed | Median forward SPY drawdown |
+| Horizon | Episode starts | Beneficial under rule | Costly false positive | Mixed | Median forward SPY drawdown |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| 1 week | 46 | 47.8% | 39.1% | 13.0% | -1.6% |
-| 1 month | 44 | 47.7% | 29.5% | 22.7% | -4.2% |
-| 3 months | 44 | 43.2% | 29.5% | 27.3% | -7.0% |
+| 1 week | 43 | 53.5% | 37.2% | 9.3% | -1.5% |
+| 1 month | 42 | 45.2% | 33.3% | 21.4% | -4.2% |
+| 3 months | 42 | 42.9% | 31.0% | 26.2% | -6.9% |
 
 “Correct” means SPY lagged BIL or suffered the horizon-specific drawdown;
 “false alarm” means SPY materially beat BIL without the drawdown; the remainder
 is mixed/early. These labels encode a utility choice and should be sensitivity
-tested. They do not mean a 47.7% probability of a crash.
+tested. They do not mean a 45.2% probability of a crash.
 
 ### 7.2 Active layered policy
 
@@ -418,28 +427,25 @@ Incremental episode comparisons:
 
 | Comparison | Horizon | Left/right starts | Delta correct | Delta false alarm | Median return cost | Median DD improvement |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Base + quantitative vs base only | 1w | 50 / 40 | +6.0 pp | -30.5 pp | -0.18% | +0.54% |
-| Base + quantitative vs base only | 1m | 50 / 40 | +2.5 pp | -7.0 pp | -0.60% | +1.20% |
-| Base + quantitative vs base only | 3m | 50 / 39 | +11.5 pp | -1.9 pp | -1.96% | +2.63% |
-| Quantitative + portfolio vs quantitative only | 1w | 69 / 87 | +6.4 pp | -16.4 pp | +0.02% | +0.03% |
-| Quantitative + portfolio vs quantitative only | 1m | 69 / 87 | -1.4 pp | +5.2 pp | -0.48% | +0.21% |
-| Quantitative + portfolio vs quantitative only | 3m | 67 / 85 | -3.6 pp | +1.3 pp | -0.43% | +0.05% |
+| Base + quantitative vs base only | 1w | 10 / 47 | +26.0 pp | -24.7 pp | -0.14% | +0.78% |
+| Base + quantitative vs base only | 1m | 10 / 47 | +3.8 pp | -24.7 pp | -1.16% | +1.23% |
+| Base + quantitative vs base only | 3m | 10 / 46 | +17.4 pp | -9.1 pp | -2.51% | +1.92% |
+| Quantitative + portfolio vs quantitative only | 1w | 43 / 20 | +18.8 pp | -10.1 pp | -0.07% | +0.36% |
+| Quantitative + portfolio vs quantitative only | 1m | 43 / 20 | -3.1 pp | +9.5 pp | -0.56% | +0.95% |
+| Quantitative + portfolio vs quantitative only | 3m | 43 / 20 | -18.1 pp | +5.2 pp | -1.20% | +1.51% |
 
-Interpretation: price-derived risk status adds some historical downside
-discrimination to native defense. Portfolio clamps add short-horizon safety but
-do not improve one-to-three-month forecasting discrimination. The layers share
-price inputs; they are distinct causal pathways, not statistically independent
-votes.
+Interpretation: the legacy price-derived risk status showed some episode-level
+downside discrimination, but its continuous sizing rule was too costly. The new
+confirmation-timed candidate did not improve full-period maximum drawdown, so it
+has zero allocation authority. Portfolio clamps add short-horizon safety but are
+not one-to-three-month forecasts. The layers share price inputs; they are
+distinct causal pathways, not statistically independent votes.
 
-The predeclared 60% base-defense sensitivity strengthens rather than reverses
-the base-plus-quantitative result. Relative to base-only episodes, its 44 versus
-33 one-month starts improve correct defense by 6.8 points and reduce false
-alarms by 17.4 points; its 44 versus 32 three-month starts improve correct
-defense by 12.5 points and reduce false alarms by 11.9 points. Median return
-costs are 0.53% and 1.79%, with drawdown improvements of 1.24% and 2.25%.
-Portfolio additions remain weak at one and three months. This threshold
-sensitivity is encouraging for the price-status interaction, but the cohorts
-are not randomized and the threshold family is still researcher-chosen.
+The confirmed-timing intersection has only 10 base-plus-quantitative episode
+starts. Its lower false-alarm rate is interesting, but median return costs are
+1.16% at one month and 2.51% at three months. Portfolio additions remain weak
+at one and three months. These cohorts are not randomized, and the small
+confirmed sample cannot justify authority.
 
 ### 7.3 Opportunity-cost replay
 
@@ -447,15 +453,15 @@ Non-overlapping weekly policies from 2007-05-30 through 2026-07-21:
 
 | Policy | CAGR | Max DD | Terminal wealth | Delta CAGR | DD improvement |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Base weekly | 20.64% | -24.82% | 36.29 | — | — |
-| Quantitative sizing every week | 15.16% | -19.74% | 14.90 | -5.48 pp | +5.09 pp |
-| Full hard-risk path every week | 12.56% | -16.59% | 9.62 | -8.08 pp | +8.23 pp |
-| Current-configuration-only overlay | 20.49% | -24.82% | 35.43 | -0.15 pp | 0.00 pp |
+| Base weekly | 18.74% | -26.21% | 26.80 | — | — |
+| Legacy risk-status sizing | 13.55% | -17.76% | 11.38 | -5.19 pp | +8.45 pp |
+| Confirmation-timed candidate | 18.12% | -25.36% | 24.22 | -0.62 pp | +0.85 pp |
+| Candidate plus hard-risk path | 13.69% | -18.63% | 11.66 | -5.05 pp | +7.59 pp |
 
-The last row is the closest answer to “is the small price for patience actually
-small?” Historically its cost was small, but it did not improve the full-period
-maximum drawdown. This supports modest patience, not a claim that 63.73% BIL is
-the uniquely optimal weight.
+The confirmation-timed row is the cleanest test of whether a smaller price for
+patience buys protection. It bought only 0.85 points of maximum-drawdown relief
+at a 0.62-point CAGR cost, leaving risk-adjusted return essentially unchanged.
+That is not enough to grant the timing layer sizing authority.
 
 ## 8. Pre-Break Hindsight And Sparse Policy Replay
 
@@ -470,18 +476,19 @@ pre-break probability, dollar pressure, and QQQ three-month return. These are
 ranked retrospective associations and should generate purged/fixed tests; they
 are not deployable rules.
 
-After causal attribution repair, early hard-defense sources are:
+After the timing-authority repair and 1:1 snapshot replacement, early hard-defense
+sources are:
 
-- early-watch: quantitative risk status 95.5%, base already defensive 4.5%;
-- long-lead context: quantitative risk status 82.9%, base already defensive
-  16.2%, portfolio absolute risk 1.0%;
-- scenario probabilities and news/events: zero causal additions under the
-  replacement policy.
+- early-watch: portfolio absolute risk 81.8%, base already defensive 18.2%;
+- long-lead context: portfolio absolute risk 69.5%, base already defensive
+  30.5%;
+- quantitative timing, scenario probabilities, and news/events: zero causal
+  additions under the replacement policy.
 
-The snapshot-budget policy replay overlays sparse historical readouts on eight
-selected experiment strategies. Base median CAGR is 14.99% with median max DD
--24.58%. The actual snapshot budget lowers median CAGR to 12.24% and does not
-improve median max DD. Hindsight stage floors lose less CAGR but still do not
+The refreshed snapshot-budget replay overlays sparse historical readouts on
+eight selected experiment strategies. Base median CAGR is 14.29% with median
+max DD -22.48%. The actual snapshot budget lowers median CAGR to 12.69% and does
+not improve median max DD. Hindsight stage floors lose less CAGR but still do not
 improve the median max drawdown. Because event windows are sparse and some
 variants use hindsight stage knowledge, this report is best used to reject
 aggressive early defense, not to select a live floor.
@@ -499,8 +506,8 @@ important evidence is deliberately contradictory.
 
 ### 9.1 Favorable retrospective evidence
 
-- Primary path roughly 22% CAGR and -20% max drawdown under configured Wednesday
-  execution.
+- The close-safe configured primary path produced 20.67% CAGR and -25.80% max
+  drawdown; the native i111 challenger produced 20.84% and -24.75%.
 - Candidate-family PBO estimate 1.43% with 0% OOS-loss probability in the fixed
   candidate study; this addresses within-family selection risk, not the full
   historical research process.
@@ -541,14 +548,36 @@ Fixed execution smoothing reduced weekday dispersion but did not clear all
 gates. EWM5 produced 20.62% Wednesday CAGR and -23.73% drawdown; mean10 produced
 20.19% and -24.57%. Both remain research-only.
 
-The correct operating label is `promising_but_fragile`. Approximately 22% CAGR
-/-20% drawdown is a configured-path observation, not an expected live result.
+The correct operating label is `promising_but_fragile`. The former 22.18% CAGR
+/-19.68% drawdown result used a one-row close-boundary approximation and is not
+an operating or expected-live result.
+
+### 9.4 Contribution-aware catastrophic-tail utility
+
+The fixed experiment uses 1,000 block-bootstrap paths, a 21-session block,
+15-year horizon, $220,000 starting value, $70,000 annual monthly contributions,
+and seed `20260705`. Terminal wealth includes contributions. Drawdown and Ulcer
+Index use a separate unitized return index, so cash flows cannot mechanically
+hide a market loss.
+
+| Path | P(DD > 20%) | P(DD > 25%) | P(DD > 30%) | Mean DD conditional on >20% | P(10%-path wealth target) | Terminal wealth p50 |
+| --- | ---: | ---: | ---: | ---: | ---: | ---: |
+| Configured primary | 84.6% | 50.3% | 21.3% | -27.2% | 98.1% | $9.91M |
+| Native i111 challenger | 84.3% | 49.3% | 20.8% | -27.1% | 98.2% | $10.06M |
+| SPY hold | 98.9% | 92.5% | 73.3% | -37.0% | 61.8% | $3.80M |
+| QQQ hold | 100.0% | 96.3% | 79.3% | -38.3% | 82.3% | $5.97M |
+
+This supports the claim that the strategy historically transformed catastrophic
+equity tails into smaller but still frequent drawdowns. It does not establish a
+forward probability: the bootstrap resamples the same modern-universe replay
+whose survivorship and selection validity remain blocked.
 
 ## 10. Data Integrity, Leakage, And Independence Audit
 
 ### 10.1 Controls that exist
 
-- Strategy execution uses a one-day signal lag by default.
+- Strategy execution uses a close-safe two-row shift by default. The former
+  one-row shift is explicitly labeled `close_boundary_approximation`.
 - Historical snapshot replacement preserves recorded point-in-time narrative
   inputs rather than replaying today's news backward.
 - Scenario authority is earned through expanding-history calibration and gated
@@ -561,20 +590,30 @@ The correct operating label is `promising_but_fragile`. Approximately 22% CAGR
   test compares sliced full paths with true truncated recomputation.
 - Research reports expose survivorship, pre-inception, and sample-size caveats.
 - Prospective monitoring cohorts freeze strategy and execution definitions.
+- Snapshot manifests now record git commit, committed tree, dirty status and
+  status hash, exact source-tree hash, dependency-lock and project hashes,
+  schema version, and an exact price-frame identity. Replacement mode requires
+  both matching config and matching source-tree identity before it can resume.
+- Replacement mode recomputes price-derived strategy paths, performance/window
+  metrics, strategy alerts, event outcome tables, and the final decision while
+  preserving the recorded point-in-time narrative objects.
 
 ### 10.2 Remaining risks
 
 - Current-universe survivorship: many studies replay today's tickers backward.
 - Pre-inception proxies: newer ETFs and AI assets have short histories.
-- Researcher degrees of freedom: PBO for one candidate shelf does not count all
-  prior abandoned ideas.
+- Researcher degrees of freedom: the ledger currently indexes 540 manifested
+  trial rows, but 119 artifact directories have no manifest and three of 14
+  manifests lack explicit rosters. Candidate-shelf PBO does not count abandoned
+  or unmanifested ideas, so retrospective promotion is disabled.
 - Event selection hindsight: named crises and break dates are known today.
 - Overlapping horizons: episode outcomes can be serially dependent.
 - Shared market inputs: base strategy, risk status, scenarios, and portfolio risk
   are not independent even when their transformations differ.
 - Threshold discontinuity: small score changes can cause large multiplier jumps.
-- Snapshot code provenance: config hashes are stronger than no provenance but do
-  not fully identify code and data state.
+- Legacy market caches may lack vendor fetch-time metadata even though the exact
+  frame used by each new snapshot is hashed. Future refreshes write a Yahoo/
+  yfinance sidecar with fetch time and known limitations.
 - Pickle compatibility/security: artifacts are local/trusted-only and coupled to
   Python class evolution.
 - External macro revision risk: FRED histories may contain revised values unless
@@ -672,10 +711,10 @@ High confidence:
 
 Moderate confidence:
 
-- Price-derived risk status adds some incremental downside discrimination to
-  native strategy defense.
-- A small 10% reduction of the remaining risk sleeve is a defensible patience
-  adjustment, especially when information value is high.
+- Explicit credit, volatility, breadth, and trend gates are more interpretable
+  than the legacy aggregate status multiplier.
+- Patient positioning can still come from the native strategy, but the separate
+  timing candidate has not earned authority.
 - Hard portfolio constraints are useful safety controls but not independent
   medium-horizon forecasts.
 - Current concentration/dispersion conditions justify avoiding emotional rally
@@ -683,7 +722,7 @@ Moderate confidence:
 
 Low confidence:
 
-- 63.73% is the uniquely correct defensive allocation.
+- 60.02% is the uniquely correct defensive allocation.
 - Current caution predicts an imminent crash.
 - The historical Wednesday i111 path will survive live execution.
 - Any existing AI warning threshold is ready for allocation authority.
@@ -757,12 +796,11 @@ authority gate.
 ## 16. Bottom Line
 
 Trade Bot is strongest as a transparent research and decision-support system,
-not as an oracle. The repaired July 21 result is mostly the native strategy's
-own 59.70% defensive posture plus a four-percentage-point price-state adjustment.
-News and scenarios add zero. Hard portfolio constraints are satisfied without a
-clamp. Historical evidence says native and quantitative agreement contains some
-downside information, but continuous layered defense is expensive and the
-precise 63.73% target is not proven optimal.
+not as an oracle. The repaired July 21 cached-data result is the native
+strategy's own 60.02% defensive posture. Revised-history macro, risk timing,
+news, and scenarios add zero; hard portfolio constraints are satisfied without
+a clamp. Historical evidence says continuous layered defense is expensive, and
+the precise 60.02% target is not proven optimal.
 
 The most important unresolved issue is no longer narrative circularity in the
 implemented weight calculation. It is whether a high-growth, AI-concentrated,

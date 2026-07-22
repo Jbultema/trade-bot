@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 import signal
 import subprocess
@@ -15,6 +16,13 @@ import typer
 from rich.console import Console
 from rich.table import Table
 
+from trade_bot.backtest.metrics import calculate_metrics, metrics_frame
+from trade_bot.backtest.windows import (
+    calendar_return_pivot,
+    calendar_year_metrics,
+    rolling_window_metrics,
+    summarize_windows,
+)
 from trade_bot.config import configured_tickers, load_config
 from trade_bot.data.fred_data import load_fred_catalog, load_or_fetch_fred_data
 from trade_bot.data.market_data import load_or_fetch_yahoo_prices
@@ -64,6 +72,7 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.ml.diagnostics import run_ml_diagnostics
 from trade_bot.reporting.report import write_baseline_report
+from trade_bot.research.artifact_provenance import build_runtime_provenance
 from trade_bot.research.backtest_pbo import (
     pbo_candidate_tickers,
     run_backtest_pbo_gauntlet,
@@ -76,6 +85,7 @@ from trade_bot.research.baselines import (
     run_configured_baselines_from_frames,
     slice_backtest_results,
 )
+from trade_bot.research.current_state import build_strategy_alerts, refresh_risk_timing
 from trade_bot.research.cycle_tracker import (
     DEFAULT_PHASE_MIN_TRAIN_DAYS,
     DEFAULT_PHASE_VALIDATION_STEP_DAYS,
@@ -87,6 +97,7 @@ from trade_bot.research.defensive_layer_calibration import (
     run_defensive_layer_calibration,
 )
 from trade_bot.research.entry_date_analysis import build_entry_date_analysis
+from trade_bot.research.event_risk import run_event_risk_study
 from trade_bot.research.experiment_monitor import (
     load_experiment_candidates,
     load_experiment_scorecards,
@@ -875,8 +886,15 @@ def backfill_snapshots_cmd(
         )
         expected_market_dates = set(latest_per_date["market_date"].astype(str))
         current_fingerprint = build_snapshot_fingerprint(config, events, macro, news)
+        current_source_tree_sha = str(
+            build_runtime_provenance().get("source_tree_sha256", "")
+        )
+        same_source_tree = latest_per_date["provenance_json"].map(
+            lambda value: _provenance_source_tree_sha(value) == current_source_tree_sha
+        )
         already_replaced = latest_per_date[
             latest_per_date["combined_config_hash"].eq(current_fingerprint.combined_hash)
+            & same_source_tree
         ]
         already_replaced_market_dates = set(
             already_replaced["market_date"].astype(str)
@@ -919,11 +937,12 @@ def backfill_snapshots_cmd(
         console.print(_snapshot_delete_summary("Purged existing snapshots", purged))
 
     saved_manifests: list[SnapshotManifest] = []
-    full_results = (
-        {}
-        if replace_existing_market_dates
-        else build_configured_strategy_results(bot_config, prices)
-    )
+    # Replacement must recompute strategy paths under the requested config. Reusing
+    # the stored path and merely changing the decision layer would stamp stale
+    # execution semantics with a new config fingerprint.
+    full_results = build_configured_strategy_results(bot_config, prices)
+    full_rolling_windows = rolling_window_metrics(full_results)
+    full_calendar_metrics = calendar_year_metrics(full_results)
     total = len(selected_dates)
     for index, market_date in enumerate(selected_dates, start=1):
         market_date_text = str(market_date.date())
@@ -954,10 +973,49 @@ def backfill_snapshots_cmd(
                 raise RuntimeError(
                     f"Configured primary strategy {primary_strategy!r} has no defensive ticker."
                 )
+            recomputed_results = slice_backtest_results(full_results, market_date_text)
+            calculated_metrics = [
+                calculate_metrics(
+                    name=result.name,
+                    returns=result.returns,
+                    equity=result.equity,
+                    turnover=result.turnover,
+                    transaction_costs=result.transaction_costs,
+                )
+                for result in recomputed_results.values()
+            ]
+            # These tables contain self-contained completed windows. Compute the
+            # expensive windows once on the same causal path, then retain only
+            # rows whose end date was available at the historical origin.
+            recomputed_rolling = _completed_windows_through(
+                full_rolling_windows, market_date_text
+            )
+            recomputed_calendar = _completed_windows_through(
+                full_calendar_metrics, market_date_text
+            )
+            current_state = refresh_risk_timing(
+                replace(
+                    source_run.current_state,
+                    strategy_alerts=build_strategy_alerts(
+                        recomputed_results,
+                        preferred_strategy=primary_strategy,
+                    ),
+                )
+            )
+            # Preserve the exact narrative objects recorded at the historical
+            # origin. The stored macro-inclusion research artifact is also
+            # preserved because rebuilding it at every origin would overwrite
+            # its point-in-time input history; it has zero allocation authority.
+            event_risk = run_event_risk_study(
+                source_run.prices,
+                recomputed_results,
+                source_run.event_risk.events,
+                primary_strategy=primary_strategy,
+            )
             trade_decision = build_trade_decision(
-                primary_result=source_run.results[primary_strategy],
-                current_state=source_run.current_state,
-                event_risk=source_run.event_risk,
+                primary_result=recomputed_results[primary_strategy],
+                current_state=current_state,
+                event_risk=event_risk,
                 news_monitor=source_run.news_monitor,
                 signal_inclusion=source_run.signal_inclusion,
                 prices=source_run.prices,
@@ -966,6 +1024,16 @@ def backfill_snapshots_cmd(
             )
             baseline_run = replace(
                 source_run,
+                results=recomputed_results,
+                metrics=metrics_frame(calculated_metrics).sort_values(
+                    "calmar", ascending=False
+                ),
+                rolling_windows=recomputed_rolling,
+                window_summary=summarize_windows(recomputed_rolling),
+                calendar_metrics=recomputed_calendar,
+                calendar_returns=calendar_return_pivot(recomputed_calendar),
+                current_state=current_state,
+                event_risk=event_risk,
                 trade_decision=trade_decision,
                 portfolio_risk=trade_decision.portfolio_risk,
             )
@@ -2439,7 +2507,7 @@ def audit_defensive_judgement_cmd(
 ) -> None:
     """Backfill false-alarm versus correct-defense metrics from saved backtests."""
 
-    store = RunStore()
+    store = RunStore(read_only=True)
     baseline_run, _manifest = store.load_latest_snapshot(require_matching_config=False)
     strategy_names = [
         strategy.strip() for strategy in strategies.split(",") if strategy.strip()
@@ -4623,6 +4691,26 @@ def _print_macro_outcome_summary(summary: pd.DataFrame, output_dir: Path) -> Non
             )
     console.print(table)
     console.print(f"Outcome reports: {output_dir}")
+
+
+def _provenance_source_tree_sha(value: object) -> str:
+    if isinstance(value, str):
+        try:
+            payload = json.loads(value)
+        except json.JSONDecodeError:
+            return ""
+    elif isinstance(value, dict):
+        payload = value
+    else:
+        return ""
+    return str(payload.get("source_tree_sha256", ""))
+
+
+def _completed_windows_through(frame: pd.DataFrame, through: str) -> pd.DataFrame:
+    if frame.empty or "end" not in frame:
+        return frame.copy()
+    end_dates = pd.to_datetime(frame["end"], errors="coerce")
+    return frame.loc[end_dates.le(pd.Timestamp(through))].reset_index(drop=True)
 
 
 def _active_experiment_dir(experiment_dir: Path) -> Path:

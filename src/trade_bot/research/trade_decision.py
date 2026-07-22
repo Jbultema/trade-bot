@@ -46,13 +46,9 @@ def build_trade_decision(
     min_trade_weight: float = 0.02,
     allocation_policy: AllocationPolicyConfig | None = None,
 ) -> TradeDecisionRun:
-    policy = allocation_policy or AllocationPolicyConfig(
-        scenario_sizing_authority=1.0,
-        scenario_budget_authority=1.0,
-        scenario_weighted_stress_authority=1.0,
-        event_sizing_authority=1.0,
-        scenario_calibration_status="validated",
-    )
+    # Omitted policy must fail closed. Research layers only gain causal sizing
+    # authority through an explicit, calibration-gated AllocationPolicyConfig.
+    policy = allocation_policy or AllocationPolicyConfig()
     base_weights = _weights_with_defensive_residual(
         primary_result.weights.iloc[-1].astype(float),
         defensive_ticker=defensive_ticker,
@@ -71,8 +67,13 @@ def build_trade_decision(
         sizing_authority=policy.macro_sizing_authority,
     )
 
+    raw_timing_multiplier = _risk_timing_multiplier(current_state)
+    timing_multiplier = _authority_adjusted_multiplier(
+        raw_timing_multiplier,
+        policy.risk_timing_sizing_authority,
+    )
     risk_multiplier = min(
-        _risk_status_multiplier(current_state.risk_status),
+        timing_multiplier,
         _as_float(scenario_context["risk_multiplier"]),
         _as_float(event_context["risk_multiplier"]),
         _as_float(macro_context["risk_multiplier"]),
@@ -175,6 +176,9 @@ def build_trade_decision(
                     policy.scenario_weighted_stress_authority
                 ),
                 "event_sizing_authority": policy.event_sizing_authority,
+                "macro_sizing_authority": policy.macro_sizing_authority,
+                "macro_calibration_status": policy.macro_calibration_status,
+                "macro_data_vintage_status": policy.macro_data_vintage_status,
                 "raw_scenario_multiplier": scenario_context["raw_risk_multiplier"],
                 "effective_scenario_multiplier": scenario_context["risk_multiplier"],
                 "raw_event_pressure": event_context["raw_event_pressure"],
@@ -193,6 +197,18 @@ def build_trade_decision(
                 ],
                 "risk_status": current_state.risk_status,
                 "risk_score": current_state.risk_score,
+                "risk_timing_state": current_state.risk_timing_state,
+                "risk_timing_multiplier": timing_multiplier,
+                "raw_risk_timing_multiplier": raw_timing_multiplier,
+                "risk_timing_sizing_authority": policy.risk_timing_sizing_authority,
+                "risk_timing_calibration_status": policy.risk_timing_calibration_status,
+                "risk_timing_break_count": len(current_state.risk_timing_breaks),
+                "risk_timing_breaks": _confirmation_breaks_text(
+                    current_state.risk_timing_breaks
+                ),
+                "risk_timing_recoveries": _confirmation_breaks_text(
+                    current_state.risk_timing_recoveries
+                ),
                 "one_month_risk_off_probability": scenario_context["risk_off_probability"],
                 "one_month_transition_probability": scenario_context["transition_probability"],
                 "one_month_fragile_upside_probability": scenario_context[
@@ -235,6 +251,8 @@ def build_trade_decision(
     attribution = _decision_attribution(
         base_weights=base_weights,
         risk_status=current_state.risk_status,
+        risk_timing_multiplier=timing_multiplier,
+        risk_timing_authority=policy.risk_timing_sizing_authority,
         scenario_context=scenario_context,
         event_context=event_context,
         macro_context=macro_context,
@@ -681,13 +699,18 @@ def _decision_sanity_context(
     event_context: dict[str, object],
     macro_context: dict[str, object],
 ) -> dict[str, object]:
-    confirmation_breaks = _market_confirmation_breaks(current_state)
+    stored_timing_breaks = tuple(getattr(current_state, "risk_timing_breaks", ()))
+    timing_state = str(getattr(current_state, "risk_timing_state", "legacy_unassessed"))
+    confirmation_breaks = (
+        stored_timing_breaks
+        if timing_state != "legacy_unassessed"
+        else _market_confirmation_breaks(current_state)
+    )
     break_count = len(confirmation_breaks)
-    risk_status = str(current_state.risk_status).lower()
     risk_off_probability = _as_float(scenario_context["risk_off_probability"])
     event_pressure = _as_float(event_context["event_pressure"])
     scenario_has_authority = _as_float(scenario_context.get("sizing_authority", 0.0)) > 0
-    left_tail_confirmed = risk_status in {"orange", "red"} or (
+    left_tail_confirmed = timing_state in {"confirmed_break", "severe_break"} or (
         scenario_has_authority and risk_off_probability >= 0.35
     )
     market_confirmed = break_count >= DEFAULT_EVENT_CONFIRMATION_REQUIRED_SIGNALS
@@ -852,6 +875,8 @@ def _decision_attribution(
     *,
     base_weights: pd.Series,
     risk_status: str,
+    risk_timing_multiplier: float | None = None,
+    risk_timing_authority: float = 1.0,
     scenario_context: dict[str, object],
     event_context: dict[str, object],
     macro_context: dict[str, object],
@@ -860,7 +885,11 @@ def _decision_attribution(
     defensive_ticker: str,
     policy: AllocationPolicyConfig,
 ) -> pd.DataFrame:
-    status_multiplier = _risk_status_multiplier(risk_status)
+    status_multiplier = (
+        float(risk_timing_multiplier)
+        if risk_timing_multiplier is not None and np.isfinite(risk_timing_multiplier)
+        else _risk_status_multiplier(risk_status)
+    )
     stage_multipliers = [
         ("base_market_strategy", 1.0),
         ("quantitative_risk_status", status_multiplier),
@@ -888,7 +917,7 @@ def _decision_attribution(
     ]
     authorities = {
         "base_market_strategy": 1.0,
-        "quantitative_risk_status": 1.0,
+        "quantitative_risk_status": risk_timing_authority,
         "scenario_probabilities": policy.scenario_sizing_authority,
         "news_event_pressure": policy.event_sizing_authority,
         "macro_quantitative": policy.macro_sizing_authority,
@@ -897,7 +926,11 @@ def _decision_attribution(
     }
     roles = {
         "base_market_strategy": "allocation_authoritative",
-        "quantitative_risk_status": "allocation_authoritative",
+        "quantitative_risk_status": (
+            "allocation_authoritative"
+            if risk_timing_authority > 0
+            else "research_only"
+        ),
         "scenario_probabilities": (
             "allocation_authoritative"
             if policy.scenario_sizing_authority > 0
@@ -1007,7 +1040,10 @@ def _decision_counterfactuals(
             )
         )
         combined_multiplier = min(
-            _risk_status_multiplier(current_state.risk_status),
+            _authority_adjusted_multiplier(
+                _risk_timing_multiplier(current_state),
+                policy.risk_timing_sizing_authority,
+            ),
             _as_float(scenario_context["risk_multiplier"]),
             variant_event_multiplier,
             _as_float(macro_context["risk_multiplier"]),
@@ -1358,8 +1394,10 @@ def _human_explanation(
         else ""
     )
     return (
-        f"Because risk status is {current_state.risk_status.upper()} "
-        f"({current_state.risk_score:.2f}){authority_clause}, {verb} {adjusted_position}. "
+        f"Price fragility is {current_state.risk_status.upper()} "
+        f"({current_state.risk_score:.2f}) and the timing gate is "
+        f"{current_state.risk_timing_state.replace('_', ' ')}{authority_clause}; "
+        f"the causal sizing layers imply {verb} {adjusted_position}. "
         f"Base systematic position is {base_position}.{research_clause} "
         f"Portfolio risk engine says: {portfolio_risk_evidence} "
         f"Macro inclusion tests say: {macro_evidence} "
@@ -1504,6 +1542,19 @@ def _risk_status_multiplier(risk_status: str) -> float:
         "orange": 0.65,
         "red": 0.40,
     }.get(risk_status, 0.85)
+
+
+def _risk_timing_multiplier(current_state: CurrentStateRun) -> float:
+    value = _as_float(getattr(current_state, "risk_timing_multiplier", np.nan))
+    if np.isfinite(value):
+        return float(np.clip(value, 0.0, 1.0))
+    return _risk_status_multiplier(current_state.risk_status)
+
+
+def _authority_adjusted_multiplier(raw_multiplier: float, authority: float) -> float:
+    bounded_raw = float(np.clip(raw_multiplier, 0.0, 1.0))
+    bounded_authority = float(np.clip(authority, 0.0, 1.0))
+    return float(1.0 - bounded_authority * (1.0 - bounded_raw))
 
 
 def _as_float(value: object) -> float:

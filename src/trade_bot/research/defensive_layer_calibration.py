@@ -15,10 +15,10 @@ from trade_bot.portfolio.risk import PortfolioRiskConfig, build_portfolio_risk
 from trade_bot.research.artifact_provenance import write_research_manifest
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.current_state import (
-    _risk_score,
     _risk_status,
     build_confirmation_matrix,
     build_market_health,
+    calculate_risk_score,
     momentum_state_table,
 )
 from trade_bot.research.defensive_judgement import (
@@ -28,6 +28,7 @@ from trade_bot.research.defensive_judgement import (
 )
 from trade_bot.research.future_scenarios import build_scenario_lattice
 from trade_bot.research.operating_history import _sample_history_dates
+from trade_bot.research.risk_timing import RiskTimingAssessment, assess_risk_timing
 from trade_bot.research.trade_decision import (
     _risk_status_multiplier,
     _scenario_adjusted_weights,
@@ -125,7 +126,10 @@ def run_defensive_layer_calibration(
         min_history_days=min_history_days,
     )
     state_rows: list[dict[str, Any]] = []
-    weight_states: dict[pd.Timestamp, tuple[pd.Series, pd.Series, pd.Series]] = {}
+    weight_states: dict[
+        pd.Timestamp,
+        tuple[pd.Series, pd.Series, pd.Series, pd.Series],
+    ] = {}
     policy = config.allocation_policy
     risk_config = PortfolioRiskConfig(
         defensive_ticker=defensive_ticker,
@@ -142,17 +146,23 @@ def run_defensive_layer_calibration(
             raw_base,
             defensive_ticker=defensive_ticker,
         )
-        risk_score, risk_status, lattice = _point_in_time_scenario_state(price_history)
+        risk_score, risk_status, lattice, timing = _point_in_time_scenario_state(price_history)
         scenario_context = _scenario_context(
             lattice,
             sizing_authority=policy.scenario_sizing_authority,
         )
-        status_multiplier = float(_risk_status_multiplier(risk_status))
+        legacy_status_multiplier = float(_risk_status_multiplier(risk_status))
+        status_multiplier = float(timing.multiplier)
         scenario_multiplier = float(scenario_context["risk_multiplier"])
         raw_scenario_multiplier = float(scenario_context["raw_risk_multiplier"])
         status_weights = _scenario_adjusted_weights(
             base_weights,
             risk_multiplier=status_multiplier,
+            defensive_ticker=defensive_ticker,
+        )
+        legacy_status_weights = _scenario_adjusted_weights(
+            base_weights,
+            risk_multiplier=legacy_status_multiplier,
             defensive_ticker=defensive_ticker,
         )
         quant_multiplier = min(status_multiplier, scenario_multiplier)
@@ -204,7 +214,13 @@ def run_defensive_layer_calibration(
                 "strategy": strategy_name,
                 "risk_score": risk_score,
                 "risk_status": risk_status,
+                "legacy_risk_status_multiplier": legacy_status_multiplier,
                 "risk_status_multiplier": status_multiplier,
+                "risk_timing_state": timing.state,
+                "risk_timing_break_count": len(timing.confirmation_breaks),
+                "risk_timing_breaks": ", ".join(timing.confirmation_breaks),
+                "risk_timing_recovery_count": len(timing.recovery_confirmations),
+                "risk_timing_recoveries": ", ".join(timing.recovery_confirmations),
                 "raw_scenario_multiplier": raw_scenario_multiplier,
                 "scenario_multiplier": scenario_multiplier,
                 "scenario_sizing_authority": policy.scenario_sizing_authority,
@@ -247,6 +263,7 @@ def run_defensive_layer_calibration(
             base_weights,
             scenario_weights,
             final_weights,
+            legacy_status_weights,
         )
 
     states = pd.DataFrame(state_rows).sort_values("origin_date").reset_index(drop=True)
@@ -288,6 +305,8 @@ def run_defensive_layer_calibration(
             "horizons": [horizon.__dict__ for horizon in horizons],
             "news_events_macro": "excluded",
             "scenario_sizing_authority": policy.scenario_sizing_authority,
+            "risk_timing_sizing_authority": policy.risk_timing_sizing_authority,
+            "risk_timing_calibration_status": policy.risk_timing_calibration_status,
             "scenario_budget_authority": policy.scenario_budget_authority,
             "scenario_weighted_stress_authority": policy.scenario_weighted_stress_authority,
             "scenario_portfolio_independence": (
@@ -360,7 +379,7 @@ def layer_flags(
 
 def _point_in_time_scenario_state(
     price_history: pd.DataFrame,
-) -> tuple[float, str, pd.DataFrame]:
+) -> tuple[float, str, pd.DataFrame, RiskTimingAssessment]:
     available = [column for column in DEFAULT_SCENARIO_PRICE_COLUMNS if column in price_history]
     # Every rolling indicator needs at most 131 observations. Extra rows preserve
     # bounded-forward-fill behavior around the left edge of the calculation window.
@@ -375,8 +394,9 @@ def _point_in_time_scenario_state(
             health.loc[ticker, "drawdown"] = np.nan
         elif not series.empty:
             health.loc[ticker, "drawdown"] = float(series.iloc[-1] / series.max() - 1.0)
-    risk_score = _risk_score(confirmation, health)
+    risk_score = calculate_risk_score(confirmation, health)
     risk_status = _risk_status(risk_score)
+    timing = assess_risk_timing(risk_score, confirmation, health)
     lattice, _drivers = build_scenario_lattice(
         confirmation,
         health,
@@ -384,7 +404,7 @@ def _point_in_time_scenario_state(
         risk_score,
         risk_status,
     )
-    return risk_score, risk_status, lattice
+    return risk_score, risk_status, lattice, timing
 
 
 def _defensive_weight(weights: pd.Series, defensive_ticker: str) -> float:
@@ -421,7 +441,10 @@ def _cohort_masks(states: pd.DataFrame) -> dict[str, pd.Series]:
 
 def _build_episode_outcomes(
     states: pd.DataFrame,
-    weight_states: dict[pd.Timestamp, tuple[pd.Series, pd.Series, pd.Series]],
+    weight_states: dict[
+        pd.Timestamp,
+        tuple[pd.Series, pd.Series, pd.Series, pd.Series],
+    ],
     prices: pd.DataFrame,
     *,
     horizons: tuple[DefensiveJudgementHorizon, ...],
@@ -442,7 +465,7 @@ def _build_episode_outcomes(
             price_position = position_by_date.get(origin)
             if price_position is None:
                 continue
-            base_weights, scenario_weights, final_weights = weight_states[origin]
+            base_weights, scenario_weights, final_weights, _legacy_weights = weight_states[origin]
             turnover = float(
                 final_weights.reindex(base_weights.index.union(final_weights.index), fill_value=0.0)
                 .sub(base_weights.reindex(base_weights.index.union(final_weights.index), fill_value=0.0))
@@ -696,7 +719,10 @@ def build_incremental_comparison(summary: pd.DataFrame) -> pd.DataFrame:
 
 def build_layer_policy_backtest(
     states: pd.DataFrame,
-    weight_states: dict[pd.Timestamp, tuple[pd.Series, pd.Series, pd.Series]],
+    weight_states: dict[
+        pd.Timestamp,
+        tuple[pd.Series, pd.Series, pd.Series, pd.Series],
+    ],
     prices: pd.DataFrame,
     *,
     transaction_cost_bps: float,
@@ -724,6 +750,7 @@ def build_layer_policy_backtest(
     )
     policies = {
         "base_weekly": lambda date: weight_states[date][0],
+        "legacy_risk_status_weekly": lambda date: weight_states[date][3],
         "quantitative_sizing_weekly": lambda date: weight_states[date][1],
         "full_layers_weekly": lambda date: weight_states[date][2],
         "current_configuration_overlay_only": lambda date: (
@@ -948,9 +975,15 @@ def _markdown_summary(
         f"- Point-in-time origins: {len(states):,} ({parameters['frequency']})",
         f"- Base layer: defensive weight >= {parameters['base_defensive_threshold']:.0%}",
         (
-            "- Quantitative sizing layer: risk-status plus any calibration-authorized "
+            "- Quantitative sizing layer: confirmation-timed risk state plus any calibration-authorized "
             "scenario clamp adds at least "
             f"{parameters['scenario_defensive_add_threshold']:.0%} defense"
+        ),
+        (
+            "- Risk-timing operating authority: "
+            f"{parameters['risk_timing_sizing_authority']:.0%} "
+            f"({parameters['risk_timing_calibration_status']}); the raw candidate is replayed "
+            "below for research but cannot size the live book."
         ),
         (
             "- Portfolio layer: stress constraints add at least "
@@ -974,7 +1007,7 @@ def _markdown_summary(
         (
             "With all scenario authorities at zero, scenario probabilities remain diagnostic "
             "and cannot create defense. The active three-layer agreement test is "
-            "base strategy defense plus price-derived risk status plus independent hard "
+            "base strategy defense plus confirmation-timed price state plus independent hard "
             "portfolio limits. These layers still share market-price inputs, so they are "
             "distinct causal pathways rather than statistically independent votes."
             if parameters["scenario_portfolio_independence"]

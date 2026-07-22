@@ -3,7 +3,11 @@ from __future__ import annotations
 import pandas as pd
 import pytest
 
-from trade_bot.backtest.engine import StaleHeldPositionError, run_backtest
+from trade_bot.backtest.engine import (
+    StaleHeldPositionError,
+    build_execution_causality_trace,
+    run_backtest,
+)
 from trade_bot.config import DrawdownControlConfig, ExecutionConfig
 
 
@@ -32,6 +36,28 @@ def test_backtest_shifts_weights_by_signal_lag() -> None:
     assert result.weights["SPY"].tolist() == [0.0, 1.0, 1.0]
     assert result.returns.tolist() == pytest.approx([0.0, 0.10, 0.10])
     assert round(result.equity.iloc[-1], 2) == 121.00
+
+
+def test_execution_causality_trace_exposes_close_boundary_assumption() -> None:
+    dates = pd.bdate_range("2024-01-01", periods=10)
+    prices = pd.DataFrame({"SPY": range(100, 110)}, index=dates, dtype=float)
+    targets = pd.DataFrame({"SPY": 1.0}, index=dates)
+
+    lag_one = build_execution_causality_trace(
+        prices,
+        targets,
+        ExecutionConfig(rebalance="W-WED", signal_lag_days=1),
+    )
+    lag_two = build_execution_causality_trace(
+        prices,
+        targets,
+        ExecutionConfig(rebalance="W-WED", signal_lag_days=2),
+    )
+
+    assert lag_one["boundary_fill_approximation"].all()
+    assert set(lag_one["causal_status"]) == {"close_boundary_approximation"}
+    assert not lag_two["boundary_fill_approximation"].any()
+    assert set(lag_two["causal_status"]) == {"strictly_after_feature_close"}
 
 
 def test_backtest_normalizes_overinvested_long_only_weights() -> None:

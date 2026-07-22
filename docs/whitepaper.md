@@ -188,17 +188,18 @@ validated driver.
 
 The operating decision now stores a sequential causal attribution. It begins
 with the base strategy, then records the marginal defensive percentage points
-from quantitative risk status, scenario probabilities, event/news pressure,
+from calibration-gated quantitative risk timing, scenario probabilities, event/news pressure,
 accepted macro signals, independent portfolio constraints, and the final
 governance guardrail. A layer with zero marginal effect is not described as a
 reason for the target. Permanent counterfactuals rerun the decision with news
 disabled, news visible but informational-only, and news sizing enabled as a
 research comparison.
 
-In the July 21 snapshot, the base strategy supplied 59.70% defense and yellow
-price-derived risk status added 4.03 percentage points, producing 63.73% final
-defense. Scenario probabilities, news/events, macro categories, portfolio hard
-constraints, and decision sanity each added zero. The news-disabled and
+After the execution and timing repairs, the July 21 cached-data snapshot starts
+and finishes at 60.02% native defense. Yellow price fragility is a diagnostic
+and adds zero because risk-timing authority is zero. Revised-history macro data
+also has zero sizing authority; scenario probabilities, news/events, portfolio
+hard constraints, and decision sanity add zero. The news-disabled and
 news-informational-only counterfactuals reproduced the same risk score, risk
 budget, scenario probabilities, weights, equity beta, and beta-adjusted S&P
 delta. This is direct evidence that the current recommendation is not the
@@ -353,6 +354,16 @@ signal lag, rebalance cadence, transaction costs, and portfolio compounding.
 This produces returns, CAGR, volatility, Sharpe, Sortino, max drawdown, Calmar,
 turnover, Ulcer Index, allocation history, and transaction behavior.
 
+The operating close-only convention now uses a two-row shift. A target using
+close `t` is modeled as filled at close `t+1` and begins earning the following
+close-to-close interval. The former one-row shift first labeled the position on
+`t+1` but earned the `t`-to-`t+1` return, which is an implicit boundary fill at
+the same close used by the signal. It remains visible only as a labeled research
+approximation. Under the clean lag-2 path, the configured primary produced
+20.67% CAGR / -25.80% maximum drawdown, and the native i111 challenger produced
+20.84% / -24.75%. The old 22.18% / -19.68% Wednesday figure is not an operating
+headline.
+
 The second layer is rolling-window and regime testing. The system evaluates
 performance across shorter windows such as 1 year, 3 years, and 5 years, as well
 as calendar-year and market-regime slices. This matters because a strategy that
@@ -433,48 +444,66 @@ The replacement-policy replay then retested 1,020 weekly origins with the live
 calibration gates applied. Scenario probabilities added exactly zero defense at
 every origin, as required by the zero-authority configuration. At the study's
 materiality thresholds, the current state is not a three-layer agreement: the
-native strategy is 59.70% defensive, price-derived risk status adds 4.03
-percentage points (below the five-point layer threshold), and hard portfolio
+native strategy is defensive, price-derived timing adds zero operating defense,
+and hard portfolio
 constraints add zero. No historical origin had native defense above 55%, a
 quantitative sizing addition above five points, and an additional hard-
 portfolio clamp above one point simultaneously.
 
-The closest active comparison, native defense plus quantitative risk-status
-sizing, was directionally better than native defense alone but not decisive. At
-one month it produced 50 episodes, a 50% correct-defense rate, and a 28% false-
-alarm rate, versus 40 native-only episodes at 48% and 35%. At three months the
-rates were 50% and 34%, versus 38% and 36%. By contrast, quantitative sizing
-plus a portfolio clamp without native defense had weaker one-month
-discrimination: 38% correct defense and 42% false alarms across 69 episodes.
-Raising the base-defense threshold from 55% to 60% did not reverse that result.
-Base-plus-quantitative episodes then improved correct-defense rates versus
-base-only by 6.8 points at one month and 12.5 points at three months, while
-false alarms fell by 17.4 and 11.9 points. This sensitivity supports the
-direction of the interaction, but it does not make the non-random cohorts
-independent or prove an optimal threshold.
+The closest research comparison, native defense plus confirmation-timed sizing,
+is directionally interesting but far too small for authority. At one month it
+produced 10 episode starts, a 40% correct-defense rate, and a 20% false-alarm
+rate, versus 48 native-only starts at 38% and 44%. At three months its rates
+were 50% and 30%, versus 34% and 38%. By contrast, quantitative timing plus a
+portfolio clamp without native defense had weaker one-month discrimination than
+timing alone: 41% beneficial-under-rule and 39% costly-false-positive across 44
+starts, versus 53% and 26% across 19. The non-random cohorts and small confirmed-timing sample
+do not establish an optimal threshold.
 
-The non-overlapping weekly replay makes the opportunity cost explicit. Native
-strategy sizing produced a 20.6% CAGR and -24.8% maximum drawdown. Quantitative
-sizing reduced drawdown by 5.1 percentage points but reduced CAGR by 5.5 points;
-adding the hard portfolio layer reduced drawdown by 8.2 points but reduced CAGR
-by 8.1 points. A separate sparse pre-break overlay replay reduced median CAGR
-from 15.0% to 12.2% without improving median maximum drawdown. These are
+The refreshed non-overlapping weekly replay makes the opportunity cost explicit.
+Native sizing produced an 18.74% CAGR and -26.21% maximum drawdown. Legacy
+risk-status sizing improved drawdown by 8.45 percentage points but reduced CAGR
+by 5.19 points. The confirmation-timed candidate reduced CAGR by 0.62 points and
+improved maximum drawdown by only 0.85 points; adding hard portfolio limits improved
+drawdown by 7.59 points but reduced CAGR by 5.05 points. The candidate therefore
+remains visible with zero allocation authority. A separate sparse pre-break
+overlay replay reduced median CAGR from 14.29% to 12.69% without improving the
+-22.48% median maximum drawdown. These are
 retrospective, current-universe results rather than prospective proof, but they
 show that the cost of optionality has not historically been small enough to
 treat aggressive overlay defense as a free improvement.
 
+The 1:1 historical snapshot replacement also changed the causal diagnosis of
+early hard defense. Quantitative timing now adds zero. Absolute portfolio-risk
+constraints account for 81.8% of Early Watch hard-defense snapshots and 69.5%
+of Long Lead hard-defense snapshots; the native strategy accounts for most of
+the remainder. Those constraints are utility/risk-tolerance controls rather
+than forecasts, so they remain intact here. Their calibration is the next
+separate risk-engine question.
+
 A narrower replay that applied the final overlay only during the current
 material layer classification (`base_only` at the 55%/5%/1% thresholds) was
-nearly neutral: CAGR was 20.5% versus 20.6% for the native strategy and maximum
-drawdown was unchanged at -24.8%. That supports treating today's extra four
-points of price-status defense as a modest risk-budget adjustment, not as
-independent confirmation of a high-conviction break call.
+nearly neutral: it reduced CAGR by 0.06 percentage points and improved maximum
+drawdown by 0.27 points. That trade-off is too small and retrospective to
+justify sizing authority. Under the repaired policy,
+the timing candidate is research-only rather than a modest discretionary
+adjustment. This prevents its warning state from being treated as independent
+confirmation of a high-conviction break call.
 
 The separate strategy-native audit reaches a similarly measured conclusion. At
-the focus strategy's 65% defensive threshold, one-month episodes were 47.7%
-correct defense, 29.5% false alarms, and 22.7% mixed. At three months they were
-43.2%, 29.5%, and 27.3%. Native defense has useful but imperfect historical
+the focus strategy's 65% defensive threshold, one-month episodes were 45.2%
+beneficial under the stated rule, 33.3% costly false positives, and 21.4% mixed.
+At three months they were 42.9%, 31.0%, and 26.2%. Native defense has useful but imperfect historical
 discrimination; it should not be described as a crash prediction.
+
+The contribution-aware catastrophic-tail read uses 1,000 fixed-seed,
+21-session block-bootstrap paths over 15 years, starting at $220,000 with
+$70,000 annual contributions. Drawdown is calculated on a flow-neutral return
+index so contributions cannot hide losses. For the configured primary, the
+historical resample produced a 50.3% frequency of drawdown beyond 25%, a 21.3%
+frequency beyond 30%, and a 98.1% chance of exceeding the wealth generated by a
+deterministic 10% return path. These are modern-universe historical resamples,
+not forecasts; their value is comparing policy utility under one frozen method.
 
 The ninth layer is leadership-dependence diagnostics. This exists because the
 strongest candidates can be excellent for reasons that are too concentrated.
@@ -540,12 +569,13 @@ inspected instead of hidden.
 Research governance is also a test layer. New manifests record the declared
 trial roster and run a fail-closed point-in-time universe audit covering
 historical membership, holding-date eligibility, delisting returns, and source
-metadata. The consolidated 2026-07-21 ledger indexes 537 manifested completed
-trial rows across 11 study manifests, with explicit rosters recovered for all
-11. It also reports that all 537 rows still lack verified point-in-time universe
-evidence. That is a blocker, not a warning label. The ledger cannot reconstruct
+metadata. The consolidated 2026-07-21 ledger indexes 540 manifested completed
+trial rows across 14 manifests and 11 distinct studies. Three manifests lack an
+explicit candidate roster, 119 artifact directories have no manifest, and all
+540 trial rows still lack verified point-in-time universe evidence. That is a
+promotion blocker, not a warning label. The ledger cannot reconstruct
 interrupted or unmanifested attempts, so complete historical trial-count proof
-also remains unfinished.
+also remains unfinished and retrospective promotion is disabled.
 
 Simulation validation is now treated as its own test family rather than a visual
 nice-to-have. The rolling-origin simulation test chooses historical origin dates,
@@ -960,16 +990,16 @@ better.
 
 The July 21, 2026 refresh covered 256 transcript-backed videos through the same
 day. An audit found and fixed a material comparison bug: the old mapping treated
-the 90% risk-budget capacity as if it were total risk exposure, causing a 63.73%
-defensive Trade Bot portfolio to be labeled risk-on. The canonical mapping now
+the 90% risk-budget capacity as if it were total risk exposure, causing the
+then-current 63.73% defensive Trade Bot portfolio to be labeled risk-on. The canonical mapping now
 uses final defensive allocation. On that basis, the newest 42 Macro transcript
 is `constructive_but_fragile` (-0.15) and Trade Bot is `cautious` (-0.27), an
 aligned 0.13-point gap. The qualitative agreement is strongest on extreme
 dispersion, leverage/concentration, AI-capex fragility, and credit as the
 confirmation channel. The horizon read is not identical: 42 Macro still calls
 the present regime risk-on and expects crowded positioning to make a short
-squeeze the likely first move, whereas Trade Bot currently holds only 36.27%
-risk exposure. Because Trade Bot's news, event, and scenario allocation
+squeeze the likely first move, whereas that contemporaneous Trade Bot snapshot
+held only 36.27% risk exposure. Because Trade Bot's news, event, and scenario allocation
 authorities are zero, this sizing is not a reflection of the 42 Macro content,
 although both processes observe some of the same market-price evidence.
 

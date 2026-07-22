@@ -5,10 +5,10 @@ from pathlib import Path
 import pandas as pd
 
 from trade_bot.research.current_state import (
-    _risk_score,
     _risk_status,
     build_confirmation_matrix,
     build_market_health,
+    calculate_risk_score,
     momentum_state_table,
 )
 from trade_bot.research.future_scenarios import build_scenario_lattice
@@ -88,7 +88,7 @@ def reconstruct_scenario_history_from_prices(
         momentum_state = momentum_state_table(as_of_prices)
         confirmation_matrix = build_confirmation_matrix(as_of_prices, momentum_state)
         market_health = build_market_health(as_of_prices, momentum_state)
-        risk_score = _risk_score(confirmation_matrix, market_health)
+        risk_score = calculate_risk_score(confirmation_matrix, market_health)
         risk_status = _risk_status(risk_score)
         scenario_lattice, _scenario_drivers = build_scenario_lattice(
             confirmation_matrix,

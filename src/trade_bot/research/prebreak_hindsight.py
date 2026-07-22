@@ -431,12 +431,27 @@ def snapshot_signal_row(
         "risk_status": str(getattr(current_state, "risk_status", "")),
         "risk_score": _safe_float(getattr(current_state, "risk_score", np.nan)),
         "risk_status_score": _risk_status_score(str(getattr(current_state, "risk_status", ""))),
+        "risk_timing_state": str(getattr(current_state, "risk_timing_state", "unassessed")),
+        "risk_timing_raw_multiplier": _safe_float(
+            getattr(current_state, "risk_timing_multiplier", np.nan)
+        ),
+        "risk_timing_break_count": len(getattr(current_state, "risk_timing_breaks", ())),
+        "risk_timing_breaks": ", ".join(getattr(current_state, "risk_timing_breaks", ())),
+        "risk_timing_recovery_count": len(
+            getattr(current_state, "risk_timing_recoveries", ())
+        ),
     }
     trade_summary = _first_row(
         getattr(getattr(run, "trade_decision", None), "summary", pd.DataFrame())
     )
     row["recommended_action"] = str(trade_summary.get("recommended_action", ""))
     row["risk_budget_multiplier"] = _safe_float(trade_summary.get("risk_budget_multiplier", np.nan))
+    row["risk_timing_effective_multiplier"] = _safe_float(
+        trade_summary.get("risk_timing_multiplier", np.nan)
+    )
+    row["risk_timing_sizing_authority"] = _safe_float(
+        trade_summary.get("risk_timing_sizing_authority", np.nan)
+    )
     row["pre_sanity_risk_budget_multiplier"] = _safe_float(
         trade_summary.get("pre_sanity_risk_budget_multiplier", np.nan)
     )

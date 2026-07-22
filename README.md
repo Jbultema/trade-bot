@@ -111,6 +111,7 @@ These are the canonical entry points for users and maintainers. Start with the f
 | --- | --- | --- |
 | [System Whitepaper](docs/whitepaper.md) | Users, reviewers, and technical readers | Semi-technical overview of what Trade Bot is, how the components work, what the research has found, and how monitoring makes the system operational. |
 | [AI Review Whitepaper](docs/ai_review_whitepaper.md) | Independent LLM reviewers and technical auditors | Machine-oriented specification of causal authority, formulas, evidence, provenance, failure modes, and open review questions. |
+| [V2.2 External Audit Response](docs/v22_external_audit_response.md) | Owners and independent reviewers | Defect dispositions, corrected execution evidence, rebuilt history, tail-utility results, and explicit unresolved blockers. |
 | [Setup Guide](docs/setup_guide.md) | New users and maintainers | Step-by-step installation, local environment setup, dashboard launch, Git basics, and troubleshooting. |
 | [User Guide](docs/user_guide.md) | Operators and reviewers | Full workflow guide for daily monitoring, strategy research, paper tracking, live logging, taxable review, and periodic review. |
 | [FAQ](docs/faq.md) | Everyone | Comprehensive answers to common questions about safety, workflow, metrics, risk, data, ML, taxes, and governance. |
@@ -236,8 +237,10 @@ drawdown cost of applying the sparse historical risk budgets to the candidate
 strategy shelf.
 
 The active balanced-asymmetric policy deliberately separates visibility from
-authority. The base market strategy and quantitative risk status can size the
-book. Independent beta, expected-shortfall, and catastrophic-stress limits
+authority. The base market strategy can size the book. Quantitative risk status
+and the confirmation-timing candidate are visible but currently have zero sizing
+authority after failing the historical promotion gate; see
+`docs/risk_timing_research.md`. Independent beta, expected-shortfall, and catastrophic-stress limits
 remain hard. Scenario probabilities, scenario-conditioned portfolio tightening,
 scenario-weighted stress, and news/events currently have zero sizing authority
 because the July 2026 walk-forward calibration did not justify it. The Today page
@@ -652,7 +655,7 @@ The intended end state is 1-3 operational systems, not a dashboard full of live 
 | Deep | Walk-forward testing, regime holdouts, left-tail windows, overfit diagnostics, and forward paper monitoring. |
 | Operational | Promote only systems that can be explained, valued, monitored, and acted on with human latency. |
 
-Core reference portfolio policies are included so simple allocations stay visible beside tactical systems. Broader policy references remain inspectable in the research archive. Active-trading probes use `configs/active_trading.yaml`, which applies daily rebalancing checks, next-day signal lag, and higher transaction-cost assumptions.
+Core reference portfolio policies are included so simple allocations stay visible beside tactical systems. Broader policy references remain inspectable in the research archive. Active-trading probes use `configs/active_trading.yaml`, which applies daily rebalancing checks, a close-safe two-row signal shift, and higher transaction-cost assumptions. With close-only data, the former one-row shift is retained only as a labeled boundary-fill research approximation.
 
 ```bash
 poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration 41

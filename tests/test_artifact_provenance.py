@@ -39,6 +39,9 @@ def test_research_manifest_captures_config_code_and_price_identity(tmp_path) -> 
     assert manifest["price_input"]["market_date"] == "2024-01-03"
     assert manifest["price_input"]["frame_sha256"]
     assert manifest["code"]["source_tree_sha256"]
+    assert manifest["code"]["git_tree_sha"]
+    assert manifest["code"]["poetry_lock_sha256"]
+    assert manifest["code"]["pyproject_sha256"]
     assert manifest["artifacts"] == ["metrics.csv", "summary.md"]
     integrity = {row["path"]: row for row in manifest["artifact_integrity"]}
     assert integrity["summary.md"]["size_bytes"] == len(b"summary\n")

@@ -1,9 +1,16 @@
 from __future__ import annotations
 
+from dataclasses import replace
+
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult
-from trade_bot.research.current_state import build_current_state, momentum_state_table
+from trade_bot.research.current_state import (
+    build_current_state,
+    calculate_risk_score,
+    momentum_state_table,
+    refresh_risk_timing,
+)
 
 
 def test_momentum_state_table_classifies_positive_and_negative_trends() -> None:
@@ -82,3 +89,50 @@ def test_build_current_state_produces_alerts_and_scenarios() -> None:
     assert sorted(state.scenario_lattice["horizon"].unique()) == ["1m", "1w", "3m", "6m"]
     horizon_probability = state.scenario_lattice.groupby("horizon")["probability"].sum()
     assert horizon_probability.round(6).eq(1.0).all()
+
+    legacy_state = replace(
+        state,
+        risk_timing_state="legacy_unassessed",
+        risk_timing_multiplier=float("nan"),
+        risk_timing_breaks=(),
+        risk_timing_recoveries=(),
+        risk_timing_evidence=(),
+    )
+    refreshed = refresh_risk_timing(legacy_state)
+
+    assert refreshed.risk_timing_state == state.risk_timing_state
+    assert refreshed.risk_timing_multiplier == state.risk_timing_multiplier
+    assert refreshed.risk_timing_breaks == state.risk_timing_breaks
+    assert refreshed.risk_timing_recoveries == state.risk_timing_recoveries
+    pd.testing.assert_frame_equal(refreshed.risk_timing_evidence, state.risk_timing_evidence)
+
+
+def test_risk_score_orientation_is_monotone_toward_more_fragility() -> None:
+    confirmation = pd.DataFrame(
+        {"score": [1.0, 0.0, -1.0]},
+        index=["breadth", "credit", "trend"],
+    )
+    health = pd.DataFrame(
+        {
+            "drawdown": [-0.02, -0.03, -0.01, float("nan")],
+            "momentum_state_label": ["bullish", "bullish", "bullish", "bearish"],
+        },
+        index=["SPY", "QQQ", "HYG", "VIXY"],
+    )
+    baseline = calculate_risk_score(confirmation, health)
+
+    bearish_confirmation = confirmation.copy()
+    bearish_confirmation.loc["breadth", "score"] = -1.0
+    assert calculate_risk_score(bearish_confirmation, health) >= baseline
+
+    perturbations = []
+    for ticker, column, value in (
+        ("SPY", "drawdown", -0.09),
+        ("QQQ", "drawdown", -0.11),
+        ("HYG", "momentum_state_label", "bearish"),
+        ("VIXY", "momentum_state_label", "bullish"),
+    ):
+        stressed = health.copy()
+        stressed.loc[ticker, column] = value
+        perturbations.append(calculate_risk_score(confirmation, stressed))
+    assert all(score >= baseline for score in perturbations)

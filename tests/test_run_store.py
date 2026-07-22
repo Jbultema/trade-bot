@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 import os
 from pathlib import Path
 
@@ -67,6 +68,10 @@ def test_run_store_saves_loads_and_lists_snapshots(tmp_path: Path) -> None:
     assert loaded_run.current_state.market_date == "2026-06-17"
     assert snapshots.iloc[0]["run_id"] == manifest.run_id
     assert Path(manifest.artifact_path).exists()
+    provenance = json.loads(loaded_manifest.provenance_json)
+    assert provenance["source_tree_sha256"]
+    assert provenance["poetry_lock_sha256"]
+    assert provenance["price_input"]["frame_sha256"]
 
 
 def test_run_store_tracks_snapshot_jobs(tmp_path: Path) -> None:
@@ -128,6 +133,37 @@ def test_run_store_migrates_legacy_snapshot_jobs_schema(tmp_path: Path) -> None:
     assert "process_id" in store.list_jobs().columns
     assert migrated is not None
     assert migrated.process_id == 0
+
+
+def test_run_store_migrates_legacy_snapshot_provenance_schema(tmp_path: Path) -> None:
+    db_path = tmp_path / "trade_bot.duckdb"
+    connection = duckdb.connect(str(db_path))
+    try:
+        connection.execute(
+            """
+            CREATE TABLE run_snapshots (
+                run_id VARCHAR PRIMARY KEY, created_at_utc VARCHAR, status VARCHAR,
+                artifact_path VARCHAR, schema_version INTEGER, config_path VARCHAR,
+                events_path VARCHAR, macro_path VARCHAR, news_path VARCHAR,
+                config_hash VARCHAR, events_hash VARCHAR, macro_hash VARCHAR,
+                news_hash VARCHAR, combined_config_hash VARCHAR, refresh_data BOOLEAN,
+                refresh_macro BOOLEAN, refresh_news BOOLEAN, market_date VARCHAR,
+                risk_status VARCHAR, recommended_action VARCHAR,
+                risk_budget_multiplier DOUBLE, price_rows BIGINT, price_columns BIGINT,
+                macro_columns BIGINT, strategy_count BIGINT, error_message VARCHAR
+            )
+            """
+        )
+    finally:
+        connection.close()
+
+    store = RunStore(
+        db_path,
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    assert "provenance_json" in store.list_snapshots().columns
 
 
 def test_run_store_prunes_snapshot_artifacts_after_dry_run(

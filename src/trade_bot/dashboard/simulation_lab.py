@@ -1485,6 +1485,32 @@ def _render_strategy_simulations(
         _format_percent(forward_summary.get("severe_drawdown_probability")),
     )
 
+    st.caption(
+        "Catastrophic-tail utility from the contribution-aware historical block bootstrap; "
+        "these are resampled-path frequencies, not crash forecasts."
+    )
+    tail_cols = st.columns(4)
+    _helped_metric(
+        tail_cols[0],
+        "P(DD > 10%)",
+        _format_percent(bootstrap_summary.get("drawdown_over_10_probability")),
+    )
+    _helped_metric(
+        tail_cols[1],
+        "P(DD > 20%)",
+        _format_percent(bootstrap_summary.get("drawdown_over_20_probability")),
+    )
+    _helped_metric(
+        tail_cols[2],
+        "P(DD > 30%)",
+        _format_percent(bootstrap_summary.get("drawdown_over_30_probability")),
+    )
+    _helped_metric(
+        tail_cols[3],
+        "Avg DD If >20%",
+        _format_percent(bootstrap_summary.get("expected_drawdown_if_over_20")),
+    )
+
     st.info(
         _escape_markdown_dollars(
             _simulation_plain_english_read(

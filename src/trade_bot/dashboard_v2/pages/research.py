@@ -268,6 +268,10 @@ def _render_candidate_artifact_read(strategy_name: str) -> None:
     selection = pbo.get("selection", pd.DataFrame())
     stats = pbo.get("stats", pd.DataFrame())
     with st.expander("PBO / overfit artifact read", expanded=False):
+        st.caption(
+            "PBO applies only to the declared candidate shelf in the persisted study. It does "
+            "not correct for abandoned families or the full adaptive research history."
+        )
         if selection.empty and stats.empty:
             st.info("No PBO artifacts found. Run `poetry run trade-bot audit-backtest-pbo`.")
             return
@@ -329,6 +333,10 @@ def _render_validation_artifacts() -> None:
     i111 = i111_evidence_frames()
     if not pbo["summary"].empty:
         render_section_header("PBO Summary")
+        st.caption(
+            "Within-shelf selection-risk diagnostic only. Consult the governance trial ledger "
+            "before interpreting this as research-wide overfit evidence."
+        )
         _render_metric_dataframe(_display_metrics(pbo["summary"]))
     if not pbo["selection"].empty:
         render_section_header("PBO Selections")
@@ -1551,12 +1559,12 @@ def _render_defensive_posture_bridge(defensive_audit: dict[str, pd.DataFrame]) -
                 "Historical quality label for similar defensive episodes.",
             ),
             (
-                "Correct Defense",
+                "Beneficial Under Rule",
                 _fmt_pct(score_row.get("defensive_correct_rate")),
-                "Share of audited defensive episodes that were followed by enough drawdown to justify defense.",
+                "Share where the benchmark underperformed cash or crossed the declared drawdown threshold; not crash-prediction accuracy.",
             ),
             (
-                "False Alarm",
+                "Costly False Positive",
                 _fmt_pct(score_row.get("defensive_false_alarm_rate")),
                 "Share of audited defensive episodes that looked more like missed upside.",
             ),
@@ -1680,9 +1688,15 @@ def _render_prebreak_margin_experiment(
         "Can We Shrink The Margin?",
         help_text=(
             "Research-only audit of whether hard defense could be delayed while preserving "
-            "late-stage drawdown coverage. This uses hindsight event dates, so treat it as a "
-            "candidate policy screen rather than a live rule."
+            "late-stage drawdown coverage. Every stage and gate is measured relative to a "
+            "break date known in hindsight, so this is a policy-hypothesis screen—not a live "
+            "countdown or allocation rule."
         ),
+    )
+    render_callout(
+        "How to read this: before confirmation, blue below green means Trade Bot carried less "
+        "risk capacity than the hypothetical stage floor; after confirmation, blue above green "
+        "means it carried more. Green is a research target, not an observed optimal allocation."
     )
     if not selected_mesh.empty:
         mesh = selected_mesh.copy()
@@ -1706,20 +1720,24 @@ def _render_prebreak_margin_experiment(
         render_card_grid(
             [
                 (
-                    "Best Gate",
+                    "In-Sample Gate",
                     _days_before_label(best.get("trigger_days_before_break")),
-                    "Lowest missed severe-label share, then highest candidate risk-budget lift.",
+                    "Best tested gate for this already-known historical event: lowest missed "
+                    "severe-label share, then highest capacity lift. Do not use it as a live "
+                    "countdown.",
                     _late_trigger_tone(best.get("mesh_read")),
                 ),
                 (
-                    "Lead Cut",
+                    "Lead Removed",
                     _days_before_label(best.get("hard_defense_lead_cut_days")),
-                    "How many days of hard-defense lead time this gate would remove.",
+                    "How many calendar days of the event's observed early hard-defense lead time "
+                    "the hypothetical gate would remove.",
                 ),
                 (
-                    "Missed Severe",
+                    "Severe Missed",
                     _fmt_pct(best.get("missed_severe_label_share_if_gated")),
-                    "Share of severe hindsight labels before the gate that would be ignored.",
+                    "Share of this event's severe three-month drawdown labels occurring before "
+                    "the gate. Zero is in-sample coverage, not a guarantee for a new event.",
                     (
                         "critical"
                         if pd.to_numeric(
@@ -1731,9 +1749,11 @@ def _render_prebreak_margin_experiment(
                     ),
                 ),
                 (
-                    "Budget Lift",
-                    _fmt_pct(best.get("mean_candidate_risk_budget_lift")),
-                    "Average extra risk budget allowed before the hard-defense gate.",
+                    "Capacity Lift",
+                    _fmt_pp(best.get("mean_candidate_risk_budget_lift")),
+                    "Average additional risk-budget capacity allowed before the gate, measured "
+                    "in percentage points. This is not an estimated return improvement or a "
+                    "portfolio weight.",
                     (
                         "success"
                         if pd.to_numeric(
@@ -1746,16 +1766,25 @@ def _render_prebreak_margin_experiment(
                 ),
             ]
         )
+        st.caption(_late_trigger_interpretation(best))
     if not selected_stages.empty:
         render_chart(
             _prebreak_staged_risk_figure(selected_stages),
             title="Actual Risk Budget Vs Staged Target",
             help_text=(
-                "Compares the bot's median risk budget by event stage against a staged policy "
-                "target: long-lead 100%, early watch 75%, warning 60%, confirmed pre-break 35%, "
-                "break/unwind 20%."
+                "Blue is the bot's median risk-budget capacity, not its actual risk-asset weight. "
+                "Green is a hypothetical hindsight stage floor: long-lead 100%, early watch 75%, "
+                "warning 60%, confirmed pre-break 35%, and break/unwind 20%. Red is the share of "
+                "snapshots classified hard-defensive. Orange marks early hard-defense snapshots "
+                "with positive subsequent upside and no severe three-month drawdown label."
             ),
             key=f"dashboard_v2_prebreak_staged_margin_{selected_crisis}",
+        )
+        st.caption(
+            "Stage windows use calendar days from the known break: Long Lead >120d; Early Watch "
+            "60–120d; Warning 46–59d; Confirmed Pre-Break 15–45d; Break / Unwind 0–14d; "
+            "Post-Break after the event. Use the shape to diagnose timing, then validate any "
+            "candidate rule across other crises and walk-forward data."
         )
         stage_columns = [
             column
@@ -2317,6 +2346,21 @@ def _days_before_label(value: object) -> str:
     if float(parsed) < 0:
         return f"{abs(int(parsed))}d after"
     return f"{int(parsed)}d before"
+
+
+def _late_trigger_interpretation(row: pd.Series) -> str:
+    gate = _days_before_label(row.get("trigger_days_before_break"))
+    lead_removed = _days_before_label(row.get("hard_defense_lead_cut_days"))
+    missed = _fmt_pct(row.get("missed_severe_label_share_if_gated"))
+    lift = _fmt_pp(row.get("mean_candidate_risk_budget_lift"))
+    drawdown = _fmt_pct(row.get("median_forward_drawdown_when_lifted"))
+    return (
+        f"Selected-event hindsight read: a gate {gate} would remove {lead_removed} of early "
+        f"hard-defense lead, restore {lift} of average risk-budget capacity, and place {missed} "
+        f"of this event's severe labels before the gate. The median three-month forward maximum "
+        f"drawdown where capacity would be restored was {drawdown}, so results near the severe "
+        "threshold remain economically meaningful."
+    )
 
 
 def _phase_winner_figure(frame: pd.DataFrame) -> go.Figure:
@@ -3060,6 +3104,16 @@ def _fmt_pct(value: object) -> str:
     if pd.isna(numeric):
         return "n/a"
     return f"{numeric:.2%}"
+
+
+def _fmt_pp(value: object) -> str:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return "n/a"
+    if pd.isna(numeric):
+        return "n/a"
+    return f"{numeric * 100:.2f} pp"
 
 
 def _fmt_float(value: object) -> str:

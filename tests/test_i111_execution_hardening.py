@@ -2,11 +2,14 @@ from __future__ import annotations
 
 import pandas as pd
 
+from trade_bot.backtest.engine import BacktestResult
 from trade_bot.config import ExecutionConfig
 from trade_bot.research.i111_execution_hardening import (
     _execution_profiles,
     _mechanism_summary,
     _summary_markdown,
+    _weekday_ensemble_result,
+    _weekday_robustness,
     default_execution_hardening_specs,
 )
 
@@ -29,6 +32,65 @@ def test_default_specs_include_risk_sleeve_and_path_controls() -> None:
     assert specs["risk_sleeve_ai50_extreme"].updates["risk_repair_ai_cap_basis"] == "risk_sleeve"
     assert specs["weight_buffer08"].updates["risk_repair_min_rebalance_change"] == 0.08
     assert specs["hold10_step30"].updates["risk_repair_min_hold_days"] == 10
+
+
+def test_weekday_robustness_applies_frozen_drawdown_and_lag_gates() -> None:
+    metrics = pd.DataFrame(
+        [
+            {
+                "mechanism": "native_reference",
+                "execution": execution,
+                "cagr": cagr,
+                "max_drawdown": drawdown,
+            }
+            for execution, cagr, drawdown in (
+                ("monday_lag1", 0.19, -0.30),
+                ("tuesday_lag1", 0.195, -0.29),
+                ("wednesday_lag1", 0.22, -0.20),
+                ("thursday_lag1", 0.20, -0.27),
+                ("friday_lag1", 0.21, -0.25),
+                ("wednesday_lag2", 0.208, -0.252),
+            )
+        ]
+    )
+
+    row = _weekday_robustness(metrics).iloc[0]
+
+    assert bool(row["weekday_cagr_gate_pass"])
+    assert not bool(row["weekday_drawdown_gate_pass"])
+    assert not bool(row["conservative_lag_gate_pass"])
+    assert not bool(row["promotion_gate_pass"])
+
+
+def test_weekday_ensemble_averages_fixed_implementation_returns() -> None:
+    index = pd.bdate_range("2025-01-01", periods=3)
+    results = {}
+    for offset, name in enumerate(
+        [
+            "monday_lag1",
+            "tuesday_lag1",
+            "wednesday_lag1",
+            "thursday_lag1",
+            "friday_lag1",
+        ]
+    ):
+        returns = pd.Series([0.0, 0.01 + offset * 0.001, -0.01], index=index)
+        weights = pd.DataFrame({"SPY": 1.0}, index=index)
+        results[name] = BacktestResult(
+            name=name,
+            equity=100.0 * (1.0 + returns).cumprod(),
+            returns=returns,
+            gross_returns=returns,
+            weights=weights,
+            target_weights=weights,
+            turnover=pd.Series(0.1, index=index),
+            transaction_costs=pd.Series(0.0, index=index),
+        )
+
+    ensemble = _weekday_ensemble_result(results, 100.0)
+
+    assert ensemble.returns.iloc[1] == 0.012
+    assert ensemble.weights["SPY"].eq(1.0).all()
 
 
 def test_mechanism_summary_requires_edge_preservation_and_tail_improvement() -> None:

@@ -49,6 +49,24 @@ def test_calibration_gated_policy_separates_research_from_allocation_authority()
     )
 
 
+def test_omitted_allocation_policy_fails_closed() -> None:
+    index = pd.bdate_range("2026-06-01", periods=5)
+    weights = pd.DataFrame({"QQQ": 0.5, "IWM": 0.5}, index=index)
+    decision = build_trade_decision(
+        primary_result=_backtest_result("primary", index, weights),
+        current_state=_current_state(),
+        event_risk=_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_empty_signal_inclusion(),
+    )
+
+    summary = decision.summary.iloc[0]
+    assert summary["scenario_sizing_authority"] == 0.0
+    assert summary["event_sizing_authority"] == 0.0
+    assert summary["effective_scenario_multiplier"] == 1.0
+    assert summary["effective_event_pressure"] == 0.0
+
+
 def test_trade_decision_reduces_risk_when_scenarios_and_events_are_adverse() -> None:
     index = pd.bdate_range("2026-06-01", periods=5)
     weights = pd.DataFrame({"QQQ": 0.5, "IWM": 0.5}, index=index)
@@ -68,6 +86,7 @@ def test_trade_decision_reduces_risk_when_scenarios_and_events_are_adverse() -> 
         event_risk=_event_risk(),
         news_monitor=_news_monitor(),
         signal_inclusion=_signal_inclusion(),
+        allocation_policy=_scenario_event_authoritative_policy(),
     )
 
     summary = decision.summary.iloc[0]
@@ -77,7 +96,7 @@ def test_trade_decision_reduces_risk_when_scenarios_and_events_are_adverse() -> 
     assert summary["risk_budget_multiplier"] < 1.0
     assert summary["posture_calibration_status"] == "defense_justified"
     assert bil_row["scenario_adjusted_weight"] > 0.0
-    assert "Because risk status is YELLOW" in summary["human_explanation"]
+    assert "Price fragility is YELLOW" in summary["human_explanation"]
     assert "Credit-led risk-off" in summary["human_explanation"]
     assert "Posture calibration says" in summary["human_explanation"]
     assert "posture_calibration" in set(decision.evidence["evidence_type"])
@@ -105,6 +124,7 @@ def test_trade_decision_uses_portfolio_risk_engine_when_prices_are_available() -
         news_monitor=_news_monitor(),
         signal_inclusion=_signal_inclusion(),
         prices=prices,
+        allocation_policy=_scenario_event_authoritative_policy(),
     )
 
     summary = decision.summary.iloc[0]
@@ -191,6 +211,7 @@ def test_trade_decision_flags_possible_opportunity_cost_when_constructive() -> N
         event_risk=_empty_event_risk(),
         news_monitor=_news_monitor(),
         signal_inclusion=_empty_signal_inclusion(),
+        allocation_policy=_scenario_event_authoritative_policy(),
     )
 
     summary = decision.summary.iloc[0]
@@ -219,6 +240,7 @@ def test_trade_decision_caps_event_only_derisk_without_market_confirmation() -> 
         news_monitor=_news_monitor(),
         signal_inclusion=_empty_signal_inclusion(),
         prices=_risk_prices(index),
+        allocation_policy=_scenario_event_authoritative_policy(),
     )
 
     summary = decision.summary.iloc[0]
@@ -250,6 +272,7 @@ def test_macro_pressure_alone_does_not_bypass_event_only_derisk_cap() -> None:
         news_monitor=_news_monitor(),
         signal_inclusion=_macro_pressure_signal_inclusion(),
         prices=_risk_prices(index),
+        allocation_policy=_scenario_event_authoritative_policy(),
     )
 
     summary = decision.summary.iloc[0]
@@ -279,6 +302,7 @@ def test_trade_decision_allows_larger_derisk_when_market_confirmation_breaks() -
         news_monitor=_news_monitor(),
         signal_inclusion=_empty_signal_inclusion(),
         prices=_risk_prices(index),
+        allocation_policy=_scenario_event_authoritative_policy(),
     )
 
     summary = decision.summary.iloc[0]
@@ -303,6 +327,7 @@ def test_trade_decision_treats_uninvested_vol_target_residual_as_defensive() -> 
         event_risk=_empty_event_risk(),
         news_monitor=_news_monitor(),
         signal_inclusion=_empty_signal_inclusion(),
+        allocation_policy=_scenario_event_authoritative_policy(),
     )
 
     summary = decision.summary.iloc[0]
@@ -313,6 +338,66 @@ def test_trade_decision_treats_uninvested_vol_target_residual_as_defensive() -> 
     assert bil_row["current_weight"] == 0.70
     assert decision.position_plan["current_weight"].sum() == 1.0
     assert summary["current_risk_asset_weight"] == pytest.approx(0.30)
+
+
+def test_uncalibrated_risk_timing_is_visible_but_cannot_size() -> None:
+    index = pd.bdate_range("2025-01-01", periods=180)
+    weights = pd.DataFrame({"QQQ": 0.8, "SPY": 0.2}, index=index)
+    result = _backtest_result("primary", index, weights)
+    current_state = replace(
+        _current_state(),
+        risk_timing_state="severe_break",
+        risk_timing_multiplier=0.40,
+        risk_timing_breaks=("credit", "volatility", "trend"),
+    )
+
+    decision = build_trade_decision(
+        primary_result=result,
+        current_state=current_state,
+        event_risk=_empty_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_empty_signal_inclusion(),
+        allocation_policy=AllocationPolicyConfig(),
+    )
+
+    summary = decision.summary.iloc[0]
+    timing_row = decision.attribution[
+        decision.attribution["layer"].eq("quantitative_risk_status")
+    ].iloc[0]
+    assert summary["raw_risk_timing_multiplier"] == 0.40
+    assert summary["risk_timing_multiplier"] == 1.0
+    assert summary["risk_timing_sizing_authority"] == 0.0
+    assert timing_row["authority"] == 0.0
+    assert timing_row["marginal_defensive_add_pp"] == 0.0
+
+
+def test_validated_risk_timing_authority_can_size() -> None:
+    index = pd.bdate_range("2025-01-01", periods=180)
+    weights = pd.DataFrame({"QQQ": 0.8, "SPY": 0.2}, index=index)
+    result = _backtest_result("primary", index, weights)
+    current_state = replace(
+        _current_state(),
+        risk_timing_state="severe_break",
+        risk_timing_multiplier=0.40,
+        risk_timing_breaks=("credit", "volatility", "trend"),
+    )
+    policy = AllocationPolicyConfig(
+        risk_timing_sizing_authority=1.0,
+        risk_timing_calibration_status="validated",
+    )
+
+    decision = build_trade_decision(
+        primary_result=result,
+        current_state=current_state,
+        event_risk=_empty_event_risk(),
+        news_monitor=_news_monitor(),
+        signal_inclusion=_empty_signal_inclusion(),
+        allocation_policy=policy,
+    )
+
+    summary = decision.summary.iloc[0]
+    assert summary["risk_timing_multiplier"] == 0.40
+    assert summary["risk_budget_multiplier"] == pytest.approx(0.40)
 
 
 
@@ -326,6 +411,21 @@ def _backtest_result(name: str, index: pd.DatetimeIndex, weights: pd.DataFrame) 
         target_weights=weights,
         turnover=pd.Series(0.0, index=index),
         transaction_costs=pd.Series(0.0, index=index),
+    )
+
+
+def _scenario_event_authoritative_policy() -> AllocationPolicyConfig:
+    """Explicit legacy-authority fixture for tests that exercise those layers."""
+
+    return AllocationPolicyConfig(
+        scenario_sizing_authority=1.0,
+        scenario_budget_authority=1.0,
+        scenario_weighted_stress_authority=1.0,
+        event_sizing_authority=1.0,
+        macro_sizing_authority=1.0,
+        macro_calibration_status="validated",
+        macro_data_vintage_status="point_in_time",
+        scenario_calibration_status="validated",
     )
 
 

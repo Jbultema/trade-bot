@@ -1,5 +1,7 @@
 from __future__ import annotations
 
+import json
+
 import pandas as pd
 import pytest
 
@@ -74,6 +76,11 @@ def test_cached_load_fetches_columns_that_are_present_but_empty(tmp_path, monkey
     assert requested == ["QQQ"]
     assert prices.loc[index[-1], "QQQ"] == 101.0
     assert prices.loc[index[-1], "SPY"] == 402.0
+    metadata = json.loads((tmp_path / "yahoo_prices.metadata.json").read_text(encoding="utf-8"))
+    assert metadata["vendor"] == "Yahoo Finance"
+    assert metadata["fetched_tickers"] == ["QQQ"]
+    assert metadata["adjusted"] is True
+    assert metadata["known_limitations"]
 
 
 def test_stale_complete_cache_is_refreshed_before_use(tmp_path, monkeypatch) -> None:

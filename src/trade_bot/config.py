@@ -100,7 +100,26 @@ class AllocationPolicyConfig(BaseModel):
     scenario_budget_authority: float = Field(default=0.0, ge=0, le=1)
     scenario_weighted_stress_authority: float = Field(default=0.0, ge=0, le=1)
     event_sizing_authority: float = Field(default=0.0, ge=0, le=1)
-    macro_sizing_authority: float = Field(default=1.0, ge=0, le=1)
+    macro_sizing_authority: float = Field(default=0.0, ge=0, le=1)
+    macro_calibration_status: Literal[
+        "not_evaluated",
+        "insufficient",
+        "provisional",
+        "validated",
+    ] = "insufficient"
+    macro_data_vintage_status: Literal[
+        "revised_history",
+        "point_in_time",
+        "first_release",
+    ] = "revised_history"
+    risk_timing_sizing_authority: float = Field(default=0.0, ge=0, le=1)
+    risk_timing_calibration_status: Literal[
+        "not_evaluated",
+        "insufficient",
+        "provisional",
+        "validated",
+    ] = "insufficient"
+    risk_timing_policy_version: str = "confirmed_v1"
     scenario_calibration_horizon: Literal["1w", "1m", "3m"] = "1m"
     scenario_calibration_status: Literal[
         "not_evaluated",
@@ -140,6 +159,31 @@ class AllocationPolicyConfig(BaseModel):
         ) > 0:
             raise ValueError(
                 "Scenario allocation authority requires provisional or validated calibration."
+            )
+        return self
+
+    @model_validator(mode="after")
+    def enforce_risk_timing_calibration_gate(self) -> AllocationPolicyConfig:
+        if (
+            self.risk_timing_calibration_status in {"not_evaluated", "insufficient"}
+            and self.risk_timing_sizing_authority > 0
+        ):
+            raise ValueError(
+                "Risk-timing allocation authority requires provisional or validated calibration."
+            )
+        return self
+
+    @model_validator(mode="after")
+    def enforce_macro_vintage_and_calibration_gate(self) -> AllocationPolicyConfig:
+        if self.macro_sizing_authority <= 0:
+            return self
+        if self.macro_calibration_status in {"not_evaluated", "insufficient"}:
+            raise ValueError(
+                "Macro allocation authority requires provisional or validated calibration."
+            )
+        if self.macro_data_vintage_status == "revised_history":
+            raise ValueError(
+                "Macro allocation authority requires point-in-time or first-release data."
             )
         return self
 

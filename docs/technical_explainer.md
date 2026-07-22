@@ -119,7 +119,7 @@ execution:
   initial_capital: 100000.0
   transaction_cost_bps: 5.0
   rebalance: "W-WED"
-  signal_lag_days: 1
+  signal_lag_days: 2
 ```
 
 This matters because the system is not allowed to look ahead or assume same-day

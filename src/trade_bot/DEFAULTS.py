@@ -149,7 +149,11 @@ DEFAULT_FRED_GRAPH_URL = "https://fred.stlouisfed.org/graph/fredgraph.csv"
 DEFAULT_INITIAL_CAPITAL = 100000.0
 DEFAULT_TRANSACTION_COST_BPS = 5.0
 DEFAULT_REBALANCE = "W-WED"
-DEFAULT_SIGNAL_LAG_DAYS = 1
+# Close-derived targets cannot be filled at the same close that supplied the
+# final feature observation.  With close-to-close returns, a two-row shift is
+# the first conservative executable interval: observe close t, establish the
+# modeled position at close t+1, and earn returns beginning after that close.
+DEFAULT_SIGNAL_LAG_DAYS = 2
 
 # Owner-directed investable exclusions. These are hard local constraints used
 # for data loading, generated candidates, and paper/live recommendation paths.
@@ -193,7 +197,7 @@ DEFAULT_DECISION_TIMELINE_MAX_EVENTS = 35
 DEFAULT_OUTCOME_OBJECTIVE = "growth_constrained"
 DEFAULT_OUTCOME_HORIZON_YEARS = 15
 DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE = 220_000.0
-DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION = 4_000.0
+DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION = 70_000.0
 DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT = -0.22
 DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT = -0.30
 DEFAULT_OUTCOME_FLOOR_CAGR = 0.05

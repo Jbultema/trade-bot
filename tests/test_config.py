@@ -29,6 +29,30 @@ def test_scenario_authority_fails_closed_without_calibration() -> None:
         AllocationPolicyConfig(scenario_sizing_authority=0.1)
 
 
+def test_risk_timing_authority_fails_closed_without_calibration() -> None:
+    with raises(ValueError, match="Risk-timing allocation authority"):
+        AllocationPolicyConfig(risk_timing_sizing_authority=0.1)
+
+
+def test_macro_authority_fails_closed_on_revised_history() -> None:
+    with raises(ValueError, match="point-in-time or first-release"):
+        AllocationPolicyConfig(
+            macro_sizing_authority=1.0,
+            macro_calibration_status="validated",
+            macro_data_vintage_status="revised_history",
+        )
+
+
+def test_validated_point_in_time_macro_authority_is_allowed() -> None:
+    policy = AllocationPolicyConfig(
+        macro_sizing_authority=1.0,
+        macro_calibration_status="validated",
+        macro_data_vintage_status="point_in_time",
+    )
+
+    assert policy.macro_sizing_authority == 1.0
+
+
 def test_baseline_execution_config_matches_default_cadence() -> None:
     config = load_config(DEFAULT_CONFIG_PATH)
 

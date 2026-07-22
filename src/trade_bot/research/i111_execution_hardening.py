@@ -6,7 +6,11 @@ from typing import Any
 
 import pandas as pd
 
-from trade_bot.backtest.engine import BacktestResult, run_backtest
+from trade_bot.backtest.engine import (
+    BacktestResult,
+    build_execution_causality_trace,
+    run_backtest,
+)
 from trade_bot.backtest.metrics import calculate_metrics
 from trade_bot.config import (
     BotConfig,
@@ -41,6 +45,8 @@ class I111ExecutionHardeningResult:
     component_decomposition: pd.DataFrame
     action_path_diagnostics: pd.DataFrame
     calendar_year_comparison: pd.DataFrame
+    weekday_robustness: pd.DataFrame
+    execution_causality_trace: pd.DataFrame
     summary: str
 
 
@@ -96,13 +102,35 @@ def run_i111_execution_hardening(
         execution_name: results[("native_reference", execution_name)]
         for execution_name, _ in executions
     }
+    weekday_ensemble = _weekday_ensemble_result(base_results, config.execution.initial_capital)
     action_path_diagnostics = _action_path_diagnostics(prices, base_results)
     calendar_year_comparison = _calendar_year_comparison(base_results)
+    weekday_robustness = _weekday_robustness(
+        execution_variant_metrics,
+        ensemble_metric=_metric_row(
+            weekday_ensemble,
+            mechanism="native_reference",
+            description="Equal-weight ensemble of five fixed weekday implementations.",
+            execution_name="weekday_ensemble_lag1",
+        ),
+    )
+    base_targets = build_strategy_weights(prices, base)
+    execution_causality_trace = pd.concat(
+        [
+            build_execution_causality_trace(prices, base_targets, execution).assign(
+                execution=execution_name
+            )
+            for execution_name, execution in executions
+            if execution_name in {"wednesday_lag1", "wednesday_lag2"}
+        ],
+        ignore_index=True,
+    )
     summary = _summary_markdown(
         execution_variant_metrics,
         mechanism_summary,
         component_decomposition,
         action_path_diagnostics,
+        weekday_robustness=weekday_robustness,
     )
 
     output = Path(output_dir)
@@ -113,6 +141,8 @@ def run_i111_execution_hardening(
         "component_decomposition": component_decomposition,
         "action_path_diagnostics": action_path_diagnostics,
         "calendar_year_comparison": calendar_year_comparison,
+        "weekday_robustness": weekday_robustness,
+        "execution_causality_trace": execution_causality_trace,
     }
     for name, frame in frames.items():
         frame.to_csv(output / f"{name}.csv", index=False)
@@ -137,6 +167,8 @@ def run_i111_execution_hardening(
         component_decomposition=component_decomposition,
         action_path_diagnostics=action_path_diagnostics,
         calendar_year_comparison=calendar_year_comparison,
+        weekday_robustness=weekday_robustness,
+        execution_causality_trace=execution_causality_trace,
         summary=summary,
     )
 
@@ -442,6 +474,117 @@ def _calendar_year_comparison(results: dict[str, BacktestResult]) -> pd.DataFram
     return pd.DataFrame(rows)
 
 
+def _weekday_robustness(
+    metrics: pd.DataFrame,
+    *,
+    ensemble_metric: dict[str, object] | None = None,
+) -> pd.DataFrame:
+    """Apply the predeclared weekday and conservative-lag promotion gates."""
+
+    reference = metrics[metrics["mechanism"].eq("native_reference")].set_index("execution")
+    weekdays = [
+        "monday_lag1",
+        "tuesday_lag1",
+        "wednesday_lag1",
+        "thursday_lag1",
+        "friday_lag1",
+    ]
+    required = [*weekdays, "wednesday_lag2"]
+    if any(name not in reference.index for name in required):
+        return pd.DataFrame()
+    weekday_rows = reference.loc[weekdays]
+    wednesday = reference.loc["wednesday_lag1"]
+    lag_two = reference.loc["wednesday_lag2"]
+    median_cagr = float(weekday_rows["cagr"].median())
+    median_drawdown = float(weekday_rows["max_drawdown"].median())
+    wednesday_cagr_premium = (
+        float(wednesday["cagr"]) / median_cagr - 1.0 if median_cagr else float("nan")
+    )
+    wednesday_drawdown_advantage = float(wednesday["max_drawdown"]) - median_drawdown
+    cagr_gate = wednesday_cagr_premium <= 0.25
+    drawdown_gate = wednesday_drawdown_advantage <= 0.05
+    lag_two_drawdown_change = float(lag_two["max_drawdown"]) - float(
+        wednesday["max_drawdown"]
+    )
+    conservative_lag_gate = lag_two_drawdown_change >= -0.05
+    ensemble = ensemble_metric or {}
+    return pd.DataFrame(
+        [
+            {
+                "weekday_median_cagr": median_cagr,
+                "weekday_worst_cagr": float(weekday_rows["cagr"].min()),
+                "weekday_median_max_drawdown": median_drawdown,
+                "weekday_worst_max_drawdown": float(weekday_rows["max_drawdown"].min()),
+                "wednesday_cagr": float(wednesday["cagr"]),
+                "wednesday_max_drawdown": float(wednesday["max_drawdown"]),
+                "wednesday_cagr_premium_vs_median": wednesday_cagr_premium,
+                "wednesday_drawdown_advantage_vs_median": wednesday_drawdown_advantage,
+                "weekday_cagr_gate_pass": cagr_gate,
+                "weekday_drawdown_gate_pass": drawdown_gate,
+                "lag2_cagr": float(lag_two["cagr"]),
+                "lag2_max_drawdown": float(lag_two["max_drawdown"]),
+                "lag2_cagr_change": float(lag_two["cagr"]) - float(wednesday["cagr"]),
+                "lag2_drawdown_change": lag_two_drawdown_change,
+                "conservative_lag_gate_pass": conservative_lag_gate,
+                "weekday_ensemble_cagr": float(ensemble.get("cagr", float("nan"))),
+                "weekday_ensemble_max_drawdown": float(
+                    ensemble.get("max_drawdown", float("nan"))
+                ),
+                "weekday_ensemble_turnover": float(
+                    ensemble.get("average_turnover", float("nan"))
+                ),
+                "promotion_gate_pass": bool(cagr_gate and drawdown_gate and conservative_lag_gate),
+            }
+        ]
+    )
+
+
+def _weekday_ensemble_result(
+    results: dict[str, BacktestResult],
+    initial_capital: float,
+) -> BacktestResult:
+    names = [
+        "monday_lag1",
+        "tuesday_lag1",
+        "wednesday_lag1",
+        "thursday_lag1",
+        "friday_lag1",
+    ]
+    selected = [results[name] for name in names]
+    returns = pd.concat([result.returns for result in selected], axis=1).mean(axis=1)
+    gross_returns = pd.concat([result.gross_returns for result in selected], axis=1).mean(axis=1)
+    turnover = pd.concat([result.turnover for result in selected], axis=1).mean(axis=1)
+    transaction_costs = pd.concat(
+        [result.transaction_costs for result in selected], axis=1
+    ).mean(axis=1)
+    all_columns = sorted(set().union(*(result.weights.columns for result in selected)))
+    weights = sum(
+        (
+            result.weights.reindex(columns=all_columns, fill_value=0.0)
+            for result in selected
+        ),
+        start=pd.DataFrame(0.0, index=returns.index, columns=all_columns),
+    ) / float(len(selected))
+    targets = sum(
+        (
+            result.target_weights.reindex(columns=all_columns, fill_value=0.0)
+            for result in selected
+        ),
+        start=pd.DataFrame(0.0, index=returns.index, columns=all_columns),
+    ) / float(len(selected))
+    equity = float(initial_capital) * (1.0 + returns).cumprod()
+    return BacktestResult(
+        name="weekday_ensemble_lag1",
+        equity=equity,
+        returns=returns,
+        gross_returns=gross_returns,
+        weights=weights,
+        target_weights=targets,
+        turnover=turnover,
+        transaction_costs=transaction_costs,
+    )
+
+
 def _period_return(returns: pd.Series, start: str, end: str) -> float:
     index = pd.to_datetime(returns.index)
     sliced = returns.loc[(index >= pd.Timestamp(start)) & (index <= pd.Timestamp(end))]
@@ -453,6 +596,8 @@ def _summary_markdown(
     mechanisms: pd.DataFrame,
     decomposition: pd.DataFrame,
     diagnostics: pd.DataFrame,
+    *,
+    weekday_robustness: pd.DataFrame | None = None,
 ) -> str:
     reference = metrics[metrics["mechanism"].eq("native_reference")].set_index("execution")
     wed = reference.loc["wednesday_lag1"]
@@ -478,6 +623,44 @@ def _summary_markdown(
             "screen. This is not automatic promotion; each requires prospective paper monitoring."
         )
     )
+    robustness_lines = [
+        "## Frozen Weekday And Causal-Lag Gate",
+        "",
+    ]
+    if weekday_robustness is None or weekday_robustness.empty:
+        robustness_lines.append("- Weekday robustness gate was not available for this run.")
+    else:
+        robust = weekday_robustness.iloc[0]
+        robustness_lines.extend(
+            [
+                (
+                    f"- Five-weekday median: {_pct(robust['weekday_median_cagr'])} CAGR / "
+                    f"{_pct(robust['weekday_median_max_drawdown'])} max drawdown; worst weekday "
+                    f"{_pct(robust['weekday_worst_cagr'])} / "
+                    f"{_pct(robust['weekday_worst_max_drawdown'])}."
+                ),
+                (
+                    f"- Wednesday CAGR premium versus median: "
+                    f"{_pct(robust['wednesday_cagr_premium_vs_median'])}; drawdown advantage: "
+                    f"{float(robust['wednesday_drawdown_advantage_vs_median']):.2%}."
+                ),
+                (
+                    f"- Conservative lag-2 path: {_pct(robust['lag2_cagr'])} CAGR / "
+                    f"{_pct(robust['lag2_max_drawdown'])} max drawdown."
+                ),
+                (
+                    f"- Equal-weight weekday ensemble: "
+                    f"{_pct(robust['weekday_ensemble_cagr'])} CAGR / "
+                    f"{_pct(robust['weekday_ensemble_max_drawdown'])} max drawdown."
+                ),
+                (
+                    "- Frozen promotion gate: "
+                    f"`{'pass' if bool(robust['promotion_gate_pass']) else 'fail'}` "
+                    "(Wednesday premium <=25%, drawdown advantage <=5 pp, and lag-2 drawdown "
+                    "degradation <=5 pp)."
+                ),
+            ]
+        )
     lines = [
         "# I111 V2.2 Execution Hardening",
         "",
@@ -494,6 +677,8 @@ def _summary_markdown(
             f"- In 2022, Wednesday returned {_pct(diagnostic_2022.loc['wednesday_lag1', 'return_2022'])}; "
             f"daily returned {_pct(diagnostic_2022.loc['daily_lag1', 'return_2022'])}."
         ),
+        "",
+        *robustness_lines,
         "",
         "## Mechanism Attribution",
         "",

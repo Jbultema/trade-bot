@@ -25,6 +25,7 @@ class PerformanceMetrics:
     worst_day: float
     average_turnover: float
     total_transaction_cost: float
+    historical_evidence_basis: str
 
 
 def calculate_metrics(
@@ -33,6 +34,8 @@ def calculate_metrics(
     equity: pd.Series,
     turnover: pd.Series,
     transaction_costs: pd.Series,
+    *,
+    historical_evidence_basis: str = "modern_universe_replay",
 ) -> PerformanceMetrics:
     clean_returns = returns.dropna()
     clean_equity = equity.loc[clean_returns.index]
@@ -74,6 +77,7 @@ def calculate_metrics(
         worst_day=float(clean_returns.min()),
         average_turnover=float(turnover.reindex(clean_returns.index).mean()),
         total_transaction_cost=float(transaction_costs.reindex(clean_returns.index).sum()),
+        historical_evidence_basis=historical_evidence_basis,
     )
 
 

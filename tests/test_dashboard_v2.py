@@ -517,6 +517,25 @@ def test_prebreak_event_selector_renders_below_selected_behavior_heading(monkeyp
     ]
 
 
+def test_late_trigger_interpretation_explains_hindsight_and_percentage_points() -> None:
+    read = research._late_trigger_interpretation(
+        pd.Series(
+            {
+                "trigger_days_before_break": 45,
+                "hard_defense_lead_cut_days": 41,
+                "missed_severe_label_share_if_gated": 0.0,
+                "mean_candidate_risk_budget_lift": 0.267262,
+                "median_forward_drawdown_when_lifted": -0.094432,
+            }
+        )
+    )
+
+    assert "Selected-event hindsight" in read
+    assert "26.73 pp" in read
+    assert "9.44%" in read
+    assert research._fmt_pp(0.267262) == "26.73 pp"
+
+
 def test_cycle_phase_frontier_figure_highlights_selected_slice() -> None:
     frame = pd.DataFrame(
         {

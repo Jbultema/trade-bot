@@ -85,9 +85,9 @@ def render_today_page(runtime: DashboardRuntime) -> None:
         [
             ("Market Date", current_state.market_date),
             (
-                "Risk",
+                "Fragility",
                 str(current_state.risk_status).upper(),
-                None,
+                "Broad price-derived fragility diagnostic; it does not size the portfolio unless the timing layer has calibrated authority.",
                 risk_status_tone(current_state.risk_status),
             ),
             (
@@ -95,6 +95,17 @@ def render_today_page(runtime: DashboardRuntime) -> None:
                 f"{float(current_state.risk_score):.2f}",
                 None,
                 risk_score_tone(current_state.risk_score),
+            ),
+            (
+                "Timing Gate",
+                str(getattr(current_state, "risk_timing_state", "unassessed")).replace(
+                    "_", " "
+                ).title(),
+                f"Effective sizing authority: {_fmt_pct(summary.get('risk_timing_sizing_authority'))}. Meaningful de-risking requires independent credit, volatility, breadth, and trend confirmation.",
+                "warning"
+                if str(getattr(current_state, "risk_timing_state", ""))
+                in {"warning", "confirmed_break", "severe_break"}
+                else "neutral",
             ),
             (
                 "Open Tickets",
@@ -109,9 +120,9 @@ def render_today_page(runtime: DashboardRuntime) -> None:
                 risk_budget_tone(summary.get("risk_budget_multiplier")),
             ),
             (
-                "1M Risk-Off",
+                "Raw 1M Risk-Off Score",
                 _fmt_pct(summary.get("one_month_risk_off_probability")),
-                None,
+                f"Uncalibrated model output; allocation authority {_fmt_pct(summary.get('scenario_sizing_authority'))}. Do not interpret as a literal forecast probability.",
                 probability_pressure_tone(
                     summary.get("one_month_risk_off_probability"),
                     warning_at=0.15,
@@ -224,7 +235,7 @@ def _render_decision_context(
     current_state = run.current_state
     allocation_cards = [
         (
-            "Risk State",
+            "Fragility Diagnostic",
             f"{str(current_state.risk_status).upper()} ({_fmt_float(current_state.risk_score)})",
             current_state.risk_summary,
             risk_status_tone(current_state.risk_status),
@@ -244,9 +255,18 @@ def _render_decision_context(
     ]
     research_cards = [
         (
-            "1M Scenario Mix",
+            "Risk Timing",
+            str(summary.get("risk_timing_state", "unassessed")).replace("_", " ").title(),
+            f"Raw multiplier {_fmt_pct(summary.get('raw_risk_timing_multiplier'))}; effective multiplier {_fmt_pct(summary.get('risk_timing_multiplier'))} at {_fmt_pct(summary.get('risk_timing_sizing_authority'))} authority. Calibration: {summary.get('risk_timing_calibration_status', 'unknown')}.",
+            "warning"
+            if str(summary.get("risk_timing_state", ""))
+            in {"warning", "confirmed_break", "severe_break"}
+            else "neutral",
+        ),
+        (
+            "Raw 1M Scenario Scores",
             _scenario_probability_summary(run.trade_decision.scenario_links),
-            f"Research-only at {_fmt_pct(summary.get('scenario_sizing_authority'))} sizing authority; calibration status: {summary.get('scenario_calibration_status', 'unknown')}.",
+            f"Raw model estimates, not calibrated forecast probabilities. Research-only at {_fmt_pct(summary.get('scenario_sizing_authority'))} sizing authority; calibration status: {summary.get('scenario_calibration_status', 'unknown')}.",
             _scenario_mix_tone(summary),
         ),
         (
@@ -260,7 +280,7 @@ def _render_decision_context(
         (
             "Macro Inclusion",
             _macro_inclusion_summary(run.signal_inclusion.summary),
-            f"Macro pressure in the current decision summary: {_fmt_pct(summary.get('macro_pressure'))}.",
+            f"Effective macro pressure {_fmt_pct(summary.get('macro_pressure'))} at {_fmt_pct(summary.get('macro_sizing_authority'))} authority. Calibration: {summary.get('macro_calibration_status', 'unknown')}; vintage: {summary.get('macro_data_vintage_status', 'unknown')}.",
             probability_pressure_tone(
                 summary.get("macro_pressure"), warning_at=0.04, critical_at=0.12
             ),
@@ -364,7 +384,7 @@ def _render_cost_of_defense() -> None:
             (
                 f"{str(row['horizon']).upper()} layered-defense history",
                 f"Median return regret {float(row['median_regret_vs_base']):.1%}; drawdown improvement {float(row['drawdown_improvement_p50']):.1%}",
-                f"{int(row['episode_starts'])} non-overlapping episodes; correct defense {float(row['correct_defense_rate']):.0%}, costly false positive {float(row['false_alarm_rate']):.0%}.",
+                f"{int(row['episode_starts'])} non-overlapping episodes; defense beneficial under the stated rule {float(row['correct_defense_rate']):.0%}, costly false positive {float(row['false_alarm_rate']):.0%}.",
                 "warning",
             )
         )
@@ -374,7 +394,7 @@ def _render_cost_of_defense() -> None:
         + "</div>",
         unsafe_allow_html=True,
     )
-    st.caption("Retrospective, small-sample evidence; overlapping weekly observations are not counted as independent episodes.")
+    st.caption("Retrospective, small-sample evidence. 'Beneficial' means benchmark underperformed cash or crossed the declared drawdown threshold; it is not a crash-prediction accuracy score. Overlapping weekly observations are not counted as independent episodes.")
 
 
 def _render_recommendation_changes(summary: dict[str, object]) -> None:

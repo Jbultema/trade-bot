@@ -17,6 +17,7 @@ POINT_IN_TIME_UNIVERSE_COLUMNS = (
     "delisting_return_included",
     "delisting_return_source",
 )
+RETROSPECTIVE_ADAPTATION_LIMIT = 25
 
 
 def audit_point_in_time_universe(
@@ -139,9 +140,22 @@ def build_research_trial_ledger(report_root: str | Path) -> tuple[pd.DataFrame, 
             ).hexdigest()
             rows.append(
                 {
+                    "experiment_id": trial_id,
                     "trial_id": trial_id,
                     "study": study,
                     "candidate": str(candidate),
+                    "parent_experiment_id": str(
+                        parameter_map.get("parent_experiment_id", "") or ""
+                    ),
+                    "hypothesis": str(parameter_map.get("hypothesis", "") or ""),
+                    "primary_metric": str(parameter_map.get("primary_metric", "") or ""),
+                    "result": str(parameter_map.get("result", "") or ""),
+                    "decision": str(parameter_map.get("decision", "") or ""),
+                    "decision_reason": str(parameter_map.get("decision_reason", "") or ""),
+                    "universe_declaration": _compact_declaration(
+                        parameter_map.get("universe", parameter_map.get("tickers", ""))
+                    ),
+                    "evaluation_period": _evaluation_period(parameter_map),
                     "trial_status": "completed_manifested",
                     "roster_source": roster_source,
                     "generated_at_utc": str(manifest.get("generated_at_utc", "")),
@@ -177,6 +191,22 @@ def build_research_trial_ledger(report_root: str | Path) -> tuple[pd.DataFrame, 
                 "roster_source": roster_source,
             }
         )
+    manifested_directories = {
+        Path(str(row.get("manifest_path", ""))).parent.resolve()
+        for row in coverage_rows
+        if str(row.get("manifest_path", ""))
+    } if coverage_rows else set()
+    for artifact_dir in _unmanifested_artifact_directories(root, manifested_directories):
+        coverage_rows.append(
+            {
+                "manifest_path": "",
+                "study": str(artifact_dir.relative_to(root)),
+                "status": "artifact_directory_without_manifest",
+                "declared_trial_count": 0,
+                "ledger_trial_count": 0,
+                "roster_source": "unavailable",
+            }
+        )
     ledger = pd.DataFrame(rows).drop_duplicates("trial_id") if rows else pd.DataFrame()
     coverage = pd.DataFrame(coverage_rows)
     return ledger, coverage
@@ -195,19 +225,44 @@ def write_research_trial_ledger(
     summary_path = output / "summary.md"
     ledger.to_csv(ledger_path, index=False)
     coverage.to_csv(coverage_path, index=False)
+    manifested_coverage = (
+        coverage[coverage["manifest_path"].fillna("").astype(str).ne("")]
+        if not coverage.empty
+        else coverage
+    )
     missing_rosters = (
-        int(coverage["status"].ne("declared_roster_indexed").sum()) if not coverage.empty else 0
+        int(manifested_coverage["status"].ne("declared_roster_indexed").sum())
+        if not manifested_coverage.empty
+        else 0
     )
     legacy_universe = (
         int(ledger["point_in_time_universe_status"].ne("verified").sum()) if not ledger.empty else 0
+    )
+    distinct_studies = int(ledger["study"].nunique()) if not ledger.empty else 0
+    distinct_configs = int(ledger["config_sha256"].nunique()) if not ledger.empty else 0
+    unmanifested = (
+        int(coverage["status"].eq("artifact_directory_without_manifest").sum())
+        if not coverage.empty
+        else 0
+    )
+    prospective_required = bool(
+        len(ledger) >= RETROSPECTIVE_ADAPTATION_LIMIT or missing_rosters or unmanifested
     )
     lines = [
         "# Research Trial And Universe Governance",
         "",
         f"- Manifested completed trial rows indexed: {len(ledger)}.",
-        f"- Study manifests inspected: {len(coverage)}.",
+        f"- Study manifests inspected: {len(manifested_coverage)}.",
         f"- Manifests without an explicit candidate roster: {missing_rosters}.",
         f"- Trial rows without verified point-in-time universe evidence: {legacy_universe}.",
+        f"- Distinct manifested studies: {distinct_studies}.",
+        f"- Distinct manifested config identities: {distinct_configs}.",
+        f"- Artifact directories without a manifest: {unmanifested}.",
+        (
+            "- Retrospective promotion status: `prospective_evidence_required`."
+            if prospective_required
+            else "- Retrospective promotion status: `eligible_for_human_review`."
+        ),
         "",
         (
             "This ledger indexes persisted completed trials. It does not invent interrupted or "
@@ -217,6 +272,34 @@ def write_research_trial_ledger(
     ]
     summary_path.write_text("\n".join(lines), encoding="utf-8")
     return ledger_path, coverage_path, summary_path
+
+
+def _unmanifested_artifact_directories(
+    root: Path,
+    manifested_directories: set[Path],
+) -> list[Path]:
+    directories: list[Path] = []
+    if not root.exists():
+        return directories
+    for directory in sorted(path for path in root.rglob("*") if path.is_dir()):
+        if directory.resolve() in manifested_directories:
+            continue
+        has_research_artifact = any(directory.glob("*.csv")) or any(directory.glob("summary.md"))
+        if has_research_artifact:
+            directories.append(directory)
+    return directories
+
+
+def _compact_declaration(value: object) -> str:
+    if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
+        return ",".join(str(item) for item in value)
+    return str(value or "")
+
+
+def _evaluation_period(parameters: Mapping[str, Any]) -> str:
+    start = str(parameters.get("start_date", parameters.get("evaluation_start", "")) or "")
+    end = str(parameters.get("end_date", parameters.get("evaluation_end", "")) or "")
+    return f"{start}..{end}" if start or end else ""
 
 
 def _holding_membership_violations(weights: pd.DataFrame | None, membership: pd.DataFrame) -> int:

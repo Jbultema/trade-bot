@@ -266,7 +266,11 @@ def bootstrap_outcome_paths(
         random_seed=cfg.random_seed,
     )
     wealth = np.full(cfg.paths, float(cfg.starting_account_value), dtype=float)
-    peak = wealth.copy()
+    # Drawdown is measured on a unitized, time-weighted return index. External
+    # contributions affect terminal wealth but must not mechanically hide an
+    # investment loss by lifting the account-value numerator.
+    return_index = np.ones(cfg.paths, dtype=float)
+    peak = return_index.copy()
     max_drawdown = np.zeros(cfg.paths, dtype=float)
     drawdown_square_sum = np.zeros(cfg.paths, dtype=float)
     contribution_schedule = annual_contribution_schedule(
@@ -276,7 +280,9 @@ def bootstrap_outcome_paths(
     )
 
     for day_idx in range(total_days):
-        wealth *= 1.0 + sampled_returns[:, day_idx]
+        daily_return = sampled_returns[:, day_idx]
+        wealth *= 1.0 + daily_return
+        return_index *= 1.0 + daily_return
         contribution = contribution_amount_for_day(
             day_idx + 1,
             contribution_schedule,
@@ -284,9 +290,15 @@ def bootstrap_outcome_paths(
         )
         if contribution:
             wealth += contribution
-        peak = np.maximum(peak, wealth)
+        peak = np.maximum(peak, return_index)
         current_drawdown = (
-            np.divide(wealth, peak, out=np.ones_like(wealth), where=peak != 0.0) - 1.0
+            np.divide(
+                return_index,
+                peak,
+                out=np.ones_like(return_index),
+                where=peak != 0.0,
+            )
+            - 1.0
         )
         current_drawdown = np.minimum(current_drawdown, 0.0)
         max_drawdown = np.minimum(max_drawdown, current_drawdown)
@@ -301,7 +313,11 @@ def bootstrap_outcome_paths(
     )
 
 
-def summarize_bootstrap_outcomes(paths: pd.DataFrame) -> dict[str, float | int | None]:
+def summarize_bootstrap_outcomes(
+    paths: pd.DataFrame,
+    *,
+    target_terminal_wealth: float | None = None,
+) -> dict[str, float | int | None]:
     if paths.empty:
         return {
             "paths": 0,
@@ -311,10 +327,16 @@ def summarize_bootstrap_outcomes(paths: pd.DataFrame) -> dict[str, float | int |
             "max_drawdown_p50": None,
             "max_drawdown_p10": None,
             "ulcer_index_p50": None,
+            "drawdown_over_10_probability": None,
+            "drawdown_over_20_probability": None,
+            "drawdown_over_30_probability": None,
+            "expected_drawdown_if_over_20": None,
+            "target_wealth_success_probability": None,
         }
     terminal = pd.to_numeric(paths["terminal_wealth"], errors="coerce").dropna()
     drawdown_values = pd.to_numeric(paths["max_drawdown"], errors="coerce").dropna()
     ulcer_values = pd.to_numeric(paths["ulcer_index"], errors="coerce").dropna()
+    severe_twenty = drawdown_values[drawdown_values <= -0.20]
     return {
         "paths": int(paths.shape[0]),
         "terminal_wealth_p10": _quantile_or_none(terminal, 0.10),
@@ -323,6 +345,17 @@ def summarize_bootstrap_outcomes(paths: pd.DataFrame) -> dict[str, float | int |
         "max_drawdown_p50": _quantile_or_none(drawdown_values, 0.50),
         "max_drawdown_p10": _quantile_or_none(drawdown_values, 0.10),
         "ulcer_index_p50": _quantile_or_none(ulcer_values, 0.50),
+        "drawdown_over_10_probability": _threshold_probability(drawdown_values, -0.10),
+        "drawdown_over_20_probability": _threshold_probability(drawdown_values, -0.20),
+        "drawdown_over_30_probability": _threshold_probability(drawdown_values, -0.30),
+        "expected_drawdown_if_over_20": (
+            float(severe_twenty.mean()) if not severe_twenty.empty else None
+        ),
+        "target_wealth_success_probability": (
+            float((terminal >= float(target_terminal_wealth)).mean())
+            if target_terminal_wealth is not None and not terminal.empty
+            else None
+        ),
     }
 
 
@@ -522,6 +555,12 @@ def _quantile_or_none(values: pd.Series, quantile: float) -> float | None:
     if values.empty:
         return None
     return float(values.quantile(quantile))
+
+
+def _threshold_probability(values: pd.Series, threshold: float) -> float | None:
+    if values.empty:
+        return None
+    return float((values <= threshold).mean())
 
 
 def _optional_float(value: object) -> float | None:

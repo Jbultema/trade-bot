@@ -29,6 +29,57 @@ class StaleHeldPositionError(ValueError):
     """Raised when a backtest would mark an open position with an unusable price."""
 
 
+def build_execution_causality_trace(
+    prices: pd.DataFrame,
+    target_weights: pd.DataFrame,
+    execution: ExecutionConfig,
+) -> pd.DataFrame:
+    """Trace scheduled signals into the close-to-close return intervals they affect.
+
+    Daily close data cannot represent a next-session-open fill. A lag-one signal
+    first affects the following close-to-close return, whose interval begins at
+    the signal close. The trace labels that boundary approximation explicitly;
+    lag two is the first convention whose modeled return interval begins strictly
+    after the feature-availability close.
+    """
+
+    index = pd.DatetimeIndex(pd.to_datetime(prices.sort_index().index))
+    if index.empty:
+        return pd.DataFrame()
+    aligned = target_weights.reindex(index).astype(float).fillna(0.0)
+    scheduled = _scheduled_rebalance_dates(aligned, execution.rebalance)
+    positions = {date: position for position, date in enumerate(index)}
+    rows: list[dict[str, object]] = []
+    for signal_date in scheduled:
+        signal_position = positions[pd.Timestamp(signal_date)]
+        holding_position = signal_position + execution.signal_lag_days
+        if holding_position >= len(index):
+            continue
+        interval_start_position = max(holding_position - 1, 0)
+        interval_start = index[interval_start_position]
+        holding_date = index[holding_position]
+        boundary_approximation = interval_start <= pd.Timestamp(signal_date)
+        rows.append(
+            {
+                "feature_observation_date": pd.Timestamp(signal_date),
+                "signal_calculation_date": pd.Timestamp(signal_date),
+                "target_generation_date": pd.Timestamp(signal_date),
+                "first_modeled_holding_date": holding_date,
+                "modeled_return_interval_start": interval_start,
+                "modeled_return_interval_end": holding_date,
+                "signal_lag_sessions": execution.signal_lag_days,
+                "fill_price_field": "daily_close",
+                "boundary_fill_approximation": boundary_approximation,
+                "causal_status": (
+                    "close_boundary_approximation"
+                    if boundary_approximation
+                    else "strictly_after_feature_close"
+                ),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
 def run_backtest(
     name: str,
     prices: pd.DataFrame,
@@ -151,6 +202,16 @@ def _rebalance_weights(weights: pd.DataFrame, rebalance: str) -> pd.DataFrame:
     last_dates = pd.Series(weights.index, index=weights.index).groupby(periods).transform("max")
     rebalanced = weights.loc[weights.index == last_dates]
     return rebalanced.reindex(weights.index).ffill().fillna(0.0)
+
+
+def _scheduled_rebalance_dates(weights: pd.DataFrame, rebalance: str) -> pd.DatetimeIndex:
+    if weights.empty:
+        return pd.DatetimeIndex([])
+    if rebalance.lower() in {"daily", "d"}:
+        return pd.DatetimeIndex(weights.index)
+    periods = weights.index.to_period(rebalance)
+    last_dates = pd.Series(weights.index, index=weights.index).groupby(periods).transform("max")
+    return pd.DatetimeIndex(weights.index[weights.index == last_dates])
 
 
 def _normalize_long_only(weights: pd.DataFrame) -> pd.DataFrame:
