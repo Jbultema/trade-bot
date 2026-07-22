@@ -59,10 +59,13 @@ def render_research_page(runtime: DashboardRuntime) -> None:
                 _count_label(candidates, "monitoring_readiness_label", "snapshot_ready"),
             ),
             ("Validation Rows", _count_nonempty(candidates, "validation_tier")),
+            ("Metric Contract", _metric_contract_label(candidates)),
+            ("Execution", _execution_contract_label(candidates)),
         ]
     )
     render_callout(
-        "Research V2 starts with scorecard summaries. Candidate diagnostics and the full aggregate workbench are explicit loads."
+        "Every displayed candidate is evaluated under the single contract shown above. "
+        "The page fails closed instead of merging stale scorecards."
     )
 
     view = st.pills(
@@ -115,6 +118,25 @@ def render_research_page(runtime: DashboardRuntime) -> None:
             frames[4],
             warehouse_path=str(runtime.paths.run_store_path),
         )
+
+
+def _metric_contract_label(frame: pd.DataFrame) -> str:
+    if frame.empty or "evaluation_contract_sha256" not in frame:
+        return "unavailable"
+    values = frame["evaluation_contract_sha256"].dropna().astype(str).unique()
+    return values[0][:10] if len(values) == 1 else "MIXED - BLOCKED"
+
+
+def _execution_contract_label(frame: pd.DataFrame) -> str:
+    if frame.empty:
+        return "unavailable"
+    lags = pd.to_numeric(
+        frame.get("signal_lag_days", pd.Series(dtype=float)), errors="coerce"
+    ).dropna().unique()
+    rebalances = frame.get("rebalance_frequency", pd.Series(dtype=str)).dropna().astype(str).unique()
+    if len(lags) != 1 or len(rebalances) != 1:
+        return "MIXED - BLOCKED"
+    return f"lag {int(lags[0])} / {rebalances[0]}"
 
 
 def _render_leaderboard(frame: pd.DataFrame) -> None:
@@ -199,9 +221,9 @@ def _render_candidate(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> Non
     ]
     _render_metric_dataframe(pd.DataFrame([row[summary_columns].to_dict()]))
     render_callout(
-        "Candidate Deep Dive includes latest runtime snapshot strategies and migrated "
-        "experiment candidates. Snapshot-only candidates may have metrics and outcome "
-        "diagnostics before they have full experiment artifacts.",
+        "Candidate Deep Dive uses the canonical replay library when it is available. "
+        "Configured strategies are replayed in that same library, so live-snapshot metrics "
+        "cannot silently override comparable research results.",
     )
     _render_outcome_decision_cards(
         row,
@@ -234,7 +256,7 @@ def _render_candidate(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> Non
 
 
 def _candidate_universe(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> pd.DataFrame:
-    """Return the fast V2 candidate set, including latest runtime snapshot metrics."""
+    """Return the canonical V2 candidate set, with runtime metrics only as a fallback."""
 
     candidates = outcome_candidate_scorecards(
         baseline_run=runtime.baseline_run,

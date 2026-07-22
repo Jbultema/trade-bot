@@ -84,7 +84,7 @@ def build_approach_catalog(
 
 def _active_experiment_root(root: str | Path) -> Path:
     requested = Path(root)
-    if requested == DEFAULT_EXPERIMENTS_DIR and DEFAULT_RESET_EXPERIMENTS_DIR.exists():
+    if requested == DEFAULT_EXPERIMENTS_DIR:
         return DEFAULT_RESET_EXPERIMENTS_DIR
     return requested
 

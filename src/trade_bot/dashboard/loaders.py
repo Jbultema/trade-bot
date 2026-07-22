@@ -8,6 +8,7 @@ import streamlit as st
 
 from trade_bot.config import load_config
 from trade_bot.DEFAULTS import (
+    DEFAULT_CONFIG_PATH,
     DEFAULT_EXPERIMENT_CACHE_TTL_SECONDS,
     DEFAULT_EXPERIMENTS_DIR,
     DEFAULT_RESET_EXPERIMENTS_DIR,
@@ -21,6 +22,7 @@ from trade_bot.research.experiment_monitor import (
     load_experiment_scorecards,
     load_experiment_walk_forward,
 )
+from trade_bot.research.experiment_replay import verify_experiment_library
 from trade_bot.storage.run_store import RunStore, SnapshotManifest, build_snapshot_fingerprint
 
 
@@ -28,7 +30,10 @@ from trade_bot.storage.run_store import RunStore, SnapshotManifest, build_snapsh
 def load_experiment_scorecards_frame(
     root: str | Path = DEFAULT_EXPERIMENTS_DIR,
 ) -> pd.DataFrame:
-    return load_experiment_scorecards(_active_experiment_root(root))
+    experiment_root = _active_experiment_root(root)
+    if not _experiment_library_is_current(experiment_root):
+        return pd.DataFrame()
+    return load_experiment_scorecards(experiment_root)
 
 
 @st.cache_data(show_spinner=False, ttl=DEFAULT_EXPERIMENT_CACHE_TTL_SECONDS)
@@ -36,6 +41,8 @@ def load_experiment_dashboard_frames(
     root: str | Path = DEFAULT_EXPERIMENTS_DIR,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     experiment_root = _active_experiment_root(root)
+    if not _experiment_library_is_current(experiment_root):
+        return tuple(pd.DataFrame() for _ in range(5))
     return (
         load_experiment_scorecards(experiment_root),
         load_experiment_regime_metrics(experiment_root),
@@ -47,9 +54,16 @@ def load_experiment_dashboard_frames(
 
 def _active_experiment_root(root: str | Path) -> Path:
     requested = Path(root)
-    if requested == DEFAULT_EXPERIMENTS_DIR and DEFAULT_RESET_EXPERIMENTS_DIR.exists():
+    if requested == DEFAULT_EXPERIMENTS_DIR:
         return DEFAULT_RESET_EXPERIMENTS_DIR
     return requested
+
+
+def _experiment_library_is_current(root: Path) -> bool:
+    return (
+        verify_experiment_library(root, config=load_config(DEFAULT_CONFIG_PATH)).get("status")
+        == "current_complete"
+    )
 
 
 @st.cache_data(show_spinner=False, ttl=DEFAULT_SNAPSHOT_CACHE_TTL_SECONDS)

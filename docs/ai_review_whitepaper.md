@@ -1,6 +1,6 @@
 # Trade Bot V2.2 AI Review Whitepaper
 
-Status: independent-review packet. Evidence cut: 2026-07-21. This document is
+Status: independent-review packet. Evidence cut: 2026-07-22. This document is
 written for a technically capable language model asked to audit the system,
 identify circularity or leakage, challenge its empirical conclusions, and
 propose bounded improvements. It is not a marketing document and it is not
@@ -91,6 +91,26 @@ fixed strategy or candidate definition
     -> frozen prospective monitoring cohort
     -> possible later promotion decision
 ```
+
+The Research path now has an explicit comparison contract. A scorecard is
+eligible for the shared frontier only when it belongs to the complete canonical
+library and shares one hash over:
+
+- exact price-frame values and ordered columns;
+- start and market dates;
+- close-to-close return convention and 252-session annualization;
+- close observation, first-eligible fill, signal lag, rebalance cadence, and
+  transaction costs;
+- full configuration, dependency lock, and research source tree.
+
+The source archive preserves the exact serialized candidate definitions. Replay
+loads those definitions directly; it does not regenerate or reselect them. A
+root manifest enumerates every expected iteration, candidate count, candidate
+roster hash, iteration-manifest hash, and artifact-integrity result. It is
+written last. Dashboard loaders reject a missing, partial, stale, config-mismatched,
+or byte-mismatched library. Configured strategies are included in the same replay
+and live-snapshot scorecards are only a fallback when no canonical library is
+available, so they cannot silently supersede comparable rows.
 
 Primary implementation areas:
 

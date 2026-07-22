@@ -7,6 +7,11 @@ import pandas as pd
 from trade_bot.dashboard.formatting import _format_decimal, _format_percent
 from trade_bot.research.baselines import BaselineRun
 from trade_bot.research.defensive_judgement import defensive_judgement_scorecard
+from trade_bot.research.evaluation_contract import (
+    EVALUATION_CONTRACT_SCHEMA_VERSION,
+    build_strategy_evaluation_contract,
+    evaluation_contract_sha256,
+)
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.research.strategy_outcome_utility import (
     add_outcome_frontier_flags,
@@ -21,29 +26,40 @@ def outcome_candidate_scorecards(
     experiment_scorecards: pd.DataFrame,
     include_defensive_judgement: bool = True,
 ) -> pd.DataFrame:
+    if not experiment_scorecards.empty:
+        if "strategy" not in experiment_scorecards:
+            return pd.DataFrame()
+        _require_single_evaluation_contract(experiment_scorecards)
+        return (
+            experiment_scorecards.sort_values("strategy", na_position="last")
+            .drop_duplicates("strategy", keep="last")
+            .reset_index(drop=True)
+        )
+
     runtime_scorecards = runtime_outcome_scorecards(
         baseline_run=baseline_run,
         bot_config=bot_config,
         include_defensive_judgement=include_defensive_judgement,
     )
-    frames = [frame for frame in [runtime_scorecards, experiment_scorecards] if not frame.empty]
-    if not frames:
+    if runtime_scorecards.empty:
         return pd.DataFrame()
-    combined = pd.concat(frames, ignore_index=True, sort=False)
-    if "strategy" not in combined:
+    if "strategy" not in runtime_scorecards:
         return pd.DataFrame()
-    combined["_runtime_source_rank"] = (
-        combined.get("source", pd.Series("", index=combined.index))
-        .astype(str)
-        .eq("latest_runtime_snapshot")
-        .map({True: 0, False: 1})
-    )
-    return (
-        combined.sort_values(["_runtime_source_rank", "strategy"], na_position="last")
-        .drop_duplicates("strategy", keep="first")
-        .drop(columns=["_runtime_source_rank"], errors="ignore")
-        .reset_index(drop=True)
-    )
+    _require_single_evaluation_contract(runtime_scorecards)
+    return runtime_scorecards.sort_values("strategy").reset_index(drop=True)
+
+
+def _require_single_evaluation_contract(frame: pd.DataFrame) -> None:
+    if "evaluation_contract_sha256" not in frame:
+        raise ValueError("Strategy comparison rows are missing an evaluation contract.")
+    values = frame["evaluation_contract_sha256"].fillna("").astype(str).str.strip()
+    contracts = set(values[values.ne("")])
+    missing = int(values.eq("").sum())
+    if len(contracts) != 1 or missing:
+        raise ValueError(
+            "Mixed-version strategy metrics are not comparable: expected exactly one "
+            f"evaluation contract, observed {len(contracts)} with {missing} missing rows."
+        )
 
 
 def runtime_outcome_scorecards(
@@ -74,9 +90,17 @@ def runtime_outcome_scorecards(
     runtime["monitoring_readiness_label"] = "snapshot_ready"
     runtime["operability_label"] = "paper_operable"
     runtime["hypothesis"] = (
-        "Configured strategy from the latest runtime snapshot; included so the current app "
-        "run and newest frontier variants can be compared against migrated experiments."
+        "Configured strategy from the latest runtime snapshot; used only when no verified "
+        "canonical experiment replay is available."
     )
+    contract = build_strategy_evaluation_contract(bot_config, baseline_run.prices)
+    runtime["evaluation_contract_schema_version"] = EVALUATION_CONTRACT_SCHEMA_VERSION
+    runtime["evaluation_contract_sha256"] = evaluation_contract_sha256(contract)
+    runtime["source_tree_sha256"] = str(contract["source_tree_sha256"])
+    runtime["signal_lag_days"] = bot_config.execution.signal_lag_days
+    runtime["rebalance_frequency"] = bot_config.execution.rebalance
+    runtime["transaction_cost_bps"] = bot_config.execution.transaction_cost_bps
+    runtime["evaluation_market_date"] = str(baseline_run.prices.index.max().date())
     runtime["display_name"] = runtime["strategy"].astype(str).map(
         lambda strategy: strategy_display_name(
             strategy,

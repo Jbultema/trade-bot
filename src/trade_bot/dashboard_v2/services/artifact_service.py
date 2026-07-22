@@ -6,7 +6,10 @@ from pathlib import Path
 import pandas as pd
 import streamlit as st
 
+from trade_bot.config import load_config
+from trade_bot.DEFAULTS import DEFAULT_CONFIG_PATH
 from trade_bot.research.artifact_provenance import (
+    research_config_sha256,
     research_source_tree_sha256,
     verify_research_manifest,
 )
@@ -35,9 +38,9 @@ def read_json_artifact(path: str | Path) -> dict[str, object]:
 def pbo_frames(report_dir: str | Path = "reports/pbo_diagnostics") -> dict[str, pd.DataFrame]:
     root = Path(report_dir)
     return {
-        "summary": read_csv_artifact(root / "pbo_summary.csv"),
-        "selection": read_csv_artifact(root / "pbo_strategy_selection.csv"),
-        "stats": read_csv_artifact(root / "pbo_strategy_stats.csv"),
+        "summary": _read_current_manifested_csv(root, "pbo_summary.csv"),
+        "selection": _read_current_manifested_csv(root, "pbo_strategy_selection.csv"),
+        "stats": _read_current_manifested_csv(root, "pbo_strategy_stats.csv"),
     }
 
 
@@ -46,9 +49,9 @@ def leadership_frames(
 ) -> dict[str, pd.DataFrame]:
     root = Path(report_dir)
     return {
-        "summary": read_csv_artifact(root / "leadership_summary.csv"),
-        "impairment": read_csv_artifact(root / "leadership_impairment.csv"),
-        "router": read_csv_artifact(root / "walk_forward_router_comparison.csv"),
+        "summary": _read_current_manifested_csv(root, "walk_forward_router_summary.csv"),
+        "impairment": _read_current_manifested_csv(root, "leadership_impairment.csv"),
+        "router": _read_current_manifested_csv(root, "walk_forward_router_comparison.csv"),
     }
 
 
@@ -103,28 +106,48 @@ def cycle_tracker_frames(
 def i111_evidence_frames(report_root: str | Path = "reports") -> dict[str, pd.DataFrame]:
     root = Path(report_root)
     return {
-        "native_metrics": read_csv_artifact(
-            root / "native_i111_risk_repair" / "strategy_metrics.csv"
+        "native_metrics": _read_current_manifested_csv(
+            root / "native_i111_risk_repair", "strategy_metrics.csv"
         ),
-        "adversarial_robustness": read_csv_artifact(
-            root / "i111_adversarial_validation" / "robustness_summary.csv"
+        "adversarial_robustness": _read_current_manifested_csv(
+            root / "i111_adversarial_validation", "robustness_summary.csv"
         ),
-        "adversarial_gaps": read_csv_artifact(
-            root / "i111_adversarial_validation" / "gap_audit.csv"
+        "adversarial_gaps": _read_current_manifested_csv(
+            root / "i111_adversarial_validation", "gap_audit.csv"
         ),
-        "execution_mechanisms": read_csv_artifact(
-            root / "i111_execution_hardening" / "mechanism_summary.csv"
+        "execution_mechanisms": _read_current_manifested_csv(
+            root / "i111_execution_hardening", "mechanism_summary.csv"
         ),
         "smoothing_gates": _smoothing_gate_frame(
-            root / "i111_execution_smoothing" / "promotion_gates.csv"
+            root / "i111_execution_smoothing",
+            "promotion_gates.csv",
         ),
-        "smoothing_summary": read_csv_artifact(
-            root / "i111_execution_smoothing" / "schedule_summary.csv"
+        "smoothing_summary": _read_current_manifested_csv(
+            root / "i111_execution_smoothing", "schedule_summary.csv"
         ),
-        "smoothing_pbo": read_csv_artifact(root / "i111_execution_smoothing" / "pbo_summary.csv"),
-        "qc_headline": read_csv_artifact(root / "backtest_qc_i111_native" / "headline.csv"),
+        "smoothing_pbo": _read_current_manifested_csv(
+            root / "i111_execution_smoothing", "pbo_summary.csv"
+        ),
+        "qc_headline": _read_current_manifested_csv(
+            root / "backtest_qc_i111_native", "headline.csv"
+        ),
         "manifests": i111_manifest_index(root),
     }
+
+
+def _read_current_manifested_csv(root: Path, filename: str) -> pd.DataFrame:
+    manifest = read_json_artifact(root / "manifest.json")
+    verification = verify_research_manifest(
+        root / "manifest.json",
+        current_source_tree_sha256=_current_research_source_tree_sha256(),
+    )
+    if (
+        verification.get("artifact_integrity_status") != "verified"
+        or verification.get("source_tree_status") != "current"
+        or manifest.get("config_sha256") != _current_research_config_sha256()
+    ):
+        return pd.DataFrame()
+    return read_csv_artifact(root / filename)
 
 
 def i111_manifest_index(report_root: str | Path = "reports") -> pd.DataFrame:
@@ -173,8 +196,8 @@ def i111_manifest_index(report_root: str | Path = "reports") -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def _smoothing_gate_frame(path: str | Path) -> pd.DataFrame:
-    frame = read_csv_artifact(path)
+def _smoothing_gate_frame(root: Path, filename: str) -> pd.DataFrame:
+    frame = _read_current_manifested_csv(root, filename)
     if frame.empty:
         return frame
     output = frame.copy()
@@ -188,3 +211,8 @@ def _smoothing_gate_frame(path: str | Path) -> pd.DataFrame:
 @st.cache_data(show_spinner=False, ttl=60)
 def _current_research_source_tree_sha256() -> str:
     return research_source_tree_sha256()
+
+
+@st.cache_data(show_spinner=False, ttl=60)
+def _current_research_config_sha256() -> str:
+    return research_config_sha256(load_config(DEFAULT_CONFIG_PATH))

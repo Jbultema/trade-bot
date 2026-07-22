@@ -92,6 +92,30 @@ def test_prebreak_snapshot_plan_can_include_first_month_after_break() -> None:
     assert pd.to_datetime(plan["market_date"]).max() <= pd.Timestamp("2020-03-21")
 
 
+def test_prebreak_snapshot_plan_preserves_non_weekly_break_session() -> None:
+    dates = pd.bdate_range("2020-01-01", "2020-03-20")
+    windows = (
+        BubbleBreakWindow(
+            name="friday_break",
+            break_date="2020-02-21",
+            family="test",
+            description="Synthetic Friday break.",
+        ),
+    )
+
+    plan = build_prebreak_snapshot_plan(
+        dates,
+        windows=windows,
+        lookback_days=14,
+        postbreak_days=7,
+        weekly_frequency="W-WED",
+    )
+
+    assert "2020-02-21" in set(plan["market_date"])
+    break_row = plan[plan["market_date"].eq("2020-02-21")].iloc[0]
+    assert break_row["days_to_break"] == 0
+
+
 def test_prebreak_snapshot_plan_deduplicates_overlapping_event_dates() -> None:
     plan = pd.DataFrame(
         [

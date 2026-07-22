@@ -451,7 +451,7 @@ poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --i
 4. Refresh signal evidence if the strategy tests a signal family:
 
 ```bash
-poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_close_safe_v22
 ```
 
 5. Migrate the warehouse:
@@ -672,7 +672,7 @@ poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile
 2. Run signal evidence if new experiments were added:
 
 ```bash
-poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_close_safe_v22
 ```
 
 3. Review docs and assumptions.

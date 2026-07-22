@@ -6,6 +6,7 @@ import pandas as pd
 import pytest
 
 from trade_bot.backtest.engine import BacktestResult
+from trade_bot.config import load_config
 from trade_bot.dashboard.monitoring import (
     _monitoring_display_frame,
     _monitoring_drift_envelope_frame,
@@ -31,6 +32,11 @@ from trade_bot.dashboard.risk_scenarios import (
 from trade_bot.dashboard.strategy_candidates import (
     outcome_candidate_scorecards,
     outcome_strategy_option_frame,
+)
+from trade_bot.DEFAULTS import DEFAULT_CONFIG_PATH
+from trade_bot.research.evaluation_contract import (
+    build_strategy_evaluation_contract,
+    evaluation_contract_sha256,
 )
 
 
@@ -81,7 +87,12 @@ def test_factor_contribution_waterfall_uses_factor_return_contributions() -> Non
 
 
 def test_outcome_frontier_includes_latest_runtime_snapshot_candidates() -> None:
+    prices = pd.DataFrame(
+        {"SPY": [100.0, 101.0], "QQQ": [100.0, 102.0], "BIL": [100.0, 100.01]},
+        index=pd.bdate_range("2026-01-02", periods=2),
+    )
     baseline_run = SimpleNamespace(
+        prices=prices,
         metrics=pd.DataFrame(
             [
                 {
@@ -136,14 +147,32 @@ def test_outcome_frontier_includes_latest_runtime_snapshot_candidates() -> None:
             ]
         ).set_index(["name", "window"]),
     )
-    bot_config = SimpleNamespace(strategies={"runtime_frontier_candidate": object()})
+    configured = load_config(DEFAULT_CONFIG_PATH)
+    bot_config = SimpleNamespace(
+        strategies={"runtime_frontier_candidate": object()},
+        execution=configured.execution,
+        data=configured.data,
+    )
+    contract_hash = evaluation_contract_sha256(
+        build_strategy_evaluation_contract(bot_config, prices)
+    )
     experiment_scorecards = pd.DataFrame(
         [
+            {
+                "strategy": "runtime_frontier_candidate",
+                "source": "canonical_experiment_replay",
+                "cagr": 0.22,
+                "max_drawdown": -0.18,
+                "worst_1y_cagr": -0.18,
+                "worst_3y_cagr": 0.02,
+                "evaluation_contract_sha256": contract_hash,
+            },
             {
                 "strategy": "older_experiment_candidate",
                 "source": "experiment_scorecard",
                 "cagr": 0.14,
                 "max_drawdown": -0.20,
+                "evaluation_contract_sha256": contract_hash,
             }
         ]
     )
@@ -159,8 +188,7 @@ def test_outcome_frontier_includes_latest_runtime_snapshot_candidates() -> None:
         "older_experiment_candidate",
     }
     runtime = scorecards[scorecards["strategy"].eq("runtime_frontier_candidate")].iloc[0]
-    assert runtime["source"] == "latest_runtime_snapshot"
-    assert runtime["monitoring_readiness_label"] == "snapshot_ready"
+    assert runtime["source"] == "canonical_experiment_replay"
     assert runtime["worst_1y_cagr"] == pytest.approx(-0.18)
     assert runtime["worst_3y_cagr"] == pytest.approx(0.02)
 
@@ -176,6 +204,15 @@ def test_outcome_frontier_includes_latest_runtime_snapshot_candidates() -> None:
     assert option_runtime["wealth_multiple_vs_qqq"] > 1.0
     assert option_runtime["worst_1y_cagr"] == pytest.approx(-0.18)
     assert option_runtime["worst_3y_cagr"] == pytest.approx(0.02)
+
+    stale = experiment_scorecards.copy()
+    stale.loc[stale.index[-1], "evaluation_contract_sha256"] = "stale-contract"
+    with pytest.raises(ValueError, match="Mixed-version strategy metrics"):
+        outcome_candidate_scorecards(
+            baseline_run=baseline_run,
+            bot_config=bot_config,
+            experiment_scorecards=stale,
+        )
 
 
 def test_decision_timeline_figure_marks_key_allocation_events() -> None:

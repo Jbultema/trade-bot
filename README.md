@@ -481,12 +481,16 @@ Interpretation rules:
 - Use `wash_sale_disallowed_loss` and `loss_carryforward_end` as warnings, not as broker-confirmed tax records.
 - Do not let tax optimization override a real left-tail exit. The taxable layer can warn about drag; it should not force holding a failing position just to avoid taxes.
 
-To refresh taxable research evidence, rerun experiment iterations with the current code and then migrate the warehouse:
+To add or refresh candidate definitions, write the source iteration and then rebuild the complete canonical comparison library before migrating the warehouse:
 
 ```bash
 poetry run trade-bot run-experiment-iteration --config configs/baseline.yaml --iteration ITERATION_NUMBER --output-dir data/experiments_reset_v2
+poetry run trade-bot replay-experiment-library --source-root data/experiments_reset_v2 --output-root data/experiments_close_safe_v22
 poetry run trade-bot migrate-warehouse
 ```
+
+The Research UI reads only the complete canonical library. It does not merge
+prior-regime scorecards or live-snapshot metrics into those rankings.
 
 If you log paper/live executions and need derived tax lots, use the journal API from Python for now:
 
@@ -519,7 +523,7 @@ Use that tab to compare profile-level adoption reads and pair-level deltas. A po
 Signal evidence separates proven model drivers from context-only diagnostics. Use it before expanding or pruning dashboard signals:
 
 ```bash
-poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_close_safe_v22
 ```
 
 This writes:

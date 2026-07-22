@@ -330,7 +330,7 @@ poetry run trade-bot list-champion-challenger
 
 ```bash
 poetry run trade-bot run-daily-update
-poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_close_safe_v22
 poetry run trade-bot list-champion-challenger
 poetry run pytest -q
 ```

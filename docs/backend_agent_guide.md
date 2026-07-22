@@ -177,7 +177,11 @@ Primary data paths:
 - `data/run_store/trade_bot.duckdb`: local run-store metadata, snapshot manifests, jobs, and related tables.
 - `data/run_store/snapshots/`: pickled `BaselineRun` snapshots for fast dashboard loading.
 - `data/trading_journal.sqlite`: local trading journal and recommendation-ticket state.
-- `data/experiments_reset_v2/`: active reset-era experiment outputs when present locally.
+- `data/experiments_reset_v2/`: saved candidate definitions and superseded
+  reset-era metrics retained for replay/audit.
+- `data/experiments_close_safe_v22/`: verified canonical strategy comparison
+  library; dashboard comparison loaders fail closed if its manifest is missing,
+  partial, stale, or internally inconsistent.
 - `reports/experiments/`: historical experiment outputs and scorecards from earlier runs.
 - `reports/`: static reports, app logs, and runtime files.
 
@@ -482,7 +486,7 @@ experiments instead of assuming every interesting macro, news, or narrative
 diagnostic should influence allocation.
 
 ```bash
-poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_close_safe_v22
 ```
 
 The command writes:

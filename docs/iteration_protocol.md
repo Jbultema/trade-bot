@@ -18,20 +18,33 @@ The target operating end state is not a large strategy zoo. The live system shou
 
 ## Experiment Artifact Roots
 
-The project has both historical and active experiment roots:
+The project has historical definitions and one active comparison root:
 
 - `reports/experiments/`: original historical experiment archive.
-- `data/experiments_reset_v2/`: active reset-era archive with more readable
-  strategy names and later ML/operating-system experiments.
+- `data/experiments_reset_v2/`: saved candidate definitions and prior-regime
+  artifacts retained as the replay source and audit archive.
+- `data/experiments_close_safe_v22/`: canonical comparison library. It contains
+  every saved candidate plus configured strategies replayed under one exact
+  price-frame, execution, configuration, dependency, and source contract.
 
-Dashboard loaders prefer `data/experiments_reset_v2/` when it exists
-locally. In that mode, "All approaches" means all approaches in the active root
-plus configured baselines; it does not automatically merge the older historical
-root. If a future workflow needs full cross-root investigation, add an explicit
-root selector or merged archive view with an `experiment_root` column.
+Dashboard loaders accept only a complete, verified
+`data/experiments_close_safe_v22/library_manifest.json`. They do not fall back to
+the reset archive, merge live-snapshot metrics into the replay, or display a
+partially rebuilt library. If verification fails, the comparison surface is
+empty rather than mixed.
 
-Do not overwrite old experiment roots. Add new roots for clean resets, and keep
-archived roots available for audit.
+Add new candidate definitions to a staging/archive root, then rebuild the
+canonical library into an absent or empty output directory:
+
+```bash
+poetry run trade-bot replay-experiment-library \
+  --source-root data/experiments_reset_v2 \
+  --output-root data/experiments_close_safe_v22
+```
+
+The replay command writes the root manifest only after every iteration and
+artifact-integrity check succeeds. Preserve superseded roots for audit; never
+copy old scorecards directly into the canonical root.
 
 ## Promotion Rules
 

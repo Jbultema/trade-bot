@@ -59,7 +59,13 @@ from trade_bot.DEFAULTS import (
     DEFAULT_SCENARIO_TRANSITION_MULTIPLIER,
 )
 from trade_bot.features.indicators import unusable_required_price_columns
+from trade_bot.research.artifact_provenance import write_research_manifest
 from trade_bot.research.curation import add_research_status, rank_strategy_candidates
+from trade_bot.research.evaluation_contract import (
+    EVALUATION_CONTRACT_SCHEMA_VERSION,
+    build_strategy_evaluation_contract,
+    evaluation_contract_sha256,
+)
 from trade_bot.research.future_state_ml import (
     FutureStateModelConfig,
     StrategyDrawdownModelConfig,
@@ -153,6 +159,30 @@ def run_experiment_iteration(
         refresh=refresh_data,
     )
 
+    return evaluate_experiment_candidates(
+        config,
+        iteration=iteration,
+        candidates=candidates,
+        prices=prices,
+        output_dir=output_dir,
+    )
+
+
+def evaluate_experiment_candidates(
+    config: BotConfig,
+    *,
+    iteration: int,
+    candidates: tuple[ExperimentCandidate, ...],
+    prices: pd.DataFrame,
+    output_dir: str | Path,
+) -> ExperimentBatchRun:
+    """Evaluate an explicit candidate slate without regenerating its definitions.
+
+    This is the canonical path for both a new iteration and a 1:1 historical
+    replay. Keeping the evaluator shared prevents replay metrics from drifting
+    from metrics produced by future experiment iterations.
+    """
+
     results: dict[str, BacktestResult] = {}
     calculated_metrics: list[PerformanceMetrics] = []
     for candidate in candidates:
@@ -229,6 +259,15 @@ def run_experiment_iteration(
         transition_metrics=transition_metrics,
         tax_metrics=tax_metrics,
     )
+    evaluation_contract = build_strategy_evaluation_contract(config, prices)
+    contract_hash = evaluation_contract_sha256(evaluation_contract)
+    scorecard["evaluation_contract_schema_version"] = EVALUATION_CONTRACT_SCHEMA_VERSION
+    scorecard["evaluation_contract_sha256"] = contract_hash
+    scorecard["source_tree_sha256"] = str(evaluation_contract["source_tree_sha256"])
+    scorecard["signal_lag_days"] = config.execution.signal_lag_days
+    scorecard["rebalance_frequency"] = config.execution.rebalance
+    scorecard["transaction_cost_bps"] = config.execution.transaction_cost_bps
+    scorecard["evaluation_market_date"] = str(prices.index.max().date())
     _write_experiment_outputs(
         iteration,
         candidates,
@@ -242,6 +281,15 @@ def run_experiment_iteration(
         operability_metrics,
         transition_metrics,
         output_dir,
+    )
+    _write_experiment_iteration_manifest(
+        config=config,
+        iteration=iteration,
+        candidates=candidates,
+        prices=prices,
+        output_dir=output_dir,
+        evaluation_contract=evaluation_contract,
+        evaluation_contract_hash=contract_hash,
     )
 
     return ExperimentBatchRun(
@@ -17096,6 +17144,49 @@ def _write_experiment_outputs(
             index=False,
         )
     _write_markdown_summary(iteration, scorecard, output / "summary.md")
+
+
+def _write_experiment_iteration_manifest(
+    *,
+    config: BotConfig,
+    iteration: int,
+    candidates: tuple[ExperimentCandidate, ...],
+    prices: pd.DataFrame,
+    output_dir: str | Path,
+    evaluation_contract: dict[str, object],
+    evaluation_contract_hash: str,
+) -> None:
+    output = Path(output_dir) / f"iteration_{iteration:02d}"
+    candidate_artifacts = [
+        "candidates.csv",
+        "scorecard.csv",
+        "metrics.csv",
+        "window_summary.csv",
+        "regime_metrics.csv",
+        "regime_summary.csv",
+        "walk_forward_folds.csv",
+        "walk_forward_summary.csv",
+        "operability_metrics.csv",
+        "transition_metrics.csv",
+        "decision_sanity_impact.csv",
+        "decision_sanity_assessment.csv",
+        "summary.md",
+    ]
+    artifacts = [name for name in candidate_artifacts if (output / name).is_file()]
+    write_research_manifest(
+        output,
+        study=f"experiment_iteration_{iteration:03d}",
+        config=config,
+        prices=prices,
+        parameters={
+            "iteration": iteration,
+            "strategies": [candidate.name for candidate in candidates],
+            "evaluation_contract": evaluation_contract,
+            "evaluation_contract_sha256": evaluation_contract_hash,
+            "replay_semantics": "exact_saved_candidate_definitions",
+        },
+        artifacts=artifacts,
+    )
 
 
 def _decision_sanity_impact_frame(scorecard: pd.DataFrame) -> pd.DataFrame:

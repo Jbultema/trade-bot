@@ -7,7 +7,9 @@ import pandas as pd
 import pytest
 
 from trade_bot.backtest.engine import BacktestResult
+from trade_bot.config import load_config
 from trade_bot.dashboard.strategy_candidates import runtime_outcome_scorecards
+from trade_bot.DEFAULTS import DEFAULT_CONFIG_PATH
 from trade_bot.research.defensive_judgement import (
     DefensiveJudgementHorizon,
     build_defensive_judgement_audit,
@@ -219,7 +221,12 @@ def test_runtime_scorecards_include_defensive_judgement_metrics() -> None:
         ).set_index("name"),
         window_summary=pd.DataFrame(),
     )
-    bot_config = SimpleNamespace(strategies={"candidate": object()})
+    configured = load_config(DEFAULT_CONFIG_PATH)
+    bot_config = SimpleNamespace(
+        strategies={"candidate": object()},
+        execution=configured.execution,
+        data=configured.data,
+    )
 
     scorecards = runtime_outcome_scorecards(
         baseline_run=baseline_run,

@@ -1,12 +1,13 @@
 # Research Pruning and Regrowth Protocol
 
-Status: maintained research-policy note. Last reviewed: 2026-07-17.
+Status: maintained research-policy note. Last reviewed: 2026-07-22.
 
 This project is intentionally experimental, but the dashboard should not treat every experiment as equally alive. Historical artifacts remain auditable; pruning only changes the default research queue.
 
 ## Current Empirical Read
 
-The active reset-era experiment archive is classified into research statuses:
+The canonical close-safe replay library is classified into research statuses;
+the reset-era archive is retained only as the definition/audit source:
 
 - `operational_candidate`: high-growth, tolerable drawdown, and still worth paper-monitoring or close inspection.
 - `needs_iteration`: promising mechanism, but not ready to monitor without a tighter next experiment.
@@ -82,7 +83,7 @@ monitor, source family, or narrative diagnostic into the default operating
 surface, run:
 
 ```bash
-poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_reset_v2
+poetry run trade-bot run-signal-evidence --experiment-dir data/experiments_close_safe_v22
 ```
 
 Dashboard path:

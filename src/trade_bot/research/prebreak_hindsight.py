@@ -144,6 +144,12 @@ def build_prebreak_snapshot_plan(
         if event_dates.empty:
             continue
         weekly_dates = _latest_date_per_week(event_dates, weekly_frequency=weekly_frequency)
+        if include_break_date:
+            break_sessions = event_dates[event_dates <= break_date]
+            if not break_sessions.empty:
+                weekly_dates = pd.DatetimeIndex(
+                    sorted(set(weekly_dates) | {break_sessions.max()})
+                )
         for market_date in weekly_dates:
             rows.append(
                 {

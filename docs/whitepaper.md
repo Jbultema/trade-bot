@@ -1,6 +1,6 @@
 # Trade Bot System Whitepaper
 
-Status: canonical overview. Last reviewed: 2026-07-21.
+Status: canonical overview. Last reviewed: 2026-07-22.
 
 For an exhaustive machine-oriented audit packet, including exact formulas,
 current attribution, provenance boundaries, empirical tables, failure modes,
@@ -47,6 +47,15 @@ includes champion/challenger monitoring, paper valuations, book alignment,
 recommendation tickets, execution logs, taxable-account estimates, and a
 Forward Test area. The goal is to move from "interesting research" to a repeatable
 process that can be reviewed, challenged, and audited before capital is scaled.
+
+Strategy comparisons use a separate fail-closed contract. The canonical replay
+library records the exact price-frame hash and columns, market window, execution
+lag, rebalance cadence, costs, configuration, dependencies, and source tree for
+every scorecard. Its root manifest is written only after every saved candidate
+and configured strategy has been replayed and every declared artifact verifies.
+The dashboard does not merge earlier-regime scorecards or allow live-snapshot
+rows to override canonical replay rows. An incomplete or stale library produces
+no comparative leaderboard rather than a mixed one.
 
 ## 1. The Problem Trade Bot Is Built To Solve
 

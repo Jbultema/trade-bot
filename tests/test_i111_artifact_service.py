@@ -2,7 +2,9 @@ from __future__ import annotations
 
 import pandas as pd
 
+from trade_bot.config import load_config
 from trade_bot.dashboard_v2.services.artifact_service import i111_evidence_frames
+from trade_bot.DEFAULTS import DEFAULT_CONFIG_PATH
 from trade_bot.research.artifact_provenance import write_research_manifest
 
 
@@ -28,7 +30,7 @@ def test_i111_evidence_frames_include_metrics_and_provenance(tmp_path) -> None:
     write_research_manifest(
         smoothing,
         study="i111_execution_smoothing_v2_3",
-        config={"execution": "test"},
+        config=load_config(DEFAULT_CONFIG_PATH),
         prices=prices,
         artifacts=["promotion_gates.csv"],
     )

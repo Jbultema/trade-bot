@@ -216,6 +216,12 @@ def research_source_tree_sha256() -> str:
     return _source_tree_sha256(_repo_root())
 
 
+def research_config_sha256(config: BaseModel | Mapping[str, object]) -> str:
+    """Return the canonical configuration identity used by research manifests."""
+
+    return _json_sha256(_jsonable_config(config))
+
+
 def _artifact_integrity(output: Path, artifact_names: Sequence[str]) -> list[dict[str, object]]:
     rows: list[dict[str, object]] = []
     for artifact_name in artifact_names:

@@ -20,6 +20,7 @@ from trade_bot.research.approach_explorer import (
     strategy_drawdown_model_from_catalog_row,
     strategy_from_catalog_row,
 )
+from trade_bot.research.artifact_provenance import write_research_manifest
 from trade_bot.research.forward_simulation import build_regime_return_library
 
 TECH_LEADERSHIP_TICKERS = {
@@ -180,6 +181,20 @@ def run_leadership_diagnostics(
     summary_path = output / "summary.md"
     summary_path.write_text(readout, encoding="utf-8")
     artifacts["summary"] = summary_path
+    write_research_manifest(
+        output,
+        study="leadership_diagnostics",
+        config=config,
+        prices=prices,
+        parameters={
+            "strategies": list(selected_names),
+            "router_horizons": list(router_horizons),
+            "min_train_days": min_train_days,
+            "origin_step_days": origin_step_days,
+            "experiment_root": str(experiment_root),
+        },
+        artifacts=[path.name for path in artifacts.values()],
+    )
     return LeadershipDiagnosticsRun(
         output_dir=output,
         artifacts=artifacts,

@@ -48,6 +48,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_FORWARD_SIMULATION_VALIDATION_MIN_TRAIN_DAYS,
     DEFAULT_FORWARD_SIMULATION_VALIDATION_ORIGIN_FREQUENCY,
     DEFAULT_JOURNAL_PATH,
+    DEFAULT_LEGACY_EXPERIMENTS_DIR,
     DEFAULT_MACRO_PATH,
     DEFAULT_ML_DIAGNOSTICS_DIR,
     DEFAULT_MONITORING_COHORT_START_DATE,
@@ -82,7 +83,6 @@ from trade_bot.research.baselines import (
     assemble_configured_baseline_from_results,
     build_configured_strategy_results,
     run_configured_baselines,
-    run_configured_baselines_from_frames,
     slice_backtest_results,
 )
 from trade_bot.research.current_state import build_strategy_alerts, refresh_risk_timing
@@ -102,6 +102,7 @@ from trade_bot.research.experiment_monitor import (
     load_experiment_candidates,
     load_experiment_scorecards,
 )
+from trade_bot.research.experiment_replay import replay_experiment_library
 from trade_bot.research.experiments import run_experiment_iteration
 from trade_bot.research.external_macro import (
     DEFAULT_42MACRO_HANDLE,
@@ -1213,6 +1214,11 @@ def generate_prebreak_snapshots_cmd(
     if plan_only or plan.empty:
         return
 
+    # Build each configured path once on the complete price history, then take a
+    # causal slice at every historical origin. Re-running a strategy directly on
+    # an early truncated panel fails for assets such as BIL that launched later,
+    # and would make old crisis windows depend on today's ETF inception dates.
+    full_results = build_configured_strategy_results(bot_config, prices)
     saved_manifests: list[SnapshotManifest] = []
     total = len(plan)
     for index, row in enumerate(plan.itertuples(index=False), start=1):
@@ -1227,9 +1233,10 @@ def generate_prebreak_snapshots_cmd(
         )
         historical_prices = prices.loc[:market_date_text].dropna(how="all")
         historical_macro = macro_data.loc[:market_date_text].dropna(how="all")
-        baseline_run = run_configured_baselines_from_frames(
+        baseline_run = assemble_configured_baseline_from_results(
             historical_config,
             prices=historical_prices,
+            results=slice_backtest_results(full_results, market_date_text),
             macro_data=historical_macro,
             macro_catalog=macro_catalog,
             refresh_news=refresh_news,
@@ -1664,6 +1671,42 @@ def run_experiment_iteration_cmd(
         )
     console.print(table)
     console.print(f"Wrote experiment outputs to {Path(output_dir) / f'iteration_{iteration:02d}'}")
+
+
+@app.command("replay-experiment-library")
+def replay_experiment_library_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    source_root: Annotated[
+        Path,
+        typer.Option("--source-root", help="Saved candidate definitions to replay exactly."),
+    ] = DEFAULT_LEGACY_EXPERIMENTS_DIR,
+    output_root: Annotated[
+        Path,
+        typer.Option("--output-root", help="Empty destination for the rebuilt library."),
+    ] = DEFAULT_RESET_EXPERIMENTS_DIR,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+    max_workers: Annotated[
+        int,
+        typer.Option("--max-workers", help="Bounded parallel iteration workers."),
+    ] = 4,
+) -> None:
+    """Rebuild all saved experiments under one current evaluation contract."""
+
+    replay = replay_experiment_library(
+        load_config(config),
+        source_root=source_root,
+        output_root=output_root,
+        refresh_data=refresh_data,
+        max_workers=max_workers,
+        progress=lambda completed, total, iteration: console.print(
+            f"[{completed:02d}/{total:02d}] completed iteration {iteration:03d}"
+        ),
+    )
+    console.print(
+        f"Replayed {replay.candidate_count:,} candidates across "
+        f"{len(replay.iterations):,} iterations into {replay.output_root}."
+    )
+    console.print(f"Evaluation contract: {replay.evaluation_contract_sha256}")
 
 
 @app.command("run-signal-evidence")
@@ -2630,12 +2673,13 @@ def run_leadership_diagnostics_cmd(
     """Audit tech leadership dependence and run the prior-only strategy router."""
 
     bot_config = load_config(config)
+    effective_experiment_root = _active_experiment_dir(experiment_root)
     strategy_names = tuple(
         strategy.strip() for strategy in strategies.split(",") if strategy.strip()
     )
     tickers = leadership_candidate_tickers(
         bot_config,
-        experiment_root=experiment_root,
+        experiment_root=effective_experiment_root,
         strategies=strategy_names,
         top_n=top_n,
     )
@@ -2654,7 +2698,7 @@ def run_leadership_diagnostics_cmd(
         config=bot_config,
         prices=prices,
         output_dir=output_dir,
-        experiment_root=experiment_root,
+        experiment_root=effective_experiment_root,
         strategies=strategy_names,
         top_n=top_n,
         router_horizons=horizons,
@@ -2742,12 +2786,13 @@ def audit_backtest_pbo_cmd(
     """Estimate Probability of Backtest Overfitting using CSCV over candidate returns."""
 
     bot_config = load_config(config)
+    effective_experiment_root = _active_experiment_dir(experiment_root)
     strategy_names = tuple(
         strategy.strip() for strategy in strategies.split(",") if strategy.strip()
     )
     tickers = set(configured_tickers(bot_config)) | pbo_candidate_tickers(
         bot_config,
-        experiment_root=experiment_root,
+        experiment_root=effective_experiment_root,
         strategies=strategy_names,
         top_n=top_n,
     )
@@ -2763,7 +2808,7 @@ def audit_backtest_pbo_cmd(
         config=bot_config,
         prices=prices,
         output_dir=output_dir,
-        experiment_root=experiment_root,
+        experiment_root=effective_experiment_root,
         strategies=strategy_names,
         top_n=top_n,
         partitions=partitions,
@@ -4714,7 +4759,7 @@ def _completed_windows_through(frame: pd.DataFrame, through: str) -> pd.DataFram
 
 
 def _active_experiment_dir(experiment_dir: Path) -> Path:
-    if experiment_dir == DEFAULT_EXPERIMENTS_DIR and DEFAULT_RESET_EXPERIMENTS_DIR.exists():
+    if experiment_dir == DEFAULT_EXPERIMENTS_DIR:
         return DEFAULT_RESET_EXPERIMENTS_DIR
     return experiment_dir
 

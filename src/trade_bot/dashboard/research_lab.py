@@ -2159,7 +2159,8 @@ def _render_outcome_planning_assumptions() -> None:
     st.info(
         "Outcome Frontier is now the deterministic candidate sorter: historical CAGR, max "
         "drawdown, recovery burden, validation gates, and configured contribution assumptions. "
-        "It includes migrated experiments plus the latest configured runtime snapshot strategies. "
+        "It uses the canonical experiment replay, including configured strategies evaluated under "
+        "that same contract. Runtime metrics appear only when no verified replay is available. "
         "Use it to decide which strategies deserve inspection. Open Simulation Lab for historical "
         "bootstrap paths, regime-conditioned futures, reference overlays, and simulation interpretability."
     )
@@ -2168,7 +2169,7 @@ def _render_outcome_planning_assumptions() -> None:
             "**What this section does:** deterministic CAGR is used for fast frontier scoring, "
             "using the configured account value, contribution cadence, planning horizon, and "
             "drawdown bands. Simulation-specific settings and outputs live in Simulation Lab so "
-            "this view remains a clean sorter across experiments and configured runtime strategies."
+            "this view remains a clean sorter across strategies evaluated under one contract."
         )
         settings = pd.concat(
             [
