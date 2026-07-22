@@ -101,6 +101,8 @@ library and shares one hash over:
 - close-to-close return convention and 252-session annualization;
 - close observation, first-eligible fill, signal lag, rebalance cadence, and
   transaction costs;
+- outcome-planning assumptions: $220,000 start, $4,000 annual contributions
+  deposited monthly, 15 years, and the soft/hard drawdown bands;
 - full configuration, dependency lock, and research source tree.
 
 The source archive preserves the exact serialized candidate definitions. Replay
@@ -111,6 +113,18 @@ written last. Dashboard loaders reject a missing, partial, stale, config-mismatc
 or byte-mismatched library. Configured strategies are included in the same replay
 and live-snapshot scorecards are only a fallback when no canonical library is
 available, so they cannot silently supersede comparable rows.
+
+The completed contract contains 427 scorecard rows across 73 groups: 406 exact
+replays of the archived iteration 77-164 definitions and 21 configured runtime
+strategies. The 406-row one-to-one migration changed median CAGR by +0.003
+percentage points and median maximum drawdown by -0.237 points. The full ranges
+were -2.160 to +1.967 CAGR points and -7.001 to +10.053 drawdown points. Despite
+the near-zero aggregate center, 114 promotion labels changed and the top-20
+membership turned over by nine names. A contribution-only counterfactual on the
+new return paths changed 223 raw rank positions but zero top-20 members; many of
+those lower-order moves are tie ordering. Thus the $70,000-to-$4,000 correction
+is highly material to terminal-wealth dollars, modest to normalized utility, and
+not evidence for a different champion.
 
 Primary implementation areas:
 
@@ -268,15 +282,15 @@ use numeric tolerances so floating-point dust does not create a breach. Scenario
 probabilities may still appear in diagnostic stress tables but cannot tighten
 limits or force sizing while their authorities are zero.
 
-## 4. July 21, 2026 Operating State
+## 4. July 22, 2026 Operating State
 
 Snapshot identity:
 
 ```text
-run_id: 20260721T223437.000001Z-31e37291-fda65c5b
-market_date: 2026-07-21
-config fingerprint prefix: 44aebc35
-prices: 5,420 rows x 168 columns
+run_id: 20260722T154729.000003Z-b1df1c1e-5d839408
+market_date: 2026-07-22
+config fingerprint prefix: b1df1c1e
+prices: 5,421 rows x 169 columns
 macro: 102 columns
 configured strategies: 22
 ```
@@ -288,27 +302,27 @@ The base strategy is
 
 | Quantity | Value |
 | --- | ---: |
-| Risk score/status | 0.433333 / yellow |
+| Risk score/status | 0.400000 / yellow |
 | Recommended action | HOLD |
-| Base defensive weight | 60.6475% |
-| Base risk-asset weight | 39.3525% |
+| Base defensive weight | 57.8017% |
+| Base risk-asset weight | 42.1983% |
 | Quantitative timing addition | 0.0000 percentage points defense |
 | Risk-timing raw/effective multiplier | 1.00 / 1.00 at 0% authority |
 | Scenario addition | 0.0000 pp |
 | News/event addition | 0.0000 pp |
-| Macro addition | 1.9676 pp |
+| Macro addition | 0.0000 pp |
 | Portfolio hard-risk addition | 0.0000 pp |
 | Decision-sanity addition | 0.0000 pp |
-| Final defensive weight | 62.6151% |
-| Final risk-asset weight | 37.3849% |
-| Final risk-budget multiplier | 0.95 |
+| Final defensive weight | 57.8017% |
+| Final risk-asset weight | 42.1983% |
+| Final risk-budget multiplier | 1.00 |
 
-Rounded base weights are BIL 61%, IGV 10%, SOXX 10%, QQQ 10%, and SMH 9%.
-Rounded final weights are BIL 63%, IGV 10%, SOXX 9%, QQQ 9%, and SMH 9%.
+Rounded base and final weights are BIL 58%, SOXX 13%, SMH 12%, QQQ 11%,
+and AMZN 6%.
 
 The portfolio risk engine reports `within_limits`, no applied hard constraints,
-ES95 1.52%, maximum stress loss 12.70%, equity beta 0.755, and AI beta 0.453.
-Scenario-weighted stress is 11.47% against an 8% advisory level, but it is a
+ES95 1.77%, maximum stress loss 14.77%, equity beta 0.896, and AI beta 0.527.
+Scenario-weighted stress is 13.16% against an 8% advisory level, but it is a
 watch rather than a hard constraint under zero authority. Concentration HHI is
 also a watch. These watches must not be described as causes of the final target.
 
@@ -316,13 +330,13 @@ also a watch. These watches must not be described as causes of the final target.
 
 The one-month probabilities in the decision record include:
 
-- risk-off 24.91%;
-- transition 38.56%;
-- fragile upside 16.93%;
-- broad risk-on 19.60%;
-- constructive composite 28.06%.
+- risk-off 22.83%;
+- transition 37.87%;
+- fragile upside 17.76%;
+- broad risk-on 21.54%;
+- constructive composite 30.42%.
 
-The raw scenario formula implies a 0.7605 multiplier, but its effective
+The raw scenario formula implies a 0.7721 multiplier, but its effective
 multiplier is 1.0 because sizing authority is zero. The system is permitted to
 say the scenario map is cautious. It is not permitted to say that map reduced
 today's weights.
@@ -332,15 +346,17 @@ today's weights.
 The permanent counterfactual table contains active policy, news disabled, news
 visible/informational-only, and a research-only news-sizing-enabled run. For
 the first three operationally relevant cases, all reported quantities are
-identical: risk score 0.4333, budget 0.90, scenario probabilities unchanged,
-target BIL 64% / SOXX 11% / SMH 10% / QQQ 10% / AMZN 5%, equity beta 0.755,
-and beta-adjusted SPY delta -0.0841.
+identical: risk score 0.4000, budget 1.00, scenario probabilities unchanged,
+target BIL 58% / SOXX 13% / SMH 12% / QQQ 11% / AMZN 6%, equity beta 0.896,
+and beta-adjusted SPY delta 0.0000.
 
-Even the research-only news-authority counterfactual is identical on this date
-because current event pressure is zero. This answers today's circularity test:
-the final recommendation does not reflect the supplied AI, private-credit,
-Iran, OpenAI, or Anthropic narratives through sizing. Those stories can still
-shape a human reader, so UI language must keep “context” separate from “cause.”
+The research-only news-authority counterfactual is different: its 8% raw event
+pressure would reduce the budget to 0.92, raise BIL to 61%, and lower equity
+beta to 0.824. That counterfactual is deliberately non-operational. The three
+authorized cases answer today's circularity test: the final recommendation does
+not reflect the supplied AI, private-credit, Iran, OpenAI, or Anthropic
+narratives through sizing. Those stories can still shape a human reader, so UI
+language must keep “context” separate from “cause.”
 
 ## 5. Historical Snapshot Reconstruction And Provenance
 
@@ -349,12 +365,12 @@ replaced one-for-one:
 
 | Store | Before | Canonical dates | After | Range |
 | --- | ---: | ---: | ---: | --- |
-| Main operating snapshots | 222 | 222 | 222 | 2007-07-11 to 2026-07-21 |
-| Pre-break snapshots | 440 generations | 397 | 397 | 2006-10-11 to 2025-03-21 |
+| Main operating snapshots | 354 generations | 223 | 223 | 2007-07-11 to 2026-07-22 |
+| Pre-break snapshots | 397 dates | 397 | 397 | 2006-10-11 to 2025-03-21 |
 
-The 43 extra pre-break rows were duplicate generations, not distinct market
-dates. Keeping them would have created an accidental weighting hazard in any
-analysis that failed to deduplicate.
+The current stores contain exactly one row per planned market date. An earlier
+audit had found 43 extra pre-break generations; those duplicates were removed
+before this complete replacement, eliminating the accidental weighting hazard.
 
 The replacement did not reconstruct historical news using today's cache. It
 loaded each recorded point-in-time snapshot, preserved its prices, macro,
@@ -366,15 +382,16 @@ resumable by current config fingerprint.
 
 The normalized operating history was separately rebuilt: 290 metric rows,
 2,610 component rows, 3,190 scenario-driver rows, and 4,640 driver-rotation rows
-from 2021-06-23 through 2026-07-21. It is explicitly labeled reconstructed
+from 2021-06-23 through 2026-07-22. It is explicitly labeled reconstructed
 price-fast point-in-time history and is not misrepresented as prospective
 monitoring.
 
-Important limitation: pickle artifacts use the current Python class definitions
-when loaded. Manifest hashes identify configs, not a cryptographic hash of every
-source-code file. A stronger future design would record code commit/tree hash,
-schema migration version, dependency lock hash, and input-data hashes for every
-snapshot.
+Important limitation: snapshot payloads remain pickle files and therefore load
+through the current Python class definitions. Their manifests now record git
+and source-tree identity, dependency-lock and project hashes, config identity,
+schema version, and the exact ordered price-frame hash. This detects stale or
+mismatched evidence but does not provide language-independent archival storage;
+schema-versioned Parquet/JSON remains the stronger long-term format.
 
 ## 6. Scenario Probability Calibration
 
@@ -385,7 +402,7 @@ bins, block-bootstrap intervals, and expanding-history authority.
 
 | Horizon | N | Positive rate | Mean predicted | Brier skill | AUC | ECE | Earned authority |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| 1 week | 998 | 41.88% | 27.68% | -0.0956 | 0.538 | 14.42% | 0.00% |
+| 1 week | 999 | 41.94% | 27.68% | -0.0963 | 0.538 | 14.48% | 0.00% |
 | 1 month | 995 | 41.51% | 27.69% | -0.0431 | 0.604 | 13.82% | 0.00% |
 | 3 months | 986 | 38.13% | 27.72% | 0.0175 | 0.651 | 10.66% | 9.60% diagnostic result |
 
@@ -447,12 +464,12 @@ Incremental episode comparisons:
 
 | Comparison | Horizon | Left/right starts | Delta correct | Delta false alarm | Median return cost | Median DD improvement |
 | --- | --- | ---: | ---: | ---: | ---: | ---: |
-| Base + quantitative vs base only | 1w | 10 / 47 | +26.0 pp | -24.7 pp | -0.14% | +0.78% |
-| Base + quantitative vs base only | 1m | 10 / 47 | +3.8 pp | -24.7 pp | -1.16% | +1.23% |
-| Base + quantitative vs base only | 3m | 10 / 46 | +17.4 pp | -9.1 pp | -2.51% | +1.92% |
-| Quantitative + portfolio vs quantitative only | 1w | 43 / 20 | +18.8 pp | -10.1 pp | -0.07% | +0.36% |
-| Quantitative + portfolio vs quantitative only | 1m | 43 / 20 | -3.1 pp | +9.5 pp | -0.56% | +0.95% |
-| Quantitative + portfolio vs quantitative only | 3m | 43 / 20 | -18.1 pp | +5.2 pp | -1.20% | +1.51% |
+| Base + quantitative vs base only | 1w | 10 / 48 | +26.7 pp | -25.8 pp | -0.1% | +0.8% |
+| Base + quantitative vs base only | 1m | 10 / 48 | +2.5 pp | -23.7 pp | -1.1% | +1.3% |
+| Base + quantitative vs base only | 3m | 10 / 47 | +16.0 pp | -8.3 pp | -2.4% | +1.9% |
+| Quantitative + portfolio vs quantitative only | 1w | 44 / 19 | +16.1 pp | -5.7 pp | -0.1% | +0.3% |
+| Quantitative + portfolio vs quantitative only | 1m | 44 / 19 | -11.7 pp | +12.3 pp | -0.5% | +0.9% |
+| Quantitative + portfolio vs quantitative only | 3m | 44 / 19 | -20.0 pp | +8.5 pp | -1.0% | +1.4% |
 
 Interpretation: the legacy price-derived risk status showed some episode-level
 downside discrimination, but its continuous sizing rule was too costly. The new
@@ -463,32 +480,33 @@ distinct causal pathways, not statistically independent votes.
 
 The confirmed-timing intersection has only 10 base-plus-quantitative episode
 starts. Its lower false-alarm rate is interesting, but median return costs are
-1.16% at one month and 2.51% at three months. Portfolio additions remain weak
+1.1% at one month and 2.4% at three months. Portfolio additions remain weak
 at one and three months. These cohorts are not randomized, and the small
 confirmed sample cannot justify authority.
 
 ### 7.3 Opportunity-cost replay
 
-Non-overlapping weekly policies from 2007-05-30 through 2026-07-21:
+Non-overlapping weekly policies from 2007-05-30 through 2026-07-22:
 
 | Policy | CAGR | Max DD | Terminal wealth | Delta CAGR | DD improvement |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Base weekly | 18.74% | -26.21% | 26.80 | — | — |
-| Legacy risk-status sizing | 13.55% | -17.76% | 11.38 | -5.19 pp | +8.45 pp |
-| Confirmation-timed candidate | 18.12% | -25.36% | 24.22 | -0.62 pp | +0.85 pp |
-| Candidate plus hard-risk path | 13.69% | -18.63% | 11.66 | -5.05 pp | +7.59 pp |
+| Base weekly | 19.60% | -25.90% | 30.71 | — | — |
+| Legacy risk-status sizing | 14.30% | -21.10% | 13.00 | -5.20 pp | +4.80 pp |
+| Confirmation-timed candidate | 19.10% | -26.20% | 28.50 | -0.50 pp | -0.40 pp |
+| Candidate plus hard-risk path | 14.50% | -20.80% | 13.33 | -5.10 pp | +5.10 pp |
+| Current authorized overlay only | 19.50% | -26.20% | 30.19 | -0.10 pp | -0.30 pp |
 
 The confirmation-timed row is the cleanest test of whether a smaller price for
-patience buys protection. It bought only 0.85 points of maximum-drawdown relief
-at a 0.62-point CAGR cost, leaving risk-adjusted return essentially unchanged.
-That is not enough to grant the timing layer sizing authority.
+patience buys protection. It cost 0.50 CAGR points while making maximum drawdown
+0.40 points worse. The current authorized overlay is nearly neutral but also
+does not improve drawdown. Neither result grants the timing layer sizing authority.
 
 ## 8. Pre-Break Hindsight And Sparse Policy Replay
 
 The pre-break panel combines canonical event-window snapshots with ordinary
-reference controls: 485 deduplicated analyzed observations from 2006-10-11 to
-2026-07-21, including 42 post-break event-window snapshots. The three-month
-severe-label share is 35.0% and major-label share 14.5%.
+reference controls: 486 deduplicated analyzed observations from 2006-10-11 to
+2026-07-22, including 42 post-break event-window snapshots. The three-month
+severe-label share is 34.9% and major-label share 14.5%.
 
 Top hindsight associations include energy/inflation relief, cycle acceleration,
 credit pressure, leadership acceleration, cross-sectional dispersion,
@@ -506,8 +524,8 @@ sources are:
   additions under the replacement policy.
 
 The refreshed snapshot-budget replay overlays sparse historical readouts on
-eight selected experiment strategies. Base median CAGR is 14.29% with median
-max DD -22.48%. The actual snapshot budget lowers median CAGR to 12.69% and does
+eight selected experiment strategies. Base median CAGR is 13.09% with median
+max DD -22.10%. The actual snapshot budget lowers median CAGR to 11.94% and does
 not improve median max DD. Hindsight stage floors lose less CAGR but still do not
 improve the median max drawdown. Because event windows are sparse and some
 variants use hindsight stage knowledge, this report is best used to reject
@@ -528,25 +546,27 @@ important evidence is deliberately contradictory.
 
 - The close-safe configured primary path produced 20.67% CAGR and -25.80% max
   drawdown; the native i111 challenger produced 20.84% and -24.75%.
-- Candidate-family PBO estimate 1.43% with 0% OOS-loss probability in the fixed
-  candidate study; this addresses within-family selection risk, not the full
-  historical research process.
-- Five-year block-bootstrap median annualized return about 22.0% for the focus
-  strategy, p05 about 9.1%.
+- The active 12-candidate adversarial roster has a 21.43% family PBO estimate
+  with 0% OOS-loss probability. This is roster-specific and does not override
+  the broader canonical-shelf result below.
+- Five-year block-bootstrap median annualized return is 16.89% for the focus
+  strategy, with a 4.11% p05.
 - Native defense shows nontrivial but imperfect downside discrimination.
 - Carried-state start-date variants did not produce negative minimum CAGR in the
   evaluated set.
 
 ### 9.2 Adverse evidence
 
-- Daily rebalance: roughly 19.6% CAGR and -28.9% drawdown.
-- Monday rebalance: roughly 19.1% and -29.9%.
-- Execution stress generated 74 failure rows in the adversarial suite.
-- Five-year bootstrap probability of breaching -25% drawdown is about 15% for
+- Daily rebalance: 19.69% CAGR and -28.86% drawdown.
+- Monday rebalance: 19.16% and -29.85%.
+- Execution stress generated 84 failure rows in the active adversarial suite.
+- The canonical 20-candidate shelf PBO is 64.29%, labeled high overfit risk,
+  despite a 0% OOS-loss rate. PBO is materially roster-sensitive.
+- Five-year bootstrap probability of breaching -25% drawdown is 24.36% for
   the focus strategy.
-- Synthetic AI-crash p05 historical-weight stress is about -31%; current stress
-  about -11.5%.
-- Average AI/growth exposure is about 65.5%, so the strategy is not independent
+- Synthetic AI-crash p05 historical-weight stress is -30.88%; current stress
+  is -11.94%.
+- Average AI/growth exposure is 65.57%, so the strategy is not independent
   of the leadership thesis it is meant to manage.
 - AI warning monitors have substantial false-positive rates near 43-45%.
 - Clean AI-led historical break events are scarce.
@@ -575,17 +595,17 @@ an operating or expected-live result.
 ### 9.4 Contribution-aware catastrophic-tail utility
 
 The fixed experiment uses 1,000 block-bootstrap paths, a 21-session block,
-15-year horizon, $220,000 starting value, $70,000 annual monthly contributions,
+15-year horizon, $220,000 starting value, $4,000 annual contributions deposited monthly,
 and seed `20260705`. Terminal wealth includes contributions. Drawdown and Ulcer
 Index use a separate unitized return index, so cash flows cannot mechanically
 hide a market loss.
 
 | Path | P(DD > 20%) | P(DD > 25%) | P(DD > 30%) | Mean DD conditional on >20% | P(10%-path wealth target) | Terminal wealth p50 |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
-| Configured primary | 84.6% | 50.3% | 21.3% | -27.2% | 98.1% | $9.91M |
-| Native i111 challenger | 84.3% | 49.3% | 20.8% | -27.1% | 98.2% | $10.06M |
-| SPY hold | 98.9% | 92.5% | 73.3% | -37.0% | 61.8% | $3.80M |
-| QQQ hold | 100.0% | 96.3% | 79.3% | -38.3% | 82.3% | $5.97M |
+| Configured primary | 84.3% | 48.5% | 22.1% | -27.2% | 98.5% | $4.22M |
+| Native i111 challenger | 83.7% | 47.8% | 21.7% | -27.1% | 98.6% | $4.29M |
+| SPY hold | 99.1% | 92.3% | 73.8% | -36.9% | 60.9% | $1.25M |
+| QQQ hold | 99.9% | 95.9% | 80.0% | -38.2% | 82.2% | $2.21M |
 
 This supports the claim that the strategy historically transformed catastrophic
 equity tails into smaller but still frequent drawdowns. It does not establish a
@@ -622,8 +642,8 @@ whose survivorship and selection validity remain blocked.
 
 - Current-universe survivorship: many studies replay today's tickers backward.
 - Pre-inception proxies: newer ETFs and AI assets have short histories.
-- Researcher degrees of freedom: the ledger currently indexes 540 manifested
-  trial rows, but 119 artifact directories have no manifest and three of 14
+- Researcher degrees of freedom: the ledger currently indexes 569 manifested
+  trial rows, but 113 artifact directories have no manifest and three of 19
   manifests lack explicit rosters. Candidate-shelf PBO does not count abandoned
   or unmanifested ideas, so retrospective promotion is disabled.
 - Event selection hindsight: named crises and break dates are known today.

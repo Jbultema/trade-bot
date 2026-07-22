@@ -13,6 +13,7 @@ from trade_bot.dashboard.monitoring import (
     _monitoring_start_cohorts,
 )
 from trade_bot.dashboard.research_lab import (
+    _deep_drawdown_comparison_frame,
     _factor_contribution_waterfall_figure,
     _make_decision_timeline_figure,
     _signal_ablation_heatmap_frame,
@@ -68,6 +69,44 @@ def test_signal_ablation_heatmap_flips_turnover_direction() -> None:
 
     assert float(heatmap.loc["Credit", "delta_cagr"]) == 0.03
     assert float(heatmap.loc["Credit", "delta_average_turnover"]) == -0.03
+
+
+def test_deep_drawdown_comparison_keeps_rejected_rows_and_labels_qqq_gap() -> None:
+    frame = pd.DataFrame(
+        [
+            {
+                "strategy": "bad_candidate",
+                "display_name": "Bad candidate",
+                "research_status": "pruned_dead_end",
+                "cagr": 0.03,
+                "max_drawdown": -0.70,
+                "growth_utility_tier": "growth_reject_hard_drawdown",
+            },
+            {
+                "strategy": "buy_hold_qqq",
+                "display_name": "QQQ",
+                "research_status": "reference",
+                "cagr": 0.15,
+                "max_drawdown": -0.53,
+                "growth_utility_tier": "growth_reject_hard_drawdown",
+            },
+            {
+                "strategy": "survivable_candidate",
+                "display_name": "Survivable candidate",
+                "research_status": "needs_iteration",
+                "cagr": 0.12,
+                "max_drawdown": -0.20,
+                "growth_utility_tier": "growth_research_only",
+            },
+        ]
+    )
+
+    comparison = _deep_drawdown_comparison_frame(frame, qqq_max_drawdown=-0.53)
+
+    assert comparison["strategy"].tolist() == ["bad_candidate", "buy_hold_qqq"]
+    assert comparison.iloc[0]["qqq_comparison"] == "17.0 pp worse than QQQ"
+    assert comparison.iloc[1]["qqq_comparison"] == "same as QQQ"
+    assert comparison.iloc[1]["row_type"] == "benchmark"
 
 
 def test_factor_contribution_waterfall_uses_factor_return_contributions() -> None:

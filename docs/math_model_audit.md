@@ -883,7 +883,7 @@ growth_constrained_utility_score
 ```
 
 Default planning assumptions are a 15-year horizon, 220,000 dollar starting
-account, 65,000 dollars of annual contributions split into monthly period-end
+account, 4,000 dollars of annual contributions split into monthly period-end
 deposits, a soft drawdown band beginning at -22 percent, and hard drawdown
 rejection at -30 percent. This score is an experiment-selection and
 paper-monitoring priority layer. It does not replace promotion score,

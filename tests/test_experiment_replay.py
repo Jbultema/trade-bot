@@ -3,7 +3,7 @@ from __future__ import annotations
 import pandas as pd
 
 from trade_bot.config import load_config
-from trade_bot.DEFAULTS import DEFAULT_CONFIG_PATH
+from trade_bot.DEFAULTS import DEFAULT_CONFIG_PATH, DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION
 from trade_bot.research.evaluation_contract import (
     build_strategy_evaluation_contract,
     evaluation_contract_sha256,
@@ -26,6 +26,19 @@ def test_evaluation_contract_includes_exact_price_frame_identity() -> None:
     )
 
     assert base_hash != expanded_hash
+
+
+def test_evaluation_contract_freezes_account_contribution_assumption() -> None:
+    config = load_config(DEFAULT_CONFIG_PATH)
+    prices = pd.DataFrame(
+        {"SPY": [100.0, 101.0]},
+        index=pd.bdate_range("2025-01-02", periods=2),
+    )
+
+    contract = build_strategy_evaluation_contract(config, prices)
+
+    assert DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION == 4_000.0
+    assert contract["outcome_planning"]["annual_contribution"] == 4_000.0
 
 
 def test_saved_candidate_loader_preserves_iteration_and_strategy_definitions(tmp_path) -> None:

@@ -315,8 +315,8 @@ interpretation.
 
 Key surfaces:
 
-- **Planning assumptions**: starting account, annual contribution, monthly
-  contribution cadence, horizon, and soft/hard drawdown bands from
+- **Planning assumptions**: starting account, the current $4,000 annual
+  contribution ($333.33 monthly), horizon, and soft/hard drawdown bands from
   `src/trade_bot/DEFAULTS.py`.
 - **Future-State Map**: current scenario probabilities mapped into broad
   simulation buckets, with the detailed scenario records and simulation settings.

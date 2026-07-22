@@ -8,6 +8,14 @@ from typing import Any
 import pandas as pd
 
 from trade_bot.config import BotConfig
+from trade_bot.DEFAULTS import (
+    DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
+    DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
+    DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
+    DEFAULT_OUTCOME_HORIZON_YEARS,
+    DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT,
+    DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
+)
 from trade_bot.research.artifact_provenance import build_runtime_provenance
 
 EVALUATION_CONTRACT_SCHEMA_VERSION = 1
@@ -28,6 +36,14 @@ def build_strategy_evaluation_contract(
         "first_eligible_fill": "strictly_after_feature_close",
         "annualization_periods": 252,
         "execution": config.execution.model_dump(mode="json"),
+        "outcome_planning": {
+            "starting_account_value": DEFAULT_OUTCOME_STARTING_ACCOUNT_VALUE,
+            "annual_contribution": DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION,
+            "contribution_timing": DEFAULT_OUTCOME_CONTRIBUTION_TIMING,
+            "horizon_years": DEFAULT_OUTCOME_HORIZON_YEARS,
+            "soft_drawdown_limit": DEFAULT_OUTCOME_SOFT_DRAWDOWN_LIMIT,
+            "hard_drawdown_limit": DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
+        },
         "data": {
             "start": config.data.start,
             "end": config.data.end,

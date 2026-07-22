@@ -1909,6 +1909,7 @@ def _render_outcome_frontier(
             benchmark_metrics=runtime_benchmark_metrics(baseline_run),
         )
     )
+    all_outcome_rows = frame.copy()
     if "research_status" in frame:
         active = frame[~frame["research_status"].astype(str).eq("pruned_dead_end")].copy()
         if not active.empty:
@@ -1999,6 +2000,20 @@ def _render_outcome_frontier(
         dash="dot",
         detail="Drawdowns at or beyond this line trigger hard review/rejection behavior.",
     )
+    qqq_max_drawdown = _runtime_qqq_max_drawdown(baseline_run)
+    if qqq_max_drawdown is not None:
+        _add_outcome_drawdown_band_trace(
+            fig,
+            y_values=plot_frame["cagr"],
+            x_value=qqq_max_drawdown,
+            name="QQQ historical max drawdown",
+            color="#2563eb",
+            dash="dashdot",
+            detail=(
+                "Reference line from the same return history. Points farther left had a "
+                "more severe historical drawdown than QQQ."
+            ),
+        )
     fig.update_layout(
         height=520,
         xaxis_title="Max drawdown",
@@ -2014,6 +2029,10 @@ def _render_outcome_frontier(
         key=_OUTCOME_FRONTIER_PLOT_KEY,
         on_select="rerun",
         selection_mode="points",
+    )
+    _render_deep_drawdown_comparison(
+        all_outcome_rows,
+        qqq_max_drawdown=qqq_max_drawdown,
     )
 
     selected_options = _outcome_select_options(plot_frame)
@@ -2247,6 +2266,87 @@ def _outcome_marker_sizes(frame: pd.DataFrame) -> pd.Series:
         return pd.Series(13.0, index=frame.index)
     scaled = (wealth - wealth.min()) / max(float(wealth.max() - wealth.min()), 1e-12)
     return 9.0 + 18.0 * scaled.fillna(0.0)
+
+
+def _runtime_qqq_max_drawdown(baseline_run: BaselineRun) -> float | None:
+    benchmarks = runtime_benchmark_metrics(baseline_run)
+    if "benchmark_qqq" not in benchmarks.index or "max_drawdown" not in benchmarks:
+        return None
+    value = pd.to_numeric(
+        pd.Series([benchmarks.loc["benchmark_qqq", "max_drawdown"]]),
+        errors="coerce",
+    ).iloc[0]
+    return float(value) if pd.notna(value) else None
+
+
+def _deep_drawdown_comparison_frame(
+    frame: pd.DataFrame,
+    *,
+    qqq_max_drawdown: float | None,
+) -> pd.DataFrame:
+    if frame.empty or "max_drawdown" not in frame:
+        return pd.DataFrame()
+    output = frame.copy()
+    output["max_drawdown"] = pd.to_numeric(output["max_drawdown"], errors="coerce")
+    output = output[
+        output["max_drawdown"].le(DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT)
+    ].copy()
+    if output.empty:
+        return output
+    if qqq_max_drawdown is not None:
+        output["drawdown_difference_vs_qqq"] = output["max_drawdown"] - qqq_max_drawdown
+        output["qqq_comparison"] = output["drawdown_difference_vs_qqq"].map(
+            lambda value: (
+                "same as QQQ"
+                if abs(value) < 0.00005
+                else f"{abs(value) * 100:.1f} pp worse than QQQ"
+                if value < 0
+                else f"{value * 100:.1f} pp less severe than QQQ"
+            )
+        )
+    else:
+        output["drawdown_difference_vs_qqq"] = float("nan")
+        output["qqq_comparison"] = "QQQ reference unavailable"
+    output["row_type"] = output.get(
+        "strategy", pd.Series("", index=output.index)
+    ).astype(str).map(
+        lambda strategy: "benchmark" if strategy in {"buy_hold_spy", "buy_hold_qqq"} else "strategy"
+    )
+    columns = [
+        "display_name",
+        "strategy",
+        "row_type",
+        "research_status",
+        "cagr",
+        "max_drawdown",
+        "drawdown_difference_vs_qqq",
+        "qqq_comparison",
+        "growth_utility_tier",
+    ]
+    return output[[column for column in columns if column in output]].sort_values(
+        "max_drawdown"
+    )
+
+
+def _render_deep_drawdown_comparison(
+    frame: pd.DataFrame,
+    *,
+    qqq_max_drawdown: float | None,
+) -> None:
+    comparison = _deep_drawdown_comparison_frame(
+        frame,
+        qqq_max_drawdown=qqq_max_drawdown,
+    )
+    with st.expander("Which strategies had drawdowns beyond the hard-review band?", expanded=False):
+        st.caption(
+            "This includes rejected and archived candidates so the left tail is inspectable, "
+            "not hidden. Negative QQQ differences are worse; positive differences are less severe. "
+            "The comparison text reports percentage-point differences."
+        )
+        if comparison.empty:
+            st.write("No strategies crossed the configured hard-review drawdown band.")
+            return
+        _render_metric_dataframe(_display_metrics(comparison), hide_index=True)
 
 
 def _add_outcome_drawdown_band_trace(

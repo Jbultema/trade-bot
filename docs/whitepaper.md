@@ -51,11 +51,24 @@ process that can be reviewed, challenged, and audited before capital is scaled.
 Strategy comparisons use a separate fail-closed contract. The canonical replay
 library records the exact price-frame hash and columns, market window, execution
 lag, rebalance cadence, costs, configuration, dependencies, and source tree for
-every scorecard. Its root manifest is written only after every saved candidate
+every scorecard. It also freezes the outcome-planning basis, including the
+$220,000 starting value, $4,000 annual contribution, monthly cadence, 15-year
+horizon, and drawdown bands. Its root manifest is written only after every saved candidate
 and configured strategy has been replayed and every declared artifact verifies.
 The dashboard does not merge earlier-regime scorecards or allow live-snapshot
 rows to override canonical replay rows. An incomplete or stale library produces
 no comparative leaderboard rather than a mixed one.
+
+The current rebuild contains 427 rows across 73 experiment groups: 406 exact
+saved-candidate replays plus 21 configured strategies. All 406 historical rows
+matched one-to-one. Relative to the earlier execution regime, median CAGR moved
+by 0.003 percentage points and median maximum drawdown by -0.237 points, but 114
+promotion decisions changed and nine names entered/exited the top 20. That is
+why the cleanup matters despite small aggregate headline changes. Holding the
+new return paths fixed and changing only annual contributions from $70,000 to
+$4,000 left the top-20 utility set unchanged; 223 lower ranks changed, largely
+inside tied score bands. The financial-assumption error materially overstated
+terminal dollars but did not create a new champion.
 
 ## 1. The Problem Trade Bot Is Built To Solve
 
@@ -422,6 +435,11 @@ in-sample winner lands above or below the median out-of-sample result. Low PBO
 supports the research process. High PBO means the strongest-looking backtests
 may be artifacts of trying many variants on the same market history.
 
+The July 22 canonical 20-candidate shelf produced 64.29% PBO, labeled
+`high_overfit_risk`, with 0% OOS-loss probability. The narrower active
+12-candidate adversarial roster produced 21.43%. That disagreement is itself a
+warning: PBO is roster-dependent and should not be quoted without its shelf.
+
 The eighth layer is defensive-signal judgement. This audits moments when the
 strategy moved heavily into BIL or residual cash and asks whether that caution
 was historically useful, a false alarm, or mixed. It reports the episode count,
@@ -435,7 +453,7 @@ The calibration is also applied to the scenario probabilities themselves.
 Point-in-time weekly origins are matched to matured SPY-versus-BIL and drawdown
 outcomes at one week, one month, and three months. The report includes reliability
 bins, Brier score and skill, AUC, expected calibration error, block-bootstrap
-uncertainty, and expanding-history authority. In the July 21, 2026 run, one-week
+uncertainty, and expanding-history authority. In the July 22, 2026 run, one-week
 and one-month Brier skill were negative; three-month skill was slightly positive
 but its interval crossed zero. The active policy therefore assigns zero
 one-month sizing authority.
@@ -470,14 +488,15 @@ starts, versus 53% and 26% across 19. The non-random cohorts and small confirmed
 do not establish an optimal threshold.
 
 The refreshed non-overlapping weekly replay makes the opportunity cost explicit.
-Native sizing produced an 18.74% CAGR and -26.21% maximum drawdown. Legacy
-risk-status sizing improved drawdown by 8.45 percentage points but reduced CAGR
-by 5.19 points. The confirmation-timed candidate reduced CAGR by 0.62 points and
-improved maximum drawdown by only 0.85 points; adding hard portfolio limits improved
-drawdown by 7.59 points but reduced CAGR by 5.05 points. The candidate therefore
+Native sizing produced a 19.60% CAGR and -25.90% maximum drawdown. Legacy
+risk-status sizing improved drawdown by 4.80 percentage points but reduced CAGR
+by 5.20 points. The confirmation-timed candidate reduced CAGR by 0.50 points and
+made maximum drawdown 0.40 points worse; adding hard portfolio limits improved
+drawdown by 5.10 points but reduced CAGR by 5.10 points. The current authorized
+overlay cost 0.10 CAGR points and made drawdown 0.30 points worse. The candidate therefore
 remains visible with zero allocation authority. A separate sparse pre-break
-overlay replay reduced median CAGR from 14.29% to 12.69% without improving the
--22.48% median maximum drawdown. These are
+overlay replay reduced median CAGR from 13.09% to 11.94% without improving the
+-22.10% median maximum drawdown. These are
 retrospective, current-universe results rather than prospective proof, but they
 show that the cost of optionality has not historically been small enough to
 treat aggressive overlay defense as a free improvement.
@@ -507,10 +526,10 @@ discrimination; it should not be described as a crash prediction.
 
 The contribution-aware catastrophic-tail read uses 1,000 fixed-seed,
 21-session block-bootstrap paths over 15 years, starting at $220,000 with
-$70,000 annual contributions. Drawdown is calculated on a flow-neutral return
+$4,000 annual contributions. Drawdown is calculated on a flow-neutral return
 index so contributions cannot hide losses. For the configured primary, the
-historical resample produced a 50.3% frequency of drawdown beyond 25%, a 21.3%
-frequency beyond 30%, and a 98.1% chance of exceeding the wealth generated by a
+historical resample produced a 48.5% frequency of drawdown beyond 25%, a 22.1%
+frequency beyond 30%, and a 98.5% chance of exceeding the wealth generated by a
 deterministic 10% return path. These are modern-universe historical resamples,
 not forecasts; their value is comparing policy utility under one frozen method.
 
@@ -578,10 +597,10 @@ inspected instead of hidden.
 Research governance is also a test layer. New manifests record the declared
 trial roster and run a fail-closed point-in-time universe audit covering
 historical membership, holding-date eligibility, delisting returns, and source
-metadata. The consolidated 2026-07-21 ledger indexes 540 manifested completed
-trial rows across 14 manifests and 11 distinct studies. Three manifests lack an
-explicit candidate roster, 119 artifact directories have no manifest, and all
-540 trial rows still lack verified point-in-time universe evidence. That is a
+metadata. The consolidated 2026-07-22 ledger indexes 569 manifested completed
+trial rows across 19 manifests and 16 distinct studies. Three manifests lack an
+explicit candidate roster, 113 artifact directories have no manifest, and all
+569 trial rows still lack verified point-in-time universe evidence. That is a
 promotion blocker, not a warning label. The ledger cannot reconstruct
 interrupted or unmanifested attempts, so complete historical trial-count proof
 also remains unfinished and retrospective promotion is disabled.

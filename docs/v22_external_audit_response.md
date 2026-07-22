@@ -1,6 +1,6 @@
 # V2.2 External Audit Response
 
-Status: implemented and empirically rerun on 2026-07-21.
+Status: implemented and empirically rerun on 2026-07-22.
 
 ## Bottom line
 
@@ -38,25 +38,25 @@ points. This is native-strategy defense, not multi-layer independent agreement.
 | Risk-score orientation | Hardened | Production calculation is public and property-tested so independently more bearish inputs cannot lower the risk score. |
 | Allocation authority | Hardened | Omitted allocation policy fails closed. Scenario, event/news, risk timing, and revised-history macro cannot size without explicit calibrated authority. |
 | Point-in-time universe / delistings | Fail-closed, data unresolved | Every research manifest audits membership, holding eligibility, delisting treatment, and sources. All 540 indexed trials remain promotion-ineligible because verified point-in-time evidence is absent. |
-| Research-wide selection | Implemented as governance blocker | 540 manifested rows, 14 manifests, 11 studies, three manifests without explicit rosters, and 119 artifact directories without manifests. Retrospective promotion status is `prospective_evidence_required`. |
+| Research-wide selection | Implemented as governance blocker | 569 manifested rows, 19 manifests, 16 studies, three manifests without explicit rosters, and 113 artifact directories without manifests. Retrospective promotion status is `prospective_evidence_required`. |
 | Frozen prospective evidence | Hardened | Runtime provenance records git/tree/dirty state, exact source tree, dependency lock, config, schema, and price-frame identity. Any revision starts a new source identity. |
 | Revised macro vintage | Fixed authority | Macro authority defaults to zero. Nonzero authority requires provisional/validated calibration plus point-in-time or first-release vintage status. |
 | Scenario false precision | UI corrected | Primary UI says raw risk-off score, displays insufficient calibration and 0% authority, and avoids treating the number as a literal forecast. |
 | “Correct defense” semantics | UI/report interpretation corrected | User-facing labels are “beneficial under rule” and “costly false positive”; the rule and episode unit are stated. Internal legacy column names remain for artifact compatibility. |
 | PBO scope | Qualified | Dashboard calls it within-shelf PBO and states that abandoned/unmanifested research is excluded. |
 | Catastrophic-tail utility | Implemented | Bootstrap summary reports P(DD >10/20/30%), conditional loss beyond 20%, target-wealth attainment, and flow-neutral drawdown. |
-| Contribution-aware planning | Implemented, bounded | Default is 15 years, $220K start, $70K annual monthly contributions. Terminal wealth includes flows; drawdown does not. Retirement spending/funding-ratio modeling remains future work. |
+| Contribution-aware planning | Implemented, bounded | Default is 15 years, $220K start, $4K annual contributions deposited monthly. Terminal wealth includes flows; drawdown does not. Retirement spending/funding-ratio modeling remains future work. |
 | Canonical pickle replacement | Deferred | New manifests make pickle identity inspectable, but DuckDB/Parquet plus schema-versioned JSON has not yet replaced pickle as the canonical snapshot payload. |
 | Defensive asset policy | Deferred fixed experiment | BIL remains a policy choice. No multi-asset defensive-basket search was run in this cycle to avoid expanding selection degrees of freedom. |
 
 ## Rebuilt evidence
 
-- Replaced 222/222 operating-history dates and pruned superseded generations.
+- Replaced 223/223 operating-history dates through 2026-07-22 and pruned superseded generations.
 - Replaced 397/397 pre-break-history dates and pruned superseded generations.
-- The refreshed pre-break analysis contains 485 observations including
+- The refreshed pre-break analysis contains 486 observations including
   reference controls and 42 post-break event-window snapshots.
-- Sparse risk overlays lowered median CAGR from 14.29% to as low as 12.69% and
-  did not improve the -22.48% median maximum drawdown.
+- Sparse risk overlays lowered median CAGR from 13.09% to as low as 11.94% and
+  did not improve the -22.10% median maximum drawdown.
 - At 65% native defense, the 42 one-month episode starts were 45.2% beneficial
   under the stated rule, 33.3% costly false positives, and 21.4% mixed. At three
   months: 42.9%, 31.0%, and 26.2%.
@@ -66,16 +66,16 @@ points. This is native-strategy defense, not multi-layer independent agreement.
 ## Catastrophic-tail fixed experiment
 
 The fixed 1,000-path, 21-session block bootstrap uses a 15-year horizon,
-$220,000 initial portfolio, $70,000 annual monthly contributions, and seed
+$220,000 initial portfolio, $4,000 annual contributions deposited monthly, and seed
 `20260705`. The wealth target is the terminal value of the same cash flows at a
-deterministic 10% return ($3.24M).
+deterministic 10% return ($1.05M).
 
 | Path | P(DD >25%) | P(DD >30%) | Conditional mean DD when >20% | Target success | Median terminal wealth |
 | --- | ---: | ---: | ---: | ---: | ---: |
-| Configured primary | 50.3% | 21.3% | -27.2% | 98.1% | $9.91M |
-| Native i111 | 49.3% | 20.8% | -27.1% | 98.2% | $10.06M |
-| SPY hold | 92.5% | 73.3% | -37.0% | 61.8% | $3.80M |
-| QQQ hold | 96.3% | 79.3% | -38.3% | 82.3% | $5.97M |
+| Configured primary | 48.5% | 22.1% | -27.2% | 98.5% | $4.22M |
+| Native i111 | 47.8% | 21.7% | -27.1% | 98.6% | $4.29M |
+| SPY hold | 92.3% | 73.8% | -36.9% | 60.9% | $1.25M |
+| QQQ hold | 95.9% | 80.0% | -38.2% | 82.2% | $2.21M |
 
 This is useful comparative utility evidence, not a forecast. It is still based
 on contribution-aware resampling of modern-universe retrospective paths.
