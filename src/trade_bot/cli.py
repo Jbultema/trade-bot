@@ -162,6 +162,7 @@ from trade_bot.research.operating_history import (
     reconstruct_operating_history,
 )
 from trade_bot.research.prebreak_hindsight import (
+    DEFAULT_HISTORICAL_CONTROL_FREQUENCY,
     DEFAULT_POSTBREAK_FOLLOWTHROUGH_DAYS,
     DEFAULT_PREBREAK_HORIZON_DAYS,
     DEFAULT_PREBREAK_LOOKBACK_DAYS,
@@ -171,7 +172,7 @@ from trade_bot.research.prebreak_hindsight import (
     DEFAULT_PREBREAK_RUN_STORE_JOB_LOG_DIR,
     DEFAULT_PREBREAK_WEEKLY_FREQUENCY,
     analyze_prebreak_hindsight,
-    build_prebreak_snapshot_plan,
+    build_prebreak_snapshot_population_plan,
     deduplicate_prebreak_snapshot_plan,
     write_prebreak_hindsight_outputs,
 )
@@ -1145,6 +1146,17 @@ def generate_prebreak_snapshots_cmd(
         str,
         typer.Option("--weekly-frequency", help="Weekly bucket frequency for event-window dates."),
     ] = DEFAULT_PREBREAK_WEEKLY_FREQUENCY,
+    include_historical_controls: Annotated[
+        bool,
+        typer.Option(
+            "--include-historical-controls/--event-windows-only",
+            help="Add ordinary-history controls outside every named event window.",
+        ),
+    ] = True,
+    control_frequency: Annotated[
+        str,
+        typer.Option("--control-frequency", help="Calendar frequency for ordinary-history controls."),
+    ] = DEFAULT_HISTORICAL_CONTROL_FREQUENCY,
     market_close_utc_hour: Annotated[
         int,
         typer.Option("--market-close-utc-hour"),
@@ -1182,11 +1194,13 @@ def generate_prebreak_snapshots_cmd(
         cache_dir=bot_config.data.cache_dir,
         refresh=refresh_macro,
     )
-    plan = build_prebreak_snapshot_plan(
+    plan = build_prebreak_snapshot_population_plan(
         prices.index,
         lookback_days=lookback_days,
         postbreak_days=postbreak_days,
         weekly_frequency=weekly_frequency,
+        include_historical_controls=include_historical_controls,
+        control_frequency=control_frequency,
     )
     plan = deduplicate_prebreak_snapshot_plan(plan)
     if plan.empty:
@@ -1208,6 +1222,7 @@ def generate_prebreak_snapshots_cmd(
         lookback_days=lookback_days,
         postbreak_days=postbreak_days,
         weekly_frequency=weekly_frequency,
+        control_frequency=control_frequency,
         skipped_existing=len(existing_market_dates) if skip_existing else 0,
         plan_only=plan_only,
     )
@@ -4551,6 +4566,7 @@ def _print_prebreak_snapshot_plan(
     lookback_days: int,
     postbreak_days: int,
     weekly_frequency: str,
+    control_frequency: str,
     skipped_existing: int,
     plan_only: bool,
 ) -> None:
@@ -4561,12 +4577,16 @@ def _print_prebreak_snapshot_plan(
     table.add_row("lookback days", f"{lookback_days:,}")
     table.add_row("postbreak days", f"{postbreak_days:,}")
     table.add_row("weekly frequency", weekly_frequency)
+    table.add_row("historical control frequency", control_frequency)
     table.add_row("existing market dates checked", f"{skipped_existing:,}")
     table.add_row("selected snapshots", f"{len(plan):,}")
     if not plan.empty:
         table.add_row("first selected", str(plan["market_date"].iloc[0]))
         table.add_row("last selected", str(plan["market_date"].iloc[-1]))
-        table.add_row("events", f"{plan['event_name'].nunique():,}")
+        named_events = plan["event_name"].fillna("").astype(str).ne("")
+        table.add_row("events", f"{plan.loc[named_events, 'event_name'].nunique():,}")
+        table.add_row("event-window snapshots", f"{int(named_events.sum()):,}")
+        table.add_row("historical controls", f"{int((~named_events).sum()):,}")
     console.print(table)
     if not plan.empty:
         preview = Table(title="Bubble-Break Snapshot Preview")
@@ -4584,6 +4604,7 @@ def _print_prebreak_snapshot_plan(
                 str(row["market_date"]),
                 str(row["break_date"]),
                 str(row["days_to_break"]),
+                str(row["postbreak_snapshot"]),
             )
         console.print(preview)
 

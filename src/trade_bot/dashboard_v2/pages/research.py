@@ -1374,6 +1374,7 @@ def _render_prebreak_hindsight_layers(
         "This layer uses hindsight-labeled historical snapshots. It does not predict a crash by "
         "itself; it shows whether the same signals that helped before are quiet, mixed, or elevated now."
     )
+    _render_prebreak_population_summary(signal_panel)
     if not current_readout.empty:
         _render_current_prebreak_monitor(current_readout, defensive_audit=defensive_audit)
     if not signal_panel.empty or not action_timing.empty:
@@ -1397,6 +1398,82 @@ def _render_prebreak_hindsight_layers(
         )
     if not signal_rank.empty:
         _render_prebreak_signal_attribution(signal_rank, current_readout=current_readout)
+
+
+def _render_prebreak_population_summary(signal_panel: pd.DataFrame) -> None:
+    if signal_panel.empty:
+        st.warning(
+            "The pre-break report has no snapshot population. Rebuild the historical event and "
+            "ordinary-control origins before interpreting this section."
+        )
+        return
+    population = _prebreak_population_summary(signal_panel)
+    render_section_header(
+        "Historical Sample Population",
+        help_text=(
+            "Coverage behind the hindsight layer. Origins overlap at the three-month outcome "
+            "horizon, so conservative event/control clusters are more meaningful than the raw row count."
+        ),
+    )
+    render_card_grid(
+        [
+            ("Historical Origins", population["origins"]),
+            ("Mature 3m Outcomes", population["mature_outcomes"]),
+            ("Named Events", population["named_events"]),
+            ("Ordinary Controls", population["ordinary_controls"]),
+            (
+                "Conservative Clusters",
+                population["population_clusters"],
+                "Named events count once; ordinary controls are grouped by calendar quarter.",
+            ),
+            ("Date Range", population["date_range"]),
+        ]
+    )
+    render_callout(
+        f"Population balance: {population['event_origins']} event-window origins and "
+        f"{population['ordinary_controls']} ordinary-history controls. Treat the "
+        f"{population['population_clusters']} event/quarter clusters as the conservative evidence "
+        "count; the raw origins are overlapping observations, not independent trials."
+    )
+
+
+def _prebreak_population_summary(signal_panel: pd.DataFrame) -> dict[str, object]:
+    data = signal_panel.copy()
+    dates = pd.to_datetime(
+        data.get("market_date", pd.Series(index=data.index, dtype=object)),
+        errors="coerce",
+    )
+    event_names = data.get("event_name", pd.Series("", index=data.index)).fillna("").astype(str)
+    event_mask = event_names.str.strip().ne("")
+    roles = data.get("population_role", pd.Series("", index=data.index)).fillna("").astype(str)
+    control_mask = roles.eq("historical_control") | ~event_mask
+    if "population_cluster" in data:
+        clusters = data["population_cluster"].fillna("").astype(str)
+    else:
+        clusters = pd.Series("", index=data.index, dtype=object)
+        clusters.loc[event_mask] = "event:" + event_names.loc[event_mask]
+        clusters.loc[control_mask] = (
+            "control:" + dates.loc[control_mask].dt.to_period("Q").astype(str)
+        )
+    mature = pd.to_numeric(
+        data.get("break_severity_3m", pd.Series(index=data.index, dtype=float)),
+        errors="coerce",
+    ).notna()
+    valid_dates = dates.dropna()
+    date_range = (
+        f"{valid_dates.min().date()} to {valid_dates.max().date()}"
+        if not valid_dates.empty
+        else "n/a"
+    )
+    return {
+        "origins": int(len(data)),
+        "mature_outcomes": int(mature.sum()),
+        "named_events": int(event_names.loc[event_mask].nunique()),
+        "event_origins": int(event_mask.sum()),
+        "ordinary_controls": int(control_mask.sum()),
+        "population_clusters": int(clusters[clusters.str.strip().ne("")].nunique()),
+        "date_range": date_range,
+    }
 
 
 def _select_prebreak_event(
@@ -1505,6 +1582,12 @@ def _render_current_prebreak_monitor(
                 top_read.title(),
                 "Current interpretation for the highest-ranked pre-break monitor.",
                 _risk_read_tone(top_read),
+            ),
+            (
+                "High Risk",
+                int(read_counts.get("high_risk", 0)),
+                "Count of best historical monitors currently in the top risk percentile band.",
+                "critical" if int(read_counts.get("high_risk", 0)) else "neutral",
             ),
             (
                 "Elevated",
@@ -2408,7 +2491,7 @@ def _late_trigger_tone(value: object) -> str:
 
 def _risk_read_tone(value: object) -> str:
     text = str(value).strip().lower()
-    if text == "elevated":
+    if text in {"high_risk", "elevated"}:
         return "critical"
     if text == "mixed":
         return "warning"

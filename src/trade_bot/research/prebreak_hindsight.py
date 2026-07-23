@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import hashlib
 from dataclasses import dataclass
 from pathlib import Path
 from typing import Any
@@ -22,6 +23,7 @@ class BubbleBreakWindow:
 DEFAULT_PREBREAK_LOOKBACK_DAYS = 365
 DEFAULT_POSTBREAK_FOLLOWTHROUGH_DAYS = 31
 DEFAULT_PREBREAK_WEEKLY_FREQUENCY = "W-WED"
+DEFAULT_HISTORICAL_CONTROL_FREQUENCY = "M"
 DEFAULT_PREBREAK_HORIZON_DAYS = 63
 DEFAULT_PREBREAK_OUTPUT_DIR = Path("reports/prebreak_hindsight")
 DEFAULT_PREBREAK_RUN_STORE_DB_PATH = Path("data/prebreak_hindsight/trade_bot.duckdb")
@@ -163,6 +165,7 @@ def build_prebreak_snapshot_plan(
                     "days_to_break": int((break_date - market_date).days),
                     "postbreak_snapshot": bool(market_date > break_date),
                     "weekly_frequency": weekly_frequency,
+                    "population_role": "event_window",
                 }
             )
     if not rows:
@@ -183,6 +186,80 @@ def build_prebreak_snapshot_plan(
     return (
         pd.DataFrame(rows)
         .sort_values(["break_date", "market_date", "event_name"])
+        .reset_index(drop=True)
+    )
+
+
+def build_historical_control_snapshot_plan(
+    available_dates: pd.DatetimeIndex | list[object] | tuple[object, ...],
+    *,
+    windows: tuple[BubbleBreakWindow, ...] = DEFAULT_BUBBLE_BREAK_WINDOWS,
+    lookback_days: int = DEFAULT_PREBREAK_LOOKBACK_DAYS,
+    postbreak_days: int = DEFAULT_POSTBREAK_FOLLOWTHROUGH_DAYS,
+    control_frequency: str = DEFAULT_HISTORICAL_CONTROL_FREQUENCY,
+) -> pd.DataFrame:
+    """Select ordinary-history controls outside every named event window."""
+    dates = _normalize_dates(available_dates)
+    if dates.empty:
+        return pd.DataFrame()
+    outside_event_window = pd.Series(True, index=dates)
+    for window in windows:
+        break_date = pd.Timestamp(window.break_date).normalize()
+        start_date = break_date - pd.Timedelta(days=lookback_days)
+        end_date = break_date + pd.Timedelta(days=postbreak_days)
+        outside_event_window &= ~((dates >= start_date) & (dates <= end_date))
+    control_dates = dates[outside_event_window.to_numpy()]
+    if control_dates.empty:
+        return pd.DataFrame()
+    frame = pd.DataFrame({"market_date": control_dates})
+    frame["control_bucket"] = frame["market_date"].dt.to_period(control_frequency).astype(str)
+    selected = frame.groupby("control_bucket", sort=True)["market_date"].max()
+    return pd.DataFrame(
+        {
+            "event_name": "",
+            "family": "historical_control",
+            "description": "Ordinary-history control outside every named event window.",
+            "break_date": "",
+            "window_start_date": "",
+            "window_end_date": "",
+            "market_date": pd.DatetimeIndex(selected).strftime("%Y-%m-%d"),
+            "days_to_break": np.nan,
+            "postbreak_snapshot": False,
+            "weekly_frequency": control_frequency,
+            "population_role": "historical_control",
+        }
+    )
+
+
+def build_prebreak_snapshot_population_plan(
+    available_dates: pd.DatetimeIndex | list[object] | tuple[object, ...],
+    *,
+    windows: tuple[BubbleBreakWindow, ...] = DEFAULT_BUBBLE_BREAK_WINDOWS,
+    lookback_days: int = DEFAULT_PREBREAK_LOOKBACK_DAYS,
+    postbreak_days: int = DEFAULT_POSTBREAK_FOLLOWTHROUGH_DAYS,
+    weekly_frequency: str = DEFAULT_PREBREAK_WEEKLY_FREQUENCY,
+    include_historical_controls: bool = True,
+    control_frequency: str = DEFAULT_HISTORICAL_CONTROL_FREQUENCY,
+) -> pd.DataFrame:
+    event_plan = build_prebreak_snapshot_plan(
+        available_dates,
+        windows=windows,
+        lookback_days=lookback_days,
+        postbreak_days=postbreak_days,
+        weekly_frequency=weekly_frequency,
+    )
+    if not include_historical_controls:
+        return event_plan
+    control_plan = build_historical_control_snapshot_plan(
+        available_dates,
+        windows=windows,
+        lookback_days=lookback_days,
+        postbreak_days=postbreak_days,
+        control_frequency=control_frequency,
+    )
+    return (
+        pd.concat([event_plan, control_plan], ignore_index=True)
+        .sort_values(["market_date", "population_role", "event_name"])
         .reset_index(drop=True)
     )
 
@@ -381,22 +458,27 @@ def _dedupe_snapshot_signals(snapshot_signals: pd.DataFrame) -> pd.DataFrame:
         else pd.Series("", index=frame.index)
     )
     in_event_window = event_name.ne("")
+    frame.loc[source.eq("prebreak_experiment") & ~in_event_window, "snapshot_source"] = (
+        "historical_control"
+    )
+    source = frame["snapshot_source"].fillna("").astype(str)
     frame = frame.loc[
-        ~(
-            (source.eq("reference_control") & in_event_window)
-            | (source.eq("prebreak_experiment") & ~in_event_window)
-        )
+        ~(source.eq("reference_control") & in_event_window)
     ].copy()
+    frame["_source_priority"] = (
+        frame["snapshot_source"]
+        .astype(str)
+        .map({"reference_control": 0, "historical_control": 1, "prebreak_experiment": 2})
+        .fillna(0)
+    )
     sort_columns = [
         column
-        for column in ["snapshot_source", "event_name", "market_date", "created_at_utc", "run_id"]
+        for column in ["event_name", "market_date", "_source_priority", "created_at_utc", "run_id"]
         if column in frame
     ]
     if sort_columns:
         frame = frame.sort_values(sort_columns)
-    dedupe_columns = [
-        column for column in ["snapshot_source", "event_name", "market_date"] if column in frame
-    ]
+    dedupe_columns = [column for column in ["event_name", "market_date"] if column in frame]
     if dedupe_columns:
         frame = frame.drop_duplicates(dedupe_columns, keep="last")
     if "run_id" in frame:
@@ -406,7 +488,7 @@ def _dedupe_snapshot_signals(snapshot_signals: pd.DataFrame) -> pd.DataFrame:
     ]
     if final_sort_columns:
         frame = frame.sort_values(final_sort_columns)
-    return frame.reset_index(drop=True)
+    return frame.drop(columns=["_source_priority"], errors="ignore").reset_index(drop=True)
 
 
 def snapshot_signal_row(
@@ -536,6 +618,7 @@ def snapshot_signal_row(
         lookback_days=lookback_days,
         postbreak_days=postbreak_days,
     )
+    _add_population_metadata(row)
     _add_staged_risk_metadata(row)
     row["hindsight_action_aligned"] = bool(
         _truthy_label(row.get("forward_break_label_3m")) and row.get("defensive_action_flag", False)
@@ -573,6 +656,8 @@ def rank_predictive_signals(
         "risk_status",
         "recommended_action",
         "hindsight_action_aligned",
+        "population_role",
+        "population_cluster",
     }
     outcome_columns = {
         target_column,
@@ -640,6 +725,13 @@ def rank_predictive_signals(
                 "predictive_score": predictive_score,
                 "risk_direction": "higher_is_riskier" if spearman >= 0 else "lower_is_riskier",
                 "latest_value": _latest_signal_value(snapshot_signals, column),
+                **_signal_population_evidence(
+                    snapshot_signals,
+                    signal=signal,
+                    target=target,
+                    label=label,
+                    column=column,
+                ),
             }
         )
     if not rows:
@@ -651,6 +743,99 @@ def rank_predictive_signals(
             ascending=[False, False, False],
         )
         .reset_index(drop=True)
+    )
+
+
+def _signal_population_evidence(
+    snapshot_signals: pd.DataFrame,
+    *,
+    signal: pd.Series,
+    target: pd.Series,
+    label: pd.Series | None,
+    column: str,
+) -> dict[str, float | int]:
+    market_dates = pd.to_datetime(snapshot_signals.get("market_date"), errors="coerce")
+    fallback_clusters = market_dates.dt.to_period("Q").astype(str).radd("control:")
+    clusters = snapshot_signals.get("population_cluster", fallback_clusters)
+    roles = snapshot_signals.get(
+        "population_role", pd.Series("historical_control", index=snapshot_signals.index)
+    )
+    frame = pd.DataFrame(
+        {
+            "signal": signal,
+            "target": target,
+            "label": label if label is not None else np.nan,
+            "cluster": clusters,
+            "role": roles,
+        }
+    ).dropna(subset=["signal", "target", "cluster"])
+    population_clusters = int(frame["cluster"].nunique())
+    event_clusters = int(
+        frame.loc[frame["role"].astype(str).eq("event_window"), "cluster"].nunique()
+    )
+    control_clusters = int(
+        frame.loc[frame["role"].astype(str).eq("historical_control"), "cluster"].nunique()
+    )
+    spearman_low, spearman_high, auc_low, auc_high = _cluster_bootstrap_signal_intervals(
+        frame,
+        seed=int(hashlib.sha256(column.encode("utf-8")).hexdigest()[:8], 16),
+    )
+    return {
+        "population_clusters": population_clusters,
+        "effective_sample_size": population_clusters,
+        "event_clusters": event_clusters,
+        "control_clusters": control_clusters,
+        "spearman_ci_low": spearman_low,
+        "spearman_ci_high": spearman_high,
+        "event_auc_ci_low": auc_low,
+        "event_auc_ci_high": auc_high,
+    }
+
+
+def _cluster_bootstrap_signal_intervals(
+    frame: pd.DataFrame,
+    *,
+    seed: int,
+    draws: int = 400,
+) -> tuple[float, float, float, float]:
+    unique_clusters = frame["cluster"].dropna().astype(str).unique()
+    if len(unique_clusters) < 8:
+        return np.nan, np.nan, np.nan, np.nan
+    grouped = {
+        cluster: frame[frame["cluster"].astype(str).eq(cluster)] for cluster in unique_clusters
+    }
+    rng = np.random.default_rng(seed)
+    spearman_values: list[float] = []
+    auc_values: list[float] = []
+    for _ in range(draws):
+        sampled = rng.choice(unique_clusters, size=len(unique_clusters), replace=True)
+        bootstrap = pd.concat([grouped[str(cluster)] for cluster in sampled], ignore_index=True)
+        spearman = bootstrap["signal"].corr(bootstrap["target"], method="spearman")
+        if pd.notna(spearman):
+            spearman_values.append(float(spearman))
+        labels = pd.to_numeric(bootstrap["label"], errors="coerce")
+        aligned = bootstrap.loc[labels.notna(), ["signal"]].copy()
+        aligned["label"] = labels.loc[labels.notna()].astype(bool).to_numpy()
+        if aligned["label"].nunique() == 2:
+            auc = _directional_auc(
+                aligned.loc[aligned["label"], "signal"],
+                aligned.loc[~aligned["label"], "signal"],
+            )
+            if pd.notna(auc):
+                auc_values.append(float(auc))
+    spearman_interval = (
+        np.quantile(spearman_values, [0.025, 0.975])
+        if spearman_values
+        else (np.nan, np.nan)
+    )
+    auc_interval = (
+        np.quantile(auc_values, [0.025, 0.975]) if auc_values else (np.nan, np.nan)
+    )
+    return (
+        float(spearman_interval[0]),
+        float(spearman_interval[1]),
+        float(auc_interval[0]),
+        float(auc_interval[1]),
     )
 
 
@@ -1260,6 +1445,17 @@ def _add_event_membership(
     row["event_description"] = match.description
     row["days_to_break"] = int((break_date - market_date).days)
     row["postbreak_snapshot"] = bool(market_date > break_date)
+
+
+def _add_population_metadata(row: dict[str, object]) -> None:
+    event_name = str(row.get("event_name", "")).strip()
+    market_date = pd.Timestamp(row["market_date"]).normalize()
+    if event_name:
+        row["population_role"] = "event_window"
+        row["population_cluster"] = f"event:{event_name}"
+        return
+    row["population_role"] = "historical_control"
+    row["population_cluster"] = f"control:{market_date.to_period('Q')}"
 
 
 def _add_staged_risk_metadata(row: dict[str, object]) -> None:

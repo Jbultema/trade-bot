@@ -487,6 +487,40 @@ def test_prebreak_signal_rank_figure_marks_current_risk_reads() -> None:
     assert "#ef4444" in list(figure.data[0].marker.color)
 
 
+def test_prebreak_population_summary_separates_origins_from_conservative_clusters() -> None:
+    frame = pd.DataFrame(
+        {
+            "market_date": ["2020-01-08", "2020-01-15", "2020-04-15", "2020-07-15"],
+            "event_name": ["sample_break", "sample_break", "", ""],
+            "population_role": [
+                "event_window",
+                "event_window",
+                "historical_control",
+                "historical_control",
+            ],
+            "population_cluster": [
+                "event:sample_break",
+                "event:sample_break",
+                "control:2020Q2",
+                "control:2020Q3",
+            ],
+            "break_severity_3m": [0.2, 0.1, 0.0, float("nan")],
+        }
+    )
+
+    summary = research._prebreak_population_summary(frame)
+
+    assert summary == {
+        "origins": 4,
+        "mature_outcomes": 3,
+        "named_events": 1,
+        "event_origins": 2,
+        "ordinary_controls": 2,
+        "population_clusters": 3,
+        "date_range": "2020-01-08 to 2020-07-15",
+    }
+
+
 def test_prebreak_event_selector_options_filter_rollups_and_default_alias() -> None:
     signal_panel = pd.DataFrame(
         {
@@ -533,6 +567,7 @@ def test_prebreak_event_selector_renders_below_selected_behavior_heading(monkeyp
         lambda title, **_kwargs: rendered.append(f"heading:{title}"),
     )
     monkeypatch.setattr(research, "render_callout", lambda *_args, **_kwargs: None)
+    monkeypatch.setattr(research, "render_card_grid", lambda *_args, **_kwargs: None)
     monkeypatch.setattr(
         research,
         "_select_prebreak_event",
@@ -557,6 +592,7 @@ def test_prebreak_event_selector_renders_below_selected_behavior_heading(monkeyp
 
     assert rendered == [
         "heading:Pre-Break Behavior And Early Warning",
+        "heading:Historical Sample Population",
         "heading:Selected Crisis Trade-Bot Behavior",
         "selector",
         "behavior",

@@ -8,8 +8,11 @@ from trade_bot.research.prebreak_hindsight import (
     DEFAULT_PREBREAK_LOOKBACK_DAYS,
     BubbleBreakWindow,
     _add_market_health_metrics,
+    _dedupe_snapshot_signals,
+    build_historical_control_snapshot_plan,
     build_late_trigger_mesh,
     build_prebreak_snapshot_plan,
+    build_prebreak_snapshot_population_plan,
     current_best_signal_readout,
     deduplicate_prebreak_snapshot_plan,
     evaluate_staged_policy_variants,
@@ -161,6 +164,64 @@ def test_prebreak_default_lookback_extends_to_one_year() -> None:
     assert DEFAULT_PREBREAK_LOOKBACK_DAYS == 365
     assert pd.to_datetime(plan["market_date"]).min() <= pd.Timestamp("2019-02-20")
     assert plan["days_to_break"].max() >= 360
+
+
+def test_historical_control_plan_spans_ordinary_history_outside_event_window() -> None:
+    dates = pd.bdate_range("2019-01-01", "2021-12-31")
+    windows = (
+        BubbleBreakWindow(
+            name="test_break",
+            break_date="2020-02-19",
+            family="test",
+            description="Synthetic break.",
+        ),
+    )
+
+    controls = build_historical_control_snapshot_plan(
+        dates,
+        windows=windows,
+        lookback_days=365,
+        postbreak_days=31,
+    )
+    population = build_prebreak_snapshot_population_plan(
+        dates,
+        windows=windows,
+        lookback_days=365,
+        postbreak_days=31,
+    )
+
+    control_dates = pd.to_datetime(controls["market_date"])
+    assert controls["population_role"].eq("historical_control").all()
+    assert control_dates.dt.to_period("M").nunique() == len(controls)
+    assert not control_dates.between("2019-02-19", "2020-03-21").any()
+    assert set(population["population_role"]) == {"event_window", "historical_control"}
+
+
+def test_prebreak_signal_dedup_prefers_full_history_control_over_reference_duplicate() -> None:
+    frame = pd.DataFrame(
+        [
+            {
+                "run_id": "main-control",
+                "market_date": "2016-03-31",
+                "created_at_utc": "2016-04-01T00:00:00Z",
+                "event_name": "",
+                "snapshot_source": "reference_control",
+            },
+            {
+                "run_id": "population-control",
+                "market_date": "2016-03-31",
+                "created_at_utc": "2016-04-01T00:00:01Z",
+                "event_name": "",
+                "snapshot_source": "prebreak_experiment",
+            },
+        ]
+    )
+
+    deduped = _dedupe_snapshot_signals(frame)
+
+    assert len(deduped) == 1
+    assert deduped.iloc[0]["run_id"] == "population-control"
+    assert deduped.iloc[0]["snapshot_source"] == "historical_control"
 
 
 def test_rank_predictive_signals_finds_monotonic_break_signal() -> None:
