@@ -1311,9 +1311,12 @@ def analyze_prebreak_hindsight_cmd(
         bool,
         typer.Option(
             "--include-reference-snapshots/--skip-reference-snapshots",
-            help="Include ordinary snapshots from the reference store as non-event controls.",
+            help=(
+                "Include ordinary snapshots from the reference store only when the pre-break "
+                "store has no full-history controls."
+            ),
         ),
-    ] = True,
+    ] = False,
     output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_PREBREAK_OUTPUT_DIR,
     lookback_days: Annotated[int, typer.Option("--lookback-days")] = DEFAULT_PREBREAK_LOOKBACK_DAYS,
     postbreak_days: Annotated[

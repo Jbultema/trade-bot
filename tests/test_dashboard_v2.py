@@ -289,6 +289,7 @@ def test_dashboard_v2_artifact_service_missing_files_are_empty(tmp_path) -> None
         "hard_defense_attribution",
         "policy_variant_results",
         "current_best_signal_readout",
+        "historical_population_summary",
     }
     assert all(frame.empty for frame in prebreak.values())
     defensive = defensive_signal_audit_frames(tmp_path / "missing_defensive_dir")

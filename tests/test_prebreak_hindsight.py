@@ -16,6 +16,7 @@ from trade_bot.research.prebreak_hindsight import (
     current_best_signal_readout,
     deduplicate_prebreak_snapshot_plan,
     evaluate_staged_policy_variants,
+    historical_population_summary,
     rank_predictive_signals,
     snapshot_signal_row,
     summarize_action_timing,
@@ -222,6 +223,30 @@ def test_prebreak_signal_dedup_prefers_full_history_control_over_reference_dupli
     assert len(deduped) == 1
     assert deduped.iloc[0]["run_id"] == "population-control"
     assert deduped.iloc[0]["snapshot_source"] == "historical_control"
+
+
+def test_historical_population_summary_reports_event_control_balance() -> None:
+    frame = pd.DataFrame(
+        {
+            "market_date": ["2020-01-01", "2020-01-08", "2020-04-30"],
+            "event_name": ["sample", "sample", ""],
+            "event_family": ["test", "test", ""],
+            "population_role": ["event_window", "event_window", "historical_control"],
+            "population_cluster": ["event:sample", "event:sample", "control:2020Q2"],
+            "break_severity_3m": [0.2, 0.1, 0.0],
+            "forward_break_label_3m": [True, True, False],
+            "forward_major_break_label_3m": [True, False, False],
+        }
+    )
+
+    row = historical_population_summary(frame).iloc[0]
+
+    assert row["origins"] == 3
+    assert row["event_window_origins"] == 2
+    assert row["historical_control_origins"] == 1
+    assert row["population_clusters"] == 2
+    assert row["event_severe_label_rate"] == 1.0
+    assert row["control_severe_label_rate"] == 0.0
 
 
 def test_rank_predictive_signals_finds_monotonic_break_signal() -> None:

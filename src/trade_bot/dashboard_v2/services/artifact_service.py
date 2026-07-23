@@ -68,6 +68,9 @@ def prebreak_hindsight_frames(
         "hard_defense_attribution": read_csv_artifact(root / "hard_defense_attribution.csv"),
         "policy_variant_results": read_csv_artifact(root / "policy_variant_results.csv"),
         "current_best_signal_readout": read_csv_artifact(root / "current_best_signal_readout.csv"),
+        "historical_population_summary": read_csv_artifact(
+            root / "historical_population_summary.csv"
+        ),
     }
 
 

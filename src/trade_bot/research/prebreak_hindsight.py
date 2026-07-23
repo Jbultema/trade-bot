@@ -288,7 +288,7 @@ def analyze_prebreak_hindsight(
     *,
     reference_run_store: RunStore | None = None,
     reference_prices: pd.DataFrame | None = None,
-    include_reference_snapshots: bool = True,
+    include_reference_snapshots: bool = False,
     include_current_snapshot: bool = True,
     windows: tuple[BubbleBreakWindow, ...] = DEFAULT_BUBBLE_BREAK_WINDOWS,
     lookback_days: int = DEFAULT_PREBREAK_LOOKBACK_DAYS,
@@ -471,6 +471,8 @@ def _dedupe_snapshot_signals(snapshot_signals: pd.DataFrame) -> pd.DataFrame:
         .map({"reference_control": 0, "historical_control": 1, "prebreak_experiment": 2})
         .fillna(0)
     )
+    if frame["snapshot_source"].astype(str).eq("historical_control").any():
+        frame = frame[~frame["snapshot_source"].astype(str).eq("reference_control")].copy()
     sort_columns = [
         column
         for column in ["event_name", "market_date", "_source_priority", "created_at_utc", "run_id"]
@@ -1199,7 +1201,76 @@ def write_prebreak_hindsight_outputs(
     result.current_signal_readout.to_csv(
         output_path / "current_best_signal_readout.csv", index=False
     )
+    historical_population_summary(result.snapshot_signals).to_csv(
+        output_path / "historical_population_summary.csv", index=False
+    )
     (output_path / "summary.md").write_text(result.summary, encoding="utf-8")
+
+
+def historical_population_summary(snapshot_signals: pd.DataFrame) -> pd.DataFrame:
+    if snapshot_signals.empty:
+        return pd.DataFrame()
+    data = snapshot_signals.copy()
+    dates = pd.to_datetime(data["market_date"], errors="coerce")
+    event_names = data.get("event_name", pd.Series("", index=data.index)).fillna("").astype(str)
+    event_mask = event_names.str.strip().ne("")
+    roles = data.get(
+        "population_role", pd.Series("historical_control", index=data.index)
+    ).fillna("").astype(str)
+    control_mask = roles.eq("historical_control") | ~event_mask
+    clusters = data.get("population_cluster", pd.Series("", index=data.index)).fillna("")
+    mature = pd.to_numeric(data.get("break_severity_3m"), errors="coerce").notna()
+    severe = pd.to_numeric(data.get("forward_break_label_3m"), errors="coerce")
+    major = pd.to_numeric(data.get("forward_major_break_label_3m"), errors="coerce")
+
+    def _rate(values: pd.Series, mask: pd.Series) -> float:
+        selected = values.loc[mask].dropna()
+        return float(selected.mean()) if not selected.empty else np.nan
+
+    valid_dates = dates.dropna()
+    event_dates = dates.loc[event_mask].dropna()
+    control_dates = dates.loc[control_mask].dropna()
+    return pd.DataFrame(
+        [
+            {
+                "origins": int(len(data)),
+                "mature_3m_outcomes": int(mature.sum()),
+                "event_window_origins": int(event_mask.sum()),
+                "historical_control_origins": int(control_mask.sum()),
+                "named_events": int(event_names.loc[event_mask].nunique()),
+                "event_families": int(
+                    data.loc[event_mask, "event_family"].fillna("").astype(str).nunique()
+                ),
+                "population_clusters": int(
+                    clusters.astype(str).loc[clusters.astype(str).str.strip().ne("")].nunique()
+                ),
+                "event_clusters": int(
+                    clusters.loc[event_mask].astype(str).replace("", np.nan).nunique()
+                ),
+                "control_clusters": int(
+                    clusters.loc[control_mask].astype(str).replace("", np.nan).nunique()
+                ),
+                "start_date": str(valid_dates.min().date()) if not valid_dates.empty else "",
+                "end_date": str(valid_dates.max().date()) if not valid_dates.empty else "",
+                "event_start_date": (
+                    str(event_dates.min().date()) if not event_dates.empty else ""
+                ),
+                "event_end_date": str(event_dates.max().date()) if not event_dates.empty else "",
+                "control_start_date": (
+                    str(control_dates.min().date()) if not control_dates.empty else ""
+                ),
+                "control_end_date": (
+                    str(control_dates.max().date()) if not control_dates.empty else ""
+                ),
+                "severe_label_rate": _rate(severe, mature),
+                "event_severe_label_rate": _rate(severe, mature & event_mask),
+                "control_severe_label_rate": _rate(severe, mature & control_mask),
+                "major_label_rate": _rate(major, mature),
+                "event_major_label_rate": _rate(major, mature & event_mask),
+                "control_major_label_rate": _rate(major, mature & control_mask),
+            }
+        ]
+    )
 
 
 def build_prebreak_hindsight_summary(
@@ -1212,6 +1283,8 @@ def build_prebreak_hindsight_summary(
     policy_variant_results: pd.DataFrame,
     current_signal_readout: pd.DataFrame,
 ) -> str:
+    population = historical_population_summary(snapshot_signals)
+    population_row = population.iloc[0] if not population.empty else pd.Series(dtype=object)
     lines = [
         "# Pre-Break Hindsight Signal Analysis",
         "",
@@ -1223,6 +1296,9 @@ def build_prebreak_hindsight_summary(
         "",
         f"- snapshots analyzed: {len(snapshot_signals):,}",
         f"- date range: {snapshot_signals['market_date'].min()} to {snapshot_signals['market_date'].max()}",
+        f"- named event-window origins: {int(population_row.get('event_window_origins', 0)):,}",
+        f"- ordinary-history controls: {int(population_row.get('historical_control_origins', 0)):,}",
+        f"- conservative event/quarter clusters: {int(population_row.get('population_clusters', 0)):,}",
         f"- event-window post-break snapshots: {_postbreak_snapshot_count(snapshot_signals):,}",
         f"- 3m break-label share: {snapshot_signals['forward_break_label_3m'].mean():.1%}",
         f"- 3m major-break-label share: {snapshot_signals['forward_major_break_label_3m'].mean():.1%}",
@@ -1238,6 +1314,9 @@ def build_prebreak_hindsight_summary(
                 "- "
                 f"{row['signal']}: score {_safe_float(row['predictive_score']):.2f}, "
                 f"spearman {_safe_float(row['spearman_to_break_severity']):.2f}, "
+                f"95% cluster CI [{_safe_float(row.get('spearman_ci_low')):.2f}, "
+                f"{_safe_float(row.get('spearman_ci_high')):.2f}], "
+                f"effective clusters {int(row.get('effective_sample_size', 0))}, "
                 f"direction {row['risk_direction']}"
             )
     lines.extend(["", "## Trade-Bot Action Timing", ""])
