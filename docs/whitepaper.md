@@ -501,6 +501,15 @@ retrospective, current-universe results rather than prospective proof, but they
 show that the cost of optionality has not historically been small enough to
 treat aggressive overlay defense as a free improvement.
 
+The pre-break population is no longer an event-heavy panel paired with only
+recent controls. It now contains 572 point-in-time origins: 397 weekly origins
+around eight named breaks and 175 monthly controls outside those windows from
+2005 through 2026. The 571 mature outcomes reduce to 71 conservative event or
+calendar-quarter clusters. Cluster-bootstrap intervals exclude zero for only
+12 of 128 signal associations. Cross-sectional dispersion is the strongest
+association (Spearman 0.34, 95% interval 0.11 to 0.51), but this remains a
+hindsight monitor and has no independent allocation authority.
+
 The 1:1 historical snapshot replacement also changed the causal diagnosis of
 early hard defense. Quantitative timing now adds zero. Absolute portfolio-risk
 constraints account for 81.8% of Early Watch hard-defense snapshots and 69.5%
@@ -598,7 +607,7 @@ Research governance is also a test layer. New manifests record the declared
 trial roster and run a fail-closed point-in-time universe audit covering
 historical membership, holding-date eligibility, delisting returns, and source
 metadata. The consolidated 2026-07-22 ledger indexes 569 manifested completed
-trial rows across 19 manifests and 16 distinct studies. Three manifests lack an
+trial rows across 19 manifests and 16 distinct studies. Five manifests lack an
 explicit candidate roster, 113 artifact directories have no manifest, and all
 569 trial rows still lack verified point-in-time universe evidence. That is a
 promotion blocker, not a warning label. The ledger cannot reconstruct

@@ -234,7 +234,11 @@ After rebuilding pre-break snapshots, run `poetry run trade-bot
 analyze-prebreak-hindsight` and then `poetry run trade-bot
 backtest-prebreak-risk-policy`; the second command measures the return and
 drawdown cost of applying the sparse historical risk budgets to the candidate
-strategy shelf.
+strategy shelf. The snapshot generator includes monthly ordinary-history
+controls outside the named event windows by default; use `--event-windows-only`
+only for a deliberately event-conditioned audit. The hindsight report separates
+raw overlapping origins from conservative event/quarter clusters and reports
+cluster-bootstrap uncertainty.
 
 The active balanced-asymmetric policy deliberately separates visibility from
 authority. The base market strategy can size the book. Quantitative risk status

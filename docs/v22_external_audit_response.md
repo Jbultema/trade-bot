@@ -38,7 +38,7 @@ points. This is native-strategy defense, not multi-layer independent agreement.
 | Risk-score orientation | Hardened | Production calculation is public and property-tested so independently more bearish inputs cannot lower the risk score. |
 | Allocation authority | Hardened | Omitted allocation policy fails closed. Scenario, event/news, risk timing, and revised-history macro cannot size without explicit calibrated authority. |
 | Point-in-time universe / delistings | Fail-closed, data unresolved | Every research manifest audits membership, holding eligibility, delisting treatment, and sources. All 540 indexed trials remain promotion-ineligible because verified point-in-time evidence is absent. |
-| Research-wide selection | Implemented as governance blocker | 569 manifested rows, 19 manifests, 16 studies, three manifests without explicit rosters, and 113 artifact directories without manifests. Retrospective promotion status is `prospective_evidence_required`. |
+| Research-wide selection | Implemented as governance blocker | 569 manifested rows, 19 manifests, 16 studies, five manifests without explicit rosters, and 113 artifact directories without manifests. Retrospective promotion status is `prospective_evidence_required`. |
 | Frozen prospective evidence | Hardened | Runtime provenance records git/tree/dirty state, exact source tree, dependency lock, config, schema, and price-frame identity. Any revision starts a new source identity. |
 | Revised macro vintage | Fixed authority | Macro authority defaults to zero. Nonzero authority requires provisional/validated calibration plus point-in-time or first-release vintage status. |
 | Scenario false precision | UI corrected | Primary UI says raw risk-off score, displays insufficient calibration and 0% authority, and avoids treating the number as a literal forecast. |
@@ -52,9 +52,14 @@ points. This is native-strategy defense, not multi-layer independent agreement.
 ## Rebuilt evidence
 
 - Replaced 223/223 operating-history dates through 2026-07-22 and pruned superseded generations.
-- Replaced 397/397 pre-break-history dates and pruned superseded generations.
-- The refreshed pre-break analysis contains 486 observations including
-  reference controls and 42 post-break event-window snapshots.
+- Completed 572/572 pre-break population dates with zero missing, extra, or
+  duplicate dates: 397 event-window origins plus 175 full-history monthly controls.
+- The refreshed analysis contains 571 mature three-month outcomes, eight named
+  events, 71 conservative event/quarter clusters, and 42 post-break event-window
+  snapshots. Signal uncertainty uses a 400-draw cluster bootstrap.
+- Only 12 of 128 signal Spearman intervals exclude zero. Cross-sectional
+  dispersion is the strongest association at 0.34 with a 95% cluster interval
+  of 0.11 to 0.51; this remains retrospective research, not sizing authority.
 - Sparse risk overlays lowered median CAGR from 13.09% to as low as 11.94% and
   did not improve the -22.10% median maximum drawdown.
 - At 65% native defense, the 42 one-month episode starts were 45.2% beneficial

@@ -366,11 +366,13 @@ replaced one-for-one:
 | Store | Before | Canonical dates | After | Range |
 | --- | ---: | ---: | ---: | --- |
 | Main operating snapshots | 354 generations | 223 | 223 | 2007-07-11 to 2026-07-22 |
-| Pre-break snapshots | 397 dates | 397 | 397 | 2006-10-11 to 2025-03-21 |
+| Pre-break population | 397 event dates | 572 | 572 | 2005-01-31 to 2026-07-22 |
 
-The current stores contain exactly one row per planned market date. An earlier
-audit had found 43 extra pre-break generations; those duplicates were removed
-before this complete replacement, eliminating the accidental weighting hazard.
+The current stores contain exactly one row per planned market date. The pre-break
+population now combines 397 weekly event-window dates with 175 monthly controls
+outside every named event window. An earlier audit had found 43 extra pre-break
+generations; those duplicates were removed before this complete replacement,
+eliminating the accidental weighting hazard.
 
 The replacement did not reconstruct historical news using today's cache. It
 loaded each recorded point-in-time snapshot, preserved its prices, macro,
@@ -503,16 +505,29 @@ does not improve drawdown. Neither result grants the timing layer sizing authori
 
 ## 8. Pre-Break Hindsight And Sparse Policy Replay
 
-The pre-break panel combines canonical event-window snapshots with ordinary
-reference controls: 486 deduplicated analyzed observations from 2006-10-11 to
-2026-07-22, including 42 post-break event-window snapshots. The three-month
-severe-label share is 34.9% and major-label share 14.5%.
+The pre-break panel now contains 572 deduplicated origins from 2005-01-31 to
+2026-07-22: 397 weekly event-window snapshots and 175 monthly ordinary-history
+controls outside all named windows. There are 571 mature three-month outcomes,
+eight named events, eight event families, and 71 conservative event/calendar-
+quarter clusters. The three-month severe-label share is 35.0% and major-label
+share 17.0%. Event-window severe incidence is 36.3%, versus 32.2% for controls;
+major incidence is 17.6% versus 15.5%.
 
-Top hindsight associations include energy/inflation relief, cycle acceleration,
-credit pressure, leadership acceleration, cross-sectional dispersion,
-pre-break probability, dollar pressure, and QQQ three-month return. These are
-ranked retrospective associations and should generate purged/fixed tests; they
-are not deployable rules.
+This corrects a material population defect in the prior 486-row readout. Its 89
+nominal controls all began after March 2025, so old event windows were being
+compared with a recent-regime control set and raw overlapping rows could be
+mistaken for independent evidence. Signal tables now report raw observations,
+conservative cluster counts, and 400-draw cluster-bootstrap confidence intervals.
+Only 12 of 128 signal Spearman intervals exclude zero. Cross-sectional
+dispersion is the strongest association (Spearman 0.34, 95% cluster interval
+0.11 to 0.51); several formerly prominent signals weaken materially once the
+population and dependence are corrected.
+
+Top hindsight associations now include cross-sectional dispersion,
+energy/inflation relief, volatility/liquidity, dollar pressure, regime
+instability, dollar drawdown, credit pressure, and duration returns. These are
+ranked retrospective associations and should generate purged/fixed tests; even
+intervals that exclude zero are not deployable rules.
 
 After the timing-authority repair and 1:1 snapshot replacement, early hard-defense
 sources are:
@@ -643,7 +658,7 @@ whose survivorship and selection validity remain blocked.
 - Current-universe survivorship: many studies replay today's tickers backward.
 - Pre-inception proxies: newer ETFs and AI assets have short histories.
 - Researcher degrees of freedom: the ledger currently indexes 569 manifested
-  trial rows, but 113 artifact directories have no manifest and three of 19
+  trial rows, but 113 artifact directories have no manifest and five of 19
   manifests lack explicit rosters. Candidate-shelf PBO does not count abandoned
   or unmanifested ideas, so retrospective promotion is disabled.
 - Event selection hindsight: named crises and break dates are known today.
