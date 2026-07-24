@@ -85,6 +85,33 @@ def defensive_signal_audit_frames(
     }
 
 
+def defensive_bias_calibration_frames(
+    report_dir: str | Path = "reports/defensive_bias_calibration",
+) -> dict[str, pd.DataFrame]:
+    root = Path(report_dir)
+    return {
+        "current_read": read_csv_artifact(root / "current_read.csv"),
+        "promotion_gates": read_csv_artifact(root / "promotion_gates.csv"),
+        "strategy_metrics": read_csv_artifact(root / "strategy_metrics.csv"),
+        "sensitivity": read_csv_artifact(root / "sensitivity.csv"),
+        "population_summary": read_csv_artifact(root / "population_summary.csv"),
+    }
+
+
+def defensive_correction_search_frames(
+    report_dir: str | Path = "reports/defensive_correction_search",
+) -> dict[str, pd.DataFrame]:
+    root = Path(report_dir)
+    return {
+        "mechanism_scorecard": read_csv_artifact(root / "mechanism_scorecard.csv"),
+        "strategy_metrics": read_csv_artifact(root / "strategy_metrics.csv"),
+        "ordinary_metrics": read_csv_artifact(root / "ordinary_metrics.csv"),
+        "rolling_metrics": read_csv_artifact(root / "rolling_metrics.csv"),
+        "current_effects": read_csv_artifact(root / "current_effects.csv"),
+        "cost_sensitivity": read_csv_artifact(root / "cost_sensitivity.csv"),
+    }
+
+
 def cycle_tracker_frames(
     report_dir: str | Path = "reports/cycle_tracker",
 ) -> dict[str, pd.DataFrame]:

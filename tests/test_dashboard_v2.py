@@ -24,6 +24,8 @@ from trade_bot.dashboard_v2.pages import (
 )
 from trade_bot.dashboard_v2.services import runtime as runtime_service
 from trade_bot.dashboard_v2.services.artifact_service import (
+    defensive_bias_calibration_frames,
+    defensive_correction_search_frames,
     defensive_signal_audit_frames,
     pbo_frames,
     prebreak_hindsight_frames,
@@ -168,6 +170,22 @@ def test_dashboard_v2_native_pages_are_summary_first() -> None:
     assert risk_source.index("Overview") < risk_source.index("_render_risk_and_scenarios(")
 
 
+def test_candidate_deep_dive_puts_detail_tabs_before_optional_research_readout() -> None:
+    candidate_source = inspect.getsource(research._render_candidate)
+    readout_source = inspect.getsource(research._render_candidate_research_readout)
+
+    assert '["Candidate Details", "Research Readout"]' in candidate_source
+    assert 'default="Candidate Details"' in candidate_source
+    assert candidate_source.index('"Candidate workspace"') < candidate_source.index(
+        'render_section_header("Candidate Detail Tabs")'
+    )
+    assert "_render_candidate_research_readout" in candidate_source
+    assert "render_card_grid" not in candidate_source
+    assert "render_card_grid" in readout_source
+    assert "_render_outcome_decision_cards" in readout_source
+    assert "_render_candidate_artifact_read" in readout_source
+
+
 def test_dashboard_v2_monitoring_trends_have_time_window_controls() -> None:
     monitoring_source = inspect.getsource(monitoring.render_monitoring_page)
     legacy_source = inspect.getsource(monitoring._render_monitoring_trend_range_controls)
@@ -295,6 +313,25 @@ def test_dashboard_v2_artifact_service_missing_files_are_empty(tmp_path) -> None
     defensive = defensive_signal_audit_frames(tmp_path / "missing_defensive_dir")
     assert set(defensive) == {"current_defensive_exposure", "summary", "scorecards"}
     assert all(frame.empty for frame in defensive.values())
+    bias = defensive_bias_calibration_frames(tmp_path / "missing_bias_dir")
+    assert set(bias) == {
+        "current_read",
+        "promotion_gates",
+        "strategy_metrics",
+        "sensitivity",
+        "population_summary",
+    }
+    assert all(frame.empty for frame in bias.values())
+    corrections = defensive_correction_search_frames(tmp_path / "missing_corrections_dir")
+    assert set(corrections) == {
+        "mechanism_scorecard",
+        "strategy_metrics",
+        "ordinary_metrics",
+        "rolling_metrics",
+        "current_effects",
+        "cost_sensitivity",
+    }
+    assert all(frame.empty for frame in corrections.values())
 
 
 def test_defensive_posture_bridge_joins_focus_strategy_scorecard() -> None:

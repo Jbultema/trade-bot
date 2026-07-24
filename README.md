@@ -345,7 +345,32 @@ The upper aggregate section includes the overview, leaderboard, curated shelf, o
 
 The **Cycle Tracker** tab is the Scenario / Phase Frontier. Refresh it with `poetry run trade-bot run-cycle-tracker` when you want the current speculative-cycle phase read, 0M nowcast, path-constrained horizon phase probabilities, current-phase conditional candidates, phase-by-horizon winner shelves, and prior-only validation metrics. It is a research/watch layer, not a crash timer or allocation override. The tracker shows both simultaneous phase evidence and a path-aware cycle state; use the path-aware view for sequential questions such as unwind, liquidation, bottoming, recovery, and post-unwind compounding.
 
-The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart. Outcome Frontier shows the configured accumulation assumptions and deterministic wealth math for aggregate tradeoff comparison; open **Simulation Lab** for historical bootstrap and regime-conditioned forward path distributions.
+The historical-crisis lane also shows **Historical Bias Adjustment Research**
+beside the Defensive Posture Cross-Check when its artifacts exist. Refresh it
+with `poetry run trade-bot research-defensive-bias --config
+configs/baseline.yaml`. It tests bounded defense relief and risk restraint over
+all eligible month-ends with point-in-time hierarchical evidence. The displayed
+shift is a counterfactual with 0% allocation authority; it does not modify the
+daily target, and relief is blocked during confirmed or severe breaks.
+
+The same lane shows **Expanded Over-Defensiveness Search** after running
+`poetry run trade-bot search-defensive-corrections --config
+configs/baseline.yaml`. It reports the closest result from 30 distinct
+architectures, exactly which gates failed, how frequently the rule changes
+allocation, its average defensive-weight reduction, explicit crisis-excluded
+ordinary-market results, one- and three-year rolling consistency, and any
+zero-authority mechanisms that would change today's target. A near-miss remains
+research-only.
+
+The follow-on native timing study is refreshed with
+`poetry run trade-bot research-native-timing-hazard --config
+configs/baseline.yaml`. It tests nested break-progression models, continuous
+defensive mappings, a constant-probability placebo, transaction costs,
+execution lags, block-bootstrap uncertainty, and a frozen i111-only prospective
+shadow candidate. The shadow has 0% allocation authority and does not alter the
+daily target.
+
+The lower **Candidate Details** workbench is the canonical one-strategy research surface. It shows explanation, performance-over-time, allocation behavior, decision timeline, factor attribution, mechanics, robustness, and manifest notes in one place. Directly below the combined performance/allocation chart, **Drawdown Attribution** identifies the selected window's peak, trough, loss contributors, turnover, exposure path, and missed SPY/QQQ recovery. In **Outcome Frontier**, selecting a plotted candidate updates the strategy detail selector below the chart. Outcome Frontier shows the configured accumulation assumptions and deterministic wealth math for aggregate tradeoff comparison; open **Simulation Lab** for historical bootstrap and regime-conditioned forward path distributions.
 
 The **ML Diagnostics** section is artifact-backed, not trained inside Streamlit. Refresh it with `poetry run trade-bot run-ml-diagnostics --config configs/baseline.yaml --profile standard`. Use `--profile research` when you intentionally want the heavier 1W/1M/3M model sweep with additional estimators; it is slower and should be treated as a research batch, not a dashboard cold-start path.
 
@@ -704,6 +729,19 @@ poetry run trade-bot run-i111-cross-sectional-replacement \
 It is intentionally a three-policy study, not a sweep. The two replacement
 policies failed their retrospective gates and did not change the operating
 strategy.
+
+The fixed native selector/transition study can be reproduced with:
+
+```bash
+poetry run trade-bot run-i111-selector-transition-repair \
+  --config configs/baseline.yaml
+```
+
+It tests incumbent retention, blended rankings, a diversified core, and
+recovery-metered entry across execution days, lags, costs, rolling windows,
+crises, PBO, and paired block bootstraps. No candidate cleared the replacement
+screen, and all post-initial mechanism ablations remain diagnostic with zero
+allocation authority.
 
 Rolling-origin simulation validation now checkpoints primary-strategy progress
 and resumes by default. A checkpoint is fingerprinted to the exact return

@@ -29,6 +29,10 @@ like live system behavior.
 | `docs/ml_research_framework.md` | Classical ML/Bayesian seams, cadence, validation gates | Update when ML moves from research-only to operating recommendations. |
 | `docs/taxable_account_framework.md` | Estimated taxable brokerage model, after-tax research semantics, tax lots, wash-sale checks, and TLH candidates | Update when account-aware scoring, tax-lot logic, dashboard tax views, or taxable assumptions change. |
 | `docs/cycle_tracker_design.md` | Scenario/phase frontier and speculative-cycle tracker design, leakage controls, artifact contract, and UI placement | Update when phase taxonomy, validation rules, persistence, or V2 Cycle Tracker UI changes. |
+| `docs/defensive_bias_calibration.md` | Pre-registered broad defensive-bias study, bounded candidate roster, pooling rules, holdouts, and promotion boundary | Update only when the fixed study contract or authority decision changes; keep retrospective findings in manifested report artifacts and the whitepapers. |
+| `docs/defensive_correction_search.md` | Staged 30-architecture over-defensiveness search, materiality contract, second-wave combinations, and stopping rule | Preserve the first/second-wave distinction and do not count parameter sensitivities as architectures. |
+| `docs/native_timing_hazard_research.md` | Nested hazard-model, continuous timing-curve, placebo, boundary-extension, and frozen i111 shadow-candidate evidence | Preserve the post-hoc label on the mild boundary extension; it has zero allocation authority and requires new prospective evidence. |
+| `docs/i111_selector_transition_repair.md` | Native i111 incumbent-buffer, blended-rank, diversified-core, recovery-entry, execution-path, and drawdown-attribution study | Preserve the initial fixed-slate versus post-initial ablation distinction; no candidate passed and allocation authority is zero. |
 
 ## Maintained Research Notes
 

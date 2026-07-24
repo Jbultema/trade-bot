@@ -143,6 +143,7 @@ Primary implementation areas:
 | Defensive calibration | `defensive_judgement.py`, `defensive_layer_calibration.py` |
 | Pre-break hindsight | `prebreak_hindsight.py`, `risk_policy_backtest.py` |
 | V2.2 adversarial research | `i111_adversarial_validation.py`, `i111_execution_hardening.py` |
+| Native selector and transition repair | `i111_selector_transition_repair.py`, `drawdown_attribution.py` |
 | Dashboard | `src/trade_bot/dashboard_v2/` |
 
 DuckDB stores manifests and normalized operating tables. Large `BaselineRun`
@@ -503,6 +504,323 @@ patience buys protection. It cost 0.50 CAGR points while making maximum drawdown
 0.40 points worse. The current authorized overlay is nearly neutral but also
 does not improve drawdown. Neither result grants the timing layer sizing authority.
 
+### 7.4 Broad defensive-bias calibration
+
+Artifact root: `reports/defensive_bias_calibration/`.
+
+The study was predeclared in `docs/defensive_bias_calibration.md` before the
+final run. It expands the question beyond named crises:
+
+- population: every eligible month-end after 756 market days;
+- strategies: 11 dynamic risk-managed strategies in `i111` and
+  `dynamic_risk_managed` families; static/reference allocations excluded;
+- actions: five-point `defense_relief` at 60%+ defense and five-point
+  `risk_restraint` at 20%- defense;
+- horizons: 21 primary and 63 secondary trading days;
+- online availability: `maturity_date < decision_origin`;
+- pooling: global -> family -> strategy with prior strengths 24/18/12;
+- clone control: global and family evidence averaged by origin before counting;
+- confirmation: relief prohibited in `confirmed_break` and `severe_break`;
+- utility delta:
+
+  \[
+  \Delta U =
+  \Delta R +
+  \begin{cases}
+  0.75\Delta DD, & \Delta DD \ge 0 \\
+  1.50\Delta DD, & \Delta DD < 0
+  \end{cases}
+  \]
+
+  where positive \(\Delta DD\) means a shallower candidate drawdown;
+- crisis holdout: all origins in each test crisis are excluded from that
+  crisis's hierarchical training evidence;
+- hard portfolio constraints: excluded and not bias-correctable;
+- live authority: 0.00.
+
+The final population has 3,172 counterfactual rows. The one-month ordinary-market
+defense-relief slice contains 97 strategy rows, 23 unique origins, and six
+strategies: positive utility rate 68.0%, mean return delta +1.12%, mean
+drawdown delta +0.53%, and mean utility delta +1.39%. The named-stress relief
+slice contains 137 rows and 36 origins: positive utility rate 51.1%, mean
+return delta +0.79%, and mean utility delta +0.75%. These are dependent strategy
+rows; the online learner uses origin-level aggregation rather than treating all
+97 or 137 as independent.
+
+The ordinary-market risk-restraint result is materially less convincing:
+53.7% positive utility at one month but -0.09% mean return delta, followed by
+48.1% positive utility and negative mean utility at three months. The data do
+not support assuming symmetric, stable bias at both allocation extremes.
+
+Full-path candidate results:
+
+| Candidate | Strategies with positive CAGR delta | Median CAGR delta | Non-worse max DD | Median max-DD delta | Retrospective pass |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Fixed symmetric 5pp | 63.6% | +0.16 pp | 63.6% | +0.77 pp | No |
+| Confirmation fixed symmetric 5pp | 54.5% | +0.04 pp | 63.6% | +0.32 pp | No |
+| Hierarchical confirmation symmetric 5pp | 45.5% | -0.04 pp | 72.7% | +0.06 pp | No |
+| Hierarchical confirmation relief only | 45.5% | 0.00 pp | 54.5% | 0.00 pp | No |
+
+The naive fixed rule is the most superficially attractive, but it fails the
+predeclared era and crisis gates: only 50% of eras have positive median return
+delta, and only 71.6% of strategy/crisis tests have non-worse drawdown versus an
+80% requirement. For the configured focus strategy, it adds 0.12 CAGR points
+and worsens maximum drawdown by 0.04 points, while being active on 78.5% of days;
+this is a broad policy change disguised as a small sleeve adjustment.
+
+The lower-activity hierarchical relief-only candidate is active on 5.1% of focus
+days, adds 0.03 CAGR points, and worsens focus maximum drawdown by 0.61 points.
+Its effect is concentrated in the recent era. It passes the crisis non-worse
+drawdown rate but fails cross-strategy, era, and prospective gates.
+
+During implementation, the first run exposed and invalidated an accounting
+error: residual cash was materialized into BIL, adding T-bill return even on
+otherwise unchanged paths. That run was discarded. The final implementation
+preserves residual cash as residual cash and has a regression test for the
+counterfactual transfer. This is relevant to independent review because any
+future sleeve overlay must preserve the base engine's unallocated-cash return
+semantics.
+
+Current read: focus defense 57.68%, risk 42.32%, timing state `watch`, below the
+60% trigger. Research shift 0.00%, allocation authority 0.00%.
+
+### 7.5 Thirty-architecture defensive-correction search
+
+Pre-registration and staged roster:
+`docs/defensive_correction_search.md`. Artifact root:
+`reports/defensive_correction_search/`.
+
+The first wave tested 20 different causal architectures. A conditional second
+wave declared 10 breadth-centered combinations after the first-wave result,
+bringing the total to the user-specified maximum of 30. Parameter variations did
+not count as architectures. Inputs are prior-close-only and exclude news,
+events, scenarios, revised macro, and hard portfolio constraints.
+
+Every mechanism was evaluated on:
+
+- full-path returns at 5 basis-point costs;
+- focus and 11-strategy CAGR/max-drawdown deltas;
+- active-day rate and actual defensive-weight reduction;
+- four fixed calendar eras;
+- an explicit crisis-excluded ordinary-market path;
+- quarterly-sampled one- and three-year rolling windows;
+- eight named stress windows;
+- 10 and 20 basis-point focus-strategy cost sensitivity;
+- the latest allocation effect.
+
+No architecture passed all eight retrospective gates.
+
+The closest result was `breadth_intact_relief`, which transfers five percentage
+points from BIL/residual defense to the strategy's existing risk sleeve when
+effective defense is at least 60% and the prior-close RSP/SPY relative trend is
+intact.
+
+| Measure | Result | Gate |
+| --- | ---: | --- |
+| Focus CAGR delta | +0.30 pp | Pass |
+| Focus maximum-drawdown delta | -0.41 pp | Pass under 1-point tolerance |
+| Focus active-day rate | 6.86% | Pass |
+| Mean active defense reduction | 5.00 pp | Pass |
+| Strategies with positive CAGR delta | 63.6% | Pass |
+| Strategies with non-worse max drawdown | 54.5% | **Fail; required 60%** |
+| Eras with positive cross-strategy median return delta | 100% | Pass |
+| Strategy/crisis non-worse drawdown rate | 77.3% | Pass |
+| Positive at 10 and 20 bp costs | Yes | Pass |
+| Current defense reduction | 0.00 pp | Informational |
+
+Coverage is 5,422 daily sessions from 2005-01-03 through 2026-07-23 for every
+one of the 11 strategies. Removing all sessions in the eight named stress
+windows leaves 3,592 ordinary-market observations. On that path,
+`breadth_intact_relief` adds 0.42 annualized return points to the focus strategy;
+54.5% of strategies have positive ordinary-path annualized-return delta and all
+11 have non-worse ordinary-path maximum drawdown.
+
+The rolling diagnostic samples every 63 sessions and produces 83 one-year plus
+75 three-year windows per strategy. For the focus path, the rule has positive
+return delta in 54.2% of one-year and 73.3% of three-year windows. It has
+non-worse drawdown in 69.9% of one-year but only 50.7% of three-year windows.
+The windows overlap and are descriptive consistency checks, not independent
+trials or post-hoc gates.
+
+The raw breadth rule improves CAGR in all six i111 variants, but worsens maximum
+drawdown by 0.07 to 0.51 points in five of them. It leaves most broader dynamic
+strategies unchanged. The result is economically plausible but
+family-concentrated and selected from an adaptive 30-architecture research
+process.
+
+The best protected combinations demonstrate the trade-off:
+
+- breadth plus shallow-drawdown gate: +0.15 focus CAGR points and -0.13 drawdown
+  points, but active on only 1.86% of days;
+- breadth plus dual-trend gate: +0.14 CAGR points and -0.13 drawdown points, but
+  active on only 1.77% of days;
+- breadth plus low-volatility gate: +0.08 CAGR points with no focus max-drawdown
+  damage, but active on only 1.29% of days and not broad across strategies/eras.
+
+Only two mechanisms change the July 23 focus allocation. Native re-entry
+acceleration reduces defense from 57.68% to 52.68%, while an intact-trend risk
+floor reduces it to 55.00%. The former adds 0.09 CAGR points but worsens maximum
+drawdown by 0.55 points and fails three gates; the latter adds only 0.01 CAGR
+points, worsens drawdown by 0.66 points, and fails five gates. Neither is an
+acceptable current override.
+
+Interpretation: over-defense has measurable opportunity cost and breadth
+contains useful state information. The search did not prove that the optimal
+correction is zero. It showed that the reliable benefit is small, concentrated
+in i111, and purchased with some restored drawdown. The next defensible step is
+a frozen prospective shadow candidate for breadth-gated relief, not live
+authority or a 31st adaptive backtest.
+
+### 7.6 Native timing hazard and continuous calibration
+
+Pre-registration, implementation contract, and exact results:
+`docs/native_timing_hazard_research.md`. Artifact root:
+`reports/native_timing_hazard/`.
+
+The study uses weekly prior-close features and a 63-session label indicating
+whether SPY or QQQ subsequently reaches a -10% path loss. Adjacent positive
+weeks receive episode-cluster weights, labels cannot train before maturity, and
+regularization plus family-shrinkage strength are selected within four nested
+expanding outer folds beginning in 2015. Sensitivity labels are -8% and -12%.
+
+Three probability models were tested: core market, augmented market, and
+family-partially-pooled. None established stable hazard skill. At the -10%
+label, mean Brier scores were 0.2628, 0.2434, and 0.2435 versus 0.2348 for the
+expanding base rate. The augmented and family models also lost to base rate on
+average at the -8% and -12% labels. Mean leave-overlapping-crisis-cluster-out
+Brier improvement was -0.0496 and -0.0473. These failures bar a hazard-engine
+replacement.
+
+The initial continuous policies used 10%/20% floors, 1.2/1.6 slopes,
+75%/90% ceilings, and 25%/50%/75% native blends. The global and family curves
+each added about 0.53 focus CAGR points and improved aggregate maximum
+drawdown, while confirmation acceleration, warning-age decay, and an SPY bridge
+reduced focus CAGR. A constant-probability placebo added 0.24 points, proving
+that generic continuous regularization explains part of the result.
+
+All initial folds selected the lowest slope/floor and highest native blend. A
+post-result boundary extension therefore tested 0%/5% floors, 0.6/0.9 slopes,
+65%/80% ceilings, and 75%/90%/95% native blends. It is explicitly ineligible to
+pass on the same history.
+
+For the configured focus strategy, the best mild constant curve produced:
+
+These metrics use the common 2015-2026 nested outer-test window. They are not
+comparable with the roughly 20.67% full-history 2005-2026 configured-path CAGR.
+
+| 2015-2026 OOS metric | Base | Candidate | Delta |
+| --- | ---: | ---: | ---: |
+| OOS CAGR | 29.8608% | 32.8920% | +3.0312 pp |
+| OOS maximum drawdown | -25.8032% | -26.3732% | -0.5701 pp |
+| Current defensive weight | 57.6768% | 47.9243% | -9.7525 pp |
+| 15-year deterministic wealth | — | — | +$4,810,950 |
+
+Fold CAGR deltas were +1.838, +3.091, +0.930, and +7.143 points. Fold
+maximum-drawdown deltas were -0.200, -2.611, -0.570, and -4.346 points. All six
+i111 variants improved CAGR; family-median gain was +3.545 points, but median
+aggregate drawdown worsened by 1.085 points. The dynamic-risk-managed family
+had a -0.150-point median CAGR effect.
+
+Cost and path diagnostics:
+
+- +2.528 focus CAGR points at 20 basis-point costs;
+- +1.739/+1.723 points with one/two extra execution sessions;
+- paired 63-session block-bootstrap CAGR-delta
+  5th/50th/95th percentiles +1.484/+2.868/+4.565 points;
+- 100% positive CAGR-delta bootstrap rate;
+- 27% probability of more than one point of drawdown damage;
+- positive-SPY-session annualized return delta +10.784 points;
+- non-positive-SPY-session annualized return delta -7.582 points.
+
+The frozen shadow is `i111_continuous_defense_calibration_v1`: i111 family only,
+0% defense floor, 0.6 slope, 65% ceiling, 75% native blend, weekly decisions,
+and one extra execution session. Its probability input is the expanding
+episode-weighted base rate, not the failed hazard model. It has 0% allocation
+authority, no automatic promotion, and cannot be retuned on this history.
+
+### 7.7 Native i111 selector and transition repair
+
+Pre-registration, causal construction, and results:
+`docs/i111_selector_transition_repair.md`. Artifact root:
+`reports/i111_selector_transition_repair/`. Reproduction command:
+`trade-bot run-i111-selector-transition-repair`.
+
+This study deliberately leaves the native total active-risk budget, volatility
+target, drawdown control, and immediate risk reductions intact. It tests whether
+the repeated 2022 and Aug. 2023-Jan. 2024 misses arise from cross-sectional
+replacement and re-entry mechanics rather than from insufficient generic
+defense.
+
+The pre-registered roster contained:
+
+1. the unmodified native reference;
+2. an incumbent buffer retaining at most two top-six positive-momentum holdings
+   when a challenger lacks a 15-percentile rank edge;
+3. a 65%/35% blend of 63-session and 126-session risk-adjusted percentile ranks;
+4. a 15% equal SPY/RSP core within active risk;
+5. half-step unconfirmed entry requiring 21-session recovery above 2%, price
+   above its 50-session average, and SPY above its 100-session average, with
+   deferred risk routed to SPY/RSP;
+6. an integrated combination.
+
+Native SPY/RSP/GLD/TLT diversifier weights are preserved before selector
+changes. Every feature is computed from information available at the target
+close, state updates only on the profile's scheduled decisions, and the normal
+execution lag is applied after target generation. The validation matrix uses
+W-WED lag two, every weekday at lag one, W-WED lags one and five, daily lag
+two, 5/20 bp costs, 1/3/5-year rolling windows, calendar years, four broad eras,
+eight named crises, CSCV/PBO, and 1,000 paired 63-session block resamples.
+
+Initial results:
+
+| Candidate | Configured CAGR | Configured DD | Median execution CAGR | Worst execution DD | Aug. 2023-Jan. 2024 |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| Native reference | 20.79% | -24.75% | 19.54% | -29.87% | -12.30% |
+| Incumbent buffer | 20.91% | -25.44% | 19.80% | -30.00% | -11.12% |
+| Blended rank | 19.90% | -25.62% | 19.00% | -29.67% | -9.32% |
+| Diversified core | 20.09% | -24.27% | 18.87% | -29.09% | -11.27% |
+| Recovery meter | 20.10% | -24.61% | 19.19% | -29.92% | -13.65% |
+| Integrated | 19.20% | -24.52% | 19.07% | -28.02% | -8.87% |
+
+No row passed. The incumbent buffer is the only pre-registered mechanism that
+increased both configured and median execution CAGR, while reducing median
+turnover from 0.0773 to 0.0703. Its block-bootstrap probability of positive
+CAGR delta was 65.3%, below the fixed 70% gate; the 5th/50th/95th CAGR-delta
+quantiles were -0.54/+0.17/+0.77 points. Only 40.9% of calendar years improved,
+and broad-era deltas were mixed. Family PBO was 54.3%.
+
+Five post-initial mechanism combinations then isolated why the integrated
+candidate failed. They are explicitly labeled
+`post_initial_mechanism_ablation` and cannot pass on this history. The best
+execution trade was blended rank plus incumbent buffer without the core or
+recovery meter:
+
+- configured CAGR 20.36%, 0.42 points below reference;
+- configured maximum drawdown -25.07%, 0.32 points worse;
+- median execution CAGR 20.13%, 0.59 points better;
+- worst execution drawdown -28.86%, 1.01 points better;
+- Aug. 2023-Jan. 2024 return -9.09%, 3.20 points better;
+- median turnover 0.0664, 14.0% below reference;
+- block-bootstrap probability of positive CAGR delta 32.1%;
+- calendar-year non-negative delta rate 40.9%.
+
+The mechanism cuts replacement churn and makes execution timing less brittle,
+but its full-history return effect is not broad. Core and recovery-meter
+combinations reduced return even when paired with the buffer. The correct
+system decision is therefore no native strategy replacement, no live
+configuration change, and continued prospective measurement of selection
+churn.
+
+The dashboard consumes the same attribution primitive used by this research.
+Directly below Candidate Details' combined chart it computes the selected
+window's local peak and trough, recovery or 63-session fallback measurement,
+gross asset contributions, average and maximum weights, peak-to-trough turnover
+and transaction cost, risk/defensive/cash exposure path, and SPY/QQQ recovery
+gap. Gross contribution is the arithmetic sum of executed weight times asset
+return; because it omits geometric interaction and presents transaction cost
+separately, the UI labels it diagnostic rather than an exact return
+reconciliation.
+
 ## 8. Pre-Break Hindsight And Sparse Policy Replay
 
 The pre-break panel now contains 572 deduplicated origins from 2005-01-31 to
@@ -725,6 +1043,9 @@ poetry run trade-bot build-snapshot --config configs/baseline.yaml
 poetry run trade-bot seed-operating-history --config configs/baseline.yaml
 poetry run trade-bot audit-defensive-judgement
 poetry run trade-bot calibrate-defensive-layers --config configs/baseline.yaml
+poetry run trade-bot research-defensive-bias --config configs/baseline.yaml
+poetry run trade-bot search-defensive-corrections --config configs/baseline.yaml
+poetry run trade-bot research-native-timing-hazard --config configs/baseline.yaml
 poetry run trade-bot calibrate-scenario-probabilities --config configs/baseline.yaml
 poetry run trade-bot analyze-prebreak-hindsight
 poetry run trade-bot build-research-governance-ledger
@@ -738,6 +1059,9 @@ Canonical evidence artifacts:
 | Current decision and attribution | latest snapshot in `data/run_store/snapshots/` |
 | Strategy-native correctness | `reports/defensive_signal_audit/` |
 | Active layer correctness and regret | `reports/defensive_layer_calibration/` |
+| Broad defensive-bias calibration | `reports/defensive_bias_calibration/` |
+| Thirty-architecture correction search | `reports/defensive_correction_search/` |
+| Native timing hazard and continuous shadow | `reports/native_timing_hazard/` |
 | 60% base-threshold sensitivity | `reports/defensive_layer_calibration_base60/` |
 | Scenario calibration | `reports/scenario_probability_calibration/` |
 | Historical pre-break behavior | `reports/prebreak_hindsight/` |
@@ -745,6 +1069,7 @@ Canonical evidence artifacts:
 | i111 adversarial evidence | `reports/i111_adversarial_validation/` |
 | Execution fragility | `reports/i111_execution_hardening/` |
 | Fixed rejected repairs | `reports/i111_cross_sectional_replacement/`, `reports/i111_execution_smoothing/` |
+| Native selector and transition repair | `reports/i111_selector_transition_repair/` |
 | Prospective evidence | DuckDB monitoring windows with frozen start dates |
 
 Do not claim “full simulation validation” unless the long rolling-origin job has

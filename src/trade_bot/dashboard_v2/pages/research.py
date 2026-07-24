@@ -28,6 +28,8 @@ from trade_bot.dashboard_v2.components.cards import (
 from trade_bot.dashboard_v2.perf import timed
 from trade_bot.dashboard_v2.services.artifact_service import (
     cycle_tracker_frames,
+    defensive_bias_calibration_frames,
+    defensive_correction_search_frames,
     defensive_signal_audit_frames,
     i111_evidence_frames,
     leadership_frames,
@@ -196,6 +198,61 @@ def _render_candidate(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> Non
         return
     selected_strategy = label_to_strategy.get(str(selected), str(selected))
     row = ordered[ordered["strategy"].astype(str) == selected_strategy].iloc[0]
+    workspace_view = (
+        st.pills(
+            "Candidate workspace",
+            ["Candidate Details", "Research Readout"],
+            default="Candidate Details",
+            selection_mode="single",
+            key="dashboard_v2_candidate_workspace",
+        )
+        or "Candidate Details"
+    )
+    if workspace_view == "Research Readout":
+        _render_candidate_research_readout(
+            row,
+            ordered=ordered,
+            scores=scores,
+            runtime=runtime,
+            selected_strategy=selected_strategy,
+        )
+        return
+
+    render_section_header("Candidate Detail Tabs")
+    st.caption(
+        "Full drilldown for the selected candidate: performance, allocation, decision "
+        "timeline, factor attribution, mechanics, robustness, and manifest/risk notes."
+    )
+    with timed("research.candidate_detail_frames"):
+        frames = dashboard_frames()
+    _render_approach_detail_workbench(
+        bot_config=runtime.bot_config,
+        baseline_run=runtime.baseline_run,
+        experiment_scorecards=frames[0],
+        experiment_regimes=frames[1],
+        experiment_walk_forward=frames[2],
+        experiment_candidates=frames[3],
+        selected_strategy=selected_strategy,
+        key_prefix="dashboard_v2_candidate",
+        show_selector=False,
+    )
+
+
+def _render_candidate_research_readout(
+    row: pd.Series,
+    *,
+    ordered: pd.DataFrame,
+    scores: pd.DataFrame,
+    runtime: DashboardRuntime,
+    selected_strategy: str,
+) -> None:
+    render_section_header(
+        "Research Readout",
+        help_text=(
+            "Headline metrics, outcome utility, comparable candidates, and persisted "
+            "overfit evidence for the selected candidate."
+        ),
+    )
     render_card_grid(
         [
             ("CAGR", _fmt_pct(row.get("cagr"))),
@@ -234,25 +291,6 @@ def _render_candidate(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> Non
         warehouse_path=str(runtime.paths.run_store_path),
     )
     _render_candidate_artifact_read(selected_strategy)
-    st.divider()
-    render_section_header("Candidate Detail Tabs")
-    st.caption(
-        "Full drilldown for the selected candidate: performance, allocation, decision "
-        "timeline, factor attribution, mechanics, robustness, and manifest/risk notes."
-    )
-    with timed("research.candidate_detail_frames"):
-        frames = dashboard_frames()
-    _render_approach_detail_workbench(
-        bot_config=runtime.bot_config,
-        baseline_run=runtime.baseline_run,
-        experiment_scorecards=frames[0],
-        experiment_regimes=frames[1],
-        experiment_walk_forward=frames[2],
-        experiment_candidates=frames[3],
-        selected_strategy=selected_strategy,
-        key_prefix="dashboard_v2_candidate",
-        show_selector=False,
-    )
 
 
 def _candidate_universe(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> pd.DataFrame:
@@ -461,6 +499,7 @@ def _render_cycle_tracker() -> None:
     crisis = frames.get("crisis_playback", pd.DataFrame())
     prebreak = prebreak_hindsight_frames()
     defensive_audit = defensive_signal_audit_frames()
+    defensive_bias = defensive_bias_calibration_frames()
     if all(frame.empty for frame in frames.values()):
         st.info("No cycle tracker artifacts found. Run `poetry run trade-bot run-cycle-tracker`.")
         return
@@ -515,6 +554,7 @@ def _render_cycle_tracker() -> None:
             crisis,
             prebreak=prebreak,
             defensive_audit=defensive_audit,
+            defensive_bias=defensive_bias,
         )
     else:
         st.info(
@@ -1204,6 +1244,7 @@ def _render_crisis_playback(
     *,
     prebreak: dict[str, pd.DataFrame] | None = None,
     defensive_audit: dict[str, pd.DataFrame] | None = None,
+    defensive_bias: dict[str, pd.DataFrame] | None = None,
 ) -> None:
     render_section_header("Historical Crisis Playback")
     st.caption(
@@ -1330,6 +1371,7 @@ def _render_crisis_playback(
             selected_crisis=str(selected_crisis),
             prebreak=prebreak,
             defensive_audit=defensive_audit or {},
+            defensive_bias=defensive_bias,
         )
 
 
@@ -1338,6 +1380,7 @@ def _render_prebreak_hindsight_layers(
     selected_crisis: str,
     prebreak: dict[str, pd.DataFrame],
     defensive_audit: dict[str, pd.DataFrame],
+    defensive_bias: dict[str, pd.DataFrame] | None = None,
 ) -> None:
     signal_panel = prebreak.get("snapshot_signal_panel", pd.DataFrame())
     signal_rank = prebreak.get("signal_predictiveness_rank", pd.DataFrame())
@@ -1376,7 +1419,11 @@ def _render_prebreak_hindsight_layers(
     )
     _render_prebreak_population_summary(signal_panel)
     if not current_readout.empty:
-        _render_current_prebreak_monitor(current_readout, defensive_audit=defensive_audit)
+        _render_current_prebreak_monitor(
+            current_readout,
+            defensive_audit=defensive_audit,
+            defensive_bias=defensive_bias,
+        )
     if not signal_panel.empty or not action_timing.empty:
         render_section_header("Selected Crisis Trade-Bot Behavior")
         selected_event = _select_prebreak_event(
@@ -1537,6 +1584,7 @@ def _render_current_prebreak_monitor(
     current_readout: pd.DataFrame,
     *,
     defensive_audit: dict[str, pd.DataFrame],
+    defensive_bias: dict[str, pd.DataFrame] | None = None,
 ) -> None:
     render_section_header("Current Early Warning Monitor")
     data = current_readout.copy()
@@ -1629,10 +1677,13 @@ def _render_current_prebreak_monitor(
             display["signal"] = display["signal"].map(_signal_label)
         with st.expander("Current monitor detail", expanded=True):
             _render_metric_dataframe(_display_metrics(display))
-    _render_defensive_posture_bridge(defensive_audit)
+    _render_defensive_posture_bridge(defensive_audit, defensive_bias)
 
 
-def _render_defensive_posture_bridge(defensive_audit: dict[str, pd.DataFrame]) -> None:
+def _render_defensive_posture_bridge(
+    defensive_audit: dict[str, pd.DataFrame],
+    defensive_bias: dict[str, pd.DataFrame] | None = None,
+) -> None:
     exposure = defensive_audit.get("current_defensive_exposure", pd.DataFrame())
     scorecards = defensive_audit.get("scorecards", pd.DataFrame())
     if exposure.empty and scorecards.empty:
@@ -1703,6 +1754,198 @@ def _render_defensive_posture_bridge(defensive_audit: dict[str, pd.DataFrame]) -
             f"This read uses {cohort} for the focus strategy at {threshold_text} defense, "
             f"measured over {horizon} against {benchmark}.{current_context}"
         )
+    _render_defensive_bias_research(defensive_bias or defensive_bias_calibration_frames())
+
+
+def _render_defensive_bias_research(frames: dict[str, pd.DataFrame]) -> None:
+    current = frames.get("current_read", pd.DataFrame())
+    gates = frames.get("promotion_gates", pd.DataFrame())
+    if current.empty:
+        return
+    row = current.iloc[0]
+    primary_policy = "hierarchical_confirmation_defense_relief_5pp"
+    primary_gates = (
+        gates[gates["policy"].astype(str).eq(primary_policy)]
+        if not gates.empty and "policy" in gates
+        else gates
+    )
+    retrospective_passed = (
+        bool(primary_gates["retrospective_gate_passed"].astype(bool).all())
+        if not primary_gates.empty and "retrospective_gate_passed" in primary_gates
+        else False
+    )
+    render_section_header(
+        "Historical Bias Adjustment Research",
+        help_text=(
+            "A broad, point-in-time study of whether the strategy is systematically too "
+            "defensive or too risk-on. It partially pools global, strategy-family, and "
+            "strategy-specific evidence and has no live allocation authority."
+        ),
+    )
+    render_card_grid(
+        [
+            (
+                "Triggered Action",
+                str(row.get("triggered_action", "none")).replace("_", " ").title(),
+                "Action implied by today's native defensive weight before confirmation and evidence gates.",
+            ),
+            (
+                "Research-Only Shift",
+                _fmt_pct(row.get("research_only_shift")),
+                "Bounded counterfactual sleeve transfer; the live portfolio is unchanged.",
+            ),
+            (
+                "Adjusted Defense",
+                _fmt_pct(row.get("research_adjusted_defensive_weight")),
+                "Hypothetical defense after the research correction, if all gates allow it.",
+            ),
+            (
+                "Confirmation",
+                str(row.get("confirmation_state", "n/a")).replace("_", " ").title(),
+                "Defense relief is blocked during confirmed or severe quantitative breaks.",
+            ),
+            (
+                "Strategy Samples",
+                str(int(float(row.get("strategy_observations", 0) or 0))),
+                "Matured, point-in-time observations for this strategy and action.",
+            ),
+            (
+                "Retrospective Gate",
+                "Passed" if retrospective_passed else "Not passed",
+                "Even a pass only permits prospective shadow monitoring, never automatic promotion.",
+            ),
+        ]
+    )
+    render_callout(
+        "This is an anti-overfitting cross-check, not a new allocation layer. The correction "
+        "is capped at five percentage points, cannot invent a risky holding, excludes hard "
+        "portfolio constraints, and currently has 0% allocation authority."
+    )
+    _render_expanded_defensive_correction_search(
+        focus_strategy=str(row.get("strategy", "")),
+    )
+
+
+def _render_expanded_defensive_correction_search(*, focus_strategy: str) -> None:
+    frames = defensive_correction_search_frames()
+    scorecard = frames.get("mechanism_scorecard", pd.DataFrame())
+    current = frames.get("current_effects", pd.DataFrame())
+    if scorecard.empty:
+        return
+    closest = scorecard.sort_values(
+        ["retrospective_gate_passed", "gate_fail_count", "focus_cagr_delta"],
+        ascending=[False, True, False],
+    ).iloc[0]
+    full_passes = int(
+        scorecard["retrospective_gate_passed"]
+        .astype(str)
+        .str.lower()
+        .isin({"true", "1", "yes"})
+        .sum()
+    )
+    render_section_header(
+        "Expanded Over-Defensiveness Search",
+        help_text=(
+            "Thirty distinct causal correction architectures, including timing, confirmation, "
+            "duration, re-entry, family-disagreement, and alternative-sleeve mechanisms. "
+            "Small parameter sensitivities do not count as separate architectures."
+        ),
+    )
+    render_card_grid(
+        [
+            (
+                "Architectures",
+                len(scorecard),
+                "Distinct mechanisms tested under the common point-in-time contract.",
+            ),
+            (
+                "Full Passes",
+                full_passes,
+                "Mechanisms clearing all return, drawdown, era, crisis, materiality, and cost gates.",
+            ),
+            (
+                "Closest Candidate",
+                str(closest.get("mechanism", "n/a")).replace("_", " ").title(),
+                "Fewest failed gates, then highest focus-strategy CAGR improvement.",
+            ),
+            (
+                "Focus CAGR Delta",
+                _fmt_pct(closest.get("focus_cagr_delta")),
+                "Full-history annualized return change versus the unchanged focus strategy.",
+            ),
+            (
+                "Focus DD Delta",
+                _fmt_pct(closest.get("focus_max_drawdown_delta")),
+                "Positive is a shallower drawdown; negative is additional drawdown cost.",
+            ),
+            (
+                "Mean Active Relief",
+                _fmt_pct(closest.get("focus_mean_active_defense_reduction")),
+                "Average defensive-weight reduction on days when the mechanism acts.",
+            ),
+            (
+                "Ordinary-Market CAGR Delta",
+                _fmt_pct(closest.get("focus_ordinary_annualized_return_delta")),
+                "Annualized focus-strategy change after removing all named crisis sessions.",
+            ),
+            (
+                "Positive Rolling 1Y",
+                _fmt_pct(closest.get("focus_rolling_1y_positive_return_rate")),
+                "Share of quarterly-sampled one-year windows with higher return than base.",
+            ),
+        ]
+    )
+    render_callout(
+        f"Closest candidate failed: {closest.get('failed_gates', 'unknown gate')}. "
+        f"It acts on {_fmt_pct(closest.get('focus_active_day_rate'))} of focus-strategy days "
+        f"and changes today's defense by {_fmt_pct(closest.get('focus_current_defense_reduction'))}. "
+        "This is a measured near-miss, not authority to change the live allocation."
+    )
+    columns = [
+        column
+        for column in [
+            "mechanism",
+            "gate_pass_count",
+            "failed_gates",
+            "focus_cagr_delta",
+            "focus_max_drawdown_delta",
+            "focus_active_day_rate",
+            "focus_mean_active_defense_reduction",
+            "focus_current_defense_reduction",
+            "focus_ordinary_annualized_return_delta",
+            "ordinary_strategy_positive_return_rate",
+            "focus_rolling_1y_positive_return_rate",
+            "focus_rolling_3y_positive_return_rate",
+        ]
+        if column in scorecard
+    ]
+    with st.expander("Architecture scorecard and current alternatives", expanded=False):
+        _render_metric_dataframe(_display_metrics(scorecard[columns].head(12)))
+        if not current.empty:
+            focus_current = current[current["strategy"].astype(str).eq(focus_strategy)]
+            active_now = focus_current[
+                pd.to_numeric(
+                    focus_current["current_defense_reduction"], errors="coerce"
+                ).abs()
+                > 1e-10
+            ]
+            if not active_now.empty:
+                st.caption(
+                    "Research mechanisms that would materially alter the latest focus allocation"
+                )
+                _render_metric_dataframe(
+                    _display_metrics(
+                        active_now[
+                            [
+                                "mechanism",
+                                "base_defensive_weight",
+                                "adjusted_defensive_weight",
+                                "current_defense_reduction",
+                                "allocation_authority",
+                            ]
+                        ]
+                    )
+                )
 
 
 def _defensive_posture_rows(

@@ -91,6 +91,14 @@ from trade_bot.research.cycle_tracker import (
     DEFAULT_PHASE_VALIDATION_STEP_DAYS,
     run_cycle_tracker,
 )
+from trade_bot.research.defensive_bias_calibration import (
+    DEFAULT_DEFENSIVE_BIAS_CALIBRATION_DIR,
+    run_defensive_bias_calibration,
+)
+from trade_bot.research.defensive_correction_search import (
+    DEFAULT_DEFENSIVE_CORRECTION_SEARCH_DIR,
+    run_defensive_correction_search,
+)
 from trade_bot.research.defensive_judgement import write_defensive_judgement_report
 from trade_bot.research.defensive_layer_calibration import (
     DEFAULT_DEFENSIVE_LAYER_CALIBRATION_DIR,
@@ -148,6 +156,10 @@ from trade_bot.research.i111_risk_repair import (
     DEFAULT_I111_RISK_REPAIR_OUTPUT_DIR,
     run_i111_risk_repair_lab,
 )
+from trade_bot.research.i111_selector_transition_repair import (
+    DEFAULT_I111_SELECTOR_TRANSITION_OUTPUT_DIR,
+    run_i111_selector_transition_repair,
+)
 from trade_bot.research.leadership_diagnostics import (
     leadership_candidate_tickers,
     run_leadership_diagnostics,
@@ -155,6 +167,10 @@ from trade_bot.research.leadership_diagnostics import (
 from trade_bot.research.native_i111_risk_repair import (
     DEFAULT_NATIVE_I111_RISK_REPAIR_OUTPUT_DIR,
     run_native_i111_risk_repair_lab,
+)
+from trade_bot.research.native_timing_hazard import (
+    DEFAULT_NATIVE_TIMING_HAZARD_DIR,
+    run_native_timing_hazard_research,
 )
 from trade_bot.research.operating_history import (
     DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
@@ -875,9 +891,7 @@ def backfill_snapshots_cmd(
             )
         existing = run_store.list_snapshots(limit=100_000)
         if existing.empty:
-            raise typer.BadParameter(
-                "The target store has no completed snapshots to replace."
-            )
+            raise typer.BadParameter("The target store has no completed snapshots to replace.")
         latest_per_date = (
             existing.sort_values(
                 ["market_date", "created_at_utc", "run_id"],
@@ -888,9 +902,7 @@ def backfill_snapshots_cmd(
         )
         expected_market_dates = set(latest_per_date["market_date"].astype(str))
         current_fingerprint = build_snapshot_fingerprint(config, events, macro, news)
-        current_source_tree_sha = str(
-            build_runtime_provenance().get("source_tree_sha256", "")
-        )
+        current_source_tree_sha = str(build_runtime_provenance().get("source_tree_sha256", ""))
         same_source_tree = latest_per_date["provenance_json"].map(
             lambda value: _provenance_source_tree_sha(value) == current_source_tree_sha
         )
@@ -898,9 +910,7 @@ def backfill_snapshots_cmd(
             latest_per_date["combined_config_hash"].eq(current_fingerprint.combined_hash)
             & same_source_tree
         ]
-        already_replaced_market_dates = set(
-            already_replaced["market_date"].astype(str)
-        )
+        already_replaced_market_dates = set(already_replaced["market_date"].astype(str))
         pending_replacement = latest_per_date[
             ~latest_per_date["market_date"].astype(str).isin(already_replaced_market_dates)
         ]
@@ -968,9 +978,7 @@ def backfill_snapshots_cmd(
                     f"Existing {market_date_text} snapshot does not contain configured "
                     f"primary strategy {primary_strategy!r}."
                 )
-            defensive_ticker = historical_config.strategies[
-                primary_strategy
-            ].defensive_ticker
+            defensive_ticker = historical_config.strategies[primary_strategy].defensive_ticker
             if not defensive_ticker:
                 raise RuntimeError(
                     f"Configured primary strategy {primary_strategy!r} has no defensive ticker."
@@ -989,9 +997,7 @@ def backfill_snapshots_cmd(
             # These tables contain self-contained completed windows. Compute the
             # expensive windows once on the same causal path, then retain only
             # rows whose end date was available at the historical origin.
-            recomputed_rolling = _completed_windows_through(
-                full_rolling_windows, market_date_text
-            )
+            recomputed_rolling = _completed_windows_through(full_rolling_windows, market_date_text)
             recomputed_calendar = _completed_windows_through(
                 full_calendar_metrics, market_date_text
             )
@@ -1027,9 +1033,7 @@ def backfill_snapshots_cmd(
             baseline_run = replace(
                 source_run,
                 results=recomputed_results,
-                metrics=metrics_frame(calculated_metrics).sort_values(
-                    "calmar", ascending=False
-                ),
+                metrics=metrics_frame(calculated_metrics).sort_values("calmar", ascending=False),
                 rolling_windows=recomputed_rolling,
                 window_summary=summarize_windows(recomputed_rolling),
                 calendar_metrics=recomputed_calendar,
@@ -1105,7 +1109,10 @@ def backfill_snapshots_cmd(
     if replace_existing_market_dates:
         final_snapshots = run_store.list_snapshots(limit=100_000)
         final_dates = set(final_snapshots["market_date"].astype(str))
-        if len(final_snapshots) != len(expected_market_dates) or final_dates != expected_market_dates:
+        if (
+            len(final_snapshots) != len(expected_market_dates)
+            or final_dates != expected_market_dates
+        ):
             raise RuntimeError(
                 "Post-prune 1:1 validation failed: "
                 f"expected {len(expected_market_dates)} dates, found "
@@ -1155,7 +1162,9 @@ def generate_prebreak_snapshots_cmd(
     ] = True,
     control_frequency: Annotated[
         str,
-        typer.Option("--control-frequency", help="Calendar frequency for ordinary-history controls."),
+        typer.Option(
+            "--control-frequency", help="Calendar frequency for ordinary-history controls."
+        ),
     ] = DEFAULT_HISTORICAL_CONTROL_FREQUENCY,
     market_close_utc_hour: Annotated[
         int,
@@ -2429,9 +2438,7 @@ def run_cycle_tracker_cmd(
 
 @app.command("calibrate-defensive-layers")
 def calibrate_defensive_layers_cmd(
-    config: Annotated[Path, typer.Option("--config", "-c")] = Path(
-        "configs/active_trading.yaml"
-    ),
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/active_trading.yaml"),
     output_dir: Annotated[
         Path,
         typer.Option("--output-dir"),
@@ -2485,18 +2492,153 @@ def calibrate_defensive_layers_cmd(
     console.print(f"Reports: {output_dir} ({len(result.origin_states):,} origins)")
 
 
+@app.command("research-defensive-bias")
+def research_defensive_bias_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/baseline.yaml"),
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_DEFENSIVE_BIAS_CALIBRATION_DIR,
+) -> None:
+    """Test bounded historical bias corrections with zero allocation authority."""
+
+    loaded = RunStore(read_only=True).load_latest_snapshot(require_matching_config=False)
+    if loaded is None:
+        raise typer.BadParameter("No completed snapshot is available.")
+    baseline_run, _manifest = loaded
+    result = run_defensive_bias_calibration(
+        baseline_run,
+        load_config(config),
+        output_dir=output_dir,
+    )
+    table = Table(title="Defensive Bias Calibration (Research Only)")
+    for column in [
+        "strategy",
+        "CAGR delta",
+        "drawdown delta",
+        "active days",
+    ]:
+        table.add_column(column)
+    candidate = result.strategy_metrics[
+        result.strategy_metrics["policy"].eq("hierarchical_confirmation_defense_relief_5pp")
+    ]
+    for _, row in candidate.iterrows():
+        table.add_row(
+            str(row["strategy"]),
+            _format_optional_percent(row["cagr_delta_vs_base"]),
+            _format_optional_percent(row["max_drawdown_delta_vs_base"]),
+            _format_optional_percent(row["active_day_rate"]),
+        )
+    console.print(table)
+    primary_policy = "hierarchical_confirmation_defense_relief_5pp"
+    primary_gates = result.promotion_gates[result.promotion_gates["policy"].eq(primary_policy)]
+    failed = primary_gates[~primary_gates["passed"].astype(bool)]["gate"].astype(str).tolist()
+    console.print(
+        "Allocation authority: 0%. Failed gates: "
+        + (", ".join(failed) if failed else "prospective evidence still required")
+    )
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("search-defensive-corrections")
+def search_defensive_corrections_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/baseline.yaml"),
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_DEFENSIVE_CORRECTION_SEARCH_DIR,
+) -> None:
+    """Test distinct over-defensiveness correction architectures."""
+
+    loaded = RunStore(read_only=True).load_latest_snapshot(require_matching_config=False)
+    if loaded is None:
+        raise typer.BadParameter("No completed snapshot is available.")
+    baseline_run, _manifest = loaded
+    result = run_defensive_correction_search(
+        baseline_run,
+        load_config(config),
+        output_dir=output_dir,
+    )
+    table = Table(title="Defensive Correction Architecture Search")
+    for column in [
+        "mechanism",
+        "focus CAGR",
+        "focus DD",
+        "active days",
+        "mean relief",
+        "gate",
+    ]:
+        table.add_column(column)
+    for _, row in result.mechanism_scorecard.head(20).iterrows():
+        table.add_row(
+            str(row["mechanism"]),
+            _format_optional_percent(row["focus_cagr_delta"]),
+            _format_optional_percent(row["focus_max_drawdown_delta"]),
+            _format_optional_percent(row["focus_active_day_rate"]),
+            _format_optional_percent(row["focus_mean_active_defense_reduction"]),
+            "pass" if bool(row["retrospective_gate_passed"]) else "fail",
+        )
+    console.print(table)
+    passed = int(result.mechanism_scorecard["retrospective_gate_passed"].sum())
+    console.print(
+        f"Distinct architectures: {len(result.mechanism_scorecard)}; "
+        f"retrospective passes: {passed}; allocation authority: 0%."
+    )
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("research-native-timing-hazard")
+def research_native_timing_hazard_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/baseline.yaml"),
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_NATIVE_TIMING_HAZARD_DIR,
+) -> None:
+    """Test continuous native timing curves with zero allocation authority."""
+
+    loaded = RunStore(read_only=True).load_latest_snapshot(require_matching_config=False)
+    if loaded is None:
+        raise typer.BadParameter("No completed snapshot is available.")
+    baseline_run, _manifest = loaded
+    result = run_native_timing_hazard_research(
+        baseline_run,
+        load_config(config),
+        output_dir=output_dir,
+    )
+    table = Table(title="Native Timing Hazard Research")
+    for column in [
+        "policy",
+        "focus CAGR",
+        "focus DD",
+        "gates",
+        "status",
+    ]:
+        table.add_column(column)
+    for _, row in result.promotion_gates.iterrows():
+        table.add_row(
+            str(row["policy"]),
+            _format_optional_percent(row["focus_cagr_delta"]),
+            _format_optional_percent(row["focus_max_drawdown_delta"]),
+            f"{int(row['gate_pass_count'])}/12",
+            "pass" if bool(row["retrospective_gate_passed"]) else "research only",
+        )
+    console.print(table)
+    console.print("Allocation authority: 0%. No live strategy was changed.")
+    console.print(f"Reports: {output_dir}")
+
+
 @app.command("calibrate-scenario-probabilities")
 def calibrate_scenario_probabilities_cmd(
-    config: Annotated[Path, typer.Option("--config", "-c")] = Path(
-        "configs/baseline.yaml"
-    ),
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/baseline.yaml"),
     origin_states: Annotated[
         Path,
         typer.Option(
             "--origin-states",
             help="Point-in-time states produced by calibrate-defensive-layers.",
         ),
-    ] = DEFAULT_DEFENSIVE_LAYER_CALIBRATION_DIR / "origin_states.csv",
+    ] = DEFAULT_DEFENSIVE_LAYER_CALIBRATION_DIR
+    / "origin_states.csv",
     output_dir: Annotated[
         Path,
         typer.Option("--output-dir"),
@@ -2582,11 +2724,11 @@ def audit_defensive_judgement_cmd(
         output_dir=output_dir,
         strategy_names=strategy_names,
         benchmark_tickers=benchmark_tickers,
-        focus_strategy=str(
-            baseline_run.trade_decision.summary.iloc[0].get("strategy", "")
-        )
-        if not baseline_run.trade_decision.summary.empty
-        else None,
+        focus_strategy=(
+            str(baseline_run.trade_decision.summary.iloc[0].get("strategy", ""))
+            if not baseline_run.trade_decision.summary.empty
+            else None
+        ),
     )
     table = Table(title="Defensive Judgement Audit")
     table.add_column("artifact")
@@ -3186,7 +3328,8 @@ def score_42macro_outcomes_cmd(
     comparison_path: Annotated[
         Path,
         typer.Option("--comparison-path"),
-    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR / "daily_comparison.csv",
+    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR
+    / "daily_comparison.csv",
     output_dir: Annotated[
         Path,
         typer.Option("--output-dir"),
@@ -3698,12 +3841,66 @@ def run_i111_execution_smoothing_cmd(
     console.print(f"Reports: {output_dir}")
 
 
+@app.command("run-i111-selector-transition-repair")
+def run_i111_selector_transition_repair_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_I111_SELECTOR_TRANSITION_OUTPUT_DIR,
+    refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+) -> None:
+    """Run the native i111 selector and transition repair study."""
+
+    bot_config = load_config(config)
+    baseline_run = run_configured_baselines(
+        bot_config,
+        refresh_data=refresh_data,
+    )
+    result = run_i111_selector_transition_repair(
+        baseline_run,
+        bot_config,
+        output_dir=output_dir,
+    )
+    base_cost = result.schedule_summary[result.schedule_summary["is_base_cost"]]
+    gates = result.promotion_gates.set_index("candidate")
+    table = Table(title="I111 Selector And Transition Repair")
+    for column in [
+        "candidate",
+        "phase",
+        "configured CAGR",
+        "configured DD",
+        "median execution CAGR",
+        "worst execution DD",
+        "gates",
+        "status",
+    ]:
+        table.add_column(column)
+    for _, row in base_cost.iterrows():
+        candidate = str(row["candidate"])
+        gate = gates.loc[candidate]
+        table.add_row(
+            candidate,
+            str(row["research_phase"]),
+            _format_optional_percent(row["configured_cagr"]),
+            _format_optional_percent(row["configured_max_drawdown"]),
+            _format_optional_percent(row["median_execution_cagr"]),
+            _format_optional_percent(row["worst_execution_drawdown"]),
+            f"{int(gate['gates_passed'])}/{int(gate['gates_total'])}",
+            str(gate["research_status"]),
+        )
+    console.print(table)
+    console.print(
+        "Retrospective research only; post-initial ablations are diagnostic "
+        "and allocation authority is 0%."
+    )
+    console.print(f"Reports: {output_dir}")
+
+
 @app.command("build-research-governance-ledger")
 def build_research_governance_ledger_cmd(
     report_root: Annotated[Path, typer.Option("--report-root")] = Path("reports"),
-    output_dir: Annotated[Path, typer.Option("--output-dir")] = Path(
-        "reports/research_governance"
-    ),
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = Path("reports/research_governance"),
 ) -> None:
     """Index manifested trials and expose universe/delisting evidence gaps."""
 

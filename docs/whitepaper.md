@@ -334,6 +334,19 @@ from seven to eight. RSP deferral produced 19.29% Wednesday CAGR, worsened the
 worst drawdown to -34.29%, and also had eight failures. This closes that fixed
 hypothesis as `no_robust_improvement`; it does not justify a strategy change.
 
+A later native selector/transition study tested incumbent buffers, 63/126-day
+blended ranks, a 15% SPY/RSP core, recovery-metered entry, and their
+combinations without adding another defensive overlay. None cleared the fixed
+replacement screen. The incumbent buffer modestly raised configured CAGR from
+20.79% to 20.91% and median execution CAGR from 19.54% to 19.80%, but worsened
+configured drawdown by 0.69 points and improved only 40.9% of calendar years.
+A post-initial blended-rank-plus-buffer ablation reduced configured CAGR to
+20.36% while improving median execution CAGR to 20.13%, worst execution
+drawdown by 1.01 points, and the Aug. 2023-Jan. 2024 result by 3.20 points.
+That is useful evidence about turnover and transition fragility, not a validated
+replacement. The core and recovery-meter mechanisms were return-dilutive, so
+the operating strategy remains unchanged.
+
 Later sector-regime and global-rotation experiments serve a different purpose.
 They have produced lower-CAGR candidates, often in the 3-6% range, with lower
 drawdowns and useful macro-rotation diagnostics. They are not currently
@@ -365,6 +378,120 @@ make them bad, but it does mean the system should not monitor ten versions of
 the same exposure and pretend they are independent challengers. The dashboard
 therefore includes family maps, factor attribution, residual behavior, and
 curated shelves to make strategy overlap visible.
+
+### Broad Defensive-Bias Calibration
+
+The July 23 defensive-bias study tested whether Trade Bot is systematically too
+defensive too early across every eligible month-end, not only bubble peaks or
+large drawdowns. It covered 11 dynamic risk-managed strategies after a
+three-year warm-up and produced 3,172 one- and three-month frozen-weight
+counterfactual rows. Static allocations were excluded. Near-clone strategies
+could not multiply the global or family sample because pooled evidence was
+averaged by origin.
+
+The candidate adjustment was deliberately small: at most five percentage points
+between BIL/residual defense and the strategy's existing risk sleeve. It could
+not invent a risky holding, defense relief was blocked during confirmed or
+severe market breaks, and hard portfolio-risk constraints were excluded because
+they encode loss tolerance rather than a forecast error. Every online estimate
+used only outcomes whose forward window had already matured.
+
+The broad result is useful but not strong enough to change the live policy:
+
+- Ordinary-market defense-relief cases were positive on the declared one-month
+  utility in 68.0% of rows across 23 unique origins, but only six strategies
+  produced such cases. Named-stress relief was positive in 51.1% of rows across
+  36 origins.
+- Risk restraint was not the mirror image. In ordinary markets it was positive
+  in 53.7% of one-month rows, but average return delta was negative and the
+  three-month utility edge disappeared.
+- The best naive fixed symmetric rule raised median strategy CAGR by 0.16
+  percentage points and had non-worse drawdown in 63.6% of strategies, but only
+  half of calendar eras had a positive median return effect and only 71.6% of
+  crisis tests had non-worse drawdown. It failed the predeclared gate.
+- The hierarchical defense-relief candidate raised the focus strategy CAGR by
+  only 0.03 points while worsening maximum drawdown by 0.61 points. Only 45.5%
+  of strategies and 25% of eras had positive return deltas.
+
+No pre-registered candidate passed the retrospective gate, and prospective
+evidence is absent. Allocation authority therefore remains zero. Today's 57.68%
+defensive focus-strategy weight is below the 60% research trigger, so the
+calibrator proposes no current adjustment. The most defensible conclusion is
+not “always add risk because Trade Bot is early.” It is narrower: early defense
+contains some strategy-family-specific upside-regret information, especially in
+recent i111 history, but the bias is not stable enough across eras and
+drawdowns to estimate as a live correction.
+
+A subsequent architecture search went beyond threshold tuning and tested 30
+distinct mechanisms: trend, credit, volatility, breadth, momentum, drawdown,
+defense duration, ramp speed, recovery, risk floors, family disagreement,
+opportunity-cost feedback, re-entry acceleration, SPY/SPLV/RSP bridge sleeves,
+and conditional combinations. None cleared all eight fixed gates.
+
+The result is not equivalent to “nothing helps.” Breadth-gated five-point relief
+was a real near-miss. For the focus strategy it added 0.30 CAGR points, cost 0.41
+maximum-drawdown points, acted on 6.86% of days, remained positive at 10 and 20
+basis-point costs, had positive cross-strategy median return effects in all four
+eras, and passed the crisis gate. It cleared seven of eight gates. It failed
+because only 54.5% of strategies had non-worse maximum drawdown versus the 60%
+requirement. The damage was concentrated in i111 variants; unrelated dynamic
+strategies were mostly unchanged.
+
+This was not a crisis-only test. The common history contains 5,422 daily
+sessions from 2005-01-03 through 2026-07-23. An explicit diagnostic removes all
+eight named crisis windows, leaving 3,592 ordinary-market sessions.
+`breadth_intact_relief` adds 0.42 annualized return points to the focus path in
+that crisis-excluded sample, and all 11 strategies have non-worse ordinary-path
+maximum drawdown, but only 54.5% have higher ordinary-path annualized return.
+Across quarterly-sampled rolling windows, the focus rule beats base on return in
+54.2% of one-year and 73.3% of three-year windows. That confirms a real
+opportunity-cost effect outside crises, but not a uniformly reliable one; its
+full-path drawdown damage arises in stress windows.
+
+Second-wave breadth combinations could reduce the drawdown cost, but only by
+becoming too rare to satisfy the material-allocation gate. Two mechanisms would
+change today's allocation: native re-entry acceleration would reduce defense by
+five points and an intact-trend risk floor by 2.68 points. Both failed multiple
+historical gates, so neither has authority. The current conclusion is therefore
+more informative than the first study: a small breadth-conditioned relief sleeve
+is the leading prospective research candidate, but the system cannot honestly
+claim a robust live correction yet.
+
+The next study removed the 60% trigger entirely. It fit nested,
+episode-weighted break-progression models and translated probabilities into a
+continuous defensive target. The hazard forecast did not validate: its mean
+Brier score was worse than the expanding break base rate, the result was not
+stable at 8%, 10%, and 12% break labels, and most leave-crisis-cluster-out tests
+failed. Confirmation acceleration and warning-age decay also reduced return.
+This rejects a broad hazard-driven rebuild.
+
+However, the experiment exposed the earlier search constraint. Every initial
+fold selected the mildest curve boundary, so a clearly post-hoc lower-slope
+extension tested continuous i111 defense calibration. It raised focus CAGR from
+29.86% to 32.89% within the 2015-2026 nested outer-test window while worsening
+that window's maximum drawdown from -25.80% to -26.37%. These are not comparable
+with the roughly 20.67% full-history 2005-2026 configured-path CAGR; the valid
+same-window improvement is 3.03 points. All four folds improved CAGR, but two
+fold drawdowns worsened by 2.61 and 4.35 points. All six i111 variants improved,
+while the broader
+dynamic-risk-managed family did not.
+
+The effect survives 20-basis-point costs and one- or two-session extra execution
+lags. In 1,000 paired 63-session block resamples, the CAGR delta was positive in
+all samples, but 27% worsened drawdown by more than one point. Today the curve
+would reduce focus defense from 57.68% to 47.92%. This is a meaningful,
+explicit return-versus-drawdown trade, not a free correction. Because the
+lower-slope grid was motivated by observed boundary behavior, it is frozen only
+as `i111_continuous_defense_calibration_v1` for prospective shadow monitoring
+with zero allocation authority.
+
+Candidate Details now places a drawdown-attribution diagnostic directly below
+the combined performance/drawdown/allocation chart. For the selected history
+window it reports the local peak, trough, recovery measurement, gross loss
+contributors, peak-to-trough turnover and costs, risk/defensive exposure path,
+and missed SPY/QQQ recovery. Asset contributions are arithmetic gross
+diagnostics and are explicitly not presented as an exact compounded
+reconciliation.
 
 ## 6. Testing And Validation Framework
 

@@ -88,6 +88,7 @@ from trade_bot.research.defensive_judgement import (
     effective_defensive_weight,
     load_scenario_context,
 )
+from trade_bot.research.drawdown_attribution import build_drawdown_attribution
 from trade_bot.research.experiment_monitor import (
     build_strategy_family_map,
     latest_experiment_iteration,
@@ -523,6 +524,13 @@ def _render_performance_allocation_context(
         ),
         width="stretch",
     )
+    _render_drawdown_attribution_context(
+        result,
+        prices=baseline_run.prices,
+        defensive_ticker=defensive_ticker,
+        start=window_start,
+        end=window_end,
+    )
 
     stats_col, behavior_col = st.columns(2)
     with stats_col:
@@ -560,6 +568,137 @@ def _render_performance_allocation_context(
     if not event_frame.empty:
         st.caption("Transition events inside the selected window")
         _render_metric_dataframe(_display_metrics(event_frame), hide_index=True)
+
+
+def _render_drawdown_attribution_context(
+    result: BacktestResult,
+    *,
+    prices: pd.DataFrame,
+    defensive_ticker: str | None,
+    start: pd.Timestamp,
+    end: pd.Timestamp,
+) -> None:
+    attribution = build_drawdown_attribution(
+        result,
+        prices,
+        defensive_ticker=defensive_ticker,
+        start=start,
+        end=end,
+    )
+    if attribution.summary.empty:
+        return
+    summary = attribution.summary.iloc[0]
+    st.markdown("#### Drawdown attribution")
+    st.caption(
+        "This diagnoses the strategy's worst peak-to-trough decline inside the "
+        "selected window: when it occurred, what positions contributed, how much "
+        "the strategy traded, how exposure evolved, and whether it lagged the "
+        "subsequent benchmark recovery. Contributions are gross arithmetic "
+        "estimates; costs and compounding make them diagnostic rather than an "
+        "exact return reconciliation."
+    )
+    metric_columns = st.columns(6)
+    metric_columns[0].metric(
+        "Peak",
+        _format_market_date(summary.get("peak_date")),
+        help="The local high-water mark immediately preceding this window's worst drawdown.",
+    )
+    metric_columns[1].metric(
+        "Trough",
+        _format_market_date(summary.get("trough_date")),
+        help="The lowest point of this window's worst peak-to-trough decline.",
+    )
+    metric_columns[2].metric(
+        "Worst Drawdown",
+        _format_percent(summary.get("max_drawdown")),
+        help="The strategy loss from the identified peak to trough.",
+    )
+    metric_columns[3].metric(
+        "Turnover",
+        _format_multiple(summary.get("turnover_peak_to_trough")),
+        help="Cumulative gross weight traded between the peak and trough.",
+    )
+    metric_columns[4].metric(
+        "Missed SPY Recovery",
+        _format_percent(summary.get("missed_spy_recovery")),
+        help="SPY return minus strategy return from the trough through recovery measurement end.",
+    )
+    metric_columns[5].metric(
+        "Missed QQQ Recovery",
+        _format_percent(summary.get("missed_qqq_recovery")),
+        help="QQQ return minus strategy return from the trough through recovery measurement end.",
+    )
+
+    contributor_column, exposure_column = st.columns(2)
+    with contributor_column:
+        st.caption("Largest gross loss contributors, peak to trough")
+        contributors = attribution.contributors[
+            attribution.contributors["gross_return_contribution"].lt(0.0)
+        ].head(8)
+        if contributors.empty:
+            st.caption("No negative gross asset contributions were identified.")
+        else:
+            figure = go.Figure(
+                go.Bar(
+                    x=contributors["gross_return_contribution"],
+                    y=contributors["asset"],
+                    orientation="h",
+                    marker_color="#ef4444",
+                    hovertemplate=("%{y}<br>Gross contribution: %{x:.2%}<extra></extra>"),
+                )
+            )
+            figure.update_layout(
+                template="plotly_white",
+                height=330,
+                margin={"l": 20, "r": 20, "t": 10, "b": 20},
+                xaxis_tickformat=".1%",
+                yaxis={"autorange": "reversed"},
+            )
+            st.plotly_chart(figure, width="stretch")
+    with exposure_column:
+        st.caption("Exposure path from peak through recovery measurement")
+        exposure = attribution.exposure_path.set_index("market_date")
+        st.line_chart(
+            exposure[
+                [
+                    column
+                    for column in [
+                        "risk_assets",
+                        "defensive",
+                        "cash_or_unallocated",
+                    ]
+                    if column in exposure
+                ]
+            ]
+        )
+
+    detail_columns = [
+        "asset",
+        "gross_return_contribution",
+        "average_weight",
+        "maximum_weight",
+    ]
+    with st.expander("Drawdown contribution detail"):
+        _render_metric_dataframe(
+            _display_metrics(attribution.contributors[detail_columns]),
+            hide_index=True,
+        )
+
+
+def _format_market_date(value: object) -> str:
+    if pd.isna(value):
+        return "Not recovered"
+    return pd.Timestamp(value).strftime("%b %d, %Y")
+
+
+def _format_multiple(value: object) -> str:
+    try:
+        numeric = float(value)
+    except (TypeError, ValueError):
+        return "n/a"
+    if pd.isna(numeric):
+        return "n/a"
+    return f"{numeric:.2f}x"
 
 
 def _make_performance_allocation_figure(
@@ -2288,9 +2427,7 @@ def _deep_drawdown_comparison_frame(
         return pd.DataFrame()
     output = frame.copy()
     output["max_drawdown"] = pd.to_numeric(output["max_drawdown"], errors="coerce")
-    output = output[
-        output["max_drawdown"].le(DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT)
-    ].copy()
+    output = output[output["max_drawdown"].le(DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT)].copy()
     if output.empty:
         return output
     if qqq_max_drawdown is not None:
@@ -2299,18 +2436,24 @@ def _deep_drawdown_comparison_frame(
             lambda value: (
                 "same as QQQ"
                 if abs(value) < 0.00005
-                else f"{abs(value) * 100:.1f} pp worse than QQQ"
-                if value < 0
-                else f"{value * 100:.1f} pp less severe than QQQ"
+                else (
+                    f"{abs(value) * 100:.1f} pp worse than QQQ"
+                    if value < 0
+                    else f"{value * 100:.1f} pp less severe than QQQ"
+                )
             )
         )
     else:
         output["drawdown_difference_vs_qqq"] = float("nan")
         output["qqq_comparison"] = "QQQ reference unavailable"
-    output["row_type"] = output.get(
-        "strategy", pd.Series("", index=output.index)
-    ).astype(str).map(
-        lambda strategy: "benchmark" if strategy in {"buy_hold_spy", "buy_hold_qqq"} else "strategy"
+    output["row_type"] = (
+        output.get("strategy", pd.Series("", index=output.index))
+        .astype(str)
+        .map(
+            lambda strategy: (
+                "benchmark" if strategy in {"buy_hold_spy", "buy_hold_qqq"} else "strategy"
+            )
+        )
     )
     columns = [
         "display_name",
@@ -2323,9 +2466,7 @@ def _deep_drawdown_comparison_frame(
         "qqq_comparison",
         "growth_utility_tier",
     ]
-    return output[[column for column in columns if column in output]].sort_values(
-        "max_drawdown"
-    )
+    return output[[column for column in columns if column in output]].sort_values("max_drawdown")
 
 
 def _render_deep_drawdown_comparison(
@@ -3822,8 +3963,12 @@ def _render_defensive_judgement_section(
     current_defensive = _current_defensive_weight(result)
     cols = st.columns(5)
     _helped_metric(cols[0], "Current Defensive", _format_percent(current_defensive))
-    _helped_metric(cols[1], "Beneficial Under Rule", _format_percent(primary.get("correct_defense_rate")))
-    _helped_metric(cols[2], "Costly False Positive", _format_percent(primary.get("false_alarm_rate")))
+    _helped_metric(
+        cols[1], "Beneficial Under Rule", _format_percent(primary.get("correct_defense_rate"))
+    )
+    _helped_metric(
+        cols[2], "Costly False Positive", _format_percent(primary.get("false_alarm_rate"))
+    )
     _helped_metric(cols[3], "Mixed", _format_percent(primary.get("mixed_rate")))
     _helped_metric(cols[4], "Episode Starts", _format_decimal(primary.get("episode_starts")))
 
@@ -4150,8 +4295,14 @@ def _outcome_metric_peer_context(
         metric_key = str(spec["key"])
         kind = str(spec["kind"])
         lower_is_better = bool(spec["lower_is_better"])
-        selected = _safe_float(working.loc[working["is_selected"], metric_key].iloc[0])
-        values = pd.to_numeric(working[metric_key], errors="coerce").dropna()
+        metric_values = (
+            working[metric_key]
+            if metric_key in working
+            else pd.Series(pd.NA, index=working.index, dtype="object")
+        )
+        selected_values = metric_values.loc[working["is_selected"].astype(bool)]
+        selected = _safe_float(selected_values.iloc[0]) if not selected_values.empty else None
+        values = pd.to_numeric(metric_values, errors="coerce").dropna()
         if values.empty or selected is None:
             peer_min = peer_median = peer_max = peer_percentile = None
         else:
