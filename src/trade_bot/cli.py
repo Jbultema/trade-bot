@@ -99,6 +99,8 @@ from trade_bot.research.capital_cycle_feasibility import (
 )
 from trade_bot.research.capital_cycle_sources import (
     fetch_census_housing_release_panel,
+    fetch_census_new_sales_panel,
+    fetch_fed_sloos_housing_panel,
     fetch_registered_source_documents,
     fetch_sec_filing_archive,
     import_eia_dpr_archive,
@@ -2846,6 +2848,41 @@ def fetch_capital_cycle_census_history_cmd(
     console.print(f"Inventory: {result.inventory_path}")
 
 
+@app.command("fetch-capital-cycle-census-new-sales")
+def fetch_capital_cycle_census_new_sales_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    quarterly_only: Annotated[
+        bool,
+        typer.Option("--quarterly-only/--monthly"),
+    ] = True,
+) -> None:
+    """Archive point-in-time Census new-home sales, supply, and price releases."""
+
+    episode_path = research_dir / "episode_manifest.csv"
+    observation_path = research_dir / "direct_observations.csv"
+    if not episode_path.exists():
+        raise FileNotFoundError(f"Episode manifest is missing: {episode_path}")
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = fetch_census_new_sales_panel(
+        episode_manifest=pd.read_csv(episode_path),
+        existing_observations=existing,
+        research_dir=research_dir,
+        quarterly_only=quarterly_only,
+    )
+    failures = int(result.archive_inventory["status"].ne("imported").sum())
+    console.print(
+        f"Census new-sales releases: {len(result.archive_inventory):,}; "
+        f"failures: {failures:,}; combined panel rows: {len(result.observations):,}."
+    )
+    console.print(f"Inventory: {result.inventory_path}")
+
+
 @app.command("import-capital-cycle-sec-companyfacts")
 def import_capital_cycle_sec_companyfacts_cmd(
     research_dir: Annotated[
@@ -2997,6 +3034,33 @@ def import_capital_cycle_eia_dpr_cmd(
     console.print(
         f"EIA DPR releases imported: {int(statuses.eq('imported').sum()):,}; "
         f"failures: {int(statuses.eq('parse_failed').sum()):,}; "
+        f"combined panel rows: {len(result.observations):,}."
+    )
+    console.print(f"Inventory: {result.inventory_path}")
+
+
+@app.command("fetch-capital-cycle-fed-sloos")
+def fetch_capital_cycle_fed_sloos_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+) -> None:
+    """Archive Fed SLOOS vintages and import mortgage-credit standards."""
+
+    observation_path = research_dir / "direct_observations.csv"
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = fetch_fed_sloos_housing_panel(
+        existing_observations=existing,
+        research_dir=research_dir,
+    )
+    statuses = result.archive_inventory.get("status", pd.Series(dtype=str))
+    console.print(
+        f"Fed SLOOS releases imported: {int(statuses.eq('imported').sum()):,}; "
+        f"failures: {int(statuses.ne('imported').sum()):,}; "
         f"combined panel rows: {len(result.observations):,}."
     )
     console.print(f"Inventory: {result.inventory_path}")

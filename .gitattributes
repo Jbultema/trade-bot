@@ -1,1 +1,3 @@
 research/capital_cycle/raw/eia_dpr/*.html binary
+research/capital_cycle/raw/**/*.pdf binary
+research/capital_cycle/raw/**/*.xlsx binary

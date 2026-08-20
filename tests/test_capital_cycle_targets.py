@@ -2,7 +2,10 @@ from __future__ import annotations
 
 import pandas as pd
 
-from trade_bot.research.capital_cycle_targets import build_objective_economic_targets
+from trade_bot.research.capital_cycle_targets import (
+    build_housing_threshold_sensitivity,
+    build_objective_economic_targets,
+)
 
 
 def _episode_manifest() -> pd.DataFrame:
@@ -121,3 +124,60 @@ def test_episode_without_target_spec_fails_closed_instead_of_crashing(tmp_path) 
     assert not event["target_spec_registered"]
     assert not event["objective_label_resolved"]
     assert "unconfigured" in result.readiness.iloc[0]["unresolved_episodes"]
+
+
+def test_housing_sensitivity_is_bounded_exploratory_and_has_no_authority() -> None:
+    episodes = pd.DataFrame(
+        [
+            {
+                "episode": "housing_mortgage_2001_2011",
+                "first_deterioration_date": "2006-01-01",
+                "market_recognition_date": "2007-02-27",
+            },
+            {
+                "episode": "housing_recovery_2012_2019",
+                "first_deterioration_date": pd.NaT,
+                "market_recognition_date": pd.NaT,
+            },
+        ]
+    )
+    rows = []
+    for episode, origin, starts, supply, credit in (
+        ("housing_mortgage_2001_2011", "2006-09-01", -0.16, 0.11, 0.00),
+        ("housing_mortgage_2001_2011", "2006-10-01", -0.17, 0.12, 0.00),
+        ("housing_mortgage_2001_2011", "2006-11-01", -0.18, 0.13, 0.00),
+        ("housing_recovery_2012_2019", "2015-01-01", 0.05, 0.02, 0.00),
+        ("housing_recovery_2012_2019", "2015-02-01", 0.04, 0.03, 0.00),
+        ("housing_recovery_2012_2019", "2015-03-01", 0.03, 0.04, 0.00),
+    ):
+        for component, value, direction, persistence in (
+            ("housing_starts_drawdown", starts, "lower_is_rollover", 3),
+            ("months_supply_increase", supply, "higher_is_rollover", 3),
+            ("mortgage_credit_tightening", credit, "higher_is_rollover", 2),
+        ):
+            rows.append(
+                {
+                    "episode": episode,
+                    "origin_date": origin,
+                    "target_component": component,
+                    "direction": direction,
+                    "persistence_periods": persistence,
+                    "evidence_updated_at_origin": True,
+                    "transformed_value": value,
+                }
+            )
+
+    sensitivity = build_housing_threshold_sensitivity(pd.DataFrame(rows), episodes)
+
+    assert len(sensitivity) == 18
+    assert sensitivity["negative_control_passed"].all()
+    assert sensitivity["allocation_authority"].eq(0.0).all()
+    assert sensitivity["analysis_role"].eq(
+        "post_hoc_exploratory_sensitivity_only"
+    ).all()
+    assert sensitivity["preregistered_configuration"].sum() == 1
+    early = sensitivity[
+        sensitivity["housing_starts_drawdown"].eq(-0.15)
+        & sensitivity["months_supply_increase"].eq(0.10)
+    ].iloc[0]
+    assert early["break_event_date"] == pd.Timestamp("2006-11-01")

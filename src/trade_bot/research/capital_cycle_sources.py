@@ -15,11 +15,15 @@ import pandas as pd
 import requests
 from bs4 import BeautifulSoup
 from pypdf import PdfReader
+from pypdf.errors import PdfReadError
 
 from trade_bot.research.capital_cycle_feasibility import DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR
 
 CENSUS_NRC_URL_TEMPLATE: Final[str] = (
     "https://www.census.gov/construction/nrc/pdf/newresconst_{period}.pdf"
+)
+CENSUS_NRS_URL_TEMPLATE: Final[str] = (
+    "https://www.census.gov/construction/nrs/pdf/newressales_{period}.pdf"
 )
 CENSUS_NRC_LEGACY_TEXT_URLS: Final[dict[str, str]] = {
     "200103": "https://www.census.gov/construction/nrc/txt/c20_0103.txt",
@@ -31,6 +35,7 @@ CENSUS_HOUSING_EPISODES: Final[tuple[str, ...]] = (
 MONTH_NAME_PATTERN: Final[str] = (
     "January|February|March|April|May|June|July|August|September|October|November|December"
 )
+FED_SLOOS_INDEX_URL: Final[str] = "https://www.federalreserve.gov/data/sloos.htm"
 
 
 @dataclass(frozen=True)
@@ -412,6 +417,12 @@ def import_fcc_telecom_capacity_release(
         source_url=source_url,
         source_hash=hashlib.sha256(content).hexdigest(),
     )
+    economics = parse_fcc_telecom_economics_release(
+        content,
+        source_url=source_url,
+        source_hash=hashlib.sha256(content).hexdigest(),
+    )
+    observations = pd.concat([observations, economics], ignore_index=True)
     combined = _merge_observations(existing_observations, observations)
     observation_path = Path(research_dir) / "direct_observations.csv"
     combined.to_csv(observation_path, index=False)
@@ -463,6 +474,45 @@ def import_eia_dpr_archive(
                 "allocation_authority": 0.0,
             }
         )
+        if status == "parse_failed":
+            continue
+        release_date = pd.Timestamp(parsed["available_date"].iloc[0])
+        for kind, parser in (
+            ("dpr-data", parse_eia_dpr_workbook),
+            ("duc-data", parse_eia_duc_workbook),
+        ):
+            workbook_path = raw_dir / f"{path.stem}-{kind}.xlsx"
+            if not workbook_path.exists():
+                continue
+            workbook_content = workbook_path.read_bytes()
+            workbook_hash = hashlib.sha256(workbook_content).hexdigest()
+            workbook_url = f"{source_url}xls/{kind}.xlsx"
+            try:
+                workbook_rows = parser(
+                    workbook_content,
+                    release_date=release_date,
+                    source_url=workbook_url,
+                    source_hash=workbook_hash,
+                )
+                workbook_status = "imported"
+                workbook_error = ""
+            except (ValueError, OSError, KeyError, IndexError) as exc:
+                workbook_rows = pd.DataFrame()
+                workbook_status = "parse_failed"
+                workbook_error = str(exc)
+            rows.extend(workbook_rows.to_dict("records"))
+            inventory_rows.append(
+                {
+                    "source_url": workbook_url,
+                    "raw_path": str(workbook_path),
+                    "sha256": workbook_hash,
+                    "bytes": len(workbook_content),
+                    "status": workbook_status,
+                    "extracted_rows": len(workbook_rows),
+                    "error": workbook_error,
+                    "allocation_authority": 0.0,
+                }
+            )
     combined = _merge_observations(existing_observations, pd.DataFrame(rows))
     inventory = pd.DataFrame(inventory_rows)
     observation_path = destination / "direct_observations.csv"
@@ -475,6 +525,259 @@ def import_eia_dpr_archive(
         observation_path=observation_path,
         inventory_path=inventory_path,
     )
+
+
+def fetch_fed_sloos_housing_panel(
+    *,
+    existing_observations: pd.DataFrame | None = None,
+    research_dir: str | Path = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    start_year: int = 2001,
+    end_year: int = 2019,
+    timeout_seconds: float = 30.0,
+) -> HistoricalArchiveImportResult:
+    """Archive SLOOS vintages and extract mortgage-credit standards as published."""
+
+    destination = Path(research_dir)
+    raw_dir = destination / "raw" / "fed_sloos"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    session = requests.Session()
+    session.headers.update({"User-Agent": DEFAULT_SEC_USER_AGENT})
+    index_response = session.get(FED_SLOOS_INDEX_URL, timeout=timeout_seconds)
+    index_response.raise_for_status()
+    release_urls = sorted(
+        {
+            urljoin(FED_SLOOS_INDEX_URL, str(link.get("href")))
+            for link in BeautifulSoup(index_response.content, "html.parser").find_all(
+                "a", href=True
+            )
+            if (
+                (match := re.search(r"/(\d{6})/default\.htm$", str(link.get("href"))))
+                and start_year <= int(match.group(1)[:4]) <= end_year
+            )
+        }
+    )
+    rows: list[dict[str, object]] = []
+    inventory_rows: list[dict[str, object]] = []
+    for release_url in release_urls:
+        release_id = re.search(r"/(\d{6})/default\.htm$", release_url).group(1)  # type: ignore[union-attr]
+        landing_path = raw_dir / f"{release_id}-default.html"
+        landing, landing_status, landing_error = _download_or_read(
+            session, release_url, landing_path, timeout_seconds=timeout_seconds
+        )
+        chart_url = ""
+        chart_path = raw_dir / f"{release_id}-chartdata.html"
+        chart_content = b""
+        status = landing_status
+        error = landing_error
+        parsed = pd.DataFrame()
+        if landing:
+            landing_soup = BeautifulSoup(landing, "html.parser")
+            release_date = _published_date(landing_soup.get_text(" ", strip=True))
+            chart_link = next(
+                (
+                    link
+                    for link in landing_soup.find_all("a", href=True)
+                    if "chartdata" in str(link.get("href")).casefold()
+                ),
+                None,
+            )
+            if release_date is None or chart_link is None:
+                status = "metadata_missing"
+                error = "Release date or chart-data link was not found."
+            else:
+                chart_url = urljoin(release_url, str(chart_link.get("href")))
+                chart_suffix = Path(urlparse(chart_url).path).suffix or ".html"
+                chart_path = raw_dir / f"{release_id}-chartdata{chart_suffix}"
+                chart_content, status, error = _download_or_read(
+                    session,
+                    chart_url,
+                    chart_path,
+                    timeout_seconds=timeout_seconds,
+                )
+                if chart_content:
+                    try:
+                        parsed = parse_fed_sloos_chartdata(
+                            chart_content,
+                            release_date=release_date,
+                            source_url=chart_url,
+                            source_hash=hashlib.sha256(chart_content).hexdigest(),
+                        )
+                        status = "imported"
+                        error = ""
+                    except (ValueError, OSError, KeyError, IndexError) as exc:
+                        status = "parse_failed"
+                        error = str(exc)
+        rows.extend(parsed.to_dict("records"))
+        inventory_rows.append(
+            {
+                "release_id": release_id,
+                "source_url": chart_url or release_url,
+                "raw_path": str(chart_path if chart_content else landing_path),
+                "sha256": (hashlib.sha256(chart_content).hexdigest() if chart_content else ""),
+                "bytes": len(chart_content),
+                "status": status,
+                "extracted_rows": len(parsed),
+                "error": error,
+                "allocation_authority": 0.0,
+            }
+        )
+    combined = _merge_observations(existing_observations, pd.DataFrame(rows))
+    inventory = pd.DataFrame(inventory_rows)
+    observation_path = destination / "direct_observations.csv"
+    inventory_path = destination / "fed_sloos_archive_inventory.csv"
+    combined.to_csv(observation_path, index=False)
+    inventory.to_csv(inventory_path, index=False)
+    return HistoricalArchiveImportResult(
+        observations=combined,
+        archive_inventory=inventory,
+        observation_path=observation_path,
+        inventory_path=inventory_path,
+    )
+
+
+def parse_fed_sloos_chartdata(
+    content: bytes,
+    *,
+    release_date: pd.Timestamp,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract the latest mortgage-tightening observation visible in a SLOOS vintage."""
+
+    text = content.decode("utf-8", errors="replace")
+    values: dict[str, float] = {}
+    reference_period: pd.Timestamp | None = None
+    if "<table" in text.casefold():
+        soup = BeautifulSoup(content, "html.parser")
+        candidates = [
+            table
+            for table in soup.find_all("table")
+            if "mortgage" in table.get_text(" ", strip=True).casefold()
+            and "tightening" in table.get_text(" ", strip=True).casefold()
+        ]
+        for table in candidates:
+            for row in reversed(table.find_all("tr")):
+                cells = row.find_all(["td", "th"])
+                if not cells:
+                    continue
+                quarter = _sloos_quarter(cells[0].get_text(" ", strip=True))
+                if quarter is None:
+                    continue
+                for index, cell in enumerate(cells[1:], start=1):
+                    headers = " ".join(cell.get("headers", [])).casefold()
+                    if "p2" in headers or (headers and "p1" not in headers):
+                        continue
+                    numeric = pd.to_numeric(
+                        cell.get_text(" ", strip=True).replace("n.a.", ""),
+                        errors="coerce",
+                    )
+                    if pd.isna(numeric):
+                        continue
+                    category_match = re.search(r"p1([a-z]+)", headers)
+                    category = category_match.group(1) if category_match else f"series_{index}"
+                    values[category] = float(numeric)
+                if values:
+                    reference_period = quarter
+                    break
+            if values:
+                break
+    else:
+        match = re.search(
+            r"Tightening\s+Standards\s+for\s+Mortgage.*?(?=\n\s*(?:Figure|Panel)\s+\d|\Z)",
+            text,
+            flags=re.IGNORECASE | re.DOTALL,
+        )
+        if match:
+            observations = re.findall(
+                r"(?m)^\s*(\d{2,4}:[1-4])\s+(-?\d+(?:\.\d+)?)\s*$",
+                match.group(0),
+            )
+            if observations:
+                quarter_label, numeric = observations[-1]
+                reference_period = _sloos_quarter(quarter_label)
+                values["all"] = float(numeric)
+    if not values or reference_period is None:
+        raise ValueError("Mortgage-credit standards were not found in SLOOS chart data.")
+
+    episode = (
+        "housing_mortgage_2001_2011"
+        if reference_period.year <= 2011
+        else "housing_recovery_2012_2019"
+    )
+    rows = [
+        {
+            "episode": episode,
+            "family": "financing",
+            "metric": f"sloos_net_percent_tightening_mortgage_{category}",
+            "entity": "Domestic bank respondents",
+            "period_end": release_date,
+            "available_date": release_date,
+            "value": value,
+            "unit": "net_percent",
+            "source_id": f"fed_sloos_{release_date:%Y%m%d}_{category}",
+            "source_url": source_url,
+            "source_tier": "A",
+            "vintage_status": "archived_release",
+            "eligible_for_model": True,
+            "revision_status": "survey_snapshot_as_published",
+            "accession_or_release_id": source_hash,
+            "source_archive_sha256": source_hash,
+            "reference_period": reference_period,
+            "notes": (
+                "Latest mortgage-credit-standards result visible in this archived "
+                "survey release; earlier chart history is not backdated."
+            ),
+        }
+        for category, value in values.items()
+    ]
+    representative = rows[0].copy()
+    representative["metric"] = "sloos_mortgage_credit_tightening"
+    representative["value"] = float(pd.Series(values.values()).median())
+    representative["source_id"] = f"fed_sloos_{release_date:%Y%m%d}_representative"
+    representative["notes"] = (
+        "Median net tightening percentage across mortgage categories reported in this "
+        "release; category-level observations are retained alongside it. Earlier chart "
+        "history is not backdated."
+    )
+    rows.append(representative)
+    return pd.DataFrame(rows)
+
+
+def _download_or_read(
+    session: requests.Session,
+    url: str,
+    path: Path,
+    *,
+    timeout_seconds: float,
+) -> tuple[bytes, str, str]:
+    if path.exists():
+        return path.read_bytes(), "cached", ""
+    try:
+        response = session.get(url, timeout=timeout_seconds)
+        response.raise_for_status()
+        path.write_bytes(response.content)
+        return response.content, "downloaded", ""
+    except requests.RequestException as exc:
+        return b"", "download_failed", str(exc)
+
+
+def _published_date(text: str) -> pd.Timestamp | None:
+    match = re.search(
+        rf"(?:Last\s+update|For\s+release[^:]*at[^A-Z]*)(?:\s*:)?\s*((?:{MONTH_NAME_PATTERN})\s+\d{{1,2}},\s+\d{{4}})",
+        text,
+        flags=re.IGNORECASE,
+    )
+    return pd.to_datetime(match.group(1)) if match else None
+
+
+def _sloos_quarter(value: str) -> pd.Timestamp | None:
+    match = re.fullmatch(r"\s*(\d{2}|\d{4}):Q?([1-4])\s*", value)
+    if not match:
+        return None
+    year = int(match.group(1))
+    if year < 100:
+        year += 1900 if year >= 60 else 2000
+    return pd.Period(year=year, quarter=int(match.group(2)), freq="Q").end_time.normalize()
 
 
 def parse_eia_dpr_release(
@@ -594,6 +897,175 @@ def _eia_table_value(
             continue
         return float(value), str(forecast_column[1])
     return None
+
+
+def parse_eia_dpr_workbook(
+    content: bytes,
+    *,
+    release_date: pd.Timestamp,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract the latest known regional rig-count aggregate from a DPR vintage."""
+
+    workbook = pd.ExcelFile(BytesIO(content))
+    latest_rows: list[tuple[pd.Timestamp, float]] = []
+    for sheet_name in workbook.sheet_names:
+        if sheet_name.casefold() == "regioncounties":
+            continue
+        sheet = pd.read_excel(workbook, sheet_name=sheet_name, header=1)
+        month_column = next(
+            (column for column in sheet if str(column).strip().casefold() == "month"),
+            None,
+        )
+        rig_column = next(
+            (column for column in sheet if str(column).strip().casefold() == "rig count"),
+            None,
+        )
+        if month_column is None or rig_column is None:
+            continue
+        dated = sheet.assign(
+            _month=pd.to_datetime(sheet[month_column], errors="coerce"),
+            _rig_count=pd.to_numeric(sheet[rig_column], errors="coerce"),
+        ).dropna(subset=["_month", "_rig_count"])
+        known = dated[dated["_month"].le(release_date)].sort_values("_month")
+        if known.empty:
+            continue
+        row = known.iloc[-1]
+        latest_rows.append((pd.Timestamp(row["_month"]), float(row["_rig_count"])))
+    if not latest_rows:
+        raise ValueError("EIA DPR workbook contains no dated regional rig-count rows.")
+    reference_period = max(month for month, _value in latest_rows)
+    same_period = [value for month, value in latest_rows if month == reference_period]
+    if not same_period:
+        raise ValueError("EIA DPR workbook has no common latest rig-count period.")
+    return pd.DataFrame(
+        [
+            _eia_workbook_observation(
+                release_date=release_date,
+                reference_period=reference_period,
+                family="capacity",
+                metric="eia_major_shale_region_rig_count_snapshot",
+                value=float(sum(same_period)),
+                unit="rigs",
+                source_url=source_url,
+                source_hash=source_hash,
+                notes=(
+                    "Aggregate of the latest common regional rig-count month in the named "
+                    "DPR workbook vintage; historical rows are not backdated."
+                ),
+            )
+        ]
+    )
+
+
+def parse_eia_duc_workbook(
+    content: bytes,
+    *,
+    release_date: pd.Timestamp,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract the total DUC inventory from a dated official workbook snapshot."""
+
+    workbook = pd.ExcelFile(BytesIO(content))
+    value: float | None = None
+    reference_period: pd.Timestamp | None = None
+    if "Data" in workbook.sheet_names:
+        data = pd.read_excel(workbook, sheet_name="Data", header=None)
+        if len(data.index) >= 5:
+            duc_columns = [
+                column
+                for column in data.columns[1:]
+                if str(data.iloc[3, column]).strip().casefold() == "duc"
+            ]
+            dated = pd.DataFrame(
+                {
+                    "date": pd.to_datetime(data.iloc[4:, 0], errors="coerce"),
+                    "value": data.iloc[4:, duc_columns]
+                    .apply(pd.to_numeric, errors="coerce")
+                    .sum(axis=1, min_count=1),
+                }
+            ).dropna()
+            known = dated[dated["date"].le(release_date)].sort_values("date")
+            if not known.empty:
+                latest = known.iloc[-1]
+                reference_period = pd.Timestamp(latest["date"])
+                value = float(latest["value"])
+
+    if value is None and "webSummary" in workbook.sheet_names:
+        summary = pd.read_excel(workbook, sheet_name="webSummary", header=1)
+        if not summary.empty:
+            entity_column = summary.columns[0]
+            total = summary[
+                summary[entity_column].astype(str).str.strip().str.casefold().eq("total")
+            ]
+            dated_columns = [
+                column
+                for column in summary.columns[1:]
+                if pd.notna(pd.to_datetime(column, errors="coerce"))
+            ]
+            if not total.empty and dated_columns:
+                reference_column = dated_columns[-1]
+                parsed_value = pd.to_numeric(total.iloc[0][reference_column], errors="coerce")
+                if pd.notna(parsed_value):
+                    reference_period = pd.Timestamp(reference_column)
+                    value = float(parsed_value)
+
+    if value is None or reference_period is None:
+        raise ValueError("EIA DUC workbook total history was not found.")
+    return pd.DataFrame(
+        [
+            _eia_workbook_observation(
+                release_date=release_date,
+                reference_period=reference_period,
+                family="commitment_overhang",
+                metric="eia_total_drilled_uncompleted_wells_snapshot",
+                value=value,
+                unit="wells",
+                source_url=source_url,
+                source_hash=source_hash,
+                notes=(
+                    "Total drilled-but-uncompleted physical project inventory from the named "
+                    "official workbook vintage; historical rows are not backdated."
+                ),
+            )
+        ]
+    )
+
+
+def _eia_workbook_observation(
+    *,
+    release_date: pd.Timestamp,
+    reference_period: pd.Timestamp,
+    family: str,
+    metric: str,
+    value: float,
+    unit: str,
+    source_url: str,
+    source_hash: str,
+    notes: str,
+) -> dict[str, object]:
+    return {
+        "episode": "shale_capex_2010_2017",
+        "family": family,
+        "metric": metric,
+        "entity": "EIA major shale regions aggregate",
+        "period_end": release_date,
+        "available_date": release_date,
+        "value": value,
+        "unit": unit,
+        "source_id": f"eia_dpr_workbook_{release_date:%Y%m%d}",
+        "source_url": source_url,
+        "source_tier": "A",
+        "vintage_status": "archived_release",
+        "eligible_for_model": True,
+        "revision_status": "snapshot_as_published",
+        "accession_or_release_id": source_hash,
+        "source_archive_sha256": source_hash,
+        "reference_period": reference_period,
+        "notes": notes,
+    }
 
 
 def import_usgs_copper_mcs_archive(
@@ -791,6 +1263,135 @@ def parse_fcc_telecom_capacity_release(
     return result
 
 
+def parse_fcc_telecom_economics_release(
+    content: bytes,
+    *,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract demand, pricing, and monetization histories from the August 2001 FCC report."""
+
+    text = "\n".join(page.extract_text() or "" for page in PdfReader(BytesIO(content)).pages)
+    available_date = pd.Timestamp("2001-08-31")
+    rows: list[dict[str, object]] = []
+
+    usage_match = re.search(
+        r"Table 11\.2\s+Line Usage Per Day.*?Increase Over Prior Year",
+        text,
+        flags=re.DOTALL,
+    )
+    if usage_match:
+        for year, total in re.findall(
+            r"(?m)^(19\d{2})\s+\d+\s+\d+\s+\d+\s+(\d+)\s*$",
+            usage_match.group(0),
+        ):
+            rows.append(
+                _fcc_economics_observation(
+                    year=int(year),
+                    available_date=available_date,
+                    family="demand",
+                    metric="fcc_total_line_usage_minutes_per_day",
+                    value=float(total),
+                    unit="minutes_per_local_loop_per_day",
+                    source_url=source_url,
+                    source_hash=source_hash,
+                    table="11.2",
+                )
+            )
+
+    for year, revenue_per_minute in re.findall(
+        r"(?m)^(19\d{2})\s+\$?(0\.\d+)\s+\$?0\.\d+\s+\d+\.\d+",
+        text,
+    ):
+        if 1984 <= int(year) <= 1999:
+            rows.append(
+                _fcc_economics_observation(
+                    year=int(year),
+                    available_date=available_date,
+                    family="pricing_utilization",
+                    metric="fcc_long_distance_average_revenue_per_minute",
+                    value=float(revenue_per_minute),
+                    unit="usd_per_minute",
+                    source_url=source_url,
+                    source_hash=source_hash,
+                    table="14.5",
+                )
+            )
+
+    revenue_sections = re.findall(
+        r"Table 16\.2\s+Telecommunications Revenues Reported by Type of Service.*?(?=Table 16\.3)",
+        text,
+        flags=re.DOTALL,
+    )
+    if revenue_sections:
+        revenue_section = max(revenue_sections, key=len)
+        revenue_match = re.search(
+            r"Total Telecommunications Revenues\s+3/\s+"
+            r"([\d,$()\s]+?)(?=\nNon-Telecommunications Revenues)",
+            revenue_section,
+        )
+        if revenue_match:
+            values = re.findall(r"\(?\$?(\d{3},\d{3})\)?", revenue_match.group(1))
+            if len(values) >= 8:
+                for year, value in zip(range(1992, 2000), values[:8], strict=True):
+                    rows.append(
+                        _fcc_economics_observation(
+                            year=year,
+                            available_date=available_date,
+                            family="monetization",
+                            metric="fcc_total_telecommunications_revenue",
+                            value=float(value.replace(",", "")),
+                            unit="usd_millions",
+                            source_url=source_url,
+                            source_hash=source_hash,
+                            table="16.2",
+                        )
+                    )
+    result = pd.DataFrame(rows).drop_duplicates(
+        subset=["family", "metric", "period_end"], keep="last"
+    )
+    expected = {"demand", "pricing_utilization", "monetization"}
+    if result.empty or set(result["family"]) != expected:
+        raise ValueError("FCC demand, pricing, and monetization tables were not all found.")
+    return result.reset_index(drop=True)
+
+
+def _fcc_economics_observation(
+    *,
+    year: int,
+    available_date: pd.Timestamp,
+    family: str,
+    metric: str,
+    value: float,
+    unit: str,
+    source_url: str,
+    source_hash: str,
+    table: str,
+) -> dict[str, object]:
+    return {
+        "episode": "dotcom_telecom_capacity_1994_2004",
+        "family": family,
+        "metric": metric,
+        "entity": "United States telecommunications industry",
+        "period_end": pd.Timestamp(year=year, month=12, day=31),
+        "available_date": available_date,
+        "value": value,
+        "unit": unit,
+        "source_id": f"fcc_trends_telephone_service_200108_table_{table.replace('.', '_')}",
+        "source_url": source_url,
+        "source_tier": "A",
+        "vintage_status": "archived_release",
+        "eligible_for_model": True,
+        "revision_status": "history_as_published_in_august_2001_release",
+        "accession_or_release_id": source_hash,
+        "source_archive_sha256": source_hash,
+        "notes": (
+            "Historical value first enters the governed panel at the August 2001 report "
+            "date and is not backdated to the measurement year."
+        ),
+    }
+
+
 def fetch_census_housing_release_panel(
     *,
     episode_manifest: pd.DataFrame,
@@ -852,7 +1453,7 @@ def fetch_census_housing_release_panel(
                     source_url=url,
                     source_hash=hashlib.sha256(content).hexdigest(),
                 )
-            except (OSError, ValueError, KeyError, re.error) as exc:
+            except (OSError, ValueError, KeyError, PdfReadError, re.error) as exc:
                 status = "parse_failed"
                 error = str(exc)
         observation_rows.extend(parsed.to_dict("records"))
@@ -882,6 +1483,150 @@ def fetch_census_housing_release_panel(
         archive_inventory=inventory,
         observation_path=observation_path,
         inventory_path=inventory_path,
+    )
+
+
+def fetch_census_new_sales_panel(
+    *,
+    episode_manifest: pd.DataFrame,
+    existing_observations: pd.DataFrame | None = None,
+    research_dir: str | Path = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    quarterly_only: bool = True,
+    timeout_seconds: float = 30.0,
+) -> CensusArchiveResult:
+    """Archive NRS releases and extract headline supply and median price snapshots."""
+
+    destination = Path(research_dir)
+    raw_dir = destination / "raw" / "census_nrs"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    session = requests.Session()
+    session.headers.update({"User-Agent": DEFAULT_SEC_USER_AGENT})
+    observation_rows: list[dict[str, object]] = []
+    inventory_rows: list[dict[str, object]] = []
+    for episode, period in _housing_release_periods(
+        episode_manifest, quarterly_only=quarterly_only
+    ):
+        period_label = period.strftime("%Y%m")
+        url = CENSUS_NRS_URL_TEMPLATE.format(period=period_label)
+        raw_path = raw_dir / f"newressales_{period_label}.pdf"
+        content, status, error = _download_or_read(
+            session, url, raw_path, timeout_seconds=timeout_seconds
+        )
+        parsed = pd.DataFrame()
+        if content:
+            try:
+                parsed = parse_census_new_sales_release(
+                    content,
+                    episode=episode,
+                    period=period,
+                    source_url=url,
+                    source_hash=hashlib.sha256(content).hexdigest(),
+                )
+                status = "imported"
+                error = ""
+            except (
+                ValueError,
+                OSError,
+                KeyError,
+                IndexError,
+                PdfReadError,
+                re.error,
+            ) as exc:
+                status = "parse_failed"
+                error = str(exc)
+        observation_rows.extend(parsed.to_dict("records"))
+        inventory_rows.append(
+            {
+                "episode": episode,
+                "period": period,
+                "source_url": url,
+                "raw_path": str(raw_path),
+                "sha256": hashlib.sha256(content).hexdigest() if content else "",
+                "bytes": len(content),
+                "status": status,
+                "extracted_rows": len(parsed),
+                "error": error,
+                "allocation_authority": 0.0,
+            }
+        )
+    combined = _merge_observations(existing_observations, pd.DataFrame(observation_rows))
+    inventory = pd.DataFrame(inventory_rows)
+    observation_path = destination / "direct_observations.csv"
+    inventory_path = destination / "census_new_sales_archive_inventory.csv"
+    combined.to_csv(observation_path, index=False)
+    inventory.to_csv(inventory_path, index=False)
+    return CensusArchiveResult(
+        observations=combined,
+        archive_inventory=inventory,
+        observation_path=observation_path,
+        inventory_path=inventory_path,
+    )
+
+
+def parse_census_new_sales_release(
+    content: bytes,
+    *,
+    episode: str,
+    period: pd.Timestamp,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract preliminary months' supply and median price from a named NRS release."""
+
+    text = "\n".join(page.extract_text() or "" for page in PdfReader(BytesIO(content)).pages)
+    release_match = re.search(
+        rf"FOR\s+(?:IMMEDIATE\s+)?RELEASE.{{0,160}}?((?:{MONTH_NAME_PATTERN})\s+\d{{1,2}},\s+\d{{4}})",
+        text,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    supply_match = re.search(
+        r"(?:represents|is)\s+a\s+supply\s+of\s+([\d.]+)\s+months",
+        text,
+        flags=re.IGNORECASE,
+    )
+    price_match = re.search(
+        r"median sales price of new houses sold.*?was\s+\$([\d,]+)",
+        text,
+        flags=re.IGNORECASE | re.DOTALL,
+    )
+    if release_match is None or supply_match is None or price_match is None:
+        raise ValueError("Census NRS headline release values were not found.")
+    release_date = pd.to_datetime(release_match.group(1), errors="raise")
+    observations = (
+        ("housing_new_home_months_supply", float(supply_match.group(1)), "months"),
+        (
+            "housing_new_home_median_sales_price",
+            float(price_match.group(1).replace(",", "")),
+            "usd",
+        ),
+    )
+    return pd.DataFrame(
+        [
+            {
+                "episode": episode,
+                "family": "pricing_utilization",
+                "metric": metric,
+                "entity": "United States",
+                "period_end": release_date,
+                "available_date": release_date,
+                "value": value,
+                "unit": unit,
+                "source_id": f"census_nrs_{period:%Y%m}_{metric}",
+                "source_url": source_url,
+                "source_tier": "A",
+                "vintage_status": "archived_release",
+                "eligible_for_model": True,
+                "revision_status": "headline_preliminary_as_published",
+                "accession_or_release_id": source_hash,
+                "source_archive_sha256": source_hash,
+                "reference_period": period,
+                "notes": (
+                    "Headline preliminary value from the named official monthly release; "
+                    "later revisions are not backdated."
+                ),
+            }
+            for metric, value, unit in observations
+        ]
     )
 
 

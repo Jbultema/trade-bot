@@ -25,6 +25,7 @@ data/ml_diagnostics/
 !research/capital_cycle/*.csv
 !research/capital_cycle/prospective_ai_vintages/**/*.csv
 !research/capital_cycle/raw/eia_dpr/*.html
+!research/capital_cycle/raw/fed_sloos/*-default.html
 
 # Provisional AI-financial-system research lanes and generated database.
 research/ai_financial_system/staging/*

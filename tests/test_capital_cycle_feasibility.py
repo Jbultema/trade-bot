@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+from io import BytesIO
 from pathlib import Path
 
 import pandas as pd
@@ -13,10 +14,16 @@ from trade_bot.research.capital_cycle_feasibility import (
 from trade_bot.research.capital_cycle_sources import (
     _parse_census_release_text,
     _parse_usgs_copper_mcs_text,
+    _published_date,
     fetch_sec_filing_archive,
     import_sec_companyfacts_panel,
+    parse_census_new_sales_release,
     parse_eia_dpr_release,
+    parse_eia_dpr_workbook,
+    parse_eia_duc_workbook,
     parse_fcc_telecom_capacity_release,
+    parse_fcc_telecom_economics_release,
+    parse_fed_sloos_chartdata,
 )
 
 
@@ -472,3 +479,197 @@ def test_fcc_capacity_parser_does_not_backdate_revised_history(monkeypatch) -> N
     assert parsed["available_date"].eq(pd.Timestamp("2001-08-31")).all()
     assert parsed["period_end"].min() == pd.Timestamp("1990-12-31")
     assert parsed["eligible_for_model"].all()
+
+
+def test_fcc_economics_parser_adds_three_families_without_backdating(monkeypatch) -> None:
+    text = """
+Table 11.2
+Line Usage Per Day
+1998 45 6 8 60
+1999 50 7 9 65
+Increase Over Prior Year
+Table 14.5
+Indicators of Long Distance Prices
+1984 $0.32 $0.41 103.9 $0.52 $0.66
+1985 $0.31 $0.39 107.6 $0.48 $0.60
+Table 16.2
+Telecommunications Revenues Reported by Type of Service
+Total Telecommunications Revenues  3/ 153,409 165,342 174,890 190,076 211,782 231,168 246,392 268,505
+Non-Telecommunications Revenues
+Table 16.3
+"""
+
+    class Page:
+        def extract_text(self):  # noqa: ANN201
+            return text
+
+    class Reader:
+        pages = [Page()]
+
+    monkeypatch.setattr("trade_bot.research.capital_cycle_sources.PdfReader", lambda _: Reader())
+    parsed = parse_fcc_telecom_economics_release(
+        b"synthetic pdf",
+        source_url="https://docs.fcc.gov/report.pdf",
+        source_hash="fcc1",
+    )
+
+    assert set(parsed["family"]) == {
+        "demand",
+        "pricing_utilization",
+        "monetization",
+    }
+    assert len(parsed) == 12
+    assert parsed["available_date"].eq(pd.Timestamp("2001-08-31")).all()
+    assert parsed["period_end"].max() == pd.Timestamp("1999-12-31")
+
+
+def test_eia_dpr_workbook_uses_release_date_without_backdating() -> None:
+    workbook = BytesIO()
+    rows = [
+        ["Production", "Production"],
+        ["Month", "Rig count"],
+        [pd.Timestamp("2016-10-01"), 10],
+        [pd.Timestamp("2016-11-01"), 12],
+        [pd.Timestamp("2017-01-01"), 99],
+    ]
+    with pd.ExcelWriter(workbook, engine="openpyxl") as writer:
+        pd.DataFrame(rows).to_excel(writer, sheet_name="Alpha", index=False, header=False)
+        pd.DataFrame(
+            [
+                ["Production", "Production"],
+                ["Month", "Rig count"],
+                [pd.Timestamp("2016-10-01"), 20],
+                [pd.Timestamp("2016-11-01"), 23],
+            ]
+        ).to_excel(writer, sheet_name="Beta", index=False, header=False)
+
+    parsed = parse_eia_dpr_workbook(
+        workbook.getvalue(),
+        release_date=pd.Timestamp("2016-12-12"),
+        source_url="https://www.eia.gov/petroleum/drilling/archive/2016/12/xls/dpr-data.xlsx",
+        source_hash="abc",
+    )
+
+    assert len(parsed) == 1
+    assert parsed.iloc[0]["family"] == "capacity"
+    assert parsed.iloc[0]["value"] == 35.0
+    assert parsed.iloc[0]["reference_period"] == pd.Timestamp("2016-11-01")
+    assert parsed.iloc[0]["period_end"] == pd.Timestamp("2016-12-12")
+    assert parsed.iloc[0]["available_date"] == pd.Timestamp("2016-12-12")
+
+
+def test_eia_duc_workbook_uses_named_vintage_without_backdating() -> None:
+    workbook = BytesIO()
+    with pd.ExcelWriter(workbook, engine="openpyxl") as writer:
+        pd.DataFrame(
+            [
+                [None, None, None, None],
+                [None, pd.Timestamp("2016-09-01"), pd.Timestamp("2016-10-01"), "change"],
+                ["Alpha", 100, 110, 10],
+                ["Total", 400, 425, 25],
+            ]
+        ).to_excel(writer, sheet_name="webSummary", index=False, header=False)
+
+    parsed = parse_eia_duc_workbook(
+        workbook.getvalue(),
+        release_date=pd.Timestamp("2016-12-12"),
+        source_url="https://www.eia.gov/petroleum/drilling/archive/2016/12/xls/duc-data.xlsx",
+        source_hash="def",
+    )
+
+    assert len(parsed) == 1
+    assert parsed.iloc[0]["family"] == "commitment_overhang"
+    assert parsed.iloc[0]["value"] == 425.0
+    assert parsed.iloc[0]["reference_period"] == pd.Timestamp("2016-10-01")
+    assert parsed.iloc[0]["period_end"] == pd.Timestamp("2016-12-12")
+    assert parsed.iloc[0]["available_date"] == pd.Timestamp("2016-12-12")
+
+
+def test_fed_sloos_legacy_chartdata_does_not_backdate_history() -> None:
+    content = b"""
+Panel 3: Net Percentage of Domestic Respondents Tightening
+          Standards for Mortgages to Individuals
+
+      Mortgages
+      ---------
+04:4        1.90
+05:1       -7.80
+
+Figure 3: Other material
+"""
+
+    parsed = parse_fed_sloos_chartdata(
+        content,
+        release_date=pd.Timestamp("2005-02-07"),
+        source_url="https://www.federalreserve.gov/archive/chartdata.txt",
+        source_hash="fed1",
+    )
+
+    assert len(parsed) == 2
+    representative = parsed[parsed["metric"].eq("sloos_mortgage_credit_tightening")].iloc[0]
+    assert representative["value"] == -7.8
+    assert parsed.iloc[0]["reference_period"] == pd.Timestamp("2005-03-31")
+    assert parsed.iloc[0]["period_end"] == pd.Timestamp("2005-02-07")
+    assert parsed.iloc[0]["available_date"] == pd.Timestamp("2005-02-07")
+
+
+def test_fed_sloos_published_date_uses_complete_month_name() -> None:
+    assert _published_date("Last\nupdate: February 7, 2005") == pd.Timestamp("2005-02-07")
+
+
+def test_fed_sloos_html_chartdata_preserves_mortgage_categories() -> None:
+    content = b"""
+<table>
+  <tr><th></th><th id="F3P1">Tightening Standards for Mortgage Loans</th>
+      <th id="F3P2">Stronger Demand for Mortgage Loans</th></tr>
+  <tr><td>2007:3</td><td headers="F3P1 F3P1PRIME date1">14.3</td>
+      <td headers="F3P2 F3P2PRIME date1">-10.0</td></tr>
+  <tr><td>2007:4</td><td headers="F3P1 F3P1PRIME date2">40.8</td>
+      <td headers="F3P2 F3P2PRIME date2">-51.0</td></tr>
+</table>
+"""
+
+    parsed = parse_fed_sloos_chartdata(
+        content,
+        release_date=pd.Timestamp("2007-11-05"),
+        source_url="https://www.federalreserve.gov/archive/chartdata.htm",
+        source_hash="fed2",
+    )
+
+    assert len(parsed) == 2
+    detail = parsed[parsed["metric"].str.endswith("prime")].iloc[0]
+    assert detail["value"] == 40.8
+    assert "sloos_mortgage_credit_tightening" in set(parsed["metric"])
+    assert parsed.iloc[0]["reference_period"] == pd.Timestamp("2007-12-31")
+
+
+def test_census_new_sales_parser_preserves_preliminary_release(monkeypatch) -> None:
+    text = """
+FOR IMMEDIATE RELEASE FRIDAY, JANUARY 27, 2006 AT 10:00 A.M. EST
+NEW RESIDENTIAL SALES IN DECEMBER 2005
+The median sales price of new houses sold in December 2005 was $221,800;
+the average sales price was $272,900. This represents a supply of 4.9 months
+at the current sales rate.
+"""
+
+    class Page:
+        def extract_text(self):  # noqa: ANN201
+            return text
+
+    class Reader:
+        pages = [Page()]
+
+    monkeypatch.setattr("trade_bot.research.capital_cycle_sources.PdfReader", lambda _: Reader())
+    parsed = parse_census_new_sales_release(
+        b"synthetic pdf",
+        episode="housing_mortgage_2001_2011",
+        period=pd.Timestamp("2005-12-31"),
+        source_url="https://www.census.gov/newressales_200512.pdf",
+        source_hash="nrs1",
+    )
+
+    assert len(parsed) == 2
+    assert set(parsed["value"]) == {4.9, 221800.0}
+    assert parsed["period_end"].eq(pd.Timestamp("2006-01-27")).all()
+    assert parsed["available_date"].eq(pd.Timestamp("2006-01-27")).all()
+    assert parsed["reference_period"].eq(pd.Timestamp("2005-12-31")).all()

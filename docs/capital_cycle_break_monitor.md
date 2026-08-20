@@ -218,6 +218,9 @@ Commands:
 
 ```bash
 poetry run trade-bot fetch-capital-cycle-census-history
+poetry run trade-bot fetch-capital-cycle-census-history --monthly
+poetry run trade-bot fetch-capital-cycle-census-new-sales --monthly
+poetry run trade-bot fetch-capital-cycle-fed-sloos
 poetry run trade-bot fetch-capital-cycle-sec-filings
 poetry run trade-bot fetch-capital-cycle-source-documents --episode dotcom_telecom_capacity_1994_2004
 poetry run trade-bot import-capital-cycle-fcc-capacity
@@ -235,19 +238,10 @@ poetry run trade-bot save-capital-cycle-ai-vintage \
 
 ### Feasibility result: 2026-08-20
 
-The first direct reconstruction archived 76 official Census release files and extracted
-221 admissible point-in-time housing observations. The official FCC August 2001
-*Trends in Telephone Service* report adds 22 telecom-capacity observations from Table
-18.3, producing 243 governed historical rows. It covers starts and permits in the housing
-demand family, housing completions, and telecom digital-link/working-channel capacity.
-Because all 1990-2000 FCC history was published together in August 2001, every extracted
-value enters the panel at that release date rather than being backdated. This makes the
-series useful for post-break recognition but provides almost no early-warning coverage.
-
-After adding two dot-com subepisodes, mean six-family coverage is 9.7%. Coverage is
-present in the housing break, housing-recovery control, and very late in the telecom
-capacity subepisode; mining, shale, cloud, and internet-speculation remain at zero. The
-feasibility gate therefore fails, and no objective episode label is resolved.
+The initial reconstruction has since been superseded by the denser acquisition pass
+described below. Its core vintage rule remains unchanged: an observation enters only on
+the date its archived release was public, never on the earlier measurement date printed
+inside the release.
 
 This is a stop at the economic-model boundary, not a conclusion that direct evidence is
 useless. The source audit distinguishes three different conditions:
@@ -299,10 +293,41 @@ new-well-productivity forecast snapshots. Each EIA row uses the publication date
 information-set `period_end` and retains the forecast month separately; forecasts are not
 misrepresented as already-realized observations.
 
-Mean direct-family coverage improved from 9.7% to 18.7%. Mining now averages 49.5% family
-coverage and shale 16.7%, while cloud and internet speculation remain at zero. Financing,
-monetization, and commitment-overhang histories remain absent across all episodes because
-the SEC endpoints still return HTTP 403. The official Baker Hughes workbook also remains
-environment-blocked, and no `FRED_API_KEY` is configured for ALFRED. The feasibility gate
-therefore remains closed; this pass improves the evidence base but does not promote a model
-or grant allocation authority.
+The completed public-archive pass expands the panel to 1,509 eligible point-in-time
+observations. It includes monthly Census construction and new-home-sales releases,
+archived Federal Reserve SLOOS mortgage-credit surveys, EIA DPR rig and DUC workbooks,
+and demand, price, revenue, and capacity tables from the FCC's August 2001 *Trends in
+Telephone Service*. The FCC history first becomes available in August 2001; its earlier
+measurement years are retained only as reference periods.
+
+Mean six-family coverage is now 30.7%. Housing break and recovery episodes average 64.6%
+and 64.2%, respectively; mining averages 49.5%, shale 27.6%, telecom 9.6%, and cloud and
+internet speculation remain at zero. Financing appears in only the two housing episodes,
+while monetization and commitment overhang each appear in only one episode. The 60%
+overall gate and the three-episode family-breadth gate therefore remain closed.
+
+### Test and tuning decision: 2026-08-20
+
+The expanded panel resolves two of seven objective labels: the housing break and its
+same-family recovery control. This is enough for a falsification test of the housing
+subsystem, but not enough for nested or out-of-sample tuning of the general capital-cycle
+tool.
+
+The preregistered housing rule triggers on 2008-03-01. That is 368 days after the
+preregistered 2007-02-27 market-recognition date and 790 days after the first-deterioration
+date. It correctly remains silent during the 2012-2019 housing-recovery control, but its
+timing makes the current configuration a late economic confirmer rather than a useful
+early-warning signal.
+
+A bounded 18-configuration sensitivity audit varied the housing-start decline threshold
+from 15% to 25% and the months-supply increase threshold from 10% to 35%, leaving the SLOOS
+threshold and persistence rules unchanged. All configurations remained silent in the
+negative control. Five configurations using a 10%-20% months-supply threshold triggered
+in October or November 2006, 118-149 days before market recognition. This is explicitly a
+post-hoc hypothesis from one break/control pair, not a tuned result. It must be
+preregistered and tested on additional independent episodes before consideration.
+
+Decision: do not tune or promote the general tool on the current sample, and do not use
+the preregistered housing configuration as an early-warning allocation signal. Preserve
+the lower months-supply threshold as a research hypothesis only. Economic forecasting,
+equity timing, strategy utility, and allocation authority all remain locked at zero.

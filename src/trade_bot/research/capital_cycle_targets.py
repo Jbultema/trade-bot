@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
+from itertools import product
 from pathlib import Path
 from typing import Final
 
@@ -15,7 +16,10 @@ from trade_bot.research.capital_cycle_feasibility import (
 DEFAULT_CAPITAL_CYCLE_TARGET_DIR = Path("reports/capital_cycle_targets")
 TARGET_COMPONENT_METRIC_ALIASES: Final[dict[str, tuple[str, ...]]] = {
     "housing_starts_drawdown": ("housing_starts_saar_thousands",),
-    "months_supply_increase": ("housing_months_supply",),
+    "months_supply_increase": (
+        "housing_months_supply",
+        "housing_new_home_months_supply",
+    ),
     "mortgage_credit_tightening": ("sloos_mortgage_credit_tightening",),
     "production_or_shipments_decline": (
         "mining_production_index",
@@ -43,6 +47,7 @@ class CapitalCycleTargetRun:
     event_manifest: pd.DataFrame
     origin_targets: pd.DataFrame
     readiness: pd.DataFrame
+    threshold_sensitivity: pd.DataFrame
     output_paths: dict[str, Path]
 
 
@@ -62,11 +67,13 @@ def build_objective_economic_targets(
     events = _build_event_manifest(episodes, components, spec)
     targets = _build_origin_targets(episodes, events)
     readiness = _build_target_readiness(episodes, components, events, spec)
+    threshold_sensitivity = build_housing_threshold_sensitivity(components, episodes)
     frames = {
         "component_panel": components,
         "event_manifest": events,
         "origin_targets": targets,
         "readiness": readiness,
+        "threshold_sensitivity": threshold_sensitivity,
     }
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
@@ -76,6 +83,106 @@ def build_objective_economic_targets(
         frame.to_csv(path, index=False)
         paths[name] = path
     return CapitalCycleTargetRun(output_paths=paths, **frames)
+
+
+def build_housing_threshold_sensitivity(
+    component_panel: pd.DataFrame,
+    episode_manifest: pd.DataFrame,
+) -> pd.DataFrame:
+    """Run a bounded, explicitly exploratory sensitivity audit on the housing pair."""
+
+    break_episode = "housing_mortgage_2001_2011"
+    control_episode = "housing_recovery_2012_2019"
+    required_episodes = {break_episode, control_episode}
+    if component_panel.empty or not required_episodes.issubset(
+        set(component_panel.get("episode", pd.Series(dtype=str)).astype(str))
+    ):
+        return pd.DataFrame()
+    thresholds = {
+        "housing_starts_drawdown": (-0.15, -0.20, -0.25),
+        "months_supply_increase": (0.10, 0.15, 0.20, 0.25, 0.30, 0.35),
+        "mortgage_credit_tightening": (0.20,),
+    }
+    episode_dates = episode_manifest.set_index("episode")
+    rows: list[dict[str, object]] = []
+    for combination in product(*thresholds.values()):
+        selected = dict(zip(thresholds, combination, strict=True))
+        dates = {
+            episode: _sensitivity_event_date(component_panel, episode, selected)
+            for episode in required_episodes
+        }
+        break_date = dates[break_episode]
+        recognition = pd.to_datetime(
+            episode_dates.loc[break_episode].get("market_recognition_date"),
+            errors="coerce",
+        )
+        first_deterioration = pd.to_datetime(
+            episode_dates.loc[break_episode].get("first_deterioration_date"),
+            errors="coerce",
+        )
+        rows.append(
+            {
+                **selected,
+                "break_event_date": break_date,
+                "negative_control_event_date": dates[control_episode],
+                "negative_control_passed": pd.isna(dates[control_episode]),
+                "lead_days_vs_market_recognition": (
+                    int((recognition - break_date).days)
+                    if pd.notna(recognition) and pd.notna(break_date)
+                    else pd.NA
+                ),
+                "lag_days_vs_first_deterioration": (
+                    int((break_date - first_deterioration).days)
+                    if pd.notna(first_deterioration) and pd.notna(break_date)
+                    else pd.NA
+                ),
+                "preregistered_configuration": (
+                    selected["housing_starts_drawdown"] == -0.20
+                    and selected["months_supply_increase"] == 0.35
+                    and selected["mortgage_credit_tightening"] == 0.20
+                ),
+                "analysis_role": "post_hoc_exploratory_sensitivity_only",
+                "allocation_authority": 0.0,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _sensitivity_event_date(
+    component_panel: pd.DataFrame,
+    episode: str,
+    thresholds: dict[str, float],
+) -> pd.Timestamp | pd.NaT:
+    flags: dict[str, pd.Series] = {}
+    for component, threshold in thresholds.items():
+        source = component_panel[
+            component_panel["episode"].astype(str).eq(episode)
+            & component_panel["target_component"].astype(str).eq(component)
+        ].sort_values("origin_date")
+        if source.empty:
+            continue
+        transformed = pd.to_numeric(source["transformed_value"], errors="coerce")
+        raw = (
+            transformed.le(threshold)
+            if str(source.iloc[0]["direction"]) == "lower_is_rollover"
+            else transformed.ge(threshold)
+        ).fillna(False)
+        history: list[bool] = []
+        persistent: list[bool] = []
+        persistence = max(1, int(source.iloc[0]["persistence_periods"]))
+        for updated, flag in zip(source["evidence_updated_at_origin"], raw, strict=True):
+            if bool(updated):
+                history.append(bool(flag))
+            persistent.append(len(history) >= persistence and all(history[-persistence:]))
+        flags[component] = pd.Series(
+            persistent,
+            index=pd.to_datetime(source["origin_date"]),
+        )
+    if len(flags) < 2:
+        return pd.NaT
+    confirmations = pd.DataFrame(flags).sum(axis=1)
+    triggered = confirmations[confirmations.ge(2)]
+    return pd.Timestamp(triggered.index.min()) if not triggered.empty else pd.NaT
 
 
 def _validate_target_spec(spec: pd.DataFrame, episodes: pd.DataFrame) -> pd.DataFrame:
