@@ -40,6 +40,22 @@ FED_G17_INDEX_URL: Final[str] = "https://www.federalreserve.gov/Releases/g17/def
 FED_G17_TECH_EPISODE_FAMILIES: Final[frozenset[str]] = frozenset(
     {"technology_hardware", "semiconductor_cycle"}
 )
+EIA_STEO_ARCHIVE_URL: Final[str] = "https://www.eia.gov/outlooks/steo/outlook.php"
+EIA_STEO_OIL_EPISODE_FAMILIES: Final[frozenset[str]] = frozenset({"oil_shock"})
+MONTH_ABBREVIATIONS: Final[dict[str, int]] = {
+    "jan": 1,
+    "feb": 2,
+    "mar": 3,
+    "apr": 4,
+    "may": 5,
+    "jun": 6,
+    "jul": 7,
+    "aug": 8,
+    "sep": 9,
+    "oct": 10,
+    "nov": 11,
+    "dec": 12,
+}
 
 
 @dataclass(frozen=True)
@@ -1002,6 +1018,271 @@ def parse_fed_g17_technology_pdf(
                 }
             )
     return pd.DataFrame(rows)
+
+
+def fetch_eia_steo_oil_panel(
+    *,
+    episode_manifest: pd.DataFrame,
+    existing_observations: pd.DataFrame | None = None,
+    research_dir: str | Path = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    quarterly_only: bool = True,
+    timeout_seconds: float = 30.0,
+) -> HistoricalArchiveImportResult:
+    """Archive point-in-time STEO oil-market workbooks and extract release snapshots."""
+
+    episodes = episode_manifest[
+        episode_manifest["episode_family"].astype(str).isin(EIA_STEO_OIL_EPISODE_FAMILIES)
+    ].copy()
+    if episodes.empty:
+        raise ValueError("No registered oil-shock episodes were found.")
+    episodes["start_date"] = pd.to_datetime(episodes["start_date"], errors="raise")
+    episodes["end_date"] = pd.to_datetime(episodes["end_date"], errors="raise")
+    destination = Path(research_dir)
+    raw_dir = destination / "raw" / "eia_steo"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    session = requests.Session()
+    session.headers.update({"User-Agent": DEFAULT_SEC_USER_AGENT})
+    index_path = raw_dir / "archive-index.html"
+    index_content, index_status, index_error = _download_or_read(
+        session,
+        EIA_STEO_ARCHIVE_URL,
+        index_path,
+        timeout_seconds=timeout_seconds,
+    )
+    if not index_content:
+        raise OSError(f"EIA STEO archive index unavailable: {index_status}: {index_error}")
+    candidates: list[tuple[pd.Timestamp, str]] = []
+    for link in BeautifulSoup(index_content, "html.parser").find_all("a", href=True):
+        href = str(link.get("href"))
+        match = re.search(r"archives/([a-z]{3})(\d{2})_base\.(?:xlsx|xls)$", href, re.IGNORECASE)
+        if not match or match.group(1).casefold() not in MONTH_ABBREVIATIONS:
+            continue
+        year = 2000 + int(match.group(2))
+        month = MONTH_ABBREVIATIONS[match.group(1).casefold()]
+        release_date = pd.Timestamp(year, month, 1) + pd.offsets.MonthEnd(0)
+        candidates.append((release_date, urljoin(EIA_STEO_ARCHIVE_URL, href)))
+    minimum_date = episodes["start_date"].min()
+    maximum_date = episodes["end_date"].max() + pd.offsets.MonthEnd(1)
+    candidates = sorted(
+        {
+            (release_date, source_url)
+            for release_date, source_url in candidates
+            if minimum_date <= release_date <= maximum_date
+            and (not quarterly_only or release_date.month in {1, 4, 7, 10})
+        }
+    )
+
+    rows: list[dict[str, object]] = []
+    inventory_rows: list[dict[str, object]] = []
+    for release_date, source_url in candidates:
+        filename = Path(urlparse(source_url).path).name
+        raw_path = raw_dir / filename
+        content, status, error = _download_or_read(
+            session,
+            source_url,
+            raw_path,
+            timeout_seconds=timeout_seconds,
+        )
+        parsed = pd.DataFrame()
+        source_hash = hashlib.sha256(content).hexdigest() if content else ""
+        if content:
+            try:
+                parsed = parse_eia_steo_oil_workbook(
+                    content,
+                    release_date=release_date,
+                    episode_manifest=episodes,
+                    source_url=source_url,
+                    source_hash=source_hash,
+                )
+                status = "imported"
+                error = ""
+            except (ValueError, OSError, KeyError, IndexError) as exc:
+                status = "parse_failed"
+                error = str(exc)
+        rows.extend(parsed.to_dict("records"))
+        inventory_rows.append(
+            {
+                "release_date": release_date,
+                "source_url": source_url,
+                "raw_path": str(raw_path),
+                "sha256": source_hash,
+                "bytes": len(content),
+                "status": status,
+                "extracted_rows": len(parsed),
+                "error": error,
+                "allocation_authority": 0.0,
+            }
+        )
+    combined = _merge_observations(existing_observations, pd.DataFrame(rows))
+    inventory = pd.DataFrame(inventory_rows)
+    observation_path = destination / "direct_observations.csv"
+    inventory_path = destination / "eia_steo_archive_inventory.csv"
+    combined.to_csv(observation_path, index=False)
+    inventory.to_csv(inventory_path, index=False)
+    return HistoricalArchiveImportResult(
+        observations=combined,
+        archive_inventory=inventory,
+        observation_path=observation_path,
+        inventory_path=inventory_path,
+    )
+
+
+def parse_eia_steo_oil_workbook(
+    content: bytes,
+    *,
+    release_date: pd.Timestamp,
+    episode_manifest: pd.DataFrame,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract the latest historical oil observations published in one STEO workbook."""
+
+    workbook = pd.ExcelFile(BytesIO(content))
+    dates = (
+        pd.read_excel(workbook, sheet_name="Dates", header=None)
+        if "Dates" in workbook.sheet_names
+        else pd.DataFrame()
+    )
+    reference_period = _steo_last_historical_month(dates, release_date)
+    series_specs = (
+        (
+            "2tab",
+            "WTIPUUS",
+            "pricing_utilization",
+            "eia_steo_wti_spot_price",
+            "West Texas Intermediate crude oil",
+            "dollars_per_barrel",
+        ),
+        (
+            "3atab",
+            "patc_world",
+            "demand",
+            "eia_steo_world_liquids_consumption",
+            "World petroleum and other liquids",
+            "million_barrels_per_day",
+        ),
+        (
+            "3atab",
+            "papr_world",
+            "capacity",
+            "eia_steo_world_liquids_production",
+            "World petroleum and other liquids",
+            "million_barrels_per_day",
+        ),
+        (
+            "3atab",
+            "pasc_oecd_t3",
+            "capacity",
+            "eia_steo_oecd_commercial_inventory",
+            "OECD commercial petroleum inventories",
+            "million_barrels",
+        ),
+        (
+            "3ctab",
+            "cops_opec",
+            "capacity",
+            "eia_steo_opec_surplus_capacity",
+            "OPEC surplus crude oil production capacity",
+            "million_barrels_per_day",
+        ),
+    )
+    sheet_cache: dict[str, pd.DataFrame] = {}
+    extracted: list[tuple[str, str, str, str, float]] = []
+    for sheet_name, series_id, family, metric, entity, unit in series_specs:
+        if sheet_name not in workbook.sheet_names:
+            if family in {"demand", "pricing_utilization"} or series_id == "papr_world":
+                raise ValueError(f"Required STEO sheet is missing: {sheet_name}")
+            continue
+        if sheet_name not in sheet_cache:
+            sheet_cache[sheet_name] = pd.read_excel(workbook, sheet_name=sheet_name, header=None)
+        table = sheet_cache[sheet_name]
+        value = _steo_series_value(table, series_id, reference_period)
+        if value is None:
+            if family in {"demand", "pricing_utilization"} or series_id == "papr_world":
+                raise ValueError(
+                    f"Required STEO series {series_id} is unavailable for {reference_period:%Y-%m}."
+                )
+            continue
+        extracted.append((family, metric, entity, unit, value))
+
+    episode_dates = episode_manifest[
+        episode_manifest["episode_family"].astype(str).isin(EIA_STEO_OIL_EPISODE_FAMILIES)
+    ].copy()
+    episode_dates["start_date"] = pd.to_datetime(episode_dates["start_date"], errors="coerce")
+    episode_dates["end_date"] = pd.to_datetime(episode_dates["end_date"], errors="coerce")
+    eligible = episode_dates[
+        episode_dates["start_date"].le(release_date)
+        & episode_dates["end_date"].ge(release_date)
+    ]
+    rows: list[dict[str, object]] = []
+    for episode in eligible["episode"].astype(str):
+        for family, metric, entity, unit, value in extracted:
+            rows.append(
+                {
+                    "episode": episode,
+                    "family": family,
+                    "metric": metric,
+                    "entity": entity,
+                    "period_end": release_date,
+                    "available_date": release_date,
+                    "value": value,
+                    "unit": unit,
+                    "source_id": f"eia_steo_{release_date:%Y%m}_{metric}",
+                    "source_url": source_url,
+                    "source_tier": "A",
+                    "vintage_status": "archived_release",
+                    "eligible_for_model": True,
+                    "revision_status": "release_snapshot_as_published",
+                    "accession_or_release_id": source_hash,
+                    "source_archive_sha256": source_hash,
+                    "reference_period": reference_period,
+                    "notes": (
+                        "Latest historical month identified by the STEO workbook; "
+                        "availability is conservatively assigned to publication-month end."
+                    ),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def _steo_last_historical_month(
+    dates: pd.DataFrame,
+    release_date: pd.Timestamp,
+) -> pd.Timestamp:
+    if dates.empty:
+        return release_date - pd.offsets.MonthEnd(1)
+    labels = dates.iloc[:, 0].astype(str)
+    matching = dates[labels.str.contains("Last Historical Month", case=False, na=False)]
+    if not matching.empty:
+        values = pd.to_numeric(matching.iloc[0, 1:], errors="coerce").dropna()
+        if not values.empty:
+            encoded = str(int(values.iloc[0]))
+            if re.fullmatch(r"\d{6}", encoded):
+                return pd.Timestamp(int(encoded[:4]), int(encoded[4:]), 1) + pd.offsets.MonthEnd(0)
+    return release_date - pd.offsets.MonthEnd(1)
+
+
+def _steo_series_value(
+    table: pd.DataFrame,
+    series_id: str,
+    reference_period: pd.Timestamp,
+) -> float | None:
+    ids = table.iloc[:, 0].astype(str).str.casefold()
+    matching = table[ids.eq(series_id.casefold())]
+    if matching.empty:
+        return None
+    years = pd.to_numeric(table.iloc[2], errors="coerce").ffill()
+    months = table.iloc[3].astype(str).str[:3].str.casefold().map(MONTH_ABBREVIATIONS)
+    for column in table.columns[2:]:
+        year = years.get(column)
+        month = months.get(column)
+        if pd.isna(year) or pd.isna(month):
+            continue
+        period = pd.Timestamp(int(year), int(month), 1) + pd.offsets.MonthEnd(0)
+        if period == reference_period:
+            value = pd.to_numeric(matching.iloc[0, column], errors="coerce")
+            return float(value) if pd.notna(value) else None
+    return None
 
 
 def _latest_month_value(row: pd.Series) -> tuple[float, pd.Timestamp]:

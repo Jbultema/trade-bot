@@ -53,6 +53,8 @@ class CapitalCycleTargetRun:
     readiness: pd.DataFrame
     threshold_sensitivity: pd.DataFrame
     technology_threshold_sensitivity: pd.DataFrame
+    oil_shock_sensitivity: pd.DataFrame
+    oil_shock_holdout: pd.DataFrame
     output_paths: dict[str, Path]
 
 
@@ -61,6 +63,7 @@ def build_objective_economic_targets(
     episode_manifest: pd.DataFrame,
     observations: pd.DataFrame,
     target_spec: pd.DataFrame,
+    oil_shock_target_spec: pd.DataFrame | None = None,
     output_dir: str | Path = DEFAULT_CAPITAL_CYCLE_TARGET_DIR,
 ) -> CapitalCycleTargetRun:
     """Generate economic rollover labels only from preregistered PIT rules."""
@@ -74,6 +77,8 @@ def build_objective_economic_targets(
     readiness = _build_target_readiness(episodes, components, events, spec)
     threshold_sensitivity = build_housing_threshold_sensitivity(components, episodes)
     technology_threshold_sensitivity = build_technology_threshold_sensitivity(components)
+    oil_shock_sensitivity = build_oil_shock_sensitivity(audited)
+    oil_shock_holdout = build_oil_shock_holdout(audited, oil_shock_target_spec)
     frames = {
         "component_panel": components,
         "event_manifest": events,
@@ -81,6 +86,8 @@ def build_objective_economic_targets(
         "readiness": readiness,
         "threshold_sensitivity": threshold_sensitivity,
         "technology_threshold_sensitivity": technology_threshold_sensitivity,
+        "oil_shock_sensitivity": oil_shock_sensitivity,
+        "oil_shock_holdout": oil_shock_holdout,
     }
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
@@ -200,6 +207,189 @@ def build_technology_threshold_sensitivity(component_panel: pd.DataFrame) -> pd.
             }
         )
     return pd.DataFrame(rows)
+
+
+def build_oil_shock_sensitivity(observations: pd.DataFrame) -> pd.DataFrame:
+    """Explore producer-downside and consumer-upside oil shock definitions."""
+
+    break_episodes = {
+        "producer_downside": "oil_oversupply_collapse_2014_2016",
+        "consumer_upside": "oil_geopolitical_shock_2021_2023",
+    }
+    control_episode = "oil_balanced_market_control_2017_2019"
+    required = {*break_episodes.values(), control_episode}
+    available = set(observations.get("episode", pd.Series(dtype=str)).astype(str))
+    if observations.empty or not required.issubset(available):
+        return pd.DataFrame()
+    grids = {
+        "producer_downside": {
+            "price": (-0.20, -0.30, -0.40),
+            "inventory": (0.03, 0.05, 0.08),
+            "surplus_capacity": (0.10, 0.20, 0.30),
+        },
+        "consumer_upside": {
+            "price": (0.20, 0.30, 0.40),
+            "inventory": (-0.03, -0.05, -0.08),
+            "surplus_capacity": (-0.20, -0.30, -0.40),
+        },
+    }
+    rows: list[dict[str, object]] = []
+    for mechanism, thresholds in grids.items():
+        for combination in product(*thresholds.values()):
+            selected = dict(zip(thresholds, combination, strict=True))
+            for persistence in (1, 2):
+                break_date = _oil_shock_event_date(
+                    observations,
+                    break_episodes[mechanism],
+                    mechanism,
+                    selected,
+                    persistence,
+                    quarterly_only=True,
+                )
+                control_date = _oil_shock_event_date(
+                    observations,
+                    control_episode,
+                    mechanism,
+                    selected,
+                    persistence,
+                    quarterly_only=True,
+                )
+                rows.append(
+                    {
+                        "mechanism": mechanism,
+                        "price_threshold": selected["price"],
+                        "inventory_threshold": selected["inventory"],
+                        "surplus_capacity_threshold": selected["surplus_capacity"],
+                        "persistence_releases": persistence,
+                        "sampling_cadence": "quarterly_archive_releases",
+                        "break_event_date": break_date,
+                        "negative_control_event_date": control_date,
+                        "break_detected": pd.notna(break_date),
+                        "negative_control_passed": pd.isna(control_date),
+                        "preregistered_configuration": False,
+                        "analysis_role": "post_hoc_exploratory_sensitivity_only",
+                        "allocation_authority": 0.0,
+                    }
+                )
+    return pd.DataFrame(rows)
+
+
+def build_oil_shock_holdout(
+    observations: pd.DataFrame,
+    target_spec: pd.DataFrame | None,
+) -> pd.DataFrame:
+    """Score frozen oil rules on their development, control, and untouched holdout."""
+
+    if observations.empty or target_spec is None or target_spec.empty:
+        return pd.DataFrame()
+    rows: list[dict[str, object]] = []
+    for spec in target_spec.to_dict("records"):
+        thresholds = {
+            "price": float(spec["price_threshold"]),
+            "inventory": float(spec["inventory_threshold"]),
+            "surplus_capacity": float(spec["surplus_capacity_threshold"]),
+        }
+        mechanism = str(spec["mechanism"])
+        persistence = int(spec["persistence_releases"])
+        lookback = int(spec["lookback_releases"])
+        minimum_components = int(spec["minimum_components"])
+        quarterly_only = str(spec.get("sampling_cadence", "")).casefold().startswith(
+            "quarterly"
+        )
+        episode_dates = {
+            role: _oil_shock_event_date(
+                observations,
+                str(spec[column]),
+                mechanism,
+                thresholds,
+                persistence,
+                lookback=lookback,
+                minimum_components=minimum_components,
+                quarterly_only=quarterly_only,
+            )
+            for role, column in {
+                "holdout": "episode",
+                "development": "development_episode",
+                "negative_control": "negative_control_episode",
+            }.items()
+        }
+        rows.append(
+            {
+                **spec,
+                "holdout_event_date": episode_dates["holdout"],
+                "development_event_date": episode_dates["development"],
+                "negative_control_event_date": episode_dates["negative_control"],
+                "holdout_detected": pd.notna(episode_dates["holdout"]),
+                "development_detected": pd.notna(episode_dates["development"]),
+                "negative_control_passed": pd.isna(episode_dates["negative_control"]),
+                "analysis_role": "frozen_historical_holdout_not_prospective",
+                "preregistered_configuration": False,
+                "allocation_authority": 0.0,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def _oil_shock_event_date(
+    observations: pd.DataFrame,
+    episode: str,
+    mechanism: str,
+    thresholds: dict[str, float],
+    persistence: int,
+    *,
+    lookback: int = 3,
+    minimum_components: int = 2,
+    quarterly_only: bool = False,
+) -> pd.Timestamp | pd.NaT:
+    metrics = {
+        "price": "eia_steo_wti_spot_price",
+        "inventory": "eia_steo_oecd_commercial_inventory",
+        "surplus_capacity": "eia_steo_opec_surplus_capacity",
+    }
+    flags: dict[str, pd.Series] = {}
+    for component, metric in metrics.items():
+        source = observations[
+            observations["episode"].astype(str).eq(episode)
+            & observations["metric"].astype(str).eq(metric)
+            & observations["eligible_for_model"].eq(True)
+        ].copy()
+        source["available_date"] = pd.to_datetime(source["available_date"], errors="coerce")
+        if quarterly_only and "source_id" in source.columns:
+            source = source[source["available_date"].dt.month.isin({1, 4, 7, 10})]
+        source = source.sort_values("available_date").drop_duplicates("available_date", keep="last")
+        values = pd.to_numeric(source["value"], errors="coerce")
+        raw: list[bool] = []
+        for index, value in enumerate(values):
+            if index < lookback or pd.isna(value):
+                raw.append(False)
+                continue
+            reference = values.iloc[index - lookback : index].dropna()
+            if len(reference) < lookback:
+                raw.append(False)
+                continue
+            lower = (mechanism == "producer_downside" and component == "price") or (
+                mechanism == "consumer_upside" and component in {"inventory", "surplus_capacity"}
+            )
+            denominator = float(reference.max() if lower else reference.median())
+            transformed = float(value) / denominator - 1 if denominator else np.nan
+            raw.append(
+                bool(transformed <= thresholds[component])
+                if lower
+                else bool(transformed >= thresholds[component])
+            )
+        persistent = [
+            index + 1 >= persistence and all(raw[index - persistence + 1 : index + 1])
+            for index in range(len(raw))
+        ]
+        flags[component] = pd.Series(
+            persistent,
+            index=pd.DatetimeIndex(source["available_date"]),
+        )
+    if len(flags) < 3:
+        return pd.NaT
+    confirmations = pd.DataFrame(flags).fillna(False).sum(axis=1)
+    triggered = confirmations[confirmations.ge(minimum_components)]
+    return pd.Timestamp(triggered.index.min()) if not triggered.empty else pd.NaT
 
 
 def _sensitivity_event_date(

@@ -5,6 +5,8 @@ import pandas as pd
 from trade_bot.research.capital_cycle_targets import (
     build_housing_threshold_sensitivity,
     build_objective_economic_targets,
+    build_oil_shock_holdout,
+    build_oil_shock_sensitivity,
     build_technology_threshold_sensitivity,
 )
 
@@ -219,3 +221,113 @@ def test_technology_sensitivity_is_bounded_and_preserves_control() -> None:
     assert sensitivity["preregistered_configuration"].sum() == 1
     preregistered = sensitivity[sensitivity["preregistered_configuration"]].iloc[0]
     assert preregistered["breaks_detected"] == 3
+
+
+def test_oil_sensitivity_is_exploratory_and_uses_a_same_family_control() -> None:
+    rows = []
+    episode_values = {
+        "oil_oversupply_collapse_2014_2016": {
+            "price": [100, 100, 100, 60, 55],
+            "inventory": [100, 100, 100, 110, 115],
+            "surplus": [2.0, 2.0, 2.0, 2.8, 3.0],
+        },
+        "oil_geopolitical_shock_2021_2023": {
+            "price": [60, 60, 60, 90, 100],
+            "inventory": [100, 100, 100, 90, 85],
+            "surplus": [3.0, 3.0, 3.0, 2.0, 1.8],
+        },
+        "oil_balanced_market_control_2017_2019": {
+            "price": [60, 62, 61, 63, 62],
+            "inventory": [100, 101, 100, 101, 100],
+            "surplus": [2.5, 2.6, 2.5, 2.6, 2.5],
+        },
+    }
+    metrics = {
+        "price": ("pricing_utilization", "eia_steo_wti_spot_price"),
+        "inventory": ("capacity", "eia_steo_oecd_commercial_inventory"),
+        "surplus": ("capacity", "eia_steo_opec_surplus_capacity"),
+    }
+    for episode, values in episode_values.items():
+        for index, date in enumerate(pd.date_range("2020-01-31", periods=5, freq="QE")):
+            for component, (family, metric) in metrics.items():
+                rows.append(
+                    {
+                        "episode": episode,
+                        "family": family,
+                        "metric": metric,
+                        "available_date": date,
+                        "value": values[component][index],
+                        "eligible_for_model": True,
+                    }
+                )
+
+    sensitivity = build_oil_shock_sensitivity(pd.DataFrame(rows))
+
+    assert len(sensitivity) == 108
+    assert sensitivity["negative_control_passed"].all()
+    assert sensitivity.groupby("mechanism")["break_detected"].any().all()
+    assert not sensitivity["preregistered_configuration"].any()
+    assert sensitivity["allocation_authority"].eq(0.0).all()
+
+
+def test_oil_holdout_scores_frozen_rule_without_granting_authority() -> None:
+    rows: list[dict[str, object]] = []
+    metrics = {
+        "price": ("pricing_utilization", "eia_steo_wti_spot_price"),
+        "inventory": ("capacity", "eia_steo_oecd_commercial_inventory"),
+        "surplus": ("capacity", "eia_steo_opec_surplus_capacity"),
+    }
+    episode_values = {
+        "holdout": {
+            "price": [50, 51, 49, 70, 75],
+            "inventory": [100, 101, 100, 90, 88],
+            "surplus": [2.5, 2.6, 2.5, 1.8, 1.7],
+        },
+        "development": {
+            "price": [50, 51, 49, 70, 75],
+            "inventory": [100, 101, 100, 90, 88],
+            "surplus": [2.5, 2.6, 2.5, 1.8, 1.7],
+        },
+        "control": {
+            "price": [50, 51, 49, 50, 51],
+            "inventory": [100, 101, 100, 101, 100],
+            "surplus": [2.5, 2.6, 2.5, 2.6, 2.5],
+        },
+    }
+    for episode, values in episode_values.items():
+        for index, date in enumerate(pd.date_range("2020-01-31", periods=5, freq="QE")):
+            for component, (family, metric) in metrics.items():
+                rows.append(
+                    {
+                        "episode": episode,
+                        "family": family,
+                        "metric": metric,
+                        "available_date": date,
+                        "value": values[component][index],
+                        "eligible_for_model": True,
+                    }
+                )
+    spec = pd.DataFrame(
+        [
+            {
+                "episode": "holdout",
+                "development_episode": "development",
+                "negative_control_episode": "control",
+                "mechanism": "consumer_upside",
+                "lookback_releases": 3,
+                "price_threshold": 0.20,
+                "inventory_threshold": -0.05,
+                "surplus_capacity_threshold": -0.20,
+                "persistence_releases": 2,
+                "minimum_components": 2,
+                "registration_status": "frozen_before_extraction",
+            }
+        ]
+    )
+
+    holdout = build_oil_shock_holdout(pd.DataFrame(rows), spec)
+
+    assert holdout.iloc[0]["holdout_detected"]
+    assert holdout.iloc[0]["development_detected"]
+    assert holdout.iloc[0]["negative_control_passed"]
+    assert holdout.iloc[0]["allocation_authority"] == 0.0

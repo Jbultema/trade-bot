@@ -100,6 +100,7 @@ from trade_bot.research.capital_cycle_feasibility import (
 from trade_bot.research.capital_cycle_sources import (
     fetch_census_housing_release_panel,
     fetch_census_new_sales_panel,
+    fetch_eia_steo_oil_panel,
     fetch_fed_g17_technology_panel,
     fetch_fed_sloos_housing_panel,
     fetch_registered_source_documents,
@@ -3103,6 +3104,42 @@ def fetch_capital_cycle_fed_g17_tech_cmd(
     console.print(f"Inventory: {result.inventory_path}")
 
 
+@app.command("fetch-capital-cycle-eia-steo-oil")
+def fetch_capital_cycle_eia_steo_oil_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    quarterly_only: Annotated[
+        bool,
+        typer.Option("--quarterly-only/--monthly"),
+    ] = True,
+) -> None:
+    """Archive point-in-time EIA STEO oil production, demand, price, and capacity data."""
+
+    episode_path = research_dir / "episode_manifest.csv"
+    observation_path = research_dir / "direct_observations.csv"
+    if not episode_path.exists():
+        raise FileNotFoundError(f"Episode manifest is missing: {episode_path}")
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = fetch_eia_steo_oil_panel(
+        episode_manifest=pd.read_csv(episode_path),
+        existing_observations=existing,
+        research_dir=research_dir,
+        quarterly_only=quarterly_only,
+    )
+    statuses = result.archive_inventory.get("status", pd.Series(dtype=str))
+    console.print(
+        f"EIA STEO workbooks imported: {int(statuses.eq('imported').sum()):,}; "
+        f"failures: {int(statuses.ne('imported').sum()):,}; "
+        f"combined panel rows: {len(result.observations):,}."
+    )
+    console.print(f"Inventory: {result.inventory_path}")
+
+
 @app.command("import-capital-cycle-usgs-copper")
 def import_capital_cycle_usgs_copper_cmd(
     research_dir: Annotated[
@@ -3179,6 +3216,7 @@ def build_capital_cycle_economic_targets_cmd(
         "observations": research_dir / "direct_observations.csv",
         "target_spec": research_dir / "economic_target_spec.csv",
     }
+    oil_target_spec_path = research_dir / "oil_shock_target_spec.csv"
     for path in inputs.values():
         if not path.exists():
             raise FileNotFoundError(f"Required economic-target input is missing: {path}")
@@ -3186,6 +3224,9 @@ def build_capital_cycle_economic_targets_cmd(
         episode_manifest=pd.read_csv(inputs["episode_manifest"]),
         observations=pd.read_csv(inputs["observations"]),
         target_spec=pd.read_csv(inputs["target_spec"]),
+        oil_shock_target_spec=(
+            pd.read_csv(oil_target_spec_path) if oil_target_spec_path.exists() else None
+        ),
         output_dir=output_dir,
     )
     readiness = result.readiness.iloc[0]

@@ -21,6 +21,7 @@ from trade_bot.research.capital_cycle_sources import (
     parse_eia_dpr_release,
     parse_eia_dpr_workbook,
     parse_eia_duc_workbook,
+    parse_eia_steo_oil_workbook,
     parse_fcc_telecom_capacity_release,
     parse_fcc_telecom_economics_release,
     parse_fed_g17_technology_pdf,
@@ -585,6 +586,126 @@ def test_eia_duc_workbook_uses_named_vintage_without_backdating() -> None:
     assert parsed.iloc[0]["reference_period"] == pd.Timestamp("2016-10-01")
     assert parsed.iloc[0]["period_end"] == pd.Timestamp("2016-12-12")
     assert parsed.iloc[0]["available_date"] == pd.Timestamp("2016-12-12")
+
+
+def test_eia_steo_workbook_uses_last_historical_month_without_backdating() -> None:
+    workbook = BytesIO()
+    dates = pd.DataFrame(
+        [
+            ["Forecast Month -", None, None, "December 2022"],
+            [None, None, None, None],
+            ["Table Beginning Year---", None, None, 2022],
+            [None, None, None, None],
+            ["Table Beginning Month---", None, None, 202201],
+            [None, None, None, None],
+            ["Last Historical Month---", None, None, 202211],
+        ]
+    )
+
+    def sheet(rows: list[list[object]]) -> pd.DataFrame:
+        return pd.DataFrame(
+            [
+                ["Table of Contents", "Synthetic STEO", None, None, None],
+                [None, "EIA STEO December 2022", None, None, None],
+                [None, None, 2022, None, None],
+                [None, None, "Oct", "Nov", "Dec"],
+                *rows,
+            ]
+        )
+
+    with pd.ExcelWriter(workbook, engine="openpyxl") as writer:
+        dates.to_excel(writer, sheet_name="Dates", index=False, header=False)
+        sheet([["WTIPUUS", "WTI", 87.0, 84.0, 80.0]]).to_excel(
+            writer, sheet_name="2tab", index=False, header=False
+        )
+        sheet(
+            [
+                ["patc_world", "World consumption", 100.0, 101.0, 102.0],
+                ["papr_world", "World production", 99.0, 100.5, 101.5],
+                ["pasc_oecd_t3", "OECD inventory", 2700.0, 2680.0, 2660.0],
+            ]
+        ).to_excel(writer, sheet_name="3atab", index=False, header=False)
+        sheet([["cops_opec", "OPEC surplus capacity", 2.0, 1.8, 1.7]]).to_excel(
+            writer, sheet_name="3ctab", index=False, header=False
+        )
+    episodes = pd.DataFrame(
+        [
+            {
+                "episode": "oil_geopolitical_shock_2021_2023",
+                "episode_family": "oil_shock",
+                "start_date": "2021-01-01",
+                "end_date": "2023-12-31",
+            }
+        ]
+    )
+
+    parsed = parse_eia_steo_oil_workbook(
+        workbook.getvalue(),
+        release_date=pd.Timestamp("2022-12-31"),
+        episode_manifest=episodes,
+        source_url="https://www.eia.gov/outlooks/steo/archives/dec22_base.xlsx",
+        source_hash="steo-test",
+    )
+
+    assert len(parsed) == 5
+    assert parsed["period_end"].eq(pd.Timestamp("2022-12-31")).all()
+    assert parsed["available_date"].eq(pd.Timestamp("2022-12-31")).all()
+    assert parsed["reference_period"].eq(pd.Timestamp("2022-11-30")).all()
+    values = dict(zip(parsed["metric"], parsed["value"], strict=True))
+    assert values["eia_steo_wti_spot_price"] == 84.0
+    assert values["eia_steo_world_liquids_consumption"] == 101.0
+    assert values["eia_steo_opec_surplus_capacity"] == 1.8
+
+
+def test_eia_steo_parser_supports_legacy_workbook_without_dates_sheet() -> None:
+    workbook = BytesIO()
+
+    def sheet(rows: list[list[object]]) -> pd.DataFrame:
+        return pd.DataFrame(
+            [
+                [None, None, 2022, 2022, 2022],
+                [None, None, None, None, None],
+                [None, None, 2022, 2022, 2022],
+                [None, None, "Oct", "Nov", "Dec"],
+                *rows,
+            ]
+        )
+
+    with pd.ExcelWriter(workbook, engine="openpyxl") as writer:
+        sheet([["WTIPUUS", "WTI", 87.0, 84.0, 80.0]]).to_excel(
+            writer, sheet_name="2tab", index=False, header=False
+        )
+        sheet(
+            [
+                ["patc_world", "World consumption", 100.0, 101.0, 102.0],
+                ["papr_world", "World production", 99.0, 100.5, 101.5],
+                ["pasc_oecd_t3", "OECD inventory", 2700.0, 2680.0, 2660.0],
+            ]
+        ).to_excel(writer, sheet_name="3atab", index=False, header=False)
+        sheet([["cops_opec", "OPEC surplus capacity", 2.0, 1.8, 1.7]]).to_excel(
+            writer, sheet_name="3ctab", index=False, header=False
+        )
+    episodes = pd.DataFrame(
+        [
+            {
+                "episode": "oil_geopolitical_shock_2021_2023",
+                "episode_family": "oil_shock",
+                "start_date": "2021-01-01",
+                "end_date": "2023-12-31",
+            }
+        ]
+    )
+
+    parsed = parse_eia_steo_oil_workbook(
+        workbook.getvalue(),
+        release_date=pd.Timestamp("2022-12-31"),
+        episode_manifest=episodes,
+        source_url="https://www.eia.gov/outlooks/steo/archives/dec22_base.xlsx",
+        source_hash="steo-test-no-dates",
+    )
+
+    assert len(parsed) == 5
+    assert parsed["reference_period"].eq(pd.Timestamp("2022-11-30")).all()
 
 
 def test_fed_sloos_legacy_chartdata_does_not_backdate_history() -> None:

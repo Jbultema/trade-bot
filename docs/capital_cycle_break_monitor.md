@@ -363,3 +363,48 @@ of large realized semiconductor contractions, not a general detector of every in
 correction and not yet an early-warning allocation tool. The next independent evidence
 needed is issuer financing/monetization/commitment data for technology and an oil-shock
 lane built from archived EIA vintages. Allocation authority remains zero.
+
+### Oil-shock acquisition and historical holdout: 2026-08-20
+
+The oil-priority pass archives 229 monthly EIA Short-Term Energy Outlook workbooks from
+January 2005 through January 2024. All 196 workbooks using EIA's modern world-market
+tables, beginning in October 2007, parse successfully. The 33 earlier workbooks fail
+closed because their legacy operational format does not contain the required world
+consumption, production, OECD inventory, and OPEC surplus-capacity tables. The parser
+supports both XLS and XLSX formats and conservatively assigns availability to publication
+month-end. When a legacy-modern workbook lacks EIA's later `Dates` sheet, the reference
+period is the preceding month; no history printed in a workbook is backdated.
+
+The governed panel now contains 2,409 eligible point-in-time observations. Each complete
+oil episode has monthly WTI price, world-liquids demand and production, OECD commercial
+inventory, and OPEC surplus-capacity snapshots. These provide three of six direct
+families: demand, capacity, and pricing/utilization. The three complete 2014-2023 oil
+episodes each contain 180 observations across 36 release vintages and approximately 49%
+mean family coverage. The left-censored 2005-2009 holdout contains 135 observations from
+27 modern-schema releases. Overall mean direct-family coverage is now 35.5%, while the
+global feasibility gate remains closed.
+
+A bounded 108-configuration exploratory audit tests two distinct mechanisms at the
+original quarterly sampling cadence. The producer-downside grid detects the 2014-2016
+oversupply collapse in 39 of 54 configurations; 30 configurations both detect it and
+remain silent in the 2017-2019 same-family control. The consumer-upside grid detects the
+2021-2023 tightening episode in all 54 configurations; 46 also preserve the control.
+This is realized-shock confirmation, not evidence that the rule forecasts an oil shock.
+The consumer signal can precede Russia's 2022 invasion because it also reflects
+post-pandemic demand recovery and thin physical buffers.
+
+Before extracting the legacy 2005-2009 panel, one consumer-upside configuration was
+frozen: a three-quarter lookback, WTI up at least 20%, OECD inventory down at least 5%,
+OPEC surplus capacity down at least 20%, two of three components, and two-release
+persistence. It still identifies the development episode on 2022-01-31 and remains
+silent in the 2017-2019 control, but it does not identify the 2005-2009 historical
+holdout. The denser monthly archive does not alter that frozen quarterly evaluation.
+Exploratory monthly checks show that relaxing persistence can recover the 2008 spike
+only by also firing in the control, so the miss cannot honestly be tuned away with the
+current evidence.
+
+Decision: the oil subsystem has enough physical-market data to falsify the first rule,
+and that rule does not generalize. Retain the panel and mechanism split, but do not promote
+the current oil detector or grant it allocation authority. A new rule requires a new
+frozen specification and additional independent episodes or evidence families, especially
+producer financing and commitment data. Allocation authority remains zero.
