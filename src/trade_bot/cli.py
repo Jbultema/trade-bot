@@ -100,6 +100,7 @@ from trade_bot.research.capital_cycle_feasibility import (
 from trade_bot.research.capital_cycle_sources import (
     fetch_census_housing_release_panel,
     fetch_census_new_sales_panel,
+    fetch_fed_g17_technology_panel,
     fetch_fed_sloos_housing_panel,
     fetch_registered_source_documents,
     fetch_sec_filing_archive,
@@ -3060,6 +3061,42 @@ def fetch_capital_cycle_fed_sloos_cmd(
     statuses = result.archive_inventory.get("status", pd.Series(dtype=str))
     console.print(
         f"Fed SLOOS releases imported: {int(statuses.eq('imported').sum()):,}; "
+        f"failures: {int(statuses.ne('imported').sum()):,}; "
+        f"combined panel rows: {len(result.observations):,}."
+    )
+    console.print(f"Inventory: {result.inventory_path}")
+
+
+@app.command("fetch-capital-cycle-fed-g17-tech")
+def fetch_capital_cycle_fed_g17_tech_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    quarterly_only: Annotated[
+        bool,
+        typer.Option("--quarterly-only/--monthly"),
+    ] = True,
+) -> None:
+    """Archive point-in-time G.17 semiconductor production and capacity releases."""
+
+    episode_path = research_dir / "episode_manifest.csv"
+    observation_path = research_dir / "direct_observations.csv"
+    if not episode_path.exists():
+        raise FileNotFoundError(f"Episode manifest is missing: {episode_path}")
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = fetch_fed_g17_technology_panel(
+        episode_manifest=pd.read_csv(episode_path),
+        existing_observations=existing,
+        research_dir=research_dir,
+        quarterly_only=quarterly_only,
+    )
+    statuses = result.archive_inventory.get("status", pd.Series(dtype=str))
+    console.print(
+        f"Fed G.17 tables imported: {int(statuses.eq('imported').sum()):,}; "
         f"failures: {int(statuses.ne('imported').sum()):,}; "
         f"combined panel rows: {len(result.observations):,}."
     )

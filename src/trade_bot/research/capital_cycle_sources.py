@@ -36,6 +36,10 @@ MONTH_NAME_PATTERN: Final[str] = (
     "January|February|March|April|May|June|July|August|September|October|November|December"
 )
 FED_SLOOS_INDEX_URL: Final[str] = "https://www.federalreserve.gov/data/sloos.htm"
+FED_G17_INDEX_URL: Final[str] = "https://www.federalreserve.gov/Releases/g17/default.htm"
+FED_G17_TECH_EPISODE_FAMILIES: Final[frozenset[str]] = frozenset(
+    {"technology_hardware", "semiconductor_cycle"}
+)
 
 
 @dataclass(frozen=True)
@@ -633,6 +637,410 @@ def fetch_fed_sloos_housing_panel(
         observation_path=observation_path,
         inventory_path=inventory_path,
     )
+
+
+def fetch_fed_g17_technology_panel(
+    *,
+    episode_manifest: pd.DataFrame,
+    existing_observations: pd.DataFrame | None = None,
+    research_dir: str | Path = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    quarterly_only: bool = True,
+    timeout_seconds: float = 30.0,
+) -> HistoricalArchiveImportResult:
+    """Archive G.17 semiconductor production, utilization, and capacity vintages."""
+
+    episodes = episode_manifest[
+        episode_manifest["episode_family"].astype(str).isin(FED_G17_TECH_EPISODE_FAMILIES)
+    ].copy()
+    if episodes.empty:
+        raise ValueError("No registered technology-hardware episodes were found.")
+    episodes["start_date"] = pd.to_datetime(episodes["start_date"], errors="raise")
+    episodes["end_date"] = pd.to_datetime(episodes["end_date"], errors="raise")
+    destination = Path(research_dir)
+    raw_dir = destination / "raw" / "fed_g17"
+    raw_dir.mkdir(parents=True, exist_ok=True)
+    session = requests.Session()
+    session.headers.update({"User-Agent": DEFAULT_SEC_USER_AGENT})
+    index_path = raw_dir / "release-index.html"
+    index_content, index_status, index_error = _download_or_read(
+        session,
+        FED_G17_INDEX_URL,
+        index_path,
+        timeout_seconds=timeout_seconds,
+    )
+    if not index_content:
+        raise OSError(f"G.17 release index unavailable: {index_status}: {index_error}")
+    release_dates = sorted(
+        {
+            pd.Timestamp(match.group(1))
+            for link in BeautifulSoup(index_content, "html.parser").find_all("a", href=True)
+            if (
+                match := re.search(
+                    r"(?:^|/)(\d{8})/(?:default_sup\.htm)?$",
+                    str(link.get("href")),
+                )
+            )
+        }
+    )
+    minimum_date = episodes["start_date"].min()
+    maximum_date = episodes["end_date"].max() + pd.offsets.MonthEnd(1)
+    release_dates = [date for date in release_dates if minimum_date <= date <= maximum_date]
+    if quarterly_only:
+        release_dates = [date for date in release_dates if date.month in {1, 4, 7, 10}]
+
+    rows: list[dict[str, object]] = []
+    inventory_rows: list[dict[str, object]] = []
+    for release_date in release_dates:
+        if release_date < pd.Timestamp("2001-10-01"):
+            source_url = (
+                "https://fraser.stlouisfed.org/files/docs/releases/g17/"
+                f"g17_{release_date:%Y%m%d}.pdf"
+            )
+            raw_path = raw_dir / f"{release_date:%Y%m%d}-fraser-g17.pdf"
+            content, status, error = _download_or_read(
+                session,
+                source_url,
+                raw_path,
+                timeout_seconds=timeout_seconds,
+            )
+            parsed = pd.DataFrame()
+            source_hash = hashlib.sha256(content).hexdigest() if content else ""
+            if content:
+                try:
+                    parsed = parse_fed_g17_technology_pdf(
+                        content,
+                        release_date=release_date,
+                        episode_manifest=episodes,
+                        source_url=source_url,
+                        source_hash=source_hash,
+                    )
+                    status = "imported"
+                    error = ""
+                except (ValueError, OSError, KeyError, IndexError) as exc:
+                    status = "parse_failed"
+                    error = str(exc)
+            rows.extend(parsed.to_dict("records"))
+            inventory_rows.append(
+                {
+                    "release_date": release_date,
+                    "table_name": "fraser_g17_pdf",
+                    "source_url": source_url,
+                    "raw_path": str(raw_path),
+                    "sha256": source_hash,
+                    "bytes": len(content),
+                    "status": status,
+                    "extracted_rows": len(parsed),
+                    "error": error,
+                    "allocation_authority": 0.0,
+                }
+            )
+            continue
+        base_url = f"https://www.federalreserve.gov/Releases/g17/{release_date:%Y%m%d}/"
+        for table_name in ("table1d_sup", "table2_sup", "table3_sup"):
+            source_url = f"{base_url}{table_name}.htm"
+            raw_path = raw_dir / f"{release_date:%Y%m%d}-{table_name}.html"
+            content, status, error = _download_or_read(
+                session,
+                source_url,
+                raw_path,
+                timeout_seconds=timeout_seconds,
+            )
+            parsed_table_name = table_name
+            if not content and table_name == "table1d_sup":
+                parsed_table_name = "table1_sup"
+                source_url = f"{base_url}{parsed_table_name}.htm"
+                raw_path = raw_dir / f"{release_date:%Y%m%d}-{parsed_table_name}.html"
+                content, status, error = _download_or_read(
+                    session,
+                    source_url,
+                    raw_path,
+                    timeout_seconds=timeout_seconds,
+                )
+            parsed = pd.DataFrame()
+            source_hash = hashlib.sha256(content).hexdigest() if content else ""
+            if content:
+                try:
+                    parsed = parse_fed_g17_technology_release(
+                        content,
+                        table_name=parsed_table_name,
+                        episode_manifest=episodes,
+                        source_url=source_url,
+                        source_hash=source_hash,
+                    )
+                    status = "imported"
+                    error = ""
+                except (ValueError, OSError, KeyError, IndexError) as exc:
+                    status = "parse_failed"
+                    error = str(exc)
+            rows.extend(parsed.to_dict("records"))
+            inventory_rows.append(
+                {
+                    "release_date": release_date,
+                    "table_name": parsed_table_name,
+                    "source_url": source_url,
+                    "raw_path": str(raw_path),
+                    "sha256": source_hash,
+                    "bytes": len(content),
+                    "status": status,
+                    "extracted_rows": len(parsed),
+                    "error": error,
+                    "allocation_authority": 0.0,
+                }
+            )
+    combined = _merge_observations(existing_observations, pd.DataFrame(rows))
+    inventory = pd.DataFrame(inventory_rows)
+    observation_path = destination / "direct_observations.csv"
+    inventory_path = destination / "fed_g17_archive_inventory.csv"
+    combined.to_csv(observation_path, index=False)
+    inventory.to_csv(inventory_path, index=False)
+    return HistoricalArchiveImportResult(
+        observations=combined,
+        archive_inventory=inventory,
+        observation_path=observation_path,
+        inventory_path=inventory_path,
+    )
+
+
+def parse_fed_g17_technology_release(
+    content: bytes,
+    *,
+    table_name: str,
+    episode_manifest: pd.DataFrame,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract the latest semiconductor value visible in one archived G.17 table."""
+
+    table_specs = {
+        "table1_sup": (
+            "demand",
+            "fed_g17_semiconductor_industrial_production",
+            "index",
+        ),
+        "table1d_sup": (
+            "demand",
+            "fed_g17_semiconductor_industrial_production",
+            "index",
+        ),
+        "table2_sup": (
+            "pricing_utilization",
+            "fed_g17_semiconductor_capacity_utilization",
+            "percent",
+        ),
+        "table3_sup": (
+            "capacity",
+            "fed_g17_semiconductor_industrial_capacity",
+            "index",
+        ),
+    }
+    if table_name not in table_specs:
+        raise ValueError(f"Unsupported G.17 table: {table_name}")
+    release_date = _published_date(BeautifulSoup(content, "html.parser").get_text(" ", strip=True))
+    if release_date is None:
+        raise ValueError("G.17 release date was not found.")
+    tables = pd.read_html(BytesIO(content), flavor="lxml")
+    if not tables:
+        raise ValueError("G.17 release contained no parseable table.")
+    table = next(
+        (
+            candidate
+            for candidate in tables
+            if candidate.iloc[:, 0]
+            .astype(str)
+            .str.contains("Semiconductor", case=False, na=False)
+            .any()
+        ),
+        None,
+    )
+    if table is None:
+        raise ValueError("G.17 semiconductor row was not found.")
+    labels = table.iloc[:, 0].astype(str).str.replace("\u00a0", " ", regex=False)
+    candidates = table[labels.str.contains("Semiconductor", case=False, na=False)]
+    if candidates.empty:
+        raise ValueError("G.17 semiconductor row was not found.")
+    value, reference_period = _latest_month_value(candidates.iloc[0])
+    family, metric, unit = table_specs[table_name]
+    episode_dates = episode_manifest[
+        episode_manifest["episode_family"].astype(str).isin(FED_G17_TECH_EPISODE_FAMILIES)
+    ].copy()
+    episode_dates["start_date"] = pd.to_datetime(episode_dates["start_date"], errors="coerce")
+    episode_dates["end_date"] = pd.to_datetime(episode_dates["end_date"], errors="coerce")
+    eligible_episodes = episode_dates[
+        episode_dates["start_date"].le(release_date)
+        & episode_dates["end_date"].ge(release_date)
+    ]
+    rows = []
+    for episode in eligible_episodes["episode"].astype(str):
+        rows.append(
+            {
+                "episode": episode,
+                "family": family,
+                "metric": metric,
+                "entity": "U.S. semiconductor manufacturing",
+                "period_end": release_date,
+                "available_date": release_date,
+                "value": value,
+                "unit": unit,
+                "source_id": f"fed_g17_{release_date:%Y%m%d}_{table_name}",
+                "source_url": source_url,
+                "source_tier": "A",
+                "vintage_status": "archived_release",
+                "eligible_for_model": True,
+                "revision_status": "release_snapshot_as_published",
+                "accession_or_release_id": source_hash,
+                "source_archive_sha256": source_hash,
+                "reference_period": reference_period,
+                "notes": (
+                    "Latest semiconductor observation visible in this G.17 release; "
+                    "earlier table history is not backdated."
+                ),
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def parse_fed_g17_technology_pdf(
+    content: bytes,
+    *,
+    release_date: pd.Timestamp,
+    episode_manifest: pd.DataFrame,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract semiconductor observations from a pre-HTML FRASER G.17 scan."""
+
+    pages = [page.extract_text() or "" for page in PdfReader(BytesIO(content)).pages]
+    page_specs = (
+        (
+            (
+                "INDUSTRIAL PRODUCTION: INDUSTRY GROUPS",
+                "INDUSTRIAL PRODUCTION INDEXES: SPECIAL AGGREGATES",
+            ),
+            "demand",
+            "fed_g17_semiconductor_industrial_production",
+            "index",
+        ),
+        (
+            ("CAPACITY UTILIZATION: MANUFACTURING, MINING, AND UTILITIES", "CAPACITY UTILIZATION"),
+            "pricing_utilization",
+            "fed_g17_semiconductor_capacity_utilization",
+            "percent",
+        ),
+        (
+            ("INDUSTRIAL CAPACITY: MANUFACTURING, MINING, AND UTILITIES",),
+            "capacity",
+            "fed_g17_semiconductor_industrial_capacity",
+            "index",
+        ),
+    )
+    episode_dates = episode_manifest[
+        episode_manifest["episode_family"].astype(str).isin(FED_G17_TECH_EPISODE_FAMILIES)
+    ].copy()
+    episode_dates["start_date"] = pd.to_datetime(episode_dates["start_date"], errors="coerce")
+    episode_dates["end_date"] = pd.to_datetime(episode_dates["end_date"], errors="coerce")
+    eligible_episodes = episode_dates[
+        episode_dates["start_date"].le(release_date)
+        & episode_dates["end_date"].ge(release_date)
+    ]
+    reference_period = release_date - pd.offsets.MonthEnd(1)
+    rows: list[dict[str, object]] = []
+    row_pattern = (
+        r"Semiconductors(?: and related\s+electronic components)?\s+"
+        r"\d{3,4}[\u2013-]\d\s+([^\n]+)"
+    )
+    for headings, family, metric, unit in page_specs:
+        page = next(
+            (
+                text
+                for text in pages
+                if any(heading in text for heading in headings)
+                and re.search(row_pattern, text, flags=re.IGNORECASE)
+            ),
+            "",
+        )
+        if not page and family == "capacity":
+            continue
+        match = re.search(row_pattern, page, flags=re.IGNORECASE)
+        if not match:
+            raise ValueError(f"G.17 PDF semiconductor row was not found for {family}.")
+        values = [
+            float(value.replace("\u2013", "-"))
+            for value in re.findall(r"[\u2013-]?(?:\d+(?:\.\d*)?|\.\d+)", match.group(1))
+        ]
+        if family == "demand" and "INDUSTRIAL PRODUCTION: INDUSTRY GROUPS" in page:
+            if len(values) < 7:
+                raise ValueError("G.17 PDF production row has too few monthly values.")
+            value = values[6]
+        else:
+            if not values:
+                raise ValueError(f"G.17 PDF {family} row has no numeric values.")
+            value = values[-1]
+        for episode in eligible_episodes["episode"].astype(str):
+            rows.append(
+                {
+                    "episode": episode,
+                    "family": family,
+                    "metric": metric,
+                    "entity": "U.S. semiconductor manufacturing",
+                    "period_end": release_date,
+                    "available_date": release_date,
+                    "value": value,
+                    "unit": unit,
+                    "source_id": f"fed_g17_{release_date:%Y%m%d}_fraser_pdf_{family}",
+                    "source_url": source_url,
+                    "source_tier": "A",
+                    "vintage_status": "archived_release",
+                    "eligible_for_model": True,
+                    "revision_status": "release_snapshot_as_published",
+                    "accession_or_release_id": source_hash,
+                    "source_archive_sha256": source_hash,
+                    "reference_period": reference_period,
+                    "notes": (
+                        "Latest semiconductor observation visible in the archived FRASER "
+                        "G.17 scan; earlier table history is not backdated."
+                    ),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def _latest_month_value(row: pd.Series) -> tuple[float, pd.Timestamp]:
+    month_numbers = {
+        "jan": 1,
+        "feb": 2,
+        "mar": 3,
+        "apr": 4,
+        "may": 5,
+        "jun": 6,
+        "jul": 7,
+        "aug": 8,
+        "sep": 9,
+        "oct": 10,
+        "nov": 11,
+        "dec": 12,
+    }
+    candidates: list[tuple[pd.Timestamp, float]] = []
+    current_year: int | None = None
+    for column, raw_value in row.items():
+        parts = column if isinstance(column, tuple) else (column,)
+        label = " ".join(str(part) for part in parts)
+        month_match = re.search(r"\b(Jan|Feb|Mar|Apr|May|Jun|Jul|Aug|Sep|Oct|Nov|Dec)", label, re.I)
+        years = re.findall(r"\b(19\d{2}|20\d{2})\b", label)
+        if years:
+            current_year = int(years[-1])
+        numeric = pd.to_numeric(raw_value, errors="coerce")
+        if month_match and current_year is not None and pd.notna(numeric):
+            month = month_numbers[month_match.group(1)[:3].casefold()]
+            candidates.append(
+                (
+                    pd.Timestamp(current_year, month, 1) + pd.offsets.MonthEnd(0),
+                    float(numeric),
+                )
+            )
+    if not candidates:
+        raise ValueError("G.17 current-month value was not found.")
+    latest = max(candidates, key=lambda item: item[0])
+    return latest[1], latest[0]
 
 
 def parse_fed_sloos_chartdata(

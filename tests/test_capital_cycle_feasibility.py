@@ -23,6 +23,8 @@ from trade_bot.research.capital_cycle_sources import (
     parse_eia_duc_workbook,
     parse_fcc_telecom_capacity_release,
     parse_fcc_telecom_economics_release,
+    parse_fed_g17_technology_pdf,
+    parse_fed_g17_technology_release,
     parse_fed_sloos_chartdata,
 )
 
@@ -615,6 +617,115 @@ Figure 3: Other material
 
 def test_fed_sloos_published_date_uses_complete_month_name() -> None:
     assert _published_date("Last\nupdate: February 7, 2005") == pd.Timestamp("2005-02-07")
+
+
+def test_fed_g17_parser_uses_latest_visible_month_and_matching_episode() -> None:
+    content = b"""
+    <html><body>
+      <p>Last update: December 14, 2018</p>
+      <table>
+        <thead>
+          <tr><th rowspan="2">Industry</th><th colspan="2">2018</th></tr>
+          <tr><th>Oct.</th><th>Nov.</th></tr>
+        </thead>
+        <tbody>
+          <tr><td>Semiconductor and other electronic component</td><td>165.1</td><td>168.3</td></tr>
+          <tr><td>Other manufacturing</td><td>99.0</td><td>100.0</td></tr>
+        </tbody>
+      </table>
+    </body></html>
+    """
+    episodes = pd.DataFrame(
+        [
+            {
+                "episode": "semiconductor_inventory_correction_2017_2020",
+                "episode_family": "semiconductor_cycle",
+                "start_date": "2017-01-01",
+                "end_date": "2020-02-29",
+            },
+            {
+                "episode": "housing_mortgage_2001_2011",
+                "episode_family": "housing_mortgage",
+                "start_date": "2001-01-01",
+                "end_date": "2011-12-31",
+            },
+        ]
+    )
+
+    parsed = parse_fed_g17_technology_release(
+        content,
+        table_name="table1d_sup",
+        episode_manifest=episodes,
+        source_url="https://www.federalreserve.gov/Releases/g17/20181214/table1d_sup.htm",
+        source_hash="fed-g17-test",
+    )
+
+    assert len(parsed) == 1
+    observation = parsed.iloc[0]
+    assert observation["episode"] == "semiconductor_inventory_correction_2017_2020"
+    assert observation["family"] == "demand"
+    assert observation["metric"] == "fed_g17_semiconductor_industrial_production"
+    assert observation["value"] == 168.3
+    assert observation["reference_period"] == pd.Timestamp("2018-11-30")
+    assert observation["period_end"] == pd.Timestamp("2018-12-14")
+    assert observation["available_date"] == pd.Timestamp("2018-12-14")
+    assert observation["vintage_status"] == "archived_release"
+
+
+def test_fed_g17_pdf_parser_uses_release_snapshot_without_backdating(monkeypatch) -> None:
+    page_texts = [
+        """INDUSTRIAL PRODUCTION: INDUSTRY GROUPS
+        Semiconductors and related
+        electronic components 3672-9 3.48 100 110 120 130 140 150 90 91 92 93 94 95
+        """,
+        """CAPACITY UTILIZATION: MANUFACTURING, MINING, AND UTILITIES
+        Semiconductors and related
+        electronic components 3672-9 4.17 70 71 72 73 74 75 76 77 78 79
+        """,
+        """INDUSTRIAL CAPACITY: MANUFACTURING, MINING, AND UTILITIES
+        Semiconductors and related
+        electronic components 3672-9 20 21 22 23 24 200 201 202 203 204 205
+        """,
+    ]
+
+    class Page:
+        def __init__(self, text: str) -> None:
+            self.text = text
+
+        def extract_text(self) -> str:
+            return self.text
+
+    class Reader:
+        pages = [Page(text) for text in page_texts]
+
+    monkeypatch.setattr("trade_bot.research.capital_cycle_sources.PdfReader", lambda _: Reader())
+    episodes = pd.DataFrame(
+        [
+            {
+                "episode": "dotcom_technology_hardware_1997_2004",
+                "episode_family": "technology_hardware",
+                "start_date": "1997-12-01",
+                "end_date": "2004-12-31",
+            }
+        ]
+    )
+
+    parsed = parse_fed_g17_technology_pdf(
+        b"synthetic pdf",
+        release_date=pd.Timestamp("2000-10-17"),
+        episode_manifest=episodes,
+        source_url="https://fraser.stlouisfed.org/g17_20001017.pdf",
+        source_hash="fraser-test",
+    )
+
+    assert dict(zip(parsed["family"], parsed["value"], strict=True)) == {
+        "demand": 150.0,
+        "pricing_utilization": 79.0,
+        "capacity": 205.0,
+    }
+    assert parsed["reference_period"].eq(pd.Timestamp("2000-09-30")).all()
+    assert parsed["period_end"].eq(pd.Timestamp("2000-10-17")).all()
+    assert parsed["available_date"].eq(pd.Timestamp("2000-10-17")).all()
 
 
 def test_fed_sloos_html_chartdata_preserves_mortgage_categories() -> None:

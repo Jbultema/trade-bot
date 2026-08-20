@@ -331,3 +331,35 @@ Decision: do not tune or promote the general tool on the current sample, and do 
 the preregistered housing configuration as an early-warning allocation signal. Preserve
 the lower months-supply threshold as a research hypothesis only. Economic forecasting,
 equity timing, strategy utility, and allocation authority all remain locked at zero.
+
+### Technology-cycle acquisition and falsification: 2026-08-20
+
+The technology-priority pass archives 297 quarterly Federal Reserve G.17 table/PDF
+artifacts with zero failures. Pre-October 2001 releases come from official FRASER scans;
+later releases use the Board's archived HTML tables. Every row enters the panel on its
+release date, retains the latest reference month separately, and does not backdate the
+older history printed in a release. The combined governed panel now contains 1,734
+eligible point-in-time observations and mean six-family coverage rises to 34.9%.
+
+Each of four technology episodes has approximately 49% mean coverage and complete
+quarterly histories for three direct families: semiconductor production, industrial
+capacity, and capacity utilization. The dot-com hardware episode has 26 observations per
+family from January 1998 through October 2004; the 2012-2016 expansion control has 20;
+the pre-pandemic 2017-2020 correction has 13; and the 2021-2024 shortage unwind has 16.
+The dot-com hardware lane shares the existing dot-com/telecom statistical cluster and is
+not counted as another independent crisis.
+
+The preregistered two-component rule identifies dot-com on 2002-03-01 and the shortage
+unwind on 2023-05-01. It remains silent in the 2012-2016 same-family expansion control,
+but also remains silent in the milder 2018 inventory correction. A bounded 16-cell
+post-hoc sensitivity audit varies the output drawdown from 5% to 12.5% and utilization
+drawdown from 4% to 10%, holding two-release persistence fixed. Every configuration
+preserves the negative control, but none identifies 2018; all identify only the same two
+large breaks. Lowering these thresholds therefore does not repair the miss and should not
+be presented as successful tuning.
+
+Decision: the three-family technology subsystem is now testable and behaves as a detector
+of large realized semiconductor contractions, not a general detector of every inventory
+correction and not yet an early-warning allocation tool. The next independent evidence
+needed is issuer financing/monetization/commitment data for technology and an oil-shock
+lane built from archived EIA vintages. Allocation authority remains zero.

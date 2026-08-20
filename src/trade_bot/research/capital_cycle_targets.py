@@ -38,6 +38,10 @@ TARGET_COMPONENT_METRIC_ALIASES: Final[dict[str, tuple[str, ...]]] = {
     "cloud_capex_contraction": ("cloud_issuer_aggregate_capex",),
     "cloud_monetization_deterioration": ("cloud_monetization_efficiency",),
     "cloud_commitment_overhang_deterioration": ("cloud_commitment_burden_ratio",),
+    "semiconductor_output_drawdown": ("fed_g17_semiconductor_industrial_production",),
+    "semiconductor_utilization_drawdown": (
+        "fed_g17_semiconductor_capacity_utilization",
+    ),
 }
 
 
@@ -48,6 +52,7 @@ class CapitalCycleTargetRun:
     origin_targets: pd.DataFrame
     readiness: pd.DataFrame
     threshold_sensitivity: pd.DataFrame
+    technology_threshold_sensitivity: pd.DataFrame
     output_paths: dict[str, Path]
 
 
@@ -68,12 +73,14 @@ def build_objective_economic_targets(
     targets = _build_origin_targets(episodes, events)
     readiness = _build_target_readiness(episodes, components, events, spec)
     threshold_sensitivity = build_housing_threshold_sensitivity(components, episodes)
+    technology_threshold_sensitivity = build_technology_threshold_sensitivity(components)
     frames = {
         "component_panel": components,
         "event_manifest": events,
         "origin_targets": targets,
         "readiness": readiness,
         "threshold_sensitivity": threshold_sensitivity,
+        "technology_threshold_sensitivity": technology_threshold_sensitivity,
     }
     destination = Path(output_dir)
     destination.mkdir(parents=True, exist_ok=True)
@@ -140,6 +147,53 @@ def build_housing_threshold_sensitivity(
                     selected["housing_starts_drawdown"] == -0.20
                     and selected["months_supply_increase"] == 0.35
                     and selected["mortgage_credit_tightening"] == 0.20
+                ),
+                "analysis_role": "post_hoc_exploratory_sensitivity_only",
+                "allocation_authority": 0.0,
+            }
+        )
+    return pd.DataFrame(rows)
+
+
+def build_technology_threshold_sensitivity(component_panel: pd.DataFrame) -> pd.DataFrame:
+    """Audit bounded post-hoc technology thresholds against one same-family control."""
+
+    break_episodes = (
+        "dotcom_technology_hardware_1997_2004",
+        "semiconductor_inventory_correction_2017_2020",
+        "semiconductor_shortage_unwind_2021_2024",
+    )
+    control_episode = "semiconductor_expansion_2012_2016"
+    required_episodes = {*break_episodes, control_episode}
+    if component_panel.empty or not required_episodes.issubset(
+        set(component_panel.get("episode", pd.Series(dtype=str)).astype(str))
+    ):
+        return pd.DataFrame()
+    thresholds = {
+        "semiconductor_output_drawdown": (-0.05, -0.075, -0.10, -0.125),
+        "semiconductor_utilization_drawdown": (-0.04, -0.06, -0.08, -0.10),
+    }
+    rows: list[dict[str, object]] = []
+    for combination in product(*thresholds.values()):
+        selected = dict(zip(thresholds, combination, strict=True))
+        dates = {
+            episode: _sensitivity_event_date(component_panel, episode, selected)
+            for episode in required_episodes
+        }
+        detected = sum(pd.notna(dates[episode]) for episode in break_episodes)
+        rows.append(
+            {
+                **selected,
+                "dotcom_break_event_date": dates[break_episodes[0]],
+                "inventory_correction_event_date": dates[break_episodes[1]],
+                "shortage_unwind_event_date": dates[break_episodes[2]],
+                "negative_control_event_date": dates[control_episode],
+                "breaks_detected": detected,
+                "break_detection_rate": detected / len(break_episodes),
+                "negative_control_passed": pd.isna(dates[control_episode]),
+                "preregistered_configuration": (
+                    selected["semiconductor_output_drawdown"] == -0.10
+                    and selected["semiconductor_utilization_drawdown"] == -0.08
                 ),
                 "analysis_role": "post_hoc_exploratory_sensitivity_only",
                 "allocation_authority": 0.0,

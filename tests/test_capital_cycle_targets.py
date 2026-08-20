@@ -5,6 +5,7 @@ import pandas as pd
 from trade_bot.research.capital_cycle_targets import (
     build_housing_threshold_sensitivity,
     build_objective_economic_targets,
+    build_technology_threshold_sensitivity,
 )
 
 
@@ -181,3 +182,40 @@ def test_housing_sensitivity_is_bounded_exploratory_and_has_no_authority() -> No
         & sensitivity["months_supply_increase"].eq(0.10)
     ].iloc[0]
     assert early["break_event_date"] == pd.Timestamp("2006-11-01")
+
+
+def test_technology_sensitivity_is_bounded_and_preserves_control() -> None:
+    rows = []
+    episodes = (
+        "dotcom_technology_hardware_1997_2004",
+        "semiconductor_inventory_correction_2017_2020",
+        "semiconductor_shortage_unwind_2021_2024",
+        "semiconductor_expansion_2012_2016",
+    )
+    for episode in episodes:
+        is_control = episode == "semiconductor_expansion_2012_2016"
+        for origin in ("2020-01-01", "2020-04-01"):
+            for component, value in (
+                ("semiconductor_output_drawdown", 0.01 if is_control else -0.11),
+                ("semiconductor_utilization_drawdown", 0.01 if is_control else -0.09),
+            ):
+                rows.append(
+                    {
+                        "episode": episode,
+                        "origin_date": origin,
+                        "target_component": component,
+                        "direction": "lower_is_rollover",
+                        "persistence_periods": 2,
+                        "evidence_updated_at_origin": True,
+                        "transformed_value": value,
+                    }
+                )
+
+    sensitivity = build_technology_threshold_sensitivity(pd.DataFrame(rows))
+
+    assert len(sensitivity) == 16
+    assert sensitivity["negative_control_passed"].all()
+    assert sensitivity["allocation_authority"].eq(0.0).all()
+    assert sensitivity["preregistered_configuration"].sum() == 1
+    preregistered = sensitivity[sensitivity["preregistered_configuration"]].iloc[0]
+    assert preregistered["breaks_detected"] == 3
