@@ -1,0 +1,6 @@
+{
+  "file_count": 13,
+  "passed": true,
+  "result": "two_empty_builds_and_retained_authored_outputs_byte_identical",
+  "scope": "all deterministic outputs authored by build_union_v2.py"
+}

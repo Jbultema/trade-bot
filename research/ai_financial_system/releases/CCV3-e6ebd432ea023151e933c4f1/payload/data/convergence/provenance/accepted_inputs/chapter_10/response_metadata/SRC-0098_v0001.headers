@@ -1,0 +1,15 @@
+HTTP/2 200 
+vary: Accept-Encoding
+strict-transport-security: max-age=63072000; includeSubDomains
+cache-control: no-cache,must-revalidate,max-age=0,no-store,private
+content-type: application/pdf; charset=UTF-8
+content-disposition: inline; filename="U-21990_12-18-2025%20-%20Finalized.pdf"
+x-content-type-options: nosniff
+content-length: 850436
+date: Sun, 26 Jul 2026 19:13:53 GMT
+set-cookie: CookieConsentPolicy=0:1; path=/; expires=Mon, 26-Jul-2027 19:13:53 GMT; Max-Age=31536000; secure
+set-cookie: LSKey-c$CookieConsentPolicy=0:1; path=/; expires=Mon, 26-Jul-2027 19:13:53 GMT; Max-Age=31536000; secure
+set-cookie: BrowserId=JAICsYkmEfGxdRN__ZzEjA; path=/; expires=Mon, 26-Jul-2027 19:13:53 GMT; Max-Age=31536000; secure; SameSite=None
+x-origin-cache-control: no-cache,must-revalidate,max-age=0,no-store,private
+akamai-grn: 0.1163ca17.1785093233.3a09e6a4
+

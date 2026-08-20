@@ -1,0 +1,18 @@
+{
+  "author_lane_core_matches_clean_build": true,
+  "author_lane_matches_clean_build": false,
+  "build_a_tree_sha256": "05dd2bdff3f5f0a1aad63a896a09ca7f6ae47b173276bb5120540041423961f3",
+  "build_b_tree_sha256": "05dd2bdff3f5f0a1aad63a896a09ca7f6ae47b173276bb5120540041423961f3",
+  "build_mode": "sequential_single_process_per_build",
+  "byte_identical": true,
+  "cpu_policy": "no_parallel_jobs",
+  "expected_post_seal_variance": [
+    "validation_results.json"
+  ],
+  "failed_paths": [],
+  "files_compared": 94,
+  "lane": "lane_1_chapter_18_metadata_rebase",
+  "passed": true,
+  "path_sets_identical": true,
+  "status_date": "2026-07-26"
+}

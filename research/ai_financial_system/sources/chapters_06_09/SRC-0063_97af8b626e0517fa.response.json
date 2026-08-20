@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 763447,
+  "content_sha256": "97af8b626e0517fa486581ba5f2afa1b8f3ee8908fb401d0eeb377d582c3124b",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026036936/exhibit21-sx1.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0063_97af8b626e0517fa.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026036936/exhibit21-sx1.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-01-31",
+  "publisher": "Space Exploration Technologies Corp.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0063_97af8b626e0517fa.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:06.720622+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:06.695727+00:00",
+  "selected_response_headers": {
+    "content-length": "51471",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:51:06 GMT",
+    "last-modified": "Mon, 22 Jun 2026 14:42:25 GMT"
+  },
+  "source_id": "SRC-0063",
+  "status": "preserved_complete",
+  "title": "Agreement and Plan of Merger and Reorganization among SpaceX and X.AI Holdings Corp.",
+  "write_state": "new_version_written"
+}

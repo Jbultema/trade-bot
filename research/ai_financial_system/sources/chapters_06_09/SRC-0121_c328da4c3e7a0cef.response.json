@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1701511,
+  "content_sha256": "c328da4c3e7a0cefe1ff4f911671d82bc7a432351bd8d7d4415fa18db64e732b",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000019/mrvl-20260502.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0121_c328da4c3e7a0cef.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1835632/000183563226000019/mrvl-20260502.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-28",
+  "publisher": "Marvell Technology Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0121_c328da4c3e7a0cef.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:52:54.485673+00:00",
+  "retrieval_started_utc": "2026-07-26T17:52:54.442729+00:00",
+  "selected_response_headers": {
+    "content-length": "141515",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:52:54 GMT",
+    "last-modified": "Thu, 28 May 2026 20:10:10 GMT"
+  },
+  "source_id": "SRC-0121",
+  "status": "preserved_complete",
+  "title": "Marvell Technology Form 10-Q for quarter ended May 2 2026",
+  "write_state": "new_version_written"
+}

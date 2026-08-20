@@ -69,6 +69,7 @@ def test_approach_catalog_includes_baselines_and_experiment_manifests(tmp_path: 
                 "cagr": 0.1,
                 "max_drawdown": -0.2,
                 "calmar": 0.6,
+                "oos_evidence_status": "verified_sealed_holdout",
             }
         ]
     ).to_csv(iteration_dir / "scorecard.csv", index=False)

@@ -1,0 +1,343 @@
+{
+  "chapter": "CH16",
+  "files": [
+    {
+      "bytes": 10340,
+      "path": "applied_exact_patch_audit.csv",
+      "rows": 46,
+      "sha256": "d1c3b43adb8fc28aa7efc454a8862c73a7c7ba4da59170e3b13f8f5c8cdf2d3c"
+    },
+    {
+      "bytes": 22711,
+      "lines": 621,
+      "path": "build_rebuilt_v3.py",
+      "sha256": "af0525e9553986d8e6351b3e08b6649167ffaf544d998e2a669c82f37cd08ad9"
+    },
+    {
+      "bytes": 769,
+      "path": "candidate_universe_completeness_audit.csv",
+      "rows": 7,
+      "sha256": "9d6c7101bc930e50b320044e378cbec1ea6c67e6d480341a1135661b45ae842b"
+    },
+    {
+      "bytes": 4835,
+      "path": "candidate_universe_source_freeze.csv",
+      "rows": 17,
+      "sha256": "27dcd0fe2b4d71ab1675d6962e9f042ae6e9e8101a8ac09b5ab2d58178531f74"
+    },
+    {
+      "bytes": 6856,
+      "path": "chapter16_counterparty_graph_selection_policy.csv",
+      "rows": 21,
+      "sha256": "6b6c3b21c2e84c9da8310d82ab8c7abfb52d9b29281cf32ffcc881bb655ea250"
+    },
+    {
+      "bytes": 370038,
+      "path": "chapter16_relationship_candidate_universe.csv",
+      "rows": 618,
+      "sha256": "f28d9b857c7ec53d1e694f8c1044bc3862ee79fcff0a210914bbc3e0cf8e93d9"
+    },
+    {
+      "bytes": 1312,
+      "path": "commensurate_concentration_metrics.csv",
+      "rows": 3,
+      "sha256": "6076a902f44f8bb5725359df59b4f09eb225ebefd371799d90b2c754409ba930"
+    },
+    {
+      "bytes": 2256,
+      "path": "contradictions.csv",
+      "rows": 7,
+      "sha256": "759a831d8b5941d7ccf19fe46f99cdbc24cd9a7ce43fffb23d12d2ff550a1d03"
+    },
+    {
+      "bytes": 6019,
+      "path": "correction_map.csv",
+      "rows": 12,
+      "sha256": "575694792cca4ab96a6ab3e73b1906c8545fda235a67334a2ec4c3c5c0d5f6db"
+    },
+    {
+      "bytes": 4488,
+      "path": "counterparty_role_matrix.csv",
+      "rows": 11,
+      "sha256": "272c055e5b2ce04fdbb36da825588cdbee674a747e88ae6429d759f79d6b06dd"
+    },
+    {
+      "bytes": 1718,
+      "path": "customer_revenue_concentration.csv",
+      "rows": 5,
+      "sha256": "dc6783ef251f7dbc9f915a14ddffafc46cf1d8d64be4156943d4f1cf632a8c33"
+    },
+    {
+      "bytes": 457,
+      "lines": 11,
+      "path": "deterministic_rebuild_results.json",
+      "sha256": "ba3a5b72ab60e724ce2fb8a53007d9fc69b6694fe65d8eb1f7a3b1207c8d75cc"
+    },
+    {
+      "bytes": 34995,
+      "path": "entity_centrality_snapshot.csv",
+      "rows": 81,
+      "sha256": "49dfa8234e9e336bf441fee92ba2a466bae7cff0c010b0be184457ca105fda6f"
+    },
+    {
+      "bytes": 3908,
+      "path": "exact_row_patch_audit.csv",
+      "rows": 22,
+      "sha256": "f9f849827b5f26c31b0121fe08ef7763fe990e3890b99987a10e33e4633d24fd"
+    },
+    {
+      "bytes": 2350,
+      "path": "falsifiers.csv",
+      "rows": 10,
+      "sha256": "af31d86851f9bf7c370ad0e68a13aeece8ff0bfc7a4d6ec01ecf0b2f6bf0b0c2"
+    },
+    {
+      "bytes": 2877,
+      "path": "field_coverage_audit.csv",
+      "rows": 19,
+      "sha256": "6d45b27120cc3b888ef564a94c2c5a4782a44025ea6e6af45abc233ce0768477"
+    },
+    {
+      "bytes": 308,
+      "path": "free_text_relationship_extraction_status.csv",
+      "rows": 1,
+      "sha256": "254499748c37bbe7ef1be32dff5bb73b8bb86391b7ac5f2c1af53d24db60015c"
+    },
+    {
+      "bytes": 356,
+      "lines": 9,
+      "path": "generic_validation_results.json",
+      "sha256": "f2266944a66da336903a2f902ed889ffffa63bf3eb02a189d4abbd00a5037977"
+    },
+    {
+      "bytes": 180653,
+      "path": "graph_edge_selection_audit.csv",
+      "rows": 618,
+      "sha256": "632c09453ae504dfa06d583cc8d8bfc06033e564db82c2e2221b252804276b72"
+    },
+    {
+      "bytes": 13709,
+      "path": "graph_metric_recomputation.csv",
+      "rows": 86,
+      "sha256": "093ed0b92cfa8eb30e0b400f69dcf30bed23c3b8b6f63322cc748e0caff31b69"
+    },
+    {
+      "bytes": 18138,
+      "path": "graph_node_registry.csv",
+      "rows": 43,
+      "sha256": "5fdf6fbd77cc756458a8e3e574c388a5ab9984530c2cc0a4f6c7bdedf29236f4"
+    },
+    {
+      "bytes": 2812,
+      "path": "guarantee_concentration.csv",
+      "rows": 7,
+      "sha256": "6b38f8ee8cadb4c47afcb7c233e40748297d986aa0a596944297fb9d387ebc38"
+    },
+    {
+      "bytes": 407,
+      "path": "input_lineage.csv",
+      "rows": 2,
+      "sha256": "3f3f2484273ca35adc3df8cd62855e32d1ea5e906e8a1109a79d5e2d65f30109"
+    },
+    {
+      "bytes": 433,
+      "lines": 10,
+      "path": "patch_application_results.json",
+      "sha256": "a31ffb41a1899b60065ab46a278dfa5d4723f588266dec361ef58f13d832cebb"
+    },
+    {
+      "bytes": 1302,
+      "path": "patch_semantic_validation.csv",
+      "rows": 12,
+      "sha256": "19f62e1f1a01109de369488934360ae8779e0982d956fa0e06284266bfa1e29d"
+    },
+    {
+      "bytes": 7172,
+      "path": "preserved_artifact_hash_audit.csv",
+      "rows": 38,
+      "sha256": "f565a964b7007db22a384ae381f0744bdb8670541d4a2e73645a40457a538bde"
+    },
+    {
+      "bytes": 881,
+      "path": "preserved_control_audit.csv",
+      "rows": 6,
+      "sha256": "6740fb4e4719095dd2306ed9ec73430b522b1e48f19ec0ebe318ebc961639223"
+    },
+    {
+      "bytes": 3410,
+      "path": "project_centrality_snapshot.csv",
+      "rows": 5,
+      "sha256": "2fca316bf446d391ba7ff9d9586cbbdfd976f67a8ddafe112799db2266ea6bf6"
+    },
+    {
+      "bytes": 6215,
+      "path": "project_party_registry.csv",
+      "rows": 24,
+      "sha256": "dc38db0406b0587f4d9ca3502bb47a25b13f3f70a5dfb1f590e20cff580f34f2"
+    },
+    {
+      "bytes": 4406,
+      "path": "project_role_edges.csv",
+      "rows": 26,
+      "sha256": "2aa04fa67578639473775f7442659f853621048e1b0efbd8806a8f8aaa52a4e3"
+    },
+    {
+      "bytes": 5452,
+      "path": "proposed_chapter16_loader_mapping.csv",
+      "rows": 19,
+      "sha256": "9c054bd08022c76a2bb2e294f6900a32a2f0cc0909859007410b0afa7670d55e"
+    },
+    {
+      "bytes": 7157,
+      "lines": 291,
+      "path": "proposed_chapter16_schema.sql",
+      "sha256": "87febfcfdcb9f8c3449bb8a7e7edb21853e119f8134e188a7438334b407529a2"
+    },
+    {
+      "bytes": 503,
+      "path": "proposed_claims.csv",
+      "rows": 1,
+      "sha256": "1a66dbe9dd7ff7f75f858d2d95a09dffb6a18482dd57e434a68f80cc137438d3"
+    },
+    {
+      "bytes": 260,
+      "path": "proposed_evidence_links.csv",
+      "rows": 1,
+      "sha256": "fa8bbb319711b08ab952a0f8c318b7a1eedaa267d872c69461e7a12277750ee0"
+    },
+    {
+      "bytes": 1100,
+      "path": "proposed_handoffs.csv",
+      "rows": 5,
+      "sha256": "a750153e8a6f36145e8dfb7328eb1b7c073a90df13fc477ce7193476a2c50592"
+    },
+    {
+      "bytes": 1152,
+      "path": "proposed_projects.csv",
+      "rows": 2,
+      "sha256": "c4b3074299d7942fcc98d61d56c1fb8ed997f19ed40f3e064bf31cd9eb066c49"
+    },
+    {
+      "bytes": 2561,
+      "path": "proposed_unknowns.csv",
+      "rows": 10,
+      "sha256": "a8a66e8e3da816ee4bb133fe36cfcf9a9027e575f543b7415ae1c47e8af46d85"
+    },
+    {
+      "bytes": 228910,
+      "path": "record_claim_links.csv",
+      "rows": 1726,
+      "sha256": "1039af1af668b3df94e2f421388c4124bc6701408058f2df4bb4b40430042558"
+    },
+    {
+      "bytes": 1844,
+      "lines": 38,
+      "path": "research_pass.md",
+      "sha256": "1fe0e43d17ef2153758928d55ea3897ebb536033e6e206a3b87338b25bf270bb"
+    },
+    {
+      "bytes": 1493,
+      "path": "semantic_regression_audit.csv",
+      "rows": 19,
+      "sha256": "94b82a3c11685632e12c593bd80ef5fb3c963ded8cc4e6b6c66cdecc7807fb92"
+    },
+    {
+      "bytes": 881,
+      "lines": 22,
+      "path": "semantic_validation_results.json",
+      "sha256": "835efc2224eaaa0d99beff3cf8efc75399afc5beec7f42a638ced4fb8b842294"
+    },
+    {
+      "bytes": 2652,
+      "path": "sensitivity_to_unresolved_identities.csv",
+      "rows": 8,
+      "sha256": "41eb7916df8d92154fbf1971e5d98ed1ceec5c3f8124fc64310a3d23bd9722e9"
+    },
+    {
+      "bytes": 1021,
+      "path": "single_point_failure_parties.csv",
+      "rows": 10,
+      "sha256": "4a9097788690b9403cdc3be7f6909bf97037021f913e331ca68404016ba39964"
+    },
+    {
+      "bytes": 3109,
+      "path": "single_point_failure_register.csv",
+      "rows": 8,
+      "sha256": "d48a01164865b5f872229d61ccf94baac3bc4624af72b49577309d0c9be3c25d"
+    },
+    {
+      "bytes": 1435,
+      "path": "source_queue.csv",
+      "rows": 9,
+      "sha256": "8849698b75de99ddafa86fd8621b1358456b435c28a76fdcec8da668553235fd"
+    },
+    {
+      "bytes": 1948,
+      "path": "supplier_platform_concentration.csv",
+      "rows": 5,
+      "sha256": "b17c48b59d396e44f16f19fc8ea3d5dca384ba1377f592ae2991457c74c22149"
+    },
+    {
+      "bytes": 14352,
+      "path": "transaction_network_edges.csv",
+      "rows": 44,
+      "sha256": "7556daad78ca8896a85b3b81e596620cff2d6c907422fd0f528d04ac2ce15f01"
+    },
+    {
+      "bytes": 5952,
+      "path": "v3_patch_accounting.csv",
+      "rows": 12,
+      "sha256": "7e8c75a292dfd6883428fa7627923af9ded366a775e5776681d82d722e5cdcde"
+    },
+    {
+      "bytes": 21919,
+      "lines": 631,
+      "path": "validate_rebuilt_v3.py",
+      "sha256": "b20a954339d45935927871caabe3411135a04ed70b76671325c24233004c4ae3"
+    },
+    {
+      "bytes": 964,
+      "lines": 17,
+      "path": "validation_report.md",
+      "sha256": "da9992285620db656231bd60a2b25b2856afc58fb18c0f0146147f162163159f"
+    },
+    {
+      "bytes": 759,
+      "lines": 26,
+      "path": "validation_results.json",
+      "sha256": "d81d042e66a4357caf005e5bbff27c3590775bdc55c760744d1bddb1ad3cfe27"
+    },
+    {
+      "bytes": 3972,
+      "lines": 118,
+      "path": "verify_full_rebuilds.py",
+      "sha256": "691f78d95f71332b88c1aea0fe120383fe28b4bf4e32202caeead91713a64560"
+    },
+    {
+      "bytes": 3100,
+      "path": "writing_gate_audit.csv",
+      "rows": 15,
+      "sha256": "d6d5c531c1aab55158182e51a2cc0595eeb993a1bab2c61dc54bf5bd9f8259cc"
+    }
+  ],
+  "lane": "lane_3_chapter_16_rebuilt_v3",
+  "no_canonical_write_attestation": {
+    "canonical_paths_written": [],
+    "source_or_review_lane_modified": false
+  },
+  "physical_output_path_in_manifested_semantics": false,
+  "publication_boundary": {
+    "bounded_documented_subgraph": "repairs_applied_pending_fresh_nonauthor_acceptance",
+    "canonical_database_write": "not_authorized",
+    "comparative_ordering": "blocked",
+    "free_text_completeness": "blocked"
+  },
+  "review_lane": "lane_1_verify_chapter_16_rebuilt_v2",
+  "review_manifest_sha256": "f57583835a0ee132636491a8a7df1dc502938fa14ddd7e2f82717f541980e046",
+  "scope": "bounded documented Chapter 16 subgraph correction packet",
+  "self_hash_policy": "lane_manifest.json excludes its own hash",
+  "source_lane": "lane_2_chapter_16_rebuilt_v2",
+  "source_manifest_sha256": "d3ac562cb943c0085205150b2ac34ad4a181477cef92856ba24b0bdbdaa75f34",
+  "status_date": "2026-07-26",
+  "verdict": "REVIEW_REQUIRED_FRESH_NONAUTHOR_ACCEPTANCE;BLOCK_COMPARATIVE_PUBLICATION_AND_CANONICAL_WRITE"
+}

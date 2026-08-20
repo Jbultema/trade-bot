@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 2740057,
+  "content_sha256": "b265afc7d71cbb4021f5024c2366a7c8e41ffc50b34e2641664350aa468eb468",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926055891/hut-20260331x10q.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0081_b265afc7d71cbb40.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926055891/hut-20260331x10q.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-06",
+  "publisher": "Hut 8 Corp.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0081_b265afc7d71cbb40.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:33.786441+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:33.747210+00:00",
+  "selected_response_headers": {
+    "content-length": "232389",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:33 GMT",
+    "last-modified": "Wed, 06 May 2026 10:46:26 GMT"
+  },
+  "source_id": "SRC-0081",
+  "status": "preserved_complete",
+  "title": "Hut 8 Corp. Form 10-Q for quarter ended March 31 2026",
+  "write_state": "new_version_written"
+}

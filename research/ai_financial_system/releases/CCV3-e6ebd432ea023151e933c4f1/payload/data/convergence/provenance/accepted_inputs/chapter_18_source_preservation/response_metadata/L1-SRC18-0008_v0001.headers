@@ -1,0 +1,14 @@
+HTTP/2 200 
+date: Sun, 26 Jul 2026 18:28:20 GMT
+content-type: application/pdf
+content-length: 261445
+server: cloudflare
+last-modified: Fri, 17 Dec 2021 17:49:17 GMT
+etag: "61bccd9d-3fd45"
+x-frame-options: SAMEORIGIN
+accept-ranges: bytes
+set-cookie: __cf_bm=nR.0sG2PtpWCCXJUb03FgtdrDe7Sc.pSNMoj15.wGRg-1785090499.8724732-1.0.1.1-F9mYEEOpz_7M4rsdyDfk5Id956hJ_nGCFb3u7WaLYWWZOXJBO4pl8IR6JIglr.oJbWlUFr4fQwLbC8x8wATKAFa24F2E1eHHfWOXmEklqOn_HSBnr62Xn1aYDfFwEfo6; HttpOnly; SameSite=None; Secure; Path=/; Domain=ferc.gov; Expires=Sun, 26 Jul 2026 18:58:20 GMT
+cache-control: max-age=14400
+cf-cache-status: MISS
+cf-ray: a21576a83eaf49b2-SEA
+

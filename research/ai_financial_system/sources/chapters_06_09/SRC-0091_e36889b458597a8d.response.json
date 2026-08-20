@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 120841,
+  "content_sha256": "e36889b458597a8dd56582138f98ded7de9ac0d12865fcff31e7fb8b5d76c47a",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.anthropic.com/news/series-h",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0091_e36889b458597a8d.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://www.anthropic.com/news/series-h",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-28",
+  "publisher": "Anthropic PBC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0091_e36889b458597a8d.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:08.677521+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:08.544328+00:00",
+  "selected_response_headers": {
+    "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:51:08 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0091",
+  "status": "preserved_complete",
+  "title": "Anthropic Series H financing and compute expansion announcement",
+  "write_state": "new_version_written"
+}

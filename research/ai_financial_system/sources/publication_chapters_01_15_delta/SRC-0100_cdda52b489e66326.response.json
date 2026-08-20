@@ -1,0 +1,33 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 63328,
+  "content_sha256": "cdda52b489e6632646df2dce63b9372657faf4464fe5c30a5fb611446e3c37c0",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://investor.atmeta.com/investor-news/press-release-details/2025/Meta-Announces-Joint-Venture-with-Funds-Managed-by-Blue-Owl-Capital-to-Develop-Hyperion-Data-Center/",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0100_cdda52b489e66326.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://investor.atmeta.com/investor-news/press-release-details/2025/Meta-Announces-Joint-Venture-with-Funds-Managed-by-Blue-Owl-Capital-to-Develop-Hyperion-Data-Center/",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-10-21",
+  "publisher": "Meta Platforms Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0100_cdda52b489e66326.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:48.395724+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:48.008155+00:00",
+  "selected_response_headers": {
+    "cache-control": "public, max-age=10, stale-if-error=86400, stale-while-revalidate=86400",
+    "content-length": "18991",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Mon, 27 Jul 2026 01:08:48 GMT",
+    "etag": "\"44de515373e795711dab5b3d38026943\"",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0100",
+  "status": "preserved_complete",
+  "title": "Meta announces joint venture with Blue Owl funds to develop Hyperion data center",
+  "write_state": "new_version_written"
+}

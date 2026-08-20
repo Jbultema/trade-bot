@@ -1,0 +1,20 @@
+HTTP/2 200 
+date: Sun, 26 Jul 2026 19:14:05 GMT
+content-type: application/pdf
+content-length: 968588
+last-modified: Tue, 03 Feb 2026 17:02:24 GMT
+accept-ranges: bytes
+cache-control: public, max-age=31536000
+expires: Mon, 26 Jul 2027 19:14:05 GMT
+x-content-type-options: nosniff
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+x-xss-protection: 1; mode=block
+access-control-allow-origin: *
+x-cacheable: YES
+set-cookie: __cf_bm=QOggEpA4Hy9EAzSwlBFB87wMJwpHVEHvYJtX9ciqfgk-1785093245.6401327-1.0.1.1-lzsP.L5squTWwpXtKtwXRR_8hsT9st_Ix_Lb4UVw4O9j9SyXZLCQ7ngPQFVlZdkOX0S2.rYVTsuqNpmOE9o6Xf7n29EZN9jC6RaZUASBHthTwBjgYGSvZg84po1YgsC8; HttpOnly; SameSite=None; Secure; Path=/; Domain=congress.gov; Expires=Sun, 26 Jul 2026 19:44:05 GMT
+content-security-policy: frame-ancestors http://*.house.gov https://*.house.gov http://*.senate.gov https://*.senate.gov http://*.loc.gov https://*.loc.gov http://*.congress.gov https://congress.gov https://*.congress.gov
+age: 1684
+cf-cache-status: HIT
+server: cloudflare
+cf-ray: a215b9b13b32e763-DEN
+

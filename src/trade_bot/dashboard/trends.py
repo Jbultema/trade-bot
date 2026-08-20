@@ -21,6 +21,9 @@ SNAPSHOT_METRIC_COLUMNS = [
     "snapshot_time",
     "market_date",
     "run_id",
+    "strategy_name",
+    "source",
+    "reconstruction_note",
     "risk_score",
     "one_month_risk_off_probability",
     "risk_budget_multiplier",
@@ -38,6 +41,9 @@ SNAPSHOT_COMPONENT_COLUMNS = [
     "snapshot_time",
     "market_date",
     "run_id",
+    "strategy_name",
+    "source",
+    "reconstruction_note",
     "component",
     "component_score",
     "latest_value",
@@ -48,6 +54,9 @@ SNAPSHOT_DRIVER_COLUMNS = [
     "snapshot_time",
     "market_date",
     "run_id",
+    "strategy_name",
+    "source",
+    "reconstruction_note",
     "driver",
     "score",
     "state",
@@ -57,6 +66,9 @@ DRIVER_ROTATION_COLUMNS = [
     "snapshot_time",
     "market_date",
     "run_id",
+    "strategy_name",
+    "source",
+    "reconstruction_note",
     "driver",
     "driver_label",
     "current_activation",
@@ -75,14 +87,16 @@ def load_snapshot_trend_frames(
     limit: int = DEFAULT_TREND_HISTORY_SNAPSHOT_LIMIT,
     *,
     force_snapshot_reconstruction: bool = False,
+    strategy_name: str | None = None,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
-    return _load_snapshot_trend_frames(
+    frames = _load_snapshot_trend_frames(
         store_path_string,
         artifact_dir_string,
         job_log_dir_string,
         limit=limit,
         force_snapshot_reconstruction=force_snapshot_reconstruction,
     )
+    return _filter_strategy_history(frames, strategy_name)
 
 
 def _load_snapshot_trend_frames(
@@ -94,9 +108,6 @@ def _load_snapshot_trend_frames(
     force_snapshot_reconstruction: bool,
 ) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
     stored_frames = _load_materialized_operating_history(store_path_string)
-    if _has_materialized_operating_history(stored_frames) and not force_snapshot_reconstruction:
-        return _clean_combined_snapshot_trend_frames(stored_frames)
-
     try:
         store = RunStore(
             store_path_string,
@@ -109,6 +120,14 @@ def _load_snapshot_trend_frames(
         return _clean_combined_snapshot_trend_frames(stored_frames)
     if snapshots.empty or "run_id" not in snapshots:
         return _clean_combined_snapshot_trend_frames(stored_frames)
+    if "market_date" in snapshots:
+        retained_dates = set(
+            pd.to_datetime(snapshots["market_date"], errors="coerce").dropna().dt.date
+        )
+        if retained_dates:
+            stored_frames = tuple(
+                _filter_frame_to_market_dates(frame, retained_dates) for frame in stored_frames
+            )
 
     metric_rows: list[dict[str, object]] = []
     component_rows: list[dict[str, object]] = []
@@ -132,6 +151,10 @@ def _load_snapshot_trend_frames(
             created_at_utc=str(getattr(manifest, "created_at_utc", "")),
             run_id=str(getattr(manifest, "run_id", run_id)),
         )
+        decision = _first_row(
+            getattr(getattr(run, "trade_decision", None), "summary", pd.DataFrame())
+        )
+        base["strategy_name"] = str(decision.get("strategy", "") or "")
         metric_rows.append({**base, **_snapshot_metric_fields(run)})
         component_rows.extend(_snapshot_component_rows(run, base))
         scenario_driver_rows.extend(_snapshot_scenario_driver_rows(run, base))
@@ -144,6 +167,34 @@ def _load_snapshot_trend_frames(
         pd.DataFrame(driver_rotation_rows),
     )
     return _clean_combined_snapshot_trend_frames((*stored_frames, *snapshot_frames))
+
+
+def _filter_frame_to_market_dates(
+    frame: pd.DataFrame,
+    retained_dates: set[object],
+) -> pd.DataFrame:
+    """Keep compact history aligned to the currently retained snapshot population."""
+    if frame.empty or "market_date" not in frame:
+        return frame
+    market_dates = pd.to_datetime(frame["market_date"], errors="coerce").dt.date
+    return frame.loc[market_dates.isin(retained_dates)].reset_index(drop=True)
+
+
+def _filter_strategy_history(
+    frames: tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame],
+    strategy_name: str | None,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    requested = str(strategy_name or "").strip()
+    if not requested:
+        return frames
+    filtered: list[pd.DataFrame] = []
+    for frame in frames:
+        if frame.empty or "strategy_name" not in frame:
+            filtered.append(frame)
+            continue
+        names = frame["strategy_name"].fillna("").astype(str)
+        filtered.append(frame.loc[names.eq(requested)].reset_index(drop=True))
+    return tuple(filtered)  # type: ignore[return-value]
 
 
 def _load_materialized_operating_history(
@@ -265,6 +316,7 @@ def compact_metric_line_figure(
     yaxis_title: str = "Value",
     percent: bool = False,
     height: int = 260,
+    break_gap_days: int | None = None,
 ) -> go.Figure:
     if frame.empty or "history_time" not in frame:
         return go.Figure()
@@ -283,10 +335,25 @@ def compact_metric_line_figure(
         values = pd.to_numeric(plot_frame[column], errors="coerce")
         if values.dropna().empty:
             continue
+        x_values: list[object] = []
+        y_values: list[float | None] = []
+        previous_time: pd.Timestamp | None = None
+        for history_time, value in zip(plot_frame["history_time"], values, strict=True):
+            timestamp = pd.Timestamp(history_time)
+            if (
+                break_gap_days is not None
+                and previous_time is not None
+                and timestamp - previous_time > pd.Timedelta(days=break_gap_days)
+            ):
+                x_values.append(timestamp)
+                y_values.append(None)
+            x_values.append(timestamp)
+            y_values.append(None if pd.isna(value) else float(value))
+            previous_time = timestamp
         figure.add_trace(
             go.Scatter(
-                x=plot_frame["history_time"],
-                y=values,
+                x=x_values,
+                y=y_values,
                 mode="lines+markers",
                 name=labels.get(column, column.replace("_", " ").title()),
                 hovertemplate=(
@@ -464,6 +531,8 @@ def _snapshot_base_fields(
         "snapshot_time": snapshot_time,
         "market_date": market_timestamp.date() if pd.notna(market_timestamp) else pd.NaT,
         "run_id": run_id,
+        "source": "saved_point_in_time_snapshot",
+        "reconstruction_note": "Contemporaneously saved or governed historical snapshot.",
     }
 
 
@@ -590,7 +659,15 @@ def _clean_snapshot_metrics(frame: pd.DataFrame) -> pd.DataFrame:
     output["snapshot_time"] = pd.to_datetime(output["snapshot_time"], errors="coerce", utc=True)
     output["market_date"] = pd.to_datetime(output["market_date"], errors="coerce").dt.date
     for column in SNAPSHOT_METRIC_COLUMNS:
-        if column in {"history_time", "snapshot_time", "market_date", "run_id"}:
+        if column in {
+            "history_time",
+            "snapshot_time",
+            "market_date",
+            "run_id",
+            "strategy_name",
+            "source",
+            "reconstruction_note",
+        }:
             continue
         if column in output:
             output[column] = pd.to_numeric(output[column], errors="coerce")

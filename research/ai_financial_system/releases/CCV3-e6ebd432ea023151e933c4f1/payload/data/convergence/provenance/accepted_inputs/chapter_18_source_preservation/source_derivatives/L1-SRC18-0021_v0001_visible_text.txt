@@ -1,0 +1,83 @@
+EX-99.1
+2
+pressrelease.htm
+PRESS RELEASE
+Exhibit
+NVIDIA Updates Financial Guidance for Fourth Quarter of Fiscal Year 2019
+•
+Fourth quarter revenue expected to be $2.20 billion versus previous guidance of $2.70 billion
+•
+Gaming and Datacenter revenue below company’s expectations
+•
+Management to discuss reported financial results on Feb. 14 earnings call
+SANTA CLARA, Calif.-Jan. 28, 2019-
+NVIDIA (NASDAQ: NVDA) today updated its financial guidance for the fourth quarter of fiscal year 2019, reflecting weaker than forecasted sales of its Gaming and Datacenter platforms.
+In Gaming, NVIDIA’s previous fourth-quarter guidance had embedded a sequential decline due to excess mid-range channel inventory following the crypto-currency boom. The reduction in that inventory and its impact on the business have proceeded largely inline with management’s expectations. However, deteriorating macroeconomic conditions, particularly in China, impacted consumer demand for NVIDIA gaming GPUs. In addition, sales of certain high-end GPUs using NVIDIA’s new Turing
+TM
+architecture were lower than expected. These products deliver a revolutionary leap in performance and innovation with real-time ray tracing and AI, but some customers may have delayed their purchase while waiting for lower price points and further demonstrations of RTX technology in actual games.
+In Datacenter, revenue also came in short of expectations. A number of deals in the company’s forecast did not close in the last month of the quarter as customers shifted to a more cautious approach. Despite these near-term headwinds, NVIDIA has a large and expanding addressable market opportunity in AI and high performance computing, and the company believes its competitive position is intact.
+“Q4 was an extraordinary, unusually turbulent, and disappointing quarter,” said Jensen Huang, founder and CEO of NVIDIA. “Looking forward, we are confident in our strategies and growth drivers.
+“The foundation of our business is strong and more evident than ever - the accelerated computing model NVIDIA pioneered is the best path forward to serve the world’s insatiable computing needs. The markets we are creating - gaming, design, HPC, AI and autonomous vehicles - are important, growing and will be very large. We have excellent strategic positions in all of them,” he said.
+NVIDIA expects its GAAP and non-GAAP gross margin to be impacted by approximately $120 million in charges for excess DRAM and other components associated with the updated revenue guidance and current market conditions.
+The company will provide Q4 fiscal 2019 financial results and Q1 fiscal 2020 guidance on its earnings call scheduled for Feb. 14.
+Previous Q4 Fiscal 2019 Guidance
+Updated Q4 Fiscal 2019 Guidance
+Revenue
+$2.70 billion, plus or minus 2%
+$2.20 billion, plus or minus 2%
+Gross margin - GAAP
+Gross margin - non-GAAP
+62.3%, plus or minus 50 bps
+62.5%, plus or minus 50 bps
+55.0%, plus or minus 100 bps
+56.0%, plus or minus 100 bps
+Operating expenses - GAAP
+Operating expenses - non-GAAP
+$915 million
+$755 million
+$915 million
+$755 million
+GAAP and non-GAAP other income and expense
+$21 million
+$25 million
+GAAP and non-GAAP tax rate, excluding discrete items
+8%, plus or minus 1%
+6%, plus or minus 1%
+This update is an estimate, based on information available to management as of the date of this release, and is subject to further changes upon completion of the company’s standard quarter and year-end closing procedures. This update does not present all necessary information for an understanding of NVIDIA’s financial condition as of Jan. 27, 2019, or its results of operations for the quarter and fiscal year ended Jan. 27, 2019. As NVIDIA completes its year-end financials close process and finalizes its financial statements for the quarter and year ended Jan. 27, 2019, it will be required to make significant judgments in a number of areas. It is possible that NVIDIA may identify items that require it to make adjustments to the financial information set forth above and those changes could be material. NVIDIA does not intend to update such financial information prior to release of its fourth quarter and year-end financial statement information, which is currently scheduled for Feb. 14, 2019.
+Shareholder Letter
+A shareholder letter from NVIDIA founder and CEO Jensen Huang is available
+here
+.
+Conference Call and Webcast Information
+NVIDIA will conduct a conference call with analysts and investors to discuss its fourth quarter and fiscal year 2019 financial results and financial prospects on Feb. 14, 2019, at 2:30 p.m. Pacific time (5:30 p.m. Eastern time).
+A live webcast (listen-only mode) of the conference call will be accessible at NVIDIA’s investor relations website, http://investor.nvidia.com.
+Non-GAAP Measures
+In addition to U.S. GAAP financial measures, this press release includes preliminary estimates of non-GAAP measures of certain components of financial performance. These preliminary estimates of non-GAAP measures include non-GAAP gross margin, operating expenses, other income (expense) and income tax expense.
+These non-GAAP financial measures exclude stock-based compensation expense, legal settlement costs, acquisition-related and other costs, gains or losses from non-affiliated investments, interest expense related to amortization of debt discount and the associated tax impact of these items, where applicable.
+A preliminary updated reconciliation of GAAP to non-GAAP gross margin and GAAP to non-GAAP operating expenses is as follows:
+GAAP gross margin
+55.0%
+Stock-based compensation expense, legal settlements and other costs
+1.0%
+Non-GAAP gross margin
+56.0%
+(In millions)
+GAAP operating expenses
+$915
+Stock-based compensation expense, acquisition-related costs and other costs
+($160)
+Non-GAAP operating expenses
+$755
+NVIDIA believes the presentation of its non-GAAP financial measures enhances the user’s overall understanding of the company’s financial performance. The presentation of the company’s non-GAAP financial measures is not meant to be considered in isolation or as a substitute for the company’s financial results prepared in accordance with GAAP, and the company’s non-GAAP measures may be different from non-GAAP measures used by other companies.
+Keep Current on NVIDIA
+Subscribe to the NVIDIA blog, follow us on Facebook, Twitter, LinkedIn and Instagram, and view NVIDIA videos on YouTube and images on Flickr.
+About NVIDIA
+NVIDIA’s (NASDAQ: NVDA) invention of the GPU in 1999 sparked the growth of the PC gaming market, redefined modern computer graphics and revolutionized parallel computing. More recently, GPU deep learning ignited modern AI - the next era of computing - with the GPU acting as the brain of computers, robots and self-driving cars that can perceive and understand the world. More information at http://nvidianews.nvidia.com/.
+# # #
+For further information, contact:
+Simona Jankowski Robert Sherbin
+Investor Relations Corporate Communications
+NVIDIA Corporation NVIDIA Corporation
+sjankowski@nvidia.com rsherbin@nvidia.com
+Certain statements in this press release including, but not limited to, statements as to: NVIDIA’s revised financial guidance for the fourth quarter of fiscal 2019; the demand for, and benefits and performance of, NVIDIA products; NVIDIA having a large and expanding addressable market opportunity in artificial intelligence and high performance computing; NVIDIA’s competitive position being intact; NVIDIA’s confidence in our strategies and growth drivers; the foundation of our business being strong; the accelerated computing model being the best path forward to serve the world’s computing needs; the size of the markets we are creating and that they are important and growing; and NVIDIA’s excellent strategic position are forward-looking statements that are subject to risks and uncertainties that could cause results to be materially different than expectations. Important factors that could cause actual results to differ materially include: global economic conditions; our reliance on third parties to manufacture, assemble, package and test our products; the impact of technological development and competition; development of new products and technologies or enhancements to our existing product and technologies; market acceptance of our products or our partners’ products; design, manufacturing or software defects; changes in consumer preferences or demands; changes in industry standards and interfaces; unexpected loss of performance of our products or technologies when integrated into systems; as well as other factors detailed from time to time in the most recent reports NVIDIA files with the Securities and Exchange Commission, or SEC, including, but not limited to, its annual report on Form 10-K and quarterly reports on Form 10-Q. Copies of reports filed with the SEC are posted on the company’s website and are available from NVIDIA without charge. These forward-looking statements are not guarantees of future performance and speak only as of the date hereof, and, except as required by law, NVIDIA disclaims any obligation to update these forward-looking statements to reflect future events or circumstances.
+© 2019 NVIDIA Corporation. All rights reserved. NVIDIA, the NVIDIA logo and NVIDIA Turing are trademarks and/or registered trademarks of NVIDIA Corporation in the U.S. and other countries.

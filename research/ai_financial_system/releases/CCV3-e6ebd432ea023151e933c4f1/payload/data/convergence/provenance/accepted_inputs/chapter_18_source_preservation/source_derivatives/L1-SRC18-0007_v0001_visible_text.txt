@@ -1,0 +1,1335 @@
+[[PDF_PAGE_0001]]
+IN THE UNITED STATES DISTRICT
+FOR THE DISTRICT OF COLORADO
+Civil Action No.
+Securities and Exchange Commission,
+P l a i n t i f f ,
+v .
+Qwest Communications International Inc.,
+Defendant.
+_____________________________________________________________________________
+COMPLAINT
+_____________________________________________________________________________
+Plaintiff Securities and Exchange Commissi on (“Commission”) for its complaint alleges
+as follows:
+I. SUMMARY
+1) From at least the second quarter ended June 30, 1999, and continuing through the first
+quarter ended March 31, 2002, Qwest Communications International Inc. (“Qwest”)
+engaged in a massive financial fraud designed to mislead the investing public about its
+revenue and growth. In annual, quarterly, and current reports, in registration statements
+that incorporated Qwest's financial statements, and in other public statements, including
+earnings releases and investor calls, Qwest made numerous false and misleading
+statements about its financial condition.
+2) Qwest fraudulently recognized approximately $3.8 billion of spurious revenue, and
+fraudulently excluded $231 million in expenses. The fraudulent scheme, approved and
+directed by Qwest’s senior management and implemented by numerous other managers
+and employees, was orchestrated to meet the company's outrageously optimistic revenue
+
+[[PDF_PAGE_0002]]
+projections, artificially inflate Qwest’s stock price, and falsely present Qwest as a “new
+technology” company with enormous earnings growth and potential.
+3) In addition, Qwest's lack of internal controls and inadequate books and records resulted
+in numerous other accounting errors during the same period, including a $56 million
+overstatement in operator services revenue, $200 million in improper capitalized costs
+associated with its design service centers, and a total of $850 million understatement of
+expenses in accounting for its merger with US West, Inc. and in certain restructuring
+charges.
+4) Qwest also made false or misleading statements about Qwest’s network, strategic
+relationships, and executive compensation.
+5) Further, Qwest failed to disclose a related party transaction and sales of unregistered
+securities.
+6) Qwest stock, which had risen to a post-merger high of $55 per share in July 2000,
+plummeted to a low of $1.11 per share in August 2002 as the company announced that it
+intended to restate revenues and the fraudulent scheme began to unravel. Qwest’s market
+capitalization plunged from a high of $91 billion to a low of $1.9 billion, a 98 percent
+decline, for the same time period.
+7) As a result of this conduct, Qwest, directly and indirectly, has engaged in, and unless
+restrained and enjoined by this Court, will in the future engage in, transactions, acts,
+practices, and courses of business that violate Sections 5(a), 5(c), and 17(a) of the
+Securities Act of 1933 ("Securities Act"), 15 U.S.C. §§ 77e(a), 77e(c), and 77q(a), and
+Sections 10(b), 13(a), 13(b)(2), and 14(a) of the Securities Exchange Act of 1934
+
+[[PDF_PAGE_0003]]
+("Exchange Act"), 15 U.S.C. §§ 78j(b), 78m(a), 78m(b)(2), and 78n(a), and Rules 10b-5,
+12b-20, 13a-1, 13a-11, 13a-13, 13b2-1, 14a-3, and 14a-9 thereunder, 17 C.F.R. §§
+240.10b-5, 240.12b-20, 240.13a-1, 240.13a-11, 240.13a-13, 240.13b2-1, 240.14a-3, and
+240.14a-9.
+8) The Commission brings this action pursuant to the authority conferred upon it by Section
+20(b) of the Securities Act, 15 U.S.C. § 77t(b), and Section 21(d) and (e) of the Exchange
+Act, 15 U.S.C. § 78u(d) and (e), for an order permanently restraining and enjoining
+Qwest and granting other equitable relief.
+9) The Commission seeks an order requiring Qwest to pay civil penalties pursuant to
+Section 20(d) of the Securities Act, 15 U.S.C. § 77t(d), and Section 21(d)(3) of the
+Exchange Act, 15 U.S.C. § 78u(d)(3), and to disgorge all ill-gotten gains, including post-
+judgment interest.
+II. JURISDICTION AND VENUE
+10) This Court has jurisdiction over this action pursuant to Section 22(a) of the Securities
+Act, 15 U.S.C. § 77v(a), and Sections 21(e) and 27 of the Exchange Act, 15 U.S.C. §§
+78u(e) and 78aa. Venue lies in this Court pursuant to Section 22(a) of the Securities Act,
+15 U.S.C. § 77v(a), and Section 27 of the Exchange Act, 15 U.S.C. § 78aa.
+11) In connection with the transactions, acts, practices, and courses of business described in
+this Complaint, Qwest, directly and indirectly, has made use of the means or
+instrumentalities of interstate commerce, of the mails, and/or of the means and
+instruments of transportation or communication in interstate commerce.
+
+[[PDF_PAGE_0004]]
+12) Qwest does business in and has its corporate headquarters in this judicial district.
+Moreover, certain of the transactions, acts, practices and courses of business constituting
+the violations of law alleged herein occurred within this district.
+III. DEFENDANT
+13) QWEST COMMUNICATIONS INTERNATIONAL INC. is one of the largest
+telecommunications and Internet services companies in the United States. Qwest is also
+the fourth largest long distance telephone service provider in the United States and
+provides local telephone service to millions of customers in 14 states. Qwest maintains
+its corporate headquarters in Denver, Colorado.
+14) Qwest’s common stock is registered with the Commission pursuant to Exchange Act
+Section 12(b) and trades on the New York Stock Exchange. Qwest files annual,
+quarterly, and current reports with the Commission on Forms 10-K, Forms 10-Q, and
+Forms 8-K, respectively, and its fiscal year end is December 31. Prior to its merger with
+US West in June 2000, Qwest common stock traded on Nasdaq. In 1999, 2000, and
+2002, Qwest issued approximately $6.3 billion in debt.
+15) Qwest’s financial statements were audited by Arthur Andersen LLP for Qwest’s fiscal
+years ended December 31, 1999, 2000, and 2001.
+16) Qwest also registered exchange offerings by filing Forms S-4 with the Commission on
+January 17, 2001, July 12, 2001, and October 30, 2001. Moreover, on December 5, 2001,
+April 30, 2002, and June 28, 2002, Qwest filed Forms S-8 registration of securities to be
+offered to employees in employee benefit plans. On October 31, 2001, November 5,
+2001, November 15, 2001, and December 4, 2001, Qwest filed Form SC TO-I and Form
+
+[[PDF_PAGE_0005]]
+SC TO-I/A, tender offer statements by issuer for securities to be offered to eligible
+employees. These filings incorporated by reference Qwest's annual, quarterly, and
+current reports.
+IV. FACTS
+17) Qwest was a wholly-owned subsidiary of the Anschutz Company until its initial public
+offering on June 23, 1997. Qwest, before its merger with US West, claimed to be a
+leader in the telecommunications industry and in the construction of a global fiber-optic
+network. A fiber-optic network is a series of cables containing strands of pure glass,
+which allow the transmission of data between any two connected points using beams of
+light. Qwest constructed its network within the United States by laying cable
+underground along rights of way acquired from landowners across the country.
+18) Because of the huge costs involved in constructing a fiber-optic network, Qwest intended
+to recoup its costs by building for others at the same time it built for itself. Therefore,
+during the construction process, Qwest contracted to sell portions of the fiber-optic
+network to other telecommunications companies and Qwest used the proceeds of those
+sales to finance the cost of construction.
+19) Typically, each cable contained at least 96 strands of fiber. With respect to fiscal years
+1997 and 1998, Qwest disclosed in Commission filings that it intended to use 48 of the
+fiber strands for its own use and to sell the remaining strands. By 1999, Qwest
+purportedly recouped 90 percent of the costs of construction through revenue generated
+from sales of the network to competitors.
+
+[[PDF_PAGE_0006]]
+20) In June 1998, Qwest purchased LCI International, Inc., a provider of long distance
+telephone services. At the same time, Qwest heralded the anticipated completion of its
+network construction by mid-1999 and focused on changing from a construction
+company to a provider of communications services, with an emphasis on data and
+Internet services. Qwest stated in press releases and filings with the Commission
+between 1998 and 1999 that its one-time sales of capacity used to reduce the company’s
+construction costs were diminishing and its recurring services revenues was increasing.
+21) Qwest entered into a merger agreement with US West on July 18, 1999, pursuant to
+which US West was merged with and into Qwest. The merger was to be completed on
+June 30, 2000, with Qwest being the surviving company. Qwest would account for the
+merger as a reverse acquisition under the purchase method of accounting with US West
+being the accounting acquiror.
+22) The merger agreement required Qwest to issue $69 worth of its common stock for each
+share of US West stock, with a “collar” provision requiring Qwest stock to trade between
+$28.26 and $39.90 per share. US West had the option to terminate the merger agreement
+if the average price of Qwest stock was below $22 per share or the closing price was
+below $22 per share for 20 consecutive trading days.
+23) By August 9, 1999, Qwest's stock price had dropped from $34 to $26 per share shortly
+after the merger announcement. Qwest senior management exerted extreme pressure
+upon other officers and managers and demanded that, through the use of one-time sales
+or other means, they meet earnings projections in order to prevent any further drop in the
+price of Qwest stock.
+
+[[PDF_PAGE_0007]]
+24) By June 2000, Qwest stock was trading above $50 per share. Qwest was able to acquire
+US West by using Qwest’s common stock, a currency that turned out to be significantly
+inflated by the false and misleading statements as detailed in this Complaint.
+25) After the merger, the management of pre-merger Qwest, including its chief executive
+officer and co-chairman of the board of directors (“CEO”), chief operating officer and
+president (“COO”), and chief financial officer (“CFO”), controlled the surviving
+company.
+26) Qwest promoted itself to analysts and the investing public as a progressive, new
+generation technology company with enormous growth potential not to be compared with
+the old-style telephone company which had been US West.
+A. Senior Management Consistently Pr ojected Double-Digit Earnings Growth
+and Created an Addiction to Non-Recurring Revenue to Meet Financial
+Targets
+27) Qwest’s CEO publicly predicted double-digit revenue growth every quarter, both prior to
+and after the completion of the merger with US West. Other Qwest senior management
+authorized public projections by Qwest, which set ambitious earnings and revenue targets
+that included significant earnings growth on an annual and quarterly basis.
+28) In 1999 and 2000, it became apparent to Qwest senior management that the revenue
+generated by selling services on its network was not increasing as Qwest had projected.
+In fact, Qwest senior management knew by 1999 that Qwest’s recurring service revenue
+and earnings showed only modest growth. Among other things, Qwest encountered
+increased competition from long distance providers and steep declines in demand for
+Internet services. Also, other major fiber-optic network providers had flooded the market
+
+[[PDF_PAGE_0008]]
+with capacity by forming their own networks. Further, as a result of rapid technological
+advances, the transmission capacity of new and existing fiber-optic networks
+substantially increased.
+29) For example, by 1999 each strand of fiber that Qwest had built could carry 256 times
+more capacity than when it was originally installed. As the technology advanced and
+capacity increased, the price at which Qwest could sell its excess fiber-optic capacity
+declined dramatically. Thus, meeting Wall Street growth expectations and Qwest's own
+public predictions of earnings growth became increasingly difficult.
+30) Notwithstanding these declines in the market, Qwest senior management publicly
+claimed that Qwest would continue its pattern of dramatic revenue increases because of a
+“flight to quality” which customers would make from competitors to Qwest. Qwest
+senior management exerted extraordinary pressure on their subordinate managers and
+employees to meet or exceed the publicly announced revenue projections. Senior
+management set aggressive revenue targets for each business unit and ordered managers
+and employees to meet them.
+31) Qwest senior management ensured that company and business unit projections were met
+by paying bonuses to management and employees only for periods when they achieved
+the targeted revenue. Qwest senior management thereby created a culture in which
+performance was measured exclusively by the numbers. Accounting rules, policies, or
+controls that interfered with meeting revenue targets were stretched or ignored outright,
+creating an environment of fraud.
+
+[[PDF_PAGE_0009]]
+32) Indeed, this focus on measuring performance by the numbers was recognized by one
+Qwest board member who wrote to another Qwest board member in October 2001: " In
+my opinion there are well known consequences for not making the numbers but no clear
+consequences for cutting corners. Until the consequences are equal the behavior will not
+change."
+33) When Qwest management realized that it could not meet the projected growth in revenue
+through increases in recurring service revenue, senior management directed the sale of
+portions of the domestic fiber-optic network originally held for Qwest’s own use by
+selling indefeasible rights of use (“IRUs”). An IRU is an irrevocable right to use a
+specific fiber strand or specific amount of fiber capacity for a specified time period.
+34) Qwest sold either raw fiber-optic cable (“dark fiber”), which did not include any optical
+equipment, or fiber capacity (“lit fiber”), which included the optical equipment necessary
+to activate the fiber and carry telecommunications traffic. Qwest sold both pieces of its
+network that it constructed as well as pieces of the network it acquired from third parties.
+35) Thus, to show revenue, Qwest began selling what the company had previously identified
+in Commission filings and press releases as its “principal asset.”
+36) Additionally, Qwest senior management used capital equipment sales to generate
+additional revenue. Both IRUs and equipment sales were referred to internally as “one
+hit wonders.” In both cases, Qwest inappropriately recognized revenue upfront rather
+than ratably over the life of the contract.
+37) Unlike recurring service revenue that produced a predictable amount of revenue for
+future quarters, revenue from IRUs and equipment sales started at zero each quarter and
+
+[[PDF_PAGE_0010]]
+had no guarantee of recurrence. Indeed, the investment community generally discounted
+non-recurring revenue when analyzing telecommunications companies; however, neither
+analysts nor investors were informed about the magnitude of Qwest's reliance on IRUs
+and equipment sales. Instead, the investment community was misled by Qwest to believe
+that Qwest's remarkable growth stemmed primarily from Qwest's recurring service
+revenue, and Qwest's stock price rose on that misinformation.
+38) Qwest’s need for one-time transactions to fill the gap between actual recurring revenue
+and publicly projected revenue targets was likened by many Qwest employees to an
+“addiction,” with the non-recurring IRU and equipment sale transactions being referred to
+as Qwest’s “heroin.” Qwest understood that, like a drug addiction, Qwest’s need for
+greater amounts of one-time revenue increased each quarter as Qwest’s senior
+management continued to project significant year-over-year and quarter-over-quarter
+revenue growth.
+39) In a July 31, 2001 email between two Qwest senior finance executives regarding "IRU
+overview," one executive explained to the other that "I sense that the general feeling . . .
+is that IRUs were originally meant as gap fillers for quarterly targets. They have since
+become main products and a major source of making revenue targets." The executive
+cautions: “The[y] are not look[ed] at as long term sustainable products to enhance . . .
+Qwest’s overall business plan . . . . "
+40) In other emails in May 2001, Qwest’s COO informed a top sales executive that the
+company needs “a ton of one time items to make the quarter.” The sales executive
+responded that “IRUs are becoming extremely difficult to do” and recommended that the
+
+[[PDF_PAGE_0011]]
+company “reset expectations and put the best face on to wall street that we can.” The
+COO rejected a reset.
+41) Qwest’s plan each quarter was to decrease its dependence on non-recurring revenue and
+grow the service business, thereby "kicking" its addiction before the investing public ever
+even knew it existed. Qwest, however, was unable to make its publicly proclaimed
+numbers through recurring service revenue, and therefore continually relied on IRU
+transactions and equipment sales in the waning days and hours of each quarter, thereby
+perpetuating its addiction.
+42) For example, in the last three days of the first quarter of 2001, Qwest executed IRU
+agreements representing sales in excess of $280 million. Qwest recorded upfront revenue
+of $198 million from these sales, which accounted for 50 percent of Qwest’s total IRU
+revenue for the quarter. At the same time, Qwest entered into equipment sales for that
+quarter and recorded upfront revenue of $65 million. Qwest reported revenue for the first
+quarter ended March 31, 2001 of $5.051 billion, exactly meeting Wall Street’s consensus
+estimate.
+43) Similarly, in the last three days of the second quarter of 2001, Qwest executed IRU
+agreements representing sales in excess of $495 million. Qwest recorded upfront revenue
+of $397 million from these sales, or 96 percent of the total IRU sales for the quarter.
+Also in the waning days of the second quarter of 2001, Qwest recorded upfront revenue
+from equipment sales of $116 million. Qwest reported revenue for the second quarter
+ended June 30, 2001 of $5.2 billion, exactly meeting Wall Street’s consensus estimate.
+
+[[PDF_PAGE_0012]]
+1. Qwest Concealed Its Non-Recurring Revenue in Misleading
+Disclosure about Operating Segments and Business Units
+44) Prior to the merger with US West, in annual and quarterly reports through March 31,
+2000, and after the merger, in annual reports for the years ended December 31, 2000 and
+2001, and in quarterly reports through March 31, 2002, Qwest crafted false and
+misleading disclosures regarding the operations of its business units.
+45) From third quarter 2000 forward, Qwest reported in its annual report on Form 10-K for
+2000, that its business segments consisted of (1) retail services, (2) wholesale services,
+(3) network services, and (4) directory services. These segments were used by US West
+prior to the merger.
+46) GAAP and Commission guidance require an issuer to make disclosures based upon
+management’s view of the company’s operations. Disclosures should be made to enable
+investors to view the company from the position of the chief operating decision maker
+(“CODM”) and to view the operating results and financial performance in the same
+manner viewed by senior management.
+47) Although the segments Qwest used may have been appropriate for pre-merger US West,
+Qwest’s CODM viewed operations by type of service provided, including data, Internet
+services, voice, wireless, and publishing. Moreover, Qwest's CODM tracked non-
+recurring revenue by breaking out IRUs and equipment sales. None of this information,
+however, was disclosed.
+48) Qwest’s failure in its public disclosures to break out segments and revenue in the same
+manner it viewed the company internally hid Qwest’s addiction to non-recurring revenue.
+For purposes of its earnings releases and the Management's Discussion and Analysis
+
+[[PDF_PAGE_0013]]
+("MD&A") portion of its Commission filings, Qwest improperly characterized non-
+recurring revenue as service revenue, and "data and Internet service revenues" in
+particular. Qwest's non-recurring revenue was included primarily in the wholesale
+services segment, and to a lesser extent, the retail services segment. Qwest, therefore,
+falsely represented itself as a fast growing technology company emphasizing its
+broadband Internet-based services, masking the modest growth of Qwest’s
+telecommunications services business.
+49) By crafting its segment reporting to hide its non-recurring revenue, Qwest hid from the
+investing public its dependence on that revenue to meet growth targets, and the amount of
+network assets being ransacked and sold off to meet projections and expectations.
+Qwest’s disclosures did not comply with GAAP and did not provide investors with the
+transparent and robust disclosures required by Commission rules and regulations that
+would allow investors to track the company’s growth and the quality of its revenue.
+2. Qwest Misrepresented the Growth of its Business through False and
+Misleading Projections and Earnings Releases
+50) On July 27, 1999, shortly after announcing the intended merger with US West, Qwest
+issued its second quarter earnings release and Form 8-K. In its release, Qwest focused
+analysts and investors on Qwest’s data and Internet services revenue, and stated “[d]ata
+and Internet services continued to be the company’s fastest growing segment and again
+posted a 100 percent increase in revenues compared to the same quarter in 1998.”
+Despite referring to "data and Internet services revenue" as a segment, Qwest did not
+report it as such in MD&A or disclose it in its financial statements filed with the
+Commission.
+
+[[PDF_PAGE_0014]]
+51) Qwest’s statements were false and misleading. The company failed to disclose that its
+recurring revenue derived from sales of IRUs and equipment – which analysts and
+investors did not expect or understand to be considered a “service.”
+52) Indeed, non-recurring revenue made up 96 percent of Qwest’s second quarter data and
+Internet services revenue, 192 percent of the growth in data and Internet services, and 19
+percent of total revenue. Excluding non-recurring revenue, data and Internet services
+revenue actually declined 92 percent from the same quarter of the previous year.
+53) In fact, a few days before the second quarter release, and contrary to Qwest’s public
+disclosures, Qwest’s COO acknowledged the company’s declining services revenue in an
+internal email: “Our revenues are way too flat and we can’t mortgage our future every
+damn quarter by selling stupid IRUs.” As it turned out, the COO’s email was a harbinger
+of Qwest’s conduct and its false and misleading statements between 1999 through 2001.
+54) On October 27, 1999, Qwest issued its third quarter earnings release and filed a Form 8-
+K announcing its “First Billion Dollar Revenue Quarter” and reporting a 26 percent
+increase in total revenue. Again focusing investors’ attention to the revenue Qwest
+derived from selling services on its newly built network, Qwest claimed “Internet and
+data services continued to be the company’s fastest growing segment” and “grew more
+than 200 percent.”
+55) The investing public was not informed that non-recurring revenue made up 140 percent
+of Qwest’s reported data and Internet services revenue, and 32 percent of total revenue.
+Excluding non-recurring revenue, total revenue actually declined 13 percent from the
+same quarter of the previous year.
+
+[[PDF_PAGE_0015]]
+56) On February 2, 2000, Qwest announced earnings for the fiscal year ended December 31,
+1999, and filed a Form 8-K stating data and Internet services revenues for the quarter
+"grew more than 200 percent” and “total revenue grew 34 percent." Further, Qwest’s
+CFO projected revenue growth of 30 to 35 percent and earnings before interest, taxation,
+depreciation, and amortization ("EBITDA") growth of 40 to 50 percent in fiscal 2000 as
+compared to fiscal 1999, led by the demand for Qwest’s data and Internet services.
+Qwest guided the investment community to value the company on a revenue and
+EBITDA basis.
+57) By the end of 1999, however, non-recurring revenue comprised 33 percent of total
+revenue for the fourth quarter, and 26 percent of Qwest’s total revenue for the year. In
+reality, without inclusion of the non-recurring revenue, Qwest's fourth quarter total
+revenue declined nine percent from the same quarter of the previous year.
+58) At approximately the same time, and citing the material amount of Qwest’s IRU revenue,
+Qwest’s corporate accounting department drafted proposed disclosure language for the
+company’s 1999 Form 10-K detailing the amount of IRU revenue. Qwest’s CFO and
+CEO, however, rejected the language and refused to disclose any material information
+about non-recurring revenue in the 1999 Form 10-K filed on March 7, 2000.
+59) On April 19, 2000, Qwest announced its results for the first quarter ended March 31,
+2000 in a release and Form 8-K. Qwest claimed that data and Internet services drove
+“record first quarter revenue of $1.22 billion,” representing a "39 percent increase" from
+the first quarter of 1999. Again focusing investors on data and Internet services, the
+
+[[PDF_PAGE_0016]]
+company stated, “Internet and data services revenues continued to grow as a significant
+part of Qwest’s overall revenue mix.”
+60) Qwest’s CEO stressed “We continue to drive strong demand for our industry-leading
+portfolio of Internet and data services in the business marketplace.” Qwest’s CFO stated
+“We . . . expect continued strong revenue and EBITDA growth led by the demand for
+Qwest’s Internet-based broadband applications and services.” In reality, by the end of
+first quarter 2000, non-recurring revenue comprised 97 percent of data and Internet
+services revenue and 29 percent of total revenue. In fact, without non-recurring revenue,
+data and Internet services declined 92 percent from the same quarter of the prior year, and
+total revenue grew only 17 percent over the same quarter of the previous year.
+61) In its July 19, 2000, earnings release for the second quarter 2000, Qwest boasted that its
+quarterly revenue grew 46 percent over second quarter 1999 to $1.28 billion. Qwest
+stated that data and Internet services continued to drive the company’s revenue growth,
+and grew more than 150 percent over the same quarter in the previous year.
+62) Qwest met its numbers, however, only through non-recurring revenue making up 86
+percent of data and Internet services revenue and 29 percent of total revenue. Excluding
+non-recurring revenue, total revenue grew only 23 percent.
+63) Notwithstanding pleas by certain Qwest employees for senior management to “take the
+numbers down,” i.e., reduce the growth projections after the US West merger, Qwest's
+CEO stated in the second quarter release that he expected Qwest would "generate
+compound annual growth rates of 15-17 percent revenue and 20 percent EBITDA
+through 2005."
+
+[[PDF_PAGE_0017]]
+64) In September and October 2000, internal Qwest documents stated the “entire company
+needs a sense of urgency to meet numbers” and identified a revenue gap for the third
+quarter 2000 of at least $120 million. Internal documents further made clear that Qwest
+would rely on additional non-recurring IRUs and equipment sales to fill the gap and meet
+the projected targets.
+65) On October 24, 2000, Qwest released its earnings for the third quarter 2000, announcing
+that total revenue grew by 12.4 percent “driven by Internet and data services growth of
+more than 50 percent.” Even after acquiring US West (thereby receiving a five-fold
+increase in revenue), however, the undisclosed truth was that non-recurring revenue made
+up 35 percent of data and Internet service revenue and eight percent of total revenue.
+66) On January 24, 2001, Qwest released a pro forma financial statement regarding earnings
+for the fourth quarter and year-end 2000. In the release, Qwest continued to highlight for
+investors the company’s data and Internet services growth, stating that the segment
+increased by “almost 40 percent,” and represented 70 percent of Qwest’s total revenue
+growth in the quarter. Qwest stated total revenue grew by ten percent for the quarter and
+14 percent for the year. Moreover, Qwest's CFO stated that Qwest "remained confident
+that [it] will achieve [its] financial commitments for 2001 of $21.3 to $21.7 billion in
+revenue and $8.5 to $8.7 billion in EBITDA."
+67) In preparing the first quarter 2001 Form 10-Q and earnings release, Qwest's corporate
+accounting group again drafted proposed IRU disclosure language citing “the materiality
+of IRUs to our results.” Moreover, internal documents demonstrate that Qwest was
+becoming even more reliant on non-recurring revenue, especially IRUs, in early 2001 as
+
+[[PDF_PAGE_0018]]
+its various business units were projecting revenue shortfalls and budget misses. Senior
+management, however, rejected disclosure and instead continued to conceal the material
+impact of non-recurring revenue on the company’s financial results.
+68) As a result, Qwest released its first quarter 2001 earnings on April 24, 2001, reporting
+that data and Internet services revenue grew 44 percent and total revenue grew 12 percent
+compared to the same quarter in 2000. Moreover, the company claimed specifically that
+its growth stemmed from a list of recurring revenue products. Conspicuously absent
+from Qwest’s list was any reference to IRUs or equipment sales.
+69) Despite the true state of its business, Qwest reconfirmed its financial targets for 2001 and,
+through its CFO, predicted revenue growth of between 12 and 13 percent for the second
+quarter as compared to the same quarter 2000. Contrary to Qwest’s statements, during
+the first quarter 2001, non-recurring revenue was 36 percent of data and Internet services
+revenue, 11 percent of total revenue, and 35 percent of Qwest’s total revenue growth.
+Excluding non-recurring revenue, Qwest’s total revenue grew only eight percent over the
+same period of the previous year.
+70) Qwest’s core recurring revenues fared no better in the second quarter of 2001, and most
+of the company’s business units again reported anticipated shortfalls to senior
+management.
+71) On July 24, 2001, as it had predicted, Qwest announced that its second quarter revenue
+increased 12.2 percent and its EBITDA increased 13.1 percent. Qwest stated that data
+and Internet services grew 41 percent and represented more than 27 percent of total
+revenue. Again, Qwest hid the non-recurring revenue that, by second quarter 2001, had
+
+[[PDF_PAGE_0019]]
+grown to 13 percent of total revenue and 39 percent of data and Internet services revenue.
+Without including the non-recurring revenue, Qwest’s total revenue grew only six
+percent over the same period of the previous year.
+72) Under extreme pressure from the investment community and in response to analysts
+questioning Qwest’s accounting generally, Qwest senior management reluctantly
+disclosed IRU amounts for the first time in its second quarter 2001 Form 10-Q filed on
+August 14, 2001. Qwest did not disclose non-recurring revenue from equipment sales
+until an analyst conference in December 2001.
+B. Qwest Improperly Recognized Revenue on IRUs To Meet Earnings
+Projections
+1. Improper Accounting of IRUs Generally
+73) Qwest improperly recognized revenue on the sale of all IRUs because of how Qwest
+classified IRUs on its balance sheet. Specifically, the IRUs Qwest sold during the 2000
+and 2001 time frame originated from the original 48 strands that Qwest had retained for
+its own use during construction of the network. Those 48 strands were designated as
+property, plant, and equipment ("PP&E") on Qwest’s balance sheet. Contrary to GAAP,
+Qwest sold IRUs designated as PP&E and recognized revenue on its income statement.
+GAAP provides, however, that sales of PP&E result in the recording of only a net gain or
+loss on the difference between the sales price and basis, not revenue.
+74) Even if Qwest had IRU inventory, all revenue on Qwest's IRU sales was inappropriate
+under GAAP. Qwest took an aggressive accounting position and treated IRU sales as
+sales-type leases in order to recognize revenue upfront under GAAP. A sales-type lease
+allows the seller to treat the lease transaction as a sale of an asset with upfront revenue
+
+[[PDF_PAGE_0020]]
+and profit recognition. Qwest failed to disclose its IRU revenue recognition policy in its
+financial statements as required by GAAP to avoid disclosure of IRU sales to the
+investment community.
+75) Upfront revenue recognition, including sales-type lease treatment, requires, among other
+things, completion of the earnings process, the assets sold remain fixed and unchanged,
+transfer of ownership with no continuing involvement by the seller, and fair market value
+of the revenue components. None of Qwest's IRUs, however, met these criteria. In fact,
+Qwest turned a blind eye to these GAAP failures and nevertheless used IRUs as “one-
+time wonders” to meet revenue targets.
+a. Portability and Grooming
+76) For upfront revenue recognition as a sales-type lease, GAAP requires that the earnings
+process be complete and that the assets sold remain fixed and unchanged. Qwest failed to
+meet these requirements because it was always Qwest’s intent to allow customers to
+return the asset purchased for a different asset. The ability to exchange capacity is known
+as “portability.” Porting was prevalent in the telecommunications industry because
+companies needed the flexibility to change their network as demand changed. In fact,
+Qwest generally negotiated the ability to port when it purchased IRUs.
+77) Qwest's intent from the beginning to allow porting was evidenced by its pattern and
+practice of allowing customers to port. From 1999 through mid-2001, Qwest sales
+employees told IRU customers they would be able to port as a matter of course.
+78) In fact, by mid-2001, Qwest’s senior management and accountants learned that Qwest
+had ported at least ten percent of assets sold as IRUs. Because of Qwest's intention to
+
+[[PDF_PAGE_0021]]
+allow porting, and its pattern and practice of porting, Qwest improperly recognized
+revenue upfront on all its IRU sales. Instead, Qwest should have recognized revenue
+ratably over the life of the lease term.
+79) Moreover, Qwest often moved IRUs previously sold, without customer consent, to
+different wavelengths and different routes as required to circumvent problems on Qwest’s
+network, address network changes, or to optimize the network’s efficiency, a process
+known as "grooming." Because Qwest routinely redirected IRU routes, upfront revenue
+recognition on all IRUs was improper because Qwest was not selling a specifically
+identifiable asset, but instead simply providing a service.
+80) During the third and fourth quarters of 2001, Qwest senior management knew of
+numerous IRUs that had been rerouted on different fibers. Qwest personnel informed
+senior management that the IRUs could not be restored to their original routes and
+advised senior management to reverse the revenue recognized from the IRU sales. Qwest
+senior management, however, rejected the employees’ recommendations, and from the
+fourth quarter of 2001 through early 2002, Qwest continued to reroute IRU fibers as
+necessary.
+b. Ownership Transfer
+81) To treat IRUs as sales-type leases and recognize revenue upfront, GAAP requires that the
+seller transfer to the buyer title, along with the usual risks and rewards of ownership, and
+that the seller does not have a substantial continuing involvement with the property. All of
+Qwest’s IRU sales did not meet these requirements. While Qwest’s IRU sales agreements
+generally provided for title transfer at the end of the lease term, there was significant
+uncertainty about whether title could ever transfer.
+
+[[PDF_PAGE_0022]]
+82) The factors that suggested that Qwest may not be able to transfer title at the end of the lease
+term included: (i) there was no statutory title transfer system for IRUs similar to what
+exists for real property; (ii) some of Qwest’s right of way agreements on the underlying
+IRUs expired prior to the end of the IRU terms; (iii) some of the underlying IRU
+agreements concerning IRUs that Qwest purchased from a third party and then resold did
+not allow Qwest to sublease its rights of way or did not provide title to Qwest and in turn,
+Qwest could not provide those rights to a third party.
+83) In fact, Qwest attempted, but could not obtain a legal opinion that title could transfer on
+IRUs. Even if title could transfer in the future theoretically, under the IRU contracts, title
+would revert back to Qwest under certain conditions. Because Qwest's IRU contracts could
+not meet the title transfer requirement, upfront revenue recognition on all Qwest's IRU
+sales was inappropriate.
+84) In some IRU contracts, Qwest specifically stated that the purchaser did not receive any
+ownership interest in the fiber, thereby defeating upfront revenue recognition. Similarly, in
+many contracts, Qwest prohibited the purchaser from assigning, selling, or transferring the
+fiber-optic capacity without Qwest’s prior written consent.
+85) For example, on March 31, 2000, Qwest entered into a $9.6 million IRU transaction with
+Cable & Wireless, plc in which Qwest included a clause preventing assignment, sale, or
+transfer without Qwest’s consent. Sales to Cable & Wireless in later quarters totaling $291
+million were accomplished by amendments to the March 31, 2000 contract and, therefore,
+were subject to the same assignment clause.
+
+[[PDF_PAGE_0023]]
+86) Moreover, upfront revenue recognition was inappropriate because Qwest had a significant
+continuing involvement with all IRUs sold in the form of ongoing administrative,
+operations, and maintenance activities.
+c. Multiple-Element Accounting and Relative Fair Value
+87) For accounting purposes, Qwest inappropriately treated its sale of IRUs as having several
+separate revenue elements. Qwest identified the elements as the right of way, conduit,
+fiber, equipment, facilities, and operations and maintenance. Qwest recognized revenue
+upfront on three of the elements, specifically, the fiber, equipment, and facilities. Qwest,
+however, did not meet the requirements of multiple-element accounting under GAAP
+because each element did not represent a separate earnings process. Under GAAP,
+Qwest should have recognized revenue ratably on the entire IRU over the life of the
+lease.
+88) Even if Qwest met the multiple-element accounting requirements, GAAP requires vendor
+specific objective evidence ("VSOE") supporting the allocation of the total IRU sales
+price to the various elements of the transaction. To maximize revenue, Qwest falsely
+allocated approximately 80 percent of the IRU revenue to the elements with upfront
+revenue recognition without VSOE. In the restatement process, Qwest determined that it
+did not have sufficient evidence on which to determine objectively the appropriate
+allocation among the different elements. Because Qwest did not have VSOE for the IRU
+revenue elements, GAAP required that revenue be recognized ratably over the lease term
+for all IRUs.
+
+[[PDF_PAGE_0024]]
+2. Improper Accounting of IRU Swaps
+89) In 1999, Qwest found that it was increasingly difficult to sell IRUs to customers unless,
+at the same time, Qwest purchased fiber or capacity in similar dollar amounts from those
+same customers. These transactions are hereafter referred to as swaps.
+90) Qwest started using IRU swaps in 1999, and during 2000 and 2001, the frequency, dollar
+amount and number of swap transactions grew as Qwest's dependence on gap-fillers
+increased to meet senior management’s ever-increasing revenue targets while the demand
+for fiber assets plummeted. Internally, some Qwest managers and employees referred to
+these transactions by the pejorative term "SLUTS," as an acronym for simultaneous,
+legally unrelated transactions.
+91) Most of Qwest’s swaps were completed as directed by members of senior management in
+the waning days and hours of each quarter in desperate attempts to meet revenue
+projections. These swaps, which members of Qwest’s senior management knew to be
+shams, were entered into for the purpose of artificially inflating Qwest's reported
+revenue.
+92) Qwest found IRU swaps attractive because of the income statement treatment Qwest
+improperly employed. In accounting for swaps, Qwest exercised the most aggressive
+methods in the telecommunications industry, recognizing large amounts of revenue
+immediately, and generating significant profit margins. On the other hand, Qwest's costs
+in purchasing capacity from others were capitalized as long-term assets to be amortized
+over the 20-25 year term of the IRU. As a result, the company’s reported EBITDA was
+grossly inflated.
+
+[[PDF_PAGE_0025]]
+93) Qwest’s recognition of revenue from these swap transactions was improper. GAAP
+provides that the gain or loss on a swap or exchange of assets may be recognized if the
+assets are dissimilar. In its 2001 Form 10-K, filed April 1, 2002, Qwest fraudulently
+claimed that its IRU swaps involved an exchange of dissimilar assets, and therefore
+revenue was properly recognized. Specifically, Qwest claimed that two sides of the swap
+transaction involved different assets because they were classified differently on Qwest’s
+balance sheet; Qwest claimed the capacity it sold was from its IRU inventory of assets
+held for sale, but that the capacity Qwest purchased was committed to PP&E.
+94) Qwest’s accounting for its IRU swaps was improper and its disclosures relating to its
+accounting were false. In fact, Qwest had no "inventory" of IRU capacity held for sale.
+Rather, all of Qwest’s IRU capacity, both those it sold and those it bought, were
+classified as PP&E. Because Qwest’s IRU swaps involved both a sale and purchase of
+fiber-optic capacity classified as PP&E, the assets were similar and no revenue should
+have been recognized. Despite knowledge that both the sales and purchases involved
+similar assets, members of senior management at Qwest directed upfront revenue
+recognition on all IRU swap sales.
+95) Moreover, Qwest’s failure to disclose swap transactions in its filings was not in
+accordance with GAAP. GAAP specifically requires disclosure of nonmonetary
+transactions, including the nature of the transaction, the basis of accounting for the assets
+transferred, and gains or losses recognized on transfers. Qwest failed to meet any of
+these GAAP requirements.
+
+[[PDF_PAGE_0026]]
+3. Specific Revenue Recognition Cr iteria Failures in Particular
+Transactions
+96) All IRU revenue recognized by Qwest, including revenue recognized on swap
+transactions, was improper under GAAP for the reasons stated above. However, the
+desperation to fill revenue gaps at all costs caused additional GAAP failures as discussed
+further in this Complaint for particular IRU transactions.
+a. Secret Side Agreements to Conceal Exchange Rights
+97) Because porting jeopardized upfront revenue recognition on IRUs, Qwest salespeople
+had to grant the right to port through secret side agreements and secret verbal assurances
+in order to close the deals. Although it was Qwest's general practice to port, customers
+sometimes requested exchange rights in writing, something Qwest's salespeople knew
+they were not allowed to do. Qwest's salespeople would provide either a verbal
+assurance or, if the customer insisted, a written document guaranteeing portability.
+98) With the approval of members of senior management, the side agreements concealed
+from Qwest accounting personnel the exchange rights included by Qwest in IRU
+transactions. In fact, in one email, a Qwest manager wrote: “By the way, we should
+NOT have an email chain that indicates that verbal commitments such as these were
+made.”
+99) For example, in the fourth quarter 2000, Qwest sold to Cable & Wireless $109 million of
+capacity in the United States, and recognized $108 million in upfront revenue. Qwest did
+not have the capacity that Cable & Wireless actually wanted available at the time.
+Therefore, Qwest convinced Cable & Wireless to purchase different capacity through a
+secret side agreement, which guaranteed that Cable & Wireless could exchange the
+
+[[PDF_PAGE_0027]]
+capacity later. Specifically, on December 29, 2000, Qwest’s COO provided to Cable &
+Wireless a secret email that guaranteed “a full and fair trade” of the capacity Cable &
+Wireless bought for the different capacity at a later date.
+100) Additionally, in the first quarter 2001, Qwest sold IRU capacity to Global Crossing, Ltd.
+and recognized $102 million of revenue, although Global Crossing did not want the
+capacity it purchased. Rather, Global Crossing wanted capacity that was not yet
+available from Qwest. To assist Qwest with meeting its revenue targets, Global Crossing
+agreed to take capacity that was available for delivery at that time so long as it had a right
+to exchange the capacity. Qwest personnel gave secret verbal assurances beyond the
+contract language to Global Crossing that Qwest would agree to exchange the capacity
+when the new capacity was available.
+101) In another example, in June 2001, Velocita Corporation sought to purchase certain routes
+from Qwest. Qwest did not have the routes available to sell but, because Qwest
+desperately needed the revenue for that quarter, Qwest suggested that Velocita buy an
+alternative route with the ability to exchange the route for others at a later date.
+102) Velocita requested that the exchange right be included in the parties’ agreement. A
+Qwest senior executive, however, provided a verbal assurance to Velocita outside the
+contract to hide from its accountants the fact that Qwest was providing an exchange right
+to Velocita. Thereafter, on June 29, 2001, Qwest and Velocita entered into a swap
+transaction in which Qwest purchased from Velocita $12.1 million of assets, and Qwest
+sold to Velocita $11.6 million of assets. Qwest recognized $11.5 million in revenue on
+the transaction in the second quarter 2001.
+
+[[PDF_PAGE_0028]]
+b. Failure to Identify Spe cific Assets Being Sold
+103) In the rush to complete IRU transactions by the end of the quarter and fill revenue gaps,
+Qwest frequently neglected to specify the assets it was selling. GAAP, however, requires
+that assets being sold be specifically identified for upfront revenue recognition.
+104) For example, in a fourth quarter 1999 swap transaction with Enron Broadband Services
+(“Enron”), Qwest sold an IRU along three routes in the U.S. In another third quarter
+2000 swap transaction, Qwest sold to Enron an IRU along five routes in the U.S. Neither
+of Qwest’s sales agreements specifically identified the fibers sold to Enron.
+105) Despite the failure to identify the fibers, Qwest recognized $36.3 million in the fourth
+quarter of 1999 and $36.9 million in the third quarter of 2000 from the swaps with Enron.
+106) In another example, in the first quarter ended March 31, 2001, Qwest sold $105 million
+of fiber-optic capacity to Global Crossing and recognized approximately $102 million in
+revenue for the sale. This was done despite the fact that the majority of the capacity was
+not specified in the contract by the end of the quarter. Rather, the contract exhibit that
+was intended to list some of the assets sold simply stated – "to be identified."
+107) Similarly, in the same transaction, Global Crossing and Qwest did not identify until June
+2001, three months after Qwest recognized the revenue for the sale, the geographic
+termination points of some of the capacity purchased by Qwest.
+c. Backdating of Contracts
+108) Members of Qwest senior management contacted the employees negotiating on behalf of
+Qwest at least daily near the end of quarters to determine the status of sales agreements
+and to press for completion. Such pressure motivated the employees to backdate
+
+[[PDF_PAGE_0029]]
+contracts when needed to demonstrate falsely contract "completion" by the end of the
+quarter.
+109) For example, in a swap transaction with Cable & Wireless recorded in the first quarter
+2001, Qwest recognized $69.8 million in revenue. The IRU sale contract was not
+executed or completed until April 12, 2001. Nevertheless, solely in order to book the
+much needed revenue in the first quarter of 2001, several Qwest employees backdated the
+contract to March 30, 2001. Qwest senior management, including the COO and the CFO
+were aware that the sale had not closed until April 12, 2001, but determined to recognize
+the revenue in the first quarter of 2001 in order to meet revenue projections.
+110) In another example of backdating, in the third quarter 2001 Qwest recognized $85.5
+million of revenue on the sale of IRU capacity in a swap with Enron. The parties’
+agreements, which are dated September 30, 2001, were not executed until October 1,
+2001, after the close of the quarter.
+d. Failure to Deliver
+111) Qwest’s contracts for the sale of an IRU required delivery by Qwest and acceptance by
+the customer. In several instances, however, Qwest failed to deliver the fiber by the end
+of the quarter in which revenue was recognized. Under GAAP it was improper for Qwest
+to recognize revenue until there had been delivery and acceptance by the customer.
+112) For example, Qwest failed to deliver to Enron certain fiber and facilities pursuant to the
+parties’ fourth quarter 1999 and third quarter 2000 swap transactions, representing a total
+of $36 million in revenue. In early 2001, Enron gave notice to Qwest that Qwest had
+breached the agreements and refused to pay Qwest the remaining amounts due under the
+
+[[PDF_PAGE_0030]]
+agreements. Some Qwest senior management knew that Qwest had not and could not
+deliver under the terms of Qwest’s sales agreements.
+113) To avoid Enron returning their routes and reversing revenue it had previously recognized,
+a Qwest senior financial executive structured Qwest’s third quarter 2001 transaction with
+Enron to include a so-called "re-purchase" of those routes. Since Qwest had never
+delivered the routes to Enron, and Enron had not paid for the routes, this was a complete
+fiction orchestrated to avoid the reversal of millions of dollars of revenue.
+e. Lack of Business Purpose for the Swaps
+114) Qwest engaged in most IRU swaps when there was no legitimate business purpose for
+Qwest simultaneously to purchase IRU capacity from another telecommunications
+company. The purchase was merely a necessary evil to facilitate the sale that Qwest used
+to inflate its revenue and meet its targets. Under GAAP, if there was no legitimate
+business need for the acquired IRU, no revenue should have been recognized in the
+transaction.
+115) Qwest stated in Commission filings, releases, and before Congress that the business
+purpose of the swaps involving acquisitions of international lit capacity or dark fiber was
+to expand its international network. Those statements were false. In most cases, Qwest
+had no intention to use and, in fact, did not use the assets it purchased. Moreover,
+members of Qwest’s senior management directed and established quotas for the IRU
+sales teams to re-sell capacity that Qwest “[took] on as a result of trades with other
+carriers that we do not intend to use.”
+
+[[PDF_PAGE_0031]]
+116) Generally Qwest’s IRU salespeople did not consult with Qwest’s network planning
+department before purchasing assets in a swap. Qwest’s network planning department
+generally was responsible for determining what capacity was needed to expand or
+develop Qwest’s fiber-optic network. In the swap transactions, however, the sales teams
+bought whatever capacity was necessary to close the deal with the customer without
+regard to the network planning department’s determinations of Qwest’s business needs.
+In the few instances where Qwest’s network planning department was consulted, it
+recommended against the purchase of capacity because Qwest had little or no need for
+the IRU. Nevertheless, Qwest’s sales team and senior management ignored their view
+and purchased the capacity.
+117) In addition, the sales staff generated no written business justification for the swap
+purchases until the second quarter of 2001. Thereafter, the business justifications had no
+detail regarding how the assets would be used, when they would be integrated into the
+network, or the anticipated revenue to be generated by the assets.
+118) Given that Qwest purchased assets in IRU swaps solely to effectuate the sale and
+recognize revenue upfront, Qwest accumulated a huge amount of network assets it did
+not need and could never use.
+119) For example, in the third quarter 2001, Qwest purchased $67.2 million of capacity in Pan
+America from Global Crossing in a swap transaction. Qwest agreed to acquire the Pan
+American capacity solely because Global Crossing could deliver the capacity by the close
+of the third quarter, a necessary element for booking revenue on Qwest’s simultaneous
+sale to Global Crossing.
+
+[[PDF_PAGE_0032]]
+120) In another example, on September 29, 2000, Qwest purchased from Global Crossing
+$20.8 million in capacity across the Pacific Ocean as part of a swap transaction. Qwest
+never activated the capacity and, six months later on March 27, 2001, Qwest returned the
+$20.8 million in capacity as a credit toward the purchase of different capacity from
+Global Crossing.
+121) In a third example, Qwest purchased a large amount of fiber from Enron in a third quarter
+2001 swap in which Qwest recognized $85.5 million in revenue on the sale. Qwest,
+however, had no supportable business purpose for buying the vast majority of this fiber.
+Prior to the purchase, Qwest’s network planning group made clear that the Qwest
+network had no need for the majority of Enron’s fiber route and other assets.
+122) In late 2001 through early 2002, Qwest conducted a study to determine how to use the
+international capacity it had purchased in IRU swaps. The study concluded that Qwest
+could possibly use or resell only one-third of the capacity it had purchased in the swaps.
+The remaining two-thirds of the capacity purchased was not needed by Qwest, could not
+be resold, and was therefore worthless.
+123) Many of the routes Qwest purchased in IRU swaps duplicated network assets Qwest
+already had. For example, Qwest purchased similar East Asia capacity during 2001 in
+four swap transactions with Cable & Wireless, Global Crossing, Flag Telecom Ltd.
+(“Flag”) and Tycom Networks, Inc. Because the routes were redundant, Qwest could not
+and did not have a business use for at least three of the four routes.
+124) Additionally, on five occasions between the second quarter of 2000 and April 2001,
+Qwest’s salespeople purchased a total of $70 million of capacity in Japan from Cable &
+
+[[PDF_PAGE_0033]]
+Wireless. At the same time, Qwest’s network engineers, who had no knowledge of the
+swaps, were building capacity along the same or similar routes. When Qwest’s network
+engineers first learned of the purchases in April 2001, Qwest abandoned construction of
+its own network in Japan.
+125) In another example, Qwest engaged in a swap with Enron on December 21, 1999,
+whereby it bought fiber between Denver and Dallas for $39.2 million. However, Qwest
+had already built and completed a route between those cities that had excess capacity and
+the ability to be expanded.
+f. Failure to Exchange Cash
+126) Each of Qwest’s capacity swaps with other carriers required that the parties exchange
+cash to demonstrate the purported value of the swapped capacity. Often the purchaser of
+capacity failed to submit its payment to Qwest as required prior to the end of the quarter
+when Qwest recognized the revenue. Under such circumstances, recognition of the
+revenue before the cash payment was received was improper under GAAP.
+127) For example, both Qwest and Cable & Wireless failed to exchange cash for all five IRU
+transactions between the parties recorded by Qwest during fiscal year 2000. In fact, as of
+December 31, 2000, Cable & Wireless owed approximately $232 million to Qwest for its
+2000 IRU purchases and did not start paying until first quarter 2001.
+128) In another example, in September 2001, Qwest entered into a swap transaction with
+Global Crossing in which Qwest sold $63.4 million of North American capacity and
+recognized approximately $29 million in upfront revenue. Simultaneously, Qwest bought
+from Global Crossing $67.2 million in South American capacity. Qwest and Global
+
+[[PDF_PAGE_0034]]
+Crossing tried to “paper over” the transaction by exchanging facsimile copies of checks
+until wire-transfers could be completed on October 1, 2001, after the close of the quarter.
+4. Concealment of Known Revenue Recognition Failures on IRU
+Transactions
+129) From the fall 2001 through the filing of Qwest’s 2001 Form 10-K on April 1, 2002,
+revenue recognition issues were topics of significant discussion among Qwest senior
+management.
+130) Specifically, in October 2001, the existence of a side agreement in which Qwest
+guaranteed Cable & Wireless portability of assets purchased in the fourth quarter 2000
+surfaced when Cable & Wireless informed Qwest that it was ready to port. Qwest
+originally denied Cable & Wireless’ request and, when Cable & Wireless threatened
+litigation, the issue escalated through Qwest senior management.
+131) Thereafter, in March 2002, Qwest’s outside counsel gave legal advice that the balance of
+potential outcomes favored Cable & Wireless if the parties litigated the enforceability of
+the side agreement. Qwest knew, based upon a document prepared by several employees,
+that litigation or arbitration with Cable & Wireless had the potential to “bleed[] into other
+transactions” resulting in an “unwind” of all IRU revenue.
+132) Some members of Qwest senior management withheld from Qwest's auditors and others
+the litigation and accounting risks raised by the Cable & Wireless side letter and quietly
+settled with Cable & Wireless on the eve of filing the 2001 Form 10-K for the full value
+of the claim.
+
+[[PDF_PAGE_0035]]
+133) During the same period of time, another red flag concerning a guarantee of porting to a
+Qwest IRU customer came to the attention of Qwest’s senior management. Specifically,
+in December 2001, Flag informed Qwest’s outside auditors through an audit confirmation
+letter of the existence of a “verbal agreement” from Qwest guaranteeing Flag portability
+of assets purchased in the second quarter 2001. The auditors advised Qwest of Flag’s
+claim.
+134) Qwest investigated the issue and obtained legal advice that if Qwest denied Flag's request
+to port, Qwest may be found to have refused its consent in bad faith. Some members of
+Qwest senior management withheld these critical facts from others involved in the 2001
+Form 10-K process.
+135) In light of these transactions, other IRU and equipment sale transactions, and a request
+for documents relating to IRU transactions between Qwest and Global Crossing by an
+office of the Commission’s enforcement division in February 2002, Qwest retained the
+same outside counsel that later opined on the Cable & Wireless transactions, ostensibly to
+perform an objective investigation of the appropriateness of Qwest’s accounting for all
+IRU transactions.
+136) Qwest’s outside counsel issued preliminary conclusions on March 29, 2002 and, despite
+the fact that the investigation was ongoing, Qwest senior management used the counsel’s
+preliminary findings to conclude that all IRU revenue was in accordance with GAAP, to
+justify not restating, and to file the 2001 Form 10-K timely.
+137) Moreover, in order to get Qwest's auditors to sign off on Qwest’s 2001 Form 10-K,
+Qwest accounting personnel read portions of the outside counsel's report to Qwest’s
+
+[[PDF_PAGE_0036]]
+auditors leaving out critical facts detailed in the report, including facts highlighting the
+incomplete nature of the report and accounting conclusions reached. The accounting
+personnel also omitted in discussions with the auditors other relevant facts known about
+specific transactions that impacted revenue recognition.
+138) Qwest also performed a purported materiality analysis on the IRU accounting issues
+identified in the outside counsel’s report. However, as with the auditors, Qwest failed to
+provide the critical information regarding the IRU transactions to the individual responsible
+for the analysis.
+139) Before filing its 2001 Form 10-K, Qwest's auditors required that Qwest obtain an outside
+legal opinion that title could transfer on all IRU transactions. At the conclusion of the
+review, outside counsel was not able to provide a legal opinion that addressed whether title
+“can or will” transfer. Rather, outside counsel was only able to conclusively state that the
+IRU agreements provided for title transfer. Notwithstanding its inability to obtain a legal
+opinion on the issue, Qwest represented to its auditors that title would transfer at the end of
+the lease term and thus revenue could be recognized upfront.
+140) On April 1, 2002, Qwest filed its 2001 Form 10-K, which falsely represented that its IRU
+accounting was in accordance with GAAP, and failed to disclose its continued internal
+investigation of IRU revenue recognition issues and the risks and uncertainties associated
+with its ability to transfer title on IRUs.
+C. Qwest Improperly Recognized Revenue on One-Time Equipment Sales
+141) In addition to IRUs, Qwest used contrived sales of Internet equipment as “heroin” or gap
+fillers to meet its need for quick fixes for revenue shortfalls at the end of quarters.
+
+[[PDF_PAGE_0037]]
+Members of Qwest senior management participated in schemes to recognize fraudulently
+a total of $621 million of revenue on Internet equipment sales and related services
+through Qwest's Global Business Markets unit and Qwest’s Internet Solutions group
+(“Internet Solutions”) to three customers: KMC Telecom, Inc., Genuity, Inc., and the
+Arizona School Facilities Board (“ASFB”).
+142) Each of these sales of Internet equipment involved an integrated services component that,
+according to GAAP, would require revenue to be recognized ratably over the life of the
+services contract. To enable upfront revenue recognition, however, members of Qwest
+senior management and employees participated in schemes to separate artificially the
+equipment sales from the services.
+1. KMC
+143) In the first and second quarters of 2000 and 2001, the Internet Solutions group and KMC,
+a privately held telecommunications company in New Jersey, entered into four
+transactions in which Qwest sold KMC a total of $452 million of Internet-related
+telephone equipment. Simultaneously, Qwest purchased Internet-related telephone
+services from KMC using the same equipment.
+144) Qwest senior managers and employees entered into the scheme to separate artificially the
+equipment sale from the services component, knowing that Qwest was entering into the
+transactions in large part during the last few days of each quarter to fill gaps in forecasted
+revenue, rather than for legitimate business needs. Qwest management knew that the
+amount of equipment to be sold to KMC was determined by the amount of the revenue
+gap.
+
+[[PDF_PAGE_0038]]
+145) Qwest’s March 31, 2000 Form 10-Q, June 30, 2000 Form 10-Q, December 31, 2000
+Form 10-K, March 31, 2001 Form 10-Q, June 30, 2001 Form 10-Q, and December 31,
+2001 Form 10-K were all materially false and misleading because upfront revenue
+recognition on each of the equipment sales to KMC was improper under GAAP.
+Fundamental GAAP requires the revenue for all four transactions to be recognized
+ratably over the life of the service contracts as the accounting must reflect the
+understanding between the parties that the equipment sale and purchase of services by
+Qwest were interrelated.
+146) Qwest fraudulently recognized revenue upfront on the KMC equipment sales as follows:
+in the first quarter of 2000, Qwest recognized $135.4 million; in the second quarter of
+2000, Qwest recognized $169 million; in the first quarter of 2001, Qwest recognized $65
+million; and in the second quarter of 2001, Qwest recognized $83 million.
+147) Qwest senior management and its employees knew that the revenue that Qwest
+recognized from each of the four KMC transactions was material. The revenue Qwest
+recognized from the first quarter 2000 transaction was 11 percent of total pre-merger
+revenue for that quarter and the revenue for the second quarter 2000 KMC transaction
+was 13 percent of revenue for that quarter. Qwest’s first quarter 2001 transaction with
+KMC contributed 1.3 percent of pre-merger Qwest’s revenue and the second quarter
+2001 transaction was 1.6 percent of revenue.
+2 Genuity
+148) In the third quarter of 2000, Qwest recognized fraudulently $100 million, or 2.3 percent,
+in revenue based on a September 22, 2000 transaction with Genuity under which Qwest
+would supply certain equipment and Internet-related services. Qwest's immediate
+
+[[PDF_PAGE_0039]]
+recognition of the $100 million in revenue did not comply with GAAP as the accounting
+did not faithfully represent the entire interrelated transaction that involved both the
+equipment sale and the concurrent provision of services.
+149) As a result of the fraudulent Genuity transaction, Qwest's September 30, 2000 quarterly
+report, December 31, 2000 annual report, March 31, 2001 quarterly report, June 30, 2001
+quarterly report, September 30, 2001 quarterly report, and December 31, 2001 annual
+report were all materially false and misleading.
+3. ASFB
+150) Qwest fraudulently recognized $33.6 million in revenue on sales of capital equipment to
+the ASFB in the second quarter of 2001. A member of Qwest senior management and
+others planned, directed, and carried out an elaborate scheme that involved the artificial
+separation of the equipment sale from installation services, and wrongfully characterized
+the sale as a bill and hold transaction under GAAP. Instead, Qwest should have used the
+percentage of completion method of accounting.
+151) Qwest's Form 10-Q for the second quarter ended June 30, 2001 therefore contained a
+materially false and misleading statement in that it improperly recognized the $33.6
+million in revenue from the ASFB transaction.
+152) Qwest claimed to have adjusted the ASFB revenue prior to the filing of its 2001 Form 10-
+K. However, Qwest did so by reducing fourth quarter revenue by the $33.6 million
+recognized in the second quarter rather than restating results for the second quarter as
+required by GAAP. Thus, in Qwest's Form 10-K for 2001, Qwest repeated the false
+revenue figures for the second quarter in its breakdown of quarterly revenue. By doing
+
+[[PDF_PAGE_0040]]
+so, Qwest avoided disclosure of a change to second quarter revenue resulting from the
+improperly recognized revenue from the ASFB contract.
+D. Qwest Made False and Misleading Di sclosures Concerning Revenue From Its
+Directory Services Unit
+153) As part of Qwest’s scheme to show revenue and EBITDA growth every quarter, Qwest
+senior management directed Qwest Dex Inc. ("Dex"), a wholly owned subsidiary of
+Qwest, to meet unrealistic revenue and EBITDA targets. To achieve those targets, Qwest
+manipulated revenue from Dex for 2000 and 2001 by secretly altering directory
+publication dates and lives.
+154) At all relevant times, Dex published telephone directories year-round in approximately
+300 markets in 14 states. Directories’ lives were traditionally twelve months. Dex
+obtained revenue by selling advertising space in its directories.
+155) In late 1999, Dex adopted a “point of publication” method of accounting and began to
+recognize all advertising revenue for a directory at the time Dex began deliveries of that
+directory to the public. Previously, Dex recognized directory revenue over the life of the
+directory.
+156) In August 2000, Dex executives informed Qwest senior management that Dex would not
+meet its 2000 EBITDA target and presented the option of making up for the shortfall by
+publishing Dex’s Colorado Springs directory in December 2000 rather than January 2001
+as scheduled, thereby allowing Qwest to recognize revenue from the directory in 2000
+rather than 2001.
+
+[[PDF_PAGE_0041]]
+157) While presenting that option, one Dex executive expressed his concern that such a
+schedule change would reduce 2001 revenue and earnings and that, in his view, Qwest
+probably would be required to disclose the change. The Dex executive made it clear to
+Qwest senior management that he did not favor the schedule change. Notwithstanding
+such opposition, Qwest senior management instructed Dex to go forward with the
+change.
+158) By recognizing revenue from the Colorado Springs directory in 2000, Qwest generated
+$28 million in additional revenue and $18 million in additional EBITDA for the year.
+The additional revenue generated in 2000 accounted for about 30 percent of Dex’s 2000
+year-over-year revenue increase, and allowed Dex to show 6.6 percent year-over-year
+revenue growth versus 4.6 percent if the schedule change had not been made.
+159) Qwest’s 2000 Form 10-K stated that Dex’s revenue for 2000 increased by almost $100
+million due in part to “an increase in the number of directories published.” That
+statement failed to apprise investors that Dex generated nearly one-third of that amount
+by publishing the Colorado Springs directory twice in 2000, or that the schedule change
+would produce a commensurate decline in Dex revenue for the first quarter of 2001.
+160) For 2001, Qwest senior management again established unrealistic revenue and EBITDA
+targets for Dex. The EBITDA target, in fact, was $80-100 million greater than the
+amount Dex management believed was achievable. Despite Dex management’s repeated
+complaints to members of Qwest senior management about the unrealistic targets, Qwest
+senior management refused to change the targets or allow Dex a “credit” to compensate
+
+[[PDF_PAGE_0042]]
+for the Colorado Springs directory schedule change. Rather, Qwest senior management
+instructed Dex management to “find a way” to compensate for the shortfall.
+161) Faced with the unrealistic 2001 financial targets, Dex management met with some of
+Qwest’s senior management in March 2001 to discuss “gap-closing” alternatives for the
+first two quarters of 2001. These alternatives included advancing the publication dates of
+several directories, thereby allowing Dex to recognize revenue in earlier quarters, and
+lengthening the lives of other directories from 12 to 13 months, thereby allowing Dex to
+bill each advertiser for one additional month of advertising fees. Senior Qwest managers
+instructed the Dex managers to implement the changes solely for the purpose of
+artificially accelerating reported revenue for the first two quarters of 2001.
+162) Later in 2001, Dex managers met with members of Qwest senior management and again
+informed Qwest senior management that Dex would need to implement directory
+schedule changes to meet its third and fourth quarter financial targets. Members of
+Qwest senior management approved the schedule changes.
+163) During 2001, Dex advanced the publication dates or extended the lives of 34 directories,
+and those schedule changes produced $42 million in additional revenue and $41 million
+in additional EBITDA. Qwest’s Forms 10-Q for the first three quarters of 2001 stated
+that period-over-period improvements in Dex’s revenue were attributable in part to
+changes in the “mix” and/or “lengths” of directories published. Like the 2000 Form 10-
+K, these reports omitted any further statements about the directory schedule changes or
+the reasons for those changes and were, therefore, materially false and misleading.
+
+[[PDF_PAGE_0043]]
+E. Qwest Improperly Recognized Reve nue From Its Wireless Division And
+Fraudulently Concealed Accounting Errors After They Were Discovered
+164) Qwest improperly recognized revenue of $57 million in 2000, $46 million in 2001, and
+$9 million during the first two quarters of 2002 from its Wireless subsidiary. The
+improper revenue recognition was due to errors relating to: 1) a failure to adjust revenue
+for returned phones and phone repairs; 2) the erroneous recognition of revenue on
+accessories given to customers for free; and 3) a failure to reduce price plan revenue to
+account for miscellaneous billing adjustments.
+165) Upon discovery of each error, the first of which was discovered in approximately May
+2001 and the last in approximately August 2002, the people in Wireless’ accounting
+group corrected the error on a going-forward basis. Additionally, on approximately ten
+occasions between October 2001 and August 2002, Wireless’ controller informed
+Wireless’ CFO of the existence and the amount of the errors. Due to the numbers-
+oriented environment created by Qwest senior management, however, the Wireless CFO
+actively hid the errors and instructed others to do likewise.
+166) As a result, Qwest failed to correct or restate amounts as required by GAAP and made
+false and misleading statements in annual, quarterly, and current reports filed with the
+Commission between October 31, 2001 and August 8, 2002.
+F. Fraudulent Understatement of Expenses
+167) When revenue gimmicks alone were insufficient to meet EBITDA growth targets,
+Qwest’s corporate accounting group, with the approval of members of senior
+management, improperly capitalized expenses and artificially inflated EBITDA results.
+
+[[PDF_PAGE_0044]]
+In doing so, for the year ended December 31, 2001, Qwest improperly increased
+EBITDA by $231 million.
+1. Improper Accounting for Sales Commission Plans
+168) After merging with US West and adopting its accounting policy of expensing sales
+commissions in the period paid, Qwest changed the policy to deferring sales
+commissions. Although GAAP allows for the more aggressive method of accounting for
+commissions under certain circumstances, Qwest did not meet the requirements for
+deferral. Specifically, Qwest did not have procedures in place to track and amortize
+capitalized commissions over the actual contractual life as required by GAAP.
+169) Qwest also failed to disclose this change in accounting policy in its Commission filings
+for the annual and quarterly periods ended March 31, 2001; June 30, 2001; September 30,
+2001; December 31, 2001; and March 31, 2002 as required by GAAP. As a
+consequence, Qwest's filings were misleading. Investors could not assess adequately
+Qwest’s financial position because, among other things, they did not know that expenses
+associated with sales commissions had been reduced by a change in accounting policy
+rather than by operational changes.
+170) Qwest further failed to obtain a preferability letter justifying its change in accounting
+policy as required by Regulation S-X of the federal securities laws.
+171) Qwest’s inappropriate deferral of sales commissions resulted in a $158 million
+overstatement of pretax income and adjusted EBITDA in 2001.
+
+[[PDF_PAGE_0045]]
+2. Improper Adjustments To Co mpensated Absences Accrual
+172) Prior to June 2001, Qwest calculated its compensated absences accrual by using 100
+percent of the vacation time the company owed to its occupational employees for the
+entire year. To help Qwest meet various financial targets, Qwest’s corporate accounting
+group on three occasions improperly decreased the accrual from approximately $118
+million to approximately $23 million, a decrease of 81 percent over the course of
+approximately seven months, with no corresponding decrease in the actual amount of
+vacation time owed.
+173) In contravention of GAAP, Qwest failed to disclose the changes in accounting
+methodology for compensated absences in the filings with the Commission, including its
+second quarter 2001 Form 10-Q and 2001 Form 10-K. As a result of the three
+adjustments made, Qwest fraudulently decreased its pre-tax loss by $73 million, or one
+percent, and net loss by $44 million, or one percent, in its 2001 Form 10-K.
+G. Other Accounting Misstatements
+1. Improper Operator Services Revenue
+174) In its 2000 and 2001 annual reports, Qwest improperly recognized a total of $56 million
+in revenue from operator services, which include operator assistance to hotels and motels,
+private pay phone owners, and Qwest long distance customers. Two improper
+accounting practices caused the revenue overstatement.
+175) First, Qwest was a party to certain service contracts that required Qwest’s Operator
+Services unit to collect money from end-users on behalf of its operator services
+customers and then remit, or pass through, all or part of that money to those customers.
+From at least January 2000 through December 2001, Qwest recognized revenue on the
+
+[[PDF_PAGE_0046]]
+entire amount it collected under those contracts and recorded as an expense the entire
+amount it remitted to its customers. That accounting treatment was improper because,
+under GAAP, Qwest should have recorded revenue only on the difference between the
+amount it collected and the amount it remitted to its customers.
+176) Second, from at least January 2001 through December 2001, Qwest failed to maintain an
+adequate reserve account for billing credits issued by a third party billing company, in
+contravention of GAAP.
+2. Design Services Costs
+177) Beginning in the first quarter of 2000, US West changed its accounting policy under
+which it began inappropriately capitalizing costs associated with, among other things,
+design service centers. After the merger, Qwest continued inappropriately to capitalize
+these costs. Qwest’s capitalization of design service center costs was not in conformity
+with GAAP because Qwest could not specifically identify the costs but, instead,
+estimated the amount of costs to be capitalized. By capitalizing those costs, Qwest
+overstated pretax income by $103 million in its 2000 Form 10-K and by $97 million in its
+2001 Form 10-K.
+3. Purchase Accounting
+178) Qwest made a number of purchase accounting errors in connection with its accounting
+for the merger with US West on June 30, 2000. These errors caused Qwest to understate
+its pre-tax loss in its 2000 Form 10-K by $263 million and in its 2001 Form 10-K by
+$347 million. The largest of these errors involved Qwest’s inclusion of $155 million in
+2000 and $249 million in 2001 of unfavorable contract costs as merger-related liabilities.
+
+[[PDF_PAGE_0047]]
+179) GAAP provides that these unfavorable contract costs should have been expensed when
+incurred. As a result of this error relating to unfavorable contract costs, Qwest
+improperly narrowed its pre-tax loss by $155 million in its 2000 Form 10-K and by $249
+million in its 2001 Form 10-K.
+4. Restructuring Expenses
+180) Qwest abandoned certain leased real estate facilities in the fourth quarter of 2001. Qwest
+inappropriately excluded certain items in the restructuring charges relating to the
+abandonment of the properties. As a result, Qwest improperly narrowed its pre-tax loss
+by $240 million in its 2001 Form 10-K.
+H. Qwest Made False or Misleading Statements about Qwest Management’s
+Investments in Qwest’s Vendors
+181) Based on its huge capital expenditure budget and status as a marquee player in the
+telecommunications industry, Qwest enjoyed tremendous leverage over small
+telecommunications equipment and service vendors between 1999 and 2001. In many
+cases, a commitment to purchase equipment or services by a high-profile company such
+as Qwest was essential to the success of a vendor’s initial public offering (“IPO”).
+182) Qwest exerted its leverage by refusing to do business with vendors unless those vendors
+allowed Qwest and certain members of its senior management to invest in those vendors
+shortly before, or at the time of, their IPOs. In recognition of this practice, a senior
+Qwest engineer told a vendor, “You have to pay to play.” Such investment opportunities
+were highly sought-after because the value of stock in telecommunications companies
+usually increased dramatically shortly after those companies went public.
+
+[[PDF_PAGE_0048]]
+183) Qwest’s investment opportunities typically took the form of a pre-IPO warrant (or option
+to buy stock) for two percent of the vendor’s outstanding shares, while Qwest senior
+managers usually invested through the vendor’s “friends and family” program, under
+which the vendor offered typically five percent of its IPO shares to employees’ family
+members and early supporters of the company. In some cases, Qwest senior management
+also made pre-IPO investments in the vendor companies. Several vendors, in fact,
+opened special financing rounds to accommodate those individuals’ desire to invest even
+though the vendors did not need additional capital.
+184) Qwest senior management demanded and negotiated the investment opportunities.
+Senior management also decided which employees would be allowed to participate in the
+vendor IPOs, usually limiting such opportunities to members of senior management.
+Senior management used the opportunities to participate in vendor IPOs as an employee
+retention tool and, consistent with that purpose, some senior managers viewed those
+opportunities as compensation.
+185) In their desire to acquire equity positions in vendors, Qwest and its senior managers
+agreed to buy hundreds of millions of dollars of equipment that Qwest did not need and
+knew would never be deployed in its network.
+186) For example, Qwest committed to buy $400 million of equipment from Tellium, Inc.,
+even though Qwest engineers had not identified any use for that equipment in Qwest’s
+network.
+187) Much of the useless equipment that Qwest bought was sold for scrap at pennies on the
+dollar, while much of it sits idle in warehouses.
+
+[[PDF_PAGE_0049]]
+188) In its 1999 and 2000 Forms 10-K, Qwest’s ebullient statements regarding the equipment
+purchased for its state-of-the-art network wholly failed to apprise investors that Qwest
+committed to purchase millions of dollars of equipment that it never intended to deploy in
+its network. In those same filings, Qwest’s statements regarding its strategic
+relationships with, and investments in, vendors failed to apprise investors that Qwest
+entered into strategic relationships with, and invested in, many vendors in part for the
+benefit of certain members of its senior management. Such statements were therefore
+materially false and misleading.
+189) Further, in its 1999, 2000, and 2001 Forms 10-K and certain proxy statements, Qwest
+failed to disclose the opportunities to invest in vendors as executive compensation. Item
+402 of Regulation S-K requires “clear, concise and understandable disclosure of all plan
+and non-plan compensation awarded to, earned by, or paid to [the CEO and four other
+most highly paid executive officers] by any person for all services rendered in all
+capacities to the registrant and its subsidiaries . . . .” The investment opportunities were
+worth several million dollars to each of the individuals specified in Item 402. Further,
+those opportunities were tied directly to the individuals’ capacities as executive officers
+of Qwest and therefore constituted compensation. By failing to disclose those
+opportunities, Qwest made materially false and misleading statements and omissions
+about executive compensation.
+I. Undisclosed Related Party Transaction With Anschutz Company
+190) In 2000, Qwest decided to sell an aircraft and purchase a different aircraft. Qwest
+decided to do so in the form of a “like-kind exchange” transaction under the Internal
+Revenue Code.
+
+[[PDF_PAGE_0050]]
+191) In order to qualify as a like-kind exchange, the sale of the old asset and the purchase of
+the new asset must take place within six months of each other. The benefit of a like-kind
+exchange is that the company is not taxed on the sale at the time of the exchange, similar
+to the rules that permit the deferral of taxes upon the sale of a house and purchase of a
+new one, thereby encouraging investment.
+192) In November 2000, Qwest retained a broker to sell the plane and acquired from the
+broker a new aircraft. Qwest transferred the old aircraft to the broker who began
+attempting to sell the old plane.
+193) In early May 2001, near the end of the six-month window to complete the like-kind
+exchange, a subsidiary of the Anschutz Company, which was beneficially owned by
+Philip Anschutz, a co-chairman of Qwest’s board of directors, agreed to purchase the
+aircraft for $7.6 million, which resulted in significant tax deferrals and savings for Qwest.
+Disinterested members of Qwest’s board of directors approved the transaction.
+194) Item 13 of Form 10-K and Item 7 of Schedule 14A required Qwest to disclose its
+transaction with the Anschutz Company in its 2001 Form 10-K and definitive proxy
+statement filed April 9, 2002. Qwest, however, failed to disclose the transaction in either
+of those filings.
+J. Qwest Sold Unregistered Securities
+195) Qwest admitted that it engaged in unregistered sales of securities in its 2002 Form 10-K,
+filed on October 16, 2003. In 2000, 2001, and 2002, Qwest issued to itself 53,596,
+114,089, and 31,731 shares of common stock, respectively, registered under Form S-8
+and reserved for the Qwest Equity Incentive Plan to pay bonuses owed to former
+
+[[PDF_PAGE_0051]]
+employees. Qwest sold these shares in the open market for aggregate gross proceeds of
+$140,251 in 2000, $2,470,026 in 2001, and $2,534,317 in 2002.
+196) The Form S-8 rules for registered issuances of securities to employees provide, among
+other things, that (i) the shares must be issued to “employees” as defined by the rules, and
+(ii) that employees’ services may not be “in connection with the offer or sale of securities
+in a capital-raising transaction.”
+197) Qwest admitted in its 2002 Form 10-K that it issued the stock in capital raising
+transactions because it used the proceeds to pay for former employees' bonuses.
+Therefore, the issuance and sale of these securities did not qualify for registration under
+any of Qwest’s Form S-8 registration statements and no exemption from registration was
+available.
+FIRST CLAIM FOR RELIEF
+(Violations of Section 17(a)(1) of the Securities Act)
+15 U.S.C. § 77q(a)(1)
+198) Paragraphs 1) through 196) are hereby realleged and incorporated by reference.
+199) Defendant Qwest directly and indirectly, with scienter, in the offer or sale of Qwest
+securities, by use of the means or instruments of transportation or communication in
+interstate commerce or by use of the mails, has employed a device, scheme, or artifice to
+defraud.
+200) By reason of the foregoing, defendant Qwest violated and unless restrained and enjoined
+will violate Section 17(a)(1) of the Securities Act.
+
+[[PDF_PAGE_0052]]
+SECOND CLAIM FOR RELIEF
+(Violations of Section 17(a)(2) and 17(a)(3) of the Securities Act)
+15 U.S.C. § 77q(a)(2) and (3)
+201) Paragraphs 1) through 196) are hereby realleged and incorporated by reference.
+202) Defendant Qwest directly and indirectly, in the offer or sale of Qwest securities, by use of
+the means or instruments of transportation or communication in interstate commerce or
+by use of the mails, has obtained money or property by means of untrue statements of
+material fact or omissions to state material facts necessary in order to make the
+statements made, in light of the circumstances under which they were made, not
+misleading; or engaged in transactions, practices, or courses of business which have been
+or are operating as a fraud or deceit upon the purchasers of Qwest securities.
+203) By reason of the foregoing, defendant Qwest violated and unless restrained and enjoined
+will violate Section 17(a)(2) and (3) of the Securities.
+THIRD CLAIM FOR RELIEF
+(Violations of Section 10(b) of the Exchange Act and Rule 10b-5)
+15 U.S.C. § 78 j(b) and 17 C.F.R. § 240.10b-5
+204) Paragraphs 1) through 196) are hereby realleged and incorporated by reference.
+205) Defendant Qwest directly and indirectly, with scienter, in connection with the purchase or
+sale of Qwest securities, by use of the means or instrumentalities of interstate commerce
+or by use of the mails, has employed devices, schemes, or artifices to defraud; has made
+untrue statements of material fact or omitted to state material facts necessary in order to
+make the statements made, in light of the circumstances under which they were made, not
+misleading; or has engaged in acts, practices, or courses of business which have been and
+are operating as a fraud or deceit upon the purchasers or sellers of such securities.
+
+[[PDF_PAGE_0053]]
+206) By reason of the foregoing, Qwest violated and unless restrained and enjoined will
+violate Section 10(b) of the Exchange Act and Rule 10b-5.
+FOURTH CLAIM FOR RELIEF
+(Violations of Section 13(a) of the Exchange Act, Item 402 of Regulation S-K
+and Rules 12b-20, 13a-1, 13a-11 and 13a-13)
+15 U.S.C. § 78 m(a) and 17 C.F.R. §§ 229.402, 240.12b-20, 240.13a-1,
+240 13a-11, and 240.13a-13
+207) Paragraphs 1) through 196) are hereby realleged and incorporated by reference.
+208) Qwest, as issuer of a security registered pursuant to Section 12 of the Exchange Act, filed
+materially misleading annual, periodic and quarterly reports with the Commission and
+failed to file with the Commission, in accordance with rules and regulations the
+Commission has prescribed, information and documents required by the Commission to
+keep current information and documents required in or with an application or registration
+statement filed pursuant to Section 12 of the Exchange Act and annual reports and
+quarterly reports as the Commission has prescribed.
+209) By reason of the foregoing, Qwest violated and unless restrained and enjoined will
+violate Section 13(a) of the Exchange Act and Rules 12b-20, 13a-1, 13a-11, and 13a-13.
+FIFTH CLAIM FOR RELIEF
+(Violations of Section 13(b)(2) of the Exchange Act and Rule 13b2-1)
+15 U.S.C. § 78m(b)(2) and 17 C.F.R. § 240.13b2-1
+210) Paragraphs 1) through 196) are hereby realleged and incorporated by reference.
+211) Qwest failed to make and keep, and directly or indirectly falsified or caused to be
+falsified, books, records, and accounts, which, in reasonable detail, accurately and fairly
+reflected the company’s transactions and dispositions of its assets and failed to devise and
+maintain a system of internal accounting controls sufficient to provide reasonable
+assurances that transactions were recorded as necessary to permit preparation of financial
+
+[[PDF_PAGE_0054]]
+statements in conformity with generally accepted accounting principles or any other
+criteria applicable to such statements.
+212) By reason of the foregoing, Qwest violated and unless restrained and enjoined will
+violate Section 13(b)(2) of the Exchange Act and Rule 13b2-1 thereunder.
+SIXTH CLAIM FOR RELIEF
+(Violations of Section 14(a) of the Exchange Act and Rules 14a-3 and 14a-9)
+15 U.S.C. § 78 n(a) and 17 C.F.R. §§ 240.14a-3 and 240.14a-9
+213) Paragraphs 1) through 196) are hereby realleged and incorporated by reference.
+214) Defendant Qwest, by use of the mails or by the means or instrumentalities of interstate
+commerce or of any facility of a national securities exchange or otherwise, in
+contravention of such rules and regulations as the Commission has prescribed, solicited
+or permitted the use of its name to solicit a proxy or consent or authorization with respect
+to Qwest securities, which are registered pursuant to Section 12 of the Exchange Act.
+215) By reason of the foregoing, Qwest violated and unless restrained and enjoined will
+violate Section 14(a) of the Exchange Act and Rules 14a-3 and 14a-9.
+SEVENTH CLAIM FOR RELIEF
+(Violations of Sections 5(a) and (c) of the Exchange Act)
+15 U.S.C. §§ 77e(a) and 77e(c)
+216) Paragraphs 1) through 196) are hereby realleged and incorporated by reference.
+217) Qwest, directly and indirectly, made use of the means or instruments of transportation
+and communication in interstate commerce and of the mails to offer to sell or offer to buy
+through the use or medium of any prospectus or otherwise Qwest securities, without a
+registration statement having been filed with the Commission as to such securities in
+violation of Sections 5(a) and 5(c) of the Securities Act.
+
+[[PDF_PAGE_0055]]
+218) No registration statements have been filed with the Commission or are otherwise in effect
+with respect to the stock offered by Qwest.
+219) By reason of the foregoing, Qwest has violated and unless restrained and enjoined will
+continue to violate Sections 5(a) and 5(c) of the Securities Act.
+PRAYER FOR RELIEF
+WHEREFORE, the Commission respect fully requests that the Court:
+I.
+Find that the Defendant comm itted the violations alleged.
+II.
+Enter an Injunction, in a form consistent wi th Rule 65(d) of the Federal Rules of Civil
+Procedure, permanently restraining and enjoining defendant, its subsidiaries, officers, directors,
+agents, servants, employees, and attorneys-in-fact, and all persons in active concert or participation
+with them, from violating, directly or indirectly, the provisions of law and rules alleged in this
+complaint.
+III.
+Order that defendant disgorge all ill-go tten gains, including post-judgment interest,
+resulting from the violations alleged herein.
+
+[[PDF_PAGE_0056]]
+IV.
+Order defendant to pay civil penalties pursuan t to Section 21(d)(3) of the Exchange Act,
+15 U.S.C. § 78u(d)(3), and Section 20(d) of the Securities Act, 15 U.S.C. § 77t(d), in an amount
+to be determined by the Court.
+V.
+Grant such other relief as this Court may deem just or appropriate.
+Dated:
+Respectfully submitted,
+___________________________
+Attorneys for Plaintiff
+Securities and Exchange Commission
+1801 California Street, Suite 1500
+Denver, Colorado 80202
+Telephone: (303) 844-1000
+Facsimile: (303) 844-1068

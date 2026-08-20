@@ -1,0 +1,24 @@
+HTTP/2 200 
+date: Sun, 26 Jul 2026 19:15:54 GMT
+content-type: text/html; charset=utf-8
+access-control-allow-origin: *
+cache-control: no-cache, no-store, must-revalidate
+set-cookie: __cf_bm=woZMfdzbP1fo50X7BDzsFhd2P6WzVF8MDIbLWfVBsdM-1785093354.3410356-1.0.1.1-hYKzp5zxh0O.WD90W8j8Dw4LdSU9noZsLEgK8FtPhcLHFWyZXKRQfwCcoeKgMx3Q8nPlr6kG9sU216TuSL.X3DTdw5GOvxlb0LX5Ovr6di8iRf9GK5SwaSe8Oh0o0oWw; HttpOnly; SameSite=None; Secure; Path=/; Domain=eib.org; Expires=Sun, 26 Jul 2026 19:45:54 GMT
+content-security-policy: default-src 'self'  https://*.eib.org;media-src 'self' blob: https://www.citygapfund.org; connect-src mdb-dashboard-widget.vercel.app *.bsky.app *.typeform.com *.piktochart.com vimeo.com eib.containers.piwik.pro infogram.com *.readspeaker.com *.eib.org eib.piwik.pro *.hotjar.com *.fontawesome.com *.googletagmanager.com *.google-analytics.com *.google.com *.demdex.net *.curator.io fonts.googleapis.com unpkg.com; script-src 'self' 'report-sample' 'unsafe-eval' 'unsafe-inline' *.eib.org  mdb-dashboard-widget.vercel.app *.typeform.com *.piktochart.com web-eur.cvent.com cdn.jsdelivr.net googleads.g.doubleclick.net eib.piwik.pro  *.smartsurvey.co.uk eib.containers.piwik.pro *.eib.org *.hotjar.com unpkg.com *.tt.omtrdc.net *.fontawesome.com infogram.com *.infogram.com *.syndication.twimg.com *.google.com *.facebook.net *.twitter.com *.gstatic.com *.europa.eu *.jquery.com *.bit.ly *.demdex.net *.adobedtm.com *.googleapis.com *.googletagmanager.com www.googleadservices.com  *.youtube.com *.mailjet.com *.google-analytics.com s.ytimg.com fonts.gstatic.com *.bootstrapcdn.com cdnjs.cloudfare.com *.visme.co europa.eu *.curator.io *.readspeaker.com; style-src 'self' 'report-sample' 'unsafe-inline' *.typeform.com cdn.jsdelivr.net *.eib.org eib.containers.piwik.pro unpkg.com *.fontawesome.com *.googletagmanager.com *.google.com *.twitter.com *.gstatic.com *.europa.eu fonts.googleapis.com *.bootstrapcdn.com app.mailjet.com europa.eu *.curator.io cdn1.readspeaker.com; object-src 'self'; worker-src blob:; child-src 'self'; frame-src data: *.typeform.com web-eur.cvent.com *.spotify.com *.eib.org www.weforum.org datawrapper.dwcdn.net *.smartsurvey.co.uk *.hotjar.com *.3dvista.com livestream.com infogram.com *.infogram.com *.sli.do *.vimeo.com vimeo.com *.europa.eu *.exposure.co *.tiesraides.lv *.twitter.com *.google.com youtu.be *.acast.com *.visme.co *.mailjet.com *.mjt.lu *.youtube.com europa.eu *.curator.io *.readspeaker.com player.clevercast.com *.youtube-nocookie.com; font-src 'self' data: *.eib.org *.piktochart.com fonts.gstatic.com eib.containers.piwik.pro  *.fontawesome.com  europa.eu *.curator.io; img-src 'self' data: mdb-dashboard-widget.vercel.app *.eif.org *.bsky.app *.piktochart.com *.vimeocdn.com *.google.com *.google.fr *.google.lu *.google.de googleads.g.doubleclick.net infogram-thumbs-1024.s3-eu-west-1.amazonaws.com infogram.com  *.eib.org *.youtube.com eib.piwik.pro eib.containers.piwik.pro *.mailjet.com *.facebook.com *.twitter.com *.googletagmanager.com *.twimg.com *.europa.eu *.google-analytics.com eib.sc.omtrdc.net europa.eu *.fastly.net server.arcgisonline.com *.curator.io; form-action 'self' https://*.eib.org *.readspeaker.com; base-uri 'self'; frame-ancestors 'self' www.citygapfund.org *.eib.org; report-uri /csp-reports.php; upgrade-insecure-requests;
+cross-origin-embedder-policy: unsafe-none
+cross-origin-opener-policy: unsafe-none
+cross-origin-resource-policy: cross-origin
+expires: 0
+permissions-policy: accelerometer=(*), autoplay=(*), camera=(), cross-origin-isolated=(), display-capture=(), document-domain=(), encrypted-media=(), fullscreen=(*), geolocation=(), gyroscope=(*), hid=(), idle-detection=(), magnetometer=(*), microphone=(), midi=(), payment=(), picture-in-picture=(*), publickey-credentials-get=(), screen-wake-lock=(), serial=(), sync-xhr=(*), usb=(), xr-spatial-tracking=()
+pragma: no-cache
+referrer-policy: origin-when-cross-origin
+server: cloudflare
+strict-transport-security: max-age=31536000; includeSubDomains
+vary: Accept-Encoding
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-permitted-cross-domain-policies: master-only
+x-xss-protection: 1; mode=block
+cf-cache-status: DYNAMIC
+cf-ray: a215bc58af678d44-DEN
+

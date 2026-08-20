@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 2792032,
+  "content_sha256": "c796cf3da3deaf213561a54b731af74526ff72fc854fde005591b0b1880ed1fc",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000104/crwv-20251231.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0016_c796cf3da3deaf21.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000104/crwv-20251231.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-02-26",
+  "publisher": "CoreWeave Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0016_c796cf3da3deaf21.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:20.528654+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:20.468195+00:00",
+  "selected_response_headers": {
+    "content-length": "256767",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:20 GMT",
+    "last-modified": "Mon, 02 Mar 2026 21:14:45 GMT"
+  },
+  "source_id": "SRC-0016",
+  "status": "preserved_complete",
+  "title": "CoreWeave Form 10-K for year ended December 31 2025",
+  "write_state": "new_version_written"
+}

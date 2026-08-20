@@ -1,0 +1,307 @@
+Executive summary – Renewables 2024 – Analysis - IEA
+About
+News
+Events
+Programmes
+Help centre
+Skip navigation
+Energy system
+Explore the energy system by fuel, technology or sector
+Fossil Fuels
+Renewables and Low-Emissions Fuels
+Transport
+Industry
+Buildings
+Explore all
+Topics
+Understand the biggest energy challenges
+The Middle East and Global Energy Markets
+Energy Security
+Artificial Intelligence
+Critical Minerals
+Access and Affordability
+Energy Innovation
+Investment
+Climate Change
+Energy and Gender
+Russia's War on Ukraine
+Investment
+Climate Change
+Energy and Gender
+Russia's War on Ukraine
+Energy and Water
+Fossil Fuel Subsidies
+Net Zero Emissions
+Saving Energy
+COP28: Tracking the Energy Outcomes
+All topics
+Countries
+Explore the energy system by country or region
+Member countries
+Australia
+Austria
+Belgium
+Canada
+Czechia
+Denmark
+Estonia
+Finland
+France
+Germany
+Greece
+Hungary
+Ireland
+Italy
+Japan
+Korea
+Latvia
+Lithuania
+Luxembourg
+Mexico
+New Zealand
+Norway
+Poland
+Portugal
+Slovak Republic
+Spain
+Sweden
+Switzerland
+The Netherlands
+Türkiye
+United Kingdom
+United States
+Accession countries
+Brazil
+Chile
+Colombia
+Costa Rica
+Israel
+Romania
+Association countries
+Argentina
+China
+Egypt
+India
+Indonesia
+Kenya
+Morocco
+Nigeria
+Senegal
+Singapore
+South Africa
+Thailand
+Ukraine
+Viet Nam
+All Countries and Regions
+Data
+Use, download and buy global energy data
+Data explorers
+Understand and manipulate data with easy to use explorers and trackers
+Data sets
+Free and paid data sets from across the energy system available for download
+Policies database
+Past, existing or planned government policies and measures
+Chart Library
+Access every chart published across all IEA reports and analysis
+Explore data
+Reports
+Read the latest analysis from the IEA
+Oil Market Report - July 2026
+Fuel report — 10 July 2026
+Sheltering From Oil Shocks
+Measures to reduce impacts on households and businesses
+Fuel report — 20 March 2026
+World Energy Outlook 2025
+Read more
+Flagship report — 12 November 2025
+Energy Technology Perspectives 2026
+Read more
+Flagship report — 26 March 2026
+All reports
+1
+Sign In
+You are connecting via IP recognition from
+.
+If you wish to proceed, click on
+Connect
+.
+If you prefer to log into your personal account, please sign in below.
+Connect
+OR
+Email *
+Password *
+Forgot password?
+Sign in
+Create an account
+Create a free IEA account to download our reports or subcribe to a paid service.
+Join for free
+Contents
+Cite
+Share
+Download full report
+Executive summary
+Global overview
+Renewable energy consumption
+Renewable electricity
+Renewable transport
+Renewable heat
+Electricity
+Tracking the global tripling pledge
+Renewable fuels
+Cite report
+IEA (2024),
+Renewables 2024
+, IEA, Paris https://www.iea.org/reports/renewables-2024, Licence: CC BY 4.0
+Copy to clipboard
+Share this report
+Twitter
+Facebook
+LinkedIn
+Bluesky
+Email
+Print
+Report options
+Download
+Renewables 2024
+Executive summary
+Global renewables growth set to outpace current government goals for 2030
+Global renewable capacity is expected to grow by 2.7 times by 2030, surpassing countries’ current ambitions by nearly 25%, but it still falls short of tripling.
+Climate and energy security policies in nearly 140 countries have played a crucial role in making renewables cost-competitive with fossil-fired power plants. This is unlocking new demand from the private sector and households, while industrial policies that encourage local manufacturing of solar panels and wind turbines are fostering domestic markets. However, this is not quite sufficient to reach the goal of tripling renewable energy capacity worldwide established by nearly 200 countries at the COP28 climate summit.
+Renewable capacity growth and the gap to global tripling, 2022-2030
+Open
+Considering existing policies and market conditions, our main case sees 5 500 gigawatts (GW) of new renewable capacity becoming operational by 2030
+. This implies that global renewable capacity additions will continue to increase every year, reaching almost 940 GW annually by 2030 – 70% more than the record level achieved last year. Solar PV and wind together account for 95% of all renewable capacity growth through the end of this decade due their growing economic attractiveness in almost all countries.
+The strong pace of global progress on renewables expansion signals an opportunity for countries to announce enhanced ambitions in the next round of Nationally Determined Contributions (NDCs) due in 2025
+. Only 14 countries had explicit renewable capacity targets in the NDCs they had designed before COP28. In our main case, nearly 70 countries, which collectively account for 80% of global capacity, reach or surpass their current ambitions for 2030. China drastically dominates among these overachievers, but other major economies, such as Brazil, India and the United States, also contribute.
+2030 forecast has two main drivers: solar PV and China
+China is set to cement its position as the global renewables leader, accounting for 60% of the expansion in global capacity to 2030.
+The country is forecast to be home to every other megawatt of all renewable energy capacity installed worldwide in 2030, after surpassing its end-of-the-decade 1 200 GW target for solar PV and wind six years early. Since ending feed-in tariffs in 2020, China's cumulative solar PV capacity has almost quadrupled and wind capacity has doubled, driven by cost-competitiveness and supportive policies. China's success stems from comprehensive support for both large-scale and distributed renewables across all renewable technologies.
+Renewable electricity capacity growth by country/region, main case, 2017-2030
+Open
+Notes
+MENA= Middle East and North Africa. ASEAN= Association of Southeast Asian Nations.
+The European Union and the United States are both forecast to double the pace of renewable capacity growth between 2024 and 2030, while India sees the fastest rate of growth among large economies.
+The Inflation Reduction Act’s tax credits will continue to boost growth in the United States, while competitive auctions and corporate power purchase agreements are set to drive expansion in the European Union. Member countries’ growth trends put the bloc’s 600 GW solar PV ambition for 2030 within reach, but more effort is needed for wind. In India, the rapid expansion of auctions, the introduction of a new support scheme for rooftop PV and stronger financial indicators for many utility companies make the country the fastest growing renewable energy market among large economies through 2030.
+New solar capacity added between now and 2030 will account for 80% of the growth in renewable power globally by the end of this decade
+. Adoption accelerates due to declining costs, shorter permitting timelines and widespread social acceptance. Cost-competitiveness and policy support also stimulate the growth of distributed applications among residential and commercial consumers as more households and companies seek to reduce their electricity bills.
+Renewable electricity capacity growth by technology segment, main case, 2010-2030
+Open
+Notes
+CSP= Concentrating solar-thermal power.
+Despite recent supply chain and macroeconomic challenges, the wind sector is expected to recover
+. Policy changes concerning auction design, permitting and grid connection in Europe, the United States, India and other emerging and developing economies are expected to enhance project bankability and help the wind sector recover from recent financial difficulties. The forecast sees the rate of global wind capacity expansion doubling between 2024 and 2030 compared with 2017-23. Hydropower capacity growth remains stable, driven by China, India, the ASEAN region and Africa. The role of other renewables, including bioenergy, geothermal, concentrated solar power and ocean, is expected to decline due to a lack of policy support.
+Hydrogen remains a negligible driver for new renewable capacity growth.
+Despite increased policy support, hydrogen produced from renewable energy is set to account for just 4% of total hydrogen production in 2030, mainly due to insufficient demand creation. While global installed electrolyser capacity is expected to increase fifty-fold by the end of the decade, only part of it will be supplied by new renewable power plants, as half of the electrolysers are estimated to use abundant low-cost renewables generation from existing plants. Overall, hydrogen is forecast to drive only 43 GW of new renewable capacity by 2030, or less than 1% of total global renewable capacity expansion.
+Tripling of global renewable capacity is within reach, but policy improvements are needed
+Our accelerated case sees global renewable capacity reaching almost 11 000 GW in 2030, laying out a pathway for meeting the tripling goal
+. In this case, China, Europe, India and the United States collectively provide 80% of total installed capacity worldwide. The case sees China addressing grid integration challenges and companies installing distributed solar PV systems at a faster pace, while in Europe and the United States, governments reduce long permitting timelines and stimulate investment in new grid capacity and flexible assets to unlock additional deployment. In India, policies addressing challenges such as land procurement, grid connection wait times and the weak financial health of power distribution companies deliver additional growth.
+Cumulative renewable capacity in the accelerated case by country or region, 2030
+Open
+Large untapped renewables potential in emerging and developing economies can be realised if policies improve
+. High financing costs reduce the economic attractiveness of renewables in most emerging and developing economies. Other key challenges include weak grid infrastructure and a lack of visibility over auction volumes. Measures to reduce risks, including by creating stable policy environments with clear long-term targets, can help unlock additional capacity. In countries with fossil fuel overcapacity with long-term contracts, policy makers could consider renegotiating inflexible power and fuel contracts and accelerating the phasedown of fossil fuel plants.
+Grid infrastructure and system integration of renewables need increasing policy attention
+In our main case, renewables will account for almost half of global electricity generation by 2030, with the share of wind and solar PV doubling to 30%
+. At the end of this decade, solar PV is set to become the largest renewable source, surpassing both wind and hydropower, which is currently the largest renewable generation source by far.
+Global electricity generation by renewable energy technology main case, 2023 and 2030
+Open
+Notes
+The electricity generation trajectories for wind and solar PV indicate potential generation, including current curtailment rates. However, they do not project future wind and solar PV curtailment, which may be significant in some countries by 2028.
+Increasing wind and solar PV generation is leading to higher curtailment, underlining the growing need for flexibility
+. In countries where grid investments and system integration measures are not keeping pace with rapid deployment, curtailment could become a growing challenge. In Chile, Ireland and the United Kingdom, for example, the curtailment of wind and solar PV recently reached between 5% and 15%. Despite growing investment in battery storage in many of these markets, further flexibility measures, including long-term storage and large-scale demand-response, will be necessary. By 2030, solar and wind penetration is set to reach close to 70% in countries such as Chile, Germany, the Netherlands and Portugal.
+Variable renewable energy integration phase and variable renewable energy power generation shares for selected countries, 2023 and 2030
+Open
+Notes and sources
+VRE= variable renewable energy. The beginning of the arrow represents 2023 (VRE share and phase), and the arrowhead represents 2030 (VRE share and phase). Phase 1= VRE has no significant impact at the system level. Phase 2= VRE has a minor to moderate impact on the system. Phase 3= VRE determines the operation pattern of the power system. Phase 4= VRE meets almost all demand at times. Phase 5= Significant volumes of surplus VRE across the year. Phase 6= Secure electricity supply almost exclusively from VRE.
+Phase assessment from IEA (2024), Integrating Solar and Wind: Global experience and emerging challenges (https://www.iea.org/reports/integrating-solar-and-wind). VRE generation share from Renewables 2024.
+Investment in grid infrastructure is lagging, with more advanced projects waiting to be connected, though grid reforms in some countries are beginning to deliver results.
+At least 1 650 GW of renewable capacity is currently in advanced stages of development and waiting for a grid connection, 150 GW higher than at this point last year. However, grid queues for projects at early stages of development have decreased, with projects either moving forward or dropping out of the queue – some without penalty – due to lack of progress. Queues to integrate energy storage are also significant as deployment rises.
+Solar PV and wind manufacturing race continues, but dynamics are changing
+Solar PV manufacturers are scaling back investment plans due to a deepening supply glut and record-low prices.
+Global solar manufacturing capacity is expected to reach over 1 100 GW by the end of 2024, more than double projected PV demand. This oversupply has caused module prices to more than halve since early 2023, leading to negative net margins for integrated solar PV manufacturers in 2024. The challenging market conditions have resulted in the cancellation of about 300 GW of polysilicon and 200 GW of wafer manufacturing capacity projects, valued at approximately USD 25 billion.
+Shares of PV module and cell manufacturing capacity by technology used and company size, 2023
+Open
+Global solar PV manufacturing capacity forecasts and PV installations in Net Zero Scenario, 2030
+Open
+Notes
+NZE= Net Zero Emissions Scenario by 2050.
+Limited prospects of global demand catching up with supply exposes smaller manufacturers to bankruptcy risks.
+We estimate that 17% of global polysilicon and 10% of wafer manufacturing capacity could be considered at risk due to age and suboptimal production processes. Despite slower growth in supply chain capacity, it is still expected to significantly exceed installations in 2030.
+China’s leadership in solar PV manufacturing will continue while industrial policies and trade measures stimulate diversification.
+By 2030, China is expected to maintain more than 80% of global manufacturing capacity for all PV manufacturing segments. Meanwhile, solar cell and module manufacturing capacity almost triples in the United States and India. However, manufacturing PV modules in the United States and India currently costs two to three times more than in China. This gap is set to remain in place for the foreseeable future. Policy makers should consider striking a fine balance between the additional costs and benefits of local manufacturing, weighing key priorities such as job creation and energy security.
+In contrast, the wind turbine manufacturing sector needs more investment to avoid supply chain bottlenecks by 2030.
+Global onshore wind manufacturing capacity could reach 145 GW, barely above expected installations in 2030 despite the incentives available in Europe, the United States and Southeast Asia. For offshore wind, the situation is even more severe. Without new manufacturing projects, supply chain bottlenecks could delay the rollout of offshore wind in EU member states, which are pursuing ambitious 2030 offshore wind goals.
+Establishing criteria for awarding renewable power capacity beyond just prices is emerging as a new tool to avoid direct trade measures while pursuing multiple policy goals.
+In the first half of 2024, almost 60% of all capacity awarded in auctions worldwide included non-price criteria, such as sustainability, supply chain security or energy system integration – double the level seen five years ago. While this approach may lead to higher awarded prices in the short term, it can support energy system optimisation and various socio-economic goals at the domestic level.
+Rapid expansion of renewable electricity drives the decarbonisation of industry, transport and buildings
+Renewable electricity use in the transport, industry and buildings sectors accounts for more than three-quarters of the overall rise in forecasted global renewable energy demand.
+This increase boosts the share of renewables in final energy consumption to nearly 20% by 2030, up from 13% in 2023. However, almost 75% of global energy demand will still be met by fossil fuels. Outside of electricity, renewable fuels – including liquid, gaseous and solid bioenergy, as well as hydrogen and e-fuels – account for 15% of the forecasted growth. Other renewable energy, such as ambient heat, solar thermal and geothermal, account for the remaining share.
+Renewable fuel growth by fuel type, main case, 2023-2030
+Open
+Sources
+Hydrogen estimates from IEA Global Hydrogen Review (2024) (https://www.iea.org/reports/global-hydrogen-review-2024), IEA (forthcoming), World Energy Outlook 2023.
+The pace of renewables growth in transport, industry and buildings doubles to 2030 compared with the rate from 2017 to 2023.
+For transport, renewable electricity accounts for half of this growth, led by electric vehicle adoption and followed by biofuels, with small contributions from biogases, hydrogen and e-fuels. Nevertheless, renewables’ share in transport only increases by two percentage points to 6% in 2030. For heat, renewables consumption expands more than 50%, driven by renewable electricity use for heat in non-energy intensive industries and buildings, followed by bioenergy. However, global heat demand outpaces renewables expansion, leading to increasing use of fossil fuels and a 5% increase in annual carbon dioxide (CO
+2
+) emissions from the sector from 2024 to 2030.
+Renewable fuels are essential to energy transitions, but growth is lagging behind
+The share of renewable fuels in total energy demand remains below 6% in 2030 despite accelerating growth.
+Demand is poised to expand in all regions, but it is concentrated in Brazil, China, Europe, India and the United States, which collectively support two-thirds of the growth due to dedicated policies to support the uptake of several – and in some cases, all – renewable fuels.
+Bioenergy accounts for almost all renewable fuel growth through 2030.
+Bioenergy use expands the most in industry, followed by transport and then buildings. Modern bioenergy is less expensive than hydrogen and e-fuels, and strong policy support is already in place in many regions. For instance, more than 60 countries have liquid biofuel policies, whereas only the European Union and the United Kingdom have e-fuel requirements.
+Road biofuels remain dominant, but aviation and maritime consumption is accelerating
+. New policies for aviation and maritime biofuels spur over 30% of new demand in the transport sector overall. Biofuels in the aviation sector are forecast to climb to near 2% of total aviation supply by 2030, up from near zero in 2023, supported by mandates in the European Union and the United Kingdom and incentives in the United States. In the maritime sector, EU legislation drives growth, bringing biofuels to nearly 0.5% of international shipping demand.
+Renewable fuel consumption by fuel, main case and Net Zero Scenario, 2023-2030
+Open
+Notes
+NZE= Net Zero Emissions by 2050 Scenario.
+Modern solid bioenergy will still account for most renewable fuel growth and use in 2030
+. Solid bioenergy is mostly used for heat, with three-quarters of the increase over the forecast period from the industrial sector, mostly reflecting expanding sugar and ethanol production in India. The remaining growth results primarily from the rollout of improved biomass cooking and heating stoves in sub-Saharan Africa, India and China.
+Demand for biogases increase by 30%, led by the United States and the European Union
+. India and China are building infrastructure and feedstock supply chains for future acceleration. The main driver in the short term is biomethane use in transport, supported by policies rewarding lower carbon intensities or waste feedstocks.
+Policies are generating demand for renewable hydrogen and e-fuels use in transport
+. By 2030, near 40% of renewable hydrogen demand is set to be from the transport sector, driven by policies primarily in the United States, Europe and China. The remaining 60% will be used primarily for feedstock to replace existing hydrogen uses from fossil fuels in refineries and in the chemical and fertilizer industries – and for low-emission hydrogen steel production.
+Renewable fuels require dedicated policy support to align with the IEA’s scenario for achieving net zero energy sector emissions by 2050.
+To align with this pathway, renewable fuel adoption must nearly double by 2030. However, under today’s market conditions, it is projected to grow by only 20%. High costs remain a major obstacle to faster deployment, and additional efforts are needed to foster innovation, strengthen supply chains and implement sustainability measures. Accelerating deployment will depend on governments enacting policies to close the cost gap with fossil fuels, promote innovation, build resilient supply chains, implement sustainability requirements and remove fossil fuel subsidies.
+Next
+Global overview
+Newsletters
+The best of the IEA sent straight to your inbox
+Subscribe to newsletters
+Podcasts
+Top energy experts put IEA analysis in context
+Listen to our podcast
+Understand energy
+Reports
+News and commentaries
+Events
+Energy system
+Topics
+Countries and regions
+Glossary
+Explore data
+Data explorers
+Data sets
+Policies database
+Chart library
+Energy Statistics Browser
+IEA essentials
+About
+Mission
+Membership
+Structure
+Programmes
+International collaborations
+Technology collaboration
+Training
+Connect
+Contact
+Press
+Careers
+Internships
+Delegates
+Help centre
+© 2026 IEA
+Terms
+Privacy
+Subscription successful
+Thank you for subscribing. You can unsubscribe at any time by clicking the link at the bottom of any IEA newsletter.

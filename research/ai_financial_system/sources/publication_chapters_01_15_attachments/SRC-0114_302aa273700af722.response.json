@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 20635,
+  "content_sha256": "302aa273700af722beb42b3181bcc069a672bb1687f2475a789fe724685f4eee",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/937966/000162828026048235/presentationinvestorrela.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_attachments/SRC-0114_302aa273700af722.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/937966/000162828026048235/presentationinvestorrela.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-07-15",
+  "publisher": "ASML Holding NV",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_attachments/SRC-0114_302aa273700af722.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:09:53.711532+00:00",
+  "retrieval_started_utc": "2026-07-27T01:09:53.623386+00:00",
+  "selected_response_headers": {
+    "content-length": "5932",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:09:53 GMT",
+    "last-modified": "Wed, 15 Jul 2026 10:08:45 GMT"
+  },
+  "source_id": "SRC-0114",
+  "status": "preserved_complete",
+  "title": "ASML second-quarter 2026 investor presentation",
+  "write_state": "new_version_written"
+}

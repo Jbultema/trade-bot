@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 62365,
+  "content_sha256": "7b7e79bb1339a7fb01009dea0cbd62c3835faf75529c6c5226580da793ada90a",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.kirkland.com/news/press-release/2025/10/kirkland-represents-blue-owl-on-joint-venture-with-meta-to-develop-hyperion-data-center",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0079_7b7e79bb1339a7fb.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://www.kirkland.com/news/press-release/2025/10/kirkland-represents-blue-owl-on-joint-venture-with-meta-to-develop-hyperion-data-center",
+  "preservation_class": "P2",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-10-21",
+  "publisher": "Kirkland and Ellis LLP",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0079_7b7e79bb1339a7fb.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:31.865757+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:31.404764+00:00",
+  "selected_response_headers": {
+    "cache-control": "no-cache, no-store",
+    "content-length": "12643",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Mon, 27 Jul 2026 01:08:31 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0079",
+  "status": "preserved_response_plus_metadata",
+  "title": "Kirkland represents Blue Owl on joint venture with Meta to develop Hyperion data center",
+  "write_state": "new_version_written"
+}

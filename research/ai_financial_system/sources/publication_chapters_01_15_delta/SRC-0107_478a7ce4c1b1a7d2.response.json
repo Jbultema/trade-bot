@@ -1,0 +1,30 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 95095,
+  "content_sha256": "478a7ce4c1b1a7d2f2de1dcb7e1572c78429709307d34e1416d18d83241d502f",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.intersect.com/solutions",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0107_478a7ce4c1b1a7d2.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=UTF-8",
+  "original_url": "https://www.intersect.com/solutions",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "",
+  "publisher": "Intersect",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0107_478a7ce4c1b1a7d2.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:53.066432+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:52.632649+00:00",
+  "selected_response_headers": {
+    "content-type": "text/html; charset=UTF-8",
+    "date": "Mon, 27 Jul 2026 01:08:53 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0107",
+  "status": "preserved_complete",
+  "title": "Intersect solutions and Meitner project status",
+  "write_state": "new_version_written"
+}

@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from datetime import date, timedelta
 from typing import Any
 
 import pandas as pd
@@ -187,16 +188,57 @@ def _render_overview(
         f"S&P delta is {_fmt_pct(beta_delta)}. Scenario pressure is led by {top_scenario}; "
         f"instability is {instability_state}."
     )
+    range_choice, custom_start, custom_end = _render_risk_history_range_controls(
+        getattr(runtime.baseline_run.current_state, "market_date", None)
+    )
     _render_portfolio_risk_history(
         run_store_path=str(runtime.paths.run_store_path),
         artifact_dir=str(runtime.paths.artifact_dir),
         job_log_dir=str(runtime.paths.job_log_dir),
+        range_choice=range_choice,
+        custom_start=custom_start,
+        custom_end=custom_end,
     )
     _render_regime_instability_history(
         run_store_path=str(runtime.paths.run_store_path),
         artifact_dir=str(runtime.paths.artifact_dir),
         job_log_dir=str(runtime.paths.job_log_dir),
+        range_choice=range_choice,
+        custom_start=custom_start,
+        custom_end=custom_end,
     )
+
+
+def _render_risk_history_range_controls(
+    market_date: object,
+) -> tuple[str, date | None, date | None]:
+    controls = st.columns([1, 1, 1, 2])
+    range_choice = controls[0].selectbox(
+        "History range",
+        ["1M", "3M", "6M", "YTD", "1Y", "3Y", "All", "Custom"],
+        index=2,
+        key="dashboard_v2_risk_overview_history_range",
+    )
+    market_timestamp = pd.to_datetime(market_date, errors="coerce")
+    end_date = market_timestamp.date() if pd.notna(market_timestamp) else date.today()
+    custom_start = None
+    custom_end = None
+    if range_choice == "Custom":
+        custom_start = controls[1].date_input(
+            "Start",
+            value=end_date - timedelta(days=92),
+            key="dashboard_v2_risk_overview_history_start",
+        )
+        custom_end = controls[2].date_input(
+            "End",
+            value=end_date,
+            key="dashboard_v2_risk_overview_history_end",
+        )
+    controls[3].caption(
+        "Applies to every saved-snapshot chart in this overview. YTD begins January 1 of the "
+        "selected chart end year."
+    )
+    return str(range_choice), custom_start, custom_end
 
 
 def _render_portfolio_risk(runtime: DashboardRuntime, portfolio_risk: Any | None) -> None:

@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 387770,
+  "content_sha256": "ce6a5b5f318cccf375236c90014652b2561de168e69c27069fc7787867a22218",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://openai.com/index/scaling-ai-for-everyone/",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0040_ce6a5b5f318cccf3.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://openai.com/index/scaling-ai-for-everyone/",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-02-27",
+  "publisher": "OpenAI",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0040_ce6a5b5f318cccf3.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:28.589996+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:27.106357+00:00",
+  "selected_response_headers": {
+    "cache-control": "public, max-age=0, must-revalidate",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Mon, 27 Jul 2026 01:08:28 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0040",
+  "status": "preserved_complete",
+  "title": "Scaling AI for everyone",
+  "write_state": "new_version_written"
+}

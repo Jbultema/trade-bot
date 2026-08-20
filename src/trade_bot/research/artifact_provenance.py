@@ -15,9 +15,12 @@ import numpy as np
 import pandas as pd
 from pydantic import BaseModel
 
-from trade_bot.research.research_governance import audit_point_in_time_universe
+from trade_bot.research.research_governance import (
+    audit_out_of_sample_evidence,
+    audit_point_in_time_universe,
+)
 
-RESEARCH_MANIFEST_SCHEMA_VERSION = 3
+RESEARCH_MANIFEST_SCHEMA_VERSION = 4
 
 
 def build_runtime_provenance(
@@ -44,6 +47,7 @@ def write_research_manifest(
     config: BaseModel | Mapping[str, object],
     prices: pd.DataFrame | None = None,
     universe_membership: pd.DataFrame | None = None,
+    oos_evidence: Mapping[str, object] | None = None,
     parameters: Mapping[str, object] | None = None,
     artifacts: Sequence[str] = (),
 ) -> Path:
@@ -56,22 +60,28 @@ def write_research_manifest(
     artifact_names = sorted(dict.fromkeys(str(item) for item in artifacts))
     parameter_payload = _jsonable(parameters or {})
     universe_audit = audit_point_in_time_universe(prices, universe_membership)
+    oos_audit = audit_out_of_sample_evidence(oos_evidence)
     trial_roster, trial_roster_source = _manifest_trial_roster(study, parameter_payload)
+    promotion_evidence_complete = bool(
+        universe_audit.get("promotion_eligible")
+        and oos_audit.get("promotion_eligible")
+        and trial_roster_source != "study_level_fallback"
+    )
     manifest = {
         "schema_version": RESEARCH_MANIFEST_SCHEMA_VERSION,
         "study": study,
         "generated_at_utc": datetime.now(UTC).isoformat(),
-        "research_status": "retrospective_research_only",
+        "research_status": (
+            "oos_evaluated_human_review_required"
+            if promotion_evidence_complete
+            else "retrospective_or_incomplete_oos_research_only"
+        ),
         "automatic_promotion_allowed": False,
         "config_sha256": _json_sha256(config_payload),
         "config": config_payload,
         "parameters": parameter_payload,
         "price_input": _price_metadata(prices),
-        "code": {
-            key: value
-            for key, value in runtime_provenance.items()
-            if key != "price_input"
-        },
+        "code": {key: value for key, value in runtime_provenance.items() if key != "price_input"},
         "environment": {
             "python": platform.python_version(),
             "platform": platform.platform(),
@@ -82,6 +92,7 @@ def write_research_manifest(
         "artifact_integrity": _artifact_integrity(output, artifact_names),
         "research_governance": {
             "point_in_time_universe": universe_audit,
+            "out_of_sample_evidence": oos_audit,
             "trial_roster": {
                 "status": (
                     "explicit_roster_recorded"
@@ -94,9 +105,12 @@ def write_research_manifest(
             },
             "promotion_evidence_gate": (
                 "eligible_for_human_review"
-                if bool(universe_audit.get("promotion_eligible"))
-                and trial_roster_source != "study_level_fallback"
-                else "blocked_incomplete_universe_or_trial_history"
+                if promotion_evidence_complete
+                else (
+                    "blocked_missing_or_invalid_oos_evidence"
+                    if not bool(oos_audit.get("promotion_eligible"))
+                    else "blocked_incomplete_universe_or_trial_history"
+                )
             ),
         },
     }
@@ -371,7 +385,9 @@ def _source_tree_sha256(repo_root: Path) -> str:
     paths = [repo_root / "pyproject.toml", repo_root / "poetry.lock"]
     for root in roots:
         if root.exists():
-            paths.extend(path for path in root.rglob("*") if path.is_file())
+            paths.extend(
+                path for path in root.rglob("*") if path.is_file() and _is_durable_source_path(path)
+            )
     for path in sorted(paths):
         if not path.exists():
             continue
@@ -381,6 +397,16 @@ def _source_tree_sha256(repo_root: Path) -> str:
         digest.update(path.read_bytes())
         digest.update(b"\0")
     return digest.hexdigest()
+
+
+def _is_durable_source_path(path: Path) -> bool:
+    """Exclude interpreter/editor products that are not research source inputs."""
+
+    if "__pycache__" in path.parts:
+        return False
+    if path.name in {".DS_Store"}:
+        return False
+    return path.suffix.lower() not in {".pyc", ".pyo", ".swp", ".tmp"}
 
 
 def _json_sha256(payload: object) -> str:

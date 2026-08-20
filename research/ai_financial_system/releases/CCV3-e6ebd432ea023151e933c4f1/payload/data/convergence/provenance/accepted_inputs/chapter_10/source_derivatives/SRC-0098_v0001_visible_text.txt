@@ -1,0 +1,1338 @@
+[[PDF_PAGE_0001]]
+S T A T E O F M I C H I G A N
+BEFORE THE MICHIGAN PUBLIC SERVICE COMMISSION
+* * * * *
+In the matter of the application of )
+DTE ELECTRIC COMPANY for approval of )
+special contracts. ) Case No. U-21990
+)
+At the December 18, 2025 meeting of the Michigan Public Service Commission in
+Lansing, Michigan.
+PRESENT: Hon. Daniel C. Scripps, Chair
+Hon. Katherine L. Peretick, Commissioner
+Hon. Shaquila Myers, Commissioner
+ORDER
+On November 3, 2025,
+1 DTE Electric Company (DTE Electric)2 filed an application in this
+docket, with supporting testimony and exhibits, for ex parte approval of special contracts for
+electric service (application). DTE Electric seeks approval of a primary supply agreement (PSA)
+and energy storage agreement (ESA) (together, the special contracts) with Green Chile Ventures
+LLC (Customer or GCV), a subsidiary of Oracle Corporation, for supplying electric service to a
+1.383 gigawatt (GW) data center facility (facility) in Saline Township, Michigan, which the
+Customer plans to “lease, operate, and cause to be constructed” in DTE Electric’s service territory.
+1 DTE Electric Company initially filed an application on October 31, 2025, but that application
+was removed from the docket at the company’s request per filing #U-21990-0001.
+2 Some potential intervenors refer to DTE Electric as DTE. All quotes are rendered verbatim
+unless otherwise indicated.
+
+[[PDF_PAGE_0002]]
+Page 2
+U-21990
+Application, pp. 1-2. The special contracts are expected to become effective upon Commission
+approval in this case. See, Exhibits A-1 and A-2.
+On November 6, 2025, the Michigan Department of Attorney General (Attorney General)
+filed a notice of intervention and a motion for a contested case pursuant to MCL 24.271 et seq. On
+November 18, 2025, DTE Electric filed a response in opposition to the Attorney General’s motion
+for a contested case.
+On November 19, 2025, the Association of Businesses Advocating Tariff Equity (ABATE);
+the Michigan Environmental Council, Natural Resources Defense Council, Inc., Sierra Club, and
+Citizens Utility Board of Michigan (together, MNSC); and the Environmental Law & Policy
+Center, the Ecology Center, Union of Concerned Scientists, and Vote Solar (together, the Clean
+Energy Organizations or CEOs) each filed a petition to intervene and a motion for a contested
+case. On November 21, 2025, the Great Lakes Renewable Energy Association (GLREA) filed a
+petition to intervene and a motion for a contested case.
+3 On November 26, 2025, DTE Electric
+filed a response in opposition to the motions for a contested case filed by ABATE, MNSC, the
+CEOs, and GLREA.4
+3 The potential intervenors have variously styled their requests for a contested case as a request,
+a petition, or a motion. For purposes of this order, the Commission refers to the requests as
+“motions” and, at times, refers to the potential intervenors as “movants.” Unless otherwise stated
+(as in footnote 4, below), all pleadings filed by the potential intervenors have been considered by
+the Commission.
+4 On December 3, 2025, ABATE filed a motion for leave to file a reply to DTE Electric’s
+response in opposition to the motions for a contested case and the Attorney General filed a reply to
+DTE Electric’s response in opposition to the motions for a contested case. On December 12,
+2025, MNSC filed a motion for leave to file a reply to DTE Electric’s response. On December 15,
+2025, the Attorney General filed a motion for leave to file the reply to DTE Electric’s response
+which was already filed by the Attorney General on December 3, 2025, and DTE Electric filed a
+response to ABATE’s motion. Mich Admin Code, R 792.10432 (Rule 432) does not provide for
+the filing of a reply to a response. Thus, the motions filed by ABATE, MNSC, and the Attorney
+General for leave to file a reply to a response are denied.
+
+[[PDF_PAGE_0003]]
+Page 3
+U-21990
+On December 3, 2025, the Commission held a virtual public hearing on the application via
+Microsoft Teams at which the Commission received comments from interested persons. The
+transcript of the public hearing is available in the docket at filing #U-21990-0025. As of the date
+of this order, there are 5,537 comments filed in the Case Comments section of the docket.5
+The Application and Attachments
+DTE Electric states that electric load at the facility will begin to materialize in January 2027
+and will reach maximum load by December 2027. Application, p. 2. DTE Electric states that it
+will provide electric service to the facility under Rate Schedule D11 (Rate D11) pursuant to the
+PSA for approximately 19 years, commencing with approval of the PSA by the Commission and
+concluding on February 28, 2045. DTE Electric further states that the PSA adds contract terms
+beyond those included in Rate D11 in order to enhance protections for ratepayers, including an
+increased minimum billing demand (MBD), an extended contract term, a termination payment,
+and certain credit and collateral requirements. Id., pp. 2-3. DTE Electric avers that the testimony
+of its witnesses shows that:
+the Special Contracts generate an affordability benefit for existing customers
+through two specific mechanisms: (1) PSA D11 Charges and (2) PSA Power
+Supply Cost Recovery (“PSCR”) Surcharge provisions. Taking service under D11
+requires that Customer contribute to fixed system costs. Customer will contribute
+to existing fixed costs through D11 that would otherwise be recovered from
+existing customers. Furthermore, Customer is responsible for all applicable
+surcharges, including the PSCR Surcharge. Through the PSCR mechanism,
+Customer will contribute to the Company’s existing renewable energy assets and
+transmission infrastructure, any future renewable deployments or transmission cost
+increases, and incremental fuel and purchased power costs required to serve
+Customer.
+5 Many of the comments address water usage, which is not within the Commission’s
+jurisdiction.
+
+[[PDF_PAGE_0004]]
+Page 4
+U-21990
+Id., p. 3.
+DTE Electric states that, pursuant to the ESA, the company will develop an energy storage
+project portfolio that will cover the Customer’s maximum load and the Customer will bear all
+costs associated with the energy storage portfolio for a 15-year cost recovery period such that no
+costs associated with the energy storage portfolio will be passed on to other customer classes or
+ratepayers. Id. The company further states that the Customer will receive 100% of the
+incremental market revenues from the Midcontinent Independent System Operator, Inc. (MISO),
+net of charging costs, that the energy storage assets generate in the open market.
+DTE Electric states that approval of the special contracts will not impact the existing rates of
+any other customer or increase the cost of service for existing customers and thus the application
+may be approved on an ex parte basis per MCL 460.6a(3) without notice or a hearing. Id., p. 4.
+DTE Electric adds that the new load will have the effect of decreasing the cost of service across all
+customer classes. Id. The company requests expedited treatment of the application.
+Neal T. Foley is Director of Electric Marketing for DTE Electric. He provides 37 pages of
+testimony
+6 and sponsors Exhibits A-1 (PSA) and A-2 (ESA). He explains the basic terms of the
+two special contracts, the identity of the Customer, and the location of the facility, as described in
+the application, and notes that the maximum load of 1.383 GW will be achieved by December
+2027. Foley testimony, pp. 3-5. Mr. Foley states that the PSA requires the Customer to take
+service on Rate D11 while adding the following six terms: (1) contract duration, (2) pricing and
+6 The Commission notes that the statements of Mr. Foley and Mr. Bilyeu are not sworn and
+were not provided in the form of affidavits. However, Mich Admin Code, R 792.10405(5) (Rule
+405(5)) provides that the signature of DTE Electric’s attorney on the application constitutes a
+certification that “[t]o the best of the signer’s knowledge, information, and belief formed after
+reasonable inquiry, the pleading is well-grounded in fact and is warranted by existing law or a
+good faith argument for the extension, modification, or reversal of existing law.” The
+Commission will refer to the statements as testimony in this order. See also, Rule 405(1)-(2).
+
+[[PDF_PAGE_0005]]
+Page 5
+U-21990
+ability to change rates, (3) MBD, (4) load ramp flexibility, (5) a termination payment, and (6)
+credit and collateral requirements. Id., p. 7. Mr. Foley states these additional terms “ensure a
+long-term commitment to the Company, mitigate the potential for stranded assets, and protect the
+Company’s other customers from financial risk.” Id.
+The contract duration is approximately 19 years starting with Commission approval, through
+February 28, 2045, with an option for two ten-year extensions, which, Mr. Foley notes, is longer
+than the five years required under Rate D11. He states that this contract length ensures that the
+Customer makes the appropriate contribution to system costs. He adds that the Customer will be
+subject to the PSCR surcharge and can change rate schedules only with 24 months advance notice,
+no less than 24 months after load ramp completion, to a rate schedule approved by the
+Commission, and one that is not cross subsidized by any other customer class. Id., pp. 8-9. Mr.
+Foley states that these terms ensure that the Customer makes its proportionate contribution to fixed
+system costs and to incremental fuel and purchased power costs, including to the fixed costs of
+renewable energy assets and transmission costs.
+According to Mr. Foley, the PSA provides that the MBD will be 80% of the contract capacity
+applicable for that billing period, stating that:
+[i]n practice, this means the Customer’s Minimum Monthly Charge (“MMC”) for a
+given billing period will be calculated using an 80% MBD as applied to the
+customer’s contracted load ramp capacity during the specific billing period. The
+MMC will increase during the Customer’s load ramp and then will be held constant
+at the contracted capacity once the max load is achieved, notwithstanding changes
+to the D11 rate.
+Id., p. 10. He notes that the MBD supersedes the three demand charges normally applied under
+Rate D11 and they will each be calculated using the greater of 80% of the contract capacity for the
+applicable billing period or the actual billing demand if greater than 80%. Mr. Foley states that the
+MMC does not change even if the maximum load is not realized and will still be based on the
+
+[[PDF_PAGE_0006]]
+Page 6
+U-21990
+capacity stated in the contract, and the MBD will ensure that there is an affordability benefit to
+other customers no matter what actual demand is from the Customer. He states that the PSA
+allows the Customer a 12 month delay in reaching the maximum load, thus, until December 2028.
+Id., p. 12.
+Mr. Foley testifies that the termination payment under the PSA will ensure that DTE Electric
+recovers at least 10 years of the MMC and equals:
+the MBD multiplied by the greater of 1) the number of months from the early
+termination date to the tenth anniversary of the Load Ramp Completion Date or
+2) 24 months. If the PSA is terminated after the tenth anniversary of the Load
+Ramp Completion Date, the customer is subject to a termination payment equal to
+24 months of Minimum Monthly Charges.
+Id., p. 12. He describes this as a long-term commitment to overall system costs. He adds that the
+PSA’s credit and collateral requirements include a parent guaranty bolstered by a letter of credit
+“as necessary based on the parent’s credit rating,” designed to protect the company and its
+customers in the event of default by the Customer. Id., p. 13.
+Mr. Foley explains that DTE Electric has decided to deploy energy storage to address resource
+adequacy for the PSA through the ESA, which provides for development of a portfolio of energy
+storage projects up to 1.383 GW. Under this arrangement, the Customer pays the full cost of the
+portfolio and receives the full benefit of any incremental capacity, energy, and ancillary service
+MISO market revenues generated by these assets. Id., p. 13. Mr. Foley states that the ESA
+includes six key terms: (1) contract duration, (2) energy storage portfolio build, (3) pricing and
+annual reconciliation, (4) market credits, (5) termination and termination payment, and (6) credit
+and collateral requirements. He states that the ESA provides that DTE Electric will recover the
+cost of each individual energy storage project over a 15-year period following the commercial
+operation date (COD) of the project from the Customer. Mr. Foley states that this coincides with
+
+[[PDF_PAGE_0007]]
+Page 7
+U-21990
+the company’s 15-year depreciable life for owned storage assets and its intention to use 15-year
+tolling agreements (TAs) for third-party contracts. Thus, he adds, this mitigates the risk of
+stranded assets. Id., p. 15. He states that DTE Electric may develop the maximum load through
+self-builds, build transfer agreements (BTAs), and third-party TAs, and each project deployed
+under the ESA will be submitted to the Commission for review and approval prior to construction.
+Mr. Foley states that the company will calculate the 15-year revenue requirement for each project
+in the same way that it would be calculated in a rate case, and the TAs will include the amount of
+any authorized financial incentive. Mr. Foley adds that DTE Electric will perform a cost
+reconciliation for each project at the end of each calendar year to compare charges to actual costs
+and incorporate over- or under-recoveries for the subsequent year, to ensure that the Customer
+pays the actual costs. Id., p. 17. He adds that both the costs and the charges will be included in
+future general rate cases, and all parties will have the opportunity to perform a review. He
+concludes that the “ESA prevents cross subsidization of the energy storage portfolio and mitigates
+the risk of stranded assets.” Id., p. 18.
+Turning to market credits, Mr. Foley explains that:
+[s]ome of the energy storage projects that the Company will deploy under the ESA
+may be co-located with existing renewable assets. A co-located energy storage
+asset shares an interconnection with an existing renewable generation asset. In
+these cases, the capacity accreditation of the existing renewable generation may be
+reduced based on the allocation of the interconnection limit between the assets. To
+account for this, the Company will deduct from the credits provided to the
+Customer an amount that will make-whole the existing renewable generation asset
+had the energy storage asset not been constructed on the same site.
+Id. Thus, he states, the described incremental credits are what will be credited to the Customer by
+the company (which are also net of charging costs). He testifies that the storage projects will be
+managed and operated in the same manner as other company resources. Mr. Foley explains that
+the Customer may not voluntarily terminate the ESA, but that, if termination occurs due to a
+
+[[PDF_PAGE_0008]]
+Page 8
+U-21990
+default, then the Customer must pay a termination payment equal to the remaining amount that
+would have been collected under the full 15-year agreement—that is, the full revenue requirement
+for each project. Id., p. 20. Like the PSA, the credit and collateral requirements under the ESA
+are met through a parent guaranty and a letter of credit “if necessary based on the parent’s credit
+rating[.]” Id., p. 21.
+Turning to the issue of resource adequacy to meet the needs of the Customer, Mr. Foley
+explains that MISO calculates the company’s planning reserve margin requirements (PRMR).
+Though the Customer’s load will increase the company’s PRMR, Mr. Foley states that DTE
+Electric projects that it will have sufficient resources to meet the incremental demand through
+deployment of the ESA resources. He adds that:
+[e]nergy storage was selected as the resource type because it is a dispatchable
+resource that provides high-capacity accreditation under MISO’s Direct Loss of
+Load (“DLOL”) methodology. For example, in summer 2030, storage has an
+expected DLOL accreditation percentage of 96.12% compared to only 10.52% and
+4.80% for wind and solar, respectively. Energy storage is also cost-competitive and
+can be developed and placed in service on a timeline that supports the Customer
+Committed Capacity Ramp.
+Id., p. 22 (citation omitted). Mr. Foley notes that the July 26, 2023 order in Case No. U-21193
+(DTE Electric’s integrated resource plan (IRP) settlement) (July 26 order) approved 780
+megawatts (MW) of energy storage, and he states that this 1.4 GW ESA is in addition to that
+amount. He adds that projects will be selected for development under the ESA via the May 9,
+2025 request for proposals (RFP) that the company issued pursuant to the July 26 order, and that
+the entire portfolio will consist of company-owned and third-party-owned projects with an
+allocation that follows the allocation approved in the July 26 order of approximately 65%
+company-owned and 35% third-party-owned assets. Id., p. 24. Mr. Foley notes that DTE
+Electric’s next IRP filing is due in December of 2026 and that filing will address the impacts of the
+
+[[PDF_PAGE_0009]]
+Page 9
+U-21990
+Customer’s load on the company’s long-term generation planning.
+Mr. Foley testifies that the special contracts will generate an affordability benefit to DTE
+Electric’s other customers “by spreading the Company’s fixed costs of generation and distribution
+over a larger customer base” in two ways. Id., p. 25. First, the Customer will be on Rate D11 and
+thus will contribute to the existing fixed costs of the company’s system that would otherwise be
+recovered from other customers; and, second, the Customer will pay the PSCR surcharge for both
+current and incremental charges. Mr. Foley explains that:
+[t]he Company’s renewable asset and transmission costs are recovered through the
+PSCR mechanism. The associated surcharge is recovered on a volumetric (i.e., per
+kWh [kilowatt-hour]) basis. As such, by being subject to the PSCR and being a
+particularly large energy user, the Customer will make a contribution to the
+Company’s existing renewable and transmission costs. These fixed costs would
+have otherwise been allocated to [the] Company’s other customers. Similarly,
+being subject to the PSCR also ensures that the Customer will make a contribution
+to any future renewable deployments or transmission cost increases. Like above,
+the Customer will be covering a portion of existing costs that would otherwise be
+allocated to the Company’s other customers. Being subject to the PSCR also
+ensures the Customer contributes to the incremental fuel and purchased power
+needed to serve their load.
+Id., p. 26.
+Mr. Foley states that these benefits will flow to other customers via the cost of service (COS)
+process within future rate cases using the COS allocation methods that are applied in electric rate
+cases. He estimates that the Customer will eventually be responsible for about 18% of the
+company’s total costs, thereby lowering the residential classes’ costs by 8%, the commercial
+classes’ costs by 5%, and the industrial classes’ costs by 5%. Id., p. 27. Mr. Foley’s Figure 2
+shows the value of the estimated total affordability benefit in graphic form, and appears to show an
+affordability benefit of approximately $150 million in 2027, ramping up to $300 million in 2029.
+Id., p. 28. He states that, even while accounting for all revenues and costs associated with serving
+the Customer (including transmission upgrades), “[b]ecause of the significant addition of load,
+
+[[PDF_PAGE_0010]]
+Page 10
+U-21990
+customer rates will be lower than they otherwise would have been had the Company not served the
+Customer.” Id. He adds that “while overall Company costs will increase . . . , the cost of service
+will decrease across all customer classes given the contribution to the Company’s costs that the
+Customer is making.” Id., p. 29. Mr. Foley states that other benefits will include local capital
+investment, 2,500 temporary construction jobs, 450 well-paying permanent jobs, and additional
+tax revenues (even with any sales and use tax exemptions approved by the Michigan Strategic
+Fund pursuant to Public Acts 207 and 181, respectively, of 2024). Id., p. 30.
+Mr. Foley describes five categories of incremental costs that will be incurred by serving the
+Customer: (1) ESA energy storage portfolio costs for 1.4 GW of energy storage assets; (2) fuel
+and purchased power costs; (3) $200 million in capital investments for transmission upgrades to
+both connect the facility and deploy the energy storage portfolio; (4) $300 million to build a new
+industrial substation to serve the Customer; and (5) the cost of incremental renewable generation
+for maintaining renewable portfolio standard (RPS) compliance. Id., pp. 30-31. He states that
+DTE Electric is “not proposing to change the way in which transmission costs are recovered from
+its customers.” Id., p. 31. Noting that the cost of the new industrial substation would be recovered
+through a contribution in aid of construction (CIAC) allowance, Mr. Foley states that the company
+is not proposing to change the current CIAC policy. He also notes that “the Customer’s landlord
+has agreed to pay a $40 million non-refundable construction advance.” Id., p. 32.
+Mr. Foley concludes that the special contracts provide adequate protections against stranded
+costs. He states that the energy storage portfolio costs are entirely the Customer’s responsibility,
+fuel and purchased power costs will be recovered volumetrically, and other types of costs such as
+those associated with transmission, the new substation, and the incremental renewable generation
+will be subject to the 80% MBD (which operates regardless of usage). Id., p. 34. He notes that the
+
+[[PDF_PAGE_0011]]
+Page 11
+U-21990
+latter provision equals approximately $230 million per year for 10 years, or $2.3 billion, even if
+the Customer’s load is zero. He concludes that:
+[i]f the Customer’s load does not materialize, the only stranded asset risk will be
+related to the deployment of capital for transmission upgrades, the new industrial
+substation, and any renewable generation deployment to maintain compliance with
+the Company’s RPS requirements. The risk of stranded asserts is effectively
+mitigated given the minimum level of cost recovery from the Customer that is
+agreed to in the PSA. Further, the credit requirements under the PSA protect
+against the risk of Customer default and helps ensure the Company recovers this
+minimum amount from the Customer.
+Id., p. 35. Mr. Foley states that the special contracts do not increase the cost of service or rates for
+any customer, but instead govern how the Customer’s future load will be served, and he notes that
+the special contracts will be “reflected in future general rate cases and PSCR (plan and
+reconciliation) cases[.]” He adds that the special contracts will appear in rate cases via the load
+forecast, ESA projects added to rate base, and amounts collected from the Customer through the
+ESA to offset rate base costs; and will appear in future PSCR cases as MISO revenues. Id., p. 36;
+see id., pp. 36-37.
+Mr. Kevin L. Bilyeu is Director of Renewable Energy Planning and Strategy for DTE Electric.
+He provides 13 pages of testimony and sponsors Exhibit A-3, a Renewable Portfolio Standard
+Compliance Summary. Mr. Bilyeu describes the RPS targets required under Public Act 235 of
+2023 (Act 235) and the renewable energy credit (REC) portfolio that electric providers must
+achieve by certain years, which is a percentage of total retail sales.
+7 He explains that DTE Electric
+uses weather-normalized megawatt-hours (MWh) of bundled load (less certain amounts) as the
+basis for this calculation. Bilyeu testimony, p. 5. Mr. Bilyeu states that the Customer’s annual
+usage will be approximately 10.9 terawatt-hours (TWh), thus requiring about 3.2 GW of additional
+7 MCL 460.1028(1) requires electric providers to achieve a REC portfolio of at least 15% of
+retail sales through 2029, 50% in 2030 through 2034, and 60% in 2035 and each year thereafter.
+
+[[PDF_PAGE_0012]]
+Page 12
+U-21990
+solar capacity to meet the RPS requirement for this incremental load through new solar build
+(using an 88.5% load factor), which could be reduced through the use of wind resources. Id.,
+pp. 6-7. He states that this type of planning is best done in an IRP case. Referring to the
+company’s most recent amended renewable energy plan (REP), he states that the new load will
+increase the company’s RPS target by approximately 30.5%, which, using the current REP, creates
+a shortfall in DTE Electric’s REC balance beginning in 2033 and continuing through 2037,
+ranging from 1.43 million RECs in 2034 to 3.78 million RECs in 2036, based on the fastest ramp
+up allowed in the PSA. Id., p. 8.
+To address these issues, Mr. Bilyeu explains that DTE Electric will expand its renewable
+energy portfolio and draw from its REC bank. Mr. Bilyeu states that the company will need 443
+MW of additional renewable energy resources by 2032 to maintain RPS compliance, assuming an
+allocation between wind and solar consistent with the allocation used in its most recent amended
+REP. Id., p. 9; Exhibit A-3, line 31. Mr. Bilyeu testifies that sufficient resources will be in place
+by 2032 to meet RPS compliance through a combination of company-owned projects, power
+purchase agreements, strategic acquisitions of renewable assets, phased capacity buildout
+additions, and technology mix optimization. Bilyeu testimony, pp. 9-11. He adds that “[a]ll of
+these efforts are coordinated within the framework of DTE Electric’s IRP and REP. The
+Company’s development pipeline includes sufficient projects to meet the incremental demand, and
+ongoing [interested person] engagement ensures alignment with regulatory expectations and
+market conditions.” Id., p. 11. He states that the company intends to file a revised REP as part of
+its next IRP filing no later than December 2026 and intends to file its next amended REP in 2027.
+Mr. Bilyeu opines that the 2026 IRP and 2027 REP provide DTE Electric with sufficient time to
+adjust its renewable energy strategy to comply with RPS targets with the addition of the new load.
+
+[[PDF_PAGE_0013]]
+Page 13
+U-21990
+Id., p. 12. Mr. Bilyeu concludes that “[t]he incremental renewable energy capacity required to
+meet the increased RPS could technically reach up to 3.2 GW, but may be as low as 443 MW by
+2032 if the Company fully leverages its estimated REC bank[.]” Id., p. 13.
+The Motions for Contested Case and Responses to the Motions
+The Attorney General requests a contested case and the allowance of at least 180 days from
+the date of the application before a final order is issued, or, at a minimum, the allowance of “60
+days for intervenors to review and conduct expedited discovery not including the time required for
+a briefing schedule.” Attorney General’s motion, p. 1. The Attorney General argues that the
+Customer’s load size is unprecedented in Michigan and would increase total forecasted bundled
+sales to retail customers by more than 25%. The Attorney General points to the testimony filed by
+the Commission Staff (Staff) in Case No. U-21859 (Consumers Energy Company’s (Consumers’)
+recent case seeking a tariff to cover large load customers such as data centers), where the Staff
+described risks associated with this type of load, including the risk that the market for artificial
+intelligence (AI) never matures as anticipated, leaving stranded assets (assets that are no longer
+used and useful before the end of their useful life) in its wake. Attorney General’s motion, pp. 5-6
+(citing Case No. U-21859, 4 Tr 294-300).
+The Attorney General notes DTE Electric’s claim that the Customer will be responsible for
+18% of total costs and thus will decrease the cost responsibility for other customer classes and she
+argues that the company has not provided adequate calculations, analyses, or exhibits that explain
+this forecast. She further argues that DTE Electric has failed to provide sufficient information to
+show that the minimum cost recovery amount is adequate. The Attorney General asserts that DTE
+Electric has failed to provide sufficient evidence to be able to adequately analyze: (1) the $200
+million in capital investments needed to upgrade the transmission system; (2) how transmission
+
+[[PDF_PAGE_0014]]
+Page 14
+U-21990
+costs will be recovered through the PSCR; (3) the $300 million needed to construct a new
+substation; (4) costs associated with other distribution assets; (5) how additional renewable
+resources will be developed to address the additional load; (6) how the company arrived at only
+443 MW of additional renewable resources after noting that this amount could be as high as 3.2
+GW; and (7) how the proposed termination fee will prove to be adequate to protect other
+ratepayers. Attorney General’s motion, pp. 7-9. On these grounds, the Attorney General contends
+that the application fails to qualify for ex parte treatment as the company has failed to show that
+the special contracts will not result in an increase in the cost of service. Id., p. 9; see also, id.,
+Attachment A (Affidavit of Sebastian Coppola). The Attorney General notes that the Commission
+rejected Consumers’ request for ex parte treatment in the March 13, 2025 order in Case No.
+U-21859 (March 13 order) after finding that data centers present “unique and significant cost
+implications” that require the development of an evidentiary record. March 13 order, p. 3. In
+conclusion, the Attorney General maintains that the application in the instant case requires a
+contested proceeding “because the requests therein may not be just and reasonable, may not be in
+compliance with all applicable legal authority, and may disrupt the State’s ability to achieve its
+renewable and clean energy standards established by the legislature under Public Act 235.”
+Attorney General’s motion, p. 10.
+In its motion, ABATE also points to the language of the March 13 order as well as the
+language of the Commission’s final order in that case, the November 6, 2025 order in Case No.
+U-21859 (November 6 order) wherein, ABATE argues, the Commission found that large load
+customers pose potential risks associated with system reliability, costs, and regulatory compliance.
+ABATE’s motion, p. 5. ABATE contends that DTE Electric’s estimates of the benefits of the
+special contracts are calculated on the assumption that the Customer’s load fully materializes, but
+
+[[PDF_PAGE_0015]]
+Page 15
+U-21990
+the application provides no information on what happens if the load fails to fully materialize.
+ABATE asserts that the application lacks sufficient supporting information to back up its cost and
+revenue claims and the special contracts themselves contain significant redactions that prevent
+proper analysis. Like the Attorney General, ABATE provides a list of concerns and concludes that
+a contested case is necessary in order to evaluate:
+• The net rate impact to existing customers if the GCV load entirely fails to
+materialize.
+• The assumptions that were utilized by DTE in developing its estimate of a $300
+million annual net benefit to existing customers if the GCV load fully materializes.
+• The additional exposure of DTE’s existing bundled service customers to price
+volatility in DTE’s PSCR factor.
+• The risk of DTE’s existing bundled customers being subject to additional costs
+related to the GCV load through DTE’s forthcoming IRP.
+• The redacted and missing sections of the proposed [P]SA and proposed ESA.
+• The potential risk of existing DTE customers being assigned additional costs if
+GCV defaults and the collateral held by DTE is not sufficient to cover PSA exit
+fees and ESA termination fees owed by GCV.
+• The exposure of existing DTE Rate D11 customers being subject to paying intra-
+class cost subsidies in DTE’s next base rate proceeding and whether GCV should
+be placed into its own rate class from the outset of service.
+ABATE’s motion, p. 8. ABATE concludes that the application does not qualify for ex parte
+treatment and notes that per Mich Admin Code, R 792.10415(1) (Rule 415(1)) the Commission is
+authorized to hold a contested case “when the Commission so directs.” ABATE’s motion, p. 9
+(quoting Rule 415(1)).
+In its motion, GLREA also notes the unprecedented size of the facility and argues that the
+PSA duration of 19 years does not match the lifetime of the generation assets that must be built to
+meet this incremental load. GLREA notes that DTE Electric uses, for example, a 35-year
+
+[[PDF_PAGE_0016]]
+Page 16
+U-21990
+depreciation schedule for solar generation assets, potentially leaving 16 years that are not covered
+by the special contracts. GLREA contends that the assertion that the Customer will cover the full
+cost of the incremental capacity is not supported because, likewise, the ESA is for only 15 years.
+GLREA’s motion, p. 6. GLREA notes that the 1.4 GW of additional load will increase DTE
+Electric’s MISO-required PRMR which will be in excess of the 1.4 GW of energy storage that the
+Customer is funding. GLREA adds that the company failed to provide the calculations underlying
+the assertion that other customers will see a benefit from the special contracts. GLREA contends
+that, while DTE Electric asserts that only 443 MW of renewable energy resources will be needed
+by 2032, DTE Electric used 1,800 MW of incremental solar generation in its affordability
+modeling. Id., p. 7 (citations omitted). GLREA questions whether the company will be able to
+“build renewable generating facilities quickly enough to remain in compliance with the RPS”
+when the company estimates that 3.2 GW of incremental renewable capacity will be required over
+the course of the special contracts. Id.
+GLREA contends that the application does not qualify for ex parte treatment because DTE
+Electric has failed to demonstrate that the special contracts will not result in an increase in the cost
+of service to existing customers. GLREA argues that the data and calculations underlying the
+company’s affordability analysis are missing, and asserts that DTE Electric’s assessment of the
+creditworthiness of Oracle may already be out of date based on recent news. Id., p. 10. GLREA
+maintains that reliance on future rate cases, IRP cases, and other cases will provide an inadequate
+remedy as DTE Electric will have incurred significant costs by that time. Finally, GLREA notes
+that significant portions of the special contracts are redacted, which can be corrected through the
+use of a protective order in a contested case. Id., p. 13.
+In their motion, the CEOs seek a contested case pursuant to the Commission’s broad
+
+[[PDF_PAGE_0017]]
+Page 17
+U-21990
+discretion under Rule 415(1) based on the serious cost allocation, rate design, and clean energy
+compliance issues presented by the application. CEOs’ motion, p. 2. The CEOs note that the
+Customer’s size is unprecedented in Michigan, and that DTE Electric states that the Customer will
+account for 18% of the company’s total annual revenue requirement and could increase the
+company’s RPS target by 30.5%. Id., p. 5. The CEOs agree with DTE Electric that it is possible
+to bring this Customer “online in a way that benefits the Company’s other ratepayers by reduction
+of their costs[,]” but they argue that the company has failed to include sufficient information,
+analyses, calculations, or exhibits to demonstrate that the special contracts qualify for ex parte
+treatment. Id., p. 6. Like other movants, the CEOs list several concerns including the transmission
+upgrades, the new substation, other distribution upgrades, and the lack of data underlying the
+company’s claims about the affordability benefit; as well as the ability of DTE Electric to develop
+enough resources to handle the resulting impact on its RPS targets, noting that “storage
+accreditation decreases as more storage is added to the grid; and the Company’s assumptions do
+not seem to reflect this possibility, which is likely as the Company significantly increases its
+battery capacity by approximately 1.4 gigawatts.” Id., p. 9. The CEOs argue that the full cost
+impacts are unclear.
+The CEOs contend that the Commission has previously found that “[w]here a case ‘involves
+significant factual and policy questions and complex legal determinations that can only be
+resolved with the benefit of discovery, comprehensive testimony and evidence, and a well-
+developed record,’ it is entirely appropriate and within the discretion of the Commission to order a
+contested case.” Id., pp. 9-10 (quoting the June 30, 2020 order in Case No. U-20763 (June 30
+order), p. 69). They further note that the Commission held that “significant public interest and
+concern” are reasons for converting an action to a contested case, and they point to the holdings in
+
+[[PDF_PAGE_0018]]
+Page 18
+U-21990
+the March 13 order. CEOs’ motion, p. 10 (quoting the June 30 order, p. 70). Finally, the CEOs
+argue that this is not a straightforward special contract approval case and the Commission would
+benefit from a comprehensive record.
+In its motion, MNSC contends that the Commission should align the instant case with Case
+No. U-21859, pointing to the Commission’s language in both the March 13 and November 6
+orders noting the unique characteristics of data centers and the need for a robust record. MNSC’s
+motion, p. 5. MNSC asserts that the application presents significant cost and energy supply issues,
+noting that DTE Electric states that the Customer will increase the company’s PRMR. MNSC
+states that DTE Electric will incur “at least the following five categories of incremental costs by
+serving the Customer: (1) energy storage portfolio costs, (2) fuel and purchased power costs,
+(3) transmission upgrade costs, (4) new industrial substation costs, and (5) renewable generation
+costs for [RPS] compliance.” Id., p. 6 (citation omitted). MNSC argues that the company has
+failed to demonstrate that it has made a sufficient assessment of these costs and the associated
+impact on customers. MNSC adds that the fact that the company has not established a
+standardized tariff means that the decision on the special contracts will set precedent for future
+negotiations and agreements.
+MNSC lists several claims that, it argues, lack sufficient information about the supporting
+assumptions, data, calculations, workpapers, or modeling files, including:
+a. Supporting the claim that the Customer will be responsible for approximately
+18% of total costs and bring down the responsibility of other customer classes,
+and explaining whether the Estimated Cost of Service Responsibility is based
+on allocators that assume 80% or 100% of contract capacity;
+b. Supporting the forecasted “affordability benefit” through 2030 and explaining
+whether that “benefit” was premised on revenues based on 80% or 100% of
+contract capacity;
+c. Demonstrating that the Customer’s revenue contributions would exceed the
+incremental costs in both the near term and over the anticipated 19-year term of
+the Special Contract of the investments that would be needed to serve the
+
+[[PDF_PAGE_0019]]
+Page 19
+U-21990
+Customer;
+d. Explaining how the estimated $200 million of transmission upgrades will
+impact [PSCR] customers;
+e. Assessing the impact of industrial substation construction costs, which DTE
+estimates to be $300 million;
+f. Assessing distribution asset costs other than the industrial substation;
+g. Estimating the additional renewable energy resources necessary to ensure
+compliance with Michigan’s Renewable Energy Standards, including the
+potential need for transmission services related to the additional renewable
+resources, and the anticipated cost recovery for those resources; and
+h. Estimating anticipated power supply investments other than the referenced
+renewable resources.
+Id., pp. 7-8 (citations omitted); see, Affidavit of Caroline Palmer (attached to MNSC’s motion).
+MNSC adds that DTE Electric has failed to show that the termination fee will be adequate, noting
+that the termination payment will recover at least 10 years of minimum monthly charges, but the
+PSA is for 19 years, leaving nine years “unprotected by the termination payment.” Id., p. 9.
+MNSC contrasts this provision with the terms adopted in the November 6 order which included an
+exit fee based on the number of months remaining in the full contract term. MNSC also argues
+that DTE Electric provides no information regarding what will happen if the full load fails to
+materialize. MNSC argues that the claimed effect on the company’s targeted energy waste
+reduction (EWR) should not be deferred until the next EWR plan proceeding.
+MNSC notes that, in the November 6 order, the Commission did not adopt a parent guaranty
+as sufficient for a default collateral requirement but remained open to the possibility of relying on
+a parent guaranty on a case-by-case basis. Id., p. 10, n. 22 (citing the November 6 order, pp. 112-
+113). MNSC argues that DTE Electric proposes a parent guaranty to secure the special contracts
+but makes no attempt to show that this is a reasonable and prudent option in light of the risk level
+associated with the Customer and its parent. MNSC takes note of another contrast to the
+Consumers case, in that the PSA does not require the Customer to move to a large load tariff rate if
+one is approved in the future, which was a requirement adopted in the November 6 order, p. 116.
+
+[[PDF_PAGE_0020]]
+Page 20
+U-21990
+MNSC’s motion, pp. 10-11. MNSC also argues that the heavy redaction of the special contracts
+does not allow for appropriate analysis of 14 separate items that would be necessary for a thorough
+review. MNSC contends that the application does not qualify for ex parte treatment. Id., p. 12.
+MNSC notes that in the February 27, 2007 order in Case No. U-15161 the Commission
+rejected a request for ex parte approval where a utility had not ruled out the possibility that some
+customers would experience cost increases as a result of approval of the application. MNSC’s
+motion, p. 12, n. 42. MNSC states that Rule 415(1) gives the Commission broad discretion to set
+any matter for a contested case, and notes that in the June 30 order the Commission found that
+“significant public interest and concern,” “significant factual and policy questions,” and “complex
+legal determinations” were reasons to convert such a matter to a contested case. MNSC’s motion,
+p. 13 (quoting the June 30 order, p. 69). MNSC adds that the Commission has indicated that it
+“may direct a contested proceeding in cases involving a program that draws significant criticism.”
+MNSC’s motion, p. 13 (quoting the July 12, 2017 order in Case No. U-18349, p. 15). MNSC
+contends that DTE Electric’s reliance (in its response in opposition to the Attorney General’s
+motion) on Attorney General v Pub Serv Comm, 227 Mich App 148, 155; 575 NW2d 302 (1997);
+appeal den, 459 Mich 910; 589 NW2d 282 (1998) (Attorney General) is misplaced because that
+case involved ex parte approval of a special contract for 80 MW. MNSC contends that this is not
+analogous to the cost impacts of 1.4 GW, and notes that, in the underlying 1997 case, the
+Commission directed the utility to account for that special contract as a separate rate class in future
+cost of service studies, which has not been proposed in the instant case. MNSC’s motion, p. 14
+(citing the December 15, 1995 order in Case No. U-11001, pp. 6-7). MNSC further notes that in
+the August 18, 1994 order in Case No. U-10646 (August 18 order), the Commission rejected a
+request for ex parte review of special contracts for 1 GW of load and ordered a six-month
+
+[[PDF_PAGE_0021]]
+Page 21
+U-21990
+contested case schedule due to the size of the load and the fact that, even if approval had no effect
+on the rates paid by other customers, it represented “an arrangement that may well have substantial
+effects in subsequent cases, including rate cases, capacity solicitation cases, and retail wheeling
+cases.” MNSC’s motion, p. 14 (quoting the August 18 order, pp. 5-6). MNSC states that the
+Commission found that the revenues were so large, and the time period of 10-year contracts was
+so long, as to require notice and an opportunity for a hearing. Id. MNSC argues that the 19-year
+PSA for a 1.4 GW customer requires the same.
+Finally, MNSC contends that recent settlements in large load tariff cases brought in Indiana,
+Ohio, Kansas, and Missouri have benefited from the fact that the parties were able to conduct
+discovery and develop a record prior to settlement. MNSC supports the Attorney General’s
+request for at least 180 days from the date of the application for a contested case. Id., p. 16.
+In its initial response to the Attorney General’s motion, DTE Electric argues that it has
+provided detailed testimony and exhibits demonstrating that approval of the special contracts will
+not increase the cost of service for existing customers. DTE Electric’s first response, p. 1. The
+company argues that the Attorney General relies on speculation and fails to cite any legal authority
+in support of her position. DTE Electric contends that it has shown that the special contracts will
+not increase the cost of service for other customers, the terms of service are consistent with the
+dictates of the November 6 order, and any future issues will be addressed in rate cases, IRPs, and
+other appropriate cases. Thus, the company argues, the requests for intervention are premature
+and the motions should be denied.
+DTE Electric contends that mere speculation is not sufficient to require a contested proceeding
+and that the Attorney General has offered no legal authority for that argument. DTE Electric
+argues that, in Attorney General, the Court of Appeals rejected the Attorney General’s argument
+
+[[PDF_PAGE_0022]]
+Page 22
+U-21990
+against ex parte treatment and held that the Commission was correct in finding that simply
+approving and implementing a special contract does not, in itself, cause a cost of service increase
+to occur. DTE Electric’s first response, p. 3 (citing 227 Mich App at 154). DTE Electric notes
+that the Court also found that in a future case involving a potential cost of service increase, such as
+a rate case, the interested parties would have the opportunity to participate in a contested hearing.
+DTE Electric’s first response, p. 4 (citing 227 Mich App at 155). DTE Electric avers that this is
+controlling authority and adds that the company has shown that the Customer will bear all cost
+responsibility for the energy storage portfolio during the 15-year cost recovery period. DTE
+Electric reiterates that the special contracts will provide an affordability benefit to existing
+customers through the PSA Rate D11 charges and through the PSCR surcharges. DTE Electric
+states that it has provided detailed testimony on cost recovery and resource planning, specific
+preliminary cost estimates for the transmission and distribution upgrades, detailed testimony on
+how the RPS targets will be met, and copies of the special contracts (which include the most
+critical provisions without redaction). The company contends that this is sufficient for evaluation
+and approval and shows that the facility is in the best interests of customers. Id., p. 5.
+DTE Electric argues that the November 6 order does not result in a requirement for a
+contested case, and, in fact, the Commission indicated in the order that “it anticipates ex parte
+review of special contracts for individual customers where the rate is already established, similar
+to what DTE Electric requests here.” Id., p. 6. DTE Electric asserts that the application is
+consistent with the findings in the November 6 order and addresses all of the key terms adopted
+therein by the Commission as illustrated by the 19-year PSA term, the 80% MBD, a termination
+fee in the ESA designed to collect the unrecovered balance of the constructed storage assets, a
+termination fee for the PSA that collects at least 10 years of the MBD, collateral (though
+
+[[PDF_PAGE_0023]]
+Page 23
+U-21990
+confidential) that is based on the Customer’s and the Customer’s parent’s creditworthiness, and a
+lack of cost impacts to other customers. DTE Electric states that it “estimates that all other factors
+held constant, the Customer would reduce the cost of service for all existing customers.” Id., p. 7
+(citation omitted). DTE Electric indicates that it will provide additional detail on its renewable
+energy resource procurement plans and other long-term planning in the appropriate future
+proceedings such as IRP and REP proceedings. Id., p. 8. Finally, DTE Electric notes that it has an
+obligation to serve customers who locate in the company’s service territory per MCL 462.4(a) and
+MCL 460.54.
+In its second response to the remaining motions, DTE Electric likewise describes the
+arguments of ABATE, MNSC, GLREA, and the CEOs as reliant on speculation. The company
+notes that its application seeks approval of the terms of service for just one customer that is
+eligible for service under Rate D11, and seeks to add additional terms of service beyond those
+already included in Rate D11 that will protect against the possibility of stranded costs. DTE
+Electric’s second response, p. 2. DTE Electric contends that none of this results in an increase to
+the cost of service. The company points out that the ESA is a standalone contract and argues that a
+request “for approval of an agreement that requires resource-specific costs to be borne by a
+singular customer also plainly does not create an increase in the cost of service.” Id., p. 3. DTE
+Electric notes that the special contracts require contract approval by December 5, 2025, and that,
+beyond this date, the Customer may terminate the agreements or extend this condition precedent
+until December 19, 2025. The company states that it is scheduled to begin construction by the end
+of 2025 and a contested case will jeopardize the ability of the company and the Customer to meet
+contract deadlines. DTE Electric contends that the motions should be denied and the requests for
+intervention are premature and should, in any case, be denied as moot. Id.
+
+[[PDF_PAGE_0024]]
+Page 24
+U-21990
+DTE Electric asserts that the plain language of MCL 460.6a(3) provides a path for approval of
+the application and that the holdings of Attorney General affirm that path by finding that the
+simple approval of a special contract does not cause a change in the cost of service. Id., p. 5
+(citing 227 Mich App at 154). DTE Electric again notes that future cases which have the potential
+to change rates will include participation by all interested parties. The company argues that
+interpreting the statute “to require guarantees against potential future outcomes would effectively
+require an impossibility, violating another fundamental doctrine of statutory construction that the
+law should not be interpreted to require the impossible. Under no circumstances can the Company
+predict every possible outcome for every customer with certainty.” DTE Electric’s second
+response, pp. 5-6 (citing West v Northern Tree Co, 365 Mich 402,406; 112 NW2d 423 (1961)
+(“[t]he law should not be read to require the impossible”)). DTE Electric maintains that the
+application meets the statutory requirements for ex parte approval because it does not seek to
+increase rates or to alter, change, or amend any rate or rate schedule, the effect of which would be
+to increase the cost of service to the company’s customers. The company argues that it is asking
+the Commission to approve terms of service that enhance Rate D11 and to approve a unique
+standalone contract to pay for the incremental capacity resources. DTE Electric posits that neither
+action increases the cost of service. Addressing GLREA’s argument regarding the mismatch
+between the length of the ESA/PSA and the 16-year depreciable life of solar resources, DTE
+Electric adds that the ESA is for storage resources (not solar resources) and storage resources have
+a depreciable life of 15 years. DTE Electric’s second response, p. 6, n. 4.
+In response to MNSC’s argument that a 1.4 GW customer is not analogous to the situation
+addressed in Attorney General, DTE Electric contends that size does not matter because approval
+of a special contract either results in a cost of service increase or it does not, and adds that
+
+[[PDF_PAGE_0025]]
+Page 25
+U-21990
+“[a]llegations of potential future events, regardless of size, are irrelevant.” Id., p. 7 (citing
+Attorney General v Pub Serv Comm, 206 Mich App 290,295-298; 520 NW2d 636 (1994)). DTE
+Electric also rejects MNSC’s reference to Case No. U-10646 where the Commission directed the
+holding of a contested case, arguing that, in that case, the utility was seeking the approval of
+specific discounted rates for the three largest automotive customers and the case took place during
+the time period when the electric industry was being restructured to allow for competition. The
+company notes that the application does not propose any discounted rates. DTE Electric further
+argues that the fact that other jurisdictions have allowed for the conduct of discovery prior to
+settlement does not result in a requirement for a contested case in the instant proceeding. DTE
+Electric’s second response, p. 8. The company notes that it does not seek a new or modified tariff.
+DTE Electric contends that the special contracts align with the holdings of the November 6
+order and that the Commission, in that order, stated that it anticipated ex parte reviews of future
+special contracts for individual customers where the rate is already established. Id., p. 9. The
+company contends that the key terms addressed in the November 6 order were contract term,
+MBD, exit fee, and collateral, and these same safeguards and protections are included in the
+special contracts in the instant case. Regarding cost impacts, DTE Electric notes that the
+Customer bears all energy storage portfolio costs during the 15-year recovery period for each
+project and again refers to the affordability benefit. DTE Electric notes that the November 6 order,
+p. 125, called for the filing of any modeling or cost of service studies (COSSs) that support the
+demonstration of no cost impact to existing customers and indicates that Attachment A to the
+second response includes the model underlying the estimated base cost of service. Id., p. 11. The
+company argues that Attachment A demonstrates that the special contracts will provide $109
+million in base rate benefits to residential customers once the Customer’s load is fully
+
+[[PDF_PAGE_0026]]
+Page 26
+U-21990
+materialized. Id. DTE Electric states that Attachment A does not account for the additional
+affordability benefits that the company expects from the PSCR mechanism, which, the company
+argues, could amount to approximately $300 million. Id.
+Addressing the contract redactions, DTE Electric contends that it has provided sufficient
+information to demonstrate the protective aspects of the special contracts. DTE Electric notes that
+Oracle is required to guarantee all payment obligations under the ESA and PSA through a
+combination of a parent guaranty and, if applicable, a letter of credit. Id., p. 12. The company
+states that the termination payment under the PSA is approximately $2.3 billion if the PSA is
+terminated at the outset; and the termination payment under the ESA is “an acceleration of the
+remaining payments that the Customer would have made had the ESA not been terminated. Total
+subscription charges under the ESA, accounting for both Company and third-party owned energy
+storage projects, are estimated at roughly $3.9 billion.” Id. DTE Electric argues that, in the
+November 6 order, the Commission did not foreclose the option of a parent guaranty but allowed
+for its consideration on a case-by-case basis. DTE Electric posits that “Oracle is one of the top 20
+companies in the world by market capitalization” and contends that the credit requirements in the
+PSA and ESA “far exceed the 50% standard set forth in the November 6 order as reasonable and
+prudent.” Id., p. 13. DTE Electric contends that the redactions are not a valid reason to reject the
+application because the redacted terms are commercially sensitive and would be redacted in a
+contested proceeding as well.
+DTE Electric asserts that it does not have a unilateral right to migrate a customer to a new or
+different rate during the term of a contract, but would have the ability to do so once the initial term
+of the PSA has run. Finally, DTE Electric states that it will provide additional detail on its plans
+for the development of renewable energy resources, EWR, and long-term resources in the
+
+[[PDF_PAGE_0027]]
+Page 27
+U-21990
+appropriate future proceedings and again notes its statutory obligation to serve. The company
+contends that the movants’ requests for additional detail on long-term planning or the impacts of
+hypothetical scenarios do not provide a valid basis for denying ex parte relief and rejecting the
+benefits of the special contracts. Id., p. 15.
+Discussion
+MCL 460.6a(1) provides that “A gas utility, electric utility, or steam utility shall not increase
+its rates and charges or alter, change, or amend any rate or rate schedules, the effect of which will
+be to increase the cost of services to its customers, without first receiving commission approval as
+provided in this section.” MCL 460.6a(3) provides that “An alteration or amendment in rates or
+rate schedules applied for by a public utility that will not result in an increase in the cost of service
+to its customers may be authorized and approved without notice or hearing.” Ex parte applications
+such as the one in the instant case are filed pursuant to MCL 460.6a(3).
+The Michigan Court of Appeals has interpreted the language of MCL 460.6a(3) (which
+previously appeared in MCL 460.6a(1)). In Attorney General, the Attorney General appealed the
+ex parte approval of a special contract between Consumers and The Upjohn Company (Upjohn)
+for ten years of retail electric service at a reduced rate, where Consumers explicitly reserved the
+right to seek a rate increase in the future based on the loss of revenue associated with the
+discounted rate. 227 Mich App 148. The Commission found that the special contract did not
+increase any customer’s rates or costs of service and thus could be approved on an ex parte basis,
+and further noted that, if Consumers ever sought a future rate increase as a result of the shortfall,
+then the company would have to meet the stringent evidentiary standards applied by the
+Commission. 227 Mich App at 151.
+The Attorney General appealed, contending that “the only way the PSC [Public Service
+
+[[PDF_PAGE_0028]]
+Page 28
+U-21990
+Commission] could approve the contract without public notice and an opportunity for hearing
+would be if the PSC ruled that all discounts and costs resulting from the Upjohn contract must
+always be borne by Consumers and its shareholders only, and never by any of Consumers’ other
+customers.” Id. at 152. The Attorney General argued that it was not necessary for the order
+approving the special contract to actually authorize an increase in rates in order for it to be
+inappropriate for ex parte treatment but, instead, that the focus in an ex parte proceeding “should
+be on whether the underlying amendment or alteration of rates approved by the PSC creates any
+potential for a rate or cost increase in the future.” Id. at 153. The Attorney General contended that
+ex parte treatment is appropriate “only when the PSC can affirmatively state that the alteration of
+rates will not result in any increase in costs to customers at any time, now or in the future[.]” Id.
+The Court of Appeals held that:
+[t]he PSC’s interpretation recognizes that merely approving and implementing the
+rate amendments in question
+is not sufficient, in and of itself, to cause any rate or
+cost of service increase to occur. That is, even though the PSC may not have
+prohibited the utility from seeking a rate increase at some point in the future, and
+even though the PSC may have expressly laid the groundwork for such a future rate
+increase request, the fact remains that mere approval and implementation of the
+contract, without more, will not result in any rate or cost increases.
+Id. at 154. The Court of Appeals further found that the Commission’s interpretation of the
+statutory language was consistent with the legislative intent to ensure notice and a hearing before
+the implementation of an increase in rates or costs of service, holding that “[m]erely establishing
+that another interpretation is plausible is not sufficient to meet the burden of establishing by clear
+and convincing evidence that the PSC’s interpretation of the statute is unlawful or unreasonable.”
+Id. at 155. The Court noted that “all interested parties will have ample opportunity for notice and a
+hearing in the event Consumers ever seeks an actual rate increase in order to recover the lost
+revenue resulting from the Upjohn contract.” Id.; see also, Attorney General v Pub Serv Comm,
+
+[[PDF_PAGE_0029]]
+Page 29
+U-21990
+206 Mich App 290, 295-296; 520 NW2d 636 (1994) (affirming the Commission’s ex parte
+approval of a settlement agreement that could result in a rate refund because a potential refund
+does not increase the rates charged to customers); and Attorney General v Pub Serv Comm,
+unpublished opinion per curiam of the Court of Appeals, issued June 11, 1999 (Docket No.
+207993), p. 4 (reversing the Commission’s ex parte approval of a request to amortize storm
+damage costs based on finding that the Commission’s order “effectuated an immediate change in
+rates which had the effect of increasing the cost of service to [Detroit Edison Company’s]
+customers” because the amortization request would result in an offset to part of a previously
+approved refund).
+These cases demonstrate that the Court of Appeals has found that special contracts that do not
+result in an immediate change in rates or in the cost of service to customers qualify for ex parte
+approval, even where it is clear that the existence of the special contracts could—or even likely
+will—result in an associated revenue request by the utility in a future rate case. The Court in
+Attorney General rejected the notion that a special contract may only receive ex parte treatment if
+the Commission can attest that there is no potential for a rate or cost of service increase in the
+short-term or at any time in the future. 227 Mich App at 153-155. Instead, the Court found the
+Commission’s interpretation of MCL 460.6a(3) to be reasonable in light of the fact that, should the
+potential for a change in rates or costs arise in a rate case, the Commission has plenary power to
+address the issue in the context of a contested proceeding in which all interested parties will be
+able to participate. MCL 460.6; MCL 460.6a. It is axiomatic that the Commission avoids single-
+issue rate cases, because changes in rates must be done on a holistic basis in order to understand
+the context of the changes and to best examine issues of rate design and cost allocation among
+customers, where customers as well as all other parties have the ability to participate. Thus, a
+
+[[PDF_PAGE_0030]]
+Page 30
+U-21990
+request for approval of a special contract cannot be treated like a single-issue rate case, and such
+an approval may occur only when there will be no impact on existing rates or costs of service to
+any customer.
+The Commission acknowledges the unprecedented size of the Customer in this case and the
+unique considerations in addressing load of this magnitude associated with a single customer. The
+fact that the Customer is seeking to exclusively pay for its own capacity source also presents
+unique aspects. But the Commission recognizes, as do the movants, that this type of application
+itself is not unusual. Special contracts with individual customers that meet the statutory standards
+are routinely addressed through ex parte proceedings. This is different from Consumers’ request
+in Case No. U-21859 for a general tariff that would apply to all data centers or large load
+customers. The special contracts apply only to the Customer. A generally applicable tariff will
+apply to all customers that are covered by the tariff’s eligibility criteria and, thus, could justify the
+use of the Commission’s discretion to order a contested case pursuant to the Commission’s broad
+authority under Rule 415(1) even if the tariff would not result in an increase in rates or the cost of
+service.
+The Commission also notes the speculative nature of the movants’ claims, many of which rely
+on positing concerns about what might occur in future IRP, PSCR, and REP proceedings, that
+could result in increases to rates or costs of service. As the Commission observed in the
+November 6 order:
+issues related to renewable and clean energy standards should be addressed in the
+proceedings that are already structured to address these issues, including REP, CEP,
+IRP, and VGP program cases, as well as rate cases. As the Staff notes, capacity
+demonstration cases and EWR cases will be involved as well. The Commission
+recognizes that MCL 460.1051 and MCL 460.1028 require a ramping-up of clean
+and renewable energy supplies and they are volumetrically-based. These are
+requirements that will be addressed in the proceedings where such requirements are
+reviewed under the statutorily authorized process. As the Staff correctly noted, the
+
+[[PDF_PAGE_0031]]
+Page 31
+U-21990
+existing separate proceedings authorized by statute have a wider scope and allow
+for better consideration of alternatives. Thus, the Commission declines the
+suggestion to include mandated renewable and clean energy requirements in the
+large load provisions of Rate GPD [the large load tariff at issue in the case]. This
+does not foreclose the possibility of changes to the tariff at a later date based on the
+results of future CEP, REP, IRP, VGP, and rate cases[.]
+November 6 order, pp. 118-119. Notably, REPs, IRPs (including consideration of CEPs), and rate
+cases are all required to be contested proceedings. See, MCL 460.6a(1); MCL 460.6t(7); MCL
+460.1022(3)-(4). Likewise, PSCR issues, such as the appropriate factor, will be addressed in the
+applicable PSCR plan or reconciliation proceeding—a contested proceeding authorized by statute
+specifically for the consideration of a record addressing the issue in the context of actual data
+rather than theoretical scenarios. MCL 460.6j(5), (12). The same principles apply in this special
+contract review case. The Commission is not persuaded that hypothetical outcomes from future
+statutorily mandated proceedings require the rejection of an application for ex parte treatment for
+these special contracts.
+Applying the case precedent and these legal principles, the Commission finds that the
+application meets the standard for ex parte treatment authorized by MCL 460.6a(3) because
+conditional approval of the special contracts will not result in an increase to the rates, rate
+schedules, or costs of service for any customers. Thus, the Commission finds that the motions for
+a contested case should be denied. And while the Commission finds that the standard for ex parte
+treatment is met on that basis alone, it also notes that, in this case, the standard argued by the
+Attorney General in Attorney General is also met. Although the argument was ultimately rejected
+by the Court of Appeals, the then-Attorney General argued “the only way the PSC could approve
+the contract without public notice and an opportunity for hearing would be if the PSC ruled that all
+discounts and costs resulting from the [special] contract must always be borne by Consumers and
+its shareholders only, and never by any of Consumers’ other customers.” 227 Mich App at 152.
+
+[[PDF_PAGE_0032]]
+Page 32
+U-21990
+As described below, the Commission is conditioning its approval on the requirement that, at the
+very least, all current and future costs caused by the Customer shall be covered by the Customer or
+by DTE Electric and not existing customers. As such, approval of the special contracts in this case
+not only meets the findings of the Court of Appeals in Attorney General, but also meets the higher
+standard proposed by the then-Attorney General (though not adopted by the Court of Appeals) in
+that case.
+The Commission further finds that, per the requirements of MCL 460.6a(3), the application
+should be conditionally approved. The Commission finds that DTE Electric has demonstrated that
+approval of the special contracts will not increase rates, rate schedules, or the cost of service to
+customers. The terms and conditions of the PSA and ESA reflect distinct protections for the utility
+with respect to stranded costs, mitigate cost subsidization for existing customers, and provide an
+opportunity for a benefit to existing customers in the form of increased affordability due to the
+increased share of fixed costs that will be borne by the Customer, with the conditions described
+below. The Commission notes that the Staff was able to perform an investigation in order to
+substantiate the validity of the request for ex parte treatment. Complete, unredacted copies of the
+PSA and ESA were made available by DTE Electric to the Commission and the Staff, and the
+Staff performed an audit of the application and testimony regarding the proposed project.
+MCL 460.6; MCL 460.6a; MCL 460.54.
+8
+The approval of special contracts “requires an evaluation of the public interest.” March 23,
+1995 order in Case No. U-10646, p. 18, n. 8. The Commission finds that the public interest is
+served by approval of the special contracts by contribution to the fixed costs that would otherwise
+8 Much of the information was produced by DTE Electric subject to the terms of a
+nondisclosure agreement.
+
+[[PDF_PAGE_0033]]
+Page 33
+U-21990
+be recovered from other ratepayers through both rate base and PSCR surcharges, creating the
+affordability benefit, as well as through the construction of 1.383 GW of incremental energy
+storage resources, fully funded by the Customer, that add additional benefits to the broader
+electrical grid. The Commission finds that the terms of the PSA that enhance the conditions of
+Rate D11, including the long-term 19-year commitment, the MBD, the termination fee, and the
+credit and collateral requirements, mitigate some risk associated with potential cost subsidization
+and include distinct protections for the utility with respect to stranded costs particularly as any
+such subsidization or exposure that could occur can be addressed in such cases where the company
+requests that rates be changed to reflect the same. The Commission makes clear that approval of
+the special contracts, in and of itself, does not approve or require future approval of subsidization
+by existing customers, or cost recovery of stranded costs from existing customers. While the PSA
+termination payment is based on ten years, the Commission finds that the minimum termination
+amounts of approximately $2.3 billion under the PSA and $3.9 billion under the ESA were
+negotiated by DTE Electric to protect itself from the financial impacts of default by the Customer.
+If the load fails to materialize, the MBD will still apply. In addition, should the Customer seek to
+exit the contracts, the termination amounts will apply. As some movants point out, at any stage in
+this process costs may (and likely will) have already been incurred by DTE Electric. The PSA and
+ESA minimum termination amounts, along with the Commission’s conditions, ensure that all of
+those costs will be fully borne by the Customer. Additionally, addressing the Attorney General’s
+concern that the termination fee may not be adequate to protect other customers, the Commission
+finds that the credit and collateral requirements in the unredacted PSA and ESA, along with the
+Commission’s conditions, ensure that any risk that the Attorney General’s concern materializes is
+either covered by the substantial collateral collected or is borne by DTE Electric and not by other
+
+[[PDF_PAGE_0034]]
+Page 34
+U-21990
+customers. See, Attorney General’s motion, pp. 7-9.
+In the following discussion, the Commission addresses in more detail the issues of RPS
+compliance, storage, EWR, and cost of service/rate design.
+In its analysis of DTE Electric’s RPS-related testimony, the Staff agreed with the company
+that, absent the five-year REC banking provision in the statute, DTE Electric would need 3,247
+MW of new solar generation in order to meet the Act 235 RPS target of 60% in 2035, in light of
+the anticipated load increase. But the Staff also confirmed that, using its banked RECs, the
+company needs only 445 MW9 of new renewable resources (with an assumed mix of wind and
+solar) by 2033, and also confirmed that the company demonstrated that this amount will come
+online in 2032. See, Exhibit A-3. Thus, the Staff confirmed that this 445 MW will allow DTE
+Electric to meet the 20-year RPS target through 2045 based on the REP approved in Case No. U-
+21662. The Staff also agreed that the company demonstrated that, by spreading the existing PSCR
+transfer price burden over more load, the special contracts should provide additional benefits to
+existing customers. The Commission recognizes that DTE Electric has yet to file its first clean
+energy plan (CEP), and that the CEP is thus the least understood aspect of the impact of the
+application. See, MCL 460.1051(2). But the Commission observes that, as discussed above, the
+Court of Appeals has affirmed that the approval of special contracts does not constitute
+ratemaking, where the special contracts do not have the effect of changing the rates, rate
+schedules, or costs of service for any existing customers. The Commission finds that ratemaking
+associated with a future CEP will occur in a future rate case.
+9 The Commission notes that in the application DTE Electric referred to needing 443 MW, but
+in its modeling it referred to needing 445 MW. The Staff was provided access to the modeling for
+its own analysis.
+
+[[PDF_PAGE_0035]]
+Page 35
+U-21990
+Mich Admin Code, R 460.2031 provides as follows:
+(1) When a utility enters into a special contract to provide service in a manner or at
+a rate not specifically covered by its filed rate schedules or rules and regulations,
+the utility shall file an application for approval of the special contract with the
+commission.
+(2) If the commission specifies any modifications to the proposed special contract
+with its approval order, then within 30 days, the utility shall file a copy of the
+executed special contract, modified as required by the commission’s order.
+The Commission’s approval of the application is accompanied by certain conditions. DTE
+Electric shall file an amended REP with its next IRP and (initial) CEP, and that application for an
+amended REP shall include a comparison of the resource requirements needed to comply with the
+RPS targets both with and without the Customer’s load and corresponding retail sales.
+10 The
+amended REP application shall also include options for recovery of any incremental costs of
+compliance that may result in a surcharge such that the surcharge is not collected on a per meter
+basis. The options should include equitable ways to recover the incremental costs of compliance
+which ensure that costs and benefits are distributed among rate classes appropriately.
+Additionally, in its next IRP application and initial CEP application, DTE Electric shall include a
+comparison of the resource requirements necessary to serve the company’s load with and without
+the addition of the Customer’s load. This analysis should be completed by identifying the
+resources included in the proposed course of action (PCA) and testing their performance in the
+Michigan Integrated Resource Planning Parameters Scenario #2 base model or in the alternative
+company base model, and shall include the corresponding plan production cost, rate impact by
+customer class, and an affordability analysis as directed by the IRP Filing Requirements adopted
+in Case No. U-21867. The same analysis should then be performed by evaluating the PCA to
+10 The Commission notes that in some pleadings DTE Electric indicates that it will file its next
+IRP/REP/CEP in December of 2026; but, during the pendency of this proceeding, DTE Electric
+changed its targeted IRP/REP/CEP filing date to October of 2026.
+
+[[PDF_PAGE_0036]]
+Page 36
+U-21990
+serve the company’s existing customers absent the Customer’s load. When removing the
+Customer’s load, the incremental renewable generation that is needed for RPS compliance with the
+Customer’s load identified in the company’s REP and the storage that is expected to be developed
+pursuant to the ESA should also be removed. This comparison should illustrate the Customer’s
+overall impact on resource planning and illustrate any net impact to other customers’ rates.11
+Turning to storage, the Staff confirmed that the ESA project will involve the use of 4-hour
+lithium-ion battery storage to add 1.383 GW of storage. The Commission notes that if the PSA is
+terminated, the ESA does not automatically terminate and thus the storage assets could continue to
+be used, paid for, and credited to an entity that would no longer be a utility customer, but could
+continue to pay for a capacity resource used by all DTE Electric customers. The Staff confirmed
+that the company intends to select cost competitive resources arising from its 2025 RFP after first
+selecting the resources that are necessary to meet DTE Electric’s IRP storage commitments
+consistent with its most recently approved IRP (the 780 MW). The Commission notes that DTE
+Electric will be able to use this storage resource for its annual capacity demonstration under MCL
+11 Though MNSC’s motion has been denied, the Commission notes that the required
+comparison helps to address some of the points raised in MNSC’s Motion for Leave to File Reply
+to DTE [Electric]’s Response (motion for leave). Specifically, MNSC states that a contested case
+proceeding could “certainly be a place for some creative thinking about how to ensure that the
+costs of increased compliance obligations and resource adequacy needs are borne by the data
+center customer rather than other ratepayers” and could provide “a forum to explore establishing a
+true-up process in which the costs and revenues for the data center are reported and reviewed, and
+if other customers are found to be paying higher rates because of the data center, the data center’s
+payment levels could be adjusted to ensure that it is covering such additional costs.” MNSC’s
+motion for leave, p. 8. The Commission notes that the required analysis, combined with the
+condition described later in the order, provides both a comparison of the actual impact of the
+Customer on other customers’ rates and conditions approval on a commitment from DTE Electric
+that the costs of serving the Customer are covered by the Customer or DTE Electric and not by
+other ratepayers.
+
+[[PDF_PAGE_0037]]
+Page 37
+U-21990
+460.6w. DTE Electric provided the Staff with an analysis of the impacts of MISO’s DLOL
+resource adequacy construct as it relates to the company’s capacity position during the Staff’s
+audit. The Commission reiterates that, with respect to both the PSA and the ESA, no cost
+allocation or cost recovery methods are approved as a result of this ex parte order. DTE Electric
+shall provide an updated analysis in its next capacity demonstration filing showing the impact of
+the Customer on the company’s capacity requirements under DLOL using MISO’s most recent
+indicative DLOL results. This analysis shall include a comparison of the company’s PRMR under
+the MISO DLOL construct, absent the Customer’s load, the incremental storage, and the
+incremental renewable resources filed in the company’s REP compared to the company’s PRMR
+under the MISO DLOL construct with the inclusion of the Customer’s load and corresponding
+incremental resources.
+Turning to EWR, the Staff confirmed that DTE Electric commits to addressing the increased
+EWR targets in its next EWR plan filing, which will be due eight months after the issuance of a
+final order in the company’s next IRP case. The Commission finds the EWR issues associated
+with the special contracts to be relatively straightforward, and directs DTE Electric, in its next
+EWR plan filing, to provide a detailed analysis of the incremental EWR costs necessary to meet
+the 2% EWR savings target inclusive of the Customer, along with a thorough analysis of updated
+surcharges that are designed to ensure other customers are not impacted by the incremental EWR
+program costs attributable to the Customer.
+Turning to issues of cost of service and cost allocation, the Commission notes that the
+Commission and the Staff were provided with an unredacted copy of the affordability model used
+by the company and verified that the model shows an affordability benefit. The Staff was also
+provided with two COSSs and rate design models, one with the Customer on Rate D11 and one
+
+[[PDF_PAGE_0038]]
+Page 38
+U-21990
+with the Customer on a new, separate primary rate (though not a separate class), using the COSS
+and rate design terms most recently approved in Case No. U-21534. These COSSs were also made
+publicly available as Attachment A to DTE Electric’s second response. The Staff confirmed that
+the assumptions and inputs used by DTE Electric do result in a general affordability benefit to
+most existing customers via base rates under both scenarios. The Staff also confirmed, for
+example, that, when holding all else equal in the prior rate case, a reduction to the revenue
+deficiency approved in the January 23, 2025 order in Case No. U-21534 would have resulted if the
+Customer had been included in the test year in that case, resulting from a reduction to power
+supply costs for customers. However, should it be shown in a future rate case that any particular
+rate class does not benefit from a reduction to the cost of service, it is the rate case that is the
+proper forum for ratemaking. Addressing ABATE’s concern that the application did not provide
+enough information on what happens if the load fails to fully materialize because DTE Electric’s
+estimates of the benefits of the special contracts are calculated on the assumption that the
+Customer’s full load is present, the Commission finds that the downside risks are protected via the
+Commission’s conditions for approval. See, ABATE’s motion, p. 8.
+The Commission also observes that the Customer is causing the need for a new substation, and
+the Customer is arguably the only entity that will benefit from the new substation that will become
+part of the facility. Ratemaking treatment is the Commission’s exclusive prerogative and occurs
+within contested cases. This is the fundamental finding of Attorney General and the other cases
+discussed above: the approval of a special contract, where the contract has no effect on rates, rate
+schedules, or costs of service, does not involve ratemaking, but ratemaking may still take place in
+the appropriate forum wherein all parties may contest the ratemaking proposals of the utility and
+the other parties. In other words, approval of the special contracts does not guarantee any
+
+[[PDF_PAGE_0039]]
+Page 39
+U-21990
+particular ratemaking treatment associated with the special contracts or service to the Customer.
+The Commission finds that, based on its independent review of the unredacted contracts and
+the Staff’s analysis, the weight of the evidence and public interest considerations support approval
+of the special contracts, both because the special contracts conform to the requirements of MCL
+460.6a(3) and because they represent a means of potentially obtaining the company’s claimed
+affordability benefit that is estimated to accrue to ratepayers. However, the Commission
+recognizes that the application does not mirror every aspect of the November 6 order. Thus, the
+Commission directs DTE Electric to file, within 90 days, an application for a generally applicable
+large load customer tariff that aligns with the findings in the November 6 order. The Commission
+will consider this application in a contested case proceeding. Addressing MNSC’s concern that
+the decision on the special contracts may set precedent for future negotiations and agreements, the
+Commission notes that the generally applicable large load customer tariff will serve the purpose of
+setting this standard. In the meantime, the Commission will consider any subsequent applications
+for approval of special contracts on a case-by-case basis. The Commission encourages DTE
+Electric to take steps to promote transparency and meaningful review as part of any such
+applications, and the Commission maintains its broad discretion under Rule 415(1) to convert any
+such applications to contested case proceedings as appropriate.
+In addition, consistent with the directives in the November 6 order, DTE Electric shall also file
+a cost allocation and rate design proposal in its next general rate case that ensures that any future
+large load interconnection customers are paying the costs of interconnection. As part of that filing,
+DTE Electric shall file at least six cost allocation and rate design studies: (1) one under traditional
+ratemaking as exemplified by DTE Electric’s current COSS from its most recent rate case order
+including the expected full contract capacity of any large load customer(s) on Rate D11; (2) same
+
+[[PDF_PAGE_0040]]
+Page 40
+U-21990
+as (1), but with the inclusion of a new large load customer rate class; (3) same as (2), but using
+12CP12 to allocate costs instead of 4CP where 4CP is currently being utilized; (4) one under
+traditional ratemaking utilizing the most recently approved COSS without the large load
+customer(s) in service; (5) one utilizing a direct assignment of costs to a new large load customer
+rate class, including transmission, generation, and distribution costs; and (6) one utilizing a direct
+assignment of costs to the individual large load customer, again including transmission,
+generation, and distribution costs. Finally, and consistent with the directives in the November 6
+order, DTE Electric shall provide all the data necessary to allow the Staff and intervenors to
+recreate the proposals, which may be filed under seal if necessary, including a workpaper listing
+all assumptions used to create the proposals.
+As part of its next general rate case, DTE Electric shall also file a proposed administrative fee
+to be charged to potential additional data centers and other large loads to ensure the costs
+associated with any interconnection or other studies performed for these potential customers are
+not absorbed by existing customers. As noted in the November 6 order, “the Commission finds
+that, in light of the unique size of the loads involved, an administrative fee that is charged upfront
+directly to the applicant and reconciled to actual costs is advisable.” November 6 order, p. 123.
+Moreover, the approval in the instant case is conditioned upon the assumption, as represented
+by DTE Electric in its application, testimony, and subsequent filings, and in the materials provided
+pursuant to the Staff’s audit, that the Customer’s obligations under Rate D11 and the special
+contracts will at least cover the costs to serve the Customer (including generation, transmission,
+distribution, or other costs). These are conditions that do not require amendment of the special
+contracts. The Commission directs DTE Electric to file, within 30 days of the date of this order, a
+12 “CP” refers to coincident peak in the cost allocation formula.
+
+[[PDF_PAGE_0041]]
+Page 41
+U-21990
+letter in the instant docket accepting these conditions. If the company is unwilling to accept these
+conditions, it may file an application for a contested case. As ABATE, the CEOs, and MNSC
+noted, the Commission may require a contested case pursuant to Rule 415(1), as well as under the
+statute.
+In addition, in the event of a failure to pay the MBD under the PSA, or in the event of a
+termination, default, or other event whereby DTE Electric is required to draw on the letter of credit
+or parental guaranty, if the company determines that the specified collateral is not sufficient to
+cover the full amount of the remaining financial exposure associated with the ESA or the PSA
+(minus the value to customers), the Commission specifically cautions DTE Electric that any
+unrecovered costs shall not be borne by ratepayers and that DTE Electric bears responsibility for
+any remaining liability. All risk associated with the sufficiency of the collateral shall be borne by
+DTE Electric.
+Additionally, in order to ensure that the addition of this significant new load will not adversely
+impact the grid reliability experienced by other customers, DTE Electric is directed, within 90
+days of the date of this order, to file an application to update its Emergency Electric Procedures
+outlined in Section C3 of its Rate Book for Electric Service and any other relevant DTE Electric
+procedures to indicate that, after the event level step including the issuance of public appeals and
+after the event level step that implements voluntary load reductions, the company will shed firm
+load from the Customer prior to shedding firm load of any of DTE Electric’s other customers to
+the extent that firm load shedding is directed by the regional transmission organization and
+shedding the load of the Customer can prevent shedding load of other DTE Electric
+customers. Alternatively, DTE Electric may develop and execute agreements necessary to enable
+a required load reduction from the Customer at the appropriate step within the emergency
+
+[[PDF_PAGE_0042]]
+Page 42
+U-21990
+procedures outlined above to effectuate a required load reduction in lieu of firm load shedding and
+shall reflect the required load reduction within its Emergency Electric Procedures.
+DTE Electric is further directed to file a quarterly report in this docket detailing the following:
+(1) the Customer’s load profile for the previous quarter; (2) the amount of storage that is
+operational as of the end of that quarter; (3) the Customer’s total demand for the preceding 12
+months, compared to expected contract capacity and MBD; (4) any changes to the Customer’s
+credit rating that trigger a change to the credit and collateral terms; and (5) DTE Electric’s
+assessment of the financial state of the Customer. On an annual basis, in every report filed on
+December 31, DTE Electric shall also include any other information related to the realization of
+the projected affordability benefit. Such reports may be filed on a confidential basis as necessary
+to protect sensitive information. The Commission directs DTE Electric to file the first of these
+quarterly reports no later than December 31, 2026.
+The Commission makes no finding as to whether the terms contained in the special contracts
+or otherwise applicable to the Customer meet the requirements for certifications to be made to the
+Michigan Strategic Fund under MCL 205.54ee(6)(c)(iii) or MCL 205.94cc(6)(c)(iii) in order to
+claim an exemption from sales and use taxes, respectively. However, as noted in the November 6
+order, the Commission observes that voluntary green pricing (VGP) programs may provide a
+vehicle for the Customer to comply with the requirements necessary to qualify for the sales and
+use tax exemptions, and the Commission would consider the approval of such VGP programs in a
+future proceeding. See, MCL 205.54ee(10)(e)(ix)(C); MCL 205.94cc(10)(e)(ix)(D).
+While acknowledging the importance of rate certainty, the Commission also observes that it is
+authorized to adjust Rate D11 in a future rate case, on the basis of the evidence filed in that future
+case. MCL 460.6; MCL 460.6a.
+
+[[PDF_PAGE_0043]]
+Page 43
+U-21990
+Finally, the Commission retains jurisdiction of this matter and reserves the authority to reopen
+this case at any time and/or issue an order to show cause if DTE Electric’s claimed affordability
+benefit fails to materialize or vanishes or costs associated with serving the Customer are expected
+to fall upon existing customers.
+THEREFORE, IT IS ORDERED that:
+A. DTE Electric Company’s November 3, 2025 application for ex parte approval of special
+contracts, consisting of a primary supply agreement and energy storage agreement with Green
+Chile Ventures LLC, is conditionally approved.
+B. The approval of the special contracts is conditioned upon the representations made by DTE
+Electric Company that payments made by Green Chile Ventures LLC under Rate Schedule D11
+and the special contracts will cover the costs to serve Green Chile Ventures LLC such that the
+costs of serving Green Chile Ventures LLC (including generation, transmission, distribution, or
+other costs) are not covered by other customers. Within 30 days of the date of this order, DTE
+Electric Company shall file a letter in this docket expressly accepting these conditions, as
+described in this order.
+C. DTE Electric Company shall file an amended renewable energy plan with its next
+integrated resource plan and clean energy plan and shall include: (1) a comparison of the resource
+requirements needed to comply with the renewable portfolio standard targets both with and
+without Green Chile Ventures LLC’s load and corresponding retail sales; (2) an analysis of options
+for recovery of any incremental costs of renewable portfolio standard compliance that may result
+in a surcharge such that the surcharge is not collected on a per meter basis; and (3) an analysis of
+equitable ways to recover the incremental costs of renewable portfolio standard compliance which
+ensure that costs and benefits are appropriately distributed among rate classes.
+
+[[PDF_PAGE_0044]]
+Page 44
+U-21990
+D. In its next integrated resource plan application and its initial clean energy plan application
+(filed together), DTE Electric Company shall include a comparison of the resource requirements
+necessary to serve the company’s load with and without the addition of Green Chile Ventures
+LLC’s load, as described in this order.
+E. DTE Electric Company shall provide an updated analysis in its next capacity demonstration
+filing under MCL 460.6w showing the impact of Green Chile Ventures LLC’s load on the
+company’s capacity requirements under direct loss of load methodology using the Midcontinent
+Independent System Operator, Inc.’s most recent indicative direct loss of load results, as described
+in this order.
+F. In its next energy waste reduction plan filing, DTE Electric Company shall provide a
+detailed analysis of the incremental costs necessary to meet the 2% energy waste reduction savings
+target inclusive of Green Chile Ventures LLC’s load, along with an analysis of updated surcharges
+that are designed to ensure other customers are not affected by the incremental energy waste
+reduction program costs attributable to Green Chile Ventures LLC.
+G. Within 90 days of the date of this order, DTE Electric Company shall file an application to
+update its Emergency Electric Procedures outlined in Section C3 of its Rate Book for Electric
+Service and any other relevant company procedures to indicate that, after the event level step
+including the issuance of public appeals and after the event level step that implements voluntary
+load reductions, the company will shed firm load from the facility operated by Green Chile
+Ventures LLC prior to shedding firm load of any of DTE Electric Company’s other customers to
+the extent that firm load shedding is directed by the regional transmission organization and
+shedding firm load of the facility operated by Green Chile Ventures LLC can prevent shedding
+firm load of other DTE Electric Company customers. Alternatively, DTE Electric Company may
+
+[[PDF_PAGE_0045]]
+Page 45
+U-21990
+develop and execute agreements necessary to enable a required load reduction from Green Chile
+Ventures LLC at the appropriate step within the emergency procedures as described in this order
+to effectuate a required load reduction in lieu of firm load shedding and shall reflect the required
+load reduction within its Emergency Electric Procedures, in Section C3 of its Rate Book for
+Electric Service.
+H. Within 90 days of the date of this order, DTE Electric Company shall file an application for
+approval of a generally applicable large load customer tariff that aligns with the findings in the
+November 6, 2025 order in Case No. U-21859.
+I. In its next general rate case, DTE Electric Company shall file a cost allocation and rate
+design proposal that ensures that future large load interconnection customers pay the full costs
+associated with interconnection, and shall include the six cost allocation and rate design studies, as
+detailed in this order. DTE Electric Company shall also provide all the data necessary to allow the
+Commission Staff and intervenors in the general rate case to recreate the studies, which may be
+filed under seal if necessary, including a workpaper listing all assumptions used to create the
+studies.
+J. In its next general rate case, DTE Electric Company shall file a proposed administrative fee
+to be charged to potential additional data centers and other large load customers to ensure the costs
+associated with any interconnection or other studies performed for these potential customers are
+not absorbed by existing customers.
+K. Beginning on December 31, 2026, DTE Electric Company shall provide the quarterly and
+annual reporting described in this order.
+The Commission reserves jurisdiction and may issue further orders as necessary.
+
+[[PDF_PAGE_0046]]
+Page 46
+U-21990
+Any party desiring to appeal this order must do so in the appropriate court within 30 days
+after issuance and notice of this order, pursuant to MCL 462.26. To comply with the Michigan
+Rules of Court’s requirement to notify the Commission of an appeal, appellants shall send
+required notices to both the Commission’s Executive Secretary and to the Commission’s Legal
+Counsel. Electronic notifications should be sent to the Executive Secretary at LARA-MPSC-
+Edockets@michigan.gov and to the Michigan Department of Attorney General - Public
+Service Division at sheac1@michigan.gov. In lieu of electronic submissions, paper copies of
+such notifications may be sent to the Executive Secretary and the Attorney General - Public
+Service Division at 7109 W. Saginaw Hwy., Lansing, MI 48917.
+MICHIGAN PUBLIC SERVICE COMMISSION
+________________________________________
+Daniel C. Scripps, Chair
+________________________________________
+Katherine L. Peretick, Commissioner
+________________________________________
+Shaquila Myers, Commissioner
+By its action of December 18, 2025.
+________________________________
+Lisa Felice, Executive Secretary
+
+[[PDF_PAGE_0047]]
+P R O O F O F S E R V I C E
+STATE OF MICHIGAN
+)
+Case No. U-21990
+County of Ingham
+)
+Brianna Brown being duly sworn, deposes and says that on December 18, 2025 A.D. she
+electronically notified the attached list of this Commission Order via e-mail transmission,
+to the persons as shown on the attached service list (Listserv Distribution List).
+_______________________________________
+Brianna Br
+own
+Subscribed and sworn to before me
+this 18th day of December 2025.
+_____________________________________
+Angela P. Sanderson
+Notary Public, Shiawassee County, Michigan
+As acting in Eaton County
+My Commission Expires: May 21, 2030
+
+[[PDF_PAGE_0048]]
+Service List for Case: U-21990
+Name On Behalf Of Email Address
+Andrea E. Hayden DTE Electric Company andrea.hayden@dteenergy.com
+DTE Electric Company DTE Electric Company mpscfilings_account@dteenergy.com

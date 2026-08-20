@@ -21,6 +21,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RISK_SECTOR_TICKERS,
     TRADING_DAYS_PER_YEAR,
 )
+from trade_bot.research.capital_cycle_break import run_capital_cycle_break_monitor
 
 PHASES = (
     "normal_cycle",
@@ -159,6 +160,12 @@ class CycleTrackerRun:
     phase_reliability: pd.DataFrame
     path_reliability: pd.DataFrame
     crisis_playback: pd.DataFrame
+    capital_cycle_summary: pd.DataFrame
+    capital_cycle_families: pd.DataFrame
+    capital_cycle_signals: pd.DataFrame
+    capital_cycle_events: pd.DataFrame
+    capital_cycle_missing_confirmations: pd.DataFrame
+    capital_cycle_lead_times: pd.DataFrame
     readout: str
 
 
@@ -166,6 +173,10 @@ def run_cycle_tracker(
     *,
     prices: pd.DataFrame,
     scenario_lattice: pd.DataFrame | None = None,
+    macro_data: pd.DataFrame | None = None,
+    capital_cycle_fundamentals: pd.DataFrame | None = None,
+    capital_cycle_events: pd.DataFrame | None = None,
+    capital_cycle_news_triage: pd.DataFrame | None = None,
     output_dir: str | Path = "reports/cycle_tracker",
     candidate_tickers: Iterable[str] | None = None,
     horizons: tuple[int, ...] = DEFAULT_PHASE_HORIZONS,
@@ -190,6 +201,14 @@ def run_cycle_tracker(
     validation_horizons = tuple(horizon for horizon in horizons if horizon > 0)
 
     current_feature = build_cycle_feature_snapshot(clean)
+    capital_cycle = run_capital_cycle_break_monitor(
+        prices=clean,
+        macro_data=macro_data,
+        fundamentals=capital_cycle_fundamentals,
+        events=capital_cycle_events,
+        news_triage=capital_cycle_news_triage,
+        as_of=current_feature.get("as_of_date"),
+    )
     phase_probabilities = _phase_probability_frame(current_feature, horizon_days=0)
     path_state_history = build_cycle_path_state_history(
         clean,
@@ -249,13 +268,17 @@ def run_cycle_tracker(
             origin_step_days=origin_step_days,
         )
         if not phase_nowcast_reliability.empty:
-            phase_reliability = pd.concat(
-                [phase_nowcast_reliability, phase_reliability],
-                ignore_index=True,
-            ).sort_values(
-                ["horizon_days", "phase_fit_rate", "origins"],
-                ascending=[True, False, False],
-            ).reset_index(drop=True)
+            phase_reliability = (
+                pd.concat(
+                    [phase_nowcast_reliability, phase_reliability],
+                    ignore_index=True,
+                )
+                .sort_values(
+                    ["horizon_days", "phase_fit_rate", "origins"],
+                    ascending=[True, False, False],
+                )
+                .reset_index(drop=True)
+            )
     path_reliability = summarize_path_phase_reliability(
         build_path_validation_observations(
             clean,
@@ -272,7 +295,9 @@ def run_cycle_tracker(
         current_phase_probabilities,
         frontier_validation_metrics,
         tickers=tickers,
-        horizon_days=_default_candidate_horizon(validation_horizons or tuple(h for h in DEFAULT_PHASE_HORIZONS if h > 0)),
+        horizon_days=_default_candidate_horizon(
+            validation_horizons or tuple(h for h in DEFAULT_PHASE_HORIZONS if h > 0)
+        ),
     )
     phase_candidate_frontier = build_phase_candidate_frontier(
         clean,
@@ -289,6 +314,7 @@ def run_cycle_tracker(
         candidate_scores=candidate_scores,
         phase_candidate_frontier=phase_candidate_frontier,
         validation_metrics=validation_metrics,
+        capital_cycle_summary=capital_cycle.summary,
     )
 
     artifacts = {
@@ -305,6 +331,12 @@ def run_cycle_tracker(
         "phase_reliability": output / "cycle_phase_reliability.csv",
         "path_reliability": output / "cycle_path_reliability.csv",
         "crisis_playback": output / "cycle_crisis_playback.csv",
+        "capital_cycle_summary": output / "capital_cycle_summary.csv",
+        "capital_cycle_families": output / "capital_cycle_families.csv",
+        "capital_cycle_signals": output / "capital_cycle_signals.csv",
+        "capital_cycle_events": output / "capital_cycle_events.csv",
+        "capital_cycle_missing_confirmations": output / "capital_cycle_missing_confirmations.csv",
+        "capital_cycle_lead_times": output / "capital_cycle_lead_times.csv",
         "summary": output / "summary.md",
     }
     phase_probabilities.to_csv(artifacts["phase_probabilities"], index=False)
@@ -320,6 +352,14 @@ def run_cycle_tracker(
     phase_reliability.to_csv(artifacts["phase_reliability"], index=False)
     path_reliability.to_csv(artifacts["path_reliability"], index=False)
     crisis_playback.to_csv(artifacts["crisis_playback"], index=False)
+    capital_cycle.summary.to_csv(artifacts["capital_cycle_summary"], index=False)
+    capital_cycle.families.to_csv(artifacts["capital_cycle_families"], index=False)
+    capital_cycle.signals.to_csv(artifacts["capital_cycle_signals"], index=False)
+    capital_cycle.events.to_csv(artifacts["capital_cycle_events"], index=False)
+    capital_cycle.missing_confirmations.to_csv(
+        artifacts["capital_cycle_missing_confirmations"], index=False
+    )
+    capital_cycle.lead_times.to_csv(artifacts["capital_cycle_lead_times"], index=False)
     artifacts["summary"].write_text(readout, encoding="utf-8")
 
     return CycleTrackerRun(
@@ -338,6 +378,12 @@ def run_cycle_tracker(
         phase_reliability=phase_reliability,
         path_reliability=path_reliability,
         crisis_playback=crisis_playback,
+        capital_cycle_summary=capital_cycle.summary,
+        capital_cycle_families=capital_cycle.families,
+        capital_cycle_signals=capital_cycle.signals,
+        capital_cycle_events=capital_cycle.events,
+        capital_cycle_missing_confirmations=capital_cycle.missing_confirmations,
+        capital_cycle_lead_times=capital_cycle.lead_times,
         readout=readout,
     )
 
@@ -638,11 +684,7 @@ def build_cycle_path_state_history(
 
         adjusted: dict[str, float] = {}
         candidate_reasons: dict[str, str] = {}
-        elapsed = (
-            int((origin_date - previous_date).days)
-            if previous_date is not None
-            else step
-        )
+        elapsed = int((origin_date - previous_date).days) if previous_date is not None else step
         for phase in PHASES:
             transition_weight = _transition_weight(previous_phase, phase)
             duration_weight = _duration_weight(
@@ -679,9 +721,7 @@ def build_cycle_path_state_history(
         else:
             duration_days = elapsed
         recent_path.append((origin_date, path_phase))
-        recent_path = [
-            item for item in recent_path if int((origin_date - item[0]).days) <= 756
-        ]
+        recent_path = [item for item in recent_path if int((origin_date - item[0]).days) <= 756]
         evidence_phase = str(feature.get("dominant_phase", "normal_cycle"))
         rows.append(
             {
@@ -750,8 +790,7 @@ def build_path_transition_forecast(
         horizon_days = int(horizon)
         if horizon_days == 0:
             distribution = {
-                phase: float(latest_state.get(f"{phase}_probability", 0.0))
-                for phase in PHASES
+                phase: float(latest_state.get(f"{phase}_probability", 0.0)) for phase in PHASES
             }
             if sum(distribution.values()) <= 0:
                 distribution = evidence
@@ -1015,10 +1054,14 @@ def summarize_path_phase_reliability(path_observations: pd.DataFrame) -> pd.Data
                 ),
             }
         )
-    return pd.DataFrame(rows).sort_values(
-        ["horizon_days", "path_fit_rate", "origins"],
-        ascending=[True, False, False],
-    ).reset_index(drop=True)
+    return (
+        pd.DataFrame(rows)
+        .sort_values(
+            ["horizon_days", "path_fit_rate", "origins"],
+            ascending=[True, False, False],
+        )
+        .reset_index(drop=True)
+    )
 
 
 def build_cycle_validation_observations(
@@ -1082,7 +1125,9 @@ def build_cycle_validation_observations(
                         "beats_spy": bool(forward_return > spy_return),
                         "beats_qqq": bool(forward_return > qqq_return),
                         "beats_bil": bool(forward_return > bil_return),
-                        "severe_drawdown": bool(forward_drawdown <= _severe_drawdown_cutoff(ticker, horizon)),
+                        "severe_drawdown": bool(
+                            forward_drawdown <= _severe_drawdown_cutoff(ticker, horizon)
+                        ),
                     }
                 )
     return pd.DataFrame(rows)
@@ -1157,7 +1202,9 @@ def summarize_phase_reliability(observations: pd.DataFrame) -> pd.DataFrame:
     rows: list[dict[str, object]] = []
     grouped = benchmark.groupby(["dominant_phase", "horizon", "horizon_days"], dropna=False)
     for (phase, horizon, horizon_days), group in grouped:
-        clean = group.dropna(subset=["qqq_forward_return", "spy_forward_return", "bil_forward_return"])
+        clean = group.dropna(
+            subset=["qqq_forward_return", "spy_forward_return", "bil_forward_return"]
+        )
         if clean.empty:
             continue
         fit_flags = clean.apply(_phase_fit_row, axis=1)
@@ -1184,10 +1231,14 @@ def summarize_phase_reliability(observations: pd.DataFrame) -> pd.DataFrame:
         )
     if not rows:
         return pd.DataFrame()
-    return pd.DataFrame(rows).sort_values(
-        ["horizon_days", "phase_fit_rate", "origins"],
-        ascending=[True, False, False],
-    ).reset_index(drop=True)
+    return (
+        pd.DataFrame(rows)
+        .sort_values(
+            ["horizon_days", "phase_fit_rate", "origins"],
+            ascending=[True, False, False],
+        )
+        .reset_index(drop=True)
+    )
 
 
 def build_phase_nowcast_reliability(
@@ -1245,10 +1296,14 @@ def build_phase_nowcast_reliability(
                 "reliability_label": "thin_sample" if origins < 10 else "nowcast_confidence",
             }
         )
-    return pd.DataFrame(summary_rows).sort_values(
-        ["horizon_days", "phase_fit_rate", "origins"],
-        ascending=[True, False, False],
-    ).reset_index(drop=True)
+    return (
+        pd.DataFrame(summary_rows)
+        .sort_values(
+            ["horizon_days", "phase_fit_rate", "origins"],
+            ascending=[True, False, False],
+        )
+        .reset_index(drop=True)
+    )
 
 
 def build_cycle_crisis_playback(
@@ -1268,7 +1323,11 @@ def build_cycle_crisis_playback(
     positive_horizons = tuple(horizon for horizon in horizons if horizon > 0)
     max_horizon = max(positive_horizons) if positive_horizons else 0
     crisis_window_starts = {
-        crisis: min(pd.Timestamp(start) for item_crisis, _, start, _, _ in CRISIS_STAGES if item_crisis == crisis)
+        crisis: min(
+            pd.Timestamp(start)
+            for item_crisis, _, start, _, _ in CRISIS_STAGES
+            if item_crisis == crisis
+        )
         for crisis, _, _, _, _ in CRISIS_STAGES
     }
     rows: list[dict[str, object]] = []
@@ -1533,10 +1592,7 @@ def build_phase_candidate_frontier(
         phase_probability = _safe_float(phase_row.get("probability"), default=0.0)
         phase_metrics = validation_metrics[
             validation_metrics["dominant_phase"].astype(str).eq(phase)
-            & (
-                pd.to_numeric(validation_metrics["horizon_days"], errors="coerce")
-                == horizon_days
-            )
+            & (pd.to_numeric(validation_metrics["horizon_days"], errors="coerce") == horizon_days)
         ].copy()
         if phase_metrics.empty:
             continue
@@ -1768,7 +1824,9 @@ def _scenario_phase_prior(
     if probabilities.sum() <= 0:
         return base
     phase_scores = dict.fromkeys(PHASES, 0.0)
-    for risk_bucket, probability in zip(frame["risk_bucket"].astype(str), probabilities, strict=False):
+    for risk_bucket, probability in zip(
+        frame["risk_bucket"].astype(str), probabilities, strict=False
+    ):
         mapped = _risk_bucket_phase_weights(risk_bucket)
         for phase, weight in mapped.items():
             phase_scores[phase] += float(probability) * weight
@@ -1809,7 +1867,9 @@ def _risk_bucket_phase_weights(risk_bucket: str) -> dict[str, float]:
     return {"normal_cycle": 1.0}
 
 
-def _candidate_ticker_list(prices: pd.DataFrame, candidate_tickers: Iterable[str] | None) -> list[str]:
+def _candidate_ticker_list(
+    prices: pd.DataFrame, candidate_tickers: Iterable[str] | None
+) -> list[str]:
     if candidate_tickers is None:
         raw = (
             list(CORE_BENCHMARKS)
@@ -1930,8 +1990,7 @@ def _phase_distinctiveness_score(
     frame["horizon_days"] = pd.to_numeric(frame["horizon_days"], errors="coerce")
     frame["phase_rank_score"] = pd.to_numeric(frame["phase_rank_score"], errors="coerce")
     matches = frame[
-        frame["ticker"].astype(str).eq(str(ticker))
-        & frame["horizon_days"].eq(int(horizon_days))
+        frame["ticker"].astype(str).eq(str(ticker)) & frame["horizon_days"].eq(int(horizon_days))
     ].dropna(subset=["phase_rank_score"])
     if matches.empty:
         return 0.5
@@ -1962,8 +2021,7 @@ def _phase_ubiquity_penalty(
     frame["horizon_days"] = pd.to_numeric(frame["horizon_days"], errors="coerce")
     frame["phase_rank_score"] = pd.to_numeric(frame["phase_rank_score"], errors="coerce")
     matches = frame[
-        frame["ticker"].astype(str).eq(str(ticker))
-        & frame["horizon_days"].eq(int(horizon_days))
+        frame["ticker"].astype(str).eq(str(ticker)) & frame["horizon_days"].eq(int(horizon_days))
     ].dropna(subset=["phase_rank_score"])
     if matches["dominant_phase"].nunique() < 4:
         return 0.0
@@ -2105,7 +2163,12 @@ def _frontier_family_cap(exposure_family: str) -> int:
         "mega_cap_growth_index",
     }:
         return 1
-    if exposure_family in {"ai_compute_semis", "ai_software_cloud", "ai_platforms", "cash_defensive"}:
+    if exposure_family in {
+        "ai_compute_semis",
+        "ai_software_cloud",
+        "ai_platforms",
+        "cash_defensive",
+    }:
         return 2
     return 2
 
@@ -2287,8 +2350,7 @@ def _stress_transition_weight(
     spy_dd = spy_drawdown if not np.isnan(spy_drawdown) else 0.0
     stress_evidence = max(
         0.0,
-        float(emissions.get("early_unwind", 0.0))
-        + float(emissions.get("liquidation", 0.0)),
+        float(emissions.get("early_unwind", 0.0)) + float(emissions.get("liquidation", 0.0)),
     )
     liquidation_evidence = max(0.0, float(emissions.get("liquidation", 0.0)))
     deep_drawdown = qqq_dd <= -0.18 or spy_dd <= -0.12
@@ -2416,11 +2478,7 @@ def _advance_path_distribution(
                 spy_drawdown=spy_drawdown,
             )
             next_scores[candidate] += (
-                previous_probability
-                * transition
-                * duration
-                * precondition
-                * stress_weight
+                previous_probability * transition * duration * precondition * stress_weight
             )
     return _normalize_scores(next_scores)
 
@@ -2497,7 +2555,11 @@ def _candidate_role(
 def _candidate_interpretation(ticker: str, phase: str, role: str) -> str:
     if phase in {"early_unwind", "liquidation"} and role == "cash_defensive":
         return f"{ticker} is a defensive candidate for unwind/liquidation phases."
-    if phase in {"bottoming", "recovery"} and role in {"ai_growth", "broad_equity", "international"}:
+    if phase in {"bottoming", "recovery"} and role in {
+        "ai_growth",
+        "broad_equity",
+        "international",
+    }:
         return f"{ticker} is a possible post-unwind re-entry candidate if recovery evidence holds."
     if phase in {"acceleration", "pre_break"} and role == "ai_growth":
         return f"{ticker} can still participate in leadership, but watch concentration and unwind evidence."
@@ -2663,9 +2725,14 @@ def _build_readout(
     candidate_scores: pd.DataFrame,
     phase_candidate_frontier: pd.DataFrame,
     validation_metrics: pd.DataFrame,
+    capital_cycle_summary: pd.DataFrame | None = None,
 ) -> str:
     dominant = _dominant_phase_from_probabilities(phase_probabilities)
-    top_probability = float(phase_probabilities["probability"].max()) if not phase_probabilities.empty else float("nan")
+    top_probability = (
+        float(phase_probabilities["probability"].max())
+        if not phase_probabilities.empty
+        else float("nan")
+    )
     top_candidates = (
         ", ".join(candidate_scores.head(5)["ticker"].astype(str).tolist())
         if not candidate_scores.empty
@@ -2680,6 +2747,16 @@ def _build_readout(
             row = group.sort_values("probability", ascending=False).iloc[0]
             pieces.append(f"{horizon}: {row['phase']} {float(row['probability']):.1%}")
         horizon_read = "; ".join(pieces)
+    capital_cycle_read = "Capital-cycle break monitor: not available."
+    if isinstance(capital_cycle_summary, pd.DataFrame) and not capital_cycle_summary.empty:
+        row = capital_cycle_summary.iloc[0]
+        capital_cycle_read = (
+            f"Capital-cycle break monitor: **{row.get('capital_cycle_state', 'n/a')}**; "
+            f"vulnerability {float(row.get('capital_vulnerability', float('nan'))):.1%} "
+            f"at {float(row.get('vulnerability_coverage', 0.0)):.1%} coverage; rollover "
+            f"{float(row.get('rollover_impulse', float('nan'))):.1%} at "
+            f"{float(row.get('rollover_coverage', 0.0)):.1%} coverage. Allocation authority: 0%."
+        )
     return (
         "# Speculative Cycle Tracker\n\n"
         f"Dominant nowcast phase: **{dominant}** ({top_probability:.1%}).\n\n"
@@ -2687,6 +2764,7 @@ def _build_readout(
         f"Top conditional candidates for the current phase: {top_candidates}.\n\n"
         f"Phase/horizon winner frontier rows: {frontier_rows:,}.\n\n"
         f"Validation metric rows: {validation_rows:,}.\n\n"
+        f"{capital_cycle_read}\n\n"
         "Use this as a research/watch layer. It identifies which speculative-cycle "
         "phase the market most resembles, which phases are plausible across horizons, "
         "and which assets historically behaved better in similar prior states. It is "

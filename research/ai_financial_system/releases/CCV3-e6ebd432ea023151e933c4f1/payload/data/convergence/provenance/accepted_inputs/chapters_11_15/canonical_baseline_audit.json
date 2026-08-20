@@ -1,0 +1,23 @@
+{
+  "accepted_source_union_manifest_sha256": "437da25ccef0f40d0504d2038f7f32b5d4849fd1fe556739669b91cbedba7406",
+  "accepted_source_union_review_manifest_sha256": "79c6a07e5746f3a5a8a81ecf8677b9efa4ce29b4c0acbdcfbde19dcb70163fb1",
+  "candidate_matches_expected": true,
+  "candidate_sqlite": {
+    "foreign_key_violations": 0,
+    "integrity_check": "ok"
+  },
+  "canonical_candidate_byte_identical": true,
+  "canonical_database_manifest_path": "reports/ai_financial_system/database_manifest.json",
+  "canonical_database_manifest_sha256": "43477e02a4368e4426ebc2565eed60837df15dd5123069f1ebf488ad63ae5428",
+  "canonical_database_path": "reports/ai_financial_system/research.db",
+  "canonical_database_sha256": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+  "canonical_matches_expected": true,
+  "canonical_sqlite": {
+    "foreign_key_violations": 0,
+    "integrity_check": "ok"
+  },
+  "expected_database_sha256": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+  "governing_audit_manifest_sha256": "e1e8d8a834edad14f95b5fc8df425e64f0c2d2da8f4be68e20509bfb1209a84c",
+  "sealed_candidate_database_path": "research/ai_financial_system/integration/candidate_data/research.db",
+  "sealed_candidate_database_sha256": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6"
+}

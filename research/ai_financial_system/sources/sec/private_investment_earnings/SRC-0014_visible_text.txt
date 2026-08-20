@@ -1,0 +1,3532 @@
+10-Q
+Table of Contents
+UNITED STATES
+SECURITIES AND EXCHANGE COMMISSION
+Washington, D.C. 20549
+FORM 10-Q
+☒ QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+For the quarterly period ended February 28, 2026
+or
+☐ TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+For the transition period from ____________ to ____________
+Commission File Number: 001-35992
+Oracle Corporation
+(Exact name of registrant as specified in its charter)
+Delaware
+54-2185193
+(State or other jurisdiction of
+incorporation or organization)
+(I.R.S. Employer
+Identification No.)
+2300 Oracle Way
+Austin, Texas
+78741
+(Address of principal executive offices)
+(Zip Code)
+(737) 867-1000
+(Registrant’s telephone number, including area code)
+Securities registered pursuant to Section 12(b) of the Act:
+Title of each class
+Trading Symbol(s)
+Name of each exchange on which registered
+Common Stock, par value $0.01 per share
+ORCL
+New York Stock Exchange
+Depositary Shares, each representing a 1/2,000th interest in a share of 6.50% Series D Mandatory Convertible Preferred Stock, par value $0.01 per share
+ORCL-PRD
+New York Stock Exchange
+Indicate by check mark whether the registrant (1) has filed all reports required to be filed by Section 13 or 15(d) of the Securities Exchange Act of 1934 during the preceding 12 months (or for such shorter period that the registrant was required to file such reports), and (2) has been subject to such filing requirements for the past 90 days. Yes ☒ No ☐
+Indicate by check mark whether the registrant has submitted electronically every Interactive Data File required to be submitted pursuant to Rule 405 of Regulation S-T (§232.405 of this chapter) during the preceding 12 months (or for such shorter period that the registrant was required to submit such files). Yes ☒ No ☐
+Indicate by check mark whether the registrant is a large accelerated filer, an accelerated filer, a non-accelerated filer, a smaller reporting company or an emerging growth company. See the definitions of “large accelerated filer,” “accelerated filer,” “smaller reporting company” and “emerging growth company” in Rule 12b-2 of the Exchange Act.
+Large accelerated filer ☒
+Accelerated filer ☐
+Non-accelerated filer ☐
+Smaller reporting company ☐
+Emerging growth company ☐
+If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ☐
+Indicate by check mark whether the registrant is a shell company (as defined in Rule 12b-2 of the Exchange Act). Yes ☐ No ☒
+The number of shares of registrant’s common stock outstanding as of March 5, 2026 was: 2,876,046,000.
+Table of Contents
+ORACLE CORPORATION
+FORM 10-Q QUARTERLY REPORT
+TABLE OF CONTENTS
+Page
+PART I.
+FINANCIAL INFORMATION
+1
+Item 1.
+Financial Statements (Unaudited)
+1
+Condensed Consolidated Balance Sheets as of February 28, 2026 and May 31, 2025
+1
+Condensed Consolidated Statements of Operations for the Three and Nine Months Ended February 28, 2026 and 2025
+2
+Condensed Consolidated Statements of Comprehensive Income for the Three and Nine Months Ended February 28, 2026 and 2025
+3
+Condensed Consolidated Statements of Stockholders’ Equity for the Three and Nine Months Ended February 28, 2026 and 2025
+4
+Condensed Consolidated Statements of Cash Flows for the Nine Months Ended February 28, 2026 and 2025
+5
+Notes to Condensed Consolidated Financial Statements
+6
+Item 2.
+Management’s Discussion and Analysis of Financial Condition and Results of Operations
+24
+Item 3.
+Quantitative and Qualitative Disclosures About Market Risk
+42
+Item 4.
+Controls and Procedures
+42
+PART II.
+OTHER INFORMATION
+44
+Item 1.
+Legal Proceedings
+44
+Item 1A.
+Risk Factors
+44
+Item 2.
+Unregistered Sales of Equity Securities and Use of Proceeds
+45
+Item 5.
+Other Information
+45
+Item 6.
+Exhibits
+46
+Signatures
+48
+Table of Contents
+PART I. FINANCIAL INFORMATION
+Item 1. Financial Statements (Unaudited)
+ORACLE CORPORATION
+CONDENSED CONSOLIDATED BALANCE SHEETS
+As of February 28, 2026 and May 31, 2025
+(Unaudited)
+(in millions, except per share data)
+February 28,
+2026
+May 31,
+2025
+ASSETS
+Current assets:
+Cash and cash equivalents
+$
+38,455
+$
+10,786
+Marketable securities
+677
+417
+Trade receivables, net of allowances for credit losses of $549 and $557 as of February 28, 2026 and May 31, 2025, respectively
+10,719
+8,558
+Prepaid expenses and other current assets
+5,023
+4,818
+Total current assets
+54,874
+24,579
+Non-current assets:
+Property, plant and equipment, net
+83,617
+43,522
+Intangible assets, net
+3,641
+4,587
+Goodwill
+62,274
+62,207
+Deferred tax assets
+11,360
+11,877
+Other non-current assets
+29,474
+21,589
+Total non-current assets
+190,366
+143,782
+Total assets
+$
+245,240
+$
+168,361
+LIABILITIES AND STOCKHOLDERS’ EQUITY
+Current liabilities:
+Notes payable and other borrowings, current
+$
+9,887
+$
+7,271
+Accounts payable
+9,474
+5,113
+Accrued compensation and related benefits
+1,940
+2,243
+Deferred revenues
+9,881
+9,387
+Other current liabilities
+9,555
+8,629
+Total current liabilities
+40,737
+32,643
+Non-current liabilities:
+Notes payable and other borrowings, non-current
+124,718
+85,297
+Income taxes payable
+11,402
+10,269
+Operating lease liabilities
+18,512
+11,536
+Other non-current liabilities
+10,820
+7,647
+Total non-current liabilities
+165,452
+114,749
+Commitments and contingencies
+Oracle Corporation stockholders’ equity:
+Preferred stock, $0.01 par value and additional paid in capital—authorized: 1.0 shares; outstanding: 0.05 shares as of February 28, 2026 of 6.50% Series D Mandatory Convertible Preferred Stock (none as of May 31, 2025)
+4,954
+—
+Common stock, $0.01 par value and additional paid in capital—authorized: 11,000 shares; outstanding: 2,875 shares and 2,807 shares as of February 28, 2026 and May 31, 2025, respectively
+41,910
+37,107
+Accumulated deficit
+(7,092
+)
+(15,481
+)
+Accumulated other comprehensive loss
+(1,277
+)
+(1,175
+)
+Total Oracle Corporation stockholders’ equity
+38,495
+20,451
+Noncontrolling interests
+556
+518
+Total stockholders’ equity
+39,051
+20,969
+Total liabilities and stockholders’ equity
+$
+245,240
+$
+168,361
+See notes to condensed consolidated financial statements.
+1
+Table of Contents
+ORACLE CORPORATION
+CONDENSED CONSOLIDATED STATEMENTS OF OPERATIONS
+For the Three and Nine Months Ended February 28, 2026 and 2025
+(Unaudited)
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions, except per share data)
+2026
+2025
+2026
+2025
+Revenues:
+Cloud
+$
+8,914
+$
+6,210
+$
+24,076
+$
+17,769
+Software
+6,119
+5,926
+17,717
+17,756
+Hardware
+714
+703
+2,160
+2,086
+Services
+1,443
+1,291
+4,220
+3,885
+Total revenues
+17,190
+14,130
+48,173
+41,496
+Operating expenses:
+Cloud and software(1)
+4,776
+2,882
+12,373
+8,226
+Hardware(1)
+183
+197
+576
+530
+Services(1)
+1,133
+1,116
+3,401
+3,430
+Sales and marketing(1)
+2,052
+2,119
+6,263
+6,345
+Research and development
+2,607
+2,429
+7,658
+7,206
+General and administrative
+389
+390
+1,174
+1,135
+Amortization of intangible assets
+413
+548
+1,239
+1,763
+Acquisition related and other
+20
+28
+55
+72
+Restructuring
+153
+63
+961
+220
+Total operating expenses
+11,726
+9,772
+33,700
+28,927
+Operating income
+5,464
+4,358
+14,473
+12,569
+Interest expense
+(1,180
+)
+(892
+)
+(3,160
+)
+(2,600
+)
+Non-operating income (expenses), net
+132
+(18
+)
+2,872
+39
+Income before income taxes
+4,416
+3,448
+14,185
+10,008
+Provision for income taxes
+695
+512
+1,402
+992
+Net income
+$
+3,721
+$
+2,936
+$
+12,783
+$
+9,016
+Preferred stock dividends
+22
+—
+22
+—
+Net income available to common shareholders
+$
+3,699
+$
+2,936
+$
+12,761
+$
+9,016
+Earnings per share attributable to common shareholders:
+Basic
+$
+1.29
+$
+1.05
+$
+4.47
+$
+3.24
+Diluted
+$
+1.27
+$
+1.02
+$
+4.38
+$
+3.15
+Weighted average common shares outstanding:
+Basic
+2,874
+2,799
+2,855
+2,783
+Diluted
+2,912
+2,874
+2,914
+2,865
+(1)
+Exclusive of amortization of intangible assets, which is shown separately.
+See notes to condensed consolidated financial statements.
+2
+Table of Contents
+ORACLE CORPORATION
+CONDENSED CONSOLIDATED STATEMENTS OF COMPREHENSIVE INCOME
+For the Three and Nine Months Ended February 28, 2026 and 2025
+(Unaudited)
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Net income
+$
+3,721
+$
+2,936
+$
+12,783
+$
+9,016
+Other comprehensive loss, net of tax:
+Net foreign currency translation gains (losses)
+2
+(54
+)
+(60
+)
+(51
+)
+Net unrealized losses on cash flow hedges
+(6
+)
+(19
+)
+(39
+)
+(107
+)
+Other, net
+(2
+)
+(1
+)
+(3
+)
+(3
+)
+Total other comprehensive loss, net
+(6
+)
+(74
+)
+(102
+)
+(161
+)
+Comprehensive income
+$
+3,715
+$
+2,862
+$
+12,681
+$
+8,855
+See notes to condensed consolidated financial statements.
+3
+Table of Contents
+ORACLE CORPORATION
+CONDENSED CONSOLIDATED STATEMENTS OF STOCKHOLDERS’ EQUITY
+For the Three and Nine Months Ended February 28, 2026 and 2025
+(Unaudited)
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions, except per share data)
+2026
+2025
+2026
+2025
+Preferred stock and additional paid in capital
+Balance, beginning of period
+$
+—
+$
+—
+$
+—
+$
+—
+Mandatory convertible preferred stock issued
+4,954
+—
+4,954
+—
+Balance, end of period
+$
+4,954
+$
+—
+$
+4,954
+$
+—
+Common stock and additional paid in capital
+Balance, beginning of period
+$
+40,577
+$
+34,310
+$
+37,107
+$
+32,764
+Common stock issued
+9
+213
+1,317
+520
+Stock-based compensation
+1,328
+1,198
+3,608
+3,374
+Repurchases of common stock
+—
+(10
+)
+(6
+)
+(34
+)
+Shares repurchased for tax withholdings upon vesting of restricted stock-based awards
+(2
+)
+(1
+)
+(111
+)
+(900
+)
+Other, net
+(2
+)
+(19
+)
+(5
+)
+(33
+)
+Balance, end of period
+$
+41,910
+$
+35,691
+$
+41,910
+$
+35,691
+Accumulated deficit
+Balance, beginning of period
+$
+(9,355
+)
+$
+(19,045
+)
+$
+(15,481
+)
+$
+(22,628
+)
+Repurchases of common stock
+—
+(140
+)
+(87
+)
+(416
+)
+Preferred stock dividends
+(22
+)
+—
+(22
+)
+—
+Common stock dividends
+(1,436
+)
+(1,119
+)
+(4,285
+)
+(3,340
+)
+Net income
+3,721
+2,936
+12,783
+9,016
+Balance, end of period
+$
+(7,092
+)
+$
+(17,368
+)
+$
+(7,092
+)
+$
+(17,368
+)
+Other stockholders’ equity, net
+Balance, beginning of period
+$
+(765
+)
+$
+(1,029
+)
+$
+(657
+)
+$
+(897
+)
+Other comprehensive loss, net
+(6
+)
+(74
+)
+(102
+)
+(161
+)
+Other, net
+50
+41
+38
+(4
+)
+Balance, end of period
+$
+(721
+)
+$
+(1,062
+)
+$
+(721
+)
+$
+(1,062
+)
+Total stockholders’ equity
+$
+39,051
+$
+17,261
+$
+39,051
+$
+17,261
+Cash dividends declared per common share
+$
+0.50
+$
+0.40
+$
+1.50
+$
+1.20
+See notes to condensed consolidated financial statements.
+4
+Table of Contents
+ORACLE CORPORATION
+CONDENSED CONSOLIDATED STATEMENTS OF CASH FLOWS
+For the Nine Months Ended February 28, 2026 and 2025
+(Unaudited)
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+Cash flows from operating activities:
+Net income
+$
+12,783
+$
+9,016
+Adjustments to reconcile net income to net cash provided by operating activities:
+Depreciation
+5,208
+2,715
+Amortization of intangible assets
+1,239
+1,763
+Deferred income taxes
+(295
+)
+(1,097
+)
+Stock-based compensation
+3,608
+3,374
+Gains from investments and other, net
+(2,149
+)
+422
+Changes in operating assets and liabilities:
+Increase in trade receivables, net
+(2,201
+)
+(312
+)
+Decrease in prepaid expenses and other assets
+1,386
+603
+Decrease in accounts payable and other liabilities
+(821
+)
+(633
+)
+Decrease in income taxes payable
+(1,651
+)
+(1,222
+)
+Increase in deferred revenues
+250
+35
+Net cash provided by operating activities
+17,357
+14,664
+Cash flows from investing activities:
+Purchases of marketable securities and other investments
+(1,663
+)
+(838
+)
+Proceeds from sales and maturities of marketable securities and other investments
+4,857
+444
+Capital expenditures
+(39,170
+)
+(12,135
+)
+Net cash used for investing activities
+(35,976
+)
+(12,529
+)
+Cash flows from financing activities:
+Proceeds from issuances of common stock
+1,317
+520
+Payments for repurchases of common stock
+(95
+)
+(450
+)
+Shares repurchased for tax withholdings upon vesting of restricted stock-based awards
+(111
+)
+(900
+)
+Proceeds from issuances of mandatory convertible preferred stock, net of issuance costs
+4,954
+—
+Payments of dividends to stockholders
+(4,285
+)
+(3,340
+)
+Proceeds from (repayments of) commercial paper and other short-term financing, net
+2,279
+(396
+)
+Proceeds from issuances of senior notes, term loan credit agreements and other borrowings, net of issuance costs
+44,544
+19,548
+Repayments of senior notes, term loan credit agreements and other borrowings
+(2,193
+)
+(9,771
+)
+Other financing activities, net
+(215
+)
+(299
+)
+Net cash provided by financing activities
+46,195
+4,912
+Effect of exchange rate changes on cash and cash equivalents
+93
+(95
+)
+Net increase in cash and cash equivalents
+27,669
+6,952
+Cash and cash equivalents at beginning of period
+10,786
+10,454
+Cash and cash equivalents at end of period
+$
+38,455
+$
+17,406
+Non-cash investing activities:
+Unpaid capital expenditures
+$
+4,506
+$
+1,846
+See notes to condensed consolidated financial statements.
+5
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS
+February 28, 2026
+(Unaudited)
+1.
+BASIS OF PRESENTATION, RECENT ACCOUNTING PRONOUNCEMENTS AND OTHER
+Basis of Presentation
+We have prepared the condensed consolidated financial statements included herein pursuant to the rules and regulations of the United States (U.S.) Securities and Exchange Commission. Certain information and footnote disclosures normally included in financial statements prepared in accordance with U.S. generally accepted accounting principles (GAAP) have been condensed or omitted pursuant to such rules and regulations. However, we believe that the disclosures herein are adequate to ensure the information presented is not misleading. These unaudited condensed consolidated financial statements should be read in conjunction with the audited consolidated financial statements and the notes thereto included in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025.
+We believe that all necessary adjustments, which consisted only of normal recurring items, have been included in the accompanying financial statements to present fairly the results of the interim periods. The results of operations for the interim periods presented are not necessarily indicative of the operating results to be expected for any subsequent interim period or for the fiscal year ending May 31, 2026. We reclassed certain revenues and other related disclosures to conform to the current period’s presentation for all periods presented in our condensed consolidated statements of operations. Such reclassifications did not affect total revenue, income from operations or net income.
+There have been no changes to our significant accounting policies as disclosed in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025 that had a significant impact on our condensed consolidated financial statements or notes thereto as of and for the nine months ended February 28, 2026.
+Cash, Cash Equivalents and Restricted Cash
+Restricted cash that was included within cash and cash equivalents as presented within our condensed consolidated balance sheets as of February 28, 2026 and May 31, 2025 and our condensed consolidated statements of cash flows for the nine months ended February 28, 2026 and 2025 was immaterial.
+Remaining Performance Obligations from Contracts with Customers
+Trade receivables, net of allowance for credit losses, and deferred revenues are reported net of related uncollected deferred revenues in our condensed consolidated balance sheets as of February 28, 2026 and May 31, 2025. The revenues recognized during the nine months ended February 28, 2026 and 2025 that were included in the opening deferred revenues balances as of May 31, 2025 and 2024 were approximately $8.7 billion and $8.6 billion, respectively. Revenues recognized from performance obligations satisfied in prior periods and impairment losses recognized on our receivables were immaterial in each of the three and nine months ended February 28, 2026 and 2025, respectively.
+Remaining performance obligations were $552.6 billion as of February 28, 2026, of which we expect to recognize approximately 12% as revenues over the next twelve months, 31% over the subsequent month 13 to month 36, 35% over the subsequent month 37 to month 60 and the remainder thereafter. We have elected the optional exemption to not disclose the variable consideration for contracts in which the variable consideration expected to be received over the duration of the contract is allocated entirely to the wholly unsatisfied performance obligations. Refer to Note 1 of Notes to Consolidated Financial Statements included in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025 for more information about our remaining performance obligations.
+6
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+Sales of Financing Receivables
+We offer certain of our customers the option to acquire certain of our products and services offerings through separate long-term payment contracts. We generally sell these contracts that we have financed for our customers on a non-recourse basis to financial institutions within 90 days of the contracts’ dates of execution. We record the transfers of amounts due from customers to financial institutions as sales of financing receivables because we are considered to have surrendered control of these financing receivables. Financing receivables sold to financial institutions were $333 million and $1.4 billion for the three and nine months ended February 28, 2026, respectively, and $306 million and $1.2 billion for the three and nine months ended February 28, 2025, respectively.
+Non-Marketable Investments
+Our non-marketable debt investments and equity securities and related instruments totaled $2.2 billion and $2.1 billion as of February 28, 2026 and May 31, 2025, respectively, and substantially all of the balance is included in other non-current assets in the accompanying condensed consolidated balance sheets and is subject to periodic credit losses and impairment reviews. Certain of these non-marketable equity securities and related instruments are adjusted for observable price changes from orderly transactions. The majority of the non-marketable debt and equity investments we held as of May 31, 2025 were with Ampere Computing Holdings LLC (Ampere), an equity method investee. On November 25, 2025, SoftBank Group Corp. acquired all of the equity interests of Ampere (the Ampere Acquisition). We received cash proceeds of $4.3 billion in exchange for our equity, debt and call option interests in Ampere in the Ampere Acquisition. We recorded $2.7 billion of realized gain, which is included in the non-operating income (expenses), net line item in our condensed consolidated statements of operations for the nine months ended February 28, 2026. We have no remaining investment in Ampere as of February 28, 2026. The substantial majority of the non-marketable investments we held as of February 28, 2026 were with TikTok USDS Joint Venture LLC, an equity method investee in which we have an ownership interest of 15% as of February 28, 2026.
+Acquisition Related and Other Expenses
+Acquisition related and other expenses primarily consist of personnel-related costs for transitional and certain other employees, certain business combination adjustments, including adjustments after the measurement period has ended, and certain other operating items, net.
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Transitional and other employee-related costs
+$
+—
+$
+—
+$
+1
+$
+3
+Business combination adjustments, net
+—
+1
+5
+(4
+)
+Other, net
+20
+27
+49
+73
+Total acquisition related and other expenses
+$
+20
+$
+28
+$
+55
+$
+72
+Non-Operating Income (Expenses), net
+Non-operating income (expenses), net consists primarily of interest income, net foreign currency exchange losses, the noncontrolling interests in the net profits of our majority-owned subsidiaries (primarily Oracle Financial Services Software Limited and Oracle Corporation Japan), net losses and gains related to marketable and non-marketable investments, including net losses and gains attributable to equity method investments (primarily Ampere) and net other income and expenses, including net gains and losses from our investment portfolio related to our deferred
+7
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+compensation plan, for which an equal and offsetting amount was recorded to our operating expenses during the same period, and non-service net periodic pension income and losses.
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Interest income
+$
+196
+$
+135
+$
+491
+$
+418
+Foreign currency losses, net
+(51
+)
+(37
+)
+(110
+)
+(96
+)
+Noncontrolling interests in income
+(53
+)
+(48
+)
+(146
+)
+(138
+)
+(Losses) gains from marketable and non-marketable investments, net
+(7
+)
+(59
+)
+2,434
+(236
+)
+Other income (expenses), net
+47
+(9
+)
+203
+91
+Total non-operating income (expenses), net
+$
+132
+$
+(18
+)
+$
+2,872
+$
+39
+Recent Accounting Pronouncements
+Income Taxes: In December 2023, the Financial Accounting Standards Board (FASB) issued Accounting Standards Update (ASU) 2023-09, Income Taxes (Topic 740): Improvements to Income Tax Disclosures (ASU 2023-09), which enhances the disclosures required for income taxes in our annual consolidated financial statements. ASU 2023-09 is effective for us for our annual reporting for fiscal 2026 on a prospective basis. Both early adoption and retrospective application are permitted. We are currently evaluating the impact of our pending adoption of ASU 2023-09 on our consolidated financial statements.
+Income Statement: In November 2024, the FASB issued ASU 2024-03, Income Statement—Reporting Comprehensive Income—Expense Disaggregation Disclosures (Subtopic 220-40): Disaggregation of Income Statement Expenses and also issued subsequent guidance clarifying the effective date of the initial guidance (collectively, Subtopic 220-40), which enhances the disclosures required for expense disaggregation in our annual and interim consolidated financial statements. This guidance is effective for us for our annual reporting for fiscal 2028 and for interim period reporting beginning in fiscal 2029 on a prospective basis. Both early adoption and retrospective application are permitted. We are currently evaluating the impact of our pending adoption of Subtopic 220-40 on our consolidated financial statements.
+Software Development Costs: In September 2025, the FASB issued ASU 2025-06, Intangibles—Goodwill and Other—Internal-Use Software (Subtopic 350-40): Targeted Improvements to the Accounting for Internal-Use Software (ASU 2025-06), which clarifies and modernizes the accounting for internal-use software. ASU 2025-06 is effective for us in the first quarter of fiscal 2029, with early adoption permitted. The standard permits application of the guidance using a prospective, retrospective, or modified transition approach. We are currently evaluating the impact of our pending adoption of ASU 2025-06 on our consolidated financial statements.
+2.
+FAIR VALUE MEASUREMENTS
+We perform fair value measurements in accordance with FASB Accounting Standards Codification (ASC) 820, Fair Value Measurement (ASC 820). ASC 820 defines fair value as the price that would be received from selling an asset or paid to transfer a liability in an orderly transaction between market participants at the measurement date. When determining the fair value measurements for assets and liabilities required to be recorded at their fair values, we consider the principal or most advantageous market in which we would transact and consider assumptions that market participants would use when pricing the assets or liabilities, such as inherent risk, transfer restrictions and risk of nonperformance.
+8
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+ASC 820 establishes a fair value hierarchy that requires an entity to maximize the use of observable inputs and minimize the use of unobservable inputs when measuring fair value. An asset’s or a liability’s categorization within the fair value hierarchy is based upon the lowest level of input that is significant to the fair value measurement. ASC 820 establishes three levels of inputs that may be used to measure fair value:
+•
+Level 1: quoted prices in active markets for identical assets or liabilities;
+•
+Level 2: inputs other than Level 1 that are observable, either directly or indirectly, such as quoted prices in active markets for similar assets or liabilities, quoted prices for identical or similar assets or liabilities in markets that are not active, or other inputs that are observable or can be corroborated by observable market data for substantially the full term of the assets or liabilities; or
+•
+Level 3: unobservable inputs that are supported by little or no market activity and that are significant to the fair values of the assets or liabilities.
+Assets and Liabilities Measured at Fair Value on a Recurring Basis
+Our assets and liabilities measured at fair value on a recurring basis consisted of the following (Level 1 and Level 2 inputs are defined above):
+February 28, 2026
+May 31, 2025
+Fair Value Measurements
+Using Input Types
+Fair Value Measurements
+Using Input Types
+(in millions)
+Level 1
+Level 2
+Total
+Level 1
+Level 2
+Total
+Assets:
+Money market funds
+$
+32,305
+$
+—
+$
+32,305
+$
+2,220
+$
+—
+$
+2,220
+Time deposits and other
+63
+763
+826
+59
+526
+585
+Derivative financial instruments
+—
+16
+—
+54
+Total assets
+$
+32,368
+$
+779
+$
+33,147
+$
+2,279
+$
+580
+$
+2,859
+Liabilities:
+Derivative financial instruments
+$
+—
+$
+—
+$
+—
+$
+—
+$
+26
+$
+26
+Our cash equivalents and marketable securities investments consist of money market funds, time deposits and marketable equity securities. Marketable securities as presented per our condensed consolidated balance sheets included debt securities with original maturities at the time of purchase greater than three months and the remainder of the debt securities were included in cash and cash equivalents. We classify our marketable debt securities as available-for-sale debt securities at the time of purchase and reevaluate such classification as of each balance sheet date. As of February 28, 2026 and May 31, 2025, all of our marketable debt securities investments mature within one year. Our valuation techniques used to measure the fair values of our instruments that were classified as Level 1 in the table above were derived from quoted market prices and active markets for these instruments that exist. Our valuation techniques used to measure the fair values of Level 2 instruments listed in the table above were derived from the following: non-binding market consensus prices that were corroborated by observable market data, quoted market prices for similar instruments, or pricing models, such as discounted cash flow techniques, with all significant inputs derived from or corroborated by observable market data including reference rate yield curves, among others.
+Based on the trading prices of the $130.9 billion and $90.3 billion of senior notes and other long-term borrowings and the related fair value hedges, if any, that we had outstanding as of February 28, 2026 and May 31, 2025, respectively, the estimated fair values of the senior notes and other long-term borrowings and the related fair value hedges, if any, using Level 2 inputs at February 28, 2026 and May 31, 2025 were $118.4 billion and $81.3 billion, respectively.
+9
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+3.
+NOTES PAYABLE AND OTHER BORROWINGS
+Senior Notes
+In the first nine months of fiscal 2026, we issued a total of $43.0 billion par value of senior notes comprised of the following:
+February 28, 2026
+(Dollars in millions)
+Date of
+Issuance
+Amount
+Effective
+Interest
+Rate
+Fixed-rate senior notes:
+$3,000, 4.55%, due February 2029
+February 2026
+$
+3,000
+4.74%
+$3,000, 4.45%, due September 2030
+September 2025
+3,000
+4.55%
+$3,500, 4.95%, due February 2031
+February 2026
+3,500
+5.08%
+$3,000, 4.80%, due September 2032
+September 2025
+3,000
+4.87%
+$3,000, 5.35%, due May 2033
+February 2026
+3,000
+5.42%
+$4,000, 5.20%, due September 2035
+September 2025
+4,000
+5.25%
+$5,000, 5.70%, due February 2036
+February 2026
+5,000
+5.78%
+$2,500, 5.875%, due September 2045
+September 2025
+2,500
+5.91%
+$2,250, 6.55%, due February 2046
+February 2026
+2,250
+6.59%
+$3,500, 5.95%, due September 2055
+September 2025
+3,500
+6.05%
+$5,000, 6.70%, due February 2056
+February 2026
+5,000
+6.74%
+$2,000, 6.10%, due September 2065
+September 2025
+2,000
+6.17%
+$2,750, 6.85%, due February 2066
+February 2026
+2,750
+6.89%
+Floating-rate senior notes:
+$500, Compounded SOFR plus 1.11%, due February 2029
+February 2026
+500
+4.92%
+Total senior notes
+$
+43,000
+Unamortized discount/issuance costs
+(251
+)
+Total senior notes, net
+$
+42,749
+We issued the senior notes for general corporate purposes, which may include capital expenditures, repayment of indebtedness, future investments or acquisitions and payment of cash dividends on or repurchases of our common stock. The interest is payable semi-annually for the fixed-rate senior notes and quarterly for the floating-rate senior notes. We may redeem some or all of the fixed-rate senior notes of each series prior to their maturity, subject to certain restrictions and the payment of an applicable make-whole premium in certain instances.
+The senior notes rank pari passu with any other existing and future unsecured and unsubordinated indebtedness of Oracle. All existing and future indebtedness and liabilities of the subsidiaries of Oracle are or will be effectively senior to the senior notes. We were in compliance with all senior notes-related covenants as of February 28, 2026.
+There have been no other significant changes in our notes payable or other borrowing arrangements that were disclosed in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025. Refer to Note 12 below for subsequent events related to certain of our borrowing arrangements.
+10
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+4.
+RESTRUCTURING ACTIVITIES
+Fiscal 2026 Oracle Restructuring Plan
+During the first nine months of fiscal 2026, our management approved, committed to, initiated and further supplemented plans to restructure and further improve efficiencies in our operations due to our acquisitions and certain other operational activities (2026 Restructuring Plan). The total estimated restructuring costs associated with the 2026 Restructuring Plan are up to $2.1 billion and will be recorded to the restructuring expense line item within our condensed consolidated statements of operations as they are incurred through the end of the plan. We recorded $156 million and $982 million of restructuring expenses in connection with the 2026 Restructuring Plan for the three and nine months ended February 28, 2026, respectively. Any changes to the estimates of executing the 2026 Restructuring Plan will be reflected in our future results of operations.
+Summary of All Plans
+Accrued
+Nine Months Ended February 28, 2026
+Accrued
+Total
+Costs
+Total
+Expected
+(in millions)
+May 31,
+2025(2)
+Initial
+Costs(3)
+Adj. to
+Cost(4)
+Cash
+Payments
+Others(5)
+February 28,
+2026(2)
+Accrued
+to Date
+Program
+Costs
+2026 Restructuring Plan(1)
+Cloud and software
+$
+—
+$
+333
+$
+24
+$
+(234
+)
+$
+1
+$
+124
+$
+357
+$
+786
+Hardware
+—
+37
+1
+(24
+)
+—
+14
+38
+83
+Services
+—
+124
+6
+(81
+)
+—
+49
+130
+399
+Other
+—
+423
+34
+(354
+)
+2
+105
+457
+835
+Total 2026 Restructuring Plan
+$
+—
+$
+917
+$
+65
+$
+(693
+)
+$
+3
+$
+292
+$
+982
+$
+2,103
+Total other restructuring plans(6)
+$
+212
+$
+—
+$
+(21
+)
+$
+(95
+)
+$
+4
+$
+100
+Total restructuring plans
+$
+212
+$
+917
+$
+44
+$
+(788
+)
+$
+7
+$
+392
+(1)
+Restructuring costs recorded to each of the operating segments presented primarily related to employee severance costs. Other restructuring costs represented employee severance costs not related to our operating segments and certain other restructuring plan costs.
+(2)
+As of February 28, 2026, $319 million and $73 million were recorded in other current liabilities and other non-current liabilities, respectively, within our condensed consolidated balance sheets. As of May 31, 2025, substantially all restructuring liabilities have been recorded in other current liabilities within our condensed consolidated balance sheets.
+(3)
+Costs recorded for the respective restructuring plans during the period presented.
+(4)
+All plan adjustments were changes in estimates whereby increases and decreases in costs were generally recorded to operating expenses in the period of adjustments.
+(5)
+Represents foreign currency translation and certain other non-cash adjustments.
+(6)
+Other restructuring plans presented in the table above included condensed information for other Oracle based plans and other plans associated with certain of our acquisitions whereby we continued to make cash outlays to settle obligations under these plans during the periods presented but for which the periodic impact to our condensed consolidated statements of operations was not significant.
+11
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+5.
+DEFERRED REVENUES
+Deferred revenues consisted of the following:
+(in millions)
+February 28,
+2026
+May 31,
+2025
+Cloud
+$
+3,394
+$
+2,959
+Software
+5,480
+5,350
+Hardware
+495
+614
+Services
+512
+464
+Deferred revenues, current
+9,881
+9,387
+Deferred revenues, non-current (in other non-current liabilities)
+1,301
+1,346
+Total deferred revenues
+$
+11,182
+$
+10,733
+Deferred cloud revenues, deferred software revenues and deferred hardware revenues substantially represent customer payments made in advance for cloud or support contracts that are billed in advance with corresponding revenues generally being recognized ratably or based upon customer usage over the respective contractual periods. Deferred services revenues include prepayments for our services business and revenues for these services are generally recognized as the services are performed.
+6.
+LEASES AND OTHER COMMITMENTS
+Leases
+We have operating and finance leases that primarily relate to our data centers and real estate facilities.
+The components of lease expense were as follows:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Operating lease cost
+$
+725
+$
+440
+$
+1,932
+$
+1,209
+Finance lease cost:
+Amortization of ROU assets
+$
+98
+$
+8
+$
+232
+$
+8
+Interest on lease liabilities
+77
+6
+184
+6
+Total finance lease cost
+$
+175
+$
+14
+$
+416
+$
+14
+12
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+Supplemental balance sheet information related to leases was as follows:
+(in millions)
+February 28,
+2026
+May 31,
+2025
+Operating leases:
+Operating lease ROU assets
+$
+20,817
+$
+13,145
+Operating lease liabilities:
+Operating lease liabilities, current
+$
+2,798
+$
+1,914
+Operating lease liabilities, non-current
+18,512
+11,536
+Total operating lease liabilities
+$
+21,310
+$
+13,450
+Finance leases:
+Finance lease ROU assets
+$
+6,060
+$
+2,874
+Finance lease liabilities:
+Finance lease liabilities, current
+$
+539
+$
+257
+Finance lease liabilities, non-current
+5,711
+2,677
+Total finance lease liabilities
+$
+6,250
+$
+2,934
+Supplemental cash flow information related to leases was as follows:
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+Cash paid for amounts included in the measurement of lease liabilities:
+Operating leases
+$
+1,741
+$
+1,151
+Finance leases
+$
+286
+$
+8
+ROU assets obtained in exchange for lease obligations:
+Operating leases
+$
+8,837
+$
+5,404
+Finance leases
+$
+3,419
+$
+902
+Maturities of lease liabilities were as follows as of February 28, 2026 (in millions):
+Operating
+Leases
+Finance
+Leases
+Remainder of fiscal 2026
+$
+807
+$
+154
+Fiscal 2027
+2,712
+535
+Fiscal 2028
+2,665
+551
+Fiscal 2029
+2,589
+567
+Fiscal 2030
+2,562
+584
+Fiscal 2031
+2,507
+601
+Thereafter
+14,884
+6,199
+Total lease payments
+28,726
+9,191
+Less: imputed interest
+(7,416
+)
+(2,941
+)
+Total lease liability
+$
+21,310
+$
+6,250
+As of February 28, 2026, we had $261 billion of additional lease commitments, substantially all related to data center arrangements, that are generally expected to commence between the fourth quarter of fiscal 2026 and fiscal 2028 and for terms of fifteen to nineteen years that were not reflected on our condensed consolidated balance sheets as
+13
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+of February 28, 2026. These additional lease commitments include a lease for which we have guaranteed up to $2.2 billion of the lessor’s borrowing, which matures in September 2026.
+Unconditional Obligations
+In the ordinary course of business, we enter into certain unconditional purchase obligations with our suppliers. These are agreements that are enforceable and legally binding and specify terms, including: fixed or minimum quantities to be purchased; fixed, minimum or variable price provisions; and the approximate timing of the payment. As of February 28, 2026, our unconditional purchase and certain other obligations, which were primarily related to data center power arrangements, were $11 billion.
+7.
+STOCKHOLDERS’ EQUITY
+Mandatory Convertible Preferred Stock
+On February 5, 2026, we issued 100,000,000 depositary shares, representing 50,000 shares of our 6.50% Series D Mandatory Convertible Preferred Stock (Mandatory Convertible Preferred Stock). The Mandatory Convertible Preferred Stock has a $100,000 per share liquidation preference and $0.01 per share par value. The proceeds from the issuance of Mandatory Convertible Preferred Stock will be used for general corporate purposes, which may include capital expenditures, repayment of indebtedness, future investments or acquisitions and payment of cash dividends on or repurchases of our common stock.
+Dividends are cumulative at an annual rate of 6.50% on the liquidation preference of $100,000 per share of Mandatory Convertible Preferred Stock and may be paid in cash, shares of our common stock or a combination of cash and shares of our common stock. Dividends that are declared will be payable on January 15, April 15, July 15 and October 15 to holders of record on the January 1, April 1, July 1 and October 1 immediately preceding the relevant dividend payment date.
+Unless earlier converted, each outstanding share of Mandatory Convertible Preferred Stock will automatically convert on the mandatory conversion date, which is January 15, 2029, into between 499.8126 and 624.7657 shares of our common stock, depending on the applicable market value of our common stock upon conversion and subject to certain anti-dilution adjustments. The applicable market value of our common stock will be determined based on the average volume-weighted average price per share of the common stock over the 20 consecutive trading day period beginning on, and including, the 21st scheduled trading day immediately prior to January 15, 2029.
+If a fundamental change occurs on or prior to January 15, 2029, then holders of Mandatory Convertible Preferred Stock will be entitled to convert all or any portion of their shares into shares of our common stock. In that case, the Mandatory Convertible Preferred Stock will convert at the fundamental change conversion rate for a specified period of time and holders will receive a make-whole dividend amount to compensate them for any unpaid accumulated dividends and any remaining future scheduled dividend payments.
+Other than during a fundamental change conversion period, at any time prior to January 15, 2029, holders of Mandatory Convertible Preferred Stock may elect to convert all or any portion of their shares at a conversion rate of 499.8126 shares of common stock per share of Mandatory Convertible Preferred Stock, subject to certain anti-dilution and other adjustments.
+The Mandatory Convertible Preferred Stock will not be redeemable at our election before the mandatory conversion date. The holders of the Mandatory Convertible Preferred Stock will not have any voting rights, with limited exceptions.
+14
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+Common Stock
+On February 2, 2026, we entered into an equity distribution agreement with ‎certain sales agents party thereto, pursuant to which we may sell shares of our common stock having aggregate sales proceeds of up to $20 billion from time to time through an “at-the-market” offering program (the ATM Program).
+Subject to the terms and conditions of the agreement, we may sell shares of common stock through the sales agents listed in the agreement in amounts and at times to be determined by us. In addition, we may elect to sell, through the sales agents or through others (whether acting as agent or principal), shares of our common stock for forward settlement. We are not obligated to sell any of the shares of our common stock under the ATM Program. The proceeds from offerings under the ATM Program, if any, will be used for general corporate purposes, which may include capital expenditures, repayment of indebtedness, future investments or acquisitions and payment of cash dividends on or repurchases of our common stock. As of February 28, 2026, we have not sold any shares of our common stock under the ATM Program.
+Common Stock Repurchases
+Our Board of Directors (the Board) has approved a program for us to repurchase shares of our common stock. As of February 28, 2026, approximately $6.3 billion remained available for stock repurchases pursuant to our stock repurchase program. We repurchased 0.4 million shares for $93 million during the nine months ended February 28, 2026 and 2.9 million shares for $450 million during the nine months ended February 28, 2025 under the stock repurchase program.
+Our stock repurchase authorization does not have an expiration date and the pace of any future repurchase activity will depend on factors such as our working capital needs, our cash requirements for capital expenditures, acquisitions and dividend payments, our debt repayment obligations or repurchases of our debt, our stock price and economic and market conditions. Our stock repurchases may be effected from time to time through open market purchases or pursuant to a Rule 10b5-1 trading plan. Our stock repurchase program may be accelerated, suspended, delayed or discontinued at any time.
+Dividends on Preferred and Common Stock
+In March 2026, the Board declared a quarterly cash dividend of $1,263.89 per share of our outstanding Mandatory Convertible Preferred Stock and $0.50 per share of our outstanding common stock. The Mandatory Convertible Preferred Stock dividend is payable on April 15, 2026 to stockholders of record as of the close of business on April 1, 2026 and the common stock dividend is payable on April 24, 2026 to stockholders of record as of the close of business on April 9, 2026. Future declarations of dividends on Oracle stocks and the establishment of future record and payment dates for our common stock are subject to the final determination of the Board.
+Fiscal 2026 Stock‑Based Awards Activity and Compensation Expense
+During the first nine months of fiscal 2026, we issued 20 million restricted stock-based units (RSUs) and stock options for 14 million shares of common stock (consisting of 13 million service-based stock options (SOs) and 1 million performance-based stock options (PSOs)). The majority of these awards were part of our annual stock-based award process. All of these awards are subject to service-based vesting restrictions, with the PSOs additionally having performance-based vesting restrictions. These fiscal 2026 stock-based award issuances were partially offset by stock-based award forfeitures and cancellations of 17 million shares during the first nine months of fiscal 2026.
+The SOs were granted with an exercise price not less than the closing share price of our common stock on the grant date, generally become exercisable 25% annually over four years of service, and generally expire ten years from the date of grant. The PSOs were granted with an exercise price not less than the closing share price of our common stock on the grant date and expire ten years from the date of grant. We estimated the fair values of our SOs and
+15
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+PSOs using the Black-Scholes-Merton option-pricing model, which was developed for use in estimating the fair values of SOs. Option valuation models, including the Black-Scholes-Merton option-pricing model, require the input of assumptions, including stock price volatility. Changes in the input assumptions can affect the fair value estimates and ultimately how much we recognize as stock-based compensation expense. The RSUs that were granted during the nine months ended February 28, 2026 generally vest 25% annually over four years of service and were valued using methodologies of a similar nature as those described in Note 11 of Notes to Consolidated Financial Statements included in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025.
+Stock-based compensation expense is included in the following operating expense line items in our condensed consolidated statements of operations:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Cloud and software
+$
+171
+$
+160
+$
+478
+$
+459
+Hardware
+8
+21
+Services
+58
+54
+158
+150
+Sales and marketing
+212
+200
+574
+556
+Research and development
+785
+675
+2,100
+1,902
+General and administrative
+94
+101
+277
+286
+Total stock-based compensation
+$
+1,328
+$
+1,198
+$
+3,608
+$
+3,374
+8.
+INCOME TAXES
+Our effective tax rates for each of the periods presented are the result of the mix of income earned and losses incurred in various tax jurisdictions that apply a broad range of income tax rates. Our provision for income taxes varied from the tax computed at the U.S. federal statutory income tax rate for the periods presented primarily due to earnings in foreign operations, state taxes, the U.S. research and development tax credit, settlements with tax authorities, the tax effects of stock-based compensation, the Foreign Derived Intangible Income deduction and the tax effect of Global Intangible Low-Taxed Income. Our effective tax rates were 15.7% and 9.9% for the three and nine months ended February 28, 2026, respectively, and 14.9% and 9.9% for the three and nine months ended February 28, 2025, respectively.
+Our net deferred tax assets were $10.6 billion and $10.2 billion as of February 28, 2026 and May 31, 2025, respectively. We believe that it is more likely than not that the net deferred tax assets will be realized in the foreseeable future. Realization of our net deferred tax assets is dependent upon our generation of sufficient taxable income in future years in appropriate tax jurisdictions to obtain benefit from the reversal of temporary differences, net operating loss carryforwards and tax credit carryforwards. The amount of net deferred tax assets considered realizable is subject to adjustment in future periods if estimates of future taxable income change.
+Domestically, U.S. federal and state taxing authorities are currently examining income tax returns of Oracle and various acquired entities for years through fiscal 2024. Our U.S. federal income tax returns have been examined for all years prior to fiscal 2013 and, with some exceptions, we are no longer subject to audit for those periods. Our U.S. state income tax returns, with some exceptions, have been examined for all years prior to fiscal 2010, and we are no longer subject to audit for those periods.
+Internationally, tax authorities for numerous non-U.S. jurisdictions are also examining or have examined returns of Oracle and various acquired entities for years through fiscal 2024. Many of the relevant tax years are at an advanced stage in examination or subsequent controversy resolution processes. With some exceptions, we are generally no longer subject to tax examinations in non-U.S. jurisdictions for years prior to fiscal 2001.
+16
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+We are under audit by the U.S. Internal Revenue Service and various other domestic and foreign tax authorities with regards to income tax and indirect tax matters and are involved in various challenges and litigation in a number of countries, including, in particular, Australia, Brazil, Canada, Egypt, India, Indonesia, Israel, Italy, Pakistan, Saudi Arabia, South Korea and Spain, where the amounts under controversy are significant. In some, although not all, cases, we have reserved for potential adjustments to our provision for income taxes and accrual of indirect taxes that may result from examinations by, or any negotiated agreements with, these tax authorities or final outcomes in judicial proceedings and we believe that the final outcome of these examinations, agreements or judicial proceedings will not have a material effect on our results of operations. If events occur which indicate payment of these amounts is unnecessary, the reversal of the liabilities would result in the recognition of benefits in the period we determine the liabilities are no longer necessary. If our estimates of the federal, state and foreign income tax liabilities and indirect tax liabilities are less than the ultimate assessment, it could result in a further charge to expense.
+We believe that we have adequately provided under GAAP for outcomes related to our tax audits. However, there can be no assurances as to the possible outcomes or any related financial statement effect thereof.
+Pursuant to the U.S. One, Big, Beautiful Bill Act that was signed into law on July 4, 2025, we recorded a net tax expense of $958 million during the first quarter of fiscal 2026, primarily related to the remeasurement of a deferred tax liability previously recorded during fiscal 2021 as part of the partial realignment of our legal entity structure.
+9.
+SEGMENT INFORMATION
+ASC 280, Segment Reporting, establishes standards for reporting information about operating segments. Operating segments are defined as components of an enterprise about which separate financial information is available that is evaluated regularly by the chief operating decision maker, or decision-making group, in deciding how to allocate resources and in assessing performance. Our chief operating decision makers (CODMs) are our Chief Executive Officers and Chief Technology Officer. We are organized by line of business and geographically. While our CODMs evaluate results in a number of different ways, the line of business management structure is the primary basis for which the allocation of resources and financial results are assessed. The tabular information below presents financial information, including information on segment revenues, significant segment expenses categories and amounts on a segment basis and included within each reported measure of a segment’s profit or loss, that is regularly provided to our CODMs for their review and assists our CODMs with evaluating the company’s performance and allocating company resources.
+We have three businesses—cloud and software (formerly referred to as cloud and license), hardware and services—each of which is comprised of a single operating segment. All three of our businesses market and sell our offerings globally to businesses of many sizes, government agencies, educational institutions and resellers with a worldwide sales force positioned to offer the combinations that best meet customer needs.
+Our cloud and software business engages in the sale, marketing and delivery of our enterprise applications and infrastructure technologies through cloud and on-premise deployment models, including our cloud offerings and our software offerings, which include software license offerings and software support offerings. Cloud revenues are generated from applications and infrastructure offerings that are typically contracted with customers directly, billed to customers either in advance or in arrears, delivered to customers over time with our revenue recognition occurring over the contractual terms and renewed by customers upon completion of the contractual terms. Our cloud contracts provide customers with access to the latest technological updates as they become available and for which the customer contracted together with related technical support services over the contractual term. Software revenues represent (1) fees earned from granting customers software licenses, generally on a perpetual basis, to use our database and middleware and our applications software products within cloud and on-premise information technology (IT) environments. We generally recognize revenues at the point in time the software is made available to the customer to download and use, which typically is immediate upon signature of the license contract; and (2)
+17
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+software support revenues, which are typically contracted with customers directly, billed to customers in advance, delivered to customers over time with our revenue recognition occurring over the contractual terms and renewed by customers upon completion of the contractual terms. Software support contracts provide customers with technical support services and unspecified license upgrades and enhancements during the term of the support period. In each fiscal year, our cloud and software business’ contractual activities, excluding the impact of timing of booking of large contracts, are typically highest in our fourth fiscal quarter, and the related cash flows are typically highest in the following quarter (i.e., in the first fiscal quarter of the next fiscal year) as we receive payments from these contracts. Costs associated with our cloud and software business are largely infrastructure- and personnel-related, including the cost of providing our cloud and software offerings, salaries and commissions earned by our sales force for the sale of our cloud and software offerings and marketing program costs.
+Our hardware business provides infrastructure technologies including Oracle Engineered Systems, servers, storage, industry-specific hardware, operating systems, virtualization, management and other hardware-related software to support diverse IT environments. Our hardware business also offers hardware support, which provides customers with software updates for the software components that are essential to the functionality of their hardware products and can also include product repairs, maintenance services and technical support services that are typically delivered and recognized ratably over the contractual term. Costs associated with our hardware business include the cost of hardware products, which consists of expenses for materials and labor used to produce these products by our internal manufacturing operations or by third-party manufacturers; the cost of materials used to repair customer products with eligible support contracts; the cost of labor and infrastructure to provide support services; and sales and marketing expenses, which are largely personnel-related and include variable compensation earned by our sales force for the sales of our hardware offerings.
+Our services business provides services to customers and partners to help maximize the performance of their investments in Oracle applications and infrastructure technologies. Costs associated with our services business consist primarily of personnel-related expenses, technology infrastructure expenditures, facilities expenses and external contractor expenses.
+We do not track our assets for each business. Consequently, it is not practical to show assets by operating segment.
+18
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+The following table presents summary results for each of our three businesses:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Cloud and software:
+Revenues
+$
+15,033
+$
+12,136
+$
+41,793
+$
+35,525
+Cloud and software expenses
+4,574
+2,690
+11,799
+7,667
+Sales and marketing expenses
+1,752
+1,817
+5,420
+5,477
+Margin(1)
+$
+8,707
+$
+7,629
+$
+24,574
+$
+22,381
+Hardware:
+Revenues
+$
+714
+$
+703
+$
+2,160
+$
+2,086
+Hardware products and support expenses
+172
+187
+546
+499
+Sales and marketing expenses
+57
+66
+170
+201
+Margin(1)
+$
+485
+$
+450
+$
+1,444
+$
+1,386
+Services:
+Revenues
+$
+1,443
+$
+1,291
+$
+4,220
+$
+3,885
+Services expenses
+1,043
+1,029
+3,143
+3,174
+Margin(1)
+$
+400
+$
+262
+$
+1,077
+$
+711
+Totals:
+Revenues
+$
+17,190
+$
+14,130
+$
+48,173
+$
+41,496
+Expenses
+7,598
+5,789
+21,078
+17,018
+Margin(1)
+$
+9,592
+$
+8,341
+$
+27,095
+$
+24,478
+(1)
+The margins reported reflect only the direct controllable costs of each line of business and do not include allocations of research and development, general and administrative and certain other allocable expenses, net. Additionally, the margins reported above do not reflect amortization of intangible assets, acquisition related and other expenses, restructuring expenses, stock-based compensation, interest expense or certain other non-operating income (expenses), net. Refer to the table below for a reconciliation of our total margin for operating segments to our income before income taxes as reported per our condensed consolidated statements of operations.
+The following table reconciles total margin for operating segments to income before income taxes:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Total margin for operating segments
+$
+9,592
+$
+8,341
+$
+27,095
+$
+24,478
+Research and development
+(2,607
+)
+(2,429
+)
+(7,658
+)
+(7,206
+)
+General and administrative
+(389
+)
+(390
+)
+(1,174
+)
+(1,135
+)
+Amortization of intangible assets
+(413
+)
+(548
+)
+(1,239
+)
+(1,763
+)
+Acquisition related and other
+(20
+)
+(28
+)
+(55
+)
+(72
+)
+Restructuring
+(153
+)
+(63
+)
+(961
+)
+(220
+)
+Stock-based compensation for operating segments
+(449
+)
+(422
+)
+(1,231
+)
+(1,186
+)
+Expense allocations and other, net
+(97
+)
+(103
+)
+(304
+)
+(327
+)
+Interest expense
+(1,180
+)
+(892
+)
+(3,160
+)
+(2,600
+)
+Non-operating income (expenses), net
+132
+(18
+)
+2,872
+39
+Income before income taxes
+$
+4,416
+$
+3,448
+$
+14,185
+$
+10,008
+19
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+Disaggregation of Revenues
+We have considered information that is regularly reviewed by our CODMs in evaluating financial performance and disclosures presented outside of our financial statements in our earnings releases and used in investor presentations to disaggregate revenues to depict how the nature, amount, timing and uncertainty of revenues and cash flows are affected by economic factors. The principal category we use to disaggregate revenues is the nature of our products and services as presented in our condensed consolidated statements of operations.
+The following table is a summary of our total revenues by geographic region:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Americas
+$
+11,361
+$
+9,000
+$
+31,490
+$
+26,305
+EMEA(1)
+3,964
+3,421
+11,204
+10,029
+Asia Pacific
+1,865
+1,709
+5,479
+5,162
+Total revenues
+$
+17,190
+$
+14,130
+$
+48,173
+$
+41,496
+(1)
+Comprised of Europe, the Middle East and Africa
+The following table presents our software revenues by offerings:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Software license
+$
+1,150
+$
+1,129
+$
+2,856
+$
+3,194
+Software support
+4,969
+4,797
+14,861
+14,562
+Total software revenues
+$
+6,119
+$
+5,926
+$
+17,717
+$
+17,756
+The following table presents our cloud revenues by offerings:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Cloud applications
+$
+4,026
+$
+3,558
+$
+11,762
+$
+10,529
+Cloud infrastructure
+4,888
+2,652
+12,314
+7,240
+Total cloud revenues
+$
+8,914
+$
+6,210
+$
+24,076
+$
+17,769
+20
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+10.
+EARNINGS PER SHARE
+Basic earnings per share is computed by dividing net income available to common shareholders for the period by the weighted-average number of common shares outstanding during the period. Diluted earnings per share is computed by dividing net income available to common shareholders for the period by the weighted-average number of common shares outstanding during the period, plus the dilutive effect of outstanding restricted stock-based awards, stock options and shares issuable under the employee stock purchase plan as applicable pursuant to the treasury stock method and the dilutive effect of Mandatory Convertible Preferred Stock pursuant to the if-converted method. The following table sets forth the computation of basic and diluted earnings per share attributable to common shareholders:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions, except per share data)
+2026
+2025
+2026
+2025
+Net income
+$
+3,721
+$
+2,936
+$
+12,783
+$
+9,016
+Preferred stock dividends
+22
+—
+22
+—
+Net income available to common shareholders
+$
+3,699
+$
+2,936
+$
+12,761
+$
+9,016
+Weighted-average common shares outstanding
+2,874
+2,799
+2,855
+2,783
+Dilutive effect of employee stock plans
+38
+75
+59
+82
+Dilutive weighted-average common shares outstanding
+2,912
+2,874
+2,914
+2,865
+Basic earnings per share attributable to common shareholders
+$
+1.29
+$
+1.05
+$
+4.47
+$
+3.24
+Diluted earnings per share attributable to common shareholders
+$
+1.27
+$
+1.02
+$
+4.38
+$
+3.15
+Stock awards and shares excluded from calculation(1)
+42
+22
+20
+23
+(1)
+Consists of: (1) anti-dilutive restricted stock-based awards and stock options, both of which were service-based, as calculated using the treasury stock method, (2) anti-dilutive Mandatory Convertible Preferred Stock as calculated using the if-converted method and (3) contingently issuable shares pursuant to PSO arrangements as the performance conditions were not met. These excluded shares could be dilutive in the future.
+11.
+LEGAL PROCEEDINGS
+Netherlands Privacy Class Action
+On August 14, 2020, The Privacy Collective (TPC), a foundation having its registered office in Amsterdam, filed a purported class action lawsuit against Oracle Nederland B.V, Oracle Corporation and Oracle America, Inc. (the Oracle Defendants), Salesforce.com, Inc. and SFDC Netherlands B.V. in the District Court of Amsterdam. TPC alleges that the Oracle Defendants’ Data Management Platform product violates certain articles of the European Union Charter of Fundamental Rights, the General Data Protection Regulation (GDPR) and the Dutch Telecommunications Act (Telecommunicatiewet). TPC claims damages under a number of categories, including: “immaterial damages” (at a fixed amount of €500 per Dutch internet user); “material damages” (in that the costs of loss of control over personal data should be equated to the market value of the personal data for parties like the Oracle Defendants); compensation for losses suffered due to an alleged data breach (at a fixed amount of €100 per Dutch internet user); and compensation for the costs of the litigation funder (10% to 25% of the compensation awarded); and the (actual) cost of the proceedings and extrajudicial costs.
+We filed our defense on March 3, 2021, and on December 29, 2021, the District Court issued a judgment, holding that all of TPC’s claims were deemed inadmissible because of fundamental procedural flaws. TPC filed an appeal with the Court of Appeal in Amsterdam challenging the District Court’s judgment, except for the claims regarding the alleged data breach, which were dropped. On June 18, 2024, the Court of Appeal overturned the District Court’s decision regarding admissibility, thus permitting the case to proceed. We requested that the Court of Appeal permit an interim appeal to the Dutch Supreme Court and/or the European Court of Justice. On September 24, 2024, the
+21
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+Court of Appeal issued a judgment confirming that TPC’s claims are admissible and referred the matter back to the District Court of Amsterdam for a decision on the merits of TPC’s claims, including TPC’s claims for damages under article 82 of the GDPR. The Court of Appeal also granted Oracle’s request for an interim appeal to the Supreme Court, appealing the June 18 and September 24, 2024 judgments.
+Oracle filed its statement of appeal with the Dutch Supreme Court on December 20, 2024, and TPC appeared in the proceedings on January 31, 2025. The filing of the Supreme Court appeal effectively suspended proceedings before the District Court pursuant to applicable procedural rules. TPC filed its statement of defense in response to our Supreme Court appeal and a counter appeal on February 27, 2025. Oracle filed its statement of defense to the counter appeal on March 28, 2025. TPC and Oracle filed their written submissions setting out their detailed arguments on July 18, 2025. The parties filed their respective further written replies and rejoinders on August 28, 2025. A hearing on this matter was held on September 26, 2025. As scheduled, on January 30, 2026, the Advocate General handed down a non-binding opinion advising the Supreme Court to dismiss Oracle’s grounds of appeal and to uphold TPC’s appeal in part. On March 6, 2026, we filed a response to the opinion. The Supreme Court’s judgment is scheduled to be issued on June 28, 2026.
+On September 24, 2025, TPC filed a motion in the District Court to lift the suspension of proceedings. On September 25, 2025, Oracle opposed that motion. The court has not yet ruled on that motion.
+We believe that we have meritorious defenses against this action, including defenses to the quantum of damages claimed, and we will continue to vigorously defend it.
+While the final outcome of this matter cannot be predicted with certainty, we do not believe that it will have a material impact on our financial position or results of operations.
+Securities Class Action Regarding Oracle Cloud Infrastructure
+On February 3, 2026, a putative class action, brought by an alleged stockholder of Oracle, was filed in the U.S. District Court for the District of Delaware against us, our Chief Technology Officer, our two Chief Executive Officers, two other Oracle executives, and one member of the Board. The plaintiff alleges that defendants made or are responsible for false and misleading statements regarding Oracle’s cloud infrastructure business. The plaintiff seeks a ruling that this case may proceed as a class action and seeks damages and attorneys’ fees and costs. The court has not yet set a schedule for defendants to respond to the plaintiff’s complaint.
+We believe that we have meritorious defenses against this action, and we will continue to vigorously defend it.
+While the final outcome of this matter cannot be predicted with certainty, we do not believe that it will have a material impact on our financial position or results of operations.
+Other Litigation
+We are party to various other legal proceedings and claims, either asserted or unasserted, which arise in the ordinary course of business, including proceedings and claims that relate to acquisitions we have completed or to companies we have acquired or are attempting to acquire. While the outcome of these matters cannot be predicted with certainty, we do not believe that the outcome of any of these matters, individually or in the aggregate, will result in losses that are materially in excess of amounts already recognized, if any.
+22
+Table of Contents
+ORACLE CORPORATION
+NOTES TO CONDENSED CONSOLIDATED FINANCIAL STATEMENTS—(Continued)
+February 28, 2026
+(Unaudited)
+12.
+SUBSEQUENT EVENTS
+Revolving Credit Agreement
+On March 6, 2026, Oracle terminated its existing $6.0 billion, five-year revolving credit agreement among Oracle, as borrower, Bank of America, N.A., as administrative agent, and the lenders and other agents named therein, which was originally scheduled to terminate on March 8, 2027. On March 6, 2026, Oracle entered into a new $10.0 billion, five-year revolving credit agreement (the Revolving Credit Agreement) among Oracle, as borrower, Bank of America, N.A., as administrative agent, and the lenders and other agents named therein, which provides for an unsecured $10.0 billion, five-year revolving credit facility (the Revolving Facility) to Oracle for working capital purposes and for other general corporate purposes.
+Subject to certain conditions stated in the Revolving Credit Agreement, Oracle may borrow, prepay and reborrow amounts under the Revolving Facility during the term of the Revolving Credit Agreement. All amounts borrowed under the Revolving Credit Agreement will become due on March 6, 2031, unless the commitments are terminated earlier either at the request of Oracle or, if an event of default occurs, by the lenders (or automatically in the case of certain bankruptcy-related events). Interest is based on either (a) a Term Secured Overnight Financing Rate (SOFR)-based formula plus a margin of 87.5 basis points to 150.0 basis points, depending on the credit rating assigned to Oracle’s long-term senior unsecured debt, or (b) a Base Rate formula plus a margin of 0.0 basis point to 50.0 basis points, depending on the same such credit rating, each as set forth in the Revolving Credit Agreement.
+The Revolving Credit Agreement contains certain customary representations and warranties, covenants and events of default, including the requirement that the ratio of “Consolidated EBITDA” to “Consolidated Net Interest Expense” (each term as defined in the Revolving Credit Agreement) of Oracle and its subsidiaries shall not be less than 3.0 to 1.0 at the end of any fiscal quarter during the period that the Revolving Credit Agreement is effective. If an event of default occurs under the Revolving Credit Agreement and is not cured within applicable grace periods or waived, any unpaid amounts under the Revolving Credit Agreement may be declared immediately due and payable and the commitments under the agreement may be terminated.
+At this time, Oracle has not borrowed any funds under the Revolving Credit Agreement.
+Commercial Paper Program
+On March 6, 2026, Oracle increased its commercial paper program to $10.0 billion. Our commercial paper program allows us to issue and sell unsecured short-term promissory notes pursuant to a private placement exemption from the registration requirements under federal and state securities laws pursuant to dealer agreements with various banks and an Issuing and Paying Agency Agreement with Deutsche Bank Trust Company Americas.
+As of February 28, 2026, $3.8 billion of commercial paper notes are outstanding under the commercial paper program.
+23
+Table of Contents
+Item 2. Management’s Discussion and Analysis of Financial Condition and Results of Operations
+Forward-Looking Statements
+This Quarterly Report on Form 10-Q (this Quarterly Report) contains statements that are not historical in nature, are predictive in nature, or that depend upon or refer to future events or conditions or otherwise contain forward-looking statements within the meaning of Section 21E of the Securities Exchange Act of 1934, as amended (the Exchange Act), and Section 27A of the Securities Act of 1933, as amended (the Securities Act). Forward-looking statements may appear throughout this Quarterly Report and include, among other things, statements regarding our future operations, financial condition and prospects, and business strategies; our expectation that, on a constant currency basis, our total cloud and software revenues generally will continue to increase due to expected growth in our cloud revenues and continued demand for our software offerings; our expectation that substantially all of our customers will renew their software support contracts upon expiration; our expectation that current and expected customer demand will require continued growth in our cloud and software expenses and capital expenditures in order to increase our existing data center capacity and establish additional data centers in new geographic locations; our expectation that the proportion of our cloud revenues relative to our total revenues will continue to increase; the sufficiency of our sources of funding, including future sales of our common stock under the at-the-market offering program and uses of such funds for working capital, capital expenditures, contractual obligations, acquisitions, dividends, stock repurchases, debt repayments and other matters; our belief that we have adequately provided under United States (U.S.) generally accepted accounting principles for outcomes related to our tax audits, that the final outcome of our tax-related examinations, agreements or judicial proceedings will not have a material effect on our results of operations and that our net deferred tax assets will likely be realized in the foreseeable future; our belief that the outcome of certain legal proceedings and claims to which we are a party will not, individually or in the aggregate, result in losses that are materially in excess of amounts already recognized, if any; the timing and amount of expenses we expect to incur; declarations and amounts of future cash dividend payments and the timing and amount of future stock repurchases; our ability to manage dilution associated with our at-the-market offering program; our expectations regarding the impact of recent accounting pronouncements on our consolidated financial statements; our ability to predict revenues and margins; and the amounts and percentages of remaining performance obligations that we expect to recognize as revenues over respective future periods. These and other forward-looking statements may be preceded by, followed by or include the words “anticipates,” “believes,” “commits,” “continues,” “could,” “endeavors,” “estimates,” “expects,” “focus,” “forecasts,” “future,” “goal,” “intends,” “is designed to,” “likely,” “maintains,” “may,” “ongoing,” “plans,” “possible,” “potential,” “projects,” “seeks,” “shall,” “should,” “strives,” “will” and similar expressions. We have based these forward-looking statements on our current expectations and projections about future events. We undertake no obligation to update or revise publicly any forward-looking statements, whether because of new information, future events or otherwise.
+These forward-looking statements are subject to risks, uncertainties and assumptions about our business that could affect our future results and could cause those results or other outcomes to differ materially from those expressed or implied in the forward-looking statements. Factors that might cause or contribute to such differences include, but are not limited to, those discussed in “Risk Factors” included in documents we file from time to time with the U.S. Securities and Exchange Commission (the SEC), including in Part 1, Item 1A beginning on page 17 of our Annual Report on Form 10-K for the fiscal year ended May 31, 2025 as well as in other sections of such report and our other Quarterly Reports on Form 10-Q filed by us in our fiscal year 2026, which runs from June 1, 2025 to May 31, 2026. The following Management’s Discussion and Analysis of Financial Condition and Results of Operations and other portions of this Quarterly Report should be read in conjunction with those filings.
+Business Overview
+Oracle provides products and services that address enterprise information technology (IT) needs. Our products and services include enterprise applications and infrastructure offerings that are delivered worldwide through a variety of flexible and interoperable IT deployment models. These models include cloud-based, on-premise and hybrid deployments (an approach that combines both cloud-based and on-premise deployments). Accordingly, we offer choice and flexibility to our customers and facilitate the product, service and deployment combinations that best suit our customers’ needs. Through our worldwide sales force and Oracle Partner Network, we sell to customers all over the world including businesses of many sizes, government agencies, educational institutions and resellers.
+We have three businesses: cloud and software (formerly referred to as cloud and license); hardware; and services; each of which comprises a single operating segment. The descriptions set forth below as a part of this Item 2 Management’s Discussion and Analysis of Financial Condition and Results of Operations and the information contained within Note 9 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report provide additional information related to our businesses and operating segments and align to how our chief operating decision makers (CODMs), which are our Chief Executive Officers and Chief Technology Officer, view our operating results and allocate resources.
+24
+Table of Contents
+Cloud and Software Business
+Our cloud and software business, which represented 86% of our total revenues on a trailing four-quarter basis, markets, sells and delivers a broad spectrum of enterprise applications and infrastructure technologies through our cloud and software offerings. Revenue streams included in our cloud and software business are:
+•
+Cloud revenues, which are earned by providing customers access to Oracle Cloud applications and infrastructure technologies via cloud-based deployment models that Oracle develops, provides unspecified updates and enhancements for, deploys, hosts, manages and supports and that customers access by entering into a subscription agreement with us for a stated period. Oracle Cloud Applications and Oracle Cloud Infrastructure (collectively Oracle Cloud Services) arrangements are billed in advance or in arrears of the cloud services being delivered and generally: have durations of one to five years; are renewed at the customer’s option; and are recognized as revenues ratably over the contractual period of the cloud contract or, in the case of usage model contracts, as the cloud services are consumed over time; and
+•
+Software revenues, which include:
+o
+software license revenues, which are earned by providing the licensing of our software products including Oracle Applications, Oracle Database, Oracle Middleware and Java, among others, which our customers deploy within cloud-based, on-premise or other IT environments. Our software license transactions are generally perpetual in nature and are generally recognized as revenues up front at the point in time when the software is made available to the customer to download and use. Revenues from usage-based royalty arrangements for distinct software licenses are recognized at the point in time when the software end user usage occurs. The timing of a few large software license transactions can substantially affect our quarterly software license revenues due to the point-in-time nature of revenue recognition for software license transactions, which is different than the typical revenue recognition pattern for our cloud and software support revenues in which revenues are recognized over time. Software license customers have the option to purchase and renew software support contracts, as further described below; and
+o
+software support revenues, which are earned by providing Oracle software support services to customers that have elected to purchase support services in connection with the purchase of Oracle applications and infrastructure software licenses for use in cloud, on-premise and other IT environments. Substantially all software support customers renew their support contracts with us upon expiration in order to continue to benefit from technical support services and the periodic issuance of unspecified updates and enhancements, which current software support customers are entitled to receive. Software support contracts are generally: priced as a percentage of the net fees paid by the customer to purchase a software license; billed in advance of the support services being performed; renewed at the customer’s option; and recognized as revenues ratably over the contractual period that the support services are provided, which is generally one year.
+Providing choice and flexibility to our customers as to when and how they deploy Oracle applications and infrastructure technologies are important elements of our corporate strategy. In recent periods, customer demand for our applications and infrastructure technologies delivered through our Oracle Cloud Services has increased. To address customer demand and enable customer choice, we have certain programs for customers to pivot their applications and infrastructure software licenses and the related software support to the Oracle Cloud for new deployments and to migrate to and expand with the Oracle Cloud for their existing workloads. The proportion of our cloud revenues relative to our total revenues has increased and we expect this trend to continue. Cloud revenues represented 52% and 50% of our total revenues for the three- and nine-month periods ended February 28, 2026, respectively, and 44% and 43% of our total revenues for the three- and nine-month periods ended February 28, 2025, respectively.
+Our cloud and software business’ revenue growth is affected by many factors, including the strength of general economic and business conditions, including the effects of inflation, tariffs and trade policy, geopolitical conditions and other macroeconomic factors on customer demand; governmental budgetary constraints; the strategy for and competitive position of our offerings; customer satisfaction with our offerings; the continued renewal of our cloud and software support customer contracts by the customer contract base; substantially all customers continuing to
+25
+Table of Contents
+purchase software support contracts in connection with their license purchases; the pricing of software support contracts sold in connection with the sales of licenses; the pricing, amounts and volumes of cloud services and licenses sold; our ability to manage Oracle Cloud capacity requirements to meet existing and prospective customer demand; and foreign currency rate fluctuations.
+On a constant currency basis, we expect that our total cloud and software revenues generally will continue to increase due to:
+•
+expected growth in our cloud offerings; and
+•
+continued demand for our software offerings.
+We believe these factors should contribute to future growth in our cloud and software business’ total revenues, which should enable us to continue to make investments in research and development and our cloud operations to develop, improve, increase the capacity of and expand the geographic footprint of our cloud and software products and services.
+Our cloud and software business’ margin has historically trended upward over the course of the four quarters within a particular fiscal year due to the historical upward trend of our cloud and software business’ revenues over those quarterly periods and because the majority of our costs for this business are generally fixed in the short term. The historical upward trend of our cloud and software business’ revenues over the course of the four quarters within a particular fiscal year is primarily due to the addition of new cloud and software support contracts to the customer contract base, which we generally recognize as revenues ratably or based upon customer usage over the respective contractual terms and the renewal of existing customers’ cloud and software support contracts over the course of each fiscal year, which we generally recognize as revenues in a similar manner; and the historical upward trend of our software license revenues, which we generally recognize at a point in time upon delivery; in each case over those four fiscal quarterly periods. Our margin for this business may be adversely impacted due to increases in supply chain and energy costs, the impact of tariffs and trade policy and other factors.
+Hardware Business
+Our hardware business, which represented 5% of our total revenues on a trailing four-quarter basis, provides a broad selection of enterprise hardware products and hardware-related software products including Oracle Engineered Systems, servers, storage, industry-specific hardware offerings, operating systems, virtualization, management and other hardware-related software and related hardware support. Each hardware product and its related software, such as an operating system or firmware, are highly interdependent and interrelated and are accounted for as a combined performance obligation. The revenues for this combined performance obligation are generally recognized at the point in time that the hardware product and its related software are delivered to the customer and ownership is transferred to the customer. We expect to continue to make investments in research and development to improve existing hardware products and services and to develop new hardware products and services. The majority of our hardware products are sold through indirect channels, including independent distributors and value-added resellers. Our hardware support offerings provide customers with unspecified software updates for software components that are essential to the functionality of our hardware products and associated software products. Our hardware support offerings can also include product repairs, maintenance services and technical support services. Hardware support contracts are entered into and renewed at the option of the customer, are generally priced as a percentage of the net hardware products fees and are generally recognized as revenues ratably as the hardware support services are delivered over the contractual terms.
+Our quarterly hardware revenues are difficult to predict. Our hardware revenues, cost of hardware and hardware operating margins that we report are affected by many factors, including our manufacturing partners’ abilities to timely and cost-effectively manufacture or deliver a few large hardware transactions; our strategy for and the pricing and position of our hardware products relative to competitor offerings; customer demand for competing offerings, including cloud infrastructure offerings; the strength of general economic and business conditions, including the effects of inflation, tariffs and trade policy, geopolitical conditions and other macroeconomic factors on customer demand; governmental budgetary constraints; whether customers decide to purchase hardware support contracts at or in close proximity to the time of hardware product sale; the percentage of our hardware support contract customer base that renews its support contracts; the effect of tariffs and other trade barriers on our costs, and our
+26
+Table of Contents
+ability to pass such costs on to customers; the geographic locations of our customers; the close association between hardware products, which have a finite life, and customer demand for related hardware support as hardware products age; customer decisions to either maintain or upgrade their existing hardware infrastructure to newly developed technologies that are available; and foreign currency rate fluctuations.
+Services Business
+Our services business, which represented 9% of our total revenues on a trailing four-quarter basis, helps customers and partners maximize the performance of their investments in Oracle applications and infrastructure technologies. We believe that our services are differentiated based on our focus on Oracle technologies, extensive experience, broad sets of intellectual property and best practices. Our services offerings include consulting services and customer success services (formerly referred to as advanced customer services). Our services business has lower margins than our cloud and software and hardware businesses. Our services revenues are affected by many factors including our strategy for, and the competitive position of, our services; customer demand for our cloud and software and hardware offerings and the related services that we may market and sell in connection with these offerings; general economic conditions; governmental budgetary constraints; personnel reductions in our customers’ IT departments; tighter controls over customer discretionary spending; and foreign currency rate fluctuations.
+Acquisitions
+Our selective and active acquisition program is another important element of our corporate strategy. Historically, we have invested billions of dollars to acquire a number of complementary companies, products, services and technologies. As compelling opportunities become available, we may acquire companies, products, services and technologies in furtherance of our corporate strategy.
+We believe that we can fund our future acquisitions with our internally available cash, cash equivalents and marketable securities balances, cash generated from operations, additional borrowings or from the issuance of additional securities. We estimate the financial impact of any potential acquisition with regard to earnings, operating margin, cash flows and return on invested capital targets, among others, before deciding to move forward with an acquisition.
+Critical Accounting Estimates
+Our consolidated financial statements are prepared in accordance with U.S. generally accepted accounting principles (GAAP), which requires us to make certain estimates, judgments and assumptions that can affect the reported amounts of assets, liabilities, revenues, expenses and related disclosures. Critical accounting estimates are those estimates that involve a significant level of estimation uncertainty and have had, or are reasonably likely to have, a material impact on our financial condition or results of operations. We believe that the estimates, judgments and assumptions upon which we rely are reasonable based upon information available to us at the time that these estimates, judgments and assumptions are made. To the extent that there are differences between these estimates, judgments or assumptions and actual results, our financial statements will be affected. We have critical accounting estimates in the areas of income taxes and non-marketable investments.
+During the first nine months of fiscal 2026, there were no significant changes to our critical accounting estimates. Refer to “Critical Accounting Estimates” under Management’s Discussion and Analysis of Financial Condition and Results of Operations contained in Part II, Item 7 of our Annual Report on Form 10-K for the fiscal year ended May 31, 2025 for a more complete discussion of our critical accounting estimates.
+Results of Operations
+Presentation of Operating Segment Results and Other Financial Information
+In our results of operations discussion below, we provide an overview of our total consolidated revenues, total consolidated operating expenses and total consolidated operating margin, all of which are presented on a GAAP basis. We also present a GAAP-based discussion below for substantially all of the other expense items as presented in our condensed consolidated statements of operations that are not directly attributable to our three businesses.
+27
+Table of Contents
+In addition, we discuss below the results of each of our three businesses—cloud and software, hardware and services—which are our operating segments as defined pursuant to ASC 280, Segment Reporting. The financial reporting for our three businesses that is presented below is presented in a manner that is consistent with that used by our CODMs. Our operating segment presentation below reflects revenues, direct costs and sales and marketing expenses that correspond to and are directly attributable to each of our three businesses. We also utilize these inputs to calculate and present a segment margin for each of our three businesses in the discussion below.
+Consistent with our internal management reporting processes, research and development expenses, general and administrative expenses, stock-based compensation expenses, amortization of intangible assets, certain other expense allocations, acquisition related and other expenses, restructuring expenses, interest expense, non-operating income (expenses), net and provision for income taxes are not attributed to our three operating segments because our management does not view the performance of our three businesses including such items and/or it is impracticable to do so. Refer to “Supplemental Disclosure Related to Certain Charges” below for additional discussion of certain of these items and Note 9 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report for a reconciliation of the summations of total segment margin as presented in the discussion below to total income before income taxes as presented per our condensed consolidated statements of operations for all periods presented.
+Constant Currency Presentation
+Our international operations have provided, and are expected to continue to provide, a significant portion of each of our businesses’ revenues and expenses. As a result, each of our businesses’ revenues and expenses and our total revenues and expenses will continue to be affected by changes in the U.S. Dollar against major international currencies. In order to provide a framework for assessing how our underlying businesses performed, excluding the effects of foreign currency rate fluctuations, we compare the percent change in the results from one period to another period in this Quarterly Report using constant currency. To present this information, current and comparative prior period results for entities reporting in currencies other than U.S. Dollars are converted into U.S. Dollars at constant exchange rates (i.e., the rates in effect on May 31, 2025, which was the last day of our prior fiscal year) rather than the actual exchange rates in effect during the respective periods. For example, if an entity reporting in Euros had revenues of 1.0 million Euros from products sold on February 28, 2026 and 2025, our financial statements would reflect reported revenues of $1.18 million in the first nine months of fiscal 2026 (using 1.18 as the applicable average exchange rate for the period) and $1.05 million in the first nine months of fiscal 2025 (using 1.05 as the applicable average exchange rate for the period). The constant currency presentation, however, would translate the results for each of the first nine months of fiscal 2026 and 2025 using the May 31, 2025 exchange rate and indicate, in this example, no change in revenues between the periods compared. In each of the tables below, we present the percent change based on actual, unrounded results in reported currency and in constant currency.
+28
+Table of Contents
+Total Revenues and Operating Expenses
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Total Revenues by Geography:
+Americas
+$
+11,361
+26%
+25%
+$
+9,000
+$
+31,490
+20%
+19%
+$
+26,305
+EMEA(1)
+3,964
+16%
+6%
+3,421
+11,204
+12%
+5%
+10,029
+Asia Pacific
+1,865
+9%
+7%
+1,709
+5,479
+6%
+5,162
+Total revenues
+17,190
+22%
+18%
+14,130
+48,173
+16%
+14%
+41,496
+Total Operating Expenses
+11,726
+20%
+18%
+9,772
+33,700
+17%
+15%
+28,927
+Total Operating Margin
+$
+5,464
+25%
+19%
+$
+4,358
+$
+14,473
+15%
+11%
+$
+12,569
+Total Operating Margin %
+32%
+31%
+30%
+% Revenues by Geography:
+Americas
+66%
+64%
+66%
+63%
+EMEA
+23%
+24%
+23%
+24%
+Asia Pacific
+11%
+12%
+11%
+13%
+Total Revenues by Business:
+Cloud and software
+$
+15,033
+24%
+20%
+$
+12,136
+$
+41,793
+18%
+16%
+$
+35,525
+Hardware
+714
+2%
+-2%
+703
+2,160
+4%
+1%
+2,086
+Services
+1,443
+12%
+8%
+1,291
+4,220
+9%
+7%
+3,885
+Total revenues
+$
+17,190
+22%
+18%
+$
+14,130
+$
+48,173
+16%
+14%
+$
+41,496
+% Revenues by Business:
+Cloud and software
+88%
+86%
+87%
+86%
+Hardware
+4%
+5%
+4%
+5%
+Services
+8%
+9%
+(1)
+Comprised of Europe, the Middle East and Africa
+Total revenues increased by $3.1 billion and $6.7 billion in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. These increases in reported currency were due to a $2.9 billion and a $6.3 billion increase in cloud and software revenues, a $11 million and a $74 million increase in hardware revenues and a $152 million and a $335 million increase in services revenues, in each case during the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year period. The increase in our cloud and software business revenues was primarily due to growth in our cloud revenues as customers purchased our applications and infrastructure technologies and also renewed their related cloud contracts. In constant currency, cloud applications contributed 15% and 18% and cloud infrastructure contributed 85% and 82% to the growth in cloud revenues in the third quarter and the first nine months of fiscal 2026, respectively. In our hardware business, the increase in revenues was primarily due to the growth in revenues from our Oracle Exadata and certain other strategic hardware product offerings, partially offset by the continued emphasis we placed on the marketing and sale of our growing cloud-based infrastructure technologies. In our services business, the increase in revenues was attributable to an increase in our consulting services revenues. The Americas region contributed 87% and 86% and the EMEA region contributed 8% and 9% to the constant currency total revenue growth during the third quarter and the first nine months of fiscal 2026, respectively, and the Asia Pacific region contributed 5% to the constant currency total revenue growth during each of the fiscal 2026 periods presented.
+Total GAAP operating expenses increased by $2.0 billion and $4.8 billion in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. The increase in GAAP operating expenses in reported currency was primarily due to a $1.9 billion and a $4.1 billion increase in cloud and software expenses primarily due to higher infrastructure expenses; a $178 million and a $452 million increase in research and development expenses primarily due to an increase in employee-related expenses, including stock-based compensation expenses and an increase in computer equipment expenses; and a $90 million and a $741 million increase in restructuring expenses, in each case during the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year period. These increases in GAAP operating expenses in reported currency were partially offset by a $135 million and a $524 million decrease in expenses for
+29
+Table of Contents
+the amortization of intangible assets as certain of our assets were fully amortized; and a $67 million and an $82 million decrease in sales and marketing expenses.
+Our total operating margin increased in the fiscal 2026 periods presented, relative to the corresponding prior year periods, due to higher revenues as discussed above. Total margin as a percentage of revenues increased in the third quarter of fiscal 2026, relative to the corresponding prior year period, due to higher revenues as discussed above. Total margin as a percentage of revenues remained flat in the first nine months of fiscal 2026, relative to the corresponding prior year period.
+Supplemental Disclosure Related to Certain Charges
+To supplement our condensed consolidated financial information, we believe that the following information is helpful to an overall understanding of our past financial performance and prospects for the future.
+Our operating results reported pursuant to GAAP included the following business combination accounting adjustments and expenses related to acquisitions and certain other expenses, including stock-based compensation, that affected our GAAP net income:
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+(in millions)
+2026
+2025
+2026
+2025
+Amortization of intangible assets(1)
+$
+413
+$
+548
+$
+1,239
+$
+1,763
+Acquisition related and other(2)
+20
+28
+55
+72
+Restructuring(3)
+153
+63
+961
+220
+Stock-based compensation, operating segments(4)
+449
+422
+1,231
+1,186
+Stock-based compensation, R&D and G&A(4)
+879
+776
+2,377
+2,188
+Income tax effects(5)
+(412
+)
+(542
+)
+(2,543
+)
+(2,042
+)
+$
+1,502
+$
+1,295
+$
+3,320
+$
+3,387
+(1)
+Represents the amortization of intangible assets, all of which were acquired in connection with our acquisitions. As of February 28, 2026, estimated future amortization related to intangible assets was as follows (in millions):
+Remainder of fiscal 2026
+$
+421
+Fiscal 2027
+729
+Fiscal 2028
+692
+Fiscal 2029
+618
+Fiscal 2030
+580
+Fiscal 2031
+375
+Thereafter
+226
+Total intangible assets, net
+$
+3,641
+(2)
+Acquisition related and other expenses consist of personnel-related costs for transitional and certain other employees, certain business combination adjustments including certain adjustments after the measurement period has ended and certain other operating items, net.
+(3)
+Restructuring expenses in the fiscal 2026 periods presented primarily related to employee severance in connection with the Fiscal 2026 Oracle Restructuring Plan (2026 Restructuring Plan). Restructuring expenses in the fiscal 2025 periods presented primarily related to employee severance in connection with the Fiscal 2024 Oracle Restructuring Plan (2024 Restructuring Plan). Additional information regarding certain of our restructuring plans is provided in management’s discussion below under “Restructuring Expenses,” in Note 4 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report and in Note 7 of Notes to Consolidated Financial Statements included in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025.
+30
+Table of Contents
+(4)
+Stock-based compensation was included in the following operating expense line items of our condensed consolidated statements of operations (in millions):
+Three Months Ended
+February 28,
+Nine Months Ended
+February 28,
+2026
+2025
+2026
+2025
+Cloud and software
+$
+171
+$
+160
+$
+478
+$
+459
+Hardware
+8
+21
+Services
+58
+54
+158
+150
+Sales and marketing
+212
+200
+574
+556
+Stock-based compensation, operating segments
+449
+422
+1,231
+1,186
+Research and development
+785
+675
+2,100
+1,902
+General and administrative
+94
+101
+277
+286
+Total stock-based compensation
+$
+1,328
+$
+1,198
+$
+3,608
+$
+3,374
+(5)
+For all periods presented, the applicable jurisdictional tax rates were applied to our income before income taxes after excluding the tax effects of items within the table above such as for stock-based compensation, amortization of intangible assets, restructuring, and certain acquisition related and other items, and after excluding the net deferred tax effects associated with a previously recorded income tax benefit that resulted from a partial realignment of our legal entity structure; and for the first nine months of fiscal 2026, after excluding the impact of the U.S. One, Big, Beautiful Bill Act related to the remeasurement of a deferred tax liability. These adjustments resulted in effective tax rates of 17.5% and 19.7%, instead of 15.7% and 9.9%, for the third quarter and the first nine months of fiscal 2026, respectively, and 19.9% and 19.7%, instead of 14.9% and 9.9%, for the third quarter and the first nine months of fiscal 2025, respectively, which in each case represented our effective tax rates as derived per our condensed consolidated statements of operations.
+Cloud and Software Business
+Our cloud and software business engages in the sale and marketing of our applications and infrastructure technologies that are delivered through various deployment models and include: Oracle Cloud offerings; and software offerings, which include Oracle software license offerings and Oracle software support offerings. Our cloud offerings deliver applications and infrastructure technologies on a subscription basis via cloud-based deployment models that we develop, provide unspecified updates and enhancements for, deploy, host, manage and support. Revenues for our cloud offerings are generally recognized ratably over the contractual term, which is generally one to five years, or in the case of usage model contracts, as the cloud offerings are consumed. Software license revenues represent fees earned from granting customers licenses, generally on a perpetual basis, to use our database and middleware and our applications software products within cloud and on-premise IT environments and are generally recognized up front at the point in time when the software is made available to the customer to download and use. Software support revenues are typically generated through the sale of applications and infrastructure software support contracts related to software licenses; are purchased by our customers at their option; and are generally recognized as revenues ratably over the contractual term, which is generally one year. We continue to place significant emphasis, both domestically and internationally, on direct sales through our own sales force. We also continue to market certain of our offerings through indirect channels. Costs associated with our cloud and software business are included in cloud and software expenses and sales and marketing expenses. These costs are largely infrastructure- and personnel-related and include the cost of providing our cloud and software support offerings, salaries and commissions earned by our sales force for the sale of our cloud and software offerings and marketing program costs.
+31
+Table of Contents
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Cloud and Software Revenues:
+Americas
+$
+10,117
+29%
+28%
+$
+7,862
+$
+27,782
+21%
+$
+22,951
+EMEA
+3,362
+17%
+6%
+2,877
+9,473
+13%
+6%
+8,378
+Asia Pacific
+1,554
+11%
+9%
+1,397
+4,538
+8%
+4,196
+Total revenues
+15,033
+24%
+20%
+12,136
+41,793
+18%
+16%
+35,525
+Expenses:
+Cloud and software(1)
+4,574
+70%
+67%
+2,690
+11,799
+54%
+52%
+7,667
+Sales and marketing(1)
+1,752
+-4%
+-7%
+1,817
+5,420
+-1%
+-3%
+5,477
+Total expenses(1)
+6,326
+40%
+37%
+4,507
+17,219
+31%
+29%
+13,144
+Total Margin
+$
+8,707
+14%
+10%
+$
+7,629
+$
+24,574
+10%
+8%
+$
+22,381
+Total Margin %
+58%
+63%
+59%
+63%
+% Revenues by Geography:
+Americas
+67%
+65%
+66%
+65%
+EMEA
+23%
+24%
+23%
+Asia Pacific
+10%
+11%
+12%
+Revenues by Offerings:
+Cloud applications
+$
+4,026
+13%
+11%
+$
+3,558
+$
+11,762
+12%
+10%
+$
+10,529
+Cloud infrastructure
+4,888
+84%
+81%
+2,652
+12,314
+70%
+68%
+7,240
+Software license
+1,150
+2%
+-2%
+1,129
+2,856
+-11%
+-13%
+3,194
+Software support
+4,969
+4%
+0%
+4,797
+14,861
+2%
+0%
+14,562
+Total revenues
+$
+15,033
+24%
+20%
+$
+12,136
+$
+41,793
+18%
+16%
+$
+35,525
+(1)
+Excludes stock-based compensation and certain expense allocations. Also excludes amortization of intangible assets and certain other GAAP-based expenses, which were not allocated to our operating segment results for purposes of reporting to and review by our CODMs, as further described under “Presentation of Operating Segment Results and Other Financial Information” above.
+Our cloud and software business’ total revenues increased by $2.9 billion and $6.3 billion in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods, primarily due to an increase in cloud revenues as customers purchased our applications and infrastructure technologies and renewed their related cloud contracts. Excluding the favorable impact of currency rate fluctuations of 4% in the third quarter of fiscal 2026 and 2% in the first nine months of fiscal 2026, cloud applications contributed 15% and 18% and cloud infrastructure contributed 85% and 82% to the constant currency growth in cloud revenues in the third quarter and the first nine months of fiscal 2026, respectively. The Americas region contributed 87% and 84%, the EMEA region contributed 8% and 10% and the Asia Pacific region contributed 5% and 6% to the constant currency revenue growth for this business during the third quarter and the first nine months of fiscal 2026, respectively.
+Our cloud and software business’ total expenses increased by $1.8 billion and $4.1 billion in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. Excluding the unfavorable effects of currency rate fluctuations of 3% in the third quarter of fiscal 2026 and 2% in the first nine months of fiscal 2026, the constant currency increase in expenses was primarily due to a $1.8 billion and a $3.9 billion increase in infrastructure expenses in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. Our cloud and software expenses have grown in recent periods, and we expect this trend to continue during fiscal 2026 and in the next few fiscal years as we increase our existing data center capacity and establish data centers in new geographic locations in order to meet current and expected customer demand.
+Excluding the effects of currency rate fluctuations, our cloud and software business’ total margin increased in the fiscal 2026 periods presented, relative to the corresponding prior year periods, due to increases in total revenues for this business as discussed above. Total margin as a percentage of revenues in constant currency decreased in the fiscal 2026 periods presented, relative to the corresponding prior year periods, due to an increase in total expenses driven by higher infrastructure expenses to support growth in our cloud infrastructure offering.
+32
+Table of Contents
+Hardware Business
+Our hardware business’ revenues are generated from the sales of our Oracle Engineered Systems, server, storage and industry-specific hardware offerings. The hardware product and related software, such as an operating system or firmware, are highly interdependent and interrelated and are accounted for as a combined performance obligation. The revenues for this combined performance obligation are generally recognized at the point in time that the hardware product is delivered to the customer and ownership is transferred to the customer. Our hardware business also earns revenues from the sale of hardware support contracts purchased by our customers at their option and that are generally recognized as revenues ratably as the hardware support services are delivered over the contractual term, which is generally one year. The majority of our hardware products are sold through indirect channels such as independent distributors and value-added resellers and we also market and sell our hardware products through our direct sales force. Operating expenses associated with our hardware business include the cost of hardware products, which consists of expenses for materials and labor used to produce these products by our internal manufacturing operations or by third-party manufacturers, warranty and related expenses and the impact of periodic changes in inventory valuation, including the impact of inventory determined to be excess and obsolete; the cost of materials used to repair customer products with eligible support contracts; the cost of labor and infrastructure to provide support services; and sales and marketing expenses, which are largely personnel-related and include variable compensation earned by our sales force for the sales of our hardware offerings.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Hardware Revenues:
+Americas
+$
+328
+-6%
+-7%
+$
+348
+$
+1,053
+7%
+6%
+$
+987
+EMEA
+236
+12%
+2%
+211
+663
+3%
+-4%
+646
+Asia Pacific
+150
+4%
+2%
+144
+444
+-2%
+453
+Total revenues
+714
+2%
+-2%
+703
+2,160
+4%
+1%
+2,086
+Expenses:
+Hardware products and support(1)
+172
+-7%
+-11%
+187
+546
+9%
+6%
+499
+Sales and marketing(1)
+57
+-14%
+-18%
+66
+170
+-15%
+-17%
+201
+Total expenses(1)
+229
+-9%
+-13%
+253
+716
+2%
+0%
+700
+Total Margin
+$
+485
+8%
+4%
+$
+450
+$
+1,444
+4%
+2%
+$
+1,386
+Total Margin %
+68%
+64%
+67%
+66%
+% Revenues by Geography:
+Americas
+46%
+50%
+49%
+47%
+EMEA
+33%
+30%
+31%
+Asia Pacific
+21%
+20%
+22%
+(1)
+Excludes stock-based compensation and certain expense allocations. Also excludes amortization of intangible assets and certain other GAAP-based expenses, which were not allocated to our operating segment results for purposes of reporting to and review by our CODMs, as further described under “Presentation of Operating Segment Results and Other Financial Information” above.
+Total hardware revenues increased by $11 million and $74 million in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. Excluding the favorable impact of currency rate fluctuations of 4% in the third quarter of fiscal 2026, the constant currency decrease in hardware revenues was primarily due to our continued emphasis on the marketing and sale of our cloud-based infrastructure technologies, which resulted in reduced sales volumes of certain of our hardware product lines and also impacted the volume of hardware support contracts sold in recent periods. Excluding the favorable impact of currency rate fluctuations of 3% in the first nine months of fiscal 2026, the constant currency increase in hardware revenues was primarily due to growth in revenues from our Oracle Exadata and certain other strategic hardware product offerings in the first nine months of fiscal 2026, relative to the corresponding prior year period. In the third quarter of fiscal 2026, the constant currency decrease in hardware revenues in the Americas region was partially offset by a constant currency increase in hardware revenues in the EMEA and the Asia Pacific regions, while in the
+33
+Table of Contents
+first nine months of fiscal 2026, the constant currency increase in hardware revenues in the Americas region was partially offset by a constant currency decrease in hardware revenues in the EMEA and the Asia Pacific regions.
+Total hardware expenses decreased by $24 million and increased by $16 million in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. Excluding the unfavorable currency rate fluctuations effect of 4% in the third quarter of fiscal 2026, the constant currency decrease in hardware expenses was due to a $22 million decrease in hardware product and support costs and a $12 million decrease in sales and marketing expenses during the third quarter of fiscal 2026, relative to the corresponding prior year period. Excluding the unfavorable currency rate fluctuations effect of 2% in the first nine months of fiscal 2026, hardware expenses remained flat due to the constant currency increase in hardware product and support costs, offset by the constant currency decrease in sales and marketing expenses.
+In constant currency, our hardware business’ total margin and total margin as a percentage of revenues increased in the fiscal 2026 periods presented, relative to the corresponding prior year periods, due to lower total expenses for this business as described above.
+Services Business
+Our services offerings are designed to help maximize the performance of customer investments in Oracle applications and infrastructure technologies and include our consulting services and customer success services offerings. Services revenues are generally recognized over time as the services are performed. The cost of providing our services consists primarily of personnel-related expenses, technology infrastructure expenditures, facilities expenses and external contractor expenses.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Services Revenues:
+Americas
+$
+916
+16%
+15%
+$
+790
+$
+2,655
+12%
+$
+2,367
+EMEA
+366
+10%
+0%
+333
+1,068
+6%
+-1%
+1,005
+Asia Pacific
+161
+-5%
+-6%
+168
+497
+-3%
+513
+Total revenues
+1,443
+12%
+8%
+1,291
+4,220
+9%
+7%
+3,885
+Total Expenses(1)
+1,043
+1%
+-2%
+1,029
+3,143
+-1%
+-3%
+3,174
+Total Margin
+$
+400
+53%
+48%
+$
+262
+$
+1,077
+51%
+48%
+$
+711
+Total Margin %
+28%
+20%
+26%
+18%
+% Revenues by Geography:
+Americas
+64%
+61%
+63%
+61%
+EMEA
+25%
+26%
+25%
+26%
+Asia Pacific
+11%
+13%
+12%
+13%
+(1)
+Excludes stock-based compensation and certain allocations. Also excludes amortization of intangible assets and certain other GAAP-based expenses, which were not allocated to our operating segment results for purposes of reporting to and review by our CODMs, as further described under “Presentation of Operating Segment Results and Other Financial Information” above.
+Total services revenues increased by $152 million and $335 million in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. Excluding the favorable impact of currency rate fluctuations of 4% in the third quarter of fiscal 2026 and 2% in the first nine months of fiscal 2026, the increase in services revenues was primarily due to increases in our consulting services revenues in the fiscal 2026 periods presented, relative to the corresponding prior year periods. The constant currency increase in services revenues in the Americas region was partially offset by a constant currency decrease in services revenues in the EMEA and the Asia Pacific regions in the fiscal 2026 periods presented.
+Total services expenses increased by $14 million and decreased by $31 million in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. Excluding the unfavorable effects of currency rate fluctuations of 3% in the third quarter of fiscal 2026 and 2% in the first nine months of fiscal 2026, the constant currency decrease in services expenses was primarily due to a $36
+34
+Table of Contents
+million and a $23 million decrease in employee-related expenses for the third quarter and first nine months of fiscal 2026, relative to the corresponding prior year periods. A $44 million decrease in bad debt expenses contributed to the constant currency decrease in services expenses in the first nine months of fiscal 2026, relative to the corresponding prior year period.
+In constant currency, our services business’ total margin and total margin as a percentage of revenues increased in the fiscal 2026 periods presented, relative to the corresponding prior year periods, due to higher total revenues and lower total expenses for this business as described above.
+Research and Development Expenses: Research and development expenses consist primarily of personnel-related expenditures. We intend to continue to invest significantly in our research and development efforts because, in our judgment, they are essential to maintaining our competitive position.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Research and development(1)
+$
+1,822
+4%
+3%
+$
+1,754
+$
+5,558
+5%
+4%
+$
+5,304
+Stock-based compensation
+785
+16%
+675
+2,100
+10%
+1,902
+Total expenses
+$
+2,607
+7%
+$
+2,429
+$
+7,658
+6%
+$
+7,206
+% of Total Revenues
+15%
+17%
+16%
+18%
+(1)
+Excluding stock-based compensation
+Total research and development expenses increased by $178 million and $452 million in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. Excluding the unfavorable effects of currency rate fluctuations of less than 1% in each of the third quarter and the first nine months of fiscal 2026, the constant currency increase in research and development expenses was primarily due to a $163 million and a $343 million increase in employee-related expenses, including stock-based compensation, in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. A $92 million increase in computer equipment expenses further contributed to the constant currency increase in research and development expenses in the first nine months of fiscal 2026.
+General and Administrative Expenses: General and administrative expenses primarily consist of personnel-related expenditures for IT, finance, legal and human resources support functions.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+General and administrative(1)
+$
+295
+2%
+-1%
+$
+289
+$
+897
+6%
+4%
+$
+849
+Stock-based compensation
+94
+-7%
+101
+277
+-3%
+286
+Total expenses
+$
+389
+0%
+-2%
+$
+390
+$
+1,174
+3%
+2%
+$
+1,135
+% of Total Revenues
+2%
+3%
+2%
+3%
+(1)
+Excluding stock-based compensation
+Total general and administrative expenses decreased by $1 million and increased by $39 million in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods. Excluding the unfavorable effects of currency rate fluctuations of 2% in the third quarter of fiscal 2026 and 1% in the first nine months of fiscal 2026, there was no material fluctuation in the constant currency general and administrative expenses for the third quarter of fiscal 2026 and the constant currency increase in general and administrative expenses for the first nine months of fiscal 2026 was primarily due to a $31 million increase in professional fees.
+35
+Table of Contents
+Amortization of Intangible Assets: Substantially all our intangible assets were acquired through our business combinations. We amortize our intangible assets over, and monitor the appropriateness of, the estimated useful lives of these assets. We also periodically review these intangible assets for potential impairment based upon relevant facts and circumstances. Refer to Note 5 of Notes to Consolidated Financial Statements included in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025 for additional information regarding our intangible assets and related amortization.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Cloud and software agreements and related relationships
+$
+136
+-50%
+$
+272
+$
+421
+-53%
+$
+904
+Developed technology
+153
+-3%
+158
+460
+-6%
+487
+Other
+124
+5%
+118
+358
+-4%
+372
+Total amortization of intangible assets
+$
+413
+-25%
+$
+548
+$
+1,239
+-30%
+$
+1,763
+Amortization of intangible assets decreased by $135 million and $524 million in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods, due to a reduction in expenses associated with certain of our intangible assets that became fully amortized.
+Acquisition Related and Other Expenses: Acquisition related and other expenses consist of personnel-related costs for transitional and certain other employees, certain business combination adjustments, including adjustments after the measurement period has ended, and certain other operating items, net.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Transitional and other employee-related costs
+$
+—
+0%
+$
+—
+$
+1
+-73%
+-74%
+$
+3
+Business combination adjustments, net
+—
+-100%
+1
+5
+*
+(4
+)
+Other, net
+20
+-25%
+-24%
+27
+49
+-33%
+-34%
+73
+Total acquisition related and other expenses
+$
+20
+-28%
+-27%
+$
+28
+$
+55
+-24%
+-25%
+$
+72
+*
+Not meaningful
+Acquisition related and other expenses decreased by $8 million and $17 million in reported currency in the third quarter and the first nine months of fiscal 2026, respectively, relative to the corresponding prior year periods, primarily due to lower asset impairment charges.
+Restructuring Expenses: Restructuring expenses resulted from the execution of management-approved restructuring plans that were generally developed to improve our cost structure and/or operations, often in conjunction with our acquisition integration strategies and/or other strategic initiatives. Restructuring expenses consist of employee severance costs, contract termination costs and certain other exit costs to improve our cost structure prospectively. For additional information regarding our restructuring plans, see Note 4 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report and Note 7 of Notes to Consolidated Financial Statements included in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Restructuring expenses
+$
+153
+142%
+126%
+$
+63
+$
+961
+337%
+325%
+$
+220
+36
+Table of Contents
+Restructuring expenses in the fiscal 2026 periods presented primarily related to the 2026 Restructuring Plan. Restructuring expenses in the fiscal 2025 periods presented primarily related to the 2024 Restructuring Plan, which is substantially complete. Our management approved, committed to and initiated the 2026 Restructuring Plan and the 2024 Restructuring Plan in order to restructure and further improve efficiencies in our operations. We may incur additional restructuring expenses in future periods due to the initiation of new restructuring plans or from changes in estimated costs associated with existing restructuring plans.
+The majority of the initiatives undertaken by the 2026 Restructuring Plan were effected to implement our continued emphasis in developing, marketing, selling and delivering our cloud-based offerings. Certain of the cost savings realized pursuant to the 2026 Restructuring Plan initiatives were offset by investments in resources and geographies that we believe better address the development, marketing, sale and delivery of our cloud-based offerings, including investments in the development and delivery of our second-generation cloud infrastructure.
+Interest Expense:
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Interest expense
+$
+1,180
+32%
+$
+892
+$
+3,160
+22%
+$
+2,600
+Interest expense increased in the fiscal 2026 periods presented, relative to the corresponding prior year periods, primarily due to higher average borrowings from the issuances of $43.0 billion of senior notes in the second and third quarters of fiscal 2026 and an aggregate of $14.0 billion of senior notes in fiscal 2025, partially offset by lower interest expense due to scheduled repayments of debt made during the first nine months of fiscal 2026 and full year of fiscal 2025. Refer to Note 3 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report for additional information on the issuance of senior notes during the first nine months of fiscal 2026.
+Non-Operating Income (Expenses), net: Non-operating income (expenses), net consists primarily of interest income, net foreign currency exchange losses, the noncontrolling interests in the net profits of our majority-owned subsidiaries (primarily Oracle Financial Services Software Limited and Oracle Corporation Japan), net losses and gains related to marketable and non-marketable investments, including net losses and gains attributable to equity method investments (primarily Ampere Computing Holdings LLC (Ampere)) and net other income and expenses, including net gains and losses from our investment portfolio related to our deferred compensation plan, for which an equal and offsetting amount was recorded to our operating expenses during the same period, and non-service net periodic pension income and losses.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Interest income
+$
+196
+45%
+44%
+$
+135
+$
+491
+18%
+17%
+$
+418
+Foreign currency losses, net
+(51
+)
+39%
+32%
+(37
+)
+(110
+)
+15%
+8%
+(96
+)
+Noncontrolling interests in income
+(53
+)
+10%
+(48
+)
+(146
+)
+6%
+(138
+)
+(Losses) gains from marketable and non-marketable investments, net
+(7
+)
+-89%
+(59
+)
+2,434
+*
+(236
+)
+Other income (expenses), net
+47
+*
+(9
+)
+203
+122%
+123%
+91
+Total non-operating income (expenses), net
+$
+132
+*
+$
+(18
+)
+$
+2,872
+*
+$
+39
+*
+Not meaningful
+Fiscal Third Quarter 2026 Compared to Fiscal Third Quarter 2025: Our non-operating income, net increased by $150 million in reported currency in the third quarter of fiscal 2026, relative to the corresponding prior year period, primarily due to a $61 million increase in interest income, a $56 million increase in other income, net and a $52 million decrease in losses from marketable and non-marketable investments, partially offset by a $14 million increase in foreign currency losses, net.
+37
+Table of Contents
+First Nine Months Fiscal 2026 Compared to First Nine Months Fiscal 2025: Our non-operating income, net increased by $2.8 billion in reported currency in the first nine months of fiscal 2026, relative to the corresponding prior year period, primarily due to a $2.7 billion gain from the sale of our investments in Ampere. Refer to Note 1 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report for additional information on the Ampere transaction.
+Provision for Income Taxes: Our effective income tax rates for each of the periods presented were the result of the mix of income earned and losses incurred in various tax jurisdictions that apply a broad range of income tax rates. Refer to Note 8 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report for a discussion regarding the differences between the effective income tax rates as presented for the periods below and the U.S. federal statutory income tax rates that were in effect during these periods. Future effective tax rates could be adversely affected by an unfavorable shift of earnings weighted to jurisdictions with higher tax rates, by unfavorable changes in tax laws and regulations, by adverse rulings in tax-related litigation, or by shortfalls in stock-based compensation realized by employees relative to stock-based compensation that was recorded for book purposes, among others.
+Three Months Ended February 28,
+Nine Months Ended February 28,
+Percent Change
+(Dollars in millions)
+2026
+Actual
+Constant
+2025
+2026
+Actual
+Constant
+2025
+Provision for income taxes
+$
+695
+36%
+27%
+$
+512
+$
+1,402
+41%
+35%
+$
+992
+Effective tax rate
+15.7%
+14.9%
+9.9%
+Fiscal Third Quarter 2026 Compared to Fiscal Third Quarter 2025: Provision for income taxes increased in the third quarter of fiscal 2026, relative to the corresponding prior year period, primarily related to higher income before provision for income taxes of $144 million and a decrease in tax benefits of $122 million related to stock-based compensation, partially offset by the realization of a one-time tax attribute of $120 million.
+First Nine Months Fiscal 2026 Compared to First Nine Months Fiscal 2025: Provision for income taxes increased in the first nine months of fiscal 2026, relative to the corresponding prior year period, primarily related to an unfavorable impact of $958 million from the enactment of the U.S. One, Big, Beautiful Bill Act, which was signed into law on July 4, 2025 that required a remeasurement of a deferred tax liability previously recorded during fiscal 2021 as part of the partial realignment of our legal entity structure, an unfavorable jurisdictional mix of earnings of $510 million, higher income before provision for income taxes of $372 million and the absence of unrecognized tax benefits associated with settlements with tax authorities and other events of $152 million, substantially offset by an increase in tax benefits of $1.5 billion related to stock-based compensation and the realization of a one-time tax attribute of $120 million.
+Liquidity and Capital Resources
+(Dollars in millions)
+February 28,
+2026
+Change
+May 31,
+2025
+Working capital
+$
+14,137
+*
+$
+(8,064
+)
+Cash, cash equivalents and marketable securities
+$
+39,132
+249%
+$
+11,203
+*
+Not meaningful
+Working capital: The increase in working capital as of February 28, 2026 in comparison to May 31, 2025 was primarily due to favorable impacts from net income; proceeds from the issuance of senior notes in September 2025 and February 2026, net of issuance costs, of $42.7 billion (refer to Note 3 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report for additional information); $5.0 billion of cash proceeds from the issuance of Mandatory Convertible Preferred Stock, net of issuance costs (refer to Note 7 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report for additional information); $4.3 billion of cash proceeds from the sale of our investments in Ampere; and $1.2 billion of net cash proceeds from our employee stock programs, partially offset by $39.2 billion of cash used for capital expenditures; $4.3 billion of cash used to pay dividends to our common stockholders; $3.3 billion of long-term borrowings that
+38
+Table of Contents
+were reclassified to current liabilities; $851 million of cash used for purchases, net of sales and maturities, of non-current investments; and $95 million of cash used for repurchases of our common stock, in each case during the first nine months of fiscal 2026. Our working capital may be impacted by some or all of the aforementioned factors in future periods, the amounts and timing of which are variable.
+Cash, cash equivalents and marketable securities: Cash and cash equivalents primarily consist of deposits held at major banks, money market funds and other securities with original maturities of 90 days or less. Marketable securities consist primarily of time deposits with original maturities at the time of purchase greater than 90 days. The increase in cash, cash equivalents and marketable securities as of February 28, 2026 in comparison to May 31, 2025 was primarily due to proceeds from the issuance of senior notes in September 2025 and February 2026, net of issuance costs, of $42.7 billion; $17.4 billion of cash inflows from our operations; $5.0 billion of cash proceeds from the issuance of Mandatory Convertible Preferred Stock, net of issuance costs; $4.3 billion of cash inflows from the sale of our investments in Ampere; $4.1 billion of cash inflows from commercial paper and other short-term financing, net; $1.2 billion of net cash provided by our employee stock programs, partially offset by $39.2 billion of cash used for capital expenditures; $4.3 billion of cash used to pay dividends to our common stockholders; $2.2 billion of cash used for scheduled repayments of debt; $851 million of cash used for purchases, net of sales and maturities, of non-current investments; $215 million of cash outflows for other financing activities, net; and $95 million of cash used for repurchases of our common stock, in each case during the first nine months of fiscal 2026. Our cash and cash equivalents may be impacted by some or all of the aforementioned factors in future periods, the amounts and timing of which are variable.
+Nine Months Ended February 28,
+(Dollars in millions)
+2026
+Change
+2025
+Net cash provided by operating activities
+$
+17,357
+18%
+$
+14,664
+Net cash used for investing activities
+$
+(35,976
+)
+187%
+$
+(12,529
+)
+Net cash provided by financing activities
+$
+46,195
+840%
+$
+4,912
+Cash flows from operating activities: Our largest source of operating cash flows is cash collections from our customers following the purchase and renewal of their cloud and software support agreements. Over the course of a fiscal year, we also generate cash from the sales of software licenses, hardware offerings and other services. Our primary uses of cash from operating activities are typically for employee-related expenditures, expenses related to data center leases and power for our cloud business, material and manufacturing costs related to the production of our hardware products, taxes, and interest payments.
+Net cash provided by operating activities increased by $2.7 billion in the first nine months of fiscal 2026, relative to the first nine months of fiscal 2025, primarily due to higher net income adjusted for certain non-cash charges, partially offset by higher cash unfavorable working capital changes, net.
+Cash flows from investing activities: The changes in cash flows from investing activities primarily relate to our investments in capital assets to support the growth in our cloud and software business and purchases, maturities and sales of our investments in marketable securities and other instruments.
+Net cash used for investing activities increased by $23.4 billion in the first nine months of fiscal 2026, relative to the first nine months of fiscal 2025, primarily due to a $27.0 billion increase in capital expenditures and an $825 million increase in cash used for purchases of investments, partially offset by $4.3 billion of cash proceeds from the sale of our investments in Ampere.
+Cash flows from financing activities: The changes in cash flows from financing activities primarily relate to borrowings and repayments related to our debt instruments, issuance of other financing or equity instruments, stock repurchases, dividend payments and net proceeds related to employee stock programs.
+Net cash provided by financing activities increased by $41.3 billion in the first nine months of fiscal 2026, relative to the first nine months of fiscal 2025, primarily due to higher proceeds from the issuance of senior notes, net of issuance costs, of $28.8 billion; proceeds from the issuance of Mandatory Convertible Preferred Stock of $5.0 billion; higher net proceeds from commercial paper and other short-term financing of $4.5 billion; lower scheduled repayments of debt of $1.9 billion; higher net cash proceeds from our employee stock programs of $1.6 billion; and lower stock repurchases of $355 million. These increases were partially offset by higher dividend payments of $945
+39
+Table of Contents
+million. Further, during the first nine months of fiscal 2025, we refinanced our term loan credit agreement that we entered into in fiscal 2023, which resulted in no net impact on financing cash flows for the period reported.
+Free cash flow: To supplement our statements of cash flows presented on a GAAP basis, we use non-GAAP measures of cash flows on a trailing four-quarter basis to analyze cash flows generated from our operations. We believe that free cash flow is also useful as one of the bases for comparing our performance with that of our competitors. The presentation of non-GAAP free cash flow is not meant to be considered in isolation or as an alternative to net income as an indicator of our performance, or as an alternative to cash flows from operating activities as a measure of liquidity. We calculate free cash flow as follows:
+Trailing Four-Quarters Ended February 28,
+(Dollars in millions)
+2026
+Change
+2025
+Net cash provided by operating activities
+$
+23,514
+13%
+$
+20,745
+Capital expenditures
+(48,250
+)
+223%
+(14,933
+)
+Free cash flow
+$
+(24,736
+)
+*
+$
+5,812
+Net income
+$
+16,210
+$
+12,160
+Net cash provided by operating activities as a percent of net income
+145%
+171%
+Free cash flow as percent of net income
+-153%
+48%
+*
+Not meaningful
+Recent Financing Activities:
+Revolving Credit Agreement: In March 2026, we terminated our existing $6.0 billion, five-year revolving credit agreement. On the same date, we entered into a new $10.0 billion, five-year revolving credit agreement (the Revolving Credit Agreement). No amounts have been drawn pursuant to this agreement as of the date of this Quarterly Report. The description above is a summary and is qualified in its entirety by reference to the full text of the Revolving Credit Agreement, which is filed as Exhibit 10.17 to this Quarterly Report on Form 10-Q.
+Commercial Paper Program: In March 2026, our commercial paper program was increased to $10.0 billion. Our commercial paper program allows us to issue and sell unsecured short-term promissory notes (Commercial Paper Notes) pursuant to a private placement exemption from the registration requirements under federal and state securities laws pursuant to dealer agreements with various banks and an Issuing and Paying Agency Agreement with Deutsche Bank Trust Company Americas. There were $3.8 billion of outstanding Commercial Paper Notes as of February 28, 2026. We used the net proceeds from the issuance of commercial paper for general corporate purposes.
+Cash Dividends: In March 2026, the Board declared a quarterly cash dividend of $1,263.89 per share of our outstanding Mandatory Convertible Preferred Stock and $0.50 per share of our outstanding common stock. The Mandatory Convertible Preferred Stock dividend is payable on April 15, 2026 to stockholders of record as of the close of business on April 1, 2026 and the common stock dividend is payable on April 24, 2026 to stockholders of record as of the close of business on April 9, 2026. Future declarations of dividends on Oracle stocks and the establishment of future record and payment dates for our common stock are subject to the final determination of the Board.
+Mandatory Convertible Preferred Stock: On February 5, 2026, we issued 100,000,000 depositary shares, representing 50,000 shares of our 6.50% Series D Mandatory Convertible Preferred Stock (Mandatory Convertible Preferred Stock). We received cash proceeds of $5.0 billion, net of issuance costs. The other terms and conditions of the Mandatory Convertible Preferred Stock are set forth in the Certificate of Designations filed herewith as Exhibit 3.03 and incorporated by reference herein.
+Common Stock: On February 2, 2026, we entered into an equity distribution agreement with ‎certain sales agents party thereto, pursuant to which we may sell shares of our common stock having aggregate sales proceeds of up to $20 billion from time to time through an “at-the-market” offering program (the ATM Program). As of February 28, 2026, we have not sold any shares of our common stock under the ATM Program.
+40
+Table of Contents
+Senior Notes: During the first nine months of fiscal 2026, we issued a total of $43.0 billion par value of senior notes comprised of the following:
+•
+$500 million of floating rate notes due February 2029;
+•
+$3.0 billion of 4.55% senior notes due February 2029;
+•
+$3.0 billion of 4.45% senior notes due September 2030;
+•
+$3.5 billion of 4.95% senior notes due February 2031;
+•
+$3.0 billion of 4.80% senior notes due September 2032;
+•
+$3.0 billion of 5.35% senior notes due May 2033;
+•
+$4.0 billion of 5.20% senior notes due September 2035;
+•
+$5.0 billion of 5.70% senior notes due February 2036;
+•
+$2.5 billion of 5.875% senior notes due September 2045;
+•
+$2.25 billion of 6.55% senior notes due February 2046;
+•
+$3.5 billion of 5.95% senior notes due September 2055;
+•
+$5.0 billion of 6.70% senior notes due February 2056;
+•
+$2.0 billion of 6.10% senior notes due September 2065; and
+•
+$2.75 billion of 6.85% senior notes due February 2066.
+We issued the Mandatory Convertible Preferred Stock and the senior notes for general corporate purposes, which may include capital expenditures, repayment of indebtedness, future investments or acquisitions and payment of cash dividends on or repurchases of our common stock. Refer to Notes 3, 7 and 12 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report for additional information. The other terms and conditions of the senior notes are set forth in, and the foregoing description of the senior notes is qualified in its entirety by reference to, the Officers’ Certificate filed herewith as Exhibit 4.04 and incorporated by reference herein.
+Contractual Obligations: During the first nine months of fiscal 2026, we entered into certain significant leases for data centers and other contractual commitments and issued $43.0 billion of senior notes with various maturity dates. Refer to Notes 3 and 6 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report and Part II, Item 7 Management’s Discussion and Analysis of Financial Condition and Results of Operations included in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025 for more information about our contractual obligations.
+Capital Expenditures: Cash used for capital expenditures increased from $12.1 billion in the first nine months of fiscal 2025 to $39.2 billion in the first nine months of fiscal 2026 primarily due to the expansion of our data centers. We expect this upward trend to continue throughout the remainder of fiscal 2026 and in the next few fiscal years as we increase our existing data center capacity and establish data centers in new geographic locations in order to meet current and expected customer demand.
+We believe that our current cash, cash equivalents and marketable securities balances, cash generated from future sales of our common stock under the ATM Program, cash generated from operations and our borrowing arrangements will be sufficient to meet our working capital, capital expenditures and contractual obligations requirements. In addition, we believe that we could fund our future acquisitions, dividend payments and repurchases of common stock or debt with our internally available cash, cash equivalents and marketable securities, cash generated from operations, additional borrowings or from the issuance of additional securities.
+41
+Table of Contents
+Remaining Performance Obligations from Contracts with Customers
+Remaining performance obligations were $552.6 billion and $130.2 billion as of February 28, 2026 and 2025, respectively. The increase in remaining performance obligations as of February 28, 2026 in comparison to February 28, 2025 was primarily attributable to certain significant cloud contracts that were entered into during the period. For more information about our remaining performance obligations, see Note 1 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report.
+Stock-Based Awards
+Our stock-based compensation program is a key component of the compensation package we provide to attract and retain certain of our talented employees and align their interests with the interests of existing stockholders.
+We recognize that stock-based awards dilute existing stockholders and have sought to control the number of stock-based awards granted while providing competitive compensation packages. Consistent with these dual goals, our cumulative potential dilution since June 1, 2022 has been an annualized rate of 1.4% per year. The potential dilution percentage is calculated as the average annualized new stock-based awards granted and assumed, net of stock-based awards forfeited by employees leaving the company, divided by the weighted-average outstanding shares during the calculation period. This maximum potential dilution will only result if all stock-based awards vest and, if applicable, are exercised. Of the outstanding stock options as of February 28, 2026, which generally have a ten-year exercise period, the majority have exercise prices higher than the market price of our common stock on such date. In recent years, our stock repurchase program has partially offset the dilutive effect of our stock-based compensation program. However, we may modify the levels of our stock repurchases in the future depending on a number of factors, including the amount of cash we have available for capital expenditures, acquisitions, to pay dividends, to repay or repurchase indebtedness or for other purposes. As of February 28, 2026, the maximum potential dilution from all outstanding stock-based awards, regardless of when granted and regardless of whether vested or unvested, was 3.7%.
+Recent Accounting Pronouncements
+For information with respect to recent accounting pronouncements, and the impact of these pronouncements on our consolidated financial statements, see Note 1 of Notes to Condensed Consolidated Financial Statements included elsewhere in this Quarterly Report.
+Item 3. Quantitative and Qualitative Disclosures About Market Risk
+There were no significant changes to our quantitative and qualitative disclosures about market risk during the first nine months of fiscal 2026. Please refer to Part II, Item 7A Quantitative and Qualitative Disclosures about Market Risk included in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025 for a more complete discussion of the market risks we encounter.
+Item 4. Controls and Procedures
+Evaluation of Disclosure Controls and Procedures: Based on our management’s evaluation (with the participation of our Principal Executive Officers and Principal Financial Officer), as of the end of the period covered by this Quarterly Report, our Principal Executive Officers and Principal Financial Officer have concluded that our “disclosure controls and procedures” (as defined in Rules 13a-15(e) and 15d-15(e) under the Exchange Act) were effective to provide reasonable assurance that the information required to be disclosed by us in our reports filed or submitted under the Exchange Act is recorded, processed, summarized, and reported within the time periods specified in the SEC’s rules and forms and is accumulated and communicated to our management (including our Principal Executive Officers and Principal Financial Officer) as appropriate to allow timely decisions regarding required disclosure.
+Changes in Internal Control over Financial Reporting: There were no changes in our internal control over financial reporting identified in connection with the evaluation required by paragraph (d) of Exchange Act Rules 13a-15 or 15d-15 that occurred during our last fiscal quarter that have materially affected, or are reasonably likely to materially affect, our internal control over financial reporting.
+42
+Table of Contents
+Inherent Limitations on Effectiveness of Controls: Our management, including our Principal Executive Officers and Principal Financial Officer, believes that our disclosure controls and procedures and internal control over financial reporting are designed to provide reasonable assurance of achieving their objectives and are effective at the reasonable assurance level. However, our management does not expect that our disclosure controls and procedures or our internal control over financial reporting will prevent all errors and all fraud. A control system, no matter how well-conceived and operated, can provide only reasonable, not absolute, assurance that the objectives of the control system are met. Further, the design of a control system must reflect the fact that there are resource constraints and the benefits of controls must be considered relative to their costs. Because of the inherent limitations in all control systems, no evaluation of controls can provide absolute assurance that all control issues and instances of fraud, if any, have been detected. These inherent limitations include the realities that judgments in decision making can be faulty and that breakdowns can occur because of a simple error or mistake. Additionally, controls can be circumvented by the individual acts of some persons, by collusion of two or more people or by management override of the controls. The design of any system of controls also is based in part upon certain assumptions about the likelihood of future events and there can be no assurance that any design will succeed in achieving its stated goals under all potential future conditions; over time, controls may become inadequate because of changes in conditions, or the degree of compliance with policies or procedures may deteriorate. Because of the inherent limitations in a cost-effective control system, misstatements due to error or fraud may occur and not be detected.
+43
+Table of Contents
+PART II. OTHER INFORMATION
+Item 1. Legal Proceedings
+The material set forth in Note 8 (pertaining to information regarding contingencies related to our income taxes) and Note 11 (pertaining to information regarding legal contingencies) of Notes to Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report is incorporated herein by reference.
+Item 1A. Risk Factors
+In addition to the other information set forth in this Quarterly Report, you should carefully consider the factors discussed in Part I, Item 1A Risk Factors in our Annual Report on Form 10-K for the fiscal year ended May 31, 2025. The risks discussed in our Annual Report on Form 10-K could materially affect our business, financial condition and future results. The risks described in our Annual Report on Form 10-K are not the only risks facing us. Additional risks and uncertainties not currently known to us or that we currently deem to be insignificant also may materially and adversely affect our business, financial condition or operating results in the future.
+Conversion of our Mandatory Convertible Preferred Stock (and our depositary shares), or the payment of dividends on Mandatory Convertible Preferred Stock in shares of common stock, or the issuance of shares of our common stock under the ATM Program will dilute the ownership interest of the holders of our common stock. The conversion of some or all of our shares of Mandatory Convertible Preferred Stock and our depositary shares, or the payment of dividends on our Mandatory Convertible Preferred Stock in the form of common stock will dilute the ownership interest of the holders of our common stock. Any sales in the public market of any common stock under the ATM Program or that may be issuable upon conversion of our Mandatory Convertible Preferred Stock and our depositary shares or the payment of dividends on our Mandatory Convertible Preferred Stock in the form of common stock could adversely affect prevailing market prices of our common stock. In addition, the existence of the Mandatory Convertible Preferred Stock and our depositary shares may encourage short selling by market participants because the conversion of the Mandatory Convertible Preferred Stock or our depositary shares, as applicable, could be used to satisfy short positions, or anticipated conversion of the Mandatory Convertible Preferred Stock or our depositary shares into shares of our common stock could depress the price of our common stock.
+The ATM Program, the Mandatory Convertible Preferred Stock or our depositary shares may adversely affect the market price of our common stock. The market price of our common stock is likely to be influenced by our ATM Program, the Mandatory Convertible Preferred Stock and our depositary shares. The market price of our common stock could become more volatile and could be depressed by: (1) investors’ anticipation of the potential sale or resale, as applicable, in the market of a substantial number of additional shares of common stock issued under the ATM Program or received upon conversion of the Mandatory Convertible Preferred Stock or our depositary shares; (2) possible sales of our common stock by investors who view the Mandatory Convertible Preferred Stock or our depositary shares as a more attractive means of equity participation in us than owning shares of common stock; and (3) hedging or arbitrage trading activity that we expect to develop involving the Mandatory Convertible Preferred Stock or our depositary shares and our common stock.
+Our common stock ranks junior to our Mandatory Convertible Preferred Stock with respect to the payment of dividends and amounts payable in the event of our liquidation, winding-up or dissolution. This means that, unless accumulated dividends have been paid or set aside for payment on all our outstanding Mandatory Convertible Preferred Stock through the most recently completed dividend period, no dividends may be declared or paid on our common stock subject to limited exceptions. Likewise, in the event of our voluntary or involuntary liquidation, winding-up or dissolution, no distribution of our assets may be made to holders of our common stock until we have paid to holders of our Mandatory Convertible Preferred Stock a liquidation preference equal to $100,000 per share plus accumulated and unpaid dividends.
+44
+Table of Contents
+Item 2. Unregistered Sales of Equity Securities and Use of Proceeds
+Our Board of Directors has approved a program for us to repurchase shares of our common stock. As of February 28, 2026, approximately $6.3 billion remained available for stock repurchases pursuant to our stock repurchase program. There was no stock repurchase activity for the three months ended February 28, 2026.
+Our stock repurchase authorization does not have an expiration date and the pace of any future repurchase activity will depend on factors such as our working capital needs, our cash requirements for capital expenditures, acquisitions and dividend payments, our debt repayment obligations or repurchases of our debt, our stock price and economic and market conditions. Our stock repurchases may be effected from time to time through open market purchases or pursuant to a Rule 10b5-1 trading plan. Our stock repurchase program may be accelerated, suspended, delayed or discontinued at any time.
+Item 5. Other Information
+The material set forth in Note 12 (pertaining to the Revolving Credit Agreement and commercial paper program) of Notes to Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q is incorporated herein by reference.
+Rule 10b5-1 Trading Plans
+Our Section 16 officers and directors (as defined in Rule 16a-1 under the Exchange Act) may from time to time enter into plans for the purchase or sale of Oracle stock that are intended to satisfy the affirmative defense conditions of Rule 10b5-1(c) under the Exchange Act. During the quarter ended February 28, 2026, the following Section 16 officers adopted, modified or terminated a “Rule 10b5-1 trading arrangement” (as defined in Item 408 of Regulation S-K under Exchange Act):
+•
+Michael Sicilia, our Chief Executive Officer and Director, adopted a new trading plan on December 24, 2025. Mr. Sicilia’s plan is scheduled to terminate on October 9, 2026, subject to early termination for certain specified events set forth in the plan. The trading plan is intended to permit Mr. Sicilia to sell up to 40% of restricted stock units scheduled to vest on future dates (approximately 161,886 gross shares) net of taxes, subject to certain limit prices set forth in the plan;
+•
+Jeffrey O. Henley, our Executive Vice Chair of the Board of Directors, adopted a new trading plan on January 2, 2026. Mr. Henley’s plan is scheduled to terminate on June 30, 2026, subject to early termination for certain specified events set forth in the plan. The trading plan is intended to permit Mr. Henley to exercise and sell up to 400,000 Oracle stock options expiring on June 30, 2026; and
+•
+Stuart Levey, our Executive Vice President, Chief Legal Officer, adopted a new trading plan on January 13, 2026. Mr. Levey’s plan is scheduled to terminate on October 15, 2026, subject to early termination for certain specified events set forth in the plan. The trading plan is intended to permit Mr. Levey to sell up to 15,000 vested shares, subject to certain limit prices set forth in the plan.
+The Rule 10b5-1 trading arrangement described above was adopted and precleared in accordance with Oracle’s Insider Trading Policy and actual sale transactions made pursuant to such trading arrangement will be disclosed publicly in future Section 16 filings with the SEC.
+45
+Table of Contents
+Item 6. Exhibits
+Exhibit
+No.
+Incorporated by Reference
+Exhibit Description
+Form
+File No.
+Exhibit
+Filing Date
+Filed By
+3.01
+Amended and Restated Certificate of Incorporation of Oracle Corporation and Certificate of Amendment of Amended and Restated Certificate of Incorporation of Oracle Corporation
+8-K 12G3
+000-51788
+3.1
+2/6/06
+Oracle Corporation
+3.02
+Amended and Restated Bylaws of Oracle Corporation
+8-K
+001-35992
+3.02
+11/17/23
+Oracle Corporation
+3.03
+Certificate of Designations, filed with the Secretary of State of the State of Delaware and effective February 5, 2026
+8-K
+001-35992
+3.1
+2/5/26
+Oracle Corporation
+4.01
+Form of Certificate for the 6.50% Series D Mandatory Convertible Preferred Stock
+8-K
+001-35992
+4.1
+2/5/26
+Oracle Corporation
+4.02
+Deposit Agreement, dated as of February 5, 2026, by and among Oracle Corporation, Equiniti Trust Company, LLC, acting as depositary, and the holders from time to time of the depositary receipts described therein
+8-K
+001-35992
+4.2
+2/5/26
+Oracle Corporation
+4.03
+Form of Depositary Receipt for the Depositary Shares
+8-K
+001-35992
+4.3
+2/5/26
+Oracle Corporation
+4.04
+Forms of Floating Rate Notes due 2029, 4.550% Notes due 2029, 4.950% Notes due 2031, 5.350% Notes due 2033, 5.700% Notes due 2036, 6.550% Notes due 2046, 6.700% Notes due 2056 and 6.850% Notes due 2066, together with an Officers’ Certificate issued February 4, 2026 setting forth the terms of the Notes
+8-K
+001-35992
+4.1
+2/4/26
+Oracle Corporation
+10.17‡*
+$10,000,000,000 5-Year Revolving Credit Agreement dated as of March 6, 2026 among Oracle Corporation and the lenders and agents named therein
+31.01‡
+Rule 13a-14(a)/15d-14(a) Certification of Principal Executive Officer
+31.02‡
+Rule 13a-14(a)/15d-14(a) Certification of Principal Executive Officer
+31.03‡
+Rule 13a-14(a)/15d-14(a) Certification of Principal Financial Officer
+32.01†
+Section 1350 Certification of Principal Executive Officers and Principal Financial Officer
+46
+Table of Contents
+Exhibit
+No.
+Incorporated by Reference
+Exhibit Description
+Form
+File No.
+Exhibit
+Filing Date
+Filed By
+101‡
+Interactive Data Files Pursuant to Rule 405 of Regulation S-T, formatted in Inline XBRL: (i) Condensed Consolidated Balance Sheets as of February 28, 2026 and May 31, 2025, (ii) Condensed Consolidated Statements of Operations for the three and nine months ended February 28, 2026 and 2025, (iii) Condensed Consolidated Statements of Comprehensive Income for the three and nine months ended February 28, 2026 and 2025, (iv) Condensed Consolidated Statements of Stockholders’ Equity for the three and nine months ended February 28, 2026 and 2025, (v) Condensed Consolidated Statements of Cash Flows for the nine months ended February 28, 2026 and 2025 and (vi) Notes to Condensed Consolidated Financial Statements
+104‡
+The cover page from the Company’s Quarterly Report on Form 10-Q for the quarter ended February 28, 2026, formatted in Inline XBRL and included in Exhibit 101
+‡
+Filed herewith.
+†
+Furnished herewith.
+*
+Certain schedules and attachments have been omitted pursuant to Item 601(a)(5) of Regulation S-K. The Company agrees to provide, on a supplemental basis, a copy of any omitted schedules and attachments to the SEC or its staff upon its request.
+47
+Table of Contents
+SIGNATURES
+Pursuant to the requirements of the Securities Exchange Act of 1934, Oracle Corporation has duly caused this report to be signed on its behalf by the undersigned, thereunto duly authorized.
+ORACLE CORPORATION
+Date: March 11, 2026
+By:
+/s/ Douglas Kehring
+Douglas Kehring
+Executive Vice President, Principal Financial Officer
+(Principal Financial Officer)
+Date: March 11, 2026
+By:
+/s/ Maria Smith
+Maria Smith
+Executive Vice President, Chief Accounting Officer
+(Principal Accounting Officer)
+48

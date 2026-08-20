@@ -1,0 +1,18 @@
+HTTP/2 200 
+content-type: application/pdf
+content-length: 16284316
+x-frame-options: SAMEORIGIN
+x-amz-id-2: fLNjSfBcFp8/I/8+7faM+qltmhPcf3D2fwVJptMMlcv2Lqyxk2ftjrT78Af2vEw3ma1ourNvNVQ=
+x-amz-request-id: QNRB6JBVRDE9GEVX
+x-amz-replication-status: COMPLETED
+last-modified: Tue, 24 Mar 2026 10:02:10 GMT
+etag: "938bf744c3fd9b71e242c71287e3f197"
+x-amz-server-side-encryption: AES256
+x-amz-meta-mode: 33188
+x-amz-version-id: jTZxJXkgjV9V6QkFZNGzJBcjiHeuBwfL
+accept-ranges: bytes
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+date: Sun, 26 Jul 2026 19:14:01 GMT
+strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+

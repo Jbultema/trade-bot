@@ -2130,6 +2130,18 @@ def write_native_timing_outputs(
         study="native_timing_hazard_research",
         config=config,
         prices=prices,
+        oos_evidence={
+            "method": "retrospective_same_history",
+            "completed": True,
+            "parameters_frozen_before_evaluation": False,
+            "evaluation_used_for_model_selection": True,
+            "primary_metric_pre_registered": True,
+            "selection_cutoff": "2026-07-24",
+            "evaluation_start": "2015-01-01",
+            "evaluation_end": "2026-07-24",
+            "observation_count": len(prices),
+            "minimum_observations": 252,
+        },
         parameters={
             "break_horizon_sessions": BREAK_HORIZON_SESSIONS,
             "break_drawdown_threshold": BREAK_DRAWDOWN_THRESHOLD,

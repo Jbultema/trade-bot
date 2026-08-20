@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+from collections.abc import Iterable
 from dataclasses import dataclass
 
 import numpy as np
@@ -69,17 +70,23 @@ def reconstruct_operating_history(
     min_history_days: int = 252,
     primary_strategy: str = DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
     allocation_policy: AllocationPolicyConfig | None = None,
+    history_dates: Iterable[object] | None = None,
+    defensive_ticker: str = "BIL",
 ) -> OperatingHistoryFrames:
     """Reconstruct lightweight operating metric history without fabricating snapshots."""
 
-    dates = _sample_history_dates(
-        baseline_run.prices.index,
-        start_date=start_date,
-        end_date=end_date,
-        frequency=frequency,
-        max_points=max_points,
-        daily_tail_market_days=daily_tail_market_days,
-        min_history_days=min_history_days,
+    dates = (
+        _explicit_history_dates(baseline_run.prices.index, history_dates)
+        if history_dates is not None
+        else _sample_history_dates(
+            baseline_run.prices.index,
+            start_date=start_date,
+            end_date=end_date,
+            frequency=frequency,
+            max_points=max_points,
+            daily_tail_market_days=daily_tail_market_days,
+            min_history_days=min_history_days,
+        )
     )
     if not dates:
         return _empty_history_frames()
@@ -110,9 +117,10 @@ def reconstruct_operating_history(
             current_state=current_state,
             prices=prices,
             allocation_policy=policy,
+            defensive_ticker=defensive_ticker,
         )
         portfolio_risk = trade_decision.portfolio_risk
-        base = _base_fields(date_label)
+        base = _base_fields(date_label, primary_strategy=primary_strategy)
         metric_rows.append(
             {
                 **base,
@@ -141,6 +149,22 @@ def reconstruct_operating_history(
         scenario_drivers=pd.DataFrame(scenario_driver_rows),
         driver_rotation=pd.DataFrame(driver_rotation_rows),
     )
+
+
+def _explicit_history_dates(
+    available_index: pd.Index,
+    requested_dates: Iterable[object],
+) -> list[pd.Timestamp]:
+    available = pd.DatetimeIndex(
+        pd.to_datetime(available_index, errors="coerce")
+    ).dropna().normalize()
+    requested = pd.DatetimeIndex(
+        pd.to_datetime(list(requested_dates), errors="coerce")
+    ).dropna().normalize()
+    if available.empty or requested.empty:
+        return []
+    matched = requested[requested.isin(available)].drop_duplicates().sort_values()
+    return [pd.Timestamp(value) for value in matched]
 
 
 def _sample_history_dates(
@@ -461,14 +485,18 @@ def _risk_asset_weight(weights: pd.Series, *, defensive_ticker: str) -> float:
     return float(clean.loc[risk_assets].clip(lower=0.0).sum())
 
 
-def _base_fields(history_date: str) -> dict[str, object]:
+def _base_fields(history_date: str, *, primary_strategy: str) -> dict[str, object]:
+    strategy_name = str(primary_strategy).strip()
     return {
-        "history_id": f"{DEFAULT_OPERATING_HISTORY_SOURCE}:{history_date}",
+        "history_id": (
+            f"{DEFAULT_OPERATING_HISTORY_SOURCE}:{strategy_name}:{history_date}"
+        ),
         "history_time": history_date,
         "snapshot_time": history_date,
         "market_date": history_date,
-        "run_id": f"reconstructed:{history_date}",
+        "run_id": f"reconstructed:{strategy_name}:{history_date}",
         "source": DEFAULT_OPERATING_HISTORY_SOURCE,
+        "strategy_name": strategy_name,
         "reconstruction_note": DEFAULT_OPERATING_HISTORY_NOTE,
     }
 

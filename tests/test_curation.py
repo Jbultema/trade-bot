@@ -101,6 +101,7 @@ def test_research_status_prunes_low_growth_and_failed_risk_profiles() -> None:
                 "calmar": 0.70,
                 "max_drawdown": -0.21,
                 "operability_label": "paper_operable",
+                "oos_evidence_status": "verified_sealed_holdout",
             },
         ]
     )
@@ -110,6 +111,29 @@ def test_research_status_prunes_low_growth_and_failed_risk_profiles() -> None:
     assert classified.loc["low_growth_ml_probe", "research_status"] == PRUNED_STATUS
     assert classified.loc["low_growth_ml_probe", "prune_reason"] == "low_cagr_below_5pct"
     assert classified.loc["high_growth_candidate", "research_status"] == "operational_candidate"
+
+
+def test_research_status_fails_closed_without_selection_oos_evidence() -> None:
+    classified = add_research_status(
+        pd.DataFrame(
+            [
+                {
+                    "strategy": "strong_retrospective_candidate",
+                    "phase": "operating_system",
+                    "family": "candidate",
+                    "promotion_decision": "promote_candidate",
+                    "cagr": 0.18,
+                    "calmar": 0.90,
+                    "max_drawdown": -0.20,
+                }
+            ]
+        )
+    ).iloc[0]
+
+    assert classified["research_status"] == "needs_iteration"
+    assert classified["prune_reason"] == "holdout_or_oos_evidence_required"
+    assert classified["governed_promotion_decision"] == "hold_for_oos_evidence"
+    assert not bool(classified["oos_promotion_eligible"])
 
 
 def test_curated_shelf_excludes_pruned_dead_ends_by_default() -> None:
@@ -232,4 +256,7 @@ def test_growth_utility_can_rank_higher_cagr_tolerable_drawdown_above_safer_lowe
     ranked = rank_strategy_candidates(rows)
 
     assert ranked.iloc[0]["strategy"] == "higher_growth_tolerable_drawdown"
-    assert ranked.iloc[0]["growth_constrained_utility_score"] > ranked.iloc[1]["growth_constrained_utility_score"]
+    assert (
+        ranked.iloc[0]["growth_constrained_utility_score"]
+        > ranked.iloc[1]["growth_constrained_utility_score"]
+    )

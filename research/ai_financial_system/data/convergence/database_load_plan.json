@@ -1,0 +1,331 @@
+{
+  "core_tables": [
+    {
+      "relative_path": "data/source_register.csv",
+      "table": "sources"
+    },
+    {
+      "relative_path": "data/entities.csv",
+      "table": "entities"
+    },
+    {
+      "relative_path": "data/claims.csv",
+      "table": "claims"
+    },
+    {
+      "relative_path": "data/evidence_links.csv",
+      "table": "evidence_links"
+    },
+    {
+      "relative_path": "data/financial_flows.csv",
+      "table": "financial_flows"
+    },
+    {
+      "relative_path": "data/capital_observations.csv",
+      "table": "capital_observations"
+    },
+    {
+      "relative_path": "data/capital_bridge.csv",
+      "table": "capital_bridge"
+    },
+    {
+      "relative_path": "data/contracts.csv",
+      "table": "contracts"
+    },
+    {
+      "relative_path": "data/debt_instruments.csv",
+      "table": "debt_instruments"
+    },
+    {
+      "relative_path": "data/leases.csv",
+      "table": "leases"
+    },
+    {
+      "relative_path": "data/guarantees.csv",
+      "table": "guarantees"
+    },
+    {
+      "relative_path": "data/investments.csv",
+      "table": "investments"
+    },
+    {
+      "relative_path": "data/funding_timeline.csv",
+      "table": "funding_timeline"
+    },
+    {
+      "relative_path": "data/projects.csv",
+      "table": "projects"
+    },
+    {
+      "relative_path": "data/project_finance_cases.csv",
+      "table": "project_finance_cases"
+    },
+    {
+      "relative_path": "data/project_cash_waterfalls.csv",
+      "table": "project_cash_waterfalls"
+    },
+    {
+      "relative_path": "data/project_delivery_milestones.csv",
+      "table": "project_delivery_milestones"
+    },
+    {
+      "relative_path": "data/power_agreements.csv",
+      "table": "power_agreements"
+    },
+    {
+      "relative_path": "data/power_system_cases.csv",
+      "table": "power_system_cases"
+    },
+    {
+      "relative_path": "data/power_infrastructure_assets.csv",
+      "table": "power_infrastructure_assets"
+    },
+    {
+      "relative_path": "data/power_cost_waterfalls.csv",
+      "table": "power_cost_waterfalls"
+    },
+    {
+      "relative_path": "data/laboratory_control.csv",
+      "table": "laboratory_control"
+    },
+    {
+      "relative_path": "data/laboratory_operating_observations.csv",
+      "table": "laboratory_operating_observations"
+    },
+    {
+      "relative_path": "data/laboratory_counterparty_flows.csv",
+      "table": "laboratory_counterparty_flows"
+    },
+    {
+      "relative_path": "data/hyperscaler_capex_observations.csv",
+      "table": "hyperscaler_capex_observations"
+    },
+    {
+      "relative_path": "data/hyperscaler_obligations.csv",
+      "table": "hyperscaler_obligations"
+    },
+    {
+      "relative_path": "data/hyperscaler_revenue_funding.csv",
+      "table": "hyperscaler_revenue_funding"
+    },
+    {
+      "relative_path": "data/compute_supply.csv",
+      "table": "compute_supply"
+    },
+    {
+      "relative_path": "data/compute_commitments.csv",
+      "table": "compute_commitments"
+    },
+    {
+      "relative_path": "data/compute_asset_finance.csv",
+      "table": "compute_asset_finance"
+    },
+    {
+      "relative_path": "data/ownership.csv",
+      "table": "ownership"
+    },
+    {
+      "relative_path": "data/dependencies.csv",
+      "table": "dependencies"
+    },
+    {
+      "relative_path": "data/risk_pathways.csv",
+      "table": "risk_pathways"
+    },
+    {
+      "relative_path": "data/unknowns.csv",
+      "table": "unknowns"
+    },
+    {
+      "relative_path": "data/semiconductor_physical_dependencies.csv",
+      "table": "semiconductor_physical_dependencies"
+    },
+    {
+      "relative_path": "data/semiconductor_capacity_finance.csv",
+      "table": "semiconductor_capacity_finance"
+    },
+    {
+      "relative_path": "data/semiconductor_loss_episodes.csv",
+      "table": "semiconductor_loss_episodes"
+    },
+    {
+      "relative_path": "data/semiconductor_substitution_constraints.csv",
+      "table": "semiconductor_substitution_constraints"
+    },
+    {
+      "relative_path": "data/semiconductor_regulatory_controls.csv",
+      "table": "semiconductor_regulatory_controls"
+    },
+    {
+      "relative_path": "data/semiconductor_measurement_reconciliations.csv",
+      "table": "semiconductor_measurement_reconciliations"
+    },
+    {
+      "relative_path": "data/private_credit_exposures.csv",
+      "table": "private_credit_exposures"
+    },
+    {
+      "relative_path": "data/private_credit_fund_liquidity.csv",
+      "table": "private_credit_fund_liquidity"
+    },
+    {
+      "relative_path": "data/private_credit_warehouse_controls.csv",
+      "table": "private_credit_warehouse_controls"
+    },
+    {
+      "relative_path": "data/private_credit_valuation_clocks.csv",
+      "table": "private_credit_valuation_clocks"
+    },
+    {
+      "relative_path": "data/private_credit_measurement_reconciliations.csv",
+      "table": "private_credit_measurement_reconciliations"
+    },
+    {
+      "relative_path": "data/public_capital_awards.csv",
+      "table": "public_capital_awards"
+    },
+    {
+      "relative_path": "data/public_tax_incentives.csv",
+      "table": "public_tax_incentives"
+    },
+    {
+      "relative_path": "data/public_equity_positions.csv",
+      "table": "public_equity_positions"
+    },
+    {
+      "relative_path": "data/public_infrastructure_cost_allocation.csv",
+      "table": "public_infrastructure_cost_allocation"
+    },
+    {
+      "relative_path": "data/sovereign_capital_cases.csv",
+      "table": "sovereign_capital_cases"
+    },
+    {
+      "relative_path": "data/public_capital_measurement_reconciliations.csv",
+      "table": "public_capital_measurement_reconciliations"
+    },
+    {
+      "relative_path": "data/claim_confidence_history.csv",
+      "table": "claim_confidence_history"
+    },
+    {
+      "relative_path": "data/claim_economic_importance.csv",
+      "table": "claim_economic_importance"
+    },
+    {
+      "relative_path": "data/economic_exposures.csv",
+      "table": "economic_exposures"
+    },
+    {
+      "relative_path": "data/exposure_components.csv",
+      "table": "exposure_components"
+    },
+    {
+      "relative_path": "data/utilization_observations.csv",
+      "table": "utilization_observations"
+    },
+    {
+      "relative_path": "data/chapter_handoffs.csv",
+      "table": "chapter_handoffs"
+    }
+  ],
+  "extension_tables": [
+    {
+      "relative_path": "data/convergence/private_investment_accounting_methods.csv",
+      "table": "private_investment_accounting_methods"
+    },
+    {
+      "relative_path": "data/convergence/private_investment_earnings.csv",
+      "table": "private_investment_earnings"
+    },
+    {
+      "relative_path": "data/convergence/private_investment_earnings_components.csv",
+      "table": "private_investment_earnings_components"
+    },
+    {
+      "relative_path": "data/convergence/private_investment_carrying_value_rollforwards.csv",
+      "table": "private_investment_carrying_value_rollforwards"
+    },
+    {
+      "relative_path": "data/convergence/private_investment_rollforward_components.csv",
+      "table": "private_investment_rollforward_components"
+    },
+    {
+      "relative_path": "data/convergence/private_investment_earnings_bridges.csv",
+      "table": "private_investment_earnings_bridges"
+    },
+    {
+      "relative_path": "data/convergence/private_investment_bridge_components.csv",
+      "table": "private_investment_bridge_components"
+    },
+    {
+      "relative_path": "data/convergence/private_investment_population_observations.csv",
+      "table": "private_investment_population_observations"
+    },
+    {
+      "relative_path": "data/convergence/private_source_archive_versions.csv",
+      "table": "private_source_archive_versions"
+    },
+    {
+      "relative_path": "data/convergence/private_source_text_derivatives.csv",
+      "table": "private_source_text_derivatives"
+    },
+    {
+      "relative_path": "data/convergence/private_claim_locator_reviews.csv",
+      "table": "private_claim_locator_reviews"
+    },
+    {
+      "relative_path": "data/convergence/private_claim_locator_review_sources.csv",
+      "table": "private_claim_locator_review_sources"
+    },
+    {
+      "relative_path": "data/convergence/private_claim_status_transitions.csv",
+      "table": "private_claim_status_transitions"
+    },
+    {
+      "relative_path": "data/convergence/private_claim_status_retained_holds.csv",
+      "table": "private_claim_status_retained_holds"
+    },
+    {
+      "relative_path": "data/convergence/source_versions.csv",
+      "table": "source_versions"
+    },
+    {
+      "relative_path": "data/convergence/source_derivatives.csv",
+      "table": "source_derivatives"
+    },
+    {
+      "relative_path": "data/convergence/source_exceptions.csv",
+      "table": "source_exceptions"
+    },
+    {
+      "relative_path": "data/convergence/source_duplicate_blob_reconciliations.csv",
+      "table": "source_duplicate_blob_reconciliations"
+    },
+    {
+      "relative_path": "data/convergence/claim_locator_states.csv",
+      "table": "claim_locator_states"
+    },
+    {
+      "relative_path": "data/convergence/chapter_support_state_projection.csv",
+      "table": "chapter_support_state_projection"
+    },
+    {
+      "relative_path": "data/convergence/source_version_delta_audit.csv",
+      "table": "source_version_delta_audit"
+    },
+    {
+      "relative_path": "data/convergence/research_packet_bindings.csv",
+      "table": "research_packet_bindings"
+    },
+    {
+      "relative_path": "data/convergence/research_artifacts.csv",
+      "table": "research_artifacts"
+    },
+    {
+      "relative_path": "data/convergence/research_packet_manifest_bindings.csv",
+      "table": "research_packet_manifest_bindings"
+    }
+  ],
+  "version": 1
+}

@@ -1,0 +1,15 @@
+{
+  "foreign_key_violations": 0,
+  "integrity_check": "ok",
+  "passed": true,
+  "table_counts": {
+    "carried_private_locator_reviews": 5,
+    "chapter_support_state_projection": 525,
+    "claim_locator_states": 167,
+    "duplicate_blob_reconciliation": 5,
+    "source_derivatives": 8,
+    "source_exceptions": 6,
+    "source_version_delta_audit": 3,
+    "source_versions": 60
+  }
+}

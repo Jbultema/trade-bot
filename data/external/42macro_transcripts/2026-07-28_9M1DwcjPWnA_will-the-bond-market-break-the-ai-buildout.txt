@@ -1,0 +1,244 @@
+source: 42macro_youtube
+published_date: 2026-07-28
+video_id: 9M1DwcjPWnA
+url: https://www.youtube.com/watch?v=9M1DwcjPWnA
+title: Will the Bond Market Break the AI Buildout?
+
+And taking a look at futures this
+morning right out of Dallas highway 124,
+but the S&P and the NASDAQ pointing
+lower. Stocks did finish mixed
+yesterday. The Dow and the S&P 500 in
+positive territory. Investors rotated
+out of semiconductor stocks. And then we
+also saw a big pullback in oil
+yesterday. Similar story this morning.
+Investors are watching key earnings.
+We're getting Meta, Microsoft, Amazon,
+and Apple this week. Investors are also
+watching AI spending in the nationwide
+data center rollout. to bring in 42
+Macro founder and CEO Darius Dale.
+Darius, what are you watching for right
+now?
+>> Well, thanks for having me, Sheryl. It's
+a real pleasure to be here. So, the
+number one thing we've been coaching our
+global investor community to prepare for
+for the past few months is the
+anticipation of a summer 1998 style
+correction in financial markets. And
+we've been coaching them on that because
+of the exogenous risk that the Fed acts
+to take away the punch bowl. We're
+actually getting increasingly concerned
+about endogenous risk specifically as it
+relates to the AI CapEx bubble and the
+infrastructure buildout associated with
+that. On one hand, you got China and the
+competition from open source models
+becoming a real issue for all large
+language model providers. On the second
+hand, you have women AI's got a women
+and young people problem from the
+perspective of regulation. 68% of women
+in this country think AI is being
+advanced too fast versus only 2% of all
+adults think it's going too slow. And
+then on the young people side, 48% of
+voters aged 18 to 29 think AI will have
+a negative impact on society versus 16%
+of all adults who believe it'll be
+positive. So, that's a big issue.
+>> Yeah, until until they start getting
+jobs and that actually because they have
+AI skills or they're willing to learn
+AI, there's your job out of college that
+we've talked about. Mark Tepper, jump in
+here. What are you watching?
+>> Darius, good morning. Want to get your
+take on the bond market. So, is the bond
+market specifically telling us something
+that maybe the stock market hasn't quite
+picked up yet. So, what we've seen over
+the course of the last few days is that
+hyperscaler credit default swaps surged.
+Yesterday, I believe it was, Nvidia's
+credit default swaps surged to the
+highest level ever. Is there some
+concern now from investors, bondholders
+specifically, that they're maybe tired
+of financing all this endless AI
+spending and all of these hyperscalers
+are going to have to figure out some
+other way to do it in the future. What's
+your take on that?
+>> Yeah, Mark, you absolutely nailed it.
+That's what we focused our weekly
+webcast on this weekend with respect to
+the the financing demands for all this
+AI build-out. Right now, AI is competing
+with global sovereign deficits that are
+as wide as they've been historically
+outside of recession in history. And so,
+that's a big issue. You also have the
+the slowdown in the growth rate of
+global savings. It's one of the If you
+look at it on a trailing 10-year basis,
+it's one of the lowest readings we've
+ever seen in that time series. And so,
+you have a marginal decline in the
+supply of savings. You obviously have a
+massive acceleration in the demand for
+uh capital. And so, that's creating some
+issues in the bond market. We saw the
+move index break out to bullish from the
+perspective of our volatility just a
+momentum signal last week. And so,
+historically, that's been a leading
+indicator for a broad decline in global
+liquidity, which itself is a coincident
+indicator for the stock market.
+>> All right. I want to take a look at oil.
+I mentioned this a moment ago. Uh oil is
+falling again this morning. We pulled We
+saw this the contracts pull back after
+the president paused strikes on Tehran's
+military sites to make way for ceasefire
+negotiations and possibly end the
+conflict. Here is the commander-in-chief
+on this yesterday, watch.
+>> I have a lot of patience.
+I have plenty of time.
+Plenty of time.
+Uh their whole shorelines wiped out.
+The uh strait is in very good shape.
+And we're talking right now. You know,
+they wanted to talk. I think uh there's
+a good chance that something could
+happen. And if it does, good. If it
+doesn't, we go back to doing what we
+were doing 2 days ago.
+>> Darius, what's your reaction to that?
+>> Uh I'll tell you what, my reaction to
+that is the same as it's been the entire
+time, which is it's not it's a
+non-event.
+The bigger event is retail margin debt.
+Can we talk about that? You know, I do
+have to say this to everyone cuz it's
+probably the most important thing I've
+seen in my research process in the last
+few years, which is retail margin debt
+has risen 100% on a trailing 3-year
+basis. And historically, anything that's
+gone up a double at least in a in a in a
+2-3 year time horizon, Sam Zell
+essentially calls that a bubble. And so
+we now have a bubble in retail margin
+debt. And if you look at the last three
+times we've seen this signal trigger in
+financial markets, it was 1998 ahead of
+a 20% crash in the stock market, in 2000
+ahead of an 80% drawdown in the Nasdaq,
+and in 2007 ahead of a 60% drawdown in
+the S&P 500. That is a much bigger risk
+factor than anything that's going on in
+Iran.
+>> All right. Well, I certainly think that
+Iran has, you know, certainly had a a a
+broader effect on the markets. And and
+my concern, to push back a little bit
+here, is that you're going to start to
+see supply chain inflation if oil prices
+continue to be hovering around, you
+know, 90-100 bucks a barrel. Right now
+we're at 80, but again, it's been very
+volatile. You get the straight at least
+somewhat, you know, calm
+and make sure that the seas
+outside of Saudi Arabia are are calm and
+cargo ships are getting through. You're
+off to the races. And I also think that
+it that the CPI numbers were strong. And
+I think that the employment data has
+been strong. So I'm feeling pretty good
+about the economy unless we see an
+energy shock again. So fingers crossed.
+I want to take a look at yields this
+morning because right now, you know, the
+Federal Reserve does begin today the
+2-day policy meeting and they're
+expected to hold rates steady. Ahead of
+some key econ data, more of it this
+week. We've got the first read of second
+quarter GDP. You got June PCE, the index
+there. The president is urging Kevin
+Warsh, the Federal Reserve chair, to
+lower rates. Watch the president again.
+>> And Kevin's fantastic, but he's got a
+board and the board members are
+very political, I would say. He wants to
+do the right thing. I know what he wants
+to do. Rates should be lowered.
+This country could be at 8%, 9%, 10%,
+12% GDP. That's what it should be. We
+should have the lowest interest rate in
+the world. I could take the money that
+these countries are making, put it into
+our portfolio,
+and we would be we should have the
+lowest interest rate
+in the world, like it used to be 30
+years ago.
+>> Uh Mark, you had mentioned, you know,
+CDS earlier. Darius talking, of course,
+about the the Fed meeting and the
+economy. Mark, first to you, your
+reaction to those comments.
+>> I mean, look, I would love to see lower
+interest rates. I mean, especially if
+you're in the markets to purchase a
+home, it'd be fantastic to see mortgage
+rates come down. Um but I just don't
+know that the Fed has the opportunity
+right now to make that happen. I mean,
+yes, inflation seems to be contained.
+However, oil prices are kind of, you
+know, they're they've been pretty
+volatile. So, um I think the Fed's going
+to stand pat.
+>> Uh Darius, what do you say? Because, of
+course, we're going to be hearing from
+Kevin Warsh tomorrow.
+>> Yeah, absolutely. Look, our president's
+a funny man, but I don't think he
+understands the bond market. Uh our
+friend and a former client, uh Scott
+Bessent, Treasury Secretary Scott
+Bessent, definitely does, and he's the
+one the one who's telling Kevin Warsh
+that it's okay to tight monetary policy,
+and here's why. The market's estimate of
+the neutral rate has gravitated by about
+50 to 60 basis points higher in the last
+few months. And so, that ultimately
+means a Federal Reserve that does not
+follow that up by tightening monetary
+policy will ultimately allow the
+spectrum of easy money to roil the long
+end of the bond market, and you're going
+to continue to see higher long-term
+interest rates, not lower.
+>> You think So, you think we're going to
+get a hike?
+You do?
+>> They should hike if they want the bond
+yields to go down.
+>> Huh. Okay.
+>> Tight money makes bond yields go down.
+Easy money makes bond yields go up.
+>> The Bessents are for for hikes later
+this year. We'll see. Darius Dale, it's
+great to see you. Thank you for being
+with us this morning.

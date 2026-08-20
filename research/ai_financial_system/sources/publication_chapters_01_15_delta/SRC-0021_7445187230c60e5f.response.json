@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 35252,
+  "content_sha256": "7445187230c60e5f28d44189256a5d783a6b5a1dccb28c1f42b49f998d54c7b5",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000045/amd-20260223.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0021_7445187230c60e5f.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000045/amd-20260223.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-02-24",
+  "publisher": "Advanced Micro Devices Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0021_7445187230c60e5f.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:24.819963+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:24.589318+00:00",
+  "selected_response_headers": {
+    "content-length": "5503",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:24 GMT",
+    "last-modified": "Tue, 24 Feb 2026 12:01:38 GMT"
+  },
+  "source_id": "SRC-0021",
+  "status": "preserved_complete",
+  "title": "AMD Form 8-K Meta GPU purchase and warrant",
+  "write_state": "new_version_written"
+}

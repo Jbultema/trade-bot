@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 279186,
+  "content_sha256": "90f5b235890bb65a1ecc82815f07c6dbb5abe3e51d6e1618eb0df68d9e284ada",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.apollo.com/insights-news/pressreleases/2026/06/apollo-leads-35-billion-capital-solution-for-broadcom-ai-xpv-platform-in-partnership-with-blackstone-and-leading-global-banks-3308896",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0133_90f5b235890bb65a.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html;charset=utf-8",
+  "original_url": "https://www.apollo.com/insights-news/pressreleases/2026/06/apollo-leads-35-billion-capital-solution-for-broadcom-ai-xpv-platform-in-partnership-with-blackstone-and-leading-global-banks-3308896",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-06-09",
+  "publisher": "Apollo Global Management Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0133_90f5b235890bb65a.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:53:52.240691+00:00",
+  "retrieval_started_utc": "2026-07-26T17:53:51.711768+00:00",
+  "selected_response_headers": {
+    "cache-control": "max-age=300,stale-while-revalidate=60",
+    "content-length": "29610",
+    "content-type": "text/html;charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:53:52 GMT"
+  },
+  "source_id": "SRC-0133",
+  "status": "preserved_complete",
+  "title": "Apollo leads initial 35 billion dollar capital solution for Broadcom AI XPV",
+  "write_state": "new_version_written"
+}

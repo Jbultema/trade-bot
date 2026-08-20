@@ -1,0 +1,200 @@
+{
+  "bounded_descriptive_use": "ACCEPT_WITH_EXPLICIT_EXTERNAL_HOLDS",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "chapter": "CH16",
+  "comparative_publication": "BLOCKED",
+  "files": [
+    {
+      "bytes": 2868,
+      "lines": 68,
+      "path": "acceptance_report.md",
+      "sha256": "38ed9354de8655961ed7a59ee7523ca353d60b3c9df27c928d370f1e537c4323"
+    },
+    {
+      "bytes": 368,
+      "lines": 14,
+      "path": "author_generic_validation_results.json",
+      "sha256": "e590459c5729f2f19c1d832c67be23646bf257ef1a62ec923c935fdcd8342945"
+    },
+    {
+      "bytes": 10096,
+      "path": "author_packet_inventory.csv",
+      "rows": 54,
+      "sha256": "f44e24688299340e996744afc98c43c5c72ec42d45fa6606e09d488c541b4f66"
+    },
+    {
+      "bytes": 97781,
+      "path": "candidate_reconstruction_audit.csv",
+      "rows": 574,
+      "sha256": "9fd5e949008f09837f032b7619740e5ba605d9c827edc371fdd1da55256df34c"
+    },
+    {
+      "bytes": 3833,
+      "path": "candidate_source_freeze_audit.csv",
+      "rows": 17,
+      "sha256": "04f46005af66105cc4f9e7d751ba188f97e678eb58fb03045c0f74847772835a"
+    },
+    {
+      "bytes": 382,
+      "path": "candidate_state_partition_audit.csv",
+      "rows": 7,
+      "sha256": "1fd990f650f7d7d81e7b76774cd58c41084cc310baa8cdf1ad291e906aa4070f"
+    },
+    {
+      "bytes": 824,
+      "path": "concentration_boundary_audit.csv",
+      "rows": 8,
+      "sha256": "96ee057f0f0f11c0a0ce0e7040180b5823805d0ee80f82b9dad93cd1519db611"
+    },
+    {
+      "bytes": 337,
+      "lines": 9,
+      "path": "deterministic_rebuild_results.json",
+      "sha256": "fff47752709c1e3296b29c8e5020641b60cf12991ba91dd9f2aa3873cc3e50dd"
+    },
+    {
+      "bytes": 9536,
+      "path": "equivalence_hold_audit.csv",
+      "rows": 59,
+      "sha256": "8048df4405c2818784cad54acba07eaaaa25cc3ca5c481445d550dc9aef56b8e"
+    },
+    {
+      "bytes": 81,
+      "path": "exact_row_patches.csv",
+      "rows": 0,
+      "sha256": "bbd6d2a059da80aa9b21aa890b6092b902ad45d46cc936c31edcecfea1f48dc9"
+    },
+    {
+      "bytes": 2209,
+      "path": "failure_party_clock_audit.csv",
+      "rows": 11,
+      "sha256": "e77ac966455ff206f1d4a366dd78b531e79abc25a2093770e395782b117a0560"
+    },
+    {
+      "bytes": 1228,
+      "path": "findings.csv",
+      "rows": 4,
+      "sha256": "03c71e9a0fbe5d8d2c892796a7ec4a6acd472db797977311b3efb584982b806c"
+    },
+    {
+      "bytes": 529,
+      "path": "free_text_gate_audit.csv",
+      "rows": 5,
+      "sha256": "9f22ee02a1572b4f16db1048fb8f7badbfb661307ecdc843be72ffa7498055ed"
+    },
+    {
+      "bytes": 5201,
+      "path": "graph_edge_audit.csv",
+      "rows": 44,
+      "sha256": "ea54c68eaf9345a2a8a941c7fa4e226b4d7cb917c6ba082b9cdaf8f0fe50840e"
+    },
+    {
+      "bytes": 8521,
+      "path": "graph_metric_audit.csv",
+      "rows": 86,
+      "sha256": "7fc39393c646a76752bd27e171de4dd272675192c3d76f28c40284182fb75b8e"
+    },
+    {
+      "bytes": 17506,
+      "path": "identity_semantics_acceptance.csv",
+      "rows": 78,
+      "sha256": "7bf49b2d5639ad6496dde2e47a90ba7824b007aab10471eef57c3704ec965df1"
+    },
+    {
+      "bytes": 3998,
+      "path": "project_role_acceptance.csv",
+      "rows": 26,
+      "sha256": "c3f439d192e600714f8c2cb7e5a216fcafd5effcd54071634f02b881ab6a0540"
+    },
+    {
+      "bytes": 200262,
+      "path": "record_claim_link_audit.csv",
+      "rows": 1726,
+      "sha256": "31a5c05c3f9306d703250a7bbf4150c87beae20bfbac10ec79c0d3599befd8c6"
+    },
+    {
+      "bytes": 375,
+      "lines": 14,
+      "path": "review_generic_validation_results.json",
+      "sha256": "aae0e87cada4e97af73506463b1e12701f5edc1ec9217bb492bd4545ec96711a"
+    },
+    {
+      "bytes": 36813,
+      "lines": 1011,
+      "path": "run_acceptance_review.py",
+      "sha256": "892d5a3bac8ba592d443f5972f6dbdf129495003f3eb72c98f24cc0d8a52d7ef"
+    },
+    {
+      "bytes": 2285,
+      "path": "schema_roundtrip_audit.csv",
+      "rows": 19,
+      "sha256": "ef14f7e44b7af06d38774ca3ce7d637a4ad88cecbf7b35669b07f67d99372b24"
+    },
+    {
+      "bytes": 1706,
+      "path": "semantic_regression_acceptance.csv",
+      "rows": 19,
+      "sha256": "418b8a7a2c1819001c4cd7ae70444f5642ab227ca5b942bd250c37bf4bc556c9"
+    },
+    {
+      "bytes": 1465,
+      "path": "semantic_repair_acceptance.csv",
+      "rows": 12,
+      "sha256": "746ca13b5ee5b4f7f37a868944a00b9e5a8461473deac023f7ab8ade385332ab"
+    },
+    {
+      "bytes": 287,
+      "path": "typed_join_audit.csv",
+      "rows": 3,
+      "sha256": "6f5e51faa2a721a1c2cbec68ddb1cf83593c666ce420ede6658a167c2cc9c418"
+    },
+    {
+      "bytes": 12282,
+      "lines": 346,
+      "path": "validate_review.py",
+      "sha256": "41acf15a5b712096f75e68e08464def4b6a17e4d092c6eace0bd2c000a767da7"
+    },
+    {
+      "bytes": 901,
+      "lines": 28,
+      "path": "validation_results.json",
+      "sha256": "e06ca487718116df86d83b0e11a070df82d5f142ceb9d5ebbe00e6ade12e1453"
+    }
+  ],
+  "intrinsic_packet": "ACCEPT_INTRINSIC_PACKET",
+  "lane": "lane_2_verify_chapter_16_rebuilt_v3",
+  "metrics": {
+    "equivalence_holds": 59,
+    "free_text_claims_unadjudicated": 427,
+    "mechanical_exclusions": 218,
+    "new_exact_row_patches": 0,
+    "record_claim_links_recomputed": 1726,
+    "regressions_passed": 19,
+    "regressions_reperformed": 19,
+    "role_holds": 297,
+    "schema_roundtrips": 19,
+    "selected_edges": 44,
+    "semantic_repairs_passed": 12,
+    "semantic_repairs_reperformed": 12,
+    "structured_candidates": 574
+  },
+  "no_write_attestation": {
+    "author_source_review_or_canonical_files_modified": false,
+    "chapter_docx_pdf_or_publication_manifest_modified": false,
+    "review_output_lane_only": "lane_2_verify_chapter_16_rebuilt_v3"
+  },
+  "reviewed_lane": "lane_3_chapter_16_rebuilt_v3",
+  "reviewed_manifest_sha256": "e506d400f9dc317097c11cf88d52920417b3af2cb04488b77ba485488285c1a4",
+  "scope": "fresh nonauthor acceptance review of Chapter 16 rebuilt-v3",
+  "self_hash_policy": "lane_manifest.json excludes its own hash.",
+  "status_date": "2026-07-26",
+  "v2_review_manifest_sha256": "f57583835a0ee132636491a8a7df1dc502938fa14ddd7e2f82717f541980e046",
+  "v2_source_manifest_sha256": "d3ac562cb943c0085205150b2ac34ad4a181477cef92856ba24b0bdbdaa75f34",
+  "verdict": "ACCEPT_WITH_EXPLICIT_EXTERNAL_HOLDS",
+  "writing_boundary": {
+    "bounded_documented_subgraph": "accepted_with_identity_and_population_caveats",
+    "canonical_database_write": "not_authorized",
+    "complete_relationship_census": "blocked",
+    "system_wide_rank_or_concentration": "blocked"
+  }
+}

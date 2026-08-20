@@ -7,6 +7,7 @@ import pandas as pd
 
 from trade_bot.config import ExecutionConfig
 from trade_bot.research.artifact_provenance import (
+    build_runtime_provenance,
     verify_research_manifest,
     write_research_manifest,
 )
@@ -33,7 +34,7 @@ def test_research_manifest_captures_config_code_and_price_identity(tmp_path) -> 
 
     manifest = json.loads(path.read_text(encoding="utf-8"))
     assert manifest["study"] == "unit_test"
-    assert manifest["schema_version"] == 3
+    assert manifest["schema_version"] == 4
     assert manifest["automatic_promotion_allowed"] is False
     assert manifest["config"]["transaction_cost_bps"] == 7.5
     assert manifest["price_input"]["market_date"] == "2024-01-03"
@@ -55,8 +56,11 @@ def test_research_manifest_captures_config_code_and_price_identity(tmp_path) -> 
     )
     assert (
         manifest["research_governance"]["promotion_evidence_gate"]
-        == "blocked_incomplete_universe_or_trial_history"
+        == "blocked_missing_or_invalid_oos_evidence"
     )
+    oos = manifest["research_governance"]["out_of_sample_evidence"]
+    assert oos["status"] == "missing_oos_evidence"
+    assert oos["promotion_eligible"] is False
 
     verification = verify_research_manifest(
         path,
@@ -90,3 +94,74 @@ def test_research_manifest_verification_flags_tampering_and_missing_artifacts(tm
     missing = verify_research_manifest(manifest_path)
     assert missing["artifact_integrity_status"] == "missing_artifacts"
     assert missing["missing_artifact_count"] == 1
+
+
+def test_manifest_only_allows_human_review_with_verified_oos_and_universe(
+    tmp_path,
+) -> None:
+    dates = pd.bdate_range("2025-01-02", periods=5)
+    prices = pd.DataFrame({"SPY": np.arange(100.0, 105.0)}, index=dates)
+    membership = pd.DataFrame(
+        {
+            "ticker": ["SPY"],
+            "effective_from": ["2000-01-01"],
+            "effective_to": [None],
+            "source": ["fund_inception_record"],
+            "source_as_of": ["2026-07-24"],
+            "delisting_return_included": [True],
+            "delisting_return_source": ["total_return_vendor"],
+        }
+    )
+
+    path = write_research_manifest(
+        tmp_path,
+        study="sealed_holdout_test",
+        config=ExecutionConfig(),
+        prices=prices,
+        universe_membership=membership,
+        oos_evidence={
+            "method": "sealed_holdout",
+            "completed": True,
+            "parameters_frozen_before_evaluation": True,
+            "evaluation_used_for_model_selection": False,
+            "primary_metric_pre_registered": True,
+            "selection_cutoff": "2024-12-31",
+            "evaluation_start": "2025-01-02",
+            "evaluation_end": "2025-01-08",
+            "observation_count": 5,
+            "minimum_observations": 5,
+        },
+        parameters={"candidate_set": ["frozen_candidate"]},
+    )
+
+    manifest = json.loads(path.read_text(encoding="utf-8"))
+    governance = manifest["research_governance"]
+    assert governance["out_of_sample_evidence"]["status"] == "verified_sealed_holdout"
+    assert governance["promotion_evidence_gate"] == "eligible_for_human_review"
+    assert manifest["research_status"] == "oos_evaluated_human_review_required"
+    assert manifest["automatic_promotion_allowed"] is False
+
+
+def test_source_tree_identity_ignores_python_cache_but_tracks_source(tmp_path) -> None:
+    source = tmp_path / "src" / "trade_bot" / "research" / "study.py"
+    source.parent.mkdir(parents=True)
+    source.write_text("VALUE = 1\n", encoding="utf-8")
+    (tmp_path / "configs").mkdir()
+    (tmp_path / "configs" / "baseline.yaml").write_text("mode: test\n", encoding="utf-8")
+    (tmp_path / "pyproject.toml").write_text("[project]\nname='test'\n", encoding="utf-8")
+    (tmp_path / "poetry.lock").write_text("", encoding="utf-8")
+
+    initial = build_runtime_provenance(repo_root=tmp_path)["source_tree_sha256"]
+    cache = source.parent / "__pycache__" / "study.cpython-312.pyc"
+    cache.parent.mkdir()
+    cache.write_bytes(b"first cache")
+    after_cache = build_runtime_provenance(repo_root=tmp_path)["source_tree_sha256"]
+    cache.write_bytes(b"rewritten cache")
+    after_cache_rewrite = build_runtime_provenance(repo_root=tmp_path)["source_tree_sha256"]
+
+    assert after_cache == initial
+    assert after_cache_rewrite == initial
+
+    source.write_text("VALUE = 2\n", encoding="utf-8")
+    after_source_change = build_runtime_provenance(repo_root=tmp_path)["source_tree_sha256"]
+    assert after_source_change != initial

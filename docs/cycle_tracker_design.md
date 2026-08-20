@@ -25,6 +25,59 @@ drawdown, or the right day to rebalance. It is not an allocation override. It is
 an explanatory and validation layer that should inform Research Lab,
 Simulation Lab, Launch Lab, and human review.
 
+## Capital-Cycle Break Monitor
+
+Cycle Tracker includes a research-only monitor for a question that market-price
+features cannot answer alone: are the financing and operating mechanisms beneath
+a capital-intensive boom beginning to roll over while headline prices still look
+healthy?
+
+The monitor deliberately separates two dimensions:
+
+- **Capital vulnerability** measures accumulated fragility: capex intensity,
+  financing dependence, monetization pressure, concentration, leverage, and
+  long-duration funding costs.
+- **Rollover impulse** measures whether that fragile system has started turning:
+  orders or capex revisions weakening, financing prices worsening, leadership
+  breaking, and leverage retreating.
+
+High vulnerability alone can produce `buildout_fragile`; it cannot declare a
+break. `rollover_confirming` requires a direct real-economy signal plus an
+independent rollover confirmation. `break_confirmed` requires direct economic
+evidence and multiple independent market/financing confirmations. Broad price
+proxies can inform a watch state but cannot masquerade as direct orders,
+utilization, capex revisions, or private-company economics. If less than 45% of
+either composite is observable, the state is `insufficient_data`.
+
+Every family exposes its current level, one- and three-month or comparable
+quarterly changes, acceleration, derivative state, source type, and missing
+inputs. Structured events are filtered by their information-availability date
+and decay by a governed half-life. Narrative events and the entire monitor have
+`allocation_authority = 0`.
+
+Optional point-in-time inputs can be supplied to the CLI:
+
+```bash
+poetry run trade-bot run-cycle-tracker \
+  --capital-cycle-fundamentals fundamentals.csv \
+  --capital-cycle-events events.csv
+```
+
+Fundamentals may be wide quarterly rows or long rows containing
+`available_date`, `period_end`, `entity`, `metric`, and `value`. The availability
+date, not the fiscal period end, governs historical eligibility. Event rows use
+`event_date`, `event_type`, `entity`, `direction`, `severity`, `confidence`,
+`source_quality`, `cycle_family`, and `decay_half_life_days`. Missing direct
+datasets remain visibly missing; they are never imputed from a bearish story.
+
+The initial monitor is instrumentation, not a validated forecasting model. Its
+next research gate is historical reconstruction across telecom/IT, housing and
+financial leverage, shale/energy, mining, and speculative-growth analogues. Any
+future use in Cycle Tracker probabilities requires nested prior-only
+walk-forward evaluation, leave-crisis-out tests, ablation against existing
+trend/credit/volatility/breadth signals, economic-utility tests, and prospective
+shadow evidence.
+
 ## Path-Aware State Model
 
 The tracker produces two related reads:
@@ -119,6 +172,12 @@ It writes:
 | `reports/cycle_tracker/cycle_path_validation_metrics.csv` | Prior-only forward metrics by decoded path phase, horizon, and ticker. This is the default evidence source for the winner frontier. |
 | `reports/cycle_tracker/cycle_path_reliability.csv` | Path-phase audit. At 0M, this is same-date agreement between decoded path phase and raw evidence phase. At forward horizons, it asks whether the next horizon matched that path phase's expected behavior. |
 | `reports/cycle_tracker/cycle_crisis_playback.csv` | Historical playback through named crisis windows, split into lead-up, unwind, and recovery stages. |
+| `reports/cycle_tracker/capital_cycle_summary.csv` | Vulnerability, rollover, coverage, sequential state, and zero-authority implication. |
+| `reports/cycle_tracker/capital_cycle_families.csv` | Family-level levels, derivatives, source status, and interpretation. |
+| `reports/cycle_tracker/capital_cycle_signals.csv` | Point-in-time source and signal audit. |
+| `reports/cycle_tracker/capital_cycle_events.csv` | Governed event ledger with age, decay weight, and decayed contribution. |
+| `reports/cycle_tracker/capital_cycle_missing_confirmations.csv` | Missing and observable confirmation checklist. |
+| `reports/cycle_tracker/capital_cycle_lead_times.csv` | Conceptual lead-time hypotheses, explicitly not fitted predictions. |
 | `reports/cycle_tracker/summary.md` | Plain-language summary. |
 
 It also persists run history and metrics in DuckDB tables:

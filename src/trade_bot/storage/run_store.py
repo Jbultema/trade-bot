@@ -28,6 +28,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_RUN_STORE_ARTIFACT_DIR,
     DEFAULT_RUN_STORE_DB_PATH,
     DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_ALL_CAPTURE_DAYS,
     DEFAULT_SNAPSHOT_RETENTION_KEEP_LATEST,
     DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
     DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
@@ -89,6 +90,7 @@ class SnapshotManifest:
     strategy_count: int
     error_message: str = ""
     provenance_json: str = "{}"
+    stored_at_utc: str = ""
 
 
 @dataclass(frozen=True)
@@ -142,11 +144,15 @@ class RunStore:
         prune_keep_recent_market_days: int | None = (
             DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS
         ),
+        prune_keep_all_capture_days: int = (
+            DEFAULT_SNAPSHOT_RETENTION_KEEP_ALL_CAPTURE_DAYS
+        ),
         prune_keep_weekly_older: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
         prune_weekly_frequency: str = DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
     ) -> SnapshotManifest:
         fingerprint = build_snapshot_fingerprint(config_path, events_path, macro_path, news_path)
-        created_at_utc = created_at_utc or utc_now_iso()
+        stored_at_utc = utc_now_iso()
+        created_at_utc = created_at_utc or stored_at_utc
         run_id = _new_run_id(created_at_utc, fingerprint)
         artifact_path = self.artifact_dir / f"{run_id}.pkl"
         with artifact_path.open("wb") as handle:
@@ -187,6 +193,7 @@ class RunStore:
             macro_columns=int(run.macro_data.shape[1]),
             strategy_count=int(len(run.results)),
             provenance_json=provenance_json,
+            stored_at_utc=stored_at_utc,
         )
         self._upsert_manifest(manifest)
         if auto_prune:
@@ -194,6 +201,7 @@ class RunStore:
                 keep_latest=prune_keep_latest,
                 keep_per_market_date=prune_keep_per_market_date,
                 keep_recent_market_days=prune_keep_recent_market_days,
+                keep_all_capture_days=prune_keep_all_capture_days,
                 keep_weekly_older=prune_keep_weekly_older,
                 weekly_frequency=prune_weekly_frequency,
                 apply=True,
@@ -263,16 +271,32 @@ class RunStore:
     def list_snapshots(self, *, limit: int = 20) -> pd.DataFrame:
         connection = self._connect()
         try:
-            return connection.execute(
-                """
+            columns = {
+                str(row[0])
+                for row in connection.execute(
+                    """
+                    SELECT column_name
+                    FROM information_schema.columns
+                    WHERE table_name = 'run_snapshots'
+                    """
+                ).fetchall()
+            }
+            storage_order = (
+                "stored_at_utc DESC, " if "stored_at_utc" in columns else ""
+            )
+            frame = connection.execute(
+                f"""
                 SELECT *
                 FROM run_snapshots
                 WHERE status = 'completed'
-                ORDER BY market_date DESC, created_at_utc DESC, run_id DESC
+                ORDER BY market_date DESC, {storage_order}created_at_utc DESC, run_id DESC
                 LIMIT ?
-                """,
+                """,  # noqa: S608 - ordering fragment is selected from a fixed internal string
                 [limit],
             ).fetchdf()
+            if "stored_at_utc" not in frame:
+                frame["stored_at_utc"] = frame.get("created_at_utc", "")
+            return frame
         finally:
             connection.close()
 
@@ -282,8 +306,10 @@ class RunStore:
         keep_latest: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_LATEST,
         keep_per_market_date: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
         keep_recent_market_days: int | None = DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
+        keep_all_capture_days: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_ALL_CAPTURE_DAYS,
         keep_weekly_older: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
         weekly_frequency: str = DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
+        now_utc: str | None = None,
         apply: bool = False,
     ) -> pd.DataFrame:
         if keep_latest < 0:
@@ -295,6 +321,9 @@ class RunStore:
         if keep_recent_market_days is not None and keep_recent_market_days < 0:
             msg = "keep_recent_market_days must be non-negative"
             raise ValueError(msg)
+        if keep_all_capture_days < 0:
+            msg = "keep_all_capture_days must be non-negative"
+            raise ValueError(msg)
         if keep_weekly_older < 0:
             msg = "keep_weekly_older must be non-negative"
             raise ValueError(msg)
@@ -305,6 +334,23 @@ class RunStore:
 
         snapshots = snapshots.copy().reset_index(drop=True)
         snapshots["_rank_market_date"] = snapshots.groupby("market_date", sort=False).cumcount() + 1
+        stored_times = pd.to_datetime(
+            snapshots.get("stored_at_utc", snapshots["created_at_utc"]),
+            errors="coerce",
+            utc=True,
+        )
+        fallback_created_times = pd.to_datetime(
+            snapshots["created_at_utc"], errors="coerce", utc=True
+        )
+        stored_times = stored_times.fillna(fallback_created_times)
+        retention_now = (
+            pd.to_datetime(now_utc, utc=True)
+            if now_utc
+            else pd.Timestamp.now(tz="UTC")
+        )
+        fresh_capture_mask = stored_times >= (
+            retention_now - pd.Timedelta(days=keep_all_capture_days)
+        )
         # Keep-latest is market-date scoped so same-day save bursts do not preserve stale artifacts.
         latest_market_dates = set(
             snapshots.loc[snapshots["_rank_market_date"] == 1, "market_date"].head(keep_latest)
@@ -313,7 +359,11 @@ class RunStore:
             latest_market_dates
         )
         if keep_recent_market_days is None:
-            retention_mask = latest_mask | (snapshots["_rank_market_date"] <= keep_per_market_date)
+            retention_mask = (
+                fresh_capture_mask
+                | latest_mask
+                | (snapshots["_rank_market_date"] <= keep_per_market_date)
+            )
         else:
             market_dates = pd.to_datetime(snapshots["market_date"], errors="coerce")
             recent_dates = (
@@ -335,7 +385,9 @@ class RunStore:
                     snapshots.loc[older_mask].groupby(weekly_periods[older_mask]).cumcount() + 1
                 )
                 weekly_mask.loc[older_mask] = weekly_ranks <= keep_weekly_older
-            retention_mask = latest_mask | recent_market_date_mask | weekly_mask
+            retention_mask = (
+                fresh_capture_mask | latest_mask | recent_market_date_mask | weekly_mask
+            )
 
         candidates = snapshots[~retention_mask].copy()
         if candidates.empty:
@@ -900,6 +952,7 @@ class RunStore:
                 CREATE TABLE IF NOT EXISTS run_snapshots (
                     run_id VARCHAR PRIMARY KEY,
                     created_at_utc VARCHAR NOT NULL,
+                    stored_at_utc VARCHAR NOT NULL,
                     status VARCHAR NOT NULL,
                     artifact_path VARCHAR NOT NULL,
                     schema_version INTEGER NOT NULL,
@@ -936,6 +989,19 @@ class RunStore:
             )
             connection.execute(
                 """
+                ALTER TABLE run_snapshots
+                ADD COLUMN IF NOT EXISTS stored_at_utc VARCHAR DEFAULT ''
+                """
+            )
+            connection.execute(
+                """
+                UPDATE run_snapshots
+                SET stored_at_utc = created_at_utc
+                WHERE stored_at_utc IS NULL OR stored_at_utc = ''
+                """
+            )
+            connection.execute(
+                """
                 CREATE TABLE IF NOT EXISTS snapshot_jobs (
                     job_id VARCHAR PRIMARY KEY,
                     created_at_utc VARCHAR NOT NULL,
@@ -965,18 +1031,19 @@ class RunStore:
             connection.execute(
                 """
                 INSERT OR REPLACE INTO run_snapshots (
-                    run_id, created_at_utc, status, artifact_path, schema_version,
+                    run_id, created_at_utc, stored_at_utc, status, artifact_path, schema_version,
                     config_path, events_path, macro_path, news_path, config_hash,
                     events_hash, macro_hash, news_hash, combined_config_hash,
                     refresh_data, refresh_macro, refresh_news, market_date,
                     risk_status, recommended_action, risk_budget_multiplier,
                     price_rows, price_columns, macro_columns, strategy_count,
                     error_message, provenance_json
-                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
+                ) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)
                 """,
                 [
                     manifest.run_id,
                     manifest.created_at_utc,
+                    manifest.stored_at_utc or manifest.created_at_utc,
                     manifest.status,
                     manifest.artifact_path,
                     manifest.schema_version,
@@ -1146,6 +1213,7 @@ def _manifest_from_mapping(row: dict[str, Any]) -> SnapshotManifest:
         strategy_count=int(row["strategy_count"]),
         error_message=str(row.get("error_message", "")),
         provenance_json=str(row.get("provenance_json", "{}") or "{}"),
+        stored_at_utc=str(row.get("stored_at_utc", row["created_at_utc"])),
     )
 
 

@@ -1,0 +1,19 @@
+HTTP/2 200 
+date: Sun, 26 Jul 2026 18:28:24 GMT
+content-type: text/html; charset=utf-8
+access-control-allow-origin: *
+cache-control: public, max-age=14400
+content-security-policy-report-only: base-uri 'self';connect-src 'self' https: https://www.recaptcha.net https://challenges.cloudflare.com wss:;default-src 'self' https: wss: blob: data:;form-action 'self' https:;img-src 'self' https: http://iea.imgix.net https://iea.imgix.net data:;media-src 'self' https: data: http://iea.imgix.net https://iea.imgix.net;object-src 'none';script-src 'self' 'unsafe-eval' https://www.google.com https://www.googletagmanager.com https://www.youtube.com https://www.google-analytics.com https://www.recaptcha.net https://challenges.cloudflare.com https://snap.licdn.com https://www.gstatic.com https://stats.g.doubleclick.net https://p.adsymptotic.com https://px.ads.linkedin.com 'sha256-l/3fcn6MZG0SSVJq6fOLe49ZKIjbWdNzhreJz7KQ/1M=' 'sha256-+MedjqNIfWWYUGuHJ53XLEjzmGDCp9Om50MVUO/C/zo=' https://ieatest.blob.core.windows.net https://iea.blob.core.windows.net 'nonce-6UucOolMDtFAwTwPlbqEuc43paDZ3Deh';style-src 'self' https: 'unsafe-inline';worker-src https://ieatest.blob.core.windows.net https://iea.blob.core.windows.net;frame-ancestors 'self'
+laravel-responsecache: Sun, 26 Jul 2026 18:25:30 +0000
+referrer-policy: strict-origin-when-cross-origin
+strict-transport-security: max-age=31536000;
+vary: Accept-Encoding
+via: 0.0 Caddy
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-xss-protection: 1; mode=block
+last-modified: Sun, 26 Jul 2026 18:28:24 GMT
+cf-cache-status: EXPIRED
+server: cloudflare
+cf-ray: a21576c4eaf8088b-DEN
+

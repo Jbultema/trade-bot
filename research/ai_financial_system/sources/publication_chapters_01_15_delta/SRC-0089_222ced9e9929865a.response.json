@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 93524,
+  "content_sha256": "222ced9e9929865a0ac74fa4e178b629aa5af40621ad931250d235a5cd9e45e5",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1769628/000119312525216497/d17274dex101.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0089_222ced9e9929865a.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1769628/000119312525216497/d17274dex101.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-05-08",
+  "publisher": "CoreWeave Inc. and OpenAI OpCo LLC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0089_222ced9e9929865a.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:40.619917+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:40.553724+00:00",
+  "selected_response_headers": {
+    "content-length": "22304",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:40 GMT",
+    "last-modified": "Thu, 25 Sep 2025 13:01:02 GMT"
+  },
+  "source_id": "SRC-0089",
+  "status": "preserved_complete",
+  "title": "CoreWeave OpenAI bare-metal master services agreement",
+  "write_state": "new_version_written"
+}

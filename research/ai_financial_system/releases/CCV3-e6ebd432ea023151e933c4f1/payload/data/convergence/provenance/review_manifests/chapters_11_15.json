@@ -1,0 +1,161 @@
+{
+  "authority": {
+    "canonical_integration": "NOT_AUTHORIZED",
+    "chapter_rewrite": "NOT_AUTHORIZED",
+    "docx_replacement": "NOT_AUTHORIZED",
+    "metadata_acceptance": "ACCEPTED_BY_FRESH_UNINVOLVED_REVIEW",
+    "model_output_promotion": "BLOCK",
+    "publication": "NOT_AUTHORIZED"
+  },
+  "dedicated_validation": "PASS",
+  "files": [
+    {
+      "bytes": 19101,
+      "path": "accepted_artifact_rehash.csv",
+      "rows": 75,
+      "sha256": "3417927a1a48f98aa5fe03f4e408ae73de63c8efa1cc44ddf3b9048bb843bf45"
+    },
+    {
+      "bytes": 642580,
+      "path": "all_cell_occurrence_reperformance.csv",
+      "rows": 2279,
+      "sha256": "1ea4527d9ca33f9ff052691781d346ff9a02d3826c0204dd33176b8c8b406a7f"
+    },
+    {
+      "bytes": 4155,
+      "path": "clean_build_comparison.csv",
+      "rows": 23,
+      "sha256": "ad9e99e9699f349e5353840b25edb608ed5375b0a768418a944ba131e2508d35"
+    },
+    {
+      "bytes": 411,
+      "path": "foreign_key_audit.csv",
+      "rows": 9,
+      "sha256": "bd4ac28c006a0ed31965f3d0b72d10925765e4e9263d6cfeb0c7aace3054fbee"
+    },
+    {
+      "bytes": 381,
+      "lines": 14,
+      "path": "generic_validation_results.json",
+      "sha256": "5cef19a793bfa1c536cfdefb5f4c86ffac19823c449b160f4c895e77bf421021"
+    },
+    {
+      "bytes": 52155,
+      "path": "governing_input_rehash.csv",
+      "rows": 150,
+      "sha256": "b7921fc1e128350db070ae8eef008288df28d5ab03bfe40aa96c47239e9ff9a9"
+    },
+    {
+      "bytes": 2010,
+      "path": "known_omission_hold_audit.csv",
+      "rows": 8,
+      "sha256": "31db953d35a4b8f9e4bdbcdc206b368e48ce26477181981d79bc6f5c7cbba73f"
+    },
+    {
+      "bytes": 22635,
+      "lines": 755,
+      "path": "machine_results.json",
+      "sha256": "c02f2391a5ef4004b119c2fc170d3be2a5d6ec83bf73259e0e2dc6ec350a0a06"
+    },
+    {
+      "bytes": 1625,
+      "path": "manifest_rehash_audit.csv",
+      "rows": 6,
+      "sha256": "e038cf4ac65e1a22a82ae1f0dc4d9783a3a3c651048f377d1fdae3aa0fe5e91f"
+    },
+    {
+      "bytes": 62,
+      "path": "patch_list.csv",
+      "rows": 0,
+      "sha256": "e3d84ae58cb31487cb1910767eafabfee1e0f75ff81c9fe08bb7fca382f4dc01"
+    },
+    {
+      "bytes": 1255,
+      "path": "population_audit.csv",
+      "rows": 32,
+      "sha256": "3421262b6602deb60485ba71cc39e23463c660ecfebfca70f0bc3985c26ebf6a"
+    },
+    {
+      "bytes": 5798,
+      "path": "protected_input_no_write_audit.csv",
+      "rows": 26,
+      "sha256": "c5eb89241b45a0d949e2c265dd3316ad8042a2d4f7b77db99188e4bd9cae7ae9"
+    },
+    {
+      "bytes": 3823,
+      "lines": 73,
+      "path": "review_report.md",
+      "sha256": "df98e79d3ea4d954546fd45db18b02ffa48cde192df26847d382faf3e314009b"
+    },
+    {
+      "bytes": 186,
+      "lines": 9,
+      "path": "ruff_results.json",
+      "sha256": "7e7fbb7b6025c31f9758113b97dbe86199fa950ec43345f945d13d9e1c9c5150"
+    },
+    {
+      "bytes": 9753,
+      "path": "source_version_rehash_audit.csv",
+      "rows": 45,
+      "sha256": "c338a2f36632054a43be6c7478a5b5cac8e3b9cd1044388e465475491d032232"
+    },
+    {
+      "bytes": 2573,
+      "path": "v1_core_identity_audit.csv",
+      "rows": 14,
+      "sha256": "10a7162303f142ff329e0e0984ba86050e9ffcf3ece9bc43552ac9d469bc890f"
+    },
+    {
+      "bytes": 110824,
+      "lines": 2791,
+      "path": "verify_metadata_rebase_v2.py",
+      "sha256": "7ac941fd130cb5701f65cf097154936a34e01ded2ea2316e00c0f2771b4f8ca6"
+    }
+  ],
+  "generic_validation": "PASS",
+  "lane": "lane_1_verify_chapters_11_15_metadata_rebase_v2",
+  "packet_type": "chapters_11_15_metadata_rebase_v2_fresh_uninvolved_acceptance_review",
+  "populations": {
+    "acceptance_boundary_bindings": 5,
+    "accepted_author_files": 75,
+    "accepted_columns": 1147,
+    "accepted_csv_files": 70,
+    "accepted_csv_rows": 1159,
+    "accepted_markdown_files": 5,
+    "accepted_scalar_fields": 19422,
+    "author_manifest_entries": 33,
+    "canonical_identity_references": 2095,
+    "canonical_manifest_inputs": 58,
+    "canonical_registry_bindings": 24,
+    "claim_occurrences": 925,
+    "claim_source_locator_relationships": 1501,
+    "clean_build_files": 23,
+    "explicit_non_support_holds": 8,
+    "governed_hold_fields": 4384,
+    "governing_inputs": 150,
+    "locator_occurrences": 556,
+    "matched_source_relationships": 908,
+    "pairing_ambiguities": 110,
+    "projected_occurrence_dispositions": 2236,
+    "protected_input_trees": 26,
+    "relationship_source_version_references": 1247,
+    "semantic_locator_holds": 1501,
+    "semantic_reference_occurrences": 2279,
+    "semantic_source_rows": 1125,
+    "source_mapping_occurrence_dispositions": 35,
+    "source_occurrences": 798,
+    "substantive_limit_controls": 11,
+    "typed_junction_fields": 15038,
+    "unique_source_versions_referenced": 45,
+    "unmatched_source_version_holds": 593
+  },
+  "residual_patches": 0,
+  "review_packet_generic_validation": "PASS",
+  "reviewed_manifest_sha256": "4bb7953cd5d0a4c6463cfb28dc5393b54b73843f8ae130ed572b1934f8115fe6",
+  "reviewed_packet": "lane_4_chapters_11_15_metadata_rebase_v2",
+  "ruff": "PASS",
+  "self_hash_policy": "lane_manifest.json and review_generic_validation_results.json are excluded from file entries",
+  "status_date": "2026-07-26",
+  "two_clean_builds": "PASS",
+  "verdict": "ACCEPT_CHAPTERS_11_15_METADATA_REBASE_V2_WITH_RETAINED_HOLDS"
+}

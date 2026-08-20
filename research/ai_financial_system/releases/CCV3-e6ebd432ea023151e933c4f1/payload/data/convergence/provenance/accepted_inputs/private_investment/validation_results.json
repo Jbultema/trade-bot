@@ -1,0 +1,41 @@
+{
+  "arithmetic_checks_passed": 19,
+  "author_canonical_writes": [],
+  "author_output_only": "research/ai_financial_system/staging/lane_2_private_investment_candidate_v2/",
+  "candidate_manifest_sha256": "efd9feb57f15e059bce85323e6dfd4c0214fd63953deb2eddb9f7e7e10152958",
+  "canonical_governance_populations_loaded": {
+    "candidate_claims": 5,
+    "chapter_handoffs": 11,
+    "evidence_links": 8,
+    "unknowns": 11
+  },
+  "canonical_integration_readiness": "NOT_AUTHORIZED_PENDING_FRESH_REVIEW",
+  "checks_failed": 0,
+  "checks_passed": 20,
+  "checks_total": 20,
+  "clean_builds_compared": 2,
+  "deterministic_files_compared": 21,
+  "economic_tables_loaded": 8,
+  "external_foreign_keys": 11,
+  "intrinsic_economic_reconstruction": "PASS",
+  "negative_fk_tests_passed": 6,
+  "population_checks_passed": 10,
+  "preservation_records_passed": 13,
+  "remaining_analytical_holds": [
+    "S&P 500 aggregate reproduction",
+    "exact Microsoft component and tax allocation",
+    "governed top-20 population reconstruction",
+    "prospective Meta/Tesla and realization monitoring",
+    "unnamed investee allocation at Alphabet and NVIDIA and residual Amazon attribution"
+  ],
+  "repairs_passed": 6,
+  "repairs_total": 6,
+  "source_preservation_atomic_rebase_readiness": "READY_PENDING_FRESH_REVIEW",
+  "status": "PASS",
+  "status_date": "2026-07-26",
+  "transformation_lineage_failures": 0,
+  "transformation_rows_checked": 500,
+  "typed_candidate_completeness": "PASS_AUTHOR_VALIDATION",
+  "typed_field_failures": 0,
+  "typed_fields_checked": 1473
+}

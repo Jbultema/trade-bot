@@ -1,0 +1,129 @@
+{
+  "boundary": "author validation only; fresh uninvolved acceptance and publication remain unauthorized",
+  "checks": {
+    "CH10-V2-P001.exact_statement_to_locator_replay": {
+      "detail": "composite lines 1-5 and 73-76; exact frozen excerpt contains 200-billion title and included 20-billion facility statement",
+      "passed": true
+    },
+    "CH10-V2-P001.unrelated_v2_artifacts_byte_frozen": {
+      "detail": "frozen_files=200 mismatches=[] diff_rows=214",
+      "passed": true
+    },
+    "P001.append_only_failures_and_cited_urls": {
+      "detail": "retained_failure_attempts=13",
+      "passed": true
+    },
+    "P001.normalized_source_versions": {
+      "detail": "attempts=37; selected=27; preserved=24; held=3",
+      "passed": true
+    },
+    "P002.all_relationships_freshly_reviewed": {
+      "detail": "verdicts={'supported': 36, 'held': 3, 'narrowed': 4}",
+      "passed": true
+    },
+    "P003.field_identity_and_values": {
+      "detail": "every original scalar identity, value, and blank state is retained",
+      "passed": true
+    },
+    "P003.field_specific_dispositions": {
+      "detail": "blank_scalars=585; critical_governed_holds=140; dispositions={'typed_junction_destination': 1592, 'governed_hold': 259, 'canonical_destination': 2337}",
+      "passed": true
+    },
+    "P003.lossless_typed_inventory": {
+      "detail": "rows=411; scalars=4188; source_files=23",
+      "passed": true
+    },
+    "P004.external_canonical_link_identity": {
+      "detail": "external claim source, locator, support type, and excerpt match canonical link",
+      "passed": true
+    },
+    "P004.packet_local_external_claim_closure": {
+      "detail": "CLM-050004 and SRC-0087 are included with typed junctions for PIC-100004 and DEP-CH10-0023",
+      "passed": true
+    },
+    "P005.recursive_entity_fk_closure": {
+      "detail": "entities=36; aliases=29; unresolved_holds=6",
+      "passed": true
+    },
+    "P006.atomic_child_coverage": {
+      "detail": "parents=26; atomic_children=79; child_evidence_edges=110",
+      "passed": true
+    },
+    "P007.claim_and_assertion_specific_falsifiers": {
+      "detail": "parent_falsifiers=26; child_falsifiers=79",
+      "passed": true
+    },
+    "P008.complete_nonadditive_timeline": {
+      "detail": "events=36; classes=['accounting_measurement', 'award_legal_state', 'cash_measurement', 'equity_closing_transition', 'equity_disclosure_transition', 'equity_legal_transition', 'equity_measurement', 'infrastructure_filing', 'infrastructure_order', 'sovereign_measurement', 'sovereign_policy_transition', 'tax_effective_transition', 'tax_legal_transition']",
+      "passed": true
+    },
+    "P009.separate_inherited_and_fresh_status": {
+      "detail": "canonical status is labeled inherited; author semantic status and publication hold are separate",
+      "passed": true
+    },
+    "P010.governing_input_provenance": {
+      "detail": "governing_inputs=89; all hashes and byte counts current",
+      "passed": true
+    },
+    "measurement.arithmetic_and_nonadditivity": {
+      "detail": "seven frozen arithmetic controls pass; all reconciliations remain nonadditive",
+      "passed": true
+    },
+    "preservation.canonical_fk_and_identity": {
+      "detail": "canonical identities unique and all 26 parents support-linked",
+      "passed": true
+    },
+    "preservation.exact_canonical_database_rows": {
+      "detail": "26 parent claims, 43 evidence links, and 27 sources match canonical rows",
+      "passed": true
+    },
+    "preservation.exact_v1_projections": {
+      "detail": "counts={'proposed_atomic_claims.csv': 26, 'proposed_evidence_links.csv': 43, 'proposed_sources.csv': 27, 'proposed_unknowns.csv': 15, 'proposed_handoffs.csv': 3, 'proposed_confidence_history.csv': 26, 'proposed_economic_importance.csv': 26, 'public_capital_awards.csv': 10, 'public_tax_incentives.csv': 5, 'public_equity_positions.csv': 4, 'public_infrastructure_cost_allocation.csv': 4, 'sovereign_capital_cases.csv': 6, 'public_capital_measurement_reconciliations.csv': 10, 'risk_pathways.csv': 5, 'arithmetic_nonadditivity_controls.csv': 7, 'contradiction_log.csv': 10, 'dependency_map.csv': 29}; exact_byte_files=17",
+      "passed": true
+    },
+    "protected.canonical_database_hash": {
+      "detail": "expected=38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+      "passed": true
+    },
+    "protected.database_foreign_keys": {
+      "detail": "PRAGMA foreign_key_check",
+      "passed": true
+    },
+    "protected.database_integrity": {
+      "detail": "PRAGMA integrity_check",
+      "passed": true
+    },
+    "protected.review_manifest_hash": {
+      "detail": "expected=04e96776fee3576bc9de2144e53fe095946bc2ee2b2b0b1dea7da97cb6874f49",
+      "passed": true
+    },
+    "protected.v1_manifest_hash": {
+      "detail": "expected=0b387ceaee5ed81706b5400f3ec391950e6af99c9b36e6208f78b6dbcee347f6",
+      "passed": true
+    },
+    "protected.v2_author_manifest_hash": {
+      "detail": "expected=ab0108513e9ceb9d9fa6e532133405cb4f8b2fcad96b212b44209c28347207f0",
+      "passed": true
+    },
+    "protected.v2_review_manifest_hash": {
+      "detail": "expected=d5d9bc7ae7cf28da974699adff6ed7297b627b868b8440f16af4cae02951c890",
+      "passed": true
+    }
+  },
+  "failures": [],
+  "patch_status": {
+    "CH10-P001": "PASS",
+    "CH10-P002": "PASS",
+    "CH10-P003": "PASS",
+    "CH10-P004": "PASS",
+    "CH10-P005": "PASS",
+    "CH10-P006": "PASS",
+    "CH10-P007": "PASS",
+    "CH10-P008": "PASS",
+    "CH10-P009": "PASS",
+    "CH10-P010": "PASS",
+    "CH10-V2-P001": "PASS"
+  },
+  "status": "PASS",
+  "validator": "chapter_10_rebuilt_v3_dedicated_acceptance_validator"
+}

@@ -1,0 +1,14 @@
+{
+  "checks": [
+    "manifest paths, hashes, row counts, and line counts",
+    "CSV shape and provisional-ID uniqueness",
+    "canonical source-ID and URL consistency",
+    "staged source-claim referential integrity"
+  ],
+  "csv_rows_checked": 718,
+  "errors": [],
+  "files_checked": 119,
+  "lane": "lane_3_chapter_18_source_preservation_corrected",
+  "passed": true,
+  "warnings": []
+}

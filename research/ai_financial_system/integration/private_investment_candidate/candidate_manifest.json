@@ -1,0 +1,79 @@
+{
+  "canonical_authorization": "AUTHORIZED_FOR_PRIMARY_AGENT_BOUNDED_REBASE_ONLY_WITH_RETAINED_HOLDS",
+  "files": {
+    "candidate_claims.csv": {
+      "rows": 5,
+      "sha256": "f3692bdbde9057483b8fe2826532b2aeced53a84ce2110c6235479d01c2ae91d"
+    },
+    "candidate_evidence_links.csv": {
+      "rows": 8,
+      "sha256": "e7119845dd242c71f8b10193f036bb9b9f40914902ee9dd077e05e3924379b8a"
+    },
+    "candidate_handoffs.csv": {
+      "rows": 11,
+      "sha256": "f467cdf61320974d762121d1b86f93c6d08d09d148742fa919deea71953b4b44"
+    },
+    "candidate_schema.sql": {
+      "rows": null,
+      "sha256": "e8d339b8cc6049cddbf80022befb18042fdb1a9cfc65897fe3286b5b253acc34"
+    },
+    "candidate_unknowns.csv": {
+      "rows": 11,
+      "sha256": "24440409b4f8e1923e5022272774f6f8717c15dffc8884fc8bafc3889ec24e48"
+    },
+    "private_investment_accounting_methods.csv": {
+      "rows": 11,
+      "sha256": "f64de13288a4877716b93d948d364520ef8fe4bcfcb4c670eed896335598a66d"
+    },
+    "private_investment_bridge_components.csv": {
+      "rows": 5,
+      "sha256": "d4a4b4958aaefcb57a85b10ff16e069782f172202c9ed35c9333633a414d4097"
+    },
+    "private_investment_carrying_value_rollforwards.csv": {
+      "rows": 5,
+      "sha256": "82f32251b0adbc9ab815381d47a4fedbebb3da25f22fe3a8bbd8fa27ba3a0d86"
+    },
+    "private_investment_earnings.csv": {
+      "rows": 8,
+      "sha256": "e8d435f6f2d4d5545a72f387a488ef8fa33ff77b4e39b5bdb27c99bbe99d1559"
+    },
+    "private_investment_earnings_bridges.csv": {
+      "rows": 4,
+      "sha256": "068089f2531a5895ebb91e7802668937868a2bec25b3788fe0ed7e87bb398ef7"
+    },
+    "private_investment_earnings_components.csv": {
+      "rows": 2,
+      "sha256": "ebada44efed9ef1d602817e1f8b0acab970e849a6f1d3fb6d146b2fa09365b55"
+    },
+    "private_investment_population_observations.csv": {
+      "rows": 10,
+      "sha256": "8634bef1a51c488915c55929ee87c8c9544c5d2e42305813df76c41dae6a82ef"
+    },
+    "private_investment_rollforward_components.csv": {
+      "rows": 16,
+      "sha256": "ce8342060cae9ada11b8ae89a791a1dc32d712714740396f361d2598cb55fe6d"
+    },
+    "transformation_audit.csv": {
+      "rows": 500,
+      "sha256": "e55f6a2a1200c26901e5d448c1f249c2513b59609379219fa06ce98dcfe630c8"
+    }
+  },
+  "generated_from_author_manifest_sha256": "609108aca41f6d717cddce064d8130bebce592e7cfd559ceb157d415e76d258b",
+  "generated_from_review_manifest_sha256": "8e48b9470b2ed1ea7e9315027b5d17fa3cf38e83724a16ca40970d801a98ed48",
+  "limits": [
+    "This is a typed candidate rebase, not canonical data.",
+    "Final publication requires archived and content-hashed primary sources.",
+    "Top-20, S&P-wide, frequency, typicality and complete investee allocation remain blocked.",
+    "Candidate claims and handoffs require atomic merge with the final Chapters 16-19 state."
+  ],
+  "retained_holds": [
+    "all eight primary-document snapshots and content hashes",
+    "governed top-20 population reconstruction",
+    "S&P 500 aggregate reproduction",
+    "unnamed investee allocation at Alphabet and NVIDIA and residual Amazon attribution",
+    "exact Microsoft component and tax allocation",
+    "prospective Meta/Tesla and realization monitoring"
+  ],
+  "review_verdict": "ACCEPT_WITH_EXPLICIT_EXTERNAL_HOLDS",
+  "status": "BOUNDED_INTEGRATION_CANDIDATE_NOT_CANONICAL"
+}

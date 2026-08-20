@@ -1,0 +1,2707 @@
+[[PDF_PAGE_0001]]
+ANNUAL PERFORMANCE REPORT
+FOR FISCAL YEAR 2001
+FEDERAL ENERGY REGULATORY COMMISSION
+MARCH 2002
+Pat Wood, III
+Chairman
+
+[[PDF_PAGE_0002]]
+i
+CONTENTS
+Introduction................................................ 1
+The Commission and Its Programs............................. 1
+The Commission ....................................... 1
+Commission Programs in FY 2001.......................... 2
+Performance Measurement in FY 2001.......................... 3
+Western Energy Markets: June 2000 Through June 2001......... 5
+A New Direction ............................................ 7
+New Strategic Plan ..................................... 8
+New Business Plan...................................... 9
+New Performance Measures ............................. 10
+Going Forward ....................................... 12
+Appendices to This Report................................... 13
+Appendix A: FY 2001 Performance Measurements Results........ 14
+Authorizing and Monitoring Energy Projects.................. 15
+Regulating Energy Markets............................... 20
+Commission Administration.............................. 24
+Appendix B: Strategic Plan 2001 – 2005 ........................ 28
+Appendix C: Comparative Performance Measurement Data....... 31
+
+[[PDF_PAGE_0003]]
+1
+INTRODUCTION
+The most important development in FY 2001 was the unprecedented increase of
+electric power and natural gas prices in the Western United States from June 2000
+through June 2001. In response to that unanticipated crisis, we are reviewing
+fundamental aspects of the way we work. The review is leading to:
+C A New Strategic Plan. The Commission approved the new Strategic Plan
+on September 26, 2001. It focuses our efforts on four main challenges and
+will serve as the basis for future budgets and performance reporting efforts.
+C A Business Plan Process. We are developing our first ever Business Plan.
+It will detail all aspects of the Commission’s work and integrate this effort with
+the Strategic Plan. It will include resource levels, priorities and completion
+dates. To ensure the Business Plan’s relevance in our rapidly changing
+environment, we will update it every quarter.
+C Better Performance Measures . As part of connecting the Business Plan
+and the Strategic Plan, we have begun planning new performance measures
+specifically related to the main challenges of the Strategic Plan.
+These changes are under way. When fully implemented, they will greatly improve
+our management capability. They will connect:
+C our use of resources to the activities we undertake;
+C the activities we undertake to the overall objectives we pursue; and
+C our efforts to achieve meaningful outcomes for energy customers throughout
+the United States.
+The result will be much greater accountability for the agency’s activities and
+results.
+THE COMMISSION AND ITS PROGRAMS
+The Commission
+The Department of Energy Organization Act created the Federal Energy
+Regulatory Commission (the Commission) on October 1, 1977 and abolished its
+predecessor, the Federal Power Commission (FPC). The President, with the
+advice and consent of the Senate, appoints the five members of the Commission
+to five-year staggered terms. No more than three members may belong to the
+same political party. The President designates one member to serve as Chairman
+
+[[PDF_PAGE_0004]]
+Federal Energy Regulatory Commission
+2
+and administrative head of the Commission. Commissioners have an equal vote
+on regulatory matters. The Commission generally meets twice a month to transact
+business. Meetings are open to the public under the provisions of the
+Government in the Sunshine Act.
+We collect the full cost of our operations from annual charges and fees authorized
+by the Federal Power Act (FPA), the Omnibus Budget Reconciliation Act of
+1986, and other laws. Congress annually adopts a budget appropriation
+authorizing the Commission to use funds from the Treasury to meet operating
+expenses. We return to the Treasury all revenue from annual charges and fees;
+therefore, there is no direct taxpayer funding.
+Commission Programs in FY 2001
+Beginning in FY 2000, we structured our work into three overall programs.
+Our Energy Markets Program oversees rates, terms and conditions for:
+C transportation and sale of natural gas in interstate commerce;
+C transmission and wholesale sales of interstate electric power; and
+C transportation of petroleum through pipelines.
+Our Energy Projects Program oversees:
+C certification of new natural gas transportation facilities such as pipelines and
+liquefied natural gas (LNG) plants;
+C licensing, inspection and administration of non-federal hydropower projects,
+including oversight of related environmental matters; and
+C dam safety for non-federal hydropower projects.
+Our Management Program is designed to improve the overall effectiveness and
+efficiency of our operations, focusing on activities in strategic management, human
+resources management, financial management, procurement, information
+technology, and external communications.
+Our internal control program includes internal reviews conducted by each office.
+The Financial Managers Fiscal Integrity Act (FMFIA) requires that agencies
+identify material internal control problems and report them to management.
+External auditors, such as the Department of Energy’s Office of the Inspector
+General and the General Accounting Office, conduct audits annually. This year’s
+reviews indicate a reasonable assurance that the Commission’s management
+controls were working effectively, that applicable laws were being followed, and
+that our resources were safeguarded against waste, loss, or unauthorized use.
+Internal Controls
+
+[[PDF_PAGE_0005]]
+FY 2001 Annual Performance Report
+3
+PERFORMANCE MEASUREMENT IN FY 2001
+For FY 2001, we adopted a two-track approach to measuring our performance.
+One track consisted of fairly traditional performance measures and targets. These
+focused mostly on our outputs, especially how quickly we processed many parts
+of our case workload. We met or beat most of these performance targets during
+FY 2001 – see Appendix A for details. For example, we processed certificates
+to build new gas pipeline facilities faster than our targeted time frames in all
+categories, which improved the stability of gas prices and availability:
+Measure Targets Results
+Percentage of cases
+completed in specified time
+82% of cases completed
+within specified time frames:
+< cases that involve no
+precedential issues and are
+unprotested, 159 days
+< cases that involve no
+precedential issues and are
+protested, 304 days
+< cases of first impression or
+containing larger policy
+Number of days to complete
+82% of the cases:
+< 136 days
+< 200 days
+< 277 days
+Approving new pipeline facilities expeditiously is particularly important, given the
+need to respond quickly to rapidly changing market conditions.
+The second performance evaluation track consisted of assessing outcomes – how
+well electric power and natural gas markets performed during the year. In
+FY 1999, we produced a State of the Markets report that showed how we might
+use a suite of indicators to identify market successes and failures. In FY 2000, we
+produced regional Bulk Power Market reports to examine how markets were
+responding to the difficult developments in energy markets during that year. We
+intended for these documents to examine the outcomes of our actions –
+specifically, how well or badly competitive markets developed for natural gas and
+electric power around the country. We did not adopt specific performance targets
+because we believed the markets were so dynamic that any targets were likely to
+be outdated before they were measured.
+In the future, we will need to have more clearly defined outcome measures. We
+have begun to plan our approach, but development of clearly defined outcome
+measures will take time. However, one can infer from our new Strategic Plan the
+kinds of outcome measures that we might adopt. For example, one of the four
+major challenges we face is to foster nationwide competitive energy markets as a
+substitute for traditional regulation. Today such markets exist in only a few parts
+of the country and appear to be working well in even fewer places:
+
+[[PDF_PAGE_0006]]
+Federal Energy Regulatory Commission
+4
+Active Independent System Operators and Regional Transmission Or ganizations
+Map by FERC/OMTR/Division of Market Development, January 22, 200 2
+A reasonable approach to measuring our success at fostering markets might be to
+measure how quickly the rest of the map is filled in versus our goals.
+During FY 2001, many gas and electric markets performed well. However, in the
+West, electric power markets experienced sustained, extremely high prices, first
+in California and then in the rest of the West. Those very high prices affected
+other markets, including those for natural gas, and began to undermine support for
+competitive electric and gas markets nationally.
+After focusing closely on what happened in the Western energy markets, we are
+retooling both our strategic direction and our internal accountability for
+performance. We must respond more rapidly to similar problems in the future –
+or prevent them altogether. And, to do that, we need to make better use of our
+resources.
+
+[[PDF_PAGE_0007]]
+FY 2001 Annual Performance Report
+5
+Western Energy Markets: June 2000 through June 2001
+California was among the first states to open its electric industry to competition,
+opening a restructured market in 1998. Until June 2000, California’s electric
+markets appeared to work well. However, California’s flawed market rules failed
+to send generators signals to build new capacity, even while the state experienced
+rapid economic growth. The lack of new capacity made the California market
+vulnerable. In 2000, a series of other conditions exposed that vulnerability: a
+severe drought curtailed hydropower; demand-side response was virtually non-
+existent partly because of fixed retail rates; and a hot summer followed a cold
+winter.
+By June 2000, the balance between supply and demand tightened dramatically.
+Day-ahead prices reached $1,099 per megawatt hour (Mwh) on June 28, 2000,
+more than ten times higher than typical prices the year before. These were not the
+first price spikes that American electric markets had seen. But the California
+prices differed from previous spikes in that they remained high through the fall and
+winter.
+Prices of key inputs also rose through the summer. California natural gas prices
+rose from about $2 to about $6 per million British thermal units (MMBtu) by
+August, leading many customers to delay injections of gas into storage. Natural
+gas prices in Southern California peaked as high as $60 per MMBtu in early
+December 2000, exacerbated by low gas storage. Other costs also rose. Prices
+for nitrogen oxides emissions allowances rose from $6 to $40 per pound by the
+end of August 2000. By December 2000, high electric prices spread to trading
+hubs throughout the West. These prices also remained very high through the fall
+and winter.
+Early in 2001, Pacific Gas and Electric Company filed for bankruptcy protection
+and sellers stopped selling to Southern California Edison Company as well. The
+California Department of Water Resources became the principal power-buying
+agent for these systems.
+In late July 2000, we began a fact-finding investigation on the market problems in
+California and the West. This led to orders in November and December 2000
+that (among other things):
+• Required much greater use of long-term contracts and greatly reduced reliance
+on the spot market, which was near 100 percent in summer 2000.
+What Happened?
+Our Response
+
+[[PDF_PAGE_0008]]
+Federal Energy Regulatory Commission
+6
+C Established a breakpoint of $150 per Mwh electric power bid into the
+California Independent System Operator. Companies would receive more
+than $150 per Mwh only if they could justify a higher bid based on actual
+costs.
+C Provided for refunds for excessive prices after October 2, 2000.
+These measures provided customers with relief from the most extreme spot market
+prices. During the first few months of 2001, we refined the idea of price
+mitigation, setting the maximum just and reasonable charge at the cost of running
+the last unit that would have been dispatched had the market performed as it was
+set up in 1998. We ordered refunds for supplier overcharges for several months’
+worth of sales. We also removed a series of regulatory obstacles to expedite
+providing increased energy supplies to the West. This helped increase the supply
+of electricity and natural gas by the summer of 2001 and reduce the upward
+pressure on prices.
+In June 2001, we extended versions of price mitigation to cover all hours (not just
+times of reserve deficiency) and all of the Western market (including California)
+through September 2002. By doing this, we responded to the fact that
+extraordinarily high prices had become a problem for customers throughout the
+West.
+By June 2001, electric prices began to return to more normal levels throughout the
+West and have remained there through November 2001. Several factors led to
+this result: reduced demand, relatively mild weather, increased supplies, and our
+price mitigation.
+The lower prices of the last few months do not change the overall dimensions of
+the Western electric problem: a year’s worth of very high prices, billions of dollars
+of additional costs to customers and the State of California, bankruptcy and near-
+bankruptcy for well-established traditional electric utilities, and growing unease
+about the whole course of developing competitive electric markets. It is
+abundantly clear that market crises can erupt very quickly, especially in electric
+power. Left untreated or un-prevented, they can do enormous damage. The most
+important lesson is this:
+Lower prices after June 2001 must not mean
+a return to business as usual.
+The Commission must retool its operations comprehensively to address such
+situations in the future. Among the most important programmatic lessons are:
+What Did We Learn
+from the California
+Problems?
+
+[[PDF_PAGE_0009]]
+FY 2001 Annual Performance Report
+7
+Natural Gas and (Especially) Electric Markets Need to Have Excess
+Capacity. Both markets operate on a hair trigger when demand approaches the
+limits of supply. Price explosions can occur suddenly and spread to other markets.
+The California electric crisis spilled over into wider Western electric markets,
+Western natural gas markets, emissions trading markets, and finally financial
+markets. Scarcity conditions can also exacerbate market manipulation. Actions
+that would barely affect prices normally can lead to very high prices under such
+conditions.
+New Regulatory Approaches Are Essential. Even the most dedicated efforts
+within the traditional regulatory approach produced little action until December
+2000, six months after the crisis began. Lack of coordination among federal and
+state authorities can delay solutions to market problems.
+The Focus Must Be on Prevention of Serious Market Breakdowns. After-
+the-fact remedies, such as refunds, are necessary to discipline individual market
+participants and were a necessary response to the California situation. For overall
+market disruptions, however, repeated use of such remedies would threaten the
+long-term viability of electric markets. They could introduce uncertainty about
+effective prices for all transactions that might become subject to refund. That in
+turn would undermine many other aspects of the market, including almost all risk
+management strategies.
+A NEW DIRECTION
+To maintain our mission and remain accountable to the American people, we have
+a duty to change the way we do business in light of the Western energy crisis. The
+changes will take three main forms:
+C A new Strategic Plan that lays out new priorities and policies, reflecting a fuller
+understanding of all the conditions needed to make competitive energy
+markets a success. .
+C A first-ever Business Plan that will encourage much more conscious allocation
+of resources to the highest priority issues facing us.
+C New performance measures, designed to build accountability into all our
+activities.
+We intend these three changes not as three separate initiatives but as a single new
+way of doing business. Using them, we will be able to say what we are trying to
+accomplish, to structure our work to achieve our goals, to move resources flexibly
+when needed and to know how well we are succeeding.
+
+[[PDF_PAGE_0010]]
+Federal Energy Regulatory Commission
+8
+New Strategic Plan
+On September 26, 2001, the Commission approved a new Strategic Plan,
+Making Markets Work (see Appendix B). It lays out four challenges facing the
+agency.
+Challenge 1 is to promote a secure, high-quality, environmentally-
+responsible energy infrastructure through consistent policies . This will
+provide the infrastructure needed to support energy markets in the future, including
+sufficient supplies of energy to give room for competition and enough transmission
+and pipeline capacity to move energy around the country. Key implications of our
+strategies to meet this challenge include the following:
+C We must recognize and help solve infrastructure problems ahead of time. One
+of our key strategies will be to identify transmission and pipeline projects with
+high public interest benefits and facilitate their speedy completion. Although
+we have no direct authority over siting electric transmission lines, we will do
+what we must to promote transmission construction. That is, we must find a
+way to work with others, especially States, to ensure that needed projects can
+be built. A crucial part of this effort will be to ensure that regional transmission
+organizations (RTOs) have a well-developed and recognized transmission
+planning function.
+C We must look at infrastructure needs as a whole, including all associated
+economic and environmental aspects.
+Challenge 2 is to foster nationwide competitive energy markets as a
+substitute for traditional regulation. This challenge will require the growth of
+many new institutions to make electric markets work. The most important of these
+will be RTOs with clear responsibilities, independence and scope to structure
+electric power markets given the underlying constraints of the transmission system.
+In addition, we need to encourage the growth of industry groups to standardize
+business practice and reliability standards, promote the use of demand-side
+participation in energy markets and establish regional transmission planning.
+The implications of our strategies to meet this challenge include the following:
+C Strong coordination with States will be essential, since many issues touch on
+both Federal and State jurisdictional issues.
+C The effort to establish RTOs will focus at least as much on precisely what the
+RTOs must do to make markets work as on simply establishing the institutions.
+Make Markets Feasible
+Make Markets Work
+
+[[PDF_PAGE_0011]]
+FY 2001 Annual Performance Report
+9
+This implies standardizing market designs as much as reasonable and
+establishing standards for market monitoring.
+Challenge 3 is to protect customers and industry participants through
+vigilant and fair oversight of the transitioning energy markets. We need a
+much stronger ability to recognize and respond to problems in the markets. At the
+systemic level, we need to recognize problems when – or before – they develop
+and craft solutions quickly. This is especially important given the extremely
+dynamic nature of emerging power markets, but also applies to natural gas
+markets. We must also be able to police individual behavior in markets much
+more effectively than in the past.
+The implications of our strategies to meet this challenge include the following:
+C We will need an improved enforcement capability.
+C We will need to work as hard at preventing problems as at responding to them
+once they develop.
+C We will need to understand how markets work much better than energy
+regulators have traditionally done.
+RTOs themselves will develop the capability to monitor markets to oversee
+activities within their operational areas. Our ability to coordinate with these
+emerging internal market monitors will be crucial to our success in the future. The
+RTO market monitors promise to be the best source of market information
+available within the RTOs.
+Challenge 4 is to efficiently administer the agency’s resources to
+accomplish the agency’s goals. The Commission will not be able to meet any
+of its programmatic challenges well without basic support. This will include
+recruiting and training the staff to perform new jobs, building first-rate, customer-
+friendly IT services, and strengthening our strategic management processes.
+Among our most important objectives will be to improve our communications. We
+must explain much more clearly to all stakeholders what we are trying to
+accomplish and listen to their ideas carefully. And we must build strong
+partnerships with others, especially with the States.
+New Business Plan
+We are now developing the first comprehensive Business Plan the agency has ever
+had. This Business Plan consists of all the activities we hope to undertake during
+the next year. We have grouped the activities under the challenges and objectives
+of the Strategic Plan. For each activity, we have specified:
+Make Sure Markets
+Work
+Operate Efficiently
+
+[[PDF_PAGE_0012]]
+Federal Energy Regulatory Commission
+10
+C A priority level between one and three;
+C Completion dates;
+C Which Offices will work on it;
+C How many FTEs will work on it from each Office; and
+C How many contract dollars we will use on it.
+The Business Plan looks forward one year and lists all activities that are needed
+over that time frame. We will update the Business Plan every quarter. The
+business planning process will greatly strengthen our management both after it is
+fully functioning and during development. Once the business planning process is
+fully developed, it will:
+C Give us an organized way of allocating resources. We will use it to formulate
+future budgets, making allowance for changes that we know will happen over
+the longer time frame represented in the budget.
+C Give us an organized way of setting priorities, so that we can shift resources
+from less to more important work as needed.
+C Connect our activities both to our objectives (because they are organized by
+objective) and to resource usage. This will greatly increase financial
+accountability.
+C Give us a set of output performance measures, since the Business Plan
+includes deadlines.
+During development, the business planning process will also help us in more
+immediate ways. It will:
+C Let us revise our list of activities so that they can meet the challenges and
+objectives laid out in the Strategic Plan. The current Business Plan is mostly
+a list of activities that we are currently doing. In some cases, those activities
+will need to change to meet the agency’s newly defined needs. In other cases,
+we will need to define new activities.
+C Let us better match our current resources to the work that needs to be done.
+We see business planning as a process rather than an event.
+New Performance Measures
+We recognize that accountability requires strong performance measures. We
+believe we need two types of performance measures:
+
+[[PDF_PAGE_0013]]
+FY 2001 Annual Performance Report
+11
+C Output measures . These specify targets for the specific work items we
+produce and when we produce them. We need these to tie activities to cost
+and to make clear to our own staff and the outside world what they can expect
+from our internal work processes.
+C Outcome measures. These specify results that we are working to create in
+the larger world. We need these to ensure that our activities are having the
+effects we intend them to have.
+For several years, we have been developing output measures. The Appendix
+reports on the measures that we had developed for FY 2001. For our FY 2003
+budget request, we established output measures to cover more of our workload.
+Examples include:
+C the percentage of pipelines complying with Order No. 637;
+C the number of markets-related cases completed within their statutory action
+dates; and
+C time targets for hydropower license cases.
+In almost all cases, our output measures provide target time frames to complete
+various kinds of work. The Business Plan process will supplement these target
+measures in at least three ways:
+C It will provide resource levels for activities so that we have targets not only for
+time but also for costs.
+C It will provide priorities, so that we can weight our performance by the
+importance of the work, at least implicitly.
+C It will provide specific deadlines for some of our work that could not be
+anticipated when the original targets were set.
+In the past, we recognized the need for outcome measures, but we did not set
+specific targets. Going forward, devising outcome measures and target
+performance levels will be difficult, but it will also be possible and necessary.
+Outcome targets are difficult to devise for two main reasons:
+C We do not have direct jurisdiction over many parts of the electricity and
+natural gas industry that must function well for our policies to succeed. In
+electric power, for example, we have no jurisdiction over the building of
+power plants, the construction of transmission lines or the development of
+Output Measures
+Outcome Measures
+
+[[PDF_PAGE_0014]]
+Federal Energy Regulatory Commission
+12
+most kinds of demand-side response programs. Yet all three must work well
+if we are to meet our strategic challenges.
+C Most obvious targets are inappropriate. Thus, it makes no sense for us to set
+a target level for electric power or natural gas prices – the whole point of
+competitive markets is to let market forces set prices. Similarly, it would
+almost certainly be counterproductive to set target levels for price volatility.
+Nonetheless, devising responsible outcome measures and targets is possible.
+The new Strategic Plan implicitly states several targets, including:
+C The nation currently has reasonably well-functioning wholesale markets only
+in the Northeast and Texas. The Strategic Plan states a challenge for the
+Commission to “foster nationwide competitive energy markets.” By doing so,
+the Strategic Plan implicitly sets a performance target: well-functioning
+wholesale energy markets across the whole country.
+C The Strategic Plan says that we wish to ensure sufficient supplies of energy to
+make competition possible and to facilitate speedy completion of transmission
+and pipeline projects with high public interest benefits. In both cases, it is a
+relatively small step from the statement of an objective or strategy and the
+statement of a performance target.
+Other performance targets are possible. Consider price volatility. There is no
+“right” level of volatility in electric and gas markets – indeed, one would expect
+pricing volatility for both commodities to be extremely high. However, one might
+develop a target that customers should have ways to hedge against that volatility
+so that it directly affects only those who choose to be exposed.
+Good outcome measures will be necessary. Our Strategic Plan lays out a
+leadership role for the Commission in establishing well-functioning energy markets
+in the future. We have committed ourselves to making markets work, even though
+many others must work with us to achieve the result. The most important question
+we can ask is whether our overall efforts are succeeding or not. If they are, the
+Nation can have confidence that today’s institutions are working as they need to.
+If our efforts are not succeeding, it suggests that larger changes may be necessary.
+Going Forward
+Our focus on changing the way we do business began in September 2001. So far
+we have developed a new sense of direction and embodied it in the Strategic Plan.
+We have begun the business planning process and have developed a full
+description of all our current activities. We are on the verge of finishing estimates
+
+[[PDF_PAGE_0015]]
+FY 2001 Annual Performance Report
+13
+of the resources needed to pursue those activities. In the process we have
+improved our output measures and developed a framework that promises to
+improve them further.
+The next step will be to reconcile the current Business Plan with the Strategic Plan.
+This will require a change in focus for our staff. They will need to begin to think
+in terms of the challenges, objectives and strategies that the Commission has
+endorsed, rather than in terms of the work currently done. That is, we will need
+to stop asking the question: “How can we fit our work into the Strategic Plan?”
+and start asking the question: “What do we need to do to meet the challenges the
+Strategic Plan lays out for us?”
+A key part of taking this step is to specify outcome performance measures and
+targets. By doing so, we can focus ourselves more concretely on what we are
+trying to accomplish, which will let us answer the question of what work we need
+to do. For this reason, we hope to use the next step of business planning to
+develop the outcome measures we need and review the output measures we have.
+APPENDICES TO THIS REPORT
+The balance of this report consists of three appendices:
+C Appendix A provides details of the results of our performance measures for
+FY 2001. It also includes other of our more significant accomplishments.
+C Appendix B contains the Commission’s new Strategic Plan.
+C Appendix C contains comparative performance measurement data for
+FY 1999 through FY 2003.
+
+[[PDF_PAGE_0016]]
+Federal Energy Regulatory Commission
+14
+APPENDIX A
+FY 2001 PERFORMANCE MEASUREMENTS RESULTS
+
+[[PDF_PAGE_0017]]
+FY 2001 Annual Performance Report
+15
+This appendix presents the detailed results of the Commission’s performance
+measurements for FY 2001. W e have included additional significant
+accomplishments when available.
+Authorizing and Monitoring Energy Projects
+Goals: To Balance Interests of Developer, Landowners, and
+Environment
+To Achieve Timely, Optimal Construction
+Measures Targets Results
+Percentage of cases
+completed in specified time
+82% of cases completed
+within specified time frames:
+1.Cases that involve no
+precedential issues and
+are unprotested, 159 days;
+2.Cases that involve no
+precedential issues and
+are protested, 304 days;
+and
+3.Cases of first impression
+or containing larger policy
+implications, 365 days
+Number of days to complete
+82% of the cases:
+< 136 days for Category 1;
+< 200 days for Category 2;
+and
+< 277 days for Category 3.
+Number of major onshore
+projects inspected at least
+every four weeks
+Inspect each major onshore
+project at least once every
+four weeks
+All six major onshore projects
+were inspected at least once
+every four weeks
+Comments:
+C We have beaten our case processing times for all case types. An alternative
+view can be derived from the percentage of cases completed within the
+targeted time frames: Category 1, 97.5 percent completed in 159 days or less;
+Category 2, 100 percent completed in 304 days or less; and Category 3, 94.4
+percent completed in 365 days or less.
+C We conducted 268 annual inspections to ensure compliance with
+environmental regulations and certificate conditions. We inspected all 57
+onshore construction projects more than 2 miles long at least once during
+construction. Six of the 57 projects involved more environmental issues and
+affected a significant population. Recognizing the potential impact of these
+major projects, we inspected them at least once every 4 weeks during
+construction, and at least once following completion.
+
+[[PDF_PAGE_0018]]
+Federal Energy Regulatory Commission
+16
+Other Accomplishments:
+Certification of Major Facilities Construction. In 2001, the Commission
+authorized the construction and operation of a significant amount of pipeline
+facilities to provide service to all regions of the country. The following table
+provides a summary of the major natural gas facilities authorized by the
+Commission in FY 2001:
+Type of Project Facilities / Added Capacity
+Cost
+($ million)
+New Pipeline 2449 miles; 804,592 horsepower;
+6.63 Bcfd capacity
+$6,644
+New Storage 19.1 billion cubic feet storage; 44,130
+horsepower; 500 MMcfd deliverability
+N/A
+Expanded Liquefied Natural
+Gas Facilities
+1.04 Bcfd deliverability $50.5
+Preliminary Determinations 305.9 miles; 89,950 horsepower;
+1.7 Bcfd capacity
+$742.8
+The following table presents other significant accomplishments related to natural
+gas infrastructure:
+Activity Results
+Continued efforts under the
+National Energy Policy to
+expedite environmentally-
+sound natural gas pipeline
+permitting and to improve the
+regulatory process governing
+approval of interstate pipeline
+projects
+< Expeditiously processed those certificate applications
+involving additional deliverability into western markets, while
+maintaining normal workload
+< Temporarily increased cost limitations on blanket certificates
+and prior notices for projects scheduled to be in service by
+April 30, 2002 within the Western Systems Coordinating
+Council
+Improved Information
+Availability and Outreach
+< Continued using the Landowner Notification Rule to allow
+parties to identify and resolve disputes before filing with the
+Commission, and identify significant new issues and/or
+alternatives
+< Initiated a series of Interstate Natural Gas Facility Planning
+Seminars. Developed and issued a draft Outreach Action
+Options in July 2001, based on the feedback from the four
+initial seminars. Reissued in September 2001 as a report
+titled, Ideas for Better Stakeholder Involvement in the
+Interstate Natural Gas Pipeline Planning Pre-Filing Process
+Responded to Renewed
+Interest in Alaskan Natural
+Gas
+< Submitted in January 2001 a report on the Alaskan Natural
+Gas Transportation Act of 1976 (ANGT A)
+< Participated actively in a task force, recommended by the
+NEP and led by the Department of Energy , established a staff
+level-working group (including Commission staff) to respond
+to the NEP tasking on Alaskan natural gas
+
+[[PDF_PAGE_0019]]
+FY 2001 Annual Performance Report
+17
+Goal: To Protect and Enhance Environmental and Public
+Benefits
+Measures Targets Results
+Percentage of licenses
+issued that contain adaptive
+management provisions
+5% increase over baseline 18% increase over baseline
+Percentage of filings
+containing some form of
+collaboration
+5% increase over baseline 33% increase over baseline
+License processing time
+when prefiling collaboration
+occurred compared to
+license processing time
+when prefiling collaboration
+did not occur
+10% less processing time 63% less processing time
+Other Accomplishments:
+We approved more than 800 licencee compliance plans and reports during
+FY 2001.
+Collaborative Process Results. The following tables provides a summary of
+our major collaborative efforts in FY 2001:
+Project Output/Location Action
+Rock Creek-Cresta 185 MW / California Prepared and issued an environmental
+assessment with alternative evaluations
+Mokelumne 215 MW / California Prepared and issued an environmental
+assessment with alternative evaluations
+North Umpqua 185 MW / Oregon Facilitated the settlement between Pacificorp
+and several federal and state resource
+agencies
+Menominee Basin A series of 10
+projects in Michigan
+and Wisconsin
+totaling 65 MW
+Issued licenses for 8 projects, a license
+amendment to re-regulate upstream flows for
+one project, and a nonpower license to retire
+and remove the tenth, an uneconomical
+project
+Indian Pond 76 MW / Maine Worked with FPL Energy and other parties to
+achieve a settlement, filed in July 2001.
+Increased Capacity. We took the following actions to increase hydropower
+capacity or generation:
+
+[[PDF_PAGE_0020]]
+Federal Energy Regulatory Commission
+18
+Action Results
+< Responded to a February Presidential
+directive to agencies to speed permit
+reviews for Western electric generation
+with a March 14, 2001, order describing the
+actions we would take
+< Presented ideas to licensees on how to
+increase generation
+Licensees are preparing license amendments
+to increase capacity or generation
+Processed a December 26, 2000 application
+from the Metropolitan Water District of
+Southern California proposing a 39-MW
+project
+Processed the application in a record 56
+days, and the project went into service on
+May 30, 2001, a year ahead of schedule
+Issued over 130 preliminary permits with a
+potential of nearly 4 GW of hydropower
+capacity
+Provided prospective developers a three-year
+opportunity to evaluate the proposed projects’
+feasibility and to complete the studies required
+to support a license application. If more than
+one license application is filed for the same
+project, we give priority to the applicant
+holding the preliminary permit
+Issued Special Documents. We also prepared and distributed the following
+documents:
+Document Purpose
+Guidelines for Preparing Environmental
+Assessments
+Provides information and examples to help
+applicants using the ALP to prepare
+environmental documents
+Hydroelectric Project Licensing Handbook
+and the Handbook for Filings Other Than
+Licenses and Exemptions
+Provides information for applicants on how to
+apply for licenses and other Commission
+approvals
+Filing a Hydropower Application with the
+Commission
+A web site providing instruction for applicants
+to prepare licenses and other documents,
+with links to our regulations
+Guidelines for Shoreline Management
+Planning at Hydropower Projects
+Discusses balancing economic and
+environmental shoreline resource values, and
+encourages collaboration.
+Goal: To Ensure the Safety of Hydropower Projects
+Measures Targets Results
+Percentage of high- and
+significant-hazard potential
+dams meeting all current
+structural safety standards
+90% of qualifying dams 94% of high- and significant-
+hazard potential dams met all
+current structural safety
+standards
+Percentage of dams requiring
+EAPs that have tested,
+evaluated plans
+99% of qualifying dams 99.9% of dams requiring
+EAPs had tested, evaluated
+plans
+(Continued on Next Page.)
+
+[[PDF_PAGE_0021]]
+FY 2001 Annual Performance Report
+Measures Targets Results
+19
+Percentage of dams with
+EAPs that have acceptance
+and certification from
+licensees and emergency
+response agencies
+90% of qualifying dams 100% of dams with EAPs
+had acceptance and
+certification from licensees
+and emergency response
+agencies
+Other Accomplishments:
+Activity Results
+Inspections, EAPs and
+Remediations
+Oversaw remediation completion at 12 dams. Conducted
+remediation oversight at 96 dams still ongoing at year end.
+Total cost of the remediation we oversaw was about $485
+million.
+Customized Dam Safety
+Response to Individual Issues
+Further developed state-of-the-art techniques to analyze
+specific highly visible situations, such as the Saluda, Santee
+Cooper, and T oledo Bend projects and the Diversion and
+Santeetlah dams. Made careful analyses and evaluations,
+developing creative and sound economic solutions related to
+safety at these dams.
+Seismicity < Continually apply new information to help ensure that dams
+in the Northwest will withstand earthquakes. Continued
+coordinating with licensees and consultants on several
+critical Southeastern projects (Saluda, Santee-Cooper , and
+Wateree) to complete remedial seismic designs
+< Provided rapid response to the February 2001 Seattle
+earthquake. Inspected the 28 dams within 40 miles of the
+epicenter within 3 days.
+Tainter Gate Design Review
+and Inspection
+Completed our physical inspection of all T ainter gates at high-
+and significant-hazard-potential dams. Refined our T ainter
+gate criteria and inspection frequency , following two
+Commission workshops on the subject
+Performance Monitoring Developed the framework for our new performance monitoring
+program, which we will initiate in FY 2002.
+Technical Workshops Developed and held “Independent Consultants Workshops” in
+Portland, Oregon and Washington, D.C., to promote
+communication on, and a common understanding of, our
+Independent Consultant Inspection Program. Planned and
+developed an international “Emergency Action Planning
+Workshop,” to be held in the Spring of 2002.
+Maximum Power Production
+in Response to Energy
+Shortages
+Increased emphasis on licensees performing adequate
+maintenance to avoid interruptions in electricity supply
+Assistance to Other Federal
+and State Agencies
+Provided dam safety inspection services to the Nuclear
+Regulatory Commission and the Department of Energy .
+Assisted the Director of the Federal Emergency Management
+Agency (FEMA) with the National Dam Safety Program and
+made substantial contributions to FEMA’s federal dam safety
+guidelines
+
+[[PDF_PAGE_0022]]
+Federal Energy Regulatory Commission
+20
+Regulating Energy Market s
+Goal: To Promote Competitive, Well-Functioning Energy Markets
+Indicators Measures Targets Results
+Competition C Number and size of capacity
+holders by system
+C Number and size of natural gas
+and electric secondary market
+participants
+C Number and size of pipeline
+suppliers by region and major
+customer
+C Number and size of electric
+power marketers
+Analyze the number and
+sizes, in conjunction with
+the measures for all
+indicators
+See
+comments
+below.
+Flexibility and
+liquidity
+Response of prices to external
+conditions in natural gas and
+electricity (e.g., events, weather ,
+plant outages)
+Large price changes
+should normally be
+associated with some
+clear external event
+See
+comments
+below.
+Incidence of pricing anomalies
+for natural gas (where price and
+quantity appear to move in
+opposite directions)
+Anomalies may indicate
+real market problems,
+problems in data, or
+unanticipated changes in
+how the market is
+working
+See
+comments
+below.
+Level of price volatility and
+changes in price volatility in
+electricity and gas
+Very high or very low
+prices can give an early
+warning for investigation
+See
+comments
+below.
+C Correlation of commodity
+prices across regions
+C Narrowing of commodity price
+differences in the absence of
+transmission constraints
+C Increased market integration
+(price changes appear to
+reflect inter-regional trading)
+Correlations should be
+near 1.0, except when
+transmission constraints
+bind and prevent free
+flow of commodities
+See
+comments
+below.
+Ease and
+Expense of
+Transactions
+C Increased use of market hub
+services in natural gas and
+electricity
+C Growth of electronic services
+for the commodity and/or
+transportation
+C Increased economic
+transmission distance
+Establish a baseline See
+comments
+below.
+Innovation C Increase in types of tariffed
+services offered (e.g., parking
+and lending in natural gas)
+C Increased services in the
+market (develop a time line for
+different services, e.g., new
+futures exchanges, new types
+of products (e.g., weather
+derivatives) and independent
+exchanges
+By their very nature,
+innovations cannot be
+specified. The
+Commission will look for
+patterns of innovation,
+track and report on them.
+See
+comments
+below.
+
+[[PDF_PAGE_0023]]
+FY 2001 Annual Performance Report
+21
+Comments:
+The Commission created a suite of performance indicators designed to track our
+success at developing energy markets. The indicators chosen were based on
+attributes we perceived to be necessary for markets to function. As noted
+previously, the events of the last year in the Western energy markets demonstrated
+that, while many of our perceptions were correct (i.e., prices certainly responded
+to external conditions), the dynamics of the markets exceeded our understanding.
+For this reason, we view this suite of indicators as a valid, but ultimately
+unsuccessful experiment, one which we are seeking to revise in concert with our
+new strategic direction.
+Other Accomplishments:
+Activity Results
+Acted to Improve Western
+Electric Supplies
+Issued a March 14, 2001, order identifying and adopting short-
+and long-term initiatives intended to help maximize supply and
+delivery of electricity , while reducing demand. On May 16,
+2001, we issued a further order affirming actions taken in the
+March 14 order , and implemented additional actions.
+Acted to Support Reliability Issued orders that improved the transmission tariff framework
+for enhanced transmission reliability . Approved a tariff filed by
+the East Central Area Reliability Council, a regional council of
+NERC, designed to improve regional reliability by creating a
+settlement system that encourages proper system operation.
+Acted on Issues Related to
+California Electricity Markets
+Ordered sweeping changes to California’s electric power
+market:
+C a major overhaul of the California Independent System
+Operator (ISO) and power exchange rules,
+C imposed a temporary “soft” price cap,
+C imporsed measures to increase the use of long-term
+contracts.
+On February 1, 2001, reported on our investigation of
+increased plant outages for California generators, finding no
+evidence that generators manipulated maintenance schedules
+to raise market prices. Imposed new pricing rules we expect
+to deter withholding. initiated a formal investigation of specific
+companies that may have engaged in physical withholding, and
+intensified monitoring of current outages.
+Applied Price Mitigation Plan
+to Spot Markets During All
+Hours in All States in the
+Entire Western Region
+Established on April 26, 2001 a new market mitigation program
+for California and opened a formal investigation of market
+power in Western markets. On June 19, 2001, made major
+changes to our mitigation program, expanding it to all
+wholesale sellers in 1 1 Western states. Mandates the use of
+a single price auction and must-offer and marginal cost bidding
+requirements when electricity reserves are below 7 percent in
+the California ISO spot markets. The two actions ensure that
+wholesale rates in spot markets in California and the rest of
+the West fall within a zone of reasonableness. The measures,
+along with a FERC rate-monitoring program, provide a structure
+that will reduce potential abuses, ensure reasonable rates for
+consumers, and encourage adequate supply in the market.
+(Continued on Next Page.)
+
+[[PDF_PAGE_0024]]
+Federal Energy Regulatory Commission
+Activity Results
+22
+Constructed a Market
+Observation Resource
+Monitoring real-time electric and gas markets using information
+services and software similar to those used by market
+participants.
+Goal: To Protect Customers
+Indicator Measure Target Results
+Constraining market
+power
+Percentage of
+respondents
+perceiving a lack of
+market power
+Establish baseline See comments
+below.
+Comments:
+We also established an additional measurement to determine whether customers
+perceived a lack of market power. This was intended to indicate our success at
+constraining market power abuse. Again, the events of the last year in the
+Western energy markets – and the nationwide publicity they generated –
+essentially invalidated this measurement. As with the previous market indicators,
+we are seeking to revise them based on our new strategic direction.
+Other Accomplishments:
+Activity Results
+Processed Merger
+Applications
+Issued Order No. 642 on November 15, 2000, revising filing
+requirements for consistency with our 1996 Merger Policy
+Guidelines. During FY 2000 and FY 2001, processed merger
+applications within the 150-day review time adopted in Order
+No. 642. Ensured that market power mitigation measures are
+in place through appropriate conditions.
+Investigated Bulk Power
+Markets
+Reported on November 1, 2000 on Western bulk power
+markets and the causes of price abnormalities in the summer
+of 2000. Issued a similar report on November 1, 2000, on
+markets in the Eastern interconnection during the autumn of
+2000. On February 1, 2001, issued a report on Northwest
+markets for the summer , November, and December of 2000.
+Ordered Refunds in Western
+Markets
+C A staff investigation resulted in an agreement by Williams on
+April 30, 2001 to refund $8 million for alleged withholding of
+generating capacity in the California market in spring 2000.
+C In a series of orders ending with an order issued July 25,
+2001, established a methodology to calculate refunds and
+ordered an expedited evidentiary hearing to do so.
+
+[[PDF_PAGE_0025]]
+FY 2001 Annual Performance Report
+1ADR is considered the “umbrella” of dispute resolution. Many forms of dispute resolution are encompassed
+within ADR, such as mediation, settlement judge procedures, mini-trials, arbitration, and combinations of these methods.
+Cases referred to the Office of Administrative Law Judges (OALJ) for ADR involve disputes of hotly contested issues
+and millions of dollars. Due to the size and complexity of cases referred to OALJ for ADR, the process of achieving
+consensual resolution often involves considerable time and effort.
+2This includes 5 cases begun in FY 2000 and completed in FY 2001. It does not include simple inquiries about
+ADR or cases in which parties expressed no interest in using ADR (11 cases), cases that were referred to Enforcement (2
+cases), cases in which the Dispute Resolution Service (DRS) only coached parties, or cases that are were ongoing into
+FY 2002 (17 cases).
+23
+Goal: To Resolve Disputes Effectively and Efficiently
+Measures Targets Results
+Percentage of customers
+satisfied with alternative
+dispute resolution (ADR)
+procedures at the
+Commission
+75% satisfaction rate OALJ: Participants report
+near 100% satisfaction with
+ADR1 procedures.
+Satisfaction is indicated by
+calls from participants and by
+continuing and increasing
+requests for the appointment
+of settlement judges and
+mediators.
+DRS: 90% (20 out of 22
+completed cases) .2
+Percentage of contested
+proceedings that achieve
+consensual agreements
+Maintain at or increase levels
+achieved in FY 2001
+OALJ: During FY2001 80%
+of cases set for hearing
+were resolved through some
+form of ADR vs. 76.7%
+during FY2000.
+DRS: 90% vs. 89% during
+FY 2000. 2
+Number of requests and
+referrals for ADR services
+Maintain at or increase levels
+achieved in FY 2001
+DRS: 52 requests vs. 40
+requests in FY 2000, a 30%
+increase. This includes
+simple inquiries about ADR,
+cases referred to DRS in
+which the parties indicated
+no interest in pursuing ADR,
+cases referred to Enforce-
+ment, and ongoing cases.
+(Continued on Next Page.)
+
+[[PDF_PAGE_0026]]
+Federal Energy Regulatory Commission
+Measures Targets Results
+24
+Percentage of ADR cases
+resolved or terminated within
+established time frames
+C 50% within 100 days
+C 75% within 150 days
+C 100% within 200 days
+OALJ: Of 60 cases:
+C 10 cases settled within 100
+days (17%)
+C 20 cases settled within 150
+days (33.3%)
+C 31 cases settled within 200
+days (51.7%)
+C 29 of 60 cases settled over
+200 days (48.3%)
+DRS: Of 22 completed cases:
+C 8 cases completed within
+100 days (36%)
+C 12 cases completed within
+150 days (55%)
+C 17 cases completed within
+200 days (77.3%)
+C 5 of 22 cases completed in
+over 200 days (22.7%)
+Comments:
+C The targets for the second and third performance measures were created
+before the baselines for FY 2000 were established. We intend to keep both
+the percentage of contested cases reaching consensual agreement and the
+number of requests for ADR services uniformly high.
+C Because the Office of Administrative Law Judges (OALJ) only works on
+cases referred to it by the Commission, it has little control over how many
+proceedings are referred to it for ADR.
+C Because cases set for ADR or hearing are hotly contested, the targets for
+percentage of cases resolved or terminated within established time frames are
+not realistic for OALJ.
+Other Accomplishments:
+Activity Results
+Improved Processes to
+Speed Settlements
+Made process improvements that will result in faster approval
+of uncontested settlements certified to the Commission by the
+administrative law judges. Anticipate settlement approval
+within 45 to 60 days of certification. All documents will be
+public as an added benefit. Will formally evaluate ADR
+services in FY 2003, for both cost avoidance and qualitative
+benefits.
+Instituted Fast Track
+Procedures
+Resolve complaints using fast track procedures when a
+complainant attempts to quantify the financial burden (if any)
+created for them because of an alleged action or inaction. May
+shorten the comment period, speed action by the Commission,
+expedite hearings before administrative law judges, or rush
+action on requests for stays, time extensions, or other relief
+by the Commission or an administrative law judge. For
+example, approximately 600 calls from market participants and
+customers were resolved through the Enforcement Hotline.
+
+[[PDF_PAGE_0027]]
+FY 2001 Annual Performance Report
+25
+Commission Administration
+Goal: To Improve Access to Information
+Measures Targets Results
+Percentage of filings that
+FERC is capable of receiving
+electronically
+Capability to receive 50% of
+filings electronically
+Capability to receive 38% of
+filings electronically by the
+end of FY 2001. Percentage
+brought to 46% by mid-
+November 2001.
+Percentage of filings
+submitted electronically
+50% of filings FERC is
+capable of receiving
+electronically are submitted
+electronically
+17% of filings FERC is
+capable of receiving
+electronically are submitted
+electronically . 30% reached
+by October 31.
+Timely issuance of
+Notices/Orders
+95% of gas and electric
+notices/orders issued within
+5 workdays
+97% of gas and electric
+notices/orders issued within
+5 workdays
+Comments:
+Submitting filings electronically to FERC remains voluntary due to the nature of the
+documents filed and the broad range of filing entities, from large companies to
+individuals. Persons commenting on or participating in FERC proceedings are
+growing more comfortable with e-filing as they use the system. W e expect to
+reach the 50 percent target within the next few months.
+The Commission has taken actions to encourage e-filing by continually expanding
+the types of filings that can be e-filed and by promoting e-filing at Commission
+meetings, in workshops and training sessions for staff and the public, and at
+industry conferences. In November , 2001, the Chairman gave a strong
+endorsement of the program at a regular Commission meeting, during which the
+Commission Secretary cited the impact of recent events on regular mail deliveries
+to the Commission.
+Goal: To Ensure a Diverse, Competent Workforce
+Measures Targets Results
+Percentage of employees in
+underrepresented groups
+Increase Hispanic employee
+population by 5%.
+The Commission increased its
+Hispanic employee population
+by 10 percent.
+(Continued on Next Page.)
+
+[[PDF_PAGE_0028]]
+Federal Energy Regulatory Commission
+Measures Targets Results
+26
+Percentage of senior
+executives participating in
+FERC’s diversity initiative
+100% of the office directors
+will have participated in the
+first phase.
+< 100 percent of office
+directors participated in
+discussions with the
+Diversity Council
+concerning the direction of
+diversity at FERC.
+< 25 percent of office
+directors actively
+participated in minority
+recruitment activities.
+Percentage of supervisory
+participation in the
+Leadership, Education, and
+Development Program (LEaD)
+100% supervisors and
+managers will have
+completed training on the 5
+leadership behaviors.
+100% of supervisors and
+managers (including new
+supervisors, managers, and
+team leaders) have
+completed training on the 5
+leadership behaviors.
+Number of learning
+agreements
+5% increase over FY 2000 29 employees on learning
+agreements in FY 2001, the
+first year of reporting
+Number of mentor/protegee
+teams
+10 mentor/protegee teams At least 15 mentor/protégé
+teams
+Comments:
+The 10 percent increase in the first measure equals an increase of 2 employees
+from base of 18.
+Goal: To Promote Alternative Dispute Resolution
+Measures Targets Results
+Percentage of customers
+satisfied with ADR
+procedures at the
+Commission
+75% satisfaction rate See comments below .
+Percentage of contested
+proceedings that achieve
+consensual agreements
+25% increase over FY 2000 See comments below .
+Number of requests and
+referrals for ADR services
+Increase by 50% over
+FY 2000
+See comments below .
+Percentage of ADR cases
+resolved or terminated within
+established time frames
+< 50% within 100 days
+< 75% within 150 days
+< 100% within 200 days
+See comments below .
+Comments:
+Because we also use ADR to resolve internal conflicts, this goal has been included
+as part of Commission Administration. The measurements and results are identical
+to those found under Energy Markets, beginning on page 22.
+
+[[PDF_PAGE_0029]]
+FY 2001 Annual Performance Report
+27
+Goal: To Maintain Efficient and Effective Business Practices
+Measures Targets Results
+Percentage of respondents
+giving positive rating for
+“FERC focusing on the right
+things.”
+10% increase over baseline
+year
+The Commission adopted a
+new Strategic Plan to focus
+on important issues arising
+from the Western Market
+meltdown. No surveys done
+during this times of great
+pressure and uncertainty .
+Percentage of office
+directors operating within
+designated budgets
+80% of office directors
+operating within designated
+salary budgets.
+100% of office directors
+operated within designated
+salary budgets.
+Unqualified opinion on
+financial statements
+Unqualified opinion received. Unqualified opinion received
+for FY 2001.
+Percentage of payments
+within Prompt Payment Act
+95% payments are made
+within Prompt Payment Act
+requirements.
+Number of days to award
+purchase orders
+Purchase orders awarded
+within 5 days of receipt of
+notification.
+98% of purchase orders
+awarded within 5 days of
+receipt of requisition
+Number of days to award
+contracts
+Contracts awarded within 30
+days of receipt of requisition
+95% of contracts awarded
+within 30 days of receipt of
+requisitions
+Number of award fee
+contracts
+Increase number of award
+contracts by 10% over FY
+2000.
+Award fee contracts and
+firm fixed price contracts
+increased by 10% over
+FY 2000 levels.
+Comments:
+• Effective management of salary dollars in FY 2001 resulted in a 5 percent
+savings of actual salary costs.
+• As interpreted by KPMG LLP, the Commission continued to receive an
+unqualified opinion on its FY 2001 financial statements along with no material
+weaknesses, reportable problems, or instances of noncompliance. This
+measurement is of utmost importance to the Commission in presenting our
+financial stability to our customers and regulated entities, and ensuring our
+financial statements reflect true and accurate balances.
+
+[[PDF_PAGE_0030]]
+Federal Energy Regulatory Commission
+28
+APPENDIX B
+STRATEGIC PLAN 2001 – 2005
+
+[[PDF_PAGE_0031]]
+FY 2001 Annual Performance Report
+29
+Federal Energy Regulatory Commission Strategic Plan 2001-2005
+Making Markets Work
+Vision
+Dependable, affordable, competitive energy markets support a strong, stable national economy.
+Mission
+The Federal Energy Regulatory Commission regulates and oversees energy industries in the economic and environmental
+interest of the American public
+.
+Challenges and Objectives
+Challenge 1: Promote a secure, high-quality, environmentally-responsible energy infrastructure through
+consistent policies.
+Objective 1.1: Remove roadblocks impeding market investment
+C Ensure that sufficient supplies of energy are available to provide room for competition to succeed
+C Identify transmission and pipeline projects with high public interest benefits and facilitate their speedy completion
+C Standardize interconnection of power generation plants of all sizes and technologies
+C Strengthen inter-agency coordination on hydropower licenses to shorten processing timelines
+C Expedite gas pipeline certificate processes, consistent with due process
+Objective 1.2: Provide clarity of cost recovery to infrastructure investors
+C Establish a process to timely include prudently-incurred expansion costs in transmission and pipeline rates
+C Ensure rate design for regulated company services supports long-term competitive markets
+C Welcome balanced innovative rate and return proposals that incent pro-competitive behavior and publicly beneficial
+projects
+Objective 1.3: Proactively address landowner, safety and environmental concerns
+C Encourage applicants to address stakeholder concerns before the licensing/certification process
+C Utilize collaboration with affected parties to the greatest extent possible
+C Ensure strictest adherence to prudent safety practices
+C Incorporate reasonable environmental conditions into permits and licenses
+Objective 1.4: Stimulate use of new technology
+C Develop industry and agency familiarity with most current infrastructure-based technologies
+C Equalize regulatory treatment (including cost recovery) for old and new technologies in transmission, transportation,
+production and generation
+Objective 1.5: Promote measures which improve the security and reliability of the energy
+infrastructure
+C Work with other agencies and parties to identify security issues and needs
+C Support industry efforts to improve infrastructure security
+Challenge 2: Foster nationwide competitive energy markets as a substitute for traditional regulation.
+Objective 2.1: Advance competitive market institutions across the entire country
+C Complete firm establishment of regional transmission organizations with clear responsibilities, independence and scope
+C Develop appropriate coordination role with states to efficiently oversee regional power markets
+C Look to balanced, industry-led organizations to develop reliability and business practice standards
+
+[[PDF_PAGE_0032]]
+Federal Energy Regulatory Commission
+30
+C Firmly establish transmission planning function on a regional basis, to use a variety of technology solutions to meet
+reliability, security and market needs
+Objective 2.2: Establish balanced, self-enforcing market rules
+C Link deregulated rate authority to continued presence of balanced market conditions
+C Rely on international best practices to develop comprehensive market protocols/rules
+C Work to establish robust programs for customer demand-side participation in energy markets
+C Encourage standardized business rules and practices to maximize market efficiency , ease market entry , and reduce
+transactions costs
+Challenge 3: Protect customers and market participants through vigilant and fair oversight of the
+transitioning energy markets.
+Objective 3.1: Improve our understanding of energy market operations
+C Keep abreast of market and technological innovation, including use of financial instruments and Internet-based energy
+trading
+C Develop staff’s investigatory and market data analysis skills through training, new hiring and relationships with outside
+experts
+C Strengthen role of RTO market monitoring units
+Objective 3.2: Assure pro-competitive market structures.
+C Identify and remedy problems concerning market structure
+C Assess market and infrastructure conditions through use of objective benchmarks
+C Periodically review effectiveness of market rules and revise them consistent with sustained, long-term development of
+energy markets
+C Ensure that mergers and consolidations are consistent with pro-competitive goals
+Objective 3.3: Remedy individual market participant behavior as needed to ensure just and
+reasonable market outcomes
+C Identify and mitigate market power, and use prohibitions and penalties as necessary
+C Initiate and conduct timely and effective investigations as warranted by factual reviews
+C Act swiftly on third-party complaints, using litigation before Administrative Law Judges as necessary to determine factual
+issues
+C Develop expedited dispute solving mechanisms to minimize time and personnel use
+Challenge 4: Efficiently administer the agency’s resources to accomplish the agency’s goals.
+Objective 4.1: Attract, train and retain staff to fulfill the S trategic Plan
+Objective 4.2: Manage information technology to better serve the public and streamline work
+processes
+Objective 4.3: Communicate our activities more clearly with customers, elected officials and industry
+C Publish information that enhances public understanding of energy markets
+C Proactively reach out to groups affected by agency actions for advance input
+Objective 4.4: Integrate agency business planning and budgeting processes
+Objective 4.5: Build strong partnerships with all stakeholders, particularly with governors and states
+
+[[PDF_PAGE_0033]]
+FY 2001 Annual Performance Report
+31
+APPENDIX C
+COMPARATIVE PERFORMANCE
+MEASUREMENT DATA
+
+[[PDF_PAGE_0034]]
+Federal Energy Regulatory Commission
+32
+Markets Performance Measurements FY 1999 – FY 2003
+FY 1999
+Measurement Target Result
+Customers will have more new products
+and a reasonable range of suppliers from
+which to choose in both the electric and
+natural gas industries. This will indicate
+that commodity markets are reasonably
+competitive as well as responsive to
+customer needs
+Establish baseline C The Commission demonstrated that the
+number of power suppliers using
+market-based rates has grown
+dramatically since 1994
+C Using service availability as a substitute
+for “new products,” the Commission
+identified 5 electric transmission
+indicators and 15 new gas
+transportation services
+Natural gas and electric power prices will
+become more responsive to market
+conditions – that is, prices will reflect
+changing supply and demand conditions
+more clearly and more quickly
+Establish baseline Developed examples relating prices to
+under-lying conditions, such as the
+weather
+Natural gas prices within each trading
+region will tend to converge, except to the
+extent there are demonstrable
+transportation constraints or costs.
+Wholesale electricity price differences will
+also tend to narrow .
+Establish baseline As an example, the Commission
+demonstrated the convergence of prices
+in Texas and Louisiana from the spring of
+1996 forward
+It will be less costly , administratively , to
+transact business on the interstate natural
+gas transportation grid
+Establish baseline As a result of developments in electronic
+information exchange, large consumers of
+energy have unprecedented ac-cess to
+information
+Market participants will have confidence
+that natural gas markets, electric markets,
+and oil transportation services are working
+fairly and that they are not subject to
+abuses of market power. That is:
+C Broad customer classes (not
+necessarily every customer) will agree
+that buyers and sellers have access to
+competitively priced commodity markets
+in the national gas transportation and
+electric transmission grids
+C Customers will generally agree that gas
+pipe-line, electric transmission and oil
+transportation rates and services are
+just and reasonable, fairly balancing the
+competing interests of the transporting
+or transmitting companies and their
+customers
+Establish baseline The Commission was unable to survey
+market participants to develop a baseline
+
+[[PDF_PAGE_0035]]
+FY 2001 Annual Performance Report
+33
+FY 2000
+Measurement Target Result
+Customers will have more new products
+and a reasonable range of suppliers from
+which to choose in both the electric and
+natural gas industries. This will indicate
+that commodity markets are reasonably
+competitive as well as responsive to
+customer needs
+Monitor the state of the markets C Gas: many new services offered over
+last few years; Order No. 637
+encourages innovative transportation
+services
+C Electric: greater availability of spot
+markets, derivatives and other risk
+management instruments, and national
+online trading; Order No. 2000
+encourages innovative transmission
+tariffs and services; many power
+suppliers using market-based rates
+Natural gas and electric power prices will
+become more responsive to market
+conditions – that is, prices will reflect
+changing supply and demand conditions
+more clearly and more quickly
+Monitor the state of the markets Prices for both gas and electricity very
+responsive to even small changes in
+supply and demand. Electric price volatility
+signals flawed market rules and need to
+increase supply , demand response and
+ability to manage risk
+Natural gas prices within each trading
+region will tend to converge, except to the
+extent there are demonstrable
+transportation constraints or costs.
+Wholesale electricity price differences will
+also tend to narrow
+Monitor the state of the markets Persistent price differentials developed
+between West Coast (especially
+California) and supply regions, possibly
+signaling need for new transportation
+capacity
+It will be less costly , administratively , to
+transact business on the interstate natural
+gas transportation grid
+Monitor the state of the markets Strong growth of online trading for both
+gas and electricity indicates greater
+availability of market-related services and
+probably declining transactions costs
+Market participants will have confidence
+that natural gas markets, electric markets,
+and oil transportation services are working
+fairly and that they are not subject to
+abuses of market power. That is:
+C Broad customer classes (not
+necessarily every customer) will agree
+that buyers and sellers have access to
+competitively priced commodity markets
+in the national gas transportation and
+electric transmission grids
+C Customers will generally agree that gas
+pipe-line, electric transmission and oil
+transportation rates and services are
+just and reasonable, fairly balancing the
+competing interests of the transporting
+or transmitting companies and their
+customers
+Monitor the state of the markets In response to electric power volatility , the
+Commission issued detailed studies of
+each regional bulk power market, which
+included consideration of a variety of
+market power issues
+
+[[PDF_PAGE_0036]]
+Federal Energy Regulatory Commission
+34
+FY 2001
+Measurement Target Result
+C Number and size of capacity holders by
+system
+C Number and size of natural gas and
+electric secondary market participants
+C Number and size of pipeline suppliers by
+region and major customer
+C Number and size of electric power
+marketers
+Analyze the number and sizes, in
+conjunction with the measures for all
+indicators
+The Commission created a suite of
+performance indicators designed to track
+our success at developing energy markets.
+The indicators chosen were based on
+attributes we perceived to be necessary
+for markets to function. As noted
+previously, the events of the last year in
+the Western energy markets demonstrated
+that, while many of our perceptions were
+correct (i.e., prices certainly responded to
+external conditions), the dynamics of the
+markets exceeded our understanding. For
+this reason, we view this suite of
+indicators as a valid, but ultimately
+unsuccessful experiment, one which we
+are seeking to revise in concert with our
+new strategic direction.
+Increase in types of tariffed services
+offered (e.g., parking and lending in
+natural gas)
+By their very nature, innovations cannot
+be specified. The Commission will look for
+patterns of innovation, track and report on
+them.
+Increased services in the market (develop
+a time line for different services, e.g., new
+futures exchanges), new types of
+products (e.g., weather derivatives) and
+independent exchanges
+Response of prices to external conditions
+in natural gas and electricity (e.g., events,
+weather, plant outages)
+Large price changes should normally be
+associated with some clear external event
+See comments on previous page.
+Incidence of pricing anomalies for natural
+gas (where price and quantity appear to
+move in opposite directions)
+Anomalies may indicate real market
+problems, problems in data, or
+unanticipated changes in how the market
+is working
+Level of price volatility and changes in
+price volatility in electricity and gas
+Very high or very low prices can give an
+early warning for investigation
+Correlation of commodity prices across
+regions
+Correlations should be near 1.0, except
+when transmission constraints bind and
+prevent free flow of commodities
+Narrowing of commodity price differences
+in the absence of transmission constraints
+Increased market integration (price
+changes appear to reflect inter-regional
+trading)
+Increased use of market hub services in
+natural gas and electricity
+Establish a baseline
+Growth of electronic services for the
+commodity and/or transportation
+Increased economic transmission distance
+Percentage of respondents perceiving a
+lack of market power
+Establish baseline
+External and internal customer satisfaction
+with Commission’s handling of disputed
+cases
+75% satisfaction rate
+Time from case receipt by presiding judge
+to initial decision
+Decrease in average time required to
+reach initial decision in 10% of comparable
+cases
+(Continued on next page.)
+
+[[PDF_PAGE_0037]]
+FY 2001 Annual Performance Report
+FY 2001
+Measurement Target Result
+3ADR is considered the “umbrella” of dispute resolution. Many forms of dispute resolution are encompassed
+within ADR, such as mediation, settlement judge procedures, mini-trials, arbitration, and combinations of these methods.
+Cases referred to OALJ for ADR involve disputes of hotly contested issues and millions of dollars. Due to the size and
+complexity of cases referred to OALJ for ADR, the process of achieving consensual resolution often involves
+considerable time and effort.
+4This includes 5 cases begun in FY 2000 and completed in FY 2001. It does not include simple inquiries about
+ADR or cases in which parties expressed no interest in using ADR (11 cases), cases that were referred to Enforcement (2
+cases), cases in which the DRS only coached parties, or cases that are were ongoing into FY 2002 (17 cases).
+35
+Percentage of customers satisfied with
+ADR procedures at the Commission
+75% satisfaction rate OALJ: Participants report near 100%
+satisfaction with ADR 3 procedures.
+Satisfaction is indicated by calls from
+participants and by continuing and
+increasing requests for the appointment of
+settlement judges and mediators.
+DRS: 90% (20 out of 22 completed
+cases).4
+Percentage of contested proceedings that
+achieve consensual agreements
+25% increase over FY 2000 OALJ: During FY2001 80% of cases set
+for hearing were resolved through some
+form of ADR vs. 76.7% during FY2000.
+DRS: 90% vs. 89% during FY 2000. 4
+Number of requests and referrals for
+ADR services
+Increase by 50% over FY 2000 OALJ: During FY2001 60 out of 77 cases
+(77.9%) terminated by OALJ were
+resolved through some means of ADR vs.
+60 out of 83 cases (72.3%) during FY2000
+DRS: 52 requests vs. 40 requests in
+FY 2000, a 30% increase. This includes
+simple inquiries about ADR, cases referred
+to DRS in which the parties indicated no
+interest in pursuing ADR, cases referred to
+Enforce-ment, and ongoing cases.
+Percentage of ADR cases resolved or
+terminated within established time frames
+C 50% within 100 days
+C 75% within 150 days
+C 100% within 200 days
+OALJ: Of 60 cases:
+C 10 cases settled within 100 days (17%)
+C 10 cases settled within 150 days (17%)
+C 11 cases settled within 200 days (18%)
+C 29 cases settled after 200 days (48.3%)
+DRS: Of 22 completed cases:
+C 8 cases completed within 100 days
+(36%)
+C 4 cases completed within 150 days
+(54%)
+C 5 cases completed within 200 days
+(77%)
+C 5 cases completed in over 200 days
+
+[[PDF_PAGE_0038]]
+Federal Energy Regulatory Commission
+36
+FY 2002
+Measurement Strategic Significance Result
+C Number and size of capacity holders by
+market
+C Number and size of natural gas and
+electric secondary market participants
+C Number and size of pipeline suppliers by
+region and major customer
+C Number and size of electric power
+marketers
+C Reasonable range of suppliers should
+enable bargain hunting and price
+arbitrage
+C Participation indicates confidence in
+market rules and oversight
+Increase in types of tariffed services
+offered (e.g., parking and lending in
+natural gas)
+Innovation indicates markets are working
+and market participants are creating their
+own solutions
+Increased services in the market (develop
+a time line for different services, e.g., new
+futures exchanges, new types of
+products (e.g., weather derivatives) and
+independent exchanges
+New service offerings show adaptation to
+price volatility and help to stabilize markets
+through hedging of risks
+Volume of financial risk-hedging
+transactions, e. g., futures contracts
+Viable financial markets provide critical
+support for physical markets
+Response of prices to external conditions
+in natural gas and electricity (e.g., events,
+weather, plant outages)
+Large price changes should normally be
+associated with some clear external event
+Level of price volatility and changes in
+price volatility in electricity and gas
+Changes in price patterns over time can
+reveal underlying market conditions
+Correlation of commodity prices across
+regions; narrowing of commodity price
+differences in the absence of
+transmission constraints
+Correlations should be near 1.0, except
+when transmission constraints bind and
+prevent free flow of commodities
+Increased use of market hub services in
+natural gas and electricity
+C Increased usage of market
+infrastructure indicates market depth
+and liquidity
+C Increased electronic commerce reduces
+transactions costs and allows broader
+market participation
+Growth of electronic services for the
+commodity and/or transportation
+Increased economic transmission distance
+Investment in generation and transmission Investment should be adequate to meet
+market needs
+Number and type of reliability-related
+incidents (emergencies, involuntary load
+reductions, TLRs)
+“Emergencies” should be infrequent;
+routine market rules should be able to
+handle most situations
+Amount of load covered by regional
+institutions
+20% increase over FY 2001
+Amount of load with congestion
+management systems
+20% increase over FY 2001
+Number of wholesale service options
+available
+Increase
+(Continued on next page.)
+
+[[PDF_PAGE_0039]]
+FY 2001 Annual Performance Report
+FY 2002
+Measurement Strategic Significance Result
+37
+Amount of load covered by regional
+institutions
+20% increase over FY 2001
+Number of market monitoring institutions
+and systems
+Increase over FY 2001
+Number of public utilities separating
+ownership or operation of transmission
+facilities from generation
+Increase over FY 2001
+Number of requests and referrals for ADR
+services
+25% increase over FY 2001
+Percentage of customers satisfied with
+ADR processes
+85%
+Percentage of processes that achieve
+consensual agreements
+C ADR processes
+C cases set for litigation resolved, at least
+in part, through consensual agreement
+C 25% increase over FY 2001
+C 5% increase over FY 2001
+Percentage of cases in time frames
+C ADR processes completed
+C litigated cases reaching initial decision
+C 20% of ADR cases within 60 days
+C 30% of ADR cases within 100 days
+C 75% of ADR cases within 150 days
+C 100% of ADR cases within 200 days
+C 95% of simple litigated cases within
+206 days (29.5 weeks)
+C 95% of complex litigated cases within
+329 days (47 weeks)
+C 95% of exceptionally complex cases,
+441 (63 weeks)
+C 95% of regular complaints, 60 days
+C 95% of “fast track” complaints, 8 days
+FY 2003
+Measurement Target Result
+Percentage of country covered by
+approved RTOs or ISOs (percentage of
+electricity load)
+100% of electricity load in regions where
+we have jurisdiction
+Number of retail customers covered by
+approved RTOs and ISOs
+Increase by the number of retail customers
+covered by 2 additional RTOs or ISOs
+Enhanced regulatory support for market
+institutions
+Creation of OMOI and market performance
+indicators
+Enhance institutional capability for
+overseeing energy markets
+C Establish the Office of Market Oversight
+and Investigation
+C Publish regular summer and winter
+Seasonal Market Assessments
+C Develop metrics/indicators of gas and
+electric market performance measures –
+a working set by July 2002, and
+improvements in 2003
+(Continued on next page.)
+
+[[PDF_PAGE_0040]]
+Federal Energy Regulatory Commission
+FY 2003
+Measurement Target Result
+38
+Top to bottom review of all existing
+information systems to monitor markets
+Complete entire review
+Development or acquisition of usable
+electronic baselines and databases to
+support market oversight objectives
+Complete development of all baselines and
+databases by end of FY 2003
+Development of market expertise C Training on market issues for 40% of
+OMOI and 20% of OMTR, OGC, and
+other staff
+C Hiring of staff with market expertise
+C Issuance of market assessment
+products and data analysis
+demonstrating market understanding
+Establishment of protocols between the
+Commission and independent market
+monitoring units of RTOs
+All approved RTOs
+Timeliness of corporate application orders Less than 20% of merger applications will
+require examination or the imposition of
+mitigation measures beyond the initial
+review period, with such percentage
+targeted to decrease as further policy
+guidance is issued in cases requiring more
+time to address market power
+Timeliness of audits Complete 90% of audits on time
+Timeliness of Hotline calls resolutions Resolve 80% within 1 week of initial
+contact
+Timeliness of formal complaints resolutions Complete 80% within target time frames
+for various paths for resolution of
+complaints as specified by the Commission
+Number of requests and referrals for ADR
+services
+Maintain at or increase levels achieved in
+FY 2001
+Percentage of customers satisfied with
+ADR processes
+85%
+Percentage of processes that achieve
+consensual agreements
+Maintain at or increase levels achieved in
+FY 2001
+Percentage of cases in time frames
+C ADR processes completed
+C litigated cases reaching initial decision
+C 20% of ADR cases within 60 days
+C 30% of ADR cases within 100 days
+C 75% of ADR cases within 150 days
+C 100% of ADR cases within 200 days
+C 95% of simple litigated cases within 206
+days (29.5 weeks)
+C 95% of complex litigated cases within
+329 days (47 weeks)
+C 95% of exceptionally complex cases,
+441 (63 weeks)
+C 95% of regular complaints, 60 days
+C 95% of “fast track” complaints, 8 days
+
+[[PDF_PAGE_0041]]
+FY 2001 Annual Performance Report
+5Since the Commission changed its regulations to require few prior notice filings, it no longer reports processing
+times for this type of filing.
+39
+Projects Performance Measurements FY 1999 – FY 2003
+FY 1999
+Measurement Target Result
+C The Commission’s certification program
+will allow the appropriate amount of new
+pipeline capacity to be available to serve
+the market when needed
+C Certification of new pipelines will be
+timely , while fairly balancing the interests
+of the gas market, project sponsor ,
+landowners, and the environment
+Number of days to complete 82% of filings
+by case type:
+C prior notice filings within 56 days 5
+C unprotested filings within 159 days
+C protested filings within 304 days
+C cases of first impression within 365
+days
+82% of filings completed in:
+C 57 days
+C 152 days
+C 304 days
+C 365 days
+Inspect all onshore construction projects
+over 2 miles in length at least once
+90% of projects inspected at least once 97% of projects inspected at least once
+Inspect each major onshore construct-ion
+project at least once every four weeks
+during ongoing construction activity
+100% of projects inspected at least once 100% of projects inspected at least once
+The Commission will reduce processing
+time under its control, particularly through
+the use of collaborative procedures and
+early involvement of staff
+Establish a baseline License filings using some form of
+collaborative process were completed in
+0.99 years on average. Others averaged
+2.77 years to complete.
+Licensing conditions will protect and
+enhance beneficial public uses, both
+developmental and nondevelopmental
+Establish a baseline The Commission is in the process of
+developing automated systems to track
+both the conditions built into licenses and
+the monitored results
+Administration of hydropower
+developments will accommodate
+increasing public use without diminishing
+key water resource values
+Establish baseline During FY 1999, the Commission issued
+licenses for 19 hydroelectric projects. Of
+these, 14 were required to install new or
+up-graded recreational facilities. The
+remaining 5 were deemed adequate.
+The percentage of high- and significant-
+hazard dams meeting all current structural
+safety standards will remain uniformly high
+Establish baseline 94.3% of qualifying dams met current
+structural safety standards
+One hundred percent of high- and
+significant-hazard dams will be inspected
+annually
+100% of qualifying dams inspected
+annually
+100% of qualifying dams were inspected
+One hundred percent of high- and
+significant-hazard dams will comply with
+emergency action plan requirements
+100% of qualifying dams in compliance 99.8% of qualifying dams were in
+compliance
+
+[[PDF_PAGE_0042]]
+Federal Energy Regulatory Commission
+40
+FY 2000
+Measurement Target Result
+C The Commission’s certification program
+will allow the appropriate amount of new
+pipeline capacity to be available to serve
+the market when needed
+C Certification of new pipelines will be
+timely , while fairly balancing the interests
+of the gas market, project sponsor ,
+landowners, and the environment
+Number of days to complete 82% of filings
+by case type:
+C prior notice filings within 56 days
+C unprotested filings within 159 days
+C protested filings within 304 days
+C cases of first impression within 365
+days
+82% of filings completed in:
+C 55 days
+C 127 days
+C 218 days
+C 272 days
+Inspect all onshore construction projects
+over 2 miles in length at least once
+90% of projects inspected at least once 99% of projects inspected at least once
+Inspect each major onshore construct-ion
+projects at least once every four weeks
+during ongoing construction activity
+100% of projects inspected at least once 100% of projects inspected at least once
+The Commission will reduce processing
+time under its control, particularly through
+the use of collaborative procedures and
+early involvement of staff
+Increased use of collaborative processes License filings using some form of
+collaborative process were completed in
+0.99 years on average. Others averaged
+2.77 years to complete. In FY 2000, 40%
+of licenses issued involved settlements, up
+from 17% in FY 1999.
+Licensing conditions will protect and
+enhance beneficial public uses, both
+developmental and nondevelopmental
+Continue systems development The Commission upgraded its automated
+system to track both the conditions built
+into licenses and the monitored results
+Administration of hydropower
+developments will accommodate
+increasing public use without diminishing
+key water resource values
+Monitor baseline data During FY 2000, the Commission issued
+licenses for 10 hydroelectric projects. Of
+these, 5 were required to install new or
+up-graded recreational facilities. The
+remaining 5 were deemed adequate.
+The percentage of high- and significant-
+hazard dams meeting all current structural
+safety standards will remain uniformly high
+Maintain current high standards 92.8 % of high- and significant-hazard
+dams meeting all current structural safety
+standards
+One hundred percent of high- and
+significant-hazard dams will be inspected
+annually
+100% of qualifying dams inspected
+annually
+100% of qualifying dams were inspected
+One hundred percent of high- and
+significant-hazard dams will comply with
+emergency action plan requirements
+100% of qualifying dams in compliance 99.7% of qualifying dams were in
+compliance
+FY 2001
+Measurement Target Result
+Percentage of cases completed in
+specified time
+82% of cases completed within specified
+time frames:
+1.Cases that involve no precedential
+issues and are unprotested, 159 days;
+2.Cases that involve no precedential
+issues and are protested, 304 days; and
+3.Cases of first impression or containing
+larger policy implications, 365 days
+Number of days to complete 82% of the
+cases:
+< 136 days for Category 1;
+< 200 days for Category 2; and
+< 277 days for Category 3.
+(Continued on next page.)
+
+[[PDF_PAGE_0043]]
+FY 2001 Annual Performance Report
+FY 2001
+Measurement Target Result
+41
+Number of major onshore projects
+inspected at least every four weeks
+Inspect each major onshore project at
+least once every four weeks
+All six major onshore projects were
+inspected at least once every four weeks
+Percentage of hydropower licenses
+issued that contain adaptive management
+provisions
+5% increase over baseline 18% increase over baseline
+Percentage of filings containing some form
+of collaboration
+5% increase over baseline 33% increase over baseline
+License processing time when prefiling
+collaboration occurred compared to
+license processing time when prefiling
+collaboration did not occur
+10% less processing time 63% less processing time
+Percentage of high- and significant-hazard
+potential dams meeting all current
+structural safety standards
+90% of qualifying dams 94% of high- and significant-hazard
+potential dams met all current structural
+safety standards
+Percentage of dams requiring EAPs that
+have tested, evaluated plans
+99% of qualifying dams 99.9% of dams requiring EAPs had tested,
+evaluated plans
+Percentage of dams with EAPs that have
+acceptance and certification from
+licensees and emergency response
+agencies s
+90% of qualifying dams 100% of dams with EAPs had acceptance
+and certification from licensees and
+emergency response agencies
+FY 2002
+Measurement Target Result
+Percentage of cases completed in
+specified time
+Specified time frames for FY 2002 to be
+determined in FY 2001
+Inspect each major onshore construction
+projects at least once every four weeks
+during construction and at least once after
+construction completion
+100% of qualifying projects inspected per
+established schedule
+Increase the percentage of licenses
+issued for applications using ALP
+2% increase over FY 2001
+Evaluate and improve effectiveness of
+required environmental enhancement and
+mitigation measures
+Conduct 5 site visits to evaluate
+effectiveness
+Hold 2 regional meetings with
+stakeholders
+Initiate annual reports to evaluate the
+effectiveness of this effort
+Percentage of filings addressing the
+development of increased capacity
+25% of all relicense cases using ALP or
+other collaborative process
+(Continued on next page.)
+
+[[PDF_PAGE_0044]]
+Federal Energy Regulatory Commission
+FY 2002
+Measurement Target Result
+42
+Percentage of high- and significant-
+hazard- potential dams meeting all current
+structural safety standards
+Percentage remains uniformly high
+Percentage of high- and significant-
+hazard- potential dams inspected annually
+100% of qualifying dams inspected
+annually
+Percentage of high- and significant-
+hazard- potential dams in compliance with
+emergency action plan requirements
+100% of qualifying dams in compliance
+Update and add new chapters to the
+Engineering Guidelines, as appropriate
+Complete revisions to Chapter 3 - Gravity
+Dams
+Complete development of the dam
+performance monitoring program
+Performance monitoring program
+established
+FY 2003
+Measurement Target Result
+Percentage of natural gas pipelines with
+approved Order No. 637 compliance filings
+100% of pipelines subject to Order No. 637
+Statutory cases by workload category All cases competed by statutory action
+date
+Number of cases requiring additional
+remedial action
+Less than 20% of all cases processed in
+FY 2002 require additional remedial action,
+with a 5% improvement for FY 2003
+Completion of interconnection proceeding Adopt new interconnection standard
+agreement by October 31, 2002
+Percentage of pipeline certificate cases
+completed in specified time frames
+85% of cases completed within the
+following time frames:
+< unprotested cases that involve no
+precedential issues, 159 days
+< protested cases that involve no
+precedential issues, 304 days
+< cases of first impression or containing
+larger policy implications, 365 days
+< cases requiring a major environmental
+assessment or environmental impact
+statement, 480 days
+Percentage of filings addressing the
+development of increased hydropower
+capacity
+25% of all relicense cases using ALP
+Increase non-federal hydropower
+capacity
+Complete license amendments proposing
+increased capacity/generation in less than
+12 months
+(Continued on next page.)
+
+[[PDF_PAGE_0045]]
+FY 2001 Annual Performance Report
+FY 2003
+Measurement Target Result
+43
+Percentage of hydropower licenses
+approved within specified time frames
+75% of licenses approved within the
+following time frames:
+< ALP median case, less than 16 months
+< Traditional median case, less than 43
+months
+Inspect each major onshore pipeline
+project at least once every four weeks
+during construction and at least once after
+construction completion
+100% of qualifying projects inspected per
+established schedule
+Increase the percentage of hydropower
+licenses issued using alternative licensing
+process (ALP)
+2% increase over FY 2002
+Evaluate and improve the effectiveness of
+required environmental enhancement and
+mitigation measures in hydropower
+licenses
+< Conduct 5 site visits
+< Hold 2 regional meetings with
+stakeholders
+< Disseminate 2 environmental
+effectiveness reports
+Percentage of high- and significant-
+hazard-potential dams inspected annually
+100% of high- and significant-hazard-
+potential dams inspected annually
+Percentage of high- and significant-
+hazard-potential dams meeting all current
+structural safety standards
+Percentage of high- and significant-
+hazard-potential dams meeting all current
+structural safety standards remains
+uniformly high
+Percentage of high- and significant-
+hazard-potential dams in compliance with
+EAP requirements
+100% of qualifying dams in compliance
+with EAP requirements
+Update and add new chapters to the
+Engineering Guidelines, as appropriate
+Issue new or revised Engineering
+Guidelines chapters, as appropriate
+
+[[PDF_PAGE_0046]]
+Federal Energy Regulatory Commission
+44
+Management Performance Measurements FY 1999 – FY 2003
+FY 1999
+Measurement Target Result
+Reduce the processing time for docketed
+workload and for resolving disputes
+None established C Met or exceeded processing targets for
+natural gas pipeline certificates
+C Demonstrated that collaborative process
+could reduce processing of hydropower
+licence applications to 0.99 years from
+2.77 years
+C 80% of cases set for litigation reached
+full or partial settlement
+Minimize filing burden None established C Issued two orders projected to save
+industry more than 230,000 hours in
+reporting time
+C Upgraded software on several auto-
+mated forms
+Generate better information for use by the
+industries
+None established C Added new features to automated
+systems
+C Began process of Internet site redesign
+Continue to receive an unqualified audit
+opinion on the Annual Financial Statements
+Unqualified opinion Unqualified opinion received
+Formulate the budget so that current year
+costs are within 5% of the total budgetary
+resources for the fiscal year
+Spending within 5% of funding Actual spending was within 2.8% of
+funding
+Pay 95% of all payments accurately and
+on time: vendors within the time required
+by the Prompt Payment Act; internal
+customers in 10 days or less
+95% of payments to external vendors
+made timely and accurately; payments to
+internal customers in 10 days or less
+99.57% of external payments were made
+within the established time frames.
+Internal payments averaged 3.9 days.
+Meet or exceed planned due dates 90% of
+the time for performing and completing
+FMFIA requirements and internal financial
+and performance reviews
+Meet or exceed planned due dates 90% of
+the time
+Met 100% of planned due dates
+FY 2000
+Measurement Target Result
+Reduce the processing time for docketed
+workload and for resolving disputes
+None established C Met or exceeded processing targets for
+natural gas pipeline certificates
+C Set new time lines to reduce average
+litigation times by up to one quarter .
+Designated times were met in 80% of
+cases.
+C 52% of cases set for hearing were
+mediated
+C Average time for approval of
+uncontested settlements dropped from
+more than 100 days to 47 days
+(Continued on next page.)
+
+[[PDF_PAGE_0047]]
+FY 2001 Annual Performance Report
+FY 2000
+Measurement Target Result
+6This includes 5 cases begun in FY 2000 and completed in FY 2001. It does not include simple inquiries about
+ADR or cases in which parties expressed no interest in using ADR (11 cases), cases that were referred to Enforcement (2
+cases), cases in which the DRS only coached parties, or cases that are were ongoing into FY 2002 (17 cases).
+45
+Minimize filing burden None established C Revised accounting and reporting
+requirements to reduce information
+reporting and maintenance burden by
+25%, and updated records retention
+requirements
+C Initiated e-filing pilot for 35% of
+Commission’s filings
+Generate better information for use by the
+industries
+None established Extended use of Internet to disseminate
+dam safety information, pilot e-filings, and
+issue notices, orders, and major rules
+Continue to receive an unqualified audit
+opinion on the Annual Financial Statements
+Unqualified opinion Unqualified opinion received
+Formulate the budget so that current year
+costs are within 5% of the total budgetary
+resources for the fiscal year
+Spending within 5% of funding Actual spending was within 5% of funding
+Pay 95% of all payments accurately and
+on time: vendors within the time required
+by the Prompt Payment Act; internal
+customers in 10 days or less
+95% of payments to external vendors
+made timely and accurately; payments to
+internal customers in 10 days or less
+On-time invoice payments at 85%. (Early
+payments made to close out old system
+and implement new one.) Internal
+payments averaged 2.6 days.
+Meet or exceed planned due dates 90% of
+the time for performing and completing
+FMFIA requirements and internal financial
+and performance reviews
+Meet or exceed planned due dates 90% of
+the time
+Met 100% of planned due dates
+FY 2001
+Measurement Target Result
+Percentage of customers satisfied with
+ADR procedures at the Commission
+75% satisfaction rate OALJ: Participants report near 100%
+satisfaction with ADR procedures.
+Satisfaction is indicated by calls from
+participants and by continuing and
+increasing requests for the appointment
+of settlement judges and mediators.
+DRS: 90% (20 out of 22 completed
+cases).6
+Percentage of contested proceedings that
+achieve consensual agreement
+25% increase over FY 2000 OALJ: During FY2001 80% of cases set
+for hearing were resolved through some
+form of ADR vs. 76.7% during FY2000.
+DRS: 90% vs. 89% during FY 2000. 6
+(Continued on next page.)
+
+[[PDF_PAGE_0048]]
+Federal Energy Regulatory Commission
+FY 2001
+Measurement Target Result
+46
+Number of requests and referrals for ADR
+services
+50% increase over FY 2000 OALJ: During FY2001 60 out of 77 cases
+terminated by OALJ were resolved
+through some means of ADR vs. 60 out of
+83 cases during FY2000
+DRS: 52 requests vs. 40 requests in FY
+2000, a 30% increase. This includes
+simple inquiries about ADR, cases referred
+to DRS in which the parties indicated no
+interest in pursuing ADR, cases referred
+to Enforcement, and ongoing cases.
+Percentage of ADR cases resolved or
+terminated within established time frames
+C 50% within 100 days
+C 75% within 150 days
+C 100% within 200 days
+OALJ: Of 60 cases:
+C 10 cases settled within 100 days (17%)
+C 10 cases settled within 150 days (17%)
+C 11 cases settled within 200 days (18%)
+C 29 cases settled after 200 days (48.3%)
+DRS: Of 22 completed cases:
+C 8 cases completed within 100 days
+(36%)
+C 4 cases completed within 150 days
+(54%)
+C 5 cases completed within 200 days
+(77%)
+C 5 cases completed in over 200 days
+Percentage of filings that FERC is capable
+of receiving electronically
+Capability to receive 50% of filings
+electronically
+Capability to receive 38% of filings
+electronically by the end of FY 2001.
+Percentage brought to 46% by mid-
+November 2001.
+Percentage of filings submitted
+electronically
+50% of filings FERC is capable of receiving
+electronically are submitted electronically
+17% of filings FERC is capable of receiving
+electronically are submitted electronically .
+30% reached by October 31.
+Timely issuance of notices/orders 95% of gas and electric notices and
+orders issued within 5 workdays
+97% of gas and electric notices/orders
+issued within 5 workdays
+Unqualified opinion on external audits Unqualified opinion Unqualified opinion received for FY 2001.
+Percentage of office directors operating
+within designated salary budgets
+80% 100% of office directors operated within
+designated salary budgets.
+Percentage of payments made within
+Prompt Payment Act requirements
+95% 81%
+Number of days to award purchase
+orders
+Within 5 days of receipt of notification 98% of purchase orders awarded within 5
+days of receipt of requisition
+Number of days to award contracts Within 30 days of receipt of notification 95% of contracts awarded within 30 days
+of receipt of requisitions
+Number of award fee contracts Increase by 10% over FY 2000 Award fee contracts and firm fixed price
+contracts increased by 10% over FY 2000
+levels.
+Percentage of respondents giving positive
+ratings for “FERC focusing on the right
+things”
+10% increase over baseline The Commission adopted a new Strategic
+Plan to focus on important issues arising
+from the Western Market meltdown. No
+surveys done during this times of great
+pressure and uncertainty .
+Percentage of employees in under-
+represented groups
+Increase Hispanic employee population by
+5%
+The Commission increased its Hispanic
+employee population by 10 percent.
+(Continued on next page.)
+
+[[PDF_PAGE_0049]]
+FY 2001 Annual Performance Report
+FY 2001
+Measurement Target Result
+47
+Percentage of senior executives
+participating in FERC’s diversity initiative
+100% of the office directors will have
+participated in the first phase
+< 100 percent of office directors
+participated in discussions with the
+Diversity Council concerning the
+direction of diversity at FERC.
+< 25 percent of office directors actively
+participated in minority recruitment
+activities.
+Percentage of supervisory participation in
+LEaD
+100% of supervisors and managers will
+have completed training on the 5
+leadership behaviors
+100% of supervisors and managers
+(including new supervisors, managers,
+and team leaders) have completed training
+on the 5 leadership behaviors.
+Number of learning agreements 5% increase over FY 2000 29 employees on learning agreements in
+FY 2001, the first year of reporting
+Number of mentor/protegee teams 10 mentor/protegee teams At least 15 mentor/protege teams
+FY 2002
+Measurement Target Results
+Number of documents and filings available
+and received electronically
+10% increase over FY 2001
+Reliability of IT infrastructure services C 98% network availability
+C 33% annual PC replacement
+C 98% Internet site availability
+Percentage of agenda items issued within
+5 working days of a Commission meeting
+100%
+Percentage of electric notices issued
+within 5 working days of receipt of filing
+95%
+Unqualified opinion on annual financial
+statements
+Unqualified opinion
+Monitor manage-to-budget concept Track biweekly; review quarterly
+Effective and efficient financial and
+administrative support
+Collect annual charges within 45 days of
+billing
+98% of invoices paid by electronic funds
+transfer
+1% increase in contract awards and
+purchase orders to small, minority , and
+women-owned businesses
+All contracts advertised online
+All contracts performance-based
+Increase diversity of staff in high grades Increase diversity in GS-14, GS-15, and
+SES positions by 10% over current
+baseline
+(Continued on next page.)
+
+[[PDF_PAGE_0050]]
+Federal Energy Regulatory Commission
+FY 2002
+Measurement Target Results
+48
+Number of new hires from recruitment
+program
+Meet the Commission’s need for new talent
+through targeted recruitment, with 50% at
+entry levels
+Staff participation in learning and
+development programs
+Expand leadership development program
+C Implement development plans for 20% of
+staff
+C Initiate employee rotational development
+program
+Periodic manager-staff discussions about
+performance accomplishments and
+improvements
+Expand to 3 major offices the program for
+quarterly discussions on performance
+objectives
+Percentage of awards presented for
+helping accomplish specific Commission
+goals
+More than 50% of awards for quality
+service based on accomplishments
+supporting strategic objectives
+FY 2003
+Measurement Target Results
+Number of new hires from recruitment
+program
+Attract new talent through targeted
+recruitment, with 50% at entry levels
+New staff from summer intern program C Expand program by 50%
+C Hire 30% of participants into permanent
+positions
+Increase diversity of staff in high grades Continue increasing diversity in GS-14,
+GS-15 and SES positions
+Increase average supervisor-to-staff
+ratios
+Increase ratio from 1:8 to 1:9
+Improved executive performance Implement 360 degree assessment of
+senior staff
+Percentage of transactions accepted
+electronically
+95% of transactions accepted
+electronically
+Percentage of e-issuance versus paper 90% of issuances made electronically
+Improved Web site C Redesigned Web site
+C 99% availability
+Timeliness of getting public documents
+online
+99% within 24 hours of receipt or
+issuance
+Network availability 99%
+Standard office automation platform and
+PC rate of refresh
+33%
+Timeliness of virus definition files updates
+on servers and workstations
+Updates within 24 hours from release by
+vendors
+(Continued on next page.)
+
+[[PDF_PAGE_0051]]
+FY 2001 Annual Performance Report
+FY 2003
+Measurement Target Results
+49
+IT system changes to comply with
+enterprise IT architecture and
+configuration management practices
+Implement 98% reviews
+Improved integration of work processes
+and electronic filing
+Refresh integrated filing, docket, and
+document management system
+Monitoring of manage-to-budget process Bi-weekly tracking of office salary levels
+and quarterly review of salary levels
+between CFO and Office Directors
+Timeliness of annual charges collections Within 45 days of billing
+Invoices paid by electronic funds transfer 98%
+Accuracy and completeness of annual
+financial statements
+Unqualified opinion
+Percentage of contracts performance-
+based
+100%
+Percentage of contracts advertised online 100%

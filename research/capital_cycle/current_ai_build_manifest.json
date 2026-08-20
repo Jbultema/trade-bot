@@ -1,0 +1,12 @@
+{
+  "allocation_authority": 0.0,
+  "as_of": "2026-08-20",
+  "observation_rows": 123,
+  "observed_families": 5,
+  "required_families": 6,
+  "sec_download_failures": 0,
+  "sec_downloaded": 0,
+  "sec_fetch_attempted": false,
+  "sec_local_imported": 0,
+  "usable_families": 5
+}

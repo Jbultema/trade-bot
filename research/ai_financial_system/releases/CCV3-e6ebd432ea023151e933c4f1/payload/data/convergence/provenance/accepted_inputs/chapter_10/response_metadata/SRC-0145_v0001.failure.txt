@@ -1,0 +1,7 @@
+source_id=SRC-0145
+attempt_id=SRC-0145_v0001
+original_url=https://www.commerce.gov/sites/default/files/2026-02/DOCFY2025AFR_508.pdf
+status=retrieval_failed_after_bounded_retry
+retry_count=2
+max_time_seconds=90
+boundary=access_control_respected_no_circumvention

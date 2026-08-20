@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1244862,
+  "content_sha256": "f71bc98384b0e63b1d0e2c175081998f089ecbd16740d46c311416f79ae801d8",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1596532/000159653226000078/anet-20260331.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0120_f71bc98384b0e63b.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1596532/000159653226000078/anet-20260331.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-06",
+  "publisher": "Arista Networks Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0120_f71bc98384b0e63b.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:52:53.636831+00:00",
+  "retrieval_started_utc": "2026-07-26T17:52:53.600809+00:00",
+  "selected_response_headers": {
+    "content-length": "118105",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:52:53 GMT",
+    "last-modified": "Wed, 06 May 2026 10:02:06 GMT"
+  },
+  "source_id": "SRC-0120",
+  "status": "preserved_complete",
+  "title": "Arista Networks Form 10-Q for quarter ended March 31 2026",
+  "write_state": "new_version_written"
+}

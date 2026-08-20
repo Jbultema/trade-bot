@@ -7,6 +7,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT,
     DEFAULT_REFERENCE_BASELINE_STRATEGIES,
 )
+from trade_bot.research.research_governance import has_verified_oos_status
 from trade_bot.research.strategy_outcome_utility import enrich_strategy_outcome_utility
 
 PRUNED_STATUS = "pruned_dead_end"
@@ -52,12 +53,13 @@ def rank_strategy_candidates(frame: pd.DataFrame) -> pd.DataFrame:
         ranked["validation_tier"] = ""
 
     ranked["_promotion_rank"] = (
-        ranked["promotion_decision"]
+        ranked["governed_promotion_decision"]
         .astype(str)
         .map(
             {
                 "promote_candidate": 0,
                 "evolve_next_iteration": 1,
+                "hold_for_oos_evidence": 2,
                 "reject_or_hold_for_reference": 2,
                 "reject_walk_forward_fragility": 3,
                 "reject_regime_fragility": 4,
@@ -154,10 +156,21 @@ def add_research_status(frame: pd.DataFrame) -> pd.DataFrame:
         "strategy": "",
         "operability_label": "",
         "growth_utility_tier": "",
+        "oos_evidence_status": "missing_oos_evidence",
     }.items():
         if column not in output:
             output[column] = default
         output[column] = output[column].fillna(default)
+    output["oos_promotion_eligible"] = output["oos_evidence_status"].map(has_verified_oos_status)
+    output["governed_promotion_decision"] = output["promotion_decision"]
+    blocked = (
+        output["promotion_decision"].isin({"promote_candidate", "evolve_next_iteration"})
+        & ~output["oos_promotion_eligible"]
+    )
+    output.loc[blocked, "governed_promotion_decision"] = "hold_for_oos_evidence"
+    if "monitoring_readiness_label" in output:
+        output["raw_monitoring_readiness_label"] = output["monitoring_readiness_label"]
+        output.loc[blocked, "monitoring_readiness_label"] = "oos_evidence_required"
 
     statuses = []
     reasons = []
@@ -206,13 +219,17 @@ def _research_status_for_row(row: pd.Series) -> tuple[str, str]:
         return PRUNED_STATUS, "left_tail_regime_loss_too_large"
 
     promoted = decision in {"promote_candidate", "evolve_next_iteration"}
+    oos_verified = has_verified_oos_status(row.get("oos_evidence_status"))
     high_growth = cagr == cagr and cagr >= 0.10
     good_risk_adjusted = calmar == calmar and calmar >= 0.55
     growth_tier = str(row.get("growth_utility_tier", ""))
-    tolerable_tail = max_drawdown != max_drawdown or max_drawdown > DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT
+    tolerable_tail = (
+        max_drawdown != max_drawdown or max_drawdown > DEFAULT_OUTCOME_HARD_DRAWDOWN_LIMIT
+    )
     human_operable = operability != "too_twitchy"
     if (
         promoted
+        and oos_verified
         and high_growth
         and good_risk_adjusted
         and tolerable_tail
@@ -221,6 +238,8 @@ def _research_status_for_row(row: pd.Series) -> tuple[str, str]:
     ):
         return OPERATIONAL_STATUS, "growth_and_risk_profile_still_operational"
 
+    if promoted and not oos_verified:
+        return ITERATE_STATUS, "holdout_or_oos_evidence_required"
     if promoted or (cagr == cagr and cagr >= 0.08) or "candidate" in role or "guardrail" in family:
         return ITERATE_STATUS, "keep_for_targeted_iteration_not_default_monitoring"
     return ARCHIVE_STATUS, "use_as_context_or_reference_only"

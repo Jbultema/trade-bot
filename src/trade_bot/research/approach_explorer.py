@@ -128,6 +128,7 @@ def load_experiment_candidates(root: str | Path = DEFAULT_EXPERIMENTS_DIR) -> pd
             "decision_sanity",
             "research_status",
             "prune_reason",
+            "oos_evidence_status",
         ]
         available_columns = [column for column in scorecard_columns if column in scorecards]
         candidates = candidates.merge(

@@ -1,0 +1,24 @@
+HTTP/2 200 
+content-type: text/html; charset=UTF-8
+x-drupal-dynamic-cache: MISS
+content-language: en
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-generator: Drupal 11 (https://www.drupal.org)
+content-security-policy: report-uri /report-csp-violation; upgrade-insecure-requests
+x-content-security-policy: report-uri /report-csp-violation; upgrade-insecure-requests
+x-webkit-csp: report-uri /report-csp-violation; upgrade-insecure-requests
+x-xss-protection: 1; mode=block
+referrer-policy: no-referrer
+x-drupal-cache: MISS
+last-modified: Sat, 25 Jul 2026 20:56:33 GMT
+etag: "1785012993-gzip"
+x-request-id: a2f0b713-b45b-4374-9a4a-e51c71d83315
+x-ah-environment: prod
+x-cache-hits: 2
+x-age: 77500
+cache-control: public, max-age=300
+expires: Sun, 26 Jul 2026 18:33:14 GMT
+date: Sun, 26 Jul 2026 18:28:14 GMT
+strict-transport-security: max-age=15768000
+

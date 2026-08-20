@@ -119,6 +119,39 @@ def snapshot_created_at_for_market_date(
     return timestamp.isoformat()
 
 
+def missing_period_backfill_dates(
+    planned_dates: Iterable[object],
+    existing_dates: Iterable[object],
+    *,
+    period_frequency: str,
+    retention_frequency: str | None = None,
+) -> tuple[pd.Timestamp, ...]:
+    """Return canonical period-end dates that are absent from the retained store."""
+    planned = _normalize_dates(planned_dates)
+    if planned.empty:
+        return ()
+    existing = _normalize_dates(existing_dates)
+    existing_date_values = set(existing)
+    retained_buckets = (
+        set(existing.to_period(retention_frequency)) if retention_frequency else set()
+    )
+    plan = pd.DataFrame(
+        {
+            "market_date": planned,
+            "period": planned.to_period(period_frequency),
+        }
+    )
+    canonical = plan.groupby("period", sort=True)["market_date"].max()
+    missing_mask = ~canonical.isin(existing_date_values)
+    if retention_frequency:
+        canonical_buckets = pd.DatetimeIndex(canonical).to_period(retention_frequency)
+        missing_mask &= ~canonical_buckets.isin(retained_buckets)
+    missing = canonical.loc[missing_mask]
+    if missing.empty:
+        return ()
+    return tuple(pd.DatetimeIndex(missing).sort_values())
+
+
 def _latest_date_per_week(
     dates: pd.DatetimeIndex,
     *,

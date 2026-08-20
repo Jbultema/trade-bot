@@ -1,0 +1,166 @@
+{
+  "authority": {
+    "canonical_integration": "NOT_AUTHORIZED",
+    "causal_transfer": "BLOCK",
+    "chapter_docx_publication": "NOT_AUTHORIZED",
+    "coefficient_transfer": "BLOCK",
+    "comparative_system_use": "BLOCK",
+    "metadata_acceptance": "ACCEPTED_BY_FRESH_UNINVOLVED_REVIEW",
+    "model_use": "BLOCK",
+    "predictive_use": "BLOCK"
+  },
+  "dedicated_validation": "PASS",
+  "external_snapshot_drift": {
+    "author_seal_sha256": "eaa96cda994f54772da0aae4018525fbb3f2e75a53a52802ead97ccb5a852d8a",
+    "classification": "EXTERNAL_POST_SEAL_SHARED_TRACKER_DRIFT",
+    "current_review_sha256": "2b195132ea43c043c29c6b6b85a3a5b36c4dac2b664c62302e701eb8bd4acddc",
+    "expected_paths": [
+      "research/ai_financial_system/staging/second_half_acceptance_tracker.md"
+    ],
+    "fresh_review_before_after_unchanged": true,
+    "paths": [
+      "research/ai_financial_system/staging/second_half_acceptance_tracker.md"
+    ],
+    "tracker_mtime_epoch": 1785093799
+  },
+  "files": [
+    {
+      "bytes": 44222,
+      "path": "artifact_rehash_audit.csv",
+      "rows": 173,
+      "sha256": "af80ae0e36297ff92ad9cb5835ba7a1d1757cae6dd083f5c2521c7a010558311"
+    },
+    {
+      "bytes": 25367,
+      "path": "clean_build_comparison.csv",
+      "rows": 94,
+      "sha256": "12fc8168c0fd04d6027d262136dc4200e7030043a2d7ec20727bf42b9ba9a560"
+    },
+    {
+      "bytes": 7552,
+      "path": "derivative_parent_rehash_audit.csv",
+      "rows": 23,
+      "sha256": "e8a0f6cb7fbcc3a3a52f1b56847e8a808d7e1b302b847f6b030aacd2c36f71a2"
+    },
+    {
+      "bytes": 292,
+      "path": "foreign_key_audit.csv",
+      "rows": 7,
+      "sha256": "25eb10c47be929190e0c0b17e8b98b05e519dd62b48b2442933c8fa97eb240ed"
+    },
+    {
+      "bytes": 375,
+      "lines": 14,
+      "path": "generic_validation_results.json",
+      "sha256": "0e6246644daedea92db07b99e102ccb0ce4370ef2852061dc5ecbee6e86e2c45"
+    },
+    {
+      "bytes": 1823,
+      "path": "governing_hash_audit.csv",
+      "rows": 7,
+      "sha256": "e70e43a34c18f879d0741e11daf1edb3f1be7e554e508e94cb0c77d6a6b45ffc"
+    },
+    {
+      "bytes": 29085,
+      "path": "locator_window_rehash_audit.csv",
+      "rows": 58,
+      "sha256": "b5a245d32e8a34eb1f56811e4afae59369c41828c572c7d0b588efde2583a311"
+    },
+    {
+      "bytes": 24720,
+      "lines": 754,
+      "path": "machine_results.json",
+      "sha256": "7744f4e52a6ab46cde97f331cfb11ab66b6e11669a6c6ffad4a69d0e075138ed"
+    },
+    {
+      "bytes": 62,
+      "path": "patch_list.csv",
+      "rows": 0,
+      "sha256": "e3d84ae58cb31487cb1910767eafabfee1e0f75ff81c9fe08bb7fca382f4dc01"
+    },
+    {
+      "bytes": 962,
+      "path": "population_audit.csv",
+      "rows": 27,
+      "sha256": "d3f7422ca938bab6783cc145ba371eee6615332b92d4e09eb9e0a4becf19588c"
+    },
+    {
+      "bytes": 95292,
+      "path": "protected_input_no_write_audit.csv",
+      "rows": 327,
+      "sha256": "325bc6db181cbf45d03eaeee4b70e2c23f5e81790ebeace8adbde9ff330acf3f"
+    },
+    {
+      "bytes": 4525,
+      "lines": 83,
+      "path": "review_report.md",
+      "sha256": "02f6ef9a62386f25d31a445399e6de14dec3cde5d78e221bd3e90271417a1ba6"
+    },
+    {
+      "bytes": 186,
+      "lines": 9,
+      "path": "ruff_results.json",
+      "sha256": "2026089721f30edf1c41ccdb9138ec5b0a7bf0831b5189855590ef5095c5fc24"
+    },
+    {
+      "bytes": 5219,
+      "path": "source_version_rehash_audit.csv",
+      "rows": 25,
+      "sha256": "31f222de8d35f227b5b087548d0dfebfb6c77d49c3d66af690c711ccdbad0faf"
+    },
+    {
+      "bytes": 1893,
+      "lines": 52,
+      "path": "validation_variance_adjudication.json",
+      "sha256": "cd3964be30e077ec6f1fdfd59df1545df20c2a5c47bb5781a62c340ee498e450"
+    },
+    {
+      "bytes": 94013,
+      "lines": 2375,
+      "path": "verify_metadata_rebase.py",
+      "sha256": "b20e93044e480c57d74c769323b5058031482462cbe7b3e860bda4fc009aa476"
+    }
+  ],
+  "generic_validation": "PASS",
+  "lane": "lane_2_verify_chapter_18_metadata_rebase",
+  "packet_type": "chapter_18_metadata_rebase_fresh_uninvolved_acceptance_review",
+  "populations": {
+    "arithmetic_nonadditivity_controls": 20,
+    "clean_build_files": 94,
+    "coefficient_blocks": 18,
+    "derivatives": 23,
+    "earlier_intrinsic_repairs": 17,
+    "final_manifest_entries": 102,
+    "intrinsic_analytical_records": 128,
+    "intrinsic_csv_rows": 1654,
+    "intrinsic_manifest_artifacts": 50,
+    "intrinsic_record_claim_links": 214,
+    "intrinsic_scalar_fields": 17112,
+    "locator_relationships": 58,
+    "locator_windows_rehashed": 101,
+    "ordered_source_edges": 73,
+    "partially_supported": 26,
+    "predictive_blocks": 16,
+    "preservation_manifest_artifacts": 123,
+    "protected_input_files": 327,
+    "rebuilt_v5_residual_repairs": 2,
+    "retained_failures": 2,
+    "retrieval_attempts": 25,
+    "semantic_patches": 18,
+    "source_metadata_csv_rows": 718,
+    "source_metadata_scalar_fields": 8096,
+    "successful_artifacts": 23,
+    "supported": 32,
+    "unique_sources": 23
+  },
+  "residual_patches": 0,
+  "review_packet_generic_validation": "PASS",
+  "reviewed_manifest_sha256": "43d2ed685f5e0fe71146023901ed43526b19d8a6167d6674cb60798efa3d8c28",
+  "reviewed_packet": "lane_1_chapter_18_metadata_rebase",
+  "ruff": "PASS",
+  "self_hash_policy": "lane_manifest.json and review_generic_validation_results.json are excluded from file entries",
+  "status_date": "2026-07-26",
+  "two_clean_builds": "PASS",
+  "variance_adjudication": "EXPLAINED_DETERMINISTIC_SEAL_TRANSITION",
+  "verdict": "ACCEPT_CHAPTER_18_METADATA_REBASE_WITH_RETAINED_HOLDS"
+}

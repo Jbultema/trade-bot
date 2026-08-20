@@ -1,0 +1,40 @@
+{
+  "candidate_manifest_sha256": "389319e0f2e472ece58a92185a1f9f300f517c488ec1746aea70b67dd9d080f7",
+  "candidate_status": "BOUNDED_INTEGRATION_CANDIDATE_NOT_CANONICAL",
+  "canonical_write": "NOT_AUTHORIZED_PENDING_FULL_SECOND_HALF_INTEGRATION",
+  "clean_builds_compared": 2,
+  "deterministic_files_compared": 15,
+  "retained_holds": [
+    "all eight primary-document snapshots and content hashes",
+    "governed top-20 population reconstruction",
+    "S&P 500 aggregate reproduction",
+    "unnamed investee allocation at Alphabet and NVIDIA and residual Amazon attribution",
+    "exact Microsoft component and tax allocation",
+    "prospective Meta/Tesla and realization monitoring"
+  ],
+  "review_verdict": "ACCEPT_WITH_EXPLICIT_EXTERNAL_HOLDS",
+  "semantic_counts": {
+    "bridges": 4,
+    "candidate_claims": 5,
+    "candidate_handoffs": 11,
+    "earnings": 8,
+    "methods": 11,
+    "population_observations": 10,
+    "rollforward_components": 16,
+    "rollforwards": 5,
+    "transformation_audit_rows": 500
+  },
+  "sqlite_foreign_key_failures": 0,
+  "sqlite_integrity": "ok",
+  "sqlite_loaded_rows": {
+    "private_investment_accounting_methods": 11,
+    "private_investment_bridge_components": 5,
+    "private_investment_carrying_value_rollforwards": 5,
+    "private_investment_earnings": 8,
+    "private_investment_earnings_bridges": 4,
+    "private_investment_earnings_components": 2,
+    "private_investment_population_observations": 10,
+    "private_investment_rollforward_components": 16
+  },
+  "status": "PASS"
+}

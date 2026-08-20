@@ -54,6 +54,7 @@ def replay_experiment_library(
     *,
     source_root: str | Path,
     output_root: str | Path,
+    strategy_names: tuple[str, ...] = (),
     refresh_data: bool = False,
     max_workers: int = 4,
     progress: Callable[[int, int, int], None] | None = None,
@@ -72,6 +73,27 @@ def replay_experiment_library(
     candidates_by_iteration = load_saved_experiment_candidates(source)
     if not candidates_by_iteration:
         raise ValueError(f"No saved candidates found under {source}")
+    if strategy_names:
+        requested = set(strategy_names)
+        available = {
+            candidate.name
+            for candidates in candidates_by_iteration.values()
+            for candidate in candidates
+        } | set(config.strategies)
+        missing = sorted(requested - available)
+        if missing:
+            raise ValueError(f"Requested strategies are not saved or configured: {missing[:10]}")
+        candidates_by_iteration = {
+            iteration: tuple(
+                candidate for candidate in candidates if candidate.name in requested
+            )
+            for iteration, candidates in candidates_by_iteration.items()
+        }
+        candidates_by_iteration = {
+            iteration: candidates
+            for iteration, candidates in candidates_by_iteration.items()
+            if candidates
+        }
     saved_candidate_names = [
         candidate.name
         for candidates in candidates_by_iteration.values()
@@ -154,6 +176,7 @@ def replay_experiment_library(
         "source_root": str(source),
         "output_root": str(output),
         "replay_semantics": "exact_saved_candidate_definitions",
+        "requested_strategy_names": sorted(strategy_names),
         "expected_candidate_count": len(candidate_names),
         "saved_candidate_count": len(saved_candidate_names),
         "configured_candidate_count": len(configured_candidates),

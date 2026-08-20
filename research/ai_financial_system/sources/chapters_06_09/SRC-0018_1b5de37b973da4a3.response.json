@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1167053,
+  "content_sha256": "1b5de37b973da4a3f1cd31a09aa455c01c519ea7cc409c73de2250ad156f99e4",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0018_1b5de37b973da4a3.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000052/nvda-20260426.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-20",
+  "publisher": "NVIDIA Corporation",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0018_1b5de37b973da4a3.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:50:48.531192+00:00",
+  "retrieval_started_utc": "2026-07-26T17:50:48.497845+00:00",
+  "selected_response_headers": {
+    "content-length": "84876",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:50:48 GMT",
+    "last-modified": "Wed, 20 May 2026 20:36:19 GMT"
+  },
+  "source_id": "SRC-0018",
+  "status": "preserved_complete",
+  "title": "NVIDIA Form 10-Q for quarter ended April 26 2026",
+  "write_state": "new_version_written"
+}

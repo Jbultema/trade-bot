@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 162054,
+  "content_sha256": "ceab7b5bb38bbc6198b787672cfcc6c69d703e9bbe1094d7d733560eb1a889d4",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926055894/hut-20260506xex99d1.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0096_ceab7b5bb38bbc61.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926055894/hut-20260506xex99d1.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-06",
+  "publisher": "Hut 8 Corp.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0096_ceab7b5bb38bbc61.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:42.406309+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:42.343910+00:00",
+  "selected_response_headers": {
+    "content-length": "12559",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:42 GMT",
+    "last-modified": "Wed, 06 May 2026 10:50:41 GMT"
+  },
+  "source_id": "SRC-0096",
+  "status": "preserved_complete",
+  "title": "Hut 8 first quarter 2026 results and River Bend financing update",
+  "write_state": "new_version_written"
+}

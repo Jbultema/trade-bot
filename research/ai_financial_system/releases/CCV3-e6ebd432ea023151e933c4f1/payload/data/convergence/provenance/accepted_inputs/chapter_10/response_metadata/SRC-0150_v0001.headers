@@ -1,0 +1,19 @@
+HTTP/2 200 
+content-type: application/pdf
+content-length: 82293
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+last-modified: Tue, 26 Nov 2024 13:29:54 GMT
+x-request-id: v-e8e9c2cc-ef9d-11f0-b725-6bea6aefa394
+x-ah-environment: prod
+x-cache-hits: 121
+x-age: 622220
+accept-ranges: bytes
+x-edgeconnect-midmile-rtt: 16
+x-edgeconnect-origin-mex-latency: 30
+cache-control: max-age=420
+expires: Sun, 26 Jul 2026 19:21:06 GMT
+date: Sun, 26 Jul 2026 19:14:06 GMT
+set-cookie: akaalb_DMAF_ALB_PROD=1785094146~op=~rv=67~m=~os=~id=0b5fb4c1aafdab83bbc0e966695bb307; path=/; HttpOnly; Secure; SameSite=None; Domain=.irs.gov
+strict-transport-security: max-age=31536000
+

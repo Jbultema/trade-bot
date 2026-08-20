@@ -1,0 +1,3906 @@
+10-K
+1
+a2091284z10-k.htm
+FORM 10-K
+QuickLinks
+-- Click here to rapidly navigate through this document
+UNITED STATES
+SECURITIES AND EXCHANGE COMMISSION
+Washington, D.C. 20549
+FORM 10-K
+(Mark One)
+ý
+ANNUAL REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+For the fiscal year ended August 29, 2002
+OR
+o
+TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+For the transition period from
+to
+Commission file number 1-10658
+Micron Technology, Inc.
+(Exact name of registrant as specified in its charter)
+Delaware
+75-1618004
+(State or other jurisdiction of
+incorporation or organization)
+(IRS Employer
+Identification No.)
+8000 S. Federal Way, P.O. Box 6, Boise, Idaho
+83707-0006
+(Address of principal executive offices)
+(Zip Code)
+Registrant's telephone number, including area code
+(208) 368-4000
+Securities registered pursuant to Section 12(b) of the Act:
+Title of each class
+Common Stock, par value $.10 per share
+Name of each exchange on which registered
+New York Stock Exchange
+Securities registered pursuant to Section 12(g) of the Act:
+None
+(Title of Class)
+Indicate by check mark whether the registrant (1) has filed all reports required to be filed by Section 13 or 15(d) of the
+Securities Exchange Act of 1934 during the preceding 12 months (or for such shorter period that the registrant was required to file such reports) and (2) has been subject to such filing
+requirements for the past 90 days. Yes
+ý
+No
+o
+Indicate
+by check mark if disclosure of delinquent filers pursuant to Item 405 of Regulation S-K is not contained herein and will not be contained to the best of
+registrants knowledge, in definitive proxy or information statements incorporated by reference in Part III of this Form 10-K or any amendment to this
+Form 10-K.
+ý
+The
+aggregate market value of the voting stock held by nonaffiliates of the registrant, based upon the closing price of such stock on September 27, 2002, as reported by the New
+York Stock Exchange, was approximately $5.3 billion. Shares of common stock held by each officer and director and by each person who owns 5% or more of the outstanding common stock have been
+excluded in that such persons may be deemed to be affiliates. This determination of affiliate status is not necessarily a conclusive determination for other purposes.
+The
+number of outstanding shares of the registrant's common stock as of October 10, 2002, was 605,060,962.
+DOCUMENTS INCORPORATED BY REFERENCE
+Portions of the Proxy Statement for registrant's 2002 Annual Meeting of Shareholders to be held on November 26, 2002, are incorporated by reference into
+Part III of this Annual Report on Form 10-K.
+PART I
+Item 1.
+Business
+The following discussion contains trend information and other forward-looking statements that involve a number of risks and uncertainties.
+Forward-looking statements include, but are not limited to, statements such as those made in "Products" regarding the Company's expectation that DDR SDRAMs will be its primary product type in
+2003, that demand for SDRAM is expected to continue for many consumer and communications applications, that the Company expects to begin shipping commercial volumes of 512 Meg DDR SDRAMs in
+2003 and that the CMOS imaging market is expected to grow significantly, and in "Manufacturing" regarding the Company's transition to its .13µ and
+.11µ line-width process technology and the possible outcomes of TECH's financing efforts. The Company's actual results could differ materially from the Company's
+historical results and those discussed in the forward-looking statements. Factors that could cause actual results to differ materially include, but are not limited to, those identified in "Item 7.
+Management's Discussion and Analysis of Financial Condition and Results of Operations—Certain Factors." All period references are to the Company's fiscal periods unless otherwise
+indicated.
+General
+Micron Technology, Inc., and its subsidiaries (hereinafter referred to collectively as the "Company") principally design, develop, manufacture and market
+semiconductor products. Micron Technology, Inc., a Delaware corporation, was incorporated in 1978. The Company's executive offices are located at 8000 South Federal Way, Boise, Idaho
+83716-9632 and its telephone number is (208) 368-4000. Information about the Company is available on the internet at www.micron.com.
+On
+April 22, 2002, the Company acquired substantially all of the assets of Toshiba Corporation's ("Toshiba") DRAM operations at Dominion Semiconductor L.L.C. in Virginia. The
+total purchase price of $328 million included cash and 1.5 million shares of the Company's common stock. (See "Item 8. Financial Statements and Supplementary Data—Notes to
+Consolidated Financial Statements—Acquisitions—Toshiba Corporation DRAM Assets.")
+Products
+The Company designs, develops, manufactures and markets semiconductor products. The Company offers products with a wide variety of packaging and configuration
+options, architectures and performance characteristics to meet particular customer needs.
+Dynamic Random Access Memory ("DRAM").
+DRAM is the Company's primary semiconductor product.
+DRAMs are high density, low-cost-per-bit, random access memory components that store digital information and provide high-speed storage and
+retrieval of data. DRAMs are the most widely used semiconductor memory component in computer systems. DRAM sales represented approximately 95%, 87% and 94% of the Company's net sales in 2002,
+2001 and 2000 respectively.
+In
+the fourth quarter of 2002, the Company transitioned from the 256 Meg synchronous DRAM ("SDRAM") to the 256 Meg Double Data Rate ("DDR") SDRAM as its primary product in production.
+DDR SDRAMs accounted for 21% of the Company's DRAM sales in 2002 and 1% of the Company's DRAM sales in 2001. Computer and networking manufacturers are transitioning from using SDRAM to DDR
+SDRAM as their primary DRAM products and the Company expects DDR SDRAMs to be its primary product type in 2003. The Company offers 128 Meg and 256 Meg DDR SDRAMs and SDRAMs in
+multiple configurations, speeds and package types.
+SDRAMs were
+the Company's highest volume type of semiconductor memory sold by the Company throughout most of 2002. The Company's overall primary product sold in 2002 was the 128
+Meg SDRAM, while the 256 Meg SDRAM was the Company's primary product in the third and fourth quarters of 2002. Although market demand has shifted from SDRAM to DDR devices for computing
+2
+and other applications, demand for SDRAM is expected to continue for many consumer applications such as cell phones and hand held devices and for communications equipment.
+The
+Company is sampling 512 Meg and is developing 1 Gig DDR SDRAMs and expects to begin shipping commercial volumes of 512 Meg DDR SDRAMs in 2003. The Company continues to
+design and develop other DRAM products, including DDRII, DDRIII, reduced latency DRAM ("RLDRAM") and CellularRAM. The Company continues to provide key customers with legacy DRAM products such as
+extended data out ("EDO") and fast page mode ("FPM") and lower density products such as the 64 Meg and 16 Meg DRAM.
+Static Random Access Memory ("SRAM").
+SRAMs are semiconductor devices that perform memory
+functions similar to DRAMs. SRAMs utilize a more complex memory cell and do not require the memory array to be periodically refreshed. This simplifies system design for memory
+applications
+utilizing SRAM and allows SRAM to operate faster than DRAM, although SRAM has a higher cost-per-bit than DRAM. SRAMs are a key component in leading-edge
+telecommunications and networking applications where low latency is a critical system parameter. Sales of SRAM products represented approximately 2%, 4%, and 2% of the Company's net sales in 2002,
+2001 and 2000, respectively.
+Flash Memory.
+Flash products are non-volatile semiconductor devices that retain memory
+content when the power is turned off, and are electrically re-writeable. Flash is used in networking applications, workstations, servers, PCs, and handheld electronic devices such as
+digital cellular phones, digital cameras, and digital music players. Sales of Flash devices represented approximately 2%, 3% and 1% of the Company's net sales in 2002, 2001 and 2000, respectively.
+Currently, the Company's Flash offerings are comprised of NOR-based products.
+Complementary Metal-Oxide Semiconductor ("CMOS") Imaging Sensors.
+Image sensors are semiconductor
+devices that capture images and process them into pictures or video for a variety of consumer and industrial applications. The Company's CMOS imaging sensors are used in products such as miniature
+cellular phone cameras, digital cameras, consumable pill cameras for medical use, automotive headlight dimming and motion tracking systems. CMOS imaging is a new market for the Company and is expected
+to grow significantly over the next several years. Sales for CMOS imaging sensors accounted for less than 1% of the Company's net sales in 2002.
+Manufacturing
+The Company is a leading global manufacturer of semiconductor products with manufacturing facilities located in the United States, Italy, Japan, Singapore, and
+Scotland. The Company's manufacturing facilities operate 24 hours per day, 7 days per week. The Company develops leading edge manufacturing process technology primarily at its research
+and development wafer fabrication facility in Boise, Idaho. The Company's manufacturing process technology is then deployed to its various fabrication facilities, including its joint venture, TECH
+Semiconductor Singapore Pte. Ltd. ("TECH").
+The
+Company's process for manufacturing semiconductor products is complex, involving a number of precise steps, including wafer fabrication, assembly, burn-in and final test.
+Efficient production of semiconductor products requires utilization of advanced semiconductor manufacturing techniques and effective deployment of these techniques across multiple facilities. The
+primary determinants of manufacturing cost are die size, number of mask layers and yield of acceptable die produced on each wafer. Other factors that contribute to manufacturing costs are wafer size,
+number of fabrication steps, cost and sophistication of manufacturing equipment, equipment utilization, process complexity, cost of raw materials, labor productivity, package type and cleanliness of
+the manufacturing environment. The Company is continuously enhancing production processes, reducing the die size of existing products and
+3
+transitioning to higher density products. The Company expects to substantially complete the transition of its manufacturing operations to its .13µ line-width
+process technology in 2003 and to move a portion of its manufacturing operations to its .11µ line-width process technology in calendar 2003.
+Wafer
+fabrication occurs in a highly controlled, clean environment to minimize dust and other yield-and quality-limiting contaminants. Despite stringent manufacturing controls, dust
+particles, equipment errors, minute impurities in materials, defects in photomasks and circuit design marginalities or other problems cause wafers to be scrapped or individual circuits to be
+nonfunctional. Success of the Company's manufacturing operations depends largely on minimizing defects and thereby maximizing yield of high-quality circuits. In this regard, the Company
+employs rigorous quality controls throughout the manufacturing, screening and testing processes. The Company is able to recover many nonstandard devices by testing and grading them to their highest
+level of functionality.
+After
+fabrication, silicon wafers are separated into individual die. Functional die are sorted, connected to external leads and encapsulated in plastic packages. Each completed package
+is then inspected and tested. The Company also sells semiconductor products in die and wafer form. The Company tests its products at various stages in the manufacturing process, performs high
+temperature burn-in on finished products and conducts numerous quality control inspections throughout the entire production flow. In addition, the Company uses its proprietary
+AMBYX™ line of intelligent test and burn-in systems to perform simultaneous circuit tests of all die during the burn-in process, capturing quality and reliability
+data and reducing testing time and cost.
+A
+significant portion of the Company's memory products are assembled into memory modules for sale to customers. Memory modules consist of an array of memory components attached to
+printed circuit boards ("PCBs") that connect to computer systems or other electronic devices. Memory components are attached to PCBs in a soldering process performed by screen printing machines and
+high speed automated pick and place machines. Completed modules are tested by custom equipment and visual inspection.
+The
+recently acquired wafer fabrication facility in Virginia presently manufactures memory devices utilizing Toshiba's 200mm wafer process, for purchase solely by Toshiba. The Company
+expects to transition its product and process technology into this facility over the next three to six months.
+TECH Semiconductor Singapore Pte. Ltd.
+TECH is a memory manufacturing joint venture in
+Singapore among Micron Technology, Inc., the Singapore Economic Development Board, Canon Inc. and Hewlett-Packard Company. TECH's semiconductor manufacturing facilities use the Company's
+product and process technology.
+Subject
+to specific terms and conditions, the Company has agreed to purchase all of the products manufactured by TECH. TECH supplied approximately 20%, 25% and 20% of the total megabits
+of memory produced by the Company in 2002, 2001 and 2000, respectively. The Company generally purchases semiconductor memory products from TECH at prices determined quarterly, based on a
+discount from average selling prices realized by the Company for the immediately preceding quarter. The Company performs assembly and test services on product manufactured by TECH. The Company also
+provides certain technology, engineering, and training to support TECH. All of these transactions with TECH are recognized as part of the net cost of products purchased from TECH.
+TECH's
+existing credit facility expires in December 2003, and TECH is currently seeking external financing to replace its maturing loans and fund ongoing operations. If TECH's
+financing efforts are unsuccessful, the Company and other TECH shareholders may be requested to invest additional capital in TECH. If TECH is unable to obtain new financing or additional capital from
+its shareholders, it would likely have to discontinue its capital spending and may have to alter its operations. The Company's source of supply from TECH could be reduced or eliminated if TECH is
+unable to obtain required financing. The Company has pledged $50 million as cash collateral for TECH's fully-drawn
+4
+line of credit. As of August 29, 2002, the Company had remaining unamortized costs of $77 million included in intangible assets relating to the supply arrangement to purchase product
+from TECH. In the event that the Company's supply of semiconductor products from TECH is reduced or eliminated, the Company may be required to write off part or all of these assets and the Company's
+results of operations could be adversely affected.
+Availability of Raw Materials
+The Company requires raw materials that meet exacting standards. The Company generally has multiple sources of supply; however, only a limited number of suppliers
+are capable of delivering certain raw materials that meet the Company's standards. Various factors could reduce the availability of raw materials such as silicon wafers, photomasks, chemicals, gases,
+lead frames and molding compound. In addition, any transportation problems could delay the Company's receipt of raw materials. Although raw materials shortages or transportation problems have not
+interrupted the Company's operations in the past, shortages may occur from time to time in the future. Also, lead times for the supply of raw materials have been extended in the past. If the Company's
+supply of raw materials is interrupted, or lead times are extended, results of operations could be adversely affected.
+Marketing and Customers
+The Company's products are sold primarily through computing, networking and telecommunications, and imaging groups. Approximately 80% of the Company's sales of
+semiconductor products for 2002 were to the computer market. Sales to Dell Computer Corporation exceeded 10% of the Company's net sales in 2002, 2001 and 2000. Aggregate sales to Hewlett-Packard
+Company and Compaq Computer Corporation (which merged on May 3, 2002) exceeded 10% of the Company's net sales in 2002, 2001 and 2000.
+The
+Company markets its semiconductor products primarily through its own direct sales force. The Company maintains inventory at locations in close proximity to certain key customers to
+facilitate rapid delivery of product shipments. The Company's products are also offered through independent sales representatives, distributors and its retail sales division, Crucial Technology. The
+Company's products are offered under the Micron, SpecTek and Crucial brand names, and under other private labels. The Company maintains semiconductor sales offices in North America, Europe, Asia and
+Japan. Sales representatives obtain orders subject to final acceptance by the Company and are compensated on a commission basis. The Company makes shipments against these orders directly to the
+customer. Distributors carry the Company's products in inventory and typically sell a variety of other semiconductor products, including competitors' products. The Company's products are also offered
+through Crucial Technology's website.
+The
+semiconductor memory industry is characterized by volatile market conditions, declining average selling prices, rapid technological change, frequent product introductions and
+enhancements, difficult product transitions and relatively short product life cycles. In 2002, the semiconductor market experienced a transition from synchronous DRAMs to DDR SDRAMs as
+the most popular type of semiconductor memory. Technology transitions, resulting from changing market demand, can make it very difficult to optimize product mix. In addition, diversification of the
+DRAM market continues, with diverse memory needs being driven by the different requirements of desktop and notebook PC's, servers, workstations, handheld devices, and communications, industrial and
+other applications that demand specific memory solutions. Many of the Company's customers require a thorough review or "qualification" of semiconductor products, which may take several months. As the
+Company further diversifies its product lines and reduces the die sizes of existing memory products, more products become subject to qualification. There can be no assurance that new products will be
+qualified for purchase by existing or potential customers.
+5
+Backlog
+Volatile industry conditions make it difficult for many customers to enter into long-term, fixed-price contracts. Accordingly, new order volumes for
+the Company's semiconductor products fluctuate significantly. Orders are typically accepted with acknowledgment that the terms may be adjusted to reflect market conditions at the shipping date.
+Customers can change delivery schedules or cancel orders without significant penalty. For these reasons, the Company does not believe that its order backlog as of any particular date is a reliable
+indicator of actual sales for any succeeding period.
+Product Warranty
+Because the design and production process for semiconductor products is highly complex, it is possible that the Company may produce products that do not comply
+with customer specifications, contain defects or are otherwise incompatible with end uses. In accordance with industry practice, the Company
+generally provides a limited warranty that its semiconductor products are in compliance with Company specifications existing at the time of delivery. Under the Company's general terms and conditions
+of sale, liability for certain failures of product during a stated warranty period is usually limited to repair or replacement of defective items or return of, or a credit with respect to, amounts
+paid for such items. Under certain circumstances the Company may provide more extensive limited warranty coverage and general legal principles may, under certain circumstances, impose upon the Company
+more extensive liability than that provided under the Company's general terms and conditions.
+Competition
+The Company faces intense competition from a number of companies, some of which are large corporations or conglomerates (e.g. Samsung Semiconductor, Inc.)
+that may have greater resources or government support to withstand downturns in the semiconductor memory market, invest in technology and capitalize on growth opportunities. These competitors seek to
+improve yields, reduce die size and decrease mask levels in their product designs. These factors have significantly increased worldwide supply and put downward pressures on prices.
+Research and Development
+To compete in the semiconductor memory industry, the Company must continue to develop technologically advanced products and processes. The Company believes that
+expansion of its semiconductor product offerings is necessary to meet expected market demand for specific memory solutions. The Company's total research and development expenses were
+$561 million, $490 million and $427 million in 2002, 2001 and 2000, respectively.
+Research
+and development expenses vary primarily with the number of development wafers processed, the cost of advanced equipment dedicated to new product and process development, and
+personnel costs. Product development costs are recorded as research and development expense. Development of a product is deemed complete once the product has been thoroughly reviewed and tested for
+performance and reliability and is internally qualified for sale to customers.
+The
+Company's DRAM process technology research and development efforts are focused on its .11µ and .095µ process technologies, which are
+designed to facilitate the Company's transition to next generation products. Additional process development work includes processes to support Flash, SRAM, CMOS imagers, Content Addressable Memory
+("CAM"), embedded memory and new memory materials. In addition to its process technology efforts, the Company continues to emphasize product designs that utilize advanced process technology. Efforts
+towards the design and development of new products are concentrated on the Company's 512 Meg and 1 Gig DDR SDRAMs, DDRII and DDRIII SDRAMs, Flash and SRAM memory products, CellularRAM, embedded
+memory, CAM, CMOS
+6
+imagers and advanced DRAM technology products. The Company is establishing a pilot line to process limited volumes of 300-millimeter ("300mm") wafers.
+International Sales
+Sales to customers outside the United States totaled $1.4 billion for 2002 and included approximately $544 million in sales to the Asia Pacific
+region, $461 million in sales to Europe and $264 million in sales to Japan. International sales totaled $1.8 billion for 2001 and $2.8 billion for 2000. (See "Item 8.
+Financial Statements and Supplementary Data—Notes to Consolidated Financial Statements—Geographic Information.")
+Patents and Licenses
+The Company owns approximately 8,200 United States patents and 560 foreign patents. In addition, the Company has numerous United States and international patent
+applications pending. The Company's patents have terms expiring from 2002 through 2021.
+From
+time to time, others have asserted, and may in the future assert, that the Company's products or processes infringe their product or process technology rights. In this regard, the
+Company is currently engaged in litigation with Rambus, Inc. ("Rambus") relating to certain of Rambus' patents and certain of the Company's claims and defenses. Lawsuits between Rambus and the
+Company are pending in the United States, Germany, France, the United Kingdom and Italy. On August 28, 2000, the Company filed a declaratory judgment action against Rambus in the U.S. District
+Court for the District of Delaware. On February 1, 2001, the Company amended its complaint. Pursuant to its amended complaint, the Company is seeking (1) relief under the federal
+antitrust laws for violations by Rambus of Section 2 of the Sherman Act; (2) a declaratory judgment that (a) certain Rambus patents are not infringed, are invalid and/or are
+unenforceable, (b) the Company has an implied license to Rambus' patents, and (c) Rambus is estopped from enforcing its patents against the Company because of its conduct in the Joint
+Electron Device Engineering Council standards setting body; and (3) damages and declaratory relief for Rambus' breach of contract, fraud, deceptive trade practices, negligent misrepresentation,
+and conduct requiring the application of equitable estoppel. On February 15, 2001, Rambus filed an Answer and Counterclaim. Rambus denies that the Company is entitled to relief and has alleged
+willful infringement by the Company of eight Rambus patents. The Company is unable to predict the outcome of these suits. A court determination that the Company's manufacturing processes or products
+infringe the product or process rights of others could result in significant liability and/or require the Company to make material changes to its products and/or manufacturing processes. Any of the
+foregoing results could have a material adverse effect on the Company's business, results of operations or financial condition.
+The
+Company has a number of patent and intellectual property license agreements. Some of these license agreements require the Company to make one time or periodic payments. The Company
+may need to obtain additional patent licenses or renew existing license agreements in the future. The
+Company is unable to predict whether these license agreements can be obtained or renewed on acceptable terms.
+Employees
+As of August 29, 2002, the Company had approximately 18,700 employees, including approximately 2,900 in the Asia Pacific region, 1,900 in Europe and 1,000
+in Japan. The Company's employees in Italy are represented by labor organizations that have entered into national and local labor contracts with the Company. The Company's employment levels can vary
+depending on market conditions and the level of the Company's production, research and product and process development. Many of the Company's employees are highly skilled, and the Company's continued
+success depends in part upon its
+7
+ability to attract and retain such employees. The loss of key Company personnel could have an adverse effect on the Company's results of operations.
+Environmental Compliance
+Government regulations impose various environmental controls on discharges, emissions and solid wastes from the Company's manufacturing processes. In 2002, the
+Company's wafer fabrication facilities continued to conform to the requirements of ISO 14001 certification. To continue certification, the Company met requirements in environmental policy, compliance,
+planning, management, structure and responsibility, training, communication, document control, operational control, emergency preparedness and response, record keeping and management review. While the
+Company has not experienced any materially adverse effects on its operations from environmental or other government regulations, changes in the regulations could necessitate additional capital
+expenditures, modification of operations or other compliance actions.
+Officers and Directors of the Registrant
+Officers of the Company are appointed annually by the Board of Directors. Directors of the Company are elected annually by the shareholders of the Company. Any
+directors appointed by the Board of Directors to fill vacancies on the Board serve until the next election by the shareholders. All officers and directors serve until their successors are duly chosen
+or elected and qualified, except in the case of earlier death, resignation or removal.
+As
+of August 29, 2002, the following executive officers and directors of the Company were subject to the reporting requirements of Section 16(a) of the Securities Exchange
+Act of 1934, as amended.
+Name
+Age
+Position
+Steven R. Appleton
+42
+Chairman, Chief Executive Officer and President
+Kipp A. Bedard
+43
+Vice President of Corporate Affairs
+Robert M. Donnelly
+63
+Vice President of Computing and Consumer Group
+Jan du Preez
+45
+Vice President of Networking and Communications Group
+D. Mark Durcan
+41
+Chief Technical Officer and Vice President of Research and Development
+Robert J. Gove
+48
+Vice President of Imaging
+Jay L. Hawkins
+42
+Vice President of Operations
+Roderic W. Lewis
+47
+Vice President of Legal Affairs, General Counsel and Corporate Secretary
+Michael W. Sadler
+44
+Vice President of Worldwide Sales
+Wilbur G. Stover, Jr.
+49
+Vice President of Finance and Chief Financial Officer
+James W. Bagley
+63
+Director
+Robert A. Lothrop
+76
+Director
+Thomas T. Nicholson
+66
+Director
+Don J. Simplot
+67
+Director
+Gordon C. Smith
+73
+Director
+William P. Weber
+62
+Director
+Steven R. Appleton
+joined the Company in February 1983 and has served in various capacities with the Company and its subsidiaries.
+Mr. Appleton first became an officer of the Company in August 1989 and has served in various officer positions with the Company since that time. From April 1991 until
+July 1992 and since May 1994, Mr. Appleton has served on the Company's Board of Directors. Since September 1994, Mr. Appleton has served as the Chief Executive
+Officer, President and Chairman of
+8
+the Board of Directors of the Company. Mr. Appleton holds a BA in Business Management from Boise State University.
+Kipp A. Bedard
+joined the Company in November 1983 and has served in various capacities with the Company and its subsidiaries.
+Mr. Bedard first became an officer of the Company in April 1990 and has served in various officer positions since that time. Since January 1994, Mr. Bedard has served as
+Vice President of Corporate Affairs for the Company. Mr. Bedard holds a BBA in Accounting from Boise State University.
+Robert M. Donnelly
+joined the Company in September 1988 and has served in various technical positions with the Company and its
+subsidiaries. Mr. Donnelly first became an officer of the Company in August 1989 and has served in various officer positions since that time. Mr. Donnelly holds a BS in Electrical
+Engineering from the University of Louisville.
+Jan du Preez
+joined the Company in June 2002 as Vice President of Networking and Communications Group. Mr. du Preez served
+as the President of Infineon Technologies North America Corporation from August 2000 until he joined the Company in June 2002. From October 1996 through July 2000,
+Mr. du Preez served as the Vice President of Memory Products Group for Infineon Technologies North America Corporation (formerly Siemens Semiconductors). Mr. du Preez holds Bachelors
+Degrees in Public Administration and Business Economics from the University of Pretoria and a Masters Degree in Commerce from Rand University.
+D. Mark Durcan
+joined the Company in June 1984 and has served in various technical positions with the Company and its subsidiaries
+since that time. Mr. Durcan served as Vice President, Process Research and Development from June 1996 through June 1997, at which time he became Chief Technical Officer and Vice
+President of Research and Development. Mr. Durcan holds a BS and MChE in Chemical Engineering from Rice University.
+Robert J. Gove
+joined the Company in March 1999 as Senior Director of Engineering and has served in various positions with the
+Company. In March 2002, he was appointed Vice President of Imaging. Prior to joining the Company, Mr. Gove served as Vice President, Engineering, of Equator Technologies, Inc.
+Mr. Gove holds a BS in Electrical Engineering from the University of Washington and an MS in Electrical Engineering and Ph.D. in Electrical Engineering from Southern Methodist University.
+Jay L. Hawkins
+joined the Company in March 1984 and has served in various manufacturing positions for the Company and its
+subsidiaries. Mr. Hawkins served as Vice President, Manufacturing Administration from February 1996 through June 1997, at which time he became Vice President of Operations.
+Mr. Hawkins holds a BBA in Marketing from Boise State University.
+Roderic W. Lewis
+joined the Company in August 1991 and has served in various capacities with the Company and its subsidiaries.
+Mr. Lewis served as Vice President, General Counsel and Corporate Secretary for the Company from July 1996 until November 1996, at which time he became Vice President of Legal
+Affairs, General Counsel and Corporate Secretary. Mr. Lewis holds a BA in Economics and Asian Studies from Brigham Young University and a JD from Columbia University School of Law.
+Michael W. Sadler
+joined the Company in September 1992 as a Regional Sales Manager and has held various sales and marketing
+positions since that time. Mr. Sadler first became an officer of the Company in July 1997 and has served as Vice President of Worldwide Sales since November 2001.
+Mr. Sadler holds a BS in Information Systems and an MBA from the University of Santa Clara.
+Wilbur G. Stover, Jr.
+joined the Company in June 1989 and has served in various financial positions with the Company and its
+subsidiaries. Since September 1994, Mr. Stover has served as the Company's
+9
+Vice President of Finance and Chief Financial Officer. Mr. Stover holds a BA in Business Administration from Washington State University.
+James W. Bagley
+became the Chairman and Chief Executive Officer of Lam Research Corporation ("Lam"), a supplier of semiconductor
+manufacturing equipment, in August 1997, upon consummation of a merger of OnTrak Systems, Inc. into Lam. Mr. Bagley is a member of the Board of Directors of Teradyne, Inc.
+and Wind River Systems, Inc. He has served on the Company's Board of Directors since June 1997. Mr. Bagley holds a BS and MS in Electrical Engineering from Mississippi State
+University.
+Robert A. Lothrop
+served as Senior Vice President of J.R. Simplot Company, an agribusiness company, from January 1986 until his
+retirement in January 1991. From August 1986 until July 1992 and since
+May 1994, Mr. Lothrop has served on the Board of Directors of the Company. Mr. Lothrop holds a BS in Engineering from the University of Idaho.
+Thomas T. Nicholson
+has served as Vice President and a Director of Honda of Seattle and Toyota of Seattle since 1988. Mr. Nicholson
+served from 1982 to May 2000 as President, and since May 2000 as Vice President, of Mountain View Equipment Company. He has served on the Company's Board of Directors since
+May 1980. Mr. Nicholson holds a BS in Agriculture from the University of Idaho.
+Don J. Simplot
+served as the President of Simplot Financial Corporation, a wholly-owned subsidiary of the J.R. Simplot Company, from
+February 1985 until January 1992. Since 1955, Mr. Simplot has served in various capacities with J.R. Simplot Company, including Director. He is a member of the Executive Committee
+of the J.R. Simplot Company. He is a member of the Board of Directors of IMPCO Technologies, Inc. Mr. Simplot has served on the Company's Board of Directors since February 1982.
+Gordon C. Smith
+has served as Chairman and Chief Executive Officer of G.C. Smith L.L.C., a holding company for ranch operations and other
+investments, since May 2000. Mr. Smith served in various management positions from July 1980 until May 1988 for the J.R. Simplot Company. From May 1988 until his
+retirement in March 1994, Mr. Smith served as the President and Chief Executive Officer of J.R. Simplot Company. Prior to becoming Chief Executive Officer of J.R. Simplot Company,
+Mr. Smith served as its Chief Financial Officer for seven years. From September 1996 until September 1999, he served as President of Wesmar, Inc., a food service company.
+From February 1982 until February 1984 and since September 1990, he has served on the Company's Board of Directors. Mr. Smith holds a BS in Accounting from Idaho State
+University.
+William P. Weber
+served in various capacities with Texas Instruments Incorporated, a semiconductor manufacturing company, and its
+subsidiaries from 1962 until April 1998. From December 1986 until December 1993 he served as the President of Texas Instruments' worldwide semiconductor operations and from
+December 1993 until his retirement in April 1998, he served as Vice Chairman of Texas Instruments Incorporated. He has served on the Company's Board of Directors since July 1998.
+Mr. Weber holds a BS in Engineering from Lamar University and a MS in Engineering from Southern Methodist University.
+There
+is no family relationship between any director or executive officer of the Company.
+Item 2.
+Properties
+The Company's corporate headquarters and principal semiconductor manufacturing, engineering, research and development, administrative and support facilities are
+located in Boise, Idaho.
+The
+Company also has a number of other properties including wafer fabrication facilities located in Avezzano, Italy, Nishiwaki-City, Japan, and Manassas, Virginia; an
+assembly and test facility located in Singapore; a test facility located in Nampa, Idaho; and a module assembly and test facility located in East Kilbride, Scotland. The Company has a partially
+completed, semiconductor manufacturing facility
+10
+located in Lehi, Utah, being used to perform test operations. Timing for completion of the Lehi facility is dependent upon market conditions, including, but not limited to, worldwide market supply
+of, and demand for, semiconductor products and the Company's operations, cash flows and alternative capacity expansion opportunities.
+The
+Company also owns and leases a number of smaller facilities in locations throughout the world that are used for design, research and development, and sales and marketing activities.
+Item 3.
+Legal Proceedings
+On August 28, 2000, the Company filed a declaratory judgment action against Rambus, Inc. ("Rambus") in U.S. District Court for the District of
+Delaware. On February 1, 2001, the Company amended its complaint. Pursuant to its amended complaint, the Company is seeking (1) relief under the federal antitrust laws for violations by
+Rambus of Section 2 of the Sherman Act; (2) a declaratory judgment (a) that certain Rambus patents are not infringed by the Company, are invalid, and/or are unenforceable due to,
+among other reasons, Rambus' fraudulent conduct in misusing and enforcing those patents, (b) that the Company has an implied license to those patents and (c) that Rambus is estopped from
+enforcing those patents against the Company because of its conduct in the Joint Electron Device Engineering Council, and (3) damages and declaratory relief for Rambus' breach of contract,
+fraud, deceptive trade practices, negligent misrepresentation, and conduct requiring the application of equitable estoppel. On February 15, 2001, Rambus filed an answer and counterclaim against
+the Company in Delaware denying the Company is entitled to relief and alleging infringement of eight Rambus patents subject to the Company's declaratory judgment action. On September 1, 2000,
+Rambus filed suit against Micron Semiconductor GmbH in the District Court of Mannheim, Germany, alleging that certain SDRAM and DDR SDRAM products infringe German patent and utility model counterparts
+to European patent 525 068. On September 13, 2000, Rambus filed suit against Micron Europe Limited in the High Court of Justice, Chancery Division in London, England, alleging that certain
+SDRAM and DDR SDRAM products infringe the U.K. counterpart to European patent 525 068. On September 22, 2000, Rambus filed a complaint against the Company and Reptronic (a distributor of the
+Company's products) in Court of First Instance of Paris, France, alleging that certain SDRAM and DDR SDRAM products infringe the French counterpart to European patent 525 068. In its suits against the
+Company, Rambus is seeking monetary damages and injunctive relief. On September 29, 2000, the Company filed suit against Rambus in the Civil Court of Milan, Italy, alleging invalidity and
+non-infringement of the Italian counterpart to European patent 525 068. On September 29, 2000, Rambus filed a preliminary proceeding against the Company and EBV (a distributor of
+the Company's products) in the Civil Court of Monza, Italy, alleging that certain SDRAM products infringe the Italian counterpart to European patent 525 068, and seeking the seizure of certain
+materials and the entry of a preliminary injunction as to products manufactured at the Company's Avezzano, Italy, site. On December 21, 2000, an appeals panel of the Court of Monza held that
+the Monza trial court had no jurisdiction to adjudicate the seizure matter. The Monza trial court
+ordered that technical review proceedings continue with respect to the issue of preliminary injunction. On May 24, 2001, the trial court rejected Rambus' assertions of infringement and denied
+its request for a preliminary injunction. Rambus' appeal from the trial judge's ruling was rejected by the Monza appeals panel on July 18, 2001. On December 29, 2000, the Company filed
+suit against Rambus in the Civil Court of Avezzano, Italy, alleging invalidity and non-infringement of the Italian counterpart to European patent 1 004 956. On August 10, 2001,
+Rambus filed suit against the Company and Assitec (an electronics retailer) in the Civil Court of Pavia, Italy, alleging that certain DDR SDRAM products infringe the Italian counterpart to European
+patent 1 022 642. The Company is unable to predict the outcome of these suits. A court determination that the Company's manufacturing processes or products infringe the product or process rights of
+others could result in significant liability and/or require the Company to make material changes to its products and/or manufacturing processes. Any of the
+11
+foregoing results could have a material adverse effect on the Company's business, results of operations or financial condition.
+On
+June 17, 2002, the Company received a grand jury subpoena from the U.S. District Court for the Northern District of California as part of an investigation by the Antitrust
+Division of the U.S. Department of Justice ("DOJ") regarding possible antitrust violations in the semiconductor memory market known as the "Dynamic Random Access Memory" or "DRAM" industry. The
+Company is cooperating fully with the DOJ in its investigation. Subsequent to the commencement of the DOJ investigation, a number of purported class action lawsuits were filed against the Company and
+other DRAM suppliers. Sixteen cases were filed between June 21, 2002 and September 19, 2002 in the following federal district courts: one in the Southern District of New York, five in
+the District of Idaho, and ten in the Northern District of California. Each of the federal district court cases purports to be on behalf of a class of individuals and entities who purchased DRAM
+directly from the various DRAM suppliers during a specified time period commencing on or after October 1, 2001. The complaints allege price-fixing in violation of the Sherman Act and seek
+treble damages in unspecified amounts, costs, attorneys' fees, and an injunction against the allegedly unlawful conduct. On September 26, 2002, the Judicial Panel on Multi-District Litigation
+("JPML") held a hearing to determine a single federal district court to conduct coordinated or consolidated pretrial proceedings in the foregoing federal cases. The JPML took the matter
+under submission, and the Company is awaiting a decision. Five additional cases were filed between August 2, 2002 and September 23, 2002 in the following California state courts: three
+in San Francisco County, one in Santa Clara County, and one in Los Angeles County. Each of the California state cases purports to be on behalf of a class of individuals and entities who indirectly
+purchased DRAM during a specified time period commencing December 1, 2001. The complaints allege violations of California's Cartwright Act and Unfair Competition Law and unjust enrichment and
+seek treble damages in unspecified amounts, restitution, costs, attorneys' fees, and an injunction against the allegedly unlawful conduct. In response to a petition filed by one of the plaintiffs, the
+Judicial Council of California will determine a single state court for coordination of the foregoing state cases. The Company is unable to predict the outcome of these suits. A court determination
+that the Company has violated federal or state antitrust laws could result in significant liability and could have a material adverse effect on the Company's results of operations or financial
+condition.
+(See
+"Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations—Certain Factors.")
+Item 4.
+Submission of Matters to a Vote of Security Holders
+There were no matters submitted to a vote of security holders during the fourth quarter of 2002.
+12
+PART II
+Item 5.
+Market for Registrant's Common Equity and Related Stockholder Matters
+Market for Common Stock
+The Company's common stock is listed on the New York Stock Exchange and is traded under the symbol "MU." The following table represents the high and low closing
+sales prices for the Company's common stock for each quarter of 2002 and 2001, as reported by Bloomberg L.P.
+High
+Low
+2002:
+4th quarter
+$
+24.450
+$
+17.250
+3rd quarter
+39.500
+22.470
+2nd quarter
+39.010
+27.160
+1st quarter
+37.610
+17.250
+2001:
+4th quarter
+$
+44.900
+$
+35.500
+3rd quarter
+48.830
+34.600
+2nd quarter
+46.850
+29.938
+1st quarter
+78.375
+28.563
+Holders of Record
+As of October 10, 2002, there were 3,841 shareholders of record of the Company's common stock.
+Dividends
+The Company does not intend to pay cash dividends on its common stock for the foreseeable future.
+Item 6.
+Selected Financial Data
+2002
+2001
+2000
+1999
+1998
+(amounts in millions except per share amounts)
+Net sales
+$
+2,589.0
+$
+3,935.9
+$
+6,362.4
+$
+2,575.1
+$
+1,564.5
+Gross margin
+(110.6
+)
+110.7
+3,248.1
+628.1
+95.7
+Operating income (loss)
+(1,025.3
+)
+(976.5
+)
+2,392.7
+(19.6
+)
+(412.6
+)
+Income (loss) from continuing operations
+(907.0
+)
+(521.2
+)
+1,547.7
+(59.0
+)
+(224.5
+)
+Income (loss) from discontinued PC Operations, net of taxes and minority interest
+—
+(103.8
+)
+(43.5
+)
+(9.9
+)
+(22.6
+)
+Net income (loss)
+(907.0
+)
+(625.0
+)
+1,504.2
+(68.9
+)
+(247.1
+)
+Diluted earnings (loss) per share:
+Continuing operations
+$
+(1.51
+)
+$
+(0.88
+)
+$
+2.63
+$
+(0.11
+)
+$
+(0.52
+)
+Discontinued operations
+—
+(0.18
+)
+(0.07
+)
+(0.02
+)
+(0.05
+)
+Net income (loss)
+(1.51
+)
+(1.05
+)
+2.56
+(0.13
+)
+(0.57
+)
+Cash and short-term investments
+$
+985.7
+$
+1,678.3
+$
+2,466.4
+$
+1,613.5
+$
+649.6
+Current assets
+2,118.8
+3,137.7
+4,720.1
+2,689.6
+1,367.7
+Property, plant and equipment, net
+4,699.5
+4,704.1
+4,171.7
+3,749.1
+3,005.4
+Total assets
+7,555.4
+8,363.2
+9,391.9
+6,773.5
+4,539.8
+Current liabilities
+752.7
+687.0
+1,447.1
+731.2
+540.5
+Long-term debt
+360.8
+445.0
+931.4
+1,527.5
+756.8
+Shareholders' equity
+6,306.4
+7,134.8
+6,432.0
+3,964.1
+2,701.3
+13
+On
+May 31, 2001, Micron Electronics, Inc. ("MEI"), then a 61% owned subsidiary of the Company, completed the disposition of its PC business. The selected financial data
+above presents the net effect of discontinued PC Operations separate from the results of the Company's continuing operations.
+On
+August 6, 2001, MEI completed its merger with Interland, Inc., in a stock-for-stock acquisition (the "Interland Merger"). Upon completion of the
+Interland Merger, MEI changed its name to Interland, Inc. ("Interland") and the Company's ownership interest was reduced from 61% to 43% of Interland's outstanding common stock. On
+August 30, 2001, the Company contributed all of its shares of Interland common stock to the Micron Technology Foundation.
+In
+September 1998, the Company acquired substantially all of the memory operations of Texas Instruments Incorporated in a transaction that was accounted for as a business
+combination using the purchase method of accounting.
+Per
+share amounts reflect a two-for-one stock dividend on May 1, 2000.
+See
+"Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations—Certain Factors" and "Item 8. Financial Statements and Supplementary
+Data—Notes to Consolidated Financial Statements."
+Item 7.
+Management's Discussion and Analysis of Financial Condition and Results of Operations
+Micron Technology, Inc., and its subsidiaries (hereinafter referred to collectively as the "Company") principally design, develop, manufacture and market
+semiconductor products.
+The following discussion contains trend information and other forward-looking statements that involve a number of risks and uncertainties. Forward-looking
+statements include, but are not limited to, statements such as those made in "Critical Accounting Policies" and "Income Taxes" regarding the modest levels of foreign taxation that the Company expects
+to be reflected in the income tax provision in future periods, in "Gross Margin" regarding the estimated amount of write-down remaining in inventory at the end of the first quarter of
+2003, the estimated gross margins on TECH products in the first quarter of 2003 and the per megabit cost associated with products manufactured at the Company's Virginia facility, and in "Liquidity and
+Capital Resources" regarding capital spending in 2003. The Company's actual results could differ materially from the Company's historical results and those discussed in the forward-looking statements.
+Factors that could cause actual results to differ materially include, but are not limited to, those identified in "Certain Factors." This discussion should be read in conjunction with the Consolidated
+Financial Statements and accompanying notes. All period references are to the Company's fiscal periods unless
+otherwise indicated. Per share amounts for 2000 reflect a two-for-one stock split effected in the form of a stock dividend on May 1, 2000. All per share amounts are
+presented on a diluted basis.
+Critical Accounting Policies
+The preparation of financial statements and related disclosures in conformity with United States generally accepted accounting principles ("U.S. GAAP") requires
+management to make estimates and judgments that affect the reported amounts of assets, liabilities, revenues, expenses and related disclosures. Estimates and judgments are based on historical
+experience, forecasted future events and various other assumptions that the Company believes to be reasonable under the circumstances. Estimates and judgments may differ under different assumptions or
+conditions. The Company evaluates its estimates and judgments on an ongoing basis. Management believes the critical accounting policies below are the most important to the portrayal of the Company's
+financial condition and results of operations and require management's most difficult, subjective or complex judgments.
+Income taxes:
+The Company evaluates the realizability of its deferred tax assets on an ongoing basis. The Company currently
+has significant deferred tax assets resulting from net operating loss
+14
+carryforwards which will offset taxable income in future periods. U.S. GAAP requires the assessment of the Company's performance and other relevant factors when determining the need for a valuation
+allowance with respect to these deferred tax assets. The Company's ability to realize deferred tax assets is dependent on its ability to generate future taxable income sufficient to utilize loss
+carryforwards or tax credits before their expiration. In the evaluation of realizability of deferred tax assets, factors such as recent losses are given substantially more weight than forecasted
+future profitability. A valuation allowance was established in the fourth quarter of 2002 for the Company's U.S. deferred tax assets, resulting in a $348 million charge to the provision for
+income taxes. The Company expects that until it utilizes these operating loss carryforwards the consolidated income tax provision will only reflect modest levels of foreign taxation.
+The
+Company is also required to estimate income tax provisions and amounts ultimately payable or recoverable in numerous jurisdictions around the world. Such estimates involve
+significant interpretations of regulations and are inherently very complex. Resolution of income tax treatments in individual jurisdictions may not be known for many years after completion of any
+fiscal year.
+Inventories:
+Inventories are stated at the lower of average cost or market value. Cost includes labor, material and overhead
+costs, including product and process technology costs. Determining market value of inventories requires judgment in that it requires the Company to project unit prices and volumes for future periods
+in which it expects to sell the inventory. As a result of these analyses, the Company records a charge to cost of goods sold in advance of when the inventory is actually sold to reflect market values
+that are below the Company's costs. Due to the volatile nature of the semiconductor memory industry, actual selling prices and volumes often vary significantly from projected prices and volumes. As a
+result, the timing of when product cost are charged to operations can vary significantly.
+U.S.
+GAAP provides for inventory to be grouped into categories in order to compare costs to market values. The amount of any inventory write-down can vary significantly
+depending on the determination of inventory categories. The majority of the Company's inventory has been categorized as volatile (DRAM and SRAM) or non-volatile (Flash). The major
+characteristics the Company considers in determining inventory categories are product type and markets.
+Product and process technology:
+Costs incurred to acquire product and process technology or to patent technology developed by
+the Company are capitalized and amortized on a straight-line basis over periods currently ranging up to 10 years. The Company capitalizes a portion of costs incurred based on its
+analysis of historical and projected patent issuance rates. Capitalized product and process technology costs are amortized over the shorter of (i) the estimated useful life of the technology
+(the determination of which requires judgment by the Company), (ii) the patent term or (iii) the term of the technology agreement.
+From
+time to time, others have asserted, and may in the future assert, that the Company's products or processes infringe their product or process technology rights. The Company accrues a
+liability and charges operations for the estimated costs of settlement or adjudication of asserted and unasserted claims for alleged infringement prior to the balance sheet date. However, it is
+difficult to predict the actual costs of settlement or adjudication.
+Property, plant and equipment:
+The Company reviews the carrying value of property, plant and equipment for impairment when
+events and circumstances indicate that the carrying value of an asset may not be recoverable from the estimated future cash flows expected to result from its use and/or eventual disposition. In cases
+where undiscounted expected future cash flows are less than the carrying value, an impairment loss would be recognized equal to an amount by which the carrying value exceeds the indicated fair value
+of the assets. The estimation of future cash flows involves numerous assumptions which require judgment by the Company, including, but not limited to, future use of the
+15
+assets for Company operations versus sale or disposal of the assets, future selling prices for the Company's products and future sales volumes.
+Research and development:
+Costs related to the conceptual formulation and design of products and processes are expensed as
+research and development. Determining when product development is deemed complete requires judgment by the Company. The Company deems that development of a product is complete once the product has
+been thoroughly reviewed, tested for performance and reliability and is internally qualified for sale to customers. Subsequent to product qualification, product costs are valued in inventory.
+Recent Events
+On April 22, 2002, the Company acquired substantially all of the assets of Toshiba Corporation's ("Toshiba") DRAM operations at Dominion Semiconductor
+L.L.C. in Virginia. The total purchase price of $328 million included cash and 1.5 million shares of the Company's common stock. (See "Item 8. Financial Statements and Supplementary
+Data—Notes to Consolidated Financial Statements—Acquisitions—Toshiba Corporation DRAM Assets.")
+Results of Operations
+2002
+2001
+2000
+(amounts in millions except per share amounts)
+Net sales:
+Semiconductor Operations
+$
+2,589.0
+$
+3,882.6
+$
+6,329.7
+Web-hosting Operations
+—
+53.0
+32.9
+Other
+—
+0.3
+(0.2
+)
+Consolidated net sales
+$
+2,589.0
+$
+3,935.9
+$
+6,362.4
+Operating income (loss):
+Semiconductor Operations
+$
+(1,025.3
+)
+$
+(920.8
+)
+$
+2,445.6
+Web-hosting Operations
+—
+(56.1
+)
+(47.0
+)
+Other
+—
+0.4
+(5.9
+)
+Operating income (loss)
+$
+(1,025.3
+)
+$
+(976.5
+)
+$
+2,392.7
+Income (loss) from continuing operations
+$
+(907.0
+)
+$
+(521.2
+)
+$
+1,547.7
+Loss from discontinued PC Operations, net
+—
+(103.8
+)
+(43.5
+)
+Net income (loss)
+$
+(907.0
+)
+$
+(625.0
+)
+$
+1,504.2
+Earnings (loss) per share from continuing operations
+$
+(1.51
+)
+$
+(0.88
+)
+$
+2.63
+Net income (loss) per share
+$
+(1.51
+)
+$
+(1.05
+)
+$
+2.56
+In
+the third quarter of 2001, the Company completed the divestiture of its PC business. The Company's consolidated financial information presents the net effect of discontinued PC
+Operations separate from the results of the Company's continuing operations. In the fourth quarter of 2001, the Company contributed its interest in its Interland Web-hosting Operations to
+the Micron Technology Foundation and incurred aggregate charges of $191 million to write down the carrying value of its equity interest in Interland to its market value and to reflect the
+contribution of Interland shares to the Foundation. (See "Item 8. Notes to Consolidated Financial Statements—Significant Accounting Policies—Basis of Presentation,"
+"Discontinued PC Operations" and "Operating Segment Information.")
+16
+On
+April 30, 2001, the Company acquired Kobe Steel, Ltd.'s 75% interest in KMT Semiconductor Limited ("KMT") and KMT became a wholly-owned subsidiary of the Company. On
+April 1, 2002, KMT's name was changed to Micron Japan, Ltd. (See "Item 8. Financial Statement and Supplementary Data—Notes to Consolidated Financial
+Statements—Acquisitions—KMT Semiconductor Limited.")
+Net Sales
+The Company's results of operations for 2002 and 2001 were significantly affected by declines in average selling prices for its semiconductor memory products of
+53% for 2002 as compared to 2001 and 60% for 2001 as compared to 2000. The decreases in average selling prices led to significantly lower net sales and to charges to cost of goods sold for write-downs
+of the Company's work in process and finished goods inventories totaling $376 million in 2002 and $727 million in 2001.
+Net
+sales for 2002 decreased by 34% as compared to 2001, primarily due to the 53% decline in average selling prices for the Company's semiconductor products. Total megabits of
+semiconductor memory sold increased by approximately 45% in 2002 as compared to 2001. Net sales decreased by 38% in 2001 as compared to 2000, primarily due to the 60% decline in average selling prices
+for the Company's semiconductor memory products. Total megabits of semiconductor memory sold increased by approximately 50% for the same period. The Company achieved higher megabit sales through
+shifts to higher density products, ongoing transitions to smaller die size versions of existing memory products ("shrink versions"), and, in 2001, increases in total wafer outs.
+In
+the fourth quarter of 2002, the Company transitioned from the 256 Meg Synchronous DRAM ("SDRAM") to the 256 Meg Double Data Rate ("DDR") SDRAM as it's primary product in production.
+The Company's overall primary product in 2002 was the 128 Meg SDRAM which constituted 33% of net sales.
+Gross Margin
+2002
+% Change
+2001
+% Change
+2000
+(amounts in millions)
+Gross margin
+$
+(110.6
+)
+(199.9
+)%
+$
+110.7
+(96.6
+)%
+$
+3,248.1
+as a % of net sales
+(4.3
+)%
+2.8
+%
+51.1
+%
+The
+Company's gross margin percentages decreased in 2002 and 2001. The declines in gross margin were primarily due to the decreases in average selling prices per megabit of memory and
+the effects of inventory write-downs, partially offset by reductions in per megabit manufacturing costs for the Company's semiconductor products.
+In
+recent quarters, average selling prices for the Company's semiconductor products have been below manufacturing costs, and accordingly the Company's results of operations, cash flows
+and financial condition have been adversely affected. To the extent the estimated market value of products held in finished goods and work in process inventories at a quarter end date is below the
+cost of these products, the Company recognizes a charge to cost of goods sold to write down the carrying value of inventory to the estimated market value. In this regard, in 2002 and 2001, the Company
+recorded charges to cost of goods sold to write down the carrying value of its inventories to their estimated market values. As these charges are recorded in advance of when inventory subject to the
+write-down is sold, gross margins in the period of sale are higher than they would be absent the effect of the previous write-downs. Excluding the effects on gross margin of inventory
+write-downs, gross margin for 2002 would have been lower by $324 million and gross margin for 2001 would have been higher by $564 million.
+Results
+of operations for the fourth quarter of 2002 include an inventory write-down of $174 million. Approximately 85% of this write-down related to the
+Company's SDRAM products, including products from the Company's newly acquired facility in Virginia. Of the cumulative inventory
+17
+write-downs recognized in 2002 and 2001, the Company estimates that approximately $240 million is associated with product remaining in inventory as of August 29, 2002. The Company
+estimates that approximately 50% of this amount will remain in inventory at the end of the first quarter of 2003.
+Subject
+to specific terms and conditions, the Company has agreed to purchase all of the products manufactured by its joint venture memory manufacturing operation, TECH Semiconductor
+Singapore Pte. Ltd. ("TECH"). TECH supplied approximately 20%, 25% and 20% of the total megabits of memory produced by the Company in 2002, 2001 and 2000, respectively. The Company generally
+purchases semiconductor products from TECH at prices determined quarterly, based on a discount from average selling price realized by the Company for the immediately preceding quarter. Depending on
+market conditions, the gross margin from the sale of TECH products may be higher or lower than the gross margin from the sale of products manufactured by the Company's wholly-owned facilities. The
+Company realized significantly higher gross margin percentages on sales of TECH products than for products manufactured by its wholly-owned facilities in 2002 and lower gross margins on sales of TECH
+products for 2001 and 2000. In light of continuing pricing declines occurring since early April 2002, the Company expects gross margins on sales of TECH products in the first quarter of 2003 to
+be higher than gross margins realized on products manufactured by the Company's wholly-owned operations. The Company performs assembly and test services on products manufactured by TECH. The Company
+also provides certain technology, engineering, and training support to TECH. All transactions with TECH are recognized as part of the net cost of products purchased from TECH.
+A
+limited amount of the Company's production for 2002 was attributable to its Virginia facility. The Company expects to transition its product and process technology into this facility
+over the next three to six months. Until the Company is able to complete the transition of its product and process technology and significantly ramp production at the Virginia facility, the Company
+expects that the per megabit costs associated with products manufactured at the facility will exceed the per megabit costs of products manufactured at the Company's other facilities.
+Selling, General and Administrative
+2002
+% Change
+2001
+% Change
+2000
+(amounts in millions)
+Selling, general and administrative
+$
+332.3
+(36.6
+)%
+$
+524.1
+19.5
+%
+$
+438.5
+as a % of net sales
+12.8
+%
+13.3
+%
+6.9
+%
+Selling,
+general and administrative expenses ("SG&A") decreased in 2002 as compared to 2001. SG&A for 2001 included a contribution charge of $94 million for the market value of
+the Company's equity interest in Interland which was contributed to the Micron Technology Foundation and $63 million from the Company's Web-hosting Operations, which were disposed
+of in August 2001. In addition, technical and professional fees associated with the implementation of the Company's business software and legal costs associated with product and process
+technology rights litigation were lower in 2002 as compared to 2001. (See "Item 8. Financial Statements and Supplementary Data—Notes to Consolidated Financial
+Statements—Commitments and Contingencies.")
+The
+increase in SG&A for 2001 as compared to 2000 resulted primarily from the $94 million contribution charge. The increase in SG&A for 2001 as compared to 2000 was also due to
+increased legal costs associated with product and process technology rights litigation, patent prosecution and depreciation expense associated with the Company's business software systems, partially
+offset by decreased performance-based compensation expense.
+SG&A
+for the Company's Web-hosting Operations was 12% and 11% of total SG&A for 2001 and 2000, respectively.
+18
+Research and Development
+2002
+% Change
+2001
+% Change
+2000
+(amounts in millions)
+Research and development
+$
+561.3
+14.7
+%
+$
+489.5
+14.6
+%
+$
+427.0
+as a % of net sales
+21.7
+%
+12.4
+%
+6.7
+%
+Research
+and development expenses vary primarily with the number of development wafers processed, the cost of advanced equipment dedicated to new product and process development, and
+personnel costs. Product development costs are recorded as research and development expense. Development of a product is deemed complete once the product has been thoroughly reviewed and tested for
+performance and reliability and is internally qualified for sale to customers.
+The
+Company's DRAM process technology research and development efforts are focused on its .11µ and .095µ line-width process
+technologies, which are designed to facilitate the Company's transition to next generation products. Additional process development work includes processes to support Flash, SRAM, CMOS imagers,
+Content Addressable Memory ("CAM"), embedded memory and new memory materials. In addition to its process technology efforts, the Company continues to emphasize product designs that utilize advanced
+process technology. Efforts towards the design and development of new products are concentrated on the Company's 512 Meg and 1 Gig DDR SDRAMs, DDRII and DDRIII SDRAMs, Flash and SRAM memory products,
+CellularRAM, embedded memory, CAM, CMOS imagers and advanced DRAM technology products. The Company is establishing a pilot line to process limited volumes of 300-millimeter ("300mm")
+wafers.
+Other Operating Income and Expense
+Other operating expense for 2002 includes losses of $27 million, net of gains, on write-downs and disposals of semiconductor equipment. Other operating
+expense for 2001 includes losses of $44 million from the write-off of certain costs associated with the Company's Lehi facility and losses of $20 million, net of gains, on
+write-downs and disposals of semiconductor equipment. Other operating income for 2000 includes a gain of $42 million on the sale of the Company's facility located in Richardson, Texas and
+losses of $23 million, net of gains, on write-downs and disposals of other semiconductor equipment.
+Other Non-Operating Income and Expense
+In the fourth quarter of 2001, the Company contributed its interest in its Interland Web-hosting Operations to the Micron Technology Foundation. Other
+non-operating expense for 2001 includes a $4 million loss in connection with the merger of Micron Electronics, Inc. (formerly a subsidiary of the Company) and
+Interland, Inc. and a charge of $92 million to write down the carrying value of the Company's equity interest in Interland contributed to the Foundation to market value. In addition, the
+Company recognized charges totaling $12 million in 2001 resulting from market value adjustments for derivative financial instruments to purchase electricity and natural gas. Other
+non-operating income for 2000 includes a gain of $14 million from the contribution to the Foundation of Interland common stock owned by the Company.
+Interest Income and Expense
+Interest income fluctuates primarily with levels of the Company's cash and investments and general rates of interest. Interest expense was relatively flat in 2002
+compared to 2001 and was lower for 2001 as compared to 2000, primarily as a result of the conversions of debt to equity in the third quarter of 2000 and the first quarter of 2001. $500 million
+of the Company's 7.0% convertible subordinated notes were converted into equity in the third quarter of 2000 and the Company's $740 million face amount, 6.5% convertible subordinated notes were
+converted into equity in the first quarter of 2001.
+19
+Income Taxes
+The Company recorded a $348 million charge in 2002 to the provision for income taxes to establish a valuation allowance against its U.S. deferred tax
+assets, consisting primarily of $1.3 billion of U.S. net operating loss carryforwards. Until the Company utilizes these operating loss carryforwards the income tax provision will only reflect
+modest levels of foreign taxation. Excluding the $348 million charge, the effective tax rate for 2002 would have been 44%. The effective tax rates for 2001 and 2000 were 46% and 34%,
+respectively. The Company's effective tax rate excluding the valuation allowance primarily reflects the U.S. statutory income tax rate, the net effect of state taxes and the effect of foreign income
+at non-U.S. tax rates.
+Recently Issued Accounting Standards
+In June 2002, the Financial Accounting Standards Board ("FASB") issued Statement of Financial Accounting Standards ("SFAS") No. 146, "Accounting for
+Costs Associated with Exit or Disposal Activities." SFAS No. 146 addresses financial accounting and reporting for costs associated with exit or disposal activities and nullifies Emerging Issues
+Task Force ("EITF") Issue No. 94-3. The adoption of SFAS No. 146 is effective for exit or disposal activities that are initiated after December 31, 2002. The Company
+does not expect the adoption of SFAS No. 146 to have a significant impact on the Company's future results of operations or financial position.
+In
+April 2002, FASB issued SFAS No. 145, "Rescission of FASB Statements No. 4, 44 and 64, Amendment of FASB Statement No. 13 and Technical Corrections." SFAS
+No. 145 updates, clarifies and simplifies certain existing accounting pronouncements. The Adoption of SFAS No. 145 is effective for the Company in fiscal 2003. The Company does not
+expect the adoption of SFAS No. 145 to have an impact on the Company's future results of operations or financial position.
+In
+August 2001, FASB issued SFAS No. 144, "Accounting for the Impairment or Disposal of Long-Lived Assets." SFAS No. 144 supersedes previous guidance for
+financial accounting and reporting for the impairment or disposal of long-lived assets and for segments of a business to be disposed of. The adoption of SFAS No. 144 is effective
+for the Company in fiscal 2003. The Company does not expect the adoption of SFAS No. 144 to have a significant impact on the Company's future results of operations or financial position.
+In
+June 2001, the FASB issued SFAS No. 143, "Accounting for Asset Retirement Obligations." SFAS No. 143 addresses financial accounting and reporting for obligations
+associated with the retirement of tangible long-lived assets and the associated retirement costs. The adoption of SFAS No. 143 is effective for the Company in fiscal 2003. The
+Company does not expect the adoption of SFAS No. 143 to have a significant impact on the Company's future results of operations or financial position.
+Liquidity and Capital Resources
+As of August 29, 2002, the Company had cash and short-term investments totaling $986 million, representing a decrease of
+$693 million from August 30, 2001. In addition, the Company had investment securities with maturities of more than one year totaling $160 million as of August 29, 2002 and
+$100 million as of August 30, 2001, which are included in other noncurrent assets in the Company's consolidated balance sheet. The Company's liquidity is highly dependent on overall
+industry demand for semiconductor memory and average selling prices for its semiconductor products. The Company's principal source of liquidity during 2002 was net cash flow from operations of
+$578 million, which includes income tax refunds of $547 million received by the Company in the first quarter of 2002. During 2002, the Company spent $760 million for property,
+plant and equipment and also paid $250 million in cash to Toshiba as part of the cost to acquire the Virginia facility.
+20
+The Company believes that to develop new product and process technologies, support future growth, achieve operating efficiencies and maintain product quality, it must continue to invest
+in manufacturing technology, facilities and capital equipment, research and development, and product and process technology. This investment may also be accomplished through business acquisitions or
+other transactions. The Company has historically utilized external sources of financing to fund a portion of operations and has a shelf registration statement in place pursuant to which the Company
+may from time to time issue debt or equity securities for up to $1 billion. The Company may also seek to raise funds through issuing securities not covered by the existing shelf registration
+statement, by increasing the size of the existing shelf registration statement or pursuing other external sources of financing.
+The
+Company expects capital spending to approximate $800 million to $1.2 billion in 2003 depending on market conditions. These capital spending estimates include
+expenditures for ongoing equipment upgrades, expenditures to transition the Company's Virginia facility to the Company's process technology and expenditures for the 300mm pilot line. As of
+August 29, 2002, the Company had commitments extending into 2004 of approximately $580 million for the acquisition of property, plant and equipment.
+In
+connection with the acquisition of the Virginia facility, the Company issued 1.5 million shares of common stock. The Company granted Toshiba an option to require Micron to
+repurchase on October 21, 2003, all of these shares for $68 million cash. The option expires if the closing price of the Company's common stock is at or above $45.05 per share for 20
+consecutive trading days.
+The
+Company has pledged $50 million, which is included in other noncurrent assets in the Company's consolidated balance sheet, as cash collateral for TECH's fully-drawn revolving
+line of credit.
+Future
+payments on notes and capital lease obligations and minimum commitments under operating leases are:
+Fiscal year
+Notes
+Capital leases
+Operating leases
+2003
+$
+80.5
+$
+13.0
+$
+12.1
+2004
+57.0
+10.4
+6.9
+2005
+22.6
+1.6
+5.3
+2006
+232.6
+—
+3.7
+2007
+22.6
+—
+3.3
+2008 and thereafter
+36.5
+—
+27.8
+Certain Factors
+In addition to the factors discussed elsewhere in this Form 10-K, the following are important factors which could cause
+actual results or events to differ materially from those contained in any forward looking statements made by or on behalf of the Company.
+If average selling prices for our semiconductor products do not exceed our costs, we expect to incur losses.
+In five of the last six fiscal years we experienced the following decreases in average selling prices for our semiconductor products: 53% in 2002, 60% in 2001,
+37% in 1999, 60% in 1998 and 75% in 1997. We are unable to predict pricing conditions for any future period.
+In
+recent quarters, average selling prices for our semiconductor products have been below our manufacturing costs, and accordingly, our results of operations, cash flows and financial
+condition have been adversely affected. If average selling prices are below costs in future periods, we expect to continue to incur losses on product sales. To the extent the estimated market value of
+products held in
+21
+finished goods and work in process inventories at a quarter end date is below the cost of these products, we recognize a charge against operations to write down the carrying value of inventory to
+market value.
+If average selling prices of semiconductor products do not improve, we may not be able to generate sufficient cash flows to fund our operations and make adequate capital
+investments.
+Our cash flows from operations depend primarily on demand for semiconductor memory, average selling prices and per megabit manufacturing costs. In recent
+quarters, average selling prices have been below our manufacturing costs. To develop new product and process technologies, support future growth, achieve operating efficiencies and maintain product
+quality, we must make significant capital investments in facilities and capital equipment, research and development, and product and process technology. Weak market conditions for the semiconductor
+industry have led us to significantly reduce actual and projected expenditures. If average selling prices do not improve, we may not be able to generate sufficient cash flows to fund our operations or
+make adequate capital investments.
+Weak demand for semiconductor memory products may lead to future inventory write-downs or limit our ability to sell our products.
+We recorded inventory write-downs totaling $376 million in 2002 and $727 million in 2001 as a result of the significant decreases in average selling
+prices for our semiconductor memory products. To the extent the estimated market value of products held in finished goods and work in process inventories at a quarter end date is below the cost of
+these products, we recognize a charge to cost of goods sold to write down the carrying value of inventory to market value. In addition, if a lack of demand for semiconductor products limits our
+ability to sell our inventory, our liquidity and financial position could be adversely affected.
+If the growth rate of either PCs sold or the amount of semiconductor memory included in each PC decreases, sales of our semiconductor products could decrease.
+We are dependent on the personal computer ("PC") market as most of the semiconductor products we sell are used in PCs or peripherals. DRAMs are the most
+widely used semiconductor components in PCs. In recent quarters, the growth rate of PCs sold has slowed or declined. If we experience a sustained reduction in the growth rate of either PCs sold or the
+average amount of semiconductor
+memory included in each PC, sales of our semiconductor products could decrease, and our results of operations, cash flows and financial condition could be adversely affected.
+The semiconductor memory industry is highly competitive.
+We face intense competition from a number of companies, some of which are large corporations or conglomerates (e.g. Samsung Semiconductor, Inc.) that may
+have greater resources to withstand downturns in the semiconductor memory market, invest in technology and capitalize on growth opportunities.
+Current economic and political conditions may harm our business.
+Global economic conditions and the effects of military or terrorist actions may cause significant disruptions to worldwide commerce. If these disruptions result
+in delays or cancellations of customer orders, a decrease in corporate spending on information technology or our inability to effectively market, manufacture or ship our products, our results of
+operations, cash flows and financial condition could be adversely affected. In addition, our ability to raise capital for capital expenditures, research and development and ongoing operations is
+dependent upon ready access to capital markets. During times of adverse global economic and political conditions, accessibility to capital markets could
+22
+decrease. If we are unable to access the capital markets over an extended period of time, we may be unable to make capital expenditures, fully carry out our research and development efforts and fund
+operations, which could materially adversely affect our results of operations, cash flows and financial condition.
+If any one of our major PC customers significantly reduces its purchases of DRAM from us, our results of operations, cash flows and financial condition could be adversely
+affected.
+Approximately 80% of the Company's sales of semiconductor products for 2002 was to the computer market. Aggregate sales to two of our PC customers approximated
+28% of our net sales in 2002. If any one of our major PC customers significantly reduces its purchases of DRAM from us, our results of operations, cash flows and financial condition could be adversely
+affected.
+Increased worldwide DRAM production could lead to further declines in average selling prices for DRAM.
+The transition to smaller geometries and the widespread use of 300 millimeter ("300mm") wafers in the industry, which is expected to occur within the next two to
+five years, could lead to a significant increase in the worldwide supply of DRAM. Increases in worldwide supply of DRAM also result from DRAM fab capacity expansions, either by way of new facilities,
+increased capacity utilization or reallocation of other semiconductor production to DRAM production. Some of our competitors may receive government support to withstand downturns in the semiconductor
+memory market and to invest in technology resulting in increased worldwide supply. Increases in worldwide supply of DRAM, if not offset by increases in demand, could lead to further declines in
+average selling prices for our products and adversely affect our results of operations, cash flows and financial condition.
+If our TECH joint venture experiences financial difficulty, or if our supply of semiconductor products from TECH is disrupted, our results of operations, cash flows and
+financial condition could be adversely affected.
+TECH supplied approximately 20%, 25% and 20% of our total megabits of memory produced in 2002, 2001 and 2000, respectively. We have agreements to purchase all of
+the production from TECH subject to specific terms and conditions. Any reduction in supply could adversely affect our results of operations, cash flows and financial condition. TECH's existing credit
+facility expires in December 2003, and TECH is currently seeking external financing to replace its maturing loans and fund ongoing operations. If TECH's financing efforts are unsuccessful, we
+and other TECH shareholders may be requested to invest additional capital in TECH. If TECH is unable to obtain new financing or additional capital from its shareholders, it would likely have to
+discontinue capital spending and may have to alter its operations. We have pledged $50 million as cash collateral for TECH's fully-drawn line of credit. As of August 29, 2002, we had
+remaining unamortized costs of $77 million included in intangible assets relating to the supply arrangement to purchase product from TECH. In the event that our supply of semiconductor products
+from TECH is reduced or eliminated, the Company may be required to write off part or all of these assets and the Company's results of operations could be adversely affected.
+We may face difficulties integrating our newly acquired Virginia facility.
+On April 22, 2002, we acquired substantially all the assets of Toshiba's DRAM business as conducted by Dominion Semiconductor L.L.C., a wholly-owned
+subsidiary of Toshiba located in Virginia. The success of these operations is partially dependent on our ability to operate them in a cost-effective manner. There can be no assurance that
+we will successfully integrate these operations and operate them in a cost-effective manner. Until we are able to complete the transition of our product and process technology and
+significantly ramp production at the Virginia facility, we expect
+23
+that the per megabit costs associated with products manufactured at the facility will exceed the per megabit costs of products manufactured at our other facilities. There can be no assurance that we
+will be successful in achieving the same level of manufacturing efficiencies in the Virginia facility as has been achieved in our other manufacturing facilities.
+We may be unable to maintain or reduce per megabit manufacturing costs at the same rate as we have in the past.
+Historically, we have decreased per megabit manufacturing costs through improvements in our manufacturing processes, including reducing the die size of our
+existing products. In future periods, we may be unable to maintain our per megabit manufacturing costs or reduce costs at historical rates. Our ability to maintain or reduce per megabit manufacturing
+costs in future periods may be affected by:
+•
+our
+ability to successfully implement product and process technology upgrades,
+•
+our
+manufacturing wafer output or yields may decrease as we implement more complex technologies, and
+•
+our
+ability to ramp the latest reduced die size versions of existing devices or new generation devices.
+If we are unable to respond to customer demand for continued diversification of semiconductor products or are unable to do so in a cost-effective manner, we may
+lose market share and our results of operations may be adversely affected.
+We will need to dedicate significant resources to product design and development to respond to customer demand for continued diversification of semiconductor
+products. If we are unable to invest sufficient resources to meet the diverse memory needs of customers, we may lose market share. In addition, as we diversify our product lines we may encounter
+difficulties penetrating certain markets, particularly markets where we do not have existing customers. If we are unable to respond to customer demand for market diversification in a
+cost-effective manner, our results of operations may be adversely affected.
+An adverse determination that our products and processes infringe the intellectual property rights of others could adversely affect our results of operations, cash flows and
+financial condition.
+From time to time, others have asserted, and may in the future assert, that our products or processes infringe their product or process technology rights. In this
+regard, we are currently engaged in litigation with Rambus, Inc. ("Rambus") relating to certain of Rambus' patents and certain of our claims and defenses. On August 28, 2000, we filed a
+declaratory judgment action against Rambus in the U.S. District Court for the District of Delaware. On February 1, 2001, we amended our complaint. Pursuant to our amended complaint, we are
+seeking (1) relief under the federal antitrust laws for violations by Rambus of Section 2 of the Sherman Act; (2) a declaratory judgment that (a) certain Rambus patents are
+not infringed, are invalid and/or are unenforceable, (b) we have an implied license to Rambus' patents, and (c) Rambus is estopped from enforcing its patents against us because of its
+conduct in the Joint Electron Device Engineering Council standards setting body; and (3) damages and declaratory relief for Rambus' breach of contract, fraud, deceptive trade practices,
+negligent misrepresentation, and conduct requiring the application of equitable estoppel. On February 15, 2001, Rambus filed an answer and counterclaim denying that we are entitled to relief
+and has alleged willful infringement by us of eight Rambus patents. In addition, Rambus has filed lawsuits against the Company in Italy, Germany, France and the United Kingdom alleging infringement of
+certain Rambus European patents. We are unable to predict the outcome of these suits. A court determination that our manufacturing processes or products infringe the product or process rights of
+others could result in significant liability and/or require us to make material changes to our products and/or manufacturing
+24
+processes. Any of the foregoing results could have a material adverse effect on our business, results of operations or financial condition.
+We
+have a number of patent and intellectual property license agreements. Some of these license agreements require us to make one time or periodic payments. We may need to obtain
+additional patent licenses or renew existing license agreements in the future. We are unable to predict whether these license agreements can be obtained or renewed on acceptable terms.
+Allegations of anticompetitive practices.
+On June 17, 2002, we received a grand jury subpoena from the U.S. District Court for the Northern District of California seeking information regarding an
+investigation by the Antitrust Division of the Department of Justice (the "DOJ") into possible antitrust violations in the "Dynamic Random Access Memory" or "DRAM" industry. We are cooperating fully
+with the DOJ in its investigation. Subsequent to the commencement of the DOJ investigation, 21 purported class action lawsuits were filed against us and other DRAM suppliers in various federal and
+state courts alleging violations of the Federal Sherman Antitrust Act or California's Cartwright Antitrust Act and Unfair Competition Law relating to the sale and pricing of DRAM products. The
+complaints seek treble damages for the alleged damages sustained by purported class members, in addition to restitution, costs and attorneys' fees, as well as an injunction against the allegedly
+unlawful conduct. There can be no assurance that additional purported class action lawsuits will not be filed against us, either within or without the United States. We are unable to predict the
+outcome of these suits. A court determination that the Company has violated
+federal or state antitrust laws could result in significant liability and could have a material adverse effect on our results of operations or financial condition.
+New product development may not be successful.
+We are developing new products that complement our traditional memory products or leverage their underlying design or process technology. We anticipate expending
+significant resources for new semiconductor product development over the next several years. There can be no assurance that our product development efforts will be successful, that we will be able to
+cost-effectively manufacture these new products or that we will be able to successfully market these products.
+If we are unable to successfully transition our operations to 300mm wafer manufacturing processes, the results of our results of operations, cash flows and financial condition
+could be adversely affected.
+We have in the past reduced our per megabit manufacturing costs by transitioning to larger wafer sizes. By transitioning to larger wafers, we should be able to
+produce significantly more die for each wafer, resulting in substantially reduced costs for each die. We and several of our competitors are evaluating plans to shift part or all of our semiconductor
+manufacturing operations to 300mm wafers, and some of our competitors have begun to shift their operations to 300mm wafers. Our transition to 300mm wafer processing will require us to make substantial
+capital investments, which will depend on our ability to generate funds from operations or to obtain funds from external sources. We may also experience disruptions in manufacturing operations and
+reduced yields during our transition to larger wafer sizes. If we are unable to successfully transition to 300mm wafer processing at the appropriate time, we could be at a cost disadvantage with
+respect to our competitors and our results of operations, cash flows and financial condition could be adversely affected.
+25
+We face risks associated with our international sales and operations that could adversely affect our results of operations, cash flows and financial condition.
+Sales to customers outside the United States approximated 53% of our consolidated net sales in 2002. In addition, we have or support manufacturing operations in
+Italy, Japan, Scotland and Singapore. Our international sales and operations are subject to a variety of risks, including:
+•
+currency
+fluctuations, export duties, changes to import and export regulations, and restrictions on the transfer of funds,
+•
+political
+and economic instability,
+•
+problems
+with the transportation or delivery of our products,
+•
+issues
+arising from cultural or language differences and labor unrest,
+•
+longer
+payment cycles and greater difficulty in collecting accounts receivable, and
+•
+compliance
+with trade and other laws in a variety of jurisdictions.
+These
+factors may adversely affect our results of operations, cash flows and financial condition.
+If our manufacturing process is disrupted, our results of operations, cash flows and financial condition could be adversely affected.
+We manufacture products using highly complex processes that require technologically advanced equipment and continuous modification to improve yields and
+performance. Difficulties in the manufacturing process can reduce yields or disrupt production and may increase our per megabit manufacturing costs. From time to time, we have experienced minor
+disruptions in our manufacturing process as a result of power outages. If production at a fabrication facility is disrupted for any reason, manufacturing yields may be adversely affected or we may be
+unable to meet our customers' requirements and they may purchase products from other suppliers. This could result in a significant increase in manufacturing costs, loss of revenues or damage to
+customer relationships.
+Disruptions in our supply of raw materials could adversely affect our results of operations, cash flows and financial position.
+Our operations require raw materials that meet exacting standards. We generally have multiple sources of supply for our raw materials. However, only a limited
+number of suppliers are capable of delivering certain raw materials that meet our standards. Various factors could reduce the availability of raw materials such as silicon wafers, photomasks,
+chemicals, gases, lead frames and molding compound. Shortages may occur from time to time in the future. In addition, any transportation problems could delay our receipt of raw materials. Lead times
+for the supply of raw materials have been extended in
+the past. If our supply of raw materials is disrupted or our lead times extended, our results of operations, cash flows and financial condition could be adversely affected.
+Products that do not meet specifications or that contain, or are perceived by our customers to contain, defects or that are otherwise incompatible with end uses could impose
+significant costs on us or otherwise adversely affect our results of operations, cash flows and financial position.
+Because the design and production process for semiconductor memory is highly complex, it is possible that we may produce products that do not comply with customer
+specifications, contain defects or are otherwise incompatible with end uses. If, despite design review, quality control and product
+26
+qualification procedures, problems with nonconforming, defective or incompatible products occur after we have shipped such products, we could be adversely affected in the following ways:
+•
+we
+may need to replace product or otherwise compensate customers for costs incurred or damages caused by defective or incompatible product, and
+•
+we
+may encounter adverse publicity, which could cause a decrease in sales of our products.
+We expect to make future acquisitions where advisable, which involve numerous risks.
+We expect to make future acquisitions where we believe it is advisable to enhance our market position. Acquisitions involve numerous risks, including:
+•
+increasing
+our exposure to changes in average selling prices for semiconductor memory products,
+•
+difficulties
+in integrating the operations, technologies, and products of the acquired companies,
+•
+increasing
+capital expenditures to upgrade and maintain facilities,
+•
+increasing
+debt to finance any acquisition,
+•
+diverting
+management's attention from normal daily operations,
+•
+managing
+larger operations and facilities and employees in separate geographic areas, and
+•
+hiring
+and retaining key employees.
+Mergers
+and acquisitions of high-technology companies are inherently risky, and future acquisitions may not be successful and may materially adversely affect our results of
+operations, cash flows or financial condition.
+Item 7A.
+Quantitative and Qualitative Disclosures about Market Risk
+Substantially all of the Company's liquid investments and long-term debt are at fixed interest rates; therefore, the fair value of these instruments
+is affected by changes in market interest rates. The Company believes that the market risk arising from its holdings of liquid investments is minimal as the majority of the Company's investments
+mature within one year. The carrying value of the Company's long-term debt was $454 million at August 29, 2002, and $531 million at August 30, 2001. The
+functional currency for substantially all of the Company's operations is in the U.S. dollar. The Company held aggregate cash and other assets in foreign currency valued at approximately U.S.
+$220 million as of August 29, 2002, and U.S. $239 million as of August 30, 2001 (including deferred tax assets denominated in Japanese Yen valued at approximately U.S.
+$165 million as of August 29, 2002, and U.S. $188 million as of August 30, 2001). The Company also held aggregate foreign currency liabilities valued at approximately U.S.
+$434 million as of August 29, 2002, and U.S. $453 million as of August 30, 2001 (including debt denominated in Japanese Yen valued at approximately U.S. $233 million
+as of August 29, 2002, and U.S. $281 million as of August 30, 2001). Foreign currency receivables and payables are comprised primarily of Japanese Yen, Euros, Singapore Dollars
+and British Pounds.
+27
+Item 8.
+Financial Statements and Supplementary Data
+Index to Consolidated Financial Statements
+Page
+Consolidated Financial Statements as of August 29, 2002, and August 30, 2001, and for fiscal years ended August 29, 2002, August 30, 2001, and August 31, 2000:
+Consolidated Statements of Operations
+29
+Consolidated Balance Sheets
+30
+Consolidated Statements of Shareholders' Equity
+31
+Consolidated Statements of Cash Flows
+32
+Notes to Consolidated Financial Statements
+33
+Report of Independent Accountants
+51
+Financial Statement Schedule:
+Schedule II—Valuation and Qualifying Accounts for the Fiscal Years Ended August 29, 2002, August 30, 2001, and August 31, 2000
+58
+28
+MICRON TECHNOLOGY, INC.
+CONSOLIDATED STATEMENTS OF OPERATIONS
+(Amounts in millions except per share amounts)
+For the year ended
+August 29,
+2002
+August 30, 2001
+August 31,
+2000
+Net sales
+$
+2,589.0
+$
+3,935.9
+$
+6,362.4
+Cost of goods sold
+2,699.6
+3,825.2
+3,114.3
+Gross margin
+(110.6
+)
+110.7
+3,248.1
+Selling, general and administrative
+332.3
+524.1
+438.5
+Research and development
+561.3
+489.5
+427.0
+Other operating (income) expense
+21.1
+73.6
+(10.1
+)
+Operating income (loss)
+(1,025.3
+)
+(976.5
+)
+2,392.7
+Interest income
+51.6
+135.8
+112.8
+Interest expense
+(17.1
+)
+(16.7
+)
+(97.9
+)
+Gain (loss) on issuance of subsidiary stock
+—
+(3.4
+)
+1.0
+Other non-operating income (expense)
+(7.7
+)
+(98.7
+)
+14.2
+Income (loss) before taxes and minority interest
+(998.5
+)
+(959.5
+)
+2,422.8
+Income tax (provision) benefit
+91.5
+446.0
+(829.8
+)
+Minority interest in net income
+—
+(7.7
+)
+(45.3
+)
+Income (loss) from continuing operations
+(907.0
+)
+(521.2
+)
+1,547.7
+Loss from discontinued PC Operations, net of taxes and minority interest:
+Loss from operations of PC business
+—
+(36.1
+)
+(43.5
+)
+Loss on disposal of PC Operations
+—
+(67.7
+)
+—
+Loss from discontinued PC Operations, net
+—
+(103.8
+)
+(43.5
+)
+Net income (loss)
+$
+(907.0
+)
+$
+(625.0
+)
+$
+1,504.2
+Basic earnings (loss) per share:
+Continuing operations
+$
+(1.51
+)
+$
+(0.88
+)
+$
+2.81
+Discontinued operations
+—
+(0.18
+)
+(0.08
+)
+Net income (loss)
+(1.51
+)
+(1.05
+)
+2.73
+Diluted earnings (loss) per share:
+Continuing operations
+$
+(1.51
+)
+$
+(0.88
+)
+$
+2.63
+Discontinued operations
+—
+(0.18
+)
+(0.07
+)
+Net income (loss)
+(1.51
+)
+(1.05
+)
+2.56
+Number of shares used in per share calculations:
+Basic
+601.5
+592.4
+550.9
+Diluted
+601.5
+592.4
+605.4
+See accompanying notes to consolidated financial statements.
+29
+MICRON TECHNOLOGY, INC.
+CONSOLIDATED BALANCE SHEETS
+(Amounts in millions except par value amounts)
+As of
+August 29,
+2002
+August 30,
+2001
+Assets
+Cash and equivalents
+$
+398.2
+$
+469.1
+Short-term investments
+587.5
+1,209.2
+Receivables
+537.9
+791.6
+Inventories
+545.4
+491.1
+Prepaid expenses
+35.6
+17.3
+Deferred income taxes
+14.2
+159.4
+Total current assets
+2,118.8
+3,137.7
+Intangible assets, net
+317.0
+307.6
+Property, plant and equipment, net
+4,699.5
+4,704.1
+Deferred income taxes
+124.8
+—
+Other assets
+295.3
+213.8
+Total assets
+$
+7,555.4
+$
+8,363.2
+Liabilities and shareholders' equity
+Accounts payable and accrued expenses
+$
+554.1
+$
+512.9
+Deferred income
+25.5
+26.4
+Equipment purchase contracts
+80.0
+61.5
+Current portion of long-term debt
+93.1
+86.2
+Total current liabilities
+752.7
+687.0
+Long-term debt
+360.8
+445.0
+Deferred income taxes
+—
+19.0
+Other liabilities
+75.3
+77.4
+Total liabilities
+1,188.8
+1,228.4
+Commitments and contingencies
+Redeemable common stock
+60.2
+—
+Common stock, $0.10 par value, authorized 3.0 billion shares, issued and outstanding 602.9 million and 598.4 million shares
+60.3
+59.8
+Additional capital
+4,229.6
+4,153.7
+Retained earnings
+2,015.5
+2,924.6
+Accumulated other comprehensive income (loss), net of tax
+1.0
+(3.3
+)
+Total shareholders' equity
+6,306.4
+7,134.8
+Total liabilities and shareholders' equity
+$
+7,555.4
+$
+8,363.2
+See accompanying notes to consolidated financial statements.
+30
+MICRON TECHNOLOGY, INC.
+CONSOLIDATED STATEMENTS OF SHAREHOLDERS' EQUITY
+(Amounts in millions)
+Class A
+Common Stock
+Accumulated
+Other
+Comprehensive
+Income (Loss)
+Number
+of Shares
+Amount
+Number
+of Shares
+Amount
+Additional
+Capital
+Retained
+Earnings
+Total
+Shareholders'
+Equity
+Balance at September 2, 1999
+252.2
+$
+25.2
+15.8
+$
+1.6
+$
+1,894.0
+$
+2,045.4
+$
+(2.1
+)
+$
+3,964.1
+Comprehensive income (loss):
+Net income
+1,504.2
+Other comprehensive income (loss):
+Net change in unrealized gain (loss) on investments, net of tax
+3.6
+Total comprehensive income (loss)
+1,507.8
+Conversion of notes to stock
+7.4
+0.7
+497.9
+498.6
+Stock issued under stock plans
+9.7
+1.0
+256.7
+257.7
+Tax effect of stock plans
+205.1
+Stock split
+266.4
+26.6
+(28.2
+)
+(1.6
+)
+Conversion of Class A to common
+31.6
+3.2
+(15.8
+)
+(1.6
+)
+1.6
+Other
+(1.3
+)
+(1.3
+)
+Balance at August 31, 2000
+567.3
+$
+56.7
+—
+$
+—
+$
+2,824.2
+$
+3,549.6
+$
+1.5
+$
+6,432.0
+Comprehensive income (loss):
+Net loss
+(625.0
+)
+(625.0
+)
+Other comprehensive income (loss):
+Net change in unrealized gain (loss) on investments, net of tax
+(4.8
+)
+(4.8
+)
+Total comprehensive income (loss)
+(629.8
+)
+Conversion of notes to stock
+24.7
+2.5
+682.1
+684.6
+Issuance of common stock warrants
+480.2
+Stock issued under stock plans
+6.4
+0.6
+122.0
+122.6
+Tax effect of stock plans
+48.3
+Other
+(3.1
+)
+(3.1
+)
+Balance at August 30, 2001
+598.4
+$
+59.8
+—
+$
+—
+$
+4,153.7
+$
+2,924.6
+$
+(3.3
+)
+$
+7,134.8
+Comprehensive income (loss):
+Net loss
+(907.0
+)
+(907.0
+)
+Other comprehensive income (loss):
+Net change in unrealized gain (loss) on investments, net of tax
+4.3
+Total comprehensive income (loss)
+(902.7
+)
+Stock issued under stock plans
+4.5
+0.5
+75.9
+76.4
+Redeemable common stock accretion
+(2.1
+)
+(2.1
+)
+Balance at August 29, 2002
+602.9
+$
+60.3
+—
+$
+—
+$
+4,229.6
+$
+2,015.5
+$
+1.0
+$
+6,306.4
+See accompanying notes to consolidated financial statements.
+31
+MICRON TECHNOLOGY, INC.
+CONSOLIDATED STATEMENTS OF CASH FLOWS
+(Amounts in millions)
+For the year ended
+August 29,
+2002
+August 30,
+2001
+August 31,
+2000
+Cash flows from operating activities
+Net income (loss)
+$
+(907.0
+)
+$
+(625.0
+)
+$
+1,504.2
+Loss from discontinued PC Operations, net
+—
+103.8
+43.5
+Adjustments to reconcile net income (loss) to net cash provided by operating activities:
+Depreciation and amortization
+1,177.4
+1,114.4
+974.4
+Provision to write down inventories to estimated market values
+376.1
+726.9
+—
+Loss (gain) from write-down or disposition of equipment
+28.4
+23.4
+(8.8
+)
+Loss (gain) from write-down or disposition of investments
+11.5
+(0.5
+)
+—
+Loss on contributions of investment
+—
+186.5
+10.7
+Additional capital tax effect of stock plans
+—
+48.3
+205.1
+Change in operating assets and liabilities
+Decrease (increase) in receivables
+239.0
+605.8
+(784.5
+)
+Increase in inventories
+(378.9
+)
+(482.8
+)
+(331.6
+)
+Increase (decrease) in accounts payable and accrued expenses
+39.9
+(702.4
+)
+596.7
+Deferred income taxes
+11.4
+(130.3
+)
+(4.0
+)
+Other
+(19.7
+)
+(79.0
+)
+(203.5
+)
+Net cash provided by operating activities
+578.1
+789.1
+2,002.2
+Cash flows from investing activities
+Expenditures for property, plant and equipment
+(759.9
+)
+(1,488.6
+)
+(1,127.4
+)
+Purchase of available-for-sale securities
+(1,867.9
+)
+(2,860.3
+)
+(2,504.7
+)
+Purchase of held-to-maturity securities
+—
+(116.3
+)
+(245.9
+)
+Proceeds from maturities of available-for-sale securities
+1,842.0
+3,104.1
+2,027.0
+Proceeds from sales of available-for-sale securities
+596.6
+131.1
+100.1
+Proceeds from maturities of held-to-maturity securities
+—
+207.7
+260.7
+Proceeds from sales of property, plant and equipment
+4.5
+23.7
+151.2
+Purchase of Toshiba Corporation DRAM assets
+(252.4
+)
+—
+Net cash reduction from deconsolidation of MEI
+—
+(170.9
+)
+—
+Cash paid in connection with disposition of PC Operations
+—
+(76.5
+)
+—
+Other
+(76.8
+)
+(136.6
+)
+(118.1
+)
+Net cash used for investing activities
+(513.9
+)
+(1,382.6
+)
+(1,457.1
+)
+Cash flows from financing activities
+Proceeds from issuance of common stock
+71.8
+118.2
+244.0
+Proceeds from issuance of common stock warrants
+—
+480.2
+—
+Proceeds from issuance of debt
+—
+22.6
+—
+Payments on equipment purchase contracts
+(122.3
+)
+(187.2
+)
+(210.7
+)
+Repayments of debt
+(84.6
+)
+(73.8
+)
+(175.1
+)
+Other
+—
+0.9
+3.8
+Net cash provided by (used for) financing activities
+(135.1
+)
+360.9
+(138.0
+)
+Net increase (decrease) in cash and equivalents
+(70.9
+)
+(232.6
+)
+407.1
+Cash and equivalents at beginning of year
+469.1
+701.7
+294.6
+Cash and equivalents at end of year
+$
+398.2
+$
+469.1
+$
+701.7
+Supplemental disclosures
+Income taxes refunded (paid), net
+$
+540.0
+$
+(410.6
+)
+$
+(207.9
+)
+Interest paid, net of amounts capitalized
+(11.5
+)
+(34.3
+)
+(88.8
+)
+Non-cash investing and financing activities:
+Equipment acquisitions on contracts payable and capital leases
+138.7
+202.9
+177.0
+Conversion of notes to equity
+—
+684.6
+498.6
+See accompanying notes to consolidated financial statements.
+32
+MICRON TECHNOLOGY, INC.
+NOTES TO CONSOLIDATED FINANCIAL STATEMENTS
+(All tabular amounts in millions except per share amounts)
+Significant Accounting Policies
+Basis of presentation:
+Micron Technology, Inc., and its subsidiaries (hereinafter referred to collectively as the
+"Company") principally design, develop, manufacture and market semiconductor products. All significant intercompany accounts and transactions have been eliminated. The Company's fiscal year is the 52
+or 53-week period ending on the Thursday closest to August 31. Fiscal years 2002, 2001 and 2000 each contained 52 weeks and ended on August 29, 2002, August 30, 2001,
+and August 31, 2000, respectively.
+On
+August 6, 2001, Micron Electronics, Inc. ("MEI"), completed a merger with Interland, Inc., in a stock-for-stock acquisition (the
+"Interland Merger"). Upon completion of the Interland Merger, MEI changed its name to Interland, Inc. ("Interland"), and the Company's ownership interest was reduced from 61% to 43% of MEI's
+outstanding common stock. On August 30, 2001, the Company contributed all of its shares of Interland common stock to the Micron Technology Foundation (the "Foundation"). The Foundation's
+results are not consolidated with the Company's results. MEI's 2001 financial results are included in the Company's consolidated financial statements for eleven months through the date of the
+Interland Merger. The Company's consolidated financial statements for 2000 includes the financial results of MEI for the full year. (See "Other Non-Operating Income (Expense)" note.) As a
+result of MEI's disposal of its PC operations in 2001, the Company's consolidated financial statements presents the net effect of discontinued PC Operations separate from the results of the Company's
+continuing operations. (See "Discontinued PC Operations" note.)
+Restatements and reclassifications:
+Per share calculations reflect a two-for-one stock split effected
+in the form of a stock dividend on May 1, 2000. Certain reclassifications have been made, none of which affected the results of operations, to present the financial statements on a consistent
+basis.
+Use of estimates:
+The preparation of financial statements and related disclosures in conformity with United States generally
+accepted accounting principles requires management to make estimates and judgments that affect the reported amounts of assets, liabilities, revenues, expenses and related disclosures. Estimates and
+judgments are based on historical experience, forecasted future events and on various other assumptions that the Company believes to be reasonable under the circumstances. Estimates and judgments may
+differ under different assumptions or conditions. The Company evaluates its estimates and judgments on an ongoing basis. Actual results could differ from those estimates.
+Revenue recognition:
+Revenue from product sales to direct customers is recognized when title transfers to the customer,
+primarily upon shipment. The Company defers recognition of sales to certain customers that have rights of return and price protection until such customers have sold the products.
+Stock-based compensation:
+Employee stock plans are accounted for using the intrinsic value method prescribed by Accounting
+Principles Board ("APB") Opinion No. 25, "Accounting for Stock Issued to Employees." The Company utilizes the Black-Scholes model to value stock options for pro forma presentation of income and
+per share data as if the fair value-based accounting method in Statement of Financial Accounting Standards ("SFAS") No. 123, "Accounting for Stock-Based Compensation," had been used to account
+for stock-based compensation.
+Advertising:
+Advertising costs are charged to operations as incurred. The Company incurred $13.6 million,
+$24.1 million and $33.1 million of advertising costs in 2002, 2001 and 2000, respectively.
+33
+Research and development:
+Costs related to the conceptual formulation and design of products and processes are expensed as
+research and development. Determining when product development is complete requires judgment by the Company. The Company deems that development for a product is complete once the product has been
+thoroughly reviewed and tested for performance and reliability and is internally qualified for sale to customers. Subsequent to product qualification, product costs are valued in inventory.
+Foreign currency:
+The U.S. dollar is the Company's functional currency for substantially all of its operations. For
+international operations where the functional currency is other than the U.S. dollar, assets and liabilities are translated into U.S. dollars at exchange rates in effect at the balance sheet date and
+income and expense items are translated at the average exchange rates prevailing during the period.
+Earnings per share:
+Basic earnings per share is computed based on the weighted-average number of common shares outstanding.
+Diluted earnings per share is computed based on the weighted-average number of common shares outstanding plus the dilutive effects of convertible debentures, stock options and warrants. Basic and
+diluted earnings per share computations include redeemable common stock accretion.
+Financial instruments:
+Cash equivalents include highly liquid short-term investments with original maturities of
+three months or less, readily convertible to known amounts of cash. Investments with original maturities greater than three months and remaining maturities less than one year are classified as
+short-term investments. Investments with remaining maturities greater than one year are classified as other noncurrent assets. Securities classified as
+available-for-sale are stated at market value.
+The
+amounts reported as cash and equivalents, short-term investments, receivables, other assets, accounts payable and accrued expenses and equipment purchase contracts
+approximate their fair values. The fair value of the Company's debt as of August 29, 2002, and August 30, 2001, approximated $429 million and $491 million, respectively.
+The fair value estimates presented herein were based on market interest rates and other market information available to management as of each balance sheet date presented. The use of different market
+assumptions and/or estimation methodologies could have a material effect on the estimated fair value amounts. The approximate fair values do not take into consideration expenses that could be incurred
+in an actual settlement.
+Certain concentrations:
+Approximately 80% of the Company's sales of semiconductor products for 2002 was to the computer
+market. Certain components used by the Company in manufacturing semiconductor memory products are purchased from a limited number of suppliers.
+Financial
+instruments that potentially subject the Company to concentrations of credit risk consist principally of cash, investment securities and trade accounts receivable. The Company
+invests cash through high-credit-quality financial institutions and, by policy, limits the concentration of credit exposure by restricting investments with any single obligor. A
+concentration of credit risk may exist with respect to trade receivables as a substantial portion of the Company's customers are affiliated with the computer, telecommunications and networking
+industries. The Company performs ongoing credit evaluations of customers worldwide and generally does not require collateral from its customers. Historically, the Company has not experienced
+significant losses on receivables.
+Inventories:
+Inventories are stated at the lower of average cost or market value. Cost includes labor, material and overhead
+costs, including product and process technology costs. Determining market value of inventories involves judgment in that it requires the Company to project unit prices and volumes for future periods
+in which it expects to sell the inventory. As a result of these analyses, the Company records a charge to cost of goods sold in advance of when the inventory is actually sold to reflect market values
+that are below the Company's costs.
+34
+Product and process technology:
+Costs incurred to acquire product and process technology or to patent technology developed by
+the Company are capitalized and amortized on a straight-line basis over periods currently ranging up to 10 years. The Company capitalizes a portion of costs incurred based on its
+analysis of historical and projected patent issuance rates. Capitalized product and process technology costs are amortized over the shorter of (i) the estimated useful life of the technology
+(the determination of which requires judgment by the Company), (ii) the patent term or (iii) the term of the technology agreement. Fully-amortized costs are removed from product and
+process technology and accumulated amortization.
+Property, plant and equipment:
+Property, plant and equipment are stated at cost and depreciated using the
+straight-line method over the estimated useful lives of 5 to 30 years for buildings, 2 to 20 years for equipment and 2 to 5 years for software. Assets held for sale
+are carried at the lower of cost or market value and are included in other noncurrent assets. When property or equipment is retired or otherwise disposed of, the net book value of the asset is removed
+from the Company's accounts and any net gain or loss is included in the Company's results of operations.
+The
+Company capitalizes interest on borrowings during the active construction period of major capital projects. Capitalized interest is added to the cost of the underlying assets and is
+amortized over the useful lives of the assets. The Company capitalized interest costs of $10.2 million, $9.8 million and $6.4 million in 2002, 2001 and 2000, respectively, in
+connection with various capital projects.
+Recently issued accounting standards:
+In June 2002, the Financial Accounting Standards Board ("FASB") issued SFAS
+No. 146, "Accounting for Costs Associated with Exit or Disposal Activities." SFAS No. 146 addresses financial accounting and reporting for costs associated with exit or disposal
+activities and nullifies Emerging Issues Task Force ("EITF") Issue No. 94-3. The adoption of SFAS No. 146 is effective for exit or disposal activities that are initiated
+after December 31, 2002. The Company does not expect the adoption of SFAS No. 146 to have a significant impact on the Company's future results of operations or financial position.
+In
+April 2002, the FASB issued SFAS No. 145, "Rescission of FASB Statements No. 4, 44 and 64, Amendment of FASB Statement No. 13 and Technical Corrections."
+SFAS No. 145 updates, clarifies and simplifies certain accounting pronouncements. The adoption of SFAS No. 145 is effective for the Company in fiscal 2003. The Company does not expect
+the adoption of SFAS No. 145 to have an impact on the Company's future results of operations or financial position.
+In
+August 2001, the FASB issued SFAS No. 144, "Accounting for the Impairment or Disposal of Long-Lived Assets." SFAS No. 144 supersedes previous guidance
+for financial accounting and reporting
+for the impairment or disposal of long-lived assets and for segments of a business to be disposed of. The adoption of SFAS No. 144 is effective for the Company in fiscal 2003. The
+Company does not expect the adoption of SFAS No. 144 to have a significant impact on the Company's future results of operations or financial position.
+In
+June 2001, the FASB issued SFAS No. 143, "Accounting for Asset Retirement Obligations." SFAS No. 143 addresses financial accounting and reporting for obligations
+associated with the retirement of tangible long-lived assets and the associated retirement costs. The adoption of SFAS No. 143 is effective for the Company in fiscal 2003. The
+Company does not expect the adoption of SFAS No. 143 to have a significant impact on the Company's future results of operations or financial position.
+35
+Supplemental Balance Sheet Information
+Investment Securities
+2002
+2001
+Available-for-sale securities:
+U.S. Government and agencies
+$
+527.0
+$
+864.5
+Commercial paper
+163.2
+491.0
+Certificates of deposit
+90.1
+100.2
+Other
+245.4
+286.1
+1,025.7
+1,741.8
+Less cash equivalents
+(275.7
+)
+(416.1
+)
+Less noncurrent investments
+(162.5
+)
+(116.5
+)
+Short-term investments
+$
+587.5
+$
+1,209.2
+As
+of August 29, 2002, $756.0 million of securities mature within one year, $108.1 million mature from one to five years, $40.2 million mature from five to
+ten years and $11.4 million mature after ten years.
+Receivables
+2002
+2001
+Trade receivables
+$
+370.7
+$
+154.9
+Income taxes
+122.2
+560.2
+Taxes other than income
+23.9
+34.9
+Joint venture
+10.5
+25.3
+Interest
+5.5
+10.9
+Other
+11.3
+9.2
+Allowance for doubtful accounts
+(6.2
+)
+(3.8
+)
+$
+537.9
+$
+791.6
+Inventories
+2002
+2001
+Finished goods
+$
+257.9
+$
+248.0
+Work in process
+202.2
+139.3
+Raw materials and supplies
+112.4
+108.2
+Allowance for obsolescence
+(27.1
+)
+(4.4
+)
+$
+545.4
+$
+491.1
+The
+Company recognized write-downs of $376.1 million and $726.9 million in 2002 and 2001, respectively, to record work in process and finished goods inventories of
+semiconductor products at their estimated market values.
+Property, Plant and Equipment
+2002
+2001
+Land
+$
+106.3
+$
+94.7
+Buildings
+2,219.8
+1,815.1
+Equipment
+6,024.9
+5,721.3
+Construction in progress
+294.2
+402.3
+Software
+194.6
+165.5
+8,839.8
+8,198.9
+Accumulated depreciation
+(4,140.3
+)
+(3,494.8
+)
+$
+4,699.5
+$
+4,704.1
+36
+As
+of August 29, 2002, construction in progress included costs of $199.0 million related to facilities in Lehi, Utah, which are not ready for their intended use and are not
+being depreciated. Timing for completion of the Lehi facility is dependent upon market conditions, including, but not limited to, worldwide market supply of, and demand for, semiconductor products and
+the Company's operations, cash flows and alternative capacity expansion opportunities. As of August 29, 2002, the Company has approximately $200 million of assets in Lehi which are being
+depreciated but are not currently in use.
+Depreciation
+expense was $1,127.5 million, $1,049.6 million and $902.0 million for 2002, 2001 and 2000, respectively.
+Accounts Payable and Accrued Expenses
+2002
+2001
+Accounts payable
+$
+331.7
+$
+307.8
+Salaries, wages and benefits
+106.2
+98.3
+Taxes other than income
+38.6
+34.7
+Interest
+6.7
+8.2
+Income taxes
+5.6
+11.1
+Other
+65.3
+52.8
+$
+554.1
+$
+512.9
+Debt
+2002
+2001
+Notes payable in periodic installments through July 2015, weighted average interest rate of 2.3% and 2.7%
+$
+241.7
+$
+305.6
+Subordinated notes payable, face amount of $210.0 million and stated interest rate of 6.5%, due October 2005, with an effective yield to maturity of 10.7%, net of unamortized discount of $22.2 million and $28.1
+million
+187.8
+181.9
+Capitalized lease obligations payable in monthly installments through December 2005, weighted average interest rate of 2.4% and 3.0%
+24.4
+43.7
+453.9
+531.2
+Less current portion
+(93.1
+)
+(86.2
+)
+$
+360.8
+$
+445.0
+As
+of August 29, 2002, notes payable and capital lease obligations of $212.4 million and $20.7 million, respectively, denominated in Japanese Yen, were at weighted
+average interest rates of 1.6% and 1.8%, respectively.
+Certain
+notes payable are collateralized by property, plant and equipment with a total cost of $102.3 million and accumulated depreciation of $91.9 million as of
+August 29, 2002. Equipment under capital leases and accumulated amortization thereon were $14.5 million and $5.7 million, respectively, as of August 29, 2002, and
+$30.3 million and $17.3 million, respectively, as of August 30, 2001.
+The
+Company has pledged $50.0 million, which is included in other noncurrent assets in the accompanying consolidated balance sheet, as cash collateral for a fully drawn revolving
+line of credit for TECH Semiconductor Singapore Pte. Ltd. (See "Joint Venture" note.)
+37
+Payments
+on notes and capital lease obligations are:
+Fiscal year
+Notes
+Capital
+Leases
+2003
+$
+80.5
+$
+13.0
+2004
+57.0
+10.4
+2005
+22.6
+1.6
+2006
+232.6
+—
+2007
+22.6
+—
+2008 and thereafter
+36.5
+—
+Discount and interest
+(22.3
+)
+(0.6
+)
+$
+429.5
+$
+24.4
+Goodwill and Intangible Assets
+During 2002, the Company expended $52.7 million to acquire product and process technology or patent technology developed by the Company and
+$9.4 million for other intangible assets with weighted average useful lives of 9 and 5 years, respectively. No significant residual value is estimated for these intangibles. During 2002,
+the Company recorded goodwill of $12.3 million and, as of August 29, 2002, goodwill was $15.5 million.
+The
+pro forma effect of adopting SFAS No. 142, "Goodwill and Other Intangible Assets," on the Company's historical financial results did not vary significantly from the actual
+results.
+Amortization
+expense for intangible assets was $47.1 million, $49.2 million and, and $50.3 million in 2002, 2001, and 2000, respectively. Annual amortization expense
+for intangible assets held as of August 29, 2002 is estimated to be $49.3 million for 2003, $45.2 million in 2004, $42.5 million in 2005, $40.8 million in 2006, and
+$39.4 million in 2007. Intangible assets consisted of the following:
+August 29, 2002
+August 30, 2001
+Gross
+Carrying
+Amount
+Accumulated
+Amortization
+Gross
+Carrying
+Amount
+Accumulated
+Amortization
+Product and process technology
+$
+320.5
+$
+(91.5
+)
+$
+271.8
+$
+(62.2
+)
+Joint venture supply arrangement
+98.0
+(20.6
+)
+115.5
+(22.3
+)
+Other
+15.0
+(4.4
+)
+5.6
+(0.8
+)
+$
+433.5
+$
+(116.5
+)
+$
+392.9
+$
+(85.3
+)
+Commitments and Contingencies
+As of August 29, 2002, the Company had commitments of $579.6 million for the acquisition of property, plant and equipment. The Company leases
+certain facilities and equipment under operating leases. Total rental expense on all operating leases was $16.2 million, $25.0 million and $23.1 million for 2002, 2001 and 2000,
+respectively. Minimum future rental commitments under operating leases aggregate $58.6 million as of August 29, 2002, and are payable (in millions): 2003, $12.1; 2004, $6.9; 2005, $5.3;
+2006, $3.7; 2007, $3.3; and 2008 and thereafter, $27.8.
+From
+time to time, others have asserted, and may in the future assert, that the Company's products or processes infringe their product or process technology rights. In this regard, the
+Company is currently engaged in litigation with Rambus, Inc. ("Rambus") relating to certain patents of Rambus and certain of the Company's claims and defenses. Lawsuits between Rambus and the
+Company are pending in the United States, Germany, France, the United Kingdom and Italy. The Company is unable to predict the outcome of these suits. A court determination that the Company's
+manufacturing
+38
+processes or products infringe the product or process rights of others could result in significant liability and/or require the Company to make material changes to its products and/or manufacturing
+processes. Any of the foregoing results could have a material adverse effect on the Company's business, results of operations or financial condition. The Company has accrued a liability and charged
+operations for the estimated costs of settlement or adjudication of asserted and unasserted claims for alleged infringement prior to the balance sheet date.
+On
+June 17, 2002, the Company received a grand jury subpoena from the U.S. District Court for the Northern District of California seeking information regarding an investigation by
+the Antitrust Division of the Department of Justice (the "DOJ") into possible antitrust violations in the "Dynamic Random Access Memory" or "DRAM" industry. The Company is cooperating fully with the
+DOJ in its investigation. Subsequent to the commencement of the DOJ investigation, 21 purported class action lawsuits were filed against the Company and other DRAM suppliers in various federal and
+state courts alleging violations of the Federal Sherman Antitrust Act or California's Cartwright Antitrust Act and Unfair Competition Law relating to the sale and pricing of DRAM products. The
+complaints seek treble damages for the alleged damages sustained by purported class members, in addition to restitution, costs and attorneys' fees, as well as an injunction against the allegedly
+unlawful conduct. The Company is unable to predict the outcome of these suits. A court determination that the Company has violated federal or state antitrust laws could result in significant liability
+and could have a material adverse effect on the Company's results of operations or financial condition.
+The
+Company is currently a party to various other legal actions arising out of the normal course of business, none of which is expected to have a material effect on the Company's
+financial position or results of operations.
+Redeemable Common Stock
+In connection with the issuance of the 1.5 million shares of common stock for the Toshiba DRAM Acquisition, the Company granted Toshiba an option to
+require the Company to repurchase on October 21, 2003, all of these shares for $67.5 million in cash. The option expires if the closing price of the Company's common stock is at or above
+$45.05 per share for 20 consecutive days. The carrying value of the redeemable common stock is accreted to its redemption amount of $67.5 million by a charge directly to retained earnings and
+is included in the computations of earning per share. Accretion of redeemable common stock was $2.1 million in 2002. (See "Acquisitions—Toshiba Corporation DRAM Assets" note.)
+Shareholders' Equity
+Common Stock Warrants
+During the fourth quarter of 2001, the Company received $480.2 million from the issuance of warrants to purchase 29.1 million shares of the
+Company's common stock. The warrants entitle the holders to exercise their warrants and purchase shares of Common Stock for $56.00 per share (the "Exercise Price") at any time through May 15,
+2008 (the "Expiration Date"). Warrants exercised prior to the Expiration Date will be settled on a "net share" basis, wherein investors receive common stock equal to the difference between $56.00 and
+the average closing sale price for the common shares over the 30 trading days immediately preceding the Exercise Date. At expiration, the Company may elect to settle the warrants on a net share basis
+or for cash, provided certain conditions are satisfied. As of August 29, 2002, there have been no exercises of warrants and all warrants issued remain outstanding.
+39
+Accumulated Other Comprehensive Income (Loss)
+Accumulated other comprehensive income (loss), net of tax, consists of:
+2002
+2001
+Foreign currency translation adjustment
+$
+(0.1
+)
+$
+(0.1
+)
+Unrealized gain (loss) on investments
+1.1
+(3.2
+)
+Accumulated other comprehensive income (loss)
+$
+1.0
+$
+(3.3
+)
+Employee Stock Plans
+Stock Option Plans
+As of August 29, 2002, the Company had an aggregate of 112.9 million shares of its common stock reserved for issuance under its various stock option
+plans, of which 80.4 million shares are subject to outstanding options and 32.5 million shares are available for future grants. Options are subject to terms and conditions as determined
+by the Company's Board of Directors. Stock options granted after June 16, 1999, are exercisable in increments of 25% during each year of employment beginning one year from the date of grant.
+Stock options granted prior to June 16, 1999, are exercisable in increments of 20% during each year of employment beginning one year from the date of grant. All stock options issued prior to
+January 19, 1998, expire six years from the date of grant and all subsequent options granted expire ten years from the date of grant.
+Option
+activity under the Company's stock option plans is summarized:
+2002
+2001
+2000
+Number
+of shares
+Weighted
+average
+exercise
+price
+Number
+of shares
+Weighted
+average
+exercise
+price
+Number
+of shares
+Weighted
+average
+exercise
+price
+Outstanding at beginning of year
+61.4
+$
+28.39
+48.9
+$
+24.03
+49.3
+$
+16.00
+Granted
+24.5
+22.20
+20.4
+35.80
+17.2
+38.10
+Exercised
+(3.3
+)
+15.54
+(5.8
+)
+17.11
+(15.6
+)
+14.36
+Cancelled or expired
+(2.2
+)
+30.97
+(2.1
+)
+30.08
+(2.0
+)
+22.29
+Outstanding at end of year
+80.4
+26.96
+61.4
+28.39
+48.9
+24.03
+Exercisable at end of year
+28.6
+26.43
+16.6
+22.61
+9.9
+17.64
+The
+following table summarizes information about options outstanding as of August 29, 2002:
+Outstanding options
+Exercisable options
+Range of exercise prices
+Number of shares
+Weighted average remaining contractual life (in years)
+Weighted average exercise price
+Number of shares
+Weighted average exercise price
+$0.28 - $14.02
+1.8
+4.7
+$
+10.14
+1.3
+$
+10.13
+$14.02 - $22.89
+34.7
+7.5
+18.64
+8.3
+15.43
+$22.89 - $34.06
+30.5
+6.5
+28.42
+13.7
+27.15
+$34.06 - $40.06
+8.5
+7.4
+36.84
+3.7
+36.78
+$40.06 - $96.56
+4.9
+8.1
+65.58
+1.6
+67.04
+80.4
+7.1
+26.96
+28.6
+26.43
+40
+Stock Purchase Plan
+The Company's 1989 Employee Stock Purchase Plan ("ESPP") allows eligible employees to purchase shares of the Company's common stock through payroll deductions.
+The shares can be purchased for 85% of the lower of the beginning or ending closing stock prices of each offering period and can be resold when purchased. Purchases are limited to 20% of an employee's
+eligible compensation. As of August 29, 2002, 15.7 million shares of the Company's common stock had been issued under the ESPP and 2.8 million shares were available for future
+issuance under the plan.
+Non-Employee Directors Stock Incentive Plan
+As of August 29, 2002, 9,117 shares of the Company's common stock had been issued under the 1998 Non-Employee Directors Stock Incentive Plan
+("DSIP Plan") and 490,883 shares were reserved for future issuance under the DSIP Plan. Shares are issued under the DSIP plan as compensation to non-employee directors of the Company.
+Stock-Based Compensation
+The Company recognized $1.4 million, $0.3 million and $3.9 million of stock-based compensation in 2002, 2001 and 2000, respectively. The
+following presents pro forma income and per share data as if a fair value-based accounting method (using the Black-Scholes option valuation model) had been used to account for stock-based
+compensation:
+2002
+2001
+2000
+Pro forma income (loss) from continuing operations
+$
+(1,286.0
+)
+$
+(746.9
+)
+$
+1,388.1
+Pro forma basic earnings (loss) per share from continuing operations
+(2.14
+)
+(1.26
+)
+2.52
+Pro forma diluted earnings (loss) per share from continuing operations
+(2.14
+)
+(1.26
+)
+2.36
+Assumptions
+used in the Black-Scholes option valuation model to estimate the value of the Company's options included in the pro forma amounts are presented below:
+Stock option
+plan shares
+Employee stock
+purchase plan shares
+2002
+2001
+2000
+2002
+2001
+2000
+Average expected life in years
+7.50
+3.50
+0.25
+Expected volatility
+78
+%
+69
+%
+64
+%
+78
+%
+69
+%
+64
+%
+Risk-free interest rate (zero coupon U.S. Treasury note)
+4.7
+%
+4.9
+%
+6.3
+%
+1.9
+%
+4.8
+%
+5.5
+%
+Weighted average fair value at grant:
+Exercise price equal to market price
+$
+16.92
+$
+18.77
+$
+19.50
+—
+Exercise price less than market price
+—
+22.51
+—
+$
+6.51
+$
+9.12
+$
+20.19
+Exercise price greater than market price
+15.61
+14.54
+—
+Weighted average exercise price:
+Exercise price equal to market price
+$
+22.25
+$
+35.67
+$
+38.10
+—
+Exercise price less than market price
+—
+41.42
+—
+$
+16.97
+$
+31.51
+$
+30.73
+Exercise price greater than market price
+20.78
+43.11
+—
+The
+Black-Scholes option valuation model was developed for use in estimating the fair value of traded options which have no vesting restrictions and are fully transferable. In addition,
+the Black-Scholes model requires the input of subjective assumptions, including the expected stock price volatility and option life. Because the Company's stock options granted to employees have
+characteristics significantly different from those of traded options and because changes in the subjective input
+41
+assumptions can materially affect the fair value estimate, in management's opinion existing models do not provide a reliable measure of the fair value of the Company's stock options granted to
+employees. For purposes of this valuation model, no dividends have been assumed.
+Employee Savings Plan
+The Company has a 401(k) retirement plan ("RAM Plan") under which employees may contribute up to 45% of their eligible pay to various savings alternatives, none
+of which include direct investment in the Company's common stock. The Company's contribution provides for an annual match of the first $1,500 of eligible employee contributions, in addition to
+contributions based on the Company's financial performance. Contribution expense for the Company's RAM Plan was $12.8 million, $16.9 million and $20.7 million in 2002, 2001 and
+2000, respectively.
+Other Operating (Income) Expense
+Other operating expense for 2002 includes losses of $27.3 million, net of gains, on write-downs and disposals of semiconductor equipment. Other operating
+expense for 2001 includes losses of $44.2 million from the write-off of certain costs related to the Company's Lehi facility and losses of $19.6 million, net of gains, on
+write-downs and disposals of semiconductor equipment. Other operating income for 2000 includes a gain of $42.0 million on the sale of the Company's facility located in Richardson, Texas, and
+losses of $22.7 million, net of gains, on write-downs and disposals of other semiconductor equipment.
+Other Non-Operating Income (Expense)
+Other non-operating expense for 2001 includes a charge of $92.4 million to write down the carrying value of the Company's equity interest in
+Interland to market value. Selling, general and administrative expense for 2001 includes a charge of $94.1 million for the market value of the Interland stock contributed to the Foundation. As
+of August 30, 2001, the Company no longer held an investment in Interland.
+Other
+non-operating expense for 2001 includes charges totaling $11.6 million for market value adjustments to long-term fixed-price derivative financial
+instruments to purchase electricity and natural gas.
+In
+2000, the Company recognized a gain in other non-operating income of $14.2 million on its contribution of 2.3 million shares of MEI common stock to the
+Foundation. Selling, general and administrative expense for 2000 includes a contribution charge of $24.9 million for the market value of the Interland stock contributed to the Foundation.
+42
+Income Taxes
+Income tax (provision) benefit consists of:
+2002
+2001
+2000
+Current:
+U.S. federal
+$
+121.8
+$
+414.9
+$
+(718.6
+)
+State
+(2.3
+)
+(1.7
+)
+(45.6
+)
+Foreign
+(10.1
+)
+(16.3
+)
+(20.7
+)
+109.4
+396.9
+(784.9
+)
+Deferred:
+U.S. federal
+79.2
+74.8
+51.9
+State
+(63.3
+)
+64.8
+(45.2
+)
+Foreign
+(33.8
+)
+(22.7
+)
+(18.5
+)
+(17.9
+)
+116.9
+(11.8
+)
+Total income tax (provision) benefit
+$
+91.5
+$
+513.8
+$
+(796.7
+)
+Income tax (provision) benefit allocated to:
+Continuing operations
+$
+91.5
+$
+446.0
+$
+(829.8
+)
+Discontinued operations
+—
+67.8
+33.1
+$
+91.5
+$
+513.8
+$
+(796.7
+)
+The
+tax benefit associated with the exercise of nonstatutory stock options and disqualifying dispositions by employees of shares issued in the Company's stock plans were credited to
+additional capital and reduced taxes payable by $48.3 million and $205.1 million for 2001 and 2000, respectively.
+A
+reconciliation between income tax computed using the U.S. federal statutory rate and the income tax (provision) benefit:
+2002
+2001
+2000
+U.S. federal income tax at statutory rate
+$
+349.5
+$
+375.2
+$
+(811.0
+)
+State taxes, net of federal benefit
+38.7
+47.8
+(56.4
+)
+Foreign income at other than U.S. rate
+3.2
+17.2
+35.4
+Basis difference in domestic subsidiaries
+—
+30.5
+0.8
+Change in valuation allowance
+(330.1
+)
+(16.6
+)
+(15.4
+)
+Other
+30.2
+59.7
+49.9
+Income tax (provision) benefit
+$
+91.5
+$
+513.8
+$
+(796.7
+)
+State
+taxes reflect investment tax credits of $23.6 million, $25.5 million and $24.0 million for 2002, 2001 and 2000, respectively.
+43
+Deferred
+income taxes reflect the net tax effects of temporary differences between the basis of assets and liabilities for financial reporting and income tax purposes. Components of the
+Company's deferred tax assets and liabilities:
+2002
+2001
+Deferred tax assets:
+Net operating loss and credit carryforwards
+$
+663.8
+$
+188.2
+Inventories
+75.1
+96.1
+Accrued compensation
+20.4
+19.8
+Accrued product and process technology
+13.1
+6.6
+Other
+81.7
+90.4
+Gross deferred tax assets
+854.1
+401.1
+Less valuation allowance
+(431.5
+)
+(87.4
+)
+Deferred tax assets
+422.6
+313.7
+Deferred tax liabilities:
+Excess tax over book depreciation
+(222.5
+)
+(102.3
+)
+Accrued product and process technology
+(18.2
+)
+(11.0
+)
+Other
+(42.9
+)
+(60.0
+)
+Deferred tax liabilities
+(283.6
+)
+(173.3
+)
+Net deferred tax assets (liabilities)
+$
+139.0
+$
+140.4
+At
+August 29, 2002, the Company had aggregate U.S. tax loss carryforwards of $1,253.0 million and U.S. tax credit carryforwards of $78.8 million, which expire in
+various years through 2022. The Company also has unused state tax net operating loss carryforwards of $1,138.4 million for tax purposes which expire
+through 2022 and unused state tax credits of $115.2 million for tax and financial reporting purposes which expire through 2016.
+The
+changes in valuation allowance of $344.1 million and $57.4 million in 2002 and 2001, respectively, are primarily due to uncertainties of realizing certain U.S. net
+operating losses and certain tax credit carryforwards. The change in the valuation allowance in 2002 includes $14.0 million for stock plan deductions in 2002, which will be credited to
+additional capital if realized.
+Provision
+has been made for deferred taxes on undistributed earnings of non-U.S. subsidiaries to the extent that dividend payments from such companies are expected to result
+in additional tax liability. The remaining undistributed earnings of $386.9 million have been indefinitely reinvested; therefore, no provision has been made for taxes due upon remittance of
+these earnings. Determination of the amount of unrecognized deferred tax liability on these unremitted earnings is not practicable.
+Discontinued PC Operations
+On May 31, 2001, MEI completed the disposition of its PC business to Gores Technology Group ("GTG"). In connection with the disposal, GTG received assets,
+including $76.5 million in cash, and
+44
+assumed specified liabilities of the PC Operations. Summary operating results for the discontinued PC Operations:
+2001
+2000
+Net sales
+$
+579.8
+$
+973.9
+Loss from operations of PC business
+$
+(64.1
+)
+$
+(105.8
+)
+Minority interest
+18.0
+29.2
+Income tax benefit
+10.0
+33.1
+Loss from operations of PC business, net
+(36.1
+)
+(43.5
+)
+Loss from disposal of PC Operations
+(126.4
+)
+—
+Operating losses during phase-out period
+(70.2
+)
+—
+Minority interest
+71.1
+—
+Income tax benefit
+57.8
+—
+Loss from disposal of PC Operations, net
+(67.7
+)
+—
+Loss from discontinued PC Operations, net
+$
+(103.8
+)
+$
+(43.5
+)
+Earnings (Loss) Per Share
+2002
+2001
+2000
+Income (loss) from continuing operations available to common shareholders
+$
+(907.0
+)
+$
+(521.2
+)
+$
+1,547.7
+Redeemable common stock accretion
+(2.1
+)
+—
+Adjustment for effects of assumed conversions
+—
+43.3
+Income (loss) from continuing operations available to common shareholders, adjusted
+(909.1
+)
+(521.2
+)
+1,591.0
+Loss from discontinued PC Operations, net of taxes and minority interest
+—
+(103.8
+)
+(43.5
+)
+Net income (loss), adjusted
+$
+(909.1
+)
+$
+(625.0
+)
+$
+1,547.5
+Weighted-average common shares outstanding
+601.5
+592.4
+550.9
+Adjustment for effects of assumed exercises and conversions
+—
+54.5
+Weighted-average common shares and share equivalents outstanding
+601.5
+592.4
+605.4
+Basic earnings (loss) per share:
+Continuing operations
+$
+(1.51
+)
+$
+(0.88
+)
+$
+2.81
+Discontinued operations
+—
+(0.18
+)
+(0.08
+)
+Net income (loss)
+(1.51
+)
+(1.05
+)
+2.73
+Diluted earnings (loss) per share:
+Continuing operations
+$
+(1.51
+)
+$
+(0.88
+)
+$
+2.63
+Discontinued operations
+—
+(0.18
+)
+(0.07
+)
+Net income (loss)
+(1.51
+)
+(1.05
+)
+2.56
+The
+average shares listed below were not included in the computation of diluted earnings per share because the effect would have been antidilutive for the periods presented:
+2002
+2001
+2000
+Employee stock plans
+79.3
+61.9
+0.4
+8.4% convertible subordinated notes payable due 2005
+—
+2.6
+—
+Common stock warrants
+29.1
+3.4
+—
+45
+Acquisitions
+Toshiba Corporation DRAM Assets
+On April 22, 2002, the Company acquired substantially all of the assets of Toshiba Corporation's ("Toshiba") DRAM business as conducted by Dominion
+Semiconductor L.L.C., a wholly-owned subsidiary of Toshiba located in Virginia (the "Toshiba DRAM Acquisition"). The total purchase price of $327.9 million included cash and 1.5 million
+shares of the Company's common stock, which was valued at $58.1 million on the date of acquisition. The purchase price was allocated to the assets acquired and liabilities assumed based on
+their estimated fair values. In connection with the purchase, the Company recorded total assets of $363.3 million, including property, plant and equipment of $292.8 million and
+intangible assets of $7.8 million, and total liabilities of $35.4 million. (See "Redeemable Common Stock" note.)
+KMT Semiconductor Limited
+Through April 30, 2001, the Company participated in KMT Semiconductor Limited ("KMT"), a joint venture between the Company and Kobe Steel, Ltd.
+("KSL") and purchased all of KMT's production at prices generally based on a discount from the Company's average selling prices. The Company was also party to various agreements with
+KMT whereby the Company provided assembly and test services, and
+technology, engineering, and training support to KMT. The net cost of products purchased from KMT amounted to $293.3 million and $556.8 million for 2001 and 2000, respectively.
+On
+April 30, 2001, the Company acquired KSL's 75% interest in KMT in a transaction (the "KMT Acquisition") that resulted in KMT becoming a wholly-owned subsidiary
+of the Company. The KMT Acquisition was accounted for as a business combination using the purchase method of accounting. The purchase price of $31.3 million, which includes $25.0 million
+cash paid to KSL for land and KSL's equity interest in KMT, is net of $37.7 million cash acquired and was allocated to the assets acquired and liabilities assumed based on their
+estimated fair values. In connection with the KMT Acquisition, the Company recorded total assets of $408.1 million, net of cash acquired, including deferred income tax assets of
+$204.6 million and property, plant and equipment of $103.6 million, and total liabilities of $376.8 million, including debt and capital lease obligations totaling
+$296.4 million. The results of operations of KMT have been included in the accompanying financial statements from the date of acquisition. On April 1, 2002, KMT's name was changed to
+Micron Japan, Ltd.
+The
+following unaudited pro forma information presents the consolidated results of operations of the Company as if the KMT Acquisition had taken place at the beginning of 2001 and 2000.
+The pro forma information does not necessarily reflect the actual results that would have occurred nor is it necessarily indicative of future results of operations.
+2001
+2000
+(unaudited)
+Net sales from continuing operations
+$
+3,935.9
+$
+6,362.4
+Income (loss) from continuing operations, net of taxes and minority interest
+(440.0
+)
+1,779.4
+Income (loss) per share from continuing operations—diluted
+(0.74
+)
+3.01
+Joint Venture
+TECH Semiconductor Singapore Pte. Ltd. ("TECH") is a memory manufacturing joint venture in Singapore among Micron Technology, Inc., the Singapore
+Economic Development Board, Canon Inc. and Hewlett-Packard Company. TECH's semiconductor manufacturing facilities use the Company's product and process technology. Subject to specific terms and
+conditions, the Company has agreed to purchase all of the products manufactured by TECH. The Company generally purchases semiconductor
+46
+memory products from TECH at prices determined quarterly, based on a discount from average selling prices realized by the Company for the immediately preceding quarter. The Company performs assembly
+and test services on product manufactured by TECH. The Company also provides certain technology, engineering and training to support TECH. All of these transactions with TECH are recognized as part of
+the net cost of products purchased from TECH. The net cost of products purchased from TECH amounted to $182.3 million, $726.0 million and $579.8 million for 2002, 2001 and 2000,
+respectively. In 2000, as part of an equity capital infusion by the majority of TECH's shareholders, the Company funded TECH with $98.0 million as support for continuing the TECH supply
+arrangement. The Company amortizes the value of the TECH supply arrangement on a straight-line basis over the remaining contractual life of the TECH shareholders' agreement. Amortization
+expense resulting from the TECH supply arrangement, included in the cost of product purchased from TECH, was $10.1 million, $10.6 million and $2.8 million for 2002, 2001 and 2000,
+respectively. Receivables from TECH were $10.5 million and payables to TECH were $52.8 million as of August 29, 2002. Receivables from TECH were $25.3 million and payables
+to TECH were $40.6 million as of August 30, 2001. During 2002, 2001 and 2000, the Company sold semiconductor equipment to TECH for $1.0 million, $0.1 million and
+$4.9 million, respectively.
+Operating Segment Information
+The Company's reportable segments have been determined based on the nature of its operations and products offered to customers. Through 2001, the Company's two
+reportable segments were Semiconductor Operations and Web-hosting Operations. As a result of the Interland Merger on August 6, 2001, the Company's only reportable segment is
+Semiconductor Operations. The Semiconductor Operations segment's primary product is DRAM. The Web-hosting Operations segment provided web-hosting and other internet products
+and services.
+Segment
+operating results are measured based on operating income or loss. Segment assets consisted of assets that were identified to reportable segments and reviewed by the chief
+operating decision makers. Included in segment assets were cash, investment securities, accounts receivable,
+47
+inventories and property, plant and equipment. De minimus amounts of intersegment eliminations of sales and operating income have been included with Other.
+2001
+2000
+Net sales
+Semiconductor Operations:
+External
+$
+3,861.0
+$
+6,278.4
+Sales to discontinued PC Operations
+21.6
+51.3
+3,882.6
+6,329.7
+Web-hosting Operations:
+External
+53.0
+32.7
+Intersegment
+—
+0.2
+53.0
+32.9
+Other
+0.3
+(0.2
+)
+Consolidated net sales
+$
+3,935.9
+$
+6,362.4
+Operating income (loss)
+Semiconductor Operations
+$
+(920.8
+)
+$
+2,445.6
+Web-hosting Operations
+(56.1
+)
+(47.0
+)
+Other
+0.4
+(5.9
+)
+Consolidated operating income (loss)
+$
+(976.5
+)
+$
+2,392.7
+Capital expenditures
+Semiconductor Operations
+$
+1,469.5
+$
+1,103.4
+Web-hosting Operations
+19.1
+24.1
+Other
+—
+(0.1
+)
+Consolidated capital expenditures
+$
+1,488.6
+$
+1,127.4
+Depreciation and amortization
+Semiconductor Operations
+$
+1,097.7
+$
+955.8
+Web-hosting Operations
+22.5
+16.8
+Other
+(5.8
+)
+1.8
+Consolidated depreciation and amortization
+$
+1,114.4
+$
+974.4
+Major Customers
+Sales by the Semiconductor Operations to one customer were 16.5%, 10.8% and 13.8% of consolidated net sales in 2002, 2001 and 2000, respectively. Sales to another
+customer were 12.0%, 13.1% and 18.6% of consolidated net sales in 2002, 2001 and 2000, respectively.
+48
+Geographic Information
+Geographic net sales based on customer location were:
+2002
+2001
+2000
+United States
+$
+1,221.7
+$
+2,116.8
+$
+3,570.8
+Asia Pacific
+544.4
+637.9
+1,144.8
+Europe
+460.9
+780.9
+1,164.5
+Japan
+264.1
+188.8
+203.0
+Canada
+19.4
+57.1
+77.3
+Other
+78.5
+154.4
+202.0
+$
+2,589.0
+$
+3,935.9
+$
+6,362.4
+Geographic
+area property, plant and equipment, net, was:
+2002
+2001
+United States
+$
+3,604.0
+$
+3,502.1
+Singapore
+454.0
+610.1
+Italy
+435.2
+442.3
+Japan
+191.5
+133.6
+Other
+14.8
+16.0
+$
+4,699.5
+$
+4,704.1
+Quarterly Financial Information (Unaudited)
+(Amounts in millions except per share amounts)
+2002
+First
+Quarter
+Second
+Quarter
+Third
+Quarter
+Fourth
+Quarter
+Net sales
+$
+423.9
+$
+645.9
+$
+771.2
+$
+748.0
+Gross margin
+(212.6
+)
+143.0
+168.2
+(209.2
+)
+Operating loss
+(452.0
+)
+(59.0
+)
+(46.7
+)
+(467.6
+)
+Net loss
+(265.9
+)
+(30.4
+)
+(24.2
+)
+(586.5
+)
+Diluted loss per share
+$
+(0.44
+)
+$
+(0.05
+)
+$
+(0.04
+)
+$
+(0.97
+)
+2001
+First
+Quarter
+Second
+Quarter
+Third
+Quarter
+Fourth
+Quarter
+Net sales
+$
+1,571.6
+$
+1,065.7
+$
+818.3
+$
+480.3
+Gross margin
+762.5
+200.3
+(275.8
+)
+(576.3
+)
+Operating income (loss)
+520.3
+(41.0
+)
+(527.2
+)
+(928.6
+)
+Income (loss) from continuing operations, net of taxes and minority interest
+359.5
+(4.1
+)
+(301.1
+)
+(575.5
+)
+Loss from discontinued PC Operations, net of taxes and minority interest
+(7.3
+)
+(84.2
+)
+(12.3
+)
+—
+Net income (loss)
+352.2
+(88.3
+)
+(313.4
+)
+(575.5
+)
+Diluted earnings (loss) per share:
+Continuing operations
+$
+0.59
+$
+(0.01
+)
+$
+(0.50
+)
+$
+(0.96
+)
+Discontinued operations
+(0.01
+)
+(0.14
+)
+(0.02
+)
+—
+Net income (loss)
+0.58
+(0.15
+)
+(0.53
+)
+(0.96
+)
+49
+The
+Company wrote down the value of work in process and finished goods inventories to the lower of cost or market value in the fourth quarter of 2002 and 2001 by an aggregate amount of
+$173.6 million and $465.8 million, respectively. In the fourth quarter of 2002, the Company recorded a charge of $347.8 million to the provision for income taxes to establish a
+valuation allowance against its U.S. deferred tax assets.
+Selling,
+general and administrative expense for the fourth quarter of 2001 includes a charge of $94.1 million for the market value of the Interland stock contributed to the
+Foundation. Other non-operating expense for the fourth quarter of 2001 includes charges of $4.4 million in connection with the Interland Merger and $92.4 million to write
+down the Company's carrying value of its investment in Interland to its market value.
+50
+Report of Independent Accountants
+To
+the Board of Directors and
+Shareholders of Micron Technology, Inc.
+In
+our opinion, the consolidated financial statements listed in the accompanying index present fairly, in all material respects, the financial position of Micron Technology, Inc.
+and its subsidiaries at August 29, 2002 and August 30, 2001, and the results of their operations and their cash flows for each of the three years in the period ended August 29,
+2002 in conformity with accounting principles generally accepted in the United States of America. In addition, in our opinion, the financial statement schedule listed in the accompanying index
+presents fairly, in all material respects, the information set forth therein when read in conjunction with the related consolidated financial statements. These financial statements and the financial
+statement schedule are the responsibility of the Company's management; our responsibility is to express an opinion on these financial statements and the financial statement schedule based on our
+audits. We conducted our audits of these statements in accordance with auditing standards generally accepted in the United States of America, which require that we plan and perform the audit to obtain
+reasonable assurance about whether the financial statements are free of material misstatement. An audit includes examining, on a test basis, evidence supporting the amounts and disclosures in the
+financial statements, assessing the accounting principles used and significant estimates made by management, and evaluating the overall financial statement presentation. We believe that our audits
+provide a reasonable basis for our opinion.
+PricewaterhouseCoopers
+LLP
+San
+Jose, CA
+September 24, 2002
+51
+Item 9.
+Changes in and Disagreements with Accountants on Accounting and Financial Disclosure
+None.
+PART III
+Item 10.
+Directors and Executive Officers of the Registrant
+Item 11.
+Executive Compensation
+Item 12.
+Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters
+Item 13.
+Certain Relationships and Related Transactions
+Certain information concerning the registrant's executive officers is included under the caption, "Officers and Directors of the Registrant," following
+Part I, Item 1 of this report. Other information required by Items 10, 11, 12 and 13 will be contained in the registrant's Proxy Statement which will be filed with the Securities
+and Exchange Commission within 120 days after August 29, 2002, and is incorporated herein by reference.
+Item 14.
+Controls and Procedures
+Not applicable.
+52
+PART IV
+Item 15.
+Exhibits, Financial Statement Schedules and Reports on Form 8-K
+(a)
+The
+following documents are filed as part of this report:
+Consolidated
+financial statements and the financial statement schedule—(see "Item 8. Financial Statements and Supplementary Data Financial Statements and Supplementary
+Data—Notes to Consolidated Financial Statements—Contingencies.")
+Exhibit
+Description
+2.1
+Acquisition Agreement between the Registrant and Texas Instruments Incorporated dated June 18, 1998(1)
+2.2
+Second Amendment to Acquisition Agreement dated as of September 30, 1998, between the Registrant and Texas Instruments Incorporated(2)
+3.1
+Restated Certificate of Incorporation of the Registrant(9)
+3.7
+Bylaws of the Registrant, as amended
+4.9
+Form of Global Warrant representing Warrants to purchase Common Stock expiring May 15, 2008 (the "Warrants")(5)
+10.82
+Form of Indemnification Agreement between the Registrant and its officers and directors(6)
+10.91
+Board Resolution regarding stock and bonus plan vesting schedules in the event of change in control of the Registrant(7)
+10.100
+Amended and Restated 1985 Incentive Stock Option Plan(8)
+10.110
+1994 Stock Option Plan(17)
+10.111
+Executive Bonus Plan(3)
+10.116
+Registration Rights Agreement dated as of June 28, 1996, between the Registrant and Canadian Imperial Bank of Commerce(11)
+10.117
+Registration Rights Agreement dated as of July 29, 1996, between the Registrant and Canadian Imperial Bank of Commerce(11)
+10.119(a)
+Reformed Irrevocable Proxy dated July 23, 1998, by J.R. Simplot Company in favor of the Registrant(14)
+10.119(b)
+Irrevocable Proxy dated July 24, 1998, by the Registrant in favor of the Canadian Imperial Bank of Commerce(14)
+10.125
+Second Supplemental Trust Indenture dated as of September 30, 1998, between the Registrant and the Trustee, relating to the issuance of 6.5% Convertible Subordinated Notes due October 2, 2005, including the form of Note(2)
+10.126
+Subordinated Promissory Note dated September 30, 1998, issued by the Registrant in the name of Texas Instruments Incorporated in the amount of $210,000,000(2)
+10.127
+Registration Rights Agreement dated as of July 20, 1998, between the Registrant, Canadian Imperial Bank of Commerce and J.R. Simplot Company(4)
+10.128
+Nonstatutory Stock Option Plan(16)
+10.129
+1997 Nonstatutory Stock Option Plan(12)
+53
+10.130
+Micron Quantum Devices, Inc. 1996 Stock Option Plan(12)
+10.131
+Sample Stock Option Assumption Letter for Micron Quantum Devices, Inc. 1996 Stock Option Plan(12)
+10.132
+1998 Nonstatutory Stock Option Plan(16)
+10.133
+Rendition, Inc. 1994 Equity Incentive Plan(13)
+10.134
+Sample Stock Option Assumption Letter for Rendition, Inc. 1994 Equity Incentive Plan(13)
+10.139
+1989 Employee Stock Purchase Plan(18)
+10.140
+1998 Non-Employee Director Stock Incentive Plan(16)
+10.142
+Purchase Agreement dated October 1, 1998, between the Company and TECH Semiconductor Singapore Pte. Ltd.(15)
+10.143
+Micron Quantum Devices Stock Bonus Plan(17)
+10.144
+Purchase Agreement dated as of July 12, 2001, between the Registrant and Lehman Brothers, Inc. relating to the Warrants(5)
+10.145
+Registration Rights Agreement dated as of July 18, 2001, between the Registrant and Lehman Brothers, Inc., relating to the Warrants(5)
+10.146
+Warrant Agreement dated as of July 18, 2001, between the Registrant and Wells Fargo Bank Minnesota, N.A., relating to the Warrants(5)
+10.151
+2001 Stock Option Plan(10)
+21.1
+Subsidiaries of the Registrant
+23.1
+Consent of Independent Accountants
+99.1
+Certifications Pursuant to 18 U.S.C. Section 1350, as Adopted Pursuant to Section 906 of the Sarbanes-Oxley Act of 2002
+(1)
+Incorporated
+by Reference to Quarterly Report on Form 10-Q for the fiscal quarter ended May 28, 1998
+(2)
+Incorporated
+by Reference to Current Report on Form 8-K filed on October 14, 1998, as amended on October 16, 1998
+(3)
+Incorporated
+by Reference to Annual Report on Form 10-K as amended for the fiscal year ended August 31, 1995
+(4)
+Incorporated
+by Reference to Registration Statement on Form S-3 as amended (Reg. No. 333-57973)
+(5)
+Incorporated
+by Reference to Form 10-K for the fiscal year ended August 30, 2001
+(6)
+Incorporated
+by Reference to Proxy Statement for the 1986 Annual Meeting of Shareholders
+(7)
+Incorporated
+by Reference to Annual Report on Form 10-K for the fiscal year ended August 31, 1989
+(8)
+Incorporated
+by Reference to Registration Statement on Forms S-8 (Reg. No. 33-52653)
+(9)
+Incorporated
+by Reference to Quarterly Report on Form 10-Q for the fiscal quarter ended May 31, 2001
+54
+(10)
+Incorporated
+by Reference to Registration Statement on Form S-8 (Reg. No. 99271)
+(11)
+Incorporated
+by Reference to Annual Report on Form 10-K for the fiscal year ended August 29, 1996
+(12)
+Incorporated
+by Reference to Registration Statement on Form S-8 (Reg. No. 333-50353)
+(13)
+Incorporated
+by Reference to Registration Statement on Form S-8 (Reg. No. 333-65449)
+(14)
+Incorporated
+by Reference to Annual Report on Form 10-K for the fiscal year ended September 3, 1998
+(15)
+Incorporated
+by Reference to Quarterly Report on Form 10-Q for the fiscal quarter ended December 3, 1998
+(16)
+Incorporated
+by Reference to Quarterly Report on Form 10-Q for the fiscal quarter ended June 3, 1999
+(17)
+Incorporated
+by Reference to Registration Statement on Form S-8 (Reg. No. 333-82549)
+(18)
+Incorporated
+by Reference to Quarterly Report on Form 10-Q for the fiscal quarter ended February 28, 2002
+(b)
+The
+registrant did not file any reports on Form 8-K during the fiscal quarter ended August 29, 2002.
+55
+SIGNATURES
+Pursuant to the requirements of Section 13 or 15(d) of the Securities Exchange Act of 1934, the Registrant has duly caused this
+report to be signed on its behalf by the undersigned, thereunto duly authorized, in the City of Boise, State of Idaho, on the 15th day of October 2002.
+Micron Technology, Inc.
+By:
+/s/
+WILBUR G. STOVER, JR.
+Wilbur G. Stover, Jr.,
+Vice President of Finance, Chief
+Financial Officer
+(Principal Financial and Accounting Officer)
+Pursuant to the requirements of the Securities Exchange Act of 1934, this Annual Report has been signed below by the following persons on behalf of the Registrant
+and in the capacities and on the dates indicated.
+Signature
+Title
+Date
+/s/
+STEVEN R. APPLETON
+(Steven R. Appleton)
+Chairman of the Board, Chief Executive Officer and President
+October 15, 2002
+/s/
+WILBUR G. STOVER, JR.
+(Wilbur G. Stover, Jr.)
+Vice President of Finance, Chief Financial Officer (Principal Financial and Accounting Officer)
+October 15, 2002
+/s/
+JAMES W. BAGLEY
+(James W. Bagley)
+Director
+October 15, 2002
+/s/
+ROBERT A. LOTHROP
+(Robert A. Lothrop)
+Director
+October 15, 2002
+/s/
+THOMAS T. NICHOLSON
+(Thomas T. Nicholson)
+Director
+October 15, 2002
+/s/
+DON J. SIMPLOT
+(Don J. Simplot)
+Director
+October 15, 2002
+/s/
+GORDON C. SMITH
+(Gordon C. Smith)
+Director
+October 15, 2002
+/s/
+WILLIAM P. WEBER
+(William P. Weber)
+Director
+October 15, 2002
+56
+I,
+Steven R. Appleton, certify that:
+1.
+I
+have reviewed this Annual Report on Form 10-K of Micron Technology, Inc.;
+2.
+Based
+on my knowledge, this Annual Report does not contain any untrue statement of a material fact or omit to state a material fact necessary to make the statements made, in light of
+the circumstances under which such statements were made, not misleading with respect to the period covered by this Annual Report;
+3.
+Based
+on my knowledge, the financial statements, and other financial information included in this Annual Report, fairly present in all material respects the financial condition,
+results of operations and cash flows of the registrant as of, and for, the periods presented in this Annual Report.
+Date: October 15, 2002
+/s/
+STEVEN R. APPLETON
+Steven R. Appleton
+Chief Executive Officer
+I,
+Wilbur G. Stover, Jr., certify that:
+1.
+I
+have reviewed this Annual Report on Form 10-K of Micron Technology, Inc.;
+2.
+Based
+on my knowledge, this Annual Report does not contain any untrue statement of a material fact or omit to state a material fact necessary to make the statements made, in light of
+the circumstances under which such statements were made, not misleading with respect to the period covered by this Annual Report;
+3.
+Based
+on my knowledge, the financial statements, and other financial information included in this Annual Report, fairly present in all material respects the financial condition,
+results of operations and cash flows of the registrant as of, and for, the periods presented in this Annual Report.
+Date: October 15, 2002
+/s/
+WILBUR G. STOVER, JR.
+Wilbur G. Stover, Jr.
+Chief Financial Officer
+57
+Schedule II
+MICRON TECHNOLOGY, INC.
+VALUATION AND QUALIFYING ACCOUNTS
+(Amounts in millions)
+Balance at
+Beginning of
+Period
+Acquisition/
+Deconsolidation
+of MEI
+Charged
+(Credited) to
+Costs and
+Expenses
+Deductions/
+Write-Offs
+Balance
+at end of
+Period
+Allowance for Doubtful Accounts
+Year ended August 29, 2002
+$
+3.8
+$
+—
+$
+2.9
+$
+(0.5
+)
+$
+6.2
+Year ended August 30, 2001
+14.4
+(1.3
+)
+(7.3
+)
+(2.0
+)
+3.8
+Year ended August 31, 2000
+6.2
+—
+11.6
+(3.4
+)
+14.4
+Allowance for Obsolete Inventory
+Year ended August 29, 2002
+$
+4.4
+$
+—
+$
+41.6
+$
+(18.9
+)
+$
+27.1
+Year ended August 30, 2001
+9.4
+—
+20.5
+(25.5
+)
+4.4
+Year ended August 31, 2000
+12.6
+—
+0.9
+(4.1
+)
+9.4
+Deferred Tax Asset Valuation Allowance
+Year ended August 29, 2002
+$
+87.4
+$
+—
+$
+330.1
+$
+14.0
+$
+431.5
+Year ended August 30, 2001
+30.0
+39.6
+17.8
+—
+87.4
+Year ended August 31, 2000
+14.6
+—
+15.4
+—
+30.0
+The
+allowance for obsolete inventory excludes any charges for write-downs of work in process and finished goods inventories to their estimated market values. See "Item 7. Management's
+Discussion and Analysis of Financial Condition and Results of Operations" and "Item 8. Financial Statements and Supplementary Data—Notes to Consolidated Financial Statements."
+58
+QuickLinks
+PART I
+Item 1. Business
+Item 2. Properties
+Item 3. Legal Proceedings
+Item 4. Submission of Matters to a Vote of Security Holders
+PART II
+Item 5. Market for Registrant's Common Equity and Related Stockholder Matters
+Item 6. Selected Financial Data
+Item 7. Management's Discussion and Analysis of Financial Condition and Results of Operations
+Item 7A. Quantitative and Qualitative Disclosures about Market Risk
+Item 8. Financial Statements and Supplementary Data
+MICRON TECHNOLOGY, INC. CONSOLIDATED STATEMENTS OF OPERATIONS (Amounts in millions except per share amounts)
+MICRON TECHNOLOGY, INC. CONSOLIDATED BALANCE SHEETS (Amounts in millions except par value amounts)
+MICRON TECHNOLOGY, INC. CONSOLIDATED STATEMENTS OF SHAREHOLDERS' EQUITY (Amounts in millions)
+MICRON TECHNOLOGY, INC. CONSOLIDATED STATEMENTS OF CASH FLOWS (Amounts in millions)
+MICRON TECHNOLOGY, INC. NOTES TO CONSOLIDATED FINANCIAL STATEMENTS (All tabular amounts in millions except per share amounts)
+Report of Independent Accountants
+Item 9. Changes in and Disagreements with Accountants on Accounting and Financial Disclosure
+PART III
+Item 10. Directors and Executive Officers of the Registrant
+Item 11. Executive Compensation
+Item 12. Security Ownership of Certain Beneficial Owners and Management and Related Stockholder Matters
+Item 13. Certain Relationships and Related Transactions
+Item 14. Controls and Procedures
+PART IV
+Item 15. Exhibits, Financial Statement Schedules and Reports on Form 8-K
+SIGNATURES
+Schedule II MICRON TECHNOLOGY, INC. VALUATION AND QUALIFYING ACCOUNTS (Amounts in millions)

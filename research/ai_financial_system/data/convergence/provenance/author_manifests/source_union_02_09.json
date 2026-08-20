@@ -1,0 +1,219 @@
+{
+  "architecture_counts": {
+    "chapter_02_09_projection_rows": 525,
+    "claim_locator_states": 167,
+    "delta_observations": 3,
+    "derivatives": 8,
+    "duplicate_blob_reconciliations": 5,
+    "explicit_exception_observations": 6,
+    "metadata_only_rights_boundaries": 2,
+    "preserved_observations": 53,
+    "private_claim_reviews": 5,
+    "retrieval_failure_observations": 4,
+    "source_version_observations": 60,
+    "unique_source_ids": 52
+  },
+  "canonical_integration_authorized": false,
+  "chapter_prose_authorized": false,
+  "decision": "READY_FOR_FRESH_NONAUTHOR_REVIEW",
+  "files": [
+    {
+      "bytes": 1071,
+      "lines": 25,
+      "path": "author_report.md",
+      "sha256": "f2f3eb921dbd26812ca65af7911288d4e49abe93159a7a823a5eb4d348cbd916"
+    },
+    {
+      "bytes": 28160,
+      "lines": 706,
+      "path": "build_union_v2.py",
+      "sha256": "a09277269e407a61a1f1d2403e97ce33642c23c566407b51c0bf0b82857e2704"
+    },
+    {
+      "bytes": 3637,
+      "lines": 68,
+      "path": "candidate_schema.sql",
+      "sha256": "23a8177941e356eb7011cca9575d470ad559de908525069a67cc94d7466c9736"
+    },
+    {
+      "bytes": 2163,
+      "path": "carried_private_locator_reviews.csv",
+      "rows": 5,
+      "sha256": "28c57de231c11b1e5f896b181f345e168c3742ce30dd568345956e9a7f2971a9"
+    },
+    {
+      "bytes": 169134,
+      "path": "chapter_02_09_support_state_projection.csv",
+      "rows": 525,
+      "sha256": "887b4984d7331746b152a7ef9abdbbe31fd8a6f54b5fcb3e3c0001a846b01133"
+    },
+    {
+      "bytes": 40660,
+      "path": "claim_locator_states.csv",
+      "rows": 167,
+      "sha256": "828f6025564bd95c7c216b9093956eeb3ba90ea852fcd0f4ffd49f04921bb60b"
+    },
+    {
+      "bytes": 2356,
+      "lines": 67,
+      "path": "dedicated_validation_results.json",
+      "sha256": "5af75e02ff4e7dd7c618a8473bc10c7046d2cf3cf851db8b146592cdf6a3af73"
+    },
+    {
+      "bytes": 566,
+      "path": "delta_manifest_reperformance.csv",
+      "rows": 3,
+      "sha256": "486465b45f507e7b6cec9d2ac897ef49c431a10bc365a359450ab134b5ea7486"
+    },
+    {
+      "bytes": 1683,
+      "path": "duplicate_blob_reconciliation.csv",
+      "rows": 5,
+      "sha256": "53ddc2e0308de0bea921ac2a82b0b6532e32bc5cec872a6ca34bd8785cc8fbdd"
+    },
+    {
+      "bytes": 375,
+      "lines": 14,
+      "path": "generic_validation_results.json",
+      "sha256": "8477ad4e0b3403e0bec3439270cc379e3f078589b36178c54b08d2c6fcdc3702"
+    },
+    {
+      "bytes": 57308,
+      "path": "no_write_audit.csv",
+      "rows": 251,
+      "sha256": "c17591ad3ce67afe6436c994ad8bc861e24f8d4060e0775c6a23a7d75bc5a239"
+    },
+    {
+      "bytes": 10205,
+      "path": "preserved_byte_reperformance.csv",
+      "rows": 53,
+      "sha256": "f3268f37efd1ae7af75785a36f7703ab642030d223f3ab309b9687bfe594c28a"
+    },
+    {
+      "bytes": 95039,
+      "path": "projection_reperformance.csv",
+      "rows": 525,
+      "sha256": "cac465abf30d1f56a8a4d21670585eace33cb28b96544c24ddc9f1e598a0f669"
+    },
+    {
+      "bytes": 6040,
+      "lines": 177,
+      "path": "seal_union_v2.py",
+      "sha256": "d4bf6cc48a0504cf81943f990f6b738e8ea7d201f866d9deead75726b4df45d8"
+    },
+    {
+      "bytes": 9995,
+      "path": "sealed_input_inventory.csv",
+      "rows": 57,
+      "sha256": "831e1aaf8620240fa760360185412ec9ce0702dbedd26c5daf9adf0c7684e391"
+    },
+    {
+      "bytes": 4121,
+      "path": "source_derivatives.csv",
+      "rows": 8,
+      "sha256": "9216afd548acc2a034a415934dfb126092c3be2bf916eba21c3d3b9d0daaaae7"
+    },
+    {
+      "bytes": 1754,
+      "path": "source_exceptions.csv",
+      "rows": 6,
+      "sha256": "c2e4cdccee3ff511fa43d1ad724f7e8d4119f27ce5451594b3478bc186aad82c"
+    },
+    {
+      "bytes": 998,
+      "path": "source_version_delta_audit.csv",
+      "rows": 3,
+      "sha256": "fcbc94c0e8b38747d5893ed58c04c343b498d3363af9465d60b2a05eb6ea1079"
+    },
+    {
+      "bytes": 39179,
+      "path": "source_versions.csv",
+      "rows": 60,
+      "sha256": "94280b7d391da5aafa43844835ecdab90a8f1e5bbdbf4295ba6671e06be7d50b"
+    },
+    {
+      "bytes": 384,
+      "lines": 15,
+      "path": "sqlite_load_results.json",
+      "sha256": "6786dd7b1bed28bead3c35fdb55c22d3fc55259e8dc22142a53d6b1a0e2a86a9"
+    },
+    {
+      "bytes": 1558,
+      "lines": 35,
+      "path": "summary.md",
+      "sha256": "25613e28dadfe7addaacd046027a50de5d007369ef7da2ef082de038039eb7f1"
+    },
+    {
+      "bytes": 3122,
+      "path": "two_clean_build_comparison.csv",
+      "rows": 13,
+      "sha256": "4414f59fdff457d0d04d0d3aa066fecbd1a21a02533f9ebdf8f653a2dc679d5a"
+    },
+    {
+      "bytes": 188,
+      "lines": 6,
+      "path": "two_clean_build_results.json",
+      "sha256": "ee545ce7a8ff4e840f06791c90ae078bd00f0ebcaa5d59ee62bdd9005b40ce18"
+    },
+    {
+      "bytes": 9900,
+      "path": "v1_retention_audit.csv",
+      "rows": 57,
+      "sha256": "9ab190c29d257325543972dc1ab988dcd66e62c2249f2889b434b3b41b360453"
+    },
+    {
+      "bytes": 17781,
+      "lines": 499,
+      "path": "validate_union_v2.py",
+      "sha256": "3eda18eb98cd31cfafc7aa384ba2087545a000e6b842bdd40cb99db69a5982e6"
+    },
+    {
+      "bytes": 2524,
+      "lines": 79,
+      "path": "validation_results.json",
+      "sha256": "c148da0773dfdb2c0bd37cd913f207815061a08fdf304d046475b01e231db3cd"
+    },
+    {
+      "bytes": 2913,
+      "lines": 104,
+      "path": "verify_two_clean_builds.py",
+      "sha256": "fd8723cc9490dd13cbf218cab755f5939949b9cc50fd6ee47195d4607ae89be4"
+    }
+  ],
+  "lane": "lane_3_source_preservation_union_v2",
+  "no_write_attestation": {
+    "canonical_or_shared_data_modified": false,
+    "chapter_or_publication_files_modified": false,
+    "output_only": "research/ai_financial_system/staging/lane_3_source_preservation_union_v2/",
+    "v1_modified": false
+  },
+  "projection_state_counts": {
+    "internal_P4_reconstruction": 3,
+    "metadata_only_rights_boundary": 2,
+    "no_matching_preservation_record": 186,
+    "preserved_and_semantically_reviewed": 5,
+    "preserved_bytes_available_locator_review_pending": 326,
+    "retrieval_failed": 3
+  },
+  "publication_authorized": false,
+  "quarantine_policy": "unmanifested_pre_fix_PR_Newswire_response_excluded",
+  "retained_analytical_holds": [
+    "S&P 500 aggregate",
+    "exact Microsoft component and tax attribution",
+    "governed top-20 population",
+    "prospective Meta and Tesla realization monitoring",
+    "unnamed investee allocation and residual Amazon attribution"
+  ],
+  "scope": "append-only normalized source-preservation union v2 candidate",
+  "self_hash_policy": "lane_manifest.json excludes its own hash",
+  "semantic_locator_clearance": "ONLY_FIVE_PREVIOUSLY_ACCEPTED_PRIVATE_CLAIM_REVIEWS",
+  "snapshot_id": "SPU-V2-20260726-38b990b2",
+  "source_version_candidate_readiness": "PASS_AUTHOR_AND_DEDICATED_VALIDATION",
+  "status_date": "2026-07-26",
+  "validation": {
+    "author_checks": "14_of_14_pass",
+    "clean_builds": 2,
+    "dedicated_checks": "11_of_11_pass",
+    "deterministic_authored_files": 13
+  }
+}

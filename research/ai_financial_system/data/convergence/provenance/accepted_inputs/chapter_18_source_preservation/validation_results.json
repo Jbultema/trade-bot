@@ -1,0 +1,79 @@
+{
+  "author_validation_is_acceptance": false,
+  "canonical_integration": "NOT_AUTHORIZED",
+  "chapter_docx_publication": "NOT_AUTHORIZED",
+  "checks": [
+    {
+      "check_id": "manifest_integrity",
+      "status": "PASS"
+    },
+    {
+      "check_id": "frozen_source_tables",
+      "status": "PASS"
+    },
+    {
+      "check_id": "frozen_source_artifacts",
+      "status": "PASS"
+    },
+    {
+      "check_id": "exact_58_locator_adoption",
+      "status": "PASS"
+    },
+    {
+      "check_id": "correct_32_26_dispositions",
+      "status": "PASS"
+    },
+    {
+      "check_id": "exact_18_material_patches",
+      "status": "PASS"
+    },
+    {
+      "check_id": "partial_scope_not_laundered",
+      "status": "PASS"
+    },
+    {
+      "check_id": "population_58_73_23_25_23",
+      "status": "PASS"
+    },
+    {
+      "check_id": "two_unctad_failures_preserved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "unctad_v0003_identity",
+      "status": "PASS"
+    },
+    {
+      "check_id": "source_and_derivative_rehashes",
+      "status": "PASS"
+    },
+    {
+      "check_id": "all_34_prohibitions_retained",
+      "status": "PASS"
+    },
+    {
+      "check_id": "all_authority_holds",
+      "status": "PASS"
+    },
+    {
+      "check_id": "protected_inputs_no_write",
+      "status": "PASS"
+    }
+  ],
+  "coefficient_predictive_causal_comparative_model_use": "BLOCK",
+  "counts": {
+    "derivatives": 23,
+    "edges": 73,
+    "failed_attempts": 2,
+    "partially_supported": 26,
+    "patches": 18,
+    "relationships": 58,
+    "sources": 23,
+    "successful_artifacts": 23,
+    "supported": 32,
+    "versions": 25
+  },
+  "errors": [],
+  "metadata_integration": "NOT_AUTHORIZED",
+  "status": "PASS"
+}

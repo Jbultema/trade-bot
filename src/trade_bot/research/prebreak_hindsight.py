@@ -1182,6 +1182,56 @@ def current_best_signal_readout(
     return pd.DataFrame(rows)
 
 
+def refresh_current_prebreak_signal_readout(
+    reference_run_store: RunStore,
+    *,
+    snapshot_signals: pd.DataFrame,
+    signal_rankings: pd.DataFrame,
+    windows: tuple[BubbleBreakWindow, ...] = DEFAULT_BUBBLE_BREAK_WINDOWS,
+    lookback_days: int = DEFAULT_PREBREAK_LOOKBACK_DAYS,
+    postbreak_days: int = DEFAULT_POSTBREAK_FOLLOWTHROUGH_DAYS,
+    horizon_days: int = DEFAULT_PREBREAK_HORIZON_DAYS,
+    severe_drawdown_threshold: float = -0.10,
+    major_drawdown_threshold: float = -0.15,
+) -> pd.DataFrame:
+    """Refresh only the current readout against a frozen historical ranking.
+
+    Daily operation should not rebuild the full hindsight population. It should
+    apply the already-audited rankings and historical percentile distribution to
+    the newest ordinary snapshot.
+    """
+
+    if snapshot_signals.empty or signal_rankings.empty:
+        return pd.DataFrame()
+    payload = reference_run_store.load_latest_snapshot(require_matching_config=False)
+    if payload is None:
+        return pd.DataFrame()
+    current_run, current_manifest = payload
+    reference_prices = _clean_prices(getattr(current_run, "prices", pd.DataFrame()))
+    if reference_prices.empty:
+        return pd.DataFrame()
+    current_row = snapshot_signal_row(
+        current_run,
+        run_id=current_manifest.run_id,
+        created_at_utc=current_manifest.created_at_utc,
+        reference_prices=reference_prices,
+        windows=windows,
+        lookback_days=lookback_days,
+        postbreak_days=postbreak_days,
+        horizon_days=horizon_days,
+        severe_drawdown_threshold=severe_drawdown_threshold,
+        major_drawdown_threshold=major_drawdown_threshold,
+    )
+    if not current_row:
+        return pd.DataFrame()
+    current_row["snapshot_source"] = "current_reference"
+    current_source = pd.concat(
+        [snapshot_signals, pd.DataFrame([current_row])],
+        ignore_index=True,
+    )
+    return current_best_signal_readout(current_source, signal_rankings)
+
+
 def write_prebreak_hindsight_outputs(
     result: PrebreakHindsightResult,
     output_dir: str | Path = DEFAULT_PREBREAK_OUTPUT_DIR,

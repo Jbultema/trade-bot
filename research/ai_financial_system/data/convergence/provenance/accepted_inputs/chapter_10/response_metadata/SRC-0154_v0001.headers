@@ -1,0 +1,28 @@
+HTTP/2 200 
+date: Sun, 26 Jul 2026 19:14:09 GMT
+content-type: text/html; charset=UTF-8
+server: cloudflare
+cf-cache-status: DYNAMIC
+vary: Accept-Encoding
+vary: Accept-Encoding,Cookie
+last-modified: Wed, 07 May 2025 09:36:25 GMT
+link: <https://news.microsoft.com/source/wp-json/>; rel="https://api.w.org/"
+link: <https://news.microsoft.com/source/wp-json/wp/v2/posts/8188>; rel="alternate"; title="JSON"; type="application/json"
+link: <https://news.microsoft.com/source/?p=8188>; rel=shortlink
+x-pingback: https://news.microsoft.com/source/xmlrpc.php
+x-powered-by: WP Engine
+x-cacheable: YES:15552000.000
+cache-control: max-age=15552000, must-revalidate
+x-cache: HIT: 283
+x-cache-group: normal
+x-xss-protection: 1; mode=block
+strict-transport-security: max-age=63072000; includeSubDomains; preload
+set-cookie: __cf_bm=0KG21rJcHgwI3hnxrSz4vOEJlHcTKVpEcMr.rGj7B7k-1785093249.7689779-1.0.1.1-KnilJINEfQAXefaZycGMiPC2Fj8.1AgbuRJ_htR2myy3d2DQ99oJfemWk97PCi7FYDRIaizwhnPYtMrVBwV_A4lxj0qE4x7aayhQYB_Z4NTZti4NOYSCGxk05fSeVnWK; HttpOnly; SameSite=None; Secure; Path=/; Domain=news.microsoft.com; Expires=Sun, 26 Jul 2026 19:44:09 GMT
+x-orig-cache-control: max-age=15552000, must-revalidate
+content-security-policy: upgrade-insecure-requests; frame-ancestors 'self' https://news.microsoft.com https://news.xbox.com https://blogs.windows.com;
+feature-policy: geolocation 'none';midi 'none';notifications 'none';push 'none';sync-xhr 'none';microphone 'none';camera 'none';magnetometer 'none';gyroscope 'none';speaker 'self';vibrate 'none';payment 'none';
+referrer-policy: strict-origin-when-cross-origin
+x-content-type-options: nosniff
+cf-ray: a215b9cb09b2fc0f-DEN
+alt-svc: h3=":443"; ma=86400
+

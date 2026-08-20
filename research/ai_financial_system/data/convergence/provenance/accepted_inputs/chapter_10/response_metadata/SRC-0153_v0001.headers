@@ -1,0 +1,12 @@
+HTTP/2 403 
+date: Sun, 26 Jul 2026 19:14:09 GMT
+content-type: text/html; charset=UTF-8
+cache-control: private, max-age=0, no-store, no-cache, must-revalidate, post-check=0, pre-check=0
+expires: Thu, 01 Jan 1970 00:00:01 GMT
+referrer-policy: same-origin
+x-frame-options: SAMEORIGIN
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+set-cookie: __cf_bm=1OtfQzd0YclKaTBV1Vq2fFvRE465ZHgk8sWNJb04PZo-1785093249.4557478-1.0.1.1-nBp.2DNCQ7iH9OyYJnlvQELZoQn8byA2KxaFtrjTWEJF0T5mCaz3rzmXzG7f9fUCvfhF_WBgpwEkPeKyPF3M51_07FLI4ZIR3TIpqf4lp8U5lXGPZTcGuuqnaXUAGkxy; HttpOnly; SameSite=None; Secure; Path=/; Domain=www.mgx.ae; Expires=Sun, 26 Jul 2026 19:44:09 GMT
+server: cloudflare
+cf-ray: a215b9c91e3d9aea-DEN
+

@@ -1,0 +1,117 @@
+{
+  "canonical_integration": "NOT_AUTHORIZED_PENDING_PRIMARY_INTEGRATION",
+  "coefficient_transfer": "BLOCK",
+  "comparative_publication": "BLOCK_EXTERNAL_SOURCE_CONTENT_AND_CANONICAL_INTEGRATION",
+  "descriptive_verdict": "ACCEPT_BOUNDED_DESCRIPTIVE_STAGING_USE",
+  "external_source_content_holds": 58,
+  "files": [
+    {
+      "bytes": 2789,
+      "path": "arithmetic_reperformance.csv",
+      "rows": 20,
+      "sha256": "8f64be8d18652359c4b02f18391f4a9794f2130233b152b8605d3222b690e6e4"
+    },
+    {
+      "bytes": 368,
+      "path": "author_generic_validation_results.json",
+      "sha256": "89994cfc8dbe12b500deb522e665c71af699ac98189e27837675c558142d2972"
+    },
+    {
+      "bytes": 2401,
+      "path": "coefficient_predictive_audit.csv",
+      "rows": 34,
+      "sha256": "6c32c164f26f42c9ba1be6977676603517352456b64006c8e267ded47c97f42a"
+    },
+    {
+      "bytes": 449,
+      "path": "deterministic_rebuild_results.json",
+      "sha256": "23eddcb7337da252ecd953527fdf62f4976dc8579d1fd1da03d07d5370e7129c"
+    },
+    {
+      "bytes": 2562,
+      "path": "exact_repair_reperformance.csv",
+      "rows": 19,
+      "sha256": "d6191e9ab96abb5a262f14c3c886a9d227044b09458ca6fb9c7e564eab8ef299"
+    },
+    {
+      "bytes": 957,
+      "path": "findings.csv",
+      "rows": 4,
+      "sha256": "1159877653727e04519023a999c5b73b3c509a75770a33aedb44dc1ffc7e7f59"
+    },
+    {
+      "bytes": 15023,
+      "path": "post_review_input_inventory.csv",
+      "rows": 57,
+      "sha256": "e19a34decc5cb0ebf1f76fdc0025579192480a45bb49a78e8d5d67ff179254d9"
+    },
+    {
+      "bytes": 2998,
+      "path": "preservation_diff_audit.csv",
+      "rows": 12,
+      "sha256": "990a2740d4d15b8a1d235fff40e7660c08d5a3502137b0a84be5dcc4591afc93"
+    },
+    {
+      "bytes": 16192,
+      "path": "record_claim_graph_audit.csv",
+      "rows": 128,
+      "sha256": "93d468ccfba7e24f572ce4862a5de4210c66c67477301fb5a3fbccf1536d9ccd"
+    },
+    {
+      "bytes": 374,
+      "path": "review_generic_validation_results.json",
+      "sha256": "6611aa380c637d0d511e99d4536523aceffbf9720b5a47bb746bf237de16f47e"
+    },
+    {
+      "bytes": 970,
+      "path": "row_population_audit.csv",
+      "rows": 16,
+      "sha256": "57766b679547e0acfc592691ebd8e32020dcc3c2969ef5122cda88168f83d0f8"
+    },
+    {
+      "bytes": 36834,
+      "lines": 965,
+      "path": "run_review.py",
+      "sha256": "ca6732f90db4a92393341ca1c67c03e0fca9c0f58f8001650711a151a509f44a"
+    },
+    {
+      "bytes": 15023,
+      "path": "sealed_input_inventory.csv",
+      "rows": 57,
+      "sha256": "e19a34decc5cb0ebf1f76fdc0025579192480a45bb49a78e8d5d67ff179254d9"
+    },
+    {
+      "bytes": 8453,
+      "path": "source_claim_join_audit.csv",
+      "rows": 58,
+      "sha256": "1b6d44a227f78e25171c4e150d4c3b34981574d221021a0a130eb2a68ad55d27"
+    },
+    {
+      "bytes": 6581,
+      "lines": 185,
+      "path": "validate_review.py",
+      "sha256": "12972838702a9703cf18a9b5255a37c654d1099247fcdeaadc0f91f04baf643c"
+    },
+    {
+      "bytes": 2396,
+      "path": "validation_results.json",
+      "sha256": "d1f91bfc430ff4de809a73caa0ac2a8c42d0fd19a9a50e1f41a73a33937b55d8"
+    },
+    {
+      "bytes": 3713,
+      "lines": 76,
+      "path": "verification_report.md",
+      "sha256": "7ecc6750355a028971df62814fd47c785c5ad72e71d28a117ec9491b0edb93cc"
+    }
+  ],
+  "intrinsic_verdict": "ACCEPT",
+  "lane": "lane_2_verify_chapter_18_rebuilt_v5",
+  "overall_verdict": "ACCEPT_INTRINSIC_WITH_EXPLICIT_EXTERNAL_HOLDS",
+  "predictive_use": "BLOCK",
+  "prior_review_manifest_sha256": "16b927c566f797b8ae95f4c81455548833356a13bce3994d7568d7196b40d086",
+  "review_checks_failed": 0,
+  "review_checks_passed": 11,
+  "reviewed_lane": "lane_4_chapter_18_rebuilt_v5",
+  "reviewed_manifest_sha256": "d11f8bd03062b2abfbcb85d3c351ea614eb2d06a3704ed15b6e571c2e758b8de",
+  "status_date": "2026-07-26"
+}

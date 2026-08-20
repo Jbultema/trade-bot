@@ -1,0 +1,26 @@
+HTTP/1.1 200 OK
+server: nginx
+date: Sun, 26 Jul 2026 19:13:50 GMT
+content-type: text/html; charset=UTF-8
+content-length: 26953
+cache-control: max-age=2764800, public
+x-drupal-dynamic-cache: MISS
+content-language: en
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+expires: Sun, 19 Nov 1978 05:00:00 GMT
+vary: Cookie,Origin
+x-generator: Drupal 10 (https://www.drupal.org)
+x-consumer-id: default_consumer
+x-drupal-cache: MISS
+last-modified: Fri, 24 Jul 2026 15:45:59 GMT
+etag: "1784907959"
+x-varnish: 1576635 1546771
+age: 185270
+x-vc-cache: HIT
+accept-ranges: bytes
+strict-transport-security: max-age=31536000;includeSubDomains;preload
+set-cookie: a443e8fd0ed04258adc504948adc6a84=aa340be3972da12eb876f563b6c28342; path=/; HttpOnly; Secure; SameSite=None
+cache-control: private
+Set-Cookie: cookiesession1=678A3E3DB0AAF7DC217B3F8D3B5ECA93;Expires=Mon, 26 Jul 2027 19:13:54 GMT;Path=/;HttpOnly
+

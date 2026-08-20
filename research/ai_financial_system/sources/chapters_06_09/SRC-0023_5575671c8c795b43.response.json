@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 22983,
+  "content_sha256": "5575671c8c795b43f53c08e5fe51a7aed83bf9130e160f49423e70cee790942b",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1730168/000119312526144028/d87999d8k.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0023_5575671c8c795b43.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1730168/000119312526144028/d87999d8k.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-04-06",
+  "publisher": "Broadcom Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0023_5575671c8c795b43.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:50:50.188748+00:00",
+  "retrieval_started_utc": "2026-07-26T17:50:50.168581+00:00",
+  "selected_response_headers": {
+    "content-length": "4246",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:50:50 GMT",
+    "last-modified": "Mon, 06 Apr 2026 21:22:32 GMT"
+  },
+  "source_id": "SRC-0023",
+  "status": "preserved_complete",
+  "title": "Broadcom Form 8-K Google TPU and Anthropic compute collaboration",
+  "write_state": "new_version_written"
+}

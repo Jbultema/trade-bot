@@ -1,0 +1,21 @@
+HTTP/2 200 
+content-type: text/html; charset=UTF-8
+x-drupal-dynamic-cache: MISS
+content-language: en
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-generator: Drupal 10 (https://www.drupal.org)
+last-modified: Sun, 26 Jul 2026 08:04:20 GMT
+etag: "1785053060-gzip"
+x-request-id: 73563836-2c77-4f3a-a527-34ff78cde504
+x-ah-environment: prod
+x-cache-hits: 41
+x-age: 25152
+cache-control: public, max-age=40
+expires: Sun, 26 Jul 2026 19:14:46 GMT
+date: Sun, 26 Jul 2026 19:14:06 GMT
+set-cookie: akaalb_DMAF_ALB_PROD=1785094146~op=~rv=26~m=~os=~id=6d3fece5ef3c03c6fe496c56733002ef; path=/; HttpOnly; Secure; SameSite=None; Domain=.irs.gov
+strict-transport-security: max-age=31536000
+set-cookie: _abck=52E5170846E271E6998E310800AB4074~-1~YAAQDmPKF68PxmqfAQAA/UzZnxDvoLBsRWs+efE2mYNIDwoZyP3YbLZ0aEMYTI9ySQkKOdpthQvF7qeHvhEZT0QAtU2wa3hQnW3EDSyuDBX0wZlHGsGFeDbxjWz1/lIOP8mermzJ+2SOAa40e3/0DxuIej/T8jF0fVhzl2TfWpx7MCGsJXDPmLxYNjWatwhNAzCVbG6KAYwNbtCQS7KrQvZMxvpN34/RcAPDCrZlkADivot01eHnUlAkGTu9AYEyQudkiZKwlJaPancl+bhn737Pmg5caXNKMIxUw4WTwKGUiJK6a07VrAoYmNijTsOUrJ4ByPMeTvx1/EeGaWR4hIX031uIYpv/eZ9uIwSlhCOpd48YSxEdpGYh/N2mMvguBX7q7YAKm+FVo3x+N3GsyQpNPDwOWDdLrQFQXqMyx92XZp1ysJHpNYZMdfJACaK9UBo=~-1~-1~-1~-1~-1; Domain=.irs.gov; Path=/; Expires=Mon, 26 Jul 2027 19:14:06 GMT; Max-Age=31536000; Secure
+set-cookie: bm_sz=8F28A414AE54F2501D88698E4DE665E9~YAAQDmPKF7APxmqfAQAA/UzZnwBDHiB8H+ntm7BVhY6sAw5yBm9BygeiInOmbzhvLeSmY1oyyMXR3QLMabQIwC7zwifofTrud4VgKlaq8wIQlh6zFNcdDeTUwVAbtQ7wc7B0o8r6vRnS4Jp0Yc+e7ruBq8ACQ7xw7WXeO4v68afDdBRqkMHEM225n8b+QrYWm6zjtJQRcTTlauWoR1dsqXqqiPaufHfr3qh3IYZLbBbSXJLVdMGs4Y5g0jov/L1w9U2qjjj6L2kou87Ys9z+YojB6yWOOqH+nxy6WNpWXhuzBMw2++vs4yJzBMbkqDQIwDNr1ySRuA566zy8vfmHwYHMxDuOAUFN1/ayIiCINNmavQ==~3356471~3294776; Domain=.irs.gov; Path=/; Expires=Sun, 26 Jul 2026 23:14:06 GMT; Max-Age=14400
+

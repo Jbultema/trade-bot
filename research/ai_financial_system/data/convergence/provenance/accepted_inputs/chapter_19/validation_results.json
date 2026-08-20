@@ -1,0 +1,59 @@
+{
+  "author_validation": "SELF_VALIDATION_ONLY",
+  "author_verdict": "SAFE_ONLY_AS_UNRESOLVED_ARCHITECTURE",
+  "canonical_write": "NOT_AUTHORIZED",
+  "chapter": "CH19",
+  "exact_fixes_expected": 10,
+  "exact_fixes_semantically_passed": 10,
+  "finding_reperformance_counts": {
+    "PASS": 2,
+    "PASS_DESCRIPTIVE_ONLY": 1,
+    "PASS_STRUCTURAL_ONLY": 1,
+    "PASS_WITH_EXPLICIT_HOLD": 10
+  },
+  "fresh_nonauthor_acceptance": "REQUIRED",
+  "lane": "lane_3_chapter_19_rebuilt_v3",
+  "original_patch_reperformance_counts": {
+    "PARTIAL_PROVENANCE_MISMATCH": 1,
+    "PASS": 36,
+    "PASS_DESCRIPTIVE_ONLY": 1,
+    "PASS_WITH_EXPLICIT_HOLD": 11,
+    "SAFE_ALTERNATIVE_NOT_LITERAL_COMPLETION": 52
+  },
+  "preserved_unresolved_architecture": {
+    "accepted_reporting_states": 0,
+    "authored_tests": 5,
+    "blank_or_blocked_tests": 247,
+    "blocker_references": 138,
+    "chronology_rows": 73,
+    "compound_parents": 52,
+    "current_confidence_snapshots": 393,
+    "effective_date_inversions": 17,
+    "executed_falsifiers": 0,
+    "external_archive_population": 155,
+    "external_archives": 0,
+    "fabricated_confidence_evolution": 0,
+    "governed_questions": 252,
+    "inactive_false_atomic_children": 114,
+    "inactive_generated_links": 750,
+    "mapped_or_accepted_blockers": 0,
+    "normalized_searched_or_accepted_routes": 0,
+    "proposed_falsifiers": 10,
+    "pseudo_scores_or_ranks": 0,
+    "reporting_audits": 119,
+    "source_routes": 994,
+    "unsafe_later_flags": 0
+  },
+  "regression_checks_passed": 15,
+  "regression_checks_total": 15,
+  "resolved_validation_findings_publication": "NOT_AUTHORIZED",
+  "review_disposition_counts": {
+    "DEFERRED_EXPLICIT_HOLD": 985,
+    "DIRECT_OR_SUPERSEDING_CORRECTION_VERIFIED": 396,
+    "PARTIAL_PROVENANCE_MISMATCH": 1,
+    "SAFE_ALTERNATIVE_CHILD_ROUTE_RETIRED": 471,
+    "SAFE_ALTERNATIVE_PARENT_RESTORED": 394
+  },
+  "status_date": "2026-07-26",
+  "validator_status": "PASS"
+}

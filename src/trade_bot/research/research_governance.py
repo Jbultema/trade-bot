@@ -18,6 +18,114 @@ POINT_IN_TIME_UNIVERSE_COLUMNS = (
     "delisting_return_source",
 )
 RETROSPECTIVE_ADAPTATION_LIMIT = 25
+VERIFIED_OOS_METHODS = {
+    "sealed_holdout",
+    "nested_walk_forward",
+    "prospective_shadow",
+}
+VERIFIED_OOS_STATUSES = {f"verified_{method}" for method in VERIFIED_OOS_METHODS}
+
+
+def audit_out_of_sample_evidence(
+    evidence: Mapping[str, object] | None,
+) -> dict[str, object]:
+    """Fail closed unless model-selection OOS evidence is explicit and auditable.
+
+    Ordinary walk-forward metrics are not automatically selection OOS. A study
+    must prove that the evaluated predictions were not used to choose the
+    architecture or tune its parameters. Prospective shadows qualify only after
+    their frozen evaluation window is complete.
+    """
+
+    if not evidence:
+        return {
+            "status": "missing_oos_evidence",
+            "method": "undeclared",
+            "promotion_eligible": False,
+            "gaps": ["oos_evidence_not_declared"],
+        }
+
+    method = str(evidence.get("method", "") or "").strip().lower()
+    completed = bool(evidence.get("completed", False))
+    parameters_frozen = bool(evidence.get("parameters_frozen_before_evaluation", False))
+    used_for_selection = bool(evidence.get("evaluation_used_for_model_selection", True))
+    metric_preregistered = bool(evidence.get("primary_metric_pre_registered", False))
+    observation_count = _positive_int(evidence.get("observation_count"))
+    minimum_observations = _positive_int(evidence.get("minimum_observations"))
+    selection_cutoff = _timestamp(evidence.get("selection_cutoff"))
+    evaluation_start = _timestamp(evidence.get("evaluation_start"))
+    evaluation_end = _timestamp(evidence.get("evaluation_end"))
+    gaps: list[str] = []
+
+    if method not in VERIFIED_OOS_METHODS:
+        gaps.append("unsupported_or_retrospective_method")
+    if not completed:
+        gaps.append("evaluation_not_completed")
+    if not parameters_frozen:
+        gaps.append("parameters_not_frozen_before_evaluation")
+    if used_for_selection:
+        gaps.append("evaluation_used_for_model_selection")
+    if not metric_preregistered:
+        gaps.append("primary_metric_not_pre_registered")
+    if observation_count is None:
+        gaps.append("positive_observation_count_required")
+    if minimum_observations is None:
+        gaps.append("preregistered_minimum_observations_required")
+    if (
+        observation_count is not None
+        and minimum_observations is not None
+        and observation_count < minimum_observations
+    ):
+        gaps.append("minimum_observation_count_not_met")
+    if selection_cutoff is None:
+        gaps.append("selection_cutoff_required")
+    if evaluation_start is None:
+        gaps.append("evaluation_start_required")
+    if evaluation_end is None:
+        gaps.append("evaluation_end_required")
+    if (
+        selection_cutoff is not None
+        and evaluation_start is not None
+        and evaluation_start <= selection_cutoff
+    ):
+        gaps.append("evaluation_must_start_after_selection_cutoff")
+    if (
+        evaluation_start is not None
+        and evaluation_end is not None
+        and evaluation_end < evaluation_start
+    ):
+        gaps.append("evaluation_end_precedes_start")
+
+    if method == "nested_walk_forward":
+        if not bool(evidence.get("inner_model_selection_only", False)):
+            gaps.append("nested_selection_not_confined_to_inner_folds")
+        if not bool(evidence.get("outer_predictions_untouched", False)):
+            gaps.append("outer_predictions_not_declared_untouched")
+
+    promotion_eligible = not gaps
+    return {
+        "status": f"verified_{method}"
+        if promotion_eligible
+        else "invalid_or_incomplete_oos_evidence",
+        "method": method or "undeclared",
+        "promotion_eligible": promotion_eligible,
+        "completed": completed,
+        "parameters_frozen_before_evaluation": parameters_frozen,
+        "evaluation_used_for_model_selection": used_for_selection,
+        "primary_metric_pre_registered": metric_preregistered,
+        "selection_cutoff": _date_text(selection_cutoff),
+        "evaluation_start": _date_text(evaluation_start),
+        "evaluation_end": _date_text(evaluation_end),
+        "observation_count": observation_count,
+        "minimum_observations": minimum_observations,
+        "gaps": gaps,
+    }
+
+
+def has_verified_oos_status(value: object) -> bool:
+    """Return whether a persisted row carries a recognized OOS audit status."""
+
+    return str(value or "").strip().lower() in VERIFIED_OOS_STATUSES
 
 
 def audit_point_in_time_universe(
@@ -127,6 +235,8 @@ def build_research_trial_ledger(report_root: str | Path) -> tuple[pd.DataFrame, 
         governance_map = governance if isinstance(governance, Mapping) else {}
         universe = governance_map.get("point_in_time_universe", {})
         universe_map = universe if isinstance(universe, Mapping) else {}
+        oos = governance_map.get("out_of_sample_evidence", {})
+        oos_map = oos if isinstance(oos, Mapping) else {}
         for candidate in candidates:
             trial_id = hashlib.sha256(
                 "|".join(
@@ -175,6 +285,9 @@ def build_research_trial_ledger(report_root: str | Path) -> tuple[pd.DataFrame, 
                     "delisting_treatment_status": str(
                         universe_map.get("delisting_treatment_status", "unverified")
                     ),
+                    "oos_evidence_status": str(oos_map.get("status", "missing_oos_evidence")),
+                    "oos_method": str(oos_map.get("method", "undeclared")),
+                    "oos_promotion_eligible": bool(oos_map.get("promotion_eligible", False)),
                 }
             )
         coverage_rows.append(
@@ -191,11 +304,15 @@ def build_research_trial_ledger(report_root: str | Path) -> tuple[pd.DataFrame, 
                 "roster_source": roster_source,
             }
         )
-    manifested_directories = {
-        Path(str(row.get("manifest_path", ""))).parent.resolve()
-        for row in coverage_rows
-        if str(row.get("manifest_path", ""))
-    } if coverage_rows else set()
+    manifested_directories = (
+        {
+            Path(str(row.get("manifest_path", ""))).parent.resolve()
+            for row in coverage_rows
+            if str(row.get("manifest_path", ""))
+        }
+        if coverage_rows
+        else set()
+    )
     for artifact_dir in _unmanifested_artifact_directories(root, manifested_directories):
         coverage_rows.append(
             {
@@ -238,6 +355,11 @@ def write_research_trial_ledger(
     legacy_universe = (
         int(ledger["point_in_time_universe_status"].ne("verified").sum()) if not ledger.empty else 0
     )
+    missing_oos = (
+        int((~ledger["oos_evidence_status"].map(has_verified_oos_status)).sum())
+        if not ledger.empty
+        else 0
+    )
     distinct_studies = int(ledger["study"].nunique()) if not ledger.empty else 0
     distinct_configs = int(ledger["config_sha256"].nunique()) if not ledger.empty else 0
     unmanifested = (
@@ -255,6 +377,7 @@ def write_research_trial_ledger(
         f"- Study manifests inspected: {len(manifested_coverage)}.",
         f"- Manifests without an explicit candidate roster: {missing_rosters}.",
         f"- Trial rows without verified point-in-time universe evidence: {legacy_universe}.",
+        f"- Trial rows without verified selection OOS evidence: {missing_oos}.",
         f"- Distinct manifested studies: {distinct_studies}.",
         f"- Distinct manifested config identities: {distinct_configs}.",
         f"- Artifact directories without a manifest: {unmanifested}.",
@@ -294,6 +417,25 @@ def _compact_declaration(value: object) -> str:
     if isinstance(value, Sequence) and not isinstance(value, (str, bytes)):
         return ",".join(str(item) for item in value)
     return str(value or "")
+
+
+def _positive_int(value: object) -> int | None:
+    try:
+        parsed = int(value)
+    except (TypeError, ValueError):
+        return None
+    return parsed if parsed > 0 else None
+
+
+def _timestamp(value: object) -> pd.Timestamp | None:
+    parsed = pd.to_datetime(value, errors="coerce")
+    if pd.isna(parsed):
+        return None
+    return pd.Timestamp(parsed)
+
+
+def _date_text(value: pd.Timestamp | None) -> str | None:
+    return value.date().isoformat() if value is not None else None
 
 
 def _evaluation_period(parameters: Mapping[str, Any]) -> str:

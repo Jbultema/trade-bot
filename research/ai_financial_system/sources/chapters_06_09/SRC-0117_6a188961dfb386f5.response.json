@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 5850865,
+  "content_sha256": "6a188961dfb386f51ccbf49ab7a485f9758d6810a7d12fd9ef3a8cbf4e4f8243",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526299963/d32785d424b4.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0117_6a188961dfb386f5.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/2120882/000119312526299963/d32785d424b4.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-07-09",
+  "publisher": "SK hynix Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0117_6a188961dfb386f5.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:52:50.514817+00:00",
+  "retrieval_started_utc": "2026-07-26T17:52:50.380033+00:00",
+  "selected_response_headers": {
+    "content-length": "441851",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:52:50 GMT",
+    "last-modified": "Fri, 10 Jul 2026 10:02:46 GMT"
+  },
+  "source_id": "SRC-0117",
+  "status": "preserved_complete",
+  "title": "SK hynix final prospectus for July 2026 ADS offering",
+  "write_state": "new_version_written"
+}

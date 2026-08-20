@@ -116,6 +116,9 @@ def cycle_tracker_frames(
     report_dir: str | Path = "reports/cycle_tracker",
 ) -> dict[str, pd.DataFrame]:
     root = Path(report_dir)
+    validation_root = root.parent / "capital_cycle_validation"
+    feasibility_root = root.parent / "capital_cycle_feasibility"
+    target_root = root.parent / "capital_cycle_targets"
     return {
         "phase_probabilities": read_csv_artifact(root / "cycle_phase_probabilities.csv"),
         "transition_forecast": read_csv_artifact(root / "cycle_transition_forecast.csv"),
@@ -130,6 +133,53 @@ def cycle_tracker_frames(
         "phase_reliability": read_csv_artifact(root / "cycle_phase_reliability.csv"),
         "path_reliability": read_csv_artifact(root / "cycle_path_reliability.csv"),
         "crisis_playback": read_csv_artifact(root / "cycle_crisis_playback.csv"),
+        "capital_cycle_summary": read_csv_artifact(root / "capital_cycle_summary.csv"),
+        "capital_cycle_families": read_csv_artifact(root / "capital_cycle_families.csv"),
+        "capital_cycle_signals": read_csv_artifact(root / "capital_cycle_signals.csv"),
+        "capital_cycle_events": read_csv_artifact(root / "capital_cycle_events.csv"),
+        "capital_cycle_missing_confirmations": read_csv_artifact(
+            root / "capital_cycle_missing_confirmations.csv"
+        ),
+        "capital_cycle_lead_times": read_csv_artifact(root / "capital_cycle_lead_times.csv"),
+        "capital_cycle_validation_readiness": read_csv_artifact(
+            validation_root / "capital_cycle_readiness.csv"
+        ),
+        "capital_cycle_validation_ablation": read_csv_artifact(
+            validation_root / "capital_cycle_ablation_summary.csv"
+        ),
+        "capital_cycle_validation_episodes": read_csv_artifact(
+            validation_root / "capital_cycle_episode_diagnostics.csv"
+        ),
+        "capital_cycle_validation_leave_episode_out": read_csv_artifact(
+            validation_root / "capital_cycle_leave_episode_out.csv"
+        ),
+        "capital_cycle_validation_uncertainty": read_csv_artifact(
+            validation_root / "capital_cycle_uncertainty.csv"
+        ),
+        "capital_cycle_validation_utility": read_csv_artifact(
+            validation_root / "capital_cycle_utility_summary.csv"
+        ),
+        "capital_cycle_validation_stage_gates": read_csv_artifact(
+            validation_root / "capital_cycle_stage_gates.csv"
+        ),
+        "capital_cycle_feasibility_readiness": read_csv_artifact(
+            feasibility_root / "capital_cycle_readiness.csv"
+        ),
+        "capital_cycle_feasibility_episodes": read_csv_artifact(
+            feasibility_root / "capital_cycle_episode_coverage.csv"
+        ),
+        "capital_cycle_feasibility_families": read_csv_artifact(
+            feasibility_root / "capital_cycle_family_coverage.csv"
+        ),
+        "capital_cycle_feasibility_source_gaps": read_csv_artifact(
+            feasibility_root / "capital_cycle_source_gaps.csv"
+        ),
+        "capital_cycle_target_readiness": read_csv_artifact(
+            target_root / "capital_cycle_readiness.csv"
+        ),
+        "capital_cycle_target_events": read_csv_artifact(
+            target_root / "capital_cycle_event_manifest.csv"
+        ),
     }
 
 
@@ -157,6 +207,57 @@ def i111_evidence_frames(report_root: str | Path = "reports") -> dict[str, pd.Da
         ),
         "smoothing_pbo": _read_current_manifested_csv(
             root / "i111_execution_smoothing", "pbo_summary.csv"
+        ),
+        "selector_transition_gates": _read_current_manifested_csv(
+            root / "i111_selector_transition_repair", "promotion_gates.csv"
+        ),
+        "selector_transition_summary": _read_current_manifested_csv(
+            root / "i111_selector_transition_repair", "schedule_summary.csv"
+        ),
+        "selector_transition_bootstrap": _read_current_manifested_csv(
+            root / "i111_selector_transition_repair", "block_bootstrap.csv"
+        ),
+        "native_timing_gates": _read_current_manifested_csv(
+            root / "native_timing_hazard", "promotion_gates.csv"
+        ),
+        "native_timing_policies": _read_current_manifested_csv(
+            root / "native_timing_hazard", "policy_metrics.csv"
+        ),
+        "native_timing_shadow": _read_current_manifested_csv(
+            root / "native_timing_hazard", "shadow_candidate.csv"
+        ),
+        "timing_severity_gates": _read_current_manifested_csv(
+            root / "native_timing_severity", "promotion_gates.csv"
+        ),
+        "timing_severity_metrics": _read_current_manifested_csv(
+            root / "native_timing_severity", "policy_metrics.csv"
+        ),
+        "timing_severity_bootstrap": _read_current_manifested_csv(
+            root / "native_timing_severity", "block_bootstrap.csv"
+        ),
+        "timing_severity_current": _read_current_manifested_csv(
+            root / "native_timing_severity", "current_read.csv"
+        ),
+        "timing_severity_execution": _read_current_manifested_csv(
+            root / "native_timing_severity", "execution_sensitivity.csv"
+        ),
+        "timing_severity_activation": _read_current_manifested_csv(
+            root / "native_timing_severity", "activation_episodes.csv"
+        ),
+        "timing_severity_shadow": _read_current_manifested_csv(
+            root / "native_timing_severity", "shadow_challenger.csv"
+        ),
+        "native_progression_gates": _read_current_manifested_csv(
+            root / "native_timing_rollout_ladder", "promotion_gates.csv"
+        ),
+        "native_progression_diagnostics": _read_current_manifested_csv(
+            root / "native_timing_rollout_ladder", "model_diagnostics.csv"
+        ),
+        "native_progression_current": _read_current_manifested_csv(
+            root / "native_timing_rollout_ladder", "current_read.csv"
+        ),
+        "native_rollout_ladder": _read_current_manifested_csv(
+            root / "native_timing_rollout_ladder", "rollout_ladder.csv"
         ),
         "qc_headline": _read_current_manifested_csv(
             root / "backtest_qc_i111_native", "headline.csv"
@@ -190,6 +291,11 @@ def i111_manifest_index(report_root: str | Path = "reports") -> pd.DataFrame:
         "i111_adversarial_validation",
         "i111_execution_hardening",
         "i111_execution_smoothing",
+        "i111_selector_transition_repair",
+        "native_timing_hazard",
+        "native_timing_progression",
+        "native_timing_severity",
+        "native_timing_rollout_ladder",
     )
     rows: list[dict[str, object]] = []
     current_source_hash = _current_research_source_tree_sha256()
@@ -200,6 +306,10 @@ def i111_manifest_index(report_root: str | Path = "reports") -> pd.DataFrame:
             continue
         price_input = manifest.get("price_input", {})
         code = manifest.get("code", {})
+        governance = manifest.get("research_governance", {})
+        governance_map = governance if isinstance(governance, dict) else {}
+        oos = governance_map.get("out_of_sample_evidence", {})
+        oos_map = oos if isinstance(oos, dict) else {}
         verification = verify_research_manifest(
             manifest_path,
             current_source_tree_sha256=current_source_hash,
@@ -219,6 +329,12 @@ def i111_manifest_index(report_root: str | Path = "reports") -> pd.DataFrame:
                     "automatic_promotion_allowed",
                     False,
                 ),
+                "oos_evidence_status": oos_map.get(
+                    "status",
+                    "missing_oos_evidence",
+                ),
+                "oos_method": oos_map.get("method", "undeclared"),
+                "oos_promotion_eligible": bool(oos_map.get("promotion_eligible", False)),
                 **verification,
                 "manifest_path": str(manifest_path),
             }

@@ -1,0 +1,33 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1450799,
+  "content_sha256": "3e21fe2dc69a4b95ebaf3e2e9a037ff5d704c5729e1eb7eff1554d03bdfea453",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/547d1696765e05ce3adb81c108ce1c8c1682b80c/TSMC%202Q26%20Transcript.pdf",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0111_3e21fe2dc69a4b95.pdf",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "application/pdf",
+  "original_url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/547d1696765e05ce3adb81c108ce1c8c1682b80c/TSMC%202Q26%20Transcript.pdf",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-07-16",
+  "publisher": "Taiwan Semiconductor Manufacturing Company Limited",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0111_3e21fe2dc69a4b95.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:15.267884+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:14.893570+00:00",
+  "selected_response_headers": {
+    "cache-control": "max-age=600, public",
+    "content-length": "1450799",
+    "content-type": "application/pdf",
+    "date": "Sun, 26 Jul 2026 17:51:15 GMT",
+    "last-modified": "Fri, 17 Jul 2026 06:09:56 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0111",
+  "status": "preserved_complete",
+  "title": "TSMC second-quarter 2026 earnings transcript",
+  "write_state": "new_version_written"
+}

@@ -5,6 +5,7 @@ import pandas as pd
 from trade_bot.research.snapshot_backfill import (
     build_snapshot_backfill_dates,
     build_snapshot_backfill_plan,
+    missing_period_backfill_dates,
     snapshot_created_at_for_market_date,
 )
 
@@ -59,3 +60,35 @@ def test_snapshot_created_at_for_market_date_uses_configured_utc_close_hour() ->
         snapshot_created_at_for_market_date("2026-07-17", market_close_utc_hour=22)
         == "2026-07-17T22:00:00+00:00"
     )
+
+
+def test_missing_period_backfill_dates_adds_absent_canonical_quarter_ends() -> None:
+    planned = pd.bdate_range("2025-01-01", "2025-12-31")
+    existing = ["2025-02-14", "2025-08-05"]
+
+    selected = missing_period_backfill_dates(
+        planned,
+        existing,
+        period_frequency="Q",
+    )
+
+    assert selected == (
+        pd.Timestamp("2025-03-31"),
+        pd.Timestamp("2025-06-30"),
+        pd.Timestamp("2025-09-30"),
+        pd.Timestamp("2025-12-31"),
+    )
+
+
+def test_missing_period_backfill_accepts_existing_retention_week_anchor() -> None:
+    planned = pd.bdate_range("2025-01-01", "2025-06-30")
+    existing = ["2025-04-01"]
+
+    selected = missing_period_backfill_dates(
+        planned,
+        existing,
+        period_frequency="Q",
+        retention_frequency="W-WED",
+    )
+
+    assert selected == (pd.Timestamp("2025-06-30"),)

@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 31125,
+  "content_sha256": "d6000bbcccb8402d27ee2c7196a8b3a8def51cc85a1e391f3c0c971d19a0afc2",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/2488/000119312525230895/d28189d8k.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0020_d6000bbcccb8402d.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000119312525230895/d28189d8k.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-10-06",
+  "publisher": "Advanced Micro Devices Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0020_d6000bbcccb8402d.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:23.683555+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:22.897628+00:00",
+  "selected_response_headers": {
+    "content-length": "5192",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:23 GMT",
+    "last-modified": "Mon, 06 Oct 2025 11:05:10 GMT"
+  },
+  "source_id": "SRC-0020",
+  "status": "preserved_complete",
+  "title": "AMD Form 8-K OpenAI GPU purchase and warrant",
+  "write_state": "new_version_written"
+}

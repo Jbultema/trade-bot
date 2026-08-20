@@ -1,0 +1,150 @@
+{
+  "accepted_v5_manifest_sha256": "d11f8bd03062b2abfbcb85d3c351ea614eb2d06a3704ed15b6e571c2e758b8de",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "chapter_docx_publication": "NOT_AUTHORIZED",
+  "coefficient_predictive_causal_comparative_model_use": "BLOCK",
+  "dedicated_validation": "PASS",
+  "files": [
+    {
+      "bytes": 981,
+      "path": "applied_patch_verification.csv",
+      "rows": 18,
+      "sha256": "c42a18915af4cd53544c3f15c0ae16b89fd610989378313ce381b218e9cafcc6"
+    },
+    {
+      "bytes": 29138,
+      "lines": 676,
+      "path": "build_review.py",
+      "sha256": "6a7b2f4b086650db1846b8e812026de78331688899645003c9cb378a7b4aabb0"
+    },
+    {
+      "bytes": 5162,
+      "path": "derivative_rehash_audit.csv",
+      "rows": 23,
+      "sha256": "5f9be8b53b40e4c2118df805cd59fd02cad0fcd0a34eacca32ff01ad8f892073"
+    },
+    {
+      "bytes": 208,
+      "path": "deterministic_build_results.json",
+      "sha256": "470295d5530830769564b82710967044dbab0595769022e89e4b7522e9858663"
+    },
+    {
+      "bytes": 393,
+      "path": "generic_validation_results.json",
+      "sha256": "ae5f31133011ab9ebf87d5ec585c251c387806728a5a50c24d5307b7adfbf7c2"
+    },
+    {
+      "bytes": 34663,
+      "path": "locator_verification.csv",
+      "rows": 58,
+      "sha256": "3c5eaebcb5c76252018abe69ce7f575d69ce3de908c8b19de4febcaaea5a0b38"
+    },
+    {
+      "bytes": 52,
+      "path": "patch_list.csv",
+      "rows": 0,
+      "sha256": "fb95f605d7fa6b1a2f494b9fd3bdc45953a61d9e16288f55a83815d3930872e5"
+    },
+    {
+      "bytes": 389,
+      "path": "population_audit.csv",
+      "rows": 12,
+      "sha256": "6060d6542296952f69c9cb8e00918df51f4fbf03732276782ae032a2903a70f7"
+    },
+    {
+      "bytes": 4755,
+      "path": "prohibition_verification.csv",
+      "rows": 34,
+      "sha256": "d85903dc521a9cb422e3c9bb16807ec559a49230a06435d0f75f37fbf680d405"
+    },
+    {
+      "bytes": 98415,
+      "path": "protected_input_no_write_audit.csv",
+      "rows": 351,
+      "sha256": "a6e4ea11bba39597b983d9ead07f58a6732eb7d214d80a214e6048cffbe0d63a"
+    },
+    {
+      "bytes": 2457,
+      "lines": 49,
+      "path": "review_report.md",
+      "sha256": "e67d030fbbbb36818fca014cc34172cf0f663cecf918eb94d10190fd5e0f5adb"
+    },
+    {
+      "bytes": 2324,
+      "path": "review_results.json",
+      "sha256": "f77a875d3abc7aa7417be83c538323616fd5819987da00f132c5c41610d8c239"
+    },
+    {
+      "bytes": 94,
+      "path": "ruff_results.json",
+      "sha256": "ed0367dcbfd2043fba100034e66884f8475cbb70f3b4f2eb4dc45e3ea426761d"
+    },
+    {
+      "bytes": 1971,
+      "lines": 75,
+      "path": "run_checks.py",
+      "sha256": "5ca6415561a3ef768af2e3aefc1ed2b16c4650028337b84179935d47a23fedc3"
+    },
+    {
+      "bytes": 3675,
+      "lines": 102,
+      "path": "seal_review.py",
+      "sha256": "105d792eae017448b8f88479b88d3dcd7b8d3caa1722b78acc55de225b18fa44"
+    },
+    {
+      "bytes": 5343,
+      "path": "source_version_rehash_audit.csv",
+      "rows": 25,
+      "sha256": "1f78bacda8288ee5aee1f94b7a7082304de2bb474817e1b3b0ee059040fbf3f3"
+    },
+    {
+      "bytes": 4635,
+      "lines": 113,
+      "path": "validate_review.py",
+      "sha256": "6bb7a6d4709c8613fdf9a7572b8455af1a7c2698cb73d05ffcce27ce7d4b3dfb"
+    },
+    {
+      "bytes": 1251,
+      "path": "validation_results.json",
+      "sha256": "7ab7091afd27cc145b222430f775c5c3250f2e41560278cc2f974defaf175608"
+    },
+    {
+      "bytes": 684,
+      "path": "verdict.json",
+      "sha256": "dddb6b35c8b1cc1db06359689a8b604e5572f8d93796f2f07c324272a9815f84"
+    },
+    {
+      "bytes": 2420,
+      "lines": 79,
+      "path": "verify_determinism.py",
+      "sha256": "28ee79040e424be7584a1a979aee8c3648b4d5264822c979ceb4c264b7492d6b"
+    }
+  ],
+  "generic_validation": "PASS",
+  "lane": "lane_4_verify_chapter_18_source_preservation_corrected",
+  "metadata_rebase": "NOT_AUTHORIZED",
+  "original_author_manifest_sha256": "595fd73bae86430a68e8462109d646845dd5ca4d1e1dc3f10df901c297950f6d",
+  "packet_type": "chapter_18_source_preservation_corrected_fresh_acceptance_review",
+  "populations": {
+    "coefficient_blocks": 18,
+    "derivatives": 23,
+    "material_patches_verified": 18,
+    "ordered_source_edges": 73,
+    "partially_supported": 26,
+    "predictive_blocks": 16,
+    "relationships": 58,
+    "residual_patches": 0,
+    "retained_failures": 2,
+    "source_version_attempts": 25,
+    "successful_artifacts": 23,
+    "supported": 32,
+    "unique_sources": 23
+  },
+  "prior_review_manifest_sha256": "945938aefbfc97411f2f0c4c9ead68982633fb56657404ff167ae3ccb5ea0de3",
+  "reviewed_manifest_sha256": "3fad6122a81e115a352e20bfdb3086be1a25d5ea6547202c97d6ac2020b11867",
+  "reviewed_packet": "lane_3_chapter_18_source_preservation_corrected",
+  "ruff": "PASS",
+  "status_date": "2026-07-26",
+  "two_clean_builds": "PASS",
+  "verdict": "ACCEPT_CORRECTED_SOURCE_PRESERVATION_WITH_EXPLICIT_RETAINED_HOLDS"
+}

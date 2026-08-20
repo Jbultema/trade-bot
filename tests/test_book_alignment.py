@@ -3,9 +3,10 @@ from __future__ import annotations
 from pathlib import Path
 
 import pandas as pd
+import pytest
 
 from trade_bot.research.trade_decision import TradeDecisionRun
-from trade_bot.trading.book_alignment import build_book_alignment
+from trade_bot.trading.book_alignment import build_book_alignment, latest_book_account_value
 from trade_bot.trading.journal import (
     TicketSizingConfig,
     TradeJournal,
@@ -122,6 +123,99 @@ def test_book_alignment_floors_account_value_at_marked_holdings(tmp_path: Path) 
     assert "Logged holdings exceed" in summary["account_value_warning"]
     assert qqq["current_weight"] == 1.0
     assert float(alignment.position_plan["current_weight"].abs().max()) <= 1.0
+
+
+def test_latest_saved_account_value_preserves_cash_after_partial_sale(tmp_path: Path) -> None:
+    journal = TradeJournal(tmp_path / "journal.sqlite")
+    base_decision = _trade_decision()
+    decision = TradeDecisionRun(
+        summary=base_decision.summary,
+        position_plan=pd.DataFrame(
+            [
+                {
+                    "ticker": "QQQ",
+                    "current_weight": 0.50,
+                    "scenario_adjusted_weight": 0.50,
+                    "delta_weight": 0.00,
+                    "action": "HOLD",
+                },
+                {
+                    "ticker": "BIL",
+                    "current_weight": 0.50,
+                    "scenario_adjusted_weight": 0.50,
+                    "delta_weight": 0.00,
+                    "action": "HOLD",
+                },
+            ]
+        ),
+        evidence=pd.DataFrame(),
+        scenario_links=pd.DataFrame(),
+    )
+    journal.save_decision_snapshot(
+        mode="paper",
+        account="shadow",
+        strategy_name="scenario_adjusted_trade_decision",
+        trade_decision=decision,
+        sizing=TicketSizingConfig(account_value=1000.0, whole_shares=False),
+        tickets=pd.DataFrame(),
+    )
+    journal.log_execution(
+        mode="paper",
+        account="shadow",
+        ticker="QQQ",
+        side="BUY",
+        quantity=1.0,
+        price=500.0,
+        executed_at_utc="2026-06-17T16:00:00+00:00",
+    )
+    journal.log_execution(
+        mode="paper",
+        account="shadow",
+        ticker="BIL",
+        side="BUY",
+        quantity=5.0,
+        price=100.0,
+        executed_at_utc="2026-06-17T16:01:00+00:00",
+    )
+    journal.log_execution(
+        mode="paper",
+        account="shadow",
+        ticker="BIL",
+        side="SELL",
+        quantity=2.0,
+        price=100.0,
+        executed_at_utc="2026-06-17T16:02:00+00:00",
+    )
+
+    account_value = latest_book_account_value(
+        journal,
+        mode="paper",
+        account="shadow",
+        strategy_name="scenario_adjusted_trade_decision",
+        default=100.0,
+    )
+    alignment = build_book_alignment(
+        journal=journal,
+        trade_decision=decision,
+        prices=_prices(),
+        mode="paper",
+        account="shadow",
+        strategy_name="scenario_adjusted_trade_decision",
+        account_value=account_value,
+    )
+
+    summary = alignment.summary.iloc[0]
+    positions = alignment.position_plan.set_index("ticker")
+    assert account_value == 1000.0
+    assert summary["account_value"] == 1000.0
+    assert summary["account_value_source"] == "input"
+    assert summary["current_cash_weight"] == pytest.approx(0.2)
+    assert positions.loc["QQQ", "current_weight"] == 0.5
+    assert positions.loc["QQQ", "delta_weight"] == 0.0
+    assert positions.loc["QQQ", "action"] == "HOLD"
+    assert positions.loc["BIL", "current_weight"] == 0.3
+    assert positions.loc["BIL", "delta_weight"] == 0.2
+    assert positions.loc["BIL", "action"] == "ADD"
 
 
 def _prices() -> pd.DataFrame:

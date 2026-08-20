@@ -1,0 +1,2953 @@
+[[PDF_PAGE_0001]]
+Federal Maritime
+Commission
+55th Annual
+Report
+for
+Fiscal Year
+2016
+
+[[PDF_PAGE_0002]]
+
+
+[[PDF_PAGE_0003]]
+Table of Contents
+Letter of Transmittal 1
+Members of the Commission 3
+FMC Mission, Strategic Goals, and Functions 5
+Strategic Goal 1 5
+Strategic Goal 2 6
+Statutory Authority 6
+Year in Review 7
+Efficiency and Competition 9
+Strategic Goal 1 9
+Agreement Filings and Review 9
+Types of Agreements 10
+Competitive Impact and Monitoring 13
+Tariffs, Service Contracts, NSAs, & MTO Schedules 16
+Supply Chain Innovation Initiative 17
+International Cooperation 20
+Protecting the Public 23
+Strategic Goal 2 23
+Licensing 23
+Revisions to Licensing Rules 24
+Passenger Vessel Program 25
+Consumer Affairs and Education 26
+Enforcement, Audits and Penalties 27
+Inter-Agency Cooperation 28
+Leveraging Technology 30
+Developments in Major U.S. Foreign Trades 33
+Worldwide 33
+Asia 34
+Indian Subcontinent and Middle East 35
+North Europe 35
+Mediterranean 36
+Australia and Oceania 37
+
+[[PDF_PAGE_0004]]
+Africa 37
+Central America and the Caribbean 38
+South America 38
+Top Twenty U.S. Liner Cargo Trading Partners 41
+Top Twenty U.S. Liner Cargo Trading Partners (FY2015 Imports and Exports)
+42
+Foreign Shipping Practices Act 43
+Controlled Carriers 44
+Formal Investigations, Private Complaints and Litigation 45
+Formal Investigations 46
+Private Complaints 46
+Litigation 51
+Rulemakings 53
+APPENDICES 55
+A - FMC Organization Chart 55
+B - FMC Senior Officials - Fy 2016 56
+C - Statement of Appropriations, Obligations, and Receipts 57
+D - Civil Penalties Collected 58
+
+[[PDF_PAGE_0005]]
+55th Annual Report 1
+Letter of Transmittal
+FEDERAL MARITIME COMMISSION
+800 North Capitol Street, N.W.
+Washington, DC 20573-0001
+March 31, 2017
+To the United States Senate and House of Representatives:
+On behalf of my fellow Commissioners, I welcome this opportunity to share with you the
+Federal Maritime Commission 55th Annual Report, which highlights the key accomplishments,
+initiatives, and relevant events that occurred during FY 2016.
+The past year has been a period of consequential change in the international shipping sector.
+The maritime transportation services industry is signigicantly remaking itself and the potential
+impacts this may have on the American shipping public are recounted in this report.
+Additionally within our report, you will learn about actions the Commission took to increase
+seaport efficiency, particularly via our Supply Chain Innovation Teams Initiative. Further, we
+cite important developments concerning filed agreements and FMC regulations. In short, we
+have continued to focus on ways to make it easier for our constituents to interact with the
+Commission and to ensure compliance requirements are as minimally burdensome as pos -
+sible. Finally, we provide details of enforcement actions taken by the agency, including an
+accounting of the $3.3 million in fines collected.
+Guaranteeing a competitive marketplace for international ocean transportation services is
+the key mission of the Federal Maritime Commission. All aspects of the American economy
+rely upon supply chain systems that are global in nature and almost always revolve around
+the oceanborne intermodal container. Accordingly, Shipping Act violations by ocean carriers
+or ocean transportation intermediaries not only break the law, but put the economic wellbeing
+of the nation in danger. I am proud of the Commission’s work and this report helps to illus -
+trate the contributions the 128 dedicated staff members at the FMC make toward upholding
+the Shipping Act.
+Thank you for your attention and I welcome the opportunity to be of assistance to you in
+any matter within the jurisdiction of the Federal Maritime Commission
+Sincerely,
+Michael A. Khouri
+Acting Chairman
+
+[[PDF_PAGE_0006]]
+55th Annual Report2
+
+[[PDF_PAGE_0007]]
+55th Annual Report 3
+Members of the Commission
+William P. Doyle
+Commissioner
+Appointed 2013
+Term Expires 2018
+Mario Cordero
+Commissioner
+Appointed 2011
+Term Expires 2019
+Michael A. Khouri
+Acting Chairman
+Appointed 2009
+Term Expires 2021
+Daniel B. Maffei
+Commissioner
+Appointed 2016
+Term Expires 2017
+Rebecca F. Dye
+Commissioner
+Appointed 2002
+Term Expires 2020
+
+[[PDF_PAGE_0008]]
+55th Annual Report4
+
+[[PDF_PAGE_0009]]
+55th Annual Report 5
+FMC Mission, Strategic
+Goals, and Functions
+The Federal Maritime Commission (FMC or Commission) is an independent agency respon-
+sible for the regulation of oceanborne transportation in the foreign commerce of the United
+States for the benefit of U.S. exporters, importers, and the U.S. consumer.
+The FMC's Mission is:
+• To foster a fair, efficient and reliable international ocean transportation system and to
+protect the public from unfair and deceptive practices.
+The FMC's Vision is:
+• Fairness and Efficiency in the U.S. Maritime Commerce.
+The Commission will achieve its Mission and Vision by
+ensuring that the fundamental dynamics of a free, open and
+competitive ocean transportation market drive economic
+outcomes. To that end, the Commission is committed to faith-
+fully administer the Shipping Act while employing a minimum
+of government intervention and regulatory costs and by placing
+a greater reliance on the marketplace.
+Strategic Goal 1
+Maintain an efficient and competitive international ocean transporta-
+tion system.
+The FMC ensures competitive and efficient ocean transportation services for the shipping
+public by:
+• Reviewing and monitoring agreements among ocean common carriers and marine
+terminal operators (MTOs) serving the U.S. foreign oceanborne trades to ensure that
+they do not cause substantial increases in transportation costs or decreases in trans -
+portation services;
+• Maintaining and reviewing confidentially filed service contracts and Non-Vessel-Oper-
+ating Common Carrier (NVOCC) Service Arrangements to guard against detrimental
+effects to shipping;
+FMC Mission
+To foster a fair, efficient
+and reliable international
+ocean transportation sys-
+tem and to protect the
+public from unfair and
+deceptive practices.
+
+[[PDF_PAGE_0010]]
+55th Annual Report6
+• Providing a forum for exporters, importers, and other members of the shipping public
+to obtain relief from ocean shipping practices or disputes that impede the flow of
+commerce;
+• Ensuring common carriers’ tariff rates and charges are published in private, automated
+tariff systems and electronically available;
+• Monitoring rates, charges, and rules of government-owned or -controlled carriers to
+ensure they are just and reasonable; and
+• Taking action to address unfavorable conditions caused by foreign government or
+business practices in U.S. foreign shipping trades.
+Strategic Goal 2
+Protect the shipping public from unlawful, unfair and deceptive ocean
+transportation practices and resolve shipping disputes.
+The FMC protects the public from financial harm, and contributes to the integrity and
+security of the U.S. supply chain and transportation system by:
+• Investigating and ruling on complaints regarding rates, charges, classifications, and
+practices of common carriers, MTOs, and Ocean Transportation Intermediaries (OTIs),
+that violate the Shipping Act;
+• Licensing OTIs with appropriate character and adequate financial responsibility;
+• Helping resolve disputes involving shipments of cargo, personal or household goods,
+or disputes between cruise vessel operators and passengers;
+• Identifying and holding regulated entities accountable for mislabeling cargo shipped
+to or from the United States; and
+• Ensuring that cruise lines maintain financial responsibility to pay claims for personal
+injury or death, and to reimburse passengers when their cruise fails to sail.
+Statutory Authority
+The principal statutes administered by the Commission, now codified in Title 46 of the U.S.
+Code at sections 40101 through 44106, are:
+• The Shipping Act of 1984, as amended by the Ocean Shipping Reform Act of 1998
+(Shipping Act)
+• The Foreign Shipping Practices Act of 1988 (FSPA)
+• Section 19 of the Merchant Marine Act, 1920 (1920 Act)
+• Sections 2 and 3 of Pub. L. No. 89-777, 80 Stat. 1350
+
+[[PDF_PAGE_0011]]
+55th Annual Report 7
+Year in Review
+Last year was one of significant and histori-
+cal changes to the container shipping industry,
+changes that fundamentally shifted many of
+the foundations of the business, and that will
+have an influence on the sector for years to
+come.
+The first major development to the ship -
+ping industry was significant consolidation
+among container ship lines, also known as
+ocean common carriers. At the end of 2015,
+there were 20 major container ship lines in
+business. In 2017, several planned mergers
+and acquisitions will reduce the number to 13.
+In some respects, this trend was long antici -
+pated and overdue, particularly given the
+poor financial performance of ocean common
+carriers for several consecutive years prior.
+The bankruptcy of a “top ten” carrier, Hanjin
+Shipping, in September was a manifestation
+of the perilous and unsound financial position
+container ship lines have found themselves
+in for the better part of a decade as a result of
+unsustainable rates and chronic overcapacity.
+Second, as a consequence of the contraction
+of the number of container shipping compa -
+nies operating in the international trades, we
+witnessed the complete re-creation of the
+ocean carrier alliance structure. In calendar
+year 2016, the Commission allowed two new
+alliances to be established that will come
+into force later in 2017. By the middle of 2017,
+ocean carriers calling the United States will
+belong to one of three alliances: the 2-M, THE
+Alliance, or the OCEAN Alliance.
+In both calendar year and fiscal year 2016,
+the Commission devoted significant time and
+resources to reviewing the interconnected
+developments of carrier consolidation and
+alliance restructuring. In the coming year, and
+for the foreseeable future, the FMC must be
+diligent in monitoring these new alliances
+given the potential impact on American
+shippers. Be assured, however, that rate and
+service competition between the various ocean
+carriers remained intense.
+Though trade growth in 2016 was not
+as significant as it has been in recent years,
+international commerce did indeed expand
+and will continue to expand. Last year in
+May, the Commission continued its efforts
+to address port congestion issues by launching
+the Supply Chain Innovation Teams Initiative,
+under the direction of Commissioner Rebecca
+Dye. In November, just seven months from
+their initiation, the teams identified an action-
+able project that, if funded, would make a
+real and meaningful contribution to improv -
+ing supply chain system efficiencies and
+contribute to increased American economic
+competitiveness.
+Key regulatory actions taken by the Com -
+mission in FY 2016 included:
+• Issued a Final Rule on OTI licens -
+ing and financial responsibility
+requirements
+• Launched an automated Agreement
+Filing System
+• Launched an online registration and
+renewal system for unlicensed for -
+eign-based NVOCCs
+• Invited public comment on a proposed
+rule on ocean common carrier and
+marine terminal operator agreements
+[Docket Number 16-04]
+
+[[PDF_PAGE_0012]]
+55th Annual Report8
+• Invited public comment on a proposal
+to revise rules on service contracts and
+NVOCC service agreements [Docket
+Number 16-05]
+Most notably, in June of last year the
+expanded Panama Canal opened. The $5.2 bil-
+lion expansion of the Panama Canal began in
+2007 and significantly increases the maximum
+size of vessels that can transit the waterway
+(Panamax) to those capable of carrying 14,000
+Twenty Foot Equivalent Units (TEUs). By way
+of comparison, legacy Panamax vessels carry
+approximately 5,000 TEUs and the largest con-
+tainer ships in operation today have capacities
+in excess of 18,000 TEUs. Time will tell to what
+extent the larger Canal will impact the flow of
+containers, but ports along the Gulf of Mexico
+and up and down the Atlantic Coast are work-
+ing to find ways to position their gateways as
+alternatives to the ports on the Pacific.
+Ports up and down the West Coast of the
+United States also saw vessels of the 18,000
+TEU class make calls for the first time. These
+ship visits were not part of a new service, but
+it did prove that facilities in Los Angeles, Long
+Beach, Oakland, and Seattle were all capable
+of receiving and servicing the largest vessels
+currently deployed in the commercial trades.
+It is reasonable to expect that, at some point,
+when market conditions warrant, we may see
+ships of this size included in regular service
+strings stopping in California and the State
+of Washington.
+Container shipping and supply chain sys -
+tems services are activities that take place
+invisibly, but are critical to the economic suc-
+cess and security of the United States. The
+information contained in the following pages
+will not only help an interested reader learn
+about the Commission’s work over the past
+year, but will help illustrate the irreplaceable
+contribution shipping makes to the quality of
+life enjoyed in the United States.
+The following presents a detailed summary
+of the Commission’s activities during FY 2016.
+
+[[PDF_PAGE_0013]]
+55th Annual Report 9
+Efficiency and Competition
+Strategic Goal 1
+Maintaining an efficient and competitive international ocean transportation system and
+enhancing liner trade by evaluating and monitoring the use of various types of agreement
+authority for anticompetitive effects is a primary function of the Commission. An efficient and
+competitive transportation system facilitates commerce, economic growth, and job creation.
+Competition among participants in U.S. liner trades fosters competitive rates and encourages
+a variety of service offerings for the benefit of U.S. exporters and importers, and ultimately
+consumers.
+The Shipping Act allows competitors to meet and discuss (and in some cases cooperate
+on) certain business issues, but first they must file a written agreement with the Commission.
+The Commission reviews agreements using traditional antitrust law and economic models to
+evaluate the potential competitive impact of a proposed agreement before it may go into effect.
+The initial review and analysis of a proposed agreement and subsequent monitoring of the
+members’ activities under the agreement, should it become effective, are designed to identify
+and guard against possible anticompetitive abuse of the filed authority, avoid unreasonable
+increases in transportation costs or decreases in transportation services, and address other
+activities prohibited by the Shipping Act.
+The Shipping Act is a federal competition law applicable to the industry of international
+liner shipping. It contains provisions similar to those found in the Sherman Act of 1890, the
+1914 Clayton Act, and the Robinson-Patman Act of 1936 concerning various prohibitions of
+discriminatory or unfair business practices and standards regarding business combinations.
+The Shipping Act creates a separate regulatory regime from antitrust under which collective
+carrier or MTO activity is both evaluated when the agreement is initially filed and closely
+monitored thereafter for any adverse impact on competition in the trade.
+So long as the regulated entities comply with the statutory and regulatory proscriptions
+of the Act, then the other federal antitrust statutes generally do not apply. Conversely, if a
+regulated entity violates the Shipping Act, they would be subject to penalties set forth in the
+Act, and may under certain circumstances be subject to investigation and prosecution under
+the full array of federal antitrust statutes.
+Agreement Filings and Review
+Under Sections 4 and 5 of the Shipping Act,
+all agreements by or among ocean common
+carriers to undertake any of the following are
+required to be filed with the Commission:
+• fix rates or conditions of service,
+• pool cargo revenue,
+• allot ports or regulate sailings,
+
+[[PDF_PAGE_0014]]
+55th Annual Report10
+• limit or regulate the volume or charac-
+ter of cargo or passengers to be carried,
+• control or prevent competition,
+• or engage in exclusive or preferential
+arrangements.
+Except for certain exempted categories,
+agreements among MTOs and among one or
+more MTOs and one or more ocean common
+carriers also must be filed with the Com -
+mission. Generally, an agreement becomes
+effective 45 days after filing, unless the
+Commission has requested additional infor -
+mation to evaluate the competitive impact of
+the agreement. All agreements are reviewed
+pursuant to the standard set forth in section
+6(g) of the Shipping Act, 46 U.S.C. §41307(b)
+(1). Effective agreements are exempt from
+U.S. antitrust laws, and instead, are subject
+to Shipping Act restrictions and Commission
+oversight.
+In FY 2016, the Commission received 251
+agreement filings. This volume of filing activ-
+ity remains well above the ten-year average
+of 183 filings per year.
+During FY 2016, the Commission under -
+took a sizeable effort to overhaul the intake
+process for ocean common carrier and marine
+terminal agreement filings to leverage new
+technologies. This effort included developing
+and deploying the new automated Agree -
+ment filing system and commencing efforts to
+replace the current online Agreement Library
+with a more robust system with expanded
+information and improved search capabilities.
+Types of Agreements
+To support the new public-facing portion of
+the Agreement system, categories were added
+to describe the authority contained in filed
+agreements. The categories were developed
+to aid public research and agency reporting.
+While the following descriptions closely par-
+allel many definitions in the Commission’s
+agreement rules, some of the descriptions
+below are more precise, i.e., equipment
+discussion agreement rather than non-rate
+discussion agreement.
+Some former categories have been sub-
+divided for more targeted research results. For
+example, under the former system, all oper -
+ational agreements were grouped together
+under the category of vessel sharing agree -
+ments (VSAs). Now the Commission can
+differentiate between types of space sharing
+agreements, allowing for a more accurate
+accounting of the industry.
+Space charter agreements authorize an
+ocean common carrier(s) (also known as a
+shipping line(s)) to sell or exchange vessel
+space for use by another shipping line. Space
+charter agreements do not include the author-
+ity to discuss the provision of space in a trade,
+only the chartering of space already deployed.
+Vessel sharing agreements authorize two
+or more shipping lines to discuss and agree
+on the supply of vessel capacity in a defined
+U.S. trade through the deployment of a spe -
+cific service string.
+Global vessel sharing agreements/alli -
+ances authorize two or more shipping lines
+to discuss and agree on the supply of vessel
+capacity across multiple trades. Alliance
+agreements may contain other authorities,
+such as, information exchange, joint procure-
+ment of goods or services necessary to operate
+
+[[PDF_PAGE_0015]]
+55th Annual Report 11
+their services, etc. Examples of this category
+of agreement include the recently filed THE
+and OCEAN alliances.
+VOCC conference agreements are distin-
+guished from all other types of agreements
+because they authorize two or more shipping
+lines to collectively discuss, agree, and fix
+uniform freight rates, charges, practices, and
+conditions of service relating to the receipt,
+carriage, handling and/or delivery of pas -
+sengers or cargo. Conference agreements
+currently only involve the transport of gov -
+ernment impelled cargo.
+Joint service agreements authorize two or
+more shipping lines to establish and operate a
+combined vessel service or joint venture that
+uses a distinct operating name and generally
+acts as a single shipping line independent
+of the shipping lines in the joint service
+agreement.
+Equipment discussion agreements are
+agreements between shipping lines that pri -
+marily focus on the discussion, exchange, and
+transportation of containers, chassis, LASH/
+SEABEE barges, and related equipment.
+Examples of this type of agreement include
+OCEMA, and more recently, agreements
+that would allow for the movement of empty
+containers.
+VOCC rate discussion agreements focus on
+any kind of rate matter or charges, but unlike
+conferences, any consensus on rates among
+the shipping line members is non-binding on
+the members.
+VOCC cooperative working agreements
+(CWAs) authorize shipping lines to establish
+exclusive, preferential, or cooperative working
+relationships that are subject to the Shipping
+Act, but that do not fall precisely within the
+parameters of any other specifically defined
+agreement category. Many current CWAs deal
+with unique operating considerations relat -
+ing to acquisitions, sharing of administrative
+services, or internet portal management.
+Assessment agreements, whether part of a
+collective bargaining agreement or negotiated
+separately, authorize the parties to collec -
+tively bargain for fringe benefit obligations on
+other than a uniform man-hour basis regard-
+less of the cargo handled or type of vessel or
+equipment utilized. These agreements can be
+between common carriers and labor organiza-
+tions or marine terminal operators and labor
+organizations, and are effective upon filing
+with the Commission.
+Marine terminal rate discussion agree -
+ments authorize marine terminal operators
+to discuss on a non-binding basis, rates and/or
+charges related to marine terminal operations.
+Marine terminal facilities agreements
+generally refer to lease agreements between
+a marine terminal operator and the owner of
+the land or warehouse/facility at a port.
+Marine terminal services agreements are
+agreements between a marine terminal opera-
+tor and a shipping line that apply to marine
+terminal services that are provided to and paid
+for by a shipping line. These services include:
+checking, dockage, free time, handling, heavy
+lift, loading and unloading, terminal storage,
+usage, wharfage, and wharf demurrage and
+including any marine terminal facilities that
+may be provided incidentally to such marine
+terminal services.
+Marine terminal joint venture agreements
+are agreements between or among two or
+more marine terminal operators, or between
+one or more marine terminal operators and
+
+[[PDF_PAGE_0016]]
+55th Annual Report12
+one or more shipping lines, operating as a
+joint venture whereby a separate marine ter -
+minal operator is established.
+MTO cooperative working agreements
+authorize marine terminal operators to estab-
+lish exclusive, preferential, or cooperative
+working relationships that are subject to the
+Shipping Act, but that do not fall precisely
+within the parameters of any specifically
+defined agreement. Examples of MTO coop -
+erative working agreements include the Port
+of New York/New Jersey Sustainable Services
+Agreement and the Port Fee Services Agree -
+ment at the Ports of Los Angeles and Long
+Beach, California.
+As in previous years, the vast majority, 81
+percent of all VOCC agreements in effect at
+the end of the fiscal year were either space
+charter or vessel sharing agreements. How -
+ever, VOCC rate discussion agreements
+remain active and continue to constitute a
+substantial portion of the Commission’s moni-
+toring activities. Ocean common carriers have
+had greater success with cost cutting efforts
+in search of financial stability under vessel
+sharing agreements, as opposed to attempts
+at rate enhancement under rate discussion
+agreements, which were largely ineffective
+this year.
+Fiscal Year 2016 was the first year in the past
+five that the number of active VOCC agree -
+ments declined, this was primarily due to a
+Commission initiative seeking the termina -
+tion of inactive agreements combined with a
+general consolidation of the shipping industry,
+through both the formation of new, larger alli-
+ances, and through mergers and acquisitions.
+Among the most notable of recent efforts were
+the formation or expansion of global alliance
+agreements, such as the 2M and OCEAN Alli-
+ance agreements.
+
+[[PDF_PAGE_0017]]
+55th Annual Report 13
+In terms of acquisition and merger activities
+within the ocean transportation market, 2016
+saw several major developments. COSCO
+Container Line and China Shipping Container
+Lines combined their container operations
+into a single entity, the China COSCO Ship -
+ping Corporation, and in doing so, became
+one of the top five container carriers in the
+world as measured by vessel capacity. Also of
+note was CMA CGM’s purchase of Neptune
+Orient Line (NOL), including NOL subsidiar-
+ies APL/American President Lines. Hanjin
+Shipping’s bankruptcy and subsequent sale
+of its vessels added to industry consolidation.
+Based on industry consultant reports, there is
+a good possibility that 2017 will continue this
+trend towards a more concentrated market.
+In FY 2016, the Commission’s new agree -
+ments system facilitated greater tracking of
+agreements within the Roll On-Roll Off (RO/
+RO) market. Of the 324 VOCC agreements on
+file and in effect at the end of the fiscal year,
+106 agreements, or almost 33 percent, autho -
+rized cooperation between ocean carriers in
+the RO/RO trade. The Commission continues
+to see a trend this year toward space charter
+agreements between two RO/RO carriers with
+a global geographic scope.
+The flexibility required of car carriers to
+serve a wide range of locations is due partly
+to the shift of car manufacturing plant loca -
+tions closer to end markets. Conversely, the
+closing of car manufacturing plants overseas
+has also contributed to an increase of vehicle
+imports into those countries. The worldwide
+scope of these agreements allows the carrier
+parties to respond to a vehicle market that
+has become increasingly diverse and mobile.
+Competitive Impact and Monitoring
+The Commission reviews all agreements
+filed under the Shipping Act as well as
+evolving commercial conditions in the U.S.
+foreign trades to ensure that cooperation con-
+templated between or among ports, ocean
+common carriers, and/or MTOs will not result
+in an unreasonable reduction
+in service or increase in rates.
+The following are examples
+of specific measures the
+Commission took during the
+fiscal year on carrier or MTO
+agreements to ensure compli-
+ance with the Shipping Act.
+The Los Angeles and Long Beach
+Port Infrastructure and Environmen -
+tal Programs Cooperative Working
+Agreement:
+This agreement allows the Ports to jointly
+form Supply Chain Optimization Working
+Groups that meet periodically
+to discuss possible measures
+designed to expedite the
+flow of containers moving
+through the Ports’ termi -
+nals, including utilizing key
+performance indicators, con-
+tainer terminal optimization
+and drayage actions. Pursuant
+to the Agreement’s monitoring requirements,
+the Commission receives reports on the activi-
+ties of these various working groups. The
+Growing vessel supply/
+demand imbalance drives a
+continued wave of mergers,
+acquisitions, joint ventures
+& increased cooperation
+among carriers.
+
+[[PDF_PAGE_0018]]
+55th Annual Report14
+Commission monitors the Agreement’s activi-
+ties and the major issues being discussed by
+the working groups.
+The West Coast MTO Agreement
+(WCMTOA):
+The Commission continued to actively mon-
+itor and evaluate the activities conducted by
+the thirteen container terminals at the Ports
+of Los Angeles and Long Beach to assess
+their competitive impacts under the section
+6(g) standard of the Shipping Act. Notable in
+the fiscal year were three programs that the
+Commission closely evaluated: the PierPASS
+program, a proposed Chassis Hosting Agree-
+ment, and a proposed assessment of a Chassis
+Services Fee.
+As part of its evaluation, Commission
+staff met with various shippers, truckers,
+intermodal equipment providers, and trade
+associations who have raised concerns about
+existing and proposed programs under the
+agreement. Commission staff also met with
+Port and PierPASS officials and agreement
+parties.
+Of major concern to the Commission as well
+as stakeholders has been the annual increase
+in the Traffic Mitigation Fee and lack of trans-
+parency about the cost to operate off-peak
+shifts, the revenue collected from the traffic
+mitigation fee, and quality of service. The
+Commission has urged WCMTOA to address
+stakeholders’ concerns by conducting an inde-
+pendent audit of the PierPASS program.
+Oakland MTO Agreement:
+In FY 2015, the Commission issued a
+Request For Additional Information (RFAI)
+regarding a proposed amendment to estab -
+lish OAKPASS, a program that would have
+allowed the container terminals at the Port
+of Oakland to offer Saturday gate times. The
+cost of providing Saturday gate operations
+would be recovered by imposing a fee on ship-
+pers and truckers using the Monday through
+Friday daytime gates. Responses to the RFAI
+would allow staff to undertake a competitive
+impact analysis of the proposed program.
+Staff also met with Port of Oakland offi -
+cials to discuss the proposed program and
+the concerns raised by shippers, truckers and
+organized labor. Responses to Commission’s
+RFAI remained pending at the end of the fiscal
+year, and therefore the proposed revised pro-
+gram has not been implemented.
+However, the largest terminal member
+of the agreement announced that it would
+independently offer fee based weeknight gate
+operations and another terminal member is
+separately experimenting with night gates to
+ascertain whether it is feasible to offer them
+on a regular basis.
+Transpacific Stabilization Agreement
+(TSA):
+As part of the 2003 settlement agreement
+between the Commission and TSA members,
+biannual meetings are held with representa -
+tives of TSA to review major activities of the
+Agreement and discuss significant develop -
+ments in the ocean liner trade between the U.S.
+and Asia. TSA is also required to provide peri-
+odic reports for review and analysis regarding
+each member’s performance and activities.
+Over the last five years, a number of fac -
+tors have converged to prompt carriers both
+to form alliances under the Shipping Act and
+to consolidate. While cargo volumes have
+increased, the rate of increase has slowed sig-
+nificantly since the end of the Great Recession
+
+[[PDF_PAGE_0019]]
+55th Annual Report 15
+of 2008-2009. During the nine years prior
+to 2008, U.S. container transport volumes
+increased at an average annual rate of 7 per -
+cent, or about 1.5 million TEUs annually. Since
+then, cargo volumes have grown at an annual-
+ized rate of only 2.5 percent, or about 750,000
+TEUs annually.
+This slower than expected growth in the
+global economy and reduced overall demand
+for liner shipping services, coupled with
+the ongoing deployment of mega container
+ships (ordered during a period of consistently
+healthy cargo growth) has impacted the finan-
+cial stability of liner carriers. Vessel capacity
+growth has consistently outpaced weak cargo
+demand growth since 2012. The introduction
+of ultra-large ships without corresponding
+cargo demand growth has resulted in supply
+outstripping demand, and downward pres -
+sure on ocean freight rates.
+Faced with this growing vessel supply/
+demand imbalance, FY 2016 witnessed a
+continued wave of mergers, acquisitions and
+joint ventures; as well as increased coop -
+eration among vessel operators under the
+Shipping Act. At the close of 2015, most of
+the major ocean carriers were members of one
+of four alliances (2M, CKYHE, G6 and Ocean
+3). During the fiscal year however, these
+four alliances and their members began to
+sort themselves into three new alliances: 2M,
+OCEAN Alliance, and THE Alliance (to be
+filed in FY 2017).
+Maersk/MSC Vessel Sharing Agree -
+ment (2M Alliance):
+The 2M Alliance consists of Maersk Line
+and Mediterranean Shipping Company. The
+Commission monitored alliance activities,
+capacity, and utilization levels. It is antici -
+pated that Hyundai will join this agreement
+during FY 2017.
+OCEAN Alliance Agreement:
+The OCEAN Alliance was the first of the
+three newly announced global ocean carrier
+alliances to file its agreement with the Com -
+mission. The OCEAN Alliance members are
+COSCO, CMA CGM, Evergreen Line and
+OOCL. At the end of fiscal year, the Com -
+mission issued an RFAI to obtain a fuller and
+more detailed explanation of how the parties
+intend to use their agreement authority, and
+to gather necessary data to undertake a com-
+petitive impact analysis.
+THE Alliance:
+THE Alliance was discussed but not filed
+with the Commission during the fiscal year.
+THE Alliance consists of Hapag-Lloyd, K Line,
+MOL, NYK and Yang Ming. It includes Japan’s
+three major shipping lines, K Line, NYK, and
+MOL. THE Alliance will allow its members to
+share vessels, charter and exchange space on
+each other’s ships, and enter into cooperative
+working arrangements.
+
+[[PDF_PAGE_0020]]
+55th Annual Report16
+Tariffs, Service
+Contracts, NSAs, &
+MTO Schedules
+Tariffs
+The Shipping Act requires common car -
+riers and conferences to publish their tariffs
+containing rates, charges, rules, and practices,
+electronically in private systems. For ease of
+public access, the Commission publishes the
+web addresses of those tariffs on its website.
+At the close of the fiscal year, 5,560 tariff loca-
+tion addresses were posted. Of that number,
+5,233 tariff addresses were for NVOCCs.
+The Commission provides regulatory relief,
+allowing licensed and foreign registered
+NVOCCs to “opt out” of the requirement
+to file rate tariffs when exclusively using
+NVOCC Negotiated Rate Arrangements
+(NRAs). NRAs are a less burdensome com -
+pliance option which NVOCCs indicate save
+them both time and money. At the end of the
+fiscal year, nearly 1,400 active NVOCCs or
+27 percent, had filed prominent notices or a
+rule in their respective tariff indicating that
+they had invoked the NRA exemption as an
+alternative to tariff filing. Approximately 12
+percent of all NVOCCs use NRAs exclusively,
+while 15 percent use a combination of NRAs
+and tariff rate filings.
+Service Contracts
+Service contracts are an alternative to trans-
+portation of cargo under tariff rates. Between
+90 and 95 percent of the total cargo trans -
+ported in the major U.S. liner trades moves
+under service contracts, rather than tariffs.
+Service contracts enable the parties to tailor
+transportation services and rates to their com-
+mercial and operational needs and to keep
+these arrangements confidential. During the
+fiscal year, the Commission received 52,968
+new service contracts, compared to 51,109 in
+fiscal year 2015, and 734,106 contract amend-
+ments, compared to 653,315 in FY 2015.
+NVOCC Service Arrangements (NSAs)
+Commission rules allow NVOCCs to offer
+transportation services pursuant to indi -
+vidually negotiated, confidential service
+arrangements with customers, rather than
+under a published tariff. During the fiscal year,
+the Commission received 984 NSAs, com -
+pared to 901 in fiscal year 2015, and 1,814 NSA
+amendments, compared to 1,790 in FY 2015.
+During the fiscal year, a total of 96 NVOCCs
+took advantage of the ability to use NSAs to
+conclude their transportation arrangements
+with shippers. Historically 1,856 NVOCCs
+have registered with the Commission to file
+NSAs, however, only 273 NVOCCs (approxi-
+mately 15 percent) have ever actually filed an
+NSA.
+Service Contracts and
+NSAs filed in 2015
+Newly filed service contracts: 51,109
+Amendments to service contracts:
+653,315
+Newly filed NSAs: 901
+Amendments to NSAs: 1,790
+
+[[PDF_PAGE_0021]]
+55th Annual Report 17
+Marine Terminal Schedules
+An MTO may make available to the public
+a schedule of rates, regulations, and practices,
+including limitations of liability for cargo loss
+or damage, pertaining to receiving, delivering,
+handling, or storing property at its marine
+terminal. An MTO schedule made available
+to the public is enforceable by an appropriate
+court as an implied contract without proof of
+actual knowledge of its provisions. During
+the fiscal year, 257 MTOs maintained an
+active Form FMC-1, which reports the elec -
+tronic location of an MTO’s terminal schedule,
+with 154 MTOs electing to voluntarily publish
+their actual terminal schedules. The internet
+address of these MTO terminal schedules are
+posted on the Commission’s website.
+Supply Chain Innovation Initiative
+On February 1, 2016, the Commission issued
+an Order directing Commissioner Rebecca
+Dye to engage leaders from commercial sec -
+tors of the U.S. international supply chain in
+discussions to identify commercial solutions
+to U.S. supply chain operational challenges.
+The Supply Chain Innovation Teams (SCIT)
+initiative was an outgrowth of the Commis -
+sion’s previous work on port congestion
+issues in the fall of 2014, and in its initial phase
+focused on the U.S. import trades associated
+with America’s three largest container sea -
+ports – the ports of Los Angeles, Long Beach,
+and New York/New Jersey.
+Under the Commission Order, Commis -
+sioner Dye convened three teams of industry
+leaders to develop process innovations that
+would enhance supply chain reliability and
+resilience. Each of the teams was composed of
+roughly a dozen representative supply chain
+organizations, including public port authori-
+ties, marine terminal operators, beneficial
+cargo owners, ocean transportation interme -
+diaries, liner shipping companies, drayage
+trucking companies, longshore labor repre -
+sentatives, rail officials and chassis providers.
+The SCIT approach stressed two fundamen-
+tal factors: innovation and teamwork. By design,
+it encouraged creative interaction among com-
+mitted participants operating within small
+teams that engaged in candid give-and-take
+dialogue and debate. During the planning
+stage Commissioner Dye sought advice from
+a variety of academic and business experts in
+supply chain management, process innova -
+tion, transportation research and the use of
+business teams.
+By April, three teams, totaling 34 volunteer
+industry leaders, had been established. Their
+initial meeting took place on May 3 and 4 in
+Washington, D.C. At the project launch, the
+team members were encouraged to step outside
+their individual enterprise silos and consider
+the international supply chain from an over -
+all systemic
+perspec-
+tive. They
+were also
+directed
+to iden -
+tify one
+inno-
+vative
+supply
+chain
+process
+Supply Chain Innovation
+Teams agree that availability
+of timely and accurate criti-
+cal information is needed to
+enhance visibility and pro-
+mote supply chain efficiency
+
+[[PDF_PAGE_0022]]
+55th Annual Report18
+improvement and develop
+a plan to implement that
+improvement.
+In response, all three teams
+determined that improved
+supply chain visibility would
+be their central focus. They
+agreed that the availability
+of timely and accurate critical
+information was needed to
+achieve the desired enhanced
+visibility and promote supply
+chain efficiency. Conse -
+quently, identifying each
+supply chain actor’s unmet
+critical information needs
+became the primary focus of
+each team’s discussions.
+Similarly, each team con -
+cluded that timely access by
+all supply chain actors to rele-
+vant critical information via a
+national seaport portal should
+be their overall goal. View -
+ing information technology
+as "the new infrastructure,"
+the teams debated how best
+to provide the right informa -
+tion, to the right person, at the
+right time, in order to more
+fully integrate and harmonize
+the supply chain system.
+Subsequent discussions
+occurred in smaller industry
+sub-groups to resolve par -
+ticular operational challenges that interfered
+with effective communication. The focus of
+these meetings related to terminal coordina -
+tion with trucking companies and chassis
+providers.
+By the close of FY 2016, the teams had
+nearly completed their lists of: (a) the criti -
+cal information/data needs of the various
+actors; (b) likely sources of that information;
+(c) timing requirements; and (d) the expected
+Commissioner Rebecca F. Dye presenting from the bench.
+
+[[PDF_PAGE_0023]]
+55th Annual Report 19
+operational improvements that likely would
+result from the parties’ access to that critical
+information. A final meeting of phase one’s
+import teams was scheduled for mid-October.
+By the start of FY 2017 the participants had
+largely completed their detailed consideration
+of high-priority information needs – mainly
+dealing with port/marine terminal operations,
+such as container availability, chassis avail -
+ability, and more efficient drayage trucking
+operations.
+The availability of this critical information
+is expected to help all supply chain actors
+achieve greater system-wide visibility, and
+link their organizations’ behavior in ways that
+better integrate the supply chain and produce
+improved reliability and resilience across the
+entire system.
+By October, initial plans were also underway
+for phase two of the supply chain initiative.
+It is expected to involve both the creation of
+three "export" teams that will begin meeting
+in early 2017; as well as a continued effort
+to pursue options for the development of a
+robust pilot project concerning a national sea-
+port information portal to provide the needed
+critical information.
+
+[[PDF_PAGE_0024]]
+55th Annual Report20
+International Cooperation
+U.S.-China Bilateral Maritime Agree-
+ment Consultations & 8th U.S.-China
+Transportation Forum
+Chairman Mario Cordero and the FMC
+General Counsel participated in the 2016
+U.S.-China Bilateral Maritime Agreement Con-
+sultations, which took place in Los Angeles,
+CA in June. The consultations were govern -
+ment-to-government exchanges between
+relevant agencies from the United States and
+China with jurisdiction over shipping issues.
+Chairman Cordero co-lead the delegation
+and engaged his Chinese counterparts on
+matters related to the consolidation of Chi -
+nese shipping lines, changes in the alliance
+structures, the status of China COSCO Ship -
+ping as a "Controlled Carrier", and NVOCC
+bond recognition.
+Taking place concurrently to the Bilateral
+Maritime Consultations was the 8th U.S.-
+China Transportation Forum, a ministerial
+level bilateral meeting that covered policy
+issues related to all modes of transportation.
+Chairman Cordero engaged in sessions that
+addressed congestion, port productivity, envi-
+ronmental initiatives, and technology.
+Chairman Mario Cordero witnesses the signing of the minutes of the U.S.-China Bilateral
+Maritime Consultations.
+
+[[PDF_PAGE_0025]]
+55th Annual Report 21
+U.S.-Korea Bilateral Maritime
+Consultation
+Commissioner Michael Khouri, accompa -
+nied by the FMC General Counsel, traveled
+to the Republic of Korea as a member of the
+U.S. delegation for consultations with offi -
+cials from the Ministry of Oceans & Fisheries
+in June 2016. Commissioner Khouri engaged
+in government-to-government informational
+dialogues and participated in a tour of a key
+port facility in that country.
+The delegation conducted discussions with
+the Vice Minister and other senior officials
+from the Ministry of Oceans & Fisheries where
+a number of issues of reciprocal interest were
+addressed, including matters related to carrier
+alliances, which are the jurisdiction of the Fed-
+eral Maritime Commission. These discussions
+were held in Sejong City. The delegation also
+had a meeting with U.S. Ambassador Mark
+Lippert in Seoul and visited marine termi -
+nal facilities in Incheon, where they had the
+opportunity to inspect the Sun Kwang New -
+port container terminal.
+U.S.-Japan Bilateral Maritime Meeting
+Commissioner Daniel Maffei and FMC
+staff participated in a U.S.-Japan Bilateral
+Maritime Meeting, hosted by the U.S. Del -
+egation in August 2016. U.S. and Japanese
+Commissioner Michael A. Khouri visits the Sun Kwang Newport container terminal at
+the Port of Incheon as a member of the US Delegation.
+
+[[PDF_PAGE_0026]]
+55th Annual Report22
+officials discussed many mutual issues and
+shared insights on the global maritime land -
+scape. Officials discussed such topics as the
+global alliances, antitrust regulatory system
+review, ocean carrier agreements and anti -
+trust exemption systems, the Panama Canal
+expansion, environmental issues, and an
+exchange program between the U.S. Mari -
+time Administration and the Japan Maritime
+Bureau. Participants agreed that coordination
+on these maritime issues is valuable for pro -
+moting mutual interests in international ocean
+transportation and commerce.
+Trade In Services Agreement
+Negotiations
+On behalf of the Commission, the Office of
+the General Counsel (OGC) acted as a mari -
+time technical advisor to two ongoing trade
+negotiations, Trade in Services Agreement
+(TiSA) and Transatlantic Trade and Invest -
+ment Partnership (T-TIP).
+Commissioner Daniel B. Maffei at the bench
+
+[[PDF_PAGE_0027]]
+55th Annual Report 23
+Protecting the Public
+Strategic Goal 2
+The FMC engages in a variety of activities that protect the public from financial harm,
+including licensing and registering of ocean transportation intermediaries; helping resolve
+disputes about the shipment of goods or the carriage of passengers; investigating and prosecut-
+ing unreasonable or unjust practices, and ruling on private party complaints alleging Shipping
+Act violations. These activities contribute to the integrity and security of the nation’s import
+and export supply chains and ocean transportation system. In addition, the FMC ensures that
+passenger vessel operators maintain proper financial coverage to reimburse cruise passengers
+in the event their cruise is cancelled or to cover liability in the event of death or injury at sea.
+Licensing
+OTIs are transportation middlemen for
+cargo moving in the U.S.-foreign ocean-borne
+trades. There are two types: NVOCCs and
+ocean freight forwarders (OFFs). An NVOCC
+is a common carrier that holds itself out to the
+public to provide ocean transportation, issues
+its own house bill of lading or equivalent
+document, but does not operate the vessel by
+which ocean transportation is provided. An
+ocean freight forwarder domiciled in the U.S.
+arranges for the transportation of cargo with a
+common carrier on behalf of shippers and pro-
+cesses documents related to those shipments.
+Both NVOCCs and OFFs must be licensed
+by the Commission if they are located
+in the U.S. and must establish financial
+responsibility. NVOCCs doing business in
+the U.S.-foreign trades but located outside
+the U.S. (foreign NVOCCs) may choose to
+become FMC-licensed, but are not required
+to do so. If not licensed under the FMC’s pro-
+gram, foreign-based NVOCCs must register
+with the Commission and establish financial
+responsibility.
+NVOCCs wishing to serve in the U.S.-
+China trade may file an Optional Rider for
+Additional NVOCC Financial Responsibility,
+to meet the Chinese government's financial
+responsibility requirements. This rider adds
+additional financial liability to meet the bond
+aggregate amount of $125,000 and is available
+to pay fines and penalties for activities in the
+U.S.-China trades that may be imposed by the
+Chinese government.
+Licensing Activity in FY 2016
+• New OTI applications accepted: 373
+• Amended applications accepted: 283
+• New OTI licenses issued: 309
+• Amended licenses issued: 113
+• Licenses revoked or voluntarily
+surrendered: 293
+
+[[PDF_PAGE_0028]]
+55th Annual Report24
+This rider is accepted as a convenience
+to U.S. NVOCCs. During the fiscal year, 44
+China Bond Riders were received and 32 were
+terminated.
+At the close of the fiscal year, 450 U.S.
+NVOCCs held China Bond Riders.
+Revisions to Licensing Rules
+During the fiscal year, the Commission
+concluded its Rulemaking proceeding in
+Docket 13-05, adopting revisions to the Ocean
+Transportation Intermediary regulations at 46
+C.F.R. Part 515 after considering the exten -
+sive comments submitted to its earlier Notice
+of Proposed Rulemaking (NPR). The Final
+Rule is designed to adapt to changing indus-
+try conditions, improve regulatory oversight,
+improve transparency, streamline FMC busi-
+ness processes, and reduce regulatory burdens
+on the industry. Among other revisions, most
+significantly the Final Rule provides:
+• a requirement to renew licenses and
+registrations every three years through
+an on-line and user-friendly process;
+• a requirement that common carriers
+verify OTI licenses and registrations,
+tariff publication and financial respon-
+sibility, provided such verifications
+can be made at a single location on
+the Commission’s website; and
+• a new expedited hearing procedure
+that would streamline the current
+
+[[PDF_PAGE_0029]]
+55th Annual Report 25
+procedures for denial, revocation
+or suspension of an OTI license.
+The Final Rule was published in the Fed -
+eral Register on November 5, 2015 (80 FR
+68722-68742), effective December 9, 2015,
+except the renewal requirements, which
+became effective December 9, 2016.
+Passenger Vessel Program
+The Commission administers the passenger
+vessel operator (PVO) program as described
+under 46 U.S.C. §§ 44102-44103, requiring evi-
+dence of financial responsibility for vessels
+which have berth or stateroom accommoda -
+tions for 50 or more passengers and embark
+passengers at U.S. ports and territories.
+Certificates of performance cover financial
+responsibility used to reimburse passengers in
+the event their cruise is cancelled. Certificates
+of casualty are required to cover liability that
+may occur for death or injury to passengers or
+other persons on voyages to or from U.S. ports.
+At the close of FY 2016, 225 vessels owned
+by 47 passenger vessel operators were certi -
+fied under the Commission’s program. The
+combined evidence of financial responsibil -
+ity for nonperformance of transportation for
+all cruise vessels in the program is $594 mil -
+lion. Under the Commission’s program, $705
+
+[[PDF_PAGE_0030]]
+55th Annual Report26
+million in aggregate financial responsibility
+for casualty coverage is evidenced under the
+Commission’s program. During the fiscal
+year, 16 new performance certificates and 14
+casualty certificates were issued. No cruise
+operator stopped operation with unperformed
+cruises during this fiscal year.
+The maximum coverage requirement is cur-
+rently $30 million per cruise line. The cap is
+adjusted every two years based on the Con -
+sumer Price Index for All Urban Consumers
+(CPI-U). The next adjustment is set for 2017.
+Consumer Affairs and
+Education
+Dispute Resolution
+The Commission, through its Office of
+Consumer Affairs and Dispute Resolution
+(CADRS) provides alternative dispute resolu-
+tion (ADR), ombuds, and mediation services, to
+assist parties in resolving international ocean
+shipping and cruise disputes, including a
+Rapid Response Team especially focused on
+addressing problems exporters may encoun-
+ter. Such services are available to the shipping
+public at any stage of a dispute, regardless of
+whether litigation has been filed at the FMC
+or another jurisdictional forum.
+The Commission’s ADR services help par -
+ties avoid the expense and delay inherent in
+litigation, and facilitate the flow of U.S. foreign
+commerce. This fiscal year, the Commission
+closed a total of 641 ombuds matters: 180
+involved household goods; 331 cargo other
+than household goods; 126 cruise; and 4 mis-
+cellaneous matters, the total representing a 12
+percent increase from the previous fiscal year.
+Ten mediation matters were also conducted.
+The Commission, through CADRS, contin-
+ued to assist parties that encountered disputes
+relating to port congestion encountered on
+the east and west coasts and assisted parties
+affected by the sudden dissolution of Hanjin
+shipping line – during the fiscal year, CADRS
+responded to 53 such requests.
+The Commission published consumer
+alerts on the Commission’s website to assist
+shippers and staff gave various educational
+presentations to industry and consumer trade
+associations regarding regulatory compliance,
+best practices, and the use of alternative dis -
+pute resolution to resolve regulatory and
+commercial ocean transportation disputes.
+PVO Participants
+• 47 PVOs are certified
+• 225 vessels are certified
+• 16 new Casualty Certificates issued
+in FY 2016
+• 14 new Performance Certificates
+issued in FY 2016
+PVO Program Coverage
+• $594 million aggregate evidence
+of financial responsibility for
+nonperformance
+• $705 million aggregate evidence
+of financial responsibility for
+casualty
+
+[[PDF_PAGE_0031]]
+55th Annual Report 27
+Area Representatives
+Area Representatives (ARs) are officials who
+represent the FMC at regional field offices
+located in Southern California, South Flor -
+ida, New Orleans, New York, Houston and
+Seattle. They investigate alleged violations
+of the shipping statutes, resolve complaints
+and disputes between parties involved in
+international oceanborne shipping (often coor-
+dinating with CADRS staff), and participate in
+local maritime industry groups. ARs provide
+advice and guidance to the shipping public,
+collect and analyze trade information, and
+assess industry conditions.
+During the fiscal year, ARs conducted out-
+reach to the public, consumer groups, trade
+associations, and worked with other Fed -
+eral, state and local government agencies to
+achieve and enhance regulatory compliance
+and protect the public from financial harm.
+They also made presentations to interested
+industry audiences in their regions, explaining
+OTI licensing requirements, bonding require-
+ments, and OTI compliance with tariff filing
+requirements and provisions application to
+NRAs.
+Enforcement, Audits and Penalties
+The Commission’s Bureau of Enforcement
+(BOE) staff and ARs work to obtain compli -
+ance with the shipping statutes administered
+by the Commission to ensure equitable trad -
+ing conditions in the foreign oceanborne
+commerce of the United States.
+During the fiscal year, staff investigated and
+prosecuted possible illegal practices in many
+trade lanes, including the Transpacific, North
+Atlantic, Middle East, South American and
+Caribbean trades. These market-distorting
+activities included various forms of unfiled
+agreements, rebates and absorptions, misde -
+scription of commodities, and unlawful use of
+service contracts, as well as carriage of cargo
+by and for untariffed and unbonded NVOCCs.
+At the beginning of the fiscal year, 15 enforce-
+ment cases were pending final resolution, BOE
+was party to 1 formal proceeding, and there
+were 7 matters pending which BOE was moni-
+toring or providing internal legal advice. The
+ARs referred 22 new investigative matters for
+enforcement action or informal compromise;
+24 matters were compromised and settled,
+administratively closed, or referred for formal
+proceedings; and 12 enforcement cases were
+pending resolution at fiscal year’s end. Two
+new formal proceedings were initiated; 1
+formal proceeding was completed, and 2 were
+pending at the end of the fiscal year.
+Major investigations undertaken or com -
+pleted during the fiscal year addressed VOCCs
+seeking to operate pursuant to agreements that
+were not filed with the Commission, as well
+as deceptive or fraudulent practices of cer -
+tain OTIs operating in the China-U.S. inbound
+trades. Of note, significant efforts in pursuing
+inquiries regarding certain car carriers in the
+Japan/South Korea/China-U.S. trade, Europe-
+U.S. trade and in other U.S. trades, resulted
+in a joint settlement with Wallenius Wilhelm-
+sen Logistics AS and Eukor Car Carriers, Inc.,
+which included payment of $1.5 million in
+civil penalties. The car carrier investigations
+
+[[PDF_PAGE_0032]]
+55th Annual Report28
+spawned an additional $170,000 settlement
+with Volkswagen Konzernlogistiks GmbH
+& Co. related to unfiled carrier agreements.
+Also of note, in October 2015, the Com -
+mission ordered Washington Movers, Inc., a
+licensed OTI to show cause why the Com -
+mission should not revoke its license due to
+the felony weapons smuggling convictions of
+its qualifying individual and various alleged
+regulatory violations. The matter is pending
+before the Administrative Law Judge.
+The Formal Investigations section of this
+report includes more information on formal
+proceedings concluded during the fiscal year.
+Cumulatively, the Commission collected $3.3
+million in penalties which were deposited
+directly into the U.S. Treasury General Fund.
+Most of these investigations were resolved
+informally, some with compromise settle -
+ments and civil penalties. A list of parties and
+penalties can be found in Appendix D.
+The Commission’s compliance audit pro -
+gram reviews the operations of licensed OTIs
+in order to assist them in complying with
+the statutory requirements and the Commis -
+sion’s rules and regulations. The program also
+reviews entities holding themselves out as
+VOCCs, where there is no indication of actual
+vessel operations. During the fiscal year, 223
+audits were commenced, 208 audits were com-
+pleted (including audits carried over from FY
+2015), and 15 remained pending at the close
+of the fiscal year.
+Inter-Agency Cooperation
+The Commission regularly works with
+a number of other federal, state, and local
+transportation and law enforcement agen -
+cies, either through established memoranda
+of understanding (MOU), collaborations or
+partnerships to address specific transportation
+related policies, issues or incidents in both
+the U.S. domestic shipping arena and inter -
+national liner shipping.
+Under the MOU between the FMC and the
+Federal Motor Carrier Safety Administration
+(FMCSA), Commission staff continued to
+participate in the FMC -
+SA’s Moving Fraud Task
+Force and Moving Fraud
+Partnership initiatives.
+CADRS and the Commis -
+sion’s ARs worked with
+FMCSA on two matters
+involving ocean transpor-
+tation intermediaries that
+had their licenses revoked
+and subsequently failed to
+deliver shipments. In the
+first matter, the agencies
+worked together to locate
+FMC works with Federal Partners to Protect
+the Public:
+Federal Motor Carrier Safety
+Administration
+Federal Bureau of Investigation
+Alcohol, Tobacco and Firearms
+(DOJ)
+Customs and Border Patrol
+(DHS)
+Immigration and Customs
+Enforcement (DHS)
+Joint Terrorism Task Force
+Census Bureau (DOC)
+Coast Guard
+Export-Import Bank
+
+[[PDF_PAGE_0033]]
+55th Annual Report 29
+a missing shipment that contained medical
+supplies for a seriously ill child. In the second
+matter, the agencies worked together with a
+foreign consulate office to attempt to locate a
+missing household goods shipment.
+Interaction between the Commission and
+the U.S. Customs and Border Protection (CBP)
+on the exchange of investigative informa -
+tion continues to be beneficial to all parties.
+Cooperation with CBP included staff interac-
+tions and joint field operations to investigate
+entities suspected of violating both agencies’
+statutes or regulations. Such cooperation also
+has included local police and other govern -
+ment entities, including the U.S. Attorney’s
+Office, Federal Bureau of Investigation, and
+Immigration and Customs Enforcement, when
+necessary.
+The Commission completed its fourth year
+under a formal MOU with the Census Bureau,
+U.S. Department of Commerce, which pro -
+vides the FMC with access to the Census’
+Automated Export System (AES) database. The
+Commission uses the AES database to review
+confidential U.S. export shipment data for law
+enforcement purposes. The Commission also
+continued its membership in the Homeland
+Security Investigations-led National Intel -
+lectual Property Rights Coordination Center
+Commissioner William P. Doyle presents to FMC staff
+
+[[PDF_PAGE_0034]]
+55th Annual Report30
+(IPR Center), a partnership of 21 Federal and
+international agencies targeting intellectual
+property- and trade-related crimes.
+The ARs continued to work closely with a
+number of law enforcement agencies, includ-
+ing local police jurisdictions in New York,
+New Jersey, South Florida and Houston, in
+matters relating to international shipping,
+such as the export of stolen motor vehicles.
+They also participated in various enforcement
+initiatives sponsored by Federal law enforce-
+ment agencies: the U.S. Department of Justice
+(DOJ), Alcohol, Tobacco and Firearms (ATF);
+FBI; the Department of Homeland Security
+(including CBP and ICE); the Joint Terrorism
+Task Force (JTTF); Department of Commerce;
+Coast Guard; Export-Import Bank; and the
+FMCSA. These activities included criminal
+and civil investigations of entities licensed or
+regulated by the Commission, interdiction of
+illicit imports and exports, consultation on car-
+rier practices, procedures and documentation
+relating to shipping and international trade,
+and coordinated action seeking to protect the
+shipping public from deceptive and unfair
+practices.
+The FMC actively participates in the U.S.
+Committee on the Marine Transportation
+System (CMTS), a partnership of Federal
+departments and agencies with responsibility
+for the Marine Transportation System (MTS).
+The CMTS is authorized by Congress to assess
+the adequacy of the MTS and coordinate
+Federal maritime policy amongst the many
+Federal maritime interests. The Chairman sits
+on the Committee’s Cabinet-level Committee
+and the Commission is represented on the
+sub-Cabinet Coordinating Board and in the
+work of the various CMTS Integrated Action
+Teams and Task Teams.
+Through CADRS, the Commission par -
+ticipates and takes a leadership role in the
+Interagency ADR Working Group (IADRWG)
+and this year led a long-term project to develop
+a Spectrum of Collaborative Processes to
+meet the needs of federal agencies that are
+exploring and implementing new collabora -
+tive dispute prevention and resolution tools.
+CADRS staff also led an effort to develop an
+interagency panel discussion which explored
+new mediation convening techniques and the
+implementation of other ADR tools to assist
+disputing parties. CADRS also assisted with a
+report on federal ADR to be issued in FY 2017
+by the DOJ and the IADRWG.
+Leveraging Technology
+The Commission continues to prioritize
+information technology (IT) investments to
+improve information security, efficiency, and
+greater public access, while reducing costs
+over time. New online services were devel -
+oped and launched through the Commission's
+public website during the fiscal year that
+automated two paper-based filing systems,
+simplifying stakeholder interaction with the
+Commission; eliminating paper, postage or
+courier costs; and providing faster publication
+of information on the FMC's website.
+Foreign-based unlicensed NVOCCs may
+now renew their FMC registrations (Form
+FMC-65) via an online process, and vessel-
+operating common carriers and marine
+terminal operators have a new Agreements
+system option to electronically file agreements
+
+[[PDF_PAGE_0035]]
+55th Annual Report 31
+for Commission review. Both systems allow
+faster publication of critical information used
+by the shipping public to make business deci-
+sions about a particular NVOCC or general
+awareness about a newly filed agreement for
+which there may be interest in filing com -
+ments with the Commission.
+The FMC is implementing its Information
+Technology Capital Plan, focusing on complet-
+ing major upgrades to internal IT systems to
+improve data support and efficiency for all
+Commission programs and research projects,
+to simplify stakeholder interaction and filing
+processes, and to ensure that the FMC’s sys -
+tems meet cybersecurity best practices. Work
+continued on the Enterprise Content Man -
+agement platform, and work was started on
+a major project to make extensive improve -
+ments to the information architecture of the
+Commission’s public website.
+
+[[PDF_PAGE_0036]]
+55th Annual Report32
+
+[[PDF_PAGE_0037]]
+55th Annual Report 33
+Developments in Major
+U.S. Foreign Trades
+Worldwide
+The world’s container trade expanded by
+just 1 percent in fiscal year 2016 compared to
+growth of 3 percent in 2015. As the fiscal year
+ended, 371 container ships lay idle, represent-
+ing nearly 7 percent of the total fleet capacity
+measured in TEUs. In contrast, 243 ships or 4
+percent of the containership fleet capacity lay
+idle at the end of fiscal year 2015.
+Due to a number of liner carrier mergers
+and acquisitions, the world’s container ship -
+ping industry became more concentrated
+during the fiscal year. The top three container
+operators controlled 39 percent of the world’s
+containership capacity; the top five controlled
+52 percent; and the top ten controlled 67 per-
+cent. A.P. Moller-Maersk A/S (15 percent),
+Mediterranean Shipping Company SA (14
+percent) and CMA CGM S.A. (11 percent)
+continued to hold the top three positions in
+terms of vessel capacity deployed.
+Container volumes in U.S. liner trades
+during the fiscal year expanded by only 1
+percent to 31.9 million TEUs, compared to
+31.5 million last year. The U.S. share of the
+world’s container trades was 16.9 percent. U.S.
+container imports expanded slightly by 1.6
+percent to 20.4 million TEUs, compared to 20
+million in 2015. This was the third consecutive
+year that U.S. imports surpassed the pre-Great
+Recession record of 18.6 million TEUs reached
+in FY 2007.
+U.S. container exports increased by less than
+1 percent to nearly 11.5 million TEUs. This
+was a significant improvement over the 5 per-
+cent contraction witnessed during the same
+period last year. As a result, the U.S. container
+imbalance worsened only slightly; for every
+100 loaded containers exported from the U.S.,
+177 were imported, compared to 175 imported
+in FY 2015.
+Worldwide
+• For the seventh consecutive year,
+worldwide container trade grew –
+expanding by 1 percent.
+• Continuing global vessel overcapacity
+is indicated as the number of
+container ships that lay idle increased
+by more than half by year’s end.
+• The world’s top 3 operators controlled
+39 percent of the worldwide vessel
+capacity.
+U.S. Liner Trades
+• Container volumes in the U.S.
+liner trades (imports and exports
+combined) grew for the seventh
+consecutive year.
+• Imported cargo continued to outpace
+exports which worsened the U.S.
+container imbalance slightly.
+
+[[PDF_PAGE_0038]]
+55th Annual Report34
+The world’s container ship fleet expanded
+slightly with nominal capacity growing by
+approximately 3 percent. At the end of the
+fiscal year, 5,148 container ships, with a total
+fleet capacity of 20.3 million TEUs, were avail-
+able to serve the world’s container trades and
+there were orders worldwide for 432 new
+container ships with an aggregate capacity
+of 3.3 million TEUs - 16 percent of the existing
+fleet capacity. Vessels with nominal capacities
+exceeding 10,000 TEUs comprised 25 percent
+of the existing container ship fleet capacity
+and 81 percent of the orderbook fleet capacity
+at year-end, reflecting the continued increas-
+ing size of containerships being ordered.
+Asia
+In terms of container cargo volumes, Asia
+is our largest trading partner. The U.S. traded
+19.9 million TEUs with the region in FY 2016
+(exports and imports combined), representing
+61 percent of total U.S. container
+trade. The U.S. imports sub -
+stantially more container cargo
+from the region than it exports.
+In FY 2016, the U.S. imported
+13.9 million TEUs of goods from
+Asia, a 1.7 percent increase over
+the previous fiscal year, while
+the U.S. exported almost 6 mil -
+lion TEUs, an increase of about
+1.5 percent over the same period.
+Fifty-one percent of U.S. container trade was
+with Northeast Asia (China, Japan, South
+Korea, Taiwan, and Hong Kong). Countries
+in Southeast Asia (Brunei, Cambodia, Indo -
+nesia, Malaysia, the Philippines, Singapore,
+and Vietnam) collectively accounted for 10
+percent of total U.S. trade in 2016.
+More than half of all imports from Asia
+flowed through the ports of Los Angeles and
+Long Beach. U.S. West Coast ports collec -
+tively handled almost two-thirds of all Asian
+imports and exports. U.S. East and Gulf Coasts
+collectively handled almost 35 percent or 7
+million TEUs worth of goods arriving from
+or destined to Asia. Of note, the largest con -
+tainership to call in the U.S., the CMA CGM
+Benjamin Franklin, with a capacity of 17,859
+TEUs, made three trips across the Pacific to the
+U.S. West Coast to demonstrate the
+feasibility of deploying ships of
+this size in the Asia-U.S. trade.
+The Transpacific Stabilization
+Agreement (TSA) is the major
+rate discussion agreement in the
+transpacific trade encompass -
+ing the inbound and outbound
+transpacific container trades. Its
+geographic scope includes por -
+tions of the Indian Subcontinent
+(i.e., Bangladesh, Pakistan and Sri Lanka, but
+not India or the Middle East). During the fiscal
+year, the thirteen TSA members’ share of the
+trade between the U.S. and Asia remained
+steady at 90 percent despite losing two mem-
+bers during the fiscal year.
+This reduction was due to the merger of
+China Shipping with COSCO, and the exit of
+K Line from the Agreement. Two more carriers
+are expected to resign from TSA (NYK Line
+and Hanjin Shipping), leaving eleven TSA
+members. Hanjin Shipping declared bank -
+ruptcy during the last quarter of the fiscal year,
+the largest in 30 years; while Japan’s three
+Asia accounts for
+nearly 68% of contain-
+erized imports to the
+U.S.; and about half of
+containerized exports
+from the U.S
+
+[[PDF_PAGE_0039]]
+55th Annual Report 35
+major ocean carriers, NYK Line, MOL, and K
+Line announced plans to spin off their respec-
+tive container divisions and merge them in
+July 2017.
+Indian Subcontinent and Middle East
+The Indian Subcontinent and Middle East
+regions combined accounted for over 6 per -
+cent of total U.S. container volumes in FY
+2016, with the Indian Subcontinent being the
+larger of the two. U.S. container trade with
+the Indian Subcontinent alone (exports and
+imports combined) grew by 7.2 percent, total-
+ing about 1.35 million TEUs. Both imports and
+exports contributed to the rise in trade with
+the region. The U.S. imported 809,000 TEUs
+from the Indian Subcontinent, an increase of 2
+percent from the prior year. American exports
+to the countries in this region grew to 536,000
+TEUs, an increase of over 16 percent compared
+to 2015.
+In contrast, overall trade between the U.S.
+and the Middle East shrank slightly over the
+past year, declining by almost 2 percent to
+about 770,000 TEUs, due to fewer exports
+to the region. In FY 2016, the U.S. exported
+551,000 TEUs to the Middle East, a decrease
+of over 5 percent compared to the prior year.
+Although U.S. imports of Middle Eastern
+goods increased by almost 9 percent over
+the year, totaling 218,000 TEUs, that increase
+was not enough to make up for the decrease
+in exports, and thus, overall trade with the
+Middle East declined.
+In this region, TSA is the rate discussion
+agreement covering part of the U.S. inbound
+and outbound container trades. For the fiscal
+year, TSA’s market share for the trade between
+the U.S. and Bangladesh, Pakistan, and Sri
+Lanka was 92 percent. These three countries
+collectively comprise approximately 380,000
+TEUs of U.S. trade; India being by far our
+largest trading partner in the region, with
+combined imports and exports total roughly
+950,000 TEUs. There are no other rate dis -
+cussion agreements covering the trade lanes
+between the U.S. and India or the Middle East.
+North Europe
+In FY 2016, cargo volume between the U.S.
+and North Europe grew at less than 1 per -
+cent in both trade directions in comparison
+to the preceding period. The decision of the
+U.K. to exit the European Union caused the
+British pound to plummet against the U.S.
+dollar, which hampered U.S. container export
+growth. A decline in U.S. imports of European
+During FY 2016, 9 out of 10 con-
+tainers between the US and Asia
+were moved by a TSA carrier.
+U.S. trade with the Indian Sub -
+continent and Middle East
+experienced contrasting trends
+in FY 2016: trade with the former
+region expanded, while trade with
+the latter region contracted.
+
+[[PDF_PAGE_0040]]
+55th Annual Report36
+automobiles, in particular Volkswagen, also
+caused a slump in U.S. container imports of
+European auto parts.
+In addition, progress in concluding the
+Transatlantic Trade and Investment Partner -
+ship which was anticipated to contribute to a
+growth in trade, is presently uncertain. The
+cargo volume carried by MSC, Hapag Lloyd,
+CMA CGM, and Maersk Line accounted for 58
+percent of the total trade. The supply of vessel
+capacity contracted by 13 percent in both trade
+directions, while average vessel utilization
+was 83 percent inbound and 59 percent out -
+bound. By the end of the fiscal year, freight
+rates in both trade directions had declined
+markedly in comparison to the previous year.
+In contrast to the prior fiscal year when car-
+rier services were introduced or expanded in
+the trade, ocean carriers made service modi -
+fications that removed vessel capacity. In July
+2016, for example, CMA CGM, Hamburg Sud,
+and United Arab
+Shipping reduced
+the pendulum
+(Vespucci) service
+operated under
+their vessel shar -
+ing agreement to
+a loop (Liberty
+Bridge) service.
+Additionally, car-
+rier parties to the 2M
+and G6 Alliances terminated their TA4 and
+AX4 loop services, respectively, due to slack
+demand.
+Mediterranean
+Conditions in the container cargo market
+between the U.S. and the Mediterranean
+remained mixed, as the volume of U.S. con -
+tainer exports to the region declined by
+5 percent in fiscal year 2016 compared to
+the preceding period, while U.S. container
+imports from the region rose by 8 percent.
+Import containers exceeded export containers
+by a ratio of 2.25 to 1. Major imported com -
+modities included wine, ceramic tiles, and
+furniture, while wood pulp, paper, nuts and
+cotton were some of the top U.S. export com-
+modities in the trade. The volume of cargo
+carried by MSC, Hapag Lloyd, Maersk Line,
+and CMA CGM accounted for 75 percent of
+the total trade.
+During the year, a new weekly loop ser -
+vice was added to the trade. In February 2016,
+the Hanjin/UASC/CMA CGM/COSCON Vessel
+Sharing Agreement was formed, establishing
+the jointly operated Amerigo Express service
+between U.S. Atlantic ports and ports in Italy,
+France, Spain, and Malta.
+The agreement supersedes a jointly oper -
+ated pendulum service that was originally
+partnered with China Shipping but reconfig-
+ured after COSCO absorbed the carrier. Also,
+Hanjin Shipping discontinued operations in
+September 2016 after the carrier was granted
+court receivership in South Korea. Due pri -
+marily to the launch of this new weekly
+service, the supply of vessel capacity in the
+trade increased by 10 percent by the end of
+the fiscal year.
+Freight rates to and
+from North Europe
+declined markedly
+compared to previ -
+ous year.
+
+[[PDF_PAGE_0041]]
+55th Annual Report 37
+Australia and Oceania
+The Oceania trade includes the nations and
+territories of Australia, New Zealand, Papua
+New Guinea, Western Samoa, and other South
+Pacific Islands. Compared to the preceding
+fiscal year, U.S. container exports to the region
+declined by 4 percent, and container imports
+to the U.S. declined by 5 percent. Container
+exports exceeded imports by a ratio of 1.37 to
+1. Container imports of meat and wine, the top
+commodities from the region, accounted for
+33 percent of the total import cargo volume.
+The cargo volume carried by Hamburg Sud,
+ANL Singapore Ptd. Ltd. (a subsidiary of
+CMA CGM), Hapag Lloyd, and Maersk Line
+accounted for 64 percent of the total trade.
+There are two main rate discussion agree -
+ments in the trade, the United States/Australasia
+Discussion Agreement (USADA) in the out -
+bound direction, and the Australia and New
+Zealand-United States Discussion Agreement
+(ANZUSDA). During the fiscal year, a number
+of carriers withdrew from the rate discus -
+sion agreements in the trade. In June 2016,
+Compagnie Maritime Marfret S.A. (Marfret)
+and Hapag Lloyd withdrew from USADA,
+reducing the trade share of the agreement
+from 75 percent to 64 percent. Also in 2016,
+Maersk Line and Hapag Lloyd withdrew from
+ANZUSDA, reducing the trade share of the
+agreement from 96 percent to 76 percent. In
+the Pacific Islands, Marfret and CMA CGM
+exited from the Pacific Island Discussion Agree-
+ment in June 2016, reducing the trade share of
+the agreement from 81 percent to 37 percent.
+Africa
+The volume of containerized cargo between
+the U.S. and the nations in Africa dropped by
+0.2 percent in FY 2016, which was a significant
+deceleration in the drop in volumes experi -
+enced in the previous two years.
+The volume of containerized cargo had
+dropped by 6 percent in FY 2015 and 4.3 per-
+cent in FY 2014. Compared to the previous
+year, U.S. exports to the nations of Africa
+increased by 1.8 percent while U.S. imports
+from Africa declined by 4.7 percent.
+Nevertheless, because the total volume of
+exports to the nations of Africa continued to
+substantially exceed imports from the region,
+the volume of containerized cargo between the
+U.S. and Africa still fell slightly; for every one
+container moving inbound from the nations in
+Africa to the U.S., a little more than 2.5 contain-
+ers moved outbound
+from the U.S.
+Major U.S. export
+commodities to
+African nations
+during the period
+included automo -
+biles and poultry,
+while cocoa bean
+and citrus fruit were
+among the top import commodities. The
+Republic of South Africa is the largest U.S.
+liner trading nation on the continent, account-
+ing this year for about 25 percent of the
+containerized cargo.
+Major U.S. exports
+to African nations
+included automo-
+biles and poultry.
+
+[[PDF_PAGE_0042]]
+55th Annual Report38
+Approximately 67 percent of the container
+cargo in the trade was carried by MSC and
+Maersk Line (including Maersk Line’s sub -
+sidiary, Safmarine). Under the Southern
+Africa Agreement, MSC and Maersk continue
+to share space on each other’s ships in the
+America Express (AMEX) service between
+the U.S. Atlantic Coast and the Republic of
+South Africa with calls at Cape Town, Port
+Elizabeth, and Durban.
+Central America and the Caribbean
+In FY 2016, U.S. export cargo volumes to
+Central America increased by 5 percent to
+641,000 TEUs and U.S. import cargo vol -
+umes increased by almost 3 percent to 770,000
+TEUs. Paper and paperboard (including waste
+paper) accounted for the largest share of U.S.
+containerized exports. Other major export
+commodities included fabrics, yarns, and raw
+cotton. Grocery products, used automobiles
+and apparel were also significant exports. On
+the import side, fresh fruit made up a major -
+ity of all imports from the region. Roughly
+three quarters of fresh fruit imports consisted
+of bananas. The second largest commodity
+imported from this region was clothing and
+apparel.
+Five of the largest regional carriers in the
+U.S./Central America trade participated in the
+Central America Discussion Agreement (CADA):
+Seaboard Marine, Crowley Latin America Ser-
+vices, King Ocean Services, Dole Ocean Cargo
+Express, and Great White Fleet Liner Service
+Ltd.
+In the liner trade between the U.S. and the
+Caribbean, U.S. exports, mainly of food, con-
+sumer goods, and manufactured products
+increased just over 1 percent to 519,000 TEUs.
+Imports to the U.S. decreased just over 1 per-
+cent to approximately 163,000 TEUs.
+Carriers in the U.S./Caribbean trade par -
+ticipated in two rate discussion agreements
+covering geographically discrete trades: (1)
+the Aruba Bonaire and Curacao Discussion
+Agreement, and (2) the Caribbean Shipowners
+Association.
+South America
+The volume of containerized cargo between
+the U.S. and South American nations decreased
+by about 1.5 percent in FY 2016. While imports
+to the U.S. from South America continued to
+grow at about 8 percent as it had done in the
+previous fiscal year, exports to South America
+declined almost 11 percent, which was a sig -
+nificantly larger decrease than in the previous
+two fiscal years.
+For every ten containers moving inbound
+from countries in South America to the U.S.,
+less than nine containers moved outbound
+from the U.S.
+Major U.S. export commodities to South
+America included automobile parts and
+chemical products, while bananas, wood, and
+coffee were among the top import commodi-
+ties. Brazil and Chile are the largest U.S. liner
+
+[[PDF_PAGE_0043]]
+55th Annual Report 39
+trading nations on the continent, accounting
+this year for about 53 percent of the container-
+ized cargo moving to and from the U.S.
+Members of the West Coast of South Amer-
+ica Discussion Agreement (WCSADA) carried
+79 percent of container cargo exports from
+the U.S. to the West Coast of South America,
+and nearly 62 percent of imports to the U.S.
+from the West Coast of South America. The
+members of this agreement consist of three
+regional carriers (Seaboard Marine, Trinity
+Shipping, and King Ocean Services) and four
+global carriers (CMA-CGM, Hamburg Sud,
+Hapag-Lloyd, and MSC).
+Independent carriers offering service out -
+side of WCSADA included Dole Ocean Liner
+Express and Great White Fleet, which mainly
+transport proprietary cargo such as fresh
+fruits and vegetables. WCSADA also faces
+competition from other major carriers serv -
+ing the trade through transshipment hubs in
+Mexico, Panama, and the Caribbean. There
+were no active rate discussion agreements in
+the trade between the U.S. and the East Coast
+of South America.
+Tanga Fitzgibbon and Gary Kardian of the Bureau of Trade Analysis
+
+[[PDF_PAGE_0044]]
+55th Annual Report40
+
+[[PDF_PAGE_0045]]
+55th Annual Report 41
+Top Twenty U.S. Liner Cargo
+Trading Partners
+The Foreign Shipping Practices Act requires
+the FMC include in its annual report to Con -
+gress “a list of the twenty foreign countries
+which generated the largest volume of ocean-
+borne liner cargo for the most recent calendar
+year in bilateral trade with the United States,”
+46 U.S.C. § 306 (b)(1).
+The Journal of Commerce’s Port Import
+Export Reporting Service (PIERS) database
+was used to derive the Commission’s list of
+top-twenty trading partners. The most recent
+complete calendar year for which data are
+available is 2015. Table 1 on the next page lists
+the twenty foreign countries that generated
+the largest volume of oceanborne liner cargo
+in bilateral trade with the United States in
+2015. The figures in the table represent each
+country’s total U.S. liner imports and exports
+combined in thousands of loaded TEUs.
+Bilateral trade with the United States’ top-
+twenty liner trading partners increased to near
+80 percent of the nation’s total liner trade in
+2015. The total volume of trade with our top-
+twenty liner trading partners increased by 2
+percent year-to-year.
+Membership of the top-twenty list has
+remained the same since 2009. This year,
+however, several changes in ranking occurred
+among the top-twenty countries. Reflecting
+the greatest year-to-year liner volume increase
+of 16 percent, Vietnam rose above Germany
+and India in the rankings to occupy 5th place.
+Germany and India dropped one rank each
+to 6th and 7th with 6 percent and 3.9 percent
+increase in volume respectively. Belgium and
+Luxembourg also rose in the rankings to 8th
+place, trading places with Hong Kong which
+slipped to 9th with the greatest decrease in
+volume of -8.7 percent. Brazil dropped two
+rank positions from 10 to 12 and was one
+of 6 countries that experienced lower liner
+cargo volumes this year (the others being
+Hong Kong, Taiwan, Japan, Australia, and
+Netherlands).
+Vietnam, Belgium and Luxembourg,
+Indonesia and Italy climbed up in the
+rankings, while Germany, India, Brazil
+and Hong Kong slipped down slightly
+in the ratings.
+
+[[PDF_PAGE_0046]]
+55th Annual Report42
+Top Twenty U.S. Liner Cargo Trading Partners
+(FY2015 Imports and Exports)
+Rank Country TEUs
+(000)
+1 China (PRC) 12,156
+2 Japan 1,352
+3 South Korea 1,339
+4 Taiwan (ROC) 1,058
+5 Vietnam 1,017
+6 Germany 985
+7 India 919
+8 Belgium &
+Luxembourg
+655
+9 Hong Kong ¹ 637
+10 Indonesia 579
+11 Italy 577
+12 Brazil 576
+13 Thailand 561
+14 Netherlands 498
+15 United Kingdom 436
+Rank Country TEUs
+(000)
+16 Guatemala 419
+17 Chile 371
+18 Malaysia 364
+19 Honduras 356
+20 Australia 327
+¹ Hong Kong reverted to Chinese control in July 1997.
+However, PIERS continues to report data separately
+for Hong Kong due to its status as a major transship -
+ment center.
+
+[[PDF_PAGE_0047]]
+55th Annual Report 43
+Foreign Shipping Practices Act
+The Commission has the authority to
+address restrictive foreign shipping practices
+under section 19 of the Merchant Marine Act
+of 1920 and the Foreign Shipping Practices
+Act of 1988 (FSPA). Section 19 empowers the
+Commission to make rules and regulations
+governing shipping in the foreign trade to
+adjust or meet conditions unfavorable to ship-
+ping. The FSPA directs the Commission to
+address adverse conditions that affect U.S.
+carriers in foreign trade and that do not exist
+for foreign carriers in the United States.
+The Commission, both through Commission
+action and through its Office of the General
+Counsel (OGC), informally pursued several
+matters involving potentially restrictive for -
+eign practices. This included interpretations
+of existing legislation, foreign legislation and
+administrative law, and regulations of non-
+domestic carriers’ terminal handling charges.
+No formal FSPA action by the Commission
+was necessary.
+Tyler Wood, General Counsel, and William Shakely, Deputy General Counsel
+
+[[PDF_PAGE_0048]]
+55th Annual Report44
+Controlled Carriers
+A controlled carrier is an ocean common
+carrier that is, or whose operating assets are,
+owned or controlled directly or indirectly by
+a foreign government. The Shipping Act pro-
+vides that no controlled carrier may maintain
+rates or charges in its tariffs or service con -
+tracts that are below a level that is just and
+reasonable, nor may any such carrier establish,
+maintain, or enforce unjust or unreasonable
+classifications, rules or regulations in those tar-
+iffs or service contracts. In addition, tariff rates,
+charges, classifications, rules, or regulations of
+a controlled carrier may not, without special
+permission of the Commission, become effec-
+tive sooner than the 30th day after the date of
+publication. The Commission’s staff monitors
+U.S. and foreign trade press and other infor -
+mation sources to identify controlled carriers
+and any unjust or unreasonable controlled
+carrier activity that might require Commis -
+sion action. In FY 2016, six controlled carriers
+operated in the U.S. trades:
+1. American President Lines, Ltd. and APL
+Co., Pte. – Republic of Singapore
+2. COSCO Container Lines Company, Ltd.
+- People’s Republic of China
+3. China Shipping Container Lines Co.,
+Ltd. and China Shipping Container
+Lines (Hong Kong) Company, Ltd. -
+People’s Republic of China
+4. Hainan P.O. Shipping Co., Ltd. – Peo -
+ple’s Republic of China
+5. CNAN Nord SPA – People's Democratic
+Republic of Algeria
+6. United Arab Shipping Co. SAG – State
+of Qatar
+
+[[PDF_PAGE_0049]]
+55th Annual Report 45
+Formal Investigations, Private
+Complaints and Litigation
+Adjudicative proceedings before the Commission are commenced by the filing of a complaint,
+or by order of the Commission upon petition, or upon its own motion. Types of docketed
+proceedings include:
+• Private complaints: Any person may file a formal complaint alleging violations of specific
+sections of the Shipping Act found at 46 U.S.C. Chapter 411. Formal complaints are
+generally assigned to an Administrative Law Judge (ALJ) who issues an initial decision
+which is reviewed by the Commission.
+• Small claims complaints: For claims of $50,000 or less, an informal complaint may be
+filed. The complaint is handled by a settlement officer for resolution using informal
+procedures that do not tend to include discovery or motions practice.
+• Investigative proceedings: The Commission may investigate the activities of ocean
+common carriers, OTIs, MTOs, and other persons to ensure effective compliance with
+the statutes and regulations administered by the Commission. Formal orders of inves-
+tigation and hearing are assigned to an ALJ for an initial decision and may be reviewed
+by the Commission.
+In FY 2016, 12 new private party complaints and 1 small claims complaint were filed and
+1 new formal investigation was instituted. The Office of Administrative Law Judges (OALJ)
+issued 10 initial decisions, including 1 initial decision on default, 1 initial decision awarding
+attorney, 3 initial decisions approving full settlement, and 1 initial decision approving partial
+settlements. The Commission issued notices finalizing the ALJ’s decisions in 4 private complaint
+cases and 1 investigative proceeding. Two ALJ’s decisions were affirmed in whole or in part
+by the Commission on exceptions or its own review, and 5 proceedings remained pending
+before the Commission.
+The Commission’s final issuances in these and other matters are detailed below.
+The following summarizes the results of docketed proceedings concluded during FY 2015
+by the ALJs and the Commission.
+
+[[PDF_PAGE_0050]]
+55th Annual Report46
+Formal Investigations
+John T. Barbour t/d/b/a Barbour Auto
+Group, Barbour Auto Sales, Barbour
+Shipping, and Barbour Shipping
+and Transportation Inc. – Possible
+Violations of Section 8 and 19 of the
+Shipping Act of 1984, [Docket No.
+15-03]
+On May 27, 2015, the Commission issued
+an Order of Investigation and Hearing to
+determine whether Respondents, a licensed
+OTI, violated the Shipping Act by operating
+as a non-vessel-operating common carrier
+(NVOCC): (1) without keeping open for public
+inspection a tariff containing rates, charges,
+rules, and practices in violation of section
+8 of the Shipping Act, 46 U.S.C. § 40501; (2)
+without a license issued by the Commission
+in violation of section 19(a), 46 U.S.C. § 40901;
+and (3) without filing evidence of financial
+responsibility in violation of section 19(b), 46
+U.S.C. § 40902. Respondents did not respond
+to the Order and failed to respond to an order
+to show cause. On January 20, 2016, the ALJ
+issued an initial decision on default imposing
+a civil penalty and ordering Respondent to
+cease operating as an NVOCC. On February
+23, 2016, the Commission issued a Notice Not
+to Review.
+Private Complaints
+Yakov Kobel and Victor Berkovich
+v. Hapag-Lloyd A.G., Hapag-Lloyd
+America, Inc., Limco Logistics, Inc.,
+and International TLC, Inc. [Docket
+No. 10-06]
+This proceeding was initiated by a complaint
+filed with the Commission on July 6, 2010,
+alleging that Respondents violated various
+sections of the Shipping Act. After discovery,
+an evidentiary hearing, and briefing, on Feb-
+ruary 14, 2012, an Initial Decision was issued
+dismissing the complaint. On July 12, 2013, the
+Commission issued an Order Vacating Initial
+Decision In Part and Remanding for Further
+Proceedings. On July 30, 2014, the ALJ issued
+an Initial Decision on remand finding that the
+Respondents violated 46 U.S.C. § 41102(c),
+and ordering that the Respondents be jointly
+and severally liable to the Complainants for
+a reparation award of $126,072. On August
+12, 2014, the Commission served a notice that
+it would review the decision. Exceptions to
+the ALJ’s decision were filed on September
+22, 2014. On May 26, 2015, the Commission
+entered an order imposing liability on several
+respondents, including Limco Logistics, Inc.,
+and International TLC, Inc. Limco requested
+that the Commission reconsider its decision.
+The Commission denied reconsideration on
+May 5, 2016. Complainants filed a petition
+for attorney fees, which is pending before the
+Commission.
+Maher Terminals, LLC v. The Port
+Authority of New York and New Jersey
+[Docket No. 12-02]
+On March 30, 2012, Maher Terminals, LLC,
+filed a complaint against the Port Authority
+alleging numerous violations of 46 U.S.C.
+§§ 41102(c), 41106(1), 41106(2), 41106(3)
+
+[[PDF_PAGE_0051]]
+55th Annual Report 47
+involving the Port Authority’s change-of-
+control practices, preferential treatment of
+ocean-carrier-affiliated terminals, lease terms,
+letting of a parcel adjoining the Global ter -
+minal, and preferential treatment of another
+terminal operator. On January 30, 2015, the
+ALJ granted the Port Authority’s motion to
+dismiss the complaint for failure to state a
+claim. The Commission affirmed the ALJ’s
+dismissal of ten of the counts and reversed
+the ALJ as to four counts, which the Com -
+mission remanded for further proceedings
+on December 18, 2015. On September 30, 2016,
+the parties jointly moved for approval of a
+settlement agreement and dismissal of this
+case and Docket No. 08-03.
+Edaf Antillas, Inc. v. Crowley Carib -
+bean Logistics, LLC; IFS International
+Forwarding, S.L.; and IFS Neutral
+Maritime Services [Docket No. 14-04]
+On April 28, 2014, Edaf Antillas filed a
+complaint with the Commission alleging that
+Respondents violated the Shipping Act by per-
+mitting non-compliant cargo to be placed in a
+container with compliant cargo causing delay
+of Edaf Antillas’s shipment and by failing to
+correct the problem in a timely manner after
+the container arrived in Puerto Rico. On April
+15, 2015, the ALJ issued an Initial Decision
+dismissing the proceeding for failure to pros-
+ecute. The Initial Decision also addressed the
+applicability of a new provision in the Ship -
+ping Act permitting an award of attorney fees
+to a prevailing party. On May 18, 2015, the
+Commission issued a Notice Not to Review
+the dismissal. Prevailing Respondents filed
+petitions for attorney fees to be decided by the
+ALJ pursuant to 46 C.F.R. § 502.254. On Octo-
+ber 15, 2015 the ALJ issued an Order granting
+Respondents’ petitions for attorney fees. The
+Commission issued a Notice to Review the
+petitions for attorney fees. The Commission
+affirmed in part and reversed in part the ALJ’s
+decision, granting attorney fees for work per-
+formed subsequent to the implementation of
+the new statutory provision.
+Santa Fe Discount Cruise Parking, Inc.,
+d/b/a EZ Cruise Parking, Lighthouse
+Parking, Inc., and Sylvia Robledo d/b/a
+81st Dolphin Parking v. The Board of
+Trustees of the Galveston Wharves
+and the Galveston Port Facilities Cor-
+poration [Docket No. 14-06]
+Respondents operate the cruise terminal
+at the Port of Galveston. Complainants oper-
+ate parking facilities near the Port where
+they provide parking for passengers who
+embark on cruises from the cruise terminal.
+As part of their service, Complainants provide
+transportation to the Port. On June 16, 2014,
+Complainants filed a complaint alleging that
+Respondents’ tariff imposing charges on Com-
+plainants’ shuttles transporting passengers to
+and from the terminal violated three sections
+of the Shipping Act.
+On November 21, 2014, the ALJ granted
+Respondents’ motion to dismiss claims under
+two sections of the Act, but denied dismissal of
+claims under 46 U.S.C. § 41106(2), finding that
+the Complaint stated a claim that Respondents
+gave an undue or unreasonable preference or
+advantage or imposed an undue or unreason-
+able prejudice or disadvantage with respect
+to Complainants. On December 23, 2014, the
+Commission issued a Notice Not to Review
+the partial dismissals and the decision became
+administratively final.
+
+[[PDF_PAGE_0052]]
+55th Annual Report48
+On December 4, 2015, the ALJ issued an
+Initial Decision dismissing Complainants’
+remaining claim regarding section 41106(2).
+Complainants and Respondents filed their
+Exceptions and Reply to the Exceptions on
+January 11, 2016, and February 2, 2016, respec-
+tively. The proceeding is pending before the
+Commission.
+Econocaribe Consolidators, Inc. v.
+Amoy International, LLC, [Docket No.
+14-10]
+On August 11, 2014, Econocaribe Consoli -
+dators, Inc. filed a complaint alleging that
+Respondent Amoy International, LLC violated
+numerous sections of the Shipping Act and
+Commission regulations in connection with
+shipment of auto parts detained by Chinese
+customs. On September 9, 2014, Amoy filed its
+Answer denying the allegations. The parties
+engaged in discovery, filed numerous motions,
+and briefed the merits of the proceeding. The
+parties eventually reached a settlement agree-
+ment that they submitted for approval. On
+September 2, 2015, the ALJ issued an Initial
+Decision Approving Joint Settlement and
+Granting Motion to Dismiss. On October 5,
+2015, the Commission issued a Notice Not to
+Review and the decision became administra-
+tively final.
+Baltic Auto Shipping, Inc. v. Michael
+Hitrinov a/k/a Michael Khitrinov and
+Empire Unite Lines Co., Inc. [Docket
+No. 14-16]
+On November 28, 2014, Baltic filed a com -
+plaint alleging that on several thousand
+shipments between November 2007 and Janu-
+ary 2012, Empire, an NVOCC, violated several
+sections of the Shipping Act, 46 U.S.C. §§
+41102, 41104, 40501, and 46 C.F.R. Part 515, by
+charging rates not set forth in a tariff, charging
+Baltic rates greater than rates charged other
+shippers, and by failing to provide Baltic with
+shipping documents. Baltic sought a repara -
+tion award. All shipments began and almost all
+were delivered more than three years before
+Baltic filed its complaint. Empire moved for
+a summary decision dismissing the claim for
+a reparation award, arguing that the claim
+was barred by the statute of limitations. On
+September 15, 2015, the ALJ held that based
+on the material facts not in dispute, Baltic’s
+claims accrued more than three years before
+Baltic filed the complaint and were barred. It
+was also determined that no other relief was
+warranted, and the complaint was dismissed.
+Complainant filed Exceptions and a sup -
+porting brief on January 15, 2016. Subsequently,
+Respondents filed their reply to the Complain-
+ant’s Exceptions on March 3, 2016. On August
+15, 2016, Complainant filed a Motion to With-
+draw Appeal and Discontinue Action and also
+filed a status report. Respondents submitted
+a separate status report in which they stated
+that they would not agree to the joint stipu -
+lation to withdraw the appeal. On August 30,
+2016, Respondents submitted a response to
+the motion. At the close of FY 2016, the motion
+was pending before the Commission.
+General Motors, LLC v. Nippon Yusen
+Kabushiki Kaisha [Docket No. 15-08]
+On September 2, 2015, Complainant Gen -
+eral Motors, LLC (GM) filed a Shipping Act
+complaint against Respondents Nippon
+Yusen Kabushiki Kaisha (NYK), Wallenius
+Wilhelmsen Logistics AS (WWL) and Eukor
+Car Carriers, Inc. (Eukor). GM alleged that
+Respondents violated numerous provisions
+
+[[PDF_PAGE_0053]]
+55th Annual Report 49
+of the Shipping Act by secretly agreeing to
+rig bids, allocate customers, restrain capac -
+ity, and otherwise fix, raise, stabilize, and
+maintain prices for vehicle carrier services.
+The ALJ granted the parties’ joint motion to
+stay the case, and on July 25, 2016, GM, WWL,
+and Eukor moved for approval of a settle -
+ment agreement and dismissal of the case
+against those respondents. The ALJ granted
+the motion on July 29, 2016. The Commission
+determined to review the Initial Decision on
+August 26, 2016, and ordered the settling par-
+ties to submit additional information, which
+they did on September 1, 2016. On September
+12, 2016, GM and NYK filed a joint motion to
+approve a settlement agreement. As of the end
+of FY 2016, the GM-WWL-Eukor settlement
+was pending before the Commission, and the
+GM-NYK settlement was pending before the
+ALJ.
+Combustion Store Ltd. v. UniGroup
+Worldwide, Inc. [Docket No. 15-02]
+On May 1, 2015, Combustion Store Ltd.
+filed a Complaint alleging that UniGroup
+Worldwide, Inc., an ocean transportation
+intermediary (OTI), violated 46 U.S.C. §
+41102(c), 46 U.S.C. § 41102(c), when it trans -
+ported a Combustion shipment from Newnan,
+Georgia, to London, England. On March 7,
+2016, Combustion filed Complainant’s Con -
+sent Motion to Dismiss with Prejudice that
+the parties supplemented on March 10, 2016,
+with a Release of All Claims and Indemnity
+Agreement signed by the parties. On March
+14, 2016, the ALJ issued an initial decision
+approving the settlement agreement. On April
+14, 2016, the Commission issued a Notice Not
+to Review and the decision became adminis -
+tratively final.
+Crocus Investments, LLC and Crocus,
+FZE v. Marine Transport Logistics, Inc.
+and Aleksandr Solovyev a/k/a Royal
+Finance Group Inc. [Docket No. 15-04]
+On May 27, 2015, the Crocus parties filed a
+complaint alleging that Marine Transport, a
+licensed NVOCC, and Solovyev, the former
+husband of the owner of Marine Transport,
+violated 46 U.S.C. § 41102(c) when handling
+three boats. Two boats were shipped from the
+United States to Dubai in two separate ship -
+ments, then returned from Dubai to the United
+States in one shipment. One boat was never
+shipped internationally. On June 17, 2016,
+the ALJ issued an Initial Decision dismiss -
+ing the Complaint because Crocus did not
+prove that Respondents violated the Shipping
+Act on the two shipments from the United
+States to Dubai, Crocus did not prove that
+Respondents operated as an OTI on the one
+shipment from Dubai to the United States, and
+the Commission does not have jurisdiction
+over the claims regarding the boat that was
+not shipped internationally. On July 6, 2016,
+the Commission granted Crocus’ motion to
+extend time to file exceptions. The time to file
+exceptions has been extended to October 27,
+2016.
+Goodwin International Ltd v. Air Sea
+International Forwarding Inc. and Ray
+Tobia [Docket No. 15-07]
+On August 27, 2015, Goodwin Interna -
+tional Ltd filed a complaint against Air Sea
+International Forwarding Inc. and Ray Tobia
+alleging that in connection with delivery of
+Goodwin’s imports, Respondents violated
+46 U.S.C. § 41102(c), 46 C.F.R. § 515.11(a)(1),
+and 46 C.F.R. § 515.31(e) by collecting from
+Goodwin “for the correct duty rate at 5%, [but]
+
+[[PDF_PAGE_0054]]
+55th Annual Report50
+paying the U.S. Customs through the Customs
+broker a lower rate at 2%, 3% or zero” and by
+“filing of false and fraudulent documentation.”
+On October 7, 2015, the Commission issued a
+Notice of Voluntary Dismissal.
+KSB Shipping & Logistics LLC v.
+Direct Container Line a/k/a Vanguard
+Logistics [Docket No. 16-03]
+On February 5, 2016, KSB Shipping filed
+a complaint against Direct Container Line
+alleging that Direct Container Line violated
+46 U.S.C. § 41102(c) in connection with cargo
+shipped from the United States to Austria
+allegedly released to the consignee without
+obtaining the original bill of lading. On March
+25, 2016, Respondent filed a motion to dis -
+miss KSB Shipping’s complaint. On April 28,
+2016, Respondent’s motion to dismiss was
+denied. On May 9, 2016, Respondent filed its
+verified answer and affirmative defenses to
+the complaint. On August 11, 2016, the parties
+filed a Joint Submission in Support of Motion
+for Settlement and Voluntary Dismissal. On
+August 24, 2016, an Initial Decision Approv -
+ing Confidential Settlement and Dismissing
+Proceeding with Prejudice was issued. On
+September 25, 2016, a Notice Not to Review
+was issued by the Commission and the deci -
+sion became administratively final.
+T. Parker Host, Inc. v. Kinder Morgan
+Liquids Terminals, LLC, et al. [Docket
+No. 16-14]
+On June 21, 2016, T. Parker Host, Inc. (TPH)
+filed a complaint against Kinder Morgan,
+Inc., and fourteen of its subsidiaries. The
+complaint alleged that Respondents violated
+46 U.S.C. § 41106, by imposing a “Blacklist
+Notice” banning TPH from physically access-
+ing vessels moored at Kinder Morgan marine
+terminals and from coordinating port calls at
+Kinder Morgan marine terminals. On August
+19, 2016, the parties filed a confidential Agree-
+ment settling their dispute and a joint motion
+asking for approval of the Agreement. On
+August 26, 2015, an Initial Decision approving
+the agreement and dismissing the proceeding
+without prejudice was issued. On September
+27, 2016, the Commission issued a Notice Not
+to Review and the decision became adminis -
+tratively final.
+Walter Muzorori v. Canada States
+Africa Lines Inc. (CSAL) [Docket No.
+1949(F)]
+Claimant Walter Muzorori filed a small
+claim for informal adjudication under Subpart
+S alleging that Canada States Africa Lines, Inc.
+(“CSAL”) violated 46 U.S.C. §§ 41102(b)(2) and
+41102(c) when it did not honor an agreement
+to change the port of delivery of a shipment
+of two vehicles from Cape Town, South Africa,
+to Walvis Bay, Namibia. Respondent CSAL
+filed an objection to proceeding under Subpart
+S and asserted that there was no modifica -
+tion of the contract; the cargo was delivered
+to the port indicated on the bill of lading; and
+the expenses claimed were not established.
+An Initial Decision dated December 23, 2015,
+found that CSAL violated section 41102(c), did
+not find a violation of section 41102(b)(2), and
+awarded reparations of $6,405.60. On January
+5, 2016, the Commission issued a determi -
+nation to review and on July 14, 2016, the
+Commission issued an Order affirming the
+Initial Decision.
+
+[[PDF_PAGE_0055]]
+55th Annual Report 51
+Litigation
+The following docket matters were litigated
+during the fiscal year in United States Courts
+of Appeals by the Office of the General Coun-
+sel (OGC) on behalf of the Commission.
+Lisa Anne Cornell and G. Ware Cor -
+nell, Jr. v. Princess Cruise Lines, Ltd.
+(Corp), Carnival plc, and Carnival Cor-
+poration, [Docket No. 13-02], United
+States Court of Appeals for the District
+of Columbia Circuit
+On January 30, 2013, complainants filed a
+complaint alleging that Respondent cruise
+ship lines refused to permit them to sail on
+their cruise ships in violation of section 10(b)
+(10) of the Act, 46 U.S.C. § 41104(10). The
+controversy stemmed from a dispute over a
+refund of money paid to a fine arts auction
+company that operates on the cruise ships after
+Lisa Cornell cancelled a purchase of works of
+art. Complainants had been involved in litiga-
+tion for several years in Florida courts with
+the auction company, an affiliate of the cruise
+lines. Respondents filed a motion to dismiss
+or alternatively for summary judgment. On
+July 23, 2013, the ALJ issued a summary Initial
+Decision dismissing most claims, but found
+that respondent Princess violated section 10(b)
+(10) and entered a cease and desist order. The
+ALJ found that Complainants did not meet
+their burden of offering evidence that they had
+suffered actual injury as a result of the viola-
+tion. On August 14, 2013, both parties filed
+exceptions to the decision. On August 28, 2014,
+the Commission issued an Order reversing in
+part, affirming in part, and vacating in part the
+Initial Decision and dismissing the complaint
+with prejudice on the ground that Princess
+Cruise Lines and other respondents did not
+violate the Shipping Act. The Complainants
+filed a Petition for Review in the D.C. Circuit,
+and the parties filed briefs. Oral argument
+took place on October 2, 2015. On December
+2, 2015, the D.C. Circuit denied the Petition
+for Review and afforded Chevron deference
+to the Commission’s statutory interpretation.
+Maher Terminals, Inc. v. The Port
+Authority of New York and New Jersey
+[Docket No. 08-03], United States
+Court of Appeals for the District of
+Columbia Circuit
+Maher leases a marine terminal from the
+Port Authority, and on June 3, 2008, Maher
+filed a Shipping Act complaint alleging that
+the Port Authority: (a) violated 46 U.S.C. §
+41106(2) by granting another terminal oper -
+ator, APM Terminals North America, Inc.
+(APM) unduly and unreasonably more favor-
+able lease terms than it provided Maher; (b)
+violated 46 U.S.C. § 41102(c) by failing to
+establish, observe, and enforce just and rea -
+sonable regulations regarding Maher’s lease
+terms; and (c) violated 46 U.S.C. § 41106(2)
+by unreasonably refusing to deal with Maher
+regarding its request for parity with APM
+and its attempts to settle counterclaims from
+another case. The Commission granted par -
+tial summary judgment to the Port Authority
+on statute of limitations grounds. Maher
+petitioned the D.C. Circuit for review of this
+decision and petitioned the Commission for
+reconsideration. The D.C. Circuit dismissed
+the petition for lack of appellate jurisdiction,
+
+[[PDF_PAGE_0056]]
+55th Annual Report52
+and the Commission rejected the petition for
+reconsideration. Maher then filed a petition
+for review of the summary judgment and
+reconsideration orders, which the D.C. Circuit
+again dismissed for lack of jurisdiction based
+on a Commission motion to dismiss.
+As to the merits, after extensive discovery
+and motion practice, the ALJ denied Maher’s
+claims and counterclaims and dismissed them
+with prejudice on April 25, 2014. On Decem -
+ber 17, 2014, the Commission affirmed the
+ALJ’s decision. Maher petitioned the D.C. Cir-
+cuit for review of the Commission’s orders,
+which the Commission opposed. On March
+22, 2016, the court issued an opinion granting
+Maher’s petition and remanding the case to
+the Commission for additional explanation
+of its decision, although it did not vacate the
+Commission’s order or reverse its decision.
+On September 30, 2016, after the Commission
+ordered the parties to file supplemental briefs,
+they moved for approval of a settlement agree-
+ment and dismissal of this case and Docket
+No. 12-02.
+Adebisi A. Adenariwo v. BDP Interna-
+tional, Zim Integrated Shipping, Ltd.
+and Its Agent (Lansal) et al. [Infor -
+mal Docket Nos. 1920(I) and 1921(I)],
+United States Court of Appeals for the
+District of Columbia Circuit
+The Claimant filed two claims on May 2,
+2011, alleging violations of Section 10(d)(1),
+of the Shipping Act, 46 U.S.C. § 41102(c) for
+problems arising from their shipment of con-
+crete products equipment from Michigan to
+Lagos, Nigeria. After reviewing the evidence,
+the settlement officer dismissed Informal
+Docket No. 1920(I) on April 18, 2012, and on
+March 7, 2013, issued a decision in Informal
+Docket No. 1921(I) awarding the Claimant
+reparations in the amount of $18,308.94, lim -
+iting the award based on the principles of
+mitigation. The Commission affirmed on Feb-
+ruary 20, 2014. On March 21, 2014, Claimant
+filed a petition for review in the United States
+Court of Appeals for the District of Colum -
+bia Circuit. On December 15, 2015, the Court
+adopted the Commission’s argument that the
+Court lacked jurisdiction over the dispute
+in Informal Docket No. 1920(I) because the
+petition was not timely filed, but the Court
+vacated the Commission’s decision relating to
+mitigation of damages in Informal Docket No.
+1921(I) and remanded with instructions to the
+Commission to award damages as supported
+by the record without applying the principle
+of mitigation. The case is pending before the
+Commission.
+
+[[PDF_PAGE_0057]]
+55th Annual Report 53
+Rulemakings
+The Commission updated several of its
+rules this year to update its regulations and
+reflect statutory changes.
+Attorney Fees, Docket No. 15-06
+On March 1, 2016, the Commission issued
+a final rule amending the regulations govern-
+ing the award of attorney fees in Shipping Act
+complaint proceedings, and its regulations
+related to Commissioner terms and vacan -
+cies. (81 FR 10508). The changes implement
+amendments made by the Howard Coble
+Coast Guard and Maritime Transportation
+Act of 2014.
+Service Contract and NVOCC Service
+Arrangements, Docket No. 16-05
+On February 29, 2016, the Commission
+sought comments on possible amendments
+to its rules governing Service Contracts and
+NVOCC Service Arrangements to update,
+modernize, and reduce the regulatory burden
+of the regulations. (81 FR 10198). The Com -
+mission issued a proposed rule on August 22,
+2016. (81 FR 56559).
+Ocean Common Carrier and Marine
+Terminal Operator Agreements Sub-
+ject to the Shipping Act of 1984, Docket
+No. 16-04
+On February 29, 2016, the Commission
+sought comments on possible amendments
+to its rules governing agreements by or among
+ocean common carriers and/or marine termi-
+nal operators subject to the Shipping Act of
+1984, and possible modifications to its rules on
+the delegation of authority and redelegation
+of authority by the Director, Bureau of Trade
+Analysis. (81 FR 10188). The Commission
+issued a proposed rule on August 15, 2016.
+(81 FR 53986).
+Update of Existing and Addition of
+New User Fees, Docket No. 16-06
+On March 21, 2016, the Commission sought
+comment on amending its user fees. (81 FR
+15002). The Commission issued a proposed
+rule on May 27, 2016. (81 FR 33637). On
+August 29, 2016, the Commission issued a final
+rule amending its user fees. The Commission
+raised certain fees and lowered others. The
+Commission also added an additional fee and
+repealed several other fees. (81 FR 59141).
+Rules of Practice and Procedure; Pre -
+sentation of Evidence in Commission
+Proceedings, Docket No. 16-08
+On May 4, 2016, the Commission sought
+comment on a proposal to reorganize several
+subparts of its Rules of Practice and Procedure
+and revise its rules regarding presentation of
+evidence in Commission proceedings. (81 FR
+26517).
+Optional Method of Filing Ocean
+Common Carrier and Marine Termi -
+nal Operator Agreements Subject to
+the Shipping Act of 1984, Docket 16-09
+On April 27, 2016, the Commission amended
+its regulations relating to the method of filing
+Ocean Common Carrier and Marine Terminal
+Operator Agreements to provide for optional
+filing of these agreements through a new elec-
+tronic filing system. (81 FR 24703).
+
+[[PDF_PAGE_0058]]
+55th Annual Report54
+Inflation Adjustment of Civil Mon -
+etary Penalties, Docket No. 16-13
+The Commission issued an interim final rule
+to adjust the maximum amount of each statu-
+tory civil penalty subject to Federal Maritime
+Commission jurisdiction for inflation, pur -
+suant to the Federal Civil Penalties Inflation
+Adjustment Act Improvements Act of 2015
+(Sec. 701 of Public Law 11-74). (81 FR 42552).
+The adjustments became effective on August
+1, 2016.
+
+[[PDF_PAGE_0059]]
+55th Annual Report 55
+APPENDICES
+A - FMC Organization Chart
+
+[[PDF_PAGE_0060]]
+55th Annual Report56
+B - FMC Senior Officials - Fy 2016
+Chief of Staff Mary T. Hoang
+Counsel to Chairman Cordero Rachit Choksi
+Counsel to Commissioner Dye Robert M. Blair
+Counsel to Commissioner Lidinsky Jewel Jennings-Wright***
+Counsel to Commissioner Khouri John A. Moran
+Counsel to Commissioner Doyle David J. Tubman, Jr.; Patrick Parsons*
+Counsel to Commissioner Maffei Zoraya B. De La Cruz
+General Counsel Tyler J. Wood
+Secretary (Assistant) Rachel E. Dickon**
+Chief Administrative Law Judge Clay G. Guthridge
+Director, Office of CADRS Rebecca A. Fenneman
+Director, Office of EEO Howard F. Jimenez
+Inspector General Jon Hatfield
+Managing Director Vern W. Hill; Karen V. Gregory**
+Deputy Managing Director Peter King**
+Director, Bureau of Certification and Licensing Sandra L. Kusumoto
+Director (Deputy), Bureau of Enforcement Brian L. Troiano**
+Director, Bureau of Trade Analysis Florence A. Carr
+*Assumed February 2016; **Assumed September 2016; ***Departed July 2016
+
+[[PDF_PAGE_0061]]
+55th Annual Report 57
+C - Statement of Appropriations, Obligations,
+and Receipts
+Appropriations
+For necessary expenses of the Federal Maritime Commission, as authorized by §201(d) of
+the Merchant Marine Act, 1936, as amended (46 U.S.C. §307), including services as authorized
+by 5 U.S.C. §3109; hire of passenger motor vehicles as authorized by 31 U.S.C. §1343(b); and
+uniforms or allowances therefore, as authorized by 5 U.S.C. §§5901-5902, $25,660,000: Provided,
+That not to exceed $2,000 shall be available for official reception and representation expenses.
+Public Law 114-113 $25,660,000
+Total Budgetary Resources $25,660,000
+Obligations and Unobligated Balance:
+Net obligations for salaries and expenses
+for the fiscal year ended September 30, 2016
+$25,574,275
+Statement of Receipts:
+Dosited with the General Fund of the Treasury for the Fiscal Year
+Ended with September 30, 2016
+Publications and reproductions, fees and
+vessel certification, and freight forwarder
+applications
+$221,552
+Fines and penalties $3,485,000
+Total general fund receipts $3,706,552
+
+[[PDF_PAGE_0062]]
+55th Annual Report58
+D - Civil Penalties Collected
+British Association of Removers Lts. $80,000
+Sparx Logistics USA Limited $80,000
+Azap Motors Inc. $60,000
+Wilhelmsen Ships Services, Inc. $35,000
+Aromark Shipping LLC $32,500
+Knopf International Inc. $24,000
+N/J International Inc. $22,500
+Orient Star Transport International Ltd. $135,000
+Ba Shi Yuexin Logistics Develop. Co. Ltd. $100,000
+Thornley & Pitt Inc. $65,000
+Volkwagen Konsernlogistiks GmbH. & Co. $170,000
+Hecny Shipping Limited $300,000
+Walker International Transportation LLC $60,000
+Razor Enterprise Inc. dba Razor Cargo Services $50,000
+American Global Logistics LLC $350,000
+Round the World Logistics (USA) Corp $80,000
+Baron Worldwide LLC $21,000
+Posey International, Inc. $22,000
+
+[[PDF_PAGE_0063]]
+55th Annual Report 59
+CL USA Inc. $22,500
+Carlo Shipping International, Inc. dba CSI Logistics $32,500
+China International Freight Co. Ltd. $100,000
+King Ocean Services Limited, Inc. $50,000
+Wallenius Wilhelmsen Logistics AS and Eukor Car Carriers $1,500,000
+Total: $3,392,000

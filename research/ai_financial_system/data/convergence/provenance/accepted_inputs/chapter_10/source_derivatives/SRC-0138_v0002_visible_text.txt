@@ -1,0 +1,193 @@
+Department of Commerce Awards CHIPS Incentives to Micron for Idaho and New York Projects and Announces Preliminary Memorandum of Terms for Virginia DRAM Project to Secure Domestic Supply of Legacy Memory Chips | NIST
+Skip to main content
+An official website of the United States government
+Here’s how you know
+Official websites use .gov
+A
+.gov
+website belongs to an official government organization in the United States.
+Secure .gov websites use HTTPS
+A
+lock
+(
+) or
+https://
+means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.
+https://www.nist.gov/news-events/news/2024/12/department-commerce-awards-chips-incentives-micron-idaho-and-new-york
+Search NIST
+Menu
+Close
+Publications
+What We Do
+All Topics
+Advanced communications
+Artificial intelligence
+Bioscience
+Buildings and construction
+Chemistry
+Cybersecurity and Privacy
+Electronics
+Energy
+Environment
+Fire
+Forensic science
+Health
+Information technology
+Infrastructure
+Manufacturing
+Materials
+Mathematics and statistics
+Metrology
+Nanotechnology
+Neutron research
+Performance excellence
+Physics
+Public safety
+Quantum information science
+Resilience
+Standards
+Transportation
+Labs & Major Programs
+Assoc Director of Laboratory Programs
+Laboratories
+Communications Technology Laboratory
+Engineering Laboratory
+Information Technology Laboratory
+Material Measurement Laboratory
+Physical Measurement Laboratory
+User Facilities
+NIST Center for Neutron Research
+CNST NanoFab
+Research Test Beds
+Research Projects
+Tools & Instruments
+Major Programs
+CHIPS for America Initiative
+Congressionally Identified Project Program (CIPP)
+Manufacturing Extension Partnership (MEP)
+Office of Advanced Manufacturing
+Technology Partnerships Office
+Services & Resources
+Measurements and Standards
+Calibration Services
+Laboratory Accreditation (NVLAP)
+Quality System
+Standard Reference Materials (SRMs)
+Standard Reference Instruments (SRIs)
+Standards.gov
+Time Services
+Office of Weights and Measures
+Software
+Data
+Chemistry WebBook
+National Vulnerability Database
+Physical Reference Data
+Standard Reference Data (SRD)
+Storefront
+License & Patents
+Computer Security Resource Center (CSRC)
+NIST Research Library
+News & Events
+News
+Events
+Blogs
+NIST In Focus
+Feature Stories
+Awards
+Video Gallery
+Image Gallery
+Media Contacts
+About NIST
+About Us
+Leadership
+Organization Structure
+Budget & Planning
+Contact Us
+Visit
+Careers
+Student programs
+Work with NIST
+History
+NIST Digital Archives
+NIST Museum
+NIST and the Nobel
+Educational Resources
+UPDATES
+This news item has been archived.
+Department of Commerce Awards CHIPS Incentives to Micron for Idaho and New York Projects and Announces Preliminary Memorandum of Terms for Virginia DRAM Project to Secure Domestic Supply of Legacy Memory Chips
+CHIPS Award Will Support Micron’s 20-year Manufacturing Vision to Expand Leading-Edge DRAM Production in Idaho and New York; CHIPS PMT Would Support Expansion of Virginia Facility to Onshore Important Memory Production
+December 10, 2024
+Share
+Facebook
+Linkedin
+X.com
+Email
+Today, the Biden-Harris Administration announced that the U.S. Department of Commerce awarded Micron Technology up to $6.165 billion in direct funding under the CHIPS Incentives Program’s Funding Opportunity for Commercial Fabrication Facilities. The award follows the previously signed preliminary memorandum of terms, announced on April 25, 2024, and the completion of the Department’s due diligence. This funding will support the first step in Micron’s two-decade vision to invest approximately $100 billion in New York and $25 billion in Idaho, which will create approximately 20,000 jobs and will help the U.S. grow its share of advanced memory manufacturing from less than 2% today to approximately 10% by 2035. The Department will disburse the funds based on Micron’s completion of project milestones.
+This investment will help strengthen U.S. economic resiliency by bolstering a reliable domestic supply of leading-edge DRAM chips that are important components for advanced technologies such as, personal computing, industrial, high-performance compute, automotive, wireless communications and artificial intelligence. Micron’s DRAM chips also power the company’s performance memory, known as High-Bandwidth Memory (HBM), which is critical for enabling new AI models. With this funding, Micron plans to expand the development and production of the most advanced memory semiconductor technology in New York and Idaho and is committing to spend approximately $50 billion before the end of the decade.
+In addition, the Biden-Harris Administration announced the Department of Commerce has signed a non-binding Preliminary Memorandum of Terms (PMT) with Micron Technology for up to $275 million in proposed funding to expand and modernize its facility in Manassas, Virginia. The expected capital expenditure for the modernization will be $2 billion over the next several years. The proposed project would onshore Micron’s 1-alpha technology to its Manassas facility, significantly increasing monthly wafer output. Micron’s 1-alpha node, an advanced DRAM process technology, offers meaningful improvements in bit density, power efficiency, and performance capability. Supporting a stable supply of Micron’s 1-alpha technology would advance U.S. supply chain resiliency because the legacy DRAM memory chips that would be made in Virginia are important components for the automotive and industrial markets. Micron’s proposed project in Manassas would be expected to create over 400 manufacturing jobs and up to 2700 community jobs at the peak of the project.
+"The spirit of innovation is central to who we are as Americans. America invented the semiconductor, the building blocks of the technology of today and tomorrow. Through our CHIPS and Science Act, President Biden and I have made the historic investments necessary to ensure semiconductor manufacturing returns to and remains here in America. Today, thanks to our historic legislation, the Department of Commerce has finalized one of its largest awards to date with Micron Technology, the only U.S. based manufacturer of memory chips. This more than $6.1 billion investment in Clay, NY and Boise, ID supports the construction of several state-of-the-art memory chips facilities as part of Micron’s total $125 billion investment over the next few decades, creating at least 20,000 jobs by the end of the decade. These investments will help the U.S. grow its share of advanced memory manufacturing from nearly 0% today to 10% over the next decade. I am also proud to say that Micron is building these facilities by utilizing project labor agreements and registered apprenticeship programs, which will further strengthen local economies, support workers, and ensure the construction is completed on time and within budget. Additionally, the Department of Commerce announced that it agreed to preliminary terms with Micron for an additional $275 million investment to expand Micron’s Manassas, VA facility and onshore a critical technology relied upon by our defense industry, automotive sector, and national security community. Our administration knows these landmark announcements are more than investments; they are catalysts for sustained economic growth. When President Biden and I took office, supply chain disruptions led to chips and semiconductor shortages. That is why we worked with Republicans, Democrats, and Independents in Congress to pass legislation to make these unprecedented investments that are creating opportunity in red and blue states alike. At the same time, our work has bolstered our national and economic security by promoting the domestic creation of the chips that are responsible for powering nearly every device Americans rely on – from smartphones and vehicles to advanced defense systems and artificial intelligence data centers. This work will make a lasting difference for decades to come and proves that in the competition for the 21st century, we can invest in American industries and American workers at the same time," said
+Vice President Kamala Harris.
+“Memory chips are foundational to all advanced technologies, and thanks to the bipartisan CHIPS and Science Act, America is rebuilding its capacity to produce these critical capabilities, said
+U.S. Secretary of Commerce Gina Raimondo
+. “With this investment in Micron, we are delivering on one of the core objectives of the CHIPS program – onshoring the development and production of the most advanced memory semiconductor technology, which is crucial for safeguarding our leadership on artificial intelligence and protecting our economic and national security.”
+“As the only U.S.-based manufacturer of memory, Micron is uniquely positioned to bring leading-edge memory manufacturing to the U.S., strengthening the country’s technology leadership and fostering advanced innovation,” said
+Micron President and CEO Sanjay Mehrotra
+. “Micron’s investments in domestic semiconductor manufacturing capabilities, supported by the bipartisan CHIPS Act, will help drive economic growth and ensure that the U.S. remains at the forefront of technological advancements. We appreciate New York’s Green CHIPS legislation and the local partnership with Micron to create a Community Investment Framework to revitalize central New York. Many federal, state and community leaders have played a pivotal role in the process, from the development of Micron’s plans to finalizing essential investment tax credits. These include New York Governor Kathy Hochul, Senate Majority Leader Chuck Schumer, U.S. Senator Mark Warner, U.S. Senator Mike Crapo, U.S. Senator James Risch, Idaho Governor Brad Little, Virginia Governor Glenn Youngkin, Mayor Lauren McLean, and County Executive Ryan McMahon. Their contributions support Micron's continued industry leadership as we work to meet the growing demand for memory.”
+For more information about Micron’s award, please visit the CHIPS for America
+website
+.
+As stated in the
+CHIPS Notice of Funding Opportunity for Commercial Fabrication Facilities
+, CHIPS for America will distribute direct funding to recipients for capital expenditures based on the completion of construction, technology, production, and commercial milestones. The program will track the performance of each CHIPS Incentives Award via financial and programmatic reports, in accordance with the award terms and conditions.
+Additionally, as explained in its first
+Notice of Funding Opportunity
+, the Department of Commerce may offer applicants a PMT on a non-binding basis after satisfactory completion of the merit review of a full application. The PMT outlines key terms for a potential CHIPS incentives award, including the amount and form of the award. The award amounts are subject to due diligence and negotiation of award documents and are conditional on the achievement of certain milestones. After a PMT is signed, the Department of Commerce begins a comprehensive due diligence process on the proposed projects and continues negotiating or refining certain terms with the applicant. The terms contained in any final award documents may differ from the terms of the PMT being announced today.
+About CHIPS for America
+CHIPS for America has awarded over $25 billion of the over $36 billion in proposed incentives funding allocated to date. These announcements across 21 states are expected to create over 125,000 jobs. Since the beginning of the Biden-Harris Administration, semiconductor and electronics companies have announced over $450 billion in private investments, catalyzed in large part by public investment. CHIPS for America is part of President Biden and Vice President Harris’s economic plan to invest in America, stimulate private sector investment, create good-paying jobs, make more in the United States, and revitalize communities left behind. CHIPS for America includes the CHIPS Program Office, responsible for manufacturing incentives, and the CHIPS Research and Development Office, responsible for R&D programs, that both sit within the National Institute of Standards and Technology (NIST) at the Department of Commerce. Visit chips.gov to learn more.
+Electronics
+,
+Semiconductors
+and
+Manufacturing
+NIST in your inbox
+Stay up to date with the latest news from NIST.
+Enter Email Address
+Organizations
+NIST Headquarters
+Creating Helpful Incentives to Produce Semiconductors for America (CHIPS)
+CHIPS Program Office
+Released December 10, 2024, Updated October 6, 2025
+Was this page helpful?
+HEADQUARTERS
+100 Bureau Drive
+Gaithersburg, MD 20899
+301-975-2000
+Webmaster
+|
+Contact Us
+|
+Our Other Offices
+X.com
+Facebook
+LinkedIn
+Instagram
+YouTube
+Giphy
+RSS Feed
+Mailing List
+How are we doing?
+Feedback
+Site Privacy
+Accessibility
+Privacy Program
+Copyright & Disclaimers
+Vulnerability Disclosure
+No Fear Act Policy
+FOIA
+Environmental Policy
+Scientific Integrity
+Information Quality Standards
+Commerce.gov
+Science.gov
+USA.gov
+Vote.gov

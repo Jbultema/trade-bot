@@ -1,0 +1,79 @@
+{
+  "boundary": "Author validation is not fresh acceptance, canonical integration, semantic locator clearance, chapter authority, or publication authority.",
+  "checks": [
+    {
+      "check": "population_60_versions_52_sources",
+      "detail": "60|52",
+      "passed": true
+    },
+    {
+      "check": "all_57_v1_rows_unchanged",
+      "detail": "57",
+      "passed": true
+    },
+    {
+      "check": "status_population",
+      "detail": "preserved=53 failures=4 rights=2",
+      "passed": true
+    },
+    {
+      "check": "all_53_preserved_bytes_rehashed",
+      "detail": "53",
+      "passed": true
+    },
+    {
+      "check": "three_delta_rows_exact_statuses",
+      "detail": "3",
+      "passed": true
+    },
+    {
+      "check": "new_failure_has_no_synthetic_content",
+      "detail": "ReadTimeout: HTTPSConnectionPool(host='investors.micron.com', port=443): Read timed out. (read timeout=180.0)",
+      "passed": true
+    },
+    {
+      "check": "three_historical_failures_unchanged",
+      "detail": "3",
+      "passed": true
+    },
+    {
+      "check": "private_reviews_and_derivatives_unchanged",
+      "detail": "5 reviews|8 derivatives",
+      "passed": true
+    },
+    {
+      "check": "locator_states_unchanged",
+      "detail": "167",
+      "passed": true
+    },
+    {
+      "check": "projection_525_exact_state_counts",
+      "detail": "{\"internal_P4_reconstruction\": 3, \"metadata_only_rights_boundary\": 2, \"no_matching_preservation_record\": 186, \"preserved_and_semantically_reviewed\": 5, \"preserved_bytes_available_locator_review_pending\": 326, \"retrieval_failed\": 3}",
+      "passed": true
+    },
+    {
+      "check": "no_semantic_status_laundering",
+      "detail": "5 accepted; delta remains pending",
+      "passed": true
+    },
+    {
+      "check": "quarantine_excluded",
+      "detail": "54",
+      "passed": true
+    },
+    {
+      "check": "isolated_sqlite_load_and_foreign_keys",
+      "detail": "{\"counts\": {\"carried_private_locator_reviews\": 5, \"chapter_support_state_projection\": 525, \"claim_locator_states\": 167, \"duplicate_blob_reconciliation\": 5, \"source_derivatives\": 8, \"source_exceptions\": 6, \"source_version_delta_audit\": 3, \"source_versions\": 60}, \"foreign_key_errors\": 0, \"integrity\": \"ok\"}",
+      "passed": true
+    },
+    {
+      "check": "delta_audit_three_rows",
+      "detail": "3",
+      "passed": true
+    }
+  ],
+  "checks_passed": 14,
+  "checks_total": 14,
+  "passed": true,
+  "validator": "source_preservation_union_v2_author_validator"
+}

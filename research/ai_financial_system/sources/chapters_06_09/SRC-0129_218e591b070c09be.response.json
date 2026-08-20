@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1198114,
+  "content_sha256": "218e591b070c09bebf67bffcc399f9bf65c60b02cd286f4cc305ce8a26262e6b",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/2069692/000206969226000031/osnl-20260331.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0129_218e591b070c09be.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/2069692/000206969226000031/osnl-20260331.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-14",
+  "publisher": "Blue Owl Digital Infrastructure Trust",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0129_218e591b070c09be.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:53:02.700830+00:00",
+  "retrieval_started_utc": "2026-07-26T17:53:02.367271+00:00",
+  "selected_response_headers": {
+    "content-length": "84384",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:53:02 GMT",
+    "last-modified": "Wed, 13 May 2026 21:17:03 GMT"
+  },
+  "source_id": "SRC-0129",
+  "status": "preserved_complete",
+  "title": "Blue Owl Digital Infrastructure Trust Form 10-Q for quarter ended March 31 2026",
+  "write_state": "new_version_written"
+}

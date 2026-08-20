@@ -1,0 +1,11 @@
+{
+  "author_verdict": "READY_FOR_FRESH_NONAUTHOR_METADATA_REBASE_REVIEW",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "checks_passed": 15,
+  "checks_total": 15,
+  "docx_replacement": "NOT_AUTHORIZED",
+  "failures": [],
+  "passed": true,
+  "publication": "BLOCKED",
+  "validator": "chapters_02_05_rebuilt_v3_dedicated_validator"
+}

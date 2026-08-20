@@ -1,0 +1,12 @@
+{
+  "author_verdict": "READY_FOR_FRESH_UNINVOLVED_REVIEW",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "docx_replacement": "NOT_AUTHORIZED",
+  "frozen_intrinsic_artifacts": 18,
+  "immutable_reference_fields": 5,
+  "publication": "NOT_AUTHORIZED",
+  "snapshot_id": "SPU-V2-20260726-38b990b2",
+  "source_queue_rows": 48,
+  "source_version_candidate_rows": 51,
+  "support_rows": 164
+}

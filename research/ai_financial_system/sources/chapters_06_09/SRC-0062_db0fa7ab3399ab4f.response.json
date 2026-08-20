@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1593202,
+  "content_sha256": "db0fa7ab3399ab4f9820d9c7c3daefa85bbb3e0c7332f95e05a934016d3e2aec",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026041013/japanfwp_06042026.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0062_db0fa7ab3399ab4f.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1181412/000162828026041013/japanfwp_06042026.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-06-04",
+  "publisher": "Space Exploration Technologies Corp.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0062_db0fa7ab3399ab4f.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:05.890295+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:05.843924+00:00",
+  "selected_response_headers": {
+    "content-length": "398091",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:51:05 GMT",
+    "last-modified": "Fri, 05 Jun 2026 10:03:54 GMT"
+  },
+  "source_id": "SRC-0062",
+  "status": "preserved_complete",
+  "title": "Space Exploration Technologies Corp. preliminary prospectus and financial statements",
+  "write_state": "new_version_written"
+}

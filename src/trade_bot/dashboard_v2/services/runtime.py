@@ -29,6 +29,10 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.research.action_headline import ActionHeadline, build_action_headline
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.research.operating_history import (
+    DEFAULT_OPERATING_HISTORY_SOURCE,
+    reconstruct_operating_history,
+)
 from trade_bot.research.strategy_decision import (
     StrategyDecisionUnavailableError,
     operating_strategy_config,
@@ -38,6 +42,7 @@ from trade_bot.research.strategy_decision import (
 from trade_bot.research.strategy_naming import strategy_display_name
 from trade_bot.research.trade_decision import TradeDecisionRun
 from trade_bot.storage.run_store import RunStore, SnapshotManifest
+from trade_bot.storage.warehouse import TradingWarehouse
 from trade_bot.trading.book_alignment import (
     BookAlignmentRun,
     build_book_alignment,
@@ -115,6 +120,9 @@ def render_book_selector(
     *,
     baseline_run: BaselineRun | None = None,
     bot_config: object | None = None,
+    warehouse_path: Path | None = None,
+    artifact_dir: Path | None = None,
+    job_log_dir: Path | None = None,
 ) -> BookSelection:
     journal = TradeJournal(journal_path)
     books = journal.list_books()
@@ -155,6 +163,13 @@ def render_book_selector(
         "Set Selected as Promoted",
         disabled=selected_book.book_id == promoted_book.book_id,
         help="Make the selected book the default operating book for Today.",
+    ) and _prepare_strategy_history_for_promotion(
+        selected_book.strategy_name,
+        baseline_run=baseline_run,
+        bot_config=bot_config,
+        warehouse_path=warehouse_path,
+        artifact_dir=artifact_dir,
+        job_log_dir=job_log_dir,
     ):
         journal.set_promoted_book(selected_book.book_id)
         st.rerun()
@@ -269,7 +284,14 @@ def render_book_selector(
                 )
                 st.session_state[session_key] = managed_book.book_id
                 st.rerun()
-            if promote_managed:
+            if promote_managed and _prepare_strategy_history_for_promotion(
+                managed_strategy,
+                baseline_run=baseline_run,
+                bot_config=bot_config,
+                warehouse_path=warehouse_path,
+                artifact_dir=artifact_dir,
+                job_log_dir=job_log_dir,
+            ):
                 journal.upsert_book(
                     book_id=managed_book.book_id,
                     book_name=managed_name,
@@ -299,6 +321,104 @@ def render_book_selector(
             st.session_state[session_key] = promoted_book.book_id
             st.rerun()
     return BookSelection(selected_book=selected_book, promoted_book=promoted_book)
+
+
+def _prepare_strategy_history_for_promotion(
+    strategy_name: str,
+    *,
+    baseline_run: BaselineRun | None,
+    bot_config: object | None,
+    warehouse_path: Path | None,
+    artifact_dir: Path | None,
+    job_log_dir: Path | None,
+) -> bool:
+    """Fail closed unless promotion leaves a complete, strategy-matched history."""
+
+    if baseline_run is None or bot_config is None or warehouse_path is None:
+        st.error(
+            "Promotion requires the loaded strategy run and warehouse so historical "
+            "interpretability can be prepared first."
+        )
+        return False
+    configured_primary = str(getattr(bot_config, "primary_strategy", "") or "").strip()
+    current_strategy = trade_decision_strategy_name(baseline_run.trade_decision)
+    requested = str(strategy_name or "").strip()
+    resolved_strategy = (
+        configured_primary
+        if requested in {"", DEFAULT_FORWARD_TEST_STRATEGY, current_strategy}
+        else requested
+    )
+    strategy_config = operating_strategy_config(
+        bot_config,
+        resolved_strategy,
+        current_strategy=current_strategy,
+    )
+    if strategy_config is None or resolved_strategy not in baseline_run.results:
+        st.error(
+            f"Cannot promote {resolved_strategy!r}: it is not available with a configured "
+            "defensive policy in the loaded run."
+        )
+        return False
+
+    try:
+        store = RunStore(
+            warehouse_path,
+            artifact_dir=artifact_dir,
+            job_log_dir=job_log_dir,
+            read_only=True,
+        )
+        snapshots = store.list_snapshots(limit=100_000)
+        if snapshots.empty or "market_date" not in snapshots:
+            raise ValueError("No retained historical snapshot dates are available.")
+        retained = (
+            snapshots.sort_values(["market_date", "created_at_utc", "run_id"])
+            .drop_duplicates("market_date", keep="last")
+            .sort_values("market_date")
+        )
+        history_dates = retained["market_date"].astype(str).tolist()
+        missing_strategy_dates: list[str] = []
+        with st.spinner(
+            f"Verifying snapshots and rebuilding history for {resolved_strategy}..."
+        ):
+            for row in retained.itertuples(index=False):
+                historical_run, _manifest = store.load_snapshot(str(row.run_id))
+                if resolved_strategy not in historical_run.results:
+                    missing_strategy_dates.append(str(row.market_date))
+            if missing_strategy_dates:
+                examples = ", ".join(missing_strategy_dates[:3])
+                raise ValueError(
+                    f"{len(missing_strategy_dates)} of {len(retained)} retained dates do not "
+                    f"contain this strategy (for example {examples}). Rebuild the 1:1 "
+                    "snapshot population before promotion."
+                )
+            history = reconstruct_operating_history(
+                baseline_run,
+                primary_strategy=resolved_strategy,
+                allocation_policy=getattr(bot_config, "allocation_policy", None),
+                history_dates=history_dates,
+                defensive_ticker=str(strategy_config.defensive_ticker or "BIL"),
+            )
+            if len(history.metrics) != len(history_dates):
+                raise ValueError(
+                    "Historical reconstruction was incomplete: "
+                    f"{len(history.metrics)} of {len(history_dates)} retained dates were built."
+                )
+            TradingWarehouse(warehouse_path).save_operating_history(
+                metrics=history.metrics,
+                components=history.components,
+                scenario_drivers=history.scenario_drivers,
+                driver_rotation=history.driver_rotation,
+                replace_sources=(DEFAULT_OPERATING_HISTORY_SOURCE,),
+            )
+    except (OSError, ValueError, TypeError, AttributeError, duckdb.Error) as error:
+        st.error(f"Promotion blocked until historical interpretability is complete: {error}")
+        return False
+
+    st.success(
+        f"Prepared {len(history.metrics)} retained dates for {resolved_strategy}; promotion "
+        "can proceed."
+    )
+    return True
 
 
 def _strategy_selectbox(

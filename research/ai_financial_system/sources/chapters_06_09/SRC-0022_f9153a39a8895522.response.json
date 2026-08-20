@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1679020,
+  "content_sha256": "f9153a39a88955227ae1389eb961e5befea4b4bb99bd4b7b5010c01cbfda1494",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000054/avgo-20260503.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0022_f9153a39a8895522.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1730168/000173016826000054/avgo-20260503.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-06-09",
+  "publisher": "Broadcom Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0022_f9153a39a8895522.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:50:49.363164+00:00",
+  "retrieval_started_utc": "2026-07-26T17:50:49.331660+00:00",
+  "selected_response_headers": {
+    "content-length": "108396",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:50:49 GMT",
+    "last-modified": "Tue, 09 Jun 2026 13:06:39 GMT"
+  },
+  "source_id": "SRC-0022",
+  "status": "preserved_complete",
+  "title": "Broadcom Form 10-Q for quarter ended May 3 2026",
+  "write_state": "new_version_written"
+}

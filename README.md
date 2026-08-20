@@ -83,6 +83,10 @@ The strategy path is separate from the daily action path. Strategy experiments a
 - Long-only stocks and ETFs are the default. No default derivatives, shorting, or automated execution.
 - Holding periods are measured in trading days and weeks, not minutes.
 - Backtests must be judged across full history, recent windows, regime shifts, sequential fixed-strategy holdouts, and true walk-forward selection when a mechanism learns or chooses among candidates.
+- No model may be selected or promoted without a sealed chronological holdout,
+  properly nested walk-forward outer test, or completed prospective shadow that
+  was not used to choose or retune the model. Ordinary walk-forward summaries
+  used during research are diagnostics, not selection OOS evidence.
 - Current-state recommendations and future-scenario research are related but separate systems.
 - Risk management, position sizing, and off-ramp behavior matter as much as return forecasts.
 
@@ -179,7 +183,7 @@ poetry run trade-bot run-dashboard-v1
 
 | Step | Command or Dashboard Area | Purpose |
 | --- | --- | --- |
-| 1 | `run-daily-update` or sidebar **Run Full Daily Update** | Refresh market, macro, news, scenarios, snapshot, warehouse, and paper valuations. |
+| 1 | `run-daily-update` or sidebar **Run Full Daily Update** | Refresh market, macro, news, scenarios, snapshot, warehouse, paper valuations, and the current pre-break monitor readout. |
 | 2 | Optional sidebar **Run ML Diagnostics** or `run-ml-diagnostics --profile standard` | Refresh Research Lab ML probability, feature-importance, and drift artifacts. |
 | 3 | Dashboard operating overview | Read Action Headline, Operating Brief, Decision Brief when needed, and book alignment. Use the right-side Term Lookup for unclear terms. |
 | 4 | Monitoring | Check champion/challenger forward performance and paper windows. |
@@ -218,7 +222,7 @@ Most refresh work can be run from the dashboard left sidebar:
 
 | Sidebar Button | Equivalent CLI | Use |
 | --- | --- | --- |
-| **Run Full Daily Update** | `poetry run trade-bot run-daily-update` | Normal daily path. Refreshes data, scenarios, snapshot, warehouse, and paper valuations. |
+| **Run Full Daily Update** | `poetry run trade-bot run-daily-update` | Normal daily path. Refreshes data, scenarios, snapshot, warehouse, paper valuations, and the current pre-break monitor readout. |
 | **Build Snapshot Only** | `poetry run trade-bot build-snapshot` | Rebuilds the dashboard snapshot and synchronizes snapshot-derived strategy registry/metrics; it skips experiment migration and paper valuation. |
 | **Migrate Warehouse** | `poetry run trade-bot migrate-warehouse` | Re-reads experiment, registry, journal, and scorecard artifacts into DuckDB. |
 | **Audit Strategy Sources** | `poetry run trade-bot audit-strategy-sources` | Reconciles top strategy claims across latest snapshot metrics, experiment scorecards, rolling/window diagnostics, and docs. |
@@ -239,6 +243,12 @@ controls outside the named event windows by default; use `--event-windows-only`
 only for a deliberately event-conditioned audit. The hindsight report separates
 raw overlapping origins from conservative event/quarter clusters and reports
 cluster-bootstrap uncertainty.
+
+The daily update applies those frozen historical signal rankings to the latest
+ordinary snapshot; it does not silently refit the hindsight study. To refresh
+only that lightweight current read, run `poetry run trade-bot
+refresh-prebreak-current`. Dashboard research panels warn after three calendar
+days and fail visibly as stale after seven.
 
 The active balanced-asymmetric policy deliberately separates visibility from
 authority. The base market strategy can size the book. Quantitative risk status
@@ -343,7 +353,9 @@ Use this for strategy research, not same-day execution. The Research Lab is spli
 
 The upper aggregate section includes the overview, leaderboard, curated shelf, outcome frontier, signal evidence, family map, taxable impact, validation/QC, and manifests. Default aggregate views are pruned on purpose. They show curated/operational candidates plus core baselines, while archived experiments, failed probes, broad reference portfolios, and low-evidence variants remain available through explicit all-approach filters.
 
-The **Cycle Tracker** tab is the Scenario / Phase Frontier. Refresh it with `poetry run trade-bot run-cycle-tracker` when you want the current speculative-cycle phase read, 0M nowcast, path-constrained horizon phase probabilities, current-phase conditional candidates, phase-by-horizon winner shelves, and prior-only validation metrics. It is a research/watch layer, not a crash timer or allocation override. The tracker shows both simultaneous phase evidence and a path-aware cycle state; use the path-aware view for sequential questions such as unwind, liquidation, bottoming, recovery, and post-unwind compounding.
+The **Cycle Tracker** tab is the Scenario / Phase Frontier. Refresh it with `poetry run trade-bot run-cycle-tracker` when you want the current speculative-cycle phase read, 0M nowcast, path-constrained horizon phase probabilities, current-phase conditional candidates, phase-by-horizon winner shelves, and prior-only validation metrics. It is a research/watch layer, not a crash timer or allocation override. The tracker shows both simultaneous phase evidence and a path-aware cycle state; use the path-aware view for sequential questions such as unwind, liquidation, bottoming, recovery, and post-unwind compounding. Its Capital-Cycle Break Monitor separately displays structural vulnerability, rollover impulse, coverage, derivative direction, decaying structured events, and the upstream confirmations that are still missing. That monitor has zero allocation authority; see `docs/capital_cycle_break_monitor.md`.
+
+Use `poetry run trade-bot validate-capital-cycle` to test whether the rollover logic adds nested out-of-sample information beyond the historical event rate and existing market signals. The job fails readiness closed when direct upstream histories or objective economic-rollover labels are absent and never grants allocation authority.
 
 The historical-crisis lane also shows **Historical Bias Adjustment Research**
 beside the Defensive Posture Cross-Check when its artifacts exist. Refresh it
@@ -666,7 +678,10 @@ Keep `.env`, `.venv/`, `data/`, `reports/`, DuckDB files, parquet files, CSV exp
 | --- | --- |
 | List snapshots | `poetry run trade-bot list-snapshots --limit 10` |
 | List background jobs | `poetry run trade-bot list-snapshot-jobs --limit 10` |
+| Preview snapshot retention | `poetry run trade-bot prune-snapshots --dry-run` |
+| Apply snapshot retention | `poetry run trade-bot prune-snapshots --apply` |
 | Migrate warehouse | `poetry run trade-bot migrate-warehouse` |
+| Rebuild strategy-matched operating history | `poetry run trade-bot seed-operating-history --config configs/baseline.yaml --match-snapshot-dates` |
 | Seed monitoring | `poetry run trade-bot seed-monitoring-windows --start-date YYYY-MM-DD --top-n 5 --capital-base 10000` |
 | Add one strategy | `poetry run trade-bot monitor-strategy STRATEGY_NAME --role challenger --mode paper --capital-base 10000 --start-date YYYY-MM-DD` |
 | Change a window | `poetry run trade-bot update-monitoring-window WINDOW_ID --role champion --demote-other-champions` |
@@ -675,6 +690,41 @@ Keep `.env`, `.venv/`, `data/`, `reports/`, DuckDB files, parquet files, CSV exp
 | List windows | `poetry run trade-bot list-monitoring-windows` |
 | Champion/challenger | `poetry run trade-bot list-champion-challenger` |
 | Freeze the fixed prospective cohort | `poetry run trade-bot seed-prospective-monitoring-cohort --config configs/active_trading.yaml` |
+
+Snapshot retention has three explicit tiers. Every intraday artifact is kept for
+seven days after its actual storage time. Once that raw-capture window expires,
+the latest snapshot within each market date is retained for the 30 most recent
+market dates. Older history retains the latest available market date and capture
+within each `W-WED` weekly bucket. Historical backfills compact immediately to
+their requested cadence instead of waiting seven days.
+
+This is a maximum-density retention rule, not a claim of complete weekly
+coverage. It never fabricates a snapshot for a week that was not captured or
+backfilled. Dashboard history therefore breaks lines across gaps longer than two
+weeks rather than visually interpolating across missing evidence.
+
+To add coarse long-history coverage without replacing denser evidence, use the
+additive missing-period mode. For example, this fills any absent canonical
+quarter-end market dates unless the same normal retention week already has a
+saved point, then reapplies the normal daily/weekly policy. Denser evidence in
+other weeks remains intact:
+
+```bash
+poetry run trade-bot backfill-snapshots \
+  --start-date 2007-07-11 \
+  --daily-tail-days 0 \
+  --weekly-frequency Q \
+  --only-missing-periods
+```
+
+Promoting an operating book is fail-closed on historical interpretability. The
+dashboard first verifies that the proposed strategy exists in every retained
+point-in-time snapshot, then rebuilds the materialized operating-history tables
+for the exact retained-date population and records the strategy identity on
+every row. If any snapshot predates the strategy definition, promotion is
+blocked until the 1:1 snapshot population is rebuilt. Price-fast reconstructed
+rows remain explicitly labeled and must not be confused with contemporaneously
+saved event, news, or macro evidence.
 
 ## Research Loop
 
@@ -756,6 +806,29 @@ poetry run trade-bot validate-simulation-engine \
 
 Checkpoint support makes a full validation finishable; it does not make a
 small-path smoke test authoritative.
+
+## AI Financial System Monograph
+
+The forensic AI-financial-system investigation lives under
+`research/ai_financial_system/`. Its canonical database, evidence registries,
+staging-lane acceptance packets, chapter sources, and publication standards are
+separate from Trade-bot's allocation research.
+
+Primary-source preservation is fail-closed. For the private-investment earnings
+workstream, rebuild and verify the SEC archive inventories and searchable text
+derivatives with:
+
+```bash
+python scripts/build_private_investment_source_archive.py
+python scripts/extract_private_investment_sec_text.py
+```
+
+The complete publication is not a single loose export. Final delivery requires
+three independently manifested and visually inspected PDFs: the executive summary,
+the full Chapters 1–19 monograph, and the “Burning Up”-inspired analytical essay.
+See
+`research/ai_financial_system/publication_pdf_standard.md` and
+`research/ai_financial_system/staging/publication_completion_baseline.md`.
 
 ## Formula Audit
 

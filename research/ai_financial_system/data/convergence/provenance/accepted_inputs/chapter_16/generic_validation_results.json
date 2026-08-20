@@ -1,0 +1,9 @@
+{
+  "canonical_source_id_and_url_consistency": "PASS",
+  "csv_shape_and_provisional_id_uniqueness": "PASS",
+  "lane": "lane_3_chapter_16_rebuilt_v3",
+  "manifest_hash_and_count_validation": "PASS",
+  "staged_source_claim_referential_integrity": "PASS",
+  "status": "PASS",
+  "validator": "research/ai_financial_system/scripts/validate_staging_packet.py"
+}

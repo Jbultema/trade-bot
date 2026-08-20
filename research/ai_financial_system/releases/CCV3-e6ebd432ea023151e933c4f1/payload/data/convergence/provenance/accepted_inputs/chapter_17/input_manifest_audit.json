@@ -1,0 +1,21 @@
+{
+  "immutable_inputs": {
+    "chapter16_fresh_acceptance": {
+      "canonical_integration": "NOT_AUTHORIZED",
+      "comparative_publication": "BLOCKED",
+      "intrinsic_packet": "ACCEPT_INTRINSIC_PACKET",
+      "lane": "lane_2_verify_chapter_16_rebuilt_v3",
+      "manifest_sha256": "8149151d11375bc7151e9361e811035f9dfada906fdd152050eb120769c88266",
+      "verdict": "ACCEPT_WITH_EXPLICIT_EXTERNAL_HOLDS"
+    },
+    "chapter16_rebuilt_v3": {
+      "lane": "lane_3_chapter_16_rebuilt_v3",
+      "manifest_sha256": "e506d400f9dc317097c11cf88d52920417b3af2cb04488b77ba485488285c1a4"
+    },
+    "chapter17_rebuilt_v2": {
+      "lane": "lane_3_chapter_17_rebuilt_v2",
+      "manifest_sha256": "53601a0fcb02daab119b898d227172fd893513674ad86df510b6c66625c34c21"
+    }
+  },
+  "status": "PASS"
+}

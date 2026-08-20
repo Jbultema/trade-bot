@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1084324,
+  "content_sha256": "1a123433f7da9b600a9415ef02211f72cc451928be30bac3dc73c8aca384e664",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/2488/000119312526129106/d46357dars.pdf",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0119_1a123433f7da9b60.pdf",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "application/pdf",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000119312526129106/d46357dars.pdf",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-04-29",
+  "publisher": "Advanced Micro Devices Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0119_1a123433f7da9b60.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:52:52.799151+00:00",
+  "retrieval_started_utc": "2026-07-26T17:52:52.684266+00:00",
+  "selected_response_headers": {
+    "content-length": "1084324",
+    "content-type": "application/pdf",
+    "date": "Sun, 26 Jul 2026 17:52:52 GMT",
+    "etag": "\"8a5d39c52e10920cb1ad11ba4d5a624c\"",
+    "last-modified": "Fri, 27 Mar 2026 20:19:16 GMT"
+  },
+  "source_id": "SRC-0119",
+  "status": "preserved_complete",
+  "title": "AMD Form 10-K for year ended December 27 2025",
+  "write_state": "new_version_written"
+}

@@ -1,0 +1,67 @@
+{
+  "canonical_integration_authorized": false,
+  "chapter_prose_authorized": false,
+  "checks": [
+    {
+      "check": "v1_append_only_retention",
+      "detail": "57/57",
+      "passed": true
+    },
+    {
+      "check": "version_identity_and_canonical_sources",
+      "detail": "60 versions|52 sources",
+      "passed": true
+    },
+    {
+      "check": "all_preserved_bytes_and_provenance",
+      "detail": "53/53",
+      "passed": true
+    },
+    {
+      "check": "delta_manifest_exact_reperformance",
+      "detail": "3/3",
+      "passed": true
+    },
+    {
+      "check": "failure_and_rights_population_fail_closed",
+      "detail": "failures=4 rights=2",
+      "passed": true
+    },
+    {
+      "check": "six_explicit_exception_observations",
+      "detail": "6",
+      "passed": true
+    },
+    {
+      "check": "accepted_v1_semantic_and_blob_tables_unchanged",
+      "detail": "{\"carried_private_locator_reviews.csv\": true, \"claim_locator_states.csv\": true, \"duplicate_blob_reconciliation.csv\": true, \"source_derivatives.csv\": true}",
+      "passed": true
+    },
+    {
+      "check": "projection_exact_reperformance_and_counts",
+      "detail": "525/525 {\"internal_P4_reconstruction\": 3, \"metadata_only_rights_boundary\": 2, \"no_matching_preservation_record\": 186, \"preserved_and_semantically_reviewed\": 5, \"preserved_bytes_available_locator_review_pending\": 326, \"retrieval_failed\": 3}",
+      "passed": true
+    },
+    {
+      "check": "quarantine_excluded",
+      "detail": "all 60 rows",
+      "passed": true
+    },
+    {
+      "check": "schema_load_integrity_and_foreign_keys",
+      "detail": "{\"foreign_key_violations\": 0, \"integrity_check\": \"ok\", \"table_counts\": {\"carried_private_locator_reviews\": 5, \"chapter_support_state_projection\": 525, \"claim_locator_states\": 167, \"duplicate_blob_reconciliation\": 5, \"source_derivatives\": 8, \"source_exceptions\": 6, \"source_version_delta_audit\": 3, \"source_versions\": 60}}",
+      "passed": true
+    },
+    {
+      "check": "protected_inputs_unchanged",
+      "detail": "251/251",
+      "passed": true
+    }
+  ],
+  "checks_passed": 11,
+  "checks_total": 11,
+  "passed": true,
+  "publication_authorized": false,
+  "semantic_locator_clearance": "none_beyond_accepted_v1_five_claim_reviews",
+  "validator": "source_preservation_union_v2_dedicated_validator"
+}

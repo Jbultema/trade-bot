@@ -1,0 +1,6 @@
+{
+  "command": "ruff check --no-cache build_metadata_rebase.py run_author_checks.py seal_manifest.py validate_all_cell_semantics.py validate_metadata_rebase.py verify_two_clean_builds.py",
+  "files_checked": 6,
+  "status": "PASS",
+  "stdout": "All checks passed!"
+}

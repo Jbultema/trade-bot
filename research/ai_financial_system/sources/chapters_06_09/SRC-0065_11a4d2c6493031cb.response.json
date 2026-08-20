@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 119761,
+  "content_sha256": "11a4d2c6493031cb504689e85cf9ab38cfafa008f7e37fd12a20df58eb3252cd",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://x.ai/news/anthropic-compute-partnership",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0065_11a4d2c6493031cb.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://x.ai/news/anthropic-compute-partnership",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-06",
+  "publisher": "xAI Corp.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0065_11a4d2c6493031cb.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:07.742641+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:07.526099+00:00",
+  "selected_response_headers": {
+    "cache-control": "s-maxage=31536000",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:51:07 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0065",
+  "status": "preserved_complete",
+  "title": "Anthropic compute partnership",
+  "write_state": "new_version_written"
+}

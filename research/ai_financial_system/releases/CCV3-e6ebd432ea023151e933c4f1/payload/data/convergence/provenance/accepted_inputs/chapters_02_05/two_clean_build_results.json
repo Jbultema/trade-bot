@@ -1,0 +1,13 @@
+{
+  "clean_builds": 2,
+  "files_compared": 66,
+  "passed": true,
+  "result": "two_clean_builds_and_retained_outputs_byte_identical",
+  "thread_limits": {
+    "MKL_NUM_THREADS": "1",
+    "NUMEXPR_NUM_THREADS": "1",
+    "OMP_NUM_THREADS": "1",
+    "OPENBLAS_NUM_THREADS": "1",
+    "VECLIB_MAXIMUM_THREADS": "1"
+  }
+}

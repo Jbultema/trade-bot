@@ -1,0 +1,6 @@
+source_id=L1-SRC18-0016
+attempt_id=L1-SRC18-0016_v0001
+original_url=https://unctad.org/press-material/rmt-continued-investment-ever-larger-ships-yet-supply-does-not-create-demand-says
+status=retrieval_failed_after_bounded_retry
+retry_count=2
+max_time_seconds=90

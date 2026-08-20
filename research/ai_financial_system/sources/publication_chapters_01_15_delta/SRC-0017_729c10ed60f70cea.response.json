@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 25665,
+  "content_sha256": "729c10ed60f70cea5862f7ed50e35d70a154d5078e810b852b46d305e137f83c",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962825000047/crwv-20250909.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0017_729c10ed60f70cea.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962825000047/crwv-20250909.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-09-15",
+  "publisher": "CoreWeave Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0017_729c10ed60f70cea.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:21.307485+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:21.281520+00:00",
+  "selected_response_headers": {
+    "content-length": "4350",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:21 GMT",
+    "last-modified": "Mon, 15 Sep 2025 12:59:40 GMT"
+  },
+  "source_id": "SRC-0017",
+  "status": "preserved_complete",
+  "title": "CoreWeave Form 8-K NVIDIA residual capacity order",
+  "write_state": "new_version_written"
+}

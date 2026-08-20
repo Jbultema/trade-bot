@@ -1,0 +1,16 @@
+{
+  "checks": [
+    "manifest paths, hashes, row counts, and line counts",
+    "CSV shape and provisional-ID uniqueness",
+    "canonical source-ID and URL consistency",
+    "staged source-claim referential integrity"
+  ],
+  "csv_rows_checked": 8040,
+  "errors": [],
+  "files_checked": 49,
+  "lane": "lane_3_chapter_19_rebuilt_v3",
+  "passed": true,
+  "status": "PASS",
+  "validator": "research/ai_financial_system/scripts/validate_staging_packet.py",
+  "warnings": []
+}

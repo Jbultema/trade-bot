@@ -73,6 +73,9 @@ def render_forward_test_page(runtime: DashboardRuntime) -> None:
                 runtime.paths.journal_path,
                 baseline_run=runtime.baseline_run,
                 bot_config=runtime.bot_config,
+                warehouse_path=runtime.paths.run_store_path,
+                artifact_dir=runtime.paths.artifact_dir,
+                job_log_dir=runtime.paths.job_log_dir,
             ).selected_book
         ),
         allow_decision_actions=not runtime.is_historical_snapshot_mode,

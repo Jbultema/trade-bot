@@ -1,0 +1,455 @@
+{
+  "authority": {
+    "canonical_integration": "NOT_AUTHORIZED",
+    "chapter_docx_publication": "NOT_AUTHORIZED",
+    "coefficient_transfer": "BLOCK",
+    "comparative_system_use": "BLOCK",
+    "metadata_acceptance": "PENDING_FRESH_UNINVOLVED_REVIEW",
+    "predictive_use": "BLOCK"
+  },
+  "checks": [
+    {
+      "check_id": "FILES-001",
+      "description": "all required tabular outputs exist",
+      "expected": [],
+      "observed": [],
+      "status": "PASS"
+    },
+    {
+      "check_id": "FILES-002",
+      "description": "required output row populations are exact",
+      "expected": {
+        "accepted_preservation_artifact_inventory.csv": 123,
+        "canonical_database_binding.csv": 2,
+        "claim_source_version_locator_junction.csv": 73,
+        "evidence_authority_publication_hold_matrix.csv": 58,
+        "foreign_key_audit.csv": 7,
+        "governing_input_hash_registry.csv": 5,
+        "immutable_intrinsic_artifact_inventory.csv": 50,
+        "intrinsic_field_disposition.csv": 17112,
+        "intrinsic_row_disposition.csv": 1654,
+        "normalized_source_version_registry.csv": 25,
+        "population_reproduction_audit.csv": 15,
+        "preserved_derivative_registry.csv": 23,
+        "retained_prohibition_matrix.csv": 34,
+        "retained_source_exception_holds.csv": 2,
+        "retained_unresolved_holds.csv": 26,
+        "retrieval_attempt_history.csv": 25,
+        "semantic_locator_registry.csv": 58,
+        "semantic_patch_registry.csv": 18,
+        "source_metadata_field_disposition.csv": 8096,
+        "source_metadata_row_disposition.csv": 718
+      },
+      "observed": {
+        "accepted_preservation_artifact_inventory.csv": 123,
+        "canonical_database_binding.csv": 2,
+        "claim_source_version_locator_junction.csv": 73,
+        "evidence_authority_publication_hold_matrix.csv": 58,
+        "foreign_key_audit.csv": 7,
+        "governing_input_hash_registry.csv": 5,
+        "immutable_intrinsic_artifact_inventory.csv": 50,
+        "intrinsic_field_disposition.csv": 17112,
+        "intrinsic_row_disposition.csv": 1654,
+        "normalized_source_version_registry.csv": 25,
+        "population_reproduction_audit.csv": 15,
+        "preserved_derivative_registry.csv": 23,
+        "retained_prohibition_matrix.csv": 34,
+        "retained_source_exception_holds.csv": 2,
+        "retained_unresolved_holds.csv": 26,
+        "retrieval_attempt_history.csv": 25,
+        "semantic_locator_registry.csv": 58,
+        "semantic_patch_registry.csv": 18,
+        "source_metadata_field_disposition.csv": 8096,
+        "source_metadata_row_disposition.csv": 718
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "FILES-003",
+      "description": "required non-tabular bindings exist",
+      "expected": [],
+      "observed": [],
+      "status": "PASS"
+    },
+    {
+      "check_id": "HASH-001",
+      "description": "all five governing inputs match before and after",
+      "expected": {
+        "corrected_preservation_author_manifest": "3fad6122a81e115a352e20bfdb3086be1a25d5ea6547202c97d6ac2020b11867",
+        "corrected_preservation_review_manifest": "d4e1d026f7743032e77f98a6ed1424ccd4270bb5a5188a3ed1a5d98c44eb8dd9",
+        "frozen_canonical_database": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+        "intrinsic_author_manifest": "d11f8bd03062b2abfbcb85d3c351ea614eb2d06a3704ed15b6e571c2e758b8de",
+        "intrinsic_review_manifest": "d4e2646953001f69c17aeddeee7e80af26d4260c9389b8e6fd7f3b0c30159cf8"
+      },
+      "observed": {
+        "corrected_preservation_author_manifest": "3fad6122a81e115a352e20bfdb3086be1a25d5ea6547202c97d6ac2020b11867",
+        "corrected_preservation_review_manifest": "d4e1d026f7743032e77f98a6ed1424ccd4270bb5a5188a3ed1a5d98c44eb8dd9",
+        "frozen_canonical_database": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+        "intrinsic_author_manifest": "d11f8bd03062b2abfbcb85d3c351ea614eb2d06a3704ed15b6e571c2e758b8de",
+        "intrinsic_review_manifest": "d4e2646953001f69c17aeddeee7e80af26d4260c9389b8e6fd7f3b0c30159cf8"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "HASH-002",
+      "description": "governing manifest snapshots are byte exact",
+      "expected": {
+        "corrected_preservation_author_manifest": "3fad6122a81e115a352e20bfdb3086be1a25d5ea6547202c97d6ac2020b11867",
+        "corrected_preservation_review_manifest": "d4e1d026f7743032e77f98a6ed1424ccd4270bb5a5188a3ed1a5d98c44eb8dd9",
+        "intrinsic_author_manifest": "d11f8bd03062b2abfbcb85d3c351ea614eb2d06a3704ed15b6e571c2e758b8de",
+        "intrinsic_review_manifest": "d4e2646953001f69c17aeddeee7e80af26d4260c9389b8e6fd7f3b0c30159cf8"
+      },
+      "observed": {
+        "corrected_preservation_author_manifest": "3fad6122a81e115a352e20bfdb3086be1a25d5ea6547202c97d6ac2020b11867",
+        "corrected_preservation_review_manifest": "d4e1d026f7743032e77f98a6ed1424ccd4270bb5a5188a3ed1a5d98c44eb8dd9",
+        "intrinsic_author_manifest": "d11f8bd03062b2abfbcb85d3c351ea614eb2d06a3704ed15b6e571c2e758b8de",
+        "intrinsic_review_manifest": "d4e2646953001f69c17aeddeee7e80af26d4260c9389b8e6fd7f3b0c30159cf8"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "IMMUTABLE-001",
+      "description": "all 50 manifest-declared intrinsic artifacts are byte identical",
+      "expected": 50,
+      "observed": 50,
+      "status": "PASS"
+    },
+    {
+      "check_id": "IMMUTABLE-002",
+      "description": "all 123 accepted preservation artifacts are bound without mutation",
+      "expected": 123,
+      "observed": 123,
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-001",
+      "description": "intrinsic row and scalar coverage is exact",
+      "expected": [
+        1654,
+        17112
+      ],
+      "observed": [
+        1654,
+        17112
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-002",
+      "description": "source-metadata row and scalar coverage is exact",
+      "expected": [
+        718,
+        8096
+      ],
+      "observed": [
+        718,
+        8096
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-003",
+      "description": "every intrinsic scalar has exactly one disposition",
+      "expected": [
+        17112,
+        17112
+      ],
+      "observed": [
+        17112,
+        17112
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-004",
+      "description": "every source-metadata scalar has exactly one disposition",
+      "expected": [
+        8096,
+        8096
+      ],
+      "observed": [
+        8096,
+        8096
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-005",
+      "description": "field dispositions use only the authorized vocabulary",
+      "expected": [
+        "accepted_duplicate_with_surviving_identity",
+        "direct_retained_identity",
+        "explicit_rejection_authorized_by_accepted_review",
+        "governed_hold_destination",
+        "normalized_junction_destination"
+      ],
+      "observed": [
+        "direct_retained_identity",
+        "governed_hold_destination",
+        "normalized_junction_destination"
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-006",
+      "description": "all destination scalars reproduce source values exactly",
+      "expected": [],
+      "observed": [],
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-007",
+      "description": "no many-to-one scalar overwrite occurs",
+      "expected": 0,
+      "observed": 0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-008",
+      "description": "no evidence authority strengthening is declared",
+      "expected": {
+        "NONE": 25208
+      },
+      "observed": {
+        "NONE": 25208
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOSSLESS-009",
+      "description": "no source scalar is explicitly rejected by the rebase",
+      "expected": 0,
+      "observed": 0,
+      "status": "PASS"
+    },
+    {
+      "check_id": "POP-001",
+      "description": "all task-declared populations reproduce exactly",
+      "expected": {
+        "arithmetic_nonadditivity_controls": 20,
+        "coefficient_blocks": 18,
+        "derivatives": 23,
+        "intrinsic_analytical_records": 128,
+        "intrinsic_record_claim_links": 214,
+        "locator_relationships": 58,
+        "ordered_source_edges": 73,
+        "partially_supported": 26,
+        "predictive_blocks": 16,
+        "retained_failures": 2,
+        "retrieval_attempts": 25,
+        "semantic_patches": 18,
+        "successful_artifacts": 23,
+        "supported": 32,
+        "unique_sources": 23
+      },
+      "observed": {
+        "arithmetic_nonadditivity_controls": 20,
+        "coefficient_blocks": 18,
+        "derivatives": 23,
+        "intrinsic_analytical_records": 128,
+        "intrinsic_record_claim_links": 214,
+        "locator_relationships": 58,
+        "ordered_source_edges": 73,
+        "partially_supported": 26,
+        "predictive_blocks": 16,
+        "retained_failures": 2,
+        "retrieval_attempts": 25,
+        "semantic_patches": 18,
+        "successful_artifacts": 23,
+        "supported": 32,
+        "unique_sources": 23
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "KEY-001",
+      "description": "source-version semantic keys are unique and deterministic",
+      "expected": 25,
+      "observed": 25,
+      "status": "PASS"
+    },
+    {
+      "check_id": "KEY-002",
+      "description": "semantic locator keys are unique and deterministic",
+      "expected": 58,
+      "observed": 58,
+      "status": "PASS"
+    },
+    {
+      "check_id": "KEY-003",
+      "description": "junction semantic keys are unique and deterministic",
+      "expected": 73,
+      "observed": 73,
+      "status": "PASS"
+    },
+    {
+      "check_id": "FK-001",
+      "description": "all stable foreign-key audits pass",
+      "expected": "all PASS",
+      "observed": {
+        "derivative_parent_version_fk": "PASS",
+        "junction_locator_composite_fk": "PASS",
+        "junction_source_version_fk": "PASS",
+        "junction_source_version_pair_fk": "PASS",
+        "locator_hold_fk": "PASS",
+        "locator_intrinsic_claim_fk": "PASS",
+        "locator_scope_fk": "PASS"
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOCATOR-001",
+      "description": "all 58 exact line ranges and window hashes reproduce",
+      "expected": 58,
+      "observed": 58,
+      "status": "PASS"
+    },
+    {
+      "check_id": "LOCATOR-002",
+      "description": "semantic dispositions remain 32 supported and 26 partially supported",
+      "expected": {
+        "partially_supported": 26,
+        "supported": 32
+      },
+      "observed": {
+        "partially_supported": 26,
+        "supported": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTH-001",
+      "description": "preservation, support, grade, scope, analytics, and publication stay separate",
+      "expected": 1,
+      "observed": 1,
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTH-002",
+      "description": "partially supported relationships are never promoted",
+      "expected": {
+        "partially_supported": 26,
+        "supported": 32
+      },
+      "observed": {
+        "partially_supported": 26,
+        "supported": 32
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "AUTH-003",
+      "description": "all 18 coefficient and 16 predictive blocks remain exact",
+      "expected": {
+        "coefficient_transfer_prohibition": 18,
+        "conceptual_hypothesis": 16
+      },
+      "observed": {
+        "coefficient_transfer_prohibition": 18,
+        "conceptual_hypothesis": 16
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "VERSION-001",
+      "description": "both original UNCTAD 403 failures and successful v0003 remain append-only",
+      "expected": {
+        "CH18-SP-L1-SRC18-0016-v0001": [
+          "retrieval_failed",
+          "403",
+          ""
+        ],
+        "CH18-SP-L1-SRC18-0016-v0002": [
+          "retrieval_failed",
+          "403",
+          ""
+        ],
+        "CH18-SP-L1-SRC18-0016-v0003": [
+          "preserved_complete",
+          "200",
+          "6b989ac7fa173a2de5d47757874e1cdc41419fa4407374fd5c9aedc69ffacb46"
+        ]
+      },
+      "observed": {
+        "CH18-SP-L1-SRC18-0016-v0001": [
+          "retrieval_failed",
+          "403",
+          ""
+        ],
+        "CH18-SP-L1-SRC18-0016-v0002": [
+          "retrieval_failed",
+          "403",
+          ""
+        ],
+        "CH18-SP-L1-SRC18-0016-v0003": [
+          "preserved_complete",
+          "200",
+          "6b989ac7fa173a2de5d47757874e1cdc41419fa4407374fd5c9aedc69ffacb46"
+        ]
+      },
+      "status": "PASS"
+    },
+    {
+      "check_id": "VERSION-002",
+      "description": "failed retrievals have no synthetic content hash or archive path",
+      "expected": 2,
+      "observed": 2,
+      "status": "PASS"
+    },
+    {
+      "check_id": "DERIVATIVE-001",
+      "description": "all 23 derivatives and parent hashes reperform exactly",
+      "expected": 23,
+      "observed": 23,
+      "status": "PASS"
+    },
+    {
+      "check_id": "PATCH-001",
+      "description": "all 18 accepted semantic-scope patches reproduce with no residual",
+      "expected": 18,
+      "observed": 18,
+      "status": "PASS"
+    },
+    {
+      "check_id": "REPAIR-001",
+      "description": "17 earlier intrinsic repairs and both v5 residual repairs stay accepted",
+      "expected": [
+        17,
+        2
+      ],
+      "observed": [
+        17,
+        2
+      ],
+      "status": "PASS"
+    },
+    {
+      "check_id": "DB-001",
+      "description": "sealed candidate database is byte-identical and SQLite-clean",
+      "expected": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+      "observed": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+      "status": "PASS"
+    },
+    {
+      "check_id": "NOWRITE-001",
+      "description": "all protected inputs remain byte-identical through validation",
+      "expected": [],
+      "observed": [],
+      "status": "PASS"
+    },
+    {
+      "check_id": "MANIFEST-001",
+      "description": "sealed manifest entries match current files",
+      "expected": 102,
+      "observed": 102,
+      "status": "PASS"
+    }
+  ],
+  "checks_failed": 0,
+  "checks_passed": 34,
+  "errors": [],
+  "lane": "lane_1_chapter_18_metadata_rebase",
+  "packet_type": "chapter_18_immutable_source_metadata_rebase",
+  "passed": true,
+  "status_date": "2026-07-26"
+}

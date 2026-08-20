@@ -1,0 +1,198 @@
+Biden-Harris Administration Announces CHIPS Incentives Award with SK hynix to Advance U.S. Technological Leadership and Expand Capacity of Chips Crucial to the AI Supply Chain | NIST
+Skip to main content
+An official website of the United States government
+Here’s how you know
+Official websites use .gov
+A
+.gov
+website belongs to an official government organization in the United States.
+Secure .gov websites use HTTPS
+A
+lock
+(
+) or
+https://
+means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.
+https://www.nist.gov/news-events/news/2024/12/biden-harris-administration-announces-chips-incentives-award-sk-hynix
+Search NIST
+Menu
+Close
+Publications
+What We Do
+All Topics
+Advanced communications
+Artificial intelligence
+Bioscience
+Buildings and construction
+Chemistry
+Cybersecurity and Privacy
+Electronics
+Energy
+Environment
+Fire
+Forensic science
+Health
+Information technology
+Infrastructure
+Manufacturing
+Materials
+Mathematics and statistics
+Metrology
+Nanotechnology
+Neutron research
+Performance excellence
+Physics
+Public safety
+Quantum information science
+Resilience
+Standards
+Transportation
+Labs & Major Programs
+Assoc Director of Laboratory Programs
+Laboratories
+Communications Technology Laboratory
+Engineering Laboratory
+Information Technology Laboratory
+Material Measurement Laboratory
+Physical Measurement Laboratory
+User Facilities
+NIST Center for Neutron Research
+CNST NanoFab
+Research Test Beds
+Research Projects
+Tools & Instruments
+Major Programs
+CHIPS for America Initiative
+Congressionally Identified Project Program (CIPP)
+Manufacturing Extension Partnership (MEP)
+Office of Advanced Manufacturing
+Technology Partnerships Office
+Services & Resources
+Measurements and Standards
+Calibration Services
+Laboratory Accreditation (NVLAP)
+Quality System
+Standard Reference Materials (SRMs)
+Standard Reference Instruments (SRIs)
+Standards.gov
+Time Services
+Office of Weights and Measures
+Software
+Data
+Chemistry WebBook
+National Vulnerability Database
+Physical Reference Data
+Standard Reference Data (SRD)
+Storefront
+License & Patents
+Computer Security Resource Center (CSRC)
+NIST Research Library
+News & Events
+News
+Events
+Blogs
+NIST In Focus
+Feature Stories
+Awards
+Video Gallery
+Image Gallery
+Media Contacts
+About NIST
+About Us
+Leadership
+Organization Structure
+Budget & Planning
+Contact Us
+Visit
+Careers
+Student programs
+Work with NIST
+History
+NIST Digital Archives
+NIST Museum
+NIST and the Nobel
+Educational Resources
+UPDATES
+This news item has been archived.
+Biden-Harris Administration Announces CHIPS Incentives Award with SK hynix to Advance U.S. Technological Leadership and Expand Capacity of Chips Crucial to the AI Supply Chain
+CHIPS Investment Establishes a Research Hub in Indiana and Brings Next Generation HBM and Advanced Packaging R&D to the U.S.
+December 19, 2024
+Share
+Facebook
+Linkedin
+X.com
+Email
+Media Contact: Hannah Robinson,
+hannah.robinson
+[at]
+chips.gov
+(
+hannah[dot]robinson[at]chips[dot]gov
+)
+Today, the Biden-Harris Administration announced that the U.S. Department of Commerce awarded SK hynix up to $458 million in direct funding under the CHIPS Incentives Program’s Funding Opportunity for Commercial Fabrication Facilities. The award comes after the previously signed preliminary memorandum of terms, announced on August 6, 2024, and the completion of the Department’s due diligence. This funding supports SK hynix’s investment of approximately $3.87 billion in West Lafayette, Indiana, to build a memory packaging plant for artificial intelligence (AI) products and an advanced packaging fabrication and R&D facility, filling a critical gap in the U.S. semiconductor supply chain. The Department will disburse the funds based on the company's completion of project milestones.
+“By investing in companies like SK hynix and communities like West Lafayette, the bipartisan CHIPS and Science Act continues to supercharge America’s global technology leadership,” said
+U.S. Secretary of Commerce Gina Raimondo
+. “With this investment in SK hynix – the world’s leading producer of high-bandwidth memory chips – and their partnership with Purdue University, we are solidifying America’s AI hardware supply chain in a way no other country on Earth can match, creating hundreds of jobs in Indiana, and ensuring the Hoosier State plays an important role in advancing U.S. economic and national security.”
+“Today’s announcement is President Biden’s CHIPS and Science Act at work,” said
+Assistant to the President for Science and Technology and Director of the White House Office of Science and Technology Policy Arati Prabhakar
+. “This new facility will develop state-of-the-art advanced packaging, which is more and more important to U.S. semiconductor leadership.”
+The CHIPS investment in SK hynix, the world’s leading producer of high-bandwidth memory (HBM), represents a significant step in advancing the security of the U.S. supply chain. AI is driving the growth and demand for HBM capacity, which is one of the core supply chain constraints for the AI industry. Because of this investment made possible by the bipartisan CHIPS and Science Act, HBM manufacturing will be available in the United States. Additionally, this investment is expected to create approximately 1,000 new facility jobs and hundreds of construction jobs and establish a research hub in Indiana through SK hynix’s partnership with Purdue University. The next generation HBM that will be researched, developed, mass-produced, and packaged in this ecosystem with Purdue University will play an important role in the U.S. semiconductor ecosystem.
+“SK hynix looks forward to collaborating with the U.S. government, the State of Indiana, Purdue University, and our U.S. business partners to build a robust and resilient AI semiconductor supply chain in the U.S.,” said
+SK hynix CEO Kwak Noh-Jung
+.
+For more information about these projects, please visit the CHIPS for America
+website
+.
+In addition to the direct funding of up to $458 million, the CHIPS Program Office will provide up to $500 million in loans – which is part of the $75 billion loan authority provided by the CHIPS and Science Act – to SK hynix under the award.
+As stated in the CHIPS Notice of Funding Opportunity for Commercial Fabrication Facilities, CHIPS for America will distribute direct funding to recipients for capital expenditures based on the completion of construction, technology, production, and commercial milestones. The program will track the performance of each CHIPS Incentives Award via financial and programmatic reports, in accordance with the award terms and conditions.
+About CHIPS for America
+CHIPS for America has awarded over $26 billion of the over $36 billion in proposed incentives funding allocated to date. These announcements 21 states are expected to create over 125,000 jobs. Since the beginning of the Biden-Harris Administration, semiconductor and electronics companies have announced over $450 billion in private investments, catalyzed in large part by public investment. CHIPS for America is part of President Biden and Vice President Harris’s economic plan to invest in America, stimulate private sector investment, create good-paying jobs, make more in the United States, and revitalize communities left behind. CHIPS for America includes the CHIPS Program Office, responsible for manufacturing incentives, and the CHIPS Research and Development Office, responsible for R&D programs, that both sit within the National Institute of Standards and Technology (NIST) at the Department of Commerce. Visit
+chips.gov
+to learn more.
+Electronics
+,
+Semiconductors
+and
+Manufacturing
+NIST in your inbox
+Stay up to date with the latest news from NIST.
+Enter Email Address
+Organizations
+NIST Headquarters
+Creating Helpful Incentives to Produce Semiconductors for America (CHIPS)
+CHIPS Program Office
+Released December 19, 2024, Updated October 6, 2025
+Was this page helpful?
+HEADQUARTERS
+100 Bureau Drive
+Gaithersburg, MD 20899
+301-975-2000
+Webmaster
+|
+Contact Us
+|
+Our Other Offices
+X.com
+Facebook
+LinkedIn
+Instagram
+YouTube
+Giphy
+RSS Feed
+Mailing List
+How are we doing?
+Feedback
+Site Privacy
+Accessibility
+Privacy Program
+Copyright & Disclaimers
+Vulnerability Disclosure
+No Fear Act Policy
+FOIA
+Environmental Policy
+Scientific Integrity
+Information Quality Standards
+Commerce.gov
+Science.gov
+USA.gov
+Vote.gov

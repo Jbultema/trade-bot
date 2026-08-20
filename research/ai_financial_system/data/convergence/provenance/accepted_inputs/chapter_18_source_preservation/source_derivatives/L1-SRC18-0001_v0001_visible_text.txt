@@ -1,0 +1,3097 @@
+[[PDF_PAGE_0001]]
+United States General Accounting Office
+GAO Report to Congressional Requesters
+July 1997
+RAIL
+TRANSPORTATION
+Federal Railroad
+Administration’s New
+Approach to Railroad
+Safety
+GAO/RCED-97-142
+
+[[PDF_PAGE_0002]]
+
+
+[[PDF_PAGE_0003]]
+GAO
+United States
+General Accounting Office
+Washington, D.C. 20548
+Resources, Community, and
+Economic Development Division
+B-275984
+July 23, 1997
+The Honorable James L. Oberstar
+Ranking Democratic Member
+Committee on Transportation and
+Infrastructure
+The Honorable Robert E. Wise, Jr.
+Ranking Democratic Member
+Subcommittee on Railroads
+Committee on Transportation and
+Infrastructure
+The Honorable Bruce F. Vento
+House of Representatives
+In response to your request, this report provides information on operational and safety trends in
+the railroad industry, and describes how the Federal Railroad Administration (
+FRA) has
+responded to these trends by developing a new partnering approach for improving safety on the
+nation’s rail lines.
+As arranged with your offices, unless you publicly announce its contents earlier, we plan no
+further distribution of this report until 30 days after the date of this letter. At that time, we will
+send copies of this report to interested congressional committees, the Secretary of
+Transportation, and the Administrator of
+FRA. We will also make copies available to others upon
+request.
+If you or your staffs have any questions, I can be reached at (202) 512-2834. Major contributors
+to this report are listed in appendix V.
+John H. Anderson, Jr.
+Director, Transportation Issues
+
+[[PDF_PAGE_0004]]
+Executive Summary
+Purpose In 1980, the Congress passed the Staggers Rail Act, which fostered
+substantial changes in the railroad industry. By 1995, fewer large freight
+railroads accounted for most of the industry’s revenue and train miles. At
+the same time, these freight railroads substantially reduced their
+workforce and track networks. In response, the Congress and railroad
+labor have raised concerns that these changes in the industry could
+compromise safety.
+The Ranking Democratic Member of the House Committee on
+Transportation and Infrastructure, the Ranking Democratic Member of
+that Committee’s Subcommittee on Railroads, and Representative Bruce F.
+Vento asked
+GAO to describe (1) relationships that existed between
+operational and safety trends in the railroad industry from 1976 to 1995
+and (2) the Federal Railroad Administration’s (
+FRA) approach to improving
+safety on the nation’s rail system. GAO was not able to identify any direct
+relationships between operational and safety trends because of limitations
+in the data that were available for the 1976 to 1995 period. Therefore, this
+report provides information on safety trends for the entire railroad
+industry and describes how
+FRA has responded to both operational and
+safety trends to develop a new partnering approach to improving safety on
+the nation’s rail lines. In addition, chapter 1 provides information on
+operational trends in the freight industry.
+Background In 1995, the railroad industry consisted of Amtrak (the nation’s largest
+passenger railroad), 14 large freight railroads—collectively known as class
+I railroads—as well as over 600 regional and smaller railroads. The
+industry had changed significantly since the Staggers Rail Act made it
+federal policy that railroads would rely, where possible, on competition
+and the demand for services, rather than on regulation to establish
+reasonable rates. Prior to the act, several of the largest freight railroads
+were earning a negative rate of return on investment and at least three
+were bankrupt. The deregulation contributed to changes in the
+composition and operation of the rail industry. From 1976 through 1995,
+the nation’s largest freight railroads cut costs; increased the tonnage each
+train carried and the distance this tonnage was carried; downsized their
+workforce; and eliminated, sold, or abandoned thousands of miles of
+unprofitable or little-used track.
+Since 1970,
+FRA has been responsible for regulating all aspects of
+passenger and freight railroad safety under the Federal Railroad Safety Act
+GAO/RCED-97-142 Rail TransportationPage 2
+
+[[PDF_PAGE_0005]]
+Executive Summary
+of 1970, as amended.1 In that capacity, FRA prescribes regulations and
+issues orders that relate to railroad equipment, track, signal systems,
+operating practices, and those aspects of railroad workplace safety that
+pertain primarily to the movement of trains. The Occupational Health and
+Safety Administration (
+OSHA) regulates those aspects of railroad workplace
+safety that are typical of any industrial workplace. FRA also enforces the
+Hazardous Materials Transportation Act as it pertains to the transportation
+of hazardous materials by rail.
+Results in Brief Railroad safety has improved significantly over the past 20 years. Reported
+accident and injury rates are down 70 and 74 percent, respectively, from
+1976 levels. Railroad industry representatives attribute the reductions to
+improvements made to the railroads’ plant and equipment. However, labor
+representatives expressed concern that, despite this progress, heavier
+loads and increased traffic may adversely affect rail safety in the future.
+Rail safety data indicate that the progress in reducing accidents has
+slowed in recent years. While preliminary data for 1996 show
+improvements in key safety statistics, about 1,000 people die each year as
+a result of grade-crossing accidents and trespassing, 11,000 railroad
+employees are injured, and thousands of people are evacuated from their
+homes as a result of the hazardous materials that are released during train
+accidents.
+FRA instituted an important shift in its safety program in 1993 to address
+safety problems in the rail industry. Rather than using violations and civil
+penalties as the primary means to obtain compliance with railroad safety
+regulations,
+FRA has emphasized cooperative partnerships with other
+federal agencies, railroad management, labor unions, and the states. The
+partnering efforts generally focus on the nation’s larger railroads and have
+resulted in
+FRA inspectors’ conducting fewer site-specific inspections of
+the railroad industry overall. While the preliminary data for 1996 show
+improvements, it is too early to determine if
+FRA’s new approach will
+sustain a long-term decline in accidents and fatalities. In addition, FRA has
+allocated fewer resources to responding to concerns about the level of
+workplace injuries for railroad employees and railroad bridge safety.
+1In 1994, the Federal Railroad Safety Act of 1970, and other federal railroad safety statutes, were
+repealed, codified, and reenacted as chapters 201-213 of title 49, United States Code.
+GAO/RCED-97-142 Rail TransportationPage 3
+
+[[PDF_PAGE_0006]]
+Executive Summary
+Principal Findings
+Safety on the Nation’s
+Railroads Has Generally
+Improved
+Safety on the nation’s railroads has improved since 1976, although the
+most rapid decrease in accidents occurred before 1987. FRA and industry
+officials attribute these improvements to advancements in technology,
+increased investment focused on a downsized infrastructure, and a more
+scientific approach toward reducing injuries. However, class I freight
+railroads, which account for most of the industry’s revenue and
+train-miles, are now using fewer people, locomotives, and cars to haul
+more tonnage over fewer miles of track. Labor officials believe that these
+changes in operations could lead to more rail collisions and accidents as a
+result of greater congestion and fewer qualified employees to perform
+essential maintenance. While current safety trends are positive, it is
+uncertain how further advancements in technology or reductions in
+employment will affect safety in the future.
+Nonetheless, further improvements in safety are needed, since more than
+1,000 people die each year as a result of fatal collisions between cars and
+trains or as a result of trespassers on railroad property being struck by
+trains. Hazardous materials releases resulting from train accidents showed
+no clear trends between 1978 and 1995. About 261,000 people were
+evacuated across the United States because of rail-related hazardous
+materials releases occurring over these years. Concerns remain about
+evacuations because the volume of chemical traffic increased by over
+one-third from 1976 to 1995.
+FRA’s New Safety Strategy
+Involves Partnerships
+Beginning in 1993, FRA reassessed its safety program to leverage the
+agency’s resources and established a cooperative approach that focused
+on results to improve railroad safety. With rail traffic expected to grow
+through the remainder of the 1990s and beyond,
+FRA anticipated the need
+for new approaches to enhance site-specific inspections. As a result, FRA
+formalized this shift with the establishment of three new initiatives. First,
+in 1994,
+FRA took the lead responsibility for coordinating the Department
+of Transportation’s multiagency plans to reduce fatalities at rail-highway
+crossings. Second, in 1995,
+FRA formally established the Safety Assurance
+and Compliance Program through which the agency works cooperatively
+with railroad labor and management to identify and solve the root causes
+of systemic problems facing the railroads. Third, in 1996,
+FRA established
+the Railroad Safety Advisory Committee to develop recommendations for
+GAO/RCED-97-142 Rail TransportationPage 4
+
+[[PDF_PAGE_0007]]
+Executive Summary
+the agency’s more complex or contentious rulemakings by seeking
+consensus among the parties affected by the rulemakings.
+It is too early to determine if FRA’s collaborative efforts will produce a
+sustained decline in rail accidents and fatalities. FRA credits its
+grade-crossing plan with contributing to a 19-percent drop in fatalities in
+1996. Whether the plan contributed to the decline is uncertain: Past trends
+indicate that the total number of railroad fatalities declined by 34 percent
+from 1976 to 1983 (from 1,630 to 1,073) but then fluctuated within a range
+of 1,036 and 1,324 deaths between 1983 and 1995.
+FRA has implemented its
+Safety Assurance and Compliance Program with 33 railroads. This method
+has improved the safety on many large railroads, but Norfolk Southern
+Corporation has refused to participate until
+FRA substantiates safety
+problems at the railroad. With regards to the Advisory Committee, the FRA
+Administrator has referred seven major rulemaking tasks to it. While the
+committee has developed proposed regulations on track safety and radio
+communications standards, efforts to develop freight power brake
+regulations have encountered problems in the negotiations among
+FRA,
+railroad labor, and railroad management.
+To accommodate the new initiatives, FRA has shifted some of its resources
+away from site-specific inspections, which have historically served as FRA’s
+primary means of ensuring compliance with safety regulations. The 53,113
+inspections conducted in 1995 were 23 percent below the 68,715
+inspections conducted in 1994. As a result, a greater number of railroads
+are not receiving inspections, and inspectors are conducting fewer reviews
+of the railroads’ own inspection efforts.
+In addition, there are two important areas of railroad safety that
+FRA’s
+collaborative approach does not systematically address: workplace safety
+for railroad employees and the structural integrity of railroad bridges.
+While a 1978 policy statement by
+FRA provides guidance on which
+workplace safety issues FRA and OSHA should cover, the two agencies’
+inspection presence on railroad property varies greatly. FRA routinely
+inspects the railroads’ track, equipment, and operating practices. In
+contrast,
+OSHA inspectors visit railroad property only in response to an
+employee or union complaint about working conditions or when
+investigating a workplace accident. In January 1997,
+FRA revised its injury
+reporting requirements to capture additional information on workplace
+injuries, including where an injury occurred, what activity was being
+performed at the time, and what was the probable cause of the injury.
+According to
+FRA, the new information will provide better data for future
+GAO/RCED-97-142 Rail TransportationPage 5
+
+[[PDF_PAGE_0008]]
+Executive Summary
+rulemakings. Because these requirements only recently became effective,
+FRA has yet to accumulate sufficient data for analysis. Once sufficient data
+are collected, the agency will be able to determine the causes of the most
+frequent and serious injuries and focus efforts on corrective actions.
+FRA does not have regulations governing the structural integrity of the
+100,700 railroad bridges in the nation. Instead, a 1995 Statement of Agency
+Policy provides guidelines for railroads to use for the formulation of their
+own bridge management programs.
+FRA inspectors do not cite specific
+defects for bridge conditions, nor do they recommend violations, as they
+do for track, signal, or equipment problems. Instead,
+FRA inspectors call
+conditions to the attention of railroad bridge maintenance and engineering
+officials. According to
+FRA, inspectors normally use informal procedures to
+advise railroad personnel of bridge problems. If a bridge condition
+presents a hazard of death or personal injury, and the bridge owner does
+not correct the condition,
+FRA exercises its emergency authority to restrict
+or prohibit train operation over the bridge. The railroad industry agrees
+with
+FRA’s policy that regulations are not needed to address issues related
+to structural conditions of bridges. Railroad labor officials disagree and
+note that bridge safety is equally as important as track safety, for which
+FRA has regulations.
+Recommendations
+GAO recommends that the Secretary of Transportation direct the FRA
+Administrator to, in cooperation with the industry, where appropriate,
+(1) analyze injury data collected under the revised reporting requirements
+to determine the workplace safety issues that lead to the most numerous
+or the most serious injuries; (2) in areas where efforts to obtain voluntary
+corrective action do not address the causes of these injuries, consider
+developing regulations; and (3) use appropriate mechanisms, including the
+Safety Assurance and Compliance Program, to ensure that a finding of
+potential structural problems on a bridge is properly addressed by the
+bridge owner.
+Agency Comments
+and GAO’s Response
+GAO provided a draft of this report to the Department of Transportation
+(DOT) for its review and comment. GAO met with departmental officials,
+including the FRA Administrator, Deputy Administrator and Associate
+Administrator for Safety. The officials indicated that they agreed with
+many portions of the draft report’s historical perspective but said that the
+report did not adequately reflect the more recent accomplishments and
+potential of the Safety Assurance and Compliance Program. The officials
+GAO/RCED-97-142 Rail TransportationPage 6
+
+[[PDF_PAGE_0009]]
+Executive Summary
+said that this program represents a fundamentally new approach to
+working with railroads to ensure regulatory compliance and accelerate
+safety improvements. The officials explained that although old methods of
+encouraging regulatory compliance contributed to a substantial reduction
+in railroad accidents between 1978 and 1986, the agency had determined
+that further progress would require new approaches.
+FRA officials maintained that the Safety Assurance and Compliance
+Program provides the tools to leverage its limited resources while
+achieving continued safety improvements. The approach was based on
+President Clinton’s directive to federal regulatory agencies that inspection
+and enforcement programs be designed to achieve results, not
+punishment. The officials indicated that the program establishes a
+framework for
+FRA to work cooperatively with railroad management and
+labor to identify and solve key safety issues. The officials indicated that
+while the program provides new tools to further enhance railroad safety,
+FRA will continue to make full use of all the enforcement options at its
+disposal as necessary and has begun to focus on enforcement where it is
+most likely to reduce accidents, injuries, and hazardous materials releases.
+FRA officials produced statistics that they maintain demonstrate the
+program’s substantial accomplishments during the 3 years since its initial
+implementation. Finally, while agreeing with two of
+GAO’s three
+recommendations, FRA commented on GAO’s recommendation that the
+agency consider developing regulations to address the issues that continue
+to cause the most numerous or serious workplace injuries.
+FRA officials
+said that the agency would limit its consideration of regulations to those
+areas that are related to train operations.
+In response to
+FRA’s comments, GAO included additional information on the
+accomplishments the agency’s new rail safety program has achieved by
+highlighting safety statistics for 1993 through 1996 and providing detailed
+information on the successes with the Safety Assurance and Compliance
+Program.
+GAO also included FRA’s performance goals for improving rail
+safety that illustrate how rail safety has improved since 1993. However,
+reaching conclusions on
+FRA’s new safety program by isolating safety
+improvements over the most recent 3-year period ignores past trends in
+railroad safety. Over the past 20 years, noteworthy reductions in railroad
+accidents, fatalities, and injuries were often followed by periods in which
+railroad safety subsequently worsened. As
+GAO concluded, it is too early to
+tell if FRA’s efforts will sustain improvements in railroad safety over an
+extended period of time. Finally, GAO disagrees with FRA’s contention that
+the agency should limit its consideration of regulations to those areas that
+GAO/RCED-97-142 Rail TransportationPage 7
+
+[[PDF_PAGE_0010]]
+Executive Summary
+are related to train operations. FRA would have matters related to non-train
+operations under the purview of OSHA. But should FRA’s analysis of
+workplace safety data show a preponderance of non-train-related injuries,
+the agency should not foreclose the need to consider regulations covering
+such injuries. Additional agency comments are included in chapter 3.
+FRA
+officials had additional technical and clarifying comments that GAO
+incorporated throughout the report, where appropriate.
+GAO/RCED-97-142 Rail TransportationPage 8
+
+[[PDF_PAGE_0011]]
+GAO/RCED-97-142 Rail TransportationPage 9
+
+[[PDF_PAGE_0012]]
+Contents
+Executive Summary 2
+Chapter 1
+Introduction
+12
+The Federal Railroad Administration 12
+Changes in the Freight Railroad Industry 14
+Objectives, Scope, and Methodology 24
+Chapter 2
+Railroad Safety
+Trends
+27
+Train Accidents Have Declined by 74 Percent 27
+Trends in Fatalities Have Been Stagnant Until Recently 33
+Injuries and Illnesses Continue a Steady Downward Trend 35
+Thousands of People Are Evacuated Due to Hazardous Materials
+Releases
+36
+Chapter 3
+FRA Has Shifted to a
+Partnership Approach
+to Improve Railroad
+Safety
+39
+FRA Has Established Three Key Initiatives to Improve Rail Safety 39
+Inspection Efforts Have Changed Under the Partnering Approach 49
+FRA Does Not Systematically Oversee Workplace and Bridge
+Safety
+53
+Conclusions 57
+Recommendations 58
+Agency Comments 59
+Appendixes Appendix I: Methodology Used to Analyze Data From the Federal
+Railroad Administration’s Railroad Inspection Reporting System
+62
+Appendix II: Safety Assurance and Compliance Program’s Senior
+Management Meetings
+63
+Appendix III: FRA’s Rulemaking Actions 65
+Appendix IV: Key Safety Statistics, Calendar Years 1993 Through
+1996, and FRA’s Performance Goals
+69
+Appendix V: Major Contributors to This Report 70
+Tables Table 1.1: Change in Class I Freight Railroad Employment by
+Category, Calendar Years 1976 Through 1995
+21
+Table 2.1: Comparison of Average Annual Decline in Types of
+Accidents and Causes of Accidents per Million Train Miles,
+Calendar Years 1976 Through 1987 and 1987 Through 1995
+32
+Table 3.1: FRA’s Rulemaking Actions Assigned to the Advisory
+Committee
+48
+GAO/RCED-97-142 Rail TransportationPage 10
+
+[[PDF_PAGE_0013]]
+Contents
+Table 3.2: Railroads With No Inspections and Inspections in One
+or Two Disciplines, Calendar Years 1992 Through 1995
+52
+Table 3.3: Percentage of Railroads That Received Records
+Inspections, Calendar Years 1992 Through 1995
+52
+Table II.1: Fiscal Year 1995 Meetings 63
+Table II.2: Fiscal Year 1996 Meetings 63
+Table II.3: Fiscal Year 1997 Meetings 64
+Figures Figure 1.1: Total Train Miles, Calendar Years 1976 Through 1995 16
+Figure 1.2: Class I Freight Railroads’ Revenue Ton Miles,
+Calendar Years 1976 Through 1995
+18
+Figure 1.3: Class I Freight Railroad Employment, Calendar Years
+1976 Through 1995
+20
+Figure 1.4: Examples of Modern Maintenance-of-Way Equipment 22
+Figure 1.5: Miles of Track Owned by Class I Freight Railroads,
+Calendar Years 1976 Through 1995
+24
+Figure 2.1: Total Train Accidents, All Railroads, Calendar Years
+1976 Through 1995
+28
+Figure 2.2: Examples of Neglected Maintenance 30
+Figure 2.3: Rail-Related Fatalities Per Million Train Miles, All
+Railroads, Calendar Years 1976 Through 1995
+34
+Figure 2.4: Total Rail-Related Injuries and Illnesses per Million
+Train Miles, All Railroads, Calendar Years 1976 Through 1995
+35
+Figure 2.5: Number of People Evacuated Due to Hazardous
+Materials Releases, Calendar Years 1978 Through 1995
+37
+Figure 3.1: Railroad Industry Fatalities, Calendar Years 1976
+Through 1995
+41
+Figure 3.2: Chronology of FRA’s Rulemaking Procedures 46
+Figure 3.3: Inspections and Defects, Calendar Years 1985 Through
+1995
+51
+Figure 3.4: Injuries and Illnesses by Type of Person and
+Occurrence, Calendar Years 1976 Through 1995
+54
+Abbreviations
+AAR Association of American Railroads
+DOT Department of Transportation
+FRA Federal Railroad Administration
+OSHA Occupational Safety and Health Administration
+RSAC Railroad Safety Advisory Committee
+SACP Safety Assurance and Compliance Program
+GAO/RCED-97-142 Rail TransportationPage 11
+
+[[PDF_PAGE_0014]]
+Chapter 1
+Introduction
+The Federal Railroad Administration (FRA) enforces federal railroad safety
+statutes under a delegation of authority from the Secretary of
+Transportation.
+FRA’s mission is to protect railroad employees and the
+public by ensuring the safe operation of freight and passenger trains. In
+1980, the Congress passed the Staggers Rail Act, which fostered
+substantial changes in the railroad industry. By 1995, fewer large railroads
+accounted for most of the industry’s revenue and train miles. At the same
+time, these railroads substantially reduced their workforce and track
+networks.
+The Federal Railroad
+Administration
+FRA has three major safety-related activities: (1) administering safety
+statutes, regulations, and programs, including the development and
+promulgation of standards and procedures, technical training,
+administration of postaccident and random testing of railroad employees,
+and management of rail-highway grade-crossing projects; (2) conducting
+research on railroad safety and national transportation policy; and
+(3) enforcing federal safety statutes, regulations, and standards by
+inspecting railroad track, equipment, signals, and railroad operating
+practices.
+FRA also enforces the provisions of the Hazardous Materials
+Transportation Act as it applies to rail.
+FRA’s Rulemaking
+Procedures
+The impetus for rulemaking may come from the Congress; FRA’s research
+programs; inspections; the National Transportation Safety Board’s
+recommendations; or railroad management, employees, or unions.
+FRA’s
+Office of Safety develops safety rules that are promulgated following
+requirements, such as those of the Administrative Procedure Act, that are
+contained in statutes and orders and are generally applicable to executive
+branch agencies, and other statutes and orders that are specifically
+applicable to the Department of Transportation (
+DOT) or FRA, such as the
+Federal Railroad Safety Act of 1970. Chapter 3 discusses FRA’s rulemaking
+procedures in detail.
+FRA’s Research and
+Development Programs
+FRA’s research and development programs provide scientific and
+technological support for its rulemaking activities. FRA sponsors research
+on safety and performance improvements to freight and passenger
+equipment, operating practices, track structure, track components,
+railroad bridge and tunnel structures, signal and train control systems, and
+track-vehicle interaction.
+FRA also conducts research on the safety of
+GAO/RCED-97-142 Rail TransportationPage 12
+
+[[PDF_PAGE_0015]]
+Chapter 1
+Introduction
+high-speed ground transportation, including the development of safety
+performance standards.
+FRA’s Enforcement
+Procedures
+FRA has an inspection system and the legal tools to enforce federal railroad
+safety statutes and regulations. FRA’s 270 railroad inspectors, who operate
+under eight regional administrators, specialize in one of five disciplines:
+motive power (e.g., locomotives) and equipment, track, signals, hazardous
+materials, and operating practices. Several states, whose railroad
+inspectors meet federal qualification standards, augment
+FRA’s inspection
+force with about 130 additional inspectors.
+When a condition or operating practice does not comply with federal
+statutes, regulations, or orders, an inspector may verbally recommend
+corrective action or prepare a defect report. As a result, the railroad
+usually takes corrective action. When the inspector determines that the
+best method of obtaining compliance is to assess a civil penalty, the
+inspector prepares a violation report, which is essentially a
+recommendation for a civil penalty—
+FRA’s most frequently utilized
+enforcement tool.
+In deciding whether to recommend civil penalties, an inspector is allowed
+to exercise considerable judgment under FRA’s regulations. For example,
+the inspector may consider the degree of variation from the standard, the
+railroad’s general history of compliance, its general level of current
+compliance, and the kind and degree of potential hazard under specific
+circumstances. If the inspector observes defects that are likely to result in
+injury, property damage, or loss of life, he or she is more likely to
+recommend civil penalties. Recommendations for civil penalties are
+reviewed at the regional level and by
+FRA’s Chief Counsel. Although a
+schedule of initial civil penalties exists for specific infractions, the final
+monetary assessment is negotiated between
+FRA and the railroad
+considering several statutory settlement criteria, including the gravity of
+the violation and the violator’s culpability and ability to pay.
+1 In addition,
+individuals may be subject to civil penalties for willful violations of
+statutes, regulations, or orders. Generally, penalties can be assessed for up
+to $10,000 per violation. When the violation is a continuing one, each day
+that the violation continues constitutes a separate offense. In 1995,
+FRA
+closed over 1,300 civil penalty cases and collected over $5 million in fines.
+1Due to certain statutory requirements, cases brought under the Hazardous Materials Transportation
+Act involve the use of more formal administrative procedures.
+GAO/RCED-97-142 Rail TransportationPage 13
+
+[[PDF_PAGE_0016]]
+Chapter 1
+Introduction
+The Federal Railroad Safety Act of 1970 and related safety statutes also
+provide FRA with more severe enforcement tools. FRA’s most severe
+enforcement tool is the emergency order, which the agency may issue
+when an unsafe condition or practice, or a combination of unsafe
+conditions or practices, causes an emergency situation involving a hazard
+of death or personal injury.
+FRA issued an emergency order in
+February 1996 after fatal commuter railroad accidents in Silver Spring,
+Maryland, and Secaucus, New Jersey, in which several people died. Among
+other things, the emergency order required prompt action by passenger
+and commuter railroads to develop emergency egress procedures that
+included the identification, labeling, and safe operation of passenger
+emergency exits. According to
+FRA’s Assistant Chief Counsel, the agency
+has issued 20 emergency orders since 1970.
+The agency also has the authority to issue compliance orders. FRA has used
+this authority on a few occasions to achieve specific remedial actions
+directed at improving compliance in specific areas. Unlike an emergency
+order, however,
+FRA can issue compliance orders only after providing an
+opportunity for a hearing.
+Among its other enforcement tools, FRA also has the authority to issue
+special notices requiring repairs and taking unsafe track or equipment out
+of service.
+FRA issues about 80 to 100 special notices per year. FRA may also
+seek injunctive relief. The U.S. Attorney General, acting on behalf of the
+Secretary of Transportation, may seek a federal district court order to
+restrain violations or enforce rules and standards issued under the railroad
+safety laws. According to
+FRA’s Assistant Chief Counsel, the agency has
+used this authority only once, to gain access to the property of a
+hazardous materials shipper that was attempting to place unacceptable
+restrictions on the access of
+FRA inspectors to its facilities.
+Changes in the Freight
+Railroad Industry
+FRA oversees an industry that has changed substantially over the past 20
+years. The 88 class I freight railroads that operated in 1976 declined to 14
+in 1995, owing to mergers and acquisitions. The Staggers Rail Act of 1980
+accelerated changes in the freight industry. The act provided the railroads
+with greater flexibility to negotiate freight rates and respond to market
+conditions. The act made it federal policy that freight railroads would rely,
+where possible, on competition and the demand for services, rather than
+on regulation to establish reasonable rates. As a result of changes fostered
+by the act, today’s freight industry has fewer large railroads; hauls more
+GAO/RCED-97-142 Rail TransportationPage 14
+
+[[PDF_PAGE_0017]]
+Chapter 1
+Introduction
+tonnage over fewer miles of track; and employs fewer people,
+locomotives, and railcars.
+Large Railroads Continue
+to Merge While Total Train
+Miles Decline
+From 1976 through 1995, the number of class I freight railroads declined
+due to mergers and acquisitions. In 1976, 88 class I freight railroads—the
+nation’s largest railroads—accounted for 98 percent of the industry’s
+freight revenue, according to the Association of American Railroads (
+AAR),
+and 89 percent of its train miles. Many of these railroads were earning a
+negative rate of return or were moving toward insolvency; several
+bankrupt northeastern railroads were consolidated into the Consolidated
+Railroad Corporation, known as Conrail. In addition, years of declining
+profits had led to deferred maintenance on rights-of-way and the
+deterioration of railroad plant and equipment. Total train miles, a standard
+measure of rail activity has declined for the entire industry since 1976.
+However, in 1995, class I freight train miles were higher than 1976 levels.
+By 1995, mergers, acquisitions, and changes in the definition of a class I
+railroad had reduced the number of such railroads to 15—Amtrak (the
+nation’s largest passenger railroad) and 14 freight railroads. In spite of the
+reduction in the number of class I freight railroads, these railroads still
+accounted for 91 percent of the industry’s freight revenue and 82 percent
+of its train miles in 1995. The 14 class I freight railroads were the Atchison,
+Topeka, and Santa Fe Railway; Burlington Northern Railroad Co.; Chicago
+and North Western Railway Co.; Consolidated Rail Corp.; CSX
+Transportation; Denver and Rio Grande Western Railroad; Grand Trunk
+Western Railroad, Inc.; Illinois Central Railroad Co.; Kansas City Southern
+Railway Co.; Norfolk Southern Corp.; Soo Line Railroad Co.; Southern
+Pacific Transportation Co.; St. Louis Southwestern Railway Co.; and Union
+Pacific Railroad Co.
+Since 1995, the trend in mergers has continued. Burlington Northern/Santa
+Fe was created on September 22, 1995 from the merger of the Burlington
+Northern Railroad Co. and the Atchison, Topeka, and Santa Fe Railway.
+The two railroads officially began operating as a single railroad in 1996.
+The merger of Union Pacific Railroad Co. and Southern Pacific
+Transportation Co. in 1996 reduced the number of class I freight railroads
+to 10. In 1997, CSX Transportation and Norfolk Southern Railway Co.
+proposed to purchase Conrail, which could further reduce the number of
+class I freight railroads.
+FRA officials believe that within the next 5 to 10
+years, the remaining class I freight railroads could be merged into two
+transcontinental railroads.
+GAO/RCED-97-142 Rail TransportationPage 15
+
+[[PDF_PAGE_0018]]
+Chapter 1
+Introduction
+As the class I freight railroads merged, the number of regional and local
+railroads increased. FRA believes that the number of these types of
+railroads will continue to grow as the number of class I freight railroads
+shrinks due to mergers and acquisitions.
+While the number of class I freight railroads has declined and the number
+of nonclass I freight railroads has increased, overall industry operations
+are still below 1976 levels. As figure 1.1 shows, total train miles, commonly
+used by
+FRA and the railroad industry to measure the level of rail activity,
+fell 28 percent—from 774.8 million in 1976 to a low of 558.2 million in
+1983.
+Figure 1.1: Total Train Miles, Calendar
+Years 1976 Through 1995
+1976
+1977
+197
+8
+197
+9
+1980
+1981
+198
+2
+1983
+1984
+1985
+198
+6
+1987
+1988
+1989
+199
+0
+1991
+1992
+1993
+199
+4
+1995
+0
+200,000,000
+400,000,000
+600,000,000
+800,000,000
+Calendar year
+Train miles
+Source: FRA.
+GAO/RCED-97-142 Rail TransportationPage 16
+
+[[PDF_PAGE_0019]]
+Chapter 1
+Introduction
+Train miles have declined overall for the railroad industry. Since 1991,
+total train miles have risen to 669.8 million, which is still below 1976 levels.
+However, 1995 class I freight train miles exceeded their 1976 levels. In
+1976, class I freight train miles were 424.8 million, compared with
+458.3 million in 1995—an increase of 8 percent.
+Tonnage on the Nation’s
+Railroads Has Increased
+Class I railroads have experienced growth in freight tonnage. In part, this
+growth has occurred because of deregulation of the rail industry as well as
+improvements in technology that enabled railroads to carry heavier loads
+over longer distances. In addition, class I freight railroads invested heavily
+in their infrastructure in the 1980s, improving both the capacity of their
+track and freight cars. Industry experts believe that rail traffic will
+continue to grow through 2006.
+Since 1976, class I freight railroads have increasingly been able to carry
+more tonnage over longer distances. For example, in 1995, each train
+hauled an average of 2,870 tons—up from 1,954 tons in 1976, and the
+average length of haul was 843 miles—up from 564 miles in 1976. As a
+result, the class I freight railroads were able to increase revenue ton miles
+2
+by 64 percent.3 As shown in figure 1.2, revenue ton miles increased from
+794 billion in 1976 to over 1.3 trillion in 1995.
+2A revenue ton mile is the movement of 1 ton of revenue freight 1 mile.
+3The revenue ton mile totals exclude Amtrak.
+GAO/RCED-97-142 Rail TransportationPage 17
+
+[[PDF_PAGE_0020]]
+Chapter 1
+Introduction
+Figure 1.2: Class I Freight Railroads’
+Revenue Ton Miles, Calendar Years
+1976 Through 1995
+1976 19
+77
+19
+78
+1979 1980 19
+81
+19
+82
+1983 1984 1985 19
+86
+1987 1988 1989 19
+90
+1991 1992 1993 19
+94
+19
+95
+0
+200,000
+400,000
+600,000
+800,000
+1,000,000
+1,200,000
+1,400,000
+Calendar year
+Revenue ton miles
+Source: AAR.
+Railroad officials said that improvements in railroad technology have
+allowed railroads to increase the average tonnage carried per train without
+requiring additional locomotives or freight cars. For example, class I
+freight railroads have replaced many of their older locomotives with
+newer ones that are more powerful and have better traction. As a result,
+these railroads have been able to reduce the number of locomotives in
+service by 32 percent. Also, while the average number of revenue tons per
+train load increased from 1976 to 1995, the average number of cars per
+train remained unchanged. The increase in tons carried per train resulted,
+in part, from the construction of lighter-weight cars made from aluminum,
+rather than steel. The freight railroads also upgraded their track in the
+1980s by replacing it with stronger rails and improved track ties. In
+addition, advancements in the strength of freight car wheel assemblies
+GAO/RCED-97-142 Rail TransportationPage 18
+
+[[PDF_PAGE_0021]]
+Chapter 1
+Introduction
+have allowed the industry to use larger and longer freight cars and
+increase their maximum gross load capacity from 263,000 to 315,000
+pounds. Railroads have also introduced double-stacked cars for their
+intermodal service, thereby increasing the carrying capacity of these cars.
+Rail traffic is expected to continue to grow. In response to a draft of this
+report,
+FRA officials indicated that total rail tonnage is expected to increase
+at a rate of 1.5 percent annually through 2006. Coal, chemicals, farm
+products, and intermodal traffic, which account for roughly 60 percent of
+rail tons originated, are expected to increase over this period due to strong
+demand.
+FRA officials believe that coal traffic will increase as the demand
+for coal increases, particularly for electricity generation, and that the
+demand for chemicals by textile and paper mills and tire producers will
+fuel the growth in chemical traffic. Farm product traffic—mostly for grain
+shipments—is forecasted to increase with higher crop yields for domestic
+production as well as a greater number of exports. Finally,
+FRA officials
+believe that intermodal traffic—which grew at a rate of 5 percent per year
+from 1986 through 1995—will continue to grow, but at a slower rate.
+Reductions in Class I
+Freight Railroad
+Workforce
+Class I freight railroad employment has declined by more than 60 percent
+since 1976 and is forecast to continue declining over the next 10 years.
+Meanwhile, nonclass I freight railroad employment has increased. New
+technology, compromises from labor, and railroad mergers have each
+contributed to the class I freight railroads’ ability to diminish their
+workforces.
+From 1976 through 1995, class I freight railroads reduced their workforce
+by 61 percent—from 483,000 to 188,000 employees (see fig. 1.3).
+4
+According to FRA, some of the decline in class I freight railroad
+employment was offset by a growth in regional railroad and short-line
+employment. However, total employee hours worked across the entire
+industry—not just for the class I freight railroads—declined by 52 percent
+during this period, suggesting that employment did not entirely shift from
+large to small railroads.
+5 As table 1.1 shows, downsizing affected all
+categories of railroad employees.
+4Employment statistics exclude contractors.
+5Average annual employment totals were not available for the entire industry.
+GAO/RCED-97-142 Rail TransportationPage 19
+
+[[PDF_PAGE_0022]]
+Chapter 1
+Introduction
+Figure 1.3: Class I Freight Railroad
+Employment, Calendar Years 1976
+Through 1995
+19761977197819791980198119821983198419851986198719881989199019911992199319941995
+0
+100,000
+200,000
+300,000
+400,000
+500,000
+Calendar year
+Employees
+Source: AAR and the Railroad Retirement Board.
+GAO/RCED-97-142 Rail TransportationPage 20
+
+[[PDF_PAGE_0023]]
+Chapter 1
+Introduction
+Table 1.1: Change in Class I Freight
+Railroad Employment by Category,
+Calendar Years 1976 Through 1995
+Employment
+category
+Calendar year
+1976
+Calendar year
+1995
+Percent
+change
+Executives, officials, and
+staff assistants
+16,105 10,708 –34
+Professional and
+administrative
+99,312 26,940 –73
+Maintenance-of-way and
+structures
+a 86,901 40,033 –54
+Maintenance-of-
+equipment and stores
+b 102,996 37,106 –64
+Transportation (other than
+train and engine)
+c
+34,130 9,597 –72
+Transportation (train and
+engine)
+d
+143,438 63,831 –55
+Total 482,882 188,215 –61
+aEmployees who maintain track, signal systems, buildings, and bridges.
+bEmployees who maintain or repair locomotives and freight cars.
+cEmployees such as dispatchers and telegraphers.
+dEmployees such as engineers, conductors, and brakemen.
+Source: AAR and the Railroad Retirement Board.
+In a response to a draft of this report, FRA officials said that the Railroad
+Retirement Board estimates that class I railroad employment will continue
+to decline to 143,000 by 2006—a 24-percent decline from 1995 employment
+levels. Regional and short-line employment was also forecast to decline.
+According to railroad industry representatives, technology innovations,
+labor concessions, and railroad mergers enabled the class I freight
+railroads to achieve this reduction. For example:
+• Modern maintenance-of-way equipment has reduced the number of
+maintenance-of-way and structures employees in a tie gang (a group of
+railroad employees assembled to conduct track maintenance) from
+between 7 and 15 to between 3 and 5. Figure 1.4 shows examples of
+modern maintenance-of-way equipment.
+GAO/RCED-97-142 Rail TransportationPage 21
+
+[[PDF_PAGE_0024]]
+Chapter 1
+Introduction
+Figure 1.4: Examples of Modern Maintenance-Of-Way Equipment
+Source: AAR.
+• End-of-train devices—electronic boxes that monitor brake-line pressure
+and are attached to the train’s last car—have replaced almost all cabooses
+and their crews, resulting in a 25-percent reduction in train crew size.
+• Electronic waybilling and computerization have considerably reduced the
+need for clerical personnel to track the location and contents of freight
+cars.
+• Improvements in traffic control systems have increased line capacity.
+• Labor concessions reduced the average train crew size from four to two or
+three—including the elimination of the fireman position (a position that
+was important during the era of steam locomotives)—allowed greater
+distances before a crew change, and allowed employees to perform tasks
+in more than one craft.
+6
+• Mergers have contributed to the reduction in class I freight railroads from
+88 in 1976 to 14 in 1995. With these mergers came reductions in
+employment.
+• The Staggers Rail Act made it easier for railroads to abandon unprofitable
+or duplicative lines or sell them to short-line and regional railroads. The
+6A craft constitutes a particular type of job. For example, electrical workers and welders would belong
+to different crafts.
+GAO/RCED-97-142 Rail TransportationPage 22
+
+[[PDF_PAGE_0025]]
+Chapter 1
+Introduction
+elimination of these lines allowed the larger railroads to make further
+employment reductions.
+Reductions in Miles of
+Track Owned by Class I
+Freight Railroads
+The Staggers Rail Act of 1980 made it easier for freight railroads to cease
+unprofitable operations. Accordingly, the class I freight railroads
+eliminated, abandoned, or sold 41 percent of their trackage (see fig. 1.5).
+According to
+AAR, class I freight railroad traffic was not distributed evenly
+over the entire network that they owned in the 1970s. Most of the track
+that the class I freight railroads eliminated was little-used and expensive to
+maintain. However, most of the traffic has been and still is on the main
+lines. In addition to reductions in employment, the reduction in track miles
+has allowed the class I freight railroads to concentrate their capital
+investments on improving their high-volume main-line corridors. The
+railroads are enlarging or eliminating tunnels, increasing bridge
+clearances, and expanding electronic signal systems over more main-line
+corridors. For example, Conrail and the state of Pennsylvania completed a
+3-year capacity improvement project along Conrail’s main line from
+Pittsburgh to Philadelphia. This project increased tunnel and bridge
+clearances along the corridor, which enabled Conrail to use
+double-stacked container cars and thereby move more commerce into
+Philadelphia.
+GAO/RCED-97-142 Rail TransportationPage 23
+
+[[PDF_PAGE_0026]]
+Chapter 1
+Introduction
+Figure 1.5: Miles of Track Owned by
+Class I Freight Railroads, Calendar
+Years 1976 Through 1995
+1976
+1977
+1978
+197
+9
+1980
+1981
+1982
+198
+3
+1984
+1985
+1986
+198
+7
+1988
+1989
+1990
+199
+1
+1992
+1993
+1994
+199
+5
+0
+50,000
+100,000
+150,000
+200,000
+250,000
+300,000
+350,000
+Calendar year
+Track miles
+Source: AAR.
+FRA officials said that the total rail network is projected to decline slightly
+each year. The net effect of the slow decrease in the rail network, together
+with the slight increase in traffic on the main lines, will be to increase the
+concentration of rail traffic on some lines.
+Objectives, Scope,
+and Methodology
+In view of the changes that have occurred in the railroad industry over the
+past 20 years and concerns about overall safety in the railroad industry,
+the Ranking Democratic Member of the House Committee on
+Transportation and Infrastructure, the Ranking Democratic Member of
+that Committee’s Subcommittee on Railroads, and Representative Bruce F.
+Vento asked us to describe (1) relationships that exist between
+GAO/RCED-97-142 Rail TransportationPage 24
+
+[[PDF_PAGE_0027]]
+Chapter 1
+Introduction
+operational and safety trends in the railroad industry from 1976 to 1995
+and (2) FRA’s approach to improving safety on the nation’s rail system.
+To address the first objective, we obtained information on the operational
+trends in the railroad industry from the AAR and safety statistics from FRA’s
+annual safety bulletins for 1976 through 1995 (the most recent edition
+available).
+FRA officials also provided us with preliminary safety statistics
+for 1996. Because of time limitations, we did not perform a reliability
+assessment on the automated database that is the source for
+FRA’s
+bulletins. AAR and FRA are the primary sources for information on
+operational and safety trends in the railroad industry for the 20-year period
+of our review. However, the data from
+AAR and FRA are not directly
+comparable because they cover different aspects of the railroad industry.
+AAR’s data provide important information on how the freight industry has
+changed since 1976, such as the miles of track owned and number of
+locomotives and cars used.
+AAR collects these data only for the class I
+freight railroads. In contrast, FRA’s safety data cover the entire
+industry—both freight and passenger (including commuter) railroads.
+FRA’s 20-year data could not be segregated to isolate safety statistics only
+for the class I freight railroads. Although class I freight railroads account
+for 91 percent of the industry’s freight revenue and 82 percent of its train
+miles, any direct comparison with safety data that are not limited
+specifically to class I freight railroads would be inconclusive. Accordingly,
+we were not able to reach conclusions on whether there are direct
+relationships between operational trends in the freight industry and safety
+trends for the entire industry. However, chapter 1 provides information on
+operational trends in the freight industry. Chapter 2 provides information
+on safety trends in the entire industry and presents the views of
+FRA, rail
+management, and labor unions on how freight operational changes might
+have affected railroad safety. Chapter 3 then describes how
+FRA has
+responded to these operational and safety trends and developed a new
+partnering approach to improving safety on the nation’s rail lines.
+We also discussed operational and safety issues with
+FRA’s Administrator
+and Deputy Administrator and officials from three headquarters
+offices—Chief Counsel, Safety Enforcement, and Safety Analysis; officials
+of the National Transportation Safety Board; railroad labor
+representatives; officials at
+AAR; Operation Lifesaver7; the Chemical
+Manufacturers Association; Railroad Retirement Board; and the National
+7An organization that receives private and federal funds to conduct rail-highway grade-crossing safety
+programs throughout the country.
+GAO/RCED-97-142 Rail TransportationPage 25
+
+[[PDF_PAGE_0028]]
+Chapter 1
+Introduction
+Railroad Construction and Maintenance Association. We also reviewed
+several reports by the National Transportation Safety Board.
+To address the second objective, we met with FRA officials and reviewed
+FRA documents on the new programs and associated activities. Our review
+included the October 1996 agency report to the Congress assessing the
+benefits of the current safety program, as well as
+FRA notices in the
+Federal Register and rulemaking dockets. In gauging industry reaction to
+FRA’s new programs, we met with officials of AAR, the American Short Line
+Railroad Association, the Regional Railroads of America, and several labor
+organizations. Finally, in order to examine how
+FRA’s new programs have
+affected resources available to oversee the railroad industry, we obtained
+and analyzed data on
+FRA’s inspection activities contained in the Railroad
+Inspection Reporting System database for calendar years 1992 through
+1995. (See app. I for more details on this system.)
+To obtain a first-hand perspective of railroad operations and of how
+FRA’s
+safety strategy is being implemented in the field, we interviewed FRA’s
+regional administrators and inspectors in two field offices. We also
+interviewed officials and observed operations at the Burlington
+Northern/Santa Fe Railway, a class I railroad; the Maryland Midland
+Railway, a small railroad; and the Belt Railway of Chicago and Houston’s
+Port Terminal Railroad Association, both of which perform switching and
+terminal operations for larger railroads. Additionally, we observed
+research activities at
+AAR’s Transportation Test Center in Pueblo,
+Colorado.
+For information on workplace safety, we interviewed officials from FRA
+and the Department of Labor’s Occupational Safety and Health
+Administration (OSHA). We also talked with officials in several states that
+have the authority to operate their own occupational health and safety
+programs: California, Kentucky, Minnesota, Vermont, and Wisconsin. We
+also reviewed appropriate legislation, regulations, and agency documents
+governing workplace safety oversight. We conducted our work from July
+1996 through June 1997 in accordance with generally accepted
+government auditing standards.
+We provided a draft of this report to
+DOT for its review and comment. We
+met with FRA’s Administrator, Deputy Administrator, and Associate
+Administrator for Safety. FRA’s comments and our response are provided in
+the executive summary and the end of chapter 3.
+GAO/RCED-97-142 Rail TransportationPage 26
+
+[[PDF_PAGE_0029]]
+Chapter 2
+Railroad Safety Trends
+Railroad safety has generally improved over the past 20 years. Railroad
+accident rates are down from 1976 levels, but the rate of decline has
+slowed since 1987. Further improvements in safety are needed, since, in
+1995, over 1,000 people died in railroad accidents and incidents, 11,000
+railroad employees were injured, and nearly 3,000 people were evacuated
+from their homes as a result of hazardous materials released from train
+accidents.
+Train Accidents Have
+Declined by 74
+Percent
+As shown in figure 2.1, the number of train accidents declined from 10,248
+in 1976 to 2,619 in 1995—a 74-percent reduction. The number of accidents
+per million train miles showed similar improvements with a 70-percent
+decline during this same period.
+1 While the number of accidents declined
+rapidly prior to 1987, progress continued at a slower rate from 1987 to
+1995. As chapter 1 noted, class I freight railroads, which account for most
+of the industry’s freight revenue and more than three-quarters of its train
+miles, are using fewer people, locomotives, and cars to haul more tonnage
+over fewer miles of track. On the one hand, labor officials contend that
+these changes could lead to more rail collisions and accidents as a result
+of greater congestion and fewer qualified employees to perform essential
+maintenance. In addition,
+FRA inspectors have observed signs of degraded
+maintenance on some railroads in their recent inspections. On the other
+hand,
+AAR and rail management contend that (1) most congestion is
+confined to rail yards and (2) the railroads have employed better
+scheduling and technology to maintain the rail infrastructure. In addition,
+detailed safety statistics show continued reductions in accidents resulting
+from collisions, derailments, track problems, and human errors.
+1Showing accidents per million train miles takes into account changing rail activity over the years.
+GAO/RCED-97-142 Rail TransportationPage 27
+
+[[PDF_PAGE_0030]]
+Chapter 2
+Railroad Safety Trends
+Figure 2.1: Total Train Accidents, All
+Railroads, Calendar Years 1976
+Through 1995
+1976 1977 1978 19
+79
+19
+80
+1981 1982 1983 1984 1985 1986 19
+87
+19
+88
+19
+89
+19
+90
+1991 1992 1993 1994 1995
+0
+2,000
+4,000
+6,000
+8,000
+10,000
+12,000
+Calendar year
+Train accidents
+Source: FRA.
+Rail Labor Believes That
+Congestion and Lack of
+Maintenance Could Affect
+Rail Accidents
+Between 1976 and 1995, the number of train miles for class I freight
+railroads increased by 7 percent, while these railroads decreased the
+number of track miles they owned by 41 percent during the same period.
+These changes suggest that more traffic is being concentrated on
+substantially fewer miles of track, resulting in more congestion and the
+potential for more collisions. In addition, a senior rail labor official said
+that reductions in railroad dispatchers (employees who control train
+movements) lend further concern about their ability to ensure safety.
+Some class I railroads have created large control centers from which
+dispatchers direct train movements throughout the railroad’s network.
+According to the official, dispatchers in these centers have larger
+territories to control and are less familiar with their territories than in the
+past when they covered smaller territories. These factors increase the
+chances that a dispatcher could direct two trains to occupy the same
+location at the same time.
+GAO/RCED-97-142 Rail TransportationPage 28
+
+[[PDF_PAGE_0031]]
+Chapter 2
+Railroad Safety Trends
+In addition to the reduction in dispatchers, labor officials say that
+reductions in maintenance crews could affect accident and collision rates.
+For example, the number of maintenance-of-equipment and stores
+employees at class I railroads declined by 64 percent from 1976 through
+1995. Many of these employees are carmen who repair and maintain
+railcars. Railroad labor officials contend that the reduction in qualified
+carmen to maintain railcars has resulted in the railroads’ using unqualified
+train crews to inspect trains prior to departing terminals. As a result, labor
+officials said that railroads are dispatching unsafe trains.
+In addition, a labor representative noted that maintenance requirements
+for track have increased substantially as the industry has increased the
+amount of tonnage carried in each car. While the installation of heavier rail
+has mitigated some of the effects of heavier loads, fasteners and ties need
+more frequent attention. Labor-saving devices have reduced the need for
+some employees, but labor officials believe that such devices are oriented
+toward major renewal projects, rather than day-to-day maintenance. As a
+result, maintenance crews tend to spend much of their time attending to
+crises. Finally, the officials told us that increases in traffic volume are
+making it more difficult to complete needed maintenance on the rail lines,
+although machinery that gets to the work site faster and does the job
+faster has helped.
+FRA inspectors have observed safety problems on some class I freight
+railroads which they attribute to reduced maintenance. For example, the
+trackage on one class I freight railroad, which in previous years had
+exceeded
+FRA’s safety standards, had subsequently degraded to the point at
+which it minimally met the standards. In the case of another class I freight
+railroad,
+FRA inspectors found that the railroad did not have sufficient
+signal maintainers to test the systems and make necessary repairs. As a
+result, inspectors found signal structures that had decayed to a condition
+such that railroad employees could not climb them to perform routine
+inspections. The inspectors also observed signal wires that were not
+properly covered and thereby exposed to poor weather conditions. Figure
+2.2 shows these conditions.
+GAO/RCED-97-142 Rail TransportationPage 29
+
+[[PDF_PAGE_0032]]
+Chapter 2
+Railroad Safety Trends
+Figure 2.2: Examples of Neglected Maintenance
+Source: FRA.
+Our analysis of AAR’s data for class I freight railroads lends some support
+to the inspectors’ observations. Although class I freight railroads had
+41 percent less track to maintain in 1995 than in 1976, during this same
+period these railroads eliminated 54 percent of the employees who
+maintain the track, resulting in fewer maintenance employees per track
+mile. For example, in 1976, these railroads employed 86,901
+maintenance-of-way and structures employees to maintain 304,100 miles
+of track—a ratio of 29 employees per 100 miles of track. In 1995, these
+railroads employed 40,033 maintenance-of-way and structures employees
+to maintain 180,419 miles of track—a ratio of 22 employees per 100 miles
+GAO/RCED-97-142 Rail TransportationPage 30
+
+[[PDF_PAGE_0033]]
+Chapter 2
+Railroad Safety Trends
+of track. As a result, the number of maintenance-of-way and structures
+employees per 100 miles of track dropped by 22 percent from 1976
+through 1995 for class I freight railroads.
+Representatives from labor unions said that railroads must make more
+investments in technologies that will improve safety. Labor officials noted
+that positive train separation—a system designed to prevent collisions—is
+one safety investment that the railroads should make.
+Railroad Management
+Believes That Mergers and
+Technology Improvements
+May Lessen Rail Accidents
+According to a senior AAR official, congestion on the railroads’ main lines
+has not increased significantly. Although the railroads have eliminated,
+sold, or abandoned many miles of track, the
+AAR official said that most of
+the traffic today remains concentrated over the same main lines used 20
+years ago. In addition,
+FRA and railroad officials said that most congestion
+occurs in and around rail yards. In locations where main-line congestion
+has become a problem, the railroads are adding capacity as needed,
+according to railroad and
+AAR officials. However, AAR was not able to
+provide expenditure data on the railroads’ total investments made to
+increase rail-line capacity. In addition,
+FRA did not have data that showed
+where congestion exists on the nation’s rail lines.
+According to a senior official of a class I railroad, railroads are
+cooperating with one another to reduce potential congestion. For
+example, the Union Pacific and Southern Pacific Railroads have converted
+parallel tracks to one-way operations in opposite directions, thereby
+greatly increasing the tracks’ combined capacity. The official said that
+mergers of major railroads have resulted in other similar arrangements.
+Mergers have also eliminated some of the need to interchange cars at
+freight yards, which allows trains to avoid some of the more congested
+areas.
+According to
+AAR officials, advancements in the strength of freight car
+wheel assemblies have allowed the industry to use larger and longer
+freight cars and increase their maximum gross load capacity from 263,000
+to 315,000 pounds. These heavier loads place more stress on the rails,
+which could imply the need for additional maintenance. However,
+AAR
+officials said that the impact of these cars on the rail infrastructure is
+mitigated by new cars that are constructed with lighter materials. The
+officials also said that reducing the amount of track that the class I freight
+railroads owned allowed them to concentrate their capital investments on
+maintaining their remaining track and associated signal systems. Part of
+GAO/RCED-97-142 Rail TransportationPage 31
+
+[[PDF_PAGE_0034]]
+Chapter 2
+Railroad Safety Trends
+this capital investment involved the installation of stronger rail and better
+ties to stand up to the increased loads. AAR officials believe that these
+factors have reduced accidents caused by track and signal defects.
+AAR officials also said that neither congestion nor employment reductions
+have adversely affected railroads’ ability to perform maintenance on the
+tracks. By carefully scheduling maintenance windows and using
+labor-saving devices that get the job done using fewer employees, the
+railroads have been able to maintain tracks in spite of heavier traffic. For
+example, in one instance, a railroad arranged for advance delivery of its
+coal and shut down a complete line for a week. By working around the
+clock, the railroad completely rebuilt the line over the course of the week.
+AAR officials noted that if safety problems were occurring, they would
+show up in statistical data. As table 2.1 shows, while the overall accident
+rate declined more rapidly between 1976 and 1987, it continued to decline
+by 2 percent per year after 1987. In addition, collisions and accidents
+caused by failed equipment, signals, or track defects also continued to
+decline.
+Table 2.1: Comparison of Average
+Annual Decline in Types of Accidents
+and Causes of Accidents Per Million
+Train Miles, Calendar Years 1976
+Through 1987 and 1987 Through 1995
+Average annual percentage declineTypes and causes of
+accidents 1976-87 1987-95
+All accidents 9 2
+Collisions 10 4
+Accidents caused by failed
+equipment
+11 6
+Accidents caused by signal
+or track defects
+10 2
+Accidents caused by human
+error
+6 0
+Source: GAO’s analysis of FRA’s data.
+AAR also contends that the slowing of improvements in the accident rate
+should not be attributed to employee reductions but to railroads’ having
+already addressed the easiest-to-solve safety problems. Most of the
+reductions in railroad employees who inspect, repair, and operate trains
+occurred by the end of 1987.
+AAR noted that further reductions in accidents
+will be more difficult to achieve.
+GAO/RCED-97-142 Rail TransportationPage 32
+
+[[PDF_PAGE_0035]]
+Chapter 2
+Railroad Safety Trends
+For example, human factors-caused accidents, which declined by an
+annual average rate of 6 percent between 1976 and 1987, showed no
+decline from 1987 through 1995.
+2 AAR recognizes that human
+factors-caused accidents continue to be a problem. One class I freight
+railroad commissioned a study on employee fatigue in an effort to better
+understand how to reduce these types of accidents further. However,
+FRA’s
+preliminary data for 1996 show a 19-percent reduction in human
+factors-caused accidents from 1995 levels. In addition, railroad labor noted
+that statistical data may overstate the role of human error in rail accidents.
+Labor officials told us that railroad management favors placing the blame
+on the operator whenever possible, when the accident may have actually
+been caused by faulty track or equipment. If such cases had been reported
+as equipment- or track-caused accidents, human factors-caused accidents
+could have declined between 1987 and 1995, rather than remaining
+unchanged on average and may have declined even more sharply in 1996.
+Trends in Fatalities
+Have Been Stagnant
+Until Recently
+In 1993, the fatality rate per million train miles stood at 2.08, only 1 percent
+lower than the 1976 rate.3 However, beginning in 1994, the fatality rate
+declined significantly and in 1995 stood at 1.71 fatalities per million train
+miles, as shown in figure 2.3. Additionally, when factoring in risk
+exposure, which
+FRA defines as motor vehicle miles traveled multiplied by
+the train miles, the accident rate declined in most years since 1976.
+Despite this progress, about 1,100 people were killed in 1995 on the
+nation’s rail lines. Most of these deaths (94 percent) were the result of
+either fatal collisions between cars and trains at highway grade crossings
+or trespassers killed by trains while on railroad property.
+2Human factors-caused accidents are those caused by operator error, such as missing a stop signal or
+exceeding speed restrictions.
+3The fatality rates are presented per million train miles to take into account changing rail activity over
+the years.
+GAO/RCED-97-142 Rail TransportationPage 33
+
+[[PDF_PAGE_0036]]
+Chapter 2
+Railroad Safety Trends
+Figure 2.3: Rail-Related Fatalities Per
+Million Train Miles, All Railroads,
+Calendar Years 1976 Through 1995
+1976
+1977
+1978
+1979
+1980
+1981
+1982
+1983
+1984
+1985
+1986
+1987
+1988
+1989
+1990
+1991
+1992
+1993
+1994
+1995
+0.00
+0.50
+1.00
+1.50
+2.00
+2.50
+Calendar year
+Fatalities per million train miles
+Source: FRA.
+Since 1993, declines in the fatality rates at grade crossings and for
+trespassers contributed to the drop in the overall fatality rate. This decline
+coincides with
+DOT’s implementation of its Grade Crossing Safety Action
+Plan in June 1994. We reported on DOT’s efforts to improve rail-highway
+crossing safety in 1995.4 The report described engineering, educational,
+and enforcement methods that federal and state governments and the
+railroad industry could pursue to improve rail crossing safety. Chapter 3
+contains additional information on
+DOT’s plans.
+4Railroad Safety: Status of Efforts to Improve Railroad Crossing Safety (GAO/RCED-95-191, Aug. 3,
+1995).
+GAO/RCED-97-142 Rail TransportationPage 34
+
+[[PDF_PAGE_0037]]
+Chapter 2
+Railroad Safety Trends
+Injuries and Illnesses
+Continue a Steady
+Downward Trend
+In addition to overall declines in accidents and fatalities, rail-related
+injuries and illnesses per million train miles declined since 1976. Railroads
+must report injuries that require medical treatment or result in work
+restrictions and lost work days.
+5 As figure 2.4 shows, the injury and illness
+rate per million train miles declined from 84.32 in 1976 to 21.56 in 1995—a
+74-percent drop. This reduction resulted in 50,891 fewer injuries and
+illnesses in 1995 than in 1976. Three-quarters of these injuries and illnesses
+affected railroad employees.
+Figure 2.4: Total Rail-Related Injuries
+and Illnesses Per Million Train Miles,
+All Railroads, Calendar Years 1976
+Through 1995
+1976197719781979 198019811982198319841985 19861987198819891990 19911992199319941995
+0.00
+20.00
+40.00
+60.00
+80.00
+100.00
+120.00
+Calendar year
+Injuries and illnesses per million train miles
+Source: FRA.
+5FRA’s data combine injuries and illnesses. Injury and illness rates are presented per million train miles
+to take into account changing levels of rail activity over the years.
+GAO/RCED-97-142 Rail TransportationPage 35
+
+[[PDF_PAGE_0038]]
+Chapter 2
+Railroad Safety Trends
+According to industry representatives, as the railroads reduced their
+number of employees, the chances for workers to be injured declined as
+well. Additionally, railroads began to implement experimental safety
+programs aimed at reducing lost work days for those remaining
+employees. One railroad, for example, began an experimental “napping
+strategy” to reduce the affects of fatigue, whereby train engineers are
+permitted short naps while other crew members remain alert. Despite the
+improvements in employee safety, about 11,000 railroad employee injuries
+and illnesses were reported to
+FRA in 1995. Workplace safety is discussed
+in chapter 3.
+Thousands of People
+Are Evacuated Due to
+Hazardous Materials
+Releases
+Each year thousands of people are evacuated because train accidents
+caused the release of hazardous materials. As figure 2.5 shows, the number
+of people evacuated ranged from 2,852 in 1995 to 39,701 in 1986. The figure
+also shows that hazardous materials releases resulting from train
+accidents are often random events and episodic; the number of people
+evacuated relates to whether or not the spill occurred near a population
+center. For example, a hazardous material release resulting from a
+Baltimore and Ohio Railroad accident in Miamisburg, Ohio, contributed to
+the large number of evacuations in 1986. When a tank car filled with
+poisonous phosphorous derailed, the resulting chemical releases forced
+30,000 people to evacuate their homes. Between 1978 and 1995, about
+261,000 people were evacuated across the United States because of
+rail-related hazardous materials releases—an average of about 14,500
+people evacuated each year. If the 1986 evacuations were excluded, the
+annual average would fall to 13,039. Concerns remain about evacuations
+because the volume of chemical traffic has increased by over one-third
+from 1976 to 1995.
+GAO/RCED-97-142 Rail TransportationPage 36
+
+[[PDF_PAGE_0039]]
+Chapter 2
+Railroad Safety Trends
+Figure 2.5: Number of People Evacuated Due to Hazardous Materials Releases, Calendar Years 1978 Through 1995
+1978 1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995
+0
+10,000
+20,000
+30,000
+40,000
+50,000
+Calendar year
+People evacuated
+Note: These data reflect evacuations reported to FRA by the railroads. These data may differ from
+information reported by the National Transportation Safety Board, which uses evacuations
+reported by the local municipalities.
+Source: FRA.
+GAO/RCED-97-142 Rail TransportationPage 37
+
+[[PDF_PAGE_0040]]
+Chapter 2
+Railroad Safety Trends
+In recent years, the rail and chemical industries have improved tank cars
+to lessen the chances that they will release hazardous materials during
+accidents. For example, manufacturers have reinforced the ends of
+tankcars, adding metal jackets with thermal protection systems to those
+transporting certain hazardous materials to resist puncture during
+accidents. In addition, researchers found that during derailments,
+adjoining cars would uncouple from hazardous materials cars allowing the
+ends of the cars to ram into one another. As a result, new couplers were
+designed and installed on tank cars to make them less likely to uncouple
+during a derailment. These and other improvements were mandated in a
+series of rules issued by
+DOT over the past 20 years. FRA’s data show that
+the collective efforts of FRA and the industry, combined with fewer
+derailments, helped to reduce hazardous materials releases per million
+train miles by 77 percent from 1978 to 1995.
+GAO/RCED-97-142 Rail TransportationPage 38
+
+[[PDF_PAGE_0041]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+In response to operational and safety trends within the railroad industry,
+in 1993, FRA began to institute an important shift in its safety program.
+Rather than using violations and civil penalties as important means to
+improve railroad safety,
+FRA now emphasizes cooperative partnerships
+with railroad management, labor, the states, and other federal agencies to
+reduce railroad accidents, fatalities, and injuries. Accordingly,
+FRA has
+developed cooperative plans to reduce grade-crossing accidents, promote
+voluntary industry compliance with federal safety statutes and regulations,
+and achieve consensus on complex and contentious railroad safety rules.
+The partnering efforts generally focus on the nation’s larger railroads and
+have resulted in
+FRA inspectors’ conducting fewer site-specific inspections
+of the railroad industry overall. While preliminary data for 1996 shows
+improvements in key safety statistics, it is too early to determine if
+FRA’s
+new approach will sustain a long-term decline in accidents and fatalities.
+In addition, there are two important areas of railroad safety that
+FRA’s
+collaborative approach does not systematically address: workplace safety
+for railroad employees and the structural integrity of railroad bridges.
+FRA Has Established
+Three Key Initiatives
+to Improve Rail Safety
+Beginning in 1993, FRA reassessed its safety program to leverage the
+agency’s resources and establish a cooperative approach that focused on
+results to improve railroad safety. With rail traffic expected to grow
+through the remainder of the 1990s and beyond,
+FRA anticipated the need
+for new approaches to enhance its site-specific inspections. As a result,
+FRA formalized this shift from inspection to collaboration with the
+establishment of three new initiatives. First, in 1994, FRA took the lead
+responsibility for coordinating DOT’s multiagency plans to reduce fatalities
+at rail-highway crossings. Second, in 1995, FRA formally established a
+Safety Assurance and Compliance Program through which the agency
+works cooperatively with railroad labor and management to identify and
+solve the root causes of systemic problems facing the railroads. Third, in
+1996,
+FRA established the Railroad Safety Advisory Committee to develop
+recommendations for the agency’s more complex or contentious
+rulemakings by seeking consensus among the affected parties.
+DOT Works With Industry
+and States to Improve
+Rail-Highway Crossing
+Safety
+About 94 percent of railroad fatalities occur as a result of either fatal
+collisions between cars and trains at highway grade crossings or
+trespassers killed by trains while on railroad property. Since many federal,
+state, and local agencies have enforcement or coordinating roles in
+reducing these fatalities,
+FRA cannot reduce fatality rates solely through its
+own rulemaking and enforcement actions. Accordingly, FRA took the lead
+GAO/RCED-97-142 Rail TransportationPage 39
+
+[[PDF_PAGE_0042]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+role, in 1994, when DOT initiated the Rail-Highway Crossing Safety Action
+Plan—an effort targeting federal, state, and industry efforts in improving
+rail-highway crossing safety and reducing fatalities among trespassers. To
+successfully implement the plan,
+FRA is working with the Federal Highway,
+National Highway Traffic Safety, and Federal Transit Administrations; the
+states, railroads, and the Congress to strengthen education and research
+activities; enhance federal, state, and local enforcement efforts; and
+increase or preserve federal rail-highway crossing safety funds. In the
+action plan,
+DOT established a 10-year goal to reduce the number of
+rail-highway grade-crossing accidents and fatalities by 50 percent. As of
+January 1997,
+DOT agencies were making progress in implementing 52 of
+the 55 proposals included in the action plan. Of the 52 proposals, 15 were
+complete; some of the remaining were intended to be continuing efforts.
+In March 1996, the
+DOT released a second report focusing on
+grade-crossing safety. That report, titled Accidents That Shouldn’t Happen,
+focused on developing solutions to communications and coordination
+problems among the many agencies involved in ensuring grade crossing
+safety. Such problems had been cited in the investigation of the collision in
+October 1995 between a school bus and a commuter train in Fox River
+Grove, Illinois, in which seven students died. The report made 24
+recommendations directed at improving communications and
+coordination between railroads and highway authorities and developing or
+expanding options in each of these areas.
+DOT has continued to monitor
+and encourage the implementation of these recommendations.
+As shown in figure 3.1, the number of fatalities in the railroad industry has
+declined since 1976.
+GAO/RCED-97-142 Rail TransportationPage 40
+
+[[PDF_PAGE_0043]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+Figure 3.1: Railroad Industry Fatalities,
+Calendar Years 1976 Through 1995
+19761977197819791980198119821983198419851986198719881989199019911992199319941995
+0
+500
+1,000
+1,500
+2,000
+Calendar year
+Fatalities
+Source: GAO’s analysis of FRA’s data.
+The period of decline in fatalities began with the establishment of the
+Rail-Highway Crossing Program in 1974 (also known as the section 130
+program because of its origin in title 23 of the United States Code). Over
+the next 23 years, the Congress appropriated about $5.8 billion (in
+constant 1997 dollars) for states to improve safety at rail-highway
+crossings. According to
+DOT officials, during the early years of the
+program, states were able to focus their initial efforts on the most
+dangerous crossings, thereby contributing to a significant reduction in
+deaths in the late 1970s and early 1980s.
+GAO/RCED-97-142 Rail TransportationPage 41
+
+[[PDF_PAGE_0044]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+The steady decline in railroad fatalities stopped in 1983, followed by
+several years in which increases in deaths in one year were followed by
+sharp drops in the next year.
+FRA estimates that total fatalities declined to
+1,022 in 1996—the lowest level in 20 years. In addition, rail-highway
+grade-crossing collisions declined by 15 percent between 1993 and 1996.
+FRA attributed the improved statistics to their safety initiatives which
+includes the rail-highway crossing program. Whether the plan contributed
+to the decline is uncertain: Past trends indicate the total number of
+railroad fatalities declined by 34 percent from 1976 to 1983 (from 1,630 to
+1,073) but then fluctuated within a range of 1,022 and 1,324 deaths
+between 1983 and 1996. Additionally, when normalized for risk—taking
+into account the annual change in vehicle and train miles—collision and
+fatality rates continued a steady rate of decline, rather than declining more
+rapidly in recent years.
+Safety Assurance and
+Compliance Program
+Seeks Voluntary
+Cooperation of Railroad
+Management and Labor
+In 1994, FRA began the Safety Assurance and Compliance Program (SACP)
+with the Chicago and Northwestern Railroad and Southern Pacific
+Railroad. These initial reviews were followed by
+FRA’s announcement in
+March 1995 formally establishing the SACP process. FRA initiated the
+program in response to a period of little decline in accident statistics and
+the belief that a continuation of existing approaches would not produce
+any further declines. In commenting on a draft of this report,
+FRA officials
+also said that SACP is an outgrowth of President Clinton’s directive to
+federal regulatory agencies that their inspection and enforcement
+programs be designed to achieve results, not punishment.
+SACP seeks to
+address safety problems at the level where they originate: If a problem is
+systemic in nature,
+FRA seeks a systemwide solution to the problem’s root
+causes. When solutions are identified, they are embodied in the SACP action
+plan; FRA then monitors to ensure that commitments are fulfilled. While
+most major railroads are participating in the SACP process, one major
+railroad—Norfolk Southern—has refused to participate until FRA
+substantiates safety problems at the railroad.
+The SACP process consists of four elements: a safety profile, senior
+management meetings, a safety action plan, and a safety audit. First, rail
+labor and management work with
+FRA and states to develop a safety profile
+of the railroad. The safety profile takes 2 to 6 months to prepare,
+depending on the size of the railroad and the complexity of the relevant
+issues. The profile includes descriptions of the railroad’s safety strengths
+and weaknesses, reported accidents, summaries of previous inspections,
+summaries of “listening sessions” with railroad labor and management,
+GAO/RCED-97-142 Rail TransportationPage 42
+
+[[PDF_PAGE_0045]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+and other safety concerns. Once FRA identifies the root causes of any
+systemic safety issues raised in the safety profile, it requests a meeting
+with the railroad’s senior management and labor representatives. During
+the meeting,
+FRA presents the safety profile, which FRA, rail management,
+labor, and the states will use to negotiate the details of the safety action
+plan.
+FRA expects the railroads to develop these plans within 30 to 60 days.
+The action plan then becomes the “informal contract” under which the
+railroad voluntarily remedies its safety problems. Although the length of
+time that specific railroads require to complete their action plans varies on
+the basis of the complexity of the issues,
+FRA expects the railroads to
+complete the plans within 1 year.
+FRA inspectors monitor the railroad’s compliance with the safety action
+plan through a safety audit, in conjunction with their routine site-specific
+inspections. During this period, unless a particular violation is severe,
+FRA
+suspends the assessment of civil penalties for defects related to systemic
+problems as long as the railroad is making a good-faith effort to identify
+the problems and develop its action plan. If
+FRA finds that the railroad is
+not making a good-faith effort in executing its action plan, FRA is likely to
+process the civil penalties that it held in abeyance. FRA officials believe
+that the threat of this enforcement is an important tool for motivating the
+industry toward
+FRA’s goal of zero accidents and zero injuries. FRA officials
+believe that this focus results in more significant improvements in safety
+than what the agency achieved under its traditional site-specific
+inspections.
+Initially,
+FRA planned on closing out SACP activities at a railroad once the
+railroad addressed the safety defects cited in the safety profile. However,
+FRA has found that the SACP has established lines of communication with
+railroad labor and management and between railroad labor and
+management. Because the safety profiles are discussed in meetings with
+senior railroad management, these high-level managers have become
+involved in the safety process.
+FRA officials said that SACP has also helped
+gain the railroads’ voluntary cooperation in taking corrective action on
+safety issues that are not covered under
+FRA’s safety regulations.
+Accordingly, FRA plans to continue to use the process to identify systemic
+problems and root causes in the future. Over time, FRA expects that a
+railroad will develop a series of action plans, which FRA will monitor for
+completion.
+According to FRA, it has been able to use the SACP process to successfully
+address systemic problems at larger railroads. For example, FRA initiated a
+GAO/RCED-97-142 Rail TransportationPage 43
+
+[[PDF_PAGE_0046]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+SACP with Burlington Northern/Santa Fe Railroad in the aftermath of a
+February 1, 1996, derailment in Cajon Pass, California. When the train’s
+braking systems failed, the subsequent derailment and fire killed two crew
+men and closed Interstate 15 for several days. A similar accident had
+occurred at the same location 14 months earlier. After the February
+accident,
+FRA sent 56 inspectors to conduct a safety compliance review of
+the railroad in conjunction with the California Public Utilities
+Commission. During the 8-day review,
+FRA prevented the railroad from
+operating any trains until safety problems were resolved. FRA identified 13
+specific safety issues and required the railroad’s management, in
+conjunction with labor, to develop an action plan to remedy these issues.
+According to
+FRA, the railroad successfully addressed all of the issues
+during the following months.
+Following the first Cajon Pass accident, the railroad had agreed to install
+two-way end-of-train devices on those trains operating in the Cajon Pass
+area. According to
+FRA, such a device might have prevented the second
+accident. The derailed train in the second accident had a two-way
+end-of-train device but it was not switched on.
+FRA found that the safety
+culture of the railroad had eroded to the point that supervisors and
+employees found it acceptable to operate trains with inoperative two-way
+end-of-train devices and to cut other corners in mechanical inspections
+and repairs.
+According to
+FRA, its review resulted in changes in the railroad’s operating
+rules for the Cajon Pass area, improved quality control practices,
+redistribution of supervisory personnel to ensure an equal quality of
+supervision over all shifts, and a review of event recorder data on every
+train descending from the pass to ensure that rules were followed.
+FRA
+credits the SACP for the progress that has been made in changing the
+railroad’s culture and believes that such changes could not have occurred
+if
+FRA had only enforced existing regulations.
+As of January 1997, FRA had conducted initial SACP meetings with
+management at 33 railroads and planned to initiate SACPs at 21 additional
+railroads by the end of fiscal year 1997 (see app. II). FRA does not plan to
+conduct a SACP assessment of all of the more than 600 railroads in the
+United States. Instead, according to the Director of the Office of Safety
+Analysis,
+FRA inspectors are expected to look for root causes of defects
+found at smaller railroads through FRA’s traditional site-specific
+inspections. FRA cites improvements in safety statistics since 1993 as
+evidence that the SACP is improving safety throughout the nation’s railroad
+GAO/RCED-97-142 Rail TransportationPage 44
+
+[[PDF_PAGE_0047]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+system. From 1993 through 1996, rail-related fatalities declined by
+20 percent, employee injuries declined by about 40 percent, and train
+accident rates declined by 16 percent.
+However,
+SACP still depends on the cooperation of the railroads. For
+example, Norfolk Southern has not participated in the SACP. The railroad’s
+position is that until FRA can identify specific areas of noncompliance, it
+will not participate. FRA officials do not believe that the issue is closed and
+plan to discuss the matter again with Norfolk Southern at a later date. FRA
+officials said that they may need to apply a more traditional enforcement
+approach if Norfolk Southern continues to rebuff the agency’s
+SACP
+initiatives.
+Premature to Assess
+Results From Actions of
+FRA’s Railroad Safety
+Advisory Committee
+In March 1996, FRA established a Railroad Safety Advisory Committee
+consisting of representatives from railroad management, labor unions, and
+others representing various rail industry perspectives, to provide
+FRA with
+recommendations on important rail safety issues through a
+consensus-based process.
+FRA decided to form the committee based on
+what the agency believed to be a successful experience in developing its
+Roadway Worker Safety rule through a collaborative process.
+FRA uses the
+Advisory Committee to obtain input from those most affected by
+regulatory decisions, improve the quality of rules, reduce the time required
+to complete them, and reduce the likelihood of litigation after they are
+promulgated. Since the inception of the committee, the
+FRA Administrator
+has referred seven major rulemaking tasks to it, most of which were for
+rulemakings initiated prior to its establishment.
+FRA has not yet issued any
+final rules developed by the committee. However, the committee has
+proposed revisions to the track safety standards that the Congress
+mandated
+FRA to complete by September 1995. In addition, the committee
+has proposed revisions to the radio communications standards. While it is
+too early to measure the committee’s success in meeting
+FRA’s objectives,
+efforts to develop freight power brake regulations have encountered
+problems in the negotiations between
+FRA and the industry.
+The Advisory Committee is composed of 48 representatives from 27
+member organizations. The committee is chaired by FRA’s Associate
+Administrator for Safety and includes representatives of the Association of
+American Railroads, the American Short Line Railroad Association, state
+governments, and numerous labor groups. In addition, the Mexican
+Transport Minister and the Canadian Transport Minister have one
+nonvoting seat each.
+GAO/RCED-97-142 Rail TransportationPage 45
+
+[[PDF_PAGE_0048]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+Once FRA refers a regulatory task to the Advisory Committee, it forms a
+working group that represents the membership of the full committee. The
+working group in turn can establish task forces to pursue specific issues.
+For each task assigned, the working group addresses the relevant facts,
+defines the safety problem presented, develops a range of options, and
+decides upon a recommendation. Once the working group has achieved
+unanimous consensus, it presents its recommendation to the full
+committee. If the full committee accepts the recommendation by either
+unanimous or majority consensus, it is sent to the
+FRA Administrator, who
+can in turn, accept, reject, or modify the recommendation. Of the seven
+rulemaking tasks that have been referred to the committee, two have been
+referred to the Administrator.
+As shown in figure 3.2, when
+FRA has made a decision to regulate, the
+Advisory Committee can provide recommendations with respect to either
+the agency’s proposed or final action, or both.
+FRA will refer these matters
+separately to the committee on a case-by-case basis.
+Figure 3.2: Chronology of FRA’s Rulemaking Procedures
+Final rule published
+FRA review and if significant,
+Office of the Secretary of
+Transportation followed by
+Office of Management and
+Budget review
+FRA reviews hearing
+testimony and comments
+and drafts final rule
+Hearing, comments
+FRA review and if significant,
+Office of the Secretary of
+Transportation followed by
+Office of Management and
+Budget review
+Notice of Proposed
+Rulemaking published
+FRA researches issue and
+develops draft Notice of
+Proposed Rulemaking
+Decision to regulate
+Points at which Railroad Safety Advisory Commi ttee consensus process may be used.
+Source: GAO’s analysis.
+GAO/RCED-97-142 Rail TransportationPage 46
+
+[[PDF_PAGE_0049]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+As the figure shows, the committee’s participation supplements rather
+than eliminates required steps in the rulemaking process. For example,
+under departmental procedures and executive orders, significant proposed
+rules are reviewed and approved by the Office of the Secretary and the
+Office of Management and Budget (OMB) before
+FRA issues notices of
+proposed rulemaking.1 In addition, a 60-day public comment period and
+public hearing are provided. Furthermore, significant final rules are
+reviewed and approved by the Office of the Secretary and OMB before
+publication. However,
+FRA officials believe that since the affected parties
+are directly involved in the development of rules through consensus, there
+will be fewer and less contentious comments on notices of proposed
+rulemaking, fewer public hearings on proposed rules, fewer changes to
+proposed rules, and less litigation after rules are finalized.
+As table 3.1 shows,
+FRA has referred seven rulemaking tasks to the
+committee.
+1DOT defines the term “significant regulation” to include any regulation that involves important
+departmental policy. For OMB’s review, Executive Order 12866 defines the term significant regulation
+to include an action likely to result in a rule that may raise novel legal or policy issues arising out of
+legal mandates, the President’s priorities, or the principles set forth in the executive order.
+GAO/RCED-97-142 Rail TransportationPage 47
+
+[[PDF_PAGE_0050]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+Table 3.1: FRA’s Rulemaking Actions
+Assigned to the Advisory Committee
+Title
+Source of
+decision to
+regulate
+Legal
+deadline
+Date rule was
+tasked to the
+Advisory
+Committee
+Locomotive
+Crashworthiness and
+Working Conditions
+Rail Safety
+Enforcement and
+Review Act-9/3/92
+Final rule or report,
+3/3/95
+10/31/96a
+Qualification and
+Certification of Locomotive
+Engineers
+Petitions to
+reconsider aspects
+of an existing rule
+None 10/31/96
+Track Safety Standards Rail Safety
+Enforcement and
+Review Act-9/3/92
+Final, 9/1/95 4/1/96b
+Reinvention of Steam
+Locomotive Inspection
+Regulations
+Reinventing
+government effort
+None 7/24/96
+Radio
+Communication-Advanced
+Train Control System
+Rail Safety
+Enforcement and
+Review Act-9/3/92
+c
+None 4/1/96d
+Freight Power Brakes Rail Safety
+Enforcement and
+Review Act-9/3/92
+Final, 12/31/93 4/1/96
+Track Motor Vehicle and
+Roadway Equipment
+Safety
+Petition to develop
+a rule
+None 10/31/96
+aThe Rail Safety Enforcement and Review Act required FRA to complete a rulemaking proceeding
+to consider prescribing regulations in this area within 30 months of enactment. The act required
+FRA to report to the Congress if it decided, based on the rulemaking proceeding, not to prescribe
+regulations. FRA reported the results of its investigation to the Congress in September 1996 and
+subsequently referred the matter to the Advisory Committee.
+bThe Advisory Committee voted to recommend a proposal to the FRA Administrator in November
+1996. FRA published a Notice of Proposed Rulemaking on July 3, 1997.
+cThe Rail Safety Enforcement and Review Act required a safety inquiry regarding railroad radio
+standards and procedures, and FRA committed to revise its rules based on this study.
+dThe Advisory Committee voted to recommend a proposal to the FRA Administrator in April 1997.
+FRA published a Notice of Proposed Rulemaking on June 26, 1997.
+Source: GAO’s analysis. (See app. III for full inventory of FRA’s rulemaking actions.)
+Most of the tasks referred to the committee were complex or controversial
+rulemaking activities that FRA had been working on for several years. For
+example, FRA had been working on the Locomotive Crashworthiness,
+Track Safety, Radio Communication-Advanced Train Control, and Freight
+Power Brake rules for 4 years before referring them to the Advisory
+GAO/RCED-97-142 Rail TransportationPage 48
+
+[[PDF_PAGE_0051]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+Committee. In two cases, FRA had missed the congressional mandate to
+issue final rules.2 However, the committee developed a recommendation
+on track safety standards within 7 months after the FRA Administrator
+referred the task to it and has recommended revisions to FRA’s rules on
+radio communications. FRA has prepared notices of proposed rulemaking
+based on both the track and radio communications recommendations. FRA
+published a Notice of Proposed Rulemaking on track safety standards on
+July 3, 1997 and a Notice of Proposed Rulemaking on radio
+communications on June 26, 1997.
+If the
+FRA Administrator believes that the Advisory Committee’s action on
+proposed rules are not progressing or have reached a stalemate, the
+Administrator can withdraw the task from the committee and direct
+FRA
+staff to develop their own proposed rule without benefit of a consensus
+recommendation. As of June 1997, the Administrator was considering such
+action due to a stalemate in negotiations on the freight power brake rule.
+The problems in negotiations centered on who should inspect trains,
+where trains should be inspected, and how often they should be inspected.
+In January 1997,
+FRA issued two technical bulletins that specified how
+inspectors were to enforce existing power brake rules and inspection
+requirements under the freight car safety standards. According to
+FRA
+officials, the bulletins were intended to give inspectors guidance on when
+to issue violations on the improper inspection of power brakes and freight
+cars. However,
+AAR protested the move by bringing a court challenge and
+by filing a petition to reconsider with FRA, stating that FRA was
+promulgating new standards without going through the rulemaking
+process. As of June 1997,
+FRA and AAR were still working to resolve the
+dispute.
+Inspection Efforts
+Have Changed Under
+the Partnering
+Approach
+The collaborative approach that FRA has adopted for obtaining voluntary
+compliance with railroad safety rules has shifted some of FRA’s resources
+away from site-specific inspections, which have historically served as FRA’s
+primary means of ensuring compliance with safety regulations. This shift
+is most evident in the 23-percent decline in the number of inspections
+conducted between 1994 and 1995. As a result, a greater number of
+railroads are not receiving inspections, and inspectors are conducting
+fewer reviews of the railroads’ own inspection efforts.
+2Originally due by March 1995, FRA’s report on Locomotive Crashworthiness and Cab Working
+Conditions was issued in September 1996.
+GAO/RCED-97-142 Rail TransportationPage 49
+
+[[PDF_PAGE_0052]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+FRA’s efforts to increase cooperation with the railroad industry to
+promulgate and enforce rail safety regulations adds new responsibilities
+for its 270 inspectors. New responsibilities include participating in
+SACP
+activities, such as listening sessions with rail management and labor to
+identify safety issues and team inspections to develop rail safety profiles.
+Inspectors also participate in the Advisory Committee’s working groups
+and task forces. Nearly all inspectors participate in
+SACP either in
+conducting formal listening sessions with labor, participating in senior
+management meetings, or focusing on
+SACP-related issues when
+conducting routine site-specific inspections.
+As figure 3.3 shows, the 67,966 field inspections FRA conducted in 1985 had
+increased slightly to 69,423 by 1992. However, inspections began to decline
+in 1993 and declined further to 53,113 by 1995. The number of inspections
+conducted in 1995 was 23 percent below the 68,715 inspections conducted
+in 1994.
+3 The decline occurred across all of FRA’s disciplines (track,
+equipment, signals, hazardous materials, and operating practices) but most
+notably in operating practices, which experienced a 41-percent decline.
+(Operating practices inspectors are responsible for enforcing federal
+regulations governing the operation of trains.) The number of inspections
+at class I railroads declined by 24 percent while inspections at smaller
+railroads declined by 19 percent between 1994 and 1995. Figure 3.3 also
+shows that after gradually increasing during the late 1980s, the number of
+defects
+FRA inspectors cited declined from 391,233 in 1989 to 270,312 in
+1995—a 31-percent drop. Defects are instances of noncompliance with
+federal safety regulations, for which railroads are expected to take
+corrective action. For example, inspectors would cite defects for cracks
+found on rail track. According to
+FRA officials, defects declined because
+fewer inspections were conducted during this period, and inspectors may
+have overreacted to
+FRA’s emphasis on cooperation and partnering.
+3Our data show the number of inspection reports. While FRA inspectors sometimes reported
+inspections in different disciplines on the same report before 1995, this became a more general
+practice in 1995 when FRA introduced a new form that was specifically designed to record inspections
+in more than one discipline. Although the number of forms submitted to FRA declined with the use of
+the new form, our data reflect the number of inspection reports regardless of the number of forms
+submitted.
+GAO/RCED-97-142 Rail TransportationPage 50
+
+[[PDF_PAGE_0053]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+Figure 3.3: Inspections and Defects,
+Calendar Years 1985 Through 1995
+Inspections
+Defects
+1985 1987 1989 1991 1993 1995
+50,000
+55,000
+60,000
+65,000
+70,000
+75,000
+80,000
+200,000
+250,000
+300,000
+350,000
+400,000
+Calendar year
+DefectsInspections
+Source: GAO’s analysis of FRA’s data.
+In commenting on a draft of this report, FRA officials said that the agency
+never intended to eliminate or discourage the use of enforcement tools. In
+April 1997,
+FRA issued guidance to all of its safety personnel in an effort to
+clarify that enforcement—while not an end in itself—is an essential
+element of
+SACP. The guidance explains the concept of “focused
+enforcement,” which encourages inspectors to concentrate their
+enforcement efforts where they will do the most good, that is, where
+accident trends, inspection data, direct observations, and/or the violation’s
+inherent seriousness indicates that enforcement action is needed to
+address a significant safety risk.
+The decline in total inspections has also resulted in a greater number of
+railroads not receiving inspections. As table 3.2 shows, the number of
+railroads that received no inspections by
+FRA increased from 43 to 95
+between 1992 and 1995. Although these railroads only reported nine
+GAO/RCED-97-142 Rail TransportationPage 51
+
+[[PDF_PAGE_0054]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+accidents during this period, it is FRA’s goal to inspect all railroads at least
+once a year.
+Table 3.2: Railroads With No
+Inspections and Inspections in One or
+Two Disciplines, Calendar Years 1992
+Through 1995
+Year
+Railroads
+with no
+inspectionsa
+Railroads with
+inspections in one or
+two disciplinesa
+1992 43 187
+1993 50 214
+1994 66 245
+1995 95 271
+aThe number of railroads receiving inspections in each year has been adjusted to combine parent
+railroads with their subsidiaries.
+Source: GAO’s analysis of FRA’s data.
+In addition, many railroads received inspections in only one or two of the
+five inspection disciplines. As shown in table 3.2, the number of railroads
+receiving inspections in only one or two disciplines increased from 187 in
+1992 to 271 in 1995.
+The reduction in total inspections also has resulted in
+FRA inspectors’
+conducting fewer reviews of the railroads’ own inspections—known as
+records inspections. Our analysis of
+FRA’s inspection data also found that
+between 1992 and 1995, the percentage of inspected railroads in which FRA
+completed a records inspection declined sharply in each discipline. Table
+3.3 shows that the drop was most precipitous in 1995.
+Table 3.3: Percentage of Railroads
+That Received Records Inspections,
+Calendar Years 1992 Through 1995
+Percentage of railroads inspected, by type of inspection
+Amounts in percents
+Year Track Equipment Signal
+Hazardous
+materials
+Operating
+practices
+1992 60 42 64 34 60
+1993 58 43 51 32 54
+1994 55 40 44 32 52
+1995 32 12 34 21 47
+Source: GAO’s analysis of FRA’s data.
+GAO/RCED-97-142 Rail TransportationPage 52
+
+[[PDF_PAGE_0055]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+The nation’s railroads are primarily responsible for conducting safety
+inspections of their equipment and facilities and keeping records of their
+inspections.
+FRA’s responsibility is to monitor the inspection activity of the
+railroads. FRA’s policy advises inspectors to prepare for an inspection by
+reviewing a railroad’s inspection records. According to FRA’s policy
+standards, these records are a good source of information for FRA
+inspectors about the extent to which a railroad has met the regulatory
+requirements and about the type of problems the railroad has found.
+FRA Does Not
+Systematically
+Oversee Workplace
+and Bridge Safety
+During our review of FRA’s rail safety approach, we identified two issues
+that the agency’s partnering or inspection efforts do not systematically
+address: improving the workplace safety of railroad employees and
+ensuring that railroad bridges receive inspection oversight comparable to
+other railroad areas.
+FRA has chosen not to issue regulations addressing
+many workplace safety issues, although railroad employees accounted for
+most of the 14,400 rail-related injuries and illnesses that occurred in 1995.
+In addition,
+FRA’s 1995 decision not to promulgate bridge safety regulations
+requires FRA personnel to rely primarily on voluntary correction of
+potential problems with bridge safety.
+Employee Workplace
+Safety and Health Receive
+Less Oversight Than Other
+Aspects of Railroad Safety
+The number of rail-related injuries and illnesses has declined from 65,331
+in 1976 to 14,440 in 1995. As figure 3.4 shows, most of these injuries and
+illnesses involve railroad employees.
+4 Railroads must report injuries that
+require medical treatment or result in work restrictions and lost work
+days.
+4Data on injuries and illnesses by type of person and occurrence were available only for calendar years
+1979 through 1995.
+GAO/RCED-97-142 Rail TransportationPage 53
+
+[[PDF_PAGE_0056]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+Figure 3.4: Injuries and Illnesses by Type of Person and Occurrence, Calendar Years 1976 Through 1995
+1979 1980 1981 1982 1983 1984 1985 1986 1987 1988 1989 1990 1991 1992 1993 1994 1995
+0
+20,000
+40,000
+60,000
+80,000
+Calendar year
+Injuries and illnesses
+Employees on duty (excludes crossings)
+At highway/rail crossings and/or involving trespassers
+Passengers (excludes crossings)
+Other (excludes crossings)
+Source: GAO’s analysis of FRA’s data.
+GAO/RCED-97-142 Rail TransportationPage 54
+
+[[PDF_PAGE_0057]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+Efforts to reduce injuries to workers must rely on the combined efforts of
+FRA and OSHA.5 For example, FRA oversees safety issues intrinsic to railroad
+operations such as ensuring that employees are not struck by moving
+trains because they did not follow
+FRA’s safety procedures while working
+on railroad track.6 OSHA, on the other hand, is responsible for employee
+safety and health issues that would be associated with any industrial
+workplace. For example,
+OSHA would ensure that employees using welding
+equipment while working on the track used appropriate safety equipment,
+such as goggles.
+While a 1978 policy statement by
+FRA provides guidance on which
+workplace safety and health issues FRA or OSHA should cover, the two
+agencies’ inspection presence on railroad property varies greatly. For
+example, in 1995,
+FRA conducted over 50,000 inspections of track, railroad
+equipment, and operating practices related to train operations. In contrast,
+OSHA inspectors normally visit railroad properties only in response to an
+employee or union complaint about working conditions or when
+investigating a workplace accident that resulted in the injury of three or
+more employees.
+7
+Labor representatives expressed concern that because of OSHA’s limited
+resources, certain workplace safety and health issues are not adequately
+addressed under the split responsibility. For example, labor
+representatives pointed out that pipe insulation and gaskets often contain
+asbestos, but there is no guidance from
+FRA on how to handle these
+hazardous materials. FRA inspectors told us that they look for unsafe work
+practices or situations when conducting site inspections. When they
+observe unsafe work practices, such as an employee welding without
+proper eye protection, inspectors can point out the problem to railroad
+supervisory personnel for voluntary compliance. However,
+FRA inspectors
+have no authority to cite railroads for workplace safety problems that fall
+5The Occupational Safety and Health Act of 1970 gave the Secretary of Labor responsibility for
+promulgating and enforcing occupational safety and health standards. Section 4(b)(1) provides that
+the act does not apply to working conditions where another federal agency exercises statutory
+authority to prescribe or enforce standards or regulations affecting occupational safety or health. The
+Federal Railroad Safety Act of 1970 allows the Secretary of Transportation to develop regulations that
+parallel standards under the Occupational Safety and Health Act and preempt the Secretary of Labor
+from enforcing such standards in the railroad industry.
+6FRA has developed some regulations relating to the safety of railroad employees, such as those
+concerning safety for roadway and bridge workers.
+7OSHA administers workplace safety programs in 25 states, while the remaining states administer their
+own OSHA-approved programs. Some of the state-administered programs follow OSHA’s procedures for
+inspections, while others do not.
+GAO/RCED-97-142 Rail TransportationPage 55
+
+[[PDF_PAGE_0058]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+under OSHA’s jurisdiction if the railroad does not voluntarily comply with
+the inspector’s suggestions.
+In January 1997, FRA revised its injury reporting requirements to capture
+additional information on workplace injuries, including where the injury
+occurred, what activity was being performed at the time, what tools were
+used, and what was the probable cause. According to
+FRA, new codes were
+developed to isolate injuries and provide better data for future
+rulemakings. Because these requirements only recently became effective,
+FRA has yet to accumulate sufficient data for analysis. Once sufficient data
+are collected, FRA will be able to determine the causes of the most frequent
+and/or serious injuries and illnesses and focus its efforts and those of the
+industry on corrective actions. The refined data will also allow
+FRA to
+determine if additional regulations are needed. In the interim, FRA will
+continue to provide to the regions data on workers’ injuries along with the
+accident and inspection data that the regions now receive for planning
+purposes.
+FRA’s Policy Relies on
+Industry to Inspect
+Railroad Bridges
+Rather than issue regulations governing the structural integrity of the
+nation’s 100,700 railroad bridges, FRA is relying on the voluntary
+cooperation of the railroads. A 1995 policy statement provides railroads
+with advisory guidelines to use in implementing their own bridge
+inspection programs.
+FRA expects its track inspectors to observe structural
+problems on bridges as they perform their routine inspections and seek
+cooperative resolutions with the railroad.
+FRA states that the railroads have
+generally been responsive in taking corrective action in response to
+inspectors’ observations. However, unlike safety problems with track,
+signals, or equipment, where inspectors have the discretion to cite defects
+or recommend violations, inspectors have no such discretion when dealing
+with potentially serious bridge problems. Their only recourse is to
+exercise emergency authority to close the bridge if conditions present an
+imminent hazard of death or personal injury.
+8
+FRA was forced to take this action in February 1996 after a New York State
+railroad inspector fell through a deteriorated bridge. The bridge was
+owned by a small railroad that operated one locomotive over 1.5 miles of
+track.
+FRA tried to reach a cooperative solution with the railroad’s owner
+over a 6-week period, but the railroad did not cooperate. After a bridge
+engineering consultant investigated the bridge and concluded that it was
+8As indicated in the 1995 policy statement, FRA maintains the authority to issue emergency,
+compliance, and disqualification orders, as well as the authority to seek injunctive relief in federal
+district court.
+GAO/RCED-97-142 Rail TransportationPage 56
+
+[[PDF_PAGE_0059]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+unsafe for the movement of the railroad’s 50-ton locomotive, FRA issued an
+emergency order to close the bridge. The emergency order continued to be
+in effect in May 1997.
+Although
+FRA has noted that some smaller railroads have not addressed all
+of their responsibilities for the safety of their bridges, FRA officials said
+that bridge regulations are not necessary. In 1995, FRA issued a report that
+concluded (1) bridges owned by the class I railroads were not in danger of
+collapse because they were designed and built to support steam
+locomotives that weigh more than modern locomotives, (2) over the past
+five decades no fatalities have resulted from railroad bridge failures,
+9
+(3) the great majority of railroad bridges are under effective management
+programs conducted by their owners, (4)
+FRA and industry bridge
+inspectors do not have the expertise needed to make a proper evaluation
+of the safety of most rail bridges, and (5)
+FRA can use emergency orders as
+an ultimate remedy for hazardous bridge conditions. FRA also noted that
+railroads have a considerable incentive, even without federal regulations,
+to maintain their bridges in a safe condition, since the loss of a bridge
+could not only cause human casualties but would also cause serious
+economic losses and operating problems for the railroads.
+FRA officials said that developing railroad bridge regulations will dilute the
+agency’s capacity to address issues that the agency believes are more
+important. While
+AAR agrees with FRA’s policy that regulations are not
+needed, railroad labor officials disagreed and noted that bridge safety is
+equally as important as track safety, for which
+FRA has promulgated
+regulations.
+Conclusions
+FRA has always faced the challenge of determining how best to deploy its
+limited resources to oversee the nation’s freight railroads. While field
+inspections and enforcement actions defined the agency’s approach in the
+past, the agency believes that the collaborative approaches it has pursued
+since 1993 will provide a more effective means to oversee an increasingly
+productive and growing industry. Railroad stakeholders have expressed
+initial support for
+FRA’s SACP process and are working to address systemic
+safety problems within the major railroads. On the other hand, efforts to
+develop freight power brake regulations through the Advisory Committee
+9Forty-seven fatalities did occur in a September 1993 accident when a barge tow struck a railroad
+bridge in Mobile, Alabama, just before an Amtrak passenger train arrived. In other instances, railroad
+bridges have been struck by motor vehicles or marine vessels, but, according to FRA, no human
+casualties resulted.
+GAO/RCED-97-142 Rail TransportationPage 57
+
+[[PDF_PAGE_0060]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+have encountered problems in the negotiations between FRA and the
+industry.
+Similarly, it is unclear how the shift in FRA’s resources away from
+site-specific inspections—the mainstay of FRA’s safety program for many
+years—will affect rail safety. FRA’s field inspectors are conducting fewer
+inspections as a result of their additional partnering responsibilities. These
+site-specific inspections served an important oversight function and may
+have contributed to the improvements in rail safety over the past 20 years.
+FRA believes that inspectors’ time is well spent on the partnership efforts.
+Since these efforts are still evolving, including the role of inspectors, it is
+too early to assess if they will improve railroad safety over the long term.
+FRA’s new approach has not yet systematically addressed concerns about
+improving the workplace safety of railroad employees or ensuring that
+railroad bridges receive inspection oversight comparable to other railroad
+areas.
+FRA’s new injury reporting requirements and database could provide
+the agency with the means to determine the causes of the most numerous
+or serious injuries and illnesses.
+FRA and the industry could then work
+together to develop corrective action. The cooperative arrangements
+inherent in the
+SACP provide a vehicle for FRA, labor, and the railroads to
+jointly seek solutions to workplace injury problems. If the injuries and
+illnesses do not decrease as a result of these efforts,
+FRA could consider
+addressing continuing workplace safety issues through regulations. The
+SACP process could also provide FRA with the means to address bridge
+safety problems before they become emergencies. By ensuring that bridge
+safety problems that track inspectors find are included in the
+SACP, FRA
+could quickly elevate the problems to senior railroad management for
+resolution.
+Recommendations We recommend that the Secretary of Transportation direct the FRA
+Administrator to, in cooperation with the industry, where appropriate,
+(1) analyze injury data collected under the revised reporting requirements
+to determine the workplace safety issues that lead to the most numerous
+or the most serious injuries; (2) in areas where efforts to obtain voluntary
+corrective action do not address the causes of these injuries, consider
+developing regulations; and (3) use appropriate mechanisms, including the
+Safety Assurance and Compliance Program, to ensure that a finding of
+potential structural problems on a bridge is properly addressed by the
+bridge owner.
+GAO/RCED-97-142 Rail TransportationPage 58
+
+[[PDF_PAGE_0061]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+Agency Comments In commenting on a draft of this report, FRA officials said that it did not
+provide detailed information on the accomplishments the agency’s new
+rail safety program had attained since it was initiated in 1993. The officials
+cited improvements in key safety statistics since 1993 and safety
+improvements in the operations of many larger railroads as examples of
+how the agency’s new systemic approach has improved rail safety. For
+example, railroad fatalities declined by 20 percent between 1993 and 1996
+compared with a 1.4-percent decline between 1990 and 1993. In addition,
+the officials said that limitations on its resources and expertise currently
+constrain the agency’s ability to address the workplace safety and bridge
+safety issues that we cited in the draft report.
+FRA said that these
+limitations would affect its ability to continue its present activities,
+adequately address new issues that will confront the agency, and address
+concerns about improving workplace safety of railroad employees or
+ensuring that railroad bridges receive oversight comparable to other
+railroad areas. Finally, while agreeing with two of our three
+recommendations,
+FRA officials commented on our recommendation that
+the agency consider developing regulations to address the issues that
+continue to cause the most numerous or serious workplace injuries. The
+officials said that it would limit its consideration of regulations to those
+areas that are related to train operations.
+FRA would have matters related
+to non-train operations under OSHA’s purview.
+In response to FRA’s comments, we included additional information on the
+accomplishments the agency’s new rail safety program has achieved by
+highlighting safety statistics for 1993 through 1996 and providing detailed
+information on the successes with the
+SACP process. Specifically, we added
+information on noticeable reductions in railroad fatalities and collisions
+that occurred during this 3-year period. We also included in appendix IV,
+FRA’s performance goals for improving rail safety in response to the
+Government Performance and Results Act of 1993. FRA’s performance
+goals and 3-year record show that safety has improved since 1993.
+However, reaching conclusions on
+FRA’s new safety program by isolating
+safety improvements over the most recent 3-year period ignores past
+trends in railroad safety. The past 20 years shows that periods of
+noteworthy reductions in railroad accidents, fatalities, and injuries were
+often followed by periods in which railroad safety worsened. As we
+concluded, it is too early to tell if
+FRA’s efforts will sustain improvements
+in railroad safety over an extended time. Finally, we disagree with FRA’s
+contention that any workplace safety regulations that it may consider
+issuing should be limited to train-related operations only. In assessing the
+more detailed workplace safety information that the agency began
+GAO/RCED-97-142 Rail TransportationPage 59
+
+[[PDF_PAGE_0062]]
+Chapter 3
+FRA Has Shifted to a Partnership Approach
+to Improve Railroad Safety
+collecting in January 1997, FRA may find a preponderance of
+non-train-related injuries that warrant the agency’s and industry’s
+attention. Accordingly,
+FRA should not foreclose the need to at least
+consider regulations that may cover serious injuries that occur away from
+train operations.
+FRA had additional comments that we incorporated throughout the report,
+where appropriate.
+GAO/RCED-97-142 Rail TransportationPage 60
+
+[[PDF_PAGE_0063]]
+GAO/RCED-97-142 Rail TransportationPage 61
+
+[[PDF_PAGE_0064]]
+Appendix I
+Methodology Used to Analyze Data From
+the Federal Railroad Administration’s
+Railroad Inspection Reporting System
+To analyze the impact of the Federal Railroad Administration’s new
+approach on field inspections, we obtained data from the agency’s
+Railroad Inspection Reporting System. The system contains all records for
+calendar years 1992 through 1994 for inspections of motive power and
+equipment, operations and hazardous materials, signal and train control,
+and track. For calendar year 1995, we obtained data from
+FRA’s current
+database which combines all of these disciplines into one file. These data
+included information such as the railroad inspected, geographic region,
+inspection discipline, defects, and violations recommended. We worked
+closely with agency officials to develop a list of subsidiary railroads to
+combine with parent railroads for each year represented in our data, as
+well as to develop a coding structure designating railroads as class I, group
+II, or all others. We also worked closely with agency officials to ensure
+that we were counting the numbers of inspections, records inspections,
+defects, and recommended violations consistently with
+FRA’s methods of
+generating statistics describing such activities.
+To determine railroads that had not received inspections, we generated a
+list of railroads from FRA’s Operations and Casualty databases for each
+calendar year 1992 through 1995. We compared this list to the railroads
+(with subsidiaries combined with parents) from the inspections data we
+received from
+FRA. We focused on railroads that received no inspection in
+any of the five inspection disciplines or that received inspections in only
+one or two of the five inspection disciplines.
+Reliability Assessment of
+FRA’s Inspection Data
+We reported the results of our limited reliability assessment of the
+Railroad Inspection Reporting System as required by the government
+auditing standards in 1990.
+1
+1Railroad Safety: New Approach Needed for Effective FRA Safety Inspection Program
+(GAO/RCED-90-194, July 31, 1990).
+GAO/RCED-97-142 Rail TransportationPage 62
+
+[[PDF_PAGE_0065]]
+Appendix II
+Safety Assurance and Compliance Program’s
+Senior Management Meetings
+Table II.1: Fiscal Year 1995 Meetings
+Railroad Date of meeting
+Chicago and Northwestern October 25, 1994
+Southern Pacific February 15, 1995
+Iowa Interstate April 26, 1995
+Conrail May 26, 1995
+Kansas City Southern July 12, 1995
+Florida East Coast July 18, 1995
+Tri-Rail July 19, 1995
+Union Pacific August 23, 1995
+Source: FRA.
+Table II.2: Fiscal Year 1996 Meetings
+Railroad Date of meeting
+Montana Rail Link October 11, 1995
+CSX Transportation October 31, 1995
+Dakota, Minnesota, & Eastern January 25, 1996
+Gateway Western January 31, 1996
+Metra (Chicago) February 22, 1996
+Southeastern Pennsylvania Transportation
+Authority (SEPTA)
+March 8, 1996
+Wisconsin Central March 29, 1996
+Long Island April 3, 1996
+Springfield Terminal April 16, 1996
+Belt Railway of Chicago May 28, 1996
+Norfolk Southern June 20, 1996
+Alaska July 16, 1996
+New Jersey Transit July 18, 1996
+Rail Tex (Central Oregon and Pacific) August 6, 1996
+Elgin, Joliet & Eastern August 20, 1996
+Metro North August 27, 1996
+Burlington Northern Santa Fe August 30, 1996
+Duluth Missabe and Iron Range September 23, 1996
+Canadian National (Grand Trunk Western
+/Duluth, Winnipeg, and Pacific)
+September 24, 1996
+Illinois Central (Chicago Central and Pacific) September 26, 1996
+Source: FRA.
+GAO/RCED-97-142 Rail TransportationPage 63
+
+[[PDF_PAGE_0066]]
+Appendix II
+Safety Assurance and Compliance
+Program’s Senior Management Meetings
+Table II.3: Fiscal Year 1997 Meetings
+Railroad Date of meeting
+Metro Link (SCRRRA) October 17, 1996
+Indiana Harbor Belt November 12, 1996
+Canadian Pacific December 12, 1996
+Amtrak December 4, 1996
+Texas Mexican To be determined
+Farmrail/Grainbelt To be determined
+Texas, Oklahoma & Eastern/DeQueen &
+Eastern
+To be determined
+North American Rail Net February 1997
+I&M Rail Link March 1997
+Wisconsin Southern March 1997
+Toledo, Peoria, and Western April 1997
+Northern Indiana Commuter April 1997
+Escanaba and Lake Superior May 1997
+Dakota, Missouri Valley, and Western June 1997
+Central Railroad of Michigan June 1997
+Carolina Southern July 1997
+Arizona and California July 1997
+Blue Mountain Reading and Northern July 1997
+Ann Arbor July 1997
+Kyle Railroad To be determined
+Wheeling and Lake Erie August 1997
+Amtrak Capital Corridor August 1997
+Indianapolis and Louisville August 1997
+North Shore Group September 1997
+Red River Valley and Western Railroad September 1997
+Source: FRA.
+GAO/RCED-97-142 Rail TransportationPage 64
+
+[[PDF_PAGE_0067]]
+Appendix III
+FRA’s Rulemaking Actions
+Stage Title
+Source of decision to
+regulate
+Legal
+deadline Other
+Prerule Hours of Service
+Electronic
+Recordkeeping Project
+Reinventing government
+effort
+None
+Proposed rule Track Motor Vehicle and
+Roadway Equipment
+Safety
+Petition to develop a rule None Tasked to the Railroad
+Safety Advisory
+Committee (RSAC) on
+10/31/96
+Proposed rule Locomotive
+Crashworthiness and
+Working Conditions
+Rail Safety Enforcement
+and Review Act –9/3/92
+Final rule or report, 3/3/95 Tasked to RSAC on
+10/31/96
+a
+Proposed rule Florida Overland
+Express High Speed Rail
+Rule of Particular
+Applicability
+FRA None
+Proposed rule Passenger Equipment
+Safety Standards
+Federal Railroad Safety
+Authorization Act of 1994
+–11/2/94
+Initial regulations,
+11/2/97;
+final, 11/2/99
+Proposed rule Whistle-Bans at
+Highway-Rail Grade
+Crossings
+Title III, Public Law
+103-440
+Final, 11/2/96
+Proposed rule Qualification and
+Certification of
+Locomotive Engineers
+Petitions to reconsider
+aspects of an existing
+rule
+None Tasked to RSAC on
+10/31/96
+Proposed rule Track Safety Standards Rail Safety Enforcement
+and Review Act –9/3/92
+Final, 9/1/95 Tasked to RSAC on
+4/1/96
+b
+Proposed rule Environmental Impact
+and Related Procedures
+FRA, FTA, and FHWA
+revisions to
+environmental regulations
+None
+Proposed rule Reinvention of Steam
+Locomotive Inspection
+Regulations
+Reinventing government
+effort
+None Tasked to RSAC on
+7/24/96
+Proposed rule Radio Communication-
+Advanced Train Control
+System
+Rail Safety Enforcement
+and Review Act-9/3/92
+c
+None Tasked to RSAC on
+4/1/96
+d
+Proposed rule Freight Power Brakes Rail Safety Enforcement
+and Review Act-9/3/92
+Final, 12/31/93 Tasked to RSAC on
+4/1/96
+e
+Final rule Rail Passenger Service:
+Emergency
+Preparedness
+Federal Railroad Safety
+Authorization Act of 1994
+–11/2/94
+Initial regulations,
+11/2/97;
+final, 11/2/99
+Final rulef Statement of Policy
+Regarding Safety of
+Railroad Bridges
+FRA None
+Final rule Use of Remotely
+Controlled Locomotives
+in Rail Operations
+FRA None
+(continued)
+GAO/RCED-97-142 Rail TransportationPage 65
+
+[[PDF_PAGE_0068]]
+Appendix III
+FRA’s Rulemaking Actions
+Stage Title
+Source of decision to
+regulate
+Legal
+deadline Other
+Final rule Use of One-Person
+Crews in Railroad
+Operations
+FRA None
+Final rule Alcohol/Drug
+Regulations;
+Miscellaneous Technical
+Amendments and
+Corrections
+Reinventing government
+effort
+None
+Final rule Local Rail Freight
+Assistance to States
+FRA None
+Final rule Freight Car Safety
+Standards:
+Maintenance-of-Way
+Equipment
+Reinventing government
+effort
+None
+Final ruleg Reinvention of
+Regulations Addressing
+Discontinuance or
+Modification of Signal
+Systems
+Reinventing government
+effort
+None
+Final ruleh Reinvention of Signal
+System Reporting
+Requirements
+Reinventing government
+effort
+None
+Final rulei Maintenance, Inspection,
+and Testing of
+Grade-Crossing Signal
+Systems
+Reinventing government
+effort; petitions to
+reconsider aspects of an
+existing rule
+None
+Rule published on 6/18/96j Railroad Accident
+Reporting
+Reinventing government
+effort
+None
+Rule published on 7/25/96 FRA Hazardous
+Materials Penalty
+Guidelines
+Senate Report 103-150,
+Public Law 103-122
+Final, 5/1/95k
+Rule published on 12/16/96 Roadway Worker
+Protection
+Rail Safety Enforcement
+and Review Act –9/3/92
+Final, 9/1/95
+Rule published on 1/2/97 Power Brake
+Regulations: Two Way
+End of Train Telemetry
+Devices
+Rail Safety Enforcement
+and Review Act –9/3/92
+Final, 12/31/93
+Long term Reinvention of
+Regulations Addressing
+Railroad User Fees
+Reinventing government
+effort
+None
+Long term Small Railroads; Policy
+Statement on
+Enforcement Program
+Small Business
+Regulatory Enforcement
+Fairness Act of 1996 -
+3/29/96
+3/29/97
+Long term Tourist and Historic
+Working Group
+Regulatory Review
+(Section 610 Review)
+FRA, Regulatory
+Flexibility Act
+l
+None
+(continued)
+GAO/RCED-97-142 Rail TransportationPage 66
+
+[[PDF_PAGE_0069]]
+Appendix III
+FRA’s Rulemaking Actions
+Stage Title
+Source of decision to
+regulate
+Legal
+deadline Other
+Long term Amtrak Waste Disposal The National and
+Community Service Act
+of 1990 - 11/16/90
+None
+Long term Protection of Utility
+Employees
+Petitions to reconsider
+aspects of an existing
+rule
+None
+Long term Selection and Installation
+of Grade Crossing
+Warning Systems
+FRA None
+Note: Rules currently pending for which action was completed in the last 12 months.
+aThe Rail Safety Enforcement and Review Act required FRA to complete a rulemaking proceeding
+to consider prescribing regulations in this area within 30 months of enactment. The act required
+FRA to report to the Congress if it decided, based on the rulemaking proceeding, not to prescribe
+regulations. FRA reported the results of its investigation to the Congress in September 1996 and
+subsequently referred the matter to the RSAC.
+bThe RSAC voted to recommend a proposal to the FRA Administrator in November 1996. FRA
+published a Notice of Proposed Rulemaking on July 3, 1997.
+cThe Rail Safety Enforcement and Review Act required a safety inquiry regarding railroad radio
+standards and procedures, and FRA committed to revise its rules based on this study.
+dThe RSAC voted to recommend a proposal to the FRA Administrator in April 1997. FRA
+published a Notice of Proposed Rulemaking on June 26, 1997.
+eProposals for passenger brake revisions are also being developed with the assistance of a
+passenger equipment standards working group.
+fFRA published an Interim Statement of Policy on April 27, 1995.
+gFRA published an Interim Final Rule on July 1, 1996.
+hFRA published an Interim Final Rule on July 1, 1996.
+iFRA published a Final Rule on September 30, 1994, requiring that railroads take actions to
+protect the travelling public and railroad employees from the hazards posed by malfunctioning
+highway-rail grade crossing warning systems, and that railroads follow specific standards for
+maintaining, inspecting, and testing those systems. This rule was effective on January 1, 1995.
+FRA is making technical changes and minor amendments to this final rule. FRA published an
+Interim Final Rule on June 20, 1996.
+jOn June 18, November 22, and November 29, 1996, FRA published final rules amending the
+railroad accident reporting regulations. On December 23, 1996, FRA responded to remaining
+issues raised in petitions for reconsideration, issued amendments addressing some of those
+concerns, and made some technical minor amendments.
+kAs stated in the report of the Senate Appropriations Committee on the Department of
+Transportation’s Fiscal Year 1994 appropriations.
+GAO/RCED-97-142 Rail TransportationPage 67
+
+[[PDF_PAGE_0070]]
+Appendix III
+FRA’s Rulemaking Actions
+lUnder the Regulatory Flexibility Act, agencies periodically review existing and proposed
+regulations that have or will have a significant economic impact on a substantial number of small
+entities. The RSAC’s Tourist and Historic Working Group will review existing and proposed
+regulations for their appropriate applicability to tourist and historic railroads.
+Source: Semiannual Regulatory Agenda (Apr. 25, 1997) and FRA.
+GAO/RCED-97-142 Rail TransportationPage 68
+
+[[PDF_PAGE_0071]]
+Appendix IV
+Key Safety Statistics, Calendar Years 1993
+Through 1996, and FRA’s Performance Goals
+Performance
+measure 1993 1996 a
+Reduction
+(percent) 1998 goal
+Comparison
+of 1996 with
+1998 goal
+Rail-related
+fatalities
+1,279 1,023 20 1,151 –128
+Train accidents 2,785 2,511 9.8 2,414 +97
+Rail
+passenger
+fatalities/
+injuries
+617 437 29.2 423 +14
+Rail employee
+fatalities/
+injuries
+15,762 8,949 43.2 11,645 –2,696
+Grade
+crossing
+accidents
+4,892 4,159 15.0 4,377 –218
+Trespasser
+fatalities
+523 472 9.8 494 –22
+Hazardous
+materials
+releases
+1,154 1,087 5.8 1,110 –23
+a1996 data are preliminary.
+Source: FRA.
+GAO/RCED-97-142 Rail TransportationPage 69
+
+[[PDF_PAGE_0072]]
+Appendix V
+Major Contributors to This Report
+Resources,
+Community, and
+Economic
+Development Division
+Joseph A. Christoff, (312) 220-7703
+Stephen M. Cleary
+Helen T. Desaulniers
+Sharon E. Dyer
+Bonnie Pignatiello Leer
+Edmond E. Menoche
+Judy K. Pagano
+Phyllis F. Scheinberg
+(343880) GAO/RCED-97-142 Rail TransportationPage 70
+
+[[PDF_PAGE_0073]]
+Ordering Information
+The first copy of each GAO report and testimony is free.
+Additional copies are $2 each. Orders should be sent to the
+following address, accompanied by a check or money order
+made out to the Superintendent of Documents, when
+necessary. VISA and MasterCard credit cards are accepted, also.
+Orders for 100 or more copies to be mailed to a single address
+are discounted 25 percent.
+Orders by mail:
+U.S. General Accounting Office
+P.O. Box 6015
+Gaithersburg, MD 20884-6015
+or visit:
+Room 1100
+700 4th St. NW (corner of 4th and G Sts. NW)
+U.S. General Accounting Office
+Washington, DC
+Orders may also be placed by calling (202) 512-6000
+or by using fax number (301) 258-4066, or TDD (301) 413-0006.
+Each day, GAO issues a list of newly available reports and
+testimony. To receive facsimile copies of the daily list or any
+list from the past 30 days, please call (202) 512-6000 using a
+touchtone phone. A recorded menu will provide information on
+how to obtain these lists.
+For information on how to access GAO reports on the INTERNET,
+send an e-mail message with "info" in the body to:
+info@www.gao.gov
+or visit GAO’s World Wide Web Home Page at:
+http://www.gao.gov
+PRINTED ON RECYCLED PAPER
+
+[[PDF_PAGE_0074]]
+United States
+General Accounting Office
+Washington, D.C. 20548-0001
+Official Business
+Penalty for Private Use $300
+Address Correction Requested
+Bulk Rate
+Postage & Fees Paid
+GAO
+Permit No. G100

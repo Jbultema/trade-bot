@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import html
+from datetime import timedelta
 
 import pandas as pd
 import streamlit as st
@@ -10,6 +11,7 @@ from trade_bot.dashboard.formatting import _display_metrics
 from trade_bot.dashboard.overview import render_operating_overview
 from trade_bot.dashboard.trends import (
     compact_metric_line_figure,
+    filter_history_time_range,
     latest_per_market_date,
     load_snapshot_trend_frames,
 )
@@ -37,6 +39,28 @@ from trade_bot.dashboard_v2.services.runtime import (
     HISTORICAL_SNAPSHOT_NOTICE,
     DashboardRuntime,
 )
+from trade_bot.research.operating_history import DEFAULT_OPERATING_HISTORY_SOURCE
+
+_HEADLINE_TREND_METRICS: dict[str, dict[str, object]] = {
+    "Fragility / Risk Score": {
+        "column": "risk_score",
+        "title": "Fragility / Risk Score Over Time",
+        "yaxis_title": "Risk score",
+        "percent": False,
+    },
+    "Risk Budget": {
+        "column": "risk_budget_multiplier",
+        "title": "Risk Budget Over Time",
+        "yaxis_title": "Risk budget",
+        "percent": True,
+    },
+    "Raw 1M Risk-Off Score": {
+        "column": "one_month_risk_off_probability",
+        "title": "Raw 1M Risk-Off Score Over Time",
+        "yaxis_title": "Raw score",
+        "percent": True,
+    },
+}
 
 
 def render_today_page(runtime: DashboardRuntime) -> None:
@@ -98,9 +122,9 @@ def render_today_page(runtime: DashboardRuntime) -> None:
             ),
             (
                 "Timing Gate",
-                str(getattr(current_state, "risk_timing_state", "unassessed")).replace(
-                    "_", " "
-                ).title(),
+                str(getattr(current_state, "risk_timing_state", "unassessed"))
+                .replace("_", " ")
+                .title(),
                 f"Effective sizing authority: {_fmt_pct(summary.get('risk_timing_sizing_authority'))}. Meaningful de-risking requires independent credit, volatility, breadth, and trend confirmation.",
                 "warning"
                 if str(getattr(current_state, "risk_timing_state", ""))
@@ -183,27 +207,17 @@ def render_today_page(runtime: DashboardRuntime) -> None:
                 str(runtime.paths.run_store_path),
                 str(runtime.paths.artifact_dir),
                 str(runtime.paths.job_log_dir),
+                strategy_name=str(summary.get("strategy", "") or ""),
             )
-        metric_history = latest_per_market_date(metric_history)
-        figure = compact_metric_line_figure(
+        metric_history = _with_current_headline_metrics(
             metric_history,
-            columns=[
-                "risk_score",
-                "one_month_risk_off_probability",
-                "risk_budget_multiplier",
-            ],
-            labels={
-                "risk_score": "Risk score",
-                "one_month_risk_off_probability": "1M risk-off probability",
-                "risk_budget_multiplier": "Risk budget multiplier",
-            },
-            title="Risk Score, Risk-Off Odds, and Trade Budget",
-            yaxis_title="Score / multiplier",
+            market_date=current_state.market_date,
+            risk_score=current_state.risk_score,
+            summary=summary,
+            strategy_name=str(summary.get("strategy", "") or ""),
         )
-        if figure is None:
-            st.info("No saved trend history is available yet.")
-        else:
-            render_chart(figure)
+        metric_history = latest_per_market_date(metric_history)
+        _render_headline_metric_history(metric_history)
     else:
         render_section_header("Raw Evidence")
         st.dataframe(trade_decision.evidence, width="stretch")
@@ -224,6 +238,163 @@ def _fmt_pct(value: object) -> str:
         return f"{float(str(value)):.0%}"
     except (TypeError, ValueError):
         return "n/a"
+
+
+def _with_current_headline_metrics(
+    metric_history: pd.DataFrame,
+    *,
+    market_date: object,
+    risk_score: object,
+    summary: dict[str, object],
+    strategy_name: str = "",
+) -> pd.DataFrame:
+    market_timestamp = pd.to_datetime(market_date, errors="coerce")
+    if pd.isna(market_timestamp):
+        return metric_history.copy()
+    normalized_history = metric_history.copy()
+    if "snapshot_time" in normalized_history:
+        normalized_history["snapshot_time"] = pd.to_datetime(
+            normalized_history["snapshot_time"], errors="coerce", utc=True
+        )
+    if "market_date" in normalized_history:
+        normalized_history["market_date"] = pd.to_datetime(
+            normalized_history["market_date"], errors="coerce"
+        ).dt.date
+    current_row = pd.DataFrame(
+        [
+            {
+                "history_time": market_timestamp,
+                "snapshot_time": pd.Timestamp.now(tz="UTC"),
+                "market_date": market_timestamp.date(),
+                "run_id": "current_runtime",
+                "strategy_name": strategy_name,
+                "risk_score": pd.to_numeric(risk_score, errors="coerce"),
+                "risk_budget_multiplier": pd.to_numeric(
+                    summary.get("risk_budget_multiplier"), errors="coerce"
+                ),
+                "one_month_risk_off_probability": pd.to_numeric(
+                    summary.get("one_month_risk_off_probability"), errors="coerce"
+                ),
+            }
+        ]
+    )
+    return pd.concat([normalized_history, current_row], ignore_index=True, sort=False)
+
+
+def _render_headline_metric_history(metric_history: pd.DataFrame) -> None:
+    render_section_header(
+        "Headline Metric History",
+        help_text=(
+            "Tracks the point-in-time values behind the Today cards. Fragility is represented "
+            "by its numeric risk score; the raw 1M score remains an uncalibrated model output."
+        ),
+    )
+    st.caption(
+        "Choose one headline metric and a standard window, or select Custom to set exact dates."
+    )
+    if metric_history.empty or "history_time" not in metric_history:
+        st.info("No saved headline metric history is available yet.")
+        return
+
+    controls = st.columns([2, 1, 1, 1])
+    metric_label = controls[0].selectbox(
+        "Metric",
+        list(_HEADLINE_TREND_METRICS),
+        key="dashboard_v2_today_headline_trend_metric",
+    )
+    range_choice = controls[1].selectbox(
+        "Time range",
+        ["1M", "3M", "6M", "YTD", "1Y", "All", "Custom"],
+        index=2,
+        key="dashboard_v2_today_headline_trend_range",
+    )
+
+    history_dates = pd.to_datetime(metric_history["history_time"], errors="coerce").dropna()
+    end_date = (
+        history_dates.max().date() if not history_dates.empty else pd.Timestamp.today().date()
+    )
+    custom_start = None
+    custom_end = None
+    if range_choice == "Custom":
+        custom_start = controls[2].date_input(
+            "Start",
+            value=end_date - timedelta(days=92),
+            key="dashboard_v2_today_headline_trend_start",
+        )
+        custom_end = controls[3].date_input(
+            "End",
+            value=end_date,
+            key="dashboard_v2_today_headline_trend_end",
+        )
+
+    filtered = filter_history_time_range(
+        metric_history,
+        range_choice,
+        custom_start=custom_start,
+        custom_end=custom_end,
+    )
+    spec = _HEADLINE_TREND_METRICS[str(metric_label)]
+    metric_column = str(spec["column"])
+    if metric_column not in filtered:
+        st.info(f"No saved {str(metric_label).lower()} history is available for this period.")
+        return
+    values = pd.to_numeric(filtered[metric_column], errors="coerce")
+    plottable = filtered.loc[values.notna()].copy()
+    if plottable.empty:
+        st.info(f"No saved {str(metric_label).lower()} history is available for this period.")
+        return
+
+    figure = compact_metric_line_figure(
+        plottable,
+        columns=[metric_column],
+        labels={metric_column: str(metric_label)},
+        title=str(spec["title"]),
+        yaxis_title=str(spec["yaxis_title"]),
+        percent=bool(spec["percent"]),
+        height=320,
+        break_gap_days=14,
+    )
+    if not getattr(figure, "data", None):
+        st.info(f"No saved {str(metric_label).lower()} history is available for this period.")
+        return
+    render_chart(figure)
+
+    first = plottable.iloc[0]
+    latest = plottable.iloc[-1]
+    first_value = float(pd.to_numeric(pd.Series([first[metric_column]]), errors="coerce").iloc[0])
+    latest_value = float(pd.to_numeric(pd.Series([latest[metric_column]]), errors="coerce").iloc[0])
+    value_format = ".1%" if bool(spec["percent"]) else ".2f"
+    first_date = pd.to_datetime(first["history_time"]).date().isoformat()
+    latest_date = pd.to_datetime(latest["history_time"]).date().isoformat()
+    st.caption(
+        f"{len(plottable):,} saved market dates · {first_date} to {latest_date} · "
+        f"{format(first_value, value_format)} → {format(latest_value, value_format)} "
+        f"({format(latest_value - first_value, '+.1%' if bool(spec['percent']) else '+.2f')})"
+    )
+    history_times = pd.to_datetime(plottable["history_time"], errors="coerce").dropna()
+    if len(history_times) > 1:
+        maximum_gap_days = int(history_times.sort_values().diff().dt.days.max())
+        if maximum_gap_days > 14:
+            st.caption(
+                "Blank spans are intentional: no retained point-in-time snapshot exists "
+                f"for parts of this range (largest gap: {maximum_gap_days:,} days). "
+                "Retention limits density; it does not manufacture missing history."
+            )
+    sources = (
+        plottable.get("source", pd.Series(dtype=str)).dropna().astype(str).unique().tolist()
+    )
+    if sources:
+        reconstructed = DEFAULT_OPERATING_HISTORY_SOURCE in sources
+        provenance = "saved point-in-time snapshots"
+        if reconstructed and len(sources) > 1:
+            provenance += " plus labeled price-fast reconstruction"
+        elif reconstructed:
+            provenance = "labeled price-fast reconstruction"
+        st.caption(
+            "History provenance: "
+            f"{provenance}. Reconstructed rows exclude historical event/news overlays and "
+            "must not be read as contemporaneously saved forecasts."
+        )
 
 
 def _render_decision_context(
@@ -350,9 +521,7 @@ def _render_attribution_and_counterfactuals(trade_decision: object) -> None:
         display["layer"] = display["layer"].str.replace("_", " ").str.title()
         display["marginal_defensive_add_pp"] = display["marginal_defensive_add_pp"].round(1)
         display["authority"] = display["authority"].map(lambda value: f"{value:.0%}")
-        display["defensive_weight"] = display["defensive_weight"].map(
-            lambda value: f"{value:.0%}"
-        )
+        display["defensive_weight"] = display["defensive_weight"].map(lambda value: f"{value:.0%}")
         st.dataframe(display, width="stretch", hide_index=True)
         st.caption(
             "Marginal effects are sequential and sum to the final defensive weight. A zero "
@@ -372,8 +541,7 @@ def _render_cost_of_defense() -> None:
     except (FileNotFoundError, OSError, pd.errors.ParserError):
         return
     selected = calibration[
-        (calibration["cohort"] == "all_three")
-        & calibration["horizon"].isin(["1m", "3m"])
+        (calibration["cohort"] == "all_three") & calibration["horizon"].isin(["1m", "3m"])
     ]
     if selected.empty:
         return
@@ -394,7 +562,9 @@ def _render_cost_of_defense() -> None:
         + "</div>",
         unsafe_allow_html=True,
     )
-    st.caption("Retrospective, small-sample evidence. 'Beneficial' means benchmark underperformed cash or crossed the declared drawdown threshold; it is not a crash-prediction accuracy score. Overlapping weekly observations are not counted as independent episodes.")
+    st.caption(
+        "Retrospective, small-sample evidence. 'Beneficial' means benchmark underperformed cash or crossed the declared drawdown threshold; it is not a crash-prediction accuracy score. Overlapping weekly observations are not counted as independent episodes."
+    )
 
 
 def _render_recommendation_changes(summary: dict[str, object]) -> None:

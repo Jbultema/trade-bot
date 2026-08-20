@@ -1,0 +1,8 @@
+{
+  "canonical_database": "reports/ai_financial_system/research.db",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "modified": false,
+  "sha256_after": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+  "sha256_before": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+  "status": "PASS"
+}

@@ -1,0 +1,24 @@
+{
+  "build_a_aggregate_sha256": "021d29e1910b4eca0b06f943f44f86d58d6411780d7915ed0fba2b03ebff36f9",
+  "build_b_aggregate_sha256": "021d29e1910b4eca0b06f943f44f86d58d6411780d7915ed0fba2b03ebff36f9",
+  "builds_run_sequentially": true,
+  "byte_identical": true,
+  "files_compared": 23,
+  "run_results": [
+    {
+      "build_number": 1,
+      "builder_returncode": 0,
+      "builder_stderr_empty": true,
+      "validator_returncode": 0,
+      "validator_status": "PASS"
+    },
+    {
+      "build_number": 2,
+      "builder_returncode": 0,
+      "builder_stderr_empty": true,
+      "validator_returncode": 0,
+      "validator_status": "PASS"
+    }
+  ],
+  "status": "PASS"
+}

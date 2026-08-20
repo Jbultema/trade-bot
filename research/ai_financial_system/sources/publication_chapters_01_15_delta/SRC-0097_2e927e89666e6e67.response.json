@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 6880202,
+  "content_sha256": "2e927e89666e6e67c36ce265f2a808efac14a44eee531a7efd0a5a6cd7a68017",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://mi-psc.my.site.com/sfc/servlet.shepherd/version/download/068cs00001MH71XAAT",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0097_2e927e89666e6e67.pdf",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "application/pdf; charset=UTF-8",
+  "original_url": "https://mi-psc.my.site.com/sfc/servlet.shepherd/version/download/068cs00001MH71XAAT",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-10-31",
+  "publisher": "DTE Electric Company and Michigan Public Service Commission",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0097_2e927e89666e6e67.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:44.735747+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:43.184784+00:00",
+  "selected_response_headers": {
+    "cache-control": "no-cache,must-revalidate,max-age=0,no-store,private",
+    "content-disposition": "inline; filename=\"U-21990%20DTE%20Electric%20Application%20for%20Ex%20Parte%20Approval%20of%20Special%20Contracts%20Final.pdf\"",
+    "content-length": "6880202",
+    "content-type": "application/pdf; charset=UTF-8",
+    "date": "Mon, 27 Jul 2026 01:08:44 GMT"
+  },
+  "source_id": "SRC-0097",
+  "status": "preserved_complete",
+  "title": "DTE Electric application testimony and public Primary Supply and Energy Storage Agreements in Case U-21990",
+  "write_state": "new_version_written"
+}

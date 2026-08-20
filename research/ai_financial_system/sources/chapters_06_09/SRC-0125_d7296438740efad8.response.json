@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 162121,
+  "content_sha256": "d7296438740efad835badddb5daa6cfd8d3a43bb62fedbf5a7a817c79828610b",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://media.bis.gov/media/documents/bis-guidance-may-31-2026.pdf",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0125_d7296438740efad8.pdf",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "application/pdf",
+  "original_url": "https://media.bis.gov/media/documents/bis-guidance-may-31-2026.pdf",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-31",
+  "publisher": "Bureau of Industry and Security",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0125_d7296438740efad8.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:52:57.170164+00:00",
+  "retrieval_started_utc": "2026-07-26T17:52:56.129547+00:00",
+  "selected_response_headers": {
+    "cache-control": "must-revalidate, no-cache, private",
+    "content-length": "162121",
+    "content-type": "application/pdf",
+    "date": "Sun, 26 Jul 2026 17:52:57 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0125",
+  "status": "preserved_complete",
+  "title": "Guidance Regarding Enforcement of License Requirements for Advanced Computing Items for Entities Headquartered in Country Group D:5 and Macau",
+  "write_state": "new_version_written"
+}

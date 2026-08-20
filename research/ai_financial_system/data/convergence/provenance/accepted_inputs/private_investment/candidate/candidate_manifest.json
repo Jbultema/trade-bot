@@ -1,0 +1,144 @@
+{
+  "canonical_integration": "NOT_AUTHORIZED_PENDING_FRESH_REVIEW",
+  "files": {
+    "candidate_claims.csv": {
+      "bytes": 3080,
+      "rows": 5,
+      "sha256": "f3692bdbde9057483b8fe2826532b2aeced53a84ce2110c6235479d01c2ae91d"
+    },
+    "candidate_evidence_links.csv": {
+      "bytes": 2798,
+      "rows": 8,
+      "sha256": "d70c648aaba2410b0cb4606c879513a77ceb4da9bb37335337e3ffd916bb6544"
+    },
+    "candidate_handoffs.csv": {
+      "bytes": 5056,
+      "rows": 11,
+      "sha256": "99494e9319f1f233da7958c6560cebbabbf66ef961316f3fca41707c1953529b"
+    },
+    "candidate_schema.sql": {
+      "bytes": 6833,
+      "lines": 168,
+      "sha256": "dd50bd74e4eb84066894a9788b94f6336056cd68761a31464634a5dc29c12dfe"
+    },
+    "candidate_unknowns.csv": {
+      "bytes": 5478,
+      "rows": 11,
+      "sha256": "24440409b4f8e1923e5022272774f6f8717c15dffc8884fc8bafc3889ec24e48"
+    },
+    "claim_locator_reviews_candidate.csv": {
+      "bytes": 2163,
+      "rows": 5,
+      "sha256": "28c57de231c11b1e5f896b181f345e168c3742ce30dd568345956e9a7f2971a9"
+    },
+    "claim_status_rebase_candidate.csv": {
+      "bytes": 3103,
+      "rows": 5,
+      "sha256": "cf0a0a216f2e38270345b847e1c2a1935dd8c305d9be70a2393728e8224352f0"
+    },
+    "input_lineage.csv": {
+      "bytes": 26395,
+      "rows": 109,
+      "sha256": "b3afed6ea0318abb82c938897510be388fd6413a840c7a8dea096a7dca8f4977"
+    },
+    "private_investment_accounting_methods.csv": {
+      "bytes": 5027,
+      "rows": 11,
+      "sha256": "f64de13288a4877716b93d948d364520ef8fe4bcfcb4c670eed896335598a66d"
+    },
+    "private_investment_bridge_components.csv": {
+      "bytes": 272,
+      "rows": 5,
+      "sha256": "d4a4b4958aaefcb57a85b10ff16e069782f172202c9ed35c9333633a414d4097"
+    },
+    "private_investment_carrying_value_rollforwards.csv": {
+      "bytes": 2469,
+      "rows": 5,
+      "sha256": "28c7fc5e71fda8760c0f263690a66d8a5559db1cf18679498a0f46140f85d283"
+    },
+    "private_investment_earnings.csv": {
+      "bytes": 5313,
+      "rows": 8,
+      "sha256": "743bf60882da132b4bfd282bbe9b6c0e0a666c5bfe02d71602b26ddf49b606ff"
+    },
+    "private_investment_earnings_bridges.csv": {
+      "bytes": 2181,
+      "rows": 4,
+      "sha256": "068089f2531a5895ebb91e7802668937868a2bec25b3788fe0ed7e87bb398ef7"
+    },
+    "private_investment_earnings_components.csv": {
+      "bytes": 322,
+      "rows": 2,
+      "sha256": "ebada44efed9ef1d602817e1f8b0acab970e849a6f1d3fb6d146b2fa09365b55"
+    },
+    "private_investment_population_observations.csv": {
+      "bytes": 6324,
+      "rows": 10,
+      "sha256": "adc29ea89475563acb6a5a86daf97bd9619de2675485d6f6acb73ac595fc5d3e"
+    },
+    "private_investment_rollforward_components.csv": {
+      "bytes": 4470,
+      "rows": 16,
+      "sha256": "ce8342060cae9ada11b8ae89a791a1dc32d712714740396f361d2598cb55fe6d"
+    },
+    "source_archive_provenance_candidate.csv": {
+      "bytes": 5891,
+      "rows": 8,
+      "sha256": "f48853dbae4e9537fbae895cb3315284ab84e85eb8b294dceefbade3ada993ff"
+    },
+    "source_register_rebase_candidate.csv": {
+      "bytes": 6131,
+      "rows": 8,
+      "sha256": "0337c175fd0957d7cb3ebf82db6c54bcbc6f5c692a98e879ff4d221074249a40"
+    },
+    "source_text_derivatives_candidate.csv": {
+      "bytes": 5163,
+      "rows": 8,
+      "sha256": "b2af07a9bcb4dfd9ddaa38658ed9f5e6c6e6ed0110284906d7a7683dd05d6adc"
+    },
+    "transformation_audit.csv": {
+      "bytes": 356934,
+      "rows": 500,
+      "sha256": "e643487c7b0e8bbd8a8b6f52b59c2550666dd892c048589d4ef99a6c25b4a053"
+    }
+  },
+  "governing_input_hashes": {
+    "accepted_source_manifest": "609108aca41f6d717cddce064d8130bebce592e7cfd559ceb157d415e76d258b",
+    "accepted_source_review_manifest": "8e48b9470b2ed1ea7e9315027b5d17fa3cf38e83724a16ca40970d801a98ed48",
+    "canonical_schema": "349b35ab87108993858a1a6ed0f3cd8f36497d1143270a44c338994af9072b3f",
+    "current_post_candidate_mapping": "1c83fa228c5f1957b0e0c017386a3337f10c58402737aa509903215716415d44",
+    "immutable_v1_candidate_manifest": "389319e0f2e472ece58a92185a1f9f300f517c488ec1746aea70b67dd9d080f7",
+    "immutable_v1_mapping_at_build": "4baf9a89f7fe70a042a35a368ebb9bb9c62aa79a925eaa70e10176f3024ffb0c",
+    "sealed_v1_review_manifest": "28660d3f260fe27adb128dd918ec3fc4dd5515b922415446da391368c701a14a",
+    "source_archive_manifest": "4fc2b46b3525617fcc68d93fcf1dc05c770a9fd9230829a79cda32ef5fec6acd",
+    "task": "dea89ee4c47469902b022c89bae095cdbca1f803ed28d9644dc0d0798fba51fc",
+    "visible_text_v2_manifest": "285918598c6b5e4aa47c5aea42f7d8afb2a5d9d9eafea21446577ee6cb8f36d0"
+  },
+  "intrinsic_economic_reconstruction": "AUTHOR_VALIDATED",
+  "limits": [
+    "This is an isolated author candidate, not canonical data.",
+    "Fresh independent review is required before any canonical merge.",
+    "Only source preservation is proposed for atomic clearance; all five analytical holds remain.",
+    "Original inline-XBRL governs; visible-text v2 records are search and locator aids only."
+  ],
+  "remaining_holds": [
+    "governed top-20 population reconstruction",
+    "S&P 500 aggregate reproduction",
+    "unnamed investee allocation at Alphabet and NVIDIA and residual Amazon attribution",
+    "exact Microsoft component and tax allocation",
+    "prospective Meta/Tesla and realization monitoring"
+  ],
+  "resolved_repairs": [
+    "V2-001 canonical support types",
+    "V2-002 rounded Microsoft amount",
+    "V2-003 partial and mixed investee scopes",
+    "V2-004 real external foreign keys",
+    "V2-005 field-level transformation lineage",
+    "V2-006 Chapter 11 claim lineage"
+  ],
+  "self_hash_policy": "candidate_manifest.json excludes its own hash",
+  "source_preservation_atomic_rebase": "AUTHOR_VALIDATED_PENDING_FRESH_REVIEW",
+  "status": "AUTHOR_V2_CANDIDATE_PENDING_FRESH_REVIEW_NOT_CANONICAL",
+  "status_date": "2026-07-26",
+  "typed_candidate_completeness": "AUTHOR_VALIDATED_PENDING_FRESH_REVIEW"
+}

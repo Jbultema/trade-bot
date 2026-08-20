@@ -1,0 +1,17 @@
+{
+  "author_acceptance": "NOT_ACCEPTED_FRESH_NONAUTHOR_REVIEW_REQUIRED",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "exact_fixes_applied": 10,
+  "exact_fixes_expected": 10,
+  "lane": "lane_3_chapter_19_rebuilt_v3",
+  "review_disposition_counts": {
+    "DEFERRED_EXPLICIT_HOLD": 985,
+    "DIRECT_OR_SUPERSEDING_CORRECTION_VERIFIED": 396,
+    "PARTIAL_PROVENANCE_MISMATCH": 1,
+    "SAFE_ALTERNATIVE_CHILD_ROUTE_RETIRED": 471,
+    "SAFE_ALTERNATIVE_PARENT_RESTORED": 394
+  },
+  "review_manifest_sha256": "5e2e7b9d3417d4b218c85c6dc6e139dd922daa28f7c07660c6668822eeef18e8",
+  "source_manifest_sha256": "3faa1d41c91cc94a5671f5fcb37b046e6fa63405576490f099712adfa99086ec",
+  "status": "PASS_10_OF_10_APPLIED_PENDING_NONAUTHOR_ACCEPTANCE"
+}

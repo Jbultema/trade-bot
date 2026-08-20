@@ -435,7 +435,12 @@ def strategy_family_takeaways(family_map: pd.DataFrame) -> list[str]:
             "not automatically the best growth engine."
         )
 
-    promoted = family_map[family_map["promotion_decision"] == "promote_candidate"]
+    decision_column = (
+        "governed_promotion_decision"
+        if "governed_promotion_decision" in family_map
+        else "promotion_decision"
+    )
+    promoted = family_map[family_map[decision_column] == "promote_candidate"]
     if not promoted.empty:
         concentration = promoted["strategy_archetype"].value_counts(normalize=True).iloc[0]
         leading_archetype = promoted["strategy_archetype"].value_counts().index[0]
@@ -787,14 +792,18 @@ def _summarize_cluster(
             key = (key,)
         best_row = _best_cluster_row(group)
         output = dict(zip(group_columns, key, strict=True))
+        decision_column = (
+            "governed_promotion_decision"
+            if "governed_promotion_decision" in group
+            else "promotion_decision"
+        )
+        decisions = group[decision_column].astype(str)
         output.update(
             {
                 "candidates": int(len(group)),
-                "promoted": int((group["promotion_decision"] == "promote_candidate").sum()),
-                "evolved": int((group["promotion_decision"] == "evolve_next_iteration").sum()),
-                "rejected": int(
-                    group["promotion_decision"].astype(str).str.startswith("reject").sum()
-                ),
+                "promoted": int(decisions.eq("promote_candidate").sum()),
+                "evolved": int(decisions.eq("evolve_next_iteration").sum()),
+                "rejected": int(decisions.str.startswith("reject").sum()),
                 "best_strategy": _safe_text(best_row.get("strategy")),
                 "best_score": _numeric_or_nan(best_row.get("promotion_score")),
                 "median_score": _numeric_or_nan(group["promotion_score"].median()),

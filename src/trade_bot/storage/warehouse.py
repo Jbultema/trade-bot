@@ -1905,6 +1905,7 @@ class TradingWarehouse:
                     market_date VARCHAR NOT NULL,
                     run_id VARCHAR NOT NULL,
                     source VARCHAR NOT NULL,
+                    strategy_name VARCHAR,
                     reconstruction_note VARCHAR NOT NULL,
                     risk_score DOUBLE,
                     one_month_risk_off_probability DOUBLE,
@@ -1932,6 +1933,7 @@ class TradingWarehouse:
                 connection,
                 "operating_metric_history",
                 {
+                    "strategy_name": "VARCHAR",
                     "base_defensive_weight": "DOUBLE",
                     "final_defensive_weight": "DOUBLE",
                     "quantitative_defensive_add_pp": "DOUBLE",
@@ -1951,6 +1953,7 @@ class TradingWarehouse:
                     market_date VARCHAR NOT NULL,
                     run_id VARCHAR NOT NULL,
                     source VARCHAR NOT NULL,
+                    strategy_name VARCHAR,
                     reconstruction_note VARCHAR NOT NULL,
                     component VARCHAR NOT NULL,
                     component_score DOUBLE,
@@ -1958,6 +1961,11 @@ class TradingWarehouse:
                     state VARCHAR NOT NULL
                 )
                 """
+            )
+            self._ensure_table_columns(
+                connection,
+                "operating_component_history",
+                {"strategy_name": "VARCHAR"},
             )
             connection.execute(
                 """
@@ -1968,12 +1976,18 @@ class TradingWarehouse:
                     market_date VARCHAR NOT NULL,
                     run_id VARCHAR NOT NULL,
                     source VARCHAR NOT NULL,
+                    strategy_name VARCHAR,
                     reconstruction_note VARCHAR NOT NULL,
                     driver VARCHAR NOT NULL,
                     score DOUBLE,
                     state VARCHAR NOT NULL
                 )
                 """
+            )
+            self._ensure_table_columns(
+                connection,
+                "operating_scenario_driver_history",
+                {"strategy_name": "VARCHAR"},
             )
             connection.execute(
                 """
@@ -1984,6 +1998,7 @@ class TradingWarehouse:
                     market_date VARCHAR NOT NULL,
                     run_id VARCHAR NOT NULL,
                     source VARCHAR NOT NULL,
+                    strategy_name VARCHAR,
                     reconstruction_note VARCHAR NOT NULL,
                     driver VARCHAR NOT NULL,
                     driver_label VARCHAR NOT NULL,
@@ -1994,6 +2009,11 @@ class TradingWarehouse:
                     model_role VARCHAR NOT NULL
                 )
                 """
+            )
+            self._ensure_table_columns(
+                connection,
+                "operating_driver_rotation_history",
+                {"strategy_name": "VARCHAR"},
             )
             connection.execute(
                 """

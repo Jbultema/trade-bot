@@ -33,6 +33,7 @@ def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_pa
                 "walk_forward_positive_rate": 0.90,
                 "left_tail_regime_return": -0.08,
                 "hypothesis": "Test promoted strategy.",
+                "oos_evidence_status": "verified_sealed_holdout",
             },
             {
                 "strategy": "fragile_alpha",

@@ -1,0 +1,3305 @@
+[[PDF_PAGE_0001]]
+October 31, 2025
+Lisa Felice
+Executive Secretary
+Michigan Public Service Commission
+7109 West Saginaw Highway
+Lansing, MI 48917
+RE: In the matter of the Application of DTE Electric Company for Approval of Special
+Contacts
+MPSC Case No
+. U-21990
+Dear Ms. Felice:
+Attached for electronic filing in the above referenced matter is DTE Electric’s Application
+for ex parte Approval of special contracts for electric service, Direct Testimony and Exhibits of
+Witnesses, Kevin L. Bilyeu and Neal T. Foley. Also attached is the Proof of Service.
+Very truly yours,
+Andrea E. Hayden
+AEH/erb
+Attachments
+cc: Service List
+Andrea E. Hayden
+(313) 235-9449
+andrea.hayden@dteenergy.com
+DTE Energy Company
+One Energy Plaza, 1635 WCB
+Detroit, MI 48226-1279
+
+[[PDF_PAGE_0002]]
+1
+STATE OF MICHIGAN
+BEFORE THE MICHIGAN PUBLIC SERVICE COMMISSION
+In the matter of the Application of )
+DTE ELECTRIC COMPANY ) Case No. U-21990
+for Approval of Special Contracts )
+DTE ELECTRIC’S APPLICATION FOR EX PARTE APPROVAL OF SPECIAL
+CONTRACTS FOR ELECTRIC SERVICE
+DTE Electric Company (“DTE Electric” or the “Company”) respectfully files this
+Application, with supporting Testimony and Exhibits , requesting the Michigan Public Service
+Commission (“MPSC” or the “Commission”) to grant expedited ex parte approval of the
+Company’s Primary Supply Agreement (“PSA”) and Energy Storage Agreement (“ESA”)
+(collectively, the “Special Contracts”) with Green Chile Ventures LLC (the “Customer”) . In
+support of the relief requested in this Application, DTE Electric states as follows:
+1. DTE Electric is a corporation organized and existing under and by virtue of the
+laws of the State of Michigan, with its principal office at One Energy Plaza, Detroit, Michigan
+48226. DTE Electric is owned by DTE Electric Holdings, LLC, which is a wholly- owned
+subsidiary of DTE Energy, providing retail electric service to customers located in Michigan. The
+Company is a public utility and Electric Provider, as defined under MCL 460.1005(a)(i), with more
+than 1,000,000 retail customers in Michigan and is subj ect to the jurisdiction of the Commission
+per various provisions of Public Act 419 of 1919, as amended, MCL 460.51 et seq .; Public Act 3
+of 1939, as amended, MCL 460.1 et seq.
+2. DTE Electric presently serves its electric customers under schedules of rates and
+charges contained in the Company’s Commission-approved tariffs.
+
+[[PDF_PAGE_0003]]
+2
+3. Customer (Green Chile Ventures LLC) is a subsidiary of Oracle Corporation, a
+global technology company that provides cloud computing services, enterprise software, and
+database and hardware technology that supports organizations worldwide. Customer plans to
+lease, operate, cause to be construct ed, and commission a data center facility in DTE Electric’s
+service territory located at or near Saline, Michigan (the “Facility”). The Facility’s maximum load
+is approximately 1.4 gigawatts (“ GW”) and is scheduled to begin materializing in January 2027
+with max load being achieved by December 2027.
+4. Following extensive negotiations between the Company and Customer, the parties
+executed the Special Contracts that will become effective upon Commission approval in this case.
+The Special Contracts are included as Exhibit A-1 and Exhibit A -2 to Company Witness Neal
+Foley’s Direct Testimony.
+5. The Special Contracts establish a balanced and protective framework that includes
+appropriate safeguards and minimizes the risks associated with serving large load customers. The
+framework reflects a reasonable and appropriate balance between the advantages of serving a new
+large load customer and protecting existing customers from risk and potential cost subsidies. The
+Special Contracts work in tandem to meet Customer’s unique needs responsibly.
+6. Pursuant to the proposed PSA Special Contract , DTE Electric will provide
+Customer electric service under Rate Schedule D11 (“D11”) for approximately 19 years ,
+commencing upon Commission approval of the PSA and concluding on February 28, 2045.
+Importantly, the PSA includes enhanced protections not included in Rate Schedule D11 to ensure
+a long- term commitment to DTE Electric , mitigate potential stranded asset risks, and protect
+existing customers from potential cost subsidies . In addition to the long- term commitment, the
+Special Contracts include the following protective provisions: increased minimum billing demand
+
+[[PDF_PAGE_0004]]
+3
+requirements, an extended contract term, termination payment, and credit and collateral
+requirements. Witness Foley provides more detailed information regarding these enhanced
+protections.
+7. As detailed in the testimony of Witness Foley, the Special Contracts generate an
+affordability benefit for existing customers through two specific mechanisms: (1) PSA D11
+Charges and (2) PSA Power Supply Cost Recovery (“PSCR”) Surcharge provisions. Taking
+service under D11 requires that Customer contribute to fixed system costs. Customer will
+contribute to existing fixed costs through D11 that would otherwise be recovered from existing
+customers. Furthermore, Customer is responsible for all applicable surcharges, including the PSCR
+Surcharge. Through the PSCR mechanism, Customer will contribute to the Company’s existing
+renewable energy assets and transmission infrastructure, any future renewable deployments or
+transmission cost increases, and incremental fuel and purchased power costs required to serve
+Customer.
+8. Pursuant to the proposed ESA Special Contract , the Company will develop an
+energy storage project portfolio up to Customer’s maximum load. The Customer bears all energy
+storage portfolio costs during the 15- year recovery period of each project. The ESA specifically
+stipulates that no energy storage portfolio costs will be passed to other customer classes. In
+exchange for bearing all costs, the Customer receives 100% of incremental Midcontinent
+Independent System Operator’s (“MISO”) market revenues, net of charging costs, that the energy
+storage assets generate in the open market to offset development costs.
+9. Commission approval of the Special Contracts will not impact existing rates or
+increase the Company’s cost of service for existing cus tomers. Instead, the proposed Special
+Contracts govern how the Company will serve the Customer’s future load and how an energy storage
+
+[[PDF_PAGE_0005]]
+4
+portfolio will be deployed under the ESA. Moreover, the Company estimates that the impact of the
+Customer’s new load will decrease the cost of service across all of its customer classes.
+10. MCL 460.6a( 3) states, in part: “ An alteration or amendment in rates or rate
+schedules applied for by a public utility that will not result in an increase in the cost of service to
+its customers may be authorized and approved without notice or hearing.” The approvals requested
+in this Application will not result in an alteration or amendment in rates or rate schedules and will
+not increase the cost of services to the Company’s customers. The Testimony of Witness Foley
+provides more detailed information regarding the customer protections included in the Special
+Contracts and explains how the Special Contracts will not increase the Company’s cost to serve
+existing customers. The approvals sought in this Application therefore “may be authorized and
+approved without notice or hearing.” MCL 460.6a(3). Thus, approval of this Application without
+notice or hearing is lawful and appropriate. Furthermore, the testimony of DTE Electric Witness
+Bilyeu addresses the impacts of the Customer’s load on the Company’s Renewable Portfolio
+Standard (“RPS”) obligations set forth in Public Act 295 of 2008, as amended by Public Act 235
+of 2023, MCL 460.1001 et seq.
+11. In addition to its request for ex parte treatment, the Company respectfully requests
+an expedited review of this Application with the issuance of a Commission order prior to the
+conditions precedent deadlines set forth in the Special Contracts which were established based on
+the Customer’s ramp schedule.
+WHEREFORE, for the reasons stated above, DTE Electric Company respectfully requests
+that the Michigan Public Service Commission:
+A. Grant DTE Electric’s request for review of the Special Contracts on an expedited
+ex parte basis;
+
+[[PDF_PAGE_0006]]
+5
+B. Determine that the Special Contracts are reasonable and prudent and enter an order
+approving the Special Contracts; and
+C. Grant DTE Electric such further additional relief as the Commission may deem
+appropriate.
+DTE ELECTRIC COMPANY
+By: __________________________________
+Andrea Hayden (P71976)
+John A. Janiszewski (P74400)
+Attorneys for DTE Electric Company
+One Energy Plaza, 1635 WCB
+Detroit, MI 48226
+313-235-9449
+Dated: October 31, 2025
+
+[[PDF_PAGE_0007]]
+STATE OF MICHIGAN
+BEFORE THE MICHIGAN PUBLIC SERVICE COMMISSION
+In the matter of the Application of )
+DTE ELECTRIC COMPANY ) Case No. U-21990
+for Approval of Special Contracts )
+QUALIFICATIONS
+AND
+DIRECT TESTIMONY
+OF
+NEAL T. FOLEY
+
+[[PDF_PAGE_0008]]
+DTE ELECTRIC COMPANY
+QUALIFICATIONS AND DIRECT TESTIMONY OF NEAL T. FOLEY
+Line
+No.
+NTF-1
+Q1. What is your name, business address and by whom are you employed?1
+A1. My name is Neal Foley . My business address is: One Energy Plaza, Detroit, 2
+Michigan 48226. I am employed by DTE Electric Company (“DTE Electric” or 3
+“Company”). 4
+5
+Q2. On whose behalf are you testifying? 6
+A2. I am testifying on behalf of DTE Electric. 7
+8
+Q3. What is your educational background? 9
+A3. I received a Bachelor of Science in Aerospace Engineering and a Bachelor of 10
+Science in Mechanical Engineering from the University of Michigan. I also 11
+received a Master of Science in Systems Engineering from Johns Hopkins 12
+University and a Master of Business Administration from Georgetown University. 13
+14
+Q4. Please summarize your professional experience. 15
+A4. In 2007, I was employed by Lockheed Martin Corporation as a Satellite Operations 16
+Engineer. In 2008, I was hired by Booz Allen Hamilton as an Associate Consultant 17
+in its Federal consulting practice. In 2012, I was hired by Deloitte as a Manager of 18
+Financial Analysis in its Federal consulting practice. In 2014, I was hired by 19
+McKinsey & Company as an Associate Consultant, ultimately being promoted to 20
+Engagement Manager before my departure in 2017. In 2017, I was hired by DTE 21
+Energy Company as Manager of Corporate Strategy. In this role , I was broadly 22
+responsible for tracking and assessing utility industry trends, executing analyses to 23
+better understand the economic impacts of emerging technologies and business 24
+models, and leading strategic initiatives for the Company. In December 2020, I was 25
+
+[[PDF_PAGE_0009]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-2
+promoted to Director of Regulatory Affairs where I was responsible for the 1
+management of regulatory activities related to DTE Electric’s Load Research, 2
+Tariffs, Pricing, and Rate Design. In December 2024, I started my current rol e as 3
+Director of Electric Marketing for DTE Electric. 4
+5
+Q5. Have you previously sponsored testimony before the Michigan Public Service 6
+Commission (“MPSC” or “Commission”)? 7
+A5. Yes. I have sponsored testimony and exhibits before the MPSC in the following 8
+DTE Electric cases: 9
+Case No. Description 10
+U-20836 DTE 2022 Electric Rate Case 11
+U-21376 DTE 2023 Distributed Generation Tariff Options 12
+U-21297 DTE 2023 Electric Rate Case 13
+U-21534 DTE 2024 Electric Rate Case 14
+U-21860 DTE 2025 Electric Rate Case 15
+
+[[PDF_PAGE_0010]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-3
+Purpose of Testimony 1
+Q6. What Commission action is the Company seeking through the instant case? 2
+A6. The Company is seeking the Commission’s ex parte approval of two special 3
+contracts that will govern how the Company serves a new, large data center . 4
+Specifically, the Company is seeking approval of the following special contracts 5
+that have been executed between the Company and Green Chile Ventures LLC 6
+(“the Customer”). 7
+• Primary Supply Agreement (“PSA”) 8
+• Energy Storage Agreement (“ESA”) 9
+10
+Taken together, the PSA and ESA are referred to as the “the Contracts” throughout 11
+my testimony. 12
+13
+Q7. Can you summarize the Contracts that are being proposed for approval? 14
+A7. Yes. The PSA stipulates that the Customer will receive electric service under the 15
+Company’s Rate Schedule D11 (“D11”) which is the Company’s Primary Supply 16
+Rate. The PSA also establishes additional protections for the Company’s other 17
+customers that are not included in Rate Schedule D11. 18
+19
+The ESA allows the Company to develop a portfolio of energy storage projects and 20
+recover from the Customer the full cost of these projects . The costs of the energy 21
+storage projects developed to fulfill the ESA with the Customer will not be passed 22
+on to the Company’s other customers. Any incremental Midcontinent Independent 23
+System Operator’s (“MISO”) market revenues that are generated by this portfolio 24
+of projects will be credited to the Customer to offset the cost of these assets. 25
+
+[[PDF_PAGE_0011]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-4
+Q8. What is the purpose of your testimony?1
+A8. The purpose of my testimony is to generally describe and support the structure and 2
+provisions of the Contracts, including the associated pricing, how the C ontracts 3
+address any risks of stranded assets, and customer affordability impacts. 4
+5
+As such, my testimony includes the following sections: 6
+1. Overview of the customer 7
+2. Proposed PSA 8
+3. Proposed ESA 9
+4. Maintaining Resource Adequacy 10
+5. Benefits to other customers 11
+6. Incremental costs and stranded cost mitigation 12
+7. Regulatory treatment 13
+14
+Q9. Are you sponsoring any exhibits in this proceeding? 15
+A9. Yes. I am sponsoring the following exhibits: 16
+Exhibit Description 17
+Exhibit A-1 Primary Supply Agreement 18
+Exhibit A-2 Energy Storage Agreement 19
+20
+Q10. What was your involvement in the preparation of the Contracts? 21
+A10. I was involved in the development of the key terms included in these Contracts, as 22
+discussed throughout my testimony. 23
+
+[[PDF_PAGE_0012]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-5
+Overview of the customer 1
+Q11. Can you describe the Customer? 2
+A11. Yes. The Customer (Green Chile Ventures LLC ) is a subsidiary of Oracle 3
+Corporation, a well-known technology company that is among the top 20 largest 4
+companies in the world by market capitalization. The Customer intends to build a 5
+data center that will be engaged in the management , storage, processing, and 6
+distribution of data. 7
+8
+Q12. Where will the data center be located? 9
+A12. The data center will be located in Southeast Michigan, within the Company’s 10
+service territory. It will be developed on roughly 250 acres , and the Customer has 11
+secured all necessary local approvals to move forward with construction at the site. 12
+13
+Q13. What is the planned Customer load at the facility and when will the load 14
+materialize? 15
+A13. The maximum load at the facility is approximately 1.4 GW (“max load” or 16
+“contract capacity”) . The Customer’s load is planned to begin materializing in 17
+January 20271, with max load being achieved by December 2027 (“load ramp” or 18
+“Customer Committed Capacity Ramp”) . Later in my testimony , I describe the 19
+Customer’s ability to adjust the timing of the load ramp and the date by which they 20
+achieve their max load (“Load Ramp Completion Date”). 21
+1 Load to support construction of the site could materialize before January 2027.
+
+[[PDF_PAGE_0013]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-6
+Q14. Will serving the Customer’s load have an impact on the Company’s 1
+obligations under the State of Michigan’s Renewable Portfolio Standard 2
+(“RPS”)? 3
+A14. Yes. In his direct testimony, Company Witness Bilyeu describes the impacts of the 4
+Customer’s load on the Company’s obligations under the State of Michigan’s RPS, 5
+and the Company’s plan for compliance. 6
+7
+Q15. Will serving the Customer’s load have an impact on the Company’s Energy 8
+Waste Reductions (“EWR”) targets? 9
+A15. Yes. By serving the Customer’s load, the Company’s targeted EWR savings will 10
+increase, consistent with applicable laws and regulations. For example, the amount 11
+of MWh savings that must be captured to achieve an overall level of savings (e.g., 12
+2%) will increase once the Customer’s load materializes. Under the terms of the 13
+PSA the customer intends to work with the Company to achieve the targeted 14
+savings. The Company’s next EWR plan will address these changes. 15
+16
+Primary Supply Agreement - overview 17
+Q16. Can you provide an overview of the PSA? 18
+A16. Yes. The PSA governs the obligations of the Company and the Customer as it 19
+relates to the electric service that the Customer will receive. 20
+21
+At a high level, the PSA requires that the Customer take service on D11, including 22
+all associated surcharges , and includes additional terms that are not currently 23
+included in Rate Schedule D11. 24
+
+[[PDF_PAGE_0014]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-7
+Q17. Is the Customer eligible for service under the Company’s current D11 rate 1
+structure without a special contract? 2
+A17. Yes. The Customer is eligible for service under D11 as currently offered in the 3
+Company’s Rate Book. However, the PSA includes additional terms designed to 4
+ensure a long-term commitment to the Company, mitigate the potential for stranded 5
+assets, and protect the Company’s other customers from financial risk. These 6
+additional terms reasonably and prudently account for the size of the Customer. 7
+8
+Q18. What are the terms of the PSA between the Company and the Customer that 9
+differ between a standard contract under the Company’s D11 rate? 10
+A18. The terms of the PSA that differ from the D11 rate are the following: 11
+• Contract duration 12
+• Pricing and ability to change rates 13
+• Minimum Billing Demand (MBD) 14
+• Load ramp flexibility 15
+• Termination payment 16
+• Credit and collateral requirements 17
+18
+I will describe each of these elements in the following sections of my testimony. 19
+20
+Primary Supply Agreement – contract duration 21
+Q19. What is the contract duration of the PSA? 22
+A19. The PSA contract duration is approximately 19 years, starting at the time the 23
+Company receives Commission approval of the PSA and running through February 24
+28, 2045. 25
+
+[[PDF_PAGE_0015]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-8
+The Customer has the option to extend the PSA two times , with each renewal 1
+effective for ten years (i.e., up to twenty total years of optional renewal). 2
+3
+Q20. Is the PSA contract duration beneficial to the Company’s other customers? 4
+A20. Yes. The PSA contract duration is much longer than the Company typically requires 5
+for large industrial customers. For comparison, the standard agreement for a new 6
+customer under D11 over 1 MW of peak demand is five years. 7
+8
+A roughly 19-year PSA contract duration represents a significant commitment on 9
+behalf of the Customer to the Company and its other customers. It ensures that the 10
+Customer will make their proportionate contribution to the Company’s system costs 11
+for a longer period than the Company normally requires of its customers. 12
+13
+Primary Supply Agreement – pricing and ability to change rates 14
+Q21. How is electric service pricing structured under the PSA? 15
+A21. Under the PSA, the Customer agrees to take service on D11 and pay all applicable 16
+surcharges. Importantly, under this arrangement the Customer will be subject to the 17
+Power Supply Cost Recovery (“PSCR”) Surcharge. 18
+19
+Q22. Can the Customer change rate schedules under the PSA? 20
+A22. Under the PSA, the Customer can only change rate schedules under the following 21
+conditions: 22
+• The Customer must request a rate schedule change 24 months in advance of 23
+the rate schedule change taking effect; 24
+
+[[PDF_PAGE_0016]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-9
+• The Customer cannot request a rate schedule change until 24 months after 1
+their Load Ramp Completion Date; 2
+• The Customer can only change to a rate schedule that is approved by the 3
+Commission after the PSA became effective; and 4
+• The Customer can only change to a rate schedule that is not cross subsidized 5
+by any other customer group, as determined by the MPSC. 6
+7
+Q23. Are the PSA pricing and ability to change rate schedule terms reasonable? 8
+A23. Yes. D11 is a cost -based rate that will ensure that the Customer makes their 9
+proportionate contribution to the Company’s fixed system costs. Being subject to 10
+the PSCR mechanism ensures that the Customer makes their proportionate 11
+contribution both to incremen tal fuel and purchased power costs that they are 12
+introducing, and to the fixed costs of renewable energy assets and transmission 13
+costs that are recovered through that mechanism. 14
+15
+The limitations on rate schedule switching in the PSA are also reasonable. The 16
+notice period ensures that any rate schedule change can be appropriately 17
+incorporated through a subsequent rate case. T he limitation that the rate schedule 18
+be newly approved and not cross -subsidized provides the Commission with 19
+appropriate oversight of the types of future rates that the Customer may be eligible 20
+for to ensure any potential future rate change would not negatively impact other 21
+customers. 22
+23
+Primary Supply Agreement – Minimum Billing Demand 24
+Q24. How is Minimum Billing Demand (“MBD”) structured under the PSA? 25
+
+[[PDF_PAGE_0017]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-10
+A24. Under the PSA, the Customer agrees that the minimum demand for a given billing 1
+period will be 80% of the contract capacity applicable for that billing period. In 2
+practice, th is means the Customer’s Minimum Monthly Charge (“MMC”) for a 3
+given billing period will be calculated using an 80% MBD as applied to the 4
+customer’s contracted load ramp capacity during the specific billing period. The 5
+MMC will increase during the Customer’s load ramp and then will be held constant 6
+at the contracted capacity once the max load is achieved, notwithstanding changes 7
+to the D11 rate. 8
+9
+Q25. How will the MBD be applied? 10
+A25. On D11, the Customer is subject to three demand charges: 11
+• Power Supply Capacity Demand Charge 12
+• Power Supply Non-Capacity Demand Charge 13
+• Distribution Demand Charge 14
+15
+The first two demand charges (Power Supply Capacity and Power Supply Non-16
+Capacity) are typically calculated based on the billing period’s on -peak billing 17
+demand as defined in D11. Under D11 these charges would also typically be subject 18
+to a 65% ratchet; however, this term is superseded by the 80% MBD agreed to in 19
+the PSA. 20
+21
+The third demand charge (Distribution) is typically calculated based on the max 22
+demand measured during the previous 12 months as defined in Rate Schedule D11. 23
+Under D11 this charge would also typically be subject to the greater of actual 24
+
+[[PDF_PAGE_0018]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-11
+maximum demand or 50% of contract capacity ; however, this term is superseded 1
+by the 80% MBD agreed to in the PSA. 2
+3
+Under the PSA, the Company will calculate all three demand charges using the 4
+greater of: 5
+• 80% of the contract capacity applicable for the billing period; or 6
+• The customer’s actual billing demand if greater than 80% of the contract 7
+capacity applicable for the billing period. 8
+9
+Q26. Is the MMC impacted if the Customer’s load does not fully materialize? 10
+A26. No. Even if the customer’s usage does not ramp to the max load (i.e., roughly 1.4 11
+GW) agreed to in the PSA, the MMC will be calculated based on contract capacity. 12
+While the timing of the Customer’s load ramp can be delayed, the max load cannot 13
+be reduced during the term of the PSA. 14
+15
+Q27. Does the MBD provide adequate protection for the Company’s other 16
+customers? 17
+A27. Yes. The MBD term ensures that the Company will collect from the Customer a 18
+minimum amount of revenue regardless of the Customer’s actual demand . As 19
+described later in my testimony, this helps ensure a minimum level of affordability 20
+benefit will be realized by the Company’s other customers. Through the PSA the 21
+Company is committing to make available the max load to the Customer for the life 22
+of the contract. The MBD likewise commits the Customer to pay for that capacity 23
+through D11 demand charges. 24
+25
+
+[[PDF_PAGE_0019]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-12
+Primary Supply Agreement – load ramp flexibility 1
+Q28. Can the Customer adjust the timing of when their load will materialize or 2
+when they must achieve max load? 3
+A28. Yes. The Customer can delay the Customer Committed Capacity Ramp or any 4
+increase in the scheduled ramp by up to 12 months in the aggregate but cannot 5
+adjust the max load that the Company has committed to serve. In practice, this 6
+means that the Customer could achieve their max load as late as December 2028 if 7
+the Customer elects to delay by the maximum 12 months allowed in the PSA. 8
+9
+Primary Supply Agreement – termination payment 10
+Q29. Can you explain the termination payment under the PSA? 11
+A29. Yes. The termination payment was designed such that the Company will recover at 12
+least 10 years of Minimum Monthly Charges. If the PSA is terminated before the 13
+tenth anniversary of the Load Ramp Completion Date, the Customer will be subject 14
+to a termination payment based on the MBD multiplied by the greater of 1) the 15
+number of months from the early termination date to the tenth anniversary of the 16
+Load Ramp Completion Date or 2) 24 months. If the PSA is terminated after the 17
+tenth anniversary of the Load Ramp Completion Date, the customer is subject to a 18
+termination payment equal to 24 months of Minimum Monthly Charges. 19
+20
+Q30. Does the termination payment benefit the Company’s other customers? 21
+A30. Yes. The termination payment represents a long-term commitment by the Customer 22
+of at least 10 years to contribute to the Company’s overall system costs, thereby 23
+reducing the cost responsibility of the Company’s other customers. 24
+
+[[PDF_PAGE_0020]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-13
+Primary Supply Agreement – credit and collateral requirements 1
+Q31. Does the PSA include credit and collateral requirements? 2
+A31. Yes. The PSA includes credit and collateral requirements through a parent guaranty 3
+and, as necessary based on the parent’s credit rating, a letter of credit designed to 4
+protect the Company and its customers in the event of Customer default. 5
+6
+Energy Storage Agreement - overview 7
+Q32. Can you provide an overview of the ESA between the Company and the 8
+Customer? 9
+A32. Yes. The ESA governs the obligations of the Company and the Customer related to 10
+the deployment and cost recovery of energy storage projects. Later in my testimony 11
+I will discuss why the Company has decided to deploy energy storage to maintain 12
+resource adequacy. 13
+14
+At a high level , the ESA allows the Company to develop a portfolio of energy 15
+storage projects up to the Customer’s max load (i.e., roughly 1.4 GW). The 16
+Customer will pay the full cost (i.e., revenue requirement) of the portfolio of 17
+projects and will receive the full value of any incremental capacity, energy, and 18
+ancillary service MISO market revenues that are generated by the assets. 19
+20
+Q33. What are the key terms of the ESA between the Company and the Customer? 21
+A33. The key terms of the ESA are the following: 22
+• Contract duration 23
+• Energy storage portfolio build 24
+• Pricing and annual reconciliation 25
+
+[[PDF_PAGE_0021]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-14
+• Market credits 1
+• Termination and termination payment 2
+• Credit and collateral requirements 3
+4
+Energy Storage Agreement – contract duration 5
+Q34. What is the contract duration of the ESA? 6
+A34. The ESA contract duration is dictated by the timing of energy storage projects that 7
+the Company will develop under the ESA . Specifically, the ESA allows the 8
+Company to recover from the Customer the costs of each individual project within 9
+the portfolio over a 15 -year period, starting at the Commercial Operation Date 10
+(“COD”) of the individual project. 11
+12
+As such, the ESA will be in effect until the fifteenth anniversary of the “last” project 13
+in the portfolio (i.e., the project with the latest COD). The ESA can be extended by 14
+mutual consent of the Company and the Customer. 15
+16
+Q35. Does the ESA contract length offer adequate protection against stranded asset 17
+risk to the Company’s other customers? 18
+A35. Yes. The depreciable life of DTE owned energy storage assets is 15 years . 19
+Likewise, the Company intends to enter into 15- year Tolling Agreements ( “TA”) 20
+with third parties to execute on the third- party owned portion of the portfolio. As 21
+such, allowing for a 15-year recovery period of each individual project ensures that 22
+the Customer will be paying for the full cost of the asset over the recovery period 23
+or, in the case of TAs, the entire contract length. This ensures that the deployment 24
+
+[[PDF_PAGE_0022]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-15
+of energy storage under the ESA will not impact the rates of the Company’s other 1
+customers during the life of the ESA, and mitigates the risk of stranded assets. 2
+3
+Energy Storage Agreement – portfolio build 4
+Q36. What obligations does the Company have related to the deployment of energy 5
+storage under the ESA? 6
+A36. Under the ESA, the Company can develop a portfolio of energy storage assets up 7
+to the max load of the Customer through a combination of self-build projects, Build 8
+Transfer Agreements (“BTAs”), and third-party TAs. 9
+10
+Q37. Will the Company submit energy storage projects deployed under the ESA to 11
+the Commission for review and approval? 12
+A37. Yes. The Company will submit each project to the Commission for review and 13
+approval prior to construction. In each project filing, the Company will clearly 14
+identify if the project is being built under the ESA so such projects can be tracked 15
+and accounted for appropriately. 16
+17
+As I describe later in my testimony, the Company is confident it has a pipeline of 18
+projects sufficient to meet the targeted level of energy storage deployment. 19
+20
+Energy Storage Agreement – pricing and annual reconciliation 21
+Q38. What is the Customer pricing structure under the ESA? 22
+A38. Under the ESA , the Customer will pay for the full cost of the energy storage 23
+portfolio during the 15-year recovery period of each project. For each DTE owned 24
+project in the portfolio, the Company will calculate a 15-year revenue requirement 25
+
+[[PDF_PAGE_0023]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-16
+in the same manner that a revenue requirement is calculated in a general rate case. 1
+The revenue requirement will include, for example: 2
+• Allowance for Funds Used During Construction ( “AFUDC”) accumulated 3
+during the construction of the project 4
+• Depreciation 5
+• The Company’s prevailing authorized rate of return 6
+• Amortization of Investment Tax Credits ( “ITC”) generated by the 7
+construction of the site 8
+• O&M 9
+• Property Tax 10
+• Insurance 11
+12
+For third party TAs, the revenue requirement will be equal to the annual cost of the 13
+TA plus any authorized financial incentive under MCL 460.1028. 14
+15
+For billing purposes, the annual project revenue requirement of each project will be 16
+evenly divided into the number of billing periods applicable to that year to 17
+determine the billing period project charge 2. The summation of individual project 18
+billing period charges will be invoiced to the customer. 19
+20
+Q39. When will the revenue requirement be determined for an individual project 21
+for the purposes of billing the Customer? 22
+A39. For the purposes of billing the Customer, t he revenue requirement for Company 23
+owned projects will first be calculated when the project achieves COD. At that time 24
+2 In general, the applicable billing periods during a year will be 12, but could vary in the first and final
+calendar years of the 15-year recovery period since project CODs could happen mid-year.
+
+[[PDF_PAGE_0024]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-17
+the Company will provide the Customer with a projection of the 15- year revenue 1
+requirement which will generally be based on actual construction capital costs and 2
+a projection of lifetime O&M costs. 3
+4
+For third party TAs, the cost will first be calculated when the Company enters into 5
+the TA. 6
+7
+Q40. Are the Customer project charges fixed for the life of the 15 -year project 8
+recovery period? 9
+A40. No. At the end of each calendar year, the Company will perform a cost 10
+reconciliation for each project in the energy storage portfolio. That reconciliation 11
+will compare the amount charged to the Customer during the previous calendar year 12
+to the actual costs of the project . Any over recovery or under recovery will be 13
+incorporated into the subsequent year’s Customer charges. 14
+15
+Under this approach, the Customer pay s the actual costs of the energy storage 16
+portfolio. 17
+18
+Q41. Will the Commission and other stakeholders have an opportunity to review 19
+the reconciliation? 20
+A41. Both the costs of the energy storage projects and the associated Customer charges 21
+will be addressed in the Company’s future general rate cases . At that time, the 22
+Commission and other stakeholders will have the opportunity to review the costs 23
+and Customer revenues associated with the energy storage portfolio developed 24
+under the ESA. 25
+
+[[PDF_PAGE_0025]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-18
+Q42. Does the ESA pricing and annual reconciliation provide adequate protection 1
+for the Company’s other customers? 2
+A42. Yes. The ESA pricing and associated reconciliation process ensure that the 3
+Customer fully pays for the actual costs of the energy storage portfolio. In this way, 4
+the ESA prevents cross subsidization of the energy storage portfolio and mitigates 5
+the risk of stranded assets. 6
+7
+Energy Storage Agreement – market credits 8
+Q43. What type of market credits will the Customer be provided under the ESA? 9
+A43. The Customer will be credited with any incremental MISO capacity, energy, and 10
+ancillary services revenues that are generated by the energy storage portfolio net of 11
+all market charges associated with the energy storage portfolio. 12
+13
+Q44. What do you mean by “incremental” credits? 14
+A44. Some of the energy storage projects that the Company will deploy under the ESA 15
+may be co-located with existing renewable assets. A co-located energy storage asset 16
+shares an interconnection with an existing renewable generation asset. In these 17
+cases, the capacity accreditation of the existing renewable generation may be 18
+reduced based on the allocation of the interconnection limit between the assets. 19
+20
+To account for this, the Company will deduct from the credits provided to the 21
+Customer an amount that will make-whole the existing renewable generation asset 22
+had the energy storage asset not been constructed on th e same site. Thus, the 23
+customer will only receive the “incremental” capacity credits generated at any co-24
+located sites. 25
+
+[[PDF_PAGE_0026]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-19
+Q45. Who will manage the operations of the energy storage assets and their 1
+participation in the MISO market? 2
+A45. The Company will operate and manage the storage projects (both Company owned 3
+and third party owned) accordingly through participation in the MISO wholesale 4
+markets. The energy storage assets will be operated in a manner similar to other 5
+Company resources. 6
+7
+Q46. How will the Company determine the amount of market credits to provide the 8
+Customer? 9
+A46. The Company will utilize the MISO settlements process to determine the amount 10
+of market credits to provide to the customer. The MISO settlements process allows 11
+for market revenues and charges to be identified by their source. As such, the 12
+Company will be able to determine the specific market revenues and charges that 13
+were generated by the energy storage portfolio. 14
+15
+The Company highlights that any energy credits provided to the customer will be 16
+net of charging costs for the energy storage project. 17
+18
+Q47. How will the market credits be provided to the Customer? 19
+A47. The market credits will be provided to the Customer through their monthly invoice. 20
+21
+Q48. Will the Company recover from the Customer the incremental costs of 22
+Company activities associated with being the MISO Market Participant for 23
+the energy storage assets? 24
+
+[[PDF_PAGE_0027]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-20
+A48. Yes. The Company will recover its incremental costs related to the management of 1
+the energy storage portfolio assets in the MISO wholesale energy and capacity 2
+markets through an administrative fee applied to the Customer’s monthly invoice. 3
+4
+Energy Storage Agreement – termination and termination payment 5
+Q49. Can the Customer voluntarily terminate the ESA? 6
+A49. No. The Customer cannot voluntarily terminate the ESA. If the ESA is terminated 7
+through a customer default, the Customer is obligated to pay the Company a 8
+termination payment. 9
+10
+Q50. How is the termination payment calculated? 11
+A50. The termination payment is set equal to the unrecovered portion of the 15- year 12
+revenue requirement for each project in the portfolio. In other words, the 13
+termination equals the remaining amount that the Company would have collected 14
+had the agreement not been terminated. 15
+16
+Q51. How does the termination payment protect the Company’s other customers? 17
+A51. The termination payment is designed to collect whatever amounts would have 18
+otherwise been collected had the ESA not been terminated. As such, the costs of all 19
+energy storage projects would be fully recovered from the Customer, mitigating the 20
+risk of stranded assets for these projects. 21
+22
+Energy Storage Agreement – credit and collateral requirements 23
+Q52. Does the ESA include credit and collateral requirements? 24
+
+[[PDF_PAGE_0028]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-21
+A52. Yes. The ESA includes credit and collateral requirements through a parent guaranty 1
+and, if necessary based on the parent’s credit rating, a letter of credit designed to 2
+protect the Company and its customers in the event of Customer default. 3
+4
+Maintaining Resource Adequacy 5
+Q53. What is resource adequacy? 6
+A53. Resource adequacy is the ability of the electric system to meet the energy needs of 7
+electricity consumers. This means having sufficient resources to meet projected 8
+electric demand3. 9
+10
+Q54. What are the Company’s resource adequacy requirements? 11
+A54. MISO, under its Federal Energy Regulatory Commission ( “FERC”) approved 12
+tariff, has resource adequacy requirements to ensure adequate resources are 13
+available to meet demand. The Company is also required to submit annual 14
+demonstrations to the MPSC showing that it has sufficient resources to meet 15
+capacity obligations four years into the future. 16
+17
+Q55. How does the Company demonstrate resource adequacy? 18
+A55. MISO establishes a Planning Reserve Margin ( “PRM”), which is defined as the 19
+amount of capacity above the expected weather-normalized peak demand necessary 20
+to meet the industry standard of a single day in ten years loss -of-load event. The 21
+PRM is added to the Company’s coincident peak demand to calculate its Planning 22
+Reserve Margin Requirements ( “PRMR”). The Company demonstrates resource 23
+adequacy by ensuring it has adequate resources to meet or exceed the PRMR. 24
+3 https://www.ferc.gov/reliability-explainer
+
+[[PDF_PAGE_0029]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-22
+Q56. How will the Customer’s load impact the Company’s PRMR? 1
+A56. The Customer’s load will increase the Company’s PRMR. As the Customer’s load 2
+increases to the max load of approximately 1.4 GW, the Company’s coincident 3
+peak demand and PRMR will also increase. 4
+5
+Q57. Would the Company be able to meet the increased PRMR with its existing 6
+resources? 7
+A57. No, the Company projects it w ould not have sufficient existing resources in all 8
+seasons to meet the higher PRMR from the increment al Customer demand . The 9
+Company determined that it could meet the increased PRMR through the 10
+deployment of incremental energy storage resources under the ESA. Adding 11
+additional capacity resources ensures that the Company will have sufficient 12
+capacity to meet MISO’s resource adequacy requirements. 13
+14
+Q58. Why did the Company select energy storage as the resource type to ensure 15
+resource adequacy? 16
+A58. Energy storage was selected as the resource type because it is a dispatchable 17
+resource that provides high-capacity accreditation under MISO’s Direct Loss of 18
+Load ( “DLOL”) methodology 4. For example, in summer 2030, stor age has an 19
+expected DLOL accreditation percentage of 96.12% compared to only 10.52% and 20
+4.80% for wind and solar, respectively. Energy storage is also cost-competitive and 21
+can be developed and placed in service on a timeline that supports the Customer 22
+Committed Capacity Ramp. 23
+24
+4 MISO 2024 Regional Resource Assessment, November 6, 2024, Appendix 5: DLOL by fuel class (%)
+https://cdn.misoenergy.org/20241106%20RASC%20Item%2010%202024%20RRA%20Update658159.pdf
+
+[[PDF_PAGE_0030]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-23
+Q59. Do the energy storage portfolio assets being developed under the ESA impact 1
+the targeted storage build contemplated in the Company’s 2022 Integrated 2
+Resource Plan (“IRP”) settlement? 3
+A59. No, the energy storage portfolio assets being developed under the ESA do not 4
+impact the targeted storage build contemplated in the IRP Settlement that was 5
+approved by the Commission through its July, 26, 2023, Order in Case No. U-21193 6
+(“July 2023 Order”) . That settlement agreement included 780 MW of energy 7
+storage deployment between 2025 and 2028. The approximately 1.4 GW that the 8
+Company intends to deploy under the ESA is in addition to this amount. 9
+10
+Q60. How will energy storage projects be selected for development under the ESA? 11
+A60. The Company intends to select projects that were bid into the Company’s 2025 12
+Energy Storage Request for Proposal (“ RFP”). The Company issued the 2025 13
+Energy Storage RFP on May 9, 2025, with proposal responses due on June 25, 14
+2025. Although the 2025 Energy Storage RFP was intended for the IRP Settlement 15
+storage needs discussed above, additional viable projects were identified in the RFP 16
+responses that could support the ESA. The RFP was conducted under a competitive 17
+procurement process that followed the MPSC’s Competitive Procurement 18
+Guidelines for Rate -Regulated Electric Utilities and the terms of the 2022 IRP 19
+Settlement Agreement. 20
+21
+The Company first selected the highest scoring projects from the RFP to meet its 22
+IRP Settlement needs. The Company intends to select the energy storage projects 23
+to be deployed under the ESA from the remaining viable projects identified in the 24
+RFP. This process prioritizes the Company’s other customers and the build plan 25
+
+[[PDF_PAGE_0031]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-24
+presented in the IRP Settlement and ensures that the Company’s other customers 1
+are not adversely impacted by the selection of additional energy storage projects 2
+from this RFP. 3
+4
+Q61. Will the energy storage projects deployed under the ESA be Company owned, 5
+third party owned, or a combination of both? 6
+A61. The energy storage projects under the ESA will be a combination of Company 7
+owned and third party owned. While these projects are incremental to the targeted 8
+storage build contemplated in the IRP Settlement, the IRP Settlement Agreement 9
+stipulated that additional energy storage projects should be allocated consistent 10
+with the allocation for the PCA build between Company owned (approximately 11
+65%) and third party owned projects (approximately 35%)5. The Company intends 12
+to select projects that are consistent with the ownership split identified in the IRP 13
+Settlement Agreement. 14
+15
+Q62. What are the impacts of the Customer load on the Company’s long- term 16
+generation plan? 17
+A62. The Company’s long- term generation plan is determined by its IRP process. The 18
+IRP Settlement Agreement approved by the Commission through its July 2023 19
+Order stipulated that the Company must file its next IRP by December 2026. The 20
+resources necessary to meet the Company’s long- term energy and capacity needs 21
+will be determined in the Company’s 2026 IRP filing. 22
+5 Section 13 of IRP Settlement (https://mi-
+psc.my.site.com/sfc/servlet.shepherd/version/download/0688y000008puPjAAI )
+
+[[PDF_PAGE_0032]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-25
+Q63. Does the Company plan to delay the retirement of Monroe Power Plant to 1
+serve the Customer? 2
+A63. No, the Company does not plan to delay the retirement of Monroe Power Plant to 3
+serve the Customer. Per the IRP Settlement Agreement approved by the 4
+Commission through its July 2023 Order, the planned retirement date for Units 3 5
+and 4 is 2028 and for Units 1 and 2 is 2032. 6
+7
+Benefits to other customers 8
+Q64. Will the Company’s other customers benefit from the Contracts? 9
+A64. Yes, the proposed Contracts will deliver an affordability benefit to the Company’s 10
+other customers. 11
+12
+Q65. How are the Contracts generating an affordability benefit for the Company’s 13
+other customers? 14
+A65. The proposed C ontracts ensure an affordability benefit for the Company’s other 15
+customers by spreading the Company’s fixed costs of generation and distribution 16
+over a larger customer base. This occurs in two ways: 17
+• PSA D11 charges. By taking service on D11, the Customer will be 18
+contributing to the fixed costs of the Company’s system (e.g., existing 19
+generation resources, distribution system , etc. ). Since all incremental 20
+capacity resources needed to ensure resource adequacy (i.e., energy storage 21
+deployed under the ESA) will be fully recovered from the Customer through 22
+the ESA, the Customer will be contributing to existing fixed costs through 23
+D11 that would otherwise be recovered from the Company’s other 24
+customers. 25
+
+[[PDF_PAGE_0033]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-26
+• PSA PSCR mechanism. The Company’s renewable asset and transmission 1
+costs are recovered through the PSCR mechanism. The associated surcharge 2
+is recovered on a volumetric (i.e., per kWh) basis. As such, by being subject 3
+to the PSCR and being a particularly large energy user, the Customer will 4
+make a contribution to the Company’s existing renewable and transmission 5
+costs. These fixed costs would have otherwise been allocated to Company’s 6
+other customers. Similarly, being subject to the PSCR also ensures that the 7
+Customer will make a contribution to any future renewable deployments or 8
+transmission cost increases . Like above, the Customer will be covering a 9
+portion of existing costs that would otherwise be allocated to the 10
+Company’s other customers. Being subject to the PSCR also ensures the 11
+Customer contributes to the incremental fuel and purchased power needed 12
+to serve their load. 13
+14
+Importantly, the ESA insulates the Company’s current customers from the costs 15
+of the increased capacity needed to serve the Customer since the Customer is 16
+paying the costs of the energy storage portfolio that the Company will develop 17
+to ensure resource adequacy. This ensures that the Company’s other customers 18
+are not responsible for incremental system costs and can fully realize the 19
+affordability benefits described above. 20
+21
+Q66. How will the Company’s other customers realize these benefits? 22
+A66. These benefits would flow to other customers through the Cost of Service (CoS) 23
+process within a future general rate case. Using current CoS allocation methods 24
+updated with the Customer’s load , the Company estimates the Customer will be 25
+
+[[PDF_PAGE_0034]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-27
+responsible for approximately 18% of total costs. See Figure 1 below for a 1
+breakdown by customer class. 2
+3
+Figure 1 Estimated Cost of Service Class Cost Responsibility 4
+5
+Q67. How large does the Company estimate that the affordability benefit will be? 6
+A67. Figure 2 below captures the Company’s estimate of the affordability benefits that 7
+will be realized by its other customers. 8
+
+[[PDF_PAGE_0035]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-28
+Figure 2 Estimated Total Affordability Benefit ($ million) 1
+2
+Q68. What is accounted for in the Company’s estimate of total affordability benefit? 3
+A68. The Company’s estimate of total affordability benefit includes Customer revenues, 4
+additional fuel and purchased power cost s incurred to serve the Customer’s load, 5
+estimated distribution and transmission upgrade costs, incremental impacts to the 6
+Renewable Portfolio Standard compliance as discussed by Company Witness 7
+Bilyeu6, and sales migration to Retail Open Access. 8
+9
+Q69. How will this affordability benefit impact customer rates? 10
+A69. Customer rates are determined through a general rate case. D uring a rate case, a 11
+number of factors are considered , including changes to the Company’s load, 12
+proposed capital expenditures, changes to Operations and Maintenance costs, etc. 13
+Because of the significant addition of load , customer rates will be lower than they 14
+otherwise would have been ha d the Company not served the Customer. All else 15
+6 For affordability modeling purposes, the Company assumed ~1,800 MW of incremental solar generation
+deployment which is the midpoint of the two buildout scenarios discussed by Company Witness Bilyeu
+(i.e., 443 MW of solar generation deployment and 3,247 MW of solar generation deployment)
+
+[[PDF_PAGE_0036]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-29
+equal (i.e., there are no other changes to rate inputs) the affordability benefit of 1
+adding this new customer will reduce existing customer rates. 2
+3
+Q70. Has the Company estimated the impact on the cost of service to its other 4
+customers of serving the Customer? 5
+A70. Yes. The Company estimates that the cost of service to its other customers will 6
+decrease if it serves the Customer. Figure 3 below highlights that, while overall 7
+Company costs will increase ( as discussed later in my testimony ), the cost of 8
+service will decrease across all customer classes given the contribution to the 9
+Company’s costs that the Customer is making. This is consistent with the estimated 10
+total affordability benefit described earlier in my testimony. 11
+12
+Figure 3 Estimated Cost of Service Responsibility 13
+14
+
+[[PDF_PAGE_0037]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-30
+Q71. Are there other benefits that will be realized through the Contracts? 1
+A71. Yes. Serving a Customer of this size and type brings a variety of benefits beyond 2
+the affordability benefit described above. These include: 3
+• Local c apital investment. The Customer will be making a multi- billion 4
+capital investment to construct, operate, and maintain their facilities; 5
+• Construction jobs. An estimated 2,500 temporary construction jobs will be 6
+created during the construction of the facility; 7
+• Permanent on-site jobs. An estimated 450 well-paying permanent jobs will 8
+be created to support the Customer’s facility; and 9
+• Additional tax revenue. The Customer and the operation of their facility will 10
+generate additional revenue for all applicable taxing jurisdictions (e.g., state 11
+and township) 12
+13
+Incremental costs and stranded cost mitigation 14
+Q72. Can you summarize the incremental costs that the Company expects to incur 15
+by serving the Customer? 16
+A72. Yes. The Company expects there to be five types of incremental costs that it will 17
+incur by serving the Customer. Those are: 18
+• ESA energy storage portfolio. As discussed previously in my testimony, the 19
+Company intends to deploy a portfolio of up to roughly 1.4 GW of energy 20
+storage assets to maintain resource adequacy; 21
+• Fuel and purchased power. The Company expects that overall fuel and 22
+purchased power costs will increase due to the energy usage of the 23
+Customer; 24
+
+[[PDF_PAGE_0038]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-31
+• Transmission upgrades. Based on initial estimates provided by the 1
+Company’s transmission provider, the Company expects that 2
+approximately $200 million of capital investment will be needed to upgrade 3
+the transmission system to both connect the customer’s facility and deploy 4
+the energy storage portfolio under the ESA. T he Company expects this to 5
+initially equate to an approximately $30 million per year revenue 6
+requirement for the Company, which will decrease over time as the 7
+investment is depreciated; 8
+• New industrial substation. The Company intends to build a new industrial 9
+substation to serve the customer. It expects that approximately $300 million 10
+of capital investment will be needed to construct the substation. The 11
+Company expects this to initially equate to an approximately $35 million 12
+per year revenue requirement for the Company, which will decrease over 13
+time as the investment is depreciated; and 14
+• Incremental renewable generation for RPS compliance. As discussed by 15
+Company Witness Bilyeu, the Company expects that incremental renewable 16
+generation will be needed for it to remain compliant with the State of 17
+Michigan’s RPS requirements. The Company expects that the amount of 18
+renewable generation to be deployed will be determined in the Company’s 19
+next IRP filing. 20
+21
+Q73. How will transmission upgrade costs be recovered from the Company’s 22
+customers? 23
+A73. The Company is not proposing to change the way in which transmission costs are 24
+recovered from its customers. Currently, the Company’s transmission provider 25
+
+[[PDF_PAGE_0039]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-32
+allocates costs to the Company based on FERC approved allocation methods, which 1
+the Company then allocates to its customers based on Commission -approved 2
+allocation methods. These costs are recovered through the PSCR mechanism. 3
+4
+The Company highlights that transmission cost upgrades were considered when it 5
+estimated the total affordability benefit presented previously in my testimony. 6
+7
+Q74. How will the costs of the new industrial substation needed to serve the 8
+Customer be recovered? 9
+A74. Typically, the Customer would pay, through a Contribution in Aid of Construction 10
+(CIAC) payment, for the cost of the infrastructure needed for grid interconnection 11
+less an allowance based on the Customer’s load (“a CIAC allowance”). If the actual 12
+costs of the new industrial substation exceeded the CIAC allowance, the Customer 13
+would be responsible for paying for the difference through the CIAC payment. 14
+15
+In this case, the Customer’s CIAC allowance would be approximately $760 million, 16
+far exceeding the expected cost of the new industrial substation. Said differently, 17
+under the approved CIAC policy, the Customer would not be directly responsible 18
+for any costs related to the new industrial substations, and instead the capital would 19
+be proposed to be added to the Company’s rate base with the associated costs 20
+allocated according to approved methods. The Company is not proposing to change 21
+the current CIAC policy. 22
+23
+However, the Customer’s landlord has agreed to pay a $40 million non-refundable 24
+construction advance to help offset the costs of the new industrial substation. The 25
+
+[[PDF_PAGE_0040]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-33
+Company will propose adding the net cost (i.e., actual costs less the $40 million 1
+construction advance) to its rate base for recovery in a future rate case. 2
+3
+The Company highlights that new industrial substation costs were considered when 4
+it estimated the total affordability benefit presented previously in my testimony. 5
+6
+Q75. Do the Contracts ensure that the Customer offsets these costs? 7
+A75. Yes. The table below summarizes the method by which the Customer will offset 8
+each of these incremental costs. 9
+10
+Table 1 Customer Contribution Method to Incremental Costs 11
+Incremental Cost Type Customer Contribution Method
+ESA energy storage
+portfolio
+Customer pays full cost of the portfolio through
+the ESA
+Fuel and purchased power Customer is subject to the PSCR mechanism
+where fuel and purchased power are recovered
+Transmission upgrades Customer is subject to the PSCR mechanism
+where transmission costs are recovered
+New industrial substation
+Customer is subject to D11 which appropriately
+allocates all system costs to customer classes;
+additionally, Customer’s landlord is making a $40
+million non-refundable contribution to the cost of
+the substation
+Incremental renewable
+generation for RPS
+compliance
+Customer is subject to the PSCR mechanism
+where renewable generation costs are recovered
+
+[[PDF_PAGE_0041]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-34
+Q76. When these costs are considered, will serving the Customer still result in an 1
+affordability benefit to the Company’s other customers? 2
+A76. Yes. The Company’s estimate of total affordability benefit considers these 3
+incremental costs. Through the Contracts, the Customer is offsetting the 4
+incremental costs that it is introducing, allowing for an affordability benefit to be 5
+realized by the Company’s other customers. 6
+7
+Q77. Do the Contracts provide adequate protections against stranded costs? 8
+A77. Yes. As it relates to ESA energy storage portfolio costs, the Customer is responsible 9
+for the full cost of the energy storage portfolio deployed under the ESA. The 10
+Customer’s responsibility for these costs cannot be reduced or eliminated , and the 11
+credit requirements under the ESA protects against the risk of Customer default. 12
+13
+As it relates to fuel and purchased power, incremental costs will be appropriately 14
+recovered from the customer regardless of their usage. If the Customer’s usage is 15
+zero, then incremental fuel and purchased power costs will also be zero. In this 16
+case, t he Company would not recover anything from the Customer since the 17
+Customer’s volumetric charges, including the PSCR factor, would also be zero. If 18
+the Customer’s usage is more than zero, then incremental fuel and purchased power 19
+costs will also be more than zero. The Company would recover these costs through 20
+the PSCR which is recovered volumetrically based on Customer usage. 21
+22
+Regarding other types of costs (i.e., transmission, industrial substation, and 23
+renewable generation), the Customer is subject to an 80% MBD in the PSA, which 24
+they are responsible for regardless of their actual usage. Under prevailing D11 rates, 25
+
+[[PDF_PAGE_0042]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-35
+this equates to approximately $230 million per year of minimum cost recovery from 1
+the Customer per year. Given that the PSA ensures the Customer pays this amount 2
+for at least 10 years after achieving their max load, the Company will at a minimum 3
+collect roughly $2.3 billion from the Customer, even if the Customer’s load is zero. 4
+5
+If the Customer’s load does not materialize, the only stranded asset risk will be 6
+related to the deployment of capital for transmission upgrades, the new industrial 7
+substation, and any renewable generation deployment to maintain compliance with 8
+the Company’s RPS requirements. The risk of stranded asserts is effectively 9
+mitigated given the minimum level of cost recovery from the Customer that is 10
+agreed to in the PSA. Further, the credit requirements under the PSA protect against 11
+the risk of Customer default and helps ensure the Company recovers this minimum 12
+amount from the Customer. 13
+14
+Regulatory treatment 15
+Q78. Would Commission approval of the Contracts increase the Company’s cost of 16
+service or customer rates? 17
+A78. No. Commission approval of t he proposed C ontracts does not increase the 18
+Company’s cost of s ervice or customer rates. Instead, the proposed C ontracts 19
+govern how the Customer’s future load will be served and how an energy storage 20
+portfolio will be deployed under the ESA. Moreover, as discussed in the 21
+affordability section above, the additional revenues that the Customer will pay 22
+under the PSA and subscription fee under the ESA w ill more than offset any 23
+potential cost of service or customer rate increase. 24
+25
+
+[[PDF_PAGE_0043]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-36
+Q79. Will the Contracts be reflected in future regulatory filings? 1
+A79. Yes. If approved, the Contracts would be reflected in future general rate cases and 2
+PSCR (plan and reconciliation) cases. 3
+4
+Q80. How will the PSA and ESA be incorporated into future rate cases? 5
+A80. The Contracts will be incorporated into future general rate cases in several ways, 6
+including: 7
+• The Customer’s expected load will be incorporated into the Company’s load 8
+forecast that is used, for example, to determine present revenues, determine 9
+cost allocations, and calculate rates; 10
+• The Company owned energy storage portfolio projects developed under the 11
+ESA will be proposed to be added to the Company’s rate base as those 12
+projects will be owned by the Company; and 13
+• The amounts collected from the Customer through the ESA will be 14
+incorporated to offset the additional rate base costs from the energy storage 15
+portfolio deployed under the ESA. 16
+17
+The energy storage portfolio project costs that are added to the Company’s rate base 18
+will be fully offset by the amounts collected from the Customer through the ESA. 19
+The Company will work with MPSC Staff to determine how to account for the 20
+Customer revenues to ensure that there is no shifting of costs from one customer 21
+class to another. 22
+23
+Q81. How will the PSA and ESA be incorporated into future PSCR plans and 24
+reconciliation cases? 25
+
+[[PDF_PAGE_0044]]
+N. T. FOLEY
+Line U- 21990
+No.
+NTF-37
+A81. As described above, the portfolio of energy storage projects developed by the 1
+Company under the ESA will be managed by the Company as the MISO Market 2
+Participant. As such, the energy storage portfolio will generate MISO revenues that 3
+would be reflected in future PSCR plan and reconciliation filings. 4
+5
+Q82. Does this complete your direct testimony? 6
+A82. Yes, it does. 7
+
+[[PDF_PAGE_0045]]
+S
+TATE OF MICHIGAN
+B
+EFORE THE MICHIGAN PUBLIC SERVICE COMMISSION
+I
+n the matter of the Application of )
+DTE ELECTRIC COMPANY ) Case No. U-21990
+for Approval of Special Contracts )
+E
+XHIBITS
+O
+F
+N
+EAL FOLEY
+
+[[PDF_PAGE_0046]]
+SCH
+EDULE DESIGNATION D11
+PRIMARY SUPPLY AGREEMENT
+This Primary Supply Agreement (this “ Agreement”) is entered into on this 22nd day of October, 2025
+(“Contract Date”), by and between:
+(1) DTE Electric Company, a corporation organized under the Laws of the State of Michigan with an address
+of One Energy Plaza, Detroit, Michigan 48226 (“Company”); and
+(2) Green Chile Ventures LLC, a Delaware limited liability company with an address of
+(“Customer”).
+Company and Customer are referred to herein collectively as the “Parties” and each individually as a “ Party”.
+Capitalized terms shall have the meaning set forth in Exhibit C.
+RECITALS
+WHEREAS:
+(A) Company is a regulated electric utility that provides retail electric service within the State of Michigan;
+(B) Customer intends to lease and operate, and cause to be constructed and commissioned, a data center facility
+(the “ Facility”) in Company’s electric service territory located at or near Saline, Michigan (the “ Data
+Center Location”), for which RD Michigan Property Owner 1 LLC (“ RD Michigan”) is the developer,
+land owner and lessor (RD Michigan together with any successors or assigns during the Term,
+“Landlord”);
+(C) Customer desires that Company, through itself or one or more A ffiliates, design, engineer, procure,
+construct, upgrade, extend, commission, operate and maintain certain generation and distribution electric
+facilities (the “Electric Facilities”) necessary to provide electric capacity and energy for the Facility (the
+“Electric Service”) at the Data Center Location;
+(D) Landlord a
+nd Company will enter into the Line Extension Agreement to construct distribution system
+upgrades necessary to provide service to the Facility;
+(E) Customer desires to receive and take Electric Service from Company in an average monthly maximum
+electrical demand in accordance with the commitments set forth in Exhibit A -1 hereto (the “Customer
+Committed Capacity Ramp”) to serve the Facility at the Data Center Location;
+(F) To serve the electric capacity and energy needs of the Facility, Customer desires to procure energy storage
+capacity from one or more energy storage projects developed by Company under the Energy Storage
+Agreement;
+(G) Company is willing to (i) provide such Electric Service to the Data Center Location in accordance with the
+terms of this Agreement and the Company’s Rate Book (as defined below) , (ii) develop and/or procure
+energy storage capacity on behalf of Customer in accordance with the Energy Storage Agreement, and (iii)
+construct and operate the applicable distribution system upgrades on behalf of Landlord in accordance with
+the Line Extension Agreement; and
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:1 of 43
+
+[[PDF_PAGE_0047]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:2 of 43
+
+[[PDF_PAGE_0048]]
+3.4, 4.6,
+6 or 7
+of the Energy Storage Agreement, then the Parties shall meet and confer within ten
+(10) Business Days to negotiate in good faith (i) a mutually agreeable adjustment to the Customer
+Committed Capacity Ramp, and/or (ii) the details of a pass-through mechanism by which Customer
+shall reimburse Company for the incremental cost of providing Electric Service to the Facility in
+accordance with the Customer Committed Capacity Ramp; provided, however, that the obligation
+to negotiate in good faith shall not require Company to agree to any solution under clause (i) or (ii)
+that could reasonably be expected, in Company’s reasonable judgment, to put Company’s system
+at risk, including any risk to its safety, reliability, security, or integrity. Such adjustment and/or
+reimbursement shall be based on Company’s ability to use commercially reasonable efforts to
+provide Electric Service from alternate sources as a result of the termination, lack of approval, or
+modification of the Energy Storage Agreement.
+2.4.2. If the
+Parties, acting in good faith, are unable to reach mutual agreement on an adjustment to the
+Customer Committed Capacity Ramp, and/or, the details of a pass -through mechanism in
+accordance with Section 2.4.1 within thirty (30) calendar days after such meeting, or such later date
+as may be agreed by the Parties in writing (the “ESPA Negotiation Period”), then Company shall
+provide Custome r with a revised Customer Committed Capacity R amp (the “ Revised Ramp
+Schedule”) reflecting the Electric Service that Company determines, in its sole discretion, it is
+capable of providing to Customer notwithstanding the termination of the Energy Storage
+Agreement. U pon no more than thirty (30) calendar days’ N otice after the end of the ESPA
+Negotiation Period, Customer shall notify Company that Customer is electing either to (i) allow
+this Agreement to remain in effect with Company’s delivery obligations governed by the Revised
+Ramp Schedule, or (ii) terminate this Agreement by providing Notice to Company, at which time
+this Agreement shall terminate and cease to be of any force or effect with no further obligation or
+liability to any Party except (i) for any Termination Payment owed by Customer under this
+Agreement pursuant to Section 7.4, and (ii) to the extent provided in the Energy Storage Agreement
+(including, if applicable, any Termination Payment (as defined in the Energy Storage Agreement)
+owed by Customer for terminating the Energy Storage Agreement). For the avoidance of doubt, in
+the event that the Parties (x) convene pursuant to Section 2.4.1 due to a termination of the Energy
+Storage Agreement as set forth in Section 2.4.1, and (y) this Agreement is terminated in accordance
+with this Section 2.4.2, then any Termination Payment owed by Customer pursuant to Section 7.4
+shall be calculated as of the date that the Energy Storage Agreement was originally terminated. If
+Customer does not terminate this Agreement within thirty (30) days of the end of the ESPA
+Negotiation Period, then (a) this Agreement shall remain in full force and effect , subject to the
+Revised Ramp Schedule, and (b) the Customer Committed Capacity Ramp set forth on Exhibit A-
+1 as of the date hereof shall no longer be in effect and the Revised Ramp Schedule shall become
+the Customer Committed Capacity Ramp for purposes of this Agreement.
+3. Term
+3.1. Term. The term (the “Initial Term”) of this Agreement shall commence upon the Commencement Date
+and shall continue until 11:59 p.m. EPT on February 28, 2045.
+3.2. Renewal Term. Customer may notify Company of its election to extend the Initial Term of this Agreement
+for an additional ten (10) year term up to two (2) times ( each ten (10) year extension term, a “Renewal
+Term”) by providing Notice to Company at least twenty-four (24) months prior to the end of the Initial
+Term or first Renewal Term, as applicable (“Renewal Notice”). Company shall notify Customer of the
+rate schedule pursuant to which Company can provide Electric Service to Customer for such Renewal
+Term and any general terms and conditions of Company’s Rate Book (or any successor thereto) or terms
+of this Agreement that would need to be modified to be consistent with the new rate schedule no later
+than twenty-three (23) months prior to the beginning of such Renewal Term. Customer shall have thirty
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:3 of 43
+
+[[PDF_PAGE_0049]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:4 of 43
+
+[[PDF_PAGE_0050]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:5 of 43
+
+[[PDF_PAGE_0051]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:6 of 43
+
+[[PDF_PAGE_0052]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:7 of 43
+
+[[PDF_PAGE_0053]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:8 of 43
+
+[[PDF_PAGE_0054]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:9 of 43
+
+[[PDF_PAGE_0055]]
+t
+axes
+imposed on, or with respect to, Company’s income, revenues, margin, gross receipts,
+personnel
+, or real or personal property, or other assets.
+6.4.2. Customer shall control the handling and resolution of any proposed assessment or other dispute
+with any governmental authority related to the taxability of the transactions contained herein.
+6.5. Environmental Levies. DTE shall not invoice Customer in a discriminatory manner for taxes, fees, or
+charges related to carbon emissions (“Environmental Levies”). To the extent any Environmental Levies
+are imposed on DTE customers in the future, such Environmental Levies shall be billed to all applicable
+customers, including Customer, in accordance with Company’s Rate Book.
+6.6. Representations and Warranties For Michigan Sales Tax Exemption.
+6.6.1. Company represents and warrants that as of the Contract Date the Company is subject to and
+operating under the regulatory framework set forth in Section 51 of the Clean and Renewable
+Energy and Energy Waste Reduction Act, of 2008 PA 295 MCL 460.1051 (the “ Clean Energy
+Act”).
+6.6.2. Company represents and warrants that the Facility is not receiving Electric Service under any of
+the following rates:
+6.6.2.1. The long-term industrial load rate established under section 10gg of 1939 PA 3 (MCL
+460.10gg) unless the designated power supply resource on which the long-term
+industrial load rate is based was placed in operation after January 1, 2024 and the rate
+is at least equivalent to the average industrial rate charged to other industrial customers
+of the electric utility that serves the facility;
+6.6.2.2. A tariff rate approved in Michigan Public Service Commission Case No. U-21160, U-
+22163, or U-21646; or
+6.6.2.3. A rate that causes residential customers to subsidize the costs incurred to provide
+electric service to the facility.
+7. Default; Termination
+7.1. Default. A Party shall be in default under this Agreement upon the occurrence of any of the following
+events (such Party, the “Defaulting Party” and each such event, an “Event of Default”):
+7.1.1. fails to pay any amount when due under this Agreement only if that amount is not cured within
+twenty (20) calendar days after receipt of Notice thereof from the other Party;
+7.1.2. Breaches any material provision of this Agreement (not otherwise a payment default) that, if
+curable, is not cured within thirty (30) calendar days after receipt of Notice thereof from the other
+Party (or for breaches for which the Defaulting Party has notified the non-Defaulting Party cannot
+be cured within thirty (30) calendar days despite its use of reasonable efforts but can be cured within
+sixty (60) calendar days, and such default has not been so cured by the extended sixty (60) day
+deadline);
+7.1.3. in the occurrence of a Bankruptcy; or
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:10 of 43
+
+[[PDF_PAGE_0056]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:11 of 43
+
+[[PDF_PAGE_0057]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:12 of 43
+
+[[PDF_PAGE_0058]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:13 of 43
+
+[[PDF_PAGE_0059]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:14 of 43
+
+[[PDF_PAGE_0060]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:15 of 43
+
+[[PDF_PAGE_0061]]
+t
+hat is
+related to and arising from the performance under this Agreement shall be considered " Project
+IP".
+10.3. N
+otwithstanding anything to the contrary in this Agreement, Company shall retain sole and exclusive
+ownership of (i) any Project IP that is derivative of and related to Company's proprietary power generation
+technology and processes, and (ii) any enhancements, improvements or modifications to its Background
+IP, including any enhancements to its power generation technology or related operation developed during
+the performance of this Agreement, (collectively, clauses (i) and (ii), "Company IP"). Customer hereby
+assigns (and shall cause its Affiliates and Personnel to assign) to Company, without compensation, all
+rights, title, and interest in and to any Company IP, including all Intellectual Property Rights therein.
+10.4. Company hereby grants to Customer a limited, irrevocable, royalty- free, non-exclusive license to use
+such Company IP during the Term or any Renewal Term of the Agreement for the work performed under
+this Agreement or operation of Company equipment or facilities. Customer hereby grants to Company a
+limited, irrevocable, royalty- free, non- exclusive license to use Project IP during the Term of the
+Agreement in connection with Company's performance hereunder.
+11. Confidentiality
+11.1. For the purpose of this Agreement, a party disclosing Confidential Information shall be referred to as the
+“Disclosing Party” and a party receiving Confidential Information shall be referred to as the “Recipient”.
+“Confidential Information” includes any and all information hereafter disclosed by or at the direction
+of the Disclosing Party to Recipient that is designated in writing as confidential or , subject to Section
+11.5, a reasonable party would consider to be of a confidential nature including but not limited to this
+Agreement and the Related Agreements; provided, however, Confidential Information does not include
+(i) information that, at the time of disclosure or therea fter, was generally available to and known by the
+public, other than as a result of a disclosure by Recipient in violation of this Section 11; (ii) information
+that, at the time of disclosure or thereafter was available to Recipient or its Representatives (as defined
+below) from a source not known by Recipient to be bound by a duty of confidentiality to the Disclosing
+Party with respect to such information; (iii) information that, prior to disclosure by or at the direction of
+the Disclosing Party, was known to Recipient or its Representatives; or (iv) information that is
+independently developed by Recipient or its Representatives by persons without reliance on the
+Confidential Information and without violating the obligations hereunder.
+11.2. Confidential Information is and shall, at all times, remain the property of the Disclosing Party. Recipient
+may disclose Confidential Information to any of its officers, directors, employees, advisors, shareholders,
+members, managers, attorneys or agents (collectively, “Representatives ”). The Recipient shall advise
+such persons of the existence of this Agreement, of the confidential nature of the information and of the
+Recipient’s obligations regarding the same under this Agreement. Receiving Party agrees that it shall
+maintain the Disclosing Party’s Confidential Information in confidence and shall not use the Confidential
+Information except as required or necessary in accordance with this Agreement. Recipient agrees that it
+shall maintain the Disclosing Pa rty’s Confidential Information in confidence and shall not use the
+Confidential Information except to the extent necessary to carry out is obligations under this Agreement.
+Recipient shall be responsible for any breach of this Agreement by such Representatives.
+11.3. In the event that Recipient is requested or required under compulsion of legal process to disclose such
+Confidential Information, Recipient shall not, unless required by Law, disclose the information until the
+Disclosing Party has first (i) received prompt Notice of such request or requirements to disclose and (ii)
+had an adequate opportunity to obtain a protective order or other reliable assurance that confidential
+treatment shall be accorded to the Confidential Information. If required by Law to disclose Confidential
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:16 of 43
+
+[[PDF_PAGE_0062]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:17 of 43
+
+[[PDF_PAGE_0063]]
+13.4. L
+imitation of Liability for Use of Electricity . Compan y shall not be liable for damages resulting to
+Customer or to third persons from the presence or use of electricity after the point of delivery to
+Customer’s Facility, and Customer shall not be liable for damages resulting to Company or to third
+persons from the presence or use of electricity at or before the point of delivery to Customer’s Facility.
+13.5. Limitation on Liability for Customer Sales Tax Exemption Under Michigan Compiled Law 205.54ee.
+Notwithstanding anything to the contrary in this Agreement, Company shall not be liable to Customer
+for any taxes, penalties, Losses, or damages for ( a) any failure to obtain the sales tax exemption under
+MCL 205.54ee or (b) any failure to maintain the sales tax exemption under MCL 205.54ee. Specifically,
+in the event Company is deemed non- compliant with the requirements under Section 51 of the Clean
+Energy Act during the Term, Customer shall have no cause of action against Company for such non-
+compliance.
+13.6. Notwithstanding anything to the contrary in this Agreement, and in addition to any rights set forth herein,
+Customer shall have the right to file a complaint with, or to otherwise initiate formal or informal
+proceedings before, the Commission related to the Electric Service or any other cause, matter, or issue
+subject to Commission jurisdiction.
+13.7. Consequential Damages. Neither Party shall be liable under this Agreement or under any cause of action
+related to the subject matter of this Agreement, whether in contract, warranty, tort including negligence,
+strict liability, professional liability, product liability, contribution, or any other cause of action for
+special, exemplary, punitive, indirect, incidental or consequential losses or damages, including loss of
+profit, loss of use, loss of opportunity, loss of revenues, or loss of good will; provided, however, that the
+foregoing shall not apply to any Party’s obligations to indemnify, defend and hold harmless any
+indemnified Party for claims and liabilities in respect of claims by third persons that are indemnified by
+such Party hereunder.
+13.8. Disclaimer of Warranty. EXCEPT AS EXPRESSLY SET FORTH IN THIS AGREEMENT, THE RATE
+SCHEDULE OR COMPANY’S RATE BOOK, COMPANY EXPRESSLY DISCLAIMS AND
+NEGATES ALL REPRESENTATIONS AN D WARRANTIES, EXPRESSED OR IMPLI ED, WITH
+RESPECT TO THE ELECTRIC SERVICE OR ANY OTHER SUBJECT MATTER OF THIS
+AGREEMENT INCLUDING WITHOUT LIMITATION, WARRANTIES OF MERCHANTABILITY
+AND FITNESS FOR A PARTICULAR PURPOSE.
+14. Assignment
+14.1. Without the prior written consent of the non- assigning Party (such consent not to be unreasonably
+withheld, delayed or denied), neither Party may assign or transfer this Agreement or its rights and
+obligations under this Agreement, and any such assignment or transfer without such consent is void.
+Notwithstanding the foregoing, except as set forth in Section 14.1.2 below, a Party may make the
+following assignments without the prior written consent of the other Party, but shall provide Notice of
+such assignment:
+14.1.1. Customer may (i) collaterally assign this Agreement to a financing party providing construction or
+long-term financing for the Facility, and (ii) issue or sell equity interests in Customer to a financing
+party pursuant to any equity financing. In no case shall any such rights and terms of such collateral
+assignment materially or adversely affect any of Company ’s commercial rights or obligations
+under this Agreement and Customer shall remain liable for its liabilities and obligations under this
+Agreement
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:18 of 43
+
+[[PDF_PAGE_0064]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:19 of 43
+
+[[PDF_PAGE_0065]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:20 of 43
+
+[[PDF_PAGE_0066]]
+17. R
+elationship Clause.
+17.1. The execut
+ion of this Agreement or any Related Agreements shall not create, nor shall this Agreement or
+any Related Agreements be construed as creating any partnership, joint venture or agency relationship
+between the Parties hereto.
+18. Relief Events
+18.1. Notice and Mitigation.
+18.1.1. In the event of a Force Majeure Event, or Customer Caused Event or Excusable Event (“ Relief
+Event”) impacting Company, the Company shall provide Notice to Customer describing the
+particulars of the occurrence of such Relief Event within ten (10) Business Days after Company
+first gains knowledge of such Relief Event. Such Notice will, to the extent of Company’s
+knowledge thereof at such time, describe (i) the details and factual basis of the cause and nature of
+such Relief Event, (ii) the anticipated length of delay due to such Relief Event, (iii) the estimated
+additional costs (beyond those anticipated before the occurrence of such Relief Event) to be
+incurred by Company as a result of such Relief Event and (iv) any other effect on Company’s
+performance of its obligations hereunder.
+18.1.2. Any delay in performance caused by any Relief Event will be of no greater scope and of no longer
+duration than is reasonably required by such occurrence. The Company will furnish the Customer
+with regular reports with respect thereto during the continuation of any such Relief Event. The
+Company shall use commercially reasonable efforts to mitigate the cause of and effect on the
+Company’s performance hereunder of any such Relief Event and the Company will promptly
+resume full performance of its obligations hereunder once it is able to do so. For the avoidance of
+doubt, such commercially reasonable efforts shall, at a minimum, require compliance with the
+provisions set forth in Section 18.1, as applicable.
+18.1.3. Company shall not be responsible or liable for any damages, or be deemed to be in breach of this
+Agreement because of any failure or delay in complying with its obligations under or pursuant to
+this Agreement, in each case, to the extent that such failure is caused by a Relief Event and the
+Company has otherwise complied with this Section 18.
+18.2. Changes in Law Rendering Performance Illegal. In the event of a Change in Law at any time during the
+Term which renders the performance of this Agreement by either or both Parties illegal or all or a material
+portion of this Agreement unenforceable, this Agreement shall be automatically terminated effective
+upon Notice from a Party to the other Party. If this Agreement is terminated in accordance with this
+Section 18.2, either Party shall have the right, but not the obligation, to terminate the Energy Storage
+Agreement.
+18.3. Cost and Schedule Relief for Customer Caused Event. In the event of a Customer Caused Event, in
+addition to its rights under Section 18.1, Company shall be entitled to (i) an equitable extension of all of
+its obligations pursuant to this Agreement that are actually and demonstrably delayed by such Customer
+Caused Event, and (ii) reimbursement for all costs and expenses actually and demonstrably incurred by
+the Company as a result of such Customer Caused Event.
+18.4. Relief for Excusable Events and Force Majeure Events. In the event of an Excusable Event, or a Force
+Majeure Event that is reasonably expected to result in a delay in Company’s ability to meet its obligations
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:21 of 43
+
+[[PDF_PAGE_0067]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:22 of 43
+
+[[PDF_PAGE_0068]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:23 of 43
+
+[[PDF_PAGE_0069]]
+19.3. A
+ll headings and captions contained in this Agreement are for convenience of reference only and shall
+not, in a
+ny way, affect the meaning of any provision hereof. No provision of this Agreement shall be
+interpreted more or less favorably towards either Party because its counsel drafted all or a portion hereof.
+The recitals set forth in this Agreement are an integral part hereof and shall have the same contractual
+significance as any other language contained in this Agreement. Pdf signatures shall be as legally binding
+and considered in all manner and respects as original signatures. The provisions of this Section 19.3 shall
+survive termination or expiration of this Agreement.
+19.4. The terms and provisions of this Agreement shall not be modified or waived except by the execution by
+the Parties of a written amendment to this Agreement. The waiver by a Party of a breach or violation of
+any provision of this Agreement will not operate a s or be construed to be a waiver of any subsequent
+breach or violation thereof.
+19.5. Each term and condition of this Agreement is deemed to have independent effect and the invalidity of
+any partial or whole paragraph or article shall not invalidate the remaining paragraphs or articles. The
+obligation to perform all of the terms and conditions shall remain in effect regardless of the performance
+of any invalid term by the other Party. Any entity that succeeds by purchase, merger, consolidation or
+other transfer to the properties of Company or Customer either substantially or as an entirety, shall be
+entitled to the rights and will be subject to the obligations of its predecessor in interest under this
+Agreement.
+19.6. This Agreement shall not create any rights in third parties, and no provision of this Agreement will be
+construed as creating any obligations for the benefit of, or rights in favor of, any person or entity other
+than the Parties.
+19.7. This Agreement shall be binding on the Parties hereto and on their respective successors, heirs and
+permitted assigns.
+19.8. This Agreement and the Energy Storage Agreement , together with the Rate Schedule and Company’s
+Rate Book, as may be amended from time to time, reflect the entire agreement among the Parties with
+respect to the subject matter hereof and supersedes all prior agreements and understandings among the
+Parties with respect to the subject matter hereof.
+19.9. This Agreement may be executed electronically, or in multiple counterparts, each of which will be
+deemed an original and all of which will constitute one and the same instrument.
+19.10. Under no circumstances shall Customer transition to any Company Retail Access Service Rider as defined
+in the Company’s Rate Book during the Term of this Agreement.
+[Remainder of Page Blank – Signatures on the Next Page]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:24 of 43
+
+[[PDF_PAGE_0070]]
+IN WITNESS WHEREOF , Company and Customer have each caused this Agreement to be duly executed by
+their authorized representatives identified below, effective as of the Contract Date.
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:25 of 43
+
+[[PDF_PAGE_0071]]
+Schedule 8
+Primary Supply Agreement Letter of Credit Posting Amounts (LC Required Amounts)
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:26 of 43
+
+[[PDF_PAGE_0072]]
+Exhibit A-1 – Customer Committed Capacity Ramp
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:27 of 43
+
+[[PDF_PAGE_0073]]
+Exhibit A-2 – Energization Schedule
+A-2
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:28 of 43
+
+[[PDF_PAGE_0074]]
+Exhibit B
+Form of Parent Guaranty
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:29 of 43
+
+[[PDF_PAGE_0075]]
+Exhibit C
+Applicable Definitions
+Capitalized terms used in the Agreement but not otherwise defined therein shall have the following
+meanings:
+“Affected Party” has the meaning set forth in Section 4.4.2.
+“Affiliate” means with regard to a Party, any person that directly or indirectly: (a) controls that Party; (b)
+is controlled by that Party; or (c) is under common control with that Party; where for each of (a), (b), and
+(c), “control” is defined as possession of the power to direct or cause the direction of the management and
+policies of a legally recognizable entity, through direct or indirect majority ownership or minimum
+percentage ownership that would grant the party a controlling interest in such entity.
+“Agreement” has the meaning set forth in the preamble to this Agreement.
+“Bankruptcy” means that (i) an entity shall voluntarily commence any proceeding or file any petition
+seeking relief under Title 11 of the United States Code, as now constituted or hereafter amended, or any
+other federal, state or foreign bankruptcy, insolvency, recei vership or similar law, (ii) an involuntary
+proceeding shall be commenced or an involuntary petition shall be filed in a court of competent jurisdiction
+seeking (A) relief in respect of an entity, or of a substantial part of its property or asse ts, under Title 11 of
+the United States Code, as now constituted or hereafter amended, or any other Federal, state or foreign
+bankruptcy, insolvency, receivership or similar law, (B) the appointment of a receiver, trustee, custodian,
+sequestrator, conservator or similar official for such entity or for a substantial part of its property or assets
+or (C) the winding-up or liquidation of an entity; and such proceeding or petition shall continue undismissed
+for 60 days or an order or decree approving or ordering any of the foregoing shall be entered; (iii) an entity
+shall consent to the institution of, or fail to contest in a timely and appropriate manner, any proceeding or
+the filing of any petition described in the foregoing clause (ii), (iv) an entity shall a pply for or consent to
+the appointment of a receiver, trustee, custodian, sequestrator, conservator or similar official for itself or
+for a substantial part of its property or assets, (v) an entity shall file an answer admitting the material
+allegations of a petition filed against it in any such proceeding, (vi) an entity shall make a general
+assignment for the benefit of creditors, (vii) an entity shall become unable, admit in writing its inability or
+fail generally to pay its debts as they become due or (viii) an entity shall take any action for the purpose of
+effecting any of the foregoing.
+“Business Days” means any day other than Saturday, Sunday, Federal Reserve Bank holiday, or other
+day that is a holiday observed by Company.
+“Change in Law ” means the adoption, enactment or other effectuation, or any change in the judicial,
+regulatory or administrative application or interpretation, or any amendment, repeal or other modification,
+by any Governmental Authority of any Law that adversely affects either Party’s performance under this
+Agreement (including any executive order or similar directive from the Executive Branch that changes the
+interpretation of any of the foregoing), in each case, after the Contract Date; provided, however, in the case
+of any new Law, order or any other legally binding requirement or directive or change to any existing Law,
+order or other legally binding requirement applicable to either Party’s performance of its obligations under
+this Agreement, in either case that is enacted prior to the Contract Date, but for which the effectiveness
+thereof occurs after the Contract Date, shall not constitute a Change in Law hereunder.
+“Commencement Date” means the date on which the Customer first receives Electric Service at the
+Facility under this Agreement.
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:30 of 43
+
+[[PDF_PAGE_0076]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:31 of 43
+
+[[PDF_PAGE_0077]]
+“Data Center Location” has the meaning set forth in paragraph B of the Recitals to this Agreement.
+“Defaulting Party” has the meaning set forth in Section 7.1.
+“Delivery Charges” means any “Delivery Charges” set forth in the Rate Schedule
+“Demand Charge s” means the sum of all applicable demand charges (per kW) set forth in the Rate
+Schedule.
+“Disclosing Party” has the meaning set forth in Section 11.1.
+“Dispute” has the meaning set forth in Section 15.1.
+“Early Termination Date” has the meaning set forth in Section 7.3.3.
+“Effective Date” has the meaning set forth in Section 4.2.
+“Electric Facilities” has the meaning set forth in in paragraph C of the Recitals to this Agreement.
+“Electric Service” has the meaning set forth in in paragraph C of the Recitals to this Agreement.
+“Energy Charges” means (a) the applicable “Energy Charge” (per kWh) set forth in the Rate Schedule
+multiplied by (b) Customer’s on-peak and off-peak electric usage, as applicable (in kWh), for such billing
+period.
+“Energy Storage Agreement” means that certain Energy Storage Agreement for standalone energy storage
+between the Parties of even date hereof.
+“ESPA Negotiation Period” has the meaning set forth in Section 2.4.2.
+“Event of Default” has the meaning set forth in Section 7.1.
+“Excusable Event” has the meaning set forth in Section 2.3.
+“Facility” has the meaning set forth in in paragraph B of the Recitals to this Agreement.
+“FERC” means the Federal Energy Regulatory Commission or its successor.
+“Financing Party” means any lender providing debt or equity financing to Company in connection with
+its use of the Facilities.
+“Force Majeure Event ” means any event or circumstance, or combination of events or circumstances,
+arising after the Contract Date that wholly or partly prevents or delays a Party from performing any
+obligation under this Agreement, but only if and to the extent:
+(a) such event or circumstance, or combination of events or circumstances, is not within the
+reasonable control of the Party, as applicable;
+(b) The Party has used reasonably diligent efforts in taking precautions and measures to (i)
+avoid the effect of such event or circumstance, or combination of events or circumstances,
+on the Party and (ii) mitigate the consequences thereof;
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:32 of 43
+
+[[PDF_PAGE_0078]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:33 of 43
+
+[[PDF_PAGE_0079]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:34 of 43
+
+[[PDF_PAGE_0080]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:35 of 43
+
+[[PDF_PAGE_0081]]
+“Sanctioned Country” means, at any time, a country or territory that is itself the target of comprehensive
+Sanctions (as of the date of this Agreement, Cuba, Iran, North Korea, the Crimea region of Ukraine, the so-
+called Donetsk People’s Republic, and the so-called Luhansk People’s Republic).
+“Sanctioned Person ” means (a) any person listed in any sanctions- related list of designated p ersons
+maintained by the Office of Foreign Assets Control of the U.S. Department of the Treasury (“OFAC”) or
+the U.S. Department of State, the United Nations Security Council, the European Union, any Member State
+of the European Union, or the United Kingdo m; (b) any person operating, organized, or resident in a
+Sanctioned Country; (c) the government of a Sanctioned Country or the Government of Venezuela; or (d)
+any person 50% or more owned or, where relevant under applicable Sanctions, controlled by any such
+person or persons or acting for or on behalf of such person or persons.
+“Sanctions” means economic or financial sanctions or trade embargoes imposed, administered or enforced
+from time to time by (a) the U.S. government, including those administered by OFAC or the U.S.
+Department of State, or (b) the United Nations Security Council, the European Union, any European Union
+Member State or the United Kingdom.
+“Schedule D11” means Primary Supply Rate Schedule No. D11, as published in the Company’s Rate Book
+and approved by the Commission as of the Contract Date, which is subject to change from time to time by
+order issued by the Commission.
+“Shortfall Capacity” has the meaning set forth in Section 5.4.
+“Shortfall Capacity Rate” means the auction clearing price, as established in the MISO Planning Resource
+Auction, for “Local Resource Zone 7” for the applicable billing period.
+“Standard & Poor’s” or “S&P” means S&P Global Ratings or its successor.
+“SUT Taxes” has the meaning set forth in Section 6.4.1.
+“Term” has the meaning set forth in Section 3.2.
+“Termination Payment” has the meaning set forth in Section 7.4.3.
+“Total Customer Credit Support Amount” means the Customer Credit Support in the forms and amounts
+required pursuant to Section 8 and Schedule 8.
+“Transmission Owner” means ITC Holdings Corporation and its Affiliates.
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:36 of 43
+
+[[PDF_PAGE_0082]]
+Exhibit D
+Sample Invoices
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:37 of 43
+
+[[PDF_PAGE_0083]]
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:38 of 43
+
+[[PDF_PAGE_0084]]
+May-29 1,383 19,030,455 1,941,106,410
+Jun-29 1,383 19,030,455 1,922,075,955
+Jul-29 1,383 19,030,455 1,903,045,500
+Aug-29 1,383 19,030,455 1,884,015,045
+Sep-29 1,383 19,030,455 1,864,984,590
+Oct-29 1,383 19,030,455 1,845,954,135
+Nov-29 1,383 19,030,455 1,826,923,680
+Dec-29 1,383 19,030,455 1,807,893,225
+Jan-30 1,383 19,030,455 1,788,862,770
+Feb-30 1,383 19,030,455 1,769,832,315
+Mar-30 1,383 19,030,455 1,750,801,860
+Apr-30 1,383 19,030,455 1,731,771,405
+May-30 1,383 19,030,455 1,712,740,950
+Jun-30 1,383 19,030,455 1,693,710,495
+Jul-30 1,383 19,030,455 1,674,680,040
+Aug-30 1,383 19,030,455 1,655,649,585
+Sep-30 1,383 19,030,455 1,636,619,130
+Oct-30 1,383 19,030,455 1,617,588,675
+Nov-30 1,383 19,030,455 1,598,558,220
+Dec-30 1,383 19,030,455 1,579,527,765
+Jan-31 1,383 19,030,455 1,560,497,310
+Feb-31 1,383 19,030,455 1,541,466,855
+Mar-31 1,383 19,030,455 1,522,436,400
+Apr-31 1,383 19,030,455 1,503,405,945
+May-31 1,383 19,030,455 1,484,375,490
+Jun-31 1,383 19,030,455 1,465,345,035
+Jul-31 1,383 19,030,455 1,446,314,580
+Aug-31 1,383 19,030,455 1,427,284,125
+Sep-31 1,383 19,030,455 1,408,253,670
+Oct-31 1,383 19,030,455 1,389,223,215
+Nov-31 1,383 19,030,455 1,370,192,760
+Dec-31 1,383 19,030,455 1,351,162,305
+Jan-32 1,383 19,030,455 1,332,131,850
+Feb-32 1,383 19,030,455 1,313,101,395
+Mar-32 1,383 19,030,455 1,294,070,940
+Apr-32 1,383 19,030,455 1,275,040,485
+May-32 1,383 19,030,455 1,256,010,030
+Jun-32 1,383 19,030,455 1,236,979,575
+Jul-32 1,383 19,030,455 1,217,949,120
+Aug-32 1,383 19,030,455 1,198,918,665
+Sep-32 1,383 19,030,455 1,179,888,210
+Oct-32 1,383 19,030,455 1,160,857,755
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:39 of 43
+
+[[PDF_PAGE_0085]]
+Nov-32 1,383 19,030,455 1,141,827,300
+Dec-32 1,383 19,030,455 1,122,796,845
+Jan-33 1,383 19,030,455 1,103,766,390
+Feb-33 1,383 19,030,455 1,084,735,935
+Mar-33 1,383 19,030,455 1,065,705,480
+Apr-33 1,383 19,030,455 1,046,675,025
+May-33 1,383 19,030,455 1,027,644,570
+Jun-33 1,383 19,030,455 1,008,614,115
+Jul-33 1,383 19,030,455 989,583,660
+Aug-33 1,383 19,030,455 970,553,205
+Sep-33 1,383 19,030,455 951,522,750
+Oct-33 1,383 19,030,455 932,492,295
+Nov-33 1,383 19,030,455 913,461,840
+Dec-33 1,383 19,030,455 894,431,385
+Jan-34 1,383 19,030,455 875,400,930
+Feb-34 1,383 19,030,455 856,370,475
+Mar-34 1,383 19,030,455 837,340,020
+Apr-34 1,383 19,030,455 818,309,565
+May-34 1,383 19,030,455 799,279,110
+Jun-34 1,383 19,030,455 780,248,655
+Jul-34 1,383 19,030,455 761,218,200
+Aug-34 1,383 19,030,455 742,187,745
+Sep-34 1,383 19,030,455 723,157,290
+Oct-34 1,383 19,030,455 704,126,835
+Nov-34 1,383 19,030,455 685,096,380
+Dec-34 1,383 19,030,455 666,065,925
+Jan-35 1,383 19,030,455 647,035,470
+Feb-35 1,383 19,030,455 628,005,015
+Mar-35 1,383 19,030,455 608,974,560
+Apr-35 1,383 19,030,455 589,944,105
+May-35 1,383 19,030,455 570,913,650
+Jun-35 1,383 19,030,455 551,883,195
+Jul-35 1,383 19,030,455 532,852,740
+Aug-35 1,383 19,030,455 513,822,285
+Sep-35 1,383 19,030,455 494,791,830
+Oct-35 1,383 19,030,455 475,761,375
+Nov-35 1,383 19,030,455 456,730,920
+Dec-35 1,383 19,030,455 456,730,920 <-- 8 Years Post Full
+Ramp Achieved
+(December 1, 2035); 24-
+month MMC
+Termination fee in effect
+Jan-36 1,383 19,030,455 456,730,920
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:40 of 43
+
+[[PDF_PAGE_0086]]
+Feb-36 1,383 19,030,455 456,730,920
+Mar-36 1,383 19,030,455 456,730,920
+Apr-36 1,383 19,030,455 456,730,920
+May-36 1,383 19,030,455 456,730,920
+Jun-36 1,383 19,030,455 456,730,920
+Jul-36 1,383 19,030,455 456,730,920
+Aug-36 1,383 19,030,455 456,730,920
+Sep-36 1,383 19,030,455 456,730,920
+Oct-36 1,383 19,030,455 456,730,920
+Nov-36 1,383 19,030,455 456,730,920
+Dec-36 1,383 19,030,455 456,730,920
+Jan-37 1,383 19,030,455 456,730,920
+Feb-37 1,383 19,030,455 456,730,920
+Mar-37 1,383 19,030,455 456,730,920
+Apr-37 1,383 19,030,455 456,730,920
+May-37 1,383 19,030,455 456,730,920
+Jun-37 1,383 19,030,455 456,730,920
+Jul-37 1,383 19,030,455 456,730,920
+Aug-37 1,383 19,030,455 456,730,920
+Sep-37 1,383 19,030,455 456,730,920
+Oct-37 1,383 19,030,455 456,730,920
+Nov-37 1,383 19,030,455 456,730,920
+Dec-37 1,383 19,030,455 456,730,920 <-- End of 10-year post
+ramp period (Dec 1,
+2037)
+Jan-38 1,383 19,030,455 456,730,920
+Feb-38 1,383 19,030,455 456,730,920
+Mar-38 1,383 19,030,455 456,730,920
+Apr-38 1,383 19,030,455 456,730,920
+May-38 1,383 19,030,455 456,730,920
+Jun-38 1,383 19,030,455 456,730,920
+Jul-38 1,383 19,030,455 456,730,920
+Aug-38 1,383 19,030,455 456,730,920
+Sep-38 1,383 19,030,455 456,730,920
+Oct-38 1,383 19,030,455 456,730,920
+Nov-38 1,383 19,030,455 456,730,920
+Dec-38 1,383 19,030,455 456,730,920
+Jan-39 1,383 19,030,455 456,730,920
+Feb-39 1,383 19,030,455 456,730,920
+Mar-39 1,383 19,030,455 456,730,920
+Apr-39 1,383 19,030,455 456,730,920
+May-39 1,383 19,030,455 456,730,920
+Jun-39 1,383 19,030,455 456,730,920
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:41 of 43
+
+[[PDF_PAGE_0087]]
+Jul-39 1,383 19,030,455 456,730,920
+Aug-39 1,383 19,030,455 456,730,920
+Sep-39 1,383 19,030,455 456,730,920
+Oct-39 1,383 19,030,455 456,730,920
+Nov-39 1,383 19,030,455 456,730,920
+Dec-39 1,383 19,030,455 456,730,920
+Jan-40 1,383 19,030,455 456,730,920
+Feb-40 1,383 19,030,455 456,730,920
+Mar-40 1,383 19,030,455 456,730,920
+Apr-40 1,383 19,030,455 456,730,920
+May-40 1,383 19,030,455 456,730,920
+Jun-40 1,383 19,030,455 456,730,920
+Jul-40 1,383 19,030,455 456,730,920
+Aug-40 1,383 19,030,455 456,730,920
+Sep-40 1,383 19,030,455 456,730,920
+Oct-40 1,383 19,030,455 456,730,920
+Nov-40 1,383 19,030,455 456,730,920
+Dec-40 1,383 19,030,455 456,730,920
+Jan-41 1,383 19,030,455 456,730,920
+Feb-41 1,383 19,030,455 456,730,920
+Mar-41 1,383 19,030,455 456,730,920
+Apr-41 1,383 19,030,455 456,730,920
+May-41 1,383 19,030,455 456,730,920
+Jun-41 1,383 19,030,455 456,730,920
+Jul-41 1,383 19,030,455 456,730,920
+Aug-41 1,383 19,030,455 456,730,920
+Sep-41 1,383 19,030,455 456,730,920
+Oct-41 1,383 19,030,455 456,730,920
+Nov-41 1,383 19,030,455 456,730,920
+Dec-41 1,383 19,030,455 456,730,920
+Jan-42 1,383 19,030,455 456,730,920
+Feb-42 1,383 19,030,455 456,730,920
+Mar-42 1,383 19,030,455 456,730,920
+Apr-42 1,383 19,030,455 456,730,920
+May-42 1,383 19,030,455 456,730,920
+Jun-42 1,383 19,030,455 456,730,920
+Jul-42 1,383 19,030,455 456,730,920
+Aug-42 1,383 19,030,455 456,730,920
+Sep-42 1,383 19,030,455 456,730,920
+Oct-42 1,383 19,030,455 456,730,920
+Nov-42 1,383 19,030,455 456,730,920
+Dec-42 1,383 19,030,455 456,730,920
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:42 of 43
+
+[[PDF_PAGE_0088]]
+Jan-43 1,383 19,030,455 456,730,920
+Feb-43 1,383 19,030,455 456,730,920
+Mar-43 1,383 19,030,455 437,700,465
+Apr-43 1,383 19,030,455 418,670,010
+May-43 1,383 19,030,455 399,639,555
+Jun-43 1,383 19,030,455 380,609,100
+Jul-43 1,383 19,030,455 361,578,645
+Aug-43 1,383 19,030,455 342,548,190
+Sep-43 1,383 19,030,455 323,517,735
+Oct-43 1,383 19,030,455 304,487,280
+Nov-43 1,383 19,030,455 285,456,825
+Dec-43 1,383 19,030,455 266,426,370
+Jan-44 1,383 19,030,455 247,395,915
+Feb-44 1,383 19,030,455 228,365,460
+Mar-44 1,383 19,030,455 209,335,005
+Apr-44 1,383 19,030,455 190,304,550
+May-44 1,383 19,030,455 171,274,095
+Jun-44 1,383 19,030,455 152,243,640
+Jul-44 1,383 19,030,455 133,213,185
+Aug-44 1,383 19,030,455 114,182,730
+Sep-44 1,383 19,030,455 95,152,275
+Oct-44 1,383 19,030,455 76,121,820
+Nov-44 1,383 19,030,455 57,091,365
+Dec-44 1,383 19,030,455 38,060,910
+Jan-45 1,383 19,030,455 19,030,455
+Feb-45 1,383 19,030,455 0
+Michigan Public Service Commission
+DTE Electric Company
+Primary Supply Agreement
+Case No.: U-21990
+Exhibit: A-1
+Witness: N. T. Foley
+Page:43 of 43
+
+[[PDF_PAGE_0089]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:1 of 35
+
+[[PDF_PAGE_0090]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:2 of 35
+
+[[PDF_PAGE_0091]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:3 of 35
+
+[[PDF_PAGE_0092]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:4 of 35
+
+[[PDF_PAGE_0093]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:5 of 35
+
+[[PDF_PAGE_0094]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:6 of 35
+
+[[PDF_PAGE_0095]]
+Relief Event or Customer Caused Event on a Project specific basis within ten (10) Business Days
+after Company first gains knowledge of such Relief Event or Customer Caused Event. Such notice
+will, to the extent of Company’s knowledge thereof at such time, describe (i) the details and factual
+basis of the cause and nature of such Relief Event or Customer Caused Event, (ii) the anticipated
+length of delay due to such Relief Event or Customer Caused Event, (iii) the estimated additional
+costs, if any, (beyond those anticipated before the occurrence of such Relief Event or Customer
+Caused Event) to be incurred by Company as a result of such Relief Event or Customer Caused
+Event and (iv) any other effect on Company’s performance of its obligations hereunder.
+4.6.2. Mitigation. Any delay in performance caused by any Relief Event or Customer Caused Event will
+be of no greater scope and of no longer duration than is reasonably required by such occurrence.
+Company will furnish the Customer with regular reports with respect thereto during the
+continuation of any such Relief Event or Customer Caused Event. Company shall use commercially
+reasonable efforts to mitigate the cause of and effect on its performance hereunder of any such
+Relief Event or Customer Caused Event and Company will promptly resume full performance of
+its obligations hereunder once it is able to do so. For the avoidance of doubt, such commercially
+reasonable efforts shall, at a minimum, require compliance with the provisions set forth in this
+Section 4.6, as applicable.
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:7 of 35
+
+[[PDF_PAGE_0096]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:8 of 35
+
+[[PDF_PAGE_0097]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:9 of 35
+
+[[PDF_PAGE_0098]]
+and except as otherwise stated in Company’s Rate Book, this Agreement (as part of the Project
+Portfolio Revenue Requirement) and/or the PSA, Customer shall not be responsible to pay any
+taxes imposed on, or with respect to, Company’s income, revenues, margin, gross receipts,
+personnel, or real or personal property, or other assets.
+5.4.2. Customer shall control the handling and resolution of any proposed assessment or other dispute
+with any governmental authority related to the taxability of the transactions contained herein.
+5.5. [Reserved.]
+5.6. Representations and Warranties for Michigan Sales Tax Exemption.
+5.6.1. Company represents and warrants that as of the Contract Date the Company is subject to and
+operating under the regulatory framework set forth in Section 51 of the Clean and Renewable
+Energy and Energy Waste Reduction Act, of 2008 PA 295 MCL 460.1051 (the “ Clean Energy
+Act”).
+5.6.2. Company represents and warrants that the Facility is not receiving Electric Service under any of
+the following rates:
+5.6.2.1. The long-term industrial load rate established under S ection 10gg of 1939 PA 3 (MCL
+460.10gg) unless the designated power supply resource on which the long-term industrial
+load rate is based was placed in operation after January 1, 2024 and the rate is at least
+equivalent to the average industrial rate charged to other industrial customers of the electric
+utility that serves the facility;
+5.6.2.2. A tariff rate approved in Michigan Public Service Commission Case No. U- 21160, U -
+22163, or U-21646; or
+5.6.2.3. A rate that causes residential customers to subsidize the costs incurred to provide electric
+service to the facility.
+6. Customer Default
+6.1. Customer shall be in default under this Agreement upon the occurrence of any of the following events
+(each, an “Customer Event of Default”):
+6.1.1. fails to pay when due any undisputed amount required to be paid under this Agreement only if that
+undisputed amount is not cured within twenty (20) calendar days after receipt of Notices thereof
+from the other Party;
+6.1.2. breaches any material term of this Agreement (not otherwise a payment default) that, if curable, is
+not cured within thirty (30) calendar days after receipt of N otice thereof from Company (or for
+breaches for which Customer has notified Company cannot be cured within thirty (30) calendar
+days despite its use of reasonable efforts but can be cured within sixty (60) calendar days, and such
+default has not been so cured by the extended sixty (60) calendar day deadline);
+6.1.3. the occurrence of a Bankruptcy; or
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:10 of 35
+
+[[PDF_PAGE_0099]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:11 of 35
+
+[[PDF_PAGE_0100]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:12 of 35
+
+[[PDF_PAGE_0101]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:13 of 35
+
+[[PDF_PAGE_0102]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:14 of 35
+
+[[PDF_PAGE_0103]]
+10. Confidentiality
+10.1. For the purpose of this Agreement, a party disclosing Confidential Information shall be referred to as the
+“Disclosing Party” and a party receiving Confidential Information shall be referred to as the “Recipient”.
+“Confidential Information” includes any and all information hereafter disclosed by or at the direction of
+the Disclosing Party to Recipient that is designated in writing as confidential or, subject to Section 10.5, a
+reasonable party would consider to be of a confidential nature including but not limited to this Agreement
+and the PSA; provided, however, Confidential Information does not include (i) information that, at the time
+of disclosure or thereafter, was generally available to and known by the public, other than as a result of a
+disclosure by Recipient in violation of this Section 13; (ii) information that, at the time of disclosure or
+thereafter was available to Recipient or its Representatives (as defined below) from a source not known by
+Recipient to be bound by a duty of confidentiality to the Disclosing Party with respect to such information;
+(iii) information that, prior to disclosure by or at the direction of the Disclosing Party, was known to
+Recipient or its Representatives; or (iv) information that is independently developed by Recipient or its
+Representatives by persons without reliance on the Confidential Information and without violating the
+obligations hereunder.
+10.2. Confidential Information is and shall, at all times, remain the property of the Disclosing Party. Recipient
+may disclose Confidential Information to any of its officers, directors, employees, advisors, shareholders,
+members, managers, attorneys or agents (collectively, “Representatives”). The Recipient shall advise such
+persons of the existence of this Agreement, of the confidential nature of the information and of the
+Recipient’s obligations regarding the same under this Agreement. Receiving Party agrees that it shall
+maintain the Disclosing Party’s Confidential Information in confidence and shall not use the Confidential
+Information except as required or necessary in accordance with this Agreement. Recipient agrees that it
+shall maintain the Disclosing Pa rty’s Confidential Information in confidence and shall not use the
+Confidential Information except to the extent necessary to carry out is obligations under this Agreement.
+Recipient shall be responsible for any breach of this Agreement by such Representatives.
+10.3. In the event that Recipient is requested or required under compulsion of legal process to disclose such
+Confidential Information, Recipient shall not, unless required by L aw, disclose the information until the
+Disclosing Party has first (i) received prompt Notice of such request or requirements to disclose and (ii)
+had an adequate opportunity to obtain a protective order or other reliable assurance that confidential
+treatment shall be accorded to the Confidential Information.
+10.4. To the extent Confidential Information, including this Agreement, must be filed with the Commission or
+other applicable regulatory governmental agency, Company shall notify Customer in advance of such
+disclosures (or if advance notification is not practica ble, as promptly as reasonably practicable after such
+disclosure), and, before a filing is required to be made, collaborate with Customer to identify redactions
+that will, to the greatest extent possible under the circumstances, limit the amount of Confide ntial
+Information that is publicly disclosed.
+10.5. Any Confidential Information disclosed in writing or electronically by a Party under this Agreement shall
+be clearly marked, labeled, or otherwise identified as “Confidential” at the time of disclosure. If
+Confidential Information is initially disclosed or ally or visually, the disclosing Party shall, within thirty
+(30) calendar days of such disclosure, provide the receiving Party with a written summary of the information
+that is designated as “Confidential.”
+11. Limitation of Liability
+11.1. Limitation of Liability for Delays. To the fullest extent permitted by Law, Company shall not be liable for
+any damages, penalties, liquidated damages, or claims arising from delays, disruptions or failures to
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:15 of 35
+
+[[PDF_PAGE_0104]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:16 of 35
+
+[[PDF_PAGE_0105]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:17 of 35
+
+[[PDF_PAGE_0106]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:18 of 35
+
+[[PDF_PAGE_0107]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:19 of 35
+
+[[PDF_PAGE_0108]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:20 of 35
+
+[[PDF_PAGE_0109]]
+15.9. All headings and captions contained in this Agreement are for convenience of reference only and shall not,
+in any way, affect the meaning of any provision hereof. No provision of this Agreement shall be interpreted
+more or less favorably towards either Party because its counsel drafted all or a portion hereof. The recitals
+set forth in this Agreement are an integral part hereof and shall have the same contractual significance as
+any other language contained in this Agreement. Facsimile and pdf signatures shall be as legally binding
+and considered in all manner and respects as original signatures. Unless otherwise defined herein, any
+capitalized terms in this Agreement shall have the meaning set forth in the Company’s Rate Book or the
+PSA, as the context may require.
+15.10. This Agreement may be executed electronically, or in multiple counterparts, each of which will be deemed
+an original and all of which will constitute one and the same instrument.
+[Remainder of Page Blank – Signatures on the Next Page]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:21 of 35
+
+[[PDF_PAGE_0110]]
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:22 of 35
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+
+[[PDF_PAGE_0111]]
+Schedule 8
+Energy Storage Agreement Letter of Credit Posting Amounts (LC Required Amounts)
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:23 of 35
+
+[[PDF_PAGE_0112]]
+Exhibit A - Form of Project Portfolio Matrix
+Project Detail (one for each project in Project Portfolio):
+Project:
+Installed Storage Capacity (MW):
+Expected Commercial Operation Date:
+Annual Project Revenue Requirement:
+Year
+(a)
+Number of Billing
+Periods
+(b)
+Annual Project Revenue
+Requirement ($)
+(c) = (b)/(a)
+Project Billing Period
+Charge ($)
+Project Portfolio Revenue Requirement
+Total Portfolio Installed Storage Capacity (MW):
+Project Portfolio Revenue Requirement:
+Year
+(a)
+Project Portfolio Revenue
+Requirement ($)
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:24 of 35
+
+[[PDF_PAGE_0113]]
+Exhibit B
+GUARANTY
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:25 of 35
+
+[[PDF_PAGE_0114]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:26 of 35
+
+[[PDF_PAGE_0115]]
+“Capacity Revenue” means all actual, incremental net revenue to be collected by Company or its affiliates
+from MISO as a result of the participation of each Project in the Project Portfolio in the MISO Planning
+Resource Auction. Company shall cause each Project in the Project Portfolio to participate in the MISO
+Planning Resource Auction as a “ Self-Scheduled Resource.” For the avoidance of doubt, for any Project
+that is co-located with an existing generation asset, Capacity Revenue shall be estimated by Company to
+equal the incremental net revenue collected by Company in excess of the revenue Company would have
+otherwise collected from the existing generation asset’s Capacity Revenue (if such existing generation asset
+was not co-located with the applicable Project).
+“Change in Law ” means the adoption, enactment or other effectuation, or any change in the judicial,
+regulatory or administrative application or interpretation, or any amendment, repeal or other modification,
+by any Governmental Authority of any Law that adversely affects either Party’s (or any Project Party’s)
+performance under this Agreement or any Project Party’s performance under any Project Agreement
+(including any Executive Order or similar directive from the Executive Branch that changes the
+interpretation of any of the foregoing), in each case, after the Contract Date; provided, however, in the case
+of any new Law, order or any other legally binding requirement or directive or change to any existing Law,
+order or other legally binding requirement applicable to either Party’s performance of its obligations under
+this Agreement or to a Project Party’s performance of its obligations under a Project Agreement, in either
+case that is enacted prior to the Contract Date, but for which the effectiveness thereof occurs after t he
+Contract Date, shall not constitute a Change in Law hereunder.
+“Charging Energy” means, for each Project in the Project Portfolio, the Energy received at such Project’s
+point of interconnection with the MISO system and used to charge such Project for resale into the MISO
+market.
+“Commencement Date” has the meaning set forth in Section 4.1 of this Agreement.
+“Commercial Operation Date” means, with respect to any Project, the date by which such Project achieves
+regular operation as an integrated whole, including the storage of Charging Energy and delivery of the full
+electrical energy output of the Project to and from the Project’s point of interconnection with the MISO
+system, consistent with Prudent Industry Practices and in accordance with the other applicable terms and
+conditions of this Agreement.
+“Commission” has the meaning set forth in Section 3.1.1 of this Agreement.
+“Commission Approval Date” has the meaning set forth in Section 3.4.3 of this Agreement.
+“Company” means DTE Electric Company, a Michigan corporation.
+“Company Event of Default” has the meaning set forth in Section 7.1 of this Agreement.
+“Company’s Rate Book” means Company’s Rate Book for Electric Service. Company’s Rate Book as of
+the Contract Date can be found at https://www.michigan.gov/mpsc/-
+/media/Project/Websites/mpsc/consumer/rate-
+books/electric/dte/dtee1cur.pdf?rev=cf55d05b027a43fc9d4f762672e9aa9e&hash=D28CE34BD%20%200
+7DCDD7279069015BB8121A and may be updated, revised and/or modified as approved or agreed to by
+the Commission.
+“Conditions Precedent” has the meaning set forth in Section 3.1 of this Agreement.
+“Confidential Information” has the meaning set forth in Section 10.1 of this Agreement.
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:27 of 35
+
+[[PDF_PAGE_0116]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:28 of 35
+
+[[PDF_PAGE_0117]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:29 of 35
+
+[[PDF_PAGE_0118]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:30 of 35
+
+[[PDF_PAGE_0119]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:31 of 35
+
+[[PDF_PAGE_0120]]
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:32 of 35
+
+[[PDF_PAGE_0121]]
+“Renewal Term” has the meaning set forth in Section 2.2 of this Agreement.
+“Representatives” has the meaning set forth in Section 10.2 of this Agreement.
+“Sanctioned Country” means, at any time, a country or territory that is itself the target of comprehensive
+Sanctions (as of the date of this Agreement, Cuba, Iran, North Korea, the Crimea region of Ukraine, the so-
+called Donetsk People’s Republic, and the so-called Luhansk People’s Republic).
+“Sanctioned Person ” means (a) any person listed in any sanctions -related list of designated persons
+maintained by the Office of Foreign Assets Control of the U.S. Department of the Treasury (“OFAC”) or
+the U.S. Department of State, the United Nations Security Council, the European Union, any Member State
+of the European Union, or the United Kingdom; (b) any person operating, organized, or resident in a
+Sanctioned Country; (c) the government of a Sanctioned Country or the Government of Venezuela; or (d)
+any person 50% or more owned or, where relevant under applicable Sanctions, controlled by any such
+person or persons or acting for or on behalf of such person or persons.
+“Sanctions” means economic or financial sanctions or trade embargoes imposed, administered or enforced
+from time to time by (a) the U.S. government, including those administered by OFAC or the U.S.
+Department of State, or (b) the United Nations Security Council, the European Union, any European Union
+Member State or the United Kingdom.
+“Self-Scheduled Resource” has the meaning ascribed to that term in the MISO Tariff.
+“Settlement Amount” means for each billing cycle , equals (i) the Subscription Charge, minus (ii) the
+Market Price Payment.
+“Standard & Poor’s” or “S&P” means S&P Global Ratings or its successor.
+“Subscription Charge” means, for each billing cycle, the sum of the applicable “Project Billing Period
+Charge”, as set forth in Exhibit A for each Project in the Project Portfolio..
+“SUT Taxes” has the meaning set forth in Section 5.4.1 of this Agreement.
+“Term” has the meaning set forth in Section 2.2.1 of this Agreement.
+“Termination Payment” has the meaning set forth in Section 6.3.1 of this Agreement.
+“Total Customer Credit Support Amount” means the Customer Credit Support in the forms and amounts
+required pursuant to Section 8 and Schedule 8.
+“Transmission Owner” mea ns ITC Holdings Corporation and its Affiliates.
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:33 of 35
+
+[[PDF_PAGE_0122]]
+Exhibit D
+Sample Invoices
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:34 of 35
+
+[[PDF_PAGE_0123]]
+Exhibit E
+Sample Termination Payment Calculation
+Michigan Public Service Commission
+DTE Electric Company
+Energy Storage Agreement
+Case No.: U-21990
+Exhibit: A-2
+Witness: N. T. Foley
+Page:35 of 35
+
+[[PDF_PAGE_0124]]
+STATE OF MICHIGAN
+BEFORE THE MICHIGAN PUBLIC SERVICE COMMISSION
+In the matter of the Application of )
+DTE ELECTRIC COMPANY ) Case No. U-21990
+for Approval of Special Contracts )
+QUALIFICATIONS
+AND
+DIRECT TESTIMONY
+OF
+KEVIN L. BILYEU
+
+[[PDF_PAGE_0125]]
+DTE ELECTRIC COMPANY
+QUALIFICATIONS AND DIRECT TESTIMONY OF KEVIN L. BILYEU
+Line
+No.
+KLB-1
+Q1. What is your name, business address and by whom are you employed?1
+A1. My name i s Kevin L. Bilyeu (he/him/his). My business address is One Energy 2
+Plaza, Detroit, Michigan 48226. I am employed by DTE Electric Company (“DTE 3
+Electric” or “Company”). 4
+5
+Q2. On whose behalf are you testifying? 6
+A2. I am testifying on behalf of DTE Electric. 7
+8
+Q3. What is your educational background? 9
+A3. I graduated from Walsh College in 2008 with a Bachelor of Business 10
+Administration. In 2012, I received a Master of Business Administration degree 11
+from the University of Michigan. 12
+13
+Q4. What is your work experience? 14
+A4. Starting in 2006, I began my professional career with SEMCO Energy Gas 15
+Company, progressing through a range of roles with increasing responsibility. In 16
+2008, I took on the position of Billing Analyst, utilizing my expertise in the subject 17
+matter to aid stakeholders, conducting reviews, managing projects, and devising 18
+process enhancements. After that, I became Supervisor of Customer Accounting in 19
+2011, leading tasks such as customer billing, remittance processing, inactive 20
+collections, bad debt management, and financial reporting for the Customer 21
+Accounting Department. Then, in 2013, I assumed the position of Manager, 22
+Customer Energy Management, where I oversaw the administration, monitoring, 23
+and development of Energy Waste Reduction ( “EWR”) Programs, testified and 24
+supported EWR plan and reconciliation cases at the Michigan Public Service 25
+
+[[PDF_PAGE_0126]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-2
+Commission ( “MPSC” or “Commission” ), and managed the home protection 1
+warranty program. 2
+3
+In 2015, I transitioned to DTE Electric, taking on the role of Principal Marketing 4
+Analyst of EWR Pilot Programs, where my responsibilities encompassed the 5
+development and management of new EWR programs. In 2016, I accepted the 6
+position of Principal Marketing Specialist of EWR Strategy, where my tasks 7
+included modeling energy efficiency in Integrated Resource Plans (“IRP”) for long-8
+term strategy planning and developing sensitivities and recommendations to support 9
+EWR plan filings with the MPSC. 10
+11
+In 2018, I advanced to the position of Principal Supervisor of EWR Strategy, where 12
+I had overall responsibility for strategic development and planning of EWR 13
+programs, including IRPs and EWR regulatory filings. Subsequently, in 2021, I 14
+assumed the role of Manager for EWR Strategy and Evaluation Measurement & 15
+Verification. As Manager, I had overall responsibility for strategic development and 16
+planning of EWR programs, which included IRPs and EWR regulatory filings. 17
+Additionally, I was responsible for ensuring program cost-effectiveness, evaluating 18
+EWR programs, and applying the results to further enhance DTE Electric and DTE 19
+Gas's offerings. I accepted a position as Manager for Renewable Energy Strategy 20
+and Special Projects in 2023, where I support ed activities related to maintaining 21
+Renewable Portfolio Standard (“RPS”) compliance, planning and executing special 22
+projects for renewable energy, and filing applications with the MPSC. I was 23
+promoted to my current position in 2025. 24
+
+[[PDF_PAGE_0127]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-3
+Q5. What is your current position with the Company? 1
+A5. My title is Director, Renewable Energy Planning and Strategy. 2
+Q6. What are your duties and responsibilities in your current position? 3
+A6. I continue to lead activities related to maintaining RPS compliance, planning and 4
+executing special projects for renewable energy, and filing applications with the 5
+MPSC, as I did in my previous role. In addition, I support activities related to land 6
+acquisition, capital planning, and financial modeling for DTE Electric’s renewable 7
+energy portfolio. 8
+9
+Q7. Have you previously sponsored testimony before the MPSC? 10
+A7. Yes. I have sponsored testimony in the following cases: 11
+U-17362 SEMCO Energy Gas Company EO Plan Filing 12
+U-18091 DTE Electric 2024 PURPA Filing 13
+U-18419 DTE Electric Certificate of Necessity 14
+U-20471 2019 DTE Electric Integrated Resource Plan 15
+U-20876 2021-2022 DTE Electric EWR Plan 16
+U-20881 2021-2022 DTE Gas EWR Plan 17
+U-21193 2022 DTE Electric Integrated Resource Plan 18
+U-21313 2022 DTE Electric and DTE Gas EWR Reconciliation 19
+U-21353 2022 DTE Electric Renewable Energy Cost Reconciliation 20
+U-21496 2023 DTE Electric Renewable Energy Plan Accounting Application 21
+U-21550 2023 DTE Electric Renewable Energy Cost Reconciliation 22
+U-21662 2024 DTE Electric Amended Renewable Energy Plan 23
+
+[[PDF_PAGE_0128]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-4
+Purpose of Testimony 1
+Q8. What is the purpose of your testimony?2
+A8. The purpose of my direct testimony is to: 3
+1) Provide an overview of the RPS framework and compliance requirements; 4
+2) Explain how Renewable Energy Credits ( “RECs”) are calculated to meet DTE 5
+Electric’s RPS target; 6
+3) Detail the impact of the Customer’s load on DTE Electric’s RPS requirements; 7
+4) Provide a comparison of the increased REC demand to the Company’s Amended 8
+Renewable Energy Plan (“REP”); 9
+5) Discuss the Company’s strategy to meet increased RPS targets; and 10
+6) Summarize the Company’s approach to updating its plans in future regulatory 11
+filings. 12
+13
+Q9. Are you sponsoring any exhibits in this proceeding? 14
+A9. Yes. I am sponsoring the following exhibits: 15
+Exhibit Description 16
+A-3 Renewable Portfolio Standard Compliance Summary 17
+18
+Q10. Were these exhibits prepared by you or under your direction? 19
+A10. Yes, they were. 20
+21
+Q11. How is the remainder of your testimony organized? 22
+A11. My testimony consists of the following four parts: 23
+Part I: Statutory Framework 24
+Part II: Customer Load Impacts on DTE Electric’s RPS Requirements 25
+
+[[PDF_PAGE_0129]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-5
+Part III: DTE Electric’s Strategy and Build Plan 1
+Part IV: Summary and Conclusions 2
+PART I: STATUTORY FRAMEWORK 3
+Q12. What are the RPS targets established in Public Act 235 of 2023 (“PA 235”)? 4
+A12. PA 235 establishes that an electric provider shall achieve a R enewable Energy 5
+Credit (“REC”) portfolio of at least the following: 6
+a) Through 2029, 15% of total retail sales 7
+b) In 2030 through 2034, 50% of total retail sales 8
+c) In 2035 and each year thereafter, 60% of total retail sales 9
+10
+Q13. What total retail sales figure does the Company use to determine its RPS 11
+targets? 12
+A13. Consistent with Section 28(2)(b) of PA 235, the Company uses weather normalized 13
+megawatt-hours of bundled load sold during the previous year, less the amount of 14
+sales attributable to customers participating in a Voluntary Green Pricing program1 15
+and the outflow from customers participating in the distributed generation program, 16
+as a basis for determining the RECs needed to satisfy the RPS targets. 17
+18
+Q14. How are RECs generated to meet the RPS targets? 19
+A14. In general, one renewable energy credit is granted for each megawatt hour of 20
+electricity generated from the renewable energy system. RECs can be generated 21
+through several methods outlined in Section 28(5) of PA 235. This includes “(a) 22
+Generating electricity from renewable energy systems for sale to retail customers. 23
+1 Voluntary green pricing is forecasted to account for an average of 17% of total bundled sales, as outlined
+in the Amended REP, Case No. U-21662.
+
+[[PDF_PAGE_0130]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-6
+(b) Purchasing or otherwise acquiring renewable energy and capacity. (c) 1
+Purchasing or otherwise acquiring renewable energy credits without the associated 2
+renewable energy or capacity…” REC-only purchases made under Section 28(5)(c) 3
+shall not exceed 5% of the Company’s compliance amount. 4
+5
+Q15. Can RECs be banked if not used towards RPS compliance in the year in which 6
+they are generated? 7
+A15. Yes. Under Section 39(3) of PA 235, “A renewable energy credit expires at the 8
+earliest of the following times: (a) When used by an electric provider to comply 9
+with its renewable energy standard. (b) When substituted for an energy waste 10
+reduction credit under section 77. (c) Five years after the end of the month in which 11
+the renewable energy credit was generated.” Based on this provision, DTE Electric 12
+may bank RECs for up to five years from their creation date. 13
+14
+PART II: EVALUATION OF THE CUSTOMER’S LOAD IMPACTS ON DTE 15
+ELECTRIC’S RPS REQUIREMENTS 16
+Q16. What is the projected increase in DTE Electric’s load resulting from the 17
+Customer (Green Chile Ventures LLC)? 18
+A16. As discussed in Company Witness Foley’s testimony, the Customer’s max load will 19
+be approximately 1.4 GW. As such, their annual usage would be approximately 20
+10.9 TWh2. 21
+22
+Q17. What amount of solar capacity (in MW) would DTE Electric need to install to 23
+satisfy the RPS requirements for the additional load? 24
+2 Estimate is based on an assumed load factor of 88.5%.
+
+[[PDF_PAGE_0131]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-7
+A17. Utilizing a simple mathematical estimate, if the Company were to meet the RPS 1
+for this incremental load through new solar build only, DTE Electric would need to 2
+install approximately 3.2 GW of additional solar capacity. This estimate is derived 3
+from the following calculation3: 4
+5
+10,903,572 MWh/year
+8,760 hours/year × 60% ÷ 23% = 3,247 MW 6
+This amount would decrease if the incremental load were served by wind resources, 7
+which typically has a higher net capacity factor 4. However, this estimate does not 8
+account for other factors such as banked RECs, which would be addressed in detail 9
+within an Integrated Resource Plan (“IRP”) and Amended REP. The Commission 10
+has concluded in Case No. U -21568 that IRPs are the best forum for evaluating 11
+generation diversity and renewable resource planning, and that future REPs should 12
+align with the assumptions in the latest IRPs. 13
+14
+Q18. Relative to the Company’s latest Amended REP , w hat is the revised RPS 15
+target after adjusting for the Customer’s load? 16
+A18. The RPS target from the Company’s most recent Amended Renewable Energy 17
+Plan, Case No. U-21662, is presented in Line 28 of Exhibit A-3. The updated RPS 18
+target reflecting the Customer’s load adjustments is shown in Line 16 of my Exhibit 19
+A-3. Overall, the projected load is expected to increase total bundled sales, which 20
+in turn will increase DTE Electric’s RPS target by approximately 30.5% based on 21
+the methodology outlined in Part I of my testimony. 22
+3 Analysis assumes 60% RPS, which takes effect in 2035, of the full ramp up, and a solar capacity factor of
+23%
+4 For example, assuming a 30.5% capacity factor for wind and a 50/50 split between wind and solar, the
+resulting capacity requirement would be 2.8 GW based on the same calculation described above.
+
+[[PDF_PAGE_0132]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-8
+Q19. Based on the most recent Amended REP, what is the projected shortfall in 1
+RECs for the Company in meeting its RPS targets, considering the additional 2
+load in this filing? 3
+A19. Based on the Company’s REC forecast in Case No. U-21662, the Company projects 4
+a surplus of RECs through 2032. However, beginning in 2033 and continuing 5
+through 2037, a negative REC balance is anticipated if the generation of REC s 6
+remains unchanged, as shown in Table 1, below. 7
+8
+TABLE 1: Estimated Year-End REC Bank Balance 9
+Year 2033 2034 2035 2036 2037
+REC Balance (1,534,948) (1,432,120) (3,372,106) (3,784,147) (1,816,539)
+10
+These REC balances are based on the fastest Customer Committed Capacity Ramp 11
+allowed in the Primary Supply Agreement ( “PSA”). If the Company delays their 12
+scheduled ramp, as described by Company Witness Foley, the resulting REC 13
+shortfall would be smaller, thereb y reducing the number of R ECs needed to 14
+maintain compliance. 15
+16
+PART III: DTE ELECTRIC’S STRATEGY AND BUILD PLAN 17
+Q20. How can DTE Electric maintain RPS compliance considering the increased 18
+REC requirements associated with the Customer’s load? 19
+A20. The Company could maintain RPS compliance through a combination of strategies, 20
+including expanding its renewable energy portfolio and/or drawing from its REC 21
+bank. Expanding DTE Electric’s renewable energy portfolio may include 22
+developing new projects, securing additional Power Purchase Agreements 23
+
+[[PDF_PAGE_0133]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-9
+(“PPAs”), and/or Build- Transfer Agreements (“BTAs”). The renewable energy 1
+build plan will be evaluated in the next IRP, to be filed in 2026. 2
+3
+Q21. When does the Company begin accumulating excess RECs in its REC bank to 4
+support increased RPS targets? 5
+A21. According to DTE Electric’s most recent Amended REP, the Company begins to 6
+see a material increase in its REC balance starting in 2027. Refer to Exhibit A -3, 7
+Line 29 for year-end balances. This timing corresponds closely with the expected 8
+progression of the Customer’s capacity ramp. 9
+10
+Q22. If the Company were to use its REC bank to the maximum extent to maintain 11
+RPS compliance, how much additional renewable energy capacity would be 12
+needed? 13
+A22. In comparison t o the Company’s most recent Amended REP , the Company 14
+estimates that 443 MW of additional renewable energy resources would be needed 15
+by 2032. This estimate assumes a proportional allocation between wind and solar 16
+that is consistent with the resource mix in the Company’s most recently approved 17
+Amended Renewable Energy Plan. Refer to Exhibit A -3, Line 31 for the updated 18
+REC balance including the additional 443 MW. 19
+20
+Q23. In this scenario, would DTE Electric defer adding the additional capacity until 21
+2032? 22
+A23. No. The year 2032 represents the latest point by which the resources must be in 23
+place to ensure RPS compliance. DTE Electric plans to advance the development 24
+of these resources where feasible. Accelerating deployment prior to 2032 would 25
+
+[[PDF_PAGE_0134]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-10
+allow the Company to generate and bank additional RECs, supporting compliance 1
+in future years. 2
+3
+Q24. Whether DTE Electric expands its renewable generation portfolio or fully 4
+leverages its REC bank, does the Company expect that sufficient renewable 5
+energy projects will be available to support the increased RPS target? 6
+A24. Yes. DTE Electric has a robust and diversified strategy to meet the increased RPS 7
+requirements associated with the projected Customer load. The Company’s 8
+approach includes a combination of: 9
+1. Company-Owned Projects: DTE Electric is actively developing new wind 10
+and solar facilities, with many projects already in the pre -construction or 11
+permitting phases. 12
+2. PPAs: The Company continues to pursue PPAs with third-party developers. 13
+Several PPAs are currently under negotiation and are expected to contribute 14
+to the required capacity. 15
+3. Strategic Acquisitions: Where feasible, DTE Electric will evaluate 16
+acquisition opportunities for operational or near -operational renewable 17
+assets that can be integrated into its portfolio to accelerate compliance 18
+timelines. 19
+4. Phased Capacity Additions: The estimated 443 MW of additional 20
+renewable capacity may be incorporated through a phased buildout, with 21
+annual targets aligned to projected load growth and REC requirements. This 22
+phased approach will ensure flexibility and allows for adjustments based on 23
+customer ramp-up scenarios. 24
+
+[[PDF_PAGE_0135]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-11
+5. Technology Mix Optimization : The resource mix will balance wind and 1
+solar technologies to optimize generation profiles and grid reliability. 2
+3
+All of these efforts are coordinated within the framework of DTE Electric’s IRP and 4
+REP. The Company’s development pipeline includes sufficient projects to meet the 5
+incremental demand, and ongoing stakeholder engagement ensures alignment with 6
+regulatory expectations and market conditions. 7
+8
+Q25. Has the Commission provided guidance on the renewable energy build plan 9
+assumptions in an Amended REP? 10
+A25. Yes. In the April 25, 2024 Order in Case No. U-21568, the Commission held “IRPs 11
+remain the most appropriate venue to consider generation diversity as well as 12
+renewable resource planning because IRPs allow for the full assessment of 13
+renewable resources against other resources (including the consideration of the 14
+value of the various resource types and attributes as expressed by commenters). In 15
+turn, future amended REPs should reflect the assumptions included in the 16
+providers’ most recently approved IRP.” 17
+18
+Q26. What is the anticipated timeline for the Company to submit an updated 19
+renewable energy build plan addressing compliance with the increased 20
+Customer load? 21
+A26. The Company plans to submit a revised renewable energy build plan as part of its 22
+next IRP filing, which is due no later than December 2026. Through the IRP 23
+process, the Company will evaluate potential incremental additions to its renewable 24
+portfolio and outline an optimized strategy to support RPS compliance. 25
+
+[[PDF_PAGE_0136]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-12
+Q27. When is the Company expected to submit its next Amended REP 1
+incorporating the Customer’s load impacts? 2
+A27. The Company anticipates filing its next Amended REP in 2027. 3
+4
+Q28. Does the timing of these filings provide DTE Electric with sufficient 5
+opportunity to address the increased RPS requirements associated with the 6
+Customer’s load? 7
+A28. Yes. The timing of the 2026 IRP and the 2027 Amended REP aligns well with the 8
+anticipated ramp of the Customer. This provides DTE Electric with a multi- year 9
+planning window to adjust its renewable energy strategy accordingly. 10
+11
+The 2026 IRP will detail DTE Electric’s approach to maintaining RPS compliance. 12
+The 2027 Amended REP will further d efine these plans, detailing DTE Electric’s 13
+REC acquisition strategy and further ensuring compliance with RPS targets. 14
+Together, these filings provide a structured and timely framework to accommodate 15
+the incremental load while maintaining regulatory compliance. 16
+17
+PART IV: SUMMARY AND CONCLUSIONS 18
+Q29. Is DTE Electric well -positioned to meet the increased RPS requirements 19
+associated with incremental Customer load? 20
+A29. Yes. DTE Electric remains committed to supporting the RPS and has a defined path 21
+for achieving the additional REC requirements driven by the Customer load. My 22
+testimony and exhibits in this filing demonstrate that: 23
+1. DTE Electric will reassess its renewable energy build plan in its next IRP filing, 24
+which will include consideration of the additional load and REC requirements; 25
+
+[[PDF_PAGE_0137]]
+K. L. BILYEU
+Line U-21990
+No.
+KLB-13
+2. The incremental renewable energy capacity required to meet the increased RPS 1
+could technically reach up to 3.2 GW, but may be as low as 443 MW by 2032 if 2
+the Company fully leverages its estimated REC bank; 3
+3. The Company’s existing renewable energy portfolio and development pipeline 4
+offer a credible and sufficient foundation to meet the elevated renewable energy 5
+targets. 6
+7
+Q30. Does this conclude your direct testimony? 8
+A30. Yes, it does. 9
+
+[[PDF_PAGE_0138]]
+S
+TATE OF MICHIGAN
+B
+EFORE THE MICHIGAN PUBLIC SERVICE COMMISSION
+I
+n the matter of the Application of )
+DTE ELECTRIC COMPANY ) Case No. U-21990
+for Approval of Special Contracts )
+E
+XHIBITS
+OF
+K
+EVIN L. BILYEU
+
+[[PDF_PAGE_0139]]
+Michigan Public Service Commission Case No.: U-21990
+DTE Electric Company Exhibit: A-3
+Renewable Portfolio Standard Compliance Summary Witness: K.L. Bilyeu
+Page: 1 of 2
+(a) (b) (c) (d) (e) (f) (g) (h) (i) (j) (k) (l)
+Line 2026 2027 2028 2029 2030 2031 2032 2033 2034 2035
+No.
+1 Sales and Requirement Calculation Source (U-21662)
+2 Method: Weather Normalized or 3 Year Average
+3 If Selected Weather Normalized:
+4 Current Year Sales to Retail Customers Exh A-29 Column (i) 39,634,892 39,497,918 39,869,525 39,910,589 40,013,252 40,203,583 40,511,120 40,702,673 41,076,945 41,418,790
+Incremental Data Center Load 3,285 5,031,963 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572
+5 Less Number of Megawatt Hours Sold from Michigan Nuclear Energy - - - - - - - - - -
+6 Current Year Weather Normalization Factor Exh A-29 Column (i) 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+7 Less VGP sales WP-6 2,794,617 5,358,090 6,616,223 7,426,909 7,415,003 7,385,969 7,375,761 7,328,315 7,299,690 7,271,202
+8 Less Outflow from DG Customers 55,355 68,099 83,171 100,829 121,202 143,020 164,705 185,876 204,715 222,048
+9 Current Year Weather Normalized Sales 36,788,205 39,103,692 44,073,703 43,286,422 43,380,618 43,578,166 43,874,226 44,092,054 44,476,112 44,829,113
+10 If Selected 3 Year Average:
+11 Current Year Retail Sales to Retail Customers
+12 Less Number of Megawatt Hours Sold from Michigan Nuclear Energy
+13 Less VGP sales
+14 Less outflow from DG customers
+15 3 Year Average of sales
+16
+RPS Required Energy Credits (For 2026 through 2029 15%,
+2030 through 2034 50% 2035 and beyond 60%) Calculated 5,667,532 5,518,231 5,865,554 6,611,055 21,643,211 21,690,309 21,789,083 21,937,113 22,046,027 26,685,667
+17 Energy Credits
+18 Energy Credit Beginning Balance Row 26 2,455,332 2,833,451 5,401,790 9,222,777 14,667,818 7,927,378 3,431,971 55,432 (1,534,948) (1,432,120)
+19 Plus: Energy Credits Obtained Through Generation/BOT Exh A-4 +WP-4 KLB (IRECs) 3,405,313 4,785,213 5,979,683 7,689,837 9,356,714 11,743,705 13,258,615 15,574,681 17,938,444 20,437,898
+20 Plus: Energy Credits Obtained Through PPA Exh A-4 +WP-4 KLB (IRECs) 2,356,962 3,025,469 3,451,320 4,117,483 4,736,487 4,639,271 4,337,065 3,947,786 3,380,699 3,300,608
+21 Plus: Energy Credits Obtained Through REC Purchases Exh A-4 line 7 283,377 275,887 255,538 248,776 809,571 811,926 816,865 824,266 829,712 1,007,176
+22 Less: Energy Credits Sold - - - - - - - - - -
+23 Available Energy Credits (Rows 18 + 19 + 20 + 21 - 22) Calculated 8,500,983 10,920,020 15,088,331 21,278,873 29,570,589 25,122,280 21,844,515 20,402,166 20,613,907 23,313,561
+24 Less: Compliance Requirement (Row 16) Calculated 5,667,532 5,518,231 5,865,554 6,611,055 21,643,211 21,690,309 21,789,083 21,937,113 22,046,027 26,685,667
+25 Less: Energy Credit Expired - - - - - - - - - -
+26 Energy Credit Ending Balance (Rows 23 - 24 - 25) Calculated 2,833,451 5,401,790 9,222,777 14,667,818 7,927,378 3,431,971 55,432 (1,534,948) (1,432,120) (3,372,106)
+27 Base Case without Data Center Load
+28
+RPS Required Energy Credits (For 2026 through 2029 15%,
+2030 through 2034 50% 2035 and beyond 60%) Exh A-2 line 16 5,667,532 5,517,738 5,110,759 4,975,520 16,191,425 16,238,523 16,337,297 16,485,327 16,594,241 20,143,524
+
+[[PDF_PAGE_0140]]
+Michigan Public Service Commission
+DTE Electric Company
+Renewable Portfolio Standard Compliance Summary
+(a) (b)
+Line
+No.
+1 Sales and Requirement Calculation Source (U-21662)
+2 Method: Weather Normalized or 3 Year Average
+3 If Selected Weather Normalized:
+4 Current Year Sales to Retail Customers Exh A-29 Column (i)
+Incremental Data Center Load
+5 Less Number of Megawatt Hours Sold from Michigan Nuclear Energy
+6 Current Year Weather Normalization Factor Exh A-29 Column (i)
+7 Less VGP sales WP-6
+8 Less Outflow from DG Customers
+9 Current Year Weather Normalized Sales
+10 If Selected 3 Year Average:
+11 Current Year Retail Sales to Retail Customers
+12 Less Number of Megawatt Hours Sold from Michigan Nuclear Energy
+13 Less VGP sales
+14 Less outflow from DG customers
+15 3 Year Average of sales
+16
+RPS Required Energy Credits (For 2026 through 2029 15%,
+2030 through 2034 50% 2035 and beyond 60%) Calculated
+17 Energy Credits
+18 Energy Credit Beginning Balance Row 26
+19 Plus: Energy Credits Obtained Through Generation/BOT Exh A-4 +WP-4 KLB (IRECs)
+20 Plus: Energy Credits Obtained Through PPA Exh A-4 +WP-4 KLB (IRECs)
+21 Plus: Energy Credits Obtained Through REC Purchases Exh A-4 line 7
+22 Less: Energy Credits Sold
+23 Available Energy Credits (Rows 18 + 19 + 20 + 21 - 22) Calculated
+24 Less: Compliance Requirement (Row 16) Calculated
+25 Less: Energy Credit Expired
+26 Energy Credit Ending Balance (Rows 23 - 24 - 25) Calculated
+27 Base Case without Data Center Load
+28
+RPS Required Energy Credits (For 2026 through 2029 15%,
+2030 through 2034 50% 2035 and beyond 60%) Exh A-2 line 16
+Case No.: U-21990
+Exhibit: A-3
+Witness: K.L. Bilyeu
+Page: 2 of 2
+(m) (n) (o) (p) (q) (r) (s) (t) (u) (v)
+2036 2037 2038 2039 2040 2041 2042 2043 2044 2045
+41,796,601 41,972,411 42,220,700 42,421,326 42,654,688 42,699,590 42,849,878 43,041,817 43,325,884 43,439,572
+10,903,572 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572 10,903,572
+- - - - - - - - - -
+1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00 1.00
+7,261,222 7,214,626 7,186,536 7,158,575 7,148,812 7,103,051 7,075,484 7,048,047 7,038,504 6,993,562
+239,754 257,838 276,311 295,137 313,920 332,890 352,794 373,097 393,673 414,458
+45,199,197 45,403,519 45,661,425 45,871,186 46,095,527 46,167,221 46,325,172 46,524,244 46,797,279 46,935,124
+26,897,468 27,119,518 27,242,111 27,396,855 27,522,711 27,657,316 27,700,333 27,795,103 27,914,546 28,078,367
+(3,372,106) (3,784,147) (1,816,539) 2,678,967 9,644,863 19,214,400 31,179,439 45,592,130 60,033,458 74,127,786
+23,189,448 25,812,563 28,475,980 31,113,974 33,847,982 36,399,106 38,902,443 39,038,455 38,815,294 38,478,159
+3,295,979 3,274,563 3,261,638 3,248,777 3,244,266 3,223,249 3,210,581 3,197,976 3,193,581 3,172,955
+- - - - - - - - - -
+23,113,321 25,302,979 29,921,078 37,041,718 46,737,111 58,836,755 73,292,463 87,828,561 102,042,332 115,778,899
+26,897,468 27,119,518 27,242,111 27,396,855 27,522,711 27,657,316 27,700,333 27,795,103 27,914,546 28,078,367
+- - - - - - - - - -
+(3,784,147) (1,816,539) 2,678,967 9,644,863 19,214,400 31,179,439 45,592,130 60,033,458 74,127,786 87,700,532
+20,355,325 20,577,375 20,699,968 20,854,712 20,980,568 21,115,173 21,158,189 21,252,960 21,372,403 21,536,224
+
+[[PDF_PAGE_0141]]
+STATE OF MICHIGAN
+BEFORE THE MICHIGAN PUBLIC SERVICE COMMISSION
+In the matter of the Application of DTE Electric )
+Company for Approval of Special Contacts ) Case No. U-21990
+PROOF OF SERVICE
+STATE OF MICHIGAN )
+) ss.
+COUNTY OF WAYNE )
+ESTELLA R. BRANSON states that on October 31, 2025, she served a copy of DTE
+Electric’s Application for ex parte Approval of special contracts for electric service, Direct
+Testimony and Exhibits of Witnesses, Kevin L. Bilyeu and Neal T. Foley, in the above captioned
+matter, via electronic mail, upon the persons listed on the attached service list.
+ESTELLA R. BRANSON
+
+[[PDF_PAGE_0142]]
+MPSC Case No. U-21990
+SERVICE LIST
+MICHIGAN PUBLIC SERVICE
+COMMISSION STAFF
+Steven D. Hughey
+Assistant Attorney General
+7109 W. Saginaw Hwy.
+Lansing, MI 48917
+hugheys@michigan.gov

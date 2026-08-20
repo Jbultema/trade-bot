@@ -1,0 +1,177 @@
+intc-20250822
+0000050863
+false
+0000050863
+2025-08-18
+UNITED STATES
+SECURITIES AND EXCHANGE COMMISSION
+Washington, D.C. 20549
+FORM
+8-K
+CURRENT REPORT
+Pursuant to Section 13 or 15(d)
+of the Securities Exchange Act of 1934
+Date of Report (Date of earliest event reported):
+August 22, 2025
+INTEL CORPORATION
+(Exact name of registrant as specified in its charter)
+Delaware
+000-06217
+94-1672743
+(State or other jurisdiction
+(Commission
+(IRS Employer
+of incorporation)
+File Number)
+Identification No.)
+2200 Mission College Boulevard
+,
+Santa Clara
+,
+California
+95054-1549
+(Address of principal executive offices)
+(Zip Code)
+Registrant's telephone number, including area code:
+(408)
+765-8080
+Not Applicable
+(Former name or former address, if changed since last report)
+Check the appropriate box below if the Form 8-K filing is intended to simultaneously satisfy the filing obligation of the registrant under any of the following provisions (
+see
+General Instruction A.2. below):
+☐
+Written communications pursuant to Rule 425 under the Securities Act (17 CFR 230.425)
+☐
+Soliciting material pursuant to Rule 14a-12 under the Exchange Act (17 CFR 240.14a-12)
+☐
+Pre-commencement communications pursuant to Rule 14d-2(b) under the Exchange Act (17 CFR 240.14d-2(b))
+☐
+Pre-commencement communications pursuant to Rule 13e-4(c) under the Exchange Act (17 CFR 240.13e-4c))
+Securities registered pursuant to Section 12(b) of the Act:
+Title of each class
+Trading Symbol(s)
+Name of each exchange on which registered
+Common stock, $0.001 par value
+INTC
+Nasdaq Global Select Market
+Indicate by check mark whether the registrant is an emerging growth company as defined in Rule 405 of the Securities Act of 1933 (§230.405 of this chapter) or Rule 12b-2 of the Securities Exchange Act of 1934 (§240.12b-2 of this chapter).
+Emerging growth company
+☐
+If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act.
+¨
+Item 1.01 Entry into a Material Definitive Agreement.
+On August 22, 2025, Intel Corporation (the “
+Company
+”) entered into a Warrant and Common Stock Agreement (the “
+Purchase Agreement
+,” and the transactions contemplated thereby, the “
+Transaction
+”) with the United States Department of Commerce (the “
+DOC
+”). Pursuant to the terms of the Purchase Agreement, the Federal Government of the United States of America (the “
+US Government
+”) agreed to make a total of $8,869,800,000 of disbursements to the Company, consisting of (1) the acceleration of certain disbursements under the Company’s Direct Funding Agreement (the “
+DFA
+”) with the DOC in the amount of $5,695,000,000, to be paid as promptly as practicable in accordance with applicable law after the Closing Date (as defined below) (the “
+Released Funds
+”), and (2) $3,174,800,000 of disbursements (the “
+Secure Enclave Disbursements
+” and, together with the Released Funds, the “
+Disbursements
+”) in respect of the Company’s agreement with the US Government under the CHIPS Act's Secure Enclave program (“
+Secure Enclave
+”) to be made on the terms and conditions of Secure Enclave.
+Pursuant to the terms of the Purchase Agreement, and as compensation to the US Government for, and as a condition to the DOC’s willingness to permit, the Disbursements, the Company agreed to issue to the DOC: (i) up to 433,323,000 shares (the “
+Shares
+”) of the Company’s common stock, par value $0.001 per share (the “
+common stock
+”), of which 274,583,000 Shares are to be issued to the DOC on the Closing Date (or such later date or dates as the Released Funds are received as described below, and corresponding to a $20.74 per share price if all Released Funds are received by the Company) (the “
+Issued Shares
+”) and 158,740,000 Shares are to be issued into escrow for the benefit of the DOC (the “
+Escrowed Shares
+”) and to be released as the Secure Enclave Disbursements are received (corresponding to a $20.00 per share price); and (ii) warrants (the “
+Warrants
+”) exercisable to purchase up to 240,516,150 shares of common stock (the “
+Warrant Shares
+”) to be issued on the Closing Date. The Shares, the Warrants and the Warrants Shares are referred to collectively as the “
+Securities
+.”
+In the Purchase Agreement, the DOC has agreed that to the maximum extent permissible under applicable law, the Company’s obligations pursuant to the DFA will be considered discharged (other than with respect to Secure Enclave), and the Company has agreed that, following the Company’s receipt of the Released Funds, the US Government will have no further obligations under the DFA (other than as required by law or with respect to Secure Enclave). The US Government has agreed to make the disbursements in respect of, and on the terms and conditions of, Secure Enclave and has agreed to work with the Company to make appropriate amendments and modifications to the DFA to release the Company from certain of its obligations.
+The Purchase Agreement provides for the closing to occur on August 26, 2025 or as soon as practicable thereafter as the parties mutually agree (the date on which the closing occurs, the “
+Closing Date
+”). If the full amount of Released Funds is not received by the Company on the Closing Date, only such number of Issued Shares with respect to the amount of Released Funds so received (based on $20.00 per share) will be issued on the Closing Date, and the remaining Issued Shares will only be issued as and to the extent the remaining Released Funds are so received after the Closing Date.
+The Escrowed Shares will be released from escrow as and when Secure Enclave Disbursements are received, with the number of Escrowed Shares to be issued with respect to each Secure Enclave Disbursements being determined based on $20.00 per share. To the extent any Escrowed Shares have not been released from escrow at the end of the period during which the Company is eligible for Secure Enclave Disbursements, and regardless of the reason the Company has not received any contemplated Secure Enclave Disbursements, half of any remaining Escrowed Shares will be released from escrow to DOC at such time with no additional consideration payable to the Company (i.e., the Company will not be entitled to the corresponding remaining Secure Enclave Disbursements related to such Escrowed Shares), with the other half of the remaining Escrowed Shares automatically forfeited and cancelled.
+The Warrants will be exercisable only if, and from the date on which, the Company ceases to directly or indirectly own at least 51% of its foundry business, and will expire on the fifth anniversary of the Closing Date. Each Warrant represents the right to purchase one share of common stock at an exercise price of $20.00 per share, subject to anti-dilution adjustments for dividends, distributions, subdivisions, combinations or reclassifications.
+The Securities will be non-transferable by the DOC until after the first anniversary of the Closing Date. Following the first anniversary of the Closing Date, the Securities (other than the Escrowed Shares, until such time thereafter that they are released from escrow) may be transferred by the DOC only in broadly-syndicated offerings.
+The DOC has certain customary registration rights under the Purchase Agreement, including that the Company will prepare and file with the Securities and Exchange Commission on or before September 5, 2025, a resale registration statement or amendment or supplement to an existing registration statement for the resale of the
+Securities.
+The DOC must vote any shares of common stock held by it in favor of the nominees of and any proposals recommended by the Company’s Board of Directors, and against any other nomination or proposal not recommended by the Board of Directors, provided that the DOC shall not be required to vote its shares of common stock inconsistent with applicable laws, and provided further that no such restrictions or obligations on DOC’s voting shall apply, and DOC may vote any of its shares of common stock as it wishes, with respect to any vote (i) regarding the Company or its subsidiaries taking or refraining from taking any action that would be a violation of the Purchase Agreement or the Warrants, (ii) seeking to reject, disclaim, unwind, terminate or otherwise materially and adversely impact the Company’s or its subsidiaries’ relationship with the US Government, or (iii) which would materially and adversely impact the ability of the Company or any of its subsidiaries to comply with its obligations under the Purchase Agreement or the Warrants.
+In addition, the Purchase Agreement contains customary representations, warranties and covenants of the Company.
+The foregoing description of the Purchase Agreement, the Securities and the Transaction are only summaries and do not purport to be complete and are qualified in their entirety by reference to the full text of the Purchase Agreement, including the Form of Warrant, attached to this Current Report on Form 8-K as Exhibit 10.1 and incorporated herein by reference.
+Item 3.02 Unregistered Sales of Equity Securities.
+The information set forth in Item 1.01 above is incorporated by reference herein. The offer and sale of the Shares and the Warrants will be made in reliance upon an exemption from registration under the Securities Act of 1933 (the “
+Securities Act
+”), pursuant to Section 4(a)(2) thereof for a sale of securities in transactions not involving any public offering. Any Warrant Shares issued upon exercise of the Warrants will be issued in reliance upon the exemption from registration in Section 4(a)(2) or, in the case of a cashless or net share exercise, Section 3(a)(9) of the Securities Act, as applicable.
+Item 7.01 Regulation FD Disclosure.
+The Company’s press release, dated August 22, 2025, announcing the Transaction is furnished as Exhibit 99.1 to this Current Report on Form 8-K.
+The information in Item 7.01 of this Current Report on Form 8-K, including Exhibit 99.1, is furnished and shall not be treated as filed for purposes of the Securities Exchange Act of 1934, as amended.
+Item 8.01 Other Events.
+The Company is providing the additional risk factor to supplement the risks described in "Risk Factors" in the Company’s 2024 Form 10-K, Q1 2025 Form 10-Q and Q2 2025 Form 10-Q.
+Risk Factors
+The consummation of the transactions under the Purchase Agreement are subject to a number of risks and uncertainties and the US Government’s ownership of significant equity interests in the Company may subject the Company and it stockholders to a number of additional risks and uncertainties, any of which could have a material adverse effect on the Company’s business, financial condition and results of operations or adversely impact the interests of our other stockholders.
+•
+The timing of consummation of the transactions and the receipt of funding, and the ability to satisfy the conditions to funding, remain uncertain
+. The accelerated DFA funds are not required to be delivered on the Closing Date or by any specified date, and there can be no assurance the Company will receive the funds on the timeline or in the amounts anticipated. In addition, future disbursements for Secure Enclave are subject to conditions in the underlying program, and the Company may not meet those conditions. Further, the Company’s receipt of funds depends on the availability of appropriations from the legislative branch of the U.S. government and the ability of the executive branch of the U.S. government to obtain funding and support contemplated by the transaction.
+•
+The transactions are subject to risks from changes in laws, regulations, or their interpretations, as well as shifts in federal administration and congressional priorities
+. The legislative, judicial or
+executive branches of the U.S. government could determine in the future that all or a portion of the transactions were unauthorized, void or voidable.
+In addition, the terms of the Purchase Agreement are subject to unilateral amendment by the DOC to comply with future changes in federal law. Further, while the DOC is contractually bound under the Purchase Agreement, no other agency or branch of the US Government has made commitments to support, refrain from challenging or otherwise impeding the transaction. Legal challenges, administrative rulings, litigation by other parts of the US Government or third parties, or geopolitical developments could materially impair funding, alter obligations under the DFA or Secure Enclave, or otherwise adversely affect the transactions and the benefits that the Company expects to receive under the Purchase Agreement. In addition, enforcement against a government counterparty is inherently uncertain given the defenses available to the US Government.
+•
+The financial, tax and accounting impacts of the transactions are being evaluated and are uncertain.
+Given complexity of the transactions, and the interrelationship with the DFA, the Company’s initial analysis of the financial, tax and accounting implications of the transactions has not been completed, and there could be adverse accounting or other impacts, including the recognition of additional costs or losses, that may materially impact the Company’s reported financial results in future periods.
+•
+The transactions eliminate the Company’s contractual rights to receive future funds under the DFA and Secure Enclave in the form of grants and may limit its ability to secure grants from government entities in the future.
+In converting future grant funding into investments in common stock by the US Government, the transactions make it such that the Company’s business will no longer benefit from the reduced future operating costs made possible by such grant funding. In addition, the Company’s business is highly capital intensive and the Company has a number of other current grant arrangement with government entities, and may seek to pursue such arrangements in the future. It is uncertain whether the transactions may cause other government entities to seek to convert their existing grant arrangements with the Company into equity investments or be unwilling to support the Company with future grants, either of which could limit the Company's access to capital, increase the Company's cost of capital, or increase the Company's future operating costs.
+•
+The transactions are dilutive to existing stockholders.
+The issuance of shares of common stock to the US Government at a discount to the current market price is dilutive to existing stockholders, and stockholders may suffer significant additional dilution if the conditions to the Warrant are triggered and the Warrant are exercised.
+•
+The US Government’s equity position in the Company reduces the voting and other governance rights of stockholders and may limit potential future transactions that may be beneficial to stockholders.
+The transactions contemplated by the Purchase Agreement may result in the US Government becoming the Company’s largest stockholder. The US Government’s interests in the Company may not be the same as those of other stockholders. The Purchase Agreement requires the US Government to vote its shares of common stock as recommended by the Company’s board of directors, subject to applicable law and exceptions to protect the US Government’s interests. This will reduce the voting influence of other stockholders with respect to the selection of directors of the Company and proposals voted on by stockholders. The existence of a significant US Government equity interest in the Company, the voting of such shares either as directed by the Company’s board of directors or the US Government, and the US Government’s substantial additional powers with respect to the laws and regulations impacting the Company, may substantially limit the Company's ability to pursue potential future strategic transactions that may be beneficial to stockholders, including by potentially limiting the willingness of other third parties to engage in such potential strategic transactions with the Company.
+•
+The Company’s non-US business may be adversely impacted by the US Government being a significant stockholder.
+Sales outside the US accounted for 76% of the Company’s revenue for the fiscal year ended December 28, 2024. Having the US Government as a significant stockholder of the Company could subject the Company to additional regulations, obligations or restrictions, such as foreign subsidy laws or otherwise, in other countries.
+•
+The Company may experience other adverse consequences resulting from the announcement or completion of the transactions
+. Given the scarcity of recent US precedents for transactions such as those contemplated by the Purchase Agreement and of the US Government becoming a significant stockholder of a company like the Company, it is difficult to foresee all the potential consequences. Among other things, there could be adverse reactions, immediately or over time, from investors, employees,
+customers, suppliers, other business or commercial partners, foreign governments or competitors. There may also be litigation related to the transaction or otherwise and increased public or political scrutiny with respect to the Company.
+Any of the foregoing could have a material adverse effect on the Company’s revenue, operations, financial position, cash flows, access to financing, cost structure, competitiveness, reputation, profitability, and prospects and could exacerbate other risks discussed in our 2024 Form 10-K, Q1 2025 Form 10-Q and Q2 2025 Form 10-Q.
+Item 9.01
+Financial Statements and Exhibits.
+(d)
+Exhibits.
+The following exhibits are provided as part of this report:
+Exhibit Number
+Description
+4.1
+Form of Warrant
+(contained in Exhibit 10.1)
+10.1
+Warrant and Common Stock Agreement, dated August 22, 2025
+by and between Intel Corporation and the United States Department of Commerce
+99.1
+Press Release, dated August 22, 2025
+104
+Cover Page Interactive Data File, formatted in Inline XBRL and included as Exhibit 101.
+SIGNATURES
+Pursuant to the requirements of the Securities Exchange Act of 1934, the registrant has duly caused this report to be signed on its behalf by the undersigned hereunto duly authorized.
+INTEL CORPORATION
+(Registrant)
+Date:
+August 25, 2025
+By:
+/s/ April Miller Boise
+April Miller Boise
+Executive Vice President and Chief Legal Officer

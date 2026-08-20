@@ -1,0 +1,11 @@
+{
+  "allocation_authority": 0.0,
+  "as_of": "2026-08-19",
+  "available_families": 0,
+  "immutable": true,
+  "missingness_sha256": "2c128365920b7e09d85a1ce5a8b22d16bb6c0c6b97abfa2f86c8d8c19aba446d",
+  "observation_rows": 0,
+  "observations_sha256": "ffd3126d44dcadb47dc5edf884da3248b0af5cf7209a0446c732019f28c7be3a",
+  "required_families": 6,
+  "vintage_month": "2026-08"
+}

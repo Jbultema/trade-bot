@@ -20,3 +20,8 @@ data/ml_diagnostics/
 *.duckdb
 *.html
 *.csv
+
+# Provisional AI-financial-system research lanes and generated database.
+research/ai_financial_system/staging/*
+!research/ai_financial_system/staging/README.md
+research/ai_financial_system/ai_financial_system.sqlite

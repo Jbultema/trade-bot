@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 121007,
+  "content_sha256": "e59e0ea65879100920b33df683934c6a631f7d886c57e39373f513be6882d1d2",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.anthropic.com/news/anthropic-amazon-compute",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0056_e59e0ea658791009.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://www.anthropic.com/news/anthropic-amazon-compute",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-04-20",
+  "publisher": "Anthropic PBC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0056_e59e0ea658791009.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:05.038476+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:04.957594+00:00",
+  "selected_response_headers": {
+    "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:51:05 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0056",
+  "status": "preserved_complete",
+  "title": "Anthropic and Amazon expand collaboration for up to five gigawatts of new compute",
+  "write_state": "new_version_written"
+}

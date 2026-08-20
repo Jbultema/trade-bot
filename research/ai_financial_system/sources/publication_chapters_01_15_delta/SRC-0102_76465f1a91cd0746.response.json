@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 50266,
+  "content_sha256": "76465f1a91cd0746b85880283f0b7e3477a1235f28560e7f2f518bd567b81172",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000129/ex102.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0102_76465f1a91cd0746.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000129/ex102.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-03-30",
+  "publisher": "CoreWeave Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0102_76465f1a91cd0746.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:50.041520+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:49.988849+00:00",
+  "selected_response_headers": {
+    "content-length": "9301",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:50 GMT",
+    "last-modified": "Tue, 31 Mar 2026 12:59:49 GMT"
+  },
+  "source_id": "SRC-0102",
+  "status": "preserved_complete",
+  "title": "CoreWeave limited bad-act guarantee for CCAC VIII DDTL 4.0",
+  "write_state": "new_version_written"
+}

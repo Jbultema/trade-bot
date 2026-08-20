@@ -66,6 +66,22 @@ Core promotion criteria:
   accumulation-account monitoring
 - understandable exposure and failure modes
 
+These criteria rank research candidates; they do not establish forecasting
+evidence by themselves. Promotion additionally requires one completed,
+persisted selection-OOS design:
+
+- a sealed chronological holdout opened only after the policy and primary
+  metric are frozen;
+- a nested walk-forward procedure in which all selection stays inside inner
+  folds and outer predictions remain untouched; or
+- a prospective shadow evaluated only on observations arriving after its
+  freeze date.
+
+The evaluation period may not be used for candidate selection or retuning.
+Missing OOS metadata fails closed, changes the governed decision to
+`hold_for_oos_evidence`, and prevents `operational_candidate` status. See
+`docs/oos_model_selection_policy.md` for the persisted evidence contract.
+
 Automatic reject signals:
 
 - max drawdown worse than the left-tail threshold

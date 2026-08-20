@@ -1,0 +1,198 @@
+BlackRock, Global Infrastructure Partners, Microsoft and MGX launch new AI partnership to invest in data centers and supporting power infrastructure - Source
+Skip to main content
+Source
+Signal blog
+Official Microsoft Blog
+Command Line
+Microsoft On The Issues
+Asia
+Canada
+Europe, Middle East and Africa
+Latin America
+The Code of Us
+What's new today
+AI
+Innovation
+Digital Transformation
+Sustainability
+Security
+Work & Life
+Diversity & Inclusion
+Unlocked
+Microsoft 365
+Azure
+Copilot
+Windows
+Surface
+XBOX
+Deals
+Small Business
+Support
+Windows Apps
+Outlook
+OneDrive
+Microsoft Teams
+OneNote
+Microsoft Edge
+Moving from Skype to Teams
+Computers
+Shop XBOX
+Accessories
+VR & mixed reality
+Certified Refurbished
+Trade-in for cash
+XBOX Game Pass Ultimate
+PC Game Pass
+XBOX games
+PC games
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365 for business
+Microsoft Power Platform
+Windows 365
+Small Business
+Digital Sovereignty
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Microsoft Rewards
+Free downloads & security
+Education
+Gift cards
+Licensing
+Unlocked stories
+View Sitemap
+Source
+September 17, 2024
+Category:
+Company News
+BlackRock, Global Infrastructure Partners, Microsoft and MGX launch new AI partnership to invest in data centers and supporting power infrastructure
+Microsoft Source
+$100 billion investment potential will enhance American competitiveness in AI while meeting the growing need for energy infrastructure to power economic growth
+NEW YORK, REDMOND, WA, AND ABU DHABI — September 17, 2024 –
+The drive to develop more powerful AI capabilities will require significant infrastructure investment to support it. Today, BlackRock, Global Infrastructure Partners (GIP), Microsoft, and MGX announced the Global AI Infrastructure Investment Partnership (GAIIP) to make investments in new and expanded data centers to meet growing demand for computing power, as well as energy infrastructure to create new sources of power for these facilities. These infrastructure investments will be chiefly in the United States fueling AI innovation and economic growth, and the remainder will be invested in U.S. partner countries.
+This partnership will support an open architecture and broad ecosystem, providing full access on a non-exclusive basis for a diverse range of partners and companies. NVIDIA will support GAIIP, offering its expertise in AI data centers and AI factories to benefit the AI ecosystem. GAIIP will also actively engage with industry leaders to help enhance AI supply chains and energy sourcing for the benefit of its customers and the industry. The partnership will initially seek to unlock $30 billion of private equity capital over time from investors, asset owners, corporates, which in turn will mobilize up to $100 billion in total investment potential when including debt financing.
+The founders of the partnership bring together leading global investors BlackRock, GIP, and MGX, an artificial intelligence and advanced technology investor, with funding as well as expertise from Microsoft. GAIIP combines deep understanding of infrastructure and technology to drive efficient scaling of data centers, with energy, power, and decarbonization investment capabilities for related enabling infrastructure for AI.
+His Highness Sheikh Tahnoon bin Zayed Al Nahyan, Chairman of MGX
+, emphasized the importance of AI for the future of our economies: “Artificial intelligence is not just an industry of the future, it underpins the future. Through this unique partnership, we will enable faster innovation, technological breakthroughs and transformational productivity gains across the global economy. The investments we make today will secure a more sustainable, prosperous and equitable future for all mankind.”
+“Mobilizing private capital to build AI infrastructure like data centers and power will unlock a multi-trillion-dollar long-term investment opportunity,” said
+Larry Fink, Chairman and CEO of BlackRock
+. “Data centers are the bedrock of the digital economy, and these investments will help power economic growth, create jobs, and drive AI technology innovation.”
+“We are committed to ensuring AI helps advance innovation and drives growth across every sector of the economy,” said
+Satya Nadella, Chairman and CEO, Microsoft
+. “The Global AI Infrastructure Investment Partnership will help us deliver on this vision, as we bring together financial and industry leaders to build the infrastructure of the future and power it in a sustainable way.”
+“The capital spending needed for AI infrastructure and the new energy to power it goes beyond what any single company or government can finance,” said
+Brad Smith, Vice Chair and President of Microsoft
+. “This financial partnership will not only help advance technology, but enhance national competitiveness, security, and economic prosperity.”
+“Building the necessary infrastructure required to advance and accelerate the adoption of AI will reshape and revitalize almost every aspect of how we live,” said
+Ahmed Yahia Al Idrissi, CEO of MGX
+. “Similar to our transportation infrastructure, new data centers and power sources will enable growth and commerce in the future innovation economy.”
+“There is a clear need to mobilize significant amounts of private capital to fund investments in essential infrastructure. One manifestation of this is the capital required to support the development of AI,” said
+Bayo Ogunlesi, Chairman and CEO of Global Infrastructure Partners
+. “We are highly confident that the combined capabilities of our partnership will help accelerate the pace of investments in AI-related infrastructure.”
+“Accelerated computing and generative AI are driving a growing need for AI infrastructure for the next industrial revolution,” said
+Jensen Huang, founder and CEO of NVIDIA
+. “NVIDIA will use its expertise as a full stack computing platform to support GAIIP and its portfolio companies on the design and integration of AI factories to propel industry innovation.”
+MGX was created in Abu Dhabi earlier this year to invest in AI and advanced technologies with global partners to enable the technology fabric of the global economy, focusing on AI infrastructure; AI-enabled technology; and semiconductors. Today’s announcement is a major partnership within those segments, building on the emirate’s longstanding investment track record in data centers, compute capacity, and enabling infrastructure.
+Significant structural forces are creating opportunities for private capital to partner with corporations and governments to provide financing for critical infrastructure needs. BlackRock has a broad network of corporate relationships as a long-term investor in their debt and equity, and GIP specializes in investing in, owning, and operating some of the largest and most complex infrastructure assets in the world. These combined capabilities position BlackRock as a world leading investment platform to make these critical investments in data centers and related infrastructure, mobilizing private capital to support economic growth and job creation while generating long-term investment benefits for its clients.
+About BlackRock
+BlackRock’s purpose is to help more and more people experience financial well-being. As a fiduciary to investors and a leading provider of financial technology, we help millions of people build savings that serve them throughout their lives by making investing easier and more affordable. For additional information on BlackRock, please visit
+www.blackrock.com/corporate
+About Global Infrastructure Partners (GIP)
+Global Infrastructure Partners (GIP) is a leading infrastructure investor that specializes in investing in, owning and operating some of the largest and most complex assets across the energy, transport, digital infrastructure and water and waste management sectors. On September 13, 2024, BlackRock issued a press release announcing that it expects to close its previously announced acquisition of GIP on October 1, 2024, subject to customary closing conditions, including the receipt of specified regulatory approvals and clearances. For more information, visit
+www.global
+–
+infra.com
+About Microsoft
+Microsoft (Nasdaq “MSFT” @microsoft) creates platforms and tools powered by AI to deliver innovative solutions that meet the evolving needs of our customers. The technology company is committed to making AI available broadly and doing so responsibly, with a mission to empower every person and every organization on the planet to achieve more.
+About MGX
+MGX is a technology investment company focused on accelerating the development and adoption of AI and advanced technologies through world-leading partnerships in the United Arab Emirates (UAE) and globally. MGX invests in sectors where AI can deliver value and economic impact at scale, including semiconductors, infrastructure, software, tech-enabled services, life sciences, and automation.
+Forward-Looking Statements
+This press release, and other statements that the parties may make, may contain forward-looking statements within the meaning of the Private Securities Litigation Reform Act, with respect to the parties’ or the GAIIP’s future financial or business performance, strategies or expectations, including the anticipated timing, consummation and expected benefits of the GAIIP. Forward-looking statements are typically identified by words or phrases such as “trend,” “potential,” “opportunity,” “pipeline,” “believe,” “comfortable,” “expect,” “anticipate,” “current,”“intention,” “estimate,” “position,” “assume,” “outlook,” “continue,” “remain,” “maintain,” “sustain,” “seek,” “achieve,” and similar expressions, or future or conditional verbs such as “will,” “would,” “should,” “could,” “may” and similar expressions.
+The parties caution that forward-looking statements are subject to numerous assumptions, risks and uncertainties, which change over time and may contain information that is not purely historical in nature. Such information may include, among other things, projections and forecasts. There is no guarantee that any projections or forecasts made will come to pass. Forward-looking statements speak only as of the date they are made, and the parties assume no duty to and do not undertake to update forward-looking statements. Actual results could differ materially from those anticipated in forward-looking statements and future results could differ materially from historical performance.
+Certain of the parties have previously disclosed risk factors in their respective United States Securities and Exchange Commission (“SEC”) reports. These risk factors and those identified elsewhere in this release, among others, could cause actual results to differ materially from forward-looking statements or historical performance. Such parties’ Annual Reports on Form 10–K, Quarterly Reports on Form 10-Q and subsequent filings with the SEC, access ible on the SEC’s website at www.sec.gov and on the applicable party’s website, discuss certain of these factors in more detail and identify additional factors that can affect forward–looking statements. The information contained on each party’s website is not a part of this press release, and therefore, is not incorporated herein by reference.
+Media Contacts
+BlackRock Media Relations
+Ed Sweeney
+646-231-0268
+[email protected]
+Global Infrastructure Partners (GIP) Media Relations
+Mustafa Riffat
+646-216-7788
+[email protected]
+Microsoft Media Relations
+WE Communications for Microsoft
+425-638-7777
+[email protected]
+MGX Media Relations
+Brian Lott
++971 55 7007666
+[email protected]
+Tags:
+Press releases
+Surface Pro
+Surface Laptop
+Surface Laptop Ultra
+Surface RTX Spark Dev Box
+Copilot for organizations
+Copilot for personal use
+Explore Microsoft products
+Windows 11 apps
+Account profile
+Download Center
+Microsoft Store support
+Returns
+Order tracking
+Certified Refurbished
+Microsoft Store Promise
+Flexible Payments
+Microsoft in education
+Devices for education
+Microsoft Teams for Education
+Microsoft 365 Education
+How to buy for your school
+Educator training and development
+Deals for students and parents
+AI for education
+Microsoft AI
+Microsoft Security
+Dynamics 365
+Microsoft 365
+Microsoft Power Platform
+Microsoft Teams
+Microsoft 365 Copilot
+Small Business
+Azure
+Microsoft Developer
+Microsoft Learn
+Support for AI marketplace apps
+Microsoft Tech Community
+Microsoft Marketplace
+Software companies
+Visual Studio
+Careers
+About Microsoft
+Company news
+Privacy at Microsoft
+Investors
+Diversity and inclusion
+Accessibility
+Sustainability
+English (United States)
+Your Privacy Choices
+Consumer Health Privacy
+Sitemap
+Contact Microsoft
+Privacy
+Manage cookies
+Terms of use
+Trademarks
+Safety & eco
+Recycling
+About our ads

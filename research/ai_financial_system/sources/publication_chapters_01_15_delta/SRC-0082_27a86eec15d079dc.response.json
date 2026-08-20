@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 53237,
+  "content_sha256": "27a86eec15d079dc6cf88b1dd97852752d685bb7ca7846c3751a9855473d1e4e",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465925122052/hut-20251217xex99d1.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0082_27a86eec15d079dc.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465925122052/hut-20251217xex99d1.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-12-17",
+  "publisher": "Hut 8 Corp.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0082_27a86eec15d079dc.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:34.566203+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:34.537394+00:00",
+  "selected_response_headers": {
+    "content-length": "9312",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:34 GMT",
+    "last-modified": "Wed, 17 Dec 2025 21:15:45 GMT"
+  },
+  "source_id": "SRC-0082",
+  "status": "preserved_complete",
+  "title": "Hut 8 signs 15-year 245 megawatt AI data center lease at River Bend",
+  "write_state": "new_version_written"
+}

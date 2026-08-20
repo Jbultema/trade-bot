@@ -1,0 +1,206 @@
+{
+  "author_manifest_sha256": "437da25ccef0f40d0504d2038f7f32b5d4849fd1fe556739669b91cbedba7406",
+  "canonical_integration_authorized": false,
+  "chapter_prose_authorized": false,
+  "files": [
+    {
+      "bytes": 2746,
+      "lines": 60,
+      "path": "acceptance_report.md",
+      "sha256": "a6a62c2e46e1aac8a29bad6d038b550faf460338f16c40ce8e68334804fcd098"
+    },
+    {
+      "bytes": 13710,
+      "path": "author_input_inventory_audit.csv",
+      "rows": 57,
+      "sha256": "3f1c3b9fef55f0868da7632db06d0ccfc0dbeaacfc6853c78468d1350fffbd3e"
+    },
+    {
+      "bytes": 4698,
+      "path": "author_manifest_audit.csv",
+      "rows": 27,
+      "sha256": "b8776c3d7762bb57e51ec4b75796a279244edbc541f9c7a21fee4c93a421f150"
+    },
+    {
+      "bytes": 2314,
+      "path": "checks.csv",
+      "rows": 15,
+      "sha256": "03256b29371eb374635b8c9e0a1d6bb95d3ad2aef13164ea3c3279a18c77280a"
+    },
+    {
+      "bytes": 7122,
+      "path": "clean_build_comparison.csv",
+      "rows": 29,
+      "sha256": "acf8f17f9cd207ab966bfa76e7855ee283f199bee55be3d96f802fe1e9fc7635"
+    },
+    {
+      "bytes": 353,
+      "lines": 14,
+      "path": "clean_build_results.json",
+      "sha256": "2fd255a9d13b5f9a133f800957e324da57048f06ecf147df5f86ad1f2b1b5841"
+    },
+    {
+      "bytes": 571,
+      "path": "delta_version_audit.csv",
+      "rows": 3,
+      "sha256": "93e0f55e836597f4a8691bee157b3ba6f9d8c4b758e25816f1800de0dfaf677c"
+    },
+    {
+      "bytes": 1004,
+      "path": "derivative_audit.csv",
+      "rows": 8,
+      "sha256": "d4ce03bd43ea3430e96868e1117d03f40db5dd68215cafeaf2420821fb464b63"
+    },
+    {
+      "bytes": 998,
+      "path": "exception_audit.csv",
+      "rows": 6,
+      "sha256": "60746404a3ea6dab647ebd40afd4724efda4b98c9f05075f2dc3bfcafdf2b9fd"
+    },
+    {
+      "bytes": 9280,
+      "lines": 253,
+      "path": "finalize_review.py",
+      "sha256": "7ea7e829dce7a89ef6383f9611bdb973ed9e1a97ed6e5e73f8f9a0633d16fa5d"
+    },
+    {
+      "bytes": 33,
+      "path": "findings.csv",
+      "rows": 0,
+      "sha256": "1c37b653b53fabccfb881c0981c7757f927a5086de905481d881c32aaaf4b292"
+    },
+    {
+      "bytes": 382,
+      "lines": 14,
+      "path": "generic_validation_results.json",
+      "sha256": "8257f3596a5a7e5e04e8e07f8127a43519282cc73266c4b90312fddd4504d491"
+    },
+    {
+      "bytes": 460,
+      "lines": 12,
+      "path": "intrinsic_validation_results.json",
+      "sha256": "4db39b30c5378366fb42f525a328072c6fff132c44f4fb49be7866600aa9f3ff"
+    },
+    {
+      "bytes": 64136,
+      "path": "no_write_audit.csv",
+      "rows": 279,
+      "sha256": "74ab3275a3672981da72534c825008a0d9cfdc055b0dc6662bad09daeb8f848a"
+    },
+    {
+      "bytes": 10205,
+      "path": "preserved_byte_audit.csv",
+      "rows": 53,
+      "sha256": "f3268f37efd1ae7af75785a36f7703ab642030d223f3ab309b9687bfe594c28a"
+    },
+    {
+      "bytes": 95080,
+      "path": "projection_reperformance.csv",
+      "rows": 525,
+      "sha256": "1918c811fcca2192ecfcdb66a8dba42700d57d03cc8a2264c7ef2a937e6f1546"
+    },
+    {
+      "bytes": 114,
+      "lines": 7,
+      "path": "ruff_results.json",
+      "sha256": "ceaf23df96d5c39d0432f7c55faac481add2b516d44cb58761c8051c6f7d7c65"
+    },
+    {
+      "bytes": 34608,
+      "lines": 874,
+      "path": "run_review.py",
+      "sha256": "97b877452375d5a07343e2b6e55b448265fb3c11506bc16f568b99b4b7721582"
+    },
+    {
+      "bytes": 16238,
+      "path": "sealed_input_inventory.csv",
+      "rows": 86,
+      "sha256": "d482548783bcfceb552917b9e2d16b4708144c16fa09564f3acbde97a3958752"
+    },
+    {
+      "bytes": 10408,
+      "path": "source_version_reperformance.csv",
+      "rows": 60,
+      "sha256": "2b44f3a47120eeea9b8ef38305df6a6cc5d3ff1cad31ad01b9bf4e46bc9a8495"
+    },
+    {
+      "bytes": 384,
+      "lines": 15,
+      "path": "sqlite_reperformance.json",
+      "sha256": "6786dd7b1bed28bead3c35fdb55c22d3fc55259e8dc22142a53d6b1a0e2a86a9"
+    },
+    {
+      "bytes": 754,
+      "path": "v1_carried_artifact_audit.csv",
+      "rows": 4,
+      "sha256": "1af11732a8709774723bad6cc50ddd411f780fe05335a81e0f3da32dd3cf35fd"
+    },
+    {
+      "bytes": 9890,
+      "path": "v1_retention_audit.csv",
+      "rows": 57,
+      "sha256": "a61c8497c0d671ebcd3cd50e40ccbd38a7491284bef3b9ebab96c7c07e40d353"
+    },
+    {
+      "bytes": 936,
+      "lines": 34,
+      "path": "validation_results.json",
+      "sha256": "82d21b67c201f76a1af5cec3d10fc20964e771fd5ecf729b40c30026e074ea8d"
+    },
+    {
+      "bytes": 4958,
+      "lines": 162,
+      "path": "verify_clean_builds.py",
+      "sha256": "5727cd09f6fb5f67fafde30392eeb7737d5338beee0f9ac47064c196318a0c5c"
+    }
+  ],
+  "lane": "lane_2_verify_source_preservation_union_v2",
+  "publication_authorized": false,
+  "research_database_sha256": "38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+  "retained_analytical_holds": [
+    "S&P 500 aggregate",
+    "exact Microsoft component and tax attribution",
+    "governed top-20 population",
+    "prospective Meta and Tesla realization monitoring",
+    "unnamed investee allocation and residual Amazon attribution"
+  ],
+  "self_hash_policy": "lane_manifest.json excludes its own hash",
+  "semantic_locator_clearance": "none_beyond_five_previously_accepted_private_reviews",
+  "status_date": "2026-07-26",
+  "validation": {
+    "canonical_integration_authorized": false,
+    "chapter_prose_authorized": false,
+    "checks": [
+      {
+        "check": "independent_intrinsic_reconstruction",
+        "detail": "15/15",
+        "passed": true
+      },
+      {
+        "check": "two_clean_author_and_reviewer_builds",
+        "detail": "author=13 reviewer=16",
+        "passed": true
+      },
+      {
+        "check": "ruff",
+        "detail": "7 files",
+        "passed": true
+      },
+      {
+        "check": "generic_staging_validation",
+        "detail": "files=25 csv_rows=1209",
+        "passed": true
+      }
+    ],
+    "checks_passed": 4,
+    "checks_total": 4,
+    "findings": 0,
+    "passed": true,
+    "publication_authorized": false,
+    "semantic_locator_clearance": "none_beyond_five_previously_accepted_private_reviews",
+    "validator": "fresh_nonauthor_source_preservation_union_v2_acceptance_reviewer",
+    "verdict": "ACCEPT_SOURCE_VERSION_CANDIDATE_READY_FOR_PRIMARY_ATOMIC_INTEGRATION_WITH_ALL_HOLDS"
+  },
+  "verdict": "ACCEPT_SOURCE_VERSION_CANDIDATE_READY_FOR_PRIMARY_ATOMIC_INTEGRATION_WITH_ALL_HOLDS",
+  "workstream": "fresh_nonauthor_source_preservation_union_v2_acceptance_review"
+}

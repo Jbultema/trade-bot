@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 3782859,
+  "content_sha256": "fa365b0ba9be17e5f032568824315d38b5f48e85b649e17a19599e53e93975ca",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/2031750/000203175026000052/ex101.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0128_fa365b0ba9be17e5.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/2031750/000203175026000052/ex101.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-06-26",
+  "publisher": "Ares Core Infrastructure Fund",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0128_fa365b0ba9be17e5.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:53:01.412241+00:00",
+  "retrieval_started_utc": "2026-07-26T17:53:00.317240+00:00",
+  "selected_response_headers": {
+    "content-length": "243556",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:53:00 GMT",
+    "last-modified": "Thu, 02 Jul 2026 20:29:02 GMT"
+  },
+  "source_id": "SRC-0128",
+  "status": "preserved_complete",
+  "title": "ACI Liquid Aggregator amended credit agreement dated June 26 2026",
+  "write_state": "new_version_written"
+}

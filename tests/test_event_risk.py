@@ -328,3 +328,27 @@ def test_user_curated_ai_news_items_load_as_current_watch_context() -> None:
     assert all(event.current for event in events.values())
     assert all(not event.sizing_authority for event in events.values())
     assert {event.phase for event in events.values()} == {"leading_warning"}
+
+
+def test_august_2026_curated_events_load_with_distinct_monitoring_roles() -> None:
+    event_ids = {
+        "walmart_us_comp_slowdown_2026_08_20",
+        "openai_q2_growth_vs_anthropic_2026_08_19",
+        "openai_q2_operating_loss_2026_08_19",
+    }
+    events = {
+        event.event_id: event
+        for event in load_market_events("configs/events.yaml")
+        if event.event_id in event_ids
+    }
+
+    assert set(events) == event_ids
+    assert events["walmart_us_comp_slowdown_2026_08_20"].category == "consumer_demand"
+    assert events["walmart_us_comp_slowdown_2026_08_20"].direction == "uncertain"
+    assert {
+        events["openai_q2_growth_vs_anthropic_2026_08_19"].category,
+        events["openai_q2_operating_loss_2026_08_19"].category,
+    } == {"ai_unit_economics"}
+    assert all(event.current for event in events.values())
+    assert all(not event.sizing_authority for event in events.values())
+    assert {event.phase for event in events.values()} == {"coincident_confirmation"}

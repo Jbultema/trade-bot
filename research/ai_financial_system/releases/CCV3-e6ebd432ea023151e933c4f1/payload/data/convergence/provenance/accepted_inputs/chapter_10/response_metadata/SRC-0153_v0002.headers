@@ -1,0 +1,23 @@
+HTTP/2 200 
+date: Sun, 26 Jul 2026 19:15:53 GMT
+content-type: text/html; charset=UTF-8
+permissions-policy: fullscreen=(), geolocation=()
+access-control-allow-origin: *
+age: 2068
+referrer-policy: strict-origin-when-cross-origin
+vary: Accept-Encoding
+x-cache: HIT
+x-cache-hits: 8
+x-cacheable: YES:Forced
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+x-host: aligneddc.com
+x-hosting: ds
+x-url: /press-release/aip-mgx-and-blackrocks-gip-close-acquisition-of-aligned-data-centers/
+x-xss-protection: 1; mode=block
+cf-cache-status: DYNAMIC
+strict-transport-security: max-age=31536000; includeSubDomains; preload
+server: cloudflare
+cf-ray: a215bc531e60e665-DEN
+alt-svc: h3=":443"; ma=86400
+

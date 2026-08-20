@@ -1,0 +1,33 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 2385481,
+  "content_sha256": "f598dde577393b51b4cfa001c80326c5991a760f6263194458278c78ec590d2a",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://lpscpubvalence.lpsc.louisiana.gov/portal/PSC/ViewFile?fileId=AUl4qI5mSHA%3D",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0087_f598dde577393b51.pdf",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "application/pdf",
+  "original_url": "https://lpscpubvalence.lpsc.louisiana.gov/portal/PSC/ViewFile?fileId=AUl4qI5mSHA%3D",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-07-02",
+  "publisher": "Louisiana Public Service Commission",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0087_f598dde577393b51.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:38.891166+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:38.214816+00:00",
+  "selected_response_headers": {
+    "cache-control": "private",
+    "content-disposition": "inline;filename=05 - Public Version of Direct Testimony and Exhibits of Daniel Kline (Confidential Filed Under Seal).pdf",
+    "content-length": "2385481",
+    "content-type": "application/pdf",
+    "date": "Mon, 27 Jul 2026 01:08:38 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0087",
+  "status": "preserved_complete",
+  "title": "Entergy Louisiana direct testimony concerning Project Evest",
+  "write_state": "new_version_written"
+}

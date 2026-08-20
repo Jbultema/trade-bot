@@ -1,0 +1,26 @@
+{
+  "arithmetic_controls": 18,
+  "author_verdict": "READY_FOR_FRESH_NONAUTHOR_METADATA_REBASE_REVIEW",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "chapter_projections": 341,
+  "claims": 278,
+  "docx_replacement": "NOT_AUTHORIZED",
+  "falsifiers": 20,
+  "handoffs": 18,
+  "intrinsic_artifacts_copied": 50,
+  "intrinsic_support_links": 396,
+  "nonadditivity_controls": 4,
+  "preservation_projection_counts": {
+    "internal_P4_reconstruction": 3,
+    "no_matching_preservation_record": 186,
+    "preserved_bytes_available_locator_review_pending": 172
+  },
+  "preservation_projection_rows": 361,
+  "publication": "BLOCKED",
+  "repairs": 9,
+  "status_date": "2026-07-26",
+  "union_review_manifest_sha256": "79c6a07e5746f3a5a8a81ecf8677b9efa4ce29b4c0acbdcfbde19dcb70163fb1",
+  "union_snapshot": "SPU-V2-20260726-38b990b2",
+  "unique_claim_appearances": 294,
+  "unknowns": 126
+}

@@ -1,0 +1,33 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 100469,
+  "content_sha256": "5edb36d623b5394c7c8a42055e71785a1e4e4ef0c16c3284fe2b37ea001e535d",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://investor.nvidia.com/news/press-release-details/2025/OpenAI-and-NVIDIA-Announce-Strategic-Partnership-to-Deploy-10-Gigawatts-of-NVIDIA-Systems/default.aspx",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0045_5edb36d623b5394c.aspx",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://investor.nvidia.com/news/press-release-details/2025/OpenAI-and-NVIDIA-Announce-Strategic-Partnership-to-Deploy-10-Gigawatts-of-NVIDIA-Systems/default.aspx",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-09-22",
+  "publisher": "NVIDIA Corporation and OpenAI",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0045_5edb36d623b5394c.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:29.819119+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:29.350672+00:00",
+  "selected_response_headers": {
+    "cache-control": "public, max-age=10, stale-if-error=86400, stale-while-revalidate=86400",
+    "content-length": "100469",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Mon, 27 Jul 2026 01:08:29 GMT",
+    "etag": "\"9123b93cf9242934ec9196c5f1d0572d\"",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0045",
+  "status": "preserved_complete",
+  "title": "OpenAI and NVIDIA announce strategic partnership to deploy ten gigawatts of NVIDIA systems",
+  "write_state": "new_version_written"
+}

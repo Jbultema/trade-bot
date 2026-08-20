@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 130989,
+  "content_sha256": "45446ff20ba46f00ca2a8e1f83366932432823f58690803ba4c13d1ac83e8e6f",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0026_45446ff20ba46f00.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=UTF-8",
+  "original_url": "https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-10-28",
+  "publisher": "Microsoft Corporation",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0026_45446ff20ba46f00.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:50:51.138308+00:00",
+  "retrieval_started_utc": "2026-07-26T17:50:50.990673+00:00",
+  "selected_response_headers": {
+    "cache-control": "max-age=15552000, must-revalidate",
+    "content-type": "text/html; charset=UTF-8",
+    "date": "Sun, 26 Jul 2026 17:50:51 GMT",
+    "last-modified": "Tue, 28 Oct 2025 06:00:09 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0026",
+  "status": "preserved_complete",
+  "title": "The next chapter of the Microsoft-OpenAI partnership",
+  "write_state": "new_version_written"
+}

@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 36876,
+  "content_sha256": "13de85cffe9ea2037abfe223a16c5cdcfd78254e64e774cbd586ad9b344b4596",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926053247/tm2613163d1_8k.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0095_13de85cffe9ea203.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1964789/000110465926053247/tm2613163d1_8k.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-04-30",
+  "publisher": "Hut 8 Corp. and Hut 8 DC LLC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0095_13de85cffe9ea203.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:11.855636+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:11.831887+00:00",
+  "selected_response_headers": {
+    "content-length": "7750",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:51:11 GMT",
+    "last-modified": "Fri, 01 May 2026 13:43:26 GMT"
+  },
+  "source_id": "SRC-0095",
+  "status": "preserved_complete",
+  "title": "Hut 8 DC River Bend senior secured notes indenture and closing Form 8-K",
+  "write_state": "new_version_written"
+}

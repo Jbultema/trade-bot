@@ -1,0 +1,15 @@
+HTTP/2 200 
+vary: Accept-Encoding
+strict-transport-security: max-age=63072000; includeSubDomains
+cache-control: no-cache,must-revalidate,max-age=0,no-store,private
+content-type: application/pdf; charset=UTF-8
+content-disposition: inline; filename="U-21990%20DTE%20Electric%20Application%20for%20Ex%20Parte%20Approval%20of%20Special%20Contracts%20Final.pdf"
+x-content-type-options: nosniff
+content-length: 6880202
+date: Sun, 26 Jul 2026 19:13:51 GMT
+set-cookie: CookieConsentPolicy=0:1; path=/; expires=Mon, 26-Jul-2027 19:13:51 GMT; Max-Age=31536000; secure
+set-cookie: LSKey-c$CookieConsentPolicy=0:1; path=/; expires=Mon, 26-Jul-2027 19:13:51 GMT; Max-Age=31536000; secure
+set-cookie: BrowserId=IxDr34kmEfG_6ZHmAycGSg; path=/; expires=Mon, 26-Jul-2027 19:13:51 GMT; Max-Age=31536000; secure; SameSite=None
+x-origin-cache-control: no-cache,must-revalidate,max-age=0,no-store,private
+akamai-grn: 0.0763ca17.1785093231.47997cdf
+

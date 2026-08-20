@@ -58,12 +58,10 @@ def test_cycle_validation_uses_next_session_after_origin() -> None:
 
     assert not observations.empty
     assert (
-        pd.to_datetime(observations["entry_date"])
-        > pd.to_datetime(observations["origin_date"])
+        pd.to_datetime(observations["entry_date"]) > pd.to_datetime(observations["origin_date"])
     ).all()
     assert (
-        pd.to_datetime(observations["end_date"])
-        > pd.to_datetime(observations["entry_date"])
+        pd.to_datetime(observations["end_date"]) > pd.to_datetime(observations["entry_date"])
     ).all()
 
 
@@ -99,6 +97,13 @@ def test_cycle_tracker_writes_artifacts(tmp_path) -> None:
     assert (tmp_path / "cycle_path_transition_forecast.csv").exists()
     assert (tmp_path / "cycle_path_reliability.csv").exists()
     assert (tmp_path / "cycle_crisis_playback.csv").exists()
+    assert (tmp_path / "capital_cycle_summary.csv").exists()
+    assert (tmp_path / "capital_cycle_families.csv").exists()
+    assert (tmp_path / "capital_cycle_signals.csv").exists()
+    assert (tmp_path / "capital_cycle_events.csv").exists()
+    assert (tmp_path / "capital_cycle_missing_confirmations.csv").exists()
+    assert (tmp_path / "capital_cycle_lead_times.csv").exists()
+    assert result.capital_cycle_summary.iloc[0]["allocation_authority"] == 0.0
     assert (tmp_path / "summary.md").exists()
 
 
@@ -135,9 +140,7 @@ def test_path_state_history_breaks_out_of_stale_normal_during_deep_stress() -> N
         state_step_days=21,
     )
 
-    deep_stress = path[
-        pd.to_numeric(path["qqq_drawdown_252d"], errors="coerce").le(-0.18)
-    ]
+    deep_stress = path[pd.to_numeric(path["qqq_drawdown_252d"], errors="coerce").le(-0.18)]
     assert not deep_stress.empty
     assert set(deep_stress["path_phase"]).intersection({"early_unwind", "liquidation"})
 
@@ -295,8 +298,7 @@ def test_path_candidate_validation_uses_decoded_path_phase() -> None:
     assert not observations.empty
     assert set(observations["dominant_phase"]) == {"liquidation"}
     assert (
-        pd.to_datetime(observations["entry_date"])
-        > pd.to_datetime(observations["origin_date"])
+        pd.to_datetime(observations["entry_date"]) > pd.to_datetime(observations["origin_date"])
     ).all()
 
 
@@ -347,9 +349,7 @@ def test_crisis_playback_replays_phase_probabilities() -> None:
     playback = build_cycle_crisis_playback(prices, horizons=(0, 21), origin_step_days=21)
 
     assert not playback.empty
-    assert {"crisis", "stage", "phase", "phase_probability", "phase_fit"}.issubset(
-        playback.columns
-    )
+    assert {"crisis", "stage", "phase", "phase_probability", "phase_fit"}.issubset(playback.columns)
     assert set(playback["horizon"]) == {"0m", "1m"}
     nowcast = playback[playback["horizon"].astype(str).eq("0m")]
     assert nowcast["qqq_forward_return"].isna().all()

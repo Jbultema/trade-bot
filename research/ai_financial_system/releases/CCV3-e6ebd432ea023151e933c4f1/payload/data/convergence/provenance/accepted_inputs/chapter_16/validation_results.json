@@ -1,0 +1,26 @@
+{
+  "builder_acceptance": "SELF_VALIDATION_ONLY",
+  "canonical_write": "NOT_AUTHORIZED",
+  "chapter": "CH16",
+  "comparative_publication": "BLOCKED",
+  "fresh_nonauthor_acceptance": "REQUIRED",
+  "lane": "lane_3_chapter_16_rebuilt_v3",
+  "patch_accounting": "PASS",
+  "patches_expected": 12,
+  "patches_semantically_passed": 12,
+  "regression_checks_passed": 19,
+  "regression_checks_total": 19,
+  "status_date": "2026-07-26",
+  "summary": {
+    "combined_candidate_and_adjudication_rows": 618,
+    "graph_metrics": 86,
+    "identity_checks": 78,
+    "prior_repairs": 46,
+    "project_role_checks": 26,
+    "record_claim_links": 1726,
+    "schema_roundtrips": 19,
+    "selected_edges": 44,
+    "structured_candidates": 574
+  },
+  "validator_status": "PASS"
+}

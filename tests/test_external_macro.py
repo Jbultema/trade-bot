@@ -39,6 +39,20 @@ def test_42macro_classifier_distinguishes_constructive_and_defensive_reads() -> 
     assert defensive["large_change_flag"] is True
 
 
+def test_42macro_classifier_does_not_treat_capex_bubble_as_bullish() -> None:
+    result = classify_42macro_transcript(
+        "The AI capex bubble is creating competition for capital. Credit default "
+        "swaps surged as the MOVE index warned of a broad decline in global liquidity. "
+        "We are preparing for a summer 1998-style correction.",
+        title="Will the bond market break the AI buildout?",
+        published_date="2026-07-28",
+        video_id="creditrisk1",
+    )
+
+    assert result["macro_posture_score"] < -0.4
+    assert result["macro_posture_label"] == "risk_reduction"
+
+
 def test_macro_tradebot_comparison_matches_nearest_operating_date() -> None:
     classifications = pd.DataFrame(
         [
@@ -209,6 +223,70 @@ reduction, not a long-term bearish view.
     assert transcript_path.exists()
     assert "Timestamp OFF" not in transcript_path.read_text(encoding="utf-8")
     assert "risk-off market" in transcript_path.read_text(encoding="utf-8")
+
+
+def test_manifest_frame_deduplicates_local_files_by_video_id(tmp_path) -> None:
+    transcript_dir = tmp_path / "transcripts"
+    transcript_dir.mkdir()
+    (transcript_dir / "manifest.json").write_text("[]", encoding="utf-8")
+    shorter = transcript_dir / "2026-07-01_duplicate123_short.txt"
+    longer = transcript_dir / "2026-07-01_duplicate123_long.txt"
+    header = (
+        "source: 42macro_youtube\n"
+        "published_date: 2026-07-01\n"
+        "video_id: duplicate123\n"
+        "url: https://www.youtube.com/watch?v=duplicate123\n"
+        "title: Duplicate test\n\n"
+    )
+    shorter.write_text(header + "short transcript", encoding="utf-8")
+    longer.write_text(
+        header + "this transcript contains substantially more retained words",
+        encoding="utf-8",
+    )
+
+    frame = external_macro._manifest_frame(transcript_dir)
+
+    assert len(frame) == 1
+    assert frame.iloc[0]["video_id"] == "duplicate123"
+    assert frame.iloc[0]["transcript_path"] == longer.name
+
+
+def test_bounded_sync_merge_preserves_prior_catalog_rows() -> None:
+    current = pd.DataFrame(
+        [
+            {
+                "video_id": "newvideo123",
+                "source": "42macro_youtube",
+                "published_date": "2026-07-28",
+                "title": "New",
+                "url": "https://www.youtube.com/watch?v=newvideo123",
+                "transcript_path": "new.txt",
+                "word_count": 100,
+                "fetched_at_utc": "2026-07-28T00:00:00Z",
+                "status": "fetched",
+                "error": "",
+            }
+        ]
+    )
+    prior = {
+        "oldvideo123": {
+            "video_id": "oldvideo123",
+            "source": "42macro_youtube",
+            "published_date": "2025-01-01",
+            "title": "Old",
+            "url": "https://www.youtube.com/watch?v=oldvideo123",
+            "transcript_path": "old.txt",
+            "word_count": 80,
+            "fetched_at_utc": "2025-01-01T00:00:00Z",
+            "status": "fetched",
+            "error": "",
+        }
+    }
+
+    merged = external_macro._merge_prior_video_rows(current, prior)
+
+    assert set(merged["video_id"]) == {"newvideo123", "oldvideo123"}
+    assert merged.iloc[0]["video_id"] == "newvideo123"
 
 
 def test_missing_transcript_priority_prefers_large_change_rows(tmp_path) -> None:

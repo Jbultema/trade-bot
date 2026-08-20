@@ -1,0 +1,14 @@
+{
+  "accepted_scalar_fields_scanned": 19422,
+  "disposition_counts": {
+    "canonical_source_identity_mapping_reference": 35,
+    "governed_non_support_reference_hold": 8,
+    "projected_relationship_reference": 2236
+  },
+  "errors": [],
+  "explicit_governed_reference_holds": 8,
+  "reviewed_omissions_exactly_accounted_for": true,
+  "semantic_reference_occurrences": 2279,
+  "status": "PASS",
+  "validator_independence": "discovers claim/source tokens from every original scalar value; does not use builder column-name routing or source_projection_coverage"
+}

@@ -1,0 +1,692 @@
+source: 42macro_youtube
+published_date: 2026-07-31
+video_id: 1Fz9zrNuAtI
+url: https://www.youtube.com/watch?v=1Fz9zrNuAtI
+title: Will the Bond Market Break the Stock Market?
+
+[music]
+>> It wouldn't be a summer Friday for
+markets without a little earning season
+intrigue and today you don't have to
+look very far to find said intrigue.
+Apple shares are getting blasted as the
+company's current quarter revenue
+guidance came up light. Ask outgoing CEO
+Tim Cook and I can't believe I'm even
+calling him outgoing about why the
+outlook wasn't strong, he would probably
+reference the memory chip shortage
+hampering many makers of consumer
+electronics.
+>> We were reluctantly raised prices I
+would say and we did it because we're in
+what I would characterize as a 100-year
+flood on the memory pricing
+with exponential increases in in memory
+prices.
+>> To the boots. On the flip side of this,
+we are seeing strong rebounds in beat-up
+memory chip names like Micron and
+SanDisk. As becomes clear, they have
+pricing power well into the future,
+whereas Apple's outlook was a complete
+letdown. Amazon was the total opposite.
+The company reported accelerated growth
+in its monster AWS business along with
+surging profit margins for that segment.
+CEO Andy Jassy came out very bullish on
+AWS on his earnings call.
+>> Our backlog stands at $496 billion
+growing triple digits year-over-year.
+AWS is now $169 billion annualized
+revenue run rate business. Which for
+perspective, it places at 24 on the
+Fortune 500 list if it was a standalone
+company.
+>> I mean, he mentions a trillion dollars
+there. I thought he would have been a
+little more excited. Let's bring in the
+opening bid round table in here. I know
+they're excited. Adam Turnquist LPL
+Financial Chief Technical Strategist
+Darius Dale, 42 Macro Founder and CEO
+and Yahoo Finance's Dan Howley. Good to
+see you all. Dan, busy evening for you
+and now a busy morning. Let's start with
+Apple that outlook coming up short.
+>> Yeah, I mean, obviously this is it's
+it's a it's twofold actually. It's it's
+the memory shortage, obviously. You
+know, Tim Cook said
+that they had a little bit of kind of
+armor
+against it when they had kind of brought
+in shipments. So, basically, they were
+bringing in earlier
+memory chips or memory chips they'd
+previously purchased,
+putting them into devices, and then
+having them shipped in.
+That was a way for them to protect
+against having to raise prices
+and some of this shock. But, that supply
+is dwindling, obviously. He kind of made
+reference to that. They're going to have
+less flexibility going forward. And so,
+we'll see a greater impact, and I think
+that's, you know, that's I think that's
+primarily what the the street is
+reacting to now is that lack of
+flexibility.
+The other thing, though, is it's not
+just a memory
+for Apple. It's also their SOCs, their
+system on chips. That's basically their
+processors. Those are also supply
+constrained because so many companies
+are fighting to build out processors at
+this point. And so, you know, Tim Cook
+has referenced this in prior earnings
+reports. Obviously, this is his last
+one, as he said. That's wild to say, but
+he kind of had to give this downer news
+where the company is facing constraints
+on these system on chips
+as well as on these memory chips.
+For Apple, you know, obviously, it
+didn't have that huge exposure to AI
+that we'd seen from, you know,
+Microsoft, Google, where they just kind
+of gone up and down and up and down and
+up and down. Or the, you know, processor
+companies or the memory companies,
+they've been insulated. And this feels
+as though it's, you know, one of the big
+shocks
+from AI to Apple. It's just it's
+tangentially related.
+>> Adam, I, you know, listening to that
+Apple earnings call, I didn't get the
+sense that pricing for memory chips is
+going to cool down anytime soon. I mean,
+this is something that is going These
+chips are going to stay high in price
+for the next 24 months, I think. I mean,
+I just I didn't get any sense that
+things were slowing down. Does that mean
+what we heard from Apple that the
+sell-offs in some of these names, like a
+Micron and a Sandisk, those sells are
+done.
+>> I think you can make that case when you
+look at the the sell-off we've incurred
+pretty much a historic meltdown in the
+momentum names, a lot of those memory
+names wrapped up into that trade. And I
+don't think it was a reflection of the
+memory trade ending or the supply demand
+future coming into in balance anytime
+soon. It was really a product of extreme
+positioning leverage positioning, and
+now we're seeing the unwind of that in a
+pretty dramatic way. So, we're starting
+to see some some technical evidence of a
+potential bottom here in some of these
+names. They've had some 50 plus percent
+drawdowns in a very short period after
+historic rallies, and I think that's the
+context that's needed here. Some of
+these names up 100 plus percent over a
+very short period of time. These type of
+corrections come with the territory. As
+things get extremely overbought and
+crowded, you tend to revert back to
+support, and and that's I think really
+what we're seeing play out here in that
+space.
+>> Adam, as you saw yesterday, Ken Griffin
+stepping in here and buying a lot of
+this AI portfolio from
+you know, Leopold and whatever he does
+over there.
+Do you view that as a major clearing
+event? And is that the all systems go to
+get back in here and buy some of these
+AI names? Because if Ken Griffin is
+buying at these prices, why shouldn't
+you?
+>> I think it adds to the evidence of a
+tradable low in the we'll call it the
+tech trade, the semi trade, and and some
+of the the momentum trade, and I think
+it does set up for at least a relief
+rally here off these depressed levels.
+You look at, for example, the Kospi,
+where you have SK Hynix and Samsung
+extremely oversold, and the rally that
+incurred there last night up 18%. That's
+a record rally in a single day for the
+Kospi, right at the 200-day moving
+average. So, score one for the
+technicals there, and I think you get
+those capitulation moments that are
+often coinciding with these headlines
+with with a forced liquidation, it tends
+to suggest that the seller
+selling pressure has probably reached a
+peak and now you're starting to see
+buyers come back into the market. So, I
+think it is a good sign for a potential
+bottom here.
+>> Darius, on that Apple earnings call, I'm
+going to stick with Apple here. Tim Cook
+saying, "Look, we're we're we're going
+to write we're going to raise prices."
+And it's likely that prices on iPhones
+are going up when they come out later
+this year with those new models.
+From an economic standpoint, is the
+economy is the US economy in such a
+place that the average consumer could
+afford to pay $300 more for an iPhone?
+>> Uh absolutely not, but that the answer
+to that was no 5 years ago. I don't
+think anything's changed on that front.
+Uh we're talking about capacity
+constraints, endogenous capacity
+constraints within the tech sector and
+they are many. I think the biggest
+capacity constraint that we learned
+about collectively as investors this
+week is the constraint on global
+capital. We run a model at 42 macro that
+tries to ascertain what the market's
+pricing is for R* and the neutral rate.
+And that model has signaled that we've
+essentially increased that that R*
+estimate by about, you know, 50 to 75
+basis points in the last couple of
+months. And so, the reason the bond
+market had such an adverse reaction to
+the Federal Reserve's inability to
+regain some credibility on inflation
+fighting on Wednesday is because the the
+Fed that does not follow that up by
+tightening monetary policy is
+essentially sending a message to the
+markets that they're going to
+financially repress them at a time where
+we know capital is starting to dwindle
+at the margins in the context of all the
+AI infrastructure build out, as well as
+in the context of these structurally
+wide sovereign budget deficits. And so,
+at the end of the day, you know, there's
+a real reckoning ahead of us here. This
+doesn't necessarily mean the bull market
+is over, but we don't believe that this
+tradeable low is something that's going
+to prove durable when you look out 3 to
+4 months because again, it's the Federal
+Reserve that's going to have to act to
+catch up to regain some of that
+inflation fighting credibility.
+>> Really important points there, Darius.
+Then, what does that day of reckoning
+look like? because if the capital is
+going to become more constrained like
+you're talking about here, you know,
+some of these financing these AI
+financing deals, data centers, you name
+it, maybe that doesn't get done. As you
+zoom out, it's these projects that have
+kept the US economy afloat for the past
+24 months.
+>> Yeah, 100%. Look, look,
+this is not a traditional growth scare.
+If anything, it's it's it's the the
+economy is being run too hot. I mean, we
+got the GDP numbers yesterday, nominal
+GDP at 8% versus a long-run mean of 4%.
+If you look at real final sales to
+private domestic purchases growing at 4%
+versus a long-run mean of 3%. I mean,
+this is an economy that is running
+exactly as as hot as we expected it to
+and forecasted at the lows of last April
+and April 2025 when we first outlined
+our paradigm C running hot theme. And so
+now we're just in a hot run economy that
+is ultimately starting to run out of
+capital from the perspective of R star
+and the market's pricing of the neutral
+rate. And so ultimately, what just has
+to happen is that the cost of capital as
+the cost of capital rises, investors are
+demanding higher ex-ante units of return
+for that incremental marginal supply of
+capital because the the the supply of
+capital is starting to dwindle. And so
+as that as we all are fighting for
+capital, whether it be at AI
+infrastructure play or or a US
+government trying to roll over $12
+trillion of debt this year,
+the price is the price.
+>> It's a good point. One thing people are
+fighting for, Dan Howl, let me get back
+to you, is Amazon Web Services.
+This business has now truly taken on a
+life of its own. And this is really, I
+think, one of the best quarters I've
+ever seen from Amazon in the AWS
+business. The business accelerated
+significantly sequentially, margins
+surged. What else could one possibly
+want from a key growth driver like this
+inside of a company that is just super
+large like Amazon?
+>> Yeah, I think it was interesting, you
+know, the kind of whole conversation
+around AI when it comes to these
+companies is having a frontier model.
+You know, you look at Google, they have
+frontier models. You look at Open AI,
+obviously Anthropic. Uh
+Microsoft, they have Open AI and they're
+kind of working on their models. Andy
+Jassy was basically saying on the call,
+"We don't really need a kind of frontier
+model. It's just not, you know, it's not
+necessary for us. We set up uh
+AWS so that people can use other
+models." He said,
+"But we're still working on a frontier
+model." So it's not as though they're if
+they're not, it's just that, you know, I
+think that's his way of saying, "Look,
+we don't got it now, guys, but we'll
+have it at some point." And that'll even
+be better for for us. I think for what
+people may look for, you know, obviously
+the growth story has been huge. This is
+I think that the same thing that
+Microsoft has seen where, you know, the
+kind of where show me the money moment,
+right? Where Microsoft had that that
+growth story
+earlier this week, it feels like last
+week, I almost said last week,
+with regards to Azure accelerating and
+then expected to accelerate further to
+45% growth next
+current quarter, 30 million Copilot
+seats for
+the AWS side.
+People I think are starting to see,
+"Okay,
+there's actual there's there's a a here
+here
+or at least we're starting to see the
+the the there there here here."
+The other thing that I think was
+interesting was the revenue run rate
+that they said they're seeing out of AI
+specifically as well as the chips
+business. So they said they had a 25
+billion-dollar run rate from AI in AWS.
+Obviously they they want to see that
+continue, but then they said, "Oh yeah,
+our chips business also has this 25
+billion-dollar run rate." Now Andy Jassy
+has, you know, talked about how the
+chips business is a multi-billion-dollar
+business before. I think he said if they
+broke it off on its own and didn't have
+to sell into Amazon, it would be 50
+billion dollars.
+And then he discussed going out and
+selling individual chips to third
+parties. In other words, not just
+renting them from their own data centers
+like they do to Anthropic, but taking
+the actual chips and allowing people to
+install them in their own data centers.
+So he's discussed that. He talked about
+that on the phone. I think that's
+something that people are going to be
+looking forward to to see, "Okay, when
+when does that happen? Then what does
+that look like for Amazon and the AWS
+business? What what kind of value does
+that add?" And obviously, you know,
+Google's doing this.
+Meta has its own chips. Microsoft has
+its own chips. Those aren't selling to
+other people.
+Meta is in the, you know, maybe we'll do
+the SpaceX thing and rent out. But for
+for Amazon, it could be a good play. And
+then you have to think, "Okay, so what
+does that mean then I guess for Nvidia?"
+>> Uh Amazon just printing money. Good
+stuff, guys. Way to kick off this show.
+Lots of great analysis there.
+>> [music]
+>> It has been another horrible week for
+SpaceX investors with the stock
+continuing to lose altitude ahead of the
+company's August 4th earnings report.
+That's the first one since their IPO.
+The stock is down 50% from its peak.
+Looked at another way, SpaceX has erased
+about $1.3 trillion in market value
+since peaking in June. This decline
+alone This is as large is large.
+Actually, I should say larger than
+Tesla's entire market cap. The number so
+big I couldn't even get out of my mouth.
+Here's how one player in the SpaceX IPO
+is thinking through the situation.
+>> It didn't seem right to us that one of
+the most historic IPOs in history retail
+would be left out. So, we were really
+excited to be able to support it. We had
+nearly a million customers that put in
+orders. Um
+and we'll see what happens in the long
+term. Our customers, as I mentioned, are
+long term bullish. And so, many of them
+are probably still buying it right now.
+Um and so, we're going to continue to
+support them.
+>> Adam D'Angelo is still with me. Let me
+also bring in at Yahoo Finance Ines
+Ferré. Ines, let me start with you. Set
+the scene for this first earnings report
+on SpaceX.
+Part of me would like to think
+expectations are so low given the
+stock's plunge since the IPO. But then
+the other part of me thinks, "Well,
+expectations are very high because
+they're still valued at over a trillion
+dollars."
+>> Yeah, and investors are going to be
+paying attention to what Elon Musk has
+to say about Starlink, about Starship,
+about data centers in space, about
+monetizing AI compute. So, all of those
+factors about the company, also they
+will probably be There may be a question
+also about perhaps merging with Tesla.
+There was a question about that in the
+Tesla earnings, and that question was
+sort of dodged, but it'll be interesting
+to see because now you have this Wall
+Street Journal report that's saying that
+that they may that Tesla may be spinning
+off or perhaps selling it's uh China
+business or weighing the options, even
+though Elon Musk came out on Twitter and
+saying that that was fake news. But,
+that would be an interesting sort of
+dynamic because this merger may be
+closer than what investors anticipate.
+>> Adam, when you look at the chart for
+SpaceX, what do you see?
+>> Well, obviously pretty beaten up since
+the IPO. And when we look back at
+historical IPOs, we've done some
+analysis on this. The average median
+drawdown over the 12-month post-IPO
+period is about 50% the median right
+around that level. So, we're at those
+levels when you look at the June highs
+to the drawdown that we've experienced
+to more recently.
+I think you can you can check that box
+in terms of qualifying here for the
+price progression that we typically see.
+We've had momentum very oversold. We
+haven't had any change in momentum
+indicators turning positive. So, what
+I'm looking for in terms of resistance,
+a close above maybe 119 in that area,
+and for a momentum actually turn
+positive. We're not quite there yet, but
+maybe earnings will get us through the
+option market and price in a pretty big
+move for next week around a I think 13
+to 14% implied move up or down. So,
+definitely going to be some fireworks.
+At least that's what the market is
+telling us post-earnings next week.
+>> Adam, is there anything in the charts
+that would suggest that after this
+earnings report, that's when insiders or
+earlier investors, too, can begin
+selling the stock? Do you think that's
+been priced in here with this drop post
+IPO?
+>> I don't know if that's fully priced in.
+I think 20% of shares that are locked up
+are said to expire after they report,
+and I think that's going to act as an
+overhang on the stock. Again, going back
+to that analysis that we did, once those
+lockup periods expire, you tend to get
+underperformance.
+Usually it's a 6-month lockup in the
+study that we did, but it's certainly a
+factor that could weigh on on the stock.
+But again, you're at very depressed
+levels. There's some signs of of seller
+enthusiasm fading a little bit in some
+of the other momentum indicators that we
+look at. So, I think it's too early to
+make the call here that a bottom has
+been set, but they're starting to We're
+starting to see some technical evidence
+we could be close.
+>> Darius, if I just extract myself from
+watching the moves in SpaceX tick by
+tick for a second, uh this is a company
+that is still viewed as a an engine, no
+pun intended, for the economy. They're
+creating jobs, not only within SpaceX,
+but also a lot of their suppliers,
+because like Elon has mentioned, a lot
+of this stuff that they're doing has
+never even existed before.
+>> Yeah, agreed. And look, this is a
+fantastic company. Elon Musk is a
+fantastic inventor, but that obviously
+hasn't stopped the stock price from
+getting greater. On June 12th, uh we
+published a note to our our our audience
+uh titled "How Many Days Do Investors
+Have to Make Money in SpaceX?" And our
+answer was three. And so, we were off by
+1 day. The stock [clears throat] peaked
+a day
+>> You better work next time. Come on.
+>> [laughter]
+>> Yeah, and look, there's there are two
+reasons why we thought that. One, uh
+citing Adam's uh work, you know,
+historically you tend to see these big
+drawdowns in IPOs. Our number was 55% uh
+within the first year on the median
+basis. Uh but more importantly, it's our
+belief system that we believe the Fed is
+has to, you know, tighten monetary
+policy to regain credibility with the
+bond market. And here's why this matters
+to the stock market, because you think,
+"Okay, 25 basis points of interest rate,
+50 basis points of interest rates, who
+cares who cares or whatever, you know,
+they're spending trillions in R&D and
+capex." But this is why this matters.
+Retail margin debt is priced as a spread
+to the overnight rate. And right now,
+retail margin debt has triggered a very
+significant warning sign, the kinds we
+only see before secular bear markets. Uh
+right now, we're up over 100% on a
+trailing three-year basis. The last
+three times we saw that signal triggered
+was
+early 1998 ahead of a 20% crash in the
+S&P 500, uh in March of 2000 ahead of an
+80-something percent drawdown in the
+Nasdaq, and then in uh mid-2007 ahead of
+a 60% drawdown in the S&P 500. So, a
+Federal Reserve that acts to take away
+the punch bowl, even at the margins,
+will start to send a a bill. Hey, here's
+a a bill that's coming due to everyone
+here who's loaded up and levered to the
+gills uh in in these high-flying uh tech
+stocks.
+>> That's a good point. All right, it has
+been a big week for the markets. We will
+end the week with Coca-Cola trading near
+a record high after a big quarter.
+Starbucks earnings reinforced the view
+its turnaround is picking up steam. Meta
+clearly deserved to be punished for its
+runaway CapEx spending. Microsoft now
+looks like the darling of the Mag 7. The
+AI trade has stabilized thanks to
+billionaire hedge fund manager Ken
+Griffin. And oh yeah, there was a Fed
+meeting where we got the sense new Fed
+chair Kevin Warsh was already behind the
+curve. Here's what stood out from our
+week on Opening Bid.
+>> The consistency really is scaling across
+our business. And, you know, at the end
+of the day, what I think we're doing is
+just being Starbucks. And, you know,
+when we execute uh great craft, you
+know, provide that moment of connection,
+and then put it in a place uh that truly
+is a special third place, and it kind of
+becomes the community's Starbucks, uh
+we're rewarded with great business.
+>> It really is, I think, for the next
+generation of of kids and and even the
+older uh folks, just a great way to
+learn about investing. And then, when
+you realize the power of compounding and
+starting when you're zero, like, I have
+a young daughter at home, and and I
+opened an account for her, and you see
+what it can do in 18 or 60 years, it's
+really powerful.
+>> Well-off consumers who are not
+constrained, uh they don't have cash
+constraints, they shop in club, they
+shop in
+uh online, uh they buy big pack sizes,
+they love innovation. uh So, everything
+good there. Then you have the more cash
+constrained consumer. Um, they are truly
+managing paycheck to paycheck. They are
+very carefully looking for lower cash
+outlay pack sizes and carefully evaluate
+promotion value.
+And when we deliver against both, we are
+able to win with both groups.
+>> He developed so fast. I mean, it was
+like faster than fable or faster than
+mythos, you know, faster than
+uh, than we see that that the top AI
+today. And he just he just morphed and
+learned and he had a confidence in
+himself,
+um,
+that I really had never seen in in a
+young entrepreneur.
+>> Darius, let me start with you here. Uh,
+out of everything we just showed, it was
+really my conversation with P&G's, uh,
+CFO, Andre Schulten, that stood out
+because I came away thinking the
+K-shaped economy is still in play. Would
+you agree with that?
+>> Oh, yeah. Uh, even I would say it's even
+deepening. Uh, when you look at, you
+know, some evidence that we can see cuz
+it's hard to get distributional
+statistics on a real-time basis or near
+real-time basis. So, you have to make
+inferences from aggregate statistics.
+And one of the ways we can tell that the
+K-shaped economy crisis is deepening is
+the fact that we see, you know, all-time
+record highs and and and delinquency
+rates. When you look at credit card,
+auto loans, student loans, you know,
+these are aggregate statistics. And we
+know that folks like us talking about
+stocks all day are doing just fine. And
+so, if the aggregate statistics are as
+bad as they were at the height of the
+global financial crisis and and depth of
+the great recession, that tells you
+exactly how bad things are for the folks
+on the bottom of the K. And we we've
+seen a significant slowdown in real wage
+growth for the consumers on the bottom,
+uh, quartile, the first the consumers in
+the bottom quartile, according to the
+Atlanta Fed wage data. They went from
+about 1.9% at the end of the Biden
+administration to about 0.9% on a on a
+Trump 2.0 to date, uh, basis. Whereas,
+we've seen the incomes of the top uh
+quintile, basically stabilize at about
+plus 2%. So, that K is is widening, it's
+deepening, and then quite frankly, it's
+gross.
+>> Uh Ines, what stood out to you?
+>> Yeah, as you mentioned actually, the
+K-shaped uh deepening, I mean, P&G's uh
+CFO basically laying it out clearly. And
+companies really need to sort of cater
+to both ends. They need to cater to that
+top end and the bottom end, and that's
+what they're doing increasingly. You saw
+it also with Target last quarter. It'll
+be interesting to see if they mention it
+this quarter as well later this month.
+>> Adam, what stood out to you on the
+charts?
+>> I for this for this week, it's been
+really about the macro and what's played
+out in interest rates. Obviously, a lot
+of volatility coming out of the the Fed
+meeting. Interest rates are right now at
+uncomfortably high levels. You look at
+the 10-year, not far from 4.7%.
+You zoom out a little bit, and that
+would mark an important breakout from
+this consolidation range we've been in,
+and I think up introduce upside risk
+maybe to even 5%, especially if the Fed
+does lean a little bit more hawkish in
+the upcoming uh FOMC meeting. So, I
+think there's some risk there,
+especially if rates move too high, too
+fast. That's where you tend to get
+spilling pressure into equity markets
+when you have those big moves in
+interest rates. And we're right at the
+brink of a pretty important breakout
+here in the 10-year.
+>> Big thanks to my round table, Darius,
+Adam, and Ines. Have a great weekend. I
+appreciate it.

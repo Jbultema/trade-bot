@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 7180965,
+  "content_sha256": "30a91b90d07b4e07c4eefa7088eaac3841104b23945810f28175ccecd92b0378",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1858681/000185868126000026/apo-20260331.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0134_30a91b90d07b4e07.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1858681/000185868126000026/apo-20260331.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-08",
+  "publisher": "Apollo Global Management Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0134_30a91b90d07b4e07.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:53:53.109071+00:00",
+  "retrieval_started_utc": "2026-07-26T17:53:53.047419+00:00",
+  "selected_response_headers": {
+    "content-length": "367103",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:53:53 GMT",
+    "last-modified": "Thu, 07 May 2026 21:26:04 GMT"
+  },
+  "source_id": "SRC-0134",
+  "status": "preserved_complete",
+  "title": "Apollo Global Management Form 10-Q for quarter ended March 31 2026",
+  "write_state": "new_version_written"
+}

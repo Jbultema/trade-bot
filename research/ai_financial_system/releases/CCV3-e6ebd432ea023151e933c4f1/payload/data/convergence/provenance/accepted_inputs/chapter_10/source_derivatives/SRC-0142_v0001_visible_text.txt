@@ -1,0 +1,1157 @@
+EX-10.1
+2
+a08222025formex101stockand.htm
+EX-10.1
+Document
+Exhibit 10.1
+Execution Version
+WARRANT AND COMMON STOCK AGREEMENT
+BY AND BETWEEN
+UNITED STATES DEPARTMENT OF COMMERCE AND
+INTEL CORPORATION
+DATED AS OF AUGUST 22, 2025
+Article I
+Closing
+1.1 Issuance; Acceleration and Release
+1
+1.2 Closing
+2
+1.3 Interpretation
+3
+Article II
+Representations and Warranties
+2.1 Representations and Warranties of the Company
+3
+Article III
+Covenants
+3.1 Commercially Reasonable Efforts
+8
+3.2 Expenses
+8
+3.3 Sufficiency of Authorized Common Stock; Exchange Listing
+9
+Article IV
+Additional Agreements
+4.1 Investment Purposes
+9
+4.2 Legends
+10
+4.3 Certain Transactions
+10
+4.4 Transfer and Escrowed Shares
+10
+4.5 Registration Rights
+11
+4.6 Agreement to Vote Common Stock
+23
+Article V
+Miscellaneous
+5.1 Survival of Representations and Warranties
+24
+5.2 Amendment
+24
+5.3 Waiver of Conditions
+24
+5.4
+Governing Law: Submission to Jurisdiction, Etc.
+24
+5.5 Notices
+25
+5.6 Definitions
+26
+5.7 Assignment
+27
+5.8 Severability
+27
+5.9 No Third Party Beneficiaries
+27
+LIST OF ANNEXES AND SCHEDULES
+ANNEX A: FORM OF WARRANT
+SCHEDULE 1: CAPITALIZATION
+INDEX OF DEFINED TERMS
+Term
+Location of
+Term
+Acceleration
+Recitals
+Affiliate
+Annex A
+Agreement
+Recitals
+Appraisal Procedure
+Annex A
+Board of Directors
+2.1(i)
+Business Combination
+Annex A
+Business Day
+Annex A
+Capitalization Date
+2.1(b)
+Closing
+1.2(a)
+Closing Date
+1.2(a)
+Commerce
+Recitals
+Common Stock
+Recitals
+Company
+Recitals
+Company Financial Statements
+2.1(j)
+Company Reports
+2.1(k)(i)
+Contractual Obligation
+5.6(a)
+Control
+Annex A
+DFA
+Recitals
+Escrow
+4.4(b)
+Escrowed Shares
+4.4(b)
+Exchange Act
+Annex A
+Governmental Authority
+5.6(b)
+Holder
+4.5(k)(i)
+Indemnitee
+4.5(g)(i)
+Laws
+5.6(c)
+Lien
+5.6(d)
+Material Adverse Effect
+5.6(e)
+New Common Stock
+Recitals
+Organizational Documents
+5.6(f)
+Pending Underwritten Offering
+4.5(l)
+Piggyback Registration
+4.5(a)(iv)
+register; registered; registration
+4.5(k)(ii)
+Registrable Securities
+4.5(k)(iii)
+Registration Commencement Date
+4.5(a)(i)
+Registration Expenses
+4.5(k)(iv)
+Released Funds
+1.1(b)
+Rule 144; Rule 144A; Rule 159A; Rule 405; Rule 415
+4.5(k)(v) SEC
+Secure Enclave Disbursements
+Recitals
+Securities Act
+Annex A
+Selling Expenses
+4.5(k)(vi)
+Shelf Registration Statement
+4.5(a)(ii)
+Special Registration
+4.5(i)
+Subsidiary
+5.6(g)
+Transfer
+4.4
+Unfunded Portion
+1.1(b)
+US Government
+Recitals
+Warrants
+Recitals
+Warrant Shares
+Annex A
+WARRANT AND COMMON STOCK AGREEMENT dated as of August 22, 2025 (this “
+Agreement
+”), between INTEL CORPORATION, a corporation organized under the laws of the State of Delaware (the “
+Company
+”), and the UNITED STATES DEPARTMENT OF COMMERCE (“
+Commerce
+”).
+WHEREAS, the Company and Commerce are party to that certain Direct Funding Agreement, dated as of November 25, 2024 (the “
+DFA
+”);
+WHEREAS, the Company has requested that Commerce make a total of
+$8,869,800,000.00 of disbursements, consisting of (1) the acceleration of certain disbursements under the DFA in the amount of $5,695,000,000.00 (the “
+Acceleration
+”) and (2) $3,174,800,000.00 of disbursements in respect of Secure Enclave (the “
+Secure Enclave
+Disbursements
+” and, together with the Acceleration, the “
+Disbursements
+”);
+WHEREAS, as appropriate compensation to the Federal Government of the United States of America (the “
+US Government
+”) for, and as a condition to Commerce’s willingness to permit, the Disbursements, the Company has agreed to issue to Commerce in a private placement (1) warrants to purchase 240,516,150 shares of Common Stock (as defined below) (the “
+Warrants
+”) and (2) 433,323,000 shares of common stock of the Company, par value $0.001 per share (“
+Common Stock
+”; such newly-issued shares of Common Stock (which number shall be subject to equitable adjustment for any stock dividend (including any dividend of securities convertible into or exchangeable for Common Stock), stock split (including a reverse stock split), stock combination, reclassification or similar transaction occurring on or after the date of this Agreement and prior to the Closing), the “
+New Common Stock
+”);
+NOW, THEREFORE
+, in consideration of the premises, and of the representations, warranties, covenants and agreements set forth herein, the parties agree as follows:
+Article I
+Closing
+1.1
+Issuance; Acceleration and Release
+.
+(a)
+On the terms and subject to the conditions set forth in this Agreement, the Company agrees to issue to Commerce, on the Closing Date (as defined below), (a) Warrants to purchase 240,516,150 shares of Common Stock and (b) the New Common Stock.
+(b)
+The Parties agreed that in exchange for entering into this Agreement, that the US Government shall release as promptly as practicable, in accordance with applicable Law, $5,695,000,000.00 (“
+Released Funds
+”) in funding in respect of its obligations under the DFA, dated as of November 25, 2024 (other than with respect to Secure Enclave). Intel agrees that the US Government shall have no further obligations under the DFA (other than as required by law or with respect to Secure Enclave). Commerce agrees that to the maximum extent permissible under applicable Law, Intel’s obligations pursuant to the DFA
+1
+shall be considered discharged (other than with respect to Secure Enclave). The US Government shall also make the disbursements in respect of, and on the terms and conditions of, Secure Enclave and agrees to work with the Company to make appropriate amendments and modifications to the DFA to release Intel from certain of its obligations.
+1.2
+Closing
+.
+(a)
+On the terms and subject to the conditions set forth in this Agreement, the closing of the issuance of the Warrants and the New Common Stock (the “
+Closing
+”) will take place on August 26, 2025 or as soon as practicable thereafter as the parties mutually agree (the date on which the Closing occurs, the “
+Closing Date
+”).
+(b)
+On the Closing Date, the Company will issue (x) to Commerce (i) a duly executed Warrant or Warrants to purchase 240,516,150 shares of Common Stock, as evidenced by one or more certificates dated the Closing Date and bearing appropriate legends as hereinafter provided for and in substantially the form attached hereto as
+Annex A
+, and (ii) the New Common Stock (other than the Escrowed Shares), together with evidence reasonably satisfactory to Commerce of the issuance of such New Common Stock in the name of Commerce in book entry form on the books of the Company’s transfer agent and (y) as set forth in Section 4.4(b), the Escrowed Shares into Escrow (such terms each as defined below). It is Commerce’s intention to release all the Released Funds on the Closing Date, to the extent any Released Funds are not released on the Closing Date, a number of shares equal to the amount of Released Funds not released divided by $20.00 shall not be delivered at the Closing Date but rather when such Released Funds are released.
+(c)
+On the Closing Date, the Company shall deliver to Commerce a certificate executed by the chief executive officer, president, executive vice president, chief financial officer, principal accounting officer, treasurer or controller confirming that the representations and warranties of the Company in this Agreement are true and correct with the same force and effect as though expressly made at and as of the Closing Date and the Company has complied with all agreements on its part to be performed or satisfied hereunder at or prior to such Closing.
+(d)
+On the Closing Date, the Company shall deliver to Commerce (i) such customary certificates of resolutions or other action, incumbency certificates and/or other certificates of the chief executive officer, president, executive vice president, chief financial officer, principal accounting officer, treasurer or controller as Commerce may require evidencing the identity, authority and capacity of each such officer thereof authorized to act as such officer in connection with this Agreement and (ii) customary resolutions or evidence of corporate authorization, secretary’s certificates and such other documents and certificates (including Organizational Documents and good standing certificates) as Commerce may reasonably request relating to the organization, existence and good standing of the Company and any other legal matters relating to the Company, this Agreement, the Warrants, the New Common Stock or the transactions contemplated hereby or thereby.
+2
+1.3
+Interpretation
+.
+(a)
+When a reference is made in this Agreement to “Recitals,” “Articles,” “Sections,” or “Annexes” such reference shall be to a Recital, Article or Section of, or Annex to, this Agreement, unless otherwise indicated. The terms defined in the singular have a comparable meaning when used in the plural, and vice versa. References to “herein”, “hereof”, “hereunder” and the like refer to this Agreement as a whole and not to any particular section or provision, unless the context requires otherwise. The table of contents and headings contained in this Agreement are for reference purposes only and are not part of this Agreement. Whenever the words “include,” “includes” or “including” are used in this Agreement, they shall be deemed followed by the words “without limitation.” No rule of construction against the draftsperson shall be applied in connection with the interpretation or enforcement of this Agreement, as this Agreement is the product of negotiation between sophisticated parties advised by counsel. All references to “$” or “dollars” mean the lawful currency of the United States of America. Except as expressly stated in this Agreement, all references to any statute, rule or regulation are to the statute, rule or regulation as amended, modified, supplemented or replaced from time to time (and, in the case of statutes, include any rules and regulations promulgated under the statute) and to any section of any statute, rule or regulation include any successor to the section.
+(b)
+Capitalized terms not defined herein have the meanings ascribed thereto in
+Annex A
+.
+Article II
+Representations and Warranties
+2.1
+Representations and Warranties of the Company
+. The Company hereby represents and warrants to Commerce that:
+(a)
+Existence, Qualification and Power
+. The Company is duly organized or formed, validly existing and, if applicable, in good standing under the Laws of the jurisdiction of its incorporation or organization, and the Company and each Subsidiary (a) has all requisite power and authority and all requisite governmental licenses, authorizations, consents and approvals to
+(i) own or lease its assets and carry on its business and (ii) execute, deliver and perform its obligations under this Agreement and the Warrants, including the issuance of the New Common Stock, and (b) is duly qualified and is licensed and, as applicable, in good standing under the Laws of each jurisdiction where its ownership, lease or operation of properties or the conduct of its business requires such qualification or license, except, in each case referred to in clause (a)(i) or (b), to the extent that failure to do so could not reasonably be expected to have a Material Adverse Effect.
+(b)
+Capitalization
+.
+The authorized capital stock of the Company, and the outstanding capital stock of the Company (including securities convertible into, or exercisable or exchangeable for, capital stock of the Company) as of June 28, 2025 (the “
+Capitalization Date
+”) is set forth in
+Schedule 1
+. The outstanding shares of capital stock of the Company have been duly authorized and are validly issued and outstanding, fully paid
+3
+and nonassessable, and subject to no preemptive rights (and were not issued in violation of any preemptive rights). Except the issuance of the New Common Stock and as provided in the Warrants, as of the date hereof, the Company does not have outstanding any securities or other obligations providing the holder the right to acquire Common Stock that is not reserved for issuance as specified on
+Schedule 1
+, and the Company has not made any other commitment to authorize, issue or sell any Common Stock (or securities convertible into, or exercisable or exchangeable for, Common Stock) other than shares to be issued to SoftBank Group Corp. pursuant to the Securities Purchase Agreement, dated as of August 18, 2025, by and between the Company and SoftBank Group Corp., subject to satisfaction of closing conditions set forth therein. Since the Capitalization Date, the Company has not issued any shares of Common Stock (or securities convertible into, or exercisable or exchangeable for, Common Stock), other than shares issued upon the exercise of stock options or delivered under other equity-based awards or other convertible securities or warrants which were issued and outstanding on the Capitalization Date and disclosed on
+Schedule 1
+.
+(c)
+Listing
+. The Common Stock has been registered pursuant to Section 12(b) of the Exchange Act and the shares of the Common Stock outstanding on the date hereof are listed on a national securities exchange. The Company has taken no action designed to, or likely to have the effect of, terminating the registration of the Common Stock under the Exchange Act or the listing of the Common Stock on such national securities exchange, nor has the Company received any notification that the Securities and Exchange Commission (the “
+SEC
+”) or such exchange is contemplating terminating such registration or listing. The Company is in compliance with applicable continued listing requirements of such exchange in all material respects.
+(d)
+Governmental Authorization; Other Consents
+. No approval, consent, exemption, authorization, or other action by, or notice to, or filing with, any Governmental Authority or any other Person is necessary or required in connection with the execution, delivery or performance by, or enforcement against, the Company of this Agreement, except for (i) such approvals, consents, exemptions, authorizations, actions or notices that have been duly obtained, taken or made and are in full force and effect, or (ii) those where the failure to obtain, take or make or not be in full force and effect such approvals, consents, exemptions, authorizations, actions or notices would not have a Material Adverse Effect on the ability of the Company to perform its obligations hereunder.
+(e)
+Execution and Delivery; Binding Effect
+. This Agreement has been duly authorized, executed and delivered by the Company. This Agreement constitutes a legal, valid and binding obligation of the Company, enforceable against the Company in accordance with its terms, except as such enforceability may be limited by bankruptcy, insolvency, reorganization, receivership, moratorium or other Laws affecting creditors’ rights generally and by general principles of equity.
+(f)
+The Warrants, Warrant Shares and New Common Stock
+. Each Warrant has been duly authorized and, when executed and delivered as contemplated hereby, will constitute a valid and legally binding obligation of the Company enforceable against the
+4
+Company in accordance with its terms, except as such enforceability may be limited by bankruptcy, insolvency, reorganization, receivership, moratorium or other Laws affecting creditors’ rights generally and by general principles of equity. The Warrant Shares have been duly authorized and reserved for issuance upon exercise of the Warrants and when so issued in accordance with the terms of the Warrants will be validly issued, fully paid and non-assessable, free and clear of all Liens (other than those arising under applicable securities laws). The New Common Stock has been duly authorized and validly issued, and is fully paid and non-assessable, free and clear of all Liens (other than those arising under applicable securities laws).
+(g)
+Authorization, Enforceability
+.
+(i)
+The Company has the corporate power and authority to execute and deliver this Agreement and the Warrants and to carry out its obligations hereunder and thereunder (which includes the issuance of the Warrants, Warrant Shares and New Common Stock). The execution, delivery and performance by the Company of this Agreement and the Warrants and the consummation by the Company of the transactions contemplated hereby and thereby have been duly authorized by all necessary corporate or other organizational action on the part of the Company and its stockholders, and no further approval or authorization is required on the part of the Company.
+(ii)
+The execution, delivery and performance by the Company of this Agreement do not and will not (a) contravene the terms of its Organizational Documents, (b) conflict with or result in any breach or contravention of, or the creation of any Lien under, or require any payment to be made under (i) any material Contractual Obligation to which the Company is a party or affecting the Company or the properties of the Company or any Subsidiary or (ii) any material order, injunction, writ or decree of any Governmental Authority or any arbitral award to which the Company or any Subsidiary or its property is subject or (c) violate any Law, except to the extent that such violation would not reasonably be expected to have a Material Adverse Effect.
+(iii)
+Other than any current report on Form 8-K required to be filed with the SEC (which shall be made on or before the date on which it is required to be filed), such filings and approvals as are required to be made or obtained under any state “blue sky” laws, such filings as required by Section 4.5 of this Agreement, the filing of a listing of additional shares notification form with Nasdaq with respect to the New Common Stock and the Warrant Shares, and such filings and approvals as have been made or obtained, no notice to, filing with, exemption or review by, or authorization, consent or approval of, any Governmental Authority is required to be made or obtained by the Company in connection with the execution, delivery and performance by the Company of this Agreement and the consummation by the Company of the issuance of the Warrants and the New Common Stock, except for any such notices, filings, exemptions, reviews, authorizations, consents and
+5
+approvals the failure of which to make or obtain would not, individually or in the aggregate, reasonably be expected to have a Material Adverse Effect.
+(h)
+Anti-takeover Provisions and Rights Plan
+. The Board of Directors of the Company (the “
+Board of Directors
+”) has taken all necessary action, and will in the future take any necessary action, to ensure that the transactions contemplated by this Agreement and the Warrants and the consummation of the transactions contemplated hereby and thereby, including the issuance of the New Common Stock and the exercise of the Warrants in accordance with their terms, will be exempt from any anti-takeover or similar provisions of the Company’s Organizational Documents, and any other provisions of any applicable “moratorium”, “control share”, “fair price”, “interested stockholder” or other anti-takeover laws and regulations of any jurisdiction, whether existing on the date hereof or implemented after the date hereof. The Company has taken all actions necessary, and will in the future take any necessary action, to render any stockholders’ rights plan of the Company inapplicable to this Agreement, the New Common Stock and the Warrants and the consummation of the transactions contemplated hereby and thereby, including the exercise of the Warrants by Commerce in accordance with their terms.
+(i)
+No Company Material Adverse Effect
+. Since the last day of the last completed fiscal period for which financial statements have been filed on a quarterly report on Form 10-Q or an annual report on Form 10-K, no fact, circumstance, event, change, occurrence, condition or development has occurred that, individually or in the aggregate, has had or would reasonably be expected to have a Material Adverse Effect.
+(j)
+Company Financial Statements
+. The financial statements of the Company and its consolidated Subsidiaries (collectively, the “
+Company Financial Statements
+”) included or incorporated by reference in the Company Reports (as defined below) filed with the SEC since December 31, 2021, present fairly in all material respects the consolidated financial position of the Company and its consolidated Subsidiaries as of the dates indicated therein and the consolidated results of their operations for the periods specified therein. Except as stated therein, the Company Financial Statements, as of the dates indicated therein (or if amended prior to the Closing Date, as of the date of such amendment), (A) were prepared in conformity with generally accepted accounting principles (“
+GAAP
+”) applied on a consistent basis (except as may be noted therein); (B) have been prepared from, and are in accordance with, the books and records of the Company and its Subsidiaries; and (C) complied as to form, as of their respective dates of filing with the SEC, in all material respects with the applicable accounting requirements and with the published rules and regulations of the SEC with respect thereto.
+(k)
+Reports
+.
+(i)
+Since December 31, 2021, the Company and each Subsidiary has timely filed all reports, registrations, documents, filings, statements and submissions, together with any amendments thereto, that it was required to file with any Governmental Authority (the foregoing, collectively, the “
+Company Reports
+”) and has paid all fees and assessments due and payable in connection therewith, except, in
+6
+each case, as would not, individually or in the aggregate, reasonably be expected to have a Material Adverse Effect. As of their respective dates of filing, the Company Reports complied in all material respects with all statutes and applicable rules and regulations of the applicable Governmental Authority. In the case of each such Company Report filed with or furnished to the SEC, such Company Report (A) did not, as of its date or if amended prior to the date hereof, as of the date of such amendment, contain an untrue statement of a material fact or omit to state a material fact necessary in order to make the statements made therein, in light of the circumstances under which they were made, not misleading, and (B) complied as to form in all material respects with the applicable requirements of the Securities Act and the Exchange Act. With respect to all other Company Reports, the Company Reports were complete and accurate in all material respects as of their respective dates. No executive officer of the Company or any Subsidiary has failed in any respect to make the certifications required of him or her under Section 302 or 906 of the Sarbanes-Oxley Act of 2002.
+(ii)
+The Company (A) has implemented and maintains disclosure controls and procedures (as defined in Rule 13a-15(e) of the Exchange Act) to ensure that material information relating to the Company, including its Subsidiaries, is made known to the chief executive officer and the chief financial officer of the Company by others within those entities, and (B) has disclosed, based on its most recent evaluation prior to the date hereof, to the Company’s outside auditors and the audit committee of the Board of Directors (x) any significant deficiencies and material weaknesses in the design or operation of internal controls over financial reporting (as defined in Rule 13a-15(f) of the Exchange Act) that are reasonably likely to adversely affect the Company’s ability to record, process, summarize and report financial information and (y) any fraud, whether or not material, that involves management or other employees who have a significant role in the Company’s internal controls over financial reporting.
+(l)
+No Undisclosed Liabilities
+. Neither the Company nor any of its Subsidiaries has any liabilities or obligations of any nature (absolute, accrued, contingent or otherwise) which are not properly reflected or reserved against in the Company Financial Statements to the extent required to be so reflected or reserved against in accordance with GAAP, except for (A) liabilities that have arisen since the last fiscal year end in the ordinary and usual course of business and consistent with past practice, (B) obligations expressly contemplated by, and fees and expenses payable to the Company’s external representatives for services rendered in connection with, this Agreement, the Warrants and the transactions contemplated hereby or thereby; and (C) liabilities that, individually or in the aggregate, have not had and would not reasonably be expected to have a Material Adverse Effect. The transactions contemplated by this Agreement and the Warrants will not, of themselves, give rise to any defaults or any rights of conversion or redemption under any of the Company’s outstanding debt instruments.
+7
+(m)
+Offering of Securities
+. Neither the Company nor any person acting on its behalf has taken any action (including any offering of any securities of the Company under circumstances which would require the integration of such offering with the offering of any of the New Common Stock or the Warrants under the Securities Act, and the rules and regulations of the SEC promulgated thereunder), which might subject the offering, issuance or sale of any of the New Common Stock or the Warrants to Commerce pursuant to this Agreement to the registration requirements of the Securities Act.
+(n)
+Litigation and Other Proceedings
+. Except as would not, individually or in the aggregate, reasonably be expected to have a Material Adverse Effect, there is no (A) pending or, to the knowledge of the Company, threatened in writing, claim, action, suit, investigation or proceeding, against the Company or any of its Subsidiaries or to which any of their assets are subject nor is the Company or any of its Subsidiaries subject to any order, judgment or decree or (B) unresolved violation, criticism or exception by the SEC with respect to any Company Report or relating to any SEC examinations or inspections of the Company or any of its Subsidiaries.
+(o)
+Compliance with Laws
+. Except as would not, individually or in the aggregate, reasonably be expected to have a Material Adverse Effect, the Company and its Subsidiaries have all permits, licenses, franchises, authorizations, orders and approvals of, and have made all filings, applications and registrations with, Governmental Authorities that are required in order to permit them to own or lease the properties and assets that they presently owned or lease and to carry on their business as presently conducted and that are material to the business of the Company or its Subsidiaries.
+(p)
+Brokers and Finders
+.
+No broker, finder or investment banker is entitled to any financial advisory, brokerage, finder’s or other fee or commission in connection with this Agreement, the New Common Stock or the Warrants or the transactions contemplated hereby or
+thereby based upon arrangements made by or on behalf of the Company or any Subsidiary for which Commerce could have any liability.
+Article III
+Covenants
+3.1
+Commercially Reasonable Efforts
+. Subject to the terms and conditions of this Agreement, each of the parties will use its commercially reasonable efforts in good faith to take, or cause to be taken, all actions, and to do, or cause to be done, all things necessary, proper or desirable, or advisable under applicable laws, to enable consummation of the transactions contemplated hereby, including the issuance of the New Common Stock and any exercise of the Warrants, and shall use commercially reasonable efforts to cooperate with the other party to that end. Commerce hereby agrees to take all actions with respect to the DFA as necessary to implement Section 1.1 (b) hereof.
+3.2
+Expenses
+. The Company shall pay (i) all reasonable out-of-pocket expenses incurred by Commerce (including the reasonable fees, charges and disbursements of any
+8
+counsel for Commerce) in connection with the preparation, negotiation, execution and delivery of this Agreement and the Warrants, any other agreements or documents executed in connection herewith or therewith, or any amendments, modifications or waivers of the provisions hereof or thereof (whether or not the transactions contemplated hereby or thereby shall be consummated), and (ii) all reasonable out-of-pocket expenses incurred by Commerce (including the fees, charges and disbursements of any counsel for Commerce), in connection with the enforcement or protection of its rights in connection with this Agreement and the Warrants, any other agreements or documents executed in connected herewith or therewith, or any amendments, modifications or waivers of the provisions hereof or thereof (whether or not the transactions contemplated hereby or thereby shall be consummated), including all such reasonable out-of- pocket expenses incurred during any workout, restructuring, negotiations or enforcement in respect of this Agreement, Warrant and other agreements or documents executed in connection herewith or therewith.
+3.3
+Sufficiency of Authorized Common Stock; Exchange Listing
+. During the period from the Closing Date until the date on which no Warrants remain outstanding, the Company shall at all times have reserved for issuance, free of preemptive or similar rights, a sufficient number of authorized and unissued Warrant Shares to effectuate the exercise of the Warrants. Nothing in this Section 3.3 shall preclude the Company from satisfying its obligations in respect of the exercise of the Warrants by delivery of shares of Common Stock which are held in the treasury of the Company. As soon as reasonably practicable on or after the Closing Date, the Company shall, at its expense, cause the New Common Stock and the Warrant Shares to be listed on the same national securities exchange on which the Common Stock is listed, subject to official notice of issuance, and shall maintain such listing for so long as any Common Stock is listed on such exchange. The Company will use commercially reasonable efforts to maintain the listing of Common Stock on such national securities exchange for so long as any New Common Stock, Warrants or Warrant Shares remain outstanding. Neither the Company nor any of its Subsidiaries shall take any action which would be reasonably expected to result in the delisting or suspension of the Common Stock on such exchange. The foregoing shall not preclude the Company from undertaking any transaction set forth in Section 4.3 subject to compliance with that provision.
+Article IV
+Additional Agreements
+4.1
+Investment Purposes
+. Commerce acknowledges that the New Common Stock, the Warrants and the Warrant Shares have not been registered under the Securities Act or under any state securities laws. Commerce (a) is acquiring the New Common Stock and the Warrants pursuant to an exemption from registration under the Securities Act solely for investment without a view to sell and with no present intention to distribute them to any person in violation of the Securities Act or any applicable U.S. state securities laws; (b) will not sell or otherwise dispose of any of the New Common Stock, the Warrants or the Warrant Shares, except in compliance with the registration requirements or exemption provisions of the Securities Act and any applicable U.S. state securities laws; and (c) has such knowledge and experience in financial and business matters and in investments of this type that it is
+9
+capable of evaluating the merits and risks of the New Common Stock, the Warrants and the Warrant Shares and of making an informed investment decision.
+4.2
+Legends
+.
+(a)
+Commerce agrees that all certificates or other instruments representing the New Common Stock, the Warrants and the Warrant Shares will bear a legend substantially to the following effect:
+“THE SECURITIES REPRESENTED BY THIS INSTRUMENT HAVE NOT BEEN REGISTERED UNDER THE SECURITIES ACT OF 1933, AS AMENDED, OR THE SECURITIES LAWS OF ANY STATE AND MAY NOT BE TRANSFERRED, SOLD OR OTHERWISE DISPOSED OF EXCEPT WHILE A REGISTRATION STATEMENT RELATING THERETO IS IN EFFECT UNDER SUCH ACT AND APPLICABLE STATE SECURITIES LAWS OR PURSUANT TO AN EXEMPTION FROM REGISTRATION UNDER SUCH ACT AND SUCH LAWS.”
+(b)
+In the event that any New Common Stock, Warrants or Warrant Shares (i) become registered under the Securities Act or (ii) are eligible to be transferred without restriction in accordance with Rule 144 or another exemption from registration under the Securities Act (other than Rule 144A), the Company, upon request of Commerce, issue or cause to be recorded new certificates or book-entry notations representing such New Common Stock, Warrants or Warrant Shares, which shall not contain the legend in Section 4.2(a) above;
+provided
+that Commerce surrenders to the Company the previously issued certificates or other instruments; and
+provided further
+, prior to the date that is one year after the Closing Date, a representation that Commerce is requesting such removal in connection with a sale.
+4.3
+Certain Transactions
+. The Company will not merge or consolidate with, or sell, transfer or lease all or substantially all of its property or assets to, any other party unless the successor, transferee or lessee party (or its ultimate parent entity), as the case may be (if not the Company), expressly assumes the due and punctual performance and observance of each and
+every covenant, agreement and condition of this Agreement and the Warrants to be performed and observed by the Company.
+4.4
+Transfer and Escrowed Shares
+.
+(a)
+Transfer
+. Subject to compliance with applicable securities laws, Commerce shall be permitted to transfer, sell, assign or otherwise dispose of (“
+Transfer
+”) all or a portion of the New Common Stock, Warrants or Warrant Shares only (i) on and after the first anniversary of the Closing Date and (ii) in one or more broadly-syndicated offerings (including government sponsored auctions), and the Company shall take all steps as may be reasonably requested by Commerce to facilitate the Transfer of the New Common Stock,
+10
+Warrants and the Warrant Shares. In the event Commerce seeks to obtain a loan pursuant to which any New Common Stock, Warrants or Warrant Shares will be pledged as collateral, the Company shall enter into a customary issuer agreement in connection with such loan in the form directed by Commerce and other take all steps as may be reasonably requested by Commerce in connection with such loan;
+provided, however,
+that Commerce shall have no ownership, voting, economic or other rights in, nor shall Commerce have any right to Transfer, any Escrowed Shares unless and until such Escrowed Shares are released from Escrow and transferred into the name of Commerce in book entry form on the books of the Company’s transfer agent pursuant to Section 4.4(b) below.
+(b)
+Escrowed Shares
+. On the Closing Date, 158,740,000 of the shares of New Common Stock shall be issued in the name of the Company in book entry form on the books of the Company’s transfer agent and held in escrow (the “
+Escrow
+”) by the Company for the benefit of Commerce (the “
+Escrowed Shares
+”). As soon as practicable following receipt by the Company of a Secure Enclave Disbursement, the Company shall release from Escrow and cause the Company’s transfer agent to transfer into the name of Commerce in book entry form on the books of the Company’s transfer agent a number of Escrowed Shares equal to the quotient of (x) the amount of such Secure Enclave Disbursement, divided by (y) $20.00. At the close of business on the last date on which the Secure Enclave Disbursements may be received, the Escrow shall immediately and automatically terminate, and 50% of the Escrowed Shares shall be delivered to Commerce and the remaining 50% of the Escrowed Shares shall be immediately and automatically forfeited and cancelled.
+4.5
+Registration Rights
+.
+(a)
+Registration
+.
+(i)
+Subject to the terms and conditions of this Agreement, the Company covenants and agrees that on or before September 5, 2025 (the end of such period, the “
+Registration Commencement Date
+”), the Company shall prepare and file with the SEC a Shelf Registration Statement covering the maximum number of Registrable Securities that may be issued pursuant to this Agreement and any New Common Stock and Warrants outstanding at that time, and, to the extent the Shelf Registration Statement has not theretofore been declared effective or is not automatically effective upon such filing, the Company shall use reasonable best efforts to cause such Shelf Registration Statement to be declared or become effective and to keep such Shelf Registration Statement continuously effective and in compliance with the Securities Act and usable for resale of
+such Registrable Securities for a period from the date of its initial effectiveness until such time as there are no Registrable Securities remaining (including by refiling such Shelf Registration Statement (or a new Shelf Registration Statement) if the initial Shelf Registration Statement expires). So long as the Company is a well-known seasoned issuer (as defined in Rule 405 under the Securities Act) at the time of filing of the Shelf Registration Statement with the SEC, such Shelf Registration Statement shall be designated by the Company as an automatic Shelf Registration Statement.
+11
+Notwithstanding the foregoing, if on the date hereof the Company is not eligible to file a registration statement on Form S-3, then the Company shall not be obligated to file a Shelf Registration Statement unless and until it is so eligible and is requested to do so in writing by Commerce.
+(ii)
+Any registration pursuant to Section 4.5(a)(i) shall be effected by means of
+(x) a new shelf registration on an appropriate form under Rule 415 under the Securities Act or (y) an amendment to, or a prospectus supplement filed under, any such shelf registration statement that has previously been filed (in either case, a “
+Shelf Registration
+Statement
+”). If Commerce or any other Holder intends to distribute any Registrable Securities by means of an underwritten offering it shall promptly so advise the Company and the Company shall take all reasonable steps to facilitate such distribution, including the actions required pursuant to Section 4.5(c);
+provided
+, that the Company shall not be required to facilitate an underwritten offering of Registrable Securities unless the total number of shares of New Common Stock, Warrant Shares and Warrants expected to be sold in such offering exceeds, or are exercisable for, at least 15% of the total number of shares of New Common Stock and Warrant Shares for which Warrants issued under this Agreement could be exercised (giving effect to the anti-dilution adjustments in Warrants); and
+provided further
+, that the Company shall not be required to facilitate more than two completed underwritten offerings within any 12-month period. The lead underwriters in any such distribution shall be selected by the Holders of a majority of the Registrable Securities to be distributed.
+(iii)
+The Company shall not be required to effect a registration (including a resale of Registrable Securities from an effective Shelf Registration Statement) or an underwritten offering pursuant to Section 4.5(a): (A) prior to the Registration Commencement Date; (B) with respect to securities that are not Registrable Securities; or
+(C) if the Company has notified Commerce and all other Holders that in the good faith judgment of the Board of Directors, it would be materially detrimental to the Company or its securityholders for such registration or underwritten offering to be effected at such time, in which event the Company shall have the right to defer such registration or offering for a period of not more than 45 days after receipt of the request of Commerce or any other Holder;
+provided
+, that such right to delay a registration or underwritten offering shall be exercised by the Company (1) only if the Company has generally exercised (or is concurrently exercising) similar black-out rights against holders of any similar securities that have registration rights and (2) not more than three times in any 12-month period and not more than 90 days in the aggregate in any 12-month period. The Company shall notify the Holders of the date of any anticipated termination of any such deferral period prior to such date.
+(iv)
+If during any period when an effective Shelf Registration Statement is not available, the Company proposes to register any of its equity securities, other than a registration pursuant to Section 4.5(a)(i) or a Special Registration, and the registration form to be filed may be used for the registration or qualification for
+12
+distribution of Registrable Securities, the Company will give prompt written notice to Commerce and all other Holders of its intention to effect such a registration (but in no event less than ten days prior to the anticipated filing date) and will include in such registration all Registrable Securities with respect to which the Company has received written requests for inclusion therein within ten Business Days after the date of the Company’s notice (a “
+Piggyback Registration
+”). Any such person that has made such a written request may withdraw its Registrable Securities from such Piggyback Registration by giving written notice to the Company and the managing underwriter, if any, on or before the fifth Business Day prior to the planned effective date of such Piggyback Registration. The Company may terminate or withdraw any registration under this Section 4.5(a)(iv) prior to the effectiveness of such registration, whether or not Commerce or any other Holders have elected to include Registrable Securities in such registration.
+(v)
+If the registration referred to in Section 4.5(a)(iv) is proposed to be underwritten, the Company will so advise Commerce and all other Holders as a part of the written notice given pursuant to Section 4.5(a)(iv). In such event, the right of Commerce and all other Holders to registration pursuant to Section 4.5(a) will be conditioned upon such persons’ participation in such underwriting and the inclusion of such person’s Registrable Securities in the underwriting if such securities are of the same class of securities as the securities to be offered in the underwritten offering, and each such person will (together with the Company and the other persons distributing their securities through such underwriting) enter into an underwriting agreement in customary form with the underwriter or underwriters selected for such underwriting by the Company;
+provided
+, that Commerce (as opposed to other Holders) shall not be required to indemnify any person in connection with any registration. If any participating person disapproves of the terms of the underwriting, such person may elect to withdraw therefrom by written notice to the Company, the managing underwriters and Commerce (if Commerce is participating in the underwriting).
+(vi)
+If either (x) the Company grants “piggyback” registration rights to one or more third parties to include their securities in an underwritten offering under the Shelf Registration Statement pursuant to Section 4.5(a)(ii) or (y) a Piggyback Registration under Section 4.5(a)(iv) relates to an underwritten offering on behalf of the Company, and in either case the managing underwriters advise the Company that in their opinion the number of securities requested to be included in such offering exceeds the number which can be sold without adversely affecting the marketability of such offering (including an adverse effect on the per share offering price), the Company will include in such offering only such number of securities that in the opinion of such managing underwriters can be sold without adversely affecting the marketability of the offering (including an adverse effect on the per share offering price), which securities will be so included in the following order of priority: (A) in the case of a Piggyback Registration under Section 4.5(a)(iv), (1) first, the securities the Company proposes to sell, (2) then the Registrable Securities of Commerce and
+13
+all other Holders who have requested inclusion of Registrable Securities pursuant to Section 4.5(a)(iv) pro rata on the basis of the aggregate number of such securities or shares owned by each such person and (3) lastly, any other securities of the Company that have been requested to be so included, subject to the terms of this Agreement and (B) in the case of any underwritten offering pursuant to Section 4.5(a)(ii), (1) first, the Registrable Securities of Commerce and all other Holders who have requested inclusion of Registrable Securities pursuant to Section 4.5(a)(ii) pro rata on the basis of the aggregate number of such securities or shares owned by each such person and (2) then, any securities the Company proposes to sell and/or other securities of the Company that have been requested to be so included, subject to the terms of this Agreement; provided, however, that if the Company has, prior to the date hereof, entered into an agreement with respect to its securities that is inconsistent with the order of priority contemplated hereby then it shall apply the order of priority in such conflicting agreement to the extent that this Agreement would otherwise result in a breach under such agreement.
+(b)
+Expenses of Registration
+. All Registration Expenses incurred in connection with any registration, qualification or compliance hereunder shall be borne by the Company. All Selling Expenses incurred in connection with any registrations hereunder shall be borne by the holders of the securities so registered
+pro rata
+on the basis of the aggregate offering or sale price of the securities so registered.
+(c)
+Obligations of the Company
+. The Company shall use its reasonable best efforts, for so long as there are Registrable Securities outstanding, to take such actions as are under its control to not become an ineligible issuer (as defined in Rule 405 under the Securities Act) and to remain a well-known seasoned issuer (as defined in Rule 405 under the Securities Act) if it has such status on the date hereof or becomes eligible for such status in the future. In addition, whenever required to effect the registration of any Registrable Securities or facilitate the distribution of Registrable Securities pursuant to an effective Shelf Registration Statement, the Company shall, as expeditiously as reasonably practicable:
+(i)
+Prepare and file with the SEC a prospectus supplement with respect to a proposed offering of Registrable Securities pursuant to an effective registration statement, subject to Section 4.5(d), keep such registration statement effective and keep such prospectus supplement current until the securities described therein are no longer Registrable Securities. The plan of distribution included in such registration statement, or, as applicable, prospectus supplement thereto, shall include, among other things, an underwritten offering, ordinary brokerage transactions and transactions in which the broker-dealer solicits purchasers, block trades, privately negotiated transactions, the writing or settlement of options or other derivative transactions and any other method permitted pursuant to applicable law, and any combination of any such methods of sale.
+14
+(ii)
+Prepare and file with the SEC such amendments and supplements to the applicable registration statement and the prospectus or prospectus supplement used in connection with such registration statement as may be necessary to comply with the provisions of the Securities Act with respect to the disposition of all securities covered by such registration statement.
+(iii)
+Furnish to the Holders and any underwriters such number of copies of the applicable registration statement and each such amendment and supplement thereto (including in each case all exhibits) and of a prospectus, including a preliminary prospectus, in conformity with the requirements of the Securities Act, and such other documents as they may reasonably request in order to facilitate the disposition of Registrable Securities owned or to be distributed by them.
+(iv)
+Use its reasonable best efforts to register and qualify the securities covered by such registration statement under such other securities or Blue Sky laws of such jurisdictions as shall be reasonably requested by the Holders or any managing underwriter(s), to keep such registration or qualification in effect for so long as such registration statement remains in effect, and to take any other action which may be reasonably necessary to enable such seller to consummate the disposition in such jurisdictions of the securities owned by such Holder;
+provided
+that the Company shall not be required in connection therewith or as a condition thereto to qualify to do business or to file a general consent to service of process in any such states or jurisdictions.
+(v)
+Notify each Holder of Registrable Securities at any time when a prospectus relating thereto is required to be delivered under the Securities Act of the happening of any event as a result of which the applicable prospectus, as then in effect, includes an untrue statement of a material fact or omits to state a material fact required to be stated therein or necessary to make the statements therein not misleading in light of the circumstances then existing.
+(vi)
+Give written notice to the Holders:
+(A)
+when any registration statement filed pursuant to Section 4.5(a) or any amendment thereto has been filed with the SEC (except for any amendment effected by the filing of a document with the SEC pursuant to the Exchange Act) and when such registration statement or any post-effective amendment thereto has become effective;
+(B)
+of any request by the SEC for amendments or supplements to any registration statement or the prospectus included therein or for additional information;
+(C)
+of the issuance by the SEC of any stop order suspending the effectiveness of any registration statement or the initiation of any proceedings for that purpose;
+15
+(D)
+of the receipt by the Company or its legal counsel of any notification with respect to the suspension of the qualification of the Common Stock for sale in any jurisdiction or the initiation or threatening of any proceeding for such purpose;
+(E)
+of the happening of any event that requires the Company to make changes in any effective registration statement or the prospectus related to the registration statement in order to make the statements therein not misleading (which notice shall be accompanied by an instruction to suspend the use of the prospectus until the requisite changes have been made); and
+(F)
+if at any time the representations and warranties of the Company contained in any underwriting agreement contemplated by Section 4.5(c)(x) cease to be true and correct.
+(vii)
+Use its reasonable best efforts to prevent the issuance or obtain the withdrawal of any order suspending the effectiveness of any registration statement referred to in Section 4.5(c)(vi)(C) at the earliest practicable time.
+(viii)
+Upon the occurrence of any event contemplated by Section 4.5(c)(v), 4.5(c)(vi)(E) or 4.5(d), promptly prepare a post-effective amendment to such registration statement or a supplement to the related prospectus or file any other required document so that, as thereafter delivered to the Holders and any underwriters, the prospectus will not contain an untrue statement of a material fact or omit to state any material fact necessary to make the statements therein, in light of the circumstances under which they were made, not misleading. If the Company notifies the Holders in accordance with Section 4.5(c)(vi)(E) to suspend the use of the prospectus until the requisite changes to the prospectus have been made, then the Holders and any underwriters shall suspend use of such prospectus and use their reasonable best efforts to return to the Company all copies of such prospectus (at the Company’s expense) other than permanent file copies then in such Holders’ or underwriters’ possession. The total number of days that any such suspension may be in effect in any 12-month period shall not exceed 90 days. The Company shall notify the Holders of the date of any anticipated termination of any such suspension period prior to such date.
+(ix)
+Use reasonable best efforts to procure the cooperation of the Company’s transfer agent in settling any offering or sale of Registrable Securities, including with respect to the transfer of physical stock certificates into book-entry form in accordance with any procedures reasonably requested by the Holders or any managing underwriter(s).
+(x)
+If an underwritten offering is requested pursuant to Section 4.5(a)(ii), enter into an underwriting agreement in customary form, scope and substance and take all such other actions reasonably requested by the Holders of a majority of the
+16
+Registrable Securities being sold in connection therewith or by the managing underwriter(s), if any, to expedite or facilitate the underwritten disposition of such Registrable Securities, and in connection therewith in any underwritten offering (including making members of management and executives of the Company available to participate in “road shows”, similar sales events and other marketing activities), (A) make such representations and warranties to the Holders that are selling stockholders and the managing underwriter(s), if any, with respect to the business of the Company and its subsidiaries, and the Shelf Registration Statement, prospectus and documents, if any, incorporated or deemed to be incorporated by reference therein, in each case, in customary form, substance and scope, and, if true, confirm the same if and when requested, (B) use its reasonable best efforts to furnish the underwriters with opinions and “10b-5” letters of counsel to the Company, addressed to the managing underwriter(s), if any, covering the matters customarily covered in such opinions and letters requested in underwritten offerings, (C) use its reasonable best efforts to obtain “cold comfort” letters from the independent certified public accountants of the Company (and, if necessary, any other independent certified public accountants of any business acquired by the Company for which financial statements and financial data are included in the Shelf Registration Statement) who have certified the financial statements included in such Shelf Registration Statement, addressed to each of the managing underwriter(s), if any, such letters to be in customary form and covering matters of the type customarily covered in “cold comfort” letters, (D) if an underwriting agreement is entered into, the same shall contain indemnification provisions and procedures customary in underwritten offerings (provided that Commerce shall not be obligated to provide any indemnity), and (E) deliver such documents and certificates as may be reasonably requested by the Holders of a majority of the Registrable Securities being sold in connection therewith, their counsel and the managing underwriter(s), if any, to evidence the continued validity of the representations and warranties made pursuant to clause (A) above and to evidence compliance with any customary conditions contained in the underwriting agreement or other agreement entered into by the Company.
+(xi)
+Make available for inspection by a representative of Holders that are selling stockholders, the managing underwriter(s), if any, and any attorneys or accountants retained by such Holders or managing underwriter(s), at the offices where normally kept, during reasonable business hours, financial and other records, pertinent corporate documents and properties of the Company, and cause the officers, directors and employees of the Company to supply all information in each case reasonably requested (and of the type customarily provided in connection with due diligence conducted in connection with a registered public offering of securities) by any such representative, managing underwriter(s), attorney or accountant in connection with such Shelf Registration Statement.
+(xii)
+Use reasonable best efforts to cause all such Registrable Securities to be listed on each national securities exchange on which similar securities issued by the Company are then listed or, if no similar securities issued by the Company are
+17
+then listed on any national securities exchange and for so long as Commerce owns any Registrable Securities, use its reasonable best efforts to cause all such Registrable Securities to be listed on such securities exchange as Commerce may designate.
+(xiii)
+If requested by Holders of a majority of the Registrable Securities being registered and/or sold in connection therewith, or the managing underwriter(s), if any, promptly include in a prospectus supplement or amendment such information as the Holders of a majority of the Registrable Securities being registered and/or sold in connection therewith or managing underwriter(s), if any, may reasonably request in order to permit the intended method of distribution of such securities and make all required filings of such prospectus supplement or such amendment as soon as practicable after the Company has received such request.
+(xiv)
+Timely provide to its security holders earning statements satisfying the provisions of Section 11(a) of the Securities Act and Rule 158 thereunder.
+(d)
+Suspension of Sales
+. Upon receipt of written notice from the Company that a registration statement, prospectus or prospectus supplement contains or may contain an untrue statement of a material fact or omits or may omit to state a material fact required to be stated therein or necessary to make the statements therein not misleading or that circumstances exist that make inadvisable use of such registration statement, prospectus or prospectus supplement, Commerce and each Holder of Registrable Securities shall forthwith discontinue disposition of Registrable Securities until Commerce and/or such Holder has received copies of a supplemented or amended prospectus or prospectus supplement, or until Commerce and/or such Holder is advised in writing by the Company that the use of the prospectus and, if applicable, prospectus supplement may be resumed, and, if so directed by the Company, Commerce and/or such Holder shall deliver to the Company (at the Company’s expense) all copies, other than permanent file copies then in Commerce and/or such Holder’s possession, of the prospectus and, if applicable, prospectus supplement covering such Registrable Securities current at the time of receipt of such notice. The total number of days that any such suspension may be in effect in any 12-month period shall not exceed 90 days. The Company shall notify Commerce prior to the anticipated termination of any such suspension period of the date of such anticipated termination.
+(e)
+Termination of Registration Rights
+. A Holder’s registration rights as to any securities held by such Holder shall not be available unless such securities are Registrable Securities.
+(f)
+Indemnification
+.
+(i)
+The Company agrees to indemnify each Holder and, if a Holder is a person other than an individual, such Holder’s officers, directors, employees, agents, representatives and Affiliates, and each Person, if any, that controls a Holder within the meaning of the Securities Act (each, an “
+Indemnitee
+”), against any and all losses,
+18
+claims, damages, actions, liabilities, costs and expenses (including reasonable fees, expenses and disbursements of attorneys and other professionals incurred in connection with investigating, defending, settling, compromising or paying any such losses, claims, damages, actions, liabilities, costs and expenses), joint or several, arising out of or based upon any untrue statement or alleged untrue statement of material fact contained in any registration statement, including any preliminary prospectus or final prospectus contained therein or any amendments or supplements thereto or any documents incorporated therein by reference or contained in any free writing prospectus (as such term is defined in Rule 405) prepared by the Company or authorized by it in writing for use by such Holder (or any amendment or supplement thereto); or any omission to state therein a material fact required to be stated therein or necessary to make the statements therein, in light of the circumstances under which they were made, not misleading;
+provided
+, that the Company shall not be liable to such Indemnitee in any such case to the extent that any such loss, claim, damage, liability (or action or proceeding in respect thereof) or expense arises out of or is based upon (A) an untrue statement or omission made in such registration statement, including any such preliminary prospectus or final prospectus contained therein or any such amendments or supplements thereto or contained in any free writing prospectus (as such term is defined in Rule 405) prepared by the Company or authorized by it in writing for use by such Holder (or any amendment or supplement thereto), in reliance upon and in conformity with information regarding such Indemnitee or its plan of distribution or ownership interests which was furnished in writing to the Company by such Indemnitee expressly for use in connection with such registration statement, including any such preliminary prospectus or final prospectus contained therein or any such amendments or supplements thereto, or (B) offers or sales effected by or on behalf of such Indemnitee “by means of” (as defined in Rule 159A) a “free writing prospectus” (as defined in Rule 405) that was not authorized in writing by the Company.
+(ii)
+If the indemnification provided for in Section 4.5(f)(i) is unavailable to an Indemnitee with respect to any losses, claims, damages, actions, liabilities, costs or expenses referred to therein or is insufficient to hold the Indemnitee harmless as contemplated therein, then the Company, in lieu of indemnifying such Indemnitee, shall contribute to the amount paid or payable by such Indemnitee as a result of such losses, claims, damages, actions, liabilities, costs or expenses in such proportion as is appropriate to reflect the relative fault of the Indemnitee, on the one hand, and the Company, on the other hand, in connection with the statements or omissions which resulted in such losses, claims, damages, actions, liabilities, costs or expenses as well as any other relevant equitable considerations. The relative fault of the Company, on the one hand, and of the Indemnitee, on the other hand, shall be determined by reference to, among other factors, whether the untrue statement of a material fact or omission to state a material fact relates to information supplied by the Company or by the Indemnitee and the parties’ relative intent, knowledge, access to information and opportunity to correct or prevent such statement or omission; the Company and each Holder agree that it would not be just and equitable if contribution pursuant to this
+19
+Section 4.5(f)(ii) were determined by
+pro rata
+allocation or by any other method of allocation that does not take account of the equitable considerations referred to in Section 4.5(f)(i). No Indemnitee guilty of fraudulent misrepresentation (within the meaning of Section 11(f) of the Securities Act) shall be entitled to contribution from the Company if the Company was not guilty of such fraudulent misrepresentation.
+(g)
+Assignment of Registration Rights
+. The rights of Commerce to registration of Registrable Securities pursuant to Section 4.5(a) (and the related provisions of this Section 4.5 to the extent required to give a transferee the full benefit of the provisions set forth in Section 4.5(a) to the same extent as Commerce) may be assigned by Commerce to a transferee or assignee of Registrable Securities in connection with a transfer of a total number of New Common Stock, Warrant Shares and/or Warrants representing at least 15% of the total number of shares of New Common Stock and Warrant Shares for which Warrants issued under this Agreement could be exercised (giving effect to the anti-dilution adjustments in Warrants);
+provided
+,
+however
+, that the transferor shall, within ten days after such transfer, furnish to the Company written notice of the name and address of such transferee or assignee and the number and type of Registrable Securities that are being assigned.
+(h)
+Clear Market
+. With respect to any underwritten offering of Registrable Securities by Commerce or other Holders pursuant to this Section 4.5, the Company agrees not to effect (other than pursuant to such registration or pursuant to a Special Registration) any public sale or distribution, or to file any Shelf Registration Statement (other than such registration or a Special Registration) covering, in the case of an underwritten offering of Common Stock or Warrants, any of its equity securities, or, in each case, any securities convertible into or exchangeable or exercisable for such securities, during the period not to exceed 30 days following the effective date of such offering. The Company also agrees to cause such of its directors and senior executive officers to execute and deliver customary lock-up agreements in such form and for such time period up to 30 days as may be requested by the managing underwriter. “
+Special
+Registration
+” means the registration of (A) equity securities and/or options or other rights in respect thereof solely registered on Form S-4 or Form S-8 (or successor form) or (B) shares of equity securities and/or options or other rights in respect thereof to be offered to directors, members of management, employees, consultants, customers, lenders or vendors of the Company or its Subsidiaries or in connection with dividend reinvestment plans.
+(i)
+Rule 144; Rule 144A
+. With a view to making available to Commerce and other Holders the benefits of certain rules and regulations of the SEC which may permit the sale of the Registrable Securities to the public without registration, the Company agrees to use its reasonable best efforts to:
+(i)
+make and keep adequate public information available, as those terms are understood and defined in Rule 144(c)(1) or any similar or analogous rule promulgated under the Securities Act, at all times after the date hereof;
+20
+(ii)
+(A) file with the SEC, in a timely manner, all reports and other documents required of the Company under the Exchange Act, and (B) if at any time the Company is not required to file such reports, make available, upon the request of any Holder, such information necessary to permit sales pursuant to Rule 144A (including the information required by Rule 144A(d)(4) under the Securities Act);
+(iii)
+so long as Commerce or a Holder owns any Registrable Securities, furnish to Commerce or such Holder forthwith upon request: a written statement by the Company as to its compliance with the reporting requirements of Rule 144 under the Securities Act, and of the Exchange Act; a copy of the most recent annual or quarterly report of the Company; and such other reports and documents as Commerce or such Holder may reasonably request in availing itself of any rule or regulation of the SEC allowing it to sell any such securities to the public without registration;
+provided
+,
+however
+, that the availability of the foregoing reports on the EDGAR filing system of the SEC will be deemed to satisfy the foregoing delivery requirements; and
+(iv)
+take such further action as any Holder may reasonably request, all to the extent required from time to time to enable such Holder to sell Registrable Securities without registration under the Securities Act.
+(j)
+As used in this Section 4.5, the following terms shall have the following respective meanings:
+(i)
+“
+Holder
+” means Commerce and any other holder of Registrable Securities to whom the registration rights conferred by this Agreement have been transferred in compliance with Section 4.5(g) hereof.
+(ii)
+“
+Register
+,” “
+registered
+,” and “
+registration
+” shall refer to a registration effected by preparing and (A) filing a registration statement in compliance with the Securities Act and applicable rules and regulations thereunder, and the declaration or ordering of effectiveness of such registration statement or (B) filing a prospectus and/or prospectus supplement in respect of an appropriate effective registration statement on Form S-3.
+(iii)
+“
+Registrable Securities
+” means (A) the New Common Stock, (B) the Warrants (subject to Section 4.5(o)) and (C) any equity securities issued or issuable directly or indirectly with respect to the securities referred to in the foregoing clauses (A) or (B) by way of conversion, exercise or exchange thereof, including the Warrant Shares, or share dividend or share split or in connection with a combination of shares, recapitalization, reclassification, merger, amalgamation, arrangement, consolidation or other reorganization,
+provided
+that once issued, such securities will cease to be Registrable Securities when (1) they are sold pursuant to an effective registration statement under the Securities Act, (2) except as provided below in Section 4.5(n), they are eligible to be sold pursuant to Rule 144 without limitation thereunder on volume or manner of sale, (3) they shall have ceased to be outstanding or (4) they have been sold in a private transaction in which the transferor’s rights
+21
+under this Agreement are not assigned to the transferee of the securities. No Registrable Securities may be registered under more than one registration statement at any one time.
+(iv)
+“
+Registration Expenses
+” mean all expenses incurred by the Company in effecting any registration pursuant to this Agreement (whether or not any registration or prospectus becomes effective or final) or in otherwise complying with its obligations under this Section 4.5, including all registration, filing and listing fees, printing expenses, fees and disbursements of counsel for the Company, blue sky fees and expenses, expenses incurred in connection with any “road show”, the reasonable fees and disbursements of Commerce’s counsel (if Commerce is participating in the registered offering), and expenses of the Company’s independent accountants in connection with any regular or special reviews or audits incident to or required by any such registration, but shall not include Selling Expenses.
+(v)
+“
+Rule 144
+”, “
+Rule 144A
+”, “
+Rule 159A
+”, “
+Rule 405
+” and “
+Rule 415
+” mean, in each case, such rule promulgated under the Securities Act (or any successor provision), as the same shall be amended from time to time.
+(vi)
+“
+Selling Expenses
+” mean all discounts, selling commissions and stock transfer taxes applicable to the sale of Registrable Securities and fees and disbursements of counsel for any Holder (other than the fees and disbursements of Commerce’s counsel included in Registration Expenses).
+(k)
+At any time, any holder of Securities (including any Holder) may elect to forfeit its rights set forth in this Section 4.5 from that date forward;
+provided
+, that a Holder forfeiting such rights shall nonetheless be entitled to participate under Section 4.5(a)(iv) – (vi) in any Pending Underwritten Offering to the same extent that such Holder would have been entitled to if the holder had not withdrawn; and
+provided further
+, that no such forfeiture shall terminate a Holder’s rights or obligations under Section 4.5(f) with respect to any prior registration or Pending Underwritten Offering. “
+Pending Underwritten Offering”
+means
+,
+with respect to any Holder forfeiting its rights pursuant to this Section 4.5(k), any underwritten offering of Registrable Securities in which such Holder has advised the Company of its intent to register its Registrable Securities either pursuant to Section 4.5(a)(ii) or 4.5(a)(iv) prior to the date of such Holder’s forfeiture.
+(l)
+Specific Performance
+. The parties hereto acknowledge that there would be no adequate remedy at law if the Company fails to perform any of its obligations under this Section
+4.5 and that Commerce and the Holders from time to time may be irreparably harmed by any such failure, and accordingly agree that Commerce and such Holders, in addition to any other remedy to which they may be entitled at law or in equity, to the fullest extent permitted and enforceable under applicable law shall be entitled to compel specific performance of the obligations of the Company under this Section 4.5 in accordance with the terms and conditions of this Section 4.5.
+22
+(m)
+No Inconsistent Agreements
+. The Company shall not, on or after the date hereof, enter into any agreement with respect to its securities that may impair the rights granted to Commerce and the other Holders under this Section 4.5 or that otherwise conflicts with the provisions hereof in any manner that may impair the rights granted to Commerce and the other Holders under this Section 4.5. In the event the Company has, prior to the date hereof, entered into any agreement with respect to its securities that is inconsistent with the rights granted to Commerce and the other Holders under this Section 4.5 (including agreements that are inconsistent with the order of priority contemplated by Section 4.5(a)(vi)) or that may otherwise conflict with the provisions hereof, the Company shall use its reasonable best efforts to amend such agreements to ensure they are consistent with the provisions of this Section 4.5. Any transaction entered into by the Company that would reasonably be expected to require the inclusion in a Shelf Registration Statement or any Company Report filed with the SEC of any separate financial statements pursuant to Rule 3-05 of Regulation S-X or pro forma financial statements pursuant to Article 11 of Regulation S-X shall include provisions requiring the Company’s counterparty to provide any information necessary to allow the Company to comply with its obligation hereunder.
+(n)
+Certain Offerings by Commerce
+. In the case of any securities held by Commerce that cease to be Registrable Securities solely by reason of clause (2) in the definition of “Registrable Securities,” the provisions of Sections 4.5(a)(ii), clauses (iv), (ix) and (x)-(xii) of Section 4.5(c), Section 4.5(f) and Section 4.5(h) shall continue to apply until such securities otherwise cease to be Registrable Securities. In any such case, an “underwritten” offering or other disposition shall include any distribution of such securities on behalf of Commerce by one or more broker-dealers, an “underwriting agreement” shall include any purchase agreement entered into by such broker- dealers, and any “registration statement” or “prospectus” shall
+include any offering document approved by the Company and used in connection with such distribution.
+(o)
+Registered Sales of the Warrants
+. The Holders agree to sell the Warrants or any portion thereof under the Shelf Registration Statement only beginning 30 days after notifying the Company of any such sale, during which 30-day period Commerce and all other Holders of the Warrants shall, at the expense of the Company, take reasonable steps to agree to revisions to the Warrants to permit a public distribution of the Warrants, including entering into a revised warrant agreement, appointing a warrant agent, and making the securities eligible for book entry clearing and settlement at the Depositary Trust Company.
+4.6
+Agreement to Vote Common Stock
+. If Commerce is the record and beneficial owner of any shares of New Common Stock or Warrant Shares (such shares, collectively, the “
+Voted Company Stock
+”), Commerce hereby agrees that (a) at any meeting (whether annual or special, and at each adjournment, recess or postponement thereof) of the Company’s stockholders, however called, or in any other circumstance, in each case, upon which a vote, consent or other approval of the Company’s stockholders with respect to any of the matters described in clauses (x) or (y) below is sought, Commerce shall (i) appear at such meeting or otherwise cause all of the Voted Company Stock to be counted as present
+23
+thereat (including by proxy) for purposes of calculating a quorum and (ii) vote or cause to be voted (including by proxy) all of the Voted Company Stock (x) in favor of each nomination and proposal recommended by the Board of Directors and (y) against any other nomination or proposal not recommended by the Board of Directors, and (b) Commerce shall not grant any consent or proxy for a consent to any third party in any solicitation of consents seeking to have the Company stockholders authorize or take corporate action by written consent without a meeting unless recommended to do so by the Board of Directors; notwithstanding anything to the contrary in this
+Section 4.6
+, (i) no such restrictions or obligations on Commerce’s voting shall apply, and Commerce may vote any of its Common Stock as it wishes, with respect to any vote (A) regarding the Company or its Subsidiaries taking or refraining from taking any action that would be a violation of this Agreement or the Warrants, (B) seeking to reject, disclaim, unwind, terminate or otherwise materially and adversely impact the Company’s or its Subsidiaries’ relationship with the Federal Government of the United States of America (including any department or other subdivision thereof), or (C) which would materially and adversely impact the ability of the Company or any of its Subsidiaries to comply with its obligations under this Agreement or the Warrants and (ii) Commerce shall in no event be required to vote any Voted Company Stock in a manner inconsistent with applicable Laws.
+Article V
+Miscellaneous
+5.1
+Survival of Representations and Warranties
+. The representations and warranties of the Company made herein or in any certificates delivered in connection with the Closing shall survive such Closing without limitation.
+5.2
+Amendment
+. No amendment of any provision of this Agreement will be effective unless made in writing and signed by an officer or a duly authorized representative of each party;
+provided
+that Commerce may unilaterally amend any provision of this Agreement to the extent required to comply with any changes after the date hereof in applicable federal statutes. No failure or delay by any party in exercising any right, power or privilege hereunder shall operate as a waiver thereof nor shall any single or partial exercise thereof preclude any other or further exercise of any other right, power or privilege. The rights and remedies herein provided shall be cumulative of any rights or remedies provided by law.
+5.3
+Waiver of Conditions
+. No waiver will be effective unless it is in a writing signed by a duly authorized officer of the waiving party that makes express reference to the provision or provisions subject to such waiver.
+5.4
+Governing Law: Submission to Jurisdiction, Etc.
+This Agreement will be governed by and construed in accordance with the federal law of the United States if and to the extent such law is applicable, and otherwise in accordance with the laws of the State of New York applicable to contracts made and to be performed entirely within such State. Each of the parties hereto agrees (a) to submit to the exclusive jurisdiction and venue of the United States District Court for the District of Columbia and the United States Court of Federal Claims for any and all civil actions, suits or proceedings arising out of or relating
+24
+to this Agreement, the New Common Stock or the Warrants or the transactions contemplated hereby or thereby, and (b) that notice may be served upon (i) the Company at the address and in the manner set forth for notices to the Company in Section 5.5 and (ii) Commerce in accordance with federal law. To the extent permitted by applicable law, each of the parties hereto hereby unconditionally waives trial by jury in any civil legal action or proceeding relating to this Agreement, the New Common Stock or the Warrants or the transactions contemplated hereby or thereby.
+5.5
+Notices
+. Any notice, request, instruction or other document to be given hereunder by any party to the other will be in writing and will be deemed to have been duly given (a) on the date of delivery if delivered personally or transmitted by email (or other electronic format acceptable to Commerce) or (b) on the second Business Day following the date of dispatch if delivered by a recognized next day courier service. All notices to the Company shall be delivered as set forth below, or pursuant to such other instruction as may be designated in writing by the Company to Commerce. All notices to Commerce shall be delivered as set forth below, or pursuant to such other instructions as may be designated in writing by Commerce to the Company.
+If to the Company:
+Intel Corporation
+2200 Mission College Boulevard Santa Clara, California 95054-1549
+Attention: [***]
+Email: [***]
+With copies to (which shall not constitute notice):
+Skadden, Arps, Slate, Meagher & Flom LLP 525 University Avenue Palo Alto, CA 94301
+Attention: [***]
+Email: [***]
+If to Commerce:
+United States Department of Commerce 1401 Constitution Avenue, NW Washington, D.C. 20230
+Attention: [***]
+Email: [***]
+25
+5.6
+Definitions.
+(a)
+The term “Contractual Obligations” means, as to any Person, any provision of any security issued by such Person or of any agreement, instrument or other undertaking or understanding to which such Person is a party or by which it or any of its property is bound.
+(b)
+The term “
+Governmental Authority
+” means the government of the United States of America or any other nation, or of any political subdivision thereof, whether state or local, and any agency, authority, instrumentality, regulatory body, court, central bank or other entity exercising executive, legislative, judicial, taxing, regulatory or administrative powers or functions of or pertaining to government (including any supra-national bodies such as the European Union or the European Central Bank).
+(c)
+The term “
+Laws
+” means, collectively, all international, foreign, federal, state and local statutes, treaties, rules, guidelines, regulations, ordinances, codes and administrative or judicial precedents or authorities, including the interpretation or administration thereof by any Governmental Authority charged with the enforcement, interpretation or administration thereof, and all applicable administrative orders, directed duties, requests, licenses, authorizations and permits of, and agreements with, any Governmental Authority, in each case whether or not having the force of law.
+(d)
+The term “
+Lien
+” means any mortgage, pledge, hypothecation, collateral assignment, deposit arrangement, encumbrance, lien (statutory or other), charge, or preference, priority or other security interest or preferential arrangement of any kind or nature whatsoever (including any conditional sale or other title retention agreement, any easement, right of way or other encumbrance on title to real property, and any financing lease having substantially the same economic effect as any of the foregoing).
+(e)
+The term “
+Material Adverse Effect
+” means (a) a material adverse change in, or a material adverse effect on, the operations, business, properties, liabilities (actual or contingent), condition (financial or otherwise) or prospects of the Company and its Subsidiaries taken as a whole; or (b) a material adverse effect on (i) the ability of the Company to perform its obligations under this Agreement or any Warrant or (ii) the legality, validity, binding effect or enforceability against the Company of this Agreement or any Warrant to which it is a party.
+(f)
+The term “
+Organizational Documents
+” means (a) as to any corporation, the charter or certificate or articles of incorporation and the bylaws (or equivalent or comparable constitutive documents with respect to any non-U.S. jurisdiction), (b) as to any limited liability company, the certificate or articles of formation or organization and operating or limited liability agreement and (c) as to any partnership, joint venture, trust or other form of business entity, the partnership, joint venture or other applicable agreement of formation or organization and any agreement, instrument, filing or notice with respect thereto filed in connection with its formation or organization with the applicable Governmental Authority in the jurisdiction of its formation or organization and, if applicable, any certificate or articles of formation or organization of such entity.
+26
+(g)
+The term “
+Subsidiary
+” means, in relation to any Person, a corporation, partnership, limited liability company, association or joint venture or other business entity of which a majority of the equity interests having ordinary voting power for the election of directors or other governing body (other than securities or interests having such power only by reason of the happening of a contingency) are at the time owned or the management of which is Controlled, directly, or indirectly through one or more intermediaries, by such Person. Unless otherwise specified, all references herein to a “
+Subsidiary
+” or to “
+Subsidiaries
+” shall refer to a Subsidiary or Subsidiaries of the Company.
+5.7
+Assignment
+. Neither this Agreement nor any right, remedy, obligation nor liability arising hereunder or by reason hereof shall be assignable by any party hereto without the prior written consent of the other party, and any attempt to assign any right, remedy, obligation or liability hereunder without such consent shall be void, except (a) an assignment, in the case of a Business Combination where such party is not the surviving entity, or a sale of substantially all of its assets, to the entity which is the survivor of such Business Combination or the purchaser in such sale and (b) as provided in Section 4.5.
+5.8
+Severability
+. If any provision of this Agreement or the Warrants, or the application thereof to any person or circumstance, is determined by a court of competent jurisdiction to be invalid, void or unenforceable, the remaining provisions hereof, or the application of such provision to persons or circumstances other than those as to which it has been held invalid or unenforceable, will remain in full force and effect and shall in no way be affected, impaired or invalidated thereby, so long as the economic or legal substance of the transactions contemplated hereby is not affected in any manner materially adverse to any party. Upon such determination, the parties shall negotiate in good faith in an effort to agree upon a suitable and equitable substitute provision to effect the original intent of the parties.
+5.9
+No Third Party Beneficiaries
+. Nothing contained in this Agreement, expressed or implied, is intended to confer upon any person or entity other than the Company and Commerce any benefit, right or remedies, except that the provisions of Section 4.5 shall inure to the benefit of the persons referred to in that Section.
+* * *
+[Signature page follows]
+27
+IN WITNESS WHEREOF, the parties hereto have caused this Agreement to be executed by their respective officers thereunto duly authorized, as of the date first above written.
+THE UNITED STATES DEPARTMENT OF COMMERCE
+By:
+/s/ Howard Lutnick
+Name: Howard Lutnick
+Title: Secretary of Commerce
+INTEL CORPORATION
+By:
+/s/Lip-Bu Tan
+Name: Lip-Bu Tan
+Title: Chief Executive Officer
+/s/ Donald J. Trump
+[President of the United States]
+[Signature Page - Purchase Agreement]
+ANNEX A
+FORM OF WARRANT
+[SEE ATTACHED]
+FORM OF WARRANT TO PURCHASE COMMON STOCK
+THE SECURITIES REPRESENTED BY THIS INSTRUMENT HAVE NOT BEEN REGISTERED UNDER THE SECURITIES ACT OF 1933, AS AMENDED, OR THE SECURITIES LAWS OF ANY STATE AND MAY NOT BE TRANSFERRED, SOLD OR OTHERWISE DISPOSED OF EXCEPT WHILE A REGISTRATION STATEMENT RELATING THERETO IS IN EFFECT UNDER SUCH ACT AND APPLICABLE STATE SECURITIES LAWS OR PURSUANT TO AN EXEMPTION FROM REGISTRATION UNDER SUCH ACT AND SUCH LAWS.
+WARRANT
+to purchase
+240,516,150
+Shares of Common Stock
+of Intel Corporation
+Issue Date: August , 2025
+1.
+Definitions
+. Unless the context otherwise requires, when used herein the following terms shall have the meanings indicated.
+“
+Affiliate
+” means, with respect to any person, any person directly or indirectly controlling, controlled by or under common control with, such other person. For purposes of this definition, “
+control
+” (including, with correlative meanings, the terms “
+controlled by
+” and “
+under
+common control with
+”) when used with respect to any person, means the possession, directly or indirectly, of the power to cause the direction of management and/or policies of such person, whether through the ownership of voting securities by contract or otherwise.
+“
+Aggregate Net Cash Settlement Amount
+” has the meaning ascribed thereto in Section 2(i).
+“
+Aggregate Net Share Settlement Amount
+” has the meaning ascribed thereto in Section 2(ii).
+“
+Appraisal Procedure
+” means a procedure whereby two independent appraisers, one chosen by the Company and one by the Original Warrantholder, shall mutually agree upon the determinations then the subject of appraisal. Each party shall deliver a notice to the other appointing its appraiser within 10 days after the Appraisal Procedure is invoked. If within 30 days after appointment of the two appraisers they are unable to agree upon the amount in question, a third independent appraiser shall be chosen within 10 days thereafter by the mutual consent of such first two appraisers. The decision of the third appraiser so appointed and chosen shall be given within 30 days after the selection of such third appraiser. If three appraisers shall be appointed and the determination of one appraiser is disparate from the
+middle determination by more than twice the amount by which the other determination is disparate from the middle determination, then the determination of such appraiser shall be excluded, the remaining two determinations shall be averaged and such average shall be binding and conclusive upon the Company and the Original Warrantholder; otherwise, the average of all three determinations shall be binding upon the Company and the Original Warrantholder. The costs of conducting any Appraisal Procedure shall be borne by the Company.
+“
+Average Market Price
+” means, with respect to any security, the arithmetic average of the Market Price of such security for the 15 consecutive trading day period ending on and including the trading day immediately preceding the determination date.
+“
+Board of Directors
+” means the board of directors of the Company, including any duly authorized committee thereof.
+“
+Business Combination
+” means a merger, consolidation, statutory share exchange or similar transaction that requires the approval of the Company’s stockholders.
+“
+Business Day
+” means any day except Saturday, Sunday and any day on which banking institutions in the State of New York generally are authorized or required by law or other governmental actions to close;
+provided
+that banks shall be deemed to be generally open for business in the event of a “shelter in place” or similar closure of physical branch locations at the direction of any governmental entity if such banks’ electronic funds transfer system (including wire transfers) are open for use by customers on such day.
+“
+Capital Stock
+” means (A) with respect to any Person that is a corporation or company, any and all shares, interests, participations or other equivalents (however designated) of capital or capital stock of such Person and (B) with respect to any Person that is not a corporation or company, any and all partnership or other equity interests of such Person.
+“
+Charter
+” means, with respect to any Person, its certificate or articles of incorporation, articles of association, or similar organizational document.
+“
+Common Stock
+” means common stock of the Company, par value $0.001 per share subject to adjustment as provided in Section 13(E).
+“
+Company
+” means the Person whose name, corporate or other organizational form and jurisdiction of organization is set forth in Item 1 of Schedule A hereto.
+“
+conversion
+” has the meaning set forth in Section 13(B). “
+convertible securities
+” has the meaning set forth in Section 13(B).
+“
+Depositary
+” means The Depositary Trust Company, its nominees and their respective successors.
+“
+Exchange Act
+” means the Securities Exchange Act of 1934, as amended, or any successor statute, and the rules and regulations promulgated thereunder.
+“
+Exercise Date
+” means each date a Notice of Exercise substantially in the form annexed hereto is delivered to the Company in accordance with Section 2 hereof.
+Company and the Original Warrantholder; otherwise, the average of all three determinations shall be binding upon the Company and the Original Warrantholder. The costs of conducting any Appraisal Procedure shall be borne by the Company.
+“
+Average Market Price
+” means, with respect to any security, the arithmetic average of the Market Price of such security for the 15 consecutive trading day period ending on and including the trading day immediately preceding the determination date.
+“
+Board of Directors
+” means the board of directors of the Company, including any duly authorized committee thereof.
+“
+Business Combination
+” means a merger, consolidation, statutory share exchange or similar transaction that requires the approval of the Company’s stockholders.
+“
+Business Day
+” means any day except Saturday, Sunday and any day on which banking institutions in the State of New York generally are authorized or required by law or other governmental actions to close;
+provided
+that banks shall be deemed to be generally open for business in the event of a “shelter in place” or similar closure of physical branch locations at the direction of any governmental entity if such banks’ electronic funds transfer system (including wire transfers) are open for use by customers on such day.
+“
+Capital Stock
+” means (A) with respect to any Person that is a corporation or company, any and all shares, interests, participations or other equivalents (however designated) of capital or capital stock of such Person and (B) with respect to any Person that is not a corporation or company, any and all partnership or other equity interests of such Person.
+“
+Charter
+” means, with respect to any Person, its certificate or articles of incorporation, articles of association, or similar organizational document.
+“
+Common Stock
+” means common stock of the Company, par value $0.001 per share subject to adjustment as provided in Section 13(E).
+“
+Company
+” means the Person whose name, corporate or other organizational form and jurisdiction of organization is set forth in Item 1 of Schedule A hereto.
+“
+conversion
+” has the meaning set forth in Section 13(B). “
+convertible securities
+” has the meaning set forth in Section 13(B).
+“
+Depositary
+” means The Depositary Trust Company, its nominees and their respective successors.
+“
+Exchange Act
+” means the Securities Exchange Act of 1934, as amended, or any successor statute, and the rules and regulations promulgated thereunder.
+“
+Exercise Date
+” means each date a Notice of Exercise substantially in the form annexed hereto is delivered to the Company in accordance with Section 2 hereof.
+“
+Exercise Price
+” means the amount set forth in Item 2 of Schedule A hereto, subject to adjustment as contemplated herein.
+“
+Fair Market Value
+” means, with respect to any security or other property, the fair market value of such security or other property as determined by the Board of Directors, acting in good faith in reliance on an opinion of a nationally recognized independent investment banking firm retained by the Company for this purpose. For so long as the Original Warrantholder holds this Warrant or any portion thereof, it may object in writing to the Board of Director’s calculation of fair market value within 10 days of receipt of written notice thereof. If the Original Warrantholder and the Company are unable to agree on fair market value during the 10-day period following the delivery of the Original Warrantholder’s objection, the Appraisal Procedure may be invoked by either party to determine Fair Market Value by delivering written notification thereof not later than the 30
+th
+day after delivery of the Original Warrantholder’s objection.
+“
+Initial Number
+” has the meaning set forth in Section 13(B).
+“Issue Date”
+means the date set forth in Item 3 of Schedule A hereto.
+“
+Market Price
+” means, with respect to a particular security, on any given day, the last reported sale price regular way or, in case no such reported sale takes place on such day, the average of the last closing bid and ask prices regular way, in either case on the principal national securities exchange on which the applicable securities are listed or admitted to trading, or if not listed or admitted to trading on any national securities exchange, the average of the closing bid and ask prices as furnished by two members of the Financial Industry Regulatory Authority, Inc. selected from time to time by the Company for that purpose. “Market Price” shall be determined without reference to after hours or extended hours trading. If such security is not listed and traded in a manner that the quotations referred to above are available for the period required hereunder, the Market Price of such security shall be deemed to be (i) in the event that any portion of the Warrant is held by the Original Warrantholder, the fair market value per share of such security as determined in good faith by the Original Warrantholder or (ii) in all other circumstances, the fair market value per share of such security as determined in good faith by the Board of Directors in reliance on an opinion of a nationally recognized independent investment banking corporation retained by the Company for this purpose and certified in a resolution to the Warrantholder.
+“
+Original Warrantholder
+” means the United States Department of Commerce. Any actions specified to be taken by the Original Warrantholder hereunder may only be taken by such Person and not by any other Warrantholder.
+“
+Permitted Transactions
+” has the meaning set forth in Section 13(B).
+“
+Per Share Net Cash Settlement Amount
+” means the Average Market Price of a share of Common Stock determined as of the relevant Exercise Date less the then applicable Exercise Price.
+“
+Per Share Net Share Settlement Amount
+” means the quotient of (i) the Average Market Price of a share of Common Stock determined as of the relevant Exercise Date less the then applicable Exercise Price
+divided by
+(ii) the Average Market Price of a share of Common Stock determined as of the relevant Exercise Date.
+“
+Person
+” has the meaning given to it in Section 3(a)(9) of the Exchange Act and as used in Sections 13(d)(3) and 14(d)(2) of the Exchange Act.
+“
+Per Share Fair Market Value
+” has the meaning set forth in Section 13(C).
+“
+Pro Rata Repurchases
+” means any purchase of shares of Common Stock by the Company or any Affiliate thereof pursuant to (A) any tender offer or exchange offer subject to Section 13(e) or 14(e) of the Exchange Act or Regulation 14E promulgated thereunder or (B) any other offer available to substantially all holders of Common Stock, in the case of both (A) or (B), whether for cash, shares of Capital Stock of the Company, other securities of the Company, evidences of indebtedness of the Company or any other Person or any other property (including, without limitation, shares of Capital Stock, other securities or evidences of indebtedness of a subsidiary), or any combination thereof, effected while this Warrant is outstanding. The “
+Effective Date
+” of a Pro Rata Repurchase shall mean the date of acceptance of shares for purchase or exchange by the Company under any tender or exchange offer which is a Pro Rata Repurchase or the date of purchase with respect to any Pro Rata Repurchase that is not a tender or exchange offer.
+“
+Regulatory Approvals
+” with respect to the Warrantholder, means, to the extent applicable and required to permit the Warrantholder to exercise this Warrant for shares of Common Stock and to own such Common Stock without the Warrantholder being in violation of applicable law, rule or regulation, the receipt of any necessary approvals and authorizations of, filings and registrations with, notifications to, or expiration or termination of any applicable waiting period under, the Hart-Scott-Rodino Antitrust Improvements Act of 1976, as amended, and the rules and regulations thereunder.
+“
+SEC
+” means the U.S. Securities and Exchange Commission.
+“
+Securities Act
+” means the Securities Act of 1933, as amended, or any successor statute, and the rules and regulations promulgated thereunder.
+“trading day”
+means (A) if the shares of Common Stock are not traded on any national or regional securities exchange or association or over-the-counter market, a Business Day or (B) if the shares of Common Stock are traded on any national or regional securities exchange or association or over-the-counter market, a Business Day on which such
+relevant exchange or quotation system is scheduled to be open for business and on which the shares of Common Stock
+(i) are not suspended from trading on any national or regional securities exchange or association or over-the-counter market for any period or periods aggregating one half hour or longer; and (ii) have traded at least once on the national or regional securities exchange or association or over- the-counter market that is the primary market for the trading of the shares of Common Stock.
+“
+Triggering Event
+” means any transaction or series of transactions which results in the Company ceasing to have at least a 51% direct or indirect ownership interest in the Company’s foundry business ( “Foundry”); provided, however, that “Triggering Event” shall not include any entity reorganization or other transaction effected for the purpose of changing domicile or entity type, creating a parent-subsidiary or holding company structure, or otherwise implementing any internal reorganization or other organizational structure.
+“
+U.S. GAAP
+” means United States generally accepted accounting principles.
+“
+Warrant
+” means this Warrant, issued pursuant to the Warrant Agreement.
+“
+Warrant Agreement
+” means the Warrant and Common Stock Agreement, dated as of the date set forth in Item 4 of Schedule A hereto, as amended from time to time, between the Company and the United States Department of Commerce.
+“
+Warrantholder
+” has the meaning set forth in Section 2.
+“
+Warrant Shares
+” has the meaning set forth in Section 2.
+2.
+Number of Warrant Shares; Net Exercise
+. This certifies that, for value received, the United States Department of Commerce or its permitted assigns (the “
+Warrantholder
+”) is entitled, upon the terms and subject to the conditions hereinafter set forth, to acquire from the Company, in whole or in part, after the receipt of all applicable Regulatory Approvals, if any, up to an aggregate of the number of fully paid and nonassessable shares of Common Stock set forth in Item 5 of Schedule A hereto. The number of shares of Common Stock (the “
+Warrant Shares
+”) issuable upon exercise of this Warrant and the Exercise Price are subject to adjustment as provided herein, and all references to “Common Stock,” “Warrant Shares” and “Exercise Price” herein shall be deemed to include any such adjustment or series of adjustments.
+Upon exercise of the Warrant in accordance with Section 3 hereof, the Company shall elect to pay or deliver, as the case may be, to the exercising Warrantholder (a) cash (“
+Net Cash Settlement
+”) or (b) Warrant Shares together with cash, if applicable, in lieu of delivering any fractional shares in accordance with Section 5 of this Warrant (“
+Net Share Settlement
+”). The Company will notify the exercising Warrantholder of its election of a settlement method within one Business Day after the relevant Exercise Date and if it fails to deliver a timely notice shall be deemed to have elected Net Share Settlement.
+(i)
+Net Cash Settlement.
+If the Company elects Net Cash Settlement, it shall pay to the Warrantholder cash equal to the Per Share Net Cash Settlement Amount multiplied by the number of Warrant Shares as to which the Warrant has been exercised as indicated in the Notice of Exercise (the “
+Aggregate Net Cash Settlement Amount
+”).
+(ii)
+Net Share Settlement
+. If the Company elects Net Share Settlement, it shall deliver to the Warrantholder a number of shares of Common Stock equal to the Per Share Net Share Settlement Amount multiplied by the number of Warrant Shares as to which the Warrant has been exercised as indicated in the Notice of Exercise (the “
+Aggregate Net Share Settlement Amount
+”).
+3.
+Term; Method of Exercise
+. Subject to Section 2, to the extent permitted by applicable laws and regulations, this Warrant is exercisable, in whole or in part by the Warrantholder, at any time or from time to time after the occurrence of a Triggering Event, but in no event later than 5:00 p.m., New York City time on the fifth anniversary of the Issue Date of this Warrant, by the surrender of this Warrant and delivery of the Notice of Exercise annexed hereto, duly completed and executed on behalf of the Warrantholder, at the principal executive office of the Company located at the address set forth in Item 6 of Schedule A hereto (or such other office or agency of the Company in the United States as it may designate by notice in writing to the Warrantholder at the address of the Warrantholder appearing on the books of the Company).
+If the Warrantholder does not exercise this Warrant in its entirety, the Warrantholder will be entitled to receive from the Company within a reasonable time after the date on which this Warrant has been duly exercised in accordance with the terms of this Warrant, and in any event not exceeding three Business Days after the date thereof, a new warrant in substantially identical form for the purchase of that number of Warrant Shares equal to the difference between the number of Warrant Shares subject to this Warrant and the number of Warrant Shares as to which this Warrant is so exercised. Notwithstanding anything in this Warrant to the contrary, the Warrantholder hereby acknowledges and agrees that its exercise of this Warrant for Warrant Shares is subject to the condition that the Warrantholder will have first received any applicable Regulatory Approvals.
+4.
+Method of Settlement.
+(i)
+Net Cash Settlement
+. If the Company elects Net Cash Settlement, the Company shall, within a reasonable time, not to exceed five Business Days after the date on which this Warrant has been duly exercised in accordance with the terms of this Warrant, pay to the exercising Warrantholder the Aggregate Net Cash Settlement Amount.
+(ii)
+Net Share Settlement
+. If the Company elects Net Share Settlement, shares of Common Stock equal to the Aggregate Net Share Settlement Amount shall be (x) issued in such name or names as the exercising Warrantholder may designate and (y) delivered by the Company or the Company’s transfer agent to such Warrantholder or its nominee or nominees (i) if the shares are then able to be so delivered, via book-entry transfer crediting the account of such Warrantholder (or the relevant agent member for the benefit of
+such Warrantholder) through the Depositary’s DWAC system (if the Company’s transfer agent participates in such system), or (ii) otherwise in certificated form by physical delivery to the address specified by the Warrantholder in the Notice of Exercise, within a reasonable time, not to exceed three Business Days after the date on which this Warrant has been duly exercised in accordance with the terms of this Warrant. The Company hereby represents and warrants that any Warrant Shares issued upon the exercise of this Warrant in accordance with the provisions of Section 3 will be duly and validly authorized and issued, fully paid and nonassessable and free from all taxes, liens and charges (other than liens or charges created by the Warrantholder, income and franchise taxes incurred in connection with the exercise of the Warrant or taxes in respect of any transfer occurring contemporaneously therewith). The Company agrees that the Warrant Shares so issued will be deemed to have been issued to the Warrantholder as of the close of business on the date on which this Warrant and payment of the Exercise Price are delivered to the Company in accordance with the terms of this Warrant, notwithstanding that the stock transfer books of the Company may then be closed or certificates representing such Warrant Shares may not be actually delivered on such date. The Company will at all times reserve and keep available, out of its authorized but unissued Common Stock, solely for the purpose of providing for the exercise of this Warrant, the aggregate number of shares of Common Stock then issuable upon exercise of this Warrant at any time. The Company will (A) procure, at its sole expense, the listing of the Warrant Shares issuable upon exercise of this Warrant at any time, subject to issuance or notice of issuance, on all principal stock exchanges on which the Common Stock is then listed or traded and (B) maintain such listings of such Warrant Shares at all times after issuance. The Company will use reasonable best efforts to ensure that the Warrant Shares may be issued without violation of any applicable law or regulation or of any requirement of any securities exchange on which the Warrant Shares are listed or traded.
+5.
+No Fractional Warrant Shares or Scrip
+. No fractional Warrant Shares or scrip representing fractional Warrant Shares shall be issued upon any exercise of this Warrant. In lieu of any fractional Share to which the Warrantholder would otherwise be entitled, the Warrantholder shall be entitled to receive a cash payment equal to the Average Market Price of the Common Stock determined as of the Exercise Date multiplied by such fraction of a share, less the pro-rated Exercise Price for such fractional share.
+6.
+No Rights as Stockholders; Transfer Books
+. This Warrant does not entitle the Warrantholder to any voting rights or other rights as a stockholder of the Company prior to the date of exercise hereof. The Company will at no time close its transfer books against transfer of this Warrant in any manner which interferes with the timely exercise of this Warrant.
+7.
+Charges, Taxes and Expenses
+. Issuance of certificates for Warrant Shares to the Warrantholder upon the exercise of this Warrant shall be made without charge to the Warrantholder for any issue or transfer tax or other incidental expense in respect of the issuance of such certificates, all of which taxes and expenses shall be paid by the Company;
+provided
+,
+however
+, that the Company shall not be required to pay any tax that may be payable in respect of any transfer involved in the issuance and delivery of any such
+certificate, or any certificates or other securities in a name other than that of the registered holder of the Warrant surrendered upon exercise of the Warrant.
+8.
+Transfer/Assignment
+.
+(A)
+Subject to compliance with clause (B) of this Section 8, this Warrant and all rights hereunder are transferable, in whole or in part, upon the books of the Company by the registered holder hereof in person or by duly authorized attorney, and a new warrant shall be made and delivered by the Company, of the same tenor and date as this Warrant but registered in the name of one or more transferees, upon surrender of this Warrant, duly endorsed, to the office or agency of the Company described in Section 3. All expenses (other than stock transfer taxes) and other charges payable in connection with the preparation, execution and delivery of the new warrants pursuant to this Section 8 shall be paid by the Company.
+(B)
+If and for so long as required by the Warrant Agreement, this Warrant shall contain the legend as set forth in Sections 4.2(a) of the Warrant Agreement.
+9.
+Exchange and Registry of Warrant
+. This Warrant is exchangeable, upon the surrender hereof by the Warrantholder to the Company, for a new warrant or warrants of like tenor and representing the right to purchase the same aggregate number of Warrant Shares. The Company shall maintain a registry showing the name and address of the Warrantholder as the registered holder of this Warrant. This Warrant may be surrendered for exchange or exercise in accordance with its terms, at the office of the Company, and the Company shall be entitled to rely in all respects, prior to written notice to the contrary, upon such registry.
+10.
+Loss, Theft, Destruction or Mutilation of Warrant
+. Upon receipt by the Company of evidence reasonably satisfactory to it of the loss, theft, destruction or mutilation of this Warrant, and in the case of any such loss, theft or destruction, upon receipt of a bond, indemnity or security reasonably satisfactory to the Company, or, in the case of any such mutilation, upon surrender and cancellation of this Warrant, the Company shall make and deliver, in lieu of such lost, stolen, destroyed or mutilated Warrant, a new Warrant of like tenor and representing the right to purchase the same aggregate number of Warrant Shares as provided for in such lost, stolen, destroyed or mutilated Warrant.
+11.
+Saturdays, Sundays, Holidays, etc
+. If the last or appointed day for the taking of any action or the expiration of any right required or granted herein shall not be a Business Day, then such action may be taken or such right may be exercised on the next succeeding day that is a Business Day.
+12.
+Information
+. With a view to making available to Warrantholders the benefits of certain rules and regulations of the SEC which may permit the sale of the Warrants and Warrant Shares to the public without registration, the Company agrees to use its reasonable best efforts to:
+(A)
+make and keep adequate public information available, as those terms are understood and defined in Rule 144(c) or any similar or analogous rule promulgated under the Securities Act, at all times after the date hereof;
+(B)
+(x) file with the SEC, in a timely manner, all reports and other documents required of the Company under the Securities Act and the Exchange Act, and (y) if at any time the Company is not required to file such reports, make available, upon the request of any Warrantholder, such information necessary to permit sales pursuant to Rule 144A (including the information required by Rule 144A(d)(4) under the Securities Act);
+(C)
+furnish to any holder of Warrants or Warrant Shares forthwith upon request: a written statement by the Company as to its compliance with the reporting requirements of the Exchange Act and Rule 144(c)(1); a copy of the most recent annual or quarterly report of the Company; and such other reports and documents as the Warrantholder may reasonably request in availing itself of any rule or regulation of the SEC allowing it to sell any such securities to the public without registration; and
+(D)
+take such further action as any Warrantholder may reasonably request, all to the extent required from time to time to enable such Warantholder to sell Warrants or Warrant Shares without registration under the Securities Act.
+13.
+Adjustments and Other Rights
+. The Exercise Price and the number of Warrant Shares issuable upon exercise of the Warrant shall be subject to adjustment from time to time as follows;
+provided
+, that if more than one subsection of this Section 13 is applicable to a single event, the subsection shall be applied that produces the largest adjustment and no single event shall cause an adjustment under more than one subsection of this Section 13 so as to result in duplication:
+(A)
+Stock Splits, Subdivisions, Reclassifications or Combinations
+. If the Company shall (i) declare and pay a dividend or make a distribution on its Common Stock in shares of Common Stock, (ii) subdivide or reclassify the outstanding shares of Common Stock into a greater number of shares, or (iii) combine or reclassify the outstanding shares of Common Stock into a smaller number of shares, the number of Warrant Shares issuable upon exercise of this Warrant at the time of the record date for such dividend or distribution or the effective date of such subdivision, combination or reclassification shall be proportionately adjusted so that the Warrantholder after such date shall be entitled to acquire the number of shares of Common Stock which such holder would have owned or been entitled to receive in respect of the shares of Common Stock subject to this Warrant after such date had this Warrant been exercised immediately prior to such date. In such event, the Exercise Price in effect at the time of the record date for such dividend or distribution or the effective date of such subdivision, combination or reclassification shall be adjusted to the number obtained by dividing (x) the product of (1) the number of Warrant Shares issuable upon the exercise of this Warrant before such adjustment and (2) the Exercise Price in effect immediately prior to the record or effective date, as the case may be, for the dividend, distribution, subdivision, combination or reclassification giving rise to this adjustment by (y) the new number of
+Warrant Shares issuable upon exercise of the Warrant determined pursuant to the immediately preceding sentence.
+(B)
+Certain Issuances of Common Stock or Convertible Securities
+. If the Company shall issue shares of Common Stock (or rights or warrants or other securities exercisable or convertible into or exchangeable (collectively, a “
+conversion
+”) for shares of Common Stock) (collectively, “
+convertible securities
+”) (other than in Permitted Transactions (as defined below) or a transaction to which subsection (A) of this Section 13 is applicable) without consideration or at a consideration per share (or having a conversion price per share) that is less than 95% of the Average Market Price determined as of the date of the agreement on pricing such shares (or such convertible securities) then, in such event:
+(A)
+the number of Warrant Shares issuable upon the exercise of this Warrant immediately prior to the date of the agreement on pricing of such shares (or of such convertible securities) (the “
+Initial Number
+”) shall be increased to the number obtained by multiplying the Initial Number by a fraction (A) the numerator of which shall be the sum of (x) the number of shares of Common Stock of the Company outstanding on such date and (y) the number of additional shares of Common Stock issued (or into which convertible securities may be converted) and (B) the denominator of which shall be the sum of (I) the number of shares of Common Stock outstanding on such date and (II) the number of shares of Common Stock which the aggregate consideration receivable by the Company for the total number of shares of Common Stock so issued (or into which convertible securities may be converted) would purchase at the Average Market Price determined as of the date of the agreement on pricing such shares (or such convertible securities); and
+(B)
+the Exercise Price payable upon exercise of the Warrant shall be adjusted by multiplying such Exercise Price in effect immediately prior to the date of the agreement on pricing of such shares (or of such convertible securities) by a fraction, the numerator of which shall be the number of shares of Common Stock issuable upon exercise of this Warrant prior to such date and the denominator of which shall be the number of shares of Common Stock issuable upon exercise of this Warrant immediately after the adjustment described in clause (A) above.
+For purposes of the foregoing, the “aggregate consideration receivable by the Company” in connection with the issuance of such shares of Common Stock or convertible securities shall be deemed to be equal to the sum of the gross offering price of all such securities plus the minimum aggregate amount, if any, payable upon conversion of any such convertible securities into shares of Common Stock; and “
+Permitted Transactions
+” shall mean issuances (i) as consideration for or to fund the acquisition of businesses and/or related assets and (ii) in connection with employee benefit plans and compensation related arrangements in the ordinary course and consistent with past practice approved by the Board
+of Directors. Any adjustment made pursuant to this Section 13(B) shall become effective immediately upon the date of such issuance.
+(C)
+Other Distributions
+. In case the Company shall fix a record date for the making of a distribution to all holders of shares of its Common Stock of securities, evidences of indebtedness, assets, cash, rights or warrants (excluding dividends of its Common Stock and other dividends or distributions referred to in Section 13(A)), in each such case, the Exercise Price in effect prior to such record date shall be reduced immediately thereafter to the price determined by multiplying the Exercise Price in effect immediately prior to the reduction by the quotient of (x) the Average Market Price of the Common Stock determined as of the first date on which the Common Stock trades regular way on the principal national securities exchange on which the Common Stock is listed or admitted to trading without the right to receive such distribution, minus the amount of cash and/or the Fair Market Value of the securities, evidences of indebtedness, assets, rights or warrants to be so distributed in respect of one share of Common Stock (such amount and/or Fair Market Value, the “
+Per Share Fair Market Value
+”) divided by (y) the Average Market Price specified in clause (x); such adjustment shall be made successively whenever such a record date is fixed. In such event, the number of Warrant Shares issuable upon the exercise of this Warrant shall be increased to the number obtained by dividing (x) the product of (1) the number of Warrant Shares issuable upon the exercise of this Warrant before such adjustment, and (2) the Exercise Price in effect immediately prior to the distribution giving rise to this adjustment by (y) the new Exercise Price determined in accordance with the immediately preceding sentence. In the event that such distribution is not so made, the Exercise Price and the number of Warrant Shares issuable upon exercise of this Warrant then in effect shall be readjusted, effective as of the date when the Board of Directors determines not to distribute such shares, evidences of indebtedness, assets, rights, cash or warrants, as the case may be, to the Exercise Price that would then be in effect and the number of Warrant Shares that would then be issuable upon exercise of this Warrant if such record date had not been fixed.
+(D)
+Certain Repurchases of Common Stock
+. In case the Company effects a Pro Rata Repurchase of Common Stock, then the Exercise Price shall be reduced to the price determined by multiplying the Exercise Price in effect immediately prior to the Effective Date of such Pro Rata Repurchase by a fraction of which the numerator shall be (i) the product of (x) the number of shares of Common Stock outstanding immediately before such Pro Rata Repurchase and (y) the Average Market Price of a share of Common Stock determined as of the date of the first public announcement by the Company or any of its Affiliates of the intent to effect such Pro Rata Repurchase, minus (ii) the aggregate purchase price of the Pro Rata Repurchase, and of which the denominator shall be the product of (i) the number of shares of Common Stock outstanding immediately prior to such Pro Rata Repurchase minus the number of shares of Common Stock so repurchased and (ii) the Average Market Price per share of Common Stock determined as of the date of the first public announcement by the Company or any of its Affiliates of the intent to effect such Pro Rata Repurchase. In such event, the number of shares of Common Stock issuable upon the exercise of this Warrant shall be increased to the number obtained by dividing (x) the product of (1) the number of Warrant Shares issuable upon the exercise of this Warrant
+before such adjustment, and (2) the Exercise Price in effect immediately prior to the Pro Rata Repurchase giving rise to this adjustment by (y) the new Exercise Price determined in accordance with the immediately preceding sentence. For the avoidance of doubt, no increase to the Exercise Price or decrease in the number of Warrant Shares issuable upon exercise of this Warrant shall be made pursuant to this Section 13(D).
+(E)
+Business Combinations
+. In case of any Business Combination or reclassification of Common Stock (other than a reclassification of Common Stock referred to in Section 13(A)), the Warrantholder’s right to receive Warrant Shares upon exercise of this Warrant shall be converted into the right to exercise this Warrant to acquire the number of shares of stock or other securities or property (including cash) which the Common Stock issuable (at the time of such Business Combination or reclassification) upon exercise of this Warrant immediately prior to such Business Combination or reclassification would have been entitled to receive upon consummation of such Business Combination or reclassification; and in any such case, if necessary, the provisions set forth herein with respect to the rights and interests thereafter of the Warrantholder shall be appropriately adjusted so as to be applicable, as nearly as may reasonably be, to the Warrantholder’s right to exercise this Warrant in exchange for any shares of stock or other securities or property pursuant to this paragraph. In determining the kind and amount of stock, securities or the property receivable upon exercise of this Warrant following the consummation of such Business Combination, if the holders of Common Stock have the right to elect the kind or amount of consideration receivable upon consummation of such Business Combination, then the consideration that the Warrantholder shall be entitled to receive upon exercise shall be deemed to be the types and amounts of consideration received by the majority of all holders of the shares of common stock that affirmatively make an election (or of all such holders if none make an election).
+(F)
+Rounding of Calculations; Minimum Adjustments
+. All calculations under this Section 13 shall be made to the nearest one-tenth (1/10th) of a cent or to the nearest one- hundredth (1/100th) of a share, as the case may be. Any provision of this Section 13 to the contrary notwithstanding, no adjustment in the Exercise Price or the number of Warrant Shares shall be made if the amount of such adjustment would be less than $0.01 or one-tenth (1/10th) of a share of Common Stock, but any such amount shall be carried forward and an adjustment with respect thereto shall be made at the time of and together with any subsequent adjustment which, together with such amount and any other amount or amounts so carried forward, shall aggregate $0.01 or 1/10th of a share of Common Stock, or more.
+(G)
+Timing of Issuance of Additional Common Stock Upon Certain Adjustments
+. In any case in which the provisions of this Section 13 shall require that an adjustment shall become effective immediately after a record date for an event, the Company may defer until the occurrence of such event (i) issuing to the Warrantholder of this Warrant exercised after such record date and before the occurrence of such event the additional shares of Common Stock issuable upon such exercise by reason of the adjustment required by such event over and above the shares of Common Stock issuable upon such exercise before giving effect to such adjustment and (ii) paying to such Warrantholder any amount of cash in lieu of a
+fractional share of Common Stock;
+provided
+,
+however
+, that the Company upon request shall deliver to such Warrantholder a due bill or other appropriate instrument evidencing such Warrantholder’s right to receive such additional shares, and such cash, upon the occurrence of the event requiring such adjustment.
+(H)
+Other Events
+. For so long as the Original Warrantholder holds this Warrant or any portion thereof, if any event occurs as to which the provisions of this Section 13 are not strictly applicable or, if strictly applicable, would not, in the good faith judgment of the Board of Directors of the Company, fairly and adequately protect the purchase rights of the Warrants in accordance with the essential intent and principles of such provisions, then the Board of Directors shall make such adjustments in the application of such provisions, in accordance with such essential intent and principles, as shall be reasonably necessary, in the good faith opinion of the Board of Directors, to protect such purchase rights as aforesaid. The Exercise Price or the number of Warrant Shares shall not be adjusted in the event of a change in the par value of the Common Stock or a change in the jurisdiction of incorporation of the Company.
+(I)
+Statement Regarding Adjustments
+. Whenever the Exercise Price or the number of Warrant Shares shall be adjusted as provided in Section 13, the Company shall forthwith file at the principal office of the Company a statement showing in reasonable detail the facts requiring such adjustment and the Exercise Price that shall be in effect and the number of Warrant Shares after such adjustment, and the Company shall also cause a copy of such statement to be sent by mail, first class postage prepaid, to each Warrantholder at the address appearing in the Company’s records.
+(J)
+Notice of Adjustment Event
+. In the event that the Company shall propose to take any action of the type described in this Section 13 (but only if the action of the type described in this Section 13 would result in an adjustment in the Exercise Price or the number of Warrant Shares or a change in the type of securities or property to be delivered upon exercise of this Warrant), the Company shall give notice to the Warrantholder, in the manner set forth in Section 13(J), which notice shall specify the record date, if any, with respect to any such action and the approximate date on which such action is to take place. Such notice shall also set forth the facts with respect thereto as shall be reasonably necessary to indicate the effect on the Exercise Price and the number, kind or class of shares or other securities or property which shall be deliverable upon exercise of this Warrant. In the case of any action which would require the fixing of a record date, such notice shall be given at least 10 days prior to the date so fixed, and in case of all other action, such notice shall be given at least 15 days prior to the taking of such proposed action. Failure to give such notice, or any defect therein, shall not affect the legality or validity of any such action.
+(K)
+Proceedings Prior to Any Action Requiring Adjustment
+. As a condition precedent to the taking of any action which would require an adjustment pursuant to this Section 13, the Company shall take any action which may be necessary, including obtaining regulatory, New York Stock Exchange, NASDAQ Stock Market or other applicable national securities exchange or stockholder approvals or exemptions, as applicable, in order that the
+Company may thereafter validly and legally issue as fully paid and nonassessable all shares of Common Stock that the Warrantholder is entitled to receive upon exercise of this Warrant pursuant to this Section 13.
+(L)
+Adjustment Rules
+. Any adjustments pursuant to this Section 13 shall be made successively whenever an event referred to herein shall occur. If an adjustment in Exercise Price made hereunder would reduce the Exercise Price to an amount below par value of the Common Stock, then such adjustment in Exercise Price made hereunder shall reduce the Exercise Price to the par value of the Common Stock.
+14.
+No Impairment
+. The Company will not, by amendment of its Charter or through any reorganization, transfer of assets, consolidation, merger, dissolution, issue or sale of securities or any other voluntary action, avoid or seek to avoid the observance or performance of any of the terms to be observed or performed hereunder by the Company, but will at all times in good faith assist in the carrying out of all the provisions of this Warrant and in taking of all such action as may be necessary or appropriate in order to protect the rights of the Warrantholder.
+15.
+Governing Law
+.
+This Warrant will be governed by and construed in accordance with the federal law of the United States if and to the extent such law is applicable, and otherwise in accordance with the laws of the State of New York applicable to contracts made and to be performed entirely within such State. Each of the Company and the Warrantholder agrees (a) to submit to the exclusive jurisdiction and venue of the United States District Court for the District of Columbia for any civil action, suit or proceeding arising out of or relating to this Warrant or the transactions contemplated hereby, and (b) that notice may be served upon the Company at the address in Section 19 below and upon the Warrantholder at the address for the Warrantholder set forth in the registry maintained by the Company pursuant to Section 9 hereof. To the extent permitted by applicable law, each of the Company and the Warrantholder hereby unconditionally waives trial by jury in any civil legal action or proceeding relating to the Warrant or the transactions contemplated hereby or thereby.
+16.
+Binding Effect
+. This Warrant shall be binding upon any successors or assigns of the Company.
+17.
+Amendments
+. This Warrant may be amended and the observance of any term of this Warrant may be waived only with the written consent of the Company and the Warrantholder.
+18.
+Prohibited Actions
+. The Company agrees that it will not take any action which would entitle the Warrantholder to an adjustment of the Exercise Price if the total number of shares of Common Stock issuable after such action upon exercise of this Warrant, together with all shares of Common Stock then outstanding and all shares of Common Stock then issuable upon the exercise of all outstanding options, warrants, conversion and other
+rights, would exceed the total number of shares of Common Stock then authorized by its Charter.
+19.
+Notices
+. Any notice, request, instruction or other document to be given hereunder by any party to the other will be in writing and will be deemed to have been duly given (a) on the date of delivery if delivered personally, or by facsimile, upon confirmation of receipt, or (b) on the second Business Day following the date of dispatch if delivered by a recognized next day courier service. All notices hereunder shall be delivered as set forth in Item 7 of Schedule A hereto, or pursuant to such other instructions as may be designated in writing by the party to receive such notice.
+20.
+Entire Agreement
+. This Warrant, the forms attached hereto and Schedule A hereto (the terms of which are incorporated by reference herein), and the Warrant Agreement (including all documents incorporated therein), contain the entire agreement between the parties with respect to the subject matter hereof and supersede all prior and contemporaneous arrangements or undertakings with respect thereto.
+[Remainder of page intentionally left blank]
+[Form of Notice of Exercise]
+Date:
+TO:
+Intel Corporation
+RE: Exercise of Warrant
+The undersigned, pursuant to the provisions set forth in the attached Warrant, hereby notifies the Company of its intention to exercise its option with respect to the number of shares of the Common Stock set forth below covered by such Warrant. The undersigned hereby notifies the Company of its elected method of settlement pursuant to Section 4 of the Warrant as indicated below. Cash to be paid pursuant to a Net Cash Settlement or payment of fractional shares in connection with a Net Share Settlement should be deposited to the account of the Warrantholder set forth below. Common Stock to be delivered pursuant to a Net Share Settlement shall be delivered to the Warrantholder as indicated below. A new warrant evidencing the remaining shares of Common Stock covered by such Warrant, but not yet subscribed for and purchased, if any, should be issued in the name set forth below.
+Method of Settlement:
+Number of Warrant Shares:
+Aggregate Exercise Price:
+Address for Delivery of Warrant Shares:
+Wire Instructions:
+Proceeds to be delivered:
+$
+Name of Bank:
+City/ State of Bank:
+ABA Number of Bank SWIFT #
+Name of Account:
+Account Number at Bank:
+Securities to be issued to:
+If in book-entry form through the Depositary:
+Depositary Account Number:
+Name of Agent Member:
+If in certificated form:
+Social Security Number or Other Identifying Number:
+Name:
+Street Address:
+City, State and Zip Code:
+Any unexercised Warrants evidenced by the exercising Warrantholder’s interest in the Warrant: Social Security Number or Other Identifying Number:
+Name:
+Street Address:
+City, State and Zip Code:
+Holder:
+By:
+Name:
+Title:
+2
+IN WITNESS WHEREOF, the Company has caused this Warrant to be duly executed by a duly authorized officer.
+Dated: August , 2025
+COMPANY: INTEL CORPORATION
+By:
+Name:
+Title:
+[Signature Page to Warrant]
+SCHEDULE A
+Item 1
+Name: Intel Corporation
+Corporate or other organizational form: Corporation Jurisdiction of organization: Delaware
+Item 2
+Exercise Price: $20.00
+Item 3
+Issue Date: August , 2025
+Item 4
+Date of Warrant Agreement between the Company and the United States Department of Commerce: August 22, 2025
+Item 5
+Number of shares of Common Stock: 240,516,150
+Item 6
+Company’s address:
+Intel Corporation
+2200 Mission College Boulevard Santa Clara, California 95054-1549
+Attention: [***]
+Email: [***]
+Item 7
+Notice information:
+Intel Corporation
+2200 Mission College Boulevard Santa Clara, California 95054-1549
+Attention: [***]
+Email: [***]
+With copies to (which shall not constitute notice):
+Skadden, Arps, Slate, Meagher & Flom LLP 525 University Avenue
+Palo Alto, CA 94301
+Attention: [***]
+Email: [***]
+SCHEDULE 1
+CAPITALIZATION
+Shares of Common Stock Authorized ($0.001 par value per share)
+10,000,000,000
+Shares of Common Stock Outstanding
+4,376,975,335
+Restricted Stock Units
+159,600,126
+Performance Stock Unit Awards Outstanding at Target
+8,617,265
+Additional Performance Stock Unit Awards Assuming Max Performance
+9,363,135
+Options at Target
+5,217,095
+Shares of Common Stock Underlying Outstanding Stock Options
+0
+Total
+183,694,090
+Total Shares Available for Issuance Under 2006 Equity Incentive Plan
+234,047,397
+Shares of Preferred Stock Authorized ($0.001 par value per share)
+50,000,000
+Shares of Preferred Stock Outstanding
+0

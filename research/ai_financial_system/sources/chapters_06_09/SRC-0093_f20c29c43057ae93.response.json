@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 131541,
+  "content_sha256": "f20c29c43057ae93685b8adadf752e9a69d7178b75c6390ece16aeb5bfb432e4",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://blogs.microsoft.com/blog/2025/11/18/microsoft-nvidia-and-anthropic-announce-strategic-partnerships/",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0093_f20c29c43057ae93.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=UTF-8",
+  "original_url": "https://blogs.microsoft.com/blog/2025/11/18/microsoft-nvidia-and-anthropic-announce-strategic-partnerships/",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-11-18",
+  "publisher": "Microsoft Corporation NVIDIA Corporation and Anthropic PBC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0093_f20c29c43057ae93.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:11.021785+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:10.943781+00:00",
+  "selected_response_headers": {
+    "cache-control": "max-age=15552000, must-revalidate",
+    "content-type": "text/html; charset=UTF-8",
+    "date": "Sun, 26 Jul 2026 17:51:11 GMT",
+    "last-modified": "Tue, 18 Nov 2025 07:03:24 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0093",
+  "status": "preserved_complete",
+  "title": "Microsoft NVIDIA and Anthropic strategic partnerships",
+  "write_state": "new_version_written"
+}

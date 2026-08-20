@@ -1,0 +1,32 @@
+{
+  "boundary": "static analysis provenance only",
+  "command": [
+    "python",
+    "-m",
+    "ruff",
+    "check",
+    "--output-format",
+    "json",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/build_packet.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/collect_validation_provenance.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/extract_source_derivatives.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/seal_manifest.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/validate_packet.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/verify_clean_builds.py"
+  ],
+  "diagnostic_count": 0,
+  "diagnostics": [],
+  "returncode": 0,
+  "scope": [
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/build_packet.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/collect_validation_provenance.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/extract_source_derivatives.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/seal_manifest.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/validate_packet.py",
+    "research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3/verify_clean_builds.py"
+  ],
+  "status": "PASS",
+  "stderr": "",
+  "tool": "ruff",
+  "tool_version": "ruff 0.15.17"
+}

@@ -1,0 +1,33 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 536453,
+  "content_sha256": "097af4beba476d723b4c61e19d03238e22871e89732972d4f32469f649d14ead",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Record-Q4-and-FY-2026-Results-Driven-by-Cloud-Infrastructure--Cloud-Applications/",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0035_097af4beba476d72.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://investor.oracle.com/investor-news/news-details/2026/Oracle-Announces-Record-Q4-and-FY-2026-Results-Driven-by-Cloud-Infrastructure--Cloud-Applications/",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-06-10",
+  "publisher": "Oracle Corporation",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0035_097af4beba476d72.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:50:59.707124+00:00",
+  "retrieval_started_utc": "2026-07-26T17:50:57.791190+00:00",
+  "selected_response_headers": {
+    "cache-control": "public, max-age=10, stale-if-error=86400, stale-while-revalidate=86400",
+    "content-length": "58780",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:50:59 GMT",
+    "etag": "\"220ab55e9426021d8e9761d29c8a353a\"",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0035",
+  "status": "preserved_complete",
+  "title": "Oracle record fourth quarter and fiscal 2026 results",
+  "write_state": "new_version_written"
+}

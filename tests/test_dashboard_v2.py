@@ -27,6 +27,7 @@ from trade_bot.dashboard_v2.services.artifact_service import (
     defensive_bias_calibration_frames,
     defensive_correction_search_frames,
     defensive_signal_audit_frames,
+    i111_evidence_frames,
     pbo_frames,
     prebreak_hindsight_frames,
     read_csv_artifact,
@@ -76,6 +77,8 @@ def test_dashboard_v2_uses_named_book_selector_for_runtime_and_forward_test() ->
     assert "selected_book=runtime.selected_book" in forward_page_source
     assert "baseline_run=runtime.baseline_run" in forward_page_source
     assert "bot_config=runtime.bot_config" in forward_page_source
+    assert "warehouse_path=runtime.paths.run_store_path" in forward_page_source
+    assert "_prepare_strategy_history_for_promotion" in selector_source
     assert "book_selector()" in forward_source
     assert "resolve_trade_decision_for_strategy" in forward_source
     assert forward_source.index("Forward Test / Trade Journal") < forward_source.index(
@@ -168,6 +171,74 @@ def test_dashboard_v2_native_pages_are_summary_first() -> None:
         '"Full Workbench"', risk_view_start
     )
     assert risk_source.index("Overview") < risk_source.index("_render_risk_and_scenarios(")
+    assert "Verified Selection OOS" in research_source
+    assert "completed prospective shadow" in research_source
+
+
+def test_today_headline_trends_offer_metric_and_date_range_controls() -> None:
+    today_source = inspect.getsource(command_center.render_today_page)
+    trend_source = inspect.getsource(command_center._render_headline_metric_history)
+
+    assert "_render_headline_metric_history(metric_history)" in today_source
+    assert set(command_center._HEADLINE_TREND_METRICS) == {
+        "Fragility / Risk Score",
+        "Risk Budget",
+        "Raw 1M Risk-Off Score",
+    }
+    assert '["1M", "3M", "6M", "YTD", "1Y", "All", "Custom"]' in trend_source
+    assert "filter_history_time_range(" in trend_source
+    assert ".date_input(" in trend_source
+
+
+def test_today_headline_trends_include_current_card_values() -> None:
+    history = pd.DataFrame(
+        {
+            "history_time": pd.to_datetime(["2026-08-18"]),
+            "snapshot_time": ["2026-08-18T23:00:00+00:00"],
+            "market_date": ["2026-08-18"],
+            "run_id": ["saved"],
+            "risk_score": [0.43],
+            "risk_budget_multiplier": [0.95],
+            "one_month_risk_off_probability": [0.24],
+        }
+    )
+
+    augmented = command_center._with_current_headline_metrics(
+        history,
+        market_date="2026-08-19",
+        risk_score=0.40,
+        summary={
+            "risk_budget_multiplier": 0.96,
+            "one_month_risk_off_probability": 0.23,
+        },
+    )
+    latest = command_center.latest_per_market_date(augmented)
+
+    assert latest["market_date"].tolist() == [date(2026, 8, 18), date(2026, 8, 19)]
+    assert latest.iloc[-1]["risk_score"] == 0.40
+    assert latest.iloc[-1]["risk_budget_multiplier"] == 0.96
+    assert latest.iloc[-1]["one_month_risk_off_probability"] == 0.23
+
+
+def test_risk_overview_history_has_shared_time_range_controls() -> None:
+    overview_source = inspect.getsource(risk._render_overview)
+    control_source = inspect.getsource(risk._render_risk_history_range_controls)
+    portfolio_source = inspect.getsource(risk._render_portfolio_risk_history)
+    instability_source = inspect.getsource(risk._render_regime_instability_history)
+
+    assert "_render_risk_history_range_controls(" in overview_source
+    assert '["1M", "3M", "6M", "YTD", "1Y", "3Y", "All", "Custom"]' in control_source
+    assert "range_choice=range_choice" in overview_source
+    assert "filter_history_time_range(" in portfolio_source
+    assert "filter_history_time_range(" in instability_source
+
+
+def test_validation_artifacts_expose_severity_safety_diagnostics() -> None:
+    source = inspect.getsource(research._render_validation_artifacts)
+
+    assert "Joint-severity execution-lag sensitivity" in source
+    assert "Joint-severity activation episodes" in source
+    assert "Joint-severity observational shadow" in source
 
 
 def test_candidate_deep_dive_puts_detail_tabs_before_optional_research_readout() -> None:
@@ -184,6 +255,27 @@ def test_candidate_deep_dive_puts_detail_tabs_before_optional_research_readout()
     assert "render_card_grid" in readout_source
     assert "_render_outcome_decision_cards" in readout_source
     assert "_render_candidate_artifact_read" in readout_source
+    assert "All including archived/pruned" in candidate_source
+    assert "_default_candidate_scope" in candidate_source
+
+
+def test_candidate_scope_retains_archive_but_filters_it_only_by_default() -> None:
+    candidates = pd.DataFrame(
+        {
+            "strategy": ["active", "archive", "pruned", "reference"],
+            "research_status": [
+                "operational_candidate",
+                "research_archive",
+                "pruned_dead_end",
+                "reference",
+            ],
+        }
+    )
+
+    visible = research._default_candidate_scope(candidates)
+
+    assert set(candidates["strategy"]) == {"active", "archive", "pruned", "reference"}
+    assert set(visible["strategy"]) == {"active", "reference"}
 
 
 def test_dashboard_v2_monitoring_trends_have_time_window_controls() -> None:
@@ -219,6 +311,24 @@ def test_filter_history_time_range_supports_presets_and_custom_dates() -> None:
         custom_end=pd.Timestamp("2026-06-30"),
     )
     assert custom["value"].tolist() == [2, 3]
+
+
+def test_macro_visual_explorer_time_range_includes_ytd() -> None:
+    source = inspect.getsource(macro._render_visual_explorer)
+    frame = pd.DataFrame(
+        {"SPY": [100.0, 105.0, 110.0]},
+        index=pd.to_datetime(["2025-12-31", "2026-01-02", "2026-08-19"]),
+    )
+
+    ytd = macro._slice_time_range(
+        frame,
+        "YTD",
+        custom_start=None,
+        custom_end=None,
+    )
+
+    assert '"YTD"' in source
+    assert ytd.index.tolist() == [pd.Timestamp("2026-01-02"), pd.Timestamp("2026-08-19")]
 
 
 def test_macro_history_presets_snap_to_available_market_dates() -> None:
@@ -332,6 +442,25 @@ def test_dashboard_v2_artifact_service_missing_files_are_empty(tmp_path) -> None
         "cost_sensitivity",
     }
     assert all(frame.empty for frame in corrections.values())
+    i111 = i111_evidence_frames(tmp_path / "missing_i111_dir")
+    assert {
+        "selector_transition_gates",
+        "selector_transition_summary",
+        "selector_transition_bootstrap",
+        "native_timing_gates",
+        "native_timing_policies",
+        "native_timing_shadow",
+        "native_progression_gates",
+        "native_progression_diagnostics",
+        "native_progression_current",
+        "native_rollout_ladder",
+        "timing_severity_gates",
+        "timing_severity_metrics",
+        "timing_severity_bootstrap",
+        "timing_severity_current",
+        "timing_severity_shadow",
+    }.issubset(i111)
+    assert all(frame.empty for frame in i111.values())
 
 
 def test_defensive_posture_bridge_joins_focus_strategy_scorecard() -> None:
@@ -523,6 +652,20 @@ def test_prebreak_signal_rank_figure_marks_current_risk_reads() -> None:
     assert len(figure.data) == 1
     assert "Market: Qqq Drawdown" in set(figure.data[0].y)
     assert "#ef4444" in list(figure.data[0].marker.color)
+
+
+def test_prebreak_readout_freshness_fails_visibly_when_stale() -> None:
+    frame = pd.DataFrame({"market_date": ["2026-07-22"]})
+
+    stale = research._prebreak_readout_freshness(frame, as_of="2026-08-19")
+    current = research._prebreak_readout_freshness(frame, as_of="2026-07-24")
+
+    assert stale == {
+        "status": "stale",
+        "age_days": 28,
+        "market_date": "2026-07-22",
+    }
+    assert current["status"] == "current"
 
 
 def test_prebreak_population_summary_separates_origins_from_conservative_clusters() -> None:
@@ -800,6 +943,8 @@ def test_forward_test_recalculates_book_alignment_after_journal_changes() -> Non
     source = inspect.getsource(forward_test._render_forward_test_and_journal)
 
     assert "Recalculate Book Alignment" in source
+    assert "latest_book_account_value(" in source
+    assert "latest saved decision snapshot" in source
     assert "Update After-Logged Book Comparison" in source
     assert "_render_after_logged_book_comparison(updated_book_alignment)" in source
     assert "Locked tickets are recommendations only" in source

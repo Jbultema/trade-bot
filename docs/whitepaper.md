@@ -531,6 +531,15 @@ candidate should have positive sequential-holdout behavior, tolerable worst
 rolling periods, reasonable left-tail performance, and—where selection is part
 of the mechanism—a genuinely nested train/select/test record.
 
+This distinction is now enforced rather than advisory. A candidate cannot
+become operational unless a persisted OOS audit verifies a sealed chronological
+holdout, untouched outer folds from a properly nested walk-forward procedure,
+or a completed prospective shadow. The parameters and primary metric must be
+frozen before the evaluation begins, and the evaluation may not be used to
+select or retune the model. Missing evidence fails closed. Historical
+`promotion_decision` values remain visible for audit, but the governed decision
+becomes `hold_for_oos_evidence`.
+
 The fourth layer is outcome utility. For this project, the objective is not just
 "high Calmar." The Growth-Constrained Outcome Frontier asks whether extra CAGR
 is worth additional drawdown for a 15-year accumulation problem with ongoing
@@ -733,7 +742,9 @@ inspected instead of hidden.
 Research governance is also a test layer. New manifests record the declared
 trial roster and run a fail-closed point-in-time universe audit covering
 historical membership, holding-date eligibility, delisting returns, and source
-metadata. The consolidated 2026-07-22 ledger indexes 569 manifested completed
+metadata. They also record a fail-closed selection-OOS audit. Retrospective
+walk-forward, bootstrap, crisis, and PBO evidence cannot satisfy that audit if
+the same results influenced model selection. The consolidated 2026-07-22 ledger indexes 569 manifested completed
 trial rows across 19 manifests and 16 distinct studies. Five manifests lack an
 explicit candidate roster, 113 artifact directories have no manifest, and all
 569 trial rows still lack verified point-in-time universe evidence. That is a

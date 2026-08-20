@@ -1,0 +1,161 @@
+{
+  "architecture_verdict": "SAFE_ONLY_AS_UNRESOLVED_ARCHITECTURE",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "chapter": "CH19",
+  "files": [
+    {
+      "bytes": 2821,
+      "lines": 71,
+      "path": "acceptance_report.md",
+      "sha256": "ecf9fa385359cd0795cb03da1ab16cac4dde18049e69a94b1882eaa8e0334361"
+    },
+    {
+      "bytes": 368,
+      "lines": 14,
+      "path": "author_generic_validation_results.json",
+      "sha256": "6167cb5839fb6a8dc06f595f770ca49508303ca6bc974ccd49007cb1545002ba"
+    },
+    {
+      "bytes": 337,
+      "lines": 9,
+      "path": "deterministic_rebuild_results.json",
+      "sha256": "d76a6858ec0431e47ce44e6eccbe37f125035c610d0966f2c038f1c272a7e222"
+    },
+    {
+      "bytes": 81,
+      "path": "exact_row_patches.csv",
+      "rows": 0,
+      "sha256": "bbd6d2a059da80aa9b21aa890b6092b902ad45d46cc936c31edcecfea1f48dc9"
+    },
+    {
+      "bytes": 1887,
+      "path": "finding_reconciliation.csv",
+      "rows": 14,
+      "sha256": "a0adf7e97c9f956203da104ba97f0d678331a4d89bca9a8febf66764aa19bb25"
+    },
+    {
+      "bytes": 908,
+      "path": "findings.csv",
+      "rows": 4,
+      "sha256": "8267586d7ebe065900db54d50ac535997dd0b54d77f1b8ee05d31dbd677cb137"
+    },
+    {
+      "bytes": 2475,
+      "path": "independent_architecture_controls.csv",
+      "rows": 15,
+      "sha256": "781242fd681be54be72a426cbcb31825953efb70bac1db9ee6ee3bf8b468792f"
+    },
+    {
+      "bytes": 1383,
+      "path": "independent_architecture_metrics.csv",
+      "rows": 40,
+      "sha256": "8a5cc247ab51615d2cecd020672adc5b2aa74a4331aee24ffb844fa8c4a1c9ea"
+    },
+    {
+      "bytes": 19942,
+      "path": "input_inventory.csv",
+      "rows": 103,
+      "sha256": "8bddf56d9696e8d76cd05c4196c20e377c1b8e2f2c2e16271b49e10e78a99a1c"
+    },
+    {
+      "bytes": 13168,
+      "path": "original_patch_provenance_reconciliation.csv",
+      "rows": 101,
+      "sha256": "cbb5f4587729958379a5ef3e63085d8050ffeffe3f410fb74feb33ce50a30c58"
+    },
+    {
+      "bytes": 449,
+      "path": "patch_h19_0028_provenance_transition.csv",
+      "rows": 1,
+      "sha256": "ffcb7f8093590457baa5078842b4fd6a3b59fb57b23d8cdd0426359a58d49759"
+    },
+    {
+      "bytes": 375,
+      "lines": 14,
+      "path": "review_generic_validation_results.json",
+      "sha256": "9eafbbd87cda7805b971602a1785be473b43b8070c34cc84e7a376910c6d1353"
+    },
+    {
+      "bytes": 282921,
+      "path": "review_patch_disposition_reconciliation.csv",
+      "rows": 2247,
+      "sha256": "0f0aac91c4bdd31f78a7a35b44a99b51df55ceccb3af8e468f85ebed8c9788b8"
+    },
+    {
+      "bytes": 55617,
+      "lines": 1552,
+      "path": "run_acceptance_review.py",
+      "sha256": "600e6e08cbab726e73aa2d7fd597d73ce5e1c987d3292deaaca33ac53645db37"
+    },
+    {
+      "bytes": 916,
+      "path": "semantic_fix_acceptance.csv",
+      "rows": 10,
+      "sha256": "32abb2bd6f2ce018e8512d3e2c384c8b874922afbbac7318a652c25adc53cee0"
+    },
+    {
+      "bytes": 1158,
+      "path": "semantic_regression_acceptance.csv",
+      "rows": 15,
+      "sha256": "de55fbb362985e74c0993f1f5de1d0a37bb8dd33318ddbf26c881180562c6338"
+    },
+    {
+      "bytes": 6374,
+      "path": "source_preservation_audit.csv",
+      "rows": 34,
+      "sha256": "5326dabf37c1f041f889fda795dfee19a2d61bf5155e8e2a289042b69d6db411"
+    },
+    {
+      "bytes": 14372,
+      "lines": 411,
+      "path": "validate_review.py",
+      "sha256": "8ba95a235e77fcd6c26e02f2c06da3fbba1d015300fc7431551725150ece1d3e"
+    },
+    {
+      "bytes": 1751,
+      "lines": 49,
+      "path": "validation_results.json",
+      "sha256": "565f97dd139b542fc857fcb8966b7fb2a93681a4252cdaace469e55bfc87a0a6"
+    }
+  ],
+  "historical_and_current_provenance": {
+    "current_rebuilt_v3_state": "PROVENANCE_REPAIRED",
+    "historical_review_disposition": "ONE_PARTIAL_PROVENANCE_MISMATCH"
+  },
+  "lane": "lane_2_verify_chapter_19_rebuilt_v3",
+  "metrics": {
+    "deferred_holds": 985,
+    "direct_or_superseding_corrections": 396,
+    "historical_partial_provenance_mismatches": 1,
+    "new_exact_row_patches": 0,
+    "regressions_passed": 15,
+    "regressions_reperformed": 15,
+    "restored_parent_alternatives": 394,
+    "retired_child_route_alternatives": 471,
+    "review_dispositions_reconciled": 2247,
+    "semantic_fixes_passed": 10,
+    "semantic_fixes_reperformed": 10
+  },
+  "no_write_attestation": {
+    "author_source_review_or_canonical_files_modified": false,
+    "chapter_docx_pdf_or_publication_manifest_modified": false,
+    "review_output_lane_only": "lane_2_verify_chapter_19_rebuilt_v3"
+  },
+  "prior_review_manifest_sha256": "5e2e7b9d3417d4b218c85c6dc6e139dd922daa28f7c07660c6668822eeef18e8",
+  "publication_as_findings": "BLOCKED_PENDING_OPERATIONAL_GATES",
+  "resolved_validation_findings": "NOT_AUTHORIZED",
+  "review_verdict": "ACCEPT_WITH_EXPLICIT_EXTERNAL_HOLDS",
+  "reviewed_lane": "lane_3_chapter_19_rebuilt_v3",
+  "reviewed_manifest_sha256": "7b7d6d1468e69bcec779acada104d5b87ec448b76697bfb1602c267f5c1ae740",
+  "scope": "fresh nonauthor acceptance review of Chapter 19 rebuilt-v3",
+  "self_hash_policy": "lane_manifest.json excludes its own hash.",
+  "source_manifest_sha256": "3faa1d41c91cc94a5671f5fcb37b046e6fa63405576490f099712adfa99086ec",
+  "status_date": "2026-07-26",
+  "writing_boundary": {
+    "canonical_database_write": "not_authorized",
+    "executive_summary_resolved_findings": "blocked_pending_operational_gates",
+    "monograph_resolved_findings": "blocked_pending_operational_gates",
+    "standalone_essay_resolved_findings": "blocked_pending_operational_gates",
+    "unresolved_architecture_description": "accepted_with_explicit_noncompletion_language"
+  }
+}

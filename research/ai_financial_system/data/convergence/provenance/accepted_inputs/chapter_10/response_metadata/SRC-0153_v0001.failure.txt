@@ -1,0 +1,7 @@
+source_id=SRC-0153
+attempt_id=SRC-0153_v0001
+original_url=https://www.mgx.ae/news-insights/aip-mgx-and-blackrocks-gip-close-acquisition-aligned-data-centers
+status=retrieval_failed_after_bounded_retry
+retry_count=2
+max_time_seconds=90
+boundary=access_control_respected_no_circumvention

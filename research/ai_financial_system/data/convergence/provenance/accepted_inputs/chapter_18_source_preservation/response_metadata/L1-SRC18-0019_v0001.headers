@@ -1,0 +1,14 @@
+HTTP/2 200 
+content-type: text/html
+x-frame-options: SAMEORIGIN
+x-amz-id-2: c/C3+VP+Mx3m8UX6U7Z4gWYrCtcmRqgjE2evCTLx6SKHKj3H4ZwnIxnQ/Z9THitTiNta9O5kXFU=
+x-amz-request-id: XWXJPFWXDKPN3EKT
+x-amz-replication-status: REPLICA
+last-modified: Sun, 24 Sep 2017 07:07:17 GMT
+x-amz-meta-mode: 33188
+x-amz-version-id: 6qX8YUf4gty5nLmOHPrWgB6zZe4UdFUT
+x-content-type-options: nosniff
+x-xss-protection: 1; mode=block
+date: Sun, 26 Jul 2026 18:29:01 GMT
+strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+

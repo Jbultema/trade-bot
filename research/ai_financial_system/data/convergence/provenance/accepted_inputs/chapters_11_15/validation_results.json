@@ -1,0 +1,104 @@
+{
+  "canonical_integration_authorized": false,
+  "chapter_prose_authorized": false,
+  "checks": [
+    {
+      "check": "required_outputs",
+      "detail": "missing=[]",
+      "passed": true
+    },
+    {
+      "check": "exact_frozen_populations",
+      "detail": "{\"CH11\": {\"fields\": 7894, \"files\": 17, \"rows\": 484}, \"CH12\": {\"fields\": 1776, \"files\": 14, \"rows\": 121}, \"CH13\": {\"fields\": 3323, \"files\": 16, \"rows\": 195}, \"CH14\": {\"fields\": 5457, \"files\": 16, \"rows\": 259}, \"CH15\": {\"fields\": 972, \"files\": 12, \"rows\": 100}}",
+      "passed": true
+    },
+    {
+      "check": "exact_total_population",
+      "detail": "files=75 rows=1159 fields=19422",
+      "passed": true
+    },
+    {
+      "check": "accepted_author_byte_identity",
+      "detail": "files=75",
+      "passed": true
+    },
+    {
+      "check": "governing_input_hashes",
+      "detail": "inputs=150 roles={'accepted_source_union_acceptance_report': 1, 'accepted_source_union_consumed_artifact': 2, 'accepted_source_union_manifest': 1, 'accepted_source_union_review_manifest': 1, 'author_artifact': 75, 'author_manifest': 5, 'canonical_database': 1, 'canonical_database_manifest': 1, 'correction_verification_artifact': 1, 'correction_verification_manifest': 1, 'governing_audit_hash_inventory': 1, 'governing_audit_manifest': 1, 'governing_metadata_rebase_v1_artifact': 29, 'governing_metadata_rebase_v1_manifest': 1, 'governing_metadata_rebase_v1_review_artifact': 12, 'governing_metadata_rebase_v1_review_manifest': 1, 'review_artifact': 5, 'review_manifest': 5, 'sealed_candidate_database': 1, 'substantive_acceptance': 5}",
+      "passed": true
+    },
+    {
+      "check": "lossless_field_dispositions",
+      "detail": "cells=19422 unique_destinations=19422",
+      "passed": true
+    },
+    {
+      "check": "stable_identities_and_foreign_keys",
+      "detail": "violations=0 integrity=ok",
+      "passed": true
+    },
+    {
+      "check": "canonical_database_integrity_and_byte_identity",
+      "detail": "database_sha256=38b990b2228dc62ebfa20a01ef5855694fad7fef47156535def138fa02ed48a6",
+      "passed": true
+    },
+    {
+      "check": "canonical_registry_bindings",
+      "detail": "bindings=24 references=2095",
+      "passed": true
+    },
+    {
+      "check": "source_locator_projection_completeness",
+      "detail": "source_rows=1125 relationships=1501",
+      "passed": true
+    },
+    {
+      "check": "independent_all_cell_semantic_reference_completeness",
+      "detail": "occurrences=2279 explicit_holds=8 returncode=0",
+      "passed": true
+    },
+    {
+      "check": "source_version_rights_locator_publication_separation",
+      "detail": "matched=908 unmatched=593 locator_holds=1501",
+      "passed": true
+    },
+    {
+      "check": "accepted_source_version_snapshot_references",
+      "detail": "junction_rows=1247 unique_versions=45",
+      "passed": true
+    },
+    {
+      "check": "no_evidence_or_publication_authority_laundering",
+      "detail": "acceptances=5 controls=11",
+      "passed": true
+    },
+    {
+      "check": "protected_input_no_write",
+      "detail": "protected_inputs=26",
+      "passed": true
+    },
+    {
+      "check": "reported_counts_reperformance",
+      "detail": "{\"accepted_author_files\": 75, \"accepted_columns\": 1147, \"accepted_csv_files\": 70, \"accepted_csv_rows\": 1159, \"accepted_markdown_files\": 5, \"accepted_scalar_fields\": 19422, \"canonical_identity_references\": 2095, \"canonical_registry_bindings\": 24, \"chapter_populations\": {\"CH11\": {\"fields\": 7894, \"files\": 17, \"rows\": 484}, \"CH12\": {\"fields\": 1776, \"files\": 14, \"rows\": 121}, \"CH13\": {\"fields\": 3323, \"files\": 16, \"rows\": 195}, \"CH14\": {\"fields\": 5457, \"files\": 16, \"rows\": 259}, \"CH15\": {\"fields\": 972, \"files\": 12, \"rows\": 100}}, \"claim_source_locator_relationships\": 1501, \"explicit_semantic_reference_holds\": 8, \"matched_source_relationships\": 908, \"protected_inputs_audited\": 26, \"relationship_source_version_references\": 1247, \"semantic_locator_holds\": 1501, \"semantic_reference_occurrences\": 2279, \"source_projection_rows_covered\": 1125, \"substantive_limit_controls\": 11, \"unique_source_versions_referenced\": 45, \"unmatched_source_version_holds\": 593}",
+      "passed": true
+    }
+  ],
+  "checks_passed": 16,
+  "checks_total": 16,
+  "counts": {
+    "accepted_author_files": 75,
+    "accepted_csv_rows": 1159,
+    "accepted_scalar_fields": 19422,
+    "claim_source_locator_relationships": 1501,
+    "explicit_semantic_reference_holds": 8,
+    "relationship_source_version_references": 1247,
+    "semantic_locator_holds": 1501,
+    "semantic_reference_occurrences": 2279,
+    "unmatched_source_version_holds": 593
+  },
+  "docx_authorized": false,
+  "errors": [],
+  "publication_authorized": false,
+  "status": "PASS",
+  "verdict": "READY_FOR_FRESH_UNINVOLVED_METADATA_ACCEPTANCE_WITH_ALL_HOLDS"
+}

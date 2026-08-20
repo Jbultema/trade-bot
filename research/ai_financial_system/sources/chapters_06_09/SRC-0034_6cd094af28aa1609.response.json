@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 6873937,
+  "content_sha256": "6cd094af28aa16098cad795bf785be1866d69e59605aed1d6aef75a911a5766b",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/orcl-20260531.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0034_6cd094af28aa1609.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/orcl-20260531.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-06-22",
+  "publisher": "Oracle Corporation",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0034_6cd094af28aa1609.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:50:56.942356+00:00",
+  "retrieval_started_utc": "2026-07-26T17:50:53.852092+00:00",
+  "selected_response_headers": {
+    "content-length": "395314",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:50:55 GMT",
+    "last-modified": "Mon, 22 Jun 2026 20:13:24 GMT"
+  },
+  "source_id": "SRC-0034",
+  "status": "preserved_complete",
+  "title": "Oracle Form 10-K for fiscal year ended May 31 2026",
+  "write_state": "new_version_written"
+}

@@ -1,0 +1,305 @@
+{
+  "author_validation_is_acceptance": false,
+  "author_verdict": "READY_FOR_FRESH_NONAUTHOR_REVIEW_WITH_EXTERNAL_HOLDS",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "coefficient_transfer": "BLOCK",
+  "comparative_publication": "BLOCKED_PENDING_FRESH_REVIEW_AND_EXTERNAL_HOLDS",
+  "descriptive_verdict": "PENDING_FRESH_NONAUTHOR_REVIEW",
+  "external_source_content_holds": 58,
+  "files": [
+    {
+      "bytes": 8062,
+      "path": "ai_similarity_non_similarity_matrix.csv",
+      "rows": 20,
+      "sha256": "827f9b56c8190b2ca9310ddba65a73770e25a200f8697578059f6d7da9e77e31"
+    },
+    {
+      "bytes": 10007,
+      "path": "analogue_episode_ledger.csv",
+      "rows": 10,
+      "sha256": "75f8bb087a08b75bab907a8c16b3018a9549ec8b1a0f456881f675a48b014e54"
+    },
+    {
+      "bytes": 4896,
+      "path": "author_validation_results.json",
+      "sha256": "b6c04f59cdde0124671cf8daf061dd625c8be204342ce4b301612abbee5a0d42"
+    },
+    {
+      "bytes": 21168,
+      "path": "build_rebuilt_v5.py",
+      "sha256": "0a61c5a91876419150ed96fd3da1b7e55dec4f9ba3440c66969816137b5f0a54"
+    },
+    {
+      "bytes": 329,
+      "path": "canonical_no_write_audit.json",
+      "sha256": "01e86697f24fc1cbbc5e6dacd73f35c4c46daa82273fdd0aab327af028c9a3b9"
+    },
+    {
+      "bytes": 23061,
+      "path": "capacity_demand_price_capital_timeline.csv",
+      "rows": 35,
+      "sha256": "a3d150d60d2e1b8192f94afad686da2d9455279c3587dd86c256c53630609baa"
+    },
+    {
+      "bytes": 8180,
+      "path": "chronology_semantic_audit.csv",
+      "rows": 20,
+      "sha256": "55b4d5d035c08692dc9155f60457567a03ac88c0da130d85b318f65632b6395b"
+    },
+    {
+      "bytes": 4501,
+      "path": "claimant_loss_boundary.csv",
+      "rows": 13,
+      "sha256": "25f776f68187038d6764a428f77c8ca77ecdffa22cdc4a4788655e7781c7e187"
+    },
+    {
+      "bytes": 3420,
+      "path": "claimant_semantic_audit.csv",
+      "rows": 13,
+      "sha256": "75ad5b3046e71c31717dfdec60e72d1601cd67c06b48f3a7b8069b49145af27e"
+    },
+    {
+      "bytes": 5592,
+      "path": "coefficient_transfer_prohibitions.csv",
+      "rows": 18,
+      "sha256": "03b825b4d706e760007f132f668bb876a9076e9cc2e1e460a7f4f5c5aa8d302a"
+    },
+    {
+      "bytes": 4556,
+      "path": "contradictions.csv",
+      "rows": 14,
+      "sha256": "9d685b5b2ee5176e6d26f11938d6b4b53bc11cebcb4e9dfbc9354ce3b56290b7"
+    },
+    {
+      "bytes": 33035,
+      "path": "correction_map.csv",
+      "rows": 70,
+      "sha256": "8505d70f03ae241076c013606100a332cf6cb35d6941e09309df78e564ab1946"
+    },
+    {
+      "bytes": 354,
+      "path": "deterministic_rebuild_results.json",
+      "sha256": "7f6d0f833a45447ca8c3ab42442b3ee5eb83f572c5e3d3bcaa34e4410aa42a53"
+    },
+    {
+      "bytes": 31796,
+      "path": "evidence_extract_register.csv",
+      "rows": 58,
+      "sha256": "4964b236b27d3d90832ee24f1c8edc8af276fc15eca1565aa95092e0858f8b8f"
+    },
+    {
+      "bytes": 15934,
+      "path": "exact_patch_audit.csv",
+      "rows": 27,
+      "sha256": "96badc795ceec435d2b16ef8311a0a37277c5d9ab8757f0e1ab6c24b917cdafe"
+    },
+    {
+      "bytes": 74936,
+      "path": "exact_patch_disposition.csv",
+      "rows": 124,
+      "sha256": "fad64e63a41cc6f84c2a1fefd252e32b0c551730449f3ca1d9e602dbfa932514"
+    },
+    {
+      "bytes": 12450,
+      "path": "fresh_exact_repair_disposition.csv",
+      "rows": 18,
+      "sha256": "49485e9e2a514eff4af9461c7894e52777d0d81777926e2263d23fdf9650a4ae"
+    },
+    {
+      "bytes": 9195,
+      "path": "fresh_review_exact_row_patches.csv",
+      "rows": 18,
+      "sha256": "6b5f3cf2b3ed828ca9e893309a677b32f1dc08df1b3b6830a390c8e6295d9de3"
+    },
+    {
+      "bytes": 368,
+      "path": "generic_validation_results.json",
+      "sha256": "89994cfc8dbe12b500deb522e665c71af699ac98189e27837675c558142d2972"
+    },
+    {
+      "bytes": 16764,
+      "path": "hypothesis_tests.csv",
+      "rows": 16,
+      "sha256": "23f4c7b99cba8c69812f752b0f44e6abd766d7bd2898395c37441854160cdcfb"
+    },
+    {
+      "bytes": 16266,
+      "path": "immutable_input_hash_audit.csv",
+      "rows": 59,
+      "sha256": "511a1663a1dec8ce9145624bcca71c29e6c0bbaa53e36703b56edfb4175b2070"
+    },
+    {
+      "bytes": 11188,
+      "path": "impairment_default_restructuring_chronology.csv",
+      "rows": 20,
+      "sha256": "013bd4a8d138ed210ba4c072a40f290285daf855baf549578a7f0af6be373021"
+    },
+    {
+      "bytes": 7729,
+      "path": "input_inventory.csv",
+      "rows": 48,
+      "sha256": "3b834ff4722c12e3ca04b2bcb6135f4ef0545e5fe6e825a847817eff87370bab"
+    },
+    {
+      "bytes": 30111,
+      "path": "junction_semantic_audit.csv",
+      "rows": 128,
+      "sha256": "63f47886e3753494a71c91eb0fbbeb8ad8e24d4c68a3458dea696e3523ae2ec6"
+    },
+    {
+      "bytes": 2612,
+      "path": "measurement_boundary_matrix.csv",
+      "rows": 12,
+      "sha256": "186c5ca3e4ca189596e18460fd7f05f6908680d3bbb1df491e0b89618b732e4a"
+    },
+    {
+      "bytes": 4935,
+      "path": "mechanism_semantic_audit.csv",
+      "rows": 16,
+      "sha256": "854f88f51e50f39cfdd057296a810241a6dccc8e87ff331ec64f498fc8166112"
+    },
+    {
+      "bytes": 5686,
+      "path": "output_artifact_hash_audit.csv",
+      "rows": 49,
+      "sha256": "f00688be7def6154e8ce35945b7fbd5af9a93c2ecfc28017c58adc24651451ec"
+    },
+    {
+      "bytes": 2114,
+      "path": "preserved_arithmetic_and_nonadditivity_audit.csv",
+      "rows": 20,
+      "sha256": "8de868833426bfafadb66052bc2fbd5abb7492a306fe4351428d7eaaffc19b4f"
+    },
+    {
+      "bytes": 29707,
+      "path": "proposed_claims.csv",
+      "rows": 58,
+      "sha256": "00e2e4fb38912d12040d06c2e627e22f945493168db9bc232744c91e1b150acc"
+    },
+    {
+      "bytes": 20981,
+      "path": "proposed_evidence_links.csv",
+      "rows": 58,
+      "sha256": "62c588dbb8cf3a25fb43471139f9dc971b6e52e68a7f23a2bf10801e21fa66ff"
+    },
+    {
+      "bytes": 2058,
+      "path": "proposed_handoffs.csv",
+      "rows": 8,
+      "sha256": "6ca0a0d6d0da6903fe1bfeed5bac9f908b409b3f864fdcfa987001172847e2d4"
+    },
+    {
+      "bytes": 9564,
+      "path": "proposed_sources.csv",
+      "rows": 23,
+      "sha256": "ca10e08135f15e85c73fcd50a4ffb491b020e934a9bebf487d53caa89df29197"
+    },
+    {
+      "bytes": 5907,
+      "path": "proposed_unknowns.csv",
+      "rows": 18,
+      "sha256": "54ab896924df731b5c5488a7ceed72ab17e06ca5f51f520e268f2c940f0f8eb6"
+    },
+    {
+      "bytes": 386,
+      "path": "rebuilt_v5_metrics.json",
+      "sha256": "df0f95f6e48a04586ab297c92cdb408dcc1f9b65ae6343dab19cc2abe64acf47"
+    },
+    {
+      "bytes": 64417,
+      "path": "record_claim_junction.csv",
+      "rows": 214,
+      "sha256": "6823f913661f643a66b4250dd357c5166901732bf46e64f43c3e8c27b6703e0a"
+    },
+    {
+      "bytes": 46720,
+      "path": "record_scope_resolution.csv",
+      "rows": 129,
+      "sha256": "a275a8f46a056db300027f6ff8b6f61b82034d6d1b425bdc32926a950d3c348d"
+    },
+    {
+      "bytes": 1559,
+      "path": "research_pass.md",
+      "sha256": "0d940c3d9d439ec43b8685a9ddedacc02857f852800c6f237665dad3685c1c21"
+    },
+    {
+      "bytes": 716,
+      "path": "review_regression_results.json",
+      "sha256": "075ced4bd525cbe3d7ab544a178e1dbb84bbdcdac40069db673936698c4d6667"
+    },
+    {
+      "bytes": 18372,
+      "path": "row_claim_support.csv",
+      "rows": 86,
+      "sha256": "80c7daebdece92b57ed67c16535c469388f931c567b8df726ba0e6ffdfcec362"
+    },
+    {
+      "bytes": 10939,
+      "path": "source_preservation_audit.csv",
+      "rows": 48,
+      "sha256": "1cc6627272700e600a95a7313da039edc1523e7ed80e4d3a9728acab7dc6b02d"
+    },
+    {
+      "bytes": 4056,
+      "path": "source_queue.csv",
+      "rows": 14,
+      "sha256": "2fa63629412c090311547937e5cc70d50f2489e08272896779764aa58c6befc3"
+    },
+    {
+      "bytes": 7879,
+      "path": "survivor_recovery_mechanisms.csv",
+      "rows": 16,
+      "sha256": "5be85e569195cfec4814ac29f0b114db417bd2484f4b5b4bee3073c8fe455e58"
+    },
+    {
+      "bytes": 2200,
+      "path": "v5_exact_patch_disposition.csv",
+      "rows": 2,
+      "sha256": "ad264a9dbe625f277fe30d5b9806a9537a8b326d0c3427de6deb6860e17e492d"
+    },
+    {
+      "bytes": 22538,
+      "path": "v5_immutable_input_hash_audit.csv",
+      "rows": 67,
+      "sha256": "92dc7f25e061ee56bb27314a3a9c205b665b73e75e273949ea78065e0f62d615"
+    },
+    {
+      "bytes": 11970,
+      "path": "v5_input_inventory.csv",
+      "rows": 67,
+      "sha256": "a8f53508d654ae43b79b8f9165f255a6a9d4dbe1c85db39082a43bef70241220"
+    },
+    {
+      "bytes": 34997,
+      "path": "validate_rebuilt_v5.py",
+      "sha256": "147a3616dea3980696b2ea8649383416cfdf07cc12fe080957f3356fbee4725a"
+    },
+    {
+      "bytes": 3878,
+      "path": "validation_report.md",
+      "sha256": "8e52268f9dfac171c2471ec85e1da9335d63e0c1412a0598360433ddd5f11632"
+    },
+    {
+      "bytes": 4896,
+      "path": "validation_results.json",
+      "sha256": "b6c04f59cdde0124671cf8daf061dd625c8be204342ce4b301612abbee5a0d42"
+    },
+    {
+      "bytes": 2735,
+      "path": "verify_full_rebuilds.py",
+      "sha256": "dd955c822efe372f53ff1e897df1677e8f491ec9f919bac2a2b6cd56a7a210c3"
+    },
+    {
+      "bytes": 5362,
+      "path": "writing_gate_audit.csv",
+      "rows": 20,
+      "sha256": "c4d8603370a663556aa8ba4a942599333a3edb42acac2323b45e21bcac6ed275"
+    }
+  ],
+  "intrinsic_verdict": "PENDING_FRESH_NONAUTHOR_REVIEW",
+  "lane": "lane_4_chapter_18_rebuilt_v5",
+  "predictive_use": "BLOCK",
+  "status_date": "2026-07-26",
+  "validation_checks_failed": 0,
+  "validation_checks_passed": 26
+}

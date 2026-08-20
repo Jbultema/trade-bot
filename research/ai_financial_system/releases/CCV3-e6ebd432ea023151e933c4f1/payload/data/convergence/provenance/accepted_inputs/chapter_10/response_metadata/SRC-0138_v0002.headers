@@ -1,0 +1,27 @@
+HTTP/2 200 
+date: Sun, 26 Jul 2026 19:15:49 GMT
+content-type: text/html; charset=UTF-8
+set-cookie: __cf_bm=JkpRZpuRK0wKjccIlqK_lJpQt_h8VcE5JF86ficq5DY-1785093349.889943-1.0.1.1-S.IqZvwWRcg2EYi3XCxOUmg2ovR.QAODUagiPE4WIPSDaYuElwZW2_XyT0p8q6KsiccAKrqcVwllI_T7QaOnTFpusVDVv9Qm_p4KwJJnmlEHd8T1zlRrT0Lom_I.y33u; HttpOnly; SameSite=None; Secure; Path=/; Domain=nist.gov; Expires=Sun, 26 Jul 2026 19:45:49 GMT
+cache-control: public, max-age=2764800
+age: 1989
+content-language: en
+content-security-policy: default-src 'self'; script-src 'self' *.nist.gov js-agent.newrelic.com bam.nr-data.net bam-cell.nr-data.net gov-bam.nr-data.net 'unsafe-inline' 'unsafe-eval' www.google-analytics.com *.googletagmanager.com platform.twitter.com https://player.vimeo.com static.cloudflareinsights.com https://challenges.cloudflare.com; style-src 'self' 'unsafe-inline' *.nist.gov fonts.googleapis.com  *.typekit.net; img-src 'self' 'unsafe-inline' data: *.nist.gov *.google-analytics.com *.googletagmanager.com cdnsecakmi.kaltura.com nist-el-nfrlhrr.s3.amazonaws.com https://cdn.jsdelivr.net/npm/leaflet-fullscreen@1.0.2/dist/fullscreen@2x.png https://cdn.jsdelivr.net/npm/leaflet-fullscreen@1.0.2/dist/fullscreen.png api.mapbox.com syndication.twitter.com https://h5p.org https://i.vimeocdn.com; media-src 'self' nist-el-nfrlhrr.s3.amazonaws.com; frame-src 'self' tube.nist.gov sts.nist.gov sts2.nist.gov *.kaltura.com *.youtube.com *.arcgis.com https://platform.twitter.com/ https://player.vimeo.com https://vimeo.com/ https://time.gov/ login.nist.gov https://customer-ltx6ylk10sje63q6.cloudflarestream.com https://challenges.cloudflare.com; frame-ancestors 'self'; child-src 'self' blob: tube.nist.gov sts.nist.gov sts2.nist.gov *.kaltura.com *.youtube.com *.arcgis.com *.time.gov login.nist.gov; font-src 'self' *.nist.gov fonts.googleapis.com fonts.gstatic.com *.typekit.net data:; connect-src 'self' bam.nr-data.net bam-cell.nr-data.net gov-bam.nr-data.net *.google-analytics.com *.analytics.google.com *.googletagmanager.com; upgrade-insecure-requests
+cf-cache-status: HIT
+expires: Sun, 19 Nov 1978 05:00:00 GMT
+last-modified: Sun, 26 Jul 2026 18:33:23 GMT
+server: cloudflare
+strict-transport-security: max-age=31536000
+vary: Cookie,Accept-Encoding
+via: varnish
+x-ah-environment: prod
+x-cache: MISS
+x-content-type-options: nosniff
+x-drupal-cache: HIT
+x-frame-options: SAMEORIGIN
+x-frame-options: SAMEORIGIN
+x-generator: Drupal 10 (https://www.drupal.org)
+x-request-id: v-c790c206-8921-11f1-a577-e7ef9c0271bd
+x-ua-compatible: IE=edge
+x-xss-protection: 1;mode=block
+cf-ray: a215bc3ccb88a35c-SEA
+

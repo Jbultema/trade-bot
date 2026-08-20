@@ -1,0 +1,20 @@
+HTTP/2 200 
+content-type: text/html; charset=UTF-8
+date: Sun, 26 Jul 2026 19:14:10 GMT
+cache-control: public, max-age=300, s-maxage=300
+x-age: 0
+content-language: en
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+expires: Sun, 19 Nov 1978 05:00:00 GMT
+last-modified: Sun, 26 Jul 2026 19:14:10 GMT
+etag: W/"1785093250-gzip"
+accept-ranges: bytes
+x-fpfis: 2343437525
+strict-transport-security: max-age=31536000; includeSubDomains; preload;
+vary: Cookie,Accept-Encoding
+x-cache: Miss from cloudfront
+via: 1.1 6fc2d4bdda3d8efb927d086a87e8483e.cloudfront.net (CloudFront)
+x-amz-cf-pop: DEN52-P3
+x-amz-cf-id: qcJf4eOEqvsL0jKsHrDzCXqYGGYu43VHYHRv61rHJErd45LmtifFlA==
+

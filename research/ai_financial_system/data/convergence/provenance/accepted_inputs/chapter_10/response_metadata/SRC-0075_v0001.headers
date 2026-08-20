@@ -1,0 +1,23 @@
+HTTP/2 200 
+content-type: text/html;charset=utf-8
+server: Apache
+x-dispatcher: dispatcher1cacentral1-29746983
+x-vhost: publish
+x-content-type-options: nosniff
+last-modified: Sun, 26 Jul 2026 17:25:33 GMT
+x-akamai-transformed: 9 8792 0 pmb=mRUM,1
+date: Sun, 26 Jul 2026 19:13:50 GMT
+content-length: 34152
+set-cookie: AWSALB=J2FNVMdx2RLYJJIiVoRgqzt7MjCoXAVvuTvT+K1PhhYx+13hK/bGJU933owgvK2Mycqb+90vqZCXutXEBxz32RN/yxF5VN1vOVhPRgMoejAIFmWShllODr4InDrQ; Expires=Sun, 02 Aug 2026 19:13:50 GMT; Path=/
+set-cookie: AWSALBCORS=J2FNVMdx2RLYJJIiVoRgqzt7MjCoXAVvuTvT+K1PhhYx+13hK/bGJU933owgvK2Mycqb+90vqZCXutXEBxz32RN/yxF5VN1vOVhPRgMoejAIFmWShllODr4InDrQ; Expires=Sun, 02 Aug 2026 19:13:50 GMT; Path=/; SameSite=None; Secure
+set-cookie: aka-ca-site-token=8963ca1721b83c006e5c666aa20000007b1f0200; path=/; secure
+server-timing: cdn-cache; desc=REVALIDATE
+server-timing: edge; dur=2045
+server-timing: origin; dur=49
+alt-svc: h3=":443"; ma=93600
+access-control-allow-origin: *
+x-frame-options: DENY
+strict-transport-security: max-age=31536000
+akamai-grn: 0.8963ca17.1785093228.43bd579b
+server-timing: ak_p; desc="1785093227971_399139721_1136482203_209052_6632_21_87_15";dur=1
+

@@ -1,0 +1,218 @@
+source: 42macro_youtube
+published_date: 2026-07-23
+video_id: eW5yZQDn3vA
+url: https://www.youtube.com/watch?v=eW5yZQDn3vA
+title: The Macro Minute: Why has Q2 earning season been a sell-the-news catalyst for AI stocks?
+
+Happy Thursday out there, team 42. It's
+your skipper here, Darius Dale,
+presenting our macro minute for
+Thursday, July 23rd, 2026. As always,
+we'll start with the executive summary
+from today's lead-off morning note, so
+let's dive right in. Today's key macro
+question is, why has Q2 earning season
+been a sell-the-news catalyst for AI
+stocks? The short answer is, because the
+liquidity required to finance all the
+CapEx is becoming scarce, and as a
+result, investors are increasingly
+demanding tangible results from an ROIC
+perspective. In terms of analytical
+nuance, Alphabet shares, Google shares
+are down 7% on renewed fears of
+excessive AI spending. Full year CapEx
+guidance was raised to 195 billion to
+205 billion from 190 billion. Alphabet
+turned cash flow negative for the first
+time since its 2004 IPO.
+Free cash flow plunged to minus $5.9
+billion in Q2.
+Alphabet's portfolio holdings, stakes in
+Anthropic and SpaceX, delivered upside.
+Investment gains neared $100 billion for
+the quarter, lifting in net income
+sharply. Alphabet's historic 213%
+positive earning surprise should be
+scrutinized with this context. The
+negative stock price reaction signals
+investors growing unease with AI company
+portfolio holdings driving such
+considerable upside to earnings
+estimates, because clearly this is not a
+sustainable dynamic. Speaking of
+spending like drunken tech executives,
+Tesla's profit sank despite strong EV
+deliveries, straining Elon Musk's pivot
+towards AI and robotics. CapEx surged to
+5.8 billion in Q2, triggering Tesla's
+first cash burn in 2 years. Full year
+CapEx still exceeds $25 billion.
+Shares plunged 14% on an unadjusted
+earnings miss and $1.1 billion in
+negative free cash flow.
+Tech firms' heavy AI infrastructure debt
+issuances increasingly competing with
+Treasuries for buyers to fund AI CapEx.
+The 30-year nominal Treasury yield has
+held above 5% for its longest stretch
+since the financial crisis began, 27
+days in 2026 and 12 consecutive days.
+That marks the highest count and longest
+streak since 2007's
+50 days. For what it's worth, the
+Treasury market ballooned to $31
+trillion from $4.5 trillion in 2007 as
+the US is sovereign debt to GDP ratio
+doubled beyond 100%.
+The AI CapEx bubble is exacerbating an
+already strained supply of global
+capital that has been weighing on the
+Treasury bond market for years. As we've
+highlighted for months, the neutral rate
+continues to rise and is currently
+between 4.0 and 4.25%
+according to the 42 macro market implied
+Fed neutral rate model. FYI, the Fed
+funds rate is 3.5 to 3.75%
+meaning the Fed is in mildly
+accommodative territory because of its
+tardy reaction to the ebbs and flows of
+the global liquidity cycle.
+The trailing 10-year growth rate of
+global savings is among the lowest on
+record and well below its long-run mean.
+This dynamic is unlikely to meaningfully
+or durably improve given the ongoing
+shift to a multipolar world and all the
+added fiscal expenditures on defense and
+infrastructures that it entails. The
+15-year high in 10-year nominal Eurozone
+government bond yields, 20-year high in
+10-year nominal UK gilt yield, and
+30-year high in the 10-year nominal JGB
+yield are telltale signs that the supply
+of global savings continues to
+deteriorate at the margins.
+And so normally we have a we pivot to
+our global investor community and wrap
+up with a question in these macro
+minutes, but instead of doing that
+today, I did want to pivot to a chart to
+highlight our Fed neutral rate model,
+which you can see here. That's the blue
+line in the in the both panels. The top
+panel shows what the neutral rate with
+the market implied estimate of a neutral
+rate is in a cutting cycle. The bottom
+panel shows what the market implied
+estimate of the neutral rate is in a
+tightening cycle and obviously we're
+sort of in between cutting and
+tightening. So, you know, I surmise it's
+best to look at both. And right now,
+whether we're in a cutting cycle or a
+tightening cycle, the market is
+essentially saying the Fed is somewhere
+between 39 and 69 65 basis points below
+what the market thinks neutral is. I.e.
+the Fed is in accommodative territory by
+let's call it 1 and 1/2 to 2 and 1/2
+rate hikes. Meaning the Fed needs to
+hike 1 and 1/2 to 2 and 1/2 times to get
+back to neutral and stop applying upward
+pressure on inflation. And part of the
+reason this is happening in our opinion
+is goes back to what has been our core
+research thesis since the author of the
+theme in summer of 2023, which is that
+there is a geopolitically driven supply
+demand imbalance in the Treasury bond
+market. And as long as that condition
+persists, which we would argue the sharp
+slowdown in the growth rate of global
+savings is contributory to that, as long
+as that condition persists, then this
+this discom petition for capital between
+Treasury US Treasury that needs to
+capitalize about 12 trillion dollars on
+the next 12-month forward basis and the
+AI infrastructure boom, which is about
+800 billion dollars in US hyperscale
+CapEx in 2026, another 1.2 trillion
+dollars in US hyperscale CapEx in 2027.
+Now you have this massive competition
+for capital that is the in terms of the
+growth rate of capital has really slowed
+down tremendously and could slow down
+even further to the extent the Strait of
+Hormuz remains closed for an extended
+period of time. Recall that the net
+international investment surplus
+economies
+in the Strait of Hormuz,
+you know, the Saudi Arabia, Qatar, UAE,
+as well as the net international
+investment surplus economies in Asia,
+which source the lion's share of their
+petroleum products from the Strait of
+Hormuz and/or the net international
+investment surplus economies in Europe
+that source a decent share of their
+petroleum products from the Strait of
+Hormuz. If those economies, those
+surplus economies can't generate the
+household savings, corporate profits,
+and FX reserves that they need to
+continue supporting this massive AI
+CapEx buildout, then we're going to have
+problems in global financial markets.
+And this is one of the reasons
+connecting all the dots why we believe
+the Fed may opt to play action pass to
+set up the run in order to kind of
+regain some attractiveness in the
+Treasury market, specifically on the
+long end of the Treasury curve in the
+context of all this competition for
+capital. And so, just wrapping up, this
+chart shows global savings. Uh but 31
+trillion dollars, the flow of savings
+out the stock of savings. And so, the
+flow of savings on a trailing 10-year
+runway basis at the bottom panel here,
+uh the most recent value is 55%. Uh the
+long-run mean of this time series just
+goes back to 1990. So, the the data goes
+back to 1980. The first observation of a
+trailing 10-year percentage change we
+have is in 1990. Uh the long-run mean of
+this time series is 89%. So, we're, you
+know, 30 3,500 basis points below the
+long-run mean of the long-run growth
+rate of global savings. And as global
+savings continues to slow down from a
+long-term growth rate perspective in the
+context of the shift to a multipolar
+world and all the added defense and
+infrastructure expenditures that
+entails, not the least of which uh all
+the infrastructure expenditures they're
+going to have to spend in
+in the in and around the street or moves
+to rebuild their infrastructure, you
+know, this is a big problem. Uh and it's
+increasingly becoming a big problem for
+the market. And so, ultimately, the cost
+of capital, the ex ante cost of capital,
+the cost of equity capital, cost of debt
+capital, uh not just for these
+companies, but also the cost of debt
+capital for the sovereigns, it has to
+rise in the context of this
+supply-demand imbalance. So, we'll wrap
+it up there. Darius Dale here, uh
+presenting our macro minute for
+Thursday, July 23rd, 2026. Best of luck
+out there today. We'll catch you back
+here tomorrow. Cheers.

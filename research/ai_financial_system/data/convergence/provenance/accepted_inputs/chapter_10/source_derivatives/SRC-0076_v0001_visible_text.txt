@@ -1,0 +1,67 @@
+Strategic Response Fund – Cohere compute expansion project public statement | Strategic Environmental Assessment (SEA)
+Skip to main content
+Skip to "About government"
+Language selection
+WxT Language switcher
+Français
+fr
+/
+Gouvernement du Canada
+WxT Search form
+Search
+Customize your search
+Search this website
+canada.ca
+Search
+Menu
+Main
+Menu
+Home
+Strategic Environmental and Economic Assessments
+Strategic Response Fund – Cedar LNG public statement
+Strategic Response Fund – Cohere compute expansion project public statement
+Strategic Response Fund – Delpharm Boucherville Canada Inc. public statement
+Strategic Response Fund – Entos Pharmaceuticals Inc. public statement
+Strategic Response Fund – IBM and C2MI advanced semiconductor packaging project public statement
+You are here
+Canada.ca
+Innovation, Science and Economic Development Canada
+Strategic Environmental Assessment (SEA)
+Strategic Response Fund – Cohere compute expansion project public statement
+In accordance with the Cabinet Directive on Strategic Environmental and Economic Assessment, a Climate, Nature and Economy Lens (CNEL) assessment was completed for the Cohere compute project. As announced on March 20, 2025, Cohere Inc. (Cohere) will receive a contribution of up to $240 million through the Government of Canada’s Strategic Response Fund, formerly the Strategic Innovation Fund, to support the $725 million project.
+Cohere is scaling its enterprise artificial intelligence (AI) capabilities and partnering with CoreWeave to expand access to high-performance compute infrastructure in Cambridge, Ontario. Through this partnership, Cohere will act as an anchor tenant for a new AI compute facility built and operated by CoreWeave, supporting the broader Canadian Sovereign AI Compute Strategy and strengthening Canada’s leadership in AI research, commercialization and model development.
+The CNEL assessment indicated that the Cohere project may indirectly contribute to increased greenhouse gas emissions due to the energy-intensive nature of AI compute infrastructure, though the extent depends on the energy sources used by third-party data centres. While Cohere does not operate these facilities, its activities drive demand for compute capacity, which may also increase energy and water use. Direct environmental impacts, including on biodiversity, are not expected, as infrastructure is typically located in industrial areas. Climate-related risks are minimal for Cohere itself, though data centre operations may require resilience planning. At the same time, AI technologies developed through the project could support emissions reductions and climate resilience across sectors by improving efficiency, forecasting and system optimization.
+The project is expected to strengthen Canada’s AI ecosystem, expanding domestic compute capacity and creating high-skilled jobs. It will enhance Canada’s global competitiveness by supporting the commercialization of Canadian AI technologies and reducing reliance on foreign infrastructure. There are no direct impacts on Indigenous rights, and the project aligns with federal sustainability and innovation goals, though environmental considerations related to energy use highlight the importance of low-carbon infrastructure. Public perception may be mixed, balancing support for innovation with concerns about the environmental footprint, underscoring the need for transparency. Ultimately, the project will support Canada’s transition to a competitive and innovative digital economy.
+Date modified:
+2026-06-10
+About this site
+Government of Canada
+All contacts
+Departments and agencies
+About government
+Themes and topics
+Jobs
+Immigration and citizenship
+Travel and tourism
+Business
+Benefits
+Health
+Taxes
+Environment and natural resources
+National security and defence
+Culture, history and sport
+Policing, justice and emergencies
+Transport and infrastructure
+Canada and the world
+Money and finance
+Science and innovation
+Indigenous peoples
+Veterans and military
+Youth
+Government of Canada Corporate
+Social media
+Mobile applications
+About Canada.ca
+Terms and conditions
+Privacy
+Top of Page

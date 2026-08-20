@@ -64,13 +64,14 @@ BULLISH_TERMS: dict[str, float] = {
     "risk-on market regime": 3.0,
     "bullish outlook": 2.5,
     "bull market": 2.0,
-    "bubble": 1.7,
+    "bubbling sharply higher": 1.7,
     "melt up": 1.7,
     "buy the dip": 1.6,
     "dip should eventually be bought": 1.6,
     "tailwind": 1.1,
-    "liquidity": 0.8,
-    "easing": 0.8,
+    "liquidity tailwind": 1.2,
+    "liquidity support": 1.0,
+    "easing cycle": 0.8,
     "runway": 0.8,
     "upside": 0.8,
     "support the rally": 0.8,
@@ -94,6 +95,16 @@ DEFENSIVE_TERMS: dict[str, float] = {
     "risk-off": 1.2,
     "headwind": 1.1,
     "stress": 1.0,
+    "summer 1998 style correction": 3.2,
+    "summer 1998-style correction": 3.2,
+    "broad decline in global liquidity": 2.8,
+    "credit default swaps surged": 2.8,
+    "competition for capital": 1.8,
+    "cash flow negative": 2.0,
+    "negative free cash flow": 2.0,
+    "cost of capital too low": 1.8,
+    "capex bubble": 2.2,
+    "bubble in retail margin debt": 2.5,
 }
 
 LARGE_CHANGE_TERMS = (
@@ -151,7 +162,8 @@ def sync_42macro_transcripts(
         max_pages=max_pages,
     )
     prior_manifest = _load_manifest(output_dir / "manifest.json")
-    local_transcripts = _local_transcript_rows(output_dir)
+    local_frame = _deduplicate_video_frame(pd.DataFrame(_local_transcript_rows(output_dir)))
+    local_transcripts = local_frame.to_dict(orient="records")
     prior_by_id = {str(row.get("video_id")): row for row in prior_manifest}
     for local_row in local_transcripts:
         video_id = str(local_row.get("video_id", ""))
@@ -233,9 +245,12 @@ def sync_42macro_transcripts(
         if pause_seconds > 0:
             time.sleep(pause_seconds)
         if checkpoint_manifest_every > 0 and len(rows) % checkpoint_manifest_every == 0:
-            _write_manifest(output_dir, pd.DataFrame(rows))
+            _write_manifest(
+                output_dir,
+                _merge_prior_video_rows(pd.DataFrame(rows), prior_by_id),
+            )
 
-    videos = pd.DataFrame(rows)
+    videos = _merge_prior_video_rows(pd.DataFrame(rows), prior_by_id)
     manifest_path = _write_manifest(output_dir, videos)
     return MacroTranscriptSyncResult(
         videos=videos,
@@ -1389,8 +1404,8 @@ def _manifest_frame(transcript_root: Path) -> pd.DataFrame:
                     "error": str(row.get("error", "")),
                 }
             )
-        frame = pd.DataFrame(normalized_rows)
-        local = pd.DataFrame(_local_transcript_rows(transcript_root))
+        frame = _deduplicate_video_frame(pd.DataFrame(normalized_rows))
+        local = _deduplicate_video_frame(pd.DataFrame(_local_transcript_rows(transcript_root)))
         if local.empty:
             return frame
         known_ids = set(frame["video_id"].astype(str)) if "video_id" in frame else set()
@@ -1398,7 +1413,73 @@ def _manifest_frame(transcript_root: Path) -> pd.DataFrame:
         if additions.empty:
             return frame
         return pd.concat([frame, additions], ignore_index=True)
-    return pd.DataFrame(_local_transcript_rows(transcript_root))
+    return _deduplicate_video_frame(pd.DataFrame(_local_transcript_rows(transcript_root)))
+
+
+def _deduplicate_video_frame(frame: pd.DataFrame) -> pd.DataFrame:
+    """Return one deterministic, most-complete row per non-empty video ID."""
+
+    if frame.empty or "video_id" not in frame:
+        return frame
+    output = frame.copy()
+    output["_video_id"] = output["video_id"].fillna("").astype(str).str.strip()
+    identified = output[output["_video_id"].ne("")].copy()
+    unidentified = output[output["_video_id"].eq("")].copy()
+    if identified.empty:
+        return output.drop(columns="_video_id").reset_index(drop=True)
+    identified["_word_count"] = pd.to_numeric(
+        identified.get("word_count", 0),
+        errors="coerce",
+    ).fillna(0)
+    identified["_transcript_path"] = identified.get("transcript_path", "").fillna("").astype(str)
+    identified = (
+        identified.sort_values(
+            ["_video_id", "_word_count", "_transcript_path"],
+            ascending=[True, False, True],
+        )
+        .drop_duplicates("_video_id", keep="first")
+        .drop(columns=["_word_count", "_transcript_path"])
+    )
+    return (
+        pd.concat([identified, unidentified], ignore_index=True)
+        .drop(columns="_video_id")
+        .reset_index(drop=True)
+    )
+
+
+def _merge_prior_video_rows(
+    current: pd.DataFrame,
+    prior_by_id: dict[str, dict[str, object]],
+) -> pd.DataFrame:
+    """Keep out-of-window catalog history when a bounded sync is run."""
+
+    current_ids = (
+        set(current["video_id"].fillna("").astype(str))
+        if not current.empty and "video_id" in current
+        else set()
+    )
+    retained: list[dict[str, object]] = []
+    for video_id, row in prior_by_id.items():
+        if not video_id or video_id in current_ids:
+            continue
+        retained.append(
+            {
+                "video_id": video_id,
+                "source": row.get("source", DEFAULT_42MACRO_SOURCE),
+                "published_date": row.get("published_date") or row.get("date") or "",
+                "title": row.get("title", ""),
+                "url": row.get("url", "") or _youtube_url(video_id),
+                "transcript_path": row.get("transcript_path") or row.get("path") or "",
+                "word_count": row.get("word_count") or row.get("words") or 0,
+                "fetched_at_utc": row.get("fetched_at_utc", ""),
+                "status": row.get("status", ""),
+                "error": row.get("error", ""),
+            }
+        )
+    frames = [current]
+    if retained:
+        frames.append(pd.DataFrame(retained))
+    return _sort_manifest_frame(_deduplicate_video_frame(pd.concat(frames, ignore_index=True)))
 
 
 def _local_transcript_rows(transcript_root: Path) -> list[dict[str, object]]:
@@ -1744,9 +1825,7 @@ def _write_alignment_diagnostic_outputs(
     if comparisons.empty:
         return
     frame = comparisons.copy()
-    transcript_backed = frame[
-        frame["classification_text_source"].eq("transcript")
-    ].copy()
+    transcript_backed = frame[frame["classification_text_source"].eq("transcript")].copy()
     transcript_backed.to_csv(
         output_dir / "daily_transcript_backed_comparison.csv",
         index=False,
@@ -1759,9 +1838,9 @@ def _write_alignment_diagnostic_outputs(
     )
     large_change.to_csv(output_dir / "large_change_moments.csv", index=False)
 
-    frame["year_month"] = pd.to_datetime(
-        frame["published_date"], errors="coerce"
-    ).dt.to_period("M").astype(str)
+    frame["year_month"] = (
+        pd.to_datetime(frame["published_date"], errors="coerce").dt.to_period("M").astype(str)
+    )
     monthly = (
         frame.groupby(["classification_text_source", "year_month"], dropna=False)
         .agg(
@@ -1809,7 +1888,9 @@ def _write_alignment_diagnostic_outputs(
                     scoped.loc[
                         scoped["large_change_focus"].astype(bool),
                         "disagreement_label",
-                    ].eq("major_mismatch").mean()
+                    ]
+                    .eq("major_mismatch")
+                    .mean()
                 ),
             }
         )
@@ -1875,8 +1956,7 @@ def _summary_markdown(summary: dict[str, object], comparisons: pd.DataFrame) -> 
     lines.extend(
         [
             f"- Video: {latest.get('published_date', '')} — {latest.get('title', '')}",
-            f"- 42 Macro: {latest['macro_posture_label']} "
-            f"({latest['macro_posture_score']:+.2f}).",
+            f"- 42 Macro: {latest['macro_posture_label']} ({latest['macro_posture_score']:+.2f}).",
             f"- Trade Bot: {latest['trade_bot_posture_label']} "
             f"({latest['trade_bot_posture_score']:+.2f})"
             + (
@@ -1913,8 +1993,8 @@ def _summary_markdown(summary: dict[str, object], comparisons: pd.DataFrame) -> 
     lines.extend(
         [
             "",
-        "## Largest Mismatches",
-        "",
+            "## Largest Mismatches",
+            "",
         ]
     )
     if comparisons.empty:

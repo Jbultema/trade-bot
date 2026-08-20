@@ -1886,7 +1886,7 @@ def _render_strategy_family_map(
     _helped_metric(
         metric_cols[4],
         "Promoted",
-        f"{int((family_map['promotion_decision'] == 'promote_candidate').sum()):,}",
+        f"{int(family_map.get('governed_promotion_decision', family_map['promotion_decision']).eq('promote_candidate').sum()):,}",
         key="promotion_decision",
     )
 
@@ -2352,8 +2352,7 @@ def _render_outcome_planning_assumptions() -> None:
                                 "contribution cadence."
                             ),
                             "change_location": (
-                                "DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION in "
-                                "src/trade_bot/DEFAULTS.py"
+                                "DEFAULT_OUTCOME_ANNUAL_CONTRIBUTION in src/trade_bot/DEFAULTS.py"
                             ),
                         },
                         {
@@ -2515,8 +2514,7 @@ def _add_outcome_drawdown_band_trace(
             name=f"{name}: {abs(x_value):.0%}",
             line={"color": color, "dash": dash, "width": 2},
             hovertemplate=(
-                f"<b>{name}</b><br>Max drawdown threshold: {x_value:.0%}<br>{detail}"
-                "<extra></extra>"
+                f"<b>{name}</b><br>Max drawdown threshold: {x_value:.0%}<br>{detail}<extra></extra>"
             ),
             showlegend=True,
             customdata=[[""], [""]],
@@ -4888,7 +4886,11 @@ def _render_experiment_monitor(
         return
 
     latest_iteration = latest_experiment_iteration(experiment_scorecards)
-    promoted_count = int((experiment_scorecards["promotion_decision"] == "promote_candidate").sum())
+    governed_decisions = experiment_scorecards.get(
+        "governed_promotion_decision",
+        experiment_scorecards["promotion_decision"],
+    )
+    promoted_count = int(governed_decisions.eq("promote_candidate").sum())
     rejected_tail_count = int(
         experiment_scorecards["promotion_decision"]
         .isin(["reject_left_tail", "reject_regime_fragility", "reject_walk_forward_fragility"])

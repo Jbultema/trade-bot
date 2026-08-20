@@ -1,0 +1,33 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 57964,
+  "content_sha256": "fa4aa7c78b902526f5bc77f4d66a0ee81412bb5e1546b36ceac7ad024de8e463",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.related.com/press-releases/2026-04-24/related-digital-announces-financing-16-billion-oracle-data-center-project",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0080_fa4aa7c78b902526.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=UTF-8",
+  "original_url": "https://www.related.com/press-releases/2026-04-24/related-digital-announces-financing-16-billion-oracle-data-center-project",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-04-24",
+  "publisher": "Related Companies",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0080_fa4aa7c78b902526.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:32.985559+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:32.622354+00:00",
+  "selected_response_headers": {
+    "cache-control": "no-store, no-cache, must-revalidate, max-age=0",
+    "content-length": "57964",
+    "content-type": "text/html; charset=UTF-8",
+    "date": "Mon, 27 Jul 2026 01:08:33 GMT",
+    "etag": "\"1785114512\"",
+    "last-modified": "Mon, 27 Jul 2026 01:08:32 GMT"
+  },
+  "source_id": "SRC-0080",
+  "status": "preserved_complete",
+  "title": "Related Digital announces financing for 16 billion dollar Oracle data center project in Saline Township Michigan",
+  "write_state": "new_version_written"
+}

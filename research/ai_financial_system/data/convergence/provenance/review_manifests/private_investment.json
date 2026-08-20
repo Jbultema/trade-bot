@@ -1,0 +1,174 @@
+{
+  "author_lane_manifest_sha256": "dad486ffe614043779eae68f6cf3a7ae70a0a00ab159334e19b7604cf1f43345",
+  "candidate_manifest_sha256": "efd9feb57f15e059bce85323e6dfd4c0214fd63953deb2eddb9f7e7e10152958",
+  "canonical_integration_verdict": "NOT_AUTHORIZED_PENDING_PRIMARY_ATOMIC_INTEGRATION",
+  "files": [
+    {
+      "bytes": 3084,
+      "lines": 62,
+      "path": "acceptance_report.md",
+      "sha256": "1f49af27207164c3d54339343b84375705dd5ee9432be8e1722fdb61861246c3"
+    },
+    {
+      "bytes": 309,
+      "path": "analytical_holds_audit.csv",
+      "rows": 5,
+      "sha256": "b3fbbb597b04426f5a5d07afb39be8ec9d738c666971b45f3d59ba73c2436a69"
+    },
+    {
+      "bytes": 1205,
+      "path": "arithmetic_reperformance.csv",
+      "rows": 19,
+      "sha256": "0c6ceb3006e35f71ee5e42d56e9a40d5c6d8f2f379d72bebdb4f0e5570badbe1"
+    },
+    {
+      "bytes": 470,
+      "path": "canonical_load_audit.csv",
+      "rows": 11,
+      "sha256": "fa443a30b2ca077e3af78467973bc986822433928ccc658437ff22fb7876961a"
+    },
+    {
+      "bytes": 1839,
+      "path": "checks.csv",
+      "rows": 17,
+      "sha256": "d6eda895f8ae0bd0b7093324c69f5934da018cdf834d459c5f48376fc4ba7fc4"
+    },
+    {
+      "bytes": 149,
+      "path": "claim_status_boundary_audit.csv",
+      "rows": 5,
+      "sha256": "f43ec3806d503abf7f04ab1f57d42b0c3e6cec02c9176d2039e630fa14ac3505"
+    },
+    {
+      "bytes": 1050,
+      "path": "derivative_boundary_audit.csv",
+      "rows": 8,
+      "sha256": "0883cb8d08af7f39c88e938ca4870aee1443e185b69944001f5f4414ffbfaef5"
+    },
+    {
+      "bytes": 61,
+      "path": "exact_row_patches.csv",
+      "rows": 0,
+      "sha256": "0d725c30d448b7b41734fd77c57ba73a1f09fc736c21f7643a9df9595be4cdc9"
+    },
+    {
+      "bytes": 924,
+      "path": "external_fk_audit.csv",
+      "rows": 11,
+      "sha256": "d30c92ed7c34b9b6b2434e941128eb41919e586be4eb0b7e07953b42ab19fad5"
+    },
+    {
+      "bytes": 51,
+      "path": "findings.csv",
+      "rows": 0,
+      "sha256": "4de2b5ca91f1fa37a29454c6510ec1175fb2ab41a898887dfc7c7bf8caeb33da"
+    },
+    {
+      "bytes": 403,
+      "lines": 15,
+      "path": "generic_validation_results.json",
+      "sha256": "7da9c54e201aa701aade57e1eb5872ac6502e14aa03204ce9be29ed23bb69abc"
+    },
+    {
+      "bytes": 659,
+      "path": "negative_constraint_tests.csv",
+      "rows": 8,
+      "sha256": "c370de4914bda49470e0a55520feb50315ebf98b670d2a954d368cd25f4622a6"
+    },
+    {
+      "bytes": 989,
+      "path": "population_reperformance.csv",
+      "rows": 10,
+      "sha256": "325cd7c7b9838cbc3c2cff9f2ea7dd044d9e0dc5a0497e57d361b86e06349d6c"
+    },
+    {
+      "bytes": 96,
+      "path": "repair_reperformance.csv",
+      "rows": 6,
+      "sha256": "7f6012d3e92b35612e457a761017901799093dd8a0f5f9b35379d37730ce6cc1"
+    },
+    {
+      "bytes": 41985,
+      "lines": 676,
+      "path": "run_review.py",
+      "sha256": "6c673a865d6da5f267a4489978469aaedeb509a438ba53b7d2bd96f54964359b"
+    },
+    {
+      "bytes": 38119,
+      "path": "sealed_input_inventory.csv",
+      "rows": 150,
+      "sha256": "a95a904ad4f9cc03d88938e2dfdc5fde43552491e62fb738d83e99004c079dcd"
+    },
+    {
+      "bytes": 748,
+      "path": "source_register_preservation_audit.csv",
+      "rows": 8,
+      "sha256": "466429d79dcba76f0b810a40b1c7a2acd5e824f340f9bdea02117ac92eddc2f5"
+    },
+    {
+      "bytes": 70999,
+      "path": "transformation_lineage_reperformance.csv",
+      "rows": 500,
+      "sha256": "304a39bfa5e0e05b53b80c8a57a38b7793cd5e523aef20f29087273da1e8ebf1"
+    },
+    {
+      "bytes": 5304,
+      "path": "two_clean_build_comparison.csv",
+      "rows": 21,
+      "sha256": "0d14fd4d5fc6d22bcea39e804c28264b571339155cea9e35b817d0886e5140c1"
+    },
+    {
+      "bytes": 228894,
+      "path": "typed_candidate_audit.csv",
+      "rows": 1473,
+      "sha256": "7871f321667371e9ee62a4e9238a988fd25c894308bbfaa56b70938a76b79263"
+    },
+    {
+      "bytes": 6374,
+      "lines": 148,
+      "path": "validate_review.py",
+      "sha256": "df1c65074c098994d5ea75869d7d73b6cbcf964174c1a15533236601cf555ca7"
+    },
+    {
+      "bytes": 1333,
+      "lines": 32,
+      "path": "validation_results.json",
+      "sha256": "0c52085d010023fc08b6f3b7edb7856535a41cf31436d871d9a79a9798d9f88e"
+    }
+  ],
+  "intrinsic_verdict": "ACCEPT_INTRINSIC_RECONSTRUCTION",
+  "lane": "lane_1_verify_private_investment_candidate_v2",
+  "no_write_attestation": {
+    "author_lane_modified": false,
+    "canonical_or_shared_files_modified": false,
+    "chapter_or_publication_files_modified": false,
+    "review_output_only": "research/ai_financial_system/staging/lane_1_verify_private_investment_candidate_v2/"
+  },
+  "overall_verdict": "ACCEPT_WITH_EXPLICIT_EXTERNAL_HOLDS",
+  "preservation_rebase_verdict": "READY_FOR_PRIMARY_ATOMIC_REBASE_WITH_EXPLICIT_HOLDS",
+  "publication_verdict": "BLOCKED_PENDING_CANONICAL_REBASE_AND_RETAINED_ANALYTICAL_HOLDS",
+  "remaining_analytical_holds": [
+    "S&P 500 aggregate reproduction",
+    "exact Microsoft component and tax allocation",
+    "governed top-20 population reconstruction",
+    "prospective Meta/Tesla and realization monitoring",
+    "unnamed investee allocation at Alphabet and NVIDIA and residual Amazon attribution"
+  ],
+  "self_hash_policy": "lane_manifest.json excludes its own hash",
+  "status_date": "2026-07-26",
+  "typed_candidate_verdict": "ACCEPT_TYPED_CANDIDATE",
+  "validation": {
+    "arithmetic_checks": 19,
+    "checks": "17_of_17_pass",
+    "clean_builds": 2,
+    "deterministic_files": 21,
+    "exact_patches": 0,
+    "external_foreign_keys": 11,
+    "negative_tests": 8,
+    "population_checks": 10,
+    "six_repairs": "6/6",
+    "source_fields": 500,
+    "typed_fields": 1473
+  },
+  "workstream": "fresh_nonauthor_semantic_acceptance_private_investment_candidate_v2"
+}

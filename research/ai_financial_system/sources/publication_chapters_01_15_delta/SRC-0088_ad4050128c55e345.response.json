@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 105811,
+  "content_sha256": "ad4050128c55e345b070286fe1852a356bb7800c643f0e6e57c01bf94520ae37",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.entergy.com/news/entergy-louisiana-breaks-ground-on-new-state-of-the-art-generation-facilities-to-power-reliability-growth-and-innovation",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0088_ad4050128c55e345.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=UTF-8",
+  "original_url": "https://www.entergy.com/news/entergy-louisiana-breaks-ground-on-new-state-of-the-art-generation-facilities-to-power-reliability-growth-and-innovation",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-12-01",
+  "publisher": "Entergy Louisiana LLC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0088_ad4050128c55e345.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:39.794208+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:39.652001+00:00",
+  "selected_response_headers": {
+    "cache-control": "max-age=600, must-revalidate",
+    "content-type": "text/html; charset=UTF-8",
+    "date": "Mon, 27 Jul 2026 01:08:39 GMT",
+    "last-modified": "Mon, 27 Jul 2026 01:08:39 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0088",
+  "status": "preserved_complete",
+  "title": "Entergy Louisiana breaks ground on generation facilities for Richland Parish growth",
+  "write_state": "new_version_written"
+}

@@ -32,7 +32,11 @@ from trade_bot.research.strategy_decision import (
     trade_decision_strategy_name,
 )
 from trade_bot.storage.warehouse import TradingWarehouse
-from trade_bot.trading.book_alignment import BookAlignmentRun, build_book_alignment
+from trade_bot.trading.book_alignment import (
+    BookAlignmentRun,
+    build_book_alignment,
+    latest_book_account_value,
+)
 from trade_bot.trading.journal import (
     JournalBook,
     TicketSizingConfig,
@@ -235,7 +239,14 @@ def _render_forward_test_and_journal(
         journal_mode = selected_book.mode
         journal_account = selected_book.account
         journal_strategy = selected_book.strategy_name
-        account_value = float(selected_book.account_value)
+        configured_account_value = float(selected_book.account_value)
+        account_value = latest_book_account_value(
+            journal,
+            mode=journal_mode,
+            account=journal_account,
+            strategy_name=journal_strategy,
+            default=configured_account_value,
+        )
         journal_cols = st.columns(5)
         journal_cols[0].metric(
             "Selected book",
@@ -246,6 +257,13 @@ def _render_forward_test_and_journal(
         journal_cols[2].metric("Account", journal_account)
         journal_cols[3].metric("Strategy to follow", journal_strategy)
         journal_cols[4].metric("Account value", f"${account_value:,.0f}")
+        if abs(account_value - configured_account_value) > 1e-6:
+            st.caption(
+                "Account value uses the latest saved decision snapshot "
+                f"(${account_value:,.2f}); the book setup value "
+                f"(${configured_account_value:,.2f}) is retained only as a fallback. "
+                "This preserves cash proceeds when fills change the marked holdings mix."
+            )
         st.caption("Use the book controls above to create, select, edit, delete, or promote books.")
     else:
         journal_cols = st.columns(4)

@@ -1,0 +1,208 @@
+source: 42macro_youtube
+published_date: 2026-07-28
+video_id: _qnyht6JRtQ
+url: https://www.youtube.com/watch?v=_qnyht6JRtQ
+title: The Macro Minute: Does AI have a circular financing problem?
+
+Happy Tuesday out there, team 42. It's
+your skipper here, Darius Dale,
+presenting our macro minute for Tuesday,
+July 28th, 2026. As always, let's start
+with the executive summary from today's
+Lead-Off Morning Note, so let's dive
+right in. Today's key macro question is,
+does AI have a circular financing
+problem? The short answer is yes.
+Towards the analytical nuance, the MSCI
+World Semiconductor Index has fallen 13%
+month-to-date, its worst month since
+2022. Its 33% year-to-date gain
+represents a source of prospective
+market risk. South Korea's Kospi sank
+11% Tuesday as Samsung and SK Hynix each
+lost more than 13%. The Korea Exchange
+temporarily suspended cash trading amid
+the rout. Additionally, Japan's Nikkei
+225 Index and Taiwan's Taiex Index each
+fell about 4%. Indeed, positioning in AI
+stocks has been unwinding painfully. SK
+Hynix best illustrates the reversal. Its
+shares have collapsed nearly 50% from a
+June 26 record high.
+So, just want to remind people about the
+asymmetry of percentage change math. I
+And And as a matter of fact, let me
+finish the executive summary then I'll
+get back to that.
+Nvidia's default protection costs posted
+their largest one-day jump on record
+Monday. Nvidia's five-year protection
+climbed as much as 14 basis points and
+82 basis points annually per ICE Data
+Services. As we highlighted in our July
+25th Around the Horn, fixed income
+markets are pricing in financing risks
+that equities have not fully discounted.
+AI has an ever-growing circular
+financing problem. While circular
+financing does not automatically equate
+to bad outcomes in the future, it does
+increase the risk of a spectacular
+blowup
+should the AI infrastructure buildout
+encounter any substantial delays or
+disappointing AI adoption among
+enterprises
+or if disappointing AI adoption among
+enterprises perpetuate sharp negative
+revisions to RIC expectations. And we
+know that the token expenditure index is
+down about 50% from its highs or 30%
+from its highs, so that's an issue.
+Anyway, Nvidia is at the epicenter of AI
+circular financing risk. Nvidia valued
+its initiative with SK Hynix
+parent above $500
+late last week. Additionally, Nvidia is
+negotiating a guarantee of up to 250
+billion to fund Open AI's compute leases
+at a US data center project among its
+largest customer financings.
+Additionally, Nvidia is discussing 350
+billion in financing uh for Open AI
+semiconductor purchases tied to the US
+project per person familiar with the
+matter. And finally, CapEx guidance from
+Meta Platforms and Microsoft on
+Wednesday tomorrow and Amazon on
+Thursday of this week will dictate
+direction. FYI, the Silicon data LLM
+token price index has crashed 30% from
+its all-time high in late May.
+Meanwhile, the Goldman Sachs hypers US
+hyperscale CDX credit default swaps
+index has increased by over 50% to 173
+basis points since its trough in early
+June. Meanwhile, equal weight S&P 500
+data record on Monday's cash session as
+investors rotated into alternatives. We
+continue to believe the first leg of the
+summer 1998 correction thesis is out of
+AI stocks and into alternatives.
+The next leg is likely down for the
+broader stock market, particularly if
+the Fed opts to play action pass, i.e.
+tighten cyclically to set up the run,
+which would be to ease structurally upon
+the advent of the task force findings
+out later this year or early next year.
+So, we shall see with the Fed FOMC
+tomorrow afternoon as well. And so, just
+going back into this before we wrap up,
+I just want to highlight you know, the
+asymmetry of percentage change math. You
+know, I have no idea how much SK Hynix
+is up year-to-date, but let's just say
+it was up, you know, 100% it doubled in
+the year-to-date or doubled in this
+risk-on reflation market regime, which
+began back in early April according to
+our market regime nowcasting process.
+So, let's say it doubled and then now
+it's down by 50%.
+So, if a stock, let's just do I'm using
+round numbers here to make it simple. If
+a stock goes from $100 to $200, i.e. it
+doubles, and it loses 50%, guess how
+much money you have?
+It's $100.
+But,
+your average return
+is higher than 0%.
+And so,
+>> [laughter]
+>> this is this is a asymmetry here that I
+don't think the the the median investor
+is aware of in terms of the risk
+management of it all in terms of, you
+know, trying to minimize downside
+capture in bear markets. You can always
+lose 100% of your money, but you're
+capped out at losing 100% of your money.
+But, you you obviously the percentage
+change math to the upside is is is is
+infinite. Um and so, you can have these
+what what look to be very positive, you
+know, kind of average returns that don't
+necessarily turn out to be
+positive uh for investors. And so, this
+is why, uh just kind of wrapping up, one
+of my, you know, favorite analyses that
+I've ever performed in my entire life
+because it it succinctly explains what
+is a very advanced, you know, concept in
+in institutional finance called
+volatility drag. And so, this this chart
+this slide shows, you know, two
+investment strategies, the blue versus
+the red, uh that both feature identical
+50% average annual returns. Yet, at the
+end of year three, portfolio A has about
+uh let's call it 40% more cash uh than
+uh portfolio uh I mean, no more than
+40%. It's, you know, 60% more cash uh
+than um you know, than portfolio uh B.
+And so, the difference is is that
+portfolio B steps in a giant pothole in
+year one, and even though it's a buy and
+hold strategy that, you know, has this
+big massive return in years two and
+three that greatly exceed the, you know,
+slow and steady compounding of uh
+portfolio strategy A, the blue bars, you
+still wind up with significantly more
+money uh in uh year three. So, again,
+portfolio strategy A and 50% year after
+year after year, you know, chopping off
+the right tail or the you know, you're
+sacrificing some of the upside from a
+trend following standpoint to minimize
+most of the downside. You know, that's
+essentially what Kiss and Dr. Mo are
+designed to do versus with the red line
+would be, okay, I'm down 50% and then
+I'm up 100% you know, after that, you
+know, this is where all the crypto guys
+will be high-fiving each other despite
+the fact they have less money than those
+of us who are managing risk after year
+three. And so this is this is why the
+hedge fund industry exists. This is why
+42 macro exists. This chart here
+explains volatility drag in a very
+succinct manner and it goes back to what
+we're saying about the asymmetry of
+percentage change math. You know, you
+know, just being down nearly 50% you
+know, doesn't feel very bad from a stock
+that let's call it doubled in in a short
+period of time, but guess what? The the
+asymmetry of the percentage change math
+doesn't change the fact that you might
+have $0 of gains after it being down 50%
+despite it doubling prior to that. So
+this one of very I really want to hammer
+this point home because
+as you guys know, we still think the
+probability of of of descending into a
+cyclical bear market at the end of the
+capex bubbles is is the overwhelming
+high probability outcome. It may be on
+its way underway. I don't think it's
+underway, but but it may be underway
+now. So just be aware of that. We'll
+wrap it up there. Jerry still here
+presenting our macro minute for Tuesday,
+July 28th, 2026. Best of luck out there
+today. We'll catch back here tomorrow.
+Cheers.

@@ -1,0 +1,146 @@
+{
+  "author_validation_is_acceptance": false,
+  "canonical_integration": "NOT_AUTHORIZED",
+  "checks": [
+    {
+      "check_id": "V5-IMMUTABLE-INPUTS",
+      "detail": "59 source/review manifest entries are byte-verified before and after build",
+      "status": "PASS"
+    },
+    {
+      "check_id": "V5-PRESERVED-CONTROLS",
+      "detail": "17 timeline repairs, 16 conceptual hypotheses, 20 arithmetic controls, 18 coefficient prohibitions, and 58 external holds are preserved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "V5-CLAIM-EXTRACT-POPULATION",
+      "detail": "58 claim/evidence/extract identities remain one-to-one; claim 0036 is cessation-bounded",
+      "status": "PASS"
+    },
+    {
+      "check_id": "V5-COMPLETE-JUNCTION",
+      "detail": "128 retained records resolve through 214 valid links and 86 compatibility links",
+      "status": "PASS"
+    },
+    {
+      "check_id": "V5-SEMANTIC-AUDITS",
+      "detail": "chronology, claimant, mechanism, and 128-record junction audits all author-pass",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0001",
+      "detail": "Global Crossing cash distribution is unasserted and the row is claim-0048 bounded",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0002",
+      "detail": "WorldCom claimant and recovery scope is limited to claim 0049",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0003",
+      "detail": "chronology 0005 makes no unsupported physical-continuity claim",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0004",
+      "detail": "chronology 0007 labels physical state unestablished",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0005",
+      "detail": "Calpine warrant-exercise and fleet-continuity propositions have bounded support",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0006",
+      "detail": "chronology 0011 makes no unsupported physical-asset assertion",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0007",
+      "detail": "solar chronology leaves claimant identity unresolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0008",
+      "detail": "Hanjin chronology leaves claimant identity unresolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0009",
+      "detail": "Micron chronology does not invent cash timing or restructuring",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0010",
+      "detail": "Micron 2002 chronology does not invent restructuring",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0011",
+      "detail": "Chartered chronology stops at Fab 1 cessation",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0012",
+      "detail": "Conrail claimant field names only the supported funding party",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0013",
+      "detail": "WorldCom lease counterparties are removed from observed claimants",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0014",
+      "detail": "Hanjin issuer and sector populations remain strictly separated",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0015",
+      "detail": "solar mechanism retains cancellation only and leaves attribution unresolved",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0016",
+      "detail": "Chartered mechanism is cessation-only with strict claim-0058 support",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0017",
+      "detail": "NVIDIA mechanism stops at reporting-entity working-capital benefit",
+      "status": "PASS"
+    },
+    {
+      "check_id": "FAR18-XP-0018",
+      "detail": "all 18 prior repairs and both v5 repairs are accounted while canonical, coefficient, predictive, and publication boundaries remain sealed",
+      "status": "PASS"
+    },
+    {
+      "check_id": "V5-TWO-REPAIR-PROPAGATION",
+      "detail": "Micron 2002 identity and same-episode solar principal with explicit Grade-C cross-episode support propagate through every required surface",
+      "status": "PASS"
+    },
+    {
+      "check_id": "V5-NO-QUANTITATIVE-TRANSFER",
+      "detail": "averages, rates, scores, coefficients, probabilities, and monitoring transfer remain blocked",
+      "status": "PASS"
+    },
+    {
+      "check_id": "V5-CANONICAL-NO-WRITE",
+      "detail": "canonical database hash is unchanged",
+      "status": "PASS"
+    }
+  ],
+  "checks_failed": 0,
+  "checks_passed": 26,
+  "coefficient_transfer": "BLOCK",
+  "comparative_publication": "BLOCKED_PENDING_FRESH_REVIEW_AND_EXTERNAL_HOLDS",
+  "descriptive_verdict": "PENDING_FRESH_NONAUTHOR_REVIEW",
+  "fresh_nonauthor_review": "REQUIRED",
+  "intrinsic_verdict": "READY_FOR_FRESH_NONAUTHOR_REVIEW",
+  "passed": true,
+  "predictive_use": "BLOCK",
+  "status": "READY_FOR_FRESH_NONAUTHOR_REVIEW_WITH_EXTERNAL_HOLDS"
+}

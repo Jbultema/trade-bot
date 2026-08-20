@@ -1,0 +1,33 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 107828,
+  "content_sha256": "7c40df45d2d99e3fbec713145ac01b461acb3b322b176bb4059acd035fe37859",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000045/a41commonstockwarrantagree.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_amd_warrants/SRC-0021_7c40df45d2d99e3f.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/2488/000000248826000045/a41commonstockwarrantagree.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-02-23",
+  "publisher": "Advanced Micro Devices Inc.",
+  "redirect_history": [],
+  "request_user_agent": "trade-bot-forensic-research/1.0 bultemj research preservation",
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_amd_warrants/SRC-0021_7c40df45d2d99e3f.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:23:21.896002+00:00",
+  "retrieval_started_utc": "2026-07-27T01:23:21.861321+00:00",
+  "selected_response_headers": {
+    "content-length": "17127",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:23:21 GMT",
+    "last-modified": "Tue, 24 Feb 2026 12:01:38 GMT"
+  },
+  "source_id": "SRC-0021",
+  "status": "preserved_complete",
+  "title": "Meta warrant to purchase AMD common stock",
+  "tls_verification": "verified",
+  "write_state": "new_version_written"
+}

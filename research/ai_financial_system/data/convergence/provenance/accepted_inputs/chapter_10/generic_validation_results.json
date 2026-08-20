@@ -1,0 +1,21 @@
+{
+  "command": "python research/ai_financial_system/scripts/validate_staging_packet.py research/ai_financial_system/staging/lane_2_chapter_10_rebuilt_v3 --json",
+  "phase": "pre_final_manifest_inventory_generic_validation",
+  "result": {
+    "checks": [
+      "manifest paths, hashes, row counts, and line counts",
+      "CSV shape and provisional-ID uniqueness",
+      "canonical source-ID and URL consistency",
+      "staged source-claim referential integrity"
+    ],
+    "csv_rows_checked": 6427,
+    "errors": [],
+    "files_checked": 214,
+    "lane": "lane_2_chapter_10_rebuilt_v3",
+    "passed": true,
+    "warnings": []
+  },
+  "returncode": 0,
+  "status": "PASS",
+  "stderr": ""
+}

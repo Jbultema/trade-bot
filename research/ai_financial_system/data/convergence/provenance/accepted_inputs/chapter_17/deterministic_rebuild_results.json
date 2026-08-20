@@ -1,0 +1,11 @@
+{
+  "byte_identical": true,
+  "canonical_integration": "NOT_AUTHORIZED",
+  "clean_builds_compared": 2,
+  "core_build_mode": true,
+  "logical_lane": "lane_3_chapter_17_atomic_rebase",
+  "manifest_included_in_comparison": true,
+  "manifested_artifacts_compared": 50,
+  "shared_core_manifest_sha256": "5106b1ab3abc76fc2b92e9d56a5beebc19efc03ebecbf851737376f6121f3856",
+  "status": "PASS"
+}

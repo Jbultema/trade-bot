@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1485906,
+  "content_sha256": "5e00b0782a54287826cdb05c18407178fd1888256770069168c1f4aa76f8e94d",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028526/meta-20260331.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0011_5e00b0782a542878.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1326801/000162828026028526/meta-20260331.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-04-30",
+  "publisher": "Meta Platforms Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0011_5e00b0782a542878.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:50:46.017868+00:00",
+  "retrieval_started_utc": "2026-07-26T17:50:45.988737+00:00",
+  "selected_response_headers": {
+    "content-length": "153904",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:50:46 GMT",
+    "last-modified": "Thu, 30 Apr 2026 10:10:09 GMT"
+  },
+  "source_id": "SRC-0011",
+  "status": "preserved_complete",
+  "title": "Meta Platforms Form 10-Q for quarter ended March 31 2026",
+  "write_state": "new_version_written"
+}

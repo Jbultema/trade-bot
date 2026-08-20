@@ -1,0 +1,2687 @@
+[[PDF_PAGE_0001]]
+GAO
+1 May l!NO
+I
+1
+RAILROAD
+i REGULATION
+Economic and
+Financial Impacts of
+the Staggers Rail Act
+of 1980
+-
+Ill I
+s
+141435
+
+[[PDF_PAGE_0002]]
+Resources, Community, and
+Economic Development Division
+B-2241 13
+May 16,199O
+The Honorable Ernest F. Hollings
+Chairman, Committee on Commerce,
+Science, and Transportation
+United States Senate
+The Honorable John C. Danforth
+Ranking Minority Member,
+Committee on Commerce,
+Science, and Transportation
+United States Senate
+In response to your request and subsequent agreements with your offices, this report
+presents our analysis of the Staggers Rail Act of 1980. The report details the economic and
+financial impacts of the Staggers Rail Act on railroads and shippers, analyzes the financial
+performance of the railroad industry, and compares railroads’ financial performance with
+that of other transportation modes.
+As arranged with your offices, unless you publicly announce its contents earlier, we plan no
+further distribution of this report until 30 days from the date of this letter. At that time, we
+will send copies to the appropriate congressional committees, the Chairman of the Interstate
+Commerce Commission, and the Secretary of Transportation. We will also makes copies
+available to others upon request.
+This work was performed under the direction of Kenneth M. Mead, Director, Transportation
+Issues, (202) 276-1000. Major contributors are listed in appendix III.
+: J J. Dexter Peach
+Assistant Comptroller General
+
+[[PDF_PAGE_0003]]
+Executive Summary
+Purpose The Congress passed the Staggers Rail Act of 1980 to improve the finan-
+cial health of the nation’s railroads, While reducing regulation of the
+railroad industry, the act continued Interstate Commerce Commission
+(ICC) regulation in areas where competition was absent.
+At the request of the Senate Committee on Commerce, Science, and
+Transportation, GAO identified how the Staggers Rail Act has affected
+railroads and shippers, determined whether the railroads’ financial per-
+formance has improved since the act’s passage, and compared the rail-
+roads’ financial performance with that of other transportation modes.
+Background During the 197Os, the profitability of Class I railroads-the nation’s
+largest railroads-was among the lowest of major industries. A number
+of railroads had gone, or were on the verge of going, bankrupt, and rail-
+roads had accumulated over $4 billion in deferred maintenance and
+delayed capital spending. The constraints of regulation, development of
+competing transportation modes that enjoyed subsidized rights-of-way
+(such as trucks and barges), changes in the industries that use railroads,
+and inefficient labor practices all contributed to the railroads’ decline.
+Before 1980, almost all rail rates were regulated and published in public
+tariffs (a schedule of rates, practices, and services). In contrast, the
+Staggers Rail Act made it federal policy to rely on competition and the
+demand for rail services, rather than on regulation, to establish reasona-
+ble rates. In addition, the act (1) allowed railroads to enter into confi-
+dential contracts for their services with shippers, (2) permitted
+railroads to cancel joint rates- single rates for the movement of goods
+over two or more railroads-that did not earn certain minimum revenue
+levels, and (3) set time limits on the line abandonment process, ICC was
+to regulate how high rail rates could be when effective competition was
+absent.
+Results in Brief Overall, the Staggers Rail Act has helped improve Class I railroads’
+financial health and rehabilitate rail facilities-the legislation’s two pri-
+mary purposes. For example, profitability increased during the 1980s
+compared with the 1970s and increased capital spending on track and
+structures, in combination with declines in accidents caused by track
+defects during the 1980s suggests improvement in the condition of rail
+facilities. In addition, the shipping industry has gained from lower rail
+rates and improved service. However, not all shippers have benefited
+because rates have not changed to the same degree for all commodities.
+Page 2 GAO/RCED-99439 Impacts of the Staggers Rail Act of 1990
+
+[[PDF_PAGE_0004]]
+,
+Executive Summary
+Moreover, some shippers have complained about ICC’s relief procedures
+and questioned whether ICC has adequately protected their interests. In
+response to shippers’ concerns, ICC has adopted new policies and proce-
+dures since 1985.
+By most measures, Class I railroads’ financial health has improved since
+1980. Profitability, as measured by return on investment, averaged 4.9
+percent during the 198Os, compared with 2.6 percent during the 1970s.
+In addition, debt has generally declined from about 36 percent of capital
+in 1980 to about 24 percent in 1988, and the ability to pay long-term
+obligations has improved. Cost reductions and increased efficiency con-
+tributed to improved financial health. However, the railroad industry is
+still not in robust health. Financial improvements have not been shared
+industrywide, and most railroads have not achieved revenue ade-
+quacy-that is, their return on investment has not equaled or exceeded
+the current cost of capital.
+The railroad industry continues to lag behind other transportation
+modes in profitability. GAO compared railroads’ financial performance
+with that of the trucking and natural gas pipeline industries-the two
+transportation industries for which sufficient financial information was
+available for analysis. Both the trucks and gas pipelines selected pro-
+vided transportation services for others. Between 1980 and 1988,
+returns on investment for the trucking and gas pipeline industries
+ranged between 8.0 and 17.0 percent, while the railroad industry’s
+returns ranged from 3.5 to 5.9 percent. Two factors contributed to these
+results: railroads must build and maintain their own rights-of-way,
+while trucks do not, and railroads have higher cost structures than gas
+pipelines.
+GAO's Analysis
+Impact of the Staggers Rail 1 By exercising the new flexibilities the Staggers Rail Act provided-in
+Act particular, greater rate-setting and contracting freedoms-the railroads
+have become more competitive. Cost reduction measures-including
+abandonments, sales of unprofitable lines, and productivity improve-
+ments, all at least partially attributable to the act-also played a role.
+Improved competitiveness has allowed the railroads to stem the decline
+in their share of the intercity freight transportation market.
+Page 3 GAO/RCED-90-90 Impacta of the Staggers Rail Act of 1930
+
+[[PDF_PAGE_0005]]
+Executive Summary
+c
+Shippers have benefited from reduced railroad regulation. Since 1980,
+rail rates, adjusted for inflation, have declined an average of about 22
+percent. In addition, service has improved: train reliability has increased
+and freight car shortages, which might interrupt a shipper’s business,
+have declined. Shipper trade associations GAO contacted said that, in
+general, the Staggers Rail Act had improved shippers’ competitiveness
+and, in particular, opened new markets for some of their members.
+The transition to a more market-oriented system under regulatory
+reform was not expected to affect all shippers the same. In keeping with
+this expectation, GAO found that rates have not changed to the same
+degree for all shippers and that, because of line abandonments and joint
+rate cancellations, some shippers have experienced increased costs or
+reduced rail service.
+Some shippers have expressed dissatisfaction with ICC’S relief proce-
+dures and questioned whether ICC has adequately protected their inter-
+ests. For example, all five of the shipper trade associations GAO
+contacted criticized ICC’S relief procedures as being burdensome, time-
+consuming, and expensive. Four of the five trade associations also told
+GAO that ICC’S implementation of the act’s provisions designed to protect
+captive shippers-shippers that must use rail to transport their goods-
+or promote railroad competition have been the most detrimental aspect
+of the change in railroad regulation. GAO found that since 1985, in
+response to shippers’ concerns, ICC has adopted new policies and proce-
+dures for mediating rates and other disputes.
+Railroads’ Financial
+Performance Since 1980
+By most measures, the railroads’ financial condition has improved since
+enactment of the Staggers Rail Act. By reducing costs and increasing
+efficiency, the nation’s largest railroads have increased their profitabil-
+ity, improved their ability to pay long-term obligations, and reduced
+their debt levels. Their short-term solvency generally improved through
+1984, but then began to decline because of changes in tax laws and
+reduced cash flow. Since 1980, railroads’ return on investment has aver-
+aged about 4.9 percent, up from the 2.5-percent average during the
+1970s. Debt has generally declined from about 36 percent of total capital
+in 1980 to about 24 percent in 1988.
+These financial gains have been concentrated among the five largest
+Class I railroads. Since 1980, the average annual return on investment
+for the other 11 Class I railroads has been about 2 percentage points less
+Page 4 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0006]]
+Jbcutlve Summary
+than that of the larger railroads -3.5 percent compared with 5.7 per-
+cent-although 2 of these 11 railroads improved their returns. In addi-
+tion, while ICC has deemed some individual railroads to be revenue
+adequate, the railroad industry as a whole has not achieved revenue
+adequacy-that is, its return on investment has not equaled or exceeded
+the current cost of capital.
+Railroads’ Performance
+Compared With That of
+Other Transportation
+Modes
+GAO compared the financial performance of railroads over the 1980-88
+period with the financial performance of the trucking and natural gas
+pipeline industries-the two transportation industries for which suffi-
+cient financial information was available for analysis. Both the trucks
+and gas pipelines selected provided transportation services to others.
+Railroads lagged behind both trucks and natural gas pipelines in profit-
+ability. Returns on investment for trucks and natural gas pipelines
+ranged between 8.0 and 17.0 percent, whereas railroads’ returns ranged
+from 3.5 to 5.9 percent. Railroads must build and maintain their own
+rights-of-way, while trucks do not, and railroads have higher cost struc-
+tures than gas pipelines. Both factors contributed to the railroads’
+inability to match the financial performance of these other transporta-
+tion modes. In addition, GAO found that since the 1981-82 recession rail-
+roads have improved their average annual return on investment by only
+about 3 percent, compared with 16- and 6-percent improvements for
+trucks and gas pipelines, respectively.
+Recommendations This report makes no recommendations.
+Agency Comments GAO met with ICC to discuss the contents of this report. ICC generally
+agreed with both GAO'S findings and conclusions. However, as requested,
+GAO did not obtain official agency comments on a draft of this report.
+Page 6 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0007]]
+Contents
+Executive Summary 2
+Chapter 1 Introduction Railroads’ Status Before 1980
+Causes of Railroads’ Problems
+Reduction in Railroad Regulation
+Objectives, Scope, and Methodology
+10
+11
+13
+16
+Chapter 2
+Railroads Are More Competition Among Transportation Modes Increased in
+Competitive and Have the 1980s
+Stabilized Their The Staggers Rail Act Enabled Railroads to Become More
+Competitive
+22
+Market Share Railroads Have Had to Cut Costs 24
+Railroads Have Improved Their Facilities 29
+Railroads Have Stemmed Their Decline in Market Share 30
+Conclusions 33
+Chapter 3 34
+Railroads’ Financial Industry Financial Health Has Improved 34
+Health Has Improved, Improved Financial Health Has Not Been Shared 41
+but Most Railroads Industrywide
+Most Railroads Are Not Revenue Adequate 41
+Are Not Revenue Railroads Lag Behind Other Transportation Industries in 44
+Adequate Financial Performance
+Conclusions 50
+Chapter 4 52
+Most-Though Not Shippers Have Benefited From Better Rates and Service 52
+All-Shippers Have Reduced Railroad Regulation Has Affected Shippers 66
+Benefited From Differently
+Shippers Have Voiced Concern Over ICC’s 60
+Reduced Railroad Implementation of the Staggers Rail Act
+Regulation Conclusions 63
+Y
+Page 6 GAO/lZCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0008]]
+Contents
+Appendixes Appendix I: 1988 Profile of Class I Railroads Included in
+GAO’s Study
+66
+Appendix II: List of Trade Associations Contacted by
+GAO
+67
+Appendix III: Major Contributors to This Report 68
+Related GAO Products 69
+Tables Table 2.1: Average Annual Growth Rates of Intercity
+Freight Tonnage
+Table 2.2: Tonnages and Market Shares of Selected
+Transportation Modes
+Table 3.1: Revenue Adequacy of Class I Railroads
+Table 3.2: Comparison of 1988 Returns for Railroads and
+Other U.S. Businesses
+Table 4.1: Average Real Rail Rate Changes
+Table 4.2: Freight Car Shortages as a Percentage of the
+Railroad Freight Car Fleet
+Figures Figure 2.1: Class I Railroad Employment (Without
+Amtrak)
+Figure 2.2: Class I Railroad Productivity
+Figure 2.3: Market Shares of Selected Transportation
+Modes
+Figure 3.1: Return on Investment for Class I Railroads
+Figure 3.2: Return on Equity for Class I Railroads
+Figure 3.3: Operating Ratio for Class I Railroads
+Figure 3.4: Current Ratio for Class I Railroads
+Figure 3.6: Fixed Charge Coverage Ratio for Class I
+Railroads
+Figure 3.6: Long-Term Debt as a Percentage of Total
+Capital for Class I Railroads
+Figure 3.7: Returns on Investment for Railroads, Trucks,
+and Gas Pipelines
+Figure 3.8: Returns on Equity for Railroads, Trucks, and
+Gas Pipelines
+Figure 3.9: Current Ratios for Railroads, Trucks, and Gas
+Pipelines
+Figure 3.10: Fixed Charge Coverage Ratios for Railroads,
+Trucks, and Gas Pipelines
+22
+31
+42
+47
+53
+65
+27
+28
+32
+36
+37
+38
+39
+40
+45
+46
+48
+49
+Page 7 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0009]]
+Contenta
+Figure 4.1: Index of Wheat Price Spreads in the Plains
+States
+68
+Abbreviations
+AAR
+COFC
+DOD
+DOT
+FRA
+GAO
+GNP
+ICC
+TDFC
+Association of American Railroads
+container-on-flatcar
+Department of Defense
+Department of Transportation
+Federal Railroad Administration
+General Accounting Office
+gross national product
+Interstate Commerce Commission
+trailer-on-flatcar
+Page8 * GAO/RCJCD-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0010]]
+Page 9 GAO/RCJZD-90430 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0011]]
+Chapter 1
+htroduction
+Railroads are a principal mode of transportation for many bulk com-
+modities, such as coal and grains. In 1988, railroads carried about 37
+percent of all intercity freight revenue ton-miles-more than any other
+transportation mode.1 However, between the 1930s and the 1970s the
+long-term viability of the railroad industry was in serious jeopardy
+because its financial health was in decline. Return on invested capital
+was among the lowest of major industries. Earnings were insufficient for
+necessary capital improvements, and plant and equipment had deterio-
+rated because of deferred maintenance. The causes of these problems
+were many, including regulatory constraints that hindered manage-
+ment’s ability to change rates and reduce costs, changes in industries
+that traditionally depended on railroads for transportation, the develop-
+ment of competing transportation modes, and poor labor productivity.
+In 1976 and 1980, the Congress passed legislation to reform railroad reg-
+ulation. The 1976 legislation encouraged railroad competition and
+allowed railroads greater freedom to change rates. The 1980 legislation
+also encouraged railroad competition and made it government policy to
+have railroads rely more on competition and the demand for services,
+rather than on regulation, to establish reasonable railroad rates. How-
+ever, the Interstate Commerce Commission (ICC) continued to play a role
+in protecting shippers and the public against unreasonable rail rates and
+practices.
+Railroads’ Status
+Before 1980
+The financial status of the railroad industry before 1980 was poor and
+seemingly getting worse. The railroads’ share of intercity freight traffic
+declined from about 76 percent in 1929 to about 38 percent in 1980.
+Furthermore, during the 1970s the profitability of Class I railroads-the
+nation’s largest railroads -was among the lowest of major industries.
+According to the Association of American Railroads (AAR), a railroad
+trade association, railroads’ 1975 rate of return on net investment-the
+relationship of net railway operating income to average net investment
+in transportation property-was only 1.2 percent, and return on share-
+holders’ equity was only about 1.9 percent. From 1976 to 1979, we
+found that return on equity averaged only about 2.6 percent. By con-
+trast, manufacturing companies and utilities earned rates of return of
+‘Railroad Facts, Association of American Railroads, 1989 Edition. A revenue ton-mile is 1 ton car&d
+1 mile for which a fee is charged. Except where noted otherwise, in this report “railroads” refers to
+Class I railroads. ICC uses three classifications of railroads baaed on annual operating revenues.
+Page 10 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0012]]
+Chapter 1
+Introduction
+about 16 and 1‘2 percent, respectively” In 1976, according to the Depart-
+ment of Transportation (nor), railroads that were earning returns on
+investment of more than 6 percent accounted for only about 30 percent
+of the industry’s revenues.3 The railroad industry also faced cash flow
+difficulties, marginal credit ratings, and concern within the financial
+community about its long-term viability.
+Many railroads had gone, or were on the verge of going, bankrupt. In a
+1978 report to the Congress on the status of the railroad industry, DOT
+indicated that in 1976 about one-third of Class I railroads (11 of 36)
+were earning a negative return on investment and that at least three
+companies-Boston and Maine; Chicago, Rock Island, and Pacific; and
+Chicago, Milwaukee, St. Paul, and Pacific-were in bankruptcy reorgan-
+ization.4 In addition, several northeast railroads, which eventually
+became the Consolidated Rail Corporation (Conrail), had entered bank-
+ruptcy in the early 1970s. Because shipments of goods frequently travel
+over more than one railroad, railroad failures have the potential to
+affect the financial condition and performance of other railroads.
+Not only were railroads going bankrupt, but the condition of rail plant
+and equipment was poor. Years of declining profits led to deferred main-
+tenance of rights-of-way, and over time plant and equipment deterio-
+rated. Prolonged deferrals in maintaining and replacing worn-out capital
+stock affected safety and the quality of rail service. According to the
+1978 DOT report, by June 1976 the nation’s Class I railroads had accumu-
+lated over $4 billion in deferred maintenance and delayed capital
+expenditures. The Federal Railroad Administration estimated that if
+poor financial performance continued, the industry would accumulate a
+capital shortfall of between $13 billion and $16 billion by 1985.
+Causes of Railroads’
+Problems
+Regulation, demographic and economic changes, the development of
+competing transportation modes, and poor labor productivity were some
+of the reasons for the railroads’ deteriorating financial health. Regula-
+tion reduced the managerial control and flexibility the railroads needed
+2These returns may not be directly comparable because before 1983 the railroad industry used the
+retirement-replacement-betterment accounting system for reporting on rail track and structures. In
+1983, ICC adopted the depreciation basis of accounting for these items.
+“A Prospectus for Change in the Freight Railroad Industry, DOT (Oct. 10, 1978).
+4Reorganization permits a bankrupt railroad to prepare a plan for court acceptance showing, among
+other things, all payments to be made; assets to be sold; and the extent to which, as well as the means
+by which, the railroad will continue service.
+Page 11 GAO/RCED-90-90 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0013]]
+Chapter 1
+Introduction
+to react to changing market conditions. Rate changes-whether
+increases or decreases-were sometimes subject to lengthy ICC review
+and possible suspension.” Rate bureaus were often used to set rates,” a
+practice that inhibited individual railroads from setting rates in a timely
+manner and in response to marketplace demands. Furthermore, from
+1962 until 1978 ICC policy prevented the railroads from negotiating con-
+tract rates with shippers. This restriction limited the ability of railroads
+to effectively market their services through tailor-made rates and ser-
+vices. Railroads tried to reduce costs by abandoning unprofitable lines.
+However, ICC’S abandonment procedures were often lengthy; it was not
+unusual for an abandonment proceeding to last several years, In addi-
+tion, before 1976 ICC routinely suspended the cancellation of joint
+rates-single rates applicable to the movement of goods over two or
+more railroads-and reciprocal switching agreements,7 thereby inhib-
+iting the elimination of uneconomic rates and routes.
+Demographic changes, a growing reliance on imports, and a move
+towards smaller, lighter, and lower-cost products also affected the rail-
+road industry. Shifts in population and manufacturing activities from
+the northeast and north-central sections of the United States to the west
+and south, as well as shifts in population from rural to urban areas, hurt
+the railroads by making portions of the rail network obsolete and alter-
+ing the balance of commodity flows between areas of the country, In
+addition, population shifts from central cities to suburban areas, where
+greater reliance is placed on highway access, hurt the railroad industry.
+Firms no longer wanted to locate on rail rights-of-way but near high-
+ways. The growth of imports and the move towards smaller, lighter
+products whose values by weight are relatively high also reduced the
+demand for rail transportation services. While domestic production and
+consumption may require several shipments by rail, imports generally
+require transportation only from a port to a point of sale. Likewise,
+smaller, lighter products require less transportation of raw materials
+and finished goods.
+The development of the interstate highways and inland waterway sys-
+tems helped the trucking and barge industries grow. Both industries
+“Suspension prevents a tariff action from taking effect pending the results of an investigation. A
+tariff is a schedule of rates, practices, and services.
+“Rate bureaus allowed railroads, under an ICC-approved grant of antitrust immunity, to collectively
+discuss and, among other things, set railroad rates.
+7Reciprocal switching agreements allow railroads, for an agreed-upon charge, to interchange cars
+originating or terminating on their track.
+Page 12 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0014]]
+Chapter 1
+Introduction
+have also benefited from less regulation than railroads. The Transporta-
+tion Association of America estimated that in 1975 all railroad activities
+were regulated, compared with only about 44 percent of truck activities
+and 15.5 percent of inland waterway activities. Furthermore, the cost
+structures of these industries give them a competitive advantage over
+railroads. In particular, while railroads build and maintain their own
+rights-of-way with minimum federal aid, highways and waterways are
+built and maintained by federal and state governments. Before 1978,
+waterways operators paid none of the costs of using the inland water-
+way system.R While trucks contribute to building and maintaining high-
+ways through license fees and taxes, nor has reported that large trucks
+may pay less than their full share of costs.
+Finally, poor labor productivity also played a role in the problems rail-
+roads faced. In the 1970s labor costs constituted more than 50 percent
+of total railroad operating expenses. However, during the 1970s labor
+productivity was often governed by such factors as narrow craft and
+class divisions among unions, work rules that based compensation on
+the distance traveled, and restrictions on the tasks various types of
+employees could perform. These factors detracted from efficient deploy-
+ment of the work force, increased costs, and prevented more efficient
+operations. Safety and job security concerns, however, led organized
+labor to oppose changes in these practices.
+Reduction in Railroad In 1976, the Congress sought to eliminate needless or harmful regulation
+Regulation of railroads by enacting the Railroad Revitalization and Regulatory
+Reform Act (4R Act). Its purpose was to restore the financial stability of
+the rail system and to improve the operation and structure of the rail-
+road industry through rate-making and regulatory reform. In particular,
+the 4R Act encouraged greater railroad competition, allowed railroads
+greater freedom to change rates, and, in general, reduced ICC’S regulation
+of the industry.
+Before 1976, ICC regulated almost all rail rates. The 4R Act allowed ICC
+to regulate rates only where there was an absence of effective competi-
+tion (called “market dominance”).Y The 4R Act also required ICC to
+exempt any person or class of persons, or any services or transactions of
+“In 1978, legislation was passed imposing a tax of 4 cents per gallon on fuel used by inland water-
+ways carriers.
+“This applied to rates equal to, or exceeding, variable costs (called “going concern value”), which
+were presumed to be reasonable.
+Page 13 GAO/RCED-9080 Impacts of the Staggers Raii Act of 1980
+
+[[PDF_PAGE_0015]]
+Chapter 1
+Introduction
+railroads from regulation where such regulation was not necessary to
+implement the national transportation policy, represented an undue bur-
+den, and served little or no useful public purpose. Finally, ICC was
+required to develop standards for determining whether railroads were
+earning revenues adequate to cover their operating costs and provide a
+reasonable return on capital (called “revenue adequacy”). The 4R Act
+did not directly link the determination of revenue adequacy to the rate-
+making process, but rather encouraged ICC to assist railroads in attaining
+adequate revenues.
+Despite the reforms of the 4R Act, the Congress found in 1980 that rail-
+road industry earnings were still insufficient to generate the funds nec-
+essary for capital improvements, Consequently, it enacted the Staggers
+Rail Act, which further deregulated the railroad industry and made it
+federal policy to have railroads rely, where possible, on competition and
+the demand for services (called “differential pricing”), rather than on
+regulation, to establish reasonable rates.
+The Staggers Rail Act maintained ICC regulation over how high rail rates
+could be when effective competition was absent or inadequate. While
+the 4R Act restricted ICC’S review of how high rail rates could be to situ-
+ations in which a railroad was market dominant, the Staggers Rail Act
+tied market dominance to rail rates exceeding a specified threshold.*”
+The Staggers Rail Act also elevated the importance of revenue ade-
+quacy. Whereas the 4R Act required ICC to develop revenue adequacy
+standards, the Staggers Rail Act required ICC to use these standards to
+determine annually which railroads were earning adequate revenues.
+The Staggers Rail Act also required ICC to consider revenue adequacy
+when it reviewed the reasonableness of rates. Finally, the Staggers Rail
+Act maintained ICC’s authority to exempt portions of the industry from
+regulation.
+The Staggers Rail Act went beyond the changes contained in the 4R Act.
+It restricted the role of rate bureaus by limiting collective rate-setting to
+only those railroads actually participating in the joint movement of
+goods, It permitted railroads to automatically change their rates, with-
+out challenge, in accordance with a rail cost adjustment factor-an
+inflation-adjusted index of rail costs. Furthermore, revenue-inadequate
+“‘The Staggers Rail Act specified revenue-to-variable-cost thresholds for establishing ICC jurisdiction
+over maximum rail rates. Variable costs are costs that change according to the quantities shipped.
+The current threshold is 180 percent.
+Page 14 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0016]]
+Chapter 1
+Introduction
+railroads could increase their rates-including rates on market-domi-
+nant traffic-an additional 4 percent each year over the rail cost adjust-
+ment factor. ICC could not suspend zone-of-rate-flexibility increases, but
+such increases could be protested by shippers and investigated by ICC.
+Revenue-inadequate railroads could also add surcharges to light-density
+rail lines-lines carrying small amounts of traffic.
+To allow railroads to more effectively market their services, the Stag-
+gers Rail Act permitted railroads to negotiate shipper contracts with
+confidential terms and conditions. The railroads were to file such con-
+tracts with ICC. The Commission was required to approve them unless
+they unreasonably discriminated against certain agricultural shippers or
+particular ports, or unduly impaired a railroad’s ability to perform its
+common carrier responsibilities. l1 Once ICC approved a contract, only
+courts had jurisdiction to hear breach-of-contract disputes.
+The Staggers Rail Act imposed time limits on the line abandonment pro-
+cess by requiring ICC to approve uncontested abandonment applications
+within 46 days of filing. The act also set an overall time limit of 255
+calendar days on the abandonment process. The time limits helped speed
+abandonments and therefore helped railroads reduce costs. Before 1980,
+no time limits on the overall abandonment process existed. The Staggers
+Rail Act also contained new provisions allowing railroads to cancel joint
+rates that did not achieve certain minimum revenue-to-variable-cost
+levels. These provisions sought to ensure that railroads earn certain
+minimum revenues on their joint rates.
+ICC maintains a role in protecting shippers against unreasonable rates
+and practices. To implement its authority, ICC has established proce-
+dures for filing protests and complaints. According to ICC officials, pro-
+tests are generally filed before a rate or practice change has taken effect
+and are designed to prevent the change. Complaints are generally filed
+after the effective date of a change and are designed to overturn the
+change. Either railroads or shippers may file protests or complaints. In
+deciding protests, ICC can suspend and investigate a change, investigate
+but not suspend a change, or take no action. According to ICC officials,
+ICC must act on complaints and, after investigating, can award damages
+to the complainant, request that rates be changed (if rates are found
+unreasonable), or allow the rate to remain in effect.
+’ ‘Railroads, as common carriers, are required to provide rail services to any shipper upon reasonable
+request.
+Page 16 GAO/BCED-90-80 Impacta of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0017]]
+Chapter 1
+Introduction
+Objectives, Scope, and
+Methodology
+The Chairman and Ranking Minority Member of the Senate Committee
+on Commerce, Science, and Transportation asked us to review certain
+aspects of the railroad industry, including the financial and competitive
+conditions within the industry. As agreed with the Committee’s office,
+we
+l identified the economic and financial impacts of the Staggers Rail Act on
+railroads and shippers,
+. determined how the financial performance of the railroad industry has
+changed since passage of the Staggers Rail Act, and
+. identified how the railroads’ financial performance compares with that
+of other transportation modes.
+To identify the Staggers Rail Act’s economic and financial impacts on
+railroads and shippers, we reviewed (1) legislation enacted in 1976 and
+1980, (2) selected ICC policies issued since 1980 on rail rates, (3) litera-
+ture available in professional and trade journals dealing with railroad
+deregulation and the economic and financial impacts of the Staggers Rail
+Act, and (4) studies and/or congressional testimony on railroad deregu-
+lation prepared by ICC; D(JT; the Departments of Energy, Justice, and
+Agriculture; the Federal Trade Commission; and the Congressional
+Research Service. In addition, we used reports we had previously issued
+on various aspects of the railroad industry and the Staggers Rail Act
+and reviewed selected position papers railroad and shipper trade
+associations had prepared.
+We also interviewed officials of 11 railroads (7 Class I and 4 Class II and
+Class III railroads)‘2 and 5 shipper trade associations about the economic
+and financial impacts of the Staggers Rail Act on them or their members.
+We selected the railroads and trade associations to obtain a cross section
+of organizations. The railroads were a mix of large and small carriers,
+carriers operating in different areas of the country, and carriers estab-
+lished both before and after passage of the Staggers Rail Act. The trade
+associations represented shippers that were diverse in terms of size,
+their level of dependence on rail transportation, and the type of goods
+transported (agriculture, manufacturing, coal, etc.).
+To determine changes in the railroads’ financial performance over the
+last two decades, we (1) collected financial information for the years
+121n 1988, Class I railroads earned annual revenues of $92.0 million or more for 3 consecutive years,
+Class II railroads earned between $18.4 million and $92.0 million, and Class III railroads earned less
+than $18.4 million.
+Page 16 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0018]]
+chapter 1
+Introduction
+1970 to 1988 from ICC’S publication Transport Statistics for both the
+railroad industry and individual Class I railroads; (2) selected-in con-
+sultation with ICC, the Federal Railroad Administration, AAR, the Ameri-
+can Trucking Associations, and the Federal Energy Regulatory
+Commission-measures of financial performance; and (3) discussed the
+financial performance of both the industry and individual railroads with
+the railroads included in our study. ICC used to require the retirement-
+replacement-betterment accounting system to account for rail roadways
+and structures, but in 1983 it adopted depreciation accounting. Using
+data the railroads prepared, ICC developed financial data adjusted to the
+depreciation accounting basis for the 1978-82 period.13 According to ICC
+officials, financial data based on depreciation data were not available
+before 1978. As a result, the data we used for the 1970s are not strictly
+comparable to the data we used for the 1980s. We included 1988 infor-
+mation where available.
+Since ICC reclassified several railroads from Class I to Class II between
+1978 and 1986, we excluded these railroads from our financial totals for
+the industry. We also excluded railroads comprising Guilford Transpor-
+tation Industries because ICC was unable to develop depreciation data
+before 1983 for these railroads. Some of the remaining Class I railroads
+were acquired by, or merged into, other railroads during our analysis
+period. We asked representatives of these railroads to review the data
+we had developed and, to the extent possible, made adjustments based
+on these reviews.‘4 However, we did not verify the accuracy of this sup-
+plemental information.
+To compare the railroads’ financial performance with that of trucks and
+natural gas pipelines, we (1) collected annual financial information from
+the American Trucking Associations’ publications Financial Analysis of
+the Motor Carrier Industry and 1988 Motor Carrier Annual Report and
+from the Energy Information Administration’s publication Statistics of
+Interstate Natural Gas Pipelines Companies; (2) compared financial
+ratios for the railroad industry with those for the trucking and natural
+‘:‘ICC provided us restated financial information for both the railroad industry and individual rail-
+roads for the 1978-82 period. The 1983 ICC Form R-l, Annual Report, included for each railroad a
+schedule restating financial information from the retirement-replacement-betterment to the deprecia-
+tion accounting basis for the preceding 4 years. Using this schedule ICC developed data for 1978.
+14The following railroads acquired subsidiary railroads during the study period: Burlington Northern
+Railroad, CSX Transportation, Grand Trunk Western Railroad Company, Norfolk Southern Corpora-
+tion, Soo Line Railroad Company, and Union Pacific Railroad Company. We treated the Missouri-
+Kansas-Texas Railroad Company as a separate entity because it was not acquired by Union Pacific
+until 1988.
+Page 17 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0019]]
+Chapter 1
+IntroducUon
+gas pipeline industries; and (3) discussed the results of our analysis with
+ICC, the American Trucking Associations, AAR, and the Federal Energy
+Regulatory Commission. Each of these organizations provided opinions
+about differences in financial performance between railroads and the
+trucking and natural gas pipeline industries.
+We included in our analysis only Ice-authorized motor carriers with
+annual revenues of $1 million or more. These carriers included general
+freight carriers as well as specialized carriers that typically carry
+freight in full truckloads from shippers to receivers. Excluded from the
+analysis were (1) motor carriers with annual revenues of less than $1
+million, since they are not required to file annual financial reports with
+ICC; (2) firms excused by ICC from filing annual reports; and (3) firms
+that the American Trucking Associations found filing incomplete, incon-
+sistent, and/or inaccurate data. We also included in our analysis only
+natural gas pipelines that derived at least 75 percent or more of their
+revenues from transporting gas for others. Our aim was to focus on gas
+pipelines providing transportation services for others and eliminate
+pipelines with primarily production and/or merchandising functions-
+activities that have no counterpart in the railroad industry. We
+attempted to include the barge, air cargo, and oil pipeline industries in
+our analysis, but the financial information available did not provide a
+representative overview of these industries.
+Appendixes I and II contain profiles of the railroads and trade associa-
+tions included in our study. “Related GAO Products” includes a list of
+reports we have issued on the railroad industry and the Staggers Rail
+Act of 1980.
+Data Limitations The information presented in this report represents our analysis of
+available data and may not identify all the individual economic and
+financial impacts on railroads and shippers. We did not attempt to mea-
+sure the economic and noneconomic effects of the Staggers Rail Act or
+establish cause-effect relationships. Factors other than regulatory
+reform may have contributed to the reported effects. To the extent pos-
+sible, we tried to acknowledge these other factors.
+We also did not contact all railroads and/or shippers potentially affected
+by the Staggers Rail Act. Instead, we selected a sample of railroads and
+shippers to obtain a wide spectrum of views. Their views and exper-
+iences, however, may be different from those of other railroads and
+Page 18 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0020]]
+,
+Chapter 1
+Introduction
+shippers. As a result, the information we obtained cannot be projected to
+the universe of railroads and shippers.
+We conducted our work between August 1988 and February 1990. GAO
+met with ICC to discuss the contents of this report. ICC generally agreed
+with both our findings and conclusions. However, as requested, GAO did
+not obtain official agency comments on a draft of this report.
+Page 19 GAO/RCED-99439 Impacts of the Staggers Rail Act of 1990
+
+[[PDF_PAGE_0021]]
+Railroads Are More Competitive and Have
+Stabilized Their Market Share
+The freedoms railroads gained under the Staggers Rail Act have enabled
+them to become more competitive in the 1980s. By exercising greater
+control over rate-making and the ability to offer contracts, railroads
+have become more responsive to the marketplace and have exploited
+new business opportunities. Faced with growing traffic since 1982 but
+declining rates and revenues, railroads were successful in reducing costs
+more than revenues declined by abandoning or selling lines, reducing
+their work force, and improving productivity. Such measures were nec-
+essary for railroads to become more profitable. In addition, the evidence
+suggests that railroads increased capital spending and improved the
+condition of their track and structures in the 1980s. By becoming more
+competitive, railroads have been able to stem the decline in their share
+of the intercity freight transportation market.
+Competition Among The transportation market became increasingly competitive in the
+Transportation Modes 1980s. The railroads faced two major rivals-trucks and barges-both
+of which underwent changes that increased their competitiveness.
+Increased in the 1980s The Motor Carrier Act of 1980 substantially reduced federal regulation
+of the trucking industry. It eased entry restrictions for new firms, elimi-
+nated restrictions prohibiting a motor carrier from operating as both a
+common and contract carrier, increased the number of exempt commodi-
+ties,’ and eliminated certain operating restrictions placed on regulated
+carriers (such as route restrictions and the number of shippers they
+could serve). This act also encouraged greater price competition among
+motor carriers in general by phasing out ICC’s authority to grant anti-
+trust immunity for certain rate-setting activities. The Surface Transpor-
+tation Assistance Act of 1982 also increased competitiveness by
+allowing the use of both heavier truck trailers and two trailers per truck
+on interstate highways. As a result of these changes, new trucking com-
+panies entered the business, existing firms expanded their markets, and
+price competition intensified in the 1980s.
+The barge industry is largely unregulated. As of 198’7, only about 8 per-
+cent of the ton-miles handled by barges was subject to ICC regulation.
+Barges tend to have lower unit costs than the competing intercity freight
+transportation modes, and they became even more competitive in the
+early 198Os, when a grain embargo and overinvestment in barges cre-
+ated overcapacity in the industry; consequently, rates fell. Although the
+‘Truck transportation of some agricultural products is exempted from ICC’s jurisdiction. These prod-
+uc%.s include livestock, feed, seeds, and unprocessed agricultural commodities.
+Page 20 GAO/RCED-90430 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0022]]
+Chapter 2
+ltakoads Are More Competitive and Have
+Stabilized Their Market Share
+overcapacity situation eased toward the end of the decade, railroads
+still compete vigorously with barges for such commodities as coal and
+grain2
+Competition among railroads also increased after passage of the Stag-
+gers Rail Act. Before 1980, railroads knew what their railroad competi-
+tors were charging for their services, since rates were published in
+tariffs and rate bureaus frequently set the price for shipping goods by
+rail. According to railroad officials we spoke with, having to go through
+rate bureaus often delayed the establishment of new rates, and certain
+railroads could block rate changes they did not consider favorable to
+them or the industry.3 For example, one official told us that rate
+changes-even increases-were often blocked by railroads wanting to
+keep their shippers competitive. Documents from another railroad indi-
+cated that because ICC wanted to avoid price competition among rail-
+roads offering alternative routes between a particular origin and
+destination, rates were collectively set to ensure equal rates over all
+routes. If a railroad tried to reduce rates to capture traffic, it would be
+blocked by potentially disadvantaged railroads. The Staggers Rail Act
+restricted collective rate-setting by these bureaus and allowed railroads
+to negotiate shipper contracts with confidential terms. As a conse-
+quence, railroads were forced to compete harder among themselves to
+attract and/or retain business.
+At the same time that the transportation sector was becoming more com-
+petitive, the economy was expanding. After a recession in 198182, real
+gross national product (GNP)-an inflation-adjusted measure of the
+value of the output of all goods and services produced by the econ-
+omy-increased at an average annual rate of 4.2 percent between the
+fourth quarter of 1982 and the third quarter of 1988. In comparison, GNP
+grew at only a 2.2-percent average annual rate between the fourth quar-
+ter of 1973 and the third quarter of 1981. An expansion in industrial
+production also required more intercity movement of freight, offering
+new business opportunities to all transportation modes-including rail-
+roads. Between 1982 and 1.988, intercity freight transportation tonnage
+grew, on average, about 3.7 percent annually, compared with an average
+“Bulk commodities, such as coal and grain, have low value-to-weight ratios and are often transported
+over long distances. Principal commodities carried by barges include coal, gram, and chemicals.
+3Regardless of rate bureau actions, railroads maintained a right of independent action in setting rates.
+However, several railroad officials told us that rate bureaus still hindered railroads from setting their
+own rates.
+Page 21 GAO/WED-90-80 Impacts of the Staggers Rail Act of 1990
+
+[[PDF_PAGE_0023]]
+Chapter 2
+Railroads Are More Competitive and Have
+Stabilized Their Market Share
+annual decline of about one-tenth of 1 percent between 1973 and 1981
+(see table 2.1).”
+Table 2.1: Average Annual Growth Rates
+of Intercity Freight Tonnage Percent growth in tonnage
+Period All modes Railroadsa
+1973-81 -0.12 -0.45
+1982-88 3.67 3.00
+%cludes all classes of railroads.
+Source: GAO analysis of Transportation in America data.
+The Staggers Rail Act Faced with an increasingly competitive transportation market, railroads
+Enabled Railroads to have taken advantage of the new flexibilities created by the Staggers
+Rail Act to enhance their own competitiveness. Through greater rate-
+&come More making freedoms and the ability to offer contra.cts for their services,
+Competitive railroads have become more responsive to the market. This has resulted
+in both reduced rates and contracts with rate and service packages tai-
+lor-made to shippers’ needs. Consequently, railroads have been better
+able to retain business and exploit new market opportunities.
+Reduced Regulation
+Enhanced Rate-Mak
+Freedoms
+:ing
+The Staggers Rail Act has allowed railroads to charge more competitive
+rates. In April 1989, ICC reported that average real rail rates had
+declined 22.4 percent between 1980 and 1987.5 In contrast, real rail
+rates had increased about 9 percent between 1978 and 1980. ICC figures
+indicated that the declines affected rates for transporting a number of
+commodities-including farm products, coal, and chemicals-and
+ranged from about 10 percent for coal to about 44 percent for farm
+products. Representatives of the eight railroads we contacted that were
+in existence before 1980 said that their firms have set more competitive
+rates since passage of the Staggers Rail Act. One railroad representative
+told us that before 1980 rates were always raised but, at least in his
+opinion, never lowered.
+The ability to offer more competitive rates has helped railroads take
+advantage of market opportunities, such as the trailer-on-flatcar (TOFC)
+4Exceit where noted, averages discussed in this chapter are average annual rates of change calcu-
+lated by dividing the total value of unweighted rates of change for individual years by the total
+number of years indicated. While this approach may mask changes in any specific year, it allows
+comparisons of the average annual rates of change from one period to another.
+“ICC put rail rates in 1987 dollars to determine real rate changes.
+Page 22 GAO/RCED90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0024]]
+Chapter 2
+-
+Itaihda Arc More Competitive and Have
+Stabilized Their Market Share
+and container-on-flatcar (COFC) markets-one of the fastest-growing
+segments of the railroad business. Goods not carried in lWC/cOFC service
+would likely be carried by trucks6 Spurred in part by greater rate-mak-
+ing flexibility and ICC’S exemption of this traffic from regulation under
+the Staggers Rail Act,’ railroads were able to design price packages that
+made this business attractive to shippers and others. As a result, this
+business has grown steadily during the 1980s. In 1988, railroads loaded
+about 6.7 million trailers and containers, compared with only about 3.1
+million in 1980.
+Railroad boxcar service also illustrates how competitive rate-making
+has allowed railroads to take advantage of increased pricing flexibility
+to retain and/or regain business. In May 1983, ICC used its Staggers Rail
+Act authority to exempt boxcar traffic from regulation. In November
+1988, ICC’S Office of Transportation Analysis reported that aggressive
+pricing had enabled railroads to retain boxcar traffic they otherwise
+would have lost to trucks.8 Some small railroads, by being responsive to
+the market, have even been able to regain some lost boxcar traffic.
+Although the boxcar business continues to diminish, according to ICC, it
+retains a role in the transportation marketplace because of the railroads’
+pricing flexibility.
+Contracts Permit Tailored Railroads have also increased their competitiveness by negotiating con-
+Rates and Services tracts with rates and services tailored to customers’ needs. According to
+one railroad official we spoke with, contracts are useful business tools
+because they can specify not only rate levels, but also such items as
+claims, damage reporting, service standards, and service guarantees,
+none of which are published in tariffs. ICC’S Office of Transportation
+Analysis found in March 1984 that contracts filed with ICC covered
+almost all commodities and included a variety of rate and service provi-
+sions.9 The majority of the contracts, according to ICC, involved reduced
+rates or allowances in exchange for volume commitments.
+6Although a large portion of ‘IOFC/COl?C traffic is diverted from highway transportation, some por-
+tion of this traffic may also be diverted from other types of rail transportation.
+‘The Staggers Rail Act required ICC to exempt persons, a class of persons, or a railroad transaction or
+service from regulation when ICC found that such regulation was not necessary to carry out the
+transportation policy of the act and regulation was not necessary to protect shippers from the abuse
+of market power.
+sEffects of the Boxcar Exemption, ICC, Office of Transportation Analysis (Nov. 1988).
+“Report on Railroad Contract Rates Authorized by Section 208 of the Staggers Rail Act of 1980, ICC,
+Office of Transportation Analysis (Mar. 13, 1984).
+Page 23 GAO/RCElMO-fM Jmpacta of the Staggers Rail Act of 1930
+
+[[PDF_PAGE_0025]]
+Chapter 2
+,
+Railreads Are More Competitive and Have
+Stabilized Their Market Share
+Railroads have made widespread use of contracts. According to an AAR
+official, AAR’S 1989 survey of eight Class I railroads found that in 1988
+about 60 percent of all these railroads’ shipments moved under contract
+rates. Officials of all 11 of the railroads we contacted said their firms
+have used contracts and expect to make equal or greater use of con-
+tracts in the future. Some of these officials said, among other things,
+that contracts provided railroads both greater flexibility in setting rates
+and guaranteed volume. Ten of the 11 officials also believe that con-
+tracts made their railroads more competitive.10
+Contracts have been important tools in attracting and retaining busi-
+ness. ICC’S survey of 11 railroads for its March 1984 report on contracts
+(see above) found that 10 of the 11 railroads had been successful in
+using contracts to attract business from other transportation modes.
+Traffic gains for four of the railroads were estimated to range from
+6,400 to 66,000 carloads annually.ll All 11 railroads also reported both
+gaining and losing traffic to other railroads because of contracting,
+although ICC was unable to gauge the extent of intramodal shifts in traf-
+fic. ICC also found that contracts (1) helped railroads weather the 1981-
+82 recession by enabling them to obtain volume commitments in return
+for rate concessions, (2) helped railroads to quickly meet market condi-
+tions by providing flexible pricing, and (3) allowed railroads to develop
+innovative rate features, such as short-term “economy specials,” to
+stimulate movements of certain commodities.
+Railroads Have Had to Faced with growing traffic since 1982 but falling rates and revenues and
+cut costs a desire to remain profitable, railroads have reduced costs by aban-
+doning lines, selling lines to other operators, reducing employment, and
+increasing productivity. Using such measures, the railroad industry has
+been successful in reducing costs at a iaster pace than revenues have
+declined. Between 1981 and 1988, the inflation-adjusted operating reve-
+nues of Class I railroads included in our analysis declined, on average,
+about 4.3 percent annually, whereas operating expenses declined, on
+average, about 4.8 percent annual1y.l”
+“‘One official did not discuss the matter.
+“Information was not available for the other railroads.
+12Not all railroads were included in our analysis. See chapter 1 for more information.
+Page 24 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0026]]
+Chapter 2
+hiko8d# Are More Competitive and Have
+Stabilized Their Market Share
+Lines Have Been
+Abandoned or Sold
+Reduce Costs
+to
+To reduce costs, railroads abandoned lines that were unprofitable or
+duplicative. As mentioned in chapter 1, the Staggers Rail Act imposed
+time limits on ICC’S processing of abandonment applications. These time
+limits helped speed abandonments and, therefore, cost reduction.
+Between 1981 and March 1989, railroads-excluding Conrail and cer-
+tain exempted railroads13 -applied for approval to abandon about
+16,000 miles of line-about 6 percent of the track they owned in 1980.
+ICC approved the abandonment of about 16,800 miles.‘4 Between 1982
+and March 1989, Conrail filed applications to abandon about 4,600
+miles. ICC approved about 3,900 miles-about 12 percent of Conrail-
+owned track.‘6
+Abandonments reduce costs by eliminating the maintenance and operat-
+ing expenses associated with continuing service on a line. Railroads find
+abandonment attractive when the revenues a line generates fall short of
+the costs incurred to serve it. Officials of five of the railroads we con-
+tacted said abandonments had played an important role in reducing
+costs since 1980. Two officials said abandonments were critical to the
+survival of their railroads. Another said profitability increased signifi-
+cantly because abandonments eliminated unproductive and redundant
+track. Documents from this railroad indicated that abandonments would
+play a key role in its financial planning because of their significant
+value in reducing costs.
+Sales of lines to other operators, instead of abandonments, have enabled
+railroads to reduce costs while maintaining traffic. Once a line is sold,
+the previous owner generally no longer incurs the operating and mainte-
+nance costs associated with the line. Should the line continue to be via-
+ble, it may continue to provide traffic to the previous owner. Since 1980,
+approximately 200 new shortline and regional railroadsI have come into
+13The 4R Act gave ICC authority to exempt carriers from the routine abandonment process. ICC
+procedures permit abandonment approval when no traffic has moved over the line for at least 2
+years and ICC finds no valid user complaints. Between 1984 and March 1989, railroads filed to aban-
+don about 7,600 miles under the exemption authority. ICC granted approval for about 6,900 miles.
+ICC did not accumulate data on exemption authority abandonments until fiscal year 1984.
+14The mileage granted in any 1 year may not be the same as the mileage filed for abandonment
+because of delays in the abandonment process and appeals of previous ICC decisions.
+16The Northeast Rail Service Act of 1981 established different abandonment procedures for Conrail.
+ICC was required to approve Conrail abandonment applications filed on or before October 3 1,1986,
+unless the lines were purchased or received a subsidy for continued operation.
+‘“There are no strict definitions of the terms “shortlme” and “regional.” ICC defines these railroads
+as being similar to Class III and Class II railroads, respectively. However, a joint Federal Railroad
+Administration and ICC report defined shortline railroads as operating less than 260 miles of track
+and regional railroads as operating 260 miles or more of track.
+Page 25 GAO/RCED-SO-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0027]]
+Chapter 2
+Ibllrods Are More Competitive and Have
+Stabilized Their Market Share
+existence from such sales, compared with only 66 between 1970 and
+1980. A 1987 ICC survey of shortline and regional railroads formed since
+1980 found that, for the most part, these railroads started by taking
+over track that had been abandoned or was targeted for abandonment.
+According to ICC, most of these railroads were operating as low-cost
+feeder and distribution systems connecting with larger railroads.
+ICC helped create these railroads by exempting most line sales from its
+approval. In January 1986, ICC adopted new procedures to expedite
+purchases of shortline and regional railroads. These procedures required
+a potential purchaser to file with ICC only a brief notification of
+purchase. A sale could be consummated in as little as 7 days after this
+notice. I7 Previous regulations required potential purchasers to file more
+information and generally took longer to process. Eighty-nine of the esti-
+mated 200 new shortline and regional railroads that have come into
+existence since 1980 were created under the new procedures. ICC
+believes its exemption policy has been beneficial in preserving rail ser-
+vice as well as railroad jobs and investment.
+Work Force Declines Have In response to falling rates and revenues, railroads have reduced the
+Further Reduced Costs size of their work force to reduce costs. According to AAR statistics,
+employment for Class I railroads (excluding Amtrak) fell more than 48
+percent between 1980 and 1988-from about 458,000 employees to
+about 236,000. In contrast, employment declined by only about 16 per-
+cent during the 1970s-from about 666,000 in 1970 to about 476,000 in
+1979 (see fig. 2.1).18 As our April 1989 report discussed, there were
+many reasons why railroad employment declined.lg Before 1980, the loss
+of freight traffic to trucks and changes to a more service-oriented econ-
+omy contributed to employment declines. Since 1980, however, factors
+associated with regulatory reform, the 1981-82 recession, organizational
+changes resulting from mergers and consolidations, management initia-
+tives (such as buyouts of employees and outside contracting for ser-
+vices), and technological changes have played a role.
+171n February 1988, ICC again modified its procedures for Class I and Class II railroad acquisitions to
+require a 21-day, rather than a 7-day, delay after notification before the acquisition would be effec-
+tive. The additional time was to allow a more m-depth evaluation of the transaction.
+IsRailroad employment, in general, has been declining since about 1929, when employment was about
+1.7 million employees. However, the periods in the text were selected to indicate the impacts of regu-
+latory reform.
+‘“Railroad Retirement: Future Rail Employment and Trust Fund Solvency (GAO/HRD-89-30, Apr. 6,
+1989).
+Page 20 GAO/RCED-90-80 Impacta of the Staggers &ail Act of 1989
+
+[[PDF_PAGE_0028]]
+chapter 2
+RaUroade Are More Competitive and Have
+Stabilized Their Market Share
+Figure 2.1: Clarr I Railroad Employment (Without Amtrak)
+809 Thowands
+899
+476
+4sa
+428
+4w
+878
+)o
+928
+100
+278
+889
+m8
+am
+1070 1on la72 1073 1974
+Source: AAA.
+Railroads have reduced employment in order to cut their labor costs.
+Since 1981, Class I railroads have reduced their real labor costs (total
+wages and fringe benefits), on average, about 6. I percent annually. In
+1987, real labor costs of Class I railroads were about $10.7 billion, com-
+pared with about $16.3 billion in 1980. However, labor costs still com-
+prise almost half of operating expenses-only marginally below the
+proportion they accounted for in 1980. This small decline reflects the
+fact that average annual earnings per employee have increased from
+about $24,700 in 1980 to about $39,400 in 1988.
+Further employment reductions are likely. Employment could fall from
+about 300,000 employees (including all classes of railroads and passen-
+ger employees) at the end of 1988 to between 71,000 and 185,000
+employees by the year 2010. AAR has estimated that about 50,000
+employees are unneeded but have been retained because of outmoded
+labor agreements, changes in technology, or other factors.
+Productivity”Has
+Improved
+Railroads registered substantial productivity gains in the 1980s. Fewer
+employees, lower fuel costs, increased abandonments and line sales,
+technological advances, and a more competitive environment have all
+Page 27 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0029]]
+Cllapter 2
+Railroad@ Are More Competitive and Have
+Stabilized Their Market Share
+contributed to productivity growth. Based on numbers indexed to 1970,
+between 1980 and 1988, revenue ton-miles per employee hour increased
+from 148 to 288 and revenue ton-miles per gallon of fuel consumed
+increased from 98 to 131 (see fig. 2.2). Net ton-mileszO per train-hour has
+also generally increased during the 1980s. While not all productivity
+gains are attributable to changes from the Staggers Rail Act, the increas-
+ingly competitive environment the act encouraged put pressure on rail-
+roads to increase productivity to remain profitable. Productivity gains
+were not as great in the 1970s.
+Figure 2.2: Class I Railroad Productivity
+390 Index Valua
+275
+/
+so
+2s
+g . . . - ..- .- .._. - ,,- ._.- . .
+1979 197-l 1972 1973 1974 197s 1976 1977 1970 1979 1999 1991 1992 1999 1994 1995 1955 1997 1999
+Ymr
+- Revenue Ton-Miles per Employee Hour
+I - - - Revenue Ton-Miles per Gallon of Fuel Consumed
+m Ton-Miles per Train Hour
+Source: GAO analysis of AAR data.
+2”Net ton-miles is the movement of revenue freight or non-revenue freight, or both, a distance of 1
+mile.
+Page 28 GAO/RCED-90430 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0030]]
+Chapter 2
+Rallronde Are More Competitive and Have
+Stabilized Their Market Share
+Railroads Have
+Improved Their
+Facilities
+A stated purpose of the Staggers Rail Act was to improve rail plant and
+equipment. The evidence suggests that the condition of rail facilities has
+improved. Railroads have increased their capital spending on track and
+structures. AAR figures show that railroads increased spending for track
+and structures from approximately $960 million in 1980 to about $3.6
+billion in 1985.2’ Since 1985, capital spending for these items has
+declined, but it is still above the average spending levels of the 1970s.
+Small railroads could be expected to have deteriorated physical facilities
+because many small railroads took over lines that had been, or were
+scheduled for, abandonment. However, in February 1989 the Federal
+Railroad Administration (FRA) reported on a survey of the deferred
+maintenance and delayed capital spending of 458 regional, local, and
+switching and terminal railroads .22 More than half had begun operations
+since 1970. Of the 458 surveyed, 358 responded, listing grain, coal, and
+lumber as their principal commodities. FRA found that most of their
+track did not require substantial repair, replacement, or improvement.
+In addition, railroads reporting no need for rehabilitation to correct
+deferred maintenance handled the majority of traffic.
+According to the Department of Defense (DOD), track necessary to meet
+national defense purposes is in very good condition. In April 1989, an
+official with DOD’S Military Traffic Management Command said he
+believed track condition was the best it had been since the 1920s. In
+January 1988, DOD informed the Congress that “the rail network was in
+its best readiness condition in two decades.” DOD attributed this condi-
+tion to the railroads’ improved financial health, the Staggers Rail Act,
+and railroad deregulation in general.
+FRA safety statistics also indicate that rail facilities have improved since
+1980. The number of accidents caused by track defects declined almost
+“These figures are not completely comparable because in 1983 ICC adopted depreciation accounting
+for track and structures.
+22Deferred Maintenance and Delayed Capital Improvements on Class II and Class III Railroads, A
+Report to Congress, DOT, FRA (Feb. 1989).
+AAR defines switching and terminal railroads as companies performing switching services; furnish-
+ing terminal trackage, bridges, or facilities, such as union passenger or freight stations; and/or operat-
+ing ferries.
+FRA defines deferred maintenance as a reduction in maintenance below the level necessary to meet
+annual replacement requirements for rails, ties, and other track materials. Delayed capital spending is
+defined as any expenditure on any addition to, or betterment of, the physical plant that is not under-
+taken at the time it becomes necessary to keep the track and structures in the desired operating
+condition.
+Page 29 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0031]]
+Chapter 2
+Railroads Are More Competitive and Have
+Stabilized Their Market Share
+60 percent between 1982 and 1987. Such accidents increased in 1988;
+however, they were still well below the levels in the early 1980s. FRA
+cited railroad deregulation- in particular, its impact on cash flow-as a
+major reason for the improved condition of rail facilities. Nevertheless,
+defective track still accounted for nearly one-third of all train accidents
+in 1988, down only slightly from about 39 percent in 1982.
+Railroads Have
+Stemmed Their
+Decline in Market
+Share
+Increased competitiveness has enabled railroads to stem the decline in
+their share of the intercity freight transportation market. By offering
+better rates and improved service to shippers, as well as by taking
+advantage of greater market opportunities from an expanding economy,
+railroads have maintained their share of traffic volume (tonnage) during
+the 1980s. However, because other modes offer better prices and ser-
+vice, railroads have not fared as well in market share as their major
+transportation competitors. Both trucks and barges increased their mar-
+ket share in the 198Os.23
+Between 1980 and 1988, railroad tonnage (tons carried) grew at the
+same rate as in the 1970s. However, railroads were able to stem the
+decline in their share of the intercity freight transportation market.
+From 1929 to 1980, the railroads’ market share generally declined from
+about 75 percent to about 38 percent (see fig. 2.3). But after dropping so
+dramatically, railroads’ average market share in the 1980s was only
+slightly below its average in the 1970s. (See table 2.2.)
+““As table 2.2 illustrates, the intercity freight transportation market primarily comprises railroads,
+trucks, oil pipelines, and barges. Great Lakes shipping and airplanes play lesser roles.
+Page 30 GAO/RCED-90-80 Impacts of the Staggera Rail Act of 1990
+
+[[PDF_PAGE_0032]]
+chapter 2
+ltdhada Are More Competitive and Have
+Stllbillmd Their Market Share
+Table 2.2: Tonnages and Market Shares
+of Selected Transportation Modes Average annual growth
+rate in freight tonnaae
+(per5ent) -
+1970-79 1 980-88b
+I.3 0.3
+Market share
+Transportation mo
+Railroads
+Truck9
+Oil oioelines
+(percent)’
+1970-79 1980-88
+37.3 36.7 C
+2.5 2.8 22.9 24.0
+2.5 1.0 23.3 23.2 - I- I- --
+Bargesd 1.4 1.5 11.4 12.7
+Great Lakes shippinge -0.1 0.4 5.0 3.1
+Airplanes 3.0 6.2 0.2 0.3
+aAverage percentage of intercity revenue ton-miles during the period. Market share numbers may not
+add to 100 because of rounding.
+b1988 numbers are preliminary
+%rcludes regulated and unregulated motor carriers of freight.
+dlncludes all river and canal water carriers of freight
+BOomestic and foreign US. traffic moving on the Great Lakes
+Source: GAO analysis of Transportation in America data.
+Page 31 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1990
+
+[[PDF_PAGE_0033]]
+Chapter 2
+ltdmada Are More Competitive and Have
+Stabilized Their Market Share
+Figure 2.3: Market Shares of Selected Transportation Modes
+loo PeKmnt
+loz0
+Vow
+1939 40 1946 1950 lQ56 loB0 1sBLT 1970 lQr8 1980 1986 868788
+- Railmads
+- Trucks
+- l - Barges
+111 I Great Lake8 Shipping
+.---- oil Pipeline8
+--- Airplanes
+Note: Figures for 1988 are preliminary.
+Source: Transportation in America and AAR
+Despite the growth in the freight transportation market and railroads’
+static growth in tonnage during the 198Os, railroads could not cut into
+their competitors’ market shares. Trucks and barges have been aggres-
+sive competitors during the 1980s and have fared better than railroads
+in terms of increasing market share (see table 2.2). The growth rate in
+truck freight tonnage during the 198088 period was about 6 percent
+higher than during the 197Os, and the trucking industry’s market share
+increased from 22.9 to 24.0 percent. Barges also increased both their
+tonnage growth rate and market share in the 1980s.
+Page 32 GAO/RCED=9080 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0034]]
+chapter 2
+ltailroads Are More competitive and Have
+Stabilized Their Market Share
+A closer analysis reveals that railroads are more competitive in some
+markets, but not in others where trucks and barges offer better prices
+and/or services. Railroads have maintained or increased their market
+share in shipping commodities such as finished motor vehicles and some
+bulk products (e.g., coal), but have lost relative market share in shipping
+other commodities.
+Conclusions Faced with an increasingly competitive transportation market in the
+198Os, railroads have used the additional flexibility the Staggers Rail
+Act provided to become more competitive. Exercising the increased rate-
+making freedoms and the ability to contract for their services, railroads
+have attracted more business and exploited new market opportunities.
+Consequently, they have been able to stem the decline in their share of
+the intercity freight transportation market, although they have not been
+able to increase their share relative to that of other transportation
+modes.
+Improvement in the condition of rail facilities has also been achieved, in
+part through the railroads’ improved financial health and increased cap-
+ital spending. The Federal Railroad Administration reported that most
+of the track covered in its survey of Class II and Class III railroads did
+not require substantial repair, replacement, or improvement to meet
+operational needs. The Department of Defense believes track conditions
+are the best they have been in decades. In addition, safety statistics indi-
+cate that the number of track-caused accidents has generally declined,
+although track defects continue to account for a significant portion of
+accidents.
+Page 23 GAO/RCED-9O-gO Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0035]]
+Chapter 3
+Railroads’ Financial Health Has Improved, but
+Most R&oads Are Not Revenue Adequate
+The overall financial health of the railroad industry has improved since
+1980. Profitability has increased, and railroads are generally better able
+to meet their long-term obligations. Short-term solvency improved dur-
+ing the early 1980s although it began to decline later in the decade as
+cash flow decreased. Despite these improvements, most railroads still do
+not earn sufficient revenues to generate a rate of return that equals or
+exceeds the current cost of capital. Furthermore, the five largest rail-
+roads generally have shown greater financial improvement than the rest
+of the industry, and railroads continue to lag behind other transporta-
+tion modes in profitability.
+Industry Financial As a number of financial indicators demonstrate, the railroad industry’s
+Health Has Improved financial health has improved since 1980. Profitability is higher, and
+railroads are better able to pay their long-term obligations than they
+were in the 1970s. Railroads’ short-term solvency improved in the early
+1980s although it later began to decline and, on average, was generally
+lower than in the 1970s. The Staggers Rail Act, modifications in the tax
+law, and other factors contributed to the overall improvements.
+Industry Profitability Railroads’ return on investment and return on equity-key indicators of
+profitability-were higher in the 1980s than in the 1970s. Return on
+investment measures the profit made on assets used to provide trans-
+portation services and is calculated by dividing net income from railway
+operations by the net investment base, which is the depreciated cost of
+track and equipment plus 16 days’ working capital. Railroads’ return on
+investment has averaged 4.9 percent since 1980, compared with about
+2.6 percent between 1970 and 1979 (see fig. 3.1)’
+‘Because we used depreciation data to calculate financial measures for 1980 to 1988, the ratios used
+in this chapter to compare financial performance between the 1970s and 1980s are not strictly com-
+parable. However, comparison between these two periods adds perspective on the railroads’ financial
+pcrformancc since 1980.
+We adopted generic ratio definitions where possible to ensure that data for all transportation modes
+were comparable. As a result, our financial results may not be comparable with financial results
+reported by ICC or other organizations. In addition, in calculating return on investment and other
+measures, we did not subtract deferred taxes from the investment base; include certain “special
+charges” that railroads took between 1986 and 1988 for work force reductions, asset write-offs, and
+court judgments; or make other adjustments ICC makes to determine revenue adequacy.
+Except where noted, all averages discussed in this chapter for each financial measure were calculated
+by dividing the unweighted specific ratio results for each individual year by the total number of
+years in each period. While this approach may mask changes in individual ratio results from year to
+year, it allows comparisons of financial results between periods.
+Page 34 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0036]]
+Chapter a
+Railmade’ Financial Health HR~ Improved,
+but Most Railroads Arc Not
+Revenue Adequate
+Figure 3.1: Return on Investment for Class 1 Railroads
+7 Perch
+1970 1971 1972 1972 1974 1975 1976 13-n 1978 1979 I 1990 1991 1992 1992 1994 1995 1999 1997 1999
+Year
+Note: In this and subsequent figures, the dotted line separates retirement-replacement-betterment data
+from depreciation data.
+Two factors influence investment returns: the ability to generate reve-
+nues from assets (called “asset turnover”) and the ability to earn a
+profit on every dollar of revenue generated (called “profit margin”).2 As
+discussed in the previous chapter, increased competition, contracts, and
+other factors during the 1980s have driven rail rates down, causing rail-
+road revenues to decline about 4.3 percent per year-even though traf-
+fic volume (tonnage) has increased since 1982. Falling revenues reduced
+asset turnover. However, because railroads reduced costs and increased
+efficiency, their profit margin increased. Higher profit margins offset
+the decline in asset turnover, allowing return on investment to improve.
+Railroads’ return on equity fluctuated but generally improved during
+the 1980s (see fig. 3.2). Return on equity measures the profit made on
+funds provided by stockholders and is the ratio of net income to year-
+end book value of stockholders’ equity. Return on equity has averaged
+about 9.0 percent since 1980, compared with only 2.3 percent in the
+“Asset turnover is calculated by dividing tatal railroad operating revenues by net investment in road
+and equipment (year-end), Profit margin is calculated by dividing net income from rail operations by
+total operating income. One method of computing return on investment is to multiply asset turnover
+times profit margin.
+Page 35 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0037]]
+Chapter 3
+Railroads Nnancial Health Haa Improved,
+but Most Railroads Are Not
+Revenue Adequate
+1970s. Revenue declines affected equity returns, as they did investment
+returns, but other factors offset these declines, including the faster
+decline in costs than revenues, lower taxes, and less debt at lower inter-
+est rates. In addition, ICC suggested that railroads have been investing in
+more profitable nonrail operations.
+Figure 3.2: Return on Equity for Class I Railroads
+12 Percmll
+Industry Efficiency and
+Solvency
+The operating ratio for the railroad industry, the ratio of operating
+expenses to operating revenues, has averaged about 88.2 percent since
+1980. Since 1982, it has shown a downward trend, reaching 86.4 percent
+in 1988 (see fig. 3.3). During the 197Os, the operating ratio averaged
+about 82.8 percent. However, this figure may be understated because
+railroads deferred maintenance during this time. If normal maintenance
+had occurred, the additional operating expenses would have led to
+higher operating ratios.
+Page 36 GAO/RCRD-90-30 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0038]]
+chapter 3
+R.aUmh’ F’inancial Health Has Improved,
+but Most Railroads Are Not
+Revenue Adequate
+Flgure 3.3: Operating Ratio for Class I Railroads
+110 Pofcmt
+I
+1979 1971 1972 1972 1974 1975 1976 1977 1979 1979 I 1969 1991 1982 1993 1994 1999 1996 1987 1998
+YUf
+During the 198Os, the operating ratio has improved because railroads
+have reduced operating expenses faster than revenues have fallen.
+According to officials in ICC’S Bureau of Accounts, a l-percentage-point
+decline in the operating ratio is a significant improvement for the rail-
+road industry. Although the operating ratio has fluctuated during the
+198Os, the average annual operating ratio declined about 1,7 percentage
+points between the first and second halves of the decade. However, both
+‘the 88Spercent average operating ratio since 1980 and the 87.3-percent
+average between 1985 and 1988 exceeded the 85-percent guideline that
+ICC officials believe is satisfactory.
+The current ratio, the ratio of current assets to current liabilities, mea-
+sures short-term solvency and the ability to pay short-term obligations.”
+The railroad industry’s current ratio generally improved during the
+early 1980s but it began to decline towards the end of the decade (see
+fig. 3.4). According to ICC, a current ratio of 100.0 percent generally is
+considered adequate for railroads to cover short-term obligations.
+“Current assets generally consist of cash and accounts receivable, and current liabilities generally
+consist of loans and accounts payable. Current liabilities also include long-term debt due within 1
+year.
+Page 37 GAO/RCED90-80 Impacts of the Staggers Raii Act of 1980
+
+[[PDF_PAGE_0039]]
+Chapter 3
+RaIlroads J?iuauciaI Health Has Improved,
+but Most Railroads Are Not
+Revenue Adequate
+Figure 3.4: Current Ratio for Class I Railroads
+180
+Between 1981 and 1984, the current. ratio averaged about 120.8 per-
+cent-that is, railroads averaged about $1.21 in current assets for every
+$1 in current liabilities. Since 1984, however, the current ratio has
+declined as cash flow has declined. Between 1985 and 1988, the current
+ratio declined from about 113.9 percent to about 98.0 percent-below
+ICC’S suggested guideline. In comparison, the current ratio averaged
+about 119.9 percent during the 1970s.
+Cash is an important component of current assets. Changes in the tax
+laws helped railroads increase their cash flow4 in the early 1980s. The
+most significant impact resulted from provisions of the Economic Recov-
+ery Tax Act of 1981. This law, among other things, permitted railroads
+to write off the total capitalized cost of track (that had not previously
+been depreciated) over a period of 5 to 50 years using an accelerated
+depreciation method and reduced the depreciation period for rolling
+stock (freight cars). These changes increased deferred taxes, which sig-
+nificantly increased cash flow. According to AAR, changes resulting from
+this law allowed the railroad industry an estimated $2.5 billion net gain
+in cash flow between 1981 and 1985. By 1986, however, most of the tax
+4Cash flow equals net income, depreciation, deferred taxes, and income from affiliate companies.
+Page 38 GAO/&CID-90430 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0040]]
+chapter 3
+Rallroade’ FlnanciaI Health Ha0 Improv*
+but Most Railroada Are Not
+Revenue Adequate
+benefits were no longer available. The Tax Reform Act of 1986, among
+other things, repealed the investment tax credit, imposed a corporate
+alternative minimum tax, and increased the depreciation period for
+track. Consequently, cash flow declined.
+The fixed charge coverage ratio, the ratio of income available for fixed
+charges to interest expense, measures long-term solvency. ICC suggested
+that a 3.5 or greater ratio is satisfactory for the railroad industry.
+Although this ratio fluctuated during the early 198Os, it has steadily
+improved since 1986, exceeding 3.6 in all years except 1982, a recession
+year (see fig. 3.6). In comparison, the fixed charge coverage ratio aver-
+aged about 1.7 during the 1970s and did not equal or exceed ICC’s sug-
+gested guideline in any of these years.
+Figure 3.5: Fixed Charge Coverage Ratio for Class I Railroads
+7 llmw Flxed Charges Coved
+i
+Improvements in the fixed charge coverage ratio can be attributed to,
+among other things, a reduced debt load and lower interest rates. Long-
+term debt has generally declined since 1980 (see fig. 3.6). In 1980, debt
+as a percentage of total capital was about 36 percent, compared with
+Page 39 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1930
+
+[[PDF_PAGE_0041]]
+Chapter 3
+RaRroads’ FlnanclaI Health Has Improved,
+but Moat Railroads Are Not
+Revenue Adequate
+about 24 percent in 1988.6 During the 197Os, debt averaged about 41
+percent of total capital. ICC officials suggested that a debt level of
+between 20 and 60 percent of total capital is reasonable for railroads.
+Lower debt levels indicate the ability to add more debt, which is gener-
+ally a less costly form of financing than selling equity. ICC officials sug-
+gested that because railroads are not an expanding industry, they have
+not required much debt. Instead, railroads have used internal funds,
+such as deferred taxes, to meet financing needs.
+Figure 3.6: Long-Term Debt as a Percentage of Total Capital for Class I Railroads
+6oPeranl
+i
+“The railroad debt referred to here is based on the debt of individual railroad companies as reported
+to ICC. This may differ from the debt levels of railroad holding companies. Cur calculation of long-
+term debt includes, among other things, funded debt unmatured, equipment obligations, and capital-
+ized lease obligations. However, it excludes such items as long-term debt due within 1 year and accu-
+mulated deferred tax credits.
+Total capital is equal to stockholders’ equity (year-end) plus long-term debt, excluding that portion
+due within 1 year.
+Page 40 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0042]]
+chapter 3
+l&ibads’ Financial Health Has Improved,
+but Most Railroads Are Not
+Revenue Adequate
+Improved Financial The five largest Class I railroads-each with $3 billion or more in reve-
+Health Has Not Been nues and together earning about 72 percent of the industry’s revenues-
+have outperformed the rest of the industry.6 Since 1980, they have gen-
+Shared Industrywide erally been more profitable and solvent than the other 11 Class I
+railroads.
+Profitability As a group, the five largest Class I railroads earned greater profits.
+Their return on investment averaged about 5.7 percent between 1980
+and 1988. By comparison, the returns of the 11 smaller Class I railroads
+averaged only about 3.5 percent in the 198Os, although the returns of 2
+of these railroads did improve.
+Short- And Long-Term
+Solvency
+The five largest Class I railroads had a higher collective current ratio
+than the 11 smaller Class I railroads. From 1980 to 1988, the current
+ratio of the five largest railroads averaged 126.4, compared with 110.0
+for the smaller railroads. While both groups’ average current ratios
+exceeded ICC’S suggested standard of 100.0 percent, the smaller rail-
+roads’ ratio dropped below the standard in 1987, when it was 93.8
+percent.
+The five largest Class I railroads had a lower collective fixed charge cov-
+erage ratio than the 11 smaller Class I railroads. Between 1980 and
+1988, the five largest railroads’ fixed charge coverage ratio averaged
+only 6.0, compared with 12.0 for the smaller railroads. However, the fig-
+ure for the smaller Class I railroads was influenced by one railroad with
+little debt. If this railroad is excluded, the 10 remaining railroads’ aver-
+age fixed charge coverage ratio was about 3.2.
+Most Railroads Are While the railroad industry’s financial health has improved, the indus-
+try’s return on investment has not equaled or exceeded the current cost
+Not Revenue Adequate f o capital-that is, the industry is not revenue adequate. Furthermore,
+most individual railroads are not revenue adequate, although in some
+years ICC found that a few railroads had achieved revenue adequacy.
+“On the basis of 1987 total operating revenues, the five largest railroads are CSX, Burlington North-
+ern, Consolidated Rail Corporation, Norfolk Southern, and Union Pacific.
+Cur analysis included all Class I railroads that reported to ICC during 1987 except those railroads
+comprising Gullford Transportation Industries. Because of incomplete information, 1988 data for the
+smaller Class I railroads exclude the Missouri-Kansas-Texas Railroad Company.
+Page 41 GAO/RCEDBO-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0043]]
+Chapter 3
+Bsllroade’ F+InanciaI He&b Has Improved, but Moat Railroads Are Not
+Revenue Adequate
+Without adequate revenues, a railroad has difficulty attracting and/or
+retaining the funds needed to operate.
+Industry’s Return on ICC considers railroads to be revenue adequate if their return on invest-
+Investment Lags Behind ment is equal to or greater than the current cost of capital for the indus-
+Current Cost of Capital try. We recomputed the railroads’ return on investment and excluded
+certain adjustments (such as deferred taxes) ICC makes for regulatory
+purposes. According to our calculations, the railroad industry was not
+revenue adequate at any time during the entire 1980-88 period. Since
+1980, the industry’s return on investment has averaged about 4.9 per-
+cent per year, compared with an average cost of capital of 13.9 percent.
+Despite the improved financial performance of large Class I railroads,
+neither the larger nor the smaller Class I railroads have achieved reve-
+nue adequacy. The gap between return on investment and the cost of
+capital grew in 1981 and 1982, a time when the cost of capital reached
+its peak (see table 3.1). However, from 1983 to 1988 the gap steadily
+narrowed. Except for the larger railroads, though, the difference
+remained greater than it was in 1980. A lower cost of capital, not higher
+earnings, largely contributed to the improvement.’
+Table 3.1: Revenue Adequacy of Class I
+Railroads
+Year
+1980
+1981
+1982
+1983
+Average return on
+investment
+5 largest 11 other
+railroads railroads
+5.23 5.45
+5.96 5.34
+4.36 2.40
+5.62 2.01
+%$ tZ
+11.2
+16.5
+17.7
+15.3
+Degree of revenue
+inadequacy
+5 largest 11 other
+railroads railroads
+-5.97 -5.75
+-10.54 -11.16
+-13.34 -15.30
+-9.68 -13.29
+1984 7.09 4.21 15.8 -8.71 -11.59
+1985 6.02 2.81 13.6 -7.58 -10.79
+1986 5.05 2.13 11.7 -6.65 -9.57
+1987 5.60 3.18 11.6 -6.00 -8.42
+1988 6.71 3.61 11.7 -4.99 -8.09
+‘In March 1981, ICC revised its revenue adequacy standards and began using the current cost of
+capital rather than an embedded (historical) cost of capital for comparison with return on invest-
+ment. This revision may account for increases in the cost of capital in 1981 and 1982.
+Page 42 GAO/RCED9W3O Impacts of the Staggera Rail Act of 1980
+
+[[PDF_PAGE_0044]]
+.
+chapter 3
+Railroads’ FlnanciaI Health Hns Improved,
+but Most Railroads Are Not
+Revenue Adequate
+ICC Revenue Adeq
+Determinations
+.uacy ICC has employed two standards for determining a railroad’s revenue
+adequacy. The first standard, adopted in 1978, required the use of three
+measures: (1) return on investment equal to the cost of capital, (2) vari-
+ous financial ratios intended to measure a railroad’s financial condition,
+and (3) a flow-of-funds model designed to determine whether net income
+is adequate to support a railroad’s capital needs. ICC found that this
+approach indicated only short-term financial viability and that its con-
+tinued use could prevent railroads from achieving the long-term revenue
+adequacy the Staggers Rail Act envisioned. The second standard,
+adopted in 1981, based revenue adequacy on return on investment equal
+to the current cost of capital. The new standard required that the cur-
+rent, rather than the embedded, cost of capital be used to calculate reve-
+nue adequacy.
+In 1986, ICC further revised its revenue adequacy standards. Although
+ICC retained the standard of comparing return on investment with the
+current cost of capital, it changed its method for calculating the various
+components of return on investment. In particular, ICC required that
+l accumulated deferred taxes be subtracted from the net investment base;
+l depreciation data, rather than retirement-replacement-betterment data,
+be used;
+9 various adjustments be applied to consolidate on a system basis all Class
+I railroads under common control; and
+l the calculations include the financial results of majority-owned Class I
+subsidiaries that were integral to rail operations, income taxes related
+only to rail operations, and interest income associated with working cap-
+ital investment.
+In October 1988, ICC once again revised its standards to, among other
+things, enhance compliance with cost-accounting principles adopted by
+the Railroad Accounting Principles Board.8 The 1988 revenue adequacy
+determination was the first to incorporate all of the changes to ICC’S
+standards.Q
+*The Railroad Accounting Principles Board was created by the Staggers Rail Act to, among other
+things, establish cost-accounting principles that ICC was to use in implementing regulatory provisions
+involving cost determinations.
+‘For more information on ICC methods for evaluating the revenue adequacy of railroads, see our
+report Railroad Revenues: Analysis of Alternative Methods to Measure Revenue Adequacy (GAO/
+NED-87-lSBR, Oct. 2,1986) and Railroad Accounting Rrinciples: Final Report, Railroad Accounting
+Principles Board (Sept. 1, 1987).
+Page 43 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0045]]
+Chapter 3
+Rallroade’ Financial Health Has Improved,
+but Most Railroads Are Not
+Revenue Adequate.
+Using the multi-indicator standard, ICC found 13 of the 36 Class I rail-
+roads to be revenue adequate in 1978. However, using the current cost
+of capital standard, ICC found only three railroads to be revenue ade-
+quate in 1979 and 1980, only two in 1981, and none between 1982 and
+1987.“’ In 1988, ICC concluded that four Class I railroads were revenue
+adequate-two only tentatively, pending comments on certain adjust-
+ments ICC had made to their financial statementsll ICC deemed 12 other
+Class I railroads revenue inadequate.
+Effects of Revenue
+Inadequacy
+Revenue inadequacy affects the ability of a railroad to attract and/or
+retain capital. Insufficient profits not only make it difficult to cover
+costs and maintain operations but also may induce investors to place
+their funds elsewhere. The Staggers Rail Act allows revenue-inadequate
+railroads to increase rates within the zone of rate flexibility and add
+surcharges to rates for traffic on light-density lines. We reported in 1986
+that ICC had not collected data on tariffs filed under the zone of rate
+flexibility or on the use of light-density surcharges.12 ICC still does not
+collect these data; however, one ICC official told us he believes that rail-
+roads have had little need for these provisions.
+Railroads Lag Behind Railroads continue to lag behind other transportation modes and indus-
+Other Transportation tries in profitability. We found that railroads’ rates of return not only
+are lower than those for the intercity trucking and natural gas pipeline
+Industries in Financial industries but also are among the lowest for major U.S. industries.13
+Performance Other financial indicators we used to compare these transportation
+modes showed mixed results.
+Railroads Have Poorer
+Profitability
+Trucks and gas pipelines have generated higher returns on investment
+than railroads (see fig. 3.7). The trucks’ returns on investment ranged
+between about 8.0 and 17.0 percent from 1980 to 1988 and were more
+than 10 percent in all years except 1982, while the gas pipelines’ returns
+“‘The number of Class I railroads generally declined between 1978 and 1987 from 36 to 18.
+“The railroads found revenue adequate were Burlington Northern, Chicago and North Western,
+Florida East Coast, and Norfolk Southern. The Burlington Northern and Chicago and North Western
+determinations were tentative.
+“Railroad Revenues: Analysis of Alternative Methods to Measure Revenue Adequacy (GAO/
+Rm-87-lm, Oct. 2,1986).
+i3The natural gas pipeline companies included in our analysis are those that derive at least 76 per-
+cent or more of their revenues from transporting gas for others.
+Page 44 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0046]]
+Chapter 8
+RaRroadr’ Flnanclal Health Has Improved,
+but Most Railroads Are Not
+Rmenue Adequate
+ranged between about 9.8 and 13.2 percent. The returns on investment
+for railroads, on the other hand, ranged between about 3.6 and 5.9 per-
+cent and have historically lagged behind those for trucks and other
+transportation modes. In addition, railroads did not improve their
+returns as much as trucks and gas pipelines following the 1981-82 reces-
+sion Between 1983 and 1988, railroads’ average return on investment
+was only about 3 percent higher than returns between 1980 and 1982-
+4.9 percent compared with 4.8 percent. Trucks and gas pipelines, how-
+ever, improved their returns by 16 and 6 percent, respectively.
+Figure 3.7: Returns on investment for
+Railroads, Trucks, and Gas Pipelines 20 Percant
+2
+0
+1980 1961 1992 1983 1984 1995 1988 1967 1999
+Year
+- Gas Pipelines
+-1-1 Trudta
+- Railroads
+As discussed earlier, return on investment performance depends on both
+asset turnover and profit margin. During the 198Os, railroads’ asset
+turnover ranged from 0.6 to 0.8 percent, which was lower than the
+trucking industry’s 4.1 to 5.3 percent but higher than the gas pipeline
+industry’s 0.3 to 0.5 percent. Railroads’ profit margin during the 1980s
+ranged from 5.3 to 9.1 percent, while trucks’ profit margin ranged from
+1.9 to 4.6 percent and gas pipelines’ from 25,l to 38.5 percent.
+Page 46 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0047]]
+chapter 3
+Railroads Pinancial Health Has Improved,
+but Most Railroads Are Not
+Revenue Adequate
+Two factors contributed to the railroads’ inability to match the financial
+performances of these other transportation modes: railroads must build
+and maintain their own rights-of-way, while trucks do not, and railroads
+have higher cost structures than gas pipelines. Right-of-way ownership
+affects asset turnover performance, while higher cost structures influ-
+ence profit margin performance.
+Railroads’ returns on equity showed mixed results compared with those
+of the other modes (see fig. 3.8). In general, railroads did better than
+trucks but not as well as gas pipelines. Between 1980 and 1988, trucks’
+returns on equity ranged between -2.0 and 13.6 percent, while gas pipe-
+lines’ returns ranged from 14.1 “;o 24.4 percent. Railroads’ returns on
+equity ranged between 6.9 and 11.6 percent and lagged behind the
+returns of the other two modes in 4 of the 9 years. Railroads were able
+to increase their average return about 4 percent following the 198182
+recession. In comparison, trucks’ equity returns increased 84 percent,
+while gas pipelines’ returns declined 12 percent.
+Figure 3.8: Returns on Equity for
+Rallroads, Trucks, and Gas Pipelines 26 Percent
+24
+22
+1960
+Ymr
+1991 1992 1992 1994 1985 1966 1997 1999
+- Gas Pipelines
+-1-1 Trucks
+m Railroads
+Page 46 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1989
+
+[[PDF_PAGE_0048]]
+,
+Chspter 3
+ltalhub’ Financial Health l-ha Improved,
+but Moat Ihilmda Are Not
+Revenue Adequate
+Finally, railroads lag behind other U.S. businesses in profitability. Rail-
+roads’ return on investment in 1988 was the lowest of a sample of 21
+industries we chose for comparison (see table 3.2). All but three of the
+industries earned returns on investment greater than 10 percent, while
+the railroads’ return on investment was only 6.6 percent. Railroads did
+not fare much better in terms of return on equity, which in 1988 was
+higher than the returns on equity of utilities and telecommunication
+companies, but lower than those of the 18 other industries.
+Table 3.2: Comparbon of 1888 Return8
+for RaIlroad and Other U.S. Buriner8es Figures in percent
+Industry
+Banks
+Health care
+Return on Return on
+investment ww
+32.5 16.6
+27.5 23.6
+Consumer products 23.7 22.6
+Discount and fashion retailing 21.3 15.8
+Chemicals 19.3 21.5
+Metals and minina 19.1 24.0
+Leisure time products 18.4 18.2
+Nonbank financial 18.3 14.2
+Food 15.9 20.7
+Paper and forest products 15.9 17.2
+Electrical and electronics 15.6 12.8
+Fuel 14.3 12.3
+Manufacturina 14.2 15.2
+Aerospace 13.7 13.3
+Office equipment and services 12.6 15.0
+Telecommunications 12.6 10.3
+Publishing and broadcasting 12.3 15.7
+Insurance 11.8 12.7
+Automotive 9.6 16.8
+Utilities 8.9 10.2
+Railroads 5.5 11.0
+Source: Business Week, ICC.
+Railroads have lagged behind other businesses in profitability for a long
+time. Our 1986 report on the revenue adequacy of railroads found that
+their return on equity in 1984 lagged behind the returns of five indus-
+tries, including the trucking and oil and gas industries, and exceeded
+only that of the steel industry. In November 1986, ICC also found that
+Page 47 GAO/RCEDW-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0049]]
+Chapter 3
+Railroads’ Financial Health Has Improved,
+but Most Railroads Are Not
+Revenue Adequate
+Class I railroads’ returns on investment and equity between 1979 and
+1983 were less than those of electric utilities and all manufacturers.14
+Other Financial Indicators Railroads generally lag behind trucks and gas pipelines in their ability to
+Show Mixed Results pay short-term debt (see fig. 3.9). The railroads’ current ratio has aver-
+aged about 113.0 percent since 1980, compared with 126.9 percent for
+trucks and 171.6 percent for gas pipelines. The current ratio has fluctu-
+ated for all three transportation modes since 1980. However, as their
+performances before and after the 1981-82 recession show, railroads did
+not do as well as the other two modes. Between 1983 and 1988, trucks’
+average current ratio was about the same as during the 1980-82 period,
+while gas pipelines’ ratio improved about 27 percent. By contrast, rail-
+roads’ current ratio declined about 6 percent-from an average of about
+117 percent to an average of about 111 percent.
+Figure 3.9: Current Ratios for Railroads,
+Trucks, and Gas Pipeline8 220
+220
+210
+200
+190
+180
+170
+160
+150
+140
+190
+120
+110
+100
+90
+80
+1980
+Year
+1951 1992 1993 1954 1955 1995 1997 1959
+- Gas Pipelines
+-1-1 Trucks
+m Railroads
+“Evaluation of Studies Prepared by Consumers United for Rail Equity (CURE) and Consumer Feder-
+ation of America (CFA), ICC, Bureau of Accounts (Nov. 1986).
+Page 48 GAO/RCED90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0050]]
+.
+Chapter 8
+ItaUmd~’ FY.namcial Health Has Improved,
+but Most IUlmade Are Not
+Revenue Adequate
+Railroads compare favorably with these two industries in long-term sol-
+vency, as a comparison of their fixed charge coverage ratios shows (see
+fig. 3.10). Since 1980, the railroads’ ratio has averaged about 4.6 annu-
+ally, compared with 3.4 and 2.8 for trucks and gas pipelines. These
+results largely reflect debt levels. According to an official at the Federal
+Energy Regulatory Commission, most of the transport-only pipelines in
+our analysis were new projects, which are financed typically by 76-per-
+cent debt and 26-percent equity. As a result, they carried about twice as
+much debt as railroads and trucks. We found that over the 1980-88
+period, the gas pipeline industry’s debt averaged about 61 percent of
+capital, compared with about 31 percent for trucks and 29 percent for
+railroads. According to a Federal Energy Regulatory Commission offi-
+cial, gas pipelines’ debt levels are expected to gradually decline as busi-
+ness develops and more revenues are generated. This official said that a
+debt of no more than 60 percent is good for the gas pipeline industry.
+Figure 3.10: Fixed Charge Coverage
+Ratios for Railroads, Trucks, and Qas
+Pipelines 6.5 Tima Flud Charges Covered
+6.0
+5.0
+4.8
+4.0
+3.6
+3.0
+2.5
+2.0
+1.6
+1989
+Yur
+1981 1902 1983 1964 1985 1986 1987 1988
+- Gas Pipelines
+-1.1 Trucks
+m Railroads
+Railroads have lower operating expenses, measured as a percentage of
+operating revenues, than trucks but higher operating expenses than gas
+pipelines, as a comparison of their operating ratios shows. Between
+Page 49 GAO/RCED-90-90 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0051]]
+Chapter 3
+Ralhads’ Fhancial Health Ha.9 Improved,
+but Most Rahiade Are Not
+Revenue Adequate
+1.980 and 1988, the railroad industry’s operating expenses were about
+88 percent of operating revenues, compared with about 97 percent for
+trucks and about 68 percent for gas pipelines. After the 1981-82 reces-
+sion, railroads improved their operating ratio more than trucks but not
+as much as gas pipelines. The railroads’ average operating ratio between
+1983 and 1988 was about 1.4 percent less than the average ratio
+between 1980 and 1982-87.8 percent compared with 89.1 percent. By
+contrast, trucks improved their average ratio by slightly less than 1 per-
+cent, while gas pipelines improved their average ratio by almost 13
+percent.
+Differences in operating ratios among the modes largely reflect the
+industries’ structural differences. According to the American Trucking
+Associations, since trucks do not own the highways and lease much of
+their equipment, less earnings are needed to replace assets. Conse-
+quently, the trucking industry’s operating ratios are higher than those
+of the railroad and gas pipeline industries. Gas pipelines, however, are
+very capital intensive, and their tariffs are regulated to cover the cost of
+doing business and to provide an acceptable rate of return. According to
+a Federal Energy Regulatory Commission official, labor costs for gas
+pipelines are only about 6.6 percent of operating expenses. In compari-
+son, railroads’ labor costs averaged about 49 percent of operating
+expenses in the 1980s. As a result, gas pipelines’ operating ratios are
+generally lower than those of railroads.
+Conclusions One of the primary purposes of the Staggers Rail Act was to improve the
+railroads’ financial health. Progress has been made in achieving this
+goal.
+To remain competitive, railroads have improved their financial health
+by reducing costs and becoming more efficient. They increased their
+profitability, improved their ability to meet long-term obligations, and
+reduced their debt levels. Short-term solvency improved in the early
+part of the 198Os, although it later declined. Railroads improved their
+financial health largely by cutting costs-abandoning lines, selling lines
+to other operators, and reducing their work force-as well as by
+improving productivity. Although railroads have benefited from tax leg-
+islation (which improved their cash flow) and declining interest rates
+(which reduced their debt costs), the Staggers Rail Act played a role in
+stimulating their financial health by facilitating cost reduction measures
+and inducing productivity.
+Page 60 GAO/RCED-SO-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0052]]
+.
+chapters Bailtoads’ YYnanclal Health Haa Improved,
+but Most Railroada Are Not
+Revenue Adequate
+Despite gains in many financial measures, the railroad industry is still
+not in robust financial health. Its financial performance lags behind that
+of other transportation modes, and financial gains have not been shared
+industrywide, In addition, even though the railroad industry has become
+more profitable, most railroads have not achieved revenue adequacy,
+Revenue inadequacy hampers their ability to attract and/or retain capi-
+tal and, in the long run, may hurt their ability to finance the capital
+acquisitions they need to provide competitive service. While some of the
+smaller Class I railroads have improved their profitability, others may
+be especially hindered in their ability to attract and/or retain capital
+because they are not as financially sound as the larger railroads.
+Page 51 GAO/RCED-90-90 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0053]]
+Chapter 4 ,
+Most-Though Not All-Shippers Have
+Benefited FYom Reduced Raboad Regulation
+Shippers have benefited from reduced regulation of the railroad indus-
+try and increased competition. Rates have declined, service has
+improved, and railroads have become more flexible in meeting customer
+needs. However, because of shippers’ individual circumstances-such as
+the type of commodity shipped, the degree of competition within a mar-
+ket, and the availability of contracts-the impact of reduced railroad
+regulation has varied. Some rates have declined more than others, and
+some shippers have experienced increased costs in the wake of railroad
+actions to eliminate uneconomical service. Disparities in rates and ser-
+vice were expected in the shift under regulatory reform to a market-
+oriented system.
+While most shippers are generally satisfied with the Staggers Rail Act,
+some shipper groups have expressed dissatisfaction with the way ICC
+has handled its remaining regulatory functions under the Staggers Rail
+Act. In particular, some shippers cite continuing burdensome regulatory
+processes and the difficulty in obtaining relief from harmful railroad
+actions as evidence that ICC has not acted to protect their interests. Since
+1985, in response to shippers’ concerns, ICC has modified some of its pol-
+icies and procedures for balancing the interests of railroads, shippers,
+and the public.
+Shippers Have The increased competitiveness of railroads, encouraged by the Staggers
+Benefited From Better Rail Act, was advantageous for most shippers. Overall, real rail rates
+h ave declined. Rail service has also improved: train service is more relia-
+Rates and Service ble, and freight car shortages, which might interrupt a shipper’s busi-
+ness, have declined. In addition, the creation of new shortline and
+regional railroads has provided continued rail service, often at better
+rates, in areas where it might have been interrupted. These changes
+have helped shippers to be more competitive in their own markets.
+Rates Declined Shippers have benefited from the fall in real rail rates since 1980. In
+April 1989, ICC reported that real rail rates-as measured by revenues
+per ton and deflated to 1987 dollars-fell an average of about 22 per-
+cent between 1980 and 1987 (see table 4.1). Rates fell for shipping seven
+of the nine commodity groups ICC studied. The declines ranged from
+about 10 percent for coal to about 44 percent for farm products. In con-
+trast, between 1978 and 1980-the comparison period ICC used-real
+rail rates increased about 9 percent, with coal rates rising about 9 per-
+cent and farm product rates about 14 percent. During the same period,
+Page 62 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0054]]
+‘
+Chapter 4
+Most-Though Not All-Shippers Have
+Benefited From Reduced RaRroad Regulation
+the rates for shipping other commodities also increased, except for rates
+for lumber and wood products, which declined 0.74 percent.
+Table 4.1: Average Real Rail Rate
+Changes Figures in percent
+Category 1978-80
+Rate change
+1980-87 1978-87
+Farm products 14.23 -44.01 -36.05
+Gal 9.36 -10.19 -1.78
+Food and kindred 14.09 -37.82 -29.06
+Lumber and wood -0.74 1 .Ol 0.26 -~-.-
+Pulp and paper 9.13 -19.40 -12.05
+Chemicals 4.49 -20.06 -16.47
+Transportation eauioment 5.60 3.83 9.64
+IntermodaP 13.93 -25.44 -15.05 _- _..- ---
+All others 8.16 -33.14 -27.68 -- -------.
+Average rate chanReb 8.55 -22.35 -15.71
+aTrailer-on-flatcar and container-on-flatcar.
+bAnnual rate changes for each category weighted by their share of revenue
+Source: ICC.
+Shippers, through negotiated contracts, have also been able to obtain
+lower rates and guaranteed service in return for predictable traffic
+volumes. Generally, the larger the volume to be transported, the larger
+the rate discount. According to a March 1984 ICC study, the main benefit
+of contracting for most shippers was discounted rates.’ ICC found that
+contracts particularly benefited shippers with competitive transporta-
+tion alternatives, who, faced with intense competition for their traffic
+during the 1981-82 recession, were able to negotiate significant rate con-
+cessions from railroads. Contracts have also benefited grain shippers.
+For example, in September 1986 the U.S. Department of Agriculture
+reported that contract rates for shipping wheat by rail from Kansas to
+port destinations in the Gulf of Mexico averaged about 17 percent less
+than published tariff rates in effect on the dates of the contracts.”
+‘Report on Railroad Contract Rates Authorized by Section 208 of the Staggers Rail Act of 1980, ICC
+(Mar. 13, 1984).
+‘Impacts of Rail Deregulation on Marketing of Kansas Wheat, U.S. Department of Agriculture (Sept.
+1986).
+Page 53 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0055]]
+Chapter 4
+Most-Thou& Not All-Shipper~ Have
+Reneflted From Reduced Rdlroad Regulation
+The creation of new shortline and regional railroads also brought rate
+benefits to many shippers. ICC’S October 1987 testimony before the Sen-
+ate Committee on Commerce, Science, and Transportation on shortline
+and regional railroads indicated that these smaller railroads not only
+continue rail service where such service could have been lost but that
+they also have operating cost advantages over Class I railroads. Because
+they have flexible work rules and lower wages, these railroads can offer
+competitive rates and still make a profit. According to an August 1989
+joint FRA and ICC survey of 627 shippers served by shortline and regional
+railroads created since 1980,94 percent reported that service levels had
+been maintained or had improved and 88 percent believed rates had
+improved or stayed the same.3 Three railroad representatives we inter-
+viewed, whose companies were created since 1980, said that the Stag-
+gers Rail Act enabled their firms to provide customers both competitive
+rates and improved service.
+Service Improved Shippers have also benefited from more reliable train service and fewer
+car shortages. In 1983, we surveyed 42 shippers that ICC had found
+likely to be in a market-dominant situation-that is, shippers that
+lacked effective transportation alternatives for certain movements of
+their goodss4 Despite this potential competitive disadvantage, about 86
+percent of these shippers reported that their rail service had not
+changed or had gotten better since passage of the Staggers Rail Act. Our
+1985 resurvey of these shippers found that almost 91 percent reported
+equal or better service under the Staggers Rail Act, including over 80
+percent of coal shippers. Those that did report service concerns most
+often singled out transit time as a problem.
+The improvement in rail service is illustrated by the decline in freight
+car shortages. According to a 1974 DOT survey of 193 manufacturers, a
+problem cited by about one-third of the shippers was the unavailability
+of railroad equipment.” Between 1973 and 1980, car shortages-ship-
+pers’ inability to obtain freight cars when needed-ranged to slightly
+over 2.6 percent of the serviceable freight car fleet. Since 1980, how-
+ever, there have been few or no shortages (see table 4.2). According to
+“A Survey of Shipper Satisfaction With ‘Service and Rates of Shortline and Regional Railroads, Joint
+Staff-, DUF, FRA; ICC, Office of Transportation Analysis (Aug. 1989).
+41nformation on Regulatory Reform Under the Staggers Rail Act of 19SO (GAO/RCED83-174, Aug.
+lr;lQW.
+“Industrial Shipper Survey (Plant Level), conducted by DUl’ as a part of the 1974 National Transpor-
+tation Study.
+Page 64 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0056]]
+chapter 4
+Moat-Though Not All-Shippen Have
+ReneftW From Reduc~~I Wlroad B0gulatton
+AAR, shortages have declined because of such factors as the use of con-
+tracts-which allow better car planning-and railroads’ better coordi-
+nation of train service. Fewer car shortages mean improved car
+utilization, which is reflected in the declining car cycle-the time
+between trips.0 In 1978, the average car cycle was 26.7 days, compared
+with about 17 days in 1988. As we reported in 1980, surpluses and
+shortages of freight cars fluctuate cyclically and geographically, as well
+as by car type.’ With fewer shortages, cars are more readily available to
+shippers, thereby improving service.8
+Table 4.2: Freight Car Shortages as a
+Percentage of the Rallroad Freight Car
+Fleet
+Year
+Car shortages
+Number of freight cars
+(in thousands) Percent of
+Percent of serviceable
+Total
+Number (in
+Serviceable thOUSatId8) total fleet fleet
+1973 1,711.3 1,604.6 34.; 2.00 2.13
+1974 1,710.z 1,607.g 10.0 058 0.6? --
+1975 1.725.1 1579.7 4.9 0.26 OS31
+1976 1,701.a 1,550.3 5.6 0.33 0.36
+- 1977 1,670.7 1,524.3 17.0 1.02 1.12
+1978 1.651.3 1513.5 38.3 2.32 2.53
+1979 1,689.2 1,594.6 16.0 0.09 1.00
+1980 1,703.2 1,598.6 .9 0 0
+1981 1,676.8 lS95.8 0 0 0
+1982 1.617.0 1.529.3 0.1 0
+1983 i551.9 1:451.7
+0
+0.1 0 0
+1984 1,498.5 1,403.o 0 0 0
+1965 1,433.6 1,346.8 3.4 0.02 0.03
+1986 1,355.2 13279.6 3.0 0.02 0.02 “~
+1987 1,286.l 1,213.3 2.7 0.02 0.02
+1968 1,247.7 1,179.6 1.5 0.01 OE
+Note: Numbers are for the fourth quarter of each year
+Source: GAO analysis of AAR data.
+“Car cycle is the time (m days) between freight car trips. If the car cycle decreases (i.e., the number of
+days between trips declines), then cars are more readily available to shippers and can make more
+trips per year. If the car cycle increases (Le., the number of days between trips increases), cars are
+not as readily available to shippers and cannot make as many trips per year.
+7There Is No Shortage of Freight Cars-Railroads Must Make Better Use of What They Have
+(CED-81-2,Nov. 10, 1980)
+“As table 4.2 illustrates, the total railroad freight car fleet has declined since 1980. In July 1989, the
+U.S. Department of Agriculture reported that without improvements ln cycle times and future addi-
+tions to the grain car fleet, grain car shortages could begin as early as 1990.
+Page 66 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0057]]
+Chapter 4
+Most-Though Not All-Shippers Have
+Reneflt43d Prom Reduced Rakoad IkgUhdiOIl
+Representatives of shippers we spoke with also believe service has
+improved as a result of the Staggers Rail Act. Representatives of four of
+the five associations we contacted said that, in general, the act has
+improved shippers’ competitiveness and opened new markets for their
+members through improved service and reduced rail rates9 Representa-
+tives of all five associations said that, to at least some degree, their
+members used, or previously had used, contracts. One representative
+said that contracts provided better service and prices, as well as
+reliability.
+Rail service, although improved, does not compare favorably with the
+service provided by trucks. A recent survey of 125 shippers found that
+although rail service had generally stayed the same or improved in the
+last 6 years, trucks rated higher than railroads in both price and service
+attributeslo Over 75 percent of the shippers surveyed reported that rail-
+roads’ reliability and equipment quality were the same or better over
+the last 5 years, and 49 percent reported that rail transit time had
+improved. However, trucks maintained an advantage over railroads in
+14 of 16 price and service attributes the survey measured, ranging from
+transit time and reliability to customer service and equipment quality
+and suitability. Railroads rated better than trucks only in their informa-
+tion systems and ability to interchange data electronically. For those
+attributes the shippers ranked of highest importance, trucks rated a
+higher advantage in 7 of 13 categories but a somewhat lower advantage
+in the other 6 attributes.”
+Reduced Railroad
+Regulation Has
+Affected Shippers
+Differently
+The transition under regulatory reform to a more market-oriented sys-
+tern was not expected to affect all shippers the same. While most ship-
+pers have gained from the Staggers Rail Act, not all have. Individual
+circumstances, such as the type of commodity shipped and the degree of
+inter- and intramodal competition, have determined which shippers
+have benefited from reduced railroad regulation. Rates have not
+eConsumers United for Rail Equity qualified its response by saying that where there is adequate
+competition, the Staggers Rail Act haa worked to provide reasonable rates and better service. How-
+ever, where there is a lack of competition, shippers have not been treated fairly.
+r”Temple, Barker, and Sloane, Inc., “Understanding and Meeting Customer Needs” (Lexington, Mass.:
+Nov. 1989).
+I ‘These seven attributes were reliability, timely notice of delays, customer service, ease of doing busi-
+ness, accurate estimated times of arrival, single-carrier service, and transit time. The other six attrib-
+utes were price, billing accuracy, loss and damage, equipment quality, claims, and equipment
+suitability.
+Page 66 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0058]]
+Chapter 4
+Moat-Though Not All-SNppers Have
+Benefited From Reduced Railroad Regulation
+changed to the same degree for all shippers, and areas with less compe-
+tition-the wheat market, for example-have seen fewer benefits than
+other areas. Marketplace competition was designed to replace regulation
+as the primary determinant of prices and services, with regulatory over-
+sight reserved for cases in which markets did not produce competitive
+results.
+Competitiv
+Rail Rates
+‘e Factors Affect Rail rates for different commodities reflect both competitive market
+conditions and the commodities’ different transportation requirements.
+Less regulation has given the railroads more flexibility in meeting com-
+petition from trucks and barges, which typically compete with railroads
+for the shipment of different types of traffic. Barges compete for low-
+value commodities that are less sensitive to delivery times, such as grain
+and coal, while trucks more often compete for the transportation of
+high-value finished goods, such as automobiles and other manufactured
+goods. In some parts of the nation, however, water transport is not
+available and truck transport is not a viable means by which rates will
+be constrained to competitive levels.
+To study how railroad competition has affected rates, we examined
+rates for shipping wheat in sections of the country that differed in the
+number of railroads serving the area. Wheat is a bulk agricultural com-
+modity for which railroads generally face less competition from barges;
+consequently, competition among railroads is a key determinant of rail
+rates for wheat shipments. Rail rates for wheat can be closely approxi-
+mated by the spread between prices paid for wheat at grain elevators in
+the Plains States and delivered prices at Portland and Houston-repre-
+sentative transfer points for export wheat.12 We found that inflation-
+adjusted spreads for both spring and hard red winter wheat have
+declined since 1980, indicating that rail rates have fallen (see fig. 4.1).
+However, the spread has declined less in areas like the Northern Plains,
+where there are relatively few railroads, than in areas like the South-
+Central Plains, where there are more railroads offering service.13 In
+recent years, the spread has increased because of increased grain
+‘“As of January 1987, about two-thirds of the nation’s wheat farms are in the plains states from
+Texas to North Dakota, including Colorado and Montana.
+%eclines in these spreads may also indicate the use of multiple-car or unit train discounts-that is,
+shipments of a single commodity to one destination in units of 26 rail cars or more at a reduced rate.
+Multiple-car discounts originated before passage of the Staggers Rail Act. However, the use of such
+discounts may have accelerated since 1980 because of the increased pricing flexibilites introduced by
+the reduction in railroad regulation.
+Page 67 GAO/RCED80-80 Impacts of the Staggers Raii Act of 1980
+
+[[PDF_PAGE_0059]]
+Chapter 4
+Moat-Though Not All-Shippers Have
+Jkneflted Fkom Reduced Raikoad Regulation
+exports, among other factors, but the spreads are still lower in real
+terms than they were during the late 1970s.
+Figure 4.1: Index of Wheat Price Spreads
+In the Plaina States Index (1977d99)
+130
+129
+110
+100
+w
+80
+70
+90
+80
+40
+30
+1977 1979 1979 1999 1981 1992 1993 1994 1985 1996 1997 1999
+Ymu
+- Northern Plains
+- - - - Southern and Central Plains
+Rail rates for coal have declined only about half the average for all com-
+modities. Moreover, according to ICC statistics, the percentage of coal
+shipments moving at rates exceeding the current threshold for ICC regu-
+lation of maximum rail rates-a revenue-to-variable-cost ratio of 180
+percent-has generally increased from about 20 percent in 1980 to
+about 46 percent in 1987.
+Whether railroads have exercised market power to extract higher prof-
+its from coal shippers is unclear. On the one hand, according to a May
+1986 Department of Energy draft report, although a large number of
+coal shippers lacked competitive alternatives and were therefore vulner-
+able to potential railroad market abuse, there was little evidence that
+Page 58 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0060]]
+Chapter 4
+Moot-Though Not All-SNppers Have
+BenefIti From Reduced Railroad Regulation
+railroads had imposed excessive rates on coal since passage of the Stag-
+gers Rail Act.‘4 On the other hand, of the 30 ICC decisions issued between
+1980 and May 1989 in which rates were found unreasonable, 15
+involved coal rates. According to a National Coal Association official,
+greater railroad competition, contracts, and increased railroad efficiency
+since 1980 have benefited the coal industry, but deregulation has not
+decreased coal captivity to railroads and rate moderation has not meant
+reasonable rates.
+Other Impacts Not all shippers have been able to obtain rail contracts and the rate and
+service benefits that come with them. ICC’S February 1987 study of 152
+small- to medium-size grain shippers (up to 2,000 rail carloads annually)
+and 29 large grain shippers (over 2,000 carloads annually) found that
+the smaller shippers were largely unable to secure rail contract rates
+because they lacked the necessary volume.16 As a result, some country
+grain elevators became noncompetitive, since contracts allowed the
+high-volume shippers to offer higher prices to farmers.‘6 Farmers often
+bypassed the low-volume shippers to obtain better prices at the high-
+volume locations. Thus, high-volume shippers benefited from lower
+transportation rates, and farmers benefited from higher prices, while
+smaller shippers paid higher rates to move their products.
+Line abandonments have also adversely affected some shippers. In Feb-
+ruary 1986, ICC reported the results of an informal survey of state,
+county, and community leaders and shippers affected by 16 line aban-
+donments between 1981 and 1983. ICC found that there were no business
+closings and that most civic and elected officials noted only minimal
+impacts on their communities. However, 33 of the 45 shippers reported
+some type of adverse effect, such as increased transportation costs and/
+or additional expenses to modify facilities to accommodate trucks. In
+July 1987, we reported the results of our survey of 163 protesters of
+i4Effects of Railroad Regulatory Reform on Coal and Electricity, Staff Working Draft, Interim Tech-
+nical Report, U.S. Department of Energy (May 1986).
+‘6% tocongre ICC f% (Feb. 18,1987).
+The 162 small- to medium-size shippers represented 214 country gram elevators, 10 feed mills, 6
+grain firms, and 1 farmer. Collectively, the 29 large shippers shipped and/or received over 1.3 million
+carloads of grain annually.
+L”Accordiig to ICC, the price farmers receive for their grain is generally the prevailing market price
+minus transportation costs and elevator handling charges. The primary function of the country eleva-
+tor is to buy farmers’ grain and sell it to processors, exporters, and livestock and poultry feeders.
+Page 59 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0061]]
+Chapter 4
+Most-Though Not All-Shippers Rave
+Reneflted Prom Reduced Raiboad Regulation
+line abandonments, 64 of which classified themselves as independent
+shippers or receivers or as representatives of an independent shipper or
+receiver.” About 54 percent of the shippers reported that shipping and
+other costs had increased as a direct result of an abandonment. Further-
+more, 12 shippers that transported such bulk commodities as grain and
+fertilizer found it necessary to relocate their businesses.
+Finally, cancellations of joint rates and of reciprocal switching agree-
+ments have also negatively affected some shippers. Our June 1987
+review of 18 joint rate and reciprocal switching cancellationsls found
+that 8 of 12 shippers had experienced a deterioration in service, such as
+longer transit times.19 Captive shippers-shippers that must use rail-
+roads to transport their goods -experienced both increased costs and
+reduced service. Some shippers reported that cancellations had limited
+their shipping alternatives and reduced competition. According to an
+August 1987 FRA survey, shippers generally characterized cancellations
+as moderately disruptive and temporary, although some shippers had
+experienced intermittent impediments in the flow of their goods and/or
+fewer rail transportation alternatives.20
+Shippers Have Voiced Shippers that believe they have been disadvantaged by the Staggers Rail
+Concern Over ICC’s Act are dissatisfied not so much with the legislation as with the policies
+and procedures ICC follows in addressing their grievances. They believe
+Implementation of the that difficulties in bringing protests or complaints, the burden of prov-
+Staggers Rail Act ing their cases, and the time and expense involved all hinder their abil-
+ity to obtain relief from railroad actions they believe are harmful to
+their interests. Some shippers also believe that ICC has failed to protect
+them against unreasonable rates and practices, as required by the Stag-
+gers Rail Act. In response to shippers’ concerns, ICC has adopted new
+policies, procedures, and rules since 1985.
+“Rail Abandonments: Abandonment Activity and Shipper Views on Rail Service loss (GAO/
+RCED-87-82, July 17,1987).
+isThe total number of such cancellations is unknown. However, we examined 9 joint rate and 9 recip
+rocal switching cancellations of the 93 protested joint rate and reciprocal switching cancellations
+between October 1980 and September 1986.
+lsRailroad Regulation: Competitive Access and Its Effects on Selected Railroads and Shippers (GAO/
+RCE?&l’,-109, June 18, 1987).
+20Joint Rate Cancellations Study, DCI, FRA, Report No. DCi’-PRA-RRP-87-02 (Aug. 1987).
+Page 60 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0062]]
+Chapter 4
+Meet-Though Not All-Shippers Have
+Benefited From Reduced Railroad Regulation
+Difficulties With Relief
+Procedures and ICC’s
+Protection of Shippers’
+Interests
+Although representatives from all of the trade associations we contacted
+supported the Staggers Rail Act and felt it has benefited their members,
+all five associations criticized ICC’S protest and complaint procedures as
+time-consuming, expensive, and burdensome, especially for small ship-
+pers. In addition, representatives of two associations said that shippers,
+not railroads, bear much of the burden of proof in relief cases. In our
+September 1987 report, we found that the average length of five pend-
+ing rate cases we reviewed was about 7 years. The costs for legal and
+other fees for 5 of the 19 cases we reviewed were over $1 million.21 Offi-
+cials of 8 of the 19 shippers we contacted said they would probably not
+use the complaint process again, in part because of the cost and time
+involved.
+Shippers also believe that ICC has not protected their interests. Accord-
+ing to representatives of four of the trade associations we contacted, the
+most detrimental aspects of the changes in railroad regulation have been
+ICC’S implementation of the Staggers Rail Act provisions designed to pro-
+tect captive shippers or promote railroad competition.22 In particular,
+Consumers United for Rail Equity, a coalition of electric utility compa-
+nies and coal producers, has alleged that ICC’S actions have nullified the
+protection for captive shippers contained in the Staggers Rail Act. This
+organization also contends that captive shippers pay rail rates in excess
+of what is needed to provide railroads with a competitive rate of return.
+In addition, the Procompetitive Rail Steering Committee, an ad hoc
+organization of industrial and agricultural companies, believes ICC has
+failed to preserve and promote competition between railroads in mar-
+kets where railroads are not subject to competitive pressures. The com-
+mittee cites, among other things, ICC’S refusal to curtail blanket
+cancellations of joint rates. Finally, the National Industrial Transporta-
+tion League, representing both rail and nonrail shippers, has complained
+that joint rate and reciprocal switching cancellations have reduced rail-
+road competition and hurt shippers’ ability to market their products.
+Despite these concerns, some shippers have been successful in obtaining
+relief at ICC. For example, as our review of ICC decisions between 1980
+and May 1989 showed, complainants (generally shippers) have won 80
+“‘Railroad Regulation: Shipper Experiences and Current Issues in ICC Regulation of Rail Rates (GAO/
+Rm-S’/-119, Sept. 9, 1987).
+“The Committee Against Revising Staggers identified no major problems with the Staggers Rail Act.
+Page 61 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0063]]
+Chapter 4
+Most-Though Not All-Shippers Have
+Benefited From Reduced RaUroad Regulation
+of 96 market dominance cases and 30 of 66 rate reasonableness deci-
+sions.23 ICC has granted monetary relief in several cases, including $23
+million in one casez4 and $22 million in another.26
+ICC Has Modified Its
+Policies and Procedures
+Since 1986, in response to shippers’ concerns, ICC has adopted new
+guidelines for determining market dominance, new criteria for evaluat-
+ing the reasonableness of rates, and new rules regarding the cancellation
+of joint rates.
+In August 198 1, ICC adopted evidentiary guidelines for determining rail-
+road market dominance. The guidelines required shippers to prove that
+four types of competition were absent before a railroad would be consid-
+ered market dominant. The four types of competition were intramodal
+(between railroads), intermodal (railroads against other transportation
+modes), product (substitute products were available for the one being
+shipped), and geographic (alternative sources were available for the
+product being shipped). In response to shippers’ concerns about this
+burden of proof, in October 1986 ICC agreed in principle to a compromise
+reached by AAR, the National Industrial Transportation League, and the
+American Paper Institute, which shifted from shippers to railroads the
+burden of proof on product and geographic competition.
+In September 1985, ICC adopted the Constrained Market Pricing method
+for evaluating the reasonableness of rates for captive coal shipments.26
+ICC believed that this approach would allow railroads to attain revenue
+adequacy, while protecting captive coal shippers from monopolistic pric-
+ing. However, recognizing the burden and expense the Constrained Mar-
+ket Pricing method could cause small shippers transporting commodities
+other than coal, in March 1987 ICC proposed two alternative methods.
+One method would use replacement costs and the other revenue-to-vari-
+able-cost ratios, rather than stand-alone costs,27 to determine maximum
+23The remaining rate reasonableness cases were still awaiting ICC decisions.
+240maha Pub. Power Dist. v. Burlington N.R.R., 3 ICC. 2d 123 (1986).
+2”Arkansas Power and Light v. Burlington N.R.R., 3 I.C.C. 2d 767 (1987).
+2”Constrained Market Pricing allows railroads to set rates in all markets according to the demand for
+rail service. To prevent the overcharging of captive shippers, rates are subject to constraints that ICC
+believes simulate the pricing of competitive markets.
+27Stand-alone costs estimate the theoretical maximum rate that a railroad can charge a captive ship-
+per without diverting substantial traffic to a hypothetical new competitor organized to provide rail
+service.
+Page 62 GAO/RCED@O-SO Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0064]]
+Chapter 4
+Most-Though Not All-Shipper8 Have
+Benefited From Reduced RaUroad Regulation
+reasonable rates. According to an ICC official, both alternatives are gen-
+erally easier to apply than Constrained Market Pricing. As of February
+1990, ICC had not adopted these alternatives in final, but ICC has applied
+them in several cases to evaluate the reasonableness of rates.
+Finally, in October 1986 ICC adopted new rules for joint rate cancella-
+tions.28 AAR and shippers negotiated these rules, as they did the changes
+shifting the burden of proof in market dominance cases. These rules
+required, among other things, that railroads notify affected parties ear-
+lier of proposed joint rate cancellations, that railroads explain and jus-
+tify cancellations, and that railroads and shippers pursue negotiations
+of their disputes before bringing them to ICC. ICC believed these changes
+would allow more time for shippers and railroads to review proposed
+cancellations and would promote better cooperation between railroads
+and shippers. ICC would also have more information available should a
+cancellation be protested. The rules also eased the criteria for suspen-
+sion of a joint rate cancellation. Under these rules, ICC will suspend a
+joint rate cancellation if the protester can show that the cancellation
+would eliminate effective railroad competition for the affected traffic
+and that the protesting shipper or railroad has used, or would use, the
+joint rate for a significant portion of its traffic. ICC officials said that as
+a result of this change, it could be easier to obtain a suspension.
+Conclusions Shippers have benefited from the Staggers Rail Act in a number of
+ways. Real rail rates have declined on average about 22 percent since
+1980, rail service has improved for many shippers, and railroads are
+generally more responsive to shippers’ needs. One of the most signifi-
+cant benefits has been contracts, through which shippers receive
+reduced rates and improved service in return for volume commitments.
+With the greater predictability contracts afford, shippers can better
+plan their operations and investments and thus enhance their competi-
+tiveness. The creation of new shortline and regional railroads has also
+benefited shippers by allowing rail service to continue-often at lower
+cost-in areas where it could have been lost.
+Some shippers, however, have not benefited. Shippers transporting cer-
+tain commodities-coal, for example-have found that their rail rates
+did not decline as much as the average or that rates increased after pas-
+sage of the Staggers Rail Act. Some small shippers have been unable to
+obtain contracts from railroads or negotiate terms as favorable as those
+““IntramodaI Rail Competition, Ex Parte 446 (Sub-No.l), decided October 29, 1986.
+Page 63 GAO/WED-90-30 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0065]]
+Chapter 4
+Most-Though Not All-Shippers Have
+Reneflted From Reduced Bailroad Regulation
+offered to larger shippers. In some cases, this situation has made these
+shippers less competitive, Other shippers have experienced increased
+costs and/or lost transportation alternatives because of line abandon-
+ments and the cancellation of joint rates. These outcomes were not unex-
+pected in the transition to a more market-oriented, economically
+efficient system of railroad regulation.
+Some shippers have complained about ICC’S implementation of the Stag-
+gers Rail Act. In particular, they believe that ICC’S relief procedures are
+burdensome, time-consuming, and expensive. Some shippers also believe
+ICC has not acted affirmatively to curb market power abuse and/or
+increase railroad competition, actions they believe would protect their
+interests. While we did not evaluate ICC’S performance in balancing the
+interests of railroads and shippers, we did find that ICC has revised some
+of its policies and procedures to address shippers’ concerns and to more
+accurately evaluate the many issues involved in deciding the reasona-
+bleness of rates and other matters.
+Page 64 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0066]]
+.
+L
+Page 65 GAO/RCED-O-90 Impacts of the Staggers Rail Act of 1990
+
+[[PDF_PAGE_0067]]
+Appendix I G
+1988 Profile of Class I Railroads Included in
+GAO’s Study
+Dollars in billions
+RailroadC
+Operating revenue0
+Percent of
+total for all
+Class I
+TOtal railroads
+Revenue ton-milerb
+Percent of
+total for all
+Class I
+Total railroads
+Atchison Topeka and Santa Fe $2.1 7.5 77.3 7.7
+Burlinaton Northern 4.5 16.1 223.5 22.4
+Chicaao and North Western 3.2 3.0
+Conrail 3.4 12.1 85.4 8.6
+csx 4.4 15.7 143.2 14.4
+Illinois Central 0.6 2.1 17.0 1.7
+Union Pacific 4.3 15.4 176.6 17.7
+Total for railroads contacted $20.2 72.1 753.4 75.5
+Total for Class I railroads $28.0 100.0 997.5 100.0
+‘Operating revenues are monies received for the transportation of passengers and property.
+bRevenue ton-mile represents 1 ton carried 1 mile for which a charge is received.
+‘We also contacted the following Class II and Class III railroads: Iowa Interstate, MidSouth Rail Corpora-
+tion, Wisconsin Central, and Genesee and Wyoming Industries.
+Page 66 GAO/RCED-99-99 Impacts of the Staggers Rail Act of 1999
+
+[[PDF_PAGE_0068]]
+.
+Appendix II
+l&t of Trade Associations Contacted by GAO
+Committee Against
+Revising Staggers
+Membership: 462 corporations that use railroads for their transporta-
+tion needs, Member companies vary in size from Fortune 600 companies
+(16 percent) to companies earning less than $100 million per year (70
+percent). Purpose: To address the major issues relating to the Staggers
+Rail Act and inform the public that the act is working and achieving its
+overall goal of keeping the country’s railroads viable in the private
+sector.
+Consumers United for Rail Membership: 90 dues-paying members, including 40 investor-owned util-
+Equity ities, 12 public power utilities, and 16 to 20 coal production companies.
+Prerequisite for membership is the exclusive use of rail service for
+transportation needs. Purpose: To encourage more competition in the
+railroad industry and better protection by ICC of captive shippers-ship-
+pers without transportation alternatives.
+National Coal Association Membership: 86 members representing both eastern and western coal
+producers. Members produce about 66 percent of all domestic coal pro-
+duced. Purpose: To represent the interests of the coal industry before
+the Congress, federal agencies, and the courts. The National Coal Associ-
+ation has been involved with Consumers United For Rail Equity in legis-
+lative initiatives to address railroad competitive access and rate
+reasonableness issues.
+National Grain and Feed
+Association
+Membership: 1,300 companies involved in the processing of grain and
+feed. Member companies range in size from $1 million to $30 billion in
+annual revenues. Purpose: To, among other things, advance and protect
+the interests of the grain and feed industry, including issues related to
+the railroad industry.
+National Industrial
+Transportation League
+Membership: 1,300 to 1,400 members representing industrial and com-
+mercial shippers, boards of trade, chambers of commerce, and similar
+groups. Its members use all modes of transportation and directly or indi-
+rectly represent 86 percent of the freight traffic that moves in the
+United States. Purpose: To attain and preserve a safe, adequate, and
+efficient national transportation system, privately owned and operated,
+and to protect and promote shippers’ interests in transportation devel-
+opments and issues.
+Page 67 GAO/RCED-90430 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0069]]
+Appendix III
+Major Contributors to This Report
+Resources, James D. Noel, Assistant Director
+Community, and Francis P. Mulvey, Assistant Director
+Richard A. Jorgenson, Evaluator-in-Charge
+Economic Mary L. Dietrich, Evaluator
+Development Division,
+Edwin H. Woodward, Evaluator
+Stephen M. Brown, Economist
+Washington, D.C. Sharon E. Butler, Writer-Editor
+Page 68 GAO/RCRD-99.89 Impacta of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0070]]
+.
+Page 69 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0071]]
+Page 70 GAO/RCED-9O-SO Impacta of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0072]]
+.
+c
+Page 71 GAO/RCED-90-80 Impacts of the Staggers Rail Act of 1980
+
+[[PDF_PAGE_0073]]
+Related GAO Products
+Railroad Retirement: Future Rail Employment and Trust Fund Solvency
+(GAO/HRD-89-30, Apr. 5, 1989).
+Railroad Regulation: Shipper Experiences and Current Issues in ICC Reg-
+ulation of Rail Rates (GAO/RCED-87-119, Sept. 9, 1987).
+Rail Abandonments: Abandonment Activity and Shipper Views on Rail
+Service Loss (GAO~RCED-87-82, July 17,1987).
+Railroad Regulation: Competitive Access and Its Effects on Selected
+Railroads and Shippers (GAO/RCED-87-109, June 18, 1987).
+Grain Shipments: Agriculture Can Reduce Costs by Increased Use of
+Negotiated Rail Rates (GAO/RCED-87-42, Jan. 21, 1987).
+Railroad Revenues: Analvsis of Alternative Methods to Measure Reve-
+nue Adequacy (GAO/RCED-87-16BR,Oct. 2, 1986)
+Shipper Rail Rates: Interstate Commerce Commission’s Handling of
+Complaints (GAO/RCED-86-64Fs, Jan. 30, 1986).
+Information on Regulatory Reform Under the Staggers Rail Act of 1980
+(GAO/RCED-83-174, Aug. 17, 1983).
+(843808) Page 72 GAO/RCED&WO Impacts of the Staggers Rail Act of 1990
+
+[[PDF_PAGE_0074]]
+The first. five copies of each report are free. Additional copies are
+.yiLOO WC’h.
+‘I’ht~rta is a 25% discottnt on orders for 100 or tttore copies mailed to a
+sittg;le address.
+Orclt~rs tttrtst be prepaid by cash or by check or mottey order made
+ottt. to the Sttltt’rittl,~tttlttt~ of Documents.
+
+[[PDF_PAGE_0075]]
+I --~ --.
+i IJnited States First-Class Mail ‘8 -“I <hwral Accounting Offiw iI’ Washington, I).(:. 20548 r Postage & Fees Paid
+I Permit No. GlOO
+/ Official Hushwss
+Penalty for Private 1Jsth $300
+i

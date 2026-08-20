@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 59986,
+  "content_sha256": "03bad9eab603835da7d4cc496a048a4ef01ceebea55f3f3c935eb09498b6ad54",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962825000050/redactedmetamsa929finald.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0090_03bad9eab603835d.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962825000050/redactedmetamsa929finald.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-09-25",
+  "publisher": "CoreWeave Inc. and Meta Platforms Inc.",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0090_03bad9eab603835d.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:41.578033+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:41.385594+00:00",
+  "selected_response_headers": {
+    "content-length": "17759",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:41 GMT",
+    "last-modified": "Tue, 30 Sep 2025 13:00:42 GMT"
+  },
+  "source_id": "SRC-0090",
+  "status": "preserved_complete",
+  "title": "CoreWeave Meta master services agreement",
+  "write_state": "new_version_written"
+}

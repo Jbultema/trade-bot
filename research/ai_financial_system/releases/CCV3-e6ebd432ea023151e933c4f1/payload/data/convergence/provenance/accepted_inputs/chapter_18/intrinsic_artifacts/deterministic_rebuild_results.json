@@ -1,0 +1,10 @@
+{
+  "artifact_paths_and_hashes_match": true,
+  "canonical_integration": "NOT_AUTHORIZED",
+  "clean_core_builds_compared": 2,
+  "comparative_publication": "BLOCKED",
+  "manifest_hashes_match": true,
+  "manifested_artifacts_compared": 49,
+  "shared_manifest_sha256": "2415313fa39213efb4b8e4240f921e9b125ebb21bb59621d7668592e77959107",
+  "status": "PASS"
+}

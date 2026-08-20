@@ -44,5 +44,7 @@ def test_i111_evidence_frames_include_metrics_and_provenance(tmp_path) -> None:
     assert frames["manifests"].iloc[0]["study"] == "i111_execution_smoothing_v2_3"
     assert frames["manifests"].iloc[0]["market_date"] == "2026-07-20"
     assert not bool(frames["manifests"].iloc[0]["automatic_promotion_allowed"])
+    assert frames["manifests"].iloc[0]["oos_evidence_status"] == "missing_oos_evidence"
+    assert not bool(frames["manifests"].iloc[0]["oos_promotion_eligible"])
     assert frames["manifests"].iloc[0]["artifact_integrity_status"] == "verified"
     assert frames["manifests"].iloc[0]["source_tree_status"] == "current"

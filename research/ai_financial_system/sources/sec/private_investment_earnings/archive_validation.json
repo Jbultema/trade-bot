@@ -1,0 +1,65 @@
+{
+  "checks": [
+    {
+      "exists": true,
+      "identity_match": true,
+      "looks_like_sec_inline_xbrl": true,
+      "source_id": "SRC-0010",
+      "status": "PASS"
+    },
+    {
+      "exists": true,
+      "identity_match": true,
+      "looks_like_sec_inline_xbrl": true,
+      "source_id": "SRC-0011",
+      "status": "PASS"
+    },
+    {
+      "exists": true,
+      "identity_match": true,
+      "looks_like_sec_inline_xbrl": true,
+      "source_id": "SRC-0012",
+      "status": "PASS"
+    },
+    {
+      "exists": true,
+      "identity_match": true,
+      "looks_like_sec_inline_xbrl": true,
+      "source_id": "SRC-0013",
+      "status": "PASS"
+    },
+    {
+      "exists": true,
+      "identity_match": true,
+      "looks_like_sec_inline_xbrl": true,
+      "source_id": "SRC-0014",
+      "status": "PASS"
+    },
+    {
+      "exists": true,
+      "identity_match": true,
+      "looks_like_sec_inline_xbrl": true,
+      "source_id": "SRC-0018",
+      "status": "PASS"
+    },
+    {
+      "exists": true,
+      "identity_match": true,
+      "looks_like_sec_inline_xbrl": true,
+      "source_id": "SRC-0064",
+      "status": "PASS"
+    },
+    {
+      "exists": true,
+      "identity_match": true,
+      "looks_like_sec_inline_xbrl": true,
+      "source_id": "SRC-0078",
+      "status": "PASS"
+    }
+  ],
+  "failed_source_count": 0,
+  "manifest_path": "research/ai_financial_system/sources/sec/private_investment_earnings/source_archive_manifest.csv",
+  "passed_source_count": 8,
+  "source_count": 8,
+  "status": "PASS"
+}

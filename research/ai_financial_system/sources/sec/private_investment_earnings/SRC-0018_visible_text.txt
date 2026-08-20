@@ -1,0 +1,2219 @@
+nvda-20260426
+UNITED STATES
+SECURITIES AND EXCHANGE COMMISSION
+Washington, D.C. 20549
+FORM 10-Q
+☒
+QUARTERLY REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+For the quarterly period ended April 26, 2026
+OR
+☐
+TRANSITION REPORT PURSUANT TO SECTION 13 OR 15(d) OF THE SECURITIES EXCHANGE ACT OF 1934
+Commission File Number: 0-23985
+NVIDIA CORPORATION
+(Exact name of registrant as specified in its charter)
+Delaware
+94-3177549
+(State or other jurisdiction of
+(I.R.S. Employer
+incorporation or organization)
+Identification No.)
+2788 San Tomas Expressway, Santa Clara, California
+95051
+(Address of principal executive offices)
+(Zip Code)
+(408) 486-2000
+(Registrant's telephone number, including area code)
+N/A
+(Former name, former address and former fiscal year, if changed since last report)
+Securities registered pursuant to Section 12(b) of the Act:
+Title of each class
+Trading Symbol(s)
+Name of each exchange on which registered
+Common Stock, $0.001 par value per share
+NVDA
+The Nasdaq Global Select Market
+Indicate by check mark whether the registrant (1) has filed all reports required to be filed by Section 13 or 15(d) of the Securities Exchange Act of 1934 during the preceding 12 months (or for such shorter period that the registrant was required to file such reports), and (2) has been subject to such filing requirements for the past 90 days. Yes ☒ No ☐
+Indicate by check mark whether the registrant has submitted electronically every Interactive Data File required to be submitted pursuant to Rule 405 of Regulation S-T (§232.405 of this chapter) during the preceding 12 months (or for such shorter period that the registrant was required to submit such files). Yes ☒ No ☐
+Indicate by check mark whether the registrant is a large accelerated filer, an accelerated filer, a non-accelerated filer, a smaller reporting company, or an emerging growth company. See the definitions of “large accelerated filer,” “accelerated filer,” “smaller reporting company,” and “emerging growth company” in Rule 12b-2 of the Exchange Act.
+Large accelerated filer
+☒
+Accelerated filer
+☐
+Non-accelerated filer
+☐
+Smaller reporting company
+☐
+Emerging growth company
+☐
+If an emerging growth company, indicate by check mark if the registrant has elected not to use the extended transition period for complying with any new or revised financial accounting standards provided pursuant to Section 13(a) of the Exchange Act. ☐
+Indicate by check mark whether the registrant is a shell company (as defined in Rule 12b-2 of the Exchange Act). Yes ☐ No ☒
+The number of shares of common stock, $0.001 par value, outstanding as of May 15, 2026, was 24.2 billion.
+NVIDIA Corporation
+Form 10-Q
+For the Quarter Ended April 26, 2026
+Table of Contents
+Page
+Part I : Financial Information
+Item 1.
+Financial Statements (Unaudited)
+a) Condensed Consolidated Statements of Income for the three months ended April 26, 2026 and April 27, 2025
+3
+b) Condensed Consolidated Statements of Comprehensive Income for the three months ended April 26, 2026 and April 27, 2025
+4
+c) Condensed Consolidated Balance Sheets as of April 26, 2026 and January 25, 2026
+5
+d) Condensed Consolidated Statements of Shareholders’ Equity for the three months ended April 26, 2026 and April 27, 2025
+6
+e) Condensed Consolidated Statements of Cash Flows for the three months ended April 26, 2026 and April 27, 2025
+7
+f) Notes to Condensed Consolidated Financial Statements
+8
+Item 2.
+Management’s Discussion and Analysis of Financial Condition and Results of Operations
+23
+Item 3.
+Quantitative and Qualitative Disclosures About Market Risk
+30
+Item 4.
+Controls and Procedures
+31
+Part II : Other Information
+Item 1.
+Legal Proceedings
+31
+Item 1A.
+Risk Factors
+31
+Item 2.
+Unregistered Sales of Equity Securities and Use of Proceeds
+38
+Item 5.
+Other Information
+39
+Item 6.
+Exhibits
+40
+Signature
+41
+Where You Can Find More Information
+Investors and others should note that we announce material financial information to our investors using our investor relations website, press releases, SEC filings and public conference calls and webcasts. We also use the following social media channels as a means of disclosing information about the company, our products, our planned financial and other announcements and attendance at upcoming investor and industry conferences, and other matters, and for complying with our disclosure obligations under Regulation FD:
+NVIDIA Corporate Blog (blogs.nvidia.com/)
+NVIDIA Technical Blog (developer.nvidia.com/blog/)
+NVIDIA LinkedIn (linkedin.com/company/nvidia)
+NVIDIA Facebook (facebook.com/nvidia)
+NVIDIA Instagram (instagram.com/nvidia)
+NVIDIA X (x.com/nvidia)
+NVIDIA Investor Relations (investor.nvidia.com)
+NVIDIA YouTube (YouTube.com/nvidia)
+The information we post through these social media channels may be deemed material. Accordingly, investors should monitor these channels, in addition to following our press releases, SEC filings and public conference calls and webcasts. This list may be updated from time to time. The information we post through these channels is not a part of this Quarterly Report on Form 10-Q.
+2
+Part I. Financial Information
+Item 1. Financial Statements (Unaudited)
+NVIDIA Corporation and Subsidiaries
+Condensed Consolidated Statements of Income
+(In millions, except per share data)
+(Unaudited)
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+Revenue
+$
+81,615
+$
+44,062
+Cost of revenue
+20,458
+17,394
+Gross profit
+61,157
+26,668
+Operating expenses
+Research and development
+6,321
+3,989
+Sales, general and administrative
+1,300
+1,041
+Total operating expenses
+7,621
+5,030
+Operating income
+53,536
+21,638
+Interest income
+540
+515
+Interest expense
+(102)
+(63)
+Other income (expense), net
+15,929
+(180)
+Total other income, net
+16,367
+272
+Income before income tax
+69,903
+21,910
+Income tax expense
+11,582
+3,135
+Net income
+$
+58,321
+$
+18,775
+Net income per share:
+Basic
+$
+2.40
+$
+0.77
+Diluted
+$
+2.39
+$
+0.76
+Weighted average shares used in per share computation:
+Basic
+24,286
+24,441
+Diluted
+24,391
+24,611
+See accompanying Notes to Condensed Consolidated Financial Statements.
+3
+NVIDIA Corporation and Subsidiaries
+Condensed Consolidated Statements of Comprehensive Income
+(In millions)
+(Unaudited)
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+Net income
+$
+58,321
+$
+18,775
+Other comprehensive income (loss), net of tax
+Available-for-sale securities:
+Net change in unrealized gain (loss)
+(78)
+139
+Cash flow hedges:
+Net change in unrealized gain
+37
+19
+Other comprehensive income (loss), net of tax
+(41)
+158
+Total comprehensive income
+$
+58,280
+$
+18,933
+See accompanying Notes to Condensed Consolidated Financial Statements.
+4
+NVIDIA Corporation and Subsidiaries
+Condensed Consolidated Balance Sheets
+(In millions)
+(Unaudited)
+Apr 26, 2026
+Jan 25, 2026
+Assets
+Current assets:
+Cash and cash equivalents
+$
+13,237
+$
+10,605
+Marketable debt securities
+37,098
+39,065
+Marketable equity securities
+30,237
+12,886
+Accounts receivable, net
+40,710
+38,466
+Inventories
+25,797
+21,403
+Prepaid expenses and other current assets
+3,916
+3,180
+Total current assets
+150,995
+125,605
+Property and equipment, net
+12,403
+10,383
+Operating lease assets
+4,258
+2,867
+Goodwill
+20,894
+20,832
+Intangible assets, net
+3,120
+3,306
+Deferred income tax assets
+11,707
+13,258
+Non-marketable securities
+43,364
+22,251
+Other assets
+12,733
+8,301
+Total assets
+$
+259,474
+$
+206,803
+Liabilities and Shareholders’ Equity
+Current liabilities:
+Accounts payable
+$
+13,097
+$
+9,812
+Accrued and other current liabilities
+29,787
+21,352
+Short-term debt
+1,000
+999
+Total current liabilities
+43,884
+32,163
+Long-term debt
+7,470
+7,469
+Long-term operating lease liabilities
+3,878
+2,572
+Other long-term liabilities
+8,768
+7,306
+Total liabilities
+64,000
+49,510
+Commitments and contingencies
+Shareholders’ equity:
+Preferred stock
+—
+Common stock
+24
+Additional paid-in capital
+10,275
+10,118
+Accumulated other comprehensive income
+137
+178
+Retained earnings
+185,038
+146,973
+Total shareholders’ equity
+195,474
+157,293
+Total liabilities and shareholders’ equity
+$
+259,474
+$
+206,803
+See accompanying Notes to Condensed Consolidated Financial Statements.
+5
+NVIDIA Corporation and Subsidiaries
+Condensed Consolidated Statements of Shareholders’ Equity
+(Unaudited)
+Common Stock
+Outstanding
+Additional Paid-in Capital
+Accumulated Other Comprehensive Income
+Retained Earnings
+Total Shareholders’ Equity
+Shares
+Amount
+(In millions, except per share data)
+Balances as of Jan 25, 2026
+24,304
+$
+24
+$
+10,118
+$
+178
+$
+146,973
+$
+157,293
+Net income
+—
+58,321
+Other comprehensive loss
+—
+(41)
+—
+(41)
+Issuance of common stock
+37
+—
+515
+—
+515
+Tax withholding related to common stock
+(12)
+—
+(2,129)
+—
+(2,129)
+Shares repurchased
+(108)
+—
+(157)
+—
+(20,013)
+(20,170)
+Cash dividends declared and paid ($0.01 per common share)
+—
+(243)
+Stock-based compensation
+—
+1,928
+—
+1,928
+Balances as of Apr 26, 2026
+24,221
+$
+24
+$
+10,275
+$
+137
+$
+185,038
+$
+195,474
+Balances as of Jan 26, 2025
+24,477
+$
+24
+$
+11,237
+$
+28
+$
+68,038
+$
+79,327
+Net income
+—
+18,775
+Other comprehensive income
+—
+158
+—
+158
+Issuance of common stock
+50
+—
+370
+—
+370
+Tax withholding related to common stock
+(13)
+—
+(1,532)
+—
+(1,532)
+Shares repurchased
+(126)
+—
+(92)
+—
+(14,411)
+(14,503)
+Cash dividends declared and paid ($0.01 per common share)
+—
+(244)
+Fair value of partially vested equity awards assumed in connection with acquisitions
+—
+22
+—
+22
+Stock-based compensation
+—
+1,470
+—
+1,470
+Balances as of Apr 27, 2025
+24,388
+$
+24
+$
+11,475
+$
+186
+$
+72,158
+$
+83,843
+See accompanying Notes to Condensed Consolidated Financial Statements.
+6
+NVIDIA Corporation and Subsidiaries
+Condensed Consolidated Statements of Cash Flows
+(In millions)
+(Unaudited)
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+Cash flows from operating activities:
+Net income
+$
+58,321
+$
+18,775
+Adjustments to reconcile net income to net cash provided by operating activities:
+Stock-based compensation expense
+1,928
+1,474
+Deferred income taxes
+1,584
+(2,177)
+Depreciation and amortization
+997
+611
+(Gains) losses from equity securities, net
+(15,936)
+175
+Other
+(94)
+(98)
+Changes in operating assets and liabilities, net of acquisitions:
+Accounts receivable
+(2,243)
+933
+Inventories
+(4,420)
+(1,258)
+Prepaid expenses and other assets
+(983)
+560
+Accounts payable
+2,210
+941
+Accrued and other current liabilities
+7,763
+7,128
+Other long-term liabilities
+1,217
+350
+Net cash provided by operating activities
+50,344
+27,414
+Cash flows from investing activities:
+Proceeds from maturities of marketable debt securities
+1,946
+3,122
+Proceeds from sales of non-marketable securities
+26
+—
+Proceeds from sales of marketable debt securities
+25
+467
+Purchases of non-marketable securities
+(18,582)
+(649)
+Purchases of marketable debt and equity securities
+(8,000)
+(6,546)
+Purchases related to property and equipment and intangible assets
+(1,757)
+(1,227)
+Acquisitions, net of cash acquired
+(87)
+(383)
+Net cash used in investing activities
+(26,429)
+(5,216)
+Cash flows from financing activities:
+Proceeds related to employee stock plans
+515
+370
+Payments related to repurchases of common stock
+(19,312)
+(14,095)
+Payments related to employee stock plan taxes
+(2,129)
+(1,532)
+Dividends paid
+(243)
+(244)
+Principal payments on property and equipment and intangible assets
+(33)
+(52)
+Other
+(81)
+—
+Net cash used in financing activities
+(21,283)
+(15,553)
+Change in cash and cash equivalents
+2,632
+6,645
+Cash and cash equivalents at beginning of period
+10,605
+8,589
+Cash and cash equivalents at end of period
+$
+13,237
+$
+15,234
+See accompanying Notes to Condensed Consolidated Financial Statements.
+7
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements
+(Unaudited)
+Note 1 - Summary of Significant Accounting Policies
+Basis of Presentation
+The accompanying unaudited condensed consolidated financial statements were prepared in accordance with accounting principles generally accepted in the United States of America, or U.S. GAAP, for interim financial information and with the instructions to Form 10-Q and Article 10 of Securities and Exchange Commission, or SEC, Regulation S-X. The January 25, 2026 consolidated balance sheet was derived from our audited consolidated financial statements included in our Annual Report on Form 10-K for the fiscal year ended January 25, 2026, as filed with the SEC, but does not include all disclosures required by U.S. GAAP. In the opinion of management, all adjustments, consisting only of normal recurring adjustments considered necessary for a fair presentation of results of operations and financial position, have been included. The results for the interim periods presented are not necessarily indicative of the results expected for any future period. The following information should be read in conjunction with the audited consolidated financial statements and notes thereto included in our Annual Report on Form 10-K for the fiscal year ended January 25, 2026.
+Certain prior fiscal year balances have been reclassified to conform to the current period presentation.
+Significant Accounting Policies
+There have been no material changes to our significant accounting policies disclosed in Note 1 - Organization and Summary of Significant Accounting Policies, of the Notes to the Consolidated Financial Statements included in our Annual Report on Form 10-K for the fiscal year ended January 25, 2026.
+Fiscal Year
+Fiscal year 2027 is a 53-week year and fiscal year 2026 was a 52-week year, both ending on the last Sunday in January. The first quarters of fiscal years 2027 and 2026 were both 13-week quarters. The fourth quarter of fiscal year 2027 will be a 14-week quarter.
+Principles of Consolidation
+Our condensed consolidated financial statements include the accounts of NVIDIA Corporation and our wholly owned subsidiaries. All intercompany balances and transactions have been eliminated in consolidation.
+Use of Estimates
+The preparation of financial statements in conformity with U.S. GAAP requires management to make estimates and assumptions that affect the reported amounts of assets and liabilities and disclosures of contingent assets and liabilities at the date of the financial statements and the reported amounts of revenue and expenses during the reporting period. Actual results could differ materially from our estimates.
+Recently Issued Accounting Pronouncements
+Recent Accounting Pronouncements Not Yet Adopted
+In November 2024, the Financial Accounting Standards Board, or FASB, issued a new accounting standard requiring disclosures of certain additional expense information on an annual and interim basis, including, among other items, the amounts of purchases of inventory, employee compensation, depreciation and intangible asset amortization included within each income statement expense caption, as applicable. We will adopt this standard in the fiscal year 2028 annual report. We do not expect the adoption of this standard to have a material impact on our Consolidated Financial Statements other than additional disclosures.
+Note 2 - Stock-Based Compensation
+We recognize stock-based compensation expense from grants of restricted stock units, or RSUs, performance stock units, or PSUs, and market-based PSUs, and issuances under our employee stock purchase plan, or ESPP.
+8
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Condensed Consolidated Statements of Income include stock-based compensation expense as follows:
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Cost of revenue
+$
+68
+$
+64
+Research and development
+1,459
+1,063
+Sales, general and administrative
+401
+347
+Total
+$
+1,928
+$
+1,474
+Equity Award Activity
+The following is a summary of our equity award transactions under our equity incentive plans:
+RSUs, PSUs and Market-based PSUs Outstanding
+Number of Shares
+Weighted Average Grant-Date Fair Value Per Share
+(In millions, except per share data)
+Balance as of Jan 25, 2026
+189
+$
+81.51
+Granted
+44
+$
+181.73
+Vested
+(31)
+$
+48.04
+Canceled and forfeited
+(2)
+$
+95.82
+Balance as of Apr 26, 2026
+200
+$
+108.92
+As of April 26, 2026, aggregate unearned stock-based compensation expense was $20.8 billion, which is expected to be recognized over a weighted average period of 2.6 years for RSUs, PSUs, and market-based PSUs, and one year for ESPP.
+Note 3 - Net Income Per Share
+The following is the basic and diluted net income per share computations for the periods presented:
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions, except per share data)
+Numerator:
+Net income
+$
+58,321
+$
+18,775
+Denominator:
+Basic weighted average shares
+24,286
+24,441
+Dilutive impact of outstanding equity awards
+105
+170
+Diluted weighted average shares
+24,391
+24,611
+Net income per share:
+Basic (1)
+$
+2.40
+$
+0.77
+Diluted (2)
+$
+2.39
+$
+0.76
+Anti-dilutive equity awards excluded from diluted net income per share
+47
+62
+(1) Net income divided by basic weighted average shares.
+(2) Net income divided by diluted weighted average shares.
+Diluted net income per share was computed using the weighted average number of common and potentially dilutive shares outstanding during the period, using the treasury stock method.
+9
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Note 4 - Amortizable Intangible Assets and Goodwill
+The components of our amortizable intangible assets are as follows:
+Apr 26, 2026
+Jan 25, 2026
+Gross
+Carrying
+Amount
+Accumulated
+Amortization
+Net Carrying
+Amount
+Gross
+Carrying
+Amount
+Accumulated
+Amortization
+Net Carrying
+Amount
+(In millions)
+Acquisition-related intangible assets
+$
+5,658
+$
+(2,759)
+$
+2,899
+$
+5,656
+$
+(2,580)
+$
+3,076
+Patents and licensed technology
+525
+(304)
+221
+528
+(298)
+230
+Total intangible assets
+$
+6,183
+$
+(3,063)
+$
+3,120
+$
+6,184
+$
+(2,878)
+$
+3,306
+Amortization expense associated with intangible assets was $232 million and $159 million for the first quarter of fiscal years 2027 and 2026, respectively.
+The following table outlines the estimated future amortization expense related to the net carrying amount of intangible assets as of April 26, 2026:
+Future Amortization Expense
+(In millions)
+Fiscal Year:
+2027 (excluding the first quarter of fiscal year 2027)
+$
+689
+2028
+754
+2029
+610
+2030
+516
+2031
+468
+2032 and thereafter
+83
+Total
+$
+3,120
+In the first quarter of fiscal year 2027, goodwill increased by $62 million from acquisitions and was allocated to our Compute & Networking reporting unit.
+10
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Note 5 - Cash Equivalents and Marketable Securities
+Cash equivalents and marketable securities including debt and equity securities are measured at fair value using quoted prices in active markets for identical assets (Level 1) or for similar assets or use of other observable inputs (Level 2).
+The following is a summary of cash equivalents and marketable securities:
+Apr 26, 2026
+Pricing Category
+Cost or Amortized
+Cost
+Unrealized
+Gain
+Unrealized
+Loss
+Estimated
+Fair Value
+Reported as
+Cash Equivalents
+Marketable Debt Securities
+Marketable Equity Securities
+Other Assets
+(In millions)
+Debt securities issued by the U.S. Treasury
+Level 2
+$
+21,883
+$
+43
+$
+(8)
+$
+21,918
+$
+470
+$
+21,448
+$
+—
+$
+—
+Corporate debt securities
+Level 2
+15,092
+48
+(8)
+15,132
+1,533
+13,599
+—
+Debt securities issued by U.S. government agencies
+Level 2
+2,009
+2
+(1)
+2,010
+—
+2,010
+—
+Certificates of deposit
+Level 2
+132
+—
+132
+—
+Foreign government bonds
+Level 2
+40
+1
+—
+41
+—
+41
+—
+Money market funds
+Level 1
+10,212
+—
+10,212
+—
+Publicly-held equity securities (1) (2)
+Level 1
+29,887
+—
+21,023
+8,864
+Publicly-held equity securities (1) (3)
+Level 2
+9,214
+—
+9,214
+—
+Total
+$
+49,368
+$
+94
+$
+(17)
+$
+88,546
+$
+12,347
+$
+37,098
+$
+30,237
+$
+8,864
+(1) The balance as of April 26, 2026 included $27.4 billion of investments, which are subject to short-term lock-up restrictions on the ability to sell.
+(2) The long-term portion of publicly-held equity securities, which are subject to lock-up restrictions through December 2027 of $8.9 billion as of April 26, 2026, was included in Other assets.
+(3) The publicly-held equity securities classified in Level 2 include investments in warrants and preferred stock convertible to common stock in public companies.
+Publicly-held equity securities are subject to market price volatility. Net unrealized gains on investments in publicly-held equity securities held at period end were $13.4 billion for the first quarter of fiscal year 2027. Net unrealized losses on investments in publicly-held equity securities held at period end were $222 million for the first quarter of fiscal year 2026. Unrealized gains and losses are recognized in Other income (expense), net, in the Condensed Consolidated Statements of Income.
+11
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Jan 25, 2026
+Pricing Category
+Cost or Amortized
+Cost
+Unrealized
+Gain
+Unrealized
+Loss
+Estimated
+Fair Value
+Reported as
+Cash Equivalents
+Marketable Debt Securities
+Marketable Equity Securities
+Other Assets
+(In millions)
+Debt securities issued by the U.S. Treasury
+Level 2
+$
+21,635
+$
+77
+$
+(3)
+$
+21,709
+$
+—
+$
+21,709
+$
+—
+$
+—
+Corporate debt securities
+Level 2
+15,410
+92
+(3)
+15,499
+345
+15,154
+—
+Debt securities issued by U.S. government agencies
+Level 2
+2,157
+4
+—
+2,161
+—
+2,161
+—
+Certificates of deposit
+Level 2
+110
+—
+110
+—
+Foreign government bonds
+Level 2
+40
+1
+—
+41
+—
+41
+—
+Money market funds
+Level 1
+7,830
+—
+7,830
+—
+Publicly-held equity securities (1) (2)
+Level 1
+17,726
+—
+12,886
+4,840
+Total
+$
+47,182
+$
+174
+$
+(6)
+$
+65,076
+$
+8,285
+$
+39,065
+$
+12,886
+$
+4,840
+(1) The balance as of January 25, 2026 included $10.5 billion of investments that are subject to short-term lock-up restrictions on the ability to sell.
+(2) The long-term portion of publicly-held equity securities, which are subject to lock-up restrictions through December 2027 of $4.8 billion as of January 25, 2026, was included in Other assets.
+The following table provides the breakdown of unrealized losses, aggregated by investment category and length of time that individual debt securities have been in a continuous loss position:
+Apr 26, 2026
+Jan 25, 2026
+Less than 12 months
+Estimated Fair Value
+Gross Unrealized Loss
+Estimated Fair Value
+Gross Unrealized Loss
+(In millions)
+Debt securities issued by the U.S. Treasury
+$
+12,238
+$
+(8)
+$
+10,666
+$
+(3)
+Corporate debt securities
+2,658
+(8)
+1,332
+(3)
+Debt securities issued by U.S. government agencies
+1,291
+(1)
+1,134
+—
+Total
+$
+16,187
+$
+(17)
+$
+13,132
+$
+(6)
+Gross unrealized losses are related to fixed income securities, driven primarily by changes in interest rates.
+The estimated fair values of debt securities included in cash equivalents and marketable debt securities are shown below by contractual maturity.
+Apr 26, 2026
+(In millions)
+Less than one year
+$
+24,307
+Due in 1 - 5 years
+14,926
+Total
+$
+39,233
+12
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Note 6 - Non-marketable Securities
+Non-marketable Equity Securities
+Our non-marketable equity securities are primarily in privately-held companies carried at cost less impairment, and adjusted for observable price changes. We value investments using observable comparable transactions and other inputs including volatility, expected time to liquidity, the risk-free rate, and security-specific rights and obligations.
+Adjustments to the carrying value of privately-held securities:
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Balance at beginning of period
+$
+22,251
+$
+3,387
+Adjustments related to non-marketable equity securities:
+Net additions
+17,899
+649
+Unrealized gains (1)
+2,603
+63
+Reclassification (2)
+(389)
+(843)
+Impairments and unrealized losses
+(28)
+(16)
+Balance at end of period
+$
+42,336
+$
+3,240
+(1) Unrealized gains are recognized in Other income (expense), net, in the Condensed Consolidated Statements of Income.
+(2) Includes primarily reclassifications to marketable securities following public market trading.
+Non-marketable equity securities had cumulative gross unrealized gains of $5.3 billion and $396 million, and cumulative gross unrealized losses and impairments of $199 million and $110 million as of April 26, 2026 and April 27, 2025, respectively.
+Equity Method Investments
+We have $1.0 billion of investments in infrastructure funds accounted for using the equity method as of April 26, 2026. Our maximum loss exposure under these investments, including invested and future committed amounts, was $2.3 billion as of April 26, 2026.
+Investment Commitments
+Total Investment commitments were $27 billion as of April 26, 2026, subject to certain contingencies, which we expect will be made through the remainder of fiscal year 2027.
+Note 7 - Balance Sheet Components
+We refer to customers who purchase products directly from NVIDIA as direct customers, such as add-in board manufacturers, or AIBs, distributors, original design manufacturers, or ODMs, original equipment manufacturers, or OEMs, cloud service providers, or CSPs, AI model makers, and system integrators. Certain direct customers may use either internal resources or third-party system integrators to complete their build. Three direct customers accounted for 30%, 18%, and 16% of our accounts receivable balance as of April 26, 2026. Three direct customers accounted for 25%, 18%, and 13% of our accounts receivable balance as of January 25, 2026.
+Certain balance sheet components were as follows:
+Apr 26, 2026
+Jan 25, 2026
+Inventories:
+(In millions)
+Raw materials
+$
+6,647
+$
+3,807
+Work in process
+9,949
+8,822
+Finished goods
+9,201
+8,774
+Total inventories (1)
+$
+25,797
+$
+21,403
+(1) We recorded inventory provisions of $0.8 billion and $2.3 billion for the first quarter of fiscal years 2027 and 2026, respectively, in Cost of revenue.
+13
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Property and Equipment:
+Property, equipment and intangible assets acquired but not paid for the first quarter of fiscal years 2027 and 2026 were $1.1 billion and $408 million, respectively.
+Apr 26, 2026
+Jan 25, 2026
+Accrued and Other Current Liabilities:
+(In millions)
+Taxes payable
+$
+10,638
+$
+2,669
+Customer program accruals
+4,182
+5,318
+Accrued purchase consideration (1)
+3,957
+3,921
+Excess inventory purchase obligations (2)
+3,121
+2,739
+Product warranty
+2,948
+2,807
+Deferred revenue (3)
+1,714
+1,379
+Accrued payroll and related expenses
+1,033
+1,146
+Other
+2,194
+1,373
+Total accrued and other current liabilities
+$
+29,787
+$
+21,352
+(1) Related to the Groq, Inc. non-exclusive license agreement.
+(2) We recorded $0.3 billion and $3.0 billion for the first quarter of fiscal years 2027 and 2026, respectively, in Cost of revenue.
+(3) Includes customer advances and unearned revenue related to hardware and software support, cloud services, and license and development arrangements. The balance as of April 26, 2026 and January 25, 2026 included $297 million and $160 million of customer advances, respectively.
+Apr 26, 2026
+Jan 25, 2026
+Other Long-Term Liabilities:
+(In millions)
+Income tax payable (1)
+$
+4,830
+$
+3,958
+Deferred income tax
+1,798
+1,774
+Deferred revenue (2)
+1,403
+1,193
+Other
+737
+381
+Total other long-term liabilities
+$
+8,768
+$
+7,306
+(1) Primarily comprised of unrecognized tax benefits and related interest and penalties.
+(2) Includes unearned revenue related to hardware and software support and cloud services.
+Deferred Revenue
+The following table shows the changes in short- and long-term deferred revenue during the first quarter of fiscal years 2027 and 2026:
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Balance at beginning of period
+$
+2,572
+$
+1,813
+Deferred revenue additions (1)
+2,530
+6,493
+Revenue recognized (2)
+(1,985)
+(6,228)
+Balance at end of period
+$
+3,117
+$
+2,078
+(1) Includes $1.7 billion and $6.2 billion of customer advances for the first quarter of fiscal years 2027 and 2026, respectively.
+(2) Includes $1.6 billion and $6.0 billion related to customer advances for the first quarter of fiscal years 2027 and 2026, respectively.
+We recognized revenue of $451 million and $265 million in the first quarter of fiscal years 2027 and 2026, respectively, that was included in the prior year-end deferred revenue balance.
+As of April 26, 2026, revenue related to remaining performance obligations from contracts greater than one year in length was $2.6 billion, which includes $2.3 billion from deferred revenue and $304 million, which has not yet been billed or
+14
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+recognized as revenue. Approximately 40% of revenue from contracts greater than one year in length will be recognized over the next twelve months.
+Note 8 - Derivative Financial Instruments
+Foreign Currency Derivatives
+We primarily utilize foreign currency forward contracts to mitigate the impact of foreign currency exchange rate movements on our operating expenses. These foreign currency forward contracts for operating expenses are designated as accounting hedges. Gains or losses on the contracts are recorded in Accumulated other comprehensive income or loss and reclassified to Operating expenses when the related operating expenses are recognized in earnings. During the first quarter of fiscal years 2027 and 2026, the impact of foreign currency forward contracts designated as accounting hedges on other comprehensive income or loss was not significant and all such instruments were determined to be highly effective.
+We also entered into foreign currency forward contracts to mitigate the impact of foreign currency movements on monetary assets and liabilities. For our foreign currency contracts for assets and liabilities, the change in fair value of these non-designated contracts was recorded in Other income or expense and offsets the change in fair value of the hedged foreign currency denominated monetary assets and liabilities, which was also recorded in Other income (expense), net.
+The table below presents the notional value of our foreign currency contracts outstanding:
+Apr 26, 2026
+Jan 25, 2026
+(In millions)
+Designated as accounting hedges
+$
+2,114
+$
+1,765
+Not designated as accounting hedges
+$
+1,850
+$
+2,332
+The fair values of our foreign currency contracts were not significant as of April 26, 2026 and January 25, 2026.
+As of April 26, 2026, all foreign currency contracts mature within 18 months. The expected realized gains and losses deferred into Accumulated other comprehensive income or loss related to foreign currency forward contracts within the next twelve months were not significant.
+Facility Lease Guarantee
+In fiscal year 2026, we entered into agreements to guarantee partners’ facility lease obligations in the event of their default in exchange for warrants. The maximum gross exposure under all agreements is $3.5 billion, which is reduced as the partners make payments to the lessors over terms ranging from 5 to 7 years. The partners have placed $712 million in escrow to mitigate our potential exposure. The guarantees, classified as credit derivatives with changes in fair value recognized in Other income (expense), net, were not material.
+15
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Note 9 - Debt
+Expected
+Remaining Term (years)
+Effective
+Interest Rate
+Apr 26, 2026
+Jan 25, 2026
+(In millions)
+3.20% Notes Due 2026
+0.4
+3.31%
+$
+1,000
+$
+1,000
+1.55% Notes Due 2028
+2.1
+1.64%
+1,250
+2.85% Notes Due 2030
+3.9
+2.93%
+1,500
+2.00% Notes Due 2031
+5.1
+2.09%
+1,250
+3.50% Notes Due 2040
+13.9
+3.54%
+1,000
+3.50% Notes Due 2050
+23.9
+3.54%
+2,000
+3.70% Notes Due 2060
+34.0
+3.73%
+500
+Unamortized debt discount and issuance costs
+(30)
+(32)
+Net carrying amount
+$
+8,470
+$
+8,468
+Less short-term portion
+(1,000)
+(999)
+Total long-term portion
+$
+7,470
+$
+7,469
+As of April 26, 2026 and January 25, 2026, the estimated fair value of debt was $7.4 billion and $7.5 billion, respectively. The estimated fair values are based on Level 2 inputs.
+Our notes are unsecured senior obligations. Existing and future liabilities of our subsidiaries will be effectively senior to the notes. Our notes pay interest semi-annually. We may redeem each of our notes prior to maturity, subject to a make-whole premium. The maturity dates of the notes are stated by calendar year.
+As of April 26, 2026, we complied with the required covenants, which are non-financial in nature, under the outstanding notes.
+As of April 26, 2026, our commercial paper program had a capacity of $25.0 billion, with no amounts outstanding.
+Note 10 - Commitments and Contingencies
+Commitments
+Manufacturing, supply, and capacity commitments reflect data center-scale production and longer future ordering horizons across current and future product architectures. We enter into agreements with our supply vendors that allow them to procure inventory based upon our defined criteria, and in certain instances, these agreements are cancellable, able to be rescheduled, or adjustable for our business needs prior to placing firm orders. Changes to these agreements may result in additional costs. As of April 26, 2026, these commitments were $119 billion for which $95 billion will be paid in the remainder of fiscal year 2027 and the remaining balance will be paid in fiscal years 2028 through 2031.
+Multi-year cloud service agreement commitments as of April 26, 2026, were $30 billion for which $6 billion, $7 billion, $7 billion, $5 billion, $3 billion, and $2 billion will be paid in the remainder of fiscal year 2027, each fiscal year from 2028 through 2031, and fiscal year 2032 and thereafter, respectively. Cloud service capacity may be reduced or terminated. Cloud service agreements will be primarily used to support our research and development efforts.
+Other vendor commitments were $6 billion as of April 26, 2026, of which the majority will be paid through fiscal year 2027.
+16
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Accrual for Product Warranty Liabilities
+The estimated amount of product warranty liabilities was $2.9 billion and $2.8 billion as of April 26, 2026 and January 25, 2026, respectively. The estimated product returns and product warranty activity consisted of the following:
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Balance at beginning of period
+$
+2,807
+$
+1,290
+Additions
+330
+870
+Utilization
+(189)
+(80)
+Balance at end of period
+$
+2,948
+$
+2,080
+For the first quarter of fiscal years 2027 and 2026, the additions in product warranty liabilities primarily related to our Compute & Networking segment.
+We have provided indemnities for matters such as tax, product, and employee liabilities. We have included intellectual property indemnification provisions in our technology-related agreements with third parties. Maximum potential future payments cannot be estimated because many of these agreements do not have a maximum stated liability. We have not recorded any liability in our Condensed Consolidated Financial Statements for such indemnifications.
+Litigation
+Securities Class Action and Derivative Lawsuits
+The plaintiffs in the putative securities class action lawsuit, captioned 4:18-cv-07669-HSG, initially filed on December 21, 2018 in the United States District Court for the Northern District of California, and titled In Re NVIDIA Corporation Securities Litigation, filed an amended complaint on May 13, 2020. The amended complaint asserted that NVIDIA and certain NVIDIA executives violated Section 10(b) of the Securities Exchange Act of 1934, as amended, or the Exchange Act, and SEC Rule 10b-5, by making materially false or misleading statements related to channel inventory and the impact of cryptocurrency mining on GPU demand between May 10, 2017 and November 14, 2018. Plaintiffs also alleged that the NVIDIA executives who they named as defendants violated Section 20(a) of the Exchange Act. Plaintiffs sought class certification, an award of unspecified compensatory damages, an award of reasonable costs and expenses, including attorneys’ fees and expert fees, and further relief as the Court may deem just and proper. On March 2, 2021, the district court granted NVIDIA’s motion to dismiss the complaint without leave to amend, entered judgment in favor of NVIDIA and closed the case. On March 30, 2021, plaintiffs filed an appeal from judgment in the United States Court of Appeals for the Ninth Circuit, case number 21-15604. On August 25, 2023, a majority of a three-judge Ninth Circuit panel affirmed in part and reversed in part the district court’s dismissal of the case, with a third judge dissenting on the basis that the district court did not err in dismissing the case. NVIDIA filed a petition for a writ of certiorari on March 4, 2024. On June 17, 2024, the Supreme Court of the United States granted NVIDIA’s petition for a writ of certiorari. After briefing and argument, the Supreme Court dismissed NVIDIA’s writ of certiorari as improvidently granted on December 11, 2024, and issued judgment on January 13, 2025. On February 20, 2025, the Ninth Circuit’s judgment, entered August 25, 2023 and corrected August 28, 2023, took effect, and the case was remanded to the district court for further proceedings. On March 25, 2026, the district court granted plaintiffs’ motion for class certification and certified a class of investors consisting of all persons or entities who purchased or otherwise acquired NVIDIA common stock between August 10, 2017, and November 15, 2018, inclusive, excluding certain persons and entities, such as NVIDIA’s officers and directors, and members of their immediate families, among others. On April 8, 2026, NVIDIA filed a petition with the Ninth Circuit for permission to appeal the district court’s order pursuant to Federal Rule of Civil Procedure 23(f).
+The putative derivative lawsuit pending in the United States District Court for the Northern District of California, captioned 4:19-cv-00341-HSG, initially filed January 18, 2019 and titled In re NVIDIA Corporation Consolidated Derivative Litigation, was stayed pending resolution of the plaintiffs’ appeal in the In Re NVIDIA Corporation Securities Litigation action. On February 22, 2022, the court administratively closed the case, but stated that it would reopen the case once the appeal in the In Re NVIDIA Corporation Securities Litigation action is resolved. The case has not yet been reopened by the court. The lawsuit asserts claims, purportedly on behalf of us, against certain officers and directors of the Company for breach of fiduciary duty, unjust enrichment, waste of corporate assets, and violations of Sections 14(a), 10(b), and 20(a) of the Exchange Act based on the dissemination of allegedly false and misleading statements related to channel inventory and the impact of cryptocurrency mining on GPU demand. The plaintiffs are seeking unspecified damages and other relief, including reforms and improvements to NVIDIA’s corporate governance and internal procedures.
+The putative derivative actions initially filed September 24, 2019 and pending in the United States District Court for the District of Delaware, Lipchitz v. Huang, et al. (Case No. 1:19-cv-01795-MN) and Nelson v. Huang, et. al. (Case No. 1:19-
+17
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+cv-01798-MN), were stayed pending resolution of the plaintiffs’ appeal in the In Re NVIDIA Corporation Securities Litigation action. On March 7, 2025, after the Supreme Court issued its judgment dismissing the Company’s petition for writ of certiorari as improvidently granted in the In Re NVIDIA Securities Litigation action, the district court adopted the parties' stipulation to extend the stay until the final and complete resolution of the In Re NVIDIA Corporation Securities Litigation action. The lawsuits assert claims, purportedly on behalf of us, against certain officers and directors of the Company for breach of fiduciary duty, unjust enrichment, insider trading, misappropriation of information, corporate waste and violations of Sections 14(a), 10(b), and 20(a) of the Exchange Act based on the dissemination of allegedly false and misleading statements related to channel inventory and the impact of cryptocurrency mining on GPU demand. The plaintiffs seek unspecified damages and other relief, including disgorgement of profits from the sale of NVIDIA stock and unspecified corporate governance measures.
+Another putative derivative action was filed on October 30, 2023 in the Court of Chancery of the State of Delaware, captioned Horanic v. Huang, et al. (Case No. 2023-1096-KSJM). This lawsuit asserts claims, purportedly on behalf of us, against certain officers and directors of the Company for breach of fiduciary duty and insider trading based on the dissemination of allegedly false and misleading statements related to channel inventory and the impact of cryptocurrency mining on GPU demand. The plaintiffs seek unspecified damages and other relief, including disgorgement of profits from the sale of NVIDIA stock and reform of unspecified corporate governance measures. On August 11, 2025, the court granted the parties’ stipulation to voluntarily dismiss with prejudice plaintiff City of Westland Police and Fire Retirement System. This derivative matter is stayed pending the final resolution of In Re NVIDIA Corporation Securities Litigation action.
+Accounting for Loss Contingencies
+As of April 26, 2026, there are no accrued contingent liabilities associated with the legal proceedings described above based on our belief that liabilities, while reasonably possible, are not probable. Further, any possible loss or range of loss in these matters cannot be reasonably estimated at this time. We are engaged in legal actions not described above arising in the ordinary course of business, as well as regulatory and government inquiries and investigations, and, while there can be no assurance of favorable outcomes, we believe that the ultimate outcome of these matters will not have a material adverse effect on our operating results, liquidity or financial position. These matters are subject to inherent uncertainties and if the ultimate outcome is unfavorable, there exists the possibility of a material adverse impact on our operating results, liquidity or financial position in the period the outcome becomes estimable and probable.
+Note 11 - Income Taxes
+Income tax expense was $11.6 billion and $3.1 billion for the first quarter of fiscal years 2027 and 2026, respectively. Income tax as a percentage of income before income tax was 16.6% and 14.3% for the first quarter of fiscal years 2027 and 2026, respectively.
+The effective tax rate increased primarily due to a lower percentage of tax benefits from stock-based compensation relative to the increase in income before income tax.
+Our effective tax rates for the first quarter of fiscal years 2027 and 2026 were lower than the U.S. federal statutory rate of 21% primarily due to tax benefits from foreign-derived deduction eligible income, income earned in jurisdictions that were subject to taxes at rates lower than the U.S. federal statutory tax rate, stock-based compensation, and the U.S. federal research tax credit.
+While we believe that we have adequately provided for all uncertain tax positions, or tax positions where we believe it is not more-likely-than-not that the position will be sustained upon review, amounts asserted by tax authorities could be greater or less than our accrued position. Accordingly, our provisions on federal, state and foreign tax related matters to be recorded in the future may change as revised estimates are made or the underlying matters are settled or otherwise resolved with the respective tax authorities.
+We are currently under examination by the Internal Revenue Service for our fiscal years 2023 and 2024.
+Note 12 - Shareholders’ Equity
+Capital Return Program
+We repurchased 108 million and 126 million shares of our common stock for $20.2 billion and $14.5 billion during the first quarter of fiscal years 2027 and 2026, respectively. As of April 26, 2026, we were authorized, subject to certain specifications, to repurchase up to $38.5 billion of our common stock.
+On May 18, 2026, our Board of Directors approved an additional $80.0 billion in share repurchase authorization, without expiration.
+18
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+We paid cash dividends to our shareholders of $243 million and $244 million during the first quarter of fiscal years 2027 and 2026, respectively. On May 18, 2026, we increased our quarterly cash dividend from $0.01 per share to $0.25 per share to all shareholders of record on June 4, 2026. Our quarterly cash dividend will be paid on June 26, 2026.
+The payment of future cash dividends is subject to our Board of Directors' continuing determination that the declaration of dividends is in the best interests of our shareholders.
+Note 13 - Segment Information
+Our Chief Executive Officer is our chief operating decision maker, or CODM, and reviews financial information presented on an operating segment basis for purposes of making decisions and assessing financial performance. Our CODM assesses operating performance of each segment based on regularly provided segment revenue and segment operating income. Operating results by segment include costs or expenses directly attributable to each segment, and costs or expenses that are leveraged across our unified architecture and therefore allocated between our two segments. Our CODM reviews expenses on a consolidated basis, and expenses attributable to each segment are not regularly provided to our CODM.
+The Compute & Networking segment includes our Data Center accelerated computing and networking platforms and AI solutions and software, and automotive platforms and autonomous and electric vehicle solutions including software.
+The Graphics segment includes GeForce GPUs for gaming and PCs, and Quadro/NVIDIA RTX GPUs for enterprise workstation graphics.
+Certain expenses are not allocated to either Compute & Networking or Graphics for purposes of making operating decisions or assessing financial performance. The expenses include stock-based compensation expense, corporate infrastructure and support costs, acquisition-related and other costs, and other non-recurring charges and benefits that our CODM deems to be enterprise in nature.
+Our CODM does not review any information regarding total assets on a reportable segment basis. There are no intersegment transactions. The accounting policies for segment reporting are the same as for our consolidated financial statements. The table below presents details of our reportable segments.
+Compute & Networking
+Graphics
+Total
+(In millions)
+Three Months Ended Apr 26, 2026
+Revenue
+$
+74,550
+$
+7,065
+$
+81,615
+Other segment items (1)
+21,215
+4,124
+25,339
+Operating income
+$
+53,335
+$
+2,941
+$
+56,276
+Three Months Ended Apr 27, 2025
+Revenue
+$
+39,589
+$
+4,473
+$
+44,062
+Other segment items (1)
+17,535
+2,833
+20,368
+Operating income
+$
+22,054
+$
+1,640
+$
+23,694
+(1) Other segment items primarily include product costs and inventory provisions, compensation and benefits excluding stock-based compensation expense, computing infrastructure expenses, and engineering development costs.
+Depreciation and amortization expense attributable to our Compute & Networking segment was $526 million and $296 million for the first quarter of fiscal years 2027 and 2026, respectively. Depreciation and amortization expense attributable to our Graphics segment was $194 million and $109 million for the first quarter of fiscal years 2027 and 2026, respectively. Acquisition-related intangible amortization expense is not allocated to either Compute & Networking or Graphics for purposes of making operating decisions or assessing financial performance.
+19
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+Reconciliation of segment operating income to consolidated income before income tax for the first quarter of fiscal years 2027 and 2026 was as follows:
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Segment operating income
+$
+56,276
+$
+23,694
+Stock-based compensation expense
+(1,928)
+(1,474)
+Unallocated operating expenses
+(565)
+(419)
+Acquisition-related and other costs
+(247)
+(163)
+Interest income
+540
+515
+Interest expense
+(102)
+(63)
+Other income (expense), net
+15,929
+(180)
+Consolidated income before income tax
+$
+69,903
+$
+21,910
+Revenue by geographic area is based upon the location of the customers’ headquarters. The end customer and shipping location may be different from our customers’ headquarters location.
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Geographic Revenue based upon Customer Headquarters Location:
+United States
+$
+63,769
+$
+25,685
+Taiwan
+12,006
+7,648
+China (including Hong Kong)
+4,550
+9,659
+Other
+1,290
+1,070
+Total revenue
+$
+81,615
+$
+44,062
+Revenue from sales to customers headquartered outside of the United States accounted for 22% of total revenue for the first quarter of fiscal year 2027 and 42% of total revenue for the first quarter of fiscal year 2026.
+We refer to customers who purchase products directly from NVIDIA as direct customers, such as AIBs, distributors, ODMs, OEMs, CSPs, AI model makers, and system integrators. Certain direct customers may use either internal resources or third-party system integrators to complete their build. We refer to indirect customers as those who purchase products through our direct customers; indirect customers include CSPs, AI Clouds, AI model makers, enterprises, and public sector entities. Our revenue is concentrated among a limited number of direct and indirect customers and this trend may continue.
+For the first quarter of fiscal year 2027, three direct customers represented 21%, 17%, and 16% of total revenue, all of which was primarily attributable to the Compute & Networking segment.
+For the first quarter of fiscal year 2026, sales to two direct customers represented 16% and 14% of total revenue, which were attributable to the Compute & Networking segment.
+20
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+In the first quarter of fiscal year 2027, we changed our presentation of revenue by market platform, and the comparable period has been recast as follows:
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Revenue by Market Platform
+Data Center
+$
+75,246
+$
+39,112
+Hyperscale
+37,869
+17,599
+AI Clouds, Industrial, & Enterprise
+37,377
+21,513
+Edge Computing
+6,369
+4,950
+Total revenue
+$
+81,615
+$
+44,062
+Note 14 - Leases
+Our lease obligations primarily consist of operating leases for our data centers and offices, with lease periods expiring between fiscal years 2027 and 2075.
+Future minimum lease obligations under our non-cancelable lease agreements as of April 26, 2026 were as follows:
+Operating Lease Obligations
+(In millions)
+Fiscal Year:
+2027 (excluding the first quarter of fiscal 2027)
+$
+460
+2028
+626
+2029
+602
+2030
+530
+2031
+462
+2032 and thereafter
+2,924
+Total
+5,604
+Less imputed interest
+1,260
+Present value of net future minimum lease payments
+4,344
+Less short-term operating lease liabilities
+466
+Long-term operating lease liabilities
+$
+3,878
+Between the second quarter of fiscal year 2027 and fiscal year 2033, we expect to commence leases with future obligations of $32.4 billion, primarily for data center leases to support our research and development efforts, with lease terms of 3 to 20 years.
+Operating lease costs were $171 million and $101 million for the first quarter of fiscal years 2027 and 2026, respectively. Short-term, variable, and finance lease costs for the first quarter of fiscal years 2027 and 2026 were not significant.
+Other information related to leases was as follows:
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Supplemental cash flows information
+Operating cash flow used for operating leases
+$
+185
+$
+96
+Operating lease assets obtained in exchange for lease obligations
+$
+1,516
+$
+98
+21
+NVIDIA Corporation and Subsidiaries
+Notes to Condensed Consolidated Financial Statements (Continued)
+(Unaudited)
+As of April 26, 2026, our operating leases have a weighted average remaining lease term of 10.4 years and a weighted average discount rate of 4.61%. As of January 25, 2026, our operating leases had a weighted average remaining lease term of 8.8 years and a weighted average discount rate of 4.38%.
+22
+Item 2. Management's Discussion and Analysis of Financial Condition and Results of Operations
+Forward-Looking Statements
+This Quarterly Report on Form 10-Q contains forward-looking statements within the meaning of Section 27A of the Securities Act of 1933, as amended, and Section 21E of the Securities Exchange Act of 1934, as amended, which are subject to the “safe harbor” created by those sections based on management’s beliefs and assumptions and on information currently available to management. In some cases, you can identify forward-looking statements by terms such as “may,” “will,” “should,” “could,” “goal,” “would,” “expect,” “plan,” “anticipate,” “believe,” “estimate,” “project,” “predict,” “potential” and similar expressions intended to identify forward-looking statements. These statements involve known and unknown risks, uncertainties and other factors, which may cause our actual results, performance, time frames or achievements to be materially different from any future results, performance, time frames or achievements expressed or implied by the forward-looking statements. We discuss many of these risks, uncertainties and other factors in this Quarterly Report on Form 10-Q and our Annual Report on Form 10-K for the fiscal year ended January 25, 2026 in greater detail under the heading “Risk Factors” of such reports. Given these risks, uncertainties, and other factors, you should not place undue reliance on these forward-looking statements. Also, these forward-looking statements represent our estimates and assumptions only as of the date of this filing. You should read this Quarterly Report on Form 10-Q completely and understand that our actual future results may be materially different from what we expect. We hereby qualify our forward-looking statements by these cautionary statements. Except as required by law, we assume no obligation to update these forward-looking statements publicly, or to update the reasons actual results could differ materially from those anticipated in these forward-looking statements, even if new information becomes available in the future.
+All references to “NVIDIA,” “we,” “us,” “our” or the “Company” mean NVIDIA Corporation and its subsidiaries.
+In addition, statements that “we believe” and similar statements reflect our beliefs and opinions on the relevant subject. These statements are based upon information available to us as of the filing date of this Quarterly Report on Form 10-Q, and while we believe such information forms a reasonable basis for such statements, such information may be limited or incomplete, and our statements should not be read to indicate that we have conducted an exhaustive inquiry into, or review of, all potentially available relevant information. These statements are inherently uncertain, and investors are cautioned not to unduly rely upon these statements.
+© 2026 NVIDIA Corporation. All rights reserved.
+The following discussion and analysis of our financial condition and results of operations should be read in conjunction with the risk factors set forth in Item 1A. “Risk Factors” of our Annual Report on Form 10-K for the fiscal year ended January 25, 2026 and Part II, Item 1A. “Risk Factors” of this Quarterly Report on Form 10-Q and our Condensed Consolidated Financial Statements and related Notes thereto, as well as other cautionary statements and risks described elsewhere in this Quarterly Report on Form 10-Q and our other filings with the SEC, before deciding to purchase, hold, or sell shares of our common stock.
+Overview
+Our Company and Our Businesses
+NVIDIA pioneered accelerated computing to help solve the most challenging computational problems. Since our original focus on PC graphics, we have expanded to several other large and important computationally intensive fields. Fueled by the sustained demand for exceptional 3D graphics and the scale of the gaming market, NVIDIA has leveraged its GPU architecture to create platforms for scientific computing, AI, data science, autonomous vehicles, robotics, and digital twin applications. NVIDIA is now a data center-scale AI infrastructure company reshaping all industries.
+Our two operating segments are “Compute & Networking” and “Graphics.” Refer to Note 13 of the Notes to Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q for additional information.
+Headquartered in Santa Clara, California, NVIDIA was incorporated in California in April 1993 and reincorporated in Delaware in April 1998.
+Recent Developments, Future Objectives and Challenges
+Revenue growth in the first quarter was driven by data center products for accelerated computing and AI solutions. Blackwell continued to account for the majority of our system shipments.
+The availability of data centers, energy, and capital to support the buildout of NVIDIA AI infrastructure by our customers and partners is crucial, and any shortage of these or other necessary resources could impact our future revenue and financial performance. Expanding energy capacity to meet demand is a complex, multi-year process that involves significant regulatory, technical, and construction challenges. In addition, access to capital can be particularly constrained for less-capitalized companies, which may face difficulties securing financing for large-scale infrastructure projects. These limitations could delay customer and partner deployments or reduce the scale of accelerated computing and AI adoption.
+23
+We expect our Rubin platform to start shipping in the second half of fiscal year 2027. The complexity of bringing up our product architecture and sophisticated system configurations has caused and may in the future cause delays in production and create challenges in managing supply and demand. This could further result in revenue volatility, quality issues, increased inventory provisions, decreases in product yields and higher material costs, and/or increased warranty costs. Customers may postpone purchasing new architectures or may adopt new technologies more gradually than anticipated, affecting our revenue timing and supply chain expenses.
+Beginning in February 2026, the U.S. government, or USG, granted licenses that allow us to ship small amounts of H200 products to specific China-based customers. To date, we have not generated any revenue under the H200 licensing program, and do not yet know whether any imports will be allowed into China. The license requires that the H200s go through an inspection process in the United States prior to any shipment to the customer. As a result, any H200 shipped under the new licensing program will be subject to a 25% tariff upon importation into the United States.
+The recent rise in high-quality, open-source foundation models is making advanced AI capabilities broadly accessible. Open-source AI is dependent on developer adoption, and if deployed on our competitors’ platforms, it could reduce demand for our products and services.
+We have made, and expect to continue making, investments in our ecosystem to enhance our growth opportunities, cultivate our ecosystem, and strengthen our competitive position. In the first quarter of fiscal year 2027, we made the following investments:
+•$18.6 billion in private companies and infrastructure funds. Some of these investments include AI model makers that may indirectly purchase or use our products in the cloud.
+•We made investments in publicly-held equity securities where the value may fluctuate significantly and could adversely affect our financial results.
+Our global supply chain for our networking products, including our Israel operations of approximately 5,900 employees supporting research and development, operations, and sales and marketing, has not been significantly impacted by the conflict in the Middle East. If the conflict escalates or extends, it could affect future product development, supply chain, and revenue, and create business uncertainty.
+Macroeconomic factors, including tariffs, inflation, interest changes, capital market volatility, global supply chain constraints, and global economic and geopolitical developments and conflicts, have direct and indirect impacts on our results of operations, particularly demand for our products. While difficult to isolate and quantify, these macroeconomic factors impact our supply chain and manufacturing costs, employee wages, costs for capital equipment, the value of our investments, revenue, and competitive position. Our product and solution pricing generally does not fluctuate with short-term changes in our costs. Within our supply chain, we continuously manage product availability and costs with our vendors.
+Refer to Part II, Item 1A, "Risk Factors" for a discussion of these factors and other risks.
+First Quarter of Fiscal Year 2027 Summary
+Three Months Ended
+Quarter-over-Quarter Change
+Year-over-Year Change
+Apr 26, 2026
+Jan 25, 2026
+Apr 27, 2025
+($ in millions, except per share data)
+Revenue
+$
+81,615
+$
+68,127
+$
+44,062
+20
+%
+85
+%
+Gross margin
+74.9
+%
+75.0
+%
+60.5
+%
+(0.1)
+pts
+14.4
+pts
+Operating expenses
+$
+7,621
+$
+6,794
+$
+5,030
+12
+%
+52
+%
+Operating income
+$
+53,536
+$
+44,299
+$
+21,638
+21
+%
+147
+%
+Net income
+$
+58,321
+$
+42,960
+$
+18,775
+36
+%
+211
+%
+Net income per diluted share
+$
+2.39
+$
+1.76
+$
+0.76
+36
+%
+214
+%
+We specialize in markets where our computing platforms can provide tremendous acceleration for applications. These platforms incorporate processors, interconnects, software, algorithms, systems, and services to deliver unique value.
+Following the rapid evolution in our businesses, we are transitioning to a new reporting framework that better reflects our current and future growth drivers.
+We will have two market platforms – Data Center and Edge Computing.
+Within Data Center, we will report two sub-markets, Hyperscale and ACIE which incorporates AI Clouds, Industrial, and Enterprise. Hyperscale will include revenue from the public clouds and the world’s largest consumer internet companies,
+24
+while ACIE addresses our growth opportunity in diverse AI purpose-built data centers and AI factories across industries and countries.
+Edge Computing highlights devices for agentic and physical AI including PCs, game consoles, workstations, AI-RAN base stations, robotics and automotive.
+Three Months Ended
+Quarter-over-Quarter Change
+Year-over-Year Change
+Apr 26, 2026
+Jan 25, 2026
+Apr 27, 2025
+($ in millions)
+Revenue by Market Platform (1)
+Data Center
+$
+75,246
+$
+62,314
+$
+39,112
+21
+%
+92
+%
+Hyperscale
+37,869
+33,814
+17,599
+12
+%
+115
+%
+AI Clouds, Industrial, & Enterprise
+37,377
+28,500
+21,513
+31
+%
+74
+%
+Edge Computing
+6,369
+5,813
+4,950
+10
+%
+29
+%
+Total revenue
+$
+81,615
+$
+68,127
+$
+44,062
+20
+%
+85
+%
+(1) In the first quarter of fiscal year 2027, we changed our presentation of revenue by market platform and the comparable periods have been recast.
+Revenue was $81.6 billion, up 85% from a year ago and up 20% sequentially.
+Data Center revenue was $75.2 billion, up 92% from a year ago and up 21% sequentially, driven by the ramp of our Blackwell 300 products and demand for our InfiniBand, Spectrum-X Ethernet, and NVLink solutions. Hyperscaler revenue increased sequentially and remained at approximately 50% of Data Center revenue, while the remaining 50% came from a continued diversification of customers, including AI Clouds, industrial, enterprise, and sovereign customers. No shipments of Data Center Hopper products to China occurred during the quarter, compared with $4.6 billion in the first quarter of fiscal year 2026.
+Edge Computing revenue for the first quarter was $6.4 billion, up 29% from a year ago and up 10% sequentially. The increases were driven by robust Blackwell workstation demand, partially offset by slower consumer PC demand that was tempered by elevated memory and systems prices.
+Gross margin increased from a year ago on lower inventory provisions, primarily due to the prior year's $4.5 billion charge associated with H20 excess inventory and purchase obligations. Gross margin was approximately flat sequentially as our Blackwell architecture remains the majority of our revenue.
+Operating expenses were up 52% from a year ago and up 12% sequentially. The increases were primarily driven by higher compensation and benefits expense due to employee growth and compensation increases, compute and infrastructure costs, and engineering development materials for new product developments.
+Financial Information by Business Segment and Geographic Data
+Refer to Note 13 of the Notes to the Condensed Consolidated Financial Statements for disclosure regarding segment information.
+Critical Accounting Policies and Estimates
+Refer to Part II, Item 7, "Critical Accounting Policies and Estimates" of our Annual Report on Form 10-K for the fiscal year ended January 25, 2026. There have been no material changes to our Critical Accounting Policies and Estimates.
+25
+Results of Operations
+The following table sets forth, for the periods indicated, certain items in our Condensed Consolidated Statements of Income expressed as a percentage of revenue.
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+Revenue
+100.0
+%
+100.0
+%
+Cost of revenue
+25.1
+39.5
+Gross profit
+74.9
+60.5
+Operating expenses
+Research and development
+7.7
+9.1
+Sales, general and administrative
+1.6
+2.4
+Total operating expenses
+9.3
+11.5
+Operating income
+65.6
+49.0
+Interest income
+0.7
+1.2
+Interest expense
+(0.1)
+Other income (expense), net
+19.5
+(0.4)
+Total other income, net
+20.1
+0.7
+Income before income tax
+85.7
+49.7
+Income tax expense
+14.2
+7.1
+Net income
+71.5
+%
+42.6
+%
+Reportable Segments
+Revenue by Reportable Segments
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+$
+Change
+%
+Change
+($ in millions)
+Compute & Networking
+$
+74,550
+$
+39,589
+$
+34,961
+88
+%
+Graphics
+7,065
+4,473
+2,592
+58
+%
+Total
+$
+81,615
+$
+44,062
+$
+37,553
+85
+%
+Operating Income by Reportable Segments
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+$
+Change
+%
+Change
+($ in millions)
+Compute & Networking
+$
+53,335
+$
+22,054
+$
+31,281
+142
+%
+Graphics
+2,941
+1,640
+1,301
+79
+%
+Total
+$
+56,276
+$
+23,694
+$
+32,582
+138
+%
+Compute & Networking revenue – The year-over-year increase in the first quarter of fiscal year 2027 was due to growth in Data Center products, driven by the ramp of our Blackwell systems and demand for our InfiniBand, Spectrum-X Ethernet, and NVLink solutions.
+Graphics revenue – The year-over-year increase in the first quarter of fiscal year 2027 was driven by sales of our Blackwell architecture.
+Reportable segment operating income – The year-over-year increase in Compute & Networking segment operating income in the first quarter of fiscal year 2027 was driven by the growth in revenue and the non-recurrence of a $4.5 billion charge associated with H20 excess inventory and purchase obligations in the first quarter of fiscal year 2026. The year-over-year increase in Graphics segment operating income in the first quarter of fiscal year 2027 was driven by the growth in revenue.
+26
+Concentration of Revenue
+We refer to customers who purchase products directly from NVIDIA as direct customers, such as AIBs, distributors, ODMs, OEMs, CSPs, AI model makers, and system integrators. Certain direct customers may use either internal resources or third-party system integrators to complete their build. We refer to indirect customers as those who purchase products through our direct customers; indirect customers include CSPs, AI Clouds, AI model makers, enterprises, and public sector entities. Our revenue is concentrated among a limited number of direct and indirect customers and this trend may continue.
+Direct Customers – For the first quarter of fiscal year 2027, three direct customers represented 21%, 17%, and 16% of total revenue, all of which was primarily attributable to the Compute & Networking segment.
+For the first quarter of fiscal year 2026, sales to two direct customers represented 16% and 14% of total revenue, which were attributable to the Compute & Networking segment.
+Indirect Customers – Indirect customer revenue is an estimation based upon multiple factors including customer purchase order information, product specifications, internal sales data, and other sources. Indirect customers primarily purchase our products through system integrators and distributors.
+We generate a significant amount of our revenue from a limited number of indirect customers, some individually representing 10% or more of our revenue. Certain companies purchase cloud and related services through various direct and indirect customers. We estimate that one AI research and deployment company contributed to a meaningful amount of our revenue by purchasing cloud services from our customers in the first quarter of fiscal year 2027.
+Revenue by geographic region is designated based on the location of the headquarters of direct customers. The end customer and shipping location may be different from our customers' headquarters location. Revenue from sales to customers headquartered outside of the United States accounted for 22% of total revenue for the first quarter of fiscal year 2027 and 42% of total revenue for the first quarter of fiscal year 2026.
+Gross Profit and Gross Margin
+Gross profit consists of total net revenue less cost of revenue. Cost of revenue consists primarily of the cost of semiconductors, including wafer fabrication, assembly, testing and packaging, board and device costs, manufacturing support costs, including labor and overhead associated with such purchases, final test yield fallout, inventory and warranty provisions, memory and component costs, tariffs, and shipping costs. Cost of revenue also includes acquisition-related intangible amortization expense, IP-related costs, and stock-based compensation related to personnel associated with manufacturing operations.
+Gross margin increased to 74.9% for the first quarter of fiscal year 2027 compared to 60.5% for the first quarter of fiscal year 2026, primarily due to the prior year's $4.5 billion charge associated with H20 excess inventory and purchase obligations.
+Provisions for inventory and excess inventory purchase obligations totaled $1.1 billion and $5.3 billion for the first quarter of fiscal years 2027 and 2026, respectively. The first quarter of fiscal year 2026 includes $4.5 billion associated with H20 excess inventory and purchase obligations. Sales of previously reserved inventory and settlements of excess inventory purchase obligations resulted in a provision release of $103 million and $436 million for the first quarter of fiscal years 2027 and 2026, respectively. The net effect on our gross margin was an unfavorable impact of 1.2% and 11.0% in the first quarter of fiscal years 2027 and 2026, respectively.
+Operating Expenses
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+$
+Change
+%
+Change
+($ in millions)
+Research and development
+$
+6,321
+$
+3,989
+$
+2,332
+58
+%
+Sales, general and administrative
+1,300
+1,041
+259
+25
+%
+Total operating expenses
+$
+7,621
+$
+5,030
+$
+2,591
+52
+%
+The increase in research and development expenses for the first quarter of fiscal year 2027 was primarily driven by a 112% increase in compute and infrastructure, a 31% increase in compensation and benefits, including stock-based compensation, reflecting employee growth and compensation increases, and a 204% increase in engineering development materials for new product introductions.
+27
+The increase in sales, general and administrative expenses for the first quarter of fiscal year 2027 was primarily driven by compensation and benefits, including stock-based compensation, reflecting employee growth and compensation increases.
+Total Other Income, Net
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+$
+Change
+($ in millions)
+Interest income
+$
+540
+$
+515
+$
+25
+Interest expense
+(102)
+(63)
+(39)
+Other income (expense), net
+15,929
+(180)
+16,109
+Total other income, net
+$
+16,367
+$
+272
+$
+16,095
+Total other income, net primarily consists of realized or unrealized gains and losses from investments in non-marketable securities and publicly-held equity securities. The change in Other income (expense), net compared to the first quarter of fiscal year 2026, was primarily driven by unrealized gains on investments in publicly-held equity securities of $13.4 billion and non-marketable equity securities of $2.6 billion.
+Income Taxes
+Income tax expense was $11.6 billion and $3.1 billion for the first quarter of fiscal years 2027 and 2026, respectively. Income tax as a percentage of income before income tax was 16.6% and 14.3% for the first quarter of fiscal years 2027 and 2026, respectively.
+The effective tax rate increased primarily due to a lower percentage of tax benefits from stock-based compensation relative to the increase in income before income tax.
+Our effective tax rates for the first quarter of fiscal years 2027 and 2026 were lower than the U.S. federal statutory rate of 21% primarily due to tax benefits from foreign-derived deduction eligible income, income earned in jurisdictions that were subject to taxes at rates lower than the U.S. federal statutory tax rate, stock-based compensation, and the U.S. federal research tax credit.
+Refer to Note 11 of the Notes to Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q for additional information.
+Liquidity and Capital Resources
+Apr 26, 2026
+Jan 25, 2026
+(In millions)
+Cash and cash equivalents
+$
+13,237
+$
+10,605
+Marketable debt securities
+37,098
+39,065
+Cash, cash equivalents, and marketable debt securities
+$
+50,335
+$
+49,670
+Three Months Ended
+Apr 26, 2026
+Apr 27, 2025
+(In millions)
+Net cash provided by operating activities
+$
+50,344
+$
+27,414
+Net cash used in investing activities
+$
+(26,429)
+$
+(5,216)
+Net cash used in financing activities
+$
+(21,283)
+$
+(15,553)
+Our fixed income security investments include highly rated, diversified investment types and credit exposures with shorter maturities.
+Cash provided by operating activities increased in the first quarter of fiscal year 2027 compared to the first quarter of fiscal year 2026 due to higher revenue.
+Cash used in investing activities increased in the first quarter of fiscal year 2027 compared to the first quarter of fiscal year 2026, primarily driven by higher purchases of equity investment securities.
+28
+Cash used in financing activities increased in the first quarter of fiscal year 2027 compared to the first quarter of fiscal year 2026, mainly due to higher share repurchases.
+Liquidity
+Our primary sources of liquidity include cash, cash equivalents, marketable debt and equity securities, and cash generated by our operations. As of April 26, 2026, we had $50.3 billion in cash, cash equivalents, and marketable debt securities as well as $30.2 billion of marketable equity securities. We believe that we have sufficient liquidity to meet our operating requirements for at least the next twelve months and for the foreseeable future, including our future obligations. We continuously evaluate our liquidity and capital resources, including our access to external capital, to ensure we can finance future capital requirements and commitments.
+Our marketable securities consist of publicly-held equity securities, debt securities issued by the U.S. government and its agencies, highly-rated corporations and financial institutions, and foreign government entities, as well as certificates of deposit issued by highly-rated financial institutions. These marketable securities are primarily denominated in U.S. dollars. Refer to Note 5 of the Notes to Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q for additional information.
+Except for approximately $1.7 billion of cash, cash equivalents, and marketable debt securities held outside of the U.S., for which we have not accrued any related foreign or state taxes if we repatriate these amounts to the U.S., substantially all of our cash, cash equivalents, and marketable debt securities held outside the U.S. at the end of the first quarter of fiscal year 2027 are available for use in the U.S. without incurring additional U.S. federal income taxes. We made no federal income tax payments in the first quarter of fiscal year 2027, whereas our second quarter of fiscal year 2027 is scheduled to include two payments.
+Capital Return to Shareholders
+In the first quarter of fiscal year 2027, we repurchased 108 million shares of our common stock for $20.2 billion. As of April 26, 2026, we were authorized, subject to certain specifications, to repurchase up to $38.5 billion of our common stock.
+On May 18, 2026, our Board of Directors approved an additional $80.0 billion in share repurchase authorization, without expiration.
+We may execute repurchases from time to time, subject to market conditions, operating requirements and other investment opportunities, in the open market, in privately-negotiated transactions, pursuant to a Rule 10b5-1 trading plan or in structured share repurchase agreements in compliance with Rule 10b-18 of the Exchange Act. Our share repurchase program may be suspended at any time at our discretion.
+We paid cash dividends to our shareholders of $243 million during the first quarter of fiscal year 2027. On May 18, 2026, we increased our quarterly cash dividend from $0.01 per share to $0.25 per share to all shareholders of record on June 4, 2026. Our quarterly cash dividend will be paid on June 26, 2026.
+The payment of future cash dividends is subject to our Board of Directors' continuing determination that the declaration of dividends is in the best interests of our shareholders.
+The U.S. Inflation Reduction Act of 2022 requires a 1% excise tax on certain share repurchases in excess of shares issued for employee compensation made after December 31, 2022. The excise tax is included in our share repurchase cost and was not significant for the first quarter of fiscal year 2027.
+29
+Outstanding Indebtedness and Commercial Paper Program
+Our aggregate debt maturities as of April 26, 2026, by year payable, were as follows:
+Apr 26, 2026
+(In millions)
+Due in one year
+$
+1,000
+Due in one to five years
+2,750
+Due in five to ten years
+1,250
+Due in greater than ten years
+3,500
+Unamortized debt discount and issuance costs
+(30)
+Net carrying amount
+$
+8,470
+Less short-term portion
+(1,000)
+Total long-term portion
+$
+7,470
+We have a commercial paper program to support general corporate purposes, pursuant to which we may issue unsecured paper notes, from time to time or all at once, up to $25.0 billion. As of April 26, 2026, no commercial paper was outstanding.
+Refer to Note 9 of the Notes to Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q for further discussion.
+Material Cash Requirements and Other Obligations
+For descriptions of our facility lease guarantees, long-term debt, purchase commitments, and operating lease obligations, refer to Note 8, Note 9, Note 10, and Note 14 of the Notes to the Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q, respectively.
+We expect to continue investing in our ecosystem. Refer to Note 6 and Item 1A. Risk Factors for additional information regarding our investments.
+Unrecognized tax benefits were $4.5 billion, which includes related interest and penalties of $439 million, and were recorded in non-current income tax payable as of April 26, 2026. We are unable to estimate the timing of any potential tax liability, interest payments, or penalties in individual years due to uncertainties in the underlying income tax positions and the timing of the effective settlement of such tax positions. We are currently under examination by the Internal Revenue Service for our fiscal years 2023 and 2024. Refer to Note 11 of the Notes to Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q.
+Other than the contractual obligations described in Notes 6 and 10, there were no material changes outside the ordinary course of business in our contractual obligations from those disclosed in our Annual Report on Form 10-K for the fiscal year ended January 25, 2026. Refer to Item 7, “Management’s Discussion and Analysis of Financial Condition and Results of Operations - Liquidity and Capital Resources” in our Annual Report on Form 10-K for the fiscal year ended January 25, 2026 for a description of our contractual obligations. For a description of our facility lease guarantees, long-term debt, purchase obligations, and operating lease obligations, refer to Notes 8, 9, 10, and 14 of the Notes to the Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q, respectively.
+Adoption of New and Recently Issued Accounting Pronouncements
+There has been no adoption of any new and recently issued accounting pronouncements.
+Item 3. Quantitative and Qualitative Disclosures About Market Risk
+Investment and Interest Rate Risk
+Financial market risks related to investment and interest rate risk are described in Part II, Item 7A, “Quantitative and Qualitative Disclosures About Market Risk” in our Annual Report on Form 10-K for the fiscal year ended January 25, 2026. Our marketable equity securities consist of publicly-held equity securities, while our non-marketable equity securities are investments in privately-held companies. Publicly-held equity securities are subject to market price volatility. A hypothetical 10% decrease in our publicly-held equity securities would decrease the fair value of the publicly-held equity securities balance by $3.9 billion and $1.8 billion as of April 26, 2026 and January 25, 2026, respectively.
+Non-marketable equity securities are measured based on cost minus impairment, if any, and are adjusted for observable price changes in orderly transactions for an identical or similar investment in the same issuer. Valuations of our non-
+30
+marketable equity securities are inherently complex due to the lack of readily available market data and observable transactions, and impact of macroeconomic factors.
+For a description of our equity investments, refer to Notes 5 and 6 of the Notes to Condensed Consolidated Financial Statements in Part I, Item 1 of this Quarterly Report on Form 10-Q, respectively.
+Foreign Exchange Rate Risk
+The impact of foreign currency transactions related to foreign exchange rate risk is described in Part II, Item 7A, “Quantitative and Qualitative Disclosures About Market Risk” in our Annual Report on Form 10-K for the fiscal year ended January 25, 2026. As of April 26, 2026, there have been no material changes to the foreign exchange rate risks described as of January 25, 2026.
+Item 4. Controls and Procedures
+Controls and Procedures
+Disclosure Controls and Procedures
+Based on their evaluation as of April 26, 2026, our management, including our Chief Executive Officer and Chief Financial Officer, has concluded that our disclosure controls and procedures (as defined in Rule 13a-15(e) under the Exchange Act) were effective to provide reasonable assurance that the information we are required to disclose in reports that we file or submit under the Exchange Act is recorded, processed, summarized and reported within the time periods specified in the SEC rules and forms, and that such information is accumulated and communicated to our management, including our Chief Executive Officer and our Chief Financial Officer, as appropriate, to allow timely decisions regarding required disclosures.
+Changes in Internal Control Over Financial Reporting
+There have been no changes in our internal control over financial reporting during the first quarter of fiscal year 2027 that have materially affected, or are reasonably likely to materially affect, our internal control over financial reporting. We are continuing a phased upgrade of our enterprise resource planning, or ERP, system to update our existing core financial systems. The ERP system is designed to accurately maintain our financial records used to report operating results. We will continue to evaluate each quarter whether there are changes that materially affect our internal control over financial reporting.
+Inherent Limitations on Effectiveness of Controls
+Our management, including our Chief Executive Officer and Chief Financial Officer, does not expect that our disclosure controls and procedures, or our internal controls, will prevent all error and all fraud. A control system, no matter how well conceived and operated, can provide only reasonable, not absolute, assurance that the objectives of the control system are met. Further, the design of a control system must reflect the fact that there are resource constraints, and the benefits of controls must be considered relative to their costs. Because of the inherent limitations in all control systems, no evaluation of controls can provide absolute assurance that all control issues and instances of fraud, if any, within NVIDIA have been detected.
+Part II. Other Information
+Item 1. Legal Proceedings
+Refer to Part I, Item 1, Note 10 of the Notes to the Condensed Consolidated Financial Statements for a discussion of significant developments in our legal proceedings since January 25, 2026.
+Item 1A. Risk Factors
+Other than the risk factors listed below, there have been no material changes from the risk factors previously described under Item 1A of our Annual Report on Form 10-K for the fiscal year ended January 25, 2026.
+Purchasing or owning NVIDIA common stock involves investment risks including, but not limited to, the risks described in Item 1A of our Annual Report on Form 10-K for the fiscal year ended January 25, 2026, and below. Any one of those risks could harm our business, financial condition and results of operations or reputation, which could cause our stock price to decline. Additional risks, trends and uncertainties not presently known to us or that we currently believe are immaterial may also harm our business, financial condition, results of operations or reputation.
+Competition could adversely impact our market share and financial results.
+Our target markets remain competitive, and competition may intensify with expanding and changing product and service offerings, industry standards, customer and market needs, new entrants and consolidations. Other companies compete
+31
+with us on a wide range of parameters including price, total cost of ownership, and performance, which has resulted and may in the future result in lower-than-expected selling prices or demand for our products. Some of our competitors operate their own fabrication facilities, and have longer operating histories, larger customer bases, more comprehensive IP portfolios and patent protections, more design wins, and greater financial, sales, marketing and distribution resources than we do. These competitors may be able to acquire market share and/or prevent us from doing so, more effectively identify and capitalize upon opportunities in new markets and end-user trends, more quickly transition their products, and impinge on our ability to procure sufficient foundry capacity and scarce input materials during a supply-constrained environment, which could harm our business. Some of our customers are developing their own ASICs and other products, including designs optimized for certain workloads that may not require all of the features and functionality our data center systems provide. Others may offer cloud-based services that compete with our AI cloud service offerings, and we may not be able to establish market share sufficient to achieve the scale necessary to meet our business objectives. If we are unable to successfully compete in this environment, demand for our products, services, and technologies could decrease, which may negatively impact our business.
+Long manufacturing lead times and uncertain supply and capacity availability, combined with a failure to estimate customer demand accurately, has led and could in the future lead to mismatches between supply and demand.
+We have long manufacturing lead times and build finished products and maintain inventory in advance of anticipated demand. In periods of shortages impacting the semiconductor industry and/or limited supply or capacity in our supply chain, the lead times for certain supply may be extended. We have previously experienced and may continue to experience extended lead times of more than 12 months. To secure future supply and capacity, we have paid premiums, provided deposits, and entered into long-term supply agreements and capacity commitments, which have increased our product costs and this may continue. We may still be unable to secure sufficient commitments for capacity to address our business needs.
+If we inaccurately estimate demand, or our customers change orders, as we have experienced in the past, we may not be able to reduce our supply commitments in time, at the same rate, or at all. Significant mismatches between supply and demand have varied across our market platforms, resulted in both product shortages and excess inventory, significantly harmed our financial results and could reoccur. If we underestimate demand, and our foundry partners and contract manufacturers are unable to increase production or provide sufficient supply, we may not be able to meet increased customer demand in a timely manner, or at all. Our reputation and customer relationships could be damaged and we could lose revenue and market share. Additionally, since some of our products are part of a complex data center buildout, supply constraints or availability issues with respect to any one component have had and may have a broader revenue impact. For example, our ability to sell certain products has been and could be impeded if components necessary for the finished products are not available from third parties.
+If we overestimate demand, or if customers cancel or defer orders or choose to purchase from our competitors, we may not be able to utilize on-hand inventory or reduce purchase commitments accordingly. We have had to reduce average selling prices, including due to our channel pricing programs, increase prices for certain of our products as a result of our suppliers’ increase in prices, write down our inventory, incur cancellation penalties, and record impairments, and may have to do so in the future. The impact of these risks would be amplified by our non-cancellable and non-returnable purchase orders placed in advance of our historical lead times and could be exacerbated if we need to make changes to the design of future products. These risks have increased and may continue to increase as our purchase obligations and prepaids have grown and are expected to continue to grow and become a greater portion of our total supply. All of these factors may negatively impact our gross margins and financial results.
+Factors that have caused and/or could in the future cause us to underestimate or overestimate demand, and impact the timing and volume of our revenue, include:
+•changes in product development cycles and time to market;
+•competing technologies and competitor product releases, announcements or other actions;
+•changes in business and economic conditions;
+•sudden or sustained government lockdowns or public health issues;
+•rapidly changing technology or customer requirements;
+•the availability of sufficient data center capacity or energy for customers to procure;
+•new product introductions and transitions resulting in less demand for existing products;
+•new or unexpected end-use cases;
+•increase in demand for competitive products;
+•changes in end-user demand;
+32
+•purchasing decisions made, and inventory levels held by, distributors, ODMs, OEMs, system integrators, other channel partners and other third parties;
+•the ability of developers, end customers and other third parties to build, enhance, and maintain accelerated computing applications that leverage our platforms;
+•the demand for accelerated computing, AI-related cloud services, or large language models;
+•changes that impact the ecosystem for the architectures underlying our products and technologies;
+•government actions or changes in governmental policies, such as export controls, increased restrictions on gaming usage, or tariffs;
+•our customers’ and partners’ ability to secure capital and energy and to build complex data center infrastructure timely; and
+•the availability of third-party content on our platforms, such as GeForce NOW.
+The availability of data centers, energy, and capital to support the buildout of NVIDIA AI infrastructure by our customers and partners is crucial, and any shortage of these and other necessary resources could impact our future revenue and financial performance. Expanding energy capacity to meet demand is a complex, multi-year process involving significant regulatory, technical, and construction challenges. In addition, access to capital can be particularly constrained for less-capitalized companies, which may face difficulties securing financing for large-scale infrastructure projects. These limitations could delay customer and partner deployments or reduce the scale of accelerated computing and AI adoption.
+Challenges in estimating demand could become more pronounced or volatile in the future on both a global and regional basis. Extended lead times may occur if we experience other supply constraints caused by natural disasters, pandemics or other events. Geopolitical tensions in regions where we rely on suppliers, contract manufacturers, and assembly partners that are critical to our supply continuity, could have a material adverse impact on us. Supply availability affecting memory, and other components, as well as rising prices, may drive the prices for data center buildouts higher. Publicly announced intentions by governments or other companies to purchase our products can further complicate our demand estimates, as such announcements are often non-binding and may not result in committed volumes.
+We continue to increase our supply and capacity purchases with existing and new suppliers to support our demand projections and increasing complexity of our data center products. We have also entered and may continue to enter into prepaid manufacturing and capacity agreements to supply both current and future products. The increased purchase volumes and integration of new suppliers and contract manufacturers into our supply chain creates more complexity in managing multiple suppliers with variations in production planning, execution and logistics. Our expanding product portfolio and varying component compatibility and quality may lead to increased inventory levels. We have incurred and may in the future incur inventory provisions or impairments if our inventory or supply or capacity commitments exceed demand for our products or demand declines. We are increasing our U.S.-based manufacturing and investing in specialized equipment and processes to support domestic production. We may experience delays or difficulties in scaling production as planned. Our ability to increase manufacturing capabilities will depend on the domestic manufacturing ecosystem's capacity to ramp production supply to the required volume timely. Delays or shortfalls could impact our ability to meet demand.
+Introducing or offering multiple architectures concurrently is complex and we often ship multiple architecture products simultaneously as our channel partners prepare to ship and support new products. We are generally in various stages of introducing and/or offering the architectures of our Data Center and Edge Computing products. The computing industry is experiencing a broader and faster launch cadence of accelerated computing platforms to meet a growing and diverse set of AI opportunities. We have introduced a new product and architecture cadence of our Data Center solutions where we seek to complete new computing solutions each year and provide a greater variety of Data Center offerings, including our Rubin platform which is expected to start shipping in the second half of fiscal year 2027. The increased frequency of these architecture introductions and the larger number of products and product configurations may magnify the challenges associated with managing our supply and demand which may further create volatility in our revenue. Qualification time for new products, customers anticipating new architecture introductions, and channel partners reducing channel inventory of prior architectures ahead of new product introductions can reduce, or create volatility in, our revenue. Customers may delay adopting new architectures if their data center infrastructure is not ready, which could affect the timing of our revenue. We have experienced and may in the future experience reduced demand for current generation architectures when customers anticipate new architectures, and we may be unable to sell multiple product architectures at the same time. Our financial results have been and may in the future be negatively impacted if we are unable to execute our architectural introductions as planned for any reason. The increased frequency and complexity of newly introduced products could result in unanticipated quality or production issues that could increase the magnitude of inventory provisions, warranty, or other costs or result in product delays. For example, our gross margins in the second quarter of fiscal year 2025 were negatively impacted by inventory provisions for low-yielding Blackwell material.
+33
+We incur significant engineering development resources for new products, and changes to our product roadmap may impact our ability to develop other products or adequately manage our supply chain cost. Customers may delay purchasing existing products as we increase the frequency of new products or may not be able to adopt our new products as fast as forecasted, both impacting the timing of our revenue and supply chain cost. While we have managed concurrent architecture introductions and/or offerings and have sold multiple product architectures at the same time, these efforts are difficult, may impair our ability to predict demand and impact our supply mix, and may cause us to incur additional costs.
+Demand estimates for our products, applications, and services can be incorrect, which may create volatility in our revenue or supply levels. We may not be able to generate significant revenue from them. Because our products may be used in multiple use cases and applications, it is difficult to estimate with any reasonable degree of precision the impact of accelerated computing and AI models on our reported revenue or forecasted demand.
+The use of our GPUs for new, mercurial, or trendy applications, has impacted, and can impact in the future, demand for our products, including by leading to inconsistent spikes and drops in demand. For example, several years ago, our gaming GPUs began to be used for mining digital currencies, such as Ethereum. It is difficult for us to estimate with any reasonable degree of precision the past or current impact of cryptocurrency mining, or forecast the future impact of cryptocurrency mining, on demand for our products. Volatility in the cryptocurrency market, including new compute technologies, price changes in cryptocurrencies, government cryptocurrency policies and regulations, new cryptocurrency standards and changes in the method of verifying blockchain transactions, has impacted and can in the future impact cryptocurrency mining and demand for our products and can further impact our ability to estimate demand for our products. Changes to cryptocurrency standards and processes including, but not limited to, the Ethereum 2.0 merge in 2022, have reduced and may in the future decrease the usage of GPUs for Ethereum mining. This has created and may in the future create increased aftermarket sales of our GPUs, which could negatively impact retail prices for our GPUs and reduce demand for our new GPUs. In general, our new products or previously sold products may be resold online or on the unauthorized “gray market,” which also makes demand forecasting difficult. Gray market products and reseller marketplaces compete with our new products and distribution channels. Our inability to accurately predict our demand that arises from new use cases may create volatility in our revenue.
+We are subject to complex laws, rules, regulations, and political and other actions, including restrictions on the export of our products, which may adversely impact our business.
+We are subject to laws and regulations domestically and worldwide, affecting our operations in areas including, but not limited to, IP ownership and infringement; taxes; import and export requirements and tariffs; anti-corruption, including the Foreign Corrupt Practices Act; business acquisitions; foreign exchange controls and cash repatriation restrictions; foreign ownership and investment; data privacy requirements; competition and antitrust; investing; advertising; employment; product regulations; cybersecurity; environmental, health, and safety requirements; the responsible use of AI; sustainability; cryptocurrency; and consumer laws. Compliance with such requirements can be onerous and expensive, could impact our competitive position, and may negatively impact our business operations and ability to manufacture and ship our products. There can be no assurance that our employees, contractors, suppliers, customers or agents will not violate applicable laws or the policies, controls, and procedures that we have designed to help ensure compliance with such laws, and violations could result in fines, criminal sanctions against us, our officers, or our employees, prohibitions on the conduct of our business, and damage to our reputation. Changes to the laws, rules and regulations to which we are subject, or changes to their interpretation and enforcement, could lead to materially greater compliance and other costs, and/or further restrictions on our ability to manufacture and supply our products and operate our business. For example, we may face increased compliance costs as a result of changes or increases in antitrust legislation, regulation, administrative rule making, increased focus from regulators on cybersecurity vulnerabilities and risks. Our position in markets relating to AI has led to increased interest in our business from regulators worldwide, including the European Union, the United States, the United Kingdom, South Korea, Japan, and China. For example, the French Competition Authority collected information from us regarding our business and competition in the graphics card and CSP market as part of an ongoing inquiry into competition in those markets. We have also received, and continue to receive, broad requests for information from competition regulators in the European Union, the United States, the United Kingdom, China, and South Korea regarding our sales of GPUs and other NVIDIA products, our efforts to allocate supply, foundation models and our investments, partnerships and other agreements with companies developing foundation models, the markets in which we compete and our competition, our strategies, roadmaps, and efforts to develop, market, and sell hardware, software, and system solutions, and our agreements with customers, suppliers, and partners. We expect to receive additional requests for information in the future. Such requests have been and are likely to be expensive and burdensome and could negatively impact our business and our relationships with customers, suppliers, and partners.
+Governments and regulators are also considering, and in certain cases, have imposed restrictions on the hardware, software, and systems used to develop frontier foundation models and generative AI. For example, the EU AI Act became effective on August 1, 2024 and will be fully applicable after a two-year transitional period. The EU AI Act may impact our ability to train, deploy, or release AI models in the EU. Several states are considering enacting or have already enacted regulations concerning AI technologies, with new state laws that took effect on January 1, 2026, which may impact our ability to train, deploy, or release AI models, and increase our compliance costs. Restrictions under these and any other regulations, if implemented, could increase the costs and burdens to us and our customers, delay or halt deployment of
+34
+new systems using our products, and reduce the number of new entrants and customers, negatively impacting our business and financial results. Revisions to laws or regulations or their interpretation and enforcement could also result in increased taxation, trade sanctions, the imposition of or increase to import duties or tariffs, restrictions and controls on imports or exports, or other retaliatory actions, which could have an adverse effect on our business plans or impact the timing of our shipments. Additionally, changes in the public perception of governments in the regions where we operate or plan to operate could negatively impact our business and results of operations.
+Government actions, including trade protection and national and economic security policies of U.S. and foreign government bodies, such as tariffs, import or export regulations, including deemed export restrictions and restrictions on the activities of U.S. persons, trade and economic sanctions, decrees, quotas or other trade barriers and restrictions could affect our ability to ship products, provide services to our customers and employees, do business without an export license with entities on the U.S. Department of Commerce’s U.S. Entity List or other USG restricted parties lists (which is expected to change from time to time), and generally fulfill our contractual obligations and have a material adverse effect on our business. If we were ever found to have violated export control laws or sanctions of the U.S. or similar applicable non-U.S. laws, even if the violation occurred without our knowledge, we may be subject to various penalties available under the laws, any of which could have a material and adverse impact on our business, operating results and financial condition.
+For example, in response to the war in Ukraine, the United States and other jurisdictions imposed economic sanctions and export control measures which blocked the passage of our products, services and support into Russia, Belarus, and certain regions of Ukraine. In fiscal year 2023, we stopped direct sales to Russia and closed business operations in Russia. Concurrently, the war in Ukraine has impacted sales in EMEA and may continue to do so in the future.
+The increasing focus on the risks and strategic importance of AI technologies has resulted in regulatory restrictions that target products and services capable of enabling or facilitating AI and may in the future result in additional restrictions impacting some or all of our product and service offerings.
+Concerns regarding third-party use of AI for purposes contrary to local governmental interests, including concerns relating to the misuse of AI applications, models, and solutions, has resulted in and could in the future result in unilateral or multilateral restrictions on products that can be used for training, modifying, tuning, and deploying LLMs and other AI applications. Such restrictions have limited and could in the future limit the ability of downstream customers and users worldwide to acquire, deploy and use systems that include our products, software, and services, and negatively impact our business and financial results.
+Such restrictions could include additional unilateral or multilateral export controls on certain products or technology, including but not limited to AI technologies. As geopolitical tensions have increased, semiconductors associated with AI, including GPUs and related products, are increasingly the focus of export control restrictions proposed by stakeholders in the U.S. and its allies. The United States has imposed unilateral worldwide controls restricting GPUs and associated products, and it is likely that additional unilateral or multilateral controls will be adopted. Such controls have been and may again be very broad in scope and application, prohibit us from exporting our products to any or all customers in one or more markets, and could negatively impact our manufacturing, testing and warehousing locations and options, or could impose other conditions that limit our ability to serve demand abroad and could negatively and materially impact our business, revenue and financial results. Export controls and other restrictions targeting GPUs and semiconductors associated with AI, which have been imposed and are likely to be more restrictive, would further limit our ability to export our technology, products, or services, creating a competitive disadvantage for us and negatively impacting our business and financial results. Export controls targeting GPUs and semiconductors associated with AI have subjected and may in the future subject downstream users of our products to restrictions on the use, resale, repair, or transfer of our products, negatively impacting our business and financial results. Controls could negatively impact our cost and/or ability to provide services such as NVIDIA AI cloud services and could impact the cost and/or ability for our CSPs and customers to provide services to their end customers, even outside China.
+Export controls have and could in the future disrupt our supply chain and distribution channels, negatively impacting our ability to serve demand, including in markets outside China and for our non-data center products. The possibility of additional export controls has negatively impacted and may in the future negatively impact demand for our products, benefiting competitors that offer alternatives less likely to be restricted by further controls. Repeated changes in the export control rules are likely to impose compliance burdens on our business and our customers, negatively and materially impacting our business.
+Increasing use of economic sanctions and export controls has impacted and may in the future impact demand for our products or services, negatively impacting our business and financial results. Reduced demand due to export controls has and could in the future lead to excess inventory or cause us to incur related supply charges. Additional unilateral or multilateral controls are also likely to include deemed export control limitations that negatively impact the ability of our research and development teams to execute our roadmap or other objectives in a timely manner. Additional export restrictions may not only impact our ability to serve overseas markets, but also provoke responses from foreign governments, including China, that negatively impact our supply chain or our ability to provide our products and services to customers in all markets worldwide, which could also substantially reduce our revenue. Regulators in China have
+35
+inquired about our sales and efforts to supply the China market and our fulfillment of the commitments we entered into at the close of our Mellanox acquisition. On September 15, 2025, China’s antitrust regulators published their preliminary finding that our compliance with applicable U.S. export controls, which required us to offer degraded products to the Chinese market, discriminated unfairly against customers in the China market and therefore violated the terms of China’s approval of our Mellanox acquisition. If regulators conclude that we have failed to fulfill the terms of our Mellanox acquisition or we have violated any applicable law in China, we could be subject to financial penalties, restrictions on our ability to conduct our business, restrictions or other orders regarding our networking business, products, and services, or otherwise impact our operations in China, any of which could have a material and adverse impact on our business, operating results and financial condition.
+We continue to be subject to a series of shifting and expanding export control restrictions, impacting our ability to serve customers outside the United States.
+In August 2022, the USG announced export restrictions and export licensing requirements targeting China’s semiconductor and supercomputing industries. These restrictions impacted exports of certain chips, as well as software, hardware, equipment and technology used to develop, produce and manufacture certain chips to China (including Hong Kong and Macau) and Russia, and specifically impact our A100 and H100 integrated circuits, DGX or any other systems or boards which incorporate A100 or H100 integrated circuits.
+In July 2023, the USG also informed us of an additional licensing requirement for a subset of A100 and H100 products destined to certain customers and other regions, including some countries in the Middle East.
+In October 2023, the USG announced new and updated licensing requirements for exports to China and Country Groups D:1, D:4, and D:5 (including but not limited to, Saudi Arabia, the United Arab Emirates, and Vietnam, but excluding Israel) of our products exceeding certain performance thresholds, including, but not limited to, the A100, A800, H100, H800, L4, L40, L40S RTX 4090, GB200 NVL72, and B200. The licensing requirements also apply to the export of products exceeding certain performance thresholds to a party headquartered in, or with an ultimate parent headquartered in, Country Group D5, including China.
+In April 2025, the USG informed us that it requires a license for export to China (including Hong Kong and Macau) and D:5 countries, or to companies headquartered or with an ultimate parent therein, of our H20 integrated circuits and any other circuits achieving the H20’s memory bandwidth, interconnect bandwidth, or combination thereof. As a result of these requirements, we incurred a $4.5 billion charge in the first quarter of fiscal year 2026 associated with H20 for excess inventory and purchase obligations, as the demand for H20 products diminished.
+Beginning in August 2025, the USG granted licenses that would allow us to ship certain H20 products to certain China-based customers. USG officials expressed an expectation that the USG will receive 15% or more of the revenue generated from licensed sales of our products, but the USG did not publish a regulation codifying such requirement.
+Beginning in February 2026, the USG granted licenses that would allow us to ship small amounts of H200 products to specific China-based customers. To date, we have not generated any revenue under the H200 licensing program, and do not yet know whether any imports will be allowed into China. The license requires that the H200s go through an inspection process in the United States prior to any shipment to the customer. As a result, any H200 shipped under the new licensing program will be subject to a 25% tariff upon importation into the United States.
+In the event that we are able to sell licensed products into the China market, we may not be able to pass along all or any of the tariff to our customers, and may be subject to litigation, increased costs, and a harmed competitive position.
+The export controls applicable to China are complex and address a variety of parameters, including the total processing performance of a chip, the “performance density” of a chip, the interconnect bandwidth of a chip, and the memory bandwidth of a chip. Under the current rules and geopolitical landscape, we are unable to create and deliver a competitive product for China’s data center market that receives approval from both the USG and the Chinese government. As of the end of the first quarter of fiscal year 2027, while we were able to ship uncontrolled products to China, such as gaming and workstation GPUs, we were effectively foreclosed from competing in China's data center computing/compute market, and our effective foreclosure from the China market helped our competitors build larger developer and customer ecosystems to challenge us worldwide. Unless we are able to return with a data center system that meets the approval of both the USG and the Chinese government, our lost opportunity and the benefit to our competitors will have a material and adverse impact on our business, operating results, and financial condition.
+In addition to controls targeting D:1, D:4 and D:5 countries, the USG has also imposed worldwide export controls impacting our products, and may impose additional controls in the future.
+In January 2025, the USG published the AI Diffusion IFR in the Federal Register. The IFR would have imposed a worldwide licensing requirement on our data center products, such as our H200, GB200 and GB300. The AI Diffusion IFR would have divided the world into three tiers, relegating most countries to “Tier 2” status, and would have created a complex and burdensome scheme for licensing approvals.
+36
+In May 2025, the USG announced that it would rescind the AI Diffusion IFR and implement a replacement rule. The scope, timing, and requirements of the forthcoming rule remain uncertain. The replacement rule may impose new restrictions on our products or operations and/or add license requirements that could have a material impact on our business, operating results, and financial condition. For example, in October 2025, the Senate passed the GAIN AI Act in the National Defense Authorization Act. The GAIN AI Act would restrict the Trump Administration’s ability to adapt the Biden Administration’s export control rules and could also allow private U.S. persons to review and overturn licensing and foreign policy decisions made by the Trump Administration. Congress is also considering legislation such as the Remote Access Security Act, or RASA, which could prohibit the provision of cloud services to any company with an ultimate parent headquartered in China. If enacted, RASA could impose new restrictions on cloud service providers and OEMs, and could have a material impact on our business, operating results, and financial condition.
+Our competitive position has been harmed by export controls, and our competitive position and future results will be further harmed, over the long term, if the restrictions remain in place or are expanded in geographic, customer, or product scope, if customers purchase product from competitors, if customers develop their own internal solution, if we are unable to provide contractual warranty or other extended service obligations, if the USG does not grant licenses in a timely manner or denies licenses to significant customers or if we incur significant transition costs. The licensing process may not be resolved before significant business opportunities evaporate. Even if the USG grants any requested licenses, the licenses have already and may in the future be temporary, impose burdensome conditions regarding the installation, maintenance, and use of such products, or include financial or economic requirements that we or our customers or end users cannot or choose not to fulfill. The licensing requirements have already and may in the future benefit certain of our competitors, as the licensing process will make our pre-sale and post-sale technical support efforts more cumbersome and less certain and encourage customers in China, the Middle East, and other regions to pursue alternatives to our products, including semiconductor suppliers based in China, Europe, and Israel.
+Given the increasing strategic importance of AI and rising geopolitical tensions, the USG has changed and may again change the export control rules at any time and further subject a wider range of our products to export restrictions and licensing requirements, negatively impacting our business and financial results. In the event of such change, we may be unable to sell our inventory of such products and may be unable to develop replacement products not subject to the licensing requirements.
+For example, the USG already imposed license conditions that limit the ability of foreign firms to create and offer as a service large-scale GPU clusters, such as imposing license conditions on the use of products to be exported to certain countries, and may impose additional conditions such as requiring chip tracking and throttling mechanisms that could disable or impair GPUs if certain events, including unauthorized system configuration, use, or location, are detected. Such government mandates in chip designs could introduce system vulnerabilities and expose us to significant risk and potential liability, negatively impact demand for our products, and could have a material impact on our business, operating results, and financial condition. Even if not enacted into binding legislation, draft bills have impacted and may in the future negatively impact our business. For example, following U.S. legislative proposals calling for mandatory features in our chips, China’s government publicly questioned whether our H20 products have built-in vulnerabilities, discouraging customers from purchasing our products. We provided a public response explaining that our GPUs, including H20, do not include such built-in vulnerabilities, and will respond to any follow-up questions we receive.
+Open-source foundation models are rapidly growing in popularity with developers worldwide. The demand for open-source foundation models and applications promotes use of our products worldwide. Any regulatory control or other restriction that limits our ability to provide products and services that support third-party applications and models, including applications built on foundation models originating in China such as DeepSeek, Qwen, or KIMMI, could have a material impact on our business, operating results, and financial condition.
+The USG already imposed export controls restricting certain gaming GPUs, and if the USG expands such controls to restrict additional gaming products, it may disrupt a significant portion of our supply and distribution chain and negatively impact sales of such products to markets outside China, including the U.S. and Europe. For example, the French Competition Authority (FCA) is questioning whether gaming GPUs and data center GPUs are separate product categories, an inquiry that may impact the export controls applicable to gaming products sold in France and Europe. In addition, as the performance of the gaming GPUs increases over time, export controls may have a greater impact on our ability to compete in markets subject to those controls. Export controls may disrupt our supply and distribution chain for a substantial portion of our products, which are warehoused in and distributed from Hong Kong.
+Export controls restricting our ability to sell data center GPUs may also negatively impact demand for our networking products used in servers containing our GPUs. The USG may also impose export controls on our networking products, such as high-speed network interconnects, to limit the ability of downstream parties to create large clusters for frontier model training.
+Export controls have and are likely in the future to have a disproportionate impact on NVIDIA and may disadvantage us against certain of our competitors that sell chips that are outside the scope of such control. Export controls have already and may in the future encourage customers outside China and other impacted regions to “design-out” certain U.S. semiconductors from their products to reduce the compliance burden and risk, and to ensure that they are able to serve
+37
+markets worldwide. Export controls have already encouraged and may in the future encourage overseas governments to request that our customers purchase from our competitors rather than NVIDIA or other U.S. firms, harming our business, market position, and financial results.
+As a result, export controls have in the past and may in the future negatively impact demand for our products and services not only in China, but also in other markets, such as Europe, Latin America, and Southeast Asia. Export controls increase the risk of investing in U.S. advanced semiconductor products, because by the time a new product is ready for market, it may be subject to new unilateral export controls restricting its sale, resulting in excess inventory and purchase obligations as we recently experienced with the H20. At the same time, such controls may increase investment in foreign competitors, which would be less likely to be restricted by U.S. controls.
+The increasingly complex export controls impose complex and burdensome compliance obligations on our partners, suppliers, and customers. We have provided and will continue to provide assistance to authorities regarding attempted diversion, but as we do not have physical control of our products after sale, we must also rely on the compliance programs of our customers and partners. While we seek to strictly comply with all applicable export control regulators, reports of diversion of controlled products, even when unsubstantiated and untrue, or any compliance failure at a customer or partner, may negatively impact our business, relationships with partners and customers, and our reputation. Incorrect allegations that our compliance efforts satisfy the letter but not the “spirit” of the applicable regulations, as well as incorrect allegations that legitimate and appropriate business is using supposed “loopholes” in the export controls may negatively impact our business, relationships with partners and customers, and our reputation.
+In addition to export controls, the USG may impose restrictions on the import and sale of products that incorporate technologies developed or manufactured in whole or in part in China. For example, the USG adopted “Connected Vehicle” restrictions on the import and sale of certain automotive products in the United States, which if adopted and interpreted broadly, could impact our ability to develop and supply solutions for our automotive customers. The USG is also considering restrictions that would limit our ability to support third-party applications and models built on open-source foundation models originating in China. Such restrictions, if implemented, would favor our foreign competitors and negatively impact our business.
+Additionally, restrictions imposed by the Chinese government on the duration of gaming activities and access to games may adversely affect our Edge Computing revenue, and even if we are able to participate in the China data center compute market, increased oversight of digital platform companies may adversely affect our Data Center revenue. The Chinese government has encouraged customers to purchase from our China-based competitors and discouraged customers from purchasing, importing, or using our data center products, including any China-specific product designed to comply with U.S. export controls. As another example, an agency of the Chinese government announced an Action Plan that endorses new standards regarding the compute performance per watt and per memory bandwidth of accelerators used in new and renovated data centers in China. Although we are already effectively foreclosed from the China market by U.S. export controls, if those controls changed to allow us to return to the market, the Chinese government could modify or implement the Action Plan in a way that effectively prevents us from being able to design products to meet the new standard, which may restrict the ability of customers to use some of our data center products and may have a material and adverse impact on our business, operating results and financial condition. Further restrictions on our products or the products of our suppliers could negatively impact our business and financial results.
+Finally, our business depends on our ability to receive consistent and reliable supply from our overseas partners, especially in Taiwan and South Korea. Any new restrictions that negatively impact our ability to receive supply of components, parts, or services from Taiwan and South Korea, would negatively impact our business and financial results.
+Item 2. Unregistered Sales of Equity Securities and Use of Proceeds
+Issuer Purchases of Equity Securities
+We repurchased 108 million shares of our common stock for $20.2 billion during the first quarter of fiscal year 2027. As of April 26, 2026, we were authorized, subject to certain specifications, to repurchase up to $38.5 billion of our common stock.
+On May 18, 2026, our Board of Directors approved an additional $80.0 billion in share repurchase authorization, without expiration.
+We paid cash dividends to our shareholders of $243 million during the first quarter of fiscal year 2027. On May 18, 2026, we increased our quarterly cash dividend from $0.01 per share to $0.25 per share to all shareholders of record on June 4, 2026. Our quarterly cash dividend will be paid on June 26, 2026.
+The payment of future cash dividends is subject to our Board of Directors' continuing determination that the declaration of dividends is in the best interests of our shareholders.
+38
+The following table presents details of our share repurchase transactions during the first quarter of fiscal year 2027:
+Period
+Total Number
+of Shares Purchased
+(In millions)
+Average Price Paid per Share (1)
+Total Number of Shares Purchased as Part of Publicly Announced Program
+(In millions)
+Approximate Dollar Value of Shares that May Yet Be Purchased Under the Program
+(In billions)
+January 26, 2026 - February 22, 2026
+8.2
+$
+186.35
+8.2
+$
+57.0
+February 23, 2026 - March 22, 2026
+9.0
+$
+183.38
+9.0
+$
+55.4
+March 23, 2026 - April 26, 2026
+91.1
+$
+184.98
+91.1
+$
+38.5
+Total
+108.3
+(1) Average price paid per share includes broker commissions but excludes our liability under the 1% excise tax on the net amount of our share repurchases required by the Inflation Reduction Act of 2022.
+We may execute repurchases from time to time, subject to market conditions, operating requirements and other investment opportunities, in the open market, in privately-negotiated transactions, pursuant to a Rule 10b5-1 trading plan or in structured share repurchase agreements in compliance with Rule 10b-18 of the Exchange Act. Our share repurchase program may be suspended at any time at our discretion.
+Employee Equity Incentive Program Share Withholding
+We withhold shares of our common stock associated with net share settlements to cover tax withholding obligations of awards under our employee equity incentive program. During the first quarter of fiscal year 2027, we withheld approximately 12 million shares, for a total value of $2.1 billion through net share settlements.
+Recent Sales of Unregistered Securities and Use of Proceeds
+On February 17, 2026, we acquired a company and issued to a key employee a total of 37,890 shares of our common stock, valued at approximately $7 million based on our closing stock price on the issuance date.
+On April 10, 2026, we acquired a company and issued to key employees a total of 72,972 shares of our common stock, valued at approximately $14 million based on our closing stock price on the issuance date.
+The above securities were issued in transactions not involving a public offering pursuant to an exemption from registration set forth in Section 4(a)(2) of the Securities Act (and Regulation D or Regulation S promulgated thereunder).
+Item 5. Other Information
+The following members of our Board of Directors and/or officers adopted, modified, or terminated a trading arrangement that is intended to satisfy the affirmative defense conditions of Rule 10b5-1(c), or a Rule 10b5-1 Trading Arrangement:
+Name
+Title of Director or Officer
+Action
+Date
+Total Shares of Common Stock to be Sold
+Expiration Date
+Tench Coxe
+Director
+Adoption
+3/19/2026
+8,000,000*
+10/30/2027
+Colette M. Kress
+Executive Vice President and Chief Financial Officer
+Termination
+4/10/2026
+500,000**
+N/A
+* The Rule 10b5-1 Trading Arrangement is solely for gifts to charitable donor-advised funds.
+** The Rule 10b5-1 Trading Arrangement was adopted on December 18, 2025, for sales through March 23, 2027. No shares were sold under the Rule 10b5-1 Trading Arrangement prior to termination.
+39
+Item 6. Exhibits
+Incorporated by Reference
+Exhibit No.
+Exhibit Description
+Schedule/Form
+Exhibit
+Filing Date
+10.1+
+Variable Compensation Plan - Fiscal Year 2027
+8-K
+10.1
+3/6/2026
+31.1*
+Certification of Chief Executive Officer as required by Rule 13a-14(a) of the Securities Exchange Act of 1934
+31.2*
+Certification of Chief Financial Officer as required by Rule 13a-14(a) of the Securities Exchange Act of 1934
+32.1#*
+Certification of Chief Executive Officer as required by Rule 13a-14(b) of the Securities Exchange Act of 1934
+32.2#*
+Certification of Chief Financial Officer as required by Rule 13a-14(b) of the Securities Exchange Act of 1934
+101.INS*
+Inline XBRL Instance Document - the instance document does not appear in the Interactive Data File because its XBRL tags are embedded within the Inline XBRL document.
+101.SCH*
+Inline XBRL Taxonomy Extension Schema Document
+101.CAL*
+Inline XBRL Taxonomy Extension Calculation Linkbase Document
+101.DEF*
+Inline XBRL Taxonomy Extension Definition Linkbase Document
+101.LAB*
+Inline XBRL Taxonomy Extension Labels Linkbase Document
+101.PRE*
+Inline XBRL Taxonomy Extension Presentation Linkbase Document
+104
+Cover Page Interactive Data File - the cover page interactive data file does not appear in the Interactive Data File because its XBRL tags are embedded within the Inline XBRL document.
++ Management contract or compensatory plan or arrangement.
+* Filed herewith.
+# In accordance with Item 601(b)(32)(ii) of Regulation S-K and SEC Release Nos. 33-8238 and 34-47986, Final Rule: Management's Reports on Internal Control Over Financial Reporting and Certification of Disclosure in Exchange Act Periodic Reports, the certifications furnished in Exhibits 32.1 and 32.2 hereto are deemed to accompany this Quarterly Report on Form 10-Q and will not be deemed “filed” for purpose of Section 18 of the Exchange Act. Such certifications will not be deemed to be incorporated by reference into any filing under the Securities Act or the Exchange Act, except to the extent that the registrant specifically incorporates it by reference.
+Copies of the above exhibits not contained herein are available to any shareholder upon written request to:
+Investor Relations: NVIDIA Corporation, 2788 San Tomas Expressway, Santa Clara, CA 95051.
+40
+Signature
+Pursuant to the requirements of the Securities Exchange Act of 1934, the registrant has duly caused this report to be signed on its behalf by the undersigned thereunto duly authorized.
+Date: May 20, 2026
+NVIDIA Corporation
+By:
+/s/ Colette M. Kress
+Colette M. Kress
+Executive Vice President and Chief Financial Officer (Duly Authorized Officer and Principal Financial Officer)
+41

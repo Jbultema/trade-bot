@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 106616,
+  "content_sha256": "4f75a2675aff6d0c09f5f0f849e92961c5d0ad88a14b1388ce98730667ef37fd",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.entergy.com/news/entergy-louisiana-announces-a-new-agreement-with-meta-that-will-deliver-an-additional-2b-in-customer-savings",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0086_4f75a2675aff6d0c.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=UTF-8",
+  "original_url": "https://www.entergy.com/news/entergy-louisiana-announces-a-new-agreement-with-meta-that-will-deliver-an-additional-2b-in-customer-savings",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-03-27",
+  "publisher": "Entergy Louisiana LLC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0086_4f75a2675aff6d0c.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:37.454175+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:37.321825+00:00",
+  "selected_response_headers": {
+    "cache-control": "max-age=600, must-revalidate",
+    "content-type": "text/html; charset=UTF-8",
+    "date": "Mon, 27 Jul 2026 01:08:37 GMT",
+    "last-modified": "Mon, 27 Jul 2026 01:08:37 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0086",
+  "status": "preserved_complete",
+  "title": "Entergy Louisiana announces additional Meta agreement and customer savings",
+  "write_state": "new_version_written"
+}

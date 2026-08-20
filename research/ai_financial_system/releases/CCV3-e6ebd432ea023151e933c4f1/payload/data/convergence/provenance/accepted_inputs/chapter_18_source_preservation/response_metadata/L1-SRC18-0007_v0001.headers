@@ -1,0 +1,15 @@
+HTTP/2 200 
+server: nginx
+content-type: application/pdf
+content-length: 118534
+x-content-type-options: nosniff
+last-modified: Thu, 16 Oct 2014 17:19:31 GMT
+accept-ranges: bytes
+x-request-id: f104f49d-f0c6-4ac1-9fea-7949a1575d55
+x-ah-environment: prod
+x-age: 0
+cache-control: private, no-cache, no-store, must-revalidate
+expires: Sun, 26 Jul 2026 18:28:19 GMT
+date: Sun, 26 Jul 2026 18:28:19 GMT
+strict-transport-security: max-age=31536000 ; includeSubDomains ; preload
+

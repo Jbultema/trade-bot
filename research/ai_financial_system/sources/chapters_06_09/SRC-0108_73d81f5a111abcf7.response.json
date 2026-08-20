@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1967816,
+  "content_sha256": "73d81f5a111abcf72426c840871e76f5f5edc9631f436d495a86b6f87306d58b",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0108_73d81f5a111abcf7.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1045810/000104581026000021/nvda-20260125.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-02-25",
+  "publisher": "NVIDIA Corporation",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0108_73d81f5a111abcf7.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:12.692325+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:12.656381+00:00",
+  "selected_response_headers": {
+    "content-length": "171136",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:51:12 GMT",
+    "last-modified": "Wed, 25 Feb 2026 21:42:44 GMT"
+  },
+  "source_id": "SRC-0108",
+  "status": "preserved_complete",
+  "title": "NVIDIA Form 10-K for year ended January 25 2026",
+  "write_state": "new_version_written"
+}

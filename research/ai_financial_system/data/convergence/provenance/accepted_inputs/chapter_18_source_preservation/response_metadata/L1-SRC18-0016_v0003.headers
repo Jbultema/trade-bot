@@ -1,0 +1,16 @@
+HTTP/1.1 200 OK
+Date: Sun, 26 Jul 2026 18:32:19 GMT
+Content-Type: application/pdf
+Content-Length: 4366012
+Connection: keep-alive
+Server: Apache
+Strict-Transport-Security: max-age=63072000; includeSubdomains; preload
+Referrer-Policy: strict-origin-when-cross-origin
+Content-Disposition: attachment; filename="UNCTAD_RMT_2017-EN.pdf"
+Accept-Ranges: bytes
+Content-Security-Policy: default-src https: 'self' tind.io *.tind.io 'unsafe-inline'; img-src https: * blob: data: 'self'; style-src https: * 'unsafe-inline'; script-src https: * 'unsafe-inline' 'unsafe-eval' blob: 'self' https://ask.un.org https://un.libwizard.com; manifest-src https: *; media-src https: * blob: data: 'self'; font-src https: data: 'self'; frame-src https: blob: 'self'; connect-src https: wss: blob: * https://chat-us.libanswers.com https://wipoanalytics.wipo.int https://digitallibrary.un.org; frame-ancestors 'self'; upgrade-insecure-requests
+Access-Control-Allow-Origin: *
+X-Content-Type-Options: nosniff
+X-XSS-Protection: 1; mode=block
+Content-Security-Policy-Report-Only: default-src https: 'self' tind.io *.tind.io 'unsafe-inline'; img-src https: * blob: data: 'self'; style-src https: * 'unsafe-inline'; script-src 'self' 'unsafe-inline' 'unsafe-eval' blob: https://www.google.com https://www.gstatic.com https://cdnjs.cloudflare.com https://cdn.jwplayer.com https://ssl.p.jwpcdn.com https://*.disqus.com https://www.googletagmanager.com https://www.google-analytics.com https://stats.tind.io https://ask.un.org https://un.libwizard.com; manifest-src https: *; media-src https: * blob: data: 'self'; font-src 'self' data: https://cdnjs.cloudflare.com; frame-src https: blob: 'self'; connect-src 'self' blob: https://*.tind.io wss://*.tind.io https://www.google.com https://www.gstatic.com https://*.disqus.com https://*.s3.amazonaws.com https://*.s3.eu-west-1.amazonaws.com https://entitlements.jwplayer.com https://www.googletagmanager.com https://*.google-analytics.com https://translate.googleapis.com https://translate-pa.googleapis.com https://stats.tind.io https://sentry.internal.tind.io https://chat-us.libanswers.com https://wipoanalytics.wipo.int https://digitallibrary.un.org; frame-ancestors 'self'; upgrade-insecure-requests ; object-src 'none'; report-uri https://sentry.internal.tind.io/api/38/security/?sentry_key=5e4555fe193047f686380355d5716bcc&sentry_environment=digitallibrary.un.org
+

@@ -326,3 +326,109 @@ events:
       news coverage describe a large open-weight Moonshot model challenging U.S. frontier labs.
       The tradable question is whether cheaper capable models compress AI pricing power, shift
       demand toward open stacks, or simply increase AI usage without hurting infrastructure demand.
+
+  - event_id: walmart_us_comp_slowdown_2026_08_20
+    name: Walmart U.S. comparable-sales slowdown tests consumer resilience
+    date: "2026-08-20"
+    category: consumer_demand
+    direction: uncertain
+    current: true
+    sizing_authority: false
+    decay_after_days: 7
+    expires_after_days: 21
+    phase: coincident_confirmation
+    phase_reason: >
+      Walmart's reported quarter is a contemporaneous read on household spending and retail mix,
+      but one retailer cannot establish an economy-wide consumer rollover by itself.
+    confirmation_window: >
+      Compare WMT with XLY/XLP, RTH, TGT, COST, AMZN retail, card delinquencies, real retail sales,
+      consumer credit, lower-income commentary, breadth, and credit before treating the result as
+      evidence of a broad demand break.
+    tags:
+      - walmart
+      - consumer
+      - consumer_demand
+      - retail_sales
+      - comparable_sales
+      - guidance
+      - k_shaped_economy
+      - coincident_confirmation
+      - watch_context
+    source_url: "https://www.wsj.com/business/earnings/warlmart-earnings-q2-2026-wmt-stock-122b69ee"
+    description: >
+      Walmart's fiscal Q2 FY2027 results showed U.S. comparable-sales growth slowing to 2.6%,
+      below expectations, alongside a light third-quarter earnings outlook, even as total revenue
+      and adjusted EPS beat and e-commerce remained stronger. This is a useful consumer-mix and
+      margin signal, not proof that aggregate consumption has broken.
+
+  - event_id: openai_q2_growth_vs_anthropic_2026_08_19
+    name: OpenAI Q2 growth trails Anthropic and raises competitive-demand questions
+    date: "2026-08-19"
+    category: ai_unit_economics
+    direction: escalation
+    current: true
+    sizing_authority: false
+    decay_after_days: 7
+    expires_after_days: 21
+    phase: coincident_confirmation
+    phase_reason: >
+      Private investor data reportedly show OpenAI revenue growth decelerating relative to a major
+      competitor. This bears directly on monetization and competitive share, but is not a public
+      audited filing and does not establish sector-wide AI demand.
+    confirmation_window: >
+      Watch subsequent OpenAI disclosures, enterprise adoption, Anthropic accounting comparability,
+      cloud revenue and margins, AI software breadth, QQQ/RSP, IGV, SMH/SOXX, HYG/LQD, and planned
+      compute commitments before treating the competitive gap as a tradable break.
+    tags:
+      - ai
+      - openai
+      - anthropic
+      - revenue_growth
+      - enterprise_ai
+      - model_competition
+      - monetization
+      - q2_openai_investor_data_2026
+      - coincident_confirmation
+      - watch_context
+    source_url: "https://www.wsj.com/tech/ai/openais-second-quarter-sales-show-tepid-growth-compared-with-anthropic-5cb42998"
+    description: >
+      Reporting based on private investor information said OpenAI's Q2 revenue rose 18% sequentially
+      to about $6.7B, while Anthropic grew much faster. Revenue definitions differ between the two
+      companies, so this is evidence about OpenAI's trajectory and competitive position rather than
+      a clean apples-to-apples sector comparison. It shares an evidence cluster with the Q2 loss event.
+
+  - event_id: openai_q2_operating_loss_2026_08_19
+    name: OpenAI Q2 operating loss widens despite revenue growth
+    date: "2026-08-19"
+    category: ai_unit_economics
+    direction: escalation
+    current: true
+    sizing_authority: false
+    decay_after_days: 7
+    expires_after_days: 21
+    phase: coincident_confirmation
+    phase_reason: >
+      The reported Q2 loss is a direct contemporaneous unit-economics and external-financing signal,
+      but comes from private investor reporting rather than a public audited quarterly filing.
+    confirmation_window: >
+      Track cash burn relative to revenue, new financing terms, compute commitments, cloud-provider
+      receivables and margins, AI infrastructure credit spreads, planned IPO disclosures, QQQ/RSP,
+      SMH/SOXX, HYG/LQD, and VIXY.
+    tags:
+      - ai
+      - openai
+      - operating_loss
+      - cash_burn
+      - compute_cost
+      - external_financing
+      - ai_capex
+      - q2_openai_investor_data_2026
+      - coincident_confirmation
+      - watch_context
+    source_url: "https://finance.yahoo.com/technology/ai/articles/openai-burning-12-3-billion-135516997.html"
+    description: >
+      Reporting based on the same Q2 private investor data said OpenAI's operating loss including
+      stock compensation widened to about $12.3B from $9.3B in Q1 while revenue reached about $6.7B.
+      This is important for burn intensity, financing dependence, and the durability of compute
+      commitments. It is not independent confirmation of the companion OpenAI growth event and must
+      not be double-counted.

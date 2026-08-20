@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 1569770,
+  "content_sha256": "5b417f8bb45ace30de42315c979cbe69106a29bf4db98fcaa8e6fcdb060a3541",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000129/ex1011.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0101_5b417f8bb45ace30.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/1769628/000176962826000129/ex1011.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-03-30",
+  "publisher": "CoreWeave Inc. and CoreWeave Compute Acquisition Co. VIII LLC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0101_5b417f8bb45ace30.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:49.227995+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:49.148871+00:00",
+  "selected_response_headers": {
+    "content-length": "169727",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:49 GMT",
+    "last-modified": "Tue, 31 Mar 2026 12:59:50 GMT"
+  },
+  "source_id": "SRC-0101",
+  "status": "preserved_complete",
+  "title": "CoreWeave CCAC VIII DDTL 4.0 credit agreement and closing Form 8-K",
+  "write_state": "new_version_written"
+}

@@ -1,0 +1,297 @@
+{
+  "candidate_manifest_sha256": "efd9feb57f15e059bce85323e6dfd4c0214fd63953deb2eddb9f7e7e10152958",
+  "canonical_integration_verdict": "NOT_AUTHORIZED_PENDING_FRESH_REVIEW",
+  "files": [
+    {
+      "bytes": 3620,
+      "lines": 83,
+      "path": "acceptance_memo.md",
+      "sha256": "d5b0aec50f9a6fe27b734ac73b92860e66386351accc9b26071dfc8d92e5946e"
+    },
+    {
+      "bytes": 2177,
+      "path": "arithmetic_reconciliation.csv",
+      "rows": 19,
+      "sha256": "743ca0b596a3314a0f9d8f3d17defcad4eb7dbab580fcc6bc4262f77cc3c61fe"
+    },
+    {
+      "bytes": 38409,
+      "lines": 1049,
+      "path": "build_candidate_v2.py",
+      "sha256": "14c1f5f38b1cbd4bb30d4c8b049c31bca4e88e467e1b88592c344e921b4a1dcc"
+    },
+    {
+      "bytes": 3080,
+      "path": "candidate/candidate_claims.csv",
+      "rows": 5,
+      "sha256": "f3692bdbde9057483b8fe2826532b2aeced53a84ce2110c6235479d01c2ae91d"
+    },
+    {
+      "bytes": 2798,
+      "path": "candidate/candidate_evidence_links.csv",
+      "rows": 8,
+      "sha256": "d70c648aaba2410b0cb4606c879513a77ceb4da9bb37335337e3ffd916bb6544"
+    },
+    {
+      "bytes": 5056,
+      "path": "candidate/candidate_handoffs.csv",
+      "rows": 11,
+      "sha256": "99494e9319f1f233da7958c6560cebbabbf66ef961316f3fca41707c1953529b"
+    },
+    {
+      "bytes": 5888,
+      "lines": 144,
+      "path": "candidate/candidate_manifest.json",
+      "sha256": "efd9feb57f15e059bce85323e6dfd4c0214fd63953deb2eddb9f7e7e10152958"
+    },
+    {
+      "bytes": 6833,
+      "lines": 168,
+      "path": "candidate/candidate_schema.sql",
+      "sha256": "dd50bd74e4eb84066894a9788b94f6336056cd68761a31464634a5dc29c12dfe"
+    },
+    {
+      "bytes": 5478,
+      "path": "candidate/candidate_unknowns.csv",
+      "rows": 11,
+      "sha256": "24440409b4f8e1923e5022272774f6f8717c15dffc8884fc8bafc3889ec24e48"
+    },
+    {
+      "bytes": 2163,
+      "path": "candidate/claim_locator_reviews_candidate.csv",
+      "rows": 5,
+      "sha256": "28c57de231c11b1e5f896b181f345e168c3742ce30dd568345956e9a7f2971a9"
+    },
+    {
+      "bytes": 3103,
+      "path": "candidate/claim_status_rebase_candidate.csv",
+      "rows": 5,
+      "sha256": "cf0a0a216f2e38270345b847e1c2a1935dd8c305d9be70a2393728e8224352f0"
+    },
+    {
+      "bytes": 26395,
+      "path": "candidate/input_lineage.csv",
+      "rows": 109,
+      "sha256": "b3afed6ea0318abb82c938897510be388fd6413a840c7a8dea096a7dca8f4977"
+    },
+    {
+      "bytes": 5027,
+      "path": "candidate/private_investment_accounting_methods.csv",
+      "rows": 11,
+      "sha256": "f64de13288a4877716b93d948d364520ef8fe4bcfcb4c670eed896335598a66d"
+    },
+    {
+      "bytes": 272,
+      "path": "candidate/private_investment_bridge_components.csv",
+      "rows": 5,
+      "sha256": "d4a4b4958aaefcb57a85b10ff16e069782f172202c9ed35c9333633a414d4097"
+    },
+    {
+      "bytes": 2469,
+      "path": "candidate/private_investment_carrying_value_rollforwards.csv",
+      "rows": 5,
+      "sha256": "28c7fc5e71fda8760c0f263690a66d8a5559db1cf18679498a0f46140f85d283"
+    },
+    {
+      "bytes": 5313,
+      "path": "candidate/private_investment_earnings.csv",
+      "rows": 8,
+      "sha256": "743bf60882da132b4bfd282bbe9b6c0e0a666c5bfe02d71602b26ddf49b606ff"
+    },
+    {
+      "bytes": 2181,
+      "path": "candidate/private_investment_earnings_bridges.csv",
+      "rows": 4,
+      "sha256": "068089f2531a5895ebb91e7802668937868a2bec25b3788fe0ed7e87bb398ef7"
+    },
+    {
+      "bytes": 322,
+      "path": "candidate/private_investment_earnings_components.csv",
+      "rows": 2,
+      "sha256": "ebada44efed9ef1d602817e1f8b0acab970e849a6f1d3fb6d146b2fa09365b55"
+    },
+    {
+      "bytes": 6324,
+      "path": "candidate/private_investment_population_observations.csv",
+      "rows": 10,
+      "sha256": "adc29ea89475563acb6a5a86daf97bd9619de2675485d6f6acb73ac595fc5d3e"
+    },
+    {
+      "bytes": 4470,
+      "path": "candidate/private_investment_rollforward_components.csv",
+      "rows": 16,
+      "sha256": "ce8342060cae9ada11b8ae89a791a1dc32d712714740396f361d2598cb55fe6d"
+    },
+    {
+      "bytes": 5891,
+      "path": "candidate/source_archive_provenance_candidate.csv",
+      "rows": 8,
+      "sha256": "f48853dbae4e9537fbae895cb3315284ab84e85eb8b294dceefbade3ada993ff"
+    },
+    {
+      "bytes": 6131,
+      "path": "candidate/source_register_rebase_candidate.csv",
+      "rows": 8,
+      "sha256": "0337c175fd0957d7cb3ebf82db6c54bcbc6f5c692a98e879ff4d221074249a40"
+    },
+    {
+      "bytes": 5163,
+      "path": "candidate/source_text_derivatives_candidate.csv",
+      "rows": 8,
+      "sha256": "b2af07a9bcb4dfd9ddaa38658ed9f5e6c6e6ed0110284906d7a7683dd05d6adc"
+    },
+    {
+      "bytes": 356934,
+      "path": "candidate/transformation_audit.csv",
+      "rows": 500,
+      "sha256": "e643487c7b0e8bbd8a8b6f52b59c2550666dd892c048589d4ef99a6c25b4a053"
+    },
+    {
+      "bytes": 1214,
+      "path": "canonical_constraint_probe.csv",
+      "rows": 11,
+      "sha256": "77209548f0e6da289678e0418c8b2f2e16bc2cadc7ad54c5806604a3595e3767"
+    },
+    {
+      "bytes": 6361,
+      "path": "checks.csv",
+      "rows": 20,
+      "sha256": "4ed5dfcf044e309cb973cbf414e6a040b0d8c1070d8012a9f6fddded6e3e4533"
+    },
+    {
+      "bytes": 47,
+      "path": "findings.csv",
+      "rows": 0,
+      "sha256": "ab08e7d3c1d4dd432af555d06260d61230ccbfb9db492e4b502933252d8f89df"
+    },
+    {
+      "bytes": 28065,
+      "path": "input_hash_audit.csv",
+      "rows": 109,
+      "sha256": "1f81f29b4e4e07cbe2d7e7ad0d24ec3f0d5502d536d94abaa1369aa97164a354"
+    },
+    {
+      "bytes": 617,
+      "path": "negative_fk_tests.csv",
+      "rows": 6,
+      "sha256": "dce556e0ac0a5e815e87ed41ab3d8279a2709a9d93578c12a7dab60156f56cf4"
+    },
+    {
+      "bytes": 1179,
+      "path": "population_reconciliation.csv",
+      "rows": 10,
+      "sha256": "3215bbc01e01fbd40039c7e8f29f2fb3792891e02d3187f247fafede0985e0dc"
+    },
+    {
+      "bytes": 530,
+      "path": "repair_reperformance.csv",
+      "rows": 6,
+      "sha256": "53bf83401b06bef24c761f3d2cf02443b26168faad92c24028818cdf82154fb6"
+    },
+    {
+      "bytes": 5485,
+      "lines": 155,
+      "path": "seal_lane.py",
+      "sha256": "d950be1e842409cb4b2f711e35d797ee1983f1febfaeb27469437ae6a87d65fd"
+    },
+    {
+      "bytes": 2726,
+      "path": "source_preservation_validation.csv",
+      "rows": 13,
+      "sha256": "d54250187dd71d1a11081fcde64cb1d523e44a85e931deba7b58aa2b0eb378aa"
+    },
+    {
+      "bytes": 68671,
+      "path": "transformation_lineage_validation.csv",
+      "rows": 500,
+      "sha256": "70976cf9b3d68a7eda6c2063adc1e6ebe6f92e14506237a1aa5333fb48aba3a1"
+    },
+    {
+      "bytes": 5550,
+      "path": "two_clean_build_comparison.csv",
+      "rows": 21,
+      "sha256": "e095137de5b2b3f56ec8f17b79a816432151616acb2958d77d7b72015f1e35d7"
+    },
+    {
+      "bytes": 245125,
+      "path": "typed_semantics_audit.csv",
+      "rows": 1473,
+      "sha256": "a207c2545df86ad2eb57f713806286e789f4636c3eb4f84652add92fa326d570"
+    },
+    {
+      "bytes": 63737,
+      "lines": 1842,
+      "path": "validate_candidate_v2.py",
+      "sha256": "3736ecb703e520b83dae7ae699cbe28da52940f0c31f50e046488760c2331d85"
+    },
+    {
+      "bytes": 9330,
+      "lines": 287,
+      "path": "validate_lane.py",
+      "sha256": "f96191ee83614fab1ba49a8bea517853c5c305aae593e954162b5d9c7eb9879d"
+    },
+    {
+      "bytes": 1546,
+      "lines": 41,
+      "path": "validation_results.json",
+      "sha256": "6ccb1fd4bda44fa0ac8c7e60a3a0acdf06e15217d45a143a1ad4788384c44ac2"
+    }
+  ],
+  "intrinsic_economic_reconstruction_verdict": "PASS",
+  "lane": "lane_2_private_investment_candidate_v2",
+  "no_write_attestation": {
+    "accepted_source_packet_or_review_modified": false,
+    "author_output_only": "research/ai_financial_system/staging/lane_2_private_investment_candidate_v2/",
+    "canonical_files_written": [],
+    "chapters_written": false,
+    "database_written": false,
+    "docx_pdf_or_publication_manifest_written": false,
+    "shared_scripts_modified": false,
+    "v1_candidate_modified": false,
+    "v1_review_modified": false
+  },
+  "preservation_boundary": {
+    "fresh_nonauthor_review_required": true,
+    "original_inline_xbrl_governs": true,
+    "preservation_hold_clearance_requires_atomic_rebase": true,
+    "visible_text_is_locator_aid_only": true
+  },
+  "resolved_v1_review_defects": [
+    "V2-001 canonical support types",
+    "V2-002 rounded Microsoft amount precision",
+    "V2-003 partial and mixed investee identity scopes",
+    "V2-004 real external foreign keys",
+    "V2-005 field-level transformation lineage",
+    "V2-006 Chapter 11 claim lineage"
+  ],
+  "retained_analytical_holds": [
+    "governed top-20 population reconstruction",
+    "S&P 500 aggregate reproduction",
+    "unnamed investee allocation at Alphabet and NVIDIA and residual Amazon attribution",
+    "exact Microsoft component and tax allocation",
+    "prospective Meta/Tesla and realization monitoring"
+  ],
+  "self_hash_policy": "lane_manifest.json excludes its own hash",
+  "source_preservation_atomic_rebase_verdict": "READY_PENDING_FRESH_REVIEW",
+  "status_date": "2026-07-26",
+  "task_sha256": "dea89ee4c47469902b022c89bae095cdbca1f803ed28d9644dc0d0798fba51fc",
+  "typed_candidate_verdict": "PASS_AUTHOR_VALIDATION",
+  "validation_scope": {
+    "arithmetic_checks": "19_of_19_pass",
+    "canonical_governance_populations": "claims_5_evidence_links_8_handoffs_11_unknowns_11",
+    "checks": "20_of_20_pass",
+    "clean_builds": 2,
+    "deterministic_files": "21_of_21_byte_identical",
+    "economic_tables_loaded": "8_of_8",
+    "external_foreign_keys": 11,
+    "governing_inputs": "109_of_109_unchanged",
+    "negative_fk_tests": "6_of_6_pass",
+    "open_findings": 0,
+    "population_checks": "10_of_10_pass",
+    "preservation_records": "13_of_13_pass",
+    "six_exact_repairs": "6_of_6_pass",
+    "source_field_lineage": "500_checked_0_failures",
+    "typed_fields": "1473_checked_0_failures"
+  },
+  "workstream": "private_investment_typed_candidate_v2_atomic_preservation_rebase"
+}

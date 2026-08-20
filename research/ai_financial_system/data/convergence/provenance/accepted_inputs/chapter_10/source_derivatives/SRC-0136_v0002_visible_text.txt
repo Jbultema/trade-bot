@@ -1,0 +1,195 @@
+Biden-Harris Administration Announces CHIPS Incentives Award with TSMC Arizona to Secure U.S. Leadership in Advanced Semiconductor Technology | NIST
+Skip to main content
+An official website of the United States government
+Here’s how you know
+Official websites use .gov
+A
+.gov
+website belongs to an official government organization in the United States.
+Secure .gov websites use HTTPS
+A
+lock
+(
+) or
+https://
+means you’ve safely connected to the .gov website. Share sensitive information only on official, secure websites.
+https://www.nist.gov/news-events/news/2024/11/biden-harris-administration-announces-chips-incentives-award-tsmc-arizona
+Search NIST
+Menu
+Close
+Publications
+What We Do
+All Topics
+Advanced communications
+Artificial intelligence
+Bioscience
+Buildings and construction
+Chemistry
+Cybersecurity and Privacy
+Electronics
+Energy
+Environment
+Fire
+Forensic science
+Health
+Information technology
+Infrastructure
+Manufacturing
+Materials
+Mathematics and statistics
+Metrology
+Nanotechnology
+Neutron research
+Performance excellence
+Physics
+Public safety
+Quantum information science
+Resilience
+Standards
+Transportation
+Labs & Major Programs
+Assoc Director of Laboratory Programs
+Laboratories
+Communications Technology Laboratory
+Engineering Laboratory
+Information Technology Laboratory
+Material Measurement Laboratory
+Physical Measurement Laboratory
+User Facilities
+NIST Center for Neutron Research
+CNST NanoFab
+Research Test Beds
+Research Projects
+Tools & Instruments
+Major Programs
+CHIPS for America Initiative
+Congressionally Identified Project Program (CIPP)
+Manufacturing Extension Partnership (MEP)
+Office of Advanced Manufacturing
+Technology Partnerships Office
+Services & Resources
+Measurements and Standards
+Calibration Services
+Laboratory Accreditation (NVLAP)
+Quality System
+Standard Reference Materials (SRMs)
+Standard Reference Instruments (SRIs)
+Standards.gov
+Time Services
+Office of Weights and Measures
+Software
+Data
+Chemistry WebBook
+National Vulnerability Database
+Physical Reference Data
+Standard Reference Data (SRD)
+Storefront
+License & Patents
+Computer Security Resource Center (CSRC)
+NIST Research Library
+News & Events
+News
+Events
+Blogs
+NIST In Focus
+Feature Stories
+Awards
+Video Gallery
+Image Gallery
+Media Contacts
+About NIST
+About Us
+Leadership
+Organization Structure
+Budget & Planning
+Contact Us
+Visit
+Careers
+Student programs
+Work with NIST
+History
+NIST Digital Archives
+NIST Museum
+NIST and the Nobel
+Educational Resources
+UPDATES
+This news item has been archived.
+Biden-Harris Administration Announces CHIPS Incentives Award with TSMC Arizona to Secure U.S. Leadership in Advanced Semiconductor Technology
+CHIPS Investment Incentivizes Creation of Leading-Edge Cluster in Phoenix, Arizona, and Over 20,000 Jobs; and Includes Commitment to Produce A16 Technology
+November 15, 2024
+Share
+Facebook
+Linkedin
+X.com
+Email
+Media Contact: Maddy Broas,
+madeline.broas
+[at]
+chips.gov
+(madeline[dot]broas[at]chips[dot]gov)
+Today, the Biden-Harris Administration announced that the U.S. Department of Commerce awarded TSMC Arizona Corporation (TSMC Arizona), a subsidiary of Taiwan Semiconductor Manufacturing Company Limited (TSMC), up to $6.6 billion in direct funding under the CHIPS Incentives Program’s Funding Opportunity for Commercial Fabrication Facilities. The award comes after the previously signed preliminary memorandum of terms, announced on April 8, 2024, and the completion of the Department’s due diligence. The award will support the company’s planned investment of more than $65 billion in three greenfield leading-edge fabs in Phoenix, Arizona. The Department will disburse the funds based on TSMC Arizona’s completion of project milestones.
+“Two years ago, shortly after I signed the CHIPS & Science Act, I visited Arizona to announce a commitment by TSMC to invest in America, create American jobs, and shore up American supply chains. On that day, I spoke about how the United States invented semiconductors and used to manufacture nearly 40% of the world’s chips, but now makes closer to 10% of them and none of the most advanced chips. I came to office determined to change that, and we have since delivered on that promise, catalyzing nearly $450 billion in private investment in semiconductors, creating over 125,000 new construction and manufacturing jobs, and reshoring critical technologies to bolster our national and economic security,” said
+President Joe Biden
+. “Today’s final agreement with TSMC – the world’s leading manufacturer of advanced semiconductors – will spur $65 billion dollars of private investment to build three state-of-the-art facilities in Arizona and create tens of thousands of jobs by the end of the decade. This is the largest foreign direct investment in a greenfield project in the history of the United States. The first of TSMC’s three facilities is on track to fully open early next year, which means that for the first time in decades an America manufacturing plant will be producing the leading-edge chips used in our most advanced technologies – from our smartphones, to autonomous vehicles, to the data centers powering artificial intelligence. Today’s announcement is among the most critical milestones yet in the implementation of the bipartisan CHIPS & Science Act, and demonstrates how we are ensuring that the progress made to date will continue to unfold in the coming years, benefitting communities all across the country.”
+“The Biden-Harris Administration’s investment in TSMC Arizona is a turning point for American innovation and manufacturing that will strengthen our economic and national security,” said
+U.S. Secretary of Commerce Gina Raimondo
+. “The leading-edge chips that will be manufactured in Arizona are foundational to the United States' technological and economic leadership in the 21st century. Because of President Biden and Vice President Harris, the most advanced semiconductor technology on the planet will be made in America, creating thousands of jobs in the process.”
+Through this investment in TSMC Arizona, the CHIPS Program Office is taking a significant step to strengthen U.S. economic and national security by helping to provide a reliable domestic supply of the chips that will underpin the 21st century technology economy, powering artificial intelligence (“AI”) and other fast-growing industries like high-performance computing, consumer electronics, automotive, and Internet of Things. At full capacity, TSMC Arizona’s three fabs are expected to manufacture tens of millions of leading-edge logic chips that will power products like 5G/6G smartphones, autonomous vehicles, and high-performance computing and AI applications. Early production yields at the first TSMC plant in Arizona are on par with similar factories in Taiwan. The advanced chips that TSMC manufactures for its customers – including its A16 technology, which is the most advanced semiconductor technology in the world – are the backbone of central processing units (“CPUs”) for servers in large-scale datacenters and of specialized graphics processing units (“GPUs) used for machine learning. The Biden-Harris Administration’s investment is expected to create approximately 6,000 direct manufacturing jobs and more than 20,000 total unique construction jobs.
+“Entering this phase of the U.S. CHIPS and Science Act marks a pivotal step in strengthening the semiconductor ecosystem in the United States,” said
+TSMC Chairman and CEO Dr. C.C. Wei
+. “TSMC appreciates the continual collaboration with customers, partners, local communities and the U.S. government beginning in early 2020. The signing of this agreement helps us to accelerate the development of the most advanced semiconductor manufacturing technology available in the U.S.”
+For more information about TSMC Arizona’s award, please visit the
+CHIPS for America website
+.
+In addition to the direct funding of up to $6.6 billion, the CHIPS Program Office will provide up to $5 billion of proposed loans – which is part of the $75 billion in loan authority provided by the CHIPS and Science Act – to TSMC Arizona under the award. As stated in the CHIPS Notice of Funding Opportunity for Commercial Fabrication Facilities, CHIPS for America will distribute direct funding to recipients for capital expenditures based on the completion of construction, production, and commercial milestones, and disburse loans to TSMC Arizona for amounts invested in capital expenditures. The program will track the performance of each CHIPS Incentives Award via financial and programmatic reports, in accordance with the award terms and conditions.
+About CHIPS for America
+CHIPS for America has awarded approximately $6.72 billion and allocated over $36 billion in proposed funding across 20 states and proposed to invest billions more in research and innovation, which is expected to create over 125,000 jobs. Since the beginning of the Biden-Harris Administration, semiconductor and electronics companies have announced over $450 billion in private investments, catalyzed in large part by public investment. CHIPS for America is part of President Biden and Vice President Harris’s economic plan to invest in America, stimulate private sector investment, create good-paying jobs, make more in the United States, and revitalize communities left behind. CHIPS for America includes the CHIPS Program Office, responsible for manufacturing incentives, and the CHIPS Research and Development Office, responsible for R&D programs, that both sit within the National Institute of Standards and Technology (NIST) at the Department of Commerce. Visit
+https://www.chips.gov
+to learn more.
+Electronics
+,
+Semiconductors
+and
+Manufacturing
+NIST in your inbox
+Stay up to date with the latest news from NIST.
+Enter Email Address
+Organizations
+NIST Headquarters
+Creating Helpful Incentives to Produce Semiconductors for America (CHIPS)
+CHIPS Program Office
+Released November 15, 2024, Updated October 6, 2025
+Was this page helpful?
+HEADQUARTERS
+100 Bureau Drive
+Gaithersburg, MD 20899
+301-975-2000
+Webmaster
+|
+Contact Us
+|
+Our Other Offices
+X.com
+Facebook
+LinkedIn
+Instagram
+YouTube
+Giphy
+RSS Feed
+Mailing List
+How are we doing?
+Feedback
+Site Privacy
+Accessibility
+Privacy Program
+Copyright & Disclaimers
+Vulnerability Disclosure
+No Fear Act Policy
+FOIA
+Environmental Policy
+Scientific Integrity
+Information Quality Standards
+Commerce.gov
+Science.gov
+USA.gov
+Vote.gov

@@ -1,0 +1,10 @@
+{
+  "canonical_write": "NOT_AUTHORIZED",
+  "comparative_publication": "BLOCKED",
+  "lane": "lane_3_chapter_16_rebuilt_v3",
+  "patches_applied": 12,
+  "patches_expected": 12,
+  "review_manifest_sha256": "f57583835a0ee132636491a8a7df1dc502938fa14ddd7e2f82717f541980e046",
+  "source_manifest_sha256": "d3ac562cb943c0085205150b2ac34ad4a181477cef92856ba24b0bdbdaa75f34",
+  "status": "PASS_12_OF_12_APPLIED_PENDING_NONAUTHOR_ACCEPTANCE"
+}

@@ -7,6 +7,7 @@ import subprocess
 import sys
 import time
 from dataclasses import replace
+from datetime import date
 from pathlib import Path
 from typing import Annotated, Any, Literal
 
@@ -64,6 +65,7 @@ from trade_bot.DEFAULTS import (
     DEFAULT_SNAPSHOT_BACKFILL_DAILY_TAIL_DAYS,
     DEFAULT_SNAPSHOT_BACKFILL_MARKET_CLOSE_UTC_HOUR,
     DEFAULT_SNAPSHOT_BACKFILL_YEARS,
+    DEFAULT_SNAPSHOT_RETENTION_KEEP_ALL_CAPTURE_DAYS,
     DEFAULT_SNAPSHOT_RETENTION_KEEP_LATEST,
     DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
     DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
@@ -84,6 +86,35 @@ from trade_bot.research.baselines import (
     build_configured_strategy_results,
     run_configured_baselines,
     slice_backtest_results,
+)
+from trade_bot.research.capital_cycle_ai_pipeline import build_current_ai_evidence
+from trade_bot.research.capital_cycle_baseline import (
+    DEFAULT_FROZEN_BASELINE_DIR,
+    freeze_trade_bot_snapshot_baseline,
+)
+from trade_bot.research.capital_cycle_feasibility import (
+    DEFAULT_CAPITAL_CYCLE_FEASIBILITY_DIR,
+    DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    run_capital_cycle_feasibility,
+)
+from trade_bot.research.capital_cycle_sources import (
+    fetch_census_housing_release_panel,
+    fetch_registered_source_documents,
+    fetch_sec_filing_archive,
+    import_fcc_telecom_capacity_release,
+    import_sec_companyfacts_panel,
+)
+from trade_bot.research.capital_cycle_targets import (
+    DEFAULT_CAPITAL_CYCLE_TARGET_DIR,
+    build_objective_economic_targets,
+)
+from trade_bot.research.capital_cycle_validation import (
+    DEFAULT_CAPITAL_CYCLE_VALIDATION_DIR,
+    run_capital_cycle_validation,
+)
+from trade_bot.research.capital_cycle_vintages import (
+    DEFAULT_AI_VINTAGE_DIR,
+    save_prospective_ai_vintage,
 )
 from trade_bot.research.current_state import build_strategy_alerts, refresh_risk_timing
 from trade_bot.research.cycle_tracker import (
@@ -164,6 +195,11 @@ from trade_bot.research.leadership_diagnostics import (
     leadership_candidate_tickers,
     run_leadership_diagnostics,
 )
+from trade_bot.research.model_evidence_audit import (
+    DEFAULT_MODEL_EVIDENCE_OUTPUT_DIR,
+    build_model_evidence_audit,
+    write_model_evidence_audit,
+)
 from trade_bot.research.native_i111_risk_repair import (
     DEFAULT_NATIVE_I111_RISK_REPAIR_OUTPUT_DIR,
     run_native_i111_risk_repair_lab,
@@ -172,8 +208,15 @@ from trade_bot.research.native_timing_hazard import (
     DEFAULT_NATIVE_TIMING_HAZARD_DIR,
     run_native_timing_hazard_research,
 )
+from trade_bot.research.native_timing_progression import (
+    DEFAULT_NATIVE_TIMING_PROGRESSION_DIR,
+    run_native_timing_progression_research,
+)
+from trade_bot.research.native_timing_severity import (
+    DEFAULT_NATIVE_TIMING_SEVERITY_DIR,
+    run_native_timing_severity_research,
+)
 from trade_bot.research.operating_history import (
-    DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
     DEFAULT_OPERATING_HISTORY_SOURCE,
     reconstruct_operating_history,
 )
@@ -190,6 +233,7 @@ from trade_bot.research.prebreak_hindsight import (
     analyze_prebreak_hindsight,
     build_prebreak_snapshot_population_plan,
     deduplicate_prebreak_snapshot_plan,
+    refresh_current_prebreak_signal_readout,
     write_prebreak_hindsight_outputs,
 )
 from trade_bot.research.research_governance import write_research_trial_ledger
@@ -216,6 +260,7 @@ from trade_bot.research.signal_evidence import (
 from trade_bot.research.snapshot_backfill import (
     SnapshotBackfillPlan,
     build_snapshot_backfill_plan,
+    missing_period_backfill_dates,
     snapshot_created_at_for_market_date,
 )
 from trade_bot.research.strategy_source_audit import write_strategy_source_audit
@@ -581,6 +626,10 @@ def run_daily_update_cmd(
         bool,
         typer.Option("--paper-valuation/--skip-paper-valuation"),
     ] = True,
+    refresh_prebreak_monitor: Annotated[
+        bool,
+        typer.Option("--refresh-prebreak-monitor/--skip-prebreak-monitor"),
+    ] = True,
     job_id: Annotated[str | None, typer.Option("--job-id")] = None,
 ) -> None:
     """Run the full daily operating refresh for the dashboard."""
@@ -639,6 +688,13 @@ def run_daily_update_cmd(
                 baseline_run,
                 market_date=manifest.market_date,
                 execution=bot_config.execution,
+            )
+        if refresh_prebreak_monitor:
+            _refresh_current_prebreak_artifact(
+                reference_store=store,
+                reference_artifact_dir=artifact_dir,
+                reference_job_log_dir=job_log_dir,
+                output_dir=DEFAULT_PREBREAK_OUTPUT_DIR,
             )
         if job_id:
             run_store.mark_job_completed(job_id, manifest.run_id)
@@ -721,6 +777,16 @@ def prune_snapshots_cmd(
             help="Keep this many recent market dates at daily granularity.",
         ),
     ] = DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
+    keep_all_capture_days: Annotated[
+        int,
+        typer.Option(
+            "--keep-all-capture-days",
+            help=(
+                "Keep every intraday capture for this many days after it is stored; "
+                "daily and weekly compaction begins afterward."
+            ),
+        ),
+    ] = DEFAULT_SNAPSHOT_RETENTION_KEEP_ALL_CAPTURE_DAYS,
     keep_weekly_older: Annotated[
         int,
         typer.Option(
@@ -748,6 +814,7 @@ def prune_snapshots_cmd(
         keep_latest=keep_latest,
         keep_per_market_date=keep_per_market_date,
         keep_recent_market_days=keep_recent_market_days,
+        keep_all_capture_days=keep_all_capture_days,
         keep_weekly_older=keep_weekly_older,
         weekly_frequency=weekly_frequency,
         apply=apply,
@@ -758,6 +825,7 @@ def prune_snapshots_cmd(
             f"{mode}: no snapshots fall outside the retention policy "
             f"(keep_latest={keep_latest}, keep_per_market_date={keep_per_market_date}, "
             f"keep_recent_market_days={keep_recent_market_days}, "
+            f"keep_all_capture_days={keep_all_capture_days}, "
             f"keep_weekly_older={keep_weekly_older}, weekly_frequency={weekly_frequency})."
         )
         return
@@ -769,6 +837,7 @@ def prune_snapshots_cmd(
         f"retention policy (keep_latest={keep_latest}, "
         f"keep_per_market_date={keep_per_market_date}, "
         f"keep_recent_market_days={keep_recent_market_days}, "
+        f"keep_all_capture_days={keep_all_capture_days}, "
         f"keep_weekly_older={keep_weekly_older}, weekly_frequency={weekly_frequency})."
     )
     if not apply:
@@ -846,6 +915,17 @@ def backfill_snapshots_cmd(
             ),
         ),
     ] = False,
+    only_missing_periods: Annotated[
+        bool,
+        typer.Option(
+            "--only-missing-periods/--all-planned-periods",
+            help=(
+                "Add only the canonical latest planned date in each selection-frequency "
+                "period when that exact date is absent; preserve normal daily/weekly "
+                "retention and any denser evidence."
+            ),
+        ),
+    ] = False,
     plan_only: Annotated[
         bool,
         typer.Option("--plan-only/--run", help="Print the rebuild schedule without writing."),
@@ -884,6 +964,24 @@ def backfill_snapshots_cmd(
     replacement_source_run_id: dict[str, str] = {}
     already_replaced_market_dates: set[str] = set()
     expected_market_dates: set[str] = set()
+    if only_missing_periods:
+        if purge_existing:
+            raise typer.BadParameter(
+                "--only-missing-periods cannot be combined with --purge-existing."
+            )
+        if replace_existing_market_dates:
+            raise typer.BadParameter(
+                "--only-missing-periods cannot be combined with "
+                "--replace-existing-market-dates."
+            )
+        existing = run_store.list_snapshots(limit=100_000)
+        existing_dates = existing.get("market_date", pd.Series(dtype=object))
+        selected_dates = missing_period_backfill_dates(
+            selected_dates,
+            existing_dates,
+            period_frequency=weekly_frequency,
+            retention_frequency=DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
+        )
     if replace_existing_market_dates:
         if purge_existing:
             raise typer.BadParameter(
@@ -942,6 +1040,9 @@ def backfill_snapshots_cmd(
         plan_only=plan_only,
     )
     if plan_only:
+        return
+    if not selected_dates:
+        console.print("No missing snapshot periods require backfill.")
         return
 
     purged = run_store.purge_snapshots(apply=True) if purge_existing else pd.DataFrame()
@@ -1089,20 +1190,30 @@ def backfill_snapshots_cmd(
             keep_latest=0,
             keep_per_market_date=1,
             keep_recent_market_days=None,
+            keep_all_capture_days=0,
             keep_weekly_older=0,
             apply=True,
         )
     else:
-        recent_market_days = _selected_daily_market_day_count(
-            selected_dates,
-            daily_cutoff_date=plan.daily_cutoff_date,
+        recent_market_days = (
+            DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS
+            if only_missing_periods
+            else _selected_daily_market_day_count(
+                selected_dates,
+                daily_cutoff_date=plan.daily_cutoff_date,
+            )
         )
         final_prune = run_store.prune_snapshots(
             keep_latest=0,
             keep_per_market_date=DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
             keep_recent_market_days=recent_market_days,
+            keep_all_capture_days=0,
             keep_weekly_older=DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
-            weekly_frequency=weekly_frequency,
+            weekly_frequency=(
+                DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY
+                if only_missing_periods
+                else weekly_frequency
+            ),
             apply=True,
         )
     console.print(_snapshot_delete_summary("Final retention prune", final_prune))
@@ -1398,6 +1509,64 @@ def analyze_prebreak_hindsight_cmd(
         console.print(table)
 
 
+@app.command("refresh-prebreak-current")
+def refresh_prebreak_current_cmd(
+    reference_store: Annotated[
+        Path, typer.Option("--reference-store")
+    ] = DEFAULT_RUN_STORE_DB_PATH,
+    reference_artifact_dir: Annotated[
+        Path, typer.Option("--reference-artifact-dir")
+    ] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    reference_job_log_dir: Annotated[
+        Path, typer.Option("--reference-job-log-dir")
+    ] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_PREBREAK_OUTPUT_DIR,
+) -> None:
+    """Apply frozen pre-break rankings to the latest ordinary snapshot."""
+
+    rows = _refresh_current_prebreak_artifact(
+        reference_store=reference_store,
+        reference_artifact_dir=reference_artifact_dir,
+        reference_job_log_dir=reference_job_log_dir,
+        output_dir=output_dir,
+    )
+    console.print(f"Refreshed current pre-break readout: {rows:,} signal row(s).")
+
+
+def _refresh_current_prebreak_artifact(
+    *,
+    reference_store: Path,
+    reference_artifact_dir: Path,
+    reference_job_log_dir: Path,
+    output_dir: Path,
+) -> int:
+    snapshot_path = output_dir / "snapshot_signal_panel.csv"
+    ranking_path = output_dir / "signal_predictiveness_rank.csv"
+    if not snapshot_path.exists() or not ranking_path.exists():
+        raise FileNotFoundError(
+            "Pre-break historical artifacts are missing. Run "
+            "`poetry run trade-bot analyze-prebreak-hindsight` first."
+        )
+    snapshot_signals = pd.read_csv(snapshot_path)
+    signal_rankings = pd.read_csv(ranking_path)
+    reference_run_store = RunStore(
+        reference_store,
+        artifact_dir=reference_artifact_dir,
+        job_log_dir=reference_job_log_dir,
+        read_only=True,
+    )
+    readout = refresh_current_prebreak_signal_readout(
+        reference_run_store,
+        snapshot_signals=snapshot_signals,
+        signal_rankings=signal_rankings,
+    )
+    if readout.empty:
+        raise RuntimeError("Latest snapshot did not produce a current pre-break readout.")
+    output_dir.mkdir(parents=True, exist_ok=True)
+    readout.to_csv(output_dir / "current_best_signal_readout.csv", index=False)
+    return len(readout)
+
+
 @app.command("list-snapshot-jobs")
 def list_snapshot_jobs_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -1686,7 +1855,7 @@ def run_experiment_iteration_cmd(
         table.add_row(
             str(name),
             str(row["role"]),
-            str(row["promotion_decision"]),
+            str(row.get("governed_promotion_decision", row["promotion_decision"])),
             f"{row.get('promotion_score', float('nan')):.2f}",
             _format_optional_decimal(row.get("growth_constrained_utility_score")),
             str(row.get("growth_utility_tier", "")),
@@ -1712,6 +1881,20 @@ def replay_experiment_library_cmd(
         typer.Option("--output-root", help="Empty destination for the rebuilt library."),
     ] = DEFAULT_RESET_EXPERIMENTS_DIR,
     refresh_data: Annotated[bool, typer.Option("--refresh-data")] = False,
+    strategies: Annotated[
+        str,
+        typer.Option(
+            "--strategies",
+            help="Optional comma-separated saved/configured strategy slate to replay.",
+        ),
+    ] = "",
+    strategy_file: Annotated[
+        Path | None,
+        typer.Option(
+            "--strategy-file",
+            help="Optional CSV containing a strategy column; combined with --strategies.",
+        ),
+    ] = None,
     max_workers: Annotated[
         int,
         typer.Option("--max-workers", help="Bounded parallel iteration workers."),
@@ -1719,10 +1902,17 @@ def replay_experiment_library_cmd(
 ) -> None:
     """Rebuild all saved experiments under one current evaluation contract."""
 
+    requested_strategies = {name.strip() for name in strategies.split(",") if name.strip()}
+    if strategy_file is not None:
+        strategy_frame = pd.read_csv(strategy_file)
+        if "strategy" not in strategy_frame:
+            raise typer.BadParameter("--strategy-file must contain a strategy column.")
+        requested_strategies.update(strategy_frame["strategy"].dropna().astype(str).str.strip())
     replay = replay_experiment_library(
         load_config(config),
         source_root=source_root,
         output_root=output_root,
+        strategy_names=tuple(sorted(name for name in requested_strategies if name)),
         refresh_data=refresh_data,
         max_workers=max_workers,
         progress=lambda completed, total, iteration: console.print(
@@ -2288,6 +2478,26 @@ def run_cycle_tracker_cmd(
             help="Optional comma-separated candidate tickers. Defaults to the configured broad research universe.",
         ),
     ] = "",
+    capital_cycle_fundamentals: Annotated[
+        Path | None,
+        typer.Option(
+            "--capital-cycle-fundamentals",
+            help=(
+                "Optional point-in-time long-form CSV with available_date, metric, and value. "
+                "Missing upstream series remain explicitly unavailable."
+            ),
+        ),
+    ] = None,
+    capital_cycle_events: Annotated[
+        Path | None,
+        typer.Option(
+            "--capital-cycle-events",
+            help=(
+                "Optional structured event CSV with event_date, event_type, direction, severity, "
+                "confidence, cycle_family, and decay_half_life_days."
+            ),
+        ),
+    ] = None,
 ) -> None:
     """Build the speculative cycle tracker and conditional-winner frontier."""
 
@@ -2310,9 +2520,17 @@ def run_cycle_tracker_cmd(
         "scenario_lattice",
         pd.DataFrame(),
     )
+    fundamentals_frame = _read_optional_research_csv(capital_cycle_fundamentals)
+    events_frame = _read_optional_research_csv(capital_cycle_events)
     result = run_cycle_tracker(
         prices=prices,
         scenario_lattice=scenario_lattice,
+        macro_data=getattr(baseline_run, "macro_data", pd.DataFrame()),
+        capital_cycle_fundamentals=fundamentals_frame,
+        capital_cycle_events=events_frame,
+        capital_cycle_news_triage=getattr(
+            getattr(baseline_run, "news_monitor", None), "triage", pd.DataFrame()
+        ),
         output_dir=output_dir,
         candidate_tickers=tuple(_parse_csv_option(candidate_tickers)) or None,
         horizons=parsed_horizons,
@@ -2433,7 +2651,543 @@ def run_cycle_tracker_cmd(
             )
         console.print(path_reliability_table)
     console.print(f"Saved cycle tracker history to DuckDB as {cycle_run_id}.")
+
+
+@app.command("validate-capital-cycle")
+def validate_capital_cycle_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    output_dir: Annotated[
+        Path, typer.Option("--output-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_VALIDATION_DIR,
+    theme_ticker: Annotated[
+        str,
+        typer.Option("--theme-ticker", help="Theme price series used for forward break labels."),
+    ] = "QQQ",
+    origin_step_days: Annotated[
+        int,
+        typer.Option("--origin-step-days", help="Trading-session spacing between prior-only origins."),
+    ] = 21,
+    min_history_days: Annotated[
+        int,
+        typer.Option("--min-history-days", help="Minimum price history before the first origin."),
+    ] = 756,
+    fundamentals: Annotated[
+        Path | None,
+        typer.Option(
+            "--fundamentals",
+            help="Optional point-in-time capital-cycle fundamentals CSV.",
+        ),
+    ] = None,
+    events: Annotated[
+        Path | None,
+        typer.Option("--events", help="Optional governed structured-event CSV."),
+    ] = None,
+    economic_events: Annotated[
+        Path | None,
+        typer.Option(
+            "--economic-events",
+            help="Optional objective economic-rollover event labels with event_date and target.",
+        ),
+    ] = None,
+    episode_manifest: Annotated[
+        Path | None,
+        typer.Option(
+            "--episode-manifest",
+            help="Optional episode,start_date,end_date manifest for episode-balanced validation.",
+        ),
+    ] = None,
+    frozen_trade_bot_baseline: Annotated[
+        Path | None,
+        typer.Option(
+            "--frozen-trade-bot-baseline",
+            help="Optional frozen saved-snapshot comparator CSV.",
+        ),
+    ] = None,
+) -> None:
+    """Run zero-authority nested OOS validation for the capital-cycle monitor."""
+
+    run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+    snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
+    if snapshot_payload is None:
+        console.print("No completed snapshots found. Build a snapshot before validation.")
+        raise typer.Exit(code=1)
+    baseline_run, manifest = snapshot_payload
+    prices = getattr(baseline_run, "prices", pd.DataFrame())
+    if not isinstance(prices, pd.DataFrame) or prices.empty:
+        console.print(f"Snapshot {manifest.run_id} does not include historical prices.")
+        raise typer.Exit(code=1)
+    result = run_capital_cycle_validation(
+        prices=prices,
+        macro_data=getattr(baseline_run, "macro_data", pd.DataFrame()),
+        fundamentals=_read_optional_research_csv(fundamentals),
+        events=_read_optional_research_csv(events),
+        economic_events=_read_optional_research_csv(economic_events),
+        episode_manifest=_read_optional_research_csv(episode_manifest),
+        frozen_trade_bot_baseline=_read_optional_research_csv(frozen_trade_bot_baseline),
+        theme_ticker=theme_ticker,
+        origin_step_days=origin_step_days,
+        min_history_days=min_history_days,
+        output_dir=output_dir,
+    )
+    readiness = result.readiness.iloc[0] if not result.readiness.empty else pd.Series(dtype=object)
+    console.print(
+        f"Capital-cycle validation wrote {len(result.output_paths)} artifacts to {output_dir}."
+    )
+    console.print(
+        f"Origins: {int(readiness.get('origin_rows', 0)):,}; "
+        f"episodes: {int(readiness.get('episode_clusters', 0)):,}; "
+        f"direct upstream origins: "
+        f"{int(readiness.get('origins_with_direct_upstream_evidence', 0)):,}."
+    )
+    console.print(f"Promotion ready: {bool(readiness.get('promotion_ready', False))}.")
+    blockers = str(readiness.get("blockers", ""))
+    if blockers:
+        console.print(f"Blockers: {blockers}.")
     console.print(f"Reports: {output_dir}")
+
+
+@app.command("build-capital-cycle-feasibility")
+def build_capital_cycle_feasibility_cmd(
+    research_dir: Annotated[
+        Path,
+        typer.Option(
+            "--research-dir",
+            help="Directory containing preregistered episode, source, and observation CSVs.",
+        ),
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    output_dir: Annotated[
+        Path, typer.Option("--output-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_FEASIBILITY_DIR,
+    minimum_origin_coverage: Annotated[
+        float,
+        typer.Option(
+            "--minimum-origin-coverage",
+            help="Required mean share of direct evidence families at historical origins.",
+        ),
+    ] = 0.60,
+    minimum_episode_coverage: Annotated[
+        float,
+        typer.Option(
+            "--minimum-episode-coverage",
+            help="Required mean family coverage within every preregistered episode.",
+        ),
+    ] = 0.50,
+) -> None:
+    """Audit the three-episode plus two-control point-in-time data feasibility gate."""
+
+    episode_path = research_dir / "episode_manifest.csv"
+    observation_path = research_dir / "direct_observations.csv"
+    source_path = research_dir / "source_registry.csv"
+    for path in (episode_path, observation_path, source_path):
+        if not path.exists():
+            raise FileNotFoundError(f"Required capital-cycle research input is missing: {path}")
+    result = run_capital_cycle_feasibility(
+        episode_manifest=pd.read_csv(episode_path),
+        observations=pd.read_csv(observation_path),
+        source_registry=pd.read_csv(source_path),
+        minimum_origin_coverage=minimum_origin_coverage,
+        minimum_episode_coverage=minimum_episode_coverage,
+        output_dir=output_dir,
+    )
+    readiness = result.readiness.iloc[0]
+    console.print(
+        f"Capital-cycle feasibility: {bool(readiness['feasibility_passed'])}; "
+        f"eligible point-in-time rows: "
+        f"{int(readiness['eligible_point_in_time_rows']):,}; "
+        f"mean direct-family coverage: "
+        f"{float(readiness['mean_direct_family_coverage']):.1%}."
+    )
+    if str(readiness.get("blockers", "")):
+        console.print(f"Blockers: {readiness['blockers']}.")
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("fetch-capital-cycle-census-history")
+def fetch_capital_cycle_census_history_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    quarterly_only: Annotated[
+        bool,
+        typer.Option(
+            "--quarterly-only/--monthly",
+            help="Archive quarter-end releases for feasibility or every monthly release.",
+        ),
+    ] = True,
+) -> None:
+    """Archive point-in-time Census housing releases for registered episodes."""
+
+    episode_path = research_dir / "episode_manifest.csv"
+    observation_path = research_dir / "direct_observations.csv"
+    if not episode_path.exists():
+        raise FileNotFoundError(f"Episode manifest is missing: {episode_path}")
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = fetch_census_housing_release_panel(
+        episode_manifest=pd.read_csv(episode_path),
+        existing_observations=existing,
+        research_dir=research_dir,
+        quarterly_only=quarterly_only,
+    )
+    failures = int(
+        result.archive_inventory["status"].isin({"download_failed", "parse_failed"}).sum()
+    )
+    console.print(
+        f"Census archive rows: {len(result.observations):,}; "
+        f"release files: {len(result.archive_inventory):,}; failures: {failures:,}."
+    )
+    console.print(f"Observations: {result.observation_path}")
+    console.print(f"Inventory: {result.inventory_path}")
+
+
+@app.command("import-capital-cycle-sec-companyfacts")
+def import_capital_cycle_sec_companyfacts_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+) -> None:
+    """Import locally archived official SEC Company Facts files into the PIT panel."""
+
+    entity_path = research_dir / "entity_manifest.csv"
+    observation_path = research_dir / "direct_observations.csv"
+    if not entity_path.exists():
+        raise FileNotFoundError(f"Entity manifest is missing: {entity_path}")
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = import_sec_companyfacts_panel(
+        entity_manifest=pd.read_csv(entity_path),
+        existing_observations=existing,
+        research_dir=research_dir,
+    )
+    imported = int(result.archive_inventory["status"].eq("imported").sum())
+    missing = int(result.archive_inventory["status"].eq("raw_file_missing").sum())
+    console.print(
+        f"SEC Company Facts files imported: {imported:,}; missing: {missing:,}; "
+        f"observation rows: {len(result.observations):,}."
+    )
+    console.print(f"Expected raw directory: {research_dir / 'raw' / 'sec_companyfacts'}")
+
+
+@app.command("fetch-capital-cycle-sec-filings")
+def fetch_capital_cycle_sec_filings_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    entity_manifest: Annotated[
+        Path | None,
+        typer.Option(
+            "--entity-manifest",
+            help="Defaults to research_dir/entity_manifest.csv.",
+        ),
+    ] = None,
+    maximum_filings_per_entity: Annotated[
+        int,
+        typer.Option("--maximum-filings-per-entity"),
+    ] = 48,
+    force: Annotated[
+        bool,
+        typer.Option("--force/--reuse-cache"),
+    ] = False,
+    sec_user_agent: Annotated[
+        str | None,
+        typer.Option("--sec-user-agent"),
+    ] = None,
+) -> None:
+    """Discover and preserve official filing HTML for historical analogue extraction."""
+
+    manifest_path = entity_manifest or research_dir / "entity_manifest.csv"
+    if not manifest_path.exists():
+        raise FileNotFoundError(f"SEC entity manifest is missing: {manifest_path}")
+    seed_path = research_dir / "sec_filing_seed_manifest.csv"
+    seed_manifest = pd.read_csv(seed_path) if seed_path.exists() else None
+    result = fetch_sec_filing_archive(
+        entity_manifest=pd.read_csv(manifest_path),
+        research_dir=research_dir,
+        maximum_filings_per_entity=maximum_filings_per_entity,
+        force=force,
+        user_agent=sec_user_agent,
+        filing_seed_manifest=seed_manifest,
+    )
+    status = result.filing_inventory.get("status", pd.Series(dtype=str))
+    console.print(
+        f"SEC filing archive: {int(status.str.endswith(('downloaded', 'cached'), na=False).sum()):,} "
+        f"filings preserved; {int(status.str.contains('failed', na=False).sum()):,} failures."
+    )
+    console.print(f"Inventory: {result.inventory_path}")
+
+
+@app.command("import-capital-cycle-fcc-capacity")
+def import_capital_cycle_fcc_capacity_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    pdf_path: Annotated[
+        Path | None,
+        typer.Option(
+            "--pdf-path",
+            help="Defaults to the archived FCC telecom-capacity registered source.",
+        ),
+    ] = None,
+) -> None:
+    """Extract the governed August 2001 FCC telecom-capacity history."""
+
+    selected_pdf = pdf_path
+    if selected_pdf is None:
+        candidates = sorted(
+            (research_dir / "raw" / "registered_sources").glob(
+                "fcc_telecom_capacity_000_*.pdf"
+            )
+        )
+        if not candidates:
+            raise FileNotFoundError(
+                "Archived FCC capacity PDF is missing. Run "
+                "fetch-capital-cycle-source-documents first."
+            )
+        selected_pdf = candidates[-1]
+    observation_path = research_dir / "direct_observations.csv"
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = import_fcc_telecom_capacity_release(
+        pdf_path=selected_pdf,
+        existing_observations=existing,
+        research_dir=research_dir,
+    )
+    added = result.observations["source_id"].astype(str).eq(
+        "fcc_trends_telephone_service_200108_table_18_3"
+    ).sum()
+    console.print(
+        f"FCC capacity observations preserved: {int(added):,}; "
+        f"combined panel rows: {len(result.observations):,}."
+    )
+    console.print(f"Observations: {result.observation_path}")
+
+
+@app.command("fetch-capital-cycle-source-documents")
+def fetch_capital_cycle_source_documents_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    episode: Annotated[
+        str | None,
+        typer.Option("--episode", help="Optional one-episode acquisition boundary."),
+    ] = None,
+    maximum_documents_per_source: Annotated[
+        int, typer.Option("--maximum-documents-per-source")
+    ] = 12,
+    force: Annotated[
+        bool, typer.Option("--force/--reuse-cache")
+    ] = False,
+) -> None:
+    """Archive official documents linked from the governed capital-cycle registry."""
+
+    registry_path = research_dir / "source_registry.csv"
+    if not registry_path.exists():
+        raise FileNotFoundError(f"Source registry is missing: {registry_path}")
+    result = fetch_registered_source_documents(
+        source_registry=pd.read_csv(registry_path),
+        research_dir=research_dir,
+        episode=episode,
+        maximum_documents_per_source=maximum_documents_per_source,
+        force=force,
+    )
+    statuses = result.archive_inventory.get("status", pd.Series(dtype=str))
+    console.print(
+        f"Registered-source archive: {int(statuses.isin({'downloaded', 'cached'}).sum()):,} "
+        f"documents preserved; {int(statuses.str.contains('failed', na=False).sum()):,} failures."
+    )
+    console.print(f"Inventory: {result.inventory_path}")
+    console.print(f"Inventory: {result.inventory_path}")
+
+
+@app.command("build-capital-cycle-economic-targets")
+def build_capital_cycle_economic_targets_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    output_dir: Annotated[
+        Path, typer.Option("--output-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_TARGET_DIR,
+) -> None:
+    """Build preregistered economic labels, failing closed when components are missing."""
+
+    inputs = {
+        "episode_manifest": research_dir / "episode_manifest.csv",
+        "observations": research_dir / "direct_observations.csv",
+        "target_spec": research_dir / "economic_target_spec.csv",
+    }
+    for path in inputs.values():
+        if not path.exists():
+            raise FileNotFoundError(f"Required economic-target input is missing: {path}")
+    result = build_objective_economic_targets(
+        episode_manifest=pd.read_csv(inputs["episode_manifest"]),
+        observations=pd.read_csv(inputs["observations"]),
+        target_spec=pd.read_csv(inputs["target_spec"]),
+        output_dir=output_dir,
+    )
+    readiness = result.readiness.iloc[0]
+    console.print(
+        f"Objective economic labels resolved: "
+        f"{int(readiness['resolved_episode_labels'])}/{int(readiness['episodes'])}; "
+        f"gate passed: {bool(readiness['economic_target_gate_passed'])}."
+    )
+    if str(readiness.get("blockers", "")):
+        console.print(f"Blockers: {readiness['blockers']}.")
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("freeze-capital-cycle-trade-bot-baseline")
+def freeze_capital_cycle_trade_bot_baseline_cmd(
+    store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
+    artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
+    job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    output_dir: Annotated[
+        Path, typer.Option("--output-dir")
+    ] = DEFAULT_FROZEN_BASELINE_DIR,
+) -> None:
+    """Freeze the latest saved Trade-bot snapshot per historical market date."""
+
+    result = freeze_trade_bot_snapshot_baseline(
+        store=store,
+        artifact_dir=artifact_dir,
+        job_log_dir=job_log_dir,
+        output_dir=output_dir,
+    )
+    console.print(
+        f"Frozen Trade-bot baseline: {len(result.baseline):,} market dates; "
+        f"{result.baseline['market_date'].min().date()} to "
+        f"{result.baseline['market_date'].max().date()}."
+    )
+    console.print(f"Baseline: {result.baseline_path}")
+    console.print(f"Manifest: {result.manifest_path}")
+
+
+@app.command("save-capital-cycle-ai-vintage")
+def save_capital_cycle_ai_vintage_cmd(
+    observations: Annotated[
+        Path | None,
+        typer.Option(
+            "--observations",
+            help="Optional governed current AI direct-observation CSV.",
+        ),
+    ] = None,
+    as_of: Annotated[
+        str,
+        typer.Option("--as-of", help="Point-in-time cutoff in YYYY-MM-DD form."),
+    ] = pd.Timestamp.now().date().isoformat(),
+    output_dir: Annotated[
+        Path, typer.Option("--output-dir")
+    ] = DEFAULT_AI_VINTAGE_DIR,
+    allow_empty: Annotated[
+        bool,
+        typer.Option(
+            "--allow-empty/--reject-empty",
+            help="Explicitly permit a zero-observation vintage for a documented negative control.",
+        ),
+    ] = False,
+) -> None:
+    """Save a no-overwrite monthly AI vintage and its explicit missing-data ledger."""
+
+    frame = _read_optional_research_csv(observations)
+    if frame.empty and not allow_empty:
+        console.print(
+            "Refusing to create an empty AI vintage. Run build-capital-cycle-ai-evidence "
+            "first, provide --observations, or explicitly pass --allow-empty."
+        )
+        raise typer.Exit(code=1)
+    result = save_prospective_ai_vintage(
+        observations=frame,
+        as_of=as_of,
+        output_dir=output_dir,
+    )
+    console.print(
+        f"Prospective AI vintage saved with {len(result.observations):,} observations "
+        f"and {int(result.missingness['available'].sum())}/"
+        f"{len(result.missingness)} direct families available."
+    )
+    console.print(f"Manifest: {result.manifest_path}")
+
+
+@app.command("build-capital-cycle-ai-evidence")
+def build_capital_cycle_ai_evidence_cmd(
+    as_of: Annotated[
+        str,
+        typer.Option("--as-of", help="Point-in-time cutoff in YYYY-MM-DD form."),
+    ] = pd.Timestamp.now().date().isoformat(),
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+    entity_manifest: Annotated[
+        Path | None,
+        typer.Option(
+            "--entity-manifest",
+            help="Current-AI entity manifest; defaults to research_dir/ai_entity_manifest.csv.",
+        ),
+    ] = None,
+    ai_financial_system_dir: Annotated[
+        Path, typer.Option("--ai-financial-system-dir")
+    ] = Path("research/ai_financial_system"),
+    fetch_sec: Annotated[
+        bool,
+        typer.Option("--fetch-sec/--local-sec-only"),
+    ] = True,
+    force_sec: Annotated[
+        bool,
+        typer.Option("--force-sec/--reuse-sec-cache"),
+    ] = False,
+    sec_user_agent: Annotated[
+        str | None,
+        typer.Option(
+            "--sec-user-agent",
+            help="SEC-compliant identifying user agent; TRADE_BOT_SEC_USER_AGENT is also supported.",
+        ),
+    ] = None,
+) -> None:
+    """Collect and audit governed current-AI direct evidence with zero allocation authority."""
+
+    manifest_path = entity_manifest or research_dir / "ai_entity_manifest.csv"
+    if not manifest_path.exists():
+        raise FileNotFoundError(f"Current-AI entity manifest is missing: {manifest_path}")
+    result = build_current_ai_evidence(
+        entity_manifest=pd.read_csv(manifest_path),
+        as_of=as_of,
+        research_dir=research_dir,
+        ai_financial_system_dir=ai_financial_system_dir,
+        fetch_sec=fetch_sec,
+        force_sec=force_sec,
+        sec_user_agent=sec_user_agent,
+    )
+    console.print(
+        f"Current-AI evidence: {len(result.observations):,} point-in-time rows; "
+        f"{int(result.coverage['observed'].sum())}/6 families observed; "
+        f"{int(result.coverage['available'].sum())}/6 pass freshness and breadth gates."
+    )
+    blocked = result.coverage[~result.coverage["available"]][
+        ["family", "missing_reason"]
+    ]
+    if not blocked.empty:
+        console.print(blocked.to_string(index=False))
+    console.print(f"Observations: {result.observation_path}")
+    console.print(f"Coverage audit: {result.coverage_path}")
+
+
+def _read_optional_research_csv(path: Path | None) -> pd.DataFrame:
+    if path is None:
+        return pd.DataFrame()
+    if not path.exists():
+        console.print(f"Research input does not exist: {path}")
+        raise typer.Exit(code=1)
+    return pd.read_csv(path)
 
 
 @app.command("calibrate-defensive-layers")
@@ -2628,6 +3382,88 @@ def research_native_timing_hazard_cmd(
     console.print(f"Reports: {output_dir}")
 
 
+@app.command("research-native-timing-progression")
+def research_native_timing_progression_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/baseline.yaml"),
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_NATIVE_TIMING_PROGRESSION_DIR,
+) -> None:
+    """Test conditional warning progression above the frozen mild curve."""
+
+    loaded = RunStore(read_only=True).load_latest_snapshot(require_matching_config=False)
+    if loaded is None:
+        raise typer.BadParameter("No completed snapshot is available.")
+    baseline_run, _manifest = loaded
+    result = run_native_timing_progression_research(
+        baseline_run,
+        load_config(config),
+        output_dir=output_dir,
+    )
+    table = Table(title="Native Timing Progression Research")
+    for column in [
+        "policy",
+        "CAGR vs native",
+        "CAGR vs mild",
+        "DD vs mild",
+        "gates",
+    ]:
+        table.add_column(column)
+    for _, row in result.promotion_gates.iterrows():
+        table.add_row(
+            str(row["policy"]),
+            f"{float(row['focus_cagr_delta_vs_native']):.2%}",
+            f"{float(row['focus_cagr_delta_vs_mild']):.2%}",
+            f"{float(row['focus_max_drawdown_delta_vs_mild']):.2%}",
+            f"{int(row['gate_pass_count'])}/10",
+        )
+    console.print(table)
+    console.print("Retrospective only; allocation authority: 0%.")
+    console.print(f"Reports: {output_dir}")
+
+
+@app.command("research-native-timing-severity")
+def research_native_timing_severity_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/baseline.yaml"),
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_NATIVE_TIMING_SEVERITY_DIR,
+) -> None:
+    """Test sparse joint-severity restoration above the frozen mild curve."""
+
+    loaded = RunStore(read_only=True).load_latest_snapshot(require_matching_config=False)
+    if loaded is None:
+        raise typer.BadParameter("No completed snapshot is available.")
+    baseline_run, _manifest = loaded
+    result = run_native_timing_severity_research(
+        baseline_run,
+        load_config(config),
+        output_dir=output_dir,
+    )
+    table = Table(title="Native Timing Joint-Severity Research")
+    for column in [
+        "policy",
+        "CAGR vs native",
+        "CAGR vs mild",
+        "DD vs mild",
+        "gates",
+    ]:
+        table.add_column(column)
+    for _, row in result.promotion_gates.iterrows():
+        table.add_row(
+            str(row["policy"]),
+            f"{float(row['focus_cagr_delta_vs_native']):.2%}",
+            f"{float(row['focus_cagr_delta_vs_mild']):.2%}",
+            f"{float(row['focus_max_drawdown_delta_vs_mild']):.2%}",
+            f"{int(row['gate_pass_count'])}/9",
+        )
+    console.print(table)
+    console.print("Post-hoc retrospective research; allocation authority: 0%.")
+    console.print(f"Reports: {output_dir}")
+
+
 @app.command("calibrate-scenario-probabilities")
 def calibrate_scenario_probabilities_cmd(
     config: Annotated[Path, typer.Option("--config", "-c")] = Path("configs/baseline.yaml"),
@@ -2637,8 +3473,7 @@ def calibrate_scenario_probabilities_cmd(
             "--origin-states",
             help="Point-in-time states produced by calibrate-defensive-layers.",
         ),
-    ] = DEFAULT_DEFENSIVE_LAYER_CALIBRATION_DIR
-    / "origin_states.csv",
+    ] = DEFAULT_DEFENSIVE_LAYER_CALIBRATION_DIR / "origin_states.csv",
     output_dir: Annotated[
         Path,
         typer.Option("--output-dir"),
@@ -2997,6 +3832,52 @@ def audit_backtest_pbo_cmd(
     console.print(gauntlet.readout)
 
 
+@app.command("audit-relevant-model-evidence")
+def audit_relevant_model_evidence_cmd(
+    config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
+    experiment_root: Annotated[
+        Path,
+        typer.Option("--experiment-root"),
+    ] = DEFAULT_RESET_EXPERIMENTS_DIR,
+    report_root: Annotated[Path, typer.Option("--report-root")] = Path("reports"),
+    output_dir: Annotated[
+        Path,
+        typer.Option("--output-dir"),
+    ] = DEFAULT_MODEL_EVIDENCE_OUTPUT_DIR,
+    top_n: Annotated[int, typer.Option("--top-n", min=1)] = 12,
+    selection_cutoff: Annotated[
+        str,
+        typer.Option(
+            "--selection-cutoff",
+            help="ISO freeze date for prospective shadows. Defaults to today.",
+        ),
+    ] = "",
+) -> None:
+    """Audit relevant models without relabeling retrospective tests as selection OOS."""
+
+    bot_config = load_config(config)
+    scorecards = load_experiment_scorecards(experiment_root)
+    audit = build_model_evidence_audit(
+        bot_config,
+        scorecards,
+        experiment_root=experiment_root,
+        report_root=report_root,
+        selection_cutoff=date.fromisoformat(selection_cutoff) if selection_cutoff else date.today(),
+        top_n=top_n,
+    )
+    write_model_evidence_audit(audit, output_dir)
+    missing_required = audit.requirement_matrix.loc[
+        audit.requirement_matrix["requirement"].eq("required")
+        & ~audit.requirement_matrix["satisfied"]
+    ]
+    console.print(
+        f"Audited {len(audit.slate):,} relevant strategies; "
+        f"{audit.evidence_matrix['selection_oos_status'].eq('verified').sum():,} have verified "
+        f"selection OOS and {len(missing_required):,} required strategy-test cells remain open."
+    )
+    console.print(f"Wrote model-evidence audit to {output_dir}.")
+
+
 @app.command("migrate-warehouse")
 def migrate_warehouse_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
@@ -3112,12 +3993,30 @@ def seed_operating_history_cmd(
         ),
     ] = 30,
     min_history_days: Annotated[int, typer.Option("--min-history-days")] = 252,
+    match_snapshot_dates: Annotated[
+        bool,
+        typer.Option(
+            "--match-snapshot-dates/--sample-history-dates",
+            help=(
+                "Reconstruct the exact retained snapshot-date population when snapshots "
+                "exist, preserving dashboard coverage across strategy promotions."
+            ),
+        ),
+    ] = True,
     primary_strategy: Annotated[
-        str,
+        str | None,
         typer.Option("--primary-strategy"),
-    ] = DEFAULT_OPERATING_HISTORY_PRIMARY_STRATEGY,
+    ] = None,
 ) -> None:
     bot_config = load_config(config)
+    resolved_primary_strategy = str(
+        primary_strategy or bot_config.primary_strategy
+    ).strip()
+    resolved_strategy_config = bot_config.strategies.get(resolved_primary_strategy)
+    if resolved_strategy_config is None:
+        raise typer.BadParameter(
+            f"Primary strategy {resolved_primary_strategy!r} is not configured."
+        )
     run_store = RunStore(store)
     source_label = "configured baselines"
     snapshot_payload = None
@@ -3143,6 +4042,15 @@ def seed_operating_history_cmd(
             macro_config_path=macro,
             news_config_path=news,
         )
+    history_dates = None
+    if match_snapshot_dates:
+        snapshots = run_store.list_snapshots(limit=100_000)
+        if not snapshots.empty and "market_date" in snapshots:
+            history_dates = (
+                snapshots.sort_values(["market_date", "created_at_utc", "run_id"])
+                .drop_duplicates("market_date", keep="last")["market_date"]
+                .tolist()
+            )
     history = reconstruct_operating_history(
         baseline_run,
         start_date=start_date,
@@ -3151,8 +4059,10 @@ def seed_operating_history_cmd(
         max_points=max_points,
         daily_tail_market_days=daily_tail_market_days,
         min_history_days=min_history_days,
-        primary_strategy=primary_strategy,
+        primary_strategy=resolved_primary_strategy,
         allocation_policy=bot_config.allocation_policy,
+        history_dates=history_dates,
+        defensive_ticker=str(resolved_strategy_config.defensive_ticker or "BIL"),
     )
     warehouse = TradingWarehouse(store)
     counts = warehouse.save_operating_history(
@@ -3178,7 +4088,8 @@ def seed_operating_history_cmd(
         end = str(history.metrics["market_date"].iloc[-1])
         console.print(
             f"Stored reconstructed operating history from {start} to {end} using {source_label}. "
-            "These rows are separate from live saved snapshots."
+            f"Strategy: {resolved_primary_strategy}. These rows are separate from live saved "
+            "snapshots."
         )
 
 
@@ -3328,8 +4239,7 @@ def score_42macro_outcomes_cmd(
     comparison_path: Annotated[
         Path,
         typer.Option("--comparison-path"),
-    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR
-    / "daily_comparison.csv",
+    ] = DEFAULT_EXTERNAL_MACRO_ALIGNMENT_DIR / "daily_comparison.csv",
     output_dir: Annotated[
         Path,
         typer.Option("--output-dir"),

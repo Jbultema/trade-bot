@@ -1,0 +1,32 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 850436,
+  "content_sha256": "a605ea05b1349746632e03d99038083572c2cde0b16f9b9ee4740403bf043479",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://mi-psc.my.site.com/sfc/servlet.shepherd/version/download/068cs00001XbIDsAAN",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0098_a605ea05b1349746.pdf",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "application/pdf; charset=UTF-8",
+  "original_url": "https://mi-psc.my.site.com/sfc/servlet.shepherd/version/download/068cs00001XbIDsAAN",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-12-18",
+  "publisher": "Michigan Public Service Commission",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0098_a605ea05b1349746.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:46.019553+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:45.490655+00:00",
+  "selected_response_headers": {
+    "cache-control": "no-cache,must-revalidate,max-age=0,no-store,private",
+    "content-disposition": "inline; filename=\"U-21990_12-18-2025%20-%20Finalized.pdf\"",
+    "content-length": "850436",
+    "content-type": "application/pdf; charset=UTF-8",
+    "date": "Mon, 27 Jul 2026 01:08:45 GMT"
+  },
+  "source_id": "SRC-0098",
+  "status": "preserved_complete",
+  "title": "Michigan Public Service Commission order conditionally approving DTE special contracts in Case U-21990",
+  "write_state": "new_version_written"
+}

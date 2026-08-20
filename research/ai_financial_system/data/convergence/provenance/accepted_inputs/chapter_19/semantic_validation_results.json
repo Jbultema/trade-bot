@@ -1,0 +1,42 @@
+{
+  "author_verdict": "SAFE_ONLY_AS_UNRESOLVED_ARCHITECTURE",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "chapter": "CH19",
+  "fixed_logical_packet_identifier": true,
+  "fresh_nonauthor_acceptance": "REQUIRED",
+  "lane": "lane_3_chapter_19_rebuilt_v3",
+  "preserved_architecture": {
+    "accepted_reporting_states": 0,
+    "blank_or_blocked_tests": 247,
+    "chronology_rows": 73,
+    "compound_parents": 52,
+    "current_confidence_snapshots": 393,
+    "effective_date_inversions": 17,
+    "executed_falsifiers": 0,
+    "executed_or_independently_authored_tests": 5,
+    "external_archive_population": 155,
+    "external_archives": 0,
+    "fabricated_confidence_evolution": 0,
+    "governed_questions": 252,
+    "inactive_child_proposals": 114,
+    "inactive_generated_links": 750,
+    "mapped_or_accepted_blockers": 0,
+    "normalized_searched_or_accepted_routes": 0,
+    "preserved_blocker_references": 138,
+    "proposed_falsifiers": 10,
+    "pseudo_scores_or_ranks": 0,
+    "reporting_audits": 119,
+    "source_routes": 994,
+    "unsafe_later_evidence_flags": 0
+  },
+  "resolved_validation_findings_publication": "NOT_AUTHORIZED",
+  "review_patch_dispositions": {
+    "deferred_explicit_holds": 985,
+    "direct_or_superseding_corrections_verified": 396,
+    "historical_provenance_mismatch_repaired_in_v3": 1,
+    "safe_alternative_child_routes_retired": 471,
+    "safe_alternative_parents_restored": 394,
+    "total_accounted": 2247
+  },
+  "status_date": "2026-07-26"
+}

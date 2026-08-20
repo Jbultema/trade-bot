@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 5597461,
+  "content_sha256": "c963d7503907384926e685a27064574fb9fbfa1adf9e2ececca4b2c3b7a35e12",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0025_c963d75039073849.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/msft-20250930.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-10-29",
+  "publisher": "Microsoft Corporation",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_delta/SRC-0025_c963d75039073849.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:08:26.226498+00:00",
+  "retrieval_started_utc": "2026-07-27T01:08:25.624788+00:00",
+  "selected_response_headers": {
+    "content-length": "229389",
+    "content-type": "text/html",
+    "date": "Mon, 27 Jul 2026 01:08:25 GMT",
+    "last-modified": "Wed, 29 Oct 2025 20:11:21 GMT"
+  },
+  "source_id": "SRC-0025",
+  "status": "preserved_complete",
+  "title": "Microsoft Form 10-Q for quarter ended September 30 2025",
+  "write_state": "new_version_written"
+}

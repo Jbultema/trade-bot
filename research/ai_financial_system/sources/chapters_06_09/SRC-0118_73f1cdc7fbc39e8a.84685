@@ -1,0 +1,2680 @@
+<!DOCTYPE html>
+
+<html lang="en-GB">
+    
+    <head>
+	<!-- PWA - manifest
+	<link rel="manifest" href="/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/pwa/manifest/global.json">
+	 -->
+	<!-- PWA - Browser Compatible
+	<script async src="/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/pwa/js/pwacompat.js"></script>
+	 -->
+	<!-- <meta name="theme-color" content="#0c4da2"> -->
+	<!-- Add to home screen for Safari on iOS -->
+    <!-- <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="apple-mobile-web-app-title" content="Samsung Shop">
+    <link rel="apple-touch-icon" href="/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/pwa/icon/pwa_icon_192x192.png"> -->
+    <!-- Add to home screen for Windows -->
+    <!-- <meta name="msapplication-TileImage" content="/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/pwa/icon/pwa_icon_192x192.png">
+    <meta name="msapplication-TileColor" content="#000000"> -->
+	
+	
+	
+		<link rel="preconnect" href="https://images.samsung.com"/>
+	
+	
+	<link rel="preconnect" href="//resources.samsung.com"/>
+
+	
+	
+	<!-- Load clientLibs required when initializing Authoring: head.html override required to be added! -->
+	
+    <!-- Load clientLibs required when initializing Authoring: head.html override required to be added! -->
+    
+
+	
+    
+    
+
+	<meta charset="utf-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge"/>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8"/>
+	
+	<meta name="viewport" content="width=device-width, initial-scale=1"/>
+	<!-- SEO -->
+	
+	
+    
+	
+	
+		<title>public-disclosure-view |  GLOBAL</title>
+	
+	
+	
+		<meta name="title" content="public-disclosure-view |  GLOBAL"/>
+	
+	
+	
+
+    
+	<link rel="canonical" href="https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view/"/>
+	
+	
+	<meta name="keywords" content="public-disclosure-view"/>
+	<meta name="description" content="public-disclosure-view"/>
+	<meta name="date" content="2020-07-14"/>
+	<meta name="sitecode" content="global"/>
+	
+	
+	
+		
+			
+		
+		 
+		
+	
+	
+	
+	
+	
+	<meta name="twitter:card" content="Summary"/>
+	<meta name="twitter:site" content="@Samsung"/>
+	<meta name="twitter:creator" content="@Samsung"/>
+	<meta name="twitter:url" content="https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view.84685/"/>
+	<meta name="twitter:title" content="public-disclosure-view"/>
+	<meta name="twitter:description" content="public-disclosure-view"/>
+	<meta name="twitter:image" content="https://cdn.samsung.com/etc/designs/samsung/global/imgs/logo-square-letter.png"/>
+
+	
+	
+
+      <meta property="og:url" content="https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view.84685/"/>
+      <meta property="og:image" content="https://cdn.samsung.com/etc/designs/samsung/global/imgs/logo-square-letter.png"/>
+      <meta property="og:type" content="website"/>
+      <meta property="og:site_name" content="Samsung global"/>
+      <meta property="og:locale" content="en-GB"/>
+      <meta property="og:title" content="public-disclosure-view"/>
+      <meta property="og:description" content="public-disclosure-view"/>
+      <meta property="og:country-name" content="global"/>
+      
+      <meta property="name" content="Samsung global"/>
+      <meta property="image" content="https://cdn.samsung.com/etc/designs/samsung/global/imgs/logo-square-letter.png"/>
+      <meta property="url" content="https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view.84685/"/>
+      <meta property="description" content="public-disclosure-view"/>
+      <meta property="keywords" content="public-disclosure-view"/>
+      
+      
+	<link rel="icon" type="image/png" href="//resources.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/images/Favicon.png" sizes="96x96"/>
+	<link rel="shortcut icon" href="//resources.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/images/Favicon.png"/>
+	<link rel="apple-touch-icon" href="//resources.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/images/app_ico.png" sizes="144x144"/>
+	
+	
+	
+	
+
+    
+    
+    
+	<!-- css 위치 변경 1) fonts.css  2) local.css 3) clientlib 카테고리 (230317) -->
+	
+    
+<link rel="stylesheet" href="//resources.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-site/sites/global/css/fonts.min.b044099f83e7f412097f7d677f78166c.css" type="text/css">
+
+
+
+
+	<!-- Local CSS 등록 -->
+	<!-- 파일의 내용이 있는 경우만 호출되도록 수정 (240528) -->
+	
+	
+		<!-- <link rel="stylesheet" href="/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-site/resources/global/css/global.css" type="text/css"/> -->
+		
+    
+
+
+
+	
+
+	
+    
+<link rel="stylesheet" href="//resources.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-templates/page-ir-none-gnb.min.c78c31f5373b4d4578151f443ef462a4.css" type="text/css">
+
+
+
+	
+	
+
+    
+    
+    
+
+    
+	
+	
+    
+    
+<script type="text/javascript">
+var winhref = window.location.href.replace("/content/samsung","").replace(".html","/");
+if ( winhref.indexOf("?") > 0) {
+	winhref = winhref.substring(0, winhref.indexOf("?"));
+}
+
+var siteCode = winhref.split("/")[3];
+//cn인 경우는 경로에서 siteCode를 추출할 수 없으므로 다른 방법으로 접근
+if(winhref.indexOf("samsung.com.cn") > 0) {
+	siteCode = "cn";
+}
+
+//depth Info.
+var depth = winhref.split("/").length;
+var depth_last = winhref.split("/")[depth-1];
+if(depth_last =="" || depth_last.charAt(0)=="?"){
+	depth -= 1;
+}
+
+//set pathIndicator(not product page)
+var pageName = "";    
+var depth_2 = "";
+var depth_3 = "";
+var depth_4 = "";
+var depth_5 = "";
+
+var digitalData = {
+	"page" : {
+			"pageInfo" : {
+					"siteCode"    : "global",
+					"pageName"    : pageName,
+					"pageID"      : "L2NvbnRlbnQvc2Ftc3VuZy9nbG9iYWwvaXIvcmVwb3J0cy1kaXNjbG9zdXJlcy9wdWJsaWMtZGlzY2xvc3VyZS12aWV3",
+					"pageTrack"   : "product ir disclosure",
+					"originPlaform" : "web"
+			},
+			"pathIndicator" : {
+					"depth_2" : depth_2,
+					"depth_3" : depth_3,
+					"depth_4" : depth_4,
+					"depth_5" : depth_5
+			}
+	},
+	"user": {
+			"userDeviceList": [
+			]
+	},
+	"product" : {
+			"category" : "", 
+			"model_code" : "", // PD class정보 이용하여 설정
+			"model_name" : "", // PD page(server-side)
+			"model_price" : "", // PD page(server-side)
+			"list_price" : "", // PD page(server-side)
+			"displayName" : "", // PD class정보 이용하여 설정
+			"pvi_type_code" : "", //PD page(server-side)
+			"pvi_type_name" : "", //PD page(server-side)
+			"pvi_subtype_code" : "", //PD page(server-side)
+			"pvi_subtype_name" : "",//PD page(server-side)
+			"pd_type" : "", //PD type
+            "content_id" : "",
+            "products" : "",
+            "prodView" : ""
+	}
+}
+</script>
+<script type="text/javascript">
+    //lastModified parameter 관련 파일 정보
+    var __fileData__ = __fileData__ || {};
+    __fileData__ = {"svg-sprite.svg":"20260716203205","svg-sprite-retention.svg":"20260421132723"};
+    if(window.__fileData__ == null){
+        window.__fileData__ = __fileData__;
+    }
+</script>
+
+    
+    
+    
+	
+	
+<!-- digitalData 값 변경시 각 page에서 로직 추가 -->
+
+
+	<!-- Excluding tagging-related scripts in Author mode -->
+    
+	    
+    	
+
+
+
+
+
+	
+
+
+	<!-- End Adobe Target Flicker handling -->
+		
+	<!-- Launch Header Embed Code -->
+	<script src="//assets.adobedtm.com/72afb75f5516/a60048433bf8/launch-7663d11824c6.min.js" async></script>
+	<!-- End Launch Header Embed Code -->
+
+	
+	
+	
+	
+
+	<!-- ugcGallary -->
+	
+	<!-- false -->
+	
+	
+    
+
+	
+	
+	
+	
+	<script type="text/javascript">
+	/**
+	 * [설정] 상수 및 구성
+	 */
+	const URL_HISTORY_KEY = 'URL_History';
+	const MAX_HISTORY_COUNT = 20; // 최대 보관할 기록 개수
+	
+	/**
+	 * 로컬 스토리지 URL 히스토리 저장 (인코딩 URL + 10자리 타임스탬프)
+	 * @param {string} url - 저장할 페이지 URL
+	 */
+	//갯수 제한용
+	function appendUrlHistoryWithTime(url) {
+	    // 1. 데이터 가공: URL 인코딩 및 10자리 타임스탬프 생성
+	    const encodedUrl = encodeURIComponent(url);
+	    const timestamp = Math.floor(Date.now() / 1000); // 13자리 밀리초를 10자리 초 단위로 변환
+	    const newDataUnit = encodedUrl + '~' + timestamp; // URL과 시간을 ~로 구분하여 결합
+	    
+	    // 2. 기존 데이터 가져오기 및 배열로 변환
+	    let existingValue = localStorage.getItem(URL_HISTORY_KEY);
+	    //기존 데이터 조회
+	    //console.log(`URL_HISTORY_KEY before existingValue: ` + existingValue);
+	    let historyArray = [];
+	    
+	    if (existingValue) {
+	        historyArray = existingValue.split('|'); // 기존 데이터를 배열로 분할
+	    }
+	    
+	    // 3. 새로운 기록을 배열 끝에 추가
+	    historyArray.push(newDataUnit);
+	    //히스토리 사이즈 조회
+	    //console.log(`URL_HISTORY_KEY historyArray.length: ` + historyArray.length); 
+	    
+	    // 4. FIFO 방식으로 최대 개수 제한 (오래된 것부터 제거)
+	    while (historyArray.length > MAX_HISTORY_COUNT) {
+	        historyArray.shift(); // 배열의 첫 번째 요소(가장 오래된 기록) 제거
+	    }
+	    
+	    // 5. 배열을 다시 문자열로 변환하여 저장
+	    const updatedValue = historyArray.join('|');
+	    
+	    // 6. 최종 저장 (에러 처리 포함)
+	    try {
+	        localStorage.setItem(URL_HISTORY_KEY, updatedValue);
+	        //console.log(`[`+URL_HISTORY_KEY+`] 업데이트 완료 (길이: `+updatedValue.length+`)`);
+	        //console.log(`URL_HISTORY_KEY after existingValue: ` + localStorage.getItem(URL_HISTORY_KEY));//데이터 조회
+	    } catch (e) {
+	        console.error("Storage Error:", e);
+	        // 저장 실패 시 더 오래된 데이터를 제거하여 재시도
+	        if (historyArray.length > 1) {
+	            historyArray.shift(); // 하나 더 제거
+	            try {
+	                localStorage.setItem(URL_HISTORY_KEY, historyArray.join('|'));
+	            } catch (retryError) {
+	                console.error("URL_HISTORY_KEY Retry Storage Error:", retryError);
+	            }
+	        }
+	    }
+	}//:~ function appendUrlHistoryWithTime(url) 
+
+	// 히스토리 조회 함수
+	function getUrlHistory() {
+	    const historyData = localStorage.getItem(URL_HISTORY_KEY);
+	    if (!historyData) return [];
+	    
+	    return historyData.split('|').map(item => {
+	        const [encodedUrl, timestamp] = item.split('~');
+	        return {
+	            url: decodeURIComponent(encodedUrl),
+	            timestamp: parseInt(timestamp, 10),
+	            date: new Date(parseInt(timestamp, 10) * 1000)
+	        };
+	    });
+	}
+
+	// 히스토리 초기화 함수
+	function clearUrlHistory() {
+	    localStorage.removeItem(URL_HISTORY_KEY);
+	}
+	
+	//====================================================================================
+	// 기존 코드 최소 수정
+	function executeUrlHistoryTracking() {
+	    try {
+	        //갯수 
+	        appendUrlHistoryWithTime(window.location.href);
+	        //NOTICE : 확인 해야 할때 주석 제거
+	        //console.log("URL_HISTORY_KEY getUrlHistory():", getUrlHistory());
+	    } catch (error) {
+	        console.error('URL History tracking error:', error);
+	    }
+	}
+
+	// 초기 로드 (기존 로직 유지하되 중복 실행 방지)
+	let hasExecutedInitialLoad = false;
+
+	if (document.readyState === 'complete') {
+	    executeUrlHistoryTracking();
+	    hasExecutedInitialLoad = true;
+	} else {
+	    window.addEventListener('load', () => {
+	        //위 상태에서 실행되지 않은 경우에만 실행 
+	        if (!hasExecutedInitialLoad) {
+	            executeUrlHistoryTracking();
+	            hasExecutedInitialLoad = true;
+	        }
+	    });
+	}
+
+	// Route Change 감지 추가
+	let currentUrl = window.location.href;
+
+	// SPA 라우트 변경 감지(뒤로가기 또는 앞으로가기 시 발생) 필요시 hasExecutedInitialLoad 관련 추가
+	['popstate'].forEach(eventType => {
+	    window.addEventListener(eventType, () => {
+	        if (currentUrl !== window.location.href) {
+	            currentUrl = window.location.href;
+	            setTimeout(executeUrlHistoryTracking, 100);
+	        }
+	    });
+	});
+
+	// pushState/replaceState 감지(URL이 변경될때)
+	const originalPushState = history.pushState;          // 1. 기존의 원본 pushState 함수를 변수에 저장해 둡니다. (나중에 호출하기 위함)
+	history.pushState = function(...args) {               // 2. history.pushState를 새로운 함수로 덮어씌웁니다 (Monkey Patching).
+	    originalPushState.apply(this, args);              // 3. 원본 pushState 기능을 그대로 수행하여 URL을 실제로 변경합니다.
+	    if (currentUrl !== window.location.href) {        // 4. URL 변경 후, 실제로 URL이 바뀌었는지 확인합니다.
+	        currentUrl = window.location.href;                  // 새로운 URL 저장
+	        setTimeout(executeUrlHistoryTracking, 100);   // 5. 0.1초(100ms) 후에 executeUrlHistoryTracking 함수를 실행합니다.
+	    }
+	};
+	</script>
+
+    
+
+<script>(window.BOOMR_mq=window.BOOMR_mq||[]).push(["addVar",{"rua.upush":"false","rua.cpush":"false","rua.upre":"false","rua.cpre":"false","rua.uprl":"false","rua.cprl":"false","rua.cprf":"false","rua.trans":"","rua.cook":"false","rua.ims":"false","rua.ufprl":"false","rua.cfprl":"false","rua.isuxp":"false","rua.texp":"norulematch","rua.ceh":"false","rua.ueh":"false","rua.ieh.st":"0"}]);</script>
+<script>!function(){function o(n,i){if(n&&i)for(var r in i)i.hasOwnProperty(r)&&(void 0===n[r]?n[r]=i[r]:n[r].constructor===Object&&i[r].constructor===Object?o(n[r],i[r]):n[r]=i[r])}try{var n=decodeURIComponent("%7B%20%22request_client_hints%22%3A%20true%20%7D");if(n.length>0&&window.JSON&&"function"==typeof window.JSON.parse){var i=JSON.parse(n);void 0!==window.BOOMR_config?o(window.BOOMR_config,i):window.BOOMR_config=i}}catch(r){window.console&&"function"==typeof window.console.error&&console.error("mPulse: Could not parse configuration",r)}}();</script>
+                                <script>!function(a){var e="https://s.go-mpulse.net/boomerang/",t="addEventListener";if("False"=="True")a.BOOMR_config=a.BOOMR_config||{},a.BOOMR_config.PageParams=a.BOOMR_config.PageParams||{},a.BOOMR_config.PageParams.pci=!0,e="https://s2.go-mpulse.net/boomerang/";if(window.BOOMR_API_key="VRZKC-5BSTD-4EWS3-R2J59-B8GYB",function(){function n(e){a.BOOMR_onload=e&&e.timeStamp||(new Date).getTime()}if(!a.BOOMR||!a.BOOMR.version&&!a.BOOMR.snippetExecuted){a.BOOMR=a.BOOMR||{},a.BOOMR.snippetExecuted=!0;var i,_,o,r=document.createElement("iframe");if(a[t])a[t]("load",n,!1);else if(a.attachEvent)a.attachEvent("onload",n);r.src="javascript:void(0)",r.title="",r.role="presentation",(r.frameElement||r).style.cssText="width:0;height:0;border:0;display:none;",o=document.getElementsByTagName("script")[0],o.parentNode.insertBefore(r,o);try{_=r.contentWindow.document}catch(O){i=document.domain,r.src="javascript:var d=document.open();d.domain='"+i+"';void(0);",_=r.contentWindow.document}_.open()._l=function(){var a=this.createElement("script");if(i)this.domain=i;a.id="boomr-if-as",a.src=e+"VRZKC-5BSTD-4EWS3-R2J59-B8GYB",BOOMR_lstart=(new Date).getTime(),this.body.appendChild(a)},_.write("<bo"+'dy onload="document._l();">'),_.close()}}(),"".length>0)if(a&&"performance"in a&&a.performance&&"function"==typeof a.performance.setResourceTimingBufferSize)a.performance.setResourceTimingBufferSize();!function(){if(BOOMR=a.BOOMR||{},BOOMR.plugins=BOOMR.plugins||{},!BOOMR.plugins.AK){var e=""=="true"?1:0,t="",n="eyhtooyxf7ed22tgjfzq-f-1c7971738-clientnsv4-s.akamaihd.net",i="false"=="true"?2:1,_={"ak.v":"41","ak.cp":"154628","ak.ai":parseInt("293013",10),"ak.ol":"0","ak.cr":30,"ak.ipv":4,"ak.proto":"http/1.1","ak.rid":"f73fbf7","ak.r":47160,"ak.a2":e,"ak.m":"x","ak.n":"essl","ak.cport":65420,"ak.gh":"23.200.72.31","ak.quicv":"","ak.tlsv":"tls1.3","ak.0rtt":"","ak.0rtt.ed":"","ak.csrc":"-","ak.acc":"bbr","ak.t":"1785088371","ak.ak":"hOBiQwZUYzCg5VSAfCLimQ==IOsJZIzX5cPgRh0O7xFZ6HMpwvvNgVYlRIk/tMbN6BMArg/CzQXOPOnKf9mJrENvq0HaSKymKHFvWK6ar4nyjsN53C6FvCoAa6lY8Xdty6hvyAz/X8HXgiEHAJ/3psM95XsLg6vuVx0OoMAx4KJfXN/lI1i5hS4dPvfcfRArQv49hyFn1vfKqDsdlk33sM2nDB+erms0f5K6bcpLp7hMMIE9aS/V9ftOeYL8wr0p8qJkdMfu+mn0r6uoyH3VshqC+qe+CuVSAza1M1ok5l1Z2RY9XP//mFHaVgLk+ogDD257YBYIF/5Fv3EMzOVOR7DEetOvfFxyPU0vqdmHr47up0F231E9vXJnKq1MChxjMjqe1+eEpxdmxQOAUOE/kDE2YbnU5ViazVtKP1Ek7rPHFm44uUHJE3dRX/+aQ+Z0whM=","ak.pv":"4400","ak.dpoabenc":"","ak.tf":i};if(""!==t)_["ak.ruds"]=t;var o={i:!1,av:function(e){var t="http.initiator";if(e&&(!e[t]||"spa_hard"===e[t]))_["ak.feo"]=void 0!==a.aFeoApplied?1:0,BOOMR.addVar(_)},rv:function(){var a=["ak.cport","ak.cr","ak.csrc","ak.gh","ak.ipv","ak.m","ak.n","ak.ol","ak.proto","ak.quicv","ak.tlsv","ak.0rtt","ak.0rtt.ed","ak.r","ak.acc","ak.t","ak.tf"];BOOMR.removeVar(a)}};BOOMR.plugins.AK={akVars:_,akDNSPreFetchDomain:n,init:function(){if(!o.i){var a=BOOMR.subscribe;a("before_beacon",o.av,null,null),a("onbeacon",o.rv,null,null),o.i=!0}return this},is_complete:function(){return!0}}}}()}(window);</script></head>
+    <body>
+
+	<!-- 
+	## PWA ##
+	<sly data-sly-test="true">
+		<script>
+			if('serviceWorker' in navigator) {
+				navigator.serviceWorker.register('/sw.js')
+				.then(function(registration) {
+					console.log("Service Worker registered with scope:", registration.scope);
+				});
+			}
+			
+			window.addEventListener('beforeinstallprompt', (e) => {
+	    		// Prevent Chrome 67 and earlier from automatically showing the prompt
+	    		//e.preventDefault();
+			
+				console.log("beforeinstallprompt");
+		
+			}); 
+		</script>
+	</sly> -->
+	
+		<script>
+		var isInIframe = (window.location != window.top.location);
+		var isNotDotcom = ( window.location.href.indexOf('samsung.com') < 0);
+        var isTopNotDotcom = ( window.top.location.href.indexOf('samsung.com') < 0);
+        
+		//404 페이지에서는 실행하지 않음.
+		if ( window.location.href.indexOf('404') < 0 && isTopNotDotcom) {
+			if ( isInIframe == true ) {
+				   console.log('isInIframe =' + isInIframe );
+				   //에러 페이지 이동  self.location.href   /"+siteCd+"/common/404.html 
+				   window.location.href = '/global/common/404.html';
+				} else {
+				   console.log('isInIframe =' + isInIframe );
+				}    
+		}
+		</script>
+	
+	
+	<div id="wrap">
+	<!-- 공통  hidden input 시작-->
+	<!-- typeAheadDomain 기존 search/ -> 붙이던 부분 삭제함 필요시 search/를 붙여서 사용-->
+	<input type="hidden" name="searchDomain" id="searchDomain" value="//searchapi.samsung.com/v6"/>
+	<input type="hidden" name="esapiSearchDomain" id="esapiSearchDomain" value="https://esapi.samsung.com"/>
+	<input type="hidden" name="scene7domain" id="scene7domain" value="//images.samsung.com/is/image/samsung/"/>
+	<input type="hidden" name="cdnAkamaiDomain" id="cdnAkamaiDomain" value="//resources.samsung.com"/>
+	<input type="hidden" name="reviewUseYN" id="reviewUseYN" value="N"/>
+	<input type="hidden" name="aplautYn" id="aplautYn" value="N"/>
+	<input type="hidden" name="reevooUseYN" id="reevooUseYN" value="N"/>
+	<input type="hidden" name="bvFlag" id="bvFlag" value="N"/>
+	<input type="hidden" name="bvRTLFlag" id="bvRTLFlag" value="N"/>
+	<input type="hidden" name="multiLanguageYn" id="multiLanguageYn" value="N"/>
+	<input type="hidden" name="localLang" id="localLang" value="en-gb"/>
+	<!-- 기존 gnbRunmodeInfo-> runmodeInfo 이름 변경-->
+    <input type="hidden" name="runmodeInfo" id="runmodeInfo" value="live"/>
+	<input type="hidden" name="apiStageInfo" id="apiStageInfo" value="front"/>
+	<input type="hidden" name="tempTitle" id="tempTitle" value="page-ir-public-disclosure-view-none-gnb"/>
+	<input type="hidden" name="siteCode" id="siteCode" value="global"/>
+	 <input type="hidden" name="store_sitecode" id="store_sitecode" value="global"/>
+	<input type="hidden" name="language" id="language" value="en_GB"/>
+	<input type="hidden" name="serverType" id="serverType" value="prod"/>
+	<!-- new-hybris -->
+	<input type="hidden" name="gpvStoreDomain" id="gpvStoreDomain"/>
+	<input type="hidden" name="storeWebDomain" id="storeWebDomain"/>
+	<input type="hidden" name="shopIntegrationFlag" id="shopIntegrationFlag"/>
+	<input type="hidden" name="newHyvStoreDomain" id="newHyvStoreDomain"/>
+	<!-- business page 여부 -->
+	<input type="hidden" name="b2bFlag" id="b2bFlag" value="N"/>
+	<input type="hidden" name="pageUrl" id="pageUrl"/>
+	<input type="hidden" name="pathString" id="pathString"/>
+	<input type="hidden" name="wishlistYn" id="wishlistYn"/>
+	<input type="hidden" name="shopParmLang" id="shopParmLang"/>
+	
+	<input type="hidden" name="reservationDomain" id="reservationDomain"/>
+	<input type="hidden" name="versionHashValue" id="versionHashValue"/>
+	<!-- 공통  hidden input 끝-->
+
+    
+    
+    
+		<section class="progress cm-loader" style="display:none;">
+		    <div class="progress__wrapper">
+		        <div class="progress__circle-1"></div>
+		        <div class="progress__circle-2"></div>
+		        <div class="progress__circle-3"></div>
+		        <div class="progress__circle-4"></div>
+		    </div>
+		</section>
+	
+	<!-- <script type="text/javascript" src="/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/js/crypto-js.min.js"></script> -->
+	
+    
+<script src="/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/global/js/crypto-js.min.6fa2276cf659f30cabde72a6fc452171.js"></script>
+
+
+
+	<script type="text/javascript" src="https://account.samsung.com/resources/libs/account-internal/2.0.0/account-internal.min.js"></script>
+	
+    
+
+	<header id="header" role="banner">
+		<div class="s-skip-content">
+		
+		</div>
+		
+
+
+
+
+    
+        
+        
+        <div class="newpar new section">
+
+</div>
+
+    
+        
+        
+        <div class="par iparys_inherited">
+
+    
+    
+    
+    
+        
+        
+        <div class="static-content">
+	
+	
+	<style>
+    body {
+        margin: 0;
+        padding: 0
+    }
+
+    .desktop {
+        display: block
+    }
+
+    .mobile {
+        display: none
+    }
+
+    .t {
+        display: none
+    }
+
+    .bold {
+        font-weight: 700
+    }
+
+    a {
+        color: #000
+    }
+
+    @media(min-width: 769px)and (max-width: 1024px) {
+        .t {
+            display: block
+        }
+    }
+
+    @media(max-width: 768px) {
+        .desktop {
+            display: none
+        }
+
+        .mobile {
+            display: block
+        }
+    }
+
+    .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        padding: 0;
+        margin: -1px;
+        overflow: hidden;
+        clip: rect(0, 0, 0, 0);
+        white-space: nowrap;
+        border: 0
+    }
+
+    .layout-content {
+        max-width: 1440px;
+        padding: 60px 30px 0 30px;
+        margin: 0 auto
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .layout-content {
+            padding: 4.1666666667vw 2.0833333333vw 0vw 2.0833333333vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .layout-content {
+            border-radius: 5.3333333333vw;
+            padding: 8vw 6.6666666667vw 0vw 6.6666666667vw
+        }
+    }
+
+    .kr-main .layout-content {
+        max-width: 1500px
+    }
+
+    .ir-column1 {
+        border-radius: 20px;
+        margin: 0 auto;
+        padding: 60px 30px 60px;
+        box-sizing: border-box
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-column1 {
+            padding-right: max(min(30px, 2.0833333333vw), 30px);
+            padding-left: max(min(30px, 2.0833333333vw), 30px);
+            padding-top: 4.1666666667vw;
+            padding-bottom: 4.1666666667vw;
+            border-radius: 1.3888888889vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-column1 {
+            border-radius: 5.3333333333vw;
+            padding: 10.6666666667vw 6.6666666667vw
+        }
+    }
+
+    .ir-column1.bg-gray {
+        background: #f4f4f4
+    }
+
+    .ir-column1.bg-black {
+        background: #000
+    }
+
+    .ir-column1 .ir-content-box {
+        margin: 0 auto;
+        display: flex
+    }
+
+    .ir-column2 {
+        display: flex;
+        flex-direction: row;
+        gap: 24px
+    }
+
+    @media(max-width: 768px) {
+        .ir-column2 {
+            flex-direction: column;
+            border-radius: 0;
+            gap: 6.4vw
+        }
+    }
+
+    .ir-column2 .ir-column2-box {
+        flex: 1;
+        border-radius: 20px;
+        padding: 40px 20px
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-column2 .ir-column2-box {
+            padding: 2.7777777778vw 1.3888888889vw;
+            border-radius: 1.3888888889vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-column2 .ir-column2-box {
+            padding: 8vw 6.6666666667vw;
+            border-radius: 5.3333333333vw
+        }
+    }
+
+    .ir-column3 {
+        border-radius: 20px;
+        display: flex;
+        flex-direction: row;
+        gap: 24px
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-column3 {
+            gap: 1.6666666667vw;
+            border-radius: 1.3888888889vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-column3 {
+            flex-direction: column;
+            border-radius: 5.3333333333vw;
+            gap: 6.4vw
+        }
+    }
+
+    .ir-column3 .ir-column3-box {
+        border-radius: 20px;
+        overflow: hidden
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-column3 .ir-column3-box {
+            border-radius: 1.3888888889vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-column3 .ir-column3-box {
+            border-radius: 5.3333333333vw
+        }
+    }
+
+    .ir-navigation {
+        z-index: 200;
+        position: relative;
+        width: 100%;
+        background-color: #fff
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .swiper {
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            list-style: none;
+            padding: 0;
+            z-index: 1;
+            display: block;
+            overflow-x: hidden
+        }
+
+        .ir-navigation .swiper-wrapper {
+            position: relative;
+            width: 100%;
+            z-index: 1;
+            display: flex;
+            transition-property: transform;
+            box-sizing: content-box
+        }
+
+        .ir-navigation .swiper-slide {
+            flex-shrink: 0;
+            transition-property: transform
+        }
+
+        .ir-navigation .swiper-button-next,
+        .ir-navigation .swiper-button-prev {
+            position: absolute;
+            z-index: 10;
+            cursor: pointer;
+            display: flex;
+            align-items: center
+        }
+
+        .ir-navigation .swiper-button-next,
+        .ir-navigation .swiper-rtl .swiper-button-prev {
+            left: auto
+        }
+
+        .ir-navigation .swiper-button-prev,
+        .ir-navigation .swiper-rtl .swiper-button-next {
+            right: auto
+        }
+
+        .ir-navigation .swiper .swiper-notification,
+        .ir-navigation .swiper-notification {
+            position: absolute;
+            left: 0;
+            top: 0;
+            pointer-events: none;
+            opacity: 0;
+            z-index: -1000
+        }
+
+        .ir-navigation .swiper-button-next.swiper-button-disabled,
+        .ir-navigation .swiper-button-prev.swiper-button-disabled {
+            display: none
+        }
+
+        .ir-navigation .swiper-button-next,
+        .ir-navigation .swiper-button-prev {
+            width: 12.2666666667vw;
+            height: 13.3333333333vw;
+            top: 0;
+            margin: 0
+        }
+
+        .ir-navigation .swiper-button-next::after,
+        .ir-navigation .swiper-button-prev::after {
+            content: "";
+            display: block;
+            background-position: 100% 50%;
+            background-size: 100% auto;
+            background-repeat: no-repeat;
+            width: 5.6vw;
+            height: 13.3333333333vw
+        }
+
+        .ir-navigation .swiper-button-next {
+            right: 0;
+            justify-content: flex-end;
+            background: linear-gradient(270deg, #ffffff 71.95%, rgba(255, 255, 255, 0) 100%)
+        }
+
+        .ir-navigation .swiper-button-next::after {
+            background-image: url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-next3.png")
+        }
+
+        .ir-navigation .swiper-button-prev {
+            left: 0;
+            justify-content: flex-start;
+            background: linear-gradient(-270deg, #ffffff 71.95%, rgba(255, 255, 255, 0) 100%)
+        }
+
+        .ir-navigation .swiper-button-prev::after {
+            background-image: url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-prev3.png")
+        }
+
+        .ir-navigation .swiper-button-next.swiper-button-disabled,
+        .ir-navigation .swiper-button-prev.swiper-button-disabled {
+            display: none
+        }
+    }
+
+    @media(min-width: 769px) {
+
+        .ir-navigation .swiper-button-next,
+        .ir-navigation .swiper-button-prev {
+            display: none
+        }
+    }
+
+    .ir-navigation.fixed {
+        z-index: 200;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0
+    }
+
+    .ir-navigation .ir-navigation-wrap {
+        box-sizing: border-box;
+        margin: 0 auto;
+        max-width: 1440px;
+        display: flex;
+        justify-content: space-between;
+        padding: 21px 0 21px 27px;
+        /* 2024-10-12 */
+        height: 123px;
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-wrap {
+            padding-left: 1.3888888889vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-wrap {
+            height: auto;
+            padding: 0;
+            display: block
+        }
+    }
+
+    .ir-navigation .samsung-ir-logo {
+        background-color: #fff;
+        display: flex;
+        flex-direction: row;
+        align-items: center
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .samsung-ir-logo {
+            padding: 3.2vw 6.6666666667vw
+        }
+    }
+
+    .ir-navigation .samsung-ir-logo::after {
+        content: ""
+    }
+
+    .ir-navigation .samsung-ir-logo .samsung-logo,
+    .ir-navigation .samsung-ir-logo .ir-logo {
+        display: flex;
+        align-items: center
+    }
+
+    .ir-navigation .samsung-ir-logo .samsung-logo a,
+    .ir-navigation .samsung-ir-logo .ir-logo a {
+        display: inline-block
+    }
+
+    .ir-navigation .samsung-ir-logo .samsung-logo svg,
+    .ir-navigation .samsung-ir-logo .ir-logo svg {
+        width: 100%;
+        fill: #000
+    }
+
+    .ir-navigation .samsung-ir-logo .samsung-logo::after {
+        content: "";
+        width: 1px;
+        height: 10px;
+        background-color: #d9d9d9;
+        display: inline-block;
+        vertical-align: super
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .samsung-ir-logo .samsung-logo::after {
+            width: 0.2666666667vw;
+            height: 2.6666666667vw
+        }
+    }
+
+    .ir-navigation .samsung-ir-logo .samsung-logo a {
+        padding-right: 16px;
+        width: 104px;
+        height: 16px
+    }
+
+    @media(min-width: 769px)and (max-width: 1024px) {
+        .ir-navigation .samsung-ir-logo .samsung-logo a {
+            width: 80px;
+            height: 9.143px
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .samsung-ir-logo .samsung-logo a {
+            width: 27.7333333333vw;
+            height: 4.2666666667vw;
+            padding-right: 2.6666666667vw
+        }
+    }
+
+    .ir-navigation .samsung-ir-logo .ir-logo a {
+        padding-left: 16px;
+        padding-top: 3px;
+        width: 140px;
+        height: 20px
+    }
+
+    @media(min-width: 769px)and (max-width: 1024px) {
+        .ir-navigation .samsung-ir-logo .ir-logo a {
+            width: 120px;
+            height: 17.143px
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .samsung-ir-logo .ir-logo a {
+            width: 39.7333333333vw;
+            height: 6.1333333333vw;
+            padding: 2.1333333333vw 0vw 0vw 2.6666666667vw
+        }
+    }
+
+    .ir-navigation .ir-navigation-item {
+        display: flex;
+        flex-direction: row;
+        height: 100%;
+        justify-content: space-between;
+        position: relative;
+        /* 2024-10-12 bg 색상 제거 */
+        /* background-color: #fff */
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item {
+            height: 13.3333333333vw;
+            flex-direction: column;
+            align-items: flex-start;
+            max-width: none;
+            justify-content: space-between;
+            padding: 0vw 6.6666666667vw
+        }
+    }
+
+    @media(min-width: 769px) {
+        .ir-navigation .ir-navigation-item .ir-menu {
+            margin: 0
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu {
+            width: 100%
+        }
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list {
+        display: flex;
+        align-items: center;
+        background-color: #fff;
+        height: 38px
+    }
+
+    @media(min-width: 769px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list {
+            transform: none !important
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list {
+            height: 13.3333333333vw
+        }
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item {
+        width: auto;
+        height: 100%;
+        display: flex;
+        white-space: nowrap;
+        align-items: center;
+        position: relative
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item {
+            padding: 0vw 3.3333333333vw
+        }
+
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:first-child {
+            padding-left: 0
+        }
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header {
+        position: relative;
+        width: auto;
+        color: #000;
+        font-weight: 400;
+        display: block;
+        text-align: left;
+        margin: 0px 27px;
+        border: 2px solid rgba(255, 255, 255, 0)
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header {
+            margin: 0vw 1.3888888889vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header {
+            margin: 0;
+            margin-bottom: 0.5333333333vw;
+            height: 100%;
+            box-sizing: border-box;
+            padding: 1.3333333333vw 0vw;
+            display: flex;
+            align-items: center
+        }
+    }
+
+    /* 2024-10-12 */
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:first-child .ir-menu-item-header {
+        margin-left: 0 !important;
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:last-child .ir-menu-item-header {
+        margin-right: 0 !important;
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header button {
+        position: absolute;
+        width: 100%;
+        height: 100%
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+        font-size: 14px;
+        line-height: 19px
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+            line-height: 1.3194444444vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+            font-size: 14px
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1440px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+            font-size: .9722222222vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1234.2857142857px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+            font-size: 12px
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+            font-size: 3.7333333333vw;
+            line-height: 5.0666666667vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 375px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+            font-size: 3.7333333333vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+            font-size: 7px
+        }
+    }
+
+    @media(max-width: 768px)and (max-width: 319px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title {
+            font-size: 7px
+        }
+    }
+
+    /* 2024-10-12 start */
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title a .ir-outlink-icon {
+        display: inline-block;
+        background-image: url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-outlink.png");
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        width: 10px;
+        height: 10px;
+        vertical-align: text-top;
+        margin-top: 4px;
+        margin-left: 2px;
+    }
+
+    @media (min-width: 769px) and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title a .ir-outlink-icon {
+            width: 0.5555555556vw;
+            height: 0.5555555556vw;
+            margin-top: 0.3472222222vw;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-menu-item-title a .ir-outlink-icon {
+            width: 2.1333333333vw;
+            height: 2.1333333333vw;
+            margin-top: 0.8vw;
+        }
+    }
+
+    /* 2024-10-12 end */
+
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon {
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        vertical-align: middle
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon {
+            vertical-align: text-top;
+            width: 1.1111111111vw;
+            height: 1.1111111111vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon {
+            vertical-align: middle;
+            width: 4.2666666667vw;
+            height: 4.2666666667vw
+        }
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon .close-up {
+        display: none;
+        background-image: url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-up.png");
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon .close-up.active {
+        display: inline-block
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon .open-down {
+        display: inline-block;
+        background-image: url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-down-black.png");
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        width: 100%;
+        height: 100%
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon .open-down.active {
+        display: none
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list {
+        display: none;
+        position: absolute;
+        top: 59px;
+        left: 0;
+        padding: 0;
+        margin: 0;
+        box-sizing: border-box;
+        background: #fff;
+        border: 1px solid #f7f7f7;
+        box-shadow: 0px 4px 4px rgba(0, 0, 0, .05);
+        border-radius: 6px;
+        margin-top: 1px;
+        left: 0;
+        min-width: 202px
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list {
+            min-width: 14.0277777778vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list {
+            top: 100%;
+            width: 53.8666666667vw
+        }
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list.hidden {
+        display: none
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+        font-size: 14px;
+        line-height: 19px;
+        color: #000;
+        font-weight: 400;
+        display: block;
+        padding: 10px 24px
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+            line-height: 1.3194444444vw;
+            padding: 0.6944444444vw 1.6666666667vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+            font-size: 14px
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1440px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+            font-size: .9722222222vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1234.2857142857px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+            font-size: 12px
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+            font-size: 3.7333333333vw;
+            line-height: 5.0666666667vw;
+            padding: 3.2vw 6.9333333333vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 375px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+            font-size: 3.7333333333vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+            font-size: 7px
+        }
+    }
+
+    @media(max-width: 768px)and (max-width: 319px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a {
+            font-size: 7px
+        }
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a .ir-outlink-icon {
+        display: inline-block;
+        background-image: url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-outlink.png");
+        background-size: auto 100%;
+        background-repeat: no-repeat;
+        width: 8px;
+        height: 8px;
+        vertical-align: text-top;
+        margin-top: 4px
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a .ir-outlink-icon {
+            width: 0.5555555556vw;
+            height: 0.5555555556vw;
+            margin-top: 0.3472222222vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item a .ir-outlink-icon {
+            width: 2.1333333333vw;
+            height: 2.1333333333vw;
+            margin-top: 0.8vw
+        }
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item:hover,
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list .ir-sub-menu-item:focus {
+        background-color: #f7f7f7;
+        border-radius: 6px
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:last-child {
+            padding-right: 1.3333333333vw
+        }
+    }
+
+    @media(min-width: 769px) {
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:last-child .ir-sub-menu-list {
+            right: 0 !important;
+            left: auto !important
+        }
+    }
+
+    @media(max-width: 768px) {
+
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item.active .ir-menu-item-header,
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:hover .ir-menu-item-header,
+        .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:focus .ir-menu-item-header {
+            border-bottom: 2px solid #000
+        }
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item.active .ir-menu-item-title,
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:hover .ir-menu-item-title,
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:focus .ir-menu-item-title {
+        color: #555
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item.active .ir-dropdown-title-icon .open-down,
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:hover .ir-dropdown-title-icon .open-down,
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:focus .ir-dropdown-title-icon .open-down {
+        background-image: url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-down-gray.png")
+    }
+
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item.active .ir-menu-item-title,
+    .ir-navigation .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item:focus .ir-menu-item-title {
+        font-weight: 700
+    }
+
+    .ir-navigation .ir-navigation-wrap-kr {
+        align-items: center;
+        padding: 0 24px;
+        height: 56px
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-wrap-kr {
+            height: auto;
+            padding: 0
+        }
+    }
+
+    .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+        display: block;
+        font-size: 16px;
+        line-height: 22px;
+        font-weight: 600
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+            line-height: 1.5277777778vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 1441px) {
+        .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+            font-size: 16px
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1440px) {
+        .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+            font-size: 1.1111111111vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1080px) {
+        .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+            font-size: 12px
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+            font-size: 4.5333333333vw;
+            line-height: 6.1333333333vw;
+            padding: 4.6666666667vw 6.6666666667vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 375px) {
+        .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+            font-size: 4.5333333333vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx) {
+        .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+            font-size: 8.5px
+        }
+    }
+
+    @media(max-width: 768px)and (max-width: 319px) {
+        .ir-navigation .ir-navigation-wrap-kr .samsung-ir-title-kr a {
+            font-size: 8.5px
+        }
+    }
+
+    .ir-navigation .ir-navigation-wrap-kr .ir-navigation-item .ir-menu .ir-menu-list {
+        height: 56px
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-wrap-kr .ir-navigation-item .ir-menu .ir-menu-list {
+            height: 13.3333333333vw
+        }
+    }
+
+    .ir-navigation .ir-navigation-wrap-kr .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon {
+        vertical-align: inherit
+    }
+
+    .ir-navigation .ir-navigation-wrap-kr .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon .close-up,
+    .ir-navigation .ir-navigation-wrap-kr .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-menu-item-header .ir-dropdown-title-icon .open-down {
+        margin-top: -5px
+    }
+
+    .ir-navigation .ir-navigation-wrap-kr .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list {
+        top: 56px
+    }
+
+    @media(max-width: 768px) {
+        .ir-navigation .ir-navigation-wrap-kr .ir-navigation-item .ir-menu .ir-menu-list .ir-menu-item .ir-sub-menu-list {
+            top: 100%
+        }
+    }
+
+    #content .ir-global__title-wrap {
+        height: 354px;
+        margin-bottom: 80px
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        #content .ir-global__title-wrap {
+            height: 24.58333vw;
+            margin-bottom: 5.55556vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        #content .ir-global__title-wrap {
+            height: 729.6px;
+            height: 95vw;
+            margin-bottom: 120px;
+            margin-bottom: 16.66667vw
+        }
+    }
+
+    #content .ir-global__title-wrap .ir-global__title-inner {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center
+    }
+
+    #content .ir-global__title-wrap .ir-global__title-inner .ir-global__background {
+        top: 0;
+        bottom: 0;
+        margin: 0;
+        height: auto
+    }
+
+    @media(max-width: 768px) {
+        #content .ir-global__title-wrap .ir-global__content-wrap {
+            min-height: auto
+        }
+    }
+
+    .ir-global__title-wrap .ir-global__title-inner .ir-global__content-wrap .ir-global__title {
+        margin: 0
+    }
+
+    .ir-breadcrumb .ir-breadcrumb-inner {
+        box-sizing: border-box;
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 24px 20.5px;
+        border-top: 1px solid #d9d9d9;
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-breadcrumb .ir-breadcrumb-inner {
+            padding: 1.4236111111vw 1.6666666667vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-breadcrumb .ir-breadcrumb-inner {
+            padding: 3.2vw
+        }
+    }
+
+    .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+        display: flex;
+        flex-direction: row;
+        align-items: center;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: -0.02em;
+        color: #757575
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+            line-height: 0.9722222222vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 1441px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+            font-size: 14px
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1440px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+            font-size: .9722222222vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1234.2857142857px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+            font-size: 12px
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+            font-size: 3.7333333333vw;
+            line-height: 4.8vw;
+            padding: 0.9333333333vw 0vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 375px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+            font-size: 3.7333333333vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+            font-size: 7px
+        }
+    }
+
+    @media(max-width: 768px)and (max-width: 319px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list {
+            font-size: 7px
+        }
+    }
+
+    .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 14px;
+        letter-spacing: -0.02em;
+        color: #000
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+            line-height: 0.9722222222vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 1441px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+            font-size: 14px
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1440px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+            font-size: .9722222222vw
+        }
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px)and (min-width: 376px)and (max-width: 1234.2857142857px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+            font-size: 12px
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+            font-size: 3.7333333333vw;
+            line-height: 4.8vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 375px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+            font-size: 3.7333333333vw
+        }
+    }
+
+    @media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+            font-size: 7px
+        }
+    }
+
+    @media(max-width: 768px)and (max-width: 319px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list>a {
+            font-size: 7px
+        }
+    }
+
+    .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list.ir-breadcrumb-title,
+    .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list.ir-breadcrumb-page,
+    .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list.ir-breadcrumb-subpage {
+        color: #757575
+    }
+
+    .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list.ir-breadcrumb-next-icon::after {
+        content: "";
+        display: inline-block;
+        width: 16px;
+        height: 16px;
+        margin: 0 4px 0 2px;
+        background-image: url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-breadcrumb-next-icon-gray.png");
+        background-size: auto 100%;
+        background-repeat: no-repeat
+    }
+
+    @media(min-width: 769px)and (max-width: 1441px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list.ir-breadcrumb-next-icon::after {
+            width: 1.1111111111vw;
+            height: 1.1111111111vw;
+            margin: 0vw 0.2777777778vw 0vw 0.1388888889vw
+        }
+    }
+
+    @media(max-width: 768px) {
+        .ir-breadcrumb .ir-breadcrumb-inner .ir-breadcrumb-list.ir-breadcrumb-next-icon::after {
+            width: 4.2666666667vw;
+            height: 4.2666666667vw;
+            margin: 0vw 1.0666666667vw 0vw 0.5333333333vw
+        }
+    }
+</style>
+
+<div class="ir-navigation">
+    <div class="ir-navigation-wrap">
+        <div class="samsung-ir-logo">
+            <div class="samsung-logo">
+                <a href="https://www.samsung.com/">
+                    <svg viewBox="0 0 104 16" fill="none" xmlns="http://www.w3.org/2000/svg"
+                        xmlns:xlink="http://www.w3.org/1999/xlink">
+                        <rect width="104" height="16" fill="url(#pattern0)" />
+                        <defs>
+                            <pattern id="pattern0" patternContentUnits="objectBoundingBox" width="1" height="1">
+                                <use xlink:href="#image0_179_6540" transform="scale(0.00480769 0.03125)" />
+                            </pattern>
+                            <image id="image0_179_6540" width="208" height="32"
+                                xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAANAAAAAgCAYAAABjNvZtAAAAGXRFWHRTb2Z0d2FyZQBBZG9iZSBJbWFnZVJlYWR5ccllPAAAAyNpVFh0WE1MOmNvbS5hZG9iZS54bXAAAAAAADw/eHBhY2tldCBiZWdpbj0i77u/IiBpZD0iVzVNME1wQ2VoaUh6cmVTek5UY3prYzlkIj8+IDx4OnhtcG1ldGEgeG1sbnM6eD0iYWRvYmU6bnM6bWV0YS8iIHg6eG1wdGs9IkFkb2JlIFhNUCBDb3JlIDYuMC1jMDA2IDc5LjE2NDY0OCwgMjAyMS8wMS8xMi0xNTo1MjoyOSAgICAgICAgIj4gPHJkZjpSREYgeG1sbnM6cmRmPSJodHRwOi8vd3d3LnczLm9yZy8xOTk5LzAyLzIyLXJkZi1zeW50YXgtbnMjIj4gPHJkZjpEZXNjcmlwdGlvbiByZGY6YWJvdXQ9IiIgeG1sbnM6eG1wPSJodHRwOi8vbnMuYWRvYmUuY29tL3hhcC8xLjAvIiB4bWxuczp4bXBNTT0iaHR0cDovL25zLmFkb2JlLmNvbS94YXAvMS4wL21tLyIgeG1sbnM6c3RSZWY9Imh0dHA6Ly9ucy5hZG9iZS5jb20veGFwLzEuMC9zVHlwZS9SZXNvdXJjZVJlZiMiIHhtcDpDcmVhdG9yVG9vbD0iQWRvYmUgUGhvdG9zaG9wIDIyLjIgKFdpbmRvd3MpIiB4bXBNTTpJbnN0YW5jZUlEPSJ4bXAuaWlkOkQ3NjM2RjE4QkM4ODExRURBODY3QkYyMDlFOUUxNTI2IiB4bXBNTTpEb2N1bWVudElEPSJ4bXAuZGlkOkQ3NjM2RjE5QkM4ODExRURBODY3QkYyMDlFOUUxNTI2Ij4gPHhtcE1NOkRlcml2ZWRGcm9tIHN0UmVmOmluc3RhbmNlSUQ9InhtcC5paWQ6RDc2MzZGMTZCQzg4MTFFREE4NjdCRjIwOUU5RTE1MjYiIHN0UmVmOmRvY3VtZW50SUQ9InhtcC5kaWQ6RDc2MzZGMTdCQzg4MTFFREE4NjdCRjIwOUU5RTE1MjYiLz4gPC9yZGY6RGVzY3JpcHRpb24+IDwvcmRmOlJERj4gPC94OnhtcG1ldGE+IDw/eHBhY2tldCBlbmQ9InIiPz4RLjVkAAAGjUlEQVR42uxd/XHaShC/aPx/LhWgV4GVClAqgFRgUoF5FUSuAKcC4wqMK0BUgKgAUYFFBTxp3ilWyOl2925PSIx35gYP4b5297dfOl0+CT1FZbtTn6FqTUrLlpctK9tz2QrxQdxU8X6iPqVqkeK9UDyv/t4oOXwQD58rim35XHXcl+1EbIvG5BSaWsx10gAaIur4sWGsGXGs1IInVBmslQJw8CNp6ZM67pGyn6lBP039uuDzH7oRNP5eqB+EFkCYq77SAv22VsMnmQBE5c8t4bdPZXuxmKNa71aB+xoo9jz+woHPa6XvTla1rb0QF7SynCdh9ECZ5rslcc0Zg2V8ZJJB5MiPPnigvUcPlDDx+bexqrzGG9Og1PBqDwiSKywyrXdJHH+LHIMi2JCR/6srAFCbHsU94nOFGRmoWNAUeu3K9r1sX8r2TSVTAsgRsGQCmylhGzG681zz3ZgYProm8XPg318V76v2b9mOht9OLPPRvtHUw5hQ5HIo26+yPajimIlkreuQ9ZSajrmjBcRaE8q6bK1fTLCAEXEMrGXcAyEmNeSOHfhxCQ+UIsd05fMW4LMkFrlWAeAFNpoSddFitZsAcy0E7BoWwXchISN4x9DCW7p64hXyuyHTqiUK4PakEZCDFpp17Uy6HgATjjwyzaQ0hSG84gZQ0RISRcjvDsLvczBp4M81A6iLahwUykO8Ht8glHyu0Im1uBmDNUgbY409A6htnhA5Z+5ZsPeK/7kmOhAWQu8j5coQjTQhFJe39QLGGwSzq5r5Z5VYYZNeDI0R1qCw9GBUSjXriZDeIGWY/wB4+60q5KQXss5deaF7QEfyC6xrCckYSsxan8I6hm+YJNg1acTM1ZYsviET4SkiScZUhzAyeGLKC/pWRDDJOiKOY6vnVrodqM0fkC5wrYToav2h8CtDWpwICSCb+FeeKauvAkKdwB4Rv5uJ/yt2P8V1lKrPAarjwbTPiw4aizwi+9RCXDgIEVL8AgkgrjAuQ6wzJCaf1P1iw2KpvEQlg7srAU9oKCZMhgCgTHmYI6Hv3EGIJoU6T453jh4ISxtg/BjZRyBzJ12s/YOwXqn6bIX/s4FdAShtkUHX3hYbUp+CMyscAgrbJsQX4iZvCRWkoqPKSg4ofugpfDsH0VdkSN1UsK0mAR9qIUEMKYwLNMpaCQQ6LqLb4BYJIiloR3hMCSrnc6oMAGgXAKrHrGTwyyKPeho4gCr9e/VsKL0CqCmMSmGeCWOFAvdKQ0RUZKiULT0CqAnQsWX+Y6tIc+WNNoR+M/H3M7shFhMGkwcFgBArgfxDEGIk4AN72AIC1spHHgUXAgWE1LN86tz0GyGsuxe8z8j6EMbJjr3QUrwf3n22BVDTylaL/44U4p2jwqdEK8+ZQB9awgedQu46FGiq1vBASIKHSnkLb6cdryEV71cXOAGoaRkihDeSwGZN1vFoESZxH+nRrdfHKww2lCCLDBMxbNJ59nFfQzioVHceXsUI62tS6jFRgSFrf9sBgEKP+U8saHcqZAJ+bjf0h6zLFp0K+wggG5pZ9ossFBgqJPj2QHHLHOkF5ZYJ82vnQ6esxUC45EFFnwBkG76ElptMHYAZOu7rc4uXu/RVUtd+ldiKOQ/KfAEIiqclIxCoBQSssnABKG8ZW2pytYLJcNgK1iVMO1rwctQDALnmdkeLqMo05yZAxPJz5HcYpYgtgZc5KCiVMCV7qtKHwJ6PQM440yi5qdq5c1j/RDMfdIDYRzjrY0zTvit+LhoGpOL7C2CcsxoMmFcZfqq2JhYemrS37CeF/eWFCXFOzPVSiaafyzVcS8ScW8X/SqjQLUrQw9RE4K6WWgvcjU2Y3MSmP/XaM0zufmJscW0dC8ZBHy1BkDkI4I0RQBgmT5kBFDELFvLIklHmWE9hA6A5M4Bqr8F2fVgdwiVMLvJgGIt6AoESWknBV7rNmX5DDS0emMb6gVgf5fUJKKfgGCck5EGuRHl1xxQiz1zRft5yACTQ+BCIV5ZWLLGwWifmPlgDlTjKgGoIXUKaQvi/j5vqMSgFmNQhwvptrG/OYv9MbYb61PdZAcTFi+QIAEkLK5YL2oHMej8hMRF12VsTQKniJaXi9Kr6UosbSzVfIvDvdR2VrjwSK5EPlgWDRPC/71QfCIiVEYmBKuNB6d9fl7t8MoRbU/F+DmykUZZCDboSH/+9iQ+qj0SFLd41VcLk5H8s/ryPola2rPGZXjG/yQ/M/xNgABy1IEo4PFgpAAAAAElFTkSuQmCC" />
+                        </defs>
+                    </svg>
+                </a>
+            </div>
+            <div class="ir-logo">
+                <a href="https://www.samsung.com/global/ir/">
+                    <svg viewBox="0 0 148 15" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path
+                            d="M0.799 1.59H3.111V14H0.799V1.59ZM4.66398 4.055H6.94198V5.279C7.27064 4.84833 7.68431 4.50267 8.18298 4.242C8.69298 3.98133 9.27098 3.851 9.91698 3.851C11.1523 3.851 12.1156 4.225 12.807 4.973C13.5096 5.721 13.861 6.76367 13.861 8.101V14H11.532V8.339C11.532 7.56833 11.345 6.962 10.971 6.52C10.597 6.06667 10.036 5.84 9.28798 5.84C8.63064 5.84 8.07531 6.07233 7.62198 6.537C7.17998 7.00167 6.95898 7.67033 6.95898 8.543V14H4.66398V4.055ZM14.2477 4.055H16.6447L19.2117 11.059L21.7277 4.055H24.0907L20.3507 14H18.0387L14.2477 4.055ZM29.1008 14.204C28.3188 14.204 27.6048 14.0737 26.9588 13.813C26.3128 13.541 25.7575 13.1727 25.2928 12.708C24.8395 12.2433 24.4825 11.6993 24.2218 11.076C23.9725 10.4413 23.8478 9.767 23.8478 9.053C23.8478 8.32767 23.9781 7.64767 24.2388 7.013C24.5108 6.37833 24.8791 5.82867 25.3438 5.364C25.8085 4.89933 26.3525 4.531 26.9758 4.259C27.6105 3.987 28.2905 3.851 29.0158 3.851C29.7525 3.851 30.4325 3.98133 31.0558 4.242C31.6905 4.49133 32.2345 4.84833 32.6878 5.313C33.1411 5.76633 33.4925 6.30467 33.7418 6.928C34.0025 7.55133 34.1328 8.23133 34.1328 8.968V9.835H26.0408C26.1995 10.5377 26.5451 11.1043 27.0778 11.535C27.6105 11.9657 28.2848 12.181 29.1008 12.181C29.7468 12.181 30.3078 12.0223 30.7838 11.705C31.2598 11.3877 31.6168 10.9627 31.8548 10.43L33.7418 11.518C33.3111 12.3227 32.7048 12.9743 31.9228 13.473C31.1521 13.9603 30.2115 14.204 29.1008 14.204ZM29.0158 5.874C28.3245 5.874 27.7238 6.061 27.2138 6.435C26.7151 6.809 26.3638 7.302 26.1598 7.914H31.8038C31.6338 7.24533 31.3051 6.741 30.8178 6.401C30.3305 6.04967 29.7298 5.874 29.0158 5.874ZM38.901 14.204C37.8017 14.204 36.8894 14 36.164 13.592C35.4387 13.1727 34.8777 12.572 34.481 11.79L36.606 10.77C36.844 11.2347 37.167 11.5917 37.575 11.841C37.983 12.0903 38.459 12.215 39.003 12.215C39.5697 12.215 39.9947 12.096 40.278 11.858C40.5614 11.62 40.703 11.3367 40.703 11.008C40.703 10.8267 40.635 10.6793 40.499 10.566C40.3744 10.4527 40.2044 10.3563 39.989 10.277C39.785 10.1863 39.5414 10.1127 39.258 10.056C38.9747 9.99933 38.68 9.937 38.374 9.869C37.9434 9.77833 37.5184 9.67067 37.099 9.546C36.691 9.42133 36.3227 9.25133 35.994 9.036C35.6654 8.80933 35.399 8.526 35.195 8.186C34.991 7.83467 34.889 7.39833 34.889 6.877C34.889 6.48033 34.9797 6.10067 35.161 5.738C35.3537 5.364 35.62 5.03533 35.96 4.752C36.3 4.46867 36.708 4.24767 37.184 4.089C37.6714 3.919 38.2097 3.834 38.799 3.834C39.7964 3.834 40.6237 4.021 41.281 4.395C41.9497 4.75767 42.4767 5.25633 42.862 5.891L40.907 6.877C40.703 6.52567 40.4197 6.248 40.057 6.044C39.6944 5.84 39.275 5.738 38.799 5.738C38.255 5.738 37.8527 5.84567 37.592 6.061C37.3314 6.27633 37.201 6.52567 37.201 6.809C37.201 7.13767 37.3937 7.37567 37.779 7.523C38.1644 7.659 38.731 7.80633 39.479 7.965C39.887 8.04433 40.295 8.152 40.703 8.288C41.1224 8.41267 41.502 8.58833 41.842 8.815C42.182 9.03033 42.454 9.31367 42.658 9.665C42.8734 10.005 42.981 10.4357 42.981 10.957C42.981 11.3083 42.9017 11.6767 42.743 12.062C42.5844 12.436 42.335 12.7873 41.995 13.116C41.6664 13.4333 41.247 13.694 40.737 13.898C40.227 14.102 39.615 14.204 38.901 14.204ZM43.4369 4.055H45.1369V2.542L47.4489 0.961V4.055H49.4719V6.112H47.4489V9.835C47.4489 10.2657 47.4715 10.617 47.5169 10.889C47.5622 11.1497 47.6529 11.3537 47.7889 11.501C47.9362 11.637 48.1402 11.7277 48.4009 11.773C48.6729 11.8183 49.0299 11.841 49.4719 11.841V14H49.1489C48.3782 14 47.7322 13.932 47.2109 13.796C46.7009 13.66 46.2929 13.4333 45.9869 13.116C45.6809 12.7873 45.4599 12.3623 45.3239 11.841C45.1992 11.3083 45.1369 10.6453 45.1369 9.852V6.112H43.4369V4.055ZM55.0799 14.204C54.3659 14.204 53.6915 14.0737 53.0569 13.813C52.4335 13.541 51.8895 13.1727 51.4249 12.708C50.9602 12.232 50.5919 11.6823 50.3199 11.059C50.0592 10.4243 49.9289 9.75 49.9289 9.036C49.9289 8.31067 50.0592 7.63633 50.3199 7.013C50.5919 6.37833 50.9602 5.82867 51.4249 5.364C51.8895 4.888 52.4335 4.51967 53.0569 4.259C53.6915 3.987 54.3659 3.851 55.0799 3.851C55.7939 3.851 56.4625 3.987 57.0859 4.259C57.7092 4.51967 58.2532 4.888 58.7179 5.364C59.1939 5.82867 59.5622 6.37833 59.8229 7.013C60.0949 7.63633 60.2309 8.31067 60.2309 9.036C60.2309 9.75 60.0949 10.4243 59.8229 11.059C59.5622 11.6823 59.1939 12.232 58.7179 12.708C58.2532 13.1727 57.7092 13.541 57.0859 13.813C56.4625 14.0737 55.7939 14.204 55.0799 14.204ZM55.0799 12.045C55.4879 12.045 55.8675 11.9657 56.2189 11.807C56.5702 11.6483 56.8762 11.433 57.1369 11.161C57.3975 10.889 57.6015 10.5717 57.7489 10.209C57.8962 9.835 57.9699 9.444 57.9699 9.036C57.9699 8.61667 57.8962 8.22567 57.7489 7.863C57.6015 7.489 57.3975 7.166 57.1369 6.894C56.8762 6.622 56.5702 6.40667 56.2189 6.248C55.8675 6.08933 55.4879 6.01 55.0799 6.01C54.6719 6.01 54.2865 6.08933 53.9239 6.248C53.5725 6.40667 53.2665 6.622 53.0059 6.894C52.7565 7.166 52.5582 7.489 52.4109 7.863C52.2635 8.22567 52.1899 8.61667 52.1899 9.036C52.1899 9.444 52.2635 9.835 52.4109 10.209C52.5582 10.5717 52.7565 10.889 53.0059 11.161C53.2665 11.433 53.5725 11.6483 53.9239 11.807C54.2865 11.9657 54.6719 12.045 55.0799 12.045ZM61.2421 4.055H63.5201V5.534C63.9848 4.548 64.8348 4.055 66.0701 4.055C66.4328 4.055 66.7558 4.09467 67.0391 4.174C67.3338 4.25333 67.5944 4.35533 67.8211 4.48L66.9541 6.656C66.7841 6.54267 66.5914 6.452 66.3761 6.384C66.1721 6.30467 65.9058 6.265 65.5771 6.265C64.9084 6.265 64.3984 6.45767 64.0471 6.843C63.7071 7.217 63.5371 7.83467 63.5371 8.696V14H61.2421V4.055ZM72.7814 14V1.59H76.7594C77.496 1.59 78.1477 1.69767 78.7144 1.913C79.2924 2.117 79.7797 2.41167 80.1764 2.797C80.573 3.171 80.8734 3.62433 81.0774 4.157C81.2927 4.67833 81.4004 5.262 81.4004 5.908C81.4004 6.656 81.219 7.35867 80.8564 8.016C80.505 8.662 79.9894 9.16633 79.3094 9.529L81.7914 14H79.1564L77.1674 10.209H75.0934V14H72.7814ZM76.5554 8.084C77.0314 8.084 77.428 8.02733 77.7454 7.914C78.074 7.78933 78.3347 7.625 78.5274 7.421C78.7314 7.20567 78.8731 6.962 78.9524 6.69C79.043 6.418 79.0884 6.129 79.0884 5.823C79.0884 5.18833 78.8844 4.684 78.4764 4.31C78.0797 3.936 77.4394 3.749 76.5554 3.749H75.0934V8.084H76.5554ZM86.8244 14.204C86.0424 14.204 85.3284 14.0737 84.6824 13.813C84.0364 13.541 83.4811 13.1727 83.0164 12.708C82.5631 12.2433 82.2061 11.6993 81.9454 11.076C81.6961 10.4413 81.5714 9.767 81.5714 9.053C81.5714 8.32767 81.7018 7.64767 81.9624 7.013C82.2344 6.37833 82.6028 5.82867 83.0674 5.364C83.5321 4.89933 84.0761 4.531 84.6994 4.259C85.3341 3.987 86.0141 3.851 86.7394 3.851C87.4761 3.851 88.1561 3.98133 88.7794 4.242C89.4141 4.49133 89.9581 4.84833 90.4114 5.313C90.8648 5.76633 91.2161 6.30467 91.4654 6.928C91.7261 7.55133 91.8564 8.23133 91.8564 8.968V9.835H83.7644C83.9231 10.5377 84.2688 11.1043 84.8014 11.535C85.3341 11.9657 86.0084 12.181 86.8244 12.181C87.4704 12.181 88.0314 12.0223 88.5074 11.705C88.9834 11.3877 89.3404 10.9627 89.5784 10.43L91.4654 11.518C91.0348 12.3227 90.4284 12.9743 89.6464 13.473C88.8758 13.9603 87.9351 14.204 86.8244 14.204ZM86.7394 5.874C86.0481 5.874 85.4474 6.061 84.9374 6.435C84.4388 6.809 84.0874 7.302 83.8834 7.914H89.5274C89.3574 7.24533 89.0288 6.741 88.5414 6.401C88.0541 6.04967 87.4534 5.874 86.7394 5.874ZM92.8847 1.42H95.1967V14H92.8847V1.42ZM101.093 14.204C100.493 14.204 99.8978 14.0907 99.3084 13.864C98.7304 13.626 98.2091 13.286 97.7444 12.844C97.2798 12.402 96.9058 11.8637 96.6224 11.229C96.3391 10.583 96.1974 9.852 96.1974 9.036C96.1974 8.20867 96.3334 7.47767 96.6054 6.843C96.8888 6.197 97.2571 5.653 97.7104 5.211C98.1751 4.769 98.7021 4.43467 99.2914 4.208C99.8921 3.97 100.504 3.851 101.127 3.851C101.785 3.851 102.391 3.97567 102.946 4.225C103.502 4.47433 103.961 4.81433 104.323 5.245V4.055H106.618V14H104.323V12.708C103.961 13.1727 103.496 13.541 102.929 13.813C102.363 14.0737 101.751 14.204 101.093 14.204ZM101.467 12.096C101.898 12.096 102.295 12.0167 102.657 11.858C103.02 11.6993 103.332 11.4783 103.592 11.195C103.853 10.9117 104.057 10.583 104.204 10.209C104.363 9.835 104.442 9.43267 104.442 9.002C104.442 8.58267 104.363 8.186 104.204 7.812C104.057 7.438 103.853 7.115 103.592 6.843C103.332 6.55967 103.02 6.33867 102.657 6.18C102.295 6.02133 101.898 5.942 101.467 5.942C101.048 5.942 100.651 6.02133 100.277 6.18C99.9148 6.33867 99.5974 6.554 99.3254 6.826C99.0534 7.098 98.8381 7.421 98.6794 7.795C98.5321 8.169 98.4584 8.57133 98.4584 9.002C98.4584 9.43267 98.5321 9.84067 98.6794 10.226C98.8381 10.6 99.0534 10.9287 99.3254 11.212C99.5974 11.484 99.9148 11.6993 100.277 11.858C100.651 12.0167 101.048 12.096 101.467 12.096ZM107.569 4.055H109.269V2.542L111.581 0.961V4.055H113.604V6.112H111.581V9.835C111.581 10.2657 111.603 10.617 111.649 10.889C111.694 11.1497 111.785 11.3537 111.921 11.501C112.068 11.637 112.272 11.7277 112.533 11.773C112.805 11.8183 113.162 11.841 113.604 11.841V14H113.281C112.51 14 111.864 13.932 111.343 13.796C110.833 13.66 110.425 13.4333 110.119 13.116C109.813 12.7873 109.592 12.3623 109.456 11.841C109.331 11.3083 109.269 10.6453 109.269 9.852V6.112H107.569V4.055ZM114.716 4.055H117.028V14H114.716V4.055ZM114.427 1.624C114.427 1.19333 114.557 0.847666 114.818 0.586999C115.078 0.315 115.43 0.179 115.872 0.179C116.325 0.179 116.676 0.315 116.926 0.586999C117.186 0.847666 117.317 1.19333 117.317 1.624C117.317 2.05467 117.186 2.40033 116.926 2.661C116.676 2.92167 116.325 3.052 115.872 3.052C115.407 3.052 115.05 2.92167 114.801 2.661C114.551 2.40033 114.427 2.05467 114.427 1.624ZM123.179 14.204C122.465 14.204 121.791 14.0737 121.156 13.813C120.533 13.541 119.989 13.1727 119.524 12.708C119.06 12.232 118.691 11.6823 118.419 11.059C118.159 10.4243 118.028 9.75 118.028 9.036C118.028 8.31067 118.159 7.63633 118.419 7.013C118.691 6.37833 119.06 5.82867 119.524 5.364C119.989 4.888 120.533 4.51967 121.156 4.259C121.791 3.987 122.465 3.851 123.179 3.851C123.893 3.851 124.562 3.987 125.185 4.259C125.809 4.51967 126.353 4.888 126.817 5.364C127.293 5.82867 127.662 6.37833 127.922 7.013C128.194 7.63633 128.33 8.31067 128.33 9.036C128.33 9.75 128.194 10.4243 127.922 11.059C127.662 11.6823 127.293 12.232 126.817 12.708C126.353 13.1727 125.809 13.541 125.185 13.813C124.562 14.0737 123.893 14.204 123.179 14.204ZM123.179 12.045C123.587 12.045 123.967 11.9657 124.318 11.807C124.67 11.6483 124.976 11.433 125.236 11.161C125.497 10.889 125.701 10.5717 125.848 10.209C125.996 9.835 126.069 9.444 126.069 9.036C126.069 8.61667 125.996 8.22567 125.848 7.863C125.701 7.489 125.497 7.166 125.236 6.894C124.976 6.622 124.67 6.40667 124.318 6.248C123.967 6.08933 123.587 6.01 123.179 6.01C122.771 6.01 122.386 6.08933 122.023 6.248C121.672 6.40667 121.366 6.622 121.105 6.894C120.856 7.166 120.658 7.489 120.51 7.863C120.363 8.22567 120.289 8.61667 120.289 9.036C120.289 9.444 120.363 9.835 120.51 10.209C120.658 10.5717 120.856 10.889 121.105 11.161C121.366 11.433 121.672 11.6483 122.023 11.807C122.386 11.9657 122.771 12.045 123.179 12.045ZM129.342 4.055H131.62V5.279C131.948 4.84833 132.362 4.50267 132.861 4.242C133.371 3.98133 133.949 3.851 134.595 3.851C135.83 3.851 136.793 4.225 137.485 4.973C138.187 5.721 138.539 6.76367 138.539 8.101V14H136.21V8.339C136.21 7.56833 136.023 6.962 135.649 6.52C135.275 6.06667 134.714 5.84 133.966 5.84C133.308 5.84 132.753 6.07233 132.3 6.537C131.858 7.00167 131.637 7.67033 131.637 8.543V14H129.342V4.055ZM143.607 14.204C142.508 14.204 141.595 14 140.87 13.592C140.145 13.1727 139.584 12.572 139.187 11.79L141.312 10.77C141.55 11.2347 141.873 11.5917 142.281 11.841C142.689 12.0903 143.165 12.215 143.709 12.215C144.276 12.215 144.701 12.096 144.984 11.858C145.267 11.62 145.409 11.3367 145.409 11.008C145.409 10.8267 145.341 10.6793 145.205 10.566C145.08 10.4527 144.91 10.3563 144.695 10.277C144.491 10.1863 144.247 10.1127 143.964 10.056C143.681 9.99933 143.386 9.937 143.08 9.869C142.649 9.77833 142.224 9.67067 141.805 9.546C141.397 9.42133 141.029 9.25133 140.7 9.036C140.371 8.80933 140.105 8.526 139.901 8.186C139.697 7.83467 139.595 7.39833 139.595 6.877C139.595 6.48033 139.686 6.10067 139.867 5.738C140.06 5.364 140.326 5.03533 140.666 4.752C141.006 4.46867 141.414 4.24767 141.89 4.089C142.377 3.919 142.916 3.834 143.505 3.834C144.502 3.834 145.33 4.021 145.987 4.395C146.656 4.75767 147.183 5.25633 147.568 5.891L145.613 6.877C145.409 6.52567 145.126 6.248 144.763 6.044C144.4 5.84 143.981 5.738 143.505 5.738C142.961 5.738 142.559 5.84567 142.298 6.061C142.037 6.27633 141.907 6.52567 141.907 6.809C141.907 7.13767 142.1 7.37567 142.485 7.523C142.87 7.659 143.437 7.80633 144.185 7.965C144.593 8.04433 145.001 8.152 145.409 8.288C145.828 8.41267 146.208 8.58833 146.548 8.815C146.888 9.03033 147.16 9.31367 147.364 9.665C147.579 10.005 147.687 10.4357 147.687 10.957C147.687 11.3083 147.608 11.6767 147.449 12.062C147.29 12.436 147.041 12.7873 146.701 13.116C146.372 13.4333 145.953 13.694 145.443 13.898C144.933 14.102 144.321 14.204 143.607 14.204Z"
+                            fill="black" />
+                    </svg>
+                </a>
+            </div>
+        </div>
+        <div class="ir-navigation-item">
+            <div class="swiper mySwiper ir-menu">
+                <div class="swiper-wrapper ir-menu-list">
+                    <div class="swiper-slide ir-menu-item">
+                        <div class="ir-menu-item-header">
+                            <button type="button" class="ir-menu-item-toggle-button"></button>
+                            <div class="ir-menu-item-text-box">
+                                <span class="ir-menu-item-title">
+                                    About Us
+                                </span>
+                                <span class="ir-dropdown-title-icon">
+                                    <span class="close-up"></span>
+                                    <span class="open-down"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="ir-sub-menu-list">
+                            <li class="ir-sub-menu-item">
+                                <a href="https://www.samsung.com/us/about-us/leadership-and-mission/" target="_blank">
+                                    Leadership & Mission
+                                    <span class="ir-icon ir-outlink-icon"></span>
+                                </a>
+                            </li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/ir-resources/our-business/">Our Business</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/ir-resources/faq/">IR General Information</a></li>
+                            
+                        </ul>
+                    </div>
+                    <div class="swiper-slide ir-menu-item">
+                        <div class="ir-menu-item-header">
+                            <button type="button" class="ir-menu-item-toggle-button"></button>
+                            <div class="ir-menu-item-text-box">
+                                <span class="ir-menu-item-title">
+                                    Financial<br class="t" />
+                                    Information &<br />Disclosures
+                                </span>
+                                <span class="ir-dropdown-title-icon">
+                                    <span class="close-up"></span>
+                                    <span class="open-down"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="ir-sub-menu-list">
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/financial-information/financial-valuation-snapshot/">Financial
+                                    Highlights</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/reports-disclosures/public-disclosure/">Public
+                                    Disclosures</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/reports-disclosures/business-report/">Interim
+                                    Reports</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/financial-information/audited-financial-statements/">Financial
+                                    Statements</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/reports-disclosures/sustainability-reports/">Sustainability
+                                    Reports</a></li>
+                            <li class="ir-sub-menu-item">
+                                <a href="https://www.samsung.com/global/ir/reports-disclosures/corporate-governance-report/">Corporate
+                                    Governance<br />
+                                    Reports</a>
+                            </li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/reports-disclosures/notices/">Notices</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="swiper-slide ir-menu-item">
+                        <div class="ir-menu-item-header">
+                            <button type="button" class="ir-menu-item-toggle-button"></button>
+                            <div class="ir-menu-item-text-box">
+                                <span class="ir-menu-item-title">
+                                    Stock<br />
+                                    Information
+                                </span>
+                                <span class="ir-dropdown-title-icon">
+                                    <span class="close-up"></span>
+                                    <span class="open-down"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="ir-sub-menu-list">
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/stock-information/stock-chart/">Stock
+                                    Chart</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/stock-information/shareholder-return/">Shareholder
+                                    Return</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/stock-information/listing-Info/">Listing
+                                    Information</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/stock-information/ownership-structure/">Shareholder
+                                    Structure</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/stock-information/how-to-buy-sec-stocks/">How
+                                    to Buy Stock</a></li>
+                        </ul>
+                    </div>
+                    <div class="swiper-slide ir-menu-item">
+                        <div class="ir-menu-item-header">
+                            <button type="button" class="ir-menu-item-toggle-button"></button>
+                            <div class="ir-menu-item-text-box">
+                                <span class="ir-menu-item-title">
+                                    Earnings<br class="t" />
+                                    Releases &<br />Events
+                                </span>
+                                <span class="ir-dropdown-title-icon">
+                                    <span class="close-up"></span>
+                                    <span class="open-down"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="ir-sub-menu-list">
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/financial-information/earnings-release/">Earnings
+                                    Releases</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/ir-events-presentations/events/">Events</a>
+                            </li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/ir-events-presentations/business-introduction/">Presentations</a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="swiper-slide ir-menu-item">
+                        <div class="ir-menu-item-header">
+                            <button type="button" class="ir-menu-item-toggle-button"></button>
+                            <div class="ir-menu-item-text-box">
+                                <span class="ir-menu-item-title">
+                                    Shareholders<br class="t" />
+                                    Meeting
+                                </span>
+                                <span class="ir-dropdown-title-icon">
+                                    <span class="close-up"></span>
+                                    <span class="open-down"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="ir-sub-menu-list">
+                            <li class="ir-sub-menu-item">
+                                <a href="https://www.samsung.com/global/ir/governance-csr/lettertoshareholders/">Letter
+                                    to Shareholders</a>
+                            </li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/governance-csr/general-meeting-of-shareholders/">Shareholders
+                                    Meeting</a></li>
+                        </ul>
+                    </div>
+                    <div class="swiper-slide ir-menu-item">
+                        <div class="ir-menu-item-header">
+                            <button type="button" class="ir-menu-item-toggle-button"></button>
+                            <div class="ir-menu-item-text-box">
+                                <span class="ir-menu-item-title">Corporate <br class="t" />Governance</span>
+                                <span class="ir-dropdown-title-icon">
+                                    <span class="close-up"></span>
+                                    <span class="open-down"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="ir-sub-menu-list">
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/governance-csr/board-of-directors/">Board
+                                    of Directors</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/governance-csr/board-committee/">Board
+                                    Committees</a></li>
+                            <li class="ir-sub-menu-item">
+                                <a href="https://www.samsung.com/global/ir/governance-csr/global-code-of-conduct/">Governance
+                                    Documents</a>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <div class="swiper-slide ir-menu-item">
+                        <div class="ir-menu-item-header">
+                            <!-- <button type="button" class="ir-menu-item-toggle-button"></button> -->
+                            <div class="ir-menu-item-text-box">
+                                <span class="ir-menu-item-title"> <a href="https://www.samsung.com/global/sustainability/main/" target="_blank">
+                                        Sustainability
+                                        <span class="ir-icon ir-outlink-icon"></span>
+                                    </a></span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="swiper-slide ir-menu-item">
+                        <div class="ir-menu-item-header">
+                            <button type="button" class="ir-menu-item-toggle-button"></button>
+                            <div class="ir-menu-item-text-box">
+                                <span class="ir-menu-item-title"> IR <br class="t" />Resources </span>
+                                <span class="ir-dropdown-title-icon">
+                                    <span class="close-up"></span>
+                                    <span class="open-down"></span>
+                                </span>
+                            </div>
+                        </div>
+                        <ul class="ir-sub-menu-list">
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/ir-resources/contact/">Contact
+                                    IR</a></li>
+                            <li class="ir-sub-menu-item"><a href="https://www.samsung.com/global/ir/ir-resources/legal-disclaimer/">Legal
+                                    Disclaimers</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div class="swiper-button-prev"></div>
+            <div class="swiper-button-next"></div>
+        </div>
+    </div>
+</div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Swiper/6.8.4/swiper-bundle.min.js"></script>
+	
+		<script>
+			;(function(win,doc,callback){'use strict';callback=callback||function(){};function detach(){if(doc.addEventListener){doc.removeEventListener('DOMContentLoaded',completed);}else{doc.detachEvent('onreadystatechange',completed);}}function completed(){if(doc.addEventListener||event.type==='load'||doc.readyState==='complete'){detach();callback(window,window.jQuery);}}function init(){if (doc.addEventListener){doc.addEventListener('DOMContentLoaded',completed);}else{doc.attachEvent('onreadystatechange',completed);}}init();})(window,document,function(win,$){
+				//swiper
+let ww = $(window).width();
+let mySwiper = undefined;
+const swiperNext = document.querySelector(".swiper-button-next");
+const swiperPrev = document.querySelector(".swiper-button-prev");
+function initSwiper() {
+  if (ww < 768 && mySwiper == undefined) {
+    mySwiper = new Swiper(".mySwiper", {
+      slidesPerView: "auto",
+      spaceBetween: 0,
+      keyboard: true,
+      speed: 100,
+      // centeredSlides: true,
+      navigation: {
+        nextEl: swiperNext,
+        prevEl: swiperPrev
+      },
+      freeMode: {
+        enabled: true,
+        sticky: false
+      }
+    });
+  } else if (ww >= 768 && mySwiper != undefined) {
+    mySwiper.destroy();
+    mySwiper = undefined;
+  }
+}
+initSwiper();
+$(window).on("resize", function () {
+  ww = $(window).width();
+  initSwiper();
+});
+const navigation = document.querySelector(".ir-navigation");
+const navigationOffsetTop = navigation.offsetTop;
+function handleScroll() {
+  if (window.pageYOffset > navigationOffsetTop) {
+    navigation.classList.add("fixed");
+  } else {
+    navigation.classList.remove("fixed");
+  }
+}
+window.addEventListener("scroll", handleScroll);
+
+// ir-navigation
+const irNavigation = document.querySelector(".ir-navigation");
+const menuItems = document.querySelectorAll(".ir-menu-item");
+const irNavItem = document.querySelector(".ir-navigation-item");
+const menuSwiper = irNavigation.querySelector(".swiper");
+let activeSubMenu = null; // 클릭한 서브 메뉴 요소를 저장하는 변수
+
+menuItems.forEach((item) => {
+  const subMenu = item.querySelector(".ir-sub-menu-list");
+  const openDown = item.querySelector(".open-down");
+  const closeUp = item.querySelector(".close-up");
+
+  if (subMenu) subMenu.style.display = "none"; // subMenu 초기화
+
+  item.addEventListener("click", () => {
+    console.log("active");
+    if (!subMenu) return false;
+    if (subMenu.style.display === "none") {
+      // close all other sub menus
+      menuItems.forEach((otherItem) => {
+        const otherSubMenu = otherItem.querySelector(".ir-sub-menu-list");
+        const otherOpenDown = otherItem.querySelector(".open-down");
+        const otherCloseUp = otherItem.querySelector(".close-up");
+
+        if (otherSubMenu && otherSubMenu !== subMenu && otherSubMenu.style.display === "block") {
+          otherSubMenu.style.display = "none";
+          otherOpenDown.style.display = "inline-block";
+          otherCloseUp.style.display = "none";
+          otherItem.classList.remove("active"); // remove active class from other item
+        }
+      });
+
+      // 스와이프
+      if (mySwiper) {
+        let swiperIndex = mySwiper.clickedIndex;
+        mySwiper.slideTo(swiperIndex);
+      }
+
+      // subMenu를 열기 전에 activeSubMenu에 저장된 요소가 있는지 확인하고 초기화한다.
+      if (activeSubMenu !== null) {
+        activeSubMenu.style.display = "none";
+        const openDownIcon = activeSubMenu.parentElement.querySelector(".open-down");
+        const closeUpIcon = activeSubMenu.parentElement.querySelector(".close-up");
+        openDownIcon.style.display = "inline-block";
+        closeUpIcon.style.display = "none";
+        activeSubMenu.parentElement.classList.remove("active");
+        activeSubMenu.style.left = 0; // left 값을 초기화한다.
+      }
+
+      // 서브 메뉴 열기
+      setTimeout(function () {
+        subMenu.style.display = "block";
+        openDown.style.display = "none";
+        closeUp.style.display = "inline-block";
+        const swiperHeight = menuSwiper.clientHeight;
+        const subMenuHeight = subMenu.clientHeight;
+        const height = swiperHeight + subMenuHeight + 10;
+        menuSwiper.style.minHeight = height + "px";
+        item.classList.add("active"); // add active class to clicked item
+
+        const subMenuRight = parseFloat(subMenu.getBoundingClientRect().right);
+        const R = parseFloat(window.getComputedStyle(irNavItem, null).getPropertyValue("padding-right").replace("px", ""));
+        const irNavItemWidth = window.innerWidth - R;
+
+        // subMenu의 right값이 irNavItemWidth보다 크면 left 값을 조정한다.
+        if (subMenuRight > irNavItemWidth) {
+          subMenu.style.left = (subMenuRight - irNavItemWidth) * -1 + "px";
+        }
+
+        // activeSubMenu에 현재 열린 서브 메뉴 요소를 저장한다.
+        activeSubMenu = subMenu;
+      }, 150);
+    } else {
+      // subMenu 닫기
+      menuSwiper.removeAttribute("style");
+      subMenu.style.display = "none";
+      openDown.style.display = "inline-block";
+      closeUp.style.display = "none";
+      subMenu.style.left = 0;
+      item.classList.remove("active"); // remove active class from clicked item
+
+      // active
+    }
+  });
+});
+
+
+// close all sub menus when clicking outside
+document.addEventListener("click", event => {
+  if (!event.target.closest(".ir-menu-item")) {
+    menuItems.forEach(item => {
+      const subMenu = item.querySelector(".ir-sub-menu-list");
+      const openDown = item.querySelector(".open-down");
+      const closeUp = item.querySelector(".close-up");
+      menuSwiper.removeAttribute("style");
+      subMenu.style.display = "none";
+      openDown.classList.remove("active");
+      closeUp.classList.remove("active");
+      subMenu.style.left = 0;
+      item.classList.remove("active"); // remove active class from all items
+    });
+  }
+});
+			});
+		</script>
+	
+</div>
+
+    
+
+</div>
+
+    
+
+
+	</header>
+
+
+
+    
+    
+    
+    
+
+
+
+    
+    
+	
+
+
+
+
+
+	
+
+<div id="content" role="main">
+	<section class="ir-public-view-wrap">
+		<input type="hidden" name="prevIrCode" id="prevIrCode" value="84695"/>
+		<input type="hidden" name="nextIrCode" id="nextIrCode" value="84675"/>
+		<div class="ir-public-view-page">
+			<div class="ir-public-view-title">
+				<strong>Future BusinessㆍManagement Plan</strong>
+				<div class="ir-public-view-info">
+					<span class="ir-public-view-date">Jun 29. 2026</span>
+					<div class="ir-public-view-share js-public-view-share">
+						<button type="button" class="ir-btn-share"><span>Share sns</span></button>
+						<div class="ir-public-view-share-box">
+							<p>Share sns</p>
+							<ul class="ir-share-list">
+								
+								
+									
+										<li class="ir-share-facebook">
+											<a href="javascript:(function(){window.open('http://www.facebook.com/sharer.php?s=100&amp;u=https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view.84685.html')})();">Facebook</a>
+										</li>
+									
+									
+										<li class="ir-share-pinit">
+											<a href="javascript:(function(){window.open('http://www.pinterest.com/pin/create/button/?url=https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view.84685.html&amp;media=https://www.samsung.com/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-common/resources/images/logo-square-letter.png&amp;description=null')})();">Pin it</a>
+										</li>
+									
+									
+										<li class="ir-share-tweet">
+											<a href="javascript:(function(){var displyText = encodeURIComponent('SAMSUNG'); window.open('https://twitter.com/intent/tweet?url=https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view.84685.html&amp;text='+displyText)})();">Tweet</a>
+										</li>
+									
+									
+								
+							</ul>
+							<button type="button" class="ir-btn-close"><span class="blind">Close</span></button>
+						</div>
+					</div>
+				</div>
+			</div>
+			
+			<div class="ir-public-view-content">
+				<p><strong>Future Business</strong><strong>ㆍ</strong><strong>Management Plan (fair disclosure)</strong></p>
+<p><strong>&nbsp;</strong></p>
+<p><strong>&nbsp;</strong></p>
+<table border="1">
+<tbody>
+<tr>
+<td colspan="4">
+<p>※ The following information contains forward-looking statements and is subject to change.</p>
+</td>
+</tr>
+<tr>
+<td colspan="3"><ol>
+<li>Future business plan</li>
+</ol></td>
+<td>
+<p>&nbsp;Domestic investment vision for 2026&ndash;2040</p>
+</td>
+</tr>
+<tr>
+<td rowspan="6">
+<p><strong>&nbsp;</strong></p>
+<p><strong>&nbsp;</strong></p>
+<ol start="2">
+<li>Major details and implementation schedule</li>
+</ol></td>
+<td colspan="2">
+<p>Purpose</p>
+</td>
+<td>
+<p>To strengthen the competitiveness of the Company's core businesses</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p>Details</p>
+</td>
+<td>
+<p>Investment in the global cutting-edge semiconductor business, etc.</p>
+</td>
+</tr>
+<tr>
+<td rowspan="2">
+<p>Implementation schedule</p>
+</td>
+<td>
+<p>Start date</p>
+</td>
+<td>
+<p>January 1, 2026</p>
+</td>
+</tr>
+<tr>
+<td>
+<p>End date</p>
+</td>
+<td>
+<p>December 31, 2040</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p>Expected investment amount</p>
+</td>
+<td>
+<p>Approximately KRW 2,450 trillion (including approximately KRW 2,100 trillion for the semiconductor business)<br /> . KRW 1,650 trillion for the Yongin semiconductor cluster and existing semiconductor complexes / KRW 400 trillion for Gwangju / DX, Display and other businesses <br /> . Construction of an HBM Fab in Onyang, Cheonan<br /> . Development of a global advanced semiconductor cluster in Gwangju<br /> . Construction of a humanoid robot production line in Gumi</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p>Expected effects</p>
+</td>
+<td>
+<p>Strengthened competitiveness of the Company's core businesses</p>
+</td>
+</tr>
+<tr>
+<td colspan="3"><ol start="3">
+<li>Risk factors</li>
+</ol></td>
+<td>
+<p>&nbsp;-</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<p>4. Date of Board resolution (Decision date)</p>
+</td>
+<td>
+<p>&nbsp;-</p>
+</td>
+</tr>
+<tr>
+<td rowspan="4">
+<p><strong>&nbsp;</strong></p>
+<ol start="5">
+<li>Information disclosure</li>
+</ol></td>
+<td colspan="2">
+<p>Disclosing department</p>
+</td>
+<td>
+<p>IR team</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p>Recipients</p>
+</td>
+<td>
+<p>Domestic and international investors, the media, etc.</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p>Scheduled disclosure date and time</p>
+</td>
+<td>
+<p>June 29, 2026, 5:10 p.m. (KST)</p>
+</td>
+</tr>
+<tr>
+<td colspan="2">
+<p>Event (venue)</p>
+</td>
+<td>
+<p>National Briefing on the Three Mega Projects for Korea&rsquo;s Grand Leap Forward (The Presidential Office)</p>
+</td>
+</tr>
+<tr>
+<td colspan="3"><ol start="6">
+<li>Contact information (Related department/Telephone Number)</li>
+</ol></td>
+<td>
+<p>IR team (02-2255-9000)</p>
+</td>
+</tr>
+<tr>
+<td colspan="4">
+<p>7. Other information material to investment decisions</p>
+</td>
+</tr>
+<tr>
+<td colspan="4">
+<p>The above mid- to long-term investment plan is provided as a guideline for reference based on the current market conditions. It is subject to change depending on future market conditions and changes in the Company's business environment.</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<p>Scheduled date of progress disclosure</p>
+</td>
+<td>
+<p>&nbsp;</p>
+</td>
+</tr>
+<tr>
+<td colspan="3">
+<p>※ Related disclosure</p>
+</td>
+<td>
+<p>&nbsp;</p>
+</td>
+</tr>
+</tbody>
+</table>
+<p>&nbsp;</p>
+			</div>
+		</div>
+		<div class="ir-public-view-navigation">
+			
+			
+				<a href="javascript:void(0)" class="ir-btn-prev">
+					<span class="ir-public-view-ico">Prev</span>
+					<span class="ir-public-view-list">2Q 2026 Pre-Earnings Guidance  </span>
+				</a>
+			
+			<a href="javascript:void(0)" class="ir-btn-list"><span class="ir-public-view-ico">List</span></a>
+			
+			
+				<a href="javascript:void(0)" class="ir-btn-next">
+					<span class="ir-public-view-ico">Next</span>
+					<span class="ir-public-view-list">Sustainability Report 2026</span>
+				</a>
+			
+		</div>
+	</section>
+</div>
+
+	
+
+
+
+
+
+
+
+	
+    
+    
+    
+    
+
+
+
+
+    
+        
+        
+        <div class="newpar new section">
+
+</div>
+
+    
+        
+        
+        <div class="par iparys_inherited">
+
+    
+    
+    
+    
+        
+        
+        <div class="static-content">
+	
+		<style scoped="scoped">
+			.ir-footer-content{border-top:1px solid #d9d9d9}@media(max-width: 768px){.ir-footer-content{border:none}}.ir-footer-content .ir-footer-inner{position:relative;max-width:1440px;margin:0 auto}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list{display:flex;flex-direction:row}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list{flex-wrap:wrap;flex-direction:column}}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item{box-sizing:border-box;width:100%;border-left:none;display:flex;flex-direction:column;gap:22px;padding:38px 24px 30px;border-right:1px solid #d9d9d9}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item:first-child{border-left:1px solid #d9d9d9}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item:first-child{border-left:none}}@media(min-width: 769px)and (max-width: 1441px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item{padding:2.6388888889vw 1.6666666667vw 2.0833333333vw;gap:1.5277777778vw}}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item{border:0;border-top:1px solid #d9d9d9;padding:0;gap:0}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item:last-child{border-bottom:1px solid #d9d9d9}}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header{position:relative}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header{display:flex;flex-direction:row;justify-content:space-between;align-items:center;padding-right:3.2vw}}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header button{position:absolute;width:100%;height:100%;display:none}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header button{display:block}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header button .collapse{display:none}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header button .expand{display:block}}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .ir-icon-open,.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .ir-icon-close{display:none}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .ir-icon-open,.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .ir-icon-close{width:3.2vw;height:3.2vw;background-size:auto 100%;background-repeat:no-repeat}}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .ir-icon-open{display:block;background-image:url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-open.png")}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .ir-icon-close{display:none;background-image:url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-close.png")}}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{font-weight:700;font-size:18px;line-height:23px;color:#000}@media(min-width: 769px)and (max-width: 1024px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{line-height:1.5972222222vw}}@media(min-width: 769px)and (max-width: 1024px)and (min-width: 1441px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{font-size:18px}}@media(min-width: 769px)and (max-width: 1024px)and (min-width: 376px)and (max-width: 1440px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{font-size:1.25vw}}@media(min-width: 769px)and (max-width: 1024px)and (min-width: 376px)and (max-width: 960px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{font-size:12px}}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{display:block;padding:5.4666666667vw 3.2vw;font-size:3.7333333333vw;line-height:3.7333333333vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 375px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{font-size:3.7333333333vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{font-size:7px}}@media(max-width: 768px)and (max-width: 319px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-header .accordion-title{font-size:7px}}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content{box-sizing:border-box;display:block;width:100%}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content{padding:5.3333333333vw 3.2vw;background:#f7f7f7;display:none}}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{color:#000;display:inline-block;line-height:14px;padding:10px 0;font-size:14px}@media(min-width: 769px)and (max-width: 1024px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{line-height:1.7361111111vw}}@media(min-width: 769px)and (max-width: 1024px)and (min-width: 1441px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{font-size:14px}}@media(min-width: 769px)and (max-width: 1024px)and (min-width: 376px)and (max-width: 1440px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{font-size:.9722222222vw}}@media(min-width: 769px)and (max-width: 1024px)and (min-width: 376px)and (max-width: 1234.2857142857px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{font-size:12px}}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{padding:2.6666666667vw 0vw;font-size:3.2vw;line-height:4.8vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 375px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{font-size:3.2vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{font-size:6px}}@media(max-width: 768px)and (max-width: 319px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item a{font-size:6px}}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item .ir-outlink-icon{display:inline-block;background-image:url("//images.samsung.com/is/image/samsung/assets/global/ir/imgs/ir-icon-outlink1.png");background-size:auto 100%;background-repeat:no-repeat;width:14px;height:14px;vertical-align:inherit}@media(min-width: 769px)and (max-width: 1441px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item .ir-outlink-icon{width:0.9722222222vw;height:0.9722222222vw}}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item .ir-accordion-content .ir-accordion-sub-sitemap-item .ir-outlink-icon{width:3.7333333333vw;height:3.7333333333vw}}@media(max-width: 768px){.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item.active .ir-accordion-header button .collapse{display:block}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item.active .ir-accordion-header button .expand{display:none}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item.active .ir-accordion-header .ir-icon-open{display:none}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item.active .ir-accordion-header .ir-icon-close{display:block}.ir-footer-content .ir-footer-inner .ir-accordion-sitemap-list .ir-accordion-sitemap-item.active .ir-accordion-content{display:block}}
+
+		</style>
+	
+	
+	<div class="ir-footer-content">
+    <nav class="ir-footer-inner sitemap-links">
+      <ul class="ir-accordion-sitemap-list">
+        <li class="ir-accordion-sitemap-item">
+            <div class="ir-accordion-header">
+              <button type="button" class="ir-accordion-toggle-button mobile" aria-expanded="false" aria-controls="id_long_desc">
+                <span class="sr-only expand">open</span>
+                <span class="sr-only collapse">close</span>
+              </button>
+              <span class="accordion-title">About Us</span>
+              <span class="ir-icon ir-icon-open"></span>
+              <span class="ir-icon ir-icon-close"></span>
+            </div>
+            <ul class="ir-accordion-content">
+              <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/us/about-us/leadership-and-mission/" target="_blank">
+                Leadership & Mission
+                <span class="ir-icon ir-outlink-icon"></span>
+              </a>
+              </li>
+              <li class="ir-accordion-sub-sitemap-item">
+                <a href="https://www.samsung.com/us/about-us/leadership-and-mission/" target="_blank">- Our mission & Values<br />
+              - Business Principles<br />
+              - Our CEO<br />
+              - History</a>
+              </li>
+              <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/ir-resources/our-business/">Our Business</a></li>
+              <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/ir-resources/faq/">IR General Information</a></li>
+            </ul>
+        </li>
+        <li class="ir-accordion-sitemap-item">
+          <div class="ir-accordion-header">
+            <button type="button" class="ir-accordion-toggle-button mobile" aria-expanded="false">
+              <span class="sr-only expand">open</span>
+              <span class="sr-only collapse">close</span>
+            </button>
+            <span class="accordion-title">Financial Information & Disclosures</span>
+            <span class="ir-icon ir-icon-open"></span>
+            <span class="ir-icon ir-icon-close"></span>
+          </div>
+          <ul class="ir-accordion-content">
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/financial-information/financial-valuation-snapshot/">Financial Highlights</a></li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/reports-disclosures/public-disclosure/">Public Disclosures</a></li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/reports-disclosures/business-report/">Interim Reports</a></li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/financial-information/audited-financial-statements/">Financial Statements</a></li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/reports-disclosures/sustainability-reports/">Sustainability Reports</a></li>
+            <li class="ir-accordion-sub-sitemap-item">
+              <a href="https://www.samsung.com/global/ir/reports-disclosures/corporate-governance-report/">Corporate Governance Reports</a>
+            </li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/reports-disclosures/notices/">Notices</a></li>
+          </ul>
+        </li>
+        <li class="ir-accordion-sitemap-item">
+            <div class="ir-accordion-header">
+              <button type="button" class="ir-accordion-toggle-button mobile" aria-expanded="false" aria-controls="id_long_desc">
+                <span class="sr-only expand">open</span>
+                <span class="sr-only collapse">close</span>
+              </button>
+              <span class="accordion-title">Stock Information</span>
+              <span class="ir-icon ir-icon-open"></span>
+              <span class="ir-icon ir-icon-close"></span>
+            </div>
+            <ul class="ir-accordion-content">
+              <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/stock-information/stock-chart/">Stock Chart</a></li>
+              <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/stock-information/shareholder-return/">Shareholder Return</a></li>
+              <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/stock-information/listing-Info/">Listing Information</a></li>
+              <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/stock-information/ownership-structure/">Shareholder Structure</a></li>
+              <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/stock-information/how-to-buy-sec-stocks/">How to Buy Stock</a></li>
+            </ul>
+        </li>
+        <li class="ir-accordion-sitemap-item">
+          <div class="ir-accordion-header">
+            <button type="button" class="ir-accordion-toggle-button mobile" aria-expanded="false" aria-controls="id_long_desc">
+              <span class="sr-only expand">open</span>
+              <span class="sr-only collapse">close</span>
+            </button>
+            <span class="accordion-title">Earnings Releases & Events</span>
+            <span class="ir-icon ir-icon-open"></span>
+            <span class="ir-icon ir-icon-close"></span>
+          </div>
+          <ul class="ir-accordion-content">
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/financial-information/earnings-release/">Earnings Releases</a></li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/ir-events-presentations/events/">Events</a></li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/ir-events-presentations/business-introduction/">Presentations</a></li>
+          </ul>
+        </li>
+        <li class="ir-accordion-sitemap-item">
+          <div class="ir-accordion-header">
+            <button type="button" class="ir-accordion-toggle-button mobile" aria-expanded="false" aria-controls="id_long_desc">
+              <span class="sr-only expand">open</span>
+              <span class="sr-only collapse">close</span>
+            </button>
+            <span class="accordion-title">Shareholders Meeting</span>
+            <span class="ir-icon ir-icon-open"></span>
+            <span class="ir-icon ir-icon-close"></span>
+          </div>
+          <ul class="ir-accordion-content">
+            <li class="ir-accordion-sub-sitemap-item">
+              <a href="https://www.samsung.com/global/ir/governance-csr/lettertoshareholders/">Letter to Shareholders</a>
+            </li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/governance-csr/general-meeting-of-shareholders/">Shareholders Meeting</a></li>
+          </ul>
+        </li>
+        
+        <li class="ir-accordion-sitemap-item">
+          <div class="ir-accordion-header">
+            <button type="button" class="ir-accordion-toggle-button mobile" aria-expanded="false" aria-controls="id_long_desc">
+              <span class="sr-only expand">open</span>
+              <span class="sr-only collapse">close</span>
+            </button>
+            <span class="accordion-title">Corporate <br class="t" />Governance</span>
+            <span class="ir-icon ir-icon-open"></span>
+            <span class="ir-icon ir-icon-close"></span>
+          </div>
+          <ul class="ir-accordion-content">
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/governance-csr/board-of-directors/">Board of Directors</a></li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/governance-csr/board-committee/">Board Committees</a></li>
+            <li class="ir-accordion-sub-sitemap-item">
+              <a href="https://www.samsung.com/global/ir/governance-csr/global-code-of-conduct/">Governance Documents</a>
+            </li>
+          </ul>
+        </li>
+        <li class="ir-accordion-sitemap-item">
+          <div class="ir-accordion-header">
+            <button type="button" class="ir-accordion-toggle-button mobile" aria-expanded="false" aria-controls="id_long_desc">
+              <span class="sr-only expand">open</span>
+              <span class="sr-only collapse">close</span>
+            </button>
+            <span class="accordion-title">IR Resources</span>
+            <span class="ir-icon ir-icon-open"></span>
+            <span class="ir-icon ir-icon-close"></span>
+          </div>
+          <ul class="ir-accordion-content">
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/ir-resources/contact/">Contact IR</a></li>
+            <li class="ir-accordion-sub-sitemap-item"><a href="https://www.samsung.com/global/ir/ir-resources/legal-disclaimer/">Legal Disclaimers</a></li>
+          </ul>
+        </li>
+        <!-- <li class="ir-accordion-sitemap">
+          <div class="ir-accordion-header">
+            <span class="accordion-title">Resources</span>
+          </div>
+        </li> -->
+      </ul>
+    </nav>
+  </div>
+  
+	
+		<script>
+			;(function(win,doc,callback){'use strict';callback=callback||function(){};function detach(){if(doc.addEventListener){doc.removeEventListener('DOMContentLoaded',completed);}else{doc.detachEvent('onreadystatechange',completed);}}function completed(){if(doc.addEventListener||event.type==='load'||doc.readyState==='complete'){detach();callback(window,window.jQuery);}}function init(){if (doc.addEventListener){doc.addEventListener('DOMContentLoaded',completed);}else{doc.attachEvent('onreadystatechange',completed);}}init();})(window,document,function(win,$){
+				const buttons = document.querySelectorAll(".ir-accordion-toggle-button");
+const listItems = document.querySelectorAll(".ir-accordion-sitemap-item");
+buttons.forEach((button, index) => {
+  const listItem = listItems[index];
+  button.addEventListener("click", () => {
+    if (button.getAttribute("aria-expanded") === "false") {
+      listItem.classList.add("active");
+      button.setAttribute("aria-expanded", "true");
+    } else {
+      listItem.classList.remove("active");
+      button.setAttribute("aria-expanded", "false");
+    }
+  });
+});
+			});
+		</script>
+	
+</div>
+
+    
+        
+        
+        <div class="static-content">
+	
+		<style scoped="scoped">
+			footer .footer-content{border-top:1px solid #d9d9d9}@media(max-width: 768px){footer .footer-content{border:none}}footer .footer-content .footer-wrap{box-sizing:border-box;display:flex;justify-content:space-between;max-width:1440px;margin:0 auto;padding:26px 24px;flex-direction:row}@media(min-width: 769px)and (max-width: 1441px){footer .footer-content .footer-wrap{padding:1.8055555556vw 1.6666666667vw}}@media(max-width: 768px){footer .footer-content .footer-wrap{padding:9.6vw 3.2vw;gap:5.3333333333vw;flex-direction:column}}footer .footer-content .footer-wrap .copyright{color:#000;font-size:12px;line-height:16px;font-weight:400;padding-right:24px}@media(max-width: 768px){footer .footer-content .footer-wrap .copyright{font-size:3.2vw;line-height:4.2666666667vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 375px){footer .footer-content .footer-wrap .copyright{font-size:3.2vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx){footer .footer-content .footer-wrap .copyright{font-size:6px}}@media(max-width: 768px)and (max-width: 319px){footer .footer-content .footer-wrap .copyright{font-size:6px}}footer .footer-content .footer-wrap .copyright .bold{font-size:13px;line-height:17px;padding-top:4px}@media(max-width: 768px){footer .footer-content .footer-wrap .copyright .bold{padding-top:9.6vw;font-size:3.4666666667vw;line-height:4.5333333333vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 375px){footer .footer-content .footer-wrap .copyright .bold{font-size:3.4666666667vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx){footer .footer-content .footer-wrap .copyright .bold{font-size:6.5px}}@media(max-width: 768px)and (max-width: 319px){footer .footer-content .footer-wrap .copyright .bold{font-size:6.5px}}footer .footer-content .footer-wrap .ir-footer-outlink{position:relative;cursor:pointer;display:flex;align-items:center}@media(max-width: 768px){footer .footer-content .footer-wrap .ir-footer-outlink{padding:4.2666666667vw 0vw}}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{color:#000;white-space:nowrap;font-size:13px;line-height:16px;font-weight:700}@media(min-width: 769px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{line-height:1.1111111111vw}}@media(min-width: 769px)and (min-width: 1441px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{font-size:13px}}@media(min-width: 769px)and (min-width: 376px)and (max-width: 1440px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{font-size:.9027777778vw}}@media(min-width: 769px)and (min-width: 376px)and (max-width: 1329.2307692308px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{font-size:12px}}@media(max-width: 768px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{font-size:3.4666666667vw;line-height:4.2666666667vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 375px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{font-size:3.4666666667vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{font-size:6.5px}}@media(max-width: 768px)and (max-width: 319px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language-click-btn{font-size:6.5px}}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language{display:none;border:1px solid #b2b2b2;position:absolute;right:0px;top:-82px;border-radius:10px}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language.show{display:block}@media(max-width: 768px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language{right:inherit;left:0;top:-20vw}}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li{box-sizing:border-box;background-color:#fff;width:180px;position:relative}@media(max-width: 768px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li{width:47.4666666667vw}}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li:nth-child(1){border-radius:10px 10px 0px 0px}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li:nth-child(2){border-radius:0px 0px 10px 10px}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li a{box-sizing:border-box;color:#000;font-weight:400;font-size:13px;line-height:16px;padding:12px 15px;display:block;width:100%}@media(max-width: 768px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li a{font-size:3.4666666667vw;line-height:4.2666666667vw;padding:3.2vw 4vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 375px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li a{font-size:3.4666666667vw}}@media(max-width: 768px)and (min-width: 350px)and (max-width: 187.5pxpx){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li a{font-size:6.5px}}@media(max-width: 768px)and (max-width: 319px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li a{font-size:6.5px}}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li .arrow{width:16px;height:16px;position:absolute;display:inline-block;top:50%;transform:translateY(-50%);right:15px}@media(max-width: 768px){footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li .arrow{width:4.2666666667vw;height:4.2666666667vw;right:4vw}}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li .arrow svg{display:inline-block;width:100%;height:100%}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li .arrow svg path{fill:#000}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li:hover{background-color:#f7f7f7}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li:hover a{color:#707070;font-weight:700}footer .footer-content .footer-wrap .ir-footer-outlink .footer-language li:hover .arrow svg path{fill:#555}
+
+		</style>
+	
+	
+	<footer>
+  <div class="footer-content">
+    <div class="footer-wrap">
+      <div class="copyright">
+        <p>This website is best viewed using Microsoft Internet Explorer 9 or higher, and/or latest version of Google Chrome and Mozila Firefox browsers.</p>
+        <p class="bold">All Contents copyright ⓒ samsung electronics co., ltd.</p>
+      </div>
+      <div class="ir-footer-outlink">
+        <div class="footer-language-click-btn">Global / English</div>
+        <ul class="footer-language">
+          <li>
+            <a href="https://www.samsung.com/sec/ir/main/">한국 / Korean</a>
+            <div class="icon arrow">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.0598 8.01501L5.79433 14.0651L4.7998 13.0683L10.0807 7.97515L4.7998 2.88195L5.79433 1.93506L12.0598 8.01501Z" fill="#000000" />
+              </svg>
+            </div>
+          </li>
+          <li>
+            <a href="https://www.samsung.com/global/ir/">Global / English</a>
+            <div class="icon arrow">
+              <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M12.0598 8.01501L5.79433 14.0651L4.7998 13.0683L10.0807 7.97515L4.7998 2.88195L5.79433 1.93506L12.0598 8.01501Z" fill="#000000" />
+              </svg>
+            </div>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</footer>
+
+	
+		<script>
+			;(function(win,doc,callback){'use strict';callback=callback||function(){};function detach(){if(doc.addEventListener){doc.removeEventListener('DOMContentLoaded',completed);}else{doc.detachEvent('onreadystatechange',completed);}}function completed(){if(doc.addEventListener||event.type==='load'||doc.readyState==='complete'){detach();callback(window,window.jQuery);}}function init(){if (doc.addEventListener){doc.addEventListener('DOMContentLoaded',completed);}else{doc.attachEvent('onreadystatechange',completed);}}init();})(window,document,function(win,$){
+				$(function () {
+  //footer
+  const footerLanguageBtn = document.querySelector(".footer-language-click-btn");
+  const footerLanguageMenu = document.querySelector(".footer-language");
+
+  // Toggle show class when footer-language-click-btn is clicked
+  footerLanguageBtn.addEventListener("click", function () {
+    footerLanguageMenu.classList.toggle("show");
+  });
+
+  // Remove show class when anywhere is clicked outside of footer-language element
+  document.addEventListener("click", function (event) {
+    const isClickInsideLanguageMenu = footerLanguageMenu.contains(event.target);
+    const isClickOnLanguageBtn = footerLanguageBtn.contains(event.target);
+    if (!isClickInsideLanguageMenu && !isClickOnLanguageBtn) {
+      footerLanguageMenu.classList.remove("show");
+    }
+  });
+});
+			});
+		</script>
+	
+</div>
+
+    
+
+</div>
+
+    
+
+
+
+    
+    
+    
+	
+    
+<script src="/etc.clientlibs/samsung/clientlibs/consumer/global/clientlib-templates/page-ir-none-gnb.min.38908bd146554124cf99764de1148f04.js"></script>
+
+
+
+	
+
+    
+    
+    
+    
+    
+
+    
+    
+    
+
+
+	
+	
+    
+    
+	
+	
+	
+
+	
+
+   
+    
+    
+  
+  <script type="application/ld+json" data-type="seo" data-object-type="WebPage" data-id="3119ba67-0def-4a57-9926-fb51a2b6ba7b">{"@context":"https://schema.org","@type":"WebPage","name":"public-disclosure-view |  GLOBAL","@id":"https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view.84685/#webpage","description":"public-disclosure-view","url":"https://www.samsung.com/global/ir/reports-disclosures/public-disclosure-view.84685/","primaryImageOfPage":"//cdn.samsung.com/etc/designs/samsung/global/imgs/logo-square-letter.png"}</script>
+
+
+
+    
+    
+	
+	
+    </div>
+</body>
+</html>

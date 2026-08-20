@@ -1,0 +1,40 @@
+{
+  "append_only_source_exceptions": 13,
+  "atomic_child_evidence_links": 110,
+  "atomic_child_falsifiers": 79,
+  "atomic_children": 79,
+  "canonical_evidence_links": 43,
+  "canonical_parent_claims": 26,
+  "canonical_source_identities": 27,
+  "claim_review_status_rows": 26,
+  "entity_aliases": 29,
+  "external_claim_dependencies": 1,
+  "external_claim_evidence_links": 1,
+  "field_dispositions": {
+    "canonical_destination": 2337,
+    "governed_hold": 259,
+    "typed_junction_destination": 1592
+  },
+  "fresh_semantic_history_rows": 26,
+  "governing_inputs": 89,
+  "legacy_blank_scalars": 585,
+  "legacy_critical_governed_holds": 140,
+  "legacy_source_inventory_files": 23,
+  "legacy_source_inventory_rows": 411,
+  "legacy_source_inventory_scalars": 4188,
+  "legacy_source_inventory_tree_sha256": "4c885a8252a0a8a92ea7c7ba1fdc1c80bb0bc45e0699cf71096a93dcfbec8be3",
+  "normalized_version_attempts": 37,
+  "parent_falsifiers": 26,
+  "recursive_entities": 36,
+  "selected_preserved_versions": 24,
+  "selected_source_versions": 27,
+  "selected_version_holds": 3,
+  "semantic_relationships": 43,
+  "semantic_verdicts": {
+    "held": 3,
+    "narrowed": 4,
+    "supported": 36
+  },
+  "timeline_events": 36,
+  "unresolved_alias_holds": 6
+}

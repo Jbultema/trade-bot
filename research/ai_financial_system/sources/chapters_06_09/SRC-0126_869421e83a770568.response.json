@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 54944,
+  "content_sha256": "869421e83a770568ff02b14a188daf7f101791659530dfb019d1baf381cb0097",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.bis.gov/press-release/department-commerce-revises-license-review-policy-semiconductors-exported-china",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0126_869421e83a770568.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://www.bis.gov/press-release/department-commerce-revises-license-review-policy-semiconductors-exported-china",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-01-13",
+  "publisher": "Bureau of Industry and Security",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0126_869421e83a770568.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:52:58.645196+00:00",
+  "retrieval_started_utc": "2026-07-26T17:52:57.974717+00:00",
+  "selected_response_headers": {
+    "cache-control": "s-maxage=60, stale-while-revalidate=31535940",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:52:58 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0126",
+  "status": "preserved_complete",
+  "title": "Department of Commerce Revises License Review Policy for Semiconductors Exported to China",
+  "write_state": "new_version_written"
+}

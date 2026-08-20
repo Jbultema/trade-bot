@@ -1,0 +1,270 @@
+{
+  "accepted_additions": {
+    "chapter_handoffs": {
+      "added": 21,
+      "updated": 20
+    },
+    "claims": {
+      "added": 0,
+      "already_present": 2
+    },
+    "economic_exposures": {
+      "added": 0,
+      "already_present": 36
+    },
+    "evidence_links": {
+      "added": 0,
+      "already_present": 9
+    },
+    "exposure_components": {
+      "added": 0,
+      "already_present": 51
+    },
+    "unknowns": {
+      "added": 30,
+      "already_present": 12
+    }
+  },
+  "candidate_data_root": "research/ai_financial_system/integration/candidate_data",
+  "canonical_data_root": "research/ai_financial_system/data",
+  "files": {
+    "capital_bridge.csv": {
+      "rows": 25,
+      "sha256": "8ce50ce804e07d052b517a67818abfbbe04676664a02a99f1523bf133b44a93b"
+    },
+    "capital_observations.csv": {
+      "rows": 108,
+      "sha256": "1a03f290f493b867160510d958156bb9ab5d6fac51ee5243eeb4e2fdb4116311"
+    },
+    "chapter_handoffs.csv": {
+      "rows": 47,
+      "sha256": "4005cd1104bf5536d39fa81699309c0da1541845e7c1e147a7e984a206119e3e"
+    },
+    "claim_confidence_history.csv": {
+      "rows": 34,
+      "sha256": "1322b0d2bb63c0a9c3e6bc840d1c4c80727bc0d549c353ab886bc4add4c92c2d"
+    },
+    "claim_economic_importance.csv": {
+      "rows": 34,
+      "sha256": "400add5d2889eef0b0cbb0d49be2346dcc19e31d235b19cc381dbf8026b4de38"
+    },
+    "claims.csv": {
+      "rows": 427,
+      "sha256": "8c7fab446fd44159c2847a5c0bacc87a6d1f9d69cfe4e321aa1352ab231d27ea"
+    },
+    "compute_asset_finance.csv": {
+      "rows": 20,
+      "sha256": "846ccfb2937927b4ca472be45767d6065295797cb971d0934a1793e3d1991bbc"
+    },
+    "compute_commitments.csv": {
+      "rows": 24,
+      "sha256": "6df7c4d9e4194858a9b18263b3b455604cb021cdfc4da6fbbd125bb55623a41e"
+    },
+    "compute_supply.csv": {
+      "rows": 10,
+      "sha256": "f5cfec3e073e57e318632ab86f59856c953981a20d157befc5cb5a2f5f18ec30"
+    },
+    "contracts.csv": {
+      "rows": 35,
+      "sha256": "59152f847658e7146fcb5b54bd2bf4532f578eb93745973c17a1161490887005"
+    },
+    "debt_instruments.csv": {
+      "rows": 20,
+      "sha256": "c694a99a5fab38f778a69a921cfa4d8a40f0b53a7a404ba47d9662b95f2a3cee"
+    },
+    "dependencies.csv": {
+      "rows": 69,
+      "sha256": "61c1a5b75158dff9e7cbb93c17fbc1767f2ee7b9a762bd11bf967972269ea168"
+    },
+    "economic_exposures.csv": {
+      "rows": 36,
+      "sha256": "2d48d1a6acd12964f8ca19ca04b574c9e8672ebba47c9521ee4f74b41b6c7173"
+    },
+    "entities.csv": {
+      "rows": 142,
+      "sha256": "261bbc3a5676845309a7ae343ba931d747a2d2e10d76b2afba2d11d396eabeeb"
+    },
+    "evidence_links.csv": {
+      "rows": 581,
+      "sha256": "519bc1323cd826c2655066c221b23a9f552221acdc9d21195884af843636c5ec"
+    },
+    "exposure_components.csv": {
+      "rows": 51,
+      "sha256": "175036b2fef67b65acdacb909860e194d7de183213c7b51dc100d1cac585da64"
+    },
+    "financial_flows.csv": {
+      "rows": 12,
+      "sha256": "0e3dcd7fa1779d64e265dde6ced34b3af989d957fce6a53f10dea1c7c7f9bf9b"
+    },
+    "funding_timeline.csv": {
+      "rows": 48,
+      "sha256": "6634a92f80b789e930cd1b3fe8ee6284b0ff8fcad3e9d92b4babbecc717b25d1"
+    },
+    "graph_selection_policy.csv": {
+      "rows": 10,
+      "sha256": "333de946b6f918174d4cbaf8821e5f68c68aca109aea4e90fe0591bfca7d156e"
+    },
+    "guarantees.csv": {
+      "rows": 13,
+      "sha256": "a2bb906e66445010337b9ff93e030216c533c2f1e945e715ca269d0b569fd38d"
+    },
+    "hyperscaler_capex_observations.csv": {
+      "rows": 52,
+      "sha256": "d94f863143cddfa2bbb629a6dc992947617f53abe0b68818aebe582cb2b8434e"
+    },
+    "hyperscaler_obligations.csv": {
+      "rows": 33,
+      "sha256": "9c7dca151f4facc4038f5a002e149337189c0aba81fd37c19e570145e0631d05"
+    },
+    "hyperscaler_revenue_funding.csv": {
+      "rows": 11,
+      "sha256": "015fd49c85b3606f382e3b7b2b508554552b90e80c615a3edd37c11807bdb647"
+    },
+    "investments.csv": {
+      "rows": 30,
+      "sha256": "c625cd08610fa449976d3ff6a1eca4f62696be2d06273018e2509be50dc721a5"
+    },
+    "laboratory_control.csv": {
+      "rows": 6,
+      "sha256": "ff6e831aec4aee13d1a15d11a47e13fa0b2c6baf4bf8e3bf7f332e75b849f2e1"
+    },
+    "laboratory_counterparty_flows.csv": {
+      "rows": 21,
+      "sha256": "85f9a72a48c74267630c8769444b716da94722ed77b928b68c735bd4e54006d0"
+    },
+    "laboratory_operating_observations.csv": {
+      "rows": 18,
+      "sha256": "31846db174a84ff92bc8559274c60ab113b1ac90d402b14edff22c34a4bef17e"
+    },
+    "leases.csv": {
+      "rows": 21,
+      "sha256": "0eeb7ea9f7253dc09840fe11a26dbf7df932fd0fd9c44a0fbaf695031445a132"
+    },
+    "ownership.csv": {
+      "rows": 14,
+      "sha256": "86ecf5c01a1e463d310e997a866a5108b48a8a210221b5800aa6c90ebe425360"
+    },
+    "power_agreements.csv": {
+      "rows": 5,
+      "sha256": "9a5637df3ecf353954bcce5bcd810b936ecfed1104f52b0688c753f55d2183f3"
+    },
+    "power_cost_waterfalls.csv": {
+      "rows": 31,
+      "sha256": "be0f0fb7eba03ed9e62eac123fd97e4aef445831b9761624821956e5807675de"
+    },
+    "power_infrastructure_assets.csv": {
+      "rows": 22,
+      "sha256": "e7153893cc8e6f0db8b2b8a75cb09e0c43bb0e6ebf236f160510e08cb087a977"
+    },
+    "power_system_cases.csv": {
+      "rows": 8,
+      "sha256": "2349592f379d3ba12bff3c29594bf542d5810376f5cc658c13192ce24ab98f67"
+    },
+    "private_credit_exposures.csv": {
+      "rows": 7,
+      "sha256": "3f64bd1b211d294fd16af114f6b0ade50bfe8634ce44aef2290e0af6599d4422"
+    },
+    "private_credit_fund_liquidity.csv": {
+      "rows": 2,
+      "sha256": "4bbd4623df3de28ab93c6f30de453295a9c2ac8274d8de465ff0afb58515364e"
+    },
+    "private_credit_measurement_reconciliations.csv": {
+      "rows": 6,
+      "sha256": "bcfcc3f44fefa61ad26bcc4b1e9570c968591b9643cc7f2ea2c5bb3dca4825cc"
+    },
+    "private_credit_valuation_clocks.csv": {
+      "rows": 7,
+      "sha256": "afe80107a9e60bcd9ae21ddecf100001749da57d204c72000cf662131c53252c"
+    },
+    "private_credit_warehouse_controls.csv": {
+      "rows": 2,
+      "sha256": "fd98571f3a11816cf97d43d6168ede42b1a0473638d02a7288b11a9220b5c86c"
+    },
+    "project_cash_waterfalls.csv": {
+      "rows": 41,
+      "sha256": "929c539a5513837f77e363c5edcc891f06ea6d0362a8ad3592125545673bc08d"
+    },
+    "project_delivery_milestones.csv": {
+      "rows": 21,
+      "sha256": "61bb8090652e89b31934686c8b81a6019a34fe681f285b1dc0b8ae53b5d8a2cb"
+    },
+    "project_finance_cases.csv": {
+      "rows": 5,
+      "sha256": "91df2adb820f3b911290b91005dc4d9a41009338b10835c1bea1ec9b73ae55b8"
+    },
+    "projects.csv": {
+      "rows": 15,
+      "sha256": "e5338469d2b9b63f6c95135aabd7391443806d3c763eb4fea32911f70aad5534"
+    },
+    "public_capital_awards.csv": {
+      "rows": 10,
+      "sha256": "1f72b510e204d1fab2a92c2309864bb922115de7f0061bed77733036b0bdacb6"
+    },
+    "public_capital_measurement_reconciliations.csv": {
+      "rows": 10,
+      "sha256": "6e2560b479b857e4c1f07ebd415c2266e4d00fc46cebecf266a0ca0996e26025"
+    },
+    "public_equity_positions.csv": {
+      "rows": 4,
+      "sha256": "b8d12bffc9b82096e5acdc271a228a3b384c7dd0f59de6bf5468dc0026596bc2"
+    },
+    "public_infrastructure_cost_allocation.csv": {
+      "rows": 4,
+      "sha256": "7e76b9ed24a43d5970abe86af0ca933826f508df7d0f71ec173a64d98968c1b9"
+    },
+    "public_tax_incentives.csv": {
+      "rows": 5,
+      "sha256": "ff00f7bb906ac19f183184aeeea4f2ceb168d9160745c144e870ed7a2f92399e"
+    },
+    "risk_pathways.csv": {
+      "rows": 16,
+      "sha256": "773f6f5b679b53db15479b7a1f3b16bb264e67d273b34f2b65a68a418ebddf29"
+    },
+    "semiconductor_capacity_finance.csv": {
+      "rows": 19,
+      "sha256": "8bda0469d6e3697cd45969498e9fc43d465b0d3bc9a35210a6e2248c219bebf9"
+    },
+    "semiconductor_loss_episodes.csv": {
+      "rows": 5,
+      "sha256": "1384b0109357f7440b6768a01d239a5365989de165815fff21d818914638282d"
+    },
+    "semiconductor_measurement_reconciliations.csv": {
+      "rows": 8,
+      "sha256": "7bd8a439676257b14643e5dc1056f9379dc92aeeeacb6cd80220581162abb0fb"
+    },
+    "semiconductor_physical_dependencies.csv": {
+      "rows": 24,
+      "sha256": "7e422be6ef0ec2cf2dfad8aa0b330d008fd4611b05265fa505ae77e0eb091d8b"
+    },
+    "semiconductor_regulatory_controls.csv": {
+      "rows": 3,
+      "sha256": "2fd7ba16a36013cea04d09af745456be5381a7291f11b0bd141030e62531aaa2"
+    },
+    "semiconductor_substitution_constraints.csv": {
+      "rows": 15,
+      "sha256": "d798e802078fa02acaaa707da27af07e3e64fd8bec43794be25cb0ab69c87825"
+    },
+    "source_register.csv": {
+      "rows": 156,
+      "sha256": "c1aa1ac7aa5574894a759cf08a77a3be8d50e68dcbf01846f5497774c4b4206c"
+    },
+    "sovereign_capital_cases.csv": {
+      "rows": 6,
+      "sha256": "31cadf1454e3105ad7cdda66c78ec7c8b2a672cd72d0699e589adfe451c902cc"
+    },
+    "unknowns.csv": {
+      "rows": 252,
+      "sha256": "d27506ec01ada079ac55bdec4db97be3435b282167491817d0863befc6e0f146"
+    },
+    "utilization_observations.csv": {
+      "rows": 0,
+      "sha256": "d02a6d19584cb33c65921bc349eb67b32ab115043fc9321d2108b28790f8ad7b"
+    }
+  },
+  "generated_at_utc": "2026-07-26T06:26:55.558648+00:00",
+  "limits": [
+    "This candidate integrates adjudicated new claims, evidence links, unknowns, and primary-accepted economic exposures.",
+    "Accepted chapter-handoff replacements and additions are candidate-only until the complete integration audit passes.",
+    "No canonical data file is modified by this builder."
+  ]
+}

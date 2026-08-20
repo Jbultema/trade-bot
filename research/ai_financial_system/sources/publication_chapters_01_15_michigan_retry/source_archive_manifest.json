@@ -1,0 +1,42 @@
+{
+  "boundary": "Byte preservation does not establish truth, scope, evidence grade, or semantic locator support.",
+  "failed_count": 0,
+  "generated_at_utc": "2026-07-27T01:12:24.265069+00:00",
+  "preserved_count": 1,
+  "record_count": 1,
+  "records": [
+    {
+      "access_or_licensing_restriction": "",
+      "byte_length": 142262,
+      "content_sha256": "6c3b72f2b481467f74893f60680697bf7370f5a6dfa8dcaf9285557c5f314364",
+      "exception_reason": "",
+      "extraction_method": "none_original_bytes",
+      "final_resolved_url": "https://www.michigan.gov/mpsc/commission/news-releases/2026/03/27/mpsc-goes-big-on-batteries",
+      "http_status": 200,
+      "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_michigan_retry/SRC-0099_6c3b72f2b481467f.html",
+      "locator_relationship": "pending_semantic_locator_review",
+      "mime_type": "text/html; charset=utf-8",
+      "original_url": "https://www.michigan.gov/mpsc/commission/news-releases/2026/03/27/mpsc-goes-big-on-batteries",
+      "preservation_class": "P1",
+      "preservation_method": "sequential_http_get",
+      "publication_date": "2026-03-27",
+      "publisher": "Michigan Public Service Commission",
+      "redirect_history": [],
+      "request_user_agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 Chrome/126.0 Safari/537.36",
+      "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_michigan_retry/SRC-0099_6c3b72f2b481467f.response.json",
+      "retrieval_completed_utc": "2026-07-27T01:12:24.206582+00:00",
+      "retrieval_started_utc": "2026-07-27T01:12:23.099511+00:00",
+      "selected_response_headers": {
+        "cache-control": "private, max-age=3600",
+        "content-length": "28491",
+        "content-type": "text/html; charset=utf-8",
+        "date": "Mon, 27 Jul 2026 01:12:24 GMT"
+      },
+      "source_id": "SRC-0099",
+      "status": "preserved_complete",
+      "title": "MPSC approval of first Saline data-center battery projects",
+      "tls_verification": "verified",
+      "write_state": "new_version_written"
+    }
+  ]
+}

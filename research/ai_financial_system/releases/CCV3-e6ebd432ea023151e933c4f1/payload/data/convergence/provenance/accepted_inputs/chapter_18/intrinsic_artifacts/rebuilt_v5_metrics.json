@@ -1,0 +1,12 @@
+{
+  "arithmetic_nonadditivity_controls": 20,
+  "coefficient_transfer_blocks": 18,
+  "compatibility_links": 86,
+  "exact_repairs_applied": 2,
+  "external_source_content_holds": 58,
+  "normalized_junction_links": 214,
+  "predictive_use_blocks": 16,
+  "preserved_prior_repairs": 17,
+  "retained_empirical_records": 128,
+  "status": "READY_FOR_FRESH_NONAUTHOR_REVIEW_WITH_EXTERNAL_HOLDS"
+}

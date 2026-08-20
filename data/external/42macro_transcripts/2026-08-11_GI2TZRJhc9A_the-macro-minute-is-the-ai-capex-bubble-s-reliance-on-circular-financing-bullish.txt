@@ -1,0 +1,203 @@
+source: 42macro_youtube
+published_date: 2026-08-11
+video_id: GI2TZRJhc9A
+url: https://www.youtube.com/watch?v=GI2TZRJhc9A
+title: The Macro Minute: Is the AI capex bubble’s reliance on circular financing bullish or bearish?
+
+Happy Tuesday out there, team 42. It's
+your skipper here, Darius Dale, to
+present our macro minute for Tuesday,
+August 11th, 2026. As always, we'll
+start with the executive summary from
+today's latest morning note, so let's
+dive right in. Today's key macro
+question is, is the AI CapEx bubble's
+increasing reliance on circular
+financing bullish or bearish? The short
+answer is both. It's overwhelmingly
+bullish for now. Respect the x-axis.
+As bulls will argue that because compute
+is increasingly serving as collateral
+for debt capital, transferable compute
+allows circular financing to be
+reallocated to different buyers in the
+event of a default, thus reducing the
+risk of capital impairment for other
+creditors. We agree. This is a
+profoundly bullish development that
+should propel the AI CapEx bubble to new
+heights. Shifting more of the financing
+burden to strong hands in the
+institutional investment community and
+away from weak-handed retail investors
+creates scope for substantial upside
+with respect to AI-related asset
+valuations because it reduces the
+marginal supply of equity and debt
+capital in public markets.
+Bears will argue that Nvidia has already
+signed many hundreds of billions of
+dollars in an AI in AI ecosystem deals
+and that these circular financing
+agreements artificially inflate industry
+demand and asset valuations, while
+genuinely inflating concentration risk
+in global financial markets.
+We agree with this take as well.
+The price Nvidia and its financing
+partners are paying for more runway to
+build out AI infrastructure is more
+circular financing, more concentration
+in investor portfolios, and ultimately
+more leverage chasing opportunities that
+have yet to yield significant
+productivity enhancements for end
+adopters of AI, enhancements that may
+not arrive on time on the accelerated
+timeline baked into current S&P 500
+earnings expectations. So, today's note
+was a doozy.
+We really went a deep dive on on the
+circular financing, a deep dive on the
+kind of capital demands from AI and how
+that's you know, kind of intersecting
+with capital demands for the US
+sovereign and sovereigns abroad and
+ultimately how that's all pushing up R
+star and what the implications of those
+dynamics are on on asset markets in the
+economy. So really really really really
+tour de force if you will and on this
+topic. We also unpack
+the the probability that you know, the
+Japan will ultimately force the Fed to
+print
+more in the context of this failed yen
+intervention. All the dynamics that are
+driving that from a Japanese yen carry
+trade perspective. So if you are
+interested in that definitely check that
+out as well. And then lastly we unpacked
+the July NFIB small business optimism
+survey data particularly as relates to
+the forward outlook for the US economy.
+So when you get a chance check that out
+as well. So as always a wrap up with the
+question from our community. This one's
+titled if the Fed doesn't run the play
+action pass. Says hi skipper, first a
+big thank you for the excellence of your
+work. I've only been a member for a few
+months and I'm already seeing the
+difference in how I approach markets.
+It's an incredible privilege that you
+also speak to smaller investors and I
+appreciate it every single day. So I
+appreciate you. Thank you for the kind
+compliment. Going back to the question.
+Says I listened to your interview with
+Adam Taggart last weekend. You explained
+that if the Fed doesn't run a play
+action pass, which is tightening
+cyclically and then to set up the run
+run being easy structurally. If the Fed
+doesn't run a play action pass, stocks
+should keep climbing and we'd have an
+excellent year. My question is about the
+other branch. If the Fed does run the
+play action pass, couldn't it end up
+spooking the bond market rather than
+reassuring it? In other words, couldn't
+long-term yields keep rising and
+eventually break the economy and the
+stock market along with it? I think he
+may be too simplistic and that's exactly
+why your insight on this was so valuable
+to me. Thank you so much. So the first
+thing I'd say is it's unlikely that the
+bond market will blow up in the event of
+Fed tightening monetary policy and
+here's why.
+Tight money makes bond prices go up
+yields go down. Easy money makes bond
+prices go down yields go up because easy
+money inflates nominal growth and tight
+money deflates nominal growth. It's as
+simple as that. Are there other dynamics
+at play as well, but certainly not for
+for macro minute.
+But, you know, just simplistically think
+about the bond market from that
+perspective. It's all about the bond
+market's yield level is a is a signal to
+capital allocators, to investors,
+you know, how much it wants their
+capital. The higher the yield, the more
+the bond market is desperately screaming
+to capital allocators that it it really
+needs their capital and the more the
+bond market really needs their capital
+from the perspective of higher yields,
+that obviously drains capital from the
+private sector and could cause problems
+in the economy and risk asset markets.
+Right now, the Fed is currently about
+two rate hikes away from getting back to
+neutral according to our market implied
+Fed neutral rate model, R* has risen by
+about, you know, 50 to 75 basis points
+over the, you know, since the end of
+February, at least according to our R*
+model. And if that's true, then
+ultimately you have a Federal Reserve
+who's modestly in accommodative
+territory, specifically as it relates to
+the policy rate. We know the balance
+sheet is in accommodative territory. You
+know, I think it's the monetary base is
+about 17% of GDP compared to a long-run
+mean or a mean pre-GFC mean somewhere in
+like the four to six range. So, clearly
+the balance sheet is in in accommodative
+territory. So, you know, as long as you
+have a Federal Reserve that's in
+accommodative territory during a time
+where there's a massive capital
+expenditure boom globally, you know,
+across across the world, then you
+ultimately it's going to continue to
+push up interest rates. So, ultimately
+in our view, a Fed that does play action
+passive a Fed that does tighten
+cyclically will ultimately actually tone
+down volatility in the bond market. But,
+obviously this could be at the expense
+of of the equity market.
+It's our view that the probability of
+that being at the expense of the equity
+market has actually declined in recent
+weeks in the context of the signals that
+we're getting from the Treasury. So,
+check out our
+research from the past a couple of weeks
+on that. So, we'll wrap it up there.
+Darius Dale here presenting our macro
+minute for Tuesday, August 11th, 2026.
+Best of luck out there today. I got to
+catch back here. We're actually going to
+catch back here on Monday. I got a
+conference this weekend and we got our
+macro scouting report. So, our next
+macro minute will be on Monday of next
+week. So, everyone have a wonderful
+week. 42 macro members,
+get excited for our August macro
+scouting report on Thursday. It's going
+to be a tour de force of everything you
+need to know to stay on the right side
+of market risk from the perspective of
+the six key macro cycles and always
+through the lens of our kiss and Dr. Mo
+risk management overlay. So, we'll wrap
+it up there. Everyone have a great day.
+Cheers.

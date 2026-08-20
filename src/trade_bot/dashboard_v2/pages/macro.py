@@ -382,8 +382,8 @@ def _render_visual_explorer(*, prices: pd.DataFrame, macro_data: pd.DataFrame) -
     range_cols = st.columns([1, 1, 2])
     range_choice = range_cols[0].selectbox(
         "Time range",
-        ["6M", "1Y", "3Y", "5Y", "All", "Custom"],
-        index=2,
+        ["6M", "YTD", "1Y", "3Y", "5Y", "All", "Custom"],
+        index=3,
         key="dashboard_v2_macro_range",
     )
     custom_start = None
@@ -595,6 +595,8 @@ def _slice_time_range(
     end = pd.to_datetime(custom_end) if custom_end is not None else working.index.max()
     if range_choice == "Custom":
         start = pd.to_datetime(custom_start) if custom_start is not None else working.index.min()
+    elif range_choice == "YTD":
+        start = pd.Timestamp(year=int(end.year), month=1, day=1)
     else:
         days = {"6M": 183, "1Y": 365, "3Y": 365 * 3, "5Y": 365 * 5}.get(range_choice, 365 * 3)
         start = end - pd.Timedelta(days=days)

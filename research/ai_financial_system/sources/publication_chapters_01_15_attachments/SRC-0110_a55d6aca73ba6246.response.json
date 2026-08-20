@@ -1,0 +1,33 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 127130,
+  "content_sha256": "a55d6aca73ba6246385d885fbb41a4efa55c92033cb644b48fda671814e0754f",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/114aaca0fea2050e96b91fffbab9ed04ba09cd92/FS.pdf",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/publication_chapters_01_15_attachments/SRC-0110_a55d6aca73ba6246.pdf",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "application/pdf",
+  "original_url": "https://investor.tsmc.com/english/encrypt/files/encrypt_file/reports/2026-07/114aaca0fea2050e96b91fffbab9ed04ba09cd92/FS.pdf",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-07-16",
+  "publisher": "Taiwan Semiconductor Manufacturing Company Limited",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/publication_chapters_01_15_attachments/SRC-0110_a55d6aca73ba6246.response.json",
+  "retrieval_completed_utc": "2026-07-27T01:09:52.865886+00:00",
+  "retrieval_started_utc": "2026-07-27T01:09:51.821796+00:00",
+  "selected_response_headers": {
+    "cache-control": "max-age=600, public",
+    "content-length": "127130",
+    "content-type": "application/pdf",
+    "date": "Mon, 27 Jul 2026 01:09:52 GMT",
+    "last-modified": "Wed, 15 Jul 2026 03:22:12 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0110",
+  "status": "preserved_complete",
+  "title": "TSMC second-quarter 2026 condensed financial statements",
+  "write_state": "new_version_written"
+}

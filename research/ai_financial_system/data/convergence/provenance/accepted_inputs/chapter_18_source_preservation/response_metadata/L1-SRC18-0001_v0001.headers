@@ -1,0 +1,14 @@
+HTTP/2 200 
+content-type: application/pdf
+content-length: 303738
+x-content-type-options: nosniff
+last-modified: Sun, 02 Feb 2020 15:57:12 GMT
+accept-ranges: bytes
+x-request-id: v-a112275c-891f-11f1-bf2c-378255270e1e
+x-ah-environment: prod
+x-age: 0
+cache-control: max-age=1744
+expires: Sun, 26 Jul 2026 18:57:16 GMT
+date: Sun, 26 Jul 2026 18:28:12 GMT
+strict-transport-security: max-age=15768000
+

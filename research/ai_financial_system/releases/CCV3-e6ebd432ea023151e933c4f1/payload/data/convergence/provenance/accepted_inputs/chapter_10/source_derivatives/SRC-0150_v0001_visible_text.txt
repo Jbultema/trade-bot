@@ -1,0 +1,115 @@
+[[PDF_PAGE_0001]]
+Part IV – Items of General Interest
+Federal Income Tax Treatment of Certain Amounts Paid or Incurred Pursuant to
+Agreements with the Department of Commerce Required Under the CHIPS Act of 2022
+Announcement 2024-40
+This announcement confirms for purposes of § 48D of the Internal Revenue
+Code (Code)
+1 that amounts paid or incurred by a taxpayer for the construction,
+expansion, or modernization of advanced manufacturing facilities pursuant to an
+agreement entered into with the United States Department of Commerce (Commerce
+Department) under 15 U.S.C. 4652(a)(6)(C)
+2 will not fail, solely by reason of such
+agreement, to constitute a “qualified investment” for purposes of determining the
+amount of any advanced manufacturing investment credit under § 48D (§ 48D credit).
+Section 48D(a) provides that the § 48D credit is an amount equal to 25 percent of
+the qualified investment for any taxable year with respect to any advanced
+manufacturing facility of an eligible taxpayer. Section 48D(b)(1) provides that the
+“qualified investment” with respect to any advanced manufacturing facility for any
+taxable year is the basis of any qualified property placed in service by the taxpayer
+during such taxable year that is part of an advanced manufacturing facility. The basis
+determined with respect to any qualified property includes capital expenditures, as
+1 Unless otherwise specified, all “section” or “§” references are to sections of the Code and the Income
+Tax Regulations.
+2 The CHIPS Act of 2022 (CHIPS Act), enacted as Division A of Public Law 117-167, 136 Stat. 1366,
+1372-1399 (August 9, 2022), amended Division H of the William M. (Mac) Thornberry National Defense
+Authorization Act for Fiscal Year 2021 (FY 2021 NDAA), Public Law 116-283, 134 Stat. 3388, 4843-4860
+(January 1, 2021) (15 U.S.C. 4651, et seq).
+
+[[PDF_PAGE_0002]]
+2
+defined in § 263 and §§ 1.263(a)–1 through 1.263(f)–1, with respect to the qualified
+property.
+The FY 2021 NDAA, as amended by the CHIPS Act, established a
+semiconductor incentives program administered by the Commerce Department (CHIPS
+Incentives Program) to incentivize investments in facilities and equipment in the United
+States for the fabrication, assembly, testing, advanced packaging, production, or
+research and development of semiconductors, materials used to manufacture
+semiconductors, or semiconductor manufacturing equipment.
+3 To implement the
+CHIPS Incentives Program, Congress authorized the Department of Commerce to
+provide funding via grants, cooperative agreements, loans, loan guarantees, and other
+transactions, which are collectively referred to as “awards” in this announcement. A
+taxpayer receiving an award under the CHIPS Incentives Program must enter into an
+agreement with the Commerce Department to ensure that the requirements of 15
+U.S.C. 4652(a)(6)(C) are satisfied. The agreement will specify the terms and conditions
+of the award, including the circumstances under which the award will be “clawed back”
+by the Commerce Department. The agreement will include the condition that the award
+be used for the construction, expansion, or modernization of a facility as well as
+performance milestones for the receipt of the award.
+Agreements entered into with the Commerce Department for awards related to
+the construction, expansion, or modernization of facilities are not long-term contracts
+3 On September 25, 2023, the CHIPS Program Office, National Institute of Standards and Technology,
+Department of Commerce published a final rule, Preventing the Improper Use of CHIPS Act Funding, in
+the Federal Register (88 FR 65600) to add part 231, subchapter C, to 15 CFR chapter II to provide
+guidance under 15 USC 4651, et seq., including a clarification that semiconductor wafer production is
+included within the definition of semiconductor manufacturing.
+
+[[PDF_PAGE_0003]]
+3
+within the meaning of § 460(f)(1) and § 1.460-1(b)(1)4 because § 460 and the
+regulations thereunder contemplate an agreement with a customer for the construction
+of the “subject matter” of the contract and payment of a “contract price” as
+compensation for the “subject matter” of the contract. See §§ 1.460-1(c)(3)(i) (date
+contract completed based in part on use of the subject matter of the contract by the
+customer for its intended purpose) and 1.460-4(b)(4) (definition of total contract price).
+A taxpayer that receives an award related to the construction of an advanced
+manufacturing facility under the CHIPS Incentives Program is constructing the facility on
+its own behalf. Moreover, the award does not purport to compensate the taxpayer for
+the cost of the project as the award amount typically does not approximate the project
+cost, much less provide the taxpayer a return. Consequently, grants and other taxable
+awards received,
+5 and costs paid or incurred, for the construction, expansion, or
+modernization of facilities pursuant to agreements to effectuate the requirements of 15
+U.S.C. 4652 are not subject to the PCM under § 460(a) and § 1.460-4(b).
+In addition, § 263(a) and § 1.263(a)-1(a) provide that no deduction is allowed for
+capital expenditures, such as amounts paid for new buildings, or for permanent
+4 Section 460(f)(1) and § 1.460-1(b)(1) provide that the term “long-term contract” means any contract for
+the manufacture, building, installation, or construction of property if such contract is not completed within
+the taxable year in which such contract is entered into. Section 1.460-1(a)(1) provides, in part, that a
+taxpayer generally must determine the income from a long-term contract using the percentage-of-
+completion method (PCM) described in § 1.460-4(b) and the cost allocation rules described in § 1.460-5.
+Under § 1.460-4(b)(2), allocable contract costs are deducted as incurred. Under § 1.460-1(d), long-term
+contract methods of accounting apply only to the gross receipts and costs attributable to long-term
+contract activities. Gross receipts and costs attributable to non-long-term contract activities generally
+must be taken into account using a permissible method of accounting other than a long-term contract
+method.
+5 Government grants generally constitute gross income under § 61(a). See § 1.61-14 (clarifying that
+gross income encompasses various kinds of income not enumerated in the statute); Rev. Rul. 79-356,
+1979-2 C.B. 28 (grants received from the Department of Housing and Urban Development for the
+installation of solar hot water systems are includible in gross income under § 61); see also § 118(a) and
+(b)(2) (providing that contributions to the capital of a corporation by any governmental entity (other than a
+contribution made by a shareholder as such) are not excludable from gross income under § 118(a)).
+
+[[PDF_PAGE_0004]]
+4
+improvements or betterments made to increase the value of property. Section 1.263(a)-
+2(d)(1) provides that capital expenditures include amounts paid to acquire or produce
+buildings, machinery and equipment, and furniture and fixtures. Section 1.263(a)-1(b)
+provides that § 263A, which requires taxpayers to capitalize the direct and allocable
+indirect costs to property produced by the taxpayer and property acquired for resale,
+remains applicable.
+Because agreements to effectuate the requirements of 15 U.S.C. 4652 are not
+long-term contracts subject to § 460, amounts paid or incurred for the construction,
+expansion, or modernization of advanced manufacturing facilities pursuant to such
+agreements that are capital expenditures under § 263(a) and the regulations thereunder
+may constitute qualified investment for purposes of the § 48D credit provided that the
+requirements of § 48D and the regulations thereunder are otherwise satisfied, including
+that amounts are paid or incurred for property constructed, reconstructed, or erected by
+the taxpayer, or acquired by the taxpayer, and the original use commences with the
+taxpayer.
+The principal author of this announcement is Kyle C. Griffin of the Office of
+Associate Chief Counsel (Income Tax and Accounting). For further information
+regarding this announcement, please contact Laureen McCloskey of the Office of
+Associate Chief Counsel (Income Tax and Accounting) at (202) 317-7006 (not a toll-free
+call)

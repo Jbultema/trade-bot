@@ -1,0 +1,21 @@
+HTTP/2 403 
+date: Sun, 26 Jul 2026 19:13:58 GMT
+content-type: text/html; charset=UTF-8
+content-length: 5950
+accept-ch: Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA
+cf-mitigated: challenge
+content-security-policy: default-src 'none'; script-src 'nonce-aTBRgCQTPgQCsg6xRn8FS7' 'unsafe-eval' https://challenges.cloudflare.com; script-src-attr 'none'; style-src 'unsafe-inline'; img-src 'self' https://challenges.cloudflare.com; connect-src 'self' https://challenges.cloudflare.com; frame-src 'self' https://challenges.cloudflare.com blob:; child-src 'self' https://challenges.cloudflare.com blob:; worker-src blob:; form-action http: https:; base-uri 'self'
+server: cloudflare
+critical-ch: Sec-CH-UA-Bitness, Sec-CH-UA-Arch, Sec-CH-UA-Full-Version, Sec-CH-UA-Mobile, Sec-CH-UA-Model, Sec-CH-UA-Platform-Version, Sec-CH-UA-Full-Version-List, Sec-CH-UA-Platform, Sec-CH-UA, UA-Bitness, UA-Arch, UA-Full-Version, UA-Mobile, UA-Model, UA-Platform-Version, UA-Platform, UA
+cross-origin-embedder-policy: require-corp
+cross-origin-opener-policy: same-origin
+cross-origin-resource-policy: same-origin
+origin-agent-cluster: ?1
+permissions-policy: accelerometer=(),camera=(),clipboard-read=(),clipboard-write=(),geolocation=(),gyroscope=(),hid=(),magnetometer=(),microphone=(),payment=(),publickey-credentials-get=(),screen-wake-lock=(),serial=(),sync-xhr=(),usb=(),xr-spatial-tracking=*
+referrer-policy: same-origin
+server-timing: chlray;desc="a215b9861fc9ec1b"
+x-content-type-options: nosniff
+x-frame-options: SAMEORIGIN
+set-cookie: __cf_bm=mfm5oAf8Vzea9TfXgmUbOu3Rc6ciyELHmHRlmvJAcXA-1785093238.7352824-1.0.1.1-OOwtrHlLOXJwnJUY6BTAIfsuPIHD2cHchyouwLJtgrjy_Ky1xZApLgoIYJhlpVqhZnkg4JUuAlfEs5CNnmeK7Q4YbEqGO2fzHkndgBeKo7kflIV3fiCreQUprjfAOwqd; HttpOnly; SameSite=None; Secure; Path=/; Domain=commerce.gov; Expires=Sun, 26 Jul 2026 19:43:58 GMT
+cf-ray: a215b9861fc9ec1b-SEA
+

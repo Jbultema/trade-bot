@@ -10,6 +10,7 @@ from trade_bot.dashboard.components import _helped_metric, _render_metric_datafr
 from trade_bot.dashboard.formatting import _display_metrics
 from trade_bot.dashboard.trends import (
     compact_metric_line_figure,
+    filter_history_time_range,
     latest_per_market_date,
     load_snapshot_trend_frames,
     long_metric_line_figure,
@@ -341,12 +342,27 @@ def _render_regime_instability_history(
     run_store_path: str,
     artifact_dir: str,
     job_log_dir: str,
+    range_choice: str = "All",
+    custom_start: object | None = None,
+    custom_end: object | None = None,
 ) -> None:
     metric_history, component_history, _scenario_driver_history, _driver_rotation_history = (
         load_snapshot_trend_frames(run_store_path, artifact_dir, job_log_dir)
     )
     metric_history = latest_per_market_date(metric_history)
     component_history = latest_per_market_date(component_history, subset=["component"])
+    metric_history = filter_history_time_range(
+        metric_history,
+        range_choice,
+        custom_start=custom_start,
+        custom_end=custom_end,
+    )
+    component_history = filter_history_time_range(
+        component_history,
+        range_choice,
+        custom_start=custom_start,
+        custom_end=custom_end,
+    )
     st.caption("Regime-instability trend from saved snapshots")
     cols = st.columns(2)
     with cols[0]:
@@ -386,11 +402,20 @@ def _render_portfolio_risk_history(
     run_store_path: str,
     artifact_dir: str,
     job_log_dir: str,
+    range_choice: str = "All",
+    custom_start: object | None = None,
+    custom_end: object | None = None,
 ) -> None:
     metric_history, _component_history, _scenario_driver_history, _driver_rotation_history = (
         load_snapshot_trend_frames(run_store_path, artifact_dir, job_log_dir)
     )
     metric_history = latest_per_market_date(metric_history)
+    metric_history = filter_history_time_range(
+        metric_history,
+        range_choice,
+        custom_start=custom_start,
+        custom_end=custom_end,
+    )
     st.caption("Portfolio risk constraint trend from saved snapshots")
     cols = st.columns(2)
     with cols[0]:

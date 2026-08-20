@@ -1,0 +1,246 @@
+For Release 8:30 A.M. EDT, Tuesday, April 17, 2001       CB01-71
+
+
+             HOUSING STARTS AND BUILDING PERMITS IN MARCH 2001
+          
+
+PRIVATELY OWNED HOUSING STARTS
+
+Privately owned housing starts in March were at a seasonally adjusted annual
+rate of 1,613,000, according to estimates reported today by the U.S.
+Commerce Department's Bureau of the Census.  This is 1 (+/-6) percent below the
+revised February rate of 1,634,000 and 1 (+/-7) percent below the March
+2000 rate of 1,630,000.
+
+Single-family housing starts in March 2001 were at a rate of 1,241,000; this
+is 4 (+/-6)  percent below the February figure of 1,297,000.  The March rate
+for units in buildings with five units or more was 330,000. The March rate for
+units in buildings with two to four units was 42,000.
+
+During the first 3 months of this year, 349,500 housing units were started
+compared with 364,600 units for the same period in 2000.  This is a decrease
+of 4 (+/-4)  percent.
+
+BUILDING PERMITS
+
+The seasonally adjusted annual rate of housing units authorized by building
+permits in March was 1,615,000.  This is 4 (+/-1) percent below the revised
+February rate of 1,675,000, but 1 (+/-1) percent above the March 2000 estimate
+of 1,597,000.
+                                                       
+Single-family authorizations in March 2001 were at a rate of 1,203,000; this
+is 3 (+/-1) percent below the February figure of 1,239,000.  Authorizations
+of units in buildings with five units or more were at a rate of 340,000 in
+March.  The March rate of permit-authorized units in buildings with two to four
+units was 72,000.
+
+During the first 3 months of this year, 370,600 housing units were authorized
+compared with 368,600 units for the same period in 2000.  This is an
+increase of 1 (+/-1)  percent.
+
+The next press release is scheduled to be issued on Wednesday, May 16, 2001,
+at 8:30 A.M. EDT.
+                                   
+EXPLANATORY NOTES
+In interpreting changes in the statistics in this release, note that month-to-
+month changes in seasonally adjusted statistics often show movements which
+may be irregular.  It may take 5 months to establish an underlying trend for
+total starts and 3 months for building permit authorizations. The statistics 
+in this release are estimated from sample surveys and are subject to sampling 
+variability as well as nonsampling error including bias and variance from 
+response, nonreporting, and undercoverage.  Estimated average relative standard 
+errors of preliminary data are shown in the tables.  Whenever a statement 
+such as "2 (+/-3) percent above" appears in the text, this indicates the range 
+(-1 to +5 percent) in which the actual percent change is likely to have occurred.  
+All ranges given for percent changes are 90- percent confidence intervals and 
+account only for sampling variability.  If a range contains zero, it is uncertain 
+whether there was an increase or decrease; that is, the change is not 
+statistically significant.  For any comparison cited without a confidence interval, 
+the change is statistically significant.  The January 2001 Current Construction 
+Reports, C20/01-1, includes explanations of confidence intervals and sampling 
+variability.  On average, the preliminary seasonally adjusted estimates of total 
+housing starts and building permits are revised about +/-1 percent.
+
+
+Table 1.  New Privately Owned Housing Units Started
+
+(Thousands of units.  Detail may not add to total because of rounding.)
+
+
+                                  In structures with --
+
+ Period                    Total                                 North-  Midwest  South  West
+                                                 3 and 4 5 units   east
+                                  1 unit 2 units   units or more
+
+
+ 1a.  Seasonally adjusted annual rate
+
+
+  2000 - March              1630    1327      16             287     155     330    772   373
+
+         April              1652    1310      30             312     140     370    710   432
+         May                1591    1258      26             307     148     345    737   361
+         June               1571    1227      39             305     144     301    762   364
+
+         July               1527    1201      43             283     144     318    674   391
+         August             1519    1229      41             249     145     299    703   372
+         September          1537    1226      41             270     157     308    674   398
+
+         October            1529    1232      40             257     158     317    720   334
+         November           1564    1233      41             290     146     326    670   422
+         December           1577    1298      37             242     167     255    714   441
+
+  2001 - January (r)        1671    1351      43             277     127     396    747   401
+         February (r)       1634    1297      24             313     151     363    743   377
+
+         March (p)          1613    1241      42             330     157     353    700   403
+
+Average RSE (%)                3       3       9               9       7       6      4     4
+
+
+ 1b.  Not seasonally adjusted
+
+
+ 1999                     1666.5  1334.9    13.4    18.5   299.7   153.7   356.4  760.3 396.1
+ 2000                     1593.1  1261.8    13.8    22.3   295.3   152.1   328.6  723.4 389.1
+
+Average RSE (%)                1       1       7      11       3       3       2      1     1
+
+  2000 First 3 months      364.6   286.0     2.6     3.0    73.1    30.0    64.1  181.9  88.5
+  2001 First 3 months      349.5   278.8     2.9     4.4    63.4    27.0    61.9  171.7  88.8
+
+Average RSE (%)                2       1       8      18       8      13       4      2     2
+
+
+  2000 - March             137.2   115.3     0.7     0.5    20.7    11.9    25.4   68.4  31.5
+
+         April             151.8   121.5     1.3     1.4    27.5    12.2    35.8   65.6  38.1
+         May               155.3   125.7     1.4     0.7    27.5    14.2    35.6   70.2  35.3
+         June              148.5   118.7     1.0     3.2    25.6    14.2    31.4   68.2  34.6
+
+         July              138.0   108.5     1.0     3.3    25.2    14.6    30.8   57.6  34.9
+         August            142.0   114.8     1.0     2.9    23.2    13.9    29.8   62.6  35.7
+         September         132.4   104.6     1.2     2.4    24.3    14.2    28.6   56.0  33.7
+
+         October           141.3   111.0     2.1     2.1    26.1    15.2    32.6   64.6  28.9
+         November          117.8    90.7     1.2     2.0    23.9    12.1    25.5   49.3  30.9
+         December          101.6    80.2     1.0     1.4    18.9    11.4    14.4   47.3  28.5
+
+  2001 - January (r)       106.3    85.5     1.0     1.4    18.4     6.6    17.2   54.0  28.5
+         February (r)      108.0    85.8     0.6     0.8    20.7     8.2    17.8   56.1  26.0
+
+         March (p)         135.2   107.5     1.3     2.1    24.3    12.2    26.9   61.7  34.4
+
+Average RSE (%)                3       3      11      13       9       7       6      4     4
+
+    (p) Preliminary.    (r) Revised.    (X) Not applicable.
+    (Z) Less than 50 units or less than 0.5 percent.
+
+    Average relative standard error (Avg. RSE):   Annual -- Avg. RSE for the last 2 years;
+        Year to Date -- Avg. RSE for the current period and the same period last year;
+        Monthly -- Avg. RSE for the latest 6 month period (January-June or July-December).
+
+
+Table 2.  Privately Owned Housing Units Authorized by Building Permits
+
+(Thousands of units.  Detail may not add to total because of rounding.)
+
+
+                               In structures with --
+
+   Period                 Total                                 North-  Midwest   South    West
+                                                3 and 4 5 units   east
+                                 1 unit 2 units   units or more
+
+
+ 2a.  Seasonally adjusted annual rate (19,000 permit-issuing places)
+
+
+  2000 - March             1597    1238      68             291     164     364     679     390
+
+         April             1559    1164      58             337     162     342     664     391
+         May               1511    1150      62             299     153     310     683     365
+         June              1528    1127      61             340     150     311     675     392
+
+         July              1511    1117      55             339     156     316     666     373
+         August            1486    1140      66             280     140     300     644     402
+         September         1518    1157      65             296     159     311     669     379
+
+         October           1546    1191      66             289     152     327     680     387
+         November          1598    1183      67             348     168     294     723     413
+         December          1507    1158      53             296     145     263     667     432
+
+  2001 - January           1724    1287      57             380     148     343     759     474
+         February (r)      1675    1239      68             368     192     329     737     417
+
+         March (p)         1615    1203      72             340     146     316     728     425
+
+Average RSE (%)               1    (Z)        5               2       2       2       1       1
+
+
+ 2b.  Not seasonally adjusted (19,000 permit-issuing places)
+
+
+ 1999                   1,663.5 1,246.7    32.5    33.3   351.1   164.9   345.4   748.9   404.3
+ 2000                   1,574.4 1,183.5    30.1    32.4   328.4   161.1   318.1   697.4   397.8
+
+Average RSE (%)            (Z)     (Z)        2       3    (Z)        1       1       1       1
+
+  2000 First 3 months     368.6   279.5     7.0     7.1    74.9    34.0    69.2   171.7    93.7
+  2001 First 3 months     370.6   277.8     6.7     7.6    78.5    31.3    62.7   176.9    99.8
+
+Average RSE (%)            (Z)     (Z)        2       4    (Z)        2       1       1       1
+
+  2000 - March            147.0   116.3     2.7     3.1    24.8    14.1    32.2    64.8    36.0
+
+         April            135.1   104.1     2.4     2.5    26.0    14.2    31.6    56.3    33.1
+         May              145.3   116.0     2.5     3.2    23.6    15.1    32.3    63.1    34.8
+         June             151.9   112.4     3.1     3.0    33.4    15.7    30.2    65.1    40.9
+
+         July             128.3    96.4     2.2     2.2    27.5    13.9    27.7    54.5    32.2
+         August           141.1   108.9     2.9     3.3    26.0    13.8    30.2    59.1    38.0
+         September        129.1    94.9     2.3     3.3    28.6    13.6    27.3    56.3    32.0
+
+         October          134.5   101.6     3.1     3.4    26.4    13.6    31.5    57.3    32.1
+         November         119.6    86.2     2.4     3.0    28.0    13.7    23.1    52.9    29.8
+         December         100.6    72.2     1.8     1.8    24.8     9.7    15.1    46.0    29.8
+
+  2001 - January          114.8    84.2     1.6     2.0    27.1     8.6    16.9    56.3    33.0
+         February (r)     111.8    83.4     2.3     2.2    23.8    10.5    18.4    54.3    28.6
+
+         March (p)        143.2   109.8     2.7     3.4    27.3    12.0    27.2    66.3    37.6
+
+Average RSE (%)               1    (Z)        5       4       2       2       2       1       1
+
+
+ 2c.  Not started at end of period - not seasonally adjusted (19,000 permit-issuing places)
+
+
+  2000 - March            150.9    93.6     3.3            54.0    17.3    22.3    80.1    31.2
+
+  2001 - January  (r)     142.6    83.3     3.6            55.7    17.1    19.2    71.8    34.6
+         February (r)     145.7    85.4     5.0            55.3    18.5    20.1    71.0    36.1
+
+
+         March (p)        155.8    95.4     5.3            55.0    17.9    21.4    77.6    38.9
+
+Average RSE (%)               3       4       8               5      13       8       4       6
+
+
+    (p) Preliminary.    (r) Revised.    (X) Not applicable.
+    (Z) Less than 50 units or less than 0.5 percent.
+
+    Average relative standard error (Avg. RSE):   Annual -- Avg. RSE for the last 2 years;
+        Year to Date -- Avg. RSE for the current period and the same period last year;
+        Monthly -- Avg. RSE for the latest 6 month period (January-June or July-December).
+
+
+Questions regarding these data may be directed to the Manufacturing and
+Construction Division, Residential Construction Branch, telephone(301)457-1321.
+
+
+
+
+
+

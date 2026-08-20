@@ -1,0 +1,28 @@
+{
+  "boundary": "clean build proof does not create substantive or publication authority",
+  "builder_output_file_count": 209,
+  "byte_identical_builds_and_root": true,
+  "clean_builds": [
+    {
+      "build_index": 1,
+      "build_returncode": 0,
+      "build_stderr": "",
+      "build_stdout": "",
+      "validation_returncode": 0,
+      "validation_status": "PASS",
+      "validation_stderr": ""
+    },
+    {
+      "build_index": 2,
+      "build_returncode": 0,
+      "build_stderr": "",
+      "build_stdout": "",
+      "validation_returncode": 0,
+      "validation_status": "PASS",
+      "validation_stderr": ""
+    }
+  ],
+  "protected_no_write": true,
+  "protected_targets": 11,
+  "status": "PASS"
+}

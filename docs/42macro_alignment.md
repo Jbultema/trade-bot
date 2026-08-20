@@ -79,63 +79,94 @@ poetry run trade-bot seed-operating-history \
   --frequency B \
   --daily-tail-market-days 0 \
   --max-points 2000 \
-  --primary-strategy i111_reentry_vol_target_fast_21d
+  --primary-strategy i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145
 ```
 
-## Current Read: July 21, 2026
+## Current Read: August 18, 2026
 
-The refreshed corpus includes 256 transcript-backed videos through July 21,
-including the July 20 AI-capex pair and the July 21 short-squeeze/correction
-discussion. The current comparison is broadly aligned after correcting an old
-posture-mapping error:
+The refreshed corpus contains 276 unique public videos through August 18. All
+23 public videos published from July 20 through August 18 are transcript-backed,
+and Trade Bot now has 22 business-day point-in-time rows over the same interval.
+The history was rebuilt under one evaluation regime and with the current
+configured primary strategy,
+`i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145`.
 
-- 42 Macro's July 21 transcript is classified `constructive_but_fragile`
-  (-0.15). Its horizon-specific message is more nuanced than that scalar: the
-  current regime is still risk-on, crowded shorts can support a squeeze first,
-  and a correction, recovery, and eventual crash/regime break remain plausible
-  in that order.
-- Trade Bot is `cautious` (-0.27), based on its actual 63.73% final defensive
-  allocation rather than its 90% risk-budget capacity.
-- The absolute posture gap is 0.13, which is an aligned classification. The
-  systems agree most clearly on elevated dispersion/concentration, AI-capex
-  fragility, and credit as a confirmation channel. Trade Bot is more defensive
-  on immediate sizing; 42 Macro is more explicit that positioning can insulate
-  the index and power a near-term squeeze before the regime changes.
+### Bottom line
 
-The six newest transcript-backed videos add useful horizon detail that the
-single lexical score cannot preserve:
+42 Macro's public stance changed in three phases. From July 28 through roughly
+August 3 it emphasized scarce capital, hyperscaler credit, bond volatility,
+possible Fed tightening, and the risk that an AI-financing unwind could become a
+broader correction. From August 5 onward, Treasury financing policy and softer
+labor/housing evidence reduced its perceived need for Fed tightening. By August
+10 it answered that investors could remain sanguine "for now"; on August 11 it
+called circular AI financing "overwhelmingly bullish for now" while retaining a
+clear longer-run concentration and leverage warning. On August 14 it argued that
+the AI capex bubble is likely to end in a secular bear market, but explicitly did
+not call for immediate selling. On August 17-18 it identified capital competition
+and rising global long yields as an accelerating correction risk while remaining
+bullish over 12 months and cautious over the next few months.
 
-| Date | Public topic | Human horizon read | Comparison with Trade Bot |
+Trade Bot completed the re-risking that was still pending on August 11. Final
+defense fell from 66.37% on August 11 to 49.05% on August 14 and 48.57% on August
+17-18. The August 18 risk score was 0.43 and the one-month risk-off probability
+was 24.07%. Market trend, credit, AI leadership, and drawdown resilience remained
+supportive; duration support (-0.26) and energy/inflation relief (-0.65) were
+adverse, cross-sectional dispersion remained stressed, and the portfolio engine
+added 2.51 percentage points of defense. Scenario and narrative sizing authority
+remained zero.
+
+The current comparison is therefore **broadly aligned constructive fragility**,
+not the major stance divergence implied by the lexical score. 42 Macro is more
+concerned about correction risk over the next few months. Trade Bot sees the same
+duration/inflation pressure but does not yet see credit, volatility, or broad
+trend confirmation of a systemic break.
+
+### Matched-date evidence
+
+| Date | 42 Macro public message | Trade Bot matched state | Interpretation |
 |---|---|---|---|
-| Jul 14 | Fed tightening and AI-capex bubble | Fed likely on hold, but AI spending and concentration are bubble-like; eventual easing is medium-term support. | Same fragility concern; 42 Macro is more constructive about the medium-term policy path. |
-| Jul 15 | K-shaped monetary policy | A structural policy transition is a downside risk to gold, Bitcoin, and, to a lesser degree, stocks; potentially bullish for Treasuries. | Mixed cross-asset view, not a clean equity risk-on call. The lexical `+1.00` score is an obvious classifier overstatement. |
-| Jul 16 | Warsh Fed winners and losers | Mixed: a more inflation-sensitive Fed is a risk to risk assets, while realtime inflation measures and AI productivity can support dovish policy. | Directionally compatible with caution, but not directly comparable to a BIL-versus-risk allocation. |
-| Jul 20 | China and hyperscaler capex | Highest-to-date risk of a capex reset, with no timing claim; AI leaders can weaken while the broad index remains resilient. | Strong thematic alignment with Trade Bot's concentration/dispersion warning. |
-| Jul 20 | The U.S.-China AI-race narrative | Explicitly skeptical of the financing and investment case around concentrated U.S. AI spending. | Strong thematic alignment, but this is narrative evidence rather than an independent sizing input. |
-| Jul 21 | Squeeze, correction, recovery, crash | Present regime remains risk-on; crowded shorts favor a squeeze first, then a correction and recovery, with a later regime break/crash risk. Credit is neutral rather than confirming a broad break. | Broadly aligned on fragility and lack of break confirmation; Trade Bot is materially more defensive today. |
+| Jul 28 | Circular financing and the bond/funding channel increase correction risk, although 42 Macro did not say the cyclical bear had begun. | 53.22% defensive; risk score 0.40; 1m risk-off 25.25%; equity beta 0.93. | 42 Macro was more tactically cautious than the current Trade Bot strategy. |
+| Jul 30 | The economy remained hot and the Goldilocks reaction looked too sanguine; Fed tightening risk was elevated. | 50.30% defensive; risk score 0.47; 1m risk-off 28.64%; equity beta 1.00. | Clear near-term divergence: the public macro warning strengthened while the strategy carried roughly neutral exposure. |
+| Aug 4 | Six macro cycles were mostly positive, but monetary policy could become a headwind over the next one or two quarters; price signals were still required before action. | 54.02% defensive; risk score 0.53; 1m risk-off 30.94%; portfolio clamp added 3.81 points. | Broadly aligned, mixed/cautious states. |
+| Aug 6 | Treasury's duration-scarcity financing could restrain bond vigilantes; 42 Macro remained bullish over 12 months and cautious over the next few months. | 53.70% defensive; risk score 0.50; 1m risk-off 28.80%; equity beta 1.05. | Similar near-term caution, although 42 Macro's policy interpretation was becoming more constructive. |
+| Aug 7 | AI-driven cost control was described as bullish for corporate profits and equities, despite adverse social effects. | 66.76% defensive; risk score 0.50; 1m risk-off 28.73%; equity beta 0.62. | Major stance divergence. Trade Bot's jump came from its native selector/execution path, not a deteriorating risk score. |
+| Aug 10 | Investors could remain sanguine "for now" because cooling labor/housing and policy support reduced the probability of Fed tightening. | 66.37% defensive; risk score 0.43; 1m risk-off 25.37%; equity beta 0.63. | 42 Macro was tactically constructive while Trade Bot remained mechanically defensive. |
+| Aug 11 | Circular financing was "overwhelmingly bullish for now" because transferable compute collateral and institutional financing can extend the build; leverage and concentration remain the eventual bear case. | 66.37% defensive; risk score 0.40; 1m risk-off 22.67%; equity beta 0.62; stress loss 11.77%. | The strongest current divergence. Trade Bot's internals improved, but the implemented allocation still reflected the prior target through the execution lag. |
+| Aug 14 | AI-capex overbuild, demanding EPS expectations, concentration, household exposure, and margin leverage create a high-probability eventual bear case; the current bull market was not declared over. | 49.05% defensive; risk score 0.33; 1m risk-off 19.90%; equity beta 0.63. | Broadly aligned tactically: remain invested while treating leverage and concentration as vulnerability, not a crash timer. |
+| Aug 17 | Corporate AI financing is competing with sovereign duration and may require a wider equity risk premium in coming months. | 48.57% defensive; risk score 0.43; 1m risk-off 23.56%; duration support -0.26. | Trade Bot independently registered adverse duration conditions but retained a balanced allocation because credit and market trend remained supportive. |
+| Aug 18 | Correction risk from capital competition was described as rapidly increasing; 42 Macro remained bullish over 12 months but warned that the next few months may be volatile. | 48.57% defensive; risk score 0.43; 1m risk-off 24.07%; portfolio clamp +2.51pp; equity beta 0.64. | Same broad regime, different emphasis: 42 Macro is more tactically cautious, while Trade Bot requires wider market confirmation before adding materially more defense. |
 
-The cleanest synthesis is therefore horizon-dependent. Over days to a few
-weeks, 42 Macro is more constructive because it expects positioning to support
-the index. Over the next one to two quarters, both processes favor caution
-around Fed uncertainty, AI-capex deceleration, dispersion, concentration, and
-credit confirmation. Over the longer run, 42 Macro remains constructive on AI
-diffusion while warning that the capex bubble can eventually end in a secular
-bear phase; Trade Bot does not have credible authority at that horizon.
+The correct synthesis is therefore:
+
+- **Immediate posture:** both are constructive but fragile. 42 Macro is cautious
+  over the next few months; Trade Bot is approximately balanced at 48.57%
+  defense after completing its re-risk transition.
+- **Structural agreement:** both still identify AI financing, leverage,
+  concentration, sovereign competition for capital, and future Fed/bond-market
+  interaction as important tail risks.
+- **Confirmed break:** neither system currently establishes one. Trade Bot's
+  credit and broad trend drivers are supportive, while 42 Macro calls correction
+  risk rather than a current break and remains bullish over 12 months.
+- **Highest-value monitor:** whether long-yield and expensive-growth weakness
+  spreads into broad credit, volatility, correlation, breadth, and large-move
+  participation. Capital-supply pressure is a mechanism; transmission into
+  those markets is the actionable confirmation.
+
+The mechanical lexical classifier still misreads the August 10 and 11 videos as
+defensive because it counts their adverse branches more heavily than their
+explicit near-term answers. On August 17-18 it gets the direction of the tactical
+warning right but overstates the magnitude by collapsing a bullish 12-month view
+and a cautious multi-month view into one scalar. The scalar remains a screening
+proxy; the horizon-separated human read is authoritative for the current
+comparison.
 
 The agreement is not independent confirmation of every narrative claim. Trade
-Bot's current news/event, scenario-sizing, and scenario-conditioned portfolio
-authorities are all zero, so its *allocation* is independent of the 42 Macro
-transcripts and the user's narrative feed. Its base strategy and quantitative
-risk-status layer still use market prices that respond to the same underlying
-world. The correct interpretation is independent causal construction with
-overlapping market evidence, not statistically independent votes.
-
-Across matured transcript-backed observations, Trade Bot's defensive sizing
-scored better on the report's action metric (0.60/0.72/0.66 at 1w/1m/3m versus
-0.48/0.45/0.42 for the transcript proxy), while 42 Macro's return proxy was
-higher at 1m and 3m. This is a simplified tactical audit, not proof of
-superiority: the text classifier compresses horizon-specific commentary into a
-single scalar, and the 42 Macro proxy is not their proprietary portfolio.
+Bot's news/event and scenario-sizing authorities were zero on these matched
+dates, so the allocation did not ingest the 42 Macro transcripts or the user's
+narrative feed. The independent portfolio-stress engine did add 2.51 points of
+defense by August 18. Both processes still respond to the same market and
+economic system. The proper interpretation is independent construction with
+overlapping underlying evidence, not statistically independent votes.
 
 ## Current Limitations
 

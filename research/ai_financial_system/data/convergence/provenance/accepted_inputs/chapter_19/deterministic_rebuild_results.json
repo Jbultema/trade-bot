@@ -1,0 +1,10 @@
+{
+  "clean_builds_compared": 2,
+  "external_full_packet_comparison_required": true,
+  "external_full_packet_verifier": "verify_full_rebuilds.py",
+  "logical_lane": "lane_3_chapter_19_rebuilt_v3",
+  "manifest_included_in_comparison": true,
+  "manifested_artifacts_compared": 48,
+  "shared_core_manifest_sha256": "0f480529a37887150b9c3c5c7be685287ef11e7fd576f9f48875c6642db8e6e4",
+  "status": "PASS"
+}

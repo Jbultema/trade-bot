@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 11412,
+  "content_sha256": "2f8ceb290440dca67e8f83e31e8a92cdbb9d0459926983ed7e5e13b4e50064d7",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.sec.gov/Archives/edgar/data/937966/000162828026048235/form6-kquarterlyfilings.htm",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0114_2f8ceb290440dca6.htm",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html",
+  "original_url": "https://www.sec.gov/Archives/edgar/data/937966/000162828026048235/form6-kquarterlyfilings.htm",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-07-15",
+  "publisher": "ASML Holding NV",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0114_2f8ceb290440dca6.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:52:49.578615+00:00",
+  "retrieval_started_utc": "2026-07-26T17:52:49.540738+00:00",
+  "selected_response_headers": {
+    "content-length": "1851",
+    "content-type": "text/html",
+    "date": "Sun, 26 Jul 2026 17:52:49 GMT",
+    "last-modified": "Wed, 15 Jul 2026 10:08:45 GMT"
+  },
+  "source_id": "SRC-0114",
+  "status": "preserved_complete",
+  "title": "ASML Form 6-K and statutory interim report for six months ended June 28 2026",
+  "write_state": "new_version_written"
+}

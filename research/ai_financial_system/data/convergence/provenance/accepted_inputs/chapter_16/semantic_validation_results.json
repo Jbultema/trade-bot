@@ -1,0 +1,22 @@
+{
+  "builder_semantic_status": "REPAIRS_APPLIED",
+  "canonical_database_write": "NOT_PERFORMED_NOT_AUTHORIZED",
+  "chapter": "CH16",
+  "combined_candidate_and_adjudication_ledger_rows": 618,
+  "comparative_publication": "BLOCKED",
+  "contract_clock": "REPAIRED_V3_PENDING_NONAUTHOR_ACCEPTANCE",
+  "fixed_logical_packet_identifier": true,
+  "free_text_relationship_adjudication": "OPEN_BLOCKER_427_CLAIMS",
+  "identity_semantics": "REPAIRED_V3_PENDING_NONAUTHOR_ACCEPTANCE",
+  "lane": "lane_3_chapter_16_rebuilt_v3",
+  "lossless_schema_loader_mappings": 19,
+  "mechanical_exclusions": 218,
+  "packet_decision": "REVIEW_REQUIRED_FRESH_NONAUTHOR_ACCEPTANCE",
+  "patches_applied": 12,
+  "pending_relationship_equivalence_holds": 59,
+  "pending_role_holds": 297,
+  "record_claim_links": 1726,
+  "selected_role_edges": 44,
+  "status_date": "2026-07-26",
+  "structured_candidates": 574
+}

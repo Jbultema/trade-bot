@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 124913,
+  "content_sha256": "ec444cb210ed483b39458e50bc58b8ef80053f0ba5eab9396dd770c2d60d7359",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.anthropic.com/news/anthropic-raises-series-f-at-usd183b-post-money-valuation",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0053_ec444cb210ed483b.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://www.anthropic.com/news/anthropic-raises-series-f-at-usd183b-post-money-valuation",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2025-09-02",
+  "publisher": "Anthropic PBC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0053_ec444cb210ed483b.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:03.265624+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:02.949940+00:00",
+  "selected_response_headers": {
+    "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:51:03 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0053",
+  "status": "preserved_complete",
+  "title": "Anthropic raises 13 billion dollar Series F at 183 billion dollar post-money valuation",
+  "write_state": "new_version_written"
+}

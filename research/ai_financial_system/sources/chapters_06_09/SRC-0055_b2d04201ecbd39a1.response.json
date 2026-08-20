@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 120841,
+  "content_sha256": "b2d04201ecbd39a130655b8bf7b7c939086d30331de3a5a62a11666b0a1cd7e8",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://www.anthropic.com/news/series-h",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0055_b2d04201ecbd39a1.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://www.anthropic.com/news/series-h",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-05-28",
+  "publisher": "Anthropic PBC",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0055_b2d04201ecbd39a1.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:04.152188+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:04.071023+00:00",
+  "selected_response_headers": {
+    "cache-control": "private, no-cache, no-store, max-age=0, must-revalidate",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:51:04 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0055",
+  "status": "preserved_complete",
+  "title": "Anthropic raises 65 billion dollars in Series H funding at 965 billion dollar post-money valuation",
+  "write_state": "new_version_written"
+}

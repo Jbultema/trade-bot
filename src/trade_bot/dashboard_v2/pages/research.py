@@ -42,6 +42,7 @@ from trade_bot.dashboard_v2.services.experiment_service import (
     top_scorecards,
 )
 from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
+from trade_bot.research.curation import add_research_status
 
 
 def render_research_page(runtime: DashboardRuntime) -> None:
@@ -49,10 +50,12 @@ def render_research_page(runtime: DashboardRuntime) -> None:
         scores = scorecards()
     with timed("research.candidate_universe"):
         candidates = _candidate_universe(scores, runtime=runtime)
-    top = top_scorecards(candidates, limit=30)
+    default_candidates = _default_candidate_scope(candidates)
+    top = top_scorecards(default_candidates, limit=30)
     render_card_grid(
         [
-            ("Candidates", len(candidates)),
+            ("All Candidates", len(candidates)),
+            ("Default Scope", len(default_candidates)),
             ("Displayed", len(top)),
             ("Champion CAGR", _best_metric(top, "cagr")),
             ("Best Utility", _best_metric(top, "growth_constrained_utility_score")),
@@ -61,13 +64,19 @@ def render_research_page(runtime: DashboardRuntime) -> None:
                 _count_label(candidates, "monitoring_readiness_label", "snapshot_ready"),
             ),
             ("Validation Rows", _count_nonempty(candidates, "validation_tier")),
+            (
+                "Verified Selection OOS",
+                _count_true(candidates, "oos_promotion_eligible"),
+            ),
             ("Metric Contract", _metric_contract_label(candidates)),
             ("Execution", _execution_contract_label(candidates)),
         ]
     )
     render_callout(
         "Every displayed candidate is evaluated under the single contract shown above. "
-        "The page fails closed instead of merging stale scorecards."
+        "The page fails closed instead of merging stale scorecards. A candidate cannot become "
+        "operational without a sealed holdout, properly nested walk-forward evaluation, or "
+        "completed prospective shadow that was not used for model selection."
     )
 
     view = st.pills(
@@ -132,10 +141,14 @@ def _metric_contract_label(frame: pd.DataFrame) -> str:
 def _execution_contract_label(frame: pd.DataFrame) -> str:
     if frame.empty:
         return "unavailable"
-    lags = pd.to_numeric(
-        frame.get("signal_lag_days", pd.Series(dtype=float)), errors="coerce"
-    ).dropna().unique()
-    rebalances = frame.get("rebalance_frequency", pd.Series(dtype=str)).dropna().astype(str).unique()
+    lags = (
+        pd.to_numeric(frame.get("signal_lag_days", pd.Series(dtype=float)), errors="coerce")
+        .dropna()
+        .unique()
+    )
+    rebalances = (
+        frame.get("rebalance_frequency", pd.Series(dtype=str)).dropna().astype(str).unique()
+    )
     if len(lags) != 1 or len(rebalances) != 1:
         return "MIXED - BLOCKED"
     return f"lag {int(lags[0])} / {rebalances[0]}"
@@ -156,6 +169,8 @@ def _render_leaderboard(frame: pd.DataFrame) -> None:
             "calmar",
             "sharpe",
             "promotion_decision",
+            "governed_promotion_decision",
+            "oos_evidence_status",
             "monitoring_readiness_label",
             "overfit_risk_label",
         ]
@@ -169,7 +184,31 @@ def _render_candidate(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> Non
     if scores.empty or "strategy" not in scores:
         st.info("No candidates are available.")
         return
-    ordered = top_scorecards(scores, limit=max(len(scores), 1))
+    candidate_scope = (
+        st.pills(
+            "Candidate scope",
+            [
+                "Current + promising",
+                "All including archived/pruned",
+            ],
+            default="Current + promising",
+            selection_mode="single",
+            key="dashboard_v2_candidate_scope",
+        )
+        or "Current + promising"
+    )
+    visible_scores = (
+        scores
+        if candidate_scope == "All including archived/pruned"
+        else _default_candidate_scope(scores)
+    )
+    if visible_scores.empty:
+        visible_scores = scores
+    st.caption(
+        f"{len(visible_scores):,} selectable strategies in this scope; "
+        f"{len(scores):,} total canonical strategies are available."
+    )
+    ordered = top_scorecards(visible_scores, limit=max(len(visible_scores), 1))
     selected_from_frontier = st.session_state.get(_OUTCOME_FRONTIER_SELECTED_STRATEGY_KEY)
     ordered = ordered.copy()
     ordered["candidate_label"] = ordered.apply(scorecard_option_label, axis=1)
@@ -260,6 +299,7 @@ def _render_candidate_research_readout(
             ("Calmar", _fmt_float(row.get("calmar"))),
             ("Utility", _fmt_float(row.get("growth_constrained_utility_score"))),
             ("Readiness", row.get("monitoring_readiness_label", "n/a")),
+            ("Selection OOS", row.get("oos_evidence_status", "missing")),
             ("Overfit", row.get("overfit_risk_label", "n/a")),
         ]
     )
@@ -270,6 +310,8 @@ def _render_candidate_research_readout(
             "hypothesis",
             "research_status",
             "promotion_decision",
+            "governed_promotion_decision",
+            "oos_evidence_status",
             "validation_tier",
             "growth_utility_tier",
             "monitoring_readiness_label",
@@ -316,11 +358,19 @@ def _candidate_universe(scores: pd.DataFrame, *, runtime: DashboardRuntime) -> p
         )
     except (KeyError, ValueError, TypeError):
         pass
-    if "research_status" in candidates:
-        active = candidates[~candidates["research_status"].astype(str).eq("pruned_dead_end")].copy()
-        if not active.empty:
-            candidates = active
-    return candidates.reset_index(drop=True)
+    return add_research_status(candidates).reset_index(drop=True)
+
+
+def _default_candidate_scope(candidates: pd.DataFrame) -> pd.DataFrame:
+    if candidates.empty or "research_status" not in candidates:
+        return candidates
+    visible = candidates[
+        ~candidates["research_status"]
+        .fillna("")
+        .astype(str)
+        .isin({"pruned_dead_end", "research_archive"})
+    ].copy()
+    return visible if not visible.empty else candidates
 
 
 def _render_candidate_artifact_read(strategy_name: str) -> None:
@@ -382,6 +432,43 @@ def _render_candidate_artifact_read(strategy_name: str) -> None:
                 matched = True
                 st.caption("Fixed-slate execution-smoothing challengers")
                 _render_metric_dataframe(_display_metrics(smoothing))
+            if strategy_name == "i111_native_risk_repair_guard17_relief85_ai85_div":
+                for label, key in (
+                    (
+                        "Native selector/transition repair gates",
+                        "selector_transition_gates",
+                    ),
+                    (
+                        "Continuous timing and hazard gates",
+                        "native_timing_gates",
+                    ),
+                    (
+                        "Frozen continuous-defense shadow",
+                        "native_timing_shadow",
+                    ),
+                    (
+                        "Conditional progression and tail-guard gates",
+                        "native_progression_gates",
+                    ),
+                    (
+                        "Continuous-defense rollout safety ladder",
+                        "native_rollout_ladder",
+                    ),
+                    (
+                        "Joint-severity protection challenger",
+                        "timing_severity_gates",
+                    ),
+                    (
+                        "Joint-severity observational shadow",
+                        "timing_severity_shadow",
+                    ),
+                ):
+                    frame = evidence.get(key, pd.DataFrame())
+                    if frame.empty:
+                        continue
+                    matched = True
+                    st.caption(label)
+                    _render_metric_dataframe(_display_metrics(frame.head(40)))
             if not matched:
                 st.info("No strategy-specific V2.2/V2.3 evidence rows are persisted yet.")
 
@@ -416,6 +503,62 @@ def _render_validation_artifacts() -> None:
         if provenance_warning:
             st.warning(provenance_warning)
         for label, key in (
+            ("Native selector/transition repair gates", "selector_transition_gates"),
+            (
+                "Native selector/transition execution summary",
+                "selector_transition_summary",
+            ),
+            (
+                "Native selector/transition block bootstrap",
+                "selector_transition_bootstrap",
+            ),
+            ("Continuous timing and hazard gates", "native_timing_gates"),
+            ("Continuous timing policy metrics", "native_timing_policies"),
+            ("Frozen continuous-defense shadow", "native_timing_shadow"),
+            (
+                "Conditional progression and tail-guard gates",
+                "native_progression_gates",
+            ),
+            (
+                "Conditional progression model diagnostics",
+                "native_progression_diagnostics",
+            ),
+            (
+                "Current conditional timing read",
+                "native_progression_current",
+            ),
+            (
+                "Continuous-defense rollout safety ladder",
+                "native_rollout_ladder",
+            ),
+            (
+                "Joint-severity protection gates",
+                "timing_severity_gates",
+            ),
+            (
+                "Joint-severity policy metrics",
+                "timing_severity_metrics",
+            ),
+            (
+                "Joint-severity paired block bootstrap",
+                "timing_severity_bootstrap",
+            ),
+            (
+                "Current joint-severity read",
+                "timing_severity_current",
+            ),
+            (
+                "Joint-severity execution-lag sensitivity",
+                "timing_severity_execution",
+            ),
+            (
+                "Joint-severity activation episodes",
+                "timing_severity_activation",
+            ),
+            (
+                "Joint-severity observational shadow",
+                "timing_severity_shadow",
+            ),
             ("Fixed-slate smoothing gates", "smoothing_gates"),
             ("Execution-hardening mechanisms", "execution_mechanisms"),
             ("Adversarial gaps", "adversarial_gaps"),
@@ -497,6 +640,51 @@ def _render_cycle_tracker() -> None:
     reliability = frames.get("phase_reliability", pd.DataFrame())
     path_reliability = frames.get("path_reliability", pd.DataFrame())
     crisis = frames.get("crisis_playback", pd.DataFrame())
+    capital_cycle_summary = frames.get("capital_cycle_summary", pd.DataFrame())
+    capital_cycle_families = frames.get("capital_cycle_families", pd.DataFrame())
+    capital_cycle_signals = frames.get("capital_cycle_signals", pd.DataFrame())
+    capital_cycle_events = frames.get("capital_cycle_events", pd.DataFrame())
+    capital_cycle_missing = frames.get("capital_cycle_missing_confirmations", pd.DataFrame())
+    capital_cycle_lead_times = frames.get("capital_cycle_lead_times", pd.DataFrame())
+    capital_cycle_validation_readiness = frames.get(
+        "capital_cycle_validation_readiness", pd.DataFrame()
+    )
+    capital_cycle_validation_ablation = frames.get(
+        "capital_cycle_validation_ablation", pd.DataFrame()
+    )
+    capital_cycle_validation_episodes = frames.get(
+        "capital_cycle_validation_episodes", pd.DataFrame()
+    )
+    capital_cycle_validation_leave_out = frames.get(
+        "capital_cycle_validation_leave_episode_out", pd.DataFrame()
+    )
+    capital_cycle_validation_uncertainty = frames.get(
+        "capital_cycle_validation_uncertainty", pd.DataFrame()
+    )
+    capital_cycle_validation_utility = frames.get(
+        "capital_cycle_validation_utility", pd.DataFrame()
+    )
+    capital_cycle_validation_stage_gates = frames.get(
+        "capital_cycle_validation_stage_gates", pd.DataFrame()
+    )
+    capital_cycle_feasibility_readiness = frames.get(
+        "capital_cycle_feasibility_readiness", pd.DataFrame()
+    )
+    capital_cycle_feasibility_episodes = frames.get(
+        "capital_cycle_feasibility_episodes", pd.DataFrame()
+    )
+    capital_cycle_feasibility_families = frames.get(
+        "capital_cycle_feasibility_families", pd.DataFrame()
+    )
+    capital_cycle_feasibility_source_gaps = frames.get(
+        "capital_cycle_feasibility_source_gaps", pd.DataFrame()
+    )
+    capital_cycle_target_readiness = frames.get(
+        "capital_cycle_target_readiness", pd.DataFrame()
+    )
+    capital_cycle_target_events = frames.get(
+        "capital_cycle_target_events", pd.DataFrame()
+    )
     prebreak = prebreak_hindsight_frames()
     defensive_audit = defensive_signal_audit_frames()
     defensive_bias = defensive_bias_calibration_frames()
@@ -526,6 +714,29 @@ def _render_cycle_tracker() -> None:
     )
     render_callout(
         "Cycle Tracker is a zoom-out cycle map, not a risk-budget or allocation override. It asks which larger speculative-cycle phase the current market resembles, which phases are plausible by horizon, and which assets historically worked in similar prior states.",
+    )
+    _render_capital_cycle_break_monitor(
+        capital_cycle_summary,
+        capital_cycle_families,
+        capital_cycle_signals,
+        capital_cycle_events,
+        capital_cycle_missing,
+        capital_cycle_lead_times,
+    )
+    _render_capital_cycle_validation(
+        capital_cycle_validation_readiness,
+        capital_cycle_validation_ablation,
+        capital_cycle_validation_episodes,
+        capital_cycle_validation_leave_out,
+        capital_cycle_validation_uncertainty,
+        capital_cycle_validation_utility,
+        capital_cycle_validation_stage_gates,
+        capital_cycle_feasibility_readiness,
+        capital_cycle_feasibility_episodes,
+        capital_cycle_feasibility_families,
+        capital_cycle_feasibility_source_gaps,
+        capital_cycle_target_readiness,
+        capital_cycle_target_events,
     )
     _render_current_phase_candidates_expander(candidates)
 
@@ -619,6 +830,248 @@ def _render_cycle_tracker() -> None:
             _render_metric_dataframe(
                 _display_metrics(path_validation[path_validation_columns].head(100))
             )
+
+
+def _render_capital_cycle_break_monitor(
+    summary: pd.DataFrame,
+    families: pd.DataFrame,
+    signals: pd.DataFrame,
+    events: pd.DataFrame,
+    missing_confirmations: pd.DataFrame,
+    lead_times: pd.DataFrame,
+) -> None:
+    render_section_header(
+        "Capital-Cycle Break Monitor",
+        help_text=(
+            "Research-only Cycle Tracker evidence that separates structural vulnerability from "
+            "actual rollover. It has zero allocation authority."
+        ),
+    )
+    if summary.empty:
+        st.info(
+            "This Cycle Tracker run predates the capital-cycle monitor. Re-run "
+            "`poetry run trade-bot run-cycle-tracker`."
+        )
+        return
+    row = summary.iloc[0]
+    render_card_grid(
+        [
+            ("Capital-Cycle State", row.get("capital_cycle_state", "n/a")),
+            ("Capital Vulnerability", _fmt_pct(row.get("capital_vulnerability"))),
+            ("Vulnerability Coverage", _fmt_pct(row.get("vulnerability_coverage"))),
+            ("Rollover Impulse", _fmt_pct(row.get("rollover_impulse"))),
+            ("Rollover Coverage", _fmt_pct(row.get("rollover_coverage"))),
+            ("Direction", row.get("direction", "n/a")),
+            ("Transition Pressure", row.get("transition_pressure", "n/a")),
+            (
+                "Direct Families",
+                f"{_fmt_count(row.get('direct_families'))} / "
+                f"{_fmt_count(row.get('total_families'))}",
+            ),
+            ("Missing Confirmations", _fmt_count(row.get("missing_confirmations"))),
+            ("Allocation Authority", _fmt_pct(row.get("allocation_authority"))),
+        ]
+    )
+    render_callout(
+        str(row.get("current_implication", "")) or "No capital-cycle interpretation is available."
+    )
+    st.caption(
+        "A high vulnerability score is not a break signal. Rollover requires independent "
+        "real-economy and market/financing confirmation; missing data reduces coverage."
+    )
+    if not families.empty:
+        family_columns = [
+            column
+            for column in [
+                "family",
+                "role",
+                "score",
+                "state",
+                "derivative_state",
+                "available_signals",
+                "total_signals",
+                "required_coverage",
+                "direct_signal_available",
+                "conceptual_lead",
+                "description",
+            ]
+            if column in families
+        ]
+        _render_metric_dataframe(_display_metrics(families[family_columns]), hide_index=True)
+    if not missing_confirmations.empty:
+        unresolved = missing_confirmations[
+            ~missing_confirmations["status"].astype(str).eq("confirming")
+        ]
+        with st.expander(
+            f"Missing or non-confirming evidence ({len(unresolved):,})",
+            expanded=True,
+        ):
+            st.caption(
+                "This is the monitor's anti-confirmation-bias view: what would need to change "
+                "before a fragile boom becomes a confirmed capital-cycle rollover."
+            )
+            _render_metric_dataframe(_display_metrics(unresolved), hide_index=True)
+    with st.expander("Signal derivatives and source audit", expanded=False):
+        if signals.empty:
+            st.info("No capital-cycle signal rows are available.")
+        else:
+            _render_metric_dataframe(_display_metrics(signals), hide_index=True)
+    with st.expander("Structured event decay ledger", expanded=False):
+        if events.empty:
+            st.info(
+                "No governed capital-cycle event ledger was supplied. Narrative events are not "
+                "silently converted into scores."
+            )
+        else:
+            _render_metric_dataframe(_display_metrics(events), hide_index=True)
+    with st.expander("Conceptual lead-time ladder", expanded=False):
+        if not lead_times.empty:
+            _render_metric_dataframe(_display_metrics(lead_times), hide_index=True)
+
+
+def _render_capital_cycle_validation(
+    readiness: pd.DataFrame,
+    ablation: pd.DataFrame,
+    episodes: pd.DataFrame,
+    leave_out: pd.DataFrame,
+    uncertainty: pd.DataFrame,
+    utility: pd.DataFrame,
+    stage_gates: pd.DataFrame,
+    feasibility_readiness: pd.DataFrame,
+    feasibility_episodes: pd.DataFrame,
+    feasibility_families: pd.DataFrame,
+    feasibility_source_gaps: pd.DataFrame,
+    target_readiness: pd.DataFrame,
+    target_events: pd.DataFrame,
+) -> None:
+    render_section_header(
+        "Does The Rollover Logic Add Information?",
+        help_text=(
+            "Nested prior-only validation. Existing Trade-bot signals are a frozen comparator; "
+            "candidate lift must come from direct upstream break evidence and its sequence."
+        ),
+    )
+    if not feasibility_readiness.empty:
+        feasibility = feasibility_readiness.iloc[0]
+        render_card_grid(
+            [
+                ("PIT Direct Rows", _fmt_count(feasibility.get("eligible_point_in_time_rows"))),
+                (
+                    "Direct-Family Coverage",
+                    _fmt_pct(feasibility.get("mean_direct_family_coverage")),
+                ),
+                ("Feasibility Gate", str(feasibility.get("feasibility_passed", False))),
+                (
+                    "Economic Target Gate",
+                    str(
+                        target_readiness.iloc[0].get("economic_target_gate_passed", False)
+                        if not target_readiness.empty
+                        else False
+                    ),
+                ),
+            ]
+        )
+        st.caption(
+            "These cards explain why upstream vulnerability and rollover can remain unavailable: "
+            "the monitor requires archived, available-at-the-time evidence across demand, capacity, "
+            "pricing/utilization, financing, monetization, and commitment overhang."
+        )
+        with st.expander("Historical direct-data feasibility and source gaps", expanded=True):
+            blockers = str(feasibility.get("blockers", "")).replace(";", ", ")
+            render_callout(
+                "Data gate blockers: " + (blockers or "none reported") + ".",
+                heavy=bool(blockers),
+            )
+            if not feasibility_episodes.empty:
+                st.markdown("**Episode coverage**")
+                _render_metric_dataframe(_display_metrics(feasibility_episodes), hide_index=True)
+            if not feasibility_families.empty:
+                st.markdown("**Direct-family coverage**")
+                _render_metric_dataframe(_display_metrics(feasibility_families), hide_index=True)
+            if not feasibility_source_gaps.empty:
+                st.markdown("**Unresolved source acquisitions**")
+                unresolved = feasibility_source_gaps[
+                    ~feasibility_source_gaps["acquisition_status"].astype(str).eq(
+                        "extracted_point_in_time"
+                    )
+                ]
+                _render_metric_dataframe(_display_metrics(unresolved), hide_index=True)
+            if not target_events.empty:
+                st.markdown("**Objective economic-label status**")
+                _render_metric_dataframe(_display_metrics(target_events), hide_index=True)
+    if readiness.empty:
+        st.info(
+            "No capital-cycle validation artifacts found. Run "
+            "`poetry run trade-bot validate-capital-cycle`."
+        )
+        return
+    if not stage_gates.empty:
+        gate = stage_gates.iloc[0]
+        render_callout(
+            "Economic forecasting gate: "
+            f"{bool(gate.get('economic_forecasting_gate_passed', False))}. "
+            "Equity timing and strategy utility remain locked until direct economic "
+            "forecasting is positive and portable across held-out episodes.",
+            heavy=not bool(gate.get("economic_forecasting_gate_passed", False)),
+        )
+    row = readiness.iloc[0]
+    render_card_grid(
+        [
+            ("Historical Origins", _fmt_count(row.get("origin_rows"))),
+            ("Episode Clusters", _fmt_count(row.get("episode_clusters"))),
+            (
+                "Direct Upstream Origins",
+                _fmt_count(row.get("origins_with_direct_upstream_evidence")),
+            ),
+            ("Evaluated Model-Folds", _fmt_count(row.get("evaluated_model_fold_rows"))),
+            ("Historical Research Ready", str(row.get("historical_research_ready", False))),
+            ("Promotion Ready", str(row.get("promotion_ready", False))),
+            ("Allocation Authority", _fmt_pct(row.get("allocation_authority"))),
+        ]
+    )
+    blockers = str(row.get("blockers", "")).replace(";", ", ")
+    render_callout(
+        "Validation blockers: " + (blockers or "none reported") + ".",
+        heavy=bool(blockers),
+    )
+    st.caption(
+        "This module does not recreate Trade-bot's trend, breadth, volatility, credit, rates, "
+        "or concentration logic. Positive retrospective results matter only when direct "
+        "upstream evidence adds lift versus that frozen existing-market baseline."
+    )
+    with st.expander("Nested OOS ablation results", expanded=True):
+        if ablation.empty:
+            st.info("No ablation was evaluable with the available historical inputs.")
+        else:
+            _render_metric_dataframe(_display_metrics(ablation), hide_index=True)
+    with st.expander("Episode-level outer-fold evidence", expanded=False):
+        if episodes.empty:
+            st.info("No episode-level diagnostics are available.")
+        else:
+            _render_metric_dataframe(_display_metrics(episodes), hide_index=True)
+    with st.expander("Leave-one-episode-out portability", expanded=False):
+        st.caption(
+            "This is a portability stress test, not a chronological sealed holdout: each model "
+            "is refit after removing one entire episode."
+        )
+        if leave_out.empty:
+            st.info("No leave-episode-out diagnostics are available.")
+        else:
+            _render_metric_dataframe(_display_metrics(leave_out), hide_index=True)
+    with st.expander("Episode-cluster uncertainty", expanded=False):
+        if uncertainty.empty:
+            st.info("Not enough episode clusters for uncertainty intervals.")
+        else:
+            _render_metric_dataframe(_display_metrics(uncertainty), hide_index=True)
+    with st.expander("Bounded utility diagnostic", expanded=False):
+        st.caption(
+            "This is an overlapping-origin regret/avoided-drawdown diagnostic with a capped "
+            "15% adjustment, not a strategy backtest."
+        )
+        if utility.empty:
+            st.info("No market-target utility rows are available.")
+        else:
+            _render_metric_dataframe(_display_metrics(utility), hide_index=True)
 
 
 def _render_current_phase_candidates_expander(candidates: pd.DataFrame) -> None:
@@ -1499,8 +1952,8 @@ def _prebreak_population_summary(signal_panel: pd.DataFrame) -> dict[str, object
     else:
         clusters = pd.Series("", index=data.index, dtype=object)
         clusters.loc[event_mask] = "event:" + event_names.loc[event_mask]
-        clusters.loc[control_mask] = (
-            "control:" + dates.loc[control_mask].dt.to_period("Q").astype(str)
+        clusters.loc[control_mask] = "control:" + dates.loc[control_mask].dt.to_period("Q").astype(
+            str
         )
     mature = pd.to_numeric(
         data.get("break_severity_3m", pd.Series(index=data.index, dtype=float)),
@@ -1601,6 +2054,19 @@ def _render_current_prebreak_monitor(
         if "market_date" in data and not data["market_date"].dropna().empty
         else "n/a"
     )
+    freshness = _prebreak_readout_freshness(data)
+    if freshness["status"] == "stale":
+        render_callout(
+            "Stale current-monitor artifact: the readout is "
+            f"{freshness['age_days']} calendar days old. Do not interpret it as current. "
+            "Run `poetry run trade-bot refresh-prebreak-current` or the full daily update.",
+            heavy=True,
+        )
+    elif freshness["status"] == "aging":
+        render_callout(
+            f"Current-monitor artifact is {freshness['age_days']} calendar days old. "
+            "Refresh it before making a time-sensitive comparison."
+        )
     read_counts = (
         data["current_risk_read"].fillna("unknown").astype(str).str.lower().value_counts()
         if "current_risk_read" in data
@@ -1618,6 +2084,7 @@ def _render_current_prebreak_monitor(
                 "Read Date",
                 latest_date,
                 "Latest market date in the current pre-break signal readout.",
+                "critical" if freshness["status"] == "stale" else "neutral",
             ),
             (
                 "Top Monitor",
@@ -1678,6 +2145,30 @@ def _render_current_prebreak_monitor(
         with st.expander("Current monitor detail", expanded=True):
             _render_metric_dataframe(_display_metrics(display))
     _render_defensive_posture_bridge(defensive_audit, defensive_bias)
+
+
+def _prebreak_readout_freshness(
+    readout: pd.DataFrame,
+    *,
+    as_of: object | None = None,
+) -> dict[str, object]:
+    if readout.empty or "market_date" not in readout:
+        return {"status": "missing", "age_days": None, "market_date": None}
+    dates = pd.to_datetime(readout["market_date"], errors="coerce").dropna()
+    if dates.empty:
+        return {"status": "missing", "age_days": None, "market_date": None}
+    latest = pd.Timestamp(dates.max()).normalize()
+    comparison = pd.to_datetime(as_of, errors="coerce")
+    if pd.isna(comparison):
+        comparison = pd.Timestamp.now()
+    comparison = pd.Timestamp(comparison).tz_localize(None).normalize()
+    age_days = max(0, int((comparison - latest).days))
+    status = "stale" if age_days > 7 else "aging" if age_days > 3 else "current"
+    return {
+        "status": status,
+        "age_days": age_days,
+        "market_date": latest.date().isoformat(),
+    }
 
 
 def _render_defensive_posture_bridge(
@@ -1763,6 +2254,7 @@ def _render_defensive_bias_research(frames: dict[str, pd.DataFrame]) -> None:
     if current.empty:
         return
     row = current.iloc[0]
+    freshness = _prebreak_readout_freshness(current)
     primary_policy = "hierarchical_confirmation_defense_relief_5pp"
     primary_gates = (
         gates[gates["policy"].astype(str).eq(primary_policy)]
@@ -1782,8 +2274,22 @@ def _render_defensive_bias_research(frames: dict[str, pd.DataFrame]) -> None:
             "strategy-specific evidence and has no live allocation authority."
         ),
     )
+    if freshness["status"] == "stale":
+        render_callout(
+            "Stale bias-adjustment current read: the research artifact is "
+            f"{freshness['age_days']} calendar days old. Historical results remain inspectable, "
+            "but today's counterfactual is not current. Run "
+            "`poetry run trade-bot research-defensive-bias`.",
+            heavy=True,
+        )
     render_card_grid(
         [
+            (
+                "Read Date",
+                str(row.get("market_date", "n/a")),
+                "Market date used for the research-only current counterfactual.",
+                "critical" if freshness["status"] == "stale" else "neutral",
+            ),
             (
                 "Triggered Action",
                 str(row.get("triggered_action", "none")).replace("_", " ").title(),
@@ -1843,6 +2349,7 @@ def _render_expanded_defensive_correction_search(*, focus_strategy: str) -> None
         .isin({"true", "1", "yes"})
         .sum()
     )
+    current_freshness = _prebreak_readout_freshness(current)
     render_section_header(
         "Expanded Over-Defensiveness Search",
         help_text=(
@@ -1851,6 +2358,13 @@ def _render_expanded_defensive_correction_search(*, focus_strategy: str) -> None
             "Small parameter sensitivities do not count as separate architectures."
         ),
     )
+    if current_freshness["status"] == "stale":
+        render_callout(
+            "Historical architecture results are available, but the displayed current effects "
+            f"are {current_freshness['age_days']} calendar days old. Run "
+            "`poetry run trade-bot search-defensive-corrections` before interpreting them.",
+            heavy=True,
+        )
     render_card_grid(
         [
             (
@@ -1924,9 +2438,7 @@ def _render_expanded_defensive_correction_search(*, focus_strategy: str) -> None
         if not current.empty:
             focus_current = current[current["strategy"].astype(str).eq(focus_strategy)]
             active_now = focus_current[
-                pd.to_numeric(
-                    focus_current["current_defense_reduction"], errors="coerce"
-                ).abs()
+                pd.to_numeric(focus_current["current_defense_reduction"], errors="coerce").abs()
                 > 1e-10
             ]
             if not active_now.empty:
@@ -1968,9 +2480,7 @@ def _defensive_posture_rows(
         if not spy.empty:
             selected = spy
     if "defensive_judgement_horizon" in selected:
-        one_month = selected[
-            selected["defensive_judgement_horizon"].astype(str).eq("1m")
-        ]
+        one_month = selected[selected["defensive_judgement_horizon"].astype(str).eq("1m")]
         if not one_month.empty:
             selected = one_month
     return exposure_row, selected.iloc[0]
@@ -3509,6 +4019,12 @@ def _count_nonempty(frame: pd.DataFrame, column: str) -> int:
     return int(frame[column].notna().sum())
 
 
+def _count_true(frame: pd.DataFrame, column: str) -> int:
+    if frame.empty or column not in frame:
+        return 0
+    return int(frame[column].fillna(False).astype(bool).sum())
+
+
 def _fmt_pct(value: object) -> str:
     try:
         numeric = float(value)
@@ -3537,3 +4053,8 @@ def _fmt_float(value: object) -> str:
     if pd.isna(numeric):
         return "n/a"
     return f"{numeric:.2f}"
+
+
+def _fmt_count(value: object) -> str:
+    numeric = pd.to_numeric(value, errors="coerce")
+    return "n/a" if pd.isna(numeric) else f"{int(numeric):,}"

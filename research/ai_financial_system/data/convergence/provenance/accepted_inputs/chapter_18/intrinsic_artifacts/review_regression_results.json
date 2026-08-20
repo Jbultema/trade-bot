@@ -1,0 +1,19 @@
+{
+  "arithmetic_controls_preserved": 20,
+  "chronology_failures_after_author_repair": 0,
+  "chronology_rows_reperformed": 20,
+  "claimant_failures_after_author_repair": 0,
+  "claimant_rows_reperformed": 13,
+  "coefficient_prohibitions_preserved": 18,
+  "external_content_holds": 58,
+  "fresh_exact_repairs_applied": 18,
+  "fresh_nonauthor_review": "REQUIRED",
+  "hypotheses_preserved_conceptual": 16,
+  "junction_links_recomputed": 214,
+  "junction_records_reperformed": 128,
+  "mechanism_failures_after_author_repair": 0,
+  "mechanism_rows_reperformed": 16,
+  "prior_exact_repairs_preserved": 106,
+  "status": "READY_FOR_FRESH_NONAUTHOR_DESCRIPTIVE_REVIEW_WITH_EXTERNAL_HOLDS",
+  "timeline_repairs_preserved": 17
+}

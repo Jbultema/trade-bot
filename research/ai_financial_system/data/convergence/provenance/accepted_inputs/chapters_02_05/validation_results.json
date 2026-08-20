@@ -1,0 +1,32 @@
+{
+  "author_verdict": "READY_FOR_FRESH_NONAUTHOR_METADATA_REBASE_REVIEW",
+  "canonical_integration": "NOT_AUTHORIZED",
+  "checks": [
+    {
+      "check": "dedicated_metadata_rebase_validation",
+      "detail": "15/15",
+      "passed": true
+    },
+    {
+      "check": "two_clean_builds",
+      "detail": "66 files",
+      "passed": true
+    },
+    {
+      "check": "ruff",
+      "detail": "4 scripts",
+      "passed": true
+    },
+    {
+      "check": "generic_staging_validation",
+      "detail": "files=77 csv_rows=3606",
+      "passed": true
+    }
+  ],
+  "checks_passed": 4,
+  "checks_total": 4,
+  "docx_replacement": "NOT_AUTHORIZED",
+  "passed": true,
+  "publication": "BLOCKED",
+  "validator": "chapters_02_05_rebuilt_v3_final_author_validator"
+}

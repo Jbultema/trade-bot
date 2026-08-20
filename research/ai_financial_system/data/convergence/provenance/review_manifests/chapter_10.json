@@ -1,0 +1,80 @@
+{
+  "candidate_input_authorized": true,
+  "canonical_mutation_authorized": false,
+  "chapter": "CH10",
+  "chapter_or_docx_replacement_authorized": false,
+  "files": [
+    {
+      "bytes": 6038,
+      "path": "acceptance_results.json",
+      "sha256": "b59b82088f322b2b55e25d330236abdec7be991c05d1794f508c221153665af7"
+    },
+    {
+      "bytes": 49717,
+      "path": "clean_build_comparison.csv",
+      "rows": 208,
+      "sha256": "85d3ca701e3b2f1e07f2824efa1f49ac6979a3558cd19f49680138f1759b812a"
+    },
+    {
+      "bytes": 760,
+      "path": "generic_validation_results.json",
+      "sha256": "3032778766692aff605b3445972cd040c3a8f8fe0edd118012b4f05d904a2125"
+    },
+    {
+      "bytes": 1919,
+      "path": "no_write_audit.csv",
+      "rows": 10,
+      "sha256": "33d36e0fc71d435b09f7279a4470fee3d1ab316ca3bfbbbe9059e7a32333e951"
+    },
+    {
+      "bytes": 1884,
+      "path": "patch_list.csv",
+      "rows": 11,
+      "sha256": "2311008e1a83ddb5d6012519a92c91823a4e651644470fe4bf0a888e2c340316"
+    },
+    {
+      "bytes": 4221,
+      "path": "review_report.md",
+      "sha256": "e7a4ebbf6e6860c0f52cdfbf773811233ef518a36ebe68afa80f50c8d5ba4f0b"
+    },
+    {
+      "bytes": 900,
+      "path": "ruff_results.json",
+      "sha256": "713525655f35223699ec07e20ee51b5cc1a30685e096b472df536917cf038e65"
+    },
+    {
+      "bytes": 2082,
+      "path": "seal_manifest.py",
+      "sha256": "1e863cf72b6ee1ff3b893ef2e9736d5a8f6980b64003226b7f9cb441c6d70bba"
+    },
+    {
+      "bytes": 392,
+      "path": "semantic_results.csv",
+      "rows": 1,
+      "sha256": "484490a491be1760975cd694b4f66857e3f21342ffff8c1a186341b9b9c1294c"
+    },
+    {
+      "bytes": 3299,
+      "path": "validation_checks.csv",
+      "rows": 17,
+      "sha256": "4b9c4e876c4199051c1ee8ebf87ac27c5632d09fe6876a8ae7df6c78d4046ccc"
+    },
+    {
+      "bytes": 228,
+      "path": "verdict.json",
+      "sha256": "e80e24bf43eb5402c31d674ba82737c9b6754b989ce556bcaaf0f3bf7f959f97"
+    },
+    {
+      "bytes": 27239,
+      "path": "verify_acceptance.py",
+      "sha256": "25ef4e008097c71cd07644b4bb3585846dd38cd49d6a67b6d2259cfb5c4e5872"
+    }
+  ],
+  "governing_v2_author_manifest_sha256": "ab0108513e9ceb9d9fa6e532133405cb4f8b2fcad96b212b44209c28347207f0",
+  "governing_v2_review_manifest_sha256": "d5d9bc7ae7cf28da974699adff6ed7297b627b868b8440f16af4cae02951c890",
+  "lane": "lane_3_verify_chapter_10_rebuilt_v3",
+  "publication_authorized": false,
+  "retained_boundary": "all prior source semantic amount-state unknown grade confidence canonical DOCX and publication holds remain binding",
+  "review_target_manifest_sha256": "415228f6d5cb3b34c23c89c412c3177f93faebefad6945cc7be292a311e150ad",
+  "review_verdict": "ACCEPT_REBUILT_V3_NARROW_LOCATOR_CORRECTION_AS_CANDIDATE_INPUT_ONLY"
+}

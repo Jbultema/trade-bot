@@ -41,6 +41,44 @@ def test_read_only_run_store_skips_schema_setup_and_reads_existing_store(
     assert reader.list_snapshots().empty
 
 
+def test_read_only_run_store_reads_legacy_schema_without_stored_at_utc(
+    tmp_path: Path,
+) -> None:
+    db_path = tmp_path / "legacy.duckdb"
+    connection = duckdb.connect(str(db_path))
+    try:
+        connection.execute(
+            """
+            CREATE TABLE run_snapshots (
+                run_id VARCHAR,
+                created_at_utc VARCHAR,
+                status VARCHAR,
+                market_date VARCHAR
+            )
+            """
+        )
+        connection.execute(
+            """
+            INSERT INTO run_snapshots VALUES
+            ('older', '2026-07-01T20:00:00+00:00', 'completed', '2026-07-01'),
+            ('newer', '2026-07-02T20:00:00+00:00', 'completed', '2026-07-02')
+            """
+        )
+    finally:
+        connection.close()
+
+    reader = RunStore(
+        db_path,
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+        read_only=True,
+    )
+    snapshots = reader.list_snapshots(limit=10)
+
+    assert snapshots["run_id"].tolist() == ["newer", "older"]
+    assert snapshots["stored_at_utc"].tolist() == snapshots["created_at_utc"].tolist()
+
+
 def test_run_store_saves_loads_and_lists_snapshots(tmp_path: Path) -> None:
     config_path, events_path, macro_path, news_path = _config_files(tmp_path)
     store = RunStore(
@@ -200,6 +238,7 @@ def test_run_store_prunes_snapshot_artifacts_after_dry_run(
     dry_run_candidates = store.prune_snapshots(
         keep_latest=1,
         keep_per_market_date=1,
+        keep_all_capture_days=0,
         apply=False,
     )
     assert len(dry_run_candidates) == 2
@@ -209,6 +248,7 @@ def test_run_store_prunes_snapshot_artifacts_after_dry_run(
     applied_candidates = store.prune_snapshots(
         keep_latest=1,
         keep_per_market_date=1,
+        keep_all_capture_days=0,
         apply=True,
     )
     remaining = store.list_snapshots(limit=10)
@@ -250,6 +290,7 @@ def test_run_store_prunes_to_recent_daily_and_older_weekly_snapshots(
         keep_latest=0,
         keep_per_market_date=1,
         keep_recent_market_days=5,
+        keep_all_capture_days=0,
         keep_weekly_older=1,
         weekly_frequency="W-WED",
         apply=True,
@@ -292,6 +333,7 @@ def test_run_store_auto_prunes_duplicate_market_date_snapshots(
             events_path=events_path,
             macro_path=macro_path,
             news_path=news_path,
+            prune_keep_all_capture_days=0,
         )
         for _ in range(3)
     ]
@@ -327,6 +369,7 @@ def test_run_store_auto_prunes_to_recent_daily_and_older_weekly_snapshots(
             prune_keep_latest=0,
             prune_keep_per_market_date=1,
             prune_keep_recent_market_days=5,
+            prune_keep_all_capture_days=0,
             prune_keep_weekly_older=1,
             prune_weekly_frequency="W-WED",
         )
@@ -340,6 +383,113 @@ def test_run_store_auto_prunes_to_recent_daily_and_older_weekly_snapshots(
     assert set(remaining_dates.dt.date).issuperset(recent_dates)
     assert older.dt.to_period("W-WED").nunique() == len(older)
     assert len(remaining) == len(recent_dates) + market_dates[:-5].to_period("W-WED").nunique()
+
+
+def test_run_store_retains_intraday_captures_for_one_week_then_latest_in_day(
+    tmp_path: Path,
+    monkeypatch: object,
+) -> None:
+    config_path, events_path, macro_path, news_path = _config_files(tmp_path)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+    timestamps = iter(
+        [
+            "2026-08-10T14:00:00+00:00",
+            "2026-08-10T18:00:00+00:00",
+            "2026-08-10T22:00:00+00:00",
+        ]
+    )
+    monkeypatch.setattr("trade_bot.storage.run_store.utc_now_iso", lambda: next(timestamps))
+
+    manifests = [
+        store.save_snapshot(
+            _baseline_run("2026-08-10"),
+            config_path=config_path,
+            events_path=events_path,
+            macro_path=macro_path,
+            news_path=news_path,
+            auto_prune=False,
+        )
+        for _ in range(3)
+    ]
+
+    fresh_candidates = store.prune_snapshots(
+        keep_latest=0,
+        keep_per_market_date=1,
+        keep_recent_market_days=30,
+        keep_all_capture_days=7,
+        now_utc="2026-08-17T13:59:59+00:00",
+        apply=False,
+    )
+    assert fresh_candidates.empty
+
+    aged_candidates = store.prune_snapshots(
+        keep_latest=0,
+        keep_per_market_date=1,
+        keep_recent_market_days=30,
+        keep_all_capture_days=7,
+        now_utc="2026-08-18T22:00:01+00:00",
+        apply=True,
+    )
+    remaining = store.list_snapshots(limit=10)
+
+    assert set(aged_candidates["run_id"]) == {manifests[0].run_id, manifests[1].run_id}
+    assert remaining["run_id"].tolist() == [manifests[2].run_id]
+    assert remaining.iloc[0]["stored_at_utc"] == "2026-08-10T22:00:00+00:00"
+
+
+def test_latest_in_day_uses_actual_storage_order_not_historical_as_of_time(
+    tmp_path: Path,
+    monkeypatch: object,
+) -> None:
+    config_path, events_path, macro_path, news_path = _config_files(tmp_path)
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+    stored_times = iter(
+        [
+            "2026-08-19T14:00:00+00:00",
+            "2026-08-19T18:00:00+00:00",
+        ]
+    )
+    monkeypatch.setattr("trade_bot.storage.run_store.utc_now_iso", lambda: next(stored_times))
+
+    first = store.save_snapshot(
+        _baseline_run("2020-03-16"),
+        config_path=config_path,
+        events_path=events_path,
+        macro_path=macro_path,
+        news_path=news_path,
+        created_at_utc="2020-03-16T22:00:02+00:00",
+        auto_prune=False,
+    )
+    second = store.save_snapshot(
+        _baseline_run("2020-03-16"),
+        config_path=config_path,
+        events_path=events_path,
+        macro_path=macro_path,
+        news_path=news_path,
+        created_at_utc="2020-03-16T22:00:01+00:00",
+        auto_prune=False,
+    )
+
+    candidates = store.prune_snapshots(
+        keep_latest=0,
+        keep_per_market_date=1,
+        keep_recent_market_days=30,
+        keep_all_capture_days=7,
+        now_utc="2026-08-27T18:00:01+00:00",
+        apply=True,
+    )
+    remaining = store.list_snapshots(limit=10)
+
+    assert candidates["run_id"].tolist() == [first.run_id]
+    assert remaining["run_id"].tolist() == [second.run_id]
 
 
 def test_run_store_lists_snapshots_by_market_date_before_created_at(tmp_path: Path) -> None:

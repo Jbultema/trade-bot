@@ -1,0 +1,31 @@
+{
+  "access_or_licensing_restriction": "",
+  "byte_length": 361408,
+  "content_sha256": "3938ce5591cdd64f2d3d7eb4e12dc73c6a1c9b190a577979679796c507b74eaf",
+  "exception_reason": "",
+  "extraction_method": "none_original_bytes",
+  "final_resolved_url": "https://openai.com/index/accelerating-the-next-phase-ai/",
+  "http_status": 200,
+  "local_archive_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0041_3938ce5591cdd64f.html",
+  "locator_relationship": "pending_semantic_locator_review",
+  "mime_type": "text/html; charset=utf-8",
+  "original_url": "https://openai.com/index/accelerating-the-next-phase-ai/",
+  "preservation_class": "P1",
+  "preservation_method": "sequential_http_get",
+  "publication_date": "2026-03-31",
+  "publisher": "OpenAI",
+  "redirect_history": [],
+  "response_metadata_path": "research/ai_financial_system/sources/chapters_06_09/SRC-0041_3938ce5591cdd64f.response.json",
+  "retrieval_completed_utc": "2026-07-26T17:51:00.874867+00:00",
+  "retrieval_started_utc": "2026-07-26T17:51:00.529284+00:00",
+  "selected_response_headers": {
+    "cache-control": "public, max-age=0, must-revalidate",
+    "content-type": "text/html; charset=utf-8",
+    "date": "Sun, 26 Jul 2026 17:51:00 GMT",
+    "server": "cloudflare"
+  },
+  "source_id": "SRC-0041",
+  "status": "preserved_complete",
+  "title": "OpenAI raises 122 billion dollars to accelerate the next phase of AI",
+  "write_state": "new_version_written"
+}

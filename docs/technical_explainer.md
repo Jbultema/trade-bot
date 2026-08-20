@@ -414,6 +414,14 @@ Candidate scoring uses multiple layers:
 
 No single metric should dominate selection.
 
+Selection OOS is a separate, mandatory contract. `research_governance.py`
+accepts only a sealed chronological holdout, properly nested walk-forward outer
+test, or completed prospective shadow whose outcomes were not used for model
+selection. `curation.py` preserves the raw research decision but replaces its
+governed decision with `hold_for_oos_evidence` when that contract is missing.
+Consequently, strong retrospective performance can rank a hypothesis for
+further work but cannot produce `operational_candidate` status.
+
 ## Outcome Utility
 
 `research/strategy_outcome_utility.py` adds a growth-constrained objective. It

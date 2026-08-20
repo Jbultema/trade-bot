@@ -1,0 +1,55 @@
+{
+  "canonical_mutation_authorized": false,
+  "database": {
+    "database_sha256": "14c5b3473cdde8dee51653b812597a507610efb7686bd30402c1acd16b75cc65",
+    "foreign_key_violations": 0,
+    "improperly_promoted_artifacts": 0,
+    "integrity": "ok",
+    "negative_governance_state_controls_passed": 4,
+    "row_counts": {
+      "chapter_support_state_projection": 525,
+      "claim_locator_states": 167,
+      "private_claim_locator_review_sources": 8,
+      "private_claim_locator_reviews": 5,
+      "private_claim_status_retained_holds": 25,
+      "private_claim_status_transitions": 5,
+      "private_investment_accounting_methods": 11,
+      "private_investment_bridge_components": 5,
+      "private_investment_carrying_value_rollforwards": 5,
+      "private_investment_earnings": 8,
+      "private_investment_earnings_bridges": 4,
+      "private_investment_earnings_components": 2,
+      "private_investment_population_observations": 10,
+      "private_investment_rollforward_components": 16,
+      "private_source_archive_versions": 8,
+      "private_source_text_derivatives": 8,
+      "research_artifacts": 894,
+      "research_packet_bindings": 11,
+      "research_packet_manifest_bindings": 22,
+      "source_derivatives": 8,
+      "source_duplicate_blob_reconciliations": 5,
+      "source_exceptions": 6,
+      "source_version_delta_audit": 3,
+      "source_versions": 60
+    },
+    "select_star_views": 0
+  },
+  "database_logical_release_id": "CCV3-e6ebd432ea023151e933c4f1",
+  "database_manifest_sha256": "6a3a7445dcdfa7647938a12a79db00744ab2ba21254086d61f7eb7d6e458f019",
+  "fresh_independent_review_required": true,
+  "inventory": {
+    "packet_bindings": 11,
+    "packet_manifests": 22,
+    "research_artifacts": 894,
+    "source_union_rows": 774
+  },
+  "release_shape": {
+    "canonical_data_directory": "data",
+    "database": "reports/research.db",
+    "governed_research_archive": "data/convergence/provenance/accepted_inputs",
+    "governing_packet_manifests": "data/convergence/provenance/author_manifests and data/convergence/provenance/review_manifests",
+    "schema_directory": "schema"
+  },
+  "status": "PASS_CANDIDATE_PENDING_INDEPENDENT_REVIEW",
+  "two_clean_database_builds_byte_identical": true
+}
