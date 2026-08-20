@@ -222,6 +222,8 @@ poetry run trade-bot fetch-capital-cycle-sec-filings
 poetry run trade-bot fetch-capital-cycle-source-documents --episode dotcom_telecom_capacity_1994_2004
 poetry run trade-bot import-capital-cycle-fcc-capacity
 poetry run trade-bot import-capital-cycle-sec-companyfacts
+poetry run trade-bot import-capital-cycle-eia-dpr
+poetry run trade-bot import-capital-cycle-usgs-copper
 poetry run trade-bot build-capital-cycle-ai-evidence --as-of YYYY-MM-DD
 poetry run trade-bot build-capital-cycle-feasibility
 poetry run trade-bot build-capital-cycle-economic-targets
@@ -285,3 +287,22 @@ two eligible rows, two entities, and family-specific freshness. `save-capital-cy
 now rejects an empty input unless `--allow-empty` is explicitly supplied, preventing the
 earlier initialization mistake from recurring silently. All acquisition and coverage
 artifacts retain zero allocation authority.
+
+### Historical acquisition progress: 2026-08-20
+
+The next acquisition pass added 94 governed rows before deduplication and brought the
+historical panel to 337 eligible point-in-time observations. Ten official USGS copper
+*Mineral Commodity Summary* vintages from 2009 through 2018 now provide mining demand,
+capacity, and producer-pricing observations. Seventeen archived EIA Drilling Productivity
+Report pages from December 2013 through December 2017 provide shale production-demand and
+new-well-productivity forecast snapshots. Each EIA row uses the publication date as its
+information-set `period_end` and retains the forecast month separately; forecasts are not
+misrepresented as already-realized observations.
+
+Mean direct-family coverage improved from 9.7% to 18.7%. Mining now averages 49.5% family
+coverage and shale 16.7%, while cloud and internet speculation remain at zero. Financing,
+monetization, and commitment-overhang histories remain absent across all episodes because
+the SEC endpoints still return HTTP 403. The official Baker Hughes workbook also remains
+environment-blocked, and no `FRED_API_KEY` is configured for ALFRED. The feasibility gate
+therefore remains closed; this pass improves the evidence base but does not promote a model
+or grant allocation authority.

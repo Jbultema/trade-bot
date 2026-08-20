@@ -1,0 +1,3 @@
+episode,entity,cik,form,filing_date,report_date,accession_number,primary_document,source_url,notes
+dotcom_telecom_capacity_1994_2004,Global Crossing,1061322,10-K,2000-03-17,1999-12-31,0000950130-00-001357,,https://www.sec.gov/Archives/edgar/data/1061322/000095013000001357/0000950130-00-001357-index.html,Official SEC filing index seed used when the submissions API is unavailable.
+dotcom_telecom_capacity_1994_2004,Level 3 Communications,794323,10-K,2002-03-29,2001-12-31,0000794323-02-000015,f10kpdf_12312001.pdf,https://www.sec.gov/Archives/edgar/data/794323/000079432302000015/f10kpdf_12312001.pdf,Official SEC annual-report seed used when the submissions API is unavailable.

@@ -1,0 +1,7 @@
+vintage_as_of,family,observation_rows,latest_available_date,available,missing_reason,allocation_authority
+2026-08-19,demand,0,,False,no_governed_pit_observation,0.0
+2026-08-19,capacity,0,,False,no_governed_pit_observation,0.0
+2026-08-19,pricing_utilization,0,,False,no_governed_pit_observation,0.0
+2026-08-19,financing,0,,False,no_governed_pit_observation,0.0
+2026-08-19,monetization,0,,False,no_governed_pit_observation,0.0
+2026-08-19,commitment_overhang,0,,False,no_governed_pit_observation,0.0

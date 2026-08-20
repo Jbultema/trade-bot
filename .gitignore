@@ -21,6 +21,11 @@ data/ml_diagnostics/
 *.html
 *.csv
 
+# Governed capital-cycle inputs, point-in-time panels, and source inventories.
+!research/capital_cycle/*.csv
+!research/capital_cycle/prospective_ai_vintages/**/*.csv
+!research/capital_cycle/raw/eia_dpr/*.html
+
 # Provisional AI-financial-system research lanes and generated database.
 research/ai_financial_system/staging/*
 !research/ai_financial_system/staging/README.md

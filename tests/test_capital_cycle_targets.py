@@ -87,3 +87,37 @@ def test_missing_component_history_keeps_target_unresolved(tmp_path) -> None:
     )
     assert not result.event_manifest.iloc[0]["objective_label_resolved"]
     assert not result.readiness.iloc[0]["economic_target_gate_passed"]
+
+
+def test_episode_without_target_spec_fails_closed_instead_of_crashing(tmp_path) -> None:
+    episodes = pd.concat(
+        [
+            _episode_manifest(),
+            pd.DataFrame(
+                [
+                    {
+                        "episode": "unconfigured",
+                        "episode_family": "other",
+                        "episode_type": "break",
+                        "start_date": "2018-01-01",
+                        "end_date": "2021-12-31",
+                        "theme_ticker": "QQQ",
+                        "preregistered_at": "2026-08-20",
+                    }
+                ]
+            ),
+        ],
+        ignore_index=True,
+    )
+
+    result = build_objective_economic_targets(
+        episode_manifest=episodes,
+        observations=_observations(),
+        target_spec=_target_spec(),
+        output_dir=tmp_path,
+    )
+
+    event = result.event_manifest.set_index("episode").loc["unconfigured"]
+    assert not event["target_spec_registered"]
+    assert not event["objective_label_resolved"]
+    assert "unconfigured" in result.readiness.iloc[0]["unresolved_episodes"]

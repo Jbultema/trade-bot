@@ -20,6 +20,7 @@ TARGET_COMPONENT_METRIC_ALIASES: Final[dict[str, tuple[str, ...]]] = {
     "production_or_shipments_decline": (
         "mining_production_index",
         "mining_shipments_index",
+        "usgs_copper_reported_refined_consumption",
     ),
     "capex_contraction": ("issuer_aggregate_capex",),
     "cashflow_below_commitment": ("cashflow_commitment_burden_ratio",),
@@ -27,6 +28,7 @@ TARGET_COMPONENT_METRIC_ALIASES: Final[dict[str, tuple[str, ...]]] = {
     "completion_or_production_deceleration": (
         "shale_completion_index",
         "shale_production_index",
+        "eia_total_shale_oil_production_forecast",
     ),
     "cashflow_below_capex_and_commitments": ("cashflow_capex_commitment_burden_ratio",),
     "cloud_capex_contraction": ("cloud_issuer_aggregate_capex",),
@@ -200,10 +202,21 @@ def _build_event_manifest(
         name = str(episode["episode"])
         episode_components = components[components["episode"].astype(str).eq(name)].copy()
         episode_spec = spec[spec["episode"].astype(str).eq(name)]
-        required = int(episode_spec["minimum_independent_components"].max())
-        available_components = int(
-            episode_components.groupby("target_component")["component_data_available"].max().sum()
-        ) if not episode_components.empty else 0
+        target_spec_registered = not episode_spec.empty
+        required = (
+            int(episode_spec["minimum_independent_components"].max())
+            if target_spec_registered
+            else 0
+        )
+        available_components = (
+            int(
+                episode_components.groupby("target_component")["component_data_available"]
+                .max()
+                .sum()
+            )
+            if not episode_components.empty
+            else 0
+        )
         by_origin = (
             episode_components.groupby("origin_date")["persistent_component_flag"].sum()
             if not episode_components.empty
@@ -211,7 +224,7 @@ def _build_event_manifest(
         )
         triggered = by_origin[by_origin.ge(required)]
         event_date = pd.Timestamp(triggered.index[0]) if not triggered.empty else pd.NaT
-        label_resolved = available_components >= required
+        label_resolved = target_spec_registered and available_components >= required
         rows.append(
             {
                 "episode": name,
@@ -221,6 +234,7 @@ def _build_event_manifest(
                 "target": "economic_rollover",
                 "required_independent_components": required,
                 "components_with_sufficient_history": available_components,
+                "target_spec_registered": target_spec_registered,
                 "objective_label_resolved": label_resolved,
                 "negative_control_passed": (
                     bool(pd.isna(event_date))
@@ -249,12 +263,16 @@ def _build_origin_targets(episodes: pd.DataFrame, events: pd.DataFrame) -> pd.Da
                     "economic_rollover_2q": (
                         float(origin < event_date <= origin + pd.Timedelta(days=126))
                         if resolved and pd.notna(event_date)
-                        else 0.0 if resolved else np.nan
+                        else 0.0
+                        if resolved
+                        else np.nan
                     ),
                     "economic_rollover_4q": (
                         float(origin < event_date <= origin + pd.Timedelta(days=252))
                         if resolved and pd.notna(event_date)
-                        else 0.0 if resolved else np.nan
+                        else 0.0
+                        if resolved
+                        else np.nan
                     ),
                     "target_source": "preregistered_point_in_time_component_rule",
                     "allocation_authority": 0.0,

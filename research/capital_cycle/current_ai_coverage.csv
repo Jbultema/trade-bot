@@ -1,0 +1,7 @@
+vintage_as_of,family,observation_rows,distinct_entities,distinct_sources,latest_available_date,age_days,maximum_age_days,minimum_rows,minimum_entities,observed,available,missing_reason,allocation_authority
+2026-08-20,demand,18,17,12,2026-06-22,59,190,2,2,True,True,,0.0
+2026-08-20,capacity,23,16,17,2026-06-05,76,190,2,2,True,True,,0.0
+2026-08-20,pricing_utilization,0,0,0,,,100,2,2,False,False,no_governed_pit_observation;insufficient_observation_rows;insufficient_entity_breadth;stale_or_undated,0.0
+2026-08-20,financing,23,7,8,2026-05-20,92,190,2,2,True,True,,0.0
+2026-08-20,monetization,42,6,7,2026-05-20,92,190,2,2,True,True,,0.0
+2026-08-20,commitment_overhang,17,17,12,2026-06-10,71,370,2,2,True,True,,0.0

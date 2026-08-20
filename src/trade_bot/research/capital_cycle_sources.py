@@ -67,6 +67,14 @@ class DirectObservationImportResult:
     observation_path: Path
 
 
+@dataclass(frozen=True)
+class HistoricalArchiveImportResult:
+    observations: pd.DataFrame
+    archive_inventory: pd.DataFrame
+    observation_path: Path
+    inventory_path: Path
+
+
 SEC_FACT_TAGS: Final[dict[str, tuple[str, str]]] = {
     "RevenueFromContractWithCustomerExcludingAssessedTax": ("monetization", "revenue"),
     "Revenues": ("monetization", "revenue"),
@@ -85,9 +93,7 @@ SEC_FACT_TAGS: Final[dict[str, tuple[str, str]]] = {
         "debt_and_finance_lease_noncurrent",
     ),
 }
-DEFAULT_SEC_USER_AGENT: Final[str] = (
-    "trade-bot capital-cycle research contact github.com/Jbultema"
-)
+DEFAULT_SEC_USER_AGENT: Final[str] = "trade-bot capital-cycle research contact github.com/Jbultema"
 ARCHIVABLE_SUFFIXES: Final[frozenset[str]] = frozenset(
     {".pdf", ".csv", ".xls", ".xlsx", ".json", ".txt", ".zip"}
 )
@@ -304,9 +310,7 @@ def fetch_sec_filing_archive(
         filing_rows = _submission_filing_rows(submission)
         filing_container = submission.get("filings", {})
         historical_files = (
-            filing_container.get("files", [])
-            if isinstance(filing_container, dict)
-            else []
+            filing_container.get("files", []) if isinstance(filing_container, dict) else []
         )
         historical_frames = []
         for historical in historical_files if isinstance(historical_files, list) else []:
@@ -327,18 +331,16 @@ def fetch_sec_filing_archive(
             if not historical_payload:
                 continue
             try:
-                historical_frames.append(
-                    _submission_filing_rows(json.loads(historical_payload))
-                )
+                historical_frames.append(_submission_filing_rows(json.loads(historical_payload)))
             except json.JSONDecodeError:
                 continue
         if historical_frames:
             available_frames = [
                 frame for frame in [filing_rows, *historical_frames] if not frame.empty
             ]
-            filing_rows = pd.concat(
-                available_frames, ignore_index=True
-            ).drop_duplicates("accession_number", keep="last")
+            filing_rows = pd.concat(available_frames, ignore_index=True).drop_duplicates(
+                "accession_number", keep="last"
+            )
         filing_start = pd.to_datetime(entity.get("filing_start"), errors="coerce")
         filing_end = pd.to_datetime(entity.get("filing_end"), errors="coerce")
         eligible = filing_rows[
@@ -417,6 +419,315 @@ def import_fcc_telecom_capacity_release(
         observations=combined,
         observation_path=observation_path,
     )
+
+
+def import_eia_dpr_archive(
+    *,
+    existing_observations: pd.DataFrame | None = None,
+    research_dir: str | Path = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+) -> HistoricalArchiveImportResult:
+    """Import locally archived, contemporaneous EIA DPR release snapshots."""
+
+    destination = Path(research_dir)
+    raw_dir = destination / "raw" / "eia_dpr"
+    rows: list[dict[str, object]] = []
+    inventory_rows: list[dict[str, object]] = []
+    for path in sorted(raw_dir.glob("????-??.html")):
+        content = path.read_bytes()
+        source_hash = hashlib.sha256(content).hexdigest()
+        source_url = (
+            f"https://www.eia.gov/petroleum/drilling/archive/{path.stem.replace('-', '/')}/"
+        )
+        try:
+            parsed = parse_eia_dpr_release(
+                content,
+                source_url=source_url,
+                source_hash=source_hash,
+            )
+            status = "imported" if not parsed.empty else "no_supported_tables"
+            error = ""
+        except (ValueError, OSError, KeyError) as exc:
+            parsed = pd.DataFrame()
+            status = "parse_failed"
+            error = str(exc)
+        rows.extend(parsed.to_dict("records"))
+        inventory_rows.append(
+            {
+                "source_url": source_url,
+                "raw_path": str(path),
+                "sha256": source_hash,
+                "bytes": len(content),
+                "status": status,
+                "extracted_rows": len(parsed),
+                "error": error,
+                "allocation_authority": 0.0,
+            }
+        )
+    combined = _merge_observations(existing_observations, pd.DataFrame(rows))
+    inventory = pd.DataFrame(inventory_rows)
+    observation_path = destination / "direct_observations.csv"
+    inventory_path = destination / "eia_dpr_archive_inventory.csv"
+    combined.to_csv(observation_path, index=False)
+    inventory.to_csv(inventory_path, index=False)
+    return HistoricalArchiveImportResult(
+        observations=combined,
+        archive_inventory=inventory,
+        observation_path=observation_path,
+        inventory_path=inventory_path,
+    )
+
+
+def parse_eia_dpr_release(
+    content: bytes,
+    *,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    """Extract aggregate production and productivity from an archived DPR page."""
+
+    text = BeautifulSoup(content, "html.parser").get_text(" ", strip=True)
+    release_match = re.search(
+        rf"Release Date:\s*({MONTH_NAME_PATTERN})\s+(\d{{1,2}}),\s+(\d{{4}})",
+        text,
+        flags=re.IGNORECASE,
+    )
+    if release_match is None:
+        raise ValueError("EIA DPR release date was not found.")
+    release_date = pd.to_datetime(" ".join(release_match.groups()), errors="raise")
+    try:
+        tables = pd.read_html(BytesIO(content), flavor="lxml")
+    except ValueError as exc:
+        raise ValueError("EIA DPR observation tables were not found.") from exc
+
+    table_contracts = (
+        (
+            "New-well oil production per rig",
+            "Rig-weighted average",
+            "pricing_utilization",
+            "eia_new_well_oil_production_per_rig_forecast",
+            "barrels_per_day_per_rig",
+        ),
+        (
+            "New-well gas production per rig",
+            "Rig-weighted average",
+            "pricing_utilization",
+            "eia_new_well_gas_production_per_rig_forecast",
+            "thousand_cubic_feet_per_day_per_rig",
+        ),
+        (
+            "Oil production",
+            "Total",
+            "demand",
+            "eia_total_shale_oil_production_forecast",
+            "thousand_barrels_per_day",
+        ),
+        (
+            "Gas production",
+            "Total",
+            "demand",
+            "eia_total_shale_gas_production_forecast",
+            "million_cubic_feet_per_day",
+        ),
+    )
+    rows: list[dict[str, object]] = []
+    for header, aggregate_label, family, metric, unit in table_contracts:
+        selected = _eia_table_value(tables, header=header, aggregate_label=aggregate_label)
+        if selected is None:
+            continue
+        value, forecast_period = selected
+        rows.append(
+            {
+                "episode": "shale_capex_2010_2017",
+                "family": family,
+                "metric": metric,
+                "entity": "EIA major shale regions aggregate",
+                "period_end": release_date,
+                "available_date": release_date,
+                "value": value,
+                "unit": unit,
+                "source_id": f"eia_dpr_{release_date:%Y%m%d}",
+                "source_url": source_url,
+                "source_tier": "A",
+                "vintage_status": "archived_release",
+                "eligible_for_model": True,
+                "revision_status": "forecast_snapshot_as_published",
+                "accession_or_release_id": source_hash,
+                "source_archive_sha256": source_hash,
+                "forecast_period": forecast_period,
+                "notes": (
+                    "Official DPR next-month forecast snapshot. period_end records the "
+                    "information-set date; forecast_period preserves the economic horizon."
+                ),
+            }
+        )
+    if not rows:
+        raise ValueError("EIA DPR supported aggregate rows were not found.")
+    return pd.DataFrame(rows)
+
+
+def _eia_table_value(
+    tables: list[pd.DataFrame],
+    *,
+    header: str,
+    aggregate_label: str,
+) -> tuple[float, str] | None:
+    for table in tables:
+        if not isinstance(table.columns, pd.MultiIndex):
+            continue
+        matching = [
+            column
+            for column in table.columns
+            if header.lower() in str(column[0]).lower() and str(column[1]).lower() != "change"
+        ]
+        if not matching:
+            continue
+        region_column = table.columns[0]
+        aggregate = table[
+            table[region_column].astype(str).str.strip().str.casefold()
+            == aggregate_label.casefold()
+        ]
+        if aggregate.empty:
+            continue
+        forecast_column = matching[-1]
+        value = pd.to_numeric(aggregate.iloc[0][forecast_column], errors="coerce")
+        if pd.isna(value):
+            continue
+        return float(value), str(forecast_column[1])
+    return None
+
+
+def import_usgs_copper_mcs_archive(
+    *,
+    existing_observations: pd.DataFrame | None = None,
+    research_dir: str | Path = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+) -> HistoricalArchiveImportResult:
+    """Import publication-year USGS copper MCS vintages for the mining episode."""
+
+    destination = Path(research_dir)
+    raw_dir = destination / "raw" / "usgs_mcs_copper"
+    rows: list[dict[str, object]] = []
+    inventory_rows: list[dict[str, object]] = []
+    for path in sorted(raw_dir.glob("mcs-????-copper.pdf")):
+        content = path.read_bytes()
+        source_hash = hashlib.sha256(content).hexdigest()
+        release_year = int(path.name.split("-")[1])
+        source_url = (
+            "https://d9-wret.s3.us-west-2.amazonaws.com/assets/palladium/production/"
+            f"mineral-pubs/copper/mcs-{release_year}-coppe.pdf"
+        )
+        try:
+            text = "\n".join(
+                page.extract_text() or "" for page in PdfReader(BytesIO(content)).pages
+            )
+            parsed = _parse_usgs_copper_mcs_text(
+                text,
+                release_year=release_year,
+                source_url=source_url,
+                source_hash=source_hash,
+            )
+            status = "imported"
+            error = ""
+        except (ValueError, OSError, KeyError) as exc:
+            parsed = pd.DataFrame()
+            status = "parse_failed"
+            error = str(exc)
+        rows.extend(parsed.to_dict("records"))
+        inventory_rows.append(
+            {
+                "release_year": release_year,
+                "source_url": source_url,
+                "raw_path": str(path),
+                "sha256": source_hash,
+                "bytes": len(content),
+                "status": status,
+                "extracted_rows": len(parsed),
+                "error": error,
+                "allocation_authority": 0.0,
+            }
+        )
+    combined = _merge_observations(existing_observations, pd.DataFrame(rows))
+    inventory = pd.DataFrame(inventory_rows)
+    observation_path = destination / "direct_observations.csv"
+    inventory_path = destination / "usgs_copper_mcs_archive_inventory.csv"
+    combined.to_csv(observation_path, index=False)
+    inventory.to_csv(inventory_path, index=False)
+    return HistoricalArchiveImportResult(
+        observations=combined,
+        archive_inventory=inventory,
+        observation_path=observation_path,
+        inventory_path=inventory_path,
+    )
+
+
+def _parse_usgs_copper_mcs_text(
+    text: str,
+    *,
+    release_year: int,
+    source_url: str,
+    source_hash: str,
+) -> pd.DataFrame:
+    normalized = " ".join(text.replace("\xa0", " ").split())
+    salient_start = normalized.find("Salient Statistics")
+    salient_end = normalized.find("Recycling:", salient_start)
+    if salient_start < 0 or salient_end < 0:
+        raise ValueError("USGS copper salient-statistics table was not found.")
+    salient = normalized[salient_start:salient_end]
+    contracts = (
+        (
+            r"\bMine(?:,\s*recoverable)?\s+(.*?)\s+Refinery:",
+            "capacity",
+            "usgs_copper_mine_production",
+            "thousand_metric_tons_copper_content",
+        ),
+        (
+            r"Reported, refined\s+(.*?)\s+Apparent, unmanufactured",
+            "demand",
+            "usgs_copper_reported_refined_consumption",
+            "thousand_metric_tons_copper_content",
+        ),
+        (
+            r"Domestic producer, cathode\s+(.*?)\s+London Metal Exchange",
+            "pricing_utilization",
+            "usgs_copper_domestic_producer_cathode_price",
+            "cents_per_pound",
+        ),
+    )
+    available_date = pd.Timestamp(year=release_year, month=1, day=31)
+    period_end = pd.Timestamp(year=release_year - 1, month=12, day=31)
+    rows: list[dict[str, object]] = []
+    for pattern, family, metric, unit in contracts:
+        match = re.search(pattern, salient, flags=re.IGNORECASE)
+        if match is None:
+            raise ValueError(f"USGS copper metric was not found: {metric}")
+        values = re.findall(r"(?<![A-Za-z])\d[\d,]*(?:\.\d+)?", match.group(1))
+        if not values:
+            raise ValueError(f"USGS copper values were not found: {metric}")
+        value = float(values[-1].replace(",", ""))
+        rows.append(
+            {
+                "episode": "mining_capex_2009_2017",
+                "family": family,
+                "metric": metric,
+                "entity": "United States copper industry",
+                "period_end": period_end,
+                "available_date": available_date,
+                "value": value,
+                "unit": unit,
+                "source_id": f"usgs_copper_mcs_{release_year}",
+                "source_url": source_url,
+                "source_tier": "A",
+                "vintage_status": "archived_release",
+                "eligible_for_model": True,
+                "revision_status": "estimate_as_published_in_annual_summary",
+                "accession_or_release_id": source_hash,
+                "source_archive_sha256": source_hash,
+                "notes": (
+                    "Prior-year estimate from the named January USGS publication; later "
+                    "editions are retained as separate vintages rather than revisions."
+                ),
+            }
+        )
+    return pd.DataFrame(rows)
 
 
 def parse_fcc_telecom_capacity_release(
@@ -711,7 +1022,14 @@ def _extract_sec_entity_facts(
     if not rows:
         return pd.DataFrame()
     frame = pd.DataFrame(rows)
-    keys = ["episode", "entity", "metric", "period_end", "available_date", "accession_or_release_id"]
+    keys = [
+        "episode",
+        "entity",
+        "metric",
+        "period_end",
+        "available_date",
+        "accession_or_release_id",
+    ]
     return frame.drop_duplicates(keys, keep="last")
 
 
@@ -858,15 +1176,15 @@ def _merge_observations(
     existing: pd.DataFrame | None,
     new: pd.DataFrame,
 ) -> pd.DataFrame:
-    frames = [frame for frame in (existing, new) if isinstance(frame, pd.DataFrame) and not frame.empty]
+    frames = [
+        frame for frame in (existing, new) if isinstance(frame, pd.DataFrame) and not frame.empty
+    ]
     if not frames:
         return pd.DataFrame()
     combined = pd.concat(frames, ignore_index=True)
     for column in ("period_end", "available_date"):
         if column in combined:
-            combined[column] = pd.to_datetime(
-                combined[column], errors="coerce", format="mixed"
-            )
+            combined[column] = pd.to_datetime(combined[column], errors="coerce", format="mixed")
     keys = [
         column
         for column in ("episode", "metric", "period_end", "available_date", "source_id")
@@ -927,10 +1245,7 @@ def _submission_filing_rows(payload: dict[str, object]) -> pd.DataFrame:
         return pd.DataFrame(columns=column_map.values())
     row_count = min(lengths)
     frame = pd.DataFrame(
-        {
-            target: list(recent[source])[:row_count]
-            for source, target in column_map.items()
-        }
+        {target: list(recent[source])[:row_count] for source, target in column_map.items()}
     )
     for column in ("filing_date", "report_date"):
         frame[column] = pd.to_datetime(frame[column], errors="coerce")
@@ -961,9 +1276,9 @@ def _archive_seeded_sec_filing(
             error="Seed URL must point to the official SEC Archives host.",
         )
         return row, last_request
-    accession_compact = accession.replace("-", "") or hashlib.sha256(
-        filing_url.encode()
-    ).hexdigest()[:18]
+    accession_compact = (
+        accession.replace("-", "") or hashlib.sha256(filing_url.encode()).hexdigest()[:18]
+    )
     local_dir = raw_dir / f"CIK{cik:010d}"
     local_dir.mkdir(parents=True, exist_ok=True)
     suffix = Path(urlparse(filing_url).path).suffix or ".html"
@@ -1047,8 +1362,7 @@ def _safe_component(value: str) -> str:
 
 def _source_keywords(source: pd.Series) -> set[str]:
     text = " ".join(
-        str(source.get(column, ""))
-        for column in ("metric", "provider", "episode", "notes")
+        str(source.get(column, "")) for column in ("metric", "provider", "episode", "notes")
     ).lower()
     tokens = set(re.findall(r"[a-z0-9]{4,}", text))
     stop = {

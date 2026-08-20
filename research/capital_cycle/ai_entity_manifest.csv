@@ -1,0 +1,10 @@
+episode,entity,cik,ticker,role,filing_start,filing_end,preregistered_at,notes
+ai_buildout_2022_present,Microsoft,789019,MSFT,hyperscaler,2022-01-01,2026-08-20,2026-08-20,"Capacity monetization financing and commitments; standardized facts are only the first extraction layer."
+ai_buildout_2022_present,Amazon,1018724,AMZN,hyperscaler,2022-01-01,2026-08-20,2026-08-20,"AWS and AI infrastructure provider and strategic investor."
+ai_buildout_2022_present,Alphabet,1652044,GOOGL,hyperscaler,2022-01-01,2026-08-20,2026-08-20,"Cloud and AI infrastructure provider; successor issuer CIK."
+ai_buildout_2022_present,Meta Platforms,1326801,META,hyperscaler,2022-01-01,2026-08-20,2026-08-20,"Large internal AI capacity builder with advertising monetization."
+ai_buildout_2022_present,Oracle,1341439,ORCL,cloud_provider,2022-01-01,2026-08-20,2026-08-20,"Cloud capacity contracts leases and financing."
+ai_buildout_2022_present,NVIDIA,1045810,NVDA,compute_supplier,2022-01-01,2026-08-20,2026-08-20,"Accelerator supplier; revenue alone is not independent evidence of end-user monetization."
+ai_buildout_2022_present,CoreWeave,1769628,CRWV,neocloud,2024-01-01,2026-08-20,2026-08-20,"Public neocloud with concentrated customers debt leases and capacity commitments."
+ai_buildout_2022_present,Digital Realty Trust,1297996,DLR,datacenter_reit,2022-01-01,2026-08-20,2026-08-20,"Data-center demand capacity and lease comparator."
+ai_buildout_2022_present,Equinix,1101239,EQIX,datacenter_reit,2022-01-01,2026-08-20,2026-08-20,"Data-center demand capacity pricing and utilization comparator."

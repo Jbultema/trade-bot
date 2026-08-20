@@ -1,0 +1,19 @@
+source_url,raw_path,sha256,bytes,status,extracted_rows,error,allocation_authority
+https://www.eia.gov/petroleum/drilling/archive/2013/10/,research/capital_cycle/raw/eia_dpr/2013-10.html,a8a3f7e61b4315236fed2461a6a4e9bfc67ee2b5b1ed37bc3e112783cee537c1,71579,parse_failed,0,EIA DPR observation tables were not found.,0.0
+https://www.eia.gov/petroleum/drilling/archive/2013/12/,research/capital_cycle/raw/eia_dpr/2013-12.html,638969b260d43f1552e07448f5ef9b0785afcf05fa13912b7203d124ecee5233,78427,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2014/03/,research/capital_cycle/raw/eia_dpr/2014-03.html,8d3355f13e5fbb8788aa1e1a4edd18e81d5a3582588b23732e161963e20f2fa9,78402,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2014/06/,research/capital_cycle/raw/eia_dpr/2014-06.html,896012fb2e7baf4a30dee80b1b48d57def623eaf2ed95e02f747e256e6d8b7c4,78385,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2014/09/,research/capital_cycle/raw/eia_dpr/2014-09.html,fae73f22693487e4f32d17d44a906cf9c119cd1c8d5d2888938721e3fe14cb06,79022,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2014/12/,research/capital_cycle/raw/eia_dpr/2014-12.html,b09e6d7a66cc5f198d8aa8d38c4d02ce0771ba106db17e938909cce58a58127a,79017,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2015/03/,research/capital_cycle/raw/eia_dpr/2015-03.html,f095b9f88a1a354c2d560ad16ae9ed291c091c415f372cc4acae75ea6d155b5a,79005,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2015/06/,research/capital_cycle/raw/eia_dpr/2015-06.html,0cb1f12c741f91c77ee0b8840b67e00e5c65162ae19e5061bc817e1d8362a340,78999,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2015/09/,research/capital_cycle/raw/eia_dpr/2015-09.html,50040490bf66fae751ac4a3a9df425ddd95c07553362aa059cdfd4d044fa806b,77698,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2015/12/,research/capital_cycle/raw/eia_dpr/2015-12.html,a3cd29f006ca71006b376f3171a3adfaa550ff6bfb2d9ed6b626e4bcd660deb3,77699,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2016/03/,research/capital_cycle/raw/eia_dpr/2016-03.html,32161d6dd06292e0fdac5b708002d42f7be0244600eaf5412327b885660137f9,77838,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2016/06/,research/capital_cycle/raw/eia_dpr/2016-06.html,259150fa1ea6ee36faf7a283497e9f097e2dd30314b136246fc057e37c62f21e,78009,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2016/09/,research/capital_cycle/raw/eia_dpr/2016-09.html,2e132e2c22818b7b25e8ab52d954d0b837f0d219555d453cafbd0bbf8a980a31,80344,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2016/12/,research/capital_cycle/raw/eia_dpr/2016-12.html,b7fd08d046c3e5f9f559d919d20c369f7f64a19b7c15225ad5d8ccc94159f0cd,80515,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2017/03/,research/capital_cycle/raw/eia_dpr/2017-03.html,25f0fad8ee79b6e53ad79d79aafd41036597eec3f7ee7f01f178d1b5c5acdf74,81836,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2017/06/,research/capital_cycle/raw/eia_dpr/2017-06.html,d05c7a6813dd09a8d00ddaf3a3e5beb81a1b5bd372bf4e8f3f3a2b0962ed822e,79124,imported,4,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2017/09/,research/capital_cycle/raw/eia_dpr/2017-09.html,3e02f0a18b59fb85f7a5ed0522c3ff4039b987fa983d7e6e7f868252cb09390f,80252,imported,2,,0.0
+https://www.eia.gov/petroleum/drilling/archive/2017/12/,research/capital_cycle/raw/eia_dpr/2017-12.html,8cd28a25725c64133bd046d96f356ba70dc7ae83e9431141bbd4eb6df74f5340,80162,imported,2,,0.0

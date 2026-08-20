@@ -101,8 +101,10 @@ from trade_bot.research.capital_cycle_sources import (
     fetch_census_housing_release_panel,
     fetch_registered_source_documents,
     fetch_sec_filing_archive,
+    import_eia_dpr_archive,
     import_fcc_telecom_capacity_release,
     import_sec_companyfacts_panel,
+    import_usgs_copper_mcs_archive,
 )
 from trade_bot.research.capital_cycle_targets import (
     DEFAULT_CAPITAL_CYCLE_TARGET_DIR,
@@ -971,8 +973,7 @@ def backfill_snapshots_cmd(
             )
         if replace_existing_market_dates:
             raise typer.BadParameter(
-                "--only-missing-periods cannot be combined with "
-                "--replace-existing-market-dates."
+                "--only-missing-periods cannot be combined with --replace-existing-market-dates."
             )
         existing = run_store.list_snapshots(limit=100_000)
         existing_dates = existing.get("market_date", pd.Series(dtype=object))
@@ -1511,9 +1512,7 @@ def analyze_prebreak_hindsight_cmd(
 
 @app.command("refresh-prebreak-current")
 def refresh_prebreak_current_cmd(
-    reference_store: Annotated[
-        Path, typer.Option("--reference-store")
-    ] = DEFAULT_RUN_STORE_DB_PATH,
+    reference_store: Annotated[Path, typer.Option("--reference-store")] = DEFAULT_RUN_STORE_DB_PATH,
     reference_artifact_dir: Annotated[
         Path, typer.Option("--reference-artifact-dir")
     ] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
@@ -2667,7 +2666,9 @@ def validate_capital_cycle_cmd(
     ] = "QQQ",
     origin_step_days: Annotated[
         int,
-        typer.Option("--origin-step-days", help="Trading-session spacing between prior-only origins."),
+        typer.Option(
+            "--origin-step-days", help="Trading-session spacing between prior-only origins."
+        ),
     ] = 21,
     min_history_days: Annotated[
         int,
@@ -2942,9 +2943,7 @@ def import_capital_cycle_fcc_capacity_cmd(
     selected_pdf = pdf_path
     if selected_pdf is None:
         candidates = sorted(
-            (research_dir / "raw" / "registered_sources").glob(
-                "fcc_telecom_capacity_000_*.pdf"
-            )
+            (research_dir / "raw" / "registered_sources").glob("fcc_telecom_capacity_000_*.pdf")
         )
         if not candidates:
             raise FileNotFoundError(
@@ -2963,14 +2962,71 @@ def import_capital_cycle_fcc_capacity_cmd(
         existing_observations=existing,
         research_dir=research_dir,
     )
-    added = result.observations["source_id"].astype(str).eq(
-        "fcc_trends_telephone_service_200108_table_18_3"
-    ).sum()
+    added = (
+        result.observations["source_id"]
+        .astype(str)
+        .eq("fcc_trends_telephone_service_200108_table_18_3")
+        .sum()
+    )
     console.print(
         f"FCC capacity observations preserved: {int(added):,}; "
         f"combined panel rows: {len(result.observations):,}."
     )
     console.print(f"Observations: {result.observation_path}")
+
+
+@app.command("import-capital-cycle-eia-dpr")
+def import_capital_cycle_eia_dpr_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+) -> None:
+    """Import locally archived EIA DPR snapshots into the historical PIT panel."""
+
+    observation_path = research_dir / "direct_observations.csv"
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = import_eia_dpr_archive(
+        existing_observations=existing,
+        research_dir=research_dir,
+    )
+    statuses = result.archive_inventory.get("status", pd.Series(dtype=str))
+    console.print(
+        f"EIA DPR releases imported: {int(statuses.eq('imported').sum()):,}; "
+        f"failures: {int(statuses.eq('parse_failed').sum()):,}; "
+        f"combined panel rows: {len(result.observations):,}."
+    )
+    console.print(f"Inventory: {result.inventory_path}")
+
+
+@app.command("import-capital-cycle-usgs-copper")
+def import_capital_cycle_usgs_copper_cmd(
+    research_dir: Annotated[
+        Path, typer.Option("--research-dir")
+    ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
+) -> None:
+    """Import archived USGS copper MCS vintages into the historical PIT panel."""
+
+    observation_path = research_dir / "direct_observations.csv"
+    existing = (
+        pd.read_csv(observation_path)
+        if observation_path.exists() and observation_path.stat().st_size > 0
+        else pd.DataFrame()
+    )
+    result = import_usgs_copper_mcs_archive(
+        existing_observations=existing,
+        research_dir=research_dir,
+    )
+    statuses = result.archive_inventory.get("status", pd.Series(dtype=str))
+    console.print(
+        f"USGS copper releases imported: {int(statuses.eq('imported').sum()):,}; "
+        f"failures: {int(statuses.eq('parse_failed').sum()):,}; "
+        f"combined panel rows: {len(result.observations):,}."
+    )
+    console.print(f"Inventory: {result.inventory_path}")
 
 
 @app.command("fetch-capital-cycle-source-documents")
@@ -2985,9 +3041,7 @@ def fetch_capital_cycle_source_documents_cmd(
     maximum_documents_per_source: Annotated[
         int, typer.Option("--maximum-documents-per-source")
     ] = 12,
-    force: Annotated[
-        bool, typer.Option("--force/--reuse-cache")
-    ] = False,
+    force: Annotated[bool, typer.Option("--force/--reuse-cache")] = False,
 ) -> None:
     """Archive official documents linked from the governed capital-cycle registry."""
 
@@ -3015,9 +3069,7 @@ def build_capital_cycle_economic_targets_cmd(
     research_dir: Annotated[
         Path, typer.Option("--research-dir")
     ] = DEFAULT_CAPITAL_CYCLE_RESEARCH_DIR,
-    output_dir: Annotated[
-        Path, typer.Option("--output-dir")
-    ] = DEFAULT_CAPITAL_CYCLE_TARGET_DIR,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_CAPITAL_CYCLE_TARGET_DIR,
 ) -> None:
     """Build preregistered economic labels, failing closed when components are missing."""
 
@@ -3051,9 +3103,7 @@ def freeze_capital_cycle_trade_bot_baseline_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
     artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
     job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
-    output_dir: Annotated[
-        Path, typer.Option("--output-dir")
-    ] = DEFAULT_FROZEN_BASELINE_DIR,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_FROZEN_BASELINE_DIR,
 ) -> None:
     """Freeze the latest saved Trade-bot snapshot per historical market date."""
 
@@ -3085,9 +3135,7 @@ def save_capital_cycle_ai_vintage_cmd(
         str,
         typer.Option("--as-of", help="Point-in-time cutoff in YYYY-MM-DD form."),
     ] = pd.Timestamp.now().date().isoformat(),
-    output_dir: Annotated[
-        Path, typer.Option("--output-dir")
-    ] = DEFAULT_AI_VINTAGE_DIR,
+    output_dir: Annotated[Path, typer.Option("--output-dir")] = DEFAULT_AI_VINTAGE_DIR,
     allow_empty: Annotated[
         bool,
         typer.Option(
@@ -3134,9 +3182,9 @@ def build_capital_cycle_ai_evidence_cmd(
             help="Current-AI entity manifest; defaults to research_dir/ai_entity_manifest.csv.",
         ),
     ] = None,
-    ai_financial_system_dir: Annotated[
-        Path, typer.Option("--ai-financial-system-dir")
-    ] = Path("research/ai_financial_system"),
+    ai_financial_system_dir: Annotated[Path, typer.Option("--ai-financial-system-dir")] = Path(
+        "research/ai_financial_system"
+    ),
     fetch_sec: Annotated[
         bool,
         typer.Option("--fetch-sec/--local-sec-only"),
@@ -3172,9 +3220,7 @@ def build_capital_cycle_ai_evidence_cmd(
         f"{int(result.coverage['observed'].sum())}/6 families observed; "
         f"{int(result.coverage['available'].sum())}/6 pass freshness and breadth gates."
     )
-    blocked = result.coverage[~result.coverage["available"]][
-        ["family", "missing_reason"]
-    ]
+    blocked = result.coverage[~result.coverage["available"]][["family", "missing_reason"]]
     if not blocked.empty:
         console.print(blocked.to_string(index=False))
     console.print(f"Observations: {result.observation_path}")
@@ -4009,9 +4055,7 @@ def seed_operating_history_cmd(
     ] = None,
 ) -> None:
     bot_config = load_config(config)
-    resolved_primary_strategy = str(
-        primary_strategy or bot_config.primary_strategy
-    ).strip()
+    resolved_primary_strategy = str(primary_strategy or bot_config.primary_strategy).strip()
     resolved_strategy_config = bot_config.strategies.get(resolved_primary_strategy)
     if resolved_strategy_config is None:
         raise typer.BadParameter(

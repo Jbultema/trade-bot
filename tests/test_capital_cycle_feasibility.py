@@ -12,8 +12,10 @@ from trade_bot.research.capital_cycle_feasibility import (
 )
 from trade_bot.research.capital_cycle_sources import (
     _parse_census_release_text,
+    _parse_usgs_copper_mcs_text,
     fetch_sec_filing_archive,
     import_sec_companyfacts_panel,
+    parse_eia_dpr_release,
     parse_fcc_telecom_capacity_release,
 )
 
@@ -177,6 +179,68 @@ def test_legacy_census_text_pattern_is_supported() -> None:
     assert set(parsed["metric"]) == {
         "housing_permits_saar_thousands",
         "housing_starts_saar_thousands",
+    }
+
+
+def test_eia_dpr_parser_preserves_release_snapshot_and_forecast_horizon() -> None:
+    content = b"""
+    <html><body>
+    <p>Release Date: June 9, 2014 | Next Release: July 14, 2014</p>
+    <table>
+      <thead>
+        <tr><th></th><th colspan="3">New-well oil production per rig barrels/day</th></tr>
+        <tr><th>Region</th><th>June 2014</th><th>July 2014</th><th>change</th></tr>
+      </thead>
+      <tbody><tr><td>Rig-weighted average</td><td>271</td><td>275</td><td>4</td></tr></tbody>
+    </table>
+    <table>
+      <thead>
+        <tr><th></th><th colspan="3">Oil production thousand barrels/day</th></tr>
+        <tr><th>Region</th><th>June 2014</th><th>July 2014</th><th>change</th></tr>
+      </thead>
+      <tbody><tr><td>Total</td><td>4436</td><td>4508</td><td>72</td></tr></tbody>
+    </table>
+    </body></html>
+    """
+
+    parsed = parse_eia_dpr_release(
+        content,
+        source_url="https://www.eia.gov/petroleum/drilling/archive/2014/06/",
+        source_hash="eia123",
+    )
+
+    assert parsed["available_date"].eq(pd.Timestamp("2014-06-09")).all()
+    assert parsed["period_end"].eq(pd.Timestamp("2014-06-09")).all()
+    assert parsed["forecast_period"].eq("July 2014").all()
+    assert set(parsed["family"]) == {"demand", "pricing_utilization"}
+    assert set(parsed["value"]) == {275.0, 4508.0}
+
+
+def test_usgs_copper_parser_uses_publication_year_availability() -> None:
+    text = """
+    Salient Statistics--United States: 2008 2009 2010 2011 2012e
+    Production: Mine 1,200 1,100 1,150 1,170 1,220 Refinery:
+    Reported, refined 1,650 1,700 1,750 1,760 1,800
+    Apparent, unmanufactured 1,600 1,650 1,700 1,720 1,770
+    Price, average, cents per pound:
+    Domestic producer, cathode 241.2 300.0 350.0 367.3 340
+    London Metal Exchange, high-grade 230.0 290.0 340.0 360.6 332
+    Recycling:
+    """
+
+    parsed = _parse_usgs_copper_mcs_text(
+        text,
+        release_year=2013,
+        source_url="https://www.usgs.gov/official.pdf",
+        source_hash="usgs123",
+    )
+
+    assert parsed["period_end"].eq(pd.Timestamp("2012-12-31")).all()
+    assert parsed["available_date"].eq(pd.Timestamp("2013-01-31")).all()
+    assert dict(zip(parsed["family"], parsed["value"], strict=True)) == {
+        "capacity": 1220.0,
+        "demand": 1800.0,
+        "pricing_utilization": 340.0,
     }
 
 
@@ -358,8 +422,7 @@ def test_sec_filing_seed_survives_blocked_submissions_api(tmp_path, monkeypatch)
                 "accession_number": "0000000123-00-000001",
                 "primary_document": "example10k.htm",
                 "source_url": (
-                    "https://www.sec.gov/Archives/edgar/data/123/"
-                    "000000012300000001/example10k.htm"
+                    "https://www.sec.gov/Archives/edgar/data/123/000000012300000001/example10k.htm"
                 ),
             }
         ]
@@ -397,9 +460,7 @@ def test_fcc_capacity_parser_does_not_backdate_revised_history(monkeypatch) -> N
     class Reader:
         pages = [Page()]
 
-    monkeypatch.setattr(
-        "trade_bot.research.capital_cycle_sources.PdfReader", lambda _: Reader()
-    )
+    monkeypatch.setattr("trade_bot.research.capital_cycle_sources.PdfReader", lambda _: Reader())
 
     parsed = parse_fcc_telecom_capacity_release(
         b"synthetic pdf",
