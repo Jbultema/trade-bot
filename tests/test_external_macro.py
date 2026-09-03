@@ -251,6 +251,77 @@ def test_manifest_frame_deduplicates_local_files_by_video_id(tmp_path) -> None:
     assert frame.iloc[0]["transcript_path"] == longer.name
 
 
+def test_manifest_frame_restores_local_transcript_downgraded_to_catalog_only(tmp_path) -> None:
+    transcript_dir = tmp_path / "transcripts"
+    transcript_dir.mkdir()
+    (transcript_dir / "manifest.json").write_text(
+        """
+[
+  {
+    "video_id": "existing123",
+    "source": "42macro_youtube",
+    "published_date": "2026-08-18",
+    "title": "Existing transcript",
+    "url": "https://www.youtube.com/watch?v=existing123",
+    "transcript_path": "",
+    "word_count": 0,
+    "status": "catalog_only"
+  }
+]
+""",
+        encoding="utf-8",
+    )
+    transcript = transcript_dir / "2026-08-18_existing123_existing-transcript.txt"
+    transcript.write_text(
+        "source: 42macro_youtube\n"
+        "published_date: 2026-08-18\n"
+        "video_id: existing123\n"
+        "url: https://www.youtube.com/watch?v=existing123\n"
+        "title: Existing transcript\n\n"
+        "A sufficiently long local transcript must override incomplete catalog metadata.",
+        encoding="utf-8",
+    )
+
+    frame = external_macro._manifest_frame(transcript_dir)
+
+    assert len(frame) == 1
+    assert frame.iloc[0]["transcript_path"] == transcript.name
+    assert frame.iloc[0]["word_count"] > 0
+    assert frame.iloc[0]["status"] == "local_file"
+
+
+def test_metadata_only_refresh_preserves_existing_transcript(tmp_path, monkeypatch) -> None:
+    transcript_dir = tmp_path / "transcripts"
+    transcript_dir.mkdir()
+    transcript = transcript_dir / "2026-08-18_existing123_existing-transcript.txt"
+    transcript.write_text(
+        "source: 42macro_youtube\n"
+        "published_date: 2026-08-18\n"
+        "video_id: existing123\n"
+        "url: https://www.youtube.com/watch?v=existing123\n"
+        "title: Existing transcript\n\n"
+        "This existing transcript must survive a refreshed metadata-only catalog sync.",
+        encoding="utf-8",
+    )
+    monkeypatch.setattr(
+        external_macro,
+        "_fetch_channel_video_catalog",
+        lambda **_: [{"video_id": "existing123", "title": "Existing transcript"}],
+    )
+
+    result = external_macro.sync_42macro_transcripts(
+        transcript_dir=transcript_dir,
+        refresh=True,
+        fetch_transcripts=False,
+        pause_seconds=0,
+    )
+
+    row = result.videos.iloc[0]
+    assert row["transcript_path"] == transcript.name
+    assert row["word_count"] > 0
+    assert row["status"] == "skipped_existing"
+
+
 def test_bounded_sync_merge_preserves_prior_catalog_rows() -> None:
     current = pd.DataFrame(
         [

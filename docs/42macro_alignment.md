@@ -82,7 +82,67 @@ poetry run trade-bot seed-operating-history \
   --primary-strategy i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145
 ```
 
-## Current Read: August 18, 2026
+## Current Read: September 3, 2026
+
+The refreshed public catalog contains 395 videos through September 3. Local
+transcript coverage is 289 manifest-backed videos, and 278 of the 384 matched
+comparisons are transcript-backed. Trade Bot's reconstructed operating history
+now extends through September 3 under the configured primary strategy. The
+remaining 106 matched rows are explicitly low-confidence title-only screens.
+
+### Bottom line
+
+The horizon-separated human read remains **constructive but fragile**, with
+stronger duration and oil-tail warnings than on August 18. 42 Macro says its
+current risk-on regime can survive one or two rate hikes, five of six macro
+cycles remain tailwinds, and investors with horizons beyond the next few months
+should buy volatility-driven dips. It simultaneously expects the next few
+months to be volatile, sees the neutral policy rate rising, and treats eventual
+yield-curve control plus an AI-capex secular bear market as material structural
+risks. The September 3 BOJ discussion does not call a risk-off transition from
+Japanese tightening alone.
+
+Trade Bot is also approximately balanced rather than risk-off. On September 3
+its risk score is 0.43, one-month risk-off probability is 23.38%, and final
+defense is 48.57%. Its native base defense fell to 28.37%, but the independent
+portfolio-risk layer added 20.20 percentage points, holding final defense at the
+governed floor. Equity beta is 0.63 and worst modeled stress loss is 18.00%.
+Scenario and narrative sizing authority remain zero.
+
+The newest evidence therefore does not establish a current technology-cycle or
+broad-market break. Both systems remain invested while watching whether higher
+long yields, expensive AI financing, oil/refining pressure, and tighter funding
+liquidity spread into credit, volatility, breadth, and trend. 42 Macro is more
+explicitly bullish beyond the next few months; Trade Bot expresses more caution
+through portfolio construction even though its native risk state is stable.
+
+### New matched-date evidence
+
+| Date | 42 Macro public message | Trade Bot matched state | Interpretation |
+|---|---|---|---|
+| Aug 24 | Treasury's policy bridge may need to lengthen; correction risk remains, while longer-horizon policy support is expected. | 48.57% defense; risk score 0.43; 1m risk-off 23.17%. | Horizon-mixed caution; the lexical score overstates an immediate sell call. |
+| Aug 25 | The public videos split between a constructive policy view and concern that AI capital demand could accelerate fiscal stress. | 48.57% defense; risk score 0.43. | Mechanism agreement, but no unified tactical 42 Macro direction from the two videos. |
+| Aug 27 | Fed policy and NVIDIA profitability were framed as a near-term risk question. | 48.57% defense; risk score 0.43. | The automated defensive score is a screening flag, not a verified allocation instruction. |
+| Sep 1 | Run-it-hot policy is not expected to break bonds immediately; near-term volatility should be faded, while the eventual secular-bear warning remains. | 48.57% defense; risk score 0.43; 1m risk-off 23.38%. | Broad tactical alignment; the lexical classifier incorrectly labels the mixed-horizon transcript as risk reduction. |
+| Sep 2 | The current risk-on regime can survive one or two hikes; five of six cycles are tailwinds, but the next few months may be volatile. Oil/refining pressure is a conditional inflation risk. | Same September 3 point-in-time match. | Constructive fragility and strong agreement on waiting for market confirmation of an oil shock. |
+| Sep 3 | Faster BOJ hikes alone are unlikely to trigger a risk-off phase transition; tighter liquidity is still a headwind. A second video remains fundamentally bullish on risk assets. | 48.57% defense; equity beta 0.63; portfolio layer adds 20.20pp. | Both remain invested; Trade Bot carries the more defensive implementation. |
+
+### Historical outcome comparison
+
+On transcript-backed rows with realized forward windows, Trade Bot's allocation
+proxy currently has the higher mean return at every tested horizon: 0.30% versus
+0.22% at one week (273 rows), 0.98% versus 0.74% at one month (255 rows), and
+2.16% versus 1.91% at three months (211 rows). Its mean action score is also
+higher at each horizon. These are proxy allocations derived from public
+language, not 42 Macro's proprietary portfolio, and the samples overlap heavily;
+they support a descriptive comparison, not a claim of product superiority.
+
+The mechanical classifier remains materially unreliable on mixed horizons. It
+misreads the explicit dip-buying September 1 answer as defensive and compresses
+the September 2 long-horizon bullish/near-term volatile view into one cautious
+scalar. The human horizon read is authoritative for the current conclusion.
+
+## Prior Read: August 18, 2026
 
 The refreshed corpus contains 276 unique public videos through August 18. All
 23 public videos published from July 20 through August 18 are transcript-backed,

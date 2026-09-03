@@ -182,7 +182,12 @@ def sync_42macro_transcripts(
             publish_date = _fetch_video_publish_date(session, video_id) or ""
         transcript_path = str(prior.get("transcript_path") or prior.get("path") or "")
         existing_path = _resolve_transcript_path(output_dir, transcript_path)
-        if existing_path is not None and existing_path.exists() and not refresh and publish_date:
+        if (
+            existing_path is not None
+            and existing_path.exists()
+            and publish_date
+            and (not refresh or not fetch_transcripts)
+        ):
             word_count = _word_count(existing_path.read_text(encoding="utf-8", errors="ignore"))
             status = "skipped_existing"
             error = ""
@@ -1408,11 +1413,7 @@ def _manifest_frame(transcript_root: Path) -> pd.DataFrame:
         local = _deduplicate_video_frame(pd.DataFrame(_local_transcript_rows(transcript_root)))
         if local.empty:
             return frame
-        known_ids = set(frame["video_id"].astype(str)) if "video_id" in frame else set()
-        additions = local[~local["video_id"].astype(str).isin(known_ids)]
-        if additions.empty:
-            return frame
-        return pd.concat([frame, additions], ignore_index=True)
+        return _deduplicate_video_frame(pd.concat([frame, local], ignore_index=True))
     return _deduplicate_video_frame(pd.DataFrame(_local_transcript_rows(transcript_root)))
 
 

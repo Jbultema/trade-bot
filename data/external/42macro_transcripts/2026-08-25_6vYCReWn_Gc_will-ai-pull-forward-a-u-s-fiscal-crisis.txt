@@ -1,0 +1,232 @@
+source: 42macro_youtube
+published_date: 2026-08-25
+video_id: 6vYCReWn_Gc
+url: https://www.youtube.com/watch?v=6vYCReWn_Gc
+title: Will AI Pull Forward a U.S. Fiscal Crisis?
+
+Time now for the word on Wall Street,
+top investors watching your money.
+Joining me now, Infrastructure Capital
+Advisors CEO and CIO, Jay Hatfield. Also
+with me is 42 Macro founder and CEO,
+Darius Dale. And Darius, good morning.
+We're going to start here with you. Take
+a look at futures. We do have uh futures
+higher this morning. Semiconductor
+stocks moving higher right now as well.
+Uh chip stocks uh weighing on the S&P
+500 and the Nasdaq yesterday. There's of
+course still these concerns about the AI
+buildout, inflation. Uh this is all
+coming ahead of Nvidia's uh big second
+quarter earnings numbers coming out
+tomorrow after the close. Uh the stock
+right now is up 1%. Uh Darius, what are
+your expectations in particular when it
+comes to Nvidia? Uh the thinking that
+we've heard so far this week from
+several analysts is that it's not that
+Nvidia isn't going to beat, but they've
+really got to beat. It's got to be an
+extraordinary beat because the
+expectations are so high going into this
+one.
+>> Yeah, and that's thanks for having me,
+Share. I appreciate being here. Uh so
+yeah, of course they're going to beat,
+they're going to raise. This is what
+Nvidia does. It's one of the best
+companies of all time. Uh what we're
+watching for tomorrow is whether or not
+they signal an acceleration of AI CapEx
+in the broader AI ecosystem that can
+potentially power the equity market
+through year end. If they don't, you
+could actually start to you know, start
+to see some more volatility in financial
+markets, particularly as it relates to
+the bond market volatility that we
+continue to see that Treasury Secretary
+Scott Bessent from a client of mine is
+now responding to uh pretty
+aggressively.
+>> Yeah, no, certainly. And there's a lot
+of discussions about Treasury's moves in
+the bond market. Uh Jay, let's talk
+about the overall you know, economy
+story here cuz yields are falling right
+now, at least this morning, ahead of
+that critical July PCE report that we're
+going to get. And that's going to be
+tomorrow. Now, the expectations here are
+a rise of 1/10 of a percent
+month-over-month and 3.6%
+year-over-year. The street's also
+expecting a 1.5% read on second quarter
+GDP, Jay. And then of course we're going
+to be getting
+this
+speech from Fed Chairman Kevin Warsh on
+Friday at Jackson Hole. So, what are you
+expecting? You know, one of the things I
+thought was interesting today that you
+point out is that you think that the Fed
+should change their preferred inflation
+index to CPI?
+Headline CPI, is that what you're
+saying?
+>> Uh actually, Court, thanks Cheryl, it's
+great to be back. So, what most people
+don't realize about PCE is it's 30%
+imputed prices. And imputed is a fancy
+way for saying that bureaucrats make up
+the prices. So, for instance, financial
+services, and I'm sure Darius would
+agree, has zero inflation. And portfolio
+management has zero inflation. The PCE
+thinks it's 21% inflation.
+And all the weightings are distorted, so
+it's distorted towards things that the
+Fed can't control. So, there's very
+little housing. Most of the transmission
+mechanism of
+monetary policy is housing. And it's a
+huge weighting in healthcare, and
+obviously the Fed can't affect that. And
+if you really listen carefully, Warsh
+has preambled that we will switch to CPI
+core, which it by the way is very cool,
+standard 2.5. But in terms of the
+number, um I would just focus on the
+fact that we're forecasting point two
+four,
+and that's for core, and consensus is
+point two. So, this it's ridiculous, but
+rounding matters. So, if it's point two
+six, then the market will react
+terribly. If it's point two, okay. So,
+just be aware of this rounding nonsense.
+>> Okay, well, we'll be watching it. We're
+going to be reporting it on the program.
+And we'll we'll keep that in mind, or at
+least I will when I'm breaking those
+numbers. But Darius, you know, one of
+the things that we've seen with the
+inflation story is that, you know, we
+still have inflation running 3 to 4% and
+that's above the Fed's target. Well,
+that's been happening since 2021.
+And if you look back at comments from
+years ago that Kevin Warsh had made, he
+was definitely an inflation hawk. But
+what's interesting now and that and the
+way that the Wall Street has to kind of
+interpret all of this, especially when
+he speaks on Friday, is that he's saying
+that there's going to be less
+communication from the Fed and they are
+still looking at the data. This means
+that there's much more focus now on the
+data by the street than we've had with
+previous Fed chairman. Your thoughts?
+>> Uh
+Kevin, if you're watching, please give
+us a reaction function so you don't melt
+down the bond market. That's all I'll
+[laughter] say about that. Look, the
+bond market is very clearly concerned
+about a confluence of factors. There's
+obviously the supply demand imbalance
+within the Treasury market that has
+geopolitical implications and
+geopolitical drivers. There's obviously
+the tax on on global capital that is the
+AI infrastructure bill, the trillions of
+dollars that we need for that. But I'm
+also concerned from the perspective of
+our analysis on the fiscal dynamics here
+in the United States economy that the
+bond market might be looking around at
+this, you know, this momentum that we're
+seeing with some of these DSA candidates
+and starting to look around and say,
+"Hey,
+maybe labor share of national income is
+too low.
+85 to 90% of US taxes, which we know are
+$2 trillion less than our spending, come
+from people. And if we accelerate this
+AI push in a way that sort of causes
+labor share of national income to
+continue to plunge to new lows as it has
+over the last few decades,
+then you might have a real accident in
+the bond market that might force the Fed
+into yield curve control or force make
+more aggressive policies by Bostic and
+Warsh.
+>> Yeah, and you know what, Jay, to that
+point, you know, Can Acara was on the
+show with us yesterday. He said the bond
+market is in charge. You know, the Wall
+Street Journal writes, "Let the bond
+market speak." And that they say that
+these rising interest rates are a a of
+trouble ahead. But you know, to Darius'
+point, we are at full employment, right?
+So, if you if you're at full full
+employment, which is their other mandate
+at the Fed, you know, how do you balance
+this, in particular when you've got a
+you know, a $40 trillion debt situation
+for the nation? Uh and of course, that
+feeds into inflation. And that's that's
+the worry as we kind of try to move
+through all of this.
+>> I We have a 100% look at me look
+>> Sorry, Jay, go ahead.
+>> So, I'm sorry, Darius.
+We have a 100% um
+uh non-consensus view on this. If you
+really look historically, all of
+inflation comes from excessive monetary
+money supply growth and oil prices. So,
+if you look today, everybody was ringing
+their hands about bonds yesterday, but
+they're rallying today. Why? Because oil
+prices are lower. So, we need oil prices
+lower, obviously the street reopen. If
+we get that, we'll see that inflation is
+actually below the Fed's target. We'll
+get rate cuts, and the 10-year is almost
+exclusively driven by the terminal fed
+funds rate. So, all the hand-wringing
+will stop. The 10-year will go towards
+four. Uh by the way, the federal budget
+deficit is average 5.7% over the last 25
+years.
+It's 5.8% now. So, every time bonds
+rise, everybody talks about the budget
+deficit, but when they rally, they never
+talk about it. So, we think almost
+everyone is completely off base, and we
+are optimistic about both rates and
+inflation, but
+we do need the street reopened. It's
+very problematic how that's going to
+happen. Um so, that's why we have a
+pretty conservative target on the S&P of
+8100, cuz we think the 10-year will stay
+right around where it is now in the 470
+range.
+>> Well, no, because if we see hit 5% as
+many uh folks have mentioned on this
+program, you know, that's when the you
+know, the alarm bells go off. Uh Jay
+Hatfield, Darius Dale, it's great to see
+you both. Thank you so much for being
+with me.
+>> Thanks, Jerome.
+>> All right, we'll be right back,
+everybody.
+>> [music]
