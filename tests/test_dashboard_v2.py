@@ -668,6 +668,16 @@ def test_prebreak_readout_freshness_fails_visibly_when_stale() -> None:
     assert current["status"] == "current"
 
 
+def test_dashboard_v2_artifact_service_columnless_csv_is_empty(tmp_path) -> None:
+    artifact = tmp_path / "gated_study_with_no_rows.csv"
+    artifact.write_text("\n", encoding="utf-8")
+
+    frame = read_csv_artifact(artifact)
+
+    assert frame.empty
+    assert frame.columns.empty
+
+
 def test_prebreak_population_summary_separates_origins_from_conservative_clusters() -> None:
     frame = pd.DataFrame(
         {

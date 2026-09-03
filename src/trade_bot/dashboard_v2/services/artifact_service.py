@@ -20,7 +20,14 @@ def read_csv_artifact(path: str | Path) -> pd.DataFrame:
     artifact_path = Path(path)
     if not artifact_path.exists():
         return pd.DataFrame()
-    return pd.read_csv(artifact_path)
+    try:
+        return pd.read_csv(artifact_path)
+    except pd.errors.EmptyDataError:
+        # Some gated research studies legitimately have no evaluable rows. Pandas
+        # serializes a completely columnless frame as a newline-only file, which
+        # should be treated like a missing optional artifact rather than taking
+        # down the entire dashboard page.
+        return pd.DataFrame()
 
 
 @st.cache_data(show_spinner=False, ttl=60)
