@@ -1,0 +1,183 @@
+source: 42macro_youtube
+published_date: 2026-02-24
+video_id: Nr2vfQNpfW0
+url: https://www.youtube.com/watch?v=Nr2vfQNpfW0
+title: Is Crowded Positioning the Real Driver of AI Volatility?
+
+Welcome back. Let's check markets here.
+Futures are indicating a gain at the
+start of trading this morning. We've got
+triple-digit moves. Home Depot just
+reported better than expected numbers,
+raised their dividend. That's adding to
+the gains. The Dow is right now up 156
+and the Nasdaq is up 59. But it was ugly
+yesterday. All three major indices were
+lower at the close. Take a look. The Dow
+was down 1 and 2/3 percent. The others
+are down better than 1% a piece. The Dow
+down more than 800 points as AI
+disruption fears and trade uncertainty
+put a dent in risk appetite. Software
+and technology led the losses. Check out
+IBM. It tumbled 13% in the worst day
+since 2000. Delivery and payment stocks
+also sliding. American Express down 7%.
+A report from Citrini research laid out
+a hypothetical AI-driven economic shock,
+including job losses, weaker spending,
+pressure on payment processing fees.
+Financials pulled back. JP Morgan, City,
+Morgan Stanley, all under selling
+pressure on the session. This issue of
+AI disruption is not new to our
+audience. We've been talking about the
+potential for job losses now for over a
+year. Joining me now is 42 Macro founder
+and CEO Darius Dale. Darius, good to see
+you. Why suddenly is Wall Street so
+worried about AI disruption today?
+>> Yeah, good morning, Maria, and thanks
+for having me. I think part of the
+reason why the AI disruption theme or
+the AI capex theme has morphed into a
+disruption theme is partially as a
+function of the historically crowded
+bullish positioning we've observed in
+financial markets since going back to
+November. And so as a function of that,
+it's making it a lot more difficult for
+the markets to achieve escape velocity
+in response to positive economic news.
+Make no mistake about it. This AI
+diffusion into the economy is highly
+likely to cause a structural uptrend in
+productivity growth, which should cause
+a structural uptrend in the growth rate
+of corporate profits, and a structural
+downtrend in inflation. This This all
+great news for the markets, but we also
+need to find a way to burn through a lot
+of this credit bill's positioning. So
+you got this big push-pull dynamic in
+markets.
+>> Yeah, and we've faced with this kind of
+we have been faced with this kind of
+pivot before. Dot-com was was most
+recent, of course, but we want to watch
+Nvidia, of course, because the company's
+reporting after the bell tomorrow night.
+And that's going to be the one to set
+the tone for the rest of the week.
+Analysts are expecting another strong
+quarter driven by robust data center
+spending, AI chip demand. Analysts are
+projecting fourth-quarter revenue will
+be near $65 billion
+with the focus on the Blackwell chip
+ramp-up and projected growth. Morgan
+Stanley reiterated an overweight rating
+on the stock. DA Davidson also
+reaffirmed buy rating going into the
+earnings, both maintaining $250 price
+targets on the stock. Talk about strong
+visibility and strong AI spending.
+Darias, before I get your analysis of
+Nvidia, let's hear what Jensen Huang
+told me last time he was on this
+program. Watch this.
+>> Some of these companies who are
+investing in AI, they're borrowing the
+money. Is it a bubble?
+>> During the time when when
+countries, when companies build
+infrastructure, it is not unusual to
+borrow money. However,
+we're nowhere near a bubble right now.
+And the reason why we know that is
+because every single GPU that Nvidia has
+in the cloud and they're in Azure,
+they're in AWS, they're in you know,
+they're GCP, they're all rented out.
+They're in Coreweave, they're all rented
+out. In fact, the demand is so high for
+our GPUs that the spot price of GPUs we
+sold a couple of years ago are going up.
+Every single industry
+is now jumping onto AI. So I think this
+is the beginning, really, of a
+decade-long buildout.
+>> Darias, what do you think? You heard
+what the CEO of Nvidia told me a month
+ago. This is not a bubble, and it's very
+typical for companies to be borrowing
+money. But that is specifically the
+reason why wealth uh managers have
+dropped in value because people are
+worried the financials are going to be
+left holding the bag because of all of
+this spending on AI and borrowing to do
+it.
+>> Yeah, that's a great uh great uh
+observation. I'll make two observations
+on this. One, incredible fashion. You
+look fantastic in that interview. Uh as
+always you always do. Uh and two, on
+Jensen. Uh I think the commentary is he
+he sort of sounds like a guy who
+realizes the baton is being taken away
+from him. And it's not to say Nvidia
+isn't a phenomenal company. It's going
+to generate fantastic earnings and
+revenue uh in terms of satisfying
+investor demand. It's just that the
+market's moving away from him in terms
+of the where the capitalization story is
+coming next. The if AI is what we hope
+it is likely to be and what it's being
+priced to be in terms of the $650
+billion of capex that the hyper scalers
+are spending this year, then it has to
+diffuse throughout the economy and it
+has to create a structural uptrend in
+productivity growth across a variety of
+sectors and industries that have
+currently been left behind by the Mag 7
+companies. And so we've been coaching
+our global investor for months that Mag
+7 is a source of funds to capitalize
+other businesses both domestically and
+abroad to play the convergence in
+productivity and profitability thing.
+>> Yeah, so Jarius, what are some smart
+investment strategies that our viewers
+should consider to best position their
+portfolios at this point? Are you
+looking at individual companies? Are you
+looking at ETFs? How are you allocating
+capital?
+>> Yeah, I think one of the best ways to
+play this is VT. VT is the Vanguard
+Total International Stock ETF. And the
+reason we say that is because we're
+probably likely to see a continued
+convergence in performance and valuation
+in international stocks relative to US
+stocks. The VT features US stocks. It
+just also has an allocation to
+international stocks which many
+investors after 10-15 years of US
+outperformance do not have in their
+portfolios. So from our perspective,
+this is a structural, you know,
+re-portfolio rebalancing dynamic that's
+likely to occur across retail investors,
+institutional investors, and investment
+advisors for the next several years. And
+so, in our opinion, we we think this
+trade has
+as as serious legs.
+>> We will be watching that. Thank you,
+Darius. Good to see you.
+>> Thank you, Maria.
+>> We'll be watching. All right.

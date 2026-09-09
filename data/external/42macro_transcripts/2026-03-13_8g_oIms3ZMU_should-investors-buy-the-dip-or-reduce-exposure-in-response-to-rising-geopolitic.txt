@@ -1,0 +1,344 @@
+source: 42macro_youtube
+published_date: 2026-03-13
+video_id: 8g_oIms3ZMU
+url: https://www.youtube.com/watch?v=8g_oIms3ZMU
+title: Should Investors Buy the Dip or Reduce Exposure in Response to Rising Geopolitical Risk?
+
+We use our macro weather model to assess
+the probability of regime change in
+asset markets over short to medium-term
+time horizon. So, let's unpack the six
+key macro cycles of that impact the
+momentum and dispersion within and
+across asset markets over a trend basis.
+Again, geopolitical risk, tariffs,
+anything that can, you know, tickle your
+amygdala from the sector of the media,
+those things can have impact on a very
+short-term time horizon, but if if it's
+going to trend, it has to impact one of
+these six cycles in terms of inflecting
+the the momentum
+one of these six key cycles. So, I'll
+start with growth.
+We look at real GDP ex-government and
+net exports.
+That's a weak negative impulse at three
+months are of 2.5%. We look at private
+sector labor income. That's a strong
+negative impulse with a three months are
+of 2.2%. So, we got that data point this
+week. We'll we'll unpack on that. We'll
+unpack that later. We look at non-farm
+productivity. We got a weak negative
+impulse at 2.8% at a three month SAR.
+So,
+uh
+I'm actually very encouraged by the
+slowdown in non-farm productivity to
+only 2.8%. Recall that there was a 100
+basis points,
+you know, the the government shutdown
+shaved 100 basis points off of GDP in
+Q4. So, this number could be somewhere
+closer to 3.8%. Again, these numbers are
+double what we trend at in productivity
+growth terms. So, we basically we
+essentially had the last three quarters
+productivity was 4.4 something, almost
+five, and almost three, and and almost
+three it was in a quarter where we lost
+100 basis points of GDP growth.
+Like,
+I've been saying we are in a structural
+uptrend in productivity growth. I think
+I'm leading the charge on that on Global
+Wall Street. A lot of folks keep saying,
+"Well, we're not sure if it's AI. We're
+not sure if it's AI." I'm telling you
+right now, it's AI and it's causing a
+structural uptrend in productivity
+growth. It's not the only thing, but it
+is happening.
+Go ask the software stocks where the
+AI's having impact. Um so, anyway,
+we look at the next S&P 500 next fiscal
+year EPS. [clears throat]
+That's a three month mean. That's a
+strong positive impulse with the 3-month
+mean of $346 per share. We look at the
+consensus short-run potential real GDP
+estimate, that's a strong positive
+impulse at 2. at a 3-month mean of 2.2%.
+So, that's the blend of the current year
+and next year estimate by according to
+Wall Street economist consensus. That's
+a proxy for, you know, what they
+generally think growth will be in the
+economy absent the impact of comparative
+base effects. So, if we look at growth,
+the current market risk assessment is
+neutral for the growth cycle. After the
+evolving from this week's data, shifting
+to inflation.
+Headline CPI is a strong negative
+impulse. The core PC
+0.7%. We're going to get the CPI data I
+think next week. Yes, and so we'll
+finally get some right now it's keying
+off of a dead October data point. So,
+that 0.7% might be a little bit
+depressed. It's artificially lower than
+it probably should be. It'll pop back
+up, but what will it pop back up to two?
+Will it pop back up to three? Obviously
+with energy rallying, you know, for the
+market number. Is it going to pop back
+up to something higher than that? We'll
+see. If you look at the core PC price
+deflator, the weak positive impulse
+there at a 3-month SAR of 3.0%. The
+year-over-year index that's a weak
+positive impulse at a 3-month SAR of
+13%. The 5-year 5-year inflation swap
+rate, strong negative impulse of the
+3-month mean of 2.44%. And the consensus
+short-run potential headline CPI
+estimate, that's a weak negative impulse
+at a 3-month mean of 2.6%. So, on net
+inflation cycle is currently a modest
+tailwind for risk assets. Transition to
+the monetary policy cycle. If we look at
+the Fed funds rate, that's a strong
+easing impulse of the 3-month mean of
+3.75%. The 2-year nominal Treasury yield
+Fed funds rate spread is a strong easing
+impulse of the 3-month mean of
+-24 basis points. The Fed Treasury
+holdings to marketable Treasury debt
+ratio is a weak easing impulse with a
+3-month mean of 14%. Bank reserves to
+commercial bank assets ratio is a strong
+tightening impulse with a 3-month mean
+of 12%. And then the SOFR IRB spread is
+a weak easing impulse with a 3-month
+mean of two basis points. So, on net the
+monetary policy cycle is a modest
+tailwind for risk assets. Fiscal policy
+sovereign fiscal balance to GDP ratio is
+a strong tightening impulse with a
+three-month mean of minus 5.3%.
+12-month federal revenue that's a strong
+easing impulse with a three-month mean
+of of 8% or three-month saw rather of
+8%. 12-month federal expenditures is a
+strong tightening impulse with a
+three-month saw minus 3%. Treasury
+general account balance to bank reserves
+ratio that's a weak easing impulse with
+a three-month mean of 30 percentage
+points. And then bills to market with
+treasury debt ratio that's a weak
+tightening impulse with a three-month
+mean of 22%. So on net the fiscal policy
+cycle is a modest headwind for risk
+assets. Right now we we obviously know
+it's going to become a meaningful
+headwind a meaningful tailwind rather in
+the coming months as a function of
+alpha. So we understand that it's going
+to get incrementally positive at the
+margins. Liquidity and the growth cycle
+should get incrementally positive at the
+margins you know once we get into
+once we get that fiscal impulse as well.
+And obviously we continue to get the
+lagged impact of monetary easing. We
+continue to receive the
+you know the ongoing the regulatory push
+particularly financial sector regulation
+that'll likely that cause growth to be
+much faster than consensus currently
+expects. So there's a lot of stuff that
+is positive right now obviously as um as
+as as indicated by the constellation of
+composite signals here in the middle of
+page. And we're we've been saying as a
+function of our paradigm C theme that
+it's positive and going to get more
+positive. And so that's why we continue
+to have a generally positive outlook for
+markets irrespective of the you know the
+choppy nature that we've been calling
+for since November. If you look at
+liquidity
+strong positive impulse in the 42 macro
+global liquidity proxy. That's a that's
+the aggregated sum of the global central
+bank balance sheets global broad money
+supply and global fiat FX reserves. We
+look at we got a weak positive impulse
+in US liquidity as the Fed balance sheet
+minus the
+Fed balance sheet minus the TGA minus
+the RRP. We got a strong easing impulse
+in the move index with three-month mean
+of 67. We got a weak tightening impulse
+in the 10-year treasury term premium
+with a three-month mean of 70 basis
+points. And then we got a strong easing
+impulse in the US broad nominal
+effective exchange rate. So right now
+the liquidity cycles a meaningful
+tailwind for asset markets and so maybe
+one of the reasons why we see a bottom
+but obviously crude oil energy rallying
+is a negative headwind for liquidity
+which may ultimately you know cause this
+to condition to deteriorate in the
+coming weeks so we'll see. And then
+finally positioning
+the position cycle is a modest headwind
+for risk assets as evidenced by three of
+the top five position cycle indicators
+as
+as indicated by how much dispersion that
+they signal with the
+major bull market peaks and major bear
+market bottoms between bull market peaks
+and bear market bottoms in terms of
+being a clean the cleanest indicators in
+the positioning model
+the three of those are currently
+breaching their bubble peak means when
+we look at the everything bubble peak in
+January 2022 housing bubble peak in
+October of 07 and the dot com bubble
+peak in March 2000. So as you know each
+of these cycles contributes
+independently to each of these
+composite signals here in the middle of
+the page so based on the current
+constellation of composite signals which
+is bullish for stocks gold bitcoin and
+commodities and bearish for the bonds
+and dollar there is a high probability
+of sustaining a risk on market regime
+over a short to medium term time horizon
+according to everything we can actually
+observe in the data including things
+like the CRB index is a weak positive
+impulse which obviously features crude
+oil. So you should be aware of that. We
+use our grid model to assess the
+probability of regime change in asset
+markets over medium to long term time
+horizon. So if you look at our
+grid model projections obviously we
+continue to see accelerating growth
+slightly less than consensus over the
+near term but higher than consensus once
+we get into the second half of the year.
+We are at right now currently 2.5% for
+2026 from a grid model perspective which
+again is is ignorant of all of our
+fundamental research views. This is
+purely statistically derived process so
+just the the highest probability outcome
+just based on the time series the auto
+aggressive nature of the US growth time
+series is that we grow 2.5% in 20 2026
+which is right at trend. The consensus
+thinks we're going to grow below trend
+at 2.1% so in our opinion both of
+numbers are too low. Uh if you look at
+from our research perspective, from the
+perspective of our forward-looking
+research, those numbers are too low. Uh
+if you look at core PCE, uh we have core
+PCE coming in persistently below
+consensus with the exception of the
+January print which we're going to get
+next Friday. So, it may be the case that
+core PCE surprises to the upside next
+week. Uh we're probably going to see uh
+inflation the CPI uh accelerate uh as
+well. Uh and then you're ultimately you
+know you're talking about a much more
+hawkish dynamic hawkish discuss
+discourse amongst global market
+participants uh you know start you know
+I mean I'm not starting next week but
+that it'll it'll be a continuation of
+that baton. And so going back to what we
+talked about uh in the um in the in the
+in the in the in the in the executive
+summary which we'll talk about here now.
+You know the market was very ill
+just ill-positioned for a inflation
+shock. Uh we can determine that
+obviously by the 90th plus percentile
+strength of signal readings by the
+former Goldilocks market regime. But
+then we look at our global liquidity
+model which we used to nowcast the
+leading indicators of private and public
+liquidity across geographies. We see
+that uh we had a positive the global
+liquidity model was generating a a
+positive systematic uh a long idea in
+global bond market uh the Brazilian bond
+market the Chinese bond market uh the
+Indian bond market uh the Japanese I'm
+sorry not the Swiss bond market the UK
+bond market and the US bond market. And
+how it determines that is that you get a
+uh a consensus uh headline short-run
+potential headline CPI expectation
+trending lower. So, that means you know
+the two consensus is negatively revising
+their uh 2026 and 2027 uh inflation uh
+forecasts such that that that mean of
+those numbers is going lower uh over on
+a trend basis. And you wind up with a uh
+neg trending negative inflation
+surprises. So, you know you have
+[clears throat] a catalyst trending
+negative inflation surprises causing
+economists and investors to revise it
+down their inflation forecast. That's
+positive for for the fixed income
+market. Uh and so we have so many
+economies where uh so many major
+economies where that dynamic was
+occurring. So, the last thing the
+markets needed was a geopolitical shock
+that causes, you know, energy and
+inflation to rally in an unexpected and
+potentially protracted manner. That's
+what's going to cause an unwind in that
+crowded bullish positioning. And so, I
+don't know how long the geopolitical
+shock is going to last, but we do know
+that markets were set up very poorly to
+deal with this dynamic. So,
+transitioning
+And finally, our key leading indicators
+of global equity currently signal a
+significant uptrend over the medium
+term, so that remains positive as well
+from the perspective of our
+forward-looking market risk. Doesn't
+mean it has to, you know, come to
+fruition or that markets have to trade
+well, but when you put everything
+together before we get into the
+fundamental research portion of the
+program, you put everything together
+from the perspective of our, you know,
+our
+our systematic elements of our process,
+they're essentially telling us to just
+relax.
+Now, they may tell us to do something
+not that other than relax next week.

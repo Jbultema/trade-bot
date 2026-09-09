@@ -82,7 +82,79 @@ poetry run trade-bot seed-operating-history \
   --primary-strategy i111_reentry_vol_target_fast_21d_no_trend_vol185_guard145
 ```
 
-## Current Read: September 3, 2026
+## Current Read: September 9, 2026
+
+The refreshed public catalog contains 398 videos through September 9. Local
+transcript coverage is 328 manifest-backed videos, and 317 of the 387 matched
+comparisons are transcript-backed. Trade Bot's reconstructed operating history
+now extends through September 9 under the configured primary strategy. The
+remaining 70 matched rows are explicitly low-confidence title-only screens.
+
+### Bottom line
+
+The human horizon read remains **tactically risk-on but structurally fragile**.
+Darius Dale's September 9 Eurodollar Talk interview says that five of six macro
+cycles are still tailwinds and that the current reflation/risk-on regime remains
+one of the stronger environments for taking risk. Positioning is the principal
+near-term headwind. He does not treat the anticipated AI-capex bust as a current
+sell signal: the market regime must first confirm the transition.
+
+The structural warning is nevertheless unusually relevant to Trade Bot's
+capital-cycle work. Dale expects AI investment eventually to overbuild capacity,
+compress marginal returns, and resemble prior railroad, radio/auto, and dot-com
+capital cycles. His proposed control is incremental, signal-driven de-risking as
+market pricing changes—not a narrative-driven wholesale exit. That maps closely
+to Trade Bot's intended separation between a slow cycle-vulnerability layer and
+faster confirmation from credit, volatility, breadth, trend, and liquidity.
+
+Trade Bot is also approximately balanced. On September 9 its risk score is
+0.40, one-month risk-off probability is 21.27%, final defense is 48.57%, equity
+beta is 0.67, and worst modeled stress loss is 18.00%. Native base defense is
+44.95%; the portfolio-risk layer raises final defense to the governed floor.
+The snapshot recommendation is HOLD with a 0.93 risk-budget multiplier.
+Scenario, event, and capital-cycle research still have zero sizing authority.
+
+The September 8 42 Macro videos create a useful watch-list disagreement. Their
+lexical scores are fully defensive while Trade Bot remains balanced, reflecting
+warnings that sovereign capital demand, central-bank policy, and bond-market
+instability could transmit into risk assets. The September 9 update and Dale's
+long interview make clear that this is not yet a confirmed risk-off phase change.
+The human read therefore treats the videos as leading bond/credit warnings inside
+a still-constructive regime, rather than as a current all-out de-risk instruction.
+
+### New matched-date evidence
+
+| Date | 42 Macro public message | Trade Bot matched state | Interpretation |
+|---|---|---|---|
+| Sep 8 | Central banks face an unfavorable tradeoff and sovereign capital demand could force a disorderly rise in long rates. | 48.57% defense; risk score 0.40; 1m risk-off 21.10%. | A real duration/credit warning, but the lexical `risk_reduction` label overstates the verified portfolio instruction. |
+| Sep 8 | The bond market may overpower incremental Treasury intervention, increasing eventual yield-curve-control and debasement risk. | Same September 8 point-in-time state. | Trade Bot is more constructive tactically; both recognize the capital-competition mechanism. |
+| Sep 9 | Treasury buybacks may be too small to control the bond market; policy error could accelerate the longer-run debasement path. | 48.57% defense; risk score 0.40; 1m risk-off 21.27%; equity beta 0.67. | The mechanical scalars align at balanced, while the human read preserves the structural warning. |
+| Sep 9 | Dale's Eurodollar Talk interview remains bullish on the current reflation regime while anticipating a later AI-capex bust. | Same September 9 state; HOLD; 0.93 risk budget. | Strong process alignment: remain invested now, monitor the structural vulnerability, and let a market-regime transition trigger incremental defense. |
+
+### Historical outcome comparison
+
+On transcript-backed rows with realized forward windows, Trade Bot's allocation
+proxy has the higher mean action score and mean return at every tested horizon:
+0.25% versus 0.19% at one week (309 rows), 0.71% versus 0.54% at one month
+(291 rows), and 2.37% versus 2.03% at three months (247 rows). The whole-corpus
+result points in the same direction. These are proxy allocations derived from
+public language, not 42 Macro's proprietary portfolio; windows overlap heavily,
+and the lexical classifier cannot reliably separate tactical from structural
+statements. This is descriptive evidence, not a claim of product superiority.
+
+The main research implication is to preserve Trade Bot's confirmation gate while
+strengthening its technology-cycle evidence. Dale's framework supports measuring
+AI capacity, financing, monetization, and commitment overhang as a Bayesian prior,
+then requiring credit/spread, volatility, breadth, and trend confirmation before
+that prior receives sizing authority. The comparison does not justify changing
+the current allocation by itself.
+
+Source reviewed: [Darius Dale Says This Bull Market Isn't Over Yet (Here's Why)](https://www.youtube.com/watch?v=MrqNifMB8RY),
+published by Eurodollar Talk on September 9, 2026. The upload had no usable public
+captions at review time, so the human read used the public audio and a local
+machine transcription. No interview transcript or media was added to the repo.
+
+## Prior Read: September 3, 2026
 
 The refreshed public catalog contains 395 videos through September 3. Local
 transcript coverage is 289 manifest-backed videos, and 278 of the 384 matched

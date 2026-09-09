@@ -1,0 +1,405 @@
+source: 42macro_youtube
+published_date: 2026-02-20
+video_id: lZGsBopjz1o
+url: https://www.youtube.com/watch?v=lZGsBopjz1o
+title: The Macro Minute: Will the Q4 GDP & December PCE data force the Fed to revise its reaction function?
+
+Happy Friday out there, team 42. It's
+your skipper here at Darius Dell to
+present our macro minute for Friday,
+February 20th, 2026. Hope everyone's
+having a great week. So, as always,
+we'll start with the executive summary
+from today's leadoff morning note. So,
+let's dive right in. Today's key macro
+question is, will the Q4 GDP and
+December PCE data force the Fed to
+revise its reaction function? The short
+answer is unlikely. The data are broadly
+in line with the latest FOMC projections
+of a 2% real growth and 2.5 to 3%
+inflation US economy. Terms of
+analytical nuance and boy there is there
+a lot today uh with so many uh important
+data points. Uh the Q4 GDP and December
+PCE data supported our resilient US
+economy theme, U-shaped economy thesis
+and sticky inflation theme. The Q4 real
+GDP data and Q4 nominal GDP data
+supported both our resilient US economy
+theme and U-shaped economy thesis. And
+the Q4 GDP deflator and core PCE price
+deflator data supported our sticky
+inflation theme. The weak negative
+impulses in real GDP and real PCE along
+with the strong negative impulse in real
+government purchases investment real
+government purchases and investment to
+below trend quarter quarter SARS in Q4
+supported our U-shaped economy thesis.
+the weak negative impulse in real final
+sales to private domestic purchasers and
+the strong negative impulse in real
+final sales to public domestic
+purchasers to respective below trend and
+well below trend quarter overquarter
+SARS in Q4 supported our U-shaped
+economy thesis as well after
+contributing a net uh 371 basis points
+on an absolute basis to real GDP in the
+first half of 2025. Imports and
+inventories have combined to contribute
+only 44 basis points on a net basis to
+real GDP in the second half of 2025
+which suggests the peak economic impact
+of tariffs is likely in the rearview
+mirror. The weak negative impulse in
+real GDP X government and net exports to
+an at trend quarter overquarter saw in
+Q4 supported our resilient US economy
+theme and U-shaped economy thesis. And
+the weak negative impulse and nominal
+GDP exgovernment and net exports to an
+above trend quarter quarter saw in Q4
+supported our resilient US economy theme
+and U-shaped economy thesis. Shifting
+gears to the weak positive impulses in
+the in real non-residential fixed
+investment and real residential fixed
+investment to respective at trend and
+well below trend quarter quarter SARS in
+Q4 supported our resilient US economy
+theme and U-shaped economy thesis
+residential fixed investment as a share
+of real GDP a new cycle low 3.2% 2% in
+Q4, upping the sense of urgency in DC to
+address the frozen housing market with
+fiscal and regulatory easing. Strong
+positive impulses in building permits
+and housing starts to respect of above
+trend three-month SARS in December
+suggest the frozen housing market is
+already starting to thaw and organically
+it will likely be turbocharged by any
+fiscal and regulatory easing.
+Shifting to the PC report, the strong
+negative impulses in nominal disposable
+personal income and real disposable
+personal income to respective below
+trend and well below trend three-month
+SARS in December supported our U-shaped
+economy thesis. While the decline in the
+personal savings rate to a fresh cycle
+low supported our resilient US economy
+theme via the West Village Malk effect.
+the weak negative impulses and real
+personal consumption expenditures, real
+goods PCE and real services PCE to
+respective below trend, well below trend
+and well above trend three-month SARS in
+December supported our resilient US
+economy theme and U-shaped economy
+thesis. The week negative in nominal
+wage and salary income to a below trend
+three-month SAR in December supports our
+view that the labor market is softer
+than both the headline data and the
+current consensus narrative regarding
+stabilization imply. Lastly, the weak
+positive impulsees in headlines PC
+deflator and core PC deflator along with
+the strong positive impulse in the super
+core PC deflator to well above trend
+three month SARS in December supported
+our sticky inflation date. As always,
+members of our global investor community
+can trust that our institutional grade
+risk management overlays Kiss and Dr. Mo
+help our portfolios these emergent risks
+better than investors attempting to
+manage risk without systematic rules or
+relying on fundamental research alone.
+Transitioning to our 42 macro dashboard,
+as always, we'll wrap up with a question
+from our community. This one's titled uh
+trailing stops. But actually before we
+get into that, uh let me take a step
+back. There's obviously a lot of
+information we just threw at you. uh
+obviously if you're not used to uh
+analyzing data like an institutional
+investor would in terms of extracting uh
+the important components from the data
+uh to support or refute your legacy
+themes uh that's totally fine. That's
+something you probably have to get used
+to uh to the extent that you are uh new
+to our global investor community. But I
+can tell you right now, as someone who
+probably analyzes more time series, uh,
+as any human being on Global Wall
+Street, uh, emphasis on human being,
+because obviously they're machines that
+analyze a lot more time series than I
+do, but uh, as someone who analyzes more
+time series probably than any human
+being on Global Wall Street, I'm telling
+you right now, this is what it takes to
+remain at the vanguard of the six key
+macro cycles that influence the momentum
+and dispersion within and across asset
+markets. Those are growth, inflation,
+monetary policy, fiscal policy,
+liquidity, and positioning. It's very
+important for you to have a a real keen
+sense of the direction, the delta, uh,
+as well as the magnitude of change,
+which is the impulse. So, the the the
+weak and strong tell you the delta, the
+impulse, the positive and ne sorry, the
+positive and negative tell you the
+delta, and the weak and strong tell you
+the magnitude when we're talking about
+the impulses. So, for example, a strong
+positive impulse is when the 3-month
+annualized rate of change exceeds the
+six-month annualized rate of change and
+the six-month annualized rate of change
+exceeds the year-over-year rate of
+change. That implies that there is a
+trending acceleration in the slope of
+the underlying time series, which
+generally speaking has more momentum
+than what a weak positive impulse would
+imply, which would equal a 3-month
+annualized rate of change is above the
+six-month annualized rate of change. But
+the six-month annualized rate of change
+is below the year rate of change. So
+that's a transitory increase in the
+slope of the underlying time series,
+which ultimately implies that it has
+less momentum than a strong positive
+impulse. Obviously, if we were talking
+about a strong negative impulse and a
+weak negative impulse, you just invert
+those
+of the uh in terms of the the
+relationship between the three-month
+annualized, but the the conclusion in
+terms of the strong uh impulse having
+more momentum and a weak than a weak
+impulse uh is the same. And so this is
+the kind of information that
+institutional investors are uh uh
+discussing uh with me in our proto
+meetings and and and what we discuss on
+global Wall Street to identify whether
+or not uh there's a a real true
+inflection uh in those six key macro
+cycles because when there are
+inflections in one or more of those six
+key macro cycles, there usually is a
+trending inflection in the relative
+performance of asset classes but also
+the relative performance of factors
+within the financial markets. And so if
+you can stay at the vanguard of those
+six key macro cycles by analyzing data
+in a consistent, systematic, and
+ultimately institutional way, you're
+going to know a lot more and ultimately
+have your trades be informed by a lot
+more critical information than the folks
+trying to piece together narratives on
+Twitter. So hopefully that was really
+helpful. Let's get back into the
+dashboard and wrapping up with the
+question from our community. So again,
+this one's titled Trailing Stops. Says,
+"Thank you for all the great guidance
+for us mainstream folks. I'm following
+KISS and I'm feeling better about
+retirement since I joined your
+community. Uh so thank you. Appreciate
+the kind feedback. Uh getting back to
+the question. This is probably a stupid
+question, but uh I'm just curious about
+the warning of a choppy year ahead of
+us. Is there any time uh it makes sense
+to implement trailing stops to hedge
+against big down days such as a recent
+draw down in gold? Uh thanks for the
+clarification. So um uh excellent
+question. You know, to me, I think this
+is uh there's a couple things, a couple
+avenues I want to explore in this
+question. Uh one, uh there's no stupid
+questions, certainly not in our
+community. Uh one of the things I'm most
+proud of as a human being, not just as a
+business builder, but as a human being,
+is how kind and thoughtful, but more
+importantly kind uh the thousands of
+investors that are interacting with each
+other here in our global investor
+community are to each other. I mean,
+I've never seen anything like it. It
+certainly doesn't exist anywhere else on
+the internet. you turn on any other part
+of the internet and you just have a
+bunch of fools yelling shouting
+obscenities at each other and
+unfortunately that's not how you learn
+and that's not how you become better
+investors with better investment
+performance. So uh you know for whatever
+reason maybe it's a testament to my
+leadership our leadership here or just a
+testament to the kind of people that we
+attract into our global investor
+community you know there's just not a
+lot of that you know negative um
+nonsense in here at all really. Uh so um
+really grateful for that uh really
+blessed by that uh dynamic. Uh and
+ultimately what that ultimately means
+going back to the question is there are
+no stupid questions. Yeah, we have
+investors here who just started
+investing. We have byside portfolio
+managers here, folks who making a ton of
+money on Global Wall Street uh answering
+questions from novice investors. We
+have, you know, investment adviserss
+answering questions from novice
+investors. We have uh folks who are
+power users of 42 micro who've been with
+us for the entire 5-year journey
+answering questions from uh new users
+about this or that process. Uh so it's
+just a wonderful community of learning
+and if you're addicted to learning like
+I am, boy oh boy is this the place for
+you. Uh so um just wanted to hammer that
+point home. And then the second part is
+uh on trailing stops. So uh I'm not a
+fan of trailing stops because I'm
+someone who uses institutional grade
+risk management overlays to manage my uh
+manage the risk in my portfolio. I would
+argue if you don't have institutional
+grade risk management overlays like KISS
+and Dr. Mo managing the risk in your
+portfolio then I reckon uh trailing
+stops is probably better than uh
+something that um you know probably it's
+certainly better than you know trying to
+manage risk with fundamental research. I
+I just think that that that the ability
+of investors particularly investors who
+aren't crunching the numbers to the
+extent that we we're forced to do uh by
+the financial markets on a daily weekly
+and monthly basis. Um, I just think
+it's, you know, the the the the amount
+of information, um, the markets move too
+quickly is what I'm trying to say. You
+know, the factor leadership changes uh,
+too quickly. The the the the factor
+leadership cycles, the cycles within the
+cycle, the broad, you know, full market
+cycle, uh, have sped up in recent years,
+in recent decades. And so if you're
+trying to use fundamental research to
+stay on the right side of factor risk or
+market risk, the probability that you be
+a you're able to do that um at a high
+level uh is is diminishing over time has
+diminished over time and continues to
+diminish and will continue to diminish
+particularly as we get more AI solutions
+involved in the investment decision-m
+process across the global buy side. So
+that's one thing I would say. Uh so that
+ultimately means you you do need some
+form of quantitative uh risk management
+overlay or a technical risk management
+overlay. I'm not a big fan of technicals
+because I think when people use
+technicals, they tend to see whatever it
+is that they want to see uh in the
+charts. You know, there's thousands of
+technical indicators and you know, you
+can always add three or four of them
+together to tell yourself whatever you
+need to tell yourself about a chart that
+you want to buy or a chart that you want
+to sell, you know, so that to me it's
+not it's not systematic enough. Uh but
+our institutional great magic overlays,
+Kiss and Dr. Mo are better than
+something like a trailing stop. and
+they're significantly better in terms of
+performance, but one of the reasons
+they're better uh than something like a
+trailing stop is because a trailing stop
+only manages [clears throat] left tail
+risk. It doesn't manage right tail risk.
+So imagine if we're heading into a uh
+bare market. A trailing stop would
+actually get you out and do you some
+some good uh in terms of chopping off
+the left side of the left tail of the
+distribution uh which helps you avoid
+type two more costly type two errors in
+your portfolio. However, it's not going
+to get you back long. And so you're not
+not going to you're not going to have a
+reason. you're not gonna have an ability
+to maximize upside capture. Unless, of
+course, you have some fundamental
+oriented view to try to tell yourself,
+hey, the market has bottomed now. It's
+time for me to get back in, which is a
+fi fantastic way to set yourself up for
+a hazardous type two error to the extent
+you are not in a market bottom. And in
+fact the bare market is likely to
+continue or perhaps even deepen uh into
+a devolve into a secular bare market
+which you know we've seen those once
+every at least 10 years uh in in in you
+know over the last you know let's call
+it 100 plus years of US equity market
+history. So uh I want investors to be
+very very clear about uh the difference
+between using two-sided institutional
+grade risk management overlays like KISS
+and Dr. mode to manage risk versus
+something that's a little bit more
+novice and offtheshelf like a trailing
+stock that only uh manages one side of
+the distribution and not the other side
+of the distribution because you need to
+do both in order to retire on time and
+comfortably which is the number one
+thing we sell to thousands of investors
+in 80 plus countries around the world.
+You need to manage both sides of the
+return distribution. uh you need to chop
+off the left tail left side of the left
+tail distribution at bare market so you
+can minimize downside capture and you
+need to expose your portfolio to the
+right side of the distribution as much
+as possible so that you can maximize
+upside capture if you do that over and
+over and over across enough market
+cycles I promise you'll retire on time
+and comfortable so uh we'll wrap it up
+there still here presenting our macro
+minute for Friday February 20th 2026
+everyone have a wonderful weekend we
+will catch you back here on Monday
+cheers

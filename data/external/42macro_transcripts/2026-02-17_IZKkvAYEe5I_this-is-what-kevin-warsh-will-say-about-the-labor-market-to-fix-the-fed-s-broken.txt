@@ -1,0 +1,297 @@
+source: 42macro_youtube
+published_date: 2026-02-17
+video_id: IZKkvAYEe5I
+url: https://www.youtube.com/watch?v=IZKkvAYEe5I
+title: This Is What Kevin Warsh Will Say About the Labor Market to Fix the Fed’s Broken Reaction Function
+
+The somewhat artificial recovery in
+private sector labor income masked
+underlying weakness in employment
+growth. So, if you look at total
+non-farm payrolls, uh we have a a weak
+positive impulse to 0.6% on a
+three-month annualized basis.
+Manufacturing payrolls is weak positive
+impulse to 0.9% uh and then if you look
+at government and government adjacent
+payrolls, we had a uh weak positive
+impulse to 1.2%. Uh the thing that
+concerns me, which is about 50% of total
+employment, is the lack of response and
+significant underperformance in true
+private services payrolls at 0.1%
+uh you know not to say that this is
+going to be the the sector relative to
+everything else on the page is the
+sector uh that is going to be most uh
+impacted by uh potential AI job
+discovery from AI. So, uh we got to keep
+our eyes on this. Three-month annualized
+rate of true private services payrolls,
+so that's private services payrolls ex
+healthcare and social services, uh you
+know, which is roughly about 50 a little
+bit over 50% of total employment.
+The three-month annualized rate of
+change of that is 0.1%. The six-month
+annualized rate of change of that is 0%.
+And the year-over-year rate of change of
+that is minus 0.1%. So, there's just
+been no growth in the true private
+services payroll economy, which again is
+roughly 50 slightly more than 50% of
+total employment growth. Investors need
+to be aware that that's a that's a in
+our opinion
+what I just circled is a sign.
+The historic crowding out of the private
+sector continues to rob the US labor
+market of the dynamism it was once
+celebrated for having. AI will probably
+make this worse. So, the structural rot
+is very important. Um we've been talking
+about this for years now. Um you know,
+it's becoming more and more clear as we
+get more and more data. Uh but if you
+look at the uh share of um the the share
+of the cumulative growth of non-farm
+payrolls that are from government and
+government adjacent sectors, which
+include federal, state, local
+governments, healthcare, education, and
+social services, uh
+that's you know, on on it it pre-COVID
+trend. So, normal down in distance which
+is a normal level of of of growth coming
+from those sectors, it's roughly 31%.
+And throughout the the four years of the
+Biden presidency, which included the
+incredible pop in employment we had in
+2021, was 35%. But when you actually
+start to feel the impact of Biden's
+failed presidency and all the terrible
+policies that he implemented,
+84% of all job growth came from these
+government and government-adjacent
+sectors, which is obviously terrible.
+It's so much worse now. So if you look
+at the Trump 2.0 economy, which
+obviously started in job support terms
+from February of last year, 144% of all
+jobs growth,
+which 359,000 total
+uh jobs have been created created, you
+know, according to payrolls report,
+which was revised. We had a minus
+870,000
+negative revision in payrolls with the
+QECW survey through March of 2025. So
+from April 2024 to March of 2025,
+these aren't lost jobs. They just were
+overcounting them, systematically
+overcounting them. So be aware of that.
+But again, in the 359,000 jobs
+that have been created in the Trump 2.0
+economy, 517,000
+of them come from this
+the government and government-adjacent
+sector category, which obviously means
+you have negative employment growth in
+the true private services and private
+manufacturing jobs. So investors need to
+be aware of that. 144%
+So 14 out of every 10 jobs that have
+been created in the Trump 2.0 economy
+are coming from the government and
+government-adjacent sectors. If you want
+to know why Elon Musk left DC, that's
+probably it.
+The sharp contraction in private sector
+job openings again, I'm not trying to
+joke cuz this is impacts people's lives.
+It's not funny. You know, sometimes you
+got to make, you know,
+there's a lot of boring data, you know,
+we're talking about three-month
+annualized, six-month annualized,
+year-over-year rates of change of, you
+know, wonky economic statistics, you
+know, let's let's have some fun here.
+And then obviously in a respectful way.
+The sharp contraction in a private
+sector job opening signals rising
+probability of a jobless recovery amid
+AI diffusion. So if you look at job
+openings, a strong negative impulse is
+about as strong as a negative impulse
+you're ever going to see in in data. And
+and by the way, for those of you that
+may be new,
+strong positive impulse means
+three-month annualized rate of change
+exceeds the six-month annualized rate of
+change. Let me just draw it since it's a
+little bit easier. Three month
+exceeds the six month,
+which exceeds the year-over-year.
+A weak positive impulse which means
+three month exceeds the six month, but
+the six month is below the
+year-over-year. Uh weak negative impulse
+means the three month is less than the
+six month, but the six month is greater
+than the year-over-year. And then a
+strong negative impulse means the three
+month is less than the six month, which
+is less than the year-over-year. So, you
+know, if you have this, you know, kind
+of strong positive impulse, that means
+there's a trending acceleration in the
+slope of the underlying time series. A
+strong negative impulse means there's a
+trending deceleration in the slope of
+the underlying time series. And then the
+weak positive and the weak negative just
+means there's a transitory acceleration
+or deceleration in the slope of the
+underlying time series. So, the reason
+we analyze data this way is because it
+is predictive. There's momentum in time
+series.
+Light bulb. It's predictive for, you
+know, the short-to-medium term outlook
+for for these for for these variables.
+So,
+if you So, really deep strong negative
+impulse to minus 62% in terms of in
+terms of the the private sector job
+openings to 5.8 million.
+>> [clears throat]
+>> In our opinion, we think that signals a
+rising probability of job recovery. And
+again, this is a December data point, so
+be aware of that. If you look at the ADP
+private sector employment, which is a
+good proxy for non-farm payrolls private
+employment on a levels basis, not
+necessarily on a month-over-month
+nominal change basis, which a lot of
+folks get wrong. But on levels basis, it
+it pretty much is. We have a
+a strong or a weak negative impulse in
+private sector employment according to
+the ADP survey to a 0.4% three-month
+annualized, well below trend. We got a
+weak negative impulse in ADP true
+private sector employment, which
+subtracts health care and education from
+the total.
+So, we've got 106 million there versus
+132 million for the total there
+versus I want to say 136 million for
+private non-farm payrolls.
+But again, going back to ADP true
+private sector employment week negative
+impulse to minus 0.2% on a few month
+annualized basis in January. So,
+obviously the headline was oh, jobs
+market is healed in January.
+In my opinion, if you take one step
+beyond the headline you're going to
+realize this is labor market is squishy.
+May not be getting squishier, but it's
+still very much squishy and from our
+perspective some of the leading
+indicators that we're focused on in
+terms of signaling a rising or falling
+probability of job job recovery.
+I would say on net they're still
+signaling rising probability.
+So, for example, the dramatic
+underperformance of employment growth
+relative to the growth of labor supply
+supports our job recovery thesis. So,
+the chart on the left shows the median
+value of private non-farm payrolls on a
+year-over-year basis by quintile bin of
+total civilian labor force or labor
+supply. So, labor supply is currently
+growing at 1.8%
+that puts us in this bin here. And so,
+on the private non-farm payrolls growth
+should be so on a median basis
+historically with data going back to
+1948, private non-farm payrolls growth
+on a median basis is 2.3% when we're in
+this quintile bin for the growth rate of
+the civilian labor force, which by the
+way, what is this nonsense about the
+lower break-even rate of employment
+growth because of the president's
+immigration policy? That's poppycock.
+That's a CNN talking point. That's an
+MSNBC talking point. That's a
+left-leaning media talking point.
+The labor force is growing 1.8%. That's
+a 70th percentile value with data going
+back to 1948. The labor force is not
+contracting. It is rising and people
+aren't getting jobs.
+>> [laughter]
+>> So, uh
+I don't know where this this ridiculous
+it's
+to me it seems politically motivated.
+They want to basically blame the
+president. You know, these these media
+sources want to blame the president for
+everything that's going wrong in the
+economy, which you know, again he's
+going to blame them for everything that
+went wrong in the Biden economy. So, you
+know, I don't want to have any parts in
+this finger-pointing, but what I want to
+do is
+elucidate the truth. My job is to figure
+out what is true. And what I'm telling
+you right now, the the growth rate of
+private nonfarm payrolls is dramatically
+underperforming the positive 70th
+percentile growth rate of the labor
+supply.
+And so, beware of that. If you look at
+the chart on the right, median one
+quarter lagged quarter-over-quarter SAAR
+growth rate of private nonfarm payrolls
+by quintile of the quarter-over-quarter
+growth rate of the civilian labor force.
+So, lagging it by one quarter. So, we
+have obviously
+uh data uh uh uh the civilian labor
+force through
+through obviously now we're starting in
+in in Q1 of this year. So, uh
+what this
+relative to the current data the next
+observation for this particular backtest
+would be the Q2 uh growth rate of
+private nonfarm payrolls. So, we don't
+have that that that observation in the
+sample, but we do have data going back
+to Q1 of 1948. And we do know that the
+civilian labor force is in the second
+quintile right now in terms of the
+quarter-over-quarter SAAR growth rate
+that we observed in Q4. And so, that
+suggests that the growth rate of private
+nonfarm payrolls in Q1 should in Q1, the
+current quarter, should be 1.9%. It is
+only 0.4%. So, uh there's dramatic
+underperformance whether you look at it
+on a year-over-year basis or on a one
+quarter lagged quarter-over-quarter SAAR
+basis, it's suggesting that uh
+you know,
+we're not getting enough employment
+growth relative to the growth rate of
+labor supply.

@@ -1,0 +1,474 @@
+source: 42macro_youtube
+published_date: 2026-02-05
+video_id: d0AJ354n4Dk
+url: https://www.youtube.com/watch?v=d0AJ354n4Dk
+title: The Macro Minute:  What does the breakdown in legacy software signal about the US labor market?
+
+Happy Tuesday out there, team 42. It's
+your skipper here, Darius Dell to
+present our macro minute for Tuesday,
+February 3rd, 2026. As always, we'll
+start with the executive summary from
+today's leadoff morning note. So, let's
+dive right in. Today's key macro
+question is, what does the breakdown in
+legacy software stocks signal about the
+US labor market? The short answer is,
+unfortunately for our already broken
+society, it signals our jobless recovery
+thesis is likely to be proven correct.
+Terms of analytical nuance, dispersion
+continues to be the name of the game
+within and across asset markets with a
+tepid but modestly positive liquidity
+backdrop. For example, Palanteer is
+rallying 5% today after issuing a sales
+outlook that exceeded consensus
+expectations. Meanwhile, shares of
+professional data and analytics
+providers Relics and Thompson Reuters
+are down 15%. Walters Clue is down 11%,
+London Stock Exchange Group is down 9%
+and Experian is down 8%. Stocks viewed
+as highly exposed to AIdriven disruption
+sold off aggressively after Anthropic
+unveiled a product aimed at automating
+legal tasks such as contract review and
+legal brief preparation. This
+intensifies investor anxiety about the
+implications of AI for data services and
+information ccentric business models.
+Although multiple business models face
+disruption, software as a service or SAS
+appears to be especially exposed because
+AI native competitors can deliver faster
+and cheaper solutions, eroding what were
+once considered to be defensible
+competitive modes. Anthropics cloud code
+and a wave of so-called vibe coding
+startups are upending traditional SAS by
+enabling non-technical users to create
+software, sharply reducing barriers to
+entry and weakening standardized
+one-sizefits-all product offerings.
+We've long argued that intense
+competition from upstart AI enabled
+competitors coupled with efficiency
+gains from large corporations that have
+the resources to scale AI solutions
+quickly and quarterly earnings pressure
+to reduce headcount are highly likely to
+disrupt the labor market. Let me read
+that again because that's one of the
+most important things I've said all
+year. We've long and I've been saying
+this for six months now. We've long
+argued that intense competition from
+upstart AI enabled competitors coupled
+with efficiency gains from large
+corporations that have the resources to
+scale AI solutions quickly and quarterly
+earnings pressure to reduce headcount
+are highly likely to disrupt the labor
+market.
+Today's collection of signals is highly
+supportive of our jobless recovery
+thesis. For what it's worth, a bearish
+outlook for the labor market somewhat
+mirrors the outlook provided in the
+economy statement for the Treasury
+Borrowing Advisory Committee. Speaking
+of, part one of the US Treasury
+Department's 1Q 2022 quarterly refunding
+announcement was released yesterday
+afternoon, and the results were somewhat
+surprising given the likelihood of a 3
+to500 billion positive fiscal impulse in
+calendar 2026. Specifically, the
+Treasury expects to borrow a net 574
+billion in Q1 and 109 billion in Q2,
+which is a sharp slowdown relative to
+the prior two quarters, which saw net
+marketable borrowing of 569 billion in
+Q4 and 1.06 trillion in Q3. We surmise
+that this is a signal of two dynamics.
+Number one, the Treasury does not expect
+the Fed to ease in the first half of
+2026 and thus is restraining net
+marketable borrowing for the second half
+of 2026 in hopes of lowering bar lower
+borrowing costs. And number two, the
+Treasury may decide to restrain net
+marketable borrowing until heavy
+issuance in Q4 to cause indigestion in
+asset prices ahead of the midterm
+elections where it appears likely that
+Democrats will have the upper hand in
+polls and results. A convenient
+narrative for the administration would
+be that the stock market is setting off
+in anticipation of congressional
+resistance to President Trump's golden
+age economic agenda. So uh beware be uh
+buyer beware if you're waiting on rate
+cuts in the second half of the year and
+they pull this off um you're going to be
+uh disappointed as an investor. So uh as
+always uh members of our global investor
+community can trust that our
+institutional grade risk management
+nolays kiss and Dr. will help our
+portfolios navigate these emergent risks
+better than investors attempting to
+manage risk without systematic rules or
+relying on fundamental research alone.
+Transition to our 42 micro dashboard. As
+always, we wrap up with a question from
+our community. This one's titled labor
+and jobs and paradigm C which is the
+growth phase of the cut grow sequence
+required to address the geopolitically
+driven supply demand imbalance in the
+treasury bond market uh versus resilient
+US economy themes. says, "Hi, Skip. I
+recognize that these two fundamental
+research themes were authored at
+different times, so I'm not sure uh if
+that would play a factor in this
+question. In this week's Around the
+Horn, something stood out to me. I had a
+hard time reconciling the labor hoarding
+aspect of the resilient US economy and
+broadening AI adoption, risking a
+jobless recovery aspect of Paradigm C.
+The current state of the labor market is
+a bit strange to me. We see a large
+percentage of current job posting being
+fake, but no actual intention to hire."
+Correct. That's something we called out
+in our research in months and quarters
+past. Also, the unemployment rate for
+recent college graduates is rising
+faster than the total unemployment rate.
+Something we've also called out. Uh,
+scrolling down. I see broadening AI
+adoption risking a jobless recovery and
+labor hoarding in the USA as being at
+odds with each other. In your opinion,
+is this the way that uh both of these um
+ultimately could be correct? The labor
+hoarding is is applied to longer tenured
+and more experienced/skilled workers,
+those towards the top, while broadening
+AI do adoption and risking a job as
+recovery is applied to those who
+younger, less experienced, and less
+skilled, those towards the bottom. Uh
+this is truly the way the labor market
+begins to sort itself out, then this
+will surely cause, if not already
+deepen, a generational divide. Uh,
+taking this labor question to its final
+conclusion, could these be the
+centralized economic issue to be sorted
+out in this fourth attorney? PS, KISS
+has been truly revolutionary to me and
+my wife's finances. I appreciate your
+hard work and the mission of 42 macro.
+Thank you. So, appreciate you for the
+kind feedback on KISS. Uh, loaded
+question, but this is as good as it gets
+questions. So, uh, let me take some try
+to to unpack this and and answer this as
+as coently as possible. So um I think
+the first part of the question is we
+still the theme seemed to be at odds
+with particularly with respect to the
+labor market one on the Brazilian US
+economy theme which we've we authored
+back in September of 2022 and consensus
+was freaking out about recession. We
+said absolutely not the economy is going
+to be resilient uh and we're going to
+avoid recession. So um that that
+obviously was a preient call uh at a
+time where so many were were concerned
+about uh further downside. Uh so the
+labor hoarding dynamic in the resilient
+US economy theme persists. In fact, if
+you just look at uh uh Jotes as an
+example of this labor hoarding dynamic,
+uh actually I have a couple charts on
+that. Don't forget that it's not good
+TV, but it's a good insight, so just
+take my word for it. Uh yep. So, we had
+a couple charts on this. So, you can see
+labor hoarding very clearly by the uh by
+two dynamics. One, we have this massive
+divergence between if you look at the
+bottom panel here, Joe's total job
+openings, which is the red line, um
+Joe's total job openings to unemployed
+workers ratio. That's the red line.
+We're now back at one uh from peaking at
+uh two uh in the early in the middle of
+2022. And this diverges between that and
+household survey total employment. This
+first time in the history of these two
+time series where they've diverged uh
+and and not only have they the first
+time they diverged, they've obviously
+meaningfully uh diverged from a delta
+perspective, trending delta perspective.
+And then if you go you look at the
+private sector hires rate which has
+historically been inversely correlated
+to the private sector layoffs and
+discharges rate. We have this well below
+trend reading of 3.5% in the private uh
+sector hires rate but we don't have a
+commensurate above trend reading in the
+private sector layoffs and discharges
+rate. In fact the private sector layoffs
+and discharges rate which is 1.2% is
+still below its pre-COVID trend. So,
+we've had a significant reduction uh in
+the amount of demand for labor as
+evidenced by the Joel's total
+unemployment workers ratio declining as
+well as the private sector highest rate
+declining uh meaningfully. It was at 5%
+heading in 2022. It's now at 3.5%. But
+we have not seen that a pickup in
+layoffs and discharges. We've not seen a
+pickup or a reduction in total
+employment. And so that's why we
+continue to believe that this labor
+hoarding dynamic uh is persistent. Uh
+another way we can observe labor
+hoarding is the through the uh uh the
+spread between the unemployment rate
+which is the red line in this chart
+relative to the conference board's uh
+consumer confidence labor survey
+differential. Historically these are two
+very correlated time series. The blue
+line and the red line are highly
+correlated. How consumers feel about the
+labor market is typically reflective of
+how the labor market is actually
+performing. However, in this business
+cycle, this wacky postco business cycle,
+we've seen uh um directional, you know,
+um the same directional trend, i.e. the
+labor hoarding um the labor survey
+differential was deteriorated
+significantly off of its um March 2022
+high, but we have not seen a
+commensurate uh uh a commensurate uh
+increase in unemployment rate.
+Unemployment rate has increased that the
+axis is inverted. You know, we've gone
+from let's say a little bit, you know,
+kind of three and a half% on the
+unemployment rate to 4.4% on the
+unemployment rate. But if the
+unemployment rate was actually tracking
+the labor hoarding survey, the labor
+differential survey rather as as closely
+as it has in the past, the unemployment
+rate would be already at six uh six plus
+percent right now. Uh so how consumers
+feel about the labor market right now is
+commensurate with about a 6%
+unemployment rate. Uh we've talked about
+this in our research. Uh we've done a
+tremendous amount of research obviously
+we do tremendous amount of research on
+on the labor market every every month uh
+in our macro scouting reports and and in
+our leadoff morning notes. But one of
+the uh one of the things we've talked
+about in recent months is how the the
+the current level of the unemployment
+rate is understating uh the the the
+weakness in the labor market. Uh if you
+actually add back what what is currently
+around 1.6 million workers who've left
+the labor market uh uh prime working age
+workers who've left the labor market. If
+you added them back to the ranks of the
+unemployed uh we'd actually have a 5.4
+or 5.3% uh unemployment rate right now.
+So, which which would be a little bit
+closer to what the labor survey
+differential was signaling, but still
+not as bad as the roughly 6% level that
+it's currently signaling. So, uh you
+know, this is a labor market that is
+very um that's very weak. It's very
+squishy. I said um a few a while ago on
+the macro minute, I said if you if you
+wanted me to describe the labor market
+as as succinctly as possible, I would
+say it's squishy and getting squishier.
+And so going back to the question, you
+know, in terms of this uh in in terms of
+this this dynamic whereby you could see
+labor hoarding for the older uh cohorts
+and and and a rejection of incremental
+demand for younger cohorts. That's
+already happening. That's already
+happening. I'm a patron for sponsors for
+educational opportunity SEO one of the
+the probably the preeminent um you know
+the private sector organization in terms
+of promoting educational advancement uh
+for lowincome you know families and
+students uh and you know the the kids
+that I've mentored over the past few
+years all of them are you know top
+flight incredible students who've done
+really well in high school and really
+well in college and they all they're all
+struggling to get jobs meaningful jobs
+you know they get the the the the the
+the top five the one top one to 5% they
+get they get terrible jobs the other 95%
+are at home with mom and dad still
+looking for jobs you know I mentor the Y
+football program I co-head the Y
+football mentorship program with one of
+my buddies over at point 72 and his I we
+it's insane to me how bad the labor
+market is when you have high-erforming
+Ivy League football players people
+who've demonstrated a tremendous work
+ethic people who've de demonstrated a
+tremendous amount of of of of elacrity
+and and and thoughtfulness. You know,
+high performing in the classroom, high
+performing on the field, you know, folks
+with all these positive uh hard and soft
+skills that are still struggling to land
+meaningful work. This labor market is
+terri and again, these are Yale football
+players who have good grades at Yale.
+Can you imagine what the labor market is
+for the median person in in college or
+right after college if it's that bad for
+for folks who are um um you know have
+historically had you know more success
+uh in the labor market uh at least
+earlier on. That to me is heartbreaking.
+It has to be heartbreaking for anybody
+with kids or anybody that's around kids
+or anybody that's mentoring kids like we
+are like I am and our and our friends
+are. So um I don't know the answer to
+this. We're obviously in the middle of a
+great technological industrial
+revolution. I don't know that how it's
+all going to shake out but based on what
+we talked about earlier in executive
+summary if you you know the in our view
+the nash equilibrium for AI in terms of
+its impact on labor market is cut first
+ask questions later and the reason for
+this is exactly why Thompson Reuters and
+Rex are down 15%. If you're in the
+middle as a company, you're going to get
+competition from upstart competitors who
+have way lower cost structures that can
+charge a much lower price and
+potentially a much better service than
+you. And you're going to get intense
+competition from the big companies that
+can afford to implement AI faster than
+you can. and more importantly u you know
+just just you know and have pressure to
+reduce headcount as we see with Amazon
+we saw with DAO last week we've seen
+with all these major uh tech companies
+um you know laying off employees by the
+thousands um to me the national
+equilibrium is cut first ask questions
+later you cannot afford as a company to
+not cut because ultimately what's going
+to happen is your cost structure is
+going to be extremely bloated you're
+going to have less profits and less cash
+flow to reinvest in your business and
+and you'll eventually get competed out
+of business by the upstar competitors
+and by the large competitors who have
+quarterly earnings pressure to reduce
+headcount. So to me it's from this from
+our perspective the game theory is the
+national equilibrium of this game theory
+is that you know it's going to AI is
+likely to be bad for the labor market
+because we live in a society that
+prioritizes corporate profits over
+people and that's been the way since the
+neoliberalism era was kicked off by our
+friend Ronald Reagan and then Margaret
+Thatcher back in in the in the early
+80s. I'm not saying it's good or bad.
+I'm just saying that's that's profits
+matter more than human beings. uh and so
+perhaps one of the great you know going
+back to the question you know is this
+could this be the central economic issue
+to be sorted out in this forturning I
+don't think the central economic issue
+to be sorted out in this for turning is
+older uh employees versus younger
+employees I think the central economic
+issue to be sorted out in this for
+turning is how many profits is too many
+profits before the society collapses
+that to me is the central economic issue
+how many profits can we sustain as a
+economy before the society that
+generates the profits collapses on top
+of itself because If you turn on the
+news, it feels like we're headed for
+some sort of societal collapse. Now, I'm
+not saying we are or we aren't. I'm just
+telling you that is the risk in this
+forth turning. And so, to me, I think
+it's less to do with the distribution of
+of of employment uh within the labor
+market and more about what is the
+function of the labor market in society
+and are we going to opt for a scenario
+where, you know, some small percentage
+of people win and have all the money in
+this economy and then everybody else
+just has universal basic income, the
+breadcrumbs they that our oligarchs
+decide to throw at us. I don't know. I
+don't know the answer to that is but I
+hope I sincerely hope and pray that we
+make the wise choices and so that's why
+uh you know I don't think this is a
+political comment but I you know we
+we're happy to use our platform to try
+to educate uh you know the masses and
+and hopefully the leaders you know we
+obviously have some very important
+people uh that used to be client's mind
+um and then in the administration and
+likely will be in subsequent
+administrations um you know I hope we
+can use our platform to continue to
+educate people and and fight the good
+fight for for humanity um you know I'm a
+Christian I don't have my religious
+beliefs. I I think this is the right
+thing to do. So, we'll wrap it up there.
+Darius Stell here presenting our macro
+minute for Tuesday, February 3rd, 2026.
+Best of luck out there today. We'll
+catch you back here tomorrow. Cheers.

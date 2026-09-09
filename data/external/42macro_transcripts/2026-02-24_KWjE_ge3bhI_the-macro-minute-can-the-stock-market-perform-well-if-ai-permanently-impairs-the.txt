@@ -1,0 +1,494 @@
+source: 42macro_youtube
+published_date: 2026-02-24
+video_id: KWjE_ge3bhI
+url: https://www.youtube.com/watch?v=KWjE_ge3bhI
+title: The Macro Minute: Can the stock market perform well if AI permanently impairs the labor market?
+
+Happy Tuesday out there, team 42. It's
+your skipper here, Darius Dale, to
+present our macro minute for Tuesday,
+February 24th, 2026. As always, we'll
+start with the executive summary from
+today's lead-off morning note. So, let's
+dive right in.
+Today's key macro question is, can the
+stock market perform well if AI
+permanently impairs the labor market?
+The short answer is yes. Much like
+globalization and the increasingly
+convoluted tax code that offers
+egregiously preferential treatment to
+capital income over labor income, AI is
+simply another tool that is engineered
+and employed by elites to consolidate
+wealth and power. In isolation, such
+cannot such consolidation is not
+bearish.
+In terms of analytical nuance, market
+participants are bracing for renewed
+volatility ahead of President Trump's
+State of the Union address tonight and
+Nvidia earnings tomorrow. The concern
+comes amid Anthropic's broadening
+deployment of its Claude co-work
+platform against incremental verticals
+just weeks after unveiling tools that
+erased nearly $1 trillion in market cap
+from software stocks within days and
+triggered sharp drawdowns in related
+industries by intensifying debate over
+artificial intelligence capacity to
+obsolete entire business models.
+Anthropic and competitor OpenAI have
+devoted substantial resources to
+advancing AI tools that automate an
+expanding set of professional functions
+spanning financial services to health
+care in an effort to attract additional
+enterprise demand and validate premium
+value valuations.
+Recall that Anthropic recently secured
+fresh financing at a $380 billion
+valuation and OpenAI is in the process
+of securing another $100 billion in
+funding that values the company at $850
+billion. In our view, demand for fresh
+AI tools will come in droves as more and
+more use cases are discovered. For
+example, new research led by professors
+from Harvard, Penn, and DePaul
+demonstrates that active mutual fund
+portfolio construction decisions can
+largely be replicated by AI with a
+neural network correctly forecasting
+approximately 71%
+of quarterly buy, sell, or hold
+decisions.
+The algorithm was calibrated using
+rolling 5-year samples from 1990 through
+2023, incorporating variables such as
+fund size, investor flows, equity
+attributes, and macroeconomic
+conditions, enabling it to project the
+bulk of portfolio reallocations.
+Notably,
+the roughly 29% of trades the system
+could not predict were on average more
+tightly linked to excess returns,
+indicating that departures from
+systematic observable patterns are
+responsible for the majority of alpha
+generation.
+The findings suggest machines have
+internalized much of the asset
+management industry's standard operating
+framework, particularly responses to
+flows, price action, and peer
+positioning, while remaining less
+effective at modeling the minority of
+discretionary decisions that deviate
+from that template.
+In our admittedly biased view, the
+unsystematic nature of alpha generation
+is largely a function of investors being
+able to see the big picture well enough
+to notice regime changes faster than
+others. For example, the pivot from
+monetary dominance to fiscal dominance
+in 2020 and everything that entailed,
+and that is still entailing, by the way.
+The pivot from a bearish paradigm B to
+bullish paradigm C in April of 2025, and
+the likely pivot from the Fed being the
+primary provider of liquidity back to
+the commercial banking sector sometime
+this year or next year.
+Uh
+In terms of all in terms of AI's impact
+on the labor market, uh former Federal
+Reserve Governor Lisa Cook cautioned
+that the US central bank's conventional
+toolkit may prove insufficient to offset
+AI-induced labor market dislocations
+that elevate unemployment. Cook's
+observations extend a series of recent
+Fed communications evaluating AI's
+prospective monetary policy
+implications, with several policymakers
+positing that productivity that
+productivity acceleration could lift the
+neutral rate of interest consistent with
+macroeconomic equilibrium. We strongly
+disagree.
+Refer to our October 28th and February
+18th lead-off Morning Notes and our
+February 2026 macro scouting report for
+more details. As always, members of our
+global investor community can trust that
+our institutional grade risk management
+overlays, KISA and Dr. Mo, help our
+portfolios navigate these emergent risks
+better than investors attempting to
+manage risk without systematic rules or
+relying on fundamental research alone.
+Transitioning to our 42 macro dashboard,
+as always, wrap up with a question from
+our community. This one's titled
+something for the Canadians, eh? Uh hope
+you guys enjoy my Canadian accent.
+It says, uh "Hi Darius, love your
+subscription offering. Very happy with
+the global shift." Thank you. Appreciate
+you guys. Uh "I am an amateur investor
+trying to set up a portfolio for my
+handicapped father-in-law in New
+Zealand. You You're now closed the gap
+in your offering, which has caused me to
+fully pause in terms of proceeding with
+the setting up for him, as I was driving
+in a fog. I am based in Canada and was
+wondering what you or one of your
+analysts thinks of VEQT as a Canadian
+alternative to VT, which is the global
+uh international equity uh ETF. Also,
+I'm looking at the uh Smartshares Total
+World ETF, GTW F, for my New
+Zealand-based family member. Um any
+insight uh on if these are an adequate
+and/or optimal replacement for VT would
+be helpful. Side note, do you foresee if
+uh commodity allocation being an
+inclusion in KISA at any point in time
+in the future? This sector seems poised
+to outperform for some time or at least
+periodically. I know your subscribers
+would greatly appreciate some
+consideration given uh
+to this question in the dynamic times we
+find ourselves in. Whether the answer's
+yes or no, I get it. I don't take factor
+risk. Uh but is the inclusion of
+commodities entirely uh taking uh factor
+risk?"
+Uh so, uh excellent questions. Uh so,
+I'll start by reminding everyone that,
+you know,
+we're not Google or ChatGPT. Uh if
+you're looking for uh
+uh ETFs that are good substitutes for
+your home country, uh obviously we have
+clients in 80-plus countries around the
+world. Uh you know, when we make a uh
+recommendation in KISA or Dr. Mo, uh
+uh you know, in terms of the our our
+risk management pivots, uh,
+you know,
+we can't make 80 plus recommendations
+based on your guys' individual unique,
+you know, set of
+product availability. Uh, so you have to
+do some digging. You guys are all DIY
+investors, otherwise you wouldn't be
+paying 42 macro for access to our our
+risk management research and risk
+management signals and and and community
+and dashboard. So, clearly you're a DIY
+investor, so spend the three to five
+minutes it takes on Google or ChatGPT or
+Claude or whatever search you're using
+these days to figure out what ETF
+best mimics the ones that we feature in
+our research, which are obviously US
+domiciled ETFs, you know, that's where
+the
+majority of that's where the largest
+share of our customers are and that's
+obviously where I'm domiciled as a US
+based investor, so that's always going
+to be the core focus of our product set
+in terms of what we're signaling on and
+focused on. So, you guys have to do, you
+know, again, the one to five minutes of
+work it takes to figure out which ETFs
+are available in your home country that
+could be used to replicate the signals
+that we are producing across the broad
+asset class that we produce. And so,
+obviously KISS has three factors in it,
+Stocks Go Bitcoin. Dr. Mo manages risk
+across uh,
+70 different factors across all of
+global US and global equities, fixed
+income
+both domestic and global as well as
+currencies, commodities and crypto. So,
+plenty to
+you know, benefit from here uh, behind
+our paywall, so I just want to make sure
+you guys are aware that, you know, we're
+never going to be in the business of,
+you know, hand-holding you guys on which
+ETF is available in your unique location
+to replicate our research. Yeah, please
+please take a second to to do that
+research. So, in fact, you know,
+just using this question as an example,
+you know, I just asked ChatGPT, can you
+compare the geographic allocations and
+fees between the VT ETF and Canada's VTI
+ETF and ChatGPT after 49 seconds of
+thinking
+told me that VT has a North America
+waiting of 64.2%
+a developed Europe waiting of 11% Japan
+at 6% emerging Asia just shy of 6%
+Asia developed at 5% UK at 3% Australia
+Australia Asia at 1.7% Africa Middle
+East at 1.42% and that compares to VEQT
+with a total US market of 44.6
+Canada at 30% developed ex North America
+18% and EM at 7.2%. So quite a bit of a
+difference between the two ETFs quite a
+bit of difference in terms of the
+management fees as well. VT is a six
+basis point
+management fee expense ratio rather
+VEQT is at I want to say 17 basis points
+and then I added um TE or VXC in there
+as well. VXC is actually a little bit
+closer to VT which is what we use to
+manage the equity exposure in our KS
+model portfolio total international
+equity exposure. VXC just from my
+vantage point looks a little bit closer
+than VEQT but again this is not a
+question this is not something we're
+trying to decide for you. You guys have
+to make that choice as thoughtful
+dispassionate data-driven DIY investors
+who are part of our community. So we
+don't we don't encourage you to use the
+bevy of information and the incredibly
+powerful search capabilities of and our
+from our friends at Google open AI cloud
+etc. to come up with this analysis again
+it took me you know
+two seconds to write this sentence and
+the machine did the work for 49 seconds.
+So I just want to remind you guys if you
+ever you know if you're a customer of
+ours or customer of anybody's and you're
+ever like hey I live in New Zealand
+what's the New Zealand ETF for you know
+S&P 500 what's New Zealand ETF for
+global equities that's not a question
+Darius is going to answer for you that's
+a question Google ChatGPT cloud etc. are
+going to answer for you. So just want to
+hammer that point home so we stop
+getting these types of questions
+and then transition to the second part
+of the question do you foresee a
+commodity allocation being included in
+KISS at any point in time in the future?
+Um
+no, unlikely no, cuz I don't I
+one, commodities as an asset class are
+fraught with uh a couple of things that
+I don't think are helpful for um retail
+investors. Uh one, commodities are they
+stationary time series over a long
+enough period of time.
+Commodities don't trend higher or lower.
+They trend higher or or over, you know,
+they're they're they're they're
+stationary time series. So, like the
+they cycle the price cycles over time
+rather than goes up over time. And so,
+if your goal is to retire on time and
+comfortably,
+the first step in that journey should be
+to expose your portfolio to
+non-stationary time series, not
+stationary time series. Uh so, that's
+that's a very obvious, you know,
+problem to solve. It's a it's it's a
+stationary time series or non-stationary
+time series. Then, you know, all the
+other problems you have to solve beyond
+that are um a little bit more
+complicated. Um but, in terms of
+commodities, you know, the likelihood
+that we, you know, we could be in a what
+feels like a non-stationary uh moment in
+time for the commodities asset class,
+which currently this I would argue this
+this current moment uh certainly feels
+that way. It seems like we're in a
+commodity supercycle to the upside,
+doesn't mean that 5 10 years from now
+commodities won't round trip and that be
+at the same price. Uh they probably will
+round trip and be at the same price
+prior to 10 years from now because
+again, commodities are not um
+you know, they're stationary time
+series. I mean, we backed up this
+extensively across all the different
+asset classes, currencies, and
+commodities don't go anywhere. They just
+cycle over time. Uh and so, you know, if
+you're trying to you're putting a lot of
+emphasis on your ability to trade and
+risk manage every single commodity cycle
+if you're going to use this as a
+retirement asset a retirement solution.
+So, my vantage from my vantage point
+it's not a good um asset to feature in
+any sort of retirement-oriented uh
+account. Uh
+now,
+got another question in our community
+chat today uh regarding uh the Bitcoin
+allocation and whether or not we would
+make a change uh
+to the KISS model portfolio to swap out
+Bitcoin and replace it with something
+else perhaps like a physical commodity
+or basket of physical commodities like
+we did in October 2024 2024 when we
+replaced the 30% target allocation to
+fixed income with gold. Obviously it's
+been a heroic call in terms of the
+incredible wealth that's been generated
+across our global investment community
+as a function of that evolution to the
+KISS model portfolio and so occasionally
+we make those evolutions to the the the
+the the
+system which again is still systematic.
+You know, we're not trading. There's no
+there's no human input into the system.
+It's just you know, we we restructure it
+redesign the systematic system
+occasionally to to give ourselves the
+best chance to to maximize upside
+capture in bull markets and minimize
+downside capture in bear markets with
+regards to the ex ante forward-looking
+market risk. And so we're
+[clears throat] going to continue to do
+that because I don't think you can you'd
+be asleep at the wheel as an investor.
+You know, you can't there's no way you
+can program a systematic solution that
+survives you know, throughout the
+duration of a four-turning polycrisis or
+even survives just in normal down and
+distance for an extended period of time.
+You're always going to have to have
+a really credible thoughtful, you know,
+investor who knows what they're doing,
+you know, be able to you know,
+understand the evolution of back test
+and also want to have a credible
+forward-looking research process that
+allows you to make those types of
+process evolutions as we have since we
+launched the KISS system back in January
+2023. So
+we get a lot of questions because of
+the drawdown that we're seeing the
+ongoing drawdown that we're seeing in
+the crypto asset class and and most
+notably the drawdown coming at a time
+where precious metals are obviously
+ramping and ripping and roaring to the
+upside. A lot of folks are concerned
+that Bitcoin as an asset class might be
+broken.
+I think it's too early to determine
+that. I think there are some fundamental
+near-term dynamics that are weighing on
+the crypto asset class that may not
+necessarily
+conclude that may not that may lead us
+to to not conclude that this is
+something that's broken about the asset
+class. Most notably, you know, there's a
+real discussion across institutional
+finance and then should certainly be in
+the crypto asset class community as well
+that, you know, Kevin Walsh might
+represent a significant change with
+regards to the Fed's reaction function
+and its footprint in the economy and
+asset markets. And that's very different
+than the narratives the the non-ba the
+stale non-Bayesian narratives that are,
+you know, kind of, you know, causing
+people to be hotling, you know,
+trillions of dollars of losses in this
+asset class when you you calculate the
+cumulative decline that we've seen since
+the the highs uh back in October. You
+know, a lot of folks are hotling
+trillions of dollars of losses with a
+stale non-Bayesian narrative that may
+prove to be wrong. I think it's too
+early to tell. You know, it's that the
+point I'm making is I don't know. We
+don't know yet if the Fed's react
+footprint in the economy and asset
+markets is going to be materially
+eroded. So, that's something that I
+think is weighing on the Bitcoin asset
+class. Another thing that's very clearly
+weighing on the Bitcoin asset class is
+the
+in our opinion, we said at the time and
+we'll continue to say it, the
+ill-advised layering on of leverage uh
+to this asset class. It's already the
+highest beta asset class in the world
+and one of the highest beta asset
+classes in world history.
+You know who in terms of the big
+treasury companies decided that they
+want to add a lot of leverage products
+to this asset class and obviously that
+stuff works great when crypto is in a
+bull market, but as a lot of, you know,
+unsuspecting investors around the world
+have learned the hard way in this most
+recent 50% drawdown in Bitcoin which,
+you know, we helped our clients risk
+manage, you know, as well as anybody in
+terms of getting them to safety starting
+in late October and concluding that
+process of reducing our exposure to
+Bitcoin in case it dropped about to zero
+on November November 7th. I think
+Bitcoin is probably down 40% since
+November 7th.
+You know, so
+a lot of folks out here are underwater
+unfortunately and it's a real shame
+because, you know, I think there's just
+a better way to to to manage risk on the
+on the on the on on investors journeys
+to an on-time and comfortable
+retirement. Like I said yesterday, if
+your goal is to retire on time and
+comfortably, this is the community for
+you. If your The is to overtrade your
+account and take a bunch of factors that
+is generally speaking a negative net
+present value decision for most retail
+investors. Then
+keep doing what you're doing.
+We'll begin rich in here. So,
+I'll wrap it up there. Terry still here
+presenting our macro minute. We'll catch
+back here tomorrow. Have a great day out
+there. Cheers.
