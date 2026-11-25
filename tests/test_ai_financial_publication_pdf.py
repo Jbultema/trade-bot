@@ -248,7 +248,7 @@ def test_title_page_starts_fresh_and_stays_together(tmp_path: Path) -> None:
         include_front_matter=False,
     )
 
-    pages = [page.extract_text() or "" for page in PdfReader(output).pages]
+    pages = [" ".join((page.extract_text() or "").split()) for page in PdfReader(output).pages]
     title_pages = [
         index
         for index, text in enumerate(pages)
