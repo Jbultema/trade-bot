@@ -11,6 +11,16 @@ from trade_bot.config import ExecutionConfig, StrategyConfig, load_config
 from trade_bot.storage.warehouse import TradingWarehouse
 
 
+def test_readonly_warehouse_handles_fresh_checkout_without_creating_database(tmp_path):
+    path = tmp_path / "not-created" / "warehouse.duckdb"
+    warehouse = TradingWarehouse(path, read_only=True)
+    assert warehouse.table_exists("monitoring_windows") is False
+    assert warehouse.read_table("monitoring_windows").empty
+    assert warehouse.list_monitoring_windows().empty
+    assert warehouse.champion_challenger_frame().empty
+    assert not path.parent.exists()
+
+
 def test_warehouse_migrates_experiments_seeds_windows_and_values_snapshot(tmp_path) -> None:
     experiment_dir = tmp_path / "experiments"
     iteration_dir = experiment_dir / "iteration_01"

@@ -27,3 +27,9 @@ Important open findings: technology-universe selection/survivorship, incomplete 
 accounting, immature prospective evidence, and Cycle Tracker's missing direct
 post-unwind-to-unwind transition despite a corresponding stress multiplier. Those model
 changes need separate historical recurrence/false-alarm validation, not a cleanup-only tweak.
+
+The first Linux CI run also exposed Mac-only publication font paths and a hidden local-store
+dependency in the dashboard test. Publication rendering preserves existing Mac typography and
+supports embedded DejaVu fonts on Linux (installed explicitly by CI). Read-only warehouse
+queries on a fresh checkout return empty results without creating a database; dashboard tests
+use an isolated store path. No tests are skipped to obtain a green portability result.

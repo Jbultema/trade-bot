@@ -23,6 +23,15 @@ def _load_script(name: str) -> ModuleType:
     return module
 
 
+def test_portable_publication_font_mapping_keeps_embedded_styles_and_unicode(tmp_path):
+    renderer = _load_script("render_publication_pdf")
+    fonts = renderer.publication_font_files(tmp_path)
+    assert set(fonts) == set(renderer.FONT_FILES)
+    assert all(Path(path).parent == tmp_path for path in fonts.values())
+    assert fonts["AFSUnicode"].endswith("DejaVuSans.ttf")
+    assert fonts["AFSBodyBoldItalic"].endswith("DejaVuSerif-BoldItalic.ttf")
+
+
 def test_publication_pdf_is_deterministic_searchable_and_embedded(tmp_path: Path) -> None:
     renderer = _load_script("render_publication_pdf")
     auditor = _load_script("audit_publication_pdf")

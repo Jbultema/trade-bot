@@ -71,7 +71,7 @@ class OutlineReset(Spacer):
 
 
 def register_fonts() -> None:
-    for name, path in FONT_FILES.items():
+    for name, path in publication_font_files().items():
         if not Path(path).is_file():
             raise FileNotFoundError(f"required publication font is missing: {path}")
         if name not in pdfmetrics.getRegisteredFontNames():
@@ -93,6 +93,24 @@ def register_fonts() -> None:
     # ReportLab otherwise injects an unembedded Helvetica resource into every
     # page stream even when all visible text uses the governed font families.
     rl_config.canvas_basefontname = "AFSBody"
+
+
+def publication_font_files(font_dir: Path | None = None) -> dict[str, str]:
+    """Preserve native typography; use the open DejaVu family on Linux."""
+    if font_dir is None and all(Path(path).is_file() for path in FONT_FILES.values()):
+        return dict(FONT_FILES)
+    root = font_dir or Path("/usr/share/fonts/truetype/dejavu")
+    return {
+        "AFSBody": str(root / "DejaVuSerif.ttf"),
+        "AFSBodyItalic": str(root / "DejaVuSerif-Italic.ttf"),
+        "AFSBodyBold": str(root / "DejaVuSerif-Bold.ttf"),
+        "AFSBodyBoldItalic": str(root / "DejaVuSerif-BoldItalic.ttf"),
+        "AFSDisplay": str(root / "DejaVuSans.ttf"),
+        "AFSDisplayItalic": str(root / "DejaVuSans-Oblique.ttf"),
+        "AFSDisplayBold": str(root / "DejaVuSans-Bold.ttf"),
+        "AFSDisplayBoldItalic": str(root / "DejaVuSans-BoldOblique.ttf"),
+        "AFSUnicode": str(root / "DejaVuSans.ttf"),
+    }
 
 
 def build_styles(

@@ -12,6 +12,7 @@ import trade_bot.dashboard.launch_lab as launch_lab_module
 import trade_bot.dashboard.loaders as dashboard_loaders_module
 import trade_bot.dashboard.research_lab as research_lab_module
 import trade_bot.dashboard.simulation_lab as simulation_lab_module
+import trade_bot.DEFAULTS as defaults_module
 import trade_bot.research.baselines as baselines_module
 import trade_bot.storage.run_store as run_store_module
 import trade_bot.trading.journal as journal_module
@@ -52,6 +53,9 @@ def test_dashboard_app_renders_action_headline(
         lambda *args, **kwargs: pd.DataFrame(),
     )
     monkeypatch.setattr(run_store_module, "RunStore", _FakeRunStore)
+    monkeypatch.setattr(
+        defaults_module, "DEFAULT_RUN_STORE_DB_PATH", tmp_path / "fresh" / "trade_bot.duckdb"
+    )
     monkeypatch.setattr(journal_module, "DEFAULT_JOURNAL_PATH", tmp_path / "journal.sqlite")
 
     app = AppTest.from_file("src/trade_bot/dashboard/app.py", default_timeout=20)

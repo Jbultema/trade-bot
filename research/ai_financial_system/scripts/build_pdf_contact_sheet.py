@@ -39,7 +39,10 @@ def build(
         raise ValueError("contact sheet requires at least one page image")
     if columns <= 0 or rows <= 0:
         raise ValueError("columns and rows must be positive")
-    pdfmetrics.registerFont(TTFont(FONT_NAME, FONT_PATH))
+    font_path = Path(FONT_PATH)
+    if not font_path.is_file():
+        font_path = Path("/usr/share/fonts/truetype/dejavu/DejaVuSans.ttf")
+    pdfmetrics.registerFont(TTFont(FONT_NAME, str(font_path)))
     output.parent.mkdir(parents=True, exist_ok=True)
     canvas = Canvas(
         str(output),

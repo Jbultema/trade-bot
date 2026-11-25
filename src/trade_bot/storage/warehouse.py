@@ -2872,6 +2872,8 @@ class TradingWarehouse:
                 raise
 
     def _query(self, query: str, params: Iterable[object] | None = None) -> pd.DataFrame:
+        if self.read_only and not self.db_path.exists():
+            return pd.DataFrame()
         connection = self._connect()
         try:
             return connection.execute(query, list(params or [])).fetchdf()
