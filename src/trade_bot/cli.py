@@ -266,8 +266,15 @@ from trade_bot.research.signal_evidence import (
 from trade_bot.research.snapshot_backfill import (
     SnapshotBackfillPlan,
     build_snapshot_backfill_plan,
+    missing_market_backfill_dates,
     missing_period_backfill_dates,
+    required_daily_retention_count,
     snapshot_created_at_for_market_date,
+)
+from trade_bot.research.strategy_decision import (
+    operating_strategy_config,
+    resolve_trade_decision_for_strategy,
+    trade_decision_strategy_name,
 )
 from trade_bot.research.strategy_source_audit import write_strategy_source_audit
 from trade_bot.research.trade_decision import build_trade_decision
@@ -281,6 +288,7 @@ from trade_bot.storage.run_store import (
     build_snapshot_fingerprint,
 )
 from trade_bot.storage.warehouse import TradingWarehouse, WarehouseMigrationResult
+from trade_bot.trading.journal import TradeJournal
 
 app = typer.Typer(no_args_is_help=True)
 console = Console()
@@ -356,15 +364,25 @@ def run_baselines(
     )
 
     alert_table = Table(title="Current Strategy Alerts")
-    for column in ["strategy", "priority", "action", "latest_position", "trade_alert"]:
+    for column in [
+        "strategy",
+        "priority",
+        "action",
+        "pending_action",
+        "latest_position",
+        "latest_target",
+        "target_alert",
+    ]:
         alert_table.add_column(column)
     for _, row in baseline_run.current_state.strategy_alerts.iterrows():
         alert_table.add_row(
             str(row["strategy"]),
             str(row["priority"]),
             str(row["action"]),
+            str(row["pending_action"]),
             str(row["latest_position"]),
-            str(row["trade_alert"]),
+            str(row["latest_target"]),
+            str(row["target_alert"]),
         )
     console.print(alert_table)
 
@@ -537,6 +555,51 @@ def run_baselines(
     console.print(f"Report written to {report_path}")
 
 
+def _record_job_failure(
+    run_store: RunStore,
+    job_id: str,
+    stage: str,
+    error: Exception,
+) -> None:
+    """Record job diagnostics without replacing the worker's original exception."""
+
+    message = str(error)
+    try:
+        run_store.mark_job_stage(job_id, stage, "failed", message)
+        run_store.mark_job_stage(job_id, "pipeline", "failed", f"{stage}: {message}")
+        run_store.mark_job_failed(job_id, f"{stage}: {message}")
+    except Exception as status_error:
+        console.print(
+            "[yellow]Could not persist job failure status; original error follows. "
+            f"Status error: {status_error}[/yellow]"
+        )
+
+
+def _operating_trade_decision(
+    baseline_run: Any,
+    bot_config: Any,
+    journal_path: Path,
+) -> tuple[str, Any]:
+    """Resolve the same promoted strategy decision used by Dashboard V2."""
+
+    promoted_book = TradeJournal(journal_path).get_promoted_book()
+    requested_strategy = str(promoted_book.strategy_name or "").strip()
+    current_strategy = trade_decision_strategy_name(baseline_run.trade_decision)
+    strategy_config = operating_strategy_config(
+        bot_config,
+        requested_strategy,
+        current_strategy=current_strategy,
+    )
+    decision = resolve_trade_decision_for_strategy(
+        baseline_run,
+        requested_strategy,
+        strategy_config=strategy_config,
+        allocation_policy=bot_config.allocation_policy,
+    )
+    resolved_strategy = trade_decision_strategy_name(decision)
+    return resolved_strategy or requested_strategy or bot_config.primary_strategy, decision
+
+
 @app.command("build-snapshot")
 def build_snapshot_cmd(
     config: Annotated[Path, typer.Option("--config", "-c")] = DEFAULT_CONFIG_PATH,
@@ -556,8 +619,12 @@ def build_snapshot_cmd(
     run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
     if job_id:
         run_store.mark_job_running(job_id)
+        run_store.mark_job_stage(job_id, "pipeline", "running")
 
+    current_stage = "baseline_run"
     try:
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
         bot_config = load_config(config)
         baseline_run = run_configured_baselines(
             bot_config,
@@ -568,6 +635,11 @@ def build_snapshot_cmd(
             macro_config_path=macro,
             news_config_path=news,
         )
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "completed")
+        current_stage = "snapshot"
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
         manifest = run_store.save_snapshot(
             baseline_run,
             config_path=config,
@@ -577,13 +649,25 @@ def build_snapshot_cmd(
             refresh_data=refresh_data,
             refresh_macro=refresh_macro,
             refresh_news=refresh_news,
+            auto_prune=False,
         )
+        if job_id:
+            run_store.attach_job_run_id(job_id, manifest.run_id)
+            run_store.mark_job_stage(job_id, current_stage, "completed", manifest.run_id)
+        current_stage = "strategy_registry"
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
         registry_rows = TradingWarehouse(store).refresh_strategy_registry_from_snapshot(
             baseline_run,
             run_id=manifest.run_id,
             market_date=manifest.market_date,
         )
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "completed", f"{registry_rows} rows")
         if write_report:
+            current_stage = "report"
+            if job_id:
+                run_store.mark_job_stage(job_id, current_stage, "running")
             write_baseline_report(
                 baseline_run.results,
                 baseline_run.metrics,
@@ -596,11 +680,27 @@ def build_snapshot_cmd(
                 baseline_run.trade_decision,
                 report_path,
             )
+            if job_id:
+                run_store.mark_job_stage(job_id, current_stage, "completed", str(report_path))
+        current_stage = "retention"
         if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
+        try:
+            pruned = run_store.prune_snapshots(apply=True)
+            if job_id:
+                run_store.mark_job_stage(
+                    job_id, current_stage, "completed", f"{len(pruned)} snapshots pruned"
+                )
+        except Exception as prune_error:
+            if job_id:
+                run_store.mark_job_stage(job_id, current_stage, "warning", str(prune_error))
+            console.print(f"[yellow]Snapshot retention warning:[/yellow] {prune_error}")
+        if job_id:
+            run_store.mark_job_stage(job_id, "pipeline", "completed")
             run_store.mark_job_completed(job_id, manifest.run_id)
     except Exception as error:
         if job_id:
-            run_store.mark_job_failed(job_id, str(error))
+            _record_job_failure(run_store, job_id, current_stage, error)
         raise
 
     _print_snapshot_manifest(manifest)
@@ -642,13 +742,18 @@ def run_daily_update_cmd(
     run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
     if job_id:
         run_store.mark_job_running(job_id)
+        run_store.mark_job_stage(job_id, "pipeline", "running")
 
     warehouse = TradingWarehouse(store)
     migration_results: list[WarehouseMigrationResult] = []
     registry_rows = 0
     valuation_rows = 0
+    executable_rows = 0
     effective_experiment_dir = _active_experiment_dir(experiment_dir)
+    current_stage = "baseline_run"
     try:
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
         bot_config = load_config(config)
         baseline_run = run_configured_baselines(
             bot_config,
@@ -659,6 +764,11 @@ def run_daily_update_cmd(
             macro_config_path=macro,
             news_config_path=news,
         )
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "completed")
+        current_stage = "snapshot"
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
         manifest = run_store.save_snapshot(
             baseline_run,
             config_path=config,
@@ -668,7 +778,14 @@ def run_daily_update_cmd(
             refresh_data=refresh_data,
             refresh_macro=refresh_macro,
             refresh_news=refresh_news,
+            auto_prune=False,
         )
+        if job_id:
+            run_store.attach_job_run_id(job_id, manifest.run_id)
+            run_store.mark_job_stage(job_id, current_stage, "completed", manifest.run_id)
+        current_stage = "report"
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
         write_baseline_report(
             baseline_run.results,
             baseline_run.metrics,
@@ -681,32 +798,96 @@ def run_daily_update_cmd(
             baseline_run.trade_decision,
             report_path,
         )
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "completed", str(report_path))
+        current_stage = "strategy_registry"
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
         registry_rows = warehouse.refresh_strategy_registry_from_snapshot(
             baseline_run,
             run_id=manifest.run_id,
             market_date=manifest.market_date,
         )
+        if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "completed", f"{registry_rows} rows")
         if migrate_warehouse:
+            current_stage = "warehouse_migration"
+            if job_id:
+                run_store.mark_job_stage(job_id, current_stage, "running")
             migration_results.extend(warehouse.migrate_experiment_outputs(effective_experiment_dir))
             migration_results.extend(warehouse.migrate_journal_sqlite(journal))
+            if job_id:
+                run_store.mark_job_stage(
+                    job_id,
+                    current_stage,
+                    "completed",
+                    f"{sum(result.rows for result in migration_results)} rows",
+                )
+        elif job_id:
+            run_store.mark_job_stage(job_id, "warehouse_migration", "skipped")
         if paper_valuation:
+            current_stage = "paper_valuation"
+            if job_id:
+                run_store.mark_job_stage(job_id, current_stage, "running")
             valuation_rows = warehouse.save_daily_valuations_from_snapshot(
                 baseline_run,
                 market_date=manifest.market_date,
                 execution=bot_config.execution,
             )
+            operating_strategy, operating_decision = _operating_trade_decision(
+                baseline_run,
+                bot_config,
+                journal,
+            )
+            executable_rows = warehouse.save_executable_portfolio_observation(
+                baseline_run,
+                snapshot_run_id=manifest.run_id,
+                strategy_name=operating_strategy,
+                execution=bot_config.execution,
+                trade_decision=operating_decision,
+            )
+            if job_id:
+                run_store.mark_job_stage(
+                    job_id,
+                    current_stage,
+                    "completed",
+                    f"{valuation_rows} strategy rows; {executable_rows} executable rows",
+                )
+        elif job_id:
+            run_store.mark_job_stage(job_id, "paper_valuation", "skipped")
         if refresh_prebreak_monitor:
+            current_stage = "prebreak_monitor"
+            if job_id:
+                run_store.mark_job_stage(job_id, current_stage, "running")
             _refresh_current_prebreak_artifact(
                 reference_store=store,
                 reference_artifact_dir=artifact_dir,
                 reference_job_log_dir=job_log_dir,
                 output_dir=DEFAULT_PREBREAK_OUTPUT_DIR,
             )
+            if job_id:
+                run_store.mark_job_stage(job_id, current_stage, "completed")
+        elif job_id:
+            run_store.mark_job_stage(job_id, "prebreak_monitor", "skipped")
+        current_stage = "retention"
         if job_id:
+            run_store.mark_job_stage(job_id, current_stage, "running")
+        try:
+            pruned = run_store.prune_snapshots(apply=True)
+            if job_id:
+                run_store.mark_job_stage(
+                    job_id, current_stage, "completed", f"{len(pruned)} snapshots pruned"
+                )
+        except Exception as prune_error:
+            if job_id:
+                run_store.mark_job_stage(job_id, current_stage, "warning", str(prune_error))
+            console.print(f"[yellow]Snapshot retention warning:[/yellow] {prune_error}")
+        if job_id:
+            run_store.mark_job_stage(job_id, "pipeline", "completed")
             run_store.mark_job_completed(job_id, manifest.run_id)
     except Exception as error:
         if job_id:
-            run_store.mark_job_failed(job_id, str(error))
+            _record_job_failure(run_store, job_id, current_stage, error)
         raise
 
     _print_snapshot_manifest(manifest)
@@ -720,6 +901,9 @@ def run_daily_update_cmd(
         refresh_data=refresh_data,
         refresh_macro=refresh_macro,
         refresh_news=refresh_news,
+    )
+    console.print(
+        f"Recorded {executable_rows:,} exact post-risk executable portfolio observation(s)."
     )
     if migration_results:
         _print_migration_table("Daily Warehouse Refresh", migration_results)
@@ -932,6 +1116,16 @@ def backfill_snapshots_cmd(
             ),
         ),
     ] = False,
+    only_missing_market_dates: Annotated[
+        bool,
+        typer.Option(
+            "--only-missing-market-dates/--all-market-dates",
+            help=(
+                "Add only planned market dates that have no retained snapshot. Existing "
+                "daily snapshots are preserved and normal daily/weekly retention is reapplied."
+            ),
+        ),
+    ] = False,
     plan_only: Annotated[
         bool,
         typer.Option("--plan-only/--run", help="Print the rebuild schedule without writing."),
@@ -970,6 +1164,23 @@ def backfill_snapshots_cmd(
     replacement_source_run_id: dict[str, str] = {}
     already_replaced_market_dates: set[str] = set()
     expected_market_dates: set[str] = set()
+    if only_missing_periods and only_missing_market_dates:
+        raise typer.BadParameter(
+            "--only-missing-periods cannot be combined with --only-missing-market-dates."
+        )
+    if only_missing_market_dates:
+        if purge_existing:
+            raise typer.BadParameter(
+                "--only-missing-market-dates cannot be combined with --purge-existing."
+            )
+        if replace_existing_market_dates:
+            raise typer.BadParameter(
+                "--only-missing-market-dates cannot be combined with "
+                "--replace-existing-market-dates."
+            )
+        existing = run_store.list_snapshots(limit=100_000)
+        existing_dates = existing.get("market_date", pd.Series(dtype=object))
+        selected_dates = missing_market_backfill_dates(selected_dates, existing_dates)
     if only_missing_periods:
         if purge_existing:
             raise typer.BadParameter(
@@ -1200,14 +1411,22 @@ def backfill_snapshots_cmd(
             apply=True,
         )
     else:
-        recent_market_days = (
-            DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS
-            if only_missing_periods
-            else _selected_daily_market_day_count(
+        if only_missing_periods:
+            recent_market_days = DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS
+        elif only_missing_market_dates:
+            retained_snapshots = run_store.list_snapshots(limit=100_000)
+            recent_market_days = required_daily_retention_count(
+                plan,
+                minimum_market_days=DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS,
+                retained_market_dates=retained_snapshots.get(
+                    "market_date", pd.Series(dtype=object)
+                ),
+            )
+        else:
+            recent_market_days = _selected_daily_market_day_count(
                 selected_dates,
                 daily_cutoff_date=plan.daily_cutoff_date,
             )
-        )
         final_prune = run_store.prune_snapshots(
             keep_latest=0,
             keep_per_market_date=DEFAULT_SNAPSHOT_RETENTION_KEEP_PER_MARKET_DATE,
@@ -1216,7 +1435,7 @@ def backfill_snapshots_cmd(
             keep_weekly_older=DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
             weekly_frequency=(
                 DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY
-                if only_missing_periods
+                if only_missing_periods or only_missing_market_dates
                 else weekly_frequency
             ),
             apply=True,
@@ -5114,16 +5333,25 @@ def run_paper_valuation_cmd(
     store: Annotated[Path, typer.Option("--store")] = DEFAULT_RUN_STORE_DB_PATH,
     artifact_dir: Annotated[Path, typer.Option("--artifact-dir")] = DEFAULT_RUN_STORE_ARTIFACT_DIR,
     job_log_dir: Annotated[Path, typer.Option("--job-log-dir")] = DEFAULT_RUN_STORE_JOB_LOG_DIR,
+    journal: Annotated[Path, typer.Option("--journal")] = DEFAULT_JOURNAL_PATH,
     job_id: Annotated[str | None, typer.Option("--job-id")] = None,
 ) -> None:
     run_store = RunStore(store, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
     if job_id:
         run_store.mark_job_running(job_id)
+        run_store.mark_job_stage(job_id, "paper_valuation", "running")
+    executable_rows = 0
     try:
         snapshot_payload = run_store.load_latest_snapshot(require_matching_config=False)
         if snapshot_payload is None:
             console.print("No completed snapshots found. Build a snapshot before paper valuation.")
             if job_id:
+                run_store.mark_job_stage(
+                    job_id,
+                    "paper_valuation",
+                    "skipped",
+                    "No completed snapshot was available.",
+                )
                 run_store.mark_job_completed(job_id, "paper-valuation-no-snapshot")
             return
         baseline_run, manifest = snapshot_payload
@@ -5139,15 +5367,35 @@ def run_paper_valuation_cmd(
             market_date=manifest.market_date,
             execution=bot_config.execution,
         )
+        operating_strategy, operating_decision = _operating_trade_decision(
+            baseline_run,
+            bot_config,
+            journal,
+        )
+        executable_rows = warehouse.save_executable_portfolio_observation(
+            baseline_run,
+            snapshot_run_id=manifest.run_id,
+            strategy_name=operating_strategy,
+            execution=bot_config.execution,
+            trade_decision=operating_decision,
+        )
         if job_id:
+            run_store.attach_job_run_id(job_id, manifest.run_id)
+            run_store.mark_job_stage(
+                job_id,
+                "paper_valuation",
+                "completed",
+                f"{rows} strategy rows; {executable_rows} executable rows",
+            )
             run_store.mark_job_completed(job_id, manifest.run_id)
     except Exception as error:
         if job_id:
-            run_store.mark_job_failed(job_id, str(error))
+            _record_job_failure(run_store, job_id, "paper_valuation", error)
         raise
     console.print(
         f"Wrote {rows:,} paper valuation rows from snapshot {manifest.run_id} "
-        f"for market date {manifest.market_date}."
+        f"for market date {manifest.market_date}; recorded {executable_rows:,} exact "
+        "post-risk portfolio observation(s)."
     )
 
 

@@ -7,6 +7,8 @@ import pickle
 import subprocess
 import sys
 import uuid
+from collections.abc import Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import UTC, datetime
 from pathlib import Path
@@ -37,6 +39,7 @@ from trade_bot.DEFAULTS import (
 )
 from trade_bot.research.artifact_provenance import build_runtime_provenance
 from trade_bot.research.baselines import BaselineRun
+from trade_bot.storage.db_lock import connect_with_retry, database_write_lock
 
 SNAPSHOT_SCHEMA_VERSION = 2
 
@@ -107,6 +110,16 @@ class SnapshotJob:
     process_id: int = 0
 
 
+@dataclass(frozen=True)
+class SnapshotJobStage:
+    job_id: str
+    stage: str
+    status: str
+    started_at_utc: str
+    completed_at_utc: str
+    detail: str = ""
+
+
 class RunStore:
     def __init__(
         self,
@@ -144,9 +157,7 @@ class RunStore:
         prune_keep_recent_market_days: int | None = (
             DEFAULT_SNAPSHOT_RETENTION_KEEP_RECENT_MARKET_DAYS
         ),
-        prune_keep_all_capture_days: int = (
-            DEFAULT_SNAPSHOT_RETENTION_KEEP_ALL_CAPTURE_DAYS
-        ),
+        prune_keep_all_capture_days: int = (DEFAULT_SNAPSHOT_RETENTION_KEEP_ALL_CAPTURE_DAYS),
         prune_keep_weekly_older: int = DEFAULT_SNAPSHOT_RETENTION_KEEP_WEEKLY_OLDER,
         prune_weekly_frequency: str = DEFAULT_SNAPSHOT_RETENTION_WEEKLY_FREQUENCY,
     ) -> SnapshotManifest:
@@ -195,7 +206,11 @@ class RunStore:
             provenance_json=provenance_json,
             stored_at_utc=stored_at_utc,
         )
-        self._upsert_manifest(manifest)
+        try:
+            self._upsert_manifest(manifest)
+        except Exception:
+            artifact_path.unlink(missing_ok=True)
+            raise
         if auto_prune:
             self.prune_snapshots(
                 keep_latest=prune_keep_latest,
@@ -281,9 +296,7 @@ class RunStore:
                     """
                 ).fetchall()
             }
-            storage_order = (
-                "stored_at_utc DESC, " if "stored_at_utc" in columns else ""
-            )
+            storage_order = "stored_at_utc DESC, " if "stored_at_utc" in columns else ""
             frame = connection.execute(
                 f"""
                 SELECT *
@@ -343,11 +356,7 @@ class RunStore:
             snapshots["created_at_utc"], errors="coerce", utc=True
         )
         stored_times = stored_times.fillna(fallback_created_times)
-        retention_now = (
-            pd.to_datetime(now_utc, utc=True)
-            if now_utc
-            else pd.Timestamp.now(tz="UTC")
-        )
+        retention_now = pd.to_datetime(now_utc, utc=True) if now_utc else pd.Timestamp.now(tz="UTC")
         fresh_capture_mask = stored_times >= (
             retention_now - pd.Timedelta(days=keep_all_capture_days)
         )
@@ -408,21 +417,22 @@ class RunStore:
         candidates["prune_reason"] = "outside_snapshot_retention_policy"
 
         if apply:
+            run_ids = candidates[["run_id"]].copy()
+            with database_write_lock(self.db_path):
+                connection = self._connect()
+                try:
+                    connection.register("snapshot_prune_ids", run_ids)
+                    connection.execute(
+                        """
+                        DELETE FROM run_snapshots
+                        WHERE run_id IN (SELECT run_id FROM snapshot_prune_ids)
+                        """
+                    )
+                finally:
+                    connection.close()
             for artifact_path in safe_paths:
                 if artifact_path.exists():
                     artifact_path.unlink()
-            run_ids = candidates[["run_id"]].copy()
-            connection = self._connect()
-            try:
-                connection.register("snapshot_prune_ids", run_ids)
-                connection.execute(
-                    """
-                    DELETE FROM run_snapshots
-                    WHERE run_id IN (SELECT run_id FROM snapshot_prune_ids)
-                    """
-                )
-            finally:
-                connection.close()
             candidates["pruned"] = True
 
         return candidates[
@@ -460,21 +470,22 @@ class RunStore:
         candidates["prune_reason"] = "snapshot_store_rebuild_purge"
 
         if apply:
+            run_ids = candidates[["run_id"]].copy()
+            with database_write_lock(self.db_path):
+                connection = self._connect()
+                try:
+                    connection.register("snapshot_purge_ids", run_ids)
+                    connection.execute(
+                        """
+                        DELETE FROM run_snapshots
+                        WHERE run_id IN (SELECT run_id FROM snapshot_purge_ids)
+                        """
+                    )
+                finally:
+                    connection.close()
             for artifact_path in safe_paths:
                 if artifact_path.exists():
                     artifact_path.unlink()
-            run_ids = candidates[["run_id"]].copy()
-            connection = self._connect()
-            try:
-                connection.register("snapshot_purge_ids", run_ids)
-                connection.execute(
-                    """
-                    DELETE FROM run_snapshots
-                    WHERE run_id IN (SELECT run_id FROM snapshot_purge_ids)
-                    """
-                )
-            finally:
-                connection.close()
             candidates["pruned"] = True
 
         return candidates[
@@ -628,6 +639,7 @@ class RunStore:
         self,
         *,
         config_path: str | Path = DEFAULT_CONFIG_PATH,
+        journal_path: str | Path = DEFAULT_JOURNAL_PATH,
     ) -> SnapshotJob:
         log_path = self.job_log_dir / f"{_new_job_id()}.log"
         command = [
@@ -643,6 +655,8 @@ class RunStore:
             str(self.artifact_dir),
             "--job-log-dir",
             str(self.job_log_dir),
+            "--journal",
+            str(journal_path),
         ]
         return self._start_background_job(command, log_path)
 
@@ -811,12 +825,6 @@ class RunStore:
                 active_at = row.get("created_at_utc")
             active_since = pd.to_datetime(active_at, errors="coerce", utc=True)
             age = now - active_since if pd.notna(active_since) else pd.Timedelta.max
-            if status == "queued" and age > pd.Timedelta(minutes=15):
-                self.mark_job_failed(
-                    job.job_id,
-                    "Queued background job exceeded its 15-minute startup lease.",
-                )
-                continue
             if status == "running" and age > pd.Timedelta(hours=6):
                 self.mark_job_failed(
                     job.job_id,
@@ -831,10 +839,21 @@ class RunStore:
                     "Queued background job did not record a process within 30 seconds.",
                 )
                 continue
-            if not self._process_is_alive(job.process_id):
+            process_alive = self._process_is_alive(job.process_id)
+            if status == "queued" and process_alive:
+                # The worker may be waiting for the serialized database writer lock before it
+                # can persist its running state. A live PID is stronger evidence than the lease.
+                return job
+            if not process_alive:
+                detail = (
+                    f"Background process ended after snapshot {job.run_id}; inspect job stages "
+                    "for incomplete downstream work."
+                    if job.run_id
+                    else "Background process is no longer running."
+                )
                 self.mark_job_failed(
                     job.job_id,
-                    "Background process is no longer running.",
+                    detail,
                 )
                 continue
             return job
@@ -870,6 +889,93 @@ class RunStore:
                 process_id=job.process_id,
             )
         )
+
+    def attach_job_run_id(self, job_id: str, run_id: str) -> None:
+        """Attach durable snapshot evidence before downstream stages run."""
+
+        job = self.get_job(job_id)
+        if job is None:
+            return
+        self._upsert_job(
+            SnapshotJob(
+                job_id=job.job_id,
+                created_at_utc=job.created_at_utc,
+                started_at_utc=job.started_at_utc or utc_now_iso(),
+                completed_at_utc=job.completed_at_utc,
+                status=job.status,
+                command=job.command,
+                log_path=job.log_path,
+                run_id=run_id,
+                error_message=job.error_message,
+                process_id=job.process_id,
+            )
+        )
+
+    def mark_job_stage(
+        self,
+        job_id: str,
+        stage: str,
+        status: str,
+        detail: str = "",
+    ) -> None:
+        if status not in {"running", "completed", "failed", "warning", "skipped"}:
+            raise ValueError(f"Unsupported job stage status: {status}")
+        existing = self.get_job_stage(job_id, stage)
+        now = utc_now_iso()
+        started_at = existing.started_at_utc if existing is not None else ""
+        if status == "running" or not started_at:
+            started_at = now
+        completed_at = "" if status == "running" else now
+        self._upsert_job_stage(
+            SnapshotJobStage(
+                job_id=job_id,
+                stage=stage,
+                status=status,
+                started_at_utc=started_at,
+                completed_at_utc=completed_at,
+                detail=detail,
+            )
+        )
+
+    def get_job_stage(self, job_id: str, stage: str) -> SnapshotJobStage | None:
+        connection = self._connect()
+        try:
+            frame = connection.execute(
+                """
+                SELECT job_id, stage, status, started_at_utc, completed_at_utc, detail
+                FROM snapshot_job_stages
+                WHERE job_id = ? AND stage = ?
+                """,
+                [job_id, stage],
+            ).fetchdf()
+        finally:
+            connection.close()
+        if frame.empty:
+            return None
+        row = frame.iloc[0]
+        return SnapshotJobStage(
+            job_id=str(row["job_id"]),
+            stage=str(row["stage"]),
+            status=str(row["status"]),
+            started_at_utc=str(row["started_at_utc"]),
+            completed_at_utc=str(row["completed_at_utc"]),
+            detail=str(row["detail"]),
+        )
+
+    def list_job_stages(self, job_id: str) -> pd.DataFrame:
+        connection = self._connect()
+        try:
+            return connection.execute(
+                """
+                SELECT job_id, stage, status, started_at_utc, completed_at_utc, detail
+                FROM snapshot_job_stages
+                WHERE job_id = ?
+                ORDER BY started_at_utc, stage
+                """,
+                [job_id],
+            ).fetchdf()
+        finally:
+            connection.close()
 
     def mark_job_completed(self, job_id: str, run_id: str) -> None:
         job = self.get_job(job_id)
@@ -942,11 +1048,19 @@ class RunStore:
             connection.close()
 
     def _connect(self) -> duckdb.DuckDBPyConnection:
-        return duckdb.connect(str(self.db_path), read_only=self.read_only)
+        return connect_with_retry(self.db_path, read_only=self.read_only)
+
+    @contextmanager
+    def _write_connection(self) -> Iterator[duckdb.DuckDBPyConnection]:
+        with database_write_lock(self.db_path):
+            connection = self._connect()
+            try:
+                yield connection
+            finally:
+                connection.close()
 
     def _ensure_schema(self) -> None:
-        connection = self._connect()
-        try:
+        with self._write_connection() as connection:
             connection.execute(
                 """
                 CREATE TABLE IF NOT EXISTS run_snapshots (
@@ -1022,12 +1136,22 @@ class RunStore:
                 ADD COLUMN IF NOT EXISTS process_id BIGINT DEFAULT 0
                 """
             )
-        finally:
-            connection.close()
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS snapshot_job_stages (
+                    stage_id VARCHAR PRIMARY KEY,
+                    job_id VARCHAR NOT NULL,
+                    stage VARCHAR NOT NULL,
+                    status VARCHAR NOT NULL,
+                    started_at_utc VARCHAR NOT NULL,
+                    completed_at_utc VARCHAR NOT NULL,
+                    detail VARCHAR NOT NULL
+                )
+                """
+            )
 
     def _upsert_manifest(self, manifest: SnapshotManifest) -> None:
-        connection = self._connect()
-        try:
+        with self._write_connection() as connection:
             connection.execute(
                 """
                 INSERT OR REPLACE INTO run_snapshots (
@@ -1071,12 +1195,9 @@ class RunStore:
                     manifest.provenance_json,
                 ],
             )
-        finally:
-            connection.close()
 
     def _upsert_job(self, job: SnapshotJob) -> None:
-        connection = self._connect()
-        try:
+        with self._write_connection() as connection:
             connection.execute(
                 """
                 INSERT OR REPLACE INTO snapshot_jobs
@@ -1097,12 +1218,9 @@ class RunStore:
                     job.process_id,
                 ],
             )
-        finally:
-            connection.close()
 
     def _set_job_process_id(self, job_id: str, process_id: int) -> None:
-        connection = self._connect()
-        try:
+        with self._write_connection() as connection:
             connection.execute(
                 """
                 UPDATE snapshot_jobs
@@ -1111,8 +1229,25 @@ class RunStore:
                 """,
                 [process_id, job_id],
             )
-        finally:
-            connection.close()
+
+    def _upsert_job_stage(self, stage: SnapshotJobStage) -> None:
+        with self._write_connection() as connection:
+            connection.execute(
+                """
+                INSERT OR REPLACE INTO snapshot_job_stages
+                    (stage_id, job_id, stage, status, started_at_utc, completed_at_utc, detail)
+                VALUES (?, ?, ?, ?, ?, ?, ?)
+                """,
+                [
+                    f"{stage.job_id}:{stage.stage}",
+                    stage.job_id,
+                    stage.stage,
+                    stage.status,
+                    stage.started_at_utc,
+                    stage.completed_at_utc,
+                    stage.detail,
+                ],
+            )
 
     def _safe_artifact_path_for_prune(self, artifact_path_string: str) -> Path:
         artifact_path = Path(artifact_path_string)

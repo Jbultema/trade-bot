@@ -181,11 +181,7 @@ def test_materialized_history_is_limited_to_retained_snapshot_dates(
             )
 
         def load_snapshot(self, run_id: str) -> tuple[SimpleNamespace, SimpleNamespace]:
-            return _snapshot_run(), SimpleNamespace(
-                run_id=run_id,
-                market_date="2026-07-20",
-                created_at_utc="2026-07-21T00:19:14+00:00",
-            )
+            raise AssertionError(f"Materialized history should avoid loading {run_id}")
 
     monkeypatch.setattr(trends_module, "TradingWarehouse", FakeWarehouse)
     monkeypatch.setattr(trends_module, "RunStore", FakeRunStore)

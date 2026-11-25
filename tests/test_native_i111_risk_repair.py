@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import pandas as pd
+import pytest
 
 from trade_bot.config import StrategyConfig
 from trade_bot.research.native_i111_risk_repair import (
@@ -133,6 +134,48 @@ def test_native_ai_cap_can_rotate_excess_to_diversifiers() -> None:
     assert weights[["NVDA", "AVGO"]].iloc[-1].sum() <= 0.600001
     assert weights[["SPY", "RSP", "GLD", "TLT"]].iloc[-1].sum() >= 0.399999
     assert weights["BIL"].iloc[-1] < 0.01
+
+
+def test_native_ai_replacement_applies_asset_cap_to_diversifiers() -> None:
+    dates = pd.bdate_range("2024-01-01", periods=180)
+    up = pd.Series(range(len(dates)), index=dates, dtype=float)
+    down = pd.Series(range(len(dates), 0, -1), index=dates, dtype=float)
+    prices = pd.DataFrame(
+        {
+            "NVDA": 100.0 + up,
+            "AVGO": 100.0 + up * 0.9,
+            "QQQ": 220.0 + down * 0.2,
+            "SMH": 200.0 + down * 0.4,
+            "SPY": 100.0 + up * 0.2,
+            "RSP": 100.0 + up * 0.15,
+            "GLD": 100.0 + up * 0.1,
+            "TLT": 100.0 + up * 0.05,
+            "HYG": 90.0 + down * 0.02,
+            "LQD": 90.0 + up * 0.02,
+            "BIL": 100.0 + up * 0.001,
+        },
+        index=dates,
+    )
+    strategy = StrategyConfig(
+        type="dual_momentum_risk_repair",
+        tickers=["NVDA", "AVGO"],
+        lookback_days=21,
+        skip_days=0,
+        top_n=2,
+        defensive_ticker="BIL",
+        min_return=-1.0,
+        trend_filter_days=None,
+        max_asset_weight=0.35,
+        risk_repair_ai_soft_cap=0.20,
+        risk_repair_ai_soft_threshold=0.50,
+        risk_repair_ai_excess_destination="diversifier_mix",
+    )
+
+    weights = build_strategy_weights(prices, strategy)
+
+    active = weights.drop(columns="BIL")
+    assert float(active.iloc[-1].max()) <= 0.350001
+    assert weights.iloc[-1].sum() == pytest.approx(1.0)
 
 
 def test_risk_repair_does_not_buy_negative_momentum_diversifiers() -> None:

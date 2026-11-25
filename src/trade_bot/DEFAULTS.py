@@ -963,7 +963,6 @@ DEFAULT_RISK_BROAD_EQUITY_TICKERS = (
     "SPY",
     "VOO",
     "IVV",
-    "SPLG",
     "VTI",
     "VT",
     "DIA",

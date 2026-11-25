@@ -129,6 +129,30 @@ def test_run_store_tracks_snapshot_jobs(tmp_path: Path) -> None:
     assert jobs.iloc[0]["run_id"] == "run-1"
 
 
+def test_run_store_tracks_stage_progress_and_snapshot_before_completion(tmp_path: Path) -> None:
+    store = RunStore(
+        tmp_path / "trade_bot.duckdb",
+        artifact_dir=tmp_path / "snapshots",
+        job_log_dir=tmp_path / "jobs",
+    )
+
+    job = store.create_job(["python", "worker.py"], tmp_path / "jobs" / "test.log")
+    store.mark_job_running(job.job_id)
+    store.mark_job_stage(job.job_id, "snapshot", "running")
+    store.attach_job_run_id(job.job_id, "run-durable")
+    store.mark_job_stage(job.job_id, "snapshot", "completed", "run-durable")
+    store.mark_job_stage(job.job_id, "paper_valuation", "failed", "valuation unavailable")
+
+    stored_job = store.get_job(job.job_id)
+    stages = store.list_job_stages(job.job_id).set_index("stage")
+
+    assert stored_job is not None
+    assert stored_job.run_id == "run-durable"
+    assert stages.loc["snapshot", "status"] == "completed"
+    assert stages.loc["paper_valuation", "status"] == "failed"
+    assert stages.loc["paper_valuation", "detail"] == "valuation unavailable"
+
+
 def test_run_store_migrates_legacy_snapshot_jobs_schema(tmp_path: Path) -> None:
     db_path = tmp_path / "trade_bot.duckdb"
     connection = duckdb.connect(str(db_path))

@@ -7,10 +7,46 @@ import pandas as pd
 from trade_bot.backtest.engine import BacktestResult
 from trade_bot.research.current_state import (
     build_current_state,
+    build_strategy_alerts,
     calculate_risk_score,
     momentum_state_table,
     refresh_risk_timing,
 )
+
+
+def test_strategy_alerts_expose_pending_target_before_execution() -> None:
+    index = pd.to_datetime(["2026-11-20", "2026-11-23"])
+    executed = pd.DataFrame(
+        [[0.70, 0.0, 0.30], [0.70, 0.0, 0.30]],
+        index=index,
+        columns=["MSFT", "XLV", "BIL"],
+    )
+    target = pd.DataFrame(
+        [[0.70, 0.0, 0.30], [0.175, 0.525, 0.30]],
+        index=index,
+        columns=executed.columns,
+    )
+    result = BacktestResult(
+        name="challenger",
+        equity=pd.Series([100.0, 100.0], index=index),
+        returns=pd.Series([0.0, 0.0], index=index),
+        gross_returns=pd.Series([0.0, 0.0], index=index),
+        weights=executed,
+        target_weights=target,
+        turnover=pd.Series([0.0, 0.0], index=index),
+        transaction_costs=pd.Series([0.0, 0.0], index=index),
+    )
+
+    alert = build_strategy_alerts(
+        {"challenger": result},
+        preferred_strategy="challenger",
+    ).iloc[0]
+
+    assert alert["action"] == "HOLD"
+    assert alert["pending_action"] == "ROTATE"
+    assert "XLV 52%" in alert["latest_target"]
+    assert "Buy/Add XLV 52%" in alert["target_alert"]
+    assert "Sell/Reduce MSFT 52%" in alert["target_alert"]
 
 
 def test_momentum_state_table_classifies_positive_and_negative_trends() -> None:

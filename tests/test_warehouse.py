@@ -158,6 +158,97 @@ def test_warehouse_freezes_fixed_prospective_cohort_without_backfill(tmp_path) -
     )
 
 
+def test_warehouse_replays_post_risk_targets_without_prospective_claim(tmp_path) -> None:
+    warehouse = TradingWarehouse(tmp_path / "trade_bot.duckdb")
+    prices = pd.DataFrame(
+        {
+            "QQQ": [100.0, 110.0],
+            "BIL": [100.0, 100.0],
+            "SPY": [100.0, 101.0],
+        },
+        index=pd.to_datetime(["2026-06-17", "2026-06-18"]),
+    )
+    execution = ExecutionConfig(
+        initial_capital=10_000.0,
+        transaction_cost_bps=5.0,
+        rebalance="D",
+        signal_lag_days=1,
+    )
+
+    def baseline_run(market_date: str, qqq: float, bil: float) -> SimpleNamespace:
+        position_plan = pd.DataFrame(
+            {
+                "ticker": ["QQQ", "BIL"],
+                "scenario_adjusted_weight": [qqq, bil],
+            }
+        )
+        return SimpleNamespace(
+            current_state=SimpleNamespace(market_date=market_date, risk_status="orange"),
+            prices=prices,
+            trade_decision=SimpleNamespace(
+                position_plan=position_plan,
+                summary=pd.DataFrame(
+                    [
+                        {
+                            "recommended_action": "REDUCE_RISK",
+                            "risk_budget_multiplier": 0.64,
+                        }
+                    ]
+                ),
+                portfolio_risk=SimpleNamespace(
+                    summary=pd.DataFrame([{"applied_constraints": "stress_loss"}])
+                ),
+            ),
+        )
+
+    first_rows = warehouse.save_executable_portfolio_observation(
+        baseline_run("2026-06-17", 0.5, 0.5),
+        snapshot_run_id="run-1",
+        strategy_name="primary",
+        execution=execution,
+    )
+    second_rows = warehouse.save_executable_portfolio_observation(
+        baseline_run("2026-06-18", 0.25, 0.55),
+        snapshot_run_id="run-2",
+        strategy_name="primary",
+        execution=execution,
+    )
+    observations = warehouse.read_table("executable_portfolio_daily").sort_values("market_date")
+    first = observations.iloc[0]
+    second = observations.iloc[1]
+
+    assert first_rows == second_rows == 1
+    assert first["valuation_status"] == "seeded"
+    assert first["target_turnover"] == pytest.approx(1.0)
+    assert second["valuation_status"] == "valued"
+    assert second["gross_return"] == pytest.approx(0.05)
+    assert second["transaction_cost"] == pytest.approx(0.0005)
+    assert second["net_return"] == pytest.approx(0.0495)
+    assert second["equity"] == pytest.approx(10_495.0)
+    assert second["cash_weight"] == pytest.approx(0.20)
+    assert second["defensive_weight"] == pytest.approx(0.55)
+    assert second["risk_asset_weight"] == pytest.approx(0.25)
+    assert second["binding_constraint"] == "stress_loss"
+    assert second["evidence_basis"] == "post_risk_target_replay_not_execution_proof"
+    assert json.loads(second["target_weights_json"]) == {"BIL": 0.55, "QQQ": 0.25}
+
+    assert warehouse.save_executable_portfolio_observation(
+        baseline_run("2026-06-19", 0.0, 0.0), snapshot_run_id="run-cash",
+        strategy_name="primary", execution=execution,
+    ) == 1
+    cash = warehouse.read_table("executable_portfolio_daily").sort_values("market_date").iloc[-1]
+    assert cash["cash_weight"] == 1.0
+    assert json.loads(cash["target_weights_json"]) == {}
+
+
+@pytest.mark.parametrize("weights", [[float("nan")], [-0.1], [1.1], [float("inf")]])
+def test_invalid_post_risk_targets_are_not_silently_repaired(weights):
+    from trade_bot.storage.warehouse import _position_plan_target_weights
+
+    with pytest.raises(ValueError, match="finite"):
+        _position_plan_target_weights(pd.DataFrame({"ticker": ["QQQ"], "target_weight": weights}))
+
+
 def test_warehouse_persists_simulation_validation_history(tmp_path) -> None:
     warehouse = TradingWarehouse(tmp_path / "trade_bot.duckdb")
     validation = pd.DataFrame(

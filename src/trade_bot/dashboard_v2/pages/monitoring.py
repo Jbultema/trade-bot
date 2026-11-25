@@ -1,5 +1,6 @@
 from __future__ import annotations
 
+import json
 from datetime import date, timedelta
 
 import pandas as pd
@@ -24,6 +25,7 @@ from trade_bot.dashboard_v2.services.runtime import DashboardRuntime
 from trade_bot.dashboard_v2.services.warehouse_service import (
     champion_challenger_frame,
     monitoring_windows,
+    read_warehouse_table,
 )
 
 
@@ -56,13 +58,15 @@ def render_monitoring_page(runtime: DashboardRuntime) -> None:
 
     view = st.pills(
         "Monitoring view",
-        ["Trends", "Readout", "Controls", "Full Workbench"],
-        default="Trends",
+        ["Executable Portfolio", "Trends", "Readout", "Controls", "Full Workbench"],
+        default="Executable Portfolio",
         selection_mode="single",
         key="dashboard_v2_monitoring_view",
     )
-    selected_view = view or "Trends"
-    if selected_view == "Trends":
+    selected_view = view or "Executable Portfolio"
+    if selected_view == "Executable Portfolio":
+        _render_executable_portfolio(warehouse_path, market_date)
+    elif selected_view == "Trends":
         render_callout(
             "Forward trend plots read valuation history from DuckDB. The default selection "
             "prioritizes champion and reference windows, and the selectors expose every "
@@ -126,6 +130,100 @@ def render_monitoring_page(runtime: DashboardRuntime) -> None:
             heavy=True,
         )
         _render_monitoring(warehouse_path)
+
+
+def _render_executable_portfolio(warehouse_path: object, market_date: str) -> None:
+    frame = read_warehouse_table(
+        warehouse_path,
+        table_name="executable_portfolio_daily",
+        limit=500,
+    )
+    render_section_header("Post-Risk Target Replay")
+    render_callout(
+        "Diagnostic replay of final trade-decision weights after portfolio risk constraints. "
+        "Market-date returns do not establish capture-before-fill timing, execution lag, or "
+        "actual trades. These results are not prospective performance evidence.",
+        heavy=True,
+    )
+    if frame.empty:
+        st.info(
+            "No post-risk replay observations are available."
+        )
+        return
+    ordered = frame.sort_values("market_date")
+    latest = ordered.iloc[-1]
+    latest_date = str(latest.get("market_date", ""))
+    freshness = "current" if latest_date == market_date else f"stale versus {market_date}"
+    render_card_grid(
+        [
+            ("Ledger Date", latest_date),
+            ("Status", str(latest.get("valuation_status", "unknown"))),
+            ("Risk Assets", _format_percent(latest.get("risk_asset_weight"))),
+            ("Defensive", _format_percent(latest.get("defensive_weight"))),
+            ("Cumulative Return", _format_percent(latest.get("cumulative_return"))),
+            ("Max Current Drawdown", _format_percent(latest.get("drawdown"))),
+            ("SPY Since Start", _format_percent(latest.get("benchmark_cumulative_return"))),
+            ("Evidence", freshness),
+        ]
+    )
+    render_callout(
+        f"Action: {latest.get('recommended_action', 'n/a')} | Risk state: "
+        f"{latest.get('risk_status', 'n/a')} | Binding constraint: "
+        f"{latest.get('binding_constraint', 'none')} | Residual cash: "
+        f"{_format_percent(latest.get('cash_weight'))}"
+    )
+    weights = _decoded_weight_frame(latest.get("target_weights_json"))
+    if not weights.empty:
+        _render_metric_dataframe(_display_metrics(weights))
+    history_columns = [
+        column
+        for column in [
+            "market_date",
+            "valuation_status",
+            "recommended_action",
+            "risk_status",
+            "binding_constraint",
+            "cash_weight",
+            "defensive_weight",
+            "risk_asset_weight",
+            "net_exposure",
+            "target_turnover",
+            "net_return",
+            "cumulative_return",
+            "drawdown",
+            "benchmark_cumulative_return",
+            "missing_tickers",
+        ]
+        if column in ordered
+    ]
+    with st.expander("Post-risk replay history", expanded=False):
+        _render_metric_dataframe(_display_metrics(ordered[history_columns].tail(100)))
+
+
+def _decoded_weight_frame(raw: object) -> pd.DataFrame:
+    if not isinstance(raw, str) or not raw:
+        return pd.DataFrame()
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return pd.DataFrame()
+    if not isinstance(values, dict):
+        return pd.DataFrame()
+    return (
+        pd.DataFrame(
+            [
+                {"ticker": str(ticker), "target_weight": float(weight)}
+                for ticker, weight in values.items()
+            ]
+        )
+        .sort_values("target_weight", ascending=False)
+        .reset_index(drop=True)
+    )
+
+
+def _format_percent(value: object) -> str:
+    numeric = pd.to_numeric(pd.Series([value]), errors="coerce").iloc[0]
+    return "n/a" if pd.isna(numeric) else f"{float(numeric):.2%}"
 
 
 def _count_role(frame: pd.DataFrame, role: str) -> int:

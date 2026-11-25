@@ -5,7 +5,9 @@ import pandas as pd
 from trade_bot.research.snapshot_backfill import (
     build_snapshot_backfill_dates,
     build_snapshot_backfill_plan,
+    missing_market_backfill_dates,
     missing_period_backfill_dates,
+    required_daily_retention_count,
     snapshot_created_at_for_market_date,
 )
 
@@ -55,6 +57,50 @@ def test_snapshot_backfill_dates_matches_plan_market_dates() -> None:
     assert dates == list(plan.market_dates)
 
 
+def test_required_daily_retention_keeps_requested_tail_above_normal_floor() -> None:
+    available_dates = pd.bdate_range("2026-08-01", "2026-11-10")
+    plan = build_snapshot_backfill_plan(
+        available_dates,
+        start_date="2026-09-11",
+        end_date="2026-11-10",
+        daily_tail_days=90,
+    )
+
+    assert len(plan.daily_market_dates) > 30
+    assert required_daily_retention_count(plan, minimum_market_days=30) == len(
+        plan.daily_market_dates
+    )
+
+
+def test_required_daily_retention_includes_newer_concurrent_snapshot() -> None:
+    available_dates = pd.bdate_range("2026-08-01", "2026-11-10")
+    plan = build_snapshot_backfill_plan(
+        available_dates,
+        start_date="2026-09-11",
+        end_date="2026-11-10",
+        daily_tail_days=90,
+    )
+
+    retention_count = required_daily_retention_count(
+        plan,
+        minimum_market_days=30,
+        retained_market_dates=[*plan.daily_market_dates, "2026-11-11"],
+    )
+
+    assert retention_count == len(plan.daily_market_dates) + 1
+
+
+def test_required_daily_retention_preserves_normal_floor_for_short_tail() -> None:
+    available_dates = pd.bdate_range("2026-10-01", "2026-11-10")
+    plan = build_snapshot_backfill_plan(
+        available_dates,
+        end_date="2026-11-10",
+        daily_tail_days=7,
+    )
+
+    assert required_daily_retention_count(plan, minimum_market_days=30) == 30
+
+
 def test_snapshot_created_at_for_market_date_uses_configured_utc_close_hour() -> None:
     assert (
         snapshot_created_at_for_market_date("2026-07-17", market_close_utc_hour=22)
@@ -92,3 +138,16 @@ def test_missing_period_backfill_accepts_existing_retention_week_anchor() -> Non
     )
 
     assert selected == (pd.Timestamp("2025-06-30"),)
+
+
+def test_missing_market_backfill_dates_keeps_exact_daily_gaps() -> None:
+    planned = pd.bdate_range("2026-10-01", "2026-10-09")
+    existing = ["2026-10-01", "2026-10-02", "2026-10-06", "2026-10-08"]
+
+    selected = missing_market_backfill_dates(planned, existing)
+
+    assert selected == (
+        pd.Timestamp("2026-10-05"),
+        pd.Timestamp("2026-10-07"),
+        pd.Timestamp("2026-10-09"),
+    )

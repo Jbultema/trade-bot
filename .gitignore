@@ -1,4 +1,6 @@
 .env
+.env.*
+!.env.example
 .venv/
 __pycache__/
 .mypy_cache/
@@ -33,3 +35,6 @@ data/ml_diagnostics/
 research/ai_financial_system/staging/*
 !research/ai_financial_system/staging/README.md
 research/ai_financial_system/ai_financial_system.sqlite
+
+# Re-downloadable public research inputs; retain locally, not in source history.
+research/public_signal_frontiers/raw/

@@ -164,7 +164,18 @@ with st.sidebar.expander("Local paths", expanded=False):
     artifact_dir = Path(st.text_input("Snapshot artifacts", str(DEFAULT_RUN_STORE_ARTIFACT_DIR)))
     job_log_dir = Path(st.text_input("Snapshot job logs", str(DEFAULT_RUN_STORE_JOB_LOG_DIR)))
 
-run_store = RunStore(run_store_path, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+run_store = RunStore(
+    run_store_path,
+    artifact_dir=artifact_dir,
+    job_log_dir=job_log_dir,
+    read_only=True,
+)
+
+
+def writable_run_store() -> RunStore:
+    return RunStore(run_store_path, artifact_dir=artifact_dir, job_log_dir=job_log_dir)
+
+
 st.sidebar.caption(
     "Fast mode reads a precomputed snapshot. Selected snapshot lets you time-travel "
     "through recent saved dashboard states."
@@ -194,7 +205,7 @@ if run_source == "Selected snapshot":
             help="Load the saved dashboard state from a specific run snapshot.",
         )
 if st.sidebar.button("Run Full Daily Update", type="primary"):
-    job = run_store.start_daily_update_job(
+    job = writable_run_store().start_daily_update_job(
         config_path=config_path,
         events_path=events_path,
         macro_path=macro_path,
@@ -218,14 +229,17 @@ with st.sidebar.expander("Targeted update jobs", expanded=False):
         "piece refreshed."
     )
     if st.button("Migrate Warehouse", key="sidebar_migrate_warehouse"):
-        job = run_store.start_warehouse_migration_job(
+        job = writable_run_store().start_warehouse_migration_job(
             experiment_dir=DEFAULT_EXPERIMENTS_DIR,
             journal_path=journal_path,
         )
         st.cache_data.clear()
         st.success(f"Queued warehouse migration: {job.job_id}")
     if st.button("Run Paper Valuation", key="sidebar_run_paper_valuation"):
-        job = run_store.start_paper_valuation_job(config_path=config_path)
+        job = writable_run_store().start_paper_valuation_job(
+            config_path=config_path,
+            journal_path=journal_path,
+        )
         st.cache_data.clear()
         st.success(f"Queued paper valuation: {job.job_id}")
     seed_top_n = st.number_input(
@@ -251,7 +265,7 @@ with st.sidebar.expander("Targeted update jobs", expanded=False):
         ),
     )
     if st.button("Seed Monitoring Windows", key="sidebar_seed_monitoring"):
-        job = run_store.start_monitoring_seed_job(
+        job = writable_run_store().start_monitoring_seed_job(
             mode="paper",
             account=DEFAULT_FORWARD_TEST_ACCOUNT,
             capital_base=float(seed_capital),
@@ -261,7 +275,7 @@ with st.sidebar.expander("Targeted update jobs", expanded=False):
         st.cache_data.clear()
         st.success(f"Queued monitoring-window seed: {job.job_id}")
     if st.button("Reset Active Paper Windows To Cohort Start", key="sidebar_reset_monitoring"):
-        job = run_store.start_monitoring_start_reset_job(
+        job = writable_run_store().start_monitoring_start_reset_job(
             config_path=config_path,
             start_date=monitoring_start_date.isoformat(),
             mode="paper",
@@ -274,7 +288,7 @@ with st.sidebar.expander("Targeted update jobs", expanded=False):
     ml_profile = st.selectbox("ML diagnostics profile", ["standard", "research"], index=0)
     ml_refresh_data = st.checkbox("Refresh prices for ML diagnostics", value=False)
     if st.button("Run ML Diagnostics", key="sidebar_run_ml_diagnostics"):
-        job = run_store.start_ml_diagnostics_job(
+        job = writable_run_store().start_ml_diagnostics_job(
             config_path=config_path,
             output_dir=DEFAULT_ML_DIAGNOSTICS_DIR,
             profile=ml_profile,
@@ -292,7 +306,7 @@ with st.sidebar.expander("Advanced snapshot options", expanded=False):
     refresh_macro = st.checkbox("Refresh macro data", value=False)
     refresh_news = st.checkbox("Refresh news", value=False)
     if st.button("Build Snapshot Only"):
-        job = run_store.start_snapshot_build_job(
+        job = writable_run_store().start_snapshot_build_job(
             config_path=config_path,
             events_path=events_path,
             macro_path=macro_path,

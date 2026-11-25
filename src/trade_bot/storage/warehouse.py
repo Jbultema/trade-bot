@@ -4,13 +4,15 @@ import hashlib
 import json
 import sqlite3
 import uuid
-from collections.abc import Iterable
+from collections.abc import Iterable, Iterator
+from contextlib import contextmanager
 from dataclasses import dataclass
 from datetime import UTC, date, datetime
 from pathlib import Path
 from typing import Any, cast
 
 import duckdb
+import numpy as np
 import pandas as pd
 
 from trade_bot.backtest.engine import BacktestResult, run_backtest
@@ -37,6 +39,7 @@ from trade_bot.research.operating_exposure import (
     build_sleeve_exposure_table,
 )
 from trade_bot.research.validation import add_overfit_diagnostics
+from trade_bot.storage.db_lock import connect_with_retry, database_write_lock
 from trade_bot.strategies.momentum import build_strategy_weights
 
 WAREHOUSE_SCHEMA_VERSION = 1
@@ -1075,11 +1078,9 @@ class TradingWarehouse:
                         window.get("evidence_basis", "reconstructed_historical")
                         or "reconstructed_historical"
                     ),
-                    "historical_backfill_allowed": bool(
-                        _monitoring_backfill_allowed(window)
-                    ),
+                    "historical_backfill_allowed": bool(_monitoring_backfill_allowed(window)),
                     "equity": paper_equity,
-                    "cash": 0.0,
+                    "cash": max(0.0, 1.0 - float(latest_weights.sum())),
                     "gross_exposure": _latest_gross_exposure(result),
                     "net_exposure": _latest_net_exposure(result),
                     "daily_return": daily_return,
@@ -1101,6 +1102,175 @@ class TradingWarehouse:
             return 0
         self._upsert_frame("strategy_daily_valuations", pd.DataFrame(rows), "valuation_id")
         return len(rows)
+
+    def save_executable_portfolio_observation(
+        self,
+        baseline_run: Any,
+        *,
+        snapshot_run_id: str,
+        strategy_name: str,
+        execution: ExecutionConfig,
+        trade_decision: Any | None = None,
+    ) -> int:
+        """Diagnostic replay of final targets, not capture-timed execution evidence.
+
+        Historical market-date intervals do not prove a target was captured before
+        its fill. The signal lag is metadata here, not a validated execution model.
+        """
+
+        decision = trade_decision or getattr(baseline_run, "trade_decision", None)
+        position_plan = getattr(decision, "position_plan", pd.DataFrame())
+        prices = getattr(baseline_run, "prices", pd.DataFrame())
+        market_date = str(getattr(getattr(baseline_run, "current_state", None), "market_date", ""))
+        if position_plan.empty or prices.empty or not market_date:
+            return 0
+
+        target_weights = _position_plan_target_weights(position_plan)
+        target_sum = float(target_weights.sum())
+        cash_weight = max(0.0, 1.0 - target_sum)
+        defensive_weight = float(target_weights.get("BIL", 0.0))
+        risk_asset_weight = max(0.0, target_sum - defensive_weight)
+        weights_json = _weights_json(target_weights)
+        previous = self._query(
+            """
+            SELECT *
+            FROM executable_portfolio_daily
+            WHERE strategy_name = ? AND market_date < ?
+            ORDER BY market_date DESC
+            LIMIT 1
+            """,
+            [strategy_name, market_date],
+        )
+
+        initial_capital = float(execution.initial_capital)
+        valuation_status = "seeded"
+        prior_market_date = ""
+        interval_sessions = 0
+        gross_return = 0.0
+        transaction_cost = 0.0
+        net_return = 0.0
+        equity = initial_capital
+        cumulative_return = 0.0
+        drawdown = 0.0
+        benchmark_return = 0.0
+        benchmark_cumulative_return = 0.0
+        missing_tickers = ""
+        previous_weights = pd.Series(dtype=float)
+
+        if not previous.empty:
+            prior = previous.iloc[0]
+            prior_market_date = str(prior["market_date"])
+            previous_weights = _weights_from_json(prior.get("target_weights_json"))
+            interval_return, interval_sessions, unavailable = _weighted_interval_return(
+                prices,
+                previous_weights,
+                start_date=prior_market_date,
+                end_date=market_date,
+            )
+            missing_tickers = ", ".join(unavailable)
+            prior_equity = float(prior["equity"])
+            if unavailable:
+                valuation_status = "incomplete_prices"
+                gross_return = float("nan")
+                net_return = float("nan")
+                equity = prior_equity
+            else:
+                valuation_status = "valued"
+                gross_return = interval_return
+                transaction_cost = float(prior.get("target_turnover", 0.0) or 0.0) * (
+                    float(execution.transaction_cost_bps) / 10_000.0
+                )
+                net_return = gross_return - transaction_cost
+                equity = prior_equity * (1.0 + net_return)
+            cumulative_return = equity / initial_capital - 1.0
+            prior_peak = self._query(
+                """
+                SELECT MAX(equity) AS peak
+                FROM executable_portfolio_daily
+                WHERE strategy_name = ? AND market_date < ?
+                """,
+                [strategy_name, market_date],
+            )
+            peak = max(
+                equity,
+                float(prior_peak.iloc[0]["peak"])
+                if not prior_peak.empty and pd.notna(prior_peak.iloc[0]["peak"])
+                else equity,
+            )
+            drawdown = equity / peak - 1.0 if peak > 0 else 0.0
+            benchmark_return, _, benchmark_missing = _weighted_interval_return(
+                prices,
+                pd.Series({"SPY": 1.0}),
+                start_date=prior_market_date,
+                end_date=market_date,
+            )
+            if benchmark_missing:
+                benchmark_return = float("nan")
+                benchmark_cumulative_return = float(prior.get("benchmark_cumulative_return", 0.0))
+            else:
+                prior_benchmark = float(prior.get("benchmark_cumulative_return", 0.0))
+                benchmark_cumulative_return = (1.0 + prior_benchmark) * (
+                    1.0 + benchmark_return
+                ) - 1.0
+
+        target_turnover = _weight_turnover(previous_weights, target_weights)
+        summary = (
+            decision.summary.iloc[0].to_dict()
+            if decision is not None and not decision.summary.empty
+            else {}
+        )
+        portfolio_summary = (
+            decision.portfolio_risk.summary.iloc[0].to_dict()
+            if decision is not None
+            and decision.portfolio_risk is not None
+            and not decision.portfolio_risk.summary.empty
+            else {}
+        )
+        row = pd.DataFrame(
+            [
+                {
+                    "observation_id": f"{strategy_name}:{market_date}",
+                    "snapshot_run_id": snapshot_run_id,
+                    "market_date": market_date,
+                    "created_at_utc": utc_now_iso(),
+                    "strategy_name": strategy_name,
+                    "evidence_basis": "post_risk_target_replay_not_execution_proof",
+                    "decision_source": "trade_decision.position_plan",
+                    "signal_lag_days": int(execution.signal_lag_days),
+                    "transaction_cost_bps": float(execution.transaction_cost_bps),
+                    "valuation_status": valuation_status,
+                    "prior_market_date": prior_market_date,
+                    "interval_sessions": int(interval_sessions),
+                    "target_weights_json": weights_json,
+                    "cash_weight": cash_weight,
+                    "defensive_weight": defensive_weight,
+                    "risk_asset_weight": risk_asset_weight,
+                    "gross_exposure": float(target_weights.abs().sum()),
+                    "net_exposure": target_sum,
+                    "target_turnover": target_turnover,
+                    "gross_return": gross_return,
+                    "transaction_cost": transaction_cost,
+                    "net_return": net_return,
+                    "equity": equity,
+                    "cumulative_return": cumulative_return,
+                    "drawdown": drawdown,
+                    "benchmark_return": benchmark_return,
+                    "benchmark_cumulative_return": benchmark_cumulative_return,
+                    "excess_return": cumulative_return - benchmark_cumulative_return,
+                    "risk_status": str(
+                        getattr(getattr(baseline_run, "current_state", None), "risk_status", "")
+                    ),
+                    "recommended_action": str(summary.get("recommended_action", "")),
+                    "risk_budget_multiplier": _optional_float(
+                        summary.get("risk_budget_multiplier")
+                    ),
+                    "binding_constraint": str(portfolio_summary.get("applied_constraints", "none")),
+                    "missing_tickers": missing_tickers,
+                }
+            ]
+        )
+        self._upsert_frame("executable_portfolio_daily", row, "observation_id")
+        return 1
 
     def save_simulation_validation_run(
         self,
@@ -1474,9 +1644,7 @@ class TradingWarehouse:
     ) -> dict[str, BacktestResult]:
         if windows.empty or "evidence_basis" not in windows:
             return {}
-        prospective = windows[
-            windows["evidence_basis"].astype(str).eq("prospective_no_backfill")
-        ]
+        prospective = windows[windows["evidence_basis"].astype(str).eq("prospective_no_backfill")]
         prices = getattr(baseline_run, "prices", pd.DataFrame())
         if prospective.empty or prices.empty:
             return {}
@@ -1818,8 +1986,7 @@ class TradingWarehouse:
         return not frame.empty
 
     def _ensure_schema(self) -> None:
-        connection = self._connect()
-        try:
+        with self._write_connection() as connection:
             connection.execute(
                 """
                 CREATE TABLE IF NOT EXISTS warehouse_metadata (
@@ -2059,6 +2226,53 @@ class TradingWarehouse:
                     "crypto_percent_of_max_sleeve": "DOUBLE",
                     "credit_percent_of_max_sleeve": "DOUBLE",
                     "latest_weights_json": "VARCHAR",
+                },
+            )
+            connection.execute(
+                """
+                CREATE TABLE IF NOT EXISTS executable_portfolio_daily (
+                    observation_id VARCHAR PRIMARY KEY,
+                    snapshot_run_id VARCHAR NOT NULL,
+                    market_date VARCHAR NOT NULL,
+                    created_at_utc VARCHAR NOT NULL,
+                    strategy_name VARCHAR NOT NULL,
+                    evidence_basis VARCHAR NOT NULL,
+                    decision_source VARCHAR NOT NULL,
+                    signal_lag_days INTEGER NOT NULL,
+                    transaction_cost_bps DOUBLE NOT NULL,
+                    valuation_status VARCHAR NOT NULL,
+                    prior_market_date VARCHAR NOT NULL,
+                    interval_sessions INTEGER NOT NULL,
+                    target_weights_json VARCHAR NOT NULL,
+                    cash_weight DOUBLE NOT NULL,
+                    defensive_weight DOUBLE NOT NULL,
+                    risk_asset_weight DOUBLE NOT NULL,
+                    gross_exposure DOUBLE NOT NULL,
+                    net_exposure DOUBLE NOT NULL,
+                    target_turnover DOUBLE NOT NULL,
+                    gross_return DOUBLE,
+                    transaction_cost DOUBLE,
+                    net_return DOUBLE,
+                    equity DOUBLE NOT NULL,
+                    cumulative_return DOUBLE NOT NULL,
+                    drawdown DOUBLE NOT NULL,
+                    benchmark_return DOUBLE,
+                    benchmark_cumulative_return DOUBLE,
+                    excess_return DOUBLE,
+                    risk_status VARCHAR NOT NULL,
+                    recommended_action VARCHAR NOT NULL,
+                    risk_budget_multiplier DOUBLE,
+                    binding_constraint VARCHAR NOT NULL,
+                    missing_tickers VARCHAR NOT NULL
+                )
+                """
+            )
+            self._ensure_table_columns(
+                connection,
+                "executable_portfolio_daily",
+                {
+                    "defensive_weight": "DOUBLE DEFAULT 0",
+                    "risk_asset_weight": "DOUBLE DEFAULT 0",
                 },
             )
             connection.execute(
@@ -2603,8 +2817,6 @@ class TradingWarehouse:
                     "classification_confidence": "DOUBLE",
                 },
             )
-        finally:
-            connection.close()
 
     @staticmethod
     def _ensure_table_columns(
@@ -2621,20 +2833,16 @@ class TradingWarehouse:
                 connection.execute(f"ALTER TABLE {table_name} ADD COLUMN {column} {column_type}")
 
     def _replace_table(self, table_name: str, frame: pd.DataFrame) -> None:
-        connection = self._connect()
-        try:
+        with self._write_connection() as connection:
             connection.register("replacement_frame", frame)
             connection.execute(
                 f"CREATE OR REPLACE TABLE {table_name} AS SELECT * FROM replacement_frame"
             )
-        finally:
-            connection.close()
 
     def _upsert_frame(self, table_name: str, frame: pd.DataFrame, key_column: str) -> None:
         if frame.empty:
             return
-        connection = self._connect()
-        try:
+        with self._write_connection() as connection:
             table_columns = [
                 str(row[1])
                 for row in connection.execute(f"PRAGMA table_info('{table_name}')").fetchall()
@@ -2646,18 +2854,22 @@ class TradingWarehouse:
             upsert_frame = upsert_frame[table_columns]
             quoted_columns = ", ".join(_quote_identifier(column) for column in table_columns)
             connection.register("upsert_frame", upsert_frame)
-            connection.execute(
-                f"""
-                DELETE FROM {table_name}
-                WHERE {key_column} IN (SELECT {key_column} FROM upsert_frame)
-                """
-            )
-            connection.execute(
-                f"INSERT INTO {table_name} ({quoted_columns}) "
-                f"SELECT {quoted_columns} FROM upsert_frame"
-            )
-        finally:
-            connection.close()
+            connection.execute("BEGIN TRANSACTION")
+            try:
+                connection.execute(
+                    f"""
+                    DELETE FROM {table_name}
+                    WHERE {key_column} IN (SELECT {key_column} FROM upsert_frame)
+                    """
+                )
+                connection.execute(
+                    f"INSERT INTO {table_name} ({quoted_columns}) "
+                    f"SELECT {quoted_columns} FROM upsert_frame"
+                )
+                connection.execute("COMMIT")
+            except Exception:
+                connection.execute("ROLLBACK")
+                raise
 
     def _query(self, query: str, params: Iterable[object] | None = None) -> pd.DataFrame:
         connection = self._connect()
@@ -2667,14 +2879,20 @@ class TradingWarehouse:
             connection.close()
 
     def _execute(self, query: str, params: Iterable[object] | None = None) -> None:
-        connection = self._connect()
-        try:
+        with self._write_connection() as connection:
             connection.execute(query, list(params or []))
-        finally:
-            connection.close()
 
     def _connect(self) -> duckdb.DuckDBPyConnection:
-        return duckdb.connect(str(self.db_path), read_only=self.read_only)
+        return connect_with_retry(self.db_path, read_only=self.read_only)
+
+    @contextmanager
+    def _write_connection(self) -> Iterator[duckdb.DuckDBPyConnection]:
+        with database_write_lock(self.db_path):
+            connection = self._connect()
+            try:
+                yield connection
+            finally:
+                connection.close()
 
 
 def utc_now_iso() -> str:
@@ -2984,6 +3202,99 @@ def _latest_strategy_weights(result: Any) -> pd.Series:
         return pd.Series(dtype=float)
     latest = pd.to_numeric(weights.iloc[-1], errors="coerce").fillna(0.0)
     return latest[latest.abs() > 1e-8].astype(float)
+
+
+def _position_plan_target_weights(position_plan: pd.DataFrame) -> pd.Series:
+    if position_plan.empty or "ticker" not in position_plan:
+        return pd.Series(dtype=float)
+    target_column = next(
+        (
+            column
+            for column in ("scenario_adjusted_weight", "risk_adjusted_weight", "target_weight")
+            if column in position_plan
+        ),
+        None,
+    )
+    if target_column is None:
+        return pd.Series(dtype=float)
+    frame = position_plan[["ticker", target_column]].copy()
+    frame[target_column] = pd.to_numeric(frame[target_column], errors="coerce")
+    if (
+        not np.isfinite(frame[target_column]).all()
+        or frame[target_column].lt(0).any()
+        or frame[target_column].sum() > 1 + 1e-9
+        or frame["ticker"].isna().any()
+    ):
+        raise ValueError("Post-risk targets must be finite, long-only and unlevered")
+    weights = frame.groupby(frame["ticker"].astype(str))[target_column].sum()
+    return weights[weights.abs() > 1e-8].astype(float).sort_index()
+
+
+def _weights_json(weights: pd.Series) -> str:
+    return json.dumps(
+        {str(ticker): float(weight) for ticker, weight in weights.sort_index().items()},
+        sort_keys=True,
+    )
+
+
+def _weights_from_json(raw: object) -> pd.Series:
+    if not isinstance(raw, str) or not raw:
+        return pd.Series(dtype=float)
+    try:
+        values = json.loads(raw)
+    except (TypeError, ValueError, json.JSONDecodeError):
+        return pd.Series(dtype=float)
+    if not isinstance(values, dict):
+        return pd.Series(dtype=float)
+    weights = pd.to_numeric(pd.Series(values), errors="coerce").dropna().astype(float)
+    return weights[weights.abs() > 1e-8].sort_index()
+
+
+def _weight_turnover(
+    previous_weights: pd.Series,
+    target_weights: pd.Series,
+) -> float:
+    tickers = sorted(set(previous_weights.index) | set(target_weights.index))
+    previous = previous_weights.reindex(tickers).fillna(0.0)
+    target = target_weights.reindex(tickers).fillna(0.0)
+    return float((target - previous).abs().sum())
+
+
+def _weighted_interval_return(
+    prices: pd.DataFrame,
+    weights: pd.Series,
+    *,
+    start_date: str,
+    end_date: str,
+) -> tuple[float, int, list[str]]:
+    if weights.empty:
+        return 0.0, 0, []
+    normalized = prices.copy()
+    normalized.index = pd.to_datetime(normalized.index, errors="coerce").tz_localize(None)
+    normalized = normalized[~normalized.index.isna()].sort_index()
+    start = pd.Timestamp(start_date)
+    end = pd.Timestamp(end_date)
+    interval = normalized.loc[(normalized.index >= start) & (normalized.index <= end)]
+    if interval.empty:
+        return 0.0, 0, sorted(str(ticker) for ticker in weights.index)
+    unavailable = []
+    for ticker in weights.index:
+        if ticker not in interval:
+            unavailable.append(str(ticker))
+            continue
+        series = pd.to_numeric(interval[ticker], errors="coerce").dropna()
+        if series.empty or start not in series.index or end not in series.index:
+            unavailable.append(str(ticker))
+    if unavailable:
+        return 0.0, max(len(interval) - 1, 0), sorted(unavailable)
+    returns = {}
+    for ticker in weights.index:
+        series = pd.to_numeric(interval[ticker], errors="coerce").dropna()
+        returns[str(ticker)] = float(series.iloc[-1] / series.iloc[0] - 1.0)
+    gross_return = float(
+        sum(float(weight) * returns[str(ticker)] for ticker, weight in weights.items())
+    )
+    return gross_return, max(len(interval) - 1, 0), []
 
 
 def _latest_exposure_diagnostics(prices: pd.DataFrame, weights: pd.Series) -> dict[str, object]:

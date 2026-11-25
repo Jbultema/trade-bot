@@ -128,6 +128,8 @@ def _load_snapshot_trend_frames(
             stored_frames = tuple(
                 _filter_frame_to_market_dates(frame, retained_dates) for frame in stored_frames
             )
+    if _has_materialized_operating_history(stored_frames) and not force_snapshot_reconstruction:
+        return _clean_combined_snapshot_trend_frames(stored_frames)
 
     metric_rows: list[dict[str, object]] = []
     component_rows: list[dict[str, object]] = []

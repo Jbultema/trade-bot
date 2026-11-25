@@ -183,7 +183,10 @@ if not jobs.empty:
             for column in [
                 "created_at_utc",
                 "status",
+                "current_stage",
+                "stage_status",
                 "run_id",
+                "process_id",
                 "completed_at_utc",
                 "log_path",
                 "error_message",

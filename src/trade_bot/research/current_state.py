@@ -300,16 +300,15 @@ def build_strategy_alerts(
             key=lambda values: values.abs(),
             ascending=False,
         )
-        action = "HOLD"
-        if not material_trades.empty:
-            buys = material_trades[material_trades > 0]
-            sells = material_trades[material_trades < 0]
-            if not buys.empty and not sells.empty:
-                action = "ROTATE"
-            elif not buys.empty:
-                action = "ADD"
-            else:
-                action = "REDUCE"
+        action = _trade_action(material_trades)
+        latest_target = result.target_weights.iloc[-1].sort_values(ascending=False)
+        target_trades = next_trade_weights(result.target_weights)
+        material_target_trades = target_trades[
+            target_trades.abs() >= min_trade_weight
+        ].sort_values(
+            key=lambda values: values.abs(),
+            ascending=False,
+        )
 
         rows.append(
             {
@@ -319,11 +318,26 @@ def build_strategy_alerts(
                 "latest_position": _format_weight_vector(latest_weights[latest_weights > 0]),
                 "previous_position": _format_weight_vector(previous_weights[previous_weights > 0]),
                 "trade_alert": _format_trade_vector(material_trades),
+                "pending_action": _trade_action(material_target_trades),
+                "latest_target": _format_weight_vector(latest_target[latest_target > 0]),
+                "target_alert": _format_trade_vector(material_target_trades),
                 "latest_return_1m": result.returns.tail(21).add(1.0).prod() - 1.0,
                 "latest_drawdown": drawdown(result.equity).iloc[-1],
             }
         )
     return pd.DataFrame(rows).sort_values(["priority", "strategy"])
+
+
+def _trade_action(material_trades: pd.Series) -> str:
+    if material_trades.empty:
+        return "HOLD"
+    buys = material_trades[material_trades > 0]
+    sells = material_trades[material_trades < 0]
+    if not buys.empty and not sells.empty:
+        return "ROTATE"
+    if not buys.empty:
+        return "ADD"
+    return "REDUCE"
 
 
 def build_scenario_outlook(scenario_lattice: pd.DataFrame, risk_status: str) -> pd.DataFrame:

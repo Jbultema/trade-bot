@@ -23,7 +23,9 @@ class QueuedJob:
 
 
 def _store(paths: DashboardPaths) -> RunStore:
-    return RunStore(paths.run_store_path, artifact_dir=paths.artifact_dir, job_log_dir=paths.job_log_dir)
+    return RunStore(
+        paths.run_store_path, artifact_dir=paths.artifact_dir, job_log_dir=paths.job_log_dir
+    )
 
 
 def queue_daily_update(paths: DashboardPaths) -> QueuedJob:
@@ -45,7 +47,9 @@ def queue_daily_update(paths: DashboardPaths) -> QueuedJob:
     return QueuedJob(job_id=job.job_id, label="daily update")
 
 
-def queue_snapshot(paths: DashboardPaths, *, refresh_data: bool, refresh_macro: bool, refresh_news: bool) -> QueuedJob:
+def queue_snapshot(
+    paths: DashboardPaths, *, refresh_data: bool, refresh_macro: bool, refresh_news: bool
+) -> QueuedJob:
     job = _store(paths).start_snapshot_build_job(
         config_path=paths.config_path,
         events_path=paths.events_path,
@@ -69,7 +73,10 @@ def queue_warehouse_migration(paths: DashboardPaths) -> QueuedJob:
 
 
 def queue_paper_valuation(paths: DashboardPaths) -> QueuedJob:
-    job = _store(paths).start_paper_valuation_job(config_path=paths.config_path)
+    job = _store(paths).start_paper_valuation_job(
+        config_path=paths.config_path,
+        journal_path=paths.journal_path,
+    )
     st.cache_data.clear()
     return QueuedJob(job_id=job.job_id, label="paper valuation")
 
@@ -101,4 +108,3 @@ def queue_ml_diagnostics(paths: DashboardPaths, *, profile: str, refresh_data: b
     )
     st.cache_data.clear()
     return QueuedJob(job_id=job.job_id, label="ML diagnostics")
-

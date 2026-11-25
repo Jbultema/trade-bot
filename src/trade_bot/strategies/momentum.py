@@ -302,9 +302,16 @@ def dual_momentum_risk_repair_weights(
         lookback_days=strategy.risk_repair_lookback_days,
     )
     if strategy.max_asset_weight is not None:
+        capped_risk_tickers = [
+            ticker
+            for ticker in dict.fromkeys(
+                [*risk_tickers, *strategy.risk_repair_ai_diversifier_tickers]
+            )
+            if ticker in weights.columns and ticker != defensive_ticker
+        ]
         weights = _cap_risk_weights(
             weights,
-            risk_tickers=risk_tickers,
+            risk_tickers=capped_risk_tickers,
             defensive_ticker=defensive_ticker,
             max_asset_weight=strategy.max_asset_weight,
         )

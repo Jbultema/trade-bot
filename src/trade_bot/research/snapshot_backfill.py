@@ -18,6 +18,27 @@ class SnapshotBackfillPlan:
     weekly_frequency: str
 
 
+def required_daily_retention_count(
+    plan: SnapshotBackfillPlan,
+    *,
+    minimum_market_days: int,
+    retained_market_dates: Iterable[object] = (),
+) -> int:
+    """Keep the requested daily tail without shortening the normal retention floor."""
+    if minimum_market_days < 0:
+        msg = "minimum_market_days must be non-negative"
+        raise ValueError(msg)
+    requested_daily_dates = _normalize_dates(plan.daily_market_dates)
+    if requested_daily_dates.empty:
+        return minimum_market_days
+    retained_dates = _normalize_dates(retained_market_dates)
+    relevant_retained_dates = retained_dates[
+        retained_dates >= requested_daily_dates.min()
+    ]
+    required_dates = requested_daily_dates.union(relevant_retained_dates)
+    return max(minimum_market_days, len(required_dates))
+
+
 def build_snapshot_backfill_dates(
     available_dates: Iterable[object],
     *,
@@ -150,6 +171,18 @@ def missing_period_backfill_dates(
     if missing.empty:
         return ()
     return tuple(pd.DatetimeIndex(missing).sort_values())
+
+
+def missing_market_backfill_dates(
+    planned_dates: Iterable[object],
+    existing_dates: Iterable[object],
+) -> tuple[pd.Timestamp, ...]:
+    """Return planned market dates that have no retained snapshot."""
+    planned = _normalize_dates(planned_dates)
+    if planned.empty:
+        return ()
+    existing = set(_normalize_dates(existing_dates))
+    return tuple(date for date in planned if date not in existing)
 
 
 def _latest_date_per_week(

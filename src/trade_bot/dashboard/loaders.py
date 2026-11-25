@@ -180,9 +180,30 @@ def load_snapshot_jobs_frame(
         read_only=True,
     )
     try:
-        return run_store.list_jobs(limit=8)
+        jobs = run_store.list_jobs(limit=8)
     except (OSError, duckdb.Error):
         return pd.DataFrame()
+    if jobs.empty or "job_id" not in jobs:
+        return jobs
+    current_stages: list[str] = []
+    current_stage_statuses: list[str] = []
+    for job_id in jobs["job_id"].astype(str):
+        try:
+            stages = run_store.list_job_stages(job_id)
+        except (OSError, duckdb.Error):
+            stages = pd.DataFrame()
+        if stages.empty:
+            current_stages.append("")
+            current_stage_statuses.append("")
+            continue
+        active = stages[stages["status"].astype(str).isin(["failed", "running", "warning"])]
+        selected = (active if not active.empty else stages).iloc[-1]
+        current_stages.append(str(selected["stage"]))
+        current_stage_statuses.append(str(selected["status"]))
+    jobs = jobs.copy()
+    jobs["current_stage"] = current_stages
+    jobs["stage_status"] = current_stage_statuses
+    return jobs
 
 
 @st.cache_data(show_spinner="Running backtests...")
