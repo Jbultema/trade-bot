@@ -548,6 +548,11 @@ def compare_42macro_to_trade_bot(
         include_title_only=include_title_only,
     )
     metrics = warehouse.read_table("operating_metric_history")
+    from trade_bot.storage.run_store import RunStore
+
+    saved = RunStore(warehouse.db_path, read_only=True).load_latest_snapshot(require_matching_config=False)
+    if saved is not None:
+        metrics = with_latest_saved_snapshot(metrics, *saved)
     comparisons = build_macro_tradebot_comparisons(
         classifications,
         metrics,
@@ -562,6 +567,29 @@ def compare_42macro_to_trade_bot(
         comparisons=comparisons,
     )
     return MacroAlignmentResult(videos, classifications, comparisons, summary, report_dir)
+
+
+def with_latest_saved_snapshot(metrics: pd.DataFrame, snapshot, manifest) -> pd.DataFrame:
+    """Do not let a stale reconstruction stand in for an available saved close."""
+    summary = snapshot.trade_decision.summary
+    if summary.empty:
+        return metrics
+    decision = summary.iloc[0]
+    final_defensive = _optional_float(decision.get("final_defensive_weight"))
+    if final_defensive is None:
+        final_defensive = _optional_float(decision.get("target_defensive_weight"))
+    if final_defensive is None:
+        return metrics
+    row = {"market_date": manifest.market_date, "history_time": manifest.created_at_utc,
+           "snapshot_time": manifest.created_at_utc, "run_id": manifest.run_id,
+           "source": "saved_snapshot_retrospective_comparison",
+           "risk_score": _optional_float(snapshot.current_state.risk_score)}
+    for key in ("final_defensive_weight", "base_defensive_weight", "risk_budget_multiplier",
+                "one_month_risk_off_probability", "portfolio_risk_multiplier"):
+        row[key] = _optional_float(decision.get(key))
+    row["final_defensive_weight"] = final_defensive
+    remaining = metrics[metrics.market_date.astype(str).ne(str(manifest.market_date))] if not metrics.empty else metrics
+    return pd.concat([remaining, pd.DataFrame([row])], ignore_index=True)
 
 
 def score_macro_tradebot_outcomes(
@@ -1965,11 +1993,14 @@ def _summary_markdown(summary: dict[str, object], comparisons: pd.DataFrame) -> 
                 if final_defensive is not None
                 else "."
             ),
+            f"- Matched Trade Bot close: {latest.get('matched_market_date', 'unknown')} "
+            f"({latest.get('matched_source', 'unknown')}); date gap: {latest.get('days_from_tradebot', 'unknown')} calendar days.",
             f"- Comparison: {latest['disagreement_label']} "
             f"(absolute posture gap {latest['abs_disagreement']:.2f}).",
             "",
             "Trade Bot posture is derived from the final defensive allocation when that "
             "field is available. Risk-budget capacity alone is not total exposure.",
+            "This is a retrospective date-level comparison, not proof of what was known before the video or a comparison with actual 42 Macro portfolio returns.",
             "",
             "## Most Recent Videos",
             "",

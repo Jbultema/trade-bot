@@ -56,3 +56,17 @@ def test_bundle_has_no_authority_and_nonoverwriting_input_hashes(tmp_path):
     assert m["automatic_promotion_allowed"] is False
     assert m["authority"] == "research_only"
     assert m["source_inputs"][0]["sha256"]
+
+
+def test_interpretation_diagnostics_reconcile_and_are_prefix_invariant():
+    from trade_bot.research.interpretation_export import signals
+
+    p = prices()
+    config = StrategyConfig(type="dual_momentum", tickers=["QQQ", "XLK"],
+                            lookback_days=63, skip_days=5, top_n=2,
+                            defensive_ticker="CASH", max_asset_weight=.5)
+    result = signals(p, config)
+    expected = research_targets(p, config)["trade_primary"][0]
+    pd.testing.assert_frame_equal(result[["target_QQQ", "target_XLK"]].rename(columns=lambda c: c[7:]), expected)
+    pd.testing.assert_frame_equal(result.iloc[:337], signals(p.iloc[:337], config))
+    assert "stress" in result

@@ -2,6 +2,12 @@
 .env.*
 !.env.example
 .venv/
+.venv
+/reports
+/data/raw
+/data/cache
+/data/processed
+/data/run_store
 __pycache__/
 .mypy_cache/
 .pytest_cache/

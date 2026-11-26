@@ -16,6 +16,25 @@ from trade_bot.research.external_macro import (
 from trade_bot.storage.warehouse import TradingWarehouse
 
 
+@pytest.mark.parametrize("defensive_column", ["final_defensive_weight", "target_defensive_weight"])
+def test_latest_saved_snapshot_replaces_stale_or_same_day_reconstruction(defensive_column):
+    from types import SimpleNamespace
+
+    from trade_bot.research.external_macro import with_latest_saved_snapshot
+
+    metrics = pd.DataFrame([{"market_date": "2026-11-20", "final_defensive_weight": .57},
+                            {"market_date": "2026-11-25", "final_defensive_weight": .57}])
+    snapshot = SimpleNamespace(trade_decision=SimpleNamespace(summary=pd.DataFrame([
+        {defensive_column: .63, "base_defensive_weight": .61, "risk_budget_multiplier": 1.}])),
+        current_state=SimpleNamespace(risk_score=.8))
+    manifest = SimpleNamespace(market_date="2026-11-25", created_at_utc="2026-11-25T21:30:00Z", run_id="saved")
+    result = with_latest_saved_snapshot(metrics, snapshot, manifest)
+    assert len(result) == 2
+    latest = result[result.market_date.eq("2026-11-25")].iloc[0]
+    assert latest.final_defensive_weight == .63
+    assert latest.source == "saved_snapshot_retrospective_comparison"
+
+
 def test_42macro_classifier_distinguishes_constructive_and_defensive_reads() -> None:
     constructive = classify_42macro_transcript(
         "The macro weather model has a bullish outlook and a risk-on market regime. "
