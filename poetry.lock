@@ -550,6 +550,25 @@ files = [
 ]
 
 [[package]]
+name = "exchange-calendars"
+version = "4.13.3"
+description = "Calendars for securities exchanges"
+optional = false
+python-versions = "<4,>=3.10"
+files = [
+    {file = "exchange_calendars-4.13.3-py3-none-any.whl", hash = "sha256:02b95a738b3848ab9c52529330f84a15f76c765edeb7790cfbbf0d45d92cc2b5"},
+    {file = "exchange_calendars-4.13.3.tar.gz", hash = "sha256:e4280cb77f58b32123ee1049018872533483bcecca70f74a5bc7fde2a6c73183"},
+]
+
+[package.dependencies]
+korean_lunar_calendar = ">=0.3.1"
+numpy = ">=1.26.4"
+pandas = ">=1.5.0"
+pyluach = ">=2.3.0"
+toolz = ">=1.0.0"
+tzdata = ">=2025.2"
+
+[[package]]
 name = "frozendict"
 version = "2.4.7"
 description = "A simple immutable dictionary"
@@ -849,6 +868,17 @@ files = [
 
 [package.dependencies]
 referencing = ">=0.31.0"
+
+[[package]]
+name = "korean-lunar-calendar"
+version = "0.4.0"
+description = "Convert the Korean lunar calendar to/from the Gregorian solar calendar (KARI standard)."
+optional = false
+python-versions = ">=3.6"
+files = [
+    {file = "korean_lunar_calendar-0.4.0-py3-none-any.whl", hash = "sha256:c042e20de0bb702add6bec8d0f6da1ea8d3b170838e63846f70420cf341fe4e7"},
+    {file = "korean_lunar_calendar-0.4.0.tar.gz", hash = "sha256:be56f27bc0594fdbbdf7bbe00f504a9f929a31e311bd7d9bb93561b645afade7"},
+]
 
 [[package]]
 name = "librt"
@@ -1964,6 +1994,21 @@ files = [
 windows-terminal = ["colorama (>=0.4.6)"]
 
 [[package]]
+name = "pyluach"
+version = "2.3.0"
+description = "A Python package for dealing with Hebrew (Jewish) calendar dates."
+optional = false
+python-versions = ">=3.8"
+files = [
+    {file = "pyluach-2.3.0-py3-none-any.whl", hash = "sha256:4497b731aef59508b079dbf5f00bc5bf4329ac45090a6cd37b5a83756f0e69ab"},
+    {file = "pyluach-2.3.0.tar.gz", hash = "sha256:ec6e30669d1df50c9ca160486da44a8195bb4c7a5d3d533990d0c5b03accd281"},
+]
+
+[package.extras]
+doc = ["sphinx (>=6.1.3,<6.2.0)", "sphinx_rtd_theme (>=1.2.0,<1.3.0)"]
+test = ["beautifulsoup4", "flake8", "pytest", "pytest-cov"]
+
+[[package]]
 name = "pypdf"
 version = "6.14.2"
 description = "A pure-python PDF library capable of splitting, merging, cropping, and transforming PDF files"
@@ -2706,6 +2751,17 @@ files = [
 ]
 
 [[package]]
+name = "toolz"
+version = "1.2.0"
+description = "List processing tools and functional utilities"
+optional = false
+python-versions = ">=3.9"
+files = [
+    {file = "toolz-1.2.0-py3-none-any.whl", hash = "sha256:890f820b1cb8152785aaf9386d8707770110809035800985ca65cb24ce1120ef"},
+    {file = "toolz-1.2.0.tar.gz", hash = "sha256:9667a038e9d6ecba37995e26cb2f59ec6420b6ad8dd9677de59db9b956b08490"},
+]
+
+[[package]]
 name = "typer"
 version = "0.26.7"
 description = "Typer, build great CLIs. Easy to code. Based on Python type hints."
@@ -2979,4 +3035,4 @@ requests = "*"
 [metadata]
 lock-version = "2.0"
 python-versions = ">=3.12,<3.13"
-content-hash = "a39636b818acc76b02325bdfe5446e30c76816d7889316eb725476ee96feed81"
+content-hash = "10e87534f6dd4df921d9cfcf31271134fc3b2a9a9fbc83b78ac986dec0c1928c"

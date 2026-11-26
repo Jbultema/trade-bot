@@ -11,6 +11,7 @@ from trade_bot.features.indicators import (
     realized_volatility,
     rolling_drawdown,
 )
+from trade_bot.features.scheduling import rebalance_dates
 
 
 @dataclass(frozen=True)
@@ -198,9 +199,7 @@ def apply_drawdown_control(
 def _rebalance_weights(weights: pd.DataFrame, rebalance: str) -> pd.DataFrame:
     if rebalance.lower() in {"daily", "d"}:
         return weights
-    periods = weights.index.to_period(rebalance)
-    last_dates = pd.Series(weights.index, index=weights.index).groupby(periods).transform("max")
-    rebalanced = weights.loc[weights.index == last_dates]
+    rebalanced = weights.loc[rebalance_dates(weights.index, rebalance)]
     return rebalanced.reindex(weights.index).ffill().fillna(0.0)
 
 
@@ -209,9 +208,7 @@ def _scheduled_rebalance_dates(weights: pd.DataFrame, rebalance: str) -> pd.Date
         return pd.DatetimeIndex([])
     if rebalance.lower() in {"daily", "d"}:
         return pd.DatetimeIndex(weights.index)
-    periods = weights.index.to_period(rebalance)
-    last_dates = pd.Series(weights.index, index=weights.index).groupby(periods).transform("max")
-    return pd.DatetimeIndex(weights.index[weights.index == last_dates])
+    return rebalance_dates(weights.index, rebalance)
 
 
 def _normalize_long_only(weights: pd.DataFrame) -> pd.DataFrame:

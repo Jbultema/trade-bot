@@ -10,6 +10,7 @@ packages = [{ include = "trade_bot", from = "src" }]
 python = ">=3.12,<3.13"
 beautifulsoup4 = ">=4.15,<5.0"
 duckdb = ">=1.0.0,<2.0.0"
+exchange-calendars = "==4.13.3"
 numpy = ">=1.24,<2.0"
 pandas = ">=2.0,<3.0"
 plotly = ">=5.18,<6.0"

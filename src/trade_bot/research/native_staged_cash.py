@@ -4,6 +4,7 @@ from __future__ import annotations
 import argparse
 import hashlib
 import json
+from importlib.metadata import version
 from pathlib import Path
 
 import pandas as pd
@@ -96,11 +97,11 @@ def run(output):
     prices.loc[start:].drop(columns="CASH", errors="ignore").to_parquet(output / "prices.parquet")
     prices.BIL.pct_change(fill_method=None).fillna(0).loc[start:].rename("cash_return").to_frame().to_parquet(output / "cash.parquet")
     pd.DataFrame(rows).to_csv(output / "native_metrics.csv", index=False)
-    sources = [Path(__file__), Path("src/trade_bot/strategies/staged_risk.py"),
-        Path("src/trade_bot/strategies/momentum.py"), Path("src/trade_bot/config.py"),
-        Path("src/trade_bot/backtest/engine.py"), Path("configs/baseline.yaml"), Path(snapshot.artifact_path)]
+    sources = [*sorted(Path("src/trade_bot").rglob("*.py")), Path("configs/baseline.yaml"),
+        Path("pyproject.toml"), Path("poetry.lock"), Path(snapshot.artifact_path)]
     manifest = {"kind": "native_staged_cash_v1", "candidates": exports,
         "sources": {str(p.resolve()): digest(p) for p in sources},
+        "environment": {name: version(name) for name in ("pandas", "numpy", "pyarrow", "pydantic")},
         "artifacts": {p.name: digest(p) for p in output.iterdir() if p.is_file()},
         "native_paths": len(specs)*6, "portfolio_allocation_allowed": False}
     (output / "manifest.json").write_text(json.dumps(manifest, indent=2) + "\n")
