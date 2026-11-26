@@ -263,6 +263,7 @@ class StrategyConfig(BaseModel):
         "relative_momentum",
         "dual_momentum",
         "dual_momentum_risk_repair",
+        "staged_dual_momentum",
         "dip_reentry",
         "dip_reentry_overlay",
         "ai_risk_cycle_overlay",
@@ -328,6 +329,9 @@ class StrategyConfig(BaseModel):
         le=1,
     )
     risk_repair_signal: Literal["balanced", "credit_breadth", "ai_leadership"] = "balanced"
+    staged_risk_base: Literal["dual_momentum", "dual_momentum_risk_repair"] = "dual_momentum"
+    staged_risk_mode: Literal["gentle", "confirmed", "repair"] = "confirmed"
+    staged_risk_lookback: Literal[126, 252] = 126
     risk_repair_constructive_floor: float = Field(default=0.0, ge=0, le=1)
     risk_repair_defensive_cap: float | None = Field(default=None, gt=0, le=1)
     risk_repair_defensive_release: float = Field(default=1.0, ge=0, le=1)
@@ -395,7 +399,11 @@ def required_strategy_tickers(strategy: StrategyConfig) -> list[str]:
             tickers.extend(DIP_REENTRY_BREADTH_SIGNAL_TICKERS)
     if strategy.type == "sector_regime_rotation":
         tickers.extend(SECTOR_REGIME_SIGNAL_TICKERS)
-    if strategy.type == "dual_momentum_risk_repair":
+    if strategy.type == "staged_dual_momentum":
+        tickers.extend(["SPY", "QQQ", "HYG", "LQD", "RSP"])
+    if strategy.type == "dual_momentum_risk_repair" or (
+        strategy.type == "staged_dual_momentum" and strategy.staged_risk_base == "dual_momentum_risk_repair"
+    ):
         tickers.extend(RISK_REPAIR_SIGNAL_TICKERS)
         tickers.extend(strategy.risk_repair_ai_diversifier_tickers)
     return list(dict.fromkeys(tickers))

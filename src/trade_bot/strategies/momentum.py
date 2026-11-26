@@ -32,6 +32,12 @@ from trade_bot.features.valuation import (
 
 
 def build_strategy_weights(prices: pd.DataFrame, strategy: StrategyConfig) -> pd.DataFrame:
+    if strategy.type == "staged_dual_momentum":
+        from trade_bot.strategies.staged_risk import size_native_weights
+
+        native = build_strategy_weights(prices, strategy.model_copy(update={"type": strategy.staged_risk_base}))
+        return size_native_weights(prices, native, strategy.defensive_ticker,
+            lookback=strategy.staged_risk_lookback, mode=strategy.staged_risk_mode)
     if strategy.type == "buy_hold":
         return buy_hold_weights(prices, strategy.tickers)
     if strategy.type == "fixed_allocation":
